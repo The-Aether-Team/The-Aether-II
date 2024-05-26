@@ -50,7 +50,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders { //TODO: abstract met
     // Aerclouds
     public static final DeferredBlock<Block> COLD_AERCLOUD = register("cold_aercloud", () -> new AercloudBlock(aercloud(MapColor.SNOW)));
     public static final DeferredBlock<Block> BLUE_AERCLOUD = register("blue_aercloud", () -> new BlueAercloudBlock(aercloud(MapColor.COLOR_LIGHT_BLUE)));
-    public static final DeferredBlock<Block> GOLDEN_AERCLOUD = register("golden_aercloud", () -> new GoldenAercloudBlock(aercloud(MapColor.COLOR_YELLOW)));
+    public static final DeferredBlock<Block> GOLDEN_AERCLOUD = register("golden_aercloud", () -> new AercloudBlock(aercloud(MapColor.COLOR_YELLOW)));
     public static final DeferredBlock<Block> GREEN_AERCLOUD = register("green_aercloud", () -> new GreenAercloudBlock(aercloud(MapColor.COLOR_LIGHT_GREEN)));
     public static final DeferredBlock<Block> PURPLE_AERCLOUD = register("purple_aercloud", () -> new PurpleAercloudBlock(aercloud(MapColor.COLOR_MAGENTA)));
     public static final DeferredBlock<Block> STORM_AERCLOUD = register("storm_aercloud", () -> new AercloudBlock(aercloud(MapColor.DEEPSLATE)));
