@@ -12,6 +12,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_PORTAL_BLOCKS = tag("aether_portal_blocks");
         public static final TagKey<Block> AETHER_PORTAL_BLACKLIST = tag("aether_portal_blacklist");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
@@ -25,6 +26,7 @@ public class AetherIITags {
 
     public static class Items {
         public static final TagKey<Item> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Item> HOLYSTONE = tag("holystone");
         public static final TagKey<Item> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Item> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");

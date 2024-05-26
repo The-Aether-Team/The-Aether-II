@@ -25,6 +25,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         this.copy(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT);
+        this.copy(AetherIITags.Blocks.HOLYSTONE, AetherIITags.Items.HOLYSTONE);
         this.copy(AetherIITags.Blocks.AERCLOUDS, AetherIITags.Items.AERCLOUDS);
         this.copy(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS);
         this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
