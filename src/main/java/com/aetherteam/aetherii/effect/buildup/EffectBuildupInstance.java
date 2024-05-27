@@ -4,7 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
-public class EffectBuildupInstance {
+public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> {
     private final MobEffectInstance effect;
     private final int buildupCap;
     private int buildup;
@@ -40,6 +40,14 @@ public class EffectBuildupInstance {
         return this.effect;
     }
 
+    public int getBuildupCap() {
+        return this.buildupCap;
+    }
+
+    public int getBuildup() {
+        return this.buildup;
+    }
+
     public CompoundTag save(CompoundTag tag) {
         tag.put("effect_instance", this.effect.save(tag));
         tag.putInt("buildup_cap", this.buildupCap);
@@ -52,5 +60,21 @@ public class EffectBuildupInstance {
         int buildupCap = tag.getInt("buildup_cap");
         int buildup = tag.getInt("buildup");
         return new EffectBuildupInstance(effect, buildupCap, buildup);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (!(other instanceof EffectBuildupInstance instance)) {
+            return false;
+        } else {
+            return this.effect.equals(instance.effect);
+        }
+    }
+
+    @Override
+    public int compareTo(EffectBuildupInstance other) {
+        return this.effect.compareTo(other.effect);
     }
 }

@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,6 +42,10 @@ public class AercloudBlock extends HalfTransparentBlock {
             entity.setDeltaMovement(entity.getDeltaMovement().multiply(1.0, 0.005, 1.0));
         }
         entity.setOnGround(entity instanceof LivingEntity livingEntity && (!(livingEntity instanceof Player player) || !player.getAbilities().flying));
+
+        if (entity instanceof LivingEntity livingEntity) {
+            livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.EXAMPLE, 500);
+        }
     }
 
     /**

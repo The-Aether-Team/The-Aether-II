@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
 import com.aetherteam.nitrogen.network.PacketRelay;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -51,7 +52,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     public void tick() {
         this.activeBuildups.values().removeIf(instance -> !instance.tick(this.entity));
 
-        AetherII.LOGGER.info(this.activeBuildups.toString());
+//        AetherII.LOGGER.info(this.activeBuildups.toString());
     }
 
     public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {
@@ -81,5 +82,9 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
             PacketRelay.sendToAll(new EffectBuildupPacket.Remove(this.entity.getId(), effect));
         }
         this.activeBuildups.remove(effect);
+    }
+
+    public Map<MobEffect, EffectBuildupInstance> getActiveBuildups() {
+        return ImmutableMap.copyOf(this.activeBuildups);
     }
 }
