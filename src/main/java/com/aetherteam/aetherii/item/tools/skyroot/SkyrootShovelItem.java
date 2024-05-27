@@ -15,7 +15,7 @@ public class SkyrootShovelItem extends ShovelItem {
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
         if (pContext.getPlayer() != null) {
-            pContext.getPlayer().getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.EXAMPLE, 500);
+            pContext.getPlayer().getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.TOXIN, 500);
         }
         return super.useOn(pContext);
     }

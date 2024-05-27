@@ -1,15 +1,14 @@
 package com.aetherteam.aetherii.effect.buildup;
 
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class EffectBuildupPresets {
-    public static Preset EXAMPLE = new Preset(MobEffects.POISON, (e) -> new MobEffectInstance(e, 100), 1000);
-    public static Preset EXAMPLE_2 = new Preset(MobEffects.FIRE_RESISTANCE, (e) -> new MobEffectInstance(e, 100), 1000);
+    public static Preset TOXIN = new Preset(AetherIIEffects.TOXIN.get(), (e) -> new MobEffectInstance(e, 500), 1000);
 
     public static final class Preset {
         private final MobEffect type;

@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.listeners.EffectsSystemListeners;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
@@ -48,6 +49,7 @@ public class AetherII {
                 AetherIIItems.ITEMS,
                 AetherIIEntityTypes.ENTITY_TYPES,
                 AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
+                AetherIIEffects.EFFECTS,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIFeatures.FEATURES,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
