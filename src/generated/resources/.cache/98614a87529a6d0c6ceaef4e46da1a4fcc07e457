@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T12:36:13.3268191	Item Models: aether_ii
+// 1.20.4	2024-05-27T15:35:57.7824784	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
 014669ae81a98eba467cc6fe0047c04b73a80768 assets/aether_ii/models/item/aether_dirt_path.json
@@ -97,6 +97,7 @@ d634fe0d27710caaafbf9d63c2877d6a38c3cc71 assets/aether_ii/models/item/skypine_le
 1264f25092e1b8ae0cfed08db5bf04a82a366fe8 assets/aether_ii/models/item/skyplane_leaves.json
 fcb760fba7e49a163740ac955449c06321ea704c assets/aether_ii/models/item/skyroot_axe.json
 ace2d20b02282d17c842521066a6f9d530ab5fdf assets/aether_ii/models/item/skyroot_button.json
+f6caba399494a58683561699d72ad1cc86e3d339 assets/aether_ii/models/item/skyroot_chest.json
 571aa86a075a6ace9b2a63613bc96a33ddc766e3 assets/aether_ii/models/item/skyroot_crafting_table.json
 4edb2f72fb18a63b18318ad1652f49e3f67ba7a2 assets/aether_ii/models/item/skyroot_door.json
 089a8912e8d6f868b478fcf3cd36e2c44fec02a5 assets/aether_ii/models/item/skyroot_fence.json

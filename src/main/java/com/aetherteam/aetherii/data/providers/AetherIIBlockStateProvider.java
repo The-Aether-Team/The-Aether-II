@@ -21,7 +21,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         super(output, id, helper);
     }
 
-
     public void farmland(Block block, Block dirtBlock) {
         ModelFile farmland = this.models().withExistingParent(this.name(block), this.mcLoc("block/template_farmland"))
                 .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
@@ -193,6 +192,11 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 }
             return ConfiguredModel.builder().build();
         });
+    }
+
+    public void skyrootChest(Block block) {
+        ModelFile chest = this.models().cubeAll(this.name(block), new ResourceLocation(AetherII.MODID, "block/construction/skyroot_planks"));
+        this.chest(block, chest);
     }
 
     public void skyrootLadder(LadderBlock block) {

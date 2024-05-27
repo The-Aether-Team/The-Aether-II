@@ -190,6 +190,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.AMBROSIUM_TORCH.get(), "utility/");
         this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+        this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
     }
 }

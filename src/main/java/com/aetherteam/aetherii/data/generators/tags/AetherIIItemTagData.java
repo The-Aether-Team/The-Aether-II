@@ -194,5 +194,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATROOT_FENCE.asItem(),
                 AetherIIBlocks.WISPROOT_FENCE.asItem()
         );
+        this.tag(Tags.Items.CHESTS_WOODEN).add(
+                AetherIIBlocks.SKYROOT_CHEST.get().asItem()
+        );
     }
 }

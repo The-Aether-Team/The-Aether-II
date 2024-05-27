@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_holystone_furnace": {
+    "has_skyroot_chest": {
       "conditions": {
         "items": [
           {
-            "tag": "aether_ii:stone_crafting"
+            "tag": "aether_ii:planks_crafting"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:holystone_furnace"
+        "recipe": "aether_ii:skyroot_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_holystone_furnace"
+      "has_skyroot_chest"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:holystone_furnace"
+      "aether_ii:skyroot_chest"
     ]
   }
 }

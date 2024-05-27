@@ -7,9 +7,13 @@ import com.aetherteam.aetherii.block.construction.QuicksoilGlassBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
 import com.aetherteam.aetherii.block.utility.HolystoneFurnaceBlock;
+import com.aetherteam.aetherii.block.utility.SkyrootChestBlock;
 import com.aetherteam.aetherii.block.utility.SkyrootCraftingTableBlock;
+import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
+import com.aetherteam.aetherii.blockentity.SkyrootChestBlockEntity;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIBlockBuilders;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.nitrogen.item.block.EntityBlockItem;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -188,6 +192,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> AMBROSIUM_WALL_TORCH = BLOCKS.register("ambrosium_wall_torch", () -> new WallTorchBlock(ParticleTypes.SMOKE, Block.Properties.ofFullCopy(Blocks.WALL_TORCH)));
     public static final DeferredBlock<Block> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", () -> new SkyrootCraftingTableBlock(Block.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
     public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", () -> new HolystoneFurnaceBlock(Block.Properties.ofFullCopy(Blocks.FURNACE)));
+    public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", () -> new SkyrootChestBlock(Block.Properties.ofFullCopy(Blocks.CHEST), AetherIIBlockEntityTypes.SKYROOT_CHEST::get));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion()));
 
     //TODO: Make Wood and Cloudwool flammable
@@ -207,7 +212,11 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
             DeferredBlock<T> block = Objects.requireNonNull(deferredBlock);
             if (block == AMBROSIUM_TORCH) {
                 return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN);
-            } else {
+            }
+            else if (block == SKYROOT_CHEST) {
+                return new EntityBlockItem(block.get(), SkyrootChestBlockEntity::new, new Item.Properties());
+            }
+            else {
                 return new BlockItem(block.get(), new Item.Properties());
             }
         };

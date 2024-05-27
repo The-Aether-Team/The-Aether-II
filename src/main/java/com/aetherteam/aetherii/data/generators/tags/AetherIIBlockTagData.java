@@ -212,7 +212,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.WISPROOT_STAIRS.get(),
                 AetherIIBlocks.WISPROOT_SLAB.get(),
-                AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get()
+                AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(),
+                AetherIIBlocks.SKYROOT_CHEST.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
@@ -265,6 +266,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
+        );
+        this.tag(Tags.Blocks.CHESTS_WOODEN).add(
+                AetherIIBlocks.SKYROOT_CHEST.get()
         );
     }
 }
