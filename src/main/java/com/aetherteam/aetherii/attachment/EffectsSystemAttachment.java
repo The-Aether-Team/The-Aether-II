@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.attachment;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
@@ -18,6 +17,7 @@ import java.util.Map;
 public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     private final Map<MobEffect, EffectBuildupInstance> activeBuildups = Maps.newHashMap();
     private final LivingEntity entity;
+    private boolean loadingSync = false;
 
     public EffectsSystemAttachment(LivingEntity entity) {
         this.entity = entity;
@@ -43,16 +43,18 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
             for (int i = 0; i < listTag.size(); ++i) {
                 CompoundTag compoundTag = listTag.getCompound(i);
                 EffectBuildupInstance instance = EffectBuildupInstance.load(compoundTag);
-                this.activeBuildups.put(instance.getEffect().getEffect(), instance);
-                PacketRelay.sendToAll(new EffectBuildupPacket.Set(this.entity.getId(), this.activeBuildups)); //todo see if this is sent too soon for proper sync
+                this.activeBuildups.put(instance.getType(), instance);
+                this.loadingSync = true;
             }
         }
     }
 
     public void tick() {
+        if (this.loadingSync) {
+            PacketRelay.sendToAll(new EffectBuildupPacket.Set(this.entity.getId(), this.activeBuildups));
+            this.loadingSync = false;
+        }
         this.activeBuildups.values().removeIf(instance -> !instance.tick(this.entity));
-
-        AetherII.LOGGER.info(this.activeBuildups.toString());
     }
 
     public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {

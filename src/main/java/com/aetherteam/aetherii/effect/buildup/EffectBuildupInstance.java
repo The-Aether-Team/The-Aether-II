@@ -1,27 +1,30 @@
 package com.aetherteam.aetherii.effect.buildup;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
 public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> {
-    private final MobEffectInstance effect;
+    private final MobEffect type;
+    private final MobEffectInstance instance;
     private final int buildupCap;
     private int buildup;
 
     public EffectBuildupInstance(EffectBuildupPresets.Preset preset, int buildup) {
-        this(preset.instanceBuilder().get(), preset.buildupCap(), buildup);
+        this(preset.type(), preset.instanceBuilder().get(), preset.buildupCap(), buildup);
     }
 
-    public EffectBuildupInstance(MobEffectInstance effect, int buildupCap, int buildup) {
-        this.effect = effect;
+    public EffectBuildupInstance(MobEffect type, MobEffectInstance instance, int buildupCap, int buildup) {
+        this.type = type;
+        this.instance = instance;
         this.buildupCap = buildupCap;
         this.buildup = buildup;
     }
 
     public boolean tick(LivingEntity entity) {
         if (this.buildup >= this.buildupCap) {
-            entity.addEffect(this.effect);
+            entity.addEffect(this.instance);
             return false;
         } else if (this.buildup <= 0) {
             return false;
@@ -38,8 +41,8 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
         this.buildup -= amount;
     }
 
-    public MobEffectInstance getEffect() {
-        return this.effect;
+    public MobEffect getType() {
+        return this.type;
     }
 
     public int getBuildupCap() {
@@ -51,17 +54,18 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     }
 
     public CompoundTag save(CompoundTag tag) {
-        tag.put("effect_instance", this.effect.save(tag));
+        tag.put("effect_instance", this.instance.save(new CompoundTag()));
         tag.putInt("buildup_cap", this.buildupCap);
         tag.putInt("buildup", this.buildup);
         return tag;
     }
 
     public static EffectBuildupInstance load(CompoundTag tag) {
-        MobEffectInstance effect = MobEffectInstance.load(tag);
+        CompoundTag effectTag = (CompoundTag) tag.get("effect_instance");
+        MobEffectInstance effect = MobEffectInstance.load(effectTag);
         int buildupCap = tag.getInt("buildup_cap");
         int buildup = tag.getInt("buildup");
-        return new EffectBuildupInstance(effect, buildupCap, buildup);
+        return new EffectBuildupInstance(effect.getEffect(), effect, buildupCap, buildup);
     }
 
     @Override
@@ -71,12 +75,12 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
         } else if (!(other instanceof EffectBuildupInstance instance)) {
             return false;
         } else {
-            return this.effect.equals(instance.effect);
+            return this.instance.equals(instance.instance);
         }
     }
 
     @Override
     public int compareTo(EffectBuildupInstance other) {
-        return this.effect.compareTo(other.effect);
+        return this.instance.compareTo(other.instance);
     }
 }
