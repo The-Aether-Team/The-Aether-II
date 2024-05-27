@@ -10,7 +10,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     private int buildup;
 
     public EffectBuildupInstance(EffectBuildupPresets.Preset preset, int buildup) {
-        this(preset.effect(), preset.buildupCap(), buildup);
+        this(preset.instanceBuilder().get(), preset.buildupCap(), buildup);
     }
 
     public EffectBuildupInstance(MobEffectInstance effect, int buildupCap, int buildup) {

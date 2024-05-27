@@ -56,7 +56,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     }
 
     public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {
-        MobEffect effect = buildup.effect().getEffect();
+        MobEffect effect = buildup.type();
         if (!this.entity.hasEffect(effect)) {
             if (!this.activeBuildups.containsKey(effect)) {
                 this.activeBuildups.put(effect, new EffectBuildupInstance(buildup, amount));
