@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer;
 
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.layer.AerbunnyCollarLayer;
 import com.aetherteam.aetherii.client.renderer.model.AerbunnyModel;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -16,6 +17,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
 
     public AerbunnyRenderer(EntityRendererProvider.Context context) {
         super(context, new AerbunnyModel(context.bakeLayer(AetherModelLayers.AERBUNNY)), 0.3F);
+        this.addLayer(new AerbunnyCollarLayer(this, context.getModelSet()));
     }
 
     /**

@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -142,6 +141,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_GEMSTONE.get(),
                 AetherIIItems.ARKENIUM_PLATE.get(),
                 AetherIIItems.GRAVITITE_PLATE.get()
+        );
+
+        this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
+                AetherIIItems.ORANGE.get()
         );
 
         this.tag(ItemTags.AXES).add(

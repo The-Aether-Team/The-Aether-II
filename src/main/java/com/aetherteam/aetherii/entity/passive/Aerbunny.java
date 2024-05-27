@@ -30,11 +30,15 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -42,11 +46,13 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.UUID;
 
-public class Aerbunny extends AetherAnimal {
+public class Aerbunny extends AetherTamableAnimal {
     private static final EntityDataAccessor<Integer> DATA_PUFFINESS_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_AFRAID_TIME_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_FAST_FALLING_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
 
     private static final int MAXIMUM_PUFFS = 11;
 
@@ -220,7 +226,59 @@ public class Aerbunny extends AetherAnimal {
      */
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        Item item = itemstack.getItem();
+        if (this.isTame()) {
+            if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+                this.heal((float) itemstack.getFoodProperties(this).getNutrition());
+                if (!player.getAbilities().instabuild) {
+                    itemstack.shrink(1);
+                }
+
+                this.gameEvent(GameEvent.EAT, this);
+                return InteractionResult.SUCCESS;
+            } else {
+                if (item instanceof DyeItem dyeitem && this.isOwnedBy(player)) {
+                    DyeColor dyecolor = dyeitem.getDyeColor();
+                    if (dyecolor != this.getCollarColor()) {
+                        this.setCollarColor(dyecolor);
+                        if (!player.getAbilities().instabuild) {
+                            itemstack.shrink(1);
+                        }
+
+                        return InteractionResult.SUCCESS;
+                    }
+
+                    return super.mobInteract(player, hand);
+                }
+
+            }
+        } else if (this.isFood(itemstack)) {
+            if (!player.getAbilities().instabuild) {
+                itemstack.shrink(1);
+            }
+
+            if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, player)) {
+                this.tame(player);
+                this.navigation.stop();
+                this.setTarget(null);
+                this.setOrderedToSit(true);
+                this.level().broadcastEntityEvent(this, (byte) 7);
+            } else {
+                this.level().broadcastEntityEvent(this, (byte) 6);
+            }
+
+            return InteractionResult.SUCCESS;
+        }
+
         InteractionResult result = super.mobInteract(player, hand);
+        if (player.isShiftKeyDown() && this.isTame() && (!result.consumesAction() || this.isBaby()) && this.isOwnedBy(player)) {
+            this.setOrderedToSit(!this.isOrderedToSit());
+            this.jumping = false;
+            this.navigation.stop();
+            this.setTarget(null);
+            return InteractionResult.SUCCESS;
+        }
         if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
             // Aerbunny can be mounted/dismounted if the shift key is held or no other interaction actions succeed, but only if the Aerbunny is not inside a block.
             if ((player.isShiftKeyDown() || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
@@ -361,6 +419,15 @@ public class Aerbunny extends AetherAnimal {
         return this.puffSubtract;
     }
 
+    public DyeColor getCollarColor() {
+        return DyeColor.byId(this.entityData.get(DATA_COLLAR_COLOR));
+    }
+
+    public void setCollarColor(DyeColor pCollarColor) {
+        this.entityData.set(DATA_COLLAR_COLOR, pCollarColor.getId());
+    }
+
+
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
         return AetherIISoundEvents.ENTITY_AERBUNNY_HURT.get();
@@ -431,7 +498,16 @@ public class Aerbunny extends AetherAnimal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
-        return AetherIIEntityTypes.AERBUNNY.get().create(level);
+        Aerbunny aerbunny = AetherIIEntityTypes.AERBUNNY.get().create(level);
+        if (aerbunny != null) {
+            UUID uuid = this.getOwnerUUID();
+            if (uuid != null) {
+                aerbunny.setOwnerUUID(uuid);
+                aerbunny.setTame(true);
+            }
+        }
+
+        return aerbunny;
     }
 
     @Override
@@ -447,6 +523,7 @@ public class Aerbunny extends AetherAnimal {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("AfraidTime", this.getAfraidTime());
+        tag.putByte("CollarColor", (byte) this.getCollarColor().getId());
     }
 
     @Override
@@ -454,6 +531,9 @@ public class Aerbunny extends AetherAnimal {
         super.readAdditionalSaveData(tag);
         if (tag.contains("AfraidTime")) {
             this.setAfraidTime(tag.getInt("AfraidTime"));
+        }
+        if (tag.contains("CollarColor", 99)) {
+            this.setCollarColor(DyeColor.byId(tag.getInt("CollarColor")));
         }
     }
 

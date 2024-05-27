@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
-import com.aetherteam.aetherii.entity.passive.AetherAnimal;
+import com.aetherteam.aetherii.entity.passive.AetherTamableAnimal;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -21,7 +21,7 @@ public class AetherIIEntityTypes {
 
 
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
-        event.register(AetherIIEntityTypes.AERBUNNY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.AERBUNNY.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherTamableAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
 
     }
 
