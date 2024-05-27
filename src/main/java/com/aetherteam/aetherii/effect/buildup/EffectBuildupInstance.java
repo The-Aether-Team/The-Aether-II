@@ -23,6 +23,8 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
         if (this.buildup >= this.buildupCap) {
             entity.addEffect(this.effect);
             return false;
+        } else if (this.buildup <= 0) {
+            return false;
         }
         this.buildup--;
         return true;

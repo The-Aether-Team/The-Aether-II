@@ -52,7 +52,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     public void tick() {
         this.activeBuildups.values().removeIf(instance -> !instance.tick(this.entity));
 
-//        AetherII.LOGGER.info(this.activeBuildups.toString());
+        AetherII.LOGGER.info(this.activeBuildups.toString());
     }
 
     public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {

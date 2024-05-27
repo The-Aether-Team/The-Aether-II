@@ -62,7 +62,7 @@ public class AetherIIOverlays {
                 if (!renderer.isVisibleInGui(instance)) continue;
                 if (instance.showIcon()) {
                     int i = screenWidth;
-                    int j = 50;
+                    int j = 53;
                     if (minecraft.isDemo()) {
                         j += 15;
                     }
@@ -76,42 +76,24 @@ public class AetherIIOverlays {
                         j += 26;
                     }
 
+                    int color = instance.getEffect().getColor();
+                    int red = (color >> 16) & 0xff;
+                    int green = (color >> 8) & 0xff;
+                    int blue = color & 0xff;
+                    guiGraphics.setColor((float) red / 255, (float) green / 255, (float) blue / 255, 1.0F);
 
-//                    AetherII.LOGGER.info(String.valueOf(new Color(instance.getEffect().getColor())));
+                    int scaled = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
 
-                    Color color = new Color(instance.getEffect().getColor());
-//
-//                    RenderSystem.disableDepthTest();
-//                    RenderSystem.depthMask(false);
-//                    RenderSystem.disableBlend();
-//                    RenderSystem.blendFuncSeparate(
-//                            GlStateManager.SourceFactor.CONSTANT_COLOR, GlStateManager.DestFactor.CONSTANT_COLOR, GlStateManager.SourceFactor.CONSTANT_COLOR, GlStateManager.DestFactor.CONSTANT_COLOR
-//                    );
-                    guiGraphics.setColor(color.getRed(), color.getGreen(), color.getBlue(), 1.0F);
-
-                    int scaled = buildup.getBuildup() / (buildup.getBuildupCap() / 24);
-
-                    guiGraphics.blitSprite(BUILDUP_BACKGROUND_OVERLAY_SPRITE, i, j, 24, 24);
-//                    guiGraphics.blitSprite(BUILDUP_BACKGROUND_OVERLAY_SPRITE, 24, 24, 24, 24, i, j, 24, 24);
-//                    RenderSystem.depthMask(true);
-//                    RenderSystem.enableDepthTest();
+                    guiGraphics.blitSprite(BUILDUP_BACKGROUND_OVERLAY_SPRITE, 24, 24, 0, 24 - scaled, i, j + 24 - scaled, 24, scaled);
                     guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-//                    RenderSystem.defaultBlendFunc();
-//                    RenderSystem.enableBlend();
 
-                    float f = 1.0F;
-//                    guiGraphics.blitSprite(BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
+                    guiGraphics.blitSprite(BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
 
-//                    if (renderer.renderGuiIcon(instance, gui, guiGraphics, i, j, 0, f)) continue;
-//                    TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(mobeffect);
-//                    int i1 = j;
-//                    float f1 = f;
-//                    int i_f = i;
-//                    list.add(() -> {
-//                        guiGraphics.setColor(1.0F, 1.0F, 1.0F, f1);
-//                        guiGraphics.blit(i_f + 3, i1 + 3, 0, 18, 18, textureatlassprite);
-//                        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-//                    });
+                    if (renderer.renderGuiIcon(instance, gui, guiGraphics, i, j, 0, 1.0F)) continue;
+                    TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(mobeffect);
+                    int i1 = j;
+                    int i_f = i;
+                    list.add(() -> guiGraphics.blit(i_f + 3, i1 + 3, 0, 18, 18, textureatlassprite));
                 }
             }
 
