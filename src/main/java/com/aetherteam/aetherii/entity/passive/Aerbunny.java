@@ -255,7 +255,7 @@ public class Aerbunny extends AetherTamableAnimal {
                 }
 
             }
-        } else if (this.isFood(itemstack)) {
+        } else if (this.isFood(itemstack) && this.getAfraidTime() <= 0) {
             if (!player.getAbilities().instabuild) {
                 itemstack.shrink(1);
             }
