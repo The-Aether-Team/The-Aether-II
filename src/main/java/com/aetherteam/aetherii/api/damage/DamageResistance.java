@@ -5,12 +5,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 
-public record DamageResistance(EntityType<?> entityType, float slashValue, float impactValue, float pierceValue) {
+public record DamageResistance(EntityType<?> entityType, double slashValue, double impactValue, double pierceValue) {
     public static final Codec<DamageResistance> CODEC =
             RecordCodecBuilder.create(in -> in.group(
                     BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity_type").forGetter(DamageResistance::entityType),
-                    Codec.FLOAT.fieldOf("slash_value").forGetter(DamageResistance::slashValue),
-                    Codec.FLOAT.fieldOf("impact_value").forGetter(DamageResistance::impactValue),
-                    Codec.FLOAT.fieldOf("pierce_value").forGetter(DamageResistance::pierceValue)
+                    Codec.DOUBLE.fieldOf("slash_value").forGetter(DamageResistance::slashValue),
+                    Codec.DOUBLE.fieldOf("impact_value").forGetter(DamageResistance::impactValue),
+                    Codec.DOUBLE.fieldOf("pierce_value").forGetter(DamageResistance::pierceValue)
             ).apply(in, DamageResistance::new));
 }

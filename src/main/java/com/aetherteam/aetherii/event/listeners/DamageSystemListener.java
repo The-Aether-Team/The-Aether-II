@@ -38,5 +38,6 @@ public class DamageSystemListener {
         ItemStack itemStack = event.getItemStack();
         List<Component> itemTooltips = event.getToolTip();
         DamageSystemHooks.addDamageTypeTooltips(player, itemTooltips, itemStack);
+        DamageSystemHooks.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
     }
 }

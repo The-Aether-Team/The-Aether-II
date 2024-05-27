@@ -13,9 +13,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictio
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.event.listeners.DamageSystemListener;
-import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
-import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
+import com.aetherteam.aetherii.event.listeners.*;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -90,6 +88,8 @@ public class AetherII {
 
         DamageSystemListener.listen(bus);
         PortalTeleportationListener.listen(bus);
+        ToolAbilityListener.listen(bus);
+        ToolModificationListener.listen(bus);
         WorldInteractionListener.listen(bus);
 
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);

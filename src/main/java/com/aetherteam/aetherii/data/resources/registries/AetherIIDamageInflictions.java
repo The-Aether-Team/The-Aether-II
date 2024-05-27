@@ -18,41 +18,43 @@ public class AetherIIDamageInflictions {
     public static final ResourceKey<DamageInfliction> SKYROOT_SHORTSWORD = createKey("skyroot_shortsword");
     public static final ResourceKey<DamageInfliction> SKYROOT_HAMMER = createKey("skyroot_hammer");
     public static final ResourceKey<DamageInfliction> SKYROOT_SPEAR = createKey("skyroot_spear");
+    public static final ResourceKey<DamageInfliction> ZANITE_HAMMER = createKey("zanite_hammer");
 
     private static ResourceKey<DamageInfliction> createKey(String name) {
         return ResourceKey.create(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, new ResourceLocation(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstapContext<DamageInfliction> context) {
-        context.register(SKYROOT_SHORTSWORD, new DamageInfliction(AetherIIItems.SKYROOT_SHORTSWORD.get(), 4.0F, 0, 0));
-        context.register(SKYROOT_HAMMER, new DamageInfliction(AetherIIItems.SKYROOT_HAMMER.get(), 0, 4.0F, 0));
-        context.register(SKYROOT_SPEAR, new DamageInfliction(AetherIIItems.SKYROOT_SPEAR.get(), 0, 0, 4.0F));
+        context.register(SKYROOT_SHORTSWORD, new DamageInfliction(AetherIIItems.SKYROOT_SHORTSWORD.get(), 4.0, 0, 0));
+        context.register(SKYROOT_HAMMER, new DamageInfliction(AetherIIItems.SKYROOT_HAMMER.get(), 0, 4.0, 0));
+        context.register(SKYROOT_SPEAR, new DamageInfliction(AetherIIItems.SKYROOT_SPEAR.get(), 0, 0, 4.0));
+        context.register(ZANITE_HAMMER, new DamageInfliction(AetherIIItems.ZANITE_HAMMER.get(), 0, 6.0, 0));
     }
 
-    public static float getSlashDamage(RegistryAccess registryAccess, ItemStack item) {
+    public static double getSlashDamage(RegistryAccess registryAccess, ItemStack item) {
         for (Map.Entry<ResourceKey<DamageInfliction>, DamageInfliction> entry : registryAccess.registryOrThrow(DAMAGE_INFLICTION_REGISTRY_KEY).entrySet()) {
             if (item.is(entry.getValue().item())) {
                 return entry.getValue().slashValue();
             }
         }
-        return 0.0F;
+        return 0.0;
     }
 
-    public static float getImpactDamage(RegistryAccess registryAccess, ItemStack item) {
+    public static double getImpactDamage(RegistryAccess registryAccess, ItemStack item) {
         for (Map.Entry<ResourceKey<DamageInfliction>, DamageInfliction> entry : registryAccess.registryOrThrow(DAMAGE_INFLICTION_REGISTRY_KEY).entrySet()) {
             if (item.is(entry.getValue().item())) {
                 return entry.getValue().impactValue();
             }
         }
-        return 0.0F;
+        return 0.0;
     }
 
-    public static float getPierceDamage(RegistryAccess registryAccess, ItemStack item) {
+    public static double getPierceDamage(RegistryAccess registryAccess, ItemStack item) {
         for (Map.Entry<ResourceKey<DamageInfliction>, DamageInfliction> entry : registryAccess.registryOrThrow(DAMAGE_INFLICTION_REGISTRY_KEY).entrySet()) {
             if (item.is(entry.getValue().item())) {
                 return entry.getValue().pierceValue();
             }
         }
-        return 0.0F;
+        return 0.0;
     }
 }
