@@ -8,13 +8,17 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
+import com.aetherteam.aetherii.event.listeners.RideMobListener;
+import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
+import com.aetherteam.aetherii.network.packet.RideMobSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
@@ -78,6 +82,7 @@ public class AetherII {
         IEventBus bus = NeoForge.EVENT_BUS;
 
         PortalTeleportationListener.listen(bus);
+        RideMobListener.listen(bus);
         WorldInteractionListener.listen(bus);
 
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
@@ -89,8 +94,13 @@ public class AetherII {
 
         // CLIENTBOUND
         registrar.play(PortalTravelSoundPacket.ID, PortalTravelSoundPacket::decode, payload -> payload.client(PortalTravelSoundPacket::handle));
+        registrar.play(RemountAerbunnyPacket.ID, RemountAerbunnyPacket::decode, payload -> payload.client(RemountAerbunnyPacket::handle));
+
+        //SERVERBOUND
+        registrar.play(AerbunnyPuffPacket.ID, AerbunnyPuffPacket::decode, payload -> payload.client(AerbunnyPuffPacket::handle));
 
         // BOTH
         registrar.play(PortalTeleportationSyncPacket.ID, PortalTeleportationSyncPacket::decode, PortalTeleportationSyncPacket::handle);
+        registrar.play(RideMobSyncPacket.ID, RideMobSyncPacket::decode, RideMobSyncPacket::handle);
     }
 }
