@@ -8,8 +8,10 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.event.hooks.AbilityHooks;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
+import com.aetherteam.aetherii.event.listeners.abilities.ToolAbilityListener;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -77,6 +79,7 @@ public class AetherII {
     public static void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
+        ToolAbilityListener.listen(bus);
         PortalTeleportationListener.listen(bus);
         WorldInteractionListener.listen(bus);
 
