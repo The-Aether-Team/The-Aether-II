@@ -31,6 +31,19 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.block.aercloud.blue_aercloud_bounce")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_AERBUNNY_DEATH,
+                definition().with(sound("aether_ii:entity/aerbunny/death"))
+                        .subtitle("subtitles.aether_ii.entity.aerbunny.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_AERBUNNY_HURT,
+                definition().with(sound("aether_ii:entity/aerbunny/hurt"))
+                        .subtitle("subtitles.aether_ii.entity.aerbunny.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_AERBUNNY_LIFT,
+                definition().with(sound("aether_ii:entity/aerbunny/lift"))
+                        .subtitle("subtitles.aether_ii.entity.aerbunny.lift")
+        );
+
         // Music
 //        this.add(AetherIISoundEvents.MUSIC_HIGHFIELDS,
 //                definition().with(
