@@ -20,6 +20,7 @@ import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacke
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
+import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -51,6 +52,7 @@ public class AetherII {
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIFeatures.FEATURES,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
+                AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
                 AetherIIMenuTypes.MENU_TYPES,
