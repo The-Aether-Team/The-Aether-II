@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.tree.foliage;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 public class AmberootFoliagePlacer extends FoliagePlacer {
     public static final Codec<AmberootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
@@ -43,7 +45,7 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
      * @param foliageRadius     The {@link Integer} for the foliage radius.
      * @param offset            The {@link Integer} for the foliage offset.
      */
-    @Override
+    @Override  //TODO: Improve this mess
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
@@ -54,6 +56,9 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 4, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 6, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 6, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+
+            //if (level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY(), attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState())) || level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY(), attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState()))) {
+            //}
         }
     }
 

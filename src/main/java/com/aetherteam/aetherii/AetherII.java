@@ -21,6 +21,7 @@ import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
+import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -51,8 +52,9 @@ public class AetherII {
                 AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIFeatures.FEATURES,
-                AetherIIStructureTypes.STRUCTURE_TYPES,
+                AetherIITrunkPlacerTypes.TRUNK_PLACERS,
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
+                AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
                 AetherIIMenuTypes.MENU_TYPES,
