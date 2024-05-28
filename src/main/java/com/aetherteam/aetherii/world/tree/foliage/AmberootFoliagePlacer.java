@@ -48,8 +48,8 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 4, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 4, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 4, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 4, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 6, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
