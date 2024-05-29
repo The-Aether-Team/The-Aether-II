@@ -65,15 +65,21 @@ public class DamageSystemHooks {
                     pierceDamage += damages.getRight();
                 }
 
-                double slashCalculation = Math.max(slashDamage - slashDefense, 1.0F);
-                double impactCalculation = Math.max(impactDamage - impactDefense, 1.0F);
-                double pierceCalculation = Math.max(pierceDamage - pierceDefense, 1.0F);
-
                 createSoundsAndParticles(sourceEntity, target, slashDamage, slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
                 createSoundsAndParticles(sourceEntity, target, impactDamage, impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
                 createSoundsAndParticles(sourceEntity, target, pierceDamage, pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
 
-                damage = slashCalculation + impactCalculation + pierceCalculation;
+                double slashCalculation = slashDamage > 0.0 ? Math.max(slashDamage - slashDefense, 0.0) : 0.0;
+                double impactCalculation = impactDamage > 0.0 ? Math.max(impactDamage - impactDefense, 0.0) : 0.0;
+                double pierceCalculation = pierceDamage > 0.0 ? Math.max(pierceDamage - pierceDefense, 0.0) : 0.0;
+
+                damage = Math.max(slashCalculation + impactCalculation + pierceCalculation, 1.0);
+                
+                AetherII.LOGGER.info(slashDamage + " - " + slashDefense);
+                AetherII.LOGGER.info(impactDamage + " - " + impactDefense);
+                AetherII.LOGGER.info(pierceDamage + " - " + pierceDefense);
+                AetherII.LOGGER.info(String.valueOf(damage));
+
                 if (sourceEntity instanceof Player player) {
                     damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
                     damage *= player.getAttackStrengthScale(0.5F);
