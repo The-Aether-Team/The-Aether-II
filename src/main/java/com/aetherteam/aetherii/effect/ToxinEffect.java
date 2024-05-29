@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class ToxinEffect extends MobEffect {
     public ToxinEffect() {
-        super(MobEffectCategory.HARMFUL, 6533213);
+        super(MobEffectCategory.HARMFUL, 7720557);
     }
 
     @Override

@@ -70,7 +70,7 @@ public class AetherIIOverlays {
                     j += 26;
                 }
 
-                Color color = new Color(effect.getColor()).brighter();
+                Color color = new Color(effect.getColor());
                 guiGraphics.setColor((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 1.0F);
 
                 int buildupScaledValue = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
@@ -79,7 +79,6 @@ public class AetherIIOverlays {
 
                 guiGraphics.blitSprite(BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
 
-
                 if (buildup.isBuildupFull()) {
                     MobEffectInstance instance = player.getEffect(buildup.getType());
                     if (instance != null) {
@@ -87,7 +86,7 @@ public class AetherIIOverlays {
                         guiGraphics.blitSprite(BUILDUP_BACKGROUND_BACKING_SPRITE, 24, 24, 0, 24 - durationValueScaled, i, j + 24 - durationValueScaled, 24, durationValueScaled);
                     }
 
-                    float flashInterval = (Mth.cos((0.75F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
+                    float flashInterval = (Mth.cos((0.5F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
                     guiGraphics.setColor(1.0F, 1.0F, 1.0F, flashInterval);
                     guiGraphics.blitSprite(BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24);
                     guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
