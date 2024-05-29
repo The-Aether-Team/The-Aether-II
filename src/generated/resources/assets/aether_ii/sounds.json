@@ -24,5 +24,23 @@
       "aether_ii:block/aercloud/blue_aercloud_bounce"
     ],
     "subtitle": "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce"
+  },
+  "entity.aerbunny.death": {
+    "sounds": [
+      "aether_ii:entity/aerbunny/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerbunny.death"
+  },
+  "entity.aerbunny.hurt": {
+    "sounds": [
+      "aether_ii:entity/aerbunny/hurt"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerbunny.hurt"
+  },
+  "entity.aerbunny.lift": {
+    "sounds": [
+      "aether_ii:entity/aerbunny/lift"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerbunny.lift"
   }
 }

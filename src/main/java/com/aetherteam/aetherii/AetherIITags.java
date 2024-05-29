@@ -12,6 +12,8 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_PORTAL_BLOCKS = tag("aether_portal_blocks");
         public static final TagKey<Block> AETHER_PORTAL_BLACKLIST = tag("aether_portal_blacklist");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
+        public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
+
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
@@ -52,6 +54,9 @@ public class AetherIITags {
         public static final TagKey<Item> ZANITE_REPAIRING = tag("zanite_repairing");
         public static final TagKey<Item> ARKENIUM_REPAIRING = tag("arkenium_repairing");
         public static final TagKey<Item> GRAVITITE_REPAIRING = tag("gravitite_repairing");
+
+        public static final TagKey<Item> AERBUNNY_TEMPTATION_ITEMS = tag("aerbunny_temptation_items");
+
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
 

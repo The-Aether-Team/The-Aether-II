@@ -10,4 +10,7 @@ public class AetherIIDataAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, AetherII.MODID);
 
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<PortalTeleportationAttachment>> PORTAL_TELEPORTATION = ATTACHMENTS.register("portal_teleportation", () -> AttachmentType.builder(PortalTeleportationAttachment::new).serialize(PortalTeleportationAttachment.CODEC).copyOnDeath().build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<RideMobAttachment>> RIDE_MOB = ATTACHMENTS.register("ride_mob", () -> AttachmentType.builder(attach -> {
+        return new RideMobAttachment();
+    }).serialize(RideMobAttachment.CODEC).build());
 }
