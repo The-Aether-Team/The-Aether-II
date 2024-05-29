@@ -43,7 +43,7 @@ public abstract class ItemStackMixin<E> {
     @Inject(method = "getTooltipLines(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/TooltipFlag;)Ljava/util/List;", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 7))
     private void getTooltipLines(Player pPlayer, TooltipFlag pIsAdvanced, CallbackInfoReturnable<List<Component>> cir, @Local List<MutableComponent> list, @Local Map.Entry<Attribute, AttributeModifier> entry, @Local AttributeModifier attributemodifier, @Local(ordinal = 1) double d1) {
         ItemStack itemStack = (ItemStack) (Object) this;
-        if (itemStack.is(AetherIITags.Items.UNIQUE_DAMAGE_INFLICTIONS)) {
+        if (itemStack.is(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR)) {
             list.add(
                     CommonComponents.space().append(Component.translatable(
                             "attribute.modifier.equals." + attributemodifier.getOperation().toValue(),
@@ -60,6 +60,6 @@ public abstract class ItemStackMixin<E> {
             slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/CommonComponents;space()Lnet/minecraft/network/chat/MutableComponent;", shift = At.Shift.BEFORE), to = @At(value = "TAIL")))
     private boolean addIfAllowed(List<E> instance, E e) {
         ItemStack itemStack = (ItemStack) (Object) this;
-        return !itemStack.is(AetherIITags.Items.UNIQUE_DAMAGE_INFLICTIONS);
+        return !itemStack.is(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR);
     }
 }

@@ -18,10 +18,6 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.tag(AetherIITags.Entities.UNIQUE_DAMAGE_RESISTANCES).add(
-                EntityType.PIG,
-                EntityType.COW,
-                EntityType.SHEEP
-        );
+
     }
 }

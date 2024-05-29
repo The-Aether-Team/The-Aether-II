@@ -2,12 +2,14 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.damage.DamageInfliction;
+import com.aetherteam.aetherii.api.damage.DamageResistance;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Map;
@@ -33,6 +35,15 @@ public class AetherIIDamageInflictions {
         context.register(ZANITE_SHORTSWORD, new DamageInfliction(AetherIIItems.ZANITE_SHORTSWORD.get(), 6.0, 0.0, 0));
         context.register(ZANITE_HAMMER, new DamageInfliction(AetherIIItems.ZANITE_HAMMER.get(), 0, 6.0, 0));
         context.register(ZANITE_SPEAR, new DamageInfliction(AetherIIItems.ZANITE_SPEAR.get(), 0, 0, 6.0));
+    }
+
+    public static boolean hasItem(RegistryAccess registryAccess, ItemStack item) {
+        for (Map.Entry<ResourceKey<DamageInfliction>, DamageInfliction> entry : registryAccess.registryOrThrow(DAMAGE_INFLICTION_REGISTRY_KEY).entrySet()) {
+            if (item.is(entry.getValue().item())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static double getSlashDamage(RegistryAccess registryAccess, ItemStack item) {

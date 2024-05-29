@@ -12,7 +12,6 @@ import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.network.PacketRelay;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -57,8 +56,8 @@ public class DamageSystemHooks {
                 double impactDefense = AetherIIDamageResistances.getImpactDefense(registryAccess, target);
                 double pierceDefense = AetherIIDamageResistances.getPierceDefense(registryAccess, target);
 
-                if (target.getType().is(AetherIITags.Entities.UNIQUE_DAMAGE_RESISTANCES)) {
-                    if (sourceStack.is(AetherIITags.Items.UNIQUE_DAMAGE_INFLICTIONS)) {
+                if (AetherIIDamageResistances.hasEntity(registryAccess, target)) {
+                    if (AetherIIDamageInflictions.hasItem(registryAccess, sourceStack)) {
                         if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
                             Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
                             slashDamage += damages.getLeft();

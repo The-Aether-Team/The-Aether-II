@@ -29,6 +29,15 @@ public class AetherIIDamageResistances {
         context.register(EXAMPLE_3, new DamageResistance(EntityType.COW, 2, 2, -2));
     }
 
+    public static boolean hasEntity(RegistryAccess registryAccess, Entity entity) {
+        for (Map.Entry<ResourceKey<DamageResistance>, DamageResistance> entry : registryAccess.registryOrThrow(DAMAGE_RESISTANCE_REGISTRY_KEY).entrySet()) {
+            if (entity.getType() == entry.getValue().entityType()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static double getSlashDefense(RegistryAccess registryAccess, Entity entity) {
         for (Map.Entry<ResourceKey<DamageResistance>, DamageResistance> entry : registryAccess.registryOrThrow(DAMAGE_RESISTANCE_REGISTRY_KEY).entrySet()) {
             if (entity.getType() == entry.getValue().entityType()) {
