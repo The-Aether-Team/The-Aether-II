@@ -99,7 +99,9 @@
   "block.aether_ii.woven_skyroot_sticks": "Woven Skyroot Sticks",
   "block.aether_ii.zanite_block": "Block of Zanite",
   "block.aether_ii.zanite_ore": "Zanite Ore",
+  "entity.aether_ii.aerbunny": "Aerbunny",
   "item.aether_ii.aechor_petal": "Aechor Petal",
+  "item.aether_ii.aerbunny_spawn_egg": "Aerbunny Spawn Egg",
   "item.aether_ii.aether_portal_frame": "Aether Portal Frame",
   "item.aether_ii.ambrosium_shard": "Ambrosium Shard",
   "item.aether_ii.arkenium_axe": "Arkenium Axe",
@@ -167,7 +169,7 @@
   "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce": "Blue Aercloud bounces",
   "subtitles.aether_ii.block.aether_portal.ambient": "Aether Portal whooshes",
   "subtitles.aether_ii.block.aether_portal.trigger": "Aether Portal noise intensifies",
-  "subtitles.aether_ii.entity.aerbunny.death": "Aerbunny Dies",
+  "subtitles.aether_ii.entity.aerbunny.death": "Aerbunny dies",
   "subtitles.aether_ii.entity.aerbunny.hurt": "Aerbunny squeals",
   "subtitles.aether_ii.entity.aerbunny.lift": "Aerbunny squeaks"
 }

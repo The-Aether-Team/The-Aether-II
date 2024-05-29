@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -197,7 +198,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
         this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
 
+        this.addItem(AetherIIItems.AERBUNNY_SPAWN_EGG, "Aerbunny Spawn Egg");
+
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
+
+        this.addEntityType(AetherIIEntityTypes.AERBUNNY, "Aerbunny");
 
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");

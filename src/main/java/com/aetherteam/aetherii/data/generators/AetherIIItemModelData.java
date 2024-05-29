@@ -73,6 +73,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
 
+        this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         //TODO: Simplify with Block Item Model with a blockWithItem Method

@@ -242,9 +242,9 @@ public class AetherIICreativeTabs {
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "ingredients"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIItems.AERBUNNY_SPAWN_EGG.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
             }).build());
 }
