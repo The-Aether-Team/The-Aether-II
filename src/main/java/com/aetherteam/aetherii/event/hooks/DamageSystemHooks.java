@@ -9,6 +9,8 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictio
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
+import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
+import com.aetherteam.nitrogen.network.PacketRelay;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
@@ -100,7 +102,7 @@ public class DamageSystemHooks {
             if (defense > 0) {
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), incorrect, source.getSoundSource(), 1.0F, 1.0F);
             } else if (defense < 0) {
-                Minecraft.getInstance().particleEngine.createTrackingEmitter(target, particleType, 1); //todo packet
+                PacketRelay.sendToNear(new DamageTypeParticlePacket(target.getId(), particleType), source.getX(), source.getY(), source.getZ(), 15, source.level().dimension());
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), correct, source.getSoundSource(), 1.0F, 1.0F);
             }
         }
