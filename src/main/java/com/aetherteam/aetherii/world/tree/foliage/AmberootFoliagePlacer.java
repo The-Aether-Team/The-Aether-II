@@ -83,11 +83,6 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
         return 7;
     }
 
-    @Override
-    public int foliageRadius(RandomSource random, int Radius) {
-        return 1;
-    }
-
     /**
      * Skips placing a foliage block at a spherical edge location and with some randomness.
      *
