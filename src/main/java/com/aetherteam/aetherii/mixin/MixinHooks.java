@@ -31,8 +31,8 @@ public class MixinHooks {
     }
 
     private static void sweepAttack(Player player) {
-        double d0 = -Mth.sin(player.getYRot() * 0.0175F);
-        double d1 = Mth.cos(player.getYRot() * 0.0175F);
+        double d0 = -Mth.sin(player.getYRot() * (float) (Math.PI / 180.0));
+        double d1 = Mth.cos(player.getYRot() * (float) (Math.PI / 180.0));
         if (player.level() instanceof ServerLevel) {
             ((ServerLevel) player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);
         }
@@ -45,7 +45,7 @@ public class MixinHooks {
             if (stabRadius > 0 || stabDistance > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(stabDistance, stabDistance, stabDistance), (other) -> withinStabDistance(player, target, other, stabRadius, stabDistance))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
-                        other.knockback(0.2F, Mth.sin(player.getYRot() * 0.0175F) * 0.5F, -Mth.cos(player.getYRot() * 0.0175F) * 0.5F);
+                        other.knockback(0.2F, Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5, -Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5);
                         other.hurt(AetherIIDamageTypes.playerAoeNoKnockback(player.level(), player), 2.0F);
                     }
                 }
@@ -71,8 +71,8 @@ public class MixinHooks {
     }
 
     private static void stabAttack(Player player) {
-        double d0 = -Mth.sin(player.getYRot() * 0.0175F);
-        double d1 = Mth.cos(player.getYRot() * 0.0175F);
+        double d0 = -Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5;
+        double d1 = Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5;
         if (player.level() instanceof ServerLevel) {
             ((ServerLevel) player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);//todo
         }
@@ -102,16 +102,14 @@ public class MixinHooks {
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_SHOCK.get(), player.getSoundSource(), 1.0F, 1.0F);
-                shockAttack(player);
+                shockAttack(player, target);
             }
         }
     }
 
-    private static void shockAttack(Player player) {
-        double d0 = -Mth.sin(player.getYRot() * 0.0175F);
-        double d1 = Mth.cos(player.getYRot() * 0.0175F);
+    private static void shockAttack(Player player, Entity target) {
         if (player.level() instanceof ServerLevel) {
-            ((ServerLevel) player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);//todo
+            ((ServerLevel) player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY(0.5), target.getZ(), 0, 0.0, 0.0, 0.0, 0.0);//todo
         }
     }
 }

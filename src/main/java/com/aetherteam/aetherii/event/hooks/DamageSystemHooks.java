@@ -55,11 +55,8 @@ public class DamageSystemHooks {
                 double impactDefense = AetherIIDamageResistances.getImpactDefense(registryAccess, target);
                 double pierceDefense = AetherIIDamageResistances.getPierceDefense(registryAccess, target);
 
-                boolean isTypedItem = (slashDamage + impactDamage + pierceDamage) > 0.0;
-                boolean isTypedEntity = (slashDefense + impactDefense + pierceDefense) > 0.0;
-
-                if (isTypedEntity) {
-                    if (isTypedItem) {
+                if (target.getType().is(AetherIITags.Entities.UNIQUE_DAMAGE_RESISTANCES)) {
+                    if (sourceStack.is(AetherIITags.Items.UNIQUE_DAMAGE_INFLICTIONS)) {
                         if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
                             Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
                             slashDamage += damages.getLeft();

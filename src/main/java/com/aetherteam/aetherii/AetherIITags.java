@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -39,7 +40,7 @@ public class AetherIITags {
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
         public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");
 
-        public static final TagKey<Item> RESTYLED_TOOLTIPS = tag("equipment");
+        public static final TagKey<Item> UNIQUE_DAMAGE_INFLICTIONS = tag("unique_damage_inflictions");
 
         public static final TagKey<Item> CRAFTS_SKYROOT_PLANKS = tag("crafts_skyroot_planks");
         public static final TagKey<Item> CRAFTS_GREATROOT_PLANKS = tag("crafts_greatroot_planks");
@@ -60,6 +61,14 @@ public class AetherIITags {
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, new ResourceLocation(AetherII.MODID, name));
+        }
+    }
+
+    public static class Entities {
+        public static final TagKey<EntityType<?>> UNIQUE_DAMAGE_RESISTANCES = tag("unique_damage_resistances");
+
+        private static TagKey<EntityType<?>> tag(String name) {
+            return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(AetherII.MODID, name));
         }
     }
 
