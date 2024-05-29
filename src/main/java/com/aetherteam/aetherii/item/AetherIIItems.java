@@ -40,12 +40,15 @@ import com.aetherteam.aetherii.item.tools.zanite.ZaniteAxeItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZanitePickaxeItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZaniteShovelItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZaniteTrowelItem;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class AetherIIItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AetherII.MODID);
+
+    public static final Style WEAPON_TOOLTIP_COLOR = Style.EMPTY.withColor(11393240);
 
     // Tools
     public static final DeferredItem<PickaxeItem> SKYROOT_PICKAXE = ITEMS.register("skyroot_pickaxe", SkyrootPickaxeItem::new);

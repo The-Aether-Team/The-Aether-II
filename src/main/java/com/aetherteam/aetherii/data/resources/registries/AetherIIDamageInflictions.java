@@ -18,7 +18,9 @@ public class AetherIIDamageInflictions {
     public static final ResourceKey<DamageInfliction> SKYROOT_SHORTSWORD = createKey("skyroot_shortsword");
     public static final ResourceKey<DamageInfliction> SKYROOT_HAMMER = createKey("skyroot_hammer");
     public static final ResourceKey<DamageInfliction> SKYROOT_SPEAR = createKey("skyroot_spear");
+    public static final ResourceKey<DamageInfliction> ZANITE_SHORTSWORD = createKey("zanite_shortsword");
     public static final ResourceKey<DamageInfliction> ZANITE_HAMMER = createKey("zanite_hammer");
+    public static final ResourceKey<DamageInfliction> ZANITE_SPEAR = createKey("zanite_spear");
 
     private static ResourceKey<DamageInfliction> createKey(String name) {
         return ResourceKey.create(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, new ResourceLocation(AetherII.MODID, name));
@@ -28,7 +30,9 @@ public class AetherIIDamageInflictions {
         context.register(SKYROOT_SHORTSWORD, new DamageInfliction(AetherIIItems.SKYROOT_SHORTSWORD.get(), 4.0, 0, 0));
         context.register(SKYROOT_HAMMER, new DamageInfliction(AetherIIItems.SKYROOT_HAMMER.get(), 0, 4.0, 0));
         context.register(SKYROOT_SPEAR, new DamageInfliction(AetherIIItems.SKYROOT_SPEAR.get(), 0, 0, 4.0));
+        context.register(ZANITE_SHORTSWORD, new DamageInfliction(AetherIIItems.ZANITE_SHORTSWORD.get(), 6.0, 0.0, 0));
         context.register(ZANITE_HAMMER, new DamageInfliction(AetherIIItems.ZANITE_HAMMER.get(), 0, 6.0, 0));
+        context.register(ZANITE_SPEAR, new DamageInfliction(AetherIIItems.ZANITE_SPEAR.get(), 0, 0, 6.0));
     }
 
     public static double getSlashDamage(RegistryAccess registryAccess, ItemStack item) {

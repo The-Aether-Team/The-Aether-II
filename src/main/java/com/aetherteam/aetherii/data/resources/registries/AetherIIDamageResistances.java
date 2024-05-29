@@ -15,14 +15,18 @@ import java.util.Map;
 public class AetherIIDamageResistances {
     public static final ResourceKey<Registry<DamageResistance>> DAMAGE_RESISTANCE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(AetherII.MODID, "damage_resistance"));
 
-    public static final ResourceKey<DamageResistance> EXAMPLE = createKey("example");
+    public static final ResourceKey<DamageResistance> EXAMPLE_1 = createKey("example_1");
+    public static final ResourceKey<DamageResistance> EXAMPLE_2 = createKey("example_2");
+    public static final ResourceKey<DamageResistance> EXAMPLE_3 = createKey("example_3");
 
     private static ResourceKey<DamageResistance> createKey(String name) {
         return ResourceKey.create(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, new ResourceLocation(AetherII.MODID, name));
     }
 
     public static void bootstrap(BootstapContext<DamageResistance> context) {
-        context.register(EXAMPLE, new DamageResistance(EntityType.PIG, 2, 2, 2));
+        context.register(EXAMPLE_1, new DamageResistance(EntityType.PIG, -2, 2, 2));
+        context.register(EXAMPLE_2, new DamageResistance(EntityType.SHEEP, 2, -2, 2));
+        context.register(EXAMPLE_3, new DamageResistance(EntityType.COW, 2, 2, -2));
     }
 
     public static double getSlashDefense(RegistryAccess registryAccess, Entity entity) {

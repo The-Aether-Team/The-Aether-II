@@ -1,15 +1,22 @@
 package com.aetherteam.aetherii.event.hooks;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,25 +65,13 @@ public class DamageSystemHooks {
                     pierceDamage += damages.getRight();
                 }
 
-                double slashCalculation = slashDamage - slashDefense;
-                double impactCalculation = impactDamage - impactDefense;
-                double pierceCalculation = pierceDamage - pierceDefense;
+                double slashCalculation = Math.max(slashDamage - slashDefense, 1.0F);
+                double impactCalculation = Math.max(impactDamage - impactDefense, 1.0F);
+                double pierceCalculation = Math.max(pierceDamage - pierceDefense, 1.0F);
 
-                if (slashCalculation >= 1.0) {
-                    spawnDamageTypeParticles(target, AetherIIParticleTypes.SLASH_ATTACK.get());
-                } else {
-                    slashCalculation = 1.0;
-                }
-                if (impactCalculation >= 1.0) {
-                    spawnDamageTypeParticles(target, AetherIIParticleTypes.IMPACT_ATTACK.get());
-                } else {
-                    impactCalculation = 1.0;
-                }
-                if (pierceCalculation >= 1.0) {
-                    spawnDamageTypeParticles(target, AetherIIParticleTypes.PIERCE_ATTACK.get());
-                } else {
-                    pierceCalculation = 1.0;
-                }
+                createSoundsAndParticles(sourceEntity, target, slashDamage, slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
+                createSoundsAndParticles(sourceEntity, target, impactDamage, impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
+                createSoundsAndParticles(sourceEntity, target, pierceDamage, pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
 
                 damage = slashCalculation + impactCalculation + pierceCalculation;
                 if (sourceEntity instanceof Player player) {
@@ -90,8 +85,24 @@ public class DamageSystemHooks {
         return (float) damage;
     }
 
-    private static void spawnDamageTypeParticles(Entity target, SimpleParticleType particleType) {
-        Minecraft.getInstance().particleEngine.createTrackingEmitter(target, particleType);
+    private static void createSoundsAndParticles(Entity source, Entity target, double damage, double defense, SimpleParticleType particleType, SoundEvent correct, SoundEvent incorrect) {
+        if (damage > 0) {
+            if (defense > 0) {
+                source.level().playSound(null, source.getX(), source.getY(), source.getZ(), incorrect, source.getSoundSource(), 1.0F, 1.0F);
+            } else if (defense < 0) {
+                Minecraft.getInstance().particleEngine.createTrackingEmitter(target, particleType, 1);
+                source.level().playSound(null, source.getX(), source.getY(), source.getZ(), correct, source.getSoundSource(), 1.0F, 1.0F);
+            }
+        }
+    }
+
+    public static void addAbilityTooltips(ItemStack stack, List<Component> components) {
+        for (int i = 1; i <= 5; i++) {
+            String string = stack.getDescriptionId() + "." + AetherII.MODID + ".ability.tooltip." + i;
+            if (I18n.exists(string)) {
+                components.add(i, Component.translatable(string));
+            }
+        }
     }
 
     public static void addDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {
@@ -119,28 +130,28 @@ public class DamageSystemHooks {
 
     private static void addDamageTypeTooltip(List<Component> components, int position, double value, String name) {
         if (value > 0.0) {
-            components.add(position, Component.literal(" ").append(Component.translatable("attribute.modifier.equals.0", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(ChatFormatting.DARK_GREEN)));
+            components.remove(position - 1);
+            components.add(position, CommonComponents.space().append(Component.translatable("attribute.modifier.equals.0", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
         }
     }
 
     public static void addBonusDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {
         if (player != null) {
             RegistryAccess registryAccess = player.level().registryAccess();
-
-            double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, stack) - 1;
-            double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, stack) - 1;
-            double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, stack) - 1;
-
             if (stack.getItem() instanceof UniqueDamage uniqueDamage) {
+                double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, stack) - 1;
+                double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, stack) - 1;
+                double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, stack) - 1;
+
                 Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(stack, slashDamage, impactDamage, pierceDamage);
                 slashDamage = damages.getLeft();
                 impactDamage = damages.getMiddle();
                 pierceDamage = damages.getRight();
-            }
 
-            addBonusDamageTypeTooltip(components, slashDamage, "slash");
-            addBonusDamageTypeTooltip(components, impactDamage, "impact");
-            addBonusDamageTypeTooltip(components, pierceDamage, "pierce");
+                addBonusDamageTypeTooltip(components, slashDamage, "slash");
+                addBonusDamageTypeTooltip(components, impactDamage, "impact");
+                addBonusDamageTypeTooltip(components, pierceDamage, "pierce");
+            }
         }
     }
 
@@ -155,6 +166,7 @@ public class DamageSystemHooks {
                     break;
                 }
             }
+            components.remove(position - 1);
             components.add(position, Component.literal("").append(Component.translatable("attribute.modifier.plus.0", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(ChatFormatting.BLUE)));
         }
     }

@@ -196,11 +196,19 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
-        this.addDamageTypeTooltip("slash", "Slash Damage");
-        this.addDamageTypeTooltip("impact", "Impact Damage");
-        this.addDamageTypeTooltip("pierce", "Pierce Damage");
+        this.addDamageTypeTooltip("slash", "\u00A79Slash\u00A7r Damage");
+        this.addDamageTypeTooltip("impact", "\u00A7eImpact\u00A7r Damage");
+        this.addDamageTypeTooltip("pierce", "\u00A7cPierce\u00A7r Damage");
 
-        this.addAttribute(AetherIIAttributes.SLASH_RANGE.get(), "Slash Range");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_PICKAXE.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_AXE.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHOVEL.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_TROWEL.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHORTSWORD.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HAMMER.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SPEAR.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
+
+        this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");
         this.addAttribute(AetherIIAttributes.SHOCK_RANGE.get(), "Shock Range");
         this.addAttribute(AetherIIAttributes.STAB_RADIUS.get(), "Stab Radius");
         this.addAttribute(AetherIIAttributes.STAB_DISTANCE.get(), "Stab Distance");

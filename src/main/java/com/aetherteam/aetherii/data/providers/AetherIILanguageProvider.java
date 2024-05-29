@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.providers;
 import com.aetherteam.nitrogen.data.providers.NitrogenLanguageProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.item.Item;
 
 public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider {
     public AetherIILanguageProvider(PackOutput output, String id) {
@@ -19,6 +20,10 @@ public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider 
 
     public void addTooltip(String path, String name) {
         this.add(this.id + ".tooltip." + path, name);
+    }
+
+    public void addPerItemAbilityTooltip(Item item, int index, String name) {
+        this.add(item.getDescriptionId() + "." + this.id + ".ability.tooltip." + index, name);
     }
 
     public void addAttribute(Attribute attribute, String name) {

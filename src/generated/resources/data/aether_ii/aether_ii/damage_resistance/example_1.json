@@ -2,5 +2,5 @@
   "entity_type": "minecraft:pig",
   "impact_value": 2.0,
   "pierce_value": 2.0,
-  "slash_value": 2.0
+  "slash_value": -2.0
 }

@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-26T12:36:13.2581745	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-05-28T19:48:30.2885248	Tags for minecraft:item mod id aether_ii
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 0c52879ea7524c9c5a2025462b6351d7e81bf251 data/aether_ii/tags/items/aether_dirt.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/aether_ii/tags/items/aether_portal_activation_items.json
@@ -10,6 +10,7 @@ fce3e48dcf2a2f543eb33cde348393547a8abb35 data/aether_ii/tags/items/crafts_skyroo
 83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/crafts_skyroot_sticks.json
 83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/crafts_skyroot_tools.json
 95632e0a46336508c58a914081fb650aa9766416 data/aether_ii/tags/items/crafts_wisproot_planks.json
+c97ef2b0c396d3206c0f7fde553104b8e13c0521 data/aether_ii/tags/items/equipment.json
 50aa3b1be78deaf9aef13985ed1fa0f21fd32bce data/aether_ii/tags/items/gems/zanite.json
 388a51dca9547d63c61921397cb0eac41f68806a data/aether_ii/tags/items/gravitite_repairing.json
 d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/items/greatroot_logs.json

@@ -16,7 +16,7 @@ import net.neoforged.neoforge.common.ToolAction;
 import java.util.UUID;
 
 public class ShortswordItem extends SwordItem {
-    public static final UUID BASE_SLASH_RANGE_UUID = UUID.fromString("8682E787-5A67-4999-AE6E-9B8AE5FA9F04");
+    public static final UUID BASE_SWEEP_RANGE_UUID = UUID.fromString("8682E787-5A67-4999-AE6E-9B8AE5FA9F04");
 
     public ShortswordItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Item.Properties properties) {
         super(tier, attackDamageModifier, attackSpeedModifier, properties);
@@ -28,7 +28,7 @@ public class ShortswordItem extends SwordItem {
         if (slot == EquipmentSlot.MAINHAND) {
             ImmutableMultimap.Builder<Attribute, AttributeModifier> attributeBuilder = ImmutableMultimap.builder();
             attributeBuilder.putAll(map);
-            attributeBuilder.put(AetherIIAttributes.SLASH_RANGE.get(), new AttributeModifier(BASE_SLASH_RANGE_UUID, "Weapon modifier", 2.0, AttributeModifier.Operation.ADDITION));
+            attributeBuilder.put(AetherIIAttributes.SWEEP_RANGE.get(), new AttributeModifier(BASE_SWEEP_RANGE_UUID, "Weapon modifier", 2.0, AttributeModifier.Operation.ADDITION));
             map = attributeBuilder.build();
         }
         return map;
