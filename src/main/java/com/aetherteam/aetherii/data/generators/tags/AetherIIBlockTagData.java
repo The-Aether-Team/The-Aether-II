@@ -150,9 +150,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
         this.tag(BlockTags.SAPLINGS).add(
+                AetherIIBlocks.SKYROOT_SAPLING.get(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get()
         );
         this.tag(BlockTags.FLOWER_POTS).add(
+                AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(),
                 AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get()
         );
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);

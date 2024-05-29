@@ -56,7 +56,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AMBEROOT_WOOD.get());
 
         //TODO: Leaves Loot Tables
-        this.dropNone(AetherIIBlocks.SKYROOT_LEAVES.get());
+        this.add(AetherIIBlocks.SKYROOT_LEAVES.get(),
+                (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aetherII$getNormalLeavesSaplingChances()));
         this.dropNone(AetherIIBlocks.SKYPLANE_LEAVES.get());
         this.dropNone(AetherIIBlocks.SKYBIRCH_LEAVES.get());
         this.dropNone(AetherIIBlocks.SKYPINE_LEAVES.get());
@@ -68,7 +69,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.AMBEROOT_LEAVES.get(),
                 (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.AMBEROOT_SAPLING.get(), BlockLootAccessor.aetherII$getNormalLeavesSaplingChances()));
 
+        this.dropSelf(AetherIIBlocks.SKYROOT_SAPLING.get());
         this.dropSelf(AetherIIBlocks.AMBEROOT_SAPLING.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get());
 
         this.dropSelf(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());

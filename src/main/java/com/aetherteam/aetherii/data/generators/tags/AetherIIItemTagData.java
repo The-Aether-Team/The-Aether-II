@@ -143,6 +143,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_PLATE.get()
         );
         this.tag(ItemTags.SAPLINGS).add(
+                AetherIIBlocks.SKYROOT_SAPLING.get().asItem(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get().asItem()
         );
 
