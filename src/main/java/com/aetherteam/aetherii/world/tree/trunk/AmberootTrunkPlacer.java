@@ -33,7 +33,7 @@ public class AmberootTrunkPlacer extends StraightTrunkPlacer {
         TrunkPlacer.setDirtAt(level, blockSetter, random, pos.below(), config);
         super.placeTrunk(level, blockSetter, random, height, pos, config);
 
-        if (RandomSource.create().nextInt(1) == 0) {
+        if (random.nextInt(2) == 0) {
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 1, pos.getY() + height - 1, pos.getZ()), config);
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 1, pos.getY() + height - 1, pos.getZ()), config);
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 2, pos.getY() + height - 1, pos.getZ()), config);
