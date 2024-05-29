@@ -47,24 +47,24 @@ public class AetherIIBiomes {
         HolderGetter<ConfiguredWorldCarver<?>> vanillaConfiguredCarvers = context.lookup(Registries.CONFIGURED_CARVER);
 
         // Highlands
-        context.register(FLOURISHING_FIELD, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(VERDANT_WOODS, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(SHROUDED_FOREST, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(SHIMMERING_BASIN, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(FLOURISHING_FIELD, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.4F));
+        context.register(VERDANT_WOODS, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
+        context.register(SHROUDED_FOREST, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
+        context.register(SHIMMERING_BASIN, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
 
-        context.register(MAGNETIC_SCAR, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(TURQUOISE_FOREST, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(GLISTENING_SWAMP, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(VIOLET_HIGHWOODS, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(MAGNETIC_SCAR, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers, 0.2F, 0.3F));
+        context.register(TURQUOISE_FOREST, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
+        context.register(GLISTENING_SWAMP, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.9F));
+        context.register(VIOLET_HIGHWOODS, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
 
-        context.register(FRIGID_SIERRA, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(ENDURING_WOODLAND, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(FROZEN_LAKES, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(SHEER_TUNDRA, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(FRIGID_SIERRA, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, -0.3F, 0.9F));
+        context.register(ENDURING_WOODLAND, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, -0.5F, 0.4F));
+        context.register(FROZEN_LAKES, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
+        context.register(SHEER_TUNDRA, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
 
-        context.register(CONTAMINATED_JUNGLE, HighlandsBiomeBuilders.makeIrradiatedBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(BATTLEGROUND_WASTES, HighlandsBiomeBuilders.makeIrradiatedBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(CONTAMINATED_JUNGLE, HighlandsBiomeBuilders.makeIrradiatedBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
+        context.register(BATTLEGROUND_WASTES, HighlandsBiomeBuilders.makeIrradiatedBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
-        context.register(EXPANSE, HighlandsBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(EXPANSE, HighlandsBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
     }
 }

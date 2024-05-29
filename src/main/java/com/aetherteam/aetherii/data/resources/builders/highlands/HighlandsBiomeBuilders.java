@@ -1,11 +1,13 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIMiscPlacements;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIOrePlacements;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.Music;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -54,6 +56,7 @@ public class HighlandsBiomeBuilders {
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_IRRADIATED, 12000, 24000, true))
+            .ambientParticle(new AmbientParticleSettings(AetherIIParticleTypes.IRRADIATION.get(), 0.00625F))
             .build();
     private static final BiomeSpecialEffects AERCLOUD_SEA_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0x000000)
@@ -66,13 +69,13 @@ public class HighlandsBiomeBuilders {
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AERCLOUD_SEA, 12000, 24000, true))
             .build();
 
-    public static Biome makeHighfieldsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+    public static Biome makeHighfieldsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
-                false,
-                0.8F,
-                0.0F,
+                true,
+                temperature,
+                downfall,
                 HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder
@@ -94,13 +97,13 @@ public class HighlandsBiomeBuilders {
         );
     }
 
-    public static Biome makeMagneticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+    public static Biome makeMagneticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
-                false,
-                0.8F,
-                0.0F,
+                true,
+                temperature,
+                downfall,
                 MAGNETIC_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder
@@ -121,13 +124,13 @@ public class HighlandsBiomeBuilders {
         );
     }
 
-    public static Biome makeArcticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+    public static Biome makeArcticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
-                false,
-                0.8F,
-                0.0F,
+                true,
+                temperature,
+                downfall,
                 ARCTIC_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder
@@ -148,13 +151,13 @@ public class HighlandsBiomeBuilders {
         );
     }
 
-    public static Biome makeIrradiatedBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+    public static Biome makeIrradiatedBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
-                false,
-                0.8F,
-                0.0F,
+                true,
+                temperature,
+                downfall,
                 IRRADIATED_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder
@@ -175,13 +178,13 @@ public class HighlandsBiomeBuilders {
         );
     }
 
-    public static Biome makeAercloudSeaBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+    public static Biome makeAercloudSeaBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
                 false,
-                0.8F,
-                0.0F,
+                temperature,
+                downfall,
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder.build(),
                 generationSettingsBuilder
