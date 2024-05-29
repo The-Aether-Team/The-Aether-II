@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-27T15:35:57.7764768	Loot Tables
+// 1.20.4	2024-05-29T10:26:47.4671048	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -11,8 +11,9 @@ c5f6889f01d43b7e3ed9816fe4135039df75096b data/aether_ii/loot_tables/blocks/agios
 63d7040cb32789544214b8d1d45929be686d20a9 data/aether_ii/loot_tables/blocks/agiosite_slab.json
 76b79914a659c9506211edf0a14f0be94f92838d data/aether_ii/loot_tables/blocks/agiosite_stairs.json
 ea7e1a6d871a82492d95884322e710b078831bab data/aether_ii/loot_tables/blocks/agiosite_wall.json
-cd78acddc96546721e8ddea1858c70e70430d9d6 data/aether_ii/loot_tables/blocks/amberoot_leaves.json
+b8d91ea304178e2fc4669c57c9ba5b9752494fff data/aether_ii/loot_tables/blocks/amberoot_leaves.json
 c5d83d6439dd5a40f8a50903bdcc73dca211303b data/aether_ii/loot_tables/blocks/amberoot_log.json
+d3f98a59d395421eb64a5e31c6a0a6ba7791d3ff data/aether_ii/loot_tables/blocks/amberoot_sapling.json
 d2407dbe16ea68ee13f2f2a6afaff944ea27d52d data/aether_ii/loot_tables/blocks/amberoot_wood.json
 a16bcaab0cf39b3023d08214573ae0f2436c3408 data/aether_ii/loot_tables/blocks/ambrosium_block.json
 5e2d1ad8a5c52e3c28f63d21e38b2215d4f1db01 data/aether_ii/loot_tables/blocks/ambrosium_ore.json
@@ -54,6 +55,7 @@ d0bc73c482f0ed62de0521c8aaf08864532df5cb data/aether_ii/loot_tables/blocks/holys
 8d3381ef356509456e812518a8e781bb41a7c942 data/aether_ii/loot_tables/blocks/mossy_holystone_slab.json
 1423b2e8e6a0120326dbb10ce4e9a84c0d8b0e17 data/aether_ii/loot_tables/blocks/mossy_holystone_stairs.json
 14ec60320f19886621ab918ffed7b9598faca3ca data/aether_ii/loot_tables/blocks/mossy_holystone_wall.json
+b1185d061605abf2afc48ec5ef4a2e13349d21be data/aether_ii/loot_tables/blocks/potted_amberoot_sapling.json
 dc817b0fe49cc7a1618d148a24f9e2d5451ae529 data/aether_ii/loot_tables/blocks/purple_aercloud.json
 7b60d94ee66fd74c65e40066a9ea4995a75a63b3 data/aether_ii/loot_tables/blocks/quicksoil.json
 be8f7ce6087bad7d632985222e14cc04e4ee7b99 data/aether_ii/loot_tables/blocks/quicksoil_glass.json

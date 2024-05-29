@@ -146,6 +146,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
+        this.tag(BlockTags.SAPLINGS).add(
+                AetherIIBlocks.AMBEROOT_SAPLING.get()
+        );
+        this.tag(BlockTags.FLOWER_POTS).add(
+                AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get()
+        );
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),

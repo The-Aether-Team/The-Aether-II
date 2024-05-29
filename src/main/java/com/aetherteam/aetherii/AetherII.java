@@ -75,7 +75,9 @@ public class AetherII {
     }
 
     public static void commonSetup(FMLCommonSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            AetherIIBlocks.registerPots();
+        });
     }
 
     public static void eventSetup(IEventBus neoBus) {
