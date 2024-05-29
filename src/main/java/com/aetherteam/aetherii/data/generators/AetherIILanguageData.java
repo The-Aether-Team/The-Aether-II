@@ -209,9 +209,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SPEAR.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
 
         this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");
+        this.addAttribute(AetherIIAttributes.SWEEP_KNOCKBACK.get(), "Sweep Knockback");
+        this.addAttribute(AetherIIAttributes.SWEEP_DAMAGE.get(), "Sweep Damage");
         this.addAttribute(AetherIIAttributes.SHOCK_RANGE.get(), "Shock Range");
+        this.addAttribute(AetherIIAttributes.SHOCK_KNOCKBACK.get(), "Shock Knockback");
+        this.addAttribute(AetherIIAttributes.SHOCK_DAMAGE.get(), "Shock Damage");
         this.addAttribute(AetherIIAttributes.STAB_RADIUS.get(), "Stab Radius");
         this.addAttribute(AetherIIAttributes.STAB_DISTANCE.get(), "Stab Distance");
+        this.addAttribute(AetherIIAttributes.STAB_KNOCKBACK.get(), "Stab Knockback");
+        this.addAttribute(AetherIIAttributes.STAB_DAMAGE.get(), "Stab Damage");
 
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");

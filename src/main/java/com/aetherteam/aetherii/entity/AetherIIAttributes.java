@@ -13,14 +13,30 @@ public class AetherIIAttributes {
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, AetherII.MODID);
 
     public static final DeferredHolder<Attribute, Attribute> SWEEP_RANGE = ATTRIBUTES.register("sweep_range", () -> new RangedAttribute("attributes.aether_ii.sweep_range", 0.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> SWEEP_KNOCKBACK = ATTRIBUTES.register("sweep_knockback", () -> new RangedAttribute("attributes.aether_ii.sweep_knockback", 0.4, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> SWEEP_DAMAGE = ATTRIBUTES.register("sweep_damage", () -> new RangedAttribute("attributes.aether_ii.sweep_damage", 1.0, 0.0, 1024.0));
+
     public static final DeferredHolder<Attribute, Attribute> SHOCK_RANGE = ATTRIBUTES.register("shock_range", () -> new RangedAttribute("attributes.aether_ii.shock_range", 0.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> SHOCK_KNOCKBACK = ATTRIBUTES.register("shock_knockback", () -> new RangedAttribute("attributes.aether_ii.shock_knockback", 1.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> SHOCK_DAMAGE = ATTRIBUTES.register("shock_damage", () -> new RangedAttribute("attributes.aether_ii.shock_damage", 0.1, 0.0, 1024.0));
+
     public static final DeferredHolder<Attribute, Attribute> STAB_RADIUS = ATTRIBUTES.register("stab_radius", () -> new RangedAttribute("attributes.aether_ii.stab_radius", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> STAB_DISTANCE = ATTRIBUTES.register("stab_distance", () -> new RangedAttribute("attributes.aether_ii.stab_distance", 0.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> STAB_KNOCKBACK = ATTRIBUTES.register("stab_knockback", () -> new RangedAttribute("attributes.aether_ii.stab_knockback", 0.2, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> STAB_DAMAGE = ATTRIBUTES.register("stab_damage", () -> new RangedAttribute("attributes.aether_ii.stab_damage", 2.0, 0.0, 1024.0));
 
     public static void registerEntityAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, SWEEP_RANGE.get());
+        event.add(EntityType.PLAYER, SWEEP_KNOCKBACK.get());
+        event.add(EntityType.PLAYER, SWEEP_DAMAGE.get());
+
         event.add(EntityType.PLAYER, SHOCK_RANGE.get());
+        event.add(EntityType.PLAYER, SHOCK_KNOCKBACK.get());
+        event.add(EntityType.PLAYER, SHOCK_DAMAGE.get());
+
         event.add(EntityType.PLAYER, STAB_RADIUS.get());
         event.add(EntityType.PLAYER, STAB_DISTANCE.get());
+        event.add(EntityType.PLAYER, STAB_KNOCKBACK.get());
+        event.add(EntityType.PLAYER, STAB_DAMAGE.get());
     }
 }

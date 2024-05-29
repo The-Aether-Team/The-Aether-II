@@ -16,12 +16,18 @@ import net.minecraft.world.phys.Vec3;
 public class MixinHooks {
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
         if (canShortswordSlash) {
-            float slashRange = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_RANGE.get());
-            if (slashRange > 0) {
-                for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(slashRange, slashRange, slashRange))) {
+            float sweepRange = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_RANGE.get());
+            if (sweepRange > 0) {
+                for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(sweepRange, sweepRange, sweepRange))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
-                        other.knockback(0.4F, Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)), -Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)));
-                        other.hurt(AetherIIDamageTypes.playerAoe(player.level(), player), 1.0F);
+                        float sweepKnockback = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_KNOCKBACK.get());
+                        float sweepDamage = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_DAMAGE.get());
+                        if (sweepKnockback > 0) {
+                            other.knockback(sweepKnockback, Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 2.5 * sweepKnockback, -Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 2.5 * sweepKnockback);
+                        }
+                        if (sweepDamage > 0) {
+                            other.hurt(AetherIIDamageTypes.playerAoe(player.level(), player), sweepDamage);
+                        }
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
@@ -33,8 +39,49 @@ public class MixinHooks {
     private static void sweepAttack(Player player) {
         double d0 = -Mth.sin(player.getYRot() * (float) (Math.PI / 180.0));
         double d1 = Mth.cos(player.getYRot() * (float) (Math.PI / 180.0));
-        if (player.level() instanceof ServerLevel) {
-            ((ServerLevel) player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);
+        }
+    }
+
+    public static void hammerShockBehavior(Player player, Entity target, boolean canHammerShock) {
+        if (canHammerShock) {
+            float shockRange = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_RANGE.get());
+            if (shockRange > 0) {
+                for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(shockRange, shockRange, shockRange))) {
+                    if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
+                        double x = target.position().x() - other.position().x();
+                        double z = target.position().z() - other.position().z();
+                        if (x > 0) {
+                            x = 5;
+                        } else if (x < 0) {
+                            x = -5;
+                        }
+                        if (z > 0) {
+                            z = 5;
+                        } else if (z < 0) {
+                            z = -5;
+                        }
+
+                        float shockKnockback = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_KNOCKBACK.get());
+                        float shockDamage = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_DAMAGE.get());
+                        if (shockKnockback > 0) {
+                            other.knockback(shockKnockback, x * shockKnockback, z * shockKnockback);
+                        }
+                        if (shockDamage > 0) {
+                            other.hurt(AetherIIDamageTypes.playerAoe(player.level(), player), shockDamage);
+                        }
+                    }
+                }
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_SHOCK.get(), player.getSoundSource(), 1.0F, 1.0F);
+                shockAttack(player, target);
+            }
+        }
+    }
+
+    private static void shockAttack(Player player, Entity target) {
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY(0.5), target.getZ(), 0, 0.0, 0.0, 0.0, 0.0);//todo
         }
     }
 
@@ -45,8 +92,14 @@ public class MixinHooks {
             if (stabRadius > 0 || stabDistance > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(stabDistance, stabDistance, stabDistance), (other) -> withinStabDistance(player, target, other, stabRadius, stabDistance))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
-                        other.knockback(0.2F, Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5, -Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5);
-                        other.hurt(AetherIIDamageTypes.playerAoeNoKnockback(player.level(), player), 2.0F);
+                        float stabKnockback = (float) player.getAttributeValue(AetherIIAttributes.STAB_KNOCKBACK.get());
+                        float stabDamage = (float) player.getAttributeValue(AetherIIAttributes.STAB_DAMAGE.get());
+                        if (stabKnockback > 0) {
+                            other.knockback(stabKnockback, Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 2.5 * stabKnockback, -Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 2.5 * stabKnockback);
+                        }
+                        if (stabDamage > 0) {
+                            other.hurt(AetherIIDamageTypes.playerAoeNoKnockback(player.level(), player), stabDamage);
+                        }
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_STAB.get(), player.getSoundSource(), 1.0F, 1.0F);
@@ -73,43 +126,8 @@ public class MixinHooks {
     private static void stabAttack(Player player) {
         double d0 = -Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5;
         double d1 = Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 0.5;
-        if (player.level() instanceof ServerLevel) {
-            ((ServerLevel) player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);//todo
-        }
-    }
-
-    public static void hammerShockBehavior(Player player, Entity target, boolean canHammerShock) {
-        if (canHammerShock) {
-            float shockRange = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_RANGE.get());
-            if (shockRange > 0) {
-                for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(shockRange, shockRange, shockRange))) {
-                    if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
-                        double x = target.position().x() - other.position().x();
-                        double z = target.position().z() - other.position().z();
-                        if (x > 0) {
-                            x = 5;
-                        } else if (x < 0) {
-                            x = -5;
-                        }
-                        if (z > 0) {
-                            z = 5;
-                        } else if (z < 0) {
-                            z = -5;
-                        }
-
-                        other.knockback(1.0F, x, z);
-                        other.hurt(AetherIIDamageTypes.playerAoe(player.level(), player), 0.1F);
-                    }
-                }
-                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_SHOCK.get(), player.getSoundSource(), 1.0F, 1.0F);
-                shockAttack(player, target);
-            }
-        }
-    }
-
-    private static void shockAttack(Player player, Entity target) {
-        if (player.level() instanceof ServerLevel) {
-            ((ServerLevel) player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY(0.5), target.getZ(), 0, 0.0, 0.0, 0.0, 0.0);//todo
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);//todo
         }
     }
 }
