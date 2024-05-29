@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.mixin;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -44,8 +45,8 @@ public class MixinHooks {
             if (stabRadius > 0 || stabDistance > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(stabDistance, stabDistance, stabDistance), (other) -> withinStabDistance(player, target, other, stabRadius, stabDistance))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
-                        other.knockback(0.1, Mth.sin(player.getYRot() * 0.0175F), -Mth.cos(player.getYRot() * 0.0175F));
-                        other.hurt(player.damageSources().playerAttack(player), 2.0F);
+                        other.knockback(0.2F, Mth.sin(player.getYRot() * 0.0175F) * 0.5F, -Mth.cos(player.getYRot() * 0.0175F) * 0.5F);
+                        other.hurt(AetherIIDamageTypes.playerAttackNoKnockback(player.level(), player), 2.0F);
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_STAB.get(), player.getSoundSource(), 1.0F, 1.0F);
@@ -96,8 +97,8 @@ public class MixinHooks {
                             z = -5;
                         }
 
-                        other.knockback(1.0, x, z);
-                        other.hurt(player.damageSources().playerAttack(player), 0.5F);
+                        other.knockback(1.0F, x, z);
+                        other.hurt(player.damageSources().playerAttack(player), 0.1F);
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_SHOCK.get(), player.getSoundSource(), 1.0F, 1.0F);
