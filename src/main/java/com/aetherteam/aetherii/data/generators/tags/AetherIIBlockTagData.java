@@ -152,6 +152,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.FLOWER_POTS).add(
                 AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get()
         );
+        this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
