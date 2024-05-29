@@ -8,8 +8,10 @@ import net.minecraft.world.entity.LivingEntity;
 public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> {
     private final MobEffect type;
     private final MobEffectInstance instance;
+    private final int initialInstanceDuration;
     private final int buildupCap;
     private int buildup;
+    private boolean triggerEffect = false;
 
     public EffectBuildupInstance(EffectBuildupPresets.Preset preset, int buildup) {
         this(preset.type(), preset.instanceBuilder().get(), preset.buildupCap(), buildup);
@@ -18,23 +20,33 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     public EffectBuildupInstance(MobEffect type, MobEffectInstance instance, int buildupCap, int buildup) {
         this.type = type;
         this.instance = instance;
+        this.initialInstanceDuration = instance.getDuration();
         this.buildupCap = buildupCap;
         this.buildup = buildup;
     }
 
     public boolean tick(LivingEntity entity) {
-        if (this.buildup >= this.buildupCap) {
-            entity.addEffect(this.instance);
-            return false;
-        } else if (this.buildup <= 0) {
-            return false;
+        if (this.isBuildupFull()) {
+            if (this.triggerEffect) {
+                entity.addEffect(this.instance);
+                this.triggerEffect = false;
+            }
+            return (this.instance.isInfiniteDuration() || this.instance.getDuration() > 0) && entity.hasEffect(this.type);
+        } else {
+            this.buildup--;
+            return this.buildup > 0;
         }
-        this.buildup--;
-        return true;
+    }
+
+    public boolean isBuildupFull() {
+        return this.buildup >= this.buildupCap;
     }
 
     public void increaseBuildup(int amount) {
         this.buildup += amount;
+        if (this.isBuildupFull()) {
+            this.triggerEffect = true;
+        }
     }
 
     public void decreaseBuildup(int amount) {
@@ -51,6 +63,10 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
 
     public int getBuildup() {
         return this.buildup;
+    }
+
+    public int getInitialInstanceDuration() {
+        return this.initialInstanceDuration;
     }
 
     public CompoundTag save(CompoundTag tag) {

@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class EffectBuildupPresets {
-    public static Preset TOXIN = new Preset(AetherIIEffects.TOXIN.get(), (e) -> new MobEffectInstance(e, 500), 1000);
+    public static Preset TOXIN = new Preset(AetherIIEffects.TOXIN.get(), (e) -> new MobEffectInstance(e, 1000, 0, false, false), 1000);
 
     public static final class Preset {
         private final MobEffect type;

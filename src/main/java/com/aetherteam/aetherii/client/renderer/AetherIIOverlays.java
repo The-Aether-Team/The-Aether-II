@@ -14,14 +14,19 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
 
+import java.awt.*;
 import java.util.Collection;
 import java.util.List;
 
 public class AetherIIOverlays {
     protected static final ResourceLocation BUILDUP_BACKGROUND_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background");
+    protected static final ResourceLocation BUILDUP_BACKGROUND_BACKING_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_backing");
+    protected static final ResourceLocation BUILDUP_BACKGROUND_OUTLINE_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_outline");
     protected static final ResourceLocation BUILDUP_BACKGROUND_OVERLAY_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_overlay");
 
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
@@ -29,12 +34,12 @@ public class AetherIIOverlays {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
-                renderEffects(minecraft, guiGraphics, screenWidth);
+                renderEffects(minecraft, player, guiGraphics, screenWidth);
             }
         });
     }
 
-    private static void renderEffects(Minecraft minecraft, GuiGraphics guiGraphics, int screenWidth) {
+    private static void renderEffects(Minecraft minecraft, LocalPlayer player, GuiGraphics guiGraphics, int screenWidth) {
         Collection<EffectBuildupInstance> collection = minecraft.player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).getActiveBuildups().values();
         if (!collection.isEmpty()) {
             Screen $$4 = minecraft.screen;
@@ -51,7 +56,7 @@ public class AetherIIOverlays {
             for (EffectBuildupInstance buildup : Ordering.natural().reverse().sortedCopy(collection)) {
                 MobEffect effect = buildup.getType();
                 int i = screenWidth;
-                int j = 53;
+                int j = 27;
                 if (minecraft.isDemo()) {
                     j += 15;
                 }
@@ -65,18 +70,28 @@ public class AetherIIOverlays {
                     j += 26;
                 }
 
-                int color = effect.getColor();
-                int red = (color >> 16) & 0xff;
-                int green = (color >> 8) & 0xff;
-                int blue = color & 0xff;
-                guiGraphics.setColor((float) red / 255, (float) green / 255, (float) blue / 255, 1.0F);
+                Color color = new Color(effect.getColor()).brighter();
+                guiGraphics.setColor((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 1.0F);
 
-                int scaled = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
+                int buildupScaledValue = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
 
-                guiGraphics.blitSprite(BUILDUP_BACKGROUND_OVERLAY_SPRITE, 24, 24, 0, 24 - scaled, i, j + 24 - scaled, 24, scaled);
-                guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+                guiGraphics.blitSprite(BUILDUP_BACKGROUND_OVERLAY_SPRITE, 24, 24, 0, 24 - buildupScaledValue, i, j + 24 - buildupScaledValue, 24, buildupScaledValue);
 
                 guiGraphics.blitSprite(BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
+
+
+                if (buildup.isBuildupFull()) {
+                    MobEffectInstance instance = player.getEffect(buildup.getType());
+                    if (instance != null) {
+                        int durationValueScaled = Math.min(instance.getDuration() / (buildup.getInitialInstanceDuration() / 24), 24);
+                        guiGraphics.blitSprite(BUILDUP_BACKGROUND_BACKING_SPRITE, 24, 24, 0, 24 - durationValueScaled, i, j + 24 - durationValueScaled, 24, durationValueScaled);
+                    }
+
+                    float flashInterval = (Mth.cos((0.75F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
+                    guiGraphics.setColor(1.0F, 1.0F, 1.0F, flashInterval);
+                    guiGraphics.blitSprite(BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24);
+                    guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+                }
 
                 TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(effect);
                 int i1 = j;
