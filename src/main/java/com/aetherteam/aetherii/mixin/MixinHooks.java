@@ -21,7 +21,7 @@ public class MixinHooks {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(slashRange, slashRange, slashRange))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
                         other.knockback(0.4F, Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)), -Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)));
-                        other.hurt(player.damageSources().playerAttack(player), 1.0F);
+                        other.hurt(AetherIIDamageTypes.playerAoe(player.level(), player), 1.0F);
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
@@ -46,7 +46,7 @@ public class MixinHooks {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(stabDistance, stabDistance, stabDistance), (other) -> withinStabDistance(player, target, other, stabRadius, stabDistance))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
                         other.knockback(0.2F, Mth.sin(player.getYRot() * 0.0175F) * 0.5F, -Mth.cos(player.getYRot() * 0.0175F) * 0.5F);
-                        other.hurt(AetherIIDamageTypes.playerAttackNoKnockback(player.level(), player), 2.0F);
+                        other.hurt(AetherIIDamageTypes.playerAoeNoKnockback(player.level(), player), 2.0F);
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_STAB.get(), player.getSoundSource(), 1.0F, 1.0F);
@@ -98,7 +98,7 @@ public class MixinHooks {
                         }
 
                         other.knockback(1.0F, x, z);
-                        other.hurt(player.damageSources().playerAttack(player), 0.1F);
+                        other.hurt(AetherIIDamageTypes.playerAoe(player.level(), player), 0.1F);
                     }
                 }
                 player.level().playSound(null, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.PLAYER_ATTACK_SHOCK.get(), player.getSoundSource(), 1.0F, 1.0F);

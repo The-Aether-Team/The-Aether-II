@@ -14,19 +14,24 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 
 public class AetherIIDamageTypes {
-    public static final ResourceKey<DamageType> PLAYER_ATTACK_NO_KNOCKBACK = createKey("armor_piercing_attack");
+    public static final ResourceKey<DamageType> PLAYER_AOE = createKey("player_aoe");
+    public static final ResourceKey<DamageType> PLAYER_AOE_NO_KNOCKBACK = createKey("player_aoe_no_knockback");
 
     public static void bootstrap(BootstapContext<DamageType> context) {
-
-        context.register(PLAYER_ATTACK_NO_KNOCKBACK, new DamageType("player", 0.1F));
+        context.register(PLAYER_AOE, new DamageType("player", 0.1F));
+        context.register(PLAYER_AOE_NO_KNOCKBACK, new DamageType("player", 0.1F));
     }
 
     private static ResourceKey<DamageType> createKey(String name) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AetherII.MODID, name));
     }
 
-    public static DamageSource playerAttackNoKnockback(Level level, Player player) {
-        return entityDamageSource(level, PLAYER_ATTACK_NO_KNOCKBACK, player);
+    public static DamageSource playerAoe(Level level, Player player) {
+        return entityDamageSource(level, PLAYER_AOE, player);
+    }
+
+    public static DamageSource playerAoeNoKnockback(Level level, Player player) {
+        return entityDamageSource(level, PLAYER_AOE_NO_KNOCKBACK, player);
     }
 
     public static DamageSource damageSource(Level level, ResourceKey<DamageType> key) {

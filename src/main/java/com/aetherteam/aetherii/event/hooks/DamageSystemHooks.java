@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.event.hooks;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -16,7 +17,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,61 +35,63 @@ public class DamageSystemHooks {
     }
 
     public static float getDamageTypeModifiedValue(Entity target, DamageSource source, double damage) {
-        RegistryAccess registryAccess = target.level().registryAccess();
-        Entity sourceEntity = source.getDirectEntity();
-        ItemStack sourceStack = ItemStack.EMPTY;
+        if (source.typeHolder().is(AetherIITags.DamageTypes.TYPED)) {
+            RegistryAccess registryAccess = target.level().registryAccess();
+            Entity sourceEntity = source.getDirectEntity();
+            ItemStack sourceStack = ItemStack.EMPTY;
 
-        if (sourceEntity instanceof LivingEntity livingSource) {
-            sourceStack = livingSource.getMainHandItem();
-        } else if (sourceEntity instanceof Projectile && sourceEntity instanceof ItemSupplier itemSupplier) {
-            sourceStack = itemSupplier.getItem();
-        }
+            if (sourceEntity instanceof LivingEntity livingSource) {
+                sourceStack = livingSource.getMainHandItem();
+            } else if (sourceEntity instanceof Projectile && sourceEntity instanceof ItemSupplier itemSupplier) {
+                sourceStack = itemSupplier.getItem();
+            }
 
-        if (!sourceStack.isEmpty()) {
-            double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, sourceStack);
-            double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, sourceStack);
-            double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, sourceStack);
+            if (!sourceStack.isEmpty()) {
+                double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, sourceStack);
+                double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, sourceStack);
+                double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, sourceStack);
 
-            double slashDefense = AetherIIDamageResistances.getSlashDefense(registryAccess, target);
-            double impactDefense = AetherIIDamageResistances.getImpactDefense(registryAccess, target);
-            double pierceDefense = AetherIIDamageResistances.getPierceDefense(registryAccess, target);
+                double slashDefense = AetherIIDamageResistances.getSlashDefense(registryAccess, target);
+                double impactDefense = AetherIIDamageResistances.getImpactDefense(registryAccess, target);
+                double pierceDefense = AetherIIDamageResistances.getPierceDefense(registryAccess, target);
 
-            boolean isTypedItem = (slashDamage + impactDamage + pierceDamage) > 0.0;
-            boolean isTypedEntity = (slashDefense + impactDefense + pierceDefense) > 0.0;
+                boolean isTypedItem = (slashDamage + impactDamage + pierceDamage) > 0.0;
+                boolean isTypedEntity = (slashDefense + impactDefense + pierceDefense) > 0.0;
 
-            if (isTypedEntity) {
-                if (isTypedItem) {
-                    if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
-                        Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
-                        slashDamage += damages.getLeft();
-                        impactDamage += damages.getMiddle();
-                        pierceDamage += damages.getRight();
+                if (isTypedEntity) {
+                    if (isTypedItem) {
+                        if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
+                            Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
+                            slashDamage += damages.getLeft();
+                            impactDamage += damages.getMiddle();
+                            pierceDamage += damages.getRight();
+                        }
+
+                        createSoundsAndParticles(sourceEntity, target, slashDamage, slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
+                        createSoundsAndParticles(sourceEntity, target, impactDamage, impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
+                        createSoundsAndParticles(sourceEntity, target, pierceDamage, pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
+
+                        double slashCalculation = slashDamage > 0.0 ? Math.max(slashDamage - slashDefense, 0.0) : 0.0;
+                        double impactCalculation = impactDamage > 0.0 ? Math.max(impactDamage - impactDefense, 0.0) : 0.0;
+                        double pierceCalculation = pierceDamage > 0.0 ? Math.max(pierceDamage - pierceDefense, 0.0) : 0.0;
+
+                        damage = Math.max(slashCalculation + impactCalculation + pierceCalculation, 1.0);
+
+                        AetherII.LOGGER.info(slashDamage + " - " + slashDefense);
+                        AetherII.LOGGER.info(impactDamage + " - " + impactDefense);
+                        AetherII.LOGGER.info(pierceDamage + " - " + pierceDefense);
+                        AetherII.LOGGER.info(String.valueOf(damage));
+
+                        if (sourceEntity instanceof Player player) {
+                            damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
+                            damage *= player.getAttackStrengthScale(0.5F);
+
+                            player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).setCriticalDamageModifier(1.0F);
+                        }
+                    } else {
+                        double resistance = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
+                        damage = Math.max(damage - resistance, 1.0F);
                     }
-
-                    createSoundsAndParticles(sourceEntity, target, slashDamage, slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
-                    createSoundsAndParticles(sourceEntity, target, impactDamage, impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
-                    createSoundsAndParticles(sourceEntity, target, pierceDamage, pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
-
-                    double slashCalculation = slashDamage > 0.0 ? Math.max(slashDamage - slashDefense, 0.0) : 0.0;
-                    double impactCalculation = impactDamage > 0.0 ? Math.max(impactDamage - impactDefense, 0.0) : 0.0;
-                    double pierceCalculation = pierceDamage > 0.0 ? Math.max(pierceDamage - pierceDefense, 0.0) : 0.0;
-
-                    damage = Math.max(slashCalculation + impactCalculation + pierceCalculation, 1.0);
-
-                    AetherII.LOGGER.info(slashDamage + " - " + slashDefense);
-                    AetherII.LOGGER.info(impactDamage + " - " + impactDefense);
-                    AetherII.LOGGER.info(pierceDamage + " - " + pierceDefense);
-                    AetherII.LOGGER.info(String.valueOf(damage));
-
-                    if (sourceEntity instanceof Player player) {
-                        damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
-                        damage *= player.getAttackStrengthScale(0.5F);
-
-                        player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).setCriticalDamageModifier(1.0F);
-                    }
-                } else {
-                    double resistance = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
-                    damage = Math.max(damage - resistance, 1.0F);
                 }
             }
         }
@@ -101,7 +103,7 @@ public class DamageSystemHooks {
             if (defense > 0) {
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), incorrect, source.getSoundSource(), 1.0F, 1.0F);
             } else if (defense < 0) {
-                Minecraft.getInstance().particleEngine.createTrackingEmitter(target, particleType, 1);
+                Minecraft.getInstance().particleEngine.createTrackingEmitter(target, particleType, 1); //todo packet
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), correct, source.getSoundSource(), 1.0F, 1.0F);
             }
         }
