@@ -33,6 +33,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get()
         );
+        this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get()
+        );
         this.tag(AetherIITags.Blocks.HOLYSTONE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get()

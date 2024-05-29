@@ -17,8 +17,19 @@ import net.neoforged.neoforge.common.NeoForge;
 public class AetherIIClient {
     public static void clientInit(IEventBus bus) {
         bus.addListener(AetherIIClient::clientSetup);
+        bus.addListener(AetherIIClient::registerEntityRenders);
+        bus.addListener(AetherIIClient::registerLayerDefinition);
 
         AetherIIClient.eventSetup(bus);
+    }
+
+    public static void registerEntityRenders(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(AetherIIEntityTypes.AERBUNNY.get(), AerbunnyRenderer::new);
+    }
+
+    public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(AetherModelLayers.AERBUNNY, AerbunnyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherModelLayers.AERBUNNY_COLLAR, AerbunnyModel::createBodyLayer);
     }
 
     public static void clientSetup(FMLClientSetupEvent event) {
@@ -29,6 +40,10 @@ public class AetherIIClient {
     }
 
     public static void eventSetup(IEventBus neoBus) {
+        IEventBus bus = NeoForge.EVENT_BUS;
+
+        AerbunnyMountClientListners.listen(bus);
+
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
         neoBus.addListener(AetherIIColorResolvers::registerItemColor);
         neoBus.addListener(AetherIIParticleTypes::registerParticleFactories);
