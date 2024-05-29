@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class AetherModelLayers {
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");
+    public static final ModelLayerLocation AERBUNNY_COLLAR = register("aerbunny", "collar");
 
     private static ModelLayerLocation register(String name) {
         return register(name, "main");

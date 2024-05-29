@@ -9,47 +9,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.TamableAnimal;
 
 public abstract class TamableCollarLayer<T extends TamableAnimal, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    private final ResourceLocation collar_location;
+    private final ResourceLocation collarLocation;
     private final M model;
 
-    public TamableCollarLayer(RenderLayerParent<T, M> pRenderer, M model, ResourceLocation collarLocation) {
-        super(pRenderer);
-        this.collar_location = collarLocation;
+    public TamableCollarLayer(RenderLayerParent<T, M> renderer, M model, ResourceLocation collarLocation) {
+        super(renderer);
+        this.collarLocation = collarLocation;
         this.model = model;
     }
 
-    public void render(
-            PoseStack pPoseStack,
-            MultiBufferSource pBuffer,
-            int pPackedLight,
-            T pLivingEntity,
-            float pLimbSwing,
-            float pLimbSwingAmount,
-            float pPartialTicks,
-            float pAgeInTicks,
-            float pNetHeadYaw,
-            float pHeadPitch
-    ) {
-        if (pLivingEntity.isTame()) {
-            float[] afloat = this.getColor(pLivingEntity);
-            coloredCutoutModelCopyLayerRender(
-                    this.getParentModel(),
-                    this.model,
-                    this.collar_location,
-                    pPoseStack,
-                    pBuffer,
-                    pPackedLight,
-                    pLivingEntity,
-                    pLimbSwing,
-                    pLimbSwingAmount,
-                    pAgeInTicks,
-                    pNetHeadYaw,
-                    pHeadPitch,
-                    pPartialTicks,
-                    afloat[0],
-                    afloat[1],
-                    afloat[2]
-            );
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        if (livingEntity.isTame()) {
+            float[] color = this.getColor(livingEntity);
+            coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, this.collarLocation, poseStack, buffer, packedLight, livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, partialTicks, color[0], color[1], color[2]);
         }
     }
 

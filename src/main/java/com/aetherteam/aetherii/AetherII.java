@@ -9,13 +9,13 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
-import com.aetherteam.aetherii.event.listeners.RideMobListener;
+import com.aetherteam.aetherii.event.listeners.AerbunnyMountListener;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
-import com.aetherteam.aetherii.network.packet.RideMobSyncPacket;
+import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
@@ -82,7 +82,7 @@ public class AetherII {
         IEventBus bus = NeoForge.EVENT_BUS;
 
         PortalTeleportationListener.listen(bus);
-        RideMobListener.listen(bus);
+        AerbunnyMountListener.listen(bus);
         WorldInteractionListener.listen(bus);
 
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
@@ -100,7 +100,7 @@ public class AetherII {
         registrar.play(AerbunnyPuffPacket.ID, AerbunnyPuffPacket::decode, payload -> payload.client(AerbunnyPuffPacket::handle));
 
         // BOTH
+        registrar.play(AerbunnyMountSyncPacket.ID, AerbunnyMountSyncPacket::decode, AerbunnyMountSyncPacket::handle);
         registrar.play(PortalTeleportationSyncPacket.ID, PortalTeleportationSyncPacket::decode, PortalTeleportationSyncPacket::handle);
-        registrar.play(RideMobSyncPacket.ID, RideMobSyncPacket::decode, RideMobSyncPacket::handle);
     }
 }

@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.event.listeners;
 
 import com.aetherteam.aetherii.event.hooks.PortalTeleportationHooks;
-import com.aetherteam.aetherii.event.hooks.RideMobHooks;
+import com.aetherteam.aetherii.event.hooks.AerbunnyMountHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -13,14 +13,14 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
-public class RideMobListener {
+public class AerbunnyMountListener {
     /**
      * @see com.aetherteam.aetherii.AetherII#eventSetup(IEventBus)
      */
     public static void listen(IEventBus bus) {
-        bus.addListener(RideMobListener::onPlayerLogin);
-        bus.addListener(RideMobListener::onPlayerLogout);
-        bus.addListener(RideMobListener::onPlayerUpdate);
+        bus.addListener(AerbunnyMountListener::onPlayerLogin);
+        bus.addListener(AerbunnyMountListener::onPlayerLogout);
+        bus.addListener(AerbunnyMountListener::onPlayerUpdate);
     }
 
     /**
@@ -28,7 +28,7 @@ public class RideMobListener {
      */
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
-        RideMobHooks.onPlayerLogin(player);
+        AerbunnyMountHooks.onPlayerLogin(player);
     }
 
     /**
@@ -36,7 +36,7 @@ public class RideMobListener {
      */
     public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         Player player = event.getEntity();
-        RideMobHooks.onPlayerLogout(player);
+        AerbunnyMountHooks.onPlayerLogout(player);
     }
 
     // GENERIC ATTACHMENT METHODS
@@ -47,7 +47,7 @@ public class RideMobListener {
     public static void onPlayerUpdate(LivingEvent.LivingTickEvent event) {
         LivingEntity livingEntity = event.getEntity();
         if (livingEntity instanceof Player player) {
-            RideMobHooks.onUpdate(player);
+            AerbunnyMountHooks.onUpdate(player);
         }
     }
 }

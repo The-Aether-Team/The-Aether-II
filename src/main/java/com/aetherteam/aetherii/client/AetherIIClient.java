@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.client.event.listeners.RideMobClientListners;
+import com.aetherteam.aetherii.client.event.listeners.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.gui.screen.inventory.HolystoneFurnaceScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AerbunnyRenderer;
@@ -29,6 +29,7 @@ public class AetherIIClient {
 
     public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(AetherModelLayers.AERBUNNY, AerbunnyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherModelLayers.AERBUNNY_COLLAR, AerbunnyModel::createBodyLayer);
     }
 
     public static void clientSetup(FMLClientSetupEvent event) {
@@ -38,11 +39,13 @@ public class AetherIIClient {
     }
 
     public static void eventSetup(IEventBus neoBus) {
+        IEventBus bus = NeoForge.EVENT_BUS;
+
+        AerbunnyMountClientListners.listen(bus);
+
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
         neoBus.addListener(AetherIIColorResolvers::registerItemColor);
         neoBus.addListener(AetherIIParticleTypes::registerParticleFactories);
-        IEventBus bus = NeoForge.EVENT_BUS;
-        RideMobClientListners.listen(bus);
     }
 
     @SuppressWarnings("deprecation")

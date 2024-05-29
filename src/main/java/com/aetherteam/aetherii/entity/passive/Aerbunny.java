@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.attachment.AerbunnyMountAttachment;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -183,7 +184,7 @@ public class Aerbunny extends AetherTamableAnimal {
                 }
 
                 if (this.level().isClientSide()) {
-                    var data = player.getData(AetherIIDataAttachments.RIDE_MOB);
+                    var data = player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT);
                     if (player.getDeltaMovement().y() <= 0.0) {
                         if (this.lastPos == null) { // Tracks the last position when the player starts falling.
                             this.lastPos = this.position();
@@ -202,7 +203,7 @@ public class Aerbunny extends AetherTamableAnimal {
             }
             if (player instanceof ServerPlayer serverPlayer) { // Prevents the player from being kicked for flying.
                 ServerGamePacketListenerImplAccessor serverGamePacketListenerImplAccessor = (ServerGamePacketListenerImplAccessor) serverPlayer.connection;
-                serverGamePacketListenerImplAccessor.aether$setAboveGroundTickCount(0);
+                serverGamePacketListenerImplAccessor.aether_ii$setAboveGroundTickCount(0);
             }
         }
     }
@@ -304,7 +305,7 @@ public class Aerbunny extends AetherTamableAnimal {
                 Vec3 playerMovement = player.getDeltaMovement();
                 this.setDeltaMovement(playerMovement.x() * 5, playerMovement.y() * 0.5 + 0.5, playerMovement.z() * 5);
             } else if (this.startRiding(player)) { // Mount segment.
-                player.getData(AetherIIDataAttachments.RIDE_MOB).setMountedAerbunny(this);
+                player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(this);
                 this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LIFT.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
             }
             return InteractionResult.SUCCESS;
@@ -313,12 +314,12 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     /**
-     * Stop tracking mounted Aerbunny with {@link com.aetherteam.aetherii.attachment.RideMobAttachment}.
+     * Stop tracking mounted Aerbunny with {@link AerbunnyMountAttachment}.
      */
     @Override
     public void stopRiding() {
         if (this.getVehicle() instanceof Player player) {
-            player.getData(AetherIIDataAttachments.RIDE_MOB).setMountedAerbunny(null);
+            player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(null);
         }
         super.stopRiding();
     }

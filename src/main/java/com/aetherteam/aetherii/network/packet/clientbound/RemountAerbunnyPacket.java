@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AerbunnyMountAttachment;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.nitrogen.network.BasePacket;
@@ -11,7 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 /**
- * Mounts an Aerbunny to the player using stored NBT data if the player previously logged out with a mounted Aerbunny. This is called by {@link com.aetherteam.aetherii.attachment.RideMobAttachment#remountAerbunny(Player)} (Player)}.<br><br>
+ * Mounts an Aerbunny to the player using stored NBT data if the player previously logged out with a mounted Aerbunny. This is called by {@link AerbunnyMountAttachment#remountAerbunny(Player)} (Player)}.<br><br>
  * This also stores the summoned Aerbunny back into the capability so the player is tracked as having a mounted Aerbunny.
  */
 public record RemountAerbunnyPacket(int vehicleID, int aerbunnyID) implements BasePacket {
@@ -40,7 +41,7 @@ public record RemountAerbunnyPacket(int vehicleID, int aerbunnyID) implements Ba
             Level world = Minecraft.getInstance().player.level();
             if (world.getEntity(this.vehicleID()) instanceof Player player && world.getEntity(this.aerbunnyID()) instanceof Aerbunny aerbunny) {
                 aerbunny.startRiding(player);
-                player.getData(AetherIIDataAttachments.RIDE_MOB).setMountedAerbunny(aerbunny);
+                player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(aerbunny);
             }
         }
     }

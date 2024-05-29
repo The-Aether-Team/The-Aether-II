@@ -11,12 +11,12 @@ import net.minecraft.resources.ResourceLocation;
 public class AerbunnyCollarLayer extends TamableCollarLayer<Aerbunny, AerbunnyModel> {
     private static final ResourceLocation COLLAR_LOCATION = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny_collar.png");
 
-    public AerbunnyCollarLayer(RenderLayerParent<Aerbunny, AerbunnyModel> pRenderer, EntityModelSet pModelSet) {
-        super(pRenderer, new AerbunnyModel(pModelSet.bakeLayer(AetherModelLayers.AERBUNNY)), COLLAR_LOCATION);
+    public AerbunnyCollarLayer(RenderLayerParent<Aerbunny, AerbunnyModel> renderer, EntityModelSet modelSet) {
+        super(renderer, new AerbunnyModel(modelSet.bakeLayer(AetherModelLayers.AERBUNNY_COLLAR)), COLLAR_LOCATION);
     }
 
     @Override
-    public float[] getColor(Aerbunny entity) {
-        return entity.getCollarColor().getTextureDiffuseColors();
+    public float[] getColor(Aerbunny aerbunny) {
+        return aerbunny.getCollarColor().getTextureDiffuseColors();
     }
 }

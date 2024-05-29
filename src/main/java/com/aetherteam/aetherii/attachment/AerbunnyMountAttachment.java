@@ -2,7 +2,8 @@ package com.aetherteam.aetherii.attachment;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
-import com.aetherteam.aetherii.network.packet.RideMobSyncPacket;
+import com.aetherteam.aetherii.event.hooks.AerbunnyMountHooks;
+import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.BasePacket;
@@ -26,21 +27,15 @@ import java.util.function.Supplier;
 /**
  * Capability class for handling {@link Player} behavior of riding mob for the Aether.
  *
- * @see com.aetherteam.aetherii.event.hooks.RideMobHooks
+ * @see AerbunnyMountHooks
  */
-public class RideMobAttachment implements INBTSynchable {
+public class AerbunnyMountAttachment implements INBTSynchable {
     private boolean isMoving;
     private boolean isJumping;
 
     @Nullable
     private Aerbunny mountedAerbunny;
     private Optional<CompoundTag> mountedAerbunnyTag = Optional.empty();
-
-    private static final int FLIGHT_TIMER_MAX = 52;
-    private static final float FLIGHT_MODIFIER_MAX = 15.0F;
-    private int flightTimer;
-    private float flightModifier = 1.0F;
-
 
     /**
      * Stores the following methods as able to be synced between client and server and vice-versa.
@@ -52,14 +47,14 @@ public class RideMobAttachment implements INBTSynchable {
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    public static final Codec<RideMobAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            CompoundTag.CODEC.optionalFieldOf("mounted_aerbunny").forGetter(RideMobAttachment::getMountedAerbunnyTag)
-    ).apply(instance, RideMobAttachment::new));
+    public static final Codec<AerbunnyMountAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            CompoundTag.CODEC.optionalFieldOf("mounted_aerbunny").forGetter(AerbunnyMountAttachment::getMountedAerbunnyTag)
+    ).apply(instance, AerbunnyMountAttachment::new));
 
-    public RideMobAttachment() {
+    public AerbunnyMountAttachment() {
     }
 
-    public RideMobAttachment(Optional<CompoundTag> mountedAerbunnyTag) {
+    public AerbunnyMountAttachment(Optional<CompoundTag> mountedAerbunnyTag) {
         this.setMountedAerbunnyTag(mountedAerbunnyTag);
     }
 
@@ -106,7 +101,7 @@ public class RideMobAttachment implements INBTSynchable {
                     PlayerList playerList = server.getPlayerList();
                     for (ServerPlayer serverPlayer : playerList.getPlayers()) {
                         if (!serverPlayer.getUUID().equals(player.getUUID())) {
-                            player.getData(AetherIIDataAttachments.RIDE_MOB).forceSync(player.getId(), Direction.CLIENT);
+                            player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).forceSync(player.getId(), Direction.CLIENT);
                         }
                     }
                 }
@@ -205,42 +200,6 @@ public class RideMobAttachment implements INBTSynchable {
     }
 
     /**
-     * @return An {@link Integer} for the maximum flight duration.
-     */
-    public int getFlightTimerMax() {
-        return FLIGHT_TIMER_MAX;
-    }
-
-    /**
-     * @return A {@link Float} for the maximum flight speed modifier.
-     */
-    public float getFlightModifierMax() {
-        return FLIGHT_MODIFIER_MAX;
-    }
-
-    public void setFlightTimer(int timer) {
-        this.flightTimer = timer;
-    }
-
-    /**
-     * @return The {@link Integer} timer for how long the player has to fly.
-     */
-    public int getFlightTimer() {
-        return this.flightTimer;
-    }
-
-    public void setFlightModifier(float modifier) {
-        this.flightModifier = modifier;
-    }
-
-    /**
-     * @return The {@link Float} modifier for the player's flight speed.
-     */
-    public float getFlightModifier() {
-        return this.flightModifier;
-    }
-
-    /**
      * @return Whether the capability should sync server values to nearby clients.
      */
     private boolean shouldSyncBetweenClients() {
@@ -253,6 +212,6 @@ public class RideMobAttachment implements INBTSynchable {
 
     @Override
     public BasePacket getSyncPacket(int entityID, String key, Type type, Object value) {
-        return new RideMobSyncPacket(entityID, key, type, value);
+        return new AerbunnyMountSyncPacket(entityID, key, type, value);
     }
 }
