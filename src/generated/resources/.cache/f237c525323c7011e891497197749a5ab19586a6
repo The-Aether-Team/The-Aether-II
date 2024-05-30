@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-30T19:18:23.2592142	Block States: aether_ii
+// 1.20.4	2024-05-30T21:57:43.1284435	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -100,7 +100,7 @@ ad7911fb814fb770a73de43206d050a95537305c assets/aether_ii/blockstates/wisproot_b
 79a010a2460b9cae89eee342361177483fe2c88d assets/aether_ii/blockstates/wisproot_fence.json
 d9c28ac49c6dad58a95d1af42b86b8f0da75bf14 assets/aether_ii/blockstates/wisproot_fence_gate.json
 b2604123f84f869624902c534499bc2bcea20998 assets/aether_ii/blockstates/wisproot_leaves.json
-168ff82804eee5feabed07e477ed8d4b32a9b763 assets/aether_ii/blockstates/wisproot_log.json
+7e0836d4886cf750062df7d9c3e9b9f9b40672e6 assets/aether_ii/blockstates/wisproot_log.json
 d9932e80643d8569405c8a1ca0b4d69ede31e375 assets/aether_ii/blockstates/wisproot_planks.json
 90089f5806ade8649f41f26f339852d1bb60abfd assets/aether_ii/blockstates/wisproot_pressure_plate.json
 994cea8146e6594a1ca506caeb458d202a767042 assets/aether_ii/blockstates/wisproot_sapling.json
@@ -295,7 +295,6 @@ ec6de98a4201a8772660e2d41b9413257c3c0eca assets/aether_ii/models/block/wisproot_
 92ffe95095092f02e1570292fedd28c437b2665f assets/aether_ii/models/block/wisproot_log.json
 d3cafee5292d65983b2b1a59751e4279ac53f7e4 assets/aether_ii/models/block/wisproot_log_horizontal.json
 0cdbdf02365bbc405939d82b86af40e973f8e8c1 assets/aether_ii/models/block/wisproot_log_mossy.json
-1294686d8498ec2982660001e1cc30ad078c1ad9 assets/aether_ii/models/block/wisproot_log_mossy_horizontal.json
 957c47454d8405e0e2ab0f046e3ba925522a4d2d assets/aether_ii/models/block/wisproot_planks.json
 154a1765093d1d8b495e68874d16a49a3d0acfab assets/aether_ii/models/block/wisproot_pressure_plate.json
 4f577d7d0e7e2f4336b10347b51fb88f3633c33b assets/aether_ii/models/block/wisproot_pressure_plate_down.json
