@@ -230,6 +230,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
         this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
 
+        this.addSubtitle("entity", "phyg.ambient", "Phyg oinks");
+        this.addSubtitle("entity", "phyg.death", "Phyg dies");
+        this.addSubtitle("entity", "phyg.hurt", "Phyg hurts");
+        this.addSubtitle("entity", "phyg.saddle", "Saddle equips");
+        this.addSubtitle("entity", "phyg.step", "Footsteps");
+
         this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
         this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");
         this.addSubtitle("entity", "aerbunny.lift", "Aerbunny squeaks");

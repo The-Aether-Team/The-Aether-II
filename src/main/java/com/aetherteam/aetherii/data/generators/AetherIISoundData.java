@@ -31,6 +31,38 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.block.aercloud.blue_aercloud_bounce")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_PHYG_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PHYG_DEATH,
+                definition().with(sound("minecraft:mob/pig/death"))
+                        .subtitle("subtitles.aether.entity.phyg.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PHYG_HURT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PHYG_SADDLE,
+                definition().with(sound("minecraft:mob/horse/leather"))
+                        .subtitle("subtitles.aether.entity.phyg.saddle")
+        );
+        this.add(AetherIISoundEvents.ENTITY_PHYG_STEP,
+                definition().with(
+                        sound("minecraft:mob/pig/step1"),
+                        sound("minecraft:mob/pig/step2"),
+                        sound("minecraft:mob/pig/step3"),
+                        sound("minecraft:mob/pig/step4"),
+                        sound("minecraft:mob/pig/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_AERBUNNY_DEATH,
                 definition().with(sound("aether_ii:entity/aerbunny/death"))
                         .subtitle("subtitles.aether_ii.entity.aerbunny.death")

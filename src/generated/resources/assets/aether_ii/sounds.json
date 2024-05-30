@@ -42,5 +42,43 @@
       "aether_ii:entity/aerbunny/lift"
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.lift"
+  },
+  "entity.phyg.ambient": {
+    "sounds": [
+      "mob/pig/say1",
+      "mob/pig/say2",
+      "mob/pig/say3"
+    ],
+    "subtitle": "subtitles.aether.entity.phyg.ambient"
+  },
+  "entity.phyg.death": {
+    "sounds": [
+      "mob/pig/death"
+    ],
+    "subtitle": "subtitles.aether.entity.phyg.death"
+  },
+  "entity.phyg.hurt": {
+    "sounds": [
+      "mob/pig/say1",
+      "mob/pig/say2",
+      "mob/pig/say3"
+    ],
+    "subtitle": "subtitles.aether.entity.phyg.hurt"
+  },
+  "entity.phyg.saddle": {
+    "sounds": [
+      "mob/horse/leather"
+    ],
+    "subtitle": "subtitles.aether.entity.phyg.saddle"
+  },
+  "entity.phyg.step": {
+    "sounds": [
+      "mob/pig/step1",
+      "mob/pig/step2",
+      "mob/pig/step3",
+      "mob/pig/step4",
+      "mob/pig/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
   }
 }
