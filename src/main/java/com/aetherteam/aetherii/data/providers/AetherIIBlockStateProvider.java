@@ -133,6 +133,14 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.axisBlock(block, this.texture(this.name(block), "natural/"), this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
     }
 
+    public void grass(Block block) {
+        ModelFile grass = this.models().withExistingParent(this.name(block), this.modLoc("block/tri_tinted_cross"))
+                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
+                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
+    }
+
     public void carpet(Block block, Block baseBlock, String location) {
         simpleBlock(block, models().singleTexture(name(block), mcLoc("block/carpet"), "wool", texture(location + name(baseBlock))));
     }

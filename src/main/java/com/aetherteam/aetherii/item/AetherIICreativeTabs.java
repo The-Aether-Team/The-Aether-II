@@ -136,6 +136,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATOAK_LEAVES.get());
                 output.accept(AetherIIBlocks.GREATBOA_LEAVES.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.AETHER_SHORT_GRASS.get());
+                output.accept(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
+                output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "natural_blocks"))

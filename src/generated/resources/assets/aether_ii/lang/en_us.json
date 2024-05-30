@@ -3,7 +3,10 @@
   "block.aether_ii.aether_dirt_path": "Aether Dirt Path",
   "block.aether_ii.aether_farmland": "Aether Farmland",
   "block.aether_ii.aether_grass_block": "Aether Grass Block",
+  "block.aether_ii.aether_long_grass": "Aether Long Grass",
+  "block.aether_ii.aether_medium_grass": "Aether Medium Grass",
   "block.aether_ii.aether_portal": "Aether Portal",
+  "block.aether_ii.aether_short_grass": "Aether Short Grass",
   "block.aether_ii.agiosite": "Agiosite",
   "block.aether_ii.agiosite_brick_slab": "Agiosite Brick Slab",
   "block.aether_ii.agiosite_brick_stairs": "Agiosite Brick Stairs",
@@ -164,7 +167,7 @@
   "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce": "Blue Aercloud bounces",
   "subtitles.aether_ii.block.aether_portal.ambient": "Aether Portal whooshes",
   "subtitles.aether_ii.block.aether_portal.trigger": "Aether Portal noise intensifies",
-  "subtitles.aether_ii.entity.aerbunny.death": "Aerbunny Dies",
+  "subtitles.aether_ii.entity.aerbunny.death": "Aerbunny dies",
   "subtitles.aether_ii.entity.aerbunny.hurt": "Aerbunny squeals",
   "subtitles.aether_ii.entity.aerbunny.lift": "Aerbunny squeaks"
 }

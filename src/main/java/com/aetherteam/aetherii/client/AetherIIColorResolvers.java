@@ -39,13 +39,13 @@ public class AetherIIColorResolvers {
                     return hex;
                 }
             }
-        }), AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        }), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_SHORT_GRASS.get(), AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), AetherIIBlocks.AETHER_LONG_GRASS.get());
     }
 
     public static void registerItemColor(RegisterColorHandlersEvent.Item event) {
         event.register((color, itemProvider) -> {
             BlockState blockstate = ((BlockItem) color.getItem()).getBlock().defaultBlockState();
             return event.getBlockColors().getColor(blockstate, null, null, itemProvider);
-        }, AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        }, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_SHORT_GRASS.get(), AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), AetherIIBlocks.AETHER_LONG_GRASS.get());
     }
 }
