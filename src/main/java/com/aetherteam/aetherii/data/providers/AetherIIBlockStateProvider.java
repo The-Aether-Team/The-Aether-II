@@ -142,34 +142,33 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         ResourceLocation top = this.extend(this.texture(this.name(block), "natural/"), "_top");
         ResourceLocation sideMossy = this.extend(this.texture(this.name(block), "natural/"), "_mossy");
         ModelFile normal = this.models().cubeColumn(blockName, side, top);
-        ModelFile normalHorizontal = this.models().cubeColumnHorizontal(blockName + "_horizontal", side, top);
+        ModelFile horizontal = this.models().cubeColumnHorizontal(blockName + "_horizontal", side, top);
         ModelFile mossy = this.models().cubeColumn(blockName + "_mossy", sideMossy, top);
-        ModelFile mossyHorizontal = this.models().cubeColumnHorizontal(blockName + "_mossy_horizontal", sideMossy, top);
 
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
             Direction.Axis axis = state.getValue(RotatedPillarBlock.AXIS);
             if (state.getValue(WisprootLogBlock.MOSSY)) {
                 switch (axis) {
                     case X -> {
-                        return ConfiguredModel.builder().modelFile(mossyHorizontal).rotationX(90).rotationY(90).build();
+                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).rotationY(90).build();
                     }
                     case Y -> {
                         return ConfiguredModel.builder().modelFile(mossy).build();
                     }
                     case Z -> {
-                        return ConfiguredModel.builder().modelFile(mossyHorizontal).rotationX(90).build();
+                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).build();
                     }
                 }
             } else {
                 switch (axis) {
                     case X -> {
-                        return ConfiguredModel.builder().modelFile(normalHorizontal).rotationX(90).rotationY(90).build();
+                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).rotationY(90).build();
                     }
                     case Y -> {
                         return ConfiguredModel.builder().modelFile(normal).build();
                     }
                     case Z -> {
-                        return ConfiguredModel.builder().modelFile(normalHorizontal).rotationX(90).build();
+                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).build();
                     }
                 }
             }

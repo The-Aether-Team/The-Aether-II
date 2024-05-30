@@ -6,7 +6,7 @@
       "y": 90
     },
     "axis=x,mossy=true": {
-      "model": "aether_ii:block/wisproot_log_mossy_horizontal",
+      "model": "aether_ii:block/wisproot_log_horizontal",
       "x": 90,
       "y": 90
     },
@@ -21,7 +21,7 @@
       "x": 90
     },
     "axis=z,mossy=true": {
-      "model": "aether_ii:block/wisproot_log_mossy_horizontal",
+      "model": "aether_ii:block/wisproot_log_horizontal",
       "x": 90
     }
   }
