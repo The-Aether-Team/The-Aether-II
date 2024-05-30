@@ -32,6 +32,26 @@ public class AmberootTrunkPlacer extends StraightTrunkPlacer {
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int height, BlockPos pos, TreeConfiguration config) {
         TrunkPlacer.setDirtAt(level, blockSetter, random, pos.below(), config);
         super.placeTrunk(level, blockSetter, random, height, pos, config);
+
+        if (random.nextInt(2) == 0) {
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 1, pos.getY() + height - 1, pos.getZ()), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 1, pos.getY() + height - 1, pos.getZ()), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 2, pos.getY() + height - 1, pos.getZ()), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 2, pos.getY() + height - 1, pos.getZ()), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 3, pos.getY() + height, pos.getZ()), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 3, pos.getY() + height, pos.getZ()), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 3, pos.getY() + height + 1, pos.getZ()), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 3, pos.getY() + height + 1, pos.getZ()), config);
+        } else {
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() + 1), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() - 1), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() + 2), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() - 2), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height, pos.getZ() + 3), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height, pos.getZ() - 3), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height + 1, pos.getZ() + 3), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height + 1, pos.getZ() - 3), config);
+        }
         return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pos.above(height), 0, false));
     }
 }
