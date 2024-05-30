@@ -25,6 +25,7 @@ public class AetherIITreeFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> WISPTOP = AetherIIFeatureUtils.registerKey("wisptop");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATROOT = AetherIIFeatureUtils.registerKey("greatroot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATOAK = AetherIIFeatureUtils.registerKey("greatoak");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA = AetherIIFeatureUtils.registerKey("greatboa");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = AetherIIFeatureUtils.registerKey("amberoot");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -72,6 +73,14 @@ public class AetherIITreeFeatures {
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
                         new GiantTrunkPlacer(10, 2, 6), BlockStateProvider.simple(AetherIIBlocks.GREATOAK_LEAVES.get().defaultBlockState()),
+                        new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
+
+        AetherIIFeatureUtils.register(context, GREATBOA, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
+                        new GiantTrunkPlacer(12, 2, 8), BlockStateProvider.simple(AetherIIBlocks.GREATBOA_LEAVES.get().defaultBlockState()),
                         new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
