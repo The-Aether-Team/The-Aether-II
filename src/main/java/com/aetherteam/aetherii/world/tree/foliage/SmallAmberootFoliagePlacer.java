@@ -70,6 +70,6 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return null;
+        return AetherIIFoliagePlacerTypes.SMALL_AMBEROOT_FOLIAGE_PLACER.get();
     }
 }
