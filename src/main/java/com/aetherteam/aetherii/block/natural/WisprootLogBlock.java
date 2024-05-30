@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -36,7 +37,7 @@ public class WisprootLogBlock extends RotatedPillarBlock {
     }
 
     private boolean isMossy(BlockState state) {
-        return !state.is(AetherIIBlocks.WISPROOT_LOG) && !state.is(Blocks.AIR);
+        return state.is(BlockTags.DIRT);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState > builder) {
