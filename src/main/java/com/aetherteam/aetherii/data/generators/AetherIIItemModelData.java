@@ -84,6 +84,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AETHER_DIRT_PATH.get());
 
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
+        this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());

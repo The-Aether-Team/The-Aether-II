@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-30T09:55:03.1661904	Tags for minecraft:block mod id aether_ii
+// 1.20.4	2024-05-30T11:44:32.0825891	Tags for minecraft:block mod id aether_ii
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/blocks/aerclouds.json
 f892200a6958152f663e0a7c08fdbed855a2811d data/aether_ii/tags/blocks/aether_animal_spawnable_on.json
 0c52879ea7524c9c5a2025462b6351d7e81bf251 data/aether_ii/tags/blocks/aether_dirt.json
@@ -23,7 +23,7 @@ c8faef7fa50c3ca0e6834d010620789165e12351 data/minecraft/tags/blocks/logs_that_bu
 abf62e17a72f4ed53313ac433e3034632361dce4 data/minecraft/tags/blocks/mineable/axe.json
 23d723b72931f1ac85ff869ce69299349ef6585c data/minecraft/tags/blocks/mineable/hoe.json
 e1b71fe9b2dfb5409326953b119c7e80fd996484 data/minecraft/tags/blocks/mineable/pickaxe.json
-afdcc8e202c30fe6d3d51959731c3ed75724f4fe data/minecraft/tags/blocks/mineable/shovel.json
+ad0c5c9b761e034e584a9d41e9d8c87d8c4a1c67 data/minecraft/tags/blocks/mineable/shovel.json
 16dcb13d185215e3e6d443eede86fd20a2ea07fd data/minecraft/tags/blocks/needs_iron_tool.json
 7bd675950a768b4aa6d26aff5332fa137704e4f8 data/minecraft/tags/blocks/needs_stone_tool.json
 ccd81a813a04e500ba302a2905182a2a24abd3f1 data/minecraft/tags/blocks/pressure_plates.json

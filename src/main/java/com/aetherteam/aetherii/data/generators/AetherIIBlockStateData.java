@@ -20,10 +20,12 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.dirtPath(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
 
         this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");
+        this.block(AetherIIBlocks.FERROSITE_SAND.get(), "natural/");
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
         this.block(AetherIIBlocks.AGIOSITE.get(), "natural/");
+
         this.block(AetherIIBlocks.AMBROSIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ZANITE_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ARKENIUM_ORE.get(), "natural/");

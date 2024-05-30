@@ -236,7 +236,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.AETHER_FARMLAND.get(),
                 AetherIIBlocks.AETHER_DIRT_PATH.get(),
-                AetherIIBlocks.QUICKSOIL.get()
+                AetherIIBlocks.QUICKSOIL.get(),
+                AetherIIBlocks.FERROSITE_SAND.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),

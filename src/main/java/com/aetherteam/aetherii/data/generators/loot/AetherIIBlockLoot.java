@@ -27,6 +27,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropOther(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
 
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
+        this.dropSelf(AetherIIBlocks.FERROSITE_SAND.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
