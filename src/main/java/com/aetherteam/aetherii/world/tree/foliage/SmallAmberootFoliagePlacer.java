@@ -96,8 +96,10 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
     protected void placeLeavesRow(LevelSimulatedReader level, FoliagePlacer.FoliageSetter setter, RandomSource rand, TreeConfiguration config, BlockPos pos, int radius, int y, boolean large) {
         // Also avoid creating a new mutable blockpos if the radius is 0 anyway
         if (radius <= 0) {
-            tryPlaceLeaf(level, setter, rand, config, pos.above(y));
-            return;
+            if (!this.shouldSkipLocationSigned(rand, 0, y, 0, radius, large)) {
+                tryPlaceLeaf(level, setter, rand, config, pos.above(y));
+                return;
+            }
         }
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
         for(int j = -radius; j <= radius; ++j) {
