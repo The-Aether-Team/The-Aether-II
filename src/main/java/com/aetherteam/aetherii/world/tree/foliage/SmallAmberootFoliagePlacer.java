@@ -32,6 +32,7 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
                     int absX = Mth.abs(x);
                     int absZ = Mth.abs(z);
                     if (y == -3 || y == 0) {
+                        // TODO: make the diamond not touch the 'arm' tip things on the top layer
                         // Bottom and top layers should be 3x3 squares, occasionally with pieces sticking out to potentially make a diamond shape (though it should be unlikely)
                         boolean square = absX <= 1 && absZ <= 1;
                         boolean diamond = absX + absZ <= 2;
