@@ -127,6 +127,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATROOT_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATOAK_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
         this.itemBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());

@@ -146,6 +146,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_SAPLING.get().asItem(),
                 AetherIIBlocks.WISPROOT_SAPLING.get().asItem(),
                 AetherIIBlocks.WISPTOP_SAPLING.get().asItem(),
+                AetherIIBlocks.GREATROOT_SAPLING.get().asItem(),
+                AetherIIBlocks.GREATOAK_SAPLING.get().asItem(),
+                AetherIIBlocks.GREATBOA_SAPLING.get().asItem(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get().asItem()
         );
 

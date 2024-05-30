@@ -63,11 +63,17 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.GREATROOT_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.GREATOAK_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
         this.pottedPlant(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(), AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_WISPROOT_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_WISPTOP_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_GREATROOT_SAPLING.get(), AetherIIBlocks.GREATROOT_LEAVES.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_GREATOAK_SAPLING.get(), AetherIIBlocks.GREATOAK_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(), AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
         this.block(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(), "natural/");

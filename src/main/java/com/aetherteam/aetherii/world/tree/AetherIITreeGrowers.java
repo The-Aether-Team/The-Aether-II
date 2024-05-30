@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.tree;
 
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIITreeFeatures;
+import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;
@@ -31,6 +32,24 @@ public class AetherIITreeGrowers {
             Optional.of(AetherIITreeFeatures.WISPTOP),
             Optional.empty()
     );
+
+    public static final TreeGrower GREATROOT = new TreeGrower(
+            "greatroot",
+            Optional.of(AetherIITreeFeatures.GREATROOT),
+            Optional.empty(),
+            Optional.empty());
+
+    public static final TreeGrower GREATOAK = new TreeGrower(
+            "greatoak",
+            Optional.of(AetherIITreeFeatures.GREATOAK),
+            Optional.empty(),
+            Optional.empty());
+
+    public static final TreeGrower GREATBOA = new TreeGrower(
+            "greatboa",
+            Optional.of(AetherIITreeFeatures.GREATBOA),
+            Optional.empty(),
+            Optional.empty());
 
     public static final TreeGrower AMBEROOT = new TreeGrower(
             "amberoot",

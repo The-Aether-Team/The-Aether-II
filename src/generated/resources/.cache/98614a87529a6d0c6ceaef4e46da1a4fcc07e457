@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-30T11:44:32.0881047	Item Models: aether_ii
+// 1.20.4	2024-05-30T13:54:21.1297481	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -54,7 +54,9 @@ c5c4dcfc36320458cfc45ff1168dca50ad1e8603 assets/aether_ii/models/item/gravitite_
 15c2b4d7f03b8ddb67f9603b9566cf5fe24b2d85 assets/aether_ii/models/item/gravitite_sword.json
 17e986aee328aaa81ee9967980f7c97968b6379f assets/aether_ii/models/item/gravitite_trowel.json
 1cc5e95ef10df402465b93aee2d044989bcd576b assets/aether_ii/models/item/greatboa_leaves.json
+e0669fa52a46acc416e204677db4bd20ffcce9d6 assets/aether_ii/models/item/greatboa_sapling.json
 62f7a90989bbafca743aefbe9d3a35d0595ecd0c assets/aether_ii/models/item/greatoak_leaves.json
+37bdab62355a8256e6c102f836199406ac2fbac2 assets/aether_ii/models/item/greatoak_sapling.json
 6121bd1e431681e31bb5872a8393412c96f55c81 assets/aether_ii/models/item/greatroot_button.json
 df09d448338c8f3690954328d7845ea5100bdf2b assets/aether_ii/models/item/greatroot_fence.json
 61138dba13855086dda902be00758b5c9354ae01 assets/aether_ii/models/item/greatroot_fence_gate.json
@@ -62,6 +64,7 @@ b7d95fde2897b2afc05b56ca6d12da7dde0f9ed2 assets/aether_ii/models/item/greatroot_
 803fbd582dc61fa4105e49b29236f0ff24c1fb5c assets/aether_ii/models/item/greatroot_log.json
 59a327269f59c411d76b254569553c1aba62e999 assets/aether_ii/models/item/greatroot_planks.json
 1b4b4d0ed051095afcdbb485af89dcac9ddac274 assets/aether_ii/models/item/greatroot_pressure_plate.json
+a38b9062e3013f273977ce4ccaa2ea4d1d1ca8d9 assets/aether_ii/models/item/greatroot_sapling.json
 bbb5be0da80c131050ed993597d2f03ea3ea1fd7 assets/aether_ii/models/item/greatroot_slab.json
 e3b849f6603be0ebb13307529d64e4de7d081c6c assets/aether_ii/models/item/greatroot_stairs.json
 268a36338d5a5ffee7512515abea46290820bef1 assets/aether_ii/models/item/greatroot_wood.json
