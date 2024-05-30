@@ -32,7 +32,9 @@
     ],
     [],
     [],
-    [],
+    [
+      "aether_ii:violet_highwoods_trees"
+    ],
     [
       "aether_ii:cold_aercloud",
       "aether_ii:blue_aercloud",
