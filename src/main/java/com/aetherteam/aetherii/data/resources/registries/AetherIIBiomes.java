@@ -47,10 +47,10 @@ public class AetherIIBiomes {
         HolderGetter<ConfiguredWorldCarver<?>> vanillaConfiguredCarvers = context.lookup(Registries.CONFIGURED_CARVER);
 
         // Highlands
-        context.register(FLOURISHING_FIELD, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(VERDANT_WOODS, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(SHROUDED_FOREST, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers));
-        context.register(SHIMMERING_BASIN, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(FLOURISHING_FIELD, HighlandsBiomeBuilders.flourishingFieldBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(VERDANT_WOODS, HighlandsBiomeBuilders.verdantWoodsBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(SHROUDED_FOREST, HighlandsBiomeBuilders.shroudedForestBiome(placedFeatures, vanillaConfiguredCarvers));
+        context.register(SHIMMERING_BASIN, HighlandsBiomeBuilders.shimmeringBasinBiome(placedFeatures, vanillaConfiguredCarvers));
 
         context.register(MAGNETIC_SCAR, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers));
         context.register(TURQUOISE_FOREST, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers));
