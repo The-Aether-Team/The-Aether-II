@@ -252,6 +252,8 @@ public class AetherIICreativeTabs {
             .icon(() -> new ItemStack(AetherIIItems.AERBUNNY_SPAWN_EGG.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {
+                output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
+                output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
             }).build());
 }
