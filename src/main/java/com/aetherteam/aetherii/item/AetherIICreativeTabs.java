@@ -107,6 +107,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.AETHER_FARMLAND.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
+                output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
@@ -136,6 +137,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATOAK_LEAVES.get());
                 output.accept(AetherIIBlocks.GREATBOA_LEAVES.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.SKYROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.WISPROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.WISPTOP_SAPLING.get());
+                output.accept(AetherIIBlocks.GREATROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.GREATOAK_SAPLING.get());
+                output.accept(AetherIIBlocks.GREATBOA_SAPLING.get());
+                output.accept(AetherIIBlocks.AMBEROOT_SAPLING.get());
                 output.accept(AetherIIBlocks.AETHER_SHORT_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
@@ -149,6 +157,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+                output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_REDSTONE_BLOCKS = CREATIVE_MODE_TABS.register("redstone_blocks", () -> CreativeModeTab.builder()
@@ -243,9 +252,9 @@ public class AetherIICreativeTabs {
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "ingredients"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIItems.AERBUNNY_SPAWN_EGG.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
             }).build());
 }

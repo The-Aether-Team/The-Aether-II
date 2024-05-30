@@ -1,6 +1,10 @@
 {
   "values": [
+<<<<<<< HEAD
     "aether_ii:aether_grass_block",
     "aether_ii:aether_dirt"
+=======
+    "#aether_ii:aether_dirt"
+>>>>>>> 1.20.4-develop
   ]
 }

@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIMiscPlacements;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIOrePlacements;
+import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIVegetationPlacements;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.sounds.Music;
@@ -66,16 +67,31 @@ public class HighlandsBiomeBuilders {
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AERCLOUD_SEA, 12000, 24000, true))
             .build();
 
-    public static Biome makeHighfieldsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+    public static Biome flourishingFieldBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers).addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.FLOURISHING_FIELD_TREES));
+    }
+
+    public static Biome verdantWoodsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers).addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VERDANT_WOODS_TREES));
+    }
+
+    public static Biome shroudedForestBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers));
+    }
+
+    public static Biome shimmeringBasinBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers));
+    }
+
+    public static Biome makeHighfieldsBiome(BiomeGenerationSettings.Builder builder) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
-        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
                 false,
                 0.8F,
                 0.0F,
                 HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder.build(),
-                generationSettingsBuilder
+                builder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_QUICKSOIL)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AMBROSIUM)
@@ -94,16 +110,32 @@ public class HighlandsBiomeBuilders {
         );
     }
 
-    public static Biome makeMagneticBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+    public static Biome magneticScarBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers));
+    }
+
+    public static Biome turquoiseForestBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers));
+    }
+
+    public static Biome glisteningSwampBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers));
+    }
+
+    public static Biome violetHighwoodsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
+        return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers).addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VIOLET_HIGHWOODS_TREES));
+    }
+
+    public static Biome makeMagneticBiome(BiomeGenerationSettings.Builder builder) {
         MobSpawnSettings.Builder spawnSettingsBuilder = new MobSpawnSettings.Builder();
-        BiomeGenerationSettings.Builder generationSettingsBuilder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         return fullDefinition(
                 false,
                 0.8F,
                 0.0F,
                 MAGNETIC_EFFECTS,
                 spawnSettingsBuilder.build(),
-                generationSettingsBuilder
+                builder
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_FERROSITE_SAND)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AMBROSIUM)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ZANITE)

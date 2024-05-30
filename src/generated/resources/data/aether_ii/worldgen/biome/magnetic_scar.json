@@ -16,7 +16,9 @@
     "water_fog_color": 6321302
   },
   "features": [
-    [],
+    [
+      "aether_ii:coast_ferrosite_sand"
+    ],
     [],
     [],
     [],

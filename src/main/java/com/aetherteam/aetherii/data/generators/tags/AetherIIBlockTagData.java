@@ -152,6 +152,25 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
+        this.tag(BlockTags.SAPLINGS).add(
+                AetherIIBlocks.SKYROOT_SAPLING.get(),
+                AetherIIBlocks.WISPROOT_SAPLING.get(),
+                AetherIIBlocks.WISPTOP_SAPLING.get(),
+                AetherIIBlocks.GREATROOT_SAPLING.get(),
+                AetherIIBlocks.GREATOAK_SAPLING.get(),
+                AetherIIBlocks.GREATBOA_SAPLING.get(),
+                AetherIIBlocks.AMBEROOT_SAPLING.get()
+        );
+        this.tag(BlockTags.FLOWER_POTS).add(
+                AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(),
+                AetherIIBlocks.POTTED_WISPROOT_SAPLING.get(),
+                AetherIIBlocks.POTTED_WISPTOP_SAPLING.get(),
+                AetherIIBlocks.POTTED_GREATROOT_SAPLING.get(),
+                AetherIIBlocks.POTTED_GREATOAK_SAPLING.get(),
+                AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(),
+                AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get()
+        );
+        this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
@@ -218,14 +237,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.WISPROOT_STAIRS.get(),
                 AetherIIBlocks.WISPROOT_SLAB.get(),
-                AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get()
+                AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(),
+                AetherIIBlocks.SKYROOT_CHEST.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.AETHER_FARMLAND.get(),
                 AetherIIBlocks.AETHER_DIRT_PATH.get(),
-                AetherIIBlocks.QUICKSOIL.get()
+                AetherIIBlocks.QUICKSOIL.get(),
+                AetherIIBlocks.FERROSITE_SAND.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),
@@ -271,6 +292,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
+        );
+        this.tag(Tags.Blocks.CHESTS_WOODEN).add(
+                AetherIIBlocks.SKYROOT_CHEST.get()
         );
     }
 }

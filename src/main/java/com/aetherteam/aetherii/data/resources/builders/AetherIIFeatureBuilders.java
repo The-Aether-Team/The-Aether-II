@@ -12,7 +12,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 
 public class AetherIIFeatureBuilders {
 
-    //This was made a separate method to share code with Ferrosite Sand Coasts once these are implemented
     @SuppressWarnings("deprecation")
     public static CoastConfiguration createCoast(BlockState coastState, int minHeight, int maxHeight) {
         return new CoastConfiguration(

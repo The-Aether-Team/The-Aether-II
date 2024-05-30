@@ -142,6 +142,15 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_PLATE.get(),
                 AetherIIItems.GRAVITITE_PLATE.get()
         );
+        this.tag(ItemTags.SAPLINGS).add(
+                AetherIIBlocks.SKYROOT_SAPLING.get().asItem(),
+                AetherIIBlocks.WISPROOT_SAPLING.get().asItem(),
+                AetherIIBlocks.WISPTOP_SAPLING.get().asItem(),
+                AetherIIBlocks.GREATROOT_SAPLING.get().asItem(),
+                AetherIIBlocks.GREATOAK_SAPLING.get().asItem(),
+                AetherIIBlocks.GREATBOA_SAPLING.get().asItem(),
+                AetherIIBlocks.AMBEROOT_SAPLING.get().asItem()
+        );
 
         this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
                 AetherIIItems.ORANGE.get()
@@ -196,6 +205,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.SKYROOT_FENCE.asItem(),
                 AetherIIBlocks.GREATROOT_FENCE.asItem(),
                 AetherIIBlocks.WISPROOT_FENCE.asItem()
+        );
+        this.tag(Tags.Items.CHESTS_WOODEN).add(
+                AetherIIBlocks.SKYROOT_CHEST.get().asItem()
         );
     }
 }
