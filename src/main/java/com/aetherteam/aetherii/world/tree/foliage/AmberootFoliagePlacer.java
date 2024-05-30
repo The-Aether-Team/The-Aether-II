@@ -4,10 +4,12 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
@@ -48,7 +50,7 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
     @Override  //TODO: Improve this mess
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            if (level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 1, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState())) || level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState()))) {
+            if (level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 1, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X))) || level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X)))) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 4, i, attachment.doubleTrunk());

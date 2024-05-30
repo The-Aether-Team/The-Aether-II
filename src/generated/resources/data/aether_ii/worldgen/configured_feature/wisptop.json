@@ -44,7 +44,8 @@
       "state": {
         "Name": "aether_ii:wisproot_log",
         "Properties": {
-          "axis": "y"
+          "axis": "y",
+          "mossy": "false"
         }
       }
     }
