@@ -40,7 +40,7 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
                 int realX = x == 0 ? -radius : radius;
                 int realZ = z == 0 ? -radius : radius;
                 mutable.setWithOffset(origin, realX, 0, realZ);
-                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, rand.nextFloat() >= 0.3);
+                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, rand.nextBoolean());
             }
         }
 
@@ -58,7 +58,7 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
             mutable.setWithOffset(spike1Loc, 0, 1, 0);
             placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
             mutable.setWithOffset(spike1Loc, 0, 2, 0);
-            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, rand.nextFloat() >= 0.3);
+            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, rand.nextBoolean());
 
             // Place the side connector piece
             // Create an 'opposite offset' value and a 'y offset' value. This part of the method will create a plus shape on the side of the tree.
@@ -80,7 +80,7 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
             BlockPos sideSpikeLoc = sideLoc.relative(currentSpikeDir, 1);
             for (int y = 0; y <= 1; y++) {
                 mutable.setWithOffset(sideSpikeLoc, 0, y, 0);
-                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, y == 1 && rand.nextFloat() >= 0.3);
+                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, y == 1 && rand.nextBoolean());
             }
 
             // Place the front/back spikes
