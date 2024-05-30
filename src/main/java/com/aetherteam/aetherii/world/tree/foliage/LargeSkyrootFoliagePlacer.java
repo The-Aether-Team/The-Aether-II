@@ -43,7 +43,7 @@ public class LargeSkyrootFoliagePlacer extends FoliagePlacer {
      * @param foliageRadius     The {@link Integer} for the foliage radius.
      * @param offset            The {@link Integer} for the foliage offset.
      */
-    @Override  //TODO: Improve this mess
+    @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         if (random.nextInt(2) == 0) {
             if (random.nextInt(2) == 0) {

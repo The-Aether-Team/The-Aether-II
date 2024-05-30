@@ -43,7 +43,7 @@ public class GreatoakFoliagePlacer extends FoliagePlacer {
      * @param foliageRadius     The {@link Integer} for the foliage radius.
      * @param offset            The {@link Integer} for the foliage offset.
      */
-    @Override  //TODO: Improve this mess
+    @Override //TODO: Code Clean-Up
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 12, i, attachment.doubleTrunk());

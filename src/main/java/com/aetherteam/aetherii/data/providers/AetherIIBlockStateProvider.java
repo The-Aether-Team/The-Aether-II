@@ -141,11 +141,10 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         ResourceLocation side = this.extend(this.texture(this.name(block), "natural/"), "");
         ResourceLocation top = this.extend(this.texture(this.name(block), "natural/"), "_top");
         ResourceLocation sideMossy = this.extend(this.texture(this.name(block), "natural/"), "_mossy");
-        ResourceLocation topMossy = this.extend(this.texture(this.name(block), "natural/"), "_mossy_top");
         ModelFile normal = this.models().cubeColumn(blockName, side, top);
         ModelFile normalHorizontal = this.models().cubeColumnHorizontal(blockName + "_horizontal", side, top);
-        ModelFile mossy = this.models().cubeColumn(blockName + "_mossy", sideMossy, topMossy);
-        ModelFile mossyHorizontal = this.models().cubeColumnHorizontal(blockName + "_mossy_horizontal", sideMossy, topMossy);
+        ModelFile mossy = this.models().cubeColumn(blockName + "_mossy", sideMossy, top);
+        ModelFile mossyHorizontal = this.models().cubeColumnHorizontal(blockName + "_mossy_horizontal", sideMossy, top);
 
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
             Direction.Axis axis = state.getValue(RotatedPillarBlock.AXIS);

@@ -30,7 +30,7 @@ public class AmberootTrunkPlacer extends StraightTrunkPlacer {
     }
 
 
-    @Override  //TODO: Improve this mess
+    @Override  //TODO: Code Clean-Up
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int height, BlockPos pos, TreeConfiguration config) {
         TrunkPlacer.setDirtAt(level, blockSetter, random, pos.below(), config);
         super.placeTrunk(level, blockSetter, random, height, pos, config);

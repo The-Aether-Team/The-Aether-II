@@ -47,7 +47,7 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
      * @param foliageRadius     The {@link Integer} for the foliage radius.
      * @param offset            The {@link Integer} for the foliage offset.
      */
-    @Override  //TODO: Improve this mess
+    @Override  //TODO: Code Clean-Up
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         for (int i = offset; i >= offset - foliageHeight; --i) {
             if (level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 1, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X))) || level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X)))) {
