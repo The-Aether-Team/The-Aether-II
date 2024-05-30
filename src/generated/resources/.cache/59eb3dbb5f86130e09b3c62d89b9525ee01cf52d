@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// 1.20.4	2024-05-30T12:43:44.8068921	Loot Tables
-=======
-// 1.20.4	2024-05-30T13:54:21.1257359	Loot Tables
->>>>>>> 1.20.4-develop
+// 1.20.4	2024-05-30T13:45:19.3145031	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
