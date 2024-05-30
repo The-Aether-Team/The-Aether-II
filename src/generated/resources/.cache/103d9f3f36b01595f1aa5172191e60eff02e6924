@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-29T21:32:51.4656015	Registries
+// 1.20.4	2024-05-30T08:14:20.1077318	Registries
 f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
 6ca34cb23e6eb3d826ebb0a80682218916ff82c2 data/aether_ii/worldgen/biome/battleground_wastes.json
@@ -33,6 +33,7 @@ f4f482e8f2b0debf6bf9aa1340a02711a53f225f data/aether_ii/worldgen/configured_feat
 7e181f5eec8dadd5d34a2fc61f3a4c6ca051f048 data/aether_ii/worldgen/configured_feature/skyroot.json
 1f71594ed367bb91ea7910bd695fe098bce7428c data/aether_ii/worldgen/configured_feature/storm_aercloud.json
 5ed634e9c0e47b0e9808434637e5ce602841919d data/aether_ii/worldgen/configured_feature/wisproot.json
+25bad84c49152ffbcb4006323021820f005e3e9e data/aether_ii/worldgen/configured_feature/wisptop.json
 40ed6613c0c4402694c2364ee88d3b9ff203550e data/aether_ii/worldgen/density_function/base_3d_noise_highlands.json
 bbd54d40e81e759f15ed5f9f612ee3a0aafde1da data/aether_ii/worldgen/density_function/erosion.json
 cea370fec50431827725f501b79caa347ebe08d0 data/aether_ii/worldgen/density_function/temperature.json

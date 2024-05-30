@@ -31,7 +31,7 @@ public class WisprootFoliagePlacer extends DarkOakFoliagePlacer {
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliagePlacer.FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliagePlacer.FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 12, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 14, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ()), 5, i, attachment.doubleTrunk());
 
             if (random.nextInt(2) == 0) {
