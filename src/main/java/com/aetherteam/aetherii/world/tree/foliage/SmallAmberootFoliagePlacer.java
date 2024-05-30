@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.world.tree.foliage;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -21,41 +22,26 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter setter, RandomSource rand, TreeConfiguration config, int maxHeight, FoliageAttachment attachment, int height, int radius, int offset) {
-        boolean rotate = rand.nextBoolean();
+        Direction.Axis axis = Direction.Plane.HORIZONTAL.getRandomAxis(rand);
         BlockPos origin = attachment.pos();
-        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
-        // Create main piece, radius should be 2 by default
-        for (int x = -radius; x <= radius; x++) {
-            for (int y = -3; y <= 0; y++) {
-                for (int z = -radius; z <= radius; z++) {
-                    int absX = Mth.abs(x);
-                    int absZ = Mth.abs(z);
-                    if (y == -3 || y == 0) {
-                        // Bottom and top layers should be 3x3 squares, occasionally with pieces sticking out to potentially make a diamond shape (though it should be unlikely)
-                        boolean square = absX <= 1 && absZ <= 1;
-                        boolean diamond = absX + absZ <= 2;
-                        if (square || (diamond && rand.nextFloat() < 0.3)) {
-                            mutable.setWithOffset(origin, x, y, z);
-                            tryPlaceLeaf(level, setter, rand, config, mutable);
-                        }
-                    } else if (y == -2) {
-                        // Second layer should be a 5x5 square, with occasionally rounded corners
-                        // As this loop does not go further than 2 blocks by default, this will create a rounded square
-                        boolean roundedSquare = absX + absZ <= radius + 1;
-                        if (roundedSquare || rand.nextFloat() < 0.3) {
-                            mutable.setWithOffset(origin, x, y, z);
-                            tryPlaceLeaf(level, setter, rand, config, mutable);
-                        }
-                    } else {
-                        // Third layer should be a full square, this can be an else statement as there are no other possible y values in this for loop
-                        mutable.setWithOffset(origin, x, y, z);
-                        tryPlaceLeaf(level, setter, rand, config, mutable);
-                    }
+        placeLeavesRow(level, setter, rand, config, origin, radius - 1, 0, false);
+        placeLeavesRow(level, setter, rand, config, origin, radius, -1, false);
+        placeLeavesRow(level, setter, rand, config, origin, radius, -2, false);
+        placeLeavesRow(level, setter, rand, config, origin, radius, -3, false);
+    }
+
+    protected void placeLeavesRow(LevelSimulatedReader level, FoliagePlacer.FoliageSetter setter, RandomSource rand, TreeConfiguration config, BlockPos pos, int radius, int y, boolean large) {
+        // Override vanilla behavior of using the 'large' boolean value to actually affect the size, this is unwanted behavior in this case
+        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        for(int j = -radius; j <= radius; ++j) {
+            for(int k = -radius; k <= radius; ++k) {
+                if (!this.shouldSkipLocationSigned(rand, j, y, k, radius, large)) {
+                    blockpos$mutableblockpos.setWithOffset(pos, j, y, k);
+                    tryPlaceLeaf(level, setter, rand, config, blockpos$mutableblockpos);
                 }
             }
         }
-
     }
 
     @Override
@@ -65,7 +51,26 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected boolean shouldSkipLocation(RandomSource rand, int x, int y, int z, int radius, boolean large) {
-        return false;
+        // when the radius is zero (placing a single block), the large value is used to determine if this should be always placed, or should be sometimes placed
+        if (radius == 0) {
+            return large && rand.nextFloat() >= 0.3;
+        } else {
+            if (y == 0) {
+                // If the y offset is 0, only skip the location if it is on the corners, AND a boolean check succeeds
+                return x + z >= radius * 2 && rand.nextBoolean();
+            } else if (y == -1) {
+                // If the y offset is -1, do not skip the location
+                return false;
+            } else if (y == -2) {
+                // If the y offset is -2, skip the location if it is on the corners
+                return x + z >= radius * 2;
+            } else {
+                boolean diamond = x + z <= radius;
+                boolean square = x < radius && z < radius;
+                return !diamond || (!square && rand.nextBoolean());
+            }
+
+        }
     }
 
     @Override
