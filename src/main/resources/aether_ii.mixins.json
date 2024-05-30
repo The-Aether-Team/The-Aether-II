@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "aether_ii.refmap.json",
   "mixins": [
+    "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
     "common.accessor.EntityAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor",

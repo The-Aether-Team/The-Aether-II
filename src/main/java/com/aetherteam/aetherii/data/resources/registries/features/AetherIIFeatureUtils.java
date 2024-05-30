@@ -14,8 +14,8 @@ public class AetherIIFeatureUtils {
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> configuredFeature) {
         AetherIIOreFeatures.bootstrap(configuredFeature);
         AetherIIMiscFeatures.bootstrap(configuredFeature);
-        //AetherIITreeFeatures.bootstrap(configuredFeature);
-        //AetherIIVegetationFeatures.bootstrap(configuredFeature);
+        AetherIITreeFeatures.bootstrap(configuredFeature);
+        AetherIIVegetationFeatures.bootstrap(configuredFeature);
     }
 
     /**

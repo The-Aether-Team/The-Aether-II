@@ -73,6 +73,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
 
+        this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         //TODO: Simplify with Block Item Model with a blockWithItem Method
@@ -82,6 +84,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AETHER_DIRT_PATH.get());
 
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
+        this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
@@ -120,6 +123,14 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES.get());
+
+        this.itemBlockFlat(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATROOT_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATOAK_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
         this.itemBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 
@@ -190,6 +201,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.AMBROSIUM_TORCH.get(), "utility/");
         this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+        this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
     }
 }
