@@ -9,6 +9,7 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.RarityFilter;
 
 public class AetherIIVegetationPlacements {
     public static final ResourceKey<PlacedFeature> FLOURISHING_FIELD_TREES = AetherIIPlacementUtils.createKey("flourishing_field_trees");
@@ -18,9 +19,9 @@ public class AetherIIVegetationPlacements {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         AetherIIPlacementUtils.register(context, FLOURISHING_FIELD_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_FLOURISHING_FIELD),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1F, 1)));
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2)));
 
         AetherIIPlacementUtils.register(context, VERDANT_WOODS_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_VERDANT_WOODS),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(20, 0.1F, 1)));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(16, 0.1F, 1)));
     }
 }
