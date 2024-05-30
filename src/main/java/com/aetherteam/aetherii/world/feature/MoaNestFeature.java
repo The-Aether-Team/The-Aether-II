@@ -20,26 +20,24 @@ public class MoaNestFeature extends Feature<NoneFeatureConfiguration> {
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
-        this.placeCircle(level, pos.below(), AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState(), 2, 3);
-        this.placeCircle(level, pos, AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState(), 3, 5);
-        this.placeCircle(level, pos, Blocks.AIR.defaultBlockState(), 2, 3);
+        this.placeCircle(level, pos.below(), AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState(), 2, 3); // Bottom layer of the nest
+        this.placeCircle(level, pos, AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState(), 3, 5); // Second Layer of the Nest
+        this.placeCircle(level, pos, Blocks.AIR.defaultBlockState(), 2, 3); // Removes the inside from the second layer and only leaves the edges
         this.setBlock(level, pos, Blocks.SNIFFER_EGG.defaultBlockState());
         return true;
     }
 
-    private void placeSquare(WorldGenLevel level, int size, BlockPos pos, BlockState state) {
-        int offset = (int) ((size/2)+0.5);
+    //TODO: Code Clean-Up
+    private void placeCircle(WorldGenLevel level, BlockPos pos, BlockState state, int radius, int squareSize) {
+        int offset = (int) ((squareSize/2)+0.5); // Generates the inner Floor of the Nest
 
-        for(int i = 0; i < size; i++) {
-            for (int y = 0; y < size; y++) {
+        for(int i = 0; i < squareSize; i++) {
+            for (int y = 0; y < squareSize; y++) {
                 this.setBlock(level, pos.relative(Direction.Axis.X,  i-offset).relative(Direction.Axis.Z, y-offset), state);
             }
         }
-    }
 
-    private void placeCircle(WorldGenLevel level, BlockPos pos, BlockState state, int radius, int squareSize) {
-        this.placeSquare(level, squareSize, pos, state);
-
+        // Generates a circle around the nest
         this.setBlock(level, pos.north(radius).east(), state);
         this.setBlock(level, pos.north(radius), state);
         this.setBlock(level, pos.north(radius).west(), state);
