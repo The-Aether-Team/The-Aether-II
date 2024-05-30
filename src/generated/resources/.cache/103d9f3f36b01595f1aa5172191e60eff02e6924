@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-30T08:52:41.7389126	Registries
+// 1.20.4	2024-05-30T11:09:39.0192714	Registries
 f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
 6ca34cb23e6eb3d826ebb0a80682218916ff82c2 data/aether_ii/worldgen/biome/battleground_wastes.json
@@ -21,6 +21,7 @@ b1b71c00bd3084c1bbb91bba3c1acf57dbd84205 data/aether_ii/worldgen/configured_feat
 525c5dea9b9e001aa5de94c9bd04825f1ae434ea data/aether_ii/worldgen/configured_feature/coast_quicksoil.json
 ff31699430e7699c09862ac6a1b8d17c4ee0c3b8 data/aether_ii/worldgen/configured_feature/cold_aercloud.json
 ce9cc6381ba77982367137184fac897d87abadcc data/aether_ii/worldgen/configured_feature/golden_aercloud.json
+a4db71676711db1330cb26e963423b7abdbc709d data/aether_ii/worldgen/configured_feature/greatroot.json
 9278e7592b8c23ed653a8bc2c22b2352099a345c data/aether_ii/worldgen/configured_feature/green_aercloud.json
 75d1e809bb1a8b79b3c598a7c2f85cd9b916b49b data/aether_ii/worldgen/configured_feature/large_skyroot.json
 c4fadd1887afd454cb7f6f057de3311f5fc70f11 data/aether_ii/worldgen/configured_feature/ore_agiosite.json
