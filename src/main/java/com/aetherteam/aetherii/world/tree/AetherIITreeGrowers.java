@@ -18,6 +18,20 @@ public class AetherIITreeGrowers {
             Optional.empty()
     );
 
+    public static final TreeGrower WISPROOT = new TreeGrower(
+            "wisproot",
+            Optional.empty(),
+            Optional.of(AetherIITreeFeatures.WISPROOT),
+            Optional.empty()
+    );
+
+    public static final TreeGrower WISPTOP = new TreeGrower(
+            "wisptop",
+            Optional.empty(),
+            Optional.of(AetherIITreeFeatures.WISPTOP),
+            Optional.empty()
+    );
+
     public static final TreeGrower AMBEROOT = new TreeGrower(
             "amberoot",
             Optional.empty(),

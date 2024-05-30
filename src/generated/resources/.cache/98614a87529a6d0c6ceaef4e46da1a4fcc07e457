@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-29T19:59:40.3943523	Item Models: aether_ii
+// 1.20.4	2024-05-30T09:55:03.1737078	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -136,10 +136,12 @@ e36af53ba18d2661d75b557c1cb111f1400b9284 assets/aether_ii/models/item/wisproot_l
 2f80adde58d2b47e3e48b60ceec291a49b41a461 assets/aether_ii/models/item/wisproot_log.json
 6d48525d89ab5cda080ca6991f0cbdfd9d25ebbc assets/aether_ii/models/item/wisproot_planks.json
 e83344497594b85c2e077c26de6679ced6e3acc9 assets/aether_ii/models/item/wisproot_pressure_plate.json
+2bd0655075e2f7baaf78365c4daaf00c6f996714 assets/aether_ii/models/item/wisproot_sapling.json
 6578a45964506d32005f922b4d62249dd58711ac assets/aether_ii/models/item/wisproot_slab.json
 e167cd2a4903ede813313aadebb011a5f64d51f9 assets/aether_ii/models/item/wisproot_stairs.json
 4daf67c80f9bae792c17752840d4459839b20d5e assets/aether_ii/models/item/wisproot_wood.json
 962869521316611ce7ea217861b3f90966cce67d assets/aether_ii/models/item/wisptop_leaves.json
+93d2aea611c19dfc741086fe9e4b962c44c4a34d assets/aether_ii/models/item/wisptop_sapling.json
 c04067ac464f073ff3892f9fb8efddc4263c33b7 assets/aether_ii/models/item/woven_skyroot_sticks.json
 d9caf48d88075318f92f7cdf5167c3790ee94286 assets/aether_ii/models/item/wyndberry.json
 641e5ab39a98fa0a52bd5c5db666b79042ba9888 assets/aether_ii/models/item/zanite_axe.json

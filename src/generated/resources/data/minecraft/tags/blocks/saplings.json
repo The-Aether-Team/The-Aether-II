@@ -1,6 +1,8 @@
 {
   "values": [
     "aether_ii:skyroot_sapling",
+    "aether_ii:wisproot_sapling",
+    "aether_ii:wisptop_sapling",
     "aether_ii:amberoot_sapling"
   ]
 }

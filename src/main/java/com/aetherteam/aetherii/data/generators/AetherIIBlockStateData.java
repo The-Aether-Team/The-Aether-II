@@ -59,8 +59,13 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.AMBEROOT_LEAVES.get(), "natural/");
 
         this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
+
         this.pottedPlant(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(), AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_WISPROOT_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_WISPTOP_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
         this.block(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(), "natural/");

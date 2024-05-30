@@ -64,8 +64,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
 
         this.addBlock(AetherIIBlocks.SKYROOT_SAPLING, "Skyroot Sapling");
+        this.addBlock(AetherIIBlocks.WISPROOT_SAPLING, "Wisproot Sapling");
+        this.addBlock(AetherIIBlocks.WISPTOP_SAPLING, "Wisptop Sapling");
         this.addBlock(AetherIIBlocks.AMBEROOT_SAPLING, "Amberoot Sapling");
+
         this.addBlock(AetherIIBlocks.POTTED_SKYROOT_SAPLING, "Potted Skyroot Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_WISPROOT_SAPLING, "Potted Wisproot Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_WISPTOP_SAPLING, "Potted Wisptop Sapling");
         this.addBlock(AetherIIBlocks.POTTED_AMBEROOT_SAPLING, "Potted Amberoot Sapling");
 
         this.addBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS, "Woven Skyroot Sticks");

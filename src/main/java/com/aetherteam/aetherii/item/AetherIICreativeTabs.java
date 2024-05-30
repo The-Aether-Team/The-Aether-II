@@ -137,6 +137,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATBOA_LEAVES.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.WISPROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.WISPTOP_SAPLING.get());
                 output.accept(AetherIIBlocks.AMBEROOT_SAPLING.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()

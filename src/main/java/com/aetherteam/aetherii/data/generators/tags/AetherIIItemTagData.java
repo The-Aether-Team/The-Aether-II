@@ -144,6 +144,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.get().asItem(),
+                AetherIIBlocks.WISPROOT_SAPLING.get().asItem(),
+                AetherIIBlocks.WISPTOP_SAPLING.get().asItem(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get().asItem()
         );
 
