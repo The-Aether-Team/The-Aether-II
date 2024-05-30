@@ -16,7 +16,9 @@
     "water_fog_color": 6321302
   },
   "features": [
-    [],
+    [
+      "aether_ii:coast_ferrosite_sand"
+    ],
     [],
     [],
     [],
@@ -32,7 +34,10 @@
     ],
     [],
     [],
-    [],
+    [
+      "aether_ii:moa_nest",
+      "aether_ii:violet_highwoods_trees"
+    ],
     [
       "aether_ii:cold_aercloud",
       "aether_ii:blue_aercloud",

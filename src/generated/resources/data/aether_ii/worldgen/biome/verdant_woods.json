@@ -34,7 +34,10 @@
     ],
     [],
     [],
-    [],
+    [
+      "aether_ii:moa_nest",
+      "aether_ii:verdant_woods_trees"
+    ],
     [
       "aether_ii:cold_aercloud",
       "aether_ii:blue_aercloud",

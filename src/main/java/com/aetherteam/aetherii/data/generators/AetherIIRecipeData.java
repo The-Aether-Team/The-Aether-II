@@ -109,7 +109,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .pattern("# #")
                 .pattern("###")
-                .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get()), has(AetherIITags.Items.STONE_CRAFTING))
+                .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_FURNACE.get()), has(AetherIITags.Items.STONE_CRAFTING))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
+                .define('#', AetherIITags.Items.PLANKS_CRAFTING)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("###")
+                .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_CHEST.get()), has(AetherIITags.Items.PLANKS_CRAFTING))
                 .save(consumer);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_LADDER.get(), 3)

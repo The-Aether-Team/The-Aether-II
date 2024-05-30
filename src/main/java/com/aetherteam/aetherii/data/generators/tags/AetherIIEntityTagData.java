@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.data.generators.tags;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.tags.EntityTypeTags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -16,6 +18,6 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-
+        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(AetherIIEntityTypes.AERBUNNY.get());
     }
 }

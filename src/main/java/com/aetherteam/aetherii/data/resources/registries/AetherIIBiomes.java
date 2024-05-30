@@ -47,15 +47,15 @@ public class AetherIIBiomes {
         HolderGetter<ConfiguredWorldCarver<?>> vanillaConfiguredCarvers = context.lookup(Registries.CONFIGURED_CARVER);
 
         // Highlands
-        context.register(FLOURISHING_FIELD, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.4F));
-        context.register(VERDANT_WOODS, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
-        context.register(SHROUDED_FOREST, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
-        context.register(SHIMMERING_BASIN, HighlandsBiomeBuilders.makeHighfieldsBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
+        context.register(FLOURISHING_FIELD, HighlandsBiomeBuilders.flourishingFieldBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.4F));
+        context.register(VERDANT_WOODS, HighlandsBiomeBuilders.verdantWoodsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
+        context.register(SHROUDED_FOREST, HighlandsBiomeBuilders.shroudedForestBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
+        context.register(SHIMMERING_BASIN, HighlandsBiomeBuilders.shimmeringBasinBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
 
-        context.register(MAGNETIC_SCAR, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers, 0.2F, 0.3F));
-        context.register(TURQUOISE_FOREST, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
-        context.register(GLISTENING_SWAMP, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.9F));
-        context.register(VIOLET_HIGHWOODS, HighlandsBiomeBuilders.makeMagneticBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
+        context.register(MAGNETIC_SCAR, HighlandsBiomeBuilders.magneticScarBiome(placedFeatures, vanillaConfiguredCarvers, 0.2F, 0.3F));
+        context.register(TURQUOISE_FOREST, HighlandsBiomeBuilders.turquoiseForestBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
+        context.register(GLISTENING_SWAMP, HighlandsBiomeBuilders.glisteningSwampBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.9F));
+        context.register(VIOLET_HIGHWOODS, HighlandsBiomeBuilders.violetHighwoodsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
 
         context.register(FRIGID_SIERRA, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, -0.3F, 0.9F));
         context.register(ENDURING_WOODLAND, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, -0.5F, 0.4F));
