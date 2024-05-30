@@ -4,8 +4,10 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
@@ -34,19 +36,19 @@ public class AmberootTrunkPlacer extends StraightTrunkPlacer {
         super.placeTrunk(level, blockSetter, random, height, pos, config);
 
         if (random.nextInt(2) == 0) {
-            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 1, pos.getY() + height - 1, pos.getZ()), config);
-            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 1, pos.getY() + height - 1, pos.getZ()), config);
-            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 2, pos.getY() + height - 1, pos.getZ()), config);
-            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 2, pos.getY() + height - 1, pos.getZ()), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 1, pos.getY() + height - 1, pos.getZ()), config, state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.X));
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 1, pos.getY() + height - 1, pos.getZ()), config, state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.X));
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 2, pos.getY() + height - 1, pos.getZ()), config, state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.X));
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 2, pos.getY() + height - 1, pos.getZ()), config, state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.X));
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 3, pos.getY() + height, pos.getZ()), config);
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 3, pos.getY() + height, pos.getZ()), config);
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() + 3, pos.getY() + height + 1, pos.getZ()), config);
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX() - 3, pos.getY() + height + 1, pos.getZ()), config);
         } else {
-            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() + 1), config);
-            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() - 1), config);
-            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() + 2), config);
-            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() - 2), config);
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() + 1), config, state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.Z));
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() - 1), config, state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.Z));
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() + 2), config, state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.Z));
+            this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height - 1, pos.getZ() - 2), config, state -> state.trySetValue(RotatedPillarBlock.AXIS, Direction.Axis.Z));
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height, pos.getZ() + 3), config);
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height, pos.getZ() - 3), config);
             this.placeLog(level, blockSetter, random, new BlockPos(pos.getX(), pos.getY() + height + 1, pos.getZ() + 3), config);
