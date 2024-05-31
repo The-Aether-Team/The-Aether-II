@@ -11,11 +11,6 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": -64.0,
-              "value": 1.5
-            },
-            {
-              "derivative": 0.0,
               "location": 128.0,
               "value": 1.0
             },
@@ -33,11 +28,6 @@
         "value": {
           "coordinate": "minecraft:y",
           "points": [
-            {
-              "derivative": 0.0,
-              "location": -56.0,
-              "value": 1.5
-            },
             {
               "derivative": 0.0,
               "location": 136.0,
@@ -59,11 +49,6 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": -48.0,
-              "value": 1.5
-            },
-            {
-              "derivative": 0.0,
               "location": 144.0,
               "value": 1.0
             },
@@ -81,11 +66,6 @@
         "value": {
           "coordinate": "minecraft:y",
           "points": [
-            {
-              "derivative": 0.0,
-              "location": -40.0,
-              "value": 1.5
-            },
             {
               "derivative": 0.0,
               "location": 152.0,
@@ -107,11 +87,6 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": -32.0,
-              "value": 1.5
-            },
-            {
-              "derivative": 0.0,
               "location": 160.0,
               "value": 1.0
             },
@@ -129,11 +104,6 @@
         "value": {
           "coordinate": "minecraft:y",
           "points": [
-            {
-              "derivative": 0.0,
-              "location": -24.0,
-              "value": 1.5
-            },
             {
               "derivative": 0.0,
               "location": 168.0,
@@ -155,11 +125,6 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": -16.0,
-              "value": 1.5
-            },
-            {
-              "derivative": 0.0,
               "location": 176.0,
               "value": 1.0
             },
@@ -177,11 +142,6 @@
         "value": {
           "coordinate": "minecraft:y",
           "points": [
-            {
-              "derivative": 0.0,
-              "location": -8.0,
-              "value": 1.5
-            },
             {
               "derivative": 0.0,
               "location": 184.0,
@@ -203,11 +163,6 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 0.0,
-              "value": 1.5
-            },
-            {
-              "derivative": 0.0,
               "location": 192.0,
               "value": 1.0
             },
@@ -225,11 +180,6 @@
         "value": {
           "coordinate": "minecraft:y",
           "points": [
-            {
-              "derivative": 0.0,
-              "location": 8.0,
-              "value": 1.5
-            },
             {
               "derivative": 0.0,
               "location": 200.0,
@@ -251,11 +201,6 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 16.0,
-              "value": 1.5
-            },
-            {
-              "derivative": 0.0,
               "location": 208.0,
               "value": 1.0
             },
@@ -273,11 +218,6 @@
         "value": {
           "coordinate": "minecraft:y",
           "points": [
-            {
-              "derivative": 0.0,
-              "location": 24.0,
-              "value": 1.5
-            },
             {
               "derivative": 0.0,
               "location": 216.0,
@@ -299,11 +239,6 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 32.0,
-              "value": 1.5
-            },
-            {
-              "derivative": 0.0,
               "location": 224.0,
               "value": 1.0
             },
@@ -321,11 +256,6 @@
         "value": {
           "coordinate": "minecraft:y",
           "points": [
-            {
-              "derivative": 0.0,
-              "location": 40.0,
-              "value": 1.5
-            },
             {
               "derivative": 0.0,
               "location": 232.0,

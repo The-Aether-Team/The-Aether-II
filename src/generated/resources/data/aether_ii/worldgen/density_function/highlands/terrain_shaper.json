@@ -1,15 +1,20 @@
 {
-  "type": "minecraft:mul",
-  "argument1": {
-    "type": "minecraft:add",
-    "argument1": "aether_ii:highlands/amplification",
-    "argument2": {
-      "type": "minecraft:y_clamped_gradient",
-      "from_value": 0.5,
-      "from_y": 0,
-      "to_value": 0.25,
-      "to_y": 256
-    }
+  "type": "minecraft:clamp",
+  "input": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": "aether_ii:highlands/amplification",
+      "argument2": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_value": 0.75,
+        "from_y": 96,
+        "to_value": 0.35,
+        "to_y": 128
+      }
+    },
+    "argument2": "aether_ii:highlands/sloper"
   },
-  "argument2": "aether_ii:highlands/sloper"
+  "max": 1.0,
+  "min": 0.0
 }
