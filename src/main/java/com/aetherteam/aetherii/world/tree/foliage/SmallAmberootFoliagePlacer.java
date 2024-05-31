@@ -44,13 +44,14 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
             }
         }
 
+        // Direction-dependent stuff
+        boolean addConnector = false;
         BlockPos above = origin.above();
         for (Direction.AxisDirection ad : Direction.AxisDirection.values()) {
             // Construct both of these at the same time, why do two for loops when you can do it in one?
             Direction currentSpikeDir = Direction.fromAxisAndDirection(axis, ad);
             Direction currentOppositeDir = Direction.fromAxisAndDirection(oppositeAxis, ad);
-            // Place top spike connector
-            placeLeavesRow(level, setter, rand, config, above, 0, 0, true);
+   
             // Place top spike
             mutable.setWithOffset(above, currentSpikeDir);
             placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
@@ -58,7 +59,11 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
             mutable.setWithOffset(spike1Loc, 0, 1, 0);
             placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
             mutable.setWithOffset(spike1Loc, 0, 2, 0);
-            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, rand.nextBoolean());
+            boolean skip = rand.nextBoolean();
+            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, skip);
+            if (!skip) {
+                addConnector = true;
+            }
 
             // Place the side connector piece
             // Create an 'opposite offset' value and a 'y offset' value. This part of the method will create a plus shape on the side of the tree.
@@ -75,6 +80,8 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
                     }
                 }
             }
+            // Place top spike connector
+            placeLeavesRow(level, setter, rand, config, above, 0, 0, addConnector);
 
             // Place the side spike
             BlockPos sideSpikeLoc = sideLoc.relative(currentSpikeDir, 1);
