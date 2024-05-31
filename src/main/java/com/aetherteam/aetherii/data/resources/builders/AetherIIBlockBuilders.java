@@ -27,15 +27,6 @@ public class AetherIIBlockBuilders {
         );
     }
 
-    public static BlockBehaviour.Properties logProperties(MapColor topMapColor, MapColor sideMapColor) {
-        return BlockBehaviour.Properties.of()
-                .mapColor(block -> block.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor)
-                .instrument(NoteBlockInstrument.BASS)
-                .strength(2.0F)
-                .sound(SoundType.WOOD)
-                .ignitedByLava();
-    }
-
     public static Block leaves(MapColor mapColor) {
         return new LeavesBlock(
                 BlockBehaviour.Properties.of()
