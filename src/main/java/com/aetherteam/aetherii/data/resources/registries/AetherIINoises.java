@@ -20,7 +20,7 @@ public class AetherIINoises {
     private static ResourceKey<NormalNoise.NoiseParameters> createKey(String name) {
         return ResourceKey.create(Registries.NOISE, new ResourceLocation(AetherII.MODID, name));
     }
-    
+
     public static void bootstrap(BootstapContext<NormalNoise.NoiseParameters> context) {
         register(context, TEMPERATURE, -9, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);
         register(context, VEGETATION, -8, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);

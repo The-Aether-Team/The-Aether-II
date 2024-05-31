@@ -6,9 +6,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(PerlinNoise.class)
 public interface PerlinNoiseAccessor {
-
     @Invoker
-    default double callMaxValue() {
-        throw new AssertionError();
-    }
+    double callMaxValue();
 }
