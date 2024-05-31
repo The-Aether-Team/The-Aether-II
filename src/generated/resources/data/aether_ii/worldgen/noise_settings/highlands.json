@@ -12,7 +12,7 @@
   "disable_mob_generation": false,
   "legacy_random_source": false,
   "noise": {
-    "height": 256,
+    "height": 384,
     "min_y": 0,
     "size_horizontal": 2,
     "size_vertical": 1
@@ -30,55 +30,39 @@
           "type": "minecraft:blend_density",
           "argument": {
             "type": "minecraft:add",
-            "argument1": -0.05,
-            "argument2": {
-              "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:mul",
               "argument1": {
-                "type": "minecraft:mul",
-                "argument1": {
+                "type": "minecraft:add",
+                "argument1": 0.1,
+                "argument2": {
                   "type": "minecraft:add",
-                  "argument1": 0.1,
-                  "argument2": {
-                    "type": "minecraft:add",
+                  "argument1": {
+                    "type": "minecraft:mul",
                     "argument1": {
-                      "type": "minecraft:mul",
-                      "argument1": {
-                        "type": "minecraft:add",
-                        "argument1": 0.2,
-                        "argument2": {
-                          "type": "minecraft:add",
-                          "argument1": -0.1,
-                          "argument2": "aether_ii:base_3d_noise_highlands"
-                        }
-                      },
+                      "type": "minecraft:add",
+                      "argument1": 0.2,
                       "argument2": {
-                        "type": "minecraft:y_clamped_gradient",
-                        "from_value": 1.0,
-                        "from_y": 64,
-                        "to_value": 0.0,
-                        "to_y": 96
+                        "type": "minecraft:add",
+                        "argument1": -0.03,
+                        "argument2": "aether_ii:base_3d_noise_highlands"
                       }
                     },
-                    "argument2": {
-                      "type": "minecraft:mul",
-                      "argument1": -0.2,
-                      "argument2": "aether_ii:factor"
-                    }
+                    "argument2": "aether_ii:top_slide"
+                  },
+                  "argument2": {
+                    "type": "minecraft:mul",
+                    "argument1": -0.2,
+                    "argument2": "aether_ii:factor"
                   }
-                },
-                "argument2": {
-                  "type": "minecraft:y_clamped_gradient",
-                  "from_value": 0.0,
-                  "from_y": -64,
-                  "to_value": 1.0,
-                  "to_y": 64
                 }
               },
-              "argument2": {
-                "type": "minecraft:mul",
-                "argument1": -0.1,
-                "argument2": "aether_ii:factor"
-              }
+              "argument2": "aether_ii:bottom_slide"
+            },
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": -0.1,
+              "argument2": "aether_ii:factor"
             }
           }
         }
@@ -169,11 +153,11 @@
         "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
-            "absolute": 48
+            "absolute": 72
           },
           "random_name": "minecraft:undershale",
           "true_at_and_below": {
-            "absolute": 40
+            "absolute": 64
           }
         },
         "then_run": {

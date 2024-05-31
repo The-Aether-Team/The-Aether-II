@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-30T13:54:21.1257359	Loot Tables
+// 1.20.4	2024-05-31T12:44:48.0029686	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -113,3 +113,5 @@ cdfcc17076a9e382892f158e6f169977dddb09b0 data/aether_ii/loot_tables/blocks/wispt
 e5756cffe597096161bf2a7f3af7adba68222a90 data/aether_ii/loot_tables/blocks/zanite_block.json
 14295de5d712c2eb60971e1b93c5c7e75cefa3e7 data/aether_ii/loot_tables/blocks/zanite_ore.json
 89e8139cb32d67fc9c34fc0b29eaf2b249fcfe99 data/aether_ii/loot_tables/entities/aerbunny.json
+87e4e6dfb52885486bfb35920906bc37cddf22ef data/aether_ii/loot_tables/entities/flying_cow.json
+993161c1be68b71a45fb784a8334df800a044c63 data/aether_ii/loot_tables/entities/phyg.json

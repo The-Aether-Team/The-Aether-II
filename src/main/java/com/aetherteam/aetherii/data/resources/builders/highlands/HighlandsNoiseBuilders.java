@@ -21,7 +21,7 @@ public class HighlandsNoiseBuilders {
     public static NoiseGeneratorSettings highlandsNoiseSettings(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
         BlockState holystone = AetherIIBlocks.HOLYSTONE.get().defaultBlockState();
         return new NoiseGeneratorSettings(
-                new NoiseSettings(0, 256, 2, 1), // noiseSettings
+                new NoiseSettings(0, 384, 2, 1), // noiseSettings
                 holystone, // defaultBlock
                 Blocks.WATER.defaultBlockState(), // defaultFluid
                 makeNoiseRouter(densityFunctions, noise), // noiseRouter
@@ -40,7 +40,7 @@ public class HighlandsNoiseBuilders {
         return SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface),
                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT),
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(40), VerticalAnchor.absolute(48)), SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()))
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(64), VerticalAnchor.absolute(72)), SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()))
         );
     }
 
@@ -50,14 +50,13 @@ public class HighlandsNoiseBuilders {
 
     private static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> densityFunctions) {
         DensityFunction density = getFunction(densityFunctions, AetherIIDensityFunctions.BASE_3D_NOISE_HIGHLANDS);
-        density = DensityFunctions.add(density, DensityFunctions.constant(-0.1));
+        density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
-        density = DensityFunctions.mul(density, DensityFunctions.yClampedGradient(64, 96, 1.0, 0.0));
+        density = DensityFunctions.mul(density, getFunction(densityFunctions, AetherIIDensityFunctions.TOP_SLIDE));
         density = DensityFunctions.add(density, factorize(densityFunctions, -0.2));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
-        density = DensityFunctions.mul(density, DensityFunctions.yClampedGradient(-64, 64, 0.0, 1.0));
+        density = DensityFunctions.mul(density, getFunction(densityFunctions, AetherIIDensityFunctions.BOTTOM_SLIDE));
         density = DensityFunctions.add(density, factorize(densityFunctions, -0.1));
-        density = DensityFunctions.add(density, DensityFunctions.constant(-0.05));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();

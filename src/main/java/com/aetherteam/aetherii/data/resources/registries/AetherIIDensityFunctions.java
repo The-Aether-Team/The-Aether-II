@@ -15,6 +15,8 @@ public class AetherIIDensityFunctions {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("temperature");
     public static final ResourceKey<DensityFunction> EROSION = createKey("erosion");
     public static final ResourceKey<DensityFunction> FACTOR = createKey("factor"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("bottom_slide"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("top_slide"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE_HIGHLANDS = createKey("base_3d_noise_highlands");
 
     private static ResourceKey<DensityFunction> createKey(String name) {

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": {
+      "type": "minecraft:y_clamped_gradient",
+      "from_value": 0.0,
+      "from_y": 0,
+      "to_value": 128.0,
+      "to_y": 128
+    },
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": 0.0,
+        "value": 0.0
+      },
+      {
+        "derivative": 0.0,
+        "location": 128.0,
+        "value": 1.0
+      }
+    ]
+  }
+}
