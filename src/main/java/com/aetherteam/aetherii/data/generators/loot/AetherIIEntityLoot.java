@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;
@@ -56,6 +57,15 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
         );
         this.add(AetherIIEntityTypes.AERBUNNY.get(), LootTable.lootTable());
+
+        this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.COLD_AERCLOUD.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
+                        )
+                )
+        );
     }
 
     @Override

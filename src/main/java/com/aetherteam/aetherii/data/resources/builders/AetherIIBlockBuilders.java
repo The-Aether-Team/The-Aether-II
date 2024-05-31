@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.resources.builders;
 
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
@@ -61,6 +62,7 @@ public class AetherIIBlockBuilders {
                 .sound(SoundType.WOOL)
                 .noOcclusion()
                 .dynamicShape()
+                .isValidSpawn((pState, pLevel, pPos, pValue) -> pValue == AetherIIEntityTypes.ZEPHYR.get())
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .isSuffocating(AetherIIBlockBuilders::never)
                 .isViewBlocking(AetherIIBlockBuilders::never);
