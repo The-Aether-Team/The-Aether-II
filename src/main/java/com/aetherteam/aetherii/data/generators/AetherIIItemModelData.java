@@ -73,6 +73,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
 
+        this.eggItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
 
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
@@ -136,6 +138,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), "natural/");
         this.itemBlock(AetherIIBlocks.HIGHLANDS_BUSH.get());
         this.itemBlockFlat(AetherIIBlocks.HIGHLANDS_BUSH_STEM.get(), "natural/");
+
+        this.itemBlockGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get(), "natural/");
+        this.itemBlockGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), "natural/");
+        this.itemBlockGrass(AetherIIBlocks.AETHER_LONG_GRASS.get(), "natural/");
 
         this.itemBlock(AetherIIBlocks.SKYROOT_LEAVES_PILE.get());
         this.itemBlock(AetherIIBlocks.SKYPLANE_LEAVES_PILE.get());

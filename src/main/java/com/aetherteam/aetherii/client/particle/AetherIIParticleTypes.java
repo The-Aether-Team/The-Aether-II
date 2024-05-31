@@ -23,6 +23,7 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GREATOAK_LEAVES = PARTICLES.register("greatoak_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GREATBOA_LEAVES = PARTICLES.register("greatboa_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AMBEROOT_LEAVES = PARTICLES.register("amberoot_leaves", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));
 
     /**
      * @see AetherIIClient#eventSetup()
@@ -39,5 +40,6 @@ public class AetherIIParticleTypes {
         event.registerSpriteSet(GREATOAK_LEAVES.get(), AetherLeafParticle.GreatoakFactory::new);
         event.registerSpriteSet(GREATBOA_LEAVES.get(), AetherLeafParticle.GreatboaFactory::new);
         event.registerSpriteSet(AMBEROOT_LEAVES.get(), AetherLeafParticle.AmberootFactory::new);
+        event.registerSpriteSet(IRRADIATION.get(), IrradiationParticle.Factory::new);
     }
 }

@@ -1,6 +1,6 @@
 {
   "carvers": {},
-  "downfall": 0.0,
+  "downfall": 0.4,
   "effects": {
     "fog_color": 15986943,
     "foliage_color": 11665355,
@@ -32,7 +32,11 @@
     ],
     [],
     [],
-    [],
+    [
+      "aether_ii:short_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:long_grass_patch"
+    ],
     [
       "aether_ii:cold_aercloud",
       "aether_ii:blue_aercloud",
@@ -42,17 +46,24 @@
       "aether_ii:storm_aercloud"
     ]
   ],
-  "has_precipitation": false,
+  "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "aether_ii:aerbunny",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.8
+  "temperature": -0.5
 }

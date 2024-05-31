@@ -67,6 +67,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBEROOT_WOOD.get());
 
         // Vanilla
+        this.tag(BlockTags.DIRT).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.AETHER_DIRT.get());
         this.tag(BlockTags.WOODEN_STAIRS).add(
                 AetherIIBlocks.SKYROOT_STAIRS.get(),
                 AetherIIBlocks.GREATROOT_STAIRS.get(),

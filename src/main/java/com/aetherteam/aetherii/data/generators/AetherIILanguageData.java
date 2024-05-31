@@ -82,6 +82,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH_STEM, "Highlands Bush Stem");
 
+        this.addBlock(AetherIIBlocks.AETHER_SHORT_GRASS, "Aether Short Grass");
+        this.addBlock(AetherIIBlocks.AETHER_MEDIUM_GRASS, "Aether Medium Grass");
+        this.addBlock(AetherIIBlocks.AETHER_LONG_GRASS, "Aether Long Grass");
+
         this.addBlock(AetherIIBlocks.SKYROOT_LEAVES_PILE, "Skyroot Leaves Pile");
         this.addBlock(AetherIIBlocks.SKYPLANE_LEAVES_PILE, "Skyplane Leaves Pile");
         this.addBlock(AetherIIBlocks.SKYBIRCH_LEAVES_PILE, "Skybirch Leaves Pile");
@@ -225,6 +229,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
         this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
 
+        this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
+        this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
         this.addItem(AetherIIItems.AERBUNNY_SPAWN_EGG, "Aerbunny Spawn Egg");
 
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
@@ -245,6 +251,20 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
         this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
+
+        this.addSubtitle("entity", "phyg.ambient", "Phyg oinks");
+        this.addSubtitle("entity", "phyg.death", "Phyg dies");
+        this.addSubtitle("entity", "phyg.hurt", "Phyg hurts");
+        this.addSubtitle("entity", "phyg.saddle", "Saddle equips");
+        this.addSubtitle("entity", "phyg.step", "Footsteps");
+
+        this.addSubtitle("entity", "flying_cow.ambient", "Flying Cow moos");
+        this.addSubtitle("entity", "flying_cow.death", "Flying Cow dies");
+        this.addSubtitle("entity", "flying_cow.hurt", "Flying Cow hurts");
+        this.addSubtitle("entity", "flying_cow.saddle", "Saddle equips");
+        this.addSubtitle("entity", "flying_cow.milk", "Flying Cow gets milked");
+        this.addSubtitle("entity", "flying_cow.step", "Footsteps");
+
 
         this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
         this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");
