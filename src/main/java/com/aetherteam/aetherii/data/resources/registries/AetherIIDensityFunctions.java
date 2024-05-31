@@ -12,35 +12,55 @@ import net.minecraft.world.level.levelgen.synth.BlendedNoise;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class AetherIIDensityFunctions {
-    public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("temperature");
-    public static final ResourceKey<DensityFunction> EROSION = createKey("erosion");
-    public static final ResourceKey<DensityFunction> ELEVATION = createKey("elevation");
-    public static final ResourceKey<DensityFunction> FACTOR = createKey("factor"); //TODO: Add to Datagen
-    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("bottom_slide"); //TODO: Add to Datagen
-    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("top_slide"); //TODO: Add to Datagen
-    public static final ResourceKey<DensityFunction> BASE_3D_NOISE_HIGHLANDS = createKey("base_3d_noise_highlands");
+    public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
+    public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
+    public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
+    public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/bottom_slide"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/top_slide"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> SLOPER = createKey("highlands/sloper"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
+    public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain_shaper"); //TODO: Add to Datagen
 
     private static ResourceKey<DensityFunction> createKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(AetherII.MODID, name));
     }
 
+    public static final ResourceKey<DensityFunction> SHIFT_X = createVanillaKey("shift_x");
+    public static final ResourceKey<DensityFunction> SHIFT_Z = createVanillaKey("shift_z");
+    public static final ResourceKey<DensityFunction> Y = createVanillaKey("y");
+
+    private static ResourceKey<DensityFunction> createVanillaKey(String name) {
+        return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(name));
+    }
+
     public static void bootstrap(BootstapContext<DensityFunction> context) {
-        HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
+        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
         HolderGetter<NormalNoise.NoiseParameters> noise = context.lookup(Registries.NOISE);
-        DensityFunction shiftX = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation("shift_x")));
-        DensityFunction shiftZ = getFunction(densityFunctions, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation("shift_z")));
+        DensityFunction shiftX = getFunction(function, SHIFT_X);
+        DensityFunction shiftZ = getFunction(function, SHIFT_Z);
 
         context.register(TEMPERATURE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.TEMPERATURE)));
         context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.EROSION)).abs());
         context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
 
-        context.register(BASE_3D_NOISE_HIGHLANDS, BlendedNoise.createUnseeded(
+        context.register(BASE_3D_NOISE, BlendedNoise.createUnseeded(
                 0.25D, // xz scale
                 0.05D, // y scale
                 80D, // xz factor
                 160D, // y factor
                 8.0D // smear scale multiplier, capped at 8
         ));
+
+        context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
+    }
+
+    public static DensityFunction makeTerrainShaper(HolderGetter<DensityFunction> function) {
+        DensityFunction density = getFunction(function, AMPLIFICATION);
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.5D));
+        density = DensityFunctions.mul(density, getFunction(function, SLOPER));
+        return density;
     }
 
     private static DensityFunction getFunction(HolderGetter<DensityFunction> densityFunctions, ResourceKey<DensityFunction> key) {

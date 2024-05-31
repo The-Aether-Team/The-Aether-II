@@ -21,7 +21,7 @@
     "barrier": 0.0,
     "continents": 0.0,
     "depth": 0.0,
-    "erosion": "aether_ii:erosion",
+    "erosion": "aether_ii:highlands/erosion",
     "final_density": {
       "type": "minecraft:squeeze",
       "argument": {
@@ -45,24 +45,32 @@
                       "argument2": {
                         "type": "minecraft:add",
                         "argument1": -0.03,
-                        "argument2": "aether_ii:base_3d_noise_highlands"
+                        "argument2": "aether_ii:highlands/base_3d_noise"
                       }
                     },
-                    "argument2": "aether_ii:top_slide"
+                    "argument2": "aether_ii:highlands/top_slide"
                   },
                   "argument2": {
                     "type": "minecraft:mul",
-                    "argument1": -0.2,
-                    "argument2": "aether_ii:factor"
+                    "argument1": {
+                      "type": "minecraft:mul",
+                      "argument1": -0.2,
+                      "argument2": "aether_ii:highlands/factor"
+                    },
+                    "argument2": "aether_ii:highlands/terrain_shaper"
                   }
                 }
               },
-              "argument2": "aether_ii:bottom_slide"
+              "argument2": "aether_ii:highlands/bottom_slide"
             },
             "argument2": {
               "type": "minecraft:mul",
-              "argument1": -0.1,
-              "argument2": "aether_ii:factor"
+              "argument1": {
+                "type": "minecraft:mul",
+                "argument1": -0.1,
+                "argument2": "aether_ii:highlands/factor"
+              },
+              "argument2": "aether_ii:highlands/terrain_shaper"
             }
           }
         }
@@ -73,7 +81,7 @@
     "initial_density_without_jaggedness": 0.0,
     "lava": 0.0,
     "ridges": 0.0,
-    "temperature": "aether_ii:temperature",
+    "temperature": "aether_ii:highlands/temperature",
     "vegetation": {
       "type": "minecraft:shifted_noise",
       "noise": "aether_ii:vegetation",
@@ -100,11 +108,11 @@
           "invert": {
             "type": "minecraft:vertical_gradient",
             "false_at_and_above": {
-              "below_top": 288
+              "below_top": 272
             },
             "random_name": "minecraft:grass",
             "true_at_and_below": {
-              "below_top": 288
+              "below_top": 272
             }
           }
         },
@@ -155,11 +163,11 @@
           "invert": {
             "type": "minecraft:vertical_gradient",
             "false_at_and_above": {
-              "below_top": 288
+              "below_top": 272
             },
             "random_name": "minecraft:dirt",
             "true_at_and_below": {
-              "below_top": 288
+              "below_top": 272
             }
           }
         },
