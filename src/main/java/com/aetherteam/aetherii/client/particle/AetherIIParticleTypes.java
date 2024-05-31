@@ -13,11 +13,13 @@ public class AetherIIParticleTypes {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, AetherII.MODID);
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AETHER_PORTAL = PARTICLES.register("aether_portal", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));
 
     /**
      * @see AetherIIClient#eventSetup()
      */
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(AETHER_PORTAL.get(), AetherPortalParticle.Factory::new);
+        event.registerSpriteSet(IRRADIATION.get(), IrradiationParticle.Factory::new);
     }
 }
