@@ -9,6 +9,7 @@ import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
@@ -29,7 +30,7 @@ public class AetherIIFeatureBuilders {
         return new AercloudConfiguration(bounds, BlockStateProvider.simple(blockState));
     }
 
-    public static CloudbedFeature.Config cloudbed(BlockState blockState, BlockPredicate predicate, int yLevel, double xzScale, double yScale, double noiseOffset) {
-        return new CloudbedFeature.Config(BlockStateProvider.simple(blockState), predicate, yLevel, xzScale, yScale, noiseOffset);
+    public static CloudbedFeature.Config cloudbed(BlockState blockState, BlockPredicate predicate, DensityFunction base, DensityFunction yOffset, int yLevel) {
+        return new CloudbedFeature.Config(BlockStateProvider.simple(blockState), predicate, base, yOffset, yLevel);
     }
 }

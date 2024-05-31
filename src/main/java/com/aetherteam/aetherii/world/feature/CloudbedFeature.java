@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -25,6 +26,9 @@ public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
 
     @Override
     public boolean place(FeaturePlaceContext<Config> context) {
+
+        DensityFunction baseNoise = context.config().base();
+        DensityFunction yOffsetNoise = context.config().yOffset();
         // This should be placed, once per chunk
         int chunkX = context.origin().getX() - (context.origin().getX() % 16);
         int chunkZ = context.origin().getZ() - (context.origin().getZ() % 16);
@@ -32,16 +36,17 @@ public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 // Multiplied so the default value can be 1
-                double scale = context.config().scaleXZ() * 0.00375;
+//                double scale = context.config().scaleXZ() * 0.00375;
                 // calculate new coords based on the for loops' values
                 int xCoord = chunkX + x;
                 int zCoord = chunkZ + z;
                 // Base noise is what is used for the distinction of gaps and non-gaps
-                double base = BASE_NOISE.getValue(xCoord * scale, zCoord * scale, false);
+                double base = baseNoise.compute(new DensityFunction.SinglePointContext(xCoord, context.config().yLevel(), zCoord));
                 // This is then modified based on the feature config
-                double main = (base * context.config().scaleY) + context.config().noiseOffset;
+                double main = (base); // TODO remove
                 // A Y offset is then calculated and applied
-                double yOffset = Y_OFFSET.getValue(xCoord * scale * 0.75D, zCoord * scale * 0.75D, false);
+//                double yOffset = Y_OFFSET.getValue(xCoord * scale * 0.75D, zCoord * scale * 0.75D, false);
+                double yOffset = yOffsetNoise.compute(new DensityFunction.SinglePointContext(xCoord, context.config().yLevel(), zCoord));
                 float offs = (float) Mth.lerp(Mth.inverseLerp(yOffset, -0.5, 0.5), 0D, 10D);
                 // We don't need to, and shouldn't, generate anything if the noise value is below zero
                 if (main >= 0) {
@@ -69,15 +74,14 @@ public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
         return (-Mth.cos((float) (Math.PI * progress)) + 1F) * 0.5F * (end - start) + start;
     }
 
-    public record Config(BlockStateProvider block, BlockPredicate predicate, int yLevel, double scaleXZ, double scaleY, double noiseOffset) implements FeatureConfiguration {
+    public record Config(BlockStateProvider block, BlockPredicate predicate, DensityFunction base, DensityFunction yOffset, int yLevel) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(
                 (builder) -> builder.group(
                         BlockStateProvider.CODEC.fieldOf("block").forGetter(Config::block),
                         BlockPredicate.CODEC.fieldOf("predicate").forGetter(Config::predicate),
-                        Codec.INT.fieldOf("base_height").forGetter(Config::yLevel),
-                        Codec.DOUBLE.fieldOf("xz_scale").forGetter(Config::scaleXZ),
-                        Codec.DOUBLE.fieldOf("y_scale").forGetter(Config::scaleY),
-                        Codec.DOUBLE.fieldOf("noise_offset").forGetter(Config::noiseOffset)
+                        DensityFunction.HOLDER_HELPER_CODEC.fieldOf("base_noise").forGetter(Config::base),
+                        DensityFunction.HOLDER_HELPER_CODEC.fieldOf("y_offset_noise").forGetter(Config::yOffset),
+                        Codec.INT.fieldOf("base_height").forGetter(Config::yLevel)
 
                 ).apply(builder, Config::new));
     }
