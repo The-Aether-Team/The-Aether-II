@@ -1,0 +1,19 @@
+{
+  "type": "aether_ii:cloudbed",
+  "config": {
+    "base_height": 8,
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:cold_aercloud"
+      }
+    },
+    "noise_offset": 0.0,
+    "predicate": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:air"
+    },
+    "xz_scale": 1.0,
+    "y_scale": 1.0
+  }
+}
