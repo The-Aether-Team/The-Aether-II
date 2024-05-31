@@ -1,6 +1,13 @@
 {
-  "type": "minecraft:noise",
-  "noise": "aether_ii:cloudbed_y_offset",
-  "xz_scale": 1.0,
-  "y_scale": 0.25
+  "type": "aether_ii:perlin_noise",
+  "noise": {
+    "amplitudes": [
+      1.0,
+      1.0
+    ],
+    "firstOctave": 0
+  },
+  "seed": 95,
+  "xz_scale": 0.25,
+  "y_scale": 0.0
 }
