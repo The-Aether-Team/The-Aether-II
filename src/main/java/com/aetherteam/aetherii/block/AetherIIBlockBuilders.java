@@ -1,7 +1,9 @@
-package com.aetherteam.aetherii.data.resources.builders;
+package com.aetherteam.aetherii.block;
 
+import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -14,8 +16,9 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
-public class AetherIIBlockBuilders {
+import java.util.function.Supplier;
 
+public class AetherIIBlockBuilders {
     public static RotatedPillarBlock log(MapColor topMapColor, MapColor sideMapColor) {
         return new RotatedPillarBlock(
                 BlockBehaviour.Properties.of()
@@ -36,8 +39,8 @@ public class AetherIIBlockBuilders {
                 .ignitedByLava();
     }
 
-    public static Block leaves(MapColor mapColor) {
-        return new LeavesBlock(
+    public static Block leaves(MapColor mapColor, Supplier<SimpleParticleType> leavesParticle) {
+        return new AetherLeavesBlock(
                 BlockBehaviour.Properties.of()
                         .mapColor(mapColor)
                         .strength(0.2F)
@@ -49,7 +52,8 @@ public class AetherIIBlockBuilders {
                         .isViewBlocking(AetherIIBlockBuilders::never)
                         .ignitedByLava()
                         .pushReaction(PushReaction.DESTROY)
-                        .isRedstoneConductor(AetherIIBlockBuilders::never)
+                        .isRedstoneConductor(AetherIIBlockBuilders::never),
+                leavesParticle
         );
     }
 

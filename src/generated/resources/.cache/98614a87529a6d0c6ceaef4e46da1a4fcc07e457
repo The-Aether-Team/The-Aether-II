@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-30T13:54:21.1297481	Item Models: aether_ii
+// 1.20.4	2024-05-30T18:15:31.520025	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -32,6 +32,8 @@ b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_s
 0a49ecb69e9c9148f5f56045b347f368ba647a05 assets/aether_ii/models/item/arkenium_sword.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
 c7551e4548b0c81d85c2d6072e683ba9789cc589 assets/aether_ii/models/item/blueberry.json
+f02bebdc929e60eaebcaaefe890b3f9fb604d4b3 assets/aether_ii/models/item/blueberry_bush.json
+c51076bdf8ae4eff8ab973abd37cd7970abb2d97 assets/aether_ii/models/item/blueberry_bush_stem.json
 59483d7ced03b47656d5d0d803d0629d3afbf66a assets/aether_ii/models/item/blue_aercloud.json
 843ecf00bc074daf792dca837106224d7d1be69a assets/aether_ii/models/item/blue_swet_jelly.json
 b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
@@ -69,6 +71,8 @@ bbb5be0da80c131050ed993597d2f03ea3ea1fd7 assets/aether_ii/models/item/greatroot_
 e3b849f6603be0ebb13307529d64e4de7d081c6c assets/aether_ii/models/item/greatroot_stairs.json
 268a36338d5a5ffee7512515abea46290820bef1 assets/aether_ii/models/item/greatroot_wood.json
 71db11dbfb4109a0d05a6f9304da556bc38af138 assets/aether_ii/models/item/green_aercloud.json
+23fea31aca6045c4f86c605c5f94fe43399b77fc assets/aether_ii/models/item/highlands_bush.json
+27ec436fe384def98c1ce22032b58c498cb3cfe2 assets/aether_ii/models/item/highlands_bush_stem.json
 8e2ea2de4b9c40ce8d12bb8929db104621345611 assets/aether_ii/models/item/holystone.json
 0835f677ffa59ed15b6385fda54653f2ac513621 assets/aether_ii/models/item/holystone_axe.json
 a6ecedda3f29b3ee2813e021e444eda7e3160514 assets/aether_ii/models/item/holystone_bricks.json

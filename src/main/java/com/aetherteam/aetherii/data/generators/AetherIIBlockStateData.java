@@ -76,6 +76,11 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.pottedPlant(AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(), AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
+        this.crossBlock(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), "natural/");
+        this.berryBush(AetherIIBlocks.BLUEBERRY_BUSH.get(), AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
+        this.crossBlock(AetherIIBlocks.HIGHLANDS_BUSH_STEM.get(), "natural/");
+        this.berryBush(AetherIIBlocks.HIGHLANDS_BUSH.get(), AetherIIBlocks.HIGHLANDS_BUSH_STEM.get());
+
         this.block(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(), "natural/");
 
         this.block(AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
