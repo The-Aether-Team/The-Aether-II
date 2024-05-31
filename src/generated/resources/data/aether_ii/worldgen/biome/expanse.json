@@ -16,7 +16,9 @@
     "water_fog_color": 5273497
   },
   "features": [
-    [],
+    [
+      "aether_ii:cloudbed"
+    ],
     [],
     [],
     [],
