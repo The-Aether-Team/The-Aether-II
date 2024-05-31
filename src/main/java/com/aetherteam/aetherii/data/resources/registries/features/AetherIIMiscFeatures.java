@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIFeatureBuilders;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
-import com.aetherteam.aetherii.world.feature.CloudLayerFeature;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -20,7 +19,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = AetherIIFeatureUtils.registerKey("purple_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = AetherIIFeatureUtils.registerKey("storm_aercloud");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUD_LAYER = AetherIIFeatureUtils.registerKey("cloud_layer");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = AetherIIFeatureUtils.registerKey("cloudbed");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         AetherIIFeatureUtils.register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), createCoast(AetherIIBlocks.QUICKSOIL.get().defaultBlockState(), 32, 96));
@@ -35,6 +34,6 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
         AetherIIFeatureUtils.register(context, PURPLE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(8, AetherIIBlocks.PURPLE_AERCLOUD.get().defaultBlockState()));
         AetherIIFeatureUtils.register(context, STORM_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(6, AetherIIBlocks.STORM_AERCLOUD.get().defaultBlockState()));
 
-        AetherIIFeatureUtils.register(context, CLOUD_LAYER, AetherIIFeatures.CLOUD_LAYER.get(), AetherIIFeatureBuilders.cloudLayer(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 8, 1D, 1D, 0));
+        AetherIIFeatureUtils.register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(), AetherIIFeatureBuilders.cloudbed(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 8, 1D, 1D, 0));
     }
 }

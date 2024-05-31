@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.world.feature.CloudLayerFeature;
+import com.aetherteam.aetherii.world.feature.CloudbedFeature;
 import com.aetherteam.aetherii.world.feature.configuration.AercloudConfiguration;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import net.minecraft.core.HolderSet;
@@ -29,7 +29,7 @@ public class AetherIIFeatureBuilders {
         return new AercloudConfiguration(bounds, BlockStateProvider.simple(blockState));
     }
 
-    public static CloudLayerFeature.Config cloudLayer(BlockState blockState, BlockPredicate predicate, int yLevel, double xzScale, double yScale, double noiseOffset) {
-        return new CloudLayerFeature.Config(BlockStateProvider.simple(blockState), predicate, yLevel, xzScale, yScale, noiseOffset);
+    public static CloudbedFeature.Config cloudbed(BlockState blockState, BlockPredicate predicate, int yLevel, double xzScale, double yScale, double noiseOffset) {
+        return new CloudbedFeature.Config(BlockStateProvider.simple(blockState), predicate, yLevel, xzScale, yScale, noiseOffset);
     }
 }
