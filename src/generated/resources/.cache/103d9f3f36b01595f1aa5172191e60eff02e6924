@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T13:13:27.3873228	Registries
+// 1.20.4	2024-05-31T13:55:10.6992834	Registries
 f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 ae01d467453be6d401ce68c8ccc006362b5a29b7 data/aether_ii/dimension_type/aether_highlands.json
 93be2fed528611e4dba243c609609f941303ba6e data/aether_ii/worldgen/biome/battleground_wastes.json
@@ -18,7 +18,7 @@ f9a6f290f67a42a8a96b755929bcc71dd9489c60 data/aether_ii/worldgen/biome/verdant_w
 3a69dd15f87d1122e9dd7527a7bd573675d25531 data/aether_ii/worldgen/biome/violet_highwoods.json
 b1b71c00bd3084c1bbb91bba3c1acf57dbd84205 data/aether_ii/worldgen/configured_feature/amberoot.json
 63289f26e69475adaf213c97eeba3dab9965b0d6 data/aether_ii/worldgen/configured_feature/blue_aercloud.json
-710af2b3123b41eecedc13b9752863321e377805 data/aether_ii/worldgen/configured_feature/cloudbed.json
+e3d641437bc5439f522ab7d50e107a1faa415af4 data/aether_ii/worldgen/configured_feature/cloudbed.json
 85a72bde5dc15305ae1c07100a72a53f1a3fee5c data/aether_ii/worldgen/configured_feature/coast_ferrosite_sand.json
 525c5dea9b9e001aa5de94c9bd04825f1ae434ea data/aether_ii/worldgen/configured_feature/coast_quicksoil.json
 ff31699430e7699c09862ac6a1b8d17c4ee0c3b8 data/aether_ii/worldgen/configured_feature/cold_aercloud.json
@@ -44,8 +44,12 @@ a293142d51c51fe367c2df72d16dcefc9592f62d data/aether_ii/worldgen/configured_feat
 66feca8511b7626bff1af06b8d33e8bb12f18528 data/aether_ii/worldgen/configured_feature/wisproot.json
 b5fb37bf8038a94bb1b38d3d719b0d90319451d8 data/aether_ii/worldgen/configured_feature/wisptop.json
 40ed6613c0c4402694c2364ee88d3b9ff203550e data/aether_ii/worldgen/density_function/base_3d_noise_highlands.json
+9c8b81a2691b2368993175ad4d4bcb334f6a6dd5 data/aether_ii/worldgen/density_function/cloudbed.json
+fe0a306db9a8ce1c2d5860bb65eafa6cc77c7b4d data/aether_ii/worldgen/density_function/cloudbed_y_offset.json
 bbd54d40e81e759f15ed5f9f612ee3a0aafde1da data/aether_ii/worldgen/density_function/erosion.json
 cea370fec50431827725f501b79caa347ebe08d0 data/aether_ii/worldgen/density_function/temperature.json
+959ecf4a1d3d88c8b5c80ab562940ad38dfbe7c6 data/aether_ii/worldgen/noise/cloudbed.json
+393c8091ece1b6b63cb995b79f4064ee04a2949d data/aether_ii/worldgen/noise/cloudbed_y_offset.json
 20ddbabfded8546f8d71cb1689cd15c42bc77244 data/aether_ii/worldgen/noise/erosion.json
 e9951c1e43a8e47e424565851e1786e9dbe41a7a data/aether_ii/worldgen/noise/temperature.json
 144e6875c7c48ab4b4a0717436536cc121dc62da data/aether_ii/worldgen/noise/vegetation.json
