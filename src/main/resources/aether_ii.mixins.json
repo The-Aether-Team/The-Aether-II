@@ -8,6 +8,7 @@
     "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
     "common.accessor.EntityAccessor",
+    "common.accessor.PerlinNoiseAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor",
     "common.accessor.SpreadingSnowyDirtBlockAccessor"
   ],

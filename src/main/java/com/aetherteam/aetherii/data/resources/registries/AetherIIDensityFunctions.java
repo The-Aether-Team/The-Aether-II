@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -56,8 +57,9 @@ public class AetherIIDensityFunctions {
                 8.0D // smear scale multiplier, capped at 8
         ));
 
-        context.register(CLOUDBED_BASE, DensityFunctions.noise(noise.getOrThrow(AetherIINoises.CLOUDBED_BASE), 0.375D));
-        context.register(CLOUDBED_Y_OFFSET, DensityFunctions.noise(noise.getOrThrow(AetherIINoises.CLOUDBED_Y_OFFSET), 0.25D));
+        // Use random seed values
+        context.register(CLOUDBED_BASE, new PerlinNoiseFunction(noise.getOrThrow(AetherIINoises.CLOUDBED_BASE), 0.375D, 0.0D, 42));
+        context.register(CLOUDBED_Y_OFFSET, new PerlinNoiseFunction(noise.getOrThrow(AetherIINoises.CLOUDBED_Y_OFFSET), 0.25D, 0.0D, 95));
 
         context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
     }

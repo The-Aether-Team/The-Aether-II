@@ -29,6 +29,7 @@ public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
 
         DensityFunction baseNoise = context.config().base();
         DensityFunction yOffsetNoise = context.config().yOffset();
+
         // This should be placed, once per chunk
         int chunkX = context.origin().getX() - (context.origin().getX() % 16);
         int chunkZ = context.origin().getZ() - (context.origin().getZ() % 16);
