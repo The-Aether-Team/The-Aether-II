@@ -19,8 +19,6 @@ public class CloudLayerFeature extends Feature<CloudLayerFeature.Config> {
     public static final PerlinSimplexNoise BASE_NOISE = new PerlinSimplexNoise(new XoroshiroRandomSource(42), List.of(0, 1, 2, 3, 4));
     public static final PerlinSimplexNoise Y_OFFSET = new PerlinSimplexNoise(new XoroshiroRandomSource(95), List.of(0, 1));
 
-
-
     public CloudLayerFeature(Codec<Config> codec) {
         super(codec);
     }
@@ -66,12 +64,10 @@ public class CloudLayerFeature extends Feature<CloudLayerFeature.Config> {
         }
         return false;
     }
-
-
+    
     private static float cosineInterp(float progress, float start, float end) {
         return (-Mth.cos((float) (Math.PI * progress)) + 1F) * 0.5F * (end - start) + start;
     }
-
 
     public record Config(BlockStateProvider block, BlockPredicate predicate, int yLevel, double scaleXZ, double scaleY, double noiseOffset) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(
@@ -84,6 +80,5 @@ public class CloudLayerFeature extends Feature<CloudLayerFeature.Config> {
                         Codec.DOUBLE.fieldOf("noise_offset").forGetter(Config::noiseOffset)
 
                 ).apply(builder, Config::new));
-
     }
 }
