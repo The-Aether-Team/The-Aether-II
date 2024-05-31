@@ -1,7 +1,7 @@
 {
   "type": "aether_ii:cloudbed",
   "config": {
-    "base_height": 72,
+    "base_height": 64,
     "base_noise": "aether_ii:cloudbed",
     "block": {
       "type": "minecraft:simple_state_provider",
