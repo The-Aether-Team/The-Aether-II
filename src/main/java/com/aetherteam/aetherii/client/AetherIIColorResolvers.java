@@ -23,7 +23,7 @@ public class AetherIIColorResolvers {
             float brightness = hsb[2];
 
             Color darkColor = Color.getHSBColor(hue, saturation + (5.0F / 100.0F), brightness);
-            Color lightColor = Color.getHSBColor(hue, saturation - (8.0F / 100.0F), brightness);
+            Color lightColor = Color.getHSBColor(hue, saturation - (6.0F / 100.0F), brightness);
 
             switch (tintIndex) {
                 case 0 -> {
