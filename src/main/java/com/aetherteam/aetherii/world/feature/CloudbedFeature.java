@@ -43,16 +43,13 @@ public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
                 int zCoord = chunkZ + z;
                 // Base noise is what is used for the distinction of gaps and non-gaps
                 double base = baseNoise.compute(new DensityFunction.SinglePointContext(xCoord, context.config().yLevel(), zCoord));
-                // This is then modified based on the feature config
-                double main = (base); // TODO remove
                 // A Y offset is then calculated and applied
-//                double yOffset = Y_OFFSET.getValue(xCoord * scale * 0.75D, zCoord * scale * 0.75D, false);
                 double yOffset = yOffsetNoise.compute(new DensityFunction.SinglePointContext(xCoord, context.config().yLevel(), zCoord));
                 float offs = (float) Mth.lerp(Mth.inverseLerp(yOffset, -0.5, 0.5), 0D, 10D);
                 // We don't need to, and shouldn't, generate anything if the noise value is below zero
-                if (main >= 0) {
+                if (base >= 0) {
                     // Interpolate for some extra smoothness
-                    float delta = cosineInterp((float) Mth.clamp(main, 0, 1), 0, 1);
+                    float delta = cosineInterp((float) Mth.clamp(base, 0, 1), 0, 1);
                     // Calculate how many blocks up from the main y offset plane should be generated
                     float blocksUp = Mth.lerp(delta, 0F, 5F) + offs;
                     // Calculate how many blocks down from the main y offset plane should be generated
