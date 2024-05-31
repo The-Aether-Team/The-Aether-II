@@ -50,12 +50,12 @@ public class HighlandsNoiseBuilders {
 
     private static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> densityFunctions) {
         DensityFunction density = getFunction(densityFunctions, AetherIIDensityFunctions.BASE_3D_NOISE_HIGHLANDS);
-        density = DensityFunctions.add(density, DensityFunctions.constant(-0.13));
+        density = DensityFunctions.add(density, DensityFunctions.constant(-0.1));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
-        density = DensityFunctions.mul(density, DensityFunctions.yClampedGradient(56, 128, 1.0, 0.0));
+        density = DensityFunctions.mul(density, DensityFunctions.yClampedGradient(64, 96, 1.0, 0.0));
         density = DensityFunctions.add(density, factorize(densityFunctions, -0.2));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
-        density = DensityFunctions.mul(density, DensityFunctions.yClampedGradient(8, 40, 0.0, 1.0));
+        density = DensityFunctions.mul(density, DensityFunctions.yClampedGradient(-64, 64, 0.0, 1.0));
         density = DensityFunctions.add(density, factorize(densityFunctions, -0.1));
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.05));
         density = DensityFunctions.blendDensity(density);

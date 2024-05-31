@@ -32,7 +32,7 @@ public class AetherIIDensityFunctions {
 
         context.register(BASE_3D_NOISE_HIGHLANDS, BlendedNoise.createUnseeded(
                 0.25D, // xz scale
-                0.25D, // y scale
+                0.05D, // y scale
                 80D, // xz factor
                 160D, // y factor
                 8.0D // smear scale multiplier, capped at 8

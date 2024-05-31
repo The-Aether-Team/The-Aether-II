@@ -47,16 +47,16 @@
                         "argument1": 0.2,
                         "argument2": {
                           "type": "minecraft:add",
-                          "argument1": -0.13,
+                          "argument1": -0.1,
                           "argument2": "aether_ii:base_3d_noise_highlands"
                         }
                       },
                       "argument2": {
                         "type": "minecraft:y_clamped_gradient",
                         "from_value": 1.0,
-                        "from_y": 56,
+                        "from_y": 64,
                         "to_value": 0.0,
-                        "to_y": 128
+                        "to_y": 96
                       }
                     },
                     "argument2": {
@@ -69,9 +69,9 @@
                 "argument2": {
                   "type": "minecraft:y_clamped_gradient",
                   "from_value": 0.0,
-                  "from_y": 8,
+                  "from_y": -64,
                   "to_value": 1.0,
-                  "to_y": 40
+                  "to_y": 64
                 }
               },
               "argument2": {

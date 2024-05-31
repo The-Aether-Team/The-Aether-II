@@ -16,13 +16,13 @@ public class AetherIINoises {
         return ResourceKey.create(Registries.NOISE, new ResourceLocation(AetherII.MODID, name));
     }
 
-    public static void bootstrap(BootstapContext<NormalNoise.NoiseParameters> ctx) {
-        register(ctx, TEMPERATURE, -9, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);
-        register(ctx, VEGETATION, -8, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-        register(ctx, EROSION, -9, 1.5, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    public static void bootstrap(BootstapContext<NormalNoise.NoiseParameters> context) {
+        register(context, TEMPERATURE, -9, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);
+        register(context, VEGETATION, -8, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+        register(context, EROSION, -9, 1.5, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
     }
 
-    public static void register(BootstapContext<NormalNoise.NoiseParameters> ctx, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double firstAmplitude, double... amplitudes) {
-        ctx.register(key, new NormalNoise.NoiseParameters(firstOctave, firstAmplitude, amplitudes));
+    public static void register(BootstapContext<NormalNoise.NoiseParameters> context, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double firstAmplitude, double... amplitudes) {
+        context.register(key, new NormalNoise.NoiseParameters(firstOctave, firstAmplitude, amplitudes));
     }
 }
