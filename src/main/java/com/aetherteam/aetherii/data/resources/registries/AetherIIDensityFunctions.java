@@ -23,6 +23,9 @@ public class AetherIIDensityFunctions {
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain_shaper"); //TODO: Add to Datagen
 
+    public static final ResourceKey<DensityFunction> CLOUDBED_BASE = createKey("cloudbed");
+    public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("cloudbed_y_offset");
+
     private static ResourceKey<DensityFunction> createKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(AetherII.MODID, name));
     }
@@ -53,6 +56,9 @@ public class AetherIIDensityFunctions {
                 8.0D // smear scale multiplier, capped at 8
         ));
 
+        context.register(CLOUDBED_BASE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375D, noise.getOrThrow(AetherIINoises.CLOUDBED_BASE)));
+        context.register(CLOUDBED_Y_OFFSET, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25D, noise.getOrThrow(AetherIINoises.CLOUDBED_Y_OFFSET)));
+
         context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
     }
 
@@ -63,7 +69,7 @@ public class AetherIIDensityFunctions {
         return density.clamp(0, 1);
     }
 
-    private static DensityFunction getFunction(HolderGetter<DensityFunction> densityFunctions, ResourceKey<DensityFunction> key) {
+    public static DensityFunction getFunction(HolderGetter<DensityFunction> densityFunctions, ResourceKey<DensityFunction> key) {
         return new DensityFunctions.HolderHolder(densityFunctions.getOrThrow(key));
     }
 }
