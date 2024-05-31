@@ -215,11 +215,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
         this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
-        this.addItem(AetherIIItems.AERBUNNY_SPAWN_EGG, "Aerbunny Spawn Egg");
+        this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
 
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         this.addEntityType(AetherIIEntityTypes.AERBUNNY, "Aerbunny");
+        this.addEntityType(AetherIIEntityTypes.PHYG, "Phyg");
+        this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
+        this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
 
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
@@ -253,6 +256,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
         this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");
         this.addSubtitle("entity", "aerbunny.lift", "Aerbunny squeaks");
+
+        this.addSubtitle("entity", "zephyr.shoot", "Zephyr spits");
+        this.addSubtitle("entity", "zephyr.ambient", "Zephyr blows");
+        this.addSubtitle("entity", "zephyr.death", "Zephyr dies");
+        this.addSubtitle("entity", "zephyr.hurt", "Zephyr hurts");
 
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
 
