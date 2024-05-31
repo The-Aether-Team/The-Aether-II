@@ -149,6 +149,7 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_FERROSITE_SAND)
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AMBROSIUM)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ZANITE)
@@ -176,6 +177,7 @@ public class HighlandsBiomeBuilders {
                 ARCTIC_EFFECTS,
                 spawnSettingsBuilder.addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16).addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 10, 1, 2)).addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1)).build(),
                 generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
@@ -206,6 +208,7 @@ public class HighlandsBiomeBuilders {
                 IRRADIATED_EFFECTS,
                 spawnSettingsBuilder.addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16).addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1)).build(),
                 generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
@@ -236,6 +239,7 @@ public class HighlandsBiomeBuilders {
                 AERCLOUD_SEA_EFFECTS,
                 spawnSettingsBuilder.addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16).addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1)).build(),
                 generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.COLD_AERCLOUD)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.BLUE_AERCLOUD)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.GOLDEN_AERCLOUD)
