@@ -96,6 +96,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropNone(AetherIIBlocks.HIGHLANDS_BUSH.get());
         this.dropSelf(AetherIIBlocks.HIGHLANDS_BUSH_STEM.get());
 
+        this.add(AetherIIBlocks.ORANGE_TREE.get(), (tree) -> this.droppingOrangeTree(tree, AetherIIItems.ORANGE.get()));
+
         this.dropNone(AetherIIBlocks.AETHER_SHORT_GRASS.get());
         this.dropNone(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
         this.dropNone(AetherIIBlocks.AETHER_LONG_GRASS.get());

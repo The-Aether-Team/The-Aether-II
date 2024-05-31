@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.providers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.natural.AetherLeavesPileBlock;
+import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -186,6 +188,21 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .element().from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F).rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end().shade(true).face(Direction.NORTH).texture("#stem").end().face(Direction.SOUTH).texture("#stem").end().end()
                 .element().from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F).rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end().shade(true).face(Direction.WEST).texture("#stem").end().face(Direction.EAST).texture("#stem").end().end()
                 .renderType(new ResourceLocation("cutout"));
+    }
+
+    public void orangeTree(Block block) {
+        String blockName = this.name(block);
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            DoubleBlockHalf halfProperty = state.getValue(OrangeTreeBlock.HALF);
+            int age = state.getValue(OrangeTreeBlock.AGE);
+            boolean lower = halfProperty == DoubleBlockHalf.LOWER;
+            int bottomAge = age == 3 ? 2 : age;
+            int topAge = Math.max(age, 2);
+            String halfString = lower ? "_bottom_" : "_top_";
+            ResourceLocation location = lower ? this.extend(this.texture(blockName, "natural/"), halfString + bottomAge) : this.extend(this.texture(blockName, "natural/"), halfString + topAge);
+            ModelFile model = this.models().cross(blockName + (lower ? (halfString + bottomAge) : (halfString + topAge)), location).renderType(new ResourceLocation("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
     }
 
     public void grass(Block block) {

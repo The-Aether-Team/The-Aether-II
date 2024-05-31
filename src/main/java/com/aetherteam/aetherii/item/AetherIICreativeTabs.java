@@ -151,6 +151,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
+                output.accept(AetherIIBlocks.ORANGE_TREE.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES_PILE.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAVES_PILE.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_LEAVES_PILE.get());

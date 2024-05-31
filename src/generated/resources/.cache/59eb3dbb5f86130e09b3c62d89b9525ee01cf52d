@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T12:40:08.6597471	Loot Tables
+// 1.20.4	2024-05-31T13:17:48.4253636	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -70,6 +70,7 @@ d0bc73c482f0ed62de0521c8aaf08864532df5cb data/aether_ii/loot_tables/blocks/holys
 8d3381ef356509456e812518a8e781bb41a7c942 data/aether_ii/loot_tables/blocks/mossy_holystone_slab.json
 1423b2e8e6a0120326dbb10ce4e9a84c0d8b0e17 data/aether_ii/loot_tables/blocks/mossy_holystone_stairs.json
 14ec60320f19886621ab918ffed7b9598faca3ca data/aether_ii/loot_tables/blocks/mossy_holystone_wall.json
+ce909fb8043adaade564fb6084b09d148d58e4a9 data/aether_ii/loot_tables/blocks/orange_tree.json
 b1185d061605abf2afc48ec5ef4a2e13349d21be data/aether_ii/loot_tables/blocks/potted_amberoot_sapling.json
 cba1efbca0df296a1db5b5154a427cd91b964c84 data/aether_ii/loot_tables/blocks/potted_greatboa_sapling.json
 d4b235e55749664b9022df3a172f7c546d676040 data/aether_ii/loot_tables/blocks/potted_greatoak_sapling.json
