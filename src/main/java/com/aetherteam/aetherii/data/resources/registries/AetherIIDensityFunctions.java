@@ -40,8 +40,8 @@ public class AetherIIDensityFunctions {
                 8.0D // smear scale multiplier, capped at 8
         ));
 
-        context.register(CLOUDBED_BASE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.00375D, noise.getOrThrow(AetherIINoises.CLOUDBED_BASE)));
-        context.register(CLOUDBED_Y_OFFSET, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.0025D, noise.getOrThrow(AetherIINoises.CLOUDBED_Y_OFFSET)));
+        context.register(CLOUDBED_BASE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375D, noise.getOrThrow(AetherIINoises.CLOUDBED_BASE)));
+        context.register(CLOUDBED_Y_OFFSET, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25D, noise.getOrThrow(AetherIINoises.CLOUDBED_Y_OFFSET)));
     }
 
     public static DensityFunction getFunction(HolderGetter<DensityFunction> densityFunctions, ResourceKey<DensityFunction> key) {
