@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.block.natural.AetherLeavesPileBlock;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -75,6 +76,7 @@ public class AetherIIBlockBuilders {
                 .sound(SoundType.WOOL)
                 .noOcclusion()
                 .dynamicShape()
+                .isValidSpawn((pState, pLevel, pPos, pValue) -> pValue == AetherIIEntityTypes.ZEPHYR.get())
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .isSuffocating(AetherIIBlockBuilders::never)
                 .isViewBlocking(AetherIIBlockBuilders::never);

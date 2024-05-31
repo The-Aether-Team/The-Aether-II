@@ -53,8 +53,25 @@
     ]
   ],
   "has_precipitation": true,
-  "spawn_costs": {},
+  "spawn_costs": {
+    "aether_ii:zephyr": {
+      "charge": 0.6,
+      "energy_budget": 0.16
+    }
+  },
+
   "spawners": {
+    "aether_aerwhale": [],
+    "aether_darkness_monster": [],
+    "aether_sky_monster": [
+      {
+        "type": "aether_ii:zephyr",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
+    "aether_surface_monster": [],
     "ambient": [],
     "axolotls": [],
     "creature": [],

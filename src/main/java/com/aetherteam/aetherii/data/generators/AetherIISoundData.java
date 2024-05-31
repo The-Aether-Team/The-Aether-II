@@ -119,6 +119,23 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.entity.aerbunny.lift")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT,
+                definition().with(sound("aether_ii:entity/zephyr/shoot"))
+                        .subtitle("subtitles.aether_ii.entity.zephyr.shoot")
+        );
+        /*this.add(AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT,
+                definition().with(sound("aether:entity/zephyr/call"))
+                        .subtitle("subtitles.aether.entity.zephyr.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_ZEPHYR_DEATH,
+                definition().with(sound("aether:entity/zephyr/call"))
+                        .subtitle("subtitles.aether.entity.zephyr.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_ZEPHYR_HURT,
+                definition().with(sound("aether:entity/zephyr/call"))
+                        .subtitle("subtitles.aether.entity.zephyr.hurt")
+        );*/
+
         // Music
 //        this.add(AetherIISoundEvents.MUSIC_HIGHFIELDS,
 //                definition().with(
