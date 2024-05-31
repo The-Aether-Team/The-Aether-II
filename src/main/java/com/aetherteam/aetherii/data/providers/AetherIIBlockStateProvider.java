@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
+import com.aetherteam.aetherii.block.natural.AetherLeavesPileBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
@@ -13,11 +13,10 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvider {
     public AetherIIBlockStateProvider(PackOutput output, String id, ExistingFileHelper helper) {
@@ -191,6 +190,29 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void carpet(Block block, Block baseBlock, String location) {
         simpleBlock(block, models().singleTexture(name(block), mcLoc("block/carpet"), "wool", texture(location + name(baseBlock))));
+    }
+
+    public void leavesPile(Block block, Block base) {
+        ResourceLocation texture = this.texture("natural/" + this.name(base));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            int i = state.getValue(AetherLeavesPileBlock.PILES);
+            boolean firstState = i == 1;
+            String name = firstState ? this.name(block) : this.name(block) + i;
+            BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
+            ModelFile model = modelBuilder
+                    .texture("particle", texture)
+                    .texture("texture", texture)
+                    .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
+                    .face(Direction.DOWN).texture("#texture").end()
+                    .face(Direction.UP).texture("#texture").end()
+                    .face(Direction.NORTH).texture("#texture").end()
+                    .face(Direction.SOUTH).texture("#texture").end()
+                    .face(Direction.EAST).texture("#texture").end()
+                    .face(Direction.WEST).texture("#texture").end()
+                    .end()
+                    .renderType(new ResourceLocation("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, AetherLeavesPileBlock.PERSISTENT);
     }
 
     public void skyrootCraftingTable(Block block, Block baseBlock, String location) {

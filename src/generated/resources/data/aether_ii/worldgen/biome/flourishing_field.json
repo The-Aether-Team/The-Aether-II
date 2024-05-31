@@ -36,7 +36,9 @@
     [],
     [
       "aether_ii:moa_nest",
-      "aether_ii:flourishing_field_trees"
+      "aether_ii:flourishing_field_trees",
+      "aether_ii:highlands_bush_patch",
+      "aether_ii:blueberry_bush_patch"
     ],
     [
       "aether_ii:cold_aercloud",

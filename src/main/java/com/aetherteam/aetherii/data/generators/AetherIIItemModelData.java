@@ -137,6 +137,17 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HIGHLANDS_BUSH.get());
         this.itemBlockFlat(AetherIIBlocks.HIGHLANDS_BUSH_STEM.get(), "natural/");
 
+        this.itemBlock(AetherIIBlocks.SKYROOT_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYPLANE_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYBIRCH_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYPINE_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.WISPTOP_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATOAK_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES_PILE.get());
+
         this.itemBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 
         this.itemBlock(AetherIIBlocks.SKYROOT_PLANKS.get());
@@ -199,7 +210,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());
         this.itemBlock(AetherIIBlocks.CLOUDWOOL_CARPET.get());
 
-        this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get() );
+        this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get());
         this.itemBlock(AetherIIBlocks.ZANITE_BLOCK.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_BLOCK.get());
 

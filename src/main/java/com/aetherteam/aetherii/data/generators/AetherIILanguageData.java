@@ -82,6 +82,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH_STEM, "Highlands Bush Stem");
 
+        this.addBlock(AetherIIBlocks.SKYROOT_LEAVES_PILE, "Skyroot Leaves Pile");
+        this.addBlock(AetherIIBlocks.SKYPLANE_LEAVES_PILE, "Skyplane Leaves Pile");
+        this.addBlock(AetherIIBlocks.SKYBIRCH_LEAVES_PILE, "Skybirch Leaves Pile");
+        this.addBlock(AetherIIBlocks.SKYPINE_LEAVES_PILE, "Skypine Leaves Pile");
+        this.addBlock(AetherIIBlocks.WISPROOT_LEAVES_PILE, "Wisproot Leaves Pile");
+        this.addBlock(AetherIIBlocks.WISPTOP_LEAVES_PILE, "Wisptop Leaves Pile");
+        this.addBlock(AetherIIBlocks.GREATROOT_LEAVES_PILE, "Greatroot Leaves Pile");
+        this.addBlock(AetherIIBlocks.GREATOAK_LEAVES_PILE, "Greatoak Leaves Pile");
+        this.addBlock(AetherIIBlocks.GREATBOA_LEAVES_PILE, "Greatboa Leaves Pile");
+        this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES_PILE, "Amberoot Leaves Pile");
+
         this.addBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS, "Woven Skyroot Sticks");
 
         this.addBlock(AetherIIBlocks.SKYROOT_PLANKS, "Skyroot Planks");

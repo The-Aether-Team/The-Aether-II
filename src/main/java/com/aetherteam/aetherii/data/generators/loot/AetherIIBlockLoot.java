@@ -96,6 +96,17 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropNone(AetherIIBlocks.HIGHLANDS_BUSH.get());
         this.dropSelf(AetherIIBlocks.HIGHLANDS_BUSH_STEM.get());
 
+        this.dropNone(AetherIIBlocks.SKYROOT_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.SKYPLANE_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.SKYBIRCH_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.SKYPINE_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.WISPROOT_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.WISPTOP_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.GREATROOT_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.GREATOAK_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.GREATBOA_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.AMBEROOT_LEAVES_PILE.get());
+
         this.dropSelf(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 
         this.dropSelf(AetherIIBlocks.SKYROOT_PLANKS.get());

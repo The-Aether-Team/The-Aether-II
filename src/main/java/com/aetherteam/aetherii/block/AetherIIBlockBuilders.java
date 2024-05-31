@@ -1,13 +1,13 @@
 package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
+import com.aetherteam.aetherii.block.natural.AetherLeavesPileBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -39,7 +39,26 @@ public class AetherIIBlockBuilders {
                 .ignitedByLava();
     }
 
-    public static Block leaves(MapColor mapColor, Supplier<SimpleParticleType> leavesParticle) {
+    public static Block leavesPile(MapColor mapColor) {
+        return new AetherLeavesPileBlock(
+                BlockBehaviour.Properties.of()
+                        .mapColor(mapColor)
+                        .strength(0.2F)
+                        .randomTicks()
+                        .sound(SoundType.GRASS)
+                        .noOcclusion()
+                        .replaceable()
+                        .forceSolidOff()
+                        .isValidSpawn(AetherIIBlockBuilders::ocelotOrParrot)
+                        .isSuffocating(AetherIIBlockBuilders::never)
+                        .isViewBlocking(AetherIIBlockBuilders::never)
+                        .ignitedByLava()
+                        .pushReaction(PushReaction.DESTROY)
+                        .isRedstoneConductor(AetherIIBlockBuilders::never)
+        );
+    }
+
+    public static Block leaves(MapColor mapColor, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
         return new AetherLeavesBlock(
                 BlockBehaviour.Properties.of()
                         .mapColor(mapColor)
@@ -53,7 +72,7 @@ public class AetherIIBlockBuilders {
                         .ignitedByLava()
                         .pushReaction(PushReaction.DESTROY)
                         .isRedstoneConductor(AetherIIBlockBuilders::never),
-                leavesParticle
+                leavesParticle, leavesPile
         );
     }
 

@@ -148,6 +148,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
+                output.accept(AetherIIBlocks.SKYROOT_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.SKYPLANE_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.SKYBIRCH_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.SKYPINE_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.WISPROOT_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.WISPTOP_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.GREATROOT_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.GREATOAK_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.GREATBOA_LEAVES_PILE.get());
+                output.accept(AetherIIBlocks.AMBEROOT_LEAVES_PILE.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "natural_blocks"))

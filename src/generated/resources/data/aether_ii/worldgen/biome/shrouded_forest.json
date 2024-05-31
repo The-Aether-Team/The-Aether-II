@@ -34,7 +34,10 @@
     ],
     [],
     [],
-    [],
+    [
+      "aether_ii:highlands_bush_patch",
+      "aether_ii:blueberry_bush_patch"
+    ],
     [
       "aether_ii:cold_aercloud",
       "aether_ii:blue_aercloud",

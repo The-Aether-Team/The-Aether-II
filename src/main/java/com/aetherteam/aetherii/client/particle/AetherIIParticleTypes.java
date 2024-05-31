@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.particle;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.AetherIIClient;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
