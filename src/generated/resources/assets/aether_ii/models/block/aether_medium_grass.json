@@ -3,6 +3,7 @@
   "textures": {
     "cross_1": "aether_ii:block/natural/aether_medium_grass_1",
     "cross_2": "aether_ii:block/natural/aether_medium_grass_2",
-    "cross_3": "aether_ii:block/natural/aether_medium_grass_3"
+    "cross_3": "aether_ii:block/natural/aether_medium_grass_3",
+    "particle": "aether_ii:block/natural/aether_medium_grass"
   }
 }
