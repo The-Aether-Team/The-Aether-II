@@ -59,7 +59,8 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         super.animateTick(state, level, pos, random);
-        if (random.nextInt(200) == 0) {
+        int bound = level.isRaining() ? 100 : 200;
+        if (random.nextInt(bound) == 0) {
             this.spawnLeavesParticles(level, pos, random);
         }
     }
