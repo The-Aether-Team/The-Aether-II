@@ -15,7 +15,7 @@ public class PerlinNoiseFunction implements DensityFunction {
 
     public static final KeyDispatchDataCodec<PerlinNoiseFunction> CODEC = KeyDispatchDataCodec.of(RecordCodecBuilder.mapCodec(
             p_208798_ -> p_208798_.group(
-                            NormalNoise.NoiseParameters.CODEC.fieldOf("noise").forGetter((func) -> func.params),
+                            NormalNoise.NoiseParameters.DIRECT_CODEC.fieldOf("noise").forGetter((func) -> func.params),
                             Codec.DOUBLE.fieldOf("xz_scale").forGetter((func) -> func.xzScale),
                             Codec.DOUBLE.fieldOf("y_scale").forGetter((func) -> func.yScale),
                             Codec.LONG.fieldOf("seed").forGetter((func) -> func.seed)
@@ -23,16 +23,16 @@ public class PerlinNoiseFunction implements DensityFunction {
                     .apply(p_208798_, PerlinNoiseFunction::new)));
 
     public final PerlinNoise noise;
-    public final Holder<NormalNoise.NoiseParameters> params;
+    public final NormalNoise.NoiseParameters params;
     private final long seed;
     private final double xzScale;
     private final double yScale;
 
-    public PerlinNoiseFunction(Holder<NormalNoise.NoiseParameters> params, double xzScale, double yScale, long seed) {
-        this(PerlinNoise.create(new XoroshiroRandomSource(seed), params.value().firstOctave(), params.value().amplitudes()), params, xzScale, yScale, seed);
+    public PerlinNoiseFunction(NormalNoise.NoiseParameters params, double xzScale, double yScale, long seed) {
+        this(PerlinNoise.create(new XoroshiroRandomSource(seed), params.firstOctave(), params.amplitudes()), params, xzScale, yScale, seed);
     }
 
-    private PerlinNoiseFunction(PerlinNoise noise, Holder<NormalNoise.NoiseParameters> params, double xzScale, double yScale, long seed) {
+    private PerlinNoiseFunction(PerlinNoise noise, NormalNoise.NoiseParameters params, double xzScale, double yScale, long seed) {
         this.seed = seed;
         this.params = params;
         this.noise = noise;
