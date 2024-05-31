@@ -49,7 +49,7 @@
       "aether_ii:storm_aercloud"
     ]
   ],
-"has_precipitation": true,
+  "has_precipitation": true,
   "spawn_costs": {
     "aether_ii:zephyr": {
       "charge": 0.6,
