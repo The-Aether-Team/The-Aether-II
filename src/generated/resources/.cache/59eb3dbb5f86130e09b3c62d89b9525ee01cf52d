@@ -1,8 +1,11 @@
-// 1.20.4	2024-05-30T13:54:21.1257359	Loot Tables
+// 1.20.4	2024-05-31T13:41:34.0885563	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
 2a86a9bdc0455369b0dffc142c983d9cc2431881 data/aether_ii/loot_tables/blocks/aether_grass_block.json
+b6d02517c63cfa1beec529e728acf91d2533a949 data/aether_ii/loot_tables/blocks/aether_long_grass.json
+e2ecb71b1b6adfa3577b77b5d5e95e0991011b00 data/aether_ii/loot_tables/blocks/aether_medium_grass.json
+d6023f6c328d291a997bf67e22d918151d7ef19e data/aether_ii/loot_tables/blocks/aether_short_grass.json
 731fd5544a8d9f803fb12a76096c0207ebf0b3b4 data/aether_ii/loot_tables/blocks/agiosite.json
 6fb8846d2441c61e0e540f5cdc18713a691a44d8 data/aether_ii/loot_tables/blocks/agiosite_bricks.json
 9aba04945176eacf66d0e73344a8d4384a326c00 data/aether_ii/loot_tables/blocks/agiosite_brick_slab.json
@@ -113,3 +116,5 @@ cdfcc17076a9e382892f158e6f169977dddb09b0 data/aether_ii/loot_tables/blocks/wispt
 e5756cffe597096161bf2a7f3af7adba68222a90 data/aether_ii/loot_tables/blocks/zanite_block.json
 14295de5d712c2eb60971e1b93c5c7e75cefa3e7 data/aether_ii/loot_tables/blocks/zanite_ore.json
 89e8139cb32d67fc9c34fc0b29eaf2b249fcfe99 data/aether_ii/loot_tables/entities/aerbunny.json
+87e4e6dfb52885486bfb35920906bc37cddf22ef data/aether_ii/loot_tables/entities/flying_cow.json
+993161c1be68b71a45fb784a8334df800a044c63 data/aether_ii/loot_tables/entities/phyg.json

@@ -144,6 +144,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATOAK_SAPLING.get());
                 output.accept(AetherIIBlocks.GREATBOA_SAPLING.get());
                 output.accept(AetherIIBlocks.AMBEROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.AETHER_SHORT_GRASS.get());
+                output.accept(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
+                output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "natural_blocks"))
@@ -252,9 +255,9 @@ public class AetherIICreativeTabs {
             .icon(() -> new ItemStack(AetherIIItems.AERBUNNY_SPAWN_EGG.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {
+                output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
-                output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
             }).build());
 }
