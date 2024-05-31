@@ -29,6 +29,7 @@
     "aether_ii:wisproot_pressure_plate",
     "aether_ii:wisproot_stairs",
     "aether_ii:wisproot_slab",
-    "aether_ii:skyroot_crafting_table"
+    "aether_ii:skyroot_crafting_table",
+    "aether_ii:skyroot_chest"
   ]
 }

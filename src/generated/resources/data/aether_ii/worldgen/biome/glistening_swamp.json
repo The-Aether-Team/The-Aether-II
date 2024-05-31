@@ -16,7 +16,9 @@
     "water_fog_color": 6321302
   },
   "features": [
-    [],
+    [
+      "aether_ii:coast_ferrosite_sand"
+    ],
     [],
     [],
     [],
@@ -47,7 +49,26 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "aether_ii:aerbunny",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "aether_ii:flying_cow",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:phyg",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],

@@ -34,7 +34,10 @@
     ],
     [],
     [],
-    [],
+    [
+      "aether_ii:moa_nest",
+      "aether_ii:flourishing_field_trees"
+    ],
     [
       "aether_ii:cold_aercloud",
       "aether_ii:blue_aercloud",
@@ -49,7 +52,26 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "aether_ii:aerbunny",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "aether_ii:flying_cow",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:phyg",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],

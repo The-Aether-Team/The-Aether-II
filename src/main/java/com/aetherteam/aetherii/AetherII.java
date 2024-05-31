@@ -8,20 +8,24 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
 import com.aetherteam.aetherii.event.listeners.AerbunnyMountListener;
+import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
+import com.aetherteam.aetherii.event.listeners.abilities.ToolAbilityListener;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
+import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
+import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
+import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -52,6 +56,8 @@ public class AetherII {
                 AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIFeatures.FEATURES,
+                AetherIITrunkPlacerTypes.TRUNK_PLACERS,
+                AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
@@ -75,12 +81,15 @@ public class AetherII {
     }
 
     public static void commonSetup(FMLCommonSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            AetherIIBlocks.registerPots();
+        });
     }
 
     public static void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
+        ToolAbilityListener.listen(bus);
         PortalTeleportationListener.listen(bus);
         AerbunnyMountListener.listen(bus);
         WorldInteractionListener.listen(bus);
@@ -97,7 +106,8 @@ public class AetherII {
         registrar.play(RemountAerbunnyPacket.ID, RemountAerbunnyPacket::decode, payload -> payload.client(RemountAerbunnyPacket::handle));
 
         //SERVERBOUND
-        registrar.play(AerbunnyPuffPacket.ID, AerbunnyPuffPacket::decode, payload -> payload.client(AerbunnyPuffPacket::handle));
+        registrar.play(AerbunnyPuffPacket.ID, AerbunnyPuffPacket::decode, payload -> payload.server(AerbunnyPuffPacket::handle));
+        registrar.play(StepHeightPacket.ID, StepHeightPacket::decode, payload -> payload.server(StepHeightPacket::handle));
 
         // BOTH
         registrar.play(AerbunnyMountSyncPacket.ID, AerbunnyMountSyncPacket::decode, AerbunnyMountSyncPacket::handle);
