@@ -1,6 +1,6 @@
 {
   "carvers": {},
-  "downfall": 0.0,
+  "downfall": 0.4,
   "effects": {
     "fog_color": 15986943,
     "foliage_color": 11665355,
@@ -42,7 +42,7 @@
       "aether_ii:storm_aercloud"
     ]
   ],
-  "has_precipitation": false,
+"has_precipitation": true,
   "spawn_costs": {
     "aether_ii:zephyr": {
       "charge": 0.6,
@@ -77,5 +77,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.8
+  "temperature": -0.5
 }
