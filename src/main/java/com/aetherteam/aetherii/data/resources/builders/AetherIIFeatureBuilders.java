@@ -16,12 +16,12 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 public class AetherIIFeatureBuilders {
 
     @SuppressWarnings("deprecation")
-    public static CoastConfiguration createCoast(BlockState coastState, int minHeight, int maxHeight) {
+    public static CoastConfiguration createCoast(BlockState coastState) {
         return new CoastConfiguration(
                 BlockStateProvider.simple(coastState),
                 ConstantFloat.of(6.63F),
                 ConstantFloat.of(4.46F),
-                UniformInt.of(minHeight, maxHeight),
+                UniformInt.of(112, 156),
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         );
     }

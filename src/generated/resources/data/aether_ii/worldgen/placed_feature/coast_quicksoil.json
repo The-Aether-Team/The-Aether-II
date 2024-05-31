@@ -10,10 +10,10 @@
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "absolute": 96
+          "absolute": 156
         },
         "min_inclusive": {
-          "absolute": 32
+          "absolute": 112
         }
       }
     },
@@ -24,7 +24,7 @@
         "blocks": "minecraft:air"
       },
       "direction_of_search": "up",
-      "max_steps": 16,
+      "max_steps": 5,
       "target_condition": {
         "type": "minecraft:has_sturdy_face",
         "direction": "down"
