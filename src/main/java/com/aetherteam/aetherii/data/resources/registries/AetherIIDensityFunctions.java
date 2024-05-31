@@ -14,6 +14,7 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 public class AetherIIDensityFunctions {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("temperature");
     public static final ResourceKey<DensityFunction> EROSION = createKey("erosion");
+    public static final ResourceKey<DensityFunction> ELEVATION = createKey("elevation");
     public static final ResourceKey<DensityFunction> FACTOR = createKey("factor"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("bottom_slide"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("top_slide"); //TODO: Add to Datagen
@@ -31,6 +32,7 @@ public class AetherIIDensityFunctions {
 
         context.register(TEMPERATURE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.TEMPERATURE)));
         context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.EROSION)).abs());
+        context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
 
         context.register(BASE_3D_NOISE_HIGHLANDS, BlendedNoise.createUnseeded(
                 0.25D, // xz scale

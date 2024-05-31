@@ -11,6 +11,7 @@ public class AetherIINoises {
     public static final ResourceKey<NormalNoise.NoiseParameters> TEMPERATURE = createKey("temperature");
     public static final ResourceKey<NormalNoise.NoiseParameters> VEGETATION = createKey("vegetation");
     public static final ResourceKey<NormalNoise.NoiseParameters> EROSION = createKey("erosion");
+    public static final ResourceKey<NormalNoise.NoiseParameters> ELEVATION = createKey("elevation");
 
     private static ResourceKey<NormalNoise.NoiseParameters> createKey(String name) {
         return ResourceKey.create(Registries.NOISE, new ResourceLocation(AetherII.MODID, name));
@@ -20,6 +21,7 @@ public class AetherIINoises {
         register(context, TEMPERATURE, -9, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);
         register(context, VEGETATION, -8, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);
         register(context, EROSION, -9, 1.5, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        register(context, ELEVATION, -8, 1.0D, 0.2D, 0.0D, 0.0D, 0.0D);
     }
 
     public static void register(BootstapContext<NormalNoise.NoiseParameters> context, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double firstAmplitude, double... amplitudes) {
