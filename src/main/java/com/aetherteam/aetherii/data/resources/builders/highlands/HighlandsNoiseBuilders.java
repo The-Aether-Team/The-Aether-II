@@ -40,7 +40,7 @@ public class HighlandsNoiseBuilders {
         return SurfaceRules.sequence(
 
                 SurfaceRules.ifTrue(SurfaceRules.not(
-                        SurfaceRules.verticalGradient("grass", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))), SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface)),
+                        SurfaceRules.verticalGradient("grass", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))), SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface)),
 
                 SurfaceRules.ifTrue(SurfaceRules.not(
                         SurfaceRules.verticalGradient("dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT)),
@@ -58,10 +58,10 @@ public class HighlandsNoiseBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.TOP_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.2));
+        density = DensityFunctions.add(density, factorize(function, -0.25));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.1));
+        density = DensityFunctions.add(density, factorize(function, -0.25));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();

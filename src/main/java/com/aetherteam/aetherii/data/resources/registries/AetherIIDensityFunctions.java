@@ -46,8 +46,8 @@ public class AetherIIDensityFunctions {
         context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
 
         context.register(BASE_3D_NOISE, BlendedNoise.createUnseeded(
-                0.25D, // xz scale
-                0.05D, // y scale
+                0.175D, // xz scale
+                0.025D, // y scale
                 80D, // xz factor
                 160D, // y factor
                 8.0D // smear scale multiplier, capped at 8
@@ -58,7 +58,7 @@ public class AetherIIDensityFunctions {
 
     public static DensityFunction makeTerrainShaper(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, AMPLIFICATION);
-        density = DensityFunctions.add(density, DensityFunctions.constant(0.5D));
+        density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(0, 256, 0.5, 0.25));
         density = DensityFunctions.mul(density, getFunction(function, SLOPER));
         return density;
     }

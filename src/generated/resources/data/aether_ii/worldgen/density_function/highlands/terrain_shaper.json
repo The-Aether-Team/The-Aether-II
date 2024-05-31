@@ -2,8 +2,14 @@
   "type": "minecraft:mul",
   "argument1": {
     "type": "minecraft:add",
-    "argument1": 0.5,
-    "argument2": "aether_ii:highlands/amplification"
+    "argument1": "aether_ii:highlands/amplification",
+    "argument2": {
+      "type": "minecraft:y_clamped_gradient",
+      "from_value": 0.5,
+      "from_y": 0,
+      "to_value": 0.25,
+      "to_y": 256
+    }
   },
   "argument2": "aether_ii:highlands/sloper"
 }

@@ -54,7 +54,7 @@
                     "type": "minecraft:mul",
                     "argument1": {
                       "type": "minecraft:mul",
-                      "argument1": -0.2,
+                      "argument1": -0.27,
                       "argument2": "aether_ii:highlands/factor"
                     },
                     "argument2": "aether_ii:highlands/terrain_shaper"
@@ -67,7 +67,7 @@
               "type": "minecraft:mul",
               "argument1": {
                 "type": "minecraft:mul",
-                "argument1": -0.1,
+                "argument1": -0.27,
                 "argument2": "aether_ii:highlands/factor"
               },
               "argument2": "aether_ii:highlands/terrain_shaper"
@@ -112,7 +112,7 @@
             },
             "random_name": "minecraft:grass",
             "true_at_and_below": {
-              "below_top": 272
+              "below_top": 276
             }
           }
         },
@@ -167,7 +167,7 @@
             },
             "random_name": "minecraft:dirt",
             "true_at_and_below": {
-              "below_top": 272
+              "below_top": 276
             }
           }
         },
