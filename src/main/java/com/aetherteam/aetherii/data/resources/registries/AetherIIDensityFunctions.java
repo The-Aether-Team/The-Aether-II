@@ -57,9 +57,8 @@ public class AetherIIDensityFunctions {
                 8.0D // smear scale multiplier, capped at 8
         ));
 
-        // Use random seed values
-        context.register(CLOUDBED_BASE, new PerlinNoiseFunction(noise.getOrThrow(AetherIINoises.CLOUDBED_BASE), 0.375D, 0.0D, 42));
-        context.register(CLOUDBED_Y_OFFSET, new PerlinNoiseFunction(noise.getOrThrow(AetherIINoises.CLOUDBED_Y_OFFSET), 0.25D, 0.0D, 95));
+        context.register(CLOUDBED_BASE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1), 0.375D, 0.0D, 42));
+        context.register(CLOUDBED_Y_OFFSET, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.25D, 0.0D, 95));
 
         context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
     }
