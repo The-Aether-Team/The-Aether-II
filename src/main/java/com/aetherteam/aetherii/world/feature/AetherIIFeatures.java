@@ -15,4 +15,5 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<CoastConfiguration>> COAST = FEATURES.register("coast", () -> new CoastFeature(CoastConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MOA_NEST = FEATURES.register("moa_nest", () -> new MoaNestFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<AercloudConfiguration>> AERCLOUD = FEATURES.register("aercloud", () -> new AercloudFeature(AercloudConfiguration.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<CloudLayerFeature.Config>> CLOUD_LAYER = FEATURES.register("cloud_layer", () -> new CloudLayerFeature(CloudLayerFeature.Config.CODEC));
 }
