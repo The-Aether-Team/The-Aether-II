@@ -151,7 +151,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATBOA_SAPLING.get().asItem(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get().asItem()
         );
-
+        this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
         this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
                 AetherIIItems.ORANGE.get()
         );

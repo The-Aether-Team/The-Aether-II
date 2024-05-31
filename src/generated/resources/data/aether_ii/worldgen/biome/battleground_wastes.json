@@ -1,6 +1,6 @@
 {
   "carvers": {},
-  "downfall": 0.0,
+  "downfall": 0.3,
   "effects": {
     "fog_color": 15788253,
     "foliage_color": 11665355,
@@ -10,6 +10,12 @@
       "min_delay": 12000,
       "replace_current_music": true,
       "sound": "aether_ii:music.highlands.irradiated"
+    },
+    "particle": {
+      "options": {
+        "type": "aether_ii:irradiation"
+      },
+      "probability": 0.00625
     },
     "sky_color": 16575429,
     "water_color": 11457727,
@@ -46,7 +52,7 @@
       "aether_ii:storm_aercloud"
     ]
   ],
-  "has_precipitation": false,
+  "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
     "ambient": [],
@@ -58,5 +64,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.8
+  "temperature": 1.0
 }
