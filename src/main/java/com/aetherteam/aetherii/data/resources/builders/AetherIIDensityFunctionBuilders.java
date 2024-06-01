@@ -22,8 +22,13 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain_shaper"); //TODO: Add to Datagen
 
-    public static final ResourceKey<DensityFunction> CLOUDBED_BASE = createKey("cloudbed");
+    public static final ResourceKey<DensityFunction> FINAL_DENSITY = createKey("highlands/final_density");
+
+    public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("cloudbed_noise");
+    public static final ResourceKey<DensityFunction> CLOUDBED_FINAL = createKey("cloudbed_final");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("cloudbed_y_offset");
+
+    public static final ResourceKey<DensityFunction> CLOUDBED_DENSITY_SUBTRACTION = createKey("cloudbed_density_subtraction");
 
     private static ResourceKey<DensityFunction> createKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(AetherII.MODID, name));

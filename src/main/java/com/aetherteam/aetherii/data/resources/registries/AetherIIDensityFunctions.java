@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.data.resources.builders.AetherIIDensityFunctionBuilders;
+import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsNoiseBuilders;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -33,8 +34,21 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
 
         context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
 
-        context.register(CLOUDBED_BASE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1), 0.015D, 0.0D, 42));
+        context.register(FINAL_DENSITY, HighlandsNoiseBuilders.buildFinalDensity(function));
+
+        context.register(CLOUDBED_NOISE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1), 0.015D, 0.0D, 42));
         context.register(CLOUDBED_Y_OFFSET, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.01D, 0.0D, 95));
+
+        context.register(CLOUDBED_DENSITY_SUBTRACTION,
+                DensityFunctions.mul(
+                        DensityFunctions.add(
+                                getFunction(function, FINAL_DENSITY),
+                                DensityFunctions.constant(0.025D)),
+                        DensityFunctions.constant(25D))
+        );
+
+        context.register(CLOUDBED_FINAL, getFunction(function, CLOUDBED_DENSITY_SUBTRACTION));
+
     }
 
 }
