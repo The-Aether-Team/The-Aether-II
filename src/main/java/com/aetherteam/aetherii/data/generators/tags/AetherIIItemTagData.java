@@ -165,6 +165,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()
         );
+
         this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
                 AetherIIItems.ORANGE.get()
         );

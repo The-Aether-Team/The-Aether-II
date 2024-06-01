@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.AerbunnyMountListener;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
@@ -64,6 +65,7 @@ public class AetherII {
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
                 AetherIIMenuTypes.MENU_TYPES,
+                AetherIIMemoryModuleTypes.MEMORY_MODULE_TYPES,
                 AetherIIPoi.POI,
                 AetherIIDataAttachments.ATTACHMENTS
         };

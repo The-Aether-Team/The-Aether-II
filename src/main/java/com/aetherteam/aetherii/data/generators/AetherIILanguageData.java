@@ -218,8 +218,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
         this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
 
+        this.addItem(AetherIIItems.AERBUNNY_SPAWN_EGG, "Aerbunny Spawn Egg");
         this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
         this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
+        this.addItem(AetherIIItems.KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
 
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
@@ -227,6 +229,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.AERBUNNY, "Aerbunny");
         this.addEntityType(AetherIIEntityTypes.PHYG, "Phyg");
         this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
+        this.addEntityType(AetherIIEntityTypes.KIRRID, "Kirrid");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
 
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
