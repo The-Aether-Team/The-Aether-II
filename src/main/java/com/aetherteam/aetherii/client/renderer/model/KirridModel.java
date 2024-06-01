@@ -13,14 +13,16 @@ import net.minecraft.client.model.geom.builders.*;
 public class KirridModel<T extends Kirrid> extends HierarchicalModel<T> {
     private final ModelPart root;
     private final ModelPart head;
+    private final ModelPart headPlate;
     private final ModelPart neck;
-    private final ModelPart body;
+    public final ModelPart body;
 
     public KirridModel(ModelPart root) {
         this.root = root;
         this.body = root.getChild("body");
         this.neck = this.body.getChild("neck");
         this.head = this.neck.getChild("head");
+        this.headPlate = this.head.getChild("head_plate_r1");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -77,6 +79,9 @@ public class KirridModel<T extends Kirrid> extends HierarchicalModel<T> {
         this.head.xRot = headPitch * (float) (Math.PI / 180.0);
         this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
         this.animate(entity.jumpAnimationState, KirridAnimations.JUMP, ageInTicks, 1.0F);
+        this.animate(entity.ramAnimationState, KirridAnimations.START_RAM, ageInTicks, 1.0F);
+        this.animate(entity.eatAnimationState, KirridAnimations.EAT, ageInTicks, 1.0F);
+        this.headPlate.visible = entity.hasPlate();
     }
 
     @Override

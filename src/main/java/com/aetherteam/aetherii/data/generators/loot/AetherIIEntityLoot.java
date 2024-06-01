@@ -2,14 +2,17 @@ package com.aetherteam.aetherii.data.generators.loot;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
@@ -59,6 +62,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.AERBUNNY.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.KIRRID.get(), LootTable.lootTable());
+        this.add(AetherIIEntityTypes.KIRRID.get(), AetherIILoot.KIRRID_FUR, createKirridTable(AetherIIBlocks.CLOUDWOOL));
 
         this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -67,6 +71,14 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
         );
+    }
+
+    protected static LootTable.Builder createKirridTable(ItemLike pWoolItem) {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(pWoolItem)))
+                .withPool(
+                        LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootTableReference.lootTableReference(AetherIIEntityTypes.KIRRID.get().getDefaultLootTable()))
+                );
     }
 
 

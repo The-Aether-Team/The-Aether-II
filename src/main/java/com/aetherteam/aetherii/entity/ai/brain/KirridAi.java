@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridEatGrass;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridRamTarget;
+import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -18,14 +21,16 @@ import net.minecraft.world.entity.schedule.Activity;
 
 public class KirridAi {
     private static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
-    private static final UniformInt TIME_BETWEEN_LONG_JUMPS = UniformInt.of(600, 1200);
-    private static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 6000);
+    private static final UniformInt TIME_BETWEEN_LONG_JUMPS = UniformInt.of(600, 2400);
+    private static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 2400);
+    public static final UniformInt TIME_BETWEEN_EAT = UniformInt.of(600, 1200);
     private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat()
-            .selector(p_311675_ -> p_311675_ instanceof Kirrid kirrid && !kirrid.isBaby() && !kirrid.getBrain().hasMemoryValue(MemoryModuleType.RAM_COOLDOWN_TICKS) && kirrid.hasHorn() && p_311675_.level().getWorldBorder().isWithinBounds(p_311675_.getBoundingBox()));
+            .selector(p_311675_ -> p_311675_ instanceof Kirrid kirrid && !kirrid.isBaby() && !kirrid.getBrain().hasMemoryValue(MemoryModuleType.RAM_COOLDOWN_TICKS) && kirrid.hasPlate() && p_311675_.level().getWorldBorder().isWithinBounds(p_311675_.getBoundingBox()));
 
     public static void initMemories(Kirrid pKirrid, RandomSource pRandom) {
         pKirrid.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, TIME_BETWEEN_LONG_JUMPS.sample(pRandom));
         pKirrid.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, TIME_BETWEEN_RAMS.sample(pRandom));
+        pKirrid.getBrain().setMemory(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), TIME_BETWEEN_EAT.sample(pRandom));
     }
 
     public static Brain<?> makeBrain(Brain<Kirrid> pBrain) {
@@ -50,7 +55,8 @@ public class KirridAi {
                         new MoveToTargetSink(),
                         new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
                         new CountDownCooldownTicks(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS),
-                        new CountDownCooldownTicks(MemoryModuleType.RAM_COOLDOWN_TICKS)
+                        new CountDownCooldownTicks(MemoryModuleType.RAM_COOLDOWN_TICKS),
+                        new CountDownCooldownTicks(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get())
                 )
         );
     }
@@ -63,8 +69,9 @@ public class KirridAi {
                         Pair.of(0, new AnimalMakeLove(AetherIIEntityTypes.KIRRID.get(), 1.0F)),
                         Pair.of(1, new FollowTemptation(p_149446_ -> 1.25F)),
                         Pair.of(2, BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 1.25F)),
+                        Pair.of(3, new KirridEatGrass()),
                         Pair.of(
-                                3,
+                                4,
                                 new RunOne<>(
                                         ImmutableList.of(
                                                 Pair.of(RandomStroll.stroll(1.0F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new DoNothing(30, 60), 1)
@@ -104,7 +111,7 @@ public class KirridAi {
     }
 
     private static void initRamActivity(Brain<Kirrid> pBrain) {
-        /*pBrain.addActivityWithConditions(
+        pBrain.addActivityWithConditions(
                 Activity.RAM,
                 ImmutableList.of(
                         Pair.of(
@@ -112,22 +119,8 @@ public class KirridAi {
                                 new KirridRamTarget(
                                         p_149474_ -> TIME_BETWEEN_RAMS,
                                         RAM_TARGET_CONDITIONS,
-                                        3.0F,
-                                        p_309513_ -> p_309513_.isBaby() ? 1.0 : 2.5,
-                                        p_149468_ -> SoundEvents.GOAT_RAM_IMPACT,
-                                        p_218772_ -> SoundEvents.GOAT_HORN_BREAK
-                                )
-                        ),
-                        Pair.of(
-                                1,
-                                new PrepareRamNearestTarget<>(
-                                        p_218770_ -> TIME_BETWEEN_RAMS.getMinValue(),
-                                        4,
-                                        7,
-                                        1.25F,
-                                        RAM_TARGET_CONDITIONS,
-                                        20,
-                                        p_218768_ -> SoundEvents.GOAT_PREPARE_RAM
+                                        1.5F,
+                                        p_149468_ -> SoundEvents.GOAT_RAM_IMPACT
                                 )
                         )
                 ),
@@ -136,10 +129,10 @@ public class KirridAi {
                         Pair.of(MemoryModuleType.BREED_TARGET, MemoryStatus.VALUE_ABSENT),
                         Pair.of(MemoryModuleType.RAM_COOLDOWN_TICKS, MemoryStatus.VALUE_ABSENT)
                 )
-        );*/
+        );
     }
 
     public static void updateActivity(Kirrid pBrain) {
-        pBrain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.LONG_JUMP, Activity.IDLE));
+        pBrain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.LONG_JUMP, Activity.RAM, Activity.IDLE));
     }
 }

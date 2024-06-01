@@ -71,6 +71,8 @@ public class KirridBabyModel<T extends Kirrid> extends HierarchicalModel<T> {
         this.head.xRot = headPitch * (float) (Math.PI / 180.0);
         this.animateWalk(KirridBabyAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
         this.animate(entity.jumpAnimationState, KirridBabyAnimations.JUMP, ageInTicks, 1.0F);
+        this.animate(entity.eatAnimationState, KirridBabyAnimations.EAT, ageInTicks, 1.0F);
+        this.plate.visible = entity.hasPlate();
     }
 
     @Override
