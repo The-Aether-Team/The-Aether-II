@@ -43,9 +43,7 @@ public class KirridRamTarget extends Behavior<Kirrid> {
         return kirrid.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES).get().findClosest(p_311583_ -> {
             if (p_311583_ instanceof Kirrid otherKirrid && !kirrid.getBrain().hasMemoryValue(MemoryModuleType.RAM_COOLDOWN_TICKS) && !otherKirrid.getBrain().hasMemoryValue(MemoryModuleType.RAM_COOLDOWN_TICKS)) {
                 if (otherKirrid.hasPlate() && kirrid.hasPlate()) {
-                    if (!otherKirrid.isBaby() && !kirrid.isBaby()) {
-                        return true;
-                    }
+                    return !otherKirrid.isBaby() && !kirrid.isBaby();
                 }
             }
 
@@ -58,7 +56,15 @@ public class KirridRamTarget extends Behavior<Kirrid> {
     }
 
     protected boolean canStillUse(ServerLevel pLevel, Kirrid pEntity, long pGameTime) {
-        return pEntity.hasPlate() && pEntity.getBrain().hasMemoryValue(AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get());
+        if (pEntity.hasPlate() && pEntity.getBrain().hasMemoryValue(AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get())) {
+            Kirrid kirrid = getTarget(pEntity);
+            return kirrid != null && kirrid.isAlive() && pEntity.distanceToSqr(kirrid) < 128;
+        }
+        return false;
+    }
+
+    private Kirrid getTarget(Kirrid pAnimal) {
+        return pAnimal.getBrain().getMemory(AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get()).get();
     }
 
     protected void start(ServerLevel pLevel, Kirrid pEntity, long pGameTime) {

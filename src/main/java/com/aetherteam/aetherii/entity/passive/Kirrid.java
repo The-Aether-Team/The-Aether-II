@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.KirridAi;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
+import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
@@ -21,9 +22,11 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
@@ -32,6 +35,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.neoforged.neoforge.common.IShearable;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -89,6 +93,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
                 this.jumpAnimationState.stop();
             }
         }
+        super.onSyncedDataUpdated(pKey);
     }
 
     @Override
@@ -110,6 +115,20 @@ public class Kirrid extends AetherAnimal implements IShearable {
         this.entityData.define(DATA_HAS_PLATE, true);
         this.entityData.define(DATA_HAS_WOOL, true);
     }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new FallPathNavigation(this, level);
+    }
+
+    /**
+     * @return The maximum height from where the entity is allowed to jump (used in pathfinder), as a {@link Integer}.
+     */
+    @Override
+    public int getMaxFallDistance() {
+        return this.onGround() ? super.getMaxFallDistance() : 14;
+    }
+
 
     @Override
     public void ate() {
@@ -191,6 +210,25 @@ public class Kirrid extends AetherAnimal implements IShearable {
     @Override
     public Brain<Kirrid> getBrain() {
         return (Brain<Kirrid>) super.getBrain();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        this.handleFallSpeed();
+    }
+
+    /**
+     * Makes this entity fall slowly.
+     */
+    private void handleFallSpeed() {
+        AttributeInstance gravity = this.getAttribute(NeoForgeMod.ENTITY_GRAVITY.value());
+        if (gravity != null) {
+            double fallSpeed = Math.max(gravity.getValue() * -1.25, -0.1); // Entity isn't allowed to fall too slowly from gravity.
+            if (this.getDeltaMovement().y() < fallSpeed) {
+                this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
+            }
+        }
     }
 
     @Override

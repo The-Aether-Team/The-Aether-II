@@ -36,7 +36,6 @@ public class AetherIIRenderers {
 
         event.registerLayerDefinition(AetherModelLayers.KIRRID, KirridModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.KIRRID_WOOL, KirridWoolModel::createBodyLayer);
 
         event.registerLayerDefinition(AetherModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.ZEPHYR_TRANSPARENCY, ZephyrModel::createBodyLayer);

@@ -69,12 +69,11 @@ public class KirridAi {
                         Pair.of(0, new AnimalMakeLove(AetherIIEntityTypes.KIRRID.get(), 1.0F)),
                         Pair.of(1, new FollowTemptation(p_149446_ -> 1.25F)),
                         Pair.of(2, BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 1.25F)),
-                        Pair.of(3, new KirridEatGrass()),
                         Pair.of(
-                                4,
+                                3,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(RandomStroll.stroll(1.0F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new DoNothing(30, 60), 1)
+                                                Pair.of(RandomStroll.stroll(1.0F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridEatGrass(), 2), Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
                         )

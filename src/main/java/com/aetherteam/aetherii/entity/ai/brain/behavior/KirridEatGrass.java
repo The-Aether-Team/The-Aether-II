@@ -16,7 +16,7 @@ public class KirridEatGrass extends Behavior<Kirrid> {
     private int eatTick;
 
     public KirridEatGrass() {
-        super(ImmutableMap.of(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), MemoryStatus.VALUE_ABSENT), 600);
+        super(ImmutableMap.of(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), MemoryStatus.VALUE_ABSENT), 60);
 
     }
 
@@ -57,10 +57,5 @@ public class KirridEatGrass extends Behavior<Kirrid> {
         if (this.isValidTarget(pLevel, pEntity)) {
             this.finishEat(pLevel, pEntity);
         }
-    }
-
-    @Override
-    protected boolean timedOut(long pGameTime) {
-        return false;
     }
 }

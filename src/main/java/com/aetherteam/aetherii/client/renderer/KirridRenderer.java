@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.renderer;
 
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.layer.KirridWoolLayer;
 import com.aetherteam.aetherii.client.renderer.model.KirridBabyModel;
 import com.aetherteam.aetherii.client.renderer.model.KirridModel;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
@@ -21,7 +20,6 @@ public class KirridRenderer<T extends Kirrid> extends MultiBabyModelRenderer<T, 
         super(context, new KirridModel<>(context.bakeLayer(AetherModelLayers.KIRRID)), 0.5F);
         this.defaultModel = new KirridModel<>(context.bakeLayer(AetherModelLayers.KIRRID));
         this.babyModel = new KirridBabyModel<>(context.bakeLayer(AetherModelLayers.KIRRID_BABY));
-        this.addLayer(new KirridWoolLayer<>(this, context.getModelSet()));
     }
 
     @Override
