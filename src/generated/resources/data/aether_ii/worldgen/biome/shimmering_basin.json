@@ -37,7 +37,10 @@
     [
       "aether_ii:short_grass_patch",
       "aether_ii:medium_grass_patch",
-      "aether_ii:long_grass_patch"
+      "aether_ii:long_grass_patch",
+      "aether_ii:highlands_bush_patch",
+      "aether_ii:blueberry_bush_patch",
+      "aether_ii:orange_tree_patch"
     ],
     [
       "aether_ii:cold_aercloud",

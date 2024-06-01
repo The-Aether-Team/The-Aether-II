@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:wisptop_leaf_pile"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wisptop_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:wisptop_leaves"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wisptop_leaves"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:wisptop_leaf_pile"
+    ]
+  }
+}

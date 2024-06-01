@@ -1,8 +1,9 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
+import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
+import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
@@ -13,7 +14,8 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -175,6 +177,38 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void bush(Block block) {
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(this.bush(block, this.name(block) + "_stem")));
+    }
+
+    public void berryBush(Block block, Block stem) {
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(this.bush(block, this.name(stem))));
+    }
+
+    public ModelFile bush(Block block, String stem) {
+        return this.models().withExistingParent(this.name(block), this.mcLoc("block/block"))
+                .texture("particle", this.texture(this.name(block), "natural/")).texture("bush", this.texture(this.name(block), "natural/")).texture("stem", this.texture(stem, "natural/"))
+                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F).shade(true).allFaces((direction, builder) -> builder.texture("#bush").end()).end()
+                .element().from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F).rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end().shade(true).face(Direction.NORTH).texture("#stem").end().face(Direction.SOUTH).texture("#stem").end().end()
+                .element().from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F).rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end().shade(true).face(Direction.WEST).texture("#stem").end().face(Direction.EAST).texture("#stem").end().end()
+                .renderType(new ResourceLocation("cutout"));
+    }
+
+    public void orangeTree(Block block) {
+        String blockName = this.name(block);
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            DoubleBlockHalf halfProperty = state.getValue(OrangeTreeBlock.HALF);
+            int age = state.getValue(OrangeTreeBlock.AGE);
+            boolean lower = halfProperty == DoubleBlockHalf.LOWER;
+            int bottomAge = age == 3 ? 2 : age;
+            int topAge = Math.max(age, 2);
+            String halfString = lower ? "_bottom_" : "_top_";
+            ResourceLocation location = lower ? this.extend(this.texture(blockName, "natural/"), halfString + bottomAge) : this.extend(this.texture(blockName, "natural/"), halfString + topAge);
+            ModelFile model = this.models().cross(blockName + (lower ? (halfString + bottomAge) : (halfString + topAge)), location).renderType(new ResourceLocation("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
+    }
+
     public void grass(Block block) {
         ModelFile grass = this.models().withExistingParent(this.name(block), this.modLoc("block/tri_tinted_cross"))
                 .texture("particle", this.texture(this.name(block), "natural/"))
@@ -182,6 +216,30 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
                 .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
+    }
+
+    public void leavesPile(Block block, Block base) {
+        ResourceLocation texture = this.texture("natural/" + this.name(base));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            int i = state.getValue(AetherLeafPileBlock.PILES);
+            boolean firstState = i == 1;
+            boolean lastState = i == 16;
+            String name = firstState ? this.name(block) : this.name(block) + i;
+            BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
+            ModelFile model = modelBuilder.ao(lastState)
+                    .texture("particle", texture)
+                    .texture("texture", texture)
+                    .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
+                    .face(Direction.DOWN).texture("#texture").end()
+                    .face(Direction.UP).texture("#texture").end()
+                    .face(Direction.NORTH).texture("#texture").end()
+                    .face(Direction.SOUTH).texture("#texture").end()
+                    .face(Direction.EAST).texture("#texture").end()
+                    .face(Direction.WEST).texture("#texture").end()
+                    .end()
+                    .renderType(new ResourceLocation("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, AetherLeafPileBlock.PERSISTENT);
     }
 
     public void carpet(Block block, Block baseBlock, String location) {

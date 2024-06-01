@@ -137,9 +137,26 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
+        this.itemBlock(AetherIIBlocks.BLUEBERRY_BUSH.get());
+        this.itemBlockFlat(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), "natural/");
+        this.itemBlock(AetherIIBlocks.HIGHLANDS_BUSH.get());
+
+        this.orangeTree(AetherIIBlocks.ORANGE_TREE.get());
+
         this.itemBlockGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get(), "natural/");
         this.itemBlockGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), "natural/");
         this.itemBlockGrass(AetherIIBlocks.AETHER_LONG_GRASS.get(), "natural/");
+
+        this.itemBlock(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYPINE_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.WISPTOP_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
 
         this.itemBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 
@@ -207,7 +224,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());
         this.itemBlock(AetherIIBlocks.CLOUDWOOL_CARPET.get());
 
-        this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get() );
+        this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get());
         this.itemBlock(AetherIIBlocks.ZANITE_BLOCK.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_BLOCK.get());
 
