@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
-import com.aetherteam.aetherii.block.natural.PebbleBlock;
+import com.aetherteam.aetherii.block.natural.RockBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
@@ -187,8 +187,8 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         String blockName = this.name(block);
         ResourceLocation texture = this.texture(this.name(stone), "natural/");
         this.getVariantBuilder(block).forAllStates((state) -> {
-            Direction direction = state.getValue(PebbleBlock.FACING);
-            int pebbleCount = state.getValue(PebbleBlock.AMOUNT);
+            Direction direction = state.getValue(RockBlock.FACING);
+            int pebbleCount = state.getValue(RockBlock.AMOUNT);
             int offset = 0;
             switch (direction) {
                 case SOUTH -> offset = 180;

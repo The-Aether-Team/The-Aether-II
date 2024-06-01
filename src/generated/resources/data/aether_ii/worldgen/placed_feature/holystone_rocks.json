@@ -1,5 +1,5 @@
 {
-  "feature": "aether_ii:pebbles",
+  "feature": "aether_ii:holystone_rocks",
   "placement": [
     {
       "type": "minecraft:noise_threshold_count",

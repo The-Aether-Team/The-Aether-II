@@ -3,29 +3,23 @@ package com.aetherteam.aetherii.data.resources.registries.placement;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIPlacementBuilders;
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIFeatureUtils;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
-import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
 
 public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = AetherIIPlacementUtils.createKey("coast_quicksoil");
     public static final ResourceKey<PlacedFeature> COAST_FERROSITE_SAND = AetherIIPlacementUtils.createKey("coast_ferrosite_sand");
-    public static final ResourceKey<PlacedFeature> PEBBLES = AetherIIPlacementUtils.createKey("pebbles");
+    public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = AetherIIPlacementUtils.createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> MOA_NEST = AetherIIPlacementUtils.createKey("moa_nest");
     public static final ResourceKey<PlacedFeature> COLD_AERCLOUD = AetherIIPlacementUtils.createKey("cold_aercloud");
     public static final ResourceKey<PlacedFeature> BLUE_AERCLOUD = AetherIIPlacementUtils.createKey("blue_aercloud");
@@ -50,7 +44,7 @@ public class AetherIIMiscPlacements {
                 BiomeFilter.biome()
         );
 
-        AetherIIPlacementUtils.register(context, PEBBLES, configuredFeatures.getOrThrow(AetherIIMiscFeatures.PEBBLES),
+        AetherIIPlacementUtils.register(context, HOLYSTONE_ROCKS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.HOLYSTONE_ROCKS),
                 NoiseThresholdCountPlacement.of(-0.8, 5, 10),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_DIRT)), //todo
