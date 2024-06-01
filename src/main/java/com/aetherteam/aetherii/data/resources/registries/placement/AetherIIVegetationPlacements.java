@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.data.resources.registries.placement;
 
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIFeatureUtils;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -9,7 +8,6 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 

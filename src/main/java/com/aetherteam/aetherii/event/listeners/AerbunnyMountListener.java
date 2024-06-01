@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.event.listeners;
 
-import com.aetherteam.aetherii.event.hooks.PortalTeleportationHooks;
 import com.aetherteam.aetherii.event.hooks.AerbunnyMountHooks;
+import com.aetherteam.aetherii.event.hooks.PortalTeleportationHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
