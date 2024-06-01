@@ -17,9 +17,6 @@ import java.util.List;
 
 public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
 
-    public static final PerlinSimplexNoise BASE_NOISE = new PerlinSimplexNoise(new XoroshiroRandomSource(42), List.of(0, 1, 2, 3, 4));
-    public static final PerlinSimplexNoise Y_OFFSET = new PerlinSimplexNoise(new XoroshiroRandomSource(95), List.of(0, 1));
-
     public CloudbedFeature(Codec<Config> codec) {
         super(codec);
     }
