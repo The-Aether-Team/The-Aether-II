@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsNoiseBuilders;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -25,13 +24,10 @@ public class AetherIIDensityFunctions {
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain_shaper"); //TODO: Add to Datagen
 
-
     public static final ResourceKey<DensityFunction> CLOUDBED_BASE = createKey("cloudbed");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("cloudbed_y_offset");
 
     public static final ResourceKey<DensityFunction> ISLAND_CLOUDBED_BORDER = createKey("island_cloudbed_border");
-
-    public static final ResourceKey<DensityFunction> FINAL_DENSITY = createKey("highlands/final_density");
 
     private static ResourceKey<DensityFunction> createKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(AetherII.MODID, name));
@@ -65,12 +61,10 @@ public class AetherIIDensityFunctions {
 
         context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
 
-        context.register(FINAL_DENSITY, HighlandsNoiseBuilders.buildFinalDensity(function));
-
         context.register(CLOUDBED_BASE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1), 0.01D, 0.0D, 42));
         context.register(CLOUDBED_Y_OFFSET, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.0075D, 0.0D, 95));
 
-        context.register(ISLAND_CLOUDBED_BORDER, DensityFunctions.add(getFunction(function, FINAL_DENSITY), DensityFunctions.constant(0.1D)));
+        context.register(ISLAND_CLOUDBED_BORDER, DensityFunctions.add(getFunction(function, TERRAIN_SHAPER), DensityFunctions.constant(0.1D)));
     }
 
     public static DensityFunction makeTerrainShaper(HolderGetter<DensityFunction> function) {
