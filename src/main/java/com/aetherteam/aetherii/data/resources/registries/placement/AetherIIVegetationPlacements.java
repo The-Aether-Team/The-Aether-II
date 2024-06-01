@@ -9,10 +9,6 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.CountOnEveryLayerPlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.RarityFilter;
 import net.minecraft.world.level.levelgen.placement.*;
 
 public class AetherIIVegetationPlacements {

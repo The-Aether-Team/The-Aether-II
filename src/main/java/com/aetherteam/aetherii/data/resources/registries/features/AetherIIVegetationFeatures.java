@@ -17,8 +17,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
 import java.util.List;
 

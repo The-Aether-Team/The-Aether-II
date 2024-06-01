@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T19:25:33.3808434	Item Models: aether_ii
+// 1.20.4	2024-05-31T19:42:41.5712979	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -80,7 +80,6 @@ e3b849f6603be0ebb13307529d64e4de7d081c6c assets/aether_ii/models/item/greatroot_
 268a36338d5a5ffee7512515abea46290820bef1 assets/aether_ii/models/item/greatroot_wood.json
 71db11dbfb4109a0d05a6f9304da556bc38af138 assets/aether_ii/models/item/green_aercloud.json
 23fea31aca6045c4f86c605c5f94fe43399b77fc assets/aether_ii/models/item/highlands_bush.json
-27ec436fe384def98c1ce22032b58c498cb3cfe2 assets/aether_ii/models/item/highlands_bush_stem.json
 8e2ea2de4b9c40ce8d12bb8929db104621345611 assets/aether_ii/models/item/holystone.json
 0835f677ffa59ed15b6385fda54653f2ac513621 assets/aether_ii/models/item/holystone_axe.json
 a6ecedda3f29b3ee2813e021e444eda7e3160514 assets/aether_ii/models/item/holystone_bricks.json

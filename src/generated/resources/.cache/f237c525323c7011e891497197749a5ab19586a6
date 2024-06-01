@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T17:35:39.586233	Block States: aether_ii
+// 1.20.4	2024-05-31T19:42:41.5492996	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -54,7 +54,6 @@ ee7cdaf40dd62a66a533338c94e0ad22fb1470e1 assets/aether_ii/blockstates/greatroot_
 d103aedc0995c3a735ba5ed6ec3e0f09e04759ed assets/aether_ii/blockstates/greatroot_wood.json
 e13010aa4837aa4d1b7dbb19731e51f2d403a61a assets/aether_ii/blockstates/green_aercloud.json
 422eff8bd7a41f811444a9986c7d6e151f440a3f assets/aether_ii/blockstates/highlands_bush.json
-29217806d13cfc9e49ec50dc431f1d43ff81cd86 assets/aether_ii/blockstates/highlands_bush_stem.json
 e6a9bf0c4014bb4052365c4b9fba3adfbba19afc assets/aether_ii/blockstates/holystone.json
 1d2833d392f2d6451785ae9da8aabdfbfad71506 assets/aether_ii/blockstates/holystone_bricks.json
 9681ccf4fc04f0f1b2e221f54e731ad1986c4b8c assets/aether_ii/blockstates/holystone_brick_slab.json
@@ -270,7 +269,6 @@ df385252c1f87853292bf4fd70745bd4d7a954fd assets/aether_ii/models/block/greatroot
 9f4aa00a000e503453a3e9b881ec93a518f7c93b assets/aether_ii/models/block/greatroot_wood_horizontal.json
 7592c3979a003e681c46b9cb0608419df1a59b60 assets/aether_ii/models/block/green_aercloud.json
 12b0669ea6bc0af6360d4675154e3c0a82d1179c assets/aether_ii/models/block/highlands_bush.json
-8a901bce56e08c1451fc04c9a8ce39a5868a520b assets/aether_ii/models/block/highlands_bush_stem.json
 408aa3bbd69ef83a44045132fa6beb88167b0421 assets/aether_ii/models/block/holystone.json
 bfe4c66db2f4eb5b460083891b20c5b56af326aa assets/aether_ii/models/block/holystone_bricks.json
 ebf1bb2742568d5e1adce9c4fa3d225ff8db125c assets/aether_ii/models/block/holystone_brick_slab.json

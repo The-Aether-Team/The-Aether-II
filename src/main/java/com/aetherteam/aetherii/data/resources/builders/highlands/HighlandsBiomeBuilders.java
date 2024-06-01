@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-
-import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIMiscPlacements;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIOrePlacements;

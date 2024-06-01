@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T19:25:33.3698442	Loot Tables
+// 1.20.4	2024-05-31T19:42:41.563299	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -53,8 +53,7 @@ d9105bec7145c2ec377367e00a7af6f7711aa0b8 data/aether_ii/loot_tables/blocks/great
 5e5a9709fef79dfdcb25c8cc5615d734c77530cc data/aether_ii/loot_tables/blocks/greatroot_stairs.json
 ee2721e8e5e7885fb63442e3079091d3cddb3e17 data/aether_ii/loot_tables/blocks/greatroot_wood.json
 cef34749bb6448dd1154aa7ff226f1111e2d8f30 data/aether_ii/loot_tables/blocks/green_aercloud.json
-d04f63cf48d94b71e0553e86b3c597df1b7340c5 data/aether_ii/loot_tables/blocks/highlands_bush.json
-243274513565617e250b9e95e27c7088a67ca91e data/aether_ii/loot_tables/blocks/highlands_bush_stem.json
+7b34471dff4b86223481ff089e9d9f6c7ac21add data/aether_ii/loot_tables/blocks/highlands_bush.json
 ad537436c978b07f8ff457e16f0cdb4c00e72d31 data/aether_ii/loot_tables/blocks/holystone.json
 85ba0a1decc8346dc251a0f46508fb81bbf6d2b1 data/aether_ii/loot_tables/blocks/holystone_bricks.json
 9935575f71a98f16a4a21f3303538c606e76845c data/aether_ii/loot_tables/blocks/holystone_brick_slab.json

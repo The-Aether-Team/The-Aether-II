@@ -80,7 +80,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BLUEBERRY_BUSH, "Blueberry Bush");
         this.addBlock(AetherIIBlocks.BLUEBERRY_BUSH_STEM, "Blueberry Bush Stem");
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
-        this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH_STEM, "Highlands Bush Stem");
 
         this.addBlock(AetherIIBlocks.ORANGE_TREE, "Orange Tree");
 
