@@ -30,7 +30,7 @@ public class AetherIIFeatureBuilders {
         return new AercloudConfiguration(bounds, BlockStateProvider.simple(blockState));
     }
 
-    public static CloudbedFeature.Config cloudbed(BlockState blockState, BlockPredicate predicate, DensityFunction base, DensityFunction yOffset, int yLevel) {
-        return new CloudbedFeature.Config(BlockStateProvider.simple(blockState), predicate, base, yOffset, yLevel);
+    public static CloudbedFeature.Config cloudbed(BlockState blockState, BlockPredicate predicate, DensityFunction base, DensityFunction yOffset, int yLevel, double radius) {
+        return new CloudbedFeature.Config(BlockStateProvider.simple(blockState), predicate, base, yOffset, yLevel, radius);
     }
 }
