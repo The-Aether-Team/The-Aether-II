@@ -45,7 +45,7 @@ public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
                 double cloudCalc = cloudNoise.compute(new DensityFunction.SinglePointContext(xCoord, config.yLevel(), zCoord));
                 // A Y offset is then calculated and applied using a second, smoother and larger noise
                 double offsetCalc = yOffsetNoise.compute(new DensityFunction.SinglePointContext(xCoord, config.yLevel(), zCoord));
-                float realOffset = (float) Mth.lerp(Mth.inverseLerp(offsetCalc, -0.5, 0.5), 0D, config.maxYOffset());
+                float realOffset =  cosineInterp((float) Mth.inverseLerp(offsetCalc, -0.5, 0.5), 0F, (float) config.maxYOffset());
                 // We don't need to, and shouldn't, generate anything if the cloud noise value is below zero
                 if (cloudCalc >= 0) {
                     // Interpolate for some extra smoothness
