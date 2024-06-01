@@ -7,7 +7,7 @@
         "Name": "aether_ii:cold_aercloud"
       }
     },
-    "cloud_noise": "aether_ii:cloudbed",
+    "cloud_noise": "aether_ii:cloudbed_final",
     "cloud_radius": 5.0,
     "offset_max": 10.0,
     "offset_noise": "aether_ii:cloudbed_y_offset",

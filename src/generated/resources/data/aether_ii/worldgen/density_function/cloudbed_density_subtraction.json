@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:mul",
+  "argument1": 25.0,
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": 0.025,
+    "argument2": "aether_ii:highlands/final_density"
+  }
+}
