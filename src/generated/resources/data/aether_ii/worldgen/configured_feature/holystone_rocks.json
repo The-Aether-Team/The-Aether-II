@@ -13,7 +13,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "north",
-                    "pebble_amount": "1"
+                    "rock_amount": "1"
                   }
                 },
                 "weight": 1
@@ -23,7 +23,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "north",
-                    "pebble_amount": "2"
+                    "rock_amount": "2"
                   }
                 },
                 "weight": 2
@@ -33,7 +33,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "north",
-                    "pebble_amount": "3"
+                    "rock_amount": "3"
                   }
                 },
                 "weight": 3
@@ -43,7 +43,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "south",
-                    "pebble_amount": "1"
+                    "rock_amount": "1"
                   }
                 },
                 "weight": 1
@@ -53,7 +53,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "south",
-                    "pebble_amount": "2"
+                    "rock_amount": "2"
                   }
                 },
                 "weight": 2
@@ -63,7 +63,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "south",
-                    "pebble_amount": "3"
+                    "rock_amount": "3"
                   }
                 },
                 "weight": 3
@@ -73,7 +73,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "west",
-                    "pebble_amount": "1"
+                    "rock_amount": "1"
                   }
                 },
                 "weight": 1
@@ -83,7 +83,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "west",
-                    "pebble_amount": "2"
+                    "rock_amount": "2"
                   }
                 },
                 "weight": 2
@@ -93,7 +93,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "west",
-                    "pebble_amount": "3"
+                    "rock_amount": "3"
                   }
                 },
                 "weight": 3
@@ -103,7 +103,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "east",
-                    "pebble_amount": "1"
+                    "rock_amount": "1"
                   }
                 },
                 "weight": 1
@@ -113,7 +113,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "east",
-                    "pebble_amount": "2"
+                    "rock_amount": "2"
                   }
                 },
                 "weight": 2
@@ -123,7 +123,7 @@
                   "Name": "aether_ii:holystone_rock",
                   "Properties": {
                     "facing": "east",
-                    "pebble_amount": "3"
+                    "rock_amount": "3"
                   }
                 },
                 "weight": 3

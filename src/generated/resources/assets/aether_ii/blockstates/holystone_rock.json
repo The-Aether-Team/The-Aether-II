@@ -1,47 +1,47 @@
 {
   "variants": {
-    "facing=east,pebble_amount=1": {
+    "facing=east,rock_amount=1": {
       "model": "aether_ii:block/holystone_rock_1",
       "y": 90
     },
-    "facing=east,pebble_amount=2": {
+    "facing=east,rock_amount=2": {
       "model": "aether_ii:block/holystone_rock_2",
       "y": 90
     },
-    "facing=east,pebble_amount=3": {
+    "facing=east,rock_amount=3": {
       "model": "aether_ii:block/holystone_rock_3",
       "y": 90
     },
-    "facing=north,pebble_amount=1": {
+    "facing=north,rock_amount=1": {
       "model": "aether_ii:block/holystone_rock_1"
     },
-    "facing=north,pebble_amount=2": {
+    "facing=north,rock_amount=2": {
       "model": "aether_ii:block/holystone_rock_2"
     },
-    "facing=north,pebble_amount=3": {
+    "facing=north,rock_amount=3": {
       "model": "aether_ii:block/holystone_rock_3"
     },
-    "facing=south,pebble_amount=1": {
+    "facing=south,rock_amount=1": {
       "model": "aether_ii:block/holystone_rock_1",
       "y": 180
     },
-    "facing=south,pebble_amount=2": {
+    "facing=south,rock_amount=2": {
       "model": "aether_ii:block/holystone_rock_2",
       "y": 180
     },
-    "facing=south,pebble_amount=3": {
+    "facing=south,rock_amount=3": {
       "model": "aether_ii:block/holystone_rock_3",
       "y": 180
     },
-    "facing=west,pebble_amount=1": {
+    "facing=west,rock_amount=1": {
       "model": "aether_ii:block/holystone_rock_1",
       "y": 270
     },
-    "facing=west,pebble_amount=2": {
+    "facing=west,rock_amount=2": {
       "model": "aether_ii:block/holystone_rock_2",
       "y": 270
     },
-    "facing=west,pebble_amount=3": {
+    "facing=west,rock_amount=3": {
       "model": "aether_ii:block/holystone_rock_3",
       "y": 270
     }

@@ -21,7 +21,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class RockBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final IntegerProperty AMOUNT = AetherIIBlockStateProperties.PEBBLE_AMOUNT;
+    public static final IntegerProperty AMOUNT = AetherIIBlockStateProperties.ROCK_AMOUNT;
     protected static final VoxelShape SMALL_SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 3.0, 11.0);
     protected static final VoxelShape LARGE_SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 3.0, 14.0);
 

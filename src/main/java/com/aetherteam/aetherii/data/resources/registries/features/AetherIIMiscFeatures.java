@@ -27,17 +27,17 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = AetherIIFeatureUtils.registerKey("storm_aercloud");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        SimpleWeightedRandomList.Builder<BlockState> pebbles = new SimpleWeightedRandomList.Builder<>();
+        SimpleWeightedRandomList.Builder<BlockState> rocks = new SimpleWeightedRandomList.Builder<>();
         for (Direction facing : RockBlock.FACING.getPossibleValues()) {
             for (int amount : RockBlock.AMOUNT.getPossibleValues()) {
-                pebbles.add(AetherIIBlocks.HOLYSTONE_ROCK.get().defaultBlockState().setValue(RockBlock.FACING, facing).setValue(RockBlock.AMOUNT, amount), amount);
+                rocks.add(AetherIIBlocks.HOLYSTONE_ROCK.get().defaultBlockState().setValue(RockBlock.FACING, facing).setValue(RockBlock.AMOUNT, amount), amount);
             }
         }
 
         AetherIIFeatureUtils.register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), createCoast(AetherIIBlocks.QUICKSOIL.get().defaultBlockState()));
         AetherIIFeatureUtils.register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), createCoast(AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()));
 
-        AetherIIFeatureUtils.register(context, HOLYSTONE_ROCKS, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(pebbles), 4));
+        AetherIIFeatureUtils.register(context, HOLYSTONE_ROCKS, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(rocks), 4));
 
         AetherIIFeatureUtils.register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get());
 

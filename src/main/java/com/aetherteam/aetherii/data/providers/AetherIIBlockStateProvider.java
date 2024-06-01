@@ -183,19 +183,19 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
     }
 
-    public void pebble(Block block, Block stone) {
+    public void rock(Block block, Block stone) {
         String blockName = this.name(block);
         ResourceLocation texture = this.texture(this.name(stone), "natural/");
         this.getVariantBuilder(block).forAllStates((state) -> {
             Direction direction = state.getValue(RockBlock.FACING);
-            int pebbleCount = state.getValue(RockBlock.AMOUNT);
+            int rockCount = state.getValue(RockBlock.AMOUNT);
             int offset = 0;
             switch (direction) {
                 case SOUTH -> offset = 180;
                 case WEST -> offset = 270;
                 case EAST -> offset = 90;
             }
-            switch (pebbleCount) {
+            switch (rockCount) {
                 case 3 -> {
                     ModelFile model = models().getBuilder(blockName + "_3").texture("particle", texture).texture("texture", texture)
                             .element().from(2, 0, 2).to(8, 3, 8)
