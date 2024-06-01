@@ -45,7 +45,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                         AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
                         64,
-                        AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_FINAL),
+                        AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_NOISE),
                         5D,
                         AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
                         10D
