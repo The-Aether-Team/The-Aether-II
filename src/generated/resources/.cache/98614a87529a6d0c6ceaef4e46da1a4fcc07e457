@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T20:36:58.7870475	Item Models: aether_ii
+// 1.20.4	2024-06-01T12:10:39.5129929	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -130,6 +130,7 @@ f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_lo
 1db0b14a9f08c7b1c5ca8c71fb0e1b1da96a3fd2 assets/aether_ii/models/item/skyroot_sword.json
 864d20031c24920c72c0f8e8f8298927ea4eae4d assets/aether_ii/models/item/skyroot_trapdoor.json
 0440543351702f8f9e40da54f501c28cb33b5a3a assets/aether_ii/models/item/skyroot_trowel.json
+f2be45bfdf35ea73f411f9f3c2e486fea81adc2a assets/aether_ii/models/item/skyroot_twig.json
 85f1eae477c0a0f9951306b14b43e1e57222c3ae assets/aether_ii/models/item/skyroot_wood.json
 1cc8dfd49b23ca26e50bf530c06afb8814d63047 assets/aether_ii/models/item/storm_aercloud.json
 353df02d890df9f39f5891ed5858e4f0a3d83ec5 assets/aether_ii/models/item/stripped_skyroot_log.json

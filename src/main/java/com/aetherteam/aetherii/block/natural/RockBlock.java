@@ -25,8 +25,8 @@ public class RockBlock extends Block {
     protected static final VoxelShape SMALL_SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 3.0, 11.0);
     protected static final VoxelShape LARGE_SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 3.0, 14.0);
 
-    public RockBlock(Properties p_49795_) {
-        super(p_49795_);
+    public RockBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1));
     }
 
@@ -56,8 +56,8 @@ public class RockBlock extends Block {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState pState, BlockGetter pReader, BlockPos pPos) {
-        return pState.getFluidState().isEmpty();
+    public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+        return state.getFluidState().isEmpty();
     }
 
     @Override

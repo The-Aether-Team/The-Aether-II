@@ -19,6 +19,7 @@ import net.minecraft.world.level.levelgen.placement.*;
 public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = AetherIIPlacementUtils.createKey("coast_quicksoil");
     public static final ResourceKey<PlacedFeature> COAST_FERROSITE_SAND = AetherIIPlacementUtils.createKey("coast_ferrosite_sand");
+    public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = AetherIIPlacementUtils.createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = AetherIIPlacementUtils.createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> MOA_NEST = AetherIIPlacementUtils.createKey("moa_nest");
     public static final ResourceKey<PlacedFeature> COLD_AERCLOUD = AetherIIPlacementUtils.createKey("cold_aercloud");
@@ -43,6 +44,12 @@ public class AetherIIMiscPlacements {
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 BiomeFilter.biome()
         );
+
+        AetherIIPlacementUtils.register(context, SKYROOT_TWIGS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.SKYROOT_TWIGS),
+                NoiseThresholdCountPlacement.of(-0.8, 5, 10),
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_DIRT)), //todo
+                BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, HOLYSTONE_ROCKS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.HOLYSTONE_ROCKS),
                 NoiseThresholdCountPlacement.of(-0.8, 5, 10),

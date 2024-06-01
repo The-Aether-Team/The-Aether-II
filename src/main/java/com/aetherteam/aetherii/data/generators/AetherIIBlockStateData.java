@@ -80,6 +80,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.grass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
         this.grass(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
+        this.twig(AetherIIBlocks.SKYROOT_TWIG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.rock(AetherIIBlocks.HOLYSTONE_ROCK.get(), AetherIIBlocks.HOLYSTONE.get());
 
         this.block(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(), "natural/");

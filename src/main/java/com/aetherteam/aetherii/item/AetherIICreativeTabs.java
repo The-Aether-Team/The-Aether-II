@@ -147,6 +147,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_SHORT_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
+                output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()

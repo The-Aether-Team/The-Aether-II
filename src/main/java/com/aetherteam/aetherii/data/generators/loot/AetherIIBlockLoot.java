@@ -96,6 +96,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropNone(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
         this.dropNone(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
+        this.dropSelf(AetherIIBlocks.SKYROOT_TWIG.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_ROCK.get());
 
         this.dropSelf(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
