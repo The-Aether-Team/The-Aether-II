@@ -2,7 +2,7 @@
   "type": "aether_ii:cloudbed",
   "config": {
     "base_height": 64,
-    "base_noise": "aether_ii:island_cloudbed_border",
+    "base_noise": "aether_ii:highlands/final_density",
     "block": {
       "type": "minecraft:simple_state_provider",
       "state": {
