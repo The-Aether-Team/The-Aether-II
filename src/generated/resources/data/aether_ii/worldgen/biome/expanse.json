@@ -1,6 +1,6 @@
 {
   "carvers": {},
-  "downfall": 0.0,
+  "downfall": 0.5,
   "effects": {
     "fog_color": 0,
     "foliage_color": 11665355,
@@ -36,8 +36,24 @@
     ]
   ],
   "has_precipitation": false,
-  "spawn_costs": {},
+  "spawn_costs": {
+    "aether_ii:zephyr": {
+      "charge": 0.6,
+      "energy_budget": 0.16
+    }
+  },
   "spawners": {
+    "aether_aerwhale": [],
+    "aether_darkness_monster": [],
+    "aether_sky_monster": [
+      {
+        "type": "aether_ii:zephyr",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
+    "aether_surface_monster": [],
     "ambient": [],
     "axolotls": [],
     "creature": [],
@@ -47,5 +63,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.8
+  "temperature": 0.5
 }

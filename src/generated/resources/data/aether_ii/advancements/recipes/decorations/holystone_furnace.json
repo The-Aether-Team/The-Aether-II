@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_skyroot_crafting_table": {
+    "has_holystone_furnace": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_skyroot_crafting_table"
+      "has_holystone_furnace"
     ]
   ],
   "rewards": {

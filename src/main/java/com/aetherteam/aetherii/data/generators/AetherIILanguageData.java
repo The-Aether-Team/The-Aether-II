@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -24,8 +25,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AETHER_DIRT_PATH, "Aether Dirt Path");
 
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
+        this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
+        this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
         this.addBlock(AetherIIBlocks.AGIOSITE, "Agiosite");
 
@@ -62,6 +65,23 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATOAK_LEAVES, "Greatoak Leaves");
         this.addBlock(AetherIIBlocks.GREATBOA_LEAVES, "Greatboa Leaves");
         this.addBlock(AetherIIBlocks.AMBEROOT_LEAVES, "Amberoot Leaves");
+
+        this.addBlock(AetherIIBlocks.SKYROOT_SAPLING, "Skyroot Sapling");
+        this.addBlock(AetherIIBlocks.WISPROOT_SAPLING, "Wisproot Sapling");
+        this.addBlock(AetherIIBlocks.WISPTOP_SAPLING, "Wisptop Sapling");
+        this.addBlock(AetherIIBlocks.GREATROOT_SAPLING, "Greatroot Sapling");
+        this.addBlock(AetherIIBlocks.GREATOAK_SAPLING, "Greatoak Sapling");
+        this.addBlock(AetherIIBlocks.GREATBOA_SAPLING, "Greatboa Sapling");
+        this.addBlock(AetherIIBlocks.AMBEROOT_SAPLING, "Amberoot Sapling");
+
+        this.addBlock(AetherIIBlocks.POTTED_SKYROOT_SAPLING, "Potted Skyroot Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_WISPROOT_SAPLING, "Potted Wisproot Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_WISPTOP_SAPLING, "Potted Wisptop Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_AMBEROOT_SAPLING, "Potted Amberoot Sapling");
+
+        this.addBlock(AetherIIBlocks.AETHER_SHORT_GRASS, "Aether Short Grass");
+        this.addBlock(AetherIIBlocks.AETHER_MEDIUM_GRASS, "Aether Medium Grass");
+        this.addBlock(AetherIIBlocks.AETHER_LONG_GRASS, "Aether Long Grass");
 
         this.addBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS, "Woven Skyroot Sticks");
 
@@ -101,6 +121,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB, "Mossy Holystone Slab");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL, "Mossy Holystone Wall");
 
+        this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, "Irradiated Holystone Stairs");
+        this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB, "Irradiated Holystone Slab");
+        this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL, "Irradiated Holystone Wall");
+
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICKS, "Holystone Bricks");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS, "Holystone Brick Stairs");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
@@ -132,6 +156,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
 
 
@@ -194,6 +219,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
         this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
 
+        this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
+        this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
+        this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
+
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         this.addDamageTypeTooltip("slash", "\u00A79Slash\u00A7r Damage");
@@ -219,6 +248,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.STAB_KNOCKBACK.get(), "Stab Knockback");
         this.addAttribute(AetherIIAttributes.STAB_DAMAGE.get(), "Stab Damage");
 
+        this.addEntityType(AetherIIEntityTypes.AERBUNNY, "Aerbunny");
+        this.addEntityType(AetherIIEntityTypes.PHYG, "Phyg");
+        this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
+        this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
+
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_BUILDING_BLOCKS.get(), "Aether II Building Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_DUNGEON_BLOCKS.get(), "Aether II Dungeon Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_NATURAL_BLOCKS.get(), "Aether II Natural Blocks");
@@ -233,6 +267,29 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
         this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
+
+        this.addSubtitle("entity", "phyg.ambient", "Phyg oinks");
+        this.addSubtitle("entity", "phyg.death", "Phyg dies");
+        this.addSubtitle("entity", "phyg.hurt", "Phyg hurts");
+        this.addSubtitle("entity", "phyg.saddle", "Saddle equips");
+        this.addSubtitle("entity", "phyg.step", "Footsteps");
+
+        this.addSubtitle("entity", "flying_cow.ambient", "Flying Cow moos");
+        this.addSubtitle("entity", "flying_cow.death", "Flying Cow dies");
+        this.addSubtitle("entity", "flying_cow.hurt", "Flying Cow hurts");
+        this.addSubtitle("entity", "flying_cow.saddle", "Saddle equips");
+        this.addSubtitle("entity", "flying_cow.milk", "Flying Cow gets milked");
+        this.addSubtitle("entity", "flying_cow.step", "Footsteps");
+
+
+        this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
+        this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");
+        this.addSubtitle("entity", "aerbunny.lift", "Aerbunny squeaks");
+
+        this.addSubtitle("entity", "zephyr.shoot", "Zephyr spits");
+        this.addSubtitle("entity", "zephyr.ambient", "Zephyr blows");
+        this.addSubtitle("entity", "zephyr.death", "Zephyr dies");
+        this.addSubtitle("entity", "zephyr.hurt", "Zephyr hurts");
 
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
 

@@ -7,8 +7,10 @@
   "mixins": [
     "common.ItemStackMixin",
     "common.PlayerMixin",
+    "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
     "common.accessor.EntityAccessor",
+    "common.accessor.ServerGamePacketListenerImplAccessor",
     "common.accessor.SpreadingSnowyDirtBlockAccessor"
   ],
   "client": [
