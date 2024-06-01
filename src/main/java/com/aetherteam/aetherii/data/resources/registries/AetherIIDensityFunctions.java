@@ -36,7 +36,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
 
         context.register(FINAL_DENSITY, HighlandsNoiseBuilders.buildFinalDensity(function));
 
-        context.register(CLOUDBED_NOISE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1), 0.015D, 0.0D, 42));
+        context.register(CLOUDBED_NOISE, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1), 0.015D, 0.0D, 42), DensityFunctions.constant(2D)));
         context.register(CLOUDBED_Y_OFFSET, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.005D, 0.0D, 95));
     }
 
