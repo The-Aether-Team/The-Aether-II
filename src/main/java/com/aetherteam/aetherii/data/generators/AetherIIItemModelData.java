@@ -147,16 +147,16 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), "natural/");
         this.itemBlockGrass(AetherIIBlocks.AETHER_LONG_GRASS.get(), "natural/");
 
-        this.itemBlock(AetherIIBlocks.SKYROOT_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.SKYPLANE_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.SKYBIRCH_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.SKYPINE_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.WISPROOT_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.WISPTOP_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.GREATROOT_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.GREATOAK_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES_PILE.get());
-        this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.SKYPINE_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.WISPTOP_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
 
         this.itemBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 

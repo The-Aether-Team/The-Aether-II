@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
-import com.aetherteam.aetherii.block.natural.AetherLeavesPileBlock;
+import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,15 +31,14 @@ public class AetherIIBlockBuilders {
         );
     }
 
-    public static Block leavesPile(MapColor mapColor) {
-        return new AetherLeavesPileBlock(
+    public static Block leafPile(MapColor mapColor) {
+        return new AetherLeafPileBlock(
                 BlockBehaviour.Properties.of()
                         .mapColor(mapColor)
                         .strength(0.2F)
                         .randomTicks()
                         .sound(SoundType.GRASS)
                         .noOcclusion()
-                        .replaceable()
                         .forceSolidOff()
                         .isValidSpawn(AetherIIBlockBuilders::ocelotOrParrot)
                         .isSuffocating(AetherIIBlockBuilders::never)

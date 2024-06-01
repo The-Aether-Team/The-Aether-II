@@ -102,16 +102,16 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropNone(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
         this.dropNone(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
-        this.dropNone(AetherIIBlocks.SKYROOT_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.SKYPLANE_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.SKYBIRCH_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.SKYPINE_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.WISPROOT_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.WISPTOP_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.GREATROOT_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.GREATOAK_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.GREATBOA_LEAVES_PILE.get());
-        this.dropNone(AetherIIBlocks.AMBEROOT_LEAVES_PILE.get());
+        this.dropNone(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.SKYPINE_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.WISPROOT_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.WISPTOP_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.GREATROOT_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
+        this.dropNone(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
 
         this.dropSelf(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 

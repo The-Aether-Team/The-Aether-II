@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
-import com.aetherteam.aetherii.block.natural.AetherLeavesPileBlock;
+import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
@@ -217,11 +217,12 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     public void leavesPile(Block block, Block base) {
         ResourceLocation texture = this.texture("natural/" + this.name(base));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            int i = state.getValue(AetherLeavesPileBlock.PILES);
+            int i = state.getValue(AetherLeafPileBlock.PILES);
             boolean firstState = i == 1;
+            boolean lastState = i == 16;
             String name = firstState ? this.name(block) : this.name(block) + i;
             BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
-            ModelFile model = modelBuilder
+            ModelFile model = modelBuilder.ao(lastState)
                     .texture("particle", texture)
                     .texture("texture", texture)
                     .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
@@ -234,7 +235,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                     .end()
                     .renderType(new ResourceLocation("cutout"));
             return ConfiguredModel.builder().modelFile(model).build();
-        }, AetherLeavesPileBlock.PERSISTENT);
+        }, AetherLeafPileBlock.PERSISTENT);
     }
 
     public void carpet(Block block, Block baseBlock, String location) {

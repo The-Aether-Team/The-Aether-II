@@ -87,16 +87,16 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.grass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
         this.grass(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
-        this.leavesPile(AetherIIBlocks.SKYROOT_LEAVES_PILE.get(), AetherIIBlocks.SKYROOT_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.SKYPLANE_LEAVES_PILE.get(), AetherIIBlocks.SKYPLANE_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.SKYBIRCH_LEAVES_PILE.get(), AetherIIBlocks.SKYBIRCH_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.SKYPINE_LEAVES_PILE.get(), AetherIIBlocks.SKYPINE_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.WISPROOT_LEAVES_PILE.get(), AetherIIBlocks.WISPROOT_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.WISPTOP_LEAVES_PILE.get(), AetherIIBlocks.WISPTOP_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.GREATROOT_LEAVES_PILE.get(), AetherIIBlocks.GREATROOT_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.GREATOAK_LEAVES_PILE.get(), AetherIIBlocks.GREATOAK_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.GREATBOA_LEAVES_PILE.get(), AetherIIBlocks.GREATBOA_LEAVES.get());
-        this.leavesPile(AetherIIBlocks.AMBEROOT_LEAVES_PILE.get(), AetherIIBlocks.AMBEROOT_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), AetherIIBlocks.SKYROOT_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.SKYPLANE_LEAF_PILE.get(), AetherIIBlocks.SKYPLANE_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(), AetherIIBlocks.SKYBIRCH_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.SKYPINE_LEAF_PILE.get(), AetherIIBlocks.SKYPINE_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.WISPROOT_LEAF_PILE.get(), AetherIIBlocks.WISPROOT_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.WISPTOP_LEAF_PILE.get(), AetherIIBlocks.WISPTOP_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.GREATROOT_LEAF_PILE.get(), AetherIIBlocks.GREATROOT_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.GREATOAK_LEAF_PILE.get(), AetherIIBlocks.GREATOAK_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.GREATBOA_LEAF_PILE.get(), AetherIIBlocks.GREATBOA_LEAVES.get());
+        this.leavesPile(AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), AetherIIBlocks.AMBEROOT_LEAVES.get());
 
         this.block(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(), "natural/");
 
