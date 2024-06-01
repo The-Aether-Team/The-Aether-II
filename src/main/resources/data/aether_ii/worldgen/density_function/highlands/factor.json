@@ -1,0 +1,57 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": "aether_ii:highlands/erosion",
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": 0.45,
+        "value": {
+          "coordinate": "aether_ii:highlands/temperature",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": -0.5,
+              "value": 1
+            },
+            {
+              "derivative": 0.0,
+              "location": -0.4,
+              "value": 7.5
+            },
+            {
+              "derivative": 0.0,
+              "location": -0.3,
+              "value": 1
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.55,
+              "value": 1
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.65,
+              "value": 7.5
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.75,
+              "value": 1
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.55,
+        "value": 7.5
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.65,
+        "value": 1
+      }
+    ]
+  }
+}

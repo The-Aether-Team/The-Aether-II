@@ -14,7 +14,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
     @Override
     protected void registerModels() {
-        this.handheldItem(AetherIIItems.SKYROOT_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_PICKAXE.get(), "tools/");
@@ -22,7 +22,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.SKYROOT_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.SKYROOT_TROWEL.get(), "tools/");
 
-        this.handheldItem(AetherIIItems.HOLYSTONE_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.HOLYSTONE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.HOLYSTONE_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.HOLYSTONE_PICKAXE.get(), "tools/");
@@ -30,7 +30,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.HOLYSTONE_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.HOLYSTONE_TROWEL.get(), "tools/");
 
-        this.handheldItem(AetherIIItems.ZANITE_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.ZANITE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.ZANITE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.ZANITE_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.ZANITE_PICKAXE.get(), "tools/");
@@ -38,7 +38,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.ZANITE_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.ZANITE_TROWEL.get(), "tools/");
 
-        this.handheldItem(AetherIIItems.ARKENIUM_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.ARKENIUM_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.ARKENIUM_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.ARKENIUM_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.ARKENIUM_PICKAXE.get(), "tools/");
@@ -46,7 +46,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.ARKENIUM_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.ARKENIUM_TROWEL.get(), "tools/");
 
-        this.handheldItem(AetherIIItems.GRAVITITE_SWORD.get(), "weapons/");
+        this.handheldItem(AetherIIItems.GRAVITITE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_SPEAR.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_PICKAXE.get(), "tools/");
@@ -73,6 +73,12 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
 
+        this.eggItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+
+        this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
+
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         //TODO: Simplify with Block Item Model with a blockWithItem Method
@@ -82,8 +88,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AETHER_DIRT_PATH.get());
 
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
+        this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE.get());
 
@@ -120,6 +128,18 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES.get());
+
+        this.itemBlockFlat(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATROOT_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATOAK_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
+
+        this.itemBlockGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get(), "natural/");
+        this.itemBlockGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), "natural/");
+        this.itemBlockGrass(AetherIIBlocks.AETHER_LONG_GRASS.get(), "natural/");
 
         this.itemBlock(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 
@@ -159,6 +179,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
 
+        this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL.get(), AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
+
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICKS.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
@@ -190,6 +214,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.AMBROSIUM_TORCH.get(), "utility/");
         this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+        this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
     }
 }

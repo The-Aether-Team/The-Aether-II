@@ -67,11 +67,12 @@ public class AetherJigsawStructure extends Structure {
     private boolean extraSpawningChecks(GenerationContext context) {
         ChunkPos chunkpos = context.chunkPos();
         return context.chunkGenerator().getFirstOccupiedHeight(
-                chunkpos.getMiddleBlockX(),
-                chunkpos.getMiddleBlockZ(),
+                chunkpos.getWorldPosition().getX(),
+                chunkpos.getWorldPosition().getZ(),
                 Heightmap.Types.WORLD_SURFACE_WG,
                 context.heightAccessor(),
-                context.randomState()) > aboveBottom;
+                context.randomState())
+                > aboveBottom;
     }
 
     @Override

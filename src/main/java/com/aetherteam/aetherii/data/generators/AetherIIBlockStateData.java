@@ -20,10 +20,13 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.dirtPath(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
 
         this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");
+        this.block(AetherIIBlocks.FERROSITE_SAND.get(), "natural/");
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
+        this.block(AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
         this.block(AetherIIBlocks.AGIOSITE.get(), "natural/");
+
         this.block(AetherIIBlocks.AMBROSIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ZANITE_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ARKENIUM_ORE.get(), "natural/");
@@ -39,7 +42,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.log(AetherIIBlocks.SKYROOT_LOG.get());
         this.log(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.log(AetherIIBlocks.GREATROOT_LOG.get());
-        this.log(AetherIIBlocks.WISPROOT_LOG.get());
+        this.wisprootLog(AetherIIBlocks.WISPROOT_LOG.get());
         this.logDifferentTop(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
@@ -57,6 +60,26 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.GREATOAK_LEAVES.get(), "natural/");
         this.block(AetherIIBlocks.GREATBOA_LEAVES.get(), "natural/");
         this.block(AetherIIBlocks.AMBEROOT_LEAVES.get(), "natural/");
+
+        this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.GREATROOT_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.GREATOAK_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
+
+        this.pottedPlant(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(), AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_WISPROOT_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_WISPTOP_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_GREATROOT_SAPLING.get(), AetherIIBlocks.GREATROOT_LEAVES.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_GREATOAK_SAPLING.get(), AetherIIBlocks.GREATOAK_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(), AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
+
+        this.grass(AetherIIBlocks.AETHER_SHORT_GRASS.get());
+        this.grass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
+        this.grass(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
         this.block(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(), "natural/");
 
@@ -96,6 +119,10 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.slab(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
         this.wallBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
 
+        this.stairs(AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS.get(), AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
+        this.slab(AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB.get(), AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
+        this.wallBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL.get(), AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
+
         this.block(AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
         this.stairs(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
         this.slab(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
@@ -127,6 +154,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.torchBlock(AetherIIBlocks.AMBROSIUM_TORCH.get(), AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.skyrootCraftingTable(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.holystoneFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+        this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
     }
 }

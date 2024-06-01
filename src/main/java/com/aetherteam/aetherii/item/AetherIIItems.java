@@ -1,23 +1,24 @@
 package com.aetherteam.aetherii.item;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.combat.HammerItem;
 import com.aetherteam.aetherii.item.combat.SpearItem;
 import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumHammerItem;
+import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumShortswordItem;
 import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumSpearItem;
-import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumSwordItem;
 import com.aetherteam.aetherii.item.combat.gravitite.GravititeHammerItem;
+import com.aetherteam.aetherii.item.combat.gravitite.GravititeShortswordItem;
 import com.aetherteam.aetherii.item.combat.gravitite.GravititeSpearItem;
-import com.aetherteam.aetherii.item.combat.gravitite.GravititeSwordItem;
 import com.aetherteam.aetherii.item.combat.holystone.HolystoneHammerItem;
+import com.aetherteam.aetherii.item.combat.holystone.HolystoneShortswordItem;
 import com.aetherteam.aetherii.item.combat.holystone.HolystoneSpearItem;
-import com.aetherteam.aetherii.item.combat.holystone.HolystoneSwordItem;
 import com.aetherteam.aetherii.item.combat.skyroot.SkyrootHammerItem;
+import com.aetherteam.aetherii.item.combat.skyroot.SkyrootShortswordItem;
 import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSpearItem;
-import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSwordItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteHammerItem;
+import com.aetherteam.aetherii.item.combat.zanite.ZaniteShortswordItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSpearItem;
-import com.aetherteam.aetherii.item.combat.zanite.ZaniteSwordItem;
 import com.aetherteam.aetherii.item.food.AetherIIFoods;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
 import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumAxeItem;
@@ -40,12 +41,16 @@ import com.aetherteam.aetherii.item.tools.zanite.ZaniteAxeItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZanitePickaxeItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZaniteShovelItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZaniteTrowelItem;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.*;
+import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class AetherIIItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AetherII.MODID);
+
+    public static final Style WEAPON_TOOLTIP_COLOR = Style.EMPTY.withColor(11393240);
 
     // Tools
     public static final DeferredItem<PickaxeItem> SKYROOT_PICKAXE = ITEMS.register("skyroot_pickaxe", SkyrootPickaxeItem::new);
@@ -74,23 +79,23 @@ public class AetherIIItems {
     public static final DeferredItem<HoeItem> GRAVITITE_TROWEL = ITEMS.register("gravitite_trowel", GravititeTrowelItem::new);
 
     // Weapons
-    public static final DeferredItem<SwordItem> SKYROOT_SWORD = ITEMS.register("skyroot_sword", SkyrootSwordItem::new);
+    public static final DeferredItem<SwordItem> SKYROOT_SHORTSWORD = ITEMS.register("skyroot_shortsword", SkyrootShortswordItem::new);
     public static final DeferredItem<HammerItem> SKYROOT_HAMMER = ITEMS.register("skyroot_hammer", SkyrootHammerItem::new);
     public static final DeferredItem<SpearItem> SKYROOT_SPEAR = ITEMS.register("skyroot_spear", SkyrootSpearItem::new);
 
-    public static final DeferredItem<SwordItem> HOLYSTONE_SWORD = ITEMS.register("holystone_sword", HolystoneSwordItem::new);
+    public static final DeferredItem<SwordItem> HOLYSTONE_SHORTSWORD = ITEMS.register("holystone_shortsword", HolystoneShortswordItem::new);
     public static final DeferredItem<HammerItem> HOLYSTONE_HAMMER = ITEMS.register("holystone_hammer", HolystoneHammerItem::new);
     public static final DeferredItem<SpearItem> HOLYSTONE_SPEAR = ITEMS.register("holystone_spear", HolystoneSpearItem::new);
 
-    public static final DeferredItem<SwordItem> ZANITE_SWORD = ITEMS.register("zanite_sword", ZaniteSwordItem::new);
+    public static final DeferredItem<SwordItem> ZANITE_SHORTSWORD = ITEMS.register("zanite_shortsword", ZaniteShortswordItem::new);
     public static final DeferredItem<HammerItem> ZANITE_HAMMER = ITEMS.register("zanite_hammer", ZaniteHammerItem::new);
     public static final DeferredItem<SpearItem> ZANITE_SPEAR = ITEMS.register("zanite_spear", ZaniteSpearItem::new);
 
-    public static final DeferredItem<SwordItem> ARKENIUM_SWORD = ITEMS.register("arkenium_sword", ArkeniumSwordItem::new);
+    public static final DeferredItem<SwordItem> ARKENIUM_SHORTSWORD = ITEMS.register("arkenium_shortsword", ArkeniumShortswordItem::new);
     public static final DeferredItem<HammerItem> ARKENIUM_HAMMER = ITEMS.register("arkenium_hammer", ArkeniumHammerItem::new);
     public static final DeferredItem<SpearItem> ARKENIUM_SPEAR = ITEMS.register("arkenium_spear", ArkeniumSpearItem::new);
 
-    public static final DeferredItem<SwordItem> GRAVITITE_SWORD = ITEMS.register("gravitite_sword", GravititeSwordItem::new);
+    public static final DeferredItem<SwordItem> GRAVITITE_SHORTSWORD = ITEMS.register("gravitite_shortsword", GravititeShortswordItem::new);
     public static final DeferredItem<HammerItem> GRAVITITE_HAMMER = ITEMS.register("gravitite_hammer", GravititeHammerItem::new);
     public static final DeferredItem<SpearItem> GRAVITITE_SPEAR = ITEMS.register("gravitite_spear", GravititeSpearItem::new);
 
@@ -114,6 +119,12 @@ public class AetherIIItems {
     public static final DeferredItem<Item> WYNDBERRY = ITEMS.register("wyndberry", () -> new Item(new Item.Properties().food(AetherIIFoods.WYNDBERRY)));
     public static final DeferredItem<Item> BLUE_SWET_JELLY = ITEMS.register("blue_swet_jelly", () -> new Item(new Item.Properties().food(AetherIIFoods.SWET_JELLY)));
     public static final DeferredItem<Item> GOLDEN_SWET_JELLY = ITEMS.register("golden_swet_jelly", () -> new Item(new Item.Properties().food(AetherIIFoods.SWET_JELLY)));
+
+    // Spawn Eggs
+    public static final DeferredItem<SpawnEggItem> FLYING_COW_SPAWN_EGG = ITEMS.register("flying_cow_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.FLYING_COW, 0xD8D8D8, 0xFFD939, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> PHYG_SPAWN_EGG = ITEMS.register("phyg_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.PHYG, 0xFFC1D0, 0xFFD939, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> AERBUNNY_SPAWN_EGG = ITEMS.register("aerbunny_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.AERBUNNY, 0xE2FCFF, 0xFFDFF9, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> ZEPHYR_SPAWN_EGG = ITEMS.register("zephyr_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.ZEPHYR, 0xDFDFDF, 0x99CFE8, new Item.Properties()));
 
     // Misc
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = ITEMS.register("aether_portal_frame", () -> new AetherPortalItem(new Item.Properties().stacksTo(1)));

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "aether_ii:block/natural/irradiated_holystone",
+    "side": "aether_ii:block/natural/irradiated_holystone",
+    "top": "aether_ii:block/natural/irradiated_holystone"
+  }
+}
