@@ -23,6 +23,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.FERROSITE_SAND.get(), "natural/");
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
+        this.block(AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
         this.block(AetherIIBlocks.AGIOSITE.get(), "natural/");
 
@@ -134,6 +135,10 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.stairs(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
         this.slab(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
         this.wallBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
+
+        this.stairs(AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS.get(), AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
+        this.slab(AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB.get(), AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
+        this.wallBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL.get(), AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
 
         this.block(AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
         this.stairs(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
