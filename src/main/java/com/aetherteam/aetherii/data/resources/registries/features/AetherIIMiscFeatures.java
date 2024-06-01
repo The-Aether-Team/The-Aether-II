@@ -46,7 +46,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
                         64,
                         AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_NOISE),
-                        5D,
+                        10D,
                         AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
                         10D
                 ));
