@@ -50,7 +50,7 @@ public class AetherIIDensityFunctions {
                 0.02D, // y scale
                 80D, // xz factor
                 160D, // y factor
-                8.0D // smear scale multiplier, capped at 8
+                1.0D // smear scale multiplier, capped at 8
         ));
 
         context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
