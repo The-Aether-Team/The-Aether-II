@@ -58,6 +58,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         );
         this.add(AetherIIEntityTypes.AERBUNNY.get(), LootTable.lootTable());
 
+        this.add(AetherIIEntityTypes.KIRRID.get(), LootTable.lootTable());
+
         this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.COLD_AERCLOUD.get())
@@ -66,6 +68,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
         );
     }
+
 
     @Override
     public Stream<EntityType<?>> getKnownEntityTypes() {
