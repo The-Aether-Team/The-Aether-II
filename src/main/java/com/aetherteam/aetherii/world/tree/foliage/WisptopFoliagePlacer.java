@@ -13,13 +13,10 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 
 public class WisptopFoliagePlacer extends DarkOakFoliagePlacer {
     public static final Codec<WisptopFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
-            .and(IntProvider.codec(0, 24).fieldOf("trunk_height").forGetter((placer) -> placer.trunkHeight))
             .apply(instance, WisptopFoliagePlacer::new));
-    private final IntProvider trunkHeight;
 
-    public WisptopFoliagePlacer(IntProvider radius, IntProvider offset, IntProvider height) {
+    public WisptopFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
-        this.trunkHeight = height;
     }
 
     @Override

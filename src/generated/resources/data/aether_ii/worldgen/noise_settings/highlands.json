@@ -20,7 +20,7 @@
   "noise_router": {
     "barrier": 0.0,
     "continents": 0.0,
-    "depth": 0.0,
+    "depth": "aether_ii:highlands/depth",
     "erosion": "aether_ii:highlands/erosion",
     "final_density": {
       "type": "minecraft:squeeze",
@@ -110,7 +110,7 @@
             "false_at_and_above": {
               "below_top": 272
             },
-            "random_name": "minecraft:grass",
+            "random_name": "minecraft:aether_grass_block",
             "true_at_and_below": {
               "below_top": 276
             }
@@ -165,7 +165,7 @@
             "false_at_and_above": {
               "below_top": 272
             },
-            "random_name": "minecraft:dirt",
+            "random_name": "minecraft:aether_dirt",
             "true_at_and_below": {
               "below_top": 272
             }

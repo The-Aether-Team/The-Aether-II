@@ -1,5 +1,5 @@
 {
-  "feature": "aether_ii:ore_zanite",
+  "feature": "aether_ii:ore_arkenium",
   "placement": [
     {
       "type": "minecraft:count",
@@ -13,10 +13,10 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "above_bottom": 64
+          "above_bottom": 96
         },
         "min_inclusive": {
-          "above_bottom": 0
+          "above_bottom": 64
         }
       }
     },

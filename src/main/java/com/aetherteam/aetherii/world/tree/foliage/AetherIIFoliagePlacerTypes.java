@@ -16,4 +16,5 @@ public class AetherIIFoliagePlacerTypes {
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<GreatoakFoliagePlacer>> GREATOAK_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("greatoak_foliage_placer", () -> new FoliagePlacerType<>(GreatoakFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<GreatboaFoliagePlacer>> GREATBOA_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("greatboa_foliage_placer", () -> new FoliagePlacerType<>(GreatboaFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<AmberootFoliagePlacer>> AMBEROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("amberoot_foliage_placer", () -> new FoliagePlacerType<>(AmberootFoliagePlacer.CODEC));
+    public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<SmallAmberootFoliagePlacer>> SMALL_AMBEROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("small_amberoot_foliage_placer", () -> new FoliagePlacerType<>(SmallAmberootFoliagePlacer.CODEC));
 }
