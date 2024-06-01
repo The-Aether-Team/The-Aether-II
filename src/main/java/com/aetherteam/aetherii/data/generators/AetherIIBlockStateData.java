@@ -16,7 +16,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.portal(AetherIIBlocks.AETHER_PORTAL.get());
 
         this.grass(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
+        this.enchantedGrass(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.block(AetherIIBlocks.AETHER_DIRT.get(), "natural/");
+        this.block(AetherIIBlocks.COARSE_AETHER_DIRT.get(), "natural/");
         this.farmland(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dirtPath(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
 

@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T22:50:39.0338319	Block States: aether_ii
+// 1.20.4	2024-05-31T23:30:03.2483584	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -27,7 +27,9 @@ f70d2c7f292ee79ecae67dd6bfc775691beb9a80 assets/aether_ii/blockstates/arkenium_o
 999553f352ecd804f63eeb4583295000ae3d56f1 assets/aether_ii/blockstates/blue_aercloud.json
 70a532fbcf0f82aa02919202b2f92afa51da56f8 assets/aether_ii/blockstates/cloudwool.json
 6519f9060094b8c8ec3e7f69d6c27a8efc771770 assets/aether_ii/blockstates/cloudwool_carpet.json
+4a90e8772fc29ca3354a506ada288e3376f1ac41 assets/aether_ii/blockstates/coarse_aether_dirt.json
 bc3c6413e013f5bc65a92f8fe5589eb316c9a32a assets/aether_ii/blockstates/cold_aercloud.json
+539a01b820efcabc906273aac2ac504e56447193 assets/aether_ii/blockstates/enchanted_aether_grass_block.json
 9cf7dec60b6c5eafaa01493d8763a5935be2bb04 assets/aether_ii/blockstates/ferrosite_sand.json
 1ded333e9c56780549d75b5cc3e6fa0921349cbb assets/aether_ii/blockstates/golden_aercloud.json
 f7407f92afdb693186504428779efef8d9646c73 assets/aether_ii/blockstates/gravitite_block.json
@@ -121,7 +123,7 @@ f444c2d02a1445ab4b6fd3fe26bbb16f757e4856 assets/aether_ii/models/block/aether_di
 8c92872a23db6755abdf9727a559b0b7892b416f assets/aether_ii/models/block/aether_farmland.json
 6e56e42c5578875c80cdc948d19be8b7770d1935 assets/aether_ii/models/block/aether_farmland_moist.json
 afa7b9edf5661fc40fd413899f4d1b21e7789e80 assets/aether_ii/models/block/aether_grass_block.json
-2af812ce09cb943587689f9be06cef04c086031c assets/aether_ii/models/block/aether_grass_block_snow.json
+f03a1ae5e5fa1d446f79a07ff3635b769efc0354 assets/aether_ii/models/block/aether_grass_block_snow.json
 3741bfaad340c1f2d4b8552e225f8aaea8fdfdea assets/aether_ii/models/block/aether_long_grass.json
 557ffdbfd47d0c4ff380caf255117b9fc08c9988 assets/aether_ii/models/block/aether_medium_grass.json
 6e6c069c57a7a0af23b0cad71f8d3fd7900fb76a assets/aether_ii/models/block/aether_portal_ew.json
@@ -159,7 +161,9 @@ d58f84bc6511c6fce4222ee12f5263d16193a0e0 assets/aether_ii/models/block/amberoot_
 9f51375a8c00c0440af1bfa813fda3d6144692ce assets/aether_ii/models/block/blue_aercloud.json
 c0f964bf0e8d5046ec61f6ad516e118fc043148a assets/aether_ii/models/block/cloudwool.json
 6a3c73dbf735f0e1567003d3c1ae9a7d3e9b23ce assets/aether_ii/models/block/cloudwool_carpet.json
+d62f232cf4792d79e46ba56f557f4b367e70d9cf assets/aether_ii/models/block/coarse_aether_dirt.json
 9a8ca279b5a4f53daf1b7ec5a285b3569058aae8 assets/aether_ii/models/block/cold_aercloud.json
+212cee464e230f4f4ee8ff172d94f3882a89e041 assets/aether_ii/models/block/enchanted_aether_grass_block.json
 3dcd7994fe0bb0bb10dd00ee1c375fe5bfde261e assets/aether_ii/models/block/ferrosite_sand.json
 db559944e0581a3cb8fd79e9185316b4ae48df9c assets/aether_ii/models/block/golden_aercloud.json
 b36b9652aff9bd759a00e281c38e06ebcba63935 assets/aether_ii/models/block/gravitite_block.json

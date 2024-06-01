@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T20:26:38.7374982	Item Models: aether_ii
+// 1.20.4	2024-05-31T23:30:03.2613602	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -40,7 +40,9 @@ c7551e4548b0c81d85c2d6072e683ba9789cc589 assets/aether_ii/models/item/blueberry.
 b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
 e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
 ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
+a6fda269de440be4d8141138223e1d4aa1d45c92 assets/aether_ii/models/item/coarse_aether_dirt.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
+9dc07025feb7e5c425d7109d554d7f8007d21846 assets/aether_ii/models/item/enchanted_aether_grass_block.json
 0a1091ef207642173d2d97fc02de7e8e115c76b4 assets/aether_ii/models/item/enchanted_berry.json
 1b4294c048cfed5353ed54611e964980d61ce9db assets/aether_ii/models/item/ferrosite_sand.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/flying_cow_spawn_egg.json

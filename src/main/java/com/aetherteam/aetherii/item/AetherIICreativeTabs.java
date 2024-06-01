@@ -103,9 +103,11 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".natural_blocks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
-                output.accept(AetherIIBlocks.AETHER_DIRT_PATH.get());
+                output.accept(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get());
                 output.accept(AetherIIBlocks.AETHER_DIRT.get());
+                output.accept(AetherIIBlocks.AETHER_DIRT_PATH.get());
                 output.accept(AetherIIBlocks.AETHER_FARMLAND.get());
+                output.accept(AetherIIBlocks.COARSE_AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());

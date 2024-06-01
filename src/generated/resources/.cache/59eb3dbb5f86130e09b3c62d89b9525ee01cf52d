@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T20:26:38.7285029	Loot Tables
+// 1.20.4	2024-05-31T23:30:03.2583574	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -26,7 +26,9 @@ a16bcaab0cf39b3023d08214573ae0f2436c3408 data/aether_ii/loot_tables/blocks/ambro
 979a5c4bb8cf4fecd2910d88472dedc69240b76e data/aether_ii/loot_tables/blocks/blue_aercloud.json
 ae25ba8ab6d368e881f2908a144d154f268b369c data/aether_ii/loot_tables/blocks/cloudwool.json
 217708d60585b4468f01c5eeea8dae4b3b892469 data/aether_ii/loot_tables/blocks/cloudwool_carpet.json
+84bf718e7cdc7effd42c11e60de977b1b9e05368 data/aether_ii/loot_tables/blocks/coarse_aether_dirt.json
 f6fe71dbb22cb5135868d44d7dce4c3989d36bfb data/aether_ii/loot_tables/blocks/cold_aercloud.json
+d7b91866be75b991d23d390c53cdf9bd5724a65b data/aether_ii/loot_tables/blocks/enchanted_aether_grass_block.json
 48e66274dcfb891765dd15f36941d07c7d265e3d data/aether_ii/loot_tables/blocks/ferrosite_sand.json
 30972fa73c943b1db70d7006dfe95fcb7d298576 data/aether_ii/loot_tables/blocks/golden_aercloud.json
 0a8333db6bbafc06187539a24dd3c8591183ade7 data/aether_ii/loot_tables/blocks/gravitite_block.json

@@ -21,11 +21,14 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void grass(Block block, Block dirtBlock) {
-        this.grassBlock(block, block, dirtBlock);
+        this.grassBlock(block, block, dirtBlock, this.grassBlockTinted(block, dirtBlock));
     }
 
-    public void grassBlock(Block baseBlock, Block blockForSnow, Block blockForDirt) {
-        ModelFile grass = this.grassBlock(baseBlock, blockForDirt);
+    public void enchantedGrass(Block block, Block grassBlock, Block dirtBlock) {
+        this.grassBlock(block, grassBlock, dirtBlock, this.grassBlock(block, dirtBlock));
+    }
+
+    public void grassBlock(Block baseBlock, Block blockForSnow, Block blockForDirt, ModelFile grass) {
         ModelFile grassSnowed = this.cubeBottomTop(this.name(blockForSnow) + "_snow",
                 this.extend(this.texture(this.name(blockForSnow), "natural/"), "_snow"),
                 this.texture(this.name(blockForDirt), "natural/"),
@@ -37,6 +40,13 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public ModelFile grassBlock(Block block, Block dirtBlock) {
+        return this.cubeBottomTop(this.name(block),
+                this.extend(this.texture(this.name(block), "natural/"), "_side"),
+                this.texture(this.name(dirtBlock), "natural/"),
+                this.extend(this.texture(this.name(block), "natural/"), "_top"));
+    }
+
+    public ModelFile grassBlockTinted(Block block, Block dirtBlock) {
         return this.models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout"))
                 .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
                 .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)))
