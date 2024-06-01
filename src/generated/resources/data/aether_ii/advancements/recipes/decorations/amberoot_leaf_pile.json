@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amberoot_leaves": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:amberoot_leaves"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:amberoot_leaf_pile"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_amberoot_leaves"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:amberoot_leaf_pile"
+    ]
+  }
+}

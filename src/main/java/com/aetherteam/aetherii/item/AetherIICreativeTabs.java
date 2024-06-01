@@ -152,6 +152,22 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_SHORT_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
+                output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
+                output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
+                output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
+                output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
+                output.accept(AetherIIBlocks.ORANGE_TREE.get());
+                output.accept(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.SKYPINE_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.WISPROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.WISPTOP_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.GREATROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "natural_blocks"))
