@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T13:41:34.1015569	Item Models: aether_ii
+// 1.20.4	2024-05-31T19:05:58.6082744	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -82,6 +82,7 @@ c3bea203b8917571dc4d022cf96b068ceac88ff4 assets/aether_ii/models/item/holystone_
 f26a40bb0998dfef2dc0993b0875caa03a4c5f51 assets/aether_ii/models/item/holystone_button.json
 5c2f714976b1dfe841b975ec6313b37aa821b6f4 assets/aether_ii/models/item/holystone_furnace.json
 3558ff783cd416913962062aa5d68433cc884bf2 assets/aether_ii/models/item/holystone_hammer.json
+7074eaa123e98c2ceb1d71cacbc6bb3aa3965c0e assets/aether_ii/models/item/holystone_pebble.json
 5ea6ea50657574464a43ae19815616413125ae8a assets/aether_ii/models/item/holystone_pickaxe.json
 b1d7855ec43a99b480d29b4f816f83f143104448 assets/aether_ii/models/item/holystone_pressure_plate.json
 0962fb67f453f2184d17164244710d93086a93cd assets/aether_ii/models/item/holystone_shovel.json
@@ -163,3 +164,4 @@ a2bc2f6f301763a350cdb8e56399ee939abf52c4 assets/aether_ii/models/item/zanite_blo
 6740e0dad96b894aaaf45497ffbcd0a3e2ad137b assets/aether_ii/models/item/zanite_spear.json
 74f1e66e7f92894d17f1829d4b005d247221751b assets/aether_ii/models/item/zanite_sword.json
 22bd806c16d179175bc04089d255c3b42201e698 assets/aether_ii/models/item/zanite_trowel.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/zephyr_spawn_egg.json

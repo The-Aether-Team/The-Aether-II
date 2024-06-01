@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
+import com.aetherteam.aetherii.block.natural.PebbleBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
@@ -13,11 +13,9 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvider {
     public AetherIIBlockStateProvider(PackOutput output, String id, ExistingFileHelper helper) {
@@ -183,6 +181,83 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
                 .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
+    }
+
+    public void pebble(Block block, Block stone) {
+        String blockName = this.name(block);
+        ResourceLocation texture = this.texture(this.name(stone), "natural/");
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            Direction direction = state.getValue(PebbleBlock.FACING);
+            int pebbleCount = state.getValue(PebbleBlock.AMOUNT);
+            int offset = 0;
+            switch (direction) {
+                case SOUTH -> offset = 180;
+                case WEST -> offset = 270;
+                case EAST -> offset = 90;
+            }
+            switch (pebbleCount) {
+                case 3 -> {
+                    ModelFile model = models().getBuilder(blockName + "_3").texture("particle", texture).texture("texture", texture)
+                            .element().from(2, 0, 2).to(8, 3, 8)
+                            .face(Direction.NORTH).uvs(0, 6, 6, 9).texture("#texture").end()
+                            .face(Direction.EAST).uvs(6, 6, 12, 9).texture("#texture").end()
+                            .face(Direction.SOUTH).uvs(0, 6, 6, 9).texture("#texture").end()
+                            .face(Direction.WEST).uvs(6, 6, 12, 9).texture("#texture").end()
+                            .face(Direction.UP).uvs(6, 0, 12, 6).texture("#texture").end()
+                            .face(Direction.DOWN).uvs(6, 9, 12, 15).texture("#texture").end()
+                            .end()
+                            .element().from(10, 0, 6).to(14, 2, 10)
+                            .face(Direction.NORTH).uvs(0, 4, 4, 6).texture("#texture").end()
+                            .face(Direction.EAST).uvs(4, 4, 8, 6).texture("#texture").end()
+                            .face(Direction.SOUTH).uvs(0, 4, 4, 6).texture("#texture").end()
+                            .face(Direction.WEST).uvs(4, 4, 8, 6).texture("#texture").end()
+                            .face(Direction.UP).uvs(4, 0, 8, 4).texture("#texture").end()
+                            .face(Direction.DOWN).uvs(4, 8, 8, 12).texture("#texture").end()
+                            .end()
+                            .element().from(7, 0, 12).to(9, 1, 14)
+                            .face(Direction.NORTH).uvs(0, 2, 2, 3).texture("#texture").end()
+                            .face(Direction.EAST).uvs(2, 2, 4, 3).texture("#texture").end()
+                            .face(Direction.SOUTH).uvs(0, 2, 2, 3).texture("#texture").end()
+                            .face(Direction.WEST).uvs(2, 2, 4, 3).texture("#texture").end()
+                            .face(Direction.UP).uvs(2, 0, 4, 2).texture("#texture").end()
+                            .face(Direction.DOWN).uvs(2, 3, 4, 5).texture("#texture").end()
+                            .end();
+                    return ConfiguredModel.builder().modelFile(model).rotationY(offset).build();
+                }
+                case 2 -> {
+                    ModelFile model = models().getBuilder(blockName + "_2").texture("particle", texture).texture("texture", texture)
+                            .element().from(2, 0, 2).to(8, 3, 8)
+                            .face(Direction.NORTH).uvs(0, 6, 6, 9).texture("#texture").end()
+                            .face(Direction.EAST).uvs(6, 6, 12, 9).texture("#texture").end()
+                            .face(Direction.SOUTH).uvs(0, 6, 6, 9).texture("#texture").end()
+                            .face(Direction.WEST).uvs(6, 6, 12, 9).texture("#texture").end()
+                            .face(Direction.UP).uvs(6, 0, 12, 6).texture("#texture").end()
+                            .face(Direction.DOWN).uvs(6, 9, 12, 15).texture("#texture").end()
+                            .end()
+                            .element().from(10, 0, 9).to(14, 2, 13)
+                            .face(Direction.NORTH).uvs(0, 4, 4, 6).texture("#texture").end()
+                            .face(Direction.EAST).uvs(4, 4, 8, 6).texture("#texture").end()
+                            .face(Direction.SOUTH).uvs(0, 4, 4, 6).texture("#texture").end()
+                            .face(Direction.WEST).uvs(4, 4, 8, 6).texture("#texture").end()
+                            .face(Direction.UP).uvs(4, 0, 8, 4).texture("#texture").end()
+                            .face(Direction.DOWN).uvs(4, 8, 8, 12).texture("#texture").end()
+                            .end();
+                    return ConfiguredModel.builder().modelFile(model).rotationY(offset).build();
+                }
+                default -> {
+                    ModelFile model = models().getBuilder(blockName + "_1").texture("particle", texture).texture("texture", texture)
+                            .element().from(5, 0, 5).to(11, 3, 11)
+                            .face(Direction.NORTH).uvs(0, 6, 6, 9).texture("#texture").end()
+                            .face(Direction.EAST).uvs(6, 6, 12, 9).texture("#texture").end()
+                            .face(Direction.SOUTH).uvs(0, 6, 6, 9).texture("#texture").end()
+                            .face(Direction.WEST).uvs(6, 6, 12, 9).texture("#texture").end()
+                            .face(Direction.UP).uvs(6, 0, 12, 6).texture("#texture").end()
+                            .face(Direction.DOWN).uvs(6, 9, 12, 15).texture("#texture").end()
+                            .end();
+                    return ConfiguredModel.builder().modelFile(model).rotationY(offset).build();
+                }
+            }
+        });
     }
 
     public void carpet(Block block, Block baseBlock, String location) {
