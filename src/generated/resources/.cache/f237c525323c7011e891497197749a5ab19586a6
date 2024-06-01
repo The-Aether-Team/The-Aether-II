@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T15:07:38.9229167	Block States: aether_ii
+// 1.20.4	2024-06-01T16:33:25.0840602	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -67,6 +67,7 @@ bf6cc5e5d87b483951c41b6f58d413eda9b2783a assets/aether_ii/blockstates/holystone_
 cc7710929f73241ed5821432a50310cdf50dcd38 assets/aether_ii/blockstates/irradiated_holystone_slab.json
 72660c1714124ff5da7f2df2c6898c0941aef859 assets/aether_ii/blockstates/irradiated_holystone_stairs.json
 b7315f317ac3397834dfdc3cdb0b33e61c42155e assets/aether_ii/blockstates/irradiated_holystone_wall.json
+2420520d30e1eae1a2309dc670bcf1381afa395c assets/aether_ii/blockstates/masonry_bench.json
 2d843423322f30442a66b0f2ffc3367675e5302e assets/aether_ii/blockstates/mossy_holystone.json
 6dba38fb0e9539ca53f446fc86178b1a869eee75 assets/aether_ii/blockstates/mossy_holystone_slab.json
 db39e0c434f592c8eaeab59dd5b119696d2bd67f assets/aether_ii/blockstates/mossy_holystone_stairs.json
@@ -241,6 +242,7 @@ af017f06d92547b881f88068157fc49b796e1479 assets/aether_ii/models/block/irradiate
 388cf84fe057aefd8be6c2bca4185ca7edc647df assets/aether_ii/models/block/irradiated_holystone_wall_post.json
 d036577053906f156e1d5ba210c4f8fe77998363 assets/aether_ii/models/block/irradiated_holystone_wall_side.json
 95756cbfed345a8bcf59375b10e64722f2eeddae assets/aether_ii/models/block/irradiated_holystone_wall_side_tall.json
+9cee576d7a22b9b0c1b98f812dbe4e02378cd1d1 assets/aether_ii/models/block/masonry_bench.json
 1fb7b535ecb7f2cb9e324b3f6dafcd7241d9bdce assets/aether_ii/models/block/mossy_holystone.json
 6c7e49be4e349264f548c8218087224938af3479 assets/aether_ii/models/block/mossy_holystone_slab.json
 2caa9625eb8b0b617c63f1342abf3c026010fb49 assets/aether_ii/models/block/mossy_holystone_slab_top.json

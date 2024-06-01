@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T15:07:38.9381352	Recipes
+// 1.20.4	2024-06-01T16:33:25.0949476	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
 d211fa2d4f1b2edaad272b7356325c4ddc5de28c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_stairs.json
@@ -63,6 +63,7 @@ ddc975fb1f9f7b1d3ae9e8adfe7a2cdfc9b16728 data/aether_ii/advancements/recipes/dec
 7ab1c82594d4c9cc5d3f81005970c9cdab561105 data/aether_ii/advancements/recipes/decorations/holystone_furnace.json
 1c3ed48e8f757467a94f552138c84a8c097f3556 data/aether_ii/advancements/recipes/decorations/holystone_wall.json
 36cf56a73834fb18fa4a0c01c69f3e67ac128f17 data/aether_ii/advancements/recipes/decorations/irradiated_holystone_wall.json
+e0c61f46d893184ce6f9fda708933f82083b34c4 data/aether_ii/advancements/recipes/decorations/masonry_bench.json
 4b95915e249a5130db5a82d1afa8ebd1965cff1a data/aether_ii/advancements/recipes/decorations/mossy_holystone_wall.json
 f49142cb40d0a96bfe1ef76cc17266872006bd87 data/aether_ii/advancements/recipes/decorations/quicksoil_glass_pane.json
 05131444286861e2255e021e2036b5b77959886b data/aether_ii/advancements/recipes/decorations/skyroot_chest.json
@@ -191,6 +192,7 @@ ba50720cf0bf63ba2c3cd21380e10aafacb74a41 data/aether_ii/recipes/holystone_trowel
 a7470a80e937a960fb08c5741083b0608a89c8c1 data/aether_ii/recipes/irradiated_holystone_slab.json
 7a1ff1e44079b948140a1f75591945e02eea4adf data/aether_ii/recipes/irradiated_holystone_stairs.json
 ae0706d34f604acac2979283ab152981fb721ac4 data/aether_ii/recipes/irradiated_holystone_wall.json
+928ea8edc285b3103567aa5210fbea96b2aa715d data/aether_ii/recipes/masonry_bench.json
 ec35ea75b515646695d800f52547401835a34616 data/aether_ii/recipes/mossy_holystone_slab.json
 e0b6e26ca215f0bf2688b46f890117cce947c0b2 data/aether_ii/recipes/mossy_holystone_stairs.json
 3bbaf0bac263dc0bc9e836f0dd6558a4fd97573a data/aether_ii/recipes/mossy_holystone_wall.json

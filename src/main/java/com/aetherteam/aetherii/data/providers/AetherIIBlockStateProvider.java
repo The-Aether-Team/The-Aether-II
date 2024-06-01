@@ -266,6 +266,17 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }, LadderBlock.WATERLOGGED);
     }
 
+    public void masonryBench(Block block) {
+        ModelFile plant = models().withExistingParent(name(block), mcLoc("block/stonecutter"))
+                .texture("particle", texture(name(block) + "_bottom", "utility/"))
+                .texture("bottom", texture(name(block) + "_bottom", "utility/"))
+                .texture("top", texture(name(block) + "_top", "utility/"))
+                .texture("side", texture(name(block) + "_side", "utility/"))
+                .texture("saw", texture(name(block) + "_saw", "utility/"))
+                .renderType("cutout_mipped");
+        getVariantBuilder(block).partialState().addModels(new ConfiguredModel(plant));
+    }
+
 //    public void grass(Block block, Block dirtBlock) {
 //        this.grassBlock(block, block, dirtBlock);
 //    }

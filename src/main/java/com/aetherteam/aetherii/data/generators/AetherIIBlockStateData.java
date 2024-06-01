@@ -160,6 +160,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.skyrootCraftingTable(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.holystoneFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
+        this.masonryBench(AetherIIBlocks.MASONRY_BENCH.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
 
         this.bookshelf(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());

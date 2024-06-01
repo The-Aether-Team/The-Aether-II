@@ -123,6 +123,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_FURNACE.get()), has(AetherIITags.Items.STONE_CRAFTING))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.MASONRY_BENCH.get())
+                .define('A', AetherIIItems.ARKENIUM_PLATE.get())
+                .define('#', AetherIITags.Items.STONE_CRAFTING)
+                .pattern(" A ")
+                .pattern("###")
+                .unlockedBy(getHasName(AetherIIBlocks.MASONRY_BENCH.get()), has(AetherIIItems.ARKENIUM_PLATE))
+                .save(consumer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("###")

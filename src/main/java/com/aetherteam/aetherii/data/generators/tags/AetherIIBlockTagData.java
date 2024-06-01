@@ -224,6 +224,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.HOLYSTONE_FURNACE.get(),
+                AetherIIBlocks.MASONRY_BENCH.get(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
