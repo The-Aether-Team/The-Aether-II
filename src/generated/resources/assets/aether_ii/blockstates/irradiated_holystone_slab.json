@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/irradiated_holystone_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/irradiated_holystone"
+    },
+    "type=top": {
+      "model": "aether_ii:block/irradiated_holystone_slab_top"
+    }
+  }
+}
