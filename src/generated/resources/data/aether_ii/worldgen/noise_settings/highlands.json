@@ -22,7 +22,60 @@
     "continents": 0.0,
     "depth": "aether_ii:highlands/depth",
     "erosion": "aether_ii:highlands/erosion",
-    "final_density": "aether_ii:highlands/final_density",
+    "final_density": {
+      "type": "minecraft:squeeze",
+      "argument": {
+        "type": "minecraft:interpolated",
+        "argument": {
+          "type": "minecraft:blend_density",
+          "argument": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:add",
+                "argument1": 0.1,
+                "argument2": {
+                  "type": "minecraft:add",
+                  "argument1": {
+                    "type": "minecraft:mul",
+                    "argument1": {
+                      "type": "minecraft:add",
+                      "argument1": 0.2,
+                      "argument2": {
+                        "type": "minecraft:add",
+                        "argument1": -0.03,
+                        "argument2": "aether_ii:highlands/base_3d_noise"
+                      }
+                    },
+                    "argument2": "aether_ii:highlands/top_slide"
+                  },
+                  "argument2": {
+                    "type": "minecraft:mul",
+                    "argument1": {
+                      "type": "minecraft:mul",
+                      "argument1": -0.21,
+                      "argument2": "aether_ii:highlands/factor"
+                    },
+                    "argument2": "aether_ii:highlands/terrain_shaper"
+                  }
+                }
+              },
+              "argument2": "aether_ii:highlands/bottom_slide"
+            },
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:mul",
+                "argument1": -0.21,
+                "argument2": "aether_ii:highlands/factor"
+              },
+              "argument2": "aether_ii:highlands/terrain_shaper"
+            }
+          }
+        }
+      }
+    },
     "fluid_level_floodedness": 0.0,
     "fluid_level_spread": 0.0,
     "initial_density_without_jaggedness": 0.0,
