@@ -73,6 +73,13 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
 
+        this.item(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(), "miscellaneous/");
+        this.item(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(), "miscellaneous/");
+        this.item(AetherIIItems.MUSIC_DISC_AERWHALE.get(), "miscellaneous/");
+        this.item(AetherIIItems.MUSIC_DISC_APPROACHES.get(), "miscellaneous/");
+        this.item(AetherIIItems.MUSIC_DISC_DEMISE.get(), "miscellaneous/");
+        this.item(AetherIIItems.RECORDING_892.get(), "miscellaneous/");
+
         this.eggItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());

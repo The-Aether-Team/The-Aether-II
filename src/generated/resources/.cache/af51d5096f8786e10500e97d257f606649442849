@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T22:44:17.0296563	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-06-01T23:32:31.5458628	Tags for minecraft:item mod id aether_ii
 53afc97bd3504253faa87c8448b46627ca13c602 data/aether_ii/tags/items/aerbunny_temptation_items.json
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 0c52879ea7524c9c5a2025462b6351d7e81bf251 data/aether_ii/tags/items/aether_dirt.json
@@ -39,6 +39,7 @@ c5ac6795116ea009da3eade76c2d8a9d29e7b636 data/minecraft/tags/items/axes.json
 27063cd86404944dcec9f3d5b3ad5db3e9311936 data/minecraft/tags/items/beacon_payment_items.json
 cbe8875041d0d6c8cb738cf1e27cbc4d074f21b9 data/minecraft/tags/items/hoes.json
 c8faef7fa50c3ca0e6834d010620789165e12351 data/minecraft/tags/items/logs_that_burn.json
+dfad5dbaa5cab01665fb4753923a154526b784a4 data/minecraft/tags/items/music_discs.json
 342b2797a54040bb536f3c7915cc43c2bbf73580 data/minecraft/tags/items/pickaxes.json
 4434eb6d4be8cdb705ca37dcef38bcb35568ad4e data/minecraft/tags/items/saplings.json
 0c276df955c88966b6d276e0f45117724691eff8 data/minecraft/tags/items/shovels.json

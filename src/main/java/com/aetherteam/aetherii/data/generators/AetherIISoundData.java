@@ -31,6 +31,25 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.block.aercloud.blue_aercloud_bounce")
         );
 
+        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_AETHER_TUNE,
+                definition().with(sound("aether_ii:item/records/aether_tune").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_ASCENDING_DAWN,
+                definition().with(sound("aether_ii:item/records/ascending_dawn").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_AERWHALE,
+                definition().with(sound("aether_ii:item/records/aerwhale").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_APPROACHES,
+                definition().with(sound("aether_ii:item/records/approaches").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_DEMISE,
+                definition().with(sound("aether_ii:item/records/demise").stream())
+        );
+        this.add(AetherIISoundEvents.ITEM_RECORDING_892,
+                definition().with(sound("aether_ii:item/records/chase").stream())
+        );
+
         this.add(AetherIISoundEvents.ENTITY_PHYG_AMBIENT,
                 definition().with(
                         sound("minecraft:mob/pig/say1"),

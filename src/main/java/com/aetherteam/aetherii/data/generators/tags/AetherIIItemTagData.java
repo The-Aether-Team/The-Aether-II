@@ -73,6 +73,13 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.UNDERSHALE.asItem()
         );
+        this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
+        this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
+                AetherIIItems.ORANGE.get()
+        );
 
         this.tag(AetherIITags.Items.SKYROOT_REPAIRING).addTag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS);
         this.tag(AetherIITags.Items.HOLYSTONE_REPAIRING).add(AetherIIBlocks.HOLYSTONE.asItem());
@@ -167,12 +174,13 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATBOA_SAPLING.get().asItem(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get().asItem()
         );
-        this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
-                AetherIIItems.ORANGE.get(),
-                AetherIIItems.BLUEBERRY.get()
-        );
-        this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
-                AetherIIItems.ORANGE.get()
+        this.tag(ItemTags.MUSIC_DISCS).add(
+                AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(),
+                AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(),
+                AetherIIItems.MUSIC_DISC_AERWHALE.get(),
+                AetherIIItems.MUSIC_DISC_APPROACHES.get(),
+                AetherIIItems.MUSIC_DISC_DEMISE.get(),
+                AetherIIItems.RECORDING_892.get()
         );
 
         this.tag(ItemTags.AXES).add(

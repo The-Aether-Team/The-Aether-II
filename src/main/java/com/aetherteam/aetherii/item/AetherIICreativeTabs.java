@@ -252,6 +252,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
+                output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
+                output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
+                output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
+                output.accept(AetherIIItems.MUSIC_DISC_APPROACHES.get());
+                output.accept(AetherIIItems.MUSIC_DISC_DEMISE.get());
+                output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
+                output.accept(AetherIIItems.RECORDING_892.get());
                 output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
             }).build());
 

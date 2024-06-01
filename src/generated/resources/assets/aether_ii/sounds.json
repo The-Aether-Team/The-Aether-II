@@ -134,5 +134,53 @@
       "aether_ii:entity/zephyr/shoot"
     ],
     "subtitle": "subtitles.aether_ii.entity.zephyr.shoot"
+  },
+  "item.music_disc.aerwhale": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/aerwhale",
+        "stream": true
+      }
+    ]
+  },
+  "item.music_disc.aether_tune": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/aether_tune",
+        "stream": true
+      }
+    ]
+  },
+  "item.music_disc.approaches": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/approaches",
+        "stream": true
+      }
+    ]
+  },
+  "item.music_disc.ascending_dawn": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/ascending_dawn",
+        "stream": true
+      }
+    ]
+  },
+  "item.music_disc.demise": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/demise",
+        "stream": true
+      }
+    ]
+  },
+  "item.music_disc.recording_892": {
+    "sounds": [
+      {
+        "name": "aether_ii:item/records/chase",
+        "stream": true
+      }
+    ]
   }
 }
