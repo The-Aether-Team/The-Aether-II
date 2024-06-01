@@ -47,7 +47,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                         DensityFunctions.constant(25D))
         );
 
-        context.register(CLOUDBED_FINAL, getFunction(function, CLOUDBED_DENSITY_SUBTRACTION));
+        context.register(CLOUDBED_FINAL, DensityFunctions.add(getFunction(function, CLOUDBED_DENSITY_SUBTRACTION), DensityFunctions.zero()));
 
     }
 
