@@ -114,6 +114,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
                 output.accept(AetherIIBlocks.AGIOSITE.get());
+                output.accept(AetherIIBlocks.FERROSITE.get());
+                output.accept(AetherIIBlocks.RUSTED_FERROSITE.get());
+                output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());

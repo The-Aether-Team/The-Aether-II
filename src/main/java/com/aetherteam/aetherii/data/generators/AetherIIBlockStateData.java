@@ -28,6 +28,10 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
         this.block(AetherIIBlocks.AGIOSITE.get(), "natural/");
+        this.block(AetherIIBlocks.FERROSITE.get(), "natural/");
+        this.block(AetherIIBlocks.RUSTED_FERROSITE.get(), "natural/");
+        this.translucentBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), "natural/");
+        this.translucentBlock(AetherIIBlocks.SCATTERGLASS.get(), "natural/");
 
         this.block(AetherIIBlocks.AMBROSIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ZANITE_ORE.get(), "natural/");

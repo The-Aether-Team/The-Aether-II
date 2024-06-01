@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.construction.AetherDirtPathBlock;
-import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
-import com.aetherteam.aetherii.block.construction.EnchantedAetherGrassBlock;
-import com.aetherteam.aetherii.block.construction.QuicksoilGlassBlock;
+import com.aetherteam.aetherii.block.construction.*;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
 import com.aetherteam.aetherii.block.utility.HolystoneFurnaceBlock;
@@ -57,6 +54,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> MOSSY_HOLYSTONE = register("mossy_holystone", () -> new Block(Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get())));
     public static final DeferredBlock<Block> UNDERSHALE = register("undershale", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> AGIOSITE = register("agiosite", () -> new Block(Block.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> FERROSITE = register("ferrosite", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> RUSTED_FERROSITE = register("rusted_ferrosite", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> CRUDE_SCATTERGLASS = register("crude_scatterglass", () -> new HalfTransparentBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F).requiresCorrectToolForDrops().sound(SoundType.GLASS).noOcclusion().isValidSpawn(AetherIIBlocks::never).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
+    public static final DeferredBlock<Block> SCATTERGLASS = register("scatterglass", () -> new ScatterglassBlock(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F).requiresCorrectToolForDrops().sound(SoundType.GLASS).noOcclusion().isValidSpawn(AetherIIBlocks::never).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
 
     // Ores
     public static final DeferredBlock<Block> AMBROSIUM_ORE = register("ambrosium_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F).requiresCorrectToolForDrops().lightLevel(AetherIIBlocks::lightLevel11)));

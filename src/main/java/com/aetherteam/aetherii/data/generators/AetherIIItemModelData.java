@@ -95,6 +95,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE.get());
+        this.itemBlock(AetherIIBlocks.FERROSITE.get());
+        this.itemBlock(AetherIIBlocks.RUSTED_FERROSITE.get());
+        this.itemBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+        this.itemBlock(AetherIIBlocks.SCATTERGLASS.get());
 
         this.itemBlock(AetherIIBlocks.AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());

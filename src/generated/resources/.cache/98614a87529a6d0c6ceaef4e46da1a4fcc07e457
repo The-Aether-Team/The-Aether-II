@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T23:30:03.2613602	Item Models: aether_ii
+// 1.20.4	2024-05-31T23:44:00.613238	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -42,8 +42,10 @@ e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.
 ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
 a6fda269de440be4d8141138223e1d4aa1d45c92 assets/aether_ii/models/item/coarse_aether_dirt.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
+62bac9bd6acefef7843b01b2cea0671183dbccc2 assets/aether_ii/models/item/crude_scatterglass.json
 9dc07025feb7e5c425d7109d554d7f8007d21846 assets/aether_ii/models/item/enchanted_aether_grass_block.json
 0a1091ef207642173d2d97fc02de7e8e115c76b4 assets/aether_ii/models/item/enchanted_berry.json
+a14343c5fd0f093e4dd270cf4ca314d3846011f5 assets/aether_ii/models/item/ferrosite.json
 1b4294c048cfed5353ed54611e964980d61ce9db assets/aether_ii/models/item/ferrosite_sand.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/flying_cow_spawn_egg.json
 3666299e7cff4487ad320250e7d6d38194f32ca4 assets/aether_ii/models/item/golden_aercloud.json
@@ -105,6 +107,8 @@ aa659e5bd10ca0db200402d370084234693fc942 assets/aether_ii/models/item/quicksoil_
 280fa1a6185b874ce28a0bec8deff7035cae5904 assets/aether_ii/models/item/quicksoil_glass_pane.json
 a6f09963a1bf3d9ecad7a84042d37734d43e4137 assets/aether_ii/models/item/raw_arkenium.json
 fad53ce2a6eed791c566a36883f6cce0d0a71b6c assets/aether_ii/models/item/raw_gravitite.json
+5b9708bb41042a805c3ddb24358f2ee39db2c7f5 assets/aether_ii/models/item/rusted_ferrosite.json
+8b11c473c4865d824980c5f9807969013fae26a4 assets/aether_ii/models/item/scatterglass.json
 8a0980302cbbd9afaab3f79672dfe45915644984 assets/aether_ii/models/item/skybirch_leaves.json
 d634fe0d27710caaafbf9d63c2877d6a38c3cc71 assets/aether_ii/models/item/skypine_leaves.json
 1264f25092e1b8ae0cfed08db5bf04a82a366fe8 assets/aether_ii/models/item/skyplane_leaves.json
