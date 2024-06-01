@@ -73,6 +73,12 @@
     "axolotls": [],
     "creature": [
       {
+        "type": "aether_ii:kirrid",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
         "type": "aether_ii:aerbunny",
         "maxCount": 2,
         "minCount": 1,
