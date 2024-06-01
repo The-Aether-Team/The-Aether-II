@@ -1,12 +1,10 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.builders.AetherIIDensityFunctionBuilders;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.*;
@@ -14,7 +12,7 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
 
-public class HighlandsNoiseBuilders {
+public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
     private static final SurfaceRules.RuleSource GRASS_BLOCK = SurfaceRules.state(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
     private static final SurfaceRules.RuleSource DIRT = SurfaceRules.state(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
 
@@ -68,16 +66,10 @@ public class HighlandsNoiseBuilders {
         return density;
     }
 
-    public static DensityFunction factorize(HolderGetter<DensityFunction> function, double value) {
-        DensityFunction density = getFunction(function, AetherIIDensityFunctions.FACTOR);
-        density = DensityFunctions.mul(density, DensityFunctions.constant(value));
-        density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.TERRAIN_SHAPER));
-        return density;
-    }
-
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> function, HolderGetter<NormalNoise.NoiseParameters> noise, DensityFunction finalDensity) {
-        DensityFunction shiftX = getFunction(function, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation("shift_x")));
-        DensityFunction shiftZ = getFunction(function, ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation("shift_z")));
+        DensityFunction shiftX = getFunction(function, SHIFT_X);
+        DensityFunction shiftZ = getFunction(function, SHIFT_Z);
+        DensityFunction y = getFunction(function, Y);
         DensityFunction temperature = getFunction(function, AetherIIDensityFunctions.TEMPERATURE);
         DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.VEGETATION));
         DensityFunction erosion = getFunction(function, AetherIIDensityFunctions.EROSION);
@@ -90,16 +82,12 @@ public class HighlandsNoiseBuilders {
                 vegetation, // vegetation
                 DensityFunctions.zero(), // continentalness noise
                 erosion, // erosion
-                DensityFunctions.zero(), // depth
+                y, // depth
                 DensityFunctions.zero(), // ridges
                 DensityFunctions.zero(), // initial density without jaggedness, used for aquifers in the Overworld.
                 finalDensity, // final density
                 DensityFunctions.zero(), // veinToggle
                 DensityFunctions.zero(), // veinRidged
                 DensityFunctions.zero()); // veinGap
-    }
-
-    private static DensityFunction getFunction(HolderGetter<DensityFunction> function, ResourceKey<DensityFunction> key) {
-        return new DensityFunctions.HolderHolder(function.getOrThrow(key));
     }
 }
