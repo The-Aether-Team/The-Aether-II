@@ -52,8 +52,12 @@ public class AetherIITreeGrowers {
 
     public static final TreeGrower AMBEROOT = new TreeGrower(
             "amberoot",
+            0.3F,
+            Optional.empty(),
             Optional.empty(),
             Optional.of(AetherIITreeFeatures.AMBEROOT),
+            Optional.of(AetherIITreeFeatures.LARGE_AMBEROOT),
+            Optional.empty(),
             Optional.empty()
     );
 }
