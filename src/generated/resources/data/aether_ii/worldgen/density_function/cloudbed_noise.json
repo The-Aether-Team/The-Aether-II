@@ -1,6 +1,6 @@
 {
   "type": "minecraft:add",
-  "argument1": 0.5,
+  "argument1": 0.1,
   "argument2": {
     "type": "minecraft:mul",
     "argument1": 1.5,
