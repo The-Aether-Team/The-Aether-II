@@ -147,6 +147,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), "natural/");
         this.itemBlockGrass(AetherIIBlocks.AETHER_LONG_GRASS.get(), "natural/");
 
+        this.item(AetherIIBlocks.SKYROOT_TWIG.asItem(), "miscellaneous/");
+        this.item(AetherIIBlocks.HOLYSTONE_ROCK.asItem(), "miscellaneous/");
         this.itemBlock(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
         this.itemBlock(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
         this.itemBlock(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());

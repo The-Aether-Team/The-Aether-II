@@ -90,6 +90,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AETHER_MEDIUM_GRASS, "Aether Medium Grass");
         this.addBlock(AetherIIBlocks.AETHER_LONG_GRASS, "Aether Long Grass");
 
+        this.addBlock(AetherIIBlocks.SKYROOT_TWIG, "Skyroot Twig");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_ROCK, "Holystone Rock");
         this.addBlock(AetherIIBlocks.SKYROOT_LEAF_PILE, "Skyroot Leaf Pile");
         this.addBlock(AetherIIBlocks.SKYPLANE_LEAF_PILE, "Skyplane Leaf Pile");
         this.addBlock(AetherIIBlocks.SKYBIRCH_LEAF_PILE, "Skybirch Leaf Pile");

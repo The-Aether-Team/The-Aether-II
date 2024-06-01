@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T16:25:24.9563071	Item Models: aether_ii
+// 1.20.4	2024-06-01T16:43:06.3116618	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -91,6 +91,7 @@ f26a40bb0998dfef2dc0993b0875caa03a4c5f51 assets/aether_ii/models/item/holystone_
 3558ff783cd416913962062aa5d68433cc884bf2 assets/aether_ii/models/item/holystone_hammer.json
 5ea6ea50657574464a43ae19815616413125ae8a assets/aether_ii/models/item/holystone_pickaxe.json
 b1d7855ec43a99b480d29b4f816f83f143104448 assets/aether_ii/models/item/holystone_pressure_plate.json
+452f9a6f53fa2af360143bccda3490bd0c65dff1 assets/aether_ii/models/item/holystone_rock.json
 1aba5cfc455b7f5713acf97910490028e2912348 assets/aether_ii/models/item/holystone_shortsword.json
 0962fb67f453f2184d17164244710d93086a93cd assets/aether_ii/models/item/holystone_shovel.json
 6c802e87e26468f5e3cbba17076d1cd80b1930cc assets/aether_ii/models/item/holystone_slab.json
@@ -145,6 +146,7 @@ f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_lo
 2cca1f194cbbc8465a4400391cdc3a65c9598dad assets/aether_ii/models/item/skyroot_stick.json
 864d20031c24920c72c0f8e8f8298927ea4eae4d assets/aether_ii/models/item/skyroot_trapdoor.json
 0440543351702f8f9e40da54f501c28cb33b5a3a assets/aether_ii/models/item/skyroot_trowel.json
+f2be45bfdf35ea73f411f9f3c2e486fea81adc2a assets/aether_ii/models/item/skyroot_twig.json
 85f1eae477c0a0f9951306b14b43e1e57222c3ae assets/aether_ii/models/item/skyroot_wood.json
 1cc8dfd49b23ca26e50bf530c06afb8814d63047 assets/aether_ii/models/item/storm_aercloud.json
 353df02d890df9f39f5891ed5858e4f0a3d83ec5 assets/aether_ii/models/item/stripped_skyroot_log.json

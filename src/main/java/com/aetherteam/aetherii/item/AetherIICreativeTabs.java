@@ -152,6 +152,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_SHORT_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
+                output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
                 output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());

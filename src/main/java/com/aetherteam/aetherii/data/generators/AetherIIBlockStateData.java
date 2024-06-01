@@ -87,6 +87,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.grass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
         this.grass(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
+        this.twig(AetherIIBlocks.SKYROOT_TWIG.get(), AetherIIBlocks.SKYROOT_LOG.get());
+        this.rock(AetherIIBlocks.HOLYSTONE_ROCK.get(), AetherIIBlocks.HOLYSTONE.get());
+
         this.leavesPile(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), AetherIIBlocks.SKYROOT_LEAVES.get());
         this.leavesPile(AetherIIBlocks.SKYPLANE_LEAF_PILE.get(), AetherIIBlocks.SKYPLANE_LEAVES.get());
         this.leavesPile(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(), AetherIIBlocks.SKYBIRCH_LEAVES.get());
