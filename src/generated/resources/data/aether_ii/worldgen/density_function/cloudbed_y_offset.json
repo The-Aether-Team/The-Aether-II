@@ -1,6 +1,6 @@
 {
   "type": "minecraft:mul",
-  "argument1": 2.0,
+  "argument1": 1.5,
   "argument2": {
     "type": "aether_ii:perlin_noise",
     "noise": {
