@@ -8,6 +8,6 @@
     "firstOctave": 0
   },
   "seed": 95,
-  "xz_scale": 0.0075,
+  "xz_scale": 0.01,
   "y_scale": 0.0
 }

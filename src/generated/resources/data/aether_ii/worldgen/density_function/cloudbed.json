@@ -5,11 +5,12 @@
       1.0,
       1.0,
       1.0,
+      1.0,
       1.0
     ],
     "firstOctave": 0
   },
   "seed": 42,
-  "xz_scale": 0.01,
+  "xz_scale": 0.015,
   "y_scale": 0.0
 }
