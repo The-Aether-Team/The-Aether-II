@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T09:25:04.7477519	Registries
+// 1.20.4	2024-06-01T09:50:52.0469446	Registries
 f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
 e48734a1f4f4a5ce46ede719985e497b3c51ce46 data/aether_ii/dimension_type/aether_highlands.json
 1a72cd8de70fc4f753a5f073ccd3a1ddfae80854 data/aether_ii/worldgen/biome/battleground_wastes.json
@@ -44,8 +44,8 @@ b94d018ffd646328a22cadd4ec8b9c78c10a5ccd data/aether_ii/worldgen/configured_feat
 eeadcece23a6544c2db602151c6e5c2b5f1cff45 data/aether_ii/worldgen/configured_feature/trees_flourishing_field.json
 da022cc6f7ba93bb2b45a1b6c171c4198ddfbc76 data/aether_ii/worldgen/configured_feature/trees_verdant_woods.json
 a293142d51c51fe367c2df72d16dcefc9592f62d data/aether_ii/worldgen/configured_feature/trees_violet_highwoods.json
-317dace21f7db48f286443f5ff98e624060850b0 data/aether_ii/worldgen/configured_feature/wisproot.json
-7fcba16386585c17855eb34c688be8336f76b1a3 data/aether_ii/worldgen/configured_feature/wisptop.json
+a1d33f8b1e4edce87eff90c6057cd9371e9fc6d8 data/aether_ii/worldgen/configured_feature/wisproot.json
+fca35c4068f990302e35d83fd12d5b8da569d020 data/aether_ii/worldgen/configured_feature/wisptop.json
 8855f643f67ae007501ea3b537ef539f703550f1 data/aether_ii/worldgen/density_function/highlands/base_3d_noise.json
 67e859ad7665bf3e2a0dd6f51d2a52eabb395fc2 data/aether_ii/worldgen/density_function/highlands/elevation.json
 bbd54d40e81e759f15ed5f9f612ee3a0aafde1da data/aether_ii/worldgen/density_function/highlands/erosion.json
