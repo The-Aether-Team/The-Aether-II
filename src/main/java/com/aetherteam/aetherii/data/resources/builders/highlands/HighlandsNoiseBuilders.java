@@ -13,8 +13,6 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import java.util.List;
 
 public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
-    private static final SurfaceRules.RuleSource GRASS_BLOCK = SurfaceRules.state(AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
-    private static final SurfaceRules.RuleSource DIRT = SurfaceRules.state(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
 
     public static NoiseGeneratorSettings highlandsNoiseSettings(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
         BlockState holystone = AetherIIBlocks.HOLYSTONE.get().defaultBlockState();
@@ -23,27 +21,13 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
                 holystone, // defaultBlock
                 Blocks.WATER.defaultBlockState(), // defaultFluid
                 makeNoiseRouter(densityFunctions, noise), // noiseRouter
-                highlandsSurfaceRules(), // surfaceRule
+                HighlandsSurfaceBuilders.surfaceRules(), // surfaceRule
                 List.of(), // spawnTarget
                 -64, // seaLevel
                 false, // disableMobGeneration
                 false, // aquifersEnabled
                 false, // oreVeinsEnabled
                 false  // useLegacyRandomSource
-        );
-    }
-
-    private static SurfaceRules.RuleSource highlandsSurfaceRules() {
-        SurfaceRules.RuleSource surface = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), GRASS_BLOCK), DIRT);
-        return SurfaceRules.sequence(
-
-                SurfaceRules.ifTrue(SurfaceRules.not(
-                        SurfaceRules.verticalGradient("grass", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))), SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, surface)),
-
-                SurfaceRules.ifTrue(SurfaceRules.not(
-                        SurfaceRules.verticalGradient("dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))), SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT)),
-
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(64), VerticalAnchor.absolute(72)), SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()))
         );
     }
 

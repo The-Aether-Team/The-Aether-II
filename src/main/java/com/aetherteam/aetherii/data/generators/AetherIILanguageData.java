@@ -27,6 +27,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
+        this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
         this.addBlock(AetherIIBlocks.AGIOSITE, "Agiosite");
 
@@ -118,6 +119,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS, "Mossy Holystone Stairs");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB, "Mossy Holystone Slab");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL, "Mossy Holystone Wall");
+
+        this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS, "Irradiated Holystone Stairs");
+        this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB, "Irradiated Holystone Slab");
+        this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL, "Irradiated Holystone Wall");
 
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICKS, "Holystone Bricks");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS, "Holystone Brick Stairs");
