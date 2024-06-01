@@ -27,8 +27,6 @@ public class AetherIIDensityFunctions {
     public static final ResourceKey<DensityFunction> CLOUDBED_BASE = createKey("cloudbed");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("cloudbed_y_offset");
 
-    public static final ResourceKey<DensityFunction> ISLAND_CLOUDBED_BORDER = createKey("island_cloudbed_border");
-
     private static ResourceKey<DensityFunction> createKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(AetherII.MODID, name));
     }
@@ -63,8 +61,6 @@ public class AetherIIDensityFunctions {
 
         context.register(CLOUDBED_BASE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1), 0.01D, 0.0D, 42));
         context.register(CLOUDBED_Y_OFFSET, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.0075D, 0.0D, 95));
-
-        context.register(ISLAND_CLOUDBED_BORDER, DensityFunctions.add(getFunction(function, TERRAIN_SHAPER), DensityFunctions.constant(0.1D)));
     }
 
     public static DensityFunction makeTerrainShaper(HolderGetter<DensityFunction> function) {
