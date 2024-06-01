@@ -69,10 +69,10 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> function, HolderGetter<NormalNoise.NoiseParameters> noise, DensityFunction finalDensity) {
         DensityFunction shiftX = getFunction(function, SHIFT_X);
         DensityFunction shiftZ = getFunction(function, SHIFT_Z);
-        DensityFunction y = getFunction(function, Y);
         DensityFunction temperature = getFunction(function, AetherIIDensityFunctions.TEMPERATURE);
         DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.VEGETATION));
         DensityFunction erosion = getFunction(function, AetherIIDensityFunctions.EROSION);
+        DensityFunction depth = getFunction(function, AetherIIDensityFunctions.DEPTH);
         return new NoiseRouter(
                 DensityFunctions.zero(), // barrier noise
                 DensityFunctions.zero(), // fluid level floodedness noise
@@ -82,7 +82,7 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
                 vegetation, // vegetation
                 DensityFunctions.zero(), // continentalness noise
                 erosion, // erosion
-                y, // depth
+                depth, // depth
                 DensityFunctions.zero(), // ridges
                 DensityFunctions.zero(), // initial density without jaggedness, used for aquifers in the Overworld.
                 finalDensity, // final density

@@ -1,5 +1,5 @@
-// 1.20.4	2024-06-01T10:33:41.2218024	Registries
-f9dbdadd419a0cff7041a86d9432bf706ba56152 data/aether_ii/dimension/aether_highlands.json
+// 1.20.4	2024-06-01T11:02:18.2153769	Registries
+143a1032c6070a94982fc860f7f78131bbb75a9f data/aether_ii/dimension/aether_highlands.json
 e48734a1f4f4a5ce46ede719985e497b3c51ce46 data/aether_ii/dimension_type/aether_highlands.json
 1a72cd8de70fc4f753a5f073ccd3a1ddfae80854 data/aether_ii/worldgen/biome/battleground_wastes.json
 1a72cd8de70fc4f753a5f073ccd3a1ddfae80854 data/aether_ii/worldgen/biome/contaminated_jungle.json
@@ -47,6 +47,7 @@ a293142d51c51fe367c2df72d16dcefc9592f62d data/aether_ii/worldgen/configured_feat
 317dace21f7db48f286443f5ff98e624060850b0 data/aether_ii/worldgen/configured_feature/wisproot.json
 7fcba16386585c17855eb34c688be8336f76b1a3 data/aether_ii/worldgen/configured_feature/wisptop.json
 adbacadbe0c5c1e6ae0972b88f61232174e2069c data/aether_ii/worldgen/density_function/highlands/base_3d_noise.json
+bb528955a5d100eb3198c0ea44e1409d8e23df3b data/aether_ii/worldgen/density_function/highlands/depth.json
 67e859ad7665bf3e2a0dd6f51d2a52eabb395fc2 data/aether_ii/worldgen/density_function/highlands/elevation.json
 bbd54d40e81e759f15ed5f9f612ee3a0aafde1da data/aether_ii/worldgen/density_function/highlands/erosion.json
 cea370fec50431827725f501b79caa347ebe08d0 data/aether_ii/worldgen/density_function/highlands/temperature.json
@@ -56,7 +57,7 @@ ae328841bacb2c5d784ffb006451cd4c404032f2 data/aether_ii/worldgen/noise/elevation
 20ddbabfded8546f8d71cb1689cd15c42bc77244 data/aether_ii/worldgen/noise/erosion.json
 e9951c1e43a8e47e424565851e1786e9dbe41a7a data/aether_ii/worldgen/noise/temperature.json
 144e6875c7c48ab4b4a0717436536cc121dc62da data/aether_ii/worldgen/noise/vegetation.json
-99bd9f0492b133aaf70eb3db3ce0b10abf0394ab data/aether_ii/worldgen/noise_settings/highlands.json
+044d5bd55a557fc375c15386e6bfc2af26e9b0be data/aether_ii/worldgen/noise_settings/highlands.json
 43177d6784dc200c91b9aa2b6dd55b6a6fe1b1f8 data/aether_ii/worldgen/placed_feature/blue_aercloud.json
 4c921e849d9227106869ed0a539eb1de9a7d1acb data/aether_ii/worldgen/placed_feature/coast_ferrosite_sand.json
 cf4e21c1b758d3bc55ed1ef3f627e847e2485a04 data/aether_ii/worldgen/placed_feature/coast_quicksoil.json

@@ -12,6 +12,7 @@ import net.minecraft.world.level.levelgen.DensityFunctions;
 public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
+    public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/bottom_slide"); //TODO: Add to Datagen
@@ -27,7 +28,6 @@ public class AetherIIDensityFunctionBuilders {
 
     public static final ResourceKey<DensityFunction> SHIFT_X = createVanillaKey("shift_x");
     public static final ResourceKey<DensityFunction> SHIFT_Z = createVanillaKey("shift_z");
-    public static final ResourceKey<DensityFunction> Y = createVanillaKey("y");
 
     private static ResourceKey<DensityFunction> createVanillaKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(name));
