@@ -60,7 +60,7 @@
         }
       },
       {
-        "chance": 0.07,
+        "chance": 0.04,
         "feature": {
           "feature": "aether_ii:large_amberoot",
           "placement": [
@@ -80,7 +80,7 @@
         }
       },
       {
-        "chance": 0.03,
+        "chance": 0.01,
         "feature": {
           "feature": "aether_ii:amberoot",
           "placement": [

@@ -25,6 +25,7 @@ import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
+import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
 import com.google.common.reflect.Reflection;
@@ -60,6 +61,7 @@ public class AetherII {
                 AetherIIFeatures.FEATURES,
                 AetherIITrunkPlacerTypes.TRUNK_PLACERS,
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
+                AetherIITreeDecoratorTypes.TREE_DECORATORS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
