@@ -16,13 +16,10 @@ import java.util.function.BiConsumer;
 
 public class GreatoakFoliagePlacer extends FoliagePlacer {
     public static final Codec<GreatoakFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
-            .and(IntProvider.codec(0, 24).fieldOf("trunk_height").forGetter((placer) -> placer.trunkHeight))
             .apply(instance, GreatoakFoliagePlacer::new));
-    private final IntProvider trunkHeight;
 
-    public GreatoakFoliagePlacer(IntProvider radius, IntProvider offset, IntProvider height) {
+    public GreatoakFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
-        this.trunkHeight = height;
     }
 
     @Override

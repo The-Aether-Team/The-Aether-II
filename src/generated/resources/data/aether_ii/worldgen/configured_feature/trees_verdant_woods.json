@@ -60,7 +60,27 @@
         }
       },
       {
-        "chance": 0.05,
+        "chance": 0.07,
+        "feature": {
+          "feature": "aether_ii:large_amberoot",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:amberoot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chance": 0.03,
         "feature": {
           "feature": "aether_ii:amberoot",
           "placement": [
