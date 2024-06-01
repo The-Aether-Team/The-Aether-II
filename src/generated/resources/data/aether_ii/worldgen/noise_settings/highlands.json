@@ -20,7 +20,7 @@
   "noise_router": {
     "barrier": 0.0,
     "continents": 0.0,
-    "depth": 0.0,
+    "depth": "minecraft:y",
     "erosion": "aether_ii:highlands/erosion",
     "final_density": {
       "type": "minecraft:squeeze",
