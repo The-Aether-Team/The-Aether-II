@@ -60,9 +60,9 @@
         }
       },
       {
-        "chance": 0.025,
+        "chance": 0.07,
         "feature": {
-          "feature": "aether_ii:amberoot",
+          "feature": "aether_ii:large_amberoot",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -80,9 +80,9 @@
         }
       },
       {
-        "chance": 0.025,
+        "chance": 0.03,
         "feature": {
-          "feature": "aether_ii:small_amberoot",
+          "feature": "aether_ii:amberoot",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
