@@ -42,7 +42,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                         DensityFunctions.constant(0.1D)
                         ));
 
-        context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(2D)));
+        context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));
     }
 
 }
