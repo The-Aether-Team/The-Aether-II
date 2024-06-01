@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.data;
 
 import com.aetherteam.aetherii.data.generators.*;
-import com.aetherteam.aetherii.data.generators.tags.AetherIIBiomeTagData;
-import com.aetherteam.aetherii.data.generators.tags.AetherIIBlockTagData;
-import com.aetherteam.aetherii.data.generators.tags.AetherIIEntityTagData;
-import com.aetherteam.aetherii.data.generators.tags.AetherIIItemTagData;
+import com.aetherteam.aetherii.data.generators.tags.*;
 import net.minecraft.DetectedVersion;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -49,7 +46,7 @@ public class AetherIIData {
 //        generator.addProvider(event.includeServer(), new AetherIIFluidTagData(packOutput, lookupProvider, fileHelper));
         generator.addProvider(event.includeServer(), new AetherIIBiomeTagData(packOutput, lookupProvider, fileHelper));
 //        generator.addProvider(event.includeServer(), new AetherIIStructureTagData(packOutput, registryProvider, fileHelper));
-//        generator.addProvider(event.includeServer(), new AetherIIDamageTypeTagData(packOutput, registryProvider, fileHelper));
+        generator.addProvider(event.includeServer(), new AetherIIDamageTypeTagData(packOutput, registryProvider, fileHelper));
 
         // pack.mcmeta
         generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.TYPE, new PackMetadataSection(
