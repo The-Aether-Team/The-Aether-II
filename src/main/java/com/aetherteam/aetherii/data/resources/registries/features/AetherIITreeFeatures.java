@@ -27,7 +27,7 @@ public class AetherIITreeFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATOAK = AetherIIFeatureUtils.registerKey("greatoak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA = AetherIIFeatureUtils.registerKey("greatboa");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = AetherIIFeatureUtils.registerKey("amberoot");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_AMBEROOT = AetherIIFeatureUtils.registerKey("small_amberoot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_AMBEROOT = AetherIIFeatureUtils.registerKey("large_amberoot");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         AetherIIFeatureUtils.register(context, SKYROOT, Feature.TREE,
@@ -86,7 +86,7 @@ public class AetherIITreeFeatures {
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
 
-        AetherIIFeatureUtils.register(context, AMBEROOT, Feature.TREE,
+        AetherIIFeatureUtils.register(context, LARGE_AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
                         new AmberootTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
@@ -94,7 +94,7 @@ public class AetherIITreeFeatures {
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());
 
-        AetherIIFeatureUtils.register(context, SMALL_AMBEROOT, Feature.TREE,
+        AetherIIFeatureUtils.register(context, AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(5, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
