@@ -15,6 +15,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
     public void registerStatesAndModels() {
         this.portal(AetherIIBlocks.AETHER_PORTAL.get());
 
+        this.grass(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.block(AetherIIBlocks.AETHER_DIRT.get(), "natural/");
         this.farmland(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dirtPath(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
@@ -76,9 +77,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.pottedPlant(AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(), AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
-        this.grass(AetherIIBlocks.AETHER_SHORT_GRASS.get());
-        this.grass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
-        this.grass(AetherIIBlocks.AETHER_LONG_GRASS.get());
+        this.shortGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get());
+        this.shortGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
+        this.shortGrass(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
         this.block(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(), "natural/");
 
