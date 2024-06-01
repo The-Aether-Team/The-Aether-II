@@ -9,10 +9,12 @@ import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.event.listeners.EffectsSystemListeners;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.event.listeners.*;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.event.listeners.AerbunnyMountListener;
@@ -23,6 +25,7 @@ import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
@@ -66,6 +69,7 @@ public class AetherII {
                 AetherIIItems.ITEMS,
                 AetherIIEntityTypes.ENTITY_TYPES,
                 AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
+                AetherIIEffects.EFFECTS,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIFeatures.FEATURES,
                 AetherIITrunkPlacerTypes.TRUNK_PLACERS,
@@ -103,6 +107,7 @@ public class AetherII {
     public static void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
+        EffectsSystemListeners.listen(bus);
         DamageSystemListener.listen(bus);
         PortalTeleportationListener.listen(bus);
         ToolAbilityListener.listen(bus);
@@ -121,6 +126,8 @@ public class AetherII {
         IPayloadRegistrar registrar = event.registrar(MODID).versioned("1.0.0").optional();
 
         // CLIENTBOUND
+        registrar.play(EffectBuildupPacket.Set.ID, EffectBuildupPacket.Set::decode, payload -> payload.client(EffectBuildupPacket.Set::handle));
+        registrar.play(EffectBuildupPacket.Remove.ID, EffectBuildupPacket.Remove::decode, payload -> payload.client(EffectBuildupPacket.Remove::handle));
         registrar.play(DamageTypeParticlePacket.ID, DamageTypeParticlePacket::decode, payload -> payload.client(DamageTypeParticlePacket::handle));
         registrar.play(PortalTravelSoundPacket.ID, PortalTravelSoundPacket::decode, payload -> payload.client(PortalTravelSoundPacket::handle));
         registrar.play(RemountAerbunnyPacket.ID, RemountAerbunnyPacket::decode, payload -> payload.client(RemountAerbunnyPacket::handle));

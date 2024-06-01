@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
@@ -224,6 +225,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
 
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
+
+        this.addEffect(AetherIIEffects.TOXIN, "Toxin");
 
         this.addDamageTypeTooltip("slash", "\u00A79Slash\u00A7r Damage");
         this.addDamageTypeTooltip("impact", "\u00A7eImpact\u00A7r Damage");
