@@ -20,13 +20,10 @@ import java.util.function.Predicate;
 
 public class AmberootFoliagePlacer extends FoliagePlacer {
     public static final Codec<AmberootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
-            .and(IntProvider.codec(0, 24).fieldOf("trunk_height").forGetter((placer) -> placer.trunkHeight))
             .apply(instance, AmberootFoliagePlacer::new));
-    private final IntProvider trunkHeight;
 
-    public AmberootFoliagePlacer(IntProvider radius, IntProvider offset, IntProvider height) {
+    public AmberootFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
-        this.trunkHeight = height;
     }
 
     @Override

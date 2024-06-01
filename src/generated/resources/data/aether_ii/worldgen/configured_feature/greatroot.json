@@ -11,8 +11,7 @@
     "foliage_placer": {
       "type": "aether_ii:greatroot_foliage_placer",
       "offset": 0,
-      "radius": 3,
-      "trunk_height": 0
+      "radius": 3
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
