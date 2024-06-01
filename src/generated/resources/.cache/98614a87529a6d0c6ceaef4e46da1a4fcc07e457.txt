@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T12:16:21.2603666	Item Models: aether_ii
+// 1.20.4	2024-05-31T20:26:38.7374982	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -163,3 +163,4 @@ a2bc2f6f301763a350cdb8e56399ee939abf52c4 assets/aether_ii/models/item/zanite_blo
 6740e0dad96b894aaaf45497ffbcd0a3e2ad137b assets/aether_ii/models/item/zanite_spear.json
 74f1e66e7f92894d17f1829d4b005d247221751b assets/aether_ii/models/item/zanite_sword.json
 22bd806c16d179175bc04089d255c3b42201e698 assets/aether_ii/models/item/zanite_trowel.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/zephyr_spawn_egg.json

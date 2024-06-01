@@ -1,6 +1,6 @@
 {
   "carvers": {},
-  "downfall": 0.0,
+  "downfall": 0.9,
   "effects": {
     "fog_color": 15593205,
     "foliage_color": 11665355,
@@ -34,7 +34,11 @@
     ],
     [],
     [],
-    [],
+    [
+      "aether_ii:short_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:long_grass_patch"
+    ],
     [
       "aether_ii:cold_aercloud",
       "aether_ii:blue_aercloud",
@@ -44,9 +48,25 @@
       "aether_ii:storm_aercloud"
     ]
   ],
-  "has_precipitation": false,
-  "spawn_costs": {},
+  "has_precipitation": true,
+  "spawn_costs": {
+    "aether_ii:zephyr": {
+      "charge": 0.6,
+      "energy_budget": 0.16
+    }
+  },
   "spawners": {
+    "aether_aerwhale": [],
+    "aether_darkness_monster": [],
+    "aether_sky_monster": [
+      {
+        "type": "aether_ii:zephyr",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      }
+    ],
+    "aether_surface_monster": [],
     "ambient": [],
     "axolotls": [],
     "creature": [

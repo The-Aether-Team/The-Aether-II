@@ -128,5 +128,11 @@
       "mob/pig/step5"
     ],
     "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.zephyr.shoot": {
+    "sounds": [
+      "aether_ii:entity/zephyr/shoot"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.zephyr.shoot"
   }
 }

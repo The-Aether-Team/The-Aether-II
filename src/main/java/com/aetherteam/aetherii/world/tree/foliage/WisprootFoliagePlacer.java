@@ -14,13 +14,10 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 
 public class WisprootFoliagePlacer extends DarkOakFoliagePlacer {
     public static final Codec<WisprootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
-            .and(IntProvider.codec(0, 24).fieldOf("trunk_height").forGetter((placer) -> placer.trunkHeight))
             .apply(instance, WisprootFoliagePlacer::new));
-    private final IntProvider trunkHeight;
 
-    public WisprootFoliagePlacer(IntProvider radius, IntProvider offset, IntProvider height) {
+    public WisprootFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
-        this.trunkHeight = height;
     }
 
     @Override
@@ -29,7 +26,7 @@ public class WisprootFoliagePlacer extends DarkOakFoliagePlacer {
     }
 
     @Override
-    protected void createFoliage(LevelSimulatedReader level, FoliagePlacer.FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliagePlacer.FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
+    protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 14, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ()), 5, i, attachment.doubleTrunk());

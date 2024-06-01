@@ -12,6 +12,13 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
         super(output, id, helper);
     }
 
+    public void itemBlockGrass(Block block, String location) {
+        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated"))
+                .texture("layer0", this.texture(this.blockName(block) + "_1", location))
+                .texture("layer1", this.texture(this.blockName(block) + "_2", location))
+                .texture("layer2", this.texture(this.blockName(block) + "_3", location));
+    }
+
     public void portalItem(Item item, String location) {
         this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
                 .texture("layer0", this.modLoc("item/" + location + this.itemName(item)))

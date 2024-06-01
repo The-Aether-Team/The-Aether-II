@@ -13,7 +13,6 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import java.util.List;
 
 public class AetherIIPlacementUtils {
-
     public static void bootstrap(BootstapContext<PlacedFeature> placedFeature) {
         AetherIIOrePlacements.bootstrap(placedFeature);
         AetherIIVegetationPlacements.bootstrap(placedFeature);
