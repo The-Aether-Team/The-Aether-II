@@ -91,6 +91,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE.get());
 
@@ -177,6 +178,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(), AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
+
+        this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL.get(), AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
 
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICKS.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
