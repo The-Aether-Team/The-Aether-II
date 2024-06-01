@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.resources.builders;
 
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.EntityType;
@@ -27,15 +28,6 @@ public class AetherIIBlockBuilders {
         );
     }
 
-    public static BlockBehaviour.Properties logProperties(MapColor topMapColor, MapColor sideMapColor) {
-        return BlockBehaviour.Properties.of()
-                .mapColor(block -> block.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor)
-                .instrument(NoteBlockInstrument.BASS)
-                .strength(2.0F)
-                .sound(SoundType.WOOD)
-                .ignitedByLava();
-    }
-
     public static Block leaves(MapColor mapColor) {
         return new LeavesBlock(
                 BlockBehaviour.Properties.of()
@@ -61,6 +53,7 @@ public class AetherIIBlockBuilders {
                 .sound(SoundType.WOOL)
                 .noOcclusion()
                 .dynamicShape()
+                .isValidSpawn((pState, pLevel, pPos, pValue) -> pValue == AetherIIEntityTypes.ZEPHYR.get())
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .isSuffocating(AetherIIBlockBuilders::never)
                 .isViewBlocking(AetherIIBlockBuilders::never);
