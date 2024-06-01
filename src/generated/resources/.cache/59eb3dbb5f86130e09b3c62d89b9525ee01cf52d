@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T13:57:18.489315	Loot Tables
+// 1.20.4	2024-06-01T15:07:38.9328091	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -27,6 +27,10 @@ a16bcaab0cf39b3023d08214573ae0f2436c3408 data/aether_ii/loot_tables/blocks/ambro
 ae25ba8ab6d368e881f2908a144d154f268b369c data/aether_ii/loot_tables/blocks/cloudwool.json
 217708d60585b4468f01c5eeea8dae4b3b892469 data/aether_ii/loot_tables/blocks/cloudwool_carpet.json
 f6fe71dbb22cb5135868d44d7dce4c3989d36bfb data/aether_ii/loot_tables/blocks/cold_aercloud.json
+f2535f760902c57c6dc69dbeae411233f1d451ca data/aether_ii/loot_tables/blocks/faded_holystone_bricks.json
+5271874b7f1d2f43f27e7ffacd118463b2aea30e data/aether_ii/loot_tables/blocks/faded_holystone_brick_slab.json
+4fb16019a6daa61e7cde078acd1f8a5fa6103259 data/aether_ii/loot_tables/blocks/faded_holystone_brick_stairs.json
+7cfe7696a1bc705031f6e4446da8c9d8925c4b47 data/aether_ii/loot_tables/blocks/faded_holystone_brick_wall.json
 48e66274dcfb891765dd15f36941d07c7d265e3d data/aether_ii/loot_tables/blocks/ferrosite_sand.json
 30972fa73c943b1db70d7006dfe95fcb7d298576 data/aether_ii/loot_tables/blocks/golden_aercloud.json
 0a8333db6bbafc06187539a24dd3c8591183ade7 data/aether_ii/loot_tables/blocks/gravitite_block.json
@@ -48,6 +52,7 @@ d9105bec7145c2ec377367e00a7af6f7711aa0b8 data/aether_ii/loot_tables/blocks/great
 ee2721e8e5e7885fb63442e3079091d3cddb3e17 data/aether_ii/loot_tables/blocks/greatroot_wood.json
 cef34749bb6448dd1154aa7ff226f1111e2d8f30 data/aether_ii/loot_tables/blocks/green_aercloud.json
 ad537436c978b07f8ff457e16f0cdb4c00e72d31 data/aether_ii/loot_tables/blocks/holystone.json
+e8fda5f07643fef17b7ec891fccb27e238037d66 data/aether_ii/loot_tables/blocks/holystone_bookshelf.json
 85ba0a1decc8346dc251a0f46508fb81bbf6d2b1 data/aether_ii/loot_tables/blocks/holystone_bricks.json
 9935575f71a98f16a4a21f3303538c606e76845c data/aether_ii/loot_tables/blocks/holystone_brick_slab.json
 93f3b1f47f789119c4c467098a357a1fb9c2e381 data/aether_ii/loot_tables/blocks/holystone_brick_stairs.json
@@ -80,6 +85,7 @@ be8f7ce6087bad7d632985222e14cc04e4ee7b99 data/aether_ii/loot_tables/blocks/quick
 e824efdf0b729b58caac1af199ac08087f452b94 data/aether_ii/loot_tables/blocks/skybirch_leaves.json
 738c97f5f6e3c604cf6e10b4ac1b2d0c348d66cf data/aether_ii/loot_tables/blocks/skypine_leaves.json
 7f0d63dd932336f59c8efb352a086f272250d2b1 data/aether_ii/loot_tables/blocks/skyplane_leaves.json
+a57c17936933e48d5e353ef6df8eea29463d0efe data/aether_ii/loot_tables/blocks/skyroot_bookshelf.json
 46837ef42f03f8e95d0ca7eb4f2f4b9c72feca06 data/aether_ii/loot_tables/blocks/skyroot_button.json
 908c9a594a9e20a383a497100a4ef6ed0eb8307c data/aether_ii/loot_tables/blocks/skyroot_chest.json
 c9eaa62b067fbc58568fbcb40835a7c349caeda3 data/aether_ii/loot_tables/blocks/skyroot_crafting_table.json

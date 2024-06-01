@@ -72,6 +72,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get());
+                output.accept(AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get());
+                output.accept(AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_STAIRS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_SLAB.get());

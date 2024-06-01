@@ -95,6 +95,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get().asItem(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS.get().asItem(),
                 AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get().asItem(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get().asItem(),
                 AetherIIBlocks.UNDERSHALE_STAIRS.get().asItem(),
                 AetherIIBlocks.AGIOSITE_STAIRS.get().asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get().asItem()
@@ -104,6 +105,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get().asItem(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB.get().asItem(),
                 AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get().asItem(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get().asItem(),
                 AetherIIBlocks.UNDERSHALE_SLAB.get().asItem(),
                 AetherIIBlocks.AGIOSITE_SLAB.get().asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_SLAB.get().asItem()
@@ -113,6 +115,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get().asItem(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL.get().asItem(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.get().asItem(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get().asItem(),
                 AetherIIBlocks.UNDERSHALE_WALL.get().asItem(),
                 AetherIIBlocks.AGIOSITE_WALL.get().asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_WALL.get().asItem()

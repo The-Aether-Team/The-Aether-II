@@ -87,6 +87,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_STAIRS.get(),
                 AetherIIBlocks.AGIOSITE_STAIRS.get(),
                 AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get()
@@ -96,6 +97,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get(),
                 AetherIIBlocks.UNDERSHALE_SLAB.get(),
                 AetherIIBlocks.AGIOSITE_SLAB.get(),
                 AetherIIBlocks.AGIOSITE_BRICK_SLAB.get()
@@ -105,6 +107,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get(),
                 AetherIIBlocks.UNDERSHALE_WALL.get(),
                 AetherIIBlocks.AGIOSITE_WALL.get(),
                 AetherIIBlocks.AGIOSITE_BRICK_WALL.get()
@@ -204,6 +207,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get(),
                 AetherIIBlocks.UNDERSHALE_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_SLAB.get(),
                 AetherIIBlocks.UNDERSHALE_WALL.get(),

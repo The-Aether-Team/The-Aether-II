@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T14:00:33.7517118	Item Models: aether_ii
+// 1.20.4	2024-06-01T15:07:38.9401354	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -42,6 +42,10 @@ e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.
 ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
 0a1091ef207642173d2d97fc02de7e8e115c76b4 assets/aether_ii/models/item/enchanted_berry.json
+5b488fc0fcac5fb3983f7a8a8a1ecbb74dfd5e95 assets/aether_ii/models/item/faded_holystone_bricks.json
+898fcf1565d789c49cadd812a027b536403e6694 assets/aether_ii/models/item/faded_holystone_brick_slab.json
+eb0b176e1501cef5cc43b3cbc3d8d644350aa524 assets/aether_ii/models/item/faded_holystone_brick_stairs.json
+bfda1c27d67a97b093fc40928e36bee3376f73c5 assets/aether_ii/models/item/faded_holystone_brick_wall.json
 1b4294c048cfed5353ed54611e964980d61ce9db assets/aether_ii/models/item/ferrosite_sand.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/flying_cow_spawn_egg.json
 3666299e7cff4487ad320250e7d6d38194f32ca4 assets/aether_ii/models/item/golden_aercloud.json
@@ -75,6 +79,7 @@ e3b849f6603be0ebb13307529d64e4de7d081c6c assets/aether_ii/models/item/greatroot_
 71db11dbfb4109a0d05a6f9304da556bc38af138 assets/aether_ii/models/item/green_aercloud.json
 8e2ea2de4b9c40ce8d12bb8929db104621345611 assets/aether_ii/models/item/holystone.json
 0835f677ffa59ed15b6385fda54653f2ac513621 assets/aether_ii/models/item/holystone_axe.json
+54676d2c2e35ed5b4958b3ac548d5216d0a568b5 assets/aether_ii/models/item/holystone_bookshelf.json
 a6ecedda3f29b3ee2813e021e444eda7e3160514 assets/aether_ii/models/item/holystone_bricks.json
 e22aac8b000522264fb03925fce0374d3eb71b08 assets/aether_ii/models/item/holystone_brick_slab.json
 c3bea203b8917571dc4d022cf96b068ceac88ff4 assets/aether_ii/models/item/holystone_brick_stairs.json
@@ -111,6 +116,7 @@ fad53ce2a6eed791c566a36883f6cce0d0a71b6c assets/aether_ii/models/item/raw_gravit
 d634fe0d27710caaafbf9d63c2877d6a38c3cc71 assets/aether_ii/models/item/skypine_leaves.json
 1264f25092e1b8ae0cfed08db5bf04a82a366fe8 assets/aether_ii/models/item/skyplane_leaves.json
 fcb760fba7e49a163740ac955449c06321ea704c assets/aether_ii/models/item/skyroot_axe.json
+f39b360091d2fff48a5b8deccf884ed359df904f assets/aether_ii/models/item/skyroot_bookshelf.json
 ace2d20b02282d17c842521066a6f9d530ab5fdf assets/aether_ii/models/item/skyroot_button.json
 f6caba399494a58683561699d72ad1cc86e3d339 assets/aether_ii/models/item/skyroot_chest.json
 571aa86a075a6ace9b2a63613bc96a33ddc766e3 assets/aether_ii/models/item/skyroot_crafting_table.json
