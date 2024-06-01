@@ -159,6 +159,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
                 output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
+                output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
             }).build());
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_REDSTONE_BLOCKS = CREATIVE_MODE_TABS.register("redstone_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "functional_blocks"))

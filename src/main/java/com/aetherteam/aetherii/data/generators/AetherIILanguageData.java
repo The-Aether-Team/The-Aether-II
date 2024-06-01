@@ -153,6 +153,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
 
+        this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
+
 
         this.addItem(AetherIIItems.SKYROOT_SWORD, "Skyroot Sword");
         this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");

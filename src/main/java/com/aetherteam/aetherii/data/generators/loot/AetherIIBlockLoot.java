@@ -6,7 +6,9 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BlockLootAccessor;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.util.Set;
 import java.util.function.Supplier;
@@ -168,6 +170,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
+
+        this.add(AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
+                (bookshelf) -> createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(),
+                (bookshelf) -> createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
     }
 
     @Override

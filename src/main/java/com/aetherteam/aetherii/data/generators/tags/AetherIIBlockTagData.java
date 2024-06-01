@@ -205,7 +205,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AGIOSITE_BRICK_WALL.get(),
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.GRAVITITE_BLOCK.get()
+                AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
@@ -238,7 +239,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_STAIRS.get(),
                 AetherIIBlocks.WISPROOT_SLAB.get(),
                 AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(),
-                AetherIIBlocks.SKYROOT_CHEST.get()
+                AetherIIBlocks.SKYROOT_CHEST.get(),
+                AetherIIBlocks.SKYROOT_BOOKSHELF.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
@@ -287,6 +289,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_FENCE.get(),
                 AetherIIBlocks.GREATROOT_FENCE.get(),
                 AetherIIBlocks.WISPROOT_FENCE.get()
+        );
+        this.tag(Tags.Blocks.BOOKSHELVES).add(
+                AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
+                AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
         );
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),

@@ -151,5 +151,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.holystoneFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
+
+        this.bookshelf(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
+        this.bookshelf(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
     }
 }

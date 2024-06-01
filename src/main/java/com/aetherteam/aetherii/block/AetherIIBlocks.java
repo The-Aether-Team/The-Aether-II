@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.construction.AetherDirtPathBlock;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
+import com.aetherteam.aetherii.block.construction.BookshelfBlock;
 import com.aetherteam.aetherii.block.construction.QuicksoilGlassBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
@@ -221,6 +222,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", () -> new HolystoneFurnaceBlock(Block.Properties.ofFullCopy(Blocks.FURNACE)));
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", () -> new SkyrootChestBlock(Block.Properties.ofFullCopy(Blocks.CHEST), AetherIIBlockEntityTypes.SKYROOT_CHEST::get));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion()));
+
+    public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", () -> new BookshelfBlock(Block.Properties.ofFullCopy(Blocks.BOOKSHELF)));
+    public static final DeferredBlock<Block> HOLYSTONE_BOOKSHELF = register("holystone_bookshelf", () -> new BookshelfBlock(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
 
     //TODO: Make Wood and Cloudwool flammable
 
