@@ -8,8 +8,8 @@
       }
     },
     "cloud_noise": "aether_ii:cloudbed_noise",
-    "cloud_radius": 15.0,
-    "offset_max": 20.0,
+    "cloud_radius": 10.0,
+    "offset_max": 15.0,
     "offset_noise": "aether_ii:cloudbed_y_offset",
     "predicate": {
       "type": "minecraft:matching_blocks",
