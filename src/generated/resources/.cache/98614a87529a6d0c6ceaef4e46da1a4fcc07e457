@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T23:44:00.613238	Item Models: aether_ii
+// 1.20.4	2024-06-01T11:29:59.9865393	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -25,6 +25,10 @@ a135c7167305bf922827b50fdf807e0518bfdcd8 assets/aether_ii/models/item/ambrosium_
 77308024eea02e4ceae6af25c5f9817950c5cb19 assets/aether_ii/models/item/ambrosium_ore.json
 c491603cffa0239e489fddeddf49195bf9eba0dc assets/aether_ii/models/item/ambrosium_shard.json
 e7a649e80296c73474cae1aced097fde5ca5cdee assets/aether_ii/models/item/ambrosium_torch.json
+c6d8de455aab4c2280825a39e7b72b417f5b8341 assets/aether_ii/models/item/arctic_ice.json
+a0c75e9d5a348efa2d1950f3dddcabd54c7f3011 assets/aether_ii/models/item/arctic_packed_ice.json
+6893e855d65956da73a981a25b137d22018bf645 assets/aether_ii/models/item/arctic_snow.json
+3011fee0d9d4504b93c6746a96035accf4506b1c assets/aether_ii/models/item/arctic_snow_block.json
 19aa149f0419e640d12cb92cc1821a9f7a4cafc6 assets/aether_ii/models/item/arkenium_axe.json
 dc70b899ac53f0aa29fccea1bfadb391bfbe5f8b assets/aether_ii/models/item/arkenium_hammer.json
 ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_ore.json

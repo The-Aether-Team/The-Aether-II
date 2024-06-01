@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T23:47:27.5065218	Block States: aether_ii
+// 1.20.4	2024-06-01T11:29:59.8455395	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -23,6 +23,10 @@ c530b03b5d4aef146463ea70f89550cb05958172 assets/aether_ii/blockstates/ambrosium_
 7ede872563c8383ca485b759e69f713162bdbcc7 assets/aether_ii/blockstates/ambrosium_ore.json
 3790108941c335e2b7b9f41dfae7a72c00b59b92 assets/aether_ii/blockstates/ambrosium_torch.json
 d33a4e439414b63dc1d0cc01b27897557dc1f718 assets/aether_ii/blockstates/ambrosium_wall_torch.json
+6d68e9c4f0e05027fb4c404f386fae561743be54 assets/aether_ii/blockstates/arctic_ice.json
+ba72649367e913f4e77952e1a1bb267d59cad4f9 assets/aether_ii/blockstates/arctic_packed_ice.json
+4309bd82b65b4582a155de7451e2ed6c8e4f12a2 assets/aether_ii/blockstates/arctic_snow.json
+ba2b95d37c59c004eae71605d4002e05391f50ac assets/aether_ii/blockstates/arctic_snow_block.json
 f70d2c7f292ee79ecae67dd6bfc775691beb9a80 assets/aether_ii/blockstates/arkenium_ore.json
 999553f352ecd804f63eeb4583295000ae3d56f1 assets/aether_ii/blockstates/blue_aercloud.json
 70a532fbcf0f82aa02919202b2f92afa51da56f8 assets/aether_ii/blockstates/cloudwool.json
@@ -161,6 +165,17 @@ d58f84bc6511c6fce4222ee12f5263d16193a0e0 assets/aether_ii/models/block/amberoot_
 5d5be47f23485414118570094b00e3d9cf1853d3 assets/aether_ii/models/block/ambrosium_ore.json
 6e1dc428632ad392f5aadcd180401d86c259884e assets/aether_ii/models/block/ambrosium_torch.json
 1b158cecbadf080c31e7b6a13bb3cd2c1bb55455 assets/aether_ii/models/block/ambrosium_wall_torch.json
+86d1eabd3c9742bf294e0244146f92cd17da6790 assets/aether_ii/models/block/arctic_ice.json
+ed85542f3480e2e7afa213ba1d113ddad4b5a5b3 assets/aether_ii/models/block/arctic_packed_ice.json
+559db5189379cca67485e6c152bd58dbc962ba0a assets/aether_ii/models/block/arctic_snow.json
+7cdd96c18b54066633cc4a078313908dee4ac24e assets/aether_ii/models/block/arctic_snow10.json
+af4081296d9c96adcfcd5aae8ec8ff95554d681e assets/aether_ii/models/block/arctic_snow12.json
+1292e5596c83e07f28db1c4fdbb206d05d0bbea8 assets/aether_ii/models/block/arctic_snow14.json
+487e420e92cc7856ac70f79f991aba4ffcd4d29d assets/aether_ii/models/block/arctic_snow16.json
+0ce7faa35008a7b77706f995b0fbdbd535717edf assets/aether_ii/models/block/arctic_snow4.json
+e850ffe1067a63eaef0569f42b023214759b2d53 assets/aether_ii/models/block/arctic_snow6.json
+b0b5aa2804547fd8444324005b8773e897828879 assets/aether_ii/models/block/arctic_snow8.json
+45f3acd4f5612d84622e9a83c6f69138c34c839a assets/aether_ii/models/block/arctic_snow_block.json
 016b0c1533090f1198dfeb2db71beb72c730a787 assets/aether_ii/models/block/arkenium_ore.json
 9f51375a8c00c0440af1bfa813fda3d6144692ce assets/aether_ii/models/block/blue_aercloud.json
 c0f964bf0e8d5046ec61f6ad516e118fc043148a assets/aether_ii/models/block/cloudwool.json

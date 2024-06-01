@@ -99,6 +99,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.itemBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
         this.itemBlock(AetherIIBlocks.SCATTERGLASS.get());
+        this.itemBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.ARCTIC_SNOW.get());
+        this.itemBlock(AetherIIBlocks.ARCTIC_ICE.get());
+        this.itemBlock(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
 
         this.itemBlock(AetherIIBlocks.AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());

@@ -115,6 +115,29 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
     }
 
+    public void snowLayer(Block block, Block base) {
+        ResourceLocation texture = this.texture("natural/" + this.name(base));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            int i = state.getValue(SnowLayerBlock.LAYERS);
+            boolean firstState = i == 1;
+            i *= 2;
+            String name = firstState ? this.name(block) : this.name(block) + i;
+            BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
+            ModelFile model = modelBuilder
+                    .texture("particle", texture)
+                    .texture("texture", texture)
+                    .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
+                    .face(Direction.DOWN).texture("#texture").end()
+                    .face(Direction.UP).texture("#texture").end()
+                    .face(Direction.NORTH).texture("#texture").end()
+                    .face(Direction.SOUTH).texture("#texture").end()
+                    .face(Direction.EAST).texture("#texture").end()
+                    .face(Direction.WEST).texture("#texture").end()
+                    .end();
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
+    }
+
     public void aercloudAll(Block block, String location) {
         ResourceLocation texture = this.texture(this.name(block), location);
         this.aercloud(block, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture);

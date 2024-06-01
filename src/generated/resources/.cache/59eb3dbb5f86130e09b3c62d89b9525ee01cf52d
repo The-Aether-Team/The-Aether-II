@@ -1,4 +1,4 @@
-// 1.20.4	2024-05-31T23:44:00.5912383	Loot Tables
+// 1.20.4	2024-06-01T11:29:59.916538	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -22,6 +22,10 @@ a16bcaab0cf39b3023d08214573ae0f2436c3408 data/aether_ii/loot_tables/blocks/ambro
 5e2d1ad8a5c52e3c28f63d21e38b2215d4f1db01 data/aether_ii/loot_tables/blocks/ambrosium_ore.json
 0813f6f52fdb70140445fd6b6034fb703490d96c data/aether_ii/loot_tables/blocks/ambrosium_torch.json
 6eda57339b984a3a0ecba560d7f4829850d937c3 data/aether_ii/loot_tables/blocks/ambrosium_wall_torch.json
+321e8bf2a43dc1004552e9c8e19bfea058629a06 data/aether_ii/loot_tables/blocks/arctic_ice.json
+e8db59e05ebcaea1d9549caf64ce6c465cf235f0 data/aether_ii/loot_tables/blocks/arctic_packed_ice.json
+b4472a1ffd108a9e2e14cb7bcd44a3c408e151a6 data/aether_ii/loot_tables/blocks/arctic_snow.json
+c975f2ca2288111bca5b8e284ddce017d621d461 data/aether_ii/loot_tables/blocks/arctic_snow_block.json
 2d59567ee2fac257895ce065f7c639bdb9447c3d data/aether_ii/loot_tables/blocks/arkenium_ore.json
 979a5c4bb8cf4fecd2910d88472dedc69240b76e data/aether_ii/loot_tables/blocks/blue_aercloud.json
 ae25ba8ab6d368e881f2908a144d154f268b369c data/aether_ii/loot_tables/blocks/cloudwool.json

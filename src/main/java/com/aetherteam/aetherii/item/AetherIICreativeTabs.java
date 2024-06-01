@@ -118,6 +118,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.RUSTED_FERROSITE.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+                output.accept(AetherIIBlocks.ARCTIC_SNOW.get());
+                output.accept(AetherIIBlocks.ARCTIC_ICE.get());
+                output.accept(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());

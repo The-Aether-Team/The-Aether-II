@@ -35,6 +35,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RUSTED_FERROSITE, "Rusted Ferrosite");
         this.addBlock(AetherIIBlocks.CRUDE_SCATTERGLASS, "Crude Scatterglass");
         this.addBlock(AetherIIBlocks.SCATTERGLASS, "Scatterglass");
+        this.addBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK, "Arctic Snow Block");
+        this.addBlock(AetherIIBlocks.ARCTIC_SNOW, "Arctic Snow");
+        this.addBlock(AetherIIBlocks.ARCTIC_ICE, "Arctic Ice");
+        this.addBlock(AetherIIBlocks.ARCTIC_PACKED_ICE, "Arctic Packed Ice");
 
         this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
         this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");
