@@ -1,5 +1,5 @@
 {
   "type": "minecraft:add",
   "argument1": 0.1,
-  "argument2": "aether_ii:highlands/terrain_shaper"
+  "argument2": "aether_ii:highlands/final_density"
 }
