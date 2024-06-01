@@ -8,7 +8,7 @@
       }
     },
     "cloud_noise": "aether_ii:cloudbed_noise",
-    "cloud_radius": 5.0,
+    "cloud_radius": 10.0,
     "offset_max": 10.0,
     "offset_noise": "aether_ii:cloudbed_y_offset",
     "predicate": {
