@@ -14,20 +14,21 @@ public class AetherIIParticleTypes {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, AetherII.MODID);
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AETHER_PORTAL = PARTICLES.register("aether_portal", () -> new SimpleParticleType(false));
-
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SLASH_ATTACK = PARTICLES.register("slash_attack", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IMPACT_ATTACK = PARTICLES.register("impact_attack", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PIERCE_ATTACK = PARTICLES.register("pierce_attack", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> ZEPHYR_SNOWFLAKE = PARTICLES.register("zephyr_snowflake", () -> new SimpleParticleType(false));
-
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));
-
 
     /**
      * @see AetherIIClient#eventSetup()
      */
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(AETHER_PORTAL.get(), AetherPortalParticle.Factory::new);
-
+        event.registerSpriteSet(SLASH_ATTACK.get(), DamageTypeParticle.Provider::new);
+        event.registerSpriteSet(IMPACT_ATTACK.get(), DamageTypeParticle.Provider::new);
+        event.registerSpriteSet(PIERCE_ATTACK.get(), DamageTypeParticle.Provider::new);
         event.registerSpriteSet(ZEPHYR_SNOWFLAKE.get(), SnowflakeParticle.Provider::new);
-
         event.registerSpriteSet(IRRADIATION.get(), IrradiationParticle.Factory::new);
     }
 }
