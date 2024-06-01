@@ -6,10 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.crafting.Ingredient;
 
 public class AetherIIRecipeData extends AetherIIRecipeProvider {
@@ -26,6 +23,24 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         planksFromLog(consumer, AetherIIBlocks.SKYROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_SKYROOT_PLANKS, 4);
         planksFromLog(consumer, AetherIIBlocks.GREATROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_GREATROOT_PLANKS, 4);
         planksFromLog(consumer, AetherIIBlocks.WISPROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_WISPROOT_PLANKS, 4);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SKYROOT_PLANKS.get())
+                .requires(AetherIITags.Items.SKYROOT_MASONRY_BLOCKS)
+                .group("planks_from_masonry")
+                .unlockedBy("has_masonry_blocks", has(AetherIITags.Items.SKYROOT_MASONRY_BLOCKS))
+                .save(consumer, name("skyroot_planks_from_masonry"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.GREATROOT_PLANKS.get())
+                .requires(AetherIITags.Items.GREATROOT_MASONRY_BLOCKS)
+                .group("planks_from_masonry")
+                .unlockedBy("has_masonry_blocks", has(AetherIITags.Items.GREATROOT_MASONRY_BLOCKS))
+                .save(consumer, name("greatroot_planks_from_masonry"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WISPROOT_PLANKS.get())
+                .requires(AetherIITags.Items.WISPROOT_MASONRY_BLOCKS)
+                .group("planks_from_masonry")
+                .unlockedBy("has_masonry_blocks", has(AetherIITags.Items.WISPROOT_MASONRY_BLOCKS))
+                .save(consumer, name("wisproot_planks_from_masonry"));
 
         this.fence(AetherIIBlocks.SKYROOT_FENCE, AetherIIBlocks.SKYROOT_PLANKS).save(consumer);
         this.fenceGate(AetherIIBlocks.SKYROOT_FENCE_GATE, AetherIIBlocks.SKYROOT_PLANKS).save(consumer);

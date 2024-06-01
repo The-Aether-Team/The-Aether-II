@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.construction.AetherDirtPathBlock;
-import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
-import com.aetherteam.aetherii.block.construction.BookshelfBlock;
-import com.aetherteam.aetherii.block.construction.QuicksoilGlassBlock;
+import com.aetherteam.aetherii.block.construction.*;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
 import com.aetherteam.aetherii.block.utility.HolystoneFurnaceBlock;
@@ -241,8 +238,42 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", () -> new SkyrootChestBlock(Block.Properties.ofFullCopy(Blocks.CHEST), AetherIIBlockEntityTypes.SKYROOT_CHEST::get));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion()));
 
+    // Bookshelves
     public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", () -> new BookshelfBlock(Block.Properties.ofFullCopy(Blocks.BOOKSHELF)));
     public static final DeferredBlock<Block> HOLYSTONE_BOOKSHELF = register("holystone_bookshelf", () -> new BookshelfBlock(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
+
+    // Skyroot Masonry Blocks
+    public static final DeferredBlock<Block> SKYROOT_FLOORBOARDS = register("skyroot_floorboards", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> SKYROOT_HIGHLIGHT = register("skyroot_highlight", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> SKYROOT_SHINGLES = register("skyroot_shingles", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> SKYROOT_SMALL_SHINGLES = register("skyroot_small_shingles", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> SKYROOT_BASE_PLANKS = register("skyroot_base_planks", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> SKYROOT_TOP_PLANKS = register("skyroot_top_planks", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> SKYROOT_BASE_BEAM = register("skyroot_base_beam", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> SKYROOT_TOP_BEAM = register("skyroot_top_beam", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+    public static final DeferredBlock<RotatedPillarBlock> SKYROOT_BEAM = register("skyroot_beam", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
+
+    // Greatroot Masonry Blocks
+    public static final DeferredBlock<Block> GREATROOT_FLOORBOARDS = register("greatroot_floorboards", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> GREATROOT_HIGHLIGHT = register("greatroot_highlight", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> GREATROOT_SHINGLES = register("greatroot_shingles", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> GREATROOT_SMALL_SHINGLES = register("greatroot_small_shingles", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> GREATROOT_BASE_PLANKS = register("greatroot_base_planks", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> GREATROOT_TOP_PLANKS = register("greatroot_top_planks", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> GREATROOT_BASE_BEAM = register("greatroot_base_beam", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> GREATROOT_TOP_BEAM = register("greatroot_top_beam", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+    public static final DeferredBlock<RotatedPillarBlock> GREATROOT_BEAM = register("greatroot_beam", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
+
+    // Wisproot Masonry Blocks
+    public static final DeferredBlock<Block> WISPROOT_FLOORBOARDS = register("wisproot_floorboards", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> WISPROOT_HIGHLIGHT = register("wisproot_highlight", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> WISPROOT_SHINGLES = register("wisproot_shingles", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> WISPROOT_SMALL_SHINGLES = register("wisproot_small_shingles", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> WISPROOT_BASE_PLANKS = register("wisproot_base_planks", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> WISPROOT_TOP_PLANKS = register("wisproot_top_planks", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> WISPROOT_BASE_BEAM = register("wisproot_base_beam", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
+    public static final DeferredBlock<Block> WISPROOT_TOP_BEAM = register("wisproot_top_beam", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
+    public static final DeferredBlock<RotatedPillarBlock> WISPROOT_BEAM = register("wisproot_beam", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
 
     //TODO: Make Wood and Cloudwool flammable
 

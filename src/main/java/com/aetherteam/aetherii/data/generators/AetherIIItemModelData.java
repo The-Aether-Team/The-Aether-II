@@ -225,5 +225,35 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         this.itemBlock(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
+
+        this.itemBlock(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_SMALL_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_BASE_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_TOP_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_BASE_BEAM.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_TOP_BEAM.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_BEAM.get());
+
+        this.itemBlock(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_SMALL_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_BASE_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_TOP_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_BASE_BEAM.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_TOP_BEAM.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_BEAM.get());
+
+        this.itemBlock(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_SMALL_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_BASE_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_TOP_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_BASE_BEAM.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_TOP_BEAM.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_BEAM.get());
     }
 }

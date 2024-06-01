@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
@@ -13,11 +12,9 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredBlock;
 
 public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvider {
     public AetherIIBlockStateProvider(PackOutput output, String id, ExistingFileHelper helper) {
@@ -275,6 +272,15 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("saw", texture(name(block) + "_saw", "utility/"))
                 .renderType("cutout_mipped");
         getVariantBuilder(block).partialState().addModels(new ConfiguredModel(plant));
+    }
+
+    public void masonryBlock(Block block, Block endBlock) {
+        ModelFile masonryBlock = this.models().cubeColumn(this.name(block), this.texture(this.name(block), "masonry/"), this.texture(this.name(endBlock), "masonry/"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(masonryBlock));
+    }
+
+    public void masonryBeam(RotatedPillarBlock block, Block endBlock) {
+        this.axisBlock(block, this.extend(this.texture(this.name(block), "masonry/"), ""), this.extend(this.texture(this.name(endBlock), "masonry/"), ""));
     }
 
 //    public void grass(Block block, Block dirtBlock) {

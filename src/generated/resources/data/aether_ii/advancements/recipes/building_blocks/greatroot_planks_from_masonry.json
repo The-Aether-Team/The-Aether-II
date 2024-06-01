@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_masonry_blocks": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "aether_ii:greatroot_masonry_blocks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:greatroot_planks_from_masonry"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_masonry_blocks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:greatroot_planks_from_masonry"
+    ]
+  }
+}
