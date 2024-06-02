@@ -9,7 +9,7 @@
       }
     },
     "foliage_placer": {
-      "type": "aether_ii:amberoot_foliage_placer",
+      "type": "aether_ii:large_amberoot_foliage_placer",
       "offset": 2,
       "radius": 1
     },
