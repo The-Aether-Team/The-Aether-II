@@ -244,6 +244,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATBOA_LEAVES.asItem(),
                 AetherIIBlocks.AMBEROOT_LEAVES.asItem()
         );
+
+        this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
+
+        this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
+                AetherIIItems.ORANGE.get()
+        );
+
         this.tag(ItemTags.MUSIC_DISCS).add(
                 AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(),
                 AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(),

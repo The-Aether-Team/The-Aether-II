@@ -13,6 +13,8 @@ import com.aetherteam.aetherii.client.renderer.entity.ZephyrRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.QuadrupedWingsModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.ZephyrModel;
+import com.aetherteam.aetherii.client.renderer.model.KirridBabyModel;
+import com.aetherteam.aetherii.client.renderer.model.KirridModel;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.client.model.CowModel;
 import net.minecraft.client.model.PigModel;
@@ -38,6 +40,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.AERBUNNY.get(), AerbunnyRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.PHYG.get(), PhygRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.FLYING_COW.get(), FlyingCowRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.KIRRID.get(), KirridRenderer::new);
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR.get(), ZephyrRenderer::new);
@@ -57,6 +60,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherModelLayers.PHYG_SADDLE, () -> PigModel.createBodyLayer(new CubeDeformation(0.5F)));
         event.registerLayerDefinition(AetherModelLayers.FLYING_COW, CowModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.FLYING_COW_WINGS, () -> QuadrupedWingsModel.createMainLayer(0.0F));
+        event.registerLayerDefinition(AetherModelLayers.KIRRID, KirridModel::createBodyLayer);
+        event.registerLayerDefinition(AetherModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
 
         // Hostile
         event.registerLayerDefinition(AetherModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);

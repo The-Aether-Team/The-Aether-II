@@ -4,12 +4,9 @@ import com.aetherteam.aetherii.item.miscellaneous.ConsumableItem;
 import com.aetherteam.aetherii.item.miscellaneous.ItemUseConversion;
 import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
-
-import java.util.Properties;
 
 public class AmbrosiumShardItem extends Item implements ItemUseConversion<AmbrosiumRecipe>, ConsumableItem {
     public AmbrosiumShardItem(Properties properties) {

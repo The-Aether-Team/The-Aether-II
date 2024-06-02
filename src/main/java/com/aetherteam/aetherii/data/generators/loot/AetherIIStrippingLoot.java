@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.data.loot.LootTableSubProvider;

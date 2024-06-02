@@ -15,6 +15,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistanc
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
@@ -70,6 +71,7 @@ public class AetherII {
                 AetherIIEntityTypes.ENTITY_TYPES,
                 AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
                 AetherIIAttributes.ATTRIBUTES,
+                AetherIIMemoryModuleTypes.MEMORY_MODULE_TYPES,
                 AetherIIEffects.EFFECTS,
                 AetherIIDataAttachments.ATTACHMENTS,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
