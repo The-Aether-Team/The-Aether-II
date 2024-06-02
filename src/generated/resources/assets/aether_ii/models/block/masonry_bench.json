@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/stonecutter",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "bottom": "aether_ii:block/utility/masonry_bench_bottom",
+    "particle": "aether_ii:block/utility/masonry_bench_bottom",
+    "saw": "aether_ii:block/utility/masonry_bench_saw",
+    "side": "aether_ii:block/utility/masonry_bench_side",
+    "top": "aether_ii:block/utility/masonry_bench_top"
+  }
+}

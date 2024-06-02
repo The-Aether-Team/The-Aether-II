@@ -594,4 +594,24 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
         }, LadderBlock.WATERLOGGED);
     }
+
+    public void masonryBench(Block block) {
+        ModelFile plant = models().withExistingParent(name(block), mcLoc("block/stonecutter"))
+                .texture("particle", texture(name(block) + "_bottom", "utility/"))
+                .texture("bottom", texture(name(block) + "_bottom", "utility/"))
+                .texture("top", texture(name(block) + "_top", "utility/"))
+                .texture("side", texture(name(block) + "_side", "utility/"))
+                .texture("saw", texture(name(block) + "_saw", "utility/"))
+                .renderType("cutout_mipped");
+        getVariantBuilder(block).partialState().addModels(new ConfiguredModel(plant));
+    }
+
+    public void masonryBlock(Block block, Block endBlock) {
+        ModelFile masonryBlock = this.models().cubeColumn(this.name(block), this.texture(this.name(block), "masonry/"), this.texture(this.name(endBlock), "masonry/"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(masonryBlock));
+    }
+
+    public void masonryBeam(RotatedPillarBlock block, Block endBlock) {
+        this.axisBlock(block, this.extend(this.texture(this.name(block), "masonry/"), ""), this.extend(this.texture(this.name(endBlock), "masonry/"), ""));
+    }
 }

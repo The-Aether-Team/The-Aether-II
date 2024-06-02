@@ -21,6 +21,9 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
+        public static final TagKey<Block> SKYROOT_MASONRY_BLOCKS = tag("skyroot_masonry_blocks");
+        public static final TagKey<Block> GREATROOT_MASONRY_BLOCKS = tag("greatroot_masonry_blocks");
+        public static final TagKey<Block> WISPROOT_MASONRY_BLOCKS = tag("wisproot_masonry_blocks");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
 
         private static TagKey<Block> tag(String name) {
@@ -36,6 +39,9 @@ public class AetherIITags {
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Item> AMBEROOT_LOGS = tag("amberoot_logs");
+        public static final TagKey<Item> SKYROOT_MASONRY_BLOCKS = tag("skyroot_masonry_blocks");
+        public static final TagKey<Item> GREATROOT_MASONRY_BLOCKS = tag("greatroot_masonry_blocks");
+        public static final TagKey<Item> WISPROOT_MASONRY_BLOCKS = tag("wisproot_masonry_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");

@@ -73,6 +73,13 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
 
+        this.item(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(), "miscellaneous/");
+        this.item(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(), "miscellaneous/");
+        this.item(AetherIIItems.MUSIC_DISC_AERWHALE.get(), "miscellaneous/");
+        this.item(AetherIIItems.MUSIC_DISC_APPROACHES.get(), "miscellaneous/");
+        this.item(AetherIIItems.MUSIC_DISC_DEMISE.get(), "miscellaneous/");
+        this.item(AetherIIItems.RECORDING_892.get(), "miscellaneous/");
+
         this.eggItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
@@ -217,6 +224,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
 
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), "construction/");
+
         this.itemBlock(AetherIIBlocks.UNDERSHALE_STAIRS.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.UNDERSHALE_WALL.get(), AetherIIBlocks.UNDERSHALE.get(), "natural/");
@@ -243,7 +255,41 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.AMBROSIUM_TORCH.get(), "utility/");
         this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+        this.itemBlock(AetherIIBlocks.MASONRY_BENCH.get());
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
+
+        this.itemBlock(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
+
+        this.itemBlock(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_SMALL_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_BASE_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_TOP_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_BASE_BEAM.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_TOP_BEAM.get());
+        this.itemBlock(AetherIIBlocks.SKYROOT_BEAM.get());
+
+        this.itemBlock(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_SMALL_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_BASE_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_TOP_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_BASE_BEAM.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_TOP_BEAM.get());
+        this.itemBlock(AetherIIBlocks.GREATROOT_BEAM.get());
+
+        this.itemBlock(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_SMALL_SHINGLES.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_BASE_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_TOP_PLANKS.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_BASE_BEAM.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_TOP_BEAM.get());
+        this.itemBlock(AetherIIBlocks.WISPROOT_BEAM.get());
     }
 }

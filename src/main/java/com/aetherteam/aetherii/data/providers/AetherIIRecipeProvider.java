@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -34,6 +35,17 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected ShapedRecipeBuilder fenceGate(Supplier<? extends Block> fenceGate, Supplier<? extends Block> material) {
         return this.fenceGate(fenceGate, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
+    }
+
+    protected static void bookshelf(RecipeOutput consumer, ItemLike result, ItemLike material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result)
+                .define('#', material)
+                .define('B', Items.BOOK)
+                .pattern("###")
+                .pattern("BBB")
+                .pattern("###")
+                .unlockedBy(getHasName(Items.BOOK), has(Items.BOOK))
+                .save(consumer);
     }
 
     protected ShapedRecipeBuilder makePickaxeWithTag(Supplier<? extends Item> pickaxe, TagKey<Item> material, String has) {

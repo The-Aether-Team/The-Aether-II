@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.natural.TwigBlock;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIFeatureBuilders;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
