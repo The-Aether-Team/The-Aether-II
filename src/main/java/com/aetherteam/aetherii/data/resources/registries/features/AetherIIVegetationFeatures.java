@@ -32,6 +32,7 @@ public class AetherIIVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_PATCH = AetherIIFeatureUtils.registerKey("blueberry_bush_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE_PATCH = AetherIIFeatureUtils.registerKey("orange_tree_patch");
 
+    // These are normally only as selectors for the Amberoot Variants but are also as a Placeholders at the moment for the Irradiated Biomes
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT = AetherIIFeatureUtils.registerKey("trees_amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_FOREST = AetherIIFeatureUtils.registerKey("trees_amberoot_forest");
 
