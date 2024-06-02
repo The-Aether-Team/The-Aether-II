@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T17:35:01.4560679	Item Models: aether_ii
+// 1.20.4	2024-06-01T18:10:23.1801189	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -130,6 +130,7 @@ a146cf9b7567eb6bd1e5a4c2523f6d1f4ec153ad assets/aether_ii/models/item/mossy_holy
 1b577aee3036b910200c7e21424651f9575623f4 assets/aether_ii/models/item/mossy_holystone_slab.json
 3d8c627cbebadfc0db76f81fe4747fef77b8f5c1 assets/aether_ii/models/item/mossy_holystone_stairs.json
 a929cf248f4d81112bcca10919db5b4f544e3a11 assets/aether_ii/models/item/mossy_holystone_wall.json
+93b9739a9d6e316cbc51c1d08211d5f7982e0303 assets/aether_ii/models/item/mossy_wisproot_log.json
 4c9510312c65a4c9bcfe155df6fa7cd994b2deb2 assets/aether_ii/models/item/music_disc_aerwhale.json
 fdbc2b95e3a38eb2246f8516f7d4668aaffc78bb assets/aether_ii/models/item/music_disc_aether_tune.json
 a4d31344b700215976c61ca1b3f366b3f3284d1e assets/aether_ii/models/item/music_disc_approaches.json

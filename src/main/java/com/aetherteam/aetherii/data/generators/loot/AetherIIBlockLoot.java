@@ -62,6 +62,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_LOG.get());
+        this.dropOther(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.asItem());
         this.dropSelf(AetherIIBlocks.AMBEROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());

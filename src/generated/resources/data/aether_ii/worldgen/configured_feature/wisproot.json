@@ -5,10 +5,9 @@
       {
         "type": "aether_ii:wisproot_decorator",
         "block": {
-          "Name": "aether_ii:wisproot_log",
+          "Name": "aether_ii:mossy_wisproot_log",
           "Properties": {
-            "axis": "y",
-            "mossy": "true"
+            "axis": "y"
           }
         }
       }
@@ -54,8 +53,7 @@
       "state": {
         "Name": "aether_ii:wisproot_log",
         "Properties": {
-          "axis": "y",
-          "mossy": "false"
+          "axis": "y"
         }
       }
     }

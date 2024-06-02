@@ -61,6 +61,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.WISPROOT_LOGS).add(
                 AetherIIBlocks.WISPROOT_LOG.get(),
+                AetherIIBlocks.MOSSY_WISPROOT_LOG.get(),
                 AetherIIBlocks.WISPROOT_WOOD.get()
         );
         this.tag(AetherIITags.Blocks.AMBEROOT_LOGS).add(

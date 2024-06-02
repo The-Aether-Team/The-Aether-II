@@ -181,6 +181,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
+                output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());

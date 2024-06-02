@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_column",
   "textures": {
     "end": "aether_ii:block/natural/wisproot_log_top",
-    "side": "aether_ii:block/natural/wisproot_log_mossy"
+    "side": "aether_ii:block/natural/mossy_wisproot_log"
   }
 }

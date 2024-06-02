@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.natural.TwigBlock;
-import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -233,46 +232,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void logDifferentTop(RotatedPillarBlock block, RotatedPillarBlock baseBlock) {
         this.axisBlock(block, this.texture(this.name(block), "natural/"), this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
-    }
-
-    public void wisprootLog(WisprootLogBlock block) {
-        String blockName = this.name(block);
-        ResourceLocation side = this.extend(this.texture(this.name(block), "natural/"), "");
-        ResourceLocation top = this.extend(this.texture(this.name(block), "natural/"), "_top");
-        ResourceLocation sideMossy = this.extend(this.texture(this.name(block), "natural/"), "_mossy");
-        ModelFile normal = this.models().cubeColumn(blockName, side, top);
-        ModelFile horizontal = this.models().cubeColumnHorizontal(blockName + "_horizontal", side, top);
-        ModelFile mossy = this.models().cubeColumn(blockName + "_mossy", sideMossy, top);
-
-        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            Direction.Axis axis = state.getValue(RotatedPillarBlock.AXIS);
-            if (state.getValue(WisprootLogBlock.MOSSY)) {
-                switch (axis) {
-                    case X -> {
-                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).rotationY(90).build();
-                    }
-                    case Y -> {
-                        return ConfiguredModel.builder().modelFile(mossy).build();
-                    }
-                    case Z -> {
-                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).build();
-                    }
-                }
-            } else {
-                switch (axis) {
-                    case X -> {
-                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).rotationY(90).build();
-                    }
-                    case Y -> {
-                        return ConfiguredModel.builder().modelFile(normal).build();
-                    }
-                    case Z -> {
-                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).build();
-                    }
-                }
-            }
-            return ConfiguredModel.builder().build();
-        });
     }
 
     public ModelBuilder<BlockModelBuilder> triTintedCross(String name) {

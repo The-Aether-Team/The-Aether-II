@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries.features;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
 import com.aetherteam.aetherii.world.tree.foliage.*;
 import com.aetherteam.aetherii.world.tree.trunk.AmberootTrunkPlacer;
@@ -55,7 +54,7 @@ public class AetherIITreeFeatures {
                         new StraightTrunkPlacer(11, 4, 0), BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LEAVES.get().defaultBlockState()),
                         new WisprootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
-                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.WISPROOT_LOG.get().defaultBlockState().setValue(WisprootLogBlock.MOSSY, true)))).build());
+                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
 
         AetherIIFeatureUtils.register(context, WISPTOP, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -63,7 +62,7 @@ public class AetherIITreeFeatures {
                         new StraightTrunkPlacer(13, 6, 0), BlockStateProvider.simple(AetherIIBlocks.WISPTOP_LEAVES.get().defaultBlockState()),
                         new WisptopFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
-                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.WISPROOT_LOG.get().defaultBlockState().setValue(WisprootLogBlock.MOSSY, true)))).build());
+                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
 
         AetherIIFeatureUtils.register(context, GREATROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
