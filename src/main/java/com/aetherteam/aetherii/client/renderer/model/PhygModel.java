@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.model;
 
-import com.aetherteam.aetherii.client.renderer.model.animation.BabyAnimation;
+import com.aetherteam.aetherii.client.renderer.model.animation.PhygAnimation;
 import com.aetherteam.aetherii.entity.passive.Phyg;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HierarchicalModel;
@@ -120,10 +120,10 @@ public class PhygModel<T extends Phyg> extends HierarchicalModel<T> {
             entity.setWingFold(entity.getWingFold() + ((aimingForFold - entity.getWingFold()) / 37.5F));
             float wingBend = -((float) Math.acos(entity.getWingFold()));
             this.wing_left.zRot = -(entity.getWingAngle() + wingBend + Mth.HALF_PI);
-            this.wing_right.zRot = -(entity.getWingAngle() - wingBend + Mth.HALF_PI) - this.wing_left.zRot;
+            this.wing_right.zRot = -this.wing_left.zRot;
         }
         if (entity.isBaby()) {
-            this.applyStatic(BabyAnimation.BABY);
+            this.applyStatic(PhygAnimation.BABY);
         }
     }
 
