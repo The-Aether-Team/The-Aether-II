@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIPlacementBuilders;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -48,15 +49,15 @@ public class AetherIIMiscPlacements {
         );
 
         AetherIIPlacementUtils.register(context, SKYROOT_TWIGS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.SKYROOT_TWIGS),
-                NoiseThresholdCountPlacement.of(-0.8, 5, 10),
+                NoiseThresholdCountPlacement.of(-0.8, 1, 2),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_DIRT)), //todo
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
                 BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, HOLYSTONE_ROCKS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.HOLYSTONE_ROCKS),
-                NoiseThresholdCountPlacement.of(-0.8, 5, 10),
+                NoiseThresholdCountPlacement.of(-0.8, 1, 2),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_DIRT)), //todo
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
                 BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, MOA_NEST, configuredFeatures.getOrThrow(AetherIIMiscFeatures.MOA_NEST),
