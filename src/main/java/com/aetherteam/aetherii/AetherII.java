@@ -71,19 +71,19 @@ public class AetherII {
                 AetherIIItems.ITEMS,
                 AetherIIEntityTypes.ENTITY_TYPES,
                 AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
+                AetherIIAttributes.ATTRIBUTES,
                 AetherIIEffects.EFFECTS,
+                AetherIIDataAttachments.ATTACHMENTS,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
+                AetherIIMenuTypes.MENU_TYPES,
+                AetherIIParticleTypes.PARTICLES,
+                AetherIISoundEvents.SOUNDS,
+                AetherIIPoi.POI,
                 AetherIIFeatures.FEATURES,
                 AetherIITreeDecoratorTypes.TREE_DECORATORS,
                 AetherIITrunkPlacerTypes.TRUNK_PLACERS,
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
-                AetherIIParticleTypes.PARTICLES,
-                AetherIISoundEvents.SOUNDS,
-                AetherIIAttributes.ATTRIBUTES,
-                AetherIIMenuTypes.MENU_TYPES,
-                AetherIIPoi.POI,
-                AetherIIDataAttachments.ATTACHMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES
         };
 
@@ -113,8 +113,6 @@ public class AetherII {
 
         EffectsSystemListeners.listen(bus);
         DamageSystemListener.listen(bus);
-        PortalTeleportationListener.listen(bus);
-        ToolAbilityListener.listen(bus);
         ToolModificationListener.listen(bus);
         ToolAbilityListener.listen(bus);
         PortalTeleportationListener.listen(bus);
