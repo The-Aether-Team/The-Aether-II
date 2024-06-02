@@ -28,7 +28,7 @@ public class FallableLongJumpMidJump extends LongJumpMidJump {
     @Override
     protected void stop(ServerLevel pLevel, Mob pEntity, long pGameTime) {
         super.stop(pLevel, pEntity, pGameTime);
-        if (pEntity.onGround()) {
+        if (!pEntity.onGround()) {
             pEntity.setPose(Pose.LONG_JUMPING);
         }
     }

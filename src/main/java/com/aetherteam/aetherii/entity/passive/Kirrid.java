@@ -348,7 +348,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
                 }
             }
             if (this.kirrid.onGround() && this.kirrid.getPose() == Pose.LONG_JUMPING) {
-                this.kirrid.setPose(Pose.LONG_JUMPING);
+                this.kirrid.setPose(Pose.STANDING);
             }
         }
 
