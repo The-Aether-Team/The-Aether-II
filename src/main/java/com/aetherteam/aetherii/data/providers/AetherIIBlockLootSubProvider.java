@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BlockLootAccessor;
@@ -67,6 +68,20 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                         .when(BlockLootAccessor.aether_ii$hasSilkTouch().invert())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE)))));
+    }
+
+    public LootTable.Builder droppingLeafPile(Block block, Block leaves) {
+        return LootTable.lootTable().withPool(LootPool.lootPool()
+                .when(HAS_SHEARS)
+                .when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
+                .add(AlternativesEntry.alternatives(
+                        AetherLeafPileBlock.PILES.getPossibleValues(),
+                        piles -> piles == 16 ? LootItem.lootTableItem(leaves) : LootItem.lootTableItem(block)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly((float) piles)))
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AetherLeafPileBlock.PILES, piles))))
+
+                )
+        );
     }
 
     public LootTable.Builder droppingWithChancesAndSkyrootSticks(Block block, Block sapling, float... chances) {

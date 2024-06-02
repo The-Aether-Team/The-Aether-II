@@ -87,16 +87,16 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.AMBEROOT_WOOD.get(), (wood) -> this.droppingAmberoot(wood, AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIItems.GOLDEN_AMBER.get()));
 
         // Leaf Pile
-        this.add(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.SKYPLANE_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.SKYPINE_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.WISPROOT_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.WISPTOP_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.GREATROOT_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.GREATOAK_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.GREATBOA_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.SKYROOT_LEAVES.get()));
+        this.add(AetherIIBlocks.SKYPLANE_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.SKYPLANE_LEAVES.get()));
+        this.add(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.SKYBIRCH_LEAVES.get()));
+        this.add(AetherIIBlocks.SKYPINE_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.SKYPINE_LEAVES.get()));
+        this.add(AetherIIBlocks.WISPROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.WISPROOT_LEAVES.get()));
+        this.add(AetherIIBlocks.WISPTOP_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.WISPTOP_LEAVES.get()));
+        this.add(AetherIIBlocks.GREATROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.GREATROOT_LEAVES.get()));
+        this.add(AetherIIBlocks.GREATOAK_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.GREATOAK_LEAVES.get()));
+        this.add(AetherIIBlocks.GREATBOA_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.GREATBOA_LEAVES.get()));
+        this.add(AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.AMBEROOT_LEAVES.get()));
 
         // Leaves //TODO: Leaves Loot Tables
         this.add(AetherIIBlocks.SKYROOT_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));

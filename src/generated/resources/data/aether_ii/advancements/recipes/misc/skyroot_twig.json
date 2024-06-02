@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_planks": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
-            "tag": "aether_ii:crafts_skyroot_sticks"
+            "items": [
+              "aether_ii:skyroot_stick"
+            ]
           }
         ]
       },
@@ -13,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:skyroot_stick"
+        "recipe": "aether_ii:skyroot_twig"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +23,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_planks"
+      "has_stick"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:skyroot_stick"
+      "aether_ii:skyroot_twig"
     ]
   }
 }
