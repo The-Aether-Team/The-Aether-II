@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.SkyrootChestBlockEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.materials.RockItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.FireBlockAccessor;
 import com.aetherteam.aetherii.world.tree.AetherIITreeGrowers;
 import com.aetherteam.nitrogen.item.block.EntityBlockItem;
@@ -432,7 +433,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     private static <T extends Block> Supplier<BlockItem> registerBlockItem(final DeferredBlock<T> deferredBlock) {
         return () -> {
             DeferredBlock<T> block = Objects.requireNonNull(deferredBlock);
-            if (block == AMBROSIUM_TORCH) {
+            if (block == HOLYSTONE_ROCK) {
+                return new RockItem(HOLYSTONE_ROCK.get(), new Item.Properties());
+            } else if (block == AMBROSIUM_TORCH) {
                 return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN);
             } else if (block == SKYROOT_CHEST) {
                 return new EntityBlockItem(block.get(), SkyrootChestBlockEntity::new, new Item.Properties());
