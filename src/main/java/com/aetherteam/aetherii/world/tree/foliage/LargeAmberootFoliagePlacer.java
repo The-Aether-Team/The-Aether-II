@@ -19,17 +19,12 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
-public class LargeAmberootFoliagePlacer extends FoliagePlacer {
+public class LargeAmberootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     public static final Codec<LargeAmberootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
             .apply(instance, LargeAmberootFoliagePlacer::new));
 
     public LargeAmberootFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
-    }
-
-    @Override
-    protected FoliagePlacerType<?> type() {
-        return AetherIIFoliagePlacerTypes.LARGE_AMBEROOT_FOLIAGE_PLACER.get();
     }
 
     /**
@@ -101,19 +96,6 @@ public class LargeAmberootFoliagePlacer extends FoliagePlacer {
         }
     }
 
-    protected static boolean tryPlaceLog(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration treeConfiguration, BlockPos pos, Direction.Axis axis) {
-        if (!TreeFeature.validTreePos(level, pos)) {
-            return false;
-        } else {
-            BlockState state = treeConfiguration.trunkProvider.getState(random, pos);
-            if (state.hasProperty(RotatedPillarBlock.AXIS)) {
-                state = state.setValue(RotatedPillarBlock.AXIS, axis);
-            }
-            foliageSetter.set(pos, state);
-            return true;
-        }
-    }
-
     /**
      * Determines the foliage height at a constant value of 7.
      *
@@ -142,5 +124,10 @@ public class LargeAmberootFoliagePlacer extends FoliagePlacer {
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
         return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(3);
+    }
+
+    @Override
+    protected FoliagePlacerType<?> type() {
+        return AetherIIFoliagePlacerTypes.LARGE_AMBEROOT_FOLIAGE_PLACER.get();
     }
 }

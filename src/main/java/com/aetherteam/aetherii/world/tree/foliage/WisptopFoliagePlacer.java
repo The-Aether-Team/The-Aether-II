@@ -21,20 +21,21 @@ public class WisptopFoliagePlacer extends DarkOakFoliagePlacer {
 
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
+        BlockPos pos = attachment.pos();
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 16, i, attachment.doubleTrunk());
 
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(4, 5) + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(4, 5) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 6, i, attachment.doubleTrunk());
             }
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(5, 7) + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(5, 7) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 6, i, attachment.doubleTrunk());
             }
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(7, 9) + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(7, 9) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 6, i, attachment.doubleTrunk());
             }
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(9, 10) + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(9, 10) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 6, i, attachment.doubleTrunk());
             }
         }
     }
