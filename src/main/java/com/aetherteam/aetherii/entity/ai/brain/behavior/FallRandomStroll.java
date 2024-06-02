@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.ai.brain.behavior;
 
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.behavior.OneShot;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
@@ -35,6 +36,9 @@ public class FallRandomStroll {
                             } else {
                                 Optional<Vec3> optional = Optional.ofNullable(pTarget.apply(p_258611_));
                                 p_258600_.setOrErase(optional.map(p_258622_ -> new WalkTarget(p_258622_, pSpeedModifier, 0)));
+                                if (p_258611_ instanceof Kirrid kirrid) {
+                                    kirrid.setSpeedModifier(pSpeedModifier);
+                                }
                                 return true;
                             }
                         })

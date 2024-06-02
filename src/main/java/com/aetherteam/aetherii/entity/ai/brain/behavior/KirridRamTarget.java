@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.behavior.EntityTracker;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
@@ -73,6 +74,7 @@ public class KirridRamTarget extends Behavior<Kirrid> {
         Kirrid animal = this.findValidTarget(pEntity).get();
         pEntity.getBrain().setMemory(AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get(), animal);
         animal.getBrain().setMemory(AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get(), pEntity);
+
         this.ramTick = 0;
         pLevel.broadcastEntityEvent(pEntity, (byte) 61);
     }
@@ -95,6 +97,10 @@ public class KirridRamTarget extends Behavior<Kirrid> {
                     }
                 }
             }
+        }
+        if (animal.isPresent() && animal.get().isAlive()) {
+            pOwner.setSpeedModifier(this.speed);
+            pOwner.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new EntityTracker(animal.get(), true));
         }
     }
 

@@ -20,14 +20,12 @@ import net.minecraft.world.entity.schedule.Activity;
 
 public class KirridAi {
     private static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
-    private static final UniformInt TIME_BETWEEN_LONG_JUMPS = UniformInt.of(600, 2400);
     private static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 2400);
     public static final UniformInt TIME_BETWEEN_EAT = UniformInt.of(600, 1200);
     private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat()
             .selector(p_311675_ -> p_311675_ instanceof Kirrid kirrid && !kirrid.isBaby() && !kirrid.getBrain().hasMemoryValue(MemoryModuleType.RAM_COOLDOWN_TICKS) && kirrid.hasPlate() && p_311675_.level().getWorldBorder().isWithinBounds(p_311675_.getBoundingBox()));
 
     public static void initMemories(Kirrid pKirrid, RandomSource pRandom) {
-        pKirrid.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, TIME_BETWEEN_LONG_JUMPS.sample(pRandom));
         pKirrid.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, TIME_BETWEEN_RAMS.sample(pRandom));
         pKirrid.getBrain().setMemory(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), TIME_BETWEEN_EAT.sample(pRandom));
     }
@@ -35,7 +33,6 @@ public class KirridAi {
     public static Brain<?> makeBrain(Brain<Kirrid> pBrain) {
         initCoreActivity(pBrain);
         initIdleActivity(pBrain);
-        initLongJumpActivity(pBrain);
         initRamActivity(pBrain);
         pBrain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         pBrain.setDefaultActivity(Activity.IDLE);
@@ -49,12 +46,11 @@ public class KirridAi {
                 0,
                 ImmutableList.of(
                         new Swim(0.8F),
-                        new AnimalPanic(2.0F),
+                        new KirridPanic(2.0F),
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
                         new AfterLongJumpFalling(),
                         new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                        new CountDownCooldownTicks(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS),
                         new CountDownCooldownTicks(MemoryModuleType.RAM_COOLDOWN_TICKS),
                         new CountDownCooldownTicks(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get())
                 )
@@ -73,41 +69,17 @@ public class KirridAi {
                                 3,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(FallRandomStroll.stroll(1.0F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridEatGrass(), 2), Pair.of(new DoNothing(30, 60), 1)
+                                                Pair.of(FallRandomStroll.stroll(1.5F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridEatGrass(), 2), Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
                         )
                 ),
                 ImmutableSet.of(
-                        Pair.of(MemoryModuleType.RAM_TARGET, MemoryStatus.VALUE_ABSENT), Pair.of(MemoryModuleType.LONG_JUMP_MID_JUMP, MemoryStatus.VALUE_ABSENT)
+                        Pair.of(MemoryModuleType.RAM_TARGET, MemoryStatus.VALUE_ABSENT)
                 )
         );
     }
 
-    private static void initLongJumpActivity(Brain<Kirrid> pBrain) {
-        pBrain.addActivityWithConditions(
-                Activity.LONG_JUMP,
-                ImmutableList.of(
-                        Pair.of(0, new FallableLongJumpMidJump(TIME_BETWEEN_LONG_JUMPS)),
-                        Pair.of(
-                                1,
-                                new FallableLongJumpToRandomPos<>(
-                                        TIME_BETWEEN_LONG_JUMPS,
-                                        5,
-                                        5,
-                                        1.5F,
-                                        p_149476_ -> SoundEvents.GOAT_LONG_JUMP
-                                        , LongJumpToRandomPos::defaultAcceptableLandingSpot)
-                        )
-                ),
-                ImmutableSet.of(
-                        Pair.of(MemoryModuleType.TEMPTING_PLAYER, MemoryStatus.VALUE_ABSENT),
-                        Pair.of(MemoryModuleType.BREED_TARGET, MemoryStatus.VALUE_ABSENT),
-                        Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),
-                        Pair.of(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, MemoryStatus.VALUE_ABSENT)
-                )
-        );
-    }
 
     private static void initRamActivity(Brain<Kirrid> pBrain) {
         pBrain.addActivityWithConditions(
@@ -132,6 +104,6 @@ public class KirridAi {
     }
 
     public static void updateActivity(Kirrid pBrain) {
-        pBrain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.LONG_JUMP, Activity.RAM, Activity.IDLE));
+        pBrain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.RAM, Activity.IDLE));
     }
 }
