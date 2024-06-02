@@ -2,14 +2,14 @@
   "type": "minecraft:random_selector",
   "config": {
     "default": {
-      "feature": "aether_ii:skyroot",
+      "feature": "aether_ii:amberoot",
       "placement": [
         {
           "type": "minecraft:block_predicate_filter",
           "predicate": {
             "type": "minecraft:would_survive",
             "state": {
-              "Name": "aether_ii:skyroot_sapling",
+              "Name": "aether_ii:amberoot_sapling",
               "Properties": {
                 "stage": "0"
               }
@@ -20,16 +20,16 @@
     },
     "features": [
       {
-        "chance": 0.6,
+        "chance": 0.3,
         "feature": {
-          "feature": "aether_ii:large_skyroot",
+          "feature": "aether_ii:singular_amberoot",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
               "predicate": {
                 "type": "minecraft:would_survive",
                 "state": {
-                  "Name": "aether_ii:skyroot_sapling",
+                  "Name": "aether_ii:amberoot_sapling",
                   "Properties": {
                     "stage": "0"
                   }
@@ -40,29 +40,9 @@
         }
       },
       {
-        "chance": 0.1,
+        "chance": 0.2,
         "feature": {
-          "feature": "aether_ii:wisproot",
-          "placement": [
-            {
-              "type": "minecraft:block_predicate_filter",
-              "predicate": {
-                "type": "minecraft:would_survive",
-                "state": {
-                  "Name": "aether_ii:wisproot_sapling",
-                  "Properties": {
-                    "stage": "0"
-                  }
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "chance": 0.05,
-        "feature": {
-          "feature": "aether_ii:trees_amberoot_forest",
+          "feature": "aether_ii:large_amberoot",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",

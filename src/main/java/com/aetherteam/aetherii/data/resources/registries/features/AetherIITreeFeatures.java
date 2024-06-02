@@ -29,6 +29,7 @@ public class AetherIITreeFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATOAK = AetherIIFeatureUtils.registerKey("greatoak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA = AetherIIFeatureUtils.registerKey("greatboa");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = AetherIIFeatureUtils.registerKey("amberoot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SINGULAR_AMBEROOT = AetherIIFeatureUtils.registerKey("singular_amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_AMBEROOT = AetherIIFeatureUtils.registerKey("large_amberoot");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -93,6 +94,14 @@ public class AetherIITreeFeatures {
                         new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(5, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new AmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, SINGULAR_AMBEROOT, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new StraightTrunkPlacer(6, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
+                        new SingularAmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());
 

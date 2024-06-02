@@ -28,7 +28,7 @@ public class LargeAmberootFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return AetherIIFoliagePlacerTypes.AMBEROOT_FOLIAGE_PLACER.get();
+        return AetherIIFoliagePlacerTypes.LARGE_AMBEROOT_FOLIAGE_PLACER.get();
     }
 
     /**
@@ -73,6 +73,9 @@ public class LargeAmberootFoliagePlacer extends FoliagePlacer {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 6, attachment.pos().getZ() - 2), 0, i, attachment.doubleTrunk());
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
+            }
+            if (random.nextInt(2) == 0) {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(2, 5), attachment.pos().getZ() + random.nextIntBetweenInclusive(-1, 1)), 1, i, attachment.doubleTrunk());
             }
         }
     }
