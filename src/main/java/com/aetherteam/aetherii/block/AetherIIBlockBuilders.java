@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.block;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -20,6 +20,20 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.function.Supplier;
 
 public class AetherIIBlockBuilders {
+    public static BlockBehaviour.Properties aercloudProperties(MapColor mapColor) {
+        return BlockBehaviour.Properties.of()
+                .mapColor(mapColor)
+                .instrument(NoteBlockInstrument.FLUTE)
+                .strength(0.3F)
+                .sound(SoundType.WOOL)
+                .noOcclusion()
+                .dynamicShape()
+                .isValidSpawn((state, level, pos, entityType) -> entityType.is(AetherIITags.Entities.SPAWNING_AERCLOUDS))
+                .isRedstoneConductor(AetherIIBlockBuilders::never)
+                .isSuffocating(AetherIIBlockBuilders::never)
+                .isViewBlocking(AetherIIBlockBuilders::never);
+    }
+
     public static RotatedPillarBlock log(MapColor topMapColor, MapColor sideMapColor) {
         return new RotatedPillarBlock(
                 BlockBehaviour.Properties.of()
@@ -40,12 +54,11 @@ public class AetherIIBlockBuilders {
                         .sound(SoundType.GRASS)
                         .noOcclusion()
                         .forceSolidOff()
-                        .isValidSpawn(AetherIIBlockBuilders::ocelotOrParrot)
                         .isSuffocating(AetherIIBlockBuilders::never)
                         .isViewBlocking(AetherIIBlockBuilders::never)
+                        .isRedstoneConductor(AetherIIBlockBuilders::never)
                         .ignitedByLava()
                         .pushReaction(PushReaction.DESTROY)
-                        .isRedstoneConductor(AetherIIBlockBuilders::never)
         );
     }
 
@@ -57,28 +70,14 @@ public class AetherIIBlockBuilders {
                         .randomTicks()
                         .sound(SoundType.GRASS)
                         .noOcclusion()
-                        .isValidSpawn(AetherIIBlockBuilders::ocelotOrParrot)
+                        .isValidSpawn(AetherIIBlockBuilders::spawnOnLeaves)
                         .isSuffocating(AetherIIBlockBuilders::never)
                         .isViewBlocking(AetherIIBlockBuilders::never)
+                        .isRedstoneConductor(AetherIIBlockBuilders::never)
                         .ignitedByLava()
-                        .pushReaction(PushReaction.DESTROY)
-                        .isRedstoneConductor(AetherIIBlockBuilders::never),
+                        .pushReaction(PushReaction.DESTROY),
                 leavesParticle, leavesPile
         );
-    }
-
-    public static BlockBehaviour.Properties aercloudProperties(MapColor mapColor) {
-        return BlockBehaviour.Properties.of()
-                .mapColor(mapColor)
-                .instrument(NoteBlockInstrument.FLUTE)
-                .strength(0.3F)
-                .sound(SoundType.WOOL)
-                .noOcclusion()
-                .dynamicShape()
-                .isValidSpawn((pState, pLevel, pPos, pValue) -> pValue == AetherIIEntityTypes.ZEPHYR.get())
-                .isRedstoneConductor(AetherIIBlockBuilders::never)
-                .isSuffocating(AetherIIBlockBuilders::never)
-                .isViewBlocking(AetherIIBlockBuilders::never);
     }
 
     public static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
@@ -93,8 +92,12 @@ public class AetherIIBlockBuilders {
         return false;
     }
 
-    public static boolean ocelotOrParrot(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> type) {
-        return type == EntityType.OCELOT || type == EntityType.PARROT;
+    public static boolean spawnOnLeaves(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
+        return entityType.is(AetherIITags.Entities.SPAWNING_LEAVES);
+    }
+
+    public static int lightLevel6(BlockState state) {
+        return 6;
     }
 
     public static int lightLevel11(BlockState state) {
