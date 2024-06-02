@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.aetherteam.aetherii.loot.AetherIILootContexts;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +34,7 @@ public class ToolModificationHooks {
     public static final Map<Block, Block> STRIPPABLES = (new ImmutableMap.Builder<Block, Block>())
             .put(AetherIIBlocks.SKYROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
             .put(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
+            .put(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.get())
             .put(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
             .put(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
             .build();
@@ -88,32 +90,33 @@ public class ToolModificationHooks {
         return old;
     }
 
-    /**
-     * Spawns Golden Amber at the user's click position when stripping Golden Oak Logs ({@link AetherIITags.Blocks#AMBEROOT_LOGS}), as long as the tool in usage can harvest Golden Amber ({@link AetherIITags.Items#GOLDEN_AMBER_HARVESTERS}).<br><br>
-     * The drops are handled using a special loot context type {@link com.aetherteam.aetherii.loot.AetherIILootContexts#STRIPPING}, used for a loot table found in {@link com.aetherteam.aetherii.data.generators.loot.AetherIIStrippingLoot}.
-     *
-     * @param accessor The {@link LevelAccessor} of the level.
-     * @param state    The {@link BlockState} an action is being performed on.
-     * @param stack    The {@link ItemStack} performing an action.
-     * @param action   The {@link ToolAction} being performed.
-     * @param context  The {@link UseOnContext} of this interaction.
-     * @see ToolModificationListener#amberootStripping(BlockEvent.BlockToolModificationEvent)
-     */
+    public static void stripMossyWisproot(LevelAccessor accessor, BlockState state, ItemStack stack, ToolAction action, UseOnContext context) {
+        if (action == ToolActions.AXE_STRIP) {
+            if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG)) {
+                stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT);
+            }
+        }
+    }
+
     public static void stripAmberoot(LevelAccessor accessor, BlockState state, ItemStack stack, ToolAction action, UseOnContext context) {
         if (action == ToolActions.AXE_STRIP) {
-            if (accessor instanceof Level level) {
-                if (state.is(AetherIITags.Blocks.AMBEROOT_LOGS) && stack.is(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)) {
-                    if (level.getServer() != null && level instanceof ServerLevel serverLevel) {
-                        Vec3 vector = context.getClickLocation();
-                        LootParams parameters = new LootParams.Builder(serverLevel).withParameter(LootContextParams.TOOL, stack).create(AetherIILootContexts.STRIPPING);
-                        LootTable lootTable = level.getServer().getLootData().getLootTable(AetherIILoot.STRIP_GOLDEN_OAK);
-                        List<ItemStack> list = lootTable.getRandomItems(parameters);
-                        for (ItemStack itemStack : list) {
-                            ItemEntity itemEntity = new ItemEntity(level, vector.x(), vector.y(), vector.z(), itemStack);
-                            itemEntity.setDefaultPickUpDelay();
-                            level.addFreshEntity(itemEntity);
-                        }
-                    }
+            if (state.is(AetherIITags.Blocks.AMBEROOT_LOGS) && stack.is(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)) {
+                stripLog(accessor, stack, context, AetherIILoot.STRIP_AMBEROOT);
+            }
+        }
+    }
+
+    private static void stripLog(LevelAccessor accessor, ItemStack stack, UseOnContext context, ResourceLocation loot) {
+        if (accessor instanceof Level level) {
+            if (level.getServer() != null && level instanceof ServerLevel serverLevel) {
+                Vec3 vector = context.getClickLocation();
+                LootParams parameters = new LootParams.Builder(serverLevel).withParameter(LootContextParams.TOOL, stack).create(AetherIILootContexts.STRIPPING);
+                LootTable lootTable = level.getServer().getLootData().getLootTable(loot);
+                List<ItemStack> list = lootTable.getRandomItems(parameters);
+                for (ItemStack itemStack : list) {
+                    ItemEntity itemEntity = new ItemEntity(level, vector.x(), vector.y(), vector.z(), itemStack);
+                    itemEntity.setDefaultPickUpDelay();
+                    level.addFreshEntity(itemEntity);
                 }
             }
         }

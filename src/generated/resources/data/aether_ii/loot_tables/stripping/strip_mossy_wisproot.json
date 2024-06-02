@@ -22,11 +22,11 @@
               "function": "minecraft:apply_bonus"
             }
           ],
-          "name": "aether_ii:golden_amber"
+          "name": "minecraft:moss_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:stripping/strip_golden_oak"
+  "random_sequence": "aether_ii:stripping/strip_mossy_wisproot"
 }

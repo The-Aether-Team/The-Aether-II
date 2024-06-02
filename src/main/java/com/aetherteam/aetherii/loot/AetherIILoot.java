@@ -11,7 +11,8 @@ public class AetherIILoot {
     private static final Set<ResourceLocation> LOOT_TABLES = new HashSet<>();
     public static final Set<ResourceLocation> IMMUTABLE_LOOT_TABLES = Collections.unmodifiableSet(LOOT_TABLES);
 
-    public static final ResourceLocation STRIP_GOLDEN_OAK = register("stripping/strip_golden_oak");
+    public static final ResourceLocation STRIP_MOSSY_WISPROOT = register("stripping/strip_mossy_wisproot");
+    public static final ResourceLocation STRIP_AMBEROOT = register("stripping/strip_amberoot");
 
     private static ResourceLocation register(String id) {
         return register(new ResourceLocation(AetherII.MODID, id));

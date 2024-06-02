@@ -16,7 +16,7 @@ public class ToolModificationListener {
      */
     public static void listen(IEventBus bus) {
         bus.addListener(ToolModificationListener::setupToolModifications);
-        bus.addListener(ToolModificationListener::amberootStripping);
+        bus.addListener(ToolModificationListener::setupStrippingLoot);
     }
 
     /**
@@ -36,13 +36,14 @@ public class ToolModificationListener {
     /**
      * @see ToolModificationHooks#stripAmberoot(LevelAccessor, BlockState, ItemStack, ToolAction, UseOnContext)
      */
-    public static void amberootStripping(BlockEvent.BlockToolModificationEvent event) {
+    public static void setupStrippingLoot(BlockEvent.BlockToolModificationEvent event) {
         LevelAccessor levelAccessor = event.getLevel();
         BlockState oldState = event.getState();
         ItemStack itemStack = event.getHeldItemStack();
         ToolAction toolAction = event.getToolAction();
         UseOnContext context = event.getContext();
         if (!event.isSimulated() && !event.isCanceled()) {
+            ToolModificationHooks.stripMossyWisproot(levelAccessor, oldState, itemStack, toolAction, context);
             ToolModificationHooks.stripAmberoot(levelAccessor, oldState, itemStack, toolAction, context);
         }
     }
