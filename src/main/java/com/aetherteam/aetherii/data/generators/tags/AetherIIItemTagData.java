@@ -125,6 +125,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.GRAVITITE_REPAIRING).add(AetherIIItems.GRAVITITE_PLATE.get());
 
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
+        this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
+                AetherIIItems.ZANITE_AXE.get(),
+                AetherIIItems.ARKENIUM_AXE.get(),
+                AetherIIItems.GRAVITITE_AXE.get()
+        );
 
         // Vanilla
         this.tag(ItemTags.WOODEN_STAIRS).add(

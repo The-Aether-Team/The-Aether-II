@@ -4,10 +4,12 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockLootSubProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BlockLootAccessor;
+import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
 import java.util.Set;
@@ -24,8 +26,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
     @Override
     public void generate() {
         // Dirt
-        this.otherWhenSilkTouch(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
-        this.otherWhenSilkTouch(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
+        this.add(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.AETHER_DIRT.get()));
+        this.add(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.AETHER_DIRT.get()));
         this.dropOther(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.COARSE_AETHER_DIRT.get());
@@ -47,10 +49,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.RUSTED_FERROSITE.get());
 
         // Arctic
-        this.dropSelf(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.ARCTIC_SNOW.get());
-        this.dropSelf(AetherIIBlocks.ARCTIC_ICE.get());
-        this.dropSelf(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
+        this.add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.ARCTIC_SNOWBALL, ConstantValue.exactly(4.0F)));
+        this.add(AetherIIBlocks.ARCTIC_SNOW.get(), this::droppingSnowLayer);
+        this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_ICE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
 
         // Irradiated
         this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
@@ -77,44 +79,37 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_LOG.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_LOG.get());
-        this.dropOther(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.asItem());
-        this.dropSelf(AetherIIBlocks.AMBEROOT_LOG.get());
+        this.add(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.WISPROOT_LOG.get()));
+        this.add(AetherIIBlocks.AMBEROOT_LOG.get(), (wood) -> this.droppingAmberoot(wood, AetherIIBlocks.SKYROOT_LOG.get(), AetherIIItems.GOLDEN_AMBER.get()));
         this.dropSelf(AetherIIBlocks.SKYROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_WOOD.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_WOOD.get());
-        this.dropSelf(AetherIIBlocks.AMBEROOT_WOOD.get());
+        this.add(AetherIIBlocks.AMBEROOT_WOOD.get(), (wood) -> this.droppingAmberoot(wood, AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIItems.GOLDEN_AMBER.get()));
 
         // Leaf Pile
-        this.dropNone(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.SKYPINE_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.WISPROOT_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.WISPTOP_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.GREATROOT_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
-        this.dropNone(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
+        this.add(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.SKYPLANE_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.SKYPINE_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.WISPROOT_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.WISPTOP_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.GREATROOT_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.GREATOAK_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.GREATBOA_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), BlockLootSubProvider::createShearsOnlyDrop);
 
         // Leaves //TODO: Leaves Loot Tables
-        this.add(AetherIIBlocks.SKYROOT_LEAVES.get(),
-                (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.SKYROOT_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.dropNone(AetherIIBlocks.SKYPLANE_LEAVES.get());
         this.dropNone(AetherIIBlocks.SKYBIRCH_LEAVES.get());
         this.dropNone(AetherIIBlocks.SKYPINE_LEAVES.get());
-        this.add(AetherIIBlocks.WISPROOT_LEAVES.get(),
-                (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.WISPROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.WISPTOP_LEAVES.get(),
-                (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.WISPTOP_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.GREATROOT_LEAVES.get(),
-                (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.GREATOAK_LEAVES.get(),
-                (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATOAK_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.GREATBOA_LEAVES.get(),
-                (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATBOA_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
-        this.add(AetherIIBlocks.AMBEROOT_LEAVES.get(),
-                (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.AMBEROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.WISPROOT_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.WISPROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.WISPTOP_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.WISPTOP_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.GREATROOT_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.GREATOAK_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATOAK_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.GREATBOA_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.GREATBOA_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
+        this.add(AetherIIBlocks.AMBEROOT_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.AMBEROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
 
         // Saplings
         this.dropSelf(AetherIIBlocks.SKYROOT_SAPLING.get());
@@ -135,13 +130,13 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get());
 
         // Grasses
-        this.dropNone(AetherIIBlocks.AETHER_SHORT_GRASS.get());
-        this.dropNone(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
-        this.dropNone(AetherIIBlocks.AETHER_LONG_GRASS.get());
+        this.add(AetherIIBlocks.AETHER_SHORT_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.AETHER_LONG_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
 
-        // Bushes //TODO
+        // Bushes
         this.dropSelf(AetherIIBlocks.HIGHLANDS_BUSH.get());
-        this.add(AetherIIBlocks.BLUEBERRY_BUSH.get(), (bush) -> droppingBerryBush(bush, AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIIItems.BLUEBERRY.get()));
+        this.add(AetherIIBlocks.BLUEBERRY_BUSH.get(), (bush) -> this.droppingBerryBush(bush, AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), AetherIIItems.BLUEBERRY.get()));
         this.dropSelf(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
 
         // Potted Bushes
@@ -292,10 +287,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
 
         // Bookshelves
-        this.add(AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
-                (bookshelf) -> createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
-        this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(),
-                (bookshelf) -> createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+        this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
     }
 
     @Override
