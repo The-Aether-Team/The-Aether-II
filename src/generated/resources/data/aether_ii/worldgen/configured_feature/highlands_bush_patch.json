@@ -6,15 +6,10 @@
         "type": "minecraft:simple_block",
         "config": {
           "to_place": {
-            "type": "minecraft:weighted_state_provider",
-            "entries": [
-              {
-                "data": {
-                  "Name": "aether_ii:highlands_bush"
-                },
-                "weight": 1
-              }
-            ]
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "aether_ii:highlands_bush"
+            }
           }
         }
       },
@@ -22,13 +17,27 @@
         {
           "type": "minecraft:block_predicate_filter",
           "predicate": {
-            "type": "minecraft:matching_blocks",
-            "blocks": "minecraft:air"
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:air"
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": "aether_ii:aether_grass_block",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            ]
           }
         }
       ]
     },
-    "tries": 32,
+    "tries": 96,
     "xz_spread": 7,
     "y_spread": 3
   }
