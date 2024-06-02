@@ -20,6 +20,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        // Aether II
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(
                 EntityType.POLAR_BEAR
         );
@@ -31,6 +32,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 EntityType.PARROT
         );
 
+        // Vanilla
         this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.ARCTIC_SNOWBALL.get());
         this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get());
     }

@@ -1,10 +1,14 @@
 {
   "values": [
     "aether_ii:aether_grass_block",
-    "aether_ii:aether_dirt",
-    "aether_ii:aether_farmland",
+    "aether_ii:enchanted_aether_grass_block",
     "aether_ii:aether_dirt_path",
+    "aether_ii:aether_dirt",
+    "aether_ii:coarse_aether_dirt",
+    "aether_ii:aether_farmland",
     "aether_ii:quicksoil",
-    "aether_ii:ferrosite_sand"
+    "aether_ii:ferrosite_sand",
+    "aether_ii:arctic_snow_block",
+    "aether_ii:arctic_snow"
   ]
 }
