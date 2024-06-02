@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -212,6 +211,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATBOA_SAPLING.get().asItem(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get().asItem()
         );
+
+        this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
+
+        this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
+                AetherIIItems.ORANGE.get()
+        );
+
         this.tag(ItemTags.MUSIC_DISCS).add(
                 AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(),
                 AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(),
