@@ -55,8 +55,8 @@ public class AetherII {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public AetherII(IEventBus bus, Dist dist) {
-        bus.addListener(AetherII::commonSetup);
         bus.addListener(AetherIIData::dataSetup);
+        bus.addListener(this::commonSetup);
         bus.addListener(this::registerPackets);
 
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, DamageInfliction.CODEC, DamageInfliction.CODEC));
@@ -87,7 +87,9 @@ public class AetherII {
             register.register(bus);
         }
 
-        AetherII.eventSetup(bus);
+        this.eventSetup(bus);
+
+        AetherIIBlocks.registerWoodTypes(); // Registered this early to avoid bugs with WoodTypes and signs.
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, AetherIIConfig.SERVER_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AetherIIConfig.COMMON_SPEC);
@@ -97,14 +99,16 @@ public class AetherII {
         }
     }
 
-    public static void commonSetup(FMLCommonSetupEvent event) {
+    public void commonSetup(FMLCommonSetupEvent event) {
+        Reflection.initialize(AetherIIMobCategory.class);
+
         event.enqueueWork(() -> {
-            Reflection.initialize(AetherIIMobCategory.class);
             AetherIIBlocks.registerPots();
+            AetherIIBlocks.registerFlammability();
         });
     }
 
-    public static void eventSetup(IEventBus neoBus) {
+    public void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
         EffectsSystemListeners.listen(bus);

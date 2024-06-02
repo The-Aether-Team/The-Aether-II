@@ -1,8 +1,8 @@
-package com.aetherteam.aetherii.client.renderer.layer;
+package com.aetherteam.aetherii.client.renderer.entity.layers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
-import com.aetherteam.aetherii.client.renderer.model.AerbunnyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.RenderLayerParent;

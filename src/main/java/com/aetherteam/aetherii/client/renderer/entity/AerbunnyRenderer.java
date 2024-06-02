@@ -1,9 +1,10 @@
-package com.aetherteam.aetherii.client.renderer;
+package com.aetherteam.aetherii.client.renderer.entity;
 
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.layer.AerbunnyCollarLayer;
-import com.aetherteam.aetherii.client.renderer.model.AerbunnyModel;
+import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.layers.AerbunnyCollarLayer;
+import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

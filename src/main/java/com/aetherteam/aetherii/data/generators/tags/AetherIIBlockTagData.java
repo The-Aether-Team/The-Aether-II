@@ -217,7 +217,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_GREATROOT_SAPLING.get(),
                 AetherIIBlocks.POTTED_GREATOAK_SAPLING.get(),
                 AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(),
-                AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get()
+                AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(),
+                AetherIIBlocks.POTTED_HIGHLANDS_BUSH.get(),
+                AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(),
+                AetherIIBlocks.POTTED_ORANGE_TREE.get()
         );
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
 

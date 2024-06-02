@@ -1,6 +1,6 @@
-package com.aetherteam.aetherii.client.renderer.layer;
+package com.aetherteam.aetherii.client.renderer.entity.layers;
 
-import com.aetherteam.aetherii.client.renderer.model.QuadrupedWingsModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.QuadrupedWingsModel;
 import com.aetherteam.aetherii.entity.passive.WingedAnimal;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

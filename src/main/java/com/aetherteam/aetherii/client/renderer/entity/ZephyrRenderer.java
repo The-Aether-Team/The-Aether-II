@@ -1,8 +1,9 @@
-package com.aetherteam.aetherii.client.renderer;
+package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.layer.ZephyrTransparencyLayer;
-import com.aetherteam.aetherii.client.renderer.model.ZephyrModel;
+import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.layers.ZephyrTransparencyLayer;
+import com.aetherteam.aetherii.client.renderer.entity.model.ZephyrModel;
 import com.aetherteam.aetherii.entity.monster.Zephyr;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

@@ -1,12 +1,7 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "aether_ii:block/aether_long_grass"
-      },
-      {
-        "model": "aether_ii:block/aether_long_grass"
-      }
-    ]
+    "": {
+      "model": "aether_ii:block/aether_long_grass"
+    }
   }
 }

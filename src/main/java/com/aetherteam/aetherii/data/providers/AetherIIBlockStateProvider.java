@@ -91,6 +91,15 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .end();
     }
 
+    public void dirtPath(Block block, Block dirtBlock) {
+        ModelFile path = this.models().withExistingParent(this.name(block), this.mcLoc("block/dirt_path"))
+                .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_top"))
+                .texture("side", this.modLoc("block/construction/" + this.name(block) + "_side"))
+                .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)));
+        this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
+    }
+
     public void farmland(Block block, Block dirtBlock) {
         ModelFile farmland = this.models().withExistingParent(this.name(block), this.mcLoc("block/template_farmland"))
                 .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
@@ -104,15 +113,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                     .modelFile(moisture < AetherFarmBlock.MAX_MOISTURE ? farmland : moist)
                     .build();
         });
-    }
-
-    public void dirtPath(Block block, Block dirtBlock) {
-        ModelFile path = this.models().withExistingParent(this.name(block), this.mcLoc("block/dirt_path"))
-                .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
-                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_top"))
-                .texture("side", this.modLoc("block/construction/" + this.name(block) + "_side"))
-                .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)));
-        this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
     }
 
     public void snowLayer(Block block, Block base) {
@@ -226,6 +226,30 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.axisBlock(block, this.texture(this.name(block), "natural/"), this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
     }
 
+    public void leafPile(Block block, Block base) {
+        ResourceLocation texture = this.texture("natural/" + this.name(base));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            int i = state.getValue(AetherLeafPileBlock.PILES);
+            boolean firstState = i == 1;
+            boolean lastState = i == 16;
+            String name = firstState ? this.name(block) : this.name(block) + i;
+            BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
+            ModelFile model = modelBuilder.ao(lastState)
+                    .texture("particle", texture)
+                    .texture("texture", texture)
+                    .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
+                    .face(Direction.DOWN).texture("#texture").end()
+                    .face(Direction.UP).texture("#texture").end()
+                    .face(Direction.NORTH).texture("#texture").end()
+                    .face(Direction.SOUTH).texture("#texture").end()
+                    .face(Direction.EAST).texture("#texture").end()
+                    .face(Direction.WEST).texture("#texture").end()
+                    .end()
+                    .renderType(new ResourceLocation("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, AetherLeafPileBlock.PERSISTENT);
+    }
+
     public ModelBuilder<BlockModelBuilder> triTintedCross(String name) {
         return this.models().getBuilder(name)
                 .renderType(new ResourceLocation("cutout"))
@@ -300,6 +324,77 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .renderType(new ResourceLocation("cutout"));
     }
 
+    public void pottedStem(Block stem, String location) {
+        ModelFile pot = this.pottedStemModel(stem, this.name(stem), location).renderType(new ResourceLocation("cutout"));
+        this.getVariantBuilder(stem).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public void pottedBush(Block bush, String location) {
+        this.pottedBush(bush, this.name(bush) + "_stem", location);
+    }
+
+    public void pottedBush(Block bush, Block stem, String location) {
+        this.pottedBush(bush, this.name(stem), location);
+    }
+
+    public void pottedBush(Block bush, String stem, String location) {
+        ModelFile pot = this.pottedStemModel(bush, stem, location)
+                .texture("stem", this.modLoc("block/" + location + stem)).texture("bush", this.modLoc("block/" + location + this.name(bush)))
+                .element().from(3.0F, 6.0F, 3.0F).to(13.0F, 16.0F, 13.0F)
+                .face(Direction.NORTH).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.EAST).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.SOUTH).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.WEST).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.UP).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.DOWN).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end().end()
+                .renderType(new ResourceLocation("cutout"));
+        this.getVariantBuilder(bush).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public BlockModelBuilder pottedStemModel(Block block, String stem, String location) {
+        return models().withExistingParent(this.name(block), this.mcLoc("block/block"))
+                .texture("particle", this.mcLoc("block/flower_pot")).texture("stem", this.modLoc("block/" + location + stem)).texture("dirt", this.mcLoc("block/dirt")).texture("flowerpot", this.mcLoc("block/flower_pot"))
+                .element().from(5.0F, 0.0F, 5.0F).to(6.0F, 6.0F, 11.0F)
+                .face(Direction.NORTH).uvs(10.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.EAST).uvs(5.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.SOUTH).uvs(5.0F, 10.0F, 6.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.WEST).uvs(5.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.UP).uvs(5.0F, 5.0F, 6.0F, 11.0F).texture("#flowerpot").end()
+                .face(Direction.DOWN).uvs(5.0F, 5.0F, 6.0F, 11.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(10.0F, 0.0F, 5.0F).to(11.0F, 6.0F, 11.0F)
+                .face(Direction.NORTH).uvs(5.0F, 10.0F, 6.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.EAST).uvs(5.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.SOUTH).uvs(10.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.WEST).uvs(5.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.UP).uvs(10.0F, 5.0F, 11.0F, 11.0F).texture("#flowerpot").end()
+                .face(Direction.DOWN).uvs(10.0F, 5.0F, 11.0F, 11.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(6.0F, 0.0F, 5.0F).to(10.0F, 6.0F, 6.0F)
+                .face(Direction.NORTH).uvs(6.0F, 10.0F, 10.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.SOUTH).uvs(6.0F, 10.0F, 10.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.UP).uvs(6.0F, 5.0F, 10.0F, 6.0F).texture("#flowerpot").end()
+                .face(Direction.DOWN).uvs(6.0F, 10.0F, 10.0F, 11.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(6.0F, 0.0F, 10.0F).to(10.0F, 6.0F, 11.0F)
+                .face(Direction.NORTH).uvs(6.0F, 10.0F, 10.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.SOUTH).uvs(6.0F, 10.0F, 10.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.UP).uvs(6.0F, 10.0F, 10.0F, 11.0F).texture("#flowerpot").end()
+                .face(Direction.DOWN).uvs(6.0F, 5.0F, 10.0F, 6.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(6.0F, 0.0F, 6.0F).to(10.0F, 4.0F, 10.0F)
+                .face(Direction.UP).uvs(6.0F, 6.0F, 10.0F, 10.0F).texture("#dirt").end()
+                .face(Direction.DOWN).uvs(6.0F, 12.0F, 10.0F, 16.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(7.0F, 4.0F, 8.0F).to(9.0F, 6.0F, 8.0F).rotation().angle(45.0F).axis(Direction.Axis.Y).origin(8.0F, 8.0F, 8.0F).end()
+                .face(Direction.NORTH).uvs(7.0F, 14.0F, 9.0F, 16.0F).texture("#stem").end()
+                .face(Direction.SOUTH).uvs(7.0F, 14.0F, 9.0F, 16.0F).texture("#stem").end().end()
+                .element().from(1.0F, 6.0F, 8.0F).to(15.0F, 16.0F, 8.0F).rotation().angle(45.0F).axis(Direction.Axis.Y).origin(8.0F, 8.0F, 8.0F).end()
+                .face(Direction.NORTH).uvs(1.0F, 4.0F, 15.0F, 14.0F).texture("#stem").end()
+                .face(Direction.SOUTH).uvs(1.0F, 4.0F, 15.0F, 14.0F).texture("#stem").end().end()
+                .element().from(8.0F, 4.0F, 7.0F).to(8.0F, 6.0F, 9.0F).rotation().angle(45.0F).axis(Direction.Axis.Y).origin(8.0F, 8.0F, 8.0F).end()
+                .face(Direction.EAST).uvs(7.0F, 14.0F, 9.0F, 16.0F).texture("#stem").end()
+                .face(Direction.WEST).uvs(7.0F, 14.0F, 9.0F, 16.0F).texture("#stem").end().end()
+                .element().from(8.0F, 6.0F, 1.0F).to(8.0F, 16.0F, 15.0F).rotation().angle(45.0F).axis(Direction.Axis.Y).origin(8.0F, 8.0F, 8.0F).end()
+                .face(Direction.EAST).uvs(1.0F, 4.0F, 15.0F, 14.0F).texture("#stem").end()
+                .face(Direction.WEST).uvs(1.0F, 4.0F, 15.0F, 14.0F).texture("#stem").end().end();
+    }
+
     public void orangeTree(Block block) {
         String blockName = this.name(block);
         this.getVariantBuilder(block).forAllStates((state) -> {
@@ -313,6 +408,11 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             ModelFile model = this.models().cross(blockName + (lower ? (halfString + bottomAge) : (halfString + topAge)), location).renderType(new ResourceLocation("cutout"));
             return ConfiguredModel.builder().modelFile(model).build();
         });
+    }
+
+    public void pottedOrangeTree(Block block, Block tree) {
+        ModelFile pot = this.models().withExistingParent(this.name(block), this.mcLoc("block/flower_pot_cross")).texture("plant", this.modLoc("block/natural/" + this.name(tree) + "_bottom_0")).renderType(new ResourceLocation("cutout"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
     }
 
     public void twig(Block block, Block log) {
@@ -439,30 +539,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 }
             }
         });
-    }
-
-    public void leavesPile(Block block, Block base) {
-        ResourceLocation texture = this.texture("natural/" + this.name(base));
-        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            int i = state.getValue(AetherLeafPileBlock.PILES);
-            boolean firstState = i == 1;
-            boolean lastState = i == 16;
-            String name = firstState ? this.name(block) : this.name(block) + i;
-            BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
-            ModelFile model = modelBuilder.ao(lastState)
-                    .texture("particle", texture)
-                    .texture("texture", texture)
-                    .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
-                    .face(Direction.DOWN).texture("#texture").end()
-                    .face(Direction.UP).texture("#texture").end()
-                    .face(Direction.NORTH).texture("#texture").end()
-                    .face(Direction.SOUTH).texture("#texture").end()
-                    .face(Direction.EAST).texture("#texture").end()
-                    .face(Direction.WEST).texture("#texture").end()
-                    .end()
-                    .renderType(new ResourceLocation("cutout"));
-            return ConfiguredModel.builder().modelFile(model).build();
-        }, AetherLeafPileBlock.PERSISTENT);
     }
 
     public void carpet(Block block, Block baseBlock, String location) {

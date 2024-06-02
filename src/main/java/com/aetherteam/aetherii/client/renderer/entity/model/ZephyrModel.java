@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.model;
+package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.entity.monster.Zephyr;
 import com.mojang.blaze3d.vertex.PoseStack;

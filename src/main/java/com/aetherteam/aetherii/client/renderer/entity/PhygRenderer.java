@@ -1,8 +1,9 @@
-package com.aetherteam.aetherii.client.renderer;
+package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.layer.QuadrupedWingsLayer;
-import com.aetherteam.aetherii.client.renderer.model.QuadrupedWingsModel;
+import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.layers.QuadrupedWingsLayer;
+import com.aetherteam.aetherii.client.renderer.entity.model.QuadrupedWingsModel;
 import com.aetherteam.aetherii.entity.passive.Phyg;
 import net.minecraft.client.model.PigModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

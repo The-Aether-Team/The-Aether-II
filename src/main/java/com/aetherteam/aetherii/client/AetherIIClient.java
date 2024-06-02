@@ -37,6 +37,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIOverlays::registerOverlays);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
+        neoBus.addListener(AetherIIRenderers::bakeModels);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
     }
 

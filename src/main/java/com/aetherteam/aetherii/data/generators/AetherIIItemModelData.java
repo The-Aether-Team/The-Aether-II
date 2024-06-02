@@ -201,9 +201,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockGrass(AetherIIBlocks.AETHER_LONG_GRASS.get(), "natural/");
 
         // Bushes
+        this.itemBlock(AetherIIBlocks.HIGHLANDS_BUSH.get());
         this.itemBlock(AetherIIBlocks.BLUEBERRY_BUSH.get());
         this.itemBlockFlat(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), "natural/");
-        this.itemBlock(AetherIIBlocks.HIGHLANDS_BUSH.get());
 
         // Orange Tree
         this.orangeTree(AetherIIBlocks.ORANGE_TREE.get());

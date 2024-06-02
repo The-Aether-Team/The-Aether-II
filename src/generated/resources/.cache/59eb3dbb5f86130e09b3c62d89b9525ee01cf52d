@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T18:10:23.164119	Loot Tables
+// 1.20.4	2024-06-01T21:07:08.201991	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -100,9 +100,13 @@ d686ea3dc1b17056e8cf175ce9f0700f7f74624a data/aether_ii/loot_tables/blocks/irrad
 973d6bd1e2b9b8a743e9f934444260207c54551a data/aether_ii/loot_tables/blocks/mossy_wisproot_log.json
 ce909fb8043adaade564fb6084b09d148d58e4a9 data/aether_ii/loot_tables/blocks/orange_tree.json
 b1185d061605abf2afc48ec5ef4a2e13349d21be data/aether_ii/loot_tables/blocks/potted_amberoot_sapling.json
+9aad646839c2c0daf7e752571bdcc62defc789d4 data/aether_ii/loot_tables/blocks/potted_blueberry_bush.json
+0b6fae1b7b80ded58c8f00baf1b3a7b79f435b4b data/aether_ii/loot_tables/blocks/potted_blueberry_bush_stem.json
 cba1efbca0df296a1db5b5154a427cd91b964c84 data/aether_ii/loot_tables/blocks/potted_greatboa_sapling.json
 d4b235e55749664b9022df3a172f7c546d676040 data/aether_ii/loot_tables/blocks/potted_greatoak_sapling.json
 52d4eccc7e68ab70e56635e3f3e8348391bf1bdc data/aether_ii/loot_tables/blocks/potted_greatroot_sapling.json
+96e6f7047831443a2f1a7d06d8c9b0b213c1590e data/aether_ii/loot_tables/blocks/potted_highlands_bush.json
+334746e75d6022d6a207a439d86506451fa0e0e3 data/aether_ii/loot_tables/blocks/potted_orange_tree.json
 9f7c437955181ab7b0b4adf8ed029ce19a00707b data/aether_ii/loot_tables/blocks/potted_skyroot_sapling.json
 9f909801e7fad94319bd5b2eab68a7a84470385f data/aether_ii/loot_tables/blocks/potted_wisproot_sapling.json
 3e21b1742a0087cf6d64f0cd8166b52ab71fc4e0 data/aether_ii/loot_tables/blocks/potted_wisptop_sapling.json

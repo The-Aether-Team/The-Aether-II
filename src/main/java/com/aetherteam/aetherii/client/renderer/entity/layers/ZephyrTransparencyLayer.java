@@ -1,7 +1,7 @@
-package com.aetherteam.aetherii.client.renderer.layer;
+package com.aetherteam.aetherii.client.renderer.entity.layers;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.model.ZephyrModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.ZephyrModel;
 import com.aetherteam.aetherii.entity.monster.Zephyr;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
