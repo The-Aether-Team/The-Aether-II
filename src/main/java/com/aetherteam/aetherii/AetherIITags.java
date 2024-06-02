@@ -15,8 +15,8 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_PORTAL_BLACKLIST = tag("aether_portal_blacklist");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
-
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
+        public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");

@@ -41,6 +41,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get()
         );
+        this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
+                AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.UNDERSHALE.get()
+        );
         this.tag(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),
                 AetherIIBlocks.BLUE_AERCLOUD.get(),
