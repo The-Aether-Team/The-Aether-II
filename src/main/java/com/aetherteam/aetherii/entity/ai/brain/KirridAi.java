@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.FallRandomStroll;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.FallableLongJumpMidJump;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridEatGrass;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridRamTarget;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
@@ -73,7 +75,7 @@ public class KirridAi {
                                 3,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(RandomStroll.stroll(1.0F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridEatGrass(), 2), Pair.of(new DoNothing(30, 60), 1)
+                                                Pair.of(FallRandomStroll.stroll(1.0F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridEatGrass(), 2), Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
                         )
@@ -88,7 +90,7 @@ public class KirridAi {
         pBrain.addActivityWithConditions(
                 Activity.LONG_JUMP,
                 ImmutableList.of(
-                        Pair.of(0, new LongJumpMidJump(TIME_BETWEEN_LONG_JUMPS, SoundEvents.GOAT_STEP)),
+                        Pair.of(0, new FallableLongJumpMidJump(TIME_BETWEEN_LONG_JUMPS, SoundEvents.GOAT_STEP)),
                         Pair.of(
                                 1,
                                 new LongJumpToRandomPos<>(

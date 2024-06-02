@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
@@ -25,6 +26,7 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.sensing.Sensor;
@@ -34,6 +36,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.IShearable;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jetbrains.annotations.Nullable;
@@ -81,6 +84,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
 
     public Kirrid(EntityType<? extends Animal> type, Level level) {
         super(type, level);
+        this.moveControl = new KirridMoveControl(this);
     }
 
     @Override
@@ -127,6 +131,19 @@ public class Kirrid extends AetherAnimal implements IShearable {
     @Override
     public int getMaxFallDistance() {
         return this.onGround() ? super.getMaxFallDistance() : 14;
+    }
+
+    private void midairJump() {
+        Vec3 motion = this.getDeltaMovement();
+        this.setDeltaMovement(new Vec3(motion.x(), 0.25, motion.z()));
+    }
+
+    /**
+     * @return A {@link Float} for the midair speed of this entity.
+     */
+    @Override
+    protected float getFlyingSpeed() {
+        return this.getSpeed() * (0.24F / ((float) Math.pow(0.91F, 3)));
     }
 
 
@@ -227,6 +244,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
             double fallSpeed = Math.max(gravity.getValue() * -1.25, -0.1); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed) {
                 this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
+                this.hasImpulse = true;
             }
         }
     }
@@ -303,5 +321,43 @@ public class Kirrid extends AetherAnimal implements IShearable {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Handles jumping movement for the Aerbunny.
+     */
+    public static class KirridMoveControl extends MoveControl {
+        private final Kirrid kirrid;
+
+        public KirridMoveControl(Kirrid kirrid) {
+            super(kirrid);
+            this.kirrid = kirrid;
+        }
+
+        @Override
+        public void tick() {
+            super.tick();
+            if (this.hasWanted() && this.kirrid.zza != 0) {
+                if (!this.kirrid.onGround() && this.kirrid.getPose() == Pose.LONG_JUMPING) {
+                    int x = Mth.floor(this.kirrid.getX());
+                    int y = Mth.floor(this.kirrid.getBoundingBox().minY);
+                    int z = Mth.floor(this.kirrid.getZ());
+                    if (this.checkForSurfaces(this.kirrid.level(), x, y, z) && !this.kirrid.horizontalCollision) {
+                        this.kirrid.midairJump();
+                    }
+                }
+            }
+            if (this.kirrid.onGround() && this.kirrid.getPose() == Pose.LONG_JUMPING) {
+                this.kirrid.setPose(Pose.LONG_JUMPING);
+            }
+        }
+
+        private boolean checkForSurfaces(Level level, int x, int y, int z) {
+            BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(x, y, z);
+            if (level.getBlockState(pos.setY(y - 1)).isAir()) {
+                return false;
+            }
+            return level.getBlockState(pos.setY(y + 2)).isAir() && level.getBlockState(pos.setY(y + 1)).isAir();
+        }
     }
 }
