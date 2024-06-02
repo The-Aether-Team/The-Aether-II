@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
+import com.aetherteam.aetherii.client.renderer.block.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.FastModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.AerbunnyRenderer;
@@ -64,17 +65,24 @@ public class AetherIIRenderers {
 
     public static void bakeModels(ModelEvent.ModifyBakingResult event) {
         List<DeferredBlock<? extends Block>> fastBlocks = List.of(AetherIIBlocks.HIGHLANDS_BUSH, AetherIIBlocks.BLUEBERRY_BUSH, AetherIIBlocks.POTTED_HIGHLANDS_BUSH, AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
+        List<DeferredBlock<? extends Block>> aoBlocks = List.of(AetherIIBlocks.AMBROSIUM_ORE);
+
+        getModels(event.getModels(), fastBlocks).forEach(entry -> event.getModels().put(entry.getKey(), new FastModel(entry.getValue())));
+        getModels(event.getModels(), aoBlocks).forEach(entry -> event.getModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
+    }
+
+    private static List<Map.Entry<ResourceLocation, BakedModel>> getModels(Map<ResourceLocation, BakedModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
         List<Map.Entry<ResourceLocation, BakedModel>> models = new ArrayList<>();
-        for (Map.Entry<ResourceLocation, BakedModel> model : event.getModels().entrySet()) {
+        for (Map.Entry<ResourceLocation, BakedModel> model : originalModels.entrySet()) {
             if (model.getKey().getNamespace().equals(AetherII.MODID)) {
                 String path = model.getKey().getPath();
-                for (DeferredBlock<? extends Block> block : fastBlocks) {
+                for (DeferredBlock<? extends Block> block : blocks) {
                     if (path.equals(block.getId().getPath())) {
                         models.add(model);
                     }
                 }
             }
         }
-        models.forEach(entry -> event.getModels().put(entry.getKey(), new FastModel(entry.getValue())));
+        return models;
     }
 }

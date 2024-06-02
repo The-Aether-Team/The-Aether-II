@@ -96,9 +96,9 @@ public class AetherIIBlockBuilders {
         return entityType.is(AetherIITags.Entities.SPAWNING_LEAVES);
     }
 
-    public static int lightLevel6(BlockState state) {
-        return 6;
-    }
+//    public static int lightLevel8(BlockState state) {
+//        return 8;
+//    }
 
     public static int lightLevel11(BlockState state) {
         return 11;
