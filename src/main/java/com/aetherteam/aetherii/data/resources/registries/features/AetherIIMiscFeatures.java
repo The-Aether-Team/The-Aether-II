@@ -4,9 +4,15 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.RockBlock;
 import com.aetherteam.aetherii.block.natural.TwigBlock;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIFeatureBuilders;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
-import net.minecraft.core.Direction;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -28,7 +34,11 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = AetherIIFeatureUtils.registerKey("purple_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = AetherIIFeatureUtils.registerKey("storm_aercloud");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = AetherIIFeatureUtils.registerKey("cloudbed");
+
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
+        HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
+      
         SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
             for (int amount : TwigBlock.AMOUNT.getPossibleValues()) {
@@ -57,5 +67,16 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
         AetherIIFeatureUtils.register(context, GREEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(8, AetherIIBlocks.GREEN_AERCLOUD.get().defaultBlockState()));
         AetherIIFeatureUtils.register(context, PURPLE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(8, AetherIIBlocks.PURPLE_AERCLOUD.get().defaultBlockState()));
         AetherIIFeatureUtils.register(context, STORM_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(6, AetherIIBlocks.STORM_AERCLOUD.get().defaultBlockState()));
+
+        AetherIIFeatureUtils.register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
+                AetherIIFeatureBuilders.cloudbed(
+                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                        64,
+                        AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_NOISE),
+                        10D,
+                        AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
+                        15D
+                ));
     }
 }

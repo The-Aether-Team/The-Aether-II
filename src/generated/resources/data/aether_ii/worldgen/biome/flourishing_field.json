@@ -17,7 +17,8 @@
   },
   "features": [
     [
-      "aether_ii:coast_quicksoil"
+      "aether_ii:coast_quicksoil",
+      "aether_ii:cloudbed"
     ],
     [],
     [],

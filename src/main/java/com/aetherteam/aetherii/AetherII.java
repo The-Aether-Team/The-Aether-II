@@ -32,6 +32,7 @@ import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
 import com.aetherteam.aetherii.world.AetherIIPoi;
+import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
@@ -82,7 +83,8 @@ public class AetherII {
                 AetherIIAttributes.ATTRIBUTES,
                 AetherIIMenuTypes.MENU_TYPES,
                 AetherIIPoi.POI,
-                AetherIIDataAttachments.ATTACHMENTS
+                AetherIIDataAttachments.ATTACHMENTS,
+                AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES
         };
 
         for (DeferredRegister<?> register : registers) {

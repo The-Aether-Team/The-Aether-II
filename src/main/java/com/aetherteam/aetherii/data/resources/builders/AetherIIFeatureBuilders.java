@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.world.feature.CloudbedFeature;
 import com.aetherteam.aetherii.world.feature.configuration.AercloudConfiguration;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import net.minecraft.core.HolderSet;
@@ -8,6 +9,8 @@ import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public class AetherIIFeatureBuilders {
@@ -25,5 +28,9 @@ public class AetherIIFeatureBuilders {
 
     public static AercloudConfiguration aercloud(int bounds, BlockState blockState) {
         return new AercloudConfiguration(bounds, BlockStateProvider.simple(blockState));
+    }
+
+    public static CloudbedFeature.Config cloudbed(BlockState blockState, BlockPredicate predicate, int yLevel, DensityFunction cloudNoise, double cloudRadius, DensityFunction offsetNoise, double offsetMax) {
+        return new CloudbedFeature.Config(BlockStateProvider.simple(blockState), predicate, yLevel, cloudNoise, cloudRadius, offsetNoise, offsetMax);
     }
 }

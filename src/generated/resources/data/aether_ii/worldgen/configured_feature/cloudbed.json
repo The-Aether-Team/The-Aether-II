@@ -1,0 +1,20 @@
+{
+  "type": "aether_ii:cloudbed",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:cold_aercloud"
+      }
+    },
+    "cloud_noise": "aether_ii:cloudbed_noise",
+    "cloud_radius": 10.0,
+    "offset_max": 15.0,
+    "offset_noise": "aether_ii:cloudbed_y_offset",
+    "predicate": {
+      "type": "minecraft:matching_blocks",
+      "blocks": "minecraft:air"
+    },
+    "y_level": 64
+  }
+}
