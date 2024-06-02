@@ -18,6 +18,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput consumer) {
         // Blocks
+        // Dirt
+        this.ambrosiumEnchanting(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_GRASS_BLOCK.get()).save(consumer, this.name("ambrosium_enchant_aether_grass_to_enchanted_aether_grass"));
+
         // Highfields
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_HOLYSTONE.get())
                 .group("mossy_holystone")

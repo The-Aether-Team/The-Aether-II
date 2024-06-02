@@ -27,6 +27,8 @@ import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacke
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
+import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
+import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
@@ -74,6 +76,8 @@ public class AetherII {
                 AetherIIMenuTypes.MENU_TYPES,
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
+                AetherIIRecipeTypes.RECIPE_TYPES,
+                AetherIIRecipeSerializers.RECIPE_SERIALIZERS,
                 AetherIIPoi.POI,
                 AetherIIFeatures.FEATURES,
                 AetherIITreeDecoratorTypes.TREE_DECORATORS,

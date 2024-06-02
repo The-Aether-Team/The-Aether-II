@@ -21,6 +21,7 @@ import com.aetherteam.aetherii.item.combat.zanite.ZaniteHammerItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteShortswordItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSpearItem;
 import com.aetherteam.aetherii.item.food.AetherIIFoods;
+import com.aetherteam.aetherii.item.materials.AmbrosiumShardItem;
 import com.aetherteam.aetherii.item.materials.ArcticSnowballItem;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
 import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumAxeItem;
@@ -103,7 +104,7 @@ public class AetherIIItems {
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = ITEMS.register("skyroot_stick", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> AMBROSIUM_SHARD = ITEMS.register("ambrosium_shard", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> AMBROSIUM_SHARD = ITEMS.register("ambrosium_shard", () -> new AmbrosiumShardItem(new Item.Properties()));
     public static final DeferredItem<Item> ZANITE_GEMSTONE = ITEMS.register("zanite_gemstone", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> RAW_ARKENIUM = ITEMS.register("raw_arkenium", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ARKENIUM_PLATE = ITEMS.register("arkenium_plate", () -> new Item(new Item.Properties()));

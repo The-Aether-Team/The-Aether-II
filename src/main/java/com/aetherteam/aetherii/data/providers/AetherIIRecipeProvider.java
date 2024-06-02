@@ -1,7 +1,10 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
+import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
+import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -94,5 +97,9 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("/")
                 .pattern("#")
                 .unlockedBy(has, has(material));
+    }
+
+    protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {
+        return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AmbrosiumRecipe::new);
     }
 }

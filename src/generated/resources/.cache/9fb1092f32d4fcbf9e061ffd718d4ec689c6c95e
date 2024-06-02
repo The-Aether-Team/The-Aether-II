@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T02:28:19.8696057	Recipes
+// 1.20.4	2024-06-02T11:50:53.8214775	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
 d211fa2d4f1b2edaad272b7356325c4ddc5de28c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_stairs.json
@@ -151,6 +151,7 @@ a767e365780ffa83c76c68efcf92f6699fa8968a data/aether_ii/recipes/agiosite_stairs.
 50d9f4ee52e85e05a6b1caf234c27de64c66c072 data/aether_ii/recipes/amberoot_leaf_pile.json
 aa5820f7c1a14ac5eab1c9b8a1a55e32d29ab34a data/aether_ii/recipes/amberoot_wood.json
 96db1866f8a395cafabb9ac2da650fae5641f978 data/aether_ii/recipes/ambrosium_block.json
+cd9b958cad7e6ba3297fb358b7feac37196beed3 data/aether_ii/recipes/ambrosium_enchant_aether_grass_to_enchanted_aether_grass.json
 d35a059cd830fe8abd7705f237464c45b201cb36 data/aether_ii/recipes/ambrosium_shard_from_ambrosium_block.json
 2cb3a5a39d2f300dfc7df0d3ac7ac15763820b81 data/aether_ii/recipes/ambrosium_shard_from_blasting.json
 143afa4a5685399c85804df6494a6b30f3624fdd data/aether_ii/recipes/ambrosium_shard_from_smelting.json
