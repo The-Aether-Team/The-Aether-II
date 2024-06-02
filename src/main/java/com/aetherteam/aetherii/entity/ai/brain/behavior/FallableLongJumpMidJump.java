@@ -4,7 +4,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.behavior.LongJumpMidJump;
 
 public class FallableLongJumpMidJump extends LongJumpMidJump {
@@ -28,8 +27,5 @@ public class FallableLongJumpMidJump extends LongJumpMidJump {
     @Override
     protected void stop(ServerLevel pLevel, Mob pEntity, long pGameTime) {
         super.stop(pLevel, pEntity, pGameTime);
-        if (!pEntity.onGround()) {
-            pEntity.setPose(Pose.LONG_JUMPING);
-        }
     }
 }
