@@ -263,7 +263,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
         super.tick();
         this.handleFallSpeed();
         if (this.level().isClientSide()) {
-            if (this.onGround()) {
+            if (this.onGround() && this.jumpDuration <= 7) {
                 this.jumpAnimationState.ifStarted(animationState -> {
                     animationState.stop();
                 });
