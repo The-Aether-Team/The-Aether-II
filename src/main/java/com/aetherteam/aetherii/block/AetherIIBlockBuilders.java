@@ -67,7 +67,7 @@ public class AetherIIBlockBuilders {
         );
     }
 
-    public static BlockBehaviour.Properties aercloud(MapColor mapColor) {
+    public static BlockBehaviour.Properties aercloudProperties(MapColor mapColor) {
         return BlockBehaviour.Properties.of()
                 .mapColor(mapColor)
                 .instrument(NoteBlockInstrument.FLUTE)
