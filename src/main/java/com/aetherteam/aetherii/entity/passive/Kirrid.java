@@ -93,8 +93,6 @@ public class Kirrid extends AetherAnimal implements IShearable {
             Pose pose = this.getPose();
             if (pose == Pose.LONG_JUMPING) {
                 this.jumpAnimationState.start(this.tickCount);
-            } else {
-                this.jumpAnimationState.stop();
             }
         }
         super.onSyncedDataUpdated(pKey);

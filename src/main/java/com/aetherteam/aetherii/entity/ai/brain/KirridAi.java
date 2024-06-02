@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.FallRandomStroll;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.FallableLongJumpMidJump;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridEatGrass;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridRamTarget;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.*;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.google.common.collect.ImmutableList;
@@ -55,6 +52,7 @@ public class KirridAi {
                         new AnimalPanic(2.0F),
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
+                        new AfterLongJumpFalling(),
                         new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
                         new CountDownCooldownTicks(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS),
                         new CountDownCooldownTicks(MemoryModuleType.RAM_COOLDOWN_TICKS),
@@ -90,16 +88,16 @@ public class KirridAi {
         pBrain.addActivityWithConditions(
                 Activity.LONG_JUMP,
                 ImmutableList.of(
-                        Pair.of(0, new FallableLongJumpMidJump(TIME_BETWEEN_LONG_JUMPS, SoundEvents.GOAT_STEP)),
+                        Pair.of(0, new FallableLongJumpMidJump(TIME_BETWEEN_LONG_JUMPS)),
                         Pair.of(
                                 1,
-                                new LongJumpToRandomPos<>(
+                                new FallableLongJumpToRandomPos<>(
                                         TIME_BETWEEN_LONG_JUMPS,
                                         5,
                                         5,
                                         1.5F,
                                         p_149476_ -> SoundEvents.GOAT_LONG_JUMP
-                                )
+                                        , LongJumpToRandomPos::defaultAcceptableLandingSpot)
                         )
                 ),
                 ImmutableSet.of(
