@@ -26,7 +26,7 @@ public class AetherIIOrePlacements {
         AetherIIPlacementUtils.register(context, ORE_SCATTERGLASS, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_SCATTERGLASS),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(256))));
         AetherIIPlacementUtils.register(context, ORE_MOSSY_HOLYSTONE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_MOSSY_HOLYSTONE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(256))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(256))));
         AetherIIPlacementUtils.register(context, ORE_AGIOSITE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_AGIOSITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(64))));
         AetherIIPlacementUtils.register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_AMBROSIUM),

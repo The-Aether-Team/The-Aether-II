@@ -20,7 +20,7 @@ public class AetherIIOreFeatures {
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         AetherIIFeatureUtils.register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.UNDERGROUND, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 32));
-        AetherIIFeatureUtils.register(context, ORE_MOSSY_HOLYSTONE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 32));
+        AetherIIFeatureUtils.register(context, ORE_MOSSY_HOLYSTONE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 64));
         AetherIIFeatureUtils.register(context, ORE_AGIOSITE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.UNDERSHALE, AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 64));
         AetherIIFeatureUtils.register(context, ORE_AMBROSIUM, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), 16));
         AetherIIFeatureUtils.register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ZANITE_ORE.get().defaultBlockState(), 5, 0.5F));
