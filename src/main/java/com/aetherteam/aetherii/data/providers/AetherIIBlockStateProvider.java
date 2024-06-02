@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
+import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
@@ -220,6 +221,21 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             }
             return ConfiguredModel.builder().build();
         });
+    }
+
+    public void mossyWisproot(FacingPillarBlock block, RotatedPillarBlock baseBlock) {
+        ResourceLocation side = this.texture(this.name(block), "natural/");
+        ResourceLocation bottom = this.extend(this.texture(this.name(block), "natural/"), "_top");
+        ResourceLocation top = this.extend(this.texture(this.name(baseBlock), "natural/"), "_top");
+        ModelFile vertical = this.models().cubeColumn(this.name(block), side, bottom).texture("up", top);
+        ModelFile horizontal = this.models().cubeColumnHorizontal(this.name(block) + "_horizontal", side, bottom).texture("up", top);
+        this.getVariantBuilder(block)
+                .partialState().with(FacingPillarBlock.FACING, Direction.DOWN).modelForState().modelFile(vertical).rotationX(180).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.EAST).modelForState().modelFile(horizontal).rotationX(90).rotationY(90).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.NORTH).modelForState().modelFile(horizontal).rotationX(90).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.SOUTH).modelForState().modelFile(horizontal).rotationX(90).rotationY(180).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.UP).modelForState().modelFile(vertical).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.WEST).modelForState().modelFile(horizontal).rotationX(90).rotationY(270).addModel();
     }
 
     public void logDifferentTop(RotatedPillarBlock block, RotatedPillarBlock baseBlock) {

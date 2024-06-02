@@ -7,7 +7,7 @@
         "block": {
           "Name": "aether_ii:mossy_wisproot_log",
           "Properties": {
-            "axis": "y"
+            "facing": "up"
           }
         }
       }

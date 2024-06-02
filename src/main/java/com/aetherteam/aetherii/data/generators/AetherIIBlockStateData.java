@@ -70,7 +70,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.log(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.log(AetherIIBlocks.GREATROOT_LOG.get());
         this.log(AetherIIBlocks.WISPROOT_LOG.get());
-        this.logDifferentTop(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.get());
+        this.mossyWisproot(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.get());
         this.logDifferentTop(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
