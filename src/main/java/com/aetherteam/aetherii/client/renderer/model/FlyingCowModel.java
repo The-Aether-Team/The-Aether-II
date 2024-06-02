@@ -4,6 +4,7 @@ package com.aetherteam.aetherii.client.renderer.model;// Made with Blockbench 4.
 
 
 import com.aetherteam.aetherii.client.renderer.model.animation.FlyingCowAnimation;
+import com.aetherteam.aetherii.client.renderer.model.animation.WingAnimation;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HierarchicalModel;
@@ -112,16 +113,14 @@ public class FlyingCowModel<T extends FlyingCow> extends HierarchicalModel<T> {
         if (!Minecraft.getInstance().isPaused()) {
             float aimingForFold;
             if (entity.isEntityOnGround()) {
-                aimingForFold = 0.1F;
+                aimingForFold = 0.0F;
             } else {
                 aimingForFold = 1.0F;
             }
-            entity.setWingAngle(entity.getWingFold() * Mth.sin(ageInTicks / 15.9F));
             entity.setWingFold(entity.getWingFold() + ((aimingForFold - entity.getWingFold()) / 37.5F));
-            float wingBend = -((float) Math.acos(entity.getWingFold()));
-            this.wing_left.zRot = -(entity.getWingAngle() + wingBend + Mth.HALF_PI);
-            this.wing_right.zRot = -this.wing_left.zRot;
         }
+        this.animateWalk(WingAnimation.wing_open, 0.0F, entity.getWingFold(), 1.0F, 1.0F);
+
         if (entity.isBaby()) {
             this.applyStatic(FlyingCowAnimation.BABY);
         }
