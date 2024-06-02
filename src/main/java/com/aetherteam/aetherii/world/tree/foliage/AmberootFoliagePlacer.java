@@ -1,156 +1,109 @@
 package com.aetherteam.aetherii.world.tree.foliage;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+
+import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 public class AmberootFoliagePlacer extends FoliagePlacer {
     public static final Codec<AmberootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
             .apply(instance, AmberootFoliagePlacer::new));
 
-    public AmberootFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
-        super(pRadius, pOffset);
-    }
-
-    @Override
-    protected void createFoliage(LevelSimulatedReader level, FoliageSetter setter, RandomSource rand, TreeConfiguration config, int maxHeight, FoliageAttachment attachment, int height, int radius, int offset) {
-        Direction.Axis axis = Direction.Plane.HORIZONTAL.getRandomAxis(rand);
-        Direction.Axis oppositeAxis = axis == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X;
-        BlockPos origin = attachment.pos();
-
-        // Place main piece
-        placeLeavesRow(level, setter, rand, config, origin, radius - 1, 0, false);
-        placeLeavesRow(level, setter, rand, config, origin, radius, -1, false);
-        placeLeavesRow(level, setter, rand, config, origin, radius, -2, false);
-        placeLeavesRow(level, setter, rand, config, origin, radius, -3, false);
-
-        // Place corner spikes
-        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
-        for (int x = 0; x <= 1; x++) {
-            for (int z = 0; z <= 1; z++) {
-                int realX = x == 0 ? -radius : radius;
-                int realZ = z == 0 ? -radius : radius;
-                mutable.setWithOffset(origin, realX, 0, realZ);
-                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, rand.nextBoolean());
-            }
-        }
-
-        // Direction-dependent stuff
-        boolean addConnector = false;
-        BlockPos above = origin.above();
-        for (Direction.AxisDirection ad : Direction.AxisDirection.values()) {
-            // Construct both of these at the same time, why do two for loops when you can do it in one?
-            Direction currentSpikeDir = Direction.fromAxisAndDirection(axis, ad);
-            Direction currentOppositeDir = Direction.fromAxisAndDirection(oppositeAxis, ad);
-   
-            // Place top spike
-            mutable.setWithOffset(above, currentSpikeDir);
-            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
-            BlockPos spike1Loc = mutable.immutable();
-            mutable.setWithOffset(spike1Loc, 0, 1, 0);
-            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
-            mutable.setWithOffset(spike1Loc, 0, 2, 0);
-            boolean skip = rand.nextBoolean();
-            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, skip);
-            if (!skip) {
-                addConnector = true;
-            }
-
-            // Place the side connector piece
-            // Create an 'opposite offset' value and a 'y offset' value. This part of the method will create a plus shape on the side of the tree.
-            Direction oppAxisStep = Direction.fromAxisAndDirection(oppositeAxis, Direction.AxisDirection.POSITIVE);
-            BlockPos sideLoc = origin.relative(currentSpikeDir, radius + 1);
-            for (int oppOffs = -1; oppOffs <= 1; oppOffs++) {
-                for (int yOffs = -1; yOffs <= 1; yOffs++) {
-                    int oppAbs = Mth.abs(oppOffs);
-                    int yAbs = Mth.abs(yOffs);
-                    if (oppAbs + yAbs < 2) {
-                        Vec3i offs =  new Vec3i(oppAxisStep.getStepX() * oppOffs, yOffs - 1, oppAxisStep.getStepZ() * oppOffs);
-                        mutable.setWithOffset(sideLoc, offs);
-                        placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
-                    }
-                }
-            }
-            // Place top spike connector
-            placeLeavesRow(level, setter, rand, config, above, 0, 0, addConnector);
-
-            // Place the side spike
-            BlockPos sideSpikeLoc = sideLoc.relative(currentSpikeDir, 1);
-            for (int y = 0; y <= 1; y++) {
-                mutable.setWithOffset(sideSpikeLoc, 0, y, 0);
-                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, y == 1 && rand.nextBoolean());
-            }
-
-            // Place the front/back spikes
-            BlockPos frontLoc = origin.relative(currentOppositeDir, radius + 1);
-            for (int y = -1; y <= 0; y++) {
-                mutable.setWithOffset(frontLoc, 0, y, 0);
-                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
-            }
-        }
-    }
-
-    // Override vanilla behavior of using the 'large' boolean value to actually affect the size, this is unwanted behavior in this case
-    protected void placeLeavesRow(LevelSimulatedReader level, FoliagePlacer.FoliageSetter setter, RandomSource rand, TreeConfiguration config, BlockPos pos, int radius, int y, boolean large) {
-        // Also avoid creating a new mutable blockpos if the radius is 0 anyway
-        if (radius <= 0) {
-            if (!this.shouldSkipLocationSigned(rand, 0, y, 0, radius, large)) {
-                tryPlaceLeaf(level, setter, rand, config, pos.above(y));
-                return;
-            }
-        }
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
-        for(int j = -radius; j <= radius; ++j) {
-            for(int k = -radius; k <= radius; ++k) {
-                if (!this.shouldSkipLocationSigned(rand, j, y, k, radius, large)) {
-                    blockpos$mutableblockpos.setWithOffset(pos, j, y, k);
-                    tryPlaceLeaf(level, setter, rand, config, blockpos$mutableblockpos);
-                }
-            }
-        }
-    }
-
-    @Override
-    public int foliageHeight(RandomSource rand, int pHeight, TreeConfiguration config) {
-        return 0;
-    }
-
-
-    @Override
-    protected boolean shouldSkipLocation(RandomSource rand, int x, int y, int z, int radius, boolean remove) {
-        // when the radius is zero (placing a single block), the remove parameter, usually called large, is used to determine whether or not to remove the block
-        if (radius == 0) {
-            return remove;
-        } else {
-            if (y == 0) {
-                // If the y offset is 0, only skip the location if it is on the corners, AND a boolean check succeeds
-                return x + z >= radius * 2 && rand.nextBoolean();
-            } else if (y == -1) {
-                // If the y offset is -1, do not skip the location
-                return false;
-            } else if (y == -2) {
-                // If the y offset is -2, skip the location if it is on the corners
-                return x + z >= radius * 2;
-            } else {
-                boolean diamond = x + z <= radius;
-                boolean square = x < radius && z < radius;
-                return !square || (!diamond && rand.nextBoolean());
-            }
-
-        }
+    public AmberootFoliagePlacer(IntProvider radius, IntProvider offset) {
+        super(radius, offset);
     }
 
     @Override
     protected FoliagePlacerType<?> type() {
         return AetherIIFoliagePlacerTypes.AMBEROOT_FOLIAGE_PLACER.get();
+    }
+
+    /**
+     * Places a sphere of leaves.
+     *
+     * @param level             The {@link LevelSimulatedReader}.
+     * @param foliageSetter     The {@link BiConsumer} of a {@link BlockPos} and {@link BlockState} used for block placement.
+     * @param random            The {@link RandomSource}.
+     * @param config            The {@link TreeConfiguration}.
+     * @param maxFreeTreeHeight The {@link Integer} for the maximum tree height.
+     * @param attachment        A {@link FoliageAttachment} to add foliage to.
+     * @param foliageHeight     The {@link Integer} for the foliage height.
+     * @param foliageRadius     The {@link Integer} for the foliage radius.
+     * @param offset            The {@link Integer} for the foliage offset.
+     */
+    @Override  //TODO: Code Clean-Up
+    protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
+        for (int i = offset; i >= offset - foliageHeight; --i) {
+            if (level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 1, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X))) || level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X)))) {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 5, attachment.pos().getY() + 3, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 5, attachment.pos().getY() + 3, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 4, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 4, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 6, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 6, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ() + 2), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ() - 2), 2, i, attachment.doubleTrunk());
+            } else {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 1, attachment.pos().getZ() + 2), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 1, attachment.pos().getZ() - 2), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ() + 4), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ() - 4), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 3, attachment.pos().getZ() + 5), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 3, attachment.pos().getZ() - 5), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 4, attachment.pos().getZ() + 2), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 4, attachment.pos().getZ() - 2), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 6, attachment.pos().getZ() + 2), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 6, attachment.pos().getZ() - 2), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
+            }
+        }
+    }
+
+    /**
+     * Determines the foliage height at a constant value of 7.
+     *
+     * @param random The {@link RandomSource}.
+     * @param height The {@link Integer} for the foliage height.
+     * @param config The {@link TreeConfiguration}.
+     * @return The {@link Integer} for the foliage height.
+     */
+    @Override
+    public int foliageHeight(RandomSource random, int height, TreeConfiguration config) {
+        return 7;
+    }
+
+    /**
+     * Skips placing a foliage block at a spherical edge location and with some randomness.
+     *
+     * @param random The {@link RandomSource}.
+     * @param localX The local {@link Integer} x-position.
+     * @param localY The local {@link Integer} y-position.
+     * @param localZ The local {@link Integer} z-position.
+     * @param range  The {@link Integer} for the placement range.
+     * @param large  The {@link Boolean} for whether the tree is large.
+     * @return Whether the location should be skipped, as a {@link Boolean}.
+     */
+
+    @Override
+    protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
+        return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(3);
     }
 }
