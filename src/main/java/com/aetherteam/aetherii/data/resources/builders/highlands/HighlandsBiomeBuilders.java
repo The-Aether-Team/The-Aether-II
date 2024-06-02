@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-
-import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIMiscPlacements;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIOrePlacements;
@@ -101,6 +100,11 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.SKYROOT_TWIGS)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.HOLYSTONE_ROCKS)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHLANDS_BUSH_PATCH)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.BLUEBERRY_BUSH_PATCH)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.ORANGE_TREE_PATCH)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_QUICKSOIL)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AMBROSIUM)
@@ -276,10 +280,12 @@ public class HighlandsBiomeBuilders {
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
 
                 // Arctic
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, fullRange, fullRange, 0),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, Climate.Parameter.span(-1.5F, -0.2F), fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.2F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.2F, 1.0F), fullRange, erosionDefault, Climate.Parameter.span(-1.5F, -0.2F), fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, Climate.Parameter.span(-0.2F, 1.5F), fullRange, 0),
+                        biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
 
                 // Highfields
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, fullRange, fullRange, 0),

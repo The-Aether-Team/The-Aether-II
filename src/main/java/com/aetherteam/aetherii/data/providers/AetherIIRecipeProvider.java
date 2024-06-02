@@ -4,10 +4,12 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -15,6 +17,15 @@ import java.util.function.Supplier;
 public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     public AetherIIRecipeProvider(PackOutput output, String id) {
         super(output, id);
+    }
+
+    protected static void leafPile(RecipeOutput recipeOutput, ItemLike carpet, ItemLike material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 32)
+                .define('#', material)
+                .pattern("##")
+                .group("leaf_pile")
+                .unlockedBy(getHasName(material), has(material))
+                .save(recipeOutput);
     }
 
     protected ShapedRecipeBuilder fence(Supplier<? extends Block> fence, Supplier<? extends Block> material) {
