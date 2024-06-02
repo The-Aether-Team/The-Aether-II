@@ -22,11 +22,6 @@ public class GreatrootFoliagePlacer extends FoliagePlacer {
         super(radius, offset);
     }
 
-    @Override
-    protected FoliagePlacerType<?> type() {
-        return AetherIIFoliagePlacerTypes.GREATROOT_FOLIAGE_PLACER.get();
-    }
-
     /**
      * Places a sphere of leaves.
      *
@@ -79,5 +74,10 @@ public class GreatrootFoliagePlacer extends FoliagePlacer {
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
         return Mth.square(localX) + Mth.square(localY - 1) + Mth.square(localZ) > range + random.nextInt(3);
+    }
+
+    @Override
+    protected FoliagePlacerType<?> type() {
+        return AetherIIFoliagePlacerTypes.GREATROOT_FOLIAGE_PLACER.get();
     }
 }

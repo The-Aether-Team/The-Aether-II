@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T10:25:54.0854746	Registries
+// 1.20.4	2024-06-02T12:31:59.6303514	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -27,7 +27,7 @@ d0a0f811d131f644cbde00da7c76615aebbc6c00 data/aether_ii/worldgen/biome/magnetic_
 85c2c5f57a46987ce663c2c4d8005ca4bc412f1e data/aether_ii/worldgen/biome/turquoise_forest.json
 a9fcb6886e291f3835cf2710f1bb31eba6398159 data/aether_ii/worldgen/biome/verdant_woods.json
 e256e9217c4a2909752df70165fe67fe8b0e0581 data/aether_ii/worldgen/biome/violet_highwoods.json
-01f3fa14e17099913fa0639f457e0ddcdfe33970 data/aether_ii/worldgen/configured_feature/amberoot.json
+e1abd8da8a516ba0183a393ae4394a1f4b90b97f data/aether_ii/worldgen/configured_feature/amberoot.json
 644bfbe902cf60ae7c6e5d49f18d2c41f605cf9d data/aether_ii/worldgen/configured_feature/blueberry_bush_patch.json
 63289f26e69475adaf213c97eeba3dab9965b0d6 data/aether_ii/worldgen/configured_feature/blue_aercloud.json
 fd2c191030173711f190e6ded6dfcaaba966690a data/aether_ii/worldgen/configured_feature/cloudbed.json

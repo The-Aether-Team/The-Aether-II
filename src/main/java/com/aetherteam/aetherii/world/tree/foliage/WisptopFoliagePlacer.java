@@ -20,11 +20,6 @@ public class WisptopFoliagePlacer extends DarkOakFoliagePlacer {
     }
 
     @Override
-    protected FoliagePlacerType<?> type() {
-        return AetherIIFoliagePlacerTypes.WISPTOP_FOLIAGE_PLACER.get();
-    }
-
-    @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 16, i, attachment.doubleTrunk());
@@ -52,5 +47,10 @@ public class WisptopFoliagePlacer extends DarkOakFoliagePlacer {
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
         return Mth.square(localX) + Mth.square(localY - 2) + Mth.square(localZ) > range + random.nextInt(2);
+    }
+
+    @Override
+    protected FoliagePlacerType<?> type() {
+        return AetherIIFoliagePlacerTypes.WISPTOP_FOLIAGE_PLACER.get();
     }
 }
