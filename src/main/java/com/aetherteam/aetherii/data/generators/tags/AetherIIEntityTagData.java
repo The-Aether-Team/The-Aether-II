@@ -31,6 +31,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 EntityType.PARROT
         );
 
+        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.ARCTIC_SNOWBALL.get());
         this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get());
     }
 }

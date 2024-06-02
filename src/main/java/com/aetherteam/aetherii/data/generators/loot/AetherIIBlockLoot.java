@@ -24,8 +24,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
     @Override
     public void generate() {
         // Dirt
-        this.dropOther(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.asItem());
-        this.dropOther(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.asItem());
+        this.otherWhenSilkTouch(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
+        this.otherWhenSilkTouch(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dropOther(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.AETHER_DIRT.get());
         this.dropSelf(AetherIIBlocks.COARSE_AETHER_DIRT.get());

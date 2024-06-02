@@ -21,6 +21,7 @@ import com.aetherteam.aetherii.item.combat.zanite.ZaniteHammerItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteShortswordItem;
 import com.aetherteam.aetherii.item.combat.zanite.ZaniteSpearItem;
 import com.aetherteam.aetherii.item.food.AetherIIFoods;
+import com.aetherteam.aetherii.item.materials.ArcticSnowballItem;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
 import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumAxeItem;
 import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumPickaxeItem;
@@ -112,6 +113,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> TAEGORE_HIDE = ITEMS.register("taegore_hide", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> BURRUKAI_PELT = ITEMS.register("burrukai_pelt", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> AECHOR_PETAL = ITEMS.register("aechor_petal", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> ARCTIC_SNOWBALL = ITEMS.register("arctic_snowball", () -> new ArcticSnowballItem(new Item.Properties()));
 
     // Food
     public static final DeferredItem<Item> BLUEBERRY = ITEMS.register("blueberry", () -> new Item(new Item.Properties().food(AetherIIFoods.BLUEBERRY)));
