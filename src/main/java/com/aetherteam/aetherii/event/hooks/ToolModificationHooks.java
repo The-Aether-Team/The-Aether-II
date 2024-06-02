@@ -43,6 +43,7 @@ public class ToolModificationHooks {
     public static final Map<Block, Block> FLATTENABLES = (new ImmutableMap.Builder<Block, Block>())
             .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
             .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
+            .put(AetherIIBlocks.COARSE_AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
             .build();
 
     /**
@@ -52,6 +53,7 @@ public class ToolModificationHooks {
             .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_FARMLAND.get())
             .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_FARMLAND.get())
             .put(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_FARMLAND.get())
+            .put(AetherIIBlocks.COARSE_AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT.get())
             .build();
 
     /**
