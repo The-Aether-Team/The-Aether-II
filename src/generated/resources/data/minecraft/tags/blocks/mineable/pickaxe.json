@@ -20,6 +20,10 @@
     "aether_ii:holystone_brick_stairs",
     "aether_ii:holystone_brick_slab",
     "aether_ii:holystone_brick_wall",
+    "aether_ii:faded_holystone_bricks",
+    "aether_ii:faded_holystone_brick_stairs",
+    "aether_ii:faded_holystone_brick_slab",
+    "aether_ii:faded_holystone_brick_wall",
     "aether_ii:undershale_stairs",
     "aether_ii:undershale_slab",
     "aether_ii:undershale_wall",
@@ -32,6 +36,9 @@
     "aether_ii:agiosite_brick_wall",
     "aether_ii:ambrosium_block",
     "aether_ii:zanite_block",
-    "aether_ii:gravitite_block"
+    "aether_ii:gravitite_block",
+    "aether_ii:holystone_furnace",
+    "aether_ii:masonry_bench",
+    "aether_ii:holystone_bookshelf"
   ]
 }

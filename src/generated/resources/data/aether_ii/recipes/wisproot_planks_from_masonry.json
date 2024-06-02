@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks_from_masonry",
+  "ingredients": [
+    {
+      "tag": "aether_ii:wisproot_masonry_blocks"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:wisproot_planks"
+  }
+}

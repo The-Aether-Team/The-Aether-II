@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "leaf_pile",
+  "key": {
+    "#": {
+      "item": "aether_ii:skypine_leaves"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 32,
+    "item": "aether_ii:skypine_leaf_pile"
+  }
+}

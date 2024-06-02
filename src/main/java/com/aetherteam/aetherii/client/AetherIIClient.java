@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.client.event.listeners.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.gui.screen.inventory.HolystoneFurnaceScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
@@ -33,6 +34,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
         neoBus.addListener(AetherIIColorResolvers::registerItemColor);
         neoBus.addListener(AetherIIParticleTypes::registerParticleFactories);
+        neoBus.addListener(AetherIIOverlays::registerOverlays);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);

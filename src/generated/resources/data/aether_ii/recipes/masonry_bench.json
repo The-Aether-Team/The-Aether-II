@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "aether_ii:stone_crafting"
+    },
+    "A": {
+      "item": "aether_ii:arkenium_plate"
+    }
+  },
+  "pattern": [
+    " A ",
+    "###"
+  ],
+  "result": {
+    "item": "aether_ii:masonry_bench"
+  }
+}

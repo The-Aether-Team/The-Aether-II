@@ -4,10 +4,13 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -17,12 +20,32 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         super(output, id);
     }
 
+    protected static void leafPile(RecipeOutput recipeOutput, ItemLike carpet, ItemLike material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 32)
+                .define('#', material)
+                .pattern("##")
+                .group("leaf_pile")
+                .unlockedBy(getHasName(material), has(material))
+                .save(recipeOutput);
+    }
+
     protected ShapedRecipeBuilder fence(Supplier<? extends Block> fence, Supplier<? extends Block> material) {
         return this.fence(fence, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
     }
 
     protected ShapedRecipeBuilder fenceGate(Supplier<? extends Block> fenceGate, Supplier<? extends Block> material) {
         return this.fenceGate(fenceGate, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
+    }
+
+    protected static void bookshelf(RecipeOutput consumer, ItemLike result, ItemLike material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result)
+                .define('#', material)
+                .define('B', Items.BOOK)
+                .pattern("###")
+                .pattern("BBB")
+                .pattern("###")
+                .unlockedBy(getHasName(Items.BOOK), has(Items.BOOK))
+                .save(consumer);
     }
 
     protected ShapedRecipeBuilder makePickaxeWithTag(Supplier<? extends Item> pickaxe, TagKey<Item> material, String has) {

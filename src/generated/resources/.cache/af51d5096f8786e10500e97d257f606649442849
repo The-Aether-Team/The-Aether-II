@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T15:42:23.3462883	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-06-01T17:35:01.4230679	Tags for minecraft:item mod id aether_ii
 53afc97bd3504253faa87c8448b46627ca13c602 data/aether_ii/tags/items/aerbunny_temptation_items.json
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 0c52879ea7524c9c5a2025462b6351d7e81bf251 data/aether_ii/tags/items/aether_dirt.json
@@ -14,6 +14,7 @@ fce3e48dcf2a2f543eb33cde348393547a8abb35 data/aether_ii/tags/items/crafts_skyroo
 50aa3b1be78deaf9aef13985ed1fa0f21fd32bce data/aether_ii/tags/items/gems/zanite.json
 388a51dca9547d63c61921397cb0eac41f68806a data/aether_ii/tags/items/gravitite_repairing.json
 d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/items/greatroot_logs.json
+2071e063a6cf1c0f9f167ef9c4c6fadba757b3e7 data/aether_ii/tags/items/greatroot_masonry_blocks.json
 07e041016f860713eeee69005d5c309bb262173d data/aether_ii/tags/items/holystone.json
 a5df7a36d1179fd70f1778840b38bad71c171e4b data/aether_ii/tags/items/holystone_repairing.json
 d4c9cbd81fe5941c2cf29db6e9c97643c1350346 data/aether_ii/tags/items/phyg_temptation_items.json
@@ -22,11 +23,14 @@ d4c9cbd81fe5941c2cf29db6e9c97643c1350346 data/aether_ii/tags/items/phyg_temptati
 388a51dca9547d63c61921397cb0eac41f68806a data/aether_ii/tags/items/plates/gravitite.json
 dc76002bbf3fed2fede1a66c265d7053b478b240 data/aether_ii/tags/items/rods/skyroot.json
 6f9651d534c05c400a6dd78fbd1469e3626777a8 data/aether_ii/tags/items/skyroot_logs.json
+e25d24f27acc51ff81a64f65603eb35cf3b433b7 data/aether_ii/tags/items/skyroot_masonry_blocks.json
 9c63466a4df59334a626bc38a990db8af39f7eb8 data/aether_ii/tags/items/skyroot_repairing.json
 0b72f8aa978e4516ff428e2de46ec5659f601643 data/aether_ii/tags/items/stone_crafting.json
 c97ef2b0c396d3206c0f7fde553104b8e13c0521 data/aether_ii/tags/items/unique_tooltip_color.json
 7e6974b61ae56625dc2ea30ee021d854764eb5d4 data/aether_ii/tags/items/wisproot_logs.json
+fb2c91a28387d33e76a95f99e34f52f12a5975a9 data/aether_ii/tags/items/wisproot_masonry_blocks.json
 50aa3b1be78deaf9aef13985ed1fa0f21fd32bce data/aether_ii/tags/items/zanite_repairing.json
+08963efec6206ba0a5e3e1fc7e5c4f4f2bbf4fde data/forge/tags/items/bookshelves.json
 10f899ac0f5727b6e9e16857e56eea8670ced961 data/forge/tags/items/chests/wooden.json
 78ed277ff645a9d01385e71d111abe5236aeecd1 data/forge/tags/items/fences.json
 78ed277ff645a9d01385e71d111abe5236aeecd1 data/forge/tags/items/fences/wooden.json
@@ -36,13 +40,14 @@ c5ac6795116ea009da3eade76c2d8a9d29e7b636 data/minecraft/tags/items/axes.json
 27063cd86404944dcec9f3d5b3ad5db3e9311936 data/minecraft/tags/items/beacon_payment_items.json
 cbe8875041d0d6c8cb738cf1e27cbc4d074f21b9 data/minecraft/tags/items/hoes.json
 c8faef7fa50c3ca0e6834d010620789165e12351 data/minecraft/tags/items/logs_that_burn.json
+dfad5dbaa5cab01665fb4753923a154526b784a4 data/minecraft/tags/items/music_discs.json
 342b2797a54040bb536f3c7915cc43c2bbf73580 data/minecraft/tags/items/pickaxes.json
 4434eb6d4be8cdb705ca37dcef38bcb35568ad4e data/minecraft/tags/items/saplings.json
 0c276df955c88966b6d276e0f45117724691eff8 data/minecraft/tags/items/shovels.json
-19d79ef230815d0a2cf8f4f57d465c7e641520d0 data/minecraft/tags/items/slabs.json
-77f04b014c1093eb6a27600a750a171e560413f5 data/minecraft/tags/items/stairs.json
+7a44d6ad6fe3232cc38eae6cd7c5db7bd25f9e30 data/minecraft/tags/items/slabs.json
+d011ca50ad0f86e7e038166eddefe59495fa9aa2 data/minecraft/tags/items/stairs.json
 220cb43fca5767fe3d04a7d01c9a1cf30c725296 data/minecraft/tags/items/stone_buttons.json
-6dd351656f5b8ea437350cbecd306a589b06f074 data/minecraft/tags/items/walls.json
+7e7f6ac46d047c1593fb43f34e27d19568d6740f data/minecraft/tags/items/walls.json
 5d3e7cc95e15b524d10caae12416861056412e53 data/minecraft/tags/items/wooden_buttons.json
 67fc3d5b8a0890d5fe3b2e86f83a9e17ec806e7b data/minecraft/tags/items/wooden_doors.json
 78ed277ff645a9d01385e71d111abe5236aeecd1 data/minecraft/tags/items/wooden_fences.json
