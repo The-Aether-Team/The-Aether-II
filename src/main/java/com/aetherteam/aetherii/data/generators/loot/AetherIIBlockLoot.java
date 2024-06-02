@@ -150,8 +150,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_ORANGE_TREE.get());
 
         // Ground Decoration
-        this.dropSelf(AetherIIBlocks.SKYROOT_TWIG.get());
-        this.dropSelf(AetherIIBlocks.HOLYSTONE_ROCK.get());
+        this.add(AetherIIBlocks.SKYROOT_TWIG.get(), this::dropTwigs);
+        this.add(AetherIIBlocks.HOLYSTONE_ROCK.get(), this::dropRocks);
 
         // Skyroot Planks
         this.dropSelf(AetherIIBlocks.SKYROOT_PLANKS.get());

@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T02:21:59.9675132	Loot Tables
+// 1.20.4	2024-06-02T02:50:03.9259358	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -85,7 +85,7 @@ e8fda5f07643fef17b7ec891fccb27e238037d66 data/aether_ii/loot_tables/blocks/holys
 9b485b1791f823235ba15a25ead72339b575a990 data/aether_ii/loot_tables/blocks/holystone_button.json
 192151093cd2b5b33003514cd4a643f998d7ef08 data/aether_ii/loot_tables/blocks/holystone_furnace.json
 f42129c5f9ab9a1f2a79ffaebdb198a6337c0dd9 data/aether_ii/loot_tables/blocks/holystone_pressure_plate.json
-c82b14da62c83bafa57b0fcbb65c48d0361753b3 data/aether_ii/loot_tables/blocks/holystone_rock.json
+ca4128e14959f974440b122c07b47ae514772c06 data/aether_ii/loot_tables/blocks/holystone_rock.json
 3c53971203ea357d1eaf6005692e3f9197d4c345 data/aether_ii/loot_tables/blocks/holystone_slab.json
 d0bc73c482f0ed62de0521c8aaf08864532df5cb data/aether_ii/loot_tables/blocks/holystone_stairs.json
 3d885a44d1a0ec53d33089cf4cfafd877204b86a data/aether_ii/loot_tables/blocks/holystone_wall.json
@@ -150,7 +150,7 @@ a63cc17b75d1542712f8283ba82a2ee68bde948f data/aether_ii/loot_tables/blocks/skyro
 c48c83bca183671e3155f81465ce731cafcda605 data/aether_ii/loot_tables/blocks/skyroot_top_beam.json
 0cf17a458225ef77adf3fc5a89800652e3f11004 data/aether_ii/loot_tables/blocks/skyroot_top_planks.json
 c3b2c642906cb7cf018e74ecc453aa2a8431e26d data/aether_ii/loot_tables/blocks/skyroot_trapdoor.json
-146c5cc12daa8072d52a2925d8d5bbe9f2c7f9a7 data/aether_ii/loot_tables/blocks/skyroot_twig.json
+d695bb5461c7f660e4c2cfa08b616caaeaf043df data/aether_ii/loot_tables/blocks/skyroot_twig.json
 e3b0acc3ce29dcaf1878ee301a7fed5c2ec19f4f data/aether_ii/loot_tables/blocks/skyroot_wood.json
 e021674a654ec1b3ff3b67e31572fe22aabd956e data/aether_ii/loot_tables/blocks/storm_aercloud.json
 4a5632bdd977fd8246d80167d2682845e8dedd19 data/aether_ii/loot_tables/blocks/stripped_skyroot_log.json
