@@ -322,7 +322,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Glass
         this.itemBlock(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
+        this.pane(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get(), AetherIIBlocks.CRUDE_SCATTERGLASS.get(), "natural/");
         this.itemBlock(AetherIIBlocks.SCATTERGLASS.get());
+        this.pane(AetherIIBlocks.SCATTERGLASS_PANE.get(), AetherIIBlocks.SCATTERGLASS.get(), "natural/");
 
         // Wool
         this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());

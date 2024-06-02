@@ -269,7 +269,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Glass
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
+        this.dropSelf(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get());
         this.dropSelf(AetherIIBlocks.SCATTERGLASS.get());
+        this.dropSelf(AetherIIBlocks.SCATTERGLASS_PANE.get());
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());

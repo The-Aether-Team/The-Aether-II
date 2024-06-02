@@ -255,7 +255,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         // Glass
         this.translucentBlock(AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
         this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
+        this.crudeScatterglassPane(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get(), AetherIIBlocks.CRUDE_SCATTERGLASS.get(), "natural/");
         this.translucentBlock(AetherIIBlocks.SCATTERGLASS.get(), "natural/");
+        this.pane(AetherIIBlocks.SCATTERGLASS_PANE.get(), AetherIIBlocks.SCATTERGLASS.get(), "natural/");
 
         // Wool
         this.block(AetherIIBlocks.CLOUDWOOL.get(), "construction/");

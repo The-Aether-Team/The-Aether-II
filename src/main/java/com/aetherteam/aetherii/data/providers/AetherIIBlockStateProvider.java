@@ -266,6 +266,15 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }, AetherLeafPileBlock.PERSISTENT);
     }
 
+    public void shortGrass(Block block) {
+        ModelFile grass = this.triTintedCross(this.name(block))
+                .texture("particle", this.texture(this.name(block), "natural/"))
+                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
+                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
+    }
+
     public ModelBuilder<BlockModelBuilder> triTintedCross(String name) {
         return this.models().getBuilder(name)
                 .renderType(new ResourceLocation("cutout"))
@@ -314,15 +323,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .end();
     }
 
-    public void shortGrass(Block block) {
-        ModelFile grass = this.triTintedCross(this.name(block))
-                .texture("particle", this.texture(this.name(block), "natural/"))
-                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
-                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
-                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
-        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
-    }
-
     public void bush(Block block) {
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(this.bush(block, this.name(block) + "_stem")));
     }
@@ -338,11 +338,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .element().from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F).rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end().shade(true).face(Direction.NORTH).texture("#stem").end().face(Direction.SOUTH).texture("#stem").end().end()
                 .element().from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F).rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end().shade(true).face(Direction.WEST).texture("#stem").end().face(Direction.EAST).texture("#stem").end().end()
                 .renderType(new ResourceLocation("cutout"));
-    }
-
-    public void pottedStem(Block stem, String location) {
-        ModelFile pot = this.pottedStemModel(stem, this.name(stem), location).renderType(new ResourceLocation("cutout"));
-        this.getVariantBuilder(stem).partialState().addModels(new ConfiguredModel(pot));
     }
 
     public void pottedBush(Block bush, String location) {
@@ -365,6 +360,11 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .face(Direction.DOWN).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end().end()
                 .renderType(new ResourceLocation("cutout"));
         this.getVariantBuilder(bush).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public void pottedStem(Block stem, String location) {
+        ModelFile pot = this.pottedStemModel(stem, this.name(stem), location).renderType(new ResourceLocation("cutout"));
+        this.getVariantBuilder(stem).partialState().addModels(new ConfiguredModel(pot));
     }
 
     public BlockModelBuilder pottedStemModel(Block block, String stem, String location) {
@@ -557,6 +557,10 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void crudeScatterglassPane(IronBarsBlock block, HalfTransparentBlock glass, String location) {
+        this.paneBlockWithRenderType(block, this.texture(this.name(glass), location), this.extend(this.texture(this.name(block), location), "_top"), new ResourceLocation("translucent"));
+    }
+
     public void carpet(Block block, Block baseBlock, String location) {
         simpleBlock(block, models().singleTexture(name(block), mcLoc("block/carpet"), "wool", texture(location + name(baseBlock))));
     }
@@ -619,25 +623,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
-    public void skyrootChest(Block block) {
-        ModelFile chest = this.models().cubeAll(this.name(block), new ResourceLocation(AetherII.MODID, "block/construction/skyroot_planks"));
-        this.chest(block, chest);
-    }
-
-    public void skyrootLadder(LadderBlock block) {
-        ResourceLocation location = this.texture(this.name(block), "construction/");
-        ModelFile ladder = models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout")).ao(false)
-                .texture("particle", location).texture("texture", location)
-                .element().from(0.0F, 0.0F, 15.2F).to(16.0F, 16.0F, 15.2F).shade(false)
-                .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#texture").end()
-                .face(Direction.SOUTH).uvs(16.0F, 0.0F, 0.0F, 16.0F).texture("#texture").end()
-                .end();
-        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            Direction direction = state.getValue(LadderBlock.FACING);
-            return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
-        }, LadderBlock.WATERLOGGED);
-    }
-
     public void masonryBench(Block block) {
         ModelFile plant = models().withExistingParent(name(block), mcLoc("block/stonecutter"))
                 .texture("particle", texture(name(block) + "_bottom", "utility/"))
@@ -656,5 +641,24 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void masonryBeam(RotatedPillarBlock block, Block endBlock) {
         this.axisBlock(block, this.extend(this.texture(this.name(block), "masonry/"), ""), this.extend(this.texture(this.name(endBlock), "masonry/"), ""));
+    }
+
+    public void skyrootChest(Block block) {
+        ModelFile chest = this.models().cubeAll(this.name(block), new ResourceLocation(AetherII.MODID, "block/construction/skyroot_planks"));
+        this.chest(block, chest);
+    }
+
+    public void skyrootLadder(LadderBlock block) {
+        ResourceLocation location = this.texture(this.name(block), "construction/");
+        ModelFile ladder = models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout")).ao(false)
+                .texture("particle", location).texture("texture", location)
+                .element().from(0.0F, 0.0F, 15.2F).to(16.0F, 16.0F, 15.2F).shade(false)
+                .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#texture").end()
+                .face(Direction.SOUTH).uvs(16.0F, 0.0F, 0.0F, 16.0F).texture("#texture").end()
+                .end();
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(LadderBlock.FACING);
+            return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
+        }, LadderBlock.WATERLOGGED);
     }
 }

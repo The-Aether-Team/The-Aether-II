@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T18:10:23.1801189	Item Models: aether_ii
+// 1.20.4	2024-06-01T23:56:19.4617806	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -50,6 +50,7 @@ ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_
 a6fda269de440be4d8141138223e1d4aa1d45c92 assets/aether_ii/models/item/coarse_aether_dirt.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
 62bac9bd6acefef7843b01b2cea0671183dbccc2 assets/aether_ii/models/item/crude_scatterglass.json
+f564a9c24a300e0c5f4ac81ecc2b9109bfd4b774 assets/aether_ii/models/item/crude_scatterglass_pane.json
 9dc07025feb7e5c425d7109d554d7f8007d21846 assets/aether_ii/models/item/enchanted_aether_grass_block.json
 0a1091ef207642173d2d97fc02de7e8e115c76b4 assets/aether_ii/models/item/enchanted_berry.json
 5b488fc0fcac5fb3983f7a8a8a1ecbb74dfd5e95 assets/aether_ii/models/item/faded_holystone_bricks.json
@@ -148,6 +149,7 @@ fad53ce2a6eed791c566a36883f6cce0d0a71b6c assets/aether_ii/models/item/raw_gravit
 5c44689b768829d161bbbd42e118d1e4844e5a02 assets/aether_ii/models/item/recording_892.json
 5b9708bb41042a805c3ddb24358f2ee39db2c7f5 assets/aether_ii/models/item/rusted_ferrosite.json
 8b11c473c4865d824980c5f9807969013fae26a4 assets/aether_ii/models/item/scatterglass.json
+7658d4a77de11fee470c7745cc9c89f159ad1665 assets/aether_ii/models/item/scatterglass_pane.json
 a278983ff6b77ed62a4f15add25a86f0f1dbef4c assets/aether_ii/models/item/skybirch_leaf_pile.json
 8a0980302cbbd9afaab3f79672dfe45915644984 assets/aether_ii/models/item/skybirch_leaves.json
 9647906d5deb7547e055f58efb9fa62911e8b879 assets/aether_ii/models/item/skypine_leaf_pile.json
