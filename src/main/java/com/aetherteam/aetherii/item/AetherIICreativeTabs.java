@@ -148,9 +148,11 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".natural_blocks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
-                output.accept(AetherIIBlocks.AETHER_DIRT_PATH.get());
+                output.accept(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get());
                 output.accept(AetherIIBlocks.AETHER_DIRT.get());
+                output.accept(AetherIIBlocks.AETHER_DIRT_PATH.get());
                 output.accept(AetherIIBlocks.AETHER_FARMLAND.get());
+                output.accept(AetherIIBlocks.COARSE_AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
@@ -158,6 +160,14 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
                 output.accept(AetherIIBlocks.AGIOSITE.get());
+                output.accept(AetherIIBlocks.FERROSITE.get());
+                output.accept(AetherIIBlocks.RUSTED_FERROSITE.get());
+                output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+                output.accept(AetherIIBlocks.ARCTIC_SNOW.get());
+                output.accept(AetherIIBlocks.ARCTIC_ICE.get());
+                output.accept(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
@@ -193,6 +203,22 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_SHORT_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
                 output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
+                output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
+                output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
+                output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
+                output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
+                output.accept(AetherIIBlocks.ORANGE_TREE.get());
+                output.accept(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.SKYPINE_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.WISPROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.WISPTOP_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.GREATROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
@@ -217,35 +243,35 @@ public class AetherIICreativeTabs {
             .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_PICKAXE.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".equipment_and_utilities"))
             .displayItems((features, output) -> {
-                output.accept(AetherIIItems.SKYROOT_SWORD.get());
+                output.accept(AetherIIItems.SKYROOT_SHORTSWORD.get());
                 output.accept(AetherIIItems.SKYROOT_HAMMER.get());
                 output.accept(AetherIIItems.SKYROOT_SPEAR.get());
                 output.accept(AetherIIItems.SKYROOT_SHOVEL.get());
                 output.accept(AetherIIItems.SKYROOT_PICKAXE.get());
                 output.accept(AetherIIItems.SKYROOT_AXE.get());
                 output.accept(AetherIIItems.SKYROOT_TROWEL.get());
-                output.accept(AetherIIItems.HOLYSTONE_SWORD.get());
+                output.accept(AetherIIItems.HOLYSTONE_SHORTSWORD.get());
                 output.accept(AetherIIItems.HOLYSTONE_HAMMER.get());
                 output.accept(AetherIIItems.HOLYSTONE_SPEAR.get());
                 output.accept(AetherIIItems.HOLYSTONE_SHOVEL.get());
                 output.accept(AetherIIItems.HOLYSTONE_PICKAXE.get());
                 output.accept(AetherIIItems.HOLYSTONE_AXE.get());
                 output.accept(AetherIIItems.HOLYSTONE_TROWEL.get());
-                output.accept(AetherIIItems.ZANITE_SWORD.get());
+                output.accept(AetherIIItems.ZANITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.ZANITE_HAMMER.get());
                 output.accept(AetherIIItems.ZANITE_SPEAR.get());
                 output.accept(AetherIIItems.ZANITE_SHOVEL.get());
                 output.accept(AetherIIItems.ZANITE_PICKAXE.get());
                 output.accept(AetherIIItems.ZANITE_AXE.get());
                 output.accept(AetherIIItems.ZANITE_TROWEL.get());
-                output.accept(AetherIIItems.ARKENIUM_SWORD.get());
+                output.accept(AetherIIItems.ARKENIUM_SHORTSWORD.get());
                 output.accept(AetherIIItems.ARKENIUM_HAMMER.get());
                 output.accept(AetherIIItems.ARKENIUM_SPEAR.get());
                 output.accept(AetherIIItems.ARKENIUM_SHOVEL.get());
                 output.accept(AetherIIItems.ARKENIUM_PICKAXE.get());
                 output.accept(AetherIIItems.ARKENIUM_AXE.get());
                 output.accept(AetherIIItems.ARKENIUM_TROWEL.get());
-                output.accept(AetherIIItems.GRAVITITE_SWORD.get());
+                output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.GRAVITITE_HAMMER.get());
                 output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
                 output.accept(AetherIIItems.GRAVITITE_SHOVEL.get());

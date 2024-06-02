@@ -20,6 +20,15 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         super(output, id);
     }
 
+    protected static void leafPile(RecipeOutput recipeOutput, ItemLike carpet, ItemLike material) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 32)
+                .define('#', material)
+                .pattern("##")
+                .group("leaf_pile")
+                .unlockedBy(getHasName(material), has(material))
+                .save(recipeOutput);
+    }
+
     protected ShapedRecipeBuilder fence(Supplier<? extends Block> fence, Supplier<? extends Block> material) {
         return this.fence(fence, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
     }

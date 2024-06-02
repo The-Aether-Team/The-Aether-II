@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T23:32:31.5458628	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-06-01T17:35:01.4230679	Tags for minecraft:item mod id aether_ii
 53afc97bd3504253faa87c8448b46627ca13c602 data/aether_ii/tags/items/aerbunny_temptation_items.json
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 0c52879ea7524c9c5a2025462b6351d7e81bf251 data/aether_ii/tags/items/aether_dirt.json
@@ -26,6 +26,7 @@ dc76002bbf3fed2fede1a66c265d7053b478b240 data/aether_ii/tags/items/rods/skyroot.
 e25d24f27acc51ff81a64f65603eb35cf3b433b7 data/aether_ii/tags/items/skyroot_masonry_blocks.json
 9c63466a4df59334a626bc38a990db8af39f7eb8 data/aether_ii/tags/items/skyroot_repairing.json
 0b72f8aa978e4516ff428e2de46ec5659f601643 data/aether_ii/tags/items/stone_crafting.json
+c97ef2b0c396d3206c0f7fde553104b8e13c0521 data/aether_ii/tags/items/unique_tooltip_color.json
 7e6974b61ae56625dc2ea30ee021d854764eb5d4 data/aether_ii/tags/items/wisproot_logs.json
 fb2c91a28387d33e76a95f99e34f52f12a5975a9 data/aether_ii/tags/items/wisproot_masonry_blocks.json
 50aa3b1be78deaf9aef13985ed1fa0f21fd32bce data/aether_ii/tags/items/zanite_repairing.json
