@@ -41,6 +41,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_SLAB.get());
                 output.accept(AetherIIBlocks.GREATROOT_FENCE.get());
                 output.accept(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.GREATROOT_DOOR.get());
+                output.accept(AetherIIBlocks.GREATROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.GREATROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
@@ -50,6 +52,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_SLAB.get());
                 output.accept(AetherIIBlocks.WISPROOT_FENCE.get());
                 output.accept(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.WISPROOT_DOOR.get());
+                output.accept(AetherIIBlocks.WISPROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.WISPROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());

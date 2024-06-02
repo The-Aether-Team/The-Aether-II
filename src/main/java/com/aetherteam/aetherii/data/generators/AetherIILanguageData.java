@@ -130,6 +130,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATROOT_SLAB, "Greatroot Slab");
         this.addBlock(AetherIIBlocks.GREATROOT_FENCE, "Greatroot Fence");
         this.addBlock(AetherIIBlocks.GREATROOT_FENCE_GATE, "Greatroot Fence Gate");
+        this.addBlock(AetherIIBlocks.GREATROOT_DOOR, "Greatroot Door");
+        this.addBlock(AetherIIBlocks.GREATROOT_TRAPDOOR, "Greatroot Trapdoor");
         this.addBlock(AetherIIBlocks.GREATROOT_BUTTON, "Greatroot Button");
         this.addBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE, "Greatroot Pressure Plate");
 
@@ -138,6 +140,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_SLAB, "Wisproot Slab");
         this.addBlock(AetherIIBlocks.WISPROOT_FENCE, "Wisproot Fence");
         this.addBlock(AetherIIBlocks.WISPROOT_FENCE_GATE, "Wisproot Fence Gate");
+        this.addBlock(AetherIIBlocks.WISPROOT_DOOR, "Wisproot Door");
+        this.addBlock(AetherIIBlocks.WISPROOT_TRAPDOOR, "Wisproot Trapdoor");
         this.addBlock(AetherIIBlocks.WISPROOT_BUTTON, "Wisproot Button");
         this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
 

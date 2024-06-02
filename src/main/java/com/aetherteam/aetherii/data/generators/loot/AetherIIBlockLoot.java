@@ -144,6 +144,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GREATROOT_PLANKS.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_STAIRS.get());
         this.add(AetherIIBlocks.GREATROOT_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.GREATROOT_DOOR.get(), createDoorTable(AetherIIBlocks.GREATROOT_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.GREATROOT_TRAPDOOR.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_FENCE.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_BUTTON.get());
@@ -152,6 +154,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_PLANKS.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_STAIRS.get());
         this.add(AetherIIBlocks.WISPROOT_SLAB.get(), this::createSlabItemTable);
+        this.add(AetherIIBlocks.WISPROOT_DOOR.get(), createDoorTable(AetherIIBlocks.WISPROOT_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.WISPROOT_TRAPDOOR.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_FENCE.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_BUTTON.get());
