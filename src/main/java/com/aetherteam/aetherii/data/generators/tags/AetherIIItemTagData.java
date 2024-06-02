@@ -36,6 +36,44 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATE.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
 
+        this.tag(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR).add(
+                AetherIIItems.SKYROOT_SHORTSWORD.get(),
+                AetherIIItems.SKYROOT_HAMMER.get(),
+                AetherIIItems.SKYROOT_SPEAR.get(),
+                AetherIIItems.HOLYSTONE_SHORTSWORD.get(),
+                AetherIIItems.HOLYSTONE_HAMMER.get(),
+                AetherIIItems.HOLYSTONE_SPEAR.get(),
+                AetherIIItems.ZANITE_SHORTSWORD.get(),
+                AetherIIItems.ZANITE_HAMMER.get(),
+                AetherIIItems.ZANITE_SPEAR.get(),
+                AetherIIItems.ARKENIUM_SHORTSWORD.get(),
+                AetherIIItems.ARKENIUM_HAMMER.get(),
+                AetherIIItems.ARKENIUM_SPEAR.get(),
+                AetherIIItems.GRAVITITE_SHORTSWORD.get(),
+                AetherIIItems.GRAVITITE_HAMMER.get(),
+                AetherIIItems.GRAVITITE_SPEAR.get(),
+                AetherIIItems.SKYROOT_AXE.get(),
+                AetherIIItems.HOLYSTONE_AXE.get(),
+                AetherIIItems.ZANITE_AXE.get(),
+                AetherIIItems.ARKENIUM_AXE.get(),
+                AetherIIItems.GRAVITITE_AXE.get(),
+                AetherIIItems.SKYROOT_PICKAXE.get(),
+                AetherIIItems.HOLYSTONE_PICKAXE.get(),
+                AetherIIItems.ZANITE_PICKAXE.get(),
+                AetherIIItems.ARKENIUM_PICKAXE.get(),
+                AetherIIItems.GRAVITITE_PICKAXE.get(),
+                AetherIIItems.SKYROOT_SHOVEL.get(),
+                AetherIIItems.HOLYSTONE_SHOVEL.get(),
+                AetherIIItems.ZANITE_SHOVEL.get(),
+                AetherIIItems.ARKENIUM_SHOVEL.get(),
+                AetherIIItems.GRAVITITE_SHOVEL.get(),
+                AetherIIItems.SKYROOT_TROWEL.get(),
+                AetherIIItems.HOLYSTONE_TROWEL.get(),
+                AetherIIItems.ZANITE_TROWEL.get(),
+                AetherIIItems.ARKENIUM_TROWEL.get(),
+                AetherIIItems.GRAVITITE_TROWEL.get()
+        );
+
         this.tag(AetherIITags.Items.CRAFTS_SKYROOT_PLANKS).addTags(
                 AetherIITags.Items.SKYROOT_LOGS,
                 AetherIITags.Items.AMBEROOT_LOGS
@@ -84,24 +122,33 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATROOT_STAIRS.asItem(),
                 AetherIIBlocks.WISPROOT_STAIRS.asItem()
         );
-        this.tag(ItemTags.STAIRS).add(
-                AetherIIBlocks.UNDERSHALE_STAIRS.get().asItem(),
-                AetherIIBlocks.AGIOSITE_STAIRS.get().asItem(),
-                AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get().asItem()
-        );
         this.tag(ItemTags.WOODEN_SLABS).add(
                 AetherIIBlocks.SKYROOT_SLAB.get().asItem(),
                 AetherIIBlocks.GREATROOT_STAIRS.get().asItem(),
                 AetherIIBlocks.WISPROOT_STAIRS.get().asItem()
         );
-        this.tag(ItemTags.WOODEN_SLABS).add(
-                AetherIIBlocks.SKYROOT_SLAB.asItem(),
-                AetherIIBlocks.GREATROOT_SLAB.asItem(),
-                AetherIIBlocks.WISPROOT_SLAB.asItem()
+        this.tag(ItemTags.STAIRS).add(
+                AetherIIBlocks.HOLYSTONE_STAIRS.get().asItem(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get().asItem(),
+                AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS.get().asItem(),
+                AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get().asItem(),
+                AetherIIBlocks.UNDERSHALE_STAIRS.get().asItem(),
+                AetherIIBlocks.AGIOSITE_STAIRS.get().asItem(),
+                AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get().asItem()
+        );
+        this.tag(ItemTags.SLABS).add(
+                AetherIIBlocks.HOLYSTONE_SLAB.get().asItem(),
+                AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get().asItem(),
+                AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB.get().asItem(),
+                AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get().asItem(),
+                AetherIIBlocks.UNDERSHALE_SLAB.get().asItem(),
+                AetherIIBlocks.AGIOSITE_SLAB.get().asItem(),
+                AetherIIBlocks.AGIOSITE_BRICK_SLAB.get().asItem()
         );
         this.tag(ItemTags.WALLS).add(
                 AetherIIBlocks.HOLYSTONE_WALL.get().asItem(),
                 AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get().asItem(),
+                AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL.get().asItem(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.get().asItem(),
                 AetherIIBlocks.UNDERSHALE_WALL.get().asItem(),
                 AetherIIBlocks.AGIOSITE_WALL.get().asItem(),

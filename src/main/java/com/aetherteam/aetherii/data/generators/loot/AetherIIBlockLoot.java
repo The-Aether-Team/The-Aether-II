@@ -30,6 +30,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.FERROSITE_SAND.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+        this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE.get());
 
@@ -91,7 +92,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_GREATBOA_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get());
 
-        //todo
+        //TODO
         this.dropNone(AetherIIBlocks.AETHER_SHORT_GRASS.get());
         this.dropNone(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
         this.dropNone(AetherIIBlocks.AETHER_LONG_GRASS.get());
@@ -133,6 +134,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get());
         this.add(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE_WALL.get());
+
+        this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE_STAIRS.get());
+        this.add(AetherIIBlocks.IRRADIATED_HOLYSTONE_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE_WALL.get());
 
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICKS.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
