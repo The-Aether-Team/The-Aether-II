@@ -14,6 +14,7 @@ public class FallPathNavigation extends GroundPathNavigation {
         super(mob, level);
     }
 
+    //fixing falling pathfinding
     protected void followThePath() {
         Vec3 vec3 = this.getTempMobPos();
         this.maxDistanceToWaypoint = this.mob.getBbWidth() > 0.75F ? this.mob.getBbWidth() / 2.0F : 0.75F - this.mob.getBbWidth() / 2.0F;

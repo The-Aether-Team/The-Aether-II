@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer.model;// Made with Blockbench 4.
 // Paste this class into your mod and generate all required imports
 
 
+import com.aetherteam.aetherii.client.renderer.model.animation.KirridAnimations;
 import com.aetherteam.aetherii.client.renderer.model.animation.KirridBabyAnimations;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.HierarchicalModel;
@@ -69,9 +70,12 @@ public class KirridBabyModel<T extends Kirrid> extends HierarchicalModel<T> {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.head.yRot = netHeadYaw * (float) (Math.PI / 180.0);
         this.head.xRot = headPitch * (float) (Math.PI / 180.0);
-        this.animateWalk(KirridBabyAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
         this.animate(entity.jumpAnimationState, KirridBabyAnimations.JUMP, ageInTicks, 1.0F);
         this.animate(entity.eatAnimationState, KirridBabyAnimations.EAT, ageInTicks, 1.0F);
+        if (!entity.jumpAnimationState.isStarted()) {
+            this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
+
+        }
         this.plate.visible = entity.hasPlate();
     }
 

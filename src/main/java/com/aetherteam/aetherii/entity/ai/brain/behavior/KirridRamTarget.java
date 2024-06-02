@@ -86,20 +86,21 @@ public class KirridRamTarget extends Behavior<Kirrid> {
         if (++ramTick >= 80) {
             if (animal.isPresent() && animal.get().isAlive()) {
                 Kirrid kirridOther = animal.get();
-                brain.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(kirridOther, this.speed, 0));
-                if (pOwner.distanceToSqr(kirridOther) < 3) {
+                if (pOwner.distanceToSqr(kirridOther) < 4) {
                     if (kirridOther.dropPlate()) {
                         this.finishRam(pLevel, pOwner);
                     }
                     if (--this.soundTick <= 0) {
                         pLevel.playSound(null, pOwner, this.getImpactSound.apply(pOwner), SoundSource.NEUTRAL, 1.0F, 1.0F);
-                        this.soundTick = 40;
+                        this.soundTick = 10;
                     }
+                } else {
+                    pOwner.setSpeedModifier(this.speed);
+                    brain.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(kirridOther, this.speed, 1));
                 }
             }
         }
         if (animal.isPresent() && animal.get().isAlive()) {
-            pOwner.setSpeedModifier(this.speed);
             pOwner.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, new EntityTracker(animal.get(), true));
         }
     }

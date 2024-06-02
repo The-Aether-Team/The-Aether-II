@@ -24,6 +24,7 @@ public class KirridPathNavigation extends GroundPathNavigation {
         return new PathFinder(this.nodeEvaluator, pMaxVisitedNodes);
     }
 
+    //fixing falling pathfinding
     protected void followThePath() {
         Vec3 vec3 = this.getTempMobPos();
         this.maxDistanceToWaypoint = this.mob.getBbWidth() > 0.75F ? this.mob.getBbWidth() / 2.0F : 0.75F - this.mob.getBbWidth() / 2.0F;

@@ -96,19 +96,13 @@ public class Kirrid extends AetherAnimal implements IShearable {
     }
 
     @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
-        if (DATA_POSE.equals(pKey)) {
-            Pose pose = this.getPose();
-            if (pose == Pose.LONG_JUMPING) {
-                this.jumpAnimationState.start(this.tickCount);
-            }
-        }
-        super.onSyncedDataUpdated(pKey);
-    }
-
-    @Override
     public void handleEntityEvent(byte pId) {
-        if (pId == 61) {
+        if (pId == 1) {
+            this.spawnSprintParticle();
+            this.jumpAnimationState.start(this.tickCount);
+            this.jumpDuration = 10;
+            this.jumpTicks = 0;
+        } else if (pId == 61) {
             this.ramAnimationState.start(this.tickCount);
         } else if (pId == 62) {
             this.ramAnimationState.stop();
@@ -173,8 +167,10 @@ public class Kirrid extends AetherAnimal implements IShearable {
                 this.moveRelative(0.1F, new Vec3(0.0, 0.0, 1.0));
             }
         }
+        if (!this.level().isClientSide) {
+            this.level().broadcastEntityEvent(this, (byte) 1);
+        }
     }
-
 
     @Override
     public void ate() {
@@ -266,6 +262,13 @@ public class Kirrid extends AetherAnimal implements IShearable {
     public void tick() {
         super.tick();
         this.handleFallSpeed();
+        if (this.level().isClientSide()) {
+            if (this.onGround()) {
+                this.jumpAnimationState.ifStarted(animationState -> {
+                    animationState.stop();
+                });
+            }
+        }
     }
 
     @Override

@@ -95,10 +95,13 @@ public class KirridModel<T extends Kirrid> extends HierarchicalModel<T> {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.head.yRot = netHeadYaw * (float) (Math.PI / 180.0);
         this.head.xRot = headPitch * (float) (Math.PI / 180.0);
-        this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
         this.animate(entity.jumpAnimationState, KirridAnimations.JUMP, ageInTicks, 1.0F);
         this.animate(entity.ramAnimationState, KirridAnimations.START_RAM, ageInTicks, 1.0F);
         this.animate(entity.eatAnimationState, KirridAnimations.EAT, ageInTicks, 1.0F);
+        if (!entity.jumpAnimationState.isStarted()) {
+            this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
+
+        }
         this.headPlate.visible = entity.hasPlate();
         this.headPlateBroken.visible = !entity.hasPlate();
         this.wool.visible = entity.hasWool();
