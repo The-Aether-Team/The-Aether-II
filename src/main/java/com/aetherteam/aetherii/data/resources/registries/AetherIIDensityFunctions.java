@@ -21,6 +21,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(TEMPERATURE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.TEMPERATURE)));
         context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.EROSION)).abs());
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -1.5, 1.5));
+        context.register(LAKES_NOISE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.LAKE_FACTOR)).abs());
         context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
 
         context.register(BASE_3D_NOISE, BlendedNoise.createUnseeded(
@@ -33,7 +34,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
 
         context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
 
-        context.register(FINAL_DENSITY, HighlandsNoiseBuilders.buildFinalDensity(function));
+        context.register(FINAL_DENSITY, buildFinalDensity(function));
 
         context.register(CLOUDBED_NOISE,
                 DensityFunctions.add(

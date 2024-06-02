@@ -13,6 +13,9 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
+    public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
+    public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> LAKES_ISLAND_CHECKER = createKey("highlands/lakes/island_checker");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/bottom_slide"); //TODO: Add to Datagen
@@ -50,6 +53,21 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(96, 128, 0.75, 0.35));
         density = DensityFunctions.mul(density, getFunction(function, SLOPER));
         return density.clamp(0, 1);
+    }
+
+    public static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> function) {
+        DensityFunction density = getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE);
+        density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
+        density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.TOP_SLIDE));
+        density = DensityFunctions.add(density, factorize(function, -0.21));
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
+        density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE));
+        density = DensityFunctions.add(density, factorize(function, -0.21));
+        density = DensityFunctions.blendDensity(density);
+        density = DensityFunctions.interpolated(density);
+        density = density.squeeze();
+        return density;
     }
 
     public static DensityFunction getFunction(HolderGetter<DensityFunction> densityFunctions, ResourceKey<DensityFunction> key) {
