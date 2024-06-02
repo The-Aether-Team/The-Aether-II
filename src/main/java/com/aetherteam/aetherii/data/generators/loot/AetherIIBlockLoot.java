@@ -22,7 +22,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
     @Override
     public void generate() {
         this.dropOther(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.asItem());
+        this.dropOther(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.asItem());
         this.dropSelf(AetherIIBlocks.AETHER_DIRT.get());
+        this.dropSelf(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.dropOther(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dropOther(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
 
@@ -33,6 +35,14 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE.get());
+        this.dropSelf(AetherIIBlocks.FERROSITE.get());
+        this.dropSelf(AetherIIBlocks.RUSTED_FERROSITE.get());
+        this.dropSelf(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+        this.dropSelf(AetherIIBlocks.SCATTERGLASS.get());
+        this.dropSelf(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.ARCTIC_SNOW.get());
+        this.dropSelf(AetherIIBlocks.ARCTIC_ICE.get());
+        this.dropSelf(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
 
         this.dropWithFortune(AetherIIBlocks.AMBROSIUM_ORE.get(), AetherIIItems.AMBROSIUM_SHARD.get());
         this.dropWithFortune(AetherIIBlocks.ZANITE_ORE.get(), AetherIIItems.ZANITE_GEMSTONE.get());

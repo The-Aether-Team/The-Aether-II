@@ -15,7 +15,10 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
     public void registerStatesAndModels() {
         this.portal(AetherIIBlocks.AETHER_PORTAL.get());
 
+        this.grass(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
+        this.enchantedGrass(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.block(AetherIIBlocks.AETHER_DIRT.get(), "natural/");
+        this.block(AetherIIBlocks.COARSE_AETHER_DIRT.get(), "natural/");
         this.farmland(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
         this.dirtPath(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_DIRT.get());
 
@@ -26,6 +29,14 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
         this.block(AetherIIBlocks.AGIOSITE.get(), "natural/");
+        this.block(AetherIIBlocks.FERROSITE.get(), "natural/");
+        this.block(AetherIIBlocks.RUSTED_FERROSITE.get(), "natural/");
+        this.translucentBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), "natural/");
+        this.translucentBlock(AetherIIBlocks.SCATTERGLASS.get(), "natural/");
+        this.block(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), "natural/");
+        this.snowLayer(AetherIIBlocks.ARCTIC_SNOW.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+        this.translucentBlock(AetherIIBlocks.ARCTIC_ICE.get(), "natural/");
+        this.block(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), "natural/");
 
         this.block(AetherIIBlocks.AMBROSIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ZANITE_ORE.get(), "natural/");
@@ -77,15 +88,19 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.pottedPlant(AetherIIBlocks.POTTED_GREATBOA_SAPLING.get(), AetherIIBlocks.GREATBOA_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get(), AetherIIBlocks.AMBEROOT_SAPLING.get(), "natural/");
 
+        this.shortGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get());
+        this.shortGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
+        this.shortGrass(AetherIIBlocks.AETHER_LONG_GRASS.get());
+
         this.crossBlock(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), "natural/");
         this.berryBush(AetherIIBlocks.BLUEBERRY_BUSH.get(), AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
         this.bush(AetherIIBlocks.HIGHLANDS_BUSH.get());
 
         this.orangeTree(AetherIIBlocks.ORANGE_TREE.get());
 
-        this.grass(AetherIIBlocks.AETHER_SHORT_GRASS.get());
-        this.grass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
-        this.grass(AetherIIBlocks.AETHER_LONG_GRASS.get());
+        this.shortGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get());
+        this.shortGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
+        this.shortGrass(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
         this.twig(AetherIIBlocks.SKYROOT_TWIG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.rock(AetherIIBlocks.HOLYSTONE_ROCK.get(), AetherIIBlocks.HOLYSTONE.get());

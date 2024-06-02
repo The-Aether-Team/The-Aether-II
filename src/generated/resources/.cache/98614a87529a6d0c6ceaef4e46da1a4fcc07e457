@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-01T16:43:06.3116618	Item Models: aether_ii
+// 1.20.4	2024-06-01T17:03:09.3984408	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -26,6 +26,10 @@ a135c7167305bf922827b50fdf807e0518bfdcd8 assets/aether_ii/models/item/ambrosium_
 77308024eea02e4ceae6af25c5f9817950c5cb19 assets/aether_ii/models/item/ambrosium_ore.json
 c491603cffa0239e489fddeddf49195bf9eba0dc assets/aether_ii/models/item/ambrosium_shard.json
 e7a649e80296c73474cae1aced097fde5ca5cdee assets/aether_ii/models/item/ambrosium_torch.json
+c6d8de455aab4c2280825a39e7b72b417f5b8341 assets/aether_ii/models/item/arctic_ice.json
+a0c75e9d5a348efa2d1950f3dddcabd54c7f3011 assets/aether_ii/models/item/arctic_packed_ice.json
+6893e855d65956da73a981a25b137d22018bf645 assets/aether_ii/models/item/arctic_snow.json
+3011fee0d9d4504b93c6746a96035accf4506b1c assets/aether_ii/models/item/arctic_snow_block.json
 19aa149f0419e640d12cb92cc1821a9f7a4cafc6 assets/aether_ii/models/item/arkenium_axe.json
 dc70b899ac53f0aa29fccea1bfadb391bfbe5f8b assets/aether_ii/models/item/arkenium_hammer.json
 ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_ore.json
@@ -43,8 +47,12 @@ c51076bdf8ae4eff8ab973abd37cd7970abb2d97 assets/aether_ii/models/item/blueberry_
 b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
 e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
 ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
+a6fda269de440be4d8141138223e1d4aa1d45c92 assets/aether_ii/models/item/coarse_aether_dirt.json
 c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercloud.json
+62bac9bd6acefef7843b01b2cea0671183dbccc2 assets/aether_ii/models/item/crude_scatterglass.json
+9dc07025feb7e5c425d7109d554d7f8007d21846 assets/aether_ii/models/item/enchanted_aether_grass_block.json
 0a1091ef207642173d2d97fc02de7e8e115c76b4 assets/aether_ii/models/item/enchanted_berry.json
+a14343c5fd0f093e4dd270cf4ca314d3846011f5 assets/aether_ii/models/item/ferrosite.json
 1b4294c048cfed5353ed54611e964980d61ce9db assets/aether_ii/models/item/ferrosite_sand.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/flying_cow_spawn_egg.json
 3666299e7cff4487ad320250e7d6d38194f32ca4 assets/aether_ii/models/item/golden_aercloud.json
@@ -116,6 +124,8 @@ aa659e5bd10ca0db200402d370084234693fc942 assets/aether_ii/models/item/quicksoil_
 280fa1a6185b874ce28a0bec8deff7035cae5904 assets/aether_ii/models/item/quicksoil_glass_pane.json
 a6f09963a1bf3d9ecad7a84042d37734d43e4137 assets/aether_ii/models/item/raw_arkenium.json
 fad53ce2a6eed791c566a36883f6cce0d0a71b6c assets/aether_ii/models/item/raw_gravitite.json
+5b9708bb41042a805c3ddb24358f2ee39db2c7f5 assets/aether_ii/models/item/rusted_ferrosite.json
+8b11c473c4865d824980c5f9807969013fae26a4 assets/aether_ii/models/item/scatterglass.json
 a278983ff6b77ed62a4f15add25a86f0f1dbef4c assets/aether_ii/models/item/skybirch_leaf_pile.json
 8a0980302cbbd9afaab3f79672dfe45915644984 assets/aether_ii/models/item/skybirch_leaves.json
 9647906d5deb7547e055f58efb9fa62911e8b879 assets/aether_ii/models/item/skypine_leaf_pile.json

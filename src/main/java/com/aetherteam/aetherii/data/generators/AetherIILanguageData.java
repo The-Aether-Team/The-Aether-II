@@ -21,7 +21,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AETHER_PORTAL, "Aether Portal");
 
         this.addBlock(AetherIIBlocks.AETHER_GRASS_BLOCK, "Aether Grass Block");
+        this.addBlock(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK, "Enchanted Aether Grass Block");
         this.addBlock(AetherIIBlocks.AETHER_DIRT, "Aether Dirt");
+        this.addBlock(AetherIIBlocks.COARSE_AETHER_DIRT, "Coarse Aether Dirt");
         this.addBlock(AetherIIBlocks.AETHER_FARMLAND, "Aether Farmland");
         this.addBlock(AetherIIBlocks.AETHER_DIRT_PATH, "Aether Dirt Path");
 
@@ -32,6 +34,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
         this.addBlock(AetherIIBlocks.AGIOSITE, "Agiosite");
+        this.addBlock(AetherIIBlocks.FERROSITE, "Ferrosite");
+        this.addBlock(AetherIIBlocks.RUSTED_FERROSITE, "Rusted Ferrosite");
+        this.addBlock(AetherIIBlocks.CRUDE_SCATTERGLASS, "Crude Scatterglass");
+        this.addBlock(AetherIIBlocks.SCATTERGLASS, "Scatterglass");
+        this.addBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK, "Arctic Snow Block");
+        this.addBlock(AetherIIBlocks.ARCTIC_SNOW, "Arctic Snow");
+        this.addBlock(AetherIIBlocks.ARCTIC_ICE, "Arctic Ice");
+        this.addBlock(AetherIIBlocks.ARCTIC_PACKED_ICE, "Arctic Packed Ice");
 
         this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
         this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");

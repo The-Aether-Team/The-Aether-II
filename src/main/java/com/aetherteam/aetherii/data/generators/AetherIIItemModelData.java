@@ -83,7 +83,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         //TODO: Simplify with Block Item Model with a blockWithItem Method
         this.itemBlock(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
+        this.itemBlock(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.AETHER_FARMLAND.get());
         this.itemBlock(AetherIIBlocks.AETHER_DIRT_PATH.get());
 
@@ -94,6 +96,14 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE.get());
+        this.itemBlock(AetherIIBlocks.FERROSITE.get());
+        this.itemBlock(AetherIIBlocks.RUSTED_FERROSITE.get());
+        this.itemBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+        this.itemBlock(AetherIIBlocks.SCATTERGLASS.get());
+        this.itemBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.ARCTIC_SNOW.get());
+        this.itemBlock(AetherIIBlocks.ARCTIC_ICE.get());
+        this.itemBlock(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
 
         this.itemBlock(AetherIIBlocks.AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());

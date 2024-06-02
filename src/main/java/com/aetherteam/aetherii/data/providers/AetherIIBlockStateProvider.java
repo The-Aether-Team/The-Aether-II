@@ -12,6 +12,7 @@ import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LadderBlock;
@@ -26,6 +27,77 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvider {
     public AetherIIBlockStateProvider(PackOutput output, String id, ExistingFileHelper helper) {
         super(output, id, helper);
+    }
+
+    public void grass(Block block, Block dirtBlock) {
+        this.grassBlock(block, block, dirtBlock, this.grassBlockTinted(block, dirtBlock));
+    }
+
+    public void enchantedGrass(Block block, Block grassBlock, Block dirtBlock) {
+        this.grassBlock(block, grassBlock, dirtBlock, this.grassBlock(block, dirtBlock));
+    }
+
+    public void grassBlock(Block baseBlock, Block blockForSnow, Block blockForDirt, ModelFile grass) {
+        ModelFile grassSnowed = this.cubeBottomTop(this.name(blockForSnow) + "_snow",
+                this.extend(this.texture(this.name(blockForSnow), "natural/"), "_snow"),
+                this.texture(this.name(blockForDirt), "natural/"),
+                this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
+        this.getVariantBuilder(baseBlock).forAllStates(state -> {
+            boolean snowy = state.getValue(SnowyDirtBlock.SNOWY);
+            return ConfiguredModel.allYRotations(snowy ? grassSnowed : grass, 0, false);
+        });
+    }
+
+    public ModelFile grassBlock(Block block, Block dirtBlock) {
+        return this.cubeBottomTop(this.name(block),
+                this.extend(this.texture(this.name(block), "natural/"), "_side"),
+                this.texture(this.name(dirtBlock), "natural/"),
+                this.extend(this.texture(this.name(block), "natural/"), "_top"));
+    }
+
+    public ModelFile grassBlockTinted(Block block, Block dirtBlock) {
+        return this.models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout"))
+                .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top_1", this.modLoc("block/natural/" + this.name(block) + "_top_1"))
+                .texture("top_2", this.modLoc("block/natural/" + this.name(block) + "_top_2"))
+                .texture("top_3", this.modLoc("block/natural/" + this.name(block) + "_top_3"))
+                .texture("side", this.modLoc("block/natural/" + this.name(block) + "_side"))
+                .texture("overlay_1", this.modLoc("block/natural/" + this.name(block) + "_side_overlay_1"))
+                .texture("overlay_2", this.modLoc("block/natural/" + this.name(block) + "_side_overlay_2"))
+                .texture("overlay_3", this.modLoc("block/natural/" + this.name(block) + "_side_overlay_3"))
+                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                .face(Direction.DOWN).uvs(0, 0, 16, 16).texture("#bottom").cullface(Direction.DOWN).end()
+                .face(Direction.UP).uvs(0, 0, 16, 16).texture("#top_1").cullface(Direction.UP).tintindex(0).end()
+                .face(Direction.NORTH).uvs(0, 0, 16, 16).texture("#side").cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#side").cullface(Direction.SOUTH).end()
+                .face(Direction.WEST).uvs(0, 0, 16, 16).texture("#side").cullface(Direction.WEST).end()
+                .face(Direction.EAST).uvs(0, 0, 16, 16).texture("#side").cullface(Direction.EAST).end()
+                .end()
+                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                .face(Direction.UP).uvs(0, 0, 16, 16).texture("#top_2").cullface(Direction.UP).tintindex(1).end()
+                .end()
+                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                .face(Direction.UP).uvs(0, 0, 16, 16).texture("#top_3").cullface(Direction.UP).tintindex(2).end()
+                .end()
+                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                .face(Direction.NORTH).uvs(0, 0, 16, 16).texture("#overlay_1").tintindex(0).cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#overlay_1").tintindex(0).cullface(Direction.SOUTH).end()
+                .face(Direction.WEST).uvs(0, 0, 16, 16).texture("#overlay_1").tintindex(0).cullface(Direction.WEST).end()
+                .face(Direction.EAST).uvs(0, 0, 16, 16).texture("#overlay_1").tintindex(0).cullface(Direction.EAST).end()
+                .end()
+                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                .face(Direction.NORTH).uvs(0, 0, 16, 16).texture("#overlay_2").tintindex(1).cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#overlay_2").tintindex(1).cullface(Direction.SOUTH).end()
+                .face(Direction.WEST).uvs(0, 0, 16, 16).texture("#overlay_2").tintindex(1).cullface(Direction.WEST).end()
+                .face(Direction.EAST).uvs(0, 0, 16, 16).texture("#overlay_2").tintindex(1).cullface(Direction.EAST).end()
+                .end()
+                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                .face(Direction.NORTH).uvs(0, 0, 16, 16).texture("#overlay_3").tintindex(2).cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#overlay_3").tintindex(2).cullface(Direction.SOUTH).end()
+                .face(Direction.WEST).uvs(0, 0, 16, 16).texture("#overlay_3").tintindex(2).cullface(Direction.WEST).end()
+                .face(Direction.EAST).uvs(0, 0, 16, 16).texture("#overlay_3").tintindex(2).cullface(Direction.EAST).end()
+                .end();
     }
 
     public void farmland(Block block, Block dirtBlock) {
@@ -50,6 +122,29 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("side", this.modLoc("block/construction/" + this.name(block) + "_side"))
                 .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)));
         this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
+    }
+
+    public void snowLayer(Block block, Block base) {
+        ResourceLocation texture = this.texture("natural/" + this.name(base));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            int i = state.getValue(SnowLayerBlock.LAYERS);
+            boolean firstState = i == 1;
+            i *= 2;
+            String name = firstState ? this.name(block) : this.name(block) + i;
+            BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
+            ModelFile model = modelBuilder
+                    .texture("particle", texture)
+                    .texture("texture", texture)
+                    .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
+                    .face(Direction.DOWN).texture("#texture").end()
+                    .face(Direction.UP).texture("#texture").end()
+                    .face(Direction.NORTH).texture("#texture").end()
+                    .face(Direction.SOUTH).texture("#texture").end()
+                    .face(Direction.EAST).texture("#texture").end()
+                    .face(Direction.WEST).texture("#texture").end()
+                    .end();
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
     }
 
     public void aercloudAll(Block block, String location) {
@@ -180,6 +275,63 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public ModelBuilder<BlockModelBuilder> triTintedCross(String name) {
+        return this.models().getBuilder(name)
+                .renderType(new ResourceLocation("cutout"))
+                .ao(false)
+                .element()
+                .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
+                .rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end()
+                .shade(false)
+                .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_1").tintindex(0).end()
+                .face(Direction.SOUTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_1").tintindex(0).end()
+                .end()
+                .element()
+                .from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F)
+                .rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end()
+                .shade(false)
+                .face(Direction.WEST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_1").tintindex(0).end()
+                .face(Direction.EAST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_1").tintindex(0).end()
+                .end()
+                .element()
+                .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
+                .rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end()
+                .shade(false)
+                .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_2").tintindex(1).end()
+                .face(Direction.SOUTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_2").tintindex(1).end()
+                .end()
+                .element()
+                .from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F)
+                .rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end()
+                .shade(false)
+                .face(Direction.WEST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_2").tintindex(1).end()
+                .face(Direction.EAST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_2").tintindex(1).end()
+                .end()
+                .element()
+                .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
+                .rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end()
+                .shade(false)
+                .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_3").tintindex(2).end()
+                .face(Direction.SOUTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_3").tintindex(2).end()
+                .end()
+                .element()
+                .from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F)
+                .rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end()
+                .shade(false)
+                .face(Direction.WEST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_3").tintindex(2).end()
+                .face(Direction.EAST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_3").tintindex(2).end()
+                .end();
+    }
+
+    public void shortGrass(Block block) {
+        ModelFile grass = this.triTintedCross(this.name(block))
+                .texture("particle", this.texture(this.name(block), "natural/"))
+                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
+                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
+    }
+
     public void bush(Block block) {
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(this.bush(block, this.name(block) + "_stem")));
     }
@@ -210,15 +362,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             ModelFile model = this.models().cross(blockName + (lower ? (halfString + bottomAge) : (halfString + topAge)), location).renderType(new ResourceLocation("cutout"));
             return ConfiguredModel.builder().modelFile(model).build();
         });
-    }
-
-    public void grass(Block block) {
-        ModelFile grass = this.models().withExistingParent(this.name(block), this.modLoc("block/tri_tinted_cross"))
-                .texture("particle", this.texture(this.name(block), "natural/"))
-                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
-                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
-                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
-        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
     }
 
     public void twig(Block block, Block log) {
@@ -451,55 +594,4 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
         }, LadderBlock.WATERLOGGED);
     }
-
-//    public void grass(Block block, Block dirtBlock) {
-//        this.grassBlock(block, block, dirtBlock);
-//    }
-//
-//    public void grassBlock(Block baseBlock, Block blockForSnow, Block blockForDirt) {
-//        ModelFile grass = this.grassBlock(baseBlock, blockForDirt);
-//        ModelFile grassSnowed = this.cubeBottomTop(this.name(blockForSnow) + "_snow",
-//                this.extend(this.texture(this.name(blockForSnow), "natural/"), "_snow"),
-//                this.texture(this.name(blockForDirt), "natural/"),
-//                this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
-//        this.getVariantBuilder(baseBlock).forAllStates(state -> {
-//            boolean snowy = state.getValue(SnowyDirtBlock.SNOWY);
-//            return ConfiguredModel.allYRotations(snowy ? grassSnowed : grass, 0, false);
-//        });
-//    }
-//
-//    public ModelFile grassBlock(Block block, Block dirtBlock) {
-//        return this.cubeBottomTop(this.name(block),
-//                this.extend(this.texture(this.name(block), "natural/"), "_side"),
-//                this.texture(this.name(dirtBlock), "natural/"),
-//                this.extend(this.texture(this.name(block), "natural/"), "_top"));
-//    }
-//
-//    public void grass(Block block,
-//                         ResourceLocation upOutside, ResourceLocation downOutside,
-//                         ResourceLocation northOutside, ResourceLocation southOutside,
-//                         ResourceLocation westOutside, ResourceLocation eastOutside,
-//                         ResourceLocation particle) {
-//        ModelFile model = this.models().withExistingParent(this.name(block), this.mcLoc("block/block"))
-//                .texture("up", upOutside)
-//                .texture("down", downOutside)
-//                .texture("north", northOutside)
-//                .texture("south", southOutside)
-//                .texture("west", westOutside)
-//                .texture("east", eastOutside)
-//                .texture("particle", particle)
-//                .element().from(0.0F, 16.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
-//                .face(Direction.UP).texture("#up").uvs(0, 0, 16, 16).cullface(Direction.UP).end().end()
-//                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 0.0F, 16.0F)
-//                .face(Direction.DOWN).texture("#down").uvs(0, 0, 16, 16).cullface(Direction.DOWN).end().end()
-//                .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 0.0F)
-//                .face(Direction.NORTH).texture("#north").uvs(0, 0, 16, 16).cullface(Direction.NORTH).end().end()
-//                .element().from(0.0F, 0.0F, 16.0F).to(16.0F, 16.0F, 16.0F)
-//                .face(Direction.SOUTH).texture("#south").uvs(0, 0, 16, 16).cullface(Direction.SOUTH).end().end()
-//                .element().from(0.0F, 0.0F, 0.0F).to(0.0F, 16.0F, 16.0F)
-//                .face(Direction.WEST).texture("#west").uvs(0, 0, 16, 16).cullface(Direction.WEST).end().end()
-//                .element().from(16.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
-//                .face(Direction.EAST).texture("#east").uvs(0, 0, 16, 16).cullface(Direction.EAST).end().end();
-//        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(model));
-//    }
 }
