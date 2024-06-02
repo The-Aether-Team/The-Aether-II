@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
 import com.aetherteam.aetherii.world.tree.foliage.*;
-import com.aetherteam.aetherii.world.tree.trunk.AmberootTrunkPlacer;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -108,7 +107,7 @@ public class AetherIITreeFeatures {
         AetherIIFeatureUtils.register(context, LARGE_AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
-                        new AmberootTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
+                        new StraightTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
                         new LargeAmberootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());

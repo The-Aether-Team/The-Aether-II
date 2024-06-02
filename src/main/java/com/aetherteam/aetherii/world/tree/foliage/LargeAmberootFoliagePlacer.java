@@ -11,6 +11,7 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
@@ -46,37 +47,70 @@ public class LargeAmberootFoliagePlacer extends FoliagePlacer {
      */
     @Override  //TODO: Code Clean-Up
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
+        BlockPos pos = attachment.pos();
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            if (level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 1, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X))) || level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X)))) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 1, attachment.pos().getZ()), 6, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 4, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 5, attachment.pos().getY() + 3, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 5, attachment.pos().getY() + 3, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 4, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 4, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 6, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 6, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ() + 2), 2, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ() - 2), 2, i, attachment.doubleTrunk());
+            if (level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 1, pos.getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X))) || level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X)))) {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 2, pos.getY() + 1, pos.getZ()), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 2, pos.getY() + 1, pos.getZ()), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 4, pos.getY() + 2, pos.getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 4, pos.getY() + 2, pos.getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 5, pos.getY() + 3, pos.getZ()), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 5, pos.getY() + 3, pos.getZ()), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 2, pos.getY() + 4, pos.getZ()), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 2, pos.getY() + 4, pos.getZ()), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 2, pos.getY() + 6, pos.getZ()), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 2, pos.getY() + 6, pos.getZ()), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ() + 2), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ() - 2), 2, i, attachment.doubleTrunk());
+
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ()), Direction.Axis.X);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ()), Direction.Axis.X);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 2, pos.getY() - 1, pos.getZ()), Direction.Axis.X);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 2, pos.getY() - 1, pos.getZ()), Direction.Axis.X);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 3, pos.getY(), pos.getZ()), Direction.Axis.Y);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 3, pos.getY(), pos.getZ()), Direction.Axis.Y);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 3, pos.getY() + 1, pos.getZ()), Direction.Axis.Y);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 3, pos.getY() + 1, pos.getZ()), Direction.Axis.Y);
+
             } else {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 1, attachment.pos().getZ() + 2), 6, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 1, attachment.pos().getZ() - 2), 6, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ() + 4), 2, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ() - 4), 2, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 3, attachment.pos().getZ() + 5), 0, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 3, attachment.pos().getZ() - 5), 0, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 4, attachment.pos().getZ() + 2), 1, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 4, attachment.pos().getZ() - 2), 1, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 6, attachment.pos().getZ() + 2), 0, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 6, attachment.pos().getZ() - 2), 0, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ() + 2), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ() - 2), 6, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ() + 4), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ() - 4), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 3, pos.getZ() + 5), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 3, pos.getZ() - 5), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 4, pos.getZ() + 2), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 4, pos.getZ() - 2), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 6, pos.getZ() + 2), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 6, pos.getZ() - 2), 0, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 2, pos.getY() + 2, pos.getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 2, pos.getY() + 2, pos.getZ()), 2, i, attachment.doubleTrunk());
+
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Z);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ() - 1), Direction.Axis.Z);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ() + 2), Direction.Axis.Z);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ() - 2), Direction.Axis.Z);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 3), Direction.Axis.Y);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 3), Direction.Axis.Y);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ() + 3), Direction.Axis.Y);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ() - 3), Direction.Axis.Y);
             }
             if (random.nextInt(2) == 0) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(2, 5), attachment.pos().getZ() + random.nextIntBetweenInclusive(-1, 1)), 1, i, attachment.doubleTrunk());
             }
+        }
+    }
+
+    protected static boolean tryPlaceLog(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration treeConfiguration, BlockPos pos, Direction.Axis axis) {
+        if (!TreeFeature.validTreePos(level, pos)) {
+            return false;
+        } else {
+            BlockState state = treeConfiguration.trunkProvider.getState(random, pos);
+            if (state.hasProperty(RotatedPillarBlock.AXIS)) {
+                state = state.setValue(RotatedPillarBlock.AXIS, axis);
+            }
+            foliageSetter.set(pos, state);
+            return true;
         }
     }
 

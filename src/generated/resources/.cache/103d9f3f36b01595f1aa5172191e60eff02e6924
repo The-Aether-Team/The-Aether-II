@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T12:46:11.0442355	Registries
+// 1.20.4	2024-06-02T13:35:06.9395838	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -41,7 +41,7 @@ d3d500b91d6a0a454ca791d8179c834004436c10 data/aether_ii/worldgen/configured_feat
 9278e7592b8c23ed653a8bc2c22b2352099a345c data/aether_ii/worldgen/configured_feature/green_aercloud.json
 7dbb254a6788b6578bbd771f77aefe5cd47d161c data/aether_ii/worldgen/configured_feature/highlands_bush_patch.json
 3dd1f3aa46393ec352116550fb025bdfd77bf570 data/aether_ii/worldgen/configured_feature/holystone_rocks.json
-efa8ac15163f951fde43e8964e4e753667952835 data/aether_ii/worldgen/configured_feature/large_amberoot.json
+cacf8742743c40ed468646f82424dc7d0e99372d data/aether_ii/worldgen/configured_feature/large_amberoot.json
 3029ceb1c12d1ce0572fa7fac93bb94a4c8f9705 data/aether_ii/worldgen/configured_feature/large_skyroot.json
 9f8f8791c2733681336cb2bbf334c75d51f1e1e3 data/aether_ii/worldgen/configured_feature/long_grass_patch.json
 da490468fa808d75c445ca3a0acf4d01b6dd43c8 data/aether_ii/worldgen/configured_feature/medium_grass_patch.json
