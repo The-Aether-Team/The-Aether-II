@@ -353,11 +353,11 @@ public class HighlandsBiomeBuilders {
                         biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
 
                 // Irradiated
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-1.0F, -0.25F), erosionDefault, fullRange, fullRange, fullRange, 0),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-1.0F, -0.2F), erosionDefault, fullRange, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES)),
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-0.25F, 0.25F), erosionDefault, fullRange, fullRange, fullRange, 0),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-0.2F, 0.2F), erosionDefault, fullRange, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.CONTAMINATED_JUNGLE)),
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.25F, 1.0F), erosionDefault, fullRange, fullRange, fullRange, 0),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.2F, 1.0F), erosionDefault, fullRange, fullRange, fullRange, 0),
                         biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES))
         )));
     }
