@@ -143,7 +143,7 @@ public class SmallAmberootFoliagePlacer extends FoliagePlacer {
             } else {
                 boolean diamond = x + z <= radius;
                 boolean square = x < radius && z < radius;
-                return !diamond || (!square && rand.nextBoolean());
+                return !square || (!diamond && rand.nextBoolean());
             }
 
         }
