@@ -11,6 +11,7 @@
     "common.accessor.BushBlockAccessor",
     "common.accessor.EntityAccessor",
     "common.accessor.FireBlockAccessor",
+    "common.accessor.LootContextParamSetsAccessor",
     "common.accessor.PerlinNoiseAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor",
     "common.accessor.SpreadingSnowyDirtBlockAccessor"
