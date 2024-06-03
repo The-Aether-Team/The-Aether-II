@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-03T17:06:45.5872287	Recipes
+// 1.20.4	2024-06-03T17:49:04.0796952	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 52671a22ce201a5a7a1cb0ad0546641abe1db91f data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks_from_masonry.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
@@ -296,7 +296,7 @@ ba50720cf0bf63ba2c3cd21380e10aafacb74a41 data/aether_ii/recipes/holystone_trowel
 a7470a80e937a960fb08c5741083b0608a89c8c1 data/aether_ii/recipes/irradiated_holystone_slab.json
 7a1ff1e44079b948140a1f75591945e02eea4adf data/aether_ii/recipes/irradiated_holystone_stairs.json
 ae0706d34f604acac2979283ab152981fb721ac4 data/aether_ii/recipes/irradiated_holystone_wall.json
-928ea8edc285b3103567aa5210fbea96b2aa715d data/aether_ii/recipes/masonry_bench.json
+4ef559faf9707f53fe2a1ee7de0247e99b06add3 data/aether_ii/recipes/masonry_bench.json
 ec35ea75b515646695d800f52547401835a34616 data/aether_ii/recipes/mossy_holystone_slab.json
 e0b6e26ca215f0bf2688b46f890117cce947c0b2 data/aether_ii/recipes/mossy_holystone_stairs.json
 3bbaf0bac263dc0bc9e836f0dd6558a4fd97573a data/aether_ii/recipes/mossy_holystone_wall.json

@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
+import com.aetherteam.aetherii.block.utility.MasonryBenchBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -624,14 +626,29 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void masonryBench(Block block) {
-        ModelFile plant = models().withExistingParent(name(block), mcLoc("block/stonecutter"))
-                .texture("particle", texture(name(block) + "_bottom", "utility/"))
-                .texture("bottom", texture(name(block) + "_bottom", "utility/"))
-                .texture("top", texture(name(block) + "_top", "utility/"))
-                .texture("side", texture(name(block) + "_side", "utility/"))
-                .texture("saw", texture(name(block) + "_saw", "utility/"))
+        ModelFile vase = models().withExistingParent(name(block), modLoc("block/template_masonry_bench"))
+                .texture("bench", texture(name(block), "utility/"))
+                .texture("particle", texture(name(AetherIIBlocks.HOLYSTONE_BRICKS.get()), "construction/"))
                 .renderType("cutout_mipped");
-        getVariantBuilder(block).partialState().addModels(new ConfiguredModel(plant));
+
+        getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(MasonryBenchBlock.FACING);
+            switch (direction) {
+                case NORTH -> {
+                    return ConfiguredModel.builder().modelFile(vase).build();
+                }
+                case EAST -> {
+                    return ConfiguredModel.builder().modelFile(vase).rotationY(90).build();
+                }
+                case SOUTH -> {
+                    return ConfiguredModel.builder().modelFile(vase).rotationY(180).build();
+                }
+                case WEST -> {
+                    return ConfiguredModel.builder().modelFile(vase).rotationY(270).build();
+                }
+            }
+            return ConfiguredModel.builder().build();
+        });
     }
 
     public void masonryBlock(Block block, Block endBlock) {

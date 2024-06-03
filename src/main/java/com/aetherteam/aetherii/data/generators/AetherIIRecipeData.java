@@ -279,9 +279,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.MASONRY_BENCH.get())
                 .define('A', AetherIIItems.ARKENIUM_PLATE.get())
-                .define('#', AetherIITags.Items.STONE_CRAFTING)
-                .pattern(" A ")
-                .pattern("###")
+                .define('P', AetherIITags.Items.PLANKS_CRAFTING)
+                .define('H', AetherIITags.Items.STONE_CRAFTING)
+                .pattern("AAA")
+                .pattern("PPP")
+                .pattern("HHH")
                 .unlockedBy(getHasName(AetherIIBlocks.MASONRY_BENCH.get()), has(AetherIIItems.ARKENIUM_PLATE))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
