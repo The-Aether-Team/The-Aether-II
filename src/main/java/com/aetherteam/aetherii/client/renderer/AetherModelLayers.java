@@ -9,6 +9,7 @@ public class AetherModelLayers {
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");
     public static final ModelLayerLocation AERBUNNY_COLLAR = register("aerbunny", "collar");
     public static final ModelLayerLocation FLYING_COW = register("flying_cow");
+    public static final ModelLayerLocation FLYING_COW_WINGS = register("flying_cow", "wings");
     public static final ModelLayerLocation KIRRID = register("kirrid");
     public static final ModelLayerLocation KIRRID_BABY = register("kirrid_baby");
 

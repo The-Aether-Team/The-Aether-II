@@ -22,11 +22,6 @@ public class GreatoakFoliagePlacer extends FoliagePlacer {
         super(radius, offset);
     }
 
-    @Override
-    protected FoliagePlacerType<?> type() {
-        return AetherIIFoliagePlacerTypes.GREATOAK_FOLIAGE_PLACER.get();
-    }
-
     /**
      * Places a sphere of leaves.
      *
@@ -42,14 +37,15 @@ public class GreatoakFoliagePlacer extends FoliagePlacer {
      */
     @Override //TODO: Code Clean-Up
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
+        BlockPos pos = attachment.pos();
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 12, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 1, attachment.pos().getY(), attachment.pos().getZ()), 12, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY(), attachment.pos().getZ() + 1), 12, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 1, attachment.pos().getY(), attachment.pos().getZ() + 1), 12, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(0, 1), attachment.pos().getY() + 1, attachment.pos().getZ() + random.nextIntBetweenInclusive(0, 1)), 4, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, pos, 12, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()), 12, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1), 12, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), 12, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(0, 1), pos.getY() + 1, pos.getZ() + random.nextIntBetweenInclusive(0, 1)), 4, i, attachment.doubleTrunk());
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(0, 1), attachment.pos().getY() - 5, attachment.pos().getZ() + random.nextIntBetweenInclusive(0, 1)), 9, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(0, 1), pos.getY() - 5, pos.getZ() + random.nextIntBetweenInclusive(0, 1)), 9, i, attachment.doubleTrunk());
         }
     }
 
@@ -82,4 +78,10 @@ public class GreatoakFoliagePlacer extends FoliagePlacer {
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
         return Mth.square(localX) + Mth.square(localY - 1) + Mth.square(localZ) > range + random.nextInt(3);
     }
+
+    @Override
+    protected FoliagePlacerType<?> type() {
+        return AetherIIFoliagePlacerTypes.GREATOAK_FOLIAGE_PLACER.get();
+    }
+
 }

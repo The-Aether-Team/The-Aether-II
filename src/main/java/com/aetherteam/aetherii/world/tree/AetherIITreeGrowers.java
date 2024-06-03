@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.tree;
 
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIITreeFeatures;
+import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;
@@ -52,12 +53,7 @@ public class AetherIITreeGrowers {
 
     public static final TreeGrower AMBEROOT = new TreeGrower(
             "amberoot",
-            0.3F,
+            Optional.of(AetherIIVegetationFeatures.TREES_AMBEROOT),
             Optional.empty(),
-            Optional.empty(),
-            Optional.of(AetherIITreeFeatures.AMBEROOT),
-            Optional.of(AetherIITreeFeatures.LARGE_AMBEROOT),
-            Optional.empty(),
-            Optional.empty()
-    );
+            Optional.empty());
 }
