@@ -2,9 +2,7 @@ package com.aetherteam.aetherii.world.density;
 
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.PerlinNoiseAccessor;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Holder;
 import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;

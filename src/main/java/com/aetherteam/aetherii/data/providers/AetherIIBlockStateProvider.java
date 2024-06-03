@@ -2,21 +2,13 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
-import com.aetherteam.aetherii.block.natural.RockBlock;
-import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
-import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
-import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
-import com.aetherteam.aetherii.block.natural.TwigBlock;
-import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
+import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
+import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LadderBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -100,6 +92,15 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .end();
     }
 
+    public void dirtPath(Block block, Block dirtBlock) {
+        ModelFile path = this.models().withExistingParent(this.name(block), this.mcLoc("block/dirt_path"))
+                .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
+                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_top"))
+                .texture("side", this.modLoc("block/construction/" + this.name(block) + "_side"))
+                .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)));
+        this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
+    }
+
     public void farmland(Block block, Block dirtBlock) {
         ModelFile farmland = this.models().withExistingParent(this.name(block), this.mcLoc("block/template_farmland"))
                 .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
@@ -113,15 +114,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                     .modelFile(moisture < AetherFarmBlock.MAX_MOISTURE ? farmland : moist)
                     .build();
         });
-    }
-
-    public void dirtPath(Block block, Block dirtBlock) {
-        ModelFile path = this.models().withExistingParent(this.name(block), this.mcLoc("block/dirt_path"))
-                .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
-                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_top"))
-                .texture("side", this.modLoc("block/construction/" + this.name(block) + "_side"))
-                .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)));
-        this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
     }
 
     public void snowLayer(Block block, Block base) {
@@ -231,48 +223,56 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void mossyWisproot(FacingPillarBlock block, RotatedPillarBlock baseBlock) {
+        ResourceLocation side = this.texture(this.name(block), "natural/");
+        ResourceLocation bottom = this.extend(this.texture(this.name(block), "natural/"), "_top");
+        ResourceLocation top = this.extend(this.texture(this.name(baseBlock), "natural/"), "_top");
+        ModelFile vertical = this.models().cubeColumn(this.name(block), side, bottom).texture("up", top);
+        ModelFile horizontal = this.models().cubeColumnHorizontal(this.name(block) + "_horizontal", side, bottom).texture("up", top);
+        this.getVariantBuilder(block)
+                .partialState().with(FacingPillarBlock.FACING, Direction.DOWN).modelForState().modelFile(vertical).rotationX(180).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.EAST).modelForState().modelFile(horizontal).rotationX(90).rotationY(90).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.NORTH).modelForState().modelFile(horizontal).rotationX(90).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.SOUTH).modelForState().modelFile(horizontal).rotationX(90).rotationY(180).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.UP).modelForState().modelFile(vertical).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.WEST).modelForState().modelFile(horizontal).rotationX(90).rotationY(270).addModel();
+    }
+
     public void logDifferentTop(RotatedPillarBlock block, RotatedPillarBlock baseBlock) {
         this.axisBlock(block, this.texture(this.name(block), "natural/"), this.extend(this.texture(this.name(baseBlock), "natural/"), "_top"));
     }
 
-    public void wisprootLog(WisprootLogBlock block) {
-        String blockName = this.name(block);
-        ResourceLocation side = this.extend(this.texture(this.name(block), "natural/"), "");
-        ResourceLocation top = this.extend(this.texture(this.name(block), "natural/"), "_top");
-        ResourceLocation sideMossy = this.extend(this.texture(this.name(block), "natural/"), "_mossy");
-        ModelFile normal = this.models().cubeColumn(blockName, side, top);
-        ModelFile horizontal = this.models().cubeColumnHorizontal(blockName + "_horizontal", side, top);
-        ModelFile mossy = this.models().cubeColumn(blockName + "_mossy", sideMossy, top);
-
+    public void leafPile(Block block, Block base) {
+        ResourceLocation texture = this.texture("natural/" + this.name(base));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            Direction.Axis axis = state.getValue(RotatedPillarBlock.AXIS);
-            if (state.getValue(WisprootLogBlock.MOSSY)) {
-                switch (axis) {
-                    case X -> {
-                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).rotationY(90).build();
-                    }
-                    case Y -> {
-                        return ConfiguredModel.builder().modelFile(mossy).build();
-                    }
-                    case Z -> {
-                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).build();
-                    }
-                }
-            } else {
-                switch (axis) {
-                    case X -> {
-                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).rotationY(90).build();
-                    }
-                    case Y -> {
-                        return ConfiguredModel.builder().modelFile(normal).build();
-                    }
-                    case Z -> {
-                        return ConfiguredModel.builder().modelFile(horizontal).rotationX(90).build();
-                    }
-                }
-            }
-            return ConfiguredModel.builder().build();
-        });
+            int i = state.getValue(AetherLeafPileBlock.PILES);
+            boolean firstState = i == 1;
+            boolean lastState = i == 16;
+            String name = firstState ? this.name(block) : this.name(block) + i;
+            BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
+            ModelFile model = modelBuilder.ao(lastState)
+                    .texture("particle", texture)
+                    .texture("texture", texture)
+                    .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
+                    .face(Direction.DOWN).texture("#texture").end()
+                    .face(Direction.UP).texture("#texture").end()
+                    .face(Direction.NORTH).texture("#texture").end()
+                    .face(Direction.SOUTH).texture("#texture").end()
+                    .face(Direction.EAST).texture("#texture").end()
+                    .face(Direction.WEST).texture("#texture").end()
+                    .end()
+                    .renderType(new ResourceLocation("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, AetherLeafPileBlock.PERSISTENT);
+    }
+
+    public void shortGrass(Block block) {
+        ModelFile grass = this.triTintedCross(this.name(block))
+                .texture("particle", this.texture(this.name(block), "natural/"))
+                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
+                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
     }
 
     public ModelBuilder<BlockModelBuilder> triTintedCross(String name) {
@@ -323,15 +323,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .end();
     }
 
-    public void shortGrass(Block block) {
-        ModelFile grass = this.triTintedCross(this.name(block))
-                .texture("particle", this.texture(this.name(block), "natural/"))
-                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
-                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
-                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
-        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
-    }
-
     public void bush(Block block) {
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(this.bush(block, this.name(block) + "_stem")));
     }
@@ -349,6 +340,77 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .renderType(new ResourceLocation("cutout"));
     }
 
+    public void pottedBush(Block bush, String location) {
+        this.pottedBush(bush, this.name(bush) + "_stem", location);
+    }
+
+    public void pottedBush(Block bush, Block stem, String location) {
+        this.pottedBush(bush, this.name(stem), location);
+    }
+
+    public void pottedBush(Block bush, String stem, String location) {
+        ModelFile pot = this.pottedStemModel(bush, stem, location)
+                .texture("stem", this.modLoc("block/" + location + stem)).texture("bush", this.modLoc("block/" + location + this.name(bush)))
+                .element().from(3.0F, 6.0F, 3.0F).to(13.0F, 16.0F, 13.0F)
+                .face(Direction.NORTH).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.EAST).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.SOUTH).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.WEST).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.UP).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
+                .face(Direction.DOWN).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end().end()
+                .renderType(new ResourceLocation("cutout"));
+        this.getVariantBuilder(bush).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public void pottedStem(Block stem, String location) {
+        ModelFile pot = this.pottedStemModel(stem, this.name(stem), location).renderType(new ResourceLocation("cutout"));
+        this.getVariantBuilder(stem).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public BlockModelBuilder pottedStemModel(Block block, String stem, String location) {
+        return models().withExistingParent(this.name(block), this.mcLoc("block/block"))
+                .texture("particle", this.mcLoc("block/flower_pot")).texture("stem", this.modLoc("block/" + location + stem)).texture("dirt", this.mcLoc("block/dirt")).texture("flowerpot", this.mcLoc("block/flower_pot"))
+                .element().from(5.0F, 0.0F, 5.0F).to(6.0F, 6.0F, 11.0F)
+                .face(Direction.NORTH).uvs(10.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.EAST).uvs(5.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.SOUTH).uvs(5.0F, 10.0F, 6.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.WEST).uvs(5.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.UP).uvs(5.0F, 5.0F, 6.0F, 11.0F).texture("#flowerpot").end()
+                .face(Direction.DOWN).uvs(5.0F, 5.0F, 6.0F, 11.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(10.0F, 0.0F, 5.0F).to(11.0F, 6.0F, 11.0F)
+                .face(Direction.NORTH).uvs(5.0F, 10.0F, 6.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.EAST).uvs(5.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.SOUTH).uvs(10.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.WEST).uvs(5.0F, 10.0F, 11.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.UP).uvs(10.0F, 5.0F, 11.0F, 11.0F).texture("#flowerpot").end()
+                .face(Direction.DOWN).uvs(10.0F, 5.0F, 11.0F, 11.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(6.0F, 0.0F, 5.0F).to(10.0F, 6.0F, 6.0F)
+                .face(Direction.NORTH).uvs(6.0F, 10.0F, 10.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.SOUTH).uvs(6.0F, 10.0F, 10.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.UP).uvs(6.0F, 5.0F, 10.0F, 6.0F).texture("#flowerpot").end()
+                .face(Direction.DOWN).uvs(6.0F, 10.0F, 10.0F, 11.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(6.0F, 0.0F, 10.0F).to(10.0F, 6.0F, 11.0F)
+                .face(Direction.NORTH).uvs(6.0F, 10.0F, 10.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.SOUTH).uvs(6.0F, 10.0F, 10.0F, 16.0F).texture("#flowerpot").end()
+                .face(Direction.UP).uvs(6.0F, 10.0F, 10.0F, 11.0F).texture("#flowerpot").end()
+                .face(Direction.DOWN).uvs(6.0F, 5.0F, 10.0F, 6.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(6.0F, 0.0F, 6.0F).to(10.0F, 4.0F, 10.0F)
+                .face(Direction.UP).uvs(6.0F, 6.0F, 10.0F, 10.0F).texture("#dirt").end()
+                .face(Direction.DOWN).uvs(6.0F, 12.0F, 10.0F, 16.0F).texture("#flowerpot").cullface(Direction.DOWN).end().end()
+                .element().from(7.0F, 4.0F, 8.0F).to(9.0F, 6.0F, 8.0F).rotation().angle(45.0F).axis(Direction.Axis.Y).origin(8.0F, 8.0F, 8.0F).end()
+                .face(Direction.NORTH).uvs(7.0F, 14.0F, 9.0F, 16.0F).texture("#stem").end()
+                .face(Direction.SOUTH).uvs(7.0F, 14.0F, 9.0F, 16.0F).texture("#stem").end().end()
+                .element().from(1.0F, 6.0F, 8.0F).to(15.0F, 16.0F, 8.0F).rotation().angle(45.0F).axis(Direction.Axis.Y).origin(8.0F, 8.0F, 8.0F).end()
+                .face(Direction.NORTH).uvs(1.0F, 4.0F, 15.0F, 14.0F).texture("#stem").end()
+                .face(Direction.SOUTH).uvs(1.0F, 4.0F, 15.0F, 14.0F).texture("#stem").end().end()
+                .element().from(8.0F, 4.0F, 7.0F).to(8.0F, 6.0F, 9.0F).rotation().angle(45.0F).axis(Direction.Axis.Y).origin(8.0F, 8.0F, 8.0F).end()
+                .face(Direction.EAST).uvs(7.0F, 14.0F, 9.0F, 16.0F).texture("#stem").end()
+                .face(Direction.WEST).uvs(7.0F, 14.0F, 9.0F, 16.0F).texture("#stem").end().end()
+                .element().from(8.0F, 6.0F, 1.0F).to(8.0F, 16.0F, 15.0F).rotation().angle(45.0F).axis(Direction.Axis.Y).origin(8.0F, 8.0F, 8.0F).end()
+                .face(Direction.EAST).uvs(1.0F, 4.0F, 15.0F, 14.0F).texture("#stem").end()
+                .face(Direction.WEST).uvs(1.0F, 4.0F, 15.0F, 14.0F).texture("#stem").end().end();
+    }
+
     public void orangeTree(Block block) {
         String blockName = this.name(block);
         this.getVariantBuilder(block).forAllStates((state) -> {
@@ -362,6 +424,11 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             ModelFile model = this.models().cross(blockName + (lower ? (halfString + bottomAge) : (halfString + topAge)), location).renderType(new ResourceLocation("cutout"));
             return ConfiguredModel.builder().modelFile(model).build();
         });
+    }
+
+    public void pottedOrangeTree(Block block, Block tree) {
+        ModelFile pot = this.models().withExistingParent(this.name(block), this.mcLoc("block/flower_pot_cross")).texture("plant", this.modLoc("block/natural/" + this.name(tree) + "_bottom_0")).renderType(new ResourceLocation("cutout"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
     }
 
     public void twig(Block block, Block log) {
@@ -490,28 +557,8 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
-    public void leavesPile(Block block, Block base) {
-        ResourceLocation texture = this.texture("natural/" + this.name(base));
-        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            int i = state.getValue(AetherLeafPileBlock.PILES);
-            boolean firstState = i == 1;
-            boolean lastState = i == 16;
-            String name = firstState ? this.name(block) : this.name(block) + i;
-            BlockModelBuilder modelBuilder = firstState ? this.models().withExistingParent(name, this.mcLoc("block/thin_block")) : this.models().getBuilder(name);
-            ModelFile model = modelBuilder.ao(lastState)
-                    .texture("particle", texture)
-                    .texture("texture", texture)
-                    .element().from(0.0F, 0.0F, 0.0F).to(16.0F, i, 16.0F)
-                    .face(Direction.DOWN).texture("#texture").end()
-                    .face(Direction.UP).texture("#texture").end()
-                    .face(Direction.NORTH).texture("#texture").end()
-                    .face(Direction.SOUTH).texture("#texture").end()
-                    .face(Direction.EAST).texture("#texture").end()
-                    .face(Direction.WEST).texture("#texture").end()
-                    .end()
-                    .renderType(new ResourceLocation("cutout"));
-            return ConfiguredModel.builder().modelFile(model).build();
-        }, AetherLeafPileBlock.PERSISTENT);
+    public void crudeScatterglassPane(IronBarsBlock block, HalfTransparentBlock glass, String location) {
+        this.paneBlockWithRenderType(block, this.texture(this.name(glass), location), this.extend(this.texture(this.name(block), location), "_top"), new ResourceLocation("translucent"));
     }
 
     public void carpet(Block block, Block baseBlock, String location) {
@@ -576,25 +623,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
-    public void skyrootChest(Block block) {
-        ModelFile chest = this.models().cubeAll(this.name(block), new ResourceLocation(AetherII.MODID, "block/construction/skyroot_planks"));
-        this.chest(block, chest);
-    }
-
-    public void skyrootLadder(LadderBlock block) {
-        ResourceLocation location = this.texture(this.name(block), "construction/");
-        ModelFile ladder = models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout")).ao(false)
-                .texture("particle", location).texture("texture", location)
-                .element().from(0.0F, 0.0F, 15.2F).to(16.0F, 16.0F, 15.2F).shade(false)
-                .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#texture").end()
-                .face(Direction.SOUTH).uvs(16.0F, 0.0F, 0.0F, 16.0F).texture("#texture").end()
-                .end();
-        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            Direction direction = state.getValue(LadderBlock.FACING);
-            return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
-        }, LadderBlock.WATERLOGGED);
-    }
-
     public void masonryBench(Block block) {
         ModelFile plant = models().withExistingParent(name(block), mcLoc("block/stonecutter"))
                 .texture("particle", texture(name(block) + "_bottom", "utility/"))
@@ -613,5 +641,24 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void masonryBeam(RotatedPillarBlock block, Block endBlock) {
         this.axisBlock(block, this.extend(this.texture(this.name(block), "masonry/"), ""), this.extend(this.texture(this.name(endBlock), "masonry/"), ""));
+    }
+
+    public void skyrootChest(Block block) {
+        ModelFile chest = this.models().cubeAll(this.name(block), new ResourceLocation(AetherII.MODID, "block/construction/skyroot_planks"));
+        this.chest(block, chest);
+    }
+
+    public void skyrootLadder(LadderBlock block) {
+        ResourceLocation location = this.texture(this.name(block), "construction/");
+        ModelFile ladder = models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout")).ao(false)
+                .texture("particle", location).texture("texture", location)
+                .element().from(0.0F, 0.0F, 15.2F).to(16.0F, 16.0F, 15.2F).shade(false)
+                .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#texture").end()
+                .face(Direction.SOUTH).uvs(16.0F, 0.0F, 0.0F, 16.0F).texture("#texture").end()
+                .end();
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(LadderBlock.FACING);
+            return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
+        }, LadderBlock.WATERLOGGED);
     }
 }

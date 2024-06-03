@@ -12,8 +12,6 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 public abstract class WingedAnimal extends MountableAnimal {
     /**
      * Used for wing animations.
-     *
-     * @see com.aetherteam.aetherii.client.renderer.layer.QuadrupedWingsLayer
      */
     private float wingFold;
     private float wingAngle;

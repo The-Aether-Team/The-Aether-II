@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_greatroot_planks": {
+    "has_skyroot_planks": {
       "conditions": {
         "items": [
           {
@@ -23,7 +23,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_greatroot_planks"
+      "has_skyroot_planks"
     ]
   ],
   "rewards": {

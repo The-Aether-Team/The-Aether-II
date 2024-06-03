@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "aether_ii:wisproot_trapdoor"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_wisproot_planks": {
+    "has_skyroot_planks": {
       "conditions": {
         "items": [
           {
@@ -18,12 +12,18 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:wisproot_trapdoor"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_wisproot_planks"
+      "has_skyroot_planks"
     ]
   ],
   "rewards": {

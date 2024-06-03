@@ -28,6 +28,7 @@ public class AetherIIData {
         // Client Data
         generator.addProvider(event.includeClient(), new AetherIIBlockStateData(packOutput, fileHelper));
         generator.addProvider(event.includeClient(), new AetherIIItemModelData(packOutput, fileHelper));
+        generator.addProvider(event.includeClient(), new AetherIIParticleData(packOutput, fileHelper));
         generator.addProvider(event.includeClient(), new AetherIILanguageData(packOutput));
         generator.addProvider(event.includeClient(), new AetherIISoundData(packOutput, fileHelper));
 

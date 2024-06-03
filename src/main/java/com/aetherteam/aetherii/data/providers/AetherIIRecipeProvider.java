@@ -1,16 +1,25 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
+import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
+import com.aetherteam.aetherii.recipe.recipes.block.IcestoneFreezableRecipe;
+import com.aetherteam.aetherii.recipe.recipes.block.SwetGelRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.MasonryRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
+import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
+import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -94,5 +103,33 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("/")
                 .pattern("#")
                 .unlockedBy(has, has(material));
+    }
+
+    protected void masonryRecipe(RecipeOutput output, RecipeCategory category, ItemLike item, ItemLike ingredient) {
+        this.masonryRecipe(output, category, item, ingredient, 1);
+    }
+
+    protected void masonryRecipe(RecipeOutput output, RecipeCategory category, ItemLike item, ItemLike ingredient, int count) {
+        new SingleItemRecipeBuilder(category, MasonryRecipe::new, Ingredient.of(ingredient), item, count).unlockedBy(getHasName(ingredient), has(ingredient)).save(output, this.name(getConversionRecipeName(item, ingredient) + "_masonry"));
+    }
+
+    protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {
+        return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AmbrosiumRecipe::new);
+    }
+
+    protected BlockStateRecipeBuilder swetGelConversion(Block result, Block ingredient) {
+        return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, SwetGelRecipe::new);
+    }
+
+    protected BiomeParameterRecipeBuilder swetGelConversionTag(Block result, Block ingredient, TagKey<Biome> tagKey) {
+        return BiomeParameterRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, tagKey, SwetGelRecipe::new);
+    }
+
+    protected BlockStateRecipeBuilder icestoneFreezable(Block result, Block ingredient) {
+        return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, IcestoneFreezableRecipe::new);
+    }
+
+    protected BiomeParameterRecipeBuilder icestoneFreezableTag(Block result, Block ingredient, TagKey<Biome> tagKey) {
+        return BiomeParameterRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, tagKey, IcestoneFreezableRecipe::new);
     }
 }
