@@ -37,7 +37,6 @@ import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
-import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
@@ -85,7 +84,6 @@ public class AetherII {
                 AetherIIPoi.POI,
                 AetherIIFeatures.FEATURES,
                 AetherIITreeDecoratorTypes.TREE_DECORATORS,
-                AetherIITrunkPlacerTypes.TRUNK_PLACERS,
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES

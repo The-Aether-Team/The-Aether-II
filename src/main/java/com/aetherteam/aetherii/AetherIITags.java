@@ -15,6 +15,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_PORTAL_BLACKLIST = tag("aether_portal_blacklist");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
+        public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
@@ -23,6 +24,8 @@ public class AetherIITags {
         public static final TagKey<Block> SKYROOT_MASONRY_BLOCKS = tag("skyroot_masonry_blocks");
         public static final TagKey<Block> GREATROOT_MASONRY_BLOCKS = tag("greatroot_masonry_blocks");
         public static final TagKey<Block> WISPROOT_MASONRY_BLOCKS = tag("wisproot_masonry_blocks");
+        public static final TagKey<Block> HOLYSTONE_MASONRY_BLOCKS = tag("holystone_masonry_blocks");
+        public static final TagKey<Block> AGIOSITE_MASONRY_BLOCKS = tag("agiosite_masonry_blocks");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
@@ -43,6 +46,8 @@ public class AetherIITags {
         public static final TagKey<Item> SKYROOT_MASONRY_BLOCKS = tag("skyroot_masonry_blocks");
         public static final TagKey<Item> GREATROOT_MASONRY_BLOCKS = tag("greatroot_masonry_blocks");
         public static final TagKey<Item> WISPROOT_MASONRY_BLOCKS = tag("wisproot_masonry_blocks");
+        public static final TagKey<Item> HOLYSTONE_MASONRY_BLOCKS = tag("holystone_masonry_blocks");
+        public static final TagKey<Item> AGIOSITE_MASONRY_BLOCKS = tag("agiosite_masonry_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
