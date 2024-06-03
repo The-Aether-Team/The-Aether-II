@@ -111,6 +111,17 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
                 AetherIIBlocks.WISPROOT_BEAM.get()
         );
+        this.tag(AetherIITags.Blocks.HOLYSTONE_MASONRY_BLOCKS).add(
+                AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(),
+                AetherIIBlocks.HOLYSTONE_HIGHLIGHT.get(),
+                AetherIIBlocks.HOLYSTONE_HEADSTONE.get(),
+                AetherIIBlocks.HOLYSTONE_KEYSTONE.get(),
+                AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get(),
+                AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.HOLYSTONE_BASE_PILLAR.get(),
+                AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.HOLYSTONE_PILLAR.get()
+        );
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
         );

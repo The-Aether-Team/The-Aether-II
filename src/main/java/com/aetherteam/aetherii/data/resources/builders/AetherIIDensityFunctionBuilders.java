@@ -13,9 +13,6 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
-    public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
-    public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor"); //TODO: Add to Datagen
-    public static final ResourceKey<DensityFunction> LAKES_ISLAND_CHECKER = createKey("highlands/lakes/island_checker");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/bottom_slide"); //TODO: Add to Datagen

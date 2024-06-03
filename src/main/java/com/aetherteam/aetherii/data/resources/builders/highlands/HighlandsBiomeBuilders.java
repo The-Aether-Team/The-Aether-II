@@ -296,69 +296,43 @@ public class HighlandsBiomeBuilders {
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
 
                 // Arctic
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, Climate.Parameter.span(-1.5F, -0.2F), fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.2F, 1.0F), fullRange, erosionDefault, Climate.Parameter.span(-1.5F, -0.2F), fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, Climate.Parameter.span(-0.2F, 1.5F), fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, Climate.Parameter.span(-1.5F, -0.2F), fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.2F, 1.0F), fullRange, erosionDefault, Climate.Parameter.span(-1.5F, -0.2F), fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, Climate.Parameter.span(-0.2F, 1.5F), fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
 
                 // Highfields
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.25F, 0.15F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.25F, 0.15F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
 
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-0.1F, 0.3F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.3F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-0.1F, 0.3F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.3F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
 
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-0.25F, 0.2F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-0.25F, 0.2F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
 
                 // Magnetic
-                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.2F, 0.15F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.2F, 0.15F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
 
-                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-1.0F, -0.15F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-0.15F, 0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.TURQUOISE_FOREST)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-1.0F, -0.15F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-0.15F, 0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.TURQUOISE_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
 
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-0.2F, 0.1F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(0.1F, 0.3F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.TURQUOISE_FOREST)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(0.3F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-0.2F, 0.1F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(0.1F, 0.3F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.TURQUOISE_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(0.3F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
 
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, fullRange, erosionMagnetic, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
 
                 // Irradiated
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-1.0F, -0.2F), erosionDefault, fullRange, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES)),
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-0.2F, 0.2F), erosionDefault, fullRange, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.CONTAMINATED_JUNGLE)),
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.2F, 1.0F), erosionDefault, fullRange, fullRange, fullRange, 0),
-                        biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES))
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-1.0F, -0.2F), erosionDefault, fullRange, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES)),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-0.2F, 0.2F), erosionDefault, fullRange, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.CONTAMINATED_JUNGLE)),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.2F, 1.0F), erosionDefault, fullRange, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES))
         )));
     }
 }

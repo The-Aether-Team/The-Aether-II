@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T19:58:25.5125736	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-06-03T16:19:11.2873997	Tags for minecraft:item mod id aether_ii
 53afc97bd3504253faa87c8448b46627ca13c602 data/aether_ii/tags/items/aerbunny_temptation_items.json
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 82f472ec897b7763f2d04a7ceefbe43c8bc3c1fd data/aether_ii/tags/items/aether_dirt.json
@@ -17,6 +17,7 @@ fce3e48dcf2a2f543eb33cde348393547a8abb35 data/aether_ii/tags/items/crafts_skyroo
 d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/items/greatroot_logs.json
 2071e063a6cf1c0f9f167ef9c4c6fadba757b3e7 data/aether_ii/tags/items/greatroot_masonry_blocks.json
 07e041016f860713eeee69005d5c309bb262173d data/aether_ii/tags/items/holystone.json
+6c9f5e5d486118430f86490e4eadc4fe165deb0b data/aether_ii/tags/items/holystone_masonry_blocks.json
 a5df7a36d1179fd70f1778840b38bad71c171e4b data/aether_ii/tags/items/holystone_repairing.json
 d4c9cbd81fe5941c2cf29db6e9c97643c1350346 data/aether_ii/tags/items/phyg_temptation_items.json
 83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/planks_crafting.json

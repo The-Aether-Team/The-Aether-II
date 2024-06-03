@@ -229,6 +229,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL, "Holystone Brick Wall");
 
+        // Holystone Masonry Blocks
+        this.addBlock(AetherIIBlocks.HOLYSTONE_FLAGSTONES, "Holystone Flagstones");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_HIGHLIGHT, "Holystone Highlight");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_HEADSTONE, "Holystone Headstone");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_KEYSTONE, "Holystone Keystone");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BASE_BRICKS, "Holystone Base Bricks");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS, "Holystone Capstone Bricks");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_BASE_PILLAR, "Holystone Base Pillar");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR, "Holystone Capstone Pillar");
+        this.addBlock(AetherIIBlocks.HOLYSTONE_PILLAR, "Holystone Pillar");
+
         // Faded Holystone Bricks
         this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICKS, "Faded Holystone Bricks");
         this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS, "Faded Holystone Brick Stairs");
@@ -384,18 +395,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Tooltips
         // Abilities
-        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_PICKAXE.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
-        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_AXE.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
-        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHOVEL.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
-        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_TROWEL.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
-        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHORTSWORD.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
-        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HAMMER.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
-        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SPEAR.get(), 1, "\u00A79Ability:\u00A7r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_PICKAXE.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_AXE.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHOVEL.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_TROWEL.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHORTSWORD.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HAMMER.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SPEAR.get(), 1, "§9Ability:§r Grows Stronger");
 
         // Damage Types
-        this.addDamageTypeTooltip("slash", "\u00A79Slash\u00A7r Damage");
-        this.addDamageTypeTooltip("impact", "\u00A7eImpact\u00A7r Damage");
-        this.addDamageTypeTooltip("pierce", "\u00A7cPierce\u00A7r Damage");
+        this.addDamageTypeTooltip("slash", "§9Slash§r Damage");
+        this.addDamageTypeTooltip("impact", "§eImpact§r Damage");
+        this.addDamageTypeTooltip("pierce", "§cPierce§r Damage");
 
 
         // Entities
@@ -407,7 +418,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Hostile
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
-
 
         // Attributes
         this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");

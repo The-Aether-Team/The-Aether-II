@@ -639,7 +639,12 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(masonryBlock));
     }
 
-    public void masonryBeam(RotatedPillarBlock block, Block endBlock) {
+    public void masonryBlockTop(Block block) {
+        ModelFile masonryBlock = this.models().cubeColumn(this.name(block), this.texture(this.name(block), "masonry/"), this.texture(this.name(block) + "_top", "masonry/"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(masonryBlock));
+    }
+
+    public void masonryPillar(RotatedPillarBlock block, Block endBlock) {
         this.axisBlock(block, this.extend(this.texture(this.name(block), "masonry/"), ""), this.extend(this.texture(this.name(endBlock), "masonry/"), ""));
     }
 

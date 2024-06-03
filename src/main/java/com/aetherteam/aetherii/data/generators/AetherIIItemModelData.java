@@ -304,6 +304,17 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
 
+        // Holystone Masonry Blocks
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_HIGHLIGHT.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_BASE_PILLAR.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_PILLAR.get());
+
         // Faded Holystone Bricks
         this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get());
         this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get());

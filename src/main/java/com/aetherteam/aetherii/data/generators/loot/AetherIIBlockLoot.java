@@ -239,6 +239,17 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
 
+        // Holystone Masonry Blocks
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_HIGHLIGHT.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_BASE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.HOLYSTONE_PILLAR.get());
+
         // Faded Holystone Bricks
         this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get());
         this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get());

@@ -265,8 +265,14 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Holystone Masonry Blocks
     public static final DeferredBlock<Block> HOLYSTONE_FLAGSTONES = register("holystone_flagstones", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> HOLYSTONE_HIGHLIGHT = register("holystone_highlight", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
     public static final DeferredBlock<Block> HOLYSTONE_HEADSTONE = register("holystone_headstone", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
     public static final DeferredBlock<Block> HOLYSTONE_KEYSTONE = register("holystone_keystone", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> HOLYSTONE_BASE_BRICKS = register("holystone_base_bricks", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> HOLYSTONE_CAPSTONE_BRICKS = register("holystone_capstone_bricks", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> HOLYSTONE_BASE_PILLAR = register("holystone_base_pillar", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> HOLYSTONE_CAPSTONE_PILLAR = register("holystone_capstone_pillar", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<RotatedPillarBlock> HOLYSTONE_PILLAR = register("holystone_pillar", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
 
     // Faded Holystone Bricks
     public static final DeferredBlock<Block> FADED_HOLYSTONE_BRICKS = register("faded_holystone_bricks", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
