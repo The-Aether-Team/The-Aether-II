@@ -62,8 +62,8 @@ public class AetherIIBiomes {
         context.register(FROZEN_LAKES, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
         context.register(SHEER_TUNDRA, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
 
-        context.register(CONTAMINATED_JUNGLE, HighlandsBiomeBuilders.makeIrradiatedBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
-        context.register(BATTLEGROUND_WASTES, HighlandsBiomeBuilders.makeIrradiatedBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
+        context.register(CONTAMINATED_JUNGLE, HighlandsBiomeBuilders.contaminatedJungleBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
+        context.register(BATTLEGROUND_WASTES, HighlandsBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
 
         context.register(EXPANSE, HighlandsBiomeBuilders.makeAercloudSeaBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
     }
