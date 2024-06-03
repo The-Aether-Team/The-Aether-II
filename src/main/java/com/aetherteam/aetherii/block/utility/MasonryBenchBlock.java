@@ -23,7 +23,6 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings("deprecation")
 public class MasonryBenchBlock extends Block {
     public static final MapCodec<MasonryBenchBlock> CODEC = simpleCodec(MasonryBenchBlock::new);
     private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.masonry_bench");

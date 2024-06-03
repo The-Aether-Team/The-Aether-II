@@ -427,6 +427,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Hostile
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
 
+
         // Attributes
         this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");
         this.addAttribute(AetherIIAttributes.SWEEP_KNOCKBACK.get(), "Sweep Knockback");

@@ -626,25 +626,24 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void masonryBench(Block block) {
-        ModelFile vase = models().withExistingParent(name(block), modLoc("block/template_masonry_bench"))
+        ModelFile model = models().withExistingParent(name(block), modLoc("block/template_masonry_bench"))
                 .texture("bench", texture(name(block), "utility/"))
                 .texture("particle", texture(name(AetherIIBlocks.HOLYSTONE_BRICKS.get()), "construction/"))
                 .renderType("cutout_mipped");
-
-        getVariantBuilder(block).forAllStatesExcept((state) -> {
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
             Direction direction = state.getValue(MasonryBenchBlock.FACING);
             switch (direction) {
                 case NORTH -> {
-                    return ConfiguredModel.builder().modelFile(vase).build();
+                    return ConfiguredModel.builder().modelFile(model).build();
                 }
                 case EAST -> {
-                    return ConfiguredModel.builder().modelFile(vase).rotationY(90).build();
+                    return ConfiguredModel.builder().modelFile(model).rotationY(90).build();
                 }
                 case SOUTH -> {
-                    return ConfiguredModel.builder().modelFile(vase).rotationY(180).build();
+                    return ConfiguredModel.builder().modelFile(model).rotationY(180).build();
                 }
                 case WEST -> {
-                    return ConfiguredModel.builder().modelFile(vase).rotationY(270).build();
+                    return ConfiguredModel.builder().modelFile(model).rotationY(270).build();
                 }
             }
             return ConfiguredModel.builder().build();
