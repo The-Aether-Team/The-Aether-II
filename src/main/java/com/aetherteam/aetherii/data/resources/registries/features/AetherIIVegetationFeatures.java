@@ -11,6 +11,7 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -35,6 +36,8 @@ public class AetherIIVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_VERDANT_WOODS = AetherIIFeatureUtils.registerKey("trees_verdant_woods");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_VIOLET_HIGHWOODS = AetherIIFeatureUtils.registerKey("trees_violet_highwoods");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = AetherIIFeatureUtils.registerKey("aether_grass_bonemeal");
+
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
@@ -50,7 +53,7 @@ public class AetherIIVegetationFeatures {
                 NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AetherIIBlocks.HIGHLANDS_BUSH.get().defaultBlockState(), 1)), 32));
         AetherIIFeatureUtils.register(context, BLUEBERRY_BUSH_PATCH, Feature.RANDOM_PATCH,
                 NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState(), 1)), 64));
-        AetherIIFeatureUtils.register(context, ORANGE_TREE_PATCH, Feature.FLOWER,
+        AetherIIFeatureUtils.register(context, ORANGE_TREE_PATCH, Feature.RANDOM_PATCH,
                 FeatureUtils.simpleRandomPatchConfiguration(16, PlacementUtils.onlyWhenEmpty(AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(new WeightedStateProvider(orangeTrees)))));
 
         AetherIIFeatureUtils.register(context, TREES_FLOURISHING_FIELD, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
@@ -70,5 +73,11 @@ public class AetherIIVegetationFeatures {
         AetherIIFeatureUtils.register(context, TREES_VIOLET_HIGHWOODS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.GREATROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.01F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.WISPTOP), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPTOP_SAPLING.get()))));
+
+        AetherIIFeatureUtils.register(context, AETHER_GRASS_BONEMEAL, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
+        )));
     }
 }

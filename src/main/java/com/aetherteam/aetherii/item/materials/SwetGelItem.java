@@ -6,10 +6,10 @@ import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.SwetGelRecipe;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.context.UseOnContext;
 
-public class SwetGelItem extends Item implements ItemUseConversion<SwetGelRecipe> {
+public class SwetGelItem extends BoneMealItem implements ItemUseConversion<SwetGelRecipe> {
     public SwetGelItem(Properties properties) {
         super(properties);
     }
@@ -19,6 +19,8 @@ public class SwetGelItem extends Item implements ItemUseConversion<SwetGelRecipe
         InteractionResult result = this.convertBlock(AetherIIRecipeTypes.SWET_GEL_CONVERSION.get(), context);
         if (context.getLevel().isClientSide() && result == InteractionResult.SUCCESS) { //todo partickles
             context.getLevel().playSound(context.getPlayer(), context.getClickedPos(), AetherIISoundEvents.ITEM_SWET_BALL_USE.get(), SoundSource.BLOCKS, 0.8F, 1.0F + (context.getLevel().getRandom().nextFloat() - context.getLevel().getRandom().nextFloat()) * 0.2F);
+        } else if (result == InteractionResult.PASS) {
+            return super.useOn(context);
         }
         return result;
     }

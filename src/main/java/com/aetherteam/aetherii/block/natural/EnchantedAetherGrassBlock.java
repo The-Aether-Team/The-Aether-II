@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,8 +22,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-public class AetherGrassBlock extends GrassBlock {
-    public AetherGrassBlock(Properties properties) {
+public class EnchantedAetherGrassBlock extends GrassBlock {
+    public EnchantedAetherGrassBlock(Properties properties) {
         super(properties);
     }
 
@@ -35,7 +34,7 @@ public class AetherGrassBlock extends GrassBlock {
     }
 
     /**
-     * Based on {@link net.minecraft.world.level.block.SpreadingSnowyDirtBlock#randomTick(BlockState, ServerLevel, BlockPos, RandomSource)}.<br><br>
+     * Based on part of {@link net.minecraft.world.level.block.SpreadingSnowyDirtBlock#randomTick(BlockState, ServerLevel, BlockPos, RandomSource)}.<br><br>
      * Warning for "deprecation" is suppressed due to being copied from what Forge does.
      */
     @Override
@@ -44,18 +43,6 @@ public class AetherGrassBlock extends GrassBlock {
             if (!level.isAreaLoaded(pos, 3))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
             level.setBlockAndUpdate(pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
-        } else {
-            if (!level.isAreaLoaded(pos, 3))
-                return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
-            if (level.getMaxLocalRawBrightness(pos.above()) >= 9) {
-                BlockState blockstate = this.defaultBlockState();
-                for (int i = 0; i < 4; ++i) {
-                    BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    if (level.getBlockState(blockpos).is(AetherIIBlocks.AETHER_DIRT.get()) && SpreadingSnowyDirtBlockAccessor.callCanPropagate(blockstate, level, blockpos)) {
-                        level.setBlockAndUpdate(blockpos, blockstate.setValue(SNOWY, level.getBlockState(blockpos.above()).is(Blocks.SNOW)));
-                    }
-                }
-            }
         }
     }
 
