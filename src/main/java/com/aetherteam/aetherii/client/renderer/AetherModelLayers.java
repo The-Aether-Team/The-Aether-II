@@ -11,6 +11,9 @@ public class AetherModelLayers {
     public static final ModelLayerLocation FLYING_COW = register("flying_cow");
     public static final ModelLayerLocation FLYING_COW_WINGS = register("flying_cow", "wings");
 
+    public static final ModelLayerLocation KIRRID = register("kirrid");
+    public static final ModelLayerLocation KIRRID_BABY = register("kirrid_baby");
+
     public static final ModelLayerLocation ZEPHYR = register("zephyr");
     public static final ModelLayerLocation ZEPHYR_TRANSPARENCY = register("zephyr", "transparency");
 

@@ -15,6 +15,9 @@ import com.aetherteam.aetherii.event.listeners.EffectsSystemListeners;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
+
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.event.listeners.AerbunnyMountListener;
@@ -82,6 +85,7 @@ public class AetherII {
                 AetherIISoundEvents.SOUNDS,
                 AetherIIAttributes.ATTRIBUTES,
                 AetherIIMenuTypes.MENU_TYPES,
+                AetherIIMemoryModuleTypes.MEMORY_MODULE_TYPES,
                 AetherIIPoi.POI,
                 AetherIIDataAttachments.ATTACHMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES
