@@ -6,7 +6,7 @@
       "tag": "aether_ii:plates/arkenium"
     },
     "/": {
-      "tag": "aether_ii:rods/skyroot"
+      "item": "aether_ii:arkenium_strip"
     }
   },
   "pattern": [

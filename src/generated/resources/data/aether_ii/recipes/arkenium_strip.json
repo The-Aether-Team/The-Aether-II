@@ -1,20 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
+  "category": "misc",
   "key": {
     "#": {
       "tag": "aether_ii:plates/arkenium"
-    },
-    "/": {
-      "item": "aether_ii:arkenium_strip"
     }
   },
   "pattern": [
     "#",
-    "/",
-    "/"
+    "#"
   ],
   "result": {
-    "item": "aether_ii:arkenium_shovel"
+    "count": 4,
+    "item": "aether_ii:arkenium_strip"
   }
 }

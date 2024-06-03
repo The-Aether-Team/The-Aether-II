@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T19:58:25.5635734	Item Models: aether_ii
+// 1.20.4	2024-06-02T21:27:18.1286845	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -39,6 +39,7 @@ b5679100bbb9478dedbaf17aad1aecc1518ff30e assets/aether_ii/models/item/arkenium_p
 2d743f2a98b375464d534dbc97a0d0801b917f4b assets/aether_ii/models/item/arkenium_shortsword.json
 b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_shovel.json
 5cdc77ed51a4e270e9d66ab00d1e0e2302609b7e assets/aether_ii/models/item/arkenium_spear.json
+8fdeceef026dc237d0a52c72b1b456e7ad35eeb2 assets/aether_ii/models/item/arkenium_strip.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
 c7551e4548b0c81d85c2d6072e683ba9789cc589 assets/aether_ii/models/item/blueberry.json
 f02bebdc929e60eaebcaaefe890b3f9fb604d4b3 assets/aether_ii/models/item/blueberry_bush.json
