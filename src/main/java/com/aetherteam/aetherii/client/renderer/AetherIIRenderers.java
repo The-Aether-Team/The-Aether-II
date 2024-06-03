@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.client.renderer.block.FastModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.QuadrupedWingsModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.ZephyrModel;
 import com.aetherteam.aetherii.client.renderer.model.FlyingCowModel;
 import com.aetherteam.aetherii.client.renderer.model.KirridBabyModel;
@@ -53,7 +52,6 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherModelLayers.AERBUNNY_COLLAR, AerbunnyModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.PHYG, PhygModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.FLYING_COW_WINGS, () -> QuadrupedWingsModel.createMainLayer(0.0F));
         event.registerLayerDefinition(AetherModelLayers.KIRRID, KirridModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
 
