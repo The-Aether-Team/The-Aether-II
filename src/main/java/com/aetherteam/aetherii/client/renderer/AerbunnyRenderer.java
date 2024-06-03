@@ -32,7 +32,6 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
         if (aerbunny.isBaby()) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         }
-        poseStack.translate(0.0, 0.2, 0.0);
     }
 
     /**
