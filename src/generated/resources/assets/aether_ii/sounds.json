@@ -135,6 +135,12 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.zephyr.shoot"
   },
+  "item.ambrosium_shard.use": {
+    "sounds": [
+      "block/amethyst/shimmer"
+    ],
+    "subtitle": "subtitles.aether.item.ambrosium_shard.use"
+  },
   "item.music_disc.aerwhale": {
     "sounds": [
       {
@@ -182,5 +188,14 @@
         "stream": true
       }
     ]
+  },
+  "item.swet_ball.use": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.item.swet_ball.use"
   }
 }

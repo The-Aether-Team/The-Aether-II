@@ -1,16 +1,30 @@
 package com.aetherteam.aetherii.event.hooks;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.event.listeners.ToolModificationListener;
+import com.aetherteam.aetherii.loot.AetherIILoot;
+import com.aetherteam.aetherii.loot.AetherIILootContexts;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ToolAction;
 import net.neoforged.neoforge.common.ToolActions;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
+import java.util.List;
 import java.util.Map;
 
 public class ToolModificationHooks {
@@ -20,6 +34,7 @@ public class ToolModificationHooks {
     public static final Map<Block, Block> STRIPPABLES = (new ImmutableMap.Builder<Block, Block>())
             .put(AetherIIBlocks.SKYROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
             .put(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
+            .put(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.get())
             .put(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
             .put(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
             .build();
@@ -30,6 +45,7 @@ public class ToolModificationHooks {
     public static final Map<Block, Block> FLATTENABLES = (new ImmutableMap.Builder<Block, Block>())
             .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
             .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
+            .put(AetherIIBlocks.COARSE_AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
             .build();
 
     /**
@@ -39,6 +55,7 @@ public class ToolModificationHooks {
             .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_FARMLAND.get())
             .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_FARMLAND.get())
             .put(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_FARMLAND.get())
+            .put(AetherIIBlocks.COARSE_AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT.get())
             .build();
 
     /**
@@ -71,5 +88,37 @@ public class ToolModificationHooks {
             }
         }
         return old;
+    }
+
+    public static void stripMossyWisproot(LevelAccessor accessor, BlockState state, ItemStack stack, ToolAction action, UseOnContext context) {
+        if (action == ToolActions.AXE_STRIP) {
+            if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG)) {
+                stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT);
+            }
+        }
+    }
+
+    public static void stripAmberoot(LevelAccessor accessor, BlockState state, ItemStack stack, ToolAction action, UseOnContext context) {
+        if (action == ToolActions.AXE_STRIP) {
+            if (state.is(AetherIITags.Blocks.AMBEROOT_LOGS) && stack.is(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)) {
+                stripLog(accessor, stack, context, AetherIILoot.STRIP_AMBEROOT);
+            }
+        }
+    }
+
+    private static void stripLog(LevelAccessor accessor, ItemStack stack, UseOnContext context, ResourceLocation loot) {
+        if (accessor instanceof Level level) {
+            if (level.getServer() != null && level instanceof ServerLevel serverLevel) {
+                Vec3 vector = context.getClickLocation();
+                LootParams parameters = new LootParams.Builder(serverLevel).withParameter(LootContextParams.TOOL, stack).create(AetherIILootContexts.STRIPPING);
+                LootTable lootTable = level.getServer().getLootData().getLootTable(loot);
+                List<ItemStack> list = lootTable.getRandomItems(parameters);
+                for (ItemStack itemStack : list) {
+                    ItemEntity itemEntity = new ItemEntity(level, vector.x(), vector.y(), vector.z(), itemStack);
+                    itemEntity.setDefaultPickUpDelay();
+                    level.addFreshEntity(itemEntity);
+                }
+            }
+        }
     }
 }

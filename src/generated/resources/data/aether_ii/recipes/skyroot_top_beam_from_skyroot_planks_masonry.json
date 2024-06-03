@@ -1,0 +1,8 @@
+{
+  "type": "aether_ii:masonry",
+  "count": 1,
+  "ingredient": {
+    "item": "aether_ii:skyroot_planks"
+  },
+  "result": "aether_ii:skyroot_top_beam"
+}

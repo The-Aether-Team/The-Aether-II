@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:skyroot_stick_from_twig"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_twig": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "aether_ii:skyroot_twig"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_twig"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:skyroot_stick_from_twig"
+    ]
+  }
+}

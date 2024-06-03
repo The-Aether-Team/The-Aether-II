@@ -7,7 +7,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private final DimensionSpecialEffects OVERWORLD = new DimensionSpecialEffects.OverworldEffects();
 
     public HighlandsSpecialEffects() {
-        super(192.0F, true, DimensionSpecialEffects.SkyType.NORMAL, false, false);
+        super(256.0F, true, DimensionSpecialEffects.SkyType.NORMAL, false, false);
     }
 
     @Override

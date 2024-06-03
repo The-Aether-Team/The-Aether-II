@@ -1,13 +1,18 @@
 {
   "values": [
     "aether_ii:skyroot_log",
+    "aether_ii:stripped_skyroot_log",
     "aether_ii:greatroot_log",
     "aether_ii:wisproot_log",
+    "aether_ii:mossy_wisproot_log",
     "aether_ii:amberoot_log",
     "aether_ii:skyroot_wood",
+    "aether_ii:stripped_skyroot_wood",
     "aether_ii:greatroot_wood",
     "aether_ii:wisproot_wood",
     "aether_ii:amberoot_wood",
+    "aether_ii:blueberry_bush_stem",
+    "aether_ii:orange_tree",
     "aether_ii:skyroot_planks",
     "aether_ii:skyroot_fence",
     "aether_ii:skyroot_fence_gate",

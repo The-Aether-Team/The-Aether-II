@@ -12,6 +12,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -107,6 +109,11 @@ public class AetherLeafPileBlock extends FallingBlock {
     }
 
     @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return !level.isEmptyBlock(pos.below());
+    }
+
+    @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity instanceof FallingBlockEntity fallingBlock && fallingBlock.getBlockState().is(this)) {
             fallingBlock.discard();
@@ -153,6 +160,15 @@ public class AetherLeafPileBlock extends FallingBlock {
                 state = state.setValue(PERSISTENT, persistent);
             }
             return state;
+        }
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
+        if (type == PathComputationType.LAND || type == PathComputationType.AIR) {
+            return true;
+        } else {
+            return super.isPathfindable(state, level, pos, type);
         }
     }
 }
