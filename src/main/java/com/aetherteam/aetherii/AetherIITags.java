@@ -14,7 +14,6 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_PORTAL_BLOCKS = tag("aether_portal_blocks");
         public static final TagKey<Block> AETHER_PORTAL_BLACKLIST = tag("aether_portal_blacklist");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
-        public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
@@ -25,6 +24,8 @@ public class AetherIITags {
         public static final TagKey<Block> SKYROOT_MASONRY_BLOCKS = tag("skyroot_masonry_blocks");
         public static final TagKey<Block> GREATROOT_MASONRY_BLOCKS = tag("greatroot_masonry_blocks");
         public static final TagKey<Block> WISPROOT_MASONRY_BLOCKS = tag("wisproot_masonry_blocks");
+
+        public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
 
         private static TagKey<Block> tag(String name) {
@@ -49,6 +50,10 @@ public class AetherIITags {
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
         public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");
 
+        public static final TagKey<Item> TOOLS_SHORTSWORDS = tag("tools/shortswords");
+        public static final TagKey<Item> TOOLS_HAMMERS = tag("tools/hammers");
+        public static final TagKey<Item> TOOLS_SPEARS = tag("tools/spears");
+
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
         public static final TagKey<Item> CRAFTS_SKYROOT_PLANKS = tag("crafts_skyroot_planks");
@@ -69,9 +74,12 @@ public class AetherIITags {
         public static final TagKey<Item> AERBUNNY_TEMPTATION_ITEMS = tag("aerbunny_temptation_items");
         public static final TagKey<Item> PHYG_TEMPTATION_ITEMS = tag("phyg_temptation_items");
         public static final TagKey<Item> PHYG_CALM_ITEMS = tag("phyg_calm_items");
+        public static final TagKey<Item> KIRRID_TEMPTATION_ITEMS = tag("kirrid_temptation_items");
         public static final TagKey<Item> FLYING_COW_TEMPTATION_ITEMS = tag("flying_cow_temptation_items");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
+        public static final TagKey<Item> SWET_GEL = tag("swet_gel");
+        public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, new ResourceLocation(AetherII.MODID, name));
@@ -90,6 +98,13 @@ public class AetherIITags {
 
     public static class Biomes {
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
+
+        public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");
+        public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");
+        public static final TagKey<Biome> CRIMSON_NYLIUM_CONVERSION = tag("crimson_nylium_conversion");
+        public static final TagKey<Biome> WARPED_NYLIUM_CONVERSION = tag("warped_nylium_conversion");
+
+        public static final TagKey<Biome> ARCTIC_ICE_FREEZING = tag("arctic_ice_freezing");
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(AetherII.MODID, name));
