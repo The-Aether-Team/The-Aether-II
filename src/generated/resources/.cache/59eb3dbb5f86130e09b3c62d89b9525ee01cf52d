@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-03T15:26:03.2313959	Loot Tables
+// 1.20.4	2024-06-03T16:12:26.4277022	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -64,6 +64,7 @@ c521336a92bb0c8c7d0f32bca920b94328acbef7 data/aether_ii/loot_tables/blocks/great
 20759943564e05eefc3210ab92b43c6d3feeb5ad data/aether_ii/loot_tables/blocks/greatroot_base_planks.json
 a3f3a007e88bf2a6a2b7319141915a79a9f92848 data/aether_ii/loot_tables/blocks/greatroot_beam.json
 d6c21022d6e4e11aae2cb24ed009eddb9a2c7033 data/aether_ii/loot_tables/blocks/greatroot_button.json
+b37d85e7a4f9c00f3bb1f7828b67e856a99e8f2e data/aether_ii/loot_tables/blocks/greatroot_door.json
 afea37773df977447740ea575aabed1252ea8fc1 data/aether_ii/loot_tables/blocks/greatroot_fence.json
 6fa20d4bf8e6ff1a1d64734005adf90b52e8899f data/aether_ii/loot_tables/blocks/greatroot_fence_gate.json
 6c869c7e89448f33b83143eff192a288b31fde4f data/aether_ii/loot_tables/blocks/greatroot_floorboards.json
@@ -80,6 +81,7 @@ d9105bec7145c2ec377367e00a7af6f7711aa0b8 data/aether_ii/loot_tables/blocks/great
 5e5a9709fef79dfdcb25c8cc5615d734c77530cc data/aether_ii/loot_tables/blocks/greatroot_stairs.json
 4131f7e625e4d93f461d8691b779adac1cadecc5 data/aether_ii/loot_tables/blocks/greatroot_top_beam.json
 53eb198149c5ba0d01a4356458a19695d90df133 data/aether_ii/loot_tables/blocks/greatroot_top_planks.json
+1a4bc805c74862e8a2c0390d1bf424317523b569 data/aether_ii/loot_tables/blocks/greatroot_trapdoor.json
 ee2721e8e5e7885fb63442e3079091d3cddb3e17 data/aether_ii/loot_tables/blocks/greatroot_wood.json
 cef34749bb6448dd1154aa7ff226f1111e2d8f30 data/aether_ii/loot_tables/blocks/green_aercloud.json
 7b34471dff4b86223481ff089e9d9f6c7ac21add data/aether_ii/loot_tables/blocks/highlands_bush.json
@@ -182,6 +184,7 @@ b1f8642b6674613c2bf351f904f86cafb05c66fb data/aether_ii/loot_tables/blocks/under
 91b95fe2cfc904fffb78a15de15dd22fde336eb5 data/aether_ii/loot_tables/blocks/wisproot_base_planks.json
 29fde0c676b6d6361576ab48b61c058f541dae60 data/aether_ii/loot_tables/blocks/wisproot_beam.json
 a11e4688069c4964af1bb72cea64a3dc5b020b7c data/aether_ii/loot_tables/blocks/wisproot_button.json
+d5915478f99ddff8cdb4cb848d154dabb4801fdb data/aether_ii/loot_tables/blocks/wisproot_door.json
 60054716b4372ed6ebef4b0d3d2c8fd7a7c023f6 data/aether_ii/loot_tables/blocks/wisproot_fence.json
 e0c3ac369e4d3a7397e9bc7897a645c17114ff59 data/aether_ii/loot_tables/blocks/wisproot_fence_gate.json
 73e3bcd1afc88c1fae01b153edc78a0f4f0e4cfe data/aether_ii/loot_tables/blocks/wisproot_floorboards.json
@@ -198,6 +201,7 @@ f8f28d53d0da79c17124495508859f06154be33d data/aether_ii/loot_tables/blocks/wispr
 21cbbb9bbbd81fe9728a50f7cbd2f7cad0d0c3ab data/aether_ii/loot_tables/blocks/wisproot_stairs.json
 608fca6a2f0533149451d0954d8a0ca0335d911b data/aether_ii/loot_tables/blocks/wisproot_top_beam.json
 80dd7b1bef9c6f97028674f775374cd82ffb6db6 data/aether_ii/loot_tables/blocks/wisproot_top_planks.json
+26675d401502cf3fcd6fed91ef1905b5fcb20886 data/aether_ii/loot_tables/blocks/wisproot_trapdoor.json
 a01f35426be7b209e1628bb7dc8e3802f176b924 data/aether_ii/loot_tables/blocks/wisproot_wood.json
 2613c040189b01349e6a33f229fa30706d6fa8cb data/aether_ii/loot_tables/blocks/wisptop_leaf_pile.json
 9021a16168cf368fc4e0b6d9b681fbf8b0c608da data/aether_ii/loot_tables/blocks/wisptop_leaves.json

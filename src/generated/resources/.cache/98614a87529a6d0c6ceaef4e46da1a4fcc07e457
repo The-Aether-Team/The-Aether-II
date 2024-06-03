@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-03T15:26:03.2513953	Item Models: aether_ii
+// 1.20.4	2024-06-03T16:12:26.4567019	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -93,6 +93,7 @@ e0669fa52a46acc416e204677db4bd20ffcce9d6 assets/aether_ii/models/item/greatboa_s
 d66c93808f73e1ad470f97cf9a88ed7dde0805da assets/aether_ii/models/item/greatroot_base_planks.json
 16301180ceec2fb4b7483d36c24e38b29b6b45d1 assets/aether_ii/models/item/greatroot_beam.json
 6121bd1e431681e31bb5872a8393412c96f55c81 assets/aether_ii/models/item/greatroot_button.json
+36aa480cf2afc721b2d6593c9d0f6ba08d0b6634 assets/aether_ii/models/item/greatroot_door.json
 df09d448338c8f3690954328d7845ea5100bdf2b assets/aether_ii/models/item/greatroot_fence.json
 61138dba13855086dda902be00758b5c9354ae01 assets/aether_ii/models/item/greatroot_fence_gate.json
 28560247db00228d40d5e276478fa56170694416 assets/aether_ii/models/item/greatroot_floorboards.json
@@ -109,6 +110,7 @@ ac2e173fd29785594ec67f4a8b9aa7bf96bcc28f assets/aether_ii/models/item/greatroot_
 e3b849f6603be0ebb13307529d64e4de7d081c6c assets/aether_ii/models/item/greatroot_stairs.json
 aab00cdd89bffc05765fb1936fd88ee0fe0e84db assets/aether_ii/models/item/greatroot_top_beam.json
 0eae591f3809c1b2981eb74beffb6360dfb6f3ef assets/aether_ii/models/item/greatroot_top_planks.json
+a67ed2f60c8b07eb4c0d4d018f6fd997003b03cc assets/aether_ii/models/item/greatroot_trapdoor.json
 268a36338d5a5ffee7512515abea46290820bef1 assets/aether_ii/models/item/greatroot_wood.json
 71db11dbfb4109a0d05a6f9304da556bc38af138 assets/aether_ii/models/item/green_aercloud.json
 9cdfd01b4d14bfeaf18e4636f5ebb8b375a895b8 assets/aether_ii/models/item/green_swet_gel.json
@@ -229,6 +231,7 @@ e08cba605dc43682cfdb888553a1f4826bf29045 assets/aether_ii/models/item/undershale
 fd46577008a8034c53e9282543661ed859e645b1 assets/aether_ii/models/item/wisproot_base_planks.json
 1caa7face9a9836b82bae7859426a52a45cde966 assets/aether_ii/models/item/wisproot_beam.json
 5636fecd5a7c213e61c99598709e9e2dbcf11ac4 assets/aether_ii/models/item/wisproot_button.json
+ba0f22333042fb455b0d45e8e0effa081818fa72 assets/aether_ii/models/item/wisproot_door.json
 07e54d9c3f77e3aca8082359e2a5465e0319405d assets/aether_ii/models/item/wisproot_fence.json
 0f0bfbc0646799f6d092621bb525d5866d387bce assets/aether_ii/models/item/wisproot_fence_gate.json
 9832df3d420103277a2764cf7921ac90f0df5676 assets/aether_ii/models/item/wisproot_floorboards.json
@@ -245,6 +248,7 @@ e83344497594b85c2e077c26de6679ced6e3acc9 assets/aether_ii/models/item/wisproot_p
 e167cd2a4903ede813313aadebb011a5f64d51f9 assets/aether_ii/models/item/wisproot_stairs.json
 0fa6eb18a4a285a82fa8ce1b9603689c2bc14b65 assets/aether_ii/models/item/wisproot_top_beam.json
 9e72b0ea33e9de5292e58df4736ee8b398c3b608 assets/aether_ii/models/item/wisproot_top_planks.json
+a1779a0be2cf8312846d6dbf0efa1c5d9de08bff assets/aether_ii/models/item/wisproot_trapdoor.json
 4daf67c80f9bae792c17752840d4459839b20d5e assets/aether_ii/models/item/wisproot_wood.json
 2f1711f049c8e583bec6a05a5cb1d8665f6e873f assets/aether_ii/models/item/wisptop_leaf_pile.json
 962869521316611ce7ea217861b3f90966cce67d assets/aether_ii/models/item/wisptop_leaves.json

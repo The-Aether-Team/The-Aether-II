@@ -247,6 +247,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATROOT_SLAB.get());
         this.itemFence(AetherIIBlocks.GREATROOT_FENCE.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
+        this.item(AetherIIBlocks.GREATROOT_DOOR.get().asItem(), "miscellaneous/");
+        this.itemBlock(AetherIIBlocks.GREATROOT_TRAPDOOR.get(), "_bottom");
         this.itemButton(AetherIIBlocks.GREATROOT_BUTTON.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
 
@@ -267,6 +269,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.WISPROOT_SLAB.get());
         this.itemFence(AetherIIBlocks.WISPROOT_FENCE.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+        this.item(AetherIIBlocks.WISPROOT_DOOR.get().asItem(), "miscellaneous/");
+        this.itemBlock(AetherIIBlocks.WISPROOT_TRAPDOOR.get(), "_bottom");
         this.itemButton(AetherIIBlocks.WISPROOT_BUTTON.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
 

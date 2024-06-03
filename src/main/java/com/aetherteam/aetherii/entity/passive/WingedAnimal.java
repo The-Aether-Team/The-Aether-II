@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.passive;
 
-import com.aetherteam.aetherii.client.renderer.entity.layers.QuadrupedWingsLayer;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
