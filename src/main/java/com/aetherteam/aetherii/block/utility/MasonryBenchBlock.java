@@ -31,7 +31,6 @@ public class MasonryBenchBlock extends Block {
     public static final MapCodec<MasonryBenchBlock> CODEC = simpleCodec(MasonryBenchBlock::new);
     private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.masonry_bench");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 9.0, 16.0);
 
     @Override
     public MapCodec<MasonryBenchBlock> codec() {
@@ -63,11 +62,6 @@ public class MasonryBenchBlock extends Block {
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider((id, inventory, player) -> new MasonryBenchMenu(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_TITLE);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
     }
 
     @Override
