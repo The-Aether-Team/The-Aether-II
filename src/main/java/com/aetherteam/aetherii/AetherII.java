@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
+import com.aetherteam.aetherii.data.ReloadListeners;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
@@ -80,6 +81,7 @@ public class AetherII {
                 AetherIISoundEvents.SOUNDS,
                 AetherIIRecipeTypes.RECIPE_TYPES,
                 AetherIIRecipeSerializers.RECIPE_SERIALIZERS,
+                AetherIIGameEvents.GAME_EVENTS,
                 AetherIIPoi.POI,
                 AetherIIFeatures.FEATURES,
                 AetherIITreeDecoratorTypes.TREE_DECORATORS,
@@ -124,6 +126,9 @@ public class AetherII {
         PortalTeleportationListener.listen(bus);
         AerbunnyMountListener.listen(bus);
         WorldInteractionListener.listen(bus);
+        RecipeListener.listen(bus);
+
+        bus.addListener(ReloadListeners::reloadListenerSetup);
 
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);

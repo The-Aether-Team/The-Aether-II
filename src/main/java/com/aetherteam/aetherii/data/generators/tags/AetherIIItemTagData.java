@@ -215,7 +215,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.asItem(),
                 AetherIIBlocks.UNDERSHALE_STAIRS.asItem(),
                 AetherIIBlocks.AGIOSITE_STAIRS.asItem(),
-                AetherIIBlocks.AGIOSITE_BRICK_STAIRS.asItem()
+                AetherIIBlocks.AGIOSITE_BRICK_STAIRS.asItem(),
+                AetherIIBlocks.ICESTONE_STAIRS.asItem()
         );
         this.tag(ItemTags.SLABS).add(
                 AetherIIBlocks.HOLYSTONE_SLAB.asItem(),
@@ -225,7 +226,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.asItem(),
                 AetherIIBlocks.UNDERSHALE_SLAB.asItem(),
                 AetherIIBlocks.AGIOSITE_SLAB.asItem(),
-                AetherIIBlocks.AGIOSITE_BRICK_SLAB.asItem()
+                AetherIIBlocks.AGIOSITE_BRICK_SLAB.asItem(),
+                AetherIIBlocks.ICESTONE_SLAB.asItem()
         );
         this.tag(ItemTags.WALLS).add(
                 AetherIIBlocks.HOLYSTONE_WALL.asItem(),
@@ -235,7 +237,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.asItem(),
                 AetherIIBlocks.UNDERSHALE_WALL.asItem(),
                 AetherIIBlocks.AGIOSITE_WALL.asItem(),
-                AetherIIBlocks.AGIOSITE_BRICK_WALL.asItem()
+                AetherIIBlocks.AGIOSITE_BRICK_WALL.asItem(),
+                AetherIIBlocks.ICESTONE_WALL.asItem()
         );
         this.tag(ItemTags.LEAVES).add(
                 AetherIIBlocks.SKYROOT_LEAVES.asItem(),

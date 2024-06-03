@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T17:15:20.2754417	Loot Tables
+// 1.20.4	2024-06-02T19:58:25.507574	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -89,6 +89,10 @@ ca4128e14959f974440b122c07b47ae514772c06 data/aether_ii/loot_tables/blocks/holys
 3c53971203ea357d1eaf6005692e3f9197d4c345 data/aether_ii/loot_tables/blocks/holystone_slab.json
 d0bc73c482f0ed62de0521c8aaf08864532df5cb data/aether_ii/loot_tables/blocks/holystone_stairs.json
 3d885a44d1a0ec53d33089cf4cfafd877204b86a data/aether_ii/loot_tables/blocks/holystone_wall.json
+3149ead4837a7edd9fd376aaedf266710affe587 data/aether_ii/loot_tables/blocks/icestone.json
+1a75ba08912a26eec31055c1f77ce925d3ced9fc data/aether_ii/loot_tables/blocks/icestone_slab.json
+a65761b996234d558580d638f0cde605cbcac551 data/aether_ii/loot_tables/blocks/icestone_stairs.json
+bc6ab30369cb3ed5448576445990de1c4e0423fe data/aether_ii/loot_tables/blocks/icestone_wall.json
 8ff008602615fe2f92e01adbac0c9e9a37c9e451 data/aether_ii/loot_tables/blocks/irradiated_holystone.json
 b404bd79fd1a93e2fda01e149f219b8bb1c402c4 data/aether_ii/loot_tables/blocks/irradiated_holystone_slab.json
 d686ea3dc1b17056e8cf175ce9f0700f7f74624a data/aether_ii/loot_tables/blocks/irradiated_holystone_stairs.json

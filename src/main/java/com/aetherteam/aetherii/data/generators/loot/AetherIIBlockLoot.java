@@ -52,6 +52,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.ARCTIC_SNOW.get(), this::droppingSnowLayer);
         this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_ICE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
+        this.dropSelf(AetherIIBlocks.ICESTONE.get());
 
         // Irradiated
         this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
@@ -259,6 +260,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get());
         this.add(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.AGIOSITE_BRICK_WALL.get());
+
+        // Icestone
+        this.dropSelf(AetherIIBlocks.ICESTONE_STAIRS.get());
+        this.add(AetherIIBlocks.ICESTONE_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.ICESTONE_WALL.get());
 
         // Glass
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS.get());

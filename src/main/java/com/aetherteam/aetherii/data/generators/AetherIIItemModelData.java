@@ -133,6 +133,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ARCTIC_SNOW.get());
         this.itemBlock(AetherIIBlocks.ARCTIC_ICE.get());
         this.itemBlock(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE.get());
 
         // Irradiated
         this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
@@ -323,6 +324,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
+
+        // Icestone
+        this.itemBlock(AetherIIBlocks.ICESTONE_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.ICESTONE_WALL.get(), AetherIIBlocks.ICESTONE.get(), "natural/");
 
         // Glass
         this.itemBlock(AetherIIBlocks.QUICKSOIL_GLASS.get());

@@ -50,6 +50,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW, "Arctic Snow");
         this.addBlock(AetherIIBlocks.ARCTIC_ICE, "Arctic Ice");
         this.addBlock(AetherIIBlocks.ARCTIC_PACKED_ICE, "Arctic Packed Ice");
+        this.addBlock(AetherIIBlocks.ICESTONE, "Icestone");
 
         // Irradiated
         this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");
@@ -249,6 +250,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_STAIRS, "Agiosite Brick Stairs");
         this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB, "Agiosite Brick Slab");
         this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL, "Agiosite Brick Wall");
+
+        // Icestone
+        this.addBlock(AetherIIBlocks.ICESTONE_STAIRS, "Icestone Stairs");
+        this.addBlock(AetherIIBlocks.ICESTONE_SLAB, "Icestone Slab");
+        this.addBlock(AetherIIBlocks.ICESTONE_WALL, "Icestone Wall");
 
         // Glass
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");

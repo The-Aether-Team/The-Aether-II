@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.recipe.recipes.block;
 
+import com.aetherteam.aetherii.event.AetherEventDispatch;
+import com.aetherteam.aetherii.event.ItemUseConvertEvent;
 import com.aetherteam.nitrogen.recipe.BlockStateRecipeUtil;
 import net.minecraft.commands.CacheableFunction;
 import net.minecraft.core.BlockPos;
@@ -20,8 +22,7 @@ public interface MatchEventRecipe {
     }
 
     default boolean matches(@Nullable Player player, Level level, BlockPos pos, @Nullable ItemStack stack, BlockState oldState, BlockState newState, RecipeType<?> recipeType) {
-//        ItemUseConvertEvent event = AetherEventDispatch.onItemUseConvert(player, level, pos, stack, oldState, newState, recipeType);
-//        return !event.isCanceled(); //todo events
-        return true;
+        ItemUseConvertEvent event = AetherEventDispatch.onItemUseConvert(player, level, pos, stack, oldState, newState, recipeType);
+        return !event.isCanceled();
     }
 }

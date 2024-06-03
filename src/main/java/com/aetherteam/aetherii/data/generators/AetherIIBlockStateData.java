@@ -44,6 +44,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.snowLayer(AetherIIBlocks.ARCTIC_SNOW.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
         this.translucentBlock(AetherIIBlocks.ARCTIC_ICE.get(), "natural/");
         this.block(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), "natural/");
+        this.block(AetherIIBlocks.ICESTONE.get(), "natural/");
 
         // Irradiated
         this.block(AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
@@ -251,6 +252,11 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.stairs(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
         this.slab(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
         this.wallBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
+
+        // Icestone
+        this.stairs(AetherIIBlocks.ICESTONE_STAIRS.get(), AetherIIBlocks.ICESTONE.get(), "natural/");
+        this.slab(AetherIIBlocks.ICESTONE_SLAB.get(), AetherIIBlocks.ICESTONE.get(), "natural/");
+        this.wallBlock(AetherIIBlocks.ICESTONE_WALL.get(), AetherIIBlocks.ICESTONE.get(), "natural/");
 
         // Glass
         this.translucentBlock(AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");

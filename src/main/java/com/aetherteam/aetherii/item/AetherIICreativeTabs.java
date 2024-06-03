@@ -116,6 +116,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.ICESTONE.get());
+                output.accept(AetherIIBlocks.ICESTONE_STAIRS.get());
+                output.accept(AetherIIBlocks.ICESTONE_SLAB.get());
+                output.accept(AetherIIBlocks.ICESTONE_WALL.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
@@ -163,6 +167,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AGIOSITE.get());
                 output.accept(AetherIIBlocks.FERROSITE.get());
                 output.accept(AetherIIBlocks.RUSTED_FERROSITE.get());
+                output.accept(AetherIIBlocks.ICESTONE.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());

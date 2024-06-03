@@ -103,6 +103,8 @@ public class AetherIITags {
         public static final TagKey<Biome> CRIMSON_NYLIUM_CONVERSION = tag("crimson_nylium_conversion");
         public static final TagKey<Biome> WARPED_NYLIUM_CONVERSION = tag("warped_nylium_conversion");
 
+        public static final TagKey<Biome> ARCTIC_ICE_FREEZING = tag("arctic_ice_freezing");
+
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(AetherII.MODID, name));
         }
