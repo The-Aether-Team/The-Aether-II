@@ -265,7 +265,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Holystone Masonry Blocks
     public static final DeferredBlock<Block> HOLYSTONE_FLAGSTONES = register("holystone_flagstones", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
-    public static final DeferredBlock<Block> HOLYSTONE_HIGHLIGHT = register("holystone_highlight", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
     public static final DeferredBlock<Block> HOLYSTONE_HEADSTONE = register("holystone_headstone", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
     public static final DeferredBlock<Block> HOLYSTONE_KEYSTONE = register("holystone_keystone", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));
     public static final DeferredBlock<Block> HOLYSTONE_BASE_BRICKS = register("holystone_base_bricks", () -> new Block(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get())));

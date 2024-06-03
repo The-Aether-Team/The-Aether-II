@@ -241,7 +241,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Holystone Masonry Blocks
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
-        this.dropSelf(AetherIIBlocks.HOLYSTONE_HIGHLIGHT.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get());

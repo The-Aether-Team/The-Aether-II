@@ -233,7 +233,6 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         // Holystone Masonry Blocks
         this.block(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(), "masonry/");
-        this.masonryBlockTop(AetherIIBlocks.HOLYSTONE_HIGHLIGHT.get());
         this.block(AetherIIBlocks.HOLYSTONE_HEADSTONE.get(), "masonry/");
         this.block(AetherIIBlocks.HOLYSTONE_KEYSTONE.get(), "masonry/");
         this.masonryBlock(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());

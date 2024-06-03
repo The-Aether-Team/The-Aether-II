@@ -101,7 +101,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
-                output.accept(AetherIIBlocks.HOLYSTONE_HIGHLIGHT.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get());

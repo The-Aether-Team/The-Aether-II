@@ -231,7 +231,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Holystone Masonry Blocks
         this.addBlock(AetherIIBlocks.HOLYSTONE_FLAGSTONES, "Holystone Flagstones");
-        this.addBlock(AetherIIBlocks.HOLYSTONE_HIGHLIGHT, "Holystone Highlight");
         this.addBlock(AetherIIBlocks.HOLYSTONE_HEADSTONE, "Holystone Headstone");
         this.addBlock(AetherIIBlocks.HOLYSTONE_KEYSTONE, "Holystone Keystone");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BASE_BRICKS, "Holystone Base Bricks");

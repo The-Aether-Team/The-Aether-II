@@ -113,7 +113,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.HOLYSTONE_MASONRY_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(),
-                AetherIIBlocks.HOLYSTONE_HIGHLIGHT.get(),
                 AetherIIBlocks.HOLYSTONE_HEADSTONE.get(),
                 AetherIIBlocks.HOLYSTONE_KEYSTONE.get(),
                 AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get(),

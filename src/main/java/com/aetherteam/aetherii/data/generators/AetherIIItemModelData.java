@@ -306,7 +306,6 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Holystone Masonry Blocks
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
-        this.itemBlock(AetherIIBlocks.HOLYSTONE_HIGHLIGHT.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get());

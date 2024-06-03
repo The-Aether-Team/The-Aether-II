@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-03T16:19:11.2843808	Loot Tables
+// 1.20.4	2024-06-03T16:41:09.0121284	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -90,7 +90,6 @@ e8fda5f07643fef17b7ec891fccb27e238037d66 data/aether_ii/loot_tables/blocks/holys
 f1b8ac8dc80317e1e2fda053aa13057692f519fe data/aether_ii/loot_tables/blocks/holystone_flagstones.json
 192151093cd2b5b33003514cd4a643f998d7ef08 data/aether_ii/loot_tables/blocks/holystone_furnace.json
 1238e0a03b57b91589bfbae16d191dfa7b8c1d61 data/aether_ii/loot_tables/blocks/holystone_headstone.json
-c236af08d4fbc8f0bc33f7e0e089fcfbc3e45853 data/aether_ii/loot_tables/blocks/holystone_highlight.json
 9efd6ff92664fdff737e018be80196b9c2de2bca data/aether_ii/loot_tables/blocks/holystone_keystone.json
 f7b6dc82ccacdb6790e45c7ab6d36d84e55c42f8 data/aether_ii/loot_tables/blocks/holystone_pillar.json
 f42129c5f9ab9a1f2a79ffaebdb198a6337c0dd9 data/aether_ii/loot_tables/blocks/holystone_pressure_plate.json
