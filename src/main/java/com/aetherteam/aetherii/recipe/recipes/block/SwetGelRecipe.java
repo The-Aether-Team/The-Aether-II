@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.recipe.recipes.block;
 
 import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.recipes.serializer.BiomeParameterRecipeSerializer;
+import com.aetherteam.aetherii.recipe.serializer.BiomeParameterRecipeSerializer;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.mojang.datafixers.util.Either;

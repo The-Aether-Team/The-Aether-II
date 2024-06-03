@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.recipe.recipes.serializer;
+package com.aetherteam.aetherii.recipe.serializer;
 
 import com.aetherteam.aetherii.recipe.recipes.block.AbstractBiomeParameterRecipe;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;

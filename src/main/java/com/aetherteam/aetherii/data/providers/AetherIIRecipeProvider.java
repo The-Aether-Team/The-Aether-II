@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
 import com.aetherteam.aetherii.recipe.recipes.block.IcestoneFreezableRecipe;
 import com.aetherteam.aetherii.recipe.recipes.block.SwetGelRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.MasonryRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
@@ -12,6 +13,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -101,6 +103,14 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("/")
                 .pattern("#")
                 .unlockedBy(has, has(material));
+    }
+
+    protected void masonryRecipe(RecipeOutput output, RecipeCategory category, ItemLike item, ItemLike ingredient) {
+        this.masonryRecipe(output, category, item, ingredient, 1);
+    }
+
+    protected void masonryRecipe(RecipeOutput output, RecipeCategory category, ItemLike item, ItemLike ingredient, int count) {
+        new SingleItemRecipeBuilder(category, MasonryRecipe::new, Ingredient.of(ingredient), item, count).unlockedBy(getHasName(ingredient), has(ingredient)).save(output, this.name(getConversionRecipeName(item, ingredient) + "_masonry"));
     }
 
     protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {

@@ -440,6 +440,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addContainerType(AetherIIMenuTypes.MASONRY_BENCH, "Masonry Bench");
 
 
         // Subtitles

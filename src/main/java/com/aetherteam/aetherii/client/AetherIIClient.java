@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.client.event.listeners.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.gui.screen.inventory.HolystoneFurnaceScreen;
+import com.aetherteam.aetherii.client.gui.screen.inventory.MasonryBenchScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
@@ -44,5 +45,6 @@ public class AetherIIClient {
     @SuppressWarnings("deprecation")
     public static void registerGuiFactories() {
         MenuScreens.register(AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), HolystoneFurnaceScreen::new);
+        MenuScreens.register(AetherIIMenuTypes.MASONRY_BENCH.get(), MasonryBenchScreen::new);
     }
 }
