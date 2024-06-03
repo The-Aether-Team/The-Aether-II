@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-03T16:41:09.0121284	Loot Tables
+// 1.20.4	2024-06-03T17:06:45.579224	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -7,10 +7,17 @@ d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aethe
 c9fc32060dbc198551f0a0b141eab0deaf1a2def data/aether_ii/loot_tables/blocks/aether_medium_grass.json
 81991fe8ffb9c17f48ab7bb76aef80921b512eb6 data/aether_ii/loot_tables/blocks/aether_short_grass.json
 731fd5544a8d9f803fb12a76096c0207ebf0b3b4 data/aether_ii/loot_tables/blocks/agiosite.json
+1fe322b9dbdab5d96955a90a395a6f03da60f842 data/aether_ii/loot_tables/blocks/agiosite_base_bricks.json
+ee677b60fc1136f13e58e805f269a43a54ea02cb data/aether_ii/loot_tables/blocks/agiosite_base_pillar.json
 6fb8846d2441c61e0e540f5cdc18713a691a44d8 data/aether_ii/loot_tables/blocks/agiosite_bricks.json
 9aba04945176eacf66d0e73344a8d4384a326c00 data/aether_ii/loot_tables/blocks/agiosite_brick_slab.json
 c5f6889f01d43b7e3ed9816fe4135039df75096b data/aether_ii/loot_tables/blocks/agiosite_brick_stairs.json
 622c48ee7db505e15844655e777da88ef79d2b1f data/aether_ii/loot_tables/blocks/agiosite_brick_wall.json
+6107791c5f9b019df3e81eafa7f7259fe2368df1 data/aether_ii/loot_tables/blocks/agiosite_capstone_bricks.json
+9860abaaaf44e810e9594d7f25a072a9cf2e253f data/aether_ii/loot_tables/blocks/agiosite_capstone_pillar.json
+57eb576ffc0de1c8d82c68e65bb0343514a03e3f data/aether_ii/loot_tables/blocks/agiosite_flagstones.json
+26d5ceef60383d37c003fda3d41d3155e965fbfd data/aether_ii/loot_tables/blocks/agiosite_keystone.json
+63c668f6265b4db1b9b32523820f272748bff1d9 data/aether_ii/loot_tables/blocks/agiosite_pillar.json
 63d7040cb32789544214b8d1d45929be686d20a9 data/aether_ii/loot_tables/blocks/agiosite_slab.json
 76b79914a659c9506211edf0a14f0be94f92838d data/aether_ii/loot_tables/blocks/agiosite_stairs.json
 ea7e1a6d871a82492d95884322e710b078831bab data/aether_ii/loot_tables/blocks/agiosite_wall.json

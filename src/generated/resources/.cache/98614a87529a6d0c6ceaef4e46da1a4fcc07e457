@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-03T16:41:09.0241321	Item Models: aether_ii
+// 1.20.4	2024-06-03T17:06:45.5897355	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -10,10 +10,17 @@ bc4f13cbf811013c951f8a827a208d901ea4f04b assets/aether_ii/models/item/aether_lon
 b9bfec314176b17ae9514e75469dbec42e1b345a assets/aether_ii/models/item/aether_portal_frame.json
 2cf5c1b5f2091b91455f3cc868aea41fef41e76f assets/aether_ii/models/item/aether_short_grass.json
 d78faa3df15e1d2f4385aba4993e8b91a1d72ad3 assets/aether_ii/models/item/agiosite.json
+2c686344d7cc1bf3b330703dc20f5c13a97974eb assets/aether_ii/models/item/agiosite_base_bricks.json
+278eb2bf060a2f2a1db849ebeb560ab04978aa3f assets/aether_ii/models/item/agiosite_base_pillar.json
 36cf50edeb4fa2360cdd3442cd6fcf664cca7a0a assets/aether_ii/models/item/agiosite_bricks.json
 1a0ad634b21a9525a99d05f444289bb89f8bcf2d assets/aether_ii/models/item/agiosite_brick_slab.json
 08ab70f7da6f2be90c34bccf53f4b997e806b31a assets/aether_ii/models/item/agiosite_brick_stairs.json
 06ec65abc81cc115c18b4c40b5eda415f5a58ce1 assets/aether_ii/models/item/agiosite_brick_wall.json
+cf49c1799d3a4a98b7669281c472db17006e2d2e assets/aether_ii/models/item/agiosite_capstone_bricks.json
+b7c812ce0081fb8ecb28dbace6cca251c69556fc assets/aether_ii/models/item/agiosite_capstone_pillar.json
+61c5a12b3fd3dae088de2cfaccf42c0ea2052905 assets/aether_ii/models/item/agiosite_flagstones.json
+a2ad28ced2cfef2209a94336a7f07b6dc43d0b82 assets/aether_ii/models/item/agiosite_keystone.json
+0b6276bb4e63279e7f670057c153e77f20a0fd57 assets/aether_ii/models/item/agiosite_pillar.json
 7d5a5ee528f06e8c62e81db4cd3105b19bac758a assets/aether_ii/models/item/agiosite_slab.json
 6d0b6541d2039949b41b31190393c9602c8e9aa9 assets/aether_ii/models/item/agiosite_stairs.json
 1c4dff40d6e81582f021204bf60d9aa4ebec0ae6 assets/aether_ii/models/item/agiosite_wall.json

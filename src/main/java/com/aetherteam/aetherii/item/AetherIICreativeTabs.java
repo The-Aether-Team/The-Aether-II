@@ -124,6 +124,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
+                output.accept(AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+                output.accept(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get());
+                output.accept(AetherIIBlocks.AGIOSITE_CAPSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.AGIOSITE_BASE_PILLAR.get());
+                output.accept(AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.AGIOSITE_PILLAR.get());
                 output.accept(AetherIIBlocks.ICESTONE.get());
                 output.accept(AetherIIBlocks.ICESTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.ICESTONE_SLAB.get());

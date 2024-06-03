@@ -261,6 +261,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB, "Agiosite Brick Slab");
         this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL, "Agiosite Brick Wall");
 
+        // Agiosite Masonry Blocks
+        this.addBlock(AetherIIBlocks.AGIOSITE_FLAGSTONES, "Agiosite Flagstones");
+        this.addBlock(AetherIIBlocks.AGIOSITE_KEYSTONE, "Agiosite Keystone");
+        this.addBlock(AetherIIBlocks.AGIOSITE_BASE_BRICKS, "Agiosite Base Bricks");
+        this.addBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_BRICKS, "Agiosite Capstone Bricks");
+        this.addBlock(AetherIIBlocks.AGIOSITE_BASE_PILLAR, "Agiosite Base Pillar");
+        this.addBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR, "Agiosite Capstone Pillar");
+        this.addBlock(AetherIIBlocks.AGIOSITE_PILLAR, "Agiosite Pillar");
+
         // Icestone
         this.addBlock(AetherIIBlocks.ICESTONE_STAIRS, "Icestone Stairs");
         this.addBlock(AetherIIBlocks.ICESTONE_SLAB, "Icestone Slab");

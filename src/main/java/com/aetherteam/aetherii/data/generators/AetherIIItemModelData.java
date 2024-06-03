@@ -336,6 +336,15 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
 
+        // Agiosite Masonry Blocks
+        this.itemBlock(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_BASE_PILLAR.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get());
+        this.itemBlock(AetherIIBlocks.AGIOSITE_PILLAR.get());
+
         // Icestone
         this.itemBlock(AetherIIBlocks.ICESTONE_STAIRS.get());
         this.itemBlock(AetherIIBlocks.ICESTONE_SLAB.get());
