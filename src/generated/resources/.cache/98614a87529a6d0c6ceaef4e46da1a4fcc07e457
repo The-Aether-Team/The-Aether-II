@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T00:27:32.1344333	Item Models: aether_ii
+// 1.20.4	2024-06-02T17:15:20.2924423	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -127,6 +127,7 @@ dd7dbfd68a795bf1d0035260b7b53d835143d28b assets/aether_ii/models/item/holystone_
 37d4edcdbee202c9966f92f449046ac10a88f107 assets/aether_ii/models/item/irradiated_holystone_slab.json
 936e064fc6b6940df4095758416c3b5f16044586 assets/aether_ii/models/item/irradiated_holystone_stairs.json
 e4ea08420ff31ca75b1bd51883c3666d1a30252d assets/aether_ii/models/item/irradiated_holystone_wall.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/kirrid_spawn_egg.json
 307e2bea8f9968043e39dd993e796f9b3c202947 assets/aether_ii/models/item/masonry_bench.json
 a146cf9b7567eb6bd1e5a4c2523f6d1f4ec153ad assets/aether_ii/models/item/mossy_holystone.json
 1b577aee3036b910200c7e21424651f9575623f4 assets/aether_ii/models/item/mossy_holystone_slab.json

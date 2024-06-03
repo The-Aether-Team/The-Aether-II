@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T12:54:50.2513708	Loot Tables
+// 1.20.4	2024-06-02T17:15:20.2754417	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -188,7 +188,9 @@ e5756cffe597096161bf2a7f3af7adba68222a90 data/aether_ii/loot_tables/blocks/zanit
 14295de5d712c2eb60971e1b93c5c7e75cefa3e7 data/aether_ii/loot_tables/blocks/zanite_ore.json
 89e8139cb32d67fc9c34fc0b29eaf2b249fcfe99 data/aether_ii/loot_tables/entities/aerbunny.json
 87e4e6dfb52885486bfb35920906bc37cddf22ef data/aether_ii/loot_tables/entities/flying_cow.json
+9983f7a59f7d96f979a7bd80a3a3bf45a30539cc data/aether_ii/loot_tables/entities/kirrid.json
 993161c1be68b71a45fb784a8334df800a044c63 data/aether_ii/loot_tables/entities/phyg.json
+f08c9660a5de3a50d88d664eef2e6e16d0b4d0d7 data/aether_ii/loot_tables/entities/sheep/kirrid.json
 1951effb76ae288f8a4a8bb5cacf7ed79091bac2 data/aether_ii/loot_tables/entities/zephyr.json
 7994cd390042f47a8ac45b1c2707a4bd578dfc9c data/aether_ii/loot_tables/stripping/strip_amberoot.json
 aac599c9f45eabc80364d4150b9c5cdbb388ff01 data/aether_ii/loot_tables/stripping/strip_mossy_wisproot.json
