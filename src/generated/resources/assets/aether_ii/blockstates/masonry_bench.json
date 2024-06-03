@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "aether_ii:block/masonry_bench",
+      "y": 90
+    },
+    "facing=north": {
       "model": "aether_ii:block/masonry_bench"
+    },
+    "facing=south": {
+      "model": "aether_ii:block/masonry_bench",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "aether_ii:block/masonry_bench",
+      "y": 270
     }
   }
 }

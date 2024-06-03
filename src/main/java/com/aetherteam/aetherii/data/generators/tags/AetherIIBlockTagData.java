@@ -47,6 +47,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get()
         );
+        this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
+                AetherIIBlocks.HOLYSTONE.get(),
+                AetherIIBlocks.UNDERSHALE.get()
+        );
         this.tag(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),
                 AetherIIBlocks.BLUE_AERCLOUD.get(),
@@ -106,6 +110,25 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_BASE_BEAM.get(),
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
                 AetherIIBlocks.WISPROOT_BEAM.get()
+        );
+        this.tag(AetherIITags.Blocks.HOLYSTONE_MASONRY_BLOCKS).add(
+                AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(),
+                AetherIIBlocks.HOLYSTONE_HEADSTONE.get(),
+                AetherIIBlocks.HOLYSTONE_KEYSTONE.get(),
+                AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get(),
+                AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.HOLYSTONE_BASE_PILLAR.get(),
+                AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.HOLYSTONE_PILLAR.get()
+        );
+        this.tag(AetherIITags.Blocks.AGIOSITE_MASONRY_BLOCKS).add(
+                AetherIIBlocks.AGIOSITE_FLAGSTONES.get(),
+                AetherIIBlocks.AGIOSITE_KEYSTONE.get(),
+                AetherIIBlocks.AGIOSITE_BASE_BRICKS.get(),
+                AetherIIBlocks.AGIOSITE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.AGIOSITE_BASE_PILLAR.get(),
+                AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.AGIOSITE_PILLAR.get()
         );
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()

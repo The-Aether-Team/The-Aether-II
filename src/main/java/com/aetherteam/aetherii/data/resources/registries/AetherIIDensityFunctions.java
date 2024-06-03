@@ -33,7 +33,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
 
         context.register(TERRAIN_SHAPER, makeTerrainShaper(function));
 
-        context.register(FINAL_DENSITY, HighlandsNoiseBuilders.buildFinalDensity(function));
+        context.register(FINAL_DENSITY, buildFinalDensity(function));
 
         context.register(CLOUDBED_NOISE,
                 DensityFunctions.add(
