@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
+import com.aetherteam.aetherii.recipe.recipes.block.SwetGelRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -101,5 +104,13 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {
         return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, AmbrosiumRecipe::new);
+    }
+
+    protected BlockStateRecipeBuilder swetGelConversion(Block result, Block ingredient) {
+        return BlockStateRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, SwetGelRecipe::new);
+    }
+
+    protected BiomeParameterRecipeBuilder swetGelConversionTag(Block result, Block ingredient, TagKey<Biome> tagKey) {
+        return BiomeParameterRecipeBuilder.recipe(BlockStateIngredient.of(ingredient), result, tagKey, SwetGelRecipe::new);
     }
 }

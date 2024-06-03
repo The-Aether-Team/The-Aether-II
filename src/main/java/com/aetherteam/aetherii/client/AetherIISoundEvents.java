@@ -17,6 +17,9 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_BLUE_AERCLOUD_BOUNCE = register("block.blue_aercloud.bounce");
 
     // Items
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_AMBROSIUM_SHARD = register("item.ambrosium_shard.use");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_SWET_BALL_USE = register("item.swet_ball.use");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_AETHER_TUNE = register("item.music_disc.aether_tune");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_ASCENDING_DAWN = register("item.music_disc.ascending_dawn");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_AERWHALE = register("item.music_disc.aerwhale");

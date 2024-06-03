@@ -142,6 +142,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ARKENIUM_REPAIRING).add(AetherIIItems.ARKENIUM_PLATE.get());
         this.tag(AetherIITags.Items.GRAVITITE_REPAIRING).add(AetherIIItems.GRAVITITE_PLATE.get());
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
+        this.tag(AetherIITags.Items.SWET_GEL).add(
+                AetherIIItems.GREEN_SWET_GEL.get(),
+                AetherIIItems.BLUE_SWET_GEL.get(),
+                AetherIIItems.PURPLE_SWET_GEL.get()
+        );
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.ZANITE_AXE.get(),
                 AetherIIItems.ARKENIUM_AXE.get(),

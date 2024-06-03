@@ -23,6 +23,7 @@ import com.aetherteam.aetherii.item.combat.zanite.ZaniteSpearItem;
 import com.aetherteam.aetherii.item.food.AetherIIFoods;
 import com.aetherteam.aetherii.item.materials.AmbrosiumShardItem;
 import com.aetherteam.aetherii.item.materials.ArcticSnowballItem;
+import com.aetherteam.aetherii.item.materials.SwetGelItem;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
 import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumAxeItem;
 import com.aetherteam.aetherii.item.tools.arkenium.ArkeniumPickaxeItem;
@@ -115,6 +116,9 @@ public class AetherIIItems {
     public static final DeferredItem<Item> BURRUKAI_PELT = ITEMS.register("burrukai_pelt", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> AECHOR_PETAL = ITEMS.register("aechor_petal", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ARCTIC_SNOWBALL = ITEMS.register("arctic_snowball", () -> new ArcticSnowballItem(new Item.Properties()));
+    public static final DeferredItem<Item> GREEN_SWET_GEL = ITEMS.register("green_swet_gel", () -> new SwetGelItem(new Item.Properties()));
+    public static final DeferredItem<Item> BLUE_SWET_GEL = ITEMS.register("blue_swet_gel", () -> new SwetGelItem(new Item.Properties()));
+    public static final DeferredItem<Item> PURPLE_SWET_GEL = ITEMS.register("purple_swet_gel", () -> new SwetGelItem(new Item.Properties()));
 
     // Food
     public static final DeferredItem<Item> BLUEBERRY = ITEMS.register("blueberry", () -> new Item(new Item.Properties().food(AetherIIFoods.BLUEBERRY)));

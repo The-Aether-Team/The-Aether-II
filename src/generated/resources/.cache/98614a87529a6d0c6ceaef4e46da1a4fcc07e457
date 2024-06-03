@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-02T17:15:20.2924423	Item Models: aether_ii
+// 1.20.4	2024-06-02T18:25:49.4062556	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -44,6 +44,7 @@ c7551e4548b0c81d85c2d6072e683ba9789cc589 assets/aether_ii/models/item/blueberry.
 f02bebdc929e60eaebcaaefe890b3f9fb604d4b3 assets/aether_ii/models/item/blueberry_bush.json
 c51076bdf8ae4eff8ab973abd37cd7970abb2d97 assets/aether_ii/models/item/blueberry_bush_stem.json
 59483d7ced03b47656d5d0d803d0629d3afbf66a assets/aether_ii/models/item/blue_aercloud.json
+f891ffeffb97c57fecdff9dca1bc9b213cd439c2 assets/aether_ii/models/item/blue_swet_gel.json
 843ecf00bc074daf792dca837106224d7d1be69a assets/aether_ii/models/item/blue_swet_jelly.json
 b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
 e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
@@ -102,6 +103,7 @@ aab00cdd89bffc05765fb1936fd88ee0fe0e84db assets/aether_ii/models/item/greatroot_
 0eae591f3809c1b2981eb74beffb6360dfb6f3ef assets/aether_ii/models/item/greatroot_top_planks.json
 268a36338d5a5ffee7512515abea46290820bef1 assets/aether_ii/models/item/greatroot_wood.json
 71db11dbfb4109a0d05a6f9304da556bc38af138 assets/aether_ii/models/item/green_aercloud.json
+9cdfd01b4d14bfeaf18e4636f5ebb8b375a895b8 assets/aether_ii/models/item/green_swet_gel.json
 23fea31aca6045c4f86c605c5f94fe43399b77fc assets/aether_ii/models/item/highlands_bush.json
 8e2ea2de4b9c40ce8d12bb8929db104621345611 assets/aether_ii/models/item/holystone.json
 0835f677ffa59ed15b6385fda54653f2ac513621 assets/aether_ii/models/item/holystone_axe.json
@@ -143,6 +145,7 @@ bcb2a30fe852ec2766cca8ed8131096018e66b51 assets/aether_ii/models/item/orange.jso
 2fb9fa40dce6a9ea0b20d77f35ea241df7a6acb2 assets/aether_ii/models/item/orange_tree.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/phyg_spawn_egg.json
 e90926eeb23d15a1a930d215621e3d0d52bf87fd assets/aether_ii/models/item/purple_aercloud.json
+fc586064ab3bbf8683e19be901cd54f874786b6e assets/aether_ii/models/item/purple_swet_gel.json
 8e37ebdc1c0a7d3958be57b8d394648cdaf9a581 assets/aether_ii/models/item/quicksoil.json
 aa659e5bd10ca0db200402d370084234693fc942 assets/aether_ii/models/item/quicksoil_glass.json
 280fa1a6185b874ce28a0bec8deff7035cae5904 assets/aether_ii/models/item/quicksoil_glass_pane.json

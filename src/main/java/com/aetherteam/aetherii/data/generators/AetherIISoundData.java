@@ -13,8 +13,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
     @Override
     public void registerSounds() {
-
-        //Portal
+        // Blocks
         this.add(AetherIISoundEvents.BLOCK_AETHER_PORTAL_AMBIENT,
                 definition().with(sound("aether_ii:block/portal/hum").attenuationDistance(10))
                         .subtitle("subtitles.aether_ii.block.aether_portal.ambient")
@@ -29,6 +28,20 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         this.add(AetherIISoundEvents.BLOCK_BLUE_AERCLOUD_BOUNCE,
                 definition().with(sound("aether_ii:block/aercloud/blue_aercloud_bounce"))
                         .subtitle("subtitles.aether_ii.block.aercloud.blue_aercloud_bounce")
+        );
+
+        // Items
+        this.add(AetherIISoundEvents.ITEM_AMBROSIUM_SHARD,
+                definition().with(sound("minecraft:block/amethyst/shimmer"))
+                        .subtitle("subtitles.aether.item.ambrosium_shard.use")
+        );
+        this.add(AetherIISoundEvents.ITEM_SWET_BALL_USE,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.item.swet_ball.use")
         );
 
         this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_AETHER_TUNE,
@@ -50,6 +63,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 definition().with(sound("aether_ii:item/records/chase").stream())
         );
 
+        // Entities
         this.add(AetherIISoundEvents.ENTITY_PHYG_AMBIENT,
                 definition().with(
                         sound("minecraft:mob/pig/say1"),
@@ -81,7 +95,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/pig/step5")
                 ).subtitle("subtitles.block.generic.footsteps")
         );
-
 
         this.add(AetherIISoundEvents.ENTITY_FLYING_COW_AMBIENT,
                 definition().with(

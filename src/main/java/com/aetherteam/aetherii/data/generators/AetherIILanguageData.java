@@ -339,6 +339,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BURRUKAI_PELT, "Burrukai Pelt");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
+        this.addItem(AetherIIItems.GREEN_SWET_GEL, "Green Swet Gel");
+        this.addItem(AetherIIItems.BLUE_SWET_GEL, "Blue Swet Gel");
+        this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");

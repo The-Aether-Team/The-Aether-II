@@ -1,2 +1,6 @@
-// 1.20.4	2024-06-01T10:15:30.5869303	Tags for minecraft:worldgen/biome mod id aether_ii
+// 1.20.4	2024-06-02T18:25:49.3992543	Tags for minecraft:worldgen/biome mod id aether_ii
+b95f2e5677841946d287305b14c97c69f59b6db1 data/aether_ii/tags/worldgen/biome/crimson_nylium_conversion.json
 6e2c94c24488ceea8d9fc5505439991dbf64937c data/aether_ii/tags/worldgen/biome/has_structure/outpost.json
+e230510c9f5c1188c61cd1ad728a3d9a6bd3125f data/aether_ii/tags/worldgen/biome/mycelium_conversion.json
+8a465b6126765ecd81cd3e4dcd95641b97642809 data/aether_ii/tags/worldgen/biome/podzol_conversion.json
+45a7fce7990fceb93e22529d0a7ef778bfac4a99 data/aether_ii/tags/worldgen/biome/warped_nylium_conversion.json

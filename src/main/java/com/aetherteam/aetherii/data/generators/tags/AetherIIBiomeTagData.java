@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
+import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -19,6 +20,14 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.Biomes.MYCELIUM_CONVERSION).add(Biomes.MUSHROOM_FIELDS);
+        this.tag(AetherIITags.Biomes.PODZOL_CONVERSION).add(
+                Biomes.OLD_GROWTH_PINE_TAIGA,
+                Biomes.OLD_GROWTH_SPRUCE_TAIGA,
+                Biomes.BAMBOO_JUNGLE);
+        this.tag(AetherIITags.Biomes.CRIMSON_NYLIUM_CONVERSION).add(Biomes.CRIMSON_FOREST);
+        this.tag(AetherIITags.Biomes.WARPED_NYLIUM_CONVERSION).add(Biomes.WARPED_FOREST);
+
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST).add(
                 AetherIIBiomes.FLOURISHING_FIELD,
                 AetherIIBiomes.VERDANT_WOODS,

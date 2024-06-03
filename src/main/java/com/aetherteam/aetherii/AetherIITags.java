@@ -77,6 +77,7 @@ public class AetherIITags {
         public static final TagKey<Item> FLYING_COW_TEMPTATION_ITEMS = tag("flying_cow_temptation_items");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
+        public static final TagKey<Item> SWET_GEL = tag("swet_gel");
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
 
         private static TagKey<Item> tag(String name) {
@@ -96,6 +97,11 @@ public class AetherIITags {
 
     public static class Biomes {
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
+
+        public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");
+        public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");
+        public static final TagKey<Biome> CRIMSON_NYLIUM_CONVERSION = tag("crimson_nylium_conversion");
+        public static final TagKey<Biome> WARPED_NYLIUM_CONVERSION = tag("warped_nylium_conversion");
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(AetherII.MODID, name));
