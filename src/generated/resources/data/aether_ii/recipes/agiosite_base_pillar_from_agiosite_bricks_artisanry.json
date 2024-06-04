@@ -1,0 +1,8 @@
+{
+  "type": "aether_ii:artisanry",
+  "count": 1,
+  "ingredient": {
+    "item": "aether_ii:agiosite_bricks"
+  },
+  "result": "aether_ii:agiosite_base_pillar"
+}
