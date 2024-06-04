@@ -102,6 +102,9 @@ public class SheepuffModel<T extends Sheepuff> extends HierarchicalModel<T> {
             this.applyStatic(SheepuffAnimations.falling);
             this.applyStatic(SheepuffAnimations.wool_expand);
         }
+        if (sheepuff.isBaby()) {
+            this.applyStatic(SheepuffAnimations.baby);
+        }
     }
 
     @Override
