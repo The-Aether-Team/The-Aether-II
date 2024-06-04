@@ -298,13 +298,20 @@ public class Aerbunny extends AetherTamableAnimal {
      * @return The {@link InteractionResult}.
      */
     private InteractionResult ridePlayer(Player player) {
-        if (!this.isBaby()) {
-            if (this.isPassenger()) { // Dismount segment.
+        if (!this.isBaby() && (!this.isTame() || this.isTame() && this.isOwnedBy(player))) {
+            if (this.isPassenger()) {
+                if (this.isTame()) {
+                    this.setOrderedToSit(true);
+                }
+                // Dismount segment.
                 this.stopRiding();
                 this.setFastFalling(true); // Aerbunny will fall fast when dismounted.
                 Vec3 playerMovement = player.getDeltaMovement();
                 this.setDeltaMovement(playerMovement.x() * 5, playerMovement.y() * 0.5 + 0.5, playerMovement.z() * 5);
             } else if (this.startRiding(player)) { // Mount segment.
+                if (this.isTame()) {
+                    this.setOrderedToSit(false);
+                }
                 player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(this);
                 this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LIFT.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
             }
