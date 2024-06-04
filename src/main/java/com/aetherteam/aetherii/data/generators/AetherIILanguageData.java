@@ -408,6 +408,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Spawn Eggs
         this.addItem(AetherIIItems.AERBUNNY_SPAWN_EGG, "Aerbunny Spawn Egg");
         this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
+        this.addItem(AetherIIItems.SHEEPUFF_SPAWN_EGG, "Sheepuff Spawn Egg");
         this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
         this.addItem(AetherIIItems.KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
@@ -436,6 +437,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.AERBUNNY, "Aerbunny");
         this.addEntityType(AetherIIEntityTypes.PHYG, "Phyg");
         this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
+        this.addEntityType(AetherIIEntityTypes.SHEEPUFF, "Sheepuff");
         this.addEntityType(AetherIIEntityTypes.KIRRID, "Kirrid");
 
         // Hostile
@@ -495,6 +497,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "flying_cow.saddle", "Saddle equips");
         this.addSubtitle("entity", "flying_cow.milk", "Flying Cow gets milked");
         this.addSubtitle("entity", "flying_cow.step", "Footsteps");
+
+        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baahs");
+        this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
+        this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
+        this.addSubtitle("entity", "sheepuff.step", "Footsteps");
 
         this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
         this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");

@@ -14,6 +14,24 @@ public class AetherIILoot {
     // Entities
     public static final ResourceLocation KIRRID_FUR = new ResourceLocation(AetherII.MODID, "entities/sheep/kirrid");
 
+    public static final ResourceLocation ENTITIES_SHEEPUFF_WHITE = register("entities/sheepuff/white");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_ORANGE = register("entities/sheepuff/orange");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_MAGENTA = register("entities/sheepuff/magenta");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_LIGHT_BLUE = register("entities/sheepuff/light_blue");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_YELLOW = register("entities/sheepuff/yellow");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_LIME = register("entities/sheepuff/lime");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_PINK = register("entities/sheepuff/pink");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_GRAY = register("entities/sheepuff/gray");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_LIGHT_GRAY = register("entities/sheepuff/light_gray");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_CYAN = register("entities/sheepuff/cyan");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_PURPLE = register("entities/sheepuff/purple");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_BLUE = register("entities/sheepuff/blue");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_BROWN = register("entities/sheepuff/brown");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_GREEN = register("entities/sheepuff/green");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_RED = register("entities/sheepuff/red");
+    public static final ResourceLocation ENTITIES_SHEEPUFF_BLACK = register("entities/sheepuff/black");
+
+
     // Stripping
     public static final ResourceLocation STRIP_MOSSY_WISPROOT = register("stripping/strip_mossy_wisproot");
     public static final ResourceLocation STRIP_AMBEROOT = register("stripping/strip_amberoot");

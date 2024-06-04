@@ -97,6 +97,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Spawn Eggs
         this.eggItem(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.KIRRID_SPAWN_EGG.get());

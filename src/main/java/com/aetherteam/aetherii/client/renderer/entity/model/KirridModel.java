@@ -1,9 +1,9 @@
-package com.aetherteam.aetherii.client.renderer.model;// Made with Blockbench 4.10.2
+package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockbench 4.10.2
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
 
-import com.aetherteam.aetherii.client.renderer.model.animation.KirridAnimations;
+import com.aetherteam.aetherii.client.renderer.entity.animation.KirridAnimations;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;

@@ -28,6 +28,7 @@
     [
       "aether_ii:ore_scatterglass",
       "aether_ii:ore_agiosite",
+      "aether_ii:ore_icestone_small",
       "aether_ii:ore_ambrosium",
       "aether_ii:ore_zanite",
       "aether_ii:ore_arkenium",
@@ -83,6 +84,12 @@
         "maxCount": 2,
         "minCount": 1,
         "weight": 10
+      },
+      {
+        "type": "aether_ii:sheepuff",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
       },
       {
         "type": "aether_ii:flying_cow",

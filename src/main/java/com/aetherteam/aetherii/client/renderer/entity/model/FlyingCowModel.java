@@ -1,10 +1,10 @@
-package com.aetherteam.aetherii.client.renderer.model;// Made with Blockbench 4.10.0
+package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockbench 4.10.0
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
 
-import com.aetherteam.aetherii.client.renderer.model.animation.FlyingCowAnimation;
-import com.aetherteam.aetherii.client.renderer.model.animation.WingAnimation;
+import com.aetherteam.aetherii.client.renderer.entity.animation.FlyingCowAnimation;
+import com.aetherteam.aetherii.client.renderer.entity.animation.WingAnimation;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HierarchicalModel;
