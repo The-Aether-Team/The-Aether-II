@@ -97,7 +97,7 @@ public class Aerbunny extends AetherTamableAnimal {
         this.getEntityData().define(DATA_PUFFINESS_ID, 0);
         this.getEntityData().define(DATA_AFRAID_TIME_ID, 0);
         this.getEntityData().define(DATA_FAST_FALLING_ID, false);
-        this.getEntityData().define(DATA_COLLAR_COLOR, 0);
+        this.getEntityData().define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
     }
 
     /**
@@ -515,6 +515,7 @@ public class Aerbunny extends AetherTamableAnimal {
             if (uuid != null) {
                 aerbunny.setOwnerUUID(uuid);
                 aerbunny.setTame(true);
+                aerbunny.setOrderedToSit(true);
             }
         }
 
