@@ -252,6 +252,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATBOA_LEAVES.get(),
                 AetherIIBlocks.AMBEROOT_LEAVES.get()
         );
+        this.tag(BlockTags.SMALL_FLOWERS).add(
+                AetherIIBlocks.HESPEROSE.get(),
+                AetherIIBlocks.TARABLOOM.get()
+        );
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(BlockTags.FLOWER_POTS).add(
                 AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(),
@@ -264,10 +268,14 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_HIGHLANDS_BUSH.get(),
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(),
-                AetherIIBlocks.POTTED_ORANGE_TREE.get()
+                AetherIIBlocks.POTTED_ORANGE_TREE.get(),
+                AetherIIBlocks.POTTED_HESPEROSE.get(),
+                AetherIIBlocks.POTTED_TARABLOOM.get()
         );
         this.tag(BlockTags.ENDERMAN_HOLDABLE).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
-                AetherIIBlocks.QUICKSOIL.get()
+                AetherIIBlocks.QUICKSOIL.get(),
+                AetherIIBlocks.HESPEROSE.get(),
+                AetherIIBlocks.TARABLOOM.get()
         );
         this.tag(BlockTags.ICE).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),
