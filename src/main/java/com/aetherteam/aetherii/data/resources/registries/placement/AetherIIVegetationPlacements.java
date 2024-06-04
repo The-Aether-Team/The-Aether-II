@@ -19,6 +19,9 @@ public class AetherIIVegetationPlacements {
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = AetherIIPlacementUtils.createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = AetherIIPlacementUtils.createKey("orange_tree_patch");
 
+    public static final ResourceKey<PlacedFeature> HESPEROSE_PATCH = AetherIIPlacementUtils.createKey("hesperose_patch");
+    public static final ResourceKey<PlacedFeature> TARABLOOM_PATCH = AetherIIPlacementUtils.createKey("tarabloom_patch");
+
     public static final ResourceKey<PlacedFeature> FLOURISHING_FIELD_TREES = AetherIIPlacementUtils.createKey("flourishing_field_trees");
     public static final ResourceKey<PlacedFeature> VERDANT_WOODS_TREES = AetherIIPlacementUtils.createKey("verdant_woods_trees");
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = AetherIIPlacementUtils.createKey("violet_highwoods_trees");
@@ -41,6 +44,15 @@ public class AetherIIVegetationPlacements {
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, LONG_GRASS_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.LONG_GRASS_PATCH),
                 NoiseThresholdCountPlacement.of(-0.8, 5, 10),
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
+                BiomeFilter.biome());
+
+        AetherIIPlacementUtils.register(context, HESPEROSE_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.HESPEROSE_PATCH),
+                RarityFilter.onAverageOnceEvery(8),
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
+                BiomeFilter.biome());
+        AetherIIPlacementUtils.register(context, TARABLOOM_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TARABLOOM_PATCH),
+                RarityFilter.onAverageOnceEvery(8),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BiomeFilter.biome());
 

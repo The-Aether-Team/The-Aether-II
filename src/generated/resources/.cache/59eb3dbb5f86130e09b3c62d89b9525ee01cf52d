@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-03T16:12:26.4277022	Loot Tables
+// 1.20.4	2024-06-04T13:47:09.9246272	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -84,6 +84,7 @@ d9105bec7145c2ec377367e00a7af6f7711aa0b8 data/aether_ii/loot_tables/blocks/great
 1a4bc805c74862e8a2c0390d1bf424317523b569 data/aether_ii/loot_tables/blocks/greatroot_trapdoor.json
 ee2721e8e5e7885fb63442e3079091d3cddb3e17 data/aether_ii/loot_tables/blocks/greatroot_wood.json
 cef34749bb6448dd1154aa7ff226f1111e2d8f30 data/aether_ii/loot_tables/blocks/green_aercloud.json
+1eb2a786ec72459ff87b9b4815e446259352c8c3 data/aether_ii/loot_tables/blocks/hesperose.json
 7b34471dff4b86223481ff089e9d9f6c7ac21add data/aether_ii/loot_tables/blocks/highlands_bush.json
 ad537436c978b07f8ff457e16f0cdb4c00e72d31 data/aether_ii/loot_tables/blocks/holystone.json
 8b2f04384b211c13d58b191cc9681418bdb254e4 data/aether_ii/loot_tables/blocks/holystone_base_bricks.json
@@ -127,9 +128,11 @@ b1185d061605abf2afc48ec5ef4a2e13349d21be data/aether_ii/loot_tables/blocks/potte
 cba1efbca0df296a1db5b5154a427cd91b964c84 data/aether_ii/loot_tables/blocks/potted_greatboa_sapling.json
 d4b235e55749664b9022df3a172f7c546d676040 data/aether_ii/loot_tables/blocks/potted_greatoak_sapling.json
 52d4eccc7e68ab70e56635e3f3e8348391bf1bdc data/aether_ii/loot_tables/blocks/potted_greatroot_sapling.json
+54a727bd268cf7c8c50eadbd8f4922c0bfe0fd64 data/aether_ii/loot_tables/blocks/potted_hesperose.json
 96e6f7047831443a2f1a7d06d8c9b0b213c1590e data/aether_ii/loot_tables/blocks/potted_highlands_bush.json
 334746e75d6022d6a207a439d86506451fa0e0e3 data/aether_ii/loot_tables/blocks/potted_orange_tree.json
 9f7c437955181ab7b0b4adf8ed029ce19a00707b data/aether_ii/loot_tables/blocks/potted_skyroot_sapling.json
+e965ede87f15796063483bc38b3a848acfbe8cc5 data/aether_ii/loot_tables/blocks/potted_tarabloom.json
 9f909801e7fad94319bd5b2eab68a7a84470385f data/aether_ii/loot_tables/blocks/potted_wisproot_sapling.json
 3e21b1742a0087cf6d64f0cd8166b52ab71fc4e0 data/aether_ii/loot_tables/blocks/potted_wisptop_sapling.json
 dc817b0fe49cc7a1618d148a24f9e2d5451ae529 data/aether_ii/loot_tables/blocks/purple_aercloud.json
@@ -176,6 +179,7 @@ e3b0acc3ce29dcaf1878ee301a7fed5c2ec19f4f data/aether_ii/loot_tables/blocks/skyro
 e021674a654ec1b3ff3b67e31572fe22aabd956e data/aether_ii/loot_tables/blocks/storm_aercloud.json
 4a5632bdd977fd8246d80167d2682845e8dedd19 data/aether_ii/loot_tables/blocks/stripped_skyroot_log.json
 e5e0ba733b93d85683663de54ff58f60cadf55f0 data/aether_ii/loot_tables/blocks/stripped_skyroot_wood.json
+d4dad081b8c9116fdfc629e167f826b87add5a8d data/aether_ii/loot_tables/blocks/tarabloom.json
 affaaaa736e64e95322f25d01dc9885fbb07a51c data/aether_ii/loot_tables/blocks/undershale.json
 3fd23bf37b42323acff84e67449caf354d79dddb data/aether_ii/loot_tables/blocks/undershale_slab.json
 b876f0a4d6dd4f317878e733ac18a0436a79aade data/aether_ii/loot_tables/blocks/undershale_stairs.json
