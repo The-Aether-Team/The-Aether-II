@@ -471,7 +471,7 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public float getMyRidingOffset(Entity entity) {
-        return 0.125F;
+        return 0.0F;
     }
 
     /**
