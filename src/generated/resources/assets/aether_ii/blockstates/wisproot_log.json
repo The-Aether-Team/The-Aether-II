@@ -1,26 +1,14 @@
 {
   "variants": {
-    "axis=x,mossy=false": {
+    "axis=x": {
       "model": "aether_ii:block/wisproot_log_horizontal",
       "x": 90,
       "y": 90
     },
-    "axis=x,mossy=true": {
-      "model": "aether_ii:block/wisproot_log_horizontal",
-      "x": 90,
-      "y": 90
-    },
-    "axis=y,mossy=false": {
+    "axis=y": {
       "model": "aether_ii:block/wisproot_log"
     },
-    "axis=y,mossy=true": {
-      "model": "aether_ii:block/wisproot_log_mossy"
-    },
-    "axis=z,mossy=false": {
-      "model": "aether_ii:block/wisproot_log_horizontal",
-      "x": 90
-    },
-    "axis=z,mossy=true": {
+    "axis=z": {
       "model": "aether_ii:block/wisproot_log_horizontal",
       "x": 90
     }

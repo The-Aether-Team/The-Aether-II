@@ -35,21 +35,6 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
         return createNoiseRouter(function, noise, getFunction(function, AetherIIDensityFunctions.FINAL_DENSITY));
     }
 
-    public static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> function) {
-        DensityFunction density = getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE);
-        density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
-        density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
-        density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.TOP_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.21));
-        density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
-        density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.21));
-        density = DensityFunctions.blendDensity(density);
-        density = DensityFunctions.interpolated(density);
-        density = density.squeeze();
-        return density;
-    }
-
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> function, HolderGetter<NormalNoise.NoiseParameters> noise, DensityFunction finalDensity) {
         DensityFunction shiftX = getFunction(function, SHIFT_X);
         DensityFunction shiftZ = getFunction(function, SHIFT_Z);

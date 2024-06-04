@@ -1,10 +1,8 @@
 package com.aetherteam.aetherii.data.resources.registries.features;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.WisprootLogBlock;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
 import com.aetherteam.aetherii.world.tree.foliage.*;
-import com.aetherteam.aetherii.world.tree.trunk.AmberootTrunkPlacer;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -30,6 +28,7 @@ public class AetherIITreeFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATOAK = AetherIIFeatureUtils.registerKey("greatoak");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA = AetherIIFeatureUtils.registerKey("greatboa");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = AetherIIFeatureUtils.registerKey("amberoot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SINGULAR_AMBEROOT = AetherIIFeatureUtils.registerKey("singular_amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_AMBEROOT = AetherIIFeatureUtils.registerKey("large_amberoot");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -55,7 +54,7 @@ public class AetherIITreeFeatures {
                         new StraightTrunkPlacer(11, 4, 0), BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LEAVES.get().defaultBlockState()),
                         new WisprootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
-                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.WISPROOT_LOG.get().defaultBlockState().setValue(WisprootLogBlock.MOSSY, true)))).build());
+                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
 
         AetherIIFeatureUtils.register(context, WISPTOP, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -63,7 +62,7 @@ public class AetherIITreeFeatures {
                         new StraightTrunkPlacer(13, 6, 0), BlockStateProvider.simple(AetherIIBlocks.WISPTOP_LEAVES.get().defaultBlockState()),
                         new WisptopFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
-                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.WISPROOT_LOG.get().defaultBlockState().setValue(WisprootLogBlock.MOSSY, true)))).build());
+                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
 
         AetherIIFeatureUtils.register(context, GREATROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
@@ -89,19 +88,27 @@ public class AetherIITreeFeatures {
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
 
-        AetherIIFeatureUtils.register(context, LARGE_AMBEROOT, Feature.TREE,
-                new TreeConfiguration.TreeConfigurationBuilder(
-                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
-                        new AmberootTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
-                        new AmberootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
-                        new TwoLayersFeatureSize(0, 0, 0))
-                        .ignoreVines().build());
-
         AetherIIFeatureUtils.register(context, AMBEROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
                         new StraightTrunkPlacer(5, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
-                        new SmallAmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new AmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, SINGULAR_AMBEROOT, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new StraightTrunkPlacer(6, 4, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
+                        new SingularAmberootFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, LARGE_AMBEROOT, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState(), 3).add(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState(), 2).build()),
+                        new StraightTrunkPlacer(8, 5, 0), BlockStateProvider.simple(AetherIIBlocks.AMBEROOT_LEAVES.get().defaultBlockState()),
+                        new LargeAmberootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());
     }

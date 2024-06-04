@@ -3,8 +3,8 @@
   "placement": [
     {
       "type": "minecraft:noise_threshold_count",
-      "above_noise": 10,
-      "below_noise": 5,
+      "above_noise": 2,
+      "below_noise": 1,
       "noise_level": -0.8
     },
     {
@@ -21,6 +21,11 @@
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:matching_block_tag",
+        "offset": [
+          0,
+          -1,
+          0
+        ],
         "tag": "aether_ii:aether_dirt"
       }
     },

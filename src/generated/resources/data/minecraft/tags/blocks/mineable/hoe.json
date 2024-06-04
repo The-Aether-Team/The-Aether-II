@@ -6,6 +6,16 @@
     "aether_ii:green_aercloud",
     "aether_ii:purple_aercloud",
     "aether_ii:storm_aercloud",
+    "aether_ii:skyroot_leaf_pile",
+    "aether_ii:skyplane_leaf_pile",
+    "aether_ii:skybirch_leaf_pile",
+    "aether_ii:skypine_leaf_pile",
+    "aether_ii:wisproot_leaf_pile",
+    "aether_ii:wisptop_leaf_pile",
+    "aether_ii:greatroot_leaf_pile",
+    "aether_ii:greatoak_leaf_pile",
+    "aether_ii:greatboa_leaf_pile",
+    "aether_ii:amberoot_leaf_pile",
     "aether_ii:skyroot_leaves",
     "aether_ii:skyplane_leaves",
     "aether_ii:skybirch_leaves",
@@ -16,6 +26,8 @@
     "aether_ii:greatoak_leaves",
     "aether_ii:greatboa_leaves",
     "aether_ii:amberoot_leaves",
-    "aether_ii:woven_skyroot_sticks"
+    "aether_ii:woven_skyroot_sticks",
+    "aether_ii:highlands_bush",
+    "aether_ii:blueberry_bush"
   ]
 }

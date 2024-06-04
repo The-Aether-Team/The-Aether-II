@@ -9,38 +9,34 @@ import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.event.listeners.EffectsSystemListeners;
+import com.aetherteam.aetherii.data.ReloadListeners;
+import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
-
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
-import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
-import com.aetherteam.aetherii.event.listeners.AerbunnyMountListener;
-import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
-import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
+import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
+import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
+import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
-import com.aetherteam.aetherii.world.tree.trunk.AetherIITrunkPlacerTypes;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
@@ -62,8 +58,8 @@ public class AetherII {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public AetherII(IEventBus bus, Dist dist) {
-        bus.addListener(AetherII::commonSetup);
         bus.addListener(AetherIIData::dataSetup);
+        bus.addListener(this::commonSetup);
         bus.addListener(this::registerPackets);
 
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, DamageInfliction.CODEC, DamageInfliction.CODEC));
@@ -74,20 +70,22 @@ public class AetherII {
                 AetherIIItems.ITEMS,
                 AetherIIEntityTypes.ENTITY_TYPES,
                 AetherIIBlockEntityTypes.BLOCK_ENTITY_TYPES,
+                AetherIIAttributes.ATTRIBUTES,
+                AetherIIMemoryModuleTypes.MEMORY_MODULE_TYPES,
                 AetherIIEffects.EFFECTS,
+                AetherIIDataAttachments.ATTACHMENTS,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
-                AetherIIFeatures.FEATURES,
-                AetherIITreeDecoratorTypes.TREE_DECORATORS,
-                AetherIITrunkPlacerTypes.TRUNK_PLACERS,
-                AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
-                AetherIIStructureTypes.STRUCTURE_TYPES,
+                AetherIIMenuTypes.MENU_TYPES,
                 AetherIIParticleTypes.PARTICLES,
                 AetherIISoundEvents.SOUNDS,
-                AetherIIAttributes.ATTRIBUTES,
-                AetherIIMenuTypes.MENU_TYPES,
-                AetherIIMemoryModuleTypes.MEMORY_MODULE_TYPES,
+                AetherIIRecipeTypes.RECIPE_TYPES,
+                AetherIIRecipeSerializers.RECIPE_SERIALIZERS,
+                AetherIIGameEvents.GAME_EVENTS,
                 AetherIIPoi.POI,
-                AetherIIDataAttachments.ATTACHMENTS,
+                AetherIIFeatures.FEATURES,
+                AetherIITreeDecoratorTypes.TREE_DECORATORS,
+                AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
+                AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES
         };
 
@@ -95,7 +93,9 @@ public class AetherII {
             register.register(bus);
         }
 
-        AetherII.eventSetup(bus);
+        this.eventSetup(bus);
+
+        AetherIIBlocks.registerWoodTypes(); // Registered this early to avoid bugs with WoodTypes and signs.
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, AetherIIConfig.SERVER_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AetherIIConfig.COMMON_SPEC);
@@ -105,25 +105,28 @@ public class AetherII {
         }
     }
 
-    public static void commonSetup(FMLCommonSetupEvent event) {
+    public void commonSetup(FMLCommonSetupEvent event) {
+        Reflection.initialize(AetherIIMobCategory.class);
+
         event.enqueueWork(() -> {
-            Reflection.initialize(AetherIIMobCategory.class);
             AetherIIBlocks.registerPots();
+            AetherIIBlocks.registerFlammability();
         });
     }
 
-    public static void eventSetup(IEventBus neoBus) {
+    public void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
         EffectsSystemListeners.listen(bus);
         DamageSystemListener.listen(bus);
-        PortalTeleportationListener.listen(bus);
-        ToolAbilityListener.listen(bus);
         ToolModificationListener.listen(bus);
         ToolAbilityListener.listen(bus);
         PortalTeleportationListener.listen(bus);
         AerbunnyMountListener.listen(bus);
         WorldInteractionListener.listen(bus);
+        RecipeListener.listen(bus);
+
+        bus.addListener(ReloadListeners::reloadListenerSetup);
 
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);

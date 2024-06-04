@@ -1,0 +1,10 @@
+{
+  "type": "aether_ii:icestone_freezable",
+  "biome": "#aether_ii:arctic_ice_freezing",
+  "ingredient": {
+    "block": "minecraft:water"
+  },
+  "result": {
+    "block": "aether_ii:arctic_ice"
+  }
+}
