@@ -31,9 +31,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
         this.copy(AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Items.GREATROOT_LOGS);
         this.copy(AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Items.AMBEROOT_LOGS);
-        this.copy(AetherIITags.Blocks.SKYROOT_MASONRY_BLOCKS, AetherIITags.Items.SKYROOT_MASONRY_BLOCKS);
-        this.copy(AetherIITags.Blocks.GREATROOT_MASONRY_BLOCKS, AetherIITags.Items.GREATROOT_MASONRY_BLOCKS);
-        this.copy(AetherIITags.Blocks.WISPROOT_MASONRY_BLOCKS, AetherIITags.Items.WISPROOT_MASONRY_BLOCKS);
+        this.copy(AetherIITags.Blocks.SKYROOT_ARTISANRY_BLOCKS, AetherIITags.Items.SKYROOT_ARTISANRY_BLOCKS);
+        this.copy(AetherIITags.Blocks.GREATROOT_ARTISANRY_BLOCKS, AetherIITags.Items.GREATROOT_ARTISANRY_BLOCKS);
+        this.copy(AetherIITags.Blocks.WISPROOT_ARTISANRY_BLOCKS, AetherIITags.Items.WISPROOT_ARTISANRY_BLOCKS);
+        this.copy(AetherIITags.Blocks.HOLYSTONE_ARTISANRY_BLOCKS, AetherIITags.Items.HOLYSTONE_ARTISANRY_BLOCKS);
+        this.copy(AetherIITags.Blocks.AGIOSITE_ARTISANRY_BLOCKS, AetherIITags.Items.AGIOSITE_ARTISANRY_BLOCKS);
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATE.get());

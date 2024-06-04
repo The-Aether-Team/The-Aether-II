@@ -22,9 +22,12 @@ public class AetherIIVegetationPlacements {
     public static final ResourceKey<PlacedFeature> FLOURISHING_FIELD_TREES = AetherIIPlacementUtils.createKey("flourishing_field_trees");
     public static final ResourceKey<PlacedFeature> VERDANT_WOODS_TREES = AetherIIPlacementUtils.createKey("verdant_woods_trees");
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = AetherIIPlacementUtils.createKey("violet_highwoods_trees");
+    public static final ResourceKey<PlacedFeature> CONTAMINATED_JUNGLE_TREES = AetherIIPlacementUtils.createKey("contaminated_jungle_trees");
+    public static final ResourceKey<PlacedFeature> BATTLEGROUND_WASTES_TREES = AetherIIPlacementUtils.createKey("battleground_wastes_trees");
 
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = AetherIIPlacementUtils.createKey("aether_grass_bonemeal");
 
+    @SuppressWarnings("deprecation")
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
@@ -56,12 +59,14 @@ public class AetherIIVegetationPlacements {
 
         AetherIIPlacementUtils.register(context, FLOURISHING_FIELD_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_FLOURISHING_FIELD),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2)));
-
         AetherIIPlacementUtils.register(context, VERDANT_WOODS_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_VERDANT_WOODS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(16, 0.1F, 1)));
-
         AetherIIPlacementUtils.register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_VIOLET_HIGHWOODS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+        AetherIIPlacementUtils.register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_FOREST),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+        AetherIIPlacementUtils.register(context, BATTLEGROUND_WASTES_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT),
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
 
         AetherIIPlacementUtils.register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
     }

@@ -50,6 +50,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_SLAB.get());
                 output.accept(AetherIIBlocks.GREATROOT_FENCE.get());
                 output.accept(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.GREATROOT_DOOR.get());
+                output.accept(AetherIIBlocks.GREATROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.GREATROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
@@ -69,6 +71,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_SLAB.get());
                 output.accept(AetherIIBlocks.WISPROOT_FENCE.get());
                 output.accept(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
+                output.accept(AetherIIBlocks.WISPROOT_DOOR.get());
+                output.accept(AetherIIBlocks.WISPROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.WISPROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
@@ -100,6 +104,14 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_BASE_PILLAR.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_PILLAR.get());
                 output.accept(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get());
                 output.accept(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get());
@@ -116,6 +128,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
                 output.accept(AetherIIBlocks.AGIOSITE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
+                output.accept(AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+                output.accept(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get());
+                output.accept(AetherIIBlocks.AGIOSITE_CAPSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.AGIOSITE_BASE_PILLAR.get());
+                output.accept(AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.AGIOSITE_PILLAR.get());
                 output.accept(AetherIIBlocks.ICESTONE.get());
                 output.accept(AetherIIBlocks.ICESTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.ICESTONE_SLAB.get());
@@ -226,13 +245,13 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "natural_blocks"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "equipment_and_utilities"))
-            .icon(() -> new ItemStack(AetherIIBlocks.MASONRY_BENCH.get()))
+            .icon(() -> new ItemStack(AetherIIBlocks.ARTISANRY_BENCH.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".functional_blocks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-                output.accept(AetherIIBlocks.MASONRY_BENCH.get());
+                output.accept(AetherIIBlocks.ARTISANRY_BENCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
