@@ -1,8 +1,0 @@
-{
-  "type": "aether_ii:masonry",
-  "count": 1,
-  "ingredient": {
-    "item": "aether_ii:greatroot_planks"
-  },
-  "result": "aether_ii:greatroot_shingles"
-}

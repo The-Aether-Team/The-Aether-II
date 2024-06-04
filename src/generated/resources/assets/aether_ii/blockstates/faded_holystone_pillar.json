@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "aether_ii:block/faded_holystone_pillar_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "aether_ii:block/faded_holystone_pillar"
+    },
+    "axis=z": {
+      "model": "aether_ii:block/faded_holystone_pillar_horizontal",
+      "x": 90
+    }
+  }
+}

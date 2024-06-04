@@ -155,7 +155,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_BUTTON, "Skyroot Button");
         this.addBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE, "Skyroot Pressure Plate");
 
-        // Skyroot Masonry Blocks
+        // Skyroot Artisanry Blocks
         this.addBlock(AetherIIBlocks.SKYROOT_FLOORBOARDS, "Skyroot Floorboards");
         this.addBlock(AetherIIBlocks.SKYROOT_HIGHLIGHT, "Skyroot Highlight");
         this.addBlock(AetherIIBlocks.SKYROOT_SHINGLES, "Skyroot Shingles");
@@ -177,7 +177,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATROOT_BUTTON, "Greatroot Button");
         this.addBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE, "Greatroot Pressure Plate");
 
-        // Greatroot Masonry Blocks
+        // Greatroot Artisanry Blocks
         this.addBlock(AetherIIBlocks.GREATROOT_FLOORBOARDS, "Greatroot Floorboards");
         this.addBlock(AetherIIBlocks.GREATROOT_HIGHLIGHT, "Greatroot Highlight");
         this.addBlock(AetherIIBlocks.GREATROOT_SHINGLES, "Greatroot Shingles");
@@ -199,7 +199,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_BUTTON, "Wisproot Button");
         this.addBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE, "Wisproot Pressure Plate");
 
-        // Wisproot Masonry Blocks
+        // Wisproot Artisanry Blocks
         this.addBlock(AetherIIBlocks.WISPROOT_FLOORBOARDS, "Wisproot Floorboards");
         this.addBlock(AetherIIBlocks.WISPROOT_HIGHLIGHT, "Wisproot Highlight");
         this.addBlock(AetherIIBlocks.WISPROOT_SHINGLES, "Wisproot Shingles");
@@ -233,7 +233,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB, "Holystone Brick Slab");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL, "Holystone Brick Wall");
 
-        // Holystone Masonry Blocks
+        // Holystone Artisanry Blocks
         this.addBlock(AetherIIBlocks.HOLYSTONE_FLAGSTONES, "Holystone Flagstones");
         this.addBlock(AetherIIBlocks.HOLYSTONE_HEADSTONE, "Holystone Headstone");
         this.addBlock(AetherIIBlocks.HOLYSTONE_KEYSTONE, "Holystone Keystone");
@@ -248,6 +248,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS, "Faded Holystone Brick Stairs");
         this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB, "Faded Holystone Brick Slab");
         this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL, "Faded Holystone Brick Wall");
+
+        // Faded Holystone Artisanry Blocks
+        this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES, "Faded Holystone Flagstones");
+        this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE, "Faded Holystone Headstone");
+        this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE, "Faded Holystone Keystone");
+        this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_BASE_BRICKS, "Faded Holystone Base Bricks");
+        this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_BRICKS, "Faded Holystone Capstone Bricks");
+        this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR, "Faded Holystone Base Pillar");
+        this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR, "Faded Holystone Capstone Pillar");
+        this.addBlock(AetherIIBlocks.FADED_HOLYSTONE_PILLAR, "Faded Holystone Pillar");
 
         // Undershale
         this.addBlock(AetherIIBlocks.UNDERSHALE_STAIRS, "Undershale Stairs");
@@ -265,7 +275,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB, "Agiosite Brick Slab");
         this.addBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL, "Agiosite Brick Wall");
 
-        // Agiosite Masonry Blocks
+        // Agiosite Artisanry Blocks
         this.addBlock(AetherIIBlocks.AGIOSITE_FLAGSTONES, "Agiosite Flagstones");
         this.addBlock(AetherIIBlocks.AGIOSITE_KEYSTONE, "Agiosite Keystone");
         this.addBlock(AetherIIBlocks.AGIOSITE_BASE_BRICKS, "Agiosite Base Bricks");
@@ -299,7 +309,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addBlock(AetherIIBlocks.MASONRY_BENCH, "Masonry Bench");
+        this.addBlock(AetherIIBlocks.ARTISANRY_BENCH, "Artisanry Bench");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
 
@@ -465,7 +475,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addContainerType(AetherIIMenuTypes.MASONRY_BENCH, "Masonry Bench");
+        this.addContainerType(AetherIIMenuTypes.ARTISANRY_BENCH, "Artisanry Bench");
 
 
         // Subtitles
