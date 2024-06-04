@@ -3,6 +3,7 @@
   "render_type": "minecraft:cutout_mipped",
   "textures": {
     "bench": "aether_ii:block/utility/artisanry_bench",
-    "particle": "aether_ii:block/construction/holystone_bricks"
+    "particle": "aether_ii:block/construction/holystone_bricks",
+    "saw": "aether_ii:block/utility/artisanry_bench_saw"
   }
 }

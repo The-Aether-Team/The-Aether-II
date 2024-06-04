@@ -121,6 +121,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.HOLYSTONE_PILLAR.get()
         );
+        this.tag(AetherIITags.Blocks.FADED_HOLYSTONE_ARTISANRY_BLOCKS).add(
+                AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BASE_BRICKS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get()
+        );
         this.tag(AetherIITags.Blocks.AGIOSITE_ARTISANRY_BLOCKS).add(
                 AetherIIBlocks.AGIOSITE_FLAGSTONES.get(),
                 AetherIIBlocks.AGIOSITE_KEYSTONE.get(),

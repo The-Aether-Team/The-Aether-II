@@ -35,6 +35,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.copy(AetherIITags.Blocks.GREATROOT_ARTISANRY_BLOCKS, AetherIITags.Items.GREATROOT_ARTISANRY_BLOCKS);
         this.copy(AetherIITags.Blocks.WISPROOT_ARTISANRY_BLOCKS, AetherIITags.Items.WISPROOT_ARTISANRY_BLOCKS);
         this.copy(AetherIITags.Blocks.HOLYSTONE_ARTISANRY_BLOCKS, AetherIITags.Items.HOLYSTONE_ARTISANRY_BLOCKS);
+        this.copy(AetherIITags.Blocks.FADED_HOLYSTONE_ARTISANRY_BLOCKS, AetherIITags.Items.FADED_HOLYSTONE_ARTISANRY_BLOCKS);
         this.copy(AetherIITags.Blocks.AGIOSITE_ARTISANRY_BLOCKS, AetherIITags.Items.AGIOSITE_ARTISANRY_BLOCKS);
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());

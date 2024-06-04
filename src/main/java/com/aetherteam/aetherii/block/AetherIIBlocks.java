@@ -283,6 +283,16 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SlabBlock> FADED_HOLYSTONE_BRICK_SLAB = register("faded_holystone_brick_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get()).strength(2.0F, 6.0F)));
     public static final DeferredBlock<WallBlock> FADED_HOLYSTONE_BRICK_WALL = register("faded_holystone_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get()).forceSolidOn()));
 
+    // Faded Holystone Artisanry Blocks
+    public static final DeferredBlock<Block> FADED_HOLYSTONE_FLAGSTONES = register("faded_holystone_flagstones", () -> new Block(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> FADED_HOLYSTONE_HEADSTONE = register("faded_holystone_headstone", () -> new Block(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> FADED_HOLYSTONE_KEYSTONE = register("faded_holystone_keystone", () -> new Block(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> FADED_HOLYSTONE_BASE_BRICKS = register("faded_holystone_base_bricks", () -> new Block(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> FADED_HOLYSTONE_CAPSTONE_BRICKS = register("faded_holystone_capstone_bricks", () -> new Block(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> FADED_HOLYSTONE_BASE_PILLAR = register("faded_holystone_base_pillar", () -> new Block(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> FADED_HOLYSTONE_CAPSTONE_PILLAR = register("faded_holystone_capstone_pillar", () -> new Block(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get())));
+    public static final DeferredBlock<RotatedPillarBlock> FADED_HOLYSTONE_PILLAR = register("faded_holystone_pillar", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get())));
+
     // Undershale
     public static final DeferredBlock<StairBlock> UNDERSHALE_STAIRS = register("undershale_stairs", () -> new StairBlock(() -> UNDERSHALE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get())));
     public static final DeferredBlock<SlabBlock> UNDERSHALE_SLAB = register("undershale_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get())));

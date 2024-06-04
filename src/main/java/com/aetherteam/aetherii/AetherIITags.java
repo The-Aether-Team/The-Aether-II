@@ -25,6 +25,7 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_ARTISANRY_BLOCKS = tag("greatroot_artisanry_blocks");
         public static final TagKey<Block> WISPROOT_ARTISANRY_BLOCKS = tag("wisproot_artisanry_blocks");
         public static final TagKey<Block> HOLYSTONE_ARTISANRY_BLOCKS = tag("holystone_artisanry_blocks");
+        public static final TagKey<Block> FADED_HOLYSTONE_ARTISANRY_BLOCKS = tag("faded_holystone_artisanry_blocks");
         public static final TagKey<Block> AGIOSITE_ARTISANRY_BLOCKS = tag("agiosite_artisanry_blocks");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
@@ -47,6 +48,7 @@ public class AetherIITags {
         public static final TagKey<Item> GREATROOT_ARTISANRY_BLOCKS = tag("greatroot_artisanry_blocks");
         public static final TagKey<Item> WISPROOT_ARTISANRY_BLOCKS = tag("wisproot_artisanry_blocks");
         public static final TagKey<Item> HOLYSTONE_ARTISANRY_BLOCKS = tag("holystone_artisanry_blocks");
+        public static final TagKey<Item> FADED_HOLYSTONE_ARTISANRY_BLOCKS = tag("faded_holystone_artisanry_blocks");
         public static final TagKey<Item> AGIOSITE_ARTISANRY_BLOCKS = tag("agiosite_artisanry_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
