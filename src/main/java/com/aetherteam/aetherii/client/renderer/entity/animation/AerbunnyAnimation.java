@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.model.animation;
+package com.aetherteam.aetherii.client.renderer.entity.animation;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;

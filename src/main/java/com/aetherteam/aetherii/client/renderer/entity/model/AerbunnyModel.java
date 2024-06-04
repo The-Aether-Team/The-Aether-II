@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.model.animation.AerbunnyAnimation;
+import com.aetherteam.aetherii.client.renderer.entity.animation.AerbunnyAnimation;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
