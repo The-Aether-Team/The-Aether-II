@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "bricks_from_artisanry",
+  "ingredients": [
+    {
+      "tag": "aether_ii:holystone_artisanry_blocks"
+    }
+  ],
+  "result": {
+    "item": "aether_ii:holystone_bricks"
+  }
+}

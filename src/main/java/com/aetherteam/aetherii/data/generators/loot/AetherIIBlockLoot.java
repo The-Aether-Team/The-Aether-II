@@ -173,7 +173,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
 
-        // Skyroot Masonry Blocks
+        // Skyroot Artisanry Blocks
         this.dropSelf(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_SHINGLES.get());
@@ -195,7 +195,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GREATROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
 
-        // Greatroot Masonry Blocks
+        // Greatroot Artisanry Blocks
         this.dropSelf(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_SHINGLES.get());
@@ -217,7 +217,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
 
-        // Wisproot Masonry Blocks
+        // Wisproot Artisanry Blocks
         this.dropSelf(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_SHINGLES.get());
@@ -251,7 +251,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
 
-        // Holystone Masonry Blocks
+        // Holystone Artisanry Blocks
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
@@ -266,6 +266,16 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get());
         this.add(AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get());
+
+        // Faded Holystone Artisanry Blocks
+        this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES.get());
+        this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get());
+        this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
+        this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_BASE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get());
 
         // Undershale
         this.dropSelf(AetherIIBlocks.UNDERSHALE_STAIRS.get());
@@ -283,7 +293,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.AGIOSITE_BRICK_WALL.get());
 
-        // Agiosite Masonry Blocks
+        // Agiosite Artisanry Blocks
         this.dropSelf(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE_KEYSTONE.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get());
@@ -318,7 +328,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-        this.dropSelf(AetherIIBlocks.MASONRY_BENCH.get());
+        this.dropSelf(AetherIIBlocks.ARTISANRY_BENCH.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
 

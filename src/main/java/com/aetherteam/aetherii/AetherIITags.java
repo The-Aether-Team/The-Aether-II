@@ -21,11 +21,12 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
-        public static final TagKey<Block> SKYROOT_MASONRY_BLOCKS = tag("skyroot_masonry_blocks");
-        public static final TagKey<Block> GREATROOT_MASONRY_BLOCKS = tag("greatroot_masonry_blocks");
-        public static final TagKey<Block> WISPROOT_MASONRY_BLOCKS = tag("wisproot_masonry_blocks");
-        public static final TagKey<Block> HOLYSTONE_MASONRY_BLOCKS = tag("holystone_masonry_blocks");
-        public static final TagKey<Block> AGIOSITE_MASONRY_BLOCKS = tag("agiosite_masonry_blocks");
+        public static final TagKey<Block> SKYROOT_ARTISANRY_BLOCKS = tag("skyroot_artisanry_blocks");
+        public static final TagKey<Block> GREATROOT_ARTISANRY_BLOCKS = tag("greatroot_artisanry_blocks");
+        public static final TagKey<Block> WISPROOT_ARTISANRY_BLOCKS = tag("wisproot_artisanry_blocks");
+        public static final TagKey<Block> HOLYSTONE_ARTISANRY_BLOCKS = tag("holystone_artisanry_blocks");
+        public static final TagKey<Block> FADED_HOLYSTONE_ARTISANRY_BLOCKS = tag("faded_holystone_artisanry_blocks");
+        public static final TagKey<Block> AGIOSITE_ARTISANRY_BLOCKS = tag("agiosite_artisanry_blocks");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
@@ -43,11 +44,12 @@ public class AetherIITags {
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Item> AMBEROOT_LOGS = tag("amberoot_logs");
-        public static final TagKey<Item> SKYROOT_MASONRY_BLOCKS = tag("skyroot_masonry_blocks");
-        public static final TagKey<Item> GREATROOT_MASONRY_BLOCKS = tag("greatroot_masonry_blocks");
-        public static final TagKey<Item> WISPROOT_MASONRY_BLOCKS = tag("wisproot_masonry_blocks");
-        public static final TagKey<Item> HOLYSTONE_MASONRY_BLOCKS = tag("holystone_masonry_blocks");
-        public static final TagKey<Item> AGIOSITE_MASONRY_BLOCKS = tag("agiosite_masonry_blocks");
+        public static final TagKey<Item> SKYROOT_ARTISANRY_BLOCKS = tag("skyroot_artisanry_blocks");
+        public static final TagKey<Item> GREATROOT_ARTISANRY_BLOCKS = tag("greatroot_artisanry_blocks");
+        public static final TagKey<Item> WISPROOT_ARTISANRY_BLOCKS = tag("wisproot_artisanry_blocks");
+        public static final TagKey<Item> HOLYSTONE_ARTISANRY_BLOCKS = tag("holystone_artisanry_blocks");
+        public static final TagKey<Item> FADED_HOLYSTONE_ARTISANRY_BLOCKS = tag("faded_holystone_artisanry_blocks");
+        public static final TagKey<Item> AGIOSITE_ARTISANRY_BLOCKS = tag("agiosite_artisanry_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");

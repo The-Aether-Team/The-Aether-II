@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "aether_ii:block/masonry/wisproot_highlight",
-    "side": "aether_ii:block/masonry/wisproot_base_planks"
+    "end": "aether_ii:block/artisanry/wisproot_highlight",
+    "side": "aether_ii:block/artisanry/wisproot_base_planks"
   }
 }

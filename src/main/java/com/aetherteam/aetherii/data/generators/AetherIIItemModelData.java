@@ -235,7 +235,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemButton(AetherIIBlocks.SKYROOT_BUTTON.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
 
-        // Skyroot Masonry Blocks
+        // Skyroot Artisanry Blocks
         this.itemBlock(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_SHINGLES.get());
@@ -257,7 +257,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemButton(AetherIIBlocks.GREATROOT_BUTTON.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
 
-        // Greatroot Masonry Blocks
+        // Greatroot Artisanry Blocks
         this.itemBlock(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_SHINGLES.get());
@@ -279,7 +279,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemButton(AetherIIBlocks.WISPROOT_BUTTON.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
 
-        // Wisproot Masonry Blocks
+        // Wisproot Artisanry Blocks
         this.itemBlock(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_SHINGLES.get());
@@ -313,7 +313,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
 
-        // Holystone Masonry Blocks
+        // Holystone Artisanry Blocks
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
@@ -328,6 +328,16 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get());
         this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), "construction/");
+
+        // Faded Holystone Artisanry Blocks
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BASE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get());
+        this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get());
 
         // Undershale
         this.itemBlock(AetherIIBlocks.UNDERSHALE_STAIRS.get());
@@ -345,7 +355,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
 
-        // Agiosite Masonry Blocks
+        // Agiosite Artisanry Blocks
         this.itemBlock(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE_KEYSTONE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get());
@@ -379,7 +389,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.AMBROSIUM_TORCH.get(), "utility/");
         this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-        this.itemBlock(AetherIIBlocks.MASONRY_BENCH.get());
+        this.itemBlock(AetherIIBlocks.ARTISANRY_BENCH.get());
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
 

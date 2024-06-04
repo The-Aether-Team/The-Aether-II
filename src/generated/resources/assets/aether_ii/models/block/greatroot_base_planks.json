@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "aether_ii:block/masonry/greatroot_highlight",
-    "side": "aether_ii:block/masonry/greatroot_base_planks"
+    "end": "aether_ii:block/artisanry/greatroot_highlight",
+    "side": "aether_ii:block/artisanry/greatroot_base_planks"
   }
 }

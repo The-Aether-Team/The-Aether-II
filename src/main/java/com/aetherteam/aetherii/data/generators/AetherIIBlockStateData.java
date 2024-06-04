@@ -165,16 +165,16 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.buttonBlock(AetherIIBlocks.SKYROOT_BUTTON.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_PLANKS.get()), "construction/"));
         this.pressurePlateBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_PLANKS.get()), "construction/"));
 
-        // Skyroot Masonry Blocks
-        this.block(AetherIIBlocks.SKYROOT_FLOORBOARDS.get(), "masonry/");
-        this.block(AetherIIBlocks.SKYROOT_HIGHLIGHT.get(), "masonry/");
-        this.block(AetherIIBlocks.SKYROOT_SHINGLES.get(), "masonry/");
-        this.block(AetherIIBlocks.SKYROOT_SMALL_SHINGLES.get(), "masonry/");
-        this.masonryBlock(AetherIIBlocks.SKYROOT_BASE_PLANKS.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.SKYROOT_TOP_PLANKS.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.SKYROOT_BASE_BEAM.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.SKYROOT_TOP_BEAM.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
-        this.masonryPillar(AetherIIBlocks.SKYROOT_BEAM.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
+        // Skyroot Artisanry Blocks
+        this.block(AetherIIBlocks.SKYROOT_FLOORBOARDS.get(), "artisanry/");
+        this.block(AetherIIBlocks.SKYROOT_HIGHLIGHT.get(), "artisanry/");
+        this.block(AetherIIBlocks.SKYROOT_SHINGLES.get(), "artisanry/");
+        this.block(AetherIIBlocks.SKYROOT_SMALL_SHINGLES.get(), "artisanry/");
+        this.artisanryBlock(AetherIIBlocks.SKYROOT_BASE_PLANKS.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.SKYROOT_TOP_PLANKS.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.SKYROOT_BASE_BEAM.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.SKYROOT_TOP_BEAM.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
+        this.artisanryPillar(AetherIIBlocks.SKYROOT_BEAM.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
 
         // Greatroot Planks
         this.block(AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
@@ -187,16 +187,16 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.buttonBlock(AetherIIBlocks.GREATROOT_BUTTON.get(), this.texture(this.name(AetherIIBlocks.GREATROOT_PLANKS.get()), "construction/"));
         this.pressurePlateBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get(), this.texture(this.name(AetherIIBlocks.GREATROOT_PLANKS.get()), "construction/"));
 
-        // Greatroot Masonry Blocks
-        this.block(AetherIIBlocks.GREATROOT_FLOORBOARDS.get(), "masonry/");
-        this.block(AetherIIBlocks.GREATROOT_HIGHLIGHT.get(), "masonry/");
-        this.block(AetherIIBlocks.GREATROOT_SHINGLES.get(), "masonry/");
-        this.block(AetherIIBlocks.GREATROOT_SMALL_SHINGLES.get(), "masonry/");
-        this.masonryBlock(AetherIIBlocks.GREATROOT_BASE_PLANKS.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.GREATROOT_TOP_PLANKS.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.GREATROOT_BASE_BEAM.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.GREATROOT_TOP_BEAM.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
-        this.masonryPillar(AetherIIBlocks.GREATROOT_BEAM.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
+        // Greatroot Artisanry Blocks
+        this.block(AetherIIBlocks.GREATROOT_FLOORBOARDS.get(), "artisanry/");
+        this.block(AetherIIBlocks.GREATROOT_HIGHLIGHT.get(), "artisanry/");
+        this.block(AetherIIBlocks.GREATROOT_SHINGLES.get(), "artisanry/");
+        this.block(AetherIIBlocks.GREATROOT_SMALL_SHINGLES.get(), "artisanry/");
+        this.artisanryBlock(AetherIIBlocks.GREATROOT_BASE_PLANKS.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.GREATROOT_TOP_PLANKS.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.GREATROOT_BASE_BEAM.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.GREATROOT_TOP_BEAM.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
+        this.artisanryPillar(AetherIIBlocks.GREATROOT_BEAM.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
 
         // Wisproot Planks
         this.block(AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
@@ -209,16 +209,16 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.buttonBlock(AetherIIBlocks.WISPROOT_BUTTON.get(), this.texture(this.name(AetherIIBlocks.WISPROOT_PLANKS.get()), "construction/"));
         this.pressurePlateBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(), this.texture(this.name(AetherIIBlocks.WISPROOT_PLANKS.get()), "construction/"));
 
-        // Wisproot Masonry Blocks
-        this.block(AetherIIBlocks.WISPROOT_FLOORBOARDS.get(), "masonry/");
-        this.block(AetherIIBlocks.WISPROOT_HIGHLIGHT.get(), "masonry/");
-        this.block(AetherIIBlocks.WISPROOT_SHINGLES.get(), "masonry/");
-        this.block(AetherIIBlocks.WISPROOT_SMALL_SHINGLES.get(), "masonry/");
-        this.masonryBlock(AetherIIBlocks.WISPROOT_BASE_PLANKS.get(), AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.WISPROOT_TOP_PLANKS.get(),  AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.WISPROOT_BASE_BEAM.get(),  AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
-        this.masonryBlock(AetherIIBlocks.WISPROOT_TOP_BEAM.get(),  AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
-        this.masonryPillar(AetherIIBlocks.WISPROOT_BEAM.get(),  AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
+        // Wisproot Artisanry Blocks
+        this.block(AetherIIBlocks.WISPROOT_FLOORBOARDS.get(), "artisanry/");
+        this.block(AetherIIBlocks.WISPROOT_HIGHLIGHT.get(), "artisanry/");
+        this.block(AetherIIBlocks.WISPROOT_SHINGLES.get(), "artisanry/");
+        this.block(AetherIIBlocks.WISPROOT_SMALL_SHINGLES.get(), "artisanry/");
+        this.artisanryBlock(AetherIIBlocks.WISPROOT_BASE_PLANKS.get(), AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.WISPROOT_TOP_PLANKS.get(),  AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.WISPROOT_BASE_BEAM.get(),  AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
+        this.artisanryBlock(AetherIIBlocks.WISPROOT_TOP_BEAM.get(),  AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
+        this.artisanryPillar(AetherIIBlocks.WISPROOT_BEAM.get(),  AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
 
         // Holystone
         this.stairs(AetherIIBlocks.HOLYSTONE_STAIRS.get(), AetherIIBlocks.HOLYSTONE.get(), "natural/");
@@ -243,15 +243,25 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.slab(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
         this.wallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
 
-        // Holystone Masonry Blocks
-        this.block(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(), "masonry/");
-        this.block(AetherIIBlocks.HOLYSTONE_HEADSTONE.get(), "masonry/");
-        this.block(AetherIIBlocks.HOLYSTONE_KEYSTONE.get(), "masonry/");
-        this.masonryBlock(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
-        this.masonryBlock(AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
-        this.masonryBlock(AetherIIBlocks.HOLYSTONE_BASE_PILLAR.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
-        this.masonryBlock(AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
-        this.masonryPillar(AetherIIBlocks.HOLYSTONE_PILLAR.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+        // Holystone Artisanry Blocks
+        this.block(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(), "artisanry/");
+        this.block(AetherIIBlocks.HOLYSTONE_HEADSTONE.get(), "artisanry/");
+        this.block(AetherIIBlocks.HOLYSTONE_KEYSTONE.get(), "artisanry/");
+        this.artisanryBlock(AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.HOLYSTONE_BASE_PILLAR.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+        this.artisanryPillar(AetherIIBlocks.HOLYSTONE_PILLAR.get(), AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
+
+        // Faded Holystone Artisanry Blocks
+        this.block(AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES.get(), "artisanry/");
+        this.block(AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get(), "artisanry/");
+        this.block(AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get(), "artisanry/");
+        this.artisanryBlock(AetherIIBlocks.FADED_HOLYSTONE_BASE_BRICKS.get(), AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_BRICKS.get(), AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get(), AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get(), AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
+        this.artisanryPillar(AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get(), AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
 
         // Faded Holystone Bricks
         this.block(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), "construction/");
@@ -275,14 +285,14 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.slab(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
         this.wallBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
 
-        // Agiosite Masonry Blocks
-        this.block(AetherIIBlocks.AGIOSITE_FLAGSTONES.get(), "masonry/");
-        this.block(AetherIIBlocks.AGIOSITE_KEYSTONE.get(), "masonry/");
-        this.masonryBlock(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
-        this.masonryBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_BRICKS.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
-        this.masonryBlock(AetherIIBlocks.AGIOSITE_BASE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
-        this.masonryBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
-        this.masonryPillar(AetherIIBlocks.AGIOSITE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+        // Agiosite Artisanry Blocks
+        this.block(AetherIIBlocks.AGIOSITE_FLAGSTONES.get(), "artisanry/");
+        this.block(AetherIIBlocks.AGIOSITE_KEYSTONE.get(), "artisanry/");
+        this.artisanryBlock(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_BRICKS.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.AGIOSITE_BASE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+        this.artisanryBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+        this.artisanryPillar(AetherIIBlocks.AGIOSITE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
 
         // Icestone
         this.stairs(AetherIIBlocks.ICESTONE_STAIRS.get(), AetherIIBlocks.ICESTONE.get(), "natural/");
@@ -309,7 +319,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.torchBlock(AetherIIBlocks.AMBROSIUM_TORCH.get(), AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.skyrootCraftingTable(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.holystoneFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-        this.masonryBench(AetherIIBlocks.MASONRY_BENCH.get());
+        this.artisanryBench(AetherIIBlocks.ARTISANRY_BENCH.get());
         this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
 

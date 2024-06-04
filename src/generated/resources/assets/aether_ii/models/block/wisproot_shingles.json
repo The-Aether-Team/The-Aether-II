@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "aether_ii:block/masonry/wisproot_shingles"
+    "all": "aether_ii:block/artisanry/wisproot_shingles"
   }
 }

@@ -1,9 +1,9 @@
-// 1.20.4	2024-06-04T13:47:09.9276264	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-06-04T14:34:40.8613046	Tags for minecraft:item mod id aether_ii
 53afc97bd3504253faa87c8448b46627ca13c602 data/aether_ii/tags/items/aerbunny_temptation_items.json
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 82f472ec897b7763f2d04a7ceefbe43c8bc3c1fd data/aether_ii/tags/items/aether_dirt.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/aether_ii/tags/items/aether_portal_activation_items.json
-b9fac901212af0fdf4169758aabd97667afd5d1a data/aether_ii/tags/items/agiosite_masonry_blocks.json
+b9fac901212af0fdf4169758aabd97667afd5d1a data/aether_ii/tags/items/agiosite_artisanry_blocks.json
 a6cb4c19d89a718bf42595fdcdffd0e03b5bc4b8 data/aether_ii/tags/items/amberoot_logs.json
 0aaea3a99a8657e17400dff0883470f47764c8ce data/aether_ii/tags/items/arkenium_repairing.json
 723e82204484e4ab7f84cb1d829b94e9354ba424 data/aether_ii/tags/items/crafts_greatroot_planks.json
@@ -12,21 +12,22 @@ fce3e48dcf2a2f543eb33cde348393547a8abb35 data/aether_ii/tags/items/crafts_skyroo
 83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/crafts_skyroot_sticks.json
 83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/crafts_skyroot_tools.json
 95632e0a46336508c58a914081fb650aa9766416 data/aether_ii/tags/items/crafts_wisproot_planks.json
+6a368dccfa7dc8b805fa30c5bc3806dd4221a187 data/aether_ii/tags/items/faded_holystone_artisanry_blocks.json
 50aa3b1be78deaf9aef13985ed1fa0f21fd32bce data/aether_ii/tags/items/gems/zanite.json
 54c31a0d15c4be02b368317eae01db4dac6abede data/aether_ii/tags/items/golden_amber_harvesters.json
 388a51dca9547d63c61921397cb0eac41f68806a data/aether_ii/tags/items/gravitite_repairing.json
+2071e063a6cf1c0f9f167ef9c4c6fadba757b3e7 data/aether_ii/tags/items/greatroot_artisanry_blocks.json
 d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/items/greatroot_logs.json
-2071e063a6cf1c0f9f167ef9c4c6fadba757b3e7 data/aether_ii/tags/items/greatroot_masonry_blocks.json
 07e041016f860713eeee69005d5c309bb262173d data/aether_ii/tags/items/holystone.json
-45c87a071e52376be37262f7a77c1d797ec0e74c data/aether_ii/tags/items/holystone_masonry_blocks.json
+45c87a071e52376be37262f7a77c1d797ec0e74c data/aether_ii/tags/items/holystone_artisanry_blocks.json
 a5df7a36d1179fd70f1778840b38bad71c171e4b data/aether_ii/tags/items/holystone_repairing.json
 d4c9cbd81fe5941c2cf29db6e9c97643c1350346 data/aether_ii/tags/items/phyg_temptation_items.json
 83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/planks_crafting.json
 0aaea3a99a8657e17400dff0883470f47764c8ce data/aether_ii/tags/items/plates/arkenium.json
 388a51dca9547d63c61921397cb0eac41f68806a data/aether_ii/tags/items/plates/gravitite.json
 dc76002bbf3fed2fede1a66c265d7053b478b240 data/aether_ii/tags/items/rods/skyroot.json
+e25d24f27acc51ff81a64f65603eb35cf3b433b7 data/aether_ii/tags/items/skyroot_artisanry_blocks.json
 6f9651d534c05c400a6dd78fbd1469e3626777a8 data/aether_ii/tags/items/skyroot_logs.json
-e25d24f27acc51ff81a64f65603eb35cf3b433b7 data/aether_ii/tags/items/skyroot_masonry_blocks.json
 9c63466a4df59334a626bc38a990db8af39f7eb8 data/aether_ii/tags/items/skyroot_repairing.json
 0b72f8aa978e4516ff428e2de46ec5659f601643 data/aether_ii/tags/items/stone_crafting.json
 4d07af80a43c603e7968d9f815e4a06e44b9fdba data/aether_ii/tags/items/swet_gel.json
@@ -34,8 +35,8 @@ b522850aa898ca53c728fbfff1aaea371b62137a data/aether_ii/tags/items/tools/hammers
 b6402c750144166fbc4b63c4131f82f5b3e92148 data/aether_ii/tags/items/tools/shortswords.json
 ec46fc983c8561a6a43594d5ffcb0fc40f8d9ea5 data/aether_ii/tags/items/tools/spears.json
 c97ef2b0c396d3206c0f7fde553104b8e13c0521 data/aether_ii/tags/items/unique_tooltip_color.json
+fb2c91a28387d33e76a95f99e34f52f12a5975a9 data/aether_ii/tags/items/wisproot_artisanry_blocks.json
 1d7eeb49ba52062b05b22efa898579edcdab1705 data/aether_ii/tags/items/wisproot_logs.json
-fb2c91a28387d33e76a95f99e34f52f12a5975a9 data/aether_ii/tags/items/wisproot_masonry_blocks.json
 50aa3b1be78deaf9aef13985ed1fa0f21fd32bce data/aether_ii/tags/items/zanite_repairing.json
 08963efec6206ba0a5e3e1fc7e5c4f4f2bbf4fde data/forge/tags/items/bookshelves.json
 10f899ac0f5727b6e9e16857e56eea8670ced961 data/forge/tags/items/chests/wooden.json
