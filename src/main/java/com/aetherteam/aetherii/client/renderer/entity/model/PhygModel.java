@@ -1,7 +1,7 @@
-package com.aetherteam.aetherii.client.renderer.model;
+package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.model.animation.PhygAnimation;
-import com.aetherteam.aetherii.client.renderer.model.animation.WingAnimation;
+import com.aetherteam.aetherii.client.renderer.entity.animation.PhygAnimation;
+import com.aetherteam.aetherii.client.renderer.entity.animation.WingAnimation;
 import com.aetherteam.aetherii.entity.passive.Phyg;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HierarchicalModel;

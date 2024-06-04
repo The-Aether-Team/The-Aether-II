@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
-import com.aetherteam.aetherii.client.renderer.model.PhygModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.PhygModel;
 import com.aetherteam.aetherii.entity.passive.Phyg;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
