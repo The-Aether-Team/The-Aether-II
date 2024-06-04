@@ -139,6 +139,7 @@ public class AetherIIItems {
 
     // Spawn Eggs
     public static final DeferredItem<SpawnEggItem> FLYING_COW_SPAWN_EGG = ITEMS.register("flying_cow_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.FLYING_COW, 0xD8D8D8, 0xFFD939, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> SHEEPUFF_SPAWN_EGG = ITEMS.register("sheepuff_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.SHEEPUFF, 0xE2FCFF, 0xCB9090, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> PHYG_SPAWN_EGG = ITEMS.register("phyg_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.PHYG, 0xFFC1D0, 0xFFD939, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> AERBUNNY_SPAWN_EGG = ITEMS.register("aerbunny_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.AERBUNNY, 0xE2FCFF, 0xFFDFF9, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> KIRRID_SPAWN_EGG = ITEMS.register("kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.KIRRID, 0x495056, 0xD2CEBA, new Item.Properties()));
