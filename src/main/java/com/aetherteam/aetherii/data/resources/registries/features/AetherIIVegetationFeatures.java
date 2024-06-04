@@ -28,8 +28,7 @@ public class AetherIIVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS_PATCH = AetherIIFeatureUtils.registerKey("medium_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LONG_GRASS_PATCH = AetherIIFeatureUtils.registerKey("long_grass_patch");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> HESPEROSE_PATCH = AetherIIFeatureUtils.registerKey("hesperose_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TARABLOOM_PATCH = AetherIIFeatureUtils.registerKey("tarabloom_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = AetherIIFeatureUtils.registerKey("highfields_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH_PATCH = AetherIIFeatureUtils.registerKey("highlands_bush_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_PATCH = AetherIIFeatureUtils.registerKey("blueberry_bush_patch");
@@ -56,10 +55,8 @@ public class AetherIIVegetationFeatures {
         AetherIIFeatureUtils.register(context, MEDIUM_GRASS_PATCH, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(BlockStateProvider.simple(AetherIIBlocks.AETHER_MEDIUM_GRASS.get()), 32));
         AetherIIFeatureUtils.register(context, LONG_GRASS_PATCH, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(BlockStateProvider.simple(AetherIIBlocks.AETHER_LONG_GRASS.get()), 16));
 
-        AetherIIFeatureUtils.register(context, HESPEROSE_PATCH, Feature.FLOWER,
-                NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)), 64));
-        AetherIIFeatureUtils.register(context, TARABLOOM_PATCH, Feature.FLOWER,
-                NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)), 64));
+        AetherIIFeatureUtils.register(context, HIGHFIELDS_FLOWER_PATCH, Feature.FLOWER,
+                NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1).add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)), 32));
 
         AetherIIFeatureUtils.register(context, HIGHLANDS_BUSH_PATCH, Feature.RANDOM_PATCH,
                 FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.HIGHLANDS_BUSH.get())), List.of(AetherIIBlocks.AETHER_GRASS_BLOCK.get())));

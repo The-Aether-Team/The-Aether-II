@@ -13,6 +13,12 @@
                   "Name": "aether_ii:hesperose"
                 },
                 "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:tarabloom"
+                },
+                "weight": 1
               }
             ]
           }
@@ -28,7 +34,7 @@
         }
       ]
     },
-    "tries": 64,
+    "tries": 32,
     "xz_spread": 7,
     "y_spread": 3
   }
