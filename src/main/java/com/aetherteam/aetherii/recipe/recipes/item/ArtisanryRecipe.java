@@ -9,9 +9,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SingleItemRecipe;
 import net.minecraft.world.level.Level;
 
-public class MasonryRecipe extends SingleItemRecipe {
-    public MasonryRecipe(String group, Ingredient ingredient, ItemStack result) {
-        super(AetherIIRecipeTypes.MASONRY.get(), AetherIIRecipeSerializers.MASONRY.get(), group, ingredient, result);
+public class ArtisanryRecipe extends SingleItemRecipe {
+    public ArtisanryRecipe(String group, Ingredient ingredient, ItemStack result) {
+        super(AetherIIRecipeTypes.ARTISANRY.get(), AetherIIRecipeSerializers.ARTISANRY.get(), group, ingredient, result);
     }
 
     @Override
@@ -21,12 +21,12 @@ public class MasonryRecipe extends SingleItemRecipe {
 
     @Override
     public ItemStack getToastSymbol() {
-        return new ItemStack(AetherIIBlocks.MASONRY_BENCH.get());
+        return new ItemStack(AetherIIBlocks.ARTISANRY_BENCH.get());
     }
 
-    public static class Serializer extends SingleItemRecipe.Serializer<MasonryRecipe> {
+    public static class Serializer extends SingleItemRecipe.Serializer<ArtisanryRecipe> {
         public Serializer() {
-            super(MasonryRecipe::new);
+            super(ArtisanryRecipe::new);
         }
     }
 }

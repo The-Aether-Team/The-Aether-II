@@ -299,7 +299,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addBlock(AetherIIBlocks.MASONRY_BENCH, "Masonry Bench");
+        this.addBlock(AetherIIBlocks.ARTISANRY_BENCH, "Artisanry Bench");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
 
@@ -463,7 +463,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Containers
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addContainerType(AetherIIMenuTypes.MASONRY_BENCH, "Masonry Bench");
+        this.addContainerType(AetherIIMenuTypes.ARTISANRY_BENCH, "Artisanry Bench");
 
 
         // Subtitles

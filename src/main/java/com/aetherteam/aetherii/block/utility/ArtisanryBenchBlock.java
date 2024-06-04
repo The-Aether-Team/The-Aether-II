@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.block.utility;
 
-import com.aetherteam.aetherii.inventory.menu.MasonryBenchMenu;
+import com.aetherteam.aetherii.inventory.menu.ArtisanryBenchMenu;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,28 +16,25 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class MasonryBenchBlock extends Block {
-    public static final MapCodec<MasonryBenchBlock> CODEC = simpleCodec(MasonryBenchBlock::new);
-    private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.masonry_bench");
+public class ArtisanryBenchBlock extends Block {
+    public static final MapCodec<ArtisanryBenchBlock> CODEC = simpleCodec(ArtisanryBenchBlock::new);
+    private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.artisanry_bench");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     @Override
-    public MapCodec<MasonryBenchBlock> codec() {
+    public MapCodec<ArtisanryBenchBlock> codec() {
         return CODEC;
     }
 
-    public MasonryBenchBlock(BlockBehaviour.Properties properties) {
+    public ArtisanryBenchBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
@@ -61,7 +58,7 @@ public class MasonryBenchBlock extends Block {
     @Nullable
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-        return new SimpleMenuProvider((id, inventory, player) -> new MasonryBenchMenu(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_TITLE);
+        return new SimpleMenuProvider((id, inventory, player) -> new ArtisanryBenchMenu(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_TITLE);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.recipes.item.MasonryRecipe;
+import com.aetherteam.aetherii.recipe.recipes.item.ArtisanryRecipe;
 import com.google.common.collect.Lists;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -18,11 +18,11 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class MasonryBenchMenu extends AbstractContainerMenu {
+public class ArtisanryBenchMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
     private final DataSlot selectedRecipeIndex = DataSlot.standalone();
     private final Level level;
-    private List<RecipeHolder<MasonryRecipe>> recipes = Lists.newArrayList();
+    private List<RecipeHolder<ArtisanryRecipe>> recipes = Lists.newArrayList();
     private ItemStack input = ItemStack.EMPTY;
     long lastSoundTime;
     final Slot inputSlot;
@@ -32,18 +32,18 @@ public class MasonryBenchMenu extends AbstractContainerMenu {
         @Override
         public void setChanged() {
             super.setChanged();
-            MasonryBenchMenu.this.slotsChanged(this);
-            MasonryBenchMenu.this.slotUpdateListener.run();
+            ArtisanryBenchMenu.this.slotsChanged(this);
+            ArtisanryBenchMenu.this.slotUpdateListener.run();
         }
     };
     final ResultContainer resultContainer = new ResultContainer();
 
-    public MasonryBenchMenu(int containerId, Inventory playerInventory) {
+    public ArtisanryBenchMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, ContainerLevelAccess.NULL);
     }
 
-    public MasonryBenchMenu(int containerId, Inventory playerInventory, final ContainerLevelAccess access) {
-        super(AetherIIMenuTypes.MASONRY_BENCH.get(), containerId);
+    public ArtisanryBenchMenu(int containerId, Inventory playerInventory, final ContainerLevelAccess access) {
+        super(AetherIIMenuTypes.ARTISANRY_BENCH.get(), containerId);
         this.access = access;
         this.level = playerInventory.player.level();
         this.inputSlot = this.addSlot(new Slot(this.container, 0, 20, 33));
@@ -56,24 +56,24 @@ public class MasonryBenchMenu extends AbstractContainerMenu {
             @Override
             public void onTake(Player player, ItemStack stack) {
                 stack.onCraftedBy(player.level(), player, stack.getCount());
-                MasonryBenchMenu.this.resultContainer.awardUsedRecipes(player, this.getRelevantItems());
-                ItemStack itemStack = MasonryBenchMenu.this.inputSlot.remove(1);
+                ArtisanryBenchMenu.this.resultContainer.awardUsedRecipes(player, this.getRelevantItems());
+                ItemStack itemStack = ArtisanryBenchMenu.this.inputSlot.remove(1);
                 if (!itemStack.isEmpty()) {
-                    MasonryBenchMenu.this.setupResultSlot();
+                    ArtisanryBenchMenu.this.setupResultSlot();
                 }
 
                 access.execute((level, pos) -> {
                     long l = level.getGameTime();
-                    if (MasonryBenchMenu.this.lastSoundTime != l) {
+                    if (ArtisanryBenchMenu.this.lastSoundTime != l) {
                         level.playSound(null, pos, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1.0F, 1.0F);
-                        MasonryBenchMenu.this.lastSoundTime = l;
+                        ArtisanryBenchMenu.this.lastSoundTime = l;
                     }
                 });
                 super.onTake(player, stack);
             }
 
             private List<ItemStack> getRelevantItems() {
-                return List.of(MasonryBenchMenu.this.inputSlot.getItem());
+                return List.of(ArtisanryBenchMenu.this.inputSlot.getItem());
             }
         });
 
@@ -94,7 +94,7 @@ public class MasonryBenchMenu extends AbstractContainerMenu {
         return this.selectedRecipeIndex.get();
     }
 
-    public List<RecipeHolder<MasonryRecipe>> getRecipes() {
+    public List<RecipeHolder<ArtisanryRecipe>> getRecipes() {
         return this.recipes;
     }
 
@@ -108,7 +108,7 @@ public class MasonryBenchMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, AetherIIBlocks.MASONRY_BENCH.get());
+        return stillValid(this.access, player, AetherIIBlocks.ARTISANRY_BENCH.get());
     }
 
     @Override
@@ -139,13 +139,13 @@ public class MasonryBenchMenu extends AbstractContainerMenu {
         this.selectedRecipeIndex.set(-1);
         this.resultSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty()) {
-            this.recipes = this.level.getRecipeManager().getRecipesFor(AetherIIRecipeTypes.MASONRY.get(), container, this.level);
+            this.recipes = this.level.getRecipeManager().getRecipesFor(AetherIIRecipeTypes.ARTISANRY.get(), container, this.level);
         }
     }
 
     void setupResultSlot() {
         if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get())) {
-            RecipeHolder<MasonryRecipe> recipe = this.recipes.get(this.selectedRecipeIndex.get());
+            RecipeHolder<ArtisanryRecipe> recipe = this.recipes.get(this.selectedRecipeIndex.get());
             ItemStack itemStack = recipe.value().assemble(this.container, this.level.registryAccess());
             if (itemStack.isItemEnabled(this.level.enabledFeatures())) {
                 this.resultContainer.setRecipeUsed(recipe);
@@ -162,7 +162,7 @@ public class MasonryBenchMenu extends AbstractContainerMenu {
 
     @Override
     public MenuType<?> getType() {
-        return AetherIIMenuTypes.MASONRY_BENCH.get();
+        return AetherIIMenuTypes.ARTISANRY_BENCH.get();
     }
 
     public void registerUpdateListener(Runnable listener) {
@@ -193,7 +193,7 @@ public class MasonryBenchMenu extends AbstractContainerMenu {
                 if (!this.moveItemStackTo(itemStack1, 2, 38, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (this.level.getRecipeManager().getRecipeFor(AetherIIRecipeTypes.MASONRY.get(), new SimpleContainer(itemStack1), this.level).isPresent()) {
+            } else if (this.level.getRecipeManager().getRecipeFor(AetherIIRecipeTypes.ARTISANRY.get(), new SimpleContainer(itemStack1), this.level).isPresent()) {
                 if (!this.moveItemStackTo(itemStack1, 0, 1, false)) {
                     return ItemStack.EMPTY;
                 }

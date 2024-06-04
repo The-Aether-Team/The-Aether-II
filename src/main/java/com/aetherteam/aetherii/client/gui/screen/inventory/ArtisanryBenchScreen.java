@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.inventory;
 
-import com.aetherteam.aetherii.inventory.menu.MasonryBenchMenu;
-import com.aetherteam.aetherii.recipe.recipes.item.MasonryRecipe;
+import com.aetherteam.aetherii.inventory.menu.ArtisanryBenchMenu;
+import com.aetherteam.aetherii.recipe.recipes.item.ArtisanryRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.List;
 
-public class MasonryBenchScreen extends AbstractContainerScreen<MasonryBenchMenu> {
+    public class ArtisanryBenchScreen extends AbstractContainerScreen<ArtisanryBenchMenu> {
     private static final ResourceLocation SCROLLER_SPRITE = new ResourceLocation("container/stonecutter/scroller");
     private static final ResourceLocation SCROLLER_DISABLED_SPRITE = new ResourceLocation("container/stonecutter/scroller_disabled");
     private static final ResourceLocation RECIPE_SELECTED_SPRITE = new ResourceLocation("container/stonecutter/recipe_selected");
@@ -27,7 +27,7 @@ public class MasonryBenchScreen extends AbstractContainerScreen<MasonryBenchMenu
     private int startIndex;
     private boolean displayRecipes;
 
-    public MasonryBenchScreen(MasonryBenchMenu menu, Inventory playerInventory, Component title) {
+    public ArtisanryBenchScreen(ArtisanryBenchMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         menu.registerUpdateListener(this::containerChanged);
         --this.titleLabelY;
@@ -61,7 +61,7 @@ public class MasonryBenchScreen extends AbstractContainerScreen<MasonryBenchMenu
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
-            List<RecipeHolder<MasonryRecipe>> list = this.menu.getRecipes();
+            List<RecipeHolder<ArtisanryRecipe>> list = this.menu.getRecipes();
 
             for (int l = this.startIndex; l < k && l < this.menu.getNumRecipes(); ++l) {
                 int i1 = l - this.startIndex;
@@ -94,7 +94,7 @@ public class MasonryBenchScreen extends AbstractContainerScreen<MasonryBenchMenu
     }
 
     private void renderRecipes(GuiGraphics guiGraphics, int x, int y, int startIndex) {
-        List<RecipeHolder<MasonryRecipe>> list = this.menu.getRecipes();
+        List<RecipeHolder<ArtisanryRecipe>> list = this.menu.getRecipes();
 
         for (int i = this.startIndex; i < startIndex && i < this.menu.getNumRecipes(); ++i) {
             int j = i - this.startIndex;
