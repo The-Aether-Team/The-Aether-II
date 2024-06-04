@@ -628,7 +628,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     public void artisanryBench(Block block) {
         ModelFile model = models().withExistingParent(name(block), modLoc("block/template_artisanry_bench"))
                 .texture("bench", texture(name(block), "utility/"))
-                .texture("saw", texture(name(block)+ "_saw", "utility/"))
                 .texture("particle", texture(name(AetherIIBlocks.HOLYSTONE_BRICKS.get()), "construction/"))
                 .renderType("cutout_mipped");
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
