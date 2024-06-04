@@ -138,6 +138,41 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.block.generic.footsteps")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/sheep/say1"),
+                        sound("minecraft:mob/sheep/say2"),
+                        sound("minecraft:mob/sheep/say3")
+                ).subtitle("subtitles.aether.entity.sheepuff.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_DEATH,
+                definition().with(
+                        sound("minecraft:mob/sheep/say1"),
+                        sound("minecraft:mob/sheep/say2"),
+                        sound("minecraft:mob/sheep/say3")
+                ).subtitle("subtitles.aether.entity.sheepuff.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_HURT,
+                definition().with(
+                        sound("minecraft:mob/sheep/say1"),
+                        sound("minecraft:mob/sheep/say2"),
+                        sound("minecraft:mob/sheep/say3")
+                ).subtitle("subtitles.aether.entity.sheepuff.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_SHEAR,
+                definition().with(sound("minecraft:mob/sheep/shear"))
+                        .subtitle("subtitles.item.shears.shear")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SHEEPUFF_STEP,
+                definition().with(
+                        sound("minecraft:mob/sheep/step1"),
+                        sound("minecraft:mob/sheep/step2"),
+                        sound("minecraft:mob/sheep/step3"),
+                        sound("minecraft:mob/sheep/step4"),
+                        sound("minecraft:mob/sheep/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_AERBUNNY_DEATH,
                 definition().with(sound("aether_ii:entity/aerbunny/death"))
                         .subtitle("subtitles.aether_ii.entity.aerbunny.death")

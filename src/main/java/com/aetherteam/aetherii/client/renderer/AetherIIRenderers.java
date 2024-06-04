@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.renderer.block.FastModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.SheepuffModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.ZephyrModel;
 import com.aetherteam.aetherii.client.renderer.model.FlyingCowModel;
 import com.aetherteam.aetherii.client.renderer.model.KirridBabyModel;
@@ -35,6 +36,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.AERBUNNY.get(), AerbunnyRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.PHYG.get(), PhygRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.FLYING_COW.get(), FlyingCowRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SHEEPUFF.get(), SheepuffRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.KIRRID.get(), KirridRenderer::new);
 
         // Hostile
@@ -52,6 +54,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherModelLayers.AERBUNNY_COLLAR, AerbunnyModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.PHYG, PhygModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
+        event.registerLayerDefinition(AetherModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.KIRRID, KirridModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
 
