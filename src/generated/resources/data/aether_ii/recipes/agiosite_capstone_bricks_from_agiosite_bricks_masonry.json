@@ -1,8 +1,0 @@
-{
-  "type": "aether_ii:masonry",
-  "count": 1,
-  "ingredient": {
-    "item": "aether_ii:agiosite_bricks"
-  },
-  "result": "aether_ii:agiosite_capstone_bricks"
-}
