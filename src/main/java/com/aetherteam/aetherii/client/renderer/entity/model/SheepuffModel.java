@@ -16,28 +16,36 @@ public class SheepuffModel<T extends Sheepuff> extends HierarchicalModel<T> {
 
     private final ModelPart root;
     private final ModelPart body;
-    private final ModelPart wool;
     private final ModelPart head;
     private final ModelPart ear_left;
     private final ModelPart ear_right;
     private final ModelPart leg_front_right;
+    private final ModelPart wool_leg_front_right;
     private final ModelPart leg_front_left;
+    private final ModelPart wool_leg_front_left;
     private final ModelPart leg_back_left;
+    private final ModelPart wool_leg_back_left;
     private final ModelPart leg_back_right;
+    private final ModelPart wool_leg_back_right;
     private final ModelPart tail;
+    private final ModelPart wool;
 
     public SheepuffModel(ModelPart root) {
         this.root = root;
         this.body = root.getChild("body");
-        this.wool = this.body.getChild("wool");
         this.head = this.body.getChild("head");
         this.ear_left = this.head.getChild("ear_left");
         this.ear_right = this.head.getChild("ear_right");
         this.leg_front_right = this.body.getChild("leg_front_right");
+        this.wool_leg_front_right = this.leg_front_right.getChild("wool_leg_front_right");
         this.leg_front_left = this.body.getChild("leg_front_left");
+        this.wool_leg_front_left = this.leg_front_left.getChild("wool_leg_front_left");
         this.leg_back_left = this.body.getChild("leg_back_left");
+        this.wool_leg_back_left = this.leg_back_left.getChild("wool_leg_back_left");
         this.leg_back_right = this.body.getChild("leg_back_right");
+        this.wool_leg_back_right = this.leg_back_right.getChild("wool_leg_back_right");
         this.tail = this.body.getChild("tail");
+        this.wool = this.body.getChild("wool");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -61,17 +69,21 @@ public class SheepuffModel<T extends Sheepuff> extends HierarchicalModel<T> {
 
         PartDefinition ear_right_r1 = ear_right.addOrReplaceChild("ear_right_r1", CubeListBuilder.create().texOffs(11, 11).addBox(-4.0F, -3.0F, 0.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.5236F, 0.2618F));
 
-        PartDefinition leg_front_right = body.addOrReplaceChild("leg_front_right", CubeListBuilder.create().texOffs(0, 35).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F))
-                .texOffs(16, 35).addBox(-1.5F, 0.0F, -1.75F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 3.0F, -5.0F));
+        PartDefinition leg_front_right = body.addOrReplaceChild("leg_front_right", CubeListBuilder.create().texOffs(0, 35).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 3.0F, -5.0F));
 
-        PartDefinition leg_front_left = body.addOrReplaceChild("leg_front_left", CubeListBuilder.create().texOffs(8, 35).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F))
-                .texOffs(28, 35).addBox(-1.5F, 0.0F, -1.75F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 3.0F, -5.0F));
+        PartDefinition wool_leg_front_right = leg_front_right.addOrReplaceChild("wool_leg_front_right", CubeListBuilder.create().texOffs(16, 35).addBox(-1.5F, 0.0F, -1.75F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        PartDefinition leg_back_left = body.addOrReplaceChild("leg_back_left", CubeListBuilder.create().texOffs(8, 45).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F))
-                .texOffs(16, 41).addBox(-5.5F, -2.0F, -1.75F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 3.0F, 6.0F));
+        PartDefinition leg_front_left = body.addOrReplaceChild("leg_front_left", CubeListBuilder.create().texOffs(8, 35).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 3.0F, -5.0F));
 
-        PartDefinition leg_back_right = body.addOrReplaceChild("leg_back_right", CubeListBuilder.create().texOffs(0, 45).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F))
-                .texOffs(28, 41).addBox(2.5F, -2.0F, -1.75F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 3.0F, 6.0F));
+        PartDefinition wool_left_front_left = leg_front_left.addOrReplaceChild("wool_leg_front_left", CubeListBuilder.create().texOffs(28, 35).addBox(-1.5F, 0.0F, -1.75F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+        PartDefinition leg_back_left = body.addOrReplaceChild("leg_back_left", CubeListBuilder.create().texOffs(8, 45).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 3.0F, 6.0F));
+
+        PartDefinition wool_leg_back_left = leg_back_left.addOrReplaceChild("wool_leg_back_left", CubeListBuilder.create().texOffs(28, 41).addBox(2.5F, -2.0F, -1.75F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, 0.0F, 0.0F));
+
+        PartDefinition leg_back_right = body.addOrReplaceChild("leg_back_right", CubeListBuilder.create().texOffs(0, 45).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 3.0F, 6.0F));
+
+        PartDefinition wool_leg_back_right = leg_back_right.addOrReplaceChild("wool_leg_back_right", CubeListBuilder.create().texOffs(16, 41).addBox(-5.5F, -2.0F, -1.75F, 3.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, 0.0F, 0.0F));
 
         PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create(), PartPose.offset(0.0F, -3.0F, 5.25F));
 
@@ -97,9 +109,15 @@ public class SheepuffModel<T extends Sheepuff> extends HierarchicalModel<T> {
         this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
         this.head.xRot = this.headXRot;
         this.wool.visible = !sheepuff.isSheared();
+        this.wool_leg_front_right.visible = !sheepuff.isSheared();
+        this.wool_leg_front_left.visible = !sheepuff.isSheared();
+        this.wool_leg_back_right.visible = !sheepuff.isSheared();
+        this.wool_leg_back_left.visible = !sheepuff.isSheared();
         this.animateWalk(SheepuffAnimations.walk, limbSwing, limbSwingAmount, 2.0F, 2.5F);
         if (sheepuff.getPuffed()) {
-            this.applyStatic(SheepuffAnimations.falling);
+            if (!sheepuff.onGround()) {
+                this.applyStatic(SheepuffAnimations.falling);
+            }
             this.applyStatic(SheepuffAnimations.wool_expand);
         }
         if (sheepuff.isBaby()) {
