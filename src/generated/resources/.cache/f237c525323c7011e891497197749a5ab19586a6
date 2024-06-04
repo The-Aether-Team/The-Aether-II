@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-04T18:06:26.3939563	Block States: aether_ii
+// 1.20.4	2024-06-04T22:49:04.1655605	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -293,7 +293,7 @@ e850ffe1067a63eaef0569f42b023214759b2d53 assets/aether_ii/models/block/arctic_sn
 b0b5aa2804547fd8444324005b8773e897828879 assets/aether_ii/models/block/arctic_snow8.json
 45f3acd4f5612d84622e9a83c6f69138c34c839a assets/aether_ii/models/block/arctic_snow_block.json
 016b0c1533090f1198dfeb2db71beb72c730a787 assets/aether_ii/models/block/arkenium_ore.json
-100aa50fdd291dd150e29aa80dbc437e0890dc07 assets/aether_ii/models/block/artisanry_bench.json
+5766fe157f714b6b89fa943f2bde57f028a50603 assets/aether_ii/models/block/artisanry_bench.json
 06cf463cdbf97a009f7c8341b4b2d91e6f4d5ed0 assets/aether_ii/models/block/blueberry_bush.json
 5887cdcbe7daf0b10e8bfde375a5156c4e7592e6 assets/aether_ii/models/block/blueberry_bush_stem.json
 9f51375a8c00c0440af1bfa813fda3d6144692ce assets/aether_ii/models/block/blue_aercloud.json
