@@ -129,6 +129,46 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.sheepuff.ambient": {
+    "sounds": [
+      "mob/sheep/say1",
+      "mob/sheep/say2",
+      "mob/sheep/say3"
+    ],
+    "subtitle": "subtitles.aether.entity.sheepuff.ambient"
+  },
+  "entity.sheepuff.death": {
+    "sounds": [
+      "mob/sheep/say1",
+      "mob/sheep/say2",
+      "mob/sheep/say3"
+    ],
+    "subtitle": "subtitles.aether.entity.sheepuff.death"
+  },
+  "entity.sheepuff.hurt": {
+    "sounds": [
+      "mob/sheep/say1",
+      "mob/sheep/say2",
+      "mob/sheep/say3"
+    ],
+    "subtitle": "subtitles.aether.entity.sheepuff.hurt"
+  },
+  "entity.sheepuff.shear": {
+    "sounds": [
+      "mob/sheep/shear"
+    ],
+    "subtitle": "subtitles.item.shears.shear"
+  },
+  "entity.sheepuff.step": {
+    "sounds": [
+      "mob/sheep/step1",
+      "mob/sheep/step2",
+      "mob/sheep/step3",
+      "mob/sheep/step4",
+      "mob/sheep/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
   "entity.zephyr.shoot": {
     "sounds": [
       "aether_ii:entity/zephyr/shoot"

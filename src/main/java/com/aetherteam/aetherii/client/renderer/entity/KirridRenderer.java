@@ -3,8 +3,8 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
-import com.aetherteam.aetherii.client.renderer.model.KirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.model.KirridModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.KirridBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.KirridModel;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
