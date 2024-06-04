@@ -16,6 +16,7 @@ public class AetherIIOrePlacements {
     public static final ResourceKey<PlacedFeature> ORE_MOSSY_HOLYSTONE = AetherIIPlacementUtils.createKey("ore_mossy_holystone");
     public static final ResourceKey<PlacedFeature> ORE_AGIOSITE = AetherIIPlacementUtils.createKey("ore_agiosite");
     public static final ResourceKey<PlacedFeature> ORE_ICESTONE = AetherIIPlacementUtils.createKey("ore_icestone");
+    public static final ResourceKey<PlacedFeature> ORE_ICESTONE_SMALL = AetherIIPlacementUtils.createKey("ore_icestone_small");
     public static final ResourceKey<PlacedFeature> ORE_AMBROSIUM = AetherIIPlacementUtils.createKey("ore_ambrosium");
     public static final ResourceKey<PlacedFeature> ORE_ZANITE = AetherIIPlacementUtils.createKey("ore_zanite");
     public static final ResourceKey<PlacedFeature> ORE_ARKENIUM = AetherIIPlacementUtils.createKey("ore_arkenium");
@@ -32,6 +33,8 @@ public class AetherIIOrePlacements {
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(64))));
         AetherIIPlacementUtils.register(context, ORE_ICESTONE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_ICESTONE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(256))));
+        AetherIIPlacementUtils.register(context, ORE_ICESTONE_SMALL, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_ICESTONE_SMALL),
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(256))));
         AetherIIPlacementUtils.register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_AMBROSIUM),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(20, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(256))));
         AetherIIPlacementUtils. register(context, ORE_ZANITE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_ZANITE),
