@@ -394,6 +394,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
         this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
+        this.addItem(AetherIIItems.BURRUKAI_RIBS, "Burrukai Ribs");
+        this.addItem(AetherIIItems.BURRUKAI_RIB_CUT, "Burrukai Rib Cut");
+        this.addItem(AetherIIItems.KIRRID_CUTLET, "Kirrid Cutlet");
+        this.addItem(AetherIIItems.KIRRID_LOIN, "Kirrid Loin");
+        this.addItem(AetherIIItems.RAW_TAEGORE_MEAT, "Raw Taegore Meat");
+        this.addItem(AetherIIItems.TAEGORE_STEAK, "Taegore Steak");
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
