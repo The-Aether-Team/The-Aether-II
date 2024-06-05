@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-05T14:43:39.6914689	Item Models: aether_ii
+// 1.20.4	2024-06-05T14:55:47.4872062	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -67,6 +67,7 @@ c313c38e5ff5ca6e3111c583c259bd093cb84542 assets/aether_ii/models/item/cold_aercl
 f564a9c24a300e0c5f4ac81ecc2b9109bfd4b774 assets/aether_ii/models/item/crude_scatterglass_pane.json
 9dc07025feb7e5c425d7109d554d7f8007d21846 assets/aether_ii/models/item/enchanted_aether_grass_block.json
 0a1091ef207642173d2d97fc02de7e8e115c76b4 assets/aether_ii/models/item/enchanted_berry.json
+56e1634bee7365abf04cb59d065a7a83a5a95723 assets/aether_ii/models/item/enchanted_wyndberry.json
 6d9829d8d2e232abdd8fa2cc0794addd6ca08288 assets/aether_ii/models/item/faded_holystone_base_bricks.json
 f4d9304081a802f9b677ce62edc3565e3f59f2e2 assets/aether_ii/models/item/faded_holystone_base_pillar.json
 5b488fc0fcac5fb3983f7a8a8a1ecbb74dfd5e95 assets/aether_ii/models/item/faded_holystone_bricks.json
