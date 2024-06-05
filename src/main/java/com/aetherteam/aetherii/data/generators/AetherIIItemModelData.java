@@ -384,7 +384,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Wool
         this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+
+        // Carpet
         this.itemBlock(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
 
         // Mineral Blocks
         this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get());

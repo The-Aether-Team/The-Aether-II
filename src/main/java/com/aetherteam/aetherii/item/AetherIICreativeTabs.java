@@ -154,7 +154,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.SCATTERGLASS_PANE.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.WHITE_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());

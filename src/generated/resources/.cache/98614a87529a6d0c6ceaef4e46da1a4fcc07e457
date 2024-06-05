@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-05T14:29:08.2912606	Item Models: aether_ii
+// 1.20.4	2024-06-05T14:43:39.6914689	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -245,6 +245,8 @@ b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale
 206a0736c3aa29e75d9a38a3c9c5d6604ad55a31 assets/aether_ii/models/item/undershale_slab.json
 dc2b26466c1c6237e46e9adf27acbb89f4a4445c assets/aether_ii/models/item/undershale_stairs.json
 e08cba605dc43682cfdb888553a1f4826bf29045 assets/aether_ii/models/item/undershale_wall.json
+068cb838bd767423e14069837fb15c45cb9f48f1 assets/aether_ii/models/item/white_cloudwool.json
+69a6c094fed4fafd160b880b5a70446012f8579c assets/aether_ii/models/item/white_cloudwool_carpet.json
 21c6cb4fc66048de4de0155c0d5f675296b8192d assets/aether_ii/models/item/wisproot_base_beam.json
 fd46577008a8034c53e9282543661ed859e645b1 assets/aether_ii/models/item/wisproot_base_planks.json
 1caa7face9a9836b82bae7859426a52a45cde966 assets/aether_ii/models/item/wisproot_beam.json

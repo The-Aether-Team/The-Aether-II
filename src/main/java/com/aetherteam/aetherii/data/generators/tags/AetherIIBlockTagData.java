@@ -146,7 +146,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.COCKATRICE_SPAWNABLE_BLACKLIST);
 
         // Vanilla
-        this.tag(BlockTags.WOOL).add(AetherIIBlocks.CLOUDWOOL.get());
+        this.tag(BlockTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL.get()
+        );
         this.tag(BlockTags.WOODEN_STAIRS).add(
                 AetherIIBlocks.SKYROOT_STAIRS.get(),
                 AetherIIBlocks.GREATROOT_STAIRS.get(),
@@ -191,7 +194,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get()
         );
-        this.tag(BlockTags.WOOL_CARPETS).add(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.tag(BlockTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get()
+        );
         this.tag(BlockTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.get(),
                 AetherIIBlocks.WISPROOT_SAPLING.get(),

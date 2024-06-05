@@ -308,7 +308,11 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         // Wool
         this.block(AetherIIBlocks.CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.WHITE_CLOUDWOOL.get(), "construction/");
+
+        // Carpet
         this.carpet(AetherIIBlocks.CLOUDWOOL_CARPET.get(), AetherIIBlocks.CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.WHITE_CLOUDWOOL.get(),"construction/");
 
         // Mineral Blocks
         this.block(AetherIIBlocks.AMBROSIUM_BLOCK.get(), "construction/");

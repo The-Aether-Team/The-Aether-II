@@ -316,7 +316,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+
+        // Carpet
         this.dropSelf(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
 
         // Mineral Blocks
         this.dropSelf(AetherIIBlocks.AMBROSIUM_BLOCK.get());

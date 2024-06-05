@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-05T14:16:51.5163518	Block States: aether_ii
+// 1.20.4	2024-06-05T14:43:39.6764691	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -194,6 +194,8 @@ c4095220b8d7eaf621a7503ca08c542549e42195 assets/aether_ii/blockstates/tarabloom.
 e9253a51323cb879c828d8fcb4dd1a1624578797 assets/aether_ii/blockstates/undershale_slab.json
 aa3f38e980c69850ce907cf98f677f81f02f37b7 assets/aether_ii/blockstates/undershale_stairs.json
 b37c3eaa3696a11a7f24bad63da8f27a3dc7d080 assets/aether_ii/blockstates/undershale_wall.json
+63e2cdd49ca5a8ca7dcafbedaaf7cf578ff18781 assets/aether_ii/blockstates/white_cloudwool.json
+55b0f2cf4e64aa2cf28a0e2446386e8e5051cf04 assets/aether_ii/blockstates/white_cloudwool_carpet.json
 b7e3d9c0e34ae5b7f3024748c239c3250944510c assets/aether_ii/blockstates/wisproot_base_beam.json
 fdd098fe1542597b5a5c34823180e94c2832c3c3 assets/aether_ii/blockstates/wisproot_base_planks.json
 02948808fbdf8610e207714ada28061d700438c9 assets/aether_ii/blockstates/wisproot_beam.json
@@ -667,6 +669,8 @@ f6612f7bb8e06e9f3db727c478331b74a87b905d assets/aether_ii/models/block/undershal
 be32ac22ff091be6467b9fdbc1cef9bf2e8f4062 assets/aether_ii/models/block/undershale_wall_post.json
 ede80fd0e432759cf67f8a0453bb272ee739144d assets/aether_ii/models/block/undershale_wall_side.json
 93ddc8134dc877b7b1e150873ae0c016891f7fc8 assets/aether_ii/models/block/undershale_wall_side_tall.json
+5b531d64f6e036e277457c930ca32fbdf2d89cf4 assets/aether_ii/models/block/white_cloudwool.json
+9cf477dd247b2500a684d4e3c5ea8ecd40a79e98 assets/aether_ii/models/block/white_cloudwool_carpet.json
 76a0d4b25f54f1af92ed727fed32bc5875eddf49 assets/aether_ii/models/block/wisproot_base_beam.json
 372d95b0bf83ed755d6e5e4040226edecda561b5 assets/aether_ii/models/block/wisproot_base_planks.json
 8e439cc6ce2aaaba49472f76d278d466d54c5df2 assets/aether_ii/models/block/wisproot_beam.json

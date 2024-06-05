@@ -157,7 +157,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
 
         // Vanilla
-        this.tag(ItemTags.WOOL).add(AetherIIBlocks.CLOUDWOOL.asItem());
+        this.tag(ItemTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.asItem(),
+                AetherIIBlocks.WHITE_CLOUDWOOL.asItem()
+        );
         this.tag(ItemTags.STONE_CRAFTING_MATERIALS).add(
                 AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.UNDERSHALE.asItem()
@@ -188,13 +191,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATROOT_BUTTON.asItem(),
                 AetherIIBlocks.WISPROOT_BUTTON.asItem()
         );
-        this.tag(ItemTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.get().asItem());
+        this.tag(ItemTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.asItem());
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(
                 AetherIIBlocks.SKYROOT_PRESSURE_PLATE.asItem(),
                 AetherIIBlocks.GREATROOT_PRESSURE_PLATE.asItem(),
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.asItem()
         );
-        this.tag(ItemTags.WOOL_CARPETS).add(AetherIIBlocks.CLOUDWOOL_CARPET.get().asItem());
+        this.tag(ItemTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem()
+        );
         this.tag(ItemTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.asItem(),
                 AetherIIBlocks.WISPROOT_SAPLING.asItem(),
