@@ -60,18 +60,12 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
     private static BufferBuilder.RenderedBuffer buildSkyDisc(BufferBuilder pBuilder, float pY) {
         float f = Math.signum(pY) * 512.0F;
-        float f1 = 512.0F;
-        RenderSystem.setShader(GameRenderer::getPositionShader);
-        pBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION);
-        pBuilder.vertex(0.0, (double)pY, 0.0).endVertex();
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
-        for(int i = -180; i <= 180; i += 45) {
-            pBuilder.vertex(
-                            (double)(f * Mth.cos((float)i * (float) (Math.PI / 180.0))),
-                            (double)pY,
-                            (double)(512.0F * Mth.sin((float)i * (float) (Math.PI / 180.0)))
-                    )
-                    .endVertex();
+        pBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+        pBuilder.vertex(0.0, pY, 0.0).color(1.0F, 1.0F, 1.0F, 1.0F).endVertex();
+        for (int i = -180; i <= 180; i += 45) {
+            pBuilder.vertex(f * Mth.cos((float) i * (float) (Math.PI / 180.0)), pY, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(1.0F, 1.0F, 1.0F, 0.0F).endVertex();
         }
 
         return pBuilder.end();
@@ -195,10 +189,12 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
 
 
-//
-                RenderSystem.setShaderColor(0.8F, 0.8F, 0.8F, 1.0F);
+
+//                RenderSystem.setShaderColor(0.8F, 0.8F, 0.8F, 1.0F);
                 poseStack.pushPose();
-                poseStack.translate(0.0F, -15.0F, 0.0F);
+                RenderSystem.enableBlend();
+                RenderSystem.defaultBlendFunc();
+//                poseStack.translate(0.0F, -15.0F, 0.0F);
                 this.cloudSkyboxBuffer.bind();
                 this.cloudSkyboxBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, shaderinstance);
                 VertexBuffer.unbind();
