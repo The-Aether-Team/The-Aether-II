@@ -108,7 +108,7 @@ public class ArtisanryBenchMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, AetherIIBlocks.ARTISANRY_BENCH.get());
+        return stillValid(this.access, player, AetherIIBlocks.ARTISANS_BENCH.get());
     }
 
     @Override

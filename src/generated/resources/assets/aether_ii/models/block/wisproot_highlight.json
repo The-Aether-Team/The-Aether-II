@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "aether_ii:block/artisanry/wisproot_highlight"
+    "all": "aether_ii:block/decorative/wisproot_highlight"
   }
 }

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:artisanry_bench"
+          "name": "aether_ii:artisans_bench"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/artisanry_bench"
+  "random_sequence": "aether_ii:blocks/artisans_bench"
 }

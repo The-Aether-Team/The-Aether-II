@@ -66,7 +66,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
         this.item(AetherIIItems.RAW_ARKENIUM.get(), "materials/");
-        this.item(AetherIIItems.ARKENIUM_PLATE.get(), "materials/");
+        this.item(AetherIIItems.ARKENIUM_PLATES.get(), "materials/");
         this.item(AetherIIItems.ARKENIUM_STRIP.get(), "materials/");
         this.item(AetherIIItems.RAW_GRAVITITE.get(), "materials/");
         this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
@@ -241,7 +241,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemButton(AetherIIBlocks.SKYROOT_BUTTON.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
 
-        // Skyroot Artisanry Blocks
+        // Skyroot Decorative Blocks
         this.itemBlock(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_SHINGLES.get());
@@ -263,7 +263,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemButton(AetherIIBlocks.GREATROOT_BUTTON.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
 
-        // Greatroot Artisanry Blocks
+        // Greatroot Decorative Blocks
         this.itemBlock(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_SHINGLES.get());
@@ -285,7 +285,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemButton(AetherIIBlocks.WISPROOT_BUTTON.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
         this.itemBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
 
-        // Wisproot Artisanry Blocks
+        // Wisproot Decorative Blocks
         this.itemBlock(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_SHINGLES.get());
@@ -319,7 +319,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
 
-        // Holystone Artisanry Blocks
+        // Holystone Decorative Blocks
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
@@ -335,7 +335,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get(), AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(), "construction/");
 
-        // Faded Holystone Artisanry Blocks
+        // Faded Holystone Decorative Blocks
         this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES.get());
         this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get());
         this.itemBlock(AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
@@ -361,7 +361,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.AGIOSITE_BRICK_WALL.get(), AetherIIBlocks.AGIOSITE_BRICKS.get(), "construction/");
 
-        // Agiosite Artisanry Blocks
+        // Agiosite Decorative Blocks
         this.itemBlock(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE_KEYSTONE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get());
@@ -389,13 +389,14 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Mineral Blocks
         this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get());
         this.itemBlock(AetherIIBlocks.ZANITE_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_BLOCK.get());
 
         // Utility
         this.itemBlockFlat(AetherIIBlocks.AMBROSIUM_TORCH.get(), "utility/");
         this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-        this.itemBlock(AetherIIBlocks.ARTISANRY_BENCH.get());
+        this.itemBlock(AetherIIBlocks.ARTISANS_BENCH.get());
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
 

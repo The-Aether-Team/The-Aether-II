@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-04T14:34:40.9176027	Item Models: aether_ii
+// 1.20.4	2024-06-05T14:29:08.2912606	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -39,16 +39,17 @@ a0c75e9d5a348efa2d1950f3dddcabd54c7f3011 assets/aether_ii/models/item/arctic_pac
 0b57ad0d2dc8aafe4bd995ca27ac8ed4fa5d4678 assets/aether_ii/models/item/arctic_snowball.json
 3011fee0d9d4504b93c6746a96035accf4506b1c assets/aether_ii/models/item/arctic_snow_block.json
 19aa149f0419e640d12cb92cc1821a9f7a4cafc6 assets/aether_ii/models/item/arkenium_axe.json
+0ff1ba29070de38072f90ca3fdb095c58f543f69 assets/aether_ii/models/item/arkenium_block.json
 dc70b899ac53f0aa29fccea1bfadb391bfbe5f8b assets/aether_ii/models/item/arkenium_hammer.json
 ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_ore.json
 13d8ad0ca93c610d5fe30d0e665af3e8508de0d7 assets/aether_ii/models/item/arkenium_pickaxe.json
-b5679100bbb9478dedbaf17aad1aecc1518ff30e assets/aether_ii/models/item/arkenium_plate.json
+543879f3359d9ed24c5ababfa688a7b7375dca95 assets/aether_ii/models/item/arkenium_plates.json
 2d743f2a98b375464d534dbc97a0d0801b917f4b assets/aether_ii/models/item/arkenium_shortsword.json
 b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_shovel.json
 5cdc77ed51a4e270e9d66ab00d1e0e2302609b7e assets/aether_ii/models/item/arkenium_spear.json
 8fdeceef026dc237d0a52c72b1b456e7ad35eeb2 assets/aether_ii/models/item/arkenium_strip.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
-7eab6363617636cd31dc3009b84a7736b4c4210e assets/aether_ii/models/item/artisanry_bench.json
+69a1b24b31d30cf80e43e5cc5b6e1c7673f7c9f8 assets/aether_ii/models/item/artisans_bench.json
 c7551e4548b0c81d85c2d6072e683ba9789cc589 assets/aether_ii/models/item/blueberry.json
 f02bebdc929e60eaebcaaefe890b3f9fb604d4b3 assets/aether_ii/models/item/blueberry_bush.json
 c51076bdf8ae4eff8ab973abd37cd7970abb2d97 assets/aether_ii/models/item/blueberry_bush_stem.json
@@ -56,6 +57,8 @@ c51076bdf8ae4eff8ab973abd37cd7970abb2d97 assets/aether_ii/models/item/blueberry_
 f891ffeffb97c57fecdff9dca1bc9b213cd439c2 assets/aether_ii/models/item/blue_swet_gel.json
 843ecf00bc074daf792dca837106224d7d1be69a assets/aether_ii/models/item/blue_swet_jelly.json
 b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
+4e48f6f25f8451d175a57c92ffcc52322d66c7fa assets/aether_ii/models/item/burrukai_ribs.json
+731e1f81e61ab924dd6c5cdb553770114c7c98ad assets/aether_ii/models/item/burrukai_rib_cut.json
 e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
 ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
 a6fda269de440be4d8141138223e1d4aa1d45c92 assets/aether_ii/models/item/coarse_aether_dirt.json
@@ -161,6 +164,8 @@ dd7dbfd68a795bf1d0035260b7b53d835143d28b assets/aether_ii/models/item/holystone_
 37d4edcdbee202c9966f92f449046ac10a88f107 assets/aether_ii/models/item/irradiated_holystone_slab.json
 936e064fc6b6940df4095758416c3b5f16044586 assets/aether_ii/models/item/irradiated_holystone_stairs.json
 e4ea08420ff31ca75b1bd51883c3666d1a30252d assets/aether_ii/models/item/irradiated_holystone_wall.json
+d44dbc6d5914d14056d2cf7c62043e6afb7cab9c assets/aether_ii/models/item/kirrid_cutlet.json
+070e74e213496e828b2cbc378654a68c742e6c07 assets/aether_ii/models/item/kirrid_loin.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/kirrid_spawn_egg.json
 a146cf9b7567eb6bd1e5a4c2523f6d1f4ec153ad assets/aether_ii/models/item/mossy_holystone.json
 1b577aee3036b910200c7e21424651f9575623f4 assets/aether_ii/models/item/mossy_holystone_slab.json
@@ -182,6 +187,7 @@ aa659e5bd10ca0db200402d370084234693fc942 assets/aether_ii/models/item/quicksoil_
 280fa1a6185b874ce28a0bec8deff7035cae5904 assets/aether_ii/models/item/quicksoil_glass_pane.json
 a6f09963a1bf3d9ecad7a84042d37734d43e4137 assets/aether_ii/models/item/raw_arkenium.json
 fad53ce2a6eed791c566a36883f6cce0d0a71b6c assets/aether_ii/models/item/raw_gravitite.json
+76fd48ee55a6ea0c050737c4642a099702f1bc10 assets/aether_ii/models/item/raw_taegore_meat.json
 5c44689b768829d161bbbd42e118d1e4844e5a02 assets/aether_ii/models/item/recording_892.json
 5b9708bb41042a805c3ddb24358f2ee39db2c7f5 assets/aether_ii/models/item/rusted_ferrosite.json
 8b11c473c4865d824980c5f9807969013fae26a4 assets/aether_ii/models/item/scatterglass.json
@@ -233,6 +239,7 @@ f2be45bfdf35ea73f411f9f3c2e486fea81adc2a assets/aether_ii/models/item/skyroot_tw
 353df02d890df9f39f5891ed5858e4f0a3d83ec5 assets/aether_ii/models/item/stripped_skyroot_log.json
 1cbe721453b41b19129fe58f97f7ecf3a358fb22 assets/aether_ii/models/item/stripped_skyroot_wood.json
 3ec615217a98b5524df0e03a2d4baa5822ba2f3b assets/aether_ii/models/item/taegore_hide.json
+c4dfd109a4a444957a73b8095e97a39112feb8f1 assets/aether_ii/models/item/taegore_steak.json
 ae57a44be1865132e2fdddbf292371ba468994ed assets/aether_ii/models/item/tarabloom.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json
 206a0736c3aa29e75d9a38a3c9c5d6604ad55a31 assets/aether_ii/models/item/undershale_slab.json

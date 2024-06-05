@@ -21,7 +21,7 @@ public class ArtisanryRecipe extends SingleItemRecipe {
 
     @Override
     public ItemStack getToastSymbol() {
-        return new ItemStack(AetherIIBlocks.ARTISANRY_BENCH.get());
+        return new ItemStack(AetherIIBlocks.ARTISANS_BENCH.get());
     }
 
     public static class Serializer extends SingleItemRecipe.Serializer<ArtisanryRecipe> {

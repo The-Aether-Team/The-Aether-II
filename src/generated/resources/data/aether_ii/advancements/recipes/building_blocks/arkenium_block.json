@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_artisanry_bench": {
+    "has_arkenium_plates": {
       "conditions": {
         "items": [
           {
             "items": [
-              "aether_ii:arkenium_plate"
+              "aether_ii:arkenium_plates"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:artisanry_bench"
+        "recipe": "aether_ii:arkenium_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,12 +23,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_artisanry_bench"
+      "has_arkenium_plates"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:artisanry_bench"
+      "aether_ii:arkenium_block"
     ]
   }
 }

@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.block.utility.ArtisanryBenchBlock;
 import com.aetherteam.aetherii.client.event.listeners.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArtisanryBenchScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.HolystoneFurnaceScreen;

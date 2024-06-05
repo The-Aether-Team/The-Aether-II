@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_artisanry_blocks": {
+    "has_artisans_bench": {
       "conditions": {
         "items": [
           {
-            "tag": "aether_ii:agiosite_decorative_blocks"
+            "items": [
+              "aether_ii:arkenium_plates"
+            ]
           }
         ]
       },
@@ -13,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:agiosite_bricks_from_artisanry"
+        "recipe": "aether_ii:artisans_bench"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +23,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_artisanry_blocks"
+      "has_artisans_bench"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:agiosite_bricks_from_artisanry"
+      "aether_ii:artisans_bench"
     ]
   }
 }

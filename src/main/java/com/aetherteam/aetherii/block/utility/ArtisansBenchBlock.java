@@ -24,17 +24,17 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-public class ArtisanryBenchBlock extends Block {
-    public static final MapCodec<ArtisanryBenchBlock> CODEC = simpleCodec(ArtisanryBenchBlock::new);
+public class ArtisansBenchBlock extends Block {
+    public static final MapCodec<ArtisansBenchBlock> CODEC = simpleCodec(ArtisansBenchBlock::new);
     private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.artisanry_bench");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     @Override
-    public MapCodec<ArtisanryBenchBlock> codec() {
+    public MapCodec<ArtisansBenchBlock> codec() {
         return CODEC;
     }
 
-    public ArtisanryBenchBlock(Properties properties) {
+    public ArtisansBenchBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
