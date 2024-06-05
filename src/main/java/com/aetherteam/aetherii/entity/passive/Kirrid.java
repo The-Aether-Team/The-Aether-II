@@ -70,7 +70,6 @@ public class Kirrid extends AetherAnimal implements IShearable {
             MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
             MemoryModuleType.IS_TEMPTED,
             MemoryModuleType.RAM_COOLDOWN_TICKS,
-            MemoryModuleType.RAM_TARGET,
             AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get(),
             AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(),
             MemoryModuleType.IS_PANICKING
@@ -131,7 +130,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
      */
     @Override
     public int getMaxFallDistance() {
-        return 8;
+        return this.onGround() ? super.getMaxFallDistance() : 14;
     }
 
     @Override

@@ -14,7 +14,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.schedule.Activity;
 
@@ -33,7 +32,6 @@ public class KirridAi {
     public static Brain<?> makeBrain(Brain<Kirrid> pBrain) {
         initCoreActivity(pBrain);
         initIdleActivity(pBrain);
-        initRamActivity(pBrain);
         pBrain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         pBrain.setDefaultActivity(Activity.IDLE);
         pBrain.useDefaultActivity();
@@ -58,7 +56,7 @@ public class KirridAi {
     }
 
     private static void initIdleActivity(Brain<Kirrid> pBrain) {
-        pBrain.addActivityWithConditions(
+        pBrain.addActivity(
                 Activity.IDLE,
                 ImmutableList.of(
                         Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
@@ -69,36 +67,15 @@ public class KirridAi {
                                 3,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(FallRandomStroll.stroll(1.5F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridEatGrass(), 3), Pair.of(new DoNothing(30, 60), 1)
+                                                Pair.of(FallRandomStroll.stroll(1.5F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridRamTarget(
+                                                        p_149474_ -> TIME_BETWEEN_RAMS,
+                                                        RAM_TARGET_CONDITIONS,
+                                                        1.5F,
+                                                        p_149468_ -> SoundEvents.GOAT_RAM_IMPACT
+                                                ), 2), Pair.of(new KirridEatGrass(), 2), Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
                         )
-                ),
-                ImmutableSet.of(
-                        Pair.of(MemoryModuleType.RAM_TARGET, MemoryStatus.VALUE_ABSENT)
-                )
-        );
-    }
-
-
-    private static void initRamActivity(Brain<Kirrid> pBrain) {
-        pBrain.addActivityWithConditions(
-                Activity.RAM,
-                ImmutableList.of(
-                        Pair.of(
-                                0,
-                                new KirridRamTarget(
-                                        p_149474_ -> TIME_BETWEEN_RAMS,
-                                        RAM_TARGET_CONDITIONS,
-                                        1.5F,
-                                        p_149468_ -> SoundEvents.GOAT_RAM_IMPACT
-                                )
-                        )
-                ),
-                ImmutableSet.of(
-                        Pair.of(MemoryModuleType.TEMPTING_PLAYER, MemoryStatus.VALUE_ABSENT),
-                        Pair.of(MemoryModuleType.BREED_TARGET, MemoryStatus.VALUE_ABSENT),
-                        Pair.of(MemoryModuleType.RAM_COOLDOWN_TICKS, MemoryStatus.VALUE_ABSENT)
                 )
         );
     }
