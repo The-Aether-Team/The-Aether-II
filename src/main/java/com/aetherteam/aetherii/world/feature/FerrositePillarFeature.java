@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositePillarConfiguration;
 import com.mojang.serialization.Codec;
@@ -9,7 +8,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration> {
 
@@ -34,15 +32,9 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         for (int i = (int) ((int) -radius * 2 + radius / 1.5F); i < 0; ++i) {
             BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int) radius, pos.getZ()), radius + i * 0.5F, random, true);
         }
-
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()), new BlockPos(pos.getX(), pos.getY() + height - 2 + floatingHeight + (int) radius, pos.getZ()), radius, random, true);
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()), new BlockPos(pos.getX(), pos.getY() + height - 1 + floatingHeight + (int) radius, pos.getZ()), radius, random, true);
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), new BlockPos(pos.getX(), pos.getY() + height + floatingHeight + (int) radius, pos.getZ()), radius, random, true);
+        BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextInt(2) -1, pos.getY() + floatingHeight + height + (int) radius, pos.getZ() + random.nextInt(2) -1), radius * 0.75F, random, true);
 
         placeSidePillar(level, random, pos, config);
-        if (random.nextInt(1) == 0) {
-            placeSidePillar(level, random, pos, config);
-        }
         if (random.nextInt(1) == 0) {
             placeSidePillar(level, random, pos, config);
         }
@@ -74,9 +66,6 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         for (int i = (int) ((int) -radius * 2 + radius / 1.5F); i < 0; ++i) {
             BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(posPillar.getX(), posPillar.getY() + i + (int)radius, posPillar.getZ()), radius + i * 0.5F, random, true);
         }
-
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()), new BlockPos(posPillar.getX(), posPillar.getY() + height - 2 + (int)radius, posPillar.getZ()), radius, random, true);
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()), new BlockPos(posPillar.getX(), posPillar.getY() + height - 1 + (int)radius, posPillar.getZ()), radius, random, true);
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), new BlockPos(posPillar.getX(), posPillar.getY() + height + (int)radius, posPillar.getZ()), radius, random, true);
+        BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(posPillar.getX() + random.nextInt(2) -1, posPillar.getY() + height + (int) radius, posPillar.getZ() + random.nextInt(2) -1), radius * 0.75F, random, true);
     }
 }

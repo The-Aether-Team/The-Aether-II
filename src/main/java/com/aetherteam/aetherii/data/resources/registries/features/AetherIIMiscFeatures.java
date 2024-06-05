@@ -18,13 +18,18 @@ import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
+
+import java.util.List;
 
 public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = AetherIIFeatureUtils.registerKey("coast_quicksoil");
@@ -64,10 +69,19 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
         AetherIIFeatureUtils.register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), createCoast(AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()));
 
         AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.FERROSITE.get()),
-                UniformFloat.of(6, 12),
-                UniformInt.of(16, 24),
-                UniformInt.of(8, 12),
+                new NoiseProvider(
+                        2345L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.0333F,
+                        List.of(
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
+                        )
+                ),
+                UniformFloat.of(0, 1),
+                UniformInt.of(0, 1),
+                UniformInt.of(0, 1),
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
 

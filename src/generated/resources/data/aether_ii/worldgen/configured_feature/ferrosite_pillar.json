@@ -2,30 +2,46 @@
   "type": "aether_ii:ferrosite_pillar",
   "config": {
     "block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:ferrosite"
-      }
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": 0
+      },
+      "scale": 0.0333,
+      "seed": 2345,
+      "states": [
+        {
+          "Name": "aether_ii:ferrosite"
+        },
+        {
+          "Name": "aether_ii:ferrosite"
+        },
+        {
+          "Name": "aether_ii:rusted_ferrosite"
+        }
+      ]
     },
     "floating_height": {
       "type": "minecraft:uniform",
       "value": {
-        "max_inclusive": 12,
-        "min_inclusive": 8
+        "max_inclusive": 1,
+        "min_inclusive": 0
       }
     },
     "height": {
       "type": "minecraft:uniform",
       "value": {
-        "max_inclusive": 24,
-        "min_inclusive": 16
+        "max_inclusive": 1,
+        "min_inclusive": 0
       }
     },
     "radius": {
       "type": "minecraft:uniform",
       "value": {
-        "max_exclusive": 12.0,
-        "min_inclusive": 6.0
+        "max_exclusive": 1.0,
+        "min_inclusive": 0.0
       }
     },
     "valid_blocks": "aether_ii:aether_grass_block"

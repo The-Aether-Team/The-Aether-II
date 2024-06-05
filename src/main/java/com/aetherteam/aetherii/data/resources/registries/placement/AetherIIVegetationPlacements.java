@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.data.resources.registries.placement;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -8,6 +10,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 
@@ -18,6 +21,8 @@ public class AetherIIVegetationPlacements {
     public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH = AetherIIPlacementUtils.createKey("highlands_bush_patch");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = AetherIIPlacementUtils.createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = AetherIIPlacementUtils.createKey("orange_tree_patch");
+
+    public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR_TURF = AetherIIPlacementUtils.createKey("ferrosite_pillar_turf");
 
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = AetherIIPlacementUtils.createKey("highfields_flower_patch");
 
@@ -64,6 +69,13 @@ public class AetherIIVegetationPlacements {
         AetherIIPlacementUtils.register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.ORANGE_TREE_PATCH),
                 RarityFilter.onAverageOnceEvery(16),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
+                BiomeFilter.biome());
+
+        AetherIIPlacementUtils.register(context, FERROSITE_PILLAR_TURF, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.FERROSITE_PILLAR_TURF),
+                CountPlacement.of(127),
+                InSquarePlacement.spread(),
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.FERROSITE)),
                 BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, FLOURISHING_FIELD_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_FLOURISHING_FIELD),
