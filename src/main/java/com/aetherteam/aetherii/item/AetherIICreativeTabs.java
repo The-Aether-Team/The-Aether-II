@@ -233,6 +233,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.SKYBIRCH_SAPLING.get());
                 output.accept(AetherIIBlocks.WISPROOT_SAPLING.get());
                 output.accept(AetherIIBlocks.WISPTOP_SAPLING.get());
                 output.accept(AetherIIBlocks.GREATROOT_SAPLING.get());

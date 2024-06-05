@@ -198,6 +198,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(ItemTags.WOOL_CARPETS).add(AetherIIBlocks.CLOUDWOOL_CARPET.get().asItem());
         this.tag(ItemTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.asItem(),
+                AetherIIBlocks.SKYBIRCH_SAPLING.asItem(),
                 AetherIIBlocks.WISPROOT_SAPLING.asItem(),
                 AetherIIBlocks.WISPTOP_SAPLING.asItem(),
                 AetherIIBlocks.GREATROOT_SAPLING.asItem(),

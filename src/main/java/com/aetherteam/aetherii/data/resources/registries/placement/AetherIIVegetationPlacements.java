@@ -71,6 +71,7 @@ public class AetherIIVegetationPlacements {
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BiomeFilter.biome());
 
+        //TODO: Optimize by having it be placed on the Pillar itself
         AetherIIPlacementUtils.register(context, FERROSITE_PILLAR_TURF, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.FERROSITE_PILLAR_TURF),
                 CountPlacement.of(127),
                 InSquarePlacement.spread(),

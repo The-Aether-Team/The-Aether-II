@@ -19,6 +19,13 @@ public class AetherIITreeGrowers {
             Optional.empty()
     );
 
+    public static final TreeGrower SKYBIRCH = new TreeGrower(
+            "skybirch",
+            Optional.empty(),
+            Optional.of(AetherIITreeFeatures.SKYBIRCH),
+            Optional.empty()
+    );
+
     public static final TreeGrower WISPROOT = new TreeGrower(
             "wisproot",
             Optional.empty(),
