@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.block.utility.ArtisanryBenchBlock;
 import com.aetherteam.aetherii.client.event.listeners.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArtisanryBenchScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.HolystoneFurnaceScreen;
@@ -41,6 +40,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
         neoBus.addListener(AetherIIRenderers::bakeModels);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
+        neoBus.addListener(AetherIIShaders::registerShaders);
     }
 
     @SuppressWarnings("deprecation")

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.level;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.AetherIIShaders;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -60,7 +61,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
     private static BufferBuilder.RenderedBuffer buildSkyDisc(BufferBuilder pBuilder, float pY) {
         float f = Math.signum(pY) * 512.0F;
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        RenderSystem.setShader(AetherIIShaders::getPositionColorCloudCoverShader);
 
         pBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
         pBuilder.vertex(0.0, pY, 0.0).color(1.0F, 1.0F, 1.0F, 1.0F).endVertex();
@@ -200,7 +201,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
 //                poseStack.translate(0.0F, -15.0F, 0.0F);
                 this.cloudSkyboxBuffer.bind();
-                this.cloudSkyboxBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, GameRenderer.getPositionColorShader());
+                this.cloudSkyboxBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, AetherIIShaders.getPositionColorCloudCoverShader());
                 VertexBuffer.unbind();
                 setupFog.run();
                 poseStack.popPose();
