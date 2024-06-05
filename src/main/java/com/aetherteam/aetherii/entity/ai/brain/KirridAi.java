@@ -69,7 +69,7 @@ public class KirridAi {
                                 3,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(FallRandomStroll.stroll(1.5F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridEatGrass(), 2), Pair.of(new DoNothing(30, 60), 1)
+                                                Pair.of(FallRandomStroll.stroll(1.5F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new KirridEatGrass(), 3), Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
                         )

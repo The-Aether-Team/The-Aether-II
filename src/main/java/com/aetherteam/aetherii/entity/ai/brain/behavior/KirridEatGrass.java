@@ -33,7 +33,6 @@ public class KirridEatGrass extends Behavior<Kirrid> {
     }
 
     protected void start(ServerLevel pLevel, Kirrid pEntity, long pGameTime) {
-
         pLevel.broadcastEntityEvent(pEntity, (byte) 64);
     }
 
