@@ -6,10 +6,12 @@ import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
+
+import static com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes.ARTISANS_BENCH;
+import static com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes.HOLYSTONE_FURNACE;
 
 public class AetherIILanguageData extends AetherIILanguageProvider {
     public AetherIILanguageData(PackOutput output) {
@@ -490,8 +492,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Containers
-        this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addContainerType(AetherIIMenuTypes.ARTISANRY_BENCH, "Decorative Bench");
+        this.addContainerType(HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addContainerType(ARTISANS_BENCH, "Artisan's Bench");
 
 
         // Subtitles

@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.block.utility;
 
-import com.aetherteam.aetherii.inventory.menu.ArtisanryBenchMenu;
+import com.aetherteam.aetherii.inventory.menu.ArtisansBenchMenu;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 
 public class ArtisansBenchBlock extends Block {
     public static final MapCodec<ArtisansBenchBlock> CODEC = simpleCodec(ArtisansBenchBlock::new);
-    private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.artisanry_bench");
+    private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.artisans_bench");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     @Override
@@ -58,7 +58,7 @@ public class ArtisansBenchBlock extends Block {
     @Nullable
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-        return new SimpleMenuProvider((id, inventory, player) -> new ArtisanryBenchMenu(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_TITLE);
+        return new SimpleMenuProvider((id, inventory, player) -> new ArtisansBenchMenu(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_TITLE);
     }
 
     @Override
