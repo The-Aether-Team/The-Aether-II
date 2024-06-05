@@ -17,6 +17,7 @@
     "common.accessor.SpreadingSnowyDirtBlockAccessor"
   ],
   "client": [
+    "client.accessor.LevelRendererAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
