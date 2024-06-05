@@ -44,7 +44,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
+        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
       
         SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
@@ -88,9 +88,9 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                         AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
                         64,
-                        AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_NOISE),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_NOISE),
                         10D,
-                        AetherIIDensityFunctions.getFunction(densityFunctions, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
                         15D
                 ));
     }

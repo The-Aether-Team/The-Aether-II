@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositePillarConfiguration;
 import com.mojang.serialization.Codec;
@@ -29,7 +30,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         int floatingHeight = random.nextInt(2) + 4;
 
         for (int i = -128; i < floatingHeight; ++i) {
-            BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(Blocks.AIR), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight - (int) radius, pos.getZ()), radius, random, true);
+            BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(Blocks.AIR), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight - (int)radius, pos.getZ()), radius, random, true);
         }
         for (int i = 0; i < height; ++i) {
             BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int)radius, pos.getZ()), radius, random, true);
@@ -37,6 +38,11 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         for (int i = (int) -radius; i < 0; ++i) {
             BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int)radius, pos.getZ()), radius + i, random, true);
         }
+
+        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()), new BlockPos(pos.getX(), pos.getY() + height - 2 + floatingHeight + (int)radius, pos.getZ()), radius, random, true);
+        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()), new BlockPos(pos.getX(), pos.getY() + height - 1 + floatingHeight + (int)radius, pos.getZ()), radius, random, true);
+        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), new BlockPos(pos.getX(), pos.getY() + height + floatingHeight + (int)radius, pos.getZ()), radius, random, true);
+
         return true;
     }
 }

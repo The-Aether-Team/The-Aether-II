@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.world.feature.configuration.CloudbedConfiguration;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -11,16 +12,15 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
+public class CloudbedFeature extends Feature<CloudbedConfiguration> {
 
-    public CloudbedFeature(Codec<Config> codec) {
+    public CloudbedFeature(Codec<CloudbedConfiguration> codec) {
         super(codec);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<Config> context) {
-
-        Config config = context.config();
+    public boolean place(FeaturePlaceContext<CloudbedConfiguration> context) {
+        CloudbedConfiguration config = context.config();
 
         DensityFunction cloudNoise = config.cloudNoise();
         DensityFunction yOffsetNoise = config.yOffset();
@@ -63,19 +63,5 @@ public class CloudbedFeature extends Feature<CloudbedFeature.Config> {
     
     private static float cosineInterp(float progress, float start, float end) {
         return (-Mth.cos((float) (Math.PI * progress)) + 1F) * 0.5F * (end - start) + start;
-    }
-
-    public record Config(BlockStateProvider block, BlockPredicate predicate, int yLevel, DensityFunction cloudNoise, double cloudRadius, DensityFunction yOffset, double maxYOffset) implements FeatureConfiguration {
-        public static final Codec<Config> CODEC = RecordCodecBuilder.create(
-                (builder) -> builder.group(
-                        BlockStateProvider.CODEC.fieldOf("block").forGetter(Config::block),
-                        BlockPredicate.CODEC.fieldOf("predicate").forGetter(Config::predicate),
-                        Codec.INT.fieldOf("y_level").forGetter(Config::yLevel),
-                        DensityFunction.HOLDER_HELPER_CODEC.fieldOf("cloud_noise").forGetter(Config::cloudNoise),
-                        Codec.DOUBLE.fieldOf("cloud_radius").forGetter(Config::cloudRadius),
-                        DensityFunction.HOLDER_HELPER_CODEC.fieldOf("offset_noise").forGetter(Config::yOffset),
-                        Codec.DOUBLE.fieldOf("offset_max").forGetter(Config::maxYOffset)
-
-                ).apply(builder, Config::new));
     }
 }

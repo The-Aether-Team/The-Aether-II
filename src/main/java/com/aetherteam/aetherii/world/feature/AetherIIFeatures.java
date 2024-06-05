@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.world.feature.configuration.AercloudConfiguration;
+import com.aetherteam.aetherii.world.feature.configuration.CloudbedConfiguration;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositePillarConfiguration;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,6 +19,6 @@ public class AetherIIFeatures {
     public static DeferredHolder<Feature<?>, Feature<FerrositePillarConfiguration>> FERROSITE_PILLAR = FEATURES.register("ferrosite_pillar", () -> new FerrositePillarFeature(FerrositePillarConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> MOA_NEST = FEATURES.register("moa_nest", () -> new MoaNestFeature(NoneFeatureConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<AercloudConfiguration>> AERCLOUD = FEATURES.register("aercloud", () -> new AercloudFeature(AercloudConfiguration.CODEC));
-    public static DeferredHolder<Feature<?>, Feature<CloudbedFeature.Config>> CLOUDBED = FEATURES.register("cloudbed", () -> new CloudbedFeature(CloudbedFeature.Config.CODEC));
+    public static DeferredHolder<Feature<?>, Feature<CloudbedConfiguration>> CLOUDBED = FEATURES.register("cloudbed", () -> new CloudbedFeature(CloudbedConfiguration.CODEC));
     public static DeferredHolder<Feature<?>, Feature<SimpleBlockConfiguration>> ORANGE_TREE = FEATURES.register("orange_tree", () -> new OrangeTreeFeature(SimpleBlockConfiguration.CODEC));
 }
