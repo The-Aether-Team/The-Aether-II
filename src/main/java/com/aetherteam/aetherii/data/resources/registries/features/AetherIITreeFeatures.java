@@ -22,6 +22,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 public class AetherIITreeFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT = AetherIIFeatureUtils.registerKey("skyroot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SKYROOT = AetherIIFeatureUtils.registerKey("large_skyroot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYBIRCH = AetherIIFeatureUtils.registerKey("skybirch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WISPROOT = AetherIIFeatureUtils.registerKey("wisproot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WISPTOP = AetherIIFeatureUtils.registerKey("wisptop");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATROOT = AetherIIFeatureUtils.registerKey("greatroot");
@@ -45,6 +46,14 @@ public class AetherIITreeFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
                         new StraightTrunkPlacer(7, 6, 0), BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAVES.get().defaultBlockState()),
                         new LargeSkyrootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, SKYBIRCH, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(8, 3, 0), BlockStateProvider.simple(AetherIIBlocks.SKYBIRCH_LEAVES.get().defaultBlockState()),
+                        new SkybirchFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());
 
