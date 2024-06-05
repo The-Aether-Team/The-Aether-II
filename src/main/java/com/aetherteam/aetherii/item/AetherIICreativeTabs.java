@@ -340,6 +340,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.WYNDBERRY.get());
                 output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_JELLY.get());
+                output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
+                output.accept(AetherIIItems.BURRUKAI_RIBS.get());
+                output.accept(AetherIIItems.KIRRID_CUTLET.get());
+                output.accept(AetherIIItems.KIRRID_LOIN.get());
+                output.accept(AetherIIItems.RAW_TAEGORE_MEAT.get());
+                output.accept(AetherIIItems.TAEGORE_STEAK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()

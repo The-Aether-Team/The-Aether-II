@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "aether_ii:kirrid_loin"
+  },
+  "result": "aether_ii:kirrid_cutlet"
+}
