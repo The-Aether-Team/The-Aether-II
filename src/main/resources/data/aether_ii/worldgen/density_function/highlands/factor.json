@@ -5,13 +5,13 @@
     "points": [
       {
         "derivative": 0.0,
-        "location": 0.5,
+        "location": 0.475,
         "value": {
           "coordinate": "aether_ii:highlands/temperature",
           "points": [
             {
               "derivative": 0.0,
-              "location": -0.45,
+              "location": -0.475,
               "value": 1
             },
             {
@@ -21,12 +21,12 @@
             },
             {
               "derivative": 0.0,
-              "location": -0.35,
+              "location": -0.325,
               "value": 1
             },
             {
               "derivative": 0.0,
-              "location": 0.6,
+              "location": 0.575,
               "value": 1
             },
             {
@@ -36,7 +36,7 @@
             },
             {
               "derivative": 0.0,
-              "location": 0.7,
+              "location": 0.725,
               "value": 1
             }
           ]
@@ -49,7 +49,7 @@
       },
       {
         "derivative": 0.0,
-        "location": 0.6,
+        "location": 0.625,
         "value": 1
       }
     ]
