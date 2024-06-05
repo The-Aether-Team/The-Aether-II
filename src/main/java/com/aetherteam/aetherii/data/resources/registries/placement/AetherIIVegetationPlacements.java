@@ -73,7 +73,7 @@ public class AetherIIVegetationPlacements {
         AetherIIPlacementUtils.register(context, MAGNETIC_SCAR_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_MAGNETIC_SCAR),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
         AetherIIPlacementUtils.register(context, TURQUOISE_FOREST_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_TURQUOISE_FOREST),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(7, 0.1F, 1)));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(4, 0.1F, 1)));
         AetherIIPlacementUtils.register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_VIOLET_HIGHWOODS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
         AetherIIPlacementUtils.register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_FOREST),

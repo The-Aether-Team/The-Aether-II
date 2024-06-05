@@ -396,7 +396,7 @@
           }
         },
         {
-          "biome": "aether_ii:magnetic_scar",
+          "biome": "aether_ii:glistening_swamp",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -426,7 +426,7 @@
           }
         },
         {
-          "biome": "aether_ii:glistening_swamp",
+          "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -456,7 +456,7 @@
           }
         },
         {
-          "biome": "aether_ii:magnetic_scar",
+          "biome": "aether_ii:turquoise_forest",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -486,7 +486,7 @@
           }
         },
         {
-          "biome": "aether_ii:turquoise_forest",
+          "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -636,7 +636,7 @@
           }
         },
         {
-          "biome": "aether_ii:glistening_swamp",
+          "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
               -1.5,
