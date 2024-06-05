@@ -16,16 +16,16 @@ public final class BlockPlacementUtil {
      * @param radius        The radius of the disc, as a {@link Float}.
      * @param random        The {@link RandomSource} used for generation.
      */
-    public static void placeDisk(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random) {
+    public static void placeDisk(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random, boolean replaceBlocks) {
         float radiusSq = radius * radius;
-        placeProvidedBlock(level, blockProvider, center, random);
+        placeProvidedBlock(level, blockProvider, center, random, replaceBlocks);
         for (int z = 0; z < radius; z++) {
             for (int x = 0; x < radius; x++) {
                 if (x * x + z * z > radiusSq) continue;
-                placeProvidedBlock(level, blockProvider, center.offset(x, 0, z), random);
-                placeProvidedBlock(level, blockProvider, center.offset(-x, 0, -z), random);
-                placeProvidedBlock(level, blockProvider, center.offset(-z, 0, x), random);
-                placeProvidedBlock(level, blockProvider, center.offset(z, 0, -x), random);
+                placeProvidedBlock(level, blockProvider, center.offset(x, 0, z), random, replaceBlocks);
+                placeProvidedBlock(level, blockProvider, center.offset(-x, 0, -z), random, replaceBlocks);
+                placeProvidedBlock(level, blockProvider, center.offset(-z, 0, x), random, replaceBlocks);
+                placeProvidedBlock(level, blockProvider, center.offset(z, 0, -x), random, replaceBlocks);
             }
         }
     }
@@ -41,8 +41,10 @@ public final class BlockPlacementUtil {
      * @return A {@link Boolean} for whether the block was placed successfully.
      */
     @SuppressWarnings("UnusedReturnValue")
-    public static boolean placeProvidedBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random) {
-        if (level.getBlockState(pos).isAir()) {
+    public static boolean placeProvidedBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, boolean replaceBlocks) {
+        if (replaceBlocks) {
+            return level.setBlock(pos, provider.getState(random, pos), 2);
+        } else if (level.getBlockState(pos).isAir()) {
             return level.setBlock(pos, provider.getState(random, pos), 2);
         } else {
             return false;
