@@ -19,7 +19,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -38,38 +37,35 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private static final ResourceLocation SNOW_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/snow_light.png");
 
     @Nullable
-    private VertexBuffer cloudSkyboxBuffer;
+    private VertexBuffer cloudCoverBuffer;
 
     public HighlandsSpecialEffects() {
         super(256.0F, true, DimensionSpecialEffects.SkyType.NORMAL, false, false);
-        this.createCloudSkyboxBuffer();
+        this.createCloudCoverBuffer();
     }
 
-    private void createCloudSkyboxBuffer() {
+    private void createCloudCoverBuffer() {
         Tesselator tesselator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tesselator.getBuilder();
-        if (this.cloudSkyboxBuffer != null) {
-            this.cloudSkyboxBuffer.close();
+        if (this.cloudCoverBuffer != null) {
+            this.cloudCoverBuffer.close();
         }
-
-        this.cloudSkyboxBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
-        BufferBuilder.RenderedBuffer bufferbuilder$renderedbuffer = buildSkyDisc(bufferbuilder, -16.0F);
-        this.cloudSkyboxBuffer.bind();
-        this.cloudSkyboxBuffer.upload(bufferbuilder$renderedbuffer);
+        this.cloudCoverBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
+        BufferBuilder.RenderedBuffer bufferbuilder$renderedbuffer = buildCloudCoverDisc(bufferbuilder, -16.0F);
+        this.cloudCoverBuffer.bind();
+        this.cloudCoverBuffer.upload(bufferbuilder$renderedbuffer);
         VertexBuffer.unbind();
     }
 
-    private static BufferBuilder.RenderedBuffer buildSkyDisc(BufferBuilder pBuilder, float pY) {
-        float f = Math.signum(pY) * 512.0F;
+    private static BufferBuilder.RenderedBuffer buildCloudCoverDisc(BufferBuilder builder, float y) {
+        float f = Math.signum(y) * 512.0F;
         RenderSystem.setShader(AetherIIShaders::getPositionColorCloudCoverShader);
-
-        pBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-        pBuilder.vertex(0.0, pY, 0.0).color(1.0F, 1.0F, 1.0F, 1.0F).endVertex();
-        for (int i = -180; i <= 180; i += 45) {
-            pBuilder.vertex(f * Mth.cos((float) i * (float) (Math.PI / 180.0)), pY, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(1.0F, 1.0F, 1.0F, 0.0F).endVertex();
+        builder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+        builder.vertex(0.0, y, 0.0).color(1.0F, 1.0F, 1.0F, 1.0F).endVertex();
+        for (int i = -180; i <= 180; i += 9) {
+            builder.vertex(f * Mth.cos((float) i * (float) (Math.PI / 180.0)), y, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(1.0F, 1.0F, 1.0F, 0.0F).endVertex();
         }
-
-        return pBuilder.end();
+        return builder.end();
     }
 
     @Override
@@ -135,12 +131,6 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 float f11 = 1.0F - level.getRainLevel(partialTick);
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, f11);
 
-                
-                
-                
-                
-                
-//                this.drawCelestialBodies(partialTick, poseStack, level, bufferBuilder);
                 poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
                 poseStack.mulPose(Axis.XP.rotationDegrees(level.getTimeOfDay(partialTick) * 360.0F));
                 Matrix4f matrix4f1 = poseStack.last().pose();
@@ -158,20 +148,17 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 int k = level.getMoonPhase();
                 int l = k % 4;
                 int i1 = k / 4 % 2;
-                float f13 = (float)(l + 0) / 4.0F;
-                float f14 = (float)(i1 + 0) / 2.0F;
-                float f15 = (float)(l + 1) / 4.0F;
-                float f16 = (float)(i1 + 1) / 2.0F;
+                float f13 = (float) (l) / 4.0F;
+                float f14 = (float) (i1) / 2.0F;
+                float f15 = (float) (l + 1) / 4.0F;
+                float f16 = (float) (i1 + 1) / 2.0F;
                 bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                 bufferBuilder.vertex(matrix4f1, -f12, -100.0F, f12).uv(f15, f16).endVertex();
                 bufferBuilder.vertex(matrix4f1, f12, -100.0F, f12).uv(f13, f16).endVertex();
                 bufferBuilder.vertex(matrix4f1, f12, -100.0F, -f12).uv(f13, f14).endVertex();
                 bufferBuilder.vertex(matrix4f1, -f12, -100.0F, -f12).uv(f15, f14).endVertex();
                 BufferUploader.drawWithShader(bufferBuilder.end());
-                
-                
-                
-                
+
                 float f10 = level.getStarBrightness(partialTick) * f11;
                 if (f10 > 0.0F) {
                     RenderSystem.setShaderColor(f10, f10, f10, f10);
@@ -187,44 +174,16 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 RenderSystem.defaultBlendFunc();
                 poseStack.popPose();
 
+                float color = Math.min(((float) (vec3.x + vec3.y + vec3.z) / 3.0F) * 1.25F, 1.0F);
+                RenderSystem.setShaderColor(color, color, color, 1.0F);
 
-
-
-
-//                RenderSystem.setShaderColor(0.8F, 0.8F, 0.8F, 1.0F);
                 poseStack.pushPose();
                 RenderSystem.enableBlend();
-                RenderSystem.defaultBlendFunc();
-                FogRenderer.setupNoFog();
-
-//                RenderS
-
-//                poseStack.translate(0.0F, -15.0F, 0.0F);
-                this.cloudSkyboxBuffer.bind();
-                this.cloudSkyboxBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, AetherIIShaders.getPositionColorCloudCoverShader());
+                this.cloudCoverBuffer.bind();
+                this.cloudCoverBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, AetherIIShaders.getPositionColorCloudCoverShader());
                 VertexBuffer.unbind();
-                setupFog.run();
+                RenderSystem.disableBlend();
                 poseStack.popPose();
-
-//                RenderSystem.setShaderColor(0.8F, 0.8F, 0.8F, 0.5F);
-//                poseStack.pushPose();
-//                poseStack.translate(0.0F, -10.0F, 0.0F);
-//                ((LevelRendererAccessor) levelRenderer).aether_ii$getDarkBuffer().bind();
-//                ((LevelRendererAccessor) levelRenderer).aether_ii$getDarkBuffer().drawWithShader(poseStack.last().pose(), projectionMatrix, shaderinstance);
-//                VertexBuffer.unbind();
-//                poseStack.popPose();
-
-
-//                RenderSystem.setShaderColor(0.0F, 0.0F, 0.0F, 1.0F);
-//                double d0 = Minecraft.getInstance().player.getEyePosition(partialTick).y - level.getLevelData().getHorizonHeight(level);
-//                if (d0 < 0.0) {
-//                    poseStack.pushPose();
-//                    poseStack.translate(0.0F, 12.0F, 0.0F);
-//                    ((LevelRendererAccessor) levelRenderer).aether_ii$getDarkBuffer().bind();
-//                    ((LevelRendererAccessor) levelRenderer).aether_ii$getDarkBuffer().drawWithShader(poseStack.last().pose(), projectionMatrix, shaderinstance);
-//                    VertexBuffer.unbind();
-//                    poseStack.popPose();
-//                }
 
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 RenderSystem.depthMask(true);
@@ -289,66 +248,6 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         }
 
         return new Vec3(f2, f3, f4);
-    }
-
-    /**
-     * [CODE COPY] - {@link LevelRenderer#renderSky(PoseStack, Matrix4f, float, Camera, boolean, Runnable)}.<br><br>
-     * Copied parts of the middle segment that were used for sun/moon rendering.
-     */
-    private void drawCelestialBodies(float partialTick, PoseStack poseStack, ClientLevel level, BufferBuilder bufferBuilder) {
-        // This code determines the current angle of the sun and moon and determines whether they should be visible or not.
-        long dayTime = level.getDayTime() % (long) 24000;
-        float sunOpacity;
-        float moonOpacity;
-        if (dayTime > 23800L) {
-            dayTime -= 23800L;
-            sunOpacity = Math.min(dayTime * 0.00167F, 1F);
-            moonOpacity = Math.max(1.0F - dayTime * 0.00167F, 0F);
-        } else if (dayTime > 12800L) {
-            dayTime -= 12800L;
-            sunOpacity = Math.max(1.0F - dayTime * 0.00167F, 0F);
-            moonOpacity = Math.min(dayTime * 0.00167F, 1F);
-        } else {
-            sunOpacity = 1.0F;
-            moonOpacity = 0.0F;
-        }
-        sunOpacity -= level.getRainLevel(partialTick);
-        moonOpacity -= level.getRainLevel(partialTick);
-
-        // Render celestial bodies.
-        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
-        poseStack.mulPose(Axis.XP.rotationDegrees(level.getTimeOfDay(partialTick) * 360.0F));
-        Matrix4f matrix4f1 = poseStack.last().pose();
-        float celestialOffset = 30.0F;
-
-        // Render the sun.
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, sunOpacity);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, SUN_LOCATION);
-        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferBuilder.vertex(matrix4f1, -celestialOffset, 100.0F, -celestialOffset).uv(0.0F, 0.0F).endVertex();
-        bufferBuilder.vertex(matrix4f1, celestialOffset, 100.0F, -celestialOffset).uv(1.0F, 0.0F).endVertex();
-        bufferBuilder.vertex(matrix4f1, celestialOffset, 100.0F, celestialOffset).uv(1.0F, 1.0F).endVertex();
-        bufferBuilder.vertex(matrix4f1, -celestialOffset, 100.0F, celestialOffset).uv(0.0F, 1.0F).endVertex();
-        BufferUploader.drawWithShader(bufferBuilder.end());
-
-        // Render the moon.
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, moonOpacity);
-        celestialOffset = 20.0F;
-        RenderSystem.setShaderTexture(0, MOON_LOCATION);
-        int moonPhase = level.getMoonPhase();
-        int textureX = moonPhase % 4;
-        int textureY = moonPhase / 4 % 2;
-        float uLeft = (float) (textureX) / 4.0F;
-        float vDown = (float) (textureY) / 2.0F;
-        float uRight = (float) (textureX + 1) / 4.0F;
-        float vUp = (float) (textureY + 1) / 2.0F;
-        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        bufferBuilder.vertex(matrix4f1, -celestialOffset, -100.0F, celestialOffset).uv(uRight, vUp).endVertex();
-        bufferBuilder.vertex(matrix4f1, celestialOffset, -100.0F, celestialOffset).uv(uLeft, vUp).endVertex();
-        bufferBuilder.vertex(matrix4f1, celestialOffset, -100.0F, -celestialOffset).uv(uLeft, vDown).endVertex();
-        bufferBuilder.vertex(matrix4f1, -celestialOffset, -100.0F, -celestialOffset).uv(uRight, vDown).endVertex();
-        BufferUploader.drawWithShader(bufferBuilder.end());
     }
 
     @Override

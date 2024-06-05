@@ -11,5 +11,5 @@ void main() {
     if (color.a == 0.0) {
         discard;
     }
-    fragColor = vec4(color.xyz, min(1.0, color.a * 128.0)) * ColorModulator;
+    fragColor = vec4(color.xyz, clamp(color.a * 16.0 - 14.0, 0.0, 1.0)) * ColorModulator;
 }
