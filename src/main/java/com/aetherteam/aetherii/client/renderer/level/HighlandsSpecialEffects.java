@@ -194,10 +194,15 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 poseStack.pushPose();
                 RenderSystem.enableBlend();
                 RenderSystem.defaultBlendFunc();
+                FogRenderer.setupNoFog();
+
+//                RenderS
+
 //                poseStack.translate(0.0F, -15.0F, 0.0F);
                 this.cloudSkyboxBuffer.bind();
-                this.cloudSkyboxBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, shaderinstance);
+                this.cloudSkyboxBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, GameRenderer.getPositionColorShader());
                 VertexBuffer.unbind();
+                setupFog.run();
                 poseStack.popPose();
 
 //                RenderSystem.setShaderColor(0.8F, 0.8F, 0.8F, 0.5F);
