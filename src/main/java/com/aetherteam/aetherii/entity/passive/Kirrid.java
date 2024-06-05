@@ -131,7 +131,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
      */
     @Override
     public int getMaxFallDistance() {
-        return this.onGround() ? super.getMaxFallDistance() : 14;
+        return 8;
     }
 
     @Override
@@ -452,6 +452,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
         this.jumpDuration = 10;
         this.jumpTicks = 0;
     }
+
 
     public static class KirridJumpControl extends JumpControl {
         private final Kirrid kirrid;
