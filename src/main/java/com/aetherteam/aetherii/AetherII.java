@@ -125,6 +125,7 @@ public class AetherII {
         AerbunnyMountListener.listen(bus);
         WorldInteractionListener.listen(bus);
         RecipeListener.listen(bus);
+        BlockInteractionListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 
