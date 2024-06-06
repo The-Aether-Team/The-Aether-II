@@ -28,6 +28,7 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 
 public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private final DimensionSpecialEffects OVERWORLD = new DimensionSpecialEffects.OverworldEffects();
@@ -44,36 +45,9 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private int prevCloudY = Integer.MIN_VALUE;
     private int prevCloudZ = Integer.MIN_VALUE;
     private Vec3 prevCloudColor = Vec3.ZERO;
-    @Nullable
-    private VertexBuffer cloudCoverBuffer;
 
     public HighlandsSpecialEffects() {
         super(256.0F, true, DimensionSpecialEffects.SkyType.NORMAL, false, false);
-        this.createCloudCoverBuffer();
-    }
-
-    private void createCloudCoverBuffer() {
-        Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferbuilder = tesselator.getBuilder();
-        if (this.cloudCoverBuffer != null) {
-            this.cloudCoverBuffer.close();
-        }
-        this.cloudCoverBuffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
-        BufferBuilder.RenderedBuffer bufferbuilder$renderedbuffer = buildCloudCoverDisc(bufferbuilder, -16.0F);
-        this.cloudCoverBuffer.bind();
-        this.cloudCoverBuffer.upload(bufferbuilder$renderedbuffer);
-        VertexBuffer.unbind();
-    }
-
-    private static BufferBuilder.RenderedBuffer buildCloudCoverDisc(BufferBuilder builder, float y) {
-        float f = Math.signum(y) * 512.0F;
-        RenderSystem.setShader(AetherIIShaders::getPositionColorCloudCoverShader);
-        builder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-        builder.vertex(0.0, y, 0.0).color(0.96F, 0.96F, 0.96F, 1.0F).endVertex();
-        for (int i = -180; i <= 180; i += 9) {
-            builder.vertex(f * Mth.cos((float) i * (float) (Math.PI / 180.0)), y, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(1.0F, 1.0F, 1.0F, 0.0F).endVertex();
-        }
-        return builder.end();
     }
 
     @Nullable
@@ -312,14 +286,38 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 RenderSystem.defaultBlendFunc();
                 poseStack.popPose();
 
-                float color = Math.min(((float) (vec3.x + vec3.y + vec3.z) / 3.0F) * 1.25F, 1.0F);
-                RenderSystem.setShaderColor(color, color, color, 1.0F);
-
                 poseStack.pushPose();
                 RenderSystem.enableBlend();
-                this.cloudCoverBuffer.bind();
-                this.cloudCoverBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, AetherIIShaders.getPositionColorCloudCoverShader());
-                VertexBuffer.unbind();
+
+                float f3 = Math.signum(-16.0F) * 512.0F;
+                Color color = new Color((int) (f * 255), (int) (f1 * 255), (int) (f2 * 255)).brighter();
+                Matrix4f matrix4f = poseStack.last().pose();
+
+                RenderSystem.setShader(AetherIIShaders::getPositionColorCloudCoverShader);
+                poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
+                bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+                bufferBuilder.vertex(matrix4f, 0.0F, -16.0F, 0.0F).color((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 1.0F).endVertex();
+                for (int i = -180; i <= 180; i += 9) {
+                    bufferBuilder.vertex(matrix4f, f3 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 0.0F).endVertex();
+                }
+                BufferUploader.drawWithShader(bufferBuilder.end());
+
+                if (sunriseColor != null) {
+                    float f4 = sunriseColor[0];
+                    float f5 = sunriseColor[1];
+                    float f6 = sunriseColor[2];
+                    float f7 = Math.signum(-26.0F) * 512.0F;
+
+                    RenderSystem.setShader(GameRenderer::getPositionColorShader);
+                    bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+                    bufferBuilder.vertex(matrix4f, 0.0F, -26.0F, 0.0F).color(f4, f5, f6, (float) Mth.clamp(sunriseColor[3], 0.0, 1.0)).endVertex();
+                    for (int i = -180; i <= 180; i += 9) {
+                        bufferBuilder.vertex(matrix4f, f7 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -26.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(sunriseColor[0], sunriseColor[1], sunriseColor[2], 0.0F).endVertex();
+                    }
+                    BufferUploader.drawWithShader(bufferBuilder.end());
+                }
+
                 RenderSystem.disableBlend();
                 poseStack.popPose();
 
