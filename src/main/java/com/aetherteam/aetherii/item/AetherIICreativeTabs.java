@@ -154,9 +154,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.SCATTERGLASS_PANE.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.WHITE_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
+                output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
             }).build());
 
@@ -255,13 +258,13 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "natural_blocks"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "equipment_and_utilities"))
-            .icon(() -> new ItemStack(AetherIIBlocks.ARTISANRY_BENCH.get()))
+            .icon(() -> new ItemStack(AetherIIBlocks.ARTISANS_BENCH.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".functional_blocks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-                output.accept(AetherIIBlocks.ARTISANRY_BENCH.get());
+                output.accept(AetherIIBlocks.ARTISANS_BENCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
@@ -338,6 +341,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ENCHANTED_BERRY.get());
                 output.accept(AetherIIItems.ORANGE.get());
                 output.accept(AetherIIItems.WYNDBERRY.get());
+                output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
                 output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_JELLY.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
@@ -358,7 +362,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
                 output.accept(AetherIIItems.RAW_ARKENIUM.get());
-                output.accept(AetherIIItems.ARKENIUM_PLATE.get());
+                output.accept(AetherIIItems.ARKENIUM_PLATES.get());
                 output.accept(AetherIIItems.ARKENIUM_STRIP.get());
                 output.accept(AetherIIItems.RAW_GRAVITITE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());

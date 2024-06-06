@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.data.resources.builders.AetherIIDensityFunctionBuilders;
-import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsNoiseBuilders;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;

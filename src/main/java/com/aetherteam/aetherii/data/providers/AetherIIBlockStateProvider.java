@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
-import com.aetherteam.aetherii.block.utility.ArtisanryBenchBlock;
+import com.aetherteam.aetherii.block.utility.ArtisansBenchBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -631,7 +631,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("particle", texture(name(AetherIIBlocks.HOLYSTONE_BRICKS.get()), "construction/"))
                 .renderType("cutout_mipped");
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            Direction direction = state.getValue(ArtisanryBenchBlock.FACING);
+            Direction direction = state.getValue(ArtisansBenchBlock.FACING);
             switch (direction) {
                 case NORTH -> {
                     return ConfiguredModel.builder().modelFile(model).build();
@@ -650,13 +650,13 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
-    public void  artisanryBlock(Block block, Block endBlock) {
-        ModelFile masonryBlock = this.models().cubeColumn(this.name(block), this.texture(this.name(block), "artisanry/"), this.texture(this.name(endBlock), "artisanry/"));
+    public void decorativeBlock(Block block, Block endBlock) {
+        ModelFile masonryBlock = this.models().cubeColumn(this.name(block), this.texture(this.name(block), "decorative/"), this.texture(this.name(endBlock), "decorative/"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(masonryBlock));
     }
 
-    public void artisanryPillar(RotatedPillarBlock block, Block endBlock) {
-        this.axisBlock(block, this.extend(this.texture(this.name(block), "artisanry/"), ""), this.extend(this.texture(this.name(endBlock), "artisanry/"), ""));
+    public void decorativePillar(RotatedPillarBlock block, Block endBlock) {
+        this.axisBlock(block, this.extend(this.texture(this.name(block), "decorative/"), ""), this.extend(this.texture(this.name(endBlock), "decorative/"), ""));
     }
 
     public void skyrootChest(Block block) {

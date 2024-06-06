@@ -5,12 +5,14 @@ import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
 import com.aetherteam.aetherii.recipe.recipes.block.IcestoneFreezableRecipe;
 import com.aetherteam.aetherii.recipe.recipes.block.SwetGelRecipe;
-import com.aetherteam.aetherii.recipe.recipes.item.ArtisanryRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -106,14 +108,6 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 200).unlockedBy("has_item", has(material.get())).save(consumer, "smelting_" + getHasName(result.get()));
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 100).unlockedBy("has_item", has(material.get())).save(consumer, "smoking_" + getHasName(result.get()));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 600).unlockedBy("has_item", has(material.get())).save(consumer, "campfire_cooking_" + getHasName(result.get()));
-    }
-
-    protected void artisanryRecipe(RecipeOutput output, RecipeCategory category, ItemLike item, ItemLike ingredient) {
-        this.artisanryRecipe(output, category, item, ingredient, 1);
-    }
-
-    protected void artisanryRecipe(RecipeOutput output, RecipeCategory category, ItemLike item, ItemLike ingredient, int count) {
-        new SingleItemRecipeBuilder(category, ArtisanryRecipe::new, Ingredient.of(ingredient), item, count).unlockedBy(getHasName(ingredient), has(ingredient)).save(output, this.name(getConversionRecipeName(item, ingredient) + "_artisanry"));
     }
 
     protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {
