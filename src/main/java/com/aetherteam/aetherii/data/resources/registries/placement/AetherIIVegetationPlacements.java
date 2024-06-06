@@ -22,8 +22,6 @@ public class AetherIIVegetationPlacements {
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = AetherIIPlacementUtils.createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = AetherIIPlacementUtils.createKey("orange_tree_patch");
 
-    public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR_TURF = AetherIIPlacementUtils.createKey("ferrosite_pillar_turf");
-
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = AetherIIPlacementUtils.createKey("highfields_flower_patch");
 
     public static final ResourceKey<PlacedFeature> FLOURISHING_FIELD_TREES = AetherIIPlacementUtils.createKey("flourishing_field_trees");
@@ -69,14 +67,6 @@ public class AetherIIVegetationPlacements {
         AetherIIPlacementUtils.register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.ORANGE_TREE_PATCH),
                 RarityFilter.onAverageOnceEvery(16),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
-                BiomeFilter.biome());
-
-        //TODO: Optimize by having it be placed on the Pillar itself
-        AetherIIPlacementUtils.register(context, FERROSITE_PILLAR_TURF, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.FERROSITE_PILLAR_TURF),
-                CountPlacement.of(127),
-                InSquarePlacement.spread(),
-                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.FERROSITE)),
                 BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, FLOURISHING_FIELD_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_FLOURISHING_FIELD),

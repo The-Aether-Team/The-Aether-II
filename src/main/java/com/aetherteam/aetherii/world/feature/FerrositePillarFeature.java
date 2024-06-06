@@ -17,53 +17,53 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
 
     @Override
     public boolean place(FeaturePlaceContext<FerrositePillarConfiguration> context) {
-        /*
-        WorldGenLevel level = context.level();
-        RandomSource random = context.random();
-        BlockPos pos = context.origin();
-        FerrositePillarConfiguration config = context.config();
+        if (enablePillarGeneration()) {
+            WorldGenLevel level = context.level();
+            RandomSource random = context.random();
+            BlockPos pos = context.origin();
+            FerrositePillarConfiguration config = context.config();
 
-        int height = random.nextInt(28) + 16;
-        float radius = random.nextInt(5) + 4.5F;
-        int floatingHeight = random.nextInt(4) + 8;
+            int height = random.nextInt(28) + 16;
+            float radius = random.nextInt(5) + 4.5F;
+            int floatingHeight = random.nextInt(4) + 8;
 
-        // Places a straight Pillar after a specific Height
-        for (int i = 0; i < height; ++i) {
-            BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int) radius, pos.getZ()), radius, random, true);
-        }
+            // Places a straight Pillar after a specific Height
+            for (int i = 0; i < height; ++i) {
+                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int) radius, pos.getZ()), radius, random, true);
+            }
 
-        // Forms a gradient at the bottom of the Pillar until the height of radius * 2
-        // Removes the Underside Peak afterward to give them a more blobby look
-        for (int i = (int) ((int) -radius * 2 + radius / 1.5F); i < 0; ++i) {
-            BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int) radius, pos.getZ()), radius + i * 0.5F, random, true);
-        }
+            // Forms a gradient at the bottom of the Pillar until the height of radius * 2
+            // Removes the Underside Peak afterward to give them a more blobby look
+            for (int i = (int) ((int) -radius * 2 + radius / 1.5F); i < 0; ++i) {
+                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int) radius, pos.getZ()), radius + i * 0.5F, random, true);
+            }
 
-        // Places a randomized disk at the top of the Pillar
-        BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextInt(2) -1, pos.getY() + floatingHeight + height + (int) radius, pos.getZ() + random.nextInt(2) -1), radius * 0.75F, random, true);
+            // Places a randomized disk at the top of the Pillar
+            BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextInt(2) - 1, pos.getY() + floatingHeight + height + (int) radius, pos.getZ() + random.nextInt(2) - 1), radius * 0.75F, random, true);
 
-        // Places Side Pillars
-        placeSidePillar(level, random, pos, config);
-        placeSidePillar(level, random, pos, config);
-        placeSidePillar(level, random, pos, config);
-        placeSidePillar(level, random, pos, config);
-
-        // Places Bonus Side Pillars
-        if (random.nextInt(1) == 0) {
+            // Places Side Pillars
             placeSidePillar(level, random, pos, config);
-        }
-        if (random.nextInt(1) == 0) {
             placeSidePillar(level, random, pos, config);
-        }
-        if (random.nextInt(1) == 0) {
             placeSidePillar(level, random, pos, config);
-        }
-        if (random.nextInt(1) == 0) {
             placeSidePillar(level, random, pos, config);
-        }
 
-         */
+            // Places Bonus Side Pillars
+            if (random.nextInt(1) == 0) {
+                placeSidePillar(level, random, pos, config);
+            }
+            if (random.nextInt(1) == 0) {
+                placeSidePillar(level, random, pos, config);
+            }
+            if (random.nextInt(1) == 0) {
+                placeSidePillar(level, random, pos, config);
+            }
+            if (random.nextInt(1) == 0) {
+                placeSidePillar(level, random, pos, config);
+            }
 
-        return true;
+            return true;
+        }
+        return false;
     }
 
     public void placeSidePillar(WorldGenLevel level, RandomSource random, BlockPos pos, FerrositePillarConfiguration config) {
@@ -83,5 +83,10 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
             BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(posPillar.getX(), posPillar.getY() + i + (int)radius, posPillar.getZ()), radius + i * 0.5F, random, true);
         }
         BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(posPillar.getX() + random.nextInt(2) -1, posPillar.getY() + height + (int) radius, posPillar.getZ() + random.nextInt(2) -1), radius * 0.75F, random, true);
+    }
+
+    //TODO: Exists for Debug purposes, delete once Ferrosite Pillars are fully implemented
+    public boolean enablePillarGeneration() {
+       return false;
     }
 }
