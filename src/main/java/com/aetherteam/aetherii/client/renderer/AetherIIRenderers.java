@@ -32,6 +32,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.FLYING_COW.get(), FlyingCowRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SHEEPUFF.get(), SheepuffRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.KIRRID.get(), KirridRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.MOA.get(), MoaRenderer::new);
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR.get(), ZephyrRenderer::new);
@@ -51,6 +52,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.KIRRID, KirridModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherModelLayers.MOA, MoaModel::createBodyLayer);
+        event.registerLayerDefinition(AetherModelLayers.MOA_BABY, MoaBabyModel::createBodyLayer);
 
         // Hostile
         event.registerLayerDefinition(AetherModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);

@@ -429,6 +429,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SHEEPUFF_SPAWN_EGG, "Sheepuff Spawn Egg");
         this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
         this.addItem(AetherIIItems.KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+        this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
 
         // Misc
@@ -457,6 +458,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
         this.addEntityType(AetherIIEntityTypes.SHEEPUFF, "Sheepuff");
         this.addEntityType(AetherIIEntityTypes.KIRRID, "Kirrid");
+        this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
 
         // Hostile
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
