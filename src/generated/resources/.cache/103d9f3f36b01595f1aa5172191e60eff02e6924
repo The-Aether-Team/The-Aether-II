@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-05T22:10:01.6919233	Registries
+// 1.20.4	2024-06-06T13:46:10.1023434	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -20,7 +20,7 @@ e48734a1f4f4a5ce46ede719985e497b3c51ce46 data/aether_ii/dimension_type/aether_hi
 283163d8515859e802d047ebeeb7ac45b79cac82 data/aether_ii/worldgen/biome/frigid_sierra.json
 7bc442f264cead22cdb594c909fa1817dc336086 data/aether_ii/worldgen/biome/frozen_lakes.json
 0ecb8fe5caee4be4e8f10048f0840e07ad5e36f4 data/aether_ii/worldgen/biome/glistening_swamp.json
-6e5eb9b329d8114bb4a6ca0f64bc8fc84eff9e18 data/aether_ii/worldgen/biome/magnetic_scar.json
+f12912a52b81fc994ccf54396320cfb914bd675e data/aether_ii/worldgen/biome/magnetic_scar.json
 7bc442f264cead22cdb594c909fa1817dc336086 data/aether_ii/worldgen/biome/sheer_tundra.json
 9e4a7099711a13754cdf36f287a159b7c19a3a5f data/aether_ii/worldgen/biome/shimmering_basin.json
 95ed79f8d6c23125216633c231655feede45c131 data/aether_ii/worldgen/biome/shrouded_forest.json
@@ -105,7 +105,6 @@ cf4e21c1b758d3bc55ed1ef3f627e847e2485a04 data/aether_ii/worldgen/placed_feature/
 2a55396de56549a8d0df32c0a75b1517eba58b66 data/aether_ii/worldgen/placed_feature/cold_aercloud.json
 2e51f9b1535aa516c5f544037c58dafae68cc80b data/aether_ii/worldgen/placed_feature/contaminated_jungle_trees.json
 a43c21d9110ca5095844feb5e82009bd86ccf4f6 data/aether_ii/worldgen/placed_feature/ferrosite_pillar.json
-e8ec09d611a3197d9ed353dcd35867dc1ccb8973 data/aether_ii/worldgen/placed_feature/ferrosite_pillar_turf.json
 c86d3e33f740b71ca524738f2d1d646e22c0c96e data/aether_ii/worldgen/placed_feature/flourishing_field_trees.json
 381f7ddeb24166aab20d975ccba39d5207c8907e data/aether_ii/worldgen/placed_feature/golden_aercloud.json
 5a840ee49b6a47ccefaf1fa39fb71a0f5a8a554e data/aether_ii/worldgen/placed_feature/green_aercloud.json
