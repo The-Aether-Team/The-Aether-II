@@ -1,6 +1,10 @@
 {
   "type": "aether_ii:ferrosite_pillar",
   "config": {
+    "additional_height": 16,
+    "additional_radius": 6.0,
+    "base_height": 24,
+    "base_radius": 4.5,
     "block": {
       "type": "minecraft:noise_provider",
       "noise": {
@@ -22,27 +26,6 @@
           "Name": "aether_ii:rusted_ferrosite"
         }
       ]
-    },
-    "floating_height": {
-      "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 1,
-        "min_inclusive": 0
-      }
-    },
-    "height": {
-      "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 1,
-        "min_inclusive": 0
-      }
-    },
-    "radius": {
-      "type": "minecraft:uniform",
-      "value": {
-        "max_exclusive": 1.0,
-        "min_inclusive": 0.0
-      }
     },
     "valid_blocks": "aether_ii:aether_grass_block"
   }

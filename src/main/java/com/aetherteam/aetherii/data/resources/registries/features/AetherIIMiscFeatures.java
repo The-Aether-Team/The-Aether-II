@@ -15,6 +15,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.valueproviders.ConstantFloat;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
@@ -79,9 +81,10 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                                 AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
                         )
                 ),
-                UniformFloat.of(0, 1),
-                UniformInt.of(0, 1),
-                UniformInt.of(0, 1),
+                ConstantFloat.of(4.5F),
+                ConstantFloat.of(6F),
+                ConstantInt.of(24),
+                ConstantInt.of(16),
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
 

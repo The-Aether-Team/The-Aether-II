@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-06T13:46:10.1023434	Registries
+// 1.20.4	2024-06-06T21:17:53.3536584	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -35,7 +35,7 @@ fd2c191030173711f190e6ded6dfcaaba966690a data/aether_ii/worldgen/configured_feat
 c32b2bfdd254fae8e0b662ba588ca883bc9d5b89 data/aether_ii/worldgen/configured_feature/coast_ferrosite_sand.json
 1d0c16827d37187e6bbfe8c054beaba2a41199de data/aether_ii/worldgen/configured_feature/coast_quicksoil.json
 ff31699430e7699c09862ac6a1b8d17c4ee0c3b8 data/aether_ii/worldgen/configured_feature/cold_aercloud.json
-ce743eda7d7b4ca3ed4b3843cb46924de98678b6 data/aether_ii/worldgen/configured_feature/ferrosite_pillar.json
+bc98824f233b710bf3ded5922e0781ae0018470e data/aether_ii/worldgen/configured_feature/ferrosite_pillar.json
 dc7db7a51a7657144c40da708af46b158f270d13 data/aether_ii/worldgen/configured_feature/ferrosite_pillar_turf.json
 1389fcc0e341dced7f8146342da2ae176ceefb20 data/aether_ii/worldgen/configured_feature/ferrosite_pillar_turf_top.json
 ce9cc6381ba77982367137184fac897d87abadcc data/aether_ii/worldgen/configured_feature/golden_aercloud.json
