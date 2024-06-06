@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "aether_ii:block/artisanry/holystone_keystone",
-    "side": "aether_ii:block/artisanry/holystone_pillar"
+    "end": "aether_ii:block/decorative/holystone_keystone",
+    "side": "aether_ii:block/decorative/holystone_pillar"
   }
 }

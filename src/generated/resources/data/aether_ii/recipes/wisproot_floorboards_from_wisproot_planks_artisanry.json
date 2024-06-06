@@ -1,8 +1,0 @@
-{
-  "type": "aether_ii:artisanry",
-  "count": 1,
-  "ingredient": {
-    "item": "aether_ii:wisproot_planks"
-  },
-  "result": "aether_ii:wisproot_floorboards"
-}

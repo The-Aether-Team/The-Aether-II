@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "aether_ii:arkenium_plates"
+    },
+    "H": {
+      "tag": "aether_ii:stone_crafting"
+    },
+    "P": {
+      "tag": "aether_ii:planks_crafting"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "PPP",
+    "HHH"
+  ],
+  "result": {
+    "item": "aether_ii:artisans_bench"
+  }
+}
