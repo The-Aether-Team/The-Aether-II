@@ -311,7 +311,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
                     RenderSystem.setShader(GameRenderer::getPositionColorShader);
                     bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-                    bufferBuilder.vertex(matrix4f, 0.0F, -26.0F, 0.0F).color(f4, f5, f6, (float) Mth.clamp(sunriseColor[3], 0.0, 1.0)).endVertex();
+                    bufferBuilder.vertex(matrix4f, 0.0F, -26.0F, 0.0F).color(f4, f5, f6, sunriseColor[3]).endVertex();
                     for (int i = -180; i <= 180; i += 9) {
                         bufferBuilder.vertex(matrix4f, f7 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -26.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(sunriseColor[0], sunriseColor[1], sunriseColor[2], 0.0F).endVertex();
                     }
