@@ -7,14 +7,14 @@
   "mixins": [
     "common.ItemStackMixin",
     "common.PlayerMixin",
+    "common.ServerLevelMixin",
     "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
     "common.accessor.EntityAccessor",
     "common.accessor.FireBlockAccessor",
     "common.accessor.LootContextParamSetsAccessor",
     "common.accessor.PerlinNoiseAccessor",
-    "common.accessor.ServerGamePacketListenerImplAccessor",
-    "common.accessor.SpreadingSnowyDirtBlockAccessor"
+    "common.accessor.ServerGamePacketListenerImplAccessor"
   ],
   "client": [
     "client.accessor.LevelRendererAccessor"

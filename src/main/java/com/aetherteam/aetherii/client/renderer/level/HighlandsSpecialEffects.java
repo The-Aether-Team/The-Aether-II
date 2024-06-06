@@ -8,6 +8,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.minecraft.client.Camera;
+import net.minecraft.client.CloudStatus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.*;
@@ -31,11 +32,18 @@ import javax.annotation.Nullable;
 public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private final DimensionSpecialEffects OVERWORLD = new DimensionSpecialEffects.OverworldEffects();
 
+    private static final ResourceLocation CLOUDS_LOCATION = new ResourceLocation("textures/environment/clouds.png");
     private static final ResourceLocation MOON_LOCATION = new ResourceLocation("textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_LOCATION = new ResourceLocation("textures/environment/sun.png");
     private static final ResourceLocation RAIN_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/rain_light.png");
     private static final ResourceLocation SNOW_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/snow_light.png");
 
+    private final float[] sunriseCol = new float[4];
+
+    private int prevCloudX = Integer.MIN_VALUE;
+    private int prevCloudY = Integer.MIN_VALUE;
+    private int prevCloudZ = Integer.MIN_VALUE;
+    private Vec3 prevCloudColor = Vec3.ZERO;
     @Nullable
     private VertexBuffer cloudCoverBuffer;
 
@@ -61,11 +69,29 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         float f = Math.signum(y) * 512.0F;
         RenderSystem.setShader(AetherIIShaders::getPositionColorCloudCoverShader);
         builder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-        builder.vertex(0.0, y, 0.0).color(1.0F, 1.0F, 1.0F, 1.0F).endVertex();
+        builder.vertex(0.0, y, 0.0).color(0.96F, 0.96F, 0.96F, 1.0F).endVertex();
         for (int i = -180; i <= 180; i += 9) {
             builder.vertex(f * Mth.cos((float) i * (float) (Math.PI / 180.0)), y, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(1.0F, 1.0F, 1.0F, 0.0F).endVertex();
         }
         return builder.end();
+    }
+
+    @Nullable
+    @Override
+    public float[] getSunriseColor(float timeOfDay, float partialTicks) {
+        float f1 = Mth.cos(timeOfDay * Mth.TWO_PI) - 0.0F;
+        if (f1 >= -0.4F && f1 <= 0.4F) {
+            float f3 = (f1 + 0.0F) / 0.4F * 0.5F + 0.5F;
+            float f4 = 1.0F - (1.0F - Mth.sin(f3 * Mth.PI)) * 0.99F;
+            f4 *= f4;
+            this.sunriseCol[0] = f3 * 0.3F + 0.65F; // Red
+            this.sunriseCol[1] = f3 * f3 * 0.7F + 0.25F; // Green
+            this.sunriseCol[2] = f3 * f3 * 0.0F + 0.4F; // Blue
+            this.sunriseCol[3] = f4;
+            return this.sunriseCol;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -76,6 +102,118 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     @Override
     public boolean isFoggyAt(int x, int z) {
         return OVERWORLD.isFoggyAt(x, z);
+    }
+
+    @Override
+    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, double camX, double camY, double camZ, Matrix4f projectionMatrix) {
+        LevelRenderer levelRenderer = Minecraft.getInstance().levelRenderer;
+        float cloudHeight = level.effects().getCloudHeight();
+        if (!Float.isNaN(cloudHeight)) {
+            RenderSystem.disableCull();
+            RenderSystem.enableBlend();
+            RenderSystem.enableDepthTest();
+            RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            RenderSystem.depthMask(true);
+            double d1 = ((float) ticks + partialTick) * 0.03F;
+            double d2 = (camX + d1) / 12.0;
+            double d3 = cloudHeight - (float) camY + 0.33F;
+            double d4 = camZ / 12.0 + (double) 0.33F;
+            d2 -= Mth.floor(d2 / 2048.0) * 2048;
+            d4 -= Mth.floor(d4 / 2048.0) * 2048;
+            float f3 = (float) (d2 - (double) Mth.floor(d2));
+            float f4 = (float) (d3 / 4.0 - (double) Mth.floor(d3 / 4.0)) * 4.0F;
+            float f5 = (float) (d4 - (double) Mth.floor(d4));
+            Vec3 vec3 = this.getCloudColor(level, partialTick);
+            int i = Mth.floor(d2);
+            int j = Mth.floor(d3 / 4.0);
+            int k = Mth.floor(d4);
+            if (i != this.prevCloudX || j != this.prevCloudY || k != this.prevCloudZ || Minecraft.getInstance().options.getCloudsType() != ((LevelRendererAccessor) levelRenderer).aether_ii$getPrevCloudsType() || this.prevCloudColor.distanceToSqr(vec3) > 2.0E-4) {
+                this.prevCloudX = i;
+                this.prevCloudY = j;
+                this.prevCloudZ = k;
+                this.prevCloudColor = vec3;
+                ((LevelRendererAccessor) levelRenderer).aether_ii$setPrevCloudsType(Minecraft.getInstance().options.getCloudsType());
+                ((LevelRendererAccessor) levelRenderer).aether_ii$setGenerateClouds(true);
+            }
+
+            if (((LevelRendererAccessor) levelRenderer).aether_ii$isGenerateClouds()) {
+                ((LevelRendererAccessor) levelRenderer).aether_ii$setGenerateClouds(false);
+                BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
+                if (((LevelRendererAccessor) levelRenderer).aether_ii$getCloudBuffer() != null) {
+                    ((LevelRendererAccessor) levelRenderer).aether_ii$getCloudBuffer().close();
+                }
+                ((LevelRendererAccessor) levelRenderer).aether_ii$setCloudBuffer(new VertexBuffer(VertexBuffer.Usage.STATIC));
+                BufferBuilder.RenderedBuffer renderedBuffer = ((LevelRendererAccessor) levelRenderer).callBuildClouds(bufferbuilder, d2, d3, d4, vec3);
+                ((LevelRendererAccessor) levelRenderer).aether_ii$getCloudBuffer().bind();
+                ((LevelRendererAccessor) levelRenderer).aether_ii$getCloudBuffer().upload(renderedBuffer);
+                VertexBuffer.unbind();
+            }
+
+            RenderSystem.setShader(GameRenderer::getPositionTexColorNormalShader);
+            RenderSystem.setShaderTexture(0, CLOUDS_LOCATION);
+            FogRenderer.levelFogColor();
+            poseStack.pushPose();
+            poseStack.scale(12.0F, 1.0F, 12.0F);
+            poseStack.translate(-f3, f4, -f5);
+            if (((LevelRendererAccessor) levelRenderer).aether_ii$getCloudBuffer() != null && RenderSystem.getShader() != null) {
+                ((LevelRendererAccessor) levelRenderer).aether_ii$getCloudBuffer().bind();
+                int l = ((LevelRendererAccessor) levelRenderer).aether_ii$getPrevCloudsType() == CloudStatus.FANCY ? 0 : 1;
+
+                for (int i1 = l; i1 < 2; ++i1) {
+                    if (i1 == 0) {
+                        RenderSystem.colorMask(false, false, false, false);
+                    } else {
+                        RenderSystem.colorMask(true, true, true, true);
+                    }
+
+                    ShaderInstance shaderInstance = RenderSystem.getShader();
+                    ((LevelRendererAccessor) levelRenderer).aether_ii$getCloudBuffer().drawWithShader(poseStack.last().pose(), projectionMatrix, shaderInstance);
+                }
+
+                VertexBuffer.unbind();
+            }
+
+            poseStack.popPose();
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.enableCull();
+            RenderSystem.disableBlend();
+        }
+        return true;
+    }
+
+    /**
+     * [CODE COPY] - {@link ClientLevel#getCloudColor(float)}.<br><br>
+     * Modified to have lighter cloud coloration than the Overworld during weather.
+     */
+    public Vec3 getCloudColor(ClientLevel level, float partialTick) {
+        float f = level.getTimeOfDay(partialTick);
+        float f1 = Mth.cos(f * Mth.TWO_PI) * 2.0F + 0.5F;
+        f1 = Mth.clamp(f1, 0.0F, 1.0F);
+        float f2 = 1.0F;
+        float f3 = 1.0F;
+        float f4 = 1.0F;
+        float f5 = level.getRainLevel(partialTick);
+        if (f5 > 0.0F) {
+            float f6 = (f2 * 0.3F + f3 * 0.59F + f4 * 0.11F) * 0.725F; // Modified darkening.
+            float f7 = 1.0F - f5 * 0.8F;
+            f2 = f2 * f7 + f6 * (1.0F - f7);
+            f3 = f3 * f7 + f6 * (1.0F - f7);
+            f4 = f4 * f7 + f6 * (1.0F - f7);
+        }
+
+        f2 *= f1 * 0.9F + 0.1F;
+        f3 *= f1 * 0.9F + 0.1F;
+        f4 *= f1 * 0.85F + 0.15F;
+        float f9 = level.getThunderLevel(partialTick);
+        if (f9 > 0.0F) {
+            float f10 = (f2 * 0.3F + f3 * 0.59F + f4 * 0.11F) * 0.5F; // Modified darkening.
+            float f8 = 1.0F - f9 * 0.7F;
+            f2 = f2 * f8 + f10 * (1.0F - f8);
+            f3 = f3 * f8 + f10 * (1.0F - f8);
+            f4 = f4 * f8 + f10 * (1.0F - f8);
+        }
+
+        return new Vec3(f2, f3, f4);
     }
 
     @Override
@@ -193,12 +331,11 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         return true;
     }
 
-    private boolean doesMobEffectBlockSky(Camera pCamera) {
-        Entity entity = pCamera.getEntity();
-        if (!(entity instanceof LivingEntity)) {
+    private boolean doesMobEffectBlockSky(Camera camera) {
+        Entity entity = camera.getEntity();
+        if (!(entity instanceof LivingEntity livingentity)) {
             return false;
         } else {
-            LivingEntity livingentity = (LivingEntity)entity;
             return livingentity.hasEffect(MobEffects.BLINDNESS) || livingentity.hasEffect(MobEffects.DARKNESS);
         }
     }
