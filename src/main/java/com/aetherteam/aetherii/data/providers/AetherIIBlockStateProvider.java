@@ -268,6 +268,38 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }, AetherLeafPileBlock.PERSISTENT);
     }
 
+    public void leaves(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            ModelFile model;
+            if (state.getValue(AetherLeavesBlock.SNOWY)) {
+                model = this.models().withExistingParent(this.name(block) + "_snowy", this.mcLoc("block/cube_all"))
+                        .texture("all", this.texture(this.name(block), "natural/"))
+                        .texture("snow", this.texture("arctic_snow_overlay", "natural/"))
+                        .element()
+                        .from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                        .face(Direction.DOWN).cullface(Direction.DOWN).texture("#all").end()
+                        .face(Direction.UP).cullface(Direction.UP).texture("#all").end()
+                        .face(Direction.NORTH).cullface(Direction.NORTH).texture("#all").end()
+                        .face(Direction.SOUTH).cullface(Direction.SOUTH).texture("#all").end()
+                        .face(Direction.WEST).cullface(Direction.WEST).texture("#all").end()
+                        .face(Direction.EAST).cullface(Direction.EAST).texture("#all").end()
+                        .end()
+                        .element()
+                        .from(-0.001F, -0.001F, -0.001F).to(16.001F, 16.001F, 16.001F)
+                        .face(Direction.DOWN).cullface(Direction.DOWN).texture("#snow").end()
+                        .face(Direction.UP).cullface(Direction.UP).texture("#snow").end()
+                        .face(Direction.NORTH).cullface(Direction.NORTH).texture("#snow").end()
+                        .face(Direction.SOUTH).cullface(Direction.SOUTH).texture("#snow").end()
+                        .face(Direction.WEST).cullface(Direction.WEST).texture("#snow").end()
+                        .face(Direction.EAST).cullface(Direction.EAST).texture("#snow").end()
+                        .end();
+            } else {
+                model = this.models().cubeAll(this.name(block), this.texture(this.name(block), "natural/"));
+            }
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
+    }
+
     public void shortGrass(Block block) {
         ModelFile grass = this.triTintedCross(this.name(block))
                 .texture("particle", this.texture(this.name(block), "natural/"))

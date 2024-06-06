@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.SpreadingSnowyDirtBlockAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -8,15 +10,21 @@ import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 
 import java.util.function.Supplier;
 
 public class AetherLeavesBlock extends LeavesBlock {
+    public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
     private final Supplier<SimpleParticleType> leavesParticle;
     private final Supplier<Block> leavesPile;
 
@@ -24,6 +32,7 @@ public class AetherLeavesBlock extends LeavesBlock {
         super(properties);
         this.leavesParticle = leavesParticle;
         this.leavesPile = leavesPile;
+        this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE));
     }
 
     @Override
@@ -57,6 +66,13 @@ public class AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        return pFacing == Direction.UP
+                ? pState.setValue(SNOWY, pFacingState.is(AetherIIBlocks.ARCTIC_SNOW) || pFacingState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
+                : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+    }
+
+    @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         super.animateTick(state, level, pos, random);
         int bound = level.isRaining() ? 100 : 200;
@@ -81,5 +97,10 @@ public class AetherLeavesBlock extends LeavesBlock {
         if (!isFaceFull(belowState.getCollisionShape(level, belowPos), Direction.UP)) {
             ParticleUtils.spawnParticleBelow(level, pos, random, this.leavesParticle.get());
         }
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        pBuilder.add(DISTANCE, PERSISTENT, WATERLOGGED, SNOWY);
     }
 }

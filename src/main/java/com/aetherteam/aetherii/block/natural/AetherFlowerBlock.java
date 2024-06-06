@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class AetherFlowerBlock extends FlowerBlock implements Snowable {
@@ -24,7 +23,7 @@ public class AetherFlowerBlock extends FlowerBlock implements Snowable {
 
     public AetherFlowerBlock(Supplier<MobEffect> effectSupplier, int p_53513_, Properties p_53514_) {
         super(effectSupplier, p_53513_, p_53514_);
-        this.registerDefaultState(this.stateDefinition.any().setValue(SNOWY, Boolean.valueOf(false)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(SNOWY, Boolean.FALSE));
     }
 
     @Override

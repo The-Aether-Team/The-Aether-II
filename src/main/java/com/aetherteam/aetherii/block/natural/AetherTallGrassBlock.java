@@ -29,7 +29,7 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
 
     public AetherTallGrassBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(SNOWY, Boolean.valueOf(false)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(SNOWY, Boolean.FALSE));
     }
 
     @Override
