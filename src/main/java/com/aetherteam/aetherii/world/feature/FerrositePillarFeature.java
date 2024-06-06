@@ -1,13 +1,19 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositePillarConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+
+import java.util.Objects;
 
 public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration> {
 
@@ -22,71 +28,52 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
             RandomSource random = context.random();
             BlockPos pos = context.origin();
             FerrositePillarConfiguration config = context.config();
+            ChunkGenerator chunk = level.getLevel().getChunkSource().getGenerator();
 
-            int height = random.nextInt(28) + 16;
-            float radius = random.nextInt(5) + 4.5F;
-            int floatingHeight = random.nextInt(4) + 8;
+            float radius = random.nextInt(6) + 4.5F;
+            int height = random.nextInt(16) + 24;
+            int offset = (int) (-radius * 20 + radius * 16);
 
-            // Places a straight Pillar after a specific Height
-            for (int i = 0; i < height; ++i) {
-                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int) radius, pos.getZ()), radius, random, true);
+            for (int i = offset; i < 0; ++i) {
+                BlockPlacementUtil.placeDisk(
+                        level,
+                        config.block(),
+                        new BlockPos(pos.getX(), pos.getY() + i + height + (int) radius, pos.getZ()),
+                        radius + i * shapeVariator(random, 0.05F),
+                        random,
+                        true);
             }
 
-            // Forms a gradient at the bottom of the Pillar until the height of radius * 2
-            // Removes the Underside Peak afterward to give them a more blobby look
-            for (int i = (int) ((int) -radius * 2 + radius / 1.5F); i < 0; ++i) {
-                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i + floatingHeight + (int) radius, pos.getZ()), radius + i * 0.5F, random, true);
+            for (int i = (int) (-radius * 0.5); i < 0; ++i) {
+                BlockPlacementUtil.placeDisk(
+                        level,
+                        config.block(),
+                        new BlockPos(pos.getX(), pos.getY() + i + height + offset + (int) radius, pos.getZ()),
+                        radius + i * shapeVariator(random, 2F),
+                        random,
+                        true);
             }
 
-            // Places a randomized disk at the top of the Pillar
-            BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextInt(2) - 1, pos.getY() + floatingHeight + height + (int) radius, pos.getZ() + random.nextInt(2) - 1), radius * 0.75F, random, true);
-
-            // Places Side Pillars
-            placeSidePillar(level, random, pos, config);
-            placeSidePillar(level, random, pos, config);
-            placeSidePillar(level, random, pos, config);
-            placeSidePillar(level, random, pos, config);
-
-            // Places Bonus Side Pillars
-            if (random.nextInt(1) == 0) {
-                placeSidePillar(level, random, pos, config);
-            }
-            if (random.nextInt(1) == 0) {
-                placeSidePillar(level, random, pos, config);
-            }
-            if (random.nextInt(1) == 0) {
-                placeSidePillar(level, random, pos, config);
-            }
-            if (random.nextInt(1) == 0) {
-                placeSidePillar(level, random, pos, config);
-            }
-
+            ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(AetherIIVegetationFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
+            turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + height + (int) radius, pos.getZ()));
             return true;
         }
         return false;
     }
 
-    public void placeSidePillar(WorldGenLevel level, RandomSource random, BlockPos pos, FerrositePillarConfiguration config) {
-        int height = random.nextInt(8) + 4;
-        float radius = random.nextInt(3) + 2.5F;
-
-        // Determines a randomized offset pos
-        int sidePillarPosXZ = random.nextInt(6) - 3;
-        int sidePillarPosY = random.nextInt(12) + 8;
-
-        BlockPos posPillar = new BlockPos(pos.getX() + sidePillarPosXZ, pos.getY() + sidePillarPosY, pos.getZ() + sidePillarPosXZ);
-
-        for (int i = 0; i < height; ++i) {
-            BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(posPillar.getX(), posPillar.getY() + i + (int)radius, posPillar.getZ()), radius, random, true);
+    private float shapeVariator(RandomSource random, float value) {
+        if (random.nextInt(15) == 5) {
+            return value * 1.5F;
         }
-        for (int i = (int) ((int) -radius * 2 + radius / 1.5F); i < 0; ++i) {
-            BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(posPillar.getX(), posPillar.getY() + i + (int)radius, posPillar.getZ()), radius + i * 0.5F, random, true);
+        else if (random.nextInt(10) == 5) {
+            return value * 1.25F;
+        } else {
+            return value;
         }
-        BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(posPillar.getX() + random.nextInt(2) -1, posPillar.getY() + height + (int) radius, posPillar.getZ() + random.nextInt(2) -1), radius * 0.75F, random, true);
     }
 
-    //TODO: Exists for Debug purposes, delete once Ferrosite Pillars are fully implemented
-    public boolean enablePillarGeneration() {
+    //TODO: Exists for Debug purposes, deleted once Ferrosite Pillars are fully implemented
+    private boolean enablePillarGeneration() {
        return false;
     }
 }

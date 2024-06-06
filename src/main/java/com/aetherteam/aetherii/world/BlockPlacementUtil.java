@@ -30,24 +30,6 @@ public final class BlockPlacementUtil {
         }
     }
 
-    // Planing to use this in Ferrosite Pillar Gen
-    /**
-     * Places a disk for generation purposes, with extra shape control.
-     */
-    public static void placeDiskXZ(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radiusX, float radiusZ, RandomSource random, boolean replaceBlocks) {
-        float radiusSq = radiusX * radiusZ;
-        placeProvidedBlock(level, blockProvider, center, random, replaceBlocks);
-        for (int z = 0; z < radiusZ; z++) {
-            for (int x = 0; x < radiusX; x++) {
-                if (x * x + z * z > radiusSq) continue;
-                placeProvidedBlock(level, blockProvider, center.offset(x, 0, z), random, replaceBlocks);
-                placeProvidedBlock(level, blockProvider, center.offset(-x, 0, -z), random, replaceBlocks);
-                placeProvidedBlock(level, blockProvider, center.offset(-z, 0, x), random, replaceBlocks);
-                placeProvidedBlock(level, blockProvider, center.offset(z, 0, -x), random, replaceBlocks);
-            }
-        }
-    }
-
     /**
      * Places a block if there is not already one at the position.<br><br>
      * Warning for "UnusedReturnValue" is suppressed because the boolean from {@link WorldGenLevel#setBlock(BlockPos, BlockState, int)} needs to be retained.
