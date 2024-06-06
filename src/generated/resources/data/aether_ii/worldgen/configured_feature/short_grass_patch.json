@@ -8,7 +8,10 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "aether_ii:aether_short_grass"
+              "Name": "aether_ii:aether_short_grass",
+              "Properties": {
+                "snowy": "false"
+              }
             }
           }
         }

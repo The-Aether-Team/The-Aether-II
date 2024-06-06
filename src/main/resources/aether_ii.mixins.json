@@ -17,6 +17,7 @@
     "common.accessor.SpreadingSnowyDirtBlockAccessor"
   ],
   "client": [
+    "client.BlockRenderDispatcherMixin"
   ],
   "injectors": {
     "defaultRequire": 1
