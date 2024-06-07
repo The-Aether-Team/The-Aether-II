@@ -1,8 +1,0 @@
-{
-  "type": "aether_ii:artisanry",
-  "count": 1,
-  "ingredient": {
-    "item": "aether_ii:faded_holystone_bricks"
-  },
-  "result": "aether_ii:faded_holystone_base_bricks"
-}

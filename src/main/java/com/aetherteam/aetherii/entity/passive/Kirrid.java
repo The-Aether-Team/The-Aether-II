@@ -70,7 +70,6 @@ public class Kirrid extends AetherAnimal implements IShearable {
             MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
             MemoryModuleType.IS_TEMPTED,
             MemoryModuleType.RAM_COOLDOWN_TICKS,
-            MemoryModuleType.RAM_TARGET,
             AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get(),
             AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(),
             MemoryModuleType.IS_PANICKING
@@ -452,6 +451,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
         this.jumpDuration = 10;
         this.jumpTicks = 0;
     }
+
 
     public static class KirridJumpControl extends JumpControl {
         private final Kirrid kirrid;

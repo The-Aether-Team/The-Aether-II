@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.level.block.Block;
 
@@ -16,7 +17,7 @@ public class KirridEatGrass extends Behavior<Kirrid> {
     private int eatTick;
 
     public KirridEatGrass() {
-        super(ImmutableMap.of(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), MemoryStatus.VALUE_ABSENT), 60);
+        super(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT, AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), MemoryStatus.VALUE_ABSENT), 60);
 
     }
 
@@ -33,7 +34,7 @@ public class KirridEatGrass extends Behavior<Kirrid> {
     }
 
     protected void start(ServerLevel pLevel, Kirrid pEntity, long pGameTime) {
-
+        this.eatTick = 0;
         pLevel.broadcastEntityEvent(pEntity, (byte) 64);
     }
 
