@@ -27,6 +27,7 @@ public class AetherIIVegetationPlacements {
 
     public static final ResourceKey<PlacedFeature> FLOURISHING_FIELD_TREES = AetherIIPlacementUtils.createKey("flourishing_field_trees");
     public static final ResourceKey<PlacedFeature> VERDANT_WOODS_TREES = AetherIIPlacementUtils.createKey("verdant_woods_trees");
+    public static final ResourceKey<PlacedFeature> SHROUDED_FOREST_TREES = AetherIIPlacementUtils.createKey("shrouded_forest_trees");
     public static final ResourceKey<PlacedFeature> MAGNETIC_SCAR_TREES = AetherIIPlacementUtils.createKey("magnetic_scar_trees");
     public static final ResourceKey<PlacedFeature> TURQUOISE_FOREST_TREES = AetherIIPlacementUtils.createKey("turquoise_forest_trees");
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = AetherIIPlacementUtils.createKey("violet_highwoods_trees");
@@ -76,6 +77,8 @@ public class AetherIIVegetationPlacements {
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2)));
         AetherIIPlacementUtils.register(context, VERDANT_WOODS_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_VERDANT_WOODS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(16, 0.1F, 1)));
+        AetherIIPlacementUtils.register(context, SHROUDED_FOREST_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_SHROUDED_FOREST),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(18, 0.1F, 1)));
 
         AetherIIPlacementUtils.register(context, MAGNETIC_SCAR_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_MAGNETIC_SCAR),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));

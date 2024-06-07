@@ -2,14 +2,14 @@
   "type": "minecraft:random_selector",
   "config": {
     "default": {
-      "feature": "aether_ii:skybirch",
+      "feature": "aether_ii:skyplane",
       "placement": [
         {
           "type": "minecraft:block_predicate_filter",
           "predicate": {
             "type": "minecraft:would_survive",
             "state": {
-              "Name": "aether_ii:skybirch_sapling",
+              "Name": "aether_ii:skyroot_sapling",
               "Properties": {
                 "stage": "0"
               }
@@ -20,36 +20,16 @@
     },
     "features": [
       {
-        "chance": 0.35,
+        "chance": 0.05,
         "feature": {
-          "feature": "aether_ii:wisptop",
+          "feature": "aether_ii:greatoak",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
               "predicate": {
                 "type": "minecraft:would_survive",
                 "state": {
-                  "Name": "aether_ii:wisproot_sapling",
-                  "Properties": {
-                    "stage": "0"
-                  }
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "chance": 0.01,
-        "feature": {
-          "feature": "aether_ii:greatroot",
-          "placement": [
-            {
-              "type": "minecraft:block_predicate_filter",
-              "predicate": {
-                "type": "minecraft:would_survive",
-                "state": {
-                  "Name": "aether_ii:greatroot_sapling",
+                  "Name": "aether_ii:greatoak_sapling",
                   "Properties": {
                     "stage": "0"
                   }

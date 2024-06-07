@@ -45,7 +45,7 @@ public class GreatboaFoliagePlacer extends FoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), 18, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(0, 1), pos.getY() + 1, pos.getZ() + random.nextIntBetweenInclusive(0, 1)), 7, i, attachment.doubleTrunk());
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(0, 1), pos.getY() - 6, pos.getZ() + random.nextIntBetweenInclusive(0, 1)), 8, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(0, 1), pos.getY() - 8, pos.getZ() + random.nextIntBetweenInclusive(0, 1)), 8, i, attachment.doubleTrunk());
         }
     }
 
