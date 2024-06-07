@@ -38,6 +38,12 @@ public interface LevelRendererAccessor {
     @Accessor("generateClouds")
     void aether_ii$setGenerateClouds(boolean generateClouds);
 
+    @Accessor("rainSoundTime")
+    int aether_ii$getRainSoundTime();
+
+    @Accessor("rainSoundTime")
+    void aether_ii$setRainSoundTime(int time);
+
     @Accessor("rainSizeX")
     float[] aether_ii$getRainSizeX();
 

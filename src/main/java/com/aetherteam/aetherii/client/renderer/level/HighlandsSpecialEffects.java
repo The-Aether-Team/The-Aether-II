@@ -10,34 +10,47 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Camera;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.ParticleStatus;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Matrix4f;
 
 import javax.annotation.Nullable;
 import java.awt.*;
 
 public class HighlandsSpecialEffects extends DimensionSpecialEffects {
-    private final DimensionSpecialEffects OVERWORLD = new DimensionSpecialEffects.OverworldEffects();
+    private final DimensionSpecialEffects OVERWORLD = new OverworldEffects();
 
     private static final ResourceLocation CLOUDS_LOCATION = new ResourceLocation("textures/environment/clouds.png");
     private static final ResourceLocation MOON_LOCATION = new ResourceLocation("textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_LOCATION = new ResourceLocation("textures/environment/sun.png");
-    private static final ResourceLocation RAIN_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/rain_light.png");
-    private static final ResourceLocation SNOW_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/snow_light.png");
+    private static final ResourceLocation RAIN_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/rain.png");
+    private static final ResourceLocation SNOW_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/snow.png");
 
     private final float[] sunriseCol = new float[4];
 
@@ -47,7 +60,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private Vec3 prevCloudColor = Vec3.ZERO;
 
     public HighlandsSpecialEffects() {
-        super(256.0F, true, DimensionSpecialEffects.SkyType.NORMAL, false, false);
+        super(256.0F, true, SkyType.NORMAL, false, false);
     }
 
     @Nullable
@@ -291,15 +304,21 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
                 float f3 = Math.signum(-16.0F) * 512.0F;
                 Color color = new Color((int) (f * 255), (int) (f1 * 255), (int) (f2 * 255)).brighter();
+                float weatherMultiplier = Math.max(1.0F - (((level.getRainLevel(partialTick) + level.getThunderLevel(partialTick)) * 0.5F) * 1.25F), 0.175F);
+                float bluePower =  Math.min(0.25F / weatherMultiplier, 0.85F);
+                float r = (color.getRed() / 255.0F) * weatherMultiplier;
+                float g = (color.getGreen() / 255.0F) * weatherMultiplier;
+                float b = (color.getBlue() / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
+
                 Matrix4f matrix4f = poseStack.last().pose();
 
                 RenderSystem.setShader(AetherIIShaders::getPositionColorCloudCoverShader);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
                 bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-                bufferBuilder.vertex(matrix4f, 0.0F, -16.0F, 0.0F).color((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 1.0F).endVertex();
+                bufferBuilder.vertex(matrix4f, 0.0F, -16.0F, 0.0F).color(r, g, b, 1.0F).endVertex();
                 for (int i = -180; i <= 180; i += 9) {
-                    bufferBuilder.vertex(matrix4f, f3 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 0.0F).endVertex();
+                    bufferBuilder.vertex(matrix4f, f3 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(r, g, b, 0.0F).endVertex();
                 }
                 BufferUploader.drawWithShader(bufferBuilder.end());
 
@@ -388,8 +407,11 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     @Override
     public boolean renderSnowAndRain(ClientLevel level, int ticks, float partialTick, LightTexture lightTexture, double camX, double camY, double camZ) {
         LevelRenderer levelRenderer = Minecraft.getInstance().levelRenderer;
-        float f = level.getRainLevel(partialTick);
-        if (!(f <= 0.0F)) {
+        float rain = level.getRainLevel(partialTick);
+        float thunder = level.getThunderLevel(partialTick);
+        boolean isThundering = (!(thunder <= 0.0F));
+
+        if (!(rain <= 0.0F)) {
             lightTexture.turnOnLightLayer();
             int i = Mth.floor(camX);
             int j = Mth.floor(camY);
@@ -399,9 +421,12 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
             RenderSystem.disableCull();
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
-            int l = 5;
+            int l = 4;
             if (Minecraft.useFancyGraphics()) {
-                l = 10;
+                l = 7;
+            }
+            if (isThundering) {
+                 l = (int) (l * 1.25F);
             }
 
             RenderSystem.depthMask(Minecraft.useShaderTransparency());
@@ -413,8 +438,8 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
             for (int j1 = k - l; j1 <= k + l; ++j1) {
                 for (int k1 = i - l; k1 <= i + l; ++k1) {
                     int l1 = (j1 - k + 16) * 32 + k1 - i + 16;
-                    double d0 = (double) ((LevelRendererAccessor) levelRenderer).aether_ii$getRainSizeX()[l1] * 0.25;
-                    double d1 = (double) ((LevelRendererAccessor) levelRenderer).aether_ii$getRainSizeZ()[l1] * 0.25;
+                    double d0 = (double) ((LevelRendererAccessor) levelRenderer).aether_ii$getRainSizeX()[l1] * 0.5;
+                    double d1 = (double) ((LevelRendererAccessor) levelRenderer).aether_ii$getRainSizeZ()[l1] * 0.5;
                     blockpos$mutableblockpos.set(k1, camY, j1);
                     Biome biome = level.getBiome(blockpos$mutableblockpos).value();
                     if (biome.hasPrecipitation()) {
@@ -429,16 +454,25 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                             k2 = i2;
                         }
 
-                        int l2 = i2;
-                        if (i2 < j) {
-                            l2 = j;
-                        }
+                        int l2 = Math.max(i2, j);
 
                         if (j2 != k2) {
                             RandomSource randomsource = RandomSource.create((long) k1 * k1 * 3121 + k1 * 45238971L ^ (long) j1 * j1 * 418711 + j1 * 13761L);
                             blockpos$mutableblockpos.set(k1, j2, j1);
                             Biome.Precipitation biome$precipitation = biome.getPrecipitationAt(blockpos$mutableblockpos);
+
+                            float size;
+                            float opacityStrength;
+                            float stretchStrength = 0.25F;
+
                             if (biome$precipitation == Biome.Precipitation.RAIN) {
+                                size = 0.5F;
+                                opacityStrength  = 0.85F;
+                                stretchStrength = 0.75F;
+
+                                d0 *= size;
+                                d1 *= size;
+
                                 if (i1 != 0) {
                                     if (i1 >= 0) {
                                         tesselator.end();
@@ -457,32 +491,34 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                                 double d2 = (double) k1 + 0.5 - camX;
                                 double d3 = (double) j1 + 0.5 - camZ;
                                 float f6 = (float) Math.sqrt(d2 * d2 + d3 * d3) / (float) l;
-                                float f7 = ((1.0F - f6 * f6) * 0.5F + 0.5F) * f * 0.5F;
+                                float f7 = ((1.0F - f6 * f6) * 0.5F + 0.5F) * rain * opacityStrength;
                                 blockpos$mutableblockpos.set(k1, l2, j1);
                                 int k3 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
                                 bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
-                                        .uv(0.0F, (float) j2 * 0.75F + f4)
+                                        .uv(0.0F, (float) j2 * stretchStrength + f4)
                                         .color(1.0F, 1.0F, 1.0F, f7)
                                         .uv2(k3)
                                         .endVertex();
                                 bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
-                                        .uv(1.0F, (float) j2 * 0.75F + f4)
+                                        .uv(1.0F, (float) j2 * stretchStrength + f4)
                                         .color(1.0F, 1.0F, 1.0F, f7)
                                         .uv2(k3)
                                         .endVertex();
                                 bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
-                                        .uv(1.0F, (float) k2 * 0.75F + f4)
+                                        .uv(1.0F, (float) k2 * stretchStrength + f4)
                                         .color(1.0F, 1.0F, 1.0F, f7)
                                         .uv2(k3)
                                         .endVertex();
                                 bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
-                                        .uv(0.0F, (float) k2 * 0.75F + f4)
+                                        .uv(0.0F, (float) k2 * stretchStrength + f4)
                                         .color(1.0F, 1.0F, 1.0F, f7)
                                         .uv2(k3)
                                         .endVertex();
                             } else if (biome$precipitation == Biome.Precipitation.SNOW) {
+                                opacityStrength  = 0.75F;
+
                                 if (i1 != 1) {
-                                    if (i1 >= 0) {
+                                    if (i1 == 0) {
                                         tesselator.end();
                                     }
 
@@ -491,13 +527,13 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                                     bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
                                 }
 
-                                float f8 = -((float) (levelRenderer.getTicks() & 511) + partialTick) / 512.0F;
+                                float f8 = -((float) (levelRenderer.getTicks() & 511) + partialTick) / 256.0F;
                                 float f9 = (float) (randomsource.nextDouble() + (double) f1 * 0.01 * (double) ((float) randomsource.nextGaussian()));
                                 float f10 = (float) (randomsource.nextDouble() + (double) (f1 * (float) randomsource.nextGaussian()) * 0.001);
                                 double d4 = (double) k1 + 0.5 - camX;
                                 double d5 = (double) j1 + 0.5 - camZ;
                                 float f11 = (float) Math.sqrt(d4 * d4 + d5 * d5) / (float)l;
-                                float f5 = ((1.0F - f11 * f11) * 0.3F + 0.5F) * f;
+                                float f5 = ((1.0F - f11 * f11) * 0.3F + 0.5F) * rain * opacityStrength;
                                 blockpos$mutableblockpos.set(k1, l2, j1);
                                 int j4 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
                                 int k4 = j4 >> 16 & 65535;
@@ -505,22 +541,22 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                                 int l3 = (k4 * 3 + 240) / 4;
                                 int i4 = (l4 * 3 + 240) / 4;
                                 bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
-                                        .uv(0.0F + f9, (float) j2 * 0.25F + f8 + f10)
+                                        .uv(0.0F + f9, (float) j2 * stretchStrength + f8 + f10)
                                         .color(1.0F, 1.0F, 1.0F, f5)
                                         .uv2(i4, l3)
                                         .endVertex();
                                 bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
-                                        .uv(1.0F + f9, (float) j2 * 0.25F + f8 + f10)
+                                        .uv(1.0F + f9, (float) j2 * stretchStrength + f8 + f10)
                                         .color(1.0F, 1.0F, 1.0F, f5)
                                         .uv2(i4, l3)
                                         .endVertex();
                                 bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
-                                        .uv(1.0F + f9, (float)k2 * 0.25F + f8 + f10)
+                                        .uv(1.0F + f9, (float) k2 * stretchStrength + f8 + f10)
                                         .color(1.0F, 1.0F, 1.0F, f5)
                                         .uv2(i4, l3)
                                         .endVertex();
                                 bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
-                                        .uv(0.0F + f9, (float)k2 * 0.25F + f8 + f10)
+                                        .uv(0.0F + f9, (float) k2 * stretchStrength + f8 + f10)
                                         .color(1.0F, 1.0F, 1.0F, f5)
                                         .uv2(i4, l3)
                                         .endVertex();
@@ -538,7 +574,68 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
             RenderSystem.disableBlend();
             lightTexture.turnOffLightLayer();
         }
-        
+
         return true;
     }
+
+    @Override
+    public boolean tickRain(ClientLevel level, int ticks, Camera camera) {
+        LevelRenderer levelRenderer = Minecraft.getInstance().levelRenderer;
+        float f = level.getRainLevel(1.0F) / (Minecraft.useFancyGraphics() ? 1.5F : 3.0F);
+        float thunder = level.getThunderLevel(1.0F);
+        boolean isThundering = (!(thunder <= 0.0F));
+        if (isThundering) {
+            f = level.getRainLevel(1.0F) / (Minecraft.useFancyGraphics() ? 0.75F : 1.5F);
+        }
+
+        if (!(f <= 0.0F)) {
+            RandomSource randomsource = RandomSource.create((long) ticks * 312987231L);
+            BlockPos blockpos = BlockPos.containing(camera.getPosition());
+            BlockPos blockpos1 = null;
+            int i = (int) (100.0F * f * f) / (Minecraft.getInstance().options.particles().get() == ParticleStatus.DECREASED ? 2 : 1);
+
+            for (int j = 0; j < i; ++j) {
+                int k = randomsource.nextInt(21) - 10;
+                int l = randomsource.nextInt(21) - 10;
+                BlockPos blockpos2 = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockpos.offset(k, 0, l));
+                if (blockpos2.getY() > level.getMinBuildHeight() && blockpos2.getY() <= blockpos.getY() + 10 && blockpos2.getY() >= blockpos.getY() - 10) {
+                    Biome biome = level.getBiome(blockpos2).value();
+                    if (biome.getPrecipitationAt(blockpos2) == Biome.Precipitation.RAIN) {
+                        blockpos1 = blockpos2.below();
+                        if (Minecraft.getInstance().options.particles().get() == ParticleStatus.MINIMAL) {
+                            break;
+                        }
+
+                        double d0 = randomsource.nextDouble();
+                        double d1 = randomsource.nextDouble();
+                        BlockState blockstate = level.getBlockState(blockpos1);
+                        FluidState fluidstate = level.getFluidState(blockpos1);
+                        VoxelShape voxelshape = blockstate.getCollisionShape(level, blockpos1);
+                        double d2 = voxelshape.max(Direction.Axis.Y, d0, d1);
+                        double d3 = fluidstate.getHeight(level, blockpos1);
+                        double d4 = Math.max(d2, d3);
+                        ParticleOptions particleoptions = !fluidstate.is(FluidTags.LAVA) && !blockstate.is(Blocks.MAGMA_BLOCK) && !CampfireBlock.isLitCampfire(blockstate) ? ParticleTypes.RAIN : ParticleTypes.SMOKE;
+                        level.addParticle(particleoptions, (double) blockpos1.getX() + d0, (double) blockpos1.getY() + d4, (double) blockpos1.getZ() + d1, 0.0, 0.0, 0.0);
+                    }
+                }
+            }
+
+            if (blockpos1 != null) {
+                ((LevelRendererAccessor) levelRenderer).aether_ii$setRainSoundTime(((LevelRendererAccessor) levelRenderer).aether_ii$getRainSoundTime() + 1);
+                if (randomsource.nextInt(3) < ((LevelRendererAccessor) levelRenderer).aether_ii$getRainSoundTime()) {
+                    ((LevelRendererAccessor) levelRenderer).aether_ii$setRainSoundTime(0);
+                    if (blockpos1.getY() > blockpos.getY() + 1
+                            && level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockpos).getY() > Mth.floor((float) blockpos.getY())) {
+                        level.playLocalSound(blockpos1, SoundEvents.WEATHER_RAIN_ABOVE, SoundSource.WEATHER, 0.1F, 0.5F, false);
+                    } else {
+                        level.playLocalSound(blockpos1, SoundEvents.WEATHER_RAIN, SoundSource.WEATHER, 0.2F, 1.0F, false);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
+
 }
