@@ -49,7 +49,7 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), 5, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 2, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), 0, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), 1, i, attachment.doubleTrunk());
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 3, pos.getZ()), 0, i, attachment.doubleTrunk());
 
             if (random.nextInt(1) == 0) {
