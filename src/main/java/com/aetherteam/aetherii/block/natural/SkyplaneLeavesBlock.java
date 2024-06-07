@@ -1,5 +1,6 @@
-package com.aetherteam.aetherii.block.natural;
+package com.aetherteam.aetherii.block.miscellaneous;
 
+import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.level.BlockGetter;
@@ -8,8 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Supplier;
 
-public class SkyPlaneLeavesBlock extends AetherLeavesBlock {
-    public SkyPlaneLeavesBlock(Properties properties, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
+public class SkyplaneLeavesBlock extends AetherLeavesBlock {
+    public SkyplaneLeavesBlock(Properties properties, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
         super(properties, leavesParticle, leavesPile);
     }
 
