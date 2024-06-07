@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-07T09:00:52.4244777	Registries
+// 1.20.4	2024-06-07T14:57:46.385287	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -67,6 +67,7 @@ b94d018ffd646328a22cadd4ec8b9c78c10a5ccd data/aether_ii/worldgen/configured_feat
 37ee4555d59ea56c592fc3524c3dc8e5ee0d0baa data/aether_ii/worldgen/configured_feature/singular_amberoot.json
 a4acb9a65a7c8a40ad3b48b133aeb8dc7e9e9da8 data/aether_ii/worldgen/configured_feature/skybirch.json
 c23d3960f84294609edfbd212f06784c333784e5 data/aether_ii/worldgen/configured_feature/skypine.json
+980bb80e63d6db8c879e595bc191a5b71bae37ec data/aether_ii/worldgen/configured_feature/skyplane.json
 7e181f5eec8dadd5d34a2fc61f3a4c6ca051f048 data/aether_ii/worldgen/configured_feature/skyroot.json
 00274963369cb2a892785645e955540527cb86e9 data/aether_ii/worldgen/configured_feature/skyroot_twigs.json
 1f71594ed367bb91ea7910bd695fe098bce7428c data/aether_ii/worldgen/configured_feature/storm_aercloud.json

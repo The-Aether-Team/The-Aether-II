@@ -10,6 +10,7 @@ public class AetherIIFoliagePlacerTypes {
     public static final DeferredRegister<FoliagePlacerType<?>> FOLIAGE_PLACERS = DeferredRegister.create(BuiltInRegistries.FOLIAGE_PLACER_TYPE, AetherII.MODID);
 
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<LargeSkyrootFoliagePlacer>> LARGE_SKYROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("large_skyroot_foliage_placer", () -> new FoliagePlacerType<>(LargeSkyrootFoliagePlacer.CODEC));
+    public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<SkyplaneFoliagePlacer>> SKYPLANE_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("skyplane_foliage_placer", () -> new FoliagePlacerType<>(SkyplaneFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<SkybirchFoliagePlacer>> SKYBIRCH_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("skybirch_foliage_placer", () -> new FoliagePlacerType<>(SkybirchFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<SkypineFoliagePlacer>> SKYPINE_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("skypine_foliage_placer", () -> new FoliagePlacerType<>(SkypineFoliagePlacer.CODEC));
     public static final DeferredHolder<FoliagePlacerType<?>, FoliagePlacerType<WisprootFoliagePlacer>> WISPROOT_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("wisproot_foliage_placer", () -> new FoliagePlacerType<>(WisprootFoliagePlacer.CODEC));
