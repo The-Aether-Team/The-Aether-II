@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-06T18:06:38.6841937	Loot Tables
+// 1.20.4	2024-06-06T18:22:47.8857651	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -21,6 +21,7 @@ c5f6889f01d43b7e3ed9816fe4135039df75096b data/aether_ii/loot_tables/blocks/agios
 63d7040cb32789544214b8d1d45929be686d20a9 data/aether_ii/loot_tables/blocks/agiosite_slab.json
 76b79914a659c9506211edf0a14f0be94f92838d data/aether_ii/loot_tables/blocks/agiosite_stairs.json
 ea7e1a6d871a82492d95884322e710b078831bab data/aether_ii/loot_tables/blocks/agiosite_wall.json
+d2220cb396a5777efef628f1fc7d2b4c3a0dc7ae data/aether_ii/loot_tables/blocks/altar.json
 d58c8fc768a16ea6fe0d921382ed135dd8796c8d data/aether_ii/loot_tables/blocks/amberoot_leaf_pile.json
 b8d91ea304178e2fc4669c57c9ba5b9752494fff data/aether_ii/loot_tables/blocks/amberoot_leaves.json
 4a0da30aedd426291f031f57b5ca7db3d73e3427 data/aether_ii/loot_tables/blocks/amberoot_log.json

@@ -21,6 +21,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
@@ -28,6 +31,11 @@ public class ArtisansBenchBlock extends Block {
     public static final MapCodec<ArtisansBenchBlock> CODEC = simpleCodec(ArtisansBenchBlock::new);
     private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.artisans_bench");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    protected static final VoxelShape SHAPE_BACK = Block.box(0.0, 0.0, 0.0, 2.0, 16.0, 0.0);
+    protected static final VoxelShape SHAPE_LEFT = Block.box(0.0, 0.0, 0.0, 0.0, 16.0, 2.0);
+    protected static final VoxelShape SHAPE_RIGHT = Block.box(0.0, 0.0, 14.0, 0.0, 16.0, 16.0);
+    protected static final VoxelShape SHAPE_BASE = Block.box(0.0, 0.0, 0.0, 16.0, 13.0, 16.0);
+    protected static final VoxelShape SHAPE = Shapes.or(SHAPE_BACK, SHAPE_LEFT, SHAPE_RIGHT, SHAPE_BASE);
 
     @Override
     public MapCodec<ArtisansBenchBlock> codec() {
@@ -59,6 +67,11 @@ public class ArtisansBenchBlock extends Block {
     @Override
     public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
         return new SimpleMenuProvider((id, inventory, player) -> new ArtisansBenchMenu(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_TITLE);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return SHAPE;
     }
 
     @Override

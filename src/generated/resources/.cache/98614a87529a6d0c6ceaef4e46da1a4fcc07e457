@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-06T18:06:38.7201942	Item Models: aether_ii
+// 1.20.4	2024-06-06T18:22:48.0747629	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -24,6 +24,7 @@ a2ad28ced2cfef2209a94336a7f07b6dc43d0b82 assets/aether_ii/models/item/agiosite_k
 7d5a5ee528f06e8c62e81db4cd3105b19bac758a assets/aether_ii/models/item/agiosite_slab.json
 6d0b6541d2039949b41b31190393c9602c8e9aa9 assets/aether_ii/models/item/agiosite_stairs.json
 1c4dff40d6e81582f021204bf60d9aa4ebec0ae6 assets/aether_ii/models/item/agiosite_wall.json
+ae1d634982c37985a9e7b0ba9ec7ab14d52b83ca assets/aether_ii/models/item/altar.json
 ec6e75254f6eac026065c9aa82e4caed69bab2f5 assets/aether_ii/models/item/amberoot_leaf_pile.json
 183e501764258654cc51853d14080c0c90ad97bb assets/aether_ii/models/item/amberoot_leaves.json
 7103a735096dfa36af38b7cd4c3e3a2b75d94935 assets/aether_ii/models/item/amberoot_log.json

@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
+import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArtisansBenchBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
@@ -625,11 +626,44 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
-    public void artisanryBench(Block block) {
-        ModelFile model = models().withExistingParent(name(block), modLoc("block/template_artisanry_bench"))
+    public void altar(Block block) {
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(AltarBlock.FACING);
+            boolean charging = state.getValue(AltarBlock.CHARGING);
+            boolean blasting = state.getValue(AltarBlock.BLASTING);
+            int degrees = 0;
+            switch (direction) {
+                case EAST -> degrees = 90;
+                case SOUTH -> degrees = 180;
+                case WEST -> degrees = 270;
+            }
+            if (charging) {
+                ModelFile model = this.models().withExistingParent(this.name(block) + "_charging", this.modLoc("block/template_altar"))
+                        .texture("altar", this.texture(this.name(block) + "_charging", "utility/"))
+                        .texture("particle", this.texture(this.name(AetherIIBlocks.HOLYSTONE.get()), "natural/"))
+                        .renderType("cutout");
+                return ConfiguredModel.builder().modelFile(model).rotationY(degrees).build();
+            } else if (blasting) {
+                ModelFile model = this.models().withExistingParent(this.name(block) + "_blasting", this.modLoc("block/template_altar"))
+                        .texture("altar", this.texture(this.name(block) + "_blasting", "utility/"))
+                        .texture("particle", this.texture(this.name(AetherIIBlocks.HOLYSTONE.get()), "natural/"))
+                        .renderType("cutout");
+                return ConfiguredModel.builder().modelFile(model).rotationY(degrees).build();
+            } else {
+                ModelFile model = this.models().withExistingParent(this.name(block), this.modLoc("block/template_altar"))
+                        .texture("altar", this.texture(this.name(block), "utility/"))
+                        .texture("particle", this.texture(this.name(AetherIIBlocks.HOLYSTONE.get()), "natural/"))
+                        .renderType("cutout");
+                return ConfiguredModel.builder().modelFile(model).rotationY(degrees).build();
+            }
+        });
+    }
+
+    public void artisansBench(Block block) {
+        ModelFile model = models().withExistingParent(name(block), modLoc("block/template_artisans_bench"))
                 .texture("bench", texture(name(block), "utility/"))
                 .texture("particle", texture(name(AetherIIBlocks.HOLYSTONE_BRICKS.get()), "construction/"))
-                .renderType("cutout_mipped");
+                .renderType("cutout");
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
             Direction direction = state.getValue(ArtisansBenchBlock.FACING);
             switch (direction) {

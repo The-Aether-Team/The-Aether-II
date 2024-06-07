@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-05T14:43:39.6764691	Block States: aether_ii
+// 1.20.4	2024-06-06T19:21:32.3831256	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -22,6 +22,7 @@ d723f86c2b0e2d07a0d650c77f4502fa74eeca84 assets/aether_ii/blockstates/agiosite_p
 d1e3c770dcb528e1e8421d88f2b0c87840cde1c7 assets/aether_ii/blockstates/agiosite_slab.json
 a5175181b7bf8145ba84bd56482d95e568202d16 assets/aether_ii/blockstates/agiosite_stairs.json
 bc27ada59933d17629ab4441897802dddb613b33 assets/aether_ii/blockstates/agiosite_wall.json
+f73d2b5f2ca99b746aa9a0da0f327b4e537f406b assets/aether_ii/blockstates/altar.json
 5d9f4b975f4d0cd520e36d0893c1f385a7546d52 assets/aether_ii/blockstates/amberoot_leaf_pile.json
 b5f21b065a5c8b88fdd19fe5dd78877e58ecd43a assets/aether_ii/blockstates/amberoot_leaves.json
 00d87fc7ac992265a1ba3abcec60d025374c7793 assets/aether_ii/blockstates/amberoot_log.json
@@ -262,6 +263,9 @@ ca0c11353060c70f2c6d8e9bd35139bba80304e7 assets/aether_ii/models/block/agiosite_
 91c9d10b8a49f1a6cb2c843bcac5affc3d5aa112 assets/aether_ii/models/block/agiosite_wall_post.json
 68a4a374b5f045b604c81ef5eb01f0510fda352c assets/aether_ii/models/block/agiosite_wall_side.json
 b4eda9abe6c94715001db4e02244cf330c333eaf assets/aether_ii/models/block/agiosite_wall_side_tall.json
+a2ec7d3614d54c3314a0b72e4240ca4715acf8e8 assets/aether_ii/models/block/altar.json
+8fab96c4e7200950f864fa535c987d32a7440a06 assets/aether_ii/models/block/altar_blasting.json
+ee527bf77e626186ccb5219aae1dc00c6b0f0414 assets/aether_ii/models/block/altar_charging.json
 17765657df84ef8bd7120a7731eb2c4671053532 assets/aether_ii/models/block/amberoot_leaf_pile.json
 19cd19d70f2408954e35c066e385d3bce50262ca assets/aether_ii/models/block/amberoot_leaf_pile10.json
 278af7c1e754d24d1f83c73e6cc20e046ce5a523 assets/aether_ii/models/block/amberoot_leaf_pile11.json
@@ -301,7 +305,7 @@ b0b5aa2804547fd8444324005b8773e897828879 assets/aether_ii/models/block/arctic_sn
 45f3acd4f5612d84622e9a83c6f69138c34c839a assets/aether_ii/models/block/arctic_snow_block.json
 479e060251162d13e380d7aa979e760d3311b9e3 assets/aether_ii/models/block/arkenium_block.json
 016b0c1533090f1198dfeb2db71beb72c730a787 assets/aether_ii/models/block/arkenium_ore.json
-3ed4a181cd2f42a71022bae186dc964d46b6355f assets/aether_ii/models/block/artisans_bench.json
+5424124d63d0cdde6a16b4f2ce6cd33a27704258 assets/aether_ii/models/block/artisans_bench.json
 06cf463cdbf97a009f7c8341b4b2d91e6f4d5ed0 assets/aether_ii/models/block/blueberry_bush.json
 5887cdcbe7daf0b10e8bfde375a5156c4e7592e6 assets/aether_ii/models/block/blueberry_bush_stem.json
 9f51375a8c00c0440af1bfa813fda3d6144692ce assets/aether_ii/models/block/blue_aercloud.json
