@@ -124,7 +124,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Leaves
     public static final DeferredBlock<Block> SKYROOT_LEAVES = register("skyroot_leaves", () -> leaves(MapColor.GRASS, AetherIIParticleTypes.SKYROOT_LEAVES, AetherIIBlocks.SKYROOT_LEAF_PILE));
-    public static final DeferredBlock<Block> SKYPLANE_LEAVES = register("skyplane_leaves", () -> leaves(MapColor.COLOR_BLUE, AetherIIParticleTypes.SKYPLANE_LEAVES, AetherIIBlocks.SKYPLANE_LEAF_PILE));
+    public static final DeferredBlock<Block> SKYPLANE_LEAVES = register("skyplane_leaves", () -> new SkyPlaneLeavesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlockBuilders::spawnOnLeaves).isSuffocating(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).ignitedByLava().pushReaction(PushReaction.DESTROY), AetherIIParticleTypes.SKYPLANE_LEAVES, AetherIIBlocks.SKYPLANE_LEAF_PILE));
     public static final DeferredBlock<Block> SKYBIRCH_LEAVES = register("skybirch_leaves", () -> leaves(MapColor.COLOR_LIGHT_BLUE, AetherIIParticleTypes.SKYBIRCH_LEAVES, AetherIIBlocks.SKYBIRCH_LEAF_PILE));
     public static final DeferredBlock<Block> SKYPINE_LEAVES = register("skypine_leaves", () -> leaves(MapColor.COLOR_MAGENTA, AetherIIParticleTypes.SKYPINE_LEAVES, AetherIIBlocks.SKYPINE_LEAF_PILE));
     public static final DeferredBlock<Block> WISPROOT_LEAVES = register("wisproot_leaves", () -> leaves(MapColor.DIAMOND, AetherIIParticleTypes.WISPROOT_LEAVES, AetherIIBlocks.WISPROOT_LEAF_PILE));

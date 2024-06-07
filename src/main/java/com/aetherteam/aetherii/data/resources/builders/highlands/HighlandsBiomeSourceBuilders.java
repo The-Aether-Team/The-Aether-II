@@ -35,18 +35,18 @@ public class HighlandsBiomeSourceBuilders {
 
                 // Highfields
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.15F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.15F, -0.1F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.1F, 0.15F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.15F, 0.15F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
 
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-1.0F, 0.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.0F, 0.2F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-0.2F, 0.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.0F, 0.2F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
 
                 Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
                 Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-0.25F, 0.1F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.1F, 0.15F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.1F, 0.25F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.25F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
 
                 // Magnetic
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
