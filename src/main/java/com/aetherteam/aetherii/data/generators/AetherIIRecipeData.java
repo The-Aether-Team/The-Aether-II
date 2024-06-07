@@ -396,14 +396,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).save(consumer, this.name("ambrosium_shard_from_blasting"));
         this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.7F).save(consumer, this.name("zanite_gemstone_from_smelting"));
         this.blastingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.7F).save(consumer, this.name("zanite_gemstone_from_blasting"));
-        this.smeltingOreRecipe(AetherIIItems.ARKENIUM_PLATES.get(), AetherIIBlocks.ARKENIUM_ORE.get(), 1.0F).save(consumer, this.name("arkenium_plate_from_smelting"));
-        this.blastingOreRecipe(AetherIIItems.ARKENIUM_PLATES.get(), AetherIIBlocks.ARKENIUM_ORE.get(), 1.0F).save(consumer, this.name("arkenium_plate_from_blasting"));
-        this.smeltingOreRecipe(AetherIIItems.ARKENIUM_PLATES.get(), AetherIIItems.RAW_ARKENIUM.get(), 1.0F).save(consumer, this.name("arkenium_plate_from_smelting_raw"));
-        this.blastingOreRecipe(AetherIIItems.ARKENIUM_PLATES.get(), AetherIIItems.RAW_ARKENIUM.get(), 1.0F).save(consumer, this.name("arkenium_plate_from_blasting_raw"));
-        this.smeltingOreRecipe(AetherIIItems.GRAVITITE_PLATE.get(), AetherIIBlocks.GRAVITITE_ORE.get(), 1.0F).save(consumer, this.name("gravitite_plate_from_smelting"));
-        this.blastingOreRecipe(AetherIIItems.GRAVITITE_PLATE.get(), AetherIIBlocks.GRAVITITE_ORE.get(), 1.0F).save(consumer, this.name("gravitite_plate_from_blasting"));
-        this.smeltingOreRecipe(AetherIIItems.GRAVITITE_PLATE.get(), AetherIIItems.RAW_GRAVITITE.get(), 1.0F).save(consumer, this.name("gravitite_plate_from_smelting_raw"));
-        this.blastingOreRecipe(AetherIIItems.GRAVITITE_PLATE.get(), AetherIIItems.RAW_GRAVITITE.get(), 1.0F).save(consumer, this.name("gravitite_plate_from_blasting_raw"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.ARKENIUM_STRIP.get(), 4)
                 .define('#', AetherIITags.Items.PLATES_ARKENIUM)
                 .pattern("#")

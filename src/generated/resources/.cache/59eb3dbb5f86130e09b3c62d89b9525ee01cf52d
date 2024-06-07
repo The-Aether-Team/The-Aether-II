@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-05T14:43:39.6694688	Loot Tables
+// 1.20.4	2024-06-06T18:06:38.6841937	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -35,7 +35,7 @@ a16bcaab0cf39b3023d08214573ae0f2436c3408 data/aether_ii/loot_tables/blocks/ambro
 c87923ccdefa88d7d3ed708f4de39fb824a9de5d data/aether_ii/loot_tables/blocks/arctic_snow.json
 a9f952fd69ef7832b32445bd67dc71d586d3de1c data/aether_ii/loot_tables/blocks/arctic_snow_block.json
 e298757b5ed094abc38289e287492b01d899f962 data/aether_ii/loot_tables/blocks/arkenium_block.json
-2d59567ee2fac257895ce065f7c639bdb9447c3d data/aether_ii/loot_tables/blocks/arkenium_ore.json
+4650ed8a6ef6c378fbd5712035ce412ad481809f data/aether_ii/loot_tables/blocks/arkenium_ore.json
 1746fca9821fbac5c05bb3a5be142856713c18d5 data/aether_ii/loot_tables/blocks/artisans_bench.json
 c7e13732177bf7826b000542a9d6754f82b2859b data/aether_ii/loot_tables/blocks/blueberry_bush.json
 98df12e3b044c3286c5d3512f976852aff894153 data/aether_ii/loot_tables/blocks/blueberry_bush_stem.json
@@ -63,7 +63,7 @@ abd70fe03f098449b618b9620927d35e95eb3a3b data/aether_ii/loot_tables/blocks/faded
 48e66274dcfb891765dd15f36941d07c7d265e3d data/aether_ii/loot_tables/blocks/ferrosite_sand.json
 30972fa73c943b1db70d7006dfe95fcb7d298576 data/aether_ii/loot_tables/blocks/golden_aercloud.json
 0a8333db6bbafc06187539a24dd3c8591183ade7 data/aether_ii/loot_tables/blocks/gravitite_block.json
-6a741dac163e2fe3e1f7383e800585919e388d75 data/aether_ii/loot_tables/blocks/gravitite_ore.json
+8aa8ea324d8008f44efc83baa5916253768dcd72 data/aether_ii/loot_tables/blocks/gravitite_ore.json
 28fddd0a3f72843d7492d491481ac11dca089569 data/aether_ii/loot_tables/blocks/greatboa_leaf_pile.json
 0d21603f773abdd6a84a038874d2df1c9ef34ce7 data/aether_ii/loot_tables/blocks/greatboa_leaves.json
 9da91b4fc07c4beea0936c5b686d997a6f8f56f4 data/aether_ii/loot_tables/blocks/greatboa_sapling.json
