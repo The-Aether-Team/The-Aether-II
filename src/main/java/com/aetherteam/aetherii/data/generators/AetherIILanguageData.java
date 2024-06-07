@@ -113,6 +113,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Saplings
         this.addBlock(AetherIIBlocks.SKYROOT_SAPLING, "Skyroot Sapling");
+        this.addBlock(AetherIIBlocks.SKYBIRCH_SAPLING, "Skybirch Sapling");
         this.addBlock(AetherIIBlocks.WISPROOT_SAPLING, "Wisproot Sapling");
         this.addBlock(AetherIIBlocks.WISPTOP_SAPLING, "Wisptop Sapling");
         this.addBlock(AetherIIBlocks.GREATROOT_SAPLING, "Greatroot Sapling");
