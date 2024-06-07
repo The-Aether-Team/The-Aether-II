@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-07T07:55:35.5514471	Registries
+// 1.20.4	2024-06-07T09:00:52.4244777	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -109,7 +109,7 @@ cf4e21c1b758d3bc55ed1ef3f627e847e2485a04 data/aether_ii/worldgen/placed_feature/
 f426d78d71ae7475a68a232b27c64ed5fa137688 data/aether_ii/worldgen/placed_feature/enduring_woodland_trees.json
 a43c21d9110ca5095844feb5e82009bd86ccf4f6 data/aether_ii/worldgen/placed_feature/ferrosite_pillar.json
 c86d3e33f740b71ca524738f2d1d646e22c0c96e data/aether_ii/worldgen/placed_feature/flourishing_field_trees.json
-bb5a6a32f5bf32ef058df234297e3e4425d7709d data/aether_ii/worldgen/placed_feature/frigid_sierra_trees.json
+4fe4594228f9458b5819e5a9164ce7a8cd6f74e6 data/aether_ii/worldgen/placed_feature/frigid_sierra_trees.json
 381f7ddeb24166aab20d975ccba39d5207c8907e data/aether_ii/worldgen/placed_feature/golden_aercloud.json
 5a840ee49b6a47ccefaf1fa39fb71a0f5a8a554e data/aether_ii/worldgen/placed_feature/green_aercloud.json
 4efc5d5255b812a9ce9db5d263790a14ce9e9772 data/aether_ii/worldgen/placed_feature/highfields_flower_patch.json

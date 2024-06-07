@@ -85,7 +85,7 @@ public class AetherIIVegetationPlacements {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
 
         AetherIIPlacementUtils.register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(AetherIITreeFeatures.GREATBOA),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(4)));
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(8)));
         AetherIIPlacementUtils.register(context, ENDURING_WOODLAND_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_ENDURING_WOODLANDS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
 
