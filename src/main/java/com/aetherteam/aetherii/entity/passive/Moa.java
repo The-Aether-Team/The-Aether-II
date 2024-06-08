@@ -211,6 +211,7 @@ public class Moa extends MountableAnimal {
             this.setMoaTypeByKey(AetherMoaTypes.BLUE);
         }*/
         if (reason == MobSpawnType.STRUCTURE) {
+            //set moa home when spawn in nest
             MoaAi.initMoaHomeMemories(this, this.random);
         }
         return super.finalizeSpawn(level, difficulty, reason, spawnData, tag);
