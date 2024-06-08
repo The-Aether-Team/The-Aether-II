@@ -1,22 +1,89 @@
 {
   "type": "minecraft:spline",
   "spline": {
-    "coordinate": "aether_ii:highlands/lakes/noise",
+    "coordinate": "aether_ii:highlands/erosion",
     "points": [
       {
         "derivative": 0.0,
-        "location": 0.3,
+        "location": 0.475,
+        "value": {
+          "coordinate": "aether_ii:highlands/temperature",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": -0.4,
+              "value": 1
+            },
+            {
+              "derivative": 0.0,
+              "location": -0.325,
+              "value": {
+                "coordinate": "aether_ii:highlands/lakes/noise",
+                "points": [
+                  {
+                    "derivative": 0.0,
+                    "location": 0.35,
+                    "value": 1
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.4,
+                    "value": 2
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.5,
+                    "value": 5
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.525,
+                    "value": 25
+                  }
+                ]
+              }
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.575,
+              "value": {
+                "coordinate": "aether_ii:highlands/lakes/noise",
+                "points": [
+                  {
+                    "derivative": 0.0,
+                    "location": 0.25,
+                    "value": 1
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.3,
+                    "value": 2
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.4,
+                    "value": 5
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.425,
+                    "value": 25
+                  }
+                ]
+              }
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.65,
+              "value": 1
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.55,
         "value": 1
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.4,
-        "value": 5
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.425,
-        "value": 25
       }
     ]
   }

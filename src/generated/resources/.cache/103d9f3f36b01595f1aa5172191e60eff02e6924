@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-08T16:54:03.8522442	Registries
+// 1.20.4	2024-06-08T17:46:44.4384708	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -16,7 +16,7 @@ dd6f3c7add97ce702acede93cec4afc8c435df53 data/aether_ii/aether_ii/damage_resista
 8052d9a9ad60b9fbdf8e8576bdb6551b8249f0de data/aether_ii/aether_ii/damage_resistance/zephyr.json
 4b4b2ff422d23e4cb6282f664d89dad7ac8ff8e6 data/aether_ii/damage_type/player_aoe.json
 4b4b2ff422d23e4cb6282f664d89dad7ac8ff8e6 data/aether_ii/damage_type/player_aoe_no_knockback.json
-a860c4a0bccc4b425178e6aad5131cd8dd078294 data/aether_ii/dimension/aether_highlands.json
+18e9ac777a227b6aae838db7b9fb2044f8981504 data/aether_ii/dimension/aether_highlands.json
 e48734a1f4f4a5ce46ede719985e497b3c51ce46 data/aether_ii/dimension_type/aether_highlands.json
 981b584aa386f60ca4413c37e42ec8c9193273a9 data/aether_ii/worldgen/biome/battleground_wastes.json
 8abe76e046c44fe24c91739c38d8476d6d1f7cf4 data/aether_ii/worldgen/biome/contaminated_jungle.json
@@ -106,9 +106,10 @@ ae328841bacb2c5d784ffb006451cd4c404032f2 data/aether_ii/worldgen/noise/elevation
 20ddbabfded8546f8d71cb1689cd15c42bc77244 data/aether_ii/worldgen/noise/erosion.json
 f038795e9e9e0941079bf3357693081e2fb30ca6 data/aether_ii/worldgen/noise/lakes.json
 aebb46c7d89f91d0ff6bb80eb24a060621e69666 data/aether_ii/worldgen/noise/lake_floor.json
+2a2d69fb87cfa04e5651db17d34f18746ade9916 data/aether_ii/worldgen/noise/lake_holystone.json
 e9951c1e43a8e47e424565851e1786e9dbe41a7a data/aether_ii/worldgen/noise/temperature.json
 144e6875c7c48ab4b4a0717436536cc121dc62da data/aether_ii/worldgen/noise/vegetation.json
-368422a763aece8b8177b89047b202dfa0a386af data/aether_ii/worldgen/noise_settings/highlands.json
+e8b3ac8926f86818694da54c5f2bb9798152dbd8 data/aether_ii/worldgen/noise_settings/highlands.json
 ee929a22672d53a49c356e659c7fbb51fc653699 data/aether_ii/worldgen/placed_feature/aether_grass_bonemeal.json
 68b4063a98f30067fa038e1a100b1de97af6c997 data/aether_ii/worldgen/placed_feature/battleground_wastes_trees.json
 7e90cba060e3872d7904303f2ee7876f317d8a92 data/aether_ii/worldgen/placed_feature/blueberry_bush_patch.json

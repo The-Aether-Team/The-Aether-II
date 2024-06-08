@@ -35,8 +35,8 @@ public class HighlandsBiomeSourceBuilders {
         Climate.Parameter depthArcticLayer2 = Climate.Parameter.span(-0.15F, 0.15F);
         Climate.Parameter depthArcticLayer3 = Climate.Parameter.span(0.15F, 1.5F);
 
-        Climate.Parameter ridgeLand = Climate.Parameter.span(-1.5F, 0.05F);
-        Climate.Parameter ridgeLake = Climate.Parameter.span(0.05F, 1.5F);
+        Climate.Parameter ridgeLand = Climate.Parameter.span(-1.5F, 0.025F);
+        Climate.Parameter ridgeLake = Climate.Parameter.span(0.025F, 1.5F);
 
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
 
