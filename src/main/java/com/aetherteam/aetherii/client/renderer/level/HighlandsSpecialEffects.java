@@ -304,8 +304,8 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
                 float f3 = Math.signum(-16.0F) * 512.0F;
                 Color color = new Color((int) (f * 255), (int) (f1 * 255), (int) (f2 * 255)).brighter();
-                float weatherMultiplier = Math.max(1.0F - (((level.getRainLevel(partialTick) + level.getThunderLevel(partialTick)) * 0.5F) * 1.25F), 0.175F);
-                float bluePower =  Math.min(0.25F / weatherMultiplier, 0.85F);
+                float weatherMultiplier = Math.max(1.0F - (((level.getRainLevel(partialTick) + level.getThunderLevel(partialTick)) * 0.5F) * 0.275F), 0.175F);
+                float bluePower =  Math.min(0.5F / weatherMultiplier, 0.85F);
                 float r = (color.getRed() / 255.0F) * weatherMultiplier;
                 float g = (color.getGreen() / 255.0F) * weatherMultiplier;
                 float b = (color.getBlue() / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);

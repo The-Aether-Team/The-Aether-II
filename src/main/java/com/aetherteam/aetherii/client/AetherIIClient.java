@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.client.event.listeners.AerbunnyMountClientListners;
+import com.aetherteam.aetherii.client.event.listeners.DimensionRenderEffectListeners;
 import com.aetherteam.aetherii.client.gui.screen.inventory.AltarScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArtisansBenchScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.HolystoneFurnaceScreen;
@@ -32,6 +33,7 @@ public class AetherIIClient {
         IEventBus bus = NeoForge.EVENT_BUS;
 
         AerbunnyMountClientListners.listen(bus);
+        DimensionRenderEffectListeners.listen(bus);
 
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
         neoBus.addListener(AetherIIColorResolvers::registerItemColor);
