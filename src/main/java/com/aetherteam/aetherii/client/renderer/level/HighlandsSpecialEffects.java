@@ -306,9 +306,9 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 Color color = new Color((int) (f * 255), (int) (f1 * 255), (int) (f2 * 255)).brighter();
                 float weatherMultiplier = Math.max(1.0F - (((level.getRainLevel(partialTick) + level.getThunderLevel(partialTick)) * 0.5F) * 0.275F), 0.175F);
                 float bluePower =  Math.min(0.5F / weatherMultiplier, 0.85F);
-                float r = (color.getRed() / 255.0F) * weatherMultiplier;
-                float g = (color.getGreen() / 255.0F) * weatherMultiplier;
-                float b = (color.getBlue() / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
+                float r = (Math.min(color.getRed() + 20, 255.0F) / 255.0F) * weatherMultiplier;
+                float g = (Math.min(color.getGreen() + 20, 255.0F) / 255.0F) * weatherMultiplier;
+                float b = (Math.min(color.getBlue() + 35, 255.0F) / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
 
                 Matrix4f matrix4f = poseStack.last().pose();
 
@@ -330,9 +330,9 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
                     RenderSystem.setShader(GameRenderer::getPositionColorShader);
                     bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-                    bufferBuilder.vertex(matrix4f, 0.0F, -26.0F, 0.0F).color(f4, f5, f6, sunriseColor[3]).endVertex();
+                    bufferBuilder.vertex(matrix4f, 0.0F, -32.0F, 0.0F).color(f4, f5, f6, sunriseColor[3]).endVertex();
                     for (int i = -180; i <= 180; i += 9) {
-                        bufferBuilder.vertex(matrix4f, f7 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -26.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(sunriseColor[0], sunriseColor[1], sunriseColor[2], 0.0F).endVertex();
+                        bufferBuilder.vertex(matrix4f, f7 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -64.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(sunriseColor[0], sunriseColor[1], sunriseColor[2], 0.0F).endVertex();
                     }
                     BufferUploader.drawWithShader(bufferBuilder.end());
                 }
