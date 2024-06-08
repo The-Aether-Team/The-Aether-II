@@ -112,7 +112,7 @@
             ],
             "humidity": [
               -1.0,
-              -0.25
+              -0.15
             ],
             "offset": 0.0,
             "temperature": [
@@ -141,7 +141,7 @@
               0.5
             ],
             "humidity": [
-              -0.25,
+              -0.15,
               0.15
             ],
             "offset": 0.0,
@@ -186,7 +186,7 @@
           }
         },
         {
-          "biome": "aether_ii:verdant_woods",
+          "biome": "aether_ii:shrouded_forest",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -202,7 +202,7 @@
             ],
             "humidity": [
               -1.0,
-              -0.1
+              -0.2
             ],
             "offset": 0.0,
             "temperature": [
@@ -231,8 +231,8 @@
               0.5
             ],
             "humidity": [
-              -0.1,
-              0.3
+              -0.2,
+              0.0
             ],
             "offset": 0.0,
             "temperature": [
@@ -246,7 +246,7 @@
           }
         },
         {
-          "biome": "aether_ii:shrouded_forest",
+          "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -261,7 +261,37 @@
               0.5
             ],
             "humidity": [
-              0.3,
+              0.0,
+              0.2
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.1,
+              0.3
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:flourishing_field",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              0.2,
               1.0
             ],
             "offset": 0.0,
@@ -322,7 +352,7 @@
             ],
             "humidity": [
               -0.25,
-              0.2
+              0.1
             ],
             "offset": 0.0,
             "temperature": [
@@ -336,7 +366,7 @@
           }
         },
         {
-          "biome": "aether_ii:shrouded_forest",
+          "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -351,7 +381,37 @@
               0.5
             ],
             "humidity": [
-              0.2,
+              0.1,
+              0.25
+            ],
+            "offset": 0.0,
+            "temperature": [
+              0.3,
+              0.65
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:verdant_woods",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              0.25,
               1.0
             ],
             "offset": 0.0,
@@ -396,7 +456,7 @@
           }
         },
         {
-          "biome": "aether_ii:magnetic_scar",
+          "biome": "aether_ii:glistening_swamp",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -426,7 +486,7 @@
           }
         },
         {
-          "biome": "aether_ii:glistening_swamp",
+          "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -456,7 +516,7 @@
           }
         },
         {
-          "biome": "aether_ii:magnetic_scar",
+          "biome": "aether_ii:turquoise_forest",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -486,7 +546,7 @@
           }
         },
         {
-          "biome": "aether_ii:turquoise_forest",
+          "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -636,7 +696,7 @@
           }
         },
         {
-          "biome": "aether_ii:glistening_swamp",
+          "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
               -1.5,
