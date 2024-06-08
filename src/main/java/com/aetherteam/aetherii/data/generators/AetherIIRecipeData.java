@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 
@@ -410,5 +411,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#")
                 .unlockedBy("has_arkenium", has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WHITE_DYE)
+                .group("white_dye")
+                .requires(AetherIIBlocks.HESPEROSE.get())
+                .unlockedBy(getHasName(AetherIIBlocks.HESPEROSE.get()), has(AetherIIBlocks.HESPEROSE.get()))
+                .save(consumer, this.name("flower_to_white_dye"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PURPLE_DYE)
+                .group("purple_dye")
+                .requires(AetherIIBlocks.TARABLOOM.get())
+                .unlockedBy(getHasName(AetherIIBlocks.TARABLOOM.get()), has(AetherIIBlocks.TARABLOOM.get()))
+                .save(consumer, this.name("flower_to_purple_dye"));
     }
 }
