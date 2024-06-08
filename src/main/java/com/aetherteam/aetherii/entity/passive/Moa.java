@@ -419,10 +419,9 @@ public class Moa extends MountableAnimal {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (this.isPlayerGrown()) {
-            if (player.isShiftKeyDown()) { // Toggles whether a tamed Moa will follow the player.
-                this.setSitting(!this.isSitting());
-            }
+        if (this.isPlayerGrown() && player.isShiftKeyDown()) {
+            this.setSitting(!this.isSitting());
+
             return InteractionResult.sidedSuccess(this.level().isClientSide());
         } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD_ITEMS)) { // Feeds a hungry baby Moa.
             if (!player.getAbilities().instabuild) {
@@ -766,7 +765,19 @@ public class Moa extends MountableAnimal {
      */
     @Override
     public float getSteeringSpeed() {
-        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
+        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.2F;
+    }
+
+    @Override
+    protected void updateWalkAnimation(float pPartialTick) {
+        if (this.hasControllingPassenger()) {
+            float f = Math.min(pPartialTick * 1.0F, 1.0F);
+            this.walkAnimation.update(f, 0.4F);
+        } else {
+            super.updateWalkAnimation(pPartialTick);
+        }
+
+
     }
 
     /**
