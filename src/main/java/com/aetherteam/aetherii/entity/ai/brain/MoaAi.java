@@ -158,7 +158,7 @@ public class MoaAi {
 
         if (moa.isPresent()) {
             for (LivingEntity moa1 : moa.get().findAll(entity -> {
-                return !entity.isBaby() && entity instanceof Moa && entity.getBrain().hasMemoryValue(MemoryModuleType.HOME);
+                return !entity.isBaby() && entity instanceof Moa moa2 && !moa2.isPlayerGrown() && entity.getBrain().hasMemoryValue(MemoryModuleType.HOME);
             })) {
                 setAngerTarget((Moa) moa1, pTarget);
             }
