@@ -66,7 +66,7 @@ public class MoaAi {
                 Activity.IDLE,
                 ImmutableList.of(
                         Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
-                        Pair.of(2, BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 0.12F))),
+                        Pair.of(2, BehaviorBuilder.triggerIf(Predicate.not(Moa::isPlayerGrown), BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 0.12F)))),
                         Pair.of(3, StartAttacking.<Moa>create(MoaAi::findNearestValidAttackTarget)),
                         Pair.of(
                                 4,
