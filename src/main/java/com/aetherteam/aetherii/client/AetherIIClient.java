@@ -42,6 +42,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
         neoBus.addListener(AetherIIRenderers::bakeModels);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
+        neoBus.addListener(AetherIIShaders::registerShaders);
     }
 
     @SuppressWarnings("deprecation")
