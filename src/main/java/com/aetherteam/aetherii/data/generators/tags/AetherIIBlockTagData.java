@@ -369,6 +369,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.HOLYSTONE_FURNACE.get(),
+                AetherIIBlocks.ALTAR.get(),
                 AetherIIBlocks.ARTISANS_BENCH.get(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
         );

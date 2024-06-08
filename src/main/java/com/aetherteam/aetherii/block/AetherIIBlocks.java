@@ -7,10 +7,7 @@ import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.miscellaneous.SkyplaneLeavesBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
-import com.aetherteam.aetherii.block.utility.ArtisansBenchBlock;
-import com.aetherteam.aetherii.block.utility.HolystoneFurnaceBlock;
-import com.aetherteam.aetherii.block.utility.SkyrootChestBlock;
-import com.aetherteam.aetherii.block.utility.SkyrootCraftingTableBlock;
+import com.aetherteam.aetherii.block.utility.*;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.SkyrootChestBlockEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -361,7 +358,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> AMBROSIUM_WALL_TORCH = BLOCKS.register("ambrosium_wall_torch", () -> new WallTorchBlock(ParticleTypes.SMOKE, Block.Properties.ofFullCopy(Blocks.WALL_TORCH)));
     public static final DeferredBlock<Block> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", () -> new SkyrootCraftingTableBlock(Block.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
     public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", () -> new HolystoneFurnaceBlock(Block.Properties.ofFullCopy(Blocks.FURNACE)));
-    public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", () -> new ArtisansBenchBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER)));
+    public static final DeferredBlock<Block> ALTAR = register("altar", () -> new AltarBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion()));
+    public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", () -> new ArtisansBenchBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion()));
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", () -> new SkyrootChestBlock(Block.Properties.ofFullCopy(Blocks.CHEST), AetherIIBlockEntityTypes.SKYROOT_CHEST::get));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion()));
 

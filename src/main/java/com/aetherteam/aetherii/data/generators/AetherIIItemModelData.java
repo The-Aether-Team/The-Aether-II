@@ -65,10 +65,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
-        this.item(AetherIIItems.RAW_ARKENIUM.get(), "materials/");
+        this.item(AetherIIItems.INERT_ARKENIUM.get(), "materials/");
         this.item(AetherIIItems.ARKENIUM_PLATES.get(), "materials/");
         this.item(AetherIIItems.ARKENIUM_STRIP.get(), "materials/");
-        this.item(AetherIIItems.RAW_GRAVITITE.get(), "materials/");
+        this.item(AetherIIItems.INERT_GRAVITITE.get(), "materials/");
         this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
         this.item(AetherIIItems.GOLDEN_AMBER.get(), "materials/");
         this.item(AetherIIItems.TAEGORE_HIDE.get(), "materials/");
@@ -83,7 +83,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Food
         this.item(AetherIIItems.BLUEBERRY.get(), "food/");
-        this.item(AetherIIItems.ENCHANTED_BERRY.get(), "food/");
+        this.item(AetherIIItems.ENCHANTED_BLUEBERRY.get(), "food/");
         this.item(AetherIIItems.ORANGE.get(), "food/");
         this.item(AetherIIItems.WYNDBERRY.get(), "food/");
         this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "food/");
@@ -408,6 +408,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.itemBlock(AetherIIBlocks.ARTISANS_BENCH.get());
+        this.itemBlock(AetherIIBlocks.ALTAR.get());
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
 
