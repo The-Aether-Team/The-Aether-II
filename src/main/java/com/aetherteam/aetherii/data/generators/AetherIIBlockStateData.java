@@ -105,6 +105,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         // Saplings
         this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.SKYBIRCH_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.GREATROOT_SAPLING.get(), "natural/");
@@ -114,6 +115,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         // Potted Saplings
         this.pottedPlant(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(), AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_SKYBIRCH_SAPLING.get(), AetherIIBlocks.SKYBIRCH_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_WISPROOT_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_WISPTOP_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_GREATROOT_SAPLING.get(), AetherIIBlocks.GREATROOT_LEAVES.get(), "natural/");
@@ -324,7 +326,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.torchBlock(AetherIIBlocks.AMBROSIUM_TORCH.get(), AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.skyrootCraftingTable(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.holystoneFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-        this.artisanryBench(AetherIIBlocks.ARTISANS_BENCH.get());
+        this.artisansBench(AetherIIBlocks.ARTISANS_BENCH.get());
+        this.altar(AetherIIBlocks.ALTAR.get());
         this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
 

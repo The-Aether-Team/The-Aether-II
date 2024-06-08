@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.world.tree.foliage;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -14,7 +15,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 
 import java.util.function.BiConsumer;
 
-public class LargeSkyrootFoliagePlacer extends FoliagePlacer {
+public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     public static final Codec<LargeSkyrootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
             .apply(instance, LargeSkyrootFoliagePlacer::new));
 
@@ -43,11 +44,17 @@ public class LargeSkyrootFoliagePlacer extends FoliagePlacer {
                 for (int i = offset; i >= offset - foliageHeight; --i) {
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
+
+                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
+                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
                 }
             } else {
                 for (int i = offset; i >= offset - foliageHeight; --i) {
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
+
+                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1), Direction.Axis.Y);
+                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() + 1), Direction.Axis.Y);
                 }
             }
         } else {
@@ -55,11 +62,17 @@ public class LargeSkyrootFoliagePlacer extends FoliagePlacer {
                 for (int i = offset; i >= offset - foliageHeight; --i) {
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
+
+                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
+                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
                 }
             } else {
                 for (int i = offset; i >= offset - foliageHeight; --i) {
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
+
+                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
+                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
                 }
             }
         }

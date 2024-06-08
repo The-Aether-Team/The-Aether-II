@@ -16,6 +16,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
+        public static final TagKey<Block> FERROSITE = tag("ferrosite");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
@@ -39,6 +40,7 @@ public class AetherIITags {
     public static class Items {
         public static final TagKey<Item> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Item> HOLYSTONE = tag("holystone");
+        public static final TagKey<Item> FERROSITE = tag("ferrosite");
         public static final TagKey<Item> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Item> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
@@ -70,6 +72,7 @@ public class AetherIITags {
         public static final TagKey<Item> CRAFTS_SKYROOT_STICKS = tag("crafts_skyroot_sticks");
         public static final TagKey<Item> CRAFTS_SKYROOT_TOOLS = tag("crafts_skyroot_tools");
         public static final TagKey<Item> CRAFTS_HOLYSTONE_TOOLS = tag("crafts_holystone_tools");
+        public static final TagKey<Item> ALTAR_FUEL = tag("altar_fuel");
 
         public static final TagKey<Item> SKYROOT_REPAIRING = tag("skyroot_repairing");
         public static final TagKey<Item> HOLYSTONE_REPAIRING = tag("holystone_repairing");
