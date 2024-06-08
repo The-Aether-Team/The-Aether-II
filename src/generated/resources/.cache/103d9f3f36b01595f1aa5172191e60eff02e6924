@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-08T20:45:33.5768175	Registries
+// 1.20.4	2024-06-08T23:12:45.7472591	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -95,6 +95,7 @@ c4a51f11338a21b8afa939a66b3a79c4c95c0b44 data/aether_ii/worldgen/density_functio
 bb528955a5d100eb3198c0ea44e1409d8e23df3b data/aether_ii/worldgen/density_function/highlands/depth.json
 67e859ad7665bf3e2a0dd6f51d2a52eabb395fc2 data/aether_ii/worldgen/density_function/highlands/elevation.json
 81c359d1f74b8a9c7385698c7d95f4f2da8f192f data/aether_ii/worldgen/density_function/highlands/erosion.json
+13597415de6f6edfbf39ec21d62f37eb87cf9270 data/aether_ii/worldgen/density_function/highlands/factor.json
 fd8096317a42f2497efdbaa1fcae5efb6e269d58 data/aether_ii/worldgen/density_function/highlands/final_density.json
 510750327e4808df1e25cadbd528e9b1d9c99f9d data/aether_ii/worldgen/density_function/highlands/lakes/noise.json
 208e08bd84d086a2f40737ae695cf8c4e12c64a7 data/aether_ii/worldgen/density_function/highlands/temperature.json

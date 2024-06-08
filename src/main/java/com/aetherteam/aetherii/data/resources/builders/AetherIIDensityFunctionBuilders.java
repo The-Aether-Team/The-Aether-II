@@ -6,6 +6,8 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.CubicSpline;
+import net.minecraft.util.ToFloatFunction;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.*;
 
@@ -15,7 +17,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
-    public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/bottom_slide"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/top_slide"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/top_slide_arctic"); //TODO: Add to Datagen
@@ -89,6 +91,37 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
         return density;
+    }
+
+    public static DensityFunction buildFactor(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate continentsSpline = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS));
+        DensityFunctions.Spline.Coordinate temperatureSpline = new DensityFunctions.Spline.Coordinate(function.getOrThrow(TEMPERATURE));
+        DensityFunctions.Spline.Coordinate erosionSpline = new DensityFunctions.Spline.Coordinate(function.getOrThrow(EROSION));
+        return DensityFunctions.spline(factor(continentsSpline, temperatureSpline, erosionSpline));
+    }
+
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factor(I continents, I temperature, I erosion) {
+        CubicSpline<C, I> continentsSpline = CubicSpline.builder(continents)
+                .addPoint(-0.2F, 1.0F)
+                .addPoint(-0.05F, 5.0F)
+                .addPoint(0.05F, 5.0F)
+                .addPoint(0.2F, 1.0F)
+                .build();
+
+        CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
+                .addPoint(-0.475F, 1.0F)
+                .addPoint(-0.4F, 7.5F)
+                .addPoint(-0.325F, continentsSpline)
+                .addPoint(0.575F, continentsSpline)
+                .addPoint(0.65F, 7.5F)
+                .addPoint(0.725F, 1.0F)
+                .build();
+
+        return CubicSpline.builder(erosion)
+                .addPoint(0.475F, temperatureSpline)
+                .addPoint(0.55F, 7.5F)
+                .addPoint(0.625F, 1.0F)
+                .build();
     }
 
     public static DensityFunction getFunction(HolderGetter<DensityFunction> function, ResourceKey<DensityFunction> key) {

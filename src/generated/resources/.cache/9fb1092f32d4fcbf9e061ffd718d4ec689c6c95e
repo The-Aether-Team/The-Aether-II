@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-07T18:23:23.1444433	Recipes
+// 1.20.4	2024-06-08T23:12:45.750772	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 79334dab93a39b3d5d6416736b3ab4954edc92b8 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks_from_artisanry.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
@@ -316,7 +316,7 @@ ba50720cf0bf63ba2c3cd21380e10aafacb74a41 data/aether_ii/recipes/holystone_trowel
 5b78eb559f53631b1729bf32b870f2288e595351 data/aether_ii/recipes/holystone_wall.json
 124903e3d6d3e2d30eceb01fbb15d0d985658749 data/aether_ii/recipes/icestone_freeze_lava.json
 08d1d4eb8b4fbdd61cd1d18a9106b2cadfcdddfd data/aether_ii/recipes/icestone_freeze_water.json
-80df59559c6d105aa272067674b01bbcdbb00825 data/aether_ii/recipes/icestone_freeze_water_to_arctic_ice.json
+61f861181bfb9fcd749f9e5cf39eb8fa08fc412f data/aether_ii/recipes/icestone_freeze_water_to_arctic_ice.json
 a7470a80e937a960fb08c5741083b0608a89c8c1 data/aether_ii/recipes/irradiated_holystone_slab.json
 7a1ff1e44079b948140a1f75591945e02eea4adf data/aether_ii/recipes/irradiated_holystone_stairs.json
 ae0706d34f604acac2979283ab152981fb721ac4 data/aether_ii/recipes/irradiated_holystone_wall.json

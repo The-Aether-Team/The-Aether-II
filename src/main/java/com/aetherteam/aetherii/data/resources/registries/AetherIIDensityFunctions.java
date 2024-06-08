@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.data.resources.builders.AetherIIDensityFunctionBuilders;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -31,6 +32,8 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 160D, // y factor
                 1.0D // smear scale multiplier, capped at 8
         ));
+
+        context.register(FACTOR, buildFactor(function));
 
         context.register(TERRAIN_SHAPER, makeTerrainShaperFinal(function));
 
