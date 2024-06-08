@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-06T19:21:32.3831256	Block States: aether_ii
+// 1.20.4	2024-06-07T02:44:24.0775394	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -22,7 +22,7 @@ d723f86c2b0e2d07a0d650c77f4502fa74eeca84 assets/aether_ii/blockstates/agiosite_p
 d1e3c770dcb528e1e8421d88f2b0c87840cde1c7 assets/aether_ii/blockstates/agiosite_slab.json
 a5175181b7bf8145ba84bd56482d95e568202d16 assets/aether_ii/blockstates/agiosite_stairs.json
 bc27ada59933d17629ab4441897802dddb613b33 assets/aether_ii/blockstates/agiosite_wall.json
-f73d2b5f2ca99b746aa9a0da0f327b4e537f406b assets/aether_ii/blockstates/altar.json
+a71c8cbbcd6829c991d4a57c33b9107b7316f858 assets/aether_ii/blockstates/altar.json
 5d9f4b975f4d0cd520e36d0893c1f385a7546d52 assets/aether_ii/blockstates/amberoot_leaf_pile.json
 b5f21b065a5c8b88fdd19fe5dd78877e58ecd43a assets/aether_ii/blockstates/amberoot_leaves.json
 00d87fc7ac992265a1ba3abcec60d025374c7793 assets/aether_ii/blockstates/amberoot_log.json

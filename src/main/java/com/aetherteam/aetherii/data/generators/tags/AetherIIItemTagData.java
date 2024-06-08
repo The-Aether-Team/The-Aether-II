@@ -132,6 +132,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.UNDERSHALE.asItem()
         );
+        this.tag(AetherIITags.Items.ALTAR_FUEL).add(
+                AetherIIItems.AMBROSIUM_SHARD.get()
+        );
         this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()

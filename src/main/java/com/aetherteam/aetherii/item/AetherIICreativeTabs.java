@@ -339,7 +339,7 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".food_and_drinks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.BLUEBERRY.get());
-                output.accept(AetherIIItems.ENCHANTED_BERRY.get());
+                output.accept(AetherIIItems.ENCHANTED_BLUEBERRY.get());
                 output.accept(AetherIIItems.ORANGE.get());
                 output.accept(AetherIIItems.WYNDBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());

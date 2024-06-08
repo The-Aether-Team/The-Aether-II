@@ -637,15 +637,15 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 case SOUTH -> degrees = 180;
                 case WEST -> degrees = 270;
             }
-            if (charging) {
-                ModelFile model = this.models().withExistingParent(this.name(block) + "_charging", this.modLoc("block/template_altar"))
-                        .texture("altar", this.texture(this.name(block) + "_charging", "utility/"))
+            if (blasting) {
+                ModelFile model = this.models().withExistingParent(this.name(block) + "_blasting", this.modLoc("block/template_altar"))
+                        .texture("altar", this.texture(this.name(block) + "_blasting", "utility/"))
                         .texture("particle", this.texture(this.name(AetherIIBlocks.HOLYSTONE.get()), "natural/"))
                         .renderType("cutout");
                 return ConfiguredModel.builder().modelFile(model).rotationY(degrees).build();
-            } else if (blasting) {
-                ModelFile model = this.models().withExistingParent(this.name(block) + "_blasting", this.modLoc("block/template_altar"))
-                        .texture("altar", this.texture(this.name(block) + "_blasting", "utility/"))
+            } else if (charging) {
+                ModelFile model = this.models().withExistingParent(this.name(block) + "_charging", this.modLoc("block/template_altar"))
+                        .texture("altar", this.texture(this.name(block) + "_charging", "utility/"))
                         .texture("particle", this.texture(this.name(AetherIIBlocks.HOLYSTONE.get()), "natural/"))
                         .renderType("cutout");
                 return ConfiguredModel.builder().modelFile(model).rotationY(degrees).build();

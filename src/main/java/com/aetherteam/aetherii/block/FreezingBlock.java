@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.event.AetherEventDispatch;
 import com.aetherteam.aetherii.event.FreezeEvent;
-import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
+import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.IcestoneFreezableRecipe;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.google.common.collect.HashBasedTable;

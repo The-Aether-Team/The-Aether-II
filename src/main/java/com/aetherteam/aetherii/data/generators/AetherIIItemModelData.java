@@ -81,7 +81,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Food
         this.item(AetherIIItems.BLUEBERRY.get(), "food/");
-        this.item(AetherIIItems.ENCHANTED_BERRY.get(), "food/");
+        this.item(AetherIIItems.ENCHANTED_BLUEBERRY.get(), "food/");
         this.item(AetherIIItems.ORANGE.get(), "food/");
         this.item(AetherIIItems.WYNDBERRY.get(), "food/");
         this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "food/");

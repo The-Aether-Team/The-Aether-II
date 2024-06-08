@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
 import com.aetherteam.aetherii.recipe.recipes.block.IcestoneFreezableRecipe;
@@ -15,6 +16,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -108,6 +110,10 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 200).unlockedBy("has_item", has(material.get())).save(consumer, "smelting_" + getHasName(result.get()));
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 100).unlockedBy("has_item", has(material.get())).save(consumer, "smoking_" + getHasName(result.get()));
         SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 600).unlockedBy("has_item", has(material.get())).save(consumer, "campfire_cooking_" + getHasName(result.get()));
+    }
+
+    protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {
+        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(ingredient), category, new ItemStack(result), experience, fuelCount, 200).unlockedBy("has_item", has(ingredient));
     }
 
     protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {

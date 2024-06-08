@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_quicksoil": {
+    "has_item": {
       "conditions": {
         "items": [
           {
             "items": [
-              "aether_ii:quicksoil"
+              "aether_ii:inert_gravitite"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:quicksoil_glass"
+        "recipe": "aether_ii:gravitite_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,12 +23,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_quicksoil"
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:quicksoil_glass"
+      "aether_ii:gravitite_plate"
     ]
   }
 }

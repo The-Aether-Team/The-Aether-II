@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/food/enchanted_berry"
+    "layer0": "aether_ii:item/food/enchanted_blueberry"
   }
 }

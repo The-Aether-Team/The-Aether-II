@@ -70,6 +70,7 @@ public class AetherIITags {
         public static final TagKey<Item> CRAFTS_SKYROOT_STICKS = tag("crafts_skyroot_sticks");
         public static final TagKey<Item> CRAFTS_SKYROOT_TOOLS = tag("crafts_skyroot_tools");
         public static final TagKey<Item> CRAFTS_HOLYSTONE_TOOLS = tag("crafts_holystone_tools");
+        public static final TagKey<Item> ALTAR_FUEL = tag("altar_fuel");
 
         public static final TagKey<Item> SKYROOT_REPAIRING = tag("skyroot_repairing");
         public static final TagKey<Item> HOLYSTONE_REPAIRING = tag("holystone_repairing");
