@@ -28,8 +28,8 @@ public class HighlandsBiomeSourceBuilders {
         Climate.Parameter continentA = Climate.Parameter.span(-1.5F, -0.125F);
         Climate.Parameter continentB = Climate.Parameter.span(0.125F, 1.5F);
 
-        Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, 0.5F);
-        Climate.Parameter erosionMagnetic = Climate.Parameter.span(0.5F, 1.5F);
+        Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, 0.55F);
+        Climate.Parameter erosionMagnetic = Climate.Parameter.span(0.55F, 1.5F);
 
         Climate.Parameter depthArcticLayer1 = Climate.Parameter.span(-1.5F, -0.15F);
         Climate.Parameter depthArcticLayer2 = Climate.Parameter.span(-0.15F, 0.15F);
