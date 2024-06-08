@@ -532,7 +532,7 @@
             ],
             "humidity": [
               -1.0,
-              -0.1
+              -0.15
             ],
             "offset": 0.0,
             "temperature": [
@@ -561,8 +561,8 @@
               0.5
             ],
             "humidity": [
-              -0.1,
-              0.15
+              -0.15,
+              0.0
             ],
             "offset": 0.0,
             "temperature": [
@@ -591,7 +591,37 @@
               0.5
             ],
             "humidity": [
-              0.15,
+              0.0,
+              0.2
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.1,
+              0.3
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:verdant_woods",
+          "parameters": {
+            "continentalness": [
+              0.125,
+              1.0
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              0.2,
               1.0
             ],
             "offset": 0.0,
@@ -1059,16 +1089,16 @@
           "biome": "aether_ii:battleground_wastes",
           "parameters": {
             "continentalness": [
-              0.0,
-              0.5
+              -1.5,
+              1.5
             ],
             "depth": [
               -1.5,
               1.5
             ],
             "erosion": [
-              -1.5,
-              1.5
+              0.0,
+              0.5
             ],
             "humidity": [
               -1.0,
@@ -1089,16 +1119,16 @@
           "biome": "aether_ii:contaminated_jungle",
           "parameters": {
             "continentalness": [
-              0.0,
-              0.5
+              -1.5,
+              1.5
             ],
             "depth": [
               -1.5,
               1.5
             ],
             "erosion": [
-              -1.5,
-              1.5
+              0.0,
+              0.5
             ],
             "humidity": [
               -0.2,
@@ -1119,16 +1149,16 @@
           "biome": "aether_ii:battleground_wastes",
           "parameters": {
             "continentalness": [
-              0.0,
-              0.5
+              -1.5,
+              1.5
             ],
             "depth": [
               -1.5,
               1.5
             ],
             "erosion": [
-              -1.5,
-              1.5
+              0.0,
+              0.5
             ],
             "humidity": [
               0.2,
