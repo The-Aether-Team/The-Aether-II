@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.item.materials;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.item.miscellaneous.ItemUseConversion;
-import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
+import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.SwetGelRecipe;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;

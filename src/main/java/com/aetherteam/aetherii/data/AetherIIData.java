@@ -39,6 +39,8 @@ public class AetherIIData {
         generator.addProvider(event.includeServer(), new AetherIIRecipeData(packOutput));
         generator.addProvider(event.includeServer(), AetherIILootTableData.create(packOutput));
 //        generator.addProvider(event.includeServer(), new AetherIIAdvancementData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(event.includeServer(), new AetherIIDataMapData(packOutput, lookupProvider));
+
         // Tags
         AetherIIBlockTagData blockTags = new AetherIIBlockTagData(packOutput, lookupProvider, fileHelper);
         generator.addProvider(event.includeServer(), blockTags);

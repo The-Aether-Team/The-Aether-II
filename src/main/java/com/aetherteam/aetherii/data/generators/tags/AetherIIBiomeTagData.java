@@ -28,7 +28,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
         this.tag(AetherIITags.Biomes.CRIMSON_NYLIUM_CONVERSION).add(Biomes.CRIMSON_FOREST);
         this.tag(AetherIITags.Biomes.WARPED_NYLIUM_CONVERSION).add(Biomes.WARPED_FOREST);
 
-        this.tag(AetherIITags.Biomes.ARCTIC_ICE_FREEZING).add(
+        this.tag(AetherIITags.Biomes.ARCTIC_ICE).add(
                 AetherIIBiomes.FLOURISHING_FIELD,
                 AetherIIBiomes.VERDANT_WOODS,
                 AetherIIBiomes.SHROUDED_FOREST,

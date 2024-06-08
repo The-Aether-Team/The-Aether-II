@@ -20,6 +20,7 @@ import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
+import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -31,8 +32,8 @@ import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacke
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
-import com.aetherteam.aetherii.recipe.AetherIIRecipeSerializers;
-import com.aetherteam.aetherii.recipe.AetherIIRecipeTypes;
+import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
+import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
@@ -109,6 +110,7 @@ public class AetherII {
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
+        Reflection.initialize(AetherIIRecipeBookTypes.class);
         Reflection.initialize(AetherIIMobCategory.class);
 
         event.enqueueWork(() -> {
