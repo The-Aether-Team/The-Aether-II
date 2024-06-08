@@ -28,7 +28,7 @@ public class HighlandsSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FRIGID_SIERRA),
                         SurfaceRules.ifTrue(SurfaceRules.not(
                                         SurfaceRules.verticalGradient("arctic_snow", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))),
-                                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.7D, 0.7D),
+                                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.55D, 0.55D),
                                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, ARCTIC_SNOW_BLOCK)))),
 
                 SurfaceRules.ifTrue(SurfaceRules.not(

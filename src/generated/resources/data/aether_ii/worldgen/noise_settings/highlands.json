@@ -125,8 +125,8 @@
             "type": "minecraft:condition",
             "if_true": {
               "type": "minecraft:noise_threshold",
-              "max_threshold": 0.7,
-              "min_threshold": -0.7,
+              "max_threshold": 0.55,
+              "min_threshold": -0.55,
               "noise": "aether_ii:arctic_snow"
             },
             "then_run": {
