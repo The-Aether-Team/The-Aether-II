@@ -154,9 +154,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.SCATTERGLASS_PANE.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.WHITE_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
+                output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.GRAVITITE_BLOCK.get());
             }).build());
 
@@ -233,6 +236,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.SKYBIRCH_SAPLING.get());
                 output.accept(AetherIIBlocks.WISPROOT_SAPLING.get());
                 output.accept(AetherIIBlocks.WISPTOP_SAPLING.get());
                 output.accept(AetherIIBlocks.GREATROOT_SAPLING.get());
@@ -255,13 +259,14 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "natural_blocks"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "equipment_and_utilities"))
-            .icon(() -> new ItemStack(AetherIIBlocks.ARTISANRY_BENCH.get()))
+            .icon(() -> new ItemStack(AetherIIBlocks.ARTISANS_BENCH.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".functional_blocks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-                output.accept(AetherIIBlocks.ARTISANRY_BENCH.get());
+                output.accept(AetherIIBlocks.ALTAR.get());
+                output.accept(AetherIIBlocks.ARTISANS_BENCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
@@ -335,11 +340,15 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".food_and_drinks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.BLUEBERRY.get());
-                output.accept(AetherIIItems.ENCHANTED_BERRY.get());
+                output.accept(AetherIIItems.ENCHANTED_BLUEBERRY.get());
                 output.accept(AetherIIItems.ORANGE.get());
                 output.accept(AetherIIItems.WYNDBERRY.get());
+                output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
+                output.accept(AetherIIItems.GREEN_SWET_JELLY.get());
                 output.accept(AetherIIItems.BLUE_SWET_JELLY.get());
+                output.accept(AetherIIItems.PURPLE_SWET_JELLY.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_JELLY.get());
+                output.accept(AetherIIItems.WHITE_SWET_JELLY.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
                 output.accept(AetherIIItems.BURRUKAI_RIBS.get());
                 output.accept(AetherIIItems.KIRRID_CUTLET.get());
@@ -351,16 +360,16 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "food_and_drinks"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "spawn_eggs"))
-            .icon(() -> new ItemStack(AetherIIItems.RAW_ARKENIUM.get()))
+            .icon(() -> new ItemStack(AetherIIItems.INERT_ARKENIUM.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
-                output.accept(AetherIIItems.RAW_ARKENIUM.get());
-                output.accept(AetherIIItems.ARKENIUM_PLATE.get());
+                output.accept(AetherIIItems.INERT_ARKENIUM.get());
+                output.accept(AetherIIItems.ARKENIUM_PLATES.get());
                 output.accept(AetherIIItems.ARKENIUM_STRIP.get());
-                output.accept(AetherIIItems.RAW_GRAVITITE.get());
+                output.accept(AetherIIItems.INERT_GRAVITITE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
@@ -370,6 +379,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GREEN_SWET_GEL.get());
                 output.accept(AetherIIItems.BLUE_SWET_GEL.get());
                 output.accept(AetherIIItems.PURPLE_SWET_GEL.get());
+                output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
+                output.accept(AetherIIItems.WHITE_SWET_GEL.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
@@ -379,9 +390,9 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
-                output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
-                output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
             }).build());
 }

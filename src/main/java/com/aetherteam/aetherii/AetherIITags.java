@@ -16,17 +16,18 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
+        public static final TagKey<Block> FERROSITE = tag("ferrosite");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
-        public static final TagKey<Block> SKYROOT_ARTISANRY_BLOCKS = tag("skyroot_artisanry_blocks");
-        public static final TagKey<Block> GREATROOT_ARTISANRY_BLOCKS = tag("greatroot_artisanry_blocks");
-        public static final TagKey<Block> WISPROOT_ARTISANRY_BLOCKS = tag("wisproot_artisanry_blocks");
-        public static final TagKey<Block> HOLYSTONE_ARTISANRY_BLOCKS = tag("holystone_artisanry_blocks");
-        public static final TagKey<Block> FADED_HOLYSTONE_ARTISANRY_BLOCKS = tag("faded_holystone_artisanry_blocks");
-        public static final TagKey<Block> AGIOSITE_ARTISANRY_BLOCKS = tag("agiosite_artisanry_blocks");
+        public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
+        public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
+        public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
+        public static final TagKey<Block> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
+        public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
+        public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
@@ -39,17 +40,18 @@ public class AetherIITags {
     public static class Items {
         public static final TagKey<Item> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Item> HOLYSTONE = tag("holystone");
+        public static final TagKey<Item> FERROSITE = tag("ferrosite");
         public static final TagKey<Item> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Item> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Item> AMBEROOT_LOGS = tag("amberoot_logs");
-        public static final TagKey<Item> SKYROOT_ARTISANRY_BLOCKS = tag("skyroot_artisanry_blocks");
-        public static final TagKey<Item> GREATROOT_ARTISANRY_BLOCKS = tag("greatroot_artisanry_blocks");
-        public static final TagKey<Item> WISPROOT_ARTISANRY_BLOCKS = tag("wisproot_artisanry_blocks");
-        public static final TagKey<Item> HOLYSTONE_ARTISANRY_BLOCKS = tag("holystone_artisanry_blocks");
-        public static final TagKey<Item> FADED_HOLYSTONE_ARTISANRY_BLOCKS = tag("faded_holystone_artisanry_blocks");
-        public static final TagKey<Item> AGIOSITE_ARTISANRY_BLOCKS = tag("agiosite_artisanry_blocks");
+        public static final TagKey<Item> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
+        public static final TagKey<Item> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
+        public static final TagKey<Item> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
+        public static final TagKey<Item> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
+        public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
+        public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
@@ -70,6 +72,7 @@ public class AetherIITags {
         public static final TagKey<Item> CRAFTS_SKYROOT_STICKS = tag("crafts_skyroot_sticks");
         public static final TagKey<Item> CRAFTS_SKYROOT_TOOLS = tag("crafts_skyroot_tools");
         public static final TagKey<Item> CRAFTS_HOLYSTONE_TOOLS = tag("crafts_holystone_tools");
+        public static final TagKey<Item> ALTAR_FUEL = tag("altar_fuel");
 
         public static final TagKey<Item> SKYROOT_REPAIRING = tag("skyroot_repairing");
         public static final TagKey<Item> HOLYSTONE_REPAIRING = tag("holystone_repairing");
@@ -112,7 +115,7 @@ public class AetherIITags {
         public static final TagKey<Biome> CRIMSON_NYLIUM_CONVERSION = tag("crimson_nylium_conversion");
         public static final TagKey<Biome> WARPED_NYLIUM_CONVERSION = tag("warped_nylium_conversion");
 
-        public static final TagKey<Biome> ARCTIC_ICE_FREEZING = tag("arctic_ice_freezing");
+        public static final TagKey<Biome> ARCTIC_ICE = tag("arctic_ice");
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(AetherII.MODID, name));

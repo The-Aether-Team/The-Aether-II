@@ -67,7 +67,7 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
-    public static DensityFunction getFunction(HolderGetter<DensityFunction> densityFunctions, ResourceKey<DensityFunction> key) {
-        return new DensityFunctions.HolderHolder(densityFunctions.getOrThrow(key));
+    public static DensityFunction getFunction(HolderGetter<DensityFunction> function, ResourceKey<DensityFunction> key) {
+        return new DensityFunctions.HolderHolder(function.getOrThrow(key));
     }
 }

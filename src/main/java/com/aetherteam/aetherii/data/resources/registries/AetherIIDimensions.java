@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsBiomeBuilders;
+import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsBiomeSourceBuilders;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -52,7 +53,7 @@ public class AetherIIDimensions {
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
         HolderGetter<NoiseGeneratorSettings> noiseSettings = context.lookup(Registries.NOISE_SETTINGS);
         HolderGetter<DimensionType> dimensionTypes = context.lookup(Registries.DIMENSION_TYPE);
-        BiomeSource source = HighlandsBiomeBuilders.buildHighlandsBiomeSource(biomes);
+        BiomeSource source = HighlandsBiomeSourceBuilders.buildHighlandsBiomeSource(biomes);
         NoiseBasedChunkGenerator aetherChunkGen = new NoiseBasedChunkGenerator(source, noiseSettings.getOrThrow(AetherIINoiseSettings.HIGHLANDS));
         context.register(AETHER_HIGHLANDS_LEVEL_STEM, new LevelStem(dimensionTypes.getOrThrow(AetherIIDimensions.AETHER_HIGHLANDS_DIMENSION_TYPE), aetherChunkGen));
     }

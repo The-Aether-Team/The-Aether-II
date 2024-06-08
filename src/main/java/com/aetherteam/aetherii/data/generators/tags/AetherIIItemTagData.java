@@ -26,20 +26,21 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         // Aether
         this.copy(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT);
         this.copy(AetherIITags.Blocks.HOLYSTONE, AetherIITags.Items.HOLYSTONE);
+        this.copy(AetherIITags.Blocks.FERROSITE, AetherIITags.Items.FERROSITE);
         this.copy(AetherIITags.Blocks.AERCLOUDS, AetherIITags.Items.AERCLOUDS);
         this.copy(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS);
         this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
         this.copy(AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Items.GREATROOT_LOGS);
         this.copy(AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Items.AMBEROOT_LOGS);
-        this.copy(AetherIITags.Blocks.SKYROOT_ARTISANRY_BLOCKS, AetherIITags.Items.SKYROOT_ARTISANRY_BLOCKS);
-        this.copy(AetherIITags.Blocks.GREATROOT_ARTISANRY_BLOCKS, AetherIITags.Items.GREATROOT_ARTISANRY_BLOCKS);
-        this.copy(AetherIITags.Blocks.WISPROOT_ARTISANRY_BLOCKS, AetherIITags.Items.WISPROOT_ARTISANRY_BLOCKS);
-        this.copy(AetherIITags.Blocks.HOLYSTONE_ARTISANRY_BLOCKS, AetherIITags.Items.HOLYSTONE_ARTISANRY_BLOCKS);
-        this.copy(AetherIITags.Blocks.FADED_HOLYSTONE_ARTISANRY_BLOCKS, AetherIITags.Items.FADED_HOLYSTONE_ARTISANRY_BLOCKS);
-        this.copy(AetherIITags.Blocks.AGIOSITE_ARTISANRY_BLOCKS, AetherIITags.Items.AGIOSITE_ARTISANRY_BLOCKS);
+        this.copy(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.GREATROOT_DECORATIVE_BLOCKS, AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.WISPROOT_DECORATIVE_BLOCKS, AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.HOLYSTONE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.FADED_HOLYSTONE_DECORATIVE_BLOCKS, AetherIITags.Items.FADED_HOLYSTONE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.AGIOSITE_DECORATIVE_BLOCKS, AetherIITags.Items.AGIOSITE_DECORATIVE_BLOCKS);
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
-        this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATE.get());
+        this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
         this.tag(AetherIITags.Items.TOOLS_SHORTSWORDS).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
@@ -132,6 +133,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.UNDERSHALE.asItem()
         );
+        this.tag(AetherIITags.Items.ALTAR_FUEL).add(
+                AetherIIItems.AMBROSIUM_SHARD.get()
+        );
         this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()
@@ -142,13 +146,15 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.SKYROOT_REPAIRING).addTag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS);
         this.tag(AetherIITags.Items.HOLYSTONE_REPAIRING).add(AetherIIBlocks.HOLYSTONE.asItem());
         this.tag(AetherIITags.Items.ZANITE_REPAIRING).add(AetherIIItems.ZANITE_GEMSTONE.get());
-        this.tag(AetherIITags.Items.ARKENIUM_REPAIRING).add(AetherIIItems.ARKENIUM_PLATE.get());
+        this.tag(AetherIITags.Items.ARKENIUM_REPAIRING).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.GRAVITITE_REPAIRING).add(AetherIIItems.GRAVITITE_PLATE.get());
         this.tag(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS);
         this.tag(AetherIITags.Items.SWET_GEL).add(
                 AetherIIItems.GREEN_SWET_GEL.get(),
                 AetherIIItems.BLUE_SWET_GEL.get(),
-                AetherIIItems.PURPLE_SWET_GEL.get()
+                AetherIIItems.PURPLE_SWET_GEL.get(),
+                AetherIIItems.GOLDEN_SWET_GEL.get(),
+                AetherIIItems.WHITE_SWET_GEL.get()
         );
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.ZANITE_AXE.get(),
@@ -157,7 +163,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
 
         // Vanilla
-        this.tag(ItemTags.WOOL).add(AetherIIBlocks.CLOUDWOOL.asItem());
+        this.tag(ItemTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.asItem(),
+                AetherIIBlocks.WHITE_CLOUDWOOL.asItem()
+        );
         this.tag(ItemTags.STONE_CRAFTING_MATERIALS).add(
                 AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.UNDERSHALE.asItem()
@@ -188,15 +197,19 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATROOT_BUTTON.asItem(),
                 AetherIIBlocks.WISPROOT_BUTTON.asItem()
         );
-        this.tag(ItemTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.get().asItem());
+        this.tag(ItemTags.STONE_BUTTONS).add(AetherIIBlocks.HOLYSTONE_BUTTON.asItem());
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(
                 AetherIIBlocks.SKYROOT_PRESSURE_PLATE.asItem(),
                 AetherIIBlocks.GREATROOT_PRESSURE_PLATE.asItem(),
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.asItem()
         );
-        this.tag(ItemTags.WOOL_CARPETS).add(AetherIIBlocks.CLOUDWOOL_CARPET.get().asItem());
+        this.tag(ItemTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem()
+        );
         this.tag(ItemTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.asItem(),
+                AetherIIBlocks.SKYBIRCH_SAPLING.asItem(),
                 AetherIIBlocks.WISPROOT_SAPLING.asItem(),
                 AetherIIBlocks.WISPTOP_SAPLING.asItem(),
                 AetherIIBlocks.GREATROOT_SAPLING.asItem(),
@@ -269,7 +282,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS).add(
                 AetherIIItems.ZANITE_GEMSTONE.get(),
-                AetherIIItems.ARKENIUM_PLATE.get(),
+                AetherIIItems.ARKENIUM_PLATES.get(),
                 AetherIIItems.GRAVITITE_PLATE.get()
         );
         this.tag(ItemTags.CLUSTER_MAX_HARVESTABLES).add(
