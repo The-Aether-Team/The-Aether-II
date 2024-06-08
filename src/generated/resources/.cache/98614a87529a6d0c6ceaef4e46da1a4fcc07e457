@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-07T18:46:33.2669129	Item Models: aether_ii
+// 1.20.4	2024-06-08T01:42:02.6644515	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -192,7 +192,9 @@ fad53ce2a6eed791c566a36883f6cce0d0a71b6c assets/aether_ii/models/item/raw_gravit
 5c44689b768829d161bbbd42e118d1e4844e5a02 assets/aether_ii/models/item/recording_892.json
 5b9708bb41042a805c3ddb24358f2ee39db2c7f5 assets/aether_ii/models/item/rusted_ferrosite.json
 8b11c473c4865d824980c5f9807969013fae26a4 assets/aether_ii/models/item/scatterglass.json
+0cdf35fc0cce951ddb5af59db1a8235ac652b485 assets/aether_ii/models/item/scatterglass_bolt.json
 7658d4a77de11fee470c7745cc9c89f159ad1665 assets/aether_ii/models/item/scatterglass_pane.json
+d0da9becaa3288ad5d474ebd8f10b74caa2f0a64 assets/aether_ii/models/item/scatterglass_shard.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/sheepuff_spawn_egg.json
 a278983ff6b77ed62a4f15add25a86f0f1dbef4c assets/aether_ii/models/item/skybirch_leaf_pile.json
 8a0980302cbbd9afaab3f79672dfe45915644984 assets/aether_ii/models/item/skybirch_leaves.json

@@ -313,6 +313,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
+                output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
@@ -360,6 +361,7 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
+                output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
                 output.accept(AetherIIItems.RAW_ARKENIUM.get());

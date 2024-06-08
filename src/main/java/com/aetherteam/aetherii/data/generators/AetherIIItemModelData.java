@@ -61,8 +61,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.GRAVITITE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_SPEAR.get(), "weapons/");
 
+        this.handheldItem(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
+
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
+        this.item(AetherIIItems.SCATTERGLASS_SHARD.get(), "materials/");
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
         this.item(AetherIIItems.RAW_ARKENIUM.get(), "materials/");
