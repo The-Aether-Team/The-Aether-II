@@ -175,7 +175,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
 
-        // Skyroot Artisanry Blocks
+        // Skyroot Decorative Blocks
         this.dropSelf(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_SHINGLES.get());
@@ -197,7 +197,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GREATROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
 
-        // Greatroot Artisanry Blocks
+        // Greatroot Decorative Blocks
         this.dropSelf(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_SHINGLES.get());
@@ -219,7 +219,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_BUTTON.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
 
-        // Wisproot Artisanry Blocks
+        // Wisproot Decorative Blocks
         this.dropSelf(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_SHINGLES.get());
@@ -253,7 +253,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.HOLYSTONE_BRICK_WALL.get());
 
-        // Holystone Artisanry Blocks
+        // Holystone Decorative Blocks
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FLAGSTONES.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_HEADSTONE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_KEYSTONE.get());
@@ -269,7 +269,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get());
 
-        // Faded Holystone Artisanry Blocks
+        // Faded Holystone Decorative Blocks
         this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES.get());
         this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get());
         this.dropSelf(AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get());
@@ -295,7 +295,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.AGIOSITE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.AGIOSITE_BRICK_WALL.get());
 
-        // Agiosite Artisanry Blocks
+        // Agiosite Decorative Blocks
         this.dropSelf(AetherIIBlocks.AGIOSITE_FLAGSTONES.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE_KEYSTONE.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE_BASE_BRICKS.get());
@@ -318,11 +318,16 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+
+        // Carpet
         this.dropSelf(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
 
         // Mineral Blocks
         this.dropSelf(AetherIIBlocks.AMBROSIUM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.ZANITE_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.ARKENIUM_BLOCK.get());
         this.dropSelf(AetherIIBlocks.GRAVITITE_BLOCK.get());
 
         // Utility
@@ -330,7 +335,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
-        this.dropSelf(AetherIIBlocks.ARTISANRY_BENCH.get());
+        this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());
 

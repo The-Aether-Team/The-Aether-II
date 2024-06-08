@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "aether_ii:block/artisanry/greatroot_floorboards"
+    "all": "aether_ii:block/decorative/greatroot_floorboards"
   }
 }

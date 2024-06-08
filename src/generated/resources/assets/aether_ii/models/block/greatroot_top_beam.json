@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "aether_ii:block/artisanry/greatroot_highlight",
-    "side": "aether_ii:block/artisanry/greatroot_top_beam"
+    "end": "aether_ii:block/decorative/greatroot_highlight",
+    "side": "aether_ii:block/decorative/greatroot_top_beam"
   }
 }

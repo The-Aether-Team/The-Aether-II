@@ -82,7 +82,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get()
         );
-        this.tag(AetherIITags.Blocks.SKYROOT_ARTISANRY_BLOCKS).add(
+        this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
                 AetherIIBlocks.SKYROOT_HIGHLIGHT.get(),
                 AetherIIBlocks.SKYROOT_SHINGLES.get(),
@@ -93,7 +93,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_TOP_BEAM.get(),
                 AetherIIBlocks.SKYROOT_BEAM.get()
         );
-        this.tag(AetherIITags.Blocks.GREATROOT_ARTISANRY_BLOCKS).add(
+        this.tag(AetherIITags.Blocks.GREATROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.GREATROOT_FLOORBOARDS.get(),
                 AetherIIBlocks.GREATROOT_HIGHLIGHT.get(),
                 AetherIIBlocks.GREATROOT_SHINGLES.get(),
@@ -104,7 +104,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_TOP_BEAM.get(),
                 AetherIIBlocks.GREATROOT_BEAM.get()
         );
-        this.tag(AetherIITags.Blocks.WISPROOT_ARTISANRY_BLOCKS).add(
+        this.tag(AetherIITags.Blocks.WISPROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.WISPROOT_FLOORBOARDS.get(),
                 AetherIIBlocks.WISPROOT_HIGHLIGHT.get(),
                 AetherIIBlocks.WISPROOT_SHINGLES.get(),
@@ -115,7 +115,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
                 AetherIIBlocks.WISPROOT_BEAM.get()
         );
-        this.tag(AetherIITags.Blocks.HOLYSTONE_ARTISANRY_BLOCKS).add(
+        this.tag(AetherIITags.Blocks.HOLYSTONE_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(),
                 AetherIIBlocks.HOLYSTONE_HEADSTONE.get(),
                 AetherIIBlocks.HOLYSTONE_KEYSTONE.get(),
@@ -125,7 +125,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.HOLYSTONE_PILLAR.get()
         );
-        this.tag(AetherIITags.Blocks.FADED_HOLYSTONE_ARTISANRY_BLOCKS).add(
+        this.tag(AetherIITags.Blocks.FADED_HOLYSTONE_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get(),
@@ -135,7 +135,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get()
         );
-        this.tag(AetherIITags.Blocks.AGIOSITE_ARTISANRY_BLOCKS).add(
+        this.tag(AetherIITags.Blocks.AGIOSITE_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.AGIOSITE_FLAGSTONES.get(),
                 AetherIIBlocks.AGIOSITE_KEYSTONE.get(),
                 AetherIIBlocks.AGIOSITE_BASE_BRICKS.get(),
@@ -150,7 +150,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.COCKATRICE_SPAWNABLE_BLACKLIST);
 
         // Vanilla
-        this.tag(BlockTags.WOOL).add(AetherIIBlocks.CLOUDWOOL.get());
+        this.tag(BlockTags.WOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL.get()
+        );
         this.tag(BlockTags.WOODEN_STAIRS).add(
                 AetherIIBlocks.SKYROOT_STAIRS.get(),
                 AetherIIBlocks.GREATROOT_STAIRS.get(),
@@ -195,7 +198,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(),
                 AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get()
         );
-        this.tag(BlockTags.WOOL_CARPETS).add(AetherIIBlocks.CLOUDWOOL_CARPET.get());
+        this.tag(BlockTags.WOOL_CARPETS).add(
+                AetherIIBlocks.CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get()
+        );
         this.tag(BlockTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.get(),
                 AetherIIBlocks.SKYBIRCH_SAPLING.get(),
@@ -363,7 +369,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
                 AetherIIBlocks.HOLYSTONE_FURNACE.get(),
-                AetherIIBlocks.ARTISANRY_BENCH.get(),
+                AetherIIBlocks.ARTISANS_BENCH.get(),
                 AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
