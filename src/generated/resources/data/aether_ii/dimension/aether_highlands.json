@@ -246,6 +246,66 @@
           }
         },
         {
+          "biome": "aether_ii:shimmering_basin",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              -0.125
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -1.5,
+              1.5
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.4,
+              0.65
+            ],
+            "weirdness": [
+              0.05,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:shimmering_basin",
+          "parameters": {
+            "continentalness": [
+              0.125,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -1.5,
+              1.5
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -0.4,
+              0.65
+            ],
+            "weirdness": [
+              0.05,
+              1.5
+            ]
+          }
+        },
+        {
           "biome": "aether_ii:shrouded_forest",
           "parameters": {
             "continentalness": [
@@ -271,7 +331,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -301,7 +361,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -331,7 +391,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -361,7 +421,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -391,7 +451,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -421,7 +481,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -451,7 +511,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -481,7 +541,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -511,7 +571,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },
@@ -541,7 +601,7 @@
             ],
             "weirdness": [
               -1.5,
-              1.5
+              0.05
             ]
           }
         },

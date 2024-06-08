@@ -19,6 +19,32 @@ public class HighlandsSurfaceBuilders {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), AETHER_GRASS_BLOCK), AETHER_DIRT);
         return SurfaceRules.sequence(
 
+                lakeLayer(0.08D, 113),
+                lakeLayer(0.175D, 114),
+                lakeLayer(0.25D, 115),
+                lakeLayer(0.3D, 116),
+                lakeLayer(0.35D, 117),
+                lakeLayer(0.39D, 118),
+                lakeLayer(0.43D, 119),
+                lakeLayer(0.47D, 120),
+                lakeLayer(0.5D, 121),
+                lakeLayer(0.6D, 122),
+                lakeLayer(0.75D, 123),
+
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN, AetherIIBiomes.FROZEN_LAKES),
+                        SurfaceRules.ifTrue(SurfaceRules.verticalGradient("lake_bottom", VerticalAnchor.absolute(112), VerticalAnchor.absolute(112)), AETHER_DIRT)
+                ),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN),
+                        SurfaceRules.ifTrue(SurfaceRules.verticalGradient("lake_top", VerticalAnchor.absolute(124), VerticalAnchor.absolute(124)), WATER)
+                ),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FROZEN_LAKES),
+                        SurfaceRules.ifTrue(SurfaceRules.verticalGradient("lake_top", VerticalAnchor.absolute(124), VerticalAnchor.absolute(124)), ARCTIC_ICE)
+                ),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN, AetherIIBiomes.FROZEN_LAKES),
+                        SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.LAKE_FLOOR, -1.0D, 1.0D),
+                                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("above_lake", VerticalAnchor.absolute(256), VerticalAnchor.absolute(256)), AIR))),
+
+
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FRIGID_SIERRA),
                         SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.5D, 0.35D),
                                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, ARCTIC_SNOW_BLOCK))),
@@ -26,6 +52,7 @@ public class HighlandsSurfaceBuilders {
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FRIGID_SIERRA),
                         SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.5D, 0.35D),
                                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, ARCTIC_SNOW_BLOCK))),
+
 
                 SurfaceRules.ifTrue(SurfaceRules.not(
                         SurfaceRules.verticalGradient("aether_grass_block", VerticalAnchor.belowTop(276), VerticalAnchor.belowTop(272))),
@@ -35,43 +62,13 @@ public class HighlandsSurfaceBuilders {
                         SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, AETHER_DIRT)),
 
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(64), VerticalAnchor.absolute(72)), SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState())),
-
-                lakeLayer(0.08D, 117),
-                lakeLayer(0.175D, 118),
-                lakeLayer(0.25D, 119),
-                lakeLayer(0.3D, 120),
-                lakeLayer(0.35D, 121),
-                lakeLayer(0.39D, 122),
-                lakeLayer(0.43D, 123),
-                lakeLayer(0.47D, 124),
-                lakeLayer(0.5D, 125),
-                lakeLayer(0.6D, 126),
-                lakeLayer(0.75D, 127),
-
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN, AetherIIBiomes.FROZEN_LAKES),
-                        SurfaceRules.ifTrue(SurfaceRules.verticalGradient("lake_bottom", VerticalAnchor.absolute(116), VerticalAnchor.absolute(116)), AETHER_DIRT)
-                ),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN, AetherIIBiomes.FROZEN_LAKES),
-                        SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.AETHER_LAKES, -1.0D, 1.0D),
-                                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("water", VerticalAnchor.absolute(127), VerticalAnchor.absolute(127)), WATER))
-                ),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN),
-                        SurfaceRules.ifTrue(SurfaceRules.verticalGradient("lake_top", VerticalAnchor.absolute(128), VerticalAnchor.absolute(128)), WATER)
-                ),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FROZEN_LAKES),
-                        SurfaceRules.ifTrue(SurfaceRules.verticalGradient("lake_top", VerticalAnchor.absolute(128), VerticalAnchor.absolute(128)), ARCTIC_ICE)
-                ),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN, AetherIIBiomes.FROZEN_LAKES),
-                        SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.AETHER_LAKES, -1.0D, 1.0D),
-                                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("above_lake", VerticalAnchor.absolute(256), VerticalAnchor.absolute(256)), AIR))
-                )
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(64), VerticalAnchor.absolute(72)), SurfaceRules.state(AetherIIBlocks.UNDERSHALE.get().defaultBlockState()))
         );
     }
 
     public static SurfaceRules.RuleSource lakeLayer(double noise, int y) {
         return SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN, AetherIIBiomes.FROZEN_LAKES),
-                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.noiseCondition(AetherIINoises.AETHER_LAKES, -noise, noise)),
+                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.noiseCondition(AetherIINoises.LAKE_FLOOR, -noise, noise)),
                         SurfaceRules.ifTrue(SurfaceRules.verticalGradient("lake_layer", VerticalAnchor.absolute(y), VerticalAnchor.absolute(y)), AETHER_DIRT))
         );
     }

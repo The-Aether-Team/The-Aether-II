@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": "aether_ii:highlands/lakes/noise",
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": 0.3,
+        "value": 1
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.4,
+        "value": 5
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.425,
+        "value": 25
+      }
+    ]
+  }
+}

@@ -6,8 +6,8 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraft.world.level.levelgen.DensityFunctions;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.levelgen.*;
 
 public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
@@ -23,6 +23,9 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("highlands/sloper_arctic"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
+    public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> LAKES_ISLAND_CHECKER = createKey("highlands/lakes/island_checker"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain_shaper"); //TODO: Add to Datagen
 
     public static final ResourceKey<DensityFunction> FINAL_DENSITY = createKey("highlands/final_density");
@@ -36,6 +39,7 @@ public class AetherIIDensityFunctionBuilders {
 
     public static final ResourceKey<DensityFunction> SHIFT_X = createVanillaKey("shift_x");
     public static final ResourceKey<DensityFunction> SHIFT_Z = createVanillaKey("shift_z");
+    public static final ResourceKey<DensityFunction> Y = createVanillaKey("y");
 
     private static ResourceKey<DensityFunction> createVanillaKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(name));
@@ -56,11 +60,20 @@ public class AetherIIDensityFunctionBuilders {
         return DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 1.5, getFunction(function, SLOPER), getFunction(function, SLOPER_ARCTIC));
     }
 
-    public static DensityFunction makeTerrainShaper(HolderGetter<DensityFunction> function) {
+    public static DensityFunction makeTerrainShaperBase(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, AMPLIFICATION);
         density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(96, 128, 0.75, 0.35));
         density = DensityFunctions.mul(density, selectSloper(function));
         return density.clamp(0, 1);
+    }
+
+    public static DensityFunction makeTerrainShaperFinal(HolderGetter<DensityFunction> function) {
+        DensityFunction base = makeTerrainShaperBase(function);
+        DensityFunction density = base;
+        density = DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 128, density, DensityFunctions.mul(density, getFunction(function, LAKES_FACTOR)));
+        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.55, density, base);
+        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, base);
+        return density;
     }
 
     public static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> function) {
