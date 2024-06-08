@@ -4,11 +4,11 @@ import com.aetherteam.aetherii.api.moaegg.MoaType;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIMoaTypes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -35,7 +35,7 @@ public class MoaNestFeature extends Feature<NoneFeatureConfiguration> {
             Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel());
             moa.setPos(pos.getCenter().add(i, 0, i));
             moa.setMoaTypeByKey(AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType));
-            moa.finalizeSpawn(level.getLevel(), level.getLevel().getCurrentDifficultyAt(pos), MobSpawnType.STRUCTURE, null, null);
+            MoaAi.initMoaHomeMemories(moa, level.getRandom());
             moa.setBaby(false);
             level.getLevel().addFreshEntity(moa);
         }
