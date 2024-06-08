@@ -23,13 +23,15 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity> {
     @Override
     public void render(MoaEggBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
         if (pBlockEntity.getBlockState().getBlock() instanceof AbstractMoaEggBlock moaEggBlock) {
+            pPoseStack.translate(0.5F, 1.5F, 0.5F);
+            pPoseStack.mulPose(Axis.XN.rotationDegrees(180F));
             if (pBlockEntity.getBlockState().getValue(AbstractMoaEggBlock.HATCH) > 0) {
                 pPoseStack.mulPose(Axis.YP.rotationDegrees((float) (Math.cos((double) pBlockEntity.tickCount * 3.25) * Math.PI * 0.4F * pBlockEntity.getBlockState().getValue(AbstractMoaEggBlock.HATCH))));
             }
 
             String modid = moaEggBlock.getMoaType().location().getNamespace();
             String path = moaEggBlock.getMoaType().location().getPath();
-            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(new ResourceLocation(modid, "textures/block/miscellaneous" + path + "blue_moa_egg.png")));
+            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(new ResourceLocation(modid, "textures/block/miscellaneous/" + path + "_moa_egg.png")));
             this.moaEggModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, pPackedOverlay, 1, 1, 1, 1F);
         }
     }

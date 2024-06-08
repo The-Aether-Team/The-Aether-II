@@ -38,7 +38,7 @@ public abstract class AbstractMoaEggBlock extends BaseEntityBlock {
     private static final int REGULAR_HATCH_TIME_TICKS = 24000;
     private static final int BOOSTED_HATCH_TIME_TICKS = 12000;
     private static final int RANDOM_HATCH_OFFSET_TICKS = 300;
-    private static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 16.0, 12.0);
+    private static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0);
     private final ResourceKey<MoaType> moaType;
 
     public AbstractMoaEggBlock(ResourceKey<MoaType> moaType, BlockBehaviour.Properties p_277906_) {
