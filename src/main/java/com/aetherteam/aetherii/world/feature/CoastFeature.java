@@ -26,8 +26,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 for (int y = config.yRange().getMinValue(); y < config.yRange().getMaxValue(); ++y) {
                     BlockPos placementPos = new BlockPos(x, y, z);
                     if (level.getBlockState(placementPos).isAir() && level.getBlockState(new BlockPos(x, y - 5, z)).isAir() && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
-                        BlockPlacementUtil.placeDisk(level, config.block(), placementPos, config.radiusTop().sample(random), random);
-                        BlockPlacementUtil.placeDisk(level, config.block(), placementPos.below(), config.radiusBottom().sample(random), random);
+                        BlockPlacementUtil.placeDisk(level, config.block(), placementPos, config.radiusTop().sample(random), random, false);
+                        BlockPlacementUtil.placeDisk(level, config.block(), placementPos.below(), config.radiusBottom().sample(random), random, false);
                         break;
                     }
                 }

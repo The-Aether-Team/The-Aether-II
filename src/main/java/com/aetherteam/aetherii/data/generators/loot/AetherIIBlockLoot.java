@@ -103,7 +103,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Leaves //TODO: Leaves Loot Tables
         this.add(AetherIIBlocks.SKYROOT_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.dropNone(AetherIIBlocks.SKYPLANE_LEAVES.get());
-        this.dropNone(AetherIIBlocks.SKYBIRCH_LEAVES.get());
+        this.add(AetherIIBlocks.SKYBIRCH_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.SKYBIRCH_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.dropNone(AetherIIBlocks.SKYPINE_LEAVES.get());
         this.add(AetherIIBlocks.WISPROOT_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.WISPROOT_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
         this.add(AetherIIBlocks.WISPTOP_LEAVES.get(), (leaves) -> droppingWithChancesAndSkyrootSticks(leaves, AetherIIBlocks.WISPTOP_SAPLING.get(), BlockLootAccessor.aether_ii$getNormalLeavesSaplingChances()));
@@ -114,6 +114,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Saplings
         this.dropSelf(AetherIIBlocks.SKYROOT_SAPLING.get());
+        this.dropSelf(AetherIIBlocks.SKYBIRCH_SAPLING.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_SAPLING.get());
         this.dropSelf(AetherIIBlocks.WISPTOP_SAPLING.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_SAPLING.get());
@@ -123,6 +124,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Potted Saplings
         this.dropPottedContents(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_SKYBIRCH_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_WISPROOT_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_WISPTOP_SAPLING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_GREATROOT_SAPLING.get());

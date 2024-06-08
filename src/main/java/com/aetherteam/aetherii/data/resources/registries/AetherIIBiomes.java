@@ -57,10 +57,10 @@ public class AetherIIBiomes {
         context.register(GLISTENING_SWAMP, HighlandsBiomeBuilders.glisteningSwampBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.9F));
         context.register(VIOLET_HIGHWOODS, HighlandsBiomeBuilders.violetHighwoodsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
 
-        context.register(FRIGID_SIERRA, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, -0.3F, 0.9F));
-        context.register(ENDURING_WOODLAND, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, -0.5F, 0.4F));
-        context.register(FROZEN_LAKES, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
-        context.register(SHEER_TUNDRA, HighlandsBiomeBuilders.makeArcticBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
+        context.register(FRIGID_SIERRA, HighlandsBiomeBuilders.frigidSierraBiome(placedFeatures, vanillaConfiguredCarvers, -0.3F, 0.9F));
+        context.register(ENDURING_WOODLAND, HighlandsBiomeBuilders.enduringWoodlandBiome(placedFeatures, vanillaConfiguredCarvers, -0.5F, 0.4F));
+        context.register(FROZEN_LAKES, HighlandsBiomeBuilders.frozenLakesBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
+        context.register(SHEER_TUNDRA, HighlandsBiomeBuilders.sheerTundraBiome(placedFeatures, vanillaConfiguredCarvers, 0.0F, 0.5F));
 
         context.register(CONTAMINATED_JUNGLE, HighlandsBiomeBuilders.contaminatedJungleBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));
         context.register(BATTLEGROUND_WASTES, HighlandsBiomeBuilders.battlegroundWastesBiome(placedFeatures, vanillaConfiguredCarvers, 1.0F, 0.3F));

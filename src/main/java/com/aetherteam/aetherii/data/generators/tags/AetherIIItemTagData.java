@@ -26,6 +26,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         // Aether
         this.copy(AetherIITags.Blocks.AETHER_DIRT, AetherIITags.Items.AETHER_DIRT);
         this.copy(AetherIITags.Blocks.HOLYSTONE, AetherIITags.Items.HOLYSTONE);
+        this.copy(AetherIITags.Blocks.FERROSITE, AetherIITags.Items.FERROSITE);
         this.copy(AetherIITags.Blocks.AERCLOUDS, AetherIITags.Items.AERCLOUDS);
         this.copy(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Items.SKYROOT_LOGS);
         this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
@@ -203,6 +204,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.asItem(),
+                AetherIIBlocks.SKYBIRCH_SAPLING.asItem(),
                 AetherIIBlocks.WISPROOT_SAPLING.asItem(),
                 AetherIIBlocks.WISPTOP_SAPLING.asItem(),
                 AetherIIBlocks.GREATROOT_SAPLING.asItem(),
