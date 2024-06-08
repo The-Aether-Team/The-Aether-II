@@ -1,10 +1,16 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.api.moaegg.MoaType;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIMoaTypes;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -23,7 +29,17 @@ public class MoaNestFeature extends Feature<NoneFeatureConfiguration> {
         this.placeCircle(level, pos.below(), AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState(), 2, 3); // Bottom layer of the nest
         this.placeCircle(level, pos, AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState(), 3, 5); // Second Layer of the Nest
         this.placeCircle(level, pos, Blocks.AIR.defaultBlockState(), 2, 3); // Removes the inside from the second layer and only leaves the edges
-        this.setBlock(level, pos, Blocks.SNIFFER_EGG.defaultBlockState());
+        MoaType moaType = AetherIIMoaTypes.getWeightedChance(level.registryAccess(), level.getRandom());
+        this.setBlock(level, pos, Block.byItem(moaType.egg().getItem()).defaultBlockState());
+        for (int i = 0; i < 2; i++) {
+            Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel());
+            moa.setPos(pos.getCenter().add(i, 0, i));
+            moa.setMoaTypeByKey(AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType));
+            moa.finalizeSpawn(level.getLevel(), level.getLevel().getCurrentDifficultyAt(pos), MobSpawnType.STRUCTURE, null, null);
+            moa.setBaby(false);
+            level.getLevel().addFreshEntity(moa);
+        }
+
         return true;
     }
 

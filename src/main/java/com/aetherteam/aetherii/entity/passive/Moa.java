@@ -1,12 +1,18 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.api.moaegg.MoaType;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIMoaTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
+import com.aetherteam.aetherii.event.AetherIIEventDispatch;
+import com.aetherteam.aetherii.event.EggLayEvent;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,6 +20,8 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -33,10 +41,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForgeMod;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -185,7 +196,7 @@ public class Moa extends MountableAnimal {
                 this.setBaby(tag.getBoolean("IsBaby"));
             }
             /*if (tag.contains("MoaType")) {
-                ResourceKey<MoaType> moaTypeKey = AetherMoaTypes.getResourceKey(level.registryAccess(), tag.getString("MoaType"));
+                ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), tag.getString("MoaType"));
                 if (moaTypeKey != null) {
                     this.setMoaTypeByKey(moaTypeKey);
                 }
@@ -201,14 +212,14 @@ public class Moa extends MountableAnimal {
             spawnData = new AgeableMob.AgeableMobGroupData(false);
         }
         /*if (this.getMoaType() == null) { // A random Moa Type to set during natural spawning.
-            MoaType moaType = AetherMoaTypes.getWeightedChance(level.registryAccess(), this.getRandom());
-            ResourceKey<MoaType> moaTypeKey = AetherMoaTypes.getResourceKey(level.registryAccess(), moaType);
+            MoaType moaType = AetherIIMoaTypes.getWeightedChance(level.registryAccess(), this.getRandom());
+            ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType);
             if (moaTypeKey != null) {
                 this.setMoaTypeByKey(moaTypeKey);
             }
         }
         if (this.getMoaType() == null) {
-            this.setMoaTypeByKey(AetherMoaTypes.BLUE);
+            this.setMoaTypeByKey(AetherIIMoaTypes.BLUE);
         }*/
         if (reason == MobSpawnType.STRUCTURE) {
             //set moa home when spawn in nest
@@ -271,21 +282,23 @@ public class Moa extends MountableAnimal {
                 this.heal(1.0F);
             }
             //TODO MOA EGG LAY
-            /*if (!this.isBaby() && this.getPassengers().isEmpty() && --this.eggTime <= 0) {
+            if (!this.isBaby() && this.getPassengers().isEmpty() && --this.eggTime <= 0) {
                 MoaType moaType = this.getMoaType();
-                if (moaType != null) {
-                    EggLayEvent eggLayEvent = AetherEventDispatch.onLayEgg(this, AetherSoundEvents.ENTITY_MOA_EGG.get(), 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F, this.getMoaType().egg());
-                    if (!eggLayEvent.isCanceled()) {
-                        if (eggLayEvent.getSound() != null) {
-                            this.playSound(eggLayEvent.getSound(), eggLayEvent.getVolume(), eggLayEvent.getPitch());
-                        }
-                        if (eggLayEvent.getItem() != null) {
-                            this.spawnAtLocation(eggLayEvent.getItem());
+                if (moaType != null && this.getBrain().hasMemoryValue(MemoryModuleType.HOME) && this.getBrain().getMemory(MemoryModuleType.HOME).get().pos().distManhattan(this.blockPosition()) <= 3) {
+                    if (this.onGround() && this.getBlockStateOn().is(AetherIITags.Blocks.MOA_HATCH_BLOCK)) {
+                        EggLayEvent eggLayEvent = AetherIIEventDispatch.onLayEgg(this, AetherIISoundEvents.ENTITY_MOA_EGG.get(), 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F, this.getMoaType().egg());
+                        if (!eggLayEvent.isCanceled()) {
+                            if (eggLayEvent.getSound() != null) {
+                                this.playSound(eggLayEvent.getSound(), eggLayEvent.getVolume(), eggLayEvent.getPitch());
+                            }
+                            if (eggLayEvent.getItem() != null) {
+                                this.level().setBlock(this.blockPosition(), Block.byItem(eggLayEvent.getItem().getItem()).defaultBlockState(), 3);
+                            }
                         }
                     }
                 }
                 this.eggTime = this.getEggTime();
-            }*/
+            }
         }
 
         // Handles baby hunger.
@@ -322,7 +335,7 @@ public class Moa extends MountableAnimal {
             this.setFlapCooldown(this.getFlapCooldown() - 1);
         } else if (this.getFlapCooldown() == 0) {
             if (!this.onGround()) {
-                //this.level().playSound(null, this, AetherIISoundEvents.ENTITY_MOA_FLAP.get(), SoundSource.NEUTRAL, 0.15F, Mth.clamp(this.getRandom().nextFloat(), 0.7F, 1.0F) + Mth.clamp(this.getRandom().nextFloat(), 0.0F, 0.3F));
+                this.level().playSound(null, this, AetherIISoundEvents.ENTITY_MOA_FLAP.get(), SoundSource.NEUTRAL, 0.15F, Mth.clamp(this.getRandom().nextFloat(), 0.7F, 1.0F) + Mth.clamp(this.getRandom().nextFloat(), 0.0F, 0.3F));
                 this.setFlapCooldown(15);
             }
         }
@@ -486,27 +499,27 @@ public class Moa extends MountableAnimal {
     /**
      * @return This Moa's {@link MoaType}.
      */
-    /*@javax.annotation.Nullable
+    @javax.annotation.Nullable
     public MoaType getMoaType() {
-        return AetherMoaTypes.getMoaType(this.level().registryAccess(), this.getEntityData().get(DATA_MOA_TYPE_ID));
-    }*/
+        return AetherIIMoaTypes.getMoaType(this.level().registryAccess(), this.getEntityData().get(DATA_MOA_TYPE_ID));
+    }
 
     /**
      * @return This Moa's {@link MoaType} {@link ResourceKey}.
      */
-    /*@javax.annotation.Nullable
+    @javax.annotation.Nullable
     public ResourceKey<MoaType> getMoaTypeKey() {
-        return AetherMoaTypes.getResourceKey(this.level().registryAccess(), this.getEntityData().get(DATA_MOA_TYPE_ID));
-    }*/
+        return AetherIIMoaTypes.getResourceKey(this.level().registryAccess(), this.getEntityData().get(DATA_MOA_TYPE_ID));
+    }
 
     /**
      * Sets this Moa's {@link MoaType}.
      *
      * @param moaType The {@link MoaType} {@link ResourceKey}.
      */
-    /*public void setMoaTypeByKey(ResourceKey<MoaType> moaType) {
+    public void setMoaTypeByKey(ResourceKey<MoaType> moaType) {
         this.getEntityData().set(DATA_MOA_TYPE_ID, moaType.location().toString());
-    }*/
+    }
 
     /**
      * @return The {@link UUID} of the current rider of this Moa.
@@ -671,37 +684,36 @@ public class Moa extends MountableAnimal {
         this.flapCooldown = flapCooldown;
     }
 
-    /*@Override
+    @Override
     protected SoundEvent getAmbientSound() {
-        return AetherSoundEvents.ENTITY_MOA_AMBIENT.get();
+        return AetherIISoundEvents.ENTITY_MOA_AMBIENT.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return AetherSoundEvents.ENTITY_MOA_HURT.get();
+        return AetherIISoundEvents.ENTITY_MOA_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return AetherSoundEvents.ENTITY_MOA_DEATH.get();
+        return AetherIISoundEvents.ENTITY_MOA_DEATH.get();
     }
 
     @Override
     protected SoundEvent getSaddledSound() {
-        return AetherSoundEvents.ENTITY_MOA_SADDLE.get();
+        return AetherIISoundEvents.ENTITY_MOA_SADDLE.get();
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(AetherSoundEvents.ENTITY_MOA_STEP.get(), 0.15F, 1.0F);
-    }*/
+        this.playSound(AetherIISoundEvents.ENTITY_MOA_STEP.get(), 0.15F, 1.0F);
+    }
 
     /**
      * @return The {@link Integer} for the maximum amount of jumps from the {@link MoaType}.
      */
     public int getMaxJumps() {
-        //TODO MOA TYPE JUMP
-        return 3;
+        return this.getMoaType() != null ? this.getMoaType().maxJumps() : 3;
     }
 
     /**
@@ -765,7 +777,7 @@ public class Moa extends MountableAnimal {
      */
     @Override
     public float getSteeringSpeed() {
-        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.2F;
+        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * (this.getMoaType() == null ? 0.15F : this.getMoaType().speed());
     }
 
     @Override
@@ -874,14 +886,14 @@ public class Moa extends MountableAnimal {
         if (tag.contains("IsBaby")) {
             this.setBaby(tag.getBoolean("IsBaby"));
         }
-        /*ResourceKey<MoaType> moaTypeKey = AetherMoaTypes.getResourceKey(this.level().registryAccess(), tag.getString("MoaType"));
+        ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(this.level().registryAccess(), tag.getString("MoaType"));
         if (tag.contains("MoaType") && moaTypeKey != null) {
             this.setMoaTypeByKey(moaTypeKey);
         } else {
-            MoaType moaType = AetherMoaTypes.getWeightedChance(this.level().registryAccess(), this.getRandom());
-            ResourceKey<MoaType> randomMoaTypeKey = AetherMoaTypes.getResourceKey(this.level().registryAccess(), moaType);
-            this.setMoaTypeByKey(Objects.requireNonNullElse(randomMoaTypeKey, AetherMoaTypes.BLUE));
-        }*/
+            MoaType moaType = AetherIIMoaTypes.getWeightedChance(this.level().registryAccess(), this.getRandom());
+            ResourceKey<MoaType> randomMoaTypeKey = AetherIIMoaTypes.getResourceKey(this.level().registryAccess(), moaType);
+            this.setMoaTypeByKey(Objects.requireNonNullElse(randomMoaTypeKey, AetherIIMoaTypes.BLUE));
+        }
         if (tag.hasUUID("Rider")) {
             this.setRider(tag.getUUID("Rider"));
         }
@@ -915,7 +927,7 @@ public class Moa extends MountableAnimal {
             tag.putUUID("MoaUUID", this.getMoaUUID());
         }
         tag.putBoolean("IsBaby", this.isBaby());
-        //tag.putString("MoaType", Objects.requireNonNullElse(this.getMoaTypeKey(), AetherMoaTypes.BLUE).location().toString());
+        tag.putString("MoaType", Objects.requireNonNullElse(this.getMoaTypeKey(), AetherIIMoaTypes.BLUE).location().toString());
         if (this.getRider() != null) {
             tag.putUUID("Rider", this.getRider());
         }

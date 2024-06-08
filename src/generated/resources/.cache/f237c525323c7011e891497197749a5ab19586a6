@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-05T14:43:39.6764691	Block States: aether_ii
+// 1.20.4	2024-06-08T23:10:26.2194209	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -41,6 +41,7 @@ f3ed611a25a2038b9cc5cca3574db2e9cbda43b2 assets/aether_ii/blockstates/artisans_b
 e194d72df6ecd47cda5570e6a6303b16e0e834a5 assets/aether_ii/blockstates/blueberry_bush.json
 58ed713583b9a936385bba8c33051c7fe1f08473 assets/aether_ii/blockstates/blueberry_bush_stem.json
 999553f352ecd804f63eeb4583295000ae3d56f1 assets/aether_ii/blockstates/blue_aercloud.json
+f0cb1ac81dc7b1af0ab749796b8d431efd284f1f assets/aether_ii/blockstates/blue_moa_egg.json
 70a532fbcf0f82aa02919202b2f92afa51da56f8 assets/aether_ii/blockstates/cloudwool.json
 6519f9060094b8c8ec3e7f69d6c27a8efc771770 assets/aether_ii/blockstates/cloudwool_carpet.json
 4a90e8772fc29ca3354a506ada288e3376f1ac41 assets/aether_ii/blockstates/coarse_aether_dirt.json
@@ -305,6 +306,7 @@ b0b5aa2804547fd8444324005b8773e897828879 assets/aether_ii/models/block/arctic_sn
 06cf463cdbf97a009f7c8341b4b2d91e6f4d5ed0 assets/aether_ii/models/block/blueberry_bush.json
 5887cdcbe7daf0b10e8bfde375a5156c4e7592e6 assets/aether_ii/models/block/blueberry_bush_stem.json
 9f51375a8c00c0440af1bfa813fda3d6144692ce assets/aether_ii/models/block/blue_aercloud.json
+094c5930599a3ed64e782d29ebdf08047ac1c0ac assets/aether_ii/models/block/blue_moa_egg.json
 c0f964bf0e8d5046ec61f6ad516e118fc043148a assets/aether_ii/models/block/cloudwool.json
 6a3c73dbf735f0e1567003d3c1ae9a7d3e9b23ce assets/aether_ii/models/block/cloudwool_carpet.json
 d62f232cf4792d79e46ba56f557f4b367e70d9cf assets/aether_ii/models/block/coarse_aether_dirt.json

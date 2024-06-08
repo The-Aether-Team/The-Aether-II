@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.block.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.FastModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
@@ -25,6 +26,7 @@ public class AetherIIRenderers {
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         // Blocks
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_CHEST.get(), SkyrootChestRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MOA_EGG.get(), MoaEggRenderer::new);
 
         // Passive
         event.registerEntityRenderer(AetherIIEntityTypes.AERBUNNY.get(), AerbunnyRenderer::new);
@@ -54,6 +56,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.MOA, MoaModel::createBodyLayer);
         event.registerLayerDefinition(AetherModelLayers.MOA_BABY, MoaBabyModel::createBodyLayer);
+
+        event.registerLayerDefinition(AetherModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
 
         // Hostile
         event.registerLayerDefinition(AetherModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);

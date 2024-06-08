@@ -145,6 +145,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.COCKATRICE_SPAWNABLE_BLACKLIST);
 
+        this.tag(AetherIITags.Blocks.MOA_HATCH_BLOCK).add(
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
+        );
+
         // Vanilla
         this.tag(BlockTags.WOOL).add(
                 AetherIIBlocks.CLOUDWOOL.get(),

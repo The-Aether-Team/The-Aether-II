@@ -328,6 +328,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
+        //Egg
+        this.addBlock(AetherIIBlocks.BLUE_MOA_EGG, "Blue Moa Egg");
+
+
         // Items
         // Tools
         this.addItem(AetherIIItems.SKYROOT_PICKAXE, "Skyroot Pickaxe");
@@ -522,6 +526,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");
+
+        this.addSubtitle("entity", "moa.ambient", "Moa calls");
+        this.addSubtitle("entity", "moa.death", "Moa dies");
+        this.addSubtitle("entity", "moa.hurt", "Moa hurts");
+        this.addSubtitle("entity", "moa.saddle", "Saddle equips");
+        this.addSubtitle("entity", "moa.step", "Footsteps");
+        this.addSubtitle("entity", "moa.flap", "Moa flaps");
+        this.addSubtitle("entity", "moa.egg", "Moa plops");
 
         this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
         this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");

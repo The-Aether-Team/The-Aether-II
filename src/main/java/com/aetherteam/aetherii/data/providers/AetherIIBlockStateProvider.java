@@ -567,6 +567,13 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         simpleBlock(block, models().singleTexture(name(block), mcLoc("block/carpet"), "wool", texture(location + name(baseBlock))));
     }
 
+    public void moaEgg(Block block) {
+        ModelFile moaEgg = this.models().withExistingParent(this.name(block)
+                        , modLoc("block/template_moa_egg")).texture(this.name(block), this.texture(this.name(block), "miscellaneous/"))
+                .texture("particle", this.texture(this.name(block), "miscellaneous/"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(moaEgg));
+    }
+
     public void skyrootCraftingTable(Block block, Block baseBlock, String location) {
         ResourceLocation baseTexture = new ResourceLocation(AetherII.MODID, "block/" + location + this.name(baseBlock));
         ModelFile workbench = this.models().cube(this.name(block),
