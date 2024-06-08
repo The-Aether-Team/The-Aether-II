@@ -383,6 +383,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
         this.addItem(AetherIIItems.RAW_ARKENIUM, "Raw Arkenium");
         this.addItem(AetherIIItems.ARKENIUM_PLATES, "Arkenium Plates");
+        this.addItem(AetherIIItems.ARKENIUM_STRIP, "Arkenium Strip");
         this.addItem(AetherIIItems.RAW_GRAVITITE, "Raw Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
@@ -393,7 +394,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GREEN_SWET_GEL, "Green Swet Gel");
         this.addItem(AetherIIItems.BLUE_SWET_GEL, "Blue Swet Gel");
         this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
-        this.addItem(AetherIIItems.ARKENIUM_STRIP, "Arkenium Strip");
+        this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
+        this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
@@ -401,8 +403,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ORANGE, "Orange");
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
+        this.addItem(AetherIIItems.GREEN_SWET_JELLY, "Green Swet Jelly");
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
+        this.addItem(AetherIIItems.PURPLE_SWET_JELLY, "Purple Swet Jelly");
         this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
+        this.addItem(AetherIIItems.WHITE_SWET_JELLY, "White Swet Jelly");
         this.addItem(AetherIIItems.BURRUKAI_RIBS, "Burrukai Ribs");
         this.addItem(AetherIIItems.BURRUKAI_RIB_CUT, "Burrukai Rib Cut");
         this.addItem(AetherIIItems.KIRRID_CUTLET, "Kirrid Cutlet");

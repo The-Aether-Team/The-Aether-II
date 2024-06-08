@@ -78,6 +78,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.GREEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.BLUE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.PURPLE_SWET_GEL.get(), "materials/");
+        this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
+        this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
 
         // Food
         this.item(AetherIIItems.BLUEBERRY.get(), "food/");
@@ -85,8 +87,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.ORANGE.get(), "food/");
         this.item(AetherIIItems.WYNDBERRY.get(), "food/");
         this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "food/");
+        this.item(AetherIIItems.GREEN_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
+        this.item(AetherIIItems.PURPLE_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
+        this.item(AetherIIItems.WHITE_SWET_JELLY.get(), "food/");
         this.item(AetherIIItems.BURRUKAI_RIBS.get(), "food/");
         this.item(AetherIIItems.BURRUKAI_RIB_CUT.get(), "food/");
         this.item(AetherIIItems.KIRRID_CUTLET.get(), "food/");
