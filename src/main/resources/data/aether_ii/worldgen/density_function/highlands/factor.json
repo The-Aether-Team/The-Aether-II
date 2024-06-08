@@ -27,6 +27,16 @@
                 "points": [
                   {
                     "derivative": 0.0,
+                    "location": -0.2,
+                    "value": 1
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": -0.0125,
+                    "value": 5
+                  },
+                  {
+                    "derivative": 0.0,
                     "location": 0.0125,
                     "value": 5
                   },
@@ -44,6 +54,16 @@
               "value": {
                 "coordinate": "aether_ii:highlands/continents",
                 "points": [
+                  {
+                    "derivative": 0.0,
+                    "location": -0.2,
+                    "value": 1
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": -0.0125,
+                    "value": 5
+                  },
                   {
                     "derivative": 0.0,
                     "location": 0.0125,
