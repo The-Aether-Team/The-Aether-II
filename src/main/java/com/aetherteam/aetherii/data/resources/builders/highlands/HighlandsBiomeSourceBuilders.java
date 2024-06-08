@@ -25,8 +25,8 @@ public class HighlandsBiomeSourceBuilders {
         Climate.Parameter tempIrradiated = Climate.Parameter.span(0.65F, 1.5F);
 
         Climate.Parameter continentExpanse = Climate.Parameter.span(-0.125F, 0.125F);
-        Climate.Parameter continentA = Climate.Parameter.span(-1.0F, -0.125F);
-        Climate.Parameter continentB = Climate.Parameter.span(0.125F, 1.0F);
+        Climate.Parameter continentA = Climate.Parameter.span(-1.5F, -0.125F);
+        Climate.Parameter continentB = Climate.Parameter.span(0.125F, 1.5F);
 
         Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, 0.5F);
         Climate.Parameter erosionMagnetic = Climate.Parameter.span(0.5F, 1.5F);

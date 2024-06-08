@@ -249,7 +249,7 @@
           "biome": "aether_ii:shrouded_forest",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -279,7 +279,7 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -309,7 +309,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -339,7 +339,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -369,7 +369,7 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -399,7 +399,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -429,7 +429,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -459,7 +459,7 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -489,7 +489,7 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -519,7 +519,7 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              -1.0,
+              -1.5,
               -0.125
             ],
             "depth": [
@@ -550,7 +550,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -580,7 +580,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -610,7 +610,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -640,7 +640,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -670,7 +670,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -700,7 +700,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -730,7 +730,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -760,7 +760,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -790,7 +790,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -820,7 +820,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
@@ -850,7 +850,7 @@
           "parameters": {
             "continentalness": [
               0.125,
-              1.0
+              1.5
             ],
             "depth": [
               -1.5,
