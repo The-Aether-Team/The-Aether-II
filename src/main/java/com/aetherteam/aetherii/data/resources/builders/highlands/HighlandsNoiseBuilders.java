@@ -40,23 +40,24 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
         DensityFunction shiftZ = getFunction(function, SHIFT_Z);
         DensityFunction temperature = getFunction(function, AetherIIDensityFunctions.TEMPERATURE);
         DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.VEGETATION));
+        DensityFunction continents = getFunction(function, AetherIIDensityFunctions.CONTINENTS);
         DensityFunction erosion = getFunction(function, AetherIIDensityFunctions.EROSION);
         DensityFunction depth = getFunction(function, AetherIIDensityFunctions.DEPTH);
         return new NoiseRouter(
-                DensityFunctions.zero(), // barrier noise
-                DensityFunctions.zero(), // fluid level floodedness noise
-                DensityFunctions.zero(), // fluid level spread noise
-                DensityFunctions.zero(), // lava noise
+                DensityFunctions.zero(), // barrier
+                DensityFunctions.zero(), // fluid level floodedness
+                DensityFunctions.zero(), // fluid level spread
+                DensityFunctions.zero(), // lava
                 temperature, // temperature
                 vegetation, // vegetation
-                DensityFunctions.zero(), // continentalness
+                continents, // continentalness
                 erosion, // erosion
                 depth, // depth
                 DensityFunctions.zero(), // ridges
-                DensityFunctions.zero(), // initial density without jaggedness, used for aquifers in the Overworld.
+                DensityFunctions.zero(), // initial density without jaggedness
                 finalDensity, // final density
-                DensityFunctions.zero(), // veinToggle
-                DensityFunctions.zero(), // veinRidged
-                DensityFunctions.zero()); // veinGap
+                DensityFunctions.zero(), // vein toggle
+                DensityFunctions.zero(), // vein ridged
+                DensityFunctions.zero()); // vein gap
     }
 }

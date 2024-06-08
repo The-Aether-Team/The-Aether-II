@@ -19,7 +19,7 @@ public class AetherIIDamageResistances {
     public static final ResourceKey<DamageResistance> EXAMPLE_1 = createKey("example_1");
     public static final ResourceKey<DamageResistance> EXAMPLE_2 = createKey("example_2");
     public static final ResourceKey<DamageResistance> EXAMPLE_3 = createKey("example_3");
-    public static final ResourceKey<DamageResistance> ZEPHER = createKey("zephyr");
+    public static final ResourceKey<DamageResistance> ZEPHYR = createKey("zephyr");
     public static final ResourceKey<DamageResistance> AERBUNNY = createKey("aerbunny");
     public static final ResourceKey<DamageResistance> SHEEPUFF = createKey("sheepuff");
     public static final ResourceKey<DamageResistance> FLYING_COW = createKey("flying_cow");
@@ -34,7 +34,7 @@ public class AetherIIDamageResistances {
         context.register(EXAMPLE_1, new DamageResistance(EntityType.PIG, -2, 2, 2));
         context.register(EXAMPLE_2, new DamageResistance(EntityType.SHEEP, 2, -2, 2));
         context.register(EXAMPLE_3, new DamageResistance(EntityType.COW, 2, 2, -2));
-        context.register(ZEPHER, new DamageResistance(AetherIIEntityTypes.ZEPHYR.get(), 0, 2, -2));
+        context.register(ZEPHYR, new DamageResistance(AetherIIEntityTypes.ZEPHYR.get(), 0, 2, -2));
         context.register(AERBUNNY, new DamageResistance(AetherIIEntityTypes.AERBUNNY.get(), 0, 2, -2));
         context.register(SHEEPUFF, new DamageResistance(AetherIIEntityTypes.SHEEPUFF.get(), 0, 0, 0));
         context.register(FLYING_COW, new DamageResistance(AetherIIEntityTypes.FLYING_COW.get(), 0, 0, 0));

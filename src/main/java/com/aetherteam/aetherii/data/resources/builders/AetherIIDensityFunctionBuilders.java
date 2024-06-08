@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.DensityFunctions;
 
 public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
+    public static final ResourceKey<DensityFunction> CONTINENTS = createKey("highlands/continents");
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
@@ -57,10 +58,10 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.TOP_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.21));
+        density = DensityFunctions.add(density, factorize(function, -0.18));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.21));
+        density = DensityFunctions.add(density, factorize(function, -0.18));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
