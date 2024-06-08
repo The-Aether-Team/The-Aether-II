@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
 public class MoaModel<T extends Moa> extends HierarchicalModel<T> {
-
+    private final ModelPart root;
     private final ModelPart body_main;
     private final ModelPart body_front;
     private final ModelPart neck;
@@ -61,6 +61,7 @@ public class MoaModel<T extends Moa> extends HierarchicalModel<T> {
     private final ModelPart leg_right_toe_left;
 
     public MoaModel(ModelPart root) {
+        this.root = root;
         this.body_main = root.getChild("body_main");
         this.body_front = this.body_main.getChild("body_front");
         this.neck = this.body_front.getChild("neck");
@@ -222,15 +223,16 @@ public class MoaModel<T extends Moa> extends HierarchicalModel<T> {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.head_main.xRot = headPitch * Mth.DEG_TO_RAD;
         this.head_main.yRot = netHeadYaw * Mth.DEG_TO_RAD;
-        this.animateWalk(MoaAnimation.walk, limbSwing, limbSwingAmount, 2.0F, 2.5F);
+        float flyAmount = entity.getFlyAmount(ageInTicks - entity.tickCount);
+        this.animateWalk(MoaAnimation.walk, limbSwing, Mth.clamp(limbSwingAmount - flyAmount, 0, 1F), 2.0F, 2.5F);
         if (entity.isSitting()) {
             this.applyStatic(MoaAnimation.sit);
         }
-        this.animateWalk(MoaAnimation.fly, ageInTicks, entity.getFlyAmount(ageInTicks - entity.tickCount), 1.0F, 1.0F);
+        this.animateWalk(MoaAnimation.fly, ageInTicks, flyAmount, 0.5F, 1.0F);
     }
 
     @Override
     public ModelPart root() {
-        return this.body_main;
+        return this.root;
     }
 }
