@@ -265,6 +265,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AMBROSIUM_TORCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
+                output.accept(AetherIIBlocks.ALTAR.get());
                 output.accept(AetherIIBlocks.ARTISANS_BENCH.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
@@ -339,7 +340,7 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".food_and_drinks"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.BLUEBERRY.get());
-                output.accept(AetherIIItems.ENCHANTED_BERRY.get());
+                output.accept(AetherIIItems.ENCHANTED_BLUEBERRY.get());
                 output.accept(AetherIIItems.ORANGE.get());
                 output.accept(AetherIIItems.WYNDBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_WYNDBERRY.get());
@@ -359,16 +360,16 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "food_and_drinks"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "spawn_eggs"))
-            .icon(() -> new ItemStack(AetherIIItems.RAW_ARKENIUM.get()))
+            .icon(() -> new ItemStack(AetherIIItems.INERT_ARKENIUM.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
-                output.accept(AetherIIItems.RAW_ARKENIUM.get());
+                output.accept(AetherIIItems.INERT_ARKENIUM.get());
                 output.accept(AetherIIItems.ARKENIUM_PLATES.get());
                 output.accept(AetherIIItems.ARKENIUM_STRIP.get());
-                output.accept(AetherIIItems.RAW_GRAVITITE.get());
+                output.accept(AetherIIItems.INERT_GRAVITITE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());

@@ -107,10 +107,10 @@ public class AetherIIItems {
     public static final DeferredItem<Item> SKYROOT_STICK = ITEMS.register("skyroot_stick", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> AMBROSIUM_SHARD = ITEMS.register("ambrosium_shard", () -> new AmbrosiumShardItem(new Item.Properties()));
     public static final DeferredItem<Item> ZANITE_GEMSTONE = ITEMS.register("zanite_gemstone", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> RAW_ARKENIUM = ITEMS.register("raw_arkenium", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> INERT_ARKENIUM = ITEMS.register("inert_arkenium", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ARKENIUM_PLATES = ITEMS.register("arkenium_plates", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ARKENIUM_STRIP = ITEMS.register("arkenium_strip", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> RAW_GRAVITITE = ITEMS.register("raw_gravitite", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> INERT_GRAVITITE = ITEMS.register("inert_gravitite", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> GRAVITITE_PLATE = ITEMS.register("gravitite_plate", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> GOLDEN_AMBER = ITEMS.register("golden_amber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> TAEGORE_HIDE = ITEMS.register("taegore_hide", () -> new Item(new Item.Properties()));
@@ -125,7 +125,7 @@ public class AetherIIItems {
 
     // Food
     public static final DeferredItem<Item> BLUEBERRY = ITEMS.register("blueberry", () -> new Item(new Item.Properties().food(AetherIIFoods.BLUEBERRY)));
-    public static final DeferredItem<Item> ENCHANTED_BERRY = ITEMS.register("enchanted_berry", () -> new Item(new Item.Properties().food(AetherIIFoods.ENCHANTED_BERRY)));
+    public static final DeferredItem<Item> ENCHANTED_BLUEBERRY = ITEMS.register("enchanted_blueberry", () -> new Item(new Item.Properties().food(AetherIIFoods.ENCHANTED_BLUEBERRY)));
     public static final DeferredItem<Item> ORANGE = ITEMS.register("orange", () -> new Item(new Item.Properties().food(AetherIIFoods.ORANGE)));
     public static final DeferredItem<Item> WYNDBERRY = ITEMS.register("wyndberry", () -> new Item(new Item.Properties().food(AetherIIFoods.WYNDBERRY)));
     public static final DeferredItem<Item> ENCHANTED_WYNDBERRY = ITEMS.register("enchanted_wyndberry", () -> new Item(new Item.Properties().food(AetherIIFoods.ENCHANTED_WYNDBERRY)));

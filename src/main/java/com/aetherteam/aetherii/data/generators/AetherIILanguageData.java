@@ -6,12 +6,10 @@ import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
-
-import static com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes.ARTISANS_BENCH;
-import static com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes.HOLYSTONE_FURNACE;
 
 public class AetherIILanguageData extends AetherIILanguageProvider {
     public AetherIILanguageData(PackOutput output) {
@@ -321,6 +319,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
@@ -381,10 +380,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
-        this.addItem(AetherIIItems.RAW_ARKENIUM, "Raw Arkenium");
+        this.addItem(AetherIIItems.INERT_ARKENIUM, "Inert Arkenium");
         this.addItem(AetherIIItems.ARKENIUM_PLATES, "Arkenium Plates");
         this.addItem(AetherIIItems.ARKENIUM_STRIP, "Arkenium Strip");
-        this.addItem(AetherIIItems.RAW_GRAVITITE, "Raw Gravitite");
+        this.addItem(AetherIIItems.INERT_GRAVITITE, "Inert Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
@@ -399,7 +398,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
-        this.addItem(AetherIIItems.ENCHANTED_BERRY, "Enchanted Berry");
+        this.addItem(AetherIIItems.ENCHANTED_BLUEBERRY, "Enchanted Blueberry");
         this.addItem(AetherIIItems.ORANGE, "Orange");
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
@@ -498,8 +497,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Containers
-        this.addContainerType(HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addContainerType(ARTISANS_BENCH, "Artisan's Bench");
+        this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
+        this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
+
+
+        // GUIs
+        this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
 
 
         // Subtitles
