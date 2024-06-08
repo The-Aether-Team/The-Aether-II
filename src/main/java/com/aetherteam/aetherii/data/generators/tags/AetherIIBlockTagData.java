@@ -51,6 +51,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.UNDERSHALE.get()
         );
+        this.tag(AetherIITags.Blocks.FERROSITE).add(
+                AetherIIBlocks.FERROSITE.get(),
+                AetherIIBlocks.RUSTED_FERROSITE.get()
+        );
         this.tag(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),
                 AetherIIBlocks.BLUE_AERCLOUD.get(),
@@ -200,6 +204,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.get(),
+                AetherIIBlocks.SKYBIRCH_SAPLING.get(),
                 AetherIIBlocks.WISPROOT_SAPLING.get(),
                 AetherIIBlocks.WISPTOP_SAPLING.get(),
                 AetherIIBlocks.GREATROOT_SAPLING.get(),
@@ -265,6 +270,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(BlockTags.FLOWER_POTS).add(
                 AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(),
+                AetherIIBlocks.POTTED_SKYBIRCH_SAPLING.get(),
                 AetherIIBlocks.POTTED_WISPROOT_SAPLING.get(),
                 AetherIIBlocks.POTTED_WISPTOP_SAPLING.get(),
                 AetherIIBlocks.POTTED_GREATROOT_SAPLING.get(),

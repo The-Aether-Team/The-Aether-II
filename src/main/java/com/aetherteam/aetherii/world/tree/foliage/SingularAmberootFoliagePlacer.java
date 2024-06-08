@@ -22,11 +22,6 @@ public class SingularAmberootFoliagePlacer extends FoliagePlacer {
         super(radius, offset);
     }
 
-    @Override
-    protected FoliagePlacerType<?> type() {
-        return AetherIIFoliagePlacerTypes.SINGULAR_AMBEROOT_FOLIAGE_PLACER.get();
-    }
-
     /**
      * Places a sphere of leaves.
      *
@@ -42,13 +37,14 @@ public class SingularAmberootFoliagePlacer extends FoliagePlacer {
      */
     @Override  //TODO: Code Clean-Up
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
+        BlockPos pos = attachment.pos();
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 6, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ()), 3, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 3, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 5, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), 3, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 3, pos.getZ()), 1, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 5, pos.getZ()), 0, i, attachment.doubleTrunk());
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(2, 4), attachment.pos().getZ() + random.nextIntBetweenInclusive(-1, 1)), 1, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(2, 4), pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), 1, i, attachment.doubleTrunk());
             }
         }
     }
@@ -81,5 +77,10 @@ public class SingularAmberootFoliagePlacer extends FoliagePlacer {
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
         return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(3);
+    }
+
+    @Override
+    protected FoliagePlacerType<?> type() {
+        return AetherIIFoliagePlacerTypes.SINGULAR_AMBEROOT_FOLIAGE_PLACER.get();
     }
 }

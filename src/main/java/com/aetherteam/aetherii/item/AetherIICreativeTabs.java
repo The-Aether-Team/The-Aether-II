@@ -236,6 +236,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYROOT_SAPLING.get());
+                output.accept(AetherIIBlocks.SKYBIRCH_SAPLING.get());
                 output.accept(AetherIIBlocks.WISPROOT_SAPLING.get());
                 output.accept(AetherIIBlocks.WISPTOP_SAPLING.get());
                 output.accept(AetherIIBlocks.GREATROOT_SAPLING.get());
@@ -384,9 +385,9 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
-                output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
-                output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
             }).build());
 }

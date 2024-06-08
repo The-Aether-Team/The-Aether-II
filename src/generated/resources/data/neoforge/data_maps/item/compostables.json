@@ -78,6 +78,9 @@
     "aether_ii:skybirch_leaves": {
       "chance": 0.3
     },
+    "aether_ii:skybirch_sapling": {
+      "chance": 0.3
+    },
     "aether_ii:skypine_leaf_pile": {
       "chance": 0.018
     },
