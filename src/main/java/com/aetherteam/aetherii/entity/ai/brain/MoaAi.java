@@ -72,9 +72,9 @@ public class MoaAi {
                                 4,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), FallRandomStroll.stroll(0.1F)), 2), Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), SetWalkTargetFromLookTarget.create(0.1F, 3)), 2),
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BetterStrollToPoi.create(MemoryModuleType.HOME, 0.08F, 2, 10)), 2),
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), StrollAroundPoi.create(MemoryModuleType.HOME, 0.08F, 10)), 2),
+                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), FallRandomStroll.stroll(0.08F)), 2), Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), SetWalkTargetFromLookTarget.create(0.08F, 3)), 2),
+                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BetterStrollToPoi.create(MemoryModuleType.HOME, 0.08F, 2, 6)), 2),
+                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), StrollAroundPoi.create(MemoryModuleType.HOME, 0.08F, 6)), 2),
                                                 Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
@@ -114,7 +114,7 @@ public class MoaAi {
             Optional<GlobalPos> globalPos = moa.getBrain().getMemory(MemoryModuleType.HOME);
             if (globalPos.isPresent() && optional1.isPresent()) {
                 if (optional1.get().level().dimension() == globalPos.get().dimension()) {
-                    if (globalPos.get().pos().distManhattan(optional1.get().blockPosition()) < 4) {
+                    if (globalPos.get().pos().distManhattan(optional1.get().blockPosition()) <= 5) {
                         //when near of nest. begin angry
                         return optional1;
                     }
