@@ -3,7 +3,7 @@
   "argument": {
     "type": "minecraft:range_choice",
     "input": "aether_ii:highlands/lakes/noise",
-    "min_inclusive": 0.35,
+    "min_inclusive": 0.325,
     "max_exclusive": 1.5,
     "when_in_range": {
       "type": "minecraft:range_choice",
@@ -23,7 +23,7 @@
             "to_y": 156
           },
           "min": 0,
-          "max": 0.35
+          "max": 0.325
         },
         "argument2": "aether_ii:highlands/final_density"
       }
