@@ -160,7 +160,22 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         // Vanilla
         this.tag(ItemTags.WOOL).add(
                 AetherIIBlocks.CLOUDWOOL.asItem(),
-                AetherIIBlocks.WHITE_CLOUDWOOL.asItem()
+                AetherIIBlocks.WHITE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL.asItem(),
+                AetherIIBlocks.LIME_CLOUDWOOL.asItem(),
+                AetherIIBlocks.PINK_CLOUDWOOL.asItem(),
+                AetherIIBlocks.GRAY_CLOUDWOOL.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.asItem(),
+                AetherIIBlocks.CYAN_CLOUDWOOL.asItem(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.BLUE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.BROWN_CLOUDWOOL.asItem(),
+                AetherIIBlocks.GREEN_CLOUDWOOL.asItem(),
+                AetherIIBlocks.RED_CLOUDWOOL.asItem(),
+                AetherIIBlocks.BLACK_CLOUDWOOL.asItem()
         );
         this.tag(ItemTags.STONE_CRAFTING_MATERIALS).add(
                 AetherIIBlocks.HOLYSTONE.asItem(),
@@ -200,7 +215,22 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.WOOL_CARPETS).add(
                 AetherIIBlocks.CLOUDWOOL_CARPET.asItem(),
-                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem()
+                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.LIME_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.PINK_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.RED_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.asItem()
         );
         this.tag(ItemTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.asItem(),

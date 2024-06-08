@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-07T18:58:43.7622228	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-06-07T19:22:49.4970824	Tags for minecraft:item mod id aether_ii
 53afc97bd3504253faa87c8448b46627ca13c602 data/aether_ii/tags/items/aerbunny_temptation_items.json
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 82f472ec897b7763f2d04a7ceefbe43c8bc3c1fd data/aether_ii/tags/items/aether_dirt.json
@@ -76,5 +76,5 @@ aa0590601c43ae254bba7e082694592a0c959547 data/minecraft/tags/items/wooden_pressu
 40fd42ddb845bcf37303aac078a0163f2ecf3aa5 data/minecraft/tags/items/wooden_slabs.json
 f3fabcca9d36c6a86d4627a0c314482ce0fc4952 data/minecraft/tags/items/wooden_stairs.json
 a40c696038b411d5dae9120fc7f28c3dee9af25f data/minecraft/tags/items/wooden_trapdoors.json
-28ca139e4fd24c8d6881331a053981b4edec8435 data/minecraft/tags/items/wool.json
-f7a5b755746822dd35fea39d9691bfb188a44bf6 data/minecraft/tags/items/wool_carpets.json
+8c517cff8ed11e8c2925c81979c893c338850d6e data/minecraft/tags/items/wool.json
+0822d64d05eecb09f77bd4e866c5e1c750023cb4 data/minecraft/tags/items/wool_carpets.json

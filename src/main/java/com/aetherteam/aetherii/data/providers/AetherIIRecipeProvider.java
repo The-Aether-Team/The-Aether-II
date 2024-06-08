@@ -9,19 +9,20 @@ import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     public AetherIIRecipeProvider(PackOutput output, String id) {
@@ -43,6 +44,21 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected ShapedRecipeBuilder fenceGate(Supplier<? extends Block> fenceGate, Supplier<? extends Block> material) {
         return this.fenceGate(fenceGate, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
+    }
+
+    protected void colorBlockWithDye(RecipeOutput consumer, List<Item> dyes, List<Item> dyeableItems, Item extra, String group) {
+        for(int i = 0; i < dyes.size(); ++i) {
+            Item item = dyes.get(i);
+            Item item1 = dyeableItems.get(i);
+            List<ItemStack> ingredients = dyeableItems.stream().filter(itemElement -> !itemElement.equals(item1)).map(ItemStack::new).collect(Collectors.toList());
+            ingredients.add(new ItemStack(extra));
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, item1)
+                    .requires(item)
+                    .requires(Ingredient.of(ingredients.toArray(ItemStack[]::new)))
+                    .group(group)
+                    .unlockedBy("has_needed_dye", has(item))
+                    .save(consumer, "dye_" + getItemName(item1));
+        }
     }
 
     protected static void bookshelf(RecipeOutput consumer, ItemLike result, ItemLike material) {

@@ -311,10 +311,40 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         // Wool
         this.block(AetherIIBlocks.CLOUDWOOL.get(), "construction/");
         this.block(AetherIIBlocks.WHITE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.ORANGE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.MAGENTA_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.YELLOW_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.LIME_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.PINK_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.GRAY_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.CYAN_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.PURPLE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.BLUE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.BROWN_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.GREEN_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.RED_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.BLACK_CLOUDWOOL.get(), "construction/");
 
         // Carpet
         this.carpet(AetherIIBlocks.CLOUDWOOL_CARPET.get(), AetherIIBlocks.CLOUDWOOL.get(),"construction/");
         this.carpet(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.WHITE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.ORANGE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get(), AetherIIBlocks.MAGENTA_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get(), AetherIIBlocks.YELLOW_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get(), AetherIIBlocks.LIME_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get(), AetherIIBlocks.PINK_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get(), AetherIIBlocks.GRAY_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get(), AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get(), AetherIIBlocks.CYAN_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.PURPLE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.BLUE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get(), AetherIIBlocks.BROWN_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get(), AetherIIBlocks.GREEN_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get(), AetherIIBlocks.RED_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get(), AetherIIBlocks.BLACK_CLOUDWOOL.get(),"construction/");
 
         // Mineral Blocks
         this.block(AetherIIBlocks.AMBROSIUM_BLOCK.get(), "construction/");

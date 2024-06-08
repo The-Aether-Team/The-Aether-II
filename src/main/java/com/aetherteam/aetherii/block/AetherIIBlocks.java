@@ -345,10 +345,40 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
     public static final DeferredBlock<Block> WHITE_CLOUDWOOL = register("white_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
+    public static final DeferredBlock<Block> ORANGE_CLOUDWOOL = register("orange_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.ORANGE_WOOL)));
+    public static final DeferredBlock<Block> MAGENTA_CLOUDWOOL = register("magenta_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.MAGENTA_WOOL)));
+    public static final DeferredBlock<Block> LIGHT_BLUE_CLOUDWOOL = register("light_blue_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_WOOL)));
+    public static final DeferredBlock<Block> YELLOW_CLOUDWOOL = register("yellow_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.YELLOW_WOOL)));
+    public static final DeferredBlock<Block> LIME_CLOUDWOOL = register("lime_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.LIME_WOOL)));
+    public static final DeferredBlock<Block> PINK_CLOUDWOOL = register("pink_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.PINK_WOOL)));
+    public static final DeferredBlock<Block> GRAY_CLOUDWOOL = register("gray_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.GRAY_WOOL)));
+    public static final DeferredBlock<Block> LIGHT_GRAY_CLOUDWOOL = register("light_gray_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_WOOL)));
+    public static final DeferredBlock<Block> CYAN_CLOUDWOOL = register("cyan_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.CYAN_WOOL)));
+    public static final DeferredBlock<Block> PURPLE_CLOUDWOOL = register("purple_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.PURPLE_WOOL)));
+    public static final DeferredBlock<Block> BLUE_CLOUDWOOL = register("blue_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.BLUE_WOOL)));
+    public static final DeferredBlock<Block> BROWN_CLOUDWOOL = register("brown_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.BROWN_WOOL)));
+    public static final DeferredBlock<Block> GREEN_CLOUDWOOL = register("green_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.GREEN_WOOL)));
+    public static final DeferredBlock<Block> RED_CLOUDWOOL = register("red_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.RED_WOOL)));
+    public static final DeferredBlock<Block> BLACK_CLOUDWOOL = register("black_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.BLACK_WOOL)));
 
     // Carpet
     public static final DeferredBlock<CarpetBlock> CLOUDWOOL_CARPET = register("cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.WHITE_CARPET)));
     public static final DeferredBlock<CarpetBlock> WHITE_CLOUDWOOL_CARPET = register("white_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.WHITE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> ORANGE_CLOUDWOOL_CARPET = register("orange_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.ORANGE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> MAGENTA_CLOUDWOOL_CARPET = register("magenta_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.MAGENTA_CARPET)));
+    public static final DeferredBlock<CarpetBlock> LIGHT_BLUE_CLOUDWOOL_CARPET = register("light_blue_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> YELLOW_CLOUDWOOL_CARPET = register("yellow_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.YELLOW_CARPET)));
+    public static final DeferredBlock<CarpetBlock> LIME_CLOUDWOOL_CARPET = register("lime_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIME_CARPET)));
+    public static final DeferredBlock<CarpetBlock> PINK_CLOUDWOOL_CARPET = register("pink_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.PINK_CARPET)));
+    public static final DeferredBlock<CarpetBlock> GRAY_CLOUDWOOL_CARPET = register("gray_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.GRAY_CARPET)));
+    public static final DeferredBlock<CarpetBlock> LIGHT_GRAY_CLOUDWOOL_CARPET = register("light_gray_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_CARPET)));
+    public static final DeferredBlock<CarpetBlock> CYAN_CLOUDWOOL_CARPET = register("cyan_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.CYAN_CARPET)));
+    public static final DeferredBlock<CarpetBlock> PURPLE_CLOUDWOOL_CARPET = register("purple_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.PURPLE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> BLUE_CLOUDWOOL_CARPET = register("blue_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BLUE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> BROWN_CLOUDWOOL_CARPET = register("brown_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BROWN_CARPET)));
+    public static final DeferredBlock<CarpetBlock> GREEN_CLOUDWOOL_CARPET = register("green_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.GREEN_CARPET)));
+    public static final DeferredBlock<CarpetBlock> RED_CLOUDWOOL_CARPET = register("red_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.RED_CARPET)));
+    public static final DeferredBlock<CarpetBlock> BLACK_CLOUDWOOL_CARPET = register("black_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BLACK_CARPET)));
 
     // Mineral Blocks
     public static final DeferredBlock<Block> AMBROSIUM_BLOCK = register("ambrosium_block", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)));
