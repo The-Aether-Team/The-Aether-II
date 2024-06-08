@@ -59,40 +59,24 @@
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:not",
-            "invert": {
-              "type": "minecraft:vertical_gradient",
-              "false_at_and_above": {
-                "below_top": 272
-              },
-              "random_name": "minecraft:arctic_snow",
-              "true_at_and_below": {
-                "below_top": 276
-              }
-            }
+            "type": "minecraft:noise_threshold",
+            "max_threshold": 0.35,
+            "min_threshold": -0.5,
+            "noise": "aether_ii:arctic_snow"
           },
           "then_run": {
             "type": "minecraft:condition",
             "if_true": {
-              "type": "minecraft:noise_threshold",
-              "max_threshold": 0.7,
-              "min_threshold": -0.7,
-              "noise": "aether_ii:arctic_snow"
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": false,
+              "offset": 0,
+              "secondary_depth_range": 0,
+              "surface_type": "floor"
             },
             "then_run": {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:stone_depth",
-                "add_surface_depth": false,
-                "offset": 0,
-                "secondary_depth_range": 0,
-                "surface_type": "floor"
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "aether_ii:arctic_snow_block"
-                }
+              "type": "minecraft:block",
+              "result_state": {
+                "Name": "aether_ii:arctic_snow_block"
               }
             }
           }
@@ -109,40 +93,24 @@
         "then_run": {
           "type": "minecraft:condition",
           "if_true": {
-            "type": "minecraft:not",
-            "invert": {
-              "type": "minecraft:vertical_gradient",
-              "false_at_and_above": {
-                "below_top": 272
-              },
-              "random_name": "minecraft:arctic_snow",
-              "true_at_and_below": {
-                "below_top": 276
-              }
-            }
+            "type": "minecraft:noise_threshold",
+            "max_threshold": 0.35,
+            "min_threshold": -0.5,
+            "noise": "aether_ii:arctic_snow"
           },
           "then_run": {
             "type": "minecraft:condition",
             "if_true": {
-              "type": "minecraft:noise_threshold",
-              "max_threshold": 0.55,
-              "min_threshold": -0.55,
-              "noise": "aether_ii:arctic_snow"
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": true,
+              "offset": 0,
+              "secondary_depth_range": 0,
+              "surface_type": "floor"
             },
             "then_run": {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:stone_depth",
-                "add_surface_depth": true,
-                "offset": 0,
-                "secondary_depth_range": 0,
-                "surface_type": "floor"
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "aether_ii:arctic_snow_block"
-                }
+              "type": "minecraft:block",
+              "result_state": {
+                "Name": "aether_ii:arctic_snow_block"
               }
             }
           }
