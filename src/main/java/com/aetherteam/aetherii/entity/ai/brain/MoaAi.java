@@ -72,9 +72,9 @@ public class MoaAi {
                                 4,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), FallRandomStroll.stroll(0.08F)), 2), Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), SetWalkTargetFromLookTarget.create(0.08F, 3)), 2),
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BetterStrollToPoi.create(MemoryModuleType.HOME, 0.08F, 2, 6)), 2),
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), StrollAroundPoi.create(MemoryModuleType.HOME, 0.08F, 6)), 2),
+                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), FallRandomStroll.stroll(0.06F)), 2), Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), SetWalkTargetFromLookTarget.create(0.06F, 3)), 2),
+                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BetterStrollToPoi.create(MemoryModuleType.HOME, 0.06F, 2, 6)), 2),
+                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), StrollAroundPoi.create(MemoryModuleType.HOME, 0.06F, 6)), 2),
                                                 Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
