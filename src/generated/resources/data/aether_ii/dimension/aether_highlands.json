@@ -22,7 +22,7 @@
             ],
             "humidity": [
               -1.0,
-              -0.25
+              -0.3
             ],
             "offset": 0.0,
             "temperature": [
@@ -51,7 +51,7 @@
               0.5
             ],
             "humidity": [
-              -0.25,
+              -0.3,
               0.2
             ],
             "offset": 0.0,
@@ -96,7 +96,7 @@
           }
         },
         {
-          "biome": "aether_ii:enduring_woodland",
+          "biome": "aether_ii:frigid_sierra",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -112,7 +112,7 @@
             ],
             "humidity": [
               -1.0,
-              -0.3
+              -0.1
             ],
             "offset": 0.0,
             "temperature": [
@@ -141,8 +141,8 @@
               0.5
             ],
             "humidity": [
-              -0.3,
-              0.1
+              -0.1,
+              0.25
             ],
             "offset": 0.0,
             "temperature": [
@@ -156,7 +156,7 @@
           }
         },
         {
-          "biome": "aether_ii:frigid_sierra",
+          "biome": "aether_ii:enduring_woodland",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -171,7 +171,7 @@
               0.5
             ],
             "humidity": [
-              0.1,
+              0.25,
               1.0
             ],
             "offset": 0.0,
@@ -262,7 +262,7 @@
             ],
             "humidity": [
               -1.0,
-              -0.15
+              -0.2
             ],
             "offset": 0.0,
             "temperature": [
@@ -291,7 +291,7 @@
               0.5
             ],
             "humidity": [
-              -0.15,
+              -0.2,
               0.15
             ],
             "offset": 0.0,
