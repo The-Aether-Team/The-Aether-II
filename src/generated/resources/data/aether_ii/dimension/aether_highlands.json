@@ -6,7 +6,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "aether_ii:sheer_tundra",
+          "biome": "aether_ii:enduring_woodland",
           "parameters": {
             "continentalness": [
               -1.5,
@@ -14,7 +14,7 @@
             ],
             "depth": [
               -1.5,
-              -0.2
+              -0.15
             ],
             "erosion": [
               0.0,
@@ -36,6 +36,36 @@
           }
         },
         {
+          "biome": "aether_ii:sheer_tundra",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              -0.15
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -0.2,
+              0.15
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.4
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
           "biome": "aether_ii:enduring_woodland",
           "parameters": {
             "continentalness": [
@@ -44,14 +74,104 @@
             ],
             "depth": [
               -1.5,
-              -0.2
+              -0.15
             ],
             "erosion": [
               0.0,
               0.5
             ],
             "humidity": [
-              -0.2,
+              0.15,
+              1.0
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.4
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:enduring_woodland",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -0.15,
+              0.15
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -1.0,
+              -0.25
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.4
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:sheer_tundra",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -0.15,
+              0.15
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              -0.25,
+              0.1
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.4
+            ],
+            "weirdness": [
+              -1.5,
+              1.5
+            ]
+          }
+        },
+        {
+          "biome": "aether_ii:frigid_sierra",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -0.15,
+              0.15
+            ],
+            "erosion": [
+              0.0,
+              0.5
+            ],
+            "humidity": [
+              0.1,
               1.0
             ],
             "offset": 0.0,
@@ -73,7 +193,7 @@
               1.5
             ],
             "depth": [
-              -0.2,
+              0.15,
               1.5
             ],
             "erosion": [
@@ -1102,7 +1222,7 @@
             ],
             "humidity": [
               -1.0,
-              -0.2
+              -0.15
             ],
             "offset": 0.0,
             "temperature": [
@@ -1131,7 +1251,7 @@
               0.5
             ],
             "humidity": [
-              -0.2,
+              -0.15,
               0.2
             ],
             "offset": 0.0,

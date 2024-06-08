@@ -31,12 +31,22 @@ public class HighlandsBiomeSourceBuilders {
         Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, 0.5F);
         Climate.Parameter erosionMagnetic = Climate.Parameter.span(0.5F, 1.5F);
 
+        Climate.Parameter depthArcticLayer1 =Climate.Parameter.span(-1.5F, -0.15F);
+        Climate.Parameter depthArcticLayer2 = Climate.Parameter.span(-0.15F, 0.15F);
+        Climate.Parameter depthArcticLayer3 = Climate.Parameter.span(0.15F, 1.5F);
+
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
 
                 // Arctic
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, Climate.Parameter.span(-1.5F, -0.2F), fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.2F, 1.0F), fullRange, erosionDefault, Climate.Parameter.span(-1.5F, -0.2F), fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, Climate.Parameter.span(-0.2F, 1.5F), fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.2F, 0.15F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.25F, 0.1F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.1F, 1.0F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
+
+                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, depthArcticLayer3, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
 
                 // Highfields
                 Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.EXPANSE)),
@@ -86,8 +96,8 @@ public class HighlandsBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
 
                 // Irradiated
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES)),
-                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-0.2F, 0.2F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.CONTAMINATED_JUNGLE)),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-1.0F, -0.15F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES)),
+                Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(-0.15F, 0.2F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.CONTAMINATED_JUNGLE)),
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.BATTLEGROUND_WASTES))
         )));
     }

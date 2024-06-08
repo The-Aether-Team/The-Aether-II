@@ -18,7 +18,9 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/bottom_slide"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/top_slide"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/top_slide_arctic"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> SLOPER = createKey("highlands/sloper"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("highlands/sloper_arctic"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain_shaper"); //TODO: Add to Datagen
@@ -46,10 +48,18 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
+    public static DensityFunction selectSlide(HolderGetter<DensityFunction> function) {
+        return DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 1.5, getFunction(function, TOP_SLIDE), getFunction(function, TOP_SLIDE_ARCTIC));
+    }
+
+    public static DensityFunction selectSloper(HolderGetter<DensityFunction> function) {
+        return DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 1.5, getFunction(function, SLOPER), getFunction(function, SLOPER_ARCTIC));
+    }
+
     public static DensityFunction makeTerrainShaper(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, AMPLIFICATION);
         density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(96, 128, 0.75, 0.35));
-        density = DensityFunctions.mul(density, getFunction(function, SLOPER));
+        density = DensityFunctions.mul(density, selectSloper(function));
         return density.clamp(0, 1);
     }
 
@@ -57,7 +67,7 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction density = getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE);
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
-        density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.TOP_SLIDE));
+        density = DensityFunctions.mul(density, selectSlide(function));
         density = DensityFunctions.add(density, factorize(function, -0.18));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE));
