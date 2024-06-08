@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-08T17:46:44.4384708	Registries
+// 1.20.4	2024-06-08T19:07:18.9226485	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -135,9 +135,9 @@ ad494c11ca8d4c8f6e8992dbadd3d695c9a63c18 data/aether_ii/worldgen/placed_feature/
 8804c5a62374f0d25e7b2db1c972bcfde961a5ed data/aether_ii/worldgen/placed_feature/orange_tree_patch.json
 b087d53a4030e714666a43d1e04d29cc43c5bff9 data/aether_ii/worldgen/placed_feature/ore_agiosite.json
 7246bba668bc633e458b73f8ff8b85d51a7b93ed data/aether_ii/worldgen/placed_feature/ore_ambrosium.json
-f97212a63ce9b8434f2c5d476a37b62d852c17c5 data/aether_ii/worldgen/placed_feature/ore_arkenium.json
-2a0a4855c1b1bc2523cc4aef8e1f2305c271f24f data/aether_ii/worldgen/placed_feature/ore_gravitite.json
-35b9d0ed8c3dbac3602afd4466a9f4aade12dae0 data/aether_ii/worldgen/placed_feature/ore_gravitite_buried.json
+afb9c6906b6e3d6e39775adb0a923cb4b6d0ff73 data/aether_ii/worldgen/placed_feature/ore_arkenium.json
+7ca9d8bf4413871f10059efe5666bfdcc1ff8a6d data/aether_ii/worldgen/placed_feature/ore_gravitite.json
+e3afc1d80a7e53e889ce95dbcd89119bbc1c202b data/aether_ii/worldgen/placed_feature/ore_gravitite_buried.json
 6f0a31d8fae01984aa8f82b15136f8760846dfbe data/aether_ii/worldgen/placed_feature/ore_icestone.json
 6a31e7c7c7a0a0c07a2d300b7c172e80ad9c7354 data/aether_ii/worldgen/placed_feature/ore_icestone_small.json
 3110025a17399751f3477efe7038bc861fee83b2 data/aether_ii/worldgen/placed_feature/ore_mossy_holystone.json
