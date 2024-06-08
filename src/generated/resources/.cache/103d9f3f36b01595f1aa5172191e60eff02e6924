@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-08T14:17:06.307359	Registries
+// 1.20.4	2024-06-08T14:22:22.0955131	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -16,7 +16,7 @@ dd6f3c7add97ce702acede93cec4afc8c435df53 data/aether_ii/aether_ii/damage_resista
 8052d9a9ad60b9fbdf8e8576bdb6551b8249f0de data/aether_ii/aether_ii/damage_resistance/zephyr.json
 4b4b2ff422d23e4cb6282f664d89dad7ac8ff8e6 data/aether_ii/damage_type/player_aoe.json
 4b4b2ff422d23e4cb6282f664d89dad7ac8ff8e6 data/aether_ii/damage_type/player_aoe_no_knockback.json
-4011cc5e4933c4ac727d2d7ce17f81d33164633a data/aether_ii/dimension/aether_highlands.json
+037815daa08bea6ddbac4371606aea9897049d75 data/aether_ii/dimension/aether_highlands.json
 e48734a1f4f4a5ce46ede719985e497b3c51ce46 data/aether_ii/dimension_type/aether_highlands.json
 981b584aa386f60ca4413c37e42ec8c9193273a9 data/aether_ii/worldgen/biome/battleground_wastes.json
 8abe76e046c44fe24c91739c38d8476d6d1f7cf4 data/aether_ii/worldgen/biome/contaminated_jungle.json

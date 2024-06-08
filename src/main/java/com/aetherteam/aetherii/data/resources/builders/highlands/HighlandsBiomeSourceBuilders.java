@@ -38,12 +38,12 @@ public class HighlandsBiomeSourceBuilders {
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
 
                 // Arctic
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.2F, 0.15F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.25F, 0.2F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
 
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.25F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.25F, 0.1F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.3F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.3F, 0.1F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
                 Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.1F, 1.0F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
 
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, depthArcticLayer3, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
