@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.layers.AerbunnyCollarLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
@@ -17,7 +17,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
     private static final ResourceLocation AERBUNNY_TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny.png");
 
     public AerbunnyRenderer(EntityRendererProvider.Context context) {
-        super(context, new AerbunnyModel(context.bakeLayer(AetherModelLayers.AERBUNNY)), 0.3F);
+        super(context, new AerbunnyModel(context.bakeLayer(AetherIIModelLayers.AERBUNNY)), 0.3F);
         this.addLayer(new AerbunnyCollarLayer(this, context.getModelSet()));
     }
 

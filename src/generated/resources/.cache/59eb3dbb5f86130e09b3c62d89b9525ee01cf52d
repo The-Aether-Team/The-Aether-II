@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-07T19:22:49.3910826	Loot Tables
+// 1.20.4	2024-06-07T20:18:58.8080138	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -190,6 +190,7 @@ a999e18635dc4c28d37064355fefd34a5a9cf4a8 data/aether_ii/loot_tables/blocks/skypi
 c8b58f299a51774eea58be34b17b907367b5d980 data/aether_ii/loot_tables/blocks/skyroot_base_beam.json
 d6b66318f3c35bf98ff967fba7795afe7894ad18 data/aether_ii/loot_tables/blocks/skyroot_base_planks.json
 6f8546b633240fed679c7f44d30de14bc267f47e data/aether_ii/loot_tables/blocks/skyroot_beam.json
+446e2f39a3b320db6749f2b1867a6ac794506ae7 data/aether_ii/loot_tables/blocks/skyroot_bed.json
 a57c17936933e48d5e353ef6df8eea29463d0efe data/aether_ii/loot_tables/blocks/skyroot_bookshelf.json
 46837ef42f03f8e95d0ca7eb4f2f4b9c72feca06 data/aether_ii/loot_tables/blocks/skyroot_button.json
 908c9a594a9e20a383a497100a4ef6ed0eb8307c data/aether_ii/loot_tables/blocks/skyroot_chest.json

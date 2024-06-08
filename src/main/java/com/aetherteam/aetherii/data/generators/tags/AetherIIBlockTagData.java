@@ -297,6 +297,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HESPEROSE.get(),
                 AetherIIBlocks.TARABLOOM.get()
         );
+        this.tag(BlockTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.get());
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(BlockTags.FLOWER_POTS).add(
                 AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(),
@@ -466,7 +467,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_TOP_PLANKS.get(),
                 AetherIIBlocks.WISPROOT_BASE_BEAM.get(),
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
-                AetherIIBlocks.WISPROOT_BEAM.get()
+                AetherIIBlocks.WISPROOT_BEAM.get(),
+                AetherIIBlocks.SKYROOT_BED.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),

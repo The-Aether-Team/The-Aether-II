@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-07T19:22:49.5170813	Block States: aether_ii
+// 1.20.4	2024-06-07T20:18:58.8500135	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -191,6 +191,7 @@ e73689e68adfd8895fd88a3a6196a5d4ccedf2ec assets/aether_ii/blockstates/skyplane_l
 5044383bc1a9a3f1d5613e5918859e992e4d4fd4 assets/aether_ii/blockstates/skyroot_base_beam.json
 513e045b3c8f88a79a5e7e6cb23bbbff664f8e27 assets/aether_ii/blockstates/skyroot_base_planks.json
 c35961116710e13aa963ec2cc13a3578de89f446 assets/aether_ii/blockstates/skyroot_beam.json
+821afccaa31837f8725666b114c9d7f263e423dc assets/aether_ii/blockstates/skyroot_bed.json
 56ad45dde2c3caab7163b6c0b52328fc3db9cfe1 assets/aether_ii/blockstates/skyroot_bookshelf.json
 e67d9fe4c08aa1761aa95894c4951e8af92c2f54 assets/aether_ii/blockstates/skyroot_button.json
 cf22b99b6fc59a24d2a38648b61f0c16f6c87e63 assets/aether_ii/blockstates/skyroot_chest.json
@@ -655,6 +656,8 @@ b5296c02d6f69d8ae4596d98796258d2e37c7478 assets/aether_ii/models/block/skyroot_b
 477580c2abe9dfade45757085f518cd95ead86d9 assets/aether_ii/models/block/skyroot_base_planks.json
 a76f3fb66a68f9599f7a1c775b2a844dec70100d assets/aether_ii/models/block/skyroot_beam.json
 b355bcaed84fba95f24f1b670c91f25f37545b6b assets/aether_ii/models/block/skyroot_beam_horizontal.json
+ed196051aea6245218cd47a1d19d10d0847b498b assets/aether_ii/models/block/skyroot_bed_foot.json
+ed196051aea6245218cd47a1d19d10d0847b498b assets/aether_ii/models/block/skyroot_bed_head.json
 91d67a9653856faba628d4e6733dc7ae3e804d16 assets/aether_ii/models/block/skyroot_bookshelf.json
 856f7c95c3e5d75078415813d6db5751022e5f77 assets/aether_ii/models/block/skyroot_button.json
 94d555c67e1355a9e56adfcc7fe4375ab00c0c56 assets/aether_ii/models/block/skyroot_button_pressed.json

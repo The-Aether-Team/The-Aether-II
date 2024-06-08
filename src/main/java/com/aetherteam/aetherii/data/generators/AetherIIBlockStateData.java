@@ -359,6 +359,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.artisanryBench(AetherIIBlocks.ARTISANS_BENCH.get());
         this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.bed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
 
         // Bookshelves
         this.bookshelf(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());

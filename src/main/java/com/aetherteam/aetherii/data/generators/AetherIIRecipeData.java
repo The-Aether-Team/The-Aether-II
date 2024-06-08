@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -399,6 +400,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .pattern("# #")
                 .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_LADDER.get()), has(AetherIITags.Items.RODS_SKYROOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_BED.get(), 1)
+                .define('W', ItemTags.WOOL)
+                .define('P', AetherIITags.Items.PLANKS_CRAFTING)
+                .pattern("WWW")
+                .pattern("PPP")
+                .unlockedBy("has_wool", has(ItemTags.WOOL))
                 .save(consumer);
 
         // Bookshelves

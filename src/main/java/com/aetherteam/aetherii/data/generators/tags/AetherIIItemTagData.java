@@ -294,9 +294,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.AMBEROOT_LEAVES.asItem()
         );
         this.tag(ItemTags.SMALL_FLOWERS).add(
-                AetherIIBlocks.HESPEROSE.get().asItem(),
-                AetherIIBlocks.TARABLOOM.get().asItem()
+                AetherIIBlocks.HESPEROSE.asItem(),
+                AetherIIBlocks.TARABLOOM.asItem()
         );
+        this.tag(ItemTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.asItem());
         this.tag(ItemTags.MUSIC_DISCS).add(
                 AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(),
                 AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(),
