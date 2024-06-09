@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-08T16:49:48.2779165	Registries
+// 1.20.4	2024-06-08T21:38:07.9470238	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -26,7 +26,7 @@ e48734a1f4f4a5ce46ede719985e497b3c51ce46 data/aether_ii/dimension_type/aether_hi
 963ac9fdff7a2ec7e909f7ed15c74692658f6620 data/aether_ii/worldgen/biome/frigid_sierra.json
 7bc442f264cead22cdb594c909fa1817dc336086 data/aether_ii/worldgen/biome/frozen_lakes.json
 0ecb8fe5caee4be4e8f10048f0840e07ad5e36f4 data/aether_ii/worldgen/biome/glistening_swamp.json
-f12912a52b81fc994ccf54396320cfb914bd675e data/aether_ii/worldgen/biome/magnetic_scar.json
+8746a8f556bade8ab8a6c01c59ef2d384f8fe68b data/aether_ii/worldgen/biome/magnetic_scar.json
 587b11f2e98ae625a43fae734553fdedf8b14efb data/aether_ii/worldgen/biome/sheer_tundra.json
 9e4a7099711a13754cdf36f287a159b7c19a3a5f data/aether_ii/worldgen/biome/shimmering_basin.json
 a84c682060cc4d0eccf3224bf18c53ca3bbb259a data/aether_ii/worldgen/biome/shrouded_forest.json
