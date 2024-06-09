@@ -1175,44 +1175,6 @@
         "if_true": {
           "type": "minecraft:biome",
           "biome_is": [
-            "aether_ii:shimmering_basin",
-            "aether_ii:frozen_lakes"
-          ]
-        },
-        "then_run": {
-          "type": "minecraft:condition",
-          "if_true": {
-            "type": "minecraft:noise_threshold",
-            "max_threshold": 1.0,
-            "min_threshold": -1.0,
-            "noise": "aether_ii:lake_floor"
-          },
-          "then_run": {
-            "type": "minecraft:condition",
-            "if_true": {
-              "type": "minecraft:vertical_gradient",
-              "false_at_and_above": {
-                "absolute": 256
-              },
-              "random_name": "minecraft:above_lake",
-              "true_at_and_below": {
-                "absolute": 256
-              }
-            },
-            "then_run": {
-              "type": "minecraft:block",
-              "result_state": {
-                "Name": "minecraft:air"
-              }
-            }
-          }
-        }
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
-          "type": "minecraft:biome",
-          "biome_is": [
             "aether_ii:frigid_sierra"
           ]
         },

@@ -139,7 +139,7 @@ public class AetherIIDensityFunctionBuilders {
 
         CubicSpline<C, I> lakeSpline = CubicSpline.builder(lakes)
                 .addPoint(0.45F, 1.0F)
-                .addPoint(0.575F, 0.65F)
+                .addPoint(0.575F, 0.5F)
                 .build();
 
         CubicSpline<C, I> continentsSpline = CubicSpline.builder(continents)
