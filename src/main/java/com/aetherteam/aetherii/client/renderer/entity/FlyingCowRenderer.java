@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.FlyingCowModel;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -12,7 +12,7 @@ public class FlyingCowRenderer extends MobRenderer<FlyingCow, FlyingCowModel<Fly
     private static final ResourceLocation FLYING_COW_TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/flying_cow/flying_cow.png");
 
     public FlyingCowRenderer(EntityRendererProvider.Context context) {
-        super(context, new FlyingCowModel<>(context.bakeLayer(AetherModelLayers.FLYING_COW)), 0.7F);
+        super(context, new FlyingCowModel<>(context.bakeLayer(AetherIIModelLayers.FLYING_COW)), 0.7F);
     }
 
     @Override

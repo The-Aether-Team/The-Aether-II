@@ -392,10 +392,40 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Wool
         this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());
         this.itemBlock(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.ORANGE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.YELLOW_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.LIME_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.PINK_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.GRAY_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.CYAN_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.PURPLE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.BLUE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.BROWN_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.GREEN_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.RED_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
         // Carpet
         this.itemBlock(AetherIIBlocks.CLOUDWOOL_CARPET.get());
         this.itemBlock(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
 
         // Mineral Blocks
         this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get());
@@ -411,6 +441,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ALTAR.get());
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
+        this.lookalikeBlock(AetherIIBlocks.SKYROOT_BED.get(), this.mcLoc("item/template_bed"));
 
         // Bookshelves
         this.itemBlock(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
