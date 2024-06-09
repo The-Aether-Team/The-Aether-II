@@ -2,22 +2,21 @@ package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIVegetationPlacements;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.SpreadingSnowyDirtBlockAccessor;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.lighting.LightEngine;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,10 +44,23 @@ public class EnchantedAetherGrassBlock extends GrassBlock {
         if (aboveState.getBlock() instanceof BushBlock plant) {
             plant.randomTick(aboveState, level, abovePos, random);
         }
-        if (!SpreadingSnowyDirtBlockAccessor.callCanBeGrass(state, level, pos)) {
+        if (!canBeGrass(state, level, pos)) {
             if (!level.isAreaLoaded(pos, 3))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
             level.setBlockAndUpdate(pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+        }
+    }
+
+    private static boolean canBeGrass(BlockState state, LevelReader level, BlockPos pos) {
+        BlockPos abovePos = pos.above();
+        BlockState blockState = level.getBlockState(abovePos);
+        if (blockState.is(AetherIIBlocks.ARCTIC_SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) {
+            return true;
+        } else if (blockState.getFluidState().getAmount() == 8) {
+            return false;
+        } else {
+            int i = LightEngine.getLightBlockInto(level, state, pos, blockState, abovePos, Direction.UP, blockState.getLightBlock(level, abovePos));
+            return i < level.getMaxLightLevel();
         }
     }
 

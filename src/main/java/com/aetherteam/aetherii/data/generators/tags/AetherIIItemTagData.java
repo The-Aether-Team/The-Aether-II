@@ -133,6 +133,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.UNDERSHALE.asItem()
         );
+        this.tag(AetherIITags.Items.ALTAR_FUEL).add(
+                AetherIIItems.AMBROSIUM_SHARD.get()
+        );
         this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()
@@ -149,7 +152,9 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.SWET_GEL).add(
                 AetherIIItems.GREEN_SWET_GEL.get(),
                 AetherIIItems.BLUE_SWET_GEL.get(),
-                AetherIIItems.PURPLE_SWET_GEL.get()
+                AetherIIItems.PURPLE_SWET_GEL.get(),
+                AetherIIItems.GOLDEN_SWET_GEL.get(),
+                AetherIIItems.WHITE_SWET_GEL.get()
         );
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.ZANITE_AXE.get(),

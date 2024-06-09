@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "aether_ii:arkenium_plates"
+      "tag": "aether_ii:plates/arkenium"
     },
     "H": {
       "tag": "aether_ii:stone_crafting"
