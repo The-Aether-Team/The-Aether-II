@@ -12,6 +12,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -710,5 +712,18 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             Direction direction = state.getValue(LadderBlock.FACING);
             return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
         }, LadderBlock.WATERLOGGED);
+    }
+
+    public void bed(Block block, Block dummyBlock) {
+        ModelFile head = this.models().cubeAll(this.name(block) + "_head", this.texture(this.name(dummyBlock), "construction/"));
+        ModelFile foot = this.models().cubeAll(this.name(block) + "_foot", this.texture(this.name(dummyBlock), "construction/"));
+        this.getVariantBuilder(block).forAllStatesExcept(state -> {
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            BedPart part = state.getValue(BlockStateProperties.BED_PART);
+            return ConfiguredModel.builder()
+                    .modelFile(part == BedPart.HEAD ? head : foot)
+                    .rotationY((((int) dir.toYRot()) + 180) % 360)
+                    .build();
+        }, BedBlock.OCCUPIED);
     }
 }
