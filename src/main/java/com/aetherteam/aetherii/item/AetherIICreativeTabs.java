@@ -155,8 +155,38 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SCATTERGLASS_PANE.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.ORANGE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.YELLOW_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.LIME_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.PINK_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.GRAY_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.CYAN_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.PURPLE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BLUE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BROWN_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.GREEN_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.RED_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BLACK_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
@@ -271,6 +301,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
+                output.accept(AetherIIBlocks.SKYROOT_BED.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("equipment_and_utilities", () -> CreativeModeTab.builder()

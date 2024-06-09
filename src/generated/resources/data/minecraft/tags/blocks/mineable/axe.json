@@ -63,6 +63,7 @@
     "aether_ii:wisproot_top_planks",
     "aether_ii:wisproot_base_beam",
     "aether_ii:wisproot_top_beam",
-    "aether_ii:wisproot_beam"
+    "aether_ii:wisproot_beam",
+    "aether_ii:skyroot_bed"
   ]
 }

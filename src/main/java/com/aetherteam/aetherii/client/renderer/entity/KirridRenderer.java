@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.KirridBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.KirridModel;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
@@ -18,9 +18,9 @@ public class KirridRenderer<T extends Kirrid> extends MultiBabyModelRenderer<T, 
 
 
     public KirridRenderer(EntityRendererProvider.Context context) {
-        super(context, new KirridModel<>(context.bakeLayer(AetherModelLayers.KIRRID)), 0.5F);
-        this.defaultModel = new KirridModel<>(context.bakeLayer(AetherModelLayers.KIRRID));
-        this.babyModel = new KirridBabyModel<>(context.bakeLayer(AetherModelLayers.KIRRID_BABY));
+        super(context, new KirridModel<>(context.bakeLayer(AetherIIModelLayers.KIRRID)), 0.5F);
+        this.defaultModel = new KirridModel<>(context.bakeLayer(AetherIIModelLayers.KIRRID));
+        this.babyModel = new KirridBabyModel<>(context.bakeLayer(AetherIIModelLayers.KIRRID_BABY));
     }
 
     @Override
