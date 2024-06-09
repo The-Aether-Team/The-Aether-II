@@ -25,6 +25,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.sprite(AetherIIParticleTypes.GREATOAK_LEAVES.get(), new ResourceLocation(AetherII.MODID, "leaves"));
         this.sprite(AetherIIParticleTypes.GREATBOA_LEAVES.get(), new ResourceLocation(AetherII.MODID, "leaves"));
         this.sprite(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), new ResourceLocation(AetherII.MODID, "leaves"));
+        this.spriteSet(AetherIIParticleTypes.RAIN.get(), new ResourceLocation(AetherII.MODID, "splash"), 4, false);
         this.sprite(AetherIIParticleTypes.IRRADIATION.get(), new ResourceLocation("generic_0"));
         this.spriteSet(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), new ResourceLocation("generic"), 8, true);
         this.sprite(AetherIIParticleTypes.SLASH_ATTACK.get(), new ResourceLocation(AetherII.MODID, "slash_attack"));

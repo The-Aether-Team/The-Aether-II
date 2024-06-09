@@ -2,7 +2,9 @@ package com.aetherteam.aetherii.client.particle;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.AetherIIClient;
+import net.minecraft.client.particle.DripParticle;
 import net.minecraft.client.particle.SnowflakeParticle;
+import net.minecraft.client.particle.WaterDropParticle;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,6 +26,7 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GREATOAK_LEAVES = PARTICLES.register("greatoak_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GREATBOA_LEAVES = PARTICLES.register("greatboa_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AMBEROOT_LEAVES = PARTICLES.register("amberoot_leaves", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RAIN = PARTICLES.register("rain", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> ZEPHYR_SNOWFLAKE = PARTICLES.register("zephyr_snowflake", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SLASH_ATTACK = PARTICLES.register("slash_attack", () -> new SimpleParticleType(false));
@@ -45,10 +48,11 @@ public class AetherIIParticleTypes {
         event.registerSpriteSet(GREATOAK_LEAVES.get(), AetherLeafParticle.GreatoakFactory::new);
         event.registerSpriteSet(GREATBOA_LEAVES.get(), AetherLeafParticle.GreatboaFactory::new);
         event.registerSpriteSet(AMBEROOT_LEAVES.get(), AetherLeafParticle.AmberootFactory::new);
+        event.registerSpriteSet(RAIN.get(), WaterDropParticle.Provider::new);
+        event.registerSpriteSet(IRRADIATION.get(), IrradiationParticle.Factory::new);
         event.registerSpriteSet(SLASH_ATTACK.get(), DamageTypeParticle.Provider::new);
         event.registerSpriteSet(IMPACT_ATTACK.get(), DamageTypeParticle.Provider::new);
         event.registerSpriteSet(PIERCE_ATTACK.get(), DamageTypeParticle.Provider::new);
-        event.registerSpriteSet(IRRADIATION.get(), IrradiationParticle.Factory::new);
         event.registerSpriteSet(ZEPHYR_SNOWFLAKE.get(), SnowflakeParticle.Provider::new);
     }
 }
