@@ -26,6 +26,7 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GREATOAK_LEAVES = PARTICLES.register("greatoak_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GREATBOA_LEAVES = PARTICLES.register("greatboa_leaves", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AMBEROOT_LEAVES = PARTICLES.register("amberoot_leaves", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DRIPPING_WATER = PARTICLES.register("dripping_water", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RAIN = PARTICLES.register("rain", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> ZEPHYR_SNOWFLAKE = PARTICLES.register("zephyr_snowflake", () -> new SimpleParticleType(false));
@@ -48,6 +49,7 @@ public class AetherIIParticleTypes {
         event.registerSpriteSet(GREATOAK_LEAVES.get(), AetherLeafParticle.GreatoakFactory::new);
         event.registerSpriteSet(GREATBOA_LEAVES.get(), AetherLeafParticle.GreatboaFactory::new);
         event.registerSpriteSet(AMBEROOT_LEAVES.get(), AetherLeafParticle.AmberootFactory::new);
+        event.registerSprite(DRIPPING_WATER.get(), DripParticle::createWaterHangParticle);
         event.registerSpriteSet(RAIN.get(), WaterDropParticle.Provider::new);
         event.registerSpriteSet(IRRADIATION.get(), IrradiationParticle.Factory::new);
         event.registerSpriteSet(SLASH_ATTACK.get(), DamageTypeParticle.Provider::new);

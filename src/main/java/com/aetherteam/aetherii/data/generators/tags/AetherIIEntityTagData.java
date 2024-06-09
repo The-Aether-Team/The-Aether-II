@@ -33,7 +33,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
 
         // Vanilla
-        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.ARCTIC_SNOWBALL.get());
+        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), AetherIIEntityTypes.SCATTERGLASS_BOLT.get());
         this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(AetherIIEntityTypes.KIRRID.get()).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get()).add(AetherIIEntityTypes.ZEPHYR.get()).add(AetherIIEntityTypes.FLYING_COW.get());
     }
 }

@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-08T22:08:28.4108547	Recipes
+// 1.20.4	2024-06-09T13:44:08.510794	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 79334dab93a39b3d5d6416736b3ab4954edc92b8 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks_from_artisanry.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
@@ -176,6 +176,7 @@ c17270498e6d1e360ed1686a6b3bb9bf00ba99fe data/aether_ii/advancements/recipes/mis
 e0d4ba8bc159bb90101880b1ab18ff9ebe1a41bd data/aether_ii/advancements/recipes/misc/gravitite_plate.json
 c4eed3ecbb16c30730b34b12fc576d4979a56094 data/aether_ii/advancements/recipes/misc/gravitite_plate_from_gravitite_block.json
 a03e28bd14d3d3a43385c7e8a8de48673904bd5b data/aether_ii/advancements/recipes/misc/quicksoil_glass.json
+5d1951aeed22f62b61b098e7b25abea3486dcefc data/aether_ii/advancements/recipes/misc/scatterglass_shard.json
 7c8052a69b5dae5f8c4ea813b174943a10cc6ce0 data/aether_ii/advancements/recipes/misc/skyroot_twig.json
 ed664abb138f0fbaa010773468f8f613a6bf99e4 data/aether_ii/advancements/recipes/misc/zanite_gemstone_from_blasting.json
 ee5d5b0d04545eae8aea5aeede26fff9e4438af6 data/aether_ii/advancements/recipes/misc/zanite_gemstone_from_smelting.json
@@ -363,6 +364,7 @@ d2b11e9910ed35f89ac97e53f6b63833e386d5db data/aether_ii/recipes/quicksoil_glass_
 5a7811ff7627b18ead3dc189b27111fb03f96027 data/aether_ii/recipes/red_cloudwool_carpet.json
 58f6cacd61c479c301ae6fc761cf7b14a51a5636 data/aether_ii/recipes/scatterglass.json
 c2d7b6bc355c183cfdbf015635cf1d3408f80a0e data/aether_ii/recipes/scatterglass_pane.json
+71ade03cb2aefad135056267d3ec77868cd00974 data/aether_ii/recipes/scatterglass_shard.json
 67d82fb9538e6bd5a55c79814c128e82a6db6971 data/aether_ii/recipes/skybirch_leaf_pile.json
 4a9e33dcd214a22a7d54d2982bef725370a4dec8 data/aether_ii/recipes/skypine_leaf_pile.json
 e433adca2f27435925ddd4da117bca16189892d6 data/aether_ii/recipes/skyplane_leaf_pile.json
