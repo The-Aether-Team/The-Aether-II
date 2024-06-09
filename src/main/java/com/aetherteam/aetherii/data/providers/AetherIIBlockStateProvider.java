@@ -271,29 +271,10 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void leaves(Block block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
+            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
             ModelFile model;
-            if (state.getValue(AetherLeavesBlock.SNOWY)) {
-                model = this.models().withExistingParent(this.name(block) + "_snowy", this.mcLoc("block/cube_all"))
-                        .texture("all", this.texture(this.name(block), "natural/"))
-                        .texture("snow", this.texture("arctic_snow_overlay", "natural/"))
-                        .element()
-                        .from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
-                        .face(Direction.DOWN).cullface(Direction.DOWN).texture("#all").end()
-                        .face(Direction.UP).cullface(Direction.UP).texture("#all").end()
-                        .face(Direction.NORTH).cullface(Direction.NORTH).texture("#all").end()
-                        .face(Direction.SOUTH).cullface(Direction.SOUTH).texture("#all").end()
-                        .face(Direction.WEST).cullface(Direction.WEST).texture("#all").end()
-                        .face(Direction.EAST).cullface(Direction.EAST).texture("#all").end()
-                        .end()
-                        .element()
-                        .from(-0.001F, -0.001F, -0.001F).to(16.001F, 16.001F, 16.001F)
-                        .face(Direction.DOWN).cullface(Direction.DOWN).texture("#snow").end()
-                        .face(Direction.UP).cullface(Direction.UP).texture("#snow").end()
-                        .face(Direction.NORTH).cullface(Direction.NORTH).texture("#snow").end()
-                        .face(Direction.SOUTH).cullface(Direction.SOUTH).texture("#snow").end()
-                        .face(Direction.WEST).cullface(Direction.WEST).texture("#snow").end()
-                        .face(Direction.EAST).cullface(Direction.EAST).texture("#snow").end()
-                        .end();
+            if (snowy) {
+                model = this.models().cubeColumnHorizontal("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/"), this.texture(this.name(block), "natural/"));
             } else {
                 model = this.models().cubeAll(this.name(block), this.texture(this.name(block), "natural/"));
             }
@@ -302,12 +283,20 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void shortGrass(Block block) {
-        ModelFile grass = this.triTintedCross(this.name(block))
-                .texture("particle", this.texture(this.name(block), "natural/"))
-                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
-                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
-                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
-        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
+            ModelFile grass;
+            if (snowy) {
+                grass = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(new ResourceLocation("cutout"));
+            } else {
+                grass = this.triTintedCross(this.name(block))
+                        .texture("particle", this.texture(this.name(block), "natural/"))
+                        .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                        .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
+                        .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
+            }
+            return ConfiguredModel.builder().modelFile(grass).build();
+        });
     }
 
     public ModelBuilder<BlockModelBuilder> triTintedCross(String name) {
@@ -356,6 +345,15 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .face(Direction.WEST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_3").tintindex(2).end()
                 .face(Direction.EAST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_3").tintindex(2).end()
                 .end();
+    }
+
+    public void frostedCross(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
+            String prefix = snowy ? "frosted_" : "";
+            ModelFile grass = this.models().cross(prefix + this.name(block), this.texture(prefix + this.name(block), "natural/")).renderType(new ResourceLocation("cutout"));
+            return ConfiguredModel.builder().modelFile(grass).build();
+        });
     }
 
     public void bush(Block block) {

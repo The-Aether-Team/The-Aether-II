@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsBiomeBuilders;
 import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsBiomeSourceBuilders;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;

@@ -1,10 +1,8 @@
 package com.aetherteam.aetherii.world.tree.foliage;
 
-import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;

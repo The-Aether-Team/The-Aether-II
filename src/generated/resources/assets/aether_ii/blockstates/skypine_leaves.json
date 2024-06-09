@@ -7,10 +7,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=1,persistent=false,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=1,persistent=false,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=1,persistent=true,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -19,10 +19,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=1,persistent=true,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=1,persistent=true,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=2,persistent=false,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -31,10 +31,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=2,persistent=false,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=2,persistent=false,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=2,persistent=true,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -43,10 +43,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=2,persistent=true,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=2,persistent=true,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=3,persistent=false,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -55,10 +55,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=3,persistent=false,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=3,persistent=false,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=3,persistent=true,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -67,10 +67,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=3,persistent=true,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=3,persistent=true,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=4,persistent=false,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -79,10 +79,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=4,persistent=false,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=4,persistent=false,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=4,persistent=true,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -91,10 +91,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=4,persistent=true,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=4,persistent=true,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=5,persistent=false,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -103,10 +103,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=5,persistent=false,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=5,persistent=false,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=5,persistent=true,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -115,10 +115,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=5,persistent=true,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=5,persistent=true,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=6,persistent=false,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -127,10 +127,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=6,persistent=false,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=6,persistent=false,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=6,persistent=true,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -139,10 +139,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=6,persistent=true,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=6,persistent=true,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=7,persistent=false,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -151,10 +151,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=7,persistent=false,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=7,persistent=false,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=7,persistent=true,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/skypine_leaves"
@@ -163,10 +163,10 @@
       "model": "aether_ii:block/skypine_leaves"
     },
     "distance=7,persistent=true,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     },
     "distance=7,persistent=true,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/skypine_leaves_snowy"
+      "model": "aether_ii:block/frosted_skypine_leaves"
     }
   }
 }
