@@ -48,12 +48,38 @@ public class AetherIIConfig {
         }
     }
 
+    public static class Client {
+        public final ConfigValue<Integer> music_backup_min_delay;
+        public final ConfigValue<Integer> music_backup_max_delay;
+        public final ConfigValue<Boolean> disable_music_manager;
+
+        public Client(ModConfigSpec.Builder builder) {
+            builder.push("Audio");
+            music_backup_min_delay = builder
+                    .comment("Sets the minimum delay for the Aether's music manager to use if needing to reset the song delay outside the Aether")
+                    .translation("config.aether.client.audio.music_backup_min_delay")
+                    .define("Set backup minimum music delay", 12000);
+            music_backup_max_delay = builder
+                    .comment("Sets the maximum delay for the Aether's music manager to use if needing to reset the song delay outside the Aether")
+                    .translation("config.aether.client.audio.music_backup_max_delay")
+                    .define("Set backup maximum music delay", 24000);
+            disable_music_manager = builder
+                    .comment("Disables the Aether's internal music manager, if true, this overrides all other audio configs")
+                    .translation("config.aether.client.audio.disable_music_manager")
+                    .define("Disables Aether music manager", false);
+            builder.pop();
+
+        }
+    }
+
     public static final ModConfigSpec SERVER_SPEC;
     public static final Server SERVER;
 
     public static final ModConfigSpec COMMON_SPEC;
     public static final Common COMMON;
 
+    public static final ModConfigSpec CLIENT_SPEC;
+    public static final Client CLIENT;
 
     static {
         final Pair<Server, ModConfigSpec> serverSpecPair = new ModConfigSpec.Builder().configure(Server::new);
@@ -63,5 +89,9 @@ public class AetherIIConfig {
         final Pair<Common, ModConfigSpec> commonSpecPair = new ModConfigSpec.Builder().configure(Common::new);
         COMMON_SPEC = commonSpecPair.getRight();
         COMMON = commonSpecPair.getLeft();
+
+        final Pair<Client, ModConfigSpec> clientSpecPair = new ModConfigSpec.Builder().configure(Client::new);
+        CLIENT_SPEC = clientSpecPair.getRight();
+        CLIENT = clientSpecPair.getLeft();
     }
 }

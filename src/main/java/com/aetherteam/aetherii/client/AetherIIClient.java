@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.client.event.listeners.AerbunnyMountClientListners;
+import com.aetherteam.aetherii.client.event.listeners.AudioListener;
 import com.aetherteam.aetherii.client.event.listeners.DimensionRenderEffectListeners;
 import com.aetherteam.aetherii.client.gui.screen.inventory.AltarScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArtisansBenchScreen;
@@ -34,6 +35,7 @@ public class AetherIIClient {
 
         AerbunnyMountClientListners.listen(bus);
         DimensionRenderEffectListeners.listen(bus);
+        AudioListener.listen(bus);
 
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
         neoBus.addListener(AetherIIColorResolvers::registerItemColor);
