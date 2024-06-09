@@ -13,25 +13,25 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 
 import java.util.function.Predicate;
 
 public class AetherCrossbowItem extends CrossbowItem {
     public static final Predicate<ItemStack> BOLT_ONLY = stack -> stack.is(AetherIIItems.SCATTERGLASS_BOLT);
+    private final Tier tier;
+    private final int chargeTime;
     private boolean startSoundPlayed = false;
     private boolean midLoadSoundPlayed = false;
-    private final int chargeTime;
 
-    public AetherCrossbowItem(Properties properties) {
-        this(25, properties);
+    public AetherCrossbowItem(Tier tier, Properties properties) {
+        this(tier, 25, properties);
     }
 
-    public AetherCrossbowItem(int chargeTime, Properties properties) {
-        super(properties);
+    public AetherCrossbowItem(Tier tier, int chargeTime, Properties properties) {
+        super(properties.defaultDurability(tier.getUses()));
+        this.tier = tier;
         this.chargeTime = chargeTime;
     }
 
@@ -125,7 +125,7 @@ public class AetherCrossbowItem extends CrossbowItem {
         if (!level.isClientSide()) {
             SoundEvent startSound = this.getStartSound();
             SoundEvent loadingSound = SoundEvents.CROSSBOW_LOADING_MIDDLE;
-            float f = (float) (stack.getUseDuration() - count) / (float) getChargeDuration(stack);
+            float f = (float) (stack.getUseDuration() - count) / (float) getCrossbowChargeDuration(stack);
             if (f < 0.2F) {
                 this.startSoundPlayed = false;
                 this.midLoadSoundPlayed = false;
@@ -139,6 +139,10 @@ public class AetherCrossbowItem extends CrossbowItem {
                 level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), loadingSound, SoundSource.PLAYERS, 0.5F, 1.0F);
             }
         }
+    }
+
+    public static int getCrossbowChargeDuration(ItemStack crossbowStack) {
+        return ((AetherCrossbowItem) crossbowStack.getItem()).chargeTime;
     }
 
     public SoundEvent getStartSound() {
@@ -158,5 +162,19 @@ public class AetherCrossbowItem extends CrossbowItem {
     @Override
     public Predicate<ItemStack> getAllSupportedProjectiles() {
         return BOLT_ONLY;
+    }
+
+    public Tier getTier() {
+        return this.tier;
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return this.tier.getEnchantmentValue();
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repairItem) {
+        return this.tier.getRepairIngredient().test(repairItem) || super.isValidRepairItem(stack, repairItem);
     }
 }
