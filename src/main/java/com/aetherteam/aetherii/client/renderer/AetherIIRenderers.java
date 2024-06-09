@@ -5,10 +5,12 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.block.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.FastModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +27,9 @@ public class AetherIIRenderers {
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         // Blocks
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_CHEST.get(), SkyrootChestRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_BED.get(), SkyrootBedRenderer::new);
 
+        // Entities
         // Passive
         event.registerEntityRenderer(AetherIIEntityTypes.AERBUNNY.get(), AerbunnyRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.PHYG.get(), PhygRenderer::new);
@@ -44,18 +48,23 @@ public class AetherIIRenderers {
     }
 
     public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        // Blocks
+        event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_FOOT, BedRenderer::createFootLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, BedRenderer::createHeadLayer);
+
+        // Entities
         // Passive
-        event.registerLayerDefinition(AetherModelLayers.AERBUNNY, AerbunnyModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.AERBUNNY_COLLAR, AerbunnyModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.PHYG, PhygModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.KIRRID, KirridModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.AERBUNNY, AerbunnyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.AERBUNNY_COLLAR, AerbunnyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.PHYG, PhygModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.KIRRID, KirridModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
 
         // Hostile
-        event.registerLayerDefinition(AetherModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);
-        event.registerLayerDefinition(AetherModelLayers.ZEPHYR_TRANSPARENCY, ZephyrModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ZEPHYR_TRANSPARENCY, ZephyrModel::createBodyLayer);
     }
 
     public static void bakeModels(ModelEvent.ModifyBakingResult event) {

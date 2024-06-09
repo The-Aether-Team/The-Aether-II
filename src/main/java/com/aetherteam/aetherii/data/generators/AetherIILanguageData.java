@@ -6,12 +6,10 @@ import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
-
-import static com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes.ARTISANS_BENCH;
-import static com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes.HOLYSTONE_FURNACE;
 
 public class AetherIILanguageData extends AetherIILanguageProvider {
     public AetherIILanguageData(PackOutput output) {
@@ -306,10 +304,40 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");
         this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL, "White Cloudwool");
+        this.addBlock(AetherIIBlocks.ORANGE_CLOUDWOOL, "Orange Cloudwool");
+        this.addBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL, "Magenta Cloudwool");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL, "Light Blue Cloudwool");
+        this.addBlock(AetherIIBlocks.YELLOW_CLOUDWOOL, "Yellow Cloudwool");
+        this.addBlock(AetherIIBlocks.LIME_CLOUDWOOL, "Lime Cloudwool");
+        this.addBlock(AetherIIBlocks.PINK_CLOUDWOOL, "Pink Cloudwool");
+        this.addBlock(AetherIIBlocks.GRAY_CLOUDWOOL, "Gray Cloudwool");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL, "Light Gray Cloudwool");
+        this.addBlock(AetherIIBlocks.CYAN_CLOUDWOOL, "Cyan Cloudwool");
+        this.addBlock(AetherIIBlocks.PURPLE_CLOUDWOOL, "Purple Cloudwool");
+        this.addBlock(AetherIIBlocks.BLUE_CLOUDWOOL, "Blue Cloudwool");
+        this.addBlock(AetherIIBlocks.BROWN_CLOUDWOOL, "Brown Cloudwool");
+        this.addBlock(AetherIIBlocks.GREEN_CLOUDWOOL, "Green Cloudwool");
+        this.addBlock(AetherIIBlocks.RED_CLOUDWOOL, "Red Cloudwool");
+        this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL, "Black Cloudwool");
 
         // Carpet
         this.addBlock(AetherIIBlocks.CLOUDWOOL_CARPET, "Cloudwool Carpet");
         this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET, "White Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET, "Orange Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET, "Magenta Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET, "Light Blue Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET, "Yellow Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.LIME_CLOUDWOOL_CARPET, "Lime Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.PINK_CLOUDWOOL_CARPET, "Pink Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET, "Gray Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET, "Light Gray Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET, "Cyan Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET, "Purple Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET, "Blue Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET, "Brown Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET, "Green Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET, "Red Cloudwool Carpet");
+        this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, "Black Cloudwool Carpet");
 
         // Mineral Blocks
         this.addBlock(AetherIIBlocks.AMBROSIUM_BLOCK, "Block of Ambrosium");
@@ -321,9 +349,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
         this.addBlock(AetherIIBlocks.SKYROOT_CRAFTING_TABLE, "Skyroot Crafting Table");
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
+        this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
 
         // Bookshelves
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
@@ -384,9 +414,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
-        this.addItem(AetherIIItems.RAW_ARKENIUM, "Raw Arkenium");
+        this.addItem(AetherIIItems.INERT_ARKENIUM, "Inert Arkenium");
         this.addItem(AetherIIItems.ARKENIUM_PLATES, "Arkenium Plates");
-        this.addItem(AetherIIItems.RAW_GRAVITITE, "Raw Gravitite");
+        this.addItem(AetherIIItems.ARKENIUM_STRIP, "Arkenium Strip");
+        this.addItem(AetherIIItems.INERT_GRAVITITE, "Inert Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
@@ -396,16 +427,20 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GREEN_SWET_GEL, "Green Swet Gel");
         this.addItem(AetherIIItems.BLUE_SWET_GEL, "Blue Swet Gel");
         this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
-        this.addItem(AetherIIItems.ARKENIUM_STRIP, "Arkenium Strip");
+        this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
+        this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
-        this.addItem(AetherIIItems.ENCHANTED_BERRY, "Enchanted Berry");
+        this.addItem(AetherIIItems.ENCHANTED_BLUEBERRY, "Enchanted Blueberry");
         this.addItem(AetherIIItems.ORANGE, "Orange");
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
+        this.addItem(AetherIIItems.GREEN_SWET_JELLY, "Green Swet Jelly");
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
+        this.addItem(AetherIIItems.PURPLE_SWET_JELLY, "Purple Swet Jelly");
         this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
+        this.addItem(AetherIIItems.WHITE_SWET_JELLY, "White Swet Jelly");
         this.addItem(AetherIIItems.BURRUKAI_RIBS, "Burrukai Ribs");
         this.addItem(AetherIIItems.BURRUKAI_RIB_CUT, "Burrukai Rib Cut");
         this.addItem(AetherIIItems.KIRRID_CUTLET, "Kirrid Cutlet");
@@ -496,8 +531,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Containers
-        this.addContainerType(HOLYSTONE_FURNACE, "Holystone Furnace");
-        this.addContainerType(ARTISANS_BENCH, "Artisan's Bench");
+        this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
+        this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
+        this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
+
+
+        // GUIs
+        this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
 
 
         // Subtitles

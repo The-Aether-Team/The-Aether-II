@@ -7,11 +7,9 @@ import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.miscellaneous.SkyplaneLeavesBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.portal.AetherPortalBlock;
-import com.aetherteam.aetherii.block.utility.ArtisansBenchBlock;
-import com.aetherteam.aetherii.block.utility.HolystoneFurnaceBlock;
-import com.aetherteam.aetherii.block.utility.SkyrootChestBlock;
-import com.aetherteam.aetherii.block.utility.SkyrootCraftingTableBlock;
+import com.aetherteam.aetherii.block.utility.*;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
+import com.aetherteam.aetherii.blockentity.SkyrootBedBlockEntity;
 import com.aetherteam.aetherii.blockentity.SkyrootChestBlockEntity;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -26,6 +24,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.level.block.*;
@@ -345,10 +344,40 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
     public static final DeferredBlock<Block> WHITE_CLOUDWOOL = register("white_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
+    public static final DeferredBlock<Block> ORANGE_CLOUDWOOL = register("orange_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.ORANGE_WOOL)));
+    public static final DeferredBlock<Block> MAGENTA_CLOUDWOOL = register("magenta_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.MAGENTA_WOOL)));
+    public static final DeferredBlock<Block> LIGHT_BLUE_CLOUDWOOL = register("light_blue_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_WOOL)));
+    public static final DeferredBlock<Block> YELLOW_CLOUDWOOL = register("yellow_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.YELLOW_WOOL)));
+    public static final DeferredBlock<Block> LIME_CLOUDWOOL = register("lime_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.LIME_WOOL)));
+    public static final DeferredBlock<Block> PINK_CLOUDWOOL = register("pink_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.PINK_WOOL)));
+    public static final DeferredBlock<Block> GRAY_CLOUDWOOL = register("gray_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.GRAY_WOOL)));
+    public static final DeferredBlock<Block> LIGHT_GRAY_CLOUDWOOL = register("light_gray_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_WOOL)));
+    public static final DeferredBlock<Block> CYAN_CLOUDWOOL = register("cyan_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.CYAN_WOOL)));
+    public static final DeferredBlock<Block> PURPLE_CLOUDWOOL = register("purple_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.PURPLE_WOOL)));
+    public static final DeferredBlock<Block> BLUE_CLOUDWOOL = register("blue_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.BLUE_WOOL)));
+    public static final DeferredBlock<Block> BROWN_CLOUDWOOL = register("brown_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.BROWN_WOOL)));
+    public static final DeferredBlock<Block> GREEN_CLOUDWOOL = register("green_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.GREEN_WOOL)));
+    public static final DeferredBlock<Block> RED_CLOUDWOOL = register("red_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.RED_WOOL)));
+    public static final DeferredBlock<Block> BLACK_CLOUDWOOL = register("black_cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.BLACK_WOOL)));
 
     // Carpet
     public static final DeferredBlock<CarpetBlock> CLOUDWOOL_CARPET = register("cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.WHITE_CARPET)));
     public static final DeferredBlock<CarpetBlock> WHITE_CLOUDWOOL_CARPET = register("white_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.WHITE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> ORANGE_CLOUDWOOL_CARPET = register("orange_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.ORANGE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> MAGENTA_CLOUDWOOL_CARPET = register("magenta_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.MAGENTA_CARPET)));
+    public static final DeferredBlock<CarpetBlock> LIGHT_BLUE_CLOUDWOOL_CARPET = register("light_blue_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> YELLOW_CLOUDWOOL_CARPET = register("yellow_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.YELLOW_CARPET)));
+    public static final DeferredBlock<CarpetBlock> LIME_CLOUDWOOL_CARPET = register("lime_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIME_CARPET)));
+    public static final DeferredBlock<CarpetBlock> PINK_CLOUDWOOL_CARPET = register("pink_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.PINK_CARPET)));
+    public static final DeferredBlock<CarpetBlock> GRAY_CLOUDWOOL_CARPET = register("gray_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.GRAY_CARPET)));
+    public static final DeferredBlock<CarpetBlock> LIGHT_GRAY_CLOUDWOOL_CARPET = register("light_gray_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_CARPET)));
+    public static final DeferredBlock<CarpetBlock> CYAN_CLOUDWOOL_CARPET = register("cyan_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.CYAN_CARPET)));
+    public static final DeferredBlock<CarpetBlock> PURPLE_CLOUDWOOL_CARPET = register("purple_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.PURPLE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> BLUE_CLOUDWOOL_CARPET = register("blue_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BLUE_CARPET)));
+    public static final DeferredBlock<CarpetBlock> BROWN_CLOUDWOOL_CARPET = register("brown_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BROWN_CARPET)));
+    public static final DeferredBlock<CarpetBlock> GREEN_CLOUDWOOL_CARPET = register("green_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.GREEN_CARPET)));
+    public static final DeferredBlock<CarpetBlock> RED_CLOUDWOOL_CARPET = register("red_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.RED_CARPET)));
+    public static final DeferredBlock<CarpetBlock> BLACK_CLOUDWOOL_CARPET = register("black_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BLACK_CARPET)));
 
     // Mineral Blocks
     public static final DeferredBlock<Block> AMBROSIUM_BLOCK = register("ambrosium_block", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)));
@@ -361,9 +390,11 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> AMBROSIUM_WALL_TORCH = BLOCKS.register("ambrosium_wall_torch", () -> new WallTorchBlock(ParticleTypes.SMOKE, Block.Properties.ofFullCopy(Blocks.WALL_TORCH)));
     public static final DeferredBlock<Block> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", () -> new SkyrootCraftingTableBlock(Block.Properties.ofFullCopy(Blocks.CRAFTING_TABLE)));
     public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", () -> new HolystoneFurnaceBlock(Block.Properties.ofFullCopy(Blocks.FURNACE)));
-    public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", () -> new ArtisansBenchBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER)));
+    public static final DeferredBlock<Block> ALTAR = register("altar", () -> new AltarBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion()));
+    public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", () -> new ArtisansBenchBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion()));
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", () -> new SkyrootChestBlock(Block.Properties.ofFullCopy(Blocks.CHEST), AetherIIBlockEntityTypes.SKYROOT_CHEST::get));
     public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion()));
+    public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", () -> new SkyrootBedBlock(DyeColor.WHITE, Block.Properties.ofFullCopy(Blocks.WHITE_BED)));
 
     // Bookshelves
     public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", () -> new BookshelfBlock(Block.Properties.ofFullCopy(Blocks.BOOKSHELF)));
@@ -496,6 +527,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
                 return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN);
             } else if (block == SKYROOT_CHEST) {
                 return new EntityBlockItem(block.get(), SkyrootChestBlockEntity::new, new Item.Properties());
+            } else if (block == SKYROOT_BED) {
+                return new EntityBlockItem(block.get(), SkyrootBedBlockEntity::new, new Item.Properties().stacksTo(1));
             } else {
                 return new BlockItem(block.get(), new Item.Properties());
             }

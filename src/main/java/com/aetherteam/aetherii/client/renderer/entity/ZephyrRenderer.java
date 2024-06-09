@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.layers.ZephyrTransparencyLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.ZephyrModel;
 import com.aetherteam.aetherii.entity.monster.Zephyr;
@@ -15,8 +15,8 @@ public class ZephyrRenderer extends MobRenderer<Zephyr, ZephyrModel> {
     private static final ResourceLocation ZEPHYR_TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/zephyr/zephyr.png");
 
     public ZephyrRenderer(EntityRendererProvider.Context context) {
-        super(context, new ZephyrModel(context.bakeLayer(AetherModelLayers.ZEPHYR)), 0.5F);
-        this.addLayer(new ZephyrTransparencyLayer(this, new ZephyrModel(context.getModelSet().bakeLayer(AetherModelLayers.ZEPHYR_TRANSPARENCY))));
+        super(context, new ZephyrModel(context.bakeLayer(AetherIIModelLayers.ZEPHYR)), 0.5F);
+        this.addLayer(new ZephyrTransparencyLayer(this, new ZephyrModel(context.getModelSet().bakeLayer(AetherIIModelLayers.ZEPHYR_TRANSPARENCY))));
     }
 
     /**
