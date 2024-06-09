@@ -27,7 +27,7 @@
     "fluid_level_spread": 0.0,
     "initial_density_without_jaggedness": 0.0,
     "lava": 0.0,
-    "ridges": "aether_ii:highlands/lakes/island_checker",
+    "ridges": "aether_ii:highlands/lakes/final",
     "temperature": "aether_ii:highlands/temperature",
     "vegetation": {
       "type": "minecraft:shifted_noise",

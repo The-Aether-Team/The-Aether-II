@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.data.resources.builders.AetherIIDensityFunctionBuilders;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -34,9 +33,9 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         ));
 
         context.register(FACTOR, buildFactor(function));
+        context.register(ISLAND_DENSITY, buildIslandDensity(function));
 
-        context.register(TERRAIN_SHAPER, makeTerrainShaperFinal(function));
-
+        context.register(TERRAIN_SHAPER, finalizeTerrainShaper(function));
         context.register(FINAL_DENSITY, buildFinalDensity(function));
 
         context.register(CLOUDBED_NOISE,
