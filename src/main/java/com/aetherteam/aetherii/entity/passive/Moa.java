@@ -195,12 +195,12 @@ public class Moa extends MountableAnimal {
             if (tag.contains("IsBaby")) {
                 this.setBaby(tag.getBoolean("IsBaby"));
             }
-            /*if (tag.contains("MoaType")) {
+            if (tag.contains("MoaType")) {
                 ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), tag.getString("MoaType"));
                 if (moaTypeKey != null) {
                     this.setMoaTypeByKey(moaTypeKey);
                 }
-            }*/
+            }
             if (tag.contains("Hungry")) {
                 this.setHungry(tag.getBoolean("Hungry"));
             }
@@ -211,7 +211,7 @@ public class Moa extends MountableAnimal {
         if (spawnData == null) { // Disallow baby Moas from spawning in spawn groups.
             spawnData = new AgeableMob.AgeableMobGroupData(false);
         }
-        /*if (this.getMoaType() == null) { // A random Moa Type to set during natural spawning.
+        if (this.getMoaType() == null) { // A random Moa Type to set during natural spawning.
             MoaType moaType = AetherIIMoaTypes.getWeightedChance(level.registryAccess(), this.getRandom());
             ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType);
             if (moaTypeKey != null) {
@@ -220,7 +220,7 @@ public class Moa extends MountableAnimal {
         }
         if (this.getMoaType() == null) {
             this.setMoaTypeByKey(AetherIIMoaTypes.BLUE);
-        }*/
+        }
         if (reason == MobSpawnType.STRUCTURE) {
             //set moa home when spawn in nest
             MoaAi.initMoaHomeMemories(this, this.random);
