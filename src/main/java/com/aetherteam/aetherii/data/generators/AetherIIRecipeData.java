@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -490,6 +489,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.SKYROOT_TWIG)
                 .unlockedBy("has_twig", has(AetherIIBlocks.SKYROOT_TWIG))
                 .save(consumer, "skyroot_stick_from_twig");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_SHARD.get(), 4)
+                .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
+                .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
+                .save(consumer);
         this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).save(consumer, this.name("ambrosium_shard_from_smelting"));
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).save(consumer, this.name("ambrosium_shard_from_blasting"));
         this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.7F).save(consumer, this.name("zanite_gemstone_from_smelting"));

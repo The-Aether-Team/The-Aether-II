@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.recipe.recipes.item;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.recipe.builder.book.AltarBookCategory;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
+import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
@@ -12,7 +12,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.crafting.CraftingHelper;
 
