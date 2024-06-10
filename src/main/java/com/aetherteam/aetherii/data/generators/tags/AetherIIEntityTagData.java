@@ -21,6 +21,11 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         // Aether II
+        this.tag(AetherIITags.Entities.KIRRID).add(
+                AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(),
+                AetherIIEntityTypes.MAGNETIC_KIRRID.get(),
+                AetherIIEntityTypes.ARCTIC_KIRRID.get()
+        );
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(
                 EntityType.POLAR_BEAR
         );

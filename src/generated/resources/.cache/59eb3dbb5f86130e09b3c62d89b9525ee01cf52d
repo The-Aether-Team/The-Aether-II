@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // 1.20.4	2024-06-10T00:35:16.2597864	Loot Tables
+=======
+// 1.20.4	2024-06-09T20:16:33.5791251	Loot Tables
+>>>>>>> 1.20.4-develop
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -276,10 +280,15 @@ c1c73a1531c704f028fba00bf8cb22312a956e8d data/aether_ii/loot_tables/blocks/yello
 e5756cffe597096161bf2a7f3af7adba68222a90 data/aether_ii/loot_tables/blocks/zanite_block.json
 14295de5d712c2eb60971e1b93c5c7e75cefa3e7 data/aether_ii/loot_tables/blocks/zanite_ore.json
 89e8139cb32d67fc9c34fc0b29eaf2b249fcfe99 data/aether_ii/loot_tables/entities/aerbunny.json
-87e4e6dfb52885486bfb35920906bc37cddf22ef data/aether_ii/loot_tables/entities/flying_cow.json
-1c88f0964c45bd644d43127c7a908b0443789dcb data/aether_ii/loot_tables/entities/kirrid.json
-993161c1be68b71a45fb784a8334df800a044c63 data/aether_ii/loot_tables/entities/phyg.json
-c68152af2bdadecee1174251926a64a36cfac184 data/aether_ii/loot_tables/entities/sheepuff.json
+625023a93f2a1225aa4323aeb89f6eb06ccb629a data/aether_ii/loot_tables/entities/arctic_kirrid.json
+252a19da26a1a189b40c349ac4f1b19a5347c672 data/aether_ii/loot_tables/entities/flying_cow.json
+25297e0d28a423947bdb0bc8d5b0852df4f7b6aa data/aether_ii/loot_tables/entities/highfields_kirrid.json
+0b7c616649f0b7f9fff53694c2744b90656e9a56 data/aether_ii/loot_tables/entities/kirrid/arctic_wool.json
+7e2495d242a9a36bc57c900978ad5006c6f44201 data/aether_ii/loot_tables/entities/kirrid/highfields_wool.json
+bbd6b8f553c91999652a67fa16c92b3d2b07d994 data/aether_ii/loot_tables/entities/kirrid/magnetic_wool.json
+227c582f4900f8979f57026a9bad2712a7d76552 data/aether_ii/loot_tables/entities/magnetic_kirrid.json
+7208f2b2e11fbcd4caa2d28c013cd0caf0e322af data/aether_ii/loot_tables/entities/phyg.json
+84c7758063ec2c2499b30ba61f4dc512667f85f8 data/aether_ii/loot_tables/entities/sheepuff.json
 fee70c3004d2d3353160f15036dc79ec928881b7 data/aether_ii/loot_tables/entities/sheepuff/black.json
 a60512caeb6810e4be53e28971c5a1faf7316277 data/aether_ii/loot_tables/entities/sheepuff/blue.json
 c8bb93a5a138429e69bfe3924ffcde8c74c2a2a6 data/aether_ii/loot_tables/entities/sheepuff/brown.json
@@ -296,7 +305,6 @@ facc11497f2b4f9ed5925abc888c422ecaa7add6 data/aether_ii/loot_tables/entities/she
 8c0fc9fd91db3a42a3afa4181102feadcf10d1b0 data/aether_ii/loot_tables/entities/sheepuff/red.json
 b9366c6982936af1049432f23c2a9b3341dafc8c data/aether_ii/loot_tables/entities/sheepuff/white.json
 158664b8331349448da09a402d43943ec35e21cb data/aether_ii/loot_tables/entities/sheepuff/yellow.json
-f08c9660a5de3a50d88d664eef2e6e16d0b4d0d7 data/aether_ii/loot_tables/entities/sheep/kirrid.json
 1951effb76ae288f8a4a8bb5cacf7ed79091bac2 data/aether_ii/loot_tables/entities/zephyr.json
 7994cd390042f47a8ac45b1c2707a4bd578dfc9c data/aether_ii/loot_tables/stripping/strip_amberoot.json
 aac599c9f45eabc80364d4150b9c5cdbb388ff01 data/aether_ii/loot_tables/stripping/strip_mossy_wisproot.json

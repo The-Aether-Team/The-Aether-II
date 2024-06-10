@@ -38,6 +38,7 @@
     [],
     [
       "aether_ii:moa_nest",
+      "aether_ii:greatboa_trees",
       "aether_ii:short_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:long_grass_patch"
@@ -74,7 +75,7 @@
     "axolotls": [],
     "creature": [
       {
-        "type": "aether_ii:kirrid",
+        "type": "aether_ii:arctic_kirrid",
         "maxCount": 3,
         "minCount": 1,
         "weight": 10

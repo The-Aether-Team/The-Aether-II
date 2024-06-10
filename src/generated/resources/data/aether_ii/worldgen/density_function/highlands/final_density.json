@@ -24,13 +24,20 @@
                     "argument2": "aether_ii:highlands/base_3d_noise"
                   }
                 },
-                "argument2": "aether_ii:highlands/top_slide"
+                "argument2": {
+                  "type": "minecraft:range_choice",
+                  "input": "aether_ii:highlands/temperature",
+                  "max_exclusive": 1.5,
+                  "min_inclusive": -0.4,
+                  "when_in_range": "aether_ii:highlands/top_slide",
+                  "when_out_of_range": "aether_ii:highlands/top_slide_arctic"
+                }
               },
               "argument2": {
                 "type": "minecraft:mul",
                 "argument1": {
                   "type": "minecraft:mul",
-                  "argument1": -0.21,
+                  "argument1": -0.18,
                   "argument2": "aether_ii:highlands/factor"
                 },
                 "argument2": "aether_ii:highlands/terrain_shaper"
@@ -43,7 +50,7 @@
           "type": "minecraft:mul",
           "argument1": {
             "type": "minecraft:mul",
-            "argument1": -0.21,
+            "argument1": -0.18,
             "argument2": "aether_ii:highlands/factor"
           },
           "argument2": "aether_ii:highlands/terrain_shaper"

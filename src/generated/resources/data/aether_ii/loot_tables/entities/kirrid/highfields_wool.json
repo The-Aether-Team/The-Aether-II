@@ -16,11 +16,11 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "aether_ii:entities/kirrid"
+          "name": "aether_ii:entities/highfields_kirrid"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:entities/sheep/kirrid"
+  "random_sequence": "aether_ii:entities/kirrid/highfields_wool"
 }

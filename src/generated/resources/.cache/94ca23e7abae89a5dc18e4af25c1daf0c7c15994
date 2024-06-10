@@ -1,6 +1,16 @@
+<<<<<<< HEAD
 // 1.20.4	2024-06-09T21:37:29.2980088	Tags for minecraft:entity_type mod id aether_ii
 9b38063070847b27437ac04bfc5d8d4216e3c725 data/aether_ii/tags/entity_types/spawning/aerclouds.json
 1524d30a78de2df7d23a5d101c5662ac77752040 data/aether_ii/tags/entity_types/spawning/ice.json
 90b9fd847361ab0269c9e708e890ede1366978d6 data/aether_ii/tags/entity_types/spawning/leaves.json
 77a59faf72e178118b13f591f7e88fff52c69eac data/minecraft/tags/entity_types/fall_damage_immune.json
 14b6ab6d534c93c8e61fbe2306be3f5a83ea694e data/minecraft/tags/entity_types/impact_projectiles.json
+=======
+// 1.20.4	2024-06-09T19:24:36.1513883	Tags for minecraft:entity_type mod id aether_ii
+aa9ab09ce1a34072349cfb6bb11cf8166ba5a44b data/aether_ii/tags/entity_types/kirrid.json
+9b38063070847b27437ac04bfc5d8d4216e3c725 data/aether_ii/tags/entity_types/spawning/aerclouds.json
+1524d30a78de2df7d23a5d101c5662ac77752040 data/aether_ii/tags/entity_types/spawning/ice.json
+90b9fd847361ab0269c9e708e890ede1366978d6 data/aether_ii/tags/entity_types/spawning/leaves.json
+fd893412de8706806b586095952f8ce83d4078ae data/minecraft/tags/entity_types/fall_damage_immune.json
+fa8b977cf7e51a052e73989487268b508b1a05dc data/minecraft/tags/entity_types/impact_projectiles.json
+>>>>>>> 1.20.4-develop
