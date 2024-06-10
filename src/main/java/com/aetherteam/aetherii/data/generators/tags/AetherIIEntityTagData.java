@@ -21,6 +21,11 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         // Aether II
+        this.tag(AetherIITags.Entities.KIRRID).add(
+                AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(),
+                AetherIIEntityTypes.MAGNETIC_KIRRID.get(),
+                AetherIIEntityTypes.ARCTIC_KIRRID.get()
+        );
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(
                 EntityType.POLAR_BEAR
         );
@@ -33,7 +38,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
 
         // Vanilla
-        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.ARCTIC_SNOWBALL.get());
-        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(AetherIIEntityTypes.KIRRID.get()).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get()).add(AetherIIEntityTypes.ZEPHYR.get()).add(AetherIIEntityTypes.FLYING_COW.get());
+        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), AetherIIEntityTypes.SCATTERGLASS_BOLT.get());
+        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(AetherIITags.Entities.KIRRID).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get()).add(AetherIIEntityTypes.ZEPHYR.get()).add(AetherIIEntityTypes.FLYING_COW.get());
     }
 }

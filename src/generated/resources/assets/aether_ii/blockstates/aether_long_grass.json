@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "snowy=false": {
       "model": "aether_ii:block/aether_long_grass"
+    },
+    "snowy=true": {
+      "model": "aether_ii:block/frosted_aether_long_grass"
     }
   }
 }

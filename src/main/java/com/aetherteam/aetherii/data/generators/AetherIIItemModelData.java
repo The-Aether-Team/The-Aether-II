@@ -44,25 +44,33 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.SKYROOT_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.HOLYSTONE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.HOLYSTONE_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.HOLYSTONE_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.ZANITE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.ZANITE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.ZANITE_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.ZANITE_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.ARKENIUM_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.ARKENIUM_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.ARKENIUM_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.ARKENIUM_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.GRAVITITE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.GRAVITITE_CROSSBOW.get(), "weapons/");
+
+        this.handheldItem(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
 
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
+        this.item(AetherIIItems.SCATTERGLASS_SHARD.get(), "materials/");
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
         this.item(AetherIIItems.INERT_ARKENIUM.get(), "materials/");
@@ -112,7 +120,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
-        this.eggItem(AetherIIItems.KIRRID_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
 
         // Misc

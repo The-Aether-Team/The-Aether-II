@@ -10,13 +10,19 @@
             "entries": [
               {
                 "data": {
-                  "Name": "aether_ii:hesperose"
+                  "Name": "aether_ii:hesperose",
+                  "Properties": {
+                    "snowy": "false"
+                  }
                 },
                 "weight": 1
               },
               {
                 "data": {
-                  "Name": "aether_ii:tarabloom"
+                  "Name": "aether_ii:tarabloom",
+                  "Properties": {
+                    "snowy": "false"
+                  }
                 },
                 "weight": 1
               }

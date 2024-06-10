@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -35,7 +36,9 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.PHYG.get(), PhygRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.FLYING_COW.get(), FlyingCowRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SHEEPUFF.get(), SheepuffRenderer::new);
-        event.registerEntityRenderer(AetherIIEntityTypes.KIRRID.get(), KirridRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.HIGHFIELDS_KIRRID));
+        event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.MAGNETIC_KIRRID));
+        event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.ARCTIC_KIRRID));
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR.get(), ZephyrRenderer::new);
@@ -43,6 +46,7 @@ public class AetherIIRenderers {
         // Projectiles
         event.registerEntityRenderer(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), ScatterglassBoltRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR_SNOWBALL.get(), renderer -> new ThrownItemRenderer<>(renderer, 3.0F, true));
     }
 
@@ -58,8 +62,12 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.PHYG, PhygModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.KIRRID, KirridModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.KIRRID_BABY, KirridBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_KIRRID, HighfieldsKirridModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_KIRRID_BABY, HighfieldsKirridBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_KIRRID, MagneticKirridModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_KIRRID_BABY, MagneticKirridBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ARCTIC_KIRRID, ArcticKirridModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ARCTIC_KIRRID_BABY, ArcticKirridBabyModel::createBodyLayer);
 
         // Hostile
         event.registerLayerDefinition(AetherIIModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);

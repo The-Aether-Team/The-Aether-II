@@ -9,7 +9,13 @@ import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.combat.AetherCrossbowItem;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -23,8 +29,9 @@ public class AetherIIClient {
 
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            registerGuiFactories();
             AetherIIAtlases.registerSkyrootChestAtlases();
+            registerGuiFactories();
+            registerItemModelProperties();
         });
     }
 
@@ -50,5 +57,22 @@ public class AetherIIClient {
         MenuScreens.register(AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), HolystoneFurnaceScreen::new);
         MenuScreens.register(AetherIIMenuTypes.ALTAR.get(), AltarScreen::new);
         MenuScreens.register(AetherIIMenuTypes.ARTISANS_BENCH.get(), ArtisansBenchScreen::new);
+    }
+
+    public static void registerItemModelProperties() {
+        registerCrossbowProperties(AetherIIItems.SKYROOT_CROSSBOW.get());
+        registerCrossbowProperties(AetherIIItems.HOLYSTONE_CROSSBOW.get());
+        registerCrossbowProperties(AetherIIItems.ZANITE_CROSSBOW.get());
+        registerCrossbowProperties(AetherIIItems.ARKENIUM_CROSSBOW.get());
+        registerCrossbowProperties(AetherIIItems.GRAVITITE_CROSSBOW.get());
+    }
+
+    private static void registerCrossbowProperties(Item item) {
+        ItemProperties.register(item, new ResourceLocation("pull"), (stack, level, livingEntity, value) ->
+                livingEntity == null ? 0.0F : AetherCrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / (float) AetherCrossbowItem.getCrossbowChargeDuration(stack));
+        ItemProperties.register(item, new ResourceLocation("pulling"), (stack, level, livingEntity, value) ->
+                livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+        ItemProperties.register(item, new ResourceLocation("charged"), (stack, level, livingEntity, value) ->
+                AetherCrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
     }
 }

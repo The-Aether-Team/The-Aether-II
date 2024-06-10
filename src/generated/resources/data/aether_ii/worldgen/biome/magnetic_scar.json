@@ -76,7 +76,7 @@
     "axolotls": [],
     "creature": [
       {
-        "type": "aether_ii:kirrid",
+        "type": "aether_ii:magnetic_kirrid",
         "maxCount": 3,
         "minCount": 1,
         "weight": 10
@@ -112,5 +112,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.2
+  "temperature": 0.6
 }

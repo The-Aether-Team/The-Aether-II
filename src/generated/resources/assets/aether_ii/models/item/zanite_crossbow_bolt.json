@@ -1,0 +1,6 @@
+{
+  "parent": "aether_ii:item/zanite_crossbow",
+  "textures": {
+    "layer0": "aether_ii:item/weapons/zanite_crossbow_bolt"
+  }
+}

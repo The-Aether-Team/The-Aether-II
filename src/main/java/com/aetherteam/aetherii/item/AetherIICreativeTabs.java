@@ -313,6 +313,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_SHORTSWORD.get());
                 output.accept(AetherIIItems.SKYROOT_HAMMER.get());
                 output.accept(AetherIIItems.SKYROOT_SPEAR.get());
+                output.accept(AetherIIItems.SKYROOT_CROSSBOW.get());
                 output.accept(AetherIIItems.SKYROOT_SHOVEL.get());
                 output.accept(AetherIIItems.SKYROOT_PICKAXE.get());
                 output.accept(AetherIIItems.SKYROOT_AXE.get());
@@ -320,6 +321,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.HOLYSTONE_SHORTSWORD.get());
                 output.accept(AetherIIItems.HOLYSTONE_HAMMER.get());
                 output.accept(AetherIIItems.HOLYSTONE_SPEAR.get());
+                output.accept(AetherIIItems.HOLYSTONE_CROSSBOW.get());
                 output.accept(AetherIIItems.HOLYSTONE_SHOVEL.get());
                 output.accept(AetherIIItems.HOLYSTONE_PICKAXE.get());
                 output.accept(AetherIIItems.HOLYSTONE_AXE.get());
@@ -327,6 +329,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.ZANITE_HAMMER.get());
                 output.accept(AetherIIItems.ZANITE_SPEAR.get());
+                output.accept(AetherIIItems.ZANITE_CROSSBOW.get());
                 output.accept(AetherIIItems.ZANITE_SHOVEL.get());
                 output.accept(AetherIIItems.ZANITE_PICKAXE.get());
                 output.accept(AetherIIItems.ZANITE_AXE.get());
@@ -334,6 +337,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_SHORTSWORD.get());
                 output.accept(AetherIIItems.ARKENIUM_HAMMER.get());
                 output.accept(AetherIIItems.ARKENIUM_SPEAR.get());
+                output.accept(AetherIIItems.ARKENIUM_CROSSBOW.get());
                 output.accept(AetherIIItems.ARKENIUM_SHOVEL.get());
                 output.accept(AetherIIItems.ARKENIUM_PICKAXE.get());
                 output.accept(AetherIIItems.ARKENIUM_AXE.get());
@@ -341,10 +345,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.GRAVITITE_HAMMER.get());
                 output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
+                output.accept(AetherIIItems.GRAVITITE_CROSSBOW.get());
                 output.accept(AetherIIItems.GRAVITITE_SHOVEL.get());
                 output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
+                output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
@@ -395,6 +401,7 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
+                output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
                 output.accept(AetherIIItems.INERT_ARKENIUM.get());
@@ -421,7 +428,9 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
-                output.accept(AetherIIItems.KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
