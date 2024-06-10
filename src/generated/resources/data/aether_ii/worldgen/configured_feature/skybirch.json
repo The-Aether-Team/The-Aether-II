@@ -20,6 +20,7 @@
         "Properties": {
           "distance": "7",
           "persistent": "false",
+          "snowy": "false",
           "waterlogged": "false"
         }
       }

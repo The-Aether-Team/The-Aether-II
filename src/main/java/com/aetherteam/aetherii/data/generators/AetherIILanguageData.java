@@ -390,25 +390,33 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_SHORTSWORD, "Skyroot Shortsword");
         this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
         this.addItem(AetherIIItems.SKYROOT_SPEAR, "Skyroot Spear");
+        this.addItem(AetherIIItems.SKYROOT_CROSSBOW, "Skyroot Crossbow");
 
         this.addItem(AetherIIItems.HOLYSTONE_SHORTSWORD, "Holystone Shortsword");
         this.addItem(AetherIIItems.HOLYSTONE_HAMMER, "Holystone Hammer");
         this.addItem(AetherIIItems.HOLYSTONE_SPEAR, "Holystone Spear");
+        this.addItem(AetherIIItems.HOLYSTONE_CROSSBOW, "Holystone Crossbow");
 
         this.addItem(AetherIIItems.ZANITE_SHORTSWORD, "Zanite Shortsword");
         this.addItem(AetherIIItems.ZANITE_HAMMER, "Zanite Hammer");
         this.addItem(AetherIIItems.ZANITE_SPEAR, "Zanite Spear");
+        this.addItem(AetherIIItems.ZANITE_CROSSBOW, "Zanite Crossbow");
 
         this.addItem(AetherIIItems.ARKENIUM_SHORTSWORD, "Arkenium Shortsword");
         this.addItem(AetherIIItems.ARKENIUM_HAMMER, "Arkenium Hammer");
         this.addItem(AetherIIItems.ARKENIUM_SPEAR, "Arkenium Spear");
+        this.addItem(AetherIIItems.ARKENIUM_CROSSBOW, "Arkenium Crossbow");
 
         this.addItem(AetherIIItems.GRAVITITE_SHORTSWORD, "Gravitite Shortsword");
         this.addItem(AetherIIItems.GRAVITITE_HAMMER, "Gravitite Hammer");
         this.addItem(AetherIIItems.GRAVITITE_SPEAR, "Gravitite Spear");
+        this.addItem(AetherIIItems.GRAVITITE_CROSSBOW, "Gravitite Crossbow");
+
+        this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
+        this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
         this.addItem(AetherIIItems.INERT_ARKENIUM, "Inert Arkenium");

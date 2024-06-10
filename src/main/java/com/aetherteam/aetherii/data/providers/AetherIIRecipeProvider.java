@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.Block;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     public AetherIIRecipeProvider(PackOutput output, String id) {

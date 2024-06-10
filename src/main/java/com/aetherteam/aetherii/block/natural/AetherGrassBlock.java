@@ -9,8 +9,13 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
@@ -47,11 +52,11 @@ public class AetherGrassBlock extends GrassBlock {
             if (!level.isAreaLoaded(pos, 3))
                 return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
             if (level.getMaxLocalRawBrightness(pos.above()) >= 9) {
-                BlockState blockstate = this.defaultBlockState();
+                BlockState defaultState = this.defaultBlockState();
                 for (int i = 0; i < 4; ++i) {
-                    BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    if (level.getBlockState(blockpos).is(AetherIIBlocks.AETHER_DIRT.get()) && canPropagate(blockstate, level, blockpos)) {
-                        level.setBlockAndUpdate(blockpos, blockstate.setValue(SNOWY, level.getBlockState(blockpos.above()).is(AetherIIBlocks.ARCTIC_SNOW)));
+                    BlockPos offsetPos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+                    if (level.getBlockState(offsetPos).is(AetherIIBlocks.AETHER_DIRT.get()) && canPropagate(defaultState, level, offsetPos)) {
+                        level.setBlockAndUpdate(offsetPos, defaultState.setValue(SNOWY, isSnowySetting(level.getBlockState(offsetPos.above()))));
                     }
                 }
             }
@@ -61,7 +66,7 @@ public class AetherGrassBlock extends GrassBlock {
     private static boolean canBeGrass(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos abovePos = pos.above();
         BlockState blockState = level.getBlockState(abovePos);
-        if (blockState.is(AetherIIBlocks.ARCTIC_SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) {
+        if ((blockState.is(AetherIIBlocks.ARCTIC_SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) || plantIsSnowed(blockState)) {
             return true;
         } else if (blockState.getFluidState().getAmount() == 8) {
             return false;
@@ -115,5 +120,28 @@ public class AetherGrassBlock extends GrassBlock {
                 featureHolder.value().place(level, level.getChunkSource().getGenerator(), random, blockPos);
             }
         }
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        return facing == Direction.UP ? state.setValue(SNOWY, isSnowySetting(facingState)) : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState blockState = context.getLevel().getBlockState(context.getClickedPos().above());
+        return this.defaultBlockState().setValue(SNOWY, isSnowySetting(blockState));
+    }
+
+    public static boolean isSnowySetting(BlockState state) {
+        return state.is(AetherIIBlocks.ARCTIC_SNOW) || state.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK) || plantIsSnowed(state);
+    }
+
+    public static boolean plantIsSnowed(BlockState state) {
+        return state.getBlock() instanceof Snowable snowable && snowable.isSnowy(state);
+    }
+
+    public static boolean plantNotSnowed(BlockState state) {
+        return state.getBlock() instanceof Snowable snowable && !snowable.isSnowy(state);
     }
 }
