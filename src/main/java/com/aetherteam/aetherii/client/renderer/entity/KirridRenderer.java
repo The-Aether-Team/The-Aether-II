@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
 
+import com.aetherteam.aetherii.client.renderer.BiomeVariantPresets;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.KirridBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.KirridModel;
 import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;

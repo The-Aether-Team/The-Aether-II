@@ -1,7 +1,6 @@
-package com.aetherteam.aetherii.client.renderer.entity;
+package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
