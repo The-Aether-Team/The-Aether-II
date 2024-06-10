@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-10T00:35:16.3077879	Recipes
+// 1.20.4	2024-06-10T01:29:36.2949685	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 79334dab93a39b3d5d6416736b3ab4954edc92b8 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks_from_artisanry.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
@@ -176,6 +176,7 @@ c5c111ffe58053586d97bb6c43dd907014251239 data/aether_ii/advancements/recipes/mis
 79980ab3781eede8eb090d427d96ac1798c19e7a data/aether_ii/advancements/recipes/misc/ambrosium_shard_from_smelting.json
 c17270498e6d1e360ed1686a6b3bb9bf00ba99fe data/aether_ii/advancements/recipes/misc/arkenium_plates.json
 5d1aac36026bfdf26d69371cee3bb491322a6929 data/aether_ii/advancements/recipes/misc/arkenium_plate_from_arkenium_block.json
+1845e364df0cf1009d2559eeb6c5dd009a5c89b9 data/aether_ii/advancements/recipes/misc/arkenium_shears.json
 7825319ab62e006a45b12d5449ab4ebcf72a9e32 data/aether_ii/advancements/recipes/misc/arkenium_strip.json
 f23d2b25c185f07c58590315e47a717cd99b2b32 data/aether_ii/advancements/recipes/misc/blueberry_moa_feed.json
 3147886bb05047163c92957dd7dbdd506ea27a21 data/aether_ii/advancements/recipes/misc/enchanted_blueberry.json
@@ -264,6 +265,7 @@ ac17c61a99e9d2506dff9d5715078af8ee9ad0c8 data/aether_ii/recipes/arkenium_door.js
 ff7cdadcedb6f2bc7e06fc1d7e61172d6946b901 data/aether_ii/recipes/arkenium_pickaxe.json
 ae53c04e90805d06d8eae1ecf6c379029908cbe2 data/aether_ii/recipes/arkenium_plates.json
 7491c5fcd2cd193c96738cfcc70e2ab9b0c64f4c data/aether_ii/recipes/arkenium_plate_from_arkenium_block.json
+ab95b0a8687683b7e5d476f2d9d3a739b2fac6f7 data/aether_ii/recipes/arkenium_shears.json
 6037e237e003c01d8e7e464eeb5dc23181b5fefc data/aether_ii/recipes/arkenium_shortsword.json
 3aba8495b3880fb75421730db7a6fc6cb1f48ef8 data/aether_ii/recipes/arkenium_shovel.json
 4d9382deb835fa8774f02568fac14f6f61ac12a1 data/aether_ii/recipes/arkenium_spear.json
