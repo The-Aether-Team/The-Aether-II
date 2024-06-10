@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "aether_ii.refmap.json",
   "mixins": [
+    "common.EntityMixin",
     "common.ItemStackMixin",
     "common.PlayerMixin",
     "common.ServerLevelMixin",
@@ -18,7 +19,9 @@
   ],
   "client": [
     "client.BlockRenderDispatcherMixin",
-    "client.accessor.LevelRendererAccessor"
+    "client.ClientLevelMixin",
+    "client.accessor.LevelRendererAccessor",
+    "client.accessor.ParticleAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

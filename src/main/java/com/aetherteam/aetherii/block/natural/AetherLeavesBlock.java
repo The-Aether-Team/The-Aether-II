@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -72,10 +75,22 @@ public class AetherLeavesBlock extends LeavesBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        super.animateTick(state, level, pos, random);
         int bound = level.isRaining() ? 100 : 200;
         if (random.nextInt(bound) == 0) {
             this.spawnLeavesParticles(level, pos, random);
+        }
+        if (level instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects) {
+            if (level.isRainingAt(pos.above())) {
+                if (random.nextInt(15) == 1) {
+                    BlockPos belowPos = pos.below();
+                    BlockState belowState = level.getBlockState(belowPos);
+                    if (!belowState.canOcclude() || !belowState.isFaceSturdy(level, belowPos, Direction.UP)) {
+                        ParticleUtils.spawnParticleBelow(level, pos, random, AetherIIParticleTypes.DRIPPING_WATER.get());
+                    }
+                }
+            }
+        } else {
+            super.animateTick(state, level, pos, random);
         }
     }
 
