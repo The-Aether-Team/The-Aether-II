@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.entity.passive;
+package com.aetherteam.aetherii.entity.passive.kirrid;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.KirridAi;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.navigator.KirridPathNavigation;
+import com.aetherteam.aetherii.entity.passive.AetherAnimal;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
@@ -33,7 +34,6 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -75,6 +75,8 @@ public class Kirrid extends AetherAnimal implements IShearable {
             MemoryModuleType.IS_PANICKING
     );
 
+    private final EntityType<? extends Kirrid> variantType;
+
     private int woolGrowTime = -1;
     private int plateGrowTime = 0;
 
@@ -87,8 +89,9 @@ public class Kirrid extends AetherAnimal implements IShearable {
     public AnimationState ramAnimationState = new AnimationState();
     public AnimationState eatAnimationState = new AnimationState();
 
-    public Kirrid(EntityType<? extends Animal> type, Level level) {
+    public Kirrid(EntityType<? extends Kirrid> type, Level level) {
         super(type, level);
+        this.variantType = type;
         this.moveControl = new KirridMoveControl(this);
         this.jumpControl = new KirridJumpControl(this);
         this.setSpeedModifier(0.0);
@@ -209,10 +212,16 @@ public class Kirrid extends AetherAnimal implements IShearable {
 
     @Override
     protected ResourceLocation getDefaultLootTable() {
-        if (this.hasWool()) {
+        if (!this.hasWool()) {
             return this.getType().getDefaultLootTable();
         } else {
-            return AetherIILoot.KIRRID_FUR;
+            if (this.getType() == AetherIIEntityTypes.MAGNETIC_KIRRID.get()) {
+                return AetherIILoot.MAGNETIC_KIRRID_FUR;
+            } else if (this.getType() == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
+                return AetherIILoot.ARCTIC_KIRRID_FUR;
+            } else {
+                return AetherIILoot.HIGHFIELDS_KIRRID_FUR;
+            }
         }
     }
 
@@ -249,7 +258,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
 
     @Override
     protected Brain<?> makeBrain(Dynamic<?> pDynamic) {
-        return KirridAi.makeBrain(this.brainProvider().makeBrain(pDynamic));
+        return KirridAi.makeBrain(this.variantType, this.brainProvider().makeBrain(pDynamic));
     }
 
     @Override
@@ -403,7 +412,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        Kirrid kirrid = AetherIIEntityTypes.KIRRID.get().create(pLevel);
+        Kirrid kirrid = this.variantType.create(pLevel);
         KirridAi.initMemories(kirrid, this.random);
         return kirrid;
     }

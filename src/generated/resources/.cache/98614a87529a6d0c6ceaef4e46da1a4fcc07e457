@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-08T23:32:15.309573	Item Models: aether_ii
+// 1.20.4	2024-06-09T19:24:36.2253875	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -35,6 +35,7 @@ a135c7167305bf922827b50fdf807e0518bfdcd8 assets/aether_ii/models/item/ambrosium_
 c491603cffa0239e489fddeddf49195bf9eba0dc assets/aether_ii/models/item/ambrosium_shard.json
 e7a649e80296c73474cae1aced097fde5ca5cdee assets/aether_ii/models/item/ambrosium_torch.json
 c6d8de455aab4c2280825a39e7b72b417f5b8341 assets/aether_ii/models/item/arctic_ice.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/arctic_kirrid_spawn_egg.json
 a0c75e9d5a348efa2d1950f3dddcabd54c7f3011 assets/aether_ii/models/item/arctic_packed_ice.json
 6893e855d65956da73a981a25b137d22018bf645 assets/aether_ii/models/item/arctic_snow.json
 0b57ad0d2dc8aafe4bd995ca27ac8ed4fa5d4678 assets/aether_ii/models/item/arctic_snowball.json
@@ -153,6 +154,7 @@ a67ed2f60c8b07eb4c0d4d018f6fd997003b03cc assets/aether_ii/models/item/greatroot_
 9cdfd01b4d14bfeaf18e4636f5ebb8b375a895b8 assets/aether_ii/models/item/green_swet_gel.json
 115e39c076a765d9da102f4fd2b120a2014a6189 assets/aether_ii/models/item/green_swet_jelly.json
 09c32fd0dac14c0feea1707335a7502d6bf4b906 assets/aether_ii/models/item/hesperose.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/highfields_kirrid_spawn_egg.json
 23fea31aca6045c4f86c605c5f94fe43399b77fc assets/aether_ii/models/item/highlands_bush.json
 8e2ea2de4b9c40ce8d12bb8929db104621345611 assets/aether_ii/models/item/holystone.json
 0835f677ffa59ed15b6385fda54653f2ac513621 assets/aether_ii/models/item/holystone_axe.json
@@ -199,7 +201,6 @@ fa73739ed55d6a503bcebafe0f72e1bcf742fb45 assets/aether_ii/models/item/inert_grav
 e4ea08420ff31ca75b1bd51883c3666d1a30252d assets/aether_ii/models/item/irradiated_holystone_wall.json
 d44dbc6d5914d14056d2cf7c62043e6afb7cab9c assets/aether_ii/models/item/kirrid_cutlet.json
 070e74e213496e828b2cbc378654a68c742e6c07 assets/aether_ii/models/item/kirrid_loin.json
-63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/kirrid_spawn_egg.json
 cc61defb58d56e20b9c2f5d98fe89899a21ec494 assets/aether_ii/models/item/light_blue_cloudwool.json
 e47fa53b8ef6891558c5c80334e3030de9d910fa assets/aether_ii/models/item/light_blue_cloudwool_carpet.json
 178ffebf3fccfe5ed775a5b4cfa3889e56ccc7a7 assets/aether_ii/models/item/light_gray_cloudwool.json
@@ -208,6 +209,7 @@ c3f1af1f9c39fc01616ed44ff8a3385d8eb1ba4a assets/aether_ii/models/item/light_gray
 37f06488bcef9bc6ecfb929108421a3659662bb9 assets/aether_ii/models/item/lime_cloudwool_carpet.json
 7cc946bdfaeb8a86c8dedfec138b4841f70cd08a assets/aether_ii/models/item/magenta_cloudwool.json
 63bfced5e7b3c23cce1d036fbf0e4b14b6c281e0 assets/aether_ii/models/item/magenta_cloudwool_carpet.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/magnetic_kirrid_spawn_egg.json
 a146cf9b7567eb6bd1e5a4c2523f6d1f4ec153ad assets/aether_ii/models/item/mossy_holystone.json
 1b577aee3036b910200c7e21424651f9575623f4 assets/aether_ii/models/item/mossy_holystone_slab.json
 3d8c627cbebadfc0db76f81fe4747fef77b8f5c1 assets/aether_ii/models/item/mossy_holystone_stairs.json

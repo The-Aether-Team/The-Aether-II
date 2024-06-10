@@ -1,32 +1,18 @@
-package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockbench 4.10.2
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
+package com.aetherteam.aetherii.client.renderer.entity.model.kirrid;
 
-
-import com.aetherteam.aetherii.client.renderer.entity.animation.KirridAnimations;
-import com.aetherteam.aetherii.entity.passive.Kirrid;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class KirridModel<T extends Kirrid> extends HierarchicalModel<T> {
-    private final ModelPart root;
-    private final ModelPart head;
-    private final ModelPart headPlate;
-    private final ModelPart headPlateBroken;
-    private final ModelPart neck;
-    public final ModelPart body;
-    public final ModelPart wool;
+public class HighfieldsKirridModel extends KirridModel {
+    protected final ModelPart headPlate;
+    protected final ModelPart headPlateBroken;
 
-    public KirridModel(ModelPart root) {
-        this.root = root;
-        this.body = root.getChild("body");
-        this.neck = this.body.getChild("neck");
-        this.head = this.neck.getChild("head");
-        this.wool = this.body.getChild("wool");
-        this.headPlate = this.head.getChild("plate");
-        this.headPlateBroken = this.head.getChild("plate_broken");
+    public HighfieldsKirridModel(ModelPart root) {
+        super(root);
+        this.headPlate = this.head.getChild("head_plate");
+        this.headPlateBroken = this.head.getChild("head_plate_broken");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -57,13 +43,13 @@ public class KirridModel<T extends Kirrid> extends HierarchicalModel<T> {
 
         PartDefinition ear_right_r1 = ear_right.addOrReplaceChild("ear_right_r1", CubeListBuilder.create().texOffs(15, 15).addBox(0.0F, 0.0F, -1.5F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.3491F));
 
-        PartDefinition plate_broken = head.addOrReplaceChild("plate_broken", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition plate_broken = head.addOrReplaceChild("head_plate_broken", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         PartDefinition head_plate_broken_3_r1 = plate_broken.addOrReplaceChild("head_plate_broken_3_r1", CubeListBuilder.create().texOffs(10, 73).addBox(-1.0F, -7.0F, -1.0F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
                 .texOffs(25, 5).addBox(-1.0F, -5.0F, -1.0F, 5.0F, 6.0F, 2.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 64).addBox(-4.0F, -10.0F, -1.0F, 3.0F, 11.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -2.0F, -2.5F, -0.5672F, 0.0F, 0.0F));
 
-        PartDefinition plate = head.addOrReplaceChild("plate", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition plate = head.addOrReplaceChild("head_plate", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
         PartDefinition head_plate_r1 = plate.addOrReplaceChild("head_plate_r1", CubeListBuilder.create().texOffs(22, 0).addBox(-4.0F, -10.0F, -1.0F, 8.0F, 11.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -2.0F, -2.5F, -0.5672F, 0.0F, 0.0F));
 
@@ -91,24 +77,9 @@ public class KirridModel<T extends Kirrid> extends HierarchicalModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head.yRot = netHeadYaw * (float) (Math.PI / 180.0);
-        this.head.xRot = headPitch * (float) (Math.PI / 180.0);
-        this.animate(entity.jumpAnimationState, KirridAnimations.JUMP, ageInTicks, 1.0F);
-        this.animate(entity.ramAnimationState, KirridAnimations.START_RAM, ageInTicks, 1.0F);
-        this.animate(entity.eatAnimationState, KirridAnimations.EAT, ageInTicks, 1.0F);
-        if (!entity.jumpAnimationState.isStarted()) {
-            this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
-
-        }
-        this.headPlate.visible = entity.hasPlate();
-        this.headPlateBroken.visible = !entity.hasPlate();
-        this.wool.visible = entity.hasWool();
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
+    public void setupAnim(Kirrid kirrid, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        super.setupAnim(kirrid, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        this.headPlate.visible = kirrid.hasPlate();
+        this.headPlateBroken.visible = !kirrid.hasPlate();
     }
 }

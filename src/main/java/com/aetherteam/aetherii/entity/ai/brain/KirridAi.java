@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.*;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
-import com.aetherteam.aetherii.entity.passive.Kirrid;
+import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
@@ -29,9 +28,9 @@ public class KirridAi {
         pKirrid.getBrain().setMemory(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), TIME_BETWEEN_EAT.sample(pRandom));
     }
 
-    public static Brain<?> makeBrain(Brain<Kirrid> pBrain) {
+    public static Brain<?> makeBrain(EntityType<? extends Kirrid> entityType, Brain<Kirrid> pBrain) {
         initCoreActivity(pBrain);
-        initIdleActivity(pBrain);
+        initIdleActivity(entityType, pBrain);
         pBrain.setCoreActivities(ImmutableSet.of(Activity.CORE));
         pBrain.setDefaultActivity(Activity.IDLE);
         pBrain.useDefaultActivity();
@@ -55,12 +54,12 @@ public class KirridAi {
         );
     }
 
-    private static void initIdleActivity(Brain<Kirrid> pBrain) {
+    private static void initIdleActivity(EntityType<? extends Kirrid> entityType, Brain<Kirrid> pBrain) {
         pBrain.addActivity(
                 Activity.IDLE,
                 ImmutableList.of(
                         Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
-                        Pair.of(0, new AnimalMakeLove(AetherIIEntityTypes.KIRRID.get(), 1.0F)),
+                        Pair.of(0, new AnimalMakeLove(entityType, 1.0F)),
                         Pair.of(1, new FollowTemptation(p_149446_ -> 1.25F)),
                         Pair.of(2, BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 1.25F)),
                         Pair.of(
