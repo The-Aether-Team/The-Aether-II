@@ -1,20 +1,130 @@
 {
-  "type": "minecraft:clamp",
-  "input": {
-    "type": "minecraft:mul",
-    "argument1": {
-      "type": "minecraft:add",
-      "argument1": "aether_ii:highlands/amplification",
-      "argument2": {
-        "type": "minecraft:y_clamped_gradient",
-        "from_value": 0.75,
-        "from_y": 96,
-        "to_value": 0.35,
-        "to_y": 128
+  "type": "minecraft:range_choice",
+  "input": "aether_ii:highlands/erosion",
+  "max_exclusive": 0.55,
+  "min_inclusive": 0.0,
+  "when_in_range": {
+    "type": "minecraft:range_choice",
+    "input": "aether_ii:highlands/temperature",
+    "max_exclusive": 0.55,
+    "min_inclusive": -0.4,
+    "when_in_range": {
+      "type": "minecraft:range_choice",
+      "input": "minecraft:y",
+      "max_exclusive": 128.0,
+      "min_inclusive": -4064.0,
+      "when_in_range": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": "aether_ii:highlands/amplification",
+            "argument2": {
+              "type": "minecraft:y_clamped_gradient",
+              "from_value": 0.75,
+              "from_y": 96,
+              "to_value": 0.35,
+              "to_y": 128
+            }
+          },
+          "argument2": {
+            "type": "minecraft:range_choice",
+            "input": "aether_ii:highlands/temperature",
+            "max_exclusive": 1.5,
+            "min_inclusive": -0.4,
+            "when_in_range": "aether_ii:highlands/sloper",
+            "when_out_of_range": "aether_ii:highlands/sloper_arctic"
+          }
+        },
+        "max": 1.0,
+        "min": 0.0
+      },
+      "when_out_of_range": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:clamp",
+          "input": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": "aether_ii:highlands/amplification",
+              "argument2": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_value": 0.75,
+                "from_y": 96,
+                "to_value": 0.35,
+                "to_y": 128
+              }
+            },
+            "argument2": {
+              "type": "minecraft:range_choice",
+              "input": "aether_ii:highlands/temperature",
+              "max_exclusive": 1.5,
+              "min_inclusive": -0.4,
+              "when_in_range": "aether_ii:highlands/sloper",
+              "when_out_of_range": "aether_ii:highlands/sloper_arctic"
+            }
+          },
+          "max": 1.0,
+          "min": 0.0
+        },
+        "argument2": "aether_ii:highlands/lakes/factor"
       }
     },
-    "argument2": "aether_ii:highlands/sloper"
+    "when_out_of_range": {
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:add",
+          "argument1": "aether_ii:highlands/amplification",
+          "argument2": {
+            "type": "minecraft:y_clamped_gradient",
+            "from_value": 0.75,
+            "from_y": 96,
+            "to_value": 0.35,
+            "to_y": 128
+          }
+        },
+        "argument2": {
+          "type": "minecraft:range_choice",
+          "input": "aether_ii:highlands/temperature",
+          "max_exclusive": 1.5,
+          "min_inclusive": -0.4,
+          "when_in_range": "aether_ii:highlands/sloper",
+          "when_out_of_range": "aether_ii:highlands/sloper_arctic"
+        }
+      },
+      "max": 1.0,
+      "min": 0.0
+    }
   },
-  "max": 1.0,
-  "min": 0.0
+  "when_out_of_range": {
+    "type": "minecraft:clamp",
+    "input": {
+      "type": "minecraft:mul",
+      "argument1": {
+        "type": "minecraft:add",
+        "argument1": "aether_ii:highlands/amplification",
+        "argument2": {
+          "type": "minecraft:y_clamped_gradient",
+          "from_value": 0.75,
+          "from_y": 96,
+          "to_value": 0.35,
+          "to_y": 128
+        }
+      },
+      "argument2": {
+        "type": "minecraft:range_choice",
+        "input": "aether_ii:highlands/temperature",
+        "max_exclusive": 1.5,
+        "min_inclusive": -0.4,
+        "when_in_range": "aether_ii:highlands/sloper",
+        "when_out_of_range": "aether_ii:highlands/sloper_arctic"
+      }
+    },
+    "max": 1.0,
+    "min": 0.0
+  }
 }
