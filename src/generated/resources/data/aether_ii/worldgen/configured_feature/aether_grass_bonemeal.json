@@ -6,19 +6,28 @@
       "entries": [
         {
           "data": {
-            "Name": "aether_ii:aether_short_grass"
+            "Name": "aether_ii:aether_short_grass",
+            "Properties": {
+              "snowy": "false"
+            }
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "aether_ii:aether_medium_grass"
+            "Name": "aether_ii:aether_medium_grass",
+            "Properties": {
+              "snowy": "false"
+            }
           },
           "weight": 1
         },
         {
           "data": {
-            "Name": "aether_ii:aether_long_grass"
+            "Name": "aether_ii:aether_long_grass",
+            "Properties": {
+              "snowy": "false"
+            }
           },
           "weight": 1
         }

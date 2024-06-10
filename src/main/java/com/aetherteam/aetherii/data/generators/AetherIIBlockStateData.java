@@ -92,16 +92,16 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.leafPile(AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), AetherIIBlocks.AMBEROOT_LEAVES.get());
 
         // Leaves
-        this.block(AetherIIBlocks.SKYROOT_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.SKYPLANE_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.SKYBIRCH_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.SKYPINE_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.WISPROOT_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.WISPTOP_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.GREATROOT_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.GREATOAK_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.GREATBOA_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.AMBEROOT_LEAVES.get(), "natural/");
+        this.leaves(AetherIIBlocks.SKYROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.SKYPLANE_LEAVES.get());
+        this.leaves(AetherIIBlocks.SKYBIRCH_LEAVES.get());
+        this.leaves(AetherIIBlocks.SKYPINE_LEAVES.get());
+        this.leaves(AetherIIBlocks.WISPROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.WISPTOP_LEAVES.get());
+        this.leaves(AetherIIBlocks.GREATROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.GREATOAK_LEAVES.get());
+        this.leaves(AetherIIBlocks.GREATBOA_LEAVES.get());
+        this.leaves(AetherIIBlocks.AMBEROOT_LEAVES.get());
 
         // Saplings
         this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
@@ -129,8 +129,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.shortGrass(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
         // Flowers
-        this.crossBlock(AetherIIBlocks.HESPEROSE.get(), "natural/");
-        this.crossBlock(AetherIIBlocks.TARABLOOM.get(), "natural/");
+        this.frostedCross(AetherIIBlocks.HESPEROSE.get());
+        this.frostedCross(AetherIIBlocks.TARABLOOM.get());
 
         // Potted Flowers
         this.pottedPlant(AetherIIBlocks.POTTED_HESPEROSE.get(), AetherIIBlocks.HESPEROSE.get(), "natural/");
