@@ -308,6 +308,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
+                output.accept(AetherIIBlocks.SKYROOT_SIGN.get());
+                output.accept(AetherIIBlocks.SKYROOT_HANGING_SIGN.get());
+                output.accept(AetherIIBlocks.GREATROOT_SIGN.get());
+                output.accept(AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
+                output.accept(AetherIIBlocks.WISPROOT_SIGN.get());
+                output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
             }).build());

@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-09T23:31:42.6031683	Item Models: aether_ii
+// 1.20.4	2024-06-10T00:35:16.3287872	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -137,6 +137,7 @@ d66c93808f73e1ad470f97cf9a88ed7dde0805da assets/aether_ii/models/item/greatroot_
 df09d448338c8f3690954328d7845ea5100bdf2b assets/aether_ii/models/item/greatroot_fence.json
 61138dba13855086dda902be00758b5c9354ae01 assets/aether_ii/models/item/greatroot_fence_gate.json
 28560247db00228d40d5e276478fa56170694416 assets/aether_ii/models/item/greatroot_floorboards.json
+ba11b6ca73ef4dbe607da5775681eb5691424428 assets/aether_ii/models/item/greatroot_hanging_sign.json
 133456da163b214c585fadd735b9aff496c84f39 assets/aether_ii/models/item/greatroot_highlight.json
 1f83c7840ecd9cfc9c7610bfe265c61c4f535158 assets/aether_ii/models/item/greatroot_leaf_pile.json
 b7d95fde2897b2afc05b56ca6d12da7dde0f9ed2 assets/aether_ii/models/item/greatroot_leaves.json
@@ -145,6 +146,7 @@ b7d95fde2897b2afc05b56ca6d12da7dde0f9ed2 assets/aether_ii/models/item/greatroot_
 1b4b4d0ed051095afcdbb485af89dcac9ddac274 assets/aether_ii/models/item/greatroot_pressure_plate.json
 a38b9062e3013f273977ce4ccaa2ea4d1d1ca8d9 assets/aether_ii/models/item/greatroot_sapling.json
 ac1542db1d4c233ed8a6d7165008e0cdcf55a95d assets/aether_ii/models/item/greatroot_shingles.json
+70215bb1072d15e394b45f7b1b3631196c159688 assets/aether_ii/models/item/greatroot_sign.json
 bbb5be0da80c131050ed993597d2f03ea3ea1fd7 assets/aether_ii/models/item/greatroot_slab.json
 ac2e173fd29785594ec67f4a8b9aa7bf96bcc28f assets/aether_ii/models/item/greatroot_small_shingles.json
 e3b849f6603be0ebb13307529d64e4de7d081c6c assets/aether_ii/models/item/greatroot_stairs.json
@@ -281,6 +283,7 @@ a5561b3951dae7f8a4ac03bf0d971c9ff75afcb8 assets/aether_ii/models/item/skyroot_cr
 69015fbae2fe7192aa6e951a64b19f27dbf4c4db assets/aether_ii/models/item/skyroot_fence_gate.json
 32738a5750fcc0690ace2d886b2ecda39f0b9996 assets/aether_ii/models/item/skyroot_floorboards.json
 4d4f128127cd67c94ba7badf79388b8ee9677b4b assets/aether_ii/models/item/skyroot_hammer.json
+38daebf25d29506dd4fa605609bc81a512f126f0 assets/aether_ii/models/item/skyroot_hanging_sign.json
 a6d7b48ac92ab223fe653761d15fcf2aa14d1893 assets/aether_ii/models/item/skyroot_highlight.json
 1b84ff9a905f56fd1d31ff17e2f31aa1de67f27a assets/aether_ii/models/item/skyroot_ladder.json
 c73b4b8ba287c6a17bf620fd11b013919500e5b7 assets/aether_ii/models/item/skyroot_leaf_pile.json
@@ -294,6 +297,7 @@ f055e8b468c9d6c90068e06871dc723d96276eb9 assets/aether_ii/models/item/skyroot_lo
 c80df0fa9c26ef8e68c7c0ac2a7059d9c33ec3b7 assets/aether_ii/models/item/skyroot_shingles.json
 6aa035b1787437cd1d7cd2b8f26901040af6c15f assets/aether_ii/models/item/skyroot_shortsword.json
 024f9ca1ef9332bf04e80aedc93aff1ad140fef7 assets/aether_ii/models/item/skyroot_shovel.json
+c7810e4e26052f6a356108658a25a33ad90b2cf5 assets/aether_ii/models/item/skyroot_sign.json
 2d1e3f00cc31570d9f1cca638e937d7b34677d01 assets/aether_ii/models/item/skyroot_slab.json
 681e43f14978bfe2493c363a303409076a8bc677 assets/aether_ii/models/item/skyroot_small_shingles.json
 52f6b666a520677e724fc944154a58aea7ea9295 assets/aether_ii/models/item/skyroot_spear.json
@@ -327,6 +331,7 @@ ba0f22333042fb455b0d45e8e0effa081818fa72 assets/aether_ii/models/item/wisproot_d
 07e54d9c3f77e3aca8082359e2a5465e0319405d assets/aether_ii/models/item/wisproot_fence.json
 0f0bfbc0646799f6d092621bb525d5866d387bce assets/aether_ii/models/item/wisproot_fence_gate.json
 9832df3d420103277a2764cf7921ac90f0df5676 assets/aether_ii/models/item/wisproot_floorboards.json
+b144febe85b1d2de73678ba1390a763f91e1e578 assets/aether_ii/models/item/wisproot_hanging_sign.json
 9dd248851bb3136c34412da52ba3cb26f2eb653e assets/aether_ii/models/item/wisproot_highlight.json
 85331a2597bb90eec470d691dc9e44eeab82ae0d assets/aether_ii/models/item/wisproot_leaf_pile.json
 e36af53ba18d2661d75b557c1cb111f1400b9284 assets/aether_ii/models/item/wisproot_leaves.json
@@ -335,6 +340,7 @@ e36af53ba18d2661d75b557c1cb111f1400b9284 assets/aether_ii/models/item/wisproot_l
 e83344497594b85c2e077c26de6679ced6e3acc9 assets/aether_ii/models/item/wisproot_pressure_plate.json
 2bd0655075e2f7baaf78365c4daaf00c6f996714 assets/aether_ii/models/item/wisproot_sapling.json
 06399cba9bbc276110ad08c8f34f305767cdbc07 assets/aether_ii/models/item/wisproot_shingles.json
+56a1391202db412c8070a53e6fc58369710d77dc assets/aether_ii/models/item/wisproot_sign.json
 6578a45964506d32005f922b4d62249dd58711ac assets/aether_ii/models/item/wisproot_slab.json
 28c4a74fac4cdef5d8e0224fba132abe9841a6e5 assets/aether_ii/models/item/wisproot_small_shingles.json
 e167cd2a4903ede813313aadebb011a5f64d51f9 assets/aether_ii/models/item/wisproot_stairs.json

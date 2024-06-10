@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
 
@@ -418,13 +419,31 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("# #")
                 .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_LADDER.get()), has(AetherIITags.Items.RODS_SKYROOT))
                 .save(consumer);
-
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_BED.get(), 1)
                 .define('W', ItemTags.WOOL)
                 .define('P', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("WWW")
                 .pattern("PPP")
                 .unlockedBy("has_wool", has(ItemTags.WOOL))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_SIGN.get(), 3)
+                .group("wooden_sign")
+                .define('P', AetherIIBlocks.SKYROOT_PLANKS.get().asItem())
+                .define('/', Tags.Items.RODS_WOODEN)
+                .pattern("PPP")
+                .pattern("PPP")
+                .pattern(" / ")
+                .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_PLANKS.get()), has(AetherIIBlocks.SKYROOT_PLANKS.get()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), 6)
+                .group("hanging_sign")
+                .define('#', AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
+                .define('X', Items.CHAIN)
+                .pattern("X X")
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_stripped_logs", has(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()))
                 .save(consumer);
 
         // Bookshelves

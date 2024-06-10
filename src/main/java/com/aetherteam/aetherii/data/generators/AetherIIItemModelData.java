@@ -467,6 +467,15 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_BED.get(), this.mcLoc("item/template_bed"));
 
+        this.item(AetherIIBlocks.SKYROOT_SIGN.get().asItem(), "miscellaneous/");
+        this.item(AetherIIBlocks.SKYROOT_HANGING_SIGN.get().asItem(), "miscellaneous/");
+
+        this.item(AetherIIBlocks.GREATROOT_SIGN.get().asItem(), "miscellaneous/");
+        this.item(AetherIIBlocks.GREATROOT_HANGING_SIGN.get().asItem(), "miscellaneous/");
+
+        this.item(AetherIIBlocks.WISPROOT_SIGN.get().asItem(), "miscellaneous/");
+        this.item(AetherIIBlocks.WISPROOT_HANGING_SIGN.get().asItem(), "miscellaneous/");
+
         // Bookshelves
         this.itemBlock(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());

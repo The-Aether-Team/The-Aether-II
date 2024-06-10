@@ -756,4 +756,10 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                     .build();
         }, BedBlock.OCCUPIED);
     }
+
+    public void hangingSignBlock(CeilingHangingSignBlock signBlock, WallHangingSignBlock wallSignBlock, ResourceLocation texture) {
+        ModelFile sign = models().sign(name(signBlock), texture);
+        simpleBlock(signBlock, sign);
+        simpleBlock(wallSignBlock, sign);
+    }
 }

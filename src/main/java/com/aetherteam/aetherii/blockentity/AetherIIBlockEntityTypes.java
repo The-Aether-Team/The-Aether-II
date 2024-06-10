@@ -24,4 +24,15 @@ public class AetherIIBlockEntityTypes {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyrootBedBlockEntity>> SKYROOT_BED = BLOCK_ENTITY_TYPES.register("skyroot_bed", () ->
             BlockEntityType.Builder.of(SkyrootBedBlockEntity::new, AetherIIBlocks.SKYROOT_BED.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AetherSignBlockEntity>> AETHER_SIGN = BLOCK_ENTITY_TYPES.register("aether_sign", () ->
+            BlockEntityType.Builder.of(AetherSignBlockEntity::new, AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
+                    AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),
+                    AetherIIBlocks.WISPROOT_WALL_SIGN.get(), AetherIIBlocks.WISPROOT_SIGN.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AetherHangingSignBlockEntity>> AETHER_HANGING_SIGN = BLOCK_ENTITY_TYPES.register("aether_hanging_sign", () ->
+            BlockEntityType.Builder.of(AetherHangingSignBlockEntity::new, AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
+                    AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
+                    AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get()).build(null));
+
 }

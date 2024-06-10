@@ -76,6 +76,18 @@
     "aether_ii:wisproot_base_beam",
     "aether_ii:wisproot_top_beam",
     "aether_ii:wisproot_beam",
-    "aether_ii:skyroot_bed"
+    "aether_ii:skyroot_bed",
+    "aether_ii:skyroot_sign",
+    "aether_ii:skyroot_wall_sign",
+    "aether_ii:skyroot_hanging_sign",
+    "aether_ii:skyroot_wall_hanging_sign",
+    "aether_ii:greatroot_sign",
+    "aether_ii:greatroot_wall_sign",
+    "aether_ii:greatroot_hanging_sign",
+    "aether_ii:greatroot_wall_hanging_sign",
+    "aether_ii:wisproot_sign",
+    "aether_ii:wisproot_wall_sign",
+    "aether_ii:wisproot_hanging_sign",
+    "aether_ii:wisproot_wall_hanging_sign"
   ]
 }

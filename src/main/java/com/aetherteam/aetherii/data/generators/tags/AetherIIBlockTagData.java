@@ -347,6 +347,34 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SCATTERGLASS.get()
         );
         this.tag(BlockTags.BAMBOO_PLANTABLE_ON).addTag(AetherIITags.Blocks.AETHER_DIRT);
+        this.tag(BlockTags.SIGNS).add(
+                AetherIIBlocks.SKYROOT_SIGN.get(),
+                AetherIIBlocks.SKYROOT_WALL_SIGN.get(),
+                AetherIIBlocks.GREATROOT_SIGN.get(),
+                AetherIIBlocks.GREATROOT_WALL_SIGN.get(),
+                AetherIIBlocks.WISPROOT_SIGN.get(),
+                AetherIIBlocks.WISPROOT_WALL_SIGN.get()
+        );
+        this.tag(BlockTags.STANDING_SIGNS).add(
+                AetherIIBlocks.SKYROOT_SIGN.get(),
+                AetherIIBlocks.GREATROOT_SIGN.get(),
+                AetherIIBlocks.WISPROOT_SIGN.get()
+        );
+        this.tag(BlockTags.WALL_SIGNS).add(
+                AetherIIBlocks.SKYROOT_WALL_SIGN.get(),
+                AetherIIBlocks.GREATROOT_WALL_SIGN.get(),
+                AetherIIBlocks.WISPROOT_WALL_SIGN.get()
+        );
+        this.tag(BlockTags.CEILING_HANGING_SIGNS).add(
+                AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.WISPROOT_HANGING_SIGN.get()
+        );
+        this.tag(BlockTags.WALL_HANGING_SIGNS).add(
+                AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(),
+                AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(),
+                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get()
+        );
         this.tag(BlockTags.PORTALS).add(AetherIIBlocks.AETHER_PORTAL.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
@@ -499,7 +527,19 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_BASE_BEAM.get(),
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
                 AetherIIBlocks.WISPROOT_BEAM.get(),
-                AetherIIBlocks.SKYROOT_BED.get()
+                AetherIIBlocks.SKYROOT_BED.get(),
+                AetherIIBlocks.SKYROOT_SIGN.get(),
+                AetherIIBlocks.SKYROOT_WALL_SIGN.get(),
+                AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(),
+                AetherIIBlocks.GREATROOT_SIGN.get(),
+                AetherIIBlocks.GREATROOT_WALL_SIGN.get(),
+                AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(),
+                AetherIIBlocks.WISPROOT_SIGN.get(),
+                AetherIIBlocks.WISPROOT_WALL_SIGN.get(),
+                AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
