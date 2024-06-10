@@ -15,7 +15,7 @@ import java.util.Map;
 public class AetherIIDamageResistances {
     public static final ResourceKey<Registry<DamageResistance>> DAMAGE_RESISTANCE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(AetherII.MODID, "damage_resistance"));
 
-    public static final ResourceKey<DamageResistance> ZEPHER = createKey("zephyr");
+    public static final ResourceKey<DamageResistance> ZEPHYR = createKey("zephyr");
     public static final ResourceKey<DamageResistance> AERBUNNY = createKey("aerbunny");
     public static final ResourceKey<DamageResistance> SHEEPUFF = createKey("sheepuff");
     public static final ResourceKey<DamageResistance> FLYING_COW = createKey("flying_cow");
@@ -27,7 +27,7 @@ public class AetherIIDamageResistances {
     }
 
     public static void bootstrap(BootstapContext<DamageResistance> context) {
-        context.register(ZEPHER, new DamageResistance(AetherIIEntityTypes.ZEPHYR.get(), 0, 2, -2));
+        context.register(ZEPHYR, new DamageResistance(AetherIIEntityTypes.ZEPHYR.get(), 0, 2, -2));
         context.register(AERBUNNY, new DamageResistance(AetherIIEntityTypes.AERBUNNY.get(), 0, 2, -2));
         context.register(SHEEPUFF, new DamageResistance(AetherIIEntityTypes.SHEEPUFF.get(), 0, 0, 0));
         context.register(FLYING_COW, new DamageResistance(AetherIIEntityTypes.FLYING_COW.get(), 0, 0, 0));

@@ -40,10 +40,10 @@ public class AetherIIOrePlacements {
         AetherIIPlacementUtils. register(context, ORE_ZANITE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_ZANITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(14, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(128))));
         AetherIIPlacementUtils. register(context, ORE_ARKENIUM, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_ARKENIUM),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(96))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(96))));
         AetherIIPlacementUtils.register(context, ORE_GRAVITITE_BURIED, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_GRAVITITE_BURIED),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(72))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(7, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(72))));
         AetherIIPlacementUtils.register(context, ORE_GRAVITITE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_GRAVITITE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-58), VerticalAnchor.aboveBottom(72))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(9, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-58), VerticalAnchor.aboveBottom(72))));
     }
 }

@@ -2,7 +2,7 @@
   "carvers": {},
   "downfall": 0.5,
   "effects": {
-    "fog_color": 0,
+    "fog_color": 15526908,
     "foliage_color": 11665355,
     "grass_color": 11927504,
     "music": {
@@ -11,12 +11,14 @@
       "replace_current_music": true,
       "sound": "aether_ii:music.highlands.aercloud_sea"
     },
-    "sky_color": 13953023,
-    "water_color": 11194598,
-    "water_fog_color": 5273497
+    "sky_color": 13226495,
+    "water_color": 10671602,
+    "water_fog_color": 5599370
   },
   "features": [
-    [],
+    [
+      "aether_ii:cloudbed"
+    ],
     [],
     [],
     [],

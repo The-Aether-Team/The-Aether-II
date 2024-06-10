@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "aether_ii:ambrosium_ore"
+          "Name": "aether_ii:arkenium_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
