@@ -3,9 +3,16 @@ package com.aetherteam.aetherii.data.resources.builders.highlands;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class HighlandsSurfaceBuilders {
     private static final SurfaceRules.RuleSource WATER = SurfaceRules.state(Blocks.WATER.defaultBlockState());
