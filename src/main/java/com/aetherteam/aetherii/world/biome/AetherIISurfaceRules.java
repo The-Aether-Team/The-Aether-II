@@ -1,3 +1,4 @@
+
 package com.aetherteam.aetherii.world.biome;
 
 import com.aetherteam.aetherii.AetherII;
@@ -14,6 +15,7 @@ import java.util.function.Function;
 
 public class AetherIISurfaceRules {
 
+    /*
     public static final DeferredRegister<Codec<? extends SurfaceRules.ConditionSource>> CONDITIONS = DeferredRegister.create(BuiltInRegistries.MATERIAL_CONDITION, AetherII.MODID);
 
     public interface ConditionSource extends Function<SurfaceRules.Context, SurfaceRules.Condition> {
@@ -72,4 +74,5 @@ public class AetherIISurfaceRules {
     static <A> Codec<? extends A> register(Registry<Codec<? extends A>> registry, String name, KeyDispatchDataCodec<? extends A> value) {
         return Registry.register(registry, name, value.codec());
     }
+    */
 }

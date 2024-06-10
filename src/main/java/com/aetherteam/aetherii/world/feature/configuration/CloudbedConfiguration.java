@@ -8,8 +8,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public record CloudbedConfiguration(BlockStateProvider block, BlockPredicate predicate, int yLevel, DensityFunction cloudNoise, double cloudRadius, DensityFunction yOffset, double maxYOffset) implements FeatureConfiguration {
-    public static final Codec<CloudbedConfiguration> CODEC = RecordCodecBuilder.create(
-            (builder) -> builder.group(
+    public static final Codec<CloudbedConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
                     BlockStateProvider.CODEC.fieldOf("block").forGetter(CloudbedConfiguration::block),
                     BlockPredicate.CODEC.fieldOf("predicate").forGetter(CloudbedConfiguration::predicate),
                     Codec.INT.fieldOf("y_level").forGetter(CloudbedConfiguration::yLevel),
@@ -18,5 +17,5 @@ public record CloudbedConfiguration(BlockStateProvider block, BlockPredicate pre
                     DensityFunction.HOLDER_HELPER_CODEC.fieldOf("offset_noise").forGetter(CloudbedConfiguration::yOffset),
                     Codec.DOUBLE.fieldOf("offset_max").forGetter(CloudbedConfiguration::maxYOffset)
 
-            ).apply(builder, CloudbedConfiguration::new));
+            ).apply(instance, CloudbedConfiguration::new));
 }
