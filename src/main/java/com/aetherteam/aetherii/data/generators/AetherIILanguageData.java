@@ -386,6 +386,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_SHOVEL, "Gravitite Shovel");
         this.addItem(AetherIIItems.GRAVITITE_TROWEL, "Gravitite Trowel");
 
+        this.addItem(AetherIIItems.ARKENIUM_SHEARS, "Arkenium Shears");
+
         // Weapons
         this.addItem(AetherIIItems.SKYROOT_SHORTSWORD, "Skyroot Shortsword");
         this.addItem(AetherIIItems.SKYROOT_HAMMER, "Skyroot Hammer");
@@ -416,6 +418,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
+        this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
@@ -476,6 +479,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
 
         // Misc
+        this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
+        this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
+        this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         // Tooltips

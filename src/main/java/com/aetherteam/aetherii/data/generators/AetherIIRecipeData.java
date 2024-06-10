@@ -489,6 +489,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.SKYROOT_TWIG)
                 .unlockedBy("has_twig", has(AetherIIBlocks.SKYROOT_TWIG))
                 .save(consumer, "skyroot_stick_from_twig");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.MOA_FEED.get(), 3)
+                .requires(AetherIIItems.SKYROOT_PINECONE)
+                .unlockedBy("has_skyroot_pinecone", has(AetherIIItems.SKYROOT_PINECONE))
+                .save(consumer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_SHARD.get(), 4)
                 .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
                 .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
@@ -515,5 +519,16 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.TARABLOOM.get())
                 .unlockedBy(getHasName(AetherIIBlocks.TARABLOOM.get()), has(AetherIIBlocks.TARABLOOM.get()))
                 .save(consumer, this.name("flower_to_purple_dye"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)
+                .requires(AetherIIItems.MOA_FEED)
+                .requires(AetherIIItems.BLUEBERRY)
+                .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED.get(), 1)
+                .requires(AetherIIItems.MOA_FEED)
+                .requires(AetherIIItems.ENCHANTED_BLUEBERRY)
+                .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
+                .save(consumer);
     }
 }

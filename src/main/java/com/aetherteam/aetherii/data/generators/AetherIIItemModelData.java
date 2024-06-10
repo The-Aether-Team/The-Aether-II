@@ -40,6 +40,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.GRAVITITE_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.GRAVITITE_TROWEL.get(), "tools/");
 
+        this.handheldItem(AetherIIItems.ARKENIUM_SHEARS.get(), "tools/");
+
         // Weapons
         this.handheldItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_HAMMER.get(), "weapons/");
@@ -70,6 +72,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
+        this.item(AetherIIItems.SKYROOT_PINECONE.get(), "materials/");
         this.item(AetherIIItems.SCATTERGLASS_SHARD.get(), "materials/");
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
@@ -124,6 +127,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
 
         // Misc
+        this.item(AetherIIItems.MOA_FEED.get(), "miscellaneous/");
+        this.item(AetherIIItems.BLUEBERRY_MOA_FEED.get(), "miscellaneous/");
+        this.item(AetherIIItems.ENCHANTED_MOA_FEED.get(), "miscellaneous/");
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         // Blocks
