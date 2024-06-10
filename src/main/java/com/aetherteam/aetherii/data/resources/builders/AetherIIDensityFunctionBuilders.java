@@ -28,7 +28,6 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/island_density");
     public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
     public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor"); //TODO: Add to Datagen
-    public static final ResourceKey<DensityFunction> LAKES_FINAL = createKey("highlands/lakes/final"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain_shaper"); //TODO: Add to Datagen
 
     public static final ResourceKey<DensityFunction> FINAL_DENSITY = createKey("highlands/final_density");
