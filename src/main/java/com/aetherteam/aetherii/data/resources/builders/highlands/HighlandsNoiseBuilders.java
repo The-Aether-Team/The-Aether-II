@@ -43,7 +43,7 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
         DensityFunction continents = getFunction(function, AetherIIDensityFunctions.CONTINENTS);
         DensityFunction erosion = getFunction(function, AetherIIDensityFunctions.EROSION);
         DensityFunction depth = getFunction(function, AetherIIDensityFunctions.DEPTH);
-        DensityFunction ridges = getFunction(function, AetherIIDensityFunctions.LAKES_NOISE).abs();
+        DensityFunction ridges = getFunction(function, AetherIIDensityFunctions.LAKES_NOISE);
         return new NoiseRouter(
                 DensityFunctions.zero(), // barrier
                 DensityFunctions.zero(), // fluid level floodedness
