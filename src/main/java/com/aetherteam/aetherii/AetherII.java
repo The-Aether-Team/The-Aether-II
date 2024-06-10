@@ -33,6 +33,7 @@ import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.world.AetherIIPoi;
+import com.aetherteam.aetherii.world.biome.AetherIISurfaceRules;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;

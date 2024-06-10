@@ -14,13 +14,13 @@ import java.util.List;
 
 public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
 
-    public static NoiseGeneratorSettings highlandsNoiseSettings(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
+    public static NoiseGeneratorSettings highlandsNoiseSettings(HolderGetter<DensityFunction> function, HolderGetter<NormalNoise.NoiseParameters> noise) {
         BlockState holystone = AetherIIBlocks.HOLYSTONE.get().defaultBlockState();
         return new NoiseGeneratorSettings(
                 new NoiseSettings(0, 384, 2, 1), // noiseSettings
                 holystone, // defaultBlock
                 Blocks.WATER.defaultBlockState(), // defaultFluid
-                makeNoiseRouter(densityFunctions, noise), // noiseRouter
+                makeNoiseRouter(function, noise), // noiseRouter
                 HighlandsSurfaceBuilders.surfaceRules(), // surfaceRule
                 List.of(), // spawnTarget
                 -64, // seaLevel
@@ -43,7 +43,7 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
         DensityFunction continents = getFunction(function, AetherIIDensityFunctions.CONTINENTS);
         DensityFunction erosion = getFunction(function, AetherIIDensityFunctions.EROSION);
         DensityFunction depth = getFunction(function, AetherIIDensityFunctions.DEPTH);
-        DensityFunction ridges = getFunction(function, AetherIIDensityFunctions.LAKES_ISLAND_CHECKER);
+        DensityFunction ridges = getFunction(function, AetherIIDensityFunctions.LAKES_FINAL);
         return new NoiseRouter(
                 DensityFunctions.zero(), // barrier
                 DensityFunctions.zero(), // fluid level floodedness
