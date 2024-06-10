@@ -1,17 +1,20 @@
 package com.aetherteam.aetherii.world.biome;
 
+import com.aetherteam.aetherii.AetherII;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraft.world.level.levelgen.NoiseRouterData;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Function;
 
-public class AetherIISurfaceRules extends NoiseRouterData {
+public class AetherIISurfaceRules {
+
+    public static final DeferredRegister<Codec<? extends SurfaceRules.ConditionSource>> CONDITIONS = DeferredRegister.create(BuiltInRegistries.MATERIAL_CONDITION, AetherII.MODID);
 
     public interface ConditionSource extends Function<SurfaceRules.Context, SurfaceRules.Condition> {
         Codec<SurfaceRules.ConditionSource> CODEC = BuiltInRegistries.MATERIAL_CONDITION
