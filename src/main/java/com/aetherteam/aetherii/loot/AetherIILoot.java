@@ -12,7 +12,9 @@ public class AetherIILoot {
     public static final Set<ResourceLocation> IMMUTABLE_LOOT_TABLES = Collections.unmodifiableSet(LOOT_TABLES);
 
     // Entities
-    public static final ResourceLocation KIRRID_FUR = new ResourceLocation(AetherII.MODID, "entities/sheep/kirrid");
+    public static final ResourceLocation HIGHFIELDS_KIRRID_FUR = new ResourceLocation(AetherII.MODID, "entities/kirrid/highfields_wool");
+    public static final ResourceLocation MAGNETIC_KIRRID_FUR = new ResourceLocation(AetherII.MODID, "entities/kirrid/magnetic_wool");
+    public static final ResourceLocation ARCTIC_KIRRID_FUR = new ResourceLocation(AetherII.MODID, "entities/kirrid/arctic_wool");
 
     public static final ResourceLocation ENTITIES_SHEEPUFF_WHITE = register("entities/sheepuff/white");
     public static final ResourceLocation ENTITIES_SHEEPUFF_ORANGE = register("entities/sheepuff/orange");

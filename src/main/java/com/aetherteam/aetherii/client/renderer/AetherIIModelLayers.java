@@ -13,8 +13,12 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation AERBUNNY_COLLAR = register("aerbunny", "collar");
     public static final ModelLayerLocation FLYING_COW = register("flying_cow");
     public static final ModelLayerLocation SHEEPUFF = register("sheepuff");
-    public static final ModelLayerLocation KIRRID = register("kirrid");
-    public static final ModelLayerLocation KIRRID_BABY = register("kirrid_baby");
+    public static final ModelLayerLocation HIGHFIELDS_KIRRID = register("highfields_kirrid");
+    public static final ModelLayerLocation HIGHFIELDS_KIRRID_BABY = register("highfields_kirrid_baby");
+    public static final ModelLayerLocation MAGNETIC_KIRRID = register("magnetic_kirrid");
+    public static final ModelLayerLocation MAGNETIC_KIRRID_BABY = register("magnetic_kirrid_baby");
+    public static final ModelLayerLocation ARCTIC_KIRRID = register("arctic_kirrid");
+    public static final ModelLayerLocation ARCTIC_KIRRID_BABY = register("arctic_kirrid_baby");
 
     public static final ModelLayerLocation ZEPHYR = register("zephyr");
     public static final ModelLayerLocation ZEPHYR_TRANSPARENCY = register("zephyr", "transparency");
