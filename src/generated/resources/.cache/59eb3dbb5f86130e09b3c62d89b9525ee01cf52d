@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-09T21:46:56.1936002	Loot Tables
+// 1.20.4	2024-06-09T23:31:42.5491668	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -36,7 +36,9 @@ a16bcaab0cf39b3023d08214573ae0f2436c3408 data/aether_ii/loot_tables/blocks/ambro
 c87923ccdefa88d7d3ed708f4de39fb824a9de5d data/aether_ii/loot_tables/blocks/arctic_snow.json
 a9f952fd69ef7832b32445bd67dc71d586d3de1c data/aether_ii/loot_tables/blocks/arctic_snow_block.json
 e298757b5ed094abc38289e287492b01d899f962 data/aether_ii/loot_tables/blocks/arkenium_block.json
+2b3d27ccf442398c4fc43c7baa9ecbdc31ee9930 data/aether_ii/loot_tables/blocks/arkenium_door.json
 4650ed8a6ef6c378fbd5712035ce412ad481809f data/aether_ii/loot_tables/blocks/arkenium_ore.json
+13aeabc438e9f4e75e1d8a629f988b0cf9f45eae data/aether_ii/loot_tables/blocks/arkenium_trapdoor.json
 1746fca9821fbac5c05bb3a5be142856713c18d5 data/aether_ii/loot_tables/blocks/artisans_bench.json
 53716e08e0f8572a5120ce365a3a04f3c186e2cc data/aether_ii/loot_tables/blocks/black_cloudwool.json
 2dcaab91de293f93723a63961907d205730b08a1 data/aether_ii/loot_tables/blocks/black_cloudwool_carpet.json
@@ -181,6 +183,12 @@ a0c1646dbcdee73a0f55b1d19422ec1c6006cbc7 data/aether_ii/loot_tables/blocks/red_c
 7f7d5422019dda69ef310ddaf0a361cf34b965c5 data/aether_ii/loot_tables/blocks/rusted_ferrosite.json
 34f38952d1ec2353bc73e9ec6f8149f073861f8f data/aether_ii/loot_tables/blocks/scatterglass.json
 d2dec275e338a96a3efef1180a388fc2458eeacb data/aether_ii/loot_tables/blocks/scatterglass_pane.json
+0c58715d8e60569d2b889ef23928d7d07e6398e0 data/aether_ii/loot_tables/blocks/secret_greatroot_door.json
+85831bb6f5cbca5139dcdd84b374c6ee4c7412e9 data/aether_ii/loot_tables/blocks/secret_greatroot_trapdoor.json
+1d46f6270e799b9a43fa52d66149dfc02d6a3bfc data/aether_ii/loot_tables/blocks/secret_skyroot_door.json
+6f252300b6d640101fca2d7415b3cd737111d24e data/aether_ii/loot_tables/blocks/secret_skyroot_trapdoor.json
+1f949d83e32b06cffa118eca2af08cea755cf430 data/aether_ii/loot_tables/blocks/secret_wisproot_door.json
+d42d093172995a53ac8d85c17f96d03d34018d2e data/aether_ii/loot_tables/blocks/secret_wisproot_trapdoor.json
 d1e3824ae7ce7c1d5cb5416fd71b7c09986bf48f data/aether_ii/loot_tables/blocks/skybirch_leaf_pile.json
 8e26a9a323ce5cc39f894dd1a6e306a9f80d3ed3 data/aether_ii/loot_tables/blocks/skybirch_leaves.json
 0a76e1c8a03f287097303c729fa73858f76d9227 data/aether_ii/loot_tables/blocks/skybirch_sapling.json

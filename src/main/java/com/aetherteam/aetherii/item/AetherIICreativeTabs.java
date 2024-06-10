@@ -43,6 +43,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_BASE_BEAM.get());
                 output.accept(AetherIIBlocks.SKYROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.SKYROOT_BEAM.get());
+                output.accept(AetherIIBlocks.SECRET_SKYROOT_DOOR.get());
+                output.accept(AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_WOOD.get());
                 output.accept(AetherIIBlocks.GREATROOT_PLANKS.get());
@@ -63,6 +65,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_BASE_BEAM.get());
                 output.accept(AetherIIBlocks.GREATROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.GREATROOT_BEAM.get());
+                output.accept(AetherIIBlocks.SECRET_GREATROOT_DOOR.get());
+                output.accept(AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
@@ -84,6 +88,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_BASE_BEAM.get());
                 output.accept(AetherIIBlocks.WISPROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.WISPROOT_BEAM.get());
+                output.accept(AetherIIBlocks.SECRET_WISPROOT_DOOR.get());
+                output.accept(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
@@ -187,6 +193,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.ARKENIUM_DOOR.get());
+                output.accept(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());

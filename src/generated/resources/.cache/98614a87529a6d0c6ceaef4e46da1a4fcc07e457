@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-09T21:55:25.6525106	Item Models: aether_ii
+// 1.20.4	2024-06-09T23:31:42.6031683	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -46,6 +46,7 @@ cabddf1d97316ffc99ae2dc29917ebc93bc4caf1 assets/aether_ii/models/item/arkenium_c
 f56500edf7b33f52740cc1ff6cddfc42839efac1 assets/aether_ii/models/item/arkenium_crossbow_pulling_0.json
 cafeb3ef8123ba1c479bcceefd8603b43a0eb138 assets/aether_ii/models/item/arkenium_crossbow_pulling_1.json
 5e28bea990a7de510d8c9bb5ef594e9e04a47101 assets/aether_ii/models/item/arkenium_crossbow_pulling_2.json
+8e440a48538e0fc878cefab3e16ddd1aa7ec0728 assets/aether_ii/models/item/arkenium_door.json
 dc70b899ac53f0aa29fccea1bfadb391bfbe5f8b assets/aether_ii/models/item/arkenium_hammer.json
 ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_ore.json
 13d8ad0ca93c610d5fe30d0e665af3e8508de0d7 assets/aether_ii/models/item/arkenium_pickaxe.json
@@ -55,6 +56,7 @@ ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_o
 b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_shovel.json
 5cdc77ed51a4e270e9d66ab00d1e0e2302609b7e assets/aether_ii/models/item/arkenium_spear.json
 8fdeceef026dc237d0a52c72b1b456e7ad35eeb2 assets/aether_ii/models/item/arkenium_strip.json
+a9b682587d4fdc2d44fc788b07158247e370f9f3 assets/aether_ii/models/item/arkenium_trapdoor.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
 69a1b24b31d30cf80e43e5cc5b6e1c7673f7c9f8 assets/aether_ii/models/item/artisans_bench.json
 5f4dbcfef456f96515ecf19da1b8b79230c9aad9 assets/aether_ii/models/item/black_cloudwool.json
@@ -246,6 +248,12 @@ f0594ecf932be1b934b5e991fafcc338ddcfc379 assets/aether_ii/models/item/red_cloudw
 0cdf35fc0cce951ddb5af59db1a8235ac652b485 assets/aether_ii/models/item/scatterglass_bolt.json
 7658d4a77de11fee470c7745cc9c89f159ad1665 assets/aether_ii/models/item/scatterglass_pane.json
 d0da9becaa3288ad5d474ebd8f10b74caa2f0a64 assets/aether_ii/models/item/scatterglass_shard.json
+03d6b8692feb3c5934110adf8fe3989c852845ea assets/aether_ii/models/item/secret_greatroot_door.json
+20341ad65901e8ca51d5cc022414bb445fca0cc5 assets/aether_ii/models/item/secret_greatroot_trapdoor.json
+b23a481733f1d709b3b550248f27fbb12b0afc39 assets/aether_ii/models/item/secret_skyroot_door.json
+ad64962172fd24865460f71f41c053fde83b1c0a assets/aether_ii/models/item/secret_skyroot_trapdoor.json
+6eb29dfa915f7ed687ff1771c2442a3f9e259b7b assets/aether_ii/models/item/secret_wisproot_door.json
+f15013cad0f267267cf942d4efc92b7d54731037 assets/aether_ii/models/item/secret_wisproot_trapdoor.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/sheepuff_spawn_egg.json
 a278983ff6b77ed62a4f15add25a86f0f1dbef4c assets/aether_ii/models/item/skybirch_leaf_pile.json
 8a0980302cbbd9afaab3f79672dfe45915644984 assets/aether_ii/models/item/skybirch_leaves.json

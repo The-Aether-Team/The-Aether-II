@@ -272,6 +272,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.SKYROOT_BASE_BEAM.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_TOP_BEAM.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_BEAM.get());
+        this.item(AetherIIBlocks.SECRET_SKYROOT_DOOR.get().asItem(), "miscellaneous/");
+        this.itemBlock(AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get(), "_bottom");
 
         // Greatroot Planks
         this.itemBlock(AetherIIBlocks.GREATROOT_PLANKS.get());
@@ -294,6 +296,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATROOT_BASE_BEAM.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_TOP_BEAM.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_BEAM.get());
+        this.item(AetherIIBlocks.SECRET_GREATROOT_DOOR.get().asItem(), "miscellaneous/");
+        this.itemBlock(AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.get(), "_bottom");
 
         // Wisproot Planks
         this.itemBlock(AetherIIBlocks.WISPROOT_PLANKS.get());
@@ -316,6 +320,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.WISPROOT_BASE_BEAM.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_TOP_BEAM.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_BEAM.get());
+        this.item(AetherIIBlocks.SECRET_WISPROOT_DOOR.get().asItem(), "miscellaneous/");
+        this.itemBlock(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get(), "_bottom");
 
         // Holystone
         this.itemBlock(AetherIIBlocks.HOLYSTONE_STAIRS.get());
@@ -440,6 +446,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
         this.itemBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
         this.itemBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
+
+        // Arkenium Blocks
+        this.item(AetherIIBlocks.ARKENIUM_DOOR.get().asItem(), "miscellaneous/");
+        this.itemBlock(AetherIIBlocks.ARKENIUM_TRAPDOOR.get(), "_bottom");
 
         // Mineral Blocks
         this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get());

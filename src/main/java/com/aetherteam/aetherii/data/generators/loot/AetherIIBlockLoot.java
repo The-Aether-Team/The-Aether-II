@@ -187,6 +187,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_BASE_BEAM.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_TOP_BEAM.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_BEAM.get());
+        this.add(AetherIIBlocks.SECRET_SKYROOT_DOOR.get(), createDoorTable(AetherIIBlocks.SECRET_SKYROOT_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get());
 
         // Greatroot Planks
         this.dropSelf(AetherIIBlocks.GREATROOT_PLANKS.get());
@@ -209,6 +211,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GREATROOT_BASE_BEAM.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_TOP_BEAM.get());
         this.dropSelf(AetherIIBlocks.GREATROOT_BEAM.get());
+        this.add(AetherIIBlocks.SECRET_GREATROOT_DOOR.get(), createDoorTable(AetherIIBlocks.SECRET_GREATROOT_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.get());
 
         // Wisproot Planks
         this.dropSelf(AetherIIBlocks.WISPROOT_PLANKS.get());
@@ -231,6 +235,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.WISPROOT_BASE_BEAM.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_TOP_BEAM.get());
         this.dropSelf(AetherIIBlocks.WISPROOT_BEAM.get());
+        this.add(AetherIIBlocks.SECRET_WISPROOT_DOOR.get(), createDoorTable(AetherIIBlocks.SECRET_WISPROOT_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get());
 
         // Holystone
         this.dropSelf(AetherIIBlocks.HOLYSTONE_STAIRS.get());
@@ -355,6 +361,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
         this.dropSelf(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
         this.dropSelf(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
+
+        // Arkenium Blocks
+        this.add(AetherIIBlocks.ARKENIUM_DOOR.get(), createDoorTable(AetherIIBlocks.ARKENIUM_DOOR.get()));
+        this.dropSelf(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
 
         // Mineral Blocks
         this.dropSelf(AetherIIBlocks.AMBROSIUM_BLOCK.get());
