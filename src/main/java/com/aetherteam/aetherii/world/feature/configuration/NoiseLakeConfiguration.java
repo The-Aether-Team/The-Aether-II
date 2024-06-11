@@ -5,10 +5,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-public record NoiseLakeConfiguration(DensityFunction lakeNoise, ConstantInt height) implements FeatureConfiguration {
+public record NoiseLakeConfiguration(DensityFunction lakeNoise, DensityFunction lakeFloorNoise, ConstantInt height, BlockStateProvider underwaterBlock) implements FeatureConfiguration {
     public static final Codec<NoiseLakeConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
             DensityFunction.HOLDER_HELPER_CODEC.fieldOf("lake_noise").forGetter(NoiseLakeConfiguration::lakeNoise),
-            ConstantInt.CODEC.fieldOf("height").forGetter(NoiseLakeConfiguration::height)
+            DensityFunction.HOLDER_HELPER_CODEC.fieldOf("lake_floor_noise").forGetter(NoiseLakeConfiguration::lakeFloorNoise),
+            ConstantInt.CODEC.fieldOf("height").forGetter(NoiseLakeConfiguration::height),
+            BlockStateProvider.CODEC.fieldOf("underwater_block").forGetter(NoiseLakeConfiguration::underwaterBlock)
     ).apply(instance, NoiseLakeConfiguration::new));
 }

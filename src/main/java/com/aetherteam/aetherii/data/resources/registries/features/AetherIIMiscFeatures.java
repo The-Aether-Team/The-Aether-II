@@ -52,7 +52,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
-      
+
         SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
             for (int amount : TwigBlock.AMOUNT.getPossibleValues()) {
@@ -73,7 +73,18 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
         AetherIIFeatureUtils.register(context, NOISE_LAKE, AetherIIFeatures.NOISE_LAKE.get(),
                 new NoiseLakeConfiguration(
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
-                        ConstantInt.of(128)
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
+                        ConstantInt.of(128),
+                        new NoiseProvider(
+                                3500L,
+                                new NormalNoise.NoiseParameters(0, 1.0),
+                                0.0345F,
+                                List.of(
+                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
+                                )
+                        )
                 ));
 
         AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
