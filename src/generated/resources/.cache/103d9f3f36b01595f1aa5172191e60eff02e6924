@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-11T12:14:29.8520177	Registries
+// 1.20.4	2024-06-11T15:03:12.5019104	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -54,7 +54,7 @@ a57d339e5aab34056b628f97057b3a473973293b data/aether_ii/worldgen/configured_feat
 12abbb3df3693da9fdad5f9734132899b60fff48 data/aether_ii/worldgen/configured_feature/long_grass_patch.json
 3f1665b6688b81e5078fe2dfd2cb2a7a02d7dde6 data/aether_ii/worldgen/configured_feature/medium_grass_patch.json
 b3b6698fbe20590e0bf7b26ef388814e19d412e2 data/aether_ii/worldgen/configured_feature/moa_nest.json
-1bd531301ae6220979184d1415da3f5c2e00a92c data/aether_ii/worldgen/configured_feature/noise_lake.json
+c0b10a6c95855124021b6304c133b6f4fc2b806d data/aether_ii/worldgen/configured_feature/noise_lake.json
 c88119c12867f70aaeff8c630a3dc5adb6aac051 data/aether_ii/worldgen/configured_feature/orange_tree_patch.json
 c4fadd1887afd454cb7f6f057de3311f5fc70f11 data/aether_ii/worldgen/configured_feature/ore_agiosite.json
 a57c6abda6c77d818311fad90dc7d61bb3d82507 data/aether_ii/worldgen/configured_feature/ore_ambrosium.json
@@ -96,7 +96,7 @@ bb528955a5d100eb3198c0ea44e1409d8e23df3b data/aether_ii/worldgen/density_functio
 13597415de6f6edfbf39ec21d62f37eb87cf9270 data/aether_ii/worldgen/density_function/highlands/factor.json
 0a8dd8e1c45d468c8ead4404a9effd6ed38851b0 data/aether_ii/worldgen/density_function/highlands/final_density.json
 b54be24aa70d7dea4f4e5e1ad53b51b9ba689cf4 data/aether_ii/worldgen/density_function/highlands/island_density.json
-b2ca6cb04bad3f3ef9294be8308aeb33b4764f61 data/aether_ii/worldgen/density_function/highlands/lakes/lake_floor.json
+d6dbdc97493b2a75250c704c6b6ffec66a984229 data/aether_ii/worldgen/density_function/highlands/lakes/lake_floor.json
 d2de538a5bac421a17c7bff86ba98b8165d91aed data/aether_ii/worldgen/density_function/highlands/lakes/noise.json
 208e08bd84d086a2f40737ae695cf8c4e12c64a7 data/aether_ii/worldgen/density_function/highlands/temperature.json
 40138b741ebc95687ee497e2ed86d5f22338be54 data/aether_ii/worldgen/density_function/highlands/terrain_shaper.json

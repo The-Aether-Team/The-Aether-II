@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -32,17 +31,12 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 placeLakeLayer(context, xCoord, 121, zCoord, 0.45, 0.5);
                 placeLakeLayer(context, xCoord, 120, zCoord, 0.46, 0.47);
                 placeLakeLayer(context, xCoord, 119, zCoord, 0.47, 0.43);
-                placeLakeLayer(context, xCoord, 118, zCoord, 0.48, 0.4);
-                placeLakeLayer(context, xCoord, 117, zCoord, 0.49, 0.37);
-                placeLakeLayer(context, xCoord, 116, zCoord, 0.5, 0.35);
-                placeLakeLayer(context, xCoord, 115, zCoord, 0.51, 0.325);
-                placeLakeLayer(context, xCoord, 114, zCoord, 0.52, 0.3);
-                placeLakeLayer(context, xCoord, 113, zCoord, 0.53, 0.275);
-                placeLakeLayer(context, xCoord, 112, zCoord, 0.555, 0.225);
-                placeLakeLayer(context, xCoord, 111, zCoord, 0.56, 0.18);
-                placeLakeLayer(context, xCoord, 110, zCoord, 0.58, 0.13);
-                placeLakeLayer(context, xCoord, 109, zCoord, 0.605, 0.08);
-                placeLakeLayer(context, xCoord, 108, zCoord, 0.65, 0.02);
+                placeLakeLayer(context, xCoord, 118, zCoord, 0.48, 0.39);
+                placeLakeLayer(context, xCoord, 117, zCoord, 0.49, 0.35);
+                placeLakeLayer(context, xCoord, 116, zCoord, 0.5, 0.3);
+                placeLakeLayer(context, xCoord, 115, zCoord, 0.51, 0.25);
+                placeLakeLayer(context, xCoord, 114, zCoord, 0.54, 0.175);
+                placeLakeLayer(context, xCoord, 113, zCoord, 0.57, 0.08);
             }
         }
         return true;
@@ -59,8 +53,8 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
 
         WorldGenLevel level = context.level();
-        if (density > noiseValue && density < 1.5D) {
-            if (!(floor > floorNoiseValue && floor < 1.0D)) {
+        if (density > noiseValue && density < 1.5) {
+            if (floor < floorNoiseValue) {
                 if (!level.isEmptyBlock(new BlockPos(x, y, z))
                         && !level.isEmptyBlock(new BlockPos(x + 1, y, z))
                         && !level.isEmptyBlock(new BlockPos(x - 1, y, z))

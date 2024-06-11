@@ -76,11 +76,10 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
                         ConstantInt.of(128),
                         new NoiseProvider(
-                                3500L,
+                                1200L,
                                 new NormalNoise.NoiseParameters(0, 1.0),
                                 0.0345F,
                                 List.of(
-                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
                                 )
