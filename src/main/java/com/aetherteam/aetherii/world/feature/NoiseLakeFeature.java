@@ -3,12 +3,15 @@ package com.aetherteam.aetherii.world.feature;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 
 public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
     public NoiseLakeFeature(Codec<NoiseLakeConfiguration> codec) {
@@ -20,11 +23,13 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         int chunkX = context.origin().getX() - (context.origin().getX() % 16);
         int chunkZ = context.origin().getZ() - (context.origin().getZ() % 16);
 
+        // Generates this feature chunk-wise
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 int xCoord = chunkX + x;
                 int zCoord = chunkZ + z;
 
+                // Determinds the noise value at each y-level
                 placeLakeLayer(context, xCoord, 124, zCoord, 0.4, 1.0);
                 placeLakeLayer(context, xCoord, 123, zCoord, 0.425, 0.75);
                 placeLakeLayer(context, xCoord, 122, zCoord, 0.44, 0.6);
@@ -48,10 +53,13 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
         DensityFunction lakeNoise = config.lakeNoise();
         DensityFunction lakeFloorNoise = config.lakeFloorNoise();
+        DensityFunction lakeBarrierNoise = config.lakeBarrierNoise();
 
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
+        double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
 
+        // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
         if (density > noiseValue && density < 1.5) {
             if (floor < floorNoiseValue) {
@@ -61,15 +69,32 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                         && !level.isEmptyBlock(new BlockPos(x, y - 1, z))
                         && !level.isEmptyBlock(new BlockPos(x, y, z + 1))
                         && !level.isEmptyBlock(new BlockPos(x, y, z - 1))
+                        && !level.isEmptyBlock(new BlockPos(x + barrierThickness(barrier), y, z))
+                        && !level.isEmptyBlock(new BlockPos(x - barrierThickness(barrier), y, z))
+                        && !level.isEmptyBlock(new BlockPos(x, y - barrierThickness(barrier), z))
+                        && !level.isEmptyBlock(new BlockPos(x, y, z + barrierThickness(barrier)))
+                        && !level.isEmptyBlock(new BlockPos(x, y, z - barrierThickness(barrier)))
                         && !level.getBlockState(new BlockPos(x, y + 1, z)).isSolid()
                 ) {
                     this.setBlock(level, new BlockPos(x, y, z), Blocks.WATER.defaultBlockState());
                     this.setBlock(level, new BlockPos(x, y - 1, z), config.underwaterBlock().getState(context.random(), new BlockPos(x, y - 1, z)));
+
+                    // Removes Floating Grass above the lakes
                     if (level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof BushBlock) {
                         this.setBlock(level, new BlockPos(x, y + 1, z), Blocks.AIR.defaultBlockState());
                     }
                 }
             }
+
+            // Generates waterfalls
+            if (y == 124 && context.random().nextInt(12) == 0 && barrier > 0.25 && !level.isEmptyBlock(new BlockPos(x, y, z))) {
+                level.setBlock(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
+                level.scheduleTick(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().getType(), 0);
+            }
         }
+    }
+
+    public int barrierThickness(double barrier) {
+        return barrier < 0.25 ? 2 : 1;
     }
 }

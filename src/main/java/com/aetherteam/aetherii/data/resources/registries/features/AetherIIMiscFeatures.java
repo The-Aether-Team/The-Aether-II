@@ -74,11 +74,12 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 new NoiseLakeConfiguration(
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
-                        ConstantInt.of(128),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        ConstantInt.of(124),
                         new NoiseProvider(
-                                1200L,
+                                100L,
                                 new NormalNoise.NoiseParameters(0, 1.0),
-                                0.0345F,
+                                0.075F,
                                 List.of(
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
@@ -88,9 +89,9 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
 
         AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
                 new NoiseProvider(
-                        2345L,
+                        200L,
                         new NormalNoise.NoiseParameters(0, 1.0),
-                        0.0333F,
+                        0.0633F,
                         List.of(
                                 AetherIIBlocks.FERROSITE.get().defaultBlockState(),
                                 AetherIIBlocks.FERROSITE.get().defaultBlockState(),

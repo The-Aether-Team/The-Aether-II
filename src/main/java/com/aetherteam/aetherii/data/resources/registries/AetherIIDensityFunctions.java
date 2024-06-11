@@ -44,6 +44,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 ));
 
         context.register(LAKES_FLOOR, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 2.5, 1.0, 0.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 17).abs());
+        context.register(LAKES_BARRIER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.5, 1.0, 0.0, 0.0), 1.0D, 0.0D, 38).abs());
 
         context.register(CLOUDBED_NOISE,
                 DensityFunctions.add(
