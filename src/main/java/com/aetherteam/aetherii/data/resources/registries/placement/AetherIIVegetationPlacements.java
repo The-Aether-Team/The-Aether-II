@@ -83,9 +83,9 @@ public class AetherIIVegetationPlacements {
         AetherIIPlacementUtils.register(context, SHROUDED_FOREST_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_SHROUDED_FOREST),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(24, 0.1F, 1)));
         AetherIIPlacementUtils.register(context, SHIMMERING_BASIN_TREES, configuredFeatures.getOrThrow(AetherIITreeFeatures.WISPROOT),
-                PlacementUtils.countExtra(4, 0.1F, 1),
+                RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
-                SurfaceWaterDepthFilter.forMaxDepth(3),
+                SurfaceWaterDepthFilter.forMaxDepth(2),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome(),
                 BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(AetherIIBlocks.WISPROOT_SAPLING.get().defaultBlockState(), BlockPos.ZERO))
