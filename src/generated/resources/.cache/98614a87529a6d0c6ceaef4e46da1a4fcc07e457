@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-11T15:22:41.7694761	Item Models: aether_ii
+// 1.20.4	2024-06-11T15:35:47.152402	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -76,6 +76,7 @@ bdd47fe31f4c2104856614e6731cbb3b4e04af3c assets/aether_ii/models/item/brown_clou
 b1968f6ccd069ed92d37c8a240ad316f8c5b50a1 assets/aether_ii/models/item/burrukai_pelt.json
 4e48f6f25f8451d175a57c92ffcc52322d66c7fa assets/aether_ii/models/item/burrukai_ribs.json
 731e1f81e61ab924dd6c5cdb553770114c7c98ad assets/aether_ii/models/item/burrukai_rib_cut.json
+1828171625819fd66e9fc5e8ba8beca0e424c388 assets/aether_ii/models/item/cloudtwine.json
 e4d13f0d25e81411724a9be96ea4882fe50f6e61 assets/aether_ii/models/item/cloudwool.json
 ed67eff7e6d30b7f6be0b507e140405622a49ed9 assets/aether_ii/models/item/cloudwool_carpet.json
 a6fda269de440be4d8141138223e1d4aa1d45c92 assets/aether_ii/models/item/coarse_aether_dirt.json

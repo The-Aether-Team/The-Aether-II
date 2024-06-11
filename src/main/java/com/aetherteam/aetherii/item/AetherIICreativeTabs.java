@@ -439,6 +439,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.INERT_GRAVITITE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
+                output.accept(AetherIIItems.CLOUDTWINE.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());

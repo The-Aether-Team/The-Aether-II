@@ -81,6 +81,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.INERT_GRAVITITE.get(), "materials/");
         this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
         this.item(AetherIIItems.GOLDEN_AMBER.get(), "materials/");
+        this.item(AetherIIItems.CLOUDTWINE.get(), "materials/");
         this.item(AetherIIItems.TAEGORE_HIDE.get(), "materials/");
         this.item(AetherIIItems.BURRUKAI_PELT.get(), "materials/");
         this.item(AetherIIItems.AECHOR_PETAL.get(), "materials/");

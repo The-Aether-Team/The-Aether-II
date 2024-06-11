@@ -46,6 +46,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return this.fenceGate(fenceGate, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
     }
 
+    protected void cloudwool(RecipeOutput output, RecipeCategory itemCategory, ItemLike item, RecipeCategory blockCategory, ItemLike block, String itemRecipeName, String itemGroup) {
+        ShapelessRecipeBuilder.shapeless(itemCategory, item, 4).requires(block).group(itemGroup).unlockedBy(getHasName(block), has(block)).save(output, this.name(itemRecipeName));
+        ShapedRecipeBuilder.shaped(blockCategory, block).define('#', item).pattern("##").pattern("##").unlockedBy(getHasName(item), has(item)).save(output, this.name(getSimpleRecipeName(block)));
+    }
+
     protected void colorBlockWithDye(RecipeOutput consumer, List<Item> dyes, List<Item> dyeableItems, Item extra, String group) {
         for(int i = 0; i < dyes.size(); ++i) {
             Item item = dyes.get(i);

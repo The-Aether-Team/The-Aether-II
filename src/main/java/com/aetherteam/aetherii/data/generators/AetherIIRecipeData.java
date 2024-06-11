@@ -355,6 +355,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 16).define('#', AetherIIBlocks.SCATTERGLASS.get()).pattern("###").pattern("###").unlockedBy("has_scatterglass", has(AetherIIBlocks.SCATTERGLASS.get())).save(consumer);
 
         // Wool
+        this.cloudwool(consumer, RecipeCategory.MISC, AetherIIItems.CLOUDTWINE, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CLOUDWOOL.get(), "cloudtwine_from_cloudwool", "cloudtwine");
         this.colorBlockWithDye(consumer, dyes, wool, AetherIIBlocks.CLOUDWOOL.asItem(), "wool");
         
         // Carpet
