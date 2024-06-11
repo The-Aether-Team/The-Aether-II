@@ -221,7 +221,7 @@ public class MoaModel<T extends Moa> extends HierarchicalModel<T> {
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head_main.xRot = headPitch * Mth.DEG_TO_RAD;
+        this.head_main.xRot = (headPitch * Mth.DEG_TO_RAD) + 0.1886F;
         this.head_main.yRot = netHeadYaw * Mth.DEG_TO_RAD;
         float flyAmount = entity.getFlyAmount(ageInTicks - entity.tickCount);
         this.animateWalk(MoaAnimation.walk, limbSwing, Mth.clamp(limbSwingAmount - flyAmount, 0, 1F), 2.0F, 2.5F);
