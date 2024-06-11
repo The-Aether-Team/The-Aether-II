@@ -438,6 +438,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.PURPLE_SWET_GEL.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
                 output.accept(AetherIIItems.WHITE_SWET_GEL.get());
+                output.accept(AetherIIBlocks.BLUE_MOA_EGG.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
@@ -453,5 +454,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
+                output.accept(AetherIIItems.MOA_SPAWN_EGG.get());
             }).build());
 }

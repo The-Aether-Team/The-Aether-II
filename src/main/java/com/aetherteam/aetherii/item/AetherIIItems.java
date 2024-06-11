@@ -171,6 +171,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> HIGHFIELDS_KIRRID_SPAWN_EGG = ITEMS.register("highfields_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_KIRRID, 0x495056, 0xD2CEBA, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> MAGNETIC_KIRRID_SPAWN_EGG = ITEMS.register("magnetic_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.MAGNETIC_KIRRID, 0x5F5A69, 0x9FA2D6, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> ARCTIC_KIRRID_SPAWN_EGG = ITEMS.register("arctic_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.ARCTIC_KIRRID, 0x6B6255, 0xDDDDDD, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> MOA_SPAWN_EGG = ITEMS.register("moa_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.MOA, 0x87BFEF, 0x7A7A7A, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> ZEPHYR_SPAWN_EGG = ITEMS.register("zephyr_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.ZEPHYR, 0xDFDFDF, 0x99CFE8, new Item.Properties()));
 
     // Misc

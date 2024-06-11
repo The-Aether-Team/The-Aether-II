@@ -31,6 +31,7 @@ public class AetherIITags {
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
+        public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, new ResourceLocation(AetherII.MODID, name));
@@ -86,6 +87,7 @@ public class AetherIITags {
         public static final TagKey<Item> KIRRID_TEMPTATION_ITEMS = tag("kirrid_temptation_items");
         public static final TagKey<Item> FLYING_COW_TEMPTATION_ITEMS = tag("flying_cow_temptation_items");
         public static final TagKey<Item> SHEEPUFF_TEMPTATION_ITEMS = tag("sheepuff_temptation_items");
+        public static final TagKey<Item> MOA_FOOD_ITEMS = tag("moa_food_items");
 
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");

@@ -89,6 +89,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.GREEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.BLUE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.PURPLE_SWET_GEL.get(), "materials/");
+
+        this.item(AetherIIBlocks.BLUE_MOA_EGG.get().asItem(), "materials/");
+
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
 
@@ -126,6 +129,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.MOA_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
 
         // Misc

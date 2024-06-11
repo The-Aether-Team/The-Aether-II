@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-10T17:04:26.8983353	Loot Tables
+// 1.20.4	2024-06-11T10:20:07.5718246	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -47,6 +47,7 @@ c7e13732177bf7826b000542a9d6754f82b2859b data/aether_ii/loot_tables/blocks/blueb
 979a5c4bb8cf4fecd2910d88472dedc69240b76e data/aether_ii/loot_tables/blocks/blue_aercloud.json
 4317e31a78d47e56f35eeafc0257eb70356fdb07 data/aether_ii/loot_tables/blocks/blue_cloudwool.json
 bcf59cb0382fd157a392229574d7178769195369 data/aether_ii/loot_tables/blocks/blue_cloudwool_carpet.json
+00c989f751cfcb62d29f8d8a05117f7559434bb6 data/aether_ii/loot_tables/blocks/blue_moa_egg.json
 deaf471938c10c76a86d7c6a040c87f2cf121466 data/aether_ii/loot_tables/blocks/brown_cloudwool.json
 60bf4993a8c15f52cb364b5c52be44d99873b886 data/aether_ii/loot_tables/blocks/brown_cloudwool_carpet.json
 ae25ba8ab6d368e881f2908a144d154f268b369c data/aether_ii/loot_tables/blocks/cloudwool.json
@@ -283,6 +284,7 @@ e5756cffe597096161bf2a7f3af7adba68222a90 data/aether_ii/loot_tables/blocks/zanit
 7e2495d242a9a36bc57c900978ad5006c6f44201 data/aether_ii/loot_tables/entities/kirrid/highfields_wool.json
 bbd6b8f553c91999652a67fa16c92b3d2b07d994 data/aether_ii/loot_tables/entities/kirrid/magnetic_wool.json
 227c582f4900f8979f57026a9bad2712a7d76552 data/aether_ii/loot_tables/entities/magnetic_kirrid.json
+0bd85271af056b5527d58b0534b2b4c6b347887f data/aether_ii/loot_tables/entities/moa.json
 7208f2b2e11fbcd4caa2d28c013cd0caf0e322af data/aether_ii/loot_tables/entities/phyg.json
 84c7758063ec2c2499b30ba61f4dc512667f85f8 data/aether_ii/loot_tables/entities/sheepuff.json
 fee70c3004d2d3353160f15036dc79ec928881b7 data/aether_ii/loot_tables/entities/sheepuff/black.json
