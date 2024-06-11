@@ -300,6 +300,21 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ICESTONE_SLAB, "Icestone Slab");
         this.addBlock(AetherIIBlocks.ICESTONE_WALL, "Icestone Wall");
 
+        // Icestone Bricks
+        this.addBlock(AetherIIBlocks.ICESTONE_BRICKS, "Icestone Bricks");
+        this.addBlock(AetherIIBlocks.ICESTONE_BRICK_STAIRS, "Icestone Brick Stairs");
+        this.addBlock(AetherIIBlocks.ICESTONE_BRICK_SLAB, "Icestone Brick Slab");
+        this.addBlock(AetherIIBlocks.ICESTONE_BRICK_WALL, "Icestone Brick Wall");
+
+        // Icestone Decorative Blocks
+        this.addBlock(AetherIIBlocks.ICESTONE_FLAGSTONES, "Icestone Flagstones");
+        this.addBlock(AetherIIBlocks.ICESTONE_KEYSTONE, "Icestone Keystone");
+        this.addBlock(AetherIIBlocks.ICESTONE_BASE_BRICKS, "Icestone Base Bricks");
+        this.addBlock(AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS, "Icestone Capstone Bricks");
+        this.addBlock(AetherIIBlocks.ICESTONE_BASE_PILLAR, "Icestone Base Pillar");
+        this.addBlock(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR, "Icestone Capstone Pillar");
+        this.addBlock(AetherIIBlocks.ICESTONE_PILLAR, "Icestone Pillar");
+
         // Glass
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS_PANE, "Quicksoil Glass Pane");

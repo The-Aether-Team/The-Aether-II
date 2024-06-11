@@ -403,6 +403,21 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE_PILLAR.get());
 
+        // Icestone Bricks
+        this.itemBlock(AetherIIBlocks.ICESTONE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_BRICK_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_BRICK_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.ICESTONE_BRICK_WALL.get(), AetherIIBlocks.ICESTONE_BRICKS.get(), "construction/");
+
+        // Icestone Decorative Blocks
+        this.itemBlock(AetherIIBlocks.ICESTONE_FLAGSTONES.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_KEYSTONE.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_BASE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_BASE_PILLAR.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
+        this.itemBlock(AetherIIBlocks.ICESTONE_PILLAR.get());
+
         // Icestone
         this.itemBlock(AetherIIBlocks.ICESTONE_STAIRS.get());
         this.itemBlock(AetherIIBlocks.ICESTONE_SLAB.get());

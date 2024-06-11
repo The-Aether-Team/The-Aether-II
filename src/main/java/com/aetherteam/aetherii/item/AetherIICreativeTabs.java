@@ -153,6 +153,17 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ICESTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.ICESTONE_SLAB.get());
                 output.accept(AetherIIBlocks.ICESTONE_WALL.get());
+                output.accept(AetherIIBlocks.ICESTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.ICESTONE_BRICK_STAIRS.get());
+                output.accept(AetherIIBlocks.ICESTONE_BRICK_SLAB.get());
+                output.accept(AetherIIBlocks.ICESTONE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.ICESTONE_FLAGSTONES.get());
+                output.accept(AetherIIBlocks.ICESTONE_KEYSTONE.get());
+                output.accept(AetherIIBlocks.ICESTONE_BASE_BRICKS.get());
+                output.accept(AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.ICESTONE_BASE_PILLAR.get());
+                output.accept(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.ICESTONE_PILLAR.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());

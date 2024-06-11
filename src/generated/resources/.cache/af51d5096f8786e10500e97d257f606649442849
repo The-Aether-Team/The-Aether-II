@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-10T00:59:13.99499	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-06-11T14:30:49.8445944	Tags for minecraft:item mod id aether_ii
 53afc97bd3504253faa87c8448b46627ca13c602 data/aether_ii/tags/items/aerbunny_temptation_items.json
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 82f472ec897b7763f2d04a7ceefbe43c8bc3c1fd data/aether_ii/tags/items/aether_dirt.json
@@ -23,6 +23,7 @@ d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/items/greatroot_log
 07e041016f860713eeee69005d5c309bb262173d data/aether_ii/tags/items/holystone.json
 45c87a071e52376be37262f7a77c1d797ec0e74c data/aether_ii/tags/items/holystone_decorative_blocks.json
 a5df7a36d1179fd70f1778840b38bad71c171e4b data/aether_ii/tags/items/holystone_repairing.json
+6afe30dacc3dcd4669c374cebdb8856c364b7b3e data/aether_ii/tags/items/icestone_decorative_blocks.json
 d4c9cbd81fe5941c2cf29db6e9c97643c1350346 data/aether_ii/tags/items/phyg_temptation_items.json
 83ee50adcdca9d4ab6edf6f27b80ebbfeac2d130 data/aether_ii/tags/items/planks_crafting.json
 707ae2a820e5dd88bcca52058c5354d01e68b539 data/aether_ii/tags/items/plates/arkenium.json
@@ -66,13 +67,13 @@ dfad5dbaa5cab01665fb4753923a154526b784a4 data/minecraft/tags/items/music_discs.j
 af2f674db119a029dc181fa210398d29dbba7d83 data/minecraft/tags/items/saplings.json
 0c276df955c88966b6d276e0f45117724691eff8 data/minecraft/tags/items/shovels.json
 c098ec8974501b4d2ec2522104ebde07957db8e5 data/minecraft/tags/items/signs.json
-d71906fd052c3c04abb18c405b4485104268eb52 data/minecraft/tags/items/slabs.json
+7110b13b40888a58453d8680fe32865e455c800b data/minecraft/tags/items/slabs.json
 a826721510b267865307b8d52bbdcdefab4e5618 data/minecraft/tags/items/small_flowers.json
-fe9faf02f9dd92d2530c91b98ce9f4f3fe6e28fa data/minecraft/tags/items/stairs.json
+fefd4cd3ba1287fe1e3014fd93002391c8f03bb8 data/minecraft/tags/items/stairs.json
 220cb43fca5767fe3d04a7d01c9a1cf30c725296 data/minecraft/tags/items/stone_buttons.json
 0b72f8aa978e4516ff428e2de46ec5659f601643 data/minecraft/tags/items/stone_crafting_materials.json
 c2203557490a11c62948e86149f8a694c7491fa5 data/minecraft/tags/items/swords.json
-5957cf74c5542723ae4f305f540cf79aa1ae1fe2 data/minecraft/tags/items/walls.json
+41b0ebd94559f2a2a1be6ded6b52de56758e1956 data/minecraft/tags/items/walls.json
 5d3e7cc95e15b524d10caae12416861056412e53 data/minecraft/tags/items/wooden_buttons.json
 67fc3d5b8a0890d5fe3b2e86f83a9e17ec806e7b data/minecraft/tags/items/wooden_doors.json
 78ed277ff645a9d01385e71d111abe5236aeecd1 data/minecraft/tags/items/wooden_fences.json

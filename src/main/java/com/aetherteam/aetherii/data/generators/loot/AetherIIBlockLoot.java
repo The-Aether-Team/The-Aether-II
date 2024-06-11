@@ -318,6 +318,21 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.ICESTONE_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.ICESTONE_WALL.get());
 
+        // Icestone Bricks
+        this.dropSelf(AetherIIBlocks.ICESTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.ICESTONE_BRICK_STAIRS.get());
+        this.add(AetherIIBlocks.ICESTONE_BRICK_SLAB.get(), this::createSlabItemTable);
+        this.dropSelf(AetherIIBlocks.ICESTONE_BRICK_WALL.get());
+
+        // Icestone Decorative Blocks
+        this.dropSelf(AetherIIBlocks.ICESTONE_FLAGSTONES.get());
+        this.dropSelf(AetherIIBlocks.ICESTONE_KEYSTONE.get());
+        this.dropSelf(AetherIIBlocks.ICESTONE_BASE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.ICESTONE_BASE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.ICESTONE_PILLAR.get());
+
         // Glass
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS.get());
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());

@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-11T10:20:07.5718246	Loot Tables
+// 1.20.4	2024-06-11T14:30:49.8295868	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -137,6 +137,17 @@ ca4128e14959f974440b122c07b47ae514772c06 data/aether_ii/loot_tables/blocks/holys
 d0bc73c482f0ed62de0521c8aaf08864532df5cb data/aether_ii/loot_tables/blocks/holystone_stairs.json
 3d885a44d1a0ec53d33089cf4cfafd877204b86a data/aether_ii/loot_tables/blocks/holystone_wall.json
 3149ead4837a7edd9fd376aaedf266710affe587 data/aether_ii/loot_tables/blocks/icestone.json
+6a04b026c022963e53d52155bbae3b03aadceccf data/aether_ii/loot_tables/blocks/icestone_base_bricks.json
+9d2abee2ceff518d43cf171f8f4d22637208b739 data/aether_ii/loot_tables/blocks/icestone_base_pillar.json
+b67c08364b3a7034343c9c8537db9c68bfdd7cf0 data/aether_ii/loot_tables/blocks/icestone_bricks.json
+d9ef5802494f258efd60ca60c5e1cf6b054f2e06 data/aether_ii/loot_tables/blocks/icestone_bricks_slab.json
+b8608cc60c54de094a2fd33a126cfc86cf0afafb data/aether_ii/loot_tables/blocks/icestone_bricks_stairs.json
+4b7e7d8de069fe3cc8ab1d6552930cbe2bb983df data/aether_ii/loot_tables/blocks/icestone_bricks_wall.json
+5302dafa894f28bc58f46dd4c8fefacaf5d1bb1d data/aether_ii/loot_tables/blocks/icestone_capstone_bricks.json
+a705ae748111b7f22ccc11902cc9c8132e61fccc data/aether_ii/loot_tables/blocks/icestone_capstone_pillar.json
+d893cf7dbd72165d5402ac82e8fc6f4f6a015548 data/aether_ii/loot_tables/blocks/icestone_flagstones.json
+a7df6e83961ac62f0a2fe061078a3f6a69f807f9 data/aether_ii/loot_tables/blocks/icestone_keystone.json
+6129aa851983e5e45cec80643a318c5274a87b70 data/aether_ii/loot_tables/blocks/icestone_pillar.json
 1a75ba08912a26eec31055c1f77ce925d3ced9fc data/aether_ii/loot_tables/blocks/icestone_slab.json
 a65761b996234d558580d638f0cde605cbcac551 data/aether_ii/loot_tables/blocks/icestone_stairs.json
 bc6ab30369cb3ed5448576445990de1c4e0423fe data/aether_ii/loot_tables/blocks/icestone_wall.json
