@@ -5,9 +5,9 @@
     "type": "aether_ii:perlin_noise",
     "noise": {
       "amplitudes": [
-        1.25,
+        1.0,
+        1.75,
         0.0,
-        0.5,
         0.0
       ],
       "firstOctave": -8

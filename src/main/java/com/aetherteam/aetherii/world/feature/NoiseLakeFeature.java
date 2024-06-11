@@ -50,15 +50,15 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
     public void placeLakeLayer(FeaturePlaceContext<NoiseLakeConfiguration> context, DensityFunction lakeNoise, int x, int y, int z, double noiseValue) {
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
         WorldGenLevel level = context.level();
-        if (!level.isEmptyBlock(new BlockPos(x, y, z))
-                && !level.isEmptyBlock(new BlockPos(x + 1, y, z))
-                && !level.isEmptyBlock(new BlockPos(x - 1, y, z))
-                && !level.isEmptyBlock(new BlockPos(x, y - 1, z))
-                && !level.isEmptyBlock(new BlockPos(x, y, z + 1))
-                && !level.isEmptyBlock(new BlockPos(x, y, z - 1))
-                && !level.getBlockState(new BlockPos(x, y + 1, z)).isSolid()
-        ) {
-            if (density > noiseValue && density < 1.0D) {
+        if (density > noiseValue && density < 1.5D) {
+            if (!level.isEmptyBlock(new BlockPos(x, y, z))
+                    && !level.isEmptyBlock(new BlockPos(x + 1, y, z))
+                    && !level.isEmptyBlock(new BlockPos(x - 1, y, z))
+                    && !level.isEmptyBlock(new BlockPos(x, y - 1, z))
+                    && !level.isEmptyBlock(new BlockPos(x, y, z + 1))
+                    && !level.isEmptyBlock(new BlockPos(x, y, z - 1))
+                    && !level.getBlockState(new BlockPos(x, y + 1, z)).isSolid()
+            ) {
                 this.setBlock(level, new BlockPos(x, y, z), Blocks.WATER.defaultBlockState());
                 this.setBlock(level, new BlockPos(x, y - 1, z), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
             }
