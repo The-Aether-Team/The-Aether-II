@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.blockentity;
 
 import com.aetherteam.aetherii.block.miscellaneous.egg.AbstractMoaEggBlock;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
-import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaEggModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -17,7 +17,7 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity> {
     private final MoaEggModel moaEggModel;
 
     public MoaEggRenderer(BlockEntityRendererProvider.Context pContext) {
-        this.moaEggModel = new MoaEggModel(pContext.getModelSet().bakeLayer(AetherModelLayers.MOA_EGG));
+        this.moaEggModel = new MoaEggModel(pContext.getModelSet().bakeLayer(AetherIIModelLayers.MOA_EGG));
     }
 
     @Override

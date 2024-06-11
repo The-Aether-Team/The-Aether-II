@@ -156,7 +156,22 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         // Vanilla
         this.tag(BlockTags.WOOL).add(
                 AetherIIBlocks.CLOUDWOOL.get(),
-                AetherIIBlocks.WHITE_CLOUDWOOL.get()
+                AetherIIBlocks.WHITE_CLOUDWOOL.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL.get(),
+                AetherIIBlocks.RED_CLOUDWOOL.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL.get()
         );
         this.tag(BlockTags.WOODEN_STAIRS).add(
                 AetherIIBlocks.SKYROOT_STAIRS.get(),
@@ -204,7 +219,22 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.WOOL_CARPETS).add(
                 AetherIIBlocks.CLOUDWOOL_CARPET.get(),
-                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get()
+                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.RED_CLOUDWOOL_CARPET.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get()
         );
         this.tag(BlockTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.get(),
@@ -271,6 +301,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HESPEROSE.get(),
                 AetherIIBlocks.TARABLOOM.get()
         );
+        this.tag(BlockTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.get());
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(BlockTags.FLOWER_POTS).add(
                 AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(),
@@ -441,7 +472,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_TOP_PLANKS.get(),
                 AetherIIBlocks.WISPROOT_BASE_BEAM.get(),
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
-                AetherIIBlocks.WISPROOT_BEAM.get()
+                AetherIIBlocks.WISPROOT_BEAM.get(),
+                AetherIIBlocks.SKYROOT_BED.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),

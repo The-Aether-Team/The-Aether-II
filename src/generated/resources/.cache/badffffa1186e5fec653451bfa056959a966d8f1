@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-07T18:50:41.8779885	Tags for minecraft:block mod id aether_ii
+// 1.20.4	2024-06-11T09:15:12.0184499	Tags for minecraft:block mod id aether_ii
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/blocks/aerclouds.json
 f892200a6958152f663e0a7c08fdbed855a2811d data/aether_ii/tags/blocks/aether_animal_spawnable_on.json
 82f472ec897b7763f2d04a7ceefbe43c8bc3c1fd data/aether_ii/tags/blocks/aether_dirt.json
@@ -14,6 +14,7 @@ a6cb4c19d89a718bf42595fdcdffd0e03b5bc4b8 data/aether_ii/tags/blocks/amberoot_log
 d16832b00a987fbbf18259365f95111bc00a1576 data/aether_ii/tags/blocks/greatroot_logs.json
 07e041016f860713eeee69005d5c309bb262173d data/aether_ii/tags/blocks/holystone.json
 45c87a071e52376be37262f7a77c1d797ec0e74c data/aether_ii/tags/blocks/holystone_decorative_blocks.json
+d2f66f2f6cb3393f04051ee782fa45ba11773d29 data/aether_ii/tags/blocks/moa_hatch_block.json
 e25d24f27acc51ff81a64f65603eb35cf3b433b7 data/aether_ii/tags/blocks/skyroot_decorative_blocks.json
 6f9651d534c05c400a6dd78fbd1469e3626777a8 data/aether_ii/tags/blocks/skyroot_logs.json
 fb2c91a28387d33e76a95f99e34f52f12a5975a9 data/aether_ii/tags/blocks/wisproot_decorative_blocks.json
@@ -25,6 +26,7 @@ a59a8582f5c13f489240e0403b5366d250d9776a data/forge/tags/blocks/fence_gates/wood
 ac55893d5d6560b7c89b92c6760cfe84872435bf data/forge/tags/blocks/storage_blocks.json
 627ae888257f3e5e6ed8d647e0952bd5c76e353c data/minecraft/tags/blocks/bamboo_plantable_on.json
 ac55893d5d6560b7c89b92c6760cfe84872435bf data/minecraft/tags/blocks/beacon_base_blocks.json
+ab38a396ec5ecb0eaf4260a739e98f5fe052d0e0 data/minecraft/tags/blocks/beds.json
 8de31e7c9d0208e9c224f2e9420e7a123696b830 data/minecraft/tags/blocks/buttons.json
 e1f3d1040cb1bc0f27182689ea566f5c91512e18 data/minecraft/tags/blocks/climbable.json
 95d329a0096f2a8191bc47d0d7dd46020215108d data/minecraft/tags/blocks/convertable_to_mud.json
@@ -37,7 +39,7 @@ f2b8d713f3793aa617f5915c6ce00358ef3092e1 data/minecraft/tags/blocks/ice.json
 ebe5b264577539f1204b094f12e88ae5a0ef52d3 data/minecraft/tags/blocks/impermeable.json
 5bf1a9be6ebc7d682e6514d2c7aa1ed69f98f2db data/minecraft/tags/blocks/leaves.json
 c8faef7fa50c3ca0e6834d010620789165e12351 data/minecraft/tags/blocks/logs_that_burn.json
-2eb664bd865a69a99cf69d14d18f8e542a69e98f data/minecraft/tags/blocks/mineable/axe.json
+3d6f042b5a96a9b8abfed05b65c4b0ae14cc34e4 data/minecraft/tags/blocks/mineable/axe.json
 6fd5a5dc6906eb29dc517e390ba64ec4c5b6674e data/minecraft/tags/blocks/mineable/hoe.json
 3c20b51f21737023f102f56a7055640f25ea5572 data/minecraft/tags/blocks/mineable/pickaxe.json
 e1cc9a3a3172b61552c237eda4c9e0edfd249805 data/minecraft/tags/blocks/mineable/shovel.json
@@ -64,5 +66,5 @@ aa0590601c43ae254bba7e082694592a0c959547 data/minecraft/tags/blocks/wooden_press
 40fd42ddb845bcf37303aac078a0163f2ecf3aa5 data/minecraft/tags/blocks/wooden_slabs.json
 f3fabcca9d36c6a86d4627a0c314482ce0fc4952 data/minecraft/tags/blocks/wooden_stairs.json
 a40c696038b411d5dae9120fc7f28c3dee9af25f data/minecraft/tags/blocks/wooden_trapdoors.json
-28ca139e4fd24c8d6881331a053981b4edec8435 data/minecraft/tags/blocks/wool.json
-f7a5b755746822dd35fea39d9691bfb188a44bf6 data/minecraft/tags/blocks/wool_carpets.json
+8c517cff8ed11e8c2925c81979c893c338850d6e data/minecraft/tags/blocks/wool.json
+0822d64d05eecb09f77bd4e866c5e1c750023cb4 data/minecraft/tags/blocks/wool_carpets.json

@@ -155,8 +155,38 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SCATTERGLASS_PANE.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.ORANGE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.YELLOW_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.LIME_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.PINK_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.GRAY_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.CYAN_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.PURPLE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BLUE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BROWN_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.GREEN_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.RED_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BLACK_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
                 output.accept(AetherIIBlocks.ZANITE_BLOCK.get());
                 output.accept(AetherIIBlocks.ARKENIUM_BLOCK.get());
@@ -271,6 +301,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
+                output.accept(AetherIIBlocks.SKYROOT_BED.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("equipment_and_utilities", () -> CreativeModeTab.builder()
@@ -282,6 +313,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_SHORTSWORD.get());
                 output.accept(AetherIIItems.SKYROOT_HAMMER.get());
                 output.accept(AetherIIItems.SKYROOT_SPEAR.get());
+                output.accept(AetherIIItems.SKYROOT_CROSSBOW.get());
                 output.accept(AetherIIItems.SKYROOT_SHOVEL.get());
                 output.accept(AetherIIItems.SKYROOT_PICKAXE.get());
                 output.accept(AetherIIItems.SKYROOT_AXE.get());
@@ -289,6 +321,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.HOLYSTONE_SHORTSWORD.get());
                 output.accept(AetherIIItems.HOLYSTONE_HAMMER.get());
                 output.accept(AetherIIItems.HOLYSTONE_SPEAR.get());
+                output.accept(AetherIIItems.HOLYSTONE_CROSSBOW.get());
                 output.accept(AetherIIItems.HOLYSTONE_SHOVEL.get());
                 output.accept(AetherIIItems.HOLYSTONE_PICKAXE.get());
                 output.accept(AetherIIItems.HOLYSTONE_AXE.get());
@@ -296,6 +329,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.ZANITE_HAMMER.get());
                 output.accept(AetherIIItems.ZANITE_SPEAR.get());
+                output.accept(AetherIIItems.ZANITE_CROSSBOW.get());
                 output.accept(AetherIIItems.ZANITE_SHOVEL.get());
                 output.accept(AetherIIItems.ZANITE_PICKAXE.get());
                 output.accept(AetherIIItems.ZANITE_AXE.get());
@@ -303,6 +337,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_SHORTSWORD.get());
                 output.accept(AetherIIItems.ARKENIUM_HAMMER.get());
                 output.accept(AetherIIItems.ARKENIUM_SPEAR.get());
+                output.accept(AetherIIItems.ARKENIUM_CROSSBOW.get());
                 output.accept(AetherIIItems.ARKENIUM_SHOVEL.get());
                 output.accept(AetherIIItems.ARKENIUM_PICKAXE.get());
                 output.accept(AetherIIItems.ARKENIUM_AXE.get());
@@ -310,10 +345,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.GRAVITITE_HAMMER.get());
                 output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
+                output.accept(AetherIIItems.GRAVITITE_CROSSBOW.get());
                 output.accept(AetherIIItems.GRAVITITE_SHOVEL.get());
                 output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
+                output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
@@ -364,6 +401,7 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
+                output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
                 output.accept(AetherIIItems.INERT_ARKENIUM.get());
@@ -391,7 +429,9 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
-                output.accept(AetherIIItems.KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());

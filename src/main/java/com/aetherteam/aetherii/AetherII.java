@@ -32,8 +32,8 @@ import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacke
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
-import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
+import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
@@ -130,6 +130,7 @@ public class AetherII {
         AerbunnyMountListener.listen(bus);
         WorldInteractionListener.listen(bus);
         RecipeListener.listen(bus);
+        BlockInteractionListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 

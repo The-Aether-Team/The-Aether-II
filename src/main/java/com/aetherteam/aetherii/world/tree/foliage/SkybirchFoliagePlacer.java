@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.tree.foliage;
 
-import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;

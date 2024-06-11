@@ -52,7 +52,7 @@ public class AetherIIBiomes {
         context.register(SHROUDED_FOREST, HighlandsBiomeBuilders.shroudedForestBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
         context.register(SHIMMERING_BASIN, HighlandsBiomeBuilders.shimmeringBasinBiome(placedFeatures, vanillaConfiguredCarvers, 0.5F, 0.5F));
 
-        context.register(MAGNETIC_SCAR, HighlandsBiomeBuilders.magneticScarBiome(placedFeatures, vanillaConfiguredCarvers, 0.2F, 0.3F));
+        context.register(MAGNETIC_SCAR, HighlandsBiomeBuilders.magneticScarBiome(placedFeatures, vanillaConfiguredCarvers, 0.6F, 0.3F));
         context.register(TURQUOISE_FOREST, HighlandsBiomeBuilders.turquoiseForestBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));
         context.register(GLISTENING_SWAMP, HighlandsBiomeBuilders.glisteningSwampBiome(placedFeatures, vanillaConfiguredCarvers, 0.8F, 0.9F));
         context.register(VIOLET_HIGHWOODS, HighlandsBiomeBuilders.violetHighwoodsBiome(placedFeatures, vanillaConfiguredCarvers, 0.7F, 0.8F));

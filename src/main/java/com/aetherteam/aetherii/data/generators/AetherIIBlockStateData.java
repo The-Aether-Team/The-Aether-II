@@ -92,16 +92,16 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.leafPile(AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), AetherIIBlocks.AMBEROOT_LEAVES.get());
 
         // Leaves
-        this.block(AetherIIBlocks.SKYROOT_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.SKYPLANE_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.SKYBIRCH_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.SKYPINE_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.WISPROOT_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.WISPTOP_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.GREATROOT_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.GREATOAK_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.GREATBOA_LEAVES.get(), "natural/");
-        this.block(AetherIIBlocks.AMBEROOT_LEAVES.get(), "natural/");
+        this.leaves(AetherIIBlocks.SKYROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.SKYPLANE_LEAVES.get());
+        this.leaves(AetherIIBlocks.SKYBIRCH_LEAVES.get());
+        this.leaves(AetherIIBlocks.SKYPINE_LEAVES.get());
+        this.leaves(AetherIIBlocks.WISPROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.WISPTOP_LEAVES.get());
+        this.leaves(AetherIIBlocks.GREATROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.GREATOAK_LEAVES.get());
+        this.leaves(AetherIIBlocks.GREATBOA_LEAVES.get());
+        this.leaves(AetherIIBlocks.AMBEROOT_LEAVES.get());
 
         // Saplings
         this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
@@ -129,8 +129,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.shortGrass(AetherIIBlocks.AETHER_LONG_GRASS.get());
 
         // Flowers
-        this.crossBlock(AetherIIBlocks.HESPEROSE.get(), "natural/");
-        this.crossBlock(AetherIIBlocks.TARABLOOM.get(), "natural/");
+        this.frostedCross(AetherIIBlocks.HESPEROSE.get());
+        this.frostedCross(AetherIIBlocks.TARABLOOM.get());
 
         // Potted Flowers
         this.pottedPlant(AetherIIBlocks.POTTED_HESPEROSE.get(), AetherIIBlocks.HESPEROSE.get(), "natural/");
@@ -311,10 +311,40 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         // Wool
         this.block(AetherIIBlocks.CLOUDWOOL.get(), "construction/");
         this.block(AetherIIBlocks.WHITE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.ORANGE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.MAGENTA_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.YELLOW_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.LIME_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.PINK_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.GRAY_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.CYAN_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.PURPLE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.BLUE_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.BROWN_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.GREEN_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.RED_CLOUDWOOL.get(), "construction/");
+        this.block(AetherIIBlocks.BLACK_CLOUDWOOL.get(), "construction/");
 
         // Carpet
         this.carpet(AetherIIBlocks.CLOUDWOOL_CARPET.get(), AetherIIBlocks.CLOUDWOOL.get(),"construction/");
         this.carpet(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.WHITE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.ORANGE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get(), AetherIIBlocks.MAGENTA_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get(), AetherIIBlocks.YELLOW_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get(), AetherIIBlocks.LIME_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get(), AetherIIBlocks.PINK_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get(), AetherIIBlocks.GRAY_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get(), AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get(), AetherIIBlocks.CYAN_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.PURPLE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get(), AetherIIBlocks.BLUE_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get(), AetherIIBlocks.BROWN_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get(), AetherIIBlocks.GREEN_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get(), AetherIIBlocks.RED_CLOUDWOOL.get(),"construction/");
+        this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get(), AetherIIBlocks.BLACK_CLOUDWOOL.get(),"construction/");
 
         // Mineral Blocks
         this.block(AetherIIBlocks.AMBROSIUM_BLOCK.get(), "construction/");
@@ -330,6 +360,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.altar(AetherIIBlocks.ALTAR.get());
         this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.bed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
 
         //Egg
         this.moaEgg(AetherIIBlocks.BLUE_MOA_EGG.get());

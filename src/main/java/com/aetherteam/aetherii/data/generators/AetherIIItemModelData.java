@@ -44,25 +44,33 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.SKYROOT_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.HOLYSTONE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.HOLYSTONE_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.HOLYSTONE_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.ZANITE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.ZANITE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.ZANITE_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.ZANITE_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.ARKENIUM_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.ARKENIUM_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.ARKENIUM_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.ARKENIUM_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.GRAVITITE_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.GRAVITITE_SPEAR.get(), "weapons/");
+        this.crossbowItem(AetherIIItems.GRAVITITE_CROSSBOW.get(), "weapons/");
+
+        this.handheldItem(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
 
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
+        this.item(AetherIIItems.SCATTERGLASS_SHARD.get(), "materials/");
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
         this.item(AetherIIItems.INERT_ARKENIUM.get(), "materials/");
@@ -115,7 +123,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
-        this.eggItem(AetherIIItems.KIRRID_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MOA_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
 
@@ -396,10 +406,40 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Wool
         this.itemBlock(AetherIIBlocks.CLOUDWOOL.get());
         this.itemBlock(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.ORANGE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.YELLOW_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.LIME_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.PINK_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.GRAY_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.CYAN_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.PURPLE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.BLUE_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.BROWN_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.GREEN_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.RED_CLOUDWOOL.get());
+        this.itemBlock(AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
         // Carpet
         this.itemBlock(AetherIIBlocks.CLOUDWOOL_CARPET.get());
         this.itemBlock(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
+        this.itemBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
 
         // Mineral Blocks
         this.itemBlock(AetherIIBlocks.AMBROSIUM_BLOCK.get());
@@ -415,6 +455,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ALTAR.get());
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
+        this.lookalikeBlock(AetherIIBlocks.SKYROOT_BED.get(), this.mcLoc("item/template_bed"));
 
         // Bookshelves
         this.itemBlock(AetherIIBlocks.SKYROOT_BOOKSHELF.get());

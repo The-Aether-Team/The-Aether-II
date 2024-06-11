@@ -1,45 +1,45 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
-import com.aetherteam.aetherii.client.renderer.entity.model.KirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.KirridModel;
-import com.aetherteam.aetherii.entity.passive.Kirrid;
+import com.aetherteam.aetherii.client.renderer.BiomeVariantPresets;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.KirridBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.KirridModel;
+import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class KirridRenderer<T extends Kirrid> extends MultiBabyModelRenderer<T, EntityModel<T>, KirridModel<T>, KirridBabyModel<T>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields.png");
-    private static final ResourceLocation BABY_TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields_baby.png");
-    private final KirridModel<T> defaultModel;
-    private final KirridBabyModel<T> babyModel;
+public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, EntityModel<Kirrid>, KirridModel, KirridBabyModel> {
+    private final ResourceLocation defaultTexture;
+    private final ResourceLocation babyTexture;
+    private final KirridModel defaultModel;
+    private final KirridBabyModel babyModel;
 
-
-    public KirridRenderer(EntityRendererProvider.Context context) {
-        super(context, new KirridModel<>(context.bakeLayer(AetherModelLayers.KIRRID)), 0.5F);
-        this.defaultModel = new KirridModel<>(context.bakeLayer(AetherModelLayers.KIRRID));
-        this.babyModel = new KirridBabyModel<>(context.bakeLayer(AetherModelLayers.KIRRID_BABY));
+    public KirridRenderer(EntityRendererProvider.Context context, BiomeVariantPresets preset) {
+        super(context, (KirridModel) preset.getDefaultModel(context), 0.5F);
+        this.defaultTexture = preset.getDefaultTexture();
+        this.babyTexture = preset.getBabyTexture();
+        this.defaultModel = (KirridModel) preset.getDefaultModel(context);
+        this.babyModel = (KirridBabyModel) preset.getBabyModel(context);
     }
 
     @Override
-    public KirridModel<T> getDefaultModel() {
+    public KirridModel getDefaultModel() {
         return this.defaultModel;
     }
 
     @Override
-    public KirridBabyModel<T> getBabyModel() {
+    public KirridBabyModel getBabyModel() {
         return this.babyModel;
     }
 
     @Override
     public ResourceLocation getDefaultTexture() {
-        return TEXTURE;
+        return this.defaultTexture;
     }
 
     @Override
     public ResourceLocation getBabyTexture() {
-        return BABY_TEXTURE;
+        return this.babyTexture;
     }
 }

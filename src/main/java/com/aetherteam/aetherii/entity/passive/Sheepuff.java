@@ -54,6 +54,22 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+//todo: unique coloration map to reference per dye color and also separate white from undyed somehow (allow a null color?):
+//  light gray d4d0cd
+//  gray 7a8191
+//  black 2f323d
+//  brown 6e545b
+//  red ab5e66
+//  orange ffbd87
+//  yellow ffdf87
+//  lime bbf2a0
+//  green 81a872
+//  cyan a3e6dc
+//  light blue b7bbf7
+//  blue 6879ba
+//  purple 9c7dc7
+//  magenta e4b9fa
+//  pink ffbad6
 /**
  * [CODE COPY] - {@link net.minecraft.world.entity.animal.Sheep}.<br><br>
  * Cleaned up and added additional behavior for puff behavior and slow-falling.<br><br>

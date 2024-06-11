@@ -7,8 +7,13 @@ import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+
+import java.util.List;
 
 public class AetherIIRecipeData extends AetherIIRecipeProvider {
     public AetherIIRecipeData(PackOutput output) {
@@ -17,6 +22,61 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput consumer) {
+        List<Item> dyes = List.of(
+                Items.BLACK_DYE,
+                Items.BLUE_DYE,
+                Items.BROWN_DYE,
+                Items.CYAN_DYE,
+                Items.GRAY_DYE,
+                Items.GREEN_DYE,
+                Items.LIGHT_BLUE_DYE,
+                Items.LIGHT_GRAY_DYE,
+                Items.LIME_DYE,
+                Items.MAGENTA_DYE,
+                Items.ORANGE_DYE,
+                Items.PINK_DYE,
+                Items.PURPLE_DYE,
+                Items.RED_DYE,
+                Items.YELLOW_DYE,
+                Items.WHITE_DYE
+        );
+        List<Item> wool = List.of(
+                AetherIIBlocks.BLACK_CLOUDWOOL.asItem(),
+                AetherIIBlocks.BLUE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.BROWN_CLOUDWOOL.asItem(),
+                AetherIIBlocks.CYAN_CLOUDWOOL.asItem(),
+                AetherIIBlocks.GRAY_CLOUDWOOL.asItem(),
+                AetherIIBlocks.GREEN_CLOUDWOOL.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.asItem(),
+                AetherIIBlocks.LIME_CLOUDWOOL.asItem(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL.asItem(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.PINK_CLOUDWOOL.asItem(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL.asItem(),
+                AetherIIBlocks.RED_CLOUDWOOL.asItem(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL.asItem(),
+                AetherIIBlocks.WHITE_CLOUDWOOL.asItem()
+        );
+        List<Item> carpet = List.of(
+                AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.LIME_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.PINK_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.RED_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.asItem(),
+                AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem()
+        );
+        
         // Blocks
         // Dirt
         this.ambrosiumEnchanting(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_GRASS_BLOCK.get()).save(consumer, this.name("ambrosium_enchant_aether_grass_to_enchanted_aether_grass"));
@@ -268,8 +328,27 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SCATTERGLASS_PANE.get(), 16).define('#', AetherIIBlocks.SCATTERGLASS.get()).pattern("###").pattern("###").unlockedBy("has_scatterglass", has(AetherIIBlocks.SCATTERGLASS.get())).save(consumer);
 
         // Wool
+        this.colorBlockWithDye(consumer, dyes, wool, AetherIIBlocks.CLOUDWOOL.asItem(), "wool");
+        
+        // Carpet
+        this.colorBlockWithDye(consumer, dyes, carpet, AetherIIBlocks.CLOUDWOOL_CARPET.asItem(), "carpet");
         carpet(consumer, AetherIIBlocks.CLOUDWOOL_CARPET, AetherIIBlocks.CLOUDWOOL.get());
         carpet(consumer, AetherIIBlocks.WHITE_CLOUDWOOL_CARPET, AetherIIBlocks.WHITE_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET, AetherIIBlocks.ORANGE_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET, AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET, AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET, AetherIIBlocks.YELLOW_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.LIME_CLOUDWOOL_CARPET, AetherIIBlocks.LIME_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.PINK_CLOUDWOOL_CARPET, AetherIIBlocks.PINK_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.GRAY_CLOUDWOOL_CARPET, AetherIIBlocks.GRAY_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET, AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.CYAN_CLOUDWOOL_CARPET, AetherIIBlocks.CYAN_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET, AetherIIBlocks.PURPLE_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.BLUE_CLOUDWOOL_CARPET, AetherIIBlocks.BLUE_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.BROWN_CLOUDWOOL_CARPET, AetherIIBlocks.BROWN_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.GREEN_CLOUDWOOL_CARPET, AetherIIBlocks.GREEN_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.RED_CLOUDWOOL_CARPET, AetherIIBlocks.RED_CLOUDWOOL.get());
+        carpet(consumer, AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
         // Mineral Blocks
         oreBlockStorageRecipesRecipesWithCustomUnpacking(consumer, RecipeCategory.MISC, AetherIIItems.AMBROSIUM_SHARD.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.AMBROSIUM_BLOCK, "ambrosium_shard_from_ambrosium_block", "ambrosium_shard");
@@ -328,6 +407,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .pattern("# #")
                 .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_LADDER.get()), has(AetherIITags.Items.RODS_SKYROOT))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_BED.get(), 1)
+                .define('W', ItemTags.WOOL)
+                .define('P', AetherIITags.Items.PLANKS_CRAFTING)
+                .pattern("WWW")
+                .pattern("PPP")
+                .unlockedBy("has_wool", has(ItemTags.WOOL))
                 .save(consumer);
 
         // Bookshelves
@@ -402,6 +489,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.SKYROOT_TWIG)
                 .unlockedBy("has_twig", has(AetherIIBlocks.SKYROOT_TWIG))
                 .save(consumer, "skyroot_stick_from_twig");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_SHARD.get(), 4)
+                .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
+                .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
+                .save(consumer);
         this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).save(consumer, this.name("ambrosium_shard_from_smelting"));
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).save(consumer, this.name("ambrosium_shard_from_blasting"));
         this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.7F).save(consumer, this.name("zanite_gemstone_from_smelting"));
@@ -414,5 +505,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#")
                 .unlockedBy("has_arkenium", has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WHITE_DYE)
+                .group("white_dye")
+                .requires(AetherIIBlocks.HESPEROSE.get())
+                .unlockedBy(getHasName(AetherIIBlocks.HESPEROSE.get()), has(AetherIIBlocks.HESPEROSE.get()))
+                .save(consumer, this.name("flower_to_white_dye"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PURPLE_DYE)
+                .group("purple_dye")
+                .requires(AetherIIBlocks.TARABLOOM.get())
+                .unlockedBy(getHasName(AetherIIBlocks.TARABLOOM.get()), has(AetherIIBlocks.TARABLOOM.get()))
+                .save(consumer, this.name("flower_to_purple_dye"));
     }
 }

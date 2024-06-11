@@ -33,7 +33,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
     public void generate() {
         this.add(AetherIIEntityTypes.FLYING_COW.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(Items.BEEF)
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_RIB_CUT)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                                 .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
                                 .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
@@ -48,7 +48,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         );
         this.add(AetherIIEntityTypes.PHYG.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(Items.PORKCHOP)
+                        .add(LootItem.lootTableItem(AetherIIItems.RAW_TAEGORE_MEAT)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                                 .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
                                 .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
@@ -65,7 +65,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
 
         this.add(AetherIIEntityTypes.SHEEPUFF.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(Items.MUTTON)
+                        .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                                 .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
                                 .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
@@ -90,16 +90,12 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_YELLOW, createSheepuffTable(Blocks.YELLOW_WOOL));
 
 
-        this.add(AetherIIEntityTypes.KIRRID.get(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
-                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
-                        )
-                )
-        );
-        this.add(AetherIIEntityTypes.KIRRID.get(), AetherIILoot.KIRRID_FUR, createKirridTable(AetherIIBlocks.CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), createKirridTable());
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), createKirridTable());
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), createKirridTable());
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.HIGHFIELDS_KIRRID_FUR, createKirridWithWoolTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.MAGNETIC_KIRRID_FUR, createKirridWithWoolTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ARCTIC_KIRRID_FUR, createKirridWithWoolTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
 
         this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -119,12 +115,21 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         );
     }
 
-    protected static LootTable.Builder createKirridTable(ItemLike pWoolItem) {
+    protected static LootTable.Builder createKirridTable() {
         return LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(pWoolItem)))
-                .withPool(
-                        LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootTableReference.lootTableReference(AetherIIEntityTypes.KIRRID.get().getDefaultLootTable()))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
                 );
+    }
+
+    protected static LootTable.Builder createKirridWithWoolTable(EntityType<?> entityType, ItemLike wool) {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(wool)))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootTableReference.lootTableReference(entityType.getDefaultLootTable())));
     }
 
     private static LootTable.Builder createSheepuffTable(ItemLike wool) {

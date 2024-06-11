@@ -1,8 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
-
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.AetherModelLayers;
+import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaModel;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -16,11 +15,10 @@ public class MoaRenderer<T extends Moa> extends MultiBabyModelRenderer<T, Entity
     private final MoaModel<T> defaultModel;
     private final MoaBabyModel<T> babyModel;
 
-
     public MoaRenderer(EntityRendererProvider.Context context) {
-        super(context, new MoaModel<>(context.bakeLayer(AetherModelLayers.MOA)), 0.5F);
-        this.defaultModel = new MoaModel<>(context.bakeLayer(AetherModelLayers.MOA));
-        this.babyModel = new MoaBabyModel<>(context.bakeLayer(AetherModelLayers.MOA_BABY));
+        super(context, new MoaModel<>(context.bakeLayer(AetherIIModelLayers.MOA)), 0.5F);
+        this.defaultModel = new MoaModel<>(context.bakeLayer(AetherIIModelLayers.MOA));
+        this.babyModel = new MoaBabyModel<>(context.bakeLayer(AetherIIModelLayers.MOA_BABY));
     }
 
     @Override

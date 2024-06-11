@@ -12,6 +12,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -269,13 +271,34 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }, AetherLeafPileBlock.PERSISTENT);
     }
 
+    public void leaves(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
+            ModelFile model;
+            if (snowy) {
+                model = this.models().cubeColumnHorizontal("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/"), this.texture(this.name(block), "natural/"));
+            } else {
+                model = this.models().cubeAll(this.name(block), this.texture(this.name(block), "natural/"));
+            }
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
+    }
+
     public void shortGrass(Block block) {
-        ModelFile grass = this.triTintedCross(this.name(block))
-                .texture("particle", this.texture(this.name(block), "natural/"))
-                .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
-                .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
-                .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
-        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(grass));
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
+            ModelFile grass;
+            if (snowy) {
+                grass = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(new ResourceLocation("cutout"));
+            } else {
+                grass = this.triTintedCross(this.name(block))
+                        .texture("particle", this.texture(this.name(block), "natural/"))
+                        .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                        .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
+                        .texture("cross_3", this.extend(this.texture(this.name(block), "natural/"), "_3"));
+            }
+            return ConfiguredModel.builder().modelFile(grass).build();
+        });
     }
 
     public ModelBuilder<BlockModelBuilder> triTintedCross(String name) {
@@ -324,6 +347,15 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .face(Direction.WEST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_3").tintindex(2).end()
                 .face(Direction.EAST).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#cross_3").tintindex(2).end()
                 .end();
+    }
+
+    public void frostedCross(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
+            String prefix = snowy ? "frosted_" : "";
+            ModelFile grass = this.models().cross(prefix + this.name(block), this.texture(prefix + this.name(block), "natural/")).renderType(new ResourceLocation("cutout"));
+            return ConfiguredModel.builder().modelFile(grass).build();
+        });
     }
 
     public void bush(Block block) {
@@ -717,5 +749,18 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             Direction direction = state.getValue(LadderBlock.FACING);
             return ConfiguredModel.builder().modelFile(ladder).rotationY((int) (direction.toYRot() + 180) % 360).build();
         }, LadderBlock.WATERLOGGED);
+    }
+
+    public void bed(Block block, Block dummyBlock) {
+        ModelFile head = this.models().cubeAll(this.name(block) + "_head", this.texture(this.name(dummyBlock), "construction/"));
+        ModelFile foot = this.models().cubeAll(this.name(block) + "_foot", this.texture(this.name(dummyBlock), "construction/"));
+        this.getVariantBuilder(block).forAllStatesExcept(state -> {
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            BedPart part = state.getValue(BlockStateProperties.BED_PART);
+            return ConfiguredModel.builder()
+                    .modelFile(part == BedPart.HEAD ? head : foot)
+                    .rotationY((((int) dir.toYRot()) + 180) % 360)
+                    .build();
+        }, BedBlock.OCCUPIED);
     }
 }
