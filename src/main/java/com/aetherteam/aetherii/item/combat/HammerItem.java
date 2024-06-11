@@ -48,7 +48,7 @@ public class HammerItem extends TieredItem implements Vanishable {
 
     @Override
     public float getDestroySpeed(ItemStack stack, BlockState state) {
-        if (state.is(Tags.Blocks.GLASS)) {
+        if (state.is(Tags.Blocks.GLASS) || state.is(Tags.Blocks.GLASS_PANES)) {
             return 15.0F;
         } else {
             return 1.0F;
@@ -67,11 +67,6 @@ public class HammerItem extends TieredItem implements Vanishable {
             stack.hurtAndBreak(2, livingEntity, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
         return true;
-    }
-
-    @Override
-    public boolean isCorrectToolForDrops(BlockState state) {
-        return state.is(Tags.Blocks.GLASS);
     }
 
     @Override
