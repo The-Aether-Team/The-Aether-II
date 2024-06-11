@@ -13,6 +13,9 @@ import net.minecraft.world.level.levelgen.*;
 
 public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
+    public static final ResourceKey<DensityFunction> VEGETATION = createKey("highlands/vegetation");
+    public static final ResourceKey<DensityFunction> VEGETATION_RARE = createKey("highlands/vegetation_rare");
+    public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("highlands/vegetation_rarity_mapper");
     public static final ResourceKey<DensityFunction> CONTINENTS = createKey("highlands/continents");
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
@@ -54,6 +57,15 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.mul(density, DensityFunctions.constant(value));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.TERRAIN_SHAPER));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.ISLAND_DENSITY));
+        return density;
+    }
+
+    public static DensityFunction makeVegetationRarityMapper(HolderGetter<DensityFunction> function) {
+        DensityFunction vegetation = getFunction(function, VEGETATION);
+        DensityFunction density = vegetation;
+        density = DensityFunctions.rangeChoice(getFunction(function, VEGETATION_RARE), 0, 0.4, density, DensityFunctions.constant(2.0));
+        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.3, density, vegetation);
+        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, vegetation);
         return density;
     }
 
@@ -105,8 +117,6 @@ public class AetherIIDensityFunctionBuilders {
 
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factor(I continents, I temperature, I erosion) {
         CubicSpline<C, I> continentsSpline = CubicSpline.builder(continents)
-                .addPoint(-0.2F, 1.0F)
-                .addPoint(-0.05F, 5.0F)
                 .addPoint(0.05F, 5.0F)
                 .addPoint(0.2F, 1.0F)
                 .build();

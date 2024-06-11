@@ -24,9 +24,8 @@ public class HighlandsBiomeSourceBuilders {
         Climate.Parameter tempMagnetic3 = Climate.Parameter.span(0.25F, 0.65F);
         Climate.Parameter tempIrradiated = Climate.Parameter.span(0.65F, 1.5F);
 
-        Climate.Parameter continentExpanse = Climate.Parameter.span(-0.125F, 0.125F);
-        Climate.Parameter continentA = Climate.Parameter.span(-1.5F, -0.125F);
-        Climate.Parameter continentB = Climate.Parameter.span(0.125F, 1.5F);
+        Climate.Parameter continentExpanse = Climate.Parameter.span(0.0F, 0.125F);
+        Climate.Parameter continentLand = Climate.Parameter.span(0.125F, 1.5F);
 
         Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, 0.55F);
         Climate.Parameter erosionMagnetic = Climate.Parameter.span(0.55F, 1.5F);
@@ -54,36 +53,21 @@ public class HighlandsBiomeSourceBuilders {
                 // Highfields
                 Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.EXPANSE)),
 
-                Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentA, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(AetherIIBiomes.SHIMMERING_BASIN)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentB, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(AetherIIBiomes.SHIMMERING_BASIN)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentLand, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(AetherIIBiomes.SHIMMERING_BASIN)),
 
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.2F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.2F, 0.15F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(0.15F, 1.0F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.15F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.15F, 1.0F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(1.0F, 2.0F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
 
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-1.0F, -0.1F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-0.1F, 0.2F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.2F, 1.0F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-1.0F, -0.1F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-0.1F, 0.2F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.2F, 1.0F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(1.0F, 2.0F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
 
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-1.0F, -0.25F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-0.25F, 0.1F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.1F, 0.25F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.25F, 1.0F), continentA, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-
-
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, 0.05F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(0.05F, 0.2F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(0.2F, 1.0F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-1.0F, -0.15F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(-0.15F, 0.0F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHROUDED_FOREST)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.0F, 0.2F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields2, Climate.Parameter.span(0.2F, 1.0F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-1.0F, -0.2F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-0.2F, 0.05F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.05F, 0.2F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
-                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.2F, 1.0F), continentB, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-1.0F, -0.25F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(-0.25F, 0.1F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.1F, 0.25F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FLOURISHING_FIELD)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.25F, 1.0F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
 
                 // Magnetic
                 Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),

@@ -18,7 +18,8 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         DensityFunction shiftZ = getFunction(function, SHIFT_Z);
 
         context.register(TEMPERATURE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375D, noise.getOrThrow(AetherIINoises.TEMPERATURE)));
-        context.register(CONTINENTS, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.EROSION)));
+        context.register(VEGETATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.VEGETATION)));
+        context.register(CONTINENTS, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.EROSION)).abs());
         context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375D, noise.getOrThrow(AetherIINoises.EROSION)).abs());
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -1.5, 1.5));
         context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
@@ -31,11 +32,15 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 1.0D // smear scale multiplier, capped at 8
         ));
 
+        context.register(VEGETATION_RARITY_MAPPER, makeVegetationRarityMapper(function));
+
         context.register(FACTOR, buildFactor(function));
         context.register(ISLAND_DENSITY, buildIslandDensity(function));
 
         context.register(TERRAIN_SHAPER, finalizeTerrainShaper(function));
         context.register(FINAL_DENSITY, buildFinalDensity(function));
+
+        context.register(VEGETATION_RARE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.5, 0.0, 0.5, 0.0, 0.0, 0.0), 0.25D, 0.0D, 76).abs());
 
         context.register(LAKES_NOISE,
                 DensityFunctions.add(
