@@ -462,7 +462,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
         this.addItem(AetherIIItems.INERT_ARKENIUM, "Inert Arkenium");
         this.addItem(AetherIIItems.ARKENIUM_PLATES, "Arkenium Plates");
-        this.addItem(AetherIIItems.ARKENIUM_STRIP, "Arkenium Strip");
         this.addItem(AetherIIItems.INERT_GRAVITITE, "Inert Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");

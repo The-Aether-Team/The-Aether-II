@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-11T14:30:49.8825877	Item Models: aether_ii
+// 1.20.4	2024-06-11T15:22:41.7694761	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -56,7 +56,6 @@ ea1731a6ef141f6d52a0a97ec20696b5aa53c54e assets/aether_ii/models/item/arkenium_o
 2d743f2a98b375464d534dbc97a0d0801b917f4b assets/aether_ii/models/item/arkenium_shortsword.json
 b7fda65a71d363a3c17216873453076ccd72ee12 assets/aether_ii/models/item/arkenium_shovel.json
 5cdc77ed51a4e270e9d66ab00d1e0e2302609b7e assets/aether_ii/models/item/arkenium_spear.json
-8fdeceef026dc237d0a52c72b1b456e7ad35eeb2 assets/aether_ii/models/item/arkenium_strip.json
 a9b682587d4fdc2d44fc788b07158247e370f9f3 assets/aether_ii/models/item/arkenium_trapdoor.json
 5606c546a7d6835f0c9a25ac6435233d368ca049 assets/aether_ii/models/item/arkenium_trowel.json
 69a1b24b31d30cf80e43e5cc5b6e1c7673f7c9f8 assets/aether_ii/models/item/artisans_bench.json
