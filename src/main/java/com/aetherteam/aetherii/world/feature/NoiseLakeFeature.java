@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -61,6 +62,9 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
             ) {
                 this.setBlock(level, new BlockPos(x, y, z), Blocks.WATER.defaultBlockState());
                 this.setBlock(level, new BlockPos(x, y - 1, z), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+                if (level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof BushBlock) {
+                    this.setBlock(level, new BlockPos(x, y + 1, z), Blocks.AIR.defaultBlockState());
+                }
             }
         }
     }
