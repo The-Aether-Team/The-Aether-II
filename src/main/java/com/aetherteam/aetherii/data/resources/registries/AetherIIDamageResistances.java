@@ -21,6 +21,7 @@ public class AetherIIDamageResistances {
     public static final ResourceKey<DamageResistance> FLYING_COW = createKey("flying_cow");
     public static final ResourceKey<DamageResistance> PHYG = createKey("phyg");
     public static final ResourceKey<DamageResistance> KIRRID = createKey("kirrid");
+    public static final ResourceKey<DamageResistance> MOA = createKey("moa");
 
     private static ResourceKey<DamageResistance> createKey(String name) {
         return ResourceKey.create(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, new ResourceLocation(AetherII.MODID, name));
@@ -33,6 +34,7 @@ public class AetherIIDamageResistances {
         context.register(FLYING_COW, new DamageResistance(AetherIIEntityTypes.FLYING_COW.get(), 0, 0, 0));
         context.register(PHYG, new DamageResistance(AetherIIEntityTypes.PHYG.get(), 0, 0, 0));
         context.register(KIRRID, new DamageResistance(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 0, 2, -2));
+        context.register(MOA, new DamageResistance(AetherIIEntityTypes.MOA.get(), 2, 2, -2));
     }
 
     public static boolean hasEntity(RegistryAccess registryAccess, Entity entity) {

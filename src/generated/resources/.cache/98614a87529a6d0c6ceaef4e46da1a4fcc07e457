@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-09T20:16:33.6521251	Item Models: aether_ii
+// 1.20.4	2024-06-11T09:15:12.165448	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -65,6 +65,7 @@ c51076bdf8ae4eff8ab973abd37cd7970abb2d97 assets/aether_ii/models/item/blueberry_
 59483d7ced03b47656d5d0d803d0629d3afbf66a assets/aether_ii/models/item/blue_aercloud.json
 b9659738c4d206dea22780b8f02e921dad60479a assets/aether_ii/models/item/blue_cloudwool.json
 44f9007ef3505e19e8f3dc6ecf9a413b8c4f7221 assets/aether_ii/models/item/blue_cloudwool_carpet.json
+28cbb94ec9a9b89484d4710a7c761b6c9f571fa9 assets/aether_ii/models/item/blue_moa_egg.json
 f891ffeffb97c57fecdff9dca1bc9b213cd439c2 assets/aether_ii/models/item/blue_swet_gel.json
 843ecf00bc074daf792dca837106224d7d1be69a assets/aether_ii/models/item/blue_swet_jelly.json
 bdd47fe31f4c2104856614e6731cbb3b4e04af3c assets/aether_ii/models/item/brown_cloudwool.json
@@ -210,6 +211,7 @@ c3f1af1f9c39fc01616ed44ff8a3385d8eb1ba4a assets/aether_ii/models/item/light_gray
 7cc946bdfaeb8a86c8dedfec138b4841f70cd08a assets/aether_ii/models/item/magenta_cloudwool.json
 63bfced5e7b3c23cce1d036fbf0e4b14b6c281e0 assets/aether_ii/models/item/magenta_cloudwool_carpet.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/magnetic_kirrid_spawn_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/moa_spawn_egg.json
 a146cf9b7567eb6bd1e5a4c2523f6d1f4ec153ad assets/aether_ii/models/item/mossy_holystone.json
 1b577aee3036b910200c7e21424651f9575623f4 assets/aether_ii/models/item/mossy_holystone_slab.json
 3d8c627cbebadfc0db76f81fe4747fef77b8f5c1 assets/aether_ii/models/item/mossy_holystone_stairs.json

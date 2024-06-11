@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.block.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.FastModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
@@ -29,6 +30,7 @@ public class AetherIIRenderers {
         // Blocks
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_CHEST.get(), SkyrootChestRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_BED.get(), SkyrootBedRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MOA_EGG.get(), MoaEggRenderer::new);
 
         // Entities
         // Passive
@@ -39,6 +41,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.HIGHFIELDS_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.MAGNETIC_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.ARCTIC_KIRRID));
+        event.registerEntityRenderer(AetherIIEntityTypes.MOA.get(), MoaRenderer::new);
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR.get(), ZephyrRenderer::new);
@@ -54,6 +57,7 @@ public class AetherIIRenderers {
         // Blocks
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_FOOT, BedRenderer::createFootLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, BedRenderer::createHeadLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
 
         // Entities
         // Passive
@@ -68,6 +72,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_KIRRID_BABY, MagneticKirridBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ARCTIC_KIRRID, ArcticKirridModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.ARCTIC_KIRRID_BABY, ArcticKirridBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MOA, MoaModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MOA_BABY, MoaBabyModel::createBodyLayer);
 
         // Hostile
         event.registerLayerDefinition(AetherIIModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);
