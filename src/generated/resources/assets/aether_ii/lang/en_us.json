@@ -343,12 +343,8 @@
   "item.aether_ii.inert_gravitite": "Inert Gravitite",
   "item.aether_ii.kirrid_cutlet": "Kirrid Cutlet",
   "item.aether_ii.kirrid_loin": "Kirrid Loin",
-<<<<<<< HEAD
-  "item.aether_ii.kirrid_spawn_egg": "Kirrid Spawn Egg",
-  "item.aether_ii.moa_feed": "Moa Feed",
-=======
   "item.aether_ii.magnetic_kirrid_spawn_egg": "Magnetic Kirrid Spawn Egg",
->>>>>>> 1.20.4-develop
+  "item.aether_ii.moa_feed": "Moa Feed",
   "item.aether_ii.music_disc_aerwhale": "Aerwhale Music Disc",
   "item.aether_ii.music_disc_aerwhale.desc": "AetherAudio - Aerwhale",
   "item.aether_ii.music_disc_aether_tune": "Blue Music Disc",
