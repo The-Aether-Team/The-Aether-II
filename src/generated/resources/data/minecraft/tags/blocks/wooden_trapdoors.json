@@ -1,5 +1,10 @@
 {
   "values": [
-    "aether_ii:skyroot_trapdoor"
+    "aether_ii:skyroot_trapdoor",
+    "aether_ii:greatroot_trapdoor",
+    "aether_ii:wisproot_trapdoor",
+    "aether_ii:secret_skyroot_trapdoor",
+    "aether_ii:secret_greatroot_trapdoor",
+    "aether_ii:secret_wisproot_trapdoor"
   ]
 }

@@ -303,6 +303,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.TARABLOOM.asItem()
         );
         this.tag(ItemTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.asItem());
+        this.tag(ItemTags.SIGNS).add(
+                AetherIIBlocks.SKYROOT_SIGN.asItem(),
+                AetherIIBlocks.GREATROOT_SIGN.asItem(),
+                AetherIIBlocks.WISPROOT_SIGN.asItem()
+        );
+        this.tag(ItemTags.HANGING_SIGNS).add(
+                AetherIIBlocks.SKYROOT_HANGING_SIGN.asItem(),
+                AetherIIBlocks.GREATROOT_HANGING_SIGN.asItem(),
+                AetherIIBlocks.WISPROOT_HANGING_SIGN.asItem()
+        );
         this.tag(ItemTags.MUSIC_DISCS).add(
                 AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(),
                 AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(),
