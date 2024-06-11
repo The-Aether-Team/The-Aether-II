@@ -621,6 +621,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
 
         // Forge
+        this.tag(Tags.Blocks.BOOKSHELVES).add(
+                AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
+                AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
+        );
         this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(
                 AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
                 AetherIIBlocks.GREATROOT_FENCE_GATE.get(),
@@ -631,10 +635,27 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_FENCE.get(),
                 AetherIIBlocks.WISPROOT_FENCE.get()
         );
-        this.tag(Tags.Blocks.BOOKSHELVES).add(
-                AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
-                AetherIIBlocks.HOLYSTONE_BOOKSHELF.get()
+        this.tag(Tags.Blocks.GLASS_COLORLESS).add(
+                AetherIIBlocks.QUICKSOIL_GLASS.get(),
+                AetherIIBlocks.SCATTERGLASS.get()
         );
+        this.tag(Tags.Blocks.GLASS_PANES_COLORLESS).add(
+                AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(),
+                AetherIIBlocks.SCATTERGLASS_PANE.get()
+        );
+        this.tag(Tags.Blocks.ORE_RATES_SINGULAR).add(
+                AetherIIBlocks.AMBROSIUM_ORE.get(),
+                AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.ARKENIUM_ORE.get(),
+                AetherIIBlocks.GRAVITITE_ORE.get()
+        );
+        this.tag(Tags.Blocks.ORES).add(
+                AetherIIBlocks.AMBROSIUM_ORE.get(),
+                AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.ARKENIUM_ORE.get(),
+                AetherIIBlocks.GRAVITITE_ORE.get()
+        );
+        this.tag(Tags.Blocks.STONE).addTag(AetherIITags.Blocks.HOLYSTONE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
