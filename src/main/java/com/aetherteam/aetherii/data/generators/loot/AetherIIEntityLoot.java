@@ -97,6 +97,15 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.MAGNETIC_KIRRID_FUR, createKirridWithWoolTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
         this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ARCTIC_KIRRID_FUR, createKirridWithWoolTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
 
+        this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(Items.FEATHER)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                )
+        );
+
         this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.COLD_AERCLOUD.get())

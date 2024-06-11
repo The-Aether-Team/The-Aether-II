@@ -186,6 +186,40 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.entity.aerbunny.lift")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_MOA_AMBIENT,
+                definition().with(sound("aether_ii:entity/moa/say"))
+                        .subtitle("subtitles.aether.entity.moa.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MOA_DEATH,
+                definition().with(sound("aether_ii:entity/moa/say"))
+                        .subtitle("subtitles.aether.entity.moa.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MOA_HURT,
+                definition().with(sound("aether_ii:entity/moa/say"))
+                        .subtitle("subtitles.aether.entity.moa.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MOA_SADDLE,
+                definition().with(sound("minecraft:mob/horse/leather"))
+                        .subtitle("subtitles.aether.entity.moa.saddle")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MOA_STEP,
+                definition().with(
+                        sound("minecraft:mob/pig/step1"),
+                        sound("minecraft:mob/pig/step2"),
+                        sound("minecraft:mob/pig/step3"),
+                        sound("minecraft:mob/pig/step4"),
+                        sound("minecraft:mob/pig/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MOA_FLAP,
+                definition().with(sound("minecraft:mob/bat/takeoff"))
+                        .subtitle("subtitles.aether.entity.moa.flap")
+        );
+        this.add(AetherIISoundEvents.ENTITY_MOA_EGG,
+                definition().with(sound("minecraft:mob/chicken/plop"))
+                        .subtitle("subtitles.aether.entity.moa.egg")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT,
                 definition().with(sound("aether_ii:entity/zephyr/shoot"))
                         .subtitle("subtitles.aether_ii.entity.zephyr.shoot")
