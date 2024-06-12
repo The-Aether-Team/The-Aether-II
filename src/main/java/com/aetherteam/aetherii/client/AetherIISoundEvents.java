@@ -62,6 +62,14 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_HURT = register("entity.aerbunny.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_LIFT = register("entity.aerbunny.lift");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_AMBIENT = register("entity.moa.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_DEATH = register("entity.moa.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_HURT = register("entity.moa.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_SADDLE = register("entity.moa.saddle");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_STEP = register("entity.moa.step");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_FLAP = register("entity.moa.flap");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_EGG = register("entity.moa.egg");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_SHOOT = register("entity.zephyr.shoot");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_AMBIENT = register("entity.zephyr.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_DEATH = register("entity.zephyr.death");

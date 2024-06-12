@@ -53,6 +53,8 @@
     "aether_ii:holystone_furnace",
     "aether_ii:altar",
     "aether_ii:artisans_bench",
-    "aether_ii:holystone_bookshelf"
+    "aether_ii:holystone_bookshelf",
+    "aether_ii:arkenium_door",
+    "aether_ii:arkenium_trapdoor"
   ]
 }

@@ -121,7 +121,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 new CloudbedConfiguration(
                         BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
-                        64,
+                        100,
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_NOISE),
                         10D,
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),

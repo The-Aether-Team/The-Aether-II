@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
 
@@ -170,6 +171,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_BASE_BEAM.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_TOP_BEAM.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_BEAM.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_SKYROOT_DOOR.get(), AetherIIBlocks.SKYROOT_DOOR.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get(), AetherIIBlocks.SKYROOT_TRAPDOOR.get());
         
         // Greatroot Planks
         planksFromLog(consumer, AetherIIBlocks.GREATROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_GREATROOT_PLANKS, 4);
@@ -200,6 +203,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_BASE_BEAM.get(), AetherIIBlocks.GREATROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_TOP_BEAM.get(), AetherIIBlocks.GREATROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_BEAM.get(), AetherIIBlocks.GREATROOT_PLANKS.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_GREATROOT_DOOR.get(), AetherIIBlocks.GREATROOT_DOOR.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.get(), AetherIIBlocks.GREATROOT_TRAPDOOR.get());
 
         // Wisproot Planks
         planksFromLog(consumer, AetherIIBlocks.WISPROOT_PLANKS.get(), AetherIITags.Items.CRAFTS_WISPROOT_PLANKS, 4);
@@ -230,6 +235,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_BASE_BEAM.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_TOP_BEAM.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_BEAM.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_WISPROOT_DOOR.get(), AetherIIBlocks.WISPROOT_DOOR.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get(), AetherIIBlocks.WISPROOT_TRAPDOOR.get());
 
         // Holystone
         this.stairs(AetherIIBlocks.HOLYSTONE_STAIRS, AetherIIBlocks.HOLYSTONE).save(consumer);
@@ -350,6 +357,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         carpet(consumer, AetherIIBlocks.RED_CLOUDWOOL_CARPET, AetherIIBlocks.RED_CLOUDWOOL.get());
         carpet(consumer, AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, AetherIIBlocks.BLACK_CLOUDWOOL.get());
 
+        // Arkenium Blocks
+        doorBuilder(AetherIIBlocks.ARKENIUM_DOOR, Ingredient.of(AetherIIItems.ARKENIUM_PLATES.get())).unlockedBy(getHasName(AetherIIItems.ARKENIUM_PLATES.get()), has(AetherIIItems.ARKENIUM_PLATES.get())).save(consumer);
+        twoByTwoPacker(consumer, RecipeCategory.REDSTONE, AetherIIBlocks.ARKENIUM_TRAPDOOR, AetherIIItems.ARKENIUM_PLATES);
+
         // Mineral Blocks
         oreBlockStorageRecipesRecipesWithCustomUnpacking(consumer, RecipeCategory.MISC, AetherIIItems.AMBROSIUM_SHARD.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.AMBROSIUM_BLOCK, "ambrosium_shard_from_ambrosium_block", "ambrosium_shard");
         oreBlockStorageRecipesRecipesWithCustomUnpacking(consumer, RecipeCategory.MISC, AetherIIItems.ZANITE_GEMSTONE.get(), RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ZANITE_BLOCK, "zanite_gemstone_from_zanite_block", "zanite_gemstone");
@@ -408,13 +419,31 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("# #")
                 .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_LADDER.get()), has(AetherIITags.Items.RODS_SKYROOT))
                 .save(consumer);
-
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_BED.get(), 1)
                 .define('W', ItemTags.WOOL)
                 .define('P', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("WWW")
                 .pattern("PPP")
                 .unlockedBy("has_wool", has(ItemTags.WOOL))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_SIGN.get(), 3)
+                .group("wooden_sign")
+                .define('P', AetherIIBlocks.SKYROOT_PLANKS.get().asItem())
+                .define('/', Tags.Items.RODS_WOODEN)
+                .pattern("PPP")
+                .pattern("PPP")
+                .pattern(" / ")
+                .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_PLANKS.get()), has(AetherIIBlocks.SKYROOT_PLANKS.get()))
+                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), 6)
+                .group("hanging_sign")
+                .define('#', AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
+                .define('X', Items.CHAIN)
+                .pattern("X X")
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_stripped_logs", has(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()))
                 .save(consumer);
 
         // Bookshelves
@@ -447,6 +476,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeAxeWithTag(AetherIIItems.GRAVITITE_AXE, AetherIITags.Items.PLATES_GRAVITITE, Ingredient.of(AetherIIItems.ARKENIUM_STRIP.get()), "has_gravitite").save(consumer);
         this.makeShovelWithTag(AetherIIItems.GRAVITITE_SHOVEL, AetherIITags.Items.PLATES_GRAVITITE, Ingredient.of(AetherIIItems.ARKENIUM_STRIP.get()), "has_gravitite").save(consumer);
         this.makeHoeWithTag(AetherIIItems.GRAVITITE_TROWEL, AetherIITags.Items.PLATES_GRAVITITE, Ingredient.of(AetherIIItems.ARKENIUM_STRIP.get()), "has_gravitite").save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.ARKENIUM_SHEARS.get())
+                .define('#', AetherIITags.Items.PLATES_ARKENIUM)
+                .pattern(" #")
+                .pattern("# ")
+                .unlockedBy("has_arkenium", has(AetherIITags.Items.PLATES_ARKENIUM))
+                .save(consumer);
 
         // Weapons
         this.makeSwordWithTag(AetherIIItems.SKYROOT_SHORTSWORD, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(consumer);
@@ -489,6 +525,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.SKYROOT_TWIG)
                 .unlockedBy("has_twig", has(AetherIIBlocks.SKYROOT_TWIG))
                 .save(consumer, "skyroot_stick_from_twig");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.MOA_FEED.get(), 3)
+                .requires(AetherIIItems.SKYROOT_PINECONE)
+                .unlockedBy("has_skyroot_pinecone", has(AetherIIItems.SKYROOT_PINECONE))
+                .save(consumer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_SHARD.get(), 4)
                 .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
                 .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
@@ -515,5 +555,16 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.TARABLOOM.get())
                 .unlockedBy(getHasName(AetherIIBlocks.TARABLOOM.get()), has(AetherIIBlocks.TARABLOOM.get()))
                 .save(consumer, this.name("flower_to_purple_dye"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)
+                .requires(AetherIIItems.MOA_FEED)
+                .requires(AetherIIItems.BLUEBERRY)
+                .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.ENCHANTED_MOA_FEED.get(), 1)
+                .requires(AetherIIItems.MOA_FEED)
+                .requires(AetherIIItems.ENCHANTED_BLUEBERRY)
+                .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
+                .save(consumer);
     }
 }

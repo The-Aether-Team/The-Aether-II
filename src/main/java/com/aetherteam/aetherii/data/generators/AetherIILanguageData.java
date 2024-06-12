@@ -170,6 +170,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_BASE_BEAM, "Skyroot Base Beam");
         this.addBlock(AetherIIBlocks.SKYROOT_TOP_BEAM, "Skyroot Top Beam");
         this.addBlock(AetherIIBlocks.SKYROOT_BEAM, "Skyroot Beam");
+        this.addBlock(AetherIIBlocks.SECRET_SKYROOT_DOOR, "Secret Skyroot Door");
+        this.addBlock(AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR, "Secret Skyroot Trapdoor");
 
         // Greatroot Planks
         this.addBlock(AetherIIBlocks.GREATROOT_PLANKS, "Greatroot Planks");
@@ -192,6 +194,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GREATROOT_BASE_BEAM, "Greatroot Base Beam");
         this.addBlock(AetherIIBlocks.GREATROOT_TOP_BEAM, "Greatroot Top Beam");
         this.addBlock(AetherIIBlocks.GREATROOT_BEAM, "Greatroot Beam");
+        this.addBlock(AetherIIBlocks.SECRET_GREATROOT_DOOR, "Secret Greatroot Door");
+        this.addBlock(AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR, "Secret Greatroot Trapdoor");
 
         // Wisproot Planks
         this.addBlock(AetherIIBlocks.WISPROOT_PLANKS, "Wisproot Planks");
@@ -214,6 +218,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.WISPROOT_BASE_BEAM, "Wisproot Base Beam");
         this.addBlock(AetherIIBlocks.WISPROOT_TOP_BEAM, "Wisproot Top Beam");
         this.addBlock(AetherIIBlocks.WISPROOT_BEAM, "Wisproot Beam");
+        this.addBlock(AetherIIBlocks.SECRET_WISPROOT_DOOR, "Secret Wisproot Door");
+        this.addBlock(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR, "Secret Wisproot Trapdoor");
 
         // Holystone
         this.addBlock(AetherIIBlocks.HOLYSTONE_STAIRS, "Holystone Stairs");
@@ -339,6 +345,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.RED_CLOUDWOOL_CARPET, "Red Cloudwool Carpet");
         this.addBlock(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET, "Black Cloudwool Carpet");
 
+        // Arkenium Blocks
+        this.addBlock(AetherIIBlocks.ARKENIUM_DOOR, "Arkenium Door");
+        this.addBlock(AetherIIBlocks.ARKENIUM_TRAPDOOR, "Arkenium Trapdoor");
+
         // Mineral Blocks
         this.addBlock(AetherIIBlocks.AMBROSIUM_BLOCK, "Block of Ambrosium");
         this.addBlock(AetherIIBlocks.ZANITE_BLOCK, "Block of Zanite");
@@ -355,9 +365,22 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
 
+        this.addBlock(AetherIIBlocks.SKYROOT_SIGN, "Skyroot Sign");
+        this.addBlock(AetherIIBlocks.SKYROOT_HANGING_SIGN, "Skyroot Hanging Sign");
+
+        this.addBlock(AetherIIBlocks.GREATROOT_SIGN, "Greatroot Sign");
+        this.addBlock(AetherIIBlocks.GREATROOT_HANGING_SIGN, "Greatroot Hanging Sign");
+
+        this.addBlock(AetherIIBlocks.WISPROOT_SIGN, "Wisproot Sign");
+        this.addBlock(AetherIIBlocks.WISPROOT_HANGING_SIGN, "Wisproot Hanging Sign");
+
         // Bookshelves
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
+
+        //Egg
+        this.addBlock(AetherIIBlocks.BLUE_MOA_EGG, "Blue Moa Egg");
+
 
         // Items
         // Tools
@@ -385,6 +408,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GRAVITITE_AXE, "Gravitite Axe");
         this.addItem(AetherIIItems.GRAVITITE_SHOVEL, "Gravitite Shovel");
         this.addItem(AetherIIItems.GRAVITITE_TROWEL, "Gravitite Trowel");
+
+        this.addItem(AetherIIItems.ARKENIUM_SHEARS, "Arkenium Shears");
 
         // Weapons
         this.addItem(AetherIIItems.SKYROOT_SHORTSWORD, "Skyroot Shortsword");
@@ -416,6 +441,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
+        this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
@@ -475,9 +501,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Highfields Kirrid Spawn Egg");
         this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Magnetic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Arctic Kirrid Spawn Egg");
+        this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
 
         // Misc
+        this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
+        this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
+        this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         // Tooltips
@@ -505,6 +535,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_KIRRID, "Highfields Kirrid");
         this.addEntityType(AetherIIEntityTypes.MAGNETIC_KIRRID, "Magnetic Kirrid");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");
+        this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
 
         // Hostile
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
@@ -573,6 +604,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");
+
+        this.addSubtitle("entity", "moa.ambient", "Moa calls");
+        this.addSubtitle("entity", "moa.death", "Moa dies");
+        this.addSubtitle("entity", "moa.hurt", "Moa hurts");
+        this.addSubtitle("entity", "moa.saddle", "Saddle equips");
+        this.addSubtitle("entity", "moa.step", "Footsteps");
+        this.addSubtitle("entity", "moa.flap", "Moa flaps");
+        this.addSubtitle("entity", "moa.egg", "Moa plops");
 
         this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
         this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");

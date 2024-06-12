@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.item.AetherIIToolActions;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -13,7 +14,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.ToolAction;
 
 import java.util.UUID;
@@ -41,6 +44,15 @@ public class HammerItem extends TieredItem implements Vanishable {
     @Override
     public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
         return !player.isCreative();
+    }
+
+    @Override
+    public float getDestroySpeed(ItemStack stack, BlockState state) {
+        if (state.is(Tags.Blocks.GLASS) || state.is(Tags.Blocks.GLASS_PANES)) {
+            return 15.0F;
+        } else {
+            return 1.0F;
+        }
     }
 
     @Override
