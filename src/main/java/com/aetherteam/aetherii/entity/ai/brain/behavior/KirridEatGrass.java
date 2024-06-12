@@ -39,8 +39,11 @@ public class KirridEatGrass extends Behavior<Kirrid> {
     }
 
     protected void tick(ServerLevel pLevel, Kirrid pOwner, long pGameTime) {
-        Brain<?> brain = pOwner.getBrain();
-
+        if (this.eatTick == 55) {
+            if (this.isValidTarget(pLevel, pOwner)) {
+                this.finishEat(pLevel, pOwner);
+            }
+        }
         this.eatTick++;
     }
 
@@ -50,13 +53,5 @@ public class KirridEatGrass extends Behavior<Kirrid> {
         pLevel.setBlock(pOwner.blockPosition().below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(), 3);
         pOwner.getBrain().setMemory(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), KirridAi.TIME_BETWEEN_EAT.sample(pLevel.random));
         pOwner.ate();
-    }
-
-    @Override
-    protected void stop(ServerLevel pLevel, Kirrid pEntity, long pGameTime) {
-        super.stop(pLevel, pEntity, pGameTime);
-        if (this.isValidTarget(pLevel, pEntity)) {
-            this.finishEat(pLevel, pEntity);
-        }
     }
 }
