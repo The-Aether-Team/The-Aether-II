@@ -28,7 +28,7 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DRIPPING_WATER = PARTICLES.register("dripping_water", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FALLING_WATER = PARTICLES.register("falling_water", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SPLASH = PARTICLES.register("splash", () -> new SimpleParticleType(false));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AMBROSIUM_TORCH = PARTICLES.register("ambrosium_torch", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AMBROSIUM = PARTICLES.register("ambrosium_torch", () -> new SimpleParticleType(false));
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RAIN = PARTICLES.register("rain", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));
@@ -75,7 +75,7 @@ public class AetherIIParticleTypes {
             splashParticle.pickSprite(spriteSet);
             return splashParticle;
         });
-        event.registerSpriteSet(AMBROSIUM_TORCH.get(), AmbrosiumTorchParticle.Provider::new);
+        event.registerSpriteSet(AMBROSIUM.get(), AmbrosiumParticle.Provider::new);
 
         event.registerSpriteSet(RAIN.get(), spriteSet -> (particle, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             WaterDropParticle rainParticle = new WaterDropParticle(level, x, y, z) {
