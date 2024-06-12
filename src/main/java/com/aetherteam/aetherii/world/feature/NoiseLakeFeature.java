@@ -93,14 +93,9 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
             }
 
             // Generates waterfalls
-            if (y == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(new BlockPos(x, y, z)).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) && !config.frozen()) {
+            if (y == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(new BlockPos(x, y, z)).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get())) {
                 level.setBlock(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
                 level.scheduleTick(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().getType(), 0);
-            }
-
-            // Freezes Top if "frozen" is true
-            if (y == config.height().getMinValue() && level.getBlockState(new BlockPos(x, y, z)).is(Blocks.WATER) && config.frozen()) {
-                this.setBlock(level, new BlockPos(x, y, z), AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
             }
         }
     }
