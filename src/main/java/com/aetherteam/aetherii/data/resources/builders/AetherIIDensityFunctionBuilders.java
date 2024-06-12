@@ -88,7 +88,7 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction base = makeBaseTerrainShaper(function);
         DensityFunction density = base;
         density = DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 128, density, DensityFunctions.mul(density, getFunction(function, LAKES_FACTOR)));
-        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.55, density, base);
+        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.65, density, base);
         density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, base);
         return density;
     }

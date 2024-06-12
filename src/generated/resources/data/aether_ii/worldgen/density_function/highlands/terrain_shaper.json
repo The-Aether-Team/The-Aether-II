@@ -6,7 +6,7 @@
   "when_in_range": {
     "type": "minecraft:range_choice",
     "input": "aether_ii:highlands/temperature",
-    "max_exclusive": 0.55,
+    "max_exclusive": 0.65,
     "min_inclusive": -0.4,
     "when_in_range": {
       "type": "minecraft:range_choice",
