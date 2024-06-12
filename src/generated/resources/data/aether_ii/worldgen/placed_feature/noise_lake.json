@@ -1,0 +1,8 @@
+{
+  "feature": "aether_ii:noise_lake",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

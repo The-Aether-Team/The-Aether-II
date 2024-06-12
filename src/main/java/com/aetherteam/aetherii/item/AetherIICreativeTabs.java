@@ -32,6 +32,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_FENCE_GATE.get());
                 output.accept(AetherIIBlocks.SKYROOT_DOOR.get());
                 output.accept(AetherIIBlocks.SKYROOT_TRAPDOOR.get());
+                output.accept(AetherIIBlocks.SECRET_SKYROOT_DOOR.get());
+                output.accept(AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.SKYROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
@@ -43,8 +45,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_BASE_BEAM.get());
                 output.accept(AetherIIBlocks.SKYROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.SKYROOT_BEAM.get());
-                output.accept(AetherIIBlocks.SECRET_SKYROOT_DOOR.get());
-                output.accept(AetherIIBlocks.SECRET_SKYROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_WOOD.get());
                 output.accept(AetherIIBlocks.GREATROOT_PLANKS.get());
@@ -54,6 +54,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_FENCE_GATE.get());
                 output.accept(AetherIIBlocks.GREATROOT_DOOR.get());
                 output.accept(AetherIIBlocks.GREATROOT_TRAPDOOR.get());
+                output.accept(AetherIIBlocks.SECRET_GREATROOT_DOOR.get());
+                output.accept(AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.GREATROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
@@ -65,8 +67,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATROOT_BASE_BEAM.get());
                 output.accept(AetherIIBlocks.GREATROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.GREATROOT_BEAM.get());
-                output.accept(AetherIIBlocks.SECRET_GREATROOT_DOOR.get());
-                output.accept(AetherIIBlocks.SECRET_GREATROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
@@ -77,6 +77,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_FENCE_GATE.get());
                 output.accept(AetherIIBlocks.WISPROOT_DOOR.get());
                 output.accept(AetherIIBlocks.WISPROOT_TRAPDOOR.get());
+                output.accept(AetherIIBlocks.SECRET_WISPROOT_DOOR.get());
+                output.accept(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.WISPROOT_BUTTON.get());
                 output.accept(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
@@ -88,8 +90,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_BASE_BEAM.get());
                 output.accept(AetherIIBlocks.WISPROOT_TOP_BEAM.get());
                 output.accept(AetherIIBlocks.WISPROOT_BEAM.get());
-                output.accept(AetherIIBlocks.SECRET_WISPROOT_DOOR.get());
-                output.accept(AetherIIBlocks.SECRET_WISPROOT_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
@@ -153,46 +153,69 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ICESTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.ICESTONE_SLAB.get());
                 output.accept(AetherIIBlocks.ICESTONE_WALL.get());
+                output.accept(AetherIIBlocks.ICESTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.ICESTONE_BRICK_STAIRS.get());
+                output.accept(AetherIIBlocks.ICESTONE_BRICK_SLAB.get());
+                output.accept(AetherIIBlocks.ICESTONE_BRICK_WALL.get());
+                output.accept(AetherIIBlocks.ICESTONE_FLAGSTONES.get());
+                output.accept(AetherIIBlocks.ICESTONE_KEYSTONE.get());
+                output.accept(AetherIIBlocks.ICESTONE_BASE_BRICKS.get());
+                output.accept(AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS.get());
+                output.accept(AetherIIBlocks.ICESTONE_BASE_PILLAR.get());
+                output.accept(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
+                output.accept(AetherIIBlocks.ICESTONE_PILLAR.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS.get());
+                output.accept(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.get());
+                output.accept(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
+                output.accept(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE.get());
+                output.accept(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get());
+                output.accept(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE.get());
+                output.accept(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE.get());
                 output.accept(AetherIIBlocks.SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.SCATTERGLASS_PANE.get());
+                output.accept(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get());
+                output.accept(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.WHITE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.GRAY_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BLACK_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BROWN_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.RED_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.ORANGE_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.YELLOW_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.LIME_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.PINK_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.GRAY_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.CYAN_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.PURPLE_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.BLUE_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.BROWN_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.GREEN_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.RED_CLOUDWOOL.get());
-                output.accept(AetherIIBlocks.BLACK_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.CYAN_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.BLUE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.PURPLE_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.MAGENTA_CLOUDWOOL.get());
+                output.accept(AetherIIBlocks.PINK_CLOUDWOOL.get());
                 output.accept(AetherIIBlocks.CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.ORANGE_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.LIME_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.GRAY_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.BROWN_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.GREEN_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.RED_CLOUDWOOL_CARPET.get());
-                output.accept(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.CYAN_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.BLUE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.PURPLE_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.MAGENTA_CLOUDWOOL_CARPET.get());
+                output.accept(AetherIIBlocks.PINK_CLOUDWOOL_CARPET.get());
                 output.accept(AetherIIBlocks.ARKENIUM_DOOR.get());
                 output.accept(AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_BLOCK.get());
@@ -292,6 +315,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
+                output.accept(AetherIIBlocks.BLUE_MOA_EGG.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
@@ -308,13 +332,13 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
+                output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
                 output.accept(AetherIIBlocks.SKYROOT_SIGN.get());
                 output.accept(AetherIIBlocks.SKYROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.GREATROOT_SIGN.get());
                 output.accept(AetherIIBlocks.GREATROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
-                output.accept(AetherIIBlocks.SKYROOT_CHEST.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
             }).build());
 
@@ -356,6 +380,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_PICKAXE.get());
                 output.accept(AetherIIItems.ARKENIUM_AXE.get());
                 output.accept(AetherIIItems.ARKENIUM_TROWEL.get());
+                output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.GRAVITITE_HAMMER.get());
                 output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
@@ -364,11 +389,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
-                output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
-                output.accept(AetherIIItems.MOA_FEED.get());
-                output.accept(AetherIIItems.BLUEBERRY_MOA_FEED.get());
-                output.accept(AetherIIItems.ENCHANTED_MOA_FEED.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
@@ -419,26 +440,28 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.SKYROOT_STICK.get());
-                output.accept(AetherIIItems.SKYROOT_PINECONE.get());
                 output.accept(AetherIIItems.SCATTERGLASS_SHARD.get());
                 output.accept(AetherIIItems.AMBROSIUM_SHARD.get());
                 output.accept(AetherIIItems.ZANITE_GEMSTONE.get());
                 output.accept(AetherIIItems.INERT_ARKENIUM.get());
                 output.accept(AetherIIItems.ARKENIUM_PLATES.get());
-                output.accept(AetherIIItems.ARKENIUM_STRIP.get());
                 output.accept(AetherIIItems.INERT_GRAVITITE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
+                output.accept(AetherIIItems.CLOUDTWINE.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
+                output.accept(AetherIIItems.SKYROOT_PINECONE.get());
+                output.accept(AetherIIItems.MOA_FEED.get());
+                output.accept(AetherIIItems.BLUEBERRY_MOA_FEED.get());
+                output.accept(AetherIIItems.ENCHANTED_MOA_FEED.get());
                 output.accept(AetherIIItems.ARCTIC_SNOWBALL.get());
                 output.accept(AetherIIItems.GREEN_SWET_GEL.get());
                 output.accept(AetherIIItems.BLUE_SWET_GEL.get());
                 output.accept(AetherIIItems.PURPLE_SWET_GEL.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
                 output.accept(AetherIIItems.WHITE_SWET_GEL.get());
-                output.accept(AetherIIBlocks.BLUE_MOA_EGG.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
@@ -447,13 +470,13 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+                output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
-                output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.MOA_SPAWN_EGG.get());
                 output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
-                output.accept(AetherIIItems.MOA_SPAWN_EGG.get());
             }).build());
 }

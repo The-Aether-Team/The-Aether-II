@@ -1,5 +1,7 @@
 {
-  "carvers": {},
+  "carvers": {
+    "air": "aether_ii:highlands_cave"
+  },
   "downfall": 0.4,
   "effects": {
     "fog_color": 15526908,
@@ -17,6 +19,7 @@
   },
   "features": [
     [
+      "aether_ii:noise_lake",
       "aether_ii:coast_quicksoil",
       "aether_ii:cloudbed"
     ],

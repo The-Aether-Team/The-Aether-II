@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_all",
   "render_type": "minecraft:translucent",
   "textures": {
-    "all": "aether_ii:block/natural/scatterglass"
+    "all": "aether_ii:block/construction/scatterglass"
   }
 }

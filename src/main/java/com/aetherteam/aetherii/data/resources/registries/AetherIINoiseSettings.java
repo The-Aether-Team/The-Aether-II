@@ -20,7 +20,6 @@ public class AetherIINoiseSettings {
 
     public static void bootstrap(BootstapContext<NoiseGeneratorSettings> context) {
         HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
-        HolderGetter<NormalNoise.NoiseParameters> noise = context.lookup(Registries.NOISE);
-        context.register(HIGHLANDS, HighlandsNoiseBuilders.highlandsNoiseSettings(densityFunctions, noise));
+        context.register(HIGHLANDS, HighlandsNoiseBuilders.highlandsNoiseSettings(densityFunctions));
     }
 }
