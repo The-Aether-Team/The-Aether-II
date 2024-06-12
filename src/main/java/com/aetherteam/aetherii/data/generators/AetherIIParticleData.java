@@ -28,8 +28,11 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.sprite(AetherIIParticleTypes.DRIPPING_WATER.get(), new ResourceLocation(AetherII.MODID, "dripping_water"));
         this.sprite(AetherIIParticleTypes.FALLING_WATER.get(), new ResourceLocation(AetherII.MODID, "falling_water"));
         this.spriteSet(AetherIIParticleTypes.SPLASH.get(),  new ResourceLocation(AetherII.MODID, "splash"), 4, false);
+        this.sprite(AetherIIParticleTypes.AMBROSIUM_TORCH.get(), new ResourceLocation("generic_0"));
+
         this.spriteSet(AetherIIParticleTypes.RAIN.get(), new ResourceLocation(AetherII.MODID, "splash"), 4, false);
         this.sprite(AetherIIParticleTypes.IRRADIATION.get(), new ResourceLocation("generic_0"));
+
         this.spriteSet(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), new ResourceLocation("generic"), 8, true);
         this.sprite(AetherIIParticleTypes.SLASH_ATTACK.get(), new ResourceLocation(AetherII.MODID, "slash_attack"));
         this.sprite(AetherIIParticleTypes.IMPACT_ATTACK.get(), new ResourceLocation(AetherII.MODID, "impact_attack"));

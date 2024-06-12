@@ -28,8 +28,11 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DRIPPING_WATER = PARTICLES.register("dripping_water", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FALLING_WATER = PARTICLES.register("falling_water", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SPLASH = PARTICLES.register("splash", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AMBROSIUM_TORCH = PARTICLES.register("ambrosium_torch", () -> new SimpleParticleType(false));
+
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RAIN = PARTICLES.register("rain", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));
+
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> ZEPHYR_SNOWFLAKE = PARTICLES.register("zephyr_snowflake", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SLASH_ATTACK = PARTICLES.register("slash_attack", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IMPACT_ATTACK = PARTICLES.register("impact_attack", () -> new SimpleParticleType(false));
@@ -72,6 +75,8 @@ public class AetherIIParticleTypes {
             splashParticle.pickSprite(spriteSet);
             return splashParticle;
         });
+        event.registerSpriteSet(AMBROSIUM_TORCH.get(), AmbrosiumTorchParticle.Provider::new);
+
         event.registerSpriteSet(RAIN.get(), spriteSet -> (particle, level, x, y, z, xSpeed, ySpeed, zSpeed) -> {
             WaterDropParticle rainParticle = new WaterDropParticle(level, x, y, z) {
                 @Override
@@ -83,6 +88,7 @@ public class AetherIIParticleTypes {
             return rainParticle;
         });
         event.registerSpriteSet(IRRADIATION.get(), IrradiationParticle.Factory::new);
+
         event.registerSpriteSet(SLASH_ATTACK.get(), DamageTypeParticle.Provider::new);
         event.registerSpriteSet(IMPACT_ATTACK.get(), DamageTypeParticle.Provider::new);
         event.registerSpriteSet(PIERCE_ATTACK.get(), DamageTypeParticle.Provider::new);
