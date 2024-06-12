@@ -35,8 +35,9 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(VEGETATION_RARITY_MAPPER, makeVegetationRarityMapper(function));
 
         context.register(FACTOR, buildFactor(function));
-        context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
         context.register(ISLAND_DENSITY, buildIslandDensity(function));
+
+        context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
         context.register(TERRAIN_SHAPER, finalizeTerrainShaper(function));
         context.register(FINAL_DENSITY, buildFinalDensity(function));
 

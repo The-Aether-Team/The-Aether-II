@@ -33,6 +33,7 @@ public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> PURPLE_AERCLOUD = AetherIIPlacementUtils.createKey("purple_aercloud");
     public static final ResourceKey<PlacedFeature> STORM_AERCLOUD = AetherIIPlacementUtils.createKey("storm_aercloud");
     public static final ResourceKey<PlacedFeature> CLOUDBED = AetherIIPlacementUtils.createKey("cloudbed");
+    public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_ARCTIC = AetherIIPlacementUtils.createKey("freeze_top_layer_arctic");
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
@@ -85,6 +86,7 @@ public class AetherIIMiscPlacements {
         );
 
         AetherIIPlacementUtils.register(context, CLOUDBED, configuredFeatures.getOrThrow(AetherIIMiscFeatures.CLOUDBED), BiomeFilter.biome());
+        AetherIIPlacementUtils.register(context, FREEZE_TOP_LAYER_ARCTIC, configuredFeatures.getOrThrow(AetherIIMiscFeatures.FREEZE_TOP_LAYER_ARCTIC), BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, COLD_AERCLOUD, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COLD_AERCLOUD), AetherIIPlacementBuilders.aercloudPlacement(32, 256, 12));
         AetherIIPlacementUtils.register(context, BLUE_AERCLOUD, configuredFeatures.getOrThrow(AetherIIMiscFeatures.BLUE_AERCLOUD), AetherIIPlacementBuilders.aercloudPlacement(32, 256, 28));
