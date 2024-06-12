@@ -40,15 +40,17 @@ public class HighlandsBiomeSourceBuilders {
         return MultiNoiseBiomeSource.createFromList(new Climate.ParameterList<>(List.of(
 
                 // Arctic
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.3F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.3F, 0.2F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, depthArcticLayer1, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(AetherIIBiomes.FROZEN_LAKES)),
 
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.1F, 0.25F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
-                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.25F, 1.0F), fullRange, erosionDefault, depthArcticLayer2, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.3F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.3F, 0.2F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionDefault, depthArcticLayer1, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
 
-                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, depthArcticLayer3, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionDefault, depthArcticLayer2, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(-0.1F, 0.25F), fullRange, erosionDefault, depthArcticLayer2, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.SHEER_TUNDRA)),
+                Pair.of(new Climate.ParameterPoint(tempArctic, Climate.Parameter.span(0.25F, 1.0F), fullRange, erosionDefault, depthArcticLayer2, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.ENDURING_WOODLAND)),
+
+                Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, depthArcticLayer3, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
 
                 // Highfields
                 Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.EXPANSE)),
@@ -70,17 +72,15 @@ public class HighlandsBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.25F, 1.0F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.VERDANT_WOODS)),
 
                 // Magnetic
-                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.2F, 0.15F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(0.15F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.1F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
 
                 Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-1.0F, -0.15F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.TURQUOISE_FOREST)),
                 Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-0.15F, 0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
                 Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.VIOLET_HIGHWOODS)),
 
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-1.0F, -0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.GLISTENING_SWAMP)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-0.2F, 0.1F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(0.1F, 0.3F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.TURQUOISE_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-0.1F, 0.3F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.TURQUOISE_FOREST)),
                 Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(0.3F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),
 
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.MAGNETIC_SCAR)),

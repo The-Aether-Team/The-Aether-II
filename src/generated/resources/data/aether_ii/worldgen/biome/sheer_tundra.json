@@ -19,6 +19,7 @@
   },
   "features": [
     [
+      "aether_ii:noise_lake_arctic",
       "aether_ii:cloudbed"
     ],
     [],

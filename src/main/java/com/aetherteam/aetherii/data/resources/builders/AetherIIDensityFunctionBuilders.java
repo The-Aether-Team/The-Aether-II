@@ -88,7 +88,7 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction base = makeBaseTerrainShaper(function);
         DensityFunction density = base;
         density = DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 128, density, DensityFunctions.mul(density, getFunction(function, LAKES_FACTOR)));
-        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.65, density, base);
+        density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -1.5, 0.65, density, base);
         density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, base);
         return density;
     }
@@ -154,15 +154,11 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
 
         CubicSpline<C, I> continentsSpline = CubicSpline.builder(continents)
-                .addPoint(-0.225F, lakeSpline)
-                .addPoint(-0.15F, 1.0F)
                 .addPoint(0.15F, 1.0F)
                 .addPoint(0.225F, lakeSpline)
                 .build();
 
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
-                .addPoint(-0.35F, 1.0F)
-                .addPoint(-0.325F, continentsSpline)
                 .addPoint(0.575F, continentsSpline)
                 .addPoint(0.6F, 1.0F)
                 .build();

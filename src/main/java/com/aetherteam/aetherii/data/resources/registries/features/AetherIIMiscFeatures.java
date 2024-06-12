@@ -36,6 +36,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = AetherIIFeatureUtils.registerKey("coast_quicksoil");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_SAND = AetherIIFeatureUtils.registerKey("coast_ferrosite_sand");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE = AetherIIFeatureUtils.registerKey("noise_lake");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_ARCTIC = AetherIIFeatureUtils.registerKey("noise_lake_arctic");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR = AetherIIFeatureUtils.registerKey("ferrosite_pillar");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = AetherIIFeatureUtils.registerKey("skyroot_twigs");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_ROCKS = AetherIIFeatureUtils.registerKey("holystone_rocks");
@@ -46,7 +47,6 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_AERCLOUD = AetherIIFeatureUtils.registerKey("green_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = AetherIIFeatureUtils.registerKey("purple_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = AetherIIFeatureUtils.registerKey("storm_aercloud");
-
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = AetherIIFeatureUtils.registerKey("cloudbed");
 
     @SuppressWarnings("deprecation")
@@ -86,6 +86,23 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                                 )
                         ),
                         false
+                ));
+        AetherIIFeatureUtils.register(context, NOISE_LAKE_ARCTIC, AetherIIFeatures.NOISE_LAKE.get(),
+                new NoiseLakeConfiguration(
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        ConstantInt.of(124),
+                        new NoiseProvider(
+                                100L,
+                                new NormalNoise.NoiseParameters(0, 1.0),
+                                0.075F,
+                                List.of(
+                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
+                                )
+                        ),
+                        true
                 ));
 
         AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(

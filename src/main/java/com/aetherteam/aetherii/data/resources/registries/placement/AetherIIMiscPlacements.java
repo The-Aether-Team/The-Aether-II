@@ -21,6 +21,7 @@ public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = AetherIIPlacementUtils.createKey("coast_quicksoil");
     public static final ResourceKey<PlacedFeature> COAST_FERROSITE_SAND = AetherIIPlacementUtils.createKey("coast_ferrosite_sand");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = AetherIIPlacementUtils.createKey("noise_lake");
+    public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = AetherIIPlacementUtils.createKey("noise_lake_arctic");
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = AetherIIPlacementUtils.createKey("ferrosite_pillar");
     public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = AetherIIPlacementUtils.createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = AetherIIPlacementUtils.createKey("holystone_rocks");
@@ -51,6 +52,7 @@ public class AetherIIMiscPlacements {
         );
 
         AetherIIPlacementUtils.register(context, NOISE_LAKE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.NOISE_LAKE), BiomeFilter.biome());
+        AetherIIPlacementUtils.register(context, NOISE_LAKE_ARCTIC, configuredFeatures.getOrThrow(AetherIIMiscFeatures.NOISE_LAKE_ARCTIC), BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, FERROSITE_PILLAR, configuredFeatures.getOrThrow(AetherIIMiscFeatures.FERROSITE_PILLAR),
                 CountPlacement.of(2),

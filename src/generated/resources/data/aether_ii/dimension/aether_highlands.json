@@ -6,6 +6,36 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
+          "biome": "aether_ii:frozen_lakes",
+          "parameters": {
+            "continentalness": [
+              -1.5,
+              1.5
+            ],
+            "depth": [
+              -1.5,
+              1.5
+            ],
+            "erosion": [
+              0.0,
+              0.55
+            ],
+            "humidity": [
+              -1.5,
+              1.5
+            ],
+            "offset": 0.0,
+            "temperature": [
+              -1.5,
+              -0.4
+            ],
+            "weirdness": [
+              0.425,
+              1.0
+            ]
+          }
+        },
+        {
           "biome": "aether_ii:enduring_woodland",
           "parameters": {
             "continentalness": [
@@ -30,8 +60,8 @@
               -0.4
             ],
             "weirdness": [
-              -1.5,
-              1.5
+              -1.0,
+              0.425
             ]
           }
         },
@@ -60,8 +90,8 @@
               -0.4
             ],
             "weirdness": [
-              -1.5,
-              1.5
+              -1.0,
+              0.425
             ]
           }
         },
@@ -90,8 +120,8 @@
               -0.4
             ],
             "weirdness": [
-              -1.5,
-              1.5
+              -1.0,
+              0.425
             ]
           }
         },
@@ -120,8 +150,8 @@
               -0.4
             ],
             "weirdness": [
-              -1.5,
-              1.5
+              -1.0,
+              0.425
             ]
           }
         },
@@ -150,8 +180,8 @@
               -0.4
             ],
             "weirdness": [
-              -1.5,
-              1.5
+              -1.0,
+              0.425
             ]
           }
         },
@@ -180,8 +210,8 @@
               -0.4
             ],
             "weirdness": [
-              -1.5,
-              1.5
+              -1.0,
+              0.425
             ]
           }
         },
@@ -210,8 +240,8 @@
               -0.4
             ],
             "weirdness": [
-              -1.5,
-              1.5
+              -1.0,
+              0.425
             ]
           }
         },
@@ -622,37 +652,7 @@
             ],
             "humidity": [
               -1.0,
-              -0.2
-            ],
-            "offset": 0.0,
-            "temperature": [
-              -1.5,
-              -0.25
-            ],
-            "weirdness": [
-              -1.5,
-              1.5
-            ]
-          }
-        },
-        {
-          "biome": "aether_ii:glistening_swamp",
-          "parameters": {
-            "continentalness": [
-              -1.5,
-              1.5
-            ],
-            "depth": [
-              -1.5,
-              1.5
-            ],
-            "erosion": [
-              0.55,
-              1.5
-            ],
-            "humidity": [
-              -0.2,
-              0.15
+              -0.1
             ],
             "offset": 0.0,
             "temperature": [
@@ -681,7 +681,7 @@
               1.5
             ],
             "humidity": [
-              0.15,
+              -0.1,
               1.0
             ],
             "offset": 0.0,
@@ -786,36 +786,6 @@
           }
         },
         {
-          "biome": "aether_ii:glistening_swamp",
-          "parameters": {
-            "continentalness": [
-              -1.5,
-              1.5
-            ],
-            "depth": [
-              -1.5,
-              1.5
-            ],
-            "erosion": [
-              0.55,
-              1.5
-            ],
-            "humidity": [
-              -1.0,
-              -0.2
-            ],
-            "offset": 0.0,
-            "temperature": [
-              0.25,
-              0.65
-            ],
-            "weirdness": [
-              -1.5,
-              1.5
-            ]
-          }
-        },
-        {
           "biome": "aether_ii:magnetic_scar",
           "parameters": {
             "continentalness": [
@@ -831,8 +801,8 @@
               1.5
             ],
             "humidity": [
-              -0.2,
-              0.1
+              -1.0,
+              -0.1
             ],
             "offset": 0.0,
             "temperature": [
@@ -861,7 +831,7 @@
               1.5
             ],
             "humidity": [
-              0.1,
+              -0.1,
               0.3
             ],
             "offset": 0.0,

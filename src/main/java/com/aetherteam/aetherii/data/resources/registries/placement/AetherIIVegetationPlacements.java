@@ -36,6 +36,7 @@ public class AetherIIVegetationPlacements {
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = AetherIIPlacementUtils.createKey("violet_highwoods_trees");
     public static final ResourceKey<PlacedFeature> GREATBOA_TREES = AetherIIPlacementUtils.createKey("greatboa_trees");
     public static final ResourceKey<PlacedFeature> ENDURING_WOODLAND_TREES = AetherIIPlacementUtils.createKey("enduring_woodland_trees");
+    public static final ResourceKey<PlacedFeature> FROZEN_LAKES_TREES = AetherIIPlacementUtils.createKey("frozen_lakes_trees");
     public static final ResourceKey<PlacedFeature> CONTAMINATED_JUNGLE_TREES = AetherIIPlacementUtils.createKey("contaminated_jungle_trees");
     public static final ResourceKey<PlacedFeature> BATTLEGROUND_WASTES_TREES = AetherIIPlacementUtils.createKey("battleground_wastes_trees");
 
@@ -99,12 +100,11 @@ public class AetherIIVegetationPlacements {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
 
         AetherIIPlacementUtils.register(context, GREATBOA_TREES, configuredFeatures.getOrThrow(AetherIITreeFeatures.GREATBOA),
-                VegetationPlacements.treePlacement(
-                        RarityFilter.onAverageOnceEvery(16),
-                        AetherIIBlocks.GREATBOA_SAPLING.get()
-                ));
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(16), AetherIIBlocks.GREATBOA_SAPLING.get()));
         AetherIIPlacementUtils.register(context, ENDURING_WOODLAND_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_ENDURING_WOODLANDS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
+        AetherIIPlacementUtils.register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYPINE),
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2), AetherIIBlocks.SKYROOT_SAPLING.get()));
 
         AetherIIPlacementUtils.register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_FOREST),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
