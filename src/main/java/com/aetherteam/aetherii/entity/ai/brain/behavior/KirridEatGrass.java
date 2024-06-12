@@ -39,7 +39,7 @@ public class KirridEatGrass extends Behavior<Kirrid> {
     }
 
     protected void tick(ServerLevel pLevel, Kirrid pOwner, long pGameTime) {
-        if (this.eatTick == 55) {
+        if (this.eatTick == 45) {
             if (this.isValidTarget(pLevel, pOwner)) {
                 this.finishEat(pLevel, pOwner);
             }
