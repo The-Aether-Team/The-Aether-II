@@ -21,6 +21,7 @@
   "client": [
     "client.BlockRenderDispatcherMixin",
     "client.ClientLevelMixin",
+    "client.LiquidBlockRendererMixin",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.ParticleAccessor"
   ],

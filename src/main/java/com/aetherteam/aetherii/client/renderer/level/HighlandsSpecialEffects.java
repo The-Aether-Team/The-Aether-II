@@ -312,7 +312,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
                 Matrix4f matrix4f = poseStack.last().pose();
 
-                RenderSystem.setShader(AetherIIShaders::getPositionColorCloudCoverShader);
+                RenderSystem.setShader(AetherIIShaders::getCloudCoverShader);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
                 bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
