@@ -124,7 +124,7 @@ public class AetherLeafPileBlock extends FallingBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!state.getValue(PERSISTENT)) {
+        if (!state.getValue(PERSISTENT) && random.nextInt(5) == 0) {
             int i = state.getValue(PILES);
             if (i > 1) {
                 state.setValue(PILES, Math.max(1, i - 1));

@@ -53,11 +53,11 @@ public class AetherLeavesBlock extends LeavesBlock {
                     BlockPos abovePos = mutablePos.above();
                     BlockState aboveState = level.getBlockState(abovePos);
                     BlockState pileState = this.leavesPile.get().defaultBlockState();
-                    if (!mutableState.isAir() && aboveState.isAir() && pileState.canSurvive(level, abovePos)) {
+                    if (Block.canSupportCenter(level, mutablePos, Direction.UP) && aboveState.isAir() && pileState.canSurvive(level, abovePos)) {
                         level.setBlock(mutablePos.above(), pileState, 2);
                         break;
                     }
-                    if (level.isOutsideBuildHeight(mutablePos.getY()) || mutableState.isSolidRender(level, pos) || !mutableState.getFluidState().isEmpty() || Shapes.joinIsNotEmpty(Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0), mutableState.getCollisionShape(level, pos), BooleanOp.AND)) {
+                    if (level.isOutsideBuildHeight(mutablePos.getY()) || mutableState.isSolidRender(level, mutablePos) || !mutableState.getFluidState().isEmpty() || Shapes.joinIsNotEmpty(Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0), mutableState.getCollisionShape(level, mutablePos), BooleanOp.AND)) {
                         break;
                     }
                 }
