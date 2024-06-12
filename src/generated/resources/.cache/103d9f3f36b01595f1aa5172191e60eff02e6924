@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-12T16:30:08.4693384	Registries
+// 1.20.4	2024-06-12T17:26:11.2442535	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -92,6 +92,7 @@ ddd0411581bfc0c402fdc178bfe098414284f613 data/aether_ii/worldgen/configured_feat
 24b850f902ff12088884fc1b81409018000db107 data/aether_ii/worldgen/configured_feature/wisptop.json
 5ef39837b9ef67a7c54332304ae301e6badcd126 data/aether_ii/worldgen/density_function/cloudbed_noise.json
 1441e743c52915919b76517dfe3d261b5a4c8545 data/aether_ii/worldgen/density_function/cloudbed_y_offset.json
+5a71e898244747089555eb81bf5e9795a24a6aa0 data/aether_ii/worldgen/density_function/highlands/amplification.json
 adbacadbe0c5c1e6ae0972b88f61232174e2069c data/aether_ii/worldgen/density_function/highlands/base_3d_noise.json
 c4dca2e764e6525d498ecd28aca850f93e56bf1a data/aether_ii/worldgen/density_function/highlands/continents.json
 bb528955a5d100eb3198c0ea44e1409d8e23df3b data/aether_ii/worldgen/density_function/highlands/depth.json
