@@ -322,7 +322,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> AGIOSITE_BRICKS = register("agiosite_bricks", () -> new Block(Block.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops()));
     public static final DeferredBlock<StairBlock> AGIOSITE_BRICK_STAIRS = register("agiosite_brick_stairs", () -> new StairBlock(() -> AGIOSITE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE_BRICKS.get())));
     public static final DeferredBlock<SlabBlock> AGIOSITE_BRICK_SLAB = register("agiosite_brick_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE_BRICKS.get()).strength(2.0F, 6.0F)));
-    public static final DeferredBlock<WallBlock> AGIOSITE_BRICK_WALL = register("agiosite_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE_BRICKS.get()).forceSolidOn()));
+    public static final DeferredBlock<WallBlock> AGIOSITE_BRICK_WALL = register("agiosite_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE_BRICKS.get()).forceSolidOn()));
 
     // Agiosite Decorative Blocks
     public static final DeferredBlock<Block> AGIOSITE_FLAGSTONES = register("agiosite_flagstones", () -> new Block(Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get())));
@@ -338,12 +338,41 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SlabBlock> ICESTONE_SLAB = register("icestone_slab", () -> new IcestoneSlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE.get()).strength(0.5F, 6.0F)));
     public static final DeferredBlock<WallBlock> ICESTONE_WALL = register("icestone_wall", () -> new IcestoneWallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE.get()).forceSolidOn()));
 
+    // Icestone Bricks
+    public static final DeferredBlock<Block> ICESTONE_BRICKS = register("icestone_bricks", () -> new Block(Block.Properties.of().mapColor(MapColor.ICE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<StairBlock> ICESTONE_BRICK_STAIRS = register("icestone_bricks_stairs", () -> new StairBlock(() -> ICESTONE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get())));
+    public static final DeferredBlock<SlabBlock> ICESTONE_BRICK_SLAB = register("icestone_bricks_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()).strength(2.0F, 6.0F)));
+    public static final DeferredBlock<WallBlock> ICESTONE_BRICK_WALL = register("icestone_bricks_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()).forceSolidOn()));
+
+    // Icestone Decorative Blocks
+    public static final DeferredBlock<Block> ICESTONE_FLAGSTONES = register("icestone_flagstones", () -> new Block(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> ICESTONE_KEYSTONE = register("icestone_keystone", () -> new Block(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> ICESTONE_BASE_BRICKS = register("icestone_base_bricks", () -> new Block(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> ICESTONE_CAPSTONE_BRICKS = register("icestone_capstone_bricks", () -> new Block(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> ICESTONE_BASE_PILLAR = register("icestone_base_pillar", () -> new Block(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get())));
+    public static final DeferredBlock<Block> ICESTONE_CAPSTONE_PILLAR = register("icestone_capstone_pillar", () -> new Block(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get())));
+    public static final DeferredBlock<RotatedPillarBlock> ICESTONE_PILLAR = register("icestone_pillar", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get())));
+
     // Glass
     public static final DeferredBlock<TransparentBlock> QUICKSOIL_GLASS = register("quicksoil_glass", () -> new QuicksoilGlassBlock(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.HAT).strength(0.2F).friction(1.1F).lightLevel(AetherIIBlocks::lightLevel11).sound(SoundType.GLASS).noOcclusion().isValidSpawn(AetherIIBlocks::never).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
-    public static final DeferredBlock<IronBarsBlock> QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", () -> new IronBarsBlock(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.HAT).strength(0.2F).friction(1.1F).lightLevel(AetherIIBlocks::lightLevel11).sound(SoundType.GLASS).noOcclusion()));
-    public static final DeferredBlock<IronBarsBlock> CRUDE_SCATTERGLASS_PANE = register("crude_scatterglass_pane", () -> new CrudeScatterglassPane(Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion().isViewBlocking(AetherIIBlocks::never)));
+    public static final DeferredBlock<TransparentBlock> SKYROOT_FRAMED_QUICKSOIL_GLASS = register("skyroot_framed_quicksoil_glass", () -> new QuicksoilGlassBlock(Block.Properties.ofFullCopy(QUICKSOIL_GLASS.get())));
+    public static final DeferredBlock<TransparentBlock> ARKENIUM_FRAMED_QUICKSOIL_GLASS = register("arkenium_framed_quicksoil_glass", () -> new QuicksoilGlassBlock(Block.Properties.ofFullCopy(QUICKSOIL_GLASS.get())));
+    public static final DeferredBlock<HalfTransparentBlock> SKYROOT_FRAMED_CRUDE_SCATTERGLASS = register("skyroot_framed_crude_scatterglass", () -> new HalfTransparentBlock(Block.Properties.ofFullCopy(CRUDE_SCATTERGLASS.get())));
+    public static final DeferredBlock<HalfTransparentBlock> ARKENIUM_FRAMED_CRUDE_SCATTERGLASS = register("arkenium_framed_crude_scatterglass", () -> new HalfTransparentBlock(Block.Properties.ofFullCopy(CRUDE_SCATTERGLASS.get())));
     public static final DeferredBlock<TransparentBlock> SCATTERGLASS = register("scatterglass", () -> new ScatterglassBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().strength(0.2F).sound(SoundType.GLASS).requiresCorrectToolForDrops().isValidSpawn(AetherIIBlocks::never).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
+    public static final DeferredBlock<TransparentBlock> SKYROOT_FRAMED_SCATTERGLASS = register("skyroot_framed_scatterglass", () -> new ScatterglassBlock(Block.Properties.ofFullCopy(SCATTERGLASS.get())));
+    public static final DeferredBlock<TransparentBlock> ARKENIUM_FRAMED_SCATTERGLASS = register("arkenium_framed_scatterglass", () -> new ScatterglassBlock(Block.Properties.ofFullCopy(SCATTERGLASS.get())));
+
+    // Glass Panes
+    public static final DeferredBlock<IronBarsBlock> QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", () -> new IronBarsBlock(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.HAT).strength(0.2F).friction(1.1F).lightLevel(AetherIIBlocks::lightLevel11).sound(SoundType.GLASS).noOcclusion()));
+    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE = register("skyroot_framed_quicksoil_glass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(QUICKSOIL_GLASS_PANE.get())));
+    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE = register("arkenium_framed_quicksoil_glass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(QUICKSOIL_GLASS_PANE.get())));
+    public static final DeferredBlock<IronBarsBlock> CRUDE_SCATTERGLASS_PANE = register("crude_scatterglass_pane", () -> new CrudeScatterglassPane(Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion().isViewBlocking(AetherIIBlocks::never)));
+    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE = register("skyroot_framed_crude_scatterglass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(CRUDE_SCATTERGLASS_PANE.get())));
+    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE = register("arkenium_framed_crude_scatterglass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(CRUDE_SCATTERGLASS_PANE.get())));
     public static final DeferredBlock<IronBarsBlock> SCATTERGLASS_PANE = register("scatterglass_pane", () -> new IronBarsBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().strength(0.2F).sound(SoundType.GLASS).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_SCATTERGLASS_PANE = register("skyroot_framed_scatterglass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(SCATTERGLASS_PANE.get())));
+    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_SCATTERGLASS_PANE = register("arkenium_framed_scatterglass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(SCATTERGLASS_PANE.get())));
 
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> new Block(Block.Properties.ofFullCopy(Blocks.WHITE_WOOL)));

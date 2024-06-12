@@ -3,15 +3,15 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "aether_ii:plates/arkenium"
+      "item": "aether_ii:icestone_bricks"
     }
   },
   "pattern": [
-    "#",
-    "#"
+    "###",
+    "###"
   ],
   "result": {
-    "count": 4,
-    "item": "aether_ii:arkenium_strip"
+    "count": 6,
+    "item": "aether_ii:icestone_bricks_wall"
   }
 }

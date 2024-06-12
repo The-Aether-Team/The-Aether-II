@@ -307,12 +307,41 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.slab(AetherIIBlocks.ICESTONE_SLAB.get(), AetherIIBlocks.ICESTONE.get(), "natural/");
         this.wallBlock(AetherIIBlocks.ICESTONE_WALL.get(), AetherIIBlocks.ICESTONE.get(), "natural/");
 
+        // Icestone Bricks
+        this.block(AetherIIBlocks.ICESTONE_BRICKS.get(), "construction/");
+        this.stairs(AetherIIBlocks.ICESTONE_BRICK_STAIRS.get(), AetherIIBlocks.ICESTONE_BRICKS.get(), "construction/");
+        this.slab(AetherIIBlocks.ICESTONE_BRICK_SLAB.get(), AetherIIBlocks.ICESTONE_BRICKS.get(), "construction/");
+        this.wallBlock(AetherIIBlocks.ICESTONE_BRICK_WALL.get(), AetherIIBlocks.ICESTONE_BRICKS.get(), "construction/");
+
+        // Icestone Decorative Blocks
+        this.block(AetherIIBlocks.ICESTONE_FLAGSTONES.get(), "decorative/");
+        this.block(AetherIIBlocks.ICESTONE_KEYSTONE.get(), "decorative/");
+        this.decorativeBlock(AetherIIBlocks.ICESTONE_BASE_BRICKS.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
+        this.decorativeBlock(AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
+        this.decorativeBlock(AetherIIBlocks.ICESTONE_BASE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
+        this.decorativeBlock(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
+        this.decorativePillar(AetherIIBlocks.ICESTONE_PILLAR.get(), AetherIIBlocks.ICESTONE_KEYSTONE.get());
+
         // Glass
         this.translucentBlock(AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
+        this.translucentBlock(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.get(), "decorative/");
+        this.translucentBlock(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.get(), "decorative/");
+        this.translucentBlock(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(), "decorative/");
+        this.translucentBlock(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get(), "decorative/");
+        this.translucentBlock(AetherIIBlocks.SCATTERGLASS.get(), "construction/");
+        this.translucentBlock(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get(), "decorative/");
+        this.translucentBlock(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get(), "decorative/");
+
+        // Glass Panes
         this.pane(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.QUICKSOIL_GLASS.get(), "construction/");
+        this.pane(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.get(), "decorative/");
+        this.pane(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE.get(), AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.get(), "decorative/");
         this.crudeScatterglassPane(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get(), AetherIIBlocks.CRUDE_SCATTERGLASS.get(), "natural/");
-        this.translucentBlock(AetherIIBlocks.SCATTERGLASS.get(), "natural/");
-        this.pane(AetherIIBlocks.SCATTERGLASS_PANE.get(), AetherIIBlocks.SCATTERGLASS.get(), "natural/");
+        this.crudeScatterglassPane(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE.get(), AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(), "decorative/");
+        this.crudeScatterglassPane(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE.get(), AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get(), "decorative/");
+        this.pane(AetherIIBlocks.SCATTERGLASS_PANE.get(), AetherIIBlocks.SCATTERGLASS.get(), "construction/");
+        this.crudeScatterglassPane(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get(), AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get(), "decorative/");
+        this.crudeScatterglassPane(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get(), AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get(), "decorative/");
 
         // Wool
         this.block(AetherIIBlocks.CLOUDWOOL.get(), "construction/");
