@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -87,7 +88,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
             }
 
             // Generates waterfalls
-            if (y == 124 && context.random().nextInt(12) == 0 && barrier > 0.25 && !level.isEmptyBlock(new BlockPos(x, y, z))) {
+            if (y == 124 && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(new BlockPos(x, y, z)).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get())) {
                 level.setBlock(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
                 level.scheduleTick(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().getType(), 0);
             }
