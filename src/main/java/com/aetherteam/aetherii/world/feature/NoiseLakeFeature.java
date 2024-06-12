@@ -1,17 +1,18 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.RockBlock;
+import com.aetherteam.aetherii.block.natural.TwigBlock;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
 public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
@@ -42,8 +43,8 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 placeLakeLayer(context, xCoord, height - 7, zCoord, 0.49, 0.35);
                 placeLakeLayer(context, xCoord, height - 8, zCoord, 0.5, 0.3);
                 placeLakeLayer(context, xCoord, height - 9, zCoord, 0.51, 0.25);
-                placeLakeLayer(context, xCoord, height- 10, zCoord, 0.54, 0.175);
-                placeLakeLayer(context, xCoord, height- 11, zCoord, 0.57, 0.08);
+                placeLakeLayer(context, xCoord, height - 10, zCoord, 0.54, 0.175);
+                placeLakeLayer(context, xCoord, height - 11, zCoord, 0.57, 0.08);
             }
         }
         return true;
@@ -76,22 +77,30 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                         && !level.isEmptyBlock(new BlockPos(x, y - barrierThickness(barrier), z))
                         && !level.isEmptyBlock(new BlockPos(x, y, z + barrierThickness(barrier)))
                         && !level.isEmptyBlock(new BlockPos(x, y, z - barrierThickness(barrier)))
-                        && !level.getBlockState(new BlockPos(x, y + 1, z)).isSolid()
+                        && (!level.getBlockState(new BlockPos(x, y + 1, z)).isSolid()
+                        || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof HalfTransparentBlock
+                        || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof BushBlock
+                )
                 ) {
                     this.setBlock(level, new BlockPos(x, y, z), Blocks.WATER.defaultBlockState());
                     this.setBlock(level, new BlockPos(x, y - 1, z), config.underwaterBlock().getState(context.random(), new BlockPos(x, y - 1, z)));
 
                     // Removes Floating Grass above the lakes
-                    if (level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof BushBlock) {
+                    if (level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof BushBlock || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof TwigBlock || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof RockBlock) {
                         this.setBlock(level, new BlockPos(x, y + 1, z), Blocks.AIR.defaultBlockState());
                     }
                 }
             }
 
             // Generates waterfalls
-            if (y == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(new BlockPos(x, y, z)).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get())) {
+            if (y == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(new BlockPos(x, y, z)).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) && !config.frozen()) {
                 level.setBlock(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
                 level.scheduleTick(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().getType(), 0);
+            }
+
+            // Freezes Top if "frozen" is true
+            if (y == config.height().getMinValue() && level.getBlockState(new BlockPos(x, y, z)).is(Blocks.WATER) && config.frozen()) {
+                this.setBlock(level, new BlockPos(x, y, z), AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
             }
         }
     }

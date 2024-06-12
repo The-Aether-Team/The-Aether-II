@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-12T10:18:08.3816248	Registries
+// 1.20.4	2024-06-12T14:15:52.0083994	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -56,7 +56,7 @@ a57d339e5aab34056b628f97057b3a473973293b data/aether_ii/worldgen/configured_feat
 12abbb3df3693da9fdad5f9734132899b60fff48 data/aether_ii/worldgen/configured_feature/long_grass_patch.json
 3f1665b6688b81e5078fe2dfd2cb2a7a02d7dde6 data/aether_ii/worldgen/configured_feature/medium_grass_patch.json
 b3b6698fbe20590e0bf7b26ef388814e19d412e2 data/aether_ii/worldgen/configured_feature/moa_nest.json
-3a5da74e899546674edb59dcc8e884fbad942e96 data/aether_ii/worldgen/configured_feature/noise_lake.json
+d0d99c211756c5af54d2f6353ab4585113649f87 data/aether_ii/worldgen/configured_feature/noise_lake.json
 c88119c12867f70aaeff8c630a3dc5adb6aac051 data/aether_ii/worldgen/configured_feature/orange_tree_patch.json
 c4fadd1887afd454cb7f6f057de3311f5fc70f11 data/aether_ii/worldgen/configured_feature/ore_agiosite.json
 a57c6abda6c77d818311fad90dc7d61bb3d82507 data/aether_ii/worldgen/configured_feature/ore_ambrosium.json

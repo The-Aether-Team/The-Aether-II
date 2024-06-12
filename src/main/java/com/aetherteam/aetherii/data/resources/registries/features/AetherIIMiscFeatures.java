@@ -84,7 +84,8 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
                                 )
-                        )
+                        ),
+                        false
                 ));
 
         AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
