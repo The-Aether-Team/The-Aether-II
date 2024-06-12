@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/materials/arkenium_strip"
+    "layer0": "aether_ii:item/materials/cloudtwine"
   }
 }

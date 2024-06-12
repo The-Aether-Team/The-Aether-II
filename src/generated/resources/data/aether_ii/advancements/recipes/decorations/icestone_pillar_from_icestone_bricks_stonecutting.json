@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_arkenium": {
+    "has_icestone_bricks": {
       "conditions": {
         "items": [
           {
-            "tag": "aether_ii:plates/arkenium"
+            "items": [
+              "aether_ii:icestone_bricks"
+            ]
           }
         ]
       },
@@ -13,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:arkenium_strip"
+        "recipe": "aether_ii:icestone_pillar_from_icestone_bricks_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +23,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_arkenium"
+      "has_icestone_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:arkenium_strip"
+      "aether_ii:icestone_pillar_from_icestone_bricks_stonecutting"
     ]
   }
 }
