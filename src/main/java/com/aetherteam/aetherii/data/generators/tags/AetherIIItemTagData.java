@@ -394,13 +394,19 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(Tags.Items.GLASS_COLORLESS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS.asItem(),
-                AetherIIBlocks.CRUDE_SCATTERGLASS.asItem(),
-                AetherIIBlocks.SCATTERGLASS.asItem()
+                AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.asItem(),
+                AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.asItem(),
+                AetherIIBlocks.SCATTERGLASS.asItem(),
+                AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.asItem(),
+                AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.asItem()
         );
         this.tag(Tags.Items.GLASS_PANES_COLORLESS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS_PANE.asItem(),
-                AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.asItem(),
-                AetherIIBlocks.SCATTERGLASS_PANE.asItem()
+                AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE.asItem(),
+                AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE.asItem(),
+                AetherIIBlocks.SCATTERGLASS_PANE.asItem(),
+                AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.asItem(),
+                AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.asItem()
         );
         this.tag(Tags.Items.ORE_RATES_SINGULAR).add(
                 AetherIIBlocks.AMBROSIUM_ORE.asItem(),

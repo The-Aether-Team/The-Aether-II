@@ -335,10 +335,24 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Glass
         this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS.get());
-        this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
-        this.dropSelf(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get());
         this.dropSelf(AetherIIBlocks.SCATTERGLASS.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get());
+
+        // Glass Panes
+        this.dropWhenSilkTouch(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE.get());
+        this.dropSelf(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE.get());
         this.dropSelf(AetherIIBlocks.SCATTERGLASS_PANE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
