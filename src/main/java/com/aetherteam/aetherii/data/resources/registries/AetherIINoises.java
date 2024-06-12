@@ -14,9 +14,6 @@ public class AetherIINoises {
     public static final ResourceKey<NormalNoise.NoiseParameters> EROSION = createKey("erosion");
     public static final ResourceKey<NormalNoise.NoiseParameters> ELEVATION = createKey("elevation");
     public static final ResourceKey<NormalNoise.NoiseParameters> AMPLIFICATION = createKey("amplification");
-    public static final ResourceKey<NormalNoise.NoiseParameters> LAKES = createKey("lakes");
-    public static final ResourceKey<NormalNoise.NoiseParameters> LAKE_FLOOR = createKey("lake_floor");
-    public static final ResourceKey<NormalNoise.NoiseParameters> LAKE_HOLYSTONE = createKey("lake_holystone");
     public static final ResourceKey<NormalNoise.NoiseParameters> ARCTIC_SNOW = createKey("arctic_snow");
 
     private static ResourceKey<NormalNoise.NoiseParameters> createKey(String name) {
@@ -30,9 +27,6 @@ public class AetherIINoises {
         register(context, EROSION, -9, 1.5, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         register(context, ELEVATION, -8, 1.0D, 0.2D, 0.0D, 0.0D, 0.0D);
         register(context, AMPLIFICATION, -7, 1.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0);
-        register(context, LAKES, -8, 1.25, 0.0, 0.25, 0.0);
-        register(context, LAKE_FLOOR, -6, 1.5, 1.0, 0.0, 0.0, 0.0, 0.0);
-        register(context, LAKE_HOLYSTONE, -4, 1.0, 0.5, 0.5, 0.0, 0.0, 0.0);
         register(context, ARCTIC_SNOW, -5, 1.0, 0.0, 0.5, 0.5, 0.0, 0.0);
     }
 

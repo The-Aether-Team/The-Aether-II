@@ -1,6 +1,7 @@
-// 1.20.4	2024-06-11T18:19:53.7751296	Tags for minecraft:block mod id aether_ii
+// 1.20.4	2024-06-12T16:39:11.5906638	Tags for minecraft:block mod id aether_ii
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/blocks/aerclouds.json
 f892200a6958152f663e0a7c08fdbed855a2811d data/aether_ii/tags/blocks/aether_animal_spawnable_on.json
+5b4ded384ef0c3476b61916bb01796c610691f7d data/aether_ii/tags/blocks/aether_carver_replaceables.json
 82f472ec897b7763f2d04a7ceefbe43c8bc3c1fd data/aether_ii/tags/blocks/aether_dirt.json
 3784b595a03a51ad1d5480d9c690866ae4523c4f data/aether_ii/tags/blocks/aether_portal_blacklist.json
 a1d6c65d4a9a1b4357c0384f184582c090565616 data/aether_ii/tags/blocks/aether_portal_blocks.json
@@ -63,7 +64,8 @@ a826721510b267865307b8d52bbdcdefab4e5618 data/minecraft/tags/blocks/small_flower
 71ba653d61c75b646b72173e57e8360795812ddd data/minecraft/tags/blocks/snaps_goat_horn.json
 f7919fbc765a02686a1b97c0b62bc2a192b047ba data/minecraft/tags/blocks/sniffer_diggable_block.json
 de12444726d6690fceda19fcd8fffdd79056e574 data/minecraft/tags/blocks/snow.json
-fefd4cd3ba1287fe1e3014fd93002391c8f03bb8 data/minecraft/tags/blocks/stairs.json
+b5168e5be75ea23e131ea0978560b82aa9c65a7d data/minecraft/tags/blocks/snow_layer_cannot_survive_on.json
+fe9faf02f9dd92d2530c91b98ce9f4f3fe6e28fa data/minecraft/tags/blocks/stairs.json
 c098ec8974501b4d2ec2522104ebde07957db8e5 data/minecraft/tags/blocks/standing_signs.json
 220cb43fca5767fe3d04a7d01c9a1cf30c725296 data/minecraft/tags/blocks/stone_buttons.json
 64253bea65bb2781525c741142f8da2e06a71fe0 data/minecraft/tags/blocks/trapdoors.json

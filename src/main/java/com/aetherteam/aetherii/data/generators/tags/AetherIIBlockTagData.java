@@ -51,6 +51,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.UNDERSHALE.get()
         );
+        this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES).addTags(
+                AetherIITags.Blocks.AETHER_DIRT,
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
+        );
         this.tag(AetherIITags.Blocks.FERROSITE).add(
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get()
@@ -661,6 +665,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get()
+        );
+        this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).add(
+                AetherIIBlocks.ARCTIC_ICE.get()
         );
 
         // Forge
