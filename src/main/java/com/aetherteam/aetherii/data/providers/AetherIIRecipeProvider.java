@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
@@ -122,6 +123,21 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("#")
                 .pattern("/")
                 .pattern("#")
+                .unlockedBy(has, has(material));
+    }
+
+    protected ShapedRecipeBuilder makeCrossbowWithTag(Supplier<? extends Item> spear, TagKey<Item> material, String has) {
+        return this.makeCrossbowWithTag(spear, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+    }
+
+    protected ShapedRecipeBuilder makeCrossbowWithTag(Supplier<? extends Item> spear, TagKey<Item> material, Ingredient sticks, String has) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, spear.get())
+                .define('#', material)
+                .define('/', sticks)
+                .define('C', AetherIIItems.CLOUDTWINE)
+                .pattern("/#/")
+                .pattern("C#C")
+                .pattern(" / ")
                 .unlockedBy(has, has(material));
     }
 
