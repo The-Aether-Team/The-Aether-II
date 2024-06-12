@@ -627,6 +627,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get()
         );
+        this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).add(
+                AetherIIBlocks.ARCTIC_ICE.get()
+        );
 
         // Forge
         this.tag(Tags.Blocks.BOOKSHELVES).add(
