@@ -23,6 +23,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
     public boolean place(FeaturePlaceContext<NoiseLakeConfiguration> context) {
         int chunkX = context.origin().getX() - (context.origin().getX() % 16);
         int chunkZ = context.origin().getZ() - (context.origin().getZ() % 16);
+        int height = context.config().height().getMinValue();
 
         // Generates this feature chunk-wise
         for (int x = 0; x < 16; x++) {
@@ -31,18 +32,18 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 int zCoord = chunkZ + z;
 
                 // Determinds the noise value at each y-level
-                placeLakeLayer(context, xCoord, 124, zCoord, 0.4, 1.0);
-                placeLakeLayer(context, xCoord, 123, zCoord, 0.425, 0.75);
-                placeLakeLayer(context, xCoord, 122, zCoord, 0.44, 0.6);
-                placeLakeLayer(context, xCoord, 121, zCoord, 0.45, 0.5);
-                placeLakeLayer(context, xCoord, 120, zCoord, 0.46, 0.47);
-                placeLakeLayer(context, xCoord, 119, zCoord, 0.47, 0.43);
-                placeLakeLayer(context, xCoord, 118, zCoord, 0.48, 0.39);
-                placeLakeLayer(context, xCoord, 117, zCoord, 0.49, 0.35);
-                placeLakeLayer(context, xCoord, 116, zCoord, 0.5, 0.3);
-                placeLakeLayer(context, xCoord, 115, zCoord, 0.51, 0.25);
-                placeLakeLayer(context, xCoord, 114, zCoord, 0.54, 0.175);
-                placeLakeLayer(context, xCoord, 113, zCoord, 0.57, 0.08);
+                placeLakeLayer(context, xCoord, height, zCoord, 0.4, 1.0);
+                placeLakeLayer(context, xCoord, height - 1, zCoord, 0.425, 0.75);
+                placeLakeLayer(context, xCoord, height - 2, zCoord, 0.44, 0.6);
+                placeLakeLayer(context, xCoord, height - 3, zCoord, 0.45, 0.5);
+                placeLakeLayer(context, xCoord, height - 4, zCoord, 0.46, 0.47);
+                placeLakeLayer(context, xCoord, height - 5, zCoord, 0.47, 0.43);
+                placeLakeLayer(context, xCoord, height - 6, zCoord, 0.48, 0.39);
+                placeLakeLayer(context, xCoord, height - 7, zCoord, 0.49, 0.35);
+                placeLakeLayer(context, xCoord, height - 8, zCoord, 0.5, 0.3);
+                placeLakeLayer(context, xCoord, height - 9, zCoord, 0.51, 0.25);
+                placeLakeLayer(context, xCoord, height- 10, zCoord, 0.54, 0.175);
+                placeLakeLayer(context, xCoord, height- 11, zCoord, 0.57, 0.08);
             }
         }
         return true;
@@ -88,7 +89,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
             }
 
             // Generates waterfalls
-            if (y == 124 && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(new BlockPos(x, y, z)).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get())) {
+            if (y == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(new BlockPos(x, y, z)).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get())) {
                 level.setBlock(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
                 level.scheduleTick(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().getType(), 0);
             }
