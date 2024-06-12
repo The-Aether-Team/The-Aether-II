@@ -1,5 +1,7 @@
 {
-  "carvers": {},
+  "carvers": {
+    "air": "aether_ii:highlands_cave"
+  },
   "downfall": 0.8,
   "effects": {
     "fog_color": 15526908,
