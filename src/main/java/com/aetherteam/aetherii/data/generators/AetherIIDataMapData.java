@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
+import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
 import java.util.concurrent.CompletableFuture;
@@ -62,6 +63,18 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIItems.WYNDBERRY, 0.3F);
         this.addCompost(compostables, AetherIIItems.ENCHANTED_WYNDBERRY, 0.5F);
         this.addCompost(compostables, AetherIIItems.ORANGE, 0.3F);
+
+        var fuels = this.builder(NeoForgeDataMaps.FURNACE_FUELS);
+        fuels.add(AetherIIBlocks.AMBROSIUM_BLOCK.asItem().builtInRegistryHolder(), new FurnaceFuel(16000), false);
+        fuels.add(AetherIIItems.AMBROSIUM_SHARD, new FurnaceFuel(1600), false);
+        fuels.add(AetherIIBlocks.SKYROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.SKYROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIItems.SKYROOT_SHORTSWORD, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_PICKAXE, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_AXE, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_SHOVEL, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_TROWEL, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {
