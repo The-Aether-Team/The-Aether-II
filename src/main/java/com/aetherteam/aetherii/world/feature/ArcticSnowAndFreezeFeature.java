@@ -25,20 +25,28 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
         BlockPos.MutableBlockPos posAbove = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos posAboveNoLeaves = new BlockPos.MutableBlockPos();
         BlockPos.MutableBlockPos posBelow = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos posBelowNoLeaves = new BlockPos.MutableBlockPos();
 
         for(int i = 0; i < 16; ++i) {
             for(int j = 0; j < 16; ++j) {
                 int k = pos.getX() + i;
                 int l = pos.getZ() + j;
-                int m = level.getHeight(Heightmap.Types.MOTION_BLOCKING, k, l);
-                posAbove.set(k, m, l);
+                int motionBlocking = level.getHeight(Heightmap.Types.MOTION_BLOCKING, k, l);
+                int noLeaves = level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, k, l);
+
+                posAbove.set(k, motionBlocking, l);
+                posAboveNoLeaves.set(k, noLeaves, l);
                 posBelow.set(posAbove).move(Direction.DOWN, 1);
+                posBelowNoLeaves.set(posAboveNoLeaves).move(Direction.DOWN, 1);
+
                 Biome biome = level.getBiome(posAbove).value();
                 if (biome.shouldFreeze(level, posBelow, false)) {
                     level.setBlock(posBelow, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 2);
                 }
 
+                // Generates snow
                 if (AetherGrassBlock.shouldSnow(biome, level, posAbove)) {
                     BlockState state = level.getBlockState(posAbove);
                     BlockState ground = level.getBlockState(posBelow);
@@ -49,6 +57,20 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
                     }
                     if (ground.hasProperty(SnowyDirtBlock.SNOWY)) {
                         level.setBlock(posBelow, ground.setValue(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
+                    }
+                }
+
+                // Generates snow below leaves
+                if (AetherGrassBlock.shouldSnow(biome, level, posAboveNoLeaves)) {
+                    BlockState state = level.getBlockState(posAboveNoLeaves);
+                    BlockState ground = level.getBlockState(posBelowNoLeaves);
+                    if (AetherGrassBlock.plantNotSnowed(state)) {
+                        level.setBlock(posAboveNoLeaves, state.setValue(BlockStateProperties.SNOWY, Boolean.TRUE), 2);
+                    } else {
+                        level.setBlock(posAboveNoLeaves, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
+                    }
+                    if (ground.hasProperty(SnowyDirtBlock.SNOWY)) {
+                        level.setBlock(posBelowNoLeaves, ground.setValue(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
                     }
                 }
             }
