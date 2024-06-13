@@ -38,8 +38,8 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
-        if (random.nextInt(2) == 0) {
-            if (random.nextInt(2) == 0) {
+        if (random.nextInt(1) == 0) {
+            if (random.nextInt(1) == 0) {
                 for (int i = offset; i >= offset - foliageHeight; --i) {
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
@@ -57,7 +57,7 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
                 }
             }
         } else {
-            if (random.nextInt(2) == 0) {
+            if (random.nextInt(1) == 0) {
                 for (int i = offset; i >= offset - foliageHeight; --i) {
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
