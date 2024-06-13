@@ -162,7 +162,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.slab(AetherIIBlocks.SKYROOT_SLAB.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.fence(AetherIIBlocks.SKYROOT_FENCE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.fenceGateBlock(AetherIIBlocks.SKYROOT_FENCE_GATE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
-        this.doorBlock(AetherIIBlocks.SKYROOT_DOOR.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_DOOR.get()), "construction/", "_bottom"), this.texture(this.name(AetherIIBlocks.SKYROOT_DOOR.get()), "construction/", "_top"));
+        this.doorBlock(AetherIIBlocks.SKYROOT_DOOR.get());
         this.trapdoorBlock(AetherIIBlocks.SKYROOT_TRAPDOOR.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_TRAPDOOR.get()), "construction/"), true);
         this.buttonBlock(AetherIIBlocks.SKYROOT_BUTTON.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_PLANKS.get()), "construction/"));
         this.pressurePlateBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_PLANKS.get()), "construction/"));
