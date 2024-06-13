@@ -34,6 +34,9 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         BlockPlacementUtil.placeDisk(level, config.nestBlock(), pos, radius + 1, random, true);
         BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(Blocks.AIR), pos, radius, random, true);
 
+        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(Blocks.AIR), pos.above(), radius + 1, random, true);
+        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(Blocks.AIR), pos.above(2), radius, random, true);
+
         MoaType moaType = AetherIIMoaTypes.getWeightedChance(level.registryAccess(), level.getRandom());
         this.setBlock(level, pos, Block.byItem(moaType.egg().getItem()).defaultBlockState());
         for (int i = 0; i < 2; i++) {
