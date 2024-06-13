@@ -17,6 +17,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
+import java.util.Objects;
+
 public class MoaNestFeature extends Feature<MoaNestConfiguration> {
     public MoaNestFeature(Codec<MoaNestConfiguration> codec) {
         super(codec);
@@ -30,23 +32,26 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         MoaNestConfiguration config = context.config();
         float radius = random.nextInt((int) config.additionalRadius().getMinValue()) + config.baseRadius().getMinValue() + 0.25F;
 
-        BlockPlacementUtil.placeDisk(level, config.nestBlock(), pos.below(), radius, random, true);
-        BlockPlacementUtil.placeDisk(level, config.nestBlock(), pos, radius + 1, random, true);
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(Blocks.AIR), pos, radius, random, true);
+        BlockPlacementUtil.placeNest(level, config.nestBlock(), pos.below(), radius, random);
+        BlockPlacementUtil.placeNest(level, config.nestBlock(), pos, radius + 1, random);
+        BlockPlacementUtil.placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos, radius, random);
 
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(Blocks.AIR), pos.above(), radius + 1, random, true);
-        BlockPlacementUtil.placeDisk(level, BlockStateProvider.simple(Blocks.AIR), pos.above(2), radius, random, true);
+        BlockPlacementUtil.placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(), radius + 1, random);
+        BlockPlacementUtil.placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(2), radius, random);
 
         MoaType moaType = AetherIIMoaTypes.getWeightedChance(level.registryAccess(), level.getRandom());
         this.setBlock(level, pos, Block.byItem(moaType.egg().getItem()).defaultBlockState());
-        for (int i = 0; i < 2; i++) {
-            Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel());
-            moa.setPos(pos.getCenter().add(i, 0, i));
-            moa.setMoaTypeByKey(AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType));
-            MoaAi.initMoaHomeMemories(moa, level.getRandom());
-            moa.setBaby(false);
-            level.getLevel().addFreshEntity(moa);
+
+        if (config.spawnMoas()) {
+             for (int i = 0; i < 2; i++) {
+                Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel());
+                 moa.setPos(pos.getCenter().add(i, 0, i));
+                 moa.setMoaTypeByKey(Objects.requireNonNull(AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType)));
+                 MoaAi.initMoaHomeMemories(moa, level.getRandom());
+                moa.setBaby(false);
+                level.getLevel().addFreshEntity(moa);
+            }
         }
-        return true;
+        return false;
     }
 }

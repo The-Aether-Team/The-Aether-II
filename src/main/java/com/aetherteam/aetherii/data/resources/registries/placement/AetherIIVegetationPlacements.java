@@ -106,9 +106,9 @@ public class AetherIIVegetationPlacements {
         AetherIIPlacementUtils.register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYPINE),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2), AetherIIBlocks.SKYROOT_SAPLING.get()));
 
-        AetherIIPlacementUtils.register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_FOREST),
+        AetherIIPlacementUtils.register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_DENSE),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
-        AetherIIPlacementUtils.register(context, BATTLEGROUND_WASTES_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT),
+        AetherIIPlacementUtils.register(context, BATTLEGROUND_WASTES_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_SPARSE),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
 
         AetherIIPlacementUtils.register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());

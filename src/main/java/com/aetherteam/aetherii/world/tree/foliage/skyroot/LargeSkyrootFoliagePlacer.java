@@ -1,5 +1,7 @@
-package com.aetherteam.aetherii.world.tree.foliage;
+package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 
+import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -101,7 +103,6 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
      * @param large  The {@link Boolean} for whether the tree is large.
      * @return Whether the location should be skipped, as a {@link Boolean}.
      */
-
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
         return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(3);
