@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.generators;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
@@ -67,9 +68,18 @@ public class AetherIIDataMapData extends DataMapProvider {
         var fuels = this.builder(NeoForgeDataMaps.FURNACE_FUELS);
         fuels.add(AetherIIBlocks.AMBROSIUM_BLOCK.asItem().builtInRegistryHolder(), new FurnaceFuel(16000), false);
         fuels.add(AetherIIItems.AMBROSIUM_SHARD, new FurnaceFuel(1600), false);
+        fuels.add(AetherIIBlocks.HIGHLANDS_BUSH.asItem().builtInRegistryHolder(), new FurnaceFuel(100), false);
         fuels.add(AetherIIBlocks.SKYROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.GREATROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.WISPROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
         fuels.add(AetherIIBlocks.SKYROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIIItems.SKYROOT_SHORTSWORD, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_HAMMER, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_SPEAR, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_CROSSBOW, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_PICKAXE, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_AXE, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_SHOVEL, new FurnaceFuel(200), false);
