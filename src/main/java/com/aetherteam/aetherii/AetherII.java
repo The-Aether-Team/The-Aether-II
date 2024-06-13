@@ -40,8 +40,13 @@ import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import com.google.common.collect.Tables;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
@@ -55,8 +60,14 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+
 @Mod(AetherII.MODID)
 public class AetherII {
+    // todo move or remove test
+    public static Table<Entity, BlockPos, Integer> cachedDynamicLightPoints = HashBasedTable.create();
+
     public static final String MODID = "aether_ii";
     public static final Logger LOGGER = LogUtils.getLogger();
 
