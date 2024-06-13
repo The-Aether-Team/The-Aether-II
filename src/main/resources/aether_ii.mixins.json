@@ -23,7 +23,8 @@
     "client.ClientLevelMixin",
     "client.LiquidBlockRendererMixin",
     "client.accessor.LevelRendererAccessor",
-    "client.accessor.ParticleAccessor"
+    "client.accessor.ParticleAccessor",
+    "client.accessor.RenderChunkRegionAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
