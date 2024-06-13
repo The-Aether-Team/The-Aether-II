@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-13T22:14:40.9800389	Registries
+// 1.20.4	2024-06-13T22:23:12.3238577	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -89,7 +89,7 @@ af2fcfed06b5947a9002af6a884028ac2f52151b data/aether_ii/worldgen/configured_feat
 df9375262c57ee63ae1b843381309b92057845b5 data/aether_ii/worldgen/configured_feature/trees_magnetic_scar.json
 e205b84c026ba6046f96e7102430b4a2ae484638 data/aether_ii/worldgen/configured_feature/trees_shrouded_forest.json
 63023cf880dae7f5b41e525cd22c49aff52abf21 data/aether_ii/worldgen/configured_feature/trees_turquoise_forest.json
-f1e7f9f7cdcc9707028989b7297f01ee50d29c61 data/aether_ii/worldgen/configured_feature/trees_verdant_woods.json
+f47db6db650c72bd382d99e35011c7387085cfbc data/aether_ii/worldgen/configured_feature/trees_verdant_woods.json
 f8338070051b6a7d5fc365ba201fcc4345e2eae6 data/aether_ii/worldgen/configured_feature/trees_violet_highwoods.json
 ddd0411581bfc0c402fdc178bfe098414284f613 data/aether_ii/worldgen/configured_feature/wisproot.json
 24b850f902ff12088884fc1b81409018000db107 data/aether_ii/worldgen/configured_feature/wisptop.json

@@ -80,7 +80,7 @@
         }
       },
       {
-        "chance": 0.025,
+        "chance": 0.015,
         "feature": {
           "feature": "aether_ii:nest_skyroot",
           "placement": [
