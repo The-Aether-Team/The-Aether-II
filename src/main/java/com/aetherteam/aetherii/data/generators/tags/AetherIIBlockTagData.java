@@ -668,8 +668,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).add(
                 AetherIIBlocks.ARCTIC_ICE.get()
-        ).addTags(
-                AetherIITags.Blocks.AERCLOUDS
         );
 
         // Forge

@@ -48,7 +48,6 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = AetherIIFeatureUtils.registerKey("purple_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = AetherIIFeatureUtils.registerKey("storm_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = AetherIIFeatureUtils.registerKey("cloudbed");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FREEZE_TOP_LAYER_ARCTIC = AetherIIFeatureUtils.registerKey("freeze_top_layer_arctic");
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
@@ -86,7 +85,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                                         AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
                                 )
                         ),
-                        true
+                        false
                 ));
         AetherIIFeatureUtils.register(context, NOISE_LAKE_ARCTIC, AetherIIFeatures.NOISE_LAKE.get(),
                 new NoiseLakeConfiguration(
@@ -103,7 +102,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                                         AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
                                 )
                         ),
-                        false
+                        true
                 ));
 
         AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
@@ -146,7 +145,5 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
                         15D
                 ));
-
-        AetherIIFeatureUtils.register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
     }
 }
