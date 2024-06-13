@@ -1,16 +1,15 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.AetherFlowerBlock;
-import com.aetherteam.aetherii.block.natural.AetherTallGrassBlock;
+import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowyDirtBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -40,18 +39,16 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
                     level.setBlock(posBelow, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState(), 2);
                 }
 
-                if (biome.shouldSnow(level, posAbove)) {
-                    BlockState state = level.getBlockState(posBelow);
-                    level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
-
-                    if (state.hasProperty(AetherTallGrassBlock.SNOWY)) {
-                        level.setBlock(posBelow, state.setValue(AetherTallGrassBlock.SNOWY, Boolean.TRUE), 2);
+                if (AetherGrassBlock.shouldSnow(biome, level, posAbove)) {
+                    BlockState state = level.getBlockState(posAbove);
+                    BlockState ground = level.getBlockState(posBelow);
+                    if (AetherGrassBlock.plantNotSnowed(state)) {
+                        level.setBlock(posAbove, state.setValue(BlockStateProperties.SNOWY, Boolean.TRUE), 2);
+                    } else {
+                        level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
                     }
-                    if (state.hasProperty(AetherFlowerBlock.SNOWY)) {
-                        level.setBlock(posBelow, state.setValue(AetherFlowerBlock.SNOWY, Boolean.TRUE), 2);
-                    }
-                    if (state.hasProperty(SnowyDirtBlock.SNOWY)) {
-                        level.setBlock(posBelow, state.setValue(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
+                    if (ground.hasProperty(SnowyDirtBlock.SNOWY)) {
+                        level.setBlock(posBelow, ground.setValue(SnowyDirtBlock.SNOWY, Boolean.TRUE), 2);
                     }
                 }
             }

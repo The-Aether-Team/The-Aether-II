@@ -12,6 +12,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.GrassBlock;
@@ -143,5 +145,15 @@ public class AetherGrassBlock extends GrassBlock {
 
     public static boolean plantNotSnowed(BlockState state) {
         return state.getBlock() instanceof Snowable snowable && !snowable.isSnowy(state);
+    }
+
+    public static boolean shouldSnow(Biome biome, LevelReader level, BlockPos pos) {
+        if (!biome.warmEnoughToRain(pos)) {
+            if (pos.getY() >= level.getMinBuildHeight() && pos.getY() < level.getMaxBuildHeight() && level.getBrightness(LightLayer.BLOCK, pos) < 10) {
+                BlockState blockState = level.getBlockState(pos);
+                return ((blockState.isAir() || blockState.is(AetherIIBlocks.ARCTIC_SNOW)) && AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().canSurvive(level, pos)) || AetherGrassBlock.plantNotSnowed(blockState);
+            }
+        }
+        return false;
     }
 }
