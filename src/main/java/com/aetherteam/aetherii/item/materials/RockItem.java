@@ -60,6 +60,7 @@ public class RockItem extends BlockItem {
             player.awardStat(Stats.ITEM_USED.get(this));
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
+                player.getCooldowns().addCooldown(stack.getItem(), 10);
             }
         }
     }
