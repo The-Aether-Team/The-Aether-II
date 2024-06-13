@@ -1,4 +1,13 @@
 {
   "type": "aether_ii:moa_nest",
-  "config": {}
+  "config": {
+    "additional_radius": 2.0,
+    "base_radius": 2.0,
+    "nest_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:woven_skyroot_sticks"
+      }
+    }
+  }
 }
