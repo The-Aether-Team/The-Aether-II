@@ -208,8 +208,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SKYROOT_BASE_BEAM = register("skyroot_base_beam", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
     public static final DeferredBlock<Block> SKYROOT_TOP_BEAM = register("skyroot_top_beam", () -> new Block(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
     public static final DeferredBlock<RotatedPillarBlock> SKYROOT_BEAM = register("skyroot_beam", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get())));
-    public static final DeferredBlock<DoorBlock> SECRET_SKYROOT_DOOR = register("secret_skyroot_door", () -> new SecretDoorBlock(AetherIIWoodTypes.SKYROOT_BLOCK_SET, Block.Properties.of().mapColor(SKYROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<TrapDoorBlock> SECRET_SKYROOT_TRAPDOOR = register("secret_skyroot_trapdoor", () -> new TrapDoorBlock(AetherIIWoodTypes.SKYROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR)));
+    public static final DeferredBlock<DoorBlock> SECRET_SKYROOT_DOOR = register("secret_skyroot_door", () -> new SecretDoorBlock(AetherIIWoodTypes.SKYROOT_BLOCK_SET, Block.Properties.of().mapColor(SKYROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).isValidSpawn(AetherIIBlocks::never).ignitedByLava()));
+    public static final DeferredBlock<TrapDoorBlock> SECRET_SKYROOT_TRAPDOOR = register("secret_skyroot_trapdoor", () -> new SecretTrapDoorBlock(AetherIIWoodTypes.SKYROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR)));
 
     // Greatroot Planks
     public static final DeferredBlock<Block> GREATROOT_PLANKS = register("greatroot_planks", () -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
@@ -233,7 +233,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> GREATROOT_TOP_BEAM = register("greatroot_top_beam", () -> new Block(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
     public static final DeferredBlock<RotatedPillarBlock> GREATROOT_BEAM = register("greatroot_beam", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get())));
     public static final DeferredBlock<DoorBlock> SECRET_GREATROOT_DOOR = register("secret_greatroot_door", () -> new SecretDoorBlock(AetherIIWoodTypes.GREATROOT_BLOCK_SET, Block.Properties.of().mapColor(GREATROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<TrapDoorBlock> SECRET_GREATROOT_TRAPDOOR = register("secret_greatroot_trapdoor", () -> new TrapDoorBlock(AetherIIWoodTypes.GREATROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR)));
+    public static final DeferredBlock<TrapDoorBlock> SECRET_GREATROOT_TRAPDOOR = register("secret_greatroot_trapdoor", () -> new SecretTrapDoorBlock(AetherIIWoodTypes.GREATROOT_BLOCK_SET, Block.Properties.of().mapColor(GREATROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).isValidSpawn(AetherIIBlocks::never).ignitedByLava()));
 
     // Wisproot Planks
     public static final DeferredBlock<Block> WISPROOT_PLANKS = register("wisproot_planks", () -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
@@ -257,7 +257,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> WISPROOT_TOP_BEAM = register("wisproot_top_beam", () -> new Block(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
     public static final DeferredBlock<RotatedPillarBlock> WISPROOT_BEAM = register("wisproot_beam", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get())));
     public static final DeferredBlock<DoorBlock> SECRET_WISPROOT_DOOR = register("secret_wisproot_door", () -> new SecretDoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, Block.Properties.of().mapColor(WISPROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<TrapDoorBlock> SECRET_WISPROOT_TRAPDOOR = register("secret_wisproot_trapdoor", () -> new TrapDoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR)));
+    public static final DeferredBlock<TrapDoorBlock> SECRET_WISPROOT_TRAPDOOR = register("secret_wisproot_trapdoor", () -> new SecretTrapDoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, Block.Properties.of().mapColor(WISPROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).isValidSpawn(AetherIIBlocks::never).ignitedByLava()));
 
     // Holystone
     public static final DeferredBlock<StairBlock> HOLYSTONE_STAIRS = register("holystone_stairs", () -> new StairBlock(() -> HOLYSTONE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get())));
