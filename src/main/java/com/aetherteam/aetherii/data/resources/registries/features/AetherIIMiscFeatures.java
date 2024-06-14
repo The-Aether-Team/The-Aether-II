@@ -122,10 +122,10 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                                 AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
                         )
                 ),
-                ConstantFloat.of(4.5F),
-                ConstantFloat.of(6F),
-                ConstantInt.of(24),
-                ConstantInt.of(16),
+                4.5F,
+                6,
+                24,
+                16,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
 
