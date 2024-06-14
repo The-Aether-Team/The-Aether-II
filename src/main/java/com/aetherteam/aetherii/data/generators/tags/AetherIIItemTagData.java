@@ -185,8 +185,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BLUEBERRY.get(),
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.WYNDBERRY.get(),
-                AetherIIItems.BURRUKAI_RIBS.get(),
-                AetherIIItems.KIRRID_CUTLET.get(),
+                AetherIIItems.BURRUKAI_RIB_CUT.get(),
+                AetherIIItems.KIRRID_LOIN.get(),
                 AetherIIItems.RAW_TAEGORE_MEAT.get()
         );
 

@@ -451,8 +451,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.WHITE_SWET_JELLY.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
                 output.accept(AetherIIItems.BURRUKAI_RIBS.get());
-                output.accept(AetherIIItems.KIRRID_CUTLET.get());
                 output.accept(AetherIIItems.KIRRID_LOIN.get());
+                output.accept(AetherIIItems.KIRRID_CUTLET.get());
                 output.accept(AetherIIItems.RAW_TAEGORE_MEAT.get());
                 output.accept(AetherIIItems.TAEGORE_STEAK.get());
             }).build());
