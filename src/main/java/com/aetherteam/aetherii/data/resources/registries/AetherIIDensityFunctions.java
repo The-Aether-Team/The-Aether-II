@@ -44,7 +44,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(TERRAIN_SHAPER, finalizeTerrainShaper(function));
         context.register(FINAL_DENSITY, buildFinalDensity(function));
 
-        context.register(VEGETATION_RARE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.5, 0.0, 0.5, 0.0, 0.0, 0.0), 0.25D, 0.0D, 76).abs());
+        context.register(VEGETATION_RARE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.5, 0.0, 0.5, 0.0, 0.0, 0.0), 0.35D, 0.0D, 76).abs());
 
         context.register(LAKES_NOISE,
                 DensityFunctions.add(
