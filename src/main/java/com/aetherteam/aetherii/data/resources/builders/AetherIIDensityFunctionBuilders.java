@@ -174,6 +174,32 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
     }
 
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> topSlide(I y, I elevation, float value) {
+        return CubicSpline.builder(elevation)
+                .addPoint(0.15F, slidePiece(y, 128, 184, 1, value))
+                .addPoint(0.2F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.25F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.3F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.35F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.4F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.45F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.5F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.55F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.6F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.65F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.7F, slidePiece(y, 216, 272, 1, value))
+                .addPoint(0.75F, slidePiece(y, 224, 280, 1, value))
+                .addPoint(0.8F, slidePiece(y, 232, 288, 1, value))
+                .build();
+    }
+
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> slidePiece(I y, float locationFrom, float locationTo, float valueFrom, float valueTo) {
+        return CubicSpline.builder(y)
+                .addPoint(locationFrom, valueFrom)
+                .addPoint(locationTo, valueTo)
+                .build();
+    }
+
     public static DensityFunction getFunction(HolderGetter<DensityFunction> function, ResourceKey<DensityFunction> key) {
         return new DensityFunctions.HolderHolder(function.getOrThrow(key));
     }
