@@ -132,8 +132,8 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
         AetherIIFeatureUtils.register(context, SKYROOT_TWIGS, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(twigs), 4));
         AetherIIFeatureUtils.register(context, HOLYSTONE_ROCKS, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(rocks), 4));
 
-        AetherIIFeatureUtils.register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), ConstantFloat.of(2), ConstantFloat.of(2), true));
-        AetherIIFeatureUtils.register(context, MOA_NEST_TREE, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), ConstantFloat.of(2), ConstantFloat.of(2), false));
+        AetherIIFeatureUtils.register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
+        AetherIIFeatureUtils.register(context, MOA_NEST_TREE, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, false));
 
         AetherIIFeatureUtils.register(context, COLD_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(16, AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()));
         AetherIIFeatureUtils.register(context, BLUE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(8, AetherIIBlocks.BLUE_AERCLOUD.get().defaultBlockState()));

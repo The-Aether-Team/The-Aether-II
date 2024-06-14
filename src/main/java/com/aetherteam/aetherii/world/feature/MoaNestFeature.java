@@ -30,10 +30,10 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         BlockPos pos = context.origin();
         RandomSource random = context.random();
         MoaNestConfiguration config = context.config();
-        float radius = random.nextInt((int) config.additionalRadius().getMinValue()) + config.baseRadius().getMinValue() + 0.5F;
+        float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
 
         BlockPlacementUtil.placeNest(level, config.nestBlock(), pos.below(), radius, random);
-        BlockPlacementUtil.placeNest(level, config.nestBlock(), pos, radius + 1, random);
+        BlockPlacementUtil.placeNest(level, config.nestBlock(), pos, radius + 1F, random);
         BlockPlacementUtil.placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos, radius, random);
 
         BlockPlacementUtil.placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(), radius + 1, random);
@@ -52,6 +52,6 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
                 level.getLevel().addFreshEntity(moa);
             }
         }
-        return false;
+        return true;
     }
 }

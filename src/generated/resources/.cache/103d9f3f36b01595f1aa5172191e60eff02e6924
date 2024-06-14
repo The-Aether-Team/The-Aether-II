@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-14T17:42:30.8585687	Registries
+// 1.20.4	2024-06-14T19:25:17.863869	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -57,8 +57,8 @@ a57d339e5aab34056b628f97057b3a473973293b data/aether_ii/worldgen/configured_feat
 79043dac5a10cb99f233e1e61d3559b8e021f4e8 data/aether_ii/worldgen/configured_feature/large_skyroot.json
 12abbb3df3693da9fdad5f9734132899b60fff48 data/aether_ii/worldgen/configured_feature/long_grass_patch.json
 3f1665b6688b81e5078fe2dfd2cb2a7a02d7dde6 data/aether_ii/worldgen/configured_feature/medium_grass_patch.json
-15f4e377402e746d82aa0776d5223e3a78dfc8f0 data/aether_ii/worldgen/configured_feature/moa_nest.json
-d7df4d846439f0db98a24972d7d5ca328b3a1f91 data/aether_ii/worldgen/configured_feature/moa_nest_tree.json
+ba91d8c03975e4c50bf068a646993dbeda4c2bcc data/aether_ii/worldgen/configured_feature/moa_nest.json
+78400e0d6df184c60fe0151051a77479bf048b65 data/aether_ii/worldgen/configured_feature/moa_nest_tree.json
 d412951bfd129e5e908ac03f8fe4a1105f207b8b data/aether_ii/worldgen/configured_feature/nest_skyroot.json
 d0d99c211756c5af54d2f6353ab4585113649f87 data/aether_ii/worldgen/configured_feature/noise_lake.json
 0ccabe8e9b6faebd79325482bcd5933e692198b4 data/aether_ii/worldgen/configured_feature/noise_lake_arctic.json

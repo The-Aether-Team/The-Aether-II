@@ -1,8 +1,8 @@
 {
   "type": "aether_ii:moa_nest",
   "config": {
-    "additional_radius": 2.0,
-    "base_radius": 2.0,
+    "additional_radius": 2,
+    "base_radius": 1.5,
     "nest_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
