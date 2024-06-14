@@ -572,6 +572,22 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Tooltips
         // Abilities
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_PICKAXE.get(), 1, "§9Ability:§r Doubles Drops");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_AXE.get(), 1, "§9Ability:§r Doubles Drops");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHOVEL.get(), 1, "§9Ability:§r Doubles Drops");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_TROWEL.get(), 1, "§9Ability:§r Doubles Drops");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHORTSWORD.get(), 1, "§9Ability:§r Doubles Drops");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_HAMMER.get(), 1, "§9Ability:§r Doubles Drops");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SPEAR.get(), 1, "§9Ability:§r Doubles Drops");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_PICKAXE.get(), 1, "§9Ability:§r Drops Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_AXE.get(), 1, "§9Ability:§r Drops Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHOVEL.get(), 1, "§9Ability:§r Drops Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_TROWEL.get(), 1, "§9Ability:§r Drops Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), 1, "§9Ability:§r Drops Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_HAMMER.get(), 1, "§9Ability:§r Drops Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SPEAR.get(), 1, "§9Ability:§r Drops Ambrosium");
+
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_PICKAXE.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_AXE.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHOVEL.get(), 1, "§9Ability:§r Grows Stronger");
