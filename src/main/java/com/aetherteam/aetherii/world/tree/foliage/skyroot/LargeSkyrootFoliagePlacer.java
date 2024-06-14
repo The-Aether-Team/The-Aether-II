@@ -40,42 +40,15 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
-        if (random.nextInt(1) == 0) {
-            if (random.nextInt(1) == 0) {
-                for (int i = offset; i >= offset - foliageHeight; --i) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
+        int offsetX = random.nextInt(1) == 0 ? -1 : 1;
+        int offsetZ = random.nextInt(1) == 0 ? -1 : 1;
 
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
-                }
-            } else {
-                for (int i = offset; i >= offset - foliageHeight; --i) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
+        for (int i = offset; i >= offset - foliageHeight; --i) {
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 1, pos.getZ() + offsetZ), 8, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX * -1, pos.getY() + 1, pos.getZ() + offsetZ * -1), 8, i, attachment.doubleTrunk());
 
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1), Direction.Axis.Y);
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() + 1), Direction.Axis.Y);
-                }
-            }
-        } else {
-            if (random.nextInt(1) == 0) {
-                for (int i = offset; i >= offset - foliageHeight; --i) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
-
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
-                }
-            } else {
-                for (int i = offset; i >= offset - foliageHeight; --i) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
-
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
-                }
-            }
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 3, pos.getZ() + offsetZ), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX * -1, pos.getY() - 1, pos.getZ() + offsetZ * -1), Direction.Axis.Y);
         }
     }
 
