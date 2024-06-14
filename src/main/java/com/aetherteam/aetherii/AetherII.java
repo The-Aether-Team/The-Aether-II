@@ -24,6 +24,7 @@ import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
@@ -90,7 +91,8 @@ public class AetherII {
                 AetherIITreeDecoratorTypes.TREE_DECORATORS,
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
-                AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES
+                AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
+                AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS
         };
 
         for (DeferredRegister<?> register : registers) {

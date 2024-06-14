@@ -95,10 +95,10 @@ public class AetherIITags {
         public static final TagKey<Item> SHEEPUFF_TEMPTATION_ITEMS = tag("sheepuff_temptation_items");
         public static final TagKey<Item> MOA_FOOD_ITEMS = tag("moa_food_items");
 
-
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
         public static final TagKey<Item> SWET_GEL = tag("swet_gel");
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
+        public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, new ResourceLocation(AetherII.MODID, name));
@@ -108,6 +108,7 @@ public class AetherIITags {
     public static class Entities {
         public static final TagKey<EntityType<?>> KIRRID = tag("kirrid");
 
+        public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
 
         public static final TagKey<EntityType<?>> SPAWNING_ICE = tag("spawning/ice");

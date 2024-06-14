@@ -165,6 +165,30 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_AXE.get(),
                 AetherIIItems.GRAVITITE_AXE.get()
         );
+        this.tag(AetherIITags.Items.DOUBLE_DROPS).add(
+                AetherIIItems.SKYROOT_STICK.get(),
+                AetherIIItems.SKYROOT_PINECONE.get(),
+                AetherIIItems.AMBROSIUM_SHARD.get(),
+                AetherIIItems.ZANITE_GEMSTONE.get(),
+                AetherIIItems.INERT_ARKENIUM.get(),
+                AetherIIItems.INERT_GRAVITITE.get(),
+                AetherIIItems.GOLDEN_AMBER.get(),
+                AetherIIItems.TAEGORE_HIDE.get(),
+                AetherIIItems.BURRUKAI_PELT.get(),
+                AetherIIItems.AECHOR_PETAL.get(),
+                AetherIIItems.ARCTIC_SNOWBALL.get(),
+                AetherIIItems.GREEN_SWET_GEL.get(),
+                AetherIIItems.BLUE_SWET_GEL.get(),
+                AetherIIItems.PURPLE_SWET_GEL.get(),
+                AetherIIItems.GOLDEN_SWET_GEL.get(),
+                AetherIIItems.WHITE_SWET_GEL.get(),
+                AetherIIItems.BLUEBERRY.get(),
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.WYNDBERRY.get(),
+                AetherIIItems.BURRUKAI_RIBS.get(),
+                AetherIIItems.KIRRID_CUTLET.get(),
+                AetherIIItems.RAW_TAEGORE_MEAT.get()
+        );
 
         // Vanilla
         this.tag(ItemTags.WOOL).add(
