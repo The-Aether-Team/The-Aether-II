@@ -104,7 +104,7 @@ public class AetherIIVegetationPlacements {
         AetherIIPlacementUtils.register(context, ENDURING_WOODLAND_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_ENDURING_WOODLANDS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
         AetherIIPlacementUtils.register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYPINE),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2), AetherIIBlocks.SKYROOT_SAPLING.get()));
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2), AetherIIBlocks.SKYPINE_SAPLING.get()));
 
         AetherIIPlacementUtils.register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_DENSE),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
