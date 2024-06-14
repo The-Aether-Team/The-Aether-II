@@ -22,12 +22,12 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/bottom_slide"); //TODO: Add to Datagen
-    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/top_slide"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/top_slide");
     public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/top_slide_arctic"); //TODO: Add to Datagen
-    public static final ResourceKey<DensityFunction> SLOPER = createKey("highlands/sloper"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> SLOPER = createKey("highlands/sloper");
     public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("highlands/sloper_arctic"); //TODO: Add to Datagen
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
-    public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification"); //TODO: Add to Datagen
+    public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification");
     public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/island_density");
     public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
     public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor"); //TODO: Add to Datagen
@@ -174,19 +174,31 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
     }
 
+    public static DensityFunction buildTopSlide(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
+        DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION));
+        return DensityFunctions.spline(topSlide(y, elevation, 0.0F));
+    }
+
+    public static DensityFunction buildSloper(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
+        DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION));
+        return DensityFunctions.spline(topSlide(y, elevation, 2.0F));
+    }
+
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> topSlide(I y, I elevation, float value) {
         return CubicSpline.builder(elevation)
                 .addPoint(0.15F, slidePiece(y, 128, 184, 1, value))
                 .addPoint(0.2F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.25F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.3F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.35F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.4F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.45F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.5F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.55F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.6F, slidePiece(y, 136, 192, 1, value))
-                .addPoint(0.65F, slidePiece(y, 136, 192, 1, value))
+                .addPoint(0.25F, slidePiece(y, 144, 200, 1, value))
+                .addPoint(0.3F, slidePiece(y, 152, 208, 1, value))
+                .addPoint(0.35F, slidePiece(y, 160, 216, 1, value))
+                .addPoint(0.4F, slidePiece(y, 168, 224, 1, value))
+                .addPoint(0.45F, slidePiece(y, 176, 232, 1, value))
+                .addPoint(0.5F, slidePiece(y, 184, 240, 1, value))
+                .addPoint(0.55F, slidePiece(y, 192, 248, 1, value))
+                .addPoint(0.6F, slidePiece(y, 200, 246, 1, value))
+                .addPoint(0.65F, slidePiece(y, 208, 264, 1, value))
                 .addPoint(0.7F, slidePiece(y, 216, 272, 1, value))
                 .addPoint(0.75F, slidePiece(y, 224, 280, 1, value))
                 .addPoint(0.8F, slidePiece(y, 232, 288, 1, value))
