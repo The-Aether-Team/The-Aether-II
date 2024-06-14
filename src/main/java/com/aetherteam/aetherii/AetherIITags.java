@@ -79,6 +79,8 @@ public class AetherIITags {
         public static final TagKey<Item> CRAFTS_HOLYSTONE_TOOLS = tag("crafts_holystone_tools");
         public static final TagKey<Item> ALTAR_FUEL = tag("altar_fuel");
 
+        public static final TagKey<Item> TAEGORE_HIDE_REPAIRING = tag("taegore_hide_repairing");
+        public static final TagKey<Item> BURRUKAI_PELT_REPAIRING = tag("burrukai_pelt_repairing");
         public static final TagKey<Item> SKYROOT_REPAIRING = tag("skyroot_repairing");
         public static final TagKey<Item> HOLYSTONE_REPAIRING = tag("holystone_repairing");
         public static final TagKey<Item> ZANITE_REPAIRING = tag("zanite_repairing");

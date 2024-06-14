@@ -408,10 +408,29 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("armor_and_accessories", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "equipment_and_utilities"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "food_and_drinks"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_HELMET.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".armor_and_accessories"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIItems.TAEGORE_HIDE_HELMET.get());
+                output.accept(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get());
+                output.accept(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get());
+                output.accept(AetherIIItems.TAEGORE_HIDE_BOOTS.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_HELMET.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_BOOTS.get());
+                output.accept(AetherIIItems.ZANITE_HELMET.get());
+                output.accept(AetherIIItems.ZANITE_CHESTPLATE.get());
+                output.accept(AetherIIItems.ZANITE_LEGGINGS.get());
+                output.accept(AetherIIItems.ZANITE_BOOTS.get());
+                output.accept(AetherIIItems.ARKENIUM_HELMET.get());
+                output.accept(AetherIIItems.ARKENIUM_CHESTPLATE.get());
+                output.accept(AetherIIItems.ARKENIUM_LEGGINGS.get());
+                output.accept(AetherIIItems.ARKENIUM_BOOTS.get());
+                output.accept(AetherIIItems.GRAVITITE_HELMET.get());
+                output.accept(AetherIIItems.GRAVITITE_CHESTPLATE.get());
+                output.accept(AetherIIItems.GRAVITITE_LEGGINGS.get());
+                output.accept(AetherIIItems.GRAVITITE_BOOTS.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FOOD_AND_DRINKS = CREATIVE_MODE_TABS.register("food_and_drinks", () -> CreativeModeTab.builder()

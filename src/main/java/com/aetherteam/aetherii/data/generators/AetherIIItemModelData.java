@@ -70,6 +70,32 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         this.handheldItem(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
 
+        // Armor
+        this.helmetItem(AetherIIItems.TAEGORE_HIDE_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), "armor/");
+
+        this.helmetItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), "armor/");
+
+        this.helmetItem(AetherIIItems.ZANITE_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.ZANITE_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.ZANITE_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.ZANITE_BOOTS.get(), "armor/");
+
+        this.helmetItem(AetherIIItems.ARKENIUM_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.ARKENIUM_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.ARKENIUM_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.ARKENIUM_BOOTS.get(), "armor/");
+
+        this.helmetItem(AetherIIItems.GRAVITITE_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.GRAVITITE_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.GRAVITITE_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.GRAVITITE_BOOTS.get(), "armor/");
+
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
         this.item(AetherIIItems.SKYROOT_PINECONE.get(), "materials/");
