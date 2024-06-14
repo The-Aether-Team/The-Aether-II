@@ -108,6 +108,8 @@ public class AetherIITags {
     public static class Entities {
         public static final TagKey<EntityType<?>> KIRRID = tag("kirrid");
 
+        public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
+
         public static final TagKey<EntityType<?>> SPAWNING_ICE = tag("spawning/ice");
         public static final TagKey<EntityType<?>> SPAWNING_AERCLOUDS = tag("spawning/aerclouds");
         public static final TagKey<EntityType<?>> SPAWNING_LEAVES = tag("spawning/leaves");
