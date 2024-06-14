@@ -37,13 +37,14 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(FACTOR, buildFactor(function));
         context.register(ISLAND_DENSITY, buildIslandDensity(function));
         context.register(TOP_SLIDE, buildTopSlide(function));
+        context.register(BOTTOM_SLIDE, buildBottomSlide(function));
         context.register(SLOPER, buildSloper(function));
 
         context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
         context.register(TERRAIN_SHAPER, finalizeTerrainShaper(function));
         context.register(FINAL_DENSITY, buildFinalDensity(function));
 
-        context.register(VEGETATION_RARE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.5, 0.0, 0.5, 0.0, 0.0, 0.0), 0.375D, 0.0D, 76).abs());
+        context.register(VEGETATION_RARE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.5, 0.0, 0.5, 0.0, 0.0, 0.0), 0.25D, 0.0D, 76).abs());
 
         context.register(LAKES_NOISE,
                 DensityFunctions.add(

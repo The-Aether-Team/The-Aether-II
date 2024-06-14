@@ -29,8 +29,8 @@
                   "input": "aether_ii:highlands/temperature",
                   "max_exclusive": 1.5,
                   "min_inclusive": -0.4,
-                  "when_in_range": "aether_ii:highlands/top_slide",
-                  "when_out_of_range": "aether_ii:highlands/top_slide_arctic"
+                  "when_in_range": "aether_ii:highlands/islands/top_slide",
+                  "when_out_of_range": "aether_ii:highlands/islands/top_slide_arctic"
                 }
               },
               "argument2": {
@@ -48,7 +48,7 @@
               }
             }
           },
-          "argument2": "aether_ii:highlands/bottom_slide"
+          "argument2": "aether_ii:highlands/islands/bottom_slide"
         },
         "argument2": {
           "type": "minecraft:mul",
