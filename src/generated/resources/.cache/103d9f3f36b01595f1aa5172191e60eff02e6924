@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-14T19:25:17.863869	Registries
+// 1.20.4	2024-06-14T19:47:36.9775601	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -112,7 +112,7 @@ f20ef3da7e4555d85f5e9f2299bd303a66edfed0 data/aether_ii/worldgen/density_functio
 f15e45bd0d9d3dde4b96ea63316be2da3daeadeb data/aether_ii/worldgen/density_function/highlands/terrain_shaper.json
 af51b6599a73d1f71645985a4a44fbc96ce962e6 data/aether_ii/worldgen/density_function/highlands/top_slide.json
 29805ff9eeb1a3ff790a98f76d703287f8b27787 data/aether_ii/worldgen/density_function/highlands/vegetation.json
-6a3a6d67922f8bf13cad4898bb268c31978e3554 data/aether_ii/worldgen/density_function/highlands/vegetation_rare.json
+56f8ef3c13201616ec748412dcdd99a62bcc5f81 data/aether_ii/worldgen/density_function/highlands/vegetation_rare.json
 d61757a13701df606790eddcb0b0ab69ac731a9b data/aether_ii/worldgen/density_function/highlands/vegetation_rarity_mapper.json
 02494c1f1168e7d1007d6bc2c0c68808cc4b6fcf data/aether_ii/worldgen/noise/amplification.json
 2d84897f5fe44963fce192d8448f2f923fa3a50d data/aether_ii/worldgen/noise/arctic_snow.json

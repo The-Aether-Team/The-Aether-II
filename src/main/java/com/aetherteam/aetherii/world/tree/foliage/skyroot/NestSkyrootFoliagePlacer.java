@@ -18,7 +18,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -65,12 +64,12 @@ public class NestSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY(), pos.getZ() + offsetZ), 15, i, attachment.doubleTrunk());
 
                 tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 1, pos.getZ() + offsetZ), Direction.Axis.Y);
-                nest.place(worldGenLevel, chunk, random, new BlockPos(pos.getX() + 2 * offsetX, pos.getY() - 6, pos.getZ() + 2 * offsetZ));
 
                 if (!(random.nextInt(2) == 0)) {
                     this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(9, 10) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 4, i, attachment.doubleTrunk());
                 }
             }
+            nest.place(worldGenLevel, chunk, random, new BlockPos(pos.getX() + 2 * offsetX, pos.getY() - 6, pos.getZ() + 2 * offsetZ));
 
             MoaType moaType = AetherIIMoaTypes.getWeightedChance(worldGenLevel.registryAccess(), random);
             for (int i = 0; i < 2; i++) {
