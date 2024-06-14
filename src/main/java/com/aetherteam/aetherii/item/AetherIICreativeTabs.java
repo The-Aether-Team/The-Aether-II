@@ -352,6 +352,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_HAMMER.get());
                 output.accept(AetherIIItems.SKYROOT_SPEAR.get());
                 output.accept(AetherIIItems.SKYROOT_CROSSBOW.get());
+                output.accept(AetherIIItems.SKYROOT_SHIELD.get());
                 output.accept(AetherIIItems.SKYROOT_SHOVEL.get());
                 output.accept(AetherIIItems.SKYROOT_PICKAXE.get());
                 output.accept(AetherIIItems.SKYROOT_AXE.get());
@@ -360,6 +361,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.HOLYSTONE_HAMMER.get());
                 output.accept(AetherIIItems.HOLYSTONE_SPEAR.get());
                 output.accept(AetherIIItems.HOLYSTONE_CROSSBOW.get());
+                output.accept(AetherIIItems.HOLYSTONE_SHIELD.get());
                 output.accept(AetherIIItems.HOLYSTONE_SHOVEL.get());
                 output.accept(AetherIIItems.HOLYSTONE_PICKAXE.get());
                 output.accept(AetherIIItems.HOLYSTONE_AXE.get());
@@ -368,6 +370,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_HAMMER.get());
                 output.accept(AetherIIItems.ZANITE_SPEAR.get());
                 output.accept(AetherIIItems.ZANITE_CROSSBOW.get());
+                output.accept(AetherIIItems.ZANITE_SHIELD.get());
                 output.accept(AetherIIItems.ZANITE_SHOVEL.get());
                 output.accept(AetherIIItems.ZANITE_PICKAXE.get());
                 output.accept(AetherIIItems.ZANITE_AXE.get());
@@ -376,19 +379,21 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_HAMMER.get());
                 output.accept(AetherIIItems.ARKENIUM_SPEAR.get());
                 output.accept(AetherIIItems.ARKENIUM_CROSSBOW.get());
+                output.accept(AetherIIItems.ARKENIUM_SHIELD.get());
                 output.accept(AetherIIItems.ARKENIUM_SHOVEL.get());
                 output.accept(AetherIIItems.ARKENIUM_PICKAXE.get());
                 output.accept(AetherIIItems.ARKENIUM_AXE.get());
                 output.accept(AetherIIItems.ARKENIUM_TROWEL.get());
-                output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.GRAVITITE_HAMMER.get());
                 output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
                 output.accept(AetherIIItems.GRAVITITE_CROSSBOW.get());
+                output.accept(AetherIIItems.GRAVITITE_SHIELD.get());
                 output.accept(AetherIIItems.GRAVITITE_SHOVEL.get());
                 output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
+                output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());

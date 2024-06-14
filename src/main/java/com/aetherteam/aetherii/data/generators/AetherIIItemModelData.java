@@ -42,7 +42,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         this.handheldItem(AetherIIItems.ARKENIUM_SHEARS.get(), "tools/");
 
-        // Weapons
+        // Combat
         this.handheldItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_SPEAR.get(), "weapons/");

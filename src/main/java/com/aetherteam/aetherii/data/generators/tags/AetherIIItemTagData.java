@@ -8,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -425,6 +426,20 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.AMBROSIUM_BLOCK.asItem(),
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),
                 AetherIIBlocks.GRAVITITE_BLOCK.asItem()
+        );
+        this.tag(Tags.Items.TOOLS_SHIELDS).add(
+                AetherIIItems.SKYROOT_SHIELD.get(),
+                AetherIIItems.HOLYSTONE_SHIELD.get(),
+                AetherIIItems.ZANITE_SHIELD.get(),
+                AetherIIItems.ARKENIUM_SHIELD.get(),
+                AetherIIItems.GRAVITITE_SHIELD.get()
+        );
+        this.tag(Tags.Items.TOOLS_CROSSBOWS).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
         );
         this.tag(Tags.Items.TOOLS).addTags(
                 AetherIITags.Items.TOOLS_SHORTSWORDS,

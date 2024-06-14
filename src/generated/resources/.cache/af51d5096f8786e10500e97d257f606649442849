@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-11T18:19:53.8031281	Tags for minecraft:item mod id aether_ii
+// 1.20.4	2024-06-13T19:07:42.6060646	Tags for minecraft:item mod id aether_ii
 53afc97bd3504253faa87c8448b46627ca13c602 data/aether_ii/tags/items/aerbunny_temptation_items.json
 95ec6d53b7050fb601add92f08fb248a156b9228 data/aether_ii/tags/items/aerclouds.json
 82f472ec897b7763f2d04a7ceefbe43c8bc3c1fd data/aether_ii/tags/items/aether_dirt.json
@@ -54,6 +54,8 @@ cdb5c83a0e582b1e90c8746946fae9e8a0843d56 data/forge/tags/items/glass_panes/color
 dc76002bbf3fed2fede1a66c265d7053b478b240 data/forge/tags/items/rods/wooden.json
 ac55893d5d6560b7c89b92c6760cfe84872435bf data/forge/tags/items/storage_blocks.json
 64bacdb9802064d91a27c93fbcccb32a9534825a data/forge/tags/items/tools.json
+3c733a6ba2d27ba485aa1af173080aea6fffe447 data/forge/tags/items/tools/crossbows.json
+ff41d1c5deed2982e1f46c51f0125727b2f7b481 data/forge/tags/items/tools/shields.json
 c5ac6795116ea009da3eade76c2d8a9d29e7b636 data/minecraft/tags/items/axes.json
 3f78ada5240d239d5d5e75bf610b0c8b0e14efa9 data/minecraft/tags/items/beacon_payment_items.json
 ab38a396ec5ecb0eaf4260a739e98f5fe052d0e0 data/minecraft/tags/items/beds.json
