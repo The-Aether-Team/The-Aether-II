@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-15T21:53:17.0208623	Registries
+// 1.20.4	2024-06-15T22:05:41.1951305	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -167,7 +167,7 @@ ad494c11ca8d4c8f6e8992dbadd3d695c9a63c18 data/aether_ii/worldgen/placed_feature/
 696082cbc7470b5db85c89f1435eaff33b293d7b data/aether_ii/worldgen/placed_feature/noise_lake_arctic.json
 8804c5a62374f0d25e7b2db1c972bcfde961a5ed data/aether_ii/worldgen/placed_feature/orange_tree_patch.json
 26c8e2721cb5838ca72373110052cb95219067f1 data/aether_ii/worldgen/placed_feature/ore_agiosite.json
-6de9c01cb19d356bffc09488409880f4273dcad6 data/aether_ii/worldgen/placed_feature/ore_ambrosium.json
+7ec256c77eb88a9a1a80bc61711996a5b0825f03 data/aether_ii/worldgen/placed_feature/ore_ambrosium.json
 4c7cd24e529b2d2250b7491a1aa53525f7501dc3 data/aether_ii/worldgen/placed_feature/ore_arctic_packed_ice.json
 4395c49e3851ccec1e53558dc8c0d7b331a5735e data/aether_ii/worldgen/placed_feature/ore_arkenium.json
 284f9792cf549ae0208a3b8647c34557591633b9 data/aether_ii/worldgen/placed_feature/ore_gravitite.json
@@ -177,7 +177,7 @@ ad494c11ca8d4c8f6e8992dbadd3d695c9a63c18 data/aether_ii/worldgen/placed_feature/
 6a31e7c7c7a0a0c07a2d300b7c172e80ad9c7354 data/aether_ii/worldgen/placed_feature/ore_icestone_small.json
 8cebc66c4afa401307a6df761064f47ce6e75951 data/aether_ii/worldgen/placed_feature/ore_mossy_holystone.json
 c1233df0b1772373259fcde08d1e74b3d08d5c7f data/aether_ii/worldgen/placed_feature/ore_scatterglass.json
-eaba5711f29c81ae0ae8fb3733bc0911bc971df4 data/aether_ii/worldgen/placed_feature/ore_zanite.json
+a6466d53a693101ef162cbfd076ca4b50056cd4b data/aether_ii/worldgen/placed_feature/ore_zanite.json
 28e842b3fb11cbc4e2d4532976d24cb7ed56db2b data/aether_ii/worldgen/placed_feature/purple_aercloud.json
 80a2ed395834d5869621d95a7d82262fb6633128 data/aether_ii/worldgen/placed_feature/shimmering_basin_trees.json
 36808f0a40f01e95eaeb45af94376313ef44af99 data/aether_ii/worldgen/placed_feature/short_grass_patch.json
