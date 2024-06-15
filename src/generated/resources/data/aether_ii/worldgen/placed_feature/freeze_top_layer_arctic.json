@@ -1,0 +1,8 @@
+{
+  "feature": "aether_ii:freeze_top_layer_arctic",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
-package com.aetherteam.aetherii.world.tree.foliage;
+package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 
+import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -38,42 +40,15 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
-        if (random.nextInt(2) == 0) {
-            if (random.nextInt(2) == 0) {
-                for (int i = offset; i >= offset - foliageHeight; --i) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
+        int offsetX = random.nextInt(1) == 0 ? -1 : 1;
+        int offsetZ = random.nextInt(1) == 0 ? -1 : 1;
 
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
-                }
-            } else {
-                for (int i = offset; i >= offset - foliageHeight; --i) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
+        for (int i = offset; i >= offset - foliageHeight; --i) {
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 1, pos.getZ() + offsetZ), 8, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX * -1, pos.getY() + 1, pos.getZ() + offsetZ * -1), 8, i, attachment.doubleTrunk());
 
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1), Direction.Axis.Y);
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() + 1), Direction.Axis.Y);
-                }
-            }
-        } else {
-            if (random.nextInt(2) == 0) {
-                for (int i = offset; i >= offset - foliageHeight; --i) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
-
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
-                }
-            } else {
-                for (int i = offset; i >= offset - foliageHeight; --i) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() + 1, pos.getZ() + 1), 8, i, attachment.doubleTrunk());
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 1, pos.getZ() - 1), 8, i, attachment.doubleTrunk());
-
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() + 1), Direction.Axis.Y);
-                    tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY() - 3, pos.getZ() - 1), Direction.Axis.Y);
-                }
-            }
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 3, pos.getZ() + offsetZ), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX * -1, pos.getY() - 1, pos.getZ() + offsetZ * -1), Direction.Axis.Y);
         }
     }
 
@@ -101,7 +76,6 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
      * @param large  The {@link Boolean} for whether the tree is large.
      * @return Whether the location should be skipped, as a {@link Boolean}.
      */
-
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
         return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(3);

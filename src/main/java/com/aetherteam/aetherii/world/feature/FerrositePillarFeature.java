@@ -29,8 +29,8 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         FerrositePillarConfiguration config = context.config();
         ChunkGenerator chunk = level.getLevel().getChunkSource().getGenerator();
 
-        float radius = random.nextInt((int) config.additionalRadius().getMinValue()) + config.baseRadius().getMinValue();
-        int height = random.nextInt(config.additionalHeight().getMinValue()) + config.baseHeight().getMinValue();
+        float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
+        int height = random.nextInt(config.additionalHeight()) + config.baseHeight();
         int offset = (int) (-radius * 20 + radius * 16);
 
         for (int i = offset; i < 0; ++i) {

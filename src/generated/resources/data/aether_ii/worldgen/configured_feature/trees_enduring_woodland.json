@@ -9,7 +9,7 @@
           "predicate": {
             "type": "minecraft:would_survive",
             "state": {
-              "Name": "aether_ii:skyroot_sapling",
+              "Name": "aether_ii:skypine_sapling",
               "Properties": {
                 "stage": "0"
               }

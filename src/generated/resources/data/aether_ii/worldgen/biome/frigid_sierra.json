@@ -28,6 +28,7 @@
     [],
     [],
     [
+      "aether_ii:ore_arctic_packed_ice",
       "aether_ii:ore_scatterglass",
       "aether_ii:ore_agiosite",
       "aether_ii:ore_icestone",
@@ -46,6 +47,7 @@
       "aether_ii:long_grass_patch"
     ],
     [
+      "aether_ii:freeze_top_layer_arctic",
       "aether_ii:cold_aercloud",
       "aether_ii:blue_aercloud",
       "aether_ii:golden_aercloud",
