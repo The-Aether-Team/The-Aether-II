@@ -137,7 +137,9 @@ public class AetherIIOverlays {
                             int k = screenWidth / 2 - 19;
                             int l = (int) (f * 10.0F);
                             guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
-                            guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 0, k, j, 10, l);
+                            guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+
+                            RenderSystem.defaultBlendFunc();
                         }
                     }
                 } else if (options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR) {
