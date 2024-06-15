@@ -1,5 +1,6 @@
-package com.aetherteam.aetherii.world.tree.foliage;
+package com.aetherteam.aetherii.world.tree.foliage.amberoot;
 
+import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -9,15 +10,16 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 import java.util.function.BiConsumer;
 
-public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
-    public static final Codec<SkypineFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
-            .apply(instance, SkypineFoliagePlacer::new));
+public class SingularAmberootFoliagePlacer extends FoliagePlacer {
+    public static final Codec<SingularAmberootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
+            .apply(instance, SingularAmberootFoliagePlacer::new));
 
-    public SkypineFoliagePlacer(IntProvider radius, IntProvider offset) {
+    public SingularAmberootFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
     }
 
@@ -34,24 +36,16 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
      * @param foliageRadius     The {@link Integer} for the foliage radius.
      * @param offset            The {@link Integer} for the foliage offset.
      */
-    @Override
+    @Override  //TODO: Code Clean-Up
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 7, pos.getZ()), 14, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 6, pos.getZ()), 4, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 4, pos.getZ()), 10, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 5, pos.getZ()), 5, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 3, pos.getZ()), 8, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ()), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), 5, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 3, pos.getZ()), 0, i, attachment.doubleTrunk());
-
-            if (random.nextInt(1) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(8, 9), attachment.pos().getZ() + random.nextIntBetweenInclusive(-1, 1)), 3, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 6, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), 3, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 3, pos.getZ()), 1, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 5, pos.getZ()), 0, i, attachment.doubleTrunk());
+            if (random.nextInt(2) == 0) {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(2, 4), pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), 1, i, attachment.doubleTrunk());
             }
         }
     }
@@ -66,7 +60,7 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
      */
     @Override
     public int foliageHeight(RandomSource random, int height, TreeConfiguration config) {
-        return 3;
+        return 7;
     }
 
     /**
@@ -83,11 +77,11 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
-        return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(2);
+        return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(3);
     }
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return AetherIIFoliagePlacerTypes.SKYPINE_FOLIAGE_PLACER.get();
+        return AetherIIFoliagePlacerTypes.SINGULAR_AMBEROOT_FOLIAGE_PLACER.get();
     }
 }

@@ -1,5 +1,7 @@
-package com.aetherteam.aetherii.world.tree.foliage;
+package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 
+import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -9,22 +11,19 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 import java.util.function.BiConsumer;
 
-public class GreatboaFoliagePlacer extends FoliagePlacer {
-    public static final Codec<GreatboaFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
-            .apply(instance, GreatboaFoliagePlacer::new));
+public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
+    public static final Codec<SkypineFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
+            .apply(instance, SkypineFoliagePlacer::new));
 
-    public GreatboaFoliagePlacer(IntProvider radius, IntProvider offset) {
+    public SkypineFoliagePlacer(IntProvider radius, IntProvider offset) {
         super(radius, offset);
     }
 
     /**
-     * Places a sphere of leaves.
-     *
      * @param level             The {@link LevelSimulatedReader}.
      * @param foliageSetter     The {@link BiConsumer} of a {@link BlockPos} and {@link BlockState} used for block placement.
      * @param random            The {@link RandomSource}.
@@ -35,17 +34,26 @@ public class GreatboaFoliagePlacer extends FoliagePlacer {
      * @param foliageRadius     The {@link Integer} for the foliage radius.
      * @param offset            The {@link Integer} for the foliage offset.
      */
-    @Override //TODO: Code Clean-Up
+
+    @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, pos, 16, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()), 18, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1), 18, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() + 1), 18, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(0, 1), pos.getY() + 1, pos.getZ() + random.nextIntBetweenInclusive(0, 1)), 7, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 7, pos.getZ()), 14, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 6, pos.getZ()), 4, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 4, pos.getZ()), 10, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 5, pos.getZ()), 5, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 3, pos.getZ()), 8, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 2, pos.getZ()), 2, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), 5, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 2, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()), 1, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), 1, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 3, pos.getZ()), 0, i, attachment.doubleTrunk());
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(0, 1), pos.getY() - 8, pos.getZ() + random.nextIntBetweenInclusive(0, 1)), 8, i, attachment.doubleTrunk());
+            if (random.nextInt(1) == 0) {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + random.nextIntBetweenInclusive(-1, 1), attachment.pos().getY() - random.nextIntBetweenInclusive(8, 9), attachment.pos().getZ() + random.nextIntBetweenInclusive(-1, 1)), 3, i, attachment.doubleTrunk());
+            }
         }
     }
 
@@ -57,9 +65,10 @@ public class GreatboaFoliagePlacer extends FoliagePlacer {
      * @param config The {@link TreeConfiguration}.
      * @return The {@link Integer} for the foliage height.
      */
+
     @Override
     public int foliageHeight(RandomSource random, int height, TreeConfiguration config) {
-        return 7;
+        return 3;
     }
 
     /**
@@ -76,11 +85,11 @@ public class GreatboaFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
-        return Mth.square(localX) + Mth.square(localY - 1) + Mth.square(localZ) > range + random.nextInt(3);
+        return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(2);
     }
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return AetherIIFoliagePlacerTypes.GREATBOA_FOLIAGE_PLACER.get();
+        return AetherIIFoliagePlacerTypes.SKYPINE_FOLIAGE_PLACER.get();
     }
 }

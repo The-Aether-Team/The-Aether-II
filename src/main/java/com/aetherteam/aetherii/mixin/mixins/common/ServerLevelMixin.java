@@ -40,7 +40,7 @@ public class ServerLevelMixin {
 
             if (serverLevel.isRaining()) {
                 int i = serverLevel.getGameRules().getInt(GameRules.RULE_SNOW_ACCUMULATION_HEIGHT);
-                if (i > 0 && this.shouldSnow(biome, serverLevel, heightmapPos)) {
+                if (i > 0 && AetherGrassBlock.shouldSnow(biome, serverLevel, heightmapPos)) {
                     BlockState blockState = serverLevel.getBlockState(heightmapPos);
                     if (blockState.is(AetherIIBlocks.ARCTIC_SNOW.get())) {
                         int layers = blockState.getValue(SnowLayerBlock.LAYERS);
@@ -64,15 +64,5 @@ public class ServerLevelMixin {
             }
             ci.cancel();
         }
-    }
-
-    private boolean shouldSnow(Biome biome, LevelReader level, BlockPos pos) {
-        if (!biome.warmEnoughToRain(pos)) {
-            if (pos.getY() >= level.getMinBuildHeight() && pos.getY() < level.getMaxBuildHeight() && level.getBrightness(LightLayer.BLOCK, pos) < 10) {
-                BlockState blockState = level.getBlockState(pos);
-                return ((blockState.isAir() || blockState.is(AetherIIBlocks.ARCTIC_SNOW)) && AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().canSurvive(level, pos)) || AetherGrassBlock.plantNotSnowed(blockState);
-            }
-        }
-        return false;
     }
 }

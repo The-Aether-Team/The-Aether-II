@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-11T18:19:53.8611301	Item Models: aether_ii
+// 1.20.4	2024-06-14T20:31:45.9233944	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -283,8 +283,10 @@ a278983ff6b77ed62a4f15add25a86f0f1dbef4c assets/aether_ii/models/item/skybirch_l
 58c014448e8eb07850dda96929064ce1895b2c5e assets/aether_ii/models/item/skybirch_sapling.json
 9647906d5deb7547e055f58efb9fa62911e8b879 assets/aether_ii/models/item/skypine_leaf_pile.json
 d634fe0d27710caaafbf9d63c2877d6a38c3cc71 assets/aether_ii/models/item/skypine_leaves.json
+3d2c71d89d1d56224905a9df71cca169c24929f3 assets/aether_ii/models/item/skypine_sapling.json
 6aeb3477c07db0802ef6be205ba4762c79e47f7c assets/aether_ii/models/item/skyplane_leaf_pile.json
 1264f25092e1b8ae0cfed08db5bf04a82a366fe8 assets/aether_ii/models/item/skyplane_leaves.json
+289c145cbe785c3e464e5b90fa4fef614f0dcfbe assets/aether_ii/models/item/skyplane_sapling.json
 fcb760fba7e49a163740ac955449c06321ea704c assets/aether_ii/models/item/skyroot_axe.json
 17c89ef879e85dab7262c319c90163e41f517587 assets/aether_ii/models/item/skyroot_base_beam.json
 6acad04ac0822d7aa5dde98acfd8b5c77fd1bcb9 assets/aether_ii/models/item/skyroot_base_planks.json

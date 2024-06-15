@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.generators;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
+import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
 import java.util.concurrent.CompletableFuture;
@@ -41,7 +43,9 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.GREATBOA_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.AMBEROOT_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYROOT_SAPLING, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.SKYPLANE_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYBIRCH_SAPLING, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.SKYPINE_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.WISPROOT_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.WISPTOP_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.GREATROOT_SAPLING, 0.3F);
@@ -62,8 +66,30 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIItems.WYNDBERRY, 0.3F);
         this.addCompost(compostables, AetherIIItems.ENCHANTED_WYNDBERRY, 0.5F);
         this.addCompost(compostables, AetherIIItems.ORANGE, 0.3F);
+
+        var fuels = this.builder(NeoForgeDataMaps.FURNACE_FUELS);
+        fuels.add(AetherIIBlocks.AMBROSIUM_BLOCK.asItem().builtInRegistryHolder(), new FurnaceFuel(16000), false);
+        fuels.add(AetherIIItems.AMBROSIUM_SHARD, new FurnaceFuel(1600), false);
+        fuels.add(AetherIIBlocks.HIGHLANDS_BUSH.asItem().builtInRegistryHolder(), new FurnaceFuel(100), false);
+        fuels.add(AetherIIBlocks.SKYROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.GREATROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.WISPROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
+        fuels.add(AetherIIBlocks.SKYROOT_BOOKSHELF.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
+        fuels.add(AetherIIItems.SKYROOT_SHORTSWORD, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_HAMMER, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_SPEAR, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_CROSSBOW, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_PICKAXE, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_AXE, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_SHOVEL, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_TROWEL, new FurnaceFuel(200), false);
+        fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
     }
 
+    @SuppressWarnings("deprecation")
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {
         map.add(item.asItem().builtInRegistryHolder(), new Compostable(chance), false);
     }

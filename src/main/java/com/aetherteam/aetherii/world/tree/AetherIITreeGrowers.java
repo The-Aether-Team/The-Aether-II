@@ -74,7 +74,7 @@ public class AetherIITreeGrowers {
 
     public static final TreeGrower AMBEROOT = new TreeGrower(
             "amberoot",
-            Optional.of(AetherIIVegetationFeatures.TREES_AMBEROOT),
+            Optional.of(AetherIIVegetationFeatures.TREES_AMBEROOT_SPARSE),
             Optional.empty(),
             Optional.empty());
 }
