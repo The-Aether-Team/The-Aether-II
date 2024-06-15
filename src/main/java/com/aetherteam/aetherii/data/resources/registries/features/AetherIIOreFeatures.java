@@ -27,7 +27,7 @@ public class AetherIIOreFeatures {
         AetherIIFeatureUtils.register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
         AetherIIFeatureUtils.register(context, ORE_ICESTONE_SMALL, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 16));
         AetherIIFeatureUtils.register(context, ORE_AMBROSIUM, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState(), 16));
-        AetherIIFeatureUtils.register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ZANITE_ORE.get().defaultBlockState(), 5, 0.75F));
+        AetherIIFeatureUtils.register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ZANITE_ORE.get().defaultBlockState(), 5, 0.5F));
         AetherIIFeatureUtils.register(context, ORE_ARKENIUM, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ARKENIUM_ORE.get().defaultBlockState(), 5, 0.5F));
         AetherIIFeatureUtils.register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.GRAVITITE_ORE.get().defaultBlockState(), 3, 0.5F));
         AetherIIFeatureUtils.register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.GRAVITITE_ORE.get().defaultBlockState(), 4));
