@@ -6,10 +6,7 @@ import com.aetherteam.aetherii.block.natural.TwigBlock;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIFeatureBuilders;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
-import com.aetherteam.aetherii.world.feature.configuration.CloudbedConfiguration;
-import com.aetherteam.aetherii.world.feature.configuration.FerrositePillarConfiguration;
-import com.aetherteam.aetherii.world.feature.configuration.MoaNestConfiguration;
-import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
+import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
@@ -21,6 +18,7 @@ import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
@@ -41,6 +39,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE = AetherIIFeatureUtils.registerKey("noise_lake");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_ARCTIC = AetherIIFeatureUtils.registerKey("noise_lake_arctic");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR = AetherIIFeatureUtils.registerKey("ferrosite_pillar");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_WATER_LAKE = AetherIIFeatureUtils.registerKey("aether_water_lake");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_WATER_SPRING = AetherIIFeatureUtils.registerKey("aether_water_spring");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = AetherIIFeatureUtils.registerKey("skyroot_twigs");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_ROCKS = AetherIIFeatureUtils.registerKey("holystone_rocks");
@@ -130,6 +129,8 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
 
+        AetherIIFeatureUtils.register(context, AETHER_WATER_LAKE, AetherIIFeatures.LAKE.get(),
+                new AetherLakeConfiguration(BlockStateProvider.simple(Blocks.WATER), BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get())));
         AetherIIFeatureUtils.register(context, AETHER_WATER_SPRING, Feature.SPRING,
                 new SpringConfiguration(Fluids.WATER.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.UNDERSHALE.get(), AetherIIBlocks.HOLYSTONE.get(), AetherIIBlocks.AETHER_DIRT.get())));
 

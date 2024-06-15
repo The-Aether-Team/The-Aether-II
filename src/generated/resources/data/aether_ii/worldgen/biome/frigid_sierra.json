@@ -22,7 +22,9 @@
       "aether_ii:noise_lake_arctic",
       "aether_ii:cloudbed"
     ],
-    [],
+    [
+      "aether_ii:aether_water_lake_underground"
+    ],
     [],
     [],
     [],

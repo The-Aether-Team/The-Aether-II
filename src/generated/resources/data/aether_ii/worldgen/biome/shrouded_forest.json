@@ -23,7 +23,9 @@
       "aether_ii:coast_quicksoil",
       "aether_ii:cloudbed"
     ],
-    [],
+    [
+      "aether_ii:aether_water_lake_underground"
+    ],
     [],
     [],
     [],
