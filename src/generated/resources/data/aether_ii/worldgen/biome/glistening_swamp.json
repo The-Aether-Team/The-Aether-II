@@ -36,7 +36,9 @@
       "aether_ii:ore_gravitite"
     ],
     [],
-    [],
+    [
+      "aether_ii:aether_water_spring"
+    ],
     [
       "aether_ii:short_grass_patch",
       "aether_ii:medium_grass_patch",

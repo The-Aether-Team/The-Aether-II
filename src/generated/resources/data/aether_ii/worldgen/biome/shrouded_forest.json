@@ -43,7 +43,9 @@
       "aether_ii:skyroot_twigs",
       "aether_ii:holystone_rocks"
     ],
-    [],
+    [
+      "aether_ii:aether_water_spring"
+    ],
     [
       "aether_ii:shrouded_forest_trees",
       "aether_ii:short_grass_patch",

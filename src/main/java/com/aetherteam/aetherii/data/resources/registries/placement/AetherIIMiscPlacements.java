@@ -23,6 +23,7 @@ public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = AetherIIPlacementUtils.createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = AetherIIPlacementUtils.createKey("noise_lake_arctic");
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = AetherIIPlacementUtils.createKey("ferrosite_pillar");
+    public static final ResourceKey<PlacedFeature> AETHER_WATER_SPRING = AetherIIPlacementUtils.createKey("aether_water_spring");
     public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = AetherIIPlacementUtils.createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = AetherIIPlacementUtils.createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> MOA_NEST = AetherIIPlacementUtils.createKey("moa_nest");
@@ -63,6 +64,12 @@ public class AetherIIMiscPlacements {
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome()
         );
+
+        AetherIIPlacementUtils.register(context, AETHER_WATER_SPRING, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_SPRING),
+                CountPlacement.of(30),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.aboveBottom(256)),
+                BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, SKYROOT_TWIGS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.SKYROOT_TWIGS),
                 NoiseThresholdCountPlacement.of(-0.8, 1, 2),
