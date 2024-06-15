@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 public class AetherIIOreFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SCATTERGLASS = AetherIIFeatureUtils.registerKey("ore_scatterglass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_MOSSY_HOLYSTONE = AetherIIFeatureUtils.registerKey("ore_mossy_holystone");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ARCTIC_PACKED_ICE = AetherIIFeatureUtils.registerKey("ore_arctic_packed_ice");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_AGIOSITE = AetherIIFeatureUtils.registerKey("ore_agiosite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE = AetherIIFeatureUtils.registerKey("ore_icestone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE_SMALL = AetherIIFeatureUtils.registerKey("ore_icestone_small");
@@ -23,6 +24,7 @@ public class AetherIIOreFeatures {
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         AetherIIFeatureUtils.register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.UNDERGROUND, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 32));
         AetherIIFeatureUtils.register(context, ORE_MOSSY_HOLYSTONE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 64));
+        AetherIIFeatureUtils.register(context, ORE_ARCTIC_PACKED_ICE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(), 64));
         AetherIIFeatureUtils.register(context, ORE_AGIOSITE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.UNDERSHALE, AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 64));
         AetherIIFeatureUtils.register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
         AetherIIFeatureUtils.register(context, ORE_ICESTONE_SMALL, Feature.ORE, new OreConfiguration(AetherIIFeatureRules.HOLYSTONE, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 16));
