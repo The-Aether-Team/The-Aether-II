@@ -62,7 +62,7 @@
       {
         "chance": 0.1,
         "feature": {
-          "feature": "aether_ii:trees_amberoot",
+          "feature": "aether_ii:trees_amberoot_sparse",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
