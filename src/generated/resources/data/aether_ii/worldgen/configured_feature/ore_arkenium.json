@@ -12,6 +12,15 @@
           "predicate_type": "minecraft:tag_match",
           "tag": "aether_ii:holystone"
         }
+      },
+      {
+        "state": {
+          "Name": "aether_ii:undershale_arkenium_ore"
+        },
+        "target": {
+          "block": "aether_ii:undershale",
+          "predicate_type": "minecraft:block_match"
+        }
       }
     ]
   }
