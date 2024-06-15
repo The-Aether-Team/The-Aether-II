@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.builders;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
+import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -9,9 +10,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.CubicSpline;
 import net.minecraft.util.ToFloatFunction;
 import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraft.world.level.levelgen.*;
-
-import java.util.Base64;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.DensityFunctions;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
@@ -26,6 +27,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor");
     public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/island_density");
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
+    public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("highlands/noise_caves");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/islands/bottom_slide");
     public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/islands/top_slide");
     public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/islands/top_slide_arctic");
@@ -99,6 +101,23 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
+    public static DensityFunction buildNoiseCaves(HolderGetter<DensityFunction> function, HolderGetter<NormalNoise.NoiseParameters> noise) {
+        DensityFunction density = DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.CAVE_THICKNESS), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1);
+        density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(0, 24, 0.05, 0.0));
+        density = DensityFunctions.add(density, DensityFunctions.constant(-0.15));
+        density = DensityFunctions.add(density, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.CAVES), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE2));
+        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
+        density = DensityFunctions.add(density, DensityFunctions.spline(caveGradient(y)));
+        return density;
+    }
+
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> caveGradient(I y) {
+        return CubicSpline.builder(y)
+                .addPoint(96, 0.0F)
+                .addPoint(112, 0.175F)
+                .build();
+    }
+
     public static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE);
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
@@ -108,6 +127,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE));
         density = DensityFunctions.add(density, factorize(function, -0.18));
+        density = DensityFunctions.min(density, getFunction(function, NOISE_CAVES));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();

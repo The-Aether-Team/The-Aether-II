@@ -47,6 +47,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(BASE_TERRAIN_SHAPER, buildBaseTerrainShaper(function));
         context.register(TERRAIN_SHAPER, buildTerrainShaper(function));
         context.register(UNDERGROUND_SHAPER, buildUndergroundShaper(function));
+        context.register(NOISE_CAVES, buildNoiseCaves(function, noise));
         context.register(FINAL_DENSITY, buildFinalDensity(function));
 
         context.register(LAKES_NOISE,
