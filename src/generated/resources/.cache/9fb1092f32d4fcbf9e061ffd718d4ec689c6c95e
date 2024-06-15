@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-15T21:49:37.9660262	Recipes
+// 1.20.4	2024-06-15T22:45:07.5326321	Recipes
 ceeef4aed870f06514a5f5cc998418931c547a22 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks.json
 79334dab93a39b3d5d6416736b3ab4954edc92b8 data/aether_ii/advancements/recipes/building_blocks/agiosite_bricks_from_artisanry.json
 0af97e5b955f582510638aeecee94fc57bcf2d1c data/aether_ii/advancements/recipes/building_blocks/agiosite_brick_slab.json
@@ -7,6 +7,7 @@ d211fa2d4f1b2edaad272b7356325c4ddc5de28c data/aether_ii/advancements/recipes/bui
 37d7e5a5421a852738eb82e64f2d2baee4377d82 data/aether_ii/advancements/recipes/building_blocks/agiosite_stairs.json
 f7b735c6b3410f9576695e3b8a487bd5aa6e9328 data/aether_ii/advancements/recipes/building_blocks/amberoot_wood.json
 5cf2fd90c148b3d9cc9067c61ab309c9c40d84ff data/aether_ii/advancements/recipes/building_blocks/ambrosium_block.json
+59e624a236f5e815fa4058562eaf45096ba25199 data/aether_ii/advancements/recipes/building_blocks/arctic_packed_ice.json
 7e962a15df2ab9da75add7104873bd1fe5c2fec9 data/aether_ii/advancements/recipes/building_blocks/arctic_snow_block.json
 5095488c0c450ef0c1b97b08b593cad33a68bcd5 data/aether_ii/advancements/recipes/building_blocks/arkenium_block.json
 6408be64a84191a073eb9b4fbde04208a0a4dfc8 data/aether_ii/advancements/recipes/building_blocks/cloudwool.json
@@ -298,6 +299,7 @@ d35a059cd830fe8abd7705f237464c45b201cb36 data/aether_ii/recipes/ambrosium_shard_
 143afa4a5685399c85804df6494a6b30f3624fdd data/aether_ii/recipes/ambrosium_shard_from_smelting.json
 79204657ad68b26ad3ee5482a074fbaba7337701 data/aether_ii/recipes/ambrosium_shard_from_smelting_undershale_ambrosium_ore.json
 f9ff4fc36bb7087171c2345332d6a983dce855e3 data/aether_ii/recipes/ambrosium_torch.json
+e7cf9468e0e5b7444f2dd2eea76cfb9eb5f64f42 data/aether_ii/recipes/arctic_packed_ice.json
 a06d026b19ed5cbe57a34d5f5731a247903531c2 data/aether_ii/recipes/arctic_snow.json
 b9529ffaa8686f17c1b4e84c98f2fe60876d6188 data/aether_ii/recipes/arctic_snow_block.json
 1f03c603c6473cdf36befbfd216c80debda7673d data/aether_ii/recipes/arkenium_axe.json

@@ -109,6 +109,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_snowball", has(AetherIIItems.ARCTIC_SNOWBALL))
                 .save(consumer);
+        threeByThreePacker(consumer, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ARCTIC_PACKED_ICE, AetherIIBlocks.ARCTIC_ICE);
 
         this.icestoneFreezable(Blocks.ICE, Blocks.WATER).save(consumer, this.name("icestone_freeze_water"));
         this.icestoneFreezableTag(AetherIIBlocks.ARCTIC_ICE.get(), Blocks.WATER, AetherIITags.Biomes.ARCTIC_ICE).save(consumer, this.name("icestone_freeze_water_to_arctic_ice"));
