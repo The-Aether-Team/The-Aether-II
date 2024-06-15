@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.event.hooks;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.DamageSystemAttachment;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
@@ -10,6 +11,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistanc
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
+import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.PacketRelay;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
@@ -20,6 +22,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -179,6 +182,21 @@ public class DamageSystemHooks {
             }
             components.remove(position - 1);
             components.add(position, Component.literal("").append(Component.translatable("attribute.modifier.plus.0", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(ChatFormatting.BLUE)));
+        }
+    }
+
+    public static void buildUpShieldBreak(LivingEntity entity, DamageSource source) { //todo refresh status with ticking when not blocking
+        if (entity instanceof Player player) {
+            if (source.getEntity() != null && source.getEntity().getType() == EntityType.ZOMBIE) {
+                DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+                attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setBlockStatus", Math.max(0, attachment.getBlockStatus() - 30));
+                if (attachment.getBlockStatus() <= 0) {
+                    player.getCooldowns().addCooldown(player.getUseItem().getItem(), 300);
+                    player.level().broadcastEntityEvent(player, (byte) 10);
+                    player.stopUsingItem();
+                    attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setBlockStatus", 100); //todo probably only reset when player isn't blocking to avoid hud bugs.
+                }
+            }
         }
     }
 }

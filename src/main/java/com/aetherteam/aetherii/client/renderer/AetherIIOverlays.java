@@ -2,11 +2,16 @@ package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.DamageSystemAttachment;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
@@ -17,7 +22,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
+import net.neoforged.neoforge.client.gui.overlay.ExtendedGui;
 
 import java.awt.*;
 import java.util.Collection;
@@ -28,13 +36,24 @@ public class AetherIIOverlays {
     protected static final ResourceLocation BUILDUP_BACKGROUND_BACKING_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_backing");
     protected static final ResourceLocation BUILDUP_BACKGROUND_OUTLINE_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_outline");
     protected static final ResourceLocation BUILDUP_BACKGROUND_OVERLAY_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_overlay");
+    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE = new ResourceLocation(AetherII.MODID, "hud/crosshair_block_indicator_background");
+    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE = new ResourceLocation(AetherII.MODID, "hud/crosshair_block_indicator_progress");
+    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = new ResourceLocation(AetherII.MODID, "hud/hotbar_block_indicator_background");
+    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = new ResourceLocation(AetherII.MODID, "hud/hotbar_block_indicator_progress");
 
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerAboveAll(new ResourceLocation(AetherII.MODID, "aether_ii_effect_buildups"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
+        event.registerAboveAll(new ResourceLocation(AetherII.MODID, "effect_buildups"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
                 renderEffects(minecraft, player, guiGraphics, screenWidth);
+            }
+        });
+        event.registerAboveAll(new ResourceLocation(AetherII.MODID, "shield_blocking"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderBlockIndicator(minecraft, guiGraphics, player, gui, screenWidth, screenHeight);
             }
         });
     }
@@ -99,6 +118,42 @@ public class AetherIIOverlays {
             }
 
             list.forEach(Runnable::run);
+        }
+    }
+
+    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player, ExtendedGui gui, int screenWidth, int screenHeight) {
+        Options options = minecraft.options;
+        if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
+            if (player.isBlocking()) {
+                DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+                float f = attachment.getBlockStatus() / 100.0F; //todo max tracking
+                if (options.attackIndicator().get() == AttackIndicatorStatus.CROSSHAIR) {
+                    if (options.getCameraType().isFirstPerson()) {
+                        if (!gui.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
+                            RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+
+                            int j = screenHeight / 2 - 5;
+                            int k = screenWidth / 2 - 19;
+                            int l = (int) (f * 10.0F);
+                            guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
+                            guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 0, k, j, 10, l);
+                        }
+                    }
+                } else if (options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR) {
+                    HumanoidArm humanoidarm = player.getMainArm().getOpposite();
+                    boolean flag = player.getOffhandItem().isEmpty();
+                    int j2 = screenHeight - 20;
+                    int i = screenWidth / 2;
+                    int k2 = i - 91 - 22 - (!flag ? 31 : 0);
+                    if (humanoidarm == HumanoidArm.RIGHT) {
+                        k2 = i + 91 + 1 + (!flag ? 31 : 0);
+                    }
+
+                    int l1 = (int) (f * 18.0F);
+                    guiGraphics.blitSprite(HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
+                    guiGraphics.blitSprite(HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+                }
+            }
         }
     }
 }
