@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-15T22:05:41.1951305	Registries
+// 1.20.4	2024-06-15T22:10:24.3762923	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -167,7 +167,7 @@ ad494c11ca8d4c8f6e8992dbadd3d695c9a63c18 data/aether_ii/worldgen/placed_feature/
 696082cbc7470b5db85c89f1435eaff33b293d7b data/aether_ii/worldgen/placed_feature/noise_lake_arctic.json
 8804c5a62374f0d25e7b2db1c972bcfde961a5ed data/aether_ii/worldgen/placed_feature/orange_tree_patch.json
 26c8e2721cb5838ca72373110052cb95219067f1 data/aether_ii/worldgen/placed_feature/ore_agiosite.json
-7ec256c77eb88a9a1a80bc61711996a5b0825f03 data/aether_ii/worldgen/placed_feature/ore_ambrosium.json
+051440cb9404578f0fc9ba61e53714e926db48d5 data/aether_ii/worldgen/placed_feature/ore_ambrosium.json
 4c7cd24e529b2d2250b7491a1aa53525f7501dc3 data/aether_ii/worldgen/placed_feature/ore_arctic_packed_ice.json
 4395c49e3851ccec1e53558dc8c0d7b331a5735e data/aether_ii/worldgen/placed_feature/ore_arkenium.json
 284f9792cf549ae0208a3b8647c34557591633b9 data/aether_ii/worldgen/placed_feature/ore_gravitite.json

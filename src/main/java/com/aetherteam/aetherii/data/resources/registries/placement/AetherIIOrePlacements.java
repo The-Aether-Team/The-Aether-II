@@ -41,7 +41,7 @@ public class AetherIIOrePlacements {
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(256))));
 
         AetherIIPlacementUtils.register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_AMBROSIUM),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(16, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(80), VerticalAnchor.aboveBottom(256))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(16, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(88), VerticalAnchor.aboveBottom(256))));
         AetherIIPlacementUtils. register(context, ORE_ZANITE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_ZANITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(144))));
         AetherIIPlacementUtils. register(context, ORE_ARKENIUM, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_ARKENIUM),
