@@ -10,8 +10,9 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class DamageSystemAttachment implements INBTSynchable {
+    public static final int MAX_BLOCK_STATUS = 500;
     private float criticalDamageModifier = 1.0F;
-    private int blockStatus = 100; //TODO stack-dependent tracker
+    private int blockStatus = MAX_BLOCK_STATUS;
 
     private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
             Map.entry("setBlockStatus", Triple.of(Type.INT, (object) -> this.setBlockStatus((int) object), this::getBlockStatus))

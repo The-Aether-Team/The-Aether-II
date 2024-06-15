@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
@@ -17,6 +18,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -29,6 +31,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.Tags;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.List;
@@ -185,16 +188,18 @@ public class DamageSystemHooks {
         }
     }
 
-    public static void buildUpShieldBreak(LivingEntity entity, DamageSource source) { //todo refresh status with ticking when not blocking
-        if (entity instanceof Player player) {
+    public static void buildUpShieldBreak(LivingEntity entity, DamageSource source) {
+        if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELDS)) {
             if (source.getEntity() != null && source.getEntity().getType() == EntityType.ZOMBIE) {
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setBlockStatus", Math.max(0, attachment.getBlockStatus() - 30));
+                int breakIncrement = DamageSystemAttachment.MAX_BLOCK_STATUS / 2; //todo balance
+                if (entity.getUseItem().getItem() instanceof AetherIIShieldItem shield) {
+                    breakIncrement = shield.getBreakIncrement();
+                }
+                attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setBlockStatus", Math.max(0, attachment.getBlockStatus() - breakIncrement));
                 if (attachment.getBlockStatus() <= 0) {
-                    player.getCooldowns().addCooldown(player.getUseItem().getItem(), 300);
-                    player.level().broadcastEntityEvent(player, (byte) 10);
+                    player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELDS).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300));
                     player.stopUsingItem();
-                    attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setBlockStatus", 100); //todo probably only reset when player isn't blocking to avoid hud bugs.
                 }
             }
         }

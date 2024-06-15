@@ -8,14 +8,20 @@ import net.minecraft.world.item.enchantment.Enchantments;
 
 public class AetherIIShieldItem extends ShieldItem {
     private final Tier tier;
+    private final int breakIncrement;
 
-    public AetherIIShieldItem(Tier tier, Properties properties) {
+    public AetherIIShieldItem(Tier tier, int breakIncrement, Properties properties) {
         super(properties.defaultDurability(tier.getUses()));
         this.tier = tier;
+        this.breakIncrement = breakIncrement;
     }
 
     public Tier getTier() {
         return this.tier;
+    }
+
+    public int getBreakIncrement() {
+        return this.breakIncrement;
     }
 
     @Override

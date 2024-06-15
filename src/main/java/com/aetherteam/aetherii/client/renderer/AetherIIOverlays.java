@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.AttackIndicatorStatus;
 import net.minecraft.client.Minecraft;
@@ -26,6 +25,7 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
 import net.neoforged.neoforge.client.gui.overlay.ExtendedGui;
+import net.neoforged.neoforge.common.Tags;
 
 import java.awt.*;
 import java.util.Collection;
@@ -124,9 +124,10 @@ public class AetherIIOverlays {
     private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player, ExtendedGui gui, int screenWidth, int screenHeight) {
         Options options = minecraft.options;
         if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
-            if (player.isBlocking()) {
+            boolean holdingShield = player.getOffhandItem().is(Tags.Items.TOOLS_SHIELDS) || player.getMainHandItem().is(Tags.Items.TOOLS_SHIELDS);
+            if (holdingShield) {
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                float f = attachment.getBlockStatus() / 100.0F; //todo max tracking
+                float f = attachment.getBlockStatus() / (float) DamageSystemAttachment.MAX_BLOCK_STATUS;
                 if (options.attackIndicator().get() == AttackIndicatorStatus.CROSSHAIR) {
                     if (options.getCameraType().isFirstPerson()) {
                         if (!gui.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
@@ -144,9 +145,9 @@ public class AetherIIOverlays {
                     boolean flag = player.getOffhandItem().isEmpty();
                     int j2 = screenHeight - 20;
                     int i = screenWidth / 2;
-                    int k2 = i - 91 - 22 - (!flag ? 31 : 0);
+                    int k2 = i - 91 - 22 - (!flag ? 31 : 3);
                     if (humanoidarm == HumanoidArm.RIGHT) {
-                        k2 = i + 91 + 1 + (!flag ? 31 : 0);
+                        k2 = i + 91 + 1 + (!flag ? 31 : 3);
                     }
 
                     int l1 = (int) (f * 18.0F);
