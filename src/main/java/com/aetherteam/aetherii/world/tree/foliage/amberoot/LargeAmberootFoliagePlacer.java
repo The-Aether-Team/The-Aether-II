@@ -1,6 +1,7 @@
-package com.aetherteam.aetherii.world.tree.foliage;
+package com.aetherteam.aetherii.world.tree.foliage.amberoot;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -9,13 +10,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 import java.util.function.BiConsumer;
-import java.util.function.Predicate;
 
 public class LargeAmberootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     public static final Codec<LargeAmberootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
@@ -42,7 +41,7 @@ public class LargeAmberootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            if (level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 1, pos.getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X))) || level.isStateAtPosition(new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() - 1, attachment.pos().getZ()), Predicate.isEqual(AetherIIBlocks.AMBEROOT_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, Direction.Axis.X)))) {
+            if (random.nextInt(1) == 0) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 2, pos.getY() + 1, pos.getZ()), 6, i, attachment.doubleTrunk());
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() - 2, pos.getY() + 1, pos.getZ()), 6, i, attachment.doubleTrunk());
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 4, pos.getY() + 2, pos.getZ()), 2, i, attachment.doubleTrunk());

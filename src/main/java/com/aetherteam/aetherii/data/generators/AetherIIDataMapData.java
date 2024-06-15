@@ -41,7 +41,9 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.GREATBOA_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.AMBEROOT_LEAVES, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYROOT_SAPLING, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.SKYPLANE_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.SKYBIRCH_SAPLING, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.SKYPINE_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.WISPROOT_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.WISPTOP_SAPLING, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.GREATROOT_SAPLING, 0.3F);
@@ -64,6 +66,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIItems.ORANGE, 0.3F);
     }
 
+    @SuppressWarnings("deprecation")
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {
         map.add(item.asItem().builtInRegistryHolder(), new Compostable(chance), false);
     }
