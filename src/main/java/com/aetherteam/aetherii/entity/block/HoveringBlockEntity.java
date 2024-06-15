@@ -1,16 +1,19 @@
 package com.aetherteam.aetherii.entity.block;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -18,9 +21,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -33,7 +38,14 @@ public class HoveringBlockEntity extends Entity {
     private BlockState blockState = Blocks.SAND.defaultBlockState();
     @Nullable
     public CompoundTag blockData;
-//    private int ticksStuck = 0;
+    protected boolean held = true;
+    protected boolean launched;
+    protected int launchDuration;
+    protected Vec3 targetSettlePosition;
+    protected int lerpSteps;
+    protected double lerpX;
+    protected double lerpY;
+    protected double lerpZ;
 
     public HoveringBlockEntity(EntityType<? extends Entity> entityType, Level level) {
         super(entityType, level);
@@ -58,31 +70,115 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    public void tick() {
+    public void tick() { //todo figure out how to not have these get stuck on non falling blocks like slabs and deal with replaceables etc.
         Entity holdingPlayer = this.getHoldingPlayer();
-        if (holdingPlayer != null) {
-            Vec3 playerToBlock = this.position().subtract(holdingPlayer.position().add(0, 1, 0));
-            Vec3 target = holdingPlayer.getViewVector(1.0F).scale(2);
-            Vec3 movement = target.subtract(playerToBlock);
-            this.setDeltaMovement(movement.scale(0.5)); //todo lerping etc.
-//            AetherII.LOGGER.info(String.valueOf(this.getDeltaMovement()));
-            if (playerToBlock.length() > 5) {
-                this.discard();
+        if (this.held) {
+            if (holdingPlayer != null) {
+                Vec3 playerToBlock = this.position().subtract(holdingPlayer.position().add(0, 1.15, 0));
+                Vec3 target = holdingPlayer.getViewVector(1.0F).scale(2);
+                Vec3 movement = target.subtract(playerToBlock);
+                this.setDeltaMovement(movement.scale(0.5));
+                if (holdingPlayer instanceof Player player) {
+                    if (playerToBlock.length() > player.getBlockReach() + 1) {
+                        this.markShouldSettle();
+                    }
+                }
+            } else {
+                this.markShouldSettle();
+            }
+        } else {
+            if (this.verticalCollision || this.horizontalCollision || this.onGround()) {
+                this.markShouldSettle();
             }
         }
+        if (this.targetSettlePosition != null) {
+            this.settleBlock();
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.98));
+        }
+
+        if (!this.level().isClientSide()) {
+            if (this.lerpSteps > 0) {
+                this.lerpPositionAndRotationStep(this.lerpSteps, this.lerpX, this.lerpY, this.lerpZ, this.getYRot(), this.getXRot());
+                --this.lerpSteps;
+            }
+        }
+
         this.move(MoverType.SELF, this.getDeltaMovement());
+
+        if (this.launched) {
+            if (this.launchDuration++ >= 100) {
+                this.dropBlock(this.blockState);
+            }
+        }
     }
 
     @Override
-    public InteractionResult interact(Player pPlayer, InteractionHand pHand) { //right click
-
+    public InteractionResult interact(Player pPlayer, InteractionHand pHand) {
+        Entity holdingPlayer = this.getHoldingPlayer();
+        if (holdingPlayer != null) {
+            this.held = false;
+            this.markShouldSettle();
+            this.settleBlock();
+        }
         return super.interact(pPlayer, pHand);
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) { //left click
-        this.setHoldingPlayer(null);
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        Entity holdingPlayer = this.getHoldingPlayer();
+        if (holdingPlayer != null) {
+            this.held = false;
+            this.launched = true;
+            this.push(holdingPlayer.getViewVector(1.0F).x() * 2.5, holdingPlayer.getViewVector(1.0F).y() * 2.5, holdingPlayer.getViewVector(1.0F).z() * 2.5);
+        }
         return super.hurt(pSource, pAmount);
+    }
+
+    private void markShouldSettle() {
+        if (this.targetSettlePosition == null) {
+            this.targetSettlePosition = this.blockPosition().getCenter().subtract(0, 0.5, 0);
+        }
+    }
+
+    private void settleBlock() {
+        Vec3 currentPos = this.position();
+        Vec3 motion = this.targetSettlePosition.subtract(currentPos);
+        this.setDeltaMovement(motion);
+        if (this.position().distanceTo(this.targetSettlePosition) <= 0.001) {
+            if (!this.level().isClientSide()) {
+                if (this.level().setBlock(this.blockPosition(), this.blockState, 2)) {
+                    if (this.blockData != null && this.getBlockState().hasBlockEntity()) {
+                        BlockEntity blockEntity = this.level().getBlockEntity(this.blockPosition());
+                        if (blockEntity != null) {
+                            CompoundTag tag = blockEntity.saveWithoutMetadata();
+                            for (String string : this.blockData.getAllKeys()) {
+                                Tag blockDataTag = this.blockData.get(string);
+                                if (blockDataTag != null) {
+                                    tag.put(string, blockDataTag.copy());
+                                }
+                            }
+
+                            try {
+                                blockEntity.load(tag);
+                            } catch (Exception exception) {
+                                AetherII.LOGGER.error("Failed to load block entity from hovering block", exception);
+                            }
+                            blockEntity.setChanged();
+                        }
+                    }
+                }
+                this.discard();
+            }
+        }
+    }
+
+    private void dropBlock(BlockState state) {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            for (ItemStack stack : Block.getDrops(state, serverLevel, this.blockPosition(), null)) {
+                this.spawnAtLocation(stack);
+            }
+            this.discard();
+        }
     }
 
     @Override
@@ -98,7 +194,6 @@ public class HoveringBlockEntity extends Entity {
     public Entity getHoldingPlayer() {
         int id = this.getEntityData().get(DATA_OWNER_ID);
         return id != -1 ? this.level().getEntity(id) : null;
-
     }
 
     public void setHoldingPlayer(@Nullable Entity entity) {
@@ -116,6 +211,30 @@ public class HoveringBlockEntity extends Entity {
 
     public BlockState getBlockState() {
         return this.blockState;
+    }
+
+    @Override
+    public void lerpTo(double pX, double pY, double pZ, float pYRot, float pXRot, int pSteps) {
+        this.lerpX = pX;
+        this.lerpY = pY;
+        this.lerpZ = pZ;
+        this.setRot(pYRot, pXRot);
+        this.lerpSteps = pSteps;
+    }
+
+    @Override
+    public double lerpTargetX() {
+        return this.lerpSteps > 0 ? this.lerpX : this.getX();
+    }
+
+    @Override
+    public double lerpTargetY() {
+        return this.lerpSteps > 0 ? this.lerpY : this.getY();
+    }
+
+    @Override
+    public double lerpTargetZ() {
+        return this.lerpSteps > 0 ? this.lerpZ : this.getZ();
     }
 
     @Override
