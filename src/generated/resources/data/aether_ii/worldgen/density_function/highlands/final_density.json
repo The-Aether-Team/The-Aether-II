@@ -42,7 +42,7 @@
                     "argument1": -0.18,
                     "argument2": "aether_ii:highlands/factor"
                   },
-                  "argument2": "aether_ii:highlands/terrain_shaper"
+                  "argument2": "aether_ii:highlands/islands/terrain_shaper"
                 },
                 "argument2": "aether_ii:highlands/island_density"
               }
@@ -59,7 +59,7 @@
               "argument1": -0.18,
               "argument2": "aether_ii:highlands/factor"
             },
-            "argument2": "aether_ii:highlands/terrain_shaper"
+            "argument2": "aether_ii:highlands/islands/terrain_shaper"
           },
           "argument2": "aether_ii:highlands/island_density"
         }

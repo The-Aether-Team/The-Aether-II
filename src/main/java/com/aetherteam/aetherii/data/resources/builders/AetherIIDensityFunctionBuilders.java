@@ -11,6 +11,8 @@ import net.minecraft.util.ToFloatFunction;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.levelgen.*;
 
+import java.util.Base64;
+
 public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TEMPERATURE = createKey("highlands/temperature");
     public static final ResourceKey<DensityFunction> VEGETATION = createKey("highlands/vegetation");
@@ -20,20 +22,22 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
+    public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification");
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor");
+    public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/island_density");
+    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/islands/bottom_slide");
     public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/islands/top_slide");
     public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/islands/top_slide_arctic");
     public static final ResourceKey<DensityFunction> SLOPER = createKey("highlands/islands/sloper");
     public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("highlands/islands/sloper_arctic");
-    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
-    public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification");
-    public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/island_density");
+    public static final ResourceKey<DensityFunction> BASE_TERRAIN_SHAPER = createKey("highlands/islands/base_terrain_shaper");
+    public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/islands/terrain_shaper");
+    public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("highlands/islands/underground_shaper");
     public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
     public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor");
     public static final ResourceKey<DensityFunction> LAKES_FLOOR = createKey("highlands/lakes/lake_floor");
     public static final ResourceKey<DensityFunction> LAKES_BARRIER = createKey("highlands/lakes/lake_barrier");
-    public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain_shaper");
 
     public static final ResourceKey<DensityFunction> FINAL_DENSITY = createKey("highlands/final_density");
 
@@ -74,18 +78,20 @@ public class AetherIIDensityFunctionBuilders {
     }
 
     public static DensityFunction selectSloper(HolderGetter<DensityFunction> function) {
-        return DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 1.5, getFunction(function, SLOPER), getFunction(function, SLOPER_ARCTIC));
+        DensityFunction density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 1.5, getFunction(function, SLOPER), getFunction(function, SLOPER_ARCTIC));
+        density = DensityFunctions.mul(density, getFunction(function, UNDERGROUND_SHAPER));
+        return density;
     }
 
-    public static DensityFunction makeBaseTerrainShaper(HolderGetter<DensityFunction> function) {
+    public static DensityFunction buildBaseTerrainShaper(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, AMPLIFICATION);
-        density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(96, 128, 0.75, 0.35));
+        density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(96, 128, 0.65, 0.35));
         density = DensityFunctions.mul(density, selectSloper(function));
         return density.clamp(0, 1);
     }
 
-    public static DensityFunction finalizeTerrainShaper(HolderGetter<DensityFunction> function) {
-        DensityFunction base = makeBaseTerrainShaper(function);
+    public static DensityFunction buildTerrainShaper(HolderGetter<DensityFunction> function) {
+        DensityFunction base = getFunction(function, BASE_TERRAIN_SHAPER);
         DensityFunction density = base;
         density = DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 128, density, DensityFunctions.mul(density, getFunction(function, LAKES_FACTOR)));
         density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -1.5, 0.65, density, base);
@@ -290,6 +296,21 @@ public class AetherIIDensityFunctionBuilders {
         return CubicSpline.builder(y)
                 .addPoint(locationFrom, valueFrom)
                 .addPoint(locationTo, valueTo)
+                .build();
+    }
+
+    public static DensityFunction buildUndergroundShaper(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
+        return DensityFunctions.spline(undergroundShaper(y));
+    }
+
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> undergroundShaper(I y) {
+        return CubicSpline.builder(y)
+                .addPoint(0, 3.0F)
+                .addPoint(16, 1.25F)
+                .addPoint(48, 0.5F)
+                .addPoint(64, 0.75F)
+                .addPoint(96, 1)
                 .build();
     }
 
