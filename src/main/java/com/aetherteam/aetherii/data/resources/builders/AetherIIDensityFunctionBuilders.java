@@ -103,8 +103,8 @@ public class AetherIIDensityFunctionBuilders {
 
     public static DensityFunction buildNoiseCaves(HolderGetter<DensityFunction> function, HolderGetter<NormalNoise.NoiseParameters> noise) {
         DensityFunction density = DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.CAVE_THICKNESS), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1);
-        density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(0, 24, 0.05, 0.0));
-        density = DensityFunctions.add(density, DensityFunctions.constant(-0.15));
+        density = DensityFunctions.add(density, DensityFunctions.yClampedGradient(16, 32, 0.05, 0.0));
+        density = DensityFunctions.add(density, DensityFunctions.constant(-0.125));
         density = DensityFunctions.add(density, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.CAVES), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE2));
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
         density = DensityFunctions.add(density, DensityFunctions.spline(caveGradient(y)));
@@ -328,8 +328,8 @@ public class AetherIIDensityFunctionBuilders {
         return CubicSpline.builder(y)
                 .addPoint(0, 3.0F)
                 .addPoint(16, 1.25F)
-                .addPoint(48, 0.5F)
-                .addPoint(64, 0.75F)
+                .addPoint(48, 0.75F)
+                .addPoint(64, 0.5F)
                 .addPoint(96, 1)
                 .build();
     }
