@@ -70,7 +70,7 @@ public class AetherIIMiscPlacements {
         );
 
         AetherIIPlacementUtils.register(context, AETHER_WATER_LAKE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_LAKE),
-                RarityFilter.onAverageOnceEvery(30),
+                RarityFilter.onAverageOnceEvery(25),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, AETHER_WATER_LAKE_UNDERGROUND, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_LAKE),
