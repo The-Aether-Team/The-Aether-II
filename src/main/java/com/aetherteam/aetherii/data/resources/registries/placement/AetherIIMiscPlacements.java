@@ -66,7 +66,7 @@ public class AetherIIMiscPlacements {
         );
 
         AetherIIPlacementUtils.register(context, AETHER_WATER_SPRING, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_SPRING),
-                CountPlacement.of(30),
+                CountPlacement.of(15),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.aboveBottom(256)),
                 BiomeFilter.biome());
