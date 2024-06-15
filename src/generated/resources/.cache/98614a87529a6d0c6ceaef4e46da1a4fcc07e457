@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-15T20:48:49.2323778	Item Models: aether_ii
+// 1.20.4	2024-06-15T21:49:37.9700746	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -195,6 +195,7 @@ fcf13b0e2fa8560b852be71a17df06fe2f7aadfa assets/aether_ii/models/item/holystone_
 5ea6ea50657574464a43ae19815616413125ae8a assets/aether_ii/models/item/holystone_pickaxe.json
 3bb9d3abdce7adadfae727709e1aa40e9d67b627 assets/aether_ii/models/item/holystone_pillar.json
 b1d7855ec43a99b480d29b4f816f83f143104448 assets/aether_ii/models/item/holystone_pressure_plate.json
+7e4d46b7a9dcfb8b5f363225f934cba7fac379cf assets/aether_ii/models/item/holystone_quartz_ore.json
 452f9a6f53fa2af360143bccda3490bd0c65dff1 assets/aether_ii/models/item/holystone_rock.json
 1aba5cfc455b7f5713acf97910490028e2912348 assets/aether_ii/models/item/holystone_shortsword.json
 0962fb67f453f2184d17164244710d93086a93cd assets/aether_ii/models/item/holystone_shovel.json

@@ -2,9 +2,9 @@
   "type": "minecraft:smelting",
   "category": "misc",
   "cookingtime": 200,
-  "experience": 0.3,
+  "experience": 0.5,
   "ingredient": {
-    "item": "aether_ii:zanite_ore"
+    "item": "aether_ii:holystone_quartz_ore"
   },
-  "result": "aether_ii:zanite_gemstone"
+  "result": "minecraft:quartz"
 }

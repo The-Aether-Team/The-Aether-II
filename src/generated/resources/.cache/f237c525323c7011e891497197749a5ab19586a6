@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-15T20:48:49.2162618	Block States: aether_ii
+// 1.20.4	2024-06-15T21:49:37.9579735	Block States: aether_ii
 09820e9981cbdbe29cb2563890673c61c5abe056 assets/aether_ii/blockstates/aether_dirt.json
 7d216c5fd9f534a8fa3506c2a1aa984edb33c9d7 assets/aether_ii/blockstates/aether_dirt_path.json
 c1a07acd4f67535c61a7eb9a5aee01787c414f7f assets/aether_ii/blockstates/aether_farmland.json
@@ -140,6 +140,7 @@ fe58df8536bce80629c0897b743baac9ae38c32c assets/aether_ii/blockstates/holystone_
 d4edbd0cae58cab95bdae36d737b7f08e4812ce6 assets/aether_ii/blockstates/holystone_keystone.json
 fc35faad20f2af04ea65c44a5301dca1fcc9e1be assets/aether_ii/blockstates/holystone_pillar.json
 b9a4daf2d435e15baedb6df36a73bf462b5373fa assets/aether_ii/blockstates/holystone_pressure_plate.json
+913a3f76c6dbcc2fcf48fd74a166c9cd3db28ef8 assets/aether_ii/blockstates/holystone_quartz_ore.json
 82ade381eb7479e267bebc9078fb75289fd0fb8f assets/aether_ii/blockstates/holystone_rock.json
 a96cf404c9bc739a7318412806329b5ca96d11ff assets/aether_ii/blockstates/holystone_slab.json
 3f63db9b8be75f30effafccdcc21f5c50a8805ed assets/aether_ii/blockstates/holystone_stairs.json
@@ -611,6 +612,7 @@ d7071dcb1f2d10f7528d387c22400dcec7451e1b assets/aether_ii/models/block/holystone
 95dfe7ae940af1e2e1c7630bae9513e7af035a60 assets/aether_ii/models/block/holystone_pillar_horizontal.json
 3a48522bb67b542bd32d27b66107e30689987bd7 assets/aether_ii/models/block/holystone_pressure_plate.json
 594adbe384fe38dbea900190e298d5f5429a0fb3 assets/aether_ii/models/block/holystone_pressure_plate_down.json
+25d8f4ad0a68be65251dacc7b73c02eb09fc42fd assets/aether_ii/models/block/holystone_quartz_ore.json
 ca4e7c411e3566706ba0298c0b8dc7848a11fea0 assets/aether_ii/models/block/holystone_rock_1.json
 2551f3e2523801ef13a61069d028649b46f696cc assets/aether_ii/models/block/holystone_rock_2.json
 8985910f30b1153e1ab21c1baf551cba170422a8 assets/aether_ii/models/block/holystone_rock_3.json

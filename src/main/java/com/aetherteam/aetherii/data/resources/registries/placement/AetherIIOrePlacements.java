@@ -23,6 +23,7 @@ public class AetherIIOrePlacements {
     public static final ResourceKey<PlacedFeature> ORE_ARKENIUM = AetherIIPlacementUtils.createKey("ore_arkenium");
     public static final ResourceKey<PlacedFeature> ORE_GRAVITITE_BURIED = AetherIIPlacementUtils.createKey("ore_gravitite_buried");
     public static final ResourceKey<PlacedFeature> ORE_GRAVITITE = AetherIIPlacementUtils.createKey("ore_gravitite");
+    public static final ResourceKey<PlacedFeature> ORE_HOLYSTONE_QUARTZ = AetherIIPlacementUtils.createKey("ore_holystone_quartz");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -49,5 +50,7 @@ public class AetherIIOrePlacements {
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(72))));
         AetherIIPlacementUtils.register(context, ORE_GRAVITITE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_GRAVITITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-58), VerticalAnchor.aboveBottom(88))));
+        AetherIIPlacementUtils.register(context, ORE_HOLYSTONE_QUARTZ, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_HOLYSTONE_QUARTZ),
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(180))));
     }
 }

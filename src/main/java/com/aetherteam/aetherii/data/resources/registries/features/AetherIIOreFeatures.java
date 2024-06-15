@@ -25,6 +25,7 @@ public class AetherIIOreFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ARKENIUM = AetherIIFeatureUtils.registerKey("ore_arkenium");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE_BURIED = AetherIIFeatureUtils.registerKey("ore_gravitite_buried");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE = AetherIIFeatureUtils.registerKey("ore_gravitite");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HOLYSTONE_QUARTZ = AetherIIFeatureUtils.registerKey("ore_holystone_quartz");
 
     public static final RuleTest HOLYSTONE = new TagMatchTest(AetherIITags.Blocks.HOLYSTONE);
     public static final RuleTest UNDERSHALE = new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get());
@@ -47,6 +48,9 @@ public class AetherIIOreFeatures {
                 OreConfiguration.target(HOLYSTONE, AetherIIBlocks.GRAVITITE_ORE.get().defaultBlockState()),
                 OreConfiguration.target(UNDERSHALE, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get().defaultBlockState())
         );
+        List<OreConfiguration.TargetBlockState> quartz = List.of(
+                OreConfiguration.target(HOLYSTONE, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get().defaultBlockState())
+        );
 
         AetherIIFeatureUtils.register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 32));
         AetherIIFeatureUtils.register(context, ORE_MOSSY_HOLYSTONE, Feature.ORE, new OreConfiguration(HOLYSTONE, AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 64));
@@ -60,5 +64,6 @@ public class AetherIIOreFeatures {
         AetherIIFeatureUtils.register(context, ORE_ARKENIUM, Feature.ORE, new OreConfiguration(arkenium, 5, 0.5F));
         AetherIIFeatureUtils.register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(gravitite, 3, 0.5F));
         AetherIIFeatureUtils.register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 4));
+        AetherIIFeatureUtils.register(context, ORE_HOLYSTONE_QUARTZ, Feature.ORE, new OreConfiguration(quartz, 6));
     }
 }

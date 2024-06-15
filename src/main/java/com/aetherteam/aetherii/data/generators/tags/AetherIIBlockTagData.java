@@ -440,6 +440,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),

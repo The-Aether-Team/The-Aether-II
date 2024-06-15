@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "category": "misc",
   "cookingtime": 100,
-  "experience": 0.7,
+  "experience": 0.3,
   "ingredient": {
     "item": "aether_ii:undershale_zanite_ore"
   },
