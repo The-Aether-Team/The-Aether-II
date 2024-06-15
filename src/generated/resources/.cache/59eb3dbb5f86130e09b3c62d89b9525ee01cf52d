@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-14T20:31:45.9092708	Loot Tables
+// 1.20.4	2024-06-15T20:48:49.2122597	Loot Tables
 b3ac0f837a89ef6292323e16712ccb72b957e765 data/aether_ii/loot_tables/blocks/aether_dirt.json
 d7f44de594f8ec5f788d2f1cab7db1dc937994cb data/aether_ii/loot_tables/blocks/aether_dirt_path.json
 39cf806080593ddf7098072051f768f30246f42f data/aether_ii/loot_tables/blocks/aether_farmland.json
@@ -264,9 +264,13 @@ e021674a654ec1b3ff3b67e31572fe22aabd956e data/aether_ii/loot_tables/blocks/storm
 e5e0ba733b93d85683663de54ff58f60cadf55f0 data/aether_ii/loot_tables/blocks/stripped_skyroot_wood.json
 d4dad081b8c9116fdfc629e167f826b87add5a8d data/aether_ii/loot_tables/blocks/tarabloom.json
 affaaaa736e64e95322f25d01dc9885fbb07a51c data/aether_ii/loot_tables/blocks/undershale.json
+5dec22999842939300c01ace6425b14ba5a6bd28 data/aether_ii/loot_tables/blocks/undershale_ambrosium_ore.json
+803d826b7c0a93d2afcccb7b9a8951940ca6ef36 data/aether_ii/loot_tables/blocks/undershale_arkenium_ore.json
+d7b2dfbece08a55434e7563e5e94014ca1897dc3 data/aether_ii/loot_tables/blocks/undershale_gravitite_ore.json
 3fd23bf37b42323acff84e67449caf354d79dddb data/aether_ii/loot_tables/blocks/undershale_slab.json
 b876f0a4d6dd4f317878e733ac18a0436a79aade data/aether_ii/loot_tables/blocks/undershale_stairs.json
 b1f8642b6674613c2bf351f904f86cafb05c66fb data/aether_ii/loot_tables/blocks/undershale_wall.json
+04ea75fd4596b262164dbd79ca7fd04f11140751 data/aether_ii/loot_tables/blocks/undershale_zanite_ore.json
 8e4906fc2a9a58edf770bf43a7a50df23bc20ee4 data/aether_ii/loot_tables/blocks/white_cloudwool.json
 a3b964567cdc7581975f28ba9ba4acb770550e4a data/aether_ii/loot_tables/blocks/white_cloudwool_carpet.json
 8e9494ea069f1e4d700e17426caa60c1b20734b9 data/aether_ii/loot_tables/blocks/wisproot_base_beam.json

@@ -27,7 +27,10 @@
     [
       "aether_ii:cloudbed"
     ],
-    [],
+    [
+      "aether_ii:aether_water_lake",
+      "aether_ii:aether_water_lake_underground"
+    ],
     [],
     [],
     [],
@@ -43,7 +46,9 @@
       "aether_ii:ore_gravitite"
     ],
     [],
-    [],
+    [
+      "aether_ii:aether_water_spring"
+    ],
     [
       "aether_ii:battleground_wastes_trees",
       "aether_ii:short_grass_patch",
