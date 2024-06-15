@@ -13,10 +13,10 @@ public class GravititeShovelItem extends ShovelItem implements GravititeTool {
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        if (!this.levitateBlock(context)) {
-            return super.useOn(context);
-        } else {
+        if (this.levitateBlock(context)) {
             return InteractionResult.sidedSuccess(context.getLevel().isClientSide());
+        } else {
+            return super.useOn(context);
         }
     }
 }
