@@ -40,18 +40,16 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity> {
         }
         if (blockState.getRenderShape() == RenderShape.MODEL) {
             Level world = floatingBlock.level();
-            if (blockState.getRenderShape() != RenderShape.INVISIBLE) {
-                poseStack.pushPose();
-                BlockPos blockPos = BlockPos.containing(floatingBlock.getX(), floatingBlock.getBoundingBox().maxY, floatingBlock.getZ());
-                poseStack.translate(-0.5, 0.0, -0.5);
-                BlockRenderDispatcher blockRenderDispatcher = Minecraft.getInstance().getBlockRenderer();
-                BakedModel model = blockRenderDispatcher.getBlockModel(blockState);
-                for (RenderType renderType : model.getRenderTypes(blockState, RandomSource.create(blockState.getSeed(floatingBlock.getStartPos())), ModelData.EMPTY)) {
-                    blockRenderDispatcher.getModelRenderer().tesselateBlock(world, model, blockState, blockPos, poseStack, buffer.getBuffer(renderType), false, RandomSource.create(), blockState.getSeed(floatingBlock.getStartPos()), OverlayTexture.NO_OVERLAY, ModelData.EMPTY, renderType);
-                }
-                poseStack.popPose();
-                super.render(floatingBlock, entityYaw, partialTicks, poseStack, buffer, packedLightIn);
+            poseStack.pushPose();
+            BlockPos blockPos = BlockPos.containing(floatingBlock.getX(), floatingBlock.getBoundingBox().maxY, floatingBlock.getZ());
+            poseStack.translate(-0.5, 0.0, -0.5);
+            BlockRenderDispatcher blockRenderDispatcher = Minecraft.getInstance().getBlockRenderer();
+            BakedModel model = blockRenderDispatcher.getBlockModel(blockState);
+            for (RenderType renderType : model.getRenderTypes(blockState, RandomSource.create(blockState.getSeed(floatingBlock.getStartPos())), ModelData.EMPTY)) {
+                blockRenderDispatcher.getModelRenderer().tesselateBlock(world, model, blockState, blockPos, poseStack, buffer.getBuffer(renderType), false, RandomSource.create(), blockState.getSeed(floatingBlock.getStartPos()), OverlayTexture.NO_OVERLAY, ModelData.EMPTY, renderType);
             }
+            poseStack.popPose();
+            super.render(floatingBlock, entityYaw, partialTicks, poseStack, buffer, packedLightIn);
         } else if (this.blockEntityDummy != null) {
             BlockEntityRenderer<BlockEntity> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(this.blockEntityDummy);
             if (renderer != null) {
