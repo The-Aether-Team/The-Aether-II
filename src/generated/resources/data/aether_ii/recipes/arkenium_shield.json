@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "W": {
+      "tag": "aether_ii:plates/arkenium"
+    },
+    "o": {
+      "tag": "aether_ii:rods/skyroot"
+    }
+  },
+  "pattern": [
+    "WoW",
+    "WWW",
+    " W "
+  ],
+  "result": {
+    "item": "aether_ii:arkenium_shield"
+  }
+}

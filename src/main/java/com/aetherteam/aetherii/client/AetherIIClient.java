@@ -11,7 +11,7 @@ import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.combat.AetherCrossbowItem;
+import com.aetherteam.aetherii.item.combat.AetherIICrossbowItem;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -67,14 +67,24 @@ public class AetherIIClient {
         registerCrossbowProperties(AetherIIItems.ZANITE_CROSSBOW.get());
         registerCrossbowProperties(AetherIIItems.ARKENIUM_CROSSBOW.get());
         registerCrossbowProperties(AetherIIItems.GRAVITITE_CROSSBOW.get());
+
+        registerShieldProperties(AetherIIItems.SKYROOT_SHIELD.get());
+        registerShieldProperties(AetherIIItems.HOLYSTONE_SHIELD.get());
+        registerShieldProperties(AetherIIItems.ZANITE_SHIELD.get());
+        registerShieldProperties(AetherIIItems.ARKENIUM_SHIELD.get());
+        registerShieldProperties(AetherIIItems.GRAVITITE_SHIELD.get());
     }
 
     private static void registerCrossbowProperties(Item item) {
         ItemProperties.register(item, new ResourceLocation("pull"), (stack, level, livingEntity, value) ->
-                livingEntity == null ? 0.0F : AetherCrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / (float) AetherCrossbowItem.getCrossbowChargeDuration(stack));
+                livingEntity == null ? 0.0F : AetherIICrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / (float) AetherIICrossbowItem.getCrossbowChargeDuration(stack));
         ItemProperties.register(item, new ResourceLocation("pulling"), (stack, level, livingEntity, value) ->
                 livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
         ItemProperties.register(item, new ResourceLocation("charged"), (stack, level, livingEntity, value) ->
-                AetherCrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+                AetherIICrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+    }
+
+    private static void registerShieldProperties(Item item) {
+        ItemProperties.register(item, new ResourceLocation("blocking"), (stack, level, livingEntity, value) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
     }
 }

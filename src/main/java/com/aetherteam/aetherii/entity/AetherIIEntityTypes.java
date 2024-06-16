@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
+import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.Zephyr;
 import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.projectile.*;
@@ -65,6 +66,10 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<ZephyrSnowball>> ZEPHYR_SNOWBALL = ENTITY_TYPES.register("zephyr_snowball",
             () -> EntityType.Builder.<ZephyrSnowball>of(ZephyrSnowball::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(4).updateInterval(10).build("zephyr_snowball"));
+
+    // Blocks
+    public static final DeferredHolder<EntityType<?>, EntityType<HoveringBlockEntity>> HOVERING_BLOCK = ENTITY_TYPES.register("hovering_block",
+            () -> EntityType.Builder.<HoveringBlockEntity>of(HoveringBlockEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(10).updateInterval(20).build("hovering_block"));
 
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
         // Passive

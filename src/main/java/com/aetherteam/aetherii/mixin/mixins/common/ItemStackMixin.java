@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
 import com.aetherteam.aetherii.item.combat.HammerItem;
 import com.aetherteam.aetherii.item.combat.ShortswordItem;
 import com.aetherteam.aetherii.item.combat.SpearItem;
@@ -30,7 +31,13 @@ import java.util.UUID;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin<E> {
     @Unique
-    private final List<UUID> defaultAttributeUUIDs = List.of(ShortswordItem.BASE_SWEEP_RANGE_UUID, HammerItem.BASE_SHOCK_RANGE_UUID, SpearItem.BASE_STAB_RADIUS_UUID, SpearItem.BASE_STAB_DISTANCE_UUID);
+    private final List<UUID> defaultAttributeUUIDs = List.of(
+            ShortswordItem.BASE_SWEEP_RANGE_UUID,
+            HammerItem.BASE_SHOCK_RANGE_UUID,
+            SpearItem.BASE_STAB_RADIUS_UUID,
+            SpearItem.BASE_STAB_DISTANCE_UUID,
+            AetherIIShieldItem.BASE_SHIELD_STAMINA_REDUCTION_UUID
+    );
 
     @ModifyVariable(method = "getTooltipLines(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/TooltipFlag;)Ljava/util/List;", at = @At("STORE"), ordinal = 0)
     private boolean injected(boolean flag, @Local AttributeModifier attributeModifier) {

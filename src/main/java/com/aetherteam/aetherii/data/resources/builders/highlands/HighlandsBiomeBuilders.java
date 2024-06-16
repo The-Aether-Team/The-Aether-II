@@ -56,7 +56,7 @@ public class HighlandsBiomeBuilders {
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_IRRADIATED, 12000, 24000, true))
-            .ambientParticle(new AmbientParticleSettings(AetherIIParticleTypes.IRRADIATION.get(), 0.00625F))
+            .ambientParticle(new AmbientParticleSettings(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F))
             .build();
     private static final BiomeSpecialEffects AERCLOUD_SEA_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0xecebfc)
@@ -72,6 +72,7 @@ public class HighlandsBiomeBuilders {
     public static Biome flourishingFieldBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.FLOURISHING_FIELD_TREES),
                 temperature, downfall);
@@ -80,6 +81,7 @@ public class HighlandsBiomeBuilders {
     public static Biome verdantWoodsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VERDANT_WOODS_TREES),
                 temperature, downfall);
@@ -88,6 +90,7 @@ public class HighlandsBiomeBuilders {
     public static Biome shroudedForestBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHROUDED_FOREST_TREES),
                 temperature, downfall);
     }
@@ -119,6 +122,7 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.NOISE_LAKE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_QUICKSOIL)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE_UNDERGROUND)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_SCATTERGLASS)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_MOSSY_HOLYSTONE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
@@ -128,8 +132,10 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ARKENIUM)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE_BURIED)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_HOLYSTONE_QUARTZ)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, AetherIIMiscPlacements.SKYROOT_TWIGS)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, AetherIIMiscPlacements.HOLYSTONE_ROCKS)
+                        .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, AetherIIMiscPlacements.AETHER_WATER_SPRING)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
@@ -152,6 +158,7 @@ public class HighlandsBiomeBuilders {
         return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.FERROSITE_PILLAR)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MAGNETIC_SCAR_TREES),
                 temperature, downfall);
     }
@@ -159,6 +166,7 @@ public class HighlandsBiomeBuilders {
     public static Biome turquoiseForestBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.TURQUOISE_FOREST_TREES),
                 temperature, downfall);
@@ -171,6 +179,7 @@ public class HighlandsBiomeBuilders {
     public static Biome violetHighwoodsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VIOLET_HIGHWOODS_TREES),
                 temperature, downfall);
@@ -196,6 +205,7 @@ public class HighlandsBiomeBuilders {
                 builder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_FERROSITE_SAND)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE_UNDERGROUND)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_SCATTERGLASS)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ICESTONE_SMALL)
@@ -204,6 +214,8 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ARKENIUM)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE_BURIED)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_HOLYSTONE_QUARTZ)
+                        .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, AetherIIMiscPlacements.AETHER_WATER_SPRING)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
@@ -221,6 +233,7 @@ public class HighlandsBiomeBuilders {
     public static Biome frigidSierraBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeArcticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.GREATBOA_TREES),
                 temperature, downfall);
     }
@@ -228,6 +241,7 @@ public class HighlandsBiomeBuilders {
     public static Biome enduringWoodlandBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeArcticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.ENDURING_WOODLAND_TREES),
                 temperature, downfall);
@@ -242,6 +256,7 @@ public class HighlandsBiomeBuilders {
     public static Biome sheerTundraBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeArcticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.GREATBOA_TREES),
                 temperature, downfall);
@@ -265,6 +280,8 @@ public class HighlandsBiomeBuilders {
                 builder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.NOISE_LAKE_ARCTIC)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE_UNDERGROUND)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ARCTIC_PACKED_iCE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_SCATTERGLASS)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ICESTONE)
@@ -273,6 +290,7 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ARKENIUM)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE_BURIED)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_HOLYSTONE_QUARTZ)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
@@ -310,6 +328,8 @@ public class HighlandsBiomeBuilders {
                 builder
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE_UNDERGROUND)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_SCATTERGLASS)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ICESTONE_SMALL)
@@ -318,6 +338,8 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ARKENIUM)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE_BURIED)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_HOLYSTONE_QUARTZ)
+                        .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, AetherIIMiscPlacements.AETHER_WATER_SPRING)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
@@ -345,7 +367,20 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1))
                         .build(),
                 generationSettingsBuilder
+                        .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.NOISE_LAKE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.CLOUDBED)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
+                        .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE_UNDERGROUND)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_SCATTERGLASS)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AGIOSITE)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ICESTONE_SMALL)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_AMBROSIUM)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ZANITE)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_ARKENIUM)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE_BURIED)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GRAVITITE)
+                        .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_HOLYSTONE_QUARTZ)
+                        .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, AetherIIMiscPlacements.AETHER_WATER_SPRING)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)

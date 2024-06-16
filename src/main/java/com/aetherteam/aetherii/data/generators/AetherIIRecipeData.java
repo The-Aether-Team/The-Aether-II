@@ -109,6 +109,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy("has_snowball", has(AetherIIItems.ARCTIC_SNOWBALL))
                 .save(consumer);
+        threeByThreePacker(consumer, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.ARCTIC_PACKED_ICE, AetherIIBlocks.ARCTIC_ICE);
 
         this.icestoneFreezable(Blocks.ICE, Blocks.WATER).save(consumer, this.name("icestone_freeze_water"));
         this.icestoneFreezableTag(AetherIIBlocks.ARCTIC_ICE.get(), Blocks.WATER, AetherIITags.Biomes.ARCTIC_ICE).save(consumer, this.name("icestone_freeze_water_to_arctic_ice"));
@@ -519,31 +520,62 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_arkenium", has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(consumer);
 
-        // Weapons
+        // Combat
         this.makeSwordWithTag(AetherIIItems.SKYROOT_SHORTSWORD, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(consumer);
         this.makeHammerWithTag(AetherIIItems.SKYROOT_HAMMER, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(consumer);
         this.makeSpearWithTag(AetherIIItems.SKYROOT_SPEAR, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(consumer);
         this.makeCrossbowWithTag(AetherIIItems.SKYROOT_CROSSBOW, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(consumer);
+        this.makeShieldWithTag(AetherIIItems.SKYROOT_SHIELD, AetherIITags.Items.CRAFTS_SKYROOT_TOOLS, "has_planks").save(consumer);
 
         this.makeSwordWithTag(AetherIIItems.HOLYSTONE_SHORTSWORD, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(consumer);
         this.makeHammerWithTag(AetherIIItems.HOLYSTONE_HAMMER, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(consumer);
         this.makeSpearWithTag(AetherIIItems.HOLYSTONE_SPEAR, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(consumer);
         this.makeCrossbowWithTag(AetherIIItems.HOLYSTONE_CROSSBOW, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(consumer);
+        this.makeShieldWithTag(AetherIIItems.HOLYSTONE_SHIELD, AetherIITags.Items.CRAFTS_HOLYSTONE_TOOLS, "has_stone").save(consumer);
 
         this.makeSwordWithTag(AetherIIItems.ZANITE_SHORTSWORD, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(consumer);
         this.makeHammerWithTag(AetherIIItems.ZANITE_HAMMER, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(consumer);
         this.makeSpearWithTag(AetherIIItems.ZANITE_SPEAR, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(consumer);
-        this.makeCrossbowWithTag(AetherIIItems.ZANITE_CROSSBOW, AetherIITags.Items.GEMS_ZANITE, "has_stone").save(consumer);
+        this.makeCrossbowWithTag(AetherIIItems.ZANITE_CROSSBOW, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(consumer);
+        this.makeShieldWithTag(AetherIIItems.ZANITE_SHIELD, AetherIITags.Items.GEMS_ZANITE, "has_zanite").save(consumer);
 
         this.makeSwordWithTag(AetherIIItems.ARKENIUM_SHORTSWORD, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(consumer);
         this.makeHammerWithTag(AetherIIItems.ARKENIUM_HAMMER, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(consumer);
         this.makeSpearWithTag(AetherIIItems.ARKENIUM_SPEAR, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(consumer);
         this.makeCrossbowWithTag(AetherIIItems.ARKENIUM_CROSSBOW, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(consumer);
+        this.makeShieldWithTag(AetherIIItems.ARKENIUM_SHIELD, AetherIITags.Items.PLATES_ARKENIUM, "has_arkenium").save(consumer);
 
         this.makeSwordWithTag(AetherIIItems.GRAVITITE_SHORTSWORD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
         this.makeHammerWithTag(AetherIIItems.GRAVITITE_HAMMER, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
         this.makeSpearWithTag(AetherIIItems.GRAVITITE_SPEAR, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
         this.makeCrossbowWithTag(AetherIIItems.GRAVITITE_CROSSBOW, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
+        this.makeShieldWithTag(AetherIIItems.GRAVITITE_SHIELD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
+
+        // Armor
+        this.makeHelmet(AetherIIItems.TAEGORE_HIDE_HELMET, AetherIIItems.TAEGORE_HIDE).save(consumer);
+        this.makeChestplate(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, AetherIIItems.TAEGORE_HIDE).save(consumer);
+        this.makeLeggings(AetherIIItems.TAEGORE_HIDE_LEGGINGS, AetherIIItems.TAEGORE_HIDE).save(consumer);
+        this.makeBoots(AetherIIItems.TAEGORE_HIDE_BOOTS, AetherIIItems.TAEGORE_HIDE).save(consumer);
+
+        this.makeHelmet(AetherIIItems.BURRUKAI_PELT_HELMET, AetherIIItems.BURRUKAI_PELT).save(consumer);
+        this.makeChestplate(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, AetherIIItems.BURRUKAI_PELT).save(consumer);
+        this.makeLeggings(AetherIIItems.BURRUKAI_PELT_LEGGINGS, AetherIIItems.BURRUKAI_PELT).save(consumer);
+        this.makeBoots(AetherIIItems.BURRUKAI_PELT_BOOTS, AetherIIItems.BURRUKAI_PELT).save(consumer);
+
+        this.makeHelmetWithTag(AetherIIItems.ZANITE_HELMET, AetherIITags.Items.GEMS_ZANITE, "zanite").save(consumer);
+        this.makeChestplateWithTag(AetherIIItems.ZANITE_CHESTPLATE, AetherIITags.Items.GEMS_ZANITE, "zanite").save(consumer);
+        this.makeLeggingsWithTag(AetherIIItems.ZANITE_LEGGINGS, AetherIITags.Items.GEMS_ZANITE, "zanite").save(consumer);
+        this.makeBootsWithTag(AetherIIItems.ZANITE_BOOTS, AetherIITags.Items.GEMS_ZANITE, "zanite").save(consumer);
+
+        this.makeHelmetWithTag(AetherIIItems.ARKENIUM_HELMET, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(consumer);
+        this.makeChestplateWithTag(AetherIIItems.ARKENIUM_CHESTPLATE, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(consumer);
+        this.makeLeggingsWithTag(AetherIIItems.ARKENIUM_LEGGINGS, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(consumer);
+        this.makeBootsWithTag(AetherIIItems.ARKENIUM_BOOTS, AetherIITags.Items.PLATES_ARKENIUM, "arkenium").save(consumer);
+
+        this.makeHelmetWithTag(AetherIIItems.GRAVITITE_HELMET, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(consumer);
+        this.makeChestplateWithTag(AetherIIItems.GRAVITITE_CHESTPLATE, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(consumer);
+        this.makeLeggingsWithTag(AetherIIItems.GRAVITITE_LEGGINGS, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(consumer);
+        this.makeBootsWithTag(AetherIIItems.GRAVITITE_BOOTS, AetherIITags.Items.PLATES_GRAVITITE, "gravitite").save(consumer);
 
         // Foods
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_BLUEBERRY, AetherIIItems.BLUEBERRY, 2, 0.0F).save(consumer);
@@ -573,12 +605,24 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
                 .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
                 .save(consumer);
-        this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).save(consumer, this.name("ambrosium_shard_from_smelting"));
-        this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).save(consumer, this.name("ambrosium_shard_from_blasting"));
-        this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.7F).save(consumer, this.name("zanite_gemstone_from_smelting"));
-        this.blastingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.7F).save(consumer, this.name("zanite_gemstone_from_blasting"));
-        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES, AetherIIItems.INERT_ARKENIUM, 4, 0.0F).save(consumer);
-        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIItems.INERT_GRAVITITE, 8, 0.0F).save(consumer);
+        this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(consumer, this.name("ambrosium_shard_from_smelting"));
+        this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(consumer, this.name("ambrosium_shard_from_blasting"));
+        this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(consumer, this.name("ambrosium_shard_from_smelting_undershale_ambrosium_ore"));
+        this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(consumer, this.name("ambrosium_shard_from_blasting_undershale_ambrosium_ore"));
+        this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.3F).group("zanite").save(consumer, this.name("zanite_gemstone_from_smelting"));
+        this.blastingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.ZANITE_ORE.get(), 0.3F).group("zanite").save(consumer, this.name("zanite_gemstone_from_blasting"));
+        this.smeltingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), 0.3F).group("zanite").save(consumer, this.name("zanite_gemstone_from_smelting_undershale_zanite_ore"));
+        this.blastingOreRecipe(AetherIIItems.ZANITE_GEMSTONE.get(), AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), 0.3F).group("zanite").save(consumer, this.name("zanite_gemstone_from_blasting_undershale_zanite_ore"));
+        this.smeltingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(consumer, this.name("quartz_from_smelting_holystone_quartz_ore"));
+        this.blastingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(consumer, this.name("quartz_from_blasting_holystone_quartz_ore"));
+
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES, AetherIIItems.INERT_ARKENIUM, 4, 0.0F).group("arkenium").save(consumer);
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES, AetherIIBlocks.ARKENIUM_ORE, 4, 0.0F).group("arkenium").save(consumer, this.name("arkenium_plates_from_arkenium_ore"));
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ARKENIUM_PLATES, AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, 4, 0.0F).group("arkenium").save(consumer, this.name("arkenium_plates_from_undershale_arkenium_ore"));
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIItems.INERT_GRAVITITE, 8, 0.0F).group("gravitite").save(consumer);
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_gravitite_ore"));
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_undershale_gravitite_ore"));
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WHITE_DYE)
                 .group("white_dye")
                 .requires(AetherIIBlocks.HESPEROSE.get())

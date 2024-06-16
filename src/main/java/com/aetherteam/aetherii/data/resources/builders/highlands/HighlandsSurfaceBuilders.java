@@ -34,7 +34,7 @@ public class HighlandsSurfaceBuilders {
                         SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, AETHER_DIRT)),
 
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(64), VerticalAnchor.absolute(72)), UNDERSHALE)
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(80), VerticalAnchor.absolute(88)), UNDERSHALE)
         );
     }
 }
