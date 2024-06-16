@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-16T10:39:10.6657042	Item Models: aether_ii
+// 1.20.4	2024-06-16T21:29:53.0213391	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -521,6 +521,7 @@ ed0169044237b43b5efcbee34addb6e16627be4e assets/aether_ii/models/item/taegore_hi
 fcfb9ff8aef1ce993178b569be37c671ea80a36f assets/aether_ii/models/item/taegore_hide_leggings_redstone_trim.json
 c4dfd109a4a444957a73b8095e97a39112feb8f1 assets/aether_ii/models/item/taegore_steak.json
 ae57a44be1865132e2fdddbf292371ba468994ed assets/aether_ii/models/item/tarabloom.json
+8686bf8aa5f3bb28d857de14e59b3c8bdd1bc270 assets/aether_ii/models/item/thunderball.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json
 bb44b9049215b5abe25a9c3c5778648530829a51 assets/aether_ii/models/item/undershale_ambrosium_ore.json
 4a0d6dd440a3deb43a5c0c2c60092d71e6a48b45 assets/aether_ii/models/item/undershale_arkenium_ore.json

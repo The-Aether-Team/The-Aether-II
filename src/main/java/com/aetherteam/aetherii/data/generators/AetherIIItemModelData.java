@@ -163,6 +163,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUEBERRY_MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.ENCHANTED_MOA_FEED.get(), "miscellaneous/");
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
+        this.item(AetherIIItems.THUNDERBALL.get(), "miscellaneous/");
 
         // Blocks
         // Dirt
