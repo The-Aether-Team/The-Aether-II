@@ -171,7 +171,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.slab(AetherIIBlocks.SKYROOT_SLAB.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.fence(AetherIIBlocks.SKYROOT_FENCE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
         this.fenceGateBlock(AetherIIBlocks.SKYROOT_FENCE_GATE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), "construction/");
-        this.doorBlock(AetherIIBlocks.SKYROOT_DOOR.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_DOOR.get()), "construction/", "_bottom"), this.texture(this.name(AetherIIBlocks.SKYROOT_DOOR.get()), "construction/", "_top"));
+        this.doorBlock(AetherIIBlocks.SKYROOT_DOOR.get());
         this.trapdoorBlock(AetherIIBlocks.SKYROOT_TRAPDOOR.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_TRAPDOOR.get()), "construction/"), true);
         this.buttonBlock(AetherIIBlocks.SKYROOT_BUTTON.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_PLANKS.get()), "construction/"));
         this.pressurePlateBlock(AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(), this.texture(this.name(AetherIIBlocks.SKYROOT_PLANKS.get()), "construction/"));
@@ -195,7 +195,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.slab(AetherIIBlocks.GREATROOT_SLAB.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.fence(AetherIIBlocks.GREATROOT_FENCE.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
         this.fenceGateBlock(AetherIIBlocks.GREATROOT_FENCE_GATE.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), "construction/");
-        this.doorBlock(AetherIIBlocks.GREATROOT_DOOR.get(), texture(name(AetherIIBlocks.GREATROOT_DOOR.get()), "construction/", "_bottom"), texture(name(AetherIIBlocks.GREATROOT_DOOR.get()), "construction/", "_top"));
+        this.doorBlock(AetherIIBlocks.GREATROOT_DOOR.get());
         this.trapdoorBlock(AetherIIBlocks.GREATROOT_TRAPDOOR.get(), texture(name(AetherIIBlocks.GREATROOT_TRAPDOOR.get()), "construction/"), true);
         this.buttonBlock(AetherIIBlocks.GREATROOT_BUTTON.get(), this.texture(this.name(AetherIIBlocks.GREATROOT_PLANKS.get()), "construction/"));
         this.pressurePlateBlock(AetherIIBlocks.GREATROOT_PRESSURE_PLATE.get(), this.texture(this.name(AetherIIBlocks.GREATROOT_PLANKS.get()), "construction/"));
@@ -219,7 +219,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.slab(AetherIIBlocks.WISPROOT_SLAB.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
         this.fence(AetherIIBlocks.WISPROOT_FENCE.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
         this.fenceGateBlock(AetherIIBlocks.WISPROOT_FENCE_GATE.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), "construction/");
-        this.doorBlock(AetherIIBlocks.WISPROOT_DOOR.get(), texture(name(AetherIIBlocks.WISPROOT_DOOR.get()), "construction/", "_bottom"), texture(name(AetherIIBlocks.WISPROOT_DOOR.get()), "construction/", "_top"));
+        this.doorBlock(AetherIIBlocks.WISPROOT_DOOR.get());
         this.trapdoorBlock(AetherIIBlocks.WISPROOT_TRAPDOOR.get(), texture(name(AetherIIBlocks.WISPROOT_TRAPDOOR.get()), "construction/"), true);
         this.buttonBlock(AetherIIBlocks.WISPROOT_BUTTON.get(), this.texture(this.name(AetherIIBlocks.WISPROOT_PLANKS.get()), "construction/"));
         this.pressurePlateBlock(AetherIIBlocks.WISPROOT_PRESSURE_PLATE.get(), this.texture(this.name(AetherIIBlocks.WISPROOT_PLANKS.get()), "construction/"));
@@ -391,7 +391,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get(), AetherIIBlocks.BLACK_CLOUDWOOL.get(),"construction/");
 
         // Arkenium Blocks
-        this.doorBlock(AetherIIBlocks.ARKENIUM_DOOR.get(), this.texture(this.name(AetherIIBlocks.ARKENIUM_DOOR.get()), "construction/", "_bottom"), this.texture(this.name(AetherIIBlocks.ARKENIUM_DOOR.get()), "construction/", "_top"));
+        this.doorBlock(AetherIIBlocks.ARKENIUM_DOOR.get());
         this.trapdoorBlock(AetherIIBlocks.ARKENIUM_TRAPDOOR.get(), this.texture(this.name(AetherIIBlocks.ARKENIUM_TRAPDOOR.get()), "construction/"), true);
 
         // Mineral Blocks
