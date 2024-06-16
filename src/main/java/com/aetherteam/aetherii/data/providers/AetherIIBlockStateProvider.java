@@ -601,19 +601,19 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     private void doorBlockInternalWithRenderType(DoorBlock block, String baseName, ResourceLocation renderType) {
-        ModelFile bottomLeft = this.door(baseName + "_bottom_left", "door_bottom_left").renderType(renderType);
-        ModelFile bottomLeftOpen = this.door(baseName + "_bottom_left_open", "door_bottom_left_open").renderType(renderType);
-        ModelFile bottomRight = this.door(baseName + "_bottom_right", "door_bottom_right").renderType(renderType);
-        ModelFile bottomRightOpen = this.door(baseName + "_bottom_right_open", "door_bottom_right_open").renderType(renderType);
-        ModelFile topLeft = this.door(baseName + "_top_left", "door_top_left").renderType(renderType);
-        ModelFile topLeftOpen = this.door(baseName + "_top_left_open", "door_top_left_open").renderType(renderType);
-        ModelFile topRight = this.door(baseName + "_top_right", "door_top_right").renderType(renderType);
-        ModelFile topRightOpen = this.door(baseName + "_top_right_open", "door_top_right_open").renderType(renderType);
+        ModelFile bottomLeft = this.door(block, baseName + "_bottom_left", "door_bottom_left").renderType(renderType);
+        ModelFile bottomLeftOpen = this.door(block, baseName + "_bottom_left_open", "door_bottom_left_open").renderType(renderType);
+        ModelFile bottomRight = this.door(block, baseName + "_bottom_right", "door_bottom_right").renderType(renderType);
+        ModelFile bottomRightOpen = this.door(block, baseName + "_bottom_right_open", "door_bottom_right_open").renderType(renderType);
+        ModelFile topLeft = this.door(block, baseName + "_top_left", "door_top_left").renderType(renderType);
+        ModelFile topLeftOpen = this.door(block, baseName + "_top_left_open", "door_top_left_open").renderType(renderType);
+        ModelFile topRight = this.door(block, baseName + "_top_right", "door_top_right").renderType(renderType);
+        ModelFile topRightOpen = this.door(block, baseName + "_top_right_open", "door_top_right_open").renderType(renderType);
         this.doorBlock(block, bottomLeft, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen);
     }
 
-    private BlockModelBuilder door(String name, String model) {
-        return this.models().withExistingParent(name,  this.modLoc("block/" + model)).texture("door", this.texture(this.name(AetherIIBlocks.SKYROOT_DOOR.get()), "construction/")).texture("bottom", this.texture(this.name(AetherIIBlocks.SKYROOT_DOOR.get()), "construction/", "_bottom")).texture("top", this.texture(this.name(AetherIIBlocks.SKYROOT_DOOR.get()), "construction/", "_top"));
+    private BlockModelBuilder door(DoorBlock block, String name, String model) {
+        return this.models().withExistingParent(name,  this.modLoc("block/" + model)).texture("door", this.texture(this.name(block), "construction/")).texture("bottom", this.texture(this.name(block), "construction/", "_bottom")).texture("top", this.texture(this.name(block), "construction/", "_top"));
     }
 
     public void crudeScatterglassPane(IronBarsBlock block, HalfTransparentBlock glass, String location) {
