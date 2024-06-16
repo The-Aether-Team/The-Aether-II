@@ -2,6 +2,8 @@
   "aether_ii.tooltip.item.damage.impact": "§eImpact§r Damage",
   "aether_ii.tooltip.item.damage.pierce": "§cPierce§r Damage",
   "aether_ii.tooltip.item.damage.slash": "§9Slash§r Damage",
+  "attributes.aether_ii.shield_stamina_reduction": "Block Reduction Rate",
+  "attributes.aether_ii.shield_stamina_restoration": "Block Restoration Rate",
   "attributes.aether_ii.shock_damage": "Shock Damage",
   "attributes.aether_ii.shock_knockback": "Shock Knockback",
   "attributes.aether_ii.shock_range": "Shock Range",

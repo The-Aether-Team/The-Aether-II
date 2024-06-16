@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.DamageSystemAttachment;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
@@ -25,7 +24,7 @@ public class ItemCooldownsMixin implements ItemCooldownsWrapper {
         if (item.getDefaultInstance().is(Tags.Items.TOOLS_SHIELDS)) {
             if (!this.player.level().isClientSide()) {
                 DamageSystemAttachment attachment = this.player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                attachment.setSynched(this.player.getId(), INBTSynchable.Direction.CLIENT, "setBlockStatus", DamageSystemAttachment.MAX_BLOCK_STATUS);
+                attachment.setSynched(this.player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", DamageSystemAttachment.MAX_SHIELD_STAMINA);
             }
         }
     }

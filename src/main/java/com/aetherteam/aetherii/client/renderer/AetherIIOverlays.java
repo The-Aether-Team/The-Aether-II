@@ -122,12 +122,14 @@ public class AetherIIOverlays {
     }
 
     private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player, ExtendedGui gui, int screenWidth, int screenHeight) {
-        Options options = minecraft.options;
+        Options options = minecraft.options; //todo visual for broken shield restoring to full shield using cooldown counter.
         if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
+            DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+            boolean missingStamina = attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA;
             boolean holdingShield = player.getOffhandItem().is(Tags.Items.TOOLS_SHIELDS) || player.getMainHandItem().is(Tags.Items.TOOLS_SHIELDS);
-            if (holdingShield) {
-                DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                float f = attachment.getBlockStatus() / (float) DamageSystemAttachment.MAX_BLOCK_STATUS;
+            boolean displayIndicator = player.isBlocking() || (holdingShield && missingStamina);
+            if (displayIndicator) {
+                float f = attachment.getShieldStamina() / (float) DamageSystemAttachment.MAX_SHIELD_STAMINA;
                 if (options.attackIndicator().get() == AttackIndicatorStatus.CROSSHAIR) {
                     if (options.getCameraType().isFirstPerson()) {
                         if (!gui.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {

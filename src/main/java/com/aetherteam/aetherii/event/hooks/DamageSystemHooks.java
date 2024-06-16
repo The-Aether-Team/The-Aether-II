@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
@@ -24,7 +25,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -188,18 +188,33 @@ public class DamageSystemHooks {
         }
     }
 
-    public static void buildUpShieldBreak(LivingEntity entity, DamageSource source) {
+    public static void buildUpShieldStun(LivingEntity entity, DamageSource source) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELDS)) {
-            if (source.getEntity() != null && source.getEntity().getType() == EntityType.ZOMBIE) {
+            if (source.getEntity() != null) { //todo check for aether hostile mobs only or something idk
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                int breakIncrement = DamageSystemAttachment.MAX_BLOCK_STATUS / 2; //todo balance
+                int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
                 if (entity.getUseItem().getItem() instanceof AetherIIShieldItem shield) {
-                    breakIncrement = shield.getBreakIncrement();
+                    rate = shield.getStaminaReductionRate();
                 }
-                attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setBlockStatus", Math.max(0, attachment.getBlockStatus() - breakIncrement));
-                if (attachment.getBlockStatus() <= 0) {
+                attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, attachment.getShieldStamina() - rate));
+                if (attachment.getShieldStamina() <= 0) {
                     player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELDS).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300));
                     player.stopUsingItem();
+                }
+            }
+        }
+    }
+
+    public static void restoreShieldStamina(Player player) {
+        if (!player.level().isClientSide()) {
+            DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+            if (player.tickCount % 10 == 0) {
+                if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
+                    int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.get());
+                    if (player.isBlocking()) {
+                        restore /= 2;
+                    }
+                    attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + restore));
                 }
             }
         }

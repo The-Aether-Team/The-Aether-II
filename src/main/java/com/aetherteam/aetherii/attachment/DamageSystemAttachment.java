@@ -10,12 +10,12 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class DamageSystemAttachment implements INBTSynchable {
-    public static final int MAX_BLOCK_STATUS = 500;
+    public static final int MAX_SHIELD_STAMINA = 500;
     private float criticalDamageModifier = 1.0F;
-    private int blockStatus = MAX_BLOCK_STATUS;
+    private int shieldStamina = MAX_SHIELD_STAMINA;
 
     private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
-            Map.entry("setBlockStatus", Triple.of(Type.INT, (object) -> this.setBlockStatus((int) object), this::getBlockStatus))
+            Map.entry("setShieldStamina", Triple.of(Type.INT, (object) -> this.setShieldStamina((int) object), this::getShieldStamina))
     );
 
     public DamageSystemAttachment() { }
@@ -32,12 +32,12 @@ public class DamageSystemAttachment implements INBTSynchable {
         return this.criticalDamageModifier;
     }
 
-    public void setBlockStatus(int blockStatus) {
-        this.blockStatus = blockStatus;
+    public void setShieldStamina(int shieldStamina) {
+        this.shieldStamina = shieldStamina;
     }
 
-    public int getBlockStatus() {
-        return this.blockStatus;
+    public int getShieldStamina() {
+        return this.shieldStamina;
     }
 
     @Override

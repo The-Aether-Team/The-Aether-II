@@ -649,6 +649,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.STAB_DISTANCE.get(), "Stab Distance");
         this.addAttribute(AetherIIAttributes.STAB_KNOCKBACK.get(), "Stab Knockback");
         this.addAttribute(AetherIIAttributes.STAB_DAMAGE.get(), "Stab Damage");
+        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.get(), "Block Reduction Rate");
+        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.get(), "Block Restoration Rate");
 
 
         // Effects
