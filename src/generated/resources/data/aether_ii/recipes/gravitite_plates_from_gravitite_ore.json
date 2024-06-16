@@ -3,8 +3,9 @@
   "category": "misc",
   "experience": 0.0,
   "fuel_count": 8,
+  "group": "gravitite",
   "ingredient": {
-    "item": "aether_ii:inert_gravitite"
+    "item": "aether_ii:gravitite_ore"
   },
   "processing_time": 200,
   "result": "aether_ii:gravitite_plate"

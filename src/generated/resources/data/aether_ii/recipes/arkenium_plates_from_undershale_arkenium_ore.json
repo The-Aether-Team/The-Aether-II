@@ -3,8 +3,9 @@
   "category": "misc",
   "experience": 0.0,
   "fuel_count": 4,
+  "group": "arkenium",
   "ingredient": {
-    "item": "aether_ii:inert_arkenium"
+    "item": "aether_ii:undershale_arkenium_ore"
   },
   "processing_time": 200,
   "result": "aether_ii:arkenium_plates"

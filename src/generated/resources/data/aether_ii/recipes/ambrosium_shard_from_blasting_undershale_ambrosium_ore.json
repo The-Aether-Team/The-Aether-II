@@ -3,6 +3,7 @@
   "category": "misc",
   "cookingtime": 100,
   "experience": 0.1,
+  "group": "ambrosium",
   "ingredient": {
     "item": "aether_ii:undershale_ambrosium_ore"
   },
