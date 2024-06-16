@@ -12,9 +12,11 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
 public class AetherIIMiscPlacements {
@@ -23,6 +25,9 @@ public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = AetherIIPlacementUtils.createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = AetherIIPlacementUtils.createKey("noise_lake_arctic");
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = AetherIIPlacementUtils.createKey("ferrosite_pillar");
+    public static final ResourceKey<PlacedFeature> AETHER_WATER_LAKE = AetherIIPlacementUtils.createKey("aether_water_lake");
+    public static final ResourceKey<PlacedFeature> AETHER_WATER_LAKE_UNDERGROUND = AetherIIPlacementUtils.createKey("aether_water_lake_underground");
+    public static final ResourceKey<PlacedFeature> AETHER_WATER_SPRING = AetherIIPlacementUtils.createKey("aether_water_spring");
     public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = AetherIIPlacementUtils.createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = AetherIIPlacementUtils.createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> MOA_NEST = AetherIIPlacementUtils.createKey("moa_nest");
@@ -33,6 +38,7 @@ public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> PURPLE_AERCLOUD = AetherIIPlacementUtils.createKey("purple_aercloud");
     public static final ResourceKey<PlacedFeature> STORM_AERCLOUD = AetherIIPlacementUtils.createKey("storm_aercloud");
     public static final ResourceKey<PlacedFeature> CLOUDBED = AetherIIPlacementUtils.createKey("cloudbed");
+    public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_ARCTIC = AetherIIPlacementUtils.createKey("freeze_top_layer_arctic");
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
@@ -63,12 +69,28 @@ public class AetherIIMiscPlacements {
                 BiomeFilter.biome()
         );
 
+        AetherIIPlacementUtils.register(context, AETHER_WATER_LAKE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_LAKE),
+                RarityFilter.onAverageOnceEvery(25),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BiomeFilter.biome());
+        AetherIIPlacementUtils.register(context, AETHER_WATER_LAKE_UNDERGROUND, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_LAKE),
+                RarityFilter.onAverageOnceEvery(15),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(0), VerticalAnchor.top())),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.not(BlockPredicate.ONLY_IN_AIR_PREDICATE), BlockPredicate.insideWorld(new BlockPos(0, -5, 0))), 16),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5),
+                InSquarePlacement.spread(),
+                BiomeFilter.biome());
+        AetherIIPlacementUtils.register(context, AETHER_WATER_SPRING, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_SPRING),
+                CountPlacement.of(15),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.aboveBottom(256)),
+                BiomeFilter.biome());
+
         AetherIIPlacementUtils.register(context, SKYROOT_TWIGS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.SKYROOT_TWIGS),
                 NoiseThresholdCountPlacement.of(-0.8, 1, 2),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
                 BiomeFilter.biome());
-
         AetherIIPlacementUtils.register(context, HOLYSTONE_ROCKS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.HOLYSTONE_ROCKS),
                 NoiseThresholdCountPlacement.of(-0.8, 1, 2),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
@@ -85,6 +107,7 @@ public class AetherIIMiscPlacements {
         );
 
         AetherIIPlacementUtils.register(context, CLOUDBED, configuredFeatures.getOrThrow(AetherIIMiscFeatures.CLOUDBED), BiomeFilter.biome());
+        AetherIIPlacementUtils.register(context, FREEZE_TOP_LAYER_ARCTIC, configuredFeatures.getOrThrow(AetherIIMiscFeatures.FREEZE_TOP_LAYER_ARCTIC), BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, COLD_AERCLOUD, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COLD_AERCLOUD), AetherIIPlacementBuilders.aercloudPlacement(32, 256, 12));
         AetherIIPlacementUtils.register(context, BLUE_AERCLOUD, configuredFeatures.getOrThrow(AetherIIMiscFeatures.BLUE_AERCLOUD), AetherIIPlacementBuilders.aercloudPlacement(32, 256, 28));

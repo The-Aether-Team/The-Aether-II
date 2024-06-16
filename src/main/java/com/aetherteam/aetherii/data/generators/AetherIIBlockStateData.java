@@ -54,6 +54,11 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.ZANITE_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ARKENIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.GRAVITITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(), "natural/");
 
         // Aerclouds
         this.aercloudAll(AetherIIBlocks.COLD_AERCLOUD.get(), "natural/");
@@ -105,7 +110,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         // Saplings
         this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.SKYPLANE_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.SKYBIRCH_SAPLING.get(), "natural/");
+        this.saplingBlock(AetherIIBlocks.SKYPINE_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.saplingBlock(AetherIIBlocks.GREATROOT_SAPLING.get(), "natural/");
@@ -115,7 +122,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         // Potted Saplings
         this.pottedPlant(AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(), AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_SKYPLANE_SAPLING.get(), AetherIIBlocks.SKYPLANE_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_SKYBIRCH_SAPLING.get(), AetherIIBlocks.SKYBIRCH_SAPLING.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_SKYPINE_SAPLING.get(), AetherIIBlocks.SKYPINE_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_WISPROOT_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_WISPTOP_SAPLING.get(), AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_GREATROOT_SAPLING.get(), AetherIIBlocks.GREATROOT_LEAVES.get(), "natural/");

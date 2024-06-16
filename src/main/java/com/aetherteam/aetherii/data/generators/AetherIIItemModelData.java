@@ -42,7 +42,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         this.handheldItem(AetherIIItems.ARKENIUM_SHEARS.get(), "tools/");
 
-        // Weapons
+        // Combat
         this.handheldItem(AetherIIItems.SKYROOT_SHORTSWORD.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_HAMMER.get(), "weapons/");
         this.handheldItem(AetherIIItems.SKYROOT_SPEAR.get(), "weapons/");
@@ -69,6 +69,32 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.crossbowItem(AetherIIItems.GRAVITITE_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
+
+        // Armor
+        this.helmetItem(AetherIIItems.TAEGORE_HIDE_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), "armor/");
+
+        this.helmetItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), "armor/");
+
+        this.helmetItem(AetherIIItems.ZANITE_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.ZANITE_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.ZANITE_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.ZANITE_BOOTS.get(), "armor/");
+
+        this.helmetItem(AetherIIItems.ARKENIUM_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.ARKENIUM_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.ARKENIUM_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.ARKENIUM_BOOTS.get(), "armor/");
+
+        this.helmetItem(AetherIIItems.GRAVITITE_HELMET.get(), "armor/");
+        this.chestplateItem(AetherIIItems.GRAVITITE_CHESTPLATE.get(), "armor/");
+        this.leggingsItem(AetherIIItems.GRAVITITE_LEGGINGS.get(), "armor/");
+        this.bootsItem(AetherIIItems.GRAVITITE_BOOTS.get(), "armor/");
 
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
@@ -177,6 +203,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());
         this.itemBlock(AetherIIBlocks.ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
 
         // Aerclouds
         this.aercloudItem(AetherIIBlocks.COLD_AERCLOUD.get());
@@ -228,7 +259,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Saplings
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.SKYPLANE_SAPLING.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.SKYBIRCH_SAPLING.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.SKYPINE_SAPLING.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.WISPROOT_SAPLING.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.WISPTOP_SAPLING.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.GREATROOT_SAPLING.get(), "natural/");

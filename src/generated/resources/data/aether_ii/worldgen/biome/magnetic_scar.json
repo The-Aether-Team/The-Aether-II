@@ -23,7 +23,10 @@
       "aether_ii:coast_ferrosite_sand",
       "aether_ii:cloudbed"
     ],
-    [],
+    [
+      "aether_ii:aether_water_lake",
+      "aether_ii:aether_water_lake_underground"
+    ],
     [],
     [],
     [],
@@ -36,10 +39,13 @@
       "aether_ii:ore_zanite",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
-      "aether_ii:ore_gravitite"
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz"
     ],
     [],
-    [],
+    [
+      "aether_ii:aether_water_spring"
+    ],
     [
       "aether_ii:magnetic_scar_trees",
       "aether_ii:short_grass_patch",

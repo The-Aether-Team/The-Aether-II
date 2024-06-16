@@ -11,7 +11,7 @@
     "when_in_range": {
       "type": "minecraft:range_choice",
       "input": "aether_ii:highlands/vegetation_rare",
-      "max_exclusive": 0.35,
+      "max_exclusive": 0.375,
       "min_inclusive": 0.0,
       "when_in_range": "aether_ii:highlands/vegetation",
       "when_out_of_range": 2.0

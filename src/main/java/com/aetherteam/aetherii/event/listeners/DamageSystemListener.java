@@ -4,10 +4,13 @@ import com.aetherteam.aetherii.event.hooks.DamageSystemHooks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.TickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.entity.living.ShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
@@ -18,6 +21,8 @@ public class DamageSystemListener {
         bus.addListener(DamageSystemListener::criticalHitTracking);
         bus.addListener(DamageSystemListener::hurtWithDamageTypes);
         bus.addListener(DamageSystemListener::applyDamageTypeTooltips);
+        bus.addListener(DamageSystemListener::blockIncomingAttack);
+        bus.addListener(DamageSystemListener::tickPlayer);
     }
 
     public static void criticalHitTracking(CriticalHitEvent event) {
@@ -40,5 +45,16 @@ public class DamageSystemListener {
         DamageSystemHooks.addAbilityTooltips(itemStack, itemTooltips);
         DamageSystemHooks.addDamageTypeTooltips(player, itemTooltips, itemStack);
         DamageSystemHooks.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
+    }
+
+    public static void blockIncomingAttack(ShieldBlockEvent event) {
+        LivingEntity livingEntity = event.getEntity();
+        DamageSource source = event.getDamageSource();
+        DamageSystemHooks.buildUpShieldStun(livingEntity, source);
+    }
+
+    public static void tickPlayer(TickEvent.PlayerTickEvent event) {
+        Player player = event.player;
+        DamageSystemHooks.restoreShieldStamina(player);
     }
 }

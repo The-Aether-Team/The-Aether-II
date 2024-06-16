@@ -12,6 +12,7 @@ import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -138,6 +139,20 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("/#/")
                 .pattern("C#C")
                 .pattern(" / ")
+                .unlockedBy(has, has(material));
+    }
+
+    protected ShapedRecipeBuilder makeShieldWithTag(Supplier<? extends Item> shield, TagKey<Item> material, String has) {
+        return this.makeShieldWithTag(shield, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+    }
+
+    protected ShapedRecipeBuilder makeShieldWithTag(Supplier<? extends Item> shield, TagKey<Item> material, Ingredient sticks, String has) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, shield.get())
+                .define('W', material)
+                .define('o', sticks)
+                .pattern("WoW")
+                .pattern("WWW")
+                .pattern(" W ")
                 .unlockedBy(has, has(material));
     }
 

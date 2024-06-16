@@ -16,9 +16,9 @@
       }
     },
     "lava_level": {
-      "above_bottom": 8
+      "above_bottom": -64
     },
-    "probability": 0.15,
+    "probability": 0.175,
     "replaceable": "#aether_ii:aether_carver_replaceables",
     "vertical_radius_multiplier": {
       "type": "minecraft:uniform",
