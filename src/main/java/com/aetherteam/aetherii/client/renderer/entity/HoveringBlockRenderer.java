@@ -40,7 +40,7 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity> {
         }
         if (blockState.getRenderShape() == RenderShape.MODEL) {
             Level world = floatingBlock.level();
-            if (blockState != world.getBlockState(floatingBlock.blockPosition()) && blockState.getRenderShape() != RenderShape.INVISIBLE) {
+            if (blockState.getRenderShape() != RenderShape.INVISIBLE) {
                 poseStack.pushPose();
                 BlockPos blockPos = BlockPos.containing(floatingBlock.getX(), floatingBlock.getBoundingBox().maxY, floatingBlock.getZ());
                 poseStack.translate(-0.5, 0.0, -0.5);
