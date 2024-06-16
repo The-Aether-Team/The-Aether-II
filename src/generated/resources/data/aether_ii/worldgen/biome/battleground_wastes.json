@@ -1,5 +1,7 @@
 {
-  "carvers": {},
+  "carvers": {
+    "air": "aether_ii:highlands_cave"
+  },
   "downfall": 0.3,
   "effects": {
     "fog_color": 15788253,
@@ -13,7 +15,7 @@
     },
     "particle": {
       "options": {
-        "type": "aether_ii:irradiation"
+        "type": "aether_ii:ambrosium_torch"
       },
       "probability": 0.00625
     },
@@ -25,7 +27,10 @@
     [
       "aether_ii:cloudbed"
     ],
-    [],
+    [
+      "aether_ii:aether_water_lake",
+      "aether_ii:aether_water_lake_underground"
+    ],
     [],
     [],
     [],
@@ -38,10 +43,13 @@
       "aether_ii:ore_zanite",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
-      "aether_ii:ore_gravitite"
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz"
     ],
     [],
-    [],
+    [
+      "aether_ii:aether_water_spring"
+    ],
     [
       "aether_ii:battleground_wastes_trees",
       "aether_ii:short_grass_patch",

@@ -91,6 +91,52 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.moa.ambient": {
+    "sounds": [
+      "aether_ii:entity/moa/say"
+    ],
+    "subtitle": "subtitles.aether.entity.moa.ambient"
+  },
+  "entity.moa.death": {
+    "sounds": [
+      "aether_ii:entity/moa/say"
+    ],
+    "subtitle": "subtitles.aether.entity.moa.death"
+  },
+  "entity.moa.egg": {
+    "sounds": [
+      "mob/chicken/plop"
+    ],
+    "subtitle": "subtitles.aether.entity.moa.egg"
+  },
+  "entity.moa.flap": {
+    "sounds": [
+      "mob/bat/takeoff"
+    ],
+    "subtitle": "subtitles.aether.entity.moa.flap"
+  },
+  "entity.moa.hurt": {
+    "sounds": [
+      "aether_ii:entity/moa/say"
+    ],
+    "subtitle": "subtitles.aether.entity.moa.hurt"
+  },
+  "entity.moa.saddle": {
+    "sounds": [
+      "mob/horse/leather"
+    ],
+    "subtitle": "subtitles.aether.entity.moa.saddle"
+  },
+  "entity.moa.step": {
+    "sounds": [
+      "mob/pig/step1",
+      "mob/pig/step2",
+      "mob/pig/step3",
+      "mob/pig/step4",
+      "mob/pig/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
   "entity.phyg.ambient": {
     "sounds": [
       "mob/pig/say1",

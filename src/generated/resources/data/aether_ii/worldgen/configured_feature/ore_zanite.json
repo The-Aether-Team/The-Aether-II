@@ -1,16 +1,25 @@
 {
   "type": "minecraft:ore",
   "config": {
-    "discard_chance_on_air_exposure": 0.75,
+    "discard_chance_on_air_exposure": 0.5,
     "size": 5,
     "targets": [
       {
         "state": {
-          "Name": "aether_ii:zanite_ore"
+          "Name": "aether_ii:ambrosium_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
           "tag": "aether_ii:holystone"
+        }
+      },
+      {
+        "state": {
+          "Name": "aether_ii:undershale_ambrosium_ore"
+        },
+        "target": {
+          "block": "aether_ii:undershale",
+          "predicate_type": "minecraft:block_match"
         }
       }
     ]

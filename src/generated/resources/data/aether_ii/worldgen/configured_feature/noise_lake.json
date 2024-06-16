@@ -1,0 +1,29 @@
+{
+  "type": "aether_ii:noise_lake",
+  "config": {
+    "frozen": false,
+    "height": 124,
+    "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
+    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
+    "lake_noise": "aether_ii:highlands/lakes/noise",
+    "underwater_block": {
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": 0
+      },
+      "scale": 0.075,
+      "seed": 100,
+      "states": [
+        {
+          "Name": "aether_ii:aether_dirt"
+        },
+        {
+          "Name": "aether_ii:holystone"
+        }
+      ]
+    }
+  }
+}

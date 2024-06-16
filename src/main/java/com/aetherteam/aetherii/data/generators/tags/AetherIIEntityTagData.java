@@ -8,6 +8,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -26,6 +27,8 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.MAGNETIC_KIRRID.get(),
                 AetherIIEntityTypes.ARCTIC_KIRRID.get()
         );
+        this.tag(AetherIITags.Entities.NO_DOUBLE_DROPS).addTag(Tags.EntityTypes.BOSSES).add(EntityType.PLAYER);
+        this.tag(AetherIITags.Entities.NO_AMBROSIUM_DROPS).add(EntityType.PLAYER);
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(
                 EntityType.POLAR_BEAR
         );
@@ -38,7 +41,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
 
         // Vanilla
-        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), AetherIIEntityTypes.SCATTERGLASS_BOLT.get());
+        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), AetherIIEntityTypes.SKYROOT_PINECONE.get(), AetherIIEntityTypes.SCATTERGLASS_BOLT.get());
         this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(AetherIITags.Entities.KIRRID).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get()).add(AetherIIEntityTypes.ZEPHYR.get()).add(AetherIIEntityTypes.FLYING_COW.get());
     }
 }

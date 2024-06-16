@@ -1,11 +1,18 @@
 {
-  "type": "minecraft:abs",
-  "argument": {
-    "type": "minecraft:shifted_noise",
-    "noise": "aether_ii:lakes",
-    "shift_x": "minecraft:shift_x",
-    "shift_y": 0.0,
-    "shift_z": "minecraft:shift_z",
+  "type": "minecraft:add",
+  "argument1": 0.1,
+  "argument2": {
+    "type": "aether_ii:perlin_noise",
+    "noise": {
+      "amplitudes": [
+        1.0,
+        1.75,
+        0.0,
+        0.0
+      ],
+      "firstOctave": -8
+    },
+    "seed": 64,
     "xz_scale": 0.5,
     "y_scale": 0.0
   }

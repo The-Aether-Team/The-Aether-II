@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:abs",
+  "argument": {
+    "type": "aether_ii:perlin_noise",
+    "noise": {
+      "amplitudes": [
+        1.5,
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "firstOctave": -8
+    },
+    "seed": 76,
+    "xz_scale": 0.35,
+    "y_scale": 0.0
+  }
+}

@@ -1,5 +1,7 @@
 {
-  "carvers": {},
+  "carvers": {
+    "air": "aether_ii:highlands_cave"
+  },
   "downfall": 0.8,
   "effects": {
     "fog_color": 15593205,
@@ -20,7 +22,10 @@
       "aether_ii:coast_ferrosite_sand",
       "aether_ii:cloudbed"
     ],
-    [],
+    [
+      "aether_ii:aether_water_lake",
+      "aether_ii:aether_water_lake_underground"
+    ],
     [],
     [],
     [],
@@ -33,10 +38,13 @@
       "aether_ii:ore_zanite",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
-      "aether_ii:ore_gravitite"
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz"
     ],
     [],
-    [],
+    [
+      "aether_ii:aether_water_spring"
+    ],
     [
       "aether_ii:moa_nest",
       "aether_ii:turquoise_forest_trees",
@@ -75,6 +83,12 @@
     "ambient": [],
     "axolotls": [],
     "creature": [
+      {
+        "type": "aether_ii:moa",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
       {
         "type": "aether_ii:magnetic_kirrid",
         "maxCount": 3,

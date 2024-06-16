@@ -2,8 +2,10 @@ package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
+import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.Zephyr;
 import com.aetherteam.aetherii.entity.passive.*;
+import com.aetherteam.aetherii.entity.projectile.*;
 import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import com.aetherteam.aetherii.entity.projectile.ArcticSnowball;
 import com.aetherteam.aetherii.entity.projectile.HolystoneRock;
@@ -29,7 +31,6 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Sheepuff>> SHEEPUFF = ENTITY_TYPES.register("sheepuff",
             () -> EntityType.Builder.of(Sheepuff::new, MobCategory.CREATURE).sized(0.95F, 1.3F).clientTrackingRange(10).build("sheepuff"));
 
-
     public static final DeferredHolder<EntityType<?>, EntityType<Phyg>> PHYG = ENTITY_TYPES.register("phyg",
             () -> EntityType.Builder.of(Phyg::new, MobCategory.CREATURE).sized(0.95F, 0.95F).clientTrackingRange(10).build("phyg"));
 
@@ -43,6 +44,9 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Kirrid>> ARCTIC_KIRRID = ENTITY_TYPES.register("arctic_kirrid",
             () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.9F, 1.25F).clientTrackingRange(10).build("arctic_kirrid"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<Moa>> MOA = ENTITY_TYPES.register("moa",
+            () -> EntityType.Builder.of(Moa::new, MobCategory.CREATURE).sized(0.95F, 2.15F).clientTrackingRange(10).build("moa"));
+
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<Zephyr>> ZEPHYR = ENTITY_TYPES.register("zephyr",
             () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.5F, 3.5F).clientTrackingRange(10).build("zephyr"));
@@ -54,11 +58,18 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<ArcticSnowball>> ARCTIC_SNOWBALL = ENTITY_TYPES.register("arctic_snowball",
             () -> EntityType.Builder.<ArcticSnowball>of(ArcticSnowball::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("arctic_snowball"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<SkyrootPinecone>> SKYROOT_PINECONE = ENTITY_TYPES.register("skyroot_pinecone",
+            () -> EntityType.Builder.<SkyrootPinecone>of(SkyrootPinecone::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("skyroot_pinecone"));
+
     public static final DeferredHolder<EntityType<?>, EntityType<ScatterglassBolt>> SCATTERGLASS_BOLT = ENTITY_TYPES.register("scatterglass_bolt",
             () -> EntityType.Builder.<ScatterglassBolt>of(ScatterglassBolt::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("scatterglass_bolt"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ZephyrSnowball>> ZEPHYR_SNOWBALL = ENTITY_TYPES.register("zephyr_snowball",
             () -> EntityType.Builder.<ZephyrSnowball>of(ZephyrSnowball::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(4).updateInterval(10).build("zephyr_snowball"));
+
+    // Blocks
+    public static final DeferredHolder<EntityType<?>, EntityType<HoveringBlockEntity>> HOVERING_BLOCK = ENTITY_TYPES.register("hovering_block",
+            () -> EntityType.Builder.<HoveringBlockEntity>of(HoveringBlockEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(10).updateInterval(20).build("hovering_block"));
 
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
         // Passive
@@ -69,6 +80,7 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.ARCTIC_KIRRID.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.MOA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
 
         // Hostile
         event.register(AetherIIEntityTypes.ZEPHYR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zephyr::checkZephyrSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
@@ -83,6 +95,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), Kirrid.createMobAttributes().build());
         event.put(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), Kirrid.createMobAttributes().build());
         event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), Kirrid.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.MOA.get(), Moa.createMobAttributes().build());
 
         // Hostile
         event.put(AetherIIEntityTypes.ZEPHYR.get(), Zephyr.createMobAttributes().build());

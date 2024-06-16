@@ -12,13 +12,13 @@ import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 public class PerlinNoiseFunction implements DensityFunction {
 
     public static final KeyDispatchDataCodec<PerlinNoiseFunction> CODEC = KeyDispatchDataCodec.of(RecordCodecBuilder.mapCodec(
-            p_208798_ -> p_208798_.group(
+            instance -> instance.group(
                             NormalNoise.NoiseParameters.DIRECT_CODEC.fieldOf("noise").forGetter((func) -> func.params),
                             Codec.DOUBLE.fieldOf("xz_scale").forGetter((func) -> func.xzScale),
                             Codec.DOUBLE.fieldOf("y_scale").forGetter((func) -> func.yScale),
                             Codec.LONG.fieldOf("seed").forGetter((func) -> func.seed)
                     )
-                    .apply(p_208798_, PerlinNoiseFunction::new)));
+                    .apply(instance, PerlinNoiseFunction::new)));
 
     public final PerlinNoise noise;
     public final NormalNoise.NoiseParameters params;
@@ -38,19 +38,19 @@ public class PerlinNoiseFunction implements DensityFunction {
         this.yScale = yScale;
     }
 
-    public double compute(DensityFunction.FunctionContext pContext) {
+    public double compute(DensityFunction.FunctionContext context) {
         return this.noise
-                .getValue((double)pContext.blockX() * this.xzScale, (double)pContext.blockY() * this.yScale, (double)pContext.blockZ() * this.xzScale);
+                .getValue((double)context.blockX() * this.xzScale, (double)context.blockY() * this.yScale, (double)context.blockZ() * this.xzScale);
     }
 
     @Override
-    public void fillArray(double[] pArray, ContextProvider pContextProvider) {
-        pContextProvider.fillAllDirectly(pArray, this);
+    public void fillArray(double[] pArray, ContextProvider contextProvider) {
+        contextProvider.fillAllDirectly(pArray, this);
     }
 
     @Override
-    public DensityFunction mapAll(Visitor pVisitor) {
-        return pVisitor.apply(new PerlinNoiseFunction(this.noise, this.params, this.xzScale, this.yScale, this.seed));
+    public DensityFunction mapAll(Visitor visitor) {
+        return visitor.apply(new PerlinNoiseFunction(this.noise, this.params, this.xzScale, this.yScale, this.seed));
     }
 
     @Override

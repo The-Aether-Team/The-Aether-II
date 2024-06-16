@@ -2,7 +2,14 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
-import com.aetherteam.aetherii.world.tree.foliage.*;
+import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.amberoot.SingularAmberootFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatoakFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatrootFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.skyroot.*;
+import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -22,6 +29,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 public class AetherIITreeFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT = AetherIIFeatureUtils.registerKey("skyroot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SKYROOT = AetherIIFeatureUtils.registerKey("large_skyroot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NEST_SKYROOT = AetherIIFeatureUtils.registerKey("nest_skyroot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPLANE = AetherIIFeatureUtils.registerKey("skyplane");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYBIRCH = AetherIIFeatureUtils.registerKey("skybirch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPINE = AetherIIFeatureUtils.registerKey("skypine");
@@ -48,6 +56,14 @@ public class AetherIITreeFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
                         new StraightTrunkPlacer(7, 6, 0), BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAVES.get().defaultBlockState()),
                         new LargeSkyrootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, NEST_SKYROOT, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(12, 3, 0), BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAVES.get().defaultBlockState()),
+                        new NestSkyrootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());
 

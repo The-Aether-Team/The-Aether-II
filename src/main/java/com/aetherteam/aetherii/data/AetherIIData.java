@@ -38,6 +38,7 @@ public class AetherIIData {
         generator.addProvider(event.includeServer(), registrySets);
         generator.addProvider(event.includeServer(), new AetherIIRecipeData(packOutput));
         generator.addProvider(event.includeServer(), AetherIILootTableData.create(packOutput));
+        generator.addProvider(event.includeServer(), new AetherIILootModifierData(packOutput));
 //        generator.addProvider(event.includeServer(), new AetherIIAdvancementData(packOutput, lookupProvider, fileHelper));
         generator.addProvider(event.includeServer(), new AetherIIDataMapData(packOutput, lookupProvider));
 

@@ -16,6 +16,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
+        public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
@@ -28,9 +29,13 @@ public class AetherIITags {
         public static final TagKey<Block> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
+        public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
+        public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");
+
+        public static final TagKey<Block> GRAVITITE_ABILITY_BLACKLIST = tag("gravitite_ability_blacklist");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, new ResourceLocation(AetherII.MODID, name));
@@ -52,6 +57,8 @@ public class AetherIITags {
         public static final TagKey<Item> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
+        public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Item> CLOUDWOOL = tag("cloudwool");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
@@ -74,6 +81,8 @@ public class AetherIITags {
         public static final TagKey<Item> CRAFTS_HOLYSTONE_TOOLS = tag("crafts_holystone_tools");
         public static final TagKey<Item> ALTAR_FUEL = tag("altar_fuel");
 
+        public static final TagKey<Item> TAEGORE_HIDE_REPAIRING = tag("taegore_hide_repairing");
+        public static final TagKey<Item> BURRUKAI_PELT_REPAIRING = tag("burrukai_pelt_repairing");
         public static final TagKey<Item> SKYROOT_REPAIRING = tag("skyroot_repairing");
         public static final TagKey<Item> HOLYSTONE_REPAIRING = tag("holystone_repairing");
         public static final TagKey<Item> ZANITE_REPAIRING = tag("zanite_repairing");
@@ -86,11 +95,12 @@ public class AetherIITags {
         public static final TagKey<Item> KIRRID_TEMPTATION_ITEMS = tag("kirrid_temptation_items");
         public static final TagKey<Item> FLYING_COW_TEMPTATION_ITEMS = tag("flying_cow_temptation_items");
         public static final TagKey<Item> SHEEPUFF_TEMPTATION_ITEMS = tag("sheepuff_temptation_items");
-
+        public static final TagKey<Item> MOA_FOOD_ITEMS = tag("moa_food_items");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
         public static final TagKey<Item> SWET_GEL = tag("swet_gel");
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
+        public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, new ResourceLocation(AetherII.MODID, name));
@@ -99,6 +109,9 @@ public class AetherIITags {
 
     public static class Entities {
         public static final TagKey<EntityType<?>> KIRRID = tag("kirrid");
+
+        public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
+        public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
 
         public static final TagKey<EntityType<?>> SPAWNING_ICE = tag("spawning/ice");
         public static final TagKey<EntityType<?>> SPAWNING_AERCLOUDS = tag("spawning/aerclouds");

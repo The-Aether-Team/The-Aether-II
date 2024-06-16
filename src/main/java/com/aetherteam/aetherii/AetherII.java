@@ -2,7 +2,9 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.api.damage.DamageInfliction;
 import com.aetherteam.aetherii.api.damage.DamageResistance;
+import com.aetherteam.aetherii.api.moaegg.MoaType;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.DamageSystemAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.AetherIIClient;
@@ -13,6 +15,7 @@ import com.aetherteam.aetherii.data.ReloadListeners;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIMoaTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -22,7 +25,9 @@ import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
+import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
 import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
@@ -65,6 +70,7 @@ public class AetherII {
 
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, DamageInfliction.CODEC, DamageInfliction.CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, DamageResistance.CODEC, DamageResistance.CODEC));
+        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIMoaTypes.MOA_TYPE_REGISTRY_KEY, MoaType.CODEC, MoaType.CODEC));
 
         DeferredRegister<?>[] registers = {
                 AetherIIBlocks.BLOCKS,
@@ -87,7 +93,8 @@ public class AetherII {
                 AetherIITreeDecoratorTypes.TREE_DECORATORS,
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
-                AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES
+                AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
+                AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS
         };
 
         for (DeferredRegister<?> register : registers) {
@@ -152,6 +159,7 @@ public class AetherII {
 
         // BOTH
         registrar.play(AerbunnyMountSyncPacket.ID, AerbunnyMountSyncPacket::decode, AerbunnyMountSyncPacket::handle);
+        registrar.play(DamageSystemSyncPacket.ID, DamageSystemSyncPacket::decode, DamageSystemSyncPacket::handle);
         registrar.play(PortalTeleportationSyncPacket.ID, PortalTeleportationSyncPacket::decode, PortalTeleportationSyncPacket::handle);
     }
 }

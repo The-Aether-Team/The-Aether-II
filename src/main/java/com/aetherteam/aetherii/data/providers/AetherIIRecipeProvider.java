@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
@@ -11,6 +12,7 @@ import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -44,6 +46,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected ShapedRecipeBuilder fenceGate(Supplier<? extends Block> fenceGate, Supplier<? extends Block> material) {
         return this.fenceGate(fenceGate, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
+    }
+
+    protected void cloudwool(RecipeOutput output, RecipeCategory itemCategory, ItemLike item, RecipeCategory blockCategory, ItemLike block, String itemRecipeName, String itemGroup) {
+        ShapelessRecipeBuilder.shapeless(itemCategory, item, 4).requires(block).group(itemGroup).unlockedBy(getHasName(block), has(block)).save(output, this.name(itemRecipeName));
+        ShapedRecipeBuilder.shaped(blockCategory, block).define('#', item).pattern("##").pattern("##").unlockedBy(getHasName(item), has(item)).save(output, this.name(getSimpleRecipeName(block)));
     }
 
     protected void colorBlockWithDye(RecipeOutput consumer, List<Item> dyes, List<Item> dyeableItems, Item extra, String group) {
@@ -117,6 +124,35 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("#")
                 .pattern("/")
                 .pattern("#")
+                .unlockedBy(has, has(material));
+    }
+
+    protected ShapedRecipeBuilder makeCrossbowWithTag(Supplier<? extends Item> spear, TagKey<Item> material, String has) {
+        return this.makeCrossbowWithTag(spear, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+    }
+
+    protected ShapedRecipeBuilder makeCrossbowWithTag(Supplier<? extends Item> spear, TagKey<Item> material, Ingredient sticks, String has) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, spear.get())
+                .define('#', material)
+                .define('/', sticks)
+                .define('C', AetherIIItems.CLOUDTWINE)
+                .pattern("/#/")
+                .pattern("C#C")
+                .pattern(" / ")
+                .unlockedBy(has, has(material));
+    }
+
+    protected ShapedRecipeBuilder makeShieldWithTag(Supplier<? extends Item> shield, TagKey<Item> material, String has) {
+        return this.makeShieldWithTag(shield, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+    }
+
+    protected ShapedRecipeBuilder makeShieldWithTag(Supplier<? extends Item> shield, TagKey<Item> material, Ingredient sticks, String has) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, shield.get())
+                .define('W', material)
+                .define('o', sticks)
+                .pattern("WoW")
+                .pattern("WWW")
+                .pattern(" W ")
                 .unlockedBy(has, has(material));
     }
 

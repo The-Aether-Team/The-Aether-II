@@ -87,10 +87,16 @@
     "aether_ii:skypine_leaves": {
       "chance": 0.3
     },
+    "aether_ii:skypine_sapling": {
+      "chance": 0.3
+    },
     "aether_ii:skyplane_leaf_pile": {
       "chance": 0.018
     },
     "aether_ii:skyplane_leaves": {
+      "chance": 0.3
+    },
+    "aether_ii:skyplane_sapling": {
       "chance": 0.3
     },
     "aether_ii:skyroot_leaf_pile": {

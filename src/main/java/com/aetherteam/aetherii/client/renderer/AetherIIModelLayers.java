@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_BED_FOOT = register("skyroot_bed_foot");
     public static final ModelLayerLocation SKYROOT_BED_HEAD = register("skyroot_bed_head");
+    public static final ModelLayerLocation MOA_EGG = register("moa_egg");
 
     public static final ModelLayerLocation PHYG = register("phyg");
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");
@@ -19,10 +20,11 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation MAGNETIC_KIRRID_BABY = register("magnetic_kirrid_baby");
     public static final ModelLayerLocation ARCTIC_KIRRID = register("arctic_kirrid");
     public static final ModelLayerLocation ARCTIC_KIRRID_BABY = register("arctic_kirrid_baby");
+    public static final ModelLayerLocation MOA = register("moa");
+    public static final ModelLayerLocation MOA_BABY = register("moa_baby");
 
     public static final ModelLayerLocation ZEPHYR = register("zephyr");
     public static final ModelLayerLocation ZEPHYR_TRANSPARENCY = register("zephyr", "transparency");
-
 
     private static ModelLayerLocation register(String name) {
         return register(name, "main");

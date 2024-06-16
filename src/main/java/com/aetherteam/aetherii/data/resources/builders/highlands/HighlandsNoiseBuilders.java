@@ -14,13 +14,13 @@ import java.util.List;
 
 public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
 
-    public static NoiseGeneratorSettings highlandsNoiseSettings(HolderGetter<DensityFunction> densityFunctions, HolderGetter<NormalNoise.NoiseParameters> noise) {
+    public static NoiseGeneratorSettings highlandsNoiseSettings(HolderGetter<DensityFunction> function) {
         BlockState holystone = AetherIIBlocks.HOLYSTONE.get().defaultBlockState();
         return new NoiseGeneratorSettings(
                 new NoiseSettings(0, 384, 2, 1), // noiseSettings
                 holystone, // defaultBlock
                 Blocks.WATER.defaultBlockState(), // defaultFluid
-                makeNoiseRouter(densityFunctions, noise), // noiseRouter
+                makeNoiseRouter(function), // noiseRouter
                 HighlandsSurfaceBuilders.surfaceRules(), // surfaceRule
                 List.of(), // spawnTarget
                 -64, // seaLevel
@@ -31,19 +31,17 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
         );
     }
 
-    private static NoiseRouter makeNoiseRouter(HolderGetter<DensityFunction> function, HolderGetter<NormalNoise.NoiseParameters> noise) {
-        return createNoiseRouter(function, noise, getFunction(function, AetherIIDensityFunctions.FINAL_DENSITY));
+    private static NoiseRouter makeNoiseRouter(HolderGetter<DensityFunction> function) {
+        return createNoiseRouter(function, getFunction(function, AetherIIDensityFunctions.FINAL_DENSITY));
     }
 
-    private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> function, HolderGetter<NormalNoise.NoiseParameters> noise, DensityFunction finalDensity) {
-        DensityFunction shiftX = getFunction(function, SHIFT_X);
-        DensityFunction shiftZ = getFunction(function, SHIFT_Z);
+    private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> function, DensityFunction finalDensity) {
         DensityFunction temperature = getFunction(function, AetherIIDensityFunctions.TEMPERATURE);
-        DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.VEGETATION));
+        DensityFunction vegetation = getFunction(function, AetherIIDensityFunctions.VEGETATION_RARITY_MAPPER);
         DensityFunction continents = getFunction(function, AetherIIDensityFunctions.CONTINENTS);
         DensityFunction erosion = getFunction(function, AetherIIDensityFunctions.EROSION);
         DensityFunction depth = getFunction(function, AetherIIDensityFunctions.DEPTH);
-        DensityFunction ridges = getFunction(function, AetherIIDensityFunctions.LAKES_ISLAND_CHECKER);
+        DensityFunction ridges = getFunction(function, AetherIIDensityFunctions.LAKES_NOISE);
         return new NoiseRouter(
                 DensityFunctions.zero(), // barrier
                 DensityFunctions.zero(), // fluid level floodedness

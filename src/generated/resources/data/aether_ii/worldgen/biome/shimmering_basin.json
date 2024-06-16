@@ -17,10 +17,13 @@
   },
   "features": [
     [
+      "aether_ii:noise_lake",
       "aether_ii:coast_quicksoil",
       "aether_ii:cloudbed"
     ],
-    [],
+    [
+      "aether_ii:aether_water_lake_underground"
+    ],
     [],
     [],
     [],
@@ -34,14 +37,18 @@
       "aether_ii:ore_zanite",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
-      "aether_ii:ore_gravitite"
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz"
     ],
     [
       "aether_ii:skyroot_twigs",
       "aether_ii:holystone_rocks"
     ],
-    [],
     [
+      "aether_ii:aether_water_spring"
+    ],
+    [
+      "aether_ii:shimmering_basin_trees",
       "aether_ii:short_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:long_grass_patch",
@@ -110,6 +117,12 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 6
+      },
+      {
+        "type": "aether_ii:moa",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "misc": [],
