@@ -15,7 +15,7 @@
     },
     "particle": {
       "options": {
-        "type": "aether_ii:irradiation"
+        "type": "aether_ii:ambrosium_torch"
       },
       "probability": 0.00625
     },

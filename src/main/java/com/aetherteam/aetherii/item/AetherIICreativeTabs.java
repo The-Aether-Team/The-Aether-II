@@ -359,6 +359,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_HAMMER.get());
                 output.accept(AetherIIItems.SKYROOT_SPEAR.get());
                 output.accept(AetherIIItems.SKYROOT_CROSSBOW.get());
+                output.accept(AetherIIItems.SKYROOT_SHIELD.get());
                 output.accept(AetherIIItems.SKYROOT_SHOVEL.get());
                 output.accept(AetherIIItems.SKYROOT_PICKAXE.get());
                 output.accept(AetherIIItems.SKYROOT_AXE.get());
@@ -367,6 +368,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.HOLYSTONE_HAMMER.get());
                 output.accept(AetherIIItems.HOLYSTONE_SPEAR.get());
                 output.accept(AetherIIItems.HOLYSTONE_CROSSBOW.get());
+                output.accept(AetherIIItems.HOLYSTONE_SHIELD.get());
                 output.accept(AetherIIItems.HOLYSTONE_SHOVEL.get());
                 output.accept(AetherIIItems.HOLYSTONE_PICKAXE.get());
                 output.accept(AetherIIItems.HOLYSTONE_AXE.get());
@@ -375,6 +377,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_HAMMER.get());
                 output.accept(AetherIIItems.ZANITE_SPEAR.get());
                 output.accept(AetherIIItems.ZANITE_CROSSBOW.get());
+                output.accept(AetherIIItems.ZANITE_SHIELD.get());
                 output.accept(AetherIIItems.ZANITE_SHOVEL.get());
                 output.accept(AetherIIItems.ZANITE_PICKAXE.get());
                 output.accept(AetherIIItems.ZANITE_AXE.get());
@@ -383,19 +386,21 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_HAMMER.get());
                 output.accept(AetherIIItems.ARKENIUM_SPEAR.get());
                 output.accept(AetherIIItems.ARKENIUM_CROSSBOW.get());
+                output.accept(AetherIIItems.ARKENIUM_SHIELD.get());
                 output.accept(AetherIIItems.ARKENIUM_SHOVEL.get());
                 output.accept(AetherIIItems.ARKENIUM_PICKAXE.get());
                 output.accept(AetherIIItems.ARKENIUM_AXE.get());
                 output.accept(AetherIIItems.ARKENIUM_TROWEL.get());
-                output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.GRAVITITE_SHORTSWORD.get());
                 output.accept(AetherIIItems.GRAVITITE_HAMMER.get());
                 output.accept(AetherIIItems.GRAVITITE_SPEAR.get());
                 output.accept(AetherIIItems.GRAVITITE_CROSSBOW.get());
+                output.accept(AetherIIItems.GRAVITITE_SHIELD.get());
                 output.accept(AetherIIItems.GRAVITITE_SHOVEL.get());
                 output.accept(AetherIIItems.GRAVITITE_PICKAXE.get());
                 output.accept(AetherIIItems.GRAVITITE_AXE.get());
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
+                output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
@@ -410,10 +415,29 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("armor_and_accessories", () -> CreativeModeTab.builder()
             .withTabsBefore(new ResourceLocation(AetherII.MODID, "equipment_and_utilities"))
             .withTabsAfter(new ResourceLocation(AetherII.MODID, "food_and_drinks"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_HELMET.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".armor_and_accessories"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIItems.TAEGORE_HIDE_HELMET.get());
+                output.accept(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get());
+                output.accept(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get());
+                output.accept(AetherIIItems.TAEGORE_HIDE_BOOTS.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_HELMET.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_BOOTS.get());
+                output.accept(AetherIIItems.ZANITE_HELMET.get());
+                output.accept(AetherIIItems.ZANITE_CHESTPLATE.get());
+                output.accept(AetherIIItems.ZANITE_LEGGINGS.get());
+                output.accept(AetherIIItems.ZANITE_BOOTS.get());
+                output.accept(AetherIIItems.ARKENIUM_HELMET.get());
+                output.accept(AetherIIItems.ARKENIUM_CHESTPLATE.get());
+                output.accept(AetherIIItems.ARKENIUM_LEGGINGS.get());
+                output.accept(AetherIIItems.ARKENIUM_BOOTS.get());
+                output.accept(AetherIIItems.GRAVITITE_HELMET.get());
+                output.accept(AetherIIItems.GRAVITITE_CHESTPLATE.get());
+                output.accept(AetherIIItems.GRAVITITE_LEGGINGS.get());
+                output.accept(AetherIIItems.GRAVITITE_BOOTS.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FOOD_AND_DRINKS = CREATIVE_MODE_TABS.register("food_and_drinks", () -> CreativeModeTab.builder()
@@ -434,8 +458,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.WHITE_SWET_JELLY.get());
                 output.accept(AetherIIItems.BURRUKAI_RIB_CUT.get());
                 output.accept(AetherIIItems.BURRUKAI_RIBS.get());
-                output.accept(AetherIIItems.KIRRID_CUTLET.get());
                 output.accept(AetherIIItems.KIRRID_LOIN.get());
+                output.accept(AetherIIItems.KIRRID_CUTLET.get());
                 output.accept(AetherIIItems.RAW_TAEGORE_MEAT.get());
                 output.accept(AetherIIItems.TAEGORE_STEAK.get());
             }).build());
