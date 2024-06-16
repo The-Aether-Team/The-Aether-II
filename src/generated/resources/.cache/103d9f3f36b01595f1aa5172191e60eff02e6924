@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-16T20:33:33.6880618	Registries
+// 1.20.4	2024-06-16T21:28:50.8991064	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -189,3 +189,4 @@ c16507b38f46d660cad95857b98727c8b648d062 data/aether_ii/worldgen/placed_feature/
 fb91c47b412b476ddda379d83f5bbf4133bf226f data/aether_ii/worldgen/placed_feature/violet_highwoods_trees.json
 1772219186c36c4b3d5ce6be38a4f23c2e0a1b47 data/aether_ii/worldgen/structure/outpost.json
 0cb00ce0406a499319f8f61e763ed08421af06e8 data/aether_ii/worldgen/structure_set/outposts.json
+508d2bf4a4ed0d933e982e5a6dfa3b395043415c data/aether_ii/worldgen/template_pool/outpost/outposts.json
