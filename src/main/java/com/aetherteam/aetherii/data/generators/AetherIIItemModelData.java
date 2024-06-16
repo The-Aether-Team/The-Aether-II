@@ -203,6 +203,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());
         this.itemBlock(AetherIIBlocks.ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
 
         // Aerclouds
         this.aercloudItem(AetherIIBlocks.COLD_AERCLOUD.get());

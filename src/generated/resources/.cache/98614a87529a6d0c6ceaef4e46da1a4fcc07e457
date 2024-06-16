@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-15T19:33:44.1945705	Item Models: aether_ii
+// 1.20.4	2024-06-16T10:39:10.6657042	Item Models: aether_ii
 a634c4a37a9a41ea2706b53c4c2b4fdabd098465 assets/aether_ii/models/item/aechor_petal.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/aether_ii/models/item/aerbunny_spawn_egg.json
 42a3939c2eb6e9d0530d51683351e295ebb5eee5 assets/aether_ii/models/item/aether_dirt.json
@@ -327,6 +327,7 @@ fcf13b0e2fa8560b852be71a17df06fe2f7aadfa assets/aether_ii/models/item/holystone_
 5ea6ea50657574464a43ae19815616413125ae8a assets/aether_ii/models/item/holystone_pickaxe.json
 3bb9d3abdce7adadfae727709e1aa40e9d67b627 assets/aether_ii/models/item/holystone_pillar.json
 b1d7855ec43a99b480d29b4f816f83f143104448 assets/aether_ii/models/item/holystone_pressure_plate.json
+7e4d46b7a9dcfb8b5f363225f934cba7fac379cf assets/aether_ii/models/item/holystone_quartz_ore.json
 452f9a6f53fa2af360143bccda3490bd0c65dff1 assets/aether_ii/models/item/holystone_rock.json
 1aba5cfc455b7f5713acf97910490028e2912348 assets/aether_ii/models/item/holystone_shortsword.json
 0962fb67f453f2184d17164244710d93086a93cd assets/aether_ii/models/item/holystone_shovel.json
@@ -521,9 +522,13 @@ fcfb9ff8aef1ce993178b569be37c671ea80a36f assets/aether_ii/models/item/taegore_hi
 c4dfd109a4a444957a73b8095e97a39112feb8f1 assets/aether_ii/models/item/taegore_steak.json
 ae57a44be1865132e2fdddbf292371ba468994ed assets/aether_ii/models/item/tarabloom.json
 b54510ea4cf32c696c314fc9005802fdab3c208a assets/aether_ii/models/item/undershale.json
+bb44b9049215b5abe25a9c3c5778648530829a51 assets/aether_ii/models/item/undershale_ambrosium_ore.json
+4a0d6dd440a3deb43a5c0c2c60092d71e6a48b45 assets/aether_ii/models/item/undershale_arkenium_ore.json
+b7ace0b33a7b2f7a4b094bf31a26688b854733ef assets/aether_ii/models/item/undershale_gravitite_ore.json
 206a0736c3aa29e75d9a38a3c9c5d6604ad55a31 assets/aether_ii/models/item/undershale_slab.json
 dc2b26466c1c6237e46e9adf27acbb89f4a4445c assets/aether_ii/models/item/undershale_stairs.json
 e08cba605dc43682cfdb888553a1f4826bf29045 assets/aether_ii/models/item/undershale_wall.json
+67333f0f4f1e4c412f8fa51cf5d986eb744fd4d4 assets/aether_ii/models/item/undershale_zanite_ore.json
 068cb838bd767423e14069837fb15c45cb9f48f1 assets/aether_ii/models/item/white_cloudwool.json
 69a6c094fed4fafd160b880b5a70446012f8579c assets/aether_ii/models/item/white_cloudwool_carpet.json
 6d2724bd14d832fc0de91de045f8e099401126eb assets/aether_ii/models/item/white_swet_gel.json

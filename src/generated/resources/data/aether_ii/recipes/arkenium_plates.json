@@ -3,6 +3,7 @@
   "category": "misc",
   "experience": 0.0,
   "fuel_count": 4,
+  "group": "arkenium",
   "ingredient": {
     "item": "aether_ii:inert_arkenium"
   },

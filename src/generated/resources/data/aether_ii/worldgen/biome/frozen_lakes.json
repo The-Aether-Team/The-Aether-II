@@ -20,7 +20,9 @@
       "aether_ii:noise_lake_arctic",
       "aether_ii:cloudbed"
     ],
-    [],
+    [
+      "aether_ii:aether_water_lake_underground"
+    ],
     [],
     [],
     [],
@@ -34,7 +36,8 @@
       "aether_ii:ore_zanite",
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
-      "aether_ii:ore_gravitite"
+      "aether_ii:ore_gravitite",
+      "aether_ii:ore_holystone_quartz"
     ],
     [],
     [],

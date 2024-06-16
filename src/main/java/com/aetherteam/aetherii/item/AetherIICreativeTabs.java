@@ -264,6 +264,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
                 output.accept(AetherIIBlocks.COLD_AERCLOUD.get());
                 output.accept(AetherIIBlocks.BLUE_AERCLOUD.get());
                 output.accept(AetherIIBlocks.GOLDEN_AERCLOUD.get());
