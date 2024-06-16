@@ -22,7 +22,7 @@ public interface GravititeTool {
         Player player = context.getPlayer();
         InteractionHand hand = context.getHand();
         if (itemStack.getItem() instanceof TieredItem tieredItem) {
-            if (player != null) {
+            if (player != null) { //todo account for stripping and other block interactions
                 if (blockState.getMenuProvider(level, blockPos) == null || player.isShiftKeyDown()) {
                     if ((itemStack.getDestroySpeed(blockState) == tieredItem.getTier().getSpeed() || itemStack.isCorrectToolForDrops(blockState))) {
                         if (blockState.getDestroySpeed(level, blockPos) >= 0.0F && !blockState.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF) && !blockState.is(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST)) {

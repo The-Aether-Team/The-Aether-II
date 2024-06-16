@@ -10,6 +10,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -50,10 +51,10 @@ public class DoubleDropsModifier extends LootModifier {
     }
 
     private void doubleDrops(ObjectArrayList<ItemStack> lootStacks, ObjectArrayList<ItemStack> newStacks, RandomSource random) {
-        boolean flag = random.nextBoolean();
-        if (flag) {
-            for (ItemStack stack : lootStacks) {
-                if (stack.is(AetherIITags.Items.DOUBLE_DROPS)) {
+        for (ItemStack stack : lootStacks) {
+            if (stack.is(AetherIITags.Items.DOUBLE_DROPS)) {
+                boolean shouldDouble = stack.getItem() instanceof BlockItem ? random.nextInt(3) == 0 : random.nextInt(3) > 0;
+                if (shouldDouble) {
                     newStacks.add(stack);
                 }
             }
