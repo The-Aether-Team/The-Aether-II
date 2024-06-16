@@ -20,8 +20,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Optional;
 
-// TODO: Port Jigsaw System from 24w14potato Snapshot and replace this with it [Density Checks]
-
 public class AetherJigsawStructure extends Structure {
 
     public static final Codec<AetherJigsawStructure> CODEC = RecordCodecBuilder.<AetherJigsawStructure>mapCodec(instance ->
@@ -32,7 +30,7 @@ public class AetherJigsawStructure extends Structure {
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
-                    Codec.intRange(-4096, 4096).fieldOf("above_bottom").forGetter(structure -> structure.aboveBottom),
+                    Codec.intRange(-4096, 4096).fieldOf("checked_y").forGetter(structure -> structure.checkedY),
                     Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(structure -> structure.poolAliases)
             ).apply(instance, AetherJigsawStructure::new)).codec();
     private final Holder<StructureTemplatePool> startPool;
@@ -41,18 +39,10 @@ public class AetherJigsawStructure extends Structure {
     private final HeightProvider startHeight;
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
-    private final int aboveBottom;
+    private final int checkedY;
     private final List<PoolAliasBinding> poolAliases;
 
-    public AetherJigsawStructure(StructureSettings config,
-                                   Holder<StructureTemplatePool> startPool,
-                                   Optional<ResourceLocation> startJigsawName,
-                                   int size,
-                                   HeightProvider startHeight,
-                                   Optional<Heightmap.Types> projectStartToHeightmap,
-                                   int maxDistanceFromCenter,
-                                   int aboveBottom,
-                                   List<PoolAliasBinding> poolAliases) {
+    public AetherJigsawStructure(StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int checkedY, List<PoolAliasBinding> poolAliases) {
         super(config);
         this.startPool = startPool;
         this.startJigsawName = startJigsawName;
@@ -60,7 +50,7 @@ public class AetherJigsawStructure extends Structure {
         this.startHeight = startHeight;
         this.projectStartToHeightmap = projectStartToHeightmap;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
-        this.aboveBottom = aboveBottom;
+        this.checkedY = checkedY;
         this.poolAliases = poolAliases;
     }
 
@@ -71,8 +61,7 @@ public class AetherJigsawStructure extends Structure {
                 chunkpos.getWorldPosition().getZ(),
                 Heightmap.Types.WORLD_SURFACE_WG,
                 context.heightAccessor(),
-                context.randomState())
-                > aboveBottom;
+                context.randomState()) > checkedY;
     }
 
     @Override
