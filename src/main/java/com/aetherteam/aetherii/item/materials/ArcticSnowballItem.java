@@ -2,7 +2,9 @@ package com.aetherteam.aetherii.item.materials;
 
 import com.aetherteam.aetherii.client.AetherIIClientItemExtensions;
 import com.aetherteam.aetherii.entity.projectile.ArcticSnowball;
+import com.aetherteam.aetherii.entity.projectile.HolystoneRock;
 import com.aetherteam.aetherii.entity.projectile.SkyrootPinecone;
+import com.aetherteam.aetherii.item.miscellaneous.ThrowableItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -18,7 +20,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
 
-public class ArcticSnowballItem extends SnowballItem {
+public class ArcticSnowballItem extends SnowballItem implements ThrowableItem {
     public ArcticSnowballItem(Properties properties) {
         super(properties);
     }
@@ -32,23 +34,7 @@ public class ArcticSnowballItem extends SnowballItem {
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
-        level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F)); //TODO SOUND
-        if (!level.isClientSide()) {
-            ArcticSnowball snowball = new ArcticSnowball(level, livingEntity);
-            snowball.setItem(stack);
-            snowball.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0.0F, 1.5F, 1.0F);
-            level.addFreshEntity(snowball);
-        }
-        if (level.isClientSide()) {
-            livingEntity.swing(livingEntity.getUsedItemHand());
-        }
-        if (livingEntity instanceof Player player) {
-            player.awardStat(Stats.ITEM_USED.get(this));
-            if (!player.getAbilities().instabuild) {
-                stack.shrink(1);
-                player.getCooldowns().addCooldown(stack.getItem(), 10);
-            }
-        }
+        this.throwItem(stack, level, livingEntity, timeLeft, SoundEvents.SNOWBALL_THROW, new ArcticSnowball(level, livingEntity));
     }
 
     @Override

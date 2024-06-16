@@ -1,10 +1,14 @@
 package com.aetherteam.aetherii.item.materials;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.AetherIIClientItemExtensions;
 import com.aetherteam.aetherii.entity.projectile.HolystoneRock;
+import com.aetherteam.aetherii.item.miscellaneous.ThrowableItem;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -21,7 +25,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
 
-public class RockItem extends BlockItem {
+public class RockItem extends BlockItem implements ThrowableItem {
     public RockItem(Block block, Properties properties) {
         super(block, properties);
     }
@@ -46,23 +50,7 @@ public class RockItem extends BlockItem {
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
-        level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F)); //TODO SOUND
-        if (!level.isClientSide()) {
-            HolystoneRock rock = new HolystoneRock(level, livingEntity);
-            rock.setItem(stack);
-            rock.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0.0F, 1.5F, 1.0F);
-            level.addFreshEntity(rock);
-        }
-        if (level.isClientSide()) {
-            livingEntity.swing(livingEntity.getUsedItemHand());
-        }
-        if (livingEntity instanceof Player player) {
-            player.awardStat(Stats.ITEM_USED.get(this));
-            if (!player.getAbilities().instabuild) {
-                stack.shrink(1);
-                player.getCooldowns().addCooldown(stack.getItem(), 10);
-            }
-        }
+        this.throwItem(stack, level, livingEntity, timeLeft, SoundEvents.SNOWBALL_THROW, new HolystoneRock(level, livingEntity));
     }
 
     @Override
