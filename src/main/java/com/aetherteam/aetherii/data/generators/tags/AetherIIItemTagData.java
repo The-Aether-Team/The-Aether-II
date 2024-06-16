@@ -8,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -68,18 +69,23 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.SKYROOT_HAMMER.get(),
                 AetherIIItems.SKYROOT_SPEAR.get(),
+                AetherIIItems.SKYROOT_SHIELD.get(),
                 AetherIIItems.HOLYSTONE_SHORTSWORD.get(),
                 AetherIIItems.HOLYSTONE_HAMMER.get(),
                 AetherIIItems.HOLYSTONE_SPEAR.get(),
+                AetherIIItems.HOLYSTONE_SHIELD.get(),
                 AetherIIItems.ZANITE_SHORTSWORD.get(),
                 AetherIIItems.ZANITE_HAMMER.get(),
                 AetherIIItems.ZANITE_SPEAR.get(),
+                AetherIIItems.ZANITE_SHIELD.get(),
                 AetherIIItems.ARKENIUM_SHORTSWORD.get(),
                 AetherIIItems.ARKENIUM_HAMMER.get(),
                 AetherIIItems.ARKENIUM_SPEAR.get(),
+                AetherIIItems.ARKENIUM_SHIELD.get(),
                 AetherIIItems.GRAVITITE_SHORTSWORD.get(),
                 AetherIIItems.GRAVITITE_HAMMER.get(),
                 AetherIIItems.GRAVITITE_SPEAR.get(),
+                AetherIIItems.GRAVITITE_SHIELD.get(),
                 AetherIIItems.SKYROOT_AXE.get(),
                 AetherIIItems.HOLYSTONE_AXE.get(),
                 AetherIIItems.ZANITE_AXE.get(),
@@ -144,6 +150,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
                 AetherIIItems.ORANGE.get()
         );
+        this.tag(AetherIITags.Items.TAEGORE_HIDE_REPAIRING).add(AetherIIItems.TAEGORE_HIDE.get());
+        this.tag(AetherIITags.Items.BURRUKAI_PELT_REPAIRING).add(AetherIIItems.BURRUKAI_PELT.get());
         this.tag(AetherIITags.Items.SKYROOT_REPAIRING).addTag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS);
         this.tag(AetherIITags.Items.HOLYSTONE_REPAIRING).add(AetherIIBlocks.HOLYSTONE.asItem());
         this.tag(AetherIITags.Items.ZANITE_REPAIRING).add(AetherIIItems.ZANITE_GEMSTONE.get());
@@ -161,6 +169,68 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_AXE.get(),
                 AetherIIItems.ARKENIUM_AXE.get(),
                 AetherIIItems.GRAVITITE_AXE.get()
+        );
+        this.tag(AetherIITags.Items.DOUBLE_DROPS).add(
+                AetherIIItems.SKYROOT_STICK.get(),
+                AetherIIItems.SKYROOT_PINECONE.get(),
+                AetherIIItems.AMBROSIUM_SHARD.get(),
+                AetherIIItems.ZANITE_GEMSTONE.get(),
+                AetherIIItems.INERT_ARKENIUM.get(),
+                AetherIIItems.INERT_GRAVITITE.get(),
+                AetherIIItems.GOLDEN_AMBER.get(),
+                AetherIIItems.TAEGORE_HIDE.get(),
+                AetherIIItems.BURRUKAI_PELT.get(),
+                AetherIIItems.AECHOR_PETAL.get(),
+                AetherIIItems.ARCTIC_SNOWBALL.get(),
+                AetherIIItems.GREEN_SWET_GEL.get(),
+                AetherIIItems.BLUE_SWET_GEL.get(),
+                AetherIIItems.PURPLE_SWET_GEL.get(),
+                AetherIIItems.GOLDEN_SWET_GEL.get(),
+                AetherIIItems.WHITE_SWET_GEL.get(),
+                AetherIIItems.BLUEBERRY.get(),
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.WYNDBERRY.get(),
+                AetherIIItems.BURRUKAI_RIB_CUT.get(),
+                AetherIIItems.KIRRID_LOIN.get(),
+                AetherIIItems.RAW_TAEGORE_MEAT.get(),
+                AetherIIBlocks.AETHER_GRASS_BLOCK.asItem(),
+                AetherIIBlocks.AETHER_DIRT.asItem(),
+                AetherIIBlocks.COARSE_AETHER_DIRT.asItem(),
+                AetherIIBlocks.HOLYSTONE.asItem(),
+                AetherIIBlocks.UNDERSHALE.asItem(),
+                AetherIIBlocks.AGIOSITE.asItem(),
+                AetherIIBlocks.CRUDE_SCATTERGLASS.asItem(),
+                AetherIIBlocks.QUICKSOIL.asItem(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.asItem(),
+                AetherIIBlocks.FERROSITE_SAND.asItem(),
+                AetherIIBlocks.FERROSITE.asItem(),
+                AetherIIBlocks.RUSTED_FERROSITE.asItem(),
+                AetherIIBlocks.ARCTIC_SNOW_BLOCK.asItem(),
+                AetherIIBlocks.ARCTIC_ICE.asItem(),
+                AetherIIBlocks.ARCTIC_PACKED_ICE.asItem(),
+                AetherIIBlocks.HOLYSTONE.asItem(),
+                AetherIIBlocks.COLD_AERCLOUD.asItem(),
+                AetherIIBlocks.BLUE_AERCLOUD.asItem(),
+                AetherIIBlocks.GOLDEN_AERCLOUD.asItem(),
+                AetherIIBlocks.GREEN_AERCLOUD.asItem(),
+                AetherIIBlocks.PURPLE_AERCLOUD.asItem(),
+                AetherIIBlocks.STORM_AERCLOUD.asItem(),
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.asItem(),
+                AetherIIBlocks.SKYROOT_LOG.asItem(),
+                AetherIIBlocks.GREATROOT_LOG.asItem(),
+                AetherIIBlocks.WISPROOT_LOG.asItem(),
+                AetherIIBlocks.MOSSY_WISPROOT_LOG.asItem(),
+                AetherIIBlocks.AMBEROOT_LOG.asItem(),
+                AetherIIBlocks.SKYROOT_LEAVES.asItem(),
+                AetherIIBlocks.SKYPLANE_LEAVES.asItem(),
+                AetherIIBlocks.SKYBIRCH_LEAVES.asItem(),
+                AetherIIBlocks.SKYPINE_LEAVES.asItem(),
+                AetherIIBlocks.WISPROOT_LEAVES.asItem(),
+                AetherIIBlocks.WISPTOP_LEAVES.asItem(),
+                AetherIIBlocks.GREATROOT_LEAVES.asItem(),
+                AetherIIBlocks.GREATOAK_LEAVES.asItem(),
+                AetherIIBlocks.GREATBOA_LEAVES.asItem(),
+                AetherIIBlocks.AMBEROOT_LEAVES.asItem()
         );
 
         // Vanilla
@@ -428,10 +498,52 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),
                 AetherIIBlocks.GRAVITITE_BLOCK.asItem()
         );
+        this.tag(Tags.Items.TOOLS_SHIELDS).add(
+                AetherIIItems.SKYROOT_SHIELD.get(),
+                AetherIIItems.HOLYSTONE_SHIELD.get(),
+                AetherIIItems.ZANITE_SHIELD.get(),
+                AetherIIItems.ARKENIUM_SHIELD.get(),
+                AetherIIItems.GRAVITITE_SHIELD.get()
+        );
+        this.tag(Tags.Items.TOOLS_CROSSBOWS).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
+        );
         this.tag(Tags.Items.TOOLS).addTags(
                 AetherIITags.Items.TOOLS_SHORTSWORDS,
                 AetherIITags.Items.TOOLS_HAMMERS,
                 AetherIITags.Items.TOOLS_SPEARS
+        );
+        this.tag(Tags.Items.ARMORS_HELMETS).add(
+                AetherIIItems.TAEGORE_HIDE_HELMET.get(),
+                AetherIIItems.BURRUKAI_PELT_HELMET.get(),
+                AetherIIItems.ZANITE_HELMET.get(),
+                AetherIIItems.ARKENIUM_HELMET.get(),
+                AetherIIItems.GRAVITITE_HELMET.get()
+        );
+        this.tag(Tags.Items.ARMORS_CHESTPLATES).add(
+                AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(),
+                AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(),
+                AetherIIItems.ZANITE_CHESTPLATE.get(),
+                AetherIIItems.ARKENIUM_CHESTPLATE.get(),
+                AetherIIItems.GRAVITITE_CHESTPLATE.get()
+        );
+        this.tag(Tags.Items.ARMORS_LEGGINGS).add(
+                AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(),
+                AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(),
+                AetherIIItems.ZANITE_LEGGINGS.get(),
+                AetherIIItems.ARKENIUM_LEGGINGS.get(),
+                AetherIIItems.GRAVITITE_LEGGINGS.get()
+        );
+        this.tag(Tags.Items.ARMORS_BOOTS).add(
+                AetherIIItems.TAEGORE_HIDE_BOOTS.get(),
+                AetherIIItems.BURRUKAI_PELT_BOOTS.get(),
+                AetherIIItems.ZANITE_BOOTS.get(),
+                AetherIIItems.ARKENIUM_BOOTS.get(),
+                AetherIIItems.GRAVITITE_BOOTS.get()
         );
         this.tag(Tags.Items.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get().asItem()

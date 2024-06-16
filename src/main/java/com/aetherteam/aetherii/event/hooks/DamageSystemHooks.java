@@ -3,18 +3,23 @@ package com.aetherteam.aetherii.event.hooks;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.DamageSystemAttachment;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
+import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.PacketRelay;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -26,6 +31,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.Tags;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.List;
@@ -179,6 +185,38 @@ public class DamageSystemHooks {
             }
             components.remove(position - 1);
             components.add(position, Component.literal("").append(Component.translatable("attribute.modifier.plus.0", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(ChatFormatting.BLUE)));
+        }
+    }
+
+    public static void buildUpShieldStun(LivingEntity entity, DamageSource source) {
+        if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELDS)) {
+            if (source.getEntity() != null) { //todo check for aether hostile mobs only or something idk
+                DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+                int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
+                if (entity.getUseItem().getItem() instanceof AetherIIShieldItem shield) {
+                    rate = shield.getStaminaReductionRate();
+                }
+                attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, attachment.getShieldStamina() - rate));
+                if (attachment.getShieldStamina() <= 0) {
+                    player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELDS).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300));
+                    player.stopUsingItem();
+                }
+            }
+        }
+    }
+
+    public static void restoreShieldStamina(Player player) {
+        if (!player.level().isClientSide()) {
+            DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+            if (player.tickCount % 5 == 0) {
+                if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
+                    int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.get());
+                    if (player.isBlocking()) {
+                        restore /= 4;
+                    }
+                    attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + restore));
+                }
+            }
         }
     }
 }
