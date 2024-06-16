@@ -391,7 +391,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.carpet(AetherIIBlocks.BLACK_CLOUDWOOL_CARPET.get(), AetherIIBlocks.BLACK_CLOUDWOOL.get(),"construction/");
 
         // Arkenium Blocks
-        this.doorBlock(AetherIIBlocks.ARKENIUM_DOOR.get(), this.texture(this.name(AetherIIBlocks.ARKENIUM_DOOR.get()), "construction/", "_bottom"), this.texture(this.name(AetherIIBlocks.ARKENIUM_DOOR.get()), "construction/", "_top"));
+        this.doorBlock(AetherIIBlocks.ARKENIUM_DOOR.get());
         this.trapdoorBlock(AetherIIBlocks.ARKENIUM_TRAPDOOR.get(), this.texture(this.name(AetherIIBlocks.ARKENIUM_TRAPDOOR.get()), "construction/"), true);
 
         // Mineral Blocks
