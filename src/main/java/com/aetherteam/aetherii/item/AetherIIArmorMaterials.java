@@ -32,12 +32,12 @@ public enum AetherIIArmorMaterials implements ArmorMaterial { //todo sounds
         map.put(ArmorItem.Type.CHESTPLATE, 6);
         map.put(ArmorItem.Type.HELMET, 2);
     }), 9, () -> SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, () -> Ingredient.of(AetherIITags.Items.ZANITE_REPAIRING)),
-    ARKENIUM("arkenium", 33, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-        map.put(ArmorItem.Type.BOOTS, 3);
-        map.put(ArmorItem.Type.LEGGINGS, 6);
-        map.put(ArmorItem.Type.CHESTPLATE, 8);
-        map.put(ArmorItem.Type.HELMET, 3);
-    }), 10, () -> SoundEvents.ARMOR_EQUIP_GENERIC, 2.0F, () -> Ingredient.of(AetherIITags.Items.ARKENIUM_REPAIRING)),
+    ARKENIUM("arkenium", 15, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+        map.put(ArmorItem.Type.BOOTS, 2);
+        map.put(ArmorItem.Type.LEGGINGS, 5);
+        map.put(ArmorItem.Type.CHESTPLATE, 6);
+        map.put(ArmorItem.Type.HELMET, 2);
+    }), 10, () -> SoundEvents.ARMOR_EQUIP_GENERIC, 1.0F, () -> Ingredient.of(AetherIITags.Items.ARKENIUM_REPAIRING)),
     GRAVITITE("gravitite", 33, Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
         map.put(ArmorItem.Type.BOOTS, 3);
         map.put(ArmorItem.Type.LEGGINGS, 6);
