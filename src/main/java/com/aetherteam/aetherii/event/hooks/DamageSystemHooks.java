@@ -208,11 +208,11 @@ public class DamageSystemHooks {
     public static void restoreShieldStamina(Player player) {
         if (!player.level().isClientSide()) {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-            if (player.tickCount % 10 == 0) {
+            if (player.tickCount % 5 == 0) {
                 if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
                     int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.get());
                     if (player.isBlocking()) {
-                        restore /= 2;
+                        restore /= 4;
                     }
                     attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + restore));
                 }
