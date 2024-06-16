@@ -126,8 +126,7 @@ public class AetherIIOverlays {
         if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
             boolean missingStamina = attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA;
-            boolean holdingShield = player.getOffhandItem().is(Tags.Items.TOOLS_SHIELDS) || player.getMainHandItem().is(Tags.Items.TOOLS_SHIELDS);
-            boolean displayIndicator = player.isBlocking() || (holdingShield && missingStamina);
+            boolean displayIndicator = player.isBlocking() || missingStamina;
             if (displayIndicator) {
                 float f = attachment.getShieldStamina() / (float) DamageSystemAttachment.MAX_SHIELD_STAMINA;
                 if (options.attackIndicator().get() == AttackIndicatorStatus.CROSSHAIR) {
