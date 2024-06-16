@@ -1,4 +1,4 @@
-// 1.20.4	2024-06-15T14:32:19.4987365	Registries
+// 1.20.4	2024-06-15T19:33:44.18157	Registries
 1799cd7facb9c4c29ebb9ee49ddcb305e7813a3f data/aether_ii/aether_ii/damage_infliction/skyroot_hammer.json
 5c5bb998e7d9303a50ecbb0e4e8534c1baa64355 data/aether_ii/aether_ii/damage_infliction/skyroot_shortsword.json
 9390b0d5d3d5b8c6f616419f64207f910dabf942 data/aether_ii/aether_ii/damage_infliction/skyroot_spear.json
@@ -17,8 +17,8 @@ b3b0ddd5d0395865eccf399980bc5e52dc9d1d06 data/aether_ii/aether_ii/moa_type/blue.
 4b4b2ff422d23e4cb6282f664d89dad7ac8ff8e6 data/aether_ii/damage_type/player_aoe_no_knockback.json
 1653d092ddc59a4e6f3df21724822d70f65ced11 data/aether_ii/dimension/aether_highlands.json
 e48734a1f4f4a5ce46ede719985e497b3c51ce46 data/aether_ii/dimension_type/aether_highlands.json
-e1d92296f46c91e9e99ea7ced48fc0578838e523 data/aether_ii/worldgen/biome/battleground_wastes.json
-1e902c1cbad566e2ef6b3651beddcc01327e5c35 data/aether_ii/worldgen/biome/contaminated_jungle.json
+450cb0c5aba230e3c76bcf3b75d39be82ddc28b3 data/aether_ii/worldgen/biome/battleground_wastes.json
+8780f4211560a4a1049537b8a0a74c62f02079c8 data/aether_ii/worldgen/biome/contaminated_jungle.json
 80d0aeb129a11ccdd18295862c16d156b935bd53 data/aether_ii/worldgen/biome/enduring_woodland.json
 d2a3739e85095bb8962d8a68b3244c11f6f9a5d3 data/aether_ii/worldgen/biome/expanse.json
 12029e31d489efc1781be1958d7e885de5d74922 data/aether_ii/worldgen/biome/flourishing_field.json

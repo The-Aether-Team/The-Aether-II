@@ -161,9 +161,14 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
         );
         this.tag(AetherIITags.Blocks.COCKATRICE_SPAWNABLE_BLACKLIST);
-
         this.tag(AetherIITags.Blocks.MOA_HATCH_BLOCK).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
+        );
+        this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).addTags(
+                BlockTags.BUTTONS,
+                BlockTags.PRESSURE_PLATES,
+                BlockTags.TRAPDOORS,
+                BlockTags.FENCE_GATES
         );
 
         // Vanilla

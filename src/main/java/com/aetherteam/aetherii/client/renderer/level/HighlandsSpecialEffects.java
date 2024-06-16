@@ -50,7 +50,9 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private static final ResourceLocation MOON_LOCATION = new ResourceLocation("textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_LOCATION = new ResourceLocation("textures/environment/sun.png");
     private static final ResourceLocation RAIN_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/rain.png");
+    private static final ResourceLocation RAIN_STORMY_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/rain_stormy.png");
     private static final ResourceLocation SNOW_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/snow.png");
+    private static final ResourceLocation SNOW_STORMY_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/snow_stormy.png");
 
     private final float[] sunriseCol = new float[4];
 
@@ -312,7 +314,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
                 Matrix4f matrix4f = poseStack.last().pose();
 
-                RenderSystem.setShader(AetherIIShaders::getPositionColorCloudCoverShader);
+                RenderSystem.setShader(AetherIIShaders::getCloudCoverShader);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
                 bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
@@ -421,9 +423,9 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
             RenderSystem.disableCull();
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
-            int l = 4;
+            int l = 3;
             if (Minecraft.useFancyGraphics()) {
-                l = 7;
+                l = 6;
             }
             if (isThundering) {
                  l = (int) (l * 1.25F);
@@ -461,105 +463,12 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                             blockpos$mutableblockpos.set(k1, j2, j1);
                             Biome.Precipitation biome$precipitation = biome.getPrecipitationAt(blockpos$mutableblockpos);
 
-                            float size;
-                            float opacityStrength;
-                            float stretchStrength = 0.25F;
-
                             if (biome$precipitation == Biome.Precipitation.RAIN) {
-                                size = 0.5F;
-                                opacityStrength  = 0.85F;
-                                stretchStrength = 0.75F;
-
-                                d0 *= size;
-                                d1 *= size;
-
-                                if (i1 != 0) {
-                                    if (i1 >= 0) {
-                                        tesselator.end();
-                                    }
-
-                                    i1 = 0;
-                                    RenderSystem.setShaderTexture(0, RAIN_LOCATION);
-                                    bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-                                }
-
-                                int i3 = levelRenderer.getTicks() & 131071;
-                                int j3 = k1 * k1 * 3121 + k1 * 45238971 + j1 * j1 * 418711 + j1 * 13761 & 0xFF;
-                                float f2 = 3.0F + randomsource.nextFloat();
-                                float f3 = -((float) (i3 + j3) + partialTick) / 32.0F * f2;
-                                float f4 = f3 % 32.0F;
-                                double d2 = (double) k1 + 0.5 - camX;
-                                double d3 = (double) j1 + 0.5 - camZ;
-                                float f6 = (float) Math.sqrt(d2 * d2 + d3 * d3) / (float) l;
-                                float f7 = ((1.0F - f6 * f6) * 0.5F + 0.5F) * rain * opacityStrength;
-                                blockpos$mutableblockpos.set(k1, l2, j1);
-                                int k3 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
-                                bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
-                                        .uv(0.0F, (float) j2 * stretchStrength + f4)
-                                        .color(1.0F, 1.0F, 1.0F, f7)
-                                        .uv2(k3)
-                                        .endVertex();
-                                bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
-                                        .uv(1.0F, (float) j2 * stretchStrength + f4)
-                                        .color(1.0F, 1.0F, 1.0F, f7)
-                                        .uv2(k3)
-                                        .endVertex();
-                                bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
-                                        .uv(1.0F, (float) k2 * stretchStrength + f4)
-                                        .color(1.0F, 1.0F, 1.0F, f7)
-                                        .uv2(k3)
-                                        .endVertex();
-                                bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
-                                        .uv(0.0F, (float) k2 * stretchStrength + f4)
-                                        .color(1.0F, 1.0F, 1.0F, f7)
-                                        .uv2(k3)
-                                        .endVertex();
+                                i1 = this.renderRain(RAIN_LOCATION, tesselator, bufferBuilder, levelRenderer, level, randomsource, partialTick, camX, camY, camZ, 1.0F, 0.85F, 0.75F, d0, d1, i1, j1, k1, blockpos$mutableblockpos, l, l2, k2, j2, rain);
+                                i1 = this.renderRain(RAIN_STORMY_LOCATION, tesselator, bufferBuilder, levelRenderer, level, randomsource, partialTick, camX, camY, camZ, 1.0F, 0.85F, 0.75F, d0, d1, i1, j1, k1, blockpos$mutableblockpos, l, l2, k2, j2, thunder);
                             } else if (biome$precipitation == Biome.Precipitation.SNOW) {
-                                opacityStrength  = 0.75F;
-
-                                if (i1 != 1) {
-                                    if (i1 == 0) {
-                                        tesselator.end();
-                                    }
-
-                                    i1 = 1;
-                                    RenderSystem.setShaderTexture(0, SNOW_LOCATION);
-                                    bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-                                }
-
-                                float f8 = -((float) (levelRenderer.getTicks() & 511) + partialTick) / 256.0F;
-                                float f9 = (float) (randomsource.nextDouble() + (double) f1 * 0.01 * (double) ((float) randomsource.nextGaussian()));
-                                float f10 = (float) (randomsource.nextDouble() + (double) (f1 * (float) randomsource.nextGaussian()) * 0.001);
-                                double d4 = (double) k1 + 0.5 - camX;
-                                double d5 = (double) j1 + 0.5 - camZ;
-                                float f11 = (float) Math.sqrt(d4 * d4 + d5 * d5) / (float)l;
-                                float f5 = ((1.0F - f11 * f11) * 0.3F + 0.5F) * rain * opacityStrength;
-                                blockpos$mutableblockpos.set(k1, l2, j1);
-                                int j4 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
-                                int k4 = j4 >> 16 & 65535;
-                                int l4 = j4 & 65535;
-                                int l3 = (k4 * 3 + 240) / 4;
-                                int i4 = (l4 * 3 + 240) / 4;
-                                bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
-                                        .uv(0.0F + f9, (float) j2 * stretchStrength + f8 + f10)
-                                        .color(1.0F, 1.0F, 1.0F, f5)
-                                        .uv2(i4, l3)
-                                        .endVertex();
-                                bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
-                                        .uv(1.0F + f9, (float) j2 * stretchStrength + f8 + f10)
-                                        .color(1.0F, 1.0F, 1.0F, f5)
-                                        .uv2(i4, l3)
-                                        .endVertex();
-                                bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
-                                        .uv(1.0F + f9, (float) k2 * stretchStrength + f8 + f10)
-                                        .color(1.0F, 1.0F, 1.0F, f5)
-                                        .uv2(i4, l3)
-                                        .endVertex();
-                                bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
-                                        .uv(0.0F + f9, (float) k2 * stretchStrength + f8 + f10)
-                                        .color(1.0F, 1.0F, 1.0F, f5)
-                                        .uv2(i4, l3)
-                                        .endVertex();
+                                i1 = this.renderSnow(SNOW_LOCATION, tesselator, bufferBuilder, levelRenderer, level, randomsource, partialTick, camX, camY, camZ, 0.75F, 0.25F, d0, d1, f1, i1, j1, k1, blockpos$mutableblockpos, l, l2, k2, j2, rain);
+                                i1 = this.renderSnow(SNOW_STORMY_LOCATION, tesselator, bufferBuilder, levelRenderer, level, randomsource, partialTick, camX, camY, camZ, 0.75F, 0.25F, d0, d1, f1, i1, j1, k1, blockpos$mutableblockpos, l, l2, k2, j2, thunder);
                             }
                         }
                     }
@@ -576,6 +485,107 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         }
 
         return true;
+    }
+
+    private int renderRain(ResourceLocation location, Tesselator tesselator, BufferBuilder bufferBuilder, LevelRenderer levelRenderer, ClientLevel level, RandomSource randomsource,
+                           float partialTick, double camX, double camY, double camZ, float size, float opacityStrength, float stretchStrength,
+                           double d0, double d1, int i1, int j1, int k1, BlockPos.MutableBlockPos blockpos$mutableblockpos, int l, int l2, int k2, int j2, float rain) {
+        d0 *= size;
+        d1 *= size;
+
+        if (i1 != 0) {
+            if (i1 >= 0) {
+                tesselator.end();
+            }
+
+            i1 = 0;
+            RenderSystem.setShaderTexture(0, location);
+            bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+        }
+
+        int i3 = levelRenderer.getTicks() & 131071;
+        int j3 = k1 * k1 * 3121 + k1 * 45238971 + j1 * j1 * 418711 + j1 * 13761 & 0xFF;
+        float f2 = 3.0F + randomsource.nextFloat();
+        float f3 = -((float) (i3 + j3) + partialTick) / 32.0F * f2;
+        float f4 = f3 % 32.0F;
+        double d2 = (double) k1 + 0.5 - camX;
+        double d3 = (double) j1 + 0.5 - camZ;
+        float f6 = (float) Math.sqrt(d2 * d2 + d3 * d3) / (float) l;
+        float f7 = ((1.0F - f6 * f6) * 0.5F + 0.5F) * rain * opacityStrength;
+        blockpos$mutableblockpos.set(k1, l2, j1);
+        int k3 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
+        bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
+                .uv(0.0F, (float) j2 * stretchStrength + f4)
+                .color(1.0F, 1.0F, 1.0F, f7)
+                .uv2(k3)
+                .endVertex();
+        bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
+                .uv(1.0F, (float) j2 * stretchStrength + f4)
+                .color(1.0F, 1.0F, 1.0F, f7)
+                .uv2(k3)
+                .endVertex();
+        bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
+                .uv(1.0F, (float) k2 * stretchStrength + f4)
+                .color(1.0F, 1.0F, 1.0F, f7)
+                .uv2(k3)
+                .endVertex();
+        bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
+                .uv(0.0F, (float) k2 * stretchStrength + f4)
+                .color(1.0F, 1.0F, 1.0F, f7)
+                .uv2(k3)
+                .endVertex();
+
+        return i1;
+    }
+
+    private int renderSnow(ResourceLocation location, Tesselator tesselator, BufferBuilder bufferBuilder, LevelRenderer levelRenderer, ClientLevel level, RandomSource randomsource,
+                           float partialTick, double camX, double camY, double camZ, float opacityStrength, float stretchStrength,
+                           double d0, double d1, float f1, int i1, int j1, int k1, BlockPos.MutableBlockPos blockpos$mutableblockpos, int l, int l2, int k2, int j2, float rain) {
+        if (i1 != 1) {
+            if (i1 == 0) {
+                tesselator.end();
+            }
+
+            i1 = 1;
+            RenderSystem.setShaderTexture(0, location);
+            bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+        }
+
+        float f8 = -((float) (levelRenderer.getTicks() & 511) + partialTick) / 256.0F;
+        float f9 = (float) (randomsource.nextDouble() + (double) f1 * 0.01 * (double) ((float) randomsource.nextGaussian()));
+        float f10 = (float) (randomsource.nextDouble() + (double) (f1 * (float) randomsource.nextGaussian()) * 0.001);
+        double d4 = (double) k1 + 0.5 - camX;
+        double d5 = (double) j1 + 0.5 - camZ;
+        float f11 = (float) Math.sqrt(d4 * d4 + d5 * d5) / (float)l;
+        float f5 = ((1.0F - f11 * f11) * 0.3F + 0.5F) * rain * opacityStrength;
+        blockpos$mutableblockpos.set(k1, l2, j1);
+        int j4 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
+        int k4 = j4 >> 16 & 65535;
+        int l4 = j4 & 65535;
+        int l3 = (k4 * 3 + 240) / 4;
+        int i4 = (l4 * 3 + 240) / 4;
+        bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
+                .uv(0.0F + f9, (float) j2 * stretchStrength + f8 + f10)
+                .color(1.0F, 1.0F, 1.0F, f5)
+                .uv2(i4, l3)
+                .endVertex();
+        bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
+                .uv(1.0F + f9, (float) j2 * stretchStrength + f8 + f10)
+                .color(1.0F, 1.0F, 1.0F, f5)
+                .uv2(i4, l3)
+                .endVertex();
+        bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
+                .uv(1.0F + f9, (float) k2 * stretchStrength + f8 + f10)
+                .color(1.0F, 1.0F, 1.0F, f5)
+                .uv2(i4, l3)
+                .endVertex();
+        bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
+                .uv(0.0F + f9, (float) k2 * stretchStrength + f8 + f10)
+                .color(1.0F, 1.0F, 1.0F, f5)
+                .uv2(i4, l3)
+                .endVertex();
+
+        return i1;
     }
 
     @Override

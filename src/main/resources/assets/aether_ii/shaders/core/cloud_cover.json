@@ -5,7 +5,7 @@
     "dstrgb": "1-srcalpha"
   },
   "vertex": "position_color",
-  "fragment": "aether_ii:position_color_cloud_cover",
+  "fragment": "aether_ii:cloud_cover",
   "attributes": [
     "Color"
   ],

@@ -17,7 +17,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.CrossbowAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -30,18 +29,18 @@ import org.joml.Vector3f;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class AetherCrossbowItem extends CrossbowItem {
+public class AetherIICrossbowItem extends CrossbowItem {
     public static final Predicate<ItemStack> BOLT_ONLY = stack -> stack.is(AetherIIItems.SCATTERGLASS_BOLT);
     private final Tier tier;
     private final int chargeTime;
     private boolean startSoundPlayed = false;
     private boolean midLoadSoundPlayed = false;
 
-    public AetherCrossbowItem(Tier tier, Properties properties) {
+    public AetherIICrossbowItem(Tier tier, Properties properties) {
         this(tier, 25, properties);
     }
 
-    public AetherCrossbowItem(Tier tier, int chargeTime, Properties properties) {
+    public AetherIICrossbowItem(Tier tier, int chargeTime, Properties properties) {
         super(properties.defaultDurability(tier.getUses()));
         this.tier = tier;
         this.chargeTime = chargeTime;
@@ -68,19 +67,19 @@ public class AetherCrossbowItem extends CrossbowItem {
 
     public static void performShooting(Level pLevel, LivingEntity pShooter, InteractionHand pUsedHand, ItemStack pCrossbowStack, float pVelocity, float pInaccuracy) {
         if (pShooter instanceof Player player && EventHooks.onArrowLoose(pCrossbowStack, pShooter.level(), player, 1, true) < 0) return;
-        List<ItemStack> list = AetherCrossbowItem.getChargedProjectiles(pCrossbowStack);
-        float[] afloat = AetherCrossbowItem.getShotPitches(pShooter.getRandom());
+        List<ItemStack> list = AetherIICrossbowItem.getChargedProjectiles(pCrossbowStack);
+        float[] afloat = AetherIICrossbowItem.getShotPitches(pShooter.getRandom());
 
         for(int i = 0; i < list.size(); ++i) {
             ItemStack itemstack = list.get(i);
             boolean flag = pShooter instanceof Player && ((Player)pShooter).getAbilities().instabuild;
             if (!itemstack.isEmpty()) {
                 if (i == 0) {
-                    AetherCrossbowItem.shootProjectile(pLevel, pShooter, pUsedHand, pCrossbowStack, itemstack, afloat[i], flag, pVelocity, pInaccuracy, 0.0F);
+                    AetherIICrossbowItem.shootProjectile(pLevel, pShooter, pUsedHand, pCrossbowStack, itemstack, afloat[i], flag, pVelocity, pInaccuracy, 0.0F);
                 } else if (i == 1) {
-                    AetherCrossbowItem.shootProjectile(pLevel, pShooter, pUsedHand, pCrossbowStack, itemstack, afloat[i], flag, pVelocity, pInaccuracy, -10.0F);
+                    AetherIICrossbowItem.shootProjectile(pLevel, pShooter, pUsedHand, pCrossbowStack, itemstack, afloat[i], flag, pVelocity, pInaccuracy, -10.0F);
                 } else if (i == 2) {
-                    AetherCrossbowItem.shootProjectile(pLevel, pShooter, pUsedHand, pCrossbowStack, itemstack, afloat[i], flag, pVelocity, pInaccuracy, 10.0F);
+                    AetherIICrossbowItem.shootProjectile(pLevel, pShooter, pUsedHand, pCrossbowStack, itemstack, afloat[i], flag, pVelocity, pInaccuracy, 10.0F);
                 }
             }
         }
@@ -90,7 +89,7 @@ public class AetherCrossbowItem extends CrossbowItem {
 
     private static float[] getShotPitches(RandomSource random) {
         boolean flag = random.nextBoolean();
-        return new float[] {1.0F, AetherCrossbowItem.getRandomShotPitch(flag, random), AetherCrossbowItem.getRandomShotPitch(!flag, random)};
+        return new float[] {1.0F, AetherIICrossbowItem.getRandomShotPitch(flag, random), AetherIICrossbowItem.getRandomShotPitch(!flag, random)};
     }
 
     private static float getRandomShotPitch(boolean isHighPitched, RandomSource random) {
@@ -100,7 +99,7 @@ public class AetherCrossbowItem extends CrossbowItem {
 
     private static void shootProjectile(Level level, LivingEntity shooter, InteractionHand hand, ItemStack crossbow, ItemStack ammo, float soundPitch, boolean isCreativeMode, float velocity, float inaccuracy, float projectileAngle) {
         if (!level.isClientSide()) {
-            AbstractArrow projectile = AetherCrossbowItem.getArrow(level, shooter, crossbow, ammo);
+            AbstractArrow projectile = AetherIICrossbowItem.getArrow(level, shooter, crossbow, ammo);
             if (isCreativeMode || projectileAngle != 0.0F) {
                 projectile.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
             }
@@ -141,7 +140,7 @@ public class AetherCrossbowItem extends CrossbowItem {
             }
             serverPlayer.awardStat(Stats.ITEM_USED.get(crossbow.getItem()));
         }
-        AetherCrossbowItem.clearChargedProjectiles(crossbow);
+        AetherIICrossbowItem.clearChargedProjectiles(crossbow);
     }
 
     @Override
@@ -187,7 +186,7 @@ public class AetherCrossbowItem extends CrossbowItem {
                 stack = ammo.copy();
             }
 
-            AetherCrossbowItem.addChargedProjectile(crossbow, stack);
+            AetherIICrossbowItem.addChargedProjectile(crossbow, stack);
             return true;
         }
     }
@@ -233,7 +232,7 @@ public class AetherCrossbowItem extends CrossbowItem {
         if (!level.isClientSide()) {
             SoundEvent startSound = this.getStartSound();
             SoundEvent loadingSound = SoundEvents.CROSSBOW_LOADING_MIDDLE;
-            float f = (float) (stack.getUseDuration() - count) / (float) AetherCrossbowItem.getCrossbowChargeDuration(stack);
+            float f = (float) (stack.getUseDuration() - count) / (float) AetherIICrossbowItem.getCrossbowChargeDuration(stack);
             if (f < 0.2F) {
                 this.startSoundPlayed = false;
                 this.midLoadSoundPlayed = false;
@@ -250,7 +249,7 @@ public class AetherCrossbowItem extends CrossbowItem {
     }
 
     public static int getCrossbowChargeDuration(ItemStack crossbowStack) {
-        return ((AetherCrossbowItem) crossbowStack.getItem()).chargeTime;
+        return ((AetherIICrossbowItem) crossbowStack.getItem()).chargeTime;
     }
 
     public SoundEvent getStartSound() {
@@ -287,6 +286,6 @@ public class AetherCrossbowItem extends CrossbowItem {
 
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repairItem) {
-        return this.tier.getRepairIngredient().test(repairItem) || super.isValidRepairItem(stack, repairItem);
+        return this.tier.getRepairIngredient().test(repairItem);
     }
 }
