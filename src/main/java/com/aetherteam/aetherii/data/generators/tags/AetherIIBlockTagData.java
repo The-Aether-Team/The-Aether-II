@@ -445,6 +445,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
                 AetherIIBlocks.HOLYSTONE_STAIRS.get(),
                 AetherIIBlocks.HOLYSTONE_SLAB.get(),
                 AetherIIBlocks.HOLYSTONE_WALL.get(),
@@ -457,10 +462,26 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE_BRICK_STAIRS.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_SLAB.get(),
                 AetherIIBlocks.HOLYSTONE_BRICK_WALL.get(),
+                AetherIIBlocks.HOLYSTONE_FLAGSTONES.get(),
+                AetherIIBlocks.HOLYSTONE_HEADSTONE.get(),
+                AetherIIBlocks.HOLYSTONE_KEYSTONE.get(),
+                AetherIIBlocks.HOLYSTONE_BASE_BRICKS.get(),
+                AetherIIBlocks.HOLYSTONE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.HOLYSTONE_BASE_PILLAR.get(),
+                AetherIIBlocks.HOLYSTONE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.HOLYSTONE_PILLAR.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_BRICK_STAIRS.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_BRICK_SLAB.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_BRICK_WALL.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_FLAGSTONES.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_HEADSTONE.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_KEYSTONE.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BASE_BRICKS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_BASE_PILLAR.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get(),
                 AetherIIBlocks.UNDERSHALE_STAIRS.get(),
                 AetherIIBlocks.UNDERSHALE_SLAB.get(),
                 AetherIIBlocks.UNDERSHALE_WALL.get(),
@@ -471,6 +492,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AGIOSITE_BRICK_STAIRS.get(),
                 AetherIIBlocks.AGIOSITE_BRICK_SLAB.get(),
                 AetherIIBlocks.AGIOSITE_BRICK_WALL.get(),
+                AetherIIBlocks.AGIOSITE_FLAGSTONES.get(),
+                AetherIIBlocks.AGIOSITE_KEYSTONE.get(),
+                AetherIIBlocks.AGIOSITE_BASE_BRICKS.get(),
+                AetherIIBlocks.AGIOSITE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.AGIOSITE_BASE_PILLAR.get(),
+                AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.AGIOSITE_PILLAR.get(),
                 AetherIIBlocks.ICESTONE_STAIRS.get(),
                 AetherIIBlocks.ICESTONE_SLAB.get(),
                 AetherIIBlocks.ICESTONE_WALL.get(),
@@ -485,6 +513,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ICESTONE_BRICK_STAIRS.get(),
                 AetherIIBlocks.ICESTONE_BRICK_SLAB.get(),
                 AetherIIBlocks.ICESTONE_BRICK_WALL.get(),
+                AetherIIBlocks.ICESTONE_FLAGSTONES.get(),
+                AetherIIBlocks.ICESTONE_KEYSTONE.get(),
+                AetherIIBlocks.ICESTONE_BASE_BRICKS.get(),
+                AetherIIBlocks.ICESTONE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.ICESTONE_BASE_PILLAR.get(),
+                AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.ICESTONE_PILLAR.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.SCATTERGLASS.get(),
@@ -646,11 +681,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ICESTONE_SLAB.get(),
                 AetherIIBlocks.ICESTONE_WALL.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get()
         );
         this.tag(BlockTags.NEEDS_IRON_TOOL).add(
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(),
+                AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
         this.tag(BlockTags.CONVERTABLE_TO_MUD).add(AetherIIBlocks.AETHER_DIRT.get());
@@ -664,7 +703,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBROSIUM_ORE.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
-                AetherIIBlocks.GRAVITITE_ORE.get()
+                AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get()
         );
         this.tag(BlockTags.ENCHANTMENT_POWER_PROVIDER).add(
                 AetherIIBlocks.SKYROOT_BOOKSHELF.get(),
@@ -676,6 +719,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get()
         );
         this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).addTags(AetherIITags.Blocks.AERCLOUDS).add(
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.ARCTIC_ICE.get()
         );
 

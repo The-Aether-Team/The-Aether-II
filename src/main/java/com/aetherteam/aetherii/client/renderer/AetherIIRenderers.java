@@ -90,7 +90,7 @@ public class AetherIIRenderers {
 
     public static void bakeModels(ModelEvent.ModifyBakingResult event) {
         List<DeferredBlock<? extends Block>> fastBlocks = List.of(AetherIIBlocks.HIGHLANDS_BUSH, AetherIIBlocks.BLUEBERRY_BUSH, AetherIIBlocks.POTTED_HIGHLANDS_BUSH, AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
-        List<DeferredBlock<? extends Block>> aoBlocks = List.of(AetherIIBlocks.AMBROSIUM_ORE);
+        List<DeferredBlock<? extends Block>> aoBlocks = List.of(AetherIIBlocks.AMBROSIUM_ORE, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE);
 
         getModels(event.getModels(), fastBlocks).forEach(entry -> event.getModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getModels(), aoBlocks).forEach(entry -> event.getModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
