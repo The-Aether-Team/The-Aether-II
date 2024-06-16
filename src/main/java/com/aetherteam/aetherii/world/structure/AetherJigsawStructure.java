@@ -4,10 +4,14 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
@@ -19,8 +23,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
-
-// TODO: Port Jigsaw System from 24w14potato Snapshot and replace this with it [Density Checks]
 
 public class AetherJigsawStructure extends Structure {
 
@@ -65,14 +67,29 @@ public class AetherJigsawStructure extends Structure {
     }
 
     private boolean extraSpawningChecks(GenerationContext context) {
+        WorldgenRandom worldgenrandom = context.random();
+        Rotation rotation = Rotation.getRandom(worldgenrandom);
+
+        BlockPos pos = this.getLowestY(context, rotation);
+        return pos.getY() > 128;
+    }
+
+    protected BlockPos getLowestY(Structure.GenerationContext context, Rotation rotation) {
+        int i = 5;
+        int j = 5;
+        if (rotation == Rotation.CLOCKWISE_90) {
+            i = -5;
+        } else if (rotation == Rotation.CLOCKWISE_180) {
+            i = -5;
+            j = -5;
+        } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+            j = -5;
+        }
+
         ChunkPos chunkpos = context.chunkPos();
-        return context.chunkGenerator().getFirstOccupiedHeight(
-                chunkpos.getWorldPosition().getX(),
-                chunkpos.getWorldPosition().getZ(),
-                Heightmap.Types.WORLD_SURFACE_WG,
-                context.heightAccessor(),
-                context.randomState())
-                > aboveBottom;
+        int k = chunkpos.getBlockX(7);
+        int l = chunkpos.getBlockZ(7);
+        return new BlockPos(k, getLowestY(context, k, l, i, j), l);
     }
 
     @Override
@@ -84,17 +101,7 @@ public class AetherJigsawStructure extends Structure {
         ChunkPos chunkPos = context.chunkPos();
         BlockPos pos = new BlockPos(chunkPos.getMiddleBlockX(), startY, chunkPos.getMiddleBlockZ());
 
-        return JigsawPlacement.addPieces(
-                context,
-                startPool,
-                startJigsawName,
-                size,
-                pos,
-                false,
-                projectStartToHeightmap,
-                maxDistanceFromCenter,
-                PoolAliasLookup.create(poolAliases, pos, context.seed())
-        );
+        return JigsawPlacement.addPieces(context, startPool, startJigsawName, size, pos, false, projectStartToHeightmap, maxDistanceFromCenter, PoolAliasLookup.create(poolAliases, pos, context.seed()));
     }
 
     @Override
