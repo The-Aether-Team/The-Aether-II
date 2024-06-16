@@ -269,7 +269,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.SAPLINGS).add(
                 AetherIIBlocks.SKYROOT_SAPLING.get(),
+                AetherIIBlocks.SKYPLANE_SAPLING.get(),
                 AetherIIBlocks.SKYBIRCH_SAPLING.get(),
+                AetherIIBlocks.SKYPINE_SAPLING.get(),
                 AetherIIBlocks.WISPROOT_SAPLING.get(),
                 AetherIIBlocks.WISPTOP_SAPLING.get(),
                 AetherIIBlocks.GREATROOT_SAPLING.get(),
@@ -342,7 +344,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(BlockTags.FLOWER_POTS).add(
                 AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(),
+                AetherIIBlocks.POTTED_SKYPLANE_SAPLING.get(),
                 AetherIIBlocks.POTTED_SKYBIRCH_SAPLING.get(),
+                AetherIIBlocks.POTTED_SKYPINE_SAPLING.get(),
                 AetherIIBlocks.POTTED_WISPROOT_SAPLING.get(),
                 AetherIIBlocks.POTTED_WISPTOP_SAPLING.get(),
                 AetherIIBlocks.POTTED_GREATROOT_SAPLING.get(),
@@ -671,7 +675,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get()
         );
-        this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).add(
+        this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).addTags(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.ARCTIC_ICE.get()
         );
 

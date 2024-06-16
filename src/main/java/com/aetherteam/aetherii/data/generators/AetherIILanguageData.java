@@ -111,7 +111,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Saplings
         this.addBlock(AetherIIBlocks.SKYROOT_SAPLING, "Skyroot Sapling");
+        this.addBlock(AetherIIBlocks.SKYPLANE_SAPLING, "Skyplane Sapling");
         this.addBlock(AetherIIBlocks.SKYBIRCH_SAPLING, "Skybirch Sapling");
+        this.addBlock(AetherIIBlocks.SKYPINE_SAPLING, "Skypine Sapling");
         this.addBlock(AetherIIBlocks.WISPROOT_SAPLING, "Wisproot Sapling");
         this.addBlock(AetherIIBlocks.WISPTOP_SAPLING, "Wisptop Sapling");
         this.addBlock(AetherIIBlocks.GREATROOT_SAPLING, "Greatroot Sapling");
@@ -121,6 +123,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Potted Saplings
         this.addBlock(AetherIIBlocks.POTTED_SKYROOT_SAPLING, "Potted Skyroot Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_SKYPLANE_SAPLING, "Potted Skyplane Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_SKYBIRCH_SAPLING, "Potted Skybirch Sapling");
+        this.addBlock(AetherIIBlocks.POTTED_SKYPINE_SAPLING, "Potted Skypine Sapling");
         this.addBlock(AetherIIBlocks.POTTED_WISPROOT_SAPLING, "Potted Wisproot Sapling");
         this.addBlock(AetherIIBlocks.POTTED_WISPTOP_SAPLING, "Potted Wisptop Sapling");
         this.addBlock(AetherIIBlocks.POTTED_GREATROOT_SAPLING, "Potted Greatroot Sapling");
