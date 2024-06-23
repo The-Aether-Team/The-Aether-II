@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.world.tree.foliage.greatroot;
 
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 import java.util.function.BiConsumer;
 
 public class GreatoakFoliagePlacer extends FoliagePlacer {
-    public static final Codec<GreatoakFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
+    public static final MapCodec<GreatoakFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
             .apply(instance, GreatoakFoliagePlacer::new));
 
     public GreatoakFoliagePlacer(IntProvider radius, IntProvider offset) {

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
@@ -10,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class WisprootTreeDecorator extends TreeDecorator {
-    public static final Codec< WisprootTreeDecorator> CODEC =
-            BlockState.CODEC.fieldOf("block").xmap(WisprootTreeDecorator::new, (instance) -> instance.state).codec();
+    public static final MapCodec< WisprootTreeDecorator> CODEC =
+            BlockState.CODEC.fieldOf("block").xmap(WisprootTreeDecorator::new, (instance) -> instance.state);
 
     private final BlockState state;
 

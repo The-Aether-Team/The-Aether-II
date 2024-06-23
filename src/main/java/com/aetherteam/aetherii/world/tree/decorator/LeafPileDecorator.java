@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.world.tree.decorator;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -11,10 +12,9 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 import java.util.List;
 
 public class LeafPileDecorator extends TreeDecorator {
-    public static final Codec<LeafPileDecorator> CODEC = BlockStateProvider.CODEC
+    public static final MapCodec<LeafPileDecorator> CODEC = BlockStateProvider.CODEC
             .fieldOf("provider")
-            .xmap(LeafPileDecorator::new, p_69327_ -> p_69327_.provider)
-            .codec();
+            .xmap(LeafPileDecorator::new, p_69327_ -> p_69327_.provider);
     private final BlockStateProvider provider;
 
     public LeafPileDecorator(BlockStateProvider provider) {

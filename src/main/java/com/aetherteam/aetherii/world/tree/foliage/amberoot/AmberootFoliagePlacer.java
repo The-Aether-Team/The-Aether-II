@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.world.tree.foliage.amberoot;
 
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,7 +16,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class AmberootFoliagePlacer extends FoliagePlacer {
-    public static final Codec<AmberootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
+    public static final MapCodec<AmberootFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
             .apply(instance, AmberootFoliagePlacer::new));
 
     public AmberootFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {

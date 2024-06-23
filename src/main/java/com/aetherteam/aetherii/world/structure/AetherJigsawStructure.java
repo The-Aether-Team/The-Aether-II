@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.structure;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -22,7 +23,7 @@ import java.util.Optional;
 
 public class AetherJigsawStructure extends Structure {
 
-    public static final Codec<AetherJigsawStructure> CODEC = RecordCodecBuilder.<AetherJigsawStructure>mapCodec(instance ->
+    public static final MapCodec<AetherJigsawStructure> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(AetherJigsawStructure.settingsCodec(instance),
                     StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
                     ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
@@ -32,7 +33,7 @@ public class AetherJigsawStructure extends Structure {
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
                     Codec.intRange(-4096, 4096).fieldOf("checked_y").forGetter(structure -> structure.checkedY),
                     Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(structure -> structure.poolAliases)
-            ).apply(instance, AetherJigsawStructure::new)).codec();
+            ).apply(instance, AetherJigsawStructure::new));
     private final Holder<StructureTemplatePool> startPool;
     private final Optional<ResourceLocation> startJigsawName;
     private final int size;

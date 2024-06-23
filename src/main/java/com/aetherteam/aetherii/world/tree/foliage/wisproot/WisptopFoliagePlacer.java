@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.world.tree.foliage.wisproot;
 
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliageP
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class WisptopFoliagePlacer extends DarkOakFoliagePlacer {
-    public static final Codec<WisptopFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
+    public static final MapCodec<WisptopFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
             .apply(instance, WisptopFoliagePlacer::new));
 
     public WisptopFoliagePlacer(IntProvider radius, IntProvider offset) {

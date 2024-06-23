@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 import java.util.function.BiConsumer;
 
 public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
-    public static final Codec<SkypineFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
+    public static final MapCodec<SkypineFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
             .apply(instance, SkypineFoliagePlacer::new));
 
     public SkypineFoliagePlacer(IntProvider radius, IntProvider offset) {

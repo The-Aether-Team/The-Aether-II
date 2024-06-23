@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,7 +29,7 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 
 public class NestSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
-    public static final Codec<NestSkyrootFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> foliagePlacerParts(instance)
+    public static final MapCodec<NestSkyrootFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
             .apply(instance, NestSkyrootFoliagePlacer::new));
 
     public NestSkyrootFoliagePlacer(IntProvider radius, IntProvider offset) {
