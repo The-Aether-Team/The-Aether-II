@@ -1,9 +1,0 @@
-// 1.20.4	2024-06-13T20:56:26.0981539	Tags for minecraft:entity_type mod id aether_ii
-aa9ab09ce1a34072349cfb6bb11cf8166ba5a44b data/aether_ii/tags/entity_types/kirrid.json
-6ded3ea2e35a47445f95b3e2a263d918575d48cf data/aether_ii/tags/entity_types/no_ambrosium_drops.json
-d93dae8e6a56ce916c3263e6fbdb8adac8bba1ad data/aether_ii/tags/entity_types/no_double_drops.json
-9b38063070847b27437ac04bfc5d8d4216e3c725 data/aether_ii/tags/entity_types/spawning/aerclouds.json
-1524d30a78de2df7d23a5d101c5662ac77752040 data/aether_ii/tags/entity_types/spawning/ice.json
-90b9fd847361ab0269c9e708e890ede1366978d6 data/aether_ii/tags/entity_types/spawning/leaves.json
-fd893412de8706806b586095952f8ce83d4078ae data/minecraft/tags/entity_types/fall_damage_immune.json
-14b6ab6d534c93c8e61fbe2306be3f5a83ea694e data/minecraft/tags/entity_types/impact_projectiles.json

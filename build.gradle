@@ -5,7 +5,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.142'
+    id 'net.neoforged.gradle.userdev' version "${neogradle_version}"
     id 'io.github.0ffz.github-packages' version '[1,2)'
     id 'com.matthewprenger.cursegradle' version '[1.4,1.5)'
     id 'com.modrinth.minotaur' version '[2,3)'
@@ -48,8 +48,7 @@ runs {
     }
 
     data {
-        programArguments.addAll '--mod', mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing', file('src/generated/resources/').getAbsolutePath()
-//        , '--existing-mod', 'nitrogen_internals', '--existing-mod', 'cumulus_menus'
+        programArguments.addAll '--mod', mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing', file('src/generated/resources/').getAbsolutePath(), '--existing-mod', 'nitrogen_internals', '--existing-mod', 'cumulus_menus'
     }
 }
 
@@ -60,22 +59,22 @@ sourceSets.main.resources {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
-//    implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
-//    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
+    implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
+    implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
 
 //    compileOnly "mezz.jei:jei-${project.mc_version}-common-api:${project.jei_version}"
 //    compileOnly "mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei_version}"
 //    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 
-//    jarJar("com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}") {
-//        jarJar.ranged(it, "[${project.nitrogen_version},)")
-//        jarJar.pin(it, "${project.nitrogen_version}")
-//    }
-//
-//    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
-//        jarJar.ranged(it, "[${project.cumulus_version},)")
-//        jarJar.pin(it, "${project.cumulus_version}")
-//    }
+    jarJar("com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}") {
+        jarJar.ranged(it, "[${project.nitrogen_version},)")
+        jarJar.pin(it, "${project.nitrogen_version}")
+    }
+
+    jarJar("com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}") {
+        jarJar.ranged(it, "[${project.cumulus_version},)")
+        jarJar.pin(it, "${project.cumulus_version}")
+    }
 
     //compileOnly fileTree(dir: 'libs', include: '*.jar')
 }
@@ -100,6 +99,7 @@ tasks.withType(ProcessResources).configureEach {
             mod_url                : mod_url,
             mod_tracker            : mod_tracker,
             mod_credits            : mod_credits,
+            mod_authors            : mod_authors,
             mod_description        : mod_description,
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
@@ -116,6 +116,7 @@ tasks.withType(ProcessResources).configureEach {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.compilerArgs << "-Xmaxerrs" << "9000"
 }
 
 tasks.named('jar', Jar).configure {

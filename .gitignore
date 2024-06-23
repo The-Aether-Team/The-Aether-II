@@ -20,5 +20,7 @@ build
 # other
 eclipse
 run
+runs
 __pycache__
 logs
+src/generated/resources/.cache
