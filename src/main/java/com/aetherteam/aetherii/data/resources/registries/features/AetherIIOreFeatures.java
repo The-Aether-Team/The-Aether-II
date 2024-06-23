@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -31,7 +31,7 @@ public class AetherIIOreFeatures {
     public static final RuleTest UNDERSHALE = new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get());
     public static final RuleTest UNDERGROUND = new TagMatchTest(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
 
-    public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
+    public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         List<OreConfiguration.TargetBlockState> ambrosium = List.of(
                 OreConfiguration.target(HOLYSTONE, AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState()),
                 OreConfiguration.target(UNDERSHALE, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get().defaultBlockState())

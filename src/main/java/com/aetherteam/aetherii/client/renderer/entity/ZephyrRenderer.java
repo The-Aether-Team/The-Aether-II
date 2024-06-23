@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class ZephyrRenderer extends MobRenderer<Zephyr, ZephyrModel> {
-    private static final ResourceLocation ZEPHYR_TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/zephyr/zephyr.png");
+    private static final ResourceLocation ZEPHYR_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/zephyr/zephyr.png");
 
     public ZephyrRenderer(EntityRendererProvider.Context context) {
         super(context, new ZephyrModel(context.bakeLayer(AetherIIModelLayers.ZEPHYR)), 0.5F);

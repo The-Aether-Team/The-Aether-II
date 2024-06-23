@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.api.moaegg.MoaType;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -16,18 +16,18 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public class AetherIIMoaTypes {
-    public static final ResourceKey<Registry<MoaType>> MOA_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(AetherII.MODID, "moa_type"));
+    public static final ResourceKey<Registry<MoaType>> MOA_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_type"));
 
     public static final ResourceKey<MoaType> BLUE = createKey("blue");
     public static final ResourceKey<MoaType> WHITE = createKey("white");
     public static final ResourceKey<MoaType> BLACK = createKey("black");
 
     private static ResourceKey<MoaType> createKey(String name) {
-        return ResourceKey.create(AetherIIMoaTypes.MOA_TYPE_REGISTRY_KEY, new ResourceLocation(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIMoaTypes.MOA_TYPE_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
-    public static void bootstrap(BootstapContext<MoaType> context) {
-        context.register(BLUE, new MoaType(new ItemStack(AetherIIBlocks.BLUE_MOA_EGG.get()), 3, 0.155F, 100, new ResourceLocation(AetherII.MODID, "textures/entity/mobs/moa/blue_moa.png"), new ResourceLocation(AetherII.MODID, "textures/entity/mobs/moa/moa_saddle.png")));
+    public static void bootstrap(BootstrapContext<MoaType> context) {
+        context.register(BLUE, new MoaType(new ItemStack(AetherIIBlocks.BLUE_MOA_EGG.get()), 3, 0.155F, 100, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/blue_moa.png"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_saddle.png")));
     }
 
     @Nullable

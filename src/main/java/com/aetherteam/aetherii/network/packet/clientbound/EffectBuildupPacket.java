@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class EffectBuildupPacket {
     public record Set(int entityId, Map<MobEffect, EffectBuildupInstance> activeBuildups) implements BasePacket {
-        public static final ResourceLocation ID = new ResourceLocation(AetherII.MODID, "effect_buildup_add");
+        public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildup_add");
 
         @Override
         public ResourceLocation id() {
@@ -51,7 +51,7 @@ public class EffectBuildupPacket {
     }
 
     public record Remove(int entityId, MobEffect mobEffect) implements BasePacket {
-        public static final ResourceLocation ID = new ResourceLocation(AetherII.MODID, "effect_buildup_remove");
+        public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildup_remove");
 
         @Override
         public ResourceLocation id() {

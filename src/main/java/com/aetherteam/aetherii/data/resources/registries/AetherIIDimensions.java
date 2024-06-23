@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsBiomeSourceBuilders;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -20,7 +20,7 @@ import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import java.util.OptionalLong;
 
 public class AetherIIDimensions {
-    private final static ResourceLocation AETHER_HIGHLANDS_LEVEL_ID = new ResourceLocation(AetherII.MODID, "aether_highlands");
+    private final static ResourceLocation AETHER_HIGHLANDS_LEVEL_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_highlands");
 
     // DimensionType - Specifies the logic and settings for a dimension.
     public static final ResourceKey<DimensionType> AETHER_HIGHLANDS_DIMENSION_TYPE = ResourceKey.create(Registries.DIMENSION_TYPE, AETHER_HIGHLANDS_LEVEL_ID);
@@ -29,7 +29,7 @@ public class AetherIIDimensions {
     // LevelStem - The dimension during lifecycle start and datagen.
     public static final ResourceKey<LevelStem> AETHER_HIGHLANDS_LEVEL_STEM = ResourceKey.create(Registries.LEVEL_STEM, AETHER_HIGHLANDS_LEVEL_ID);
 
-    public static void bootstrapDimensionType(BootstapContext<DimensionType> context) {
+    public static void bootstrapDimensionType(BootstrapContext<DimensionType> context) {
         context.register(AETHER_HIGHLANDS_DIMENSION_TYPE, new DimensionType(
                 OptionalLong.empty(),
                 true,
@@ -43,12 +43,12 @@ public class AetherIIDimensions {
                 384,
                 384,
                 BlockTags.INFINIBURN_OVERWORLD,
-                new ResourceLocation(AetherII.MODID, "aether_highlands"),
+                ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_highlands"),
                 0.0F,
                 new DimensionType.MonsterSettings(false, false, UniformInt.of(0, 7), 0)));
     }
 
-    public static void bootstrapLevelStem(BootstapContext<LevelStem> context) {
+    public static void bootstrapLevelStem(BootstrapContext<LevelStem> context) {
         HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
         HolderGetter<NoiseGeneratorSettings> noiseSettings = context.lookup(Registries.NOISE_SETTINGS);
         HolderGetter<DimensionType> dimensionTypes = context.lookup(Registries.DIMENSION_TYPE);

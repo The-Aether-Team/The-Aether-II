@@ -17,7 +17,7 @@ public class AetherIICreativeTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_BUILDING_BLOCKS = CREATIVE_MODE_TABS.register("building_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-            .withTabsAfter(new ResourceLocation(AetherII.MODID, "dungeon_blocks"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dungeon_blocks"))
             .icon(() -> new ItemStack(AetherIIBlocks.HOLYSTONE_BRICKS.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".building_blocks"))
             .displayItems((features, output) -> {
@@ -225,8 +225,8 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
-            .withTabsBefore(new ResourceLocation(AetherII.MODID, "building_blocks"))
-            .withTabsAfter(new ResourceLocation(AetherII.MODID, "natural_blocks"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "building_blocks"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "natural_blocks"))
             .icon(() -> new ItemStack(Blocks.STONE))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".dungeon_blocks"))
             .displayItems((features, output) -> {
@@ -234,8 +234,8 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()
-            .withTabsBefore(new ResourceLocation(AetherII.MODID, "dungeon_blocks"))
-            .withTabsAfter(new ResourceLocation(AetherII.MODID, "functional_blocks"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dungeon_blocks"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "functional_blocks"))
             .icon(() -> new ItemStack(AetherIIBlocks.AETHER_GRASS_BLOCK.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".natural_blocks"))
             .displayItems((features, output) -> {
@@ -326,8 +326,8 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
-            .withTabsBefore(new ResourceLocation(AetherII.MODID, "natural_blocks"))
-            .withTabsAfter(new ResourceLocation(AetherII.MODID, "equipment_and_utilities"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "natural_blocks"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "equipment_and_utilities"))
             .icon(() -> new ItemStack(AetherIIBlocks.ARTISANS_BENCH.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".functional_blocks"))
             .displayItems((features, output) -> {
@@ -350,8 +350,8 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("equipment_and_utilities", () -> CreativeModeTab.builder()
-            .withTabsBefore(new ResourceLocation(AetherII.MODID, "functional_blocks"))
-            .withTabsAfter(new ResourceLocation(AetherII.MODID, "armor_and_accessories"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "functional_blocks"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "armor_and_accessories"))
             .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_PICKAXE.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".equipment_and_utilities"))
             .displayItems((features, output) -> {
@@ -413,8 +413,8 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("armor_and_accessories", () -> CreativeModeTab.builder()
-            .withTabsBefore(new ResourceLocation(AetherII.MODID, "equipment_and_utilities"))
-            .withTabsAfter(new ResourceLocation(AetherII.MODID, "food_and_drinks"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "equipment_and_utilities"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "food_and_drinks"))
             .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_HELMET.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".armor_and_accessories"))
             .displayItems((features, output) -> {
@@ -441,8 +441,8 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FOOD_AND_DRINKS = CREATIVE_MODE_TABS.register("food_and_drinks", () -> CreativeModeTab.builder()
-            .withTabsBefore(new ResourceLocation(AetherII.MODID, "combat"))
-            .withTabsAfter(new ResourceLocation(AetherII.MODID, "ingredients"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "combat"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ingredients"))
             .icon(() -> new ItemStack(AetherIIItems.ORANGE.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".food_and_drinks"))
             .displayItems((features, output) -> {
@@ -465,8 +465,8 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
-            .withTabsBefore(new ResourceLocation(AetherII.MODID, "food_and_drinks"))
-            .withTabsAfter(new ResourceLocation(AetherII.MODID, "spawn_eggs"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "food_and_drinks"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "spawn_eggs"))
             .icon(() -> new ItemStack(AetherIIItems.INERT_ARKENIUM.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
             .displayItems((features, output) -> {
@@ -496,7 +496,7 @@ public class AetherIICreativeTabs {
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
-            .withTabsBefore(new ResourceLocation(AetherII.MODID, "ingredients"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ingredients"))
             .icon(() -> new ItemStack(AetherIIItems.AERBUNNY_SPAWN_EGG.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
 public record DamageTypeParticlePacket(int entityID, SimpleParticleType particleType) implements BasePacket {
-    public static final ResourceLocation ID = new ResourceLocation(AetherII.MODID, "spawn_damage_type_particle");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "spawn_damage_type_particle");
 
     @Override
     public ResourceLocation id() {

@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.item.EquipmentUtil;
 import com.aetherteam.aetherii.item.combat.abilities.SkyrootWeapon;
 import com.aetherteam.aetherii.item.tools.abilities.SkyrootTool;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.RandomSource;
@@ -20,7 +21,7 @@ import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
 
 public class DoubleDropsModifier extends LootModifier {
-    public static final Codec<DoubleDropsModifier> CODEC = RecordCodecBuilder.create((instance) -> LootModifier.codecStart(instance).apply(instance, DoubleDropsModifier::new));
+    public static final MapCodec<DoubleDropsModifier> CODEC = RecordCodecBuilder.mapCodec((instance) -> LootModifier.codecStart(instance).apply(instance, DoubleDropsModifier::new));
 
     public DoubleDropsModifier(LootItemCondition[] conditions) {
         super(conditions);
@@ -36,7 +37,7 @@ public class DoubleDropsModifier extends LootModifier {
 
         // Weapons
         Entity targetEntity = context.getParamOrNull(LootContextParams.THIS_ENTITY);
-        Entity attacker = context.getParamOrNull(LootContextParams.DIRECT_KILLER_ENTITY);
+        Entity attacker = context.getParamOrNull(LootContextParams.DIRECT_ATTACKING_ENTITY);
 
         if (targetState != null) {
             if (tool != null && tool.getItem() instanceof SkyrootTool) {

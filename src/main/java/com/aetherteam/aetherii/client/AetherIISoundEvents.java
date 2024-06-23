@@ -83,6 +83,6 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AERCLOUD_SEA = register("music.highlands.aercloud_sea");
 
     private static DeferredHolder<SoundEvent, SoundEvent> register(String location) {
-        return SOUNDS.register(location, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(AetherII.MODID, location)));
+        return SOUNDS.register(location, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, location)));
     }
 }

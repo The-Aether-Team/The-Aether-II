@@ -13,7 +13,7 @@ import oshi.util.tuples.Quartet;
 import java.util.function.Supplier;
 
 public class PortalTeleportationSyncPacket extends SyncEntityPacket<PortalTeleportationAttachment> {
-    public static final ResourceLocation ID = new ResourceLocation(AetherII.MODID, "sync_portal_teleportation_attachment");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sync_portal_teleportation_attachment");
 
     public PortalTeleportationSyncPacket(Quartet<Integer, String, INBTSynchable.Type, Object> values) {
         super(values);

@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -20,10 +20,10 @@ public class AetherIINoises {
     public static final ResourceKey<NormalNoise.NoiseParameters> ARCTIC_SNOW = createKey("arctic_snow");
 
     private static ResourceKey<NormalNoise.NoiseParameters> createKey(String name) {
-        return ResourceKey.create(Registries.NOISE, new ResourceLocation(AetherII.MODID, name));
+        return ResourceKey.create(Registries.NOISE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
-    public static void bootstrap(BootstapContext<NormalNoise.NoiseParameters> context) {
+    public static void bootstrap(BootstrapContext<NormalNoise.NoiseParameters> context) {
         register(context, TEMPERATURE, -9, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);
         register(context, VEGETATION, -8, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);
         register(context, VEGETATION_RARE, -8, 1.5D, 0.0D, 5.0D, 0.0D, 0.0D, 0.0D);
@@ -36,7 +36,7 @@ public class AetherIINoises {
         register(context, ARCTIC_SNOW, -5, 1.0, 0.0, 0.5, 0.5, 0.0, 0.0);
     }
 
-    public static void register(BootstapContext<NormalNoise.NoiseParameters> context, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double firstAmplitude, double... amplitudes) {
+    public static void register(BootstrapContext<NormalNoise.NoiseParameters> context, ResourceKey<NormalNoise.NoiseParameters> key, int firstOctave, double firstAmplitude, double... amplitudes) {
         context.register(key, new NormalNoise.NoiseParameters(firstOctave, firstAmplitude, amplitudes));
     }
 }

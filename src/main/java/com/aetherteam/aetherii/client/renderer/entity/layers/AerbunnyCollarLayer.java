@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.resources.ResourceLocation;
 
 public class AerbunnyCollarLayer extends TamableCollarLayer<Aerbunny, AerbunnyModel> {
-    private static final ResourceLocation COLLAR_LOCATION = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny_collar.png");
+    private static final ResourceLocation COLLAR_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny_collar.png");
 
     public AerbunnyCollarLayer(RenderLayerParent<Aerbunny, AerbunnyModel> renderer, EntityModelSet modelSet) {
         super(renderer, new AerbunnyModel(modelSet.bakeLayer(AetherIIModelLayers.AERBUNNY_COLLAR)), COLLAR_LOCATION);

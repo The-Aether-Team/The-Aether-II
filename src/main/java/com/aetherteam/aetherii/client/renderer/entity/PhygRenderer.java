@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class PhygRenderer extends MobRenderer<Phyg, PhygModel<Phyg>> {
-    private static final ResourceLocation PHYG_TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/phyg/phyg.png");
+    private static final ResourceLocation PHYG_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/phyg/phyg.png");
 
     public PhygRenderer(EntityRendererProvider.Context context) {
         super(context, new PhygModel<>(context.bakeLayer(AetherIIModelLayers.PHYG)), 0.7F);

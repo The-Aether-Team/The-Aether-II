@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.api.damage.DamageInfliction;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Map;
 
 public class AetherIIDamageInflictions {
-    public static final ResourceKey<Registry<DamageInfliction>> DAMAGE_INFLICTION_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(AetherII.MODID, "damage_infliction"));
+    public static final ResourceKey<Registry<DamageInfliction>> DAMAGE_INFLICTION_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "damage_infliction"));
 
     public static final ResourceKey<DamageInfliction> SKYROOT_SHORTSWORD = createKey("skyroot_shortsword");
     public static final ResourceKey<DamageInfliction> SKYROOT_HAMMER = createKey("skyroot_hammer");
@@ -23,10 +23,10 @@ public class AetherIIDamageInflictions {
     public static final ResourceKey<DamageInfliction> ZANITE_SPEAR = createKey("zanite_spear");
 
     private static ResourceKey<DamageInfliction> createKey(String name) {
-        return ResourceKey.create(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, new ResourceLocation(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
-    public static void bootstrap(BootstapContext<DamageInfliction> context) {
+    public static void bootstrap(BootstrapContext<DamageInfliction> context) {
         context.register(SKYROOT_SHORTSWORD, new DamageInfliction(AetherIIItems.SKYROOT_SHORTSWORD.get(), 4.0, 0, 0));
         context.register(SKYROOT_HAMMER, new DamageInfliction(AetherIIItems.SKYROOT_HAMMER.get(), 0, 4.0, 0));
         context.register(SKYROOT_SPEAR, new DamageInfliction(AetherIIItems.SKYROOT_SPEAR.get(), 0, 0, 4.0));

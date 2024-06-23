@@ -13,7 +13,7 @@ import oshi.util.tuples.Quartet;
 import java.util.function.Supplier;
 
 public class DamageSystemSyncPacket extends SyncEntityPacket<DamageSystemAttachment> {
-    public static final ResourceLocation ID = new ResourceLocation(AetherII.MODID, "sync_damage_system_attachment");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sync_damage_system_attachment");
 
     public DamageSystemSyncPacket(Quartet<Integer, String, INBTSynchable.Type, Object> values) {
         super(values);

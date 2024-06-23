@@ -49,10 +49,10 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private static final ResourceLocation CLOUDS_LOCATION = new ResourceLocation("textures/environment/clouds.png");
     private static final ResourceLocation MOON_LOCATION = new ResourceLocation("textures/environment/moon_phases.png");
     private static final ResourceLocation SUN_LOCATION = new ResourceLocation("textures/environment/sun.png");
-    private static final ResourceLocation RAIN_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/rain.png");
-    private static final ResourceLocation RAIN_STORMY_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/rain_stormy.png");
-    private static final ResourceLocation SNOW_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/snow.png");
-    private static final ResourceLocation SNOW_STORMY_LOCATION = new ResourceLocation(AetherII.MODID, "textures/environment/snow_stormy.png");
+    private static final ResourceLocation RAIN_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain.png");
+    private static final ResourceLocation RAIN_STORMY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain_stormy.png");
+    private static final ResourceLocation SNOW_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow.png");
+    private static final ResourceLocation SNOW_STORMY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow_stormy.png");
 
     private final float[] sunriseCol = new float[4];
 

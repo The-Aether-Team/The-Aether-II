@@ -12,9 +12,9 @@ public class AetherIILoot {
     public static final Set<ResourceLocation> IMMUTABLE_LOOT_TABLES = Collections.unmodifiableSet(LOOT_TABLES);
 
     // Entities
-    public static final ResourceLocation HIGHFIELDS_KIRRID_FUR = new ResourceLocation(AetherII.MODID, "entities/kirrid/highfields_wool");
-    public static final ResourceLocation MAGNETIC_KIRRID_FUR = new ResourceLocation(AetherII.MODID, "entities/kirrid/magnetic_wool");
-    public static final ResourceLocation ARCTIC_KIRRID_FUR = new ResourceLocation(AetherII.MODID, "entities/kirrid/arctic_wool");
+    public static final ResourceLocation HIGHFIELDS_KIRRID_FUR = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entities/kirrid/highfields_wool");
+    public static final ResourceLocation MAGNETIC_KIRRID_FUR = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entities/kirrid/magnetic_wool");
+    public static final ResourceLocation ARCTIC_KIRRID_FUR = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entities/kirrid/arctic_wool");
 
     public static final ResourceLocation ENTITIES_SHEEPUFF_WHITE = register("entities/sheepuff/white");
     public static final ResourceLocation ENTITIES_SHEEPUFF_ORANGE = register("entities/sheepuff/orange");
@@ -39,7 +39,7 @@ public class AetherIILoot {
     public static final ResourceLocation STRIP_AMBEROOT = register("stripping/strip_amberoot");
 
     private static ResourceLocation register(String id) {
-        return register(new ResourceLocation(AetherII.MODID, id));
+        return register(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id));
     }
 
     private static ResourceLocation register(ResourceLocation id) {

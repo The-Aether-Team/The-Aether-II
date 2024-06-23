@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.api.damage.DamageResistance;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 import java.util.Map;
 
 public class AetherIIDamageResistances {
-    public static final ResourceKey<Registry<DamageResistance>> DAMAGE_RESISTANCE_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(AetherII.MODID, "damage_resistance"));
+    public static final ResourceKey<Registry<DamageResistance>> DAMAGE_RESISTANCE_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "damage_resistance"));
 
     public static final ResourceKey<DamageResistance> ZEPHYR = createKey("zephyr");
     public static final ResourceKey<DamageResistance> AERBUNNY = createKey("aerbunny");
@@ -24,10 +24,10 @@ public class AetherIIDamageResistances {
     public static final ResourceKey<DamageResistance> MOA = createKey("moa");
 
     private static ResourceKey<DamageResistance> createKey(String name) {
-        return ResourceKey.create(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, new ResourceLocation(AetherII.MODID, name));
+        return ResourceKey.create(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
-    public static void bootstrap(BootstapContext<DamageResistance> context) {
+    public static void bootstrap(BootstrapContext<DamageResistance> context) {
         context.register(ZEPHYR, new DamageResistance(AetherIIEntityTypes.ZEPHYR.get(), 0, 2, -2));
         context.register(AERBUNNY, new DamageResistance(AetherIIEntityTypes.AERBUNNY.get(), 0, 2, -2));
         context.register(SHEEPUFF, new DamageResistance(AetherIIEntityTypes.SHEEPUFF.get(), 0, 0, 0));

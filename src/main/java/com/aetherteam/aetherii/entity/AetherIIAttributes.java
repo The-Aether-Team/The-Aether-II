@@ -29,20 +29,20 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_RESTORATION = ATTRIBUTES.register("shield_stamina_restoration", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_restoration", 5.0, 0.0, 500.0));
 
     public static void registerEntityAttributes(EntityAttributeModificationEvent event) {
-        event.add(EntityType.PLAYER, SWEEP_RANGE.get());
-        event.add(EntityType.PLAYER, SWEEP_KNOCKBACK.get());
-        event.add(EntityType.PLAYER, SWEEP_DAMAGE.get());
+        event.add(EntityType.PLAYER, SWEEP_RANGE);
+        event.add(EntityType.PLAYER, SWEEP_KNOCKBACK);
+        event.add(EntityType.PLAYER, SWEEP_DAMAGE);
 
-        event.add(EntityType.PLAYER, SHOCK_RANGE.get());
-        event.add(EntityType.PLAYER, SHOCK_KNOCKBACK.get());
-        event.add(EntityType.PLAYER, SHOCK_DAMAGE.get());
+        event.add(EntityType.PLAYER, SHOCK_RANGE);
+        event.add(EntityType.PLAYER, SHOCK_KNOCKBACK);
+        event.add(EntityType.PLAYER, SHOCK_DAMAGE);
 
-        event.add(EntityType.PLAYER, STAB_RADIUS.get());
-        event.add(EntityType.PLAYER, STAB_DISTANCE.get());
-        event.add(EntityType.PLAYER, STAB_KNOCKBACK.get());
-        event.add(EntityType.PLAYER, STAB_DAMAGE.get());
+        event.add(EntityType.PLAYER, STAB_RADIUS);
+        event.add(EntityType.PLAYER, STAB_DISTANCE);
+        event.add(EntityType.PLAYER, STAB_KNOCKBACK);
+        event.add(EntityType.PLAYER, STAB_DAMAGE);
 
-        event.add(EntityType.PLAYER, SHIELD_STAMINA_REDUCTION.get());
-        event.add(EntityType.PLAYER, SHIELD_STAMINA_RESTORATION.get());
+        event.add(EntityType.PLAYER, SHIELD_STAMINA_REDUCTION);
+        event.add(EntityType.PLAYER, SHIELD_STAMINA_RESTORATION);
     }
 }

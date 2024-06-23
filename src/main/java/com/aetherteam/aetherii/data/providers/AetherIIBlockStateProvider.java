@@ -632,7 +632,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void skyrootCraftingTable(Block block, Block baseBlock, String location) {
-        ResourceLocation baseTexture = new ResourceLocation(AetherII.MODID, "block/" + location + this.name(baseBlock));
+        ResourceLocation baseTexture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/" + location + this.name(baseBlock));
         ModelFile workbench = this.models().cube(this.name(block),
                         baseTexture,
                         this.extend(this.texture(this.name(block), "utility/"), "_top"),
@@ -757,7 +757,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void skyrootChest(Block block) {
-        ModelFile chest = this.models().cubeAll(this.name(block), new ResourceLocation(AetherII.MODID, "block/construction/skyroot_planks"));
+        ModelFile chest = this.models().cubeAll(this.name(block), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/construction/skyroot_planks"));
         this.chest(block, chest);
     }
 

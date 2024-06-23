@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 public record PortalTravelSoundPacket() implements BasePacket {
-    public static final ResourceLocation ID = new ResourceLocation(AetherII.MODID, "play_portal_travel_sound");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "play_portal_travel_sound");
 
     @Override
     public ResourceLocation id() {

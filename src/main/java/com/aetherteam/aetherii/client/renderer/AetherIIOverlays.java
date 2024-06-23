@@ -32,24 +32,24 @@ import java.util.Collection;
 import java.util.List;
 
 public class AetherIIOverlays {
-    protected static final ResourceLocation BUILDUP_BACKGROUND_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background");
-    protected static final ResourceLocation BUILDUP_BACKGROUND_BACKING_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_backing");
-    protected static final ResourceLocation BUILDUP_BACKGROUND_OUTLINE_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_outline");
-    protected static final ResourceLocation BUILDUP_BACKGROUND_OVERLAY_SPRITE = new ResourceLocation(AetherII.MODID, "hud/buildup_background_overlay");
-    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE = new ResourceLocation(AetherII.MODID, "hud/crosshair_block_indicator_background");
-    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE = new ResourceLocation(AetherII.MODID, "hud/crosshair_block_indicator_progress");
-    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = new ResourceLocation(AetherII.MODID, "hud/hotbar_block_indicator_background");
-    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = new ResourceLocation(AetherII.MODID, "hud/hotbar_block_indicator_progress");
+    protected static final ResourceLocation BUILDUP_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background");
+    protected static final ResourceLocation BUILDUP_BACKGROUND_BACKING_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_backing");
+    protected static final ResourceLocation BUILDUP_BACKGROUND_OUTLINE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_outline");
+    protected static final ResourceLocation BUILDUP_BACKGROUND_OVERLAY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_overlay");
+    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_background");
+    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_progress");
+    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_background");
+    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_progress");
 
     public static void registerOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerAboveAll(new ResourceLocation(AetherII.MODID, "effect_buildups"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
                 renderEffects(minecraft, player, guiGraphics, screenWidth);
             }
         });
-        event.registerAboveAll(new ResourceLocation(AetherII.MODID, "shield_blocking"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield_blocking"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {

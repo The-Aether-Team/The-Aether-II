@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
@@ -17,13 +17,13 @@ public class AetherIIDamageTypes {
     public static final ResourceKey<DamageType> PLAYER_AOE = createKey("player_aoe");
     public static final ResourceKey<DamageType> PLAYER_AOE_NO_KNOCKBACK = createKey("player_aoe_no_knockback");
 
-    public static void bootstrap(BootstapContext<DamageType> context) {
+    public static void bootstrap(BootstrapContext<DamageType> context) {
         context.register(PLAYER_AOE, new DamageType("player", 0.1F));
         context.register(PLAYER_AOE_NO_KNOCKBACK, new DamageType("player", 0.1F));
     }
 
     private static ResourceKey<DamageType> createKey(String name) {
-        return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AetherII.MODID, name));
+        return ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static DamageSource playerAoe(Level level, Player player) {

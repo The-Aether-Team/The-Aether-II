@@ -76,15 +76,15 @@ public class AetherIIClient {
     }
 
     private static void registerCrossbowProperties(Item item) {
-        ItemProperties.register(item, new ResourceLocation("pull"), (stack, level, livingEntity, value) ->
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"), (stack, level, livingEntity, value) ->
                 livingEntity == null ? 0.0F : AetherIICrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / (float) AetherIICrossbowItem.getCrossbowChargeDuration(stack));
-        ItemProperties.register(item, new ResourceLocation("pulling"), (stack, level, livingEntity, value) ->
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pulling"), (stack, level, livingEntity, value) ->
                 livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
-        ItemProperties.register(item, new ResourceLocation("charged"), (stack, level, livingEntity, value) ->
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"), (stack, level, livingEntity, value) ->
                 AetherIICrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
     }
 
     private static void registerShieldProperties(Item item) {
-        ItemProperties.register(item, new ResourceLocation("blocking"), (stack, level, livingEntity, value) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, livingEntity, value) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
     }
 }

@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class MoaRenderer<T extends Moa> extends MultiBabyModelRenderer<T, EntityModel<T>, MoaModel<T>, MoaBabyModel<T>> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/moa/moa.png");
-    private static final ResourceLocation BABY_TEXTURE = new ResourceLocation(AetherII.MODID, "textures/entity/mobs/moa/moa_baby.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa.png");
+    private static final ResourceLocation BABY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_baby.png");
     private final MoaModel<T> defaultModel;
     private final MoaBabyModel<T> babyModel;
 

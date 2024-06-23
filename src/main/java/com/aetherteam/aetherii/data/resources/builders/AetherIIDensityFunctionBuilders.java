@@ -47,7 +47,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("cloudbed_y_offset");
 
     private static ResourceKey<DensityFunction> createKey(String name) {
-        return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(AetherII.MODID, name));
+        return ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
     public static final ResourceKey<DensityFunction> SHIFT_X = createVanillaKey("shift_x");
@@ -55,7 +55,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> Y = createVanillaKey("y");
 
     private static ResourceKey<DensityFunction> createVanillaKey(String name) {
-        return ResourceKey.create(Registries.DENSITY_FUNCTION, new ResourceLocation(name));
+        return ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.withDefaultNamespace(name));
     }
 
     public static DensityFunction factorize(HolderGetter<DensityFunction> function, double value) {

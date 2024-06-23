@@ -18,12 +18,12 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements RecipeUpdateListener {
-    private static final ResourceLocation ALTAR_TEXTURE = new ResourceLocation(AetherII.MODID, "textures/gui/menu/altar.png");
-    private static final ResourceLocation OUTPUT_PROGRESS_SPRITE = new ResourceLocation(AetherII.MODID, "container/altar/output_progress");
-    private static final ResourceLocation CHARGE_SPRITE = new ResourceLocation(AetherII.MODID, "container/altar/charge");
-    private static final ResourceLocation CHARGE_HORIZONTAL_SPRITE = new ResourceLocation(AetherII.MODID, "container/altar/charge_horizontal");
-    private static final ResourceLocation CHARGE_VERTICAL_SPRITE = new ResourceLocation(AetherII.MODID, "container/altar/charge_vertical");
-    private static final ResourceLocation CHARGE_SLOT_SPRITE = new ResourceLocation(AetherII.MODID, "container/altar/charge_slot");
+    private static final ResourceLocation ALTAR_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/altar.png");
+    private static final ResourceLocation OUTPUT_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/output_progress");
+    private static final ResourceLocation CHARGE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge");
+    private static final ResourceLocation CHARGE_HORIZONTAL_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_horizontal");
+    private static final ResourceLocation CHARGE_VERTICAL_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_vertical");
+    private static final ResourceLocation CHARGE_SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/altar/charge_slot");
 
     public final AltarRecipeBookComponent recipeBookComponent;
     private boolean widthTooNarrow;

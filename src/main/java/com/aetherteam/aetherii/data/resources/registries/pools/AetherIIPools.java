@@ -7,7 +7,7 @@ import com.mojang.datafixers.util.Either;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +21,7 @@ public class AetherIIPools {
 
     private static final Holder<StructureProcessorList> EMPTY = Holder.direct(new StructureProcessorList(List.of()));
 
-    public static void bootstrap(BootstapContext<StructureTemplatePool> context) {
+    public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> holderGetter = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> fallback = holderGetter.getOrThrow(Pools.EMPTY);
 
@@ -30,14 +30,14 @@ public class AetherIIPools {
     }
 
     public static ResourceKey<StructureTemplatePool> createKey(String name) {
-        return ResourceKey.create(Registries.TEMPLATE_POOL, new ResourceLocation(AetherII.MODID, name));
+        return ResourceKey.create(Registries.TEMPLATE_POOL, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
     }
 
-    public static void register(BootstapContext<StructureTemplatePool> context, String name, StructureTemplatePool value) {
+    public static void register(BootstrapContext<StructureTemplatePool> context, String name, StructureTemplatePool value) {
         context.register(createKey(name), value);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id) {
-        return pool -> new AetherPoolElement(Either.left(new ResourceLocation(AetherII.MODID, id)), EMPTY, pool);
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool);
     }
 }

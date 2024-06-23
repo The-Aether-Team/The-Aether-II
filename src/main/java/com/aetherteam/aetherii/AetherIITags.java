@@ -38,7 +38,7 @@ public class AetherIITags {
         public static final TagKey<Block> GRAVITITE_ABILITY_BLACKLIST = tag("gravitite_ability_blacklist");
 
         private static TagKey<Block> tag(String name) {
-            return TagKey.create(Registries.BLOCK, new ResourceLocation(AetherII.MODID, name));
+            return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -103,7 +103,7 @@ public class AetherIITags {
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
 
         private static TagKey<Item> tag(String name) {
-            return TagKey.create(Registries.ITEM, new ResourceLocation(AetherII.MODID, name));
+            return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -118,7 +118,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> SPAWNING_LEAVES = tag("spawning/leaves");
 
         private static TagKey<EntityType<?>> tag(String name) {
-            return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(AetherII.MODID, name));
+            return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -133,7 +133,7 @@ public class AetherIITags {
         public static final TagKey<Biome> ARCTIC_ICE = tag("arctic_ice");
 
         private static TagKey<Biome> tag(String name) {
-            return TagKey.create(Registries.BIOME, new ResourceLocation(AetherII.MODID, name));
+            return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 
@@ -141,7 +141,7 @@ public class AetherIITags {
         public static final TagKey<DamageType> TYPED = tag("typed");
 
         private static TagKey<DamageType> tag(String name) {
-            return TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(AetherII.MODID, name));
+            return TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 }

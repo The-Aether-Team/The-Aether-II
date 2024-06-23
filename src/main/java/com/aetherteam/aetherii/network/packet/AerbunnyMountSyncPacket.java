@@ -13,7 +13,7 @@ import oshi.util.tuples.Quartet;
 import java.util.function.Supplier;
 
 public class AerbunnyMountSyncPacket extends SyncEntityPacket<AerbunnyMountAttachment> {
-    public static final ResourceLocation ID = new ResourceLocation(AetherII.MODID, "sync_aerbunny_mount_attachment");
+    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sync_aerbunny_mount_attachment");
 
     public AerbunnyMountSyncPacket(Quartet<Integer, String, INBTSynchable.Type, Object> values) {
         super(values);

@@ -15,7 +15,7 @@ public class AetherIIShaders {
     public static void registerShaders(RegisterShadersEvent event) {
         ResourceProvider resourceProvider = event.getResourceProvider();
         try {
-            event.registerShader(new ShaderInstance(resourceProvider, new ResourceLocation(AetherII.MODID, "cloud_cover"), DefaultVertexFormat.POSITION_COLOR), instance -> cloudCoverShader = instance);
+            event.registerShader(new ShaderInstance(resourceProvider, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cloud_cover"), DefaultVertexFormat.POSITION_COLOR), instance -> cloudCoverShader = instance);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
