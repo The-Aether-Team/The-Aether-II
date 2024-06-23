@@ -5,6 +5,6 @@ import net.minecraft.world.item.PickaxeItem;
 
 public class ArkeniumPickaxeItem extends PickaxeItem {
     public ArkeniumPickaxeItem() {
-        super(AetherIIItemTiers.ARKENIUM, 1, -2.8F, new Properties());
+        super(AetherIIItemTiers.ARKENIUM, new Properties().attributes(PickaxeItem.createAttributes(AetherIIItemTiers.ARKENIUM, 1, -2.8F)));
     }
 }

@@ -6,11 +6,12 @@ import com.aetherteam.aetherii.item.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.tools.abilities.SkyrootTool;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.UseOnContext;
 
 public class SkyrootShovelItem extends ShovelItem implements SkyrootTool {
     public SkyrootShovelItem() {
-        super(AetherIIItemTiers.SKYROOT, 1.5F, -3.0F, new Properties());
+        super(AetherIIItemTiers.SKYROOT, new Properties().attributes(ShovelItem.createAttributes(AetherIIItemTiers.SKYROOT, 1.5F, -3.0F)));
     }
 
     @Override

@@ -3,9 +3,10 @@ package com.aetherteam.aetherii.item.tools.holystone;
 import com.aetherteam.aetherii.item.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.tools.abilities.HolystoneTool;
 import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.Tiers;
 
 public class HolystoneTrowelItem extends HoeItem implements HolystoneTool {
     public HolystoneTrowelItem() {
-        super(AetherIIItemTiers.HOLYSTONE, -1, -2.0F, new Properties());
+        super(AetherIIItemTiers.HOLYSTONE, new Properties().attributes(HoeItem.createAttributes(AetherIIItemTiers.HOLYSTONE, -1.0F, -2.0F)));
     }
 }

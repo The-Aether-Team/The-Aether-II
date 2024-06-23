@@ -4,11 +4,12 @@ import com.aetherteam.aetherii.item.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.tools.abilities.GravititeTool;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.UseOnContext;
 
 public class GravititePickaxeItem extends PickaxeItem implements GravititeTool {
     public GravititePickaxeItem() {
-        super(AetherIIItemTiers.GRAVITITE, 1, -2.8F, new Properties());
+        super(AetherIIItemTiers.GRAVITITE, new Properties().attributes(PickaxeItem.createAttributes(AetherIIItemTiers.GRAVITITE, 1.0F, -2.8F)));
     }
 
     @Override
