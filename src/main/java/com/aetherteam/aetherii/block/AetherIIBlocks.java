@@ -19,7 +19,6 @@ import com.aetherteam.aetherii.mixin.mixins.common.accessor.FireBlockAccessor;
 import com.aetherteam.aetherii.world.tree.AetherIITreeGrowers;
 import com.aetherteam.nitrogen.item.block.EntityBlockItem;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -167,8 +166,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> AETHER_LONG_GRASS = register("aether_long_grass", () -> new AetherTallGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always)));
 
     // Flowers
-    public static final DeferredBlock<Block> HESPEROSE = register("hesperose", () -> new AetherFlowerBlock(() -> MobEffects.SLOW_FALLING.value(), 4, Block.Properties.ofFullCopy(Blocks.DANDELION)));
-    public static final DeferredBlock<Block> TARABLOOM = register("tarabloom", () -> new AetherFlowerBlock(() -> MobEffects.SLOW_FALLING.value(), 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
+    public static final DeferredBlock<Block> HESPEROSE = register("hesperose", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 4, Block.Properties.ofFullCopy(Blocks.DANDELION)));
+    public static final DeferredBlock<Block> TARABLOOM = register("tarabloom", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
 
     // Potted Flowers
     public static final DeferredBlock<FlowerPotBlock> POTTED_HESPEROSE = BLOCKS.register("potted_hesperose", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, HESPEROSE, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
