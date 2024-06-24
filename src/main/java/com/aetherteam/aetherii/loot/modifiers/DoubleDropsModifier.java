@@ -63,7 +63,7 @@ public class DoubleDropsModifier extends LootModifier {
     }
 
     @Override
-    public Codec<? extends IGlobalLootModifier> codec() {
+    public MapCodec<? extends IGlobalLootModifier> codec() {
         return DoubleDropsModifier.CODEC;
     }
 }

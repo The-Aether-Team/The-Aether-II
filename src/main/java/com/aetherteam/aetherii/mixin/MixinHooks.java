@@ -16,12 +16,12 @@ import net.minecraft.world.phys.Vec3;
 public class MixinHooks {
     public static void shortswordSlashBehavior(Player player, Entity target, boolean canShortswordSlash) {
         if (canShortswordSlash) {
-            float sweepRange = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_RANGE.get());
+            float sweepRange = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_RANGE);
             if (sweepRange > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(sweepRange, sweepRange, sweepRange))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
-                        float sweepKnockback = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_KNOCKBACK.get());
-                        float sweepDamage = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_DAMAGE.get());
+                        float sweepKnockback = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_KNOCKBACK);
+                        float sweepDamage = (float) player.getAttributeValue(AetherIIAttributes.SWEEP_DAMAGE);
                         if (sweepKnockback > 0) {
                             other.knockback(sweepKnockback, Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 2.5 * sweepKnockback, -Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 2.5 * sweepKnockback);
                         }
@@ -46,7 +46,7 @@ public class MixinHooks {
 
     public static void hammerShockBehavior(Player player, Entity target, boolean canHammerShock) {
         if (canHammerShock) {
-            float shockRange = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_RANGE.get());
+            float shockRange = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_RANGE);
             if (shockRange > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(shockRange, shockRange, shockRange))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
@@ -63,8 +63,8 @@ public class MixinHooks {
                             z = -5;
                         }
 
-                        float shockKnockback = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_KNOCKBACK.get());
-                        float shockDamage = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_DAMAGE.get());
+                        float shockKnockback = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_KNOCKBACK);
+                        float shockDamage = (float) player.getAttributeValue(AetherIIAttributes.SHOCK_DAMAGE);
                         if (shockKnockback > 0) {
                             other.knockback(shockKnockback, x * shockKnockback, z * shockKnockback);
                         }
@@ -87,13 +87,13 @@ public class MixinHooks {
 
     public static void spearStabBehavior(Player player, Entity target, boolean canSpearStab) {
         if (canSpearStab) {
-            float stabRadius = (float) player.getAttributeValue(AetherIIAttributes.STAB_RADIUS.get());
-            float stabDistance = (float) player.getAttributeValue(AetherIIAttributes.STAB_DISTANCE.get());
+            float stabRadius = (float) player.getAttributeValue(AetherIIAttributes.STAB_RADIUS);
+            float stabDistance = (float) player.getAttributeValue(AetherIIAttributes.STAB_DISTANCE);
             if (stabRadius > 0 || stabDistance > 0) {
                 for (LivingEntity other : player.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(stabDistance, stabDistance, stabDistance), (other) -> withinStabDistance(player, target, other, stabRadius, stabDistance))) {
                     if (other != player && other != target && !player.isAlliedTo(other) && (!(other instanceof ArmorStand armorStand) || !armorStand.isMarker())) {
-                        float stabKnockback = (float) player.getAttributeValue(AetherIIAttributes.STAB_KNOCKBACK.get());
-                        float stabDamage = (float) player.getAttributeValue(AetherIIAttributes.STAB_DAMAGE.get());
+                        float stabKnockback = (float) player.getAttributeValue(AetherIIAttributes.STAB_KNOCKBACK);
+                        float stabDamage = (float) player.getAttributeValue(AetherIIAttributes.STAB_DAMAGE);
                         if (stabKnockback > 0) {
                             other.knockback(stabKnockback, Mth.sin(player.getYRot() * (float) (Math.PI / 180.0)) * 2.5 * stabKnockback, -Mth.cos(player.getYRot() * (float) (Math.PI / 180.0)) * 2.5 * stabKnockback);
                         }

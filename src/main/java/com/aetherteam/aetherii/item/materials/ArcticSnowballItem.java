@@ -43,7 +43,7 @@ public class ArcticSnowballItem extends SnowballItem implements ThrowableItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity livingEntity) {
         return 72000;
     }
 

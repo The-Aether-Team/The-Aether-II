@@ -59,7 +59,7 @@ public class RockItem extends BlockItem implements ThrowableItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity livingEntity) {
         return 72000;
     }
 
