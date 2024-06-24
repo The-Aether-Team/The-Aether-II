@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,8 +22,8 @@ import java.util.function.Supplier;
 public class AetherFlowerBlock extends FlowerBlock implements Snowable {
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
 
-    public AetherFlowerBlock(Supplier<MobEffect> effectSupplier, int p_53513_, Properties p_53514_) {
-        super(effectSupplier, p_53513_, p_53514_);
+    public AetherFlowerBlock(Holder<MobEffect> effectHolder, int p_53513_, Properties p_53514_) {
+        super(effectHolder, p_53513_, p_53514_);
         this.registerDefaultState(this.stateDefinition.any().setValue(SNOWY, Boolean.FALSE));
     }
 

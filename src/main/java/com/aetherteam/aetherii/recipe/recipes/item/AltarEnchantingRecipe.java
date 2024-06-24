@@ -5,21 +5,17 @@ import com.aetherteam.aetherii.recipe.builder.book.AltarBookCategory;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.Container;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.crafting.CraftingHelper;
 
-public class AltarEnchantingRecipe implements Recipe<Container> {
+public class AltarEnchantingRecipe implements Recipe<SingleRecipeInput> {
     protected final String group;
     protected final AltarBookCategory category;
     protected final Ingredient ingredient;
@@ -39,12 +35,12 @@ public class AltarEnchantingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container container, Level level) {
-        return this.ingredient.test(container.getItem(0));
+    public boolean matches(SingleRecipeInput input, Level level) {
+        return this.ingredient.test(input.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
+    public ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider provider) {
         return this.result.copy();
     }
 
@@ -61,7 +57,7 @@ public class AltarEnchantingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return this.result;
     }
 
@@ -102,43 +98,48 @@ public class AltarEnchantingRecipe implements Recipe<Container> {
     }
 
     public static class Serializer implements RecipeSerializer<AltarEnchantingRecipe> {
-        private final Codec<AltarEnchantingRecipe> codec;
+        private final MapCodec<AltarEnchantingRecipe> codec;
+        private final StreamCodec<RegistryFriendlyByteBuf, AltarEnchantingRecipe> streamCodec;
 
         public Serializer() {
-            this.codec = RecordCodecBuilder.create(instance -> instance.group(
-                    ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter(recipe -> recipe.group),
+            this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                    Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
                     AltarBookCategory.CODEC.fieldOf("category").orElse(AltarBookCategory.MISC).forGetter(p_300828_ -> p_300828_.category),
                     Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
-                    CraftingHelper.smeltingResultCodec().fieldOf("result").forGetter(recipe -> recipe.result),
+                    ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
                     Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(recipe -> recipe.experience),
                     Codec.INT.fieldOf("fuel_count").orElse(1).forGetter(recipe -> recipe.fuelCount),
                     Codec.INT.fieldOf("processing_time").orElse(200).forGetter(recipe -> recipe.processingTime)
             ).apply(instance, AltarEnchantingRecipe::new));
+            this.streamCodec = StreamCodec.of(this::toNetwork, this::fromNetwork);
         }
 
         @Override
-        public Codec<AltarEnchantingRecipe> codec() {
+        public MapCodec<AltarEnchantingRecipe> codec() {
             return this.codec;
         }
 
         @Override
-        public AltarEnchantingRecipe fromNetwork(FriendlyByteBuf buffer) {
+        public StreamCodec<RegistryFriendlyByteBuf, AltarEnchantingRecipe> streamCodec() {
+            return this.streamCodec;
+        }
+
+        public AltarEnchantingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
             String group = buffer.readUtf();
             AltarBookCategory category = buffer.readEnum(AltarBookCategory.class);
-            Ingredient ingredient = Ingredient.fromNetwork(buffer);
-            ItemStack result = buffer.readItem();
+            Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+            ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
             float experience = buffer.readFloat();
             int inputCount = buffer.readVarInt();
             int processingTime = buffer.readVarInt();
             return new AltarEnchantingRecipe(group, category, ingredient, result, experience, inputCount, processingTime);
         }
 
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, AltarEnchantingRecipe recipe) {
+        public void toNetwork(RegistryFriendlyByteBuf buffer, AltarEnchantingRecipe recipe) {
             buffer.writeUtf(recipe.group);
             buffer.writeEnum(recipe.category());
-            recipe.ingredient.toNetwork(buffer);
-            buffer.writeItem(recipe.result);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.ingredient);
+            ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
             buffer.writeFloat(recipe.experience);
             buffer.writeVarInt(recipe.fuelCount);
             buffer.writeVarInt(recipe.processingTime);

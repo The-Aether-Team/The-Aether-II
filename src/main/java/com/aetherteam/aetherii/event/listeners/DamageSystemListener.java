@@ -8,11 +8,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.event.TickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
 import net.neoforged.neoforge.event.entity.living.ShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class DamageSystemListener {
 
     public static void criticalHitTracking(CriticalHitEvent event) {
         Player player = event.getEntity();
-        float modifier = event.getDamageModifier();
+        float modifier = event.getDamageMultiplier();
         DamageSystemHooks.trackCriticalHitValue(player, modifier);
     }
 
@@ -53,8 +53,8 @@ public class DamageSystemListener {
         DamageSystemHooks.buildUpShieldStun(livingEntity, source);
     }
 
-    public static void tickPlayer(TickEvent.PlayerTickEvent event) {
-        Player player = event.player;
+    public static void tickPlayer(PlayerTickEvent event) {
+        Player player = event.getEntity();
         DamageSystemHooks.restoreShieldStamina(player);
     }
 }

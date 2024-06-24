@@ -2,30 +2,33 @@ package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.portal.PortalSoundUtil;
-import com.aetherteam.nitrogen.network.BasePacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record PortalTravelSoundPacket() implements BasePacket {
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "play_portal_travel_sound");
+public record PortalTravelSoundPacket() implements CustomPacketPayload {
+    public static final Type<PortalTravelSoundPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "play_portal_travel_sound"));
 
-    @Override
-    public ResourceLocation id() {
-        return ID;
+    public static final StreamCodec<RegistryFriendlyByteBuf, PortalTravelSoundPacket> STREAM_CODEC = CustomPacketPayload.codec(
+            PortalTravelSoundPacket::write,
+            PortalTravelSoundPacket::decode);
+
+    public void write(RegistryFriendlyByteBuf buf) {
     }
 
-    @Override
-    public void write(FriendlyByteBuf buf) {
-    }
-
-    public static PortalTravelSoundPacket decode(FriendlyByteBuf buf) {
+    public static PortalTravelSoundPacket decode(RegistryFriendlyByteBuf buf) {
         return new PortalTravelSoundPacket();
     }
 
     @Override
-    public void execute(Player playerEntity) {
+    public Type<PortalTravelSoundPacket> type() {
+        return TYPE;
+    }
+
+    public static void execute(PortalTravelSoundPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             PortalSoundUtil.playPortalSound(Minecraft.getInstance().player);
         }

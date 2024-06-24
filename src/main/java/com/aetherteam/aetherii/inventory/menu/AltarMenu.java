@@ -18,11 +18,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-public class AltarMenu extends RecipeBookMenu<Container> {
+public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchantingRecipe> {
     private final Container container;
     private final ContainerData data;
     protected final Level level;
@@ -82,8 +83,8 @@ public class AltarMenu extends RecipeBookMenu<Container> {
     }
 
     @Override
-    public boolean recipeMatches(RecipeHolder<? extends Recipe<Container>> recipeHolder) {
-        return recipeHolder.value().matches(this.container, this.level);
+    public boolean recipeMatches(RecipeHolder<AltarEnchantingRecipe> recipeHolder) {
+        return recipeHolder.value().matches(new SingleRecipeInput(this.container.getItem(0)), this.level);
     }
 
     @Override

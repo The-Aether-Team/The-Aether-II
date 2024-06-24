@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.attachment;
 
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.BasePacket;
+import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.Map;
@@ -41,7 +41,7 @@ public class DamageSystemAttachment implements INBTSynchable {
     }
 
     @Override
-    public BasePacket getSyncPacket(int entityID, String key, Type type, Object value) {
+    public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
         return new DamageSystemSyncPacket(entityID, key, type, value);
     }
 }

@@ -14,10 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Supplier;
-
 public class IcestoneStairsBlock extends StairBlock implements EntityBlock {
-    public IcestoneStairsBlock(Supplier<BlockState> state, Properties properties) {
+    public IcestoneStairsBlock(BlockState state, Properties properties) {
         super(state, properties);
     }
 

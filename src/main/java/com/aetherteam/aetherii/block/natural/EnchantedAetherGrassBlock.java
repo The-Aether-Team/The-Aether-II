@@ -40,8 +40,8 @@ public class EnchantedAetherGrassBlock extends GrassBlock {
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         BlockPos abovePos = pos.above();
         BlockState aboveState = level.getBlockState(abovePos);
-        if (aboveState.getBlock() instanceof BushBlock plant) {
-            plant.randomTick(aboveState, level, abovePos, random);
+        if (aboveState.getBlock() instanceof BushBlock) {
+            aboveState.randomTick(level, abovePos, random);
         }
         if (!canBeGrass(state, level, pos)) {
             if (!level.isAreaLoaded(pos, 3))

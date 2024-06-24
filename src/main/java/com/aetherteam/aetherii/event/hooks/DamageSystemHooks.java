@@ -14,7 +14,6 @@ import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.PacketRelay;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
@@ -22,6 +21,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -32,6 +32,7 @@ import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.List;
@@ -107,7 +108,9 @@ public class DamageSystemHooks {
             if (defense > 0) {
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), incorrect, source.getSoundSource(), 1.0F, 1.0F);
             } else if (defense < 0) {
-                PacketRelay.sendToNear(new DamageTypeParticlePacket(target.getId(), particleType), source.getX(), source.getY(), source.getZ(), 15, source.level().dimension());
+                if (source.level() instanceof ServerLevel serverLevel) {
+                    PacketDistributor.sendToPlayersNear(serverLevel, null, source.getX(), source.getY(), source.getZ(), 15,  new DamageTypeParticlePacket(target.getId(), particleType));
+                }
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), correct, source.getSoundSource(), 1.0F, 1.0F);
             }
         }
@@ -127,7 +130,7 @@ public class DamageSystemHooks {
             RegistryAccess registryAccess = player.level().registryAccess();
 
             int position = components.size();
-            Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.getDescriptionId());
+            Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.value().getDescriptionId());
             for (int i = 0; i < position; i++) {
                 Component component = components.get(i);
                 if (component.getString().contains(damageText.getString())) {
@@ -210,7 +213,7 @@ public class DamageSystemHooks {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
             if (player.tickCount % 5 == 0) {
                 if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
-                    int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.get());
+                    int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION);
                     if (player.isBlocking()) {
                         restore /= 4;
                     }

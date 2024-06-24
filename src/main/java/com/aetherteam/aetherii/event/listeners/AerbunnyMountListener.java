@@ -10,8 +10,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class AerbunnyMountListener {
     /**
@@ -44,10 +44,8 @@ public class AerbunnyMountListener {
     /**
      * @see PortalTeleportationHooks#update(LivingEntity)
      */
-    public static void onPlayerUpdate(LivingEvent.LivingTickEvent event) {
-        LivingEntity livingEntity = event.getEntity();
-        if (livingEntity instanceof Player player) {
-            AerbunnyMountHooks.onUpdate(player);
-        }
+    public static void onPlayerUpdate(PlayerTickEvent event) {
+        Player player = event.getEntity();
+        AerbunnyMountHooks.onUpdate(player);
     }
 }

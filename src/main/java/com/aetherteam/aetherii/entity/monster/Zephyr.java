@@ -61,10 +61,10 @@ public class Zephyr extends FlyingMob implements Enemy {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.getEntityData().define(DATA_CHARGE_TIME_ID, 0);
-        this.getEntityData().define(DATA_BLOW_ID, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_CHARGE_TIME_ID, 0);
+        builder.define(DATA_BLOW_ID, false);
     }
 
     /**

@@ -6,8 +6,7 @@ import com.aetherteam.aetherii.event.hooks.AerbunnyMountHooks;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.BasePacket;
-import com.aetherteam.nitrogen.network.PacketRelay;
+import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
@@ -16,6 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
 
 import javax.annotation.Nullable;
@@ -145,7 +145,7 @@ public class AerbunnyMountAttachment implements INBTSynchable {
                 aerbunny.startRiding(player);
                 this.setMountedAerbunny(aerbunny);
                 if (player instanceof ServerPlayer serverPlayer) {
-                    PacketRelay.sendToPlayer(new RemountAerbunnyPacket(player.getId(), aerbunny.getId()), serverPlayer);
+                    PacketDistributor.sendToPlayer(serverPlayer, new RemountAerbunnyPacket(player.getId(), aerbunny.getId()));
                 }
             }
             this.setMountedAerbunnyTag(null);
@@ -211,7 +211,7 @@ public class AerbunnyMountAttachment implements INBTSynchable {
     }
 
     @Override
-    public BasePacket getSyncPacket(int entityID, String key, Type type, Object value) {
+    public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
         return new AerbunnyMountSyncPacket(entityID, key, type, value);
     }
 }

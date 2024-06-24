@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
-import com.aetherteam.nitrogen.network.PacketRelay;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -84,12 +83,12 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     @Override
-    public void defineSynchedData() {
-        super.defineSynchedData();
-        this.getEntityData().define(DATA_PUFFINESS_ID, 0);
-        this.getEntityData().define(DATA_AFRAID_TIME_ID, 0);
-        this.getEntityData().define(DATA_FAST_FALLING_ID, false);
-        this.getEntityData().define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
+    public void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_PUFFINESS_ID, 0);
+        builder.define(DATA_AFRAID_TIME_ID, 0);
+        builder.define(DATA_FAST_FALLING_ID, false);
+        builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
     }
 
     /**
@@ -192,7 +191,7 @@ public class Aerbunny extends AetherTamableAnimal {
                         // The player is only able to jump if the Aerbunny's position is below the last tracked falling position, to avoid infinite jump exploits.
                         if (!player.onGround() && data.isJumping() && player.getDeltaMovement().y() <= 0.0 && this.position().y() < this.lastPos.y() - 1.1) {
                             player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
-                            PacketRelay.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
+                            PacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
                             this.spawnExplosionParticle();
                             this.lastPos = null;
                         }

@@ -16,6 +16,7 @@ import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 public class PortalTeleportationListener {
     /**
@@ -69,8 +70,8 @@ public class PortalTeleportationListener {
     /**
      * @see PortalTeleportationHooks#update(LivingEntity)
      */
-    public static void onPlayerUpdate(LivingEvent.LivingTickEvent event) {
-        LivingEntity livingEntity = event.getEntity();
-        PortalTeleportationHooks.update(livingEntity);
+    public static void onPlayerUpdate(PlayerTickEvent event) {
+        Player player = event.getEntity();
+        PortalTeleportationHooks.update(player);
     }
 }

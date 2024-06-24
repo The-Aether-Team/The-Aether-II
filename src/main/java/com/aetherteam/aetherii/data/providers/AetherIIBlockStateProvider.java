@@ -53,7 +53,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public ModelFile grassBlockTinted(Block block, Block dirtBlock) {
-        return this.models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout"))
+        return this.models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(ResourceLocation.withDefaultNamespace("cutout"))
                 .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
                 .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)))
                 .texture("top_1", this.modLoc("block/natural/" + this.name(block) + "_top_1"))
@@ -171,7 +171,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("east_inside", eastInside)
                 .texture("east_outside", eastOutside)
                 .texture("particle", particle)
-                .renderType(new ResourceLocation("translucent"))
+                .renderType(ResourceLocation.withDefaultNamespace("translucent"))
                 .element().from(0.0F, 15.998F, 0.0F).to(16.0F, 16.0F, 16.0F)
                 .face(Direction.DOWN).texture("#up_inside").uvs(0, 16, 16, 0).cullface(Direction.UP).end()
                 .face(Direction.UP).texture("#up_outside").uvs(0, 0, 16, 16).cullface(Direction.UP).end()
@@ -205,8 +205,8 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         ResourceLocation back = this.extend(this.texture(this.name(block), "natural/"), "_back");
         ResourceLocation right = this.extend(this.texture(this.name(block), "natural/"), "_right");
         ResourceLocation left = this.extend(this.texture(this.name(block), "natural/"), "_left");
-        ModelFile rightModel = this.models().cubeBottomTop(blockName, right, back, front).renderType(new ResourceLocation("translucent"));
-        ModelFile leftModel = this.models().cubeBottomTop(blockName, left, back, front).renderType(new ResourceLocation("translucent"));
+        ModelFile rightModel = this.models().cubeBottomTop(blockName, right, back, front).renderType(ResourceLocation.withDefaultNamespace("translucent"));
+        ModelFile leftModel = this.models().cubeBottomTop(blockName, left, back, front).renderType(ResourceLocation.withDefaultNamespace("translucent"));
 
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
             Direction direction = state.getValue(PurpleAercloudBlock.FACING);
@@ -266,7 +266,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                     .face(Direction.EAST).texture("#texture").end()
                     .face(Direction.WEST).texture("#texture").end()
                     .end()
-                    .renderType(new ResourceLocation("cutout"));
+                    .renderType(ResourceLocation.withDefaultNamespace("cutout"));
             return ConfiguredModel.builder().modelFile(model).build();
         }, AetherLeafPileBlock.PERSISTENT);
     }
@@ -289,7 +289,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
             ModelFile grass;
             if (snowy) {
-                grass = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(new ResourceLocation("cutout"));
+                grass = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
             } else {
                 grass = this.triTintedCross(this.name(block))
                         .texture("particle", this.texture(this.name(block), "natural/"))
@@ -303,7 +303,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public ModelBuilder<BlockModelBuilder> triTintedCross(String name) {
         return this.models().getBuilder(name)
-                .renderType(new ResourceLocation("cutout"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"))
                 .ao(false)
                 .element()
                 .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
@@ -353,7 +353,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.getVariantBuilder(block).forAllStates((state) -> {
             boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
             String prefix = snowy ? "frosted_" : "";
-            ModelFile grass = this.models().cross(prefix + this.name(block), this.texture(prefix + this.name(block), "natural/")).renderType(new ResourceLocation("cutout"));
+            ModelFile grass = this.models().cross(prefix + this.name(block), this.texture(prefix + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
             return ConfiguredModel.builder().modelFile(grass).build();
         });
     }
@@ -372,7 +372,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .element().from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F).shade(true).allFaces((direction, builder) -> builder.texture("#bush").end()).end()
                 .element().from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F).rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end().shade(true).face(Direction.NORTH).texture("#stem").end().face(Direction.SOUTH).texture("#stem").end().end()
                 .element().from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F).rotation().origin(8.0F, 8.0F, 8.0F).axis(Direction.Axis.Y).angle(45.0F).rescale(true).end().shade(true).face(Direction.WEST).texture("#stem").end().face(Direction.EAST).texture("#stem").end().end()
-                .renderType(new ResourceLocation("cutout"));
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
     }
 
     public void pottedBush(Block bush, String location) {
@@ -393,12 +393,12 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .face(Direction.WEST).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
                 .face(Direction.UP).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end()
                 .face(Direction.DOWN).uvs(3.0F, 3.0F, 13.0F, 13.0F).texture("#bush").end().end()
-                .renderType(new ResourceLocation("cutout"));
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
         this.getVariantBuilder(bush).partialState().addModels(new ConfiguredModel(pot));
     }
 
     public void pottedStem(Block stem, String location) {
-        ModelFile pot = this.pottedStemModel(stem, this.name(stem), location).renderType(new ResourceLocation("cutout"));
+        ModelFile pot = this.pottedStemModel(stem, this.name(stem), location).renderType(ResourceLocation.withDefaultNamespace("cutout"));
         this.getVariantBuilder(stem).partialState().addModels(new ConfiguredModel(pot));
     }
 
@@ -456,13 +456,13 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             int topAge = Math.max(age, 2);
             String halfString = lower ? "_bottom_" : "_top_";
             ResourceLocation location = lower ? this.extend(this.texture(blockName, "natural/"), halfString + bottomAge) : this.extend(this.texture(blockName, "natural/"), halfString + topAge);
-            ModelFile model = this.models().cross(blockName + (lower ? (halfString + bottomAge) : (halfString + topAge)), location).renderType(new ResourceLocation("cutout"));
+            ModelFile model = this.models().cross(blockName + (lower ? (halfString + bottomAge) : (halfString + topAge)), location).renderType(ResourceLocation.withDefaultNamespace("cutout"));
             return ConfiguredModel.builder().modelFile(model).build();
         });
     }
 
     public void pottedOrangeTree(Block block, Block tree) {
-        ModelFile pot = this.models().withExistingParent(this.name(block), this.mcLoc("block/flower_pot_cross")).texture("plant", this.modLoc("block/natural/" + this.name(tree) + "_bottom_0")).renderType(new ResourceLocation("cutout"));
+        ModelFile pot = this.models().withExistingParent(this.name(block), this.mcLoc("block/flower_pot_cross")).texture("plant", this.modLoc("block/natural/" + this.name(tree) + "_bottom_0")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
     }
 
@@ -617,7 +617,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void crudeScatterglassPane(IronBarsBlock block, HalfTransparentBlock glass, String location) {
-        this.paneBlockWithRenderType(block, this.texture(this.name(glass), location), this.extend(this.texture(this.name(block), location), "_top"), new ResourceLocation("translucent"));
+        this.paneBlockWithRenderType(block, this.texture(this.name(glass), location), this.extend(this.texture(this.name(block), location), "_top"), ResourceLocation.withDefaultNamespace("translucent"));
     }
 
     public void carpet(Block block, Block baseBlock, String location) {
@@ -763,7 +763,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void skyrootLadder(LadderBlock block) {
         ResourceLocation location = this.texture(this.name(block), "construction/");
-        ModelFile ladder = models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(new ResourceLocation("cutout")).ao(false)
+        ModelFile ladder = models().withExistingParent(this.name(block), this.mcLoc("block/block")).renderType(ResourceLocation.withDefaultNamespace("cutout")).ao(false)
                 .texture("particle", location).texture("texture", location)
                 .element().from(0.0F, 0.0F, 15.2F).to(16.0F, 16.0F, 15.2F).shade(false)
                 .face(Direction.NORTH).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#texture").end()

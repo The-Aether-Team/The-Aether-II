@@ -44,17 +44,20 @@ import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
+import com.aetherteam.nitrogen.network.packet.clientbound.UpdateUserInfoPacket;
+import com.aetherteam.nitrogen.network.packet.serverbound.TriggerUpdateInfoPacket;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
@@ -64,7 +67,7 @@ public class AetherII {
     public static final String MODID = "aether_ii";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public AetherII(IEventBus bus, Dist dist) {
+    public AetherII(ModContainer mod, IEventBus bus, Dist dist) {
         bus.addListener(AetherIIData::dataSetup);
         bus.addListener(this::commonSetup);
         bus.addListener(this::registerPackets);
@@ -107,8 +110,8 @@ public class AetherII {
 
         AetherIIBlocks.registerWoodTypes(); // Registered this early to avoid bugs with WoodTypes and signs.
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, AetherIIConfig.SERVER_SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AetherIIConfig.COMMON_SPEC);
+        mod.registerConfig(ModConfig.Type.SERVER, AetherIIConfig.SERVER_SPEC);
+        mod.registerConfig(ModConfig.Type.COMMON, AetherIIConfig.COMMON_SPEC);
 
         if (dist == Dist.CLIENT) {
             AetherIIClient.clientInit(bus);
@@ -145,23 +148,23 @@ public class AetherII {
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
     }
 
-    public void registerPackets(RegisterPayloadHandlerEvent event) {
-        IPayloadRegistrar registrar = event.registrar(MODID).versioned("1.0.0").optional();
+    public void registerPackets(RegisterPayloadHandlersEvent event) {
+        PayloadRegistrar registrar = event.registrar(MODID).versioned("1.0.0").optional();
 
         // CLIENTBOUND
-        registrar.play(EffectBuildupPacket.Set.ID, EffectBuildupPacket.Set::decode, payload -> payload.client(EffectBuildupPacket.Set::handle));
-        registrar.play(EffectBuildupPacket.Remove.ID, EffectBuildupPacket.Remove::decode, payload -> payload.client(EffectBuildupPacket.Remove::handle));
-        registrar.play(DamageTypeParticlePacket.ID, DamageTypeParticlePacket::decode, payload -> payload.client(DamageTypeParticlePacket::handle));
-        registrar.play(PortalTravelSoundPacket.ID, PortalTravelSoundPacket::decode, payload -> payload.client(PortalTravelSoundPacket::handle));
-        registrar.play(RemountAerbunnyPacket.ID, RemountAerbunnyPacket::decode, payload -> payload.client(RemountAerbunnyPacket::handle));
+        registrar.playToClient(EffectBuildupPacket.Set.TYPE, EffectBuildupPacket.Set.STREAM_CODEC, EffectBuildupPacket.Set::execute);
+        registrar.playToClient(EffectBuildupPacket.Remove.TYPE, EffectBuildupPacket.Remove.STREAM_CODEC, EffectBuildupPacket.Remove::execute);
+        registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
+        registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
+        registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
 
         //SERVERBOUND
-        registrar.play(AerbunnyPuffPacket.ID, AerbunnyPuffPacket::decode, payload -> payload.server(AerbunnyPuffPacket::handle));
-        registrar.play(StepHeightPacket.ID, StepHeightPacket::decode, payload -> payload.server(StepHeightPacket::handle));
+        registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
+        registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
 
         // BOTH
-        registrar.play(AerbunnyMountSyncPacket.ID, AerbunnyMountSyncPacket::decode, AerbunnyMountSyncPacket::handle);
-        registrar.play(DamageSystemSyncPacket.ID, DamageSystemSyncPacket::decode, DamageSystemSyncPacket::handle);
-        registrar.play(PortalTeleportationSyncPacket.ID, PortalTeleportationSyncPacket::decode, PortalTeleportationSyncPacket::handle);
+        registrar.playBidirectional(AerbunnyMountSyncPacket.TYPE, AerbunnyMountSyncPacket.STREAM_CODEC, AerbunnyMountSyncPacket::execute);
+        registrar.playBidirectional(DamageSystemSyncPacket.TYPE, DamageSystemSyncPacket.STREAM_CODEC, DamageSystemSyncPacket::execute);
+        registrar.playBidirectional(PortalTeleportationSyncPacket.TYPE, PortalTeleportationSyncPacket.STREAM_CODEC, PortalTeleportationSyncPacket::execute);
     }
 }

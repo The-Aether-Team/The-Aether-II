@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
-import com.aetherteam.nitrogen.network.PacketRelay;
+import com.aetherteam.nitrogen.network.PacketDistributor;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -111,7 +111,7 @@ public interface MountableMob {
                     stepHeight.addTransientModifier(vehicle.getMountStepHeightModifier());
                 }
                 if (vehicle.level().isClientSide()) {
-                    PacketRelay.sendToServer(new StepHeightPacket(vehicle.getId()));
+                    PacketDistributor.sendToServer(new StepHeightPacket(vehicle.getId()));
                 }
             }
             // Handles movement.

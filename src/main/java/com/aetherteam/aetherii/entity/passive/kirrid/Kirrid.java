@@ -116,8 +116,8 @@ public class Kirrid extends AetherAnimal implements IShearable {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
         this.entityData.define(DATA_HAS_PLATE, true);
         this.entityData.define(DATA_HAS_WOOL, true);
     }

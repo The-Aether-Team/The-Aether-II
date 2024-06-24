@@ -3,14 +3,15 @@ package com.aetherteam.aetherii.attachment;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
-import com.aetherteam.nitrogen.network.PacketRelay;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     }
 
     @Override
-    public CompoundTag serializeNBT() {
+    public CompoundTag serializeNBT(HolderLookup.Provider provider) {
         CompoundTag compoundTag = new CompoundTag();
         if (!this.activeBuildups.isEmpty()) {
             ListTag listTag = new ListTag();
@@ -37,7 +38,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     }
 
     @Override
-    public void deserializeNBT(CompoundTag tag) {
+    public void deserializeNBT(HolderLookup.Provider provider, CompoundTag tag) {
         if (tag.contains("active_buildups", 9)) {
             ListTag listTag = tag.getList("active_buildups", 10);
             for (int i = 0; i < listTag.size(); ++i) {
@@ -51,7 +52,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
 
     public void tick() {
         if (this.loadingSync) {
-            PacketRelay.sendToAll(new EffectBuildupPacket.Set(this.entity.getId(), this.activeBuildups));
+            PacketDistributor.sendToAllPlayers(new EffectBuildupPacket.Set(this.entity.getId(), this.activeBuildups));
             this.loadingSync = false;
         }
         this.activeBuildups.values().removeIf(instance -> !instance.tick(this.entity));
@@ -81,7 +82,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
 
     public void removeBuildup(MobEffect effect) {
         if (!this.entity.level().isClientSide()) {
-            PacketRelay.sendToAll(new EffectBuildupPacket.Remove(this.entity.getId(), effect));
+            PacketDistributor.sendToAllPlayers(new EffectBuildupPacket.Remove(this.entity.getId(), effect));
         }
         this.activeBuildups.remove(effect);
     }

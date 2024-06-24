@@ -44,6 +44,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForgeMod;
 
@@ -101,13 +102,13 @@ public class Moa extends MountableAnimal {
 
     public Moa(EntityType<? extends Moa> type, Level level) {
         super(type, level);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_FIRE, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DAMAGE_FIRE, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_OTHER, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DAMAGE_OTHER, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.LAVA, -1.0F);
+        this.setPathfindingMalus(PathType.DANGER_FIRE, -1.0F);
+        this.setPathfindingMalus(PathType.DAMAGE_FIRE, -1.0F);
+        this.setPathfindingMalus(PathType.DANGER_POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.DANGER_OTHER, -1.0F);
+        this.setPathfindingMalus(PathType.DAMAGE_OTHER, -1.0F);
+        this.setPathfindingMalus(PathType.LAVA, -1.0F);
     }
 
 
@@ -125,18 +126,18 @@ public class Moa extends MountableAnimal {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.getEntityData().define(DATA_MOA_UUID_ID, Optional.empty());
-        this.getEntityData().define(DATA_MOA_TYPE_ID, "");
-        this.getEntityData().define(DATA_RIDER_UUID, Optional.empty());
-        this.getEntityData().define(DATA_LAST_RIDER_UUID, Optional.empty());
-        this.getEntityData().define(DATA_REMAINING_JUMPS_ID, 0);
-        this.getEntityData().define(DATA_HUNGRY_ID, false);
-        this.getEntityData().define(DATA_AMOUNT_FED_ID, 0);
-        this.getEntityData().define(DATA_PLAYER_GROWN_ID, false);
-        this.getEntityData().define(DATA_SITTING_ID, false);
-        this.getEntityData().define(DATA_FOLLOWING_ID, Optional.empty());
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_MOA_UUID_ID, Optional.empty());
+        builder.define(DATA_MOA_TYPE_ID, "");
+        builder.define(DATA_RIDER_UUID, Optional.empty());
+        builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
+        builder.define(DATA_REMAINING_JUMPS_ID, 0);
+        builder.define(DATA_HUNGRY_ID, false);
+        builder.define(DATA_AMOUNT_FED_ID, 0);
+        builder.define(DATA_PLAYER_GROWN_ID, false);
+        builder.define(DATA_SITTING_ID, false);
+        builder.define(DATA_FOLLOWING_ID, Optional.empty());
     }
 
     @Override
@@ -451,7 +452,7 @@ public class Moa extends MountableAnimal {
                 this.setBaby(false);
             }
             this.setHungry(false);
-            //PacketRelay.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
+            //PacketDistributor.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
             return InteractionResult.CONSUME;
         } else if (this.isPlayerGrown() && !this.isBaby() && this.getHealth() < this.getMaxHealth() && itemStack.is(AetherIITags.Items.MOA_FOOD_ITEMS)) { // Heals a tamed Moa.
             if (!player.getAbilities().instabuild) {
