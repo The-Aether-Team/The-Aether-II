@@ -10,7 +10,7 @@ public class ToxinEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        super.applyEffectTick(pLivingEntity, pAmplifier);
+    public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+        return super.applyEffectTick(pLivingEntity, pAmplifier);
     }
 }

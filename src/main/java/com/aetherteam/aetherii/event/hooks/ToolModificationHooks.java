@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.aetherteam.aetherii.loot.AetherIILootContexts;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -106,12 +106,12 @@ public class ToolModificationHooks {
         }
     }
 
-    private static void stripLog(LevelAccessor accessor, ItemStack stack, UseOnContext context, ResourceLocation loot) {
+    private static void stripLog(LevelAccessor accessor, ItemStack stack, UseOnContext context, ResourceKey<LootTable> loot) {
         if (accessor instanceof Level level) {
             if (level.getServer() != null && level instanceof ServerLevel serverLevel) {
                 Vec3 vector = context.getClickLocation();
                 LootParams parameters = new LootParams.Builder(serverLevel).withParameter(LootContextParams.TOOL, stack).create(AetherIILootContexts.STRIPPING);
-                LootTable lootTable = level.getServer().getLootData().getLootTable(loot);
+                LootTable lootTable = level.getServer().reloadableRegistries().getLootTable(loot);
                 List<ItemStack> list = lootTable.getRandomItems(parameters);
                 for (ItemStack itemStack : list) {
                     ItemEntity itemEntity = new ItemEntity(level, vector.x(), vector.y(), vector.z(), itemStack);

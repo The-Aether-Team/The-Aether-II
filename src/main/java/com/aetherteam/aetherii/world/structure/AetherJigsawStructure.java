@@ -12,10 +12,12 @@ import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.pools.DimensionPadding;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -32,7 +34,11 @@ public class AetherJigsawStructure extends Structure {
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
                     Codec.intRange(-4096, 4096).fieldOf("checked_y").forGetter(structure -> structure.checkedY),
-                    Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(structure -> structure.poolAliases)
+                    Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(structure -> structure.poolAliases),
+                    DimensionPadding.CODEC
+                            .optionalFieldOf("dimension_padding", DimensionPadding.ZERO)
+                            .forGetter(p_348455_ -> p_348455_.dimensionPadding),
+                    LiquidSettings.CODEC.optionalFieldOf("liquid_settings", LiquidSettings.APPLY_WATERLOGGING).forGetter(p_352036_ -> p_352036_.liquidSettings)
             ).apply(instance, AetherJigsawStructure::new));
     private final Holder<StructureTemplatePool> startPool;
     private final Optional<ResourceLocation> startJigsawName;
@@ -42,8 +48,10 @@ public class AetherJigsawStructure extends Structure {
     private final int maxDistanceFromCenter;
     private final int checkedY;
     private final List<PoolAliasBinding> poolAliases;
+    private final DimensionPadding dimensionPadding;
+    private final LiquidSettings liquidSettings;
 
-    public AetherJigsawStructure(StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int checkedY, List<PoolAliasBinding> poolAliases) {
+    public AetherJigsawStructure(StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int checkedY, List<PoolAliasBinding> poolAliases, DimensionPadding dimensionPadding, LiquidSettings liquidSettings) {
         super(config);
         this.startPool = startPool;
         this.startJigsawName = startJigsawName;
@@ -53,6 +61,8 @@ public class AetherJigsawStructure extends Structure {
         this.maxDistanceFromCenter = maxDistanceFromCenter;
         this.checkedY = checkedY;
         this.poolAliases = poolAliases;
+        this.dimensionPadding = dimensionPadding;
+        this.liquidSettings = liquidSettings;
     }
 
     private boolean extraSpawningChecks(GenerationContext context) {
@@ -83,7 +93,9 @@ public class AetherJigsawStructure extends Structure {
                 false,
                 projectStartToHeightmap,
                 maxDistanceFromCenter,
-                PoolAliasLookup.create(poolAliases, pos, context.seed())
+                PoolAliasLookup.create(poolAliases, pos, context.seed()),
+                this.dimensionPadding,
+                this.liquidSettings
         );
     }
 

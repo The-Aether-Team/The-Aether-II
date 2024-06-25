@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
@@ -31,14 +32,14 @@ public interface GravititeTool {
                                 if (blockState.hasBlockEntity()) {
                                     BlockEntity blockEntity = level.getBlockEntity(blockPos);
                                     if (blockEntity != null) {
-                                        floatingBlockEntity.blockData = blockEntity.saveWithoutMetadata();
+                                        floatingBlockEntity.blockData = blockEntity.saveWithoutMetadata(level.registryAccess());
                                     }
                                 }
                                 floatingBlockEntity.setHoldingPlayer(player);
                                 level.addFreshEntity(floatingBlockEntity);
                                 level.removeBlockEntity(blockPos);
                                 level.removeBlock(blockPos, false);
-                                itemStack.hurtAndBreak(4, player, (p) -> p.broadcastBreakEvent(hand));
+                                itemStack.hurtAndBreak(4, player, LivingEntity.getSlotForHand(hand));
                             } else {
                                 player.swing(hand);
                             }

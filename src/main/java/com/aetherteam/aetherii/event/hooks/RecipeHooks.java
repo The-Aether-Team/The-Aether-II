@@ -24,7 +24,7 @@ public class RecipeHooks {
             BlockState oldBlockState = level.getBlockState(pos);
             FreezingBlock.cacheRecipes(level);
             if (FreezingBlock.matchesCache(oldBlockState.getBlock(), oldBlockState, accessor.getBiome(pos)) != null) {
-                level.gameEvent(null, AetherIIGameEvents.ICESTONE_FREEZABLE_UPDATE.value(), pos);
+                level.gameEvent(null, AetherIIGameEvents.ICESTONE_FREEZABLE_UPDATE, pos);
             }
         }
     }
