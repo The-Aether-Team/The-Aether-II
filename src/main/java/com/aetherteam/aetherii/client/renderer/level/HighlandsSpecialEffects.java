@@ -94,7 +94,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     }
 
     @Override
-    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, double camX, double camY, double camZ, Matrix4f projectionMatrix) {
+    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, double camX, double camY, double camZ, Matrix4f modelViewMatrix, Matrix4f projectionMatrix) {
         LevelRenderer levelRenderer = Minecraft.getInstance().levelRenderer;
         float cloudHeight = level.effects().getCloudHeight();
         if (!Float.isNaN(cloudHeight)) {
@@ -217,7 +217,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 float f1 = (float) vec3.y;
                 float f2 = (float) vec3.z;
                 FogRenderer.levelFogColor();
-                BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
+                Tesselator tesselator = Tesselator.getInstance();
                 RenderSystem.depthMask(false);
                 RenderSystem.setShaderColor(f, f1, f2, 1.0F);
                 ShaderInstance shaderinstance = RenderSystem.getShader();
@@ -238,17 +238,17 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                     float f5 = sunriseColor[1];
                     float f6 = sunriseColor[2];
                     Matrix4f matrix4f = poseStack.last().pose();
-                    bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-                    bufferBuilder.vertex(matrix4f, 0.0F, 100.0F, 0.0F).color(f4, f5, f6, sunriseColor[3]).endVertex();
+                    BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+                    bufferBuilder.addVertex(matrix4f, 0.0F, 100.0F, 0.0F).setColor(f4, f5, f6, sunriseColor[3]);
 
                     for (int j = 0; j <= 16; ++j) {
                         float f7 = (float) j * Mth.TWO_PI / 16.0F;
                         float f8 = Mth.sin(f7);
                         float f9 = Mth.cos(f7);
-                        bufferBuilder.vertex(matrix4f, f8 * 120.0F, f9 * 120.0F, -f9 * 40.0F * sunriseColor[3]).color(sunriseColor[0], sunriseColor[1], sunriseColor[2], 0.0F).endVertex();
+                        bufferBuilder.addVertex(matrix4f, f8 * 120.0F, f9 * 120.0F, -f9 * 40.0F * sunriseColor[3]).setColor(sunriseColor[0], sunriseColor[1], sunriseColor[2], 0.0F);
                     }
 
-                    BufferUploader.drawWithShader(bufferBuilder.end());
+                    BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
                     poseStack.popPose();
                 }
 
@@ -264,12 +264,12 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 float f12 = 30.0F;
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
                 RenderSystem.setShaderTexture(0, SUN_LOCATION);
-                bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-                bufferBuilder.vertex(matrix4f1, -f12, 100.0F, -f12).uv(0.0F, 0.0F).endVertex();
-                bufferBuilder.vertex(matrix4f1, f12, 100.0F, -f12).uv(1.0F, 0.0F).endVertex();
-                bufferBuilder.vertex(matrix4f1, f12, 100.0F, f12).uv(1.0F, 1.0F).endVertex();
-                bufferBuilder.vertex(matrix4f1, -f12, 100.0F, f12).uv(0.0F, 1.0F).endVertex();
-                BufferUploader.drawWithShader(bufferBuilder.end());
+                BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+                bufferBuilder.addVertex(matrix4f1, -f12, 100.0F, -f12).setUv(0.0F, 0.0F);
+                bufferBuilder.addVertex(matrix4f1, f12, 100.0F, -f12).setUv(1.0F, 0.0F);
+                bufferBuilder.addVertex(matrix4f1, f12, 100.0F, f12).setUv(1.0F, 1.0F);
+                bufferBuilder.addVertex(matrix4f1, -f12, 100.0F, f12).setUv(0.0F, 1.0F);
+                BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
                 f12 = 20.0F;
                 RenderSystem.setShaderTexture(0, MOON_LOCATION);
                 int k = level.getMoonPhase();
@@ -279,12 +279,12 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 float f14 = (float) (i1) / 2.0F;
                 float f15 = (float) (l + 1) / 4.0F;
                 float f16 = (float) (i1 + 1) / 2.0F;
-                bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-                bufferBuilder.vertex(matrix4f1, -f12, -100.0F, f12).uv(f15, f16).endVertex();
-                bufferBuilder.vertex(matrix4f1, f12, -100.0F, f12).uv(f13, f16).endVertex();
-                bufferBuilder.vertex(matrix4f1, f12, -100.0F, -f12).uv(f13, f14).endVertex();
-                bufferBuilder.vertex(matrix4f1, -f12, -100.0F, -f12).uv(f15, f14).endVertex();
-                BufferUploader.drawWithShader(bufferBuilder.end());
+                BufferBuilder bufferbuilder1 = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+                bufferbuilder1.addVertex(matrix4f1, -f12, -100.0F, f12).setUv(f15, f16);
+                bufferbuilder1.addVertex(matrix4f1, f12, -100.0F, f12).setUv(f13, f16);
+                bufferbuilder1.addVertex(matrix4f1, f12, -100.0F, -f12).setUv(f13, f14);
+                bufferbuilder1.addVertex(matrix4f1, -f12, -100.0F, -f12).setUv(f15, f14);
+                BufferUploader.drawWithShader(bufferbuilder1.buildOrThrow());
 
                 float f10 = level.getStarBrightness(partialTick) * f11;
                 if (f10 > 0.0F) {
@@ -317,12 +317,12 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 RenderSystem.setShader(AetherIIShaders::getCloudCoverShader);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
-                bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-                bufferBuilder.vertex(matrix4f, 0.0F, -16.0F, 0.0F).color(r, g, b, 1.0F).endVertex();
+                BufferBuilder bufferbuilder2 = tesselator.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+                bufferbuilder2.addVertex(matrix4f, 0.0F, -16.0F, 0.0F).setColor(r, g, b, 1.0F);
                 for (int i = -180; i <= 180; i += 9) {
-                    bufferBuilder.vertex(matrix4f, f3 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(r, g, b, 0.0F).endVertex();
+                    bufferbuilder2.addVertex(matrix4f, f3 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).setColor(r, g, b, 0.0F);
                 }
-                BufferUploader.drawWithShader(bufferBuilder.end());
+                BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 
                 if (sunriseColor != null) {
                     float f4 = sunriseColor[0];
@@ -331,12 +331,12 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                     float f7 = Math.signum(-26.0F) * 512.0F;
 
                     RenderSystem.setShader(GameRenderer::getPositionColorShader);
-                    bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-                    bufferBuilder.vertex(matrix4f, 0.0F, -32.0F, 0.0F).color(f4, f5, f6, sunriseColor[3]).endVertex();
+                    BufferBuilder bufferbuilder3 = tesselator.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+                    bufferbuilder3.addVertex(matrix4f, 0.0F, -32.0F, 0.0F).setColor(f4, f5, f6, sunriseColor[3]);
                     for (int i = -180; i <= 180; i += 9) {
-                        bufferBuilder.vertex(matrix4f, f7 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -64.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).color(sunriseColor[0], sunriseColor[1], sunriseColor[2], 0.0F).endVertex();
+                        bufferbuilder3.addVertex(matrix4f, f7 * Mth.cos((float) i * (float) (Math.PI / 180.0)), -64.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).setColor(sunriseColor[0], sunriseColor[1], sunriseColor[2], 0.0F);
                     }
-                    BufferUploader.drawWithShader(bufferBuilder.end());
+                    BufferUploader.drawWithShader(bufferbuilder3.buildOrThrow());
                 }
 
                 RenderSystem.disableBlend();
@@ -514,26 +514,26 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         float f7 = ((1.0F - f6 * f6) * 0.5F + 0.5F) * rain * opacityStrength;
         blockpos$mutableblockpos.set(k1, l2, j1);
         int k3 = LevelRenderer.getLightColor(level, blockpos$mutableblockpos);
-        bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
-                .uv(0.0F, (float) j2 * stretchStrength + f4)
-                .color(1.0F, 1.0F, 1.0F, f7)
+        bufferBuilder.addVertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
+                .setUv(0.0F, (float) j2 * stretchStrength + f4)
+                .setColor(1.0F, 1.0F, 1.0F, f7)
                 .uv2(k3)
-                .endVertex();
-        bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
-                .uv(1.0F, (float) j2 * stretchStrength + f4)
-                .color(1.0F, 1.0F, 1.0F, f7)
+                ;
+        bufferBuilder.addVertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
+                .setUv(1.0F, (float) j2 * stretchStrength + f4)
+                .setColor(1.0F, 1.0F, 1.0F, f7)
                 .uv2(k3)
-                .endVertex();
-        bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
-                .uv(1.0F, (float) k2 * stretchStrength + f4)
-                .color(1.0F, 1.0F, 1.0F, f7)
+                ;
+        bufferBuilder.addVertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
+                .setUv(1.0F, (float) k2 * stretchStrength + f4)
+                .setColor(1.0F, 1.0F, 1.0F, f7)
                 .uv2(k3)
-                .endVertex();
-        bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
-                .uv(0.0F, (float) k2 * stretchStrength + f4)
-                .color(1.0F, 1.0F, 1.0F, f7)
+                ;
+        bufferBuilder.addVertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
+                .setUv(0.0F, (float) k2 * stretchStrength + f4)
+                .setColor(1.0F, 1.0F, 1.0F, f7)
                 .uv2(k3)
-                .endVertex();
+                ;
 
         return i1;
     }
@@ -564,26 +564,26 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         int l4 = j4 & 65535;
         int l3 = (k4 * 3 + 240) / 4;
         int i4 = (l4 * 3 + 240) / 4;
-        bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
-                .uv(0.0F + f9, (float) j2 * stretchStrength + f8 + f10)
-                .color(1.0F, 1.0F, 1.0F, f5)
+        bufferBuilder.addVertex((double) k1 - camX - d0 + 0.5, (double) k2 - camY, (double) j1 - camZ - d1 + 0.5)
+                .setUv(0.0F + f9, (float) j2 * stretchStrength + f8 + f10)
+                .setColor(1.0F, 1.0F, 1.0F, f5)
                 .uv2(i4, l3)
-                .endVertex();
-        bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
-                .uv(1.0F + f9, (float) j2 * stretchStrength + f8 + f10)
-                .color(1.0F, 1.0F, 1.0F, f5)
+                ;
+        bufferBuilder.addVertex((double) k1 - camX + d0 + 0.5, (double) k2 - camY, (double) j1 - camZ + d1 + 0.5)
+                .setUv(1.0F + f9, (float) j2 * stretchStrength + f8 + f10)
+                .setColor(1.0F, 1.0F, 1.0F, f5)
                 .uv2(i4, l3)
-                .endVertex();
-        bufferBuilder.vertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
-                .uv(1.0F + f9, (float) k2 * stretchStrength + f8 + f10)
-                .color(1.0F, 1.0F, 1.0F, f5)
+                ;
+        bufferBuilder.addVertex((double) k1 - camX + d0 + 0.5, (double) j2 - camY, (double) j1 - camZ + d1 + 0.5)
+                .setUv(1.0F + f9, (float) k2 * stretchStrength + f8 + f10)
+                .setColor(1.0F, 1.0F, 1.0F, f5)
                 .uv2(i4, l3)
-                .endVertex();
-        bufferBuilder.vertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
-                .uv(0.0F + f9, (float) k2 * stretchStrength + f8 + f10)
-                .color(1.0F, 1.0F, 1.0F, f5)
+                ;
+        bufferBuilder.addVertex((double) k1 - camX - d0 + 0.5, (double) j2 - camY, (double) j1 - camZ - d1 + 0.5)
+                .setUv(0.0F + f9, (float) k2 * stretchStrength + f8 + f10)
+                .setColor(1.0F, 1.0F, 1.0F, f5)
                 .uv2(i4, l3)
-                .endVertex();
+                ;
 
         return i1;
     }

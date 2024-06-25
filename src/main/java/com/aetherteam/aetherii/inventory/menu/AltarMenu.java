@@ -167,7 +167,7 @@ public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchanting
     }
 
     public int getRecipeFuelCount(ItemStack stack) {
-        Optional<RecipeHolder<AltarEnchantingRecipe>> recipeHolderOptional = this.level.getRecipeManager().getRecipeFor(this.recipeType, new SimpleContainer(stack), this.level);
+        Optional<RecipeHolder<AltarEnchantingRecipe>> recipeHolderOptional = this.level.getRecipeManager().getRecipeFor(this.recipeType, new SingleRecipeInput(stack), this.level);
         if (recipeHolderOptional.isPresent()) {
             AltarEnchantingRecipe recipe = recipeHolderOptional.get().value();
             return recipe.getFuelCount();
@@ -176,7 +176,7 @@ public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchanting
     }
 
     protected boolean canProcess(ItemStack pStack) {
-        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new SimpleContainer(pStack), this.level).isPresent();
+        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new SingleRecipeInput(pStack), this.level).isPresent();
     }
 
     public boolean isFuel(ItemStack stack) {

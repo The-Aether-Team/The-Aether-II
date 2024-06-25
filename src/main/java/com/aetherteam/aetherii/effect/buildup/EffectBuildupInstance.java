@@ -1,12 +1,13 @@
 package com.aetherteam.aetherii.effect.buildup;
 
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
 public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> {
-    private final MobEffect type;
+    private final Holder<MobEffect> type;
     private final MobEffectInstance instance;
     private final int initialInstanceDuration;
     private final int buildupCap;
@@ -17,7 +18,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
         this(preset.type(), preset.instanceBuilder().get(), preset.buildupCap(), buildup);
     }
 
-    public EffectBuildupInstance(MobEffect type, MobEffectInstance instance, int buildupCap, int buildup) {
+    public EffectBuildupInstance(Holder<MobEffect> type, MobEffectInstance instance, int buildupCap, int buildup) {
         this.type = type;
         this.instance = instance;
         this.initialInstanceDuration = instance.getDuration();
@@ -53,7 +54,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
         this.buildup -= amount;
     }
 
-    public MobEffect getType() {
+    public Holder<MobEffect> getType() {
         return this.type;
     }
 
@@ -70,7 +71,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     }
 
     public CompoundTag save(CompoundTag tag) {
-        tag.put("effect_instance", this.instance.save(new CompoundTag()));
+        tag.put("effect_instance", this.instance.save());
         tag.putInt("buildup_cap", this.buildupCap);
         tag.putInt("buildup", this.buildup);
         return tag;

@@ -10,10 +10,7 @@ import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +31,7 @@ import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -81,7 +79,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         }
     };
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
-    private final RecipeManager.CachedCheck<Container, AltarEnchantingRecipe> quickCheck;
+    private final RecipeManager.CachedCheck<SingleRecipeInput, AltarEnchantingRecipe> quickCheck;
 
     public AltarBlockEntity() {
         this(AetherIIBlockEntityTypes.ALTAR.get(), BlockPos.ZERO, AetherIIBlocks.ALTAR.get().defaultBlockState());
@@ -107,24 +105,24 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registry) {
+        super.loadAdditional(tag, registry);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(tag, this.items);
+        ContainerHelper.loadAllItems(tag, this.items, registry);
         this.processingProgress = tag.getInt("ProcessingTime");
         this.processingTotalTime = tag.getInt("ProcessingTimeTotal");
         CompoundTag recipesUsedTag = tag.getCompound("RecipesUsed");
         for (String key : recipesUsedTag.getAllKeys()) {
-            this.recipesUsed.put(new ResourceLocation(key), recipesUsedTag.getInt(key));
+            this.recipesUsed.put(ResourceLocation.tryParse(key), recipesUsedTag.getInt(key));
         }
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registry) {
+        super.saveAdditional(tag, registry);
         tag.putInt("ProcessingTime", this.processingProgress);
         tag.putInt("ProcessingTimeTotal", this.processingTotalTime);
-        ContainerHelper.saveAllItems(tag, this.items);
+        ContainerHelper.saveAllItems(tag, this.items, registry);
         CompoundTag recipesUsedTag = new CompoundTag();
         this.recipesUsed.forEach((location, integer) -> recipesUsedTag.putInt(location.toString(), integer));
         tag.put("RecipesUsed", recipesUsedTag);
@@ -133,7 +131,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     public static void serverTick(Level level, BlockPos pos, BlockState state, AltarBlockEntity blockEntity) {
         boolean changed = false;
 
-        RecipeHolder<AltarEnchantingRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(blockEntity, level).orElse(null);
+        RecipeHolder<AltarEnchantingRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), level).orElse(null);
         boolean hasFuel = hasFuel(blockEntity);
         int i = blockEntity.getMaxStackSize();
         boolean isCharging = false;
@@ -184,7 +182,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
 
     private boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<AltarEnchantingRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
         if (!stacks.get(0).isEmpty() && recipeHolder != null) {
-            ItemStack result = recipeHolder.value().assemble(this, registryAccess);
+            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
             if (result.isEmpty()) {
                 return false;
             } else {
@@ -207,7 +205,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     private boolean process(RegistryAccess registryAccess, @Nullable RecipeHolder<AltarEnchantingRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
         if (recipeHolder != null && this.canProcess(registryAccess, recipeHolder, stacks, maxStackSize)) {
             ItemStack input = stacks.get(0);
-            ItemStack result = recipeHolder.value().assemble(this, registryAccess);
+            ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
             ItemStack output = stacks.get(9);
             if (output.isEmpty()) {
                 stacks.set(9, result.copy());
@@ -239,11 +237,11 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     private static int getTotalProcessingTime(Level level, AltarBlockEntity blockEntity) {
-        return blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(recipeHolder -> recipeHolder.value().getProcessingTime()).orElse(200);
+        return blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), level).map(recipeHolder -> recipeHolder.value().getProcessingTime()).orElse(200);
     }
 
     public static int getRecipeFuelCount(AltarBlockEntity blockEntity) {
-        Optional<RecipeHolder<AltarEnchantingRecipe>> recipeHolderOptional = blockEntity.quickCheck.getRecipeFor(blockEntity, blockEntity.level);
+        Optional<RecipeHolder<AltarEnchantingRecipe>> recipeHolderOptional = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), blockEntity.level);
         if (recipeHolderOptional.isPresent()) {
             AltarEnchantingRecipe recipe = recipeHolderOptional.get().value();
             return recipe.getFuelCount();
@@ -295,6 +293,16 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     @Override
+    protected NonNullList<ItemStack> getItems() {
+        return this.items;
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> pItems) {
+        this.items = pItems;
+    }
+
+    @Override
     public int getContainerSize() {
         return this.items.size();
     }
@@ -327,7 +335,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     @Override
     public void setItem(int index, ItemStack stack) {
         ItemStack itemstack = this.items.get(index);
-        boolean flag = !stack.isEmpty() && ItemStack.isSameItemSameTags(itemstack, stack);
+        boolean flag = !stack.isEmpty() && ItemStack.isSameItemSameComponents(itemstack, stack);
         this.items.set(index, stack);
         if (stack.getCount() > this.getMaxStackSize()) {
             stack.setCount(this.getMaxStackSize());

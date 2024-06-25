@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -17,7 +18,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import java.util.Map;
 
 public class EffectBuildupPacket {
-    public record Set(int entityId, Map<MobEffect, EffectBuildupInstance> activeBuildups) implements CustomPacketPayload {
+    public record Set(int entityId, Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups) implements CustomPacketPayload {
         public static final Type<EffectBuildupPacket.Set> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildup_add"));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, EffectBuildupPacket.Set> STREAM_CODEC = CustomPacketPayload.codec(
@@ -27,14 +28,14 @@ public class EffectBuildupPacket {
         public void write(RegistryFriendlyByteBuf buf) {
             buf.writeInt(this.entityId());
             buf.writeMap(this.activeBuildups(),
-                    (innerBuf, mobEffect) -> innerBuf.writeResourceLocation(BuiltInRegistries.MOB_EFFECT.getKey(mobEffect)),
+                    (innerBuf, mobEffect) -> innerBuf.writeResourceKey(mobEffect.unwrapKey().get()),
                     (innerBuf, instance) -> innerBuf.writeNbt(instance.save(new CompoundTag())));
         }
 
         public static EffectBuildupPacket.Set decode(RegistryFriendlyByteBuf buf) {
             int entityId = buf.readInt();
-            Map<MobEffect, EffectBuildupInstance> activeBuildups = buf.readMap(
-                    (innerBuf) -> BuiltInRegistries.MOB_EFFECT.get(innerBuf.readResourceLocation()),
+            Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups = buf.readMap(
+                    (innerBuf) -> BuiltInRegistries.MOB_EFFECT.getHolderOrThrow(innerBuf.readResourceKey(BuiltInRegistries.MOB_EFFECT.key())),
                     (innerBuf) -> EffectBuildupInstance.load(innerBuf.readNbt()));
             return new EffectBuildupPacket.Set(entityId, activeBuildups);
         }
@@ -51,7 +52,7 @@ public class EffectBuildupPacket {
         }
     }
 
-    public record Remove(int entityId, MobEffect mobEffect) implements CustomPacketPayload {
+    public record Remove(int entityId, Holder<MobEffect> mobEffect) implements CustomPacketPayload {
         public static final Type<EffectBuildupPacket.Remove> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildup_remove"));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, EffectBuildupPacket.Remove> STREAM_CODEC = CustomPacketPayload.codec(
@@ -60,12 +61,12 @@ public class EffectBuildupPacket {
 
         public void write(RegistryFriendlyByteBuf buf) {
             buf.writeInt(this.entityId());
-            buf.writeResourceLocation(BuiltInRegistries.MOB_EFFECT.getKey(this.mobEffect()));
+            buf.writeResourceKey(this.mobEffect().unwrapKey().get());
         }
 
         public static EffectBuildupPacket.Remove decode(RegistryFriendlyByteBuf buf) {
             int entityId = buf.readInt();
-            MobEffect mobEffect = BuiltInRegistries.MOB_EFFECT.get(buf.readResourceLocation());
+            Holder.Reference<MobEffect> mobEffect = BuiltInRegistries.MOB_EFFECT.getHolderOrThrow(buf.readResourceKey(BuiltInRegistries.MOB_EFFECT.key()));
             return new EffectBuildupPacket.Remove(entityId, mobEffect);
         }
 

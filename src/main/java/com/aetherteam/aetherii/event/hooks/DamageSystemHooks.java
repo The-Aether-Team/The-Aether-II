@@ -178,7 +178,7 @@ public class DamageSystemHooks {
     private static void addBonusDamageTypeTooltip(List<Component> components, double value, String name) {
         if (value > 0.0) {
             int position = components.size();
-            Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.getDescriptionId());
+            Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.value().getDescriptionId());
             for (int i = position - 1; i >= 0; i--) {
                 Component component = components.get(i);
                 if (component.getString().contains(damageText.getString())) {
@@ -192,7 +192,7 @@ public class DamageSystemHooks {
     }
 
     public static void buildUpShieldStun(LivingEntity entity, DamageSource source) {
-        if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELDS)) {
+        if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
             if (source.getEntity() != null) { //todo check for aether hostile mobs only or something idk
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
@@ -201,7 +201,7 @@ public class DamageSystemHooks {
                 }
                 attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, attachment.getShieldStamina() - rate));
                 if (attachment.getShieldStamina() <= 0) {
-                    player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELDS).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300));
+                    player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300));
                     player.stopUsingItem();
                 }
             }

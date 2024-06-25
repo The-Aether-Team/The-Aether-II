@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.level.Level;
 
@@ -134,19 +135,23 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
         }
     }
 
+    private static SingleRecipeInput createRecipeInput(Container pContainer) {
+        return new SingleRecipeInput(pContainer.getItem(0));
+    }
+
     private void setupRecipeList(Container container, ItemStack stack) {
         this.recipes.clear();
         this.selectedRecipeIndex.set(-1);
         this.resultSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty()) {
-            this.recipes = this.level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, container, this.level);
+            this.recipes = this.level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, createRecipeInput(container), this.level);
         }
     }
 
     void setupResultSlot() {
         if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get())) {
             RecipeHolder<StonecutterRecipe> recipe = this.recipes.get(this.selectedRecipeIndex.get());
-            ItemStack itemStack = recipe.value().assemble(this.container, this.level.registryAccess());
+            ItemStack itemStack = recipe.value().assemble(createRecipeInput(this.container), this.level.registryAccess());
             if (itemStack.isItemEnabled(this.level.enabledFeatures())) {
                 this.resultContainer.setRecipeUsed(recipe);
                 this.resultSlot.set(itemStack);

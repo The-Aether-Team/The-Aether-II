@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -16,7 +17,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.Map;
 
 public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
-    private final Map<MobEffect, EffectBuildupInstance> activeBuildups = Maps.newHashMap();
+    private final Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups = Maps.newHashMap();
     private final LivingEntity entity;
     private boolean loadingSync = false;
 
@@ -59,7 +60,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     }
 
     public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {
-        MobEffect effect = buildup.type();
+        Holder<MobEffect> effect = buildup.type();
         if (!this.entity.hasEffect(effect)) {
             if (!this.activeBuildups.containsKey(effect)) {
                 this.activeBuildups.put(effect, new EffectBuildupInstance(buildup, amount));
@@ -69,25 +70,25 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
         }
     }
 
-    public void reduceBuildup(MobEffect effect, int amount) {
+    public void reduceBuildup(Holder<MobEffect> effect, int amount) {
         if (this.activeBuildups.containsKey(effect)) {
             this.activeBuildups.get(effect).decreaseBuildup(amount);
         }
     }
 
-    public void setBuildups(Map<MobEffect, EffectBuildupInstance> activeBuildups) {
+    public void setBuildups(Map<Holder<MobEffect>, EffectBuildupInstance> activeBuildups) {
         this.activeBuildups.clear();
         this.activeBuildups.putAll(activeBuildups);
     }
 
-    public void removeBuildup(MobEffect effect) {
+    public void removeBuildup(Holder<MobEffect> effect) {
         if (!this.entity.level().isClientSide()) {
             PacketDistributor.sendToAllPlayers(new EffectBuildupPacket.Remove(this.entity.getId(), effect));
         }
         this.activeBuildups.remove(effect);
     }
 
-    public Map<MobEffect, EffectBuildupInstance> getActiveBuildups() {
+    public Map<Holder<MobEffect>, EffectBuildupInstance> getActiveBuildups() {
         return ImmutableMap.copyOf(this.activeBuildups);
     }
 }

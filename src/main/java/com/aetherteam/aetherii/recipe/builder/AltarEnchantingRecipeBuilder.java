@@ -7,6 +7,7 @@ import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -74,7 +75,7 @@ public class AltarEnchantingRecipeBuilder implements RecipeBuilder {
     }
 
     private static AltarBookCategory determineRecipeCategory(ItemStack ingredient, ItemStack result) {
-        if (result.getItem().isEdible()) {
+        if (result.getItem().components().has(DataComponents.FOOD)) {
             return AltarBookCategory.FOOD;
         } else if (result.getItem() instanceof BlockItem) {
             return AltarBookCategory.BLOCKS;

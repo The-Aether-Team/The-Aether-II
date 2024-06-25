@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.LongJumpToRandomPos;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.neoforged.neoforge.common.NeoForgeMod;
@@ -30,7 +31,7 @@ public class FallableLongJumpToRandomPos<E extends Mob> extends LongJumpToRandom
                 pOwner.setDiscardFriction(true);
                 double d0 = this.chosenJump.length();
                 double d1 = d0 + (double) pOwner.getJumpBoostPower();
-                AttributeInstance gravity = pOwner.getAttribute(NeoForgeMod.ENTITY_GRAVITY.value());
+                AttributeInstance gravity = pOwner.getAttribute(Attributes.GRAVITY);
                 double fallSpeed = gravity.getValue() / Math.min(gravity.getValue() * 1.25F, 0.1); // Entity isn't allowed to fall too slowly from gravity.
                 pOwner.setDeltaMovement(this.chosenJump.scale(d1 / d0).scale(fallSpeed));
                 pOwner.getBrain().setMemory(MemoryModuleType.LONG_JUMP_MID_JUMP, true);

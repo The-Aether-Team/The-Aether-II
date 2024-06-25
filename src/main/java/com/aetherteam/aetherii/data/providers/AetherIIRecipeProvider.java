@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.recipe.recipes.block.SwetGelRecipe;
 import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
@@ -23,12 +24,13 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
-    public AetherIIRecipeProvider(PackOutput output, String id) {
-        super(output, id);
+    public AetherIIRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String id) {
+        super(output, provider, id);
     }
 
     protected static void leafPile(RecipeOutput recipeOutput, ItemLike carpet, ItemLike material) {

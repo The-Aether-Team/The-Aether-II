@@ -43,6 +43,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -153,7 +154,7 @@ public class Aerbunny extends AetherTamableAnimal {
      * Makes this entity fall slowly.
      */
     private void handleFallSpeed() {
-        AttributeInstance gravity = this.getAttribute(NeoForgeMod.ENTITY_GRAVITY.value());
+        AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
             double fallSpeed = Math.max(gravity.getValue() * -1.25, -0.1); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed) {
@@ -175,7 +176,7 @@ public class Aerbunny extends AetherTamableAnimal {
 
             player.resetFallDistance();
             if (!player.onGround() && !player.isFallFlying()) {
-                AttributeInstance playerGravity = player.getAttribute(NeoForgeMod.ENTITY_GRAVITY.value());
+                AttributeInstance playerGravity = player.getAttribute(Attributes.GRAVITY);
                 if (playerGravity != null) {
                     if (!player.getAbilities().flying && !player.isInFluidType() && playerGravity.getValue() > 0.02) {  // Entity isn't allowed to fall too slowly from gravity.
                         player.setDeltaMovement(player.getDeltaMovement().add(0.0, 0.05, 0.0));
@@ -232,7 +233,7 @@ public class Aerbunny extends AetherTamableAnimal {
         Item item = itemstack.getItem();
         if (this.isTame()) {
             if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-                this.heal((float) itemstack.getFoodProperties(this).getNutrition());
+                this.heal((float) itemstack.getFoodProperties(this).nutrition());
                 if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
@@ -512,7 +513,7 @@ public class Aerbunny extends AetherTamableAnimal {
             UUID uuid = this.getOwnerUUID();
             if (uuid != null) {
                 aerbunny.setOwnerUUID(uuid);
-                aerbunny.setTame(true);
+                aerbunny.setTame(true, false);
                 aerbunny.setOrderedToSit(true);
             }
         }
