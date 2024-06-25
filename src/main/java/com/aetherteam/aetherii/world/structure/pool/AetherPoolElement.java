@@ -6,6 +6,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.Optionull;
@@ -42,7 +43,7 @@ public class AetherPoolElement extends StructurePoolElement {
     private static final Codec<Either<ResourceLocation, StructureTemplate>> TEMPLATE_CODEC = Codec.of(
             AetherPoolElement::encodeTemplate, ResourceLocation.CODEC.map(Either::left)
     );
-    public static final Codec<AetherPoolElement> CODEC = RecordCodecBuilder.create(
+    public static final MapCodec<AetherPoolElement> CODEC = RecordCodecBuilder.mapCodec(
             instance -> instance.group(templateCodec(), processorsCodec(), projectionCodec()).apply(instance, AetherPoolElement::new)
     );
     protected final Either<ResourceLocation, StructureTemplate> template;
@@ -127,7 +128,7 @@ public class AetherPoolElement extends StructurePoolElement {
     }
 
     @Override
-    public boolean place(StructureTemplateManager templateManager, WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator, BlockPos offset, BlockPos pos, Rotation rotation, BoundingBox box, RandomSource random, boolean keepJigsaws) {
+    public boolean place(StructureTemplateManager templateManager, WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator, BlockPos offset, BlockPos pos, Rotation rotation, BoundingBox box, RandomSource random, LiquidSettings liquidSettings, boolean keepJigsaws) {
         StructureTemplate template = this.getTemplate(templateManager);
         StructurePlaceSettings settings = this.getSettings(rotation, box, keepJigsaws);
         if (pos.getY() > 96) { // Deletes templates that generated below the cloudbed
@@ -158,6 +159,7 @@ public class AetherPoolElement extends StructurePoolElement {
         settings.setIgnoreEntities(false);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
+//        settings.setLiquidSettings() //todo
         settings.setFinalizeEntities(true);
         if (!offset) {
             settings.addProcessor(JigsawReplacementProcessor.INSTANCE);

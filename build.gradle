@@ -61,6 +61,8 @@ dependencies {
 
     implementation "com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}"
     implementation "com.aetherteam.cumulus:cumulus_menus:${project.cumulus_version}"
+    implementation "io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}"
+    implementation("io.wispforest:accessories-common:${project.accessories_version}+${project.minecraft_version}")
 
 //    compileOnly "mezz.jei:jei-${project.mc_version}-common-api:${project.jei_version}"
 //    compileOnly "mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei_version}"
@@ -76,6 +78,11 @@ dependencies {
         jarJar.pin(it, "${project.cumulus_version}")
     }
 
+    jarJar("io.wispforest:accessories-neoforge:${project.accessories_version}+${project.minecraft_version}") {
+        jarJar.ranged(it, "[${project.accessories_version}+${project.minecraft_version},)")
+        jarJar.pin(it, "${project.accessories_version}+${project.minecraft_version}")
+    }
+
     //compileOnly fileTree(dir: 'libs', include: '*.jar')
 }
 
@@ -83,8 +90,9 @@ repositories {
     maven { url = "https://jitpack.io" }
     maven { url = "https://maven.blamejared.com" }
     maven { url = "https://www.cursemaven.com" }
-    maven { url = "https://dvs1.progwml6.com/files/maven/" }
-    maven { url = "https://gitlab.com/api/v4/projects/21830712/packages/maven" }
+    maven { url = "https://maven.wispforest.io" }
+    maven { url = "https://maven.wispforest.io/releases" }
+    maven { url = "https://maven.shedaniel.me/" }
     maven githubPackage.invoke("The-Aether-Team/Nitrogen")
     maven githubPackage.invoke("The-Aether-Team/Cumulus")
     mavenLocal()
