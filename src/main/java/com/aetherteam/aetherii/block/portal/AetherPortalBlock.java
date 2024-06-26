@@ -50,41 +50,41 @@ public class AetherPortalBlock extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        EntityAccessor entityAccessor = (EntityAccessor) entity;
-        if (!entity.isPassenger() && !entity.isVehicle() && entity.canChangeDimensions()) {
-            if (entity.isOnPortalCooldown()) {
-                entity.setPortalCooldown();
-            } else {
-                if (!entity.level().isClientSide() && !pos.equals(entityAccessor.aether_ii$getPortalEntrancePos())) {
-                    entityAccessor.aether_ii$setPortalEntrancePos(pos.immutable());
-                }
-                if (!entity.hasData(AetherIIDataAttachments.PORTAL_TELEPORTATION)) {
-                    this.handleTeleportation(entity);
-                } else {
-                    var data = entity.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
-                    data.setInPortal(true);
-                    int waitTime = data.getPortalTimer();
-                    if (waitTime >= entity.getPortalWaitTime()) {
-                        this.handleTeleportation(entity);
-                        data.setPortalTimer(0);
-                    }
-                }
-            }
-        }
+//        EntityAccessor entityAccessor = (EntityAccessor) entity;
+//        if (!entity.isPassenger() && !entity.isVehicle() && entity.canChangeDimensions()) {
+//            if (entity.isOnPortalCooldown()) {
+//                entity.setPortalCooldown();
+//            } else {
+//                if (!entity.level().isClientSide() && !pos.equals(entityAccessor.aether_ii$getPortalEntrancePos())) {
+//                    entityAccessor.aether_ii$setPortalEntrancePos(pos.immutable());
+//                }
+//                if (!entity.hasData(AetherIIDataAttachments.PORTAL_TELEPORTATION)) {
+//                    this.handleTeleportation(entity);
+//                } else {
+//                    var data = entity.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
+//                    data.setInPortal(true);
+//                    int waitTime = data.getPortalTimer();
+//                    if (waitTime >= entity.getPortalWaitTime()) {
+//                        this.handleTeleportation(entity);
+//                        data.setPortalTimer(0);
+//                    }
+//                }
+//            }
+//        }
     }
 
     private void handleTeleportation(Entity entity) {
-        MinecraftServer server = entity.level().getServer();
-        ResourceKey<Level> destinationKey = entity.level().dimension() == LevelUtil.destinationDimension() ? LevelUtil.returnDimension() : LevelUtil.destinationDimension();
-        if (server != null) {
-            ServerLevel destinationLevel = server.getLevel(destinationKey);
-            if (destinationLevel != null && !entity.isPassenger()) {
-                entity.level().getProfiler().push("aether_portal");
-                entity.setPortalCooldown();
-                entity.changeDimension(destinationLevel, new AetherPortalForcer(destinationLevel, true));
-                entity.level().getProfiler().pop();
-            }
-        }
+//        MinecraftServer server = entity.level().getServer();
+//        ResourceKey<Level> destinationKey = entity.level().dimension() == LevelUtil.destinationDimension() ? LevelUtil.returnDimension() : LevelUtil.destinationDimension();
+//        if (server != null) {
+//            ServerLevel destinationLevel = server.getLevel(destinationKey);
+//            if (destinationLevel != null && !entity.isPassenger()) {
+//                entity.level().getProfiler().push("aether_portal");
+//                entity.setPortalCooldown();
+//                entity.changeDimension(destinationLevel, new AetherPortalForcer(destinationLevel, true));
+//                entity.level().getProfiler().pop();
+//            }
+//        }
     }
 
     /**

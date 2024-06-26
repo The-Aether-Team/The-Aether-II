@@ -17,15 +17,14 @@ import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.MobEffectTextureManager;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.level.GameType;
-import net.neoforged.neoforge.client.event.RegisterGuiOverlaysEvent;
-import net.neoforged.neoforge.client.gui.overlay.ExtendedGui;
-import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
 import java.awt.*;
 import java.util.Collection;
@@ -41,19 +40,22 @@ public class AetherIIOverlays {
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_background");
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_progress");
 
-    public static void registerOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
+    public static void registerOverlays(RegisterGuiLayersEvent event) {
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
+            int screenWidth = minecraft.getWindow().getScreenWidth();
             if (player != null) {
                 renderEffects(minecraft, player, guiGraphics, screenWidth);
             }
         });
-        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield_blocking"), (gui, guiGraphics, partialTicks, screenWidth, screenHeight) -> {
+        event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield_blocking"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
+            int screenWidth = minecraft.getWindow().getScreenWidth();
+            int screenHeight = minecraft.getWindow().getScreenHeight();
             if (player != null) {
-                renderBlockIndicator(minecraft, guiGraphics, player, gui, screenWidth, screenHeight);
+                renderBlockIndicator(minecraft, guiGraphics, player, screenWidth, screenHeight);
             }
         });
     }
@@ -73,14 +75,14 @@ public class AetherIIOverlays {
             List<Runnable> list = Lists.newArrayListWithExpectedSize(collection.size());
 
             for (EffectBuildupInstance buildup : Ordering.natural().reverse().sortedCopy(collection)) {
-                MobEffect effect = buildup.getType();
+                Holder<MobEffect> effect = buildup.getType();
                 int i = screenWidth;
                 int j = 27;
                 if (minecraft.isDemo()) {
                     j += 15;
                 }
 
-                if (effect.isBeneficial()) {
+                if (effect.value().isBeneficial()) {
                     ++j1;
                     i -= 25 * j1;
                 } else {
@@ -89,7 +91,7 @@ public class AetherIIOverlays {
                     j += 26;
                 }
 
-                Color color = new Color(effect.getColor());
+                Color color = new Color(effect.value().getColor());
                 guiGraphics.setColor((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 1.0F);
 
                 int buildupScaledValue = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
@@ -121,7 +123,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player, ExtendedGui gui, int screenWidth, int screenHeight) {
+    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player, int screenWidth, int screenHeight) {
         Options options = minecraft.options; //todo visual for broken shield restoring to full shield using cooldown counter.
         if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
@@ -131,7 +133,7 @@ public class AetherIIOverlays {
                 float f = attachment.getShieldStamina() / (float) DamageSystemAttachment.MAX_SHIELD_STAMINA;
                 if (options.attackIndicator().get() == AttackIndicatorStatus.CROSSHAIR) {
                     if (options.getCameraType().isFirstPerson()) {
-                        if (!gui.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
+                        if (!minecraft.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
                             RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
                             int j = screenHeight / 2 - 5;

@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -96,11 +97,11 @@ public class AetherIIRenderers {
         getModels(event.getModels(), aoBlocks).forEach(entry -> event.getModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
     }
 
-    private static List<Map.Entry<ResourceLocation, BakedModel>> getModels(Map<ResourceLocation, BakedModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
-        List<Map.Entry<ResourceLocation, BakedModel>> models = new ArrayList<>();
-        for (Map.Entry<ResourceLocation, BakedModel> model : originalModels.entrySet()) {
-            if (model.getKey().getNamespace().equals(AetherII.MODID)) {
-                String path = model.getKey().getPath();
+    private static List<Map.Entry<ModelResourceLocation, BakedModel>> getModels(Map<ModelResourceLocation, BakedModel> originalModels, List<DeferredBlock<? extends Block>> blocks) {
+        List<Map.Entry<ModelResourceLocation, BakedModel>> models = new ArrayList<>();
+        for (Map.Entry<ModelResourceLocation, BakedModel> model : originalModels.entrySet()) {
+            if (model.getKey().id().getNamespace().equals(AetherII.MODID)) {
+                String path = model.getKey().id().getPath();
                 for (DeferredBlock<? extends Block> block : blocks) {
                     if (path.equals(block.getId().getPath())) {
                         models.add(model);

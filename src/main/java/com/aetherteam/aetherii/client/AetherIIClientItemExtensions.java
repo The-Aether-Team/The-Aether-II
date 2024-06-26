@@ -36,7 +36,7 @@ public class AetherIIClientItemExtensions {
 //                poseStack.mulPose(Axis.XP.rotationDegrees(-13.935F));
                 poseStack.mulPose(Axis.YP.rotationDegrees((float)k * 35.3F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees((float)k * -9.785F));
-                float f8 = (float)itemInHand.getUseDuration() - ((float)player.getUseItemRemainingTicks() - partialTick + 1.0F);
+                float f8 = (float)itemInHand.getUseDuration(player) - ((float)player.getUseItemRemainingTicks() - partialTick + 1.0F);
                 float f12 = f8 / 20.0F;
                 f12 = (f12 * f12 + f12 * 2.0F) / 3.0F;
                 if (f12 > 1.0F) {

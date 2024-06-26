@@ -1,37 +1,42 @@
 package com.aetherteam.aetherii.item.combat;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIToolActions;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.common.ToolAction;
 
 import java.util.UUID;
 
 public class ShortswordItem extends SwordItem {
-    public static final UUID BASE_SWEEP_RANGE_UUID = UUID.fromString("8682E787-5A67-4999-AE6E-9B8AE5FA9F04");
+    public static final ResourceLocation BASE_SWEEP_RANGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_sweep_range");
 
-    public ShortswordItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Item.Properties properties) {
-        super(tier, attackDamageModifier, attackSpeedModifier, properties);
+    public ShortswordItem(Tier tier, Item.Properties properties) {
+        super(tier, properties);
     }
 
-    @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        Multimap<Attribute, AttributeModifier> map = super.getAttributeModifiers(slot, stack);
-        if (slot == EquipmentSlot.MAINHAND) {
-            ImmutableMultimap.Builder<Attribute, AttributeModifier> attributeBuilder = ImmutableMultimap.builder();
-            attributeBuilder.putAll(map);
-            attributeBuilder.put(AetherIIAttributes.SWEEP_RANGE.get(), new AttributeModifier(BASE_SWEEP_RANGE_UUID, "Weapon modifier", 2.0, AttributeModifier.Operation.ADDITION));
-            map = attributeBuilder.build();
-        }
-        return map;
+    public static ItemAttributeModifiers createAttributes(Tier pTier, int pAttackDamage, float pAttackSpeed) {
+        return createAttributes(pTier, (float) pAttackDamage, pAttackSpeed);
+    }
+
+    public static ItemAttributeModifiers createAttributes(Tier p_330371_, float p_331976_, float p_332104_) {
+        return ItemAttributeModifiers.builder()
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, p_331976_ + p_330371_.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, p_332104_, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(AetherIIAttributes.SWEEP_RANGE, new AttributeModifier(BASE_SWEEP_RANGE_ID, 2.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .build();
     }
 
     @Override

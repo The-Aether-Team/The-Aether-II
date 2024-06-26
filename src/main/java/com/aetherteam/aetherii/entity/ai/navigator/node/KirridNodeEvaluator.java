@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.entity.ai.navigator.node;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
@@ -79,8 +78,7 @@ public class KirridNodeEvaluator extends WalkNodeEvaluator {
         return i;
     }
 
-
     private double getMobJumpHeight() {
-        return Math.max(2.5, (double) this.mob.getStepHeight());
+        return Math.max(2.5, this.mob.maxUpStep());
     }
 }

@@ -18,16 +18,6 @@ public class AmbientOcclusionLightModel extends BakedModelWrapper<BakedModel> {
     }
 
     @Override
-    public boolean useAmbientOcclusion(BlockState state) {
-        return true;
-    }
-
-    @Override
-    public boolean useAmbientOcclusion(BlockState state, RenderType renderType) {
-        return true;
-    }
-
-    @Override
     public TriState useAmbientOcclusion(BlockState state, ModelData data, RenderType renderType) {
         return TriState.TRUE;
     }

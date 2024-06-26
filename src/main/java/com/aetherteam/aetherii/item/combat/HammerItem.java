@@ -1,44 +1,54 @@
 package com.aetherteam.aetherii.item.combat;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIToolActions;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.ToolAction;
 
+import java.util.List;
 import java.util.UUID;
 
-public class HammerItem extends TieredItem implements Vanishable {
-    public static final UUID BASE_SHOCK_RANGE_UUID = UUID.fromString("35FB6CDA-25E2-4350-8931-2E35BA352FD8");
+public class HammerItem extends TieredItem {
+    public static final ResourceLocation BASE_SHOCK_RANGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shock_range");
 
-    private final float attackDamage;
-    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
-
-    public HammerItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Item.Properties properties) {
-        super(tier, properties);
-        this.attackDamage = (float) attackDamageModifier + tier.getAttackDamageBonus();
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedModifier, AttributeModifier.Operation.ADDITION));
-        builder.put(AetherIIAttributes.SHOCK_RANGE.get(), new AttributeModifier(BASE_SHOCK_RANGE_UUID, "Weapon modifier", 2.0, AttributeModifier.Operation.ADDITION));
-        this.defaultModifiers = builder.build();
+    public HammerItem(Tier tier, Item.Properties properties) {
+        super(tier, properties.component(DataComponents.TOOL, createToolProperties()));
     }
 
-    public float getDamage() {
-        return this.attackDamage;
+    public static Tool createToolProperties() {
+        return new Tool(List.of(Tool.Rule.overrideSpeed(Tags.Blocks.GLASS_BLOCKS, 15.0F), Tool.Rule.overrideSpeed(Tags.Blocks.GLASS_PANES, 15.0F)), 1.0F, 2);
+    }
+
+    public static ItemAttributeModifiers createAttributes(Tier pTier, int pAttackDamage, float pAttackSpeed) {
+        return createAttributes(pTier, (float) pAttackDamage, pAttackSpeed);
+    }
+
+    public static ItemAttributeModifiers createAttributes(Tier p_330371_, float p_331976_, float p_332104_) {
+        return ItemAttributeModifiers.builder()
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, p_331976_ + p_330371_.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, p_332104_, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(AetherIIAttributes.SHOCK_RANGE, new AttributeModifier(BASE_SHOCK_RANGE_ID, 2.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .build();
     }
 
     @Override
@@ -47,31 +57,13 @@ public class HammerItem extends TieredItem implements Vanishable {
     }
 
     @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
-        if (state.is(Tags.Blocks.GLASS) || state.is(Tags.Blocks.GLASS_PANES)) {
-            return 15.0F;
-        } else {
-            return 1.0F;
-        }
-    }
-
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.hurtAndBreak(1, attacker, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+    public boolean hurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
         return true;
     }
 
     @Override
-    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity livingEntity) {
-        if (state.getDestroySpeed(level, pos) != 0.0F) {
-            stack.hurtAndBreak(2, livingEntity, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
-        }
-        return true;
-    }
-
-    @Override
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
-        return equipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
+    public void postHurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
+        pStack.hurtAndBreak(1, pAttacker, EquipmentSlot.MAINHAND);
     }
 
     @Override

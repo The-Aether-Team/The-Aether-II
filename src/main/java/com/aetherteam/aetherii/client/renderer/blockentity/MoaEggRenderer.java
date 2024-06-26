@@ -32,7 +32,7 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity> {
             String modid = moaEggBlock.getMoaType().location().getNamespace();
             String path = moaEggBlock.getMoaType().location().getPath();
             VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(ResourceLocation.fromNamespaceAndPath(modid, "textures/block/miscellaneous/" + path + "_moa_egg.png")));
-            this.moaEggModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, pPackedOverlay, 1, 1, 1, 1F);
+            this.moaEggModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, pPackedOverlay, -1);
         }
     }
 }

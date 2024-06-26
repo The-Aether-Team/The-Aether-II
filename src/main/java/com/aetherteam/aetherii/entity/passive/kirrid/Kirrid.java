@@ -45,6 +45,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.IShearable;
 import net.neoforged.neoforge.common.NeoForgeMod;
 import org.jetbrains.annotations.Nullable;
+import org.w3c.dom.Attr;
 
 import java.util.List;
 
@@ -120,8 +121,8 @@ public class Kirrid extends AetherAnimal implements IShearable {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        this.entityData.define(DATA_HAS_PLATE, true);
-        this.entityData.define(DATA_HAS_WOOL, true);
+        builder.define(DATA_HAS_PLATE, true);
+        builder.define(DATA_HAS_WOOL, true);
     }
 
     @Override
@@ -162,7 +163,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
         return f + this.getJumpBoostPower();
     }
     @Override
-    protected void jumpFromGround() {
+    public void jumpFromGround() {
         super.jumpFromGround();
         double d0 = this.moveControl.getSpeedModifier();
         if (d0 > 0.0) {
@@ -208,7 +209,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
     }
 
     @Override
-    public boolean isShearable(ItemStack item, Level level, BlockPos pos) {
+    public boolean isShearable(Player player, ItemStack item, Level level, BlockPos pos) {
         return this.hasWool();
     }
 
@@ -228,7 +229,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
     }
 
     @Override
-    public List<ItemStack> onSheared(@Nullable Player player, ItemStack item, Level level, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(@Nullable Player player, ItemStack item, Level level, BlockPos pos) {
         this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, SoundSource.NEUTRAL, 1.0F, 1.0F);
 
         this.setWool(false);
@@ -290,7 +291,7 @@ public class Kirrid extends AetherAnimal implements IShearable {
      * Makes this entity fall slowly.
      */
     private void handleFallSpeed() {
-        AttributeInstance gravity = this.getAttribute(NeoForgeMod.ENTITY_GRAVITY.value());
+        AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
             double fallSpeed = Math.max(gravity.getValue() * -1.25, -0.1); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed) {
@@ -389,14 +390,13 @@ public class Kirrid extends AetherAnimal implements IShearable {
             ServerLevelAccessor pLevel,
             DifficultyInstance pDifficulty,
             MobSpawnType pReason,
-            @javax.annotation.Nullable SpawnGroupData pSpawnData,
-            @javax.annotation.Nullable CompoundTag pDataTag
+            @javax.annotation.Nullable SpawnGroupData pSpawnData
     ) {
         RandomSource randomsource = pLevel.getRandom();
         KirridAi.initMemories(this, randomsource);
         this.ageBoundaryReached();
 
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData);
     }
 
 

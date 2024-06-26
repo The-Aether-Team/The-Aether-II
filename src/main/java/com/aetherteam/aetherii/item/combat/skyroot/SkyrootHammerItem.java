@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 
 public class SkyrootHammerItem extends HammerItem implements SkyrootWeapon {
     public SkyrootHammerItem() {
-        super(AetherIIItemTiers.SKYROOT, 3, -2.4F, new Item.Properties());
+        super(AetherIIItemTiers.SKYROOT, new Item.Properties().attributes(HammerItem.createAttributes(AetherIIItemTiers.SKYROOT, 3, -2.4F)));
     }
 }

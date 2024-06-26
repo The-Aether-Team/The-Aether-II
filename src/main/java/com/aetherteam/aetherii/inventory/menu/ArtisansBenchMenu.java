@@ -198,7 +198,7 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
                 if (!this.moveItemStackTo(itemStack1, 2, 38, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (this.level.getRecipeManager().getRecipeFor(RecipeType.STONECUTTING, new SimpleContainer(itemStack1), this.level).isPresent()) {
+            } else if (this.level.getRecipeManager().getRecipeFor(RecipeType.STONECUTTING, new SingleRecipeInput(itemStack1), this.level).isPresent()) {
                 if (!this.moveItemStackTo(itemStack1, 0, 1, false)) {
                     return ItemStack.EMPTY;
                 }

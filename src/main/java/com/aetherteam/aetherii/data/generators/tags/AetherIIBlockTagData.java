@@ -738,7 +738,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_FENCE.get(),
                 AetherIIBlocks.WISPROOT_FENCE.get()
         );
-        this.tag(Tags.Blocks.GLASS_COLORLESS).add(
+        this.tag(Tags.Blocks.GLASS_BLOCKS_COLORLESS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.get(),
@@ -766,7 +766,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get()
         );
-        this.tag(Tags.Blocks.STONE).addTag(AetherIITags.Blocks.HOLYSTONE).add(AetherIIBlocks.UNDERSHALE.get());
+        this.tag(Tags.Blocks.STONES).addTag(AetherIITags.Blocks.HOLYSTONE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),

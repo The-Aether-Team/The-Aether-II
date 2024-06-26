@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 
 public class SkyrootShortswordItem extends ShortswordItem implements SkyrootWeapon {
     public SkyrootShortswordItem() {
-        super(AetherIIItemTiers.SKYROOT, 3, -2.4F, new Item.Properties());
+        super(AetherIIItemTiers.SKYROOT, new Item.Properties().attributes(ShortswordItem.createAttributes(AetherIIItemTiers.SKYROOT, 3, -2.4F)));
     }
 }

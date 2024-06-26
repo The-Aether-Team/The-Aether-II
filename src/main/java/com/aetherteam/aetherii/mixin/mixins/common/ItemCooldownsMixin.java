@@ -21,7 +21,7 @@ public class ItemCooldownsMixin implements ItemCooldownsWrapper {
 
     @Inject(at = @At(value = "HEAD"), method = "onCooldownEnded(Lnet/minecraft/world/item/Item;)V")
     private void onCooldownEnded(Item item, CallbackInfo ci) {
-        if (item.getDefaultInstance().is(Tags.Items.TOOLS_SHIELDS)) {
+        if (item.getDefaultInstance().is(Tags.Items.TOOLS_SHIELD)) {
             if (!this.player.level().isClientSide()) {
                 DamageSystemAttachment attachment = this.player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 attachment.setSynched(this.player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", DamageSystemAttachment.MAX_SHIELD_STAMINA);

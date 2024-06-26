@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.PortalTeleportationAttachment;
-import com.aetherteam.aetherii.block.portal.AetherPortalForcer;
+//import com.aetherteam.aetherii.block.portal.AetherPortalForcer;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
@@ -45,25 +45,25 @@ public class PortalTeleportationHooks {
      * @see WorldInteractionListener#onPlayerLogin(PlayerEvent.PlayerLoggedInEvent)
      */
     public static void startInAether(Player player) {
-        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
-        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
-            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
-                if (player instanceof ServerPlayer serverPlayer) {
-                    MinecraftServer server = serverPlayer.level().getServer();
-                    if (server != null) {
-                        ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL);
-                        if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
-                            if (player.changeDimension(aetherLevel, new AetherPortalForcer(aetherLevel, false, true)) != null) {
-                                serverPlayer.setRespawnPosition(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, serverPlayer.blockPosition(), serverPlayer.getYRot(), true, false);
-                                aetherIIPlayer.setCanSpawnInAether(false); // Sets that the player has already spawned in the Aether.
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            aetherIIPlayer.setCanSpawnInAether(false);
-        }
+//        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
+//        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
+//            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
+//                if (player instanceof ServerPlayer serverPlayer) {
+//                    MinecraftServer server = serverPlayer.level().getServer();
+//                    if (server != null) {
+//                        ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL);
+//                        if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
+//                            if (player.changeDimension(aetherLevel, new AetherPortalForcer(aetherLevel, false, true)) != null) {
+//                                serverPlayer.setRespawnPosition(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, serverPlayer.blockPosition(), serverPlayer.getYRot(), true, false);
+//                                aetherIIPlayer.setCanSpawnInAether(false); // Sets that the player has already spawned in the Aether.
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        } else {
+//            aetherIIPlayer.setCanSpawnInAether(false);
+//        }
     }
 
     /**
@@ -79,31 +79,31 @@ public class PortalTeleportationHooks {
      * @see WorldInteractionListener#onInteractWithPortalFrame(PlayerInteractEvent.RightClickBlock)
      */
     public static boolean createPortal(Player player, Level level, BlockPos pos, @Nullable Direction direction, ItemStack stack, InteractionHand hand) {
-        if (direction != null) {
-            BlockPos relativePos = pos.relative(direction);
-            if (stack.is(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS)) { // Checks if the item can activate the portal.
-                // Checks whether the dimension can have a portal created in it, and that the portal isn't disabled.
-                if ((level.dimension() == LevelUtil.returnDimension() || level.dimension() == LevelUtil.destinationDimension())) {
-                    Optional<AetherPortalShape> optional = AetherPortalShape.findEmptyAetherPortalShape(level, relativePos, Direction.Axis.X);
-                    if (optional.isPresent()) {
-                        optional.get().createPortalBlocks();
-                        player.playSound(SoundEvents.BUCKET_EMPTY, 1.0F, 1.0F);
-                        player.swing(hand);
-                        if (!player.isCreative()) {
-                            if (stack.getCount() > 1) {
-                                stack.shrink(1);
-                                player.addItem(stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
-                            } else if (stack.isDamageableItem()) {
-                                stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-                            } else {
-                                player.setItemInHand(hand, stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
-                            }
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
+//        if (direction != null) {
+//            BlockPos relativePos = pos.relative(direction);
+//            if (stack.is(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS)) { // Checks if the item can activate the portal.
+//                // Checks whether the dimension can have a portal created in it, and that the portal isn't disabled.
+//                if ((level.dimension() == LevelUtil.returnDimension() || level.dimension() == LevelUtil.destinationDimension())) {
+//                    Optional<AetherPortalShape> optional = AetherPortalShape.findEmptyAetherPortalShape(level, relativePos, Direction.Axis.X);
+//                    if (optional.isPresent()) {
+//                        optional.get().createPortalBlocks();
+//                        player.playSound(SoundEvents.BUCKET_EMPTY, 1.0F, 1.0F);
+//                        player.swing(hand);
+//                        if (!player.isCreative()) {
+//                            if (stack.getCount() > 1) {
+//                                stack.shrink(1);
+//                                player.addItem(stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
+//                            } else if (stack.isDamageableItem()) {
+//                                stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+//                            } else {
+//                                player.setItemInHand(hand, stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
+//                            }
+//                        }
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
         return false;
     }
 

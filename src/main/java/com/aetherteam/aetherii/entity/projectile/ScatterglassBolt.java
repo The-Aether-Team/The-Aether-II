@@ -12,14 +12,19 @@ public class ScatterglassBolt extends AbstractArrow {
     private static final ItemStack SCATTERGLASS_BOLT = new ItemStack(AetherIIItems.SCATTERGLASS_BOLT.get());
 
     public ScatterglassBolt(EntityType<? extends ScatterglassBolt> entityType, Level level) {
-        super(entityType, level, SCATTERGLASS_BOLT);
+        super(entityType, level);
     }
 
-    public ScatterglassBolt(Level level, double x, double y, double z, ItemStack pickupStack) {
-        super(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), x, y, z, level, pickupStack);
+    public ScatterglassBolt(Level level, double x, double y, double z, ItemStack pickupStack, ItemStack weaponStack) {
+        super(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), x, y, z, level, pickupStack, weaponStack);
     }
 
-    public ScatterglassBolt(Level level, LivingEntity owner, ItemStack pickupStack) {
-        super(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), owner, level, pickupStack);
+    public ScatterglassBolt(Level level, LivingEntity owner, ItemStack pickupStack, ItemStack weaponStack) {
+        super(AetherIIEntityTypes.SCATTERGLASS_BOLT.get(), owner, level, pickupStack, weaponStack);
+    }
+
+    @Override
+    protected ItemStack getDefaultPickupItem() {
+        return SCATTERGLASS_BOLT;
     }
 }

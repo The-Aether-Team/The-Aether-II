@@ -32,7 +32,7 @@ public class AetherIIMoaTypes {
 
     @Nullable
     public static ResourceKey<MoaType> getResourceKey(RegistryAccess registryAccess, String location) {
-        return getResourceKey(registryAccess, new ResourceLocation(location));
+        return getResourceKey(registryAccess, ResourceLocation.parse(location));
     }
 
     @Nullable
@@ -52,7 +52,7 @@ public class AetherIIMoaTypes {
 
     @Nullable
     public static MoaType getMoaType(RegistryAccess registryAccess, String location) {
-        return getMoaType(registryAccess, new ResourceLocation(location));
+        return getMoaType(registryAccess, ResourceLocation.parse(location));
     }
 
     @Nullable

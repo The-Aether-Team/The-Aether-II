@@ -12,13 +12,13 @@ import org.apache.commons.lang3.tuple.Triple;
 
 public class ZaniteHammerItem extends HammerItem implements ZaniteWeapon {
     public ZaniteHammerItem() {
-        super(AetherIIItemTiers.ZANITE, 3, -2.4F, new Properties());
+        super(AetherIIItemTiers.ZANITE, new Properties().attributes(HammerItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F)));
     }
 
-    @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        return this.increaseDamage(super.getAttributeModifiers(slot, stack), stack, slot);
-    }
+//    @Override
+//    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+//        return this.increaseDamage(super.getAttributeModifiers(slot, stack), stack, slot);
+//    }
 
     @Override
     public Triple<Double, Double, Double> getUniqueDamage(ItemStack itemStack, double slashDamage, double impactDamage, double pierceDamage) {
