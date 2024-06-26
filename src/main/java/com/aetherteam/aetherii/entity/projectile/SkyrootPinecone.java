@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.projectile;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.particles.ItemParticleOption;

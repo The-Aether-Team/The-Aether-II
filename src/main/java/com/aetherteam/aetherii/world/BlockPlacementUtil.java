@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world;
 
-import com.aetherteam.aetherii.AetherIITags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;

@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
-import com.aetherteam.aetherii.entity.ai.brain.behavior.*;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.AfterLongJumpFalling;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.FallRandomStroll;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridEatGrass;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridRamTarget;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import com.google.common.collect.ImmutableList;
@@ -43,7 +46,7 @@ public class KirridAi {
                 0,
                 ImmutableList.of(
                         new Swim(0.8F),
-                        new KirridPanic(2.0F),
+//                        new KirridPanic(2.0F),
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
                         new AfterLongJumpFalling(),
@@ -59,7 +62,7 @@ public class KirridAi {
                 Activity.IDLE,
                 ImmutableList.of(
                         Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
-                        Pair.of(0, new AnimalMakeLove(entityType, 1.0F)),
+                        Pair.of(0, new AnimalMakeLove(entityType)),
                         Pair.of(1, new FollowTemptation(p_149446_ -> 1.25F)),
                         Pair.of(2, BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 1.25F)),
                         Pair.of(

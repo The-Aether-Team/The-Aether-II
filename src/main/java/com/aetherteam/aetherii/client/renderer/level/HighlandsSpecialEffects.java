@@ -1,47 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.level;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.AetherIIShaders;
-import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Axis;
-import net.minecraft.client.Camera;
-import net.minecraft.client.CloudStatus;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.ParticleStatus;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.CubicSampler;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeManager;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.FogType;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.joml.Matrix4f;
-
-import javax.annotation.Nullable;
-import java.awt.*;
 
 public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private final DimensionSpecialEffects OVERWORLD = new OverworldEffects();

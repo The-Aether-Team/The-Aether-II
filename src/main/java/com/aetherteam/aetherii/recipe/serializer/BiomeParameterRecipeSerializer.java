@@ -7,7 +7,6 @@ import com.aetherteam.nitrogen.recipe.BlockStateRecipeUtil;
 import com.aetherteam.nitrogen.recipe.recipes.AbstractBlockStateRecipe;
 import com.aetherteam.nitrogen.recipe.serializer.BlockStateRecipeSerializer;
 import com.mojang.datafixers.util.Either;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.Registries;
@@ -19,7 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
-import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class BiomeParameterRecipeSerializer<T extends AbstractBiomeParameterRecipe> extends BlockStateRecipeSerializer<T> {
@@ -50,15 +48,23 @@ public class BiomeParameterRecipeSerializer<T extends AbstractBiomeParameterReci
     }
 
     public T fromNetwork(RegistryFriendlyByteBuf buffer) {
-        Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome = buffer.readOptional((buf) -> buf.readEither((buf1) -> ResourceKey.create(Registries.BIOME, buf1.readResourceLocation()), (buf1) -> TagKey.create(Registries.BIOME, buf1.readResourceLocation())));
-        BlockStateIngredient ingredient = BlockStateIngredient.fromNetwork(buffer);
+        Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome = buffer.readOptional((buf) -> buf.readBoolean() ? Either.left(ResourceKey.create(Registries.BIOME, buf.readResourceLocation())) : Either.right(TagKey.create(Registries.BIOME, buf.readResourceLocation())));
+        BlockStateIngredient ingredient = BlockStateIngredient.CONTENTS_STREAM_CODEC.decode(buffer);
         BlockPropertyPair result = BlockStateRecipeUtil.readPair(buffer);
         Optional<ResourceLocation> function = buffer.readOptional(FriendlyByteBuf::readResourceLocation);
         return this.factory.create(biome, ingredient, result, function);
     }
 
     public void toNetwork(RegistryFriendlyByteBuf buffer, T recipe) {
-        buffer.writeOptional(recipe.getBiome(), (buf, either) -> buf.writeEither(either, (buf1, left) -> buf1.writeResourceLocation(left.location()), (buf1, right) -> buf1.writeResourceLocation(right.location())));
+        buffer.writeOptional(recipe.getBiome(), (buf, either) -> {
+            either.ifLeft(consumer -> {
+                buf.writeBoolean(true);
+                buf.writeResourceLocation(consumer.location());
+            }).ifRight(consumer -> {
+                buf.writeBoolean(false);
+                buf.writeResourceLocation(consumer.location());
+            });
+        });
         super.toNetwork(buffer, recipe);
     }
 

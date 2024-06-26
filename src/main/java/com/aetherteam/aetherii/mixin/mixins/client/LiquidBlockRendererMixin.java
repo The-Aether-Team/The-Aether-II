@@ -1,21 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
-import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
-import com.aetherteam.aetherii.mixin.mixins.client.accessor.RenderChunkRegionAccessor;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.LiquidBlockRenderer;
-import net.minecraft.client.renderer.chunk.RenderChunkRegion;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.material.FluidState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LiquidBlockRenderer.class)
 public class LiquidBlockRendererMixin {

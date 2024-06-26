@@ -1,0 +1,79 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/inventory/RecipeBookType",
+      "name": "ALTAR",
+      "constructor": "()V",
+      "parameters": [ ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_SURFACE_MONSTER",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_surface_monster", 15, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_DARKNESS_MONSTER",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_darkness_monster", 5, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_SKY_MONSTER",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_sky_monster", 4, false, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/world/entity/MobCategory",
+      "name": "AETHER_AERWHALE",
+      "constructor": "(Ljava/lang/String;IZZI)V",
+      "parameters": [ "aether_aerwhale", 1, true, false, 128 ]
+    },
+    {
+      "enum": "net/minecraft/client/RecipeBookCategories",
+      "name": "ALTAR_SEARCH",
+      "constructor": "([Lnet/minecraft/world/item/ItemStack;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "method": "altarSearchIcon"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/RecipeBookCategories",
+      "name": "ALTAR_FOOD",
+      "constructor": "([Lnet/minecraft/world/item/ItemStack;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "method": "altarFoodIcon"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/RecipeBookCategories",
+      "name": "ALTAR_BLOCKS",
+      "constructor": "([Lnet/minecraft/world/item/ItemStack;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "method": "altarBlocksIcon"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/RecipeBookCategories",
+      "name": "ALTAR_REPAIR",
+      "constructor": "([Lnet/minecraft/world/item/ItemStack;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "method": "altarRepairIcon"
+      }
+    },
+    {
+      "enum": "net/minecraft/client/RecipeBookCategories",
+      "name": "ALTAR_MISC",
+      "constructor": "([Lnet/minecraft/world/item/ItemStack;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "method": "altarMiscIcon"
+      }
+    }
+  ]
+}

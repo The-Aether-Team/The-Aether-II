@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.world.density;
 
 import com.aetherteam.aetherii.AetherII;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.DensityFunction;

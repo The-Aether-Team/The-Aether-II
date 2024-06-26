@@ -2,22 +2,13 @@ package com.aetherteam.aetherii.item.combat;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
-
-import java.util.UUID;
 
 public class AetherIIShieldItem extends ShieldItem {
     public static final ResourceLocation BASE_SHIELD_STAMINA_REDUCTION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shield_stamina_reduction");

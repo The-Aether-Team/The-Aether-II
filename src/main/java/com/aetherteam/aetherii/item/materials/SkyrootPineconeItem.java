@@ -1,12 +1,9 @@
 package com.aetherteam.aetherii.item.materials;
 
 import com.aetherteam.aetherii.client.AetherIIClientItemExtensions;
-import com.aetherteam.aetherii.entity.projectile.HolystoneRock;
 import com.aetherteam.aetherii.entity.projectile.SkyrootPinecone;
 import com.aetherteam.aetherii.item.miscellaneous.ThrowableItem;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;

@@ -12,7 +12,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Iterator;
-import java.util.UUID;
 
 public interface ZaniteWeapon extends ZaniteTool, UniqueDamage {
     ResourceLocation DAMAGE_MODIFIER_UUID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");

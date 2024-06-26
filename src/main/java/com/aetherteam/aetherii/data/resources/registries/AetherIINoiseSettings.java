@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
-import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class AetherIINoiseSettings {
     public static final ResourceKey<NoiseGeneratorSettings> HIGHLANDS = createKey("highlands");

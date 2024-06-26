@@ -1,32 +1,7 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
-import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
-import com.aetherteam.aetherii.item.combat.HammerItem;
-import com.aetherteam.aetherii.item.combat.ShortswordItem;
-import com.aetherteam.aetherii.item.combat.SpearItem;
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Slice;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin<E> {

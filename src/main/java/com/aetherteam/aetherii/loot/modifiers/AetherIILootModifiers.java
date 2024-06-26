@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.loot.modifiers;
 
 import com.aetherteam.aetherii.AetherII;
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.DeferredHolder;

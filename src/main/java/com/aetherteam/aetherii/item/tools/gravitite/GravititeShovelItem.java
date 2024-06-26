@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.item.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.tools.abilities.GravititeTool;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.context.UseOnContext;
 
 public class GravititeShovelItem extends ShovelItem implements GravititeTool {

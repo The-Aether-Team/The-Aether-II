@@ -1,14 +1,8 @@
 package com.aetherteam.aetherii.item.combat;
 
-import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.Holder;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
-
-import javax.annotation.Nullable;
 
 public class AetherIIArmorItem extends ArmorItem {
     public AetherIIArmorItem(Holder<ArmorMaterial> material, ArmorItem.Type type, Properties properties) {

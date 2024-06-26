@@ -10,7 +10,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.behavior.LongJumpToRandomPos;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.neoforged.neoforge.common.NeoForgeMod;
 
 import java.util.function.BiPredicate;
 import java.util.function.Function;

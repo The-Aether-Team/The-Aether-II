@@ -1,14 +1,9 @@
 package com.aetherteam.aetherii.item.materials;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.AetherIIClientItemExtensions;
 import com.aetherteam.aetherii.entity.projectile.HolystoneRock;
 import com.aetherteam.aetherii.item.miscellaneous.ThrowableItem;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;

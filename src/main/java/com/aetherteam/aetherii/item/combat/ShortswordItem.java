@@ -3,12 +3,8 @@ package com.aetherteam.aetherii.item.combat;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIToolActions;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
@@ -17,8 +13,6 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.common.ToolAction;
-
-import java.util.UUID;
 
 public class ShortswordItem extends SwordItem {
     public static final ResourceLocation BASE_SWEEP_RANGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_sweep_range");

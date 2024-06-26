@@ -17,8 +17,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Supplier;
-
 public class AetherFlowerBlock extends FlowerBlock implements Snowable {
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
 

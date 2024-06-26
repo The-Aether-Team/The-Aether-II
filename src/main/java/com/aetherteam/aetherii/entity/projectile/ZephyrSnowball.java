@@ -72,7 +72,7 @@ public class ZephyrSnowball extends Fireball implements ItemSupplier {
                 f = 0.8F;
             }
 
-            this.setDeltaMovement(vec3.add(this.xPower, this.yPower, this.zPower).scale(f));
+            this.setDeltaMovement(vec3.add(vec3.normalize().scale(this.accelerationPower)).scale(f));
             this.level().addParticle(this.getTrailParticle(), d0, d1 + 0.5, d2, 0.0, 0.0, 0.0);
             this.setPos(d0, d1, d2);
         } else {

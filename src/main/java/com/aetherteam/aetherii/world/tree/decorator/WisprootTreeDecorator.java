@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;

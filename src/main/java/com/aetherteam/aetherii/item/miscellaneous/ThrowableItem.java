@@ -1,9 +1,6 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.projectile.HolystoneRock;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;

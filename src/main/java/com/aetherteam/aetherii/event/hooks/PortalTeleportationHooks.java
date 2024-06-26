@@ -1,21 +1,14 @@
 package com.aetherteam.aetherii.event.hooks;
 
 import com.aetherteam.aetherii.AetherIIConfig;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.PortalTeleportationAttachment;
-//import com.aetherteam.aetherii.block.portal.AetherPortalForcer;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

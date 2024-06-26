@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.event.hooks;
 
 import com.aetherteam.aetherii.item.tools.abilities.HolystoneTool;
-import com.aetherteam.aetherii.item.tools.abilities.SkyrootTool;
 import com.aetherteam.aetherii.item.tools.abilities.ZaniteTool;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
