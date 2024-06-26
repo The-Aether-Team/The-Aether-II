@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.event.hooks;
 
 import com.aetherteam.aetherii.AetherIIConfig;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.PortalTeleportationAttachment;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
@@ -9,6 +10,7 @@ import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -72,31 +74,31 @@ public class PortalTeleportationHooks {
      * @see WorldInteractionListener#onInteractWithPortalFrame(PlayerInteractEvent.RightClickBlock)
      */
     public static boolean createPortal(Player player, Level level, BlockPos pos, @Nullable Direction direction, ItemStack stack, InteractionHand hand) {  //todo: port to new 1.21 portal system
-//        if (direction != null) {
-//            BlockPos relativePos = pos.relative(direction);
-//            if (stack.is(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS)) { // Checks if the item can activate the portal.
-//                // Checks whether the dimension can have a portal created in it, and that the portal isn't disabled.
-//                if ((level.dimension() == LevelUtil.returnDimension() || level.dimension() == LevelUtil.destinationDimension())) {
-//                    Optional<AetherPortalShape> optional = AetherPortalShape.findEmptyAetherPortalShape(level, relativePos, Direction.Axis.X);
-//                    if (optional.isPresent()) {
-//                        optional.get().createPortalBlocks();
-//                        player.playSound(SoundEvents.BUCKET_EMPTY, 1.0F, 1.0F);
-//                        player.swing(hand);
-//                        if (!player.isCreative()) {
-//                            if (stack.getCount() > 1) {
-//                                stack.shrink(1);
-//                                player.addItem(stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
-//                            } else if (stack.isDamageableItem()) {
-//                                stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-//                            } else {
-//                                player.setItemInHand(hand, stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
-//                            }
-//                        }
-//                        return true;
-//                    }
-//                }
-//            }
-//        }
+        if (direction != null) {
+            BlockPos relativePos = pos.relative(direction);
+            if (stack.is(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS)) { // Checks if the item can activate the portal.
+                // Checks whether the dimension can have a portal created in it, and that the portal isn't disabled.
+                if ((level.dimension() == LevelUtil.returnDimension() || level.dimension() == LevelUtil.destinationDimension())) {
+                    Optional<AetherPortalShape> optional = AetherPortalShape.findEmptyAetherPortalShape(level, relativePos, Direction.Axis.X);
+                    if (optional.isPresent()) {
+                        optional.get().createPortalBlocks();
+                        player.playSound(SoundEvents.BUCKET_EMPTY, 1.0F, 1.0F);
+                        player.swing(hand);
+                        if (!player.isCreative()) {
+                            if (stack.getCount() > 1) {
+                                stack.shrink(1);
+                                player.addItem(stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
+                            } else if (stack.isDamageableItem()) {
+                                stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                            } else {
+                                player.setItemInHand(hand, stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
