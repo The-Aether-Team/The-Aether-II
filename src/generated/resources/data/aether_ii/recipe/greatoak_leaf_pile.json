@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "leaf_pile",
+  "key": {
+    "#": {
+      "item": "aether_ii:greatoak_leaves"
+    }
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 32,
+    "id": "aether_ii:greatoak_leaf_pile"
+  }
+}

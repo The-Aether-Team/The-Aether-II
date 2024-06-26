@@ -1,0 +1,8 @@
+{
+  "comparator_output": 3,
+  "description": {
+    "translate": "jukebox_song.aether_ii.aerwhale"
+  },
+  "length_in_seconds": 178.0,
+  "sound_event": "aether_ii:item.music_disc.aerwhale"
+}

@@ -44,7 +44,7 @@ public class AerbunnyMountListener {
     /**
      * @see PortalTeleportationHooks#update(LivingEntity)
      */
-    public static void onPlayerUpdate(PlayerTickEvent event) {
+    public static void onPlayerUpdate(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         AerbunnyMountHooks.onUpdate(player);
     }

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "aether_ii:arctic_ice"
+    },
+    {
+      "item": "aether_ii:arctic_ice"
+    },
+    {
+      "item": "aether_ii:arctic_ice"
+    },
+    {
+      "item": "aether_ii:arctic_ice"
+    },
+    {
+      "item": "aether_ii:arctic_ice"
+    },
+    {
+      "item": "aether_ii:arctic_ice"
+    },
+    {
+      "item": "aether_ii:arctic_ice"
+    },
+    {
+      "item": "aether_ii:arctic_ice"
+    },
+    {
+      "item": "aether_ii:arctic_ice"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:arctic_packed_ice"
+  }
+}

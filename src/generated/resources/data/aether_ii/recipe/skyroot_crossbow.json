@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "aether_ii:crafts_skyroot_tools"
+    },
+    "/": {
+      "tag": "aether_ii:rods/skyroot"
+    },
+    "C": {
+      "item": "aether_ii:cloudtwine"
+    }
+  },
+  "pattern": [
+    "/#/",
+    "C#C",
+    " / "
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:skyroot_crossbow"
+  }
+}

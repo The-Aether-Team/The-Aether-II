@@ -1,0 +1,8 @@
+{
+  "comparator_output": 6,
+  "description": {
+    "translate": "jukebox_song.aether_ii.recording_892"
+  },
+  "length_in_seconds": 97.0,
+  "sound_event": "aether_ii:item.music_disc.recording_892"
+}

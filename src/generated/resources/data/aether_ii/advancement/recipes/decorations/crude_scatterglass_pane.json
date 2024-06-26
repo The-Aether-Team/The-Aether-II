@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crude_scatterglass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:crude_scatterglass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:crude_scatterglass_pane"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crude_scatterglass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:crude_scatterglass_pane"
+    ]
+  }
+}

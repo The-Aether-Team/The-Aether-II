@@ -12,11 +12,11 @@ import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
 import java.util.function.Supplier;
 
 public class AetherIIRecipeCategories {
-    public static final Supplier<RecipeBookCategories> ALTAR_SEARCH = Suppliers.memoize(() -> RecipeBookCategories.valueOf("ALTAR_SEARCH"));
-    public static final Supplier<RecipeBookCategories> ALTAR_FOOD = Suppliers.memoize(() -> RecipeBookCategories.valueOf("ALTAR_FOOD"));
-    public static final Supplier<RecipeBookCategories> ALTAR_BLOCKS = Suppliers.memoize(() -> RecipeBookCategories.valueOf("ALTAR_BLOCKS"));
-    public static final Supplier<RecipeBookCategories> ALTAR_REPAIR = Suppliers.memoize(() -> RecipeBookCategories.valueOf("ALTAR_REPAIR"));
-    public static final Supplier<RecipeBookCategories> ALTAR_MISC = Suppliers.memoize(() -> RecipeBookCategories.valueOf("ALTAR_MISC"));
+    public static final Supplier<RecipeBookCategories> ALTAR_SEARCH = Suppliers.memoize(() -> RecipeBookCategories.valueOf("AETHER_II_ALTAR_SEARCH"));
+    public static final Supplier<RecipeBookCategories> ALTAR_FOOD = Suppliers.memoize(() -> RecipeBookCategories.valueOf("AETHER_II_ALTAR_FOOD"));
+    public static final Supplier<RecipeBookCategories> ALTAR_BLOCKS = Suppliers.memoize(() -> RecipeBookCategories.valueOf("AETHER_II_ALTAR_BLOCKS"));
+    public static final Supplier<RecipeBookCategories> ALTAR_REPAIR = Suppliers.memoize(() -> RecipeBookCategories.valueOf("AETHER_II_ALTAR_REPAIR"));
+    public static final Supplier<RecipeBookCategories> ALTAR_MISC = Suppliers.memoize(() -> RecipeBookCategories.valueOf("AETHER_II_ALTAR_MISC"));
 
     public static void registerRecipeCategories(RegisterRecipeBookCategoriesEvent event) {
         // Altar Enchanting

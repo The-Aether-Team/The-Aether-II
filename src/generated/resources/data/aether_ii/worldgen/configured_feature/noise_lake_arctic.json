@@ -2,7 +2,9 @@
   "type": "aether_ii:noise_lake",
   "config": {
     "frozen": true,
-    "height": 124,
+    "height": {
+      "value": 124
+    },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
     "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
     "lake_noise": "aether_ii:highlands/lakes/noise",

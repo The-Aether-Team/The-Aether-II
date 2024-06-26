@@ -53,7 +53,7 @@ public class DamageSystemListener {
         DamageSystemHooks.buildUpShieldStun(livingEntity, source);
     }
 
-    public static void tickPlayer(PlayerTickEvent event) {
+    public static void tickPlayer(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         DamageSystemHooks.restoreShieldStamina(player);
     }

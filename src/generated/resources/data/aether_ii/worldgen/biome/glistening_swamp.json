@@ -64,9 +64,9 @@
     }
   },
   "spawners": {
-    "aether_aerwhale": [],
-    "aether_darkness_monster": [],
-    "aether_sky_monster": [
+    "aether_ii:aether_aerwhale": [],
+    "aether_ii:aether_darkness_monster": [],
+    "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
         "maxCount": 1,
@@ -74,7 +74,7 @@
         "weight": 3
       }
     ],
-    "aether_surface_monster": [],
+    "aether_ii:aether_surface_monster": [],
     "ambient": [],
     "axolotls": [],
     "creature": [

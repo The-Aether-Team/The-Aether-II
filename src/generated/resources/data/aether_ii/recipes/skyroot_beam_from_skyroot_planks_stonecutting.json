@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "aether_ii:skyroot_planks"
-  },
-  "result": "aether_ii:skyroot_beam"
-}

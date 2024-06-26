@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wooden_fence_gate",
+  "key": {
+    "/": {
+      "tag": "aether_ii:rods/skyroot"
+    },
+    "M": {
+      "item": "aether_ii:wisproot_planks"
+    }
+  },
+  "pattern": [
+    "/M/",
+    "/M/"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:wisproot_fence_gate"
+  }
+}

@@ -11,7 +11,7 @@ public class EffectsSystemListeners {
         bus.addListener(EffectsSystemListeners::livingTick);
     }
 
-    public static void livingTick(EntityTickEvent event) {
+    public static void livingTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
         if (entity instanceof LivingEntity livingEntity) {
             EffectsSystemHooks.tickEffectsSystemAttachment(livingEntity);

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "aether_ii:crude_scatterglass"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:scatterglass_shard"
+  }
+}

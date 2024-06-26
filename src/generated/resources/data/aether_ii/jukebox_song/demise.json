@@ -1,0 +1,8 @@
+{
+  "comparator_output": 5,
+  "description": {
+    "translate": "jukebox_song.aether_ii.demise"
+  },
+  "length_in_seconds": 300.0,
+  "sound_event": "aether_ii:item.music_disc.demise"
+}
