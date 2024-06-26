@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.block.portal;
 
-//public class AetherPortalForcer implements ITeleporter {
+//public class AetherPortalForcer implements ITeleporter { //todo: port to 1.21 portal system
 //    private final ServerLevel level;
 //    private final boolean hasFrame; // Whether to generate a portal frame or not.
 //    private final boolean isStartup;

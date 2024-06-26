@@ -37,7 +37,7 @@ public class PortalTeleportationHooks {
      * @param player The {@link Player}.
      * @see WorldInteractionListener#onPlayerLogin(PlayerEvent.PlayerLoggedInEvent)
      */
-    public static void startInAether(Player player) {
+    public static void startInAether(Player player) { //todo: port to new 1.21 portal system
 //        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
 //        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
 //            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
@@ -71,7 +71,7 @@ public class PortalTeleportationHooks {
      * @return Whether the portal should be created, as a {@link Boolean}.
      * @see WorldInteractionListener#onInteractWithPortalFrame(PlayerInteractEvent.RightClickBlock)
      */
-    public static boolean createPortal(Player player, Level level, BlockPos pos, @Nullable Direction direction, ItemStack stack, InteractionHand hand) {
+    public static boolean createPortal(Player player, Level level, BlockPos pos, @Nullable Direction direction, ItemStack stack, InteractionHand hand) {  //todo: port to new 1.21 portal system
 //        if (direction != null) {
 //            BlockPos relativePos = pos.relative(direction);
 //            if (stack.is(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS)) { // Checks if the item can activate the portal.

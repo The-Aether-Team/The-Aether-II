@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client.renderer.level;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.world.phys.Vec3;
 
-public class HighlandsSpecialEffects extends DimensionSpecialEffects {
+public class HighlandsSpecialEffects extends DimensionSpecialEffects { //todo: 1.21 porting, render changes, compare to LevelRenderer for reference.
     private final DimensionSpecialEffects OVERWORLD = new OverworldEffects();
 //
 //    private static final ResourceLocation CLOUDS_LOCATION = ResourceLocation.withDefaultNamespace("textures/environment/clouds.png");

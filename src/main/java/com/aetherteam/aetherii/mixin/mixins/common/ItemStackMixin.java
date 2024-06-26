@@ -4,7 +4,7 @@ import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ItemStack.class)
-public abstract class ItemStackMixin<E> {
+public abstract class ItemStackMixin<E> { //todo: 1.21 porting
 //    @Unique
 //    private final List<UUID> defaultAttributeUUIDs = List.of(
 //            ShortswordItem.BASE_SWEEP_RANGE_UUID,

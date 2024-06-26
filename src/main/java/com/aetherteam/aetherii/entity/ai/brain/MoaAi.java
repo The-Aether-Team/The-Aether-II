@@ -51,7 +51,7 @@ public class MoaAi {
                 0,
                 ImmutableList.of(
                         new Swim(0.8F),
-//                        new AnimalPanic(0.14F, LivingEntity::isBaby),
+//                        new AnimalPanic(0.14F, LivingEntity::isBaby), //todo
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
                         StopBeingAngryIfTargetDead.create(),

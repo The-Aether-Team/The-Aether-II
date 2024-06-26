@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.ai.navigator.node;
 
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
 
-public class KirridNodeEvaluator extends WalkNodeEvaluator {
+public class KirridNodeEvaluator extends WalkNodeEvaluator { //todo: 1.21 porting
 
 
 //    @Nullable

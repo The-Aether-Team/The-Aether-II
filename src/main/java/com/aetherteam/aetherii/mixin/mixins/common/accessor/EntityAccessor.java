@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Entity.class)
-public interface EntityAccessor {
+public interface EntityAccessor { //todo: determine if commented out accessors and invokers are needed with 1.21 portal system
     @Accessor("random")
     RandomSource aether_ii$getRandom();
 

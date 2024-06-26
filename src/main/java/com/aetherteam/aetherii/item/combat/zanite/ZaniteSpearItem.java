@@ -11,7 +11,7 @@ public class ZaniteSpearItem extends SpearItem implements ZaniteWeapon {
         super(AetherIIItemTiers.ZANITE, new Properties().attributes(SpearItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F)));
     }
 
-//    @Override
+//    @Override //todo: make this work with item components
 //    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
 //        return this.increaseDamage(super.getAttributeModifiers(slot, stack), stack, slot);
 //    }

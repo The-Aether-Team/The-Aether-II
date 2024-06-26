@@ -7,7 +7,7 @@ import net.minecraft.world.item.Tier;
 
 import java.util.function.Predicate;
 
-public class AetherIICrossbowItem extends CrossbowItem {
+public class AetherIICrossbowItem extends CrossbowItem { //todo: rewrite with 1.21 changes
     public static final Predicate<ItemStack> BOLT_ONLY = stack -> stack.is(AetherIIItems.SCATTERGLASS_BOLT);
     private final Tier tier;
     private final int chargeTime;

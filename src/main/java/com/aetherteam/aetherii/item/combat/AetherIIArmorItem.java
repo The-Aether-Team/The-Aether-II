@@ -9,7 +9,7 @@ public class AetherIIArmorItem extends ArmorItem {
         super(material, type, properties);
     }
 
-//    @Nullable
+//    @Nullable //todo: is this necessary in 1.21
 //    @Override
 //    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 //        return String.format("%s:textures/models/armor/%s_layer_%s.png", AetherII.MODID, this.getMaterial().getName(), slot == EquipmentSlot.LEGS ? 2 : 1);
