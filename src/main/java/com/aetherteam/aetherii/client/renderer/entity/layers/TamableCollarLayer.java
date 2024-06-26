@@ -20,10 +20,10 @@ public abstract class TamableCollarLayer<T extends TamableAnimal, M extends Enti
 
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (livingEntity.isTame()) {
-            float[] color = this.getColor(livingEntity);
-            coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, this.collarLocation, poseStack, buffer, packedLight, livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, partialTicks, color[0], color[1], color[2]);
+            int color = this.getColor(livingEntity);
+            coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, this.collarLocation, poseStack, buffer, packedLight, livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, partialTicks, color);
         }
     }
 
-    public abstract float[] getColor(T entity);
+    public abstract int getColor(T entity);
 }

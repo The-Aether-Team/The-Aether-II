@@ -467,14 +467,6 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     /**
-     * @return The offset {@link Double} for an Aerbunny when riding another entity.
-     */
-    @Override
-    public float getMyRidingOffset(Entity entity) {
-        return 0.0F;
-    }
-
-    /**
      * @return Whether the Aerbunny can be interacted with. The Aerbunny can only be interacted when it is within a certain range of the player's view vector,
      * to avoid bugs with displaying the player's crosshairs.
      */

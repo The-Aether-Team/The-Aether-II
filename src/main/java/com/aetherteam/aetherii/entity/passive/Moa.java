@@ -189,25 +189,25 @@ public class Moa extends MountableAnimal {
      * @return The {@link SpawnGroupData} to return.
      */
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @javax.annotation.Nullable SpawnGroupData spawnData, @javax.annotation.Nullable CompoundTag tag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
         this.generateMoaUUID();
-        if (tag != null) { // Applies NBT when spawned from incubation.
-            if (tag.contains("IsBaby")) {
-                this.setBaby(tag.getBoolean("IsBaby"));
-            }
-            if (tag.contains("MoaType")) {
-                ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), tag.getString("MoaType"));
-                if (moaTypeKey != null) {
-                    this.setMoaTypeByKey(moaTypeKey);
-                }
-            }
-            if (tag.contains("Hungry")) {
-                this.setHungry(tag.getBoolean("Hungry"));
-            }
-            if (tag.contains("PlayerGrown")) {
-                this.setPlayerGrown(tag.getBoolean("PlayerGrown"));
-            }
-        }
+//        if (tag != null) { // Applies NBT when spawned from incubation.
+//            if (tag.contains("IsBaby")) {
+//                this.setBaby(tag.getBoolean("IsBaby"));
+//            }
+//            if (tag.contains("MoaType")) {
+//                ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), tag.getString("MoaType"));
+//                if (moaTypeKey != null) {
+//                    this.setMoaTypeByKey(moaTypeKey);
+//                }
+//            }
+//            if (tag.contains("Hungry")) {
+//                this.setHungry(tag.getBoolean("Hungry"));
+//            }
+//            if (tag.contains("PlayerGrown")) {
+//                this.setPlayerGrown(tag.getBoolean("PlayerGrown"));
+//            }
+//        }
         if (spawnData == null) { // Disallow baby Moas from spawning in spawn groups.
             spawnData = new AgeableMob.AgeableMobGroupData(false);
         }
@@ -225,7 +225,7 @@ public class Moa extends MountableAnimal {
             //set moa home when spawn in nest
             MoaAi.initMoaHomeMemories(this, this.random);
         }
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, tag);
+        return super.finalizeSpawn(level, difficulty, reason, spawnData);
     }
 
     /**
@@ -832,7 +832,7 @@ public class Moa extends MountableAnimal {
      * @return The {@link EntityDimensions}.
      */
     @Override
-    public EntityDimensions getDimensions(Pose pose) {
+    public EntityDimensions getDefaultDimensions(Pose pose) {
         EntityDimensions dimensions = super.getDimensions(pose);
         if (this.isSitting()) {
             dimensions = dimensions.scale(1.0F, 0.5F);

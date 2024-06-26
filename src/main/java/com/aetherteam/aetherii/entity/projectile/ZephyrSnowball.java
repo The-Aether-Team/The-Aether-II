@@ -32,7 +32,7 @@ public class ZephyrSnowball extends Fireball implements ItemSupplier {
     }
 
     public ZephyrSnowball(Level level, LivingEntity shooter, double accelX, double accelY, double accelZ) {
-        super(AetherIIEntityTypes.ZEPHYR_SNOWBALL.get(), shooter, accelX, accelY, accelZ, level);
+        super(AetherIIEntityTypes.ZEPHYR_SNOWBALL.get(), shooter, new Vec3(accelX, accelY, accelZ), level);
         this.setNoGravity(true);
     }
 

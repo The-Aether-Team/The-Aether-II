@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -79,7 +80,7 @@ public class HoveringBlockEntity extends Entity {
                 Vec3 movement = target.subtract(playerToBlock);
                 this.setDeltaMovement(movement.scale(0.5));
                 if (holdingPlayer instanceof Player player) {
-                    if (playerToBlock.length() > player.getBlockReach() + 1) {
+                    if (playerToBlock.length() > player.blockInteractionRange() + 1) {
                         this.markShouldSettle();
                     }
                 }
@@ -150,7 +151,7 @@ public class HoveringBlockEntity extends Entity {
                     if (this.blockData != null && this.getBlockState().hasBlockEntity()) {
                         BlockEntity blockEntity = this.level().getBlockEntity(this.blockPosition());
                         if (blockEntity != null) {
-                            CompoundTag tag = blockEntity.saveWithoutMetadata();
+                            CompoundTag tag = blockEntity.saveWithoutMetadata(this.level().registryAccess());
                             for (String string : this.blockData.getAllKeys()) {
                                 Tag blockDataTag = this.blockData.get(string);
                                 if (blockDataTag != null) {
@@ -159,7 +160,7 @@ public class HoveringBlockEntity extends Entity {
                             }
 
                             try {
-                                blockEntity.load(tag);
+                                blockEntity.loadWithComponents(tag, this.level().registryAccess());
                             } catch (Exception exception) {
                                 AetherII.LOGGER.error("Failed to load block entity from hovering block", exception);
                             }
@@ -259,8 +260,8 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this, Block.getId(this.getBlockState()));
+    public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity serverEntity) {
+        return new ClientboundAddEntityPacket(this, serverEntity, Block.getId(this.getBlockState()));
     }
 
     @Override

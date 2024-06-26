@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.mixin.mixins.client.accessor;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.MeshData;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexBuffer;
 import net.minecraft.client.CloudStatus;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -51,5 +53,5 @@ public interface LevelRendererAccessor {
     float[] aether_ii$getRainSizeZ();
 
     @Invoker
-    BufferBuilder.RenderedBuffer callBuildClouds(BufferBuilder builder, double x, double y, double z, Vec3 cloudColor);
+    MeshData callBuildClouds(Tesselator tesselator, double x, double y, double z, Vec3 cloudColor);
 }

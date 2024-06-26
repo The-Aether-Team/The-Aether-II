@@ -16,7 +16,7 @@ public class AerbunnyCollarLayer extends TamableCollarLayer<Aerbunny, AerbunnyMo
     }
 
     @Override
-    public float[] getColor(Aerbunny aerbunny) {
-        return aerbunny.getCollarColor().getTextureDiffuseColors();
+    public int getColor(Aerbunny aerbunny) {
+        return aerbunny.getCollarColor().getTextureDiffuseColor();
     }
 }

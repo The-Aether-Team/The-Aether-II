@@ -15,8 +15,8 @@ public class ScatterglassBoltItem extends ArrowItem {
     }
 
     @Override
-    public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity shooter, @Nullable ItemStack otherStack) {
-        return new ScatterglassBolt(level, shooter, stack.copyWithCount(1));
+    public AbstractArrow createArrow(Level level, ItemStack stack, LivingEntity shooter, @Nullable ItemStack weaponStack) {
+        return new ScatterglassBolt(level, shooter, stack.copyWithCount(1), weaponStack);
     }
 
     @Override

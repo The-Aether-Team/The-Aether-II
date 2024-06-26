@@ -31,6 +31,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
@@ -151,7 +152,7 @@ public class DamageSystemHooks {
     private static void addDamageTypeTooltip(List<Component> components, int position, double value, String name) {
         if (value > 0.0) {
             components.remove(position - 1);
-            components.add(position, CommonComponents.space().append(Component.translatable("attribute.modifier.equals.0", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
+            components.add(position, CommonComponents.space().append(Component.translatable("attribute.modifier.equals.0", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
         }
     }
 
@@ -187,7 +188,7 @@ public class DamageSystemHooks {
                 }
             }
             components.remove(position - 1);
-            components.add(position, Component.literal("").append(Component.translatable("attribute.modifier.plus.0", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(ChatFormatting.BLUE)));
+            components.add(position, Component.literal("").append(Component.translatable("attribute.modifier.plus.0", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(ChatFormatting.BLUE)));
         }
     }
 
@@ -197,7 +198,7 @@ public class DamageSystemHooks {
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
                 if (entity.getUseItem().getItem() instanceof AetherIIShieldItem shield) {
-                    rate = shield.getStaminaReductionRate();
+                    rate = (int) player.getAttribute(AetherIIAttributes.SHIELD_STAMINA_RESTORATION).getValue();
                 }
                 attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, attachment.getShieldStamina() - rate));
                 if (attachment.getShieldStamina() <= 0) {

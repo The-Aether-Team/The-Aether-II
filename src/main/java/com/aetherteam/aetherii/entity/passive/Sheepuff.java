@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.entity.ai.goal.EatAetherGrassGoal;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
 import com.aetherteam.aetherii.loot.AetherIILoot;
+import com.google.common.collect.Maps;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -32,6 +34,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -41,6 +44,7 @@ import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
@@ -100,7 +104,9 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         p_203402_0_.put(DyeColor.RED, Blocks.RED_WOOL);
         p_203402_0_.put(DyeColor.BLACK, Blocks.BLACK_WOOL);
     });
-    private static final Map<DyeColor, float[]> COLOR_ARRAY_BY_COLOR = new EnumMap<>(Arrays.stream(DyeColor.values()).collect(Collectors.toMap((DyeColor p_200204_0_) -> p_200204_0_, Sheepuff::createSheepColor)));
+    private static final Map<DyeColor, Integer> COLOR_BY_DYE = Maps.<DyeColor, Integer>newEnumMap(
+            Arrays.stream(DyeColor.values()).collect(Collectors.toMap(p_29868_ -> p_29868_, Sheepuff::createSheepColor))
+    );
 
     private int eatAnimationTick, amountEaten;
     private EatAetherGrassGoal eatBlockGoal;
@@ -108,17 +114,23 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     private final FallPathNavigation fallNavigation;
     private final GroundPathNavigation groundNavigation;
 
-    private static float[] createSheepColor(DyeColor p_192020_0_) {
+    private static int createSheepColor(DyeColor p_192020_0_) {
         if (p_192020_0_ == DyeColor.WHITE) {
-            return new float[]{0.9019608F, 0.9019608F, 0.9019608F};
+            return -1644826;
         } else {
-            float[] afloat = p_192020_0_.getTextureDiffuseColors();
-            return new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+            int i = p_192020_0_.getTextureDiffuseColor();
+            float f = 0.75F;
+            return FastColor.ARGB32.color(
+                    255,
+                    Mth.floor((float)FastColor.ARGB32.red(i) * 0.75F),
+                    Mth.floor((float)FastColor.ARGB32.green(i) * 0.75F),
+                    Mth.floor((float)FastColor.ARGB32.blue(i) * 0.75F)
+            );
         }
     }
 
-    public static float[] getColorArray(DyeColor p_175513_0_) {
-        return COLOR_ARRAY_BY_COLOR.get(p_175513_0_);
+    public static int getColor(DyeColor pDyeColor) {
+        return COLOR_BY_DYE.get(pDyeColor);
     }
 
     public Sheepuff(EntityType<? extends Sheepuff> type, Level level) {
@@ -156,9 +168,9 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData, @Nullable CompoundTag tag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData) {
         this.setColor(getRandomSheepuffColor(level.getRandom()));
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, tag);
+        return super.finalizeSpawn(level, difficulty, reason, spawnData);
     }
 
     @Override
@@ -183,7 +195,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         super.tick();
         if (this.getPuffed()) {
             this.checkSlowFallDistance();
-            AttributeInstance gravity = this.getAttribute(NeoForgeMod.ENTITY_GRAVITY.value());
+            AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
             if (gravity != null) {
                 double fallSpeed = Math.max(gravity.getValue() * -0.625, -0.05);
                 if (this.getDeltaMovement().y() < fallSpeed) {
@@ -200,7 +212,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
      * Makes this entity jump much higher when puffed up.
      */
     @Override
-    protected void jumpFromGround() {
+    public void jumpFromGround() {
         super.jumpFromGround();
         if (this.getPuffed()) {
             this.push(0.0, 1.8, 0.0);
@@ -259,7 +271,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
      * Forge shearing method.
      */
     @Override
-    public List<ItemStack> onSheared(@Nullable Player player, ItemStack item, Level level, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(@Nullable Player player, ItemStack item, Level level, BlockPos pos) {
         level.playSound(null, this, AetherIISoundEvents.ENTITY_SHEEPUFF_SHEAR.get(), player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
         if (!level.isClientSide()) {
             int i;
@@ -307,7 +319,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public boolean isShearable(ItemStack item, Level world, BlockPos pos) {
+    public boolean isShearable(Player player, ItemStack item, Level world, BlockPos pos) {
         return this.readyForShearing();
     }
 
@@ -447,11 +459,11 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     private DyeColor getOffspringColor(Animal parent1, Animal parent2) {
         DyeColor dyeColor1 = ((Sheepuff) parent1).getColor();
         DyeColor dyeColor2 = ((Sheepuff) parent2).getColor();
-        CraftingContainer craftingcontainer = makeContainer(dyeColor1, dyeColor2);
+        CraftingInput craftinginput = makeCraftInput(dyeColor1, dyeColor2);
         return this.level()
                 .getRecipeManager()
-                .getRecipeFor(RecipeType.CRAFTING, craftingcontainer, this.level())
-                .map(recipeHolder -> recipeHolder.value().assemble(craftingcontainer, this.level().registryAccess()))
+                .getRecipeFor(RecipeType.CRAFTING, craftinginput, this.level())
+                .map(p_352802_ -> p_352802_.value().assemble(craftinginput, this.level().registryAccess()))
                 .map(ItemStack::getItem)
                 .filter(DyeItem.class::isInstance)
                 .map(DyeItem.class::cast)
@@ -459,16 +471,8 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
                 .orElseGet(() -> this.level().random.nextBoolean() ? dyeColor1 : dyeColor2);
     }
 
-    private static CraftingContainer makeContainer(DyeColor dyeColor1, DyeColor dyeColor2) {
-        CraftingContainer craftingInventory = new TransientCraftingContainer(new SheepuffContainer(null, -1), 2, 1);
-        craftingInventory.setItem(0, new ItemStack(DyeItem.byColor(dyeColor1)));
-        craftingInventory.setItem(1, new ItemStack(DyeItem.byColor(dyeColor2)));
-        return craftingInventory;
-    }
-
-    @Override
-    protected float getStandingEyeHeight(Pose pose, EntityDimensions size) {
-        return 0.95F * size.height;
+    private static CraftingInput makeCraftInput(DyeColor pColor1, DyeColor pColor2) {
+        return CraftingInput.of(2, 1, List.of(new ItemStack(DyeItem.byColor(pColor1)), new ItemStack(DyeItem.byColor(pColor2))));
     }
 
     public float getHeadEatPositionScale(float pos) {
