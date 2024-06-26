@@ -22,6 +22,7 @@ import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
+import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
@@ -80,6 +81,7 @@ public class AetherII {
                 AetherIIAttributes.ATTRIBUTES,
                 AetherIIMemoryModuleTypes.MEMORY_MODULE_TYPES,
                 AetherIIEffects.EFFECTS,
+                AetherIIArmorMaterials.ARMOR_MATERIALS,
                 AetherIIDataAttachments.ATTACHMENTS,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIMenuTypes.MENU_TYPES,

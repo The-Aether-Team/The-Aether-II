@@ -407,7 +407,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_APPROACHES.get());
                 output.accept(AetherIIItems.MUSIC_DISC_DEMISE.get());
-                output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.RECORDING_892.get());
                 output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
             }).build());
