@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @Mixin(ItemStack.class)
-public abstract class ItemStackMixin<E> { //todo: 1.21 porting
+public abstract class ItemStackMixin<E> {
     @Unique
     private final List<ResourceLocation> defaultAttributeUUIDs = List.of(
             ShortswordItem.BASE_SWEEP_RANGE_ID,

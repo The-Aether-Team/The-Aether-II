@@ -448,7 +448,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                             RandomSource randomsource = RandomSource.create((long) k1 * k1 * 3121 + k1 * 45238971L ^ (long) j1 * j1 * 418711 + j1 * 13761L);
                             blockpos$mutableblockpos.set(k1, j2, j1);
                             Biome.Precipitation biome$precipitation = biome.getPrecipitationAt(blockpos$mutableblockpos);
-                            
+
                             if (biome$precipitation == Biome.Precipitation.RAIN) {
                                 if (i1 != 0) {
                                     if (i1 >= 0) {
