@@ -1,12 +1,9 @@
-package com.aetherteam.aetherii.attachment;
+package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.event.hooks.PortalTeleportationHooks;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.network.packet.PortalTeleportationSyncPacket;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
@@ -16,32 +13,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import org.apache.commons.lang3.tuple.Triple;
-
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * Capability class for handling portal and teleportation behavior for the Aether.
  *
  * @see PortalTeleportationHooks
  */
-public class PortalTeleportationAttachment implements INBTSynchable {
+public class PortalTeleportationAttachment {
     private boolean canGetPortal = true;
     private boolean canSpawnInAether = true;
 
     public boolean isInAetherPortal = false;
     public int aetherPortalTimer = 0;
     public float prevPortalAnimTime, portalAnimTime = 0.0F;
-
-    /**
-     * Stores the following methods as able to be synced between client and server and vice-versa.
-     */
-    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
-    );
-    private boolean shouldSyncAfterJoin;
-    private boolean shouldSyncBetweenClients;
 
     public static final Codec<PortalTeleportationAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.fieldOf("can_get_portal").forGetter(PortalTeleportationAttachment::canGetPortal),
@@ -53,10 +37,6 @@ public class PortalTeleportationAttachment implements INBTSynchable {
     public PortalTeleportationAttachment(boolean portal, boolean spawnInAether) {
         this.setCanGetPortal(portal);
         this.setCanSpawnInAether(spawnInAether);
-    }
-
-    public Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> getSynchableFunctions() {
-        return this.synchableFunctions;
     }
 
     /**
@@ -198,10 +178,5 @@ public class PortalTeleportationAttachment implements INBTSynchable {
      */
     public float getPrevPortalAnimTime() {
         return this.prevPortalAnimTime;
-    }
-
-    @Override
-    public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
-        return new PortalTeleportationSyncPacket(entityID, key, type, value);
     }
 }

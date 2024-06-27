@@ -1,5 +1,6 @@
-package com.aetherteam.aetherii.attachment;
+package com.aetherteam.aetherii.attachment.player;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.event.hooks.AerbunnyMountHooks;

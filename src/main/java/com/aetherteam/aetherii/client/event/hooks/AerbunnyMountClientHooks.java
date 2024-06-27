@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
-import com.aetherteam.aetherii.attachment.AerbunnyMountAttachment;
+import com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import net.minecraft.client.player.Input;

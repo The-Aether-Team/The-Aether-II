@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.attachment.AerbunnyMountAttachment;
+import com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import net.minecraft.client.Minecraft;

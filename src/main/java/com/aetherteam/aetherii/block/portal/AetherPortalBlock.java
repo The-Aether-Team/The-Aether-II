@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.block.portal;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,7 +36,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class AetherPortalBlock extends Block implements Portal { //todo: port to 1.21 portal system
+public class AetherPortalBlock extends Block implements Portal {
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 0.0, 6.0, 16.0, 16.0, 10.0);
     protected static final VoxelShape Z_AXIS_AABB = Block.box(6.0, 0.0, 0.0, 10.0, 16.0, 16.0);
@@ -58,48 +60,29 @@ public class AetherPortalBlock extends Block implements Portal { //todo: port to
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity.canUsePortal(false)) {
             entity.setAsInsidePortal(this, pos);
+            if (entity.isOnPortalCooldown()) {
+                entity.setPortalCooldown();
+            } else {
+                if (entity.hasData(AetherIIDataAttachments.PORTAL_TELEPORTATION)) {
+                    var data = entity.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
+                    data.setInPortal(true);
+                    int waitTime = data.getPortalTimer();
+                    if (waitTime >= this.getLevelPortalTransitionTime(level, entity)) {
+                        data.setPortalTimer(0);
+                    }
+                }
+            }
         }
-//        EntityAccessor entityAccessor = (EntityAccessor) entity;
-//        if (!entity.isPassenger() && !entity.isVehicle() && entity.canChangeDimensions()) {
-//            if (entity.isOnPortalCooldown()) {
-//                entity.setPortalCooldown();
-//            } else {
-//                if (!entity.level().isClientSide() && !pos.equals(entityAccessor.aether_ii$getPortalEntrancePos())) {
-//                    entityAccessor.aether_ii$setPortalEntrancePos(pos.immutable());
-//                }
-//                if (!entity.hasData(AetherIIDataAttachments.PORTAL_TELEPORTATION)) {
-//                    this.handleTeleportation(entity);
-//                } else {
-//                    var data = entity.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
-//                    data.setInPortal(true);
-//                    int waitTime = data.getPortalTimer();
-//                    if (waitTime >= entity.getPortalWaitTime()) {
-//                        this.handleTeleportation(entity);
-//                        data.setPortalTimer(0);
-//                    }
-//                }
-//            }
-//        }
-    }
-
-    private void handleTeleportation(Entity entity) {
-//        MinecraftServer server = entity.level().getServer();
-//        ResourceKey<Level> destinationKey = entity.level().dimension() == LevelUtil.destinationDimension() ? LevelUtil.returnDimension() : LevelUtil.destinationDimension();
-//        if (server != null) {
-//            ServerLevel destinationLevel = server.getLevel(destinationKey);
-//            if (destinationLevel != null && !entity.isPassenger()) {
-//                entity.level().getProfiler().push("aether_portal");
-//                entity.setPortalCooldown();
-//                entity.changeDimension(destinationLevel, new AetherPortalForcer(destinationLevel, true));
-//                entity.level().getProfiler().pop();
-//            }
-//        }
     }
 
     @Override
     public int getPortalTransitionTime(ServerLevel pLevel, Entity pEntity) {
-        return pEntity instanceof Player player
-                ? Math.max(1, pLevel.getGameRules().getInt(player.getAbilities().invulnerable ? GameRules.RULE_PLAYERS_NETHER_PORTAL_CREATIVE_DELAY : GameRules.RULE_PLAYERS_NETHER_PORTAL_DEFAULT_DELAY))
+        return getLevelPortalTransitionTime(pLevel, pEntity);
+    }
+
+    private int getLevelPortalTransitionTime(Level level, Entity entity) {
+        return entity instanceof Player player
+                ? Math.max(1, level.getGameRules().getInt(player.getAbilities().invulnerable ? GameRules.RULE_PLAYERS_NETHER_PORTAL_CREATIVE_DELAY : GameRules.RULE_PLAYERS_NETHER_PORTAL_DEFAULT_DELAY))
                 : 0;
     }
 
@@ -202,11 +185,6 @@ public class AetherPortalBlock extends Block implements Portal { //todo: port to
         Vec3 vec31 = new Vec3((double)blockpos.getX() + (flag ? d2 : d4), (double)blockpos.getY() + d3, (double)blockpos.getZ() + (flag ? d4 : d2));
         Vec3 vec32 = AetherPortalShape.findCollisionFreePosition(vec31, pLevel, pEntity, entitydimensions);
         return new DimensionTransition(pLevel, vec32, vec3, pYRot + (float)i, pXRot, pPostDimensionTransition);
-    }
-
-    @Override
-    public Portal.Transition getLocalTransition() {
-        return Portal.Transition.CONFUSION;
     }
 
     /**

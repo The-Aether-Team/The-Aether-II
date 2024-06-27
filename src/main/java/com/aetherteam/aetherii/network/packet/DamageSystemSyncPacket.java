@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.network.packet;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.DamageSystemAttachment;
+import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.packet.SyncEntityPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;

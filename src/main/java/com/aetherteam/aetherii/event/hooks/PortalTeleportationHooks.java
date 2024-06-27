@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.event.hooks;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.PortalTeleportationAttachment;
+import com.aetherteam.aetherii.attachment.player.PortalTeleportationAttachment;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;

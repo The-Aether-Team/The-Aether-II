@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.attachment;
+package com.aetherteam.aetherii.attachment.living;
 
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
