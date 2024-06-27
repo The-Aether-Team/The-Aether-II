@@ -20,6 +20,7 @@ public class AetherIIDamageResistances {
     public static final ResourceKey<DamageResistance> SHEEPUFF = createKey("sheepuff");
     public static final ResourceKey<DamageResistance> FLYING_COW = createKey("flying_cow");
     public static final ResourceKey<DamageResistance> PHYG = createKey("phyg");
+    public static final ResourceKey<DamageResistance> BURRUKAI = createKey("burrukai");
     public static final ResourceKey<DamageResistance> KIRRID = createKey("kirrid");
     public static final ResourceKey<DamageResistance> MOA = createKey("moa");
 
@@ -33,6 +34,7 @@ public class AetherIIDamageResistances {
         context.register(SHEEPUFF, new DamageResistance(AetherIIEntityTypes.SHEEPUFF.get(), 0, 0, 0));
         context.register(FLYING_COW, new DamageResistance(AetherIIEntityTypes.FLYING_COW.get(), 0, 0, 0));
         context.register(PHYG, new DamageResistance(AetherIIEntityTypes.PHYG.get(), 0, 0, 0));
+        context.register(BURRUKAI, new DamageResistance(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 2, -2, 0));
         context.register(KIRRID, new DamageResistance(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 0, 2, -2));
         context.register(MOA, new DamageResistance(AetherIIEntityTypes.MOA.get(), 2, 2, -2));
     }

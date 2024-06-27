@@ -568,6 +568,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
         this.addItem(AetherIIItems.SHEEPUFF_SPAWN_EGG, "Sheepuff Spawn Egg");
         this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
+        this.addItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Highfields Burrukai Spawn Egg");
         this.addItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Highfields Kirrid Spawn Egg");
         this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Magnetic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Arctic Kirrid Spawn Egg");
@@ -639,6 +640,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.PHYG, "Phyg");
         this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
         this.addEntityType(AetherIIEntityTypes.SHEEPUFF, "Sheepuff");
+        this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, "Highfields Burrukai");
         this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_KIRRID, "Highfields Kirrid");
         this.addEntityType(AetherIIEntityTypes.MAGNETIC_KIRRID, "Magnetic Kirrid");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");

@@ -502,6 +502,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
+                output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MOA_SPAWN_EGG.get());
