@@ -1,13 +1,11 @@
 package com.aetherteam.aetherii.block.miscellaneous.egg;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.api.moaegg.MoaType;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -39,17 +37,17 @@ public abstract class AbstractMoaEggBlock extends BaseEntityBlock {
     private static final int BOOSTED_HATCH_TIME_TICKS = 12000;
     private static final int RANDOM_HATCH_OFFSET_TICKS = 300;
     private static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0);
-    private final ResourceKey<MoaType> moaType;
+//    private final ResourceKey<MoaFeatherShape> moaType;  //todo moa variation
 
-    public AbstractMoaEggBlock(ResourceKey<MoaType> moaType, BlockBehaviour.Properties p_277906_) {
+    public AbstractMoaEggBlock(BlockBehaviour.Properties p_277906_) {
         super(p_277906_);
-        this.moaType = moaType;
+//        this.moaType = moaType;
         this.registerDefaultState(this.stateDefinition.any().setValue(HATCH, Integer.valueOf(0)));
     }
 
-    public ResourceKey<MoaType> getMoaType() {
-        return moaType;
-    }
+//    public ResourceKey<MoaFeatherShape> getMoaType() {
+//        return moaType;
+//    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
@@ -81,7 +79,7 @@ public abstract class AbstractMoaEggBlock extends BaseEntityBlock {
             if (moa != null) {
                 Vec3 vec3 = pPos.getCenter();
                 moa.setBaby(true);
-                moa.setMoaTypeByKey(this.moaType);
+//                moa.setMoaTypeByKey(this.moaType);
                 moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(pLevel.random.nextFloat() * 360.0F), 0.0F);
                 pLevel.addFreshEntity(moa);
             }

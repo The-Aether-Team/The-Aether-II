@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.blockentity;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.miscellaneous.egg.AbstractMoaEggBlock;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
@@ -29,9 +30,7 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity> {
                 pPoseStack.mulPose(Axis.YP.rotationDegrees((float) (Math.cos((double) pBlockEntity.tickCount * 3.25) * Math.PI * 0.4F * pBlockEntity.getBlockState().getValue(AbstractMoaEggBlock.HATCH))));
             }
 
-            String modid = moaEggBlock.getMoaType().location().getNamespace();
-            String path = moaEggBlock.getMoaType().location().getPath();
-            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(ResourceLocation.fromNamespaceAndPath(modid, "textures/block/miscellaneous/" + path + "_moa_egg.png")));
+            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/block/miscellaneous/blue_moa_egg.png")));  //todo moa variation
             this.moaEggModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, pPackedOverlay, -1);
         }
     }

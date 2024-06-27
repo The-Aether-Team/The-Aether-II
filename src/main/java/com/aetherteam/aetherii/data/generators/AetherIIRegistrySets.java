@@ -32,7 +32,7 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.JUKEBOX_SONG, AetherIIJukeboxSongs::bootstrap)
             .add(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, AetherIIDamageInflictions::bootstrap)
             .add(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, AetherIIDamageResistances::bootstrap)
-            .add(AetherIIMoaTypes.MOA_TYPE_REGISTRY_KEY, AetherIIMoaTypes::bootstrap);
+            .add(AetherIIMoaFeatherShapes.MOA_FEATHER_SHAPE_REGISTRY_KEY, AetherIIMoaFeatherShapes::bootstrap);
 
     public AetherIIRegistrySets(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Collections.singleton(AetherII.MODID));

@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.api.moaegg.MoaType;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIMoaTypes;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -11,13 +10,10 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-
-import java.util.Objects;
 
 public class MoaNestFeature extends Feature<MoaNestConfiguration> {
     public MoaNestFeature(Codec<MoaNestConfiguration> codec) {
@@ -39,14 +35,14 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         BlockPlacementUtil.placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(), radius + 1, random);
         BlockPlacementUtil.placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(2), radius, random);
 
-        MoaType moaType = AetherIIMoaTypes.getWeightedChance(level.registryAccess(), level.getRandom());
-        this.setBlock(level, pos, Block.byItem(moaType.egg().getItem()).defaultBlockState());
+//        MoaFeatherShape moaType = AetherIIMoaFeatherShapes.getWeightedChance(level.registryAccess(), level.getRandom()); //todo moa variation
+        this.setBlock(level, pos, AetherIIBlocks.BLUE_MOA_EGG.get().defaultBlockState());
 
         if (config.spawnMoas()) {
              for (int i = 0; i < 2; i++) {
                 Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel());
                  moa.setPos(pos.getCenter().add(i, 0, i));
-                 moa.setMoaTypeByKey(Objects.requireNonNull(AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType)));
+//                 moa.setMoaTypeByKey(Objects.requireNonNull(AetherIIMoaFeatherShapes.getResourceKey(level.registryAccess(), moaType)));
                  MoaAi.initMoaHomeMemories(moa, level.getRandom());
                 moa.setBaby(false);
                 level.getLevel().addFreshEntity(moa);

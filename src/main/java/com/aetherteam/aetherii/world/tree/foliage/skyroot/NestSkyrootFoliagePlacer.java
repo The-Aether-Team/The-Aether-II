@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 
-import com.aetherteam.aetherii.api.moaegg.MoaType;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIMoaTypes;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
@@ -71,11 +69,11 @@ public class NestSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
             }
             nest.place(worldGenLevel, chunk, random, new BlockPos(pos.getX() + 2 * offsetX, pos.getY() - 6, pos.getZ() + 2 * offsetZ));
 
-            MoaType moaType = AetherIIMoaTypes.getWeightedChance(worldGenLevel.registryAccess(), random);
+//            MoaFeatherShape moaType = AetherIIMoaFeatherShapes.getWeightedChance(worldGenLevel.registryAccess(), random);  //todo moa variation
             for (int i = 0; i < 2; i++) {
                 Moa moa = AetherIIEntityTypes.MOA.get().create(worldGenLevel.getLevel());
                 moa.setPos(new BlockPos(new BlockPos(pos.getX() + 2 * offsetX, pos.getY() - 6, pos.getZ() + 2 * offsetZ)).getCenter().add(i, 0, i));
-                moa.setMoaTypeByKey(Objects.requireNonNull(AetherIIMoaTypes.getResourceKey(worldGenLevel.registryAccess(), moaType)));
+//                moa.setMoaTypeByKey(Objects.requireNonNull(AetherIIMoaFeatherShapes.getResourceKey(worldGenLevel.registryAccess(), moaType)));
                 MoaAi.initMoaHomeMemories(moa, worldGenLevel.getRandom());moa.setBaby(false);
                 worldGenLevel.getLevel().addFreshEntity(moa);
             }
