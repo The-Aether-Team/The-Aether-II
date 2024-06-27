@@ -30,7 +30,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements R
     
     public AltarScreen(AltarMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
-        this.recipeBookComponent = new AltarRecipeBookComponent(); //todo
+        this.recipeBookComponent = new AltarRecipeBookComponent();
     }
 
     @Override
