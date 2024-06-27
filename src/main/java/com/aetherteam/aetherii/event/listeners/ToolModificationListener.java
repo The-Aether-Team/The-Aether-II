@@ -7,7 +7,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.ToolAction;
+import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
 public class ToolModificationListener {
@@ -20,13 +20,13 @@ public class ToolModificationListener {
     }
 
     /**
-     * @see ToolModificationHooks#setupToolActions(LevelAccessor, BlockPos, BlockState, ToolAction)
+     * @see ToolModificationHooks#setupToolActions(LevelAccessor, BlockPos, BlockState, ItemAbility)
      */
     public static void setupToolModifications(BlockEvent.BlockToolModificationEvent event) {
         LevelAccessor levelAccessor = event.getLevel();
         BlockPos pos = event.getPos();
         BlockState oldState = event.getState();
-        ToolAction toolAction = event.getToolAction();
+        ItemAbility toolAction = event.getItemAbility();
         BlockState newState = ToolModificationHooks.setupToolActions(levelAccessor, pos, oldState, toolAction);
         if (newState != oldState && !event.isSimulated() && !event.isCanceled()) {
             event.setFinalState(newState);
@@ -34,13 +34,13 @@ public class ToolModificationListener {
     }
 
     /**
-     * @see ToolModificationHooks#stripAmberoot(LevelAccessor, BlockState, ItemStack, ToolAction, UseOnContext)
+     * @see ToolModificationHooks#stripAmberoot(LevelAccessor, BlockState, ItemStack, ItemAbility, UseOnContext)
      */
     public static void setupStrippingLoot(BlockEvent.BlockToolModificationEvent event) {
         LevelAccessor levelAccessor = event.getLevel();
         BlockState oldState = event.getState();
         ItemStack itemStack = event.getHeldItemStack();
-        ToolAction toolAction = event.getToolAction();
+        ItemAbility toolAction = event.getItemAbility();
         UseOnContext context = event.getContext();
         if (!event.isSimulated() && !event.isCanceled()) {
             ToolModificationHooks.stripMossyWisproot(levelAccessor, oldState, itemStack, toolAction, context);

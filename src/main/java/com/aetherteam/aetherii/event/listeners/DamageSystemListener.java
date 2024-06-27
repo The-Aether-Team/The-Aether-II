@@ -8,8 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
-import net.neoforged.neoforge.event.entity.living.ShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -31,11 +31,11 @@ public class DamageSystemListener {
         DamageSystemHooks.trackCriticalHitValue(player, modifier);
     }
 
-    public static void hurtWithDamageTypes(LivingHurtEvent event) {
+    public static void hurtWithDamageTypes(LivingDamageEvent.Pre event) {
         Entity target = event.getEntity();
-        DamageSource source = event.getSource();
-        float damage = event.getAmount();
-        event.setAmount(DamageSystemHooks.getDamageTypeModifiedValue(target, source, damage));
+        DamageSource source = event.getContainer().getSource();
+        float damage = event.getContainer().getOriginalDamage(); //todo?
+        event.getContainer().setNewDamage(DamageSystemHooks.getDamageTypeModifiedValue(target, source, damage));
     }
 
     public static void applyDamageTypeTooltips(ItemTooltipEvent event) {
@@ -47,7 +47,7 @@ public class DamageSystemListener {
         DamageSystemHooks.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
     }
 
-    public static void blockIncomingAttack(ShieldBlockEvent event) {
+    public static void blockIncomingAttack(LivingShieldBlockEvent event) {
         LivingEntity livingEntity = event.getEntity();
         DamageSource source = event.getDamageSource();
         DamageSystemHooks.buildUpShieldStun(livingEntity, source);

@@ -20,8 +20,8 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.ToolAction;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
 import java.util.List;
@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class ToolModificationHooks {
     /**
-     * Blocks able to be flattened with {@link ToolActions#AXE_STRIP}, and the equivalent result block.
+     * Blocks able to be flattened with {@link ItemAbilities#AXE_STRIP}, and the equivalent result block.
      */
     public static final Map<Block, Block> STRIPPABLES = (new ImmutableMap.Builder<Block, Block>())
             .put(AetherIIBlocks.SKYROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
@@ -40,7 +40,7 @@ public class ToolModificationHooks {
             .build();
 
     /**
-     * Blocks able to be flattened with {@link ToolActions#SHOVEL_FLATTEN}, and the equivalent result block.
+     * Blocks able to be flattened with {@link ItemAbilities#SHOVEL_FLATTEN}, and the equivalent result block.
      */
     public static final Map<Block, Block> FLATTENABLES = (new ImmutableMap.Builder<Block, Block>())
             .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
@@ -49,7 +49,7 @@ public class ToolModificationHooks {
             .build();
 
     /**
-     * Blocks able to be tilled with {@link ToolActions#HOE_TILL}, and the equivalent result block.
+     * Blocks able to be tilled with {@link ItemAbilities#HOE_TILL}, and the equivalent result block.
      */
     public static final Map<Block, Block> TILLABLES = (new ImmutableMap.Builder<Block, Block>())
             .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_FARMLAND.get())
@@ -59,28 +59,28 @@ public class ToolModificationHooks {
             .build();
 
     /**
-     * Handles modifying blocks when a {@link ToolAction} is performed on them.
+     * Handles modifying blocks when a {@link ItemAbility} is performed on them.
      *
      * @param accessor The {@link LevelAccessor} of the level.
      * @param pos      The {@link Block} within the level.
      * @param old      The old {@link BlockState} of the block an action is being performed on.
-     * @param action   The {@link ToolAction} being performed on the block.
+     * @param action   The {@link ItemAbility} being performed on the block.
      * @return The new {@link BlockState} of the block.
      * @see ToolModificationListener#setupToolModifications(BlockEvent.BlockToolModificationEvent)
      */
-    public static BlockState setupToolActions(LevelAccessor accessor, BlockPos pos, BlockState old, ToolAction action) {
+    public static BlockState setupToolActions(LevelAccessor accessor, BlockPos pos, BlockState old, ItemAbility action) {
         Block oldBlock = old.getBlock();
-        if (action == ToolActions.AXE_STRIP) {
+        if (action == ItemAbilities.AXE_STRIP) {
             if (STRIPPABLES.containsKey(oldBlock)) {
                 return STRIPPABLES.get(oldBlock).withPropertiesOf(old);
             }
         }
-        else if (action == ToolActions.SHOVEL_FLATTEN) {
+        else if (action == ItemAbilities.SHOVEL_FLATTEN) {
             if (FLATTENABLES.containsKey(oldBlock)) {
                 return FLATTENABLES.get(oldBlock).withPropertiesOf(old);
             }
         }
-        else if (action == ToolActions.HOE_TILL) {
+        else if (action == ItemAbilities.HOE_TILL) {
             if (accessor.getBlockState(pos.above()).isAir()) {
                 if (TILLABLES.containsKey(oldBlock)) {
                     return TILLABLES.get(oldBlock).withPropertiesOf(old);
@@ -90,16 +90,16 @@ public class ToolModificationHooks {
         return old;
     }
 
-    public static void stripMossyWisproot(LevelAccessor accessor, BlockState state, ItemStack stack, ToolAction action, UseOnContext context) {
-        if (action == ToolActions.AXE_STRIP) {
+    public static void stripMossyWisproot(LevelAccessor accessor, BlockState state, ItemStack stack, ItemAbility action, UseOnContext context) {
+        if (action == ItemAbilities.AXE_STRIP) {
             if (state.is(AetherIIBlocks.MOSSY_WISPROOT_LOG)) {
                 stripLog(accessor, stack, context, AetherIILoot.STRIP_MOSSY_WISPROOT);
             }
         }
     }
 
-    public static void stripAmberoot(LevelAccessor accessor, BlockState state, ItemStack stack, ToolAction action, UseOnContext context) {
-        if (action == ToolActions.AXE_STRIP) {
+    public static void stripAmberoot(LevelAccessor accessor, BlockState state, ItemStack stack, ItemAbility action, UseOnContext context) {
+        if (action == ItemAbilities.AXE_STRIP) {
             if (state.is(AetherIITags.Blocks.AMBEROOT_LOGS) && stack.is(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)) {
                 stripLog(accessor, stack, context, AetherIILoot.STRIP_AMBEROOT);
             }

@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.item.combat;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
-import com.aetherteam.aetherii.item.AetherIIToolActions;
+import com.aetherteam.aetherii.item.AetherIIItemAbilities;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.neoforged.neoforge.common.ToolAction;
+import net.neoforged.neoforge.common.ItemAbility;
 
 public class ShortswordItem extends SwordItem {
     public static final ResourceLocation BASE_SWEEP_RANGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_sweep_range");
@@ -34,7 +34,7 @@ public class ShortswordItem extends SwordItem {
     }
 
     @Override
-    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        return AetherIIToolActions.DEFAULT_SHORTSWORD_ACTIONS.contains(toolAction);
+    public boolean canPerformAction(ItemStack stack, ItemAbility toolAction) {
+        return AetherIIItemAbilities.DEFAULT_SHORTSWORD_ACTIONS.contains(toolAction);
     }
 }
