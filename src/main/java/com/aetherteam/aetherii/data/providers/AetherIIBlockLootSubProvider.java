@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.block.natural.RockBlock;
 import com.aetherteam.aetherii.block.natural.TwigBlock;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.BlockLootAccessor;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockLootSubProvider;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;

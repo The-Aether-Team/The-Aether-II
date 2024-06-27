@@ -178,17 +178,21 @@ public class DamageSystemHooks {
 
     private static void addBonusDamageTypeTooltip(List<Component> components, double value, String name) {
         if (value > 0.0) {
-            int position = components.size();
+            int removePosition = components.size() - 1;
+            int addPosition = components.size() - 1;
             Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.value().getDescriptionId());
-            for (int i = position - 1; i >= 0; i--) {
+            Component damageTypeText = Component.translatable("aether_ii.tooltip.item.damage." + name);
+            for (int i = components.size() - 1; i >= 0; i--) {
                 Component component = components.get(i);
                 if (component.getString().contains(damageText.getString())) {
-                    position = i + 1;
-                    break;
+                    removePosition = i;
+                }
+                if (component.getString().contains(damageTypeText.getString())) {
+                    addPosition = i + 1;
                 }
             }
-            components.remove(position - 1);
-            components.add(position, Component.literal("").append(Component.translatable("attribute.modifier.plus.0", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(value), Component.translatable("aether_ii.tooltip.item.damage." + name)).withStyle(ChatFormatting.BLUE)));
+            components.remove(removePosition);
+            components.add(addPosition, Component.literal("").append(Component.translatable("attribute.modifier.plus.0", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(value), damageTypeText).withStyle(ChatFormatting.BLUE)));
         }
     }
 

@@ -832,7 +832,7 @@ public class Moa extends MountableAnimal {
      */
     @Override
     public EntityDimensions getDefaultDimensions(Pose pose) {
-        EntityDimensions dimensions = super.getDimensions(pose);
+        EntityDimensions dimensions = super.getDefaultDimensions(pose);
         if (this.isSitting()) {
             dimensions = dimensions.scale(1.0F, 0.5F);
         }

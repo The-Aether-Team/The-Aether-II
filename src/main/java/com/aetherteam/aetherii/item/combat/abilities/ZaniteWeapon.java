@@ -2,37 +2,39 @@ package com.aetherteam.aetherii.item.combat.abilities;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.item.tools.abilities.ZaniteTool;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import org.apache.commons.compress.utils.Lists;
 
-import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public interface ZaniteWeapon extends ZaniteTool, UniqueDamage {
-    ResourceLocation DAMAGE_MODIFIER_UUID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
+    ResourceLocation DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
 
-    default Multimap<Attribute, AttributeModifier> increaseDamage(Multimap<Attribute, AttributeModifier> map, ItemStack stack, EquipmentSlot slot) {
-        if (slot == EquipmentSlot.MAINHAND) {
-            ImmutableMultimap.Builder<Attribute, AttributeModifier> attributeBuilder = ImmutableMultimap.builder();
-            attributeBuilder.putAll(map);
-            attributeBuilder.put(Attributes.ATTACK_DAMAGE.value(), new AttributeModifier(DAMAGE_MODIFIER_UUID, this.calculateIncrease(map, stack), AttributeModifier.Operation.ADD_VALUE));
-            map = attributeBuilder.build();
+    default ItemAttributeModifiers increaseDamage(ItemAttributeModifiers modifiers, ItemStack stack) {
+        List<ItemAttributeModifiers.Entry> mutableList = Lists.newArrayList(modifiers.modifiers().listIterator());
+        mutableList.removeIf((entry) -> entry.modifier().is(DAMAGE_MODIFIER_ID));
+        mutableList.add(new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, this.calculateIncrease(modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
+        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+        for (ItemAttributeModifiers.Entry entry : mutableList) {
+            builder.add(entry.attribute(), entry.modifier(), entry.slot());
         }
-        return map;
+        return builder.build();
     }
 
-     default int calculateIncrease(Multimap<Attribute, AttributeModifier> map, ItemStack stack) {
-        double baseDamage = 0.0;
-        for (Iterator<AttributeModifier> it = map.get(Attributes.ATTACK_DAMAGE.value()).stream().iterator(); it.hasNext();) {
-            AttributeModifier modifier = it.next();
-            baseDamage += modifier.amount();
-        }
-        return this.calculateIncrease(stack, baseDamage);
+     default int calculateIncrease(ItemAttributeModifiers modifiers, ItemStack stack) {
+        AtomicReference<Double> baseDamage = new AtomicReference<>(0.0);
+        modifiers.forEach(EquipmentSlotGroup.MAINHAND, (attribute, modifier) -> {
+            if (attribute.value() == Attributes.ATTACK_DAMAGE.value()) {
+                baseDamage.updateAndGet(v -> v + modifier.amount());
+            }
+        });
+        return this.calculateIncrease(stack, baseDamage.get());
     }
 
     default int calculateIncrease(ItemStack stack, double baseDamage) {

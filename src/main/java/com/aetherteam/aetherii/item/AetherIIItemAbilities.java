@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.item;
 
 import com.google.common.collect.Sets;
-import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.Set;
 import java.util.stream.Collectors;
