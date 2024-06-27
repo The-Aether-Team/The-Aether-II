@@ -46,7 +46,7 @@ public class KirridAi {
                 0,
                 ImmutableList.of(
                         new Swim(0.8F),
-//                        new KirridPanic(2.0F), //todo
+//                        new KirridPanic(2.0F), //todo 1.21
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
                         new AfterLongJumpFalling(),

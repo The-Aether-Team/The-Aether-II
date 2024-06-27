@@ -73,7 +73,7 @@ public class PortalTeleportationHooks {
      * @return Whether the portal should be created, as a {@link Boolean}.
      * @see WorldInteractionListener#onInteractWithPortalFrame(PlayerInteractEvent.RightClickBlock)
      */
-    public static boolean createPortal(Player player, Level level, BlockPos pos, @Nullable Direction direction, ItemStack stack, InteractionHand hand) {  //todo: port to new 1.21 portal system
+    public static boolean createPortal(Player player, Level level, BlockPos pos, @Nullable Direction direction, ItemStack stack, InteractionHand hand) {
         if (direction != null) {
             BlockPos relativePos = pos.relative(direction);
             if (stack.is(AetherIITags.Items.AETHER_PORTAL_ACTIVATION_ITEMS)) { // Checks if the item can activate the portal.

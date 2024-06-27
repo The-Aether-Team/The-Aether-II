@@ -189,7 +189,7 @@ public class Moa extends MountableAnimal {
      */
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
-        this.generateMoaUUID();
+        this.generateMoaUUID(); //todo: 1.21 tag passing into this method was removed.
 //        if (tag != null) { // Applies NBT when spawned from incubation.
 //            if (tag.contains("IsBaby")) {
 //                this.setBaby(tag.getBoolean("IsBaby"));
