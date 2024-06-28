@@ -72,7 +72,7 @@ public class PortalTeleportationAttachment {
      * Increments or decrements the Aether portal timer depending on if the player is inside an Aether portal.
      * On the client, this will also help to set the portal overlay.
      */
-    private void handleAetherPortal(Player player) {
+    private void handleAetherPortal(Player player) { //todo 1.21 still needs to display overlay in loading screen and retain fade-out overlay after teleportation before exiting portal.
         if (player.level().isClientSide()) {
             this.prevPortalAnimTime = this.portalAnimTime;
             Minecraft minecraft = Minecraft.getInstance();
