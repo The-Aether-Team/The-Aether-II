@@ -43,9 +43,12 @@ public class Burrukai extends AetherAnimal implements IShearable {
             MemoryModuleType.NEAREST_VISIBLE_ADULT,
             MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
             MemoryModuleType.IS_TEMPTED,
-            MemoryModuleType.RAM_COOLDOWN_TICKS,
             MemoryModuleType.IS_PANICKING,
-            MemoryModuleType.ANGRY_AT
+            MemoryModuleType.ATTACK_TARGET,
+            MemoryModuleType.ATTACK_COOLING_DOWN,
+            MemoryModuleType.ANGRY_AT,
+            MemoryModuleType.HURT_BY,
+            MemoryModuleType.HURT_BY_ENTITY
     );
 
     private final EntityType<? extends Burrukai> variantType;
@@ -148,6 +151,8 @@ public class Burrukai extends AetherAnimal implements IShearable {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 18.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.24)
+                .add(Attributes.ATTACK_DAMAGE, 3.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 3.0F)
                 .add(Attributes.ARMOR, 4.0);
     }
 

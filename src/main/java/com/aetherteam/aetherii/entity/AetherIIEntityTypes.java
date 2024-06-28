@@ -34,7 +34,7 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(Aerbunny::new, MobCategory.CREATURE).sized(0.6F, 0.5F).clientTrackingRange(10).ridingOffset(0).build("aerbunny"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Burrukai>> HIGHFIELDS_BURRUKAI = ENTITY_TYPES.register("highfields_burrukai",
-            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 2.5F).clientTrackingRange(10).build("highfields_burrukai"));
+            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).clientTrackingRange(10).build("highfields_burrukai"));
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<Kirrid>> HIGHFIELDS_KIRRID = ENTITY_TYPES.register("highfields_kirrid",

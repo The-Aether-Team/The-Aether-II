@@ -58,7 +58,6 @@ public class BurrukaiAi {
                         new MoveToTargetSink(),
                         new AfterLongJumpFalling(),
                         new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                        new CountDownCooldownTicks(MemoryModuleType.RAM_COOLDOWN_TICKS),
                         new CountDownCooldownTicks(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get())
                 )
         );
@@ -77,7 +76,7 @@ public class BurrukaiAi {
                                 4,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(RandomStroll.stroll(1.5F), 2), Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2), Pair.of(new DoNothing(30, 60), 1)
+                                                Pair.of(RandomStroll.stroll(0.8F), 2), Pair.of(SetWalkTargetFromLookTarget.create(0.8F, 3), 2), Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
                         )
@@ -91,7 +90,7 @@ public class BurrukaiAi {
                 10,
                 ImmutableList.of(
                         StopAttackingIfTargetInvalid.<Mob>create(p_35118_ -> !isNearestValidAttackTarget(pBurrukai, p_35118_)),
-                        new RamAttack(2.0F)
+                        new RamAttack(2.25F)
                 ),
                 MemoryModuleType.ATTACK_TARGET
         );

@@ -10,6 +10,11 @@ public class NeutralAnimalPanic<T extends AetherAnimal> extends AnimalPanic<T> {
     }
 
     @Override
+    protected boolean checkExtraStartConditions(ServerLevel level, T owner) {
+        return owner.isBaby() && super.checkExtraStartConditions(level, owner);
+    }
+
+    @Override
     protected boolean canStillUse(ServerLevel level, T entity, long gameTime) {
         return entity.isBaby() && super.canStillUse(level, entity, gameTime);
     }
