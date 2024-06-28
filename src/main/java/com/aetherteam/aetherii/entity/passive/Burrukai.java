@@ -152,7 +152,7 @@ public class Burrukai extends AetherAnimal implements IShearable {
                 .add(Attributes.MAX_HEALTH, 18.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.24)
                 .add(Attributes.ATTACK_DAMAGE, 3.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 3.0F)
+                .add(Attributes.ATTACK_KNOCKBACK, 4.0F)
                 .add(Attributes.ARMOR, 4.0);
     }
 

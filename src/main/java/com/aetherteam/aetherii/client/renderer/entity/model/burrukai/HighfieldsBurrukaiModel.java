@@ -17,7 +17,7 @@ public class HighfieldsBurrukaiModel extends BurrukaiModel {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition body_main = partdefinition.addOrReplaceChild("body_main", CubeListBuilder.create().texOffs(20, 85).mirror().addBox(-9.0F, -0.8F, -1.0F, 18.0F, 8.0F, 13.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, -4.0F, 0.0F));
+		PartDefinition body_main = partdefinition.addOrReplaceChild("body_main", CubeListBuilder.create().texOffs(20, 85).mirror().addBox(-9.0F, -0.8F, -1.0F, 18.0F, 8.0F, 13.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, -4.0F, -8.0F));
 
 		PartDefinition body_front = body_main.addOrReplaceChild("body_front", CubeListBuilder.create().texOffs(27, 106).mirror().addBox(-6.0F, 7.0F, -1.0F, 12.0F, 11.0F, 12.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
 
