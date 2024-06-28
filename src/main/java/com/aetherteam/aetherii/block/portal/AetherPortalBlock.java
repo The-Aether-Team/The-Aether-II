@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -55,7 +54,6 @@ public class AetherPortalBlock extends Block implements Portal {
      * [CODE COPY] - {@link Entity#handleInsidePortal(BlockPos)}<br>
      * Warning for "deprecation" is suppressed because the method is fine to override.
      */
-    @SuppressWarnings("deprecation")
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity.canUsePortal(false)) {
@@ -77,13 +75,11 @@ public class AetherPortalBlock extends Block implements Portal {
 
     @Override
     public int getPortalTransitionTime(ServerLevel pLevel, Entity pEntity) {
-        return getLevelPortalTransitionTime(pLevel, pEntity);
+        return this.getLevelPortalTransitionTime(pLevel, pEntity);
     }
 
     private int getLevelPortalTransitionTime(Level level, Entity entity) {
-        return entity instanceof Player player
-                ? Math.max(1, level.getGameRules().getInt(player.getAbilities().invulnerable ? GameRules.RULE_PLAYERS_NETHER_PORTAL_CREATIVE_DELAY : GameRules.RULE_PLAYERS_NETHER_PORTAL_DEFAULT_DELAY))
-                : 0;
+        return entity instanceof Player player ? Math.max(1, level.getGameRules().getInt(player.getAbilities().invulnerable ? GameRules.RULE_PLAYERS_NETHER_PORTAL_CREATIVE_DELAY : GameRules.RULE_PLAYERS_NETHER_PORTAL_DEFAULT_DELAY)) : 0;
     }
 
     @Nullable
@@ -94,20 +90,17 @@ public class AetherPortalBlock extends Block implements Portal {
         if (serverlevel == null) {
             return null;
         } else {
-            boolean flag = serverlevel.dimension() == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL;
             WorldBorder worldborder = serverlevel.getWorldBorder();
             double d0 = DimensionType.getTeleportationScale(pLevel.dimensionType(), serverlevel.dimensionType());
             BlockPos blockpos = worldborder.clampToBounds(pEntity.getX() * d0, pEntity.getY(), pEntity.getZ() * d0);
-            return this.getExitPortal(serverlevel, pEntity, pPos, blockpos, flag, worldborder);
+            return this.getExitPortal(serverlevel, pEntity, pPos, blockpos, worldborder);
         }
     }
 
     @Nullable
-    private DimensionTransition getExitPortal(
-            ServerLevel pLevel, Entity pEntity, BlockPos pPos, BlockPos pExitPos, boolean pIsNether, WorldBorder pWorldBorder
-    ) {
+    private DimensionTransition getExitPortal(ServerLevel pLevel, Entity pEntity, BlockPos pPos, BlockPos pExitPos, WorldBorder pWorldBorder) {
         AetherPortalForcer portalForcer = new AetherPortalForcer(pLevel);
-        Optional<BlockPos> optional = portalForcer.findClosestPortalPosition(pExitPos, pIsNether, pWorldBorder);
+        Optional<BlockPos> optional = portalForcer.findClosestPortalPosition(pExitPos, pWorldBorder);
         BlockUtil.FoundRectangle blockutil$foundrectangle;
         DimensionTransition.PostDimensionTransition dimensiontransition$postdimensiontransition;
         if (optional.isPresent()) {
@@ -121,7 +114,7 @@ public class AetherPortalBlock extends Block implements Portal {
                     21,
                     p_351970_ -> pLevel.getBlockState(p_351970_) == blockstate
             );
-            dimensiontransition$postdimensiontransition = DimensionTransition.PLAY_PORTAL_SOUND.then(p_351967_ -> p_351967_.placePortalTicket(blockpos));
+            dimensiontransition$postdimensiontransition = AetherPortalForcer.PLAY_PORTAL_SOUND.then(p_351967_ -> p_351967_.placePortalTicket(blockpos));
         } else {
             Direction.Axis direction$axis = pEntity.level().getBlockState(pPos).getOptionalValue(AXIS).orElse(Direction.Axis.X);
             Optional<BlockUtil.FoundRectangle> optional1 = portalForcer.createPortal(pExitPos, direction$axis);
@@ -131,15 +124,13 @@ public class AetherPortalBlock extends Block implements Portal {
             }
 
             blockutil$foundrectangle = optional1.get();
-            dimensiontransition$postdimensiontransition = DimensionTransition.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET);
+            dimensiontransition$postdimensiontransition = AetherPortalForcer.PLAY_PORTAL_SOUND.then(DimensionTransition.PLACE_PORTAL_TICKET);
         }
 
         return getDimensionTransitionFromExit(pEntity, pPos, blockutil$foundrectangle, pLevel, dimensiontransition$postdimensiontransition);
     }
 
-    private static DimensionTransition getDimensionTransitionFromExit(
-            Entity pEntity, BlockPos pPos, BlockUtil.FoundRectangle pRectangle, ServerLevel pLevel, DimensionTransition.PostDimensionTransition pPostDimensionTransition
-    ) {
+    private static DimensionTransition getDimensionTransitionFromExit(Entity pEntity, BlockPos pPos, BlockUtil.FoundRectangle pRectangle, ServerLevel pLevel, DimensionTransition.PostDimensionTransition pPostDimensionTransition) {
         BlockState blockstate = pEntity.level().getBlockState(pPos);
         Direction.Axis direction$axis;
         Vec3 vec3;
@@ -154,27 +145,15 @@ public class AetherPortalBlock extends Block implements Portal {
             vec3 = new Vec3(0.5, 0.0, 0.0);
         }
 
-        return createDimensionTransition(
-                pLevel, pRectangle, direction$axis, vec3, pEntity, pEntity.getDeltaMovement(), pEntity.getYRot(), pEntity.getXRot(), pPostDimensionTransition
-        );
+        return createDimensionTransition(pLevel, pRectangle, direction$axis, vec3, pEntity, pEntity.getDeltaMovement(), pEntity.getYRot(), pEntity.getXRot(), pPostDimensionTransition);
     }
 
-    private static DimensionTransition createDimensionTransition(
-            ServerLevel pLevel,
-            BlockUtil.FoundRectangle pRectangle,
-            Direction.Axis pAxis,
-            Vec3 pOffset,
-            Entity pEntity,
-            Vec3 pSpeed,
-            float pYRot,
-            float pXRot,
-            DimensionTransition.PostDimensionTransition pPostDimensionTransition
-    ) {
+    private static DimensionTransition createDimensionTransition(ServerLevel pLevel, BlockUtil.FoundRectangle pRectangle, Direction.Axis pAxis, Vec3 pOffset, Entity pEntity, Vec3 pSpeed, float pYRot, float pXRot, DimensionTransition.PostDimensionTransition pPostDimensionTransition) {
         BlockPos blockpos = pRectangle.minCorner;
         BlockState blockstate = pLevel.getBlockState(blockpos);
         Direction.Axis direction$axis = blockstate.getOptionalValue(BlockStateProperties.HORIZONTAL_AXIS).orElse(Direction.Axis.X);
-        double d0 = (double)pRectangle.axis1Size;
-        double d1 = (double)pRectangle.axis2Size;
+        double d0 = pRectangle.axis1Size;
+        double d1 = pRectangle.axis2Size;
         EntityDimensions entitydimensions = pEntity.getDimensions(pEntity.getPose());
         int i = pAxis == direction$axis ? 0 : 90;
         Vec3 vec3 = pAxis == direction$axis ? pSpeed : new Vec3(pSpeed.z, pSpeed.y, -pSpeed.x);
