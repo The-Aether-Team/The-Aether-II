@@ -83,11 +83,6 @@ public class DamageSystemHooks {
 
                         damage = Math.max(slashCalculation + impactCalculation + pierceCalculation, 1.0);
 
-                        AetherII.LOGGER.info(slashDamage + " - " + slashDefense);
-                        AetherII.LOGGER.info(impactDamage + " - " + impactDefense);
-                        AetherII.LOGGER.info(pierceDamage + " - " + pierceDefense);
-                        AetherII.LOGGER.info(String.valueOf(damage));
-
                         if (sourceEntity instanceof Player player) {
                             damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
                             damage *= player.getAttackStrengthScale(0.5F);
@@ -101,6 +96,7 @@ public class DamageSystemHooks {
                 }
             }
         }
+        AetherII.LOGGER.info(String.valueOf(damage));
         return (float) damage;
     }
 

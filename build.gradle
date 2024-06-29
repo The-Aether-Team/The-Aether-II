@@ -29,7 +29,7 @@ minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/
 runs {
     configureEach {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
-        systemProperty  'forge.logging.console.level', 'debug'
+        systemProperty  'forge.logging.console.level', 'info'
 
         modSource project.sourceSets.main
     }
