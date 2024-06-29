@@ -1,6 +1,6 @@
-package com.aetherteam.aetherii.client.event.listeners;
+package com.aetherteam.aetherii.client.event.listeners.attachment;
 
-import com.aetherteam.aetherii.client.event.hooks.AerbunnyMountClientHooks;
+import com.aetherteam.aetherii.client.event.hooks.attachment.AerbunnyMountClientHooks;
 import net.minecraft.client.player.Input;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;

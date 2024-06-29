@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.event.hooks;
+package com.aetherteam.aetherii.event.hooks.attachment;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import net.minecraft.world.entity.LivingEntity;

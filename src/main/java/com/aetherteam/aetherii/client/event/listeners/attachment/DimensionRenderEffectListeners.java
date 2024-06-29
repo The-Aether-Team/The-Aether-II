@@ -1,6 +1,6 @@
-package com.aetherteam.aetherii.client.event.listeners;
+package com.aetherteam.aetherii.client.event.listeners.attachment;
 
-import com.aetherteam.aetherii.client.event.hooks.DimensionRenderEffectHooks;
+import com.aetherteam.aetherii.client.event.hooks.attachment.DimensionRenderEffectHooks;
 import net.minecraft.client.Camera;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.ViewportEvent;

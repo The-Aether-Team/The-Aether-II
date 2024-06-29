@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.event.hooks;
+package com.aetherteam.aetherii.client.event.hooks.attachment;
 
 import com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;

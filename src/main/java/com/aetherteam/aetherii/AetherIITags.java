@@ -69,6 +69,10 @@ public class AetherIITags {
         public static final TagKey<Item> TOOLS_HAMMERS = tag("tools/hammers");
         public static final TagKey<Item> TOOLS_SPEARS = tag("tools/spears");
 
+        public static final TagKey<Item> EQUIPMENT_RELICS = tag("equipment/relics");
+        public static final TagKey<Item> EQUIPMENT_HANDWEAR = tag("equipment/handwear");
+        public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
+
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
         public static final TagKey<Item> CRAFTS_SKYROOT_PLANKS = tag("crafts_skyroot_planks");

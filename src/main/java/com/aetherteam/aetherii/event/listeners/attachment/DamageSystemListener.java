@@ -1,6 +1,6 @@
-package com.aetherteam.aetherii.event.listeners;
+package com.aetherteam.aetherii.event.listeners.attachment;
 
-import com.aetherteam.aetherii.event.hooks.DamageSystemHooks;
+import com.aetherteam.aetherii.event.hooks.attachment.DamageSystemHooks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;

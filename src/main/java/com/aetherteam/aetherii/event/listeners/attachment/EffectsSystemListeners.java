@@ -1,6 +1,6 @@
-package com.aetherteam.aetherii.event.listeners;
+package com.aetherteam.aetherii.event.listeners.attachment;
 
-import com.aetherteam.aetherii.event.hooks.EffectsSystemHooks;
+import com.aetherteam.aetherii.event.hooks.attachment.EffectsSystemHooks;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.IEventBus;
