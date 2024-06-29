@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.RenderChunkRegionAccessor;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -33,9 +34,10 @@ public class LiquidBlockRendererMixin {
         int range = 8;
         float opacityStep = 1.0F / range;
         int max = bottomY + range;
-        boolean isUpperVertex = y - currentY > 0.005;
         if (currentY < max) {
-            float trueAlpha = isUpperVertex ? opacityStep * (currentY + 1) : opacityStep * currentY;
+            float offsetY = currentY - bottomY;
+            boolean isUpperVertex = y - offsetY > 0.005;
+            float trueAlpha = isUpperVertex ? opacityStep * (offsetY + 1) : opacityStep * offsetY;
             consumer.addVertex(x, y, z).setColor(r, g, b, trueAlpha).setUv(u, v).setLight(light).setNormal(0.0F, 1.0F, 0.0F);
             return true;
         } else {
