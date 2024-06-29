@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
 import com.aetherteam.aetherii.client.event.listeners.attachment.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.event.listeners.attachment.DimensionRenderEffectListeners;
@@ -30,6 +31,8 @@ public class AetherIIClient {
             AetherIIAtlases.registerSkyrootChestAtlases();
             registerItemModelProperties();
         });
+
+        HandwearAccessory.clientInit();
     }
 
     public static void eventSetup(IEventBus neoBus) {

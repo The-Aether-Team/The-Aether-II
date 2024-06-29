@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
+import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.api.damage.DamageInfliction;
 import com.aetherteam.aetherii.api.damage.DamageResistance;
 import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
@@ -133,6 +134,7 @@ public class AetherII {
             AetherIIBlocks.registerFlammability();
         });
 
+        HandwearAccessory.init();
         UniqueSlotHandling.EVENT.register(AetherIISlotHandling.INSTANCE);
     }
 

@@ -78,9 +78,9 @@ public interface Guidebook {
     enum Tab {
         EQUIPMENT(EQUIPMENT_TAB, (menu, inventory) -> new GuidebookEquipmentScreen(menu, inventory, Component.empty())),
         STATUS(STATUS_TAB, (menu, inventory) -> new GuidebookStatusScreen(menu, inventory, Component.empty())),
-        DISCOVERY(DISCOVERY_TAB, (menu, inventory) -> new GuidebookStatusScreen(menu, inventory, Component.empty())), //todo
-        JOURNAL(JOURNAL_TAB, (menu, inventory) -> new GuidebookStatusScreen(menu, inventory, Component.empty())),
-        REWARDS(REWARDS_TAB, (menu, inventory) -> new GuidebookStatusScreen(menu, inventory, Component.empty()));
+        DISCOVERY(DISCOVERY_TAB, (menu, inventory) -> new GuidebookDiscoveryScreen(menu, inventory, Component.empty())),
+        JOURNAL(JOURNAL_TAB, (menu, inventory) -> new GuidebookJournalScreen(menu, inventory, Component.empty())),
+        REWARDS(REWARDS_TAB, (menu, inventory) -> new GuidebookRewardsScreen(menu, inventory, Component.empty()));
 
         private final WidgetSprites sprite;
         private final BiFunction<GuidebookEquipmentMenu, Inventory, Screen> screen;

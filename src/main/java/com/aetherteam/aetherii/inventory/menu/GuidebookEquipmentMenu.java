@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.inventory.menu;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
 import com.mojang.datafixers.util.Pair;
@@ -46,7 +48,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         AccessoriesSlotGenerator generator = AccessoriesSlotGenerator.of(this::addSlot, 57, 22, this.owner, AetherIISlotHandling.getRelicSlotType(), AetherIISlotHandling.getHandwearSlotType(), AetherIISlotHandling.getAccessorySlotType());
 
         if (generator != null) {
-            this.addedSlots = generator.padding(0).column(); //todo account into quickMoveStack
+            this.addedSlots = generator.padding(0).column();
         }
 
         for (int k = 0; k < 4; k++) {
@@ -112,6 +114,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
      */
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
+        AetherII.LOGGER.info(String.valueOf(index));
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasItem()) {
@@ -128,28 +131,40 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 if (!this.moveItemStackTo(itemstack1, 9, 45, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 5 && index < 9) {
-                if (!this.moveItemStackTo(itemstack1, 9, 45, false)) {
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(5).hasItem()) {
+                if (!this.moveItemStackTo(itemstack1, 5, 6, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (equipmentslot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && !this.slots.get(8 - equipmentslot.getIndex()).hasItem()) {
-                int i = 8 - equipmentslot.getIndex();
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(6).hasItem()) {
+                if (!this.moveItemStackTo(itemstack1, 6, 7, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_HANDWEAR) && !this.slots.get(7).hasItem()) {
+                if (!this.moveItemStackTo(itemstack1, 7, 8, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_ACCESSORIES) && !this.slots.get(8).hasItem()) {
+                if (!this.moveItemStackTo(itemstack1, 8, 9, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (equipmentslot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR && !this.slots.get(12 - equipmentslot.getIndex()).hasItem()) {
+                int i = 12 - equipmentslot.getIndex();
                 if (!this.moveItemStackTo(itemstack1, i, i + 1, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (equipmentslot == EquipmentSlot.OFFHAND && !this.slots.get(45).hasItem()) {
-                if (!this.moveItemStackTo(itemstack1, 45, 46, false)) {
+            } else if (equipmentslot == EquipmentSlot.OFFHAND && !this.slots.get(49).hasItem()) {
+                if (!this.moveItemStackTo(itemstack1, 49, 50, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 9 && index < 36) {
-                if (!this.moveItemStackTo(itemstack1, 36, 45, false)) {
+            } else if (index >= 13 && index < 40) {
+                if (!this.moveItemStackTo(itemstack1, 40, 49, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (index >= 36 && index < 45) {
-                if (!this.moveItemStackTo(itemstack1, 9, 36, false)) {
+            } else if (index >= 40 && index < 49) {
+                if (!this.moveItemStackTo(itemstack1, 13, 40, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemstack1, 9, 45, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 13, 49, false)) {
                 return ItemStack.EMPTY;
             }
 

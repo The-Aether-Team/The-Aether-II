@@ -72,6 +72,7 @@ public class AetherIITags {
         public static final TagKey<Item> EQUIPMENT_RELICS = tag("equipment/relics");
         public static final TagKey<Item> EQUIPMENT_HANDWEAR = tag("equipment/handwear");
         public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
+        public static final TagKey<Item> EQUIPABLE = tag("equipable");
 
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 

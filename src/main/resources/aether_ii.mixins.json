@@ -26,6 +26,7 @@
     "client.LiquidBlockRendererMixin",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.ParticleAccessor",
+    "client.accessor.PlayerModelAccessor",
     "client.accessor.RenderChunkRegionAccessor"
   ],
   "injectors": {
