@@ -6,18 +6,6 @@
       "chance": 15
     },
     {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "max_inclusive": {
-          "below_top": 0
-        },
-        "min_inclusive": {
-          "absolute": 0
-        }
-      }
-    },
-    {
       "type": "minecraft:environment_scan",
       "direction_of_search": "down",
       "max_steps": 16,
@@ -46,9 +34,6 @@
       "type": "minecraft:surface_relative_threshold_filter",
       "heightmap": "OCEAN_FLOOR_WG",
       "max_inclusive": -5
-    },
-    {
-      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:biome"

@@ -75,10 +75,8 @@ public class AetherIIMiscPlacements {
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, AETHER_WATER_LAKE_UNDERGROUND, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_LAKE),
                 RarityFilter.onAverageOnceEvery(15),
-                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(0), VerticalAnchor.top())),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.not(BlockPredicate.ONLY_IN_AIR_PREDICATE), BlockPredicate.insideWorld(new BlockPos(0, -5, 0))), 16),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5),
-                InSquarePlacement.spread(),
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, AETHER_WATER_SPRING, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_SPRING),
                 CountPlacement.of(15),
