@@ -64,7 +64,7 @@ public abstract class MultiBlock extends BaseEntityBlock {
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) { //todo prevent placement if this doesnt have enough room.
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         Pair<Direction, Direction> directions = getDirectionAndOffsetDirection(context.getHorizontalDirection(), context.getRotation());
         Direction direction = directions.getFirst();
         Direction offsetDirection = directions.getSecond();
@@ -114,14 +114,13 @@ public abstract class MultiBlock extends BaseEntityBlock {
         if (degreesOffset < 0) degreesOffset += 360;
         int rangedDegrees = degreesOffset % 90;
 
-        Direction direction = initialDirection;
         Direction offsetDirection;
         if (rangedDegrees < 45) { //todo this is where segmentation will factor in later i think. 45 is the midpoint. i need to account for more than just a midpoint for 2<
-            offsetDirection = direction.getCounterClockWise();
+            offsetDirection = initialDirection.getCounterClockWise();
         } else {
-            offsetDirection = direction.getClockWise();
+            offsetDirection = initialDirection.getClockWise();
         }
-        return Pair.of(direction, offsetDirection);
+        return Pair.of(initialDirection, offsetDirection);
     }
 
     public Stream<BlockPos> multiBlockPositions(Direction depthDirection, Direction widthDirection) {
