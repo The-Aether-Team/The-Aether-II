@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public abstract class MultiBlock extends BaseEntityBlock {
-    public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
+    public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS; //todo replace with horizontal orientation
     public static final DirectionProperty X_DIRECTION_FROM_ORIGIN = DirectionProperty.create("x_direction_from_origin", Direction.WEST, Direction.EAST);
     public static final DirectionProperty Y_DIRECTION_FROM_ORIGIN = DirectionProperty.create("y_direction_from_origin", Direction.DOWN, Direction.UP);
     public static final DirectionProperty Z_DIRECTION_FROM_ORIGIN = DirectionProperty.create("z_direction_from_origin", Direction.NORTH, Direction.SOUTH);
