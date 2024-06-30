@@ -68,31 +68,27 @@ public class OutpostCampfireRenderer implements BlockEntityRenderer<OutpostCampf
     @Override
     public void render(OutpostCampfireBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         BlockState blockState = blockEntity.getBlockState();
-        OutpostCampfireBlock block = (OutpostCampfireBlock) blockState.getBlock();
-        if (blockState.getValue(block.X_OFFSET_FROM_ORIGIN) == block.getScale().getX() - 1 && blockState.getValue(block.Y_OFFSET_FROM_ORIGIN) == 0 && blockState.getValue(block.Z_OFFSET_FROM_ORIGIN) == block.getScale().getZ() - 1) {
-            poseStack.translate(0, 1.5, 0);
-            poseStack.mulPose(Axis.XN.rotationDegrees(180));
-            Direction xDirection = blockState.getValue(OutpostCampfireBlock.X_DIRECTION_FROM_ORIGIN);
-            Direction zDirection = blockState.getValue(OutpostCampfireBlock.Z_DIRECTION_FROM_ORIGIN);
-            if (xDirection != Direction.EAST) {
-                poseStack.translate(-xDirection.getStepX(), 0, 0);
-            }
-            if (zDirection != Direction.SOUTH) {
-                poseStack.translate(0, 0, zDirection.getStepZ());
-            }
-            //todo orientation rotation so the campfire isnt always facing the same way regardless of placement.
-            VertexConsumer vertexConsumer = OUTPOST_CAMPFIRE_TEXTURE.buffer(bufferSource, RenderType::entityCutout);
-            this.campfire.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+        poseStack.translate(0, 1.5, 0);
+        poseStack.mulPose(Axis.XN.rotationDegrees(180));
+        Direction xDirection = blockState.getValue(OutpostCampfireBlock.X_DIRECTION_FROM_ORIGIN);
+        Direction zDirection = blockState.getValue(OutpostCampfireBlock.Z_DIRECTION_FROM_ORIGIN);
+        if (xDirection != Direction.EAST) {
+            poseStack.translate(-xDirection.getStepX(), 0, 0);
         }
+        if (zDirection != Direction.SOUTH) {
+            poseStack.translate(0, 0, zDirection.getStepZ());
+        }
+        poseStack.mulPose(Axis.YP.rotationDegrees(blockState.getValue(OutpostCampfireBlock.HORIZONTAL_FACING).toYRot()));
+        VertexConsumer vertexConsumer = OUTPOST_CAMPFIRE_TEXTURE.buffer(bufferSource, RenderType::entityCutout);
+        this.campfire.render(poseStack, vertexConsumer, packedLight, packedOverlay);
     }
 
     @Override
-    public int getViewDistance() { //todo
-        return 96;
-    }
-
-    @Override
-    public AABB getRenderBoundingBox(OutpostCampfireBlockEntity blockEntity) {  //todo
-        return AABB.INFINITE;
+    public AABB getRenderBoundingBox(OutpostCampfireBlockEntity blockEntity) {
+        BlockState state = blockEntity.getBlockState();
+        OutpostCampfireBlock block = (OutpostCampfireBlock) state.getBlock();
+        BlockPos origin = block.locateOriginFrom(state, blockEntity.getBlockPos());
+        BlockPos corner = origin.relative(state.getValue(OutpostCampfireBlock.X_DIRECTION_FROM_ORIGIN), block.getScale().getX() - 1).relative(Direction.UP, block.getScale().getY() - 1).relative(state.getValue(OutpostCampfireBlock.Z_DIRECTION_FROM_ORIGIN), block.getScale().getZ() - 1);
+        return new AABB(origin.getX(), origin.getY(), origin.getZ(), corner.getX(), corner.getY(), corner.getZ()).inflate(1, 1, 1);
     }
 }
