@@ -93,6 +93,7 @@ public class AetherIITags {
         public static final TagKey<Item> PHYG_TEMPTATION_ITEMS = tag("phyg_temptation_items");
         public static final TagKey<Item> PHYG_CALM_ITEMS = tag("phyg_calm_items");
         public static final TagKey<Item> KIRRID_TEMPTATION_ITEMS = tag("kirrid_temptation_items");
+        public static final TagKey<Item> BURRUKAI_TEMPTATION_ITEMS = tag("burrukai_temptation_items");
         public static final TagKey<Item> FLYING_COW_TEMPTATION_ITEMS = tag("flying_cow_temptation_items");
         public static final TagKey<Item> SHEEPUFF_TEMPTATION_ITEMS = tag("sheepuff_temptation_items");
         public static final TagKey<Item> MOA_FOOD_ITEMS = tag("moa_food_items");
@@ -108,6 +109,7 @@ public class AetherIITags {
     }
 
     public static class Entities {
+        public static final TagKey<EntityType<?>> BURRUKAI = tag("burrukai");
         public static final TagKey<EntityType<?>> KIRRID = tag("kirrid");
 
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
