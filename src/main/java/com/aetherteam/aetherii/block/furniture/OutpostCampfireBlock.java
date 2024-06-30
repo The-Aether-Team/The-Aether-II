@@ -24,6 +24,6 @@ public class OutpostCampfireBlock extends MultiBlock { //todo model shapes and l
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new OutpostCampfireBlockEntity(pos, state);
+        return new OutpostCampfireBlockEntity(pos, state); //todo this makes a block entity for every subblock of the multiblock, it probably should not do that.
     }
 }
