@@ -1,0 +1,388 @@
+{
+  "variants": {
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=x,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=east,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=0,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=down,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=0,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=north,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=0": {
+      "model": "aether_ii:block/outpost_campfire"
+    },
+    "axis=z,x_direction_from_origin=west,x_offset_from_origin=1,y_direction_from_origin=up,y_offset_from_origin=1,z_direction_from_origin=south,z_offset_from_origin=1": {
+      "model": "aether_ii:block/outpost_campfire"
+    }
+  }
+}

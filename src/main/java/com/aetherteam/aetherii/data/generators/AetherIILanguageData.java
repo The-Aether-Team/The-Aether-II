@@ -417,6 +417,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_BOOKSHELF, "Skyroot Bookshelf");
         this.addBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF, "Holystone Bookshelf");
 
+        // Furniture
+        this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
+
         //Egg
         this.addBlock(AetherIIBlocks.BLUE_MOA_EGG, "Blue Moa Egg");
 
