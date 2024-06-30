@@ -68,7 +68,8 @@ public abstract class MultiBlock extends BaseEntityBlock {
         Pair<Direction, Direction> directions = getDirectionAndOffsetDirection(context.getHorizontalDirection(), context.getRotation());
         Direction direction = directions.getFirst();
         Direction offsetDirection = directions.getSecond();
-        if (this.multiBlockPositions(direction, offsetDirection).allMatch((loopedPos) -> context.getLevel().isEmptyBlock(loopedPos.offset(context.getClickedPos())))) {
+        if (this.multiBlockPositions(direction, offsetDirection).allMatch((loopedPos) -> context.getLevel().isEmptyBlock(loopedPos.offset(context.getClickedPos())))
+                && this.multiBlockPositions(direction, offsetDirection).noneMatch((loopedPos) -> context.getLevel().isEmptyBlock(loopedPos.offset(context.getClickedPos().below())))) {
             return this.defaultBlockState();
         } else {
             return null;
