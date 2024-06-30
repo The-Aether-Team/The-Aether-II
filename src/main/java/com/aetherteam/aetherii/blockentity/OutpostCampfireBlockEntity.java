@@ -8,10 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class OutpostCampfireBlockEntity extends BlockEntity {
     public OutpostCampfireBlockEntity() {
-        super(AetherIIBlockEntityTypes.OUTPOST_CAMPFIRE.get(), BlockPos.ZERO, AetherIIBlocks.OUTPOST_CAMPFIRE.get().defaultBlockState()
-                .setValue(AetherIIBlocks.OUTPOST_CAMPFIRE.get().X_OFFSET_FROM_ORIGIN, 1)
-                .setValue(AetherIIBlocks.OUTPOST_CAMPFIRE.get().Y_OFFSET_FROM_ORIGIN, 0)
-                .setValue(AetherIIBlocks.OUTPOST_CAMPFIRE.get().Z_OFFSET_FROM_ORIGIN, 1));
+        super(AetherIIBlockEntityTypes.OUTPOST_CAMPFIRE.get(), BlockPos.ZERO, AetherIIBlocks.OUTPOST_CAMPFIRE.get().defaultBlockState());
     }
 
     public OutpostCampfireBlockEntity(BlockPos pos, BlockState blockState) {
