@@ -10,6 +10,8 @@ import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
+import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.HighfieldsBurrukaiBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.HighfieldsBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
@@ -42,6 +44,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.PHYG.get(), PhygRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.FLYING_COW.get(), FlyingCowRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SHEEPUFF.get(), SheepuffRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), (context) -> new BurrukaiRenderer(context, BiomeVariantPresets.HIGHFIELDS_BURRUKAI));
         event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.HIGHFIELDS_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.MAGNETIC_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.ARCTIC_KIRRID));
@@ -74,6 +77,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.PHYG, PhygModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_BURRUKAI, HighfieldsBurrukaiModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_BURRUKAI_BABY, HighfieldsBurrukaiBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_KIRRID, HighfieldsKirridModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_KIRRID_BABY, HighfieldsKirridBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_KIRRID, MagneticKirridModel::createBodyLayer);

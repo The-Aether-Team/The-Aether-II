@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
+import com.aetherteam.aetherii.entity.ai.brain.behavior.BabyOnlyAnimalPanic;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.BetterStrollToPoi;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.FallRandomStroll;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
@@ -51,7 +52,7 @@ public class MoaAi {
                 0,
                 ImmutableList.of(
                         new Swim(0.8F),
-//                        new AnimalPanic(0.14F, LivingEntity::isBaby), //todo 1.21
+                        new BabyOnlyAnimalPanic<>(0.14F),
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
                         StopBeingAngryIfTargetDead.create(),

@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.HighfieldsBurrukaiBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.HighfieldsBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -10,6 +12,11 @@ import net.minecraft.world.entity.Entity;
 import java.util.function.Function;
 
 public enum BiomeVariantPresets {
+    HIGHFIELDS_BURRUKAI(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/highfields/burrukai_highfields.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/highfields/burrukai_highfields_baby.png"),
+            (context) -> new HighfieldsBurrukaiModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_BURRUKAI)),
+            (context) -> new HighfieldsBurrukaiBabyModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_BURRUKAI_BABY))),
     HIGHFIELDS_KIRRID(
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields.png"),
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields_baby.png"),

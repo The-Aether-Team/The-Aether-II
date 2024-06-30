@@ -1,0 +1,79 @@
+package com.aetherteam.aetherii.client.renderer.entity.model.burrukai;// Made with Blockbench 4.10.3
+// Exported for Minecraft version 1.17 or later with Mojang mappings
+// Paste this class into your mod and generate all required imports
+
+
+import com.aetherteam.aetherii.client.renderer.entity.animation.BurrukaiAnimation;
+import com.aetherteam.aetherii.entity.passive.Burrukai;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
+
+public class BurrukaiModel extends HierarchicalModel<Burrukai> {
+    protected final ModelPart root;
+    public final ModelPart body_main;
+    public final ModelPart body_front;
+    public final ModelPart body_rear;
+    public final ModelPart tail;
+    public final ModelPart body_plate_rear;
+    public final ModelPart body_plate_front;
+    public final ModelPart body_neck;
+    public final ModelPart leg_front_left;
+    public final ModelPart leg_front_left_lower;
+    public final ModelPart leg_front_left_plate;
+    public final ModelPart leg_front_right;
+    public final ModelPart leg_front_right_lower;
+    public final ModelPart leg_front_right_plate;
+    public final ModelPart leg_rear_right;
+    public final ModelPart leg_rear_right_lower;
+    public final ModelPart leg_rear_left;
+    public final ModelPart leg_rear_left_lower;
+    public final ModelPart head_main;
+    public final ModelPart head_front;
+    public final ModelPart head_plate;
+    public final ModelPart ear_left;
+    public final ModelPart ear_right;
+    public final ModelPart head_rear;
+    public final ModelPart mouth;
+
+    public BurrukaiModel(ModelPart root) {
+        this.root = root;
+        this.body_main = root.getChild("body_main");
+        this.body_front = this.body_main.getChild("body_front");
+        this.body_rear = this.body_main.getChild("body_rear");
+        this.tail = this.body_main.getChild("tail");
+        this.body_plate_rear = this.body_main.getChild("body_plate_rear");
+        this.body_plate_front = this.body_main.getChild("body_plate_front");
+        this.body_neck = this.body_main.getChild("body_neck");
+        this.leg_front_left = this.body_main.getChild("leg_front_left");
+        this.leg_front_left_lower = this.leg_front_left.getChild("leg_front_left_lower");
+        this.leg_front_left_plate = this.leg_front_left.getChild("leg_front_left_plate");
+        this.leg_front_right = this.body_main.getChild("leg_front_right");
+        this.leg_front_right_lower = this.leg_front_right.getChild("leg_front_right_lower");
+        this.leg_front_right_plate = this.leg_front_right.getChild("leg_front_right_plate");
+        this.leg_rear_right = this.body_main.getChild("leg_rear_right");
+        this.leg_rear_right_lower = this.leg_rear_right.getChild("leg_rear_right_lower");
+        this.leg_rear_left = this.body_main.getChild("leg_rear_left");
+        this.leg_rear_left_lower = this.leg_rear_left.getChild("leg_rear_left_lower");
+        this.head_main = this.body_main.getChild("head_main");
+        this.head_front = this.head_main.getChild("head_front");
+        this.head_plate = this.head_main.getChild("head_plate");
+        this.ear_left = this.head_main.getChild("ear_left");
+        this.ear_right = this.head_main.getChild("ear_right");
+        this.head_rear = this.head_main.getChild("head_rear");
+        this.mouth = this.head_main.getChild("mouth");
+    }
+
+    @Override
+    public void setupAnim(Burrukai burrukai, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.root().getAllParts().forEach(ModelPart::resetPose);
+        this.head_main.yRot = netHeadYaw * (float) (Math.PI / 180.0);
+        this.head_main.xRot = headPitch * (float) (Math.PI / 180.0);
+        this.animate(burrukai.ramAnimationState, BurrukaiAnimation.RUSH_START, ageInTicks, 1.0F);
+        this.animateWalk(BurrukaiAnimation.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
+    }
+
+    @Override
+    public ModelPart root() {
+        return this.root;
+    }
+}
