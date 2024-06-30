@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public abstract class MultiBlock extends BaseEntityBlock {
-    public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS; //todo replace with horizontal orientation
+    public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS; //todo replace with horizontal orientation; move to campfireblock only
     public static final DirectionProperty X_DIRECTION_FROM_ORIGIN = DirectionProperty.create("x_direction_from_origin", Direction.WEST, Direction.EAST);
     public static final DirectionProperty Y_DIRECTION_FROM_ORIGIN = DirectionProperty.create("y_direction_from_origin", Direction.DOWN, Direction.UP);
     public static final DirectionProperty Z_DIRECTION_FROM_ORIGIN = DirectionProperty.create("z_direction_from_origin", Direction.NORTH, Direction.SOUTH);
@@ -72,7 +72,7 @@ public abstract class MultiBlock extends BaseEntityBlock {
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (placer != null) { //todo; default if placer null; dont let this overwrite other blocks;
-//            Direction.Axis axis = state.getValue(HORIZONTAL_AXIS);
+//            Direction.Axis axis = state.getValue(HORIZONTAL_AXIS); //todo i dont need this i can just get it from the player direction
 //            int segmentation = 0;
 //            if (axis == Direction.Axis.X) {
 //                segmentation = this.scale.getZ();
