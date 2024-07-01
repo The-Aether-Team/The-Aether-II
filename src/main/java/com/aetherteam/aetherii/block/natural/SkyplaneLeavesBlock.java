@@ -1,6 +1,5 @@
-package com.aetherteam.aetherii.block.miscellaneous;
+package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.level.BlockGetter;
