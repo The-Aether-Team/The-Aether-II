@@ -69,7 +69,7 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction makeVegetationRarityMapper(HolderGetter<DensityFunction> function) {
         DensityFunction vegetation = getFunction(function, VEGETATION);
         DensityFunction density = vegetation;
-        density = DensityFunctions.rangeChoice(getFunction(function, VEGETATION_RARE), 0, 0.375, density, DensityFunctions.constant(2.0));
+        density = DensityFunctions.rangeChoice(getFunction(function, VEGETATION_RARE), -1.5, 0.65, density, DensityFunctions.constant(2.0));
         density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.3, density, vegetation);
         density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, vegetation);
         return density;
