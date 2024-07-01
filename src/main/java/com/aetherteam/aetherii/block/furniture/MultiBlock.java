@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.block.furniture;
 
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.BlockAccessor;
 import com.google.common.collect.Streams;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -16,10 +15,9 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
@@ -65,11 +63,12 @@ public abstract class MultiBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Pair<Direction, Direction> directions = getDirectionAndOffsetDirection(context.getHorizontalDirection(), context.getRotation());
-        Direction direction = directions.getFirst();
-        Direction offsetDirection = directions.getSecond();
-        if (this.multiBlockPositions(direction, offsetDirection).allMatch((loopedPos) -> context.getLevel().isEmptyBlock(loopedPos.offset(context.getClickedPos())))
-                && this.multiBlockPositions(direction, offsetDirection).noneMatch((loopedPos) -> context.getLevel().isEmptyBlock(loopedPos.offset(context.getClickedPos().below())))) {
+        Triple<Direction, Direction, Integer> directions = this.getDirectionAndOffsetDirection(context.getHorizontalDirection(), context.getRotation());
+        Direction direction = directions.getLeft();
+        Direction offsetDirection = directions.getMiddle();
+        int offsetIncrement = directions.getRight();
+        if (this.multiBlockPositions(direction, offsetDirection).allMatch((loopedPos) -> context.getLevel().isEmptyBlock(loopedPos.offset(context.getClickedPos().relative(offsetDirection, offsetIncrement))))
+                && this.multiBlockPositions(direction, offsetDirection).noneMatch((loopedPos) -> context.getLevel().isEmptyBlock(loopedPos.offset(context.getClickedPos().below().relative(offsetDirection, offsetIncrement))))) {
             return this.defaultBlockState();
         } else {
             return null;
@@ -78,50 +77,62 @@ public abstract class MultiBlock extends BaseEntityBlock {
 
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (placer != null) { //todo; default if placer null; dont let this overwrite other blocks;
-            Pair<Direction, Direction> directions = this.getDirectionAndOffsetDirection(placer.getDirection(), placer.getYRot());
-            Direction direction = directions.getFirst();
-            Direction offsetDirection = directions.getSecond();
-            this.multiBlockPositions(direction, offsetDirection).forEach((loopedPos) -> {
-                BlockState modifiedState = state;
-                Direction xDirection = direction.getAxis() == Direction.Axis.X ? direction : offsetDirection;
-                Direction zDirection = direction.getAxis() == Direction.Axis.Z ? direction : offsetDirection;
-                modifiedState = modifiedState.setValue(X_DIRECTION_FROM_ORIGIN, xDirection).setValue(this.X_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getX()));
-                modifiedState = modifiedState.setValue(Y_DIRECTION_FROM_ORIGIN, Direction.UP).setValue(this.Y_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getY()));
-                modifiedState = modifiedState.setValue(Z_DIRECTION_FROM_ORIGIN, zDirection).setValue(this.Z_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getZ()));
-                level.setBlock(loopedPos.offset(pos), modifiedState, 3);
-            });
+        Direction initialDirection = Direction.NORTH;
+        float initialRotation = initialDirection.toYRot();
+        if (placer != null) {
+            initialDirection = placer.getDirection();
+            initialRotation = placer.getYRot();
         }
+        Triple<Direction, Direction, Integer> directions = this.getDirectionAndOffsetDirection(initialDirection, initialRotation);
+        Direction direction = directions.getLeft();
+        Direction offsetDirection = directions.getMiddle();
+        int offsetIncrement = directions.getRight();
+        this.multiBlockPositions(direction, offsetDirection).forEach((loopedPos) -> {
+            BlockState modifiedState = state;
+            Direction xDirection = direction.getAxis() == Direction.Axis.X ? direction : offsetDirection;
+            Direction zDirection = direction.getAxis() == Direction.Axis.Z ? direction : offsetDirection;
+            modifiedState = modifiedState.setValue(X_DIRECTION_FROM_ORIGIN, xDirection).setValue(this.X_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getX()));
+            modifiedState = modifiedState.setValue(Y_DIRECTION_FROM_ORIGIN, Direction.UP).setValue(this.Y_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getY()));
+            modifiedState = modifiedState.setValue(Z_DIRECTION_FROM_ORIGIN, zDirection).setValue(this.Z_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getZ()));
+            level.setBlock(loopedPos.offset(pos.relative(offsetDirection, offsetIncrement)), modifiedState, 3);
+        });
     }
 
     @Override
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) { //todo drop block check this.isOrigin(level.getBlockState(loopedPos.offset(origin)))
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         BlockPos origin = this.locateOriginFrom(state, pos);
-        this.multiBlockPositions(state.getValue(X_DIRECTION_FROM_ORIGIN), state.getValue(Z_DIRECTION_FROM_ORIGIN)).forEach((loopedPos) -> level.destroyBlock(loopedPos.offset(origin), false));
+        this.multiBlockPositions(state.getValue(X_DIRECTION_FROM_ORIGIN), state.getValue(Z_DIRECTION_FROM_ORIGIN)).forEach((loopedPos) -> level.destroyBlock(loopedPos.offset(origin), !player.isCreative() && this.isOrigin(level.getBlockState(loopedPos.offset(origin)))));
         return super.playerWillDestroy(level, pos, state, player);
     }
 
-    public Pair<Direction, Direction> getDirectionAndOffsetDirection(Direction initialDirection, float initialDegrees) {
-//            Direction.Axis axis = state.getValue(HORIZONTAL_AXIS); //todo i dont need this i can just get it from the player direction
-//            int segmentation = 0;
-//            if (axis == Direction.Axis.X) {
-//                segmentation = this.scale.getZ();
-//            } else {
-//                segmentation = this.scale.getX();
-//            } //todo 90 / segmentation
+    public Triple<Direction, Direction, Integer> getDirectionAndOffsetDirection(Direction initialDirection, float initialDegrees) {
+        Direction.Axis axis = initialDirection.getClockWise().getAxis();
+        int segmentation = 0;
+        if (axis == Direction.Axis.X) {
+            segmentation = this.scale.getZ();
+        } else {
+            segmentation = this.scale.getX();
+        }
+        int segmentationDegree = 90 / segmentation;
 
-        int degrees = Math.round(Mth.wrapDegrees(initialDegrees) + 180); //todo may need to be abstracted so its usable for getStateForPlacement placeable checking
+        int degrees = Math.round(Mth.wrapDegrees(initialDegrees) + 180);
         int degreesOffset = degrees - 45;
         if (degreesOffset < 0) degreesOffset += 360;
         int rangedDegrees = degreesOffset % 90;
 
         Direction offsetDirection;
-        if (rangedDegrees < 45) { //todo this is where segmentation will factor in later i think. 45 is the midpoint. i need to account for more than just a midpoint for 2<
+        int offsetIncrement = 0;
+        if (rangedDegrees < segmentationDegree) {
             offsetDirection = initialDirection.getCounterClockWise();
+        } else if (rangedDegrees >= 90 - segmentationDegree) {
+            offsetDirection = initialDirection.getClockWise();
         } else {
             offsetDirection = initialDirection.getClockWise();
+            int innerRange = 90 - (2 * segmentationDegree);
+            int offset = Mth.ceil((float) innerRange / rangedDegrees);
+            offsetIncrement = -offset;
         }
-        return Pair.of(initialDirection, offsetDirection);
+        return Triple.of(initialDirection, offsetDirection, offsetIncrement);
     }
 
     public Stream<BlockPos> multiBlockPositions(Direction depthDirection, Direction widthDirection) {
