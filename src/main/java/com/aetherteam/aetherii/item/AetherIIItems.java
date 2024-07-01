@@ -196,11 +196,13 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SHEEPUFF_SPAWN_EGG = ITEMS.register("sheepuff_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.SHEEPUFF, 0xE2FCFF, 0xCB9090, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> PHYG_SPAWN_EGG = ITEMS.register("phyg_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.PHYG, 0xFFC1D0, 0xFFD939, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> AERBUNNY_SPAWN_EGG = ITEMS.register("aerbunny_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.AERBUNNY, 0xE2FCFF, 0xFFDFF9, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> HIGHFIELDS_BURRUKAI_SPAWN_EGG = ITEMS.register("highfields_burrukai_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, 0x232627, 0x4C7687, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> HIGHFIELDS_KIRRID_SPAWN_EGG = ITEMS.register("highfields_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_KIRRID, 0x495056, 0xD2CEBA, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> MAGNETIC_KIRRID_SPAWN_EGG = ITEMS.register("magnetic_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.MAGNETIC_KIRRID, 0x5F5A69, 0x9FA2D6, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> ARCTIC_KIRRID_SPAWN_EGG = ITEMS.register("arctic_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.ARCTIC_KIRRID, 0x6B6255, 0xDDDDDD, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> MOA_SPAWN_EGG = ITEMS.register("moa_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.MOA, 0x87BFEF, 0x7A7A7A, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> ZEPHYR_SPAWN_EGG = ITEMS.register("zephyr_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.ZEPHYR, 0xDFDFDF, 0x99CFE8, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> TEMPEST_SPAWN_EGG = ITEMS.register("tempest_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.TEMPEST, 0x3C464C, 0xC3E6F0, new Item.Properties()));
 
     // Misc
     public static final DeferredItem<Item> MOA_FEED = ITEMS.register("moa_feed", () -> new Item(new Item.Properties()));

@@ -22,6 +22,8 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         // Aether II
+        this.tag(AetherIITags.Entities.BURRUKAI)
+                .add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get());
         this.tag(AetherIITags.Entities.KIRRID).add(
                 AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(),
                 AetherIIEntityTypes.MAGNETIC_KIRRID.get(),

@@ -37,8 +37,8 @@ public class AetherIIOreFeatures {
                 OreConfiguration.target(UNDERSHALE, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get().defaultBlockState())
         );
         List<OreConfiguration.TargetBlockState> zanite = List.of(
-                OreConfiguration.target(HOLYSTONE, AetherIIBlocks.AMBROSIUM_ORE.get().defaultBlockState()),
-                OreConfiguration.target(UNDERSHALE, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get().defaultBlockState())
+                OreConfiguration.target(HOLYSTONE, AetherIIBlocks.ZANITE_ORE.get().defaultBlockState()),
+                OreConfiguration.target(UNDERSHALE, AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get().defaultBlockState())
         );
         List<OreConfiguration.TargetBlockState> arkenium = List.of(
                 OreConfiguration.target(HOLYSTONE, AetherIIBlocks.ARKENIUM_ORE.get().defaultBlockState()),
