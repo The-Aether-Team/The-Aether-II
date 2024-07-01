@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -124,6 +125,18 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         entity.yHeadRotO = m;
         entity.yHeadRot = n;
         guiGraphics.disableScissor();
+    }
+
+    @Override
+    protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop, int mouseButton) {
+        for (Renderable renderable : this.renderables) {
+            if (renderable instanceof GuidebookTab guidebookTab) {
+                if (guidebookTab.isMouseOver(mouseX, mouseY)) {
+                    return false;
+                }
+            }
+        }
+        return super.hasClickedOutside(mouseX, mouseY, guiLeft, guiTop, mouseButton);
     }
 
     @Override

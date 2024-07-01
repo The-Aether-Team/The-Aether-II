@@ -10,7 +10,11 @@ public class GuidebookTab extends ImageButton {
     private final Screen screenToOpen;
 
     public GuidebookTab(Screen currentScreen, Screen screenToOpen, int x, int y, int width, int height, WidgetSprites sprites) {
-        super(x, y, width, height, sprites, (button) -> Minecraft.getInstance().setScreen(screenToOpen));
+        super(x, y, width, height, sprites, (button) -> {
+            if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.containerMenu.getCarried().isEmpty()) {
+                Minecraft.getInstance().setScreen(screenToOpen);
+            }
+        });
         this.currentScreen = currentScreen;
         this.screenToOpen = screenToOpen;
     }
