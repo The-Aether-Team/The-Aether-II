@@ -2,34 +2,34 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 
 import com.aetherteam.aetherii.client.renderer.BiomeVariantPresets;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.KirridBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.KirridModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.AbstractKirridBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.AbstractKirridModel;
 import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, EntityModel<Kirrid>, KirridModel, KirridBabyModel> {
+public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, EntityModel<Kirrid>, AbstractKirridModel, AbstractKirridBabyModel> {
     private final ResourceLocation defaultTexture;
     private final ResourceLocation babyTexture;
-    private final KirridModel defaultModel;
-    private final KirridBabyModel babyModel;
+    private final AbstractKirridModel defaultModel;
+    private final AbstractKirridBabyModel babyModel;
 
     public KirridRenderer(EntityRendererProvider.Context context, BiomeVariantPresets preset) {
-        super(context, (KirridModel) preset.getDefaultModel(context), 0.5F);
+        super(context, (AbstractKirridModel) preset.getDefaultModel(context), 0.5F);
         this.defaultTexture = preset.getDefaultTexture();
         this.babyTexture = preset.getBabyTexture();
-        this.defaultModel = (KirridModel) preset.getDefaultModel(context);
-        this.babyModel = (KirridBabyModel) preset.getBabyModel(context);
+        this.defaultModel = (AbstractKirridModel) preset.getDefaultModel(context);
+        this.babyModel = (AbstractKirridBabyModel) preset.getBabyModel(context);
     }
 
     @Override
-    public KirridModel getDefaultModel() {
+    public AbstractKirridModel getDefaultModel() {
         return this.defaultModel;
     }
 
     @Override
-    public KirridBabyModel getBabyModel() {
+    public AbstractKirridBabyModel getBabyModel() {
         return this.babyModel;
     }
 

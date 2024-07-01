@@ -36,7 +36,10 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Burrukai>> HIGHFIELDS_BURRUKAI = ENTITY_TYPES.register("highfields_burrukai",
             () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).clientTrackingRange(10).build("highfields_burrukai"));
-
+    public static final DeferredHolder<EntityType<?>, EntityType<Burrukai>> MAGNETIC_BURRUKAI = ENTITY_TYPES.register("magnetic_burrukai",
+            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).clientTrackingRange(10).build("magnetic_burrukai"));
+    public static final DeferredHolder<EntityType<?>, EntityType<Burrukai>> ARCTIC_BURRUKAI = ENTITY_TYPES.register("arctic_burrukai",
+            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).clientTrackingRange(10).build("arctic_burrukai"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Kirrid>> HIGHFIELDS_KIRRID = ENTITY_TYPES.register("highfields_kirrid",
             () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.9F, 1.25F).clientTrackingRange(10).build("highfields_kirrid"));
@@ -87,6 +90,8 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.PHYG.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.AERBUNNY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherTamableAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.ARCTIC_KIRRID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
@@ -103,6 +108,8 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.PHYG.get(), Phyg.createMobAttributes().build());
         event.put(AetherIIEntityTypes.AERBUNNY.get(), Aerbunny.createMobAttributes().build());
         event.put(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), Burrukai.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), Burrukai.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), Burrukai.createMobAttributes().build());
         event.put(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), Kirrid.createMobAttributes().build());
         event.put(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), Kirrid.createMobAttributes().build());
         event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), Kirrid.createMobAttributes().build());

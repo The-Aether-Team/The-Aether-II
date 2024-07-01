@@ -5,14 +5,14 @@ import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 
-public abstract class KirridModel extends HierarchicalModel<Kirrid> {
+public abstract class AbstractKirridModel extends HierarchicalModel<Kirrid> {
     protected final ModelPart root;
     protected final ModelPart head;
     protected final ModelPart neck;
     public final ModelPart body;
     public final ModelPart wool;
 
-    public KirridModel(ModelPart root) {
+    public AbstractKirridModel(ModelPart root) {
         this.root = root;
         this.body = root.getChild("body");
         this.neck = this.body.getChild("neck");

@@ -1,17 +1,13 @@
-package com.aetherteam.aetherii.client.renderer.entity.model.burrukai;// Made with Blockbench 4.10.3
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
+package com.aetherteam.aetherii.client.renderer.entity.model.burrukai;
 
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class HighfieldsBurrukaiModel extends BurrukaiModel {
-
-    public HighfieldsBurrukaiModel(ModelPart root) {
-        super(root);
-    }
+public class ArcticBurrukaiModel extends AbstractBurrukaiModel {
+	public ArcticBurrukaiModel(ModelPart root) {
+		super(root);
+	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
@@ -57,9 +53,9 @@ public class HighfieldsBurrukaiModel extends BurrukaiModel {
 
 		PartDefinition head_plate = head_main.addOrReplaceChild("head_plate", CubeListBuilder.create().texOffs(33, 0).mirror().addBox(-4.0F, -8.5F, -3.5F, 8.0F, 2.0F, 10.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.8727F, 0.0F, 0.0F));
 
-		PartDefinition antler_left = head_main.addOrReplaceChild("antler_left", CubeListBuilder.create().texOffs(69, 0).mirror().addBox(-15.0F, -11.0F, -1.0F, 10.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3491F, 0.0F, 0.3491F));
+		PartDefinition antler_right = head_main.addOrReplaceChild("antler_right", CubeListBuilder.create().texOffs(83, 140).mirror().addBox(5.0F, -17.0F, -1.0F, 10.0F, 14.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.75F, 0.2508F, -0.085F, -0.1013F));
 
-		PartDefinition antler_right = head_main.addOrReplaceChild("antler_right", CubeListBuilder.create().texOffs(9, 0).mirror().addBox(5.0F, -11.0F, -1.0F, 10.0F, 10.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3491F, 0.0F, -0.3491F));
+		PartDefinition antler_left = head_main.addOrReplaceChild("antler_left", CubeListBuilder.create().texOffs(0, 140).addBox(-15.0F, -17.0F, -1.0F, 10.0F, 14.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.75F, 0.2508F, 0.085F, 0.1013F));
 
 		PartDefinition ear_left = head_main.addOrReplaceChild("ear_left", CubeListBuilder.create().texOffs(58, 40).mirror().addBox(-4.5F, -0.5F, -2.0F, 1.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.5236F));
 
@@ -71,5 +67,4 @@ public class HighfieldsBurrukaiModel extends BurrukaiModel {
 
 		return LayerDefinition.create(meshdefinition, 107, 156);
 	}
-
 }
