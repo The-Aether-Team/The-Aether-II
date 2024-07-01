@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.projectile.TempestThunderball;
@@ -54,7 +56,7 @@ public class Tempest extends Zephyr {
     }
 
     public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(11) == 0) && level.canSeeSky(pos) && isNight(level);
+        return level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos.below()).is(AetherIIBlocks.STORM_AERCLOUD.get()) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(11) == 0) && level.canSeeSky(pos) && isNight(level);
     }
 
     private static boolean isNight(LevelAccessor level){

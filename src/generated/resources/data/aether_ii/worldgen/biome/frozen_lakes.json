@@ -59,6 +59,10 @@
   ],
   "has_precipitation": true,
   "spawn_costs": {
+    "aether_ii:tempest": {
+      "charge": 0.6,
+      "energy_budget": 0.16
+    },
     "aether_ii:zephyr": {
       "charge": 0.6,
       "energy_budget": 0.16
@@ -70,6 +74,12 @@
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
+      },
+      {
+        "type": "aether_ii:tempest",
         "maxCount": 1,
         "minCount": 1,
         "weight": 3

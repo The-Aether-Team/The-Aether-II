@@ -158,6 +158,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MOA_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.TEMPEST_SPAWN_EGG.get());
 
         // Misc
         this.item(AetherIIItems.MOA_FEED.get(), "miscellaneous/");
