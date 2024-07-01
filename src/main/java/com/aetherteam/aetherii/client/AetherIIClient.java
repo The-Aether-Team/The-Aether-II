@@ -48,6 +48,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::bakeModels);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
         neoBus.addListener(AetherIIShaders::registerShaders);
+        neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
     }
 
     public static void registerItemModelProperties() {

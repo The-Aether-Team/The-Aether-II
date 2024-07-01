@@ -25,6 +25,7 @@ import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
+import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
@@ -83,6 +84,7 @@ public class AetherII {
                 AetherIIEffects.EFFECTS,
                 AetherIIArmorMaterials.ARMOR_MATERIALS,
                 AetherIIDataSerializers.ENTITY_DATA_SERIALIZERS,
+                AetherIIDataComponents.DATA_COMPONENT_TYPES,
                 AetherIIDataAttachments.ATTACHMENTS,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIMenuTypes.MENU_TYPES,
