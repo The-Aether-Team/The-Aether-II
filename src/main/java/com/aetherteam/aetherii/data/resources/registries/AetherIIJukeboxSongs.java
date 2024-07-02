@@ -24,17 +24,17 @@ public class AetherIIJukeboxSongs {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, pName));
     }
 
-    public static void bootstrap(BootstrapContext<JukeboxSong> pContext) {
-        register(pContext, AETHER_TUNE, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_AETHER_TUNE.getDelegate(), 149, 1);
-        register(pContext, ASCENDING_DAWN, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_ASCENDING_DAWN.getDelegate(), 350, 2);
-        register(pContext, AERWHALE, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_AERWHALE.getDelegate(), 178, 3);
-        register(pContext, APPROACHES, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_APPROACHES.getDelegate(), 274, 4);
-        register(pContext, DEMISE, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_DEMISE.getDelegate(), 300, 5);
-        register(pContext, RECORDING_892, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_RECORDING_892.getDelegate(), 97, 6);
+    public static void bootstrap(BootstrapContext<JukeboxSong> context) {
+        register(context, AETHER_TUNE, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_AETHER_TUNE.getDelegate(), 149, 1);
+        register(context, ASCENDING_DAWN, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_ASCENDING_DAWN.getDelegate(), 350, 2);
+        register(context, AERWHALE, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_AERWHALE.getDelegate(), 178, 3);
+        register(context, APPROACHES, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_APPROACHES.getDelegate(), 274, 4);
+        register(context, DEMISE, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_DEMISE.getDelegate(), 300, 5);
+        register(context, RECORDING_892, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_RECORDING_892.getDelegate(), 97, 6);
 
     }
 
-    private static void register(BootstrapContext<JukeboxSong> pContext, ResourceKey<JukeboxSong> pKey, Holder.Reference<SoundEvent> pSoundEvent, int pLengthInSeconds, int pComparatorOutput) {
-        pContext.register(pKey, new JukeboxSong(pSoundEvent, Component.translatable(Util.makeDescriptionId("jukebox_song", pKey.location())), (float)pLengthInSeconds, pComparatorOutput));
+    private static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> key, Holder.Reference<SoundEvent> soundEvent, int lengthInSeconds, int comparatorOutput) {
+        context.register(key, new JukeboxSong(soundEvent, Component.translatable(Util.makeDescriptionId("jukebox_song", key.location())), (float)lengthInSeconds, comparatorOutput));
     }
 }
