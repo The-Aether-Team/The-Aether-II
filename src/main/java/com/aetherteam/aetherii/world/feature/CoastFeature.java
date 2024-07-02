@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -61,7 +62,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
     @SuppressWarnings("UnusedReturnValue")
     public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance) {
-        if (level.getBlockState(pos).isAir()
+        if ((level.getBlockState(pos).isAir() || level.getBlockState(pos).getBlock() instanceof BushBlock)
                 && (level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
