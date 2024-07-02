@@ -55,6 +55,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
+        this.tag(AetherIITags.Blocks.SHAPES_COASTS)
+                .add(Blocks.WATER)
+                .addTags(
+                AetherIITags.Blocks.AETHER_DIRT,
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
+        );
         this.tag(AetherIITags.Blocks.FERROSITE).add(
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get()

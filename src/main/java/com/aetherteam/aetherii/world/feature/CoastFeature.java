@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.world.BlockPlacementUtil;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -9,6 +9,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public class CoastFeature extends Feature<CoastConfiguration> {
     public CoastFeature(Codec<CoastConfiguration> codec) {
@@ -26,16 +27,46 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {
                 for (int y = config.yRange().getMinValue(); y < config.yRange().getMaxValue(); ++y) {
                     BlockPos placementPos = new BlockPos(x, y, z);
-                    float radius = (float) config.sizeNoise().compute(new DensityFunction.SinglePointContext(x, y, z));
+                    int distance = (int) config.sizeNoise().compute(new DensityFunction.SinglePointContext(x, y, z));
 
-                    if (level.getBlockState(placementPos).isAir() && level.getBlockState(new BlockPos(x, y - 5, z)).isAir() && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
-                        BlockPlacementUtil.placeDisk(level, config.block(), placementPos, radius, random, false);
-                        BlockPlacementUtil.placeDisk(level, config.block(), placementPos.below(), radius / 1.75F, random, false);
-                        break;
+                    for (int distanceY = 0; distanceY < 8; distanceY++) {
+                        if (level.getBlockState(placementPos).isAir() && level.getBlockState(placementPos.below(distanceY)).isAir() && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
+                            placeCoast(level, config.block(), placementPos, 16.35F, random, distance);
+                            placeCoast(level, config.block(), placementPos.below(), 16.35F, random, (int) (distance / 1.75F));
+                            break;
+                        }
                     }
                 }
             }
         }
         return true;
+    }
+
+    public static void placeCoast(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random, int distance) {
+        float radiusSq = radius * radius;
+        placeCoastBlock(level, blockProvider, center, random, distance);
+        for (int z = 0; z < radius; z++) {
+            for (int x = 0; x < radius; x++) {
+                if (x * x + z * z > radiusSq) continue;
+                placeCoastBlock(level, blockProvider, center.offset(x, 0, z), random, distance);
+                placeCoastBlock(level, blockProvider, center.offset(-x, 0, -z), random, distance);
+                placeCoastBlock(level, blockProvider, center.offset(-z, 0, x), random, distance);
+                placeCoastBlock(level, blockProvider, center.offset(z, 0, -x), random, distance);
+            }
+        }
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance) {
+        if (level.getBlockState(pos).isAir()
+                && (level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
+                || level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
+                || level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
+                || level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
+        )) {
+            return level.setBlock(pos, provider.getState(random, pos), 2);
+        } else {
+            return false;
+        }
     }
 }
