@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class HighfieldsKirridModel extends KirridModel {
+public class HighfieldsKirridModel extends AbstractKirridModel {
     protected final ModelPart headPlate;
     protected final ModelPart headPlateBroken;
 

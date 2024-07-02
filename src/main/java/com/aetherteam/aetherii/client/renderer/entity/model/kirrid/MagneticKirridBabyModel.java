@@ -4,7 +4,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class MagneticKirridBabyModel extends KirridBabyModel {
+public class MagneticKirridBabyModel extends AbstractKirridBabyModel {
 	public MagneticKirridBabyModel(ModelPart root) {
 		super(root);
 	}
