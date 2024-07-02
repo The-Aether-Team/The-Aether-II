@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -33,6 +34,7 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = AetherIIFeatureUtils.registerKey("coast_quicksoil");
@@ -80,6 +82,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 CoastFeature.Type.HIGHFIELDS,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
+                Optional.empty(),
                 UniformInt.of(112, 156),
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
@@ -88,6 +91,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 CoastFeature.Type.MAGNETIC,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
+                Optional.of(DensityFunctions.zero()),
                 UniformInt.of(112, 156),
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
@@ -96,6 +100,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 CoastFeature.Type.ARCTIC,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
+                Optional.empty(),
                 UniformInt.of(120, 180),
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
