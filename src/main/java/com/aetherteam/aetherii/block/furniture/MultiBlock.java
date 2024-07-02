@@ -88,12 +88,7 @@ public abstract class MultiBlock extends BaseEntityBlock {
         Direction offsetDirection = directions.getMiddle();
         int offsetIncrement = directions.getRight();
         this.multiBlockPositions(direction, offsetDirection).forEach((loopedPos) -> {
-            BlockState modifiedState = state;
-            Direction xDirection = direction.getAxis() == Direction.Axis.X ? direction : offsetDirection;
-            Direction zDirection = direction.getAxis() == Direction.Axis.Z ? direction : offsetDirection;
-            modifiedState = modifiedState.setValue(X_DIRECTION_FROM_ORIGIN, xDirection).setValue(this.X_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getX()));
-            modifiedState = modifiedState.setValue(Y_DIRECTION_FROM_ORIGIN, Direction.UP).setValue(this.Y_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getY()));
-            modifiedState = modifiedState.setValue(Z_DIRECTION_FROM_ORIGIN, zDirection).setValue(this.Z_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getZ()));
+            BlockState modifiedState = this.getModifiedState(state, direction, offsetDirection, loopedPos);
             level.setBlock(loopedPos.offset(pos.relative(offsetDirection, offsetIncrement)), modifiedState, 3);
         });
     }
@@ -139,6 +134,15 @@ public abstract class MultiBlock extends BaseEntityBlock {
         BlockPos origin = BlockPos.ZERO;
         BlockPos corner = origin.relative(depthDirection, this.getScale().getX() - 1).relative(Direction.UP, this.getScale().getY() - 1).relative(widthDirection, this.getScale().getZ() - 1);
         return Streams.stream(BlockPos.betweenClosed(origin, corner));
+    }
+
+    public BlockState getModifiedState(BlockState state, Direction depthDirection, Direction widthDirection, BlockPos loopedPos) {
+        Direction xDirection = depthDirection.getAxis() == Direction.Axis.X ? depthDirection : widthDirection;
+        Direction zDirection = depthDirection.getAxis() == Direction.Axis.Z ? depthDirection : widthDirection;
+        state = state.setValue(X_DIRECTION_FROM_ORIGIN, xDirection).setValue(this.X_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getX()));
+        state = state.setValue(Y_DIRECTION_FROM_ORIGIN, Direction.UP).setValue(this.Y_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getY()));
+        state = state.setValue(Z_DIRECTION_FROM_ORIGIN, zDirection).setValue(this.Z_OFFSET_FROM_ORIGIN, Mth.abs(loopedPos.getZ()));
+        return state;
     }
 
     public BlockPos locateOriginFrom(BlockState state, BlockPos pos) {
