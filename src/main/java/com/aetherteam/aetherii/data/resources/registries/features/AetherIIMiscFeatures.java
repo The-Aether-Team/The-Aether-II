@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.natural.TwigBlock;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIFeatureBuilders;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import com.aetherteam.aetherii.world.feature.CoastFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
 import net.minecraft.core.Direction;
@@ -76,6 +77,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
 
         AetherIIFeatureUtils.register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
+                CoastFeature.Type.HIGHFIELDS,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 UniformInt.of(112, 156),
@@ -83,6 +85,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
         ));
         AetherIIFeatureUtils.register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
+                CoastFeature.Type.MAGNETIC,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 UniformInt.of(112, 156),
@@ -90,6 +93,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
         ));
         AetherIIFeatureUtils.register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
+                CoastFeature.Type.ARCTIC,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
                 UniformInt.of(120, 180),

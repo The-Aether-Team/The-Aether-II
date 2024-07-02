@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
@@ -71,6 +72,28 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             return level.setBlock(pos, provider.getState(random, pos), 2);
         } else {
             return false;
+        }
+    }
+
+    public enum Type implements StringRepresentable {
+        HIGHFIELDS("highfields"),
+        MAGNETIC("magnetic"),
+        ARCTIC("arctic");
+
+        public static final Codec<CoastFeature.Type> CODEC = StringRepresentable.fromEnum(CoastFeature.Type::values);
+        private final String name;
+
+        Type(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name;
         }
     }
 }
