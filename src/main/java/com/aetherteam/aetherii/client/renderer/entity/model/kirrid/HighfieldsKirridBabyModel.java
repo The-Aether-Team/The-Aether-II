@@ -4,7 +4,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class HighfieldsKirridBabyModel extends KirridBabyModel {
+public class HighfieldsKirridBabyModel extends AbstractKirridBabyModel {
     public HighfieldsKirridBabyModel(ModelPart root) {
         super(root);
     }

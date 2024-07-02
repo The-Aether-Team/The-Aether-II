@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class ArcticKirridModel extends KirridModel {
+public class ArcticKirridModel extends AbstractKirridModel {
 	private final ModelPart headPlate;
 	private final ModelPart hornLeft;
 	private final ModelPart hornRight;
