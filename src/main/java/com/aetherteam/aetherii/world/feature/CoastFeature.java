@@ -29,13 +29,16 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     BlockPos placementPos = new BlockPos(x, y, z);
                     int distance = (int) config.sizeNoise().compute(new DensityFunction.SinglePointContext(x, y, z));
 
-                    for (int distanceY = 0; distanceY < 8; distanceY++) {
-                        if (level.getBlockState(placementPos).isAir() && level.getBlockState(placementPos.below(distanceY)).isAir() && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
+                        if (level.getBlockState(placementPos).isAir()
+                                && level.getBlockState(placementPos.below(2)).isAir()
+                                && level.getBlockState(placementPos.below(4)).isAir()
+                                && level.getBlockState(placementPos.below(8)).isAir()
+                                && level.getBlockState(placementPos.below(16)).isAir()
+                                && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
                             placeCoast(level, config.block(), placementPos, 16.35F, random, distance);
                             placeCoast(level, config.block(), placementPos.below(), 16.35F, random, (int) (distance / 1.75F));
                             break;
                         }
-                    }
                 }
             }
         }
