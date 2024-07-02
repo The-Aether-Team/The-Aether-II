@@ -1,6 +1,6 @@
 {
   "type": "minecraft:add",
-  "argument1": 5.0,
+  "argument1": 3.0,
   "argument2": {
     "type": "minecraft:abs",
     "argument": {
@@ -14,7 +14,7 @@
         ],
         "firstOctave": -6
       },
-      "seed": 76,
+      "seed": 16,
       "xz_scale": 1.5,
       "y_scale": 0.0
     }

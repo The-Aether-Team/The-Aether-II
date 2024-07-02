@@ -18,7 +18,8 @@ public class AetherIIFeatureBuilders {
     public static CoastConfiguration createCoast(BlockState coastState, HolderGetter<DensityFunction> function) {
         return new CoastConfiguration(
                 BlockStateProvider.simple(coastState),
-                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_QUICKSOIL),
+                16.35F,
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 UniformInt.of(112, 156),
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         );
