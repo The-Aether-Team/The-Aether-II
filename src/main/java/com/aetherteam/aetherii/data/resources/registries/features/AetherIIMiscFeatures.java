@@ -72,8 +72,8 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
             }
         }
 
-        AetherIIFeatureUtils.register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), createCoast(AetherIIBlocks.QUICKSOIL.get().defaultBlockState()));
-        AetherIIFeatureUtils.register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), createCoast(AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()));
+        AetherIIFeatureUtils.register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), createCoast(AetherIIBlocks.QUICKSOIL.get().defaultBlockState(), function));
+        AetherIIFeatureUtils.register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), createCoast(AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(), function));
 
         AetherIIFeatureUtils.register(context, NOISE_LAKE, AetherIIFeatures.NOISE_LAKE.get(),
                 new NoiseLakeConfiguration(

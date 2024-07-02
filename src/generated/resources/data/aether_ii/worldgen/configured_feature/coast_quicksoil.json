@@ -7,8 +7,7 @@
         "Name": "aether_ii:quicksoil"
       }
     },
-    "radius_bottom": 4.46,
-    "radius_top": 6.63,
+    "size_noise": "aether_ii:highlands/coasts/quicksoil",
     "valid_blocks": "aether_ii:aether_grass_block",
     "y_range": {
       "max_inclusive": 156,
