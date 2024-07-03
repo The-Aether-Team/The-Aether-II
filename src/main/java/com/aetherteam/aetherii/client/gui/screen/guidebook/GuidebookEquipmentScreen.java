@@ -23,20 +23,21 @@ import org.joml.Vector3f;
 public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookEquipmentMenu> implements Guidebook {
     private static final ResourceLocation GUIDEBOOK_EQUIPMENT_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left.png");
     private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right.png");
-    private static final ResourceLocation HEART_CONTAINER_SPRITE = ResourceLocation.withDefaultNamespace("hud/heart/container");
-    private static final ResourceLocation HEART_SPRITE = ResourceLocation.withDefaultNamespace("hud/heart/full");
-    private static final ResourceLocation ARMOR_SPRITE = ResourceLocation.withDefaultNamespace("hud/armor_full");
 
     private final Inventory playerInventory;
     private float xMouse;
     private float yMouse;
     private Component craftingTitle = Component.translatable("container.crafting");
+    protected int craftingTitleLabelX;
+    protected int craftingTitleLabelY;
 
     public GuidebookEquipmentScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.playerInventory = playerInventory;
-        this.titleLabelX = 139;
-        this.titleLabelY = 12;
+        this.titleLabelX = -24;
+        this.titleLabelY = -3;
+        this.craftingTitleLabelX = 139;
+        this.craftingTitleLabelY = 12;
         this.inventoryLabelX = 96;
         this.inventoryLabelY = 64;
     }
@@ -62,8 +63,9 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.craftingTitle, this.titleLabelX, this.titleLabelY, 4210752, false);
+        guiGraphics.drawString(this.font, this.craftingTitle, this.craftingTitleLabelX, this.craftingTitleLabelY, 4210752, false);
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
+        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215, true);
     }
 
     @Override
@@ -86,9 +88,9 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         int y = this.topPos;
         guiGraphics.blitSprite(HEART_CONTAINER_SPRITE, x - 50, y + 100, 9, 9);
         guiGraphics.blitSprite(HEART_SPRITE, x - 50, y + 100, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf((int) (player.getHealth() * 2))), x - 39, y + 101, 4210752, false);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf((int) (player.getHealth()))), x - 39, y + 101, 16777215, true);
         guiGraphics.blitSprite(ARMOR_SPRITE, x - 25, y + 100, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf(player.getArmorValue())), x - 14, y + 101, 4210752, false);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf(player.getArmorValue())), x - 14, y + 101, 16777215, true);
     }
 
     private void renderCurrency(GuiGraphics guiGraphics) {

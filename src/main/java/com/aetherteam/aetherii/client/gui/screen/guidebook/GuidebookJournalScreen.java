@@ -17,11 +17,15 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
+    protected int leftTitleLabelX;
+    protected int leftTitleLabelY;
 
     protected GuidebookJournalScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(title);
         this.equipmentMenu = menu;
         this.playerInventory = playerInventory;
+        this.leftTitleLabelX = -20;
+        this.leftTitleLabelY = 7;
     }
 
     @Override
@@ -35,6 +39,14 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
         this.renderTransparentBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
+    public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        int x = (this.width - Guidebook.PAGE_WIDTH) / 2;
+        int y = (this.height - Guidebook.PAGE_HEIGHT) / 2;
+        Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.drawString(this.font, this.title, x + this.leftTitleLabelX, y + this.leftTitleLabelY, 16777215, true);
     }
 
     @Override

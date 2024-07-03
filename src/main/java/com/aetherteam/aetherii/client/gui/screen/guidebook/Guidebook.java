@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -22,6 +23,9 @@ public interface Guidebook {
     WidgetSprites JOURNAL_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/journal_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/journal_tab_selected"));
     WidgetSprites REWARDS_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/rewards_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/rewards_tab_selected"));
     ResourceLocation GUIDEBOOK_BACKING_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/guidebook_backing.png");
+    ResourceLocation HEART_CONTAINER_SPRITE = ResourceLocation.withDefaultNamespace("hud/heart/container");
+    ResourceLocation HEART_SPRITE = ResourceLocation.withDefaultNamespace("hud/heart/full");
+    ResourceLocation ARMOR_SPRITE = ResourceLocation.withDefaultNamespace("hud/armor_full");
     int BACKING_WIDTH = 375;
     int BACKING_HEIGHT = 198;
     int PAGE_WIDTH = 176;
@@ -36,7 +40,10 @@ public interface Guidebook {
         int x = screen.width / 2 - (totalWidth / 2);
         int y = 0;
         for (Tab tab : tabs) {
-            this.addRenderableWidget(screen, new GuidebookTab(screen, tab.getScreen().apply(this.getEquipmentMenu(), this.getPlayerInventory()), x, y, singleTabWidth, singleTabHeight, tab.getSprite()));
+            Screen screenToOpen = tab.getScreen().apply(this.getEquipmentMenu(), this.getPlayerInventory());
+            GuidebookTab tabButton = new GuidebookTab(screen, screenToOpen, x, y, singleTabWidth, singleTabHeight, tab.getSprite());
+            tabButton.setTooltip(Tooltip.create(screenToOpen.getTitle()));
+            this.addRenderableWidget(screen, tabButton);
             x += singleTabWidth + 1;
         }
     }
@@ -76,11 +83,11 @@ public interface Guidebook {
     <T extends GuiEventListener & Renderable & NarratableEntry> T addRenderableWidget(Screen screen, T widget);
 
     enum Tab {
-        EQUIPMENT(EQUIPMENT_TAB, (menu, inventory) -> new GuidebookEquipmentScreen(menu, inventory, Component.empty())),
-        STATUS(STATUS_TAB, (menu, inventory) -> new GuidebookStatusScreen(menu, inventory, Component.empty())),
-        DISCOVERY(DISCOVERY_TAB, (menu, inventory) -> new GuidebookDiscoveryScreen(menu, inventory, Component.empty())),
-        JOURNAL(JOURNAL_TAB, (menu, inventory) -> new GuidebookJournalScreen(menu, inventory, Component.empty())),
-        REWARDS(REWARDS_TAB, (menu, inventory) -> new GuidebookRewardsScreen(menu, inventory, Component.empty()));
+        EQUIPMENT(EQUIPMENT_TAB, (menu, inventory) -> new GuidebookEquipmentScreen(menu, inventory, Component.translatable("gui.aether_ii.guidebook.equipment.title"))),
+        STATUS(STATUS_TAB, (menu, inventory) -> new GuidebookStatusScreen(menu, inventory, Component.translatable("gui.aether_ii.guidebook.status.title"))),
+        DISCOVERY(DISCOVERY_TAB, (menu, inventory) -> new GuidebookDiscoveryScreen(menu, inventory, Component.translatable("gui.aether_ii.guidebook.discovery.title"))),
+        JOURNAL(JOURNAL_TAB, (menu, inventory) -> new GuidebookJournalScreen(menu, inventory, Component.translatable("gui.aether_ii.guidebook.journal.title"))),
+        REWARDS(REWARDS_TAB, (menu, inventory) -> new GuidebookRewardsScreen(menu, inventory, Component.translatable("gui.aether_ii.guidebook.rewards.title")));
 
         private final WidgetSprites sprite;
         private final BiFunction<GuidebookEquipmentMenu, Inventory, Screen> screen;

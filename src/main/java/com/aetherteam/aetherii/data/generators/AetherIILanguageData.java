@@ -698,6 +698,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // GUIs
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
+        this.addGuiText("guidebook.equipment.title", "Equipment");
+        this.addGuiText("guidebook.status.title", "Status");
+        this.addGuiText("guidebook.status.mount.title", "Mount");
+        this.addGuiText("guidebook.discovery.title", "Discovery");
+        this.addGuiText("guidebook.discovery.bestiary.title", "Bestiary");
+        this.addGuiText("guidebook.discovery.effects.title", "Effects");
+        this.addGuiText("guidebook.discovery.landmarks.title", "Landmarks");
+        this.addGuiText("guidebook.journal.title", "Journal");
+        this.addGuiText("guidebook.rewards.title", "Rewards");
 
 
         // Subtitles

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.gui.component.guidebook.SectionTab;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -17,17 +18,29 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
+    protected int leftTitleLabelX;
+    protected int leftTitleLabelY;
 
     protected GuidebookDiscoveryScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(title);
         this.equipmentMenu = menu;
         this.playerInventory = playerInventory;
+        this.leftTitleLabelX = -25;
+        this.leftTitleLabelY = 7;
     }
 
     @Override
     protected void init() {
         super.init();
         this.initTabs(this);
+
+        int x = ((this.width - Guidebook.PAGE_WIDTH) / 2) - 64;
+        int y = (this.height / 2) - 72;
+        this.addRenderableWidget(new SectionTab(x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary"), (button) -> {}));
+        x += 43;
+        this.addRenderableWidget(new SectionTab(x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects"), (button) -> {}));
+        x += 43;
+        this.addRenderableWidget(new SectionTab(x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration"), (button) -> {}));
     }
 
     @Override
@@ -35,6 +48,14 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         this.renderTransparentBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
+    public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        int x = (this.width - Guidebook.PAGE_WIDTH) / 2;
+        int y = (this.height - Guidebook.PAGE_HEIGHT) / 2;
+        Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.drawString(this.font, this.title, x + this.leftTitleLabelX, y + this.leftTitleLabelY, 16777215, true);
     }
 
     @Override

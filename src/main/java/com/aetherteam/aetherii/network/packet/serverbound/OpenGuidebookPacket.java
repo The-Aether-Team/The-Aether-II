@@ -33,7 +33,7 @@ public record OpenGuidebookPacket(ItemStack carryStack) implements CustomPacketP
         if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             ItemStack itemStack = serverPlayer.isCreative() ? payload.carryStack() : serverPlayer.containerMenu.getCarried();
             serverPlayer.containerMenu.setCarried(ItemStack.EMPTY);
-            serverPlayer.openMenu(new SimpleMenuProvider((id, inventory, user) -> new GuidebookEquipmentMenu(id, inventory), Component.empty()));
+            serverPlayer.openMenu(new SimpleMenuProvider((id, inventory, user) -> new GuidebookEquipmentMenu(id, inventory), Component.translatable("gui.aether_ii.guidebook.equipment.title")));
             if (!itemStack.isEmpty()) {
                 serverPlayer.containerMenu.setCarried(itemStack);
                 PacketDistributor.sendToPlayer(serverPlayer, new ClientGrabItemPacket(itemStack));
