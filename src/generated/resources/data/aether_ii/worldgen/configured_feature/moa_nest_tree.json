@@ -9,6 +9,6 @@
         "Name": "aether_ii:woven_skyroot_sticks"
       }
     },
-    "spawn_moas": false
+    "spawn_moas": true
   }
 }

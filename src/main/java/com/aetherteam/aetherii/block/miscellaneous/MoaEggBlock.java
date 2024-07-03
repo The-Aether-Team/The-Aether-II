@@ -1,10 +1,11 @@
-package com.aetherteam.aetherii.block.miscellaneous.egg;
+package com.aetherteam.aetherii.block.miscellaneous;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -21,7 +22,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -30,19 +33,27 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractMoaEggBlock extends BaseEntityBlock {
-    public static final int MAX_HATCH_LEVEL = 2;
+public class MoaEggBlock extends BaseEntityBlock {
+    public static final MapCodec<MoaEggBlock> CODEC = simpleCodec(MoaEggBlock::new);
+
+    public static final EnumProperty<Moa.KeratinColor> KERATIN = EnumProperty.create("keratin", Moa.KeratinColor.class);
+    public static final EnumProperty<Moa.EyeColor> EYES = EnumProperty.create("eyes", Moa.EyeColor.class);
+    public static final EnumProperty<Moa.FeatherColor> FEATHERS = EnumProperty.create("feathers", Moa.FeatherColor.class);
     public static final IntegerProperty HATCH = BlockStateProperties.HATCH;
+    public static final int MAX_HATCH_LEVEL = 2;
     private static final int REGULAR_HATCH_TIME_TICKS = 24000;
     private static final int BOOSTED_HATCH_TIME_TICKS = 12000;
     private static final int RANDOM_HATCH_OFFSET_TICKS = 300;
     private static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0);
-//    private final ResourceKey<MoaFeatherShape> moaType;  //todo moa variation
 
-    public AbstractMoaEggBlock(BlockBehaviour.Properties p_277906_) {
+    public MoaEggBlock(BlockBehaviour.Properties p_277906_) {
         super(p_277906_);
-//        this.moaType = moaType;
-        this.registerDefaultState(this.stateDefinition.any().setValue(HATCH, Integer.valueOf(0)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HATCH, 0).setValue(KERATIN, Moa.KeratinColor.TEMPEST).setValue(EYES, Moa.EyeColor.PORTAGE).setValue(FEATHERS, Moa.FeatherColor.BLUE));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
 //    public ResourceKey<MoaFeatherShape> getMoaType() {
@@ -51,7 +62,7 @@ public abstract class AbstractMoaEggBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(HATCH);
+        pBuilder.add(HATCH).add(KERATIN).add(EYES).add(FEATHERS);
     }
 
     @Override

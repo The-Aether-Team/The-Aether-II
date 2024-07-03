@@ -116,7 +116,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.PURPLE_SWET_GEL.get(), "materials/");
 
-        this.item(AetherIIBlocks.BLUE_MOA_EGG.get().asItem(), "materials/");
+        this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "materials/");
 
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");

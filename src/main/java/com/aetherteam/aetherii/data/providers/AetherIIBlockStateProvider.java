@@ -625,9 +625,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void moaEgg(Block block) {
-        ModelFile moaEgg = this.models().withExistingParent(this.name(block)
-                        , modLoc("block/template_moa_egg")).texture(this.name(block), this.texture(this.name(block), "miscellaneous/"))
-                .texture("particle", this.texture(this.name(block), "miscellaneous/"));
+        ModelFile moaEgg = this.models().withExistingParent(this.name(block), modLoc("block/template_moa_egg"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(moaEgg));
     }
 
