@@ -32,7 +32,7 @@ public abstract class AbstractKirridModel extends HierarchicalModel<Kirrid> {
             this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
 
         }
-        this.wool.visible = kirrid.hasWool();
+        this.wool.visible = !kirrid.isSheared();
     }
 
     @Override

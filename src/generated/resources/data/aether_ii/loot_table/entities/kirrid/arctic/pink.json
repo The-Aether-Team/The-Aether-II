@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:cloudwool"
+          "name": "aether_ii:pink_cloudwool"
         }
       ],
       "rolls": 1.0
@@ -16,11 +16,11 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "aether_ii:entities/highfields_kirrid"
+          "value": "aether_ii:entities/arctic_kirrid"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:entities/kirrid/highfields_wool"
+  "random_sequence": "aether_ii:entities/kirrid/arctic/pink"
 }

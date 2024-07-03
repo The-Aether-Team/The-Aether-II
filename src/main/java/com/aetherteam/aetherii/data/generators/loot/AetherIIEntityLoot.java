@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.generators.loot;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 public class AetherIIEntityLoot extends EntityLootSubProvider {
@@ -75,32 +77,84 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
         );
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_BLACK, createSheepuffTable(Blocks.BLACK_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_BLUE, createSheepuffTable(Blocks.BLUE_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_BROWN, createSheepuffTable(Blocks.BROWN_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_CYAN, createSheepuffTable(Blocks.CYAN_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_GRAY, createSheepuffTable(Blocks.GRAY_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_GREEN, createSheepuffTable(Blocks.GREEN_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_LIGHT_BLUE, createSheepuffTable(Blocks.LIGHT_BLUE_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_LIGHT_GRAY, createSheepuffTable(Blocks.LIGHT_GRAY_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_LIME, createSheepuffTable(Blocks.LIME_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_MAGENTA, createSheepuffTable(Blocks.MAGENTA_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_ORANGE, createSheepuffTable(Blocks.ORANGE_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_PINK, createSheepuffTable(Blocks.PINK_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_PURPLE, createSheepuffTable(Blocks.PURPLE_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_RED, createSheepuffTable(Blocks.RED_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_WHITE, createSheepuffTable(Blocks.WHITE_WOOL));
-        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_YELLOW, createSheepuffTable(Blocks.YELLOW_WOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_PLAIN, createSheepuffTable(AetherIIBlocks.CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_BLACK, createSheepuffTable(AetherIIBlocks.BLACK_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_BLUE, createSheepuffTable(AetherIIBlocks.BLUE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_BROWN, createSheepuffTable(AetherIIBlocks.BROWN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_CYAN, createSheepuffTable(AetherIIBlocks.CYAN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_GRAY, createSheepuffTable(AetherIIBlocks.GRAY_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_GREEN, createSheepuffTable(AetherIIBlocks.GREEN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_LIGHT_BLUE, createSheepuffTable(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_LIGHT_GRAY, createSheepuffTable(AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_LIME, createSheepuffTable(AetherIIBlocks.LIME_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_MAGENTA, createSheepuffTable(AetherIIBlocks.MAGENTA_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_ORANGE, createSheepuffTable(AetherIIBlocks.ORANGE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_PINK, createSheepuffTable(AetherIIBlocks.PINK_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_PURPLE, createSheepuffTable(AetherIIBlocks.PURPLE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_RED, createSheepuffTable(AetherIIBlocks.RED_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_WHITE, createSheepuffTable(AetherIIBlocks.WHITE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_YELLOW, createSheepuffTable(AetherIIBlocks.YELLOW_CLOUDWOOL));
 
         this.add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), createBurrukaiTable());
         this.add(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), createBurrukaiTable());
         this.add(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), createBurrukaiTable());
+
         this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), createKirridTable());
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PLAIN, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BLACK, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.BLACK_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BLUE, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.BLUE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BROWN, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.BROWN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_CYAN, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.CYAN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_GRAY, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.GRAY_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_GREEN, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.GREEN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIGHT_BLUE, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIGHT_GRAY, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIME, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.LIME_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_MAGENTA, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.MAGENTA_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_ORANGE, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.ORANGE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PINK, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.PINK_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PURPLE, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.PURPLE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_RED, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.RED_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WHITE, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.WHITE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_YELLOW, createKirridTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.YELLOW_CLOUDWOOL));
+
         this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), createKirridTable());
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PLAIN, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BLACK, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.BLACK_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BLUE, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.BLUE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BROWN, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.BROWN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_CYAN, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.CYAN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_GRAY, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.GRAY_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_GREEN, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.GREEN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIGHT_BLUE, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIGHT_GRAY, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIME, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.LIME_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_MAGENTA, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.MAGENTA_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_ORANGE, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.ORANGE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PINK, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.PINK_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PURPLE, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.PURPLE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_RED, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.RED_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WHITE, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.WHITE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_YELLOW, createKirridTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.YELLOW_CLOUDWOOL));
+
         this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), createKirridTable());
-        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.HIGHFIELDS_KIRRID_FUR, createKirridWithWoolTable(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
-        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.MAGNETIC_KIRRID_FUR, createKirridWithWoolTable(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
-        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ARCTIC_KIRRID_FUR, createKirridWithWoolTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_PLAIN, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_BLACK, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.BLACK_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_BLUE, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.BLUE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_BROWN, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.BROWN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_CYAN, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.CYAN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_GRAY, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.GRAY_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_GREEN, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.GREEN_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIGHT_BLUE, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIGHT_GRAY, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIME, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.LIME_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_MAGENTA, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.MAGENTA_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_ORANGE, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.ORANGE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_PINK, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.PINK_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_PURPLE, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.PURPLE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_RED, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.RED_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_WHITE, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.WHITE_CLOUDWOOL));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_YELLOW, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.YELLOW_CLOUDWOOL));
 
         this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -156,7 +210,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 );
     }
 
-    protected LootTable.Builder createKirridWithWoolTable(EntityType<?> entityType, ItemLike wool) {
+    protected LootTable.Builder createKirridTable(EntityType<?> entityType, ItemLike wool) {
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(wool)))
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(NestedLootTable.lootTableReference(entityType.getDefaultLootTable())));

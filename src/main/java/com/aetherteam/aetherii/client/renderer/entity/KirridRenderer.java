@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 
 import com.aetherteam.aetherii.client.renderer.BiomeVariantPresets;
+import com.aetherteam.aetherii.client.renderer.entity.layers.KirridWoolLayer;
+import com.aetherteam.aetherii.client.renderer.entity.layers.SheepuffWoolLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.AbstractKirridBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.AbstractKirridModel;
 import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
@@ -21,6 +23,7 @@ public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, EntityModel<K
         this.babyTexture = preset.getBabyTexture();
         this.defaultModel = (AbstractKirridModel) preset.getDefaultModel(context);
         this.babyModel = (AbstractKirridBabyModel) preset.getBabyModel(context);
+        this.addLayer(new KirridWoolLayer(this));
     }
 
     @Override
