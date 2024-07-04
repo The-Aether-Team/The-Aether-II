@@ -1,20 +1,19 @@
 {
   "type": "aether_ii:coast",
   "config": {
-    "type": "magnetic",
+    "type": "arctic",
     "block": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:ferrosite_sand"
+        "Name": "aether_ii:arctic_packed_ice"
       }
     },
-    "distance_noise": "aether_ii:highlands/coasts/highfields",
-    "pattern_noise": 0.0,
+    "distance_noise": "aether_ii:highlands/coasts/arctic",
     "size": 16.35,
     "valid_blocks": "aether_ii:aether_grass_block",
     "y_range": {
-      "max_inclusive": 156,
-      "min_inclusive": 112
+      "max_inclusive": 180,
+      "min_inclusive": 120
     }
   }
 }

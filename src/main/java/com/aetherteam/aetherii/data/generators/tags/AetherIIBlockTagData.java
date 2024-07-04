@@ -55,6 +55,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
+        this.tag(AetherIITags.Blocks.SHAPES_COASTS)
+                .add(Blocks.WATER)
+                .addTags(
+                AetherIITags.Blocks.AETHER_DIRT,
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
+        );
         this.tag(AetherIITags.Blocks.FERROSITE).add(
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get()
@@ -739,7 +745,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).addTags(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
-                AetherIIBlocks.ARCTIC_ICE.get()
+                AetherIIBlocks.ARCTIC_ICE.get(),
+                AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
 
         // Forge
