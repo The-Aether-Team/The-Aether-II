@@ -300,7 +300,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
                 output.accept(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
-                output.accept(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());
@@ -320,7 +319,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get());
-                output.accept(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYROOT_SAPLING.get());
                 output.accept(AetherIIBlocks.SKYPLANE_SAPLING.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_SAPLING.get());

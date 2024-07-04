@@ -110,7 +110,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, "Irradiated Greatroot Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, "Irradiated Greatoak Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, "Irradiated Greatboa Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAF_PILE, "Irradiated Amberoot Leaf Pile");
 
         // Leaves
         this.addBlock(AetherIIBlocks.SKYROOT_LEAVES, "Skyroot Leaves");
@@ -132,7 +131,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, "Irradiated Greatroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, "Irradiated Greatoak Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, "Irradiated Greatboa Leaves");
-        this.addBlock(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES, "Irradiated Amberoot Leaves");
 
         // Saplings
         this.addBlock(AetherIIBlocks.SKYROOT_SAPLING, "Skyroot Sapling");

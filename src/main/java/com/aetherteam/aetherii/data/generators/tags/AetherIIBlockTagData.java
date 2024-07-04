@@ -345,8 +345,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get()
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
         );
         this.tag(BlockTags.TRAPDOORS).add(
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
@@ -695,7 +694,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get(),
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.HIGHLANDS_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get()
