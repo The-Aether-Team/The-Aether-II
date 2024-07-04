@@ -17,6 +17,7 @@
   },
   "features": [
     [
+      "aether_ii:coast_arctic_packed_ice",
       "aether_ii:noise_lake_arctic",
       "aether_ii:cloudbed"
     ],
@@ -100,6 +101,12 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 10
+      },
+      {
+        "type": "aether_ii:arctic_burrukai",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 8
       },
       {
         "type": "aether_ii:sheepuff",

@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.HighfieldsBurrukaiBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.HighfieldsBurrukaiModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -15,8 +15,18 @@ public enum BiomeVariantPresets {
     HIGHFIELDS_BURRUKAI(
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/highfields/burrukai_highfields.png"),
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/highfields/burrukai_highfields_baby.png"),
-            (context) -> new HighfieldsBurrukaiModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_BURRUKAI)),
-            (context) -> new HighfieldsBurrukaiBabyModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_BURRUKAI_BABY))),
+            (context) -> new BurrukaiModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_BURRUKAI)),
+            (context) -> new BurrukaiBabyModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_BURRUKAI_BABY))),
+    MAGNETIC_BURRUKAI(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/magnetic/burrukai_magnetic.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/magnetic/burrukai_magnetic_baby.png"),
+            (context) -> new BurrukaiModel(context.bakeLayer(AetherIIModelLayers.MAGNETIC_BURRUKAI)),
+            (context) -> new BurrukaiBabyModel(context.bakeLayer(AetherIIModelLayers.MAGNETIC_BURRUKAI_BABY))),
+    ARCTIC_BURRUKAI(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/arctic/burrukai_arctic.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/arctic/burrukai_arctic_baby.png"),
+            (context) -> new BurrukaiModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_BURRUKAI)),
+            (context) -> new BurrukaiBabyModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_BURRUKAI_BABY))),
     HIGHFIELDS_KIRRID(
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields.png"),
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields_baby.png"),

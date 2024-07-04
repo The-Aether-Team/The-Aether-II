@@ -291,6 +291,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATOAK_LEAVES.get());
                 output.accept(AetherIIBlocks.GREATBOA_LEAVES.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
+                output.accept(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_LEAF_PILE.get());
@@ -301,6 +311,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get());
+                output.accept(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAF_PILE.get());
                 output.accept(AetherIIBlocks.SKYROOT_SAPLING.get());
                 output.accept(AetherIIBlocks.SKYPLANE_SAPLING.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_SAPLING.get());
@@ -347,6 +367,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_SIGN.get());
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
+                output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("equipment_and_utilities", () -> CreativeModeTab.builder()
@@ -500,10 +521,12 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+                output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MOA_SPAWN_EGG.get());
                 output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());

@@ -106,6 +106,12 @@
         "weight": 10
       },
       {
+        "type": "aether_ii:magnetic_burrukai",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 8
+      },
+      {
         "type": "aether_ii:aerbunny",
         "maxCount": 2,
         "minCount": 1,

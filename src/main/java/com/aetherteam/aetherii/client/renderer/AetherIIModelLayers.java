@@ -8,6 +8,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_BED_FOOT = register("skyroot_bed_foot");
     public static final ModelLayerLocation SKYROOT_BED_HEAD = register("skyroot_bed_head");
     public static final ModelLayerLocation MOA_EGG = register("moa_egg");
+    public static final ModelLayerLocation OUTPOST_CAMPFIRE = register("outpost_campfire");
 
     public static final ModelLayerLocation PHYG = register("phyg");
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");
@@ -16,6 +17,10 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SHEEPUFF = register("sheepuff");
     public static final ModelLayerLocation HIGHFIELDS_BURRUKAI = register("highfields_burrukai");
     public static final ModelLayerLocation HIGHFIELDS_BURRUKAI_BABY = register("highfields_burrukai_baby");
+    public static final ModelLayerLocation MAGNETIC_BURRUKAI = register("magnetic_burrukai");
+    public static final ModelLayerLocation MAGNETIC_BURRUKAI_BABY = register("magnetic_burrukai_baby");
+    public static final ModelLayerLocation ARCTIC_BURRUKAI = register("arctic_burrukai");
+    public static final ModelLayerLocation ARCTIC_BURRUKAI_BABY = register("arctic_burrukai_baby");
     public static final ModelLayerLocation HIGHFIELDS_KIRRID = register("highfields_kirrid");
     public static final ModelLayerLocation HIGHFIELDS_KIRRID_BABY = register("highfields_kirrid_baby");
     public static final ModelLayerLocation MAGNETIC_KIRRID = register("magnetic_kirrid");
