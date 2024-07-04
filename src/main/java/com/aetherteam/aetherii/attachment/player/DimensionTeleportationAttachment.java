@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.attachment.player;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.event.hooks.PortalTeleportationHooks;
+import com.aetherteam.aetherii.event.hooks.DimensionTeleportationHooks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -21,23 +21,23 @@ import net.minecraft.world.item.ItemStack;
 /**
  * Capability class for handling portal and teleportation behavior for the Aether.
  *
- * @see PortalTeleportationHooks
+ * @see DimensionTeleportationHooks
  */
-public class PortalTeleportationAttachment {
+public class DimensionTeleportationAttachment {
     private boolean canGetPortal = true;
     private boolean canSpawnInAether = true;
 
     public float portalIntensity;
     public float oPortalIntensity;
 
-    public static final Codec<PortalTeleportationAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.BOOL.fieldOf("can_get_portal").forGetter(PortalTeleportationAttachment::canGetPortal),
-            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(PortalTeleportationAttachment::canSpawnInAether)
-    ).apply(instance, PortalTeleportationAttachment::new));
+    public static final Codec<DimensionTeleportationAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.BOOL.fieldOf("can_get_portal").forGetter(DimensionTeleportationAttachment::canGetPortal),
+            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(DimensionTeleportationAttachment::canSpawnInAether)
+    ).apply(instance, DimensionTeleportationAttachment::new));
 
-    public PortalTeleportationAttachment() { }
+    public DimensionTeleportationAttachment() { }
 
-    public PortalTeleportationAttachment(boolean portal, boolean spawnInAether) {
+    public DimensionTeleportationAttachment(boolean portal, boolean spawnInAether) {
         this.setCanGetPortal(portal);
         this.setCanSpawnInAether(spawnInAether);
     }

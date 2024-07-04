@@ -3,9 +3,9 @@ package com.aetherteam.aetherii.event.hooks;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.player.PortalTeleportationAttachment;
+import com.aetherteam.aetherii.attachment.player.DimensionTeleportationAttachment;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
-import com.aetherteam.aetherii.event.listeners.PortalTeleportationListener;
+import com.aetherteam.aetherii.event.listeners.DimensionTeleportationListener;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.core.BlockPos;
@@ -28,7 +28,7 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class PortalTeleportationHooks {
+public class DimensionTeleportationHooks {
     public static boolean playerLeavingAether;
     public static boolean displayAetherTravel;
     public static int teleportationTimer;
@@ -130,12 +130,12 @@ public class PortalTeleportationHooks {
     // GENERIC ATTACHMENT METHODS
 
     /**
-     * @see PortalTeleportationAttachment#onUpdate(Player)
-     * @see PortalTeleportationListener#onPlayerUpdate(LivingEvent.LivingTickEvent)
+     * @see DimensionTeleportationAttachment#onUpdate(Player)
+     * @see DimensionTeleportationListener#onPlayerUpdate(LivingEvent.LivingTickEvent)
      */
     public static void update(LivingEntity entity) {
         if (entity instanceof Player player) {
-            player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION).onUpdate(player);
+            player.getData(AetherIIDataAttachments.DIMENSION_TELEPORTATION).onUpdate(player);
         }
     }
 }

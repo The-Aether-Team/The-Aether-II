@@ -29,10 +29,7 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
-import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.*;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
@@ -134,7 +131,7 @@ public class AetherII {
         DamageSystemListener.listen(bus);
         ToolModificationListener.listen(bus);
         ToolAbilityListener.listen(bus);
-        PortalTeleportationListener.listen(bus);
+        DimensionTeleportationListener.listen(bus);
         AerbunnyMountListener.listen(bus);
         WorldInteractionListener.listen(bus);
         RecipeListener.listen(bus);
@@ -156,6 +153,7 @@ public class AetherII {
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
+        registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
 
         // SERVERBOUND
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
