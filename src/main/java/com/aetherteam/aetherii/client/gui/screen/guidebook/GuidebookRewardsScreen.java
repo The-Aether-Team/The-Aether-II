@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -54,6 +56,16 @@ public class GuidebookRewardsScreen extends Screen implements Guidebook {
 
     @Override
     protected void renderBlurredBackground(float partialTick) { }
+
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+        if (Minecraft.getInstance().options.keyInventory.isActiveAndMatches(mouseKey)) {
+            this.onClose();
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
 
     @Override
     public ResourceLocation getLeftPageTexture() {

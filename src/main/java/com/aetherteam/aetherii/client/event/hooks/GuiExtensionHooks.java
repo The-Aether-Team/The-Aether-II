@@ -20,6 +20,20 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import javax.annotation.Nullable;
 
 public class GuiExtensionHooks {
+    public static Screen lastGuidebookScreen = null;
+    public static boolean forceCloseGuidebook = false;
+
+    public static Screen openStoredGuidebookScreen(Screen screen) {
+        if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
+            if (lastGuidebookScreen != null && !forceCloseGuidebook) {
+                return lastGuidebookScreen;
+            }
+        } else if (screen instanceof Guidebook) {
+            forceCloseGuidebook = false;
+        }
+        return null;
+    }
+
     @Nullable
     public static Button setupAccessoryButton(Screen screen) {
         Screen containerScreen = canCreateAccessoryButtonForScreen(screen);
@@ -41,6 +55,7 @@ public class GuiExtensionHooks {
                     player.containerMenu.setCarried(ItemStack.EMPTY);
 
                     if (containerScreen instanceof Guidebook) {
+                        forceCloseGuidebook = true;
                         InventoryScreen inventory = new InventoryScreen(player);
                         minecraft.setScreen(inventory);
                         player.inventoryMenu.setCarried(stack);
@@ -60,5 +75,13 @@ public class GuiExtensionHooks {
             return screen;
         }
         return null;
+    }
+
+    public static void storeGuidebookScreen(Screen screen) {
+        if (screen instanceof Guidebook) {
+            lastGuidebookScreen = screen;
+        } else {
+            lastGuidebookScreen = null;
+        }
     }
 }
