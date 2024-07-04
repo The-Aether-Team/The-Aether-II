@@ -40,7 +40,7 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity> {
             VertexConsumer eyesConsumer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(EYES_LOCATION));
             this.moaEggModel.renderToBuffer(pPoseStack, eyesConsumer, pPackedLight, pPackedOverlay, pBlockEntity.getBlockState().getValue(MoaEggBlock.EYES).getColor());
 
-            VertexConsumer keratinConsumer = pBuffer.getBuffer(RenderType.entityTranslucent(KERATIN_LOCATION));
+            VertexConsumer keratinConsumer = pBuffer.getBuffer(RenderType.entityCutoutNoCull(KERATIN_LOCATION));
             this.moaEggModel.renderToBuffer(pPoseStack, keratinConsumer, pPackedLight, pPackedOverlay, pBlockEntity.getBlockState().getValue(MoaEggBlock.KERATIN).getColor());
         }
     }
