@@ -1,10 +1,14 @@
 package com.aetherteam.aetherii.client.event.listeners;
 
 import com.aetherteam.aetherii.client.event.hooks.GuiExtensionHooks;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
+import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class GuiExtensionListener {
     public static void listen(IEventBus bus) {
@@ -18,6 +22,9 @@ public class GuiExtensionListener {
         Screen storedScreen = GuiExtensionHooks.openStoredGuidebookScreen(screen);
         if (storedScreen != null) {
             event.setNewScreen(storedScreen);
+            if (storedScreen instanceof GuidebookEquipmentScreen) {
+                PacketDistributor.sendToServer(new OpenGuidebookPacket(ItemStack.EMPTY));
+            }
         }
     }
 
