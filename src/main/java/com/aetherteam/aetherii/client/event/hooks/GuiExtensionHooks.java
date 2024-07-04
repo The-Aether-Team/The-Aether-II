@@ -64,7 +64,7 @@ public class GuiExtensionHooks {
                         PacketDistributor.sendToServer(new OpenGuidebookPacket(stack));
                     }
                 }
-            }).pos((screen.width / 2) - 50, (screen.height / 2) + 95).size(100, 22));
+            }).pos((screen.width / 2) - 50, (screen.height / 2) + 101).size(100, 22));
         }
         return null;
     }
