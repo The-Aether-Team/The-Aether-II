@@ -327,6 +327,8 @@
   "entity.aether_ii.phyg": "Phyg",
   "entity.aether_ii.sheepuff": "Sheepuff",
   "entity.aether_ii.zephyr": "Zephyr",
+  "gui.aether_ii.guidebook.button.close": "Inventory",
+  "gui.aether_ii.guidebook.button.open": "Guidebook",
   "gui.aether_ii.guidebook.discovery.bestiary.title": "Bestiary",
   "gui.aether_ii.guidebook.discovery.effects.title": "Effects",
   "gui.aether_ii.guidebook.discovery.landmarks.title": "Landmarks",
