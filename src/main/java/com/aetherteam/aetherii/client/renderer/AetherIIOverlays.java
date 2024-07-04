@@ -47,10 +47,9 @@ public class AetherIIOverlays {
     public static void registerOverlays(RegisterGuiLayersEvent event) {
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_portal_overlay"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
-            Window window = minecraft.getWindow();
             LocalPlayer player = minecraft.player;
             if (player != null) {
-                renderAetherPortalOverlay(guiGraphics, minecraft, window, player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION.get()), partialTicks);
+                renderAetherPortalOverlay(guiGraphics, minecraft, player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION.get()), partialTicks);
             }
         });
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (guiGraphics, partialTicks) -> {
@@ -72,8 +71,8 @@ public class AetherIIOverlays {
         });
     }
 
-    private static void renderAetherPortalOverlay(GuiGraphics guiGraphics, Minecraft minecraft, Window window, PortalTeleportationAttachment handler, DeltaTracker partialTicks) {
-        float timeInPortal = Mth.lerp(partialTicks.getGameTimeDeltaPartialTick(false), handler.getPrevPortalAnimTime(), handler.getPortalAnimTime());
+    private static void renderAetherPortalOverlay(GuiGraphics guiGraphics, Minecraft minecraft, PortalTeleportationAttachment handler, DeltaTracker partialTicks) {
+        float timeInPortal = Mth.lerp(partialTicks.getGameTimeDeltaPartialTick(false), handler.getOldPortalIntensity(), handler.getPortalIntensity());
         if (timeInPortal > 0.0F) {
             if (timeInPortal < 1.0F) {
                 timeInPortal *= timeInPortal;

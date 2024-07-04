@@ -1,18 +1,22 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.event.hooks.PortalTeleportationHooks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.DeathScreen;
+import net.minecraft.client.gui.screens.ReceivingLevelScreen;
+import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 /**
  * Capability class for handling portal and teleportation behavior for the Aether.
@@ -23,9 +27,8 @@ public class PortalTeleportationAttachment {
     private boolean canGetPortal = true;
     private boolean canSpawnInAether = true;
 
-    public boolean isInAetherPortal = false;
-    public int aetherPortalTimer = 0;
-    public float prevPortalAnimTime, portalAnimTime = 0.0F;
+    public float portalIntensity;
+    public float oPortalIntensity;
 
     public static final Codec<PortalTeleportationAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.fieldOf("can_get_portal").forGetter(PortalTeleportationAttachment::canGetPortal),
@@ -72,55 +75,38 @@ public class PortalTeleportationAttachment {
      * Increments or decrements the Aether portal timer depending on if the player is inside an Aether portal.
      * On the client, this will also help to set the portal overlay.
      */
-    private void handleAetherPortal(Player player) { //todo 1.21 still needs to display overlay in loading screen and retain fade-out overlay after teleportation before exiting portal.
-        if (player.level().isClientSide()) {
-            this.prevPortalAnimTime = this.portalAnimTime;
-            Minecraft minecraft = Minecraft.getInstance();
-            if (this.isInAetherPortal) {
-                if (minecraft.screen != null && !minecraft.screen.isPauseScreen()) {
-                    if (minecraft.screen instanceof AbstractContainerScreen) {
-                        player.closeContainer();
+    private void handleAetherPortal(Player player) {
+        if (player instanceof LocalPlayer localPlayer) {
+            if (!(Minecraft.getInstance().screen instanceof ReceivingLevelScreen)) {
+                this.oPortalIntensity = this.portalIntensity;
+                float f = 0.0F;
+                if (localPlayer.portalProcess != null && localPlayer.portalProcess.isInsidePortalThisTick() && localPlayer.portalProcess.isSamePortal(AetherIIBlocks.AETHER_PORTAL.get())) {
+                    if (Minecraft.getInstance().screen != null
+                            && !Minecraft.getInstance().screen.isPauseScreen()
+                            && !(Minecraft.getInstance().screen instanceof DeathScreen)
+                            && !(Minecraft.getInstance().screen instanceof WinScreen)) {
+                        if (Minecraft.getInstance().screen instanceof AbstractContainerScreen) {
+                            localPlayer.closeContainer();
+                        }
+
+                        Minecraft.getInstance().setScreen(null);
                     }
-                    minecraft.setScreen(null);
+
+                    if (this.portalIntensity == 0.0F) {
+                        Minecraft.getInstance()
+                                .getSoundManager()
+                                .play(SimpleSoundInstance.forLocalAmbience(AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER.get(), localPlayer.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F));
+                    }
+
+                    f = 0.0125F;
+                    localPlayer.portalProcess.setAsInsidePortalThisTick(false);
+                } else if (this.portalIntensity > 0.0F) {
+                    f = -0.05F;
                 }
 
-                if (this.getPortalAnimTime() == 0.0F) {
-                    this.playPortalSound(minecraft, player);
-                }
+                this.portalIntensity = Mth.clamp(this.portalIntensity + f, 0.0F, 1.0F);
             }
         }
-
-        if (this.isInPortal()) {
-            ++this.aetherPortalTimer;
-            if (player.level().isClientSide()) {
-                this.portalAnimTime += 0.0125F;
-                if (this.getPortalAnimTime() > 1.0F) {
-                    this.portalAnimTime = 1.0F;
-                }
-            }
-            this.isInAetherPortal = false;
-        } else {
-            if (player.level().isClientSide()) {
-                if (this.getPortalAnimTime() > 0.0F) {
-                    this.portalAnimTime -= 0.05F;
-                }
-
-                if (this.getPortalAnimTime() < 0.0F) {
-                    this.portalAnimTime = 0.0F;
-                }
-            }
-            if (this.getPortalTimer() > 0) {
-                this.aetherPortalTimer -= 4;
-            }
-        }
-    }
-
-    /**
-     * Plays the portal entry sound on the client.
-     */
-    @OnlyIn(Dist.CLIENT)
-    private void playPortalSound(Minecraft minecraft, Player player) {
-        minecraft.getSoundManager().play(SimpleSoundInstance.forLocalAmbience(AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER.get(), player.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F));
     }
 
     /**
@@ -144,39 +130,11 @@ public class PortalTeleportationAttachment {
         return this.canGetPortal;
     }
 
-    public void setInPortal(boolean inPortal) {
-        this.isInAetherPortal = inPortal;
+    public float getPortalIntensity() {
+        return this.portalIntensity;
     }
 
-    /**
-     * @return Whether the player is in an Aether Portal, as a {@link Boolean}.
-     */
-    public boolean isInPortal() {
-        return this.isInAetherPortal;
-    }
-
-    public void setPortalTimer(int timer) {
-        this.aetherPortalTimer = timer;
-    }
-
-    /**
-     * @return The {@link Integer} timer for how long the player has stood in a portal.
-     */
-    public int getPortalTimer() {
-        return this.aetherPortalTimer;
-    }
-
-    /**
-     * @return The {@link Float} timer for the portal vignette animation time.
-     */
-    public float getPortalAnimTime() {
-        return this.portalAnimTime;
-    }
-
-    /**
-     * @return The previous {@link Float} for the portal animation timer.
-     */
-    public float getPrevPortalAnimTime() {
-        return this.prevPortalAnimTime;
+    public float getOldPortalIntensity() {
+        return this.oPortalIntensity;
     }
 }
