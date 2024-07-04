@@ -3,6 +3,9 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
+import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
+import io.wispforest.accessories.AccessoriesInternals;
+import io.wispforest.accessories.networking.server.NukeAccessories;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -14,15 +17,24 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Vector2i;
 import org.joml.Vector3f;
 
+import javax.annotation.Nullable;
+
 public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookEquipmentMenu> implements Guidebook {
     private static final ResourceLocation GUIDEBOOK_EQUIPMENT_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_left.png");
     private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right.png");
+    private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_CREATIVE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right_creative.png");
+    private static final SimpleContainer DESTROY_ITEM_CONTAINER = new SimpleContainer(1);
 
     private final Inventory playerInventory;
     private float xMouse;
@@ -30,6 +42,9 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     private Component craftingTitle = Component.translatable("container.crafting");
     protected int craftingTitleLabelX;
     protected int craftingTitleLabelY;
+    @Nullable
+    private Slot destroyItemSlot;
+    private int nukeCoolDown = 0;
 
     public GuidebookEquipmentScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -49,9 +64,32 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) { //todo creative deletion slot
+    protected void containerTick() {
+        if (this.nukeCoolDown > 0) {
+            this.nukeCoolDown--;
+        }
+    }
+
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+
+        if (this.getMinecraft().player != null) {
+            if (this.getMinecraft().player.isCreative() && this.destroyItemSlot == null) {
+                this.destroyItemSlot = new Slot(DESTROY_ITEM_CONTAINER, 0, 121, 34);
+                this.getMenu().slots.add(this.destroyItemSlot);
+            } else if (!this.getMinecraft().player.isCreative() && this.destroyItemSlot != null) {
+                this.getMenu().slots.remove(this.destroyItemSlot);
+                this.destroyItemSlot = null;
+            }
+        }
+
+        if (this.destroyItemSlot != null && this.isHovering(this.destroyItemSlot.x, this.destroyItemSlot.y, 16, 16, mouseX, mouseY)) {
+            guiGraphics.renderTooltip(this.font, Component.translatable("inventory.binSlot"), mouseX, mouseY);
+        }
+
         this.renderTooltip(guiGraphics, mouseX, mouseY);
+
         this.xMouse = (float) mouseX;
         this.yMouse = (float) mouseY;
     }
@@ -63,7 +101,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        guiGraphics.drawString(this.font, this.craftingTitle, this.craftingTitleLabelX, this.craftingTitleLabelY, 4210752, false);
+        int xOffset = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isCreative() ? 19 : 0;
+        guiGraphics.drawString(this.font, this.craftingTitle, this.craftingTitleLabelX + xOffset, this.craftingTitleLabelY, 4210752, false);
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
         guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215, true);
     }
@@ -130,6 +169,32 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     }
 
     @Override
+    protected void slotClicked(@Nullable Slot slot, int slotId, int mouseButton, ClickType type) {
+        if (this.getMinecraft().player != null && this.getMinecraft().gameMode != null) {
+            boolean flag = type == ClickType.QUICK_MOVE;
+            if (slot != null || type == ClickType.QUICK_CRAFT) {
+                if (slot == null || slot.mayPickup(this.getMinecraft().player)) {
+                    if (slot == this.destroyItemSlot && this.destroyItemSlot != null && flag) {
+                        for (int j = 0; j < this.getMinecraft().player.inventoryMenu.getItems().size(); ++j) {
+                            if (this.nukeCoolDown <= 0) {
+                                AccessoriesInternals.getNetworkHandler().sendToServer(new NukeAccessories());
+                                this.nukeCoolDown = 10;
+                            }
+                            this.getMinecraft().gameMode.handleCreativeModeItemAdd(ItemStack.EMPTY, j);
+                        }
+                    } else {
+                        if (slot == this.destroyItemSlot && this.destroyItemSlot != null) {
+                            this.getMenu().setCarried(ItemStack.EMPTY);
+                            PacketDistributor.sendToServer(new ClearItemPacket());
+                        }
+                    }
+                }
+            }
+            super.slotClicked(slot, slotId, mouseButton, type);
+        }
+    }
+
+    @Override
     protected boolean hasClickedOutside(double mouseX, double mouseY, int guiLeft, int guiTop, int mouseButton) {
         for (Renderable renderable : this.renderables) {
             if (renderable instanceof GuidebookTab guidebookTab) {
@@ -148,6 +213,9 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
     @Override
     public ResourceLocation getRightPageTexture() {
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.isCreative()) {
+            return GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_CREATIVE_LOCATION;
+        }
         return GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_LOCATION;
     }
 

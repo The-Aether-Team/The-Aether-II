@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.inventory.menu;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
@@ -37,11 +36,13 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         super(AetherIIMenuTypes.GUIDEBOOK.get(), containerId);
         this.owner = playerInventory.player;
 
-        this.addSlot(new ResultSlot(playerInventory.player, this.craftSlots, this.resultSlots, 0, 196, 34));
+        int xOffset = this.owner.isCreative() ? 19 : 0;
+
+        this.addSlot(new ResultSlot(playerInventory.player, this.craftSlots, this.resultSlots, 0, 196 + xOffset, 34));
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                this.addSlot(new Slot(this.craftSlots, j + i * 2, 140 + j * 18, 24 + i * 18));
+                this.addSlot(new Slot(this.craftSlots, j + i * 2,  xOffset + 140 + j * 18, 24 + i * 18));
             }
         }
 
@@ -114,7 +115,6 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
      */
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
-        AetherII.LOGGER.info(String.valueOf(index));
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasItem()) {
