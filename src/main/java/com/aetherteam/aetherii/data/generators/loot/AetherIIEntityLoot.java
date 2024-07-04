@@ -93,6 +93,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_YELLOW, createSheepuffTable(Blocks.YELLOW_WOOL));
 
         this.add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), createBurrukaiTable());
+        this.add(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), createBurrukaiTable());
+        this.add(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), createBurrukaiTable());
         this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), createKirridTable());
         this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), createKirridTable());
         this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), createKirridTable());

@@ -17,14 +17,14 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         DensityFunction shiftX = getFunction(function, SHIFT_X);
         DensityFunction shiftZ = getFunction(function, SHIFT_Z);
 
-        context.register(TEMPERATURE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375D, noise.getOrThrow(AetherIINoises.TEMPERATURE)));
-        context.register(VEGETATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, noise.getOrThrow(AetherIINoises.VEGETATION)));
+        context.register(TEMPERATURE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.TEMPERATURE)));
+        context.register(VEGETATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.VEGETATION)));
         context.register(VEGETATION_RARITY_MAPPER, makeVegetationRarityMapper(function));
-        context.register(VEGETATION_RARE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.5, 0.0, 0.5, 0.0, 0.0, 0.0), 0.35D, 0.0D, 76).abs());
-        context.register(CONTINENTS, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.EROSION)).abs());
-        context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375D, noise.getOrThrow(AetherIINoises.EROSION)).abs());
+        context.register(VEGETATION_RARE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25, noise.getOrThrow(AetherIINoises.VEGETATION_RARE)));
+        context.register(CONTINENTS, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.EROSION)).abs());
+        context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.EROSION)).abs());
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -1.5, 1.5));
-        context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75D, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
+        context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
         context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
 
         context.register(BASE_3D_NOISE, BlendedNoise.createUnseeded(

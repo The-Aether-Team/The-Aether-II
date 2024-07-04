@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class MagneticKirridModel extends KirridModel {
+public class MagneticKirridModel extends AbstractKirridModel {
 	protected final ModelPart headPlate;
 	protected final ModelPart headPlateBroken;
 
