@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
@@ -17,8 +17,11 @@ import net.minecraft.util.FastColor;
 
 public class KirridWoolLayer extends RenderLayer<Kirrid, EntityModel<Kirrid>> {
     private static final ResourceLocation ARCTIC_KIRRID_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/arctic/kirrid_arctic_wool.png");
+    private static final ResourceLocation ARCTIC_KIRRID_BABY_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/arctic/kirrid_arctic_baby_wool.png");
     private static final ResourceLocation HIGHFIELDS_KIRRID_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields_wool.png");
+    private static final ResourceLocation HIGHFIELDS_KIRRID_BABY_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields_baby_wool.png");
     private static final ResourceLocation MAGNETIC_KIRRID_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/magnetic/kirrid_magnetic_wool.png");
+    private static final ResourceLocation MAGNETIC_KIRRID_BABY_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/magnetic/kirrid_magnetic_baby_wool.png");
 
     public KirridWoolLayer(RenderLayerParent<Kirrid, EntityModel<Kirrid>> renderer) {
         super(renderer);
@@ -57,11 +60,11 @@ public class KirridWoolLayer extends RenderLayer<Kirrid, EntityModel<Kirrid>> {
 
     private ResourceLocation getTexture(Kirrid kirrid) {
         if (kirrid.getType() == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
-            return ARCTIC_KIRRID_WOOL_TEXTURE;
+            return kirrid.isBaby() ? ARCTIC_KIRRID_BABY_WOOL_TEXTURE : ARCTIC_KIRRID_WOOL_TEXTURE;
         } else if (kirrid.getType() == AetherIIEntityTypes.MAGNETIC_KIRRID.get()) {
-            return MAGNETIC_KIRRID_WOOL_TEXTURE;
+            return kirrid.isBaby() ? MAGNETIC_KIRRID_BABY_WOOL_TEXTURE : MAGNETIC_KIRRID_WOOL_TEXTURE;
         } else {
-            return HIGHFIELDS_KIRRID_WOOL_TEXTURE;
+            return kirrid.isBaby() ? HIGHFIELDS_KIRRID_BABY_WOOL_TEXTURE : HIGHFIELDS_KIRRID_WOOL_TEXTURE;
         }
     }
 }

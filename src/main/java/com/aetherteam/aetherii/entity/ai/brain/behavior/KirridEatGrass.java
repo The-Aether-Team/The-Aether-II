@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity.ai.brain.behavior;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.ai.brain.KirridAi;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.Behavior;

@@ -3,10 +3,9 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.client.renderer.BiomeVariantPresets;
 import com.aetherteam.aetherii.client.renderer.entity.layers.KirridWoolLayer;
-import com.aetherteam.aetherii.client.renderer.entity.layers.SheepuffWoolLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.AbstractKirridBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.AbstractKirridModel;
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;

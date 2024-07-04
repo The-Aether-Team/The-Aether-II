@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.entity.ai.memory;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;

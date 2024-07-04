@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.entity.passive.kirrid;
+package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -8,8 +8,6 @@ import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.KirridAi;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.ai.navigator.KirridPathNavigation;
-import com.aetherteam.aetherii.entity.passive.AetherAnimal;
-import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;

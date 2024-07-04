@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity.model.kirrid;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.KirridAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.animation.KirridBabyAnimations;
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 
