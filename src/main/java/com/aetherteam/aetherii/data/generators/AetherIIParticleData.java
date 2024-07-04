@@ -25,6 +25,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.sprite(AetherIIParticleTypes.GREATOAK_LEAVES.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "leaves"));
         this.sprite(AetherIIParticleTypes.GREATBOA_LEAVES.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "leaves"));
         this.sprite(AetherIIParticleTypes.AMBEROOT_LEAVES.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "leaves"));
+        this.sprite(AetherIIParticleTypes.IRRADIATED_LEAVES.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "leaves"));
         this.sprite(AetherIIParticleTypes.DRIPPING_WATER.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dripping_water"));
         this.sprite(AetherIIParticleTypes.FALLING_WATER.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "falling_water"));
         this.spriteSet(AetherIIParticleTypes.SPLASH.get(),  ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "splash"), 4, false);
@@ -34,6 +35,7 @@ public class AetherIIParticleData extends ParticleDescriptionProvider {
         this.sprite(AetherIIParticleTypes.IRRADIATION.get(), ResourceLocation.withDefaultNamespace("generic_0"));
 
         this.spriteSet(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), ResourceLocation.withDefaultNamespace("generic"), 8, true);
+        this.spriteSet(AetherIIParticleTypes.TEMPEST_ELECTRICITY.get(), ResourceLocation.withDefaultNamespace("generic"), 8, true);
         this.sprite(AetherIIParticleTypes.SLASH_ATTACK.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "slash_attack"));
         this.sprite(AetherIIParticleTypes.IMPACT_ATTACK.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "impact_attack"));
         this.sprite(AetherIIParticleTypes.PIERCE_ATTACK.get(), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "pierce_attack"));
