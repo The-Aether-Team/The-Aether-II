@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
+import com.aetherteam.aetherii.block.furniture.MultiBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArtisansBenchBlock;
@@ -792,5 +793,11 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         ModelFile sign = models().sign(name(signBlock), texture);
         simpleBlock(signBlock, sign);
         simpleBlock(wallSignBlock, sign);
+    }
+
+    public void multiBlock(MultiBlock block, Block particle, String location) {
+        ResourceLocation texture = this.texture(this.name(particle), location);
+        ModelFile model = this.models().getBuilder(this.name(block)).texture("particle", texture);
+        this.getVariantBuilder(block).forAllStates((state) -> ConfiguredModel.builder().modelFile(model).build());
     }
 }

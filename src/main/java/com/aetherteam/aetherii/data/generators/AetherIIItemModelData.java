@@ -571,5 +571,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Bookshelves
         this.itemBlock(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
+
+        // Furniture
+        this.outpostCampfireItem(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
     }
 }

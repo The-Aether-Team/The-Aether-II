@@ -464,6 +464,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Bookshelves
         this.add(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
         this.add(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), (bookshelf) -> this.createSingleItemTableWithSilkTouch(bookshelf, Items.BOOK, ConstantValue.exactly(3)));
+
+        // Furniture
+        this.dropNone(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
     }
 
     @Override
