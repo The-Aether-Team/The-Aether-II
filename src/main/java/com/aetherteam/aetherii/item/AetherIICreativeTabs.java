@@ -440,22 +440,27 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE_BOOTS.get());
+                output.accept(AetherIIItems.TAEGORE_HIDE_GLOVES.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT_HELMET.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT_BOOTS.get());
+                output.accept(AetherIIItems.BURRUKAI_PELT_GLOVES.get());
                 output.accept(AetherIIItems.ZANITE_HELMET.get());
                 output.accept(AetherIIItems.ZANITE_CHESTPLATE.get());
                 output.accept(AetherIIItems.ZANITE_LEGGINGS.get());
                 output.accept(AetherIIItems.ZANITE_BOOTS.get());
+                output.accept(AetherIIItems.ZANITE_GLOVES.get());
                 output.accept(AetherIIItems.ARKENIUM_HELMET.get());
                 output.accept(AetherIIItems.ARKENIUM_CHESTPLATE.get());
                 output.accept(AetherIIItems.ARKENIUM_LEGGINGS.get());
                 output.accept(AetherIIItems.ARKENIUM_BOOTS.get());
+                output.accept(AetherIIItems.ARKENIUM_GLOVES.get());
                 output.accept(AetherIIItems.GRAVITITE_HELMET.get());
                 output.accept(AetherIIItems.GRAVITITE_CHESTPLATE.get());
                 output.accept(AetherIIItems.GRAVITITE_LEGGINGS.get());
                 output.accept(AetherIIItems.GRAVITITE_BOOTS.get());
+                output.accept(AetherIIItems.GRAVITITE_GLOVES.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FOOD_AND_DRINKS = CREATIVE_MODE_TABS.register("food_and_drinks", () -> CreativeModeTab.builder()

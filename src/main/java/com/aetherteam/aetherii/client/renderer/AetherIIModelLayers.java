@@ -32,9 +32,11 @@ public class AetherIIModelLayers {
 
     public static final ModelLayerLocation ZEPHYR = register("zephyr");
     public static final ModelLayerLocation ZEPHYR_TRANSPARENCY = register("zephyr", "transparency");
-
     public static final ModelLayerLocation TEMPEST = register("tempest");
     public static final ModelLayerLocation TEMPEST_TRANSPARENCY = register("tempest", "transparency");
+  
+    public static final ModelLayerLocation GLOVES = register("gloves");
+    public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");
 
     private static ModelLayerLocation register(String name) {
         return register(name, "main");
