@@ -798,6 +798,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     public void multiBlock(MultiBlock block, Block particle, String location) {
         ResourceLocation texture = this.texture(this.name(particle), location);
         ModelFile model = this.models().getBuilder(this.name(block)).texture("particle", texture);
-        this.getVariantBuilder(block).forAllStates((state) -> ConfiguredModel.builder().modelFile(model).build());
+        this.getVariantBuilder(block).partialState().addModels(ConfiguredModel.builder().modelFile(model).build());
     }
 }

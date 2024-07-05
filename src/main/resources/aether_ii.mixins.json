@@ -25,6 +25,7 @@
     "client.ClientLevelMixin",
     "client.LiquidBlockRendererMixin",
     "client.ReceivingLevelScreenMixin",
+    "client.accessor.DeathScreenAccessor",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.ParticleAccessor",
     "client.accessor.RenderChunkRegionAccessor"

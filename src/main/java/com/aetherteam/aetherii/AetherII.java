@@ -29,6 +29,7 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
+import com.aetherteam.aetherii.network.packet.OutpostTrackerSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.*;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
@@ -136,6 +137,7 @@ public class AetherII {
         WorldInteractionListener.listen(bus);
         RecipeListener.listen(bus);
         BlockInteractionListener.listen(bus);
+        PlayerRespawnListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 
@@ -162,5 +164,6 @@ public class AetherII {
         // BOTH
         registrar.playBidirectional(AerbunnyMountSyncPacket.TYPE, AerbunnyMountSyncPacket.STREAM_CODEC, AerbunnyMountSyncPacket::execute);
         registrar.playBidirectional(DamageSystemSyncPacket.TYPE, DamageSystemSyncPacket.STREAM_CODEC, DamageSystemSyncPacket::execute);
+        registrar.playBidirectional(OutpostTrackerSyncPacket.TYPE, OutpostTrackerSyncPacket.STREAM_CODEC, OutpostTrackerSyncPacket::execute);
     }
 }
