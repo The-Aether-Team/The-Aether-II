@@ -1,10 +1,18 @@
 package com.aetherteam.aetherii.accessories.accessory;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesRenderer;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.combat.GlovesItem;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.Accessory;
+import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
+import io.wispforest.accessories.api.slot.SlotReference;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.ItemStack;
 
 public class HandwearAccessory implements Accessory {
     public static void clientInit() {
@@ -16,10 +24,25 @@ public class HandwearAccessory implements Accessory {
     }
 
     public static void init() {
-        AccessoriesAPI.registerAccessory(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), new HandwearAccessory());
-        AccessoriesAPI.registerAccessory(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), new HandwearAccessory());
-        AccessoriesAPI.registerAccessory(AetherIIItems.ZANITE_GLOVES.get(), new HandwearAccessory());
-        AccessoriesAPI.registerAccessory(AetherIIItems.ARKENIUM_GLOVES.get(), new HandwearAccessory());
-        AccessoriesAPI.registerAccessory(AetherIIItems.GRAVITITE_GLOVES.get(), new HandwearAccessory());
+        AccessoriesAPI.registerAccessory(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), new HandwearAccessory(5)); //todo
+        AccessoriesAPI.registerAccessory(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), new HandwearAccessory(7));
+        AccessoriesAPI.registerAccessory(AetherIIItems.ZANITE_GLOVES.get(), new HandwearAccessory(10));
+        AccessoriesAPI.registerAccessory(AetherIIItems.ARKENIUM_GLOVES.get(), new HandwearAccessory(10));
+        AccessoriesAPI.registerAccessory(AetherIIItems.GRAVITITE_GLOVES.get(), new HandwearAccessory(20));
+    }
+
+    public static final ResourceLocation BASE_GLOVES_STAMINA_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_stamina_restoration");
+
+    private final double restoration;
+
+    public HandwearAccessory(double restoration) {
+        this.restoration = restoration;
+    }
+
+    @Override
+    public void getModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
+//        if (reference.slotName().equals("aether_ii:handwear_slot")) {
+//            builder.addStackable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION, new AttributeModifier(BASE_GLOVES_STAMINA_RESTORATION_ID, this.restoration, AttributeModifier.Operation.ADD_VALUE));
+//        }
     }
 }

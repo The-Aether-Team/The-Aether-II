@@ -23,4 +23,8 @@ public class GlovesItem extends Item {
     public ResourceLocation getGlovesTexture() {
         return this.GLOVES_TEXTURE;
     }
+
+    public static int getDurability(int durabilityFactor) {
+        return 13 * durabilityFactor;
+    } //todo
 }

@@ -18,9 +18,18 @@ public class AetherIIDamageInflictions {
     public static final ResourceKey<DamageInfliction> SKYROOT_SHORTSWORD = createKey("skyroot_shortsword");
     public static final ResourceKey<DamageInfliction> SKYROOT_HAMMER = createKey("skyroot_hammer");
     public static final ResourceKey<DamageInfliction> SKYROOT_SPEAR = createKey("skyroot_spear");
+    public static final ResourceKey<DamageInfliction> HOLYSTONE_SHORTSWORD = createKey("holystone_shortsword");
+    public static final ResourceKey<DamageInfliction> HOLYSTONE_HAMMER = createKey("holystone_hammer");
+    public static final ResourceKey<DamageInfliction> HOLYSTONE_SPEAR = createKey("holystone_spear");
     public static final ResourceKey<DamageInfliction> ZANITE_SHORTSWORD = createKey("zanite_shortsword");
     public static final ResourceKey<DamageInfliction> ZANITE_HAMMER = createKey("zanite_hammer");
     public static final ResourceKey<DamageInfliction> ZANITE_SPEAR = createKey("zanite_spear");
+    public static final ResourceKey<DamageInfliction> ARKENIUM_SHORTSWORD = createKey("arkenium_shortsword");
+    public static final ResourceKey<DamageInfliction> ARKENIUM_HAMMER = createKey("arkenium_hammer");
+    public static final ResourceKey<DamageInfliction> ARKENIUM_SPEAR = createKey("arkenium_spear");
+    public static final ResourceKey<DamageInfliction> GRAVITITE_SHORTSWORD = createKey("gravitite_shortsword");
+    public static final ResourceKey<DamageInfliction> GRAVITITE_HAMMER = createKey("gravitite_hammer");
+    public static final ResourceKey<DamageInfliction> GRAVITITE_SPEAR = createKey("gravitite_spear");
 
     private static ResourceKey<DamageInfliction> createKey(String name) {
         return ResourceKey.create(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -30,9 +39,18 @@ public class AetherIIDamageInflictions {
         context.register(SKYROOT_SHORTSWORD, new DamageInfliction(AetherIIItems.SKYROOT_SHORTSWORD.get(), 4.0, 0, 0));
         context.register(SKYROOT_HAMMER, new DamageInfliction(AetherIIItems.SKYROOT_HAMMER.get(), 0, 4.0, 0));
         context.register(SKYROOT_SPEAR, new DamageInfliction(AetherIIItems.SKYROOT_SPEAR.get(), 0, 0, 4.0));
+        context.register(HOLYSTONE_SHORTSWORD, new DamageInfliction(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), 5.0, 0, 0));
+        context.register(HOLYSTONE_HAMMER, new DamageInfliction(AetherIIItems.HOLYSTONE_HAMMER.get(), 0, 5.0, 0));
+        context.register(HOLYSTONE_SPEAR, new DamageInfliction(AetherIIItems.HOLYSTONE_SPEAR.get(), 0, 0, 5.0));
         context.register(ZANITE_SHORTSWORD, new DamageInfliction(AetherIIItems.ZANITE_SHORTSWORD.get(), 6.0, 0.0, 0));
         context.register(ZANITE_HAMMER, new DamageInfliction(AetherIIItems.ZANITE_HAMMER.get(), 0, 6.0, 0));
         context.register(ZANITE_SPEAR, new DamageInfliction(AetherIIItems.ZANITE_SPEAR.get(), 0, 0, 6.0));
+        context.register(ARKENIUM_SHORTSWORD, new DamageInfliction(AetherIIItems.ARKENIUM_SHORTSWORD.get(), 6.0, 0.0, 0));
+        context.register(ARKENIUM_HAMMER, new DamageInfliction(AetherIIItems.ARKENIUM_HAMMER.get(), 0, 6.0, 0));
+        context.register(ARKENIUM_SPEAR, new DamageInfliction(AetherIIItems.ARKENIUM_SPEAR.get(), 0, 0, 6.0));
+        context.register(GRAVITITE_SHORTSWORD, new DamageInfliction(AetherIIItems.GRAVITITE_SHORTSWORD.get(), 7.0, 0.0, 0));
+        context.register(GRAVITITE_HAMMER, new DamageInfliction(AetherIIItems.GRAVITITE_HAMMER.get(), 0, 7.0, 0));
+        context.register(GRAVITITE_SPEAR, new DamageInfliction(AetherIIItems.GRAVITITE_SPEAR.get(), 0, 0, 7.0));
     }
 
     public static boolean hasItem(RegistryAccess registryAccess, ItemStack item) {

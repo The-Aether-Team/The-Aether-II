@@ -13,7 +13,7 @@ public enum AetherIIItemTiers implements Tier { //todo
     SKYROOT(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 59, 2.0F, 0.0F, 15, () -> Ingredient.of(AetherIITags.Items.SKYROOT_REPAIRING)),
     HOLYSTONE(BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, () -> Ingredient.of(AetherIITags.Items.HOLYSTONE_REPAIRING)),
     ZANITE(BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 6.0F, 2.0F, 14, () -> Ingredient.of(AetherIITags.Items.ZANITE_REPAIRING)),
-    ARKENIUM(BlockTags.INCORRECT_FOR_IRON_TOOL, 1561, 8.0F, 3.0F, 10, () -> Ingredient.of(AetherIITags.Items.ARKENIUM_REPAIRING)),
+    ARKENIUM(BlockTags.INCORRECT_FOR_IRON_TOOL, 1561, 6.0F, 2.0F, 14, () -> Ingredient.of(AetherIITags.Items.ARKENIUM_REPAIRING)),
     GRAVITITE(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1561, 8.0F, 3.0F, 10, () -> Ingredient.of(AetherIITags.Items.GRAVITITE_REPAIRING));
 
     private final TagKey<Block> incorrectBlocksForDrops;

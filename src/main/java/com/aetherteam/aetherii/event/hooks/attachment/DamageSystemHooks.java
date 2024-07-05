@@ -197,8 +197,8 @@ public class DamageSystemHooks {
             if (source.getEntity() != null) { //todo check for aether hostile mobs only or something idk
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
-                if (entity.getUseItem().getItem() instanceof AetherIIShieldItem shield) {
-                    rate = (int) player.getAttribute(AetherIIAttributes.SHIELD_STAMINA_RESTORATION).getValue();
+                if (entity.getUseItem().getItem() instanceof AetherIIShieldItem) {
+                    rate = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_REDUCTION);
                 }
                 attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, attachment.getShieldStamina() - rate));
                 if (attachment.getShieldStamina() <= 0) {
