@@ -134,7 +134,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> IRRADIATED_GREATROOT_LEAF_PILE = register("irradiated_greatroot_leaf_pile" , () -> leafPile(MapColor.TERRACOTTA_YELLOW));
     public static final DeferredBlock<Block> IRRADIATED_GREATOAK_LEAF_PILE = register("irradiated_greatoak_leaf_pile" , () -> leafPile(MapColor.TERRACOTTA_YELLOW));
     public static final DeferredBlock<Block> IRRADIATED_GREATBOA_LEAF_PILE = register("irradiated_greatboa_leaf_pile" , () -> leafPile(MapColor.TERRACOTTA_YELLOW));
-    public static final DeferredBlock<Block> IRRADIATED_AMBEROOT_LEAF_PILE = register("irradiated_amberoot_leaf_pile" , () -> leafPile(MapColor.TERRACOTTA_YELLOW));
 
     // Leaves
     public static final DeferredBlock<Block> SKYROOT_LEAVES = register("skyroot_leaves", () -> leaves(MapColor.GRASS, AetherIIParticleTypes.SKYROOT_LEAVES, AetherIIBlocks.SKYROOT_LEAF_PILE));
@@ -156,7 +155,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> IRRADIATED_GREATROOT_LEAVES = register("irradiated_greatroot_leaves", () -> leaves(MapColor.TERRACOTTA_YELLOW, AetherIIParticleTypes.IRRADIATED_LEAVES, AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE));
     public static final DeferredBlock<Block> IRRADIATED_GREATOAK_LEAVES = register("irradiated_greatoak_leaves", () -> leaves(MapColor.TERRACOTTA_YELLOW, AetherIIParticleTypes.IRRADIATED_LEAVES, AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE));
     public static final DeferredBlock<Block> IRRADIATED_GREATBOA_LEAVES = register("irradiated_greatboa_leaves", () -> leaves(MapColor.TERRACOTTA_YELLOW, AetherIIParticleTypes.IRRADIATED_LEAVES, AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE));
-    public static final DeferredBlock<Block> IRRADIATED_AMBEROOT_LEAVES = register("irradiated_amberoot_leaves", () -> leaves(MapColor.TERRACOTTA_YELLOW, AetherIIParticleTypes.IRRADIATED_LEAVES, AetherIIBlocks.IRRADIATED_AMBEROOT_LEAF_PILE));
 
     // Saplings
     public static final DeferredBlock<SaplingBlock> SKYROOT_SAPLING = register("skyroot_sapling", () -> new SaplingBlock(AetherIITreeGrowers.SKYROOT, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING)));

@@ -262,7 +262,6 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get());
         this.itemBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get());
         this.itemBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get());
-        this.itemBlock(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAF_PILE.get());
 
         // Leaves
         this.itemBlock(AetherIIBlocks.SKYROOT_LEAVES.get());
@@ -284,7 +283,6 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
         this.itemBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
         this.itemBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
-        this.itemBlock(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get());
 
         // Saplings
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");

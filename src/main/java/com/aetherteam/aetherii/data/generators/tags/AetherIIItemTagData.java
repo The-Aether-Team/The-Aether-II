@@ -247,8 +247,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.asItem()
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem()
         );
 
         // Vanilla
@@ -398,8 +397,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.asItem()
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem()
         );
         this.tag(ItemTags.SMALL_FLOWERS).add(
                 AetherIIBlocks.HESPEROSE.asItem(),
