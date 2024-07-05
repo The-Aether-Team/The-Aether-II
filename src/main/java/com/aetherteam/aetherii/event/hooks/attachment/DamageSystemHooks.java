@@ -194,7 +194,7 @@ public class DamageSystemHooks {
 
     public static void buildUpShieldStun(LivingEntity entity, DamageSource source) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
-            if (source.getEntity() != null) { //todo check for aether hostile mobs only or something idk
+            if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) { //todo check for aether hostile mobs only or something idk
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
                 if (entity.getUseItem().getItem() instanceof AetherIIShieldItem) {

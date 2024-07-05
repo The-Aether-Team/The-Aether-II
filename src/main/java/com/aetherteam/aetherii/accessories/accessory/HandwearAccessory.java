@@ -41,8 +41,8 @@ public class HandwearAccessory implements Accessory {
 
     @Override
     public void getModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-//        if (reference.slotName().equals("aether_ii:handwear_slot")) {
-//            builder.addStackable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION, new AttributeModifier(BASE_GLOVES_STAMINA_RESTORATION_ID, this.restoration, AttributeModifier.Operation.ADD_VALUE));
-//        }
+        if (reference.slotName().equals("aether_ii:handwear_slot")) {
+            builder.addStackable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION, new AttributeModifier(BASE_GLOVES_STAMINA_RESTORATION_ID, this.restoration, AttributeModifier.Operation.ADD_VALUE));
+        }
     }
 }
