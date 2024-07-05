@@ -110,7 +110,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, "Irradiated Greatroot Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, "Irradiated Greatoak Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, "Irradiated Greatboa Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAF_PILE, "Irradiated Amberoot Leaf Pile");
 
         // Leaves
         this.addBlock(AetherIIBlocks.SKYROOT_LEAVES, "Skyroot Leaves");
@@ -132,7 +131,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, "Irradiated Greatroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, "Irradiated Greatoak Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, "Irradiated Greatboa Leaves");
-        this.addBlock(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES, "Irradiated Amberoot Leaves");
 
         // Saplings
         this.addBlock(AetherIIBlocks.SKYROOT_SAPLING, "Skyroot Sapling");
@@ -579,17 +577,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Noisestorm - Aether Tune");
         this.addItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Valkyrie Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Emile van Krieken - Ascending Dawn");
         this.addItem(AetherIIItems.MUSIC_DISC_AERWHALE, "Aerwhale Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_AERWHALE, "AetherAudio - Aerwhale");
         this.addItem(AetherIIItems.MUSIC_DISC_APPROACHES, "Moa Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_APPROACHES, "Emile van Krieken - Approaches");
         this.addItem(AetherIIItems.MUSIC_DISC_DEMISE, "Labyrinth Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_DEMISE, "Moorziey - Demise");
         this.addItem(AetherIIItems.RECORDING_892, "Recording #892");
-        this.addDiscDesc(AetherIIItems.RECORDING_892, "Emile van Krieken - ???");
 
         // Spawn Eggs
         this.addItem(AetherIIItems.AERBUNNY_SPAWN_EGG, "Aerbunny Spawn Egg");
@@ -741,6 +733,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.journal.title", "Journal");
         this.addGuiText("guidebook.rewards.title", "Rewards");
 
+        // Jukebox Songs
+        this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
+        this.addJukeboxSong("ascending_dawn", "Emile van Krieken - Ascending Dawn");
+        this.addJukeboxSong("aerwhale", "AetherAudio - Aerwhale");
+        this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
+        this.addJukeboxSong("demise", "Moorziey - Demise");
+        this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
+
 
         // Subtitles
         // Blocks
@@ -762,7 +762,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "flying_cow.milk", "Flying Cow gets milked");
         this.addSubtitle("entity", "flying_cow.step", "Footsteps");
 
-        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baahs");
+        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baths");
         this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");

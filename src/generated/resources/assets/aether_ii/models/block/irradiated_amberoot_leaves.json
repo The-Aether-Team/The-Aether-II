@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "aether_ii:block/natural/irradiated_amberoot_leaves"
-  }
-}
