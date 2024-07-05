@@ -26,6 +26,10 @@ public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider 
         this.add(item.getDescriptionId() + "." + this.id + ".ability.tooltip." + index, name);
     }
 
+    public void addAccessorySlot(String path, String name) {
+        this.add("accessories.slot." + this.id + "." + path, name);
+    }
+
     public void addAttribute(Attribute attribute, String name) {
         this.add(attribute.getDescriptionId(), name);
     }

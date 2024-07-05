@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii;
 
+import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
+import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.api.damage.DamageInfliction;
 import com.aetherteam.aetherii.api.damage.DamageResistance;
 import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
@@ -21,6 +23,10 @@ import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
+import com.aetherteam.aetherii.event.listeners.attachment.AerbunnyMountListener;
+import com.aetherteam.aetherii.event.listeners.attachment.DamageSystemListener;
+import com.aetherteam.aetherii.event.listeners.attachment.EffectsSystemListeners;
+import com.aetherteam.aetherii.event.listeners.attachment.PortalTeleportationListener;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
@@ -29,12 +35,8 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
-import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
-import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
-import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.*;
+import com.aetherteam.aetherii.network.packet.serverbound.*;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.world.AetherIIPoi;
@@ -46,6 +48,7 @@ import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
+import io.wispforest.accessories.api.slot.UniqueSlotHandling;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -125,6 +128,9 @@ public class AetherII {
             AetherIIBlocks.registerPots();
             AetherIIBlocks.registerFlammability();
         });
+
+        HandwearAccessory.init();
+        UniqueSlotHandling.EVENT.register(AetherIISlotHandling.INSTANCE);
     }
 
     public void eventSetup(IEventBus neoBus) {
@@ -151,6 +157,7 @@ public class AetherII {
         PayloadRegistrar registrar = event.registrar(MODID).versioned("1.0.0").optional();
 
         // CLIENTBOUND
+        registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
         registrar.playToClient(EffectBuildupPacket.Set.TYPE, EffectBuildupPacket.Set.STREAM_CODEC, EffectBuildupPacket.Set::execute);
         registrar.playToClient(EffectBuildupPacket.Remove.TYPE, EffectBuildupPacket.Remove.STREAM_CODEC, EffectBuildupPacket.Remove::execute);
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
@@ -159,6 +166,9 @@ public class AetherII {
 
         // SERVERBOUND
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
+        registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
+        registrar.playToServer(OpenGuidebookPacket.TYPE, OpenGuidebookPacket.STREAM_CODEC, OpenGuidebookPacket::execute);
+        registrar.playToServer(OpenInventoryPacket.TYPE, OpenInventoryPacket.STREAM_CODEC, OpenInventoryPacket::execute);
         registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
 
         // BOTH
