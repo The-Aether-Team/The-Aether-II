@@ -465,6 +465,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_TROWEL.get(),
                 AetherIIItems.GRAVITITE_TROWEL.get()
         );
+        this.tag(ItemTags.DYEABLE).add(
+                AetherIIItems.TAEGORE_HIDE_HELMET.get(),
+                AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(),
+                AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(),
+                AetherIIItems.TAEGORE_HIDE_BOOTS.get(),
+                AetherIIItems.BURRUKAI_PELT_HELMET.get(),
+                AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(),
+                AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(),
+                AetherIIItems.BURRUKAI_PELT_BOOTS.get()
+        );
 
         // Forge
         this.tag(Tags.Items.BOOKSHELVES).add(

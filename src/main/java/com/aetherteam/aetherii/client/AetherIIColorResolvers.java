@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
@@ -23,6 +25,10 @@ public class AetherIIColorResolvers {
     }
 
     public static void registerItemColor(RegisterColorHandlersEvent.Item event) {
+        event.register((color, itemProvider) -> itemProvider == 0 ? -1 : DyedItemColor.getOrDefault(color, -3150087),
+                AetherIIItems.TAEGORE_HIDE_HELMET.get(), AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), AetherIIItems.TAEGORE_HIDE_BOOTS.get());
+        event.register((color, itemProvider) -> itemProvider == 0 ? -1 : DyedItemColor.getOrDefault(color, -10380096),
+                AetherIIItems.BURRUKAI_PELT_HELMET.get(), AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), AetherIIItems.BURRUKAI_PELT_BOOTS.get());
         event.register((color, itemProvider) -> {
             BlockState blockstate = ((BlockItem) color.getItem()).getBlock().defaultBlockState();
             return event.getBlockColors().getColor(blockstate, null, null, itemProvider);
