@@ -451,6 +451,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZANITE_HELMET.get());
                 output.accept(AetherIIItems.ZANITE_CHESTPLATE.get());
                 output.accept(AetherIIItems.ZANITE_LEGGINGS.get());
+                output.accept(AetherIIItems.ZANITE_BOOTS.get());
                 output.accept(AetherIIItems.ZANITE_GLOVES.get());
                 output.accept(AetherIIItems.ARKENIUM_HELMET.get());
                 output.accept(AetherIIItems.ARKENIUM_CHESTPLATE.get());
