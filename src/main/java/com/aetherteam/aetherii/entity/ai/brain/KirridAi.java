@@ -1,9 +1,6 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
-import com.aetherteam.aetherii.entity.ai.brain.behavior.AfterLongJumpFalling;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.FallRandomStroll;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridEatGrass;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.KirridRamTarget;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.*;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
 import com.google.common.collect.ImmutableList;
@@ -46,7 +43,7 @@ public class KirridAi {
                 0,
                 ImmutableList.of(
                         new Swim(0.8F),
-//                        new KirridPanic(2.0F), //todo 1.21
+                        new KirridPanic(2.0F),
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
                         new AfterLongJumpFalling(),

@@ -16,12 +16,12 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
 public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = AetherIIPlacementUtils.createKey("coast_quicksoil");
     public static final ResourceKey<PlacedFeature> COAST_FERROSITE_SAND = AetherIIPlacementUtils.createKey("coast_ferrosite_sand");
+    public static final ResourceKey<PlacedFeature> COAST_ARCTIC_PACKED_ICE = AetherIIPlacementUtils.createKey("coast_arctic_packed_ice");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = AetherIIPlacementUtils.createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = AetherIIPlacementUtils.createKey("noise_lake_arctic");
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = AetherIIPlacementUtils.createKey("ferrosite_pillar");
@@ -45,14 +45,20 @@ public class AetherIIMiscPlacements {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         AetherIIPlacementUtils.register(context, COAST_QUICKSOIL, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COAST_QUICKSOIL),
-                CountPlacement.of(127),
+                CountPlacement.of(64),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 BiomeFilter.biome()
         );
         AetherIIPlacementUtils.register(context, COAST_FERROSITE_SAND, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COAST_FERROSITE_SAND),
-                CountPlacement.of(127),
+                CountPlacement.of(64),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                BiomeFilter.biome()
+        );
+        AetherIIPlacementUtils.register(context, COAST_ARCTIC_PACKED_ICE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COAST_ARCTIC_PACKED_ICE),
+                CountPlacement.of(8),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(144)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 BiomeFilter.biome()
         );
@@ -75,10 +81,8 @@ public class AetherIIMiscPlacements {
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, AETHER_WATER_LAKE_UNDERGROUND, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_LAKE),
                 RarityFilter.onAverageOnceEvery(15),
-                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.absolute(0), VerticalAnchor.top())),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.not(BlockPredicate.ONLY_IN_AIR_PREDICATE), BlockPredicate.insideWorld(new BlockPos(0, -5, 0))), 16),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5),
-                InSquarePlacement.spread(),
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, AETHER_WATER_SPRING, configuredFeatures.getOrThrow(AetherIIMiscFeatures.AETHER_WATER_SPRING),
                 CountPlacement.of(15),

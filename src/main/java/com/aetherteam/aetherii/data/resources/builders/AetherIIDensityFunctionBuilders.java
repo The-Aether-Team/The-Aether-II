@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.resources.builders;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -40,6 +41,10 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor");
     public static final ResourceKey<DensityFunction> LAKES_FLOOR = createKey("highlands/lakes/lake_floor");
     public static final ResourceKey<DensityFunction> LAKES_BARRIER = createKey("highlands/lakes/lake_barrier");
+    public static final ResourceKey<DensityFunction> COASTS_HIGHFIELDS = createKey("highlands/coasts/highfields");
+    public static final ResourceKey<DensityFunction> COASTS_MAGNETIC = createKey("highlands/coasts/magnetic");
+    public static final ResourceKey<DensityFunction> COASTS_MAGNETIC_PATTERN = createKey("highlands/coasts/magnetic_pattern");
+    public static final ResourceKey<DensityFunction> COASTS_ARCTIC = createKey("highlands/coasts/arctic");
 
     public static final ResourceKey<DensityFunction> FINAL_DENSITY = createKey("highlands/final_density");
 
@@ -69,7 +74,7 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction makeVegetationRarityMapper(HolderGetter<DensityFunction> function) {
         DensityFunction vegetation = getFunction(function, VEGETATION);
         DensityFunction density = vegetation;
-        density = DensityFunctions.rangeChoice(getFunction(function, VEGETATION_RARE), 0, 0.375, density, DensityFunctions.constant(2.0));
+        density = DensityFunctions.rangeChoice(getFunction(function, VEGETATION_RARE), -1.5, 0.65, density, DensityFunctions.constant(2.0));
         density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.3, density, vegetation);
         density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, vegetation);
         return density;
@@ -116,6 +121,10 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(96, 0.0F)
                 .addPoint(112, 0.175F)
                 .build();
+    }
+
+    public static DensityFunction buildCoastNoise(double value) {
+        return DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 8.0, 2.0, 0.0, 0.0), 1.5D, 0.0D, 16).abs(), DensityFunctions.constant(value));
     }
 
     public static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> function) {

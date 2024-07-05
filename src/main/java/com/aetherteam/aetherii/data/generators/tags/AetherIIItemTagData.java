@@ -238,7 +238,17 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.GREATOAK_LEAVES.asItem(),
                 AetherIIBlocks.GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.AMBEROOT_LEAVES.asItem()
+                AetherIIBlocks.AMBEROOT_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.asItem()
         );
 
         // Vanilla
@@ -380,7 +390,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.GREATOAK_LEAVES.asItem(),
                 AetherIIBlocks.GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.AMBEROOT_LEAVES.asItem()
+                AetherIIBlocks.AMBEROOT_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
+                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.asItem()
         );
         this.tag(ItemTags.SMALL_FLOWERS).add(
                 AetherIIBlocks.HESPEROSE.asItem(),

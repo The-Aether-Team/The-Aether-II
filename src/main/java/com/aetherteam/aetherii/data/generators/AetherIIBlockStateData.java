@@ -95,6 +95,16 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.leafPile(AetherIIBlocks.GREATOAK_LEAF_PILE.get(), AetherIIBlocks.GREATOAK_LEAVES.get());
         this.leafPile(AetherIIBlocks.GREATBOA_LEAF_PILE.get(), AetherIIBlocks.GREATBOA_LEAVES.get());
         this.leafPile(AetherIIBlocks.AMBEROOT_LEAF_PILE.get(), AetherIIBlocks.AMBEROOT_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
+        this.leafPile(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAF_PILE.get(), AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get());
 
         // Leaves
         this.leaves(AetherIIBlocks.SKYROOT_LEAVES.get());
@@ -107,6 +117,16 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.leaves(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.leaves(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.leaves(AetherIIBlocks.AMBEROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
+        this.leaves(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get());
 
         // Saplings
         this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
@@ -425,5 +445,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         // Bookshelves
         this.bookshelf(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
         this.bookshelf(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
+
+        // Furniture
+        this.multiBlock(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
     }
 }

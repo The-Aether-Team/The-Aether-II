@@ -72,6 +72,10 @@
   ],
   "has_precipitation": true,
   "spawn_costs": {
+    "aether_ii:tempest": {
+      "charge": 0.6,
+      "energy_budget": 0.16
+    },
     "aether_ii:zephyr": {
       "charge": 0.6,
       "energy_budget": 0.16
@@ -86,6 +90,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 3
+      },
+      {
+        "type": "aether_ii:tempest",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 3
       }
     ],
     "aether_ii:aether_surface_monster": [],
@@ -97,6 +107,12 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 10
+      },
+      {
+        "type": "aether_ii:highfields_burrukai",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 8
       },
       {
         "type": "aether_ii:aerbunny",
