@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.client.event.listeners.AerbunnyMountClientListners;
-import com.aetherteam.aetherii.client.event.listeners.DimensionRenderEffectListeners;
+import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
+import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
+import com.aetherteam.aetherii.client.event.listeners.attachment.AerbunnyMountClientListners;
+import com.aetherteam.aetherii.client.event.listeners.attachment.DimensionRenderEffectListeners;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
@@ -29,6 +31,8 @@ public class AetherIIClient {
             AetherIIAtlases.registerSkyrootChestAtlases();
             registerItemModelProperties();
         });
+
+        HandwearAccessory.clientInit();
     }
 
     public static void eventSetup(IEventBus neoBus) {
@@ -36,6 +40,7 @@ public class AetherIIClient {
 
         AerbunnyMountClientListners.listen(bus);
         DimensionRenderEffectListeners.listen(bus);
+        GuiExtensionListener.listen(bus);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
