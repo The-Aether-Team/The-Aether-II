@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
+import com.aetherteam.aetherii.block.natural.Snowable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
@@ -47,8 +48,8 @@ public class ServerLevelMixin {
                             Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
                             serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
                         }
-                    } else if (AetherGrassBlock.plantNotSnowed(blockState)) {
-                        serverLevel.setBlockAndUpdate(heightmapPos, blockState.setValue(BlockStateProperties.SNOWY, true));
+                    } else if (AetherGrassBlock.plantNotSnowed(blockState) && blockState.getBlock() instanceof Snowable snowable) {
+                        serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState));
                     } else {
                         serverLevel.setBlockAndUpdate(heightmapPos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState());
                     }

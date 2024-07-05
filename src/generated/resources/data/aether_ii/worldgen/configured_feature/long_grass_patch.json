@@ -10,7 +10,7 @@
             "state": {
               "Name": "aether_ii:aether_long_grass",
               "Properties": {
-                "snowy": "false"
+                "grass_type": "default"
               }
             }
           }
