@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -25,8 +24,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.EnumSet;
+
 public class Tempest extends Zephyr {
+    private static final int FLAG_SLEEPING = 32;
     public static final EntityDataAccessor<Integer> DATA_ATTACK_CHARGE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.BYTE);
 
     public Tempest(EntityType<? extends Tempest> type, Level level) {
         super(type, level);
@@ -36,9 +39,11 @@ public class Tempest extends Zephyr {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(3, new Tempest.SleepGoal(this));
+        this.goalSelector.addGoal(5, new Tempest.ThunderballAttackGoal(this));
         this.goalSelector.addGoal(5, new Zephyr.RandomFloatAroundGoal(this));
         this.goalSelector.addGoal(7, new Zephyr.ZephyrLookGoal(this));
-        this.goalSelector.addGoal(5, new Tempest.ThunderballAttackGoal(this));
+
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
     }
 
@@ -53,19 +58,25 @@ public class Tempest extends Zephyr {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_ATTACK_CHARGE_ID, 0);
+        builder.define(DATA_FLAGS_ID, (byte) 0);
     }
 
+
     public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos.below()).is(AetherIIBlocks.STORM_AERCLOUD.get()) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(11) == 0) && level.canSeeSky(pos) && isNight(level);
+        return level.getDifficulty() != Difficulty.PEACEFUL && isStormAercloud(level, pos) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(11) == 0) && level.canSeeSky(pos);
     }
 
     private static boolean isNight(LevelAccessor level){
         return !(level.getSkyDarken() < 4) && !level.dimensionType().hasFixedTime();
     }
 
+    private static boolean isStormAercloud(LevelAccessor level, BlockPos pos){
+        return level.getBlockState(pos).is(AetherIIBlocks.STORM_AERCLOUD.get());
+    }
+
     @Override
     public void tick() {
-        if (!this.level().isClientSide() && !isNight(this.level())) {
+        if (!this.level().isClientSide() && !isNight(this.level()) && !isStormAercloud(this.level(), this.getOnPos())) {
             this.hurt(this.level().damageSources().generic(), 1);
             for (int i = 0; i < 7; ++i) {
                 if (this.level() instanceof ServerLevel serverLevel) {
@@ -94,6 +105,26 @@ public class Tempest extends Zephyr {
         return AetherIISoundEvents.ENTITY_ZEPHYR_DEATH.get();
     }
 
+    @Override
+    public boolean isSleeping() {
+        return this.getFlag(FLAG_SLEEPING);
+    }
+
+    void setSleeping(boolean sleeping) {
+        this.setFlag(32, sleeping);
+    }
+
+    private void setFlag(int flagId, boolean value) {
+        if (value) {
+            this.entityData.set(DATA_FLAGS_ID, (byte)(this.entityData.get(DATA_FLAGS_ID) | flagId));
+        } else {
+            this.entityData.set(DATA_FLAGS_ID, (byte)(this.entityData.get(DATA_FLAGS_ID) & ~flagId));
+        }
+    }
+
+    private boolean getFlag(int flagId) {
+        return (this.entityData.get(DATA_FLAGS_ID) & flagId) != 0;
+    }
 
     static class ThunderballAttackGoal extends Goal {
         private final Tempest parentEntity;
@@ -153,6 +184,41 @@ public class Tempest extends Zephyr {
             } else if (this.parentEntity.getChargeTime() > 0) {
                 this.parentEntity.setChargeTime(this.parentEntity.getChargeTime() - 1);
             }
+        }
+    }
+
+    class SleepGoal extends Goal {
+        private Tempest tempest;
+
+        public SleepGoal(Tempest tempest) {
+            this.tempest = tempest;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
+        }
+
+        @Override
+        public boolean canUse() {
+            return tempest.xxa == 0.0F && tempest.yya == 0.0F && tempest.zza == 0.0F ? this.canSleep() || tempest.isSleeping() : false;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.canSleep();
+        }
+
+        private boolean canSleep() {
+            return tempest.level().isDay() && Tempest.isStormAercloud(tempest.level(), tempest.getBlockPosBelowThatAffectsMyMovement());
+        }
+
+        @Override
+        public void stop() {
+            tempest.setSleeping(false);
+        }
+
+        @Override
+        public void start() {
+            tempest.setSleeping(true);
+            tempest.getNavigation().stop();
+            tempest.getMoveControl().setWantedPosition(tempest.getX(), tempest.getY(), tempest.getZ(), 0.0);
         }
     }
 }

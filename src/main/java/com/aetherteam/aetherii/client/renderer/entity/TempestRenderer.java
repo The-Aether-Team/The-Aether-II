@@ -21,9 +21,9 @@ public class TempestRenderer extends MobRenderer<Tempest, TempestModel> {
 
     public TempestRenderer(EntityRendererProvider.Context context) {
         super(context, new TempestModel(context.bakeLayer(AetherIIModelLayers.TEMPEST)), 0.5F);
-        this.addLayer(new TempestMarkingsLayer(this));
-        this.addLayer(new TempestTransparencyLayer(this, new TempestModel(context.getModelSet().bakeLayer(AetherIIModelLayers.TEMPEST_TRANSPARENCY))));
-        this.addLayer(new TempestTransparencyGlowLayer(this));
+        //this.addLayer(new TempestMarkingsLayer(this));
+        //this.addLayer(new TempestTransparencyLayer(this, new TempestModel(context.getModelSet().bakeLayer(AetherIIModelLayers.TEMPEST_TRANSPARENCY))));
+        //this.addLayer(new TempestTransparencyGlowLayer(this));
     }
 
     @Override
