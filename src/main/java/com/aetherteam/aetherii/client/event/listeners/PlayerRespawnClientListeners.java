@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.client.event.listeners;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.DeathScreenAccessor;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
+import com.aetherteam.aetherii.network.packet.serverbound.OutpostRespawnPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -21,8 +20,8 @@ public class PlayerRespawnClientListeners {
     public static void postScreenInitialization(ScreenEvent.Init.Post event) {
         if (event.getScreen() instanceof DeathScreen deathScreen) {
             if (!Minecraft.getInstance().player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).getCampfirePositions().isEmpty()) {
-                Button testButton = Button.builder(Component.literal("test"), (button) -> {
-                    Minecraft.getInstance().player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "shouldRespawnAtOutpost", true);
+                Button testButton = Button.builder(Component.translatable("gui.aether_ii.deathScreen.outpost_respawn"), (button) -> {
+                    PacketDistributor.sendToServer(new OutpostRespawnPacket());
                     Minecraft.getInstance().player.respawn();
                     button.active = false;
                 }).bounds(deathScreen.width / 2 - 100, deathScreen.height / 4 + 96, 200, 20).build();

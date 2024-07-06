@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.blockentity.OutpostCampfireBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -60,13 +61,25 @@ public class OutpostCampfireBlock extends MultiBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new OutpostCampfireBlockEntity(pos, state, this.isOrigin(state));
+        return new OutpostCampfireBlockEntity(pos, state);
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).addCampfirePosition(player.blockPosition()); //todo better position handling and also position removal
+        BlockPos origin = this.locateOriginFrom(state, pos);
+        if (level.getBlockEntity(origin) instanceof OutpostCampfireBlockEntity) { //todo message for adding this campfire to respawn points.
+            var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
+            if (!data.getCampfirePositions().contains(origin)) {
+                data.addCampfirePosition(origin);
+                //todo lit behavior with particles
+            }
+        }
         return super.useWithoutItem(state, level, pos, player, hitResult);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        super.animateTick(state, level, pos, random); //todo
     }
 
     @Override

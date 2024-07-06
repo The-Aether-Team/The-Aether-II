@@ -66,7 +66,7 @@ public class OutpostCampfireRenderer implements BlockEntityRenderer<OutpostCampf
     }
 
     @Override
-    public void render(OutpostCampfireBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(OutpostCampfireBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) { //todo this starts having z-fighting when light level dims.
         BlockState blockState = blockEntity.getBlockState();
         OutpostCampfireBlock block = (OutpostCampfireBlock) blockState.getBlock();
         poseStack.translate(0, 1.5, 0);

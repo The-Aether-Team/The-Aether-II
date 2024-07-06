@@ -1,33 +1,28 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.network.packet.OutpostTrackerSyncPacket;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import org.apache.commons.lang3.tuple.Triple;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
-public class OutpostTrackerAttachment implements INBTSynchable {
-    private final List<BlockPos> campfirePositions;
+public class OutpostTrackerAttachment {
+    private List<BlockPos> campfirePositions; //todo i should make a custom campfireposition record that also stores dimension. for futureproofing.
     private boolean shouldRespawnAtOutpost;
+    private boolean shouldSyncAfterJoin;
 
     public static final Codec<OutpostTrackerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BlockPos.CODEC.listOf().fieldOf("campfire_positions").forGetter(OutpostTrackerAttachment::getCampfirePositions),
             Codec.BOOL.fieldOf("should_respawn_at_outpost").forGetter(OutpostTrackerAttachment::shouldRespawnAtOutpost)
     ).apply(instance, OutpostTrackerAttachment::new));
-
-    private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
-            Map.entry("shouldRespawnAtOutpost", Triple.of(Type.BOOLEAN, (object) -> this.setShouldRespawnAtOutpost((boolean) object), this::shouldRespawnAtOutpost))
-    );
 
     public OutpostTrackerAttachment() {
         this.campfirePositions = new ArrayList<>();
@@ -38,19 +33,46 @@ public class OutpostTrackerAttachment implements INBTSynchable {
         this.shouldRespawnAtOutpost = shouldRespawnAtOutpost;
     }
 
-    public Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> getSynchableFunctions() {
-        return this.synchableFunctions;
+    public void onJoinLevel() {
+        this.shouldSyncAfterJoin = true;
+    }
+
+    public void handleRespawn() {
+        this.shouldSyncAfterJoin = true;
+    }
+
+    public void onUpdate(Player player) {
+        this.syncAfterJoin(player);
+    }
+
+    private void syncAfterJoin(Player player) {
+        if (this.shouldSyncAfterJoin) {
+            if (player instanceof ServerPlayer serverPlayer) {
+                PacketDistributor.sendToPlayer(serverPlayer, new OutpostTrackerSyncPacket(this.getCampfirePositions(), this.shouldRespawnAtOutpost()));
+            }
+            this.shouldSyncAfterJoin = false;
+        }
     }
 
     @Nullable
-    public BlockPos findClosestPositionTo(BlockPos pos) {
+    public BlockPos findClosestPositionTo(Level level, BlockPos pos) {
         BlockPos respawnPos = null;
+        List<BlockPos> toRemove = new ArrayList<>();
         for (BlockPos campfirePos : this.campfirePositions) {
-            if (respawnPos == null || pos.distSqr(campfirePos) < pos.distSqr(respawnPos)) {
-                respawnPos = campfirePos;
+            if (level.getBlockState(campfirePos).is(AetherIIBlocks.OUTPOST_CAMPFIRE)) {
+                if (respawnPos == null || pos.distSqr(campfirePos) < pos.distSqr(respawnPos)) {
+                    respawnPos = campfirePos;
+                }
+            } else {
+                toRemove.add(campfirePos);
             }
         }
+        this.campfirePositions.removeAll(toRemove);
         return respawnPos;
+    }
+
+    public void setCampfirePositions(List<BlockPos> campfirePositions) {
+        this.campfirePositions = new ArrayList<>(campfirePositions);
     }
 
     public void addCampfirePosition(BlockPos pos) {
@@ -67,10 +89,5 @@ public class OutpostTrackerAttachment implements INBTSynchable {
 
     public boolean shouldRespawnAtOutpost() {
         return this.shouldRespawnAtOutpost;
-    }
-
-    @Override
-    public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
-        return new OutpostTrackerSyncPacket(entityID, key, type, value);
     }
 }
