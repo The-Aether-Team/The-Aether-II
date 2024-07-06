@@ -162,6 +162,19 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 )
         );
 
+        this.add(AetherIIEntityTypes.AECHOR_PLANT.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.AECHOR_PETAL.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AECHOR_CUTTING.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                )
+        );
+
         this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.COLD_AERCLOUD.get())

@@ -30,6 +30,8 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation MOA = register("moa");
     public static final ModelLayerLocation MOA_BABY = register("moa_baby");
 
+    public static final ModelLayerLocation AECHOR_PLANT = register("aechor_plant");
+
     public static final ModelLayerLocation ZEPHYR = register("zephyr");
     public static final ModelLayerLocation ZEPHYR_TRANSPARENCY = register("zephyr", "transparency");
     public static final ModelLayerLocation TEMPEST = register("tempest");

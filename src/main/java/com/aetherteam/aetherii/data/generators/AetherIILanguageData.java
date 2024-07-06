@@ -164,6 +164,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Flowers
         this.addBlock(AetherIIBlocks.HESPEROSE, "Hesperose");
         this.addBlock(AetherIIBlocks.TARABLOOM, "Tarabloom");
+        this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
 
         // Bushes
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
@@ -595,6 +596,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Magnetic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Arctic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
+        this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
 
@@ -678,6 +680,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
 
         // Hostile
+        this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
 

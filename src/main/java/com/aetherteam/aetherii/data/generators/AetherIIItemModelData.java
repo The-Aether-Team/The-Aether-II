@@ -164,6 +164,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MOA_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.TEMPEST_SPAWN_EGG.get());
 
@@ -304,6 +305,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Flowers
         this.itemBlockFlat(AetherIIBlocks.HESPEROSE.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.TARABLOOM.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Bushes
         this.itemBlock(AetherIIBlocks.HIGHLANDS_BUSH.get());
