@@ -17,6 +17,7 @@
   },
   "features": [
     [
+      "aether_ii:coast_arctic_packed_ice",
       "aether_ii:noise_lake_arctic",
       "aether_ii:cloudbed"
     ],
@@ -59,6 +60,10 @@
   ],
   "has_precipitation": true,
   "spawn_costs": {
+    "aether_ii:aechor_plant": {
+      "charge": 0.4,
+      "energy_budget": 0.11
+    },
     "aether_ii:tempest": {
       "charge": 0.6,
       "energy_budget": 0.16
@@ -85,7 +90,14 @@
         "weight": 3
       }
     ],
-    "aether_ii:aether_surface_monster": [],
+    "aether_ii:aether_surface_monster": [
+      {
+        "type": "aether_ii:aechor_plant",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 7
+      }
+    ],
     "ambient": [],
     "axolotls": [],
     "creature": [

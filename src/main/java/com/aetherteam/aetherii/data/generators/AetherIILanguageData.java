@@ -110,7 +110,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE, "Irradiated Greatroot Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE, "Irradiated Greatoak Leaf Pile");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE, "Irradiated Greatboa Leaf Pile");
-        this.addBlock(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAF_PILE, "Irradiated Amberoot Leaf Pile");
 
         // Leaves
         this.addBlock(AetherIIBlocks.SKYROOT_LEAVES, "Skyroot Leaves");
@@ -132,7 +131,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES, "Irradiated Greatroot Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES, "Irradiated Greatoak Leaves");
         this.addBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES, "Irradiated Greatboa Leaves");
-        this.addBlock(AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES, "Irradiated Amberoot Leaves");
 
         // Saplings
         this.addBlock(AetherIIBlocks.SKYROOT_SAPLING, "Skyroot Sapling");
@@ -166,6 +164,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Flowers
         this.addBlock(AetherIIBlocks.HESPEROSE, "Hesperose");
         this.addBlock(AetherIIBlocks.TARABLOOM, "Tarabloom");
+        this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
 
         // Bushes
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
@@ -441,7 +440,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
 
         //Egg
-        this.addBlock(AetherIIBlocks.BLUE_MOA_EGG, "Blue Moa Egg");
+        this.addBlock(AetherIIBlocks.MOA_EGG, "Moa Egg");
 
 
         // Items
@@ -511,26 +510,31 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, "Taegore Hide Chestplate");
         this.addItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS, "Taegore Hide Leggings");
         this.addItem(AetherIIItems.TAEGORE_HIDE_BOOTS, "Taegore Hide Boots");
+        this.addItem(AetherIIItems.TAEGORE_HIDE_GLOVES, "Taegore Hide Gloves");
 
         this.addItem(AetherIIItems.BURRUKAI_PELT_HELMET, "Burrukai Pelt Helmet");
         this.addItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, "Burrukai Pelt Chestplate");
         this.addItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS, "Burrukai Pelt Leggings");
         this.addItem(AetherIIItems.BURRUKAI_PELT_BOOTS, "Burrukai Pelt Boots");
+        this.addItem(AetherIIItems.BURRUKAI_PELT_GLOVES, "Burrukai Pelt Gloves");
 
         this.addItem(AetherIIItems.ZANITE_HELMET, "Zanite Helmet");
         this.addItem(AetherIIItems.ZANITE_CHESTPLATE, "Zanite Chestplate");
         this.addItem(AetherIIItems.ZANITE_LEGGINGS, "Zanite Leggings");
         this.addItem(AetherIIItems.ZANITE_BOOTS, "Zanite Boots");
+        this.addItem(AetherIIItems.ZANITE_GLOVES, "Zanite Gloves");
 
         this.addItem(AetherIIItems.ARKENIUM_HELMET, "Arkenium Helmet");
         this.addItem(AetherIIItems.ARKENIUM_CHESTPLATE, "Arkenium Chestplate");
         this.addItem(AetherIIItems.ARKENIUM_LEGGINGS, "Arkenium Leggings");
         this.addItem(AetherIIItems.ARKENIUM_BOOTS, "Arkenium Boots");
+        this.addItem(AetherIIItems.ARKENIUM_GLOVES, "Arkenium Gloves");
 
         this.addItem(AetherIIItems.GRAVITITE_HELMET, "Gravitite Helmet");
         this.addItem(AetherIIItems.GRAVITITE_CHESTPLATE, "Gravitite Chestplate");
         this.addItem(AetherIIItems.GRAVITITE_LEGGINGS, "Gravitite Leggings");
         this.addItem(AetherIIItems.GRAVITITE_BOOTS, "Gravitite Boots");
+        this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gloves");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
@@ -574,17 +578,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Noisestorm - Aether Tune");
         this.addItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Valkyrie Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Emile van Krieken - Ascending Dawn");
         this.addItem(AetherIIItems.MUSIC_DISC_AERWHALE, "Aerwhale Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_AERWHALE, "AetherAudio - Aerwhale");
         this.addItem(AetherIIItems.MUSIC_DISC_APPROACHES, "Moa Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_APPROACHES, "Emile van Krieken - Approaches");
         this.addItem(AetherIIItems.MUSIC_DISC_DEMISE, "Labyrinth Music Disc");
-        this.addDiscDesc(AetherIIItems.MUSIC_DISC_DEMISE, "Moorziey - Demise");
         this.addItem(AetherIIItems.RECORDING_892, "Recording #892");
-        this.addDiscDesc(AetherIIItems.RECORDING_892, "Emile van Krieken - ???");
 
         // Spawn Eggs
         this.addItem(AetherIIItems.AERBUNNY_SPAWN_EGG, "Aerbunny Spawn Egg");
@@ -598,6 +596,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Magnetic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Arctic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
+        this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
 
@@ -660,6 +659,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDamageTypeTooltip("pierce", "§cPierce§r Damage");
 
 
+        // Accessory Slots
+        this.addAccessorySlot("relic_slot", "Relic");
+        this.addAccessorySlot("handwear_slot", "Handwear");
+        this.addAccessorySlot("accessory_slot", "Accessory");
+
+
         // Entities
         // Passive
         this.addEntityType(AetherIIEntityTypes.AERBUNNY, "Aerbunny");
@@ -675,6 +680,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
 
         // Hostile
+        this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
 
@@ -719,6 +725,26 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // GUIs
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
+        this.addGuiText("guidebook.button.open", "Guidebook");
+        this.addGuiText("guidebook.button.close", "Inventory");
+        this.addGuiText("guidebook.equipment.title", "Equipment");
+        this.addGuiText("guidebook.status.title", "Status");
+        this.addGuiText("guidebook.status.mount.title", "Mount");
+        this.addGuiText("guidebook.discovery.title", "Discovery");
+        this.addGuiText("guidebook.discovery.bestiary.title", "Bestiary");
+        this.addGuiText("guidebook.discovery.effects.title", "Effects");
+        this.addGuiText("guidebook.discovery.landmarks.title", "Landmarks");
+        this.addGuiText("guidebook.journal.title", "Journal");
+        this.addGuiText("guidebook.rewards.title", "Rewards");
+
+
+        // Jukebox Songs
+        this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
+        this.addJukeboxSong("ascending_dawn", "Emile van Krieken - Ascending Dawn");
+        this.addJukeboxSong("aerwhale", "AetherAudio - Aerwhale");
+        this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
+        this.addJukeboxSong("demise", "Moorziey - Demise");
+        this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
 
 
         // Generic
@@ -746,7 +772,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "flying_cow.milk", "Flying Cow gets milked");
         this.addSubtitle("entity", "flying_cow.step", "Footsteps");
 
-        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baahs");
+        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baths");
         this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");

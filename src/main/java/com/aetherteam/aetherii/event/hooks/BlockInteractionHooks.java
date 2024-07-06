@@ -19,11 +19,11 @@ public class BlockInteractionHooks {
         if (itemStack.getItem() instanceof BlockItem blockItem) {
             boolean success = false;
             Block blockInHand = blockItem.getBlock();
-            if (stateInLevel.is(AetherIIBlocks.ARCTIC_SNOW) && blockInHand instanceof Snowable) {
-                level.setBlock(pos, blockInHand.defaultBlockState().setValue(BlockStateProperties.SNOWY, true), 1 | 2);
+            if (stateInLevel.is(AetherIIBlocks.ARCTIC_SNOW) && blockInHand instanceof Snowable snowable) {
+                level.setBlock(pos, snowable.setSnowy(blockInHand.defaultBlockState()), 1 | 2);
                 success = true;
-            } else if (blockInHand == AetherIIBlocks.ARCTIC_SNOW.get() && AetherGrassBlock.plantNotSnowed(stateInLevel)) {
-                level.setBlock(pos, stateInLevel.setValue(BlockStateProperties.SNOWY, true), 1 | 2);
+            } else if (blockInHand == AetherIIBlocks.ARCTIC_SNOW.get() && AetherGrassBlock.plantNotSnowed(stateInLevel) && stateInLevel instanceof Snowable snowable) {
+                level.setBlock(pos, snowable.setSnowy(stateInLevel), 1 | 2);
                 success = true;
             }
             if (success) {

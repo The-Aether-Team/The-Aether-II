@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.attachment.player;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
-import com.aetherteam.aetherii.event.hooks.AerbunnyMountHooks;
+import com.aetherteam.aetherii.event.hooks.attachment.AerbunnyMountHooks;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;

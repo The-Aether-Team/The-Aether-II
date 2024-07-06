@@ -64,6 +64,15 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_SPEAR.get(),
                 AetherIIItems.GRAVITITE_SPEAR.get()
         );
+        this.tag(AetherIITags.Items.EQUIPMENT_RELICS);
+        this.tag(AetherIITags.Items.EQUIPMENT_HANDWEAR).add(
+                AetherIIItems.TAEGORE_HIDE_GLOVES.get(),
+                AetherIIItems.BURRUKAI_PELT_GLOVES.get(),
+                AetherIIItems.ZANITE_GLOVES.get(),
+                AetherIIItems.ARKENIUM_GLOVES.get(),
+                AetherIIItems.GRAVITITE_GLOVES.get());
+        this.tag(AetherIITags.Items.EQUIPMENT_ACCESSORIES);
+        this.tag(AetherIITags.Items.EQUIPABLE).addTags(AetherIITags.Items.EQUIPMENT_RELICS, AetherIITags.Items.EQUIPMENT_HANDWEAR, AetherIITags.Items.EQUIPMENT_ACCESSORIES);
         this.tag(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.SKYROOT_HAMMER.get(),
@@ -238,8 +247,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.asItem()
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem()
         );
 
         // Vanilla
@@ -389,8 +397,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.asItem()
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem()
         );
         this.tag(ItemTags.SMALL_FLOWERS).add(
                 AetherIIBlocks.HESPEROSE.asItem(),

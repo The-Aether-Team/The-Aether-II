@@ -55,6 +55,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
+        this.tag(AetherIITags.Blocks.SHAPES_COASTS)
+                .add(Blocks.WATER)
+                .addTags(
+                AetherIITags.Blocks.AETHER_DIRT,
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
+        );
         this.tag(AetherIITags.Blocks.FERROSITE).add(
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get()
@@ -160,6 +166,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
         );
+        this.tag(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.COCKATRICE_SPAWNABLE_BLACKLIST);
         this.tag(AetherIITags.Blocks.MOA_HATCH_BLOCK).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
@@ -339,15 +346,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get()
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
         );
         this.tag(BlockTags.TRAPDOORS).add(
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
         );
         this.tag(BlockTags.SMALL_FLOWERS).add(
                 AetherIIBlocks.HESPEROSE.get(),
-                AetherIIBlocks.TARABLOOM.get()
+                AetherIIBlocks.TARABLOOM.get(),
+                AetherIIBlocks.AECHOR_CUTTING.get()
         );
         this.tag(BlockTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.get());
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
@@ -367,7 +374,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.POTTED_ORANGE_TREE.get(),
                 AetherIIBlocks.POTTED_HESPEROSE.get(),
-                AetherIIBlocks.POTTED_TARABLOOM.get()
+                AetherIIBlocks.POTTED_TARABLOOM.get(),
+                AetherIIBlocks.POTTED_AECHOR_CUTTING.get()
         );
         this.tag(BlockTags.ENDERMAN_HOLDABLE).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.QUICKSOIL.get(),
@@ -689,7 +697,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.get(),
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.HIGHLANDS_BUSH.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH.get()
@@ -739,7 +746,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).addTags(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
-                AetherIIBlocks.ARCTIC_ICE.get()
+                AetherIIBlocks.ARCTIC_ICE.get(),
+                AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
 
         // Forge

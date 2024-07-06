@@ -14,6 +14,7 @@
     "common.accessor.BlockAccessor",
     "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
+    "common.accessor.CraftingMenuAccessor",
     "common.accessor.EntityAccessor",
     "common.accessor.FireBlockAccessor",
     "common.accessor.LootContextParamSetsAccessor",
@@ -28,6 +29,7 @@
     "client.accessor.DeathScreenAccessor",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.ParticleAccessor",
+    "client.accessor.PlayerModelAccessor",
     "client.accessor.RenderChunkRegionAccessor"
   ],
   "injectors": {

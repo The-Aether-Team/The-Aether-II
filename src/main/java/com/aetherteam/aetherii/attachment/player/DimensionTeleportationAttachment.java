@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.attachment.player;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.event.hooks.DimensionTeleportationHooks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

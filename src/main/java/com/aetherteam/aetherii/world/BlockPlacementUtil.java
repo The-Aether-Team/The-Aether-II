@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.world;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,29 +45,6 @@ public final class BlockPlacementUtil {
         if (replaceBlocks) {
             return level.setBlock(pos, provider.getState(random, pos), 2);
         } else if (level.getBlockState(pos).isAir()) {
-            return level.setBlock(pos, provider.getState(random, pos), 2);
-        } else {
-            return false;
-        }
-    }
-
-    public static void placeNest(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random) {
-        float radiusSq = radius * radius;
-        placeNestBlock(level, blockProvider, center, random);
-        for (int z = 0; z < radius; z++) {
-            for (int x = 0; x < radius; x++) {
-                if (x * x + z * z > radiusSq) continue;
-                placeNestBlock(level, blockProvider, center.offset(x, 0, z), random);
-                placeNestBlock(level, blockProvider, center.offset(-x, 0, -z), random);
-                placeNestBlock(level, blockProvider, center.offset(-z, 0, x), random);
-                placeNestBlock(level, blockProvider, center.offset(z, 0, -x), random);
-            }
-        }
-    }
-
-    @SuppressWarnings("UnusedReturnValue")
-    public static boolean placeNestBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random) {
-        if (!level.getBlockState(pos).is(BlockTags.LOGS)) {
             return level.setBlock(pos, provider.getState(random, pos), 2);
         } else {
             return false;
