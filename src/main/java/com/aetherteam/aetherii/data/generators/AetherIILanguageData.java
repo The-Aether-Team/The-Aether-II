@@ -671,6 +671,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAccessorySlot("accessory_slot", "Accessory");
 
 
+        // Use Action
+        this.addTooltip("item.modifiers.blocking", "When blocking:");
+
+
         // Entities
         // Passive
         this.addEntityType(AetherIIEntityTypes.AERBUNNY, "Aerbunny");
@@ -701,8 +705,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.STAB_DISTANCE.get(), "Stab Distance");
         this.addAttribute(AetherIIAttributes.STAB_KNOCKBACK.get(), "Stab Knockback");
         this.addAttribute(AetherIIAttributes.STAB_DAMAGE.get(), "Stab Damage");
-        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.get(), "Block Reduction Rate");
-        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.get(), "Block Restoration Rate");
+        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.get(), "Shield Stamina Used");
+        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.get(), "Shield Stamina Restoration");
 
 
         // Effects

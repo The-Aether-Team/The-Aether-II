@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.event.hooks.attachment;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
+import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
@@ -11,21 +13,30 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistanc
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
+import com.aetherteam.aetherii.item.combat.GlovesItem;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
+import io.wispforest.accessories.api.AccessoriesAPI;
+import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
+import io.wispforest.accessories.api.components.AccessoriesDataComponents;
+import io.wispforest.accessories.api.components.AccessoryItemAttributeModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ItemSupplier;
@@ -192,9 +203,63 @@ public class DamageSystemHooks {
         }
     }
 
+    public static void addShieldTooltips(List<Component> components, ItemStack stack) {
+        if (stack.getItem() instanceof AetherIIShieldItem) {
+            int useTooltip = components.size() - 1;
+            int attributeTooltip = components.size() - 1;
+
+            Component useText = Component.translatable("item.modifiers." + EquipmentSlotGroup.HAND.getSerializedName());
+            Component attributeText = Component.translatable(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.value().getDescriptionId());
+
+            for (int i = components.size() - 1; i >= 0; i--) {
+                Component component = components.get(i);
+                if (component.getString().contains(useText.getString())) {
+                    useTooltip = i;
+                }
+                if (component.getString().contains(attributeText.getString())) {
+                    attributeTooltip = i;
+                }
+            }
+            int value = 0;
+            for (ItemAttributeModifiers.Entry entry : stack.getAttributeModifiers().modifiers()) {
+                if (entry.modifier().is(AetherIIShieldItem.BASE_SHIELD_STAMINA_REDUCTION_ID)) {
+                    value = (int) ((entry.modifier().amount() / DamageSystemAttachment.MAX_SHIELD_STAMINA) * 100);
+                }
+            }
+            components.remove(useTooltip);
+            components.add(useTooltip, Component.translatable("aether_ii.tooltip.item.modifiers.blocking").withStyle(ChatFormatting.GRAY));
+            components.remove(attributeTooltip);
+            components.add(attributeTooltip, CommonComponents.space().append(Component.translatable("attribute.modifier.equals.0", value + "%", Component.translatable(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.value().getDescriptionId())).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
+        }
+    }
+
+    public static void addGloveTooltips(Player player, List<Component> components, ItemStack stack) {
+        if (stack.getItem() instanceof GlovesItem) {
+            int attributeTooltip = components.size() - 1;
+
+            Component attributeText = Component.translatable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.value().getDescriptionId());
+
+            for (int i = components.size() - 1; i >= 0; i--) {
+                Component component = components.get(i);
+                if (component.getString().contains(attributeText.getString())) {
+                    attributeTooltip = i;
+                }
+            }
+
+            int value = 0;
+            for (AttributeModifier entry : AccessoriesAPI.getAttributeModifiers(stack, player, AetherIISlotHandling.getHandwearSlotType().slotName(), 0).getAttributeModifiers(false).values()) {
+                if (entry.id().getPath().contains(HandwearAccessory.BASE_GLOVES_STAMINA_RESTORATION_ID.getNamespace())) {
+                    value = (int) ((entry.amount() / DamageSystemAttachment.MAX_SHIELD_STAMINA) * 100);
+                }
+            }
+            components.remove(attributeTooltip);
+            components.add(attributeTooltip, Component.empty().append(Component.translatable("attribute.modifier.equals.0", "+" + value + "%", Component.translatable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.value().getDescriptionId())).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
+        }
+    }
+
     public static void buildUpShieldStun(LivingEntity entity, DamageSource source) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
-            if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) { //todo check for aether hostile mobs only or something idk
+            if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) {
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
                 if (entity.getUseItem().getItem() instanceof AetherIIShieldItem) {
