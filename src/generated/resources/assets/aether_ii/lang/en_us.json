@@ -1,4 +1,6 @@
 {
+  "aether_ii.message.campfire_added": "This Outpost Campfire is now a valid respawn option.",
+  "aether_ii.message.campfire_respawn_failed": "Failed to locate a valid Outpost Campfire.",
   "aether_ii.tooltip.item.damage.impact": "§eImpact§r Damage",
   "aether_ii.tooltip.item.damage.pierce": "§cPierce§r Damage",
   "aether_ii.tooltip.item.damage.slash": "§9Slash§r Damage",

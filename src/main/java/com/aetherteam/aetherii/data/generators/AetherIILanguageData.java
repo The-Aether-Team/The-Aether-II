@@ -721,6 +721,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
 
 
+        // Generic
+        this.addGeneric("message.campfire_added", "This Outpost Campfire is now a valid respawn option.");
+        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid Outpost Campfire.");
+
+
         // Subtitles
         // Blocks
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");

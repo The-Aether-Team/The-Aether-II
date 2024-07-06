@@ -5,6 +5,9 @@ import com.aetherteam.aetherii.network.packet.OutpostTrackerSyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -15,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutpostTrackerAttachment {
-    private List<BlockPos> campfirePositions; //todo i should make a custom campfireposition record that also stores dimension. for futureproofing.
+    private List<CampfirePosition> campfirePositions;
     private boolean shouldRespawnAtOutpost;
     private boolean shouldSyncAfterJoin;
 
     public static final Codec<OutpostTrackerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BlockPos.CODEC.listOf().fieldOf("campfire_positions").forGetter(OutpostTrackerAttachment::getCampfirePositions),
+            CampfirePosition.CODEC.listOf().fieldOf("campfire_positions").forGetter(OutpostTrackerAttachment::getCampfirePositions),
             Codec.BOOL.fieldOf("should_respawn_at_outpost").forGetter(OutpostTrackerAttachment::shouldRespawnAtOutpost)
     ).apply(instance, OutpostTrackerAttachment::new));
 
@@ -28,7 +31,7 @@ public class OutpostTrackerAttachment {
         this.campfirePositions = new ArrayList<>();
     }
 
-    protected OutpostTrackerAttachment(List<BlockPos> campfirePositions, boolean shouldRespawnAtOutpost) {
+    protected OutpostTrackerAttachment(List<CampfirePosition> campfirePositions, boolean shouldRespawnAtOutpost) {
         this.campfirePositions = new ArrayList<>(campfirePositions);
         this.shouldRespawnAtOutpost = shouldRespawnAtOutpost;
     }
@@ -55,31 +58,34 @@ public class OutpostTrackerAttachment {
     }
 
     @Nullable
-    public BlockPos findClosestPositionTo(Level level, BlockPos pos) {
-        BlockPos respawnPos = null;
-        List<BlockPos> toRemove = new ArrayList<>();
-        for (BlockPos campfirePos : this.campfirePositions) {
-            if (level.getBlockState(campfirePos).is(AetherIIBlocks.OUTPOST_CAMPFIRE)) {
-                if (respawnPos == null || pos.distSqr(campfirePos) < pos.distSqr(respawnPos)) {
-                    respawnPos = campfirePos;
+    public CampfirePosition findClosestPositionTo(ServerLevel level, BlockPos pos) {
+        CampfirePosition respawnPos = null;
+        List<CampfirePosition> toRemove = new ArrayList<>();
+        for (CampfirePosition campfirePos : this.campfirePositions) {
+            ServerLevel serverLevel = level.getServer().getLevel(campfirePos.level());
+            if (serverLevel != null) {
+                if (serverLevel.getBlockState(campfirePos.pos()).is(AetherIIBlocks.OUTPOST_CAMPFIRE)) {
+                    if (respawnPos == null || pos.distSqr(campfirePos.pos()) < pos.distSqr(respawnPos.pos())) {
+                        respawnPos = campfirePos;
+                    }
+                } else {
+                    toRemove.add(campfirePos);
                 }
-            } else {
-                toRemove.add(campfirePos);
             }
         }
         this.campfirePositions.removeAll(toRemove);
         return respawnPos;
     }
 
-    public void setCampfirePositions(List<BlockPos> campfirePositions) {
+    public void setCampfirePositions(List<CampfirePosition> campfirePositions) {
         this.campfirePositions = new ArrayList<>(campfirePositions);
     }
 
-    public void addCampfirePosition(BlockPos pos) {
+    public void addCampfirePosition(CampfirePosition pos) {
         this.campfirePositions.add(pos);
     }
 
-    public List<BlockPos> getCampfirePositions() {
+    public List<CampfirePosition> getCampfirePositions() {
         return this.campfirePositions;
     }
 
@@ -89,5 +95,12 @@ public class OutpostTrackerAttachment {
 
     public boolean shouldRespawnAtOutpost() {
         return this.shouldRespawnAtOutpost;
+    }
+
+    public record CampfirePosition(ResourceKey<Level> level, BlockPos pos) {
+        public static final Codec<CampfirePosition> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ResourceKey.codec(Registries.DIMENSION).fieldOf("dimension").forGetter(CampfirePosition::level),
+                BlockPos.CODEC.fieldOf("position").forGetter(CampfirePosition::pos)
+        ).apply(instance, CampfirePosition::new));
     }
 }

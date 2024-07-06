@@ -1,10 +1,13 @@
 package com.aetherteam.aetherii.block.furniture;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.OutpostTrackerAttachment;
 import com.aetherteam.aetherii.blockentity.OutpostCampfireBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,9 +25,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.Collectors;
 
 public class OutpostCampfireBlock extends MultiBlock {
     public static final MapCodec<OutpostCampfireBlock> CODEC = simpleCodec(OutpostCampfireBlock::new);
@@ -67,11 +73,16 @@ public class OutpostCampfireBlock extends MultiBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockPos origin = this.locateOriginFrom(state, pos);
-        if (level.getBlockEntity(origin) instanceof OutpostCampfireBlockEntity) { //todo message for adding this campfire to respawn points.
+        if (level.getBlockEntity(origin) instanceof OutpostCampfireBlockEntity) {
             var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
-            if (!data.getCampfirePositions().contains(origin)) {
-                data.addCampfirePosition(origin);
-                //todo lit behavior with particles
+            if (!data.getCampfirePositions().stream().map(OutpostTrackerAttachment.CampfirePosition::pos).collect(Collectors.toSet()).contains(origin)) {
+                data.addCampfirePosition(new OutpostTrackerAttachment.CampfirePosition(level.dimension(), pos));
+                player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), true);
+                if (!state.getValue(LIT)) {
+                    this.multiBlockPositions(state.getValue(X_DIRECTION_FROM_ORIGIN), state.getValue(Z_DIRECTION_FROM_ORIGIN)).forEach((loopedPos) -> level.setBlock(loopedPos.offset(origin), level.getBlockState(loopedPos.offset(origin)).setValue(LIT, true), 3));
+                }
+                Vec3 originVec = Vec3.atBottomCenterOf(this.locateOriginFrom(state, pos));
+                this.activationParticles(level, new Vec3(originVec.x() + (state.getValue(X_DIRECTION_FROM_ORIGIN).getStepX() / 2.0), originVec.y(), originVec.z() + (state.getValue(Z_DIRECTION_FROM_ORIGIN).getStepZ() / 2.0)), level.getRandom());
             }
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
@@ -79,7 +90,69 @@ public class OutpostCampfireBlock extends MultiBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        super.animateTick(state, level, pos, random); //todo
+        if (state.getValue(LIT)) {
+            Vec3 originVec = Vec3.atBottomCenterOf(this.locateOriginFrom(state, pos));
+            this.tickParticles(level, new Vec3(originVec.x() + (state.getValue(X_DIRECTION_FROM_ORIGIN).getStepX() / 2.0), originVec.y(), originVec.z() + (state.getValue(Z_DIRECTION_FROM_ORIGIN).getStepZ() / 2.0)), level.getRandom());
+        }
+    }
+
+    private void activationParticles(Level level, Vec3 pos, RandomSource random) {
+        for (int i = 0; i < 50; i++) {
+            double range = random.nextDouble() * 0.9;
+
+            if (random.nextInt(10) == 0) {
+                level.addParticle(ParticleTypes.LAVA, pos.x() + (random.nextDouble() * (random.nextBoolean() ? range : -range)), pos.y(),
+                        pos.z() + (random.nextDouble() * (random.nextBoolean() ? range : -range)),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.2, 0.075 * random.nextDouble(),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.2);
+            }
+            if (random.nextInt(4) == 0) {
+                level.addParticle(ParticleTypes.FLAME, pos.x() + (random.nextDouble() * (random.nextBoolean() ? range : -range)), pos.y(),
+                        pos.z() + (random.nextDouble() * (random.nextBoolean() ? range : -range)),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.1, 0.1 * random.nextDouble(),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.1);
+            }
+            if (random.nextInt(4) == 0) {
+                level.addParticle(ParticleTypes.SMOKE, pos.x() + (random.nextDouble() * (random.nextBoolean() ? range : -range)), pos.y(),
+                        pos.z() + (random.nextDouble() * (random.nextBoolean() ? range : -range)),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.1, 0.1 * random.nextDouble(),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.1);
+            }
+        }
+    }
+
+    private void tickParticles(Level level, Vec3 pos, RandomSource random) {
+        for (int i = 0; i < 10; i++) {
+            double range = random.nextDouble() * 0.75;
+
+            if (random.nextInt(800) == 0) {
+                level.addParticle(ParticleTypes.LAVA, (random.nextDouble() * (random.nextBoolean() ? range : -range)), pos.y(),
+                        pos.z() + (random.nextDouble() * (random.nextBoolean() ? range : -range)),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.001, 0.075 * random.nextDouble(),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.001);
+            }
+            if (random.nextInt(4) == 0) {
+                level.addParticle(ParticleTypes.FLAME, pos.x() + (random.nextDouble() * (random.nextBoolean() ? range : -range)), pos.y(),
+                        pos.z() + (random.nextDouble() * (random.nextBoolean() ? range : -range)),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.001, 0.04 * random.nextDouble(),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.001);
+            }
+            if (random.nextInt(4) == 0) {
+                level.addParticle(ParticleTypes.SMOKE, pos.x() + (random.nextDouble() * (random.nextBoolean() ? range : -range)), pos.y(),
+                        pos.z() + (random.nextDouble() * (random.nextBoolean() ? range : -range)),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.001, 0.075 * random.nextDouble(),
+                        (random.nextDouble() * (random.nextBoolean() ? range : -range)) * 0.001);
+            }
+        }
+    }
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        if (state.getValue(LIT)) {
+            return 15;
+        } else {
+            return 0;
+        }
     }
 
     @Override
