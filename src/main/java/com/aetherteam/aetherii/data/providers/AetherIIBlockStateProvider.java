@@ -274,7 +274,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void leaves(Block block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
-            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
+            boolean snowy = state.getValue(BlockStateProperties.SNOWY);
             ModelFile model;
             if (snowy) {
                 model = this.models().cubeColumnHorizontal("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/"), this.texture(this.name(block), "natural/"));
@@ -287,12 +287,12 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void shortGrass(Block block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
-            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
+            AetherTallGrassBlock.GrassType type = state.getValue(AetherTallGrassBlock.TYPE);
             ModelFile grass;
-            if (snowy) {
-                grass = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
-            } else {
-                grass = this.triTintedCross(this.name(block))
+            switch (type) {
+                case SNOWY -> grass = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+                case ENCHANTED -> grass = this.models().cross("enchanted_" + this.name(block), this.texture("enchanted_" + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+                default -> grass = this.triTintedCross(this.name(block))
                         .texture("particle", this.texture(this.name(block), "natural/"))
                         .texture("cross_1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
                         .texture("cross_2", this.extend(this.texture(this.name(block), "natural/"), "_2"))
@@ -352,7 +352,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void frostedCross(Block block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
-            boolean snowy = state.getValue(AetherTallGrassBlock.SNOWY);
+            boolean snowy = state.getValue(BlockStateProperties.SNOWY);
             String prefix = snowy ? "frosted_" : "";
             ModelFile grass = this.models().cross(prefix + this.name(block), this.texture(prefix + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
             return ConfiguredModel.builder().modelFile(grass).build();
