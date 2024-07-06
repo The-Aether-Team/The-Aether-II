@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.kirrid;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.KirridAnimations;
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 
@@ -32,7 +32,7 @@ public abstract class AbstractKirridModel extends HierarchicalModel<Kirrid> {
             this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
 
         }
-        this.wool.visible = kirrid.hasWool();
+        this.wool.visible = !kirrid.isSheared();
     }
 
     @Override

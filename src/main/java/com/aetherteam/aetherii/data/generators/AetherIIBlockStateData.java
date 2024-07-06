@@ -438,7 +438,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.hangingSignBlock(AetherIIBlocks.WISPROOT_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), this.texture(this.name(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()), "natural/"));
 
         // Moa Egg
-        this.moaEgg(AetherIIBlocks.BLUE_MOA_EGG.get());
+        this.moaEgg(AetherIIBlocks.MOA_EGG.get());
 
         // Bookshelves
         this.bookshelf(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());

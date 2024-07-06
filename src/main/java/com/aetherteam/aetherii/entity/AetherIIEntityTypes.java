@@ -6,7 +6,7 @@ import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.Tempest;
 import com.aetherteam.aetherii.entity.monster.Zephyr;
 import com.aetherteam.aetherii.entity.passive.*;
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.projectile.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;

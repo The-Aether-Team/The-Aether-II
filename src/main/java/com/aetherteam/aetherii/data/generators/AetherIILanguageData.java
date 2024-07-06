@@ -439,7 +439,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
 
         //Egg
-        this.addBlock(AetherIIBlocks.BLUE_MOA_EGG, "Blue Moa Egg");
+        this.addBlock(AetherIIBlocks.MOA_EGG, "Moa Egg");
 
 
         // Items

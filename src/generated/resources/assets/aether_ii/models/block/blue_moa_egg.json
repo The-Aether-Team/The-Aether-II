@@ -1,7 +1,0 @@
-{
-  "parent": "aether_ii:block/template_moa_egg",
-  "textures": {
-    "blue_moa_egg": "aether_ii:block/miscellaneous/blue_moa_egg",
-    "particle": "aether_ii:block/miscellaneous/blue_moa_egg"
-  }
-}
