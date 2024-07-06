@@ -41,9 +41,9 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor");
     public static final ResourceKey<DensityFunction> LAKES_FLOOR = createKey("highlands/lakes/lake_floor");
     public static final ResourceKey<DensityFunction> LAKES_BARRIER = createKey("highlands/lakes/lake_barrier");
+    public static final ResourceKey<DensityFunction> COASTS_BASE_NOISE = createKey("highlands/coasts/base_noise");
     public static final ResourceKey<DensityFunction> COASTS_HIGHFIELDS = createKey("highlands/coasts/highfields");
     public static final ResourceKey<DensityFunction> COASTS_MAGNETIC = createKey("highlands/coasts/magnetic");
-    public static final ResourceKey<DensityFunction> COASTS_MAGNETIC_PATTERN = createKey("highlands/coasts/magnetic_pattern");
     public static final ResourceKey<DensityFunction> COASTS_ARCTIC = createKey("highlands/coasts/arctic");
 
     public static final ResourceKey<DensityFunction> FINAL_DENSITY = createKey("highlands/final_density");
@@ -123,8 +123,8 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
     }
 
-    public static DensityFunction buildCoastNoise(double value) {
-        return DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 8.0, 2.0, 0.0, 0.0), 1.5D, 0.0D, 16).abs(), DensityFunctions.constant(value));
+    public static DensityFunction buildCoastNoise(HolderGetter<DensityFunction> function, double value) {
+        return DensityFunctions.add(getFunction(function, AetherIIDensityFunctions.COASTS_BASE_NOISE), DensityFunctions.constant(value));
     }
 
     public static DensityFunction buildFinalDensity(HolderGetter<DensityFunction> function) {
