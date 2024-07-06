@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.event.hooks.PortalTeleportationHooks;
+import com.aetherteam.aetherii.event.hooks.attachment.PortalTeleportationHooks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

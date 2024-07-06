@@ -75,26 +75,31 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.chestplateItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.ZANITE_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.ZANITE_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.ZANITE_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.ZANITE_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.ZANITE_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.ARKENIUM_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.ARKENIUM_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.ARKENIUM_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.ARKENIUM_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.ARKENIUM_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.GRAVITITE_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.GRAVITITE_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.GRAVITITE_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.GRAVITITE_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.GRAVITITE_GLOVES.get(), "armor/");
 
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
@@ -248,6 +253,15 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get());
 
         // Leaves
         this.itemBlock(AetherIIBlocks.SKYROOT_LEAVES.get());
@@ -260,6 +274,15 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
 
         // Saplings
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
@@ -551,5 +574,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Bookshelves
         this.itemBlock(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
+
+        // Furniture
+        this.outpostCampfireItem(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
     }
 }

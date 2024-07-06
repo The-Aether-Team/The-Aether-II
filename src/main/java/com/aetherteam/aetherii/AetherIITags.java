@@ -17,6 +17,7 @@ public class AetherIITags {
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
+        public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
@@ -68,6 +69,11 @@ public class AetherIITags {
         public static final TagKey<Item> TOOLS_SHORTSWORDS = tag("tools/shortswords");
         public static final TagKey<Item> TOOLS_HAMMERS = tag("tools/hammers");
         public static final TagKey<Item> TOOLS_SPEARS = tag("tools/spears");
+
+        public static final TagKey<Item> EQUIPMENT_RELICS = tag("equipment/relics");
+        public static final TagKey<Item> EQUIPMENT_HANDWEAR = tag("equipment/handwear");
+        public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
+        public static final TagKey<Item> EQUIPABLE = tag("equipable");
 
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
