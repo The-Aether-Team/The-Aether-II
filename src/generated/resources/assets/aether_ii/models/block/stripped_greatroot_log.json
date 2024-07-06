@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aether_ii:block/natural/stripped_greatroot_log_top",
+    "side": "aether_ii:block/natural/stripped_greatroot_log"
+  }
+}

@@ -3,14 +3,14 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "minecraft:simple_block",
+        "type": "aether_ii:aether_grass",
         "config": {
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
               "Name": "aether_ii:aether_short_grass",
               "Properties": {
-                "snowy": "false"
+                "grass_type": "default"
               }
             }
           }

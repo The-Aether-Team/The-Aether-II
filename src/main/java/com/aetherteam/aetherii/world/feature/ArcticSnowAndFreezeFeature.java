@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
+import com.aetherteam.aetherii.block.natural.Snowable;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -42,8 +43,8 @@ public class ArcticSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
                 if (AetherGrassBlock.shouldSnow(biome, level, posAbove)) {
                     BlockState state = level.getBlockState(posAbove);
                     BlockState ground = level.getBlockState(posBelow);
-                    if (AetherGrassBlock.plantNotSnowed(state)) {
-                        level.setBlock(posAbove, state.setValue(BlockStateProperties.SNOWY, Boolean.TRUE), 2);
+                    if (AetherGrassBlock.plantNotSnowed(state) && state.getBlock() instanceof Snowable snowable) {
+                        level.setBlock(posAbove, snowable.setSnowy(state), 2);
                     } else {
                         level.setBlock(posAbove, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 2);
                     }

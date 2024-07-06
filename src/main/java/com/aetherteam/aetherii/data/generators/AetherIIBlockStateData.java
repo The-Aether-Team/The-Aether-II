@@ -75,13 +75,17 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.log(AetherIIBlocks.SKYROOT_LOG.get());
         this.log(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.log(AetherIIBlocks.GREATROOT_LOG.get());
+        this.log(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
         this.log(AetherIIBlocks.WISPROOT_LOG.get());
+        this.log(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         this.mossyWisproot(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.get());
         this.logDifferentTop(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.wood(AetherIIBlocks.GREATROOT_WOOD.get(), AetherIIBlocks.GREATROOT_LOG.get());
+        this.wood(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get(), AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
         this.wood(AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.WISPROOT_LOG.get());
+        this.wood(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         this.wood(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.AMBEROOT_LOG.get());
 
         // Leaf Pile
@@ -158,10 +162,12 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         // Flowers
         this.frostedCross(AetherIIBlocks.HESPEROSE.get());
         this.frostedCross(AetherIIBlocks.TARABLOOM.get());
+        this.crossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Potted Flowers
         this.pottedPlant(AetherIIBlocks.POTTED_HESPEROSE.get(), AetherIIBlocks.HESPEROSE.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_TARABLOOM.get(), AetherIIBlocks.TARABLOOM.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_AECHOR_CUTTING.get(), AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Bushes
         this.bush(AetherIIBlocks.HIGHLANDS_BUSH.get());
@@ -438,7 +444,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.hangingSignBlock(AetherIIBlocks.WISPROOT_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), this.texture(this.name(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()), "natural/"));
 
         // Moa Egg
-        this.moaEgg(AetherIIBlocks.BLUE_MOA_EGG.get());
+        this.moaEgg(AetherIIBlocks.MOA_EGG.get());
 
         // Bookshelves
         this.bookshelf(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());

@@ -47,6 +47,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_BEAM.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get());
                 output.accept(AetherIIBlocks.GREATROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.GREATROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.GREATROOT_SLAB.get());
@@ -70,6 +72,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
                 output.accept(AetherIIBlocks.WISPROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.WISPROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.WISPROOT_SLAB.get());
@@ -334,13 +338,14 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
                 output.accept(AetherIIBlocks.HESPEROSE.get());
                 output.accept(AetherIIBlocks.TARABLOOM.get());
+                output.accept(AetherIIBlocks.AECHOR_CUTTING.get());
                 output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
-                output.accept(AetherIIBlocks.BLUE_MOA_EGG.get());
+                output.accept(AetherIIBlocks.MOA_EGG.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FUNCTIONAL_BLOCKS = CREATIVE_MODE_TABS.register("functional_blocks", () -> CreativeModeTab.builder()
@@ -523,6 +528,7 @@ public class AetherIICreativeTabs {
             .icon(() -> new ItemStack(AetherIIItems.AERBUNNY_SPAWN_EGG.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {
+                output.accept(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get());
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
