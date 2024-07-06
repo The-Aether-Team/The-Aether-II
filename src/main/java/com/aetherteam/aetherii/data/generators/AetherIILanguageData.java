@@ -769,7 +769,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "flying_cow.milk", "Flying Cow gets milked");
         this.addSubtitle("entity", "flying_cow.step", "Footsteps");
 
-        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baths");
+        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baahs");
         this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");
