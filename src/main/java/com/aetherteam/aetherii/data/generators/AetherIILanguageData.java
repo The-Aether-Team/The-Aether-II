@@ -81,13 +81,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_LOG, "Skyroot Log");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_LOG, "Stripped Skyroot Log");
         this.addBlock(AetherIIBlocks.GREATROOT_LOG, "Greatroot Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_GREATROOT_LOG, "Stripped Greatroot Log");
         this.addBlock(AetherIIBlocks.WISPROOT_LOG, "Wisproot Log");
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG, "Mossy Wisproot Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_LOG, "Stripped Wisproot Log");
         this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD, "Stripped Skyroot Wood");
         this.addBlock(AetherIIBlocks.GREATROOT_WOOD, "Greatroot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_GREATROOT_WOOD, "Stripped Greatroot Wood");
         this.addBlock(AetherIIBlocks.WISPROOT_WOOD, "Wisproot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD, "Stripped Wisproot Wood");
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
 
         // Leaf Pile

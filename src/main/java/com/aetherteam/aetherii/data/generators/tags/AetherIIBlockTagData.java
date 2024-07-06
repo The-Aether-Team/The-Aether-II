@@ -81,12 +81,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.GREATROOT_LOGS).add(
                 AetherIIBlocks.GREATROOT_LOG.get(),
-                AetherIIBlocks.GREATROOT_WOOD.get()
+                AetherIIBlocks.GREATROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get()
         );
         this.tag(AetherIITags.Blocks.WISPROOT_LOGS).add(
                 AetherIIBlocks.WISPROOT_LOG.get(),
                 AetherIIBlocks.MOSSY_WISPROOT_LOG.get(),
-                AetherIIBlocks.WISPROOT_WOOD.get()
+                AetherIIBlocks.WISPROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get()
         );
         this.tag(AetherIITags.Blocks.AMBEROOT_LOGS).add(
                 AetherIIBlocks.AMBEROOT_LOG.get(),
