@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 
 public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
     private int ticksUntilNextAttack;
+    private boolean attack;
 
     public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
         super(mob, speedModifier, followingTargetEvenIfNotSeen);
@@ -14,18 +15,19 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
 
     @Override
     public boolean canUse() {
-        return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) < 6;
+        return super.canUse() && this.mob.distanceToSqr(this.mob.getTarget()) <= 3 * 3;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return super.canContinueToUse() && this.mob.distanceTo(this.mob.getTarget()) < 6;
+        return super.canContinueToUse() && this.mob.distanceToSqr(this.mob.getTarget()) < 10 * 10;
     }
 
     @Override
     public void start() {
         super.start();
         this.ticksUntilNextAttack = 0;
+        this.attack = false;
     }
 
     @Override
@@ -36,9 +38,13 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
 
     @Override
     protected void checkAndPerformAttack(LivingEntity target) {
-        if (!(this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && (this.ticksUntilNextAttack >= 49 || this.ticksUntilNextAttack <= 0)) {
+        if (!(this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && (!this.attack)) {
             this.resetAttackCooldown();
-        } else if (this.ticksUntilNextAttack == 49) {
+            this.attack = false;
+        } else {
+            this.attack = true;
+        }
+        if (this.attack && this.ticksUntilNextAttack == 30) {
             this.mob.level().broadcastEntityEvent(this.mob, (byte) 61);
         }
 
@@ -47,18 +53,24 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
             this.mob.doHurtTarget(target);
         }
 
-        --this.ticksUntilNextAttack;
+        if (this.attack) {
+            --this.ticksUntilNextAttack;
+        }
+
+        if (this.ticksUntilNextAttack <= 0) {
+            this.attack = false;
+        }
     }
 
 
     @Override
     protected void resetAttackCooldown() {
-        this.ticksUntilNextAttack = this.adjustedTickDelay(50);
+        this.ticksUntilNextAttack = this.adjustedTickDelay(30);
     }
 
     @Override
     protected boolean isTimeToAttack() {
-        return this.ticksUntilNextAttack == 17;
+        return this.ticksUntilNextAttack == 10 + 3;
     }
 
     @Override

@@ -54,7 +54,7 @@ public class Cockatrice extends Monster implements RangedAttackMob {
         this.goalSelector.addGoal(1, new RestrictSunGoal(this));
         this.goalSelector.addGoal(2, new FleeSunGoal(this, 1.0));
         this.goalSelector.addGoal(3, new CockatriceMeleeAttackGoal(this, 1.1F, true));
-        this.goalSelector.addGoal(4, new CockatriceRangedAttackGoal(this, 0.86F, 20, 10.0F));
+        this.goalSelector.addGoal(4, new CockatriceRangedAttackGoal(this, 0.86F, 20 * 10, 20 * 15, 10.0F));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));

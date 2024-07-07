@@ -170,7 +170,7 @@ public class CockatriceModel<T extends Cockatrice> extends HierarchicalModel<T> 
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
         this.animateWalk(CockatriceAnimation.RUN, limbSwing, limbSwingAmount, 1.0F, 1.5F);
-        this.animate(entity.attackAnimationState, CockatriceAnimation.CLAW_ATTACK, ageInTicks, 1.0F);
+        this.animate(entity.attackAnimationState, CockatriceAnimation.CLAW_ATTACK, ageInTicks, 2.0F);
         this.animate(entity.shootAnimationState, CockatriceAnimation.ATTACK, ageInTicks, 1.0F);
     }
 
