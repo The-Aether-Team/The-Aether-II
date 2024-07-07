@@ -95,6 +95,12 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             this.currencySlot = new Slot(CURRENCY_CONTAINER, 0, 57, 87) {
                 @Override
                 public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                    if (Minecraft.getInstance().player != null) {
+                        var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
+                        if (data.getAmount() > 0) {
+                            return Pair.of(InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/miscellaneous/glint_coin"));
+                        }
+                    }
                     return Pair.of(InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gui/slot/slot_currency"));
                 }
             };
@@ -109,7 +115,6 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             if (Minecraft.getInstance().player != null) {
                 var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
                 if (data.getAmount() > 0) {
-                    guiGraphics.renderItem(new ItemStack(AetherIIItems.GLINT_COIN.get()), this.getGuiLeft() + this.currencySlot.x, this.getGuiTop() + this.currencySlot.y);
                     if (this.isHovering(this.currencySlot.x, this.currencySlot.y, 16, 16, mouseX, mouseY)) {
                         guiGraphics.renderTooltip(this.font, Component.literal(data.getAmount() + " Glint"), mouseX, mouseY);
                     }
