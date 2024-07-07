@@ -1,9 +1,14 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
+import com.aetherteam.nitrogen.attachment.INBTSynchable;
+import com.mojang.datafixers.util.Pair;
 import io.wispforest.accessories.AccessoriesInternals;
 import io.wispforest.accessories.networking.server.NukeAccessories;
 import net.minecraft.client.Minecraft;
@@ -21,6 +26,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -35,6 +41,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right.png");
     private static final ResourceLocation GUIDEBOOK_EQUIPMENT_RIGHT_PAGE_CREATIVE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/equipment/guidebook_equipment_right_creative.png");
     private static final SimpleContainer DESTROY_ITEM_CONTAINER = new SimpleContainer(1);
+    private static final SimpleContainer CURRENCY_CONTAINER = new SimpleContainer(1);
 
     private final Inventory playerInventory;
     private float xMouse;
@@ -44,6 +51,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     protected int craftingTitleLabelY;
     @Nullable
     private Slot destroyItemSlot;
+    private Slot currencySlot;
     private int nukeCoolDown = 0;
 
     public GuidebookEquipmentScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
@@ -83,9 +91,30 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 this.destroyItemSlot = null;
             }
         }
+        if (this.currencySlot == null) {
+            this.currencySlot = new Slot(CURRENCY_CONTAINER, 0, 57, 87) {
+                @Override
+                public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                    return Pair.of(InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gui/slot/slot_currency"));
+                }
+            };
+            this.getMenu().slots.add(this.currencySlot);
+        }
 
         if (this.destroyItemSlot != null && this.isHovering(this.destroyItemSlot.x, this.destroyItemSlot.y, 16, 16, mouseX, mouseY)) {
             guiGraphics.renderTooltip(this.font, Component.translatable("inventory.binSlot"), mouseX, mouseY);
+        }
+
+        if (this.currencySlot != null) {
+            if (Minecraft.getInstance().player != null) {
+                var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
+                if (data.getAmount() > 0) {
+                    guiGraphics.renderItem(new ItemStack(AetherIIItems.GLINT_COIN.get()), this.getGuiLeft() + this.currencySlot.x, this.getGuiTop() + this.currencySlot.y);
+                    if (this.isHovering(this.currencySlot.x, this.currencySlot.y, 16, 16, mouseX, mouseY)) {
+                        guiGraphics.renderTooltip(this.font, Component.literal(data.getAmount() + " Glint"), mouseX, mouseY);
+                    }
+                }
+            }
         }
 
         this.renderTooltip(guiGraphics, mouseX, mouseY);
@@ -113,7 +142,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         this.renderStats(guiGraphics);
         this.renderCurrency(guiGraphics);
         int x = this.leftPos - 49;
-        int y = this.topPos + 21;
+        int y = this.topPos + 12;
         Vector2i scissorStart = new Vector2i(x, y);
         Vector2i scissorEnd = new Vector2i(x + 124, y + 70);
         Vector2i size = new Vector2i((int) ((scissorEnd.x - scissorStart.x) / 2.5), scissorEnd.y - scissorStart.y);
@@ -125,11 +154,11 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         Player player = Minecraft.getInstance().player;
         int x = this.leftPos;
         int y = this.topPos;
-        guiGraphics.blitSprite(HEART_CONTAINER_SPRITE, x - 50, y + 100, 9, 9);
-        guiGraphics.blitSprite(HEART_SPRITE, x - 50, y + 100, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf((int) (player.getHealth()))), x - 39, y + 101, 16777215, true);
-        guiGraphics.blitSprite(ARMOR_SPRITE, x - 25, y + 100, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf(player.getArmorValue())), x - 14, y + 101, 16777215, true);
+        guiGraphics.blitSprite(HEART_CONTAINER_SPRITE, x - 50, y + 91, 9, 9);
+        guiGraphics.blitSprite(HEART_SPRITE, x - 50, y + 91, 9, 9);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf((int) (player.getHealth()))), x - 39, y + 92, 16777215, true);
+        guiGraphics.blitSprite(ARMOR_SPRITE, x - 25, y + 91, 9, 9);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf(player.getArmorValue())), x - 14, y + 92, 16777215, true);
     }
 
     private void renderCurrency(GuiGraphics guiGraphics) {
@@ -186,6 +215,41 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                         if (slot == this.destroyItemSlot && this.destroyItemSlot != null) {
                             this.getMenu().setCarried(ItemStack.EMPTY);
                             PacketDistributor.sendToServer(new ClearItemPacket());
+                        }
+                    }
+                }
+            }
+            if (slot != null) {
+                if (slot == this.currencySlot) {
+                    var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
+                    if (type == ClickType.PICKUP) {
+                        if (this.getMenu().getCarried().isEmpty() && data.getAmount() > 0 && mouseButton == 1) {
+                            ItemStack stack = new ItemStack(AetherIIItems.GLINT_COIN.get());
+                            data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() - 1);
+                            this.getMenu().setCarried(stack.copy());
+                            PacketDistributor.sendToServer(new HeldCurrencyPacket(stack.copy()));
+                        } else if (this.getMenu().getCarried().is(AetherIIItems.GLINT_COIN.get()) && mouseButton == 0) {
+                            ItemStack stack = this.getMenu().getCarried().copy();
+                            stack.shrink(1);
+                            data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() + 1);
+                            this.getMenu().setCarried(stack);
+                            PacketDistributor.sendToServer(new HeldCurrencyPacket(stack));
+                        }
+                    } else if (type == ClickType.QUICK_MOVE) {
+                        if (this.getMenu().getCarried().isEmpty() && data.getAmount() > 0) {
+                            ItemStack stack = new ItemStack(AetherIIItems.GLINT_COIN.get());
+                            int amount = Math.min(64, data.getAmount());
+                            stack.setCount(amount);
+                            data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() - amount);
+                            this.getMenu().setCarried(stack.copy());
+                            PacketDistributor.sendToServer(new HeldCurrencyPacket(stack.copy()));
+                        } else if (this.getMenu().getCarried().is(AetherIIItems.GLINT_COIN.get())) {
+                            ItemStack stack = this.getMenu().getCarried().copy();
+                            int amount = stack.getCount();
+                            stack.shrink(amount);
+                            data.setSynched(Minecraft.getInstance().player.getId(), INBTSynchable.Direction.SERVER, "setAmount", data.getAmount() + amount);
+                            this.getMenu().setCarried(stack);
+                            PacketDistributor.sendToServer(new HeldCurrencyPacket(stack));
                         }
                     }
                 }
