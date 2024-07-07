@@ -64,7 +64,7 @@ public class AetherPortalForcer {
         int i = Math.min(this.level.getMaxBuildHeight(), this.level.getMinBuildHeight() + this.level.getLogicalHeight()) - 1;
         BlockPos.MutableBlockPos mutablePos = pos.mutable();
 
-        for (BlockPos.MutableBlockPos mutablePos1 : BlockPos.spiralAround(pos, 16, Direction.EAST, Direction.SOUTH)) {
+        for (BlockPos.MutableBlockPos mutablePos1 : BlockPos.spiralAround(pos, 64, Direction.EAST, Direction.SOUTH)) {
             int j = Math.min(i, this.level.getHeight(Heightmap.Types.MOTION_BLOCKING, mutablePos1.getX(), mutablePos1.getZ()));
             if (worldBorder.isWithinBounds(mutablePos1) && worldBorder.isWithinBounds(mutablePos1.move(direction, 1))) {
                 mutablePos1.move(direction.getOpposite(), 1);
@@ -147,15 +147,13 @@ public class AetherPortalForcer {
         return Optional.of(new BlockUtil.FoundRectangle(blockPos.immutable(), 2, 3));
     }
 
-    @SuppressWarnings("deprecation")
     private boolean canHostFrame(BlockPos originalPos, BlockPos.MutableBlockPos offsetPos, Direction direction, int offsetScale) {
         Direction clockWiseDirection = direction.getClockWise();
         for (int i = -1; i < 3; ++i) {
             for (int j = -1; j < 4; ++j) {
                 offsetPos.setWithOffset(originalPos, direction.getStepX() * i + clockWiseDirection.getStepX() * offsetScale, j, direction.getStepZ() * i + clockWiseDirection.getStepZ() * offsetScale);
                 BlockState blockState = this.level.getBlockState(offsetPos);
-                if (j < 0 && (!blockState.isSolid()
-                        || blockState.is(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST))) {
+                if (j < 0 && (blockState.isAir() || blockState.is(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST))) {
                     return false;
                 }
                 if (j >= 0 && !this.level.isEmptyBlock(offsetPos)) {

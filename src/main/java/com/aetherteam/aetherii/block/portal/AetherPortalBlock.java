@@ -92,7 +92,7 @@ public class AetherPortalBlock extends Block implements Portal {
         } else {
             WorldBorder worldborder = serverlevel.getWorldBorder();
             double d0 = DimensionType.getTeleportationScale(pLevel.dimensionType(), serverlevel.dimensionType());
-            BlockPos blockpos = worldborder.clampToBounds(pEntity.getX() * d0, pEntity.getY(), pEntity.getZ() * d0);
+            BlockPos blockpos = worldborder.clampToBounds(pEntity.getX() * d0, pEntity.getY() + 64, pEntity.getZ() * d0);
             return this.getExitPortal(serverlevel, pEntity, pPos, blockpos, worldborder);
         }
     }
