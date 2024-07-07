@@ -229,19 +229,11 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
-    public void mossyWisproot(FacingPillarBlock block, RotatedPillarBlock baseBlock) {
+    public void mossyWisprootLog(FacingPillarBlock block, Block endBlock) {
         ResourceLocation side = this.texture(this.name(block), "natural/");
-        ResourceLocation bottom = this.extend(this.texture(this.name(block), "natural/"), "_top");
-        ResourceLocation top = this.extend(this.texture(this.name(baseBlock), "natural/"), "_top");
-        ModelFile vertical = this.models().cubeColumn(this.name(block), side, bottom).texture("up", top);
-        ModelFile horizontal = this.models().cubeColumnHorizontal(this.name(block) + "_horizontal", side, bottom).texture("up", top);
-        this.getVariantBuilder(block)
-                .partialState().with(FacingPillarBlock.FACING, Direction.DOWN).modelForState().modelFile(vertical).rotationX(180).addModel()
-                .partialState().with(FacingPillarBlock.FACING, Direction.EAST).modelForState().modelFile(horizontal).rotationX(90).rotationY(90).addModel()
-                .partialState().with(FacingPillarBlock.FACING, Direction.NORTH).modelForState().modelFile(horizontal).rotationX(90).addModel()
-                .partialState().with(FacingPillarBlock.FACING, Direction.SOUTH).modelForState().modelFile(horizontal).rotationX(90).rotationY(180).addModel()
-                .partialState().with(FacingPillarBlock.FACING, Direction.UP).modelForState().modelFile(vertical).addModel()
-                .partialState().with(FacingPillarBlock.FACING, Direction.WEST).modelForState().modelFile(horizontal).rotationX(90).rotationY(270).addModel();
+        ResourceLocation bottom = this.texture(this.name(block) + "_top", "natural/");
+        ResourceLocation top = this.texture(this.name(endBlock) + "_top", "natural/");
+        this.facingPillar(block, side, bottom, top);
     }
 
     public void logDifferentTop(RotatedPillarBlock block, RotatedPillarBlock baseBlock) {
@@ -753,6 +745,25 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     public void decorativePillar(RotatedPillarBlock block, Block endBlock) {
         this.axisBlock(block, this.extend(this.texture(this.name(block), "decorative/"), ""), this.extend(this.texture(this.name(endBlock), "decorative/"), ""));
+    }
+
+    public void decorativeFacingPillar(FacingPillarBlock block, Block endBlock) {
+        ResourceLocation side = this.texture(this.name(block), "decorative/");
+        ResourceLocation bottom = this.texture(this.name(endBlock), "decorative/");
+        ResourceLocation top = this.texture(this.name(endBlock), "decorative/");
+        this.facingPillar(block, side, bottom, top);
+    }
+
+    public void facingPillar(FacingPillarBlock block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top) {
+        ModelFile vertical = this.models().cubeColumn(this.name(block), side, bottom).texture("up", top);
+        ModelFile horizontal = this.models().cubeColumnHorizontal(this.name(block) + "_horizontal", side, bottom).texture("up", top);
+        this.getVariantBuilder(block)
+                .partialState().with(FacingPillarBlock.FACING, Direction.DOWN).modelForState().modelFile(vertical).rotationX(180).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.EAST).modelForState().modelFile(horizontal).rotationX(90).rotationY(90).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.NORTH).modelForState().modelFile(horizontal).rotationX(90).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.SOUTH).modelForState().modelFile(horizontal).rotationX(90).rotationY(180).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.UP).modelForState().modelFile(vertical).addModel()
+                .partialState().with(FacingPillarBlock.FACING, Direction.WEST).modelForState().modelFile(horizontal).rotationX(90).rotationY(270).addModel();
     }
 
     public void skyrootChest(Block block) {
