@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.entity.passive;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
+import com.aetherteam.aetherii.entity.ai.goal.TaegorePanicGoal;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
@@ -25,10 +26,10 @@ public class Taegore extends AetherAnimal {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 2.0));
+        this.goalSelector.addGoal(1, new TaegorePanicGoal(this, 2.2));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, Ingredient.of(AetherIITags.Items.TAEGORE_FOOD), false));
-        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Player.class, 3.0F, 2.1, 1.8, condition -> !condition.isCrouching()));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Player.class, 4.0F, 2.2, 2.2, condition -> !condition.isCrouching()));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(6, new FallingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
