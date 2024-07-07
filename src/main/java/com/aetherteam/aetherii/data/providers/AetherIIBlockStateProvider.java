@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;
@@ -457,6 +458,16 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     public void pottedOrangeTree(Block block, Block tree) {
         ModelFile pot = this.models().withExistingParent(this.name(block), this.mcLoc("block/flower_pot_cross")).texture("plant", this.modLoc("block/natural/" + this.name(tree) + "_bottom_0")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public void valkyrieSprout(Block block) {
+        String blockName = this.name(block);
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            int age = state.getValue(ValkyrieSproutBlock.AGE);
+            ResourceLocation location = this.extend(this.texture(blockName, "natural/"), "_" + age);
+            ModelFile model = this.models().cross(blockName + "_" + age, location).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
     }
 
     public void twig(Block block, Block log) {

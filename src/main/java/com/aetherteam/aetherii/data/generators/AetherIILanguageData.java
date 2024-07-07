@@ -178,6 +178,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Orange Tree
         this.addBlock(AetherIIBlocks.ORANGE_TREE, "Orange Tree");
 
+        // Valkyrie Sprout
+        this.addBlock(AetherIIBlocks.VALKYRIE_SPROUT, "Valkyrie Sprout");
+
         // Ground Decoration
         this.addBlock(AetherIIBlocks.SKYROOT_TWIG, "Skyroot Twig");
         this.addBlock(AetherIIBlocks.HOLYSTONE_ROCK, "Holystone Rock");
@@ -543,6 +546,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
         this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
+        this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");

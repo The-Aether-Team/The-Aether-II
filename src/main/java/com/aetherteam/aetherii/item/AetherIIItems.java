@@ -151,6 +151,7 @@ public class AetherIIItems {
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = ITEMS.register("skyroot_stick", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> SKYROOT_PINECONE = ITEMS.register("skyroot_pinecone", () -> new SkyrootPineconeItem(new Item.Properties()));
+    public static final DeferredItem<Item> VALKYRIE_WINGS = ITEMS.register("valkyrie_wings", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> SCATTERGLASS_SHARD = ITEMS.register("scatterglass_shard", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> AMBROSIUM_SHARD = ITEMS.register("ambrosium_shard", () -> new AmbrosiumShardItem(new Item.Properties()));
     public static final DeferredItem<Item> ZANITE_GEMSTONE = ITEMS.register("zanite_gemstone", () -> new Item(new Item.Properties()));

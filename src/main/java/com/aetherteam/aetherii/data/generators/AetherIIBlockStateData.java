@@ -185,6 +185,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         // Potted Orange Tree
         this.pottedOrangeTree(AetherIIBlocks.POTTED_ORANGE_TREE.get(), AetherIIBlocks.ORANGE_TREE.get());
 
+        // Valkyrie Sprout
+        this.valkyrieSprout(AetherIIBlocks.VALKYRIE_SPROUT.get());
+
         // Ground Decoration
         this.twig(AetherIIBlocks.SKYROOT_TWIG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.rock(AetherIIBlocks.HOLYSTONE_ROCK.get(), AetherIIBlocks.HOLYSTONE.get());
