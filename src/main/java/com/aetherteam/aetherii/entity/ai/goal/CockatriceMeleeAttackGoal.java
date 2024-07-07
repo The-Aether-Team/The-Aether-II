@@ -51,6 +51,7 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
         if (this.canPerformAttack(target)) {
             this.mob.swing(InteractionHand.MAIN_HAND);
             this.mob.doHurtTarget(target);
+            this.mob.setZza(0.3F);
         }
 
         if (this.attack) {
