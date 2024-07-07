@@ -63,7 +63,7 @@ public class Tempest extends Zephyr {
 
 
     public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && isStormAercloud(level, pos) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(11) == 0) && level.canSeeSky(pos);
+        return level.getDifficulty() != Difficulty.PEACEFUL && isStormAercloud(level, pos.below()) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(11) == 0) && level.canSeeSky(pos);
     }
 
     private static boolean isNight(LevelAccessor level){
