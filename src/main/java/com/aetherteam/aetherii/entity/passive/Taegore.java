@@ -30,7 +30,7 @@ public class Taegore extends AetherAnimal {
         this.goalSelector.addGoal(1, new TaegorePanicGoal(this, 2.2));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, Ingredient.of(AetherIITags.Items.TAEGORE_FOOD), false));
-        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Player.class, 4.0F, 2.2, 2.2, Entity::isSprinting));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Player.class, 8.0F, 2.2, 2.2, Entity::isSprinting));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(6, new FallingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
