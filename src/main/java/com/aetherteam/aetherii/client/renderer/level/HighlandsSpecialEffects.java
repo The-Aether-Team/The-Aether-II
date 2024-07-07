@@ -301,6 +301,13 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
                 Matrix4f matrix4f = poseStack.last().pose();
 
+
+                double d0 = Minecraft.getInstance().player.getEyePosition(partialTick).y - 96;
+                if (d0 < 0.0) {
+                    r *= 0.95F;
+                    g *= 0.95F;
+                }
+
                 RenderSystem.setShader(AetherIIShaders::getCloudCoverShader);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0.0F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(0.0F));
