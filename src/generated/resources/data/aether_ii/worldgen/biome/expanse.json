@@ -85,7 +85,14 @@
         "weight": 3
       }
     ],
-    "aether_ii:aether_surface_monster": [],
+    "aether_ii:aether_surface_monster": [
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      }
+    ],
     "ambient": [],
     "axolotls": [],
     "creature": [],
