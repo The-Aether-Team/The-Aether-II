@@ -111,6 +111,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.ARKENIUM_PLATES.get(), "materials/");
         this.item(AetherIIItems.INERT_GRAVITITE.get(), "materials/");
         this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
+        this.item(AetherIIItems.GLINT_GEMSTONE.get(), "materials/");
         this.item(AetherIIItems.GOLDEN_AMBER.get(), "materials/");
         this.item(AetherIIItems.CLOUDTWINE.get(), "materials/");
         this.item(AetherIIItems.TAEGORE_HIDE.get(), "materials/");
@@ -172,6 +173,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.BLUEBERRY_MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.ENCHANTED_MOA_FEED.get(), "miscellaneous/");
+        this.item(AetherIIItems.GLINT_COIN.get(), "miscellaneous/");
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         // Blocks
@@ -214,6 +216,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_ORE.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
+        this.itemBlock(AetherIIBlocks.GLINT_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());

@@ -269,6 +269,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
+                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
@@ -432,6 +433,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MUSIC_DISC_APPROACHES.get());
                 output.accept(AetherIIItems.MUSIC_DISC_DEMISE.get());
                 output.accept(AetherIIItems.RECORDING_892.get());
+                output.accept(AetherIIItems.GLINT_COIN.get());
                 output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
             }).build());
 
@@ -506,6 +508,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_PLATES.get());
                 output.accept(AetherIIItems.INERT_GRAVITITE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
+                output.accept(AetherIIItems.GLINT_GEMSTONE.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
                 output.accept(AetherIIItems.CLOUDTWINE.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
