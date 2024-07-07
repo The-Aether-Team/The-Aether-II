@@ -216,8 +216,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FlowerPotBlock> POTTED_ORANGE_TREE = BLOCKS.register("potted_orange_tree", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ORANGE_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT)));
 
     // Brettl
-    public static final DeferredBlock<Block> BRETTL_PLANT = register("brettl_plant", () -> new BrettlPlantBlock(BlockBehaviour.Properties.of().noCollission().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
-    public static final DeferredBlock<Block> BRETTL_FLOWER = register("brettl_flower", () -> new BrettlFlowerBlock(BlockBehaviour.Properties.of().noCollission().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> BRETTL_PLANT = BLOCKS.register("brettl_plant", () -> new BrettlPlantBlock(BlockBehaviour.Properties.of().noCollission().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> BRETTL_FLOWER = BLOCKS.register("brettl_flower", () -> new BrettlFlowerBlock(BlockBehaviour.Properties.of().noCollission().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
 
     // Ground Decoration
     public static final DeferredBlock<Block> SKYROOT_TWIG = register("skyroot_twig", () -> new TwigBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).noOcclusion().noCollission().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY)));
