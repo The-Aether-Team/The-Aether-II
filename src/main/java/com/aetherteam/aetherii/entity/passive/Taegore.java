@@ -31,6 +31,7 @@ public class Taegore extends AetherAnimal {
         this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Player.class, 3.0F, 2.1, 1.8, condition -> !condition.isCrouching()));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(6, new FallingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
 
