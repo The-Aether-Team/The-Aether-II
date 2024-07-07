@@ -158,7 +158,7 @@ public class Burrukai extends AetherAnimal implements IShearable {
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(AetherIITags.Items.BURRUKAI_TEMPTATION_ITEMS);
+        return pStack.is(AetherIITags.Items.BURRUKAI_FOOD);
     }
 
     @Nullable
