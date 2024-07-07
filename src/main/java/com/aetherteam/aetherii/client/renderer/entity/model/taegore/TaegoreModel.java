@@ -62,8 +62,8 @@ public class TaegoreModel extends HierarchicalModel<Taegore> {
 		this.leg_rear_right_lower = leg_rear_right.getChild("leg_rear_right_lower");
 		this.leg_rear_left = body_main.getChild("leg_rear_left");
 		this.leg_rear_left_lower = leg_rear_left.getChild("leg_rear_left_lower");
-		this.tail = root.getChild("tail");
-		this.spines = root.getChild("spines");
+		this.tail = body_main.getChild("tail");
+		this.spines = body_main.getChild("spines");
 	}
 
 	public static LayerDefinition createBodyLayer() {
