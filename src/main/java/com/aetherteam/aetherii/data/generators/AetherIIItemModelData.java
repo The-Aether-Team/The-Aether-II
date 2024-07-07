@@ -121,7 +121,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.PURPLE_SWET_GEL.get(), "materials/");
 
-        this.item(AetherIIBlocks.BLUE_MOA_EGG.get().asItem(), "materials/");
+        this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "materials/");
 
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
@@ -164,6 +164,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MOA_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.TEMPEST_SPAWN_EGG.get());
 
@@ -233,13 +234,17 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_LOG.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_WOOD.get());
 
         // Leaf Pile
@@ -304,6 +309,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Flowers
         this.itemBlockFlat(AetherIIBlocks.HESPEROSE.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.TARABLOOM.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Bushes
         this.itemBlock(AetherIIBlocks.HIGHLANDS_BUSH.get());

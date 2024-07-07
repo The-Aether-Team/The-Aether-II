@@ -81,13 +81,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_LOG, "Skyroot Log");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_LOG, "Stripped Skyroot Log");
         this.addBlock(AetherIIBlocks.GREATROOT_LOG, "Greatroot Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_GREATROOT_LOG, "Stripped Greatroot Log");
         this.addBlock(AetherIIBlocks.WISPROOT_LOG, "Wisproot Log");
         this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG, "Mossy Wisproot Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_LOG, "Stripped Wisproot Log");
         this.addBlock(AetherIIBlocks.AMBEROOT_LOG, "Amberoot Log");
         this.addBlock(AetherIIBlocks.SKYROOT_WOOD, "Skyroot Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD, "Stripped Skyroot Wood");
         this.addBlock(AetherIIBlocks.GREATROOT_WOOD, "Greatroot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_GREATROOT_WOOD, "Stripped Greatroot Wood");
         this.addBlock(AetherIIBlocks.WISPROOT_WOOD, "Wisproot Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD, "Stripped Wisproot Wood");
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
 
         // Leaf Pile
@@ -164,6 +168,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Flowers
         this.addBlock(AetherIIBlocks.HESPEROSE, "Hesperose");
         this.addBlock(AetherIIBlocks.TARABLOOM, "Tarabloom");
+        this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
 
         // Bushes
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
@@ -439,7 +444,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
 
         //Egg
-        this.addBlock(AetherIIBlocks.BLUE_MOA_EGG, "Blue Moa Egg");
+        this.addBlock(AetherIIBlocks.MOA_EGG, "Moa Egg");
 
 
         // Items
@@ -595,6 +600,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Magnetic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Arctic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
+        this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
 
@@ -678,6 +684,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
 
         // Hostile
+        this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
 
@@ -762,7 +769,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "flying_cow.milk", "Flying Cow gets milked");
         this.addSubtitle("entity", "flying_cow.step", "Footsteps");
 
-        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baths");
+        this.addSubtitle("entity", "sheepuff.ambient", "Sheepuff baahs");
         this.addSubtitle("entity", "sheepuff.death", "Sheepuff dies");
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");

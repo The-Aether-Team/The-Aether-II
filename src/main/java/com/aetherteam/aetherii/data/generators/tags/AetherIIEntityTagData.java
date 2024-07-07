@@ -38,6 +38,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 EntityType.POLAR_BEAR
         );
         this.tag(AetherIITags.Entities.SPAWNING_AERCLOUDS).add(
+                AetherIIEntityTypes.TEMPEST.get(),
                 AetherIIEntityTypes.ZEPHYR.get()
         );
         this.tag(AetherIITags.Entities.SPAWNING_LEAVES).add(
