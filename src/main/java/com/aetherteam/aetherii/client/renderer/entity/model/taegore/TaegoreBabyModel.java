@@ -26,18 +26,18 @@ public class TaegoreBabyModel extends HierarchicalModel<Taegore> {
 	public TaegoreBabyModel(ModelPart root) {
 		this.root = root;
 		this.body_main = root.getChild("body_main");
-		this.tail = root.getChild("tail");
-		this.plate_f_l = root.getChild("plate_f_l");
-		this.head = root.getChild("head");
-		this.ears = root.getChild("ears");
-		this.snout = root.getChild("snout");
-		this.leg_f_l = root.getChild("leg_f_l");
-		this.leg_f_r = root.getChild("leg_f_r");
-		this.leg_b_l = root.getChild("leg_b_l");
-		this.leg_b_r = root.getChild("leg_b_r");
-		this.plate_f_r = root.getChild("plate_f_r");
-		this.plate_b_l = root.getChild("plate_b_l");
-		this.plate_b_r = root.getChild("plate_b_r");
+		this.tail = body_main.getChild("tail");
+		this.plate_f_l = body_main.getChild("plate_f_l");
+		this.head = body_main.getChild("head");
+		this.ears = head.getChild("ears");
+		this.snout = head.getChild("snout");
+		this.leg_f_l = body_main.getChild("leg_f_l");
+		this.leg_f_r = body_main.getChild("leg_f_r");
+		this.leg_b_l = body_main.getChild("leg_b_l");
+		this.leg_b_r = body_main.getChild("leg_b_r");
+		this.plate_f_r = body_main.getChild("plate_f_r");
+		this.plate_b_l = body_main.getChild("plate_b_l");
+		this.plate_b_r = body_main.getChild("plate_b_r");
 	}
 
 	public static LayerDefinition createBodyLayer() {
