@@ -30,7 +30,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.QUARTZ_PILLAR,
                 Blocks.CHISELED_QUARTZ_BLOCK
         );
-        this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST).addTag(AetherIITags.Blocks.AERCLOUDS).addTag(BlockTags.LEAVES).addTag(Tags.Blocks.STONES);
+        this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST).add(
+                AetherIIBlocks.BLUE_AERCLOUD.get(),
+                AetherIIBlocks.GREEN_AERCLOUD.get(),
+                AetherIIBlocks.PURPLE_AERCLOUD.get(),
+                AetherIIBlocks.STORM_AERCLOUD.get()
+        );
         this.tag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
