@@ -13,10 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.properties.BedPart;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;
@@ -618,6 +615,17 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
     private BlockModelBuilder door(DoorBlock block, String name, String model) {
         return this.models().withExistingParent(name,  this.modLoc("block/" + model)).texture("door", this.texture(this.name(block), "construction/")).texture("bottom", this.texture(this.name(block), "construction/", "_bottom")).texture("top", this.texture(this.name(block), "construction/", "_top"));
+    }
+
+    public void secretTrapdoorBlock(TrapDoorBlock block, ResourceLocation texture) {
+        this.secretTrapdoorBlockInternal(block, this.name(block), texture);
+    }
+
+    private void secretTrapdoorBlockInternal(TrapDoorBlock block, String baseName, ResourceLocation texture) {
+        ModelFile bottom = this.models().withExistingParent(baseName + "_bottom", this.modLoc("block/template_orientable_secret_trapdoor_bottom")).texture("texture", texture);
+        ModelFile top = this.models().withExistingParent(baseName + "_top", this.modLoc("block/template_orientable_secret_trapdoor_top")).texture("texture", texture);
+        ModelFile open = this.models().withExistingParent(baseName + "_open", this.modLoc("block/template_orientable_secret_trapdoor_open")).texture("texture", texture);
+        this.trapdoorBlock(block, bottom, top, open, true);
     }
 
     public void crudeScatterglassPane(IronBarsBlock block, HalfTransparentBlock glass, String location) {
