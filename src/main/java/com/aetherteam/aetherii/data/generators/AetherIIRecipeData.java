@@ -611,6 +611,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIItems.SKYROOT_PINECONE)
                 .unlockedBy("has_skyroot_pinecone", has(AetherIIItems.SKYROOT_PINECONE))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SKYROOT_BUCKET.get(), 1)
+                .define('#', AetherIITags.Items.CRAFTS_SKYROOT_TOOLS)
+                .pattern("# #")
+                .pattern(" # ")
+                .unlockedBy("has_planks", has(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS))
+                .save(consumer);
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_SHARD.get(), 4)
                 .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
                 .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
