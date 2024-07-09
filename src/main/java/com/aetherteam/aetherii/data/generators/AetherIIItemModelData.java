@@ -68,7 +68,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.GRAVITITE_SPEAR.get(), "weapons/");
         this.crossbowItem(AetherIIItems.GRAVITITE_CROSSBOW.get(), "weapons/");
 
-        this.handheldItem(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
+        this.item(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
 
         // Armor
         this.dyedHelmetItem(AetherIIItems.TAEGORE_HIDE_HELMET.get(), "armor/");
