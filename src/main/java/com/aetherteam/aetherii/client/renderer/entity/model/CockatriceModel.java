@@ -6,6 +6,7 @@ import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 
 public class CockatriceModel<T extends Cockatrice> extends HierarchicalModel<T> {
     private final ModelPart root;
@@ -169,6 +170,8 @@ public class CockatriceModel<T extends Cockatrice> extends HierarchicalModel<T> 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
+        this.head.xRot = (headPitch * Mth.DEG_TO_RAD) + 0.0873F;
+        this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
         this.animateWalk(CockatriceAnimation.RUN, limbSwing, limbSwingAmount, 1.0F, 1.5F);
         this.animate(entity.attackAnimationState, CockatriceAnimation.CLAW_ATTACK, ageInTicks, 2.0F);
         this.animate(entity.shootAnimationState, CockatriceAnimation.ATTACK, ageInTicks, 1.0F);
