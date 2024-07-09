@@ -54,7 +54,7 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
 
     @Override
     protected boolean isRandomlyTicking(BlockState state) {
-        return state.getValue(AGE) < 2;
+        return true;
     }
 
     @Override
@@ -62,8 +62,18 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
         if (state.getValue(AGE) < 2 && CommonHooks.canCropGrow(level, pos.relative(this.growthDirection), state, random.nextDouble() < 0.1)) {
             BlockPos blockpos = pos.relative(this.growthDirection);
             if (this.canGrowInto(level.getBlockState(blockpos))) {
-                level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state, level.random));
+                if (state.getValue(AGE) == 1) {
+                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state.setValue(GROWN, true), level.random));
+                } else {
+                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state, level.random));
+                }
                 CommonHooks.fireCropGrowPost(level, blockpos, level.getBlockState(blockpos));
+            }
+        }
+        if (state.getValue(GROWN)) {
+            if (level.getBlockState(pos.below()).hasProperty(GROWN) && level.getBlockState(pos.below(2)).hasProperty(GROWN)) {
+                level.setBlockAndUpdate(pos.below(), AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, true));
+                level.setBlockAndUpdate(pos.below(2), AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, true));
             }
         }
     }
