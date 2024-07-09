@@ -13,6 +13,7 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.ReloadListeners;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
@@ -145,12 +146,14 @@ public class AetherII {
         WorldInteractionListener.listen(bus);
         RecipeListener.listen(bus);
         BlockInteractionListener.listen(bus);
+        EntityInteractionListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
+        neoBus.addListener(AetherIIDataMaps::registerDataMaps);
     }
 
     public void registerPackets(RegisterPayloadHandlersEvent event) {
