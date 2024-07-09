@@ -42,8 +42,8 @@ public class AetherFlowerBlock extends FlowerBlock implements Snowable {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(SNOWY);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(SNOWY);
     }
 
     @Override

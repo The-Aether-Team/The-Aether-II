@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;
@@ -7,10 +8,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantBodyBlock;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BrettlPlantBlock extends GrowingPlantBodyBlock {
     public static final MapCodec<BrettlPlantBlock> CODEC = simpleCodec(BrettlPlantBlock::new);
+    public static final BooleanProperty GROWN = AetherIIBlockStateProperties.BRETTL_GROWN;
     public static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 16.0, 12.0);
 
     @Override
@@ -20,10 +25,16 @@ public class BrettlPlantBlock extends GrowingPlantBodyBlock {
 
     public BrettlPlantBlock(BlockBehaviour.Properties properties) {
         super(properties, Direction.UP, SHAPE, false);
+        this.registerDefaultState(this.stateDefinition.any().setValue(GROWN, Boolean.FALSE));
     }
 
     @Override
     protected GrowingPlantHeadBlock getHeadBlock() {
         return (GrowingPlantHeadBlock) AetherIIBlocks.BRETTL_PLANT_TIP.get();
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(GROWN);
     }
 }
