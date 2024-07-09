@@ -16,11 +16,9 @@ public class CockatriceRangedAttackGoal extends Goal {
     private LivingEntity target;
     private int attackTime = -1;
     private final double speedModifier;
-    private int seeTime;
     private final int attackIntervalMin;
     private final int attackIntervalMax;
     private final float attackRadius;
-    private final float attackRadiusSqr;
 
     public CockatriceRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackInterval, float attackRadius) {
         this(rangedAttackMob, speedModifier, attackInterval, attackInterval, attackRadius);
@@ -36,7 +34,6 @@ public class CockatriceRangedAttackGoal extends Goal {
             this.attackIntervalMin = attackIntervalMin;
             this.attackIntervalMax = attackIntervalMax;
             this.attackRadius = attackRadius;
-            this.attackRadiusSqr = attackRadius * attackRadius;
             this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
         }
     }
@@ -60,7 +57,6 @@ public class CockatriceRangedAttackGoal extends Goal {
     @Override
     public void stop() {
         this.target = null;
-        this.seeTime = 0;
         this.attackTime = -1;
     }
 
@@ -73,12 +69,6 @@ public class CockatriceRangedAttackGoal extends Goal {
     public void tick() {
         double d0 = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
         boolean flag = this.mob.getSensing().hasLineOfSight(this.target);
-        if (flag) {
-            this.seeTime++;
-        } else {
-            this.seeTime = 0;
-        }
-
         this.mob.getNavigation().moveTo(this.target, this.speedModifier);
 
 
