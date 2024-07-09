@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_brettl_weed": {
+    "has_brettl_grass": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_brettl_weed"
+      "has_brettl_grass"
     ]
   ],
   "rewards": {

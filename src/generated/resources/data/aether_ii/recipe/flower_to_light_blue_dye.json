@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "cyan_dye",
+  "group": "light_blue_dye",
   "ingredients": [
     {
       "item": "aether_ii:brettl_flower"
@@ -9,6 +9,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "minecraft:cyan_dye"
+    "id": "minecraft:light_blue_dye"
   }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:flower_to_cyan_dye"
+        "recipe": "aether_ii:flower_to_light_blue_dye"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:flower_to_cyan_dye"
+      "aether_ii:flower_to_light_blue_dye"
     ]
   }
 }
