@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Set;
 import java.util.function.Supplier;
@@ -39,7 +40,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE.get());
-        this.dropSelf(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+        this.add(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.SCATTERGLASS_SHARD, UniformGenerator.between(1.0F, 3.0F)));
 
         // Highfields
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
@@ -196,6 +197,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Potted Orange Tree
         this.dropPottedContents(AetherIIBlocks.POTTED_ORANGE_TREE.get());
+
+        // Valkyrie Sprout
+        this.add(AetherIIBlocks.VALKYRIE_SPROUT.get(), (sprout) -> this.droppingValkyrieSprout(sprout, AetherIIItems.VALKYRIE_WINGS.get()));
 
         // Ground Decoration
         this.add(AetherIIBlocks.SKYROOT_TWIG.get(), this::dropTwigs);

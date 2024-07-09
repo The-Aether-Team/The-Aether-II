@@ -343,6 +343,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
+                output.accept(AetherIIBlocks.VALKYRIE_SPROUT.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
                 output.accept(AetherIIBlocks.MOA_EGG.get());
@@ -511,6 +512,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
+                output.accept(AetherIIItems.VALKYRIE_WINGS.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
                 output.accept(AetherIIItems.MOA_FEED.get());
                 output.accept(AetherIIItems.BLUEBERRY_MOA_FEED.get());
