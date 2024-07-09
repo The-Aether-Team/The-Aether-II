@@ -15,7 +15,6 @@ import java.awt.*;
 public class AetherIIColorResolvers {
     private static final int AETHER_GRASS_COLOR = 0xB1FFCB;
     private static final int AETHER_TALL_GRASS_COLOR = 0xB1FFCB;
-    private static final int ENCHANTED_GRASS_COLOR = 0xFCEA64;
 
     public static void registerBlockColor(RegisterColorHandlersEvent.Block event) {
         event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(level, pos, tintIndex, level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_GRASS_COLOR, 5.0F, 6.0F)),
@@ -26,9 +25,9 @@ public class AetherIIColorResolvers {
 
     public static void registerItemColor(RegisterColorHandlersEvent.Item event) {
         event.register((color, itemProvider) -> itemProvider == 0 ? -1 : DyedItemColor.getOrDefault(color, -3150087),
-                AetherIIItems.TAEGORE_HIDE_HELMET.get(), AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), AetherIIItems.TAEGORE_HIDE_BOOTS.get());
+                AetherIIItems.TAEGORE_HIDE_HELMET.get(), AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), AetherIIItems.TAEGORE_HIDE_BOOTS.get(), AetherIIItems.TAEGORE_HIDE_GLOVES.get());
         event.register((color, itemProvider) -> itemProvider == 0 ? -1 : DyedItemColor.getOrDefault(color, -10380096),
-                AetherIIItems.BURRUKAI_PELT_HELMET.get(), AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), AetherIIItems.BURRUKAI_PELT_BOOTS.get());
+                AetherIIItems.BURRUKAI_PELT_HELMET.get(), AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), AetherIIItems.BURRUKAI_PELT_BOOTS.get(), AetherIIItems.BURRUKAI_PELT_GLOVES.get());
         event.register((color, itemProvider) -> {
             BlockState blockstate = ((BlockItem) color.getItem()).getBlock().defaultBlockState();
             return event.getBlockColors().getColor(blockstate, null, null, itemProvider);

@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/armor/taegore_hide_gloves"
+    "layer0": "aether_ii:item/armor/taegore_hide_gloves",
+    "layer1": "aether_ii:item/armor/taegore_hide_gloves_dyed"
   }
 }

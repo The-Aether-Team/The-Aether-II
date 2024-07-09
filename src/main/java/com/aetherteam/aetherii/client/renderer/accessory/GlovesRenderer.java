@@ -17,8 +17,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 
 public class GlovesRenderer implements SimpleAccessoryRenderer {
     private final GlovesModel glovesModel;
@@ -44,6 +47,13 @@ public class GlovesRenderer implements SimpleAccessoryRenderer {
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.armorCutoutNoCull(texture));
         glovesModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, -1);
+
+        if (stack.is(ItemTags.DYEABLE)) {
+            int color = FastColor.ARGB32.opaque(DyedItemColor.getOrDefault(stack, -6265536));
+            ResourceLocation dyedTexture = ResourceLocation.parse(glovesItem.getGlovesTexture().toString().replace(".png", "_dyed.png"));
+            VertexConsumer dyedConsumer = buffer.getBuffer(RenderType.armorCutoutNoCull(dyedTexture));
+            glovesModel.renderToBuffer(poseStack, dyedConsumer, packedLight, OverlayTexture.NO_OVERLAY, color);
+        }
 
         if (stack.hasFoil()) {
             glovesModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.armorEntityGlint()), packedLight, OverlayTexture.NO_OVERLAY, -1);

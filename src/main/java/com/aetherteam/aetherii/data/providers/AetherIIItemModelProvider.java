@@ -52,6 +52,10 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
         this.dyedStyledArmorItem(item, location, "boots");
     }
 
+    public void dyedGlovesItem(Item item, String location) {
+        this.dyedStyledArmorItem(item, location, "gloves");
+    }
+
     public void dyedStyledArmorItem(Item item, String location, String type) {
         this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
                 .texture("layer0", this.modLoc("item/" + location + this.itemName(item)))

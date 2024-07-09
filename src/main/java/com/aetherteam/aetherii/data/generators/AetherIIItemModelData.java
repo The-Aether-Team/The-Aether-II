@@ -75,13 +75,13 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.dyedChestplateItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), "armor/");
         this.dyedLeggingsItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), "armor/");
         this.dyedBootsItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), "armor/");
-        this.item(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), "armor/");
+        this.dyedGlovesItem(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), "armor/");
 
         this.dyedHelmetItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), "armor/");
         this.dyedChestplateItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), "armor/");
         this.dyedLeggingsItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), "armor/");
         this.dyedBootsItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), "armor/");
-        this.item(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), "armor/");
+        this.dyedGlovesItem(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.ZANITE_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.ZANITE_CHESTPLATE.get(), "armor/");

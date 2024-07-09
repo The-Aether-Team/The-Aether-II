@@ -470,10 +470,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(),
                 AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(),
                 AetherIIItems.TAEGORE_HIDE_BOOTS.get(),
+                AetherIIItems.TAEGORE_HIDE_GLOVES.get(),
                 AetherIIItems.BURRUKAI_PELT_HELMET.get(),
                 AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(),
                 AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(),
-                AetherIIItems.BURRUKAI_PELT_BOOTS.get()
+                AetherIIItems.BURRUKAI_PELT_BOOTS.get(),
+                AetherIIItems.BURRUKAI_PELT_GLOVES.get()
         );
 
         // Forge
