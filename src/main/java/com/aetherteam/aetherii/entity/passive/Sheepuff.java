@@ -96,7 +96,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1, Ingredient.of(AetherIITags.Items.SHEEPUFF_TEMPTATION_ITEMS), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1, Ingredient.of(AetherIITags.Items.SHEEPUFF_FOOD), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(5, this.eatBlockGoal);
         this.goalSelector.addGoal(6, new FallingRandomStrollGoal(this, 1.0));
@@ -318,7 +318,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.is(AetherIITags.Items.SHEEPUFF_TEMPTATION_ITEMS);
+        return stack.is(AetherIITags.Items.SHEEPUFF_FOOD);
     }
 
     @Nullable
@@ -350,22 +350,22 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
             return this.getType().getDefaultLootTable();
         } else {
             return switch (this.getColor()) {
-                case SheepuffColor.WHITE -> AetherIILoot.ENTITIES_SHEEPUFF_WHITE;
-                case SheepuffColor.ORANGE -> AetherIILoot.ENTITIES_SHEEPUFF_ORANGE;
-                case SheepuffColor.MAGENTA -> AetherIILoot.ENTITIES_SHEEPUFF_MAGENTA;
-                case SheepuffColor.LIGHT_BLUE -> AetherIILoot.ENTITIES_SHEEPUFF_LIGHT_BLUE;
-                case SheepuffColor.YELLOW -> AetherIILoot.ENTITIES_SHEEPUFF_YELLOW;
-                case SheepuffColor.LIME -> AetherIILoot.ENTITIES_SHEEPUFF_LIME;
-                case SheepuffColor.PINK -> AetherIILoot.ENTITIES_SHEEPUFF_PINK;
-                case SheepuffColor.GRAY -> AetherIILoot.ENTITIES_SHEEPUFF_GRAY;
-                case SheepuffColor.LIGHT_GRAY -> AetherIILoot.ENTITIES_SHEEPUFF_LIGHT_GRAY;
-                case SheepuffColor.CYAN -> AetherIILoot.ENTITIES_SHEEPUFF_CYAN;
-                case SheepuffColor.PURPLE -> AetherIILoot.ENTITIES_SHEEPUFF_PURPLE;
-                case SheepuffColor.BLUE -> AetherIILoot.ENTITIES_SHEEPUFF_BLUE;
-                case SheepuffColor.BROWN -> AetherIILoot.ENTITIES_SHEEPUFF_BROWN;
-                case SheepuffColor.GREEN -> AetherIILoot.ENTITIES_SHEEPUFF_GREEN;
-                case SheepuffColor.RED -> AetherIILoot.ENTITIES_SHEEPUFF_RED;
-                case SheepuffColor.BLACK -> AetherIILoot.ENTITIES_SHEEPUFF_BLACK;
+                case WHITE -> AetherIILoot.ENTITIES_SHEEPUFF_WHITE;
+                case ORANGE -> AetherIILoot.ENTITIES_SHEEPUFF_ORANGE;
+                case MAGENTA -> AetherIILoot.ENTITIES_SHEEPUFF_MAGENTA;
+                case LIGHT_BLUE -> AetherIILoot.ENTITIES_SHEEPUFF_LIGHT_BLUE;
+                case YELLOW -> AetherIILoot.ENTITIES_SHEEPUFF_YELLOW;
+                case LIME -> AetherIILoot.ENTITIES_SHEEPUFF_LIME;
+                case PINK -> AetherIILoot.ENTITIES_SHEEPUFF_PINK;
+                case GRAY -> AetherIILoot.ENTITIES_SHEEPUFF_GRAY;
+                case LIGHT_GRAY -> AetherIILoot.ENTITIES_SHEEPUFF_LIGHT_GRAY;
+                case CYAN -> AetherIILoot.ENTITIES_SHEEPUFF_CYAN;
+                case PURPLE -> AetherIILoot.ENTITIES_SHEEPUFF_PURPLE;
+                case BLUE -> AetherIILoot.ENTITIES_SHEEPUFF_BLUE;
+                case BROWN -> AetherIILoot.ENTITIES_SHEEPUFF_BROWN;
+                case GREEN -> AetherIILoot.ENTITIES_SHEEPUFF_GREEN;
+                case RED -> AetherIILoot.ENTITIES_SHEEPUFF_RED;
+                case BLACK -> AetherIILoot.ENTITIES_SHEEPUFF_BLACK;
             };
         }
     }

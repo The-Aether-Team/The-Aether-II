@@ -343,6 +343,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
+                output.accept(AetherIIBlocks.VALKYRIE_SPROUT.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
                 output.accept(AetherIIBlocks.MOA_EGG.get());
@@ -511,6 +512,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
+                output.accept(AetherIIItems.VALKYRIE_WINGS.get());
                 output.accept(AetherIIItems.CHARGE_CORE.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
                 output.accept(AetherIIItems.MOA_FEED.get());
@@ -536,6 +538,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MOA_SPAWN_EGG.get());

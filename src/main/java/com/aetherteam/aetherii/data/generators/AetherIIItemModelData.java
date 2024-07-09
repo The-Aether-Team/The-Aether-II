@@ -104,6 +104,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
         this.item(AetherIIItems.SKYROOT_PINECONE.get(), "materials/");
+        this.item(AetherIIItems.VALKYRIE_WINGS.get(), "materials/");
         this.item(AetherIIItems.SCATTERGLASS_SHARD.get(), "materials/");
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
@@ -120,11 +121,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.GREEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.BLUE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.PURPLE_SWET_GEL.get(), "materials/");
-
-        this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "materials/");
-
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
+        this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "materials/");
 
         // Food
         this.item(AetherIIItems.BLUEBERRY.get(), "food/");
@@ -157,6 +156,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
@@ -319,6 +319,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Orange Tree
         this.orangeTree(AetherIIBlocks.ORANGE_TREE.get());
+
+        // Valkyrie Sprout
+        this.valkyrieSprout(AetherIIBlocks.VALKYRIE_SPROUT.get());
 
         // Ground Decoration
         this.item(AetherIIBlocks.SKYROOT_TWIG.asItem(), "miscellaneous/");
