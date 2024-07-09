@@ -8,14 +8,24 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
     private int ticksUntilNextAttack;
     private boolean attack;
+    private final double speedModifier;
 
     public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
         super(mob, speedModifier, followingTargetEvenIfNotSeen);
+        this.speedModifier = speedModifier;
     }
 
     @Override
     public boolean canUse() {
-        return super.canUse() && this.mob.distanceToSqr(this.mob.getTarget()) <= 3 * 3;
+        if (super.canUse() && this.mob.distanceToSqr(this.mob.getTarget()) <= 3 * 3) {
+            return true;
+        } else {
+            LivingEntity target = this.mob.getTarget();
+            if (target != null) {
+                this.mob.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), this.speedModifier);
+            }
+            return false;
+        }
     }
 
     @Override
@@ -33,7 +43,6 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
     @Override
     public void stop() {
         super.stop();
-        this.mob.getNavigation().stop();
     }
 
     @Override

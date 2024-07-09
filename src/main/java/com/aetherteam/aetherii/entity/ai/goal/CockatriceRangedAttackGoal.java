@@ -45,13 +45,17 @@ public class CockatriceRangedAttackGoal extends Goal {
             this.target = livingentity;
             return true;
         } else {
+            LivingEntity target = this.mob.getTarget();
+            if (target != null) {
+                this.mob.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), this.speedModifier);
+            }
             return false;
         }
     }
 
     @Override
     public boolean canContinueToUse() {
-        return this.canUse() || this.target.isAlive() && !this.mob.getNavigation().isDone();
+        return this.canUse();
     }
 
     @Override

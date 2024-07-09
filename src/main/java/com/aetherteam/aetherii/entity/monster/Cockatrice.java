@@ -28,7 +28,7 @@ public class Cockatrice extends Monster implements RangedAttackMob {
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState shootAnimationState = new AnimationState();
 
-    public Cockatrice(EntityType<? extends Monster> entityType, Level level) {
+    public Cockatrice(EntityType<? extends Cockatrice> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -51,11 +51,11 @@ public class Cockatrice extends Monster implements RangedAttackMob {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new RestrictSunGoal(this));
-        this.goalSelector.addGoal(2, new FleeSunGoal(this, 1.0));
-        this.goalSelector.addGoal(3, new CockatriceMeleeAttackGoal(this, 1.1F, true));
-        this.goalSelector.addGoal(4, new CockatriceRangedAttackGoal(this, 0.8F, 20 * 10, 20 * 15, 10.0F));
-        this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6));
+        this.goalSelector.addGoal(2, new RestrictSunGoal(this));
+        this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0));
+        this.goalSelector.addGoal(4, new CockatriceMeleeAttackGoal(this, 1.1F, true));
+        this.goalSelector.addGoal(5, new CockatriceRangedAttackGoal(this, 0.8F, 20 * 10, 20 * 15, 10.0F));
+        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this, Raider.class).setAlertOthers());
@@ -81,7 +81,7 @@ public class Cockatrice extends Monster implements RangedAttackMob {
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
-        return Mob.createMobAttributes()
+        return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 25.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
