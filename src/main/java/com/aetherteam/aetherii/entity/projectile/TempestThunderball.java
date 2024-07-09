@@ -96,7 +96,7 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         electricCircle.setDuration(electricCircle.getDuration() / 5);
 
         electricCircle.addEffect(new MobEffectInstance(MobEffects.HARM, 1, 0, false, false, false));
-        electricCircle.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1, 1, false, false, false));
+        electricCircle.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 1, false, false, false));
 
         this.level().addFreshEntity(electricCircle);
         electricCircle.playSound(SoundEvents.AMETHYST_BLOCK_CHIME);

@@ -1,8 +1,11 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.projectile.TempestThunderball;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,18 +14,25 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.MagmaCube;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
@@ -39,9 +49,8 @@ public class Tempest extends Zephyr {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(3, new Tempest.SleepGoal(this));
         this.goalSelector.addGoal(5, new Tempest.ThunderballAttackGoal(this));
-        this.goalSelector.addGoal(5, new Zephyr.RandomFloatAroundGoal(this));
+        this.goalSelector.addGoal(5, new Tempest.RandomFloatAroundGoal(this));
         this.goalSelector.addGoal(7, new Zephyr.ZephyrLookGoal(this));
 
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
@@ -50,8 +59,8 @@ public class Tempest extends Zephyr {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return FlyingMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 25.0)
-                .add(Attributes.FOLLOW_RANGE, 50.0);
+                .add(Attributes.MAX_HEALTH, 30.0)
+                .add(Attributes.FOLLOW_RANGE, 40.0);
     }
 
     @Override
@@ -63,19 +72,31 @@ public class Tempest extends Zephyr {
 
 
     public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && isStormAercloud(level, pos.below()) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(6) == 0) && level.canSeeSky(pos);    }
+        return level.getDifficulty() != Difficulty.PEACEFUL && isValidSpawnBlock(level, pos.below()) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(6) == 0) && level.canSeeSky(pos) && isNight(level);
+    }
 
     private static boolean isNight(LevelAccessor level){
         return !(level.getSkyDarken() < 4) && !level.dimensionType().hasFixedTime();
     }
 
+    private static boolean isValidSpawnBlock(LevelAccessor level, BlockPos pos){
+        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.HOLYSTONE);
+    }
+
+    /*
     private static boolean isStormAercloud(LevelAccessor level, BlockPos pos){
         return level.getBlockState(pos).is(AetherIIBlocks.STORM_AERCLOUD.get());
+    }
+    */
+
+    @Override
+    public boolean isInvulnerableTo(DamageSource source) {
+        return source.getDirectEntity() instanceof AreaEffectCloud;
     }
 
     @Override
     public void tick() {
-        if (!this.level().isClientSide() && !isNight(this.level()) && !isStormAercloud(this.level(), this.getOnPos())) {
+        if (!this.level().isClientSide() && !isNight(this.level())) {
             this.hurt(this.level().damageSources().generic(), 1);
             for (int i = 0; i < 7; ++i) {
                 if (this.level() instanceof ServerLevel serverLevel) {
@@ -123,6 +144,52 @@ public class Tempest extends Zephyr {
 
     private boolean getFlag(int flagId) {
         return (this.entityData.get(DATA_FLAGS_ID) & flagId) != 0;
+    }
+
+    protected static class RandomFloatAroundGoal extends Goal {
+        private final Tempest tempest;
+
+        public RandomFloatAroundGoal(Tempest tempest) {
+            this.tempest = tempest;
+            this.setFlags(EnumSet.of(Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            MoveControl moveControl = this.tempest.getMoveControl();
+            if (!moveControl.hasWanted()) {
+                return true;
+            } else {
+                double d0 = moveControl.getWantedX() - this.tempest.getX();
+                double d1 = moveControl.getWantedY() - this.tempest.getY();
+                double d2 = moveControl.getWantedZ() - this.tempest.getZ();
+                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+                return d3 < 1.0 || d3 > 3600.0;
+            }
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return false;
+        }
+
+        @Override
+        public void start() {
+            LivingEntity livingEntity = this.tempest.getTarget();
+            if (livingEntity != null) {
+                RandomSource random = this.tempest.getRandom();
+                double d0 = livingEntity.getX() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
+                double d1 = livingEntity.getY() + random.nextFloat() * 3.0F;
+                double d2 = livingEntity.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
+                this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.8);
+            } else {
+                RandomSource random = this.tempest.getRandom();
+                double d0 = this.tempest.getX() + (random.nextFloat() * 2.0F - 1.0F) * 12.0F;
+                double d1 = this.tempest.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
+                double d2 = this.tempest.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 12.0F;
+                this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.8);
+            }
+        }
     }
 
     static class ThunderballAttackGoal extends Goal {
@@ -176,7 +243,7 @@ public class Tempest extends Zephyr {
                     double accelZ = target.getZ() - (this.parentEntity.getZ() + look.z * 4.0);
                     this.parentEntity.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
                     TempestThunderball thunderBall = new TempestThunderball(level, this.parentEntity, accelX, accelY, accelZ);
-                    thunderBall.setPos(this.parentEntity.getX() + look.x * 4.0, this.parentEntity.getY(0.5) + 0.5, this.parentEntity.getZ() + look.z * 4.0);
+                    thunderBall.setPos(this.parentEntity.getX() + look.x * 1.5, this.parentEntity.getY(), this.parentEntity.getZ() + look.z * 1.5);
                     level.addFreshEntity(thunderBall);
                     this.parentEntity.setChargeTime(-40);
                 }
@@ -186,6 +253,7 @@ public class Tempest extends Zephyr {
         }
     }
 
+    /*
     class SleepGoal extends Goal {
         private Tempest tempest;
 
@@ -220,4 +288,5 @@ public class Tempest extends Zephyr {
             tempest.getMoveControl().setWantedPosition(tempest.getX(), tempest.getY(), tempest.getZ(), 0.0);
         }
     }
+    */
 }
