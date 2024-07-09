@@ -45,6 +45,7 @@ import com.aetherteam.aetherii.item.tools.zanite.ZaniteAxeItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZanitePickaxeItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZaniteShovelItem;
 import com.aetherteam.aetherii.item.tools.zanite.ZaniteTrowelItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -82,7 +83,7 @@ public class AetherIIItems {
     public static final DeferredItem<ShovelItem> GRAVITITE_SHOVEL = ITEMS.register("gravitite_shovel", GravititeShovelItem::new);
     public static final DeferredItem<HoeItem> GRAVITITE_TROWEL = ITEMS.register("gravitite_trowel", GravititeTrowelItem::new);
 
-    public static final DeferredItem<Item> ARKENIUM_SHEARS = ITEMS.register("arkenium_shears", () -> new ShearsItem(new Item.Properties().durability(250)));
+    public static final DeferredItem<Item> ARKENIUM_SHEARS = ITEMS.register("arkenium_shears", () -> new ShearsItem(new Item.Properties().durability(238).component(DataComponents.TOOL, ShearsItem.createToolProperties())));
 
     // Combat
     public static final DeferredItem<SwordItem> SKYROOT_SHORTSWORD = ITEMS.register("skyroot_shortsword", SkyrootShortswordItem::new);
