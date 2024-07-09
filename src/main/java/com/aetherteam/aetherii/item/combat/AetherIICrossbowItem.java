@@ -13,6 +13,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -28,6 +29,7 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -61,6 +63,11 @@ public class AetherIICrossbowItem extends CrossbowItem {
     }
 
     @Override
+    public ItemStack getDefaultCreativeAmmo(@Nullable Player player, ItemStack projectileWeaponItem) {
+        return AetherIIItems.SCATTERGLASS_BOLT.get().getDefaultInstance();
+    }
+
+    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         ChargedProjectiles chargedProjectiles = stack.get(DataComponents.CHARGED_PROJECTILES);
@@ -77,8 +84,26 @@ public class AetherIICrossbowItem extends CrossbowItem {
         }
     }
 
-    public float getCrossbowShootingPower(ChargedProjectiles projectile) {
-        return 3.15F;
+    @Override
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int count) {
+        if (!level.isClientSide()) {
+            CrossbowItem.ChargingSounds chargeSounds = this.getChargingSounds(stack);
+            float duration = (float) (stack.getUseDuration(livingEntity) - count) / (float) this.getCrossbowChargeDuration(stack, livingEntity);
+            if (duration < 0.2F) {
+                this.startSoundPlayed = false;
+                this.midLoadSoundPlayed = false;
+            }
+
+            if (duration >= 0.2F && !this.startSoundPlayed) {
+                this.startSoundPlayed = true;
+                chargeSounds.start().ifPresent(p_352849_ -> level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), p_352849_.value(), SoundSource.PLAYERS, 0.5F, 1.0F));
+            }
+
+            if (duration >= 0.5F && !this.midLoadSoundPlayed) {
+                this.midLoadSoundPlayed = true;
+                chargeSounds.mid().ifPresent(p_352855_ -> level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), p_352855_.value(), SoundSource.PLAYERS, 0.5F, 1.0F));
+            }
+        }
     }
 
     @Override
@@ -100,13 +125,78 @@ public class AetherIICrossbowItem extends CrossbowItem {
     }
 
     public boolean tryLoadProjectiles(LivingEntity shooter, ItemStack crossbowStack) {
-        List<ItemStack> list = draw(crossbowStack, shooter.getProjectile(crossbowStack), shooter);
+        List<ItemStack> list = drawProjectile(crossbowStack, shooter.getProjectile(crossbowStack), shooter);
         if (!list.isEmpty()) {
             crossbowStack.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.of(list));
             return true;
         } else {
             return false;
         }
+    }
+
+    public List<ItemStack> drawProjectile(ItemStack weapon, ItemStack ammo, LivingEntity shooter) {
+        if (ammo.isEmpty()) {
+            return List.of();
+        } else {
+            int i = shooter.level() instanceof ServerLevel serverlevel ? this.getProjectileCount(serverlevel, weapon, shooter, 1) : 1;
+            List<ItemStack> list = new ArrayList<>(i);
+            ItemStack ammoCopy = ammo.copy();
+
+            for (int j = 0; j < i; j++) {
+                ItemStack afterUse = useAmmo(weapon, j == 0 ? ammo : ammoCopy, shooter, j > 0);
+                if (!afterUse.isEmpty()) {
+                    list.add(afterUse);
+                }
+            }
+
+            return list;
+        }
+    }
+
+    @Override
+    public void performShooting(Level level, LivingEntity shooter, InteractionHand hand, ItemStack weapon, float velocity, float inaccuracy, @Nullable LivingEntity target) {
+        if (level instanceof ServerLevel serverlevel) {
+            if (shooter instanceof Player player && EventHooks.onArrowLoose(weapon, shooter.level(), player, 1, true) < 0) return;
+            ChargedProjectiles chargedProjectiles = weapon.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
+            if (chargedProjectiles != null && !chargedProjectiles.isEmpty()) {
+                this.shoot(serverlevel, shooter, hand, weapon, chargedProjectiles.getItems(), velocity, inaccuracy, shooter instanceof Player, target);
+                if (shooter instanceof ServerPlayer serverPlayer) {
+                    CriteriaTriggers.SHOT_CROSSBOW.trigger(serverPlayer, weapon);
+                    serverPlayer.awardStat(Stats.ITEM_USED.get(weapon.getItem()));
+                }
+            }
+        }
+    }
+
+    protected void shoot(ServerLevel level, LivingEntity shooter, InteractionHand hand, ItemStack weapon, List<ItemStack> projectileItems, float velocity, float inaccuracy, boolean isCrit, @Nullable LivingEntity target) {
+        float f = this.getProjectileSpread(level, weapon, shooter, 0.0F);
+        float f1 = projectileItems.size() == 1 ? 0.0F : 2.0F * f / (float)(projectileItems.size() - 1);
+        float f2 = (float) ((projectileItems.size() - 1) % 2) * f1 / 2.0F;
+        float f3 = 1.0F;
+
+        for (int i = 0; i < projectileItems.size(); i++) {
+            ItemStack itemStack = projectileItems.get(i);
+            if (!itemStack.isEmpty()) {
+                float f4 = f2 + f3 * (float)((i + 1) / 2) * f1;
+                f3 = -f3;
+                Projectile projectile = this.createProjectile(level, shooter, weapon, itemStack, isCrit);
+                this.shootProjectile(shooter, projectile, i, velocity, inaccuracy, f4, target);
+                level.addFreshEntity(projectile);
+                weapon.hurtAndBreak(this.getDurabilityUse(itemStack), shooter, LivingEntity.getSlotForHand(hand));
+                if (weapon.isEmpty()) {
+                    break;
+                }
+            }
+        }
+    }
+
+    @Override
+    protected Projectile createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit) {
+        Projectile projectile = super.createProjectile(level, shooter, weapon, ammo, isCrit);
+        if (projectile instanceof AbstractArrow abstractarrow) {
+            abstractarrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
+        }
+        return projectile;
     }
 
     @Override
@@ -141,35 +231,6 @@ public class AetherIICrossbowItem extends CrossbowItem {
         return vector3f.rotateAxis(angle * (float) (Math.PI / 180.0), vector3f2.x, vector3f2.y, vector3f2.z);
     }
 
-    @Override
-    protected Projectile createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit) {
-        Projectile projectile = super.createProjectile(level, shooter, weapon, ammo, isCrit);
-        if (projectile instanceof AbstractArrow abstractarrow) {
-            abstractarrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
-        }
-        return projectile;
-    }
-
-    @Override
-    protected int getDurabilityUse(ItemStack stack) {
-        return 1;
-    }
-
-    @Override
-    public void performShooting(Level level, LivingEntity shooter, InteractionHand hand, ItemStack weapon, float velocity, float inaccuracy, @Nullable LivingEntity target) {
-        if (level instanceof ServerLevel serverlevel) {
-            if (shooter instanceof Player player && EventHooks.onArrowLoose(weapon, shooter.level(), player, 1, true) < 0) return;
-            ChargedProjectiles chargedProjectiles = weapon.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY);
-            if (chargedProjectiles != null && !chargedProjectiles.isEmpty()) {
-                this.shoot(serverlevel, shooter, hand, weapon, chargedProjectiles.getItems(), velocity, inaccuracy, shooter instanceof Player, target);
-                if (shooter instanceof ServerPlayer serverPlayer) {
-                    CriteriaTriggers.SHOT_CROSSBOW.trigger(serverPlayer, weapon);
-                    serverPlayer.awardStat(Stats.ITEM_USED.get(weapon.getItem()));
-                }
-            }
-        }
-    }
-
     public float getShotPitch(RandomSource random, int index) {
         return index == 0 ? 1.0F : this.getRandomShotPitch((index & 1) == 1, random);
     }
@@ -179,26 +240,29 @@ public class AetherIICrossbowItem extends CrossbowItem {
         return 1.0F / (random.nextFloat() * 0.5F + 1.8F) + f;
     }
 
-    @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int count) {
-        if (!level.isClientSide()) {
-            CrossbowItem.ChargingSounds chargeSounds = this.getChargingSounds(stack);
-            float duration = (float) (stack.getUseDuration(livingEntity) - count) / (float) this.getCrossbowChargeDuration(stack, livingEntity);
-            if (duration < 0.2F) {
-                this.startSoundPlayed = false;
-                this.midLoadSoundPlayed = false;
-            }
+    public int getProjectileCount(ServerLevel level, ItemStack tool, Entity entity, int projectileCount) {
+        return projectileCount;
+    }
 
-            if (duration >= 0.2F && !this.startSoundPlayed) {
-                this.startSoundPlayed = true;
-                chargeSounds.start().ifPresent(p_352849_ -> level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), p_352849_.value(), SoundSource.PLAYERS, 0.5F, 1.0F));
-            }
+    public float getProjectileSpread(ServerLevel level, ItemStack tool, Entity entity, float projectileSpread) {
+        return projectileSpread;
+    }
 
-            if (duration >= 0.5F && !this.midLoadSoundPlayed) {
-                this.midLoadSoundPlayed = true;
-                chargeSounds.mid().ifPresent(p_352855_ -> level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), p_352855_.value(), SoundSource.PLAYERS, 0.5F, 1.0F));
-            }
+    public float getPowerForTime(int timeLeft, ItemStack stack, LivingEntity shooter) {
+        float f = (float) timeLeft / (float) this.getCrossbowChargeDuration(stack, shooter);
+        if (f > 1.0F) {
+            f = 1.0F;
         }
+        return f;
+    }
+
+    public float getCrossbowShootingPower(ChargedProjectiles projectile) {
+        return 3.15F;
+    }
+
+    @Override
+    protected int getDurabilityUse(ItemStack stack) {
+        return 1;
     }
 
     @Override
@@ -220,14 +284,6 @@ public class AetherIICrossbowItem extends CrossbowItem {
 
     private CrossbowItem.ChargingSounds getChargingSounds(ItemStack stack) {
         return EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.CROSSBOW_CHARGING_SOUNDS).orElse(DEFAULT_SOUNDS);
-    }
-
-    public float getPowerForTime(int timeLeft, ItemStack stack, LivingEntity shooter) {
-        float f = (float) timeLeft / (float) this.getCrossbowChargeDuration(stack, shooter);
-        if (f > 1.0F) {
-            f = 1.0F;
-        }
-        return f;
     }
 
     @Override

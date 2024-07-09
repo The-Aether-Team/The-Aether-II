@@ -11,6 +11,7 @@
     "common.ItemStackMixin",
     "common.PlayerMixin",
     "common.ServerLevelMixin",
+    "common.accessor.AbstractArrowAccessor",
     "common.accessor.BlockAccessor",
     "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",

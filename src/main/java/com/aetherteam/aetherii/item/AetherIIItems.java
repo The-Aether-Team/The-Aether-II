@@ -7,12 +7,15 @@ import com.aetherteam.aetherii.item.combat.*;
 import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumHammerItem;
 import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumShortswordItem;
 import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumSpearItem;
+import com.aetherteam.aetherii.item.combat.gravitite.GravititeCrossbowItem;
 import com.aetherteam.aetherii.item.combat.gravitite.GravititeHammerItem;
 import com.aetherteam.aetherii.item.combat.gravitite.GravititeShortswordItem;
 import com.aetherteam.aetherii.item.combat.gravitite.GravititeSpearItem;
+import com.aetherteam.aetherii.item.combat.holystone.HolystoneCrossbowItem;
 import com.aetherteam.aetherii.item.combat.holystone.HolystoneHammerItem;
 import com.aetherteam.aetherii.item.combat.holystone.HolystoneShortswordItem;
 import com.aetherteam.aetherii.item.combat.holystone.HolystoneSpearItem;
+import com.aetherteam.aetherii.item.combat.skyroot.SkyrootCrossbowItem;
 import com.aetherteam.aetherii.item.combat.skyroot.SkyrootHammerItem;
 import com.aetherteam.aetherii.item.combat.skyroot.SkyrootShortswordItem;
 import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSpearItem;
@@ -88,13 +91,13 @@ public class AetherIIItems {
     public static final DeferredItem<SwordItem> SKYROOT_SHORTSWORD = ITEMS.register("skyroot_shortsword", SkyrootShortswordItem::new);
     public static final DeferredItem<HammerItem> SKYROOT_HAMMER = ITEMS.register("skyroot_hammer", SkyrootHammerItem::new);
     public static final DeferredItem<SpearItem> SKYROOT_SPEAR = ITEMS.register("skyroot_spear", SkyrootSpearItem::new);
-    public static final DeferredItem<CrossbowItem> SKYROOT_CROSSBOW = ITEMS.register("skyroot_crossbow", () -> new AetherIICrossbowItem(AetherIIItemTiers.SKYROOT, new Item.Properties()));
+    public static final DeferredItem<CrossbowItem> SKYROOT_CROSSBOW = ITEMS.register("skyroot_crossbow", SkyrootCrossbowItem::new);
     public static final DeferredItem<ShieldItem> SKYROOT_SHIELD = ITEMS.register("skyroot_shield", () -> new AetherIIShieldItem(AetherIIItemTiers.SKYROOT, new Item.Properties().attributes(AetherIIShieldItem.createAttributes(100))));
 
     public static final DeferredItem<SwordItem> HOLYSTONE_SHORTSWORD = ITEMS.register("holystone_shortsword", HolystoneShortswordItem::new);
     public static final DeferredItem<HammerItem> HOLYSTONE_HAMMER = ITEMS.register("holystone_hammer", HolystoneHammerItem::new);
     public static final DeferredItem<SpearItem> HOLYSTONE_SPEAR = ITEMS.register("holystone_spear", HolystoneSpearItem::new);
-    public static final DeferredItem<CrossbowItem> HOLYSTONE_CROSSBOW = ITEMS.register("holystone_crossbow", () -> new AetherIICrossbowItem(AetherIIItemTiers.HOLYSTONE, new Item.Properties()));
+    public static final DeferredItem<CrossbowItem> HOLYSTONE_CROSSBOW = ITEMS.register("holystone_crossbow", HolystoneCrossbowItem::new);
     public static final DeferredItem<ShieldItem> HOLYSTONE_SHIELD = ITEMS.register("holystone_shield", () -> new AetherIIShieldItem(AetherIIItemTiers.HOLYSTONE, new Item.Properties().attributes(AetherIIShieldItem.createAttributes(80))));
 
     public static final DeferredItem<SwordItem> ZANITE_SHORTSWORD = ITEMS.register("zanite_shortsword", ZaniteShortswordItem::new);
@@ -112,7 +115,7 @@ public class AetherIIItems {
     public static final DeferredItem<SwordItem> GRAVITITE_SHORTSWORD = ITEMS.register("gravitite_shortsword", GravititeShortswordItem::new);
     public static final DeferredItem<HammerItem> GRAVITITE_HAMMER = ITEMS.register("gravitite_hammer", GravititeHammerItem::new);
     public static final DeferredItem<SpearItem> GRAVITITE_SPEAR = ITEMS.register("gravitite_spear", GravititeSpearItem::new);
-    public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = ITEMS.register("gravitite_crossbow", () -> new AetherIICrossbowItem(AetherIIItemTiers.GRAVITITE, new Item.Properties()));
+    public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = ITEMS.register("gravitite_crossbow", GravititeCrossbowItem::new);
     public static final DeferredItem<ShieldItem> GRAVITITE_SHIELD = ITEMS.register("gravitite_shield", () -> new AetherIIShieldItem(AetherIIItemTiers.GRAVITITE, new Item.Properties().attributes(AetherIIShieldItem.createAttributes(40))));
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = ITEMS.register("scatterglass_bolt", () -> new ScatterglassBoltItem(new Item.Properties()));
