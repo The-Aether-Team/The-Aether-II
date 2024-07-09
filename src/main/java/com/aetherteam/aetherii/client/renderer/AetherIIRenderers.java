@@ -16,6 +16,8 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurru
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
+import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
@@ -49,6 +51,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.PHYG.get(), PhygRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.FLYING_COW.get(), FlyingCowRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SHEEPUFF.get(), SheepuffRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), (context) -> new TaegoreRenderer(context, BiomeVariantPresets.HIGHFIELDS_TAEGORE));
         event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), (context) -> new BurrukaiRenderer(context, BiomeVariantPresets.HIGHFIELDS_BURRUKAI));
         event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), (context) -> new BurrukaiRenderer(context, BiomeVariantPresets.MAGNETIC_BURRUKAI));
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), (context) -> new BurrukaiRenderer(context, BiomeVariantPresets.ARCTIC_BURRUKAI));
@@ -89,6 +92,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.PHYG, PhygModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_TAEGORE, TaegoreModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_TAEGORE_BABY, TaegoreBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_BURRUKAI, BurrukaiModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_BURRUKAI_BABY, BurrukaiBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_BURRUKAI, BurrukaiModel::createBodyLayer);

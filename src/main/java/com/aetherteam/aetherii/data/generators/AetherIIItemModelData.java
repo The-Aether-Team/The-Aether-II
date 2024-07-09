@@ -156,6 +156,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());

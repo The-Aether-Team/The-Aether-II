@@ -92,6 +92,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_WHITE, createSheepuffTable(AetherIIBlocks.WHITE_CLOUDWOOL));
         this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_YELLOW, createSheepuffTable(AetherIIBlocks.YELLOW_CLOUDWOOL));
 
+        this.add(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), createTaegoreTable());
+
         this.add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), createBurrukaiTable());
         this.add(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), createBurrukaiTable());
         this.add(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), createBurrukaiTable());
@@ -190,6 +192,23 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
         );
+    }
+
+    protected LootTable.Builder createTaegoreTable() {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.RAW_TAEGORE_MEAT)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.TAEGORE_HIDE)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
+                        )
+                );
     }
 
     protected LootTable.Builder createBurrukaiTable() {

@@ -15,6 +15,8 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation AERBUNNY_COLLAR = register("aerbunny", "collar");
     public static final ModelLayerLocation FLYING_COW = register("flying_cow");
     public static final ModelLayerLocation SHEEPUFF = register("sheepuff");
+    public static final ModelLayerLocation HIGHFIELDS_TAEGORE = register("highfields_taegore");
+    public static final ModelLayerLocation HIGHFIELDS_TAEGORE_BABY = register("highfields_taegore_baby");
     public static final ModelLayerLocation HIGHFIELDS_BURRUKAI = register("highfields_burrukai");
     public static final ModelLayerLocation HIGHFIELDS_BURRUKAI_BABY = register("highfields_burrukai_baby");
     public static final ModelLayerLocation MAGNETIC_BURRUKAI = register("magnetic_burrukai");
