@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "aether_ii:block/decorative/wisproot_highlight",
+    "side": "aether_ii:block/decorative/wisproot_top_beam",
+    "up": "aether_ii:block/decorative/wisproot_highlight"
+  }
+}
