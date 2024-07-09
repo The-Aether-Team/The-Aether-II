@@ -302,7 +302,7 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 Matrix4f matrix4f = poseStack.last().pose();
 
                 ClientLevel.ClientLevelData worldInfo = level.getLevelData();
-                double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 74) * worldInfo.getClearColorScale();
+                double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * worldInfo.getClearColorScale();
                 if (d0 < 1.0) {
                     if (d0 < 0.0) {
                         d0 = 0.0;

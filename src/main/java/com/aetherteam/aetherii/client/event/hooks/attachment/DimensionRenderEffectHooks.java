@@ -17,7 +17,7 @@ public class DimensionRenderEffectHooks {
                 ClientLevel.ClientLevelData worldInfo = clientLevel.getLevelData();
                 FogType type = camera.getFluidInCamera();
 
-                double f = (camera.getPosition().y() - 72) * worldInfo.getClearColorScale();
+                double f = (camera.getPosition().y() - 64) * worldInfo.getClearColorScale();
                 if (f < 1.0 && type != FogType.LAVA && type != FogType.POWDER_SNOW) {
                     if (f < 0.0F) {
                         f = 0.0F;
