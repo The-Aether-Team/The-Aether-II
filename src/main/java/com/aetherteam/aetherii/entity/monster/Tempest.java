@@ -181,13 +181,13 @@ public class Tempest extends Zephyr {
                 double d0 = livingEntity.getX() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
                 double d1 = livingEntity.getY() + random.nextFloat() * 3.0F;
                 double d2 = livingEntity.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
-                this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.8);
+                this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.6);
             } else {
                 RandomSource random = this.tempest.getRandom();
                 double d0 = this.tempest.getX() + (random.nextFloat() * 2.0F - 1.0F) * 12.0F;
                 double d1 = this.tempest.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
                 double d2 = this.tempest.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 12.0F;
-                this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.8);
+                this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.6);
             }
         }
     }
