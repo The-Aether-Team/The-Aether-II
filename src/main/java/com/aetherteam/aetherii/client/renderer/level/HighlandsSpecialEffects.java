@@ -301,11 +301,16 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
 
                 Matrix4f matrix4f = poseStack.last().pose();
 
-
-                double d0 = Minecraft.getInstance().player.getEyePosition(partialTick).y - 96;
-                if (d0 < 0.0) {
-                    r *= 0.95F;
-                    g *= 0.95F;
+                ClientLevel.ClientLevelData worldInfo = level.getLevelData();
+                double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 74) * worldInfo.getClearColorScale();
+                if (d0 < 1.0) {
+                    if (d0 < 0.0) {
+                        d0 = 0.0;
+                    }
+                    d0 *= d0;
+                    r *= (float) Math.clamp(d0, 0.15F, 1.0F);
+                    g *= (float) Math.clamp(d0, 0.15F, 1.0F);
+                    b *= (float) Math.clamp(d0 * 1.25F, 0.15F * 1.25F, 1.0F);
                 }
 
                 RenderSystem.setShader(AetherIIShaders::getCloudCoverShader);
@@ -319,9 +324,9 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
                 BufferUploader.drawWithShader(cloudCoverBuffer.buildOrThrow());
 
                 if (sunriseColor != null) {
-                    float f4 = sunriseColor[0];
-                    float f5 = sunriseColor[1];
-                    float f6 = sunriseColor[2];
+                    float f4 = sunriseColor[0] *= (float) Math.clamp(d0, 0.15F, 1.0F);;
+                    float f5 = sunriseColor[1] *= (float) Math.clamp(d0, 0.15F, 1.0F);
+                    float f6 = sunriseColor[2] *= (float) Math.clamp(d0 * 1.25F, 0.15F * 1.25F, 1.0F);
                     float f7 = Math.signum(-26.0F) * 512.0F;
 
                     RenderSystem.setShader(GameRenderer::getPositionColorShader);
