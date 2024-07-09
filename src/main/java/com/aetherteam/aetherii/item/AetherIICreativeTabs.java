@@ -514,7 +514,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.VALKYRIE_WINGS.get());
                 output.accept(AetherIIItems.BRETTL_CANE.get());
-                output.accept(AetherIIItems.BRETTL_WEED.get());
+                output.accept(AetherIIItems.BRETTL_GRASS.get());
                 output.accept(AetherIIItems.BRETTL_ROPE.get());
                 output.accept(AetherIIItems.BRETTL_FLOWER.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());

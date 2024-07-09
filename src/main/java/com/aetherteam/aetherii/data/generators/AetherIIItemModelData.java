@@ -103,8 +103,6 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
-        this.item(AetherIIItems.SKYROOT_PINECONE.get(), "materials/");
-        this.item(AetherIIItems.VALKYRIE_WINGS.get(), "materials/");
         this.item(AetherIIItems.SCATTERGLASS_SHARD.get(), "materials/");
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
@@ -116,6 +114,12 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.CLOUDTWINE.get(), "materials/");
         this.item(AetherIIItems.TAEGORE_HIDE.get(), "materials/");
         this.item(AetherIIItems.BURRUKAI_PELT.get(), "materials/");
+        this.item(AetherIIItems.SKYROOT_PINECONE.get(), "materials/");
+        this.item(AetherIIItems.VALKYRIE_WINGS.get(), "materials/");
+        this.item(AetherIIItems.BRETTL_CANE.get(), "materials/");
+        this.item(AetherIIItems.BRETTL_GRASS.get(), "materials/");
+        this.item(AetherIIItems.BRETTL_ROPE.get(), "materials/");
+        this.item(AetherIIItems.BRETTL_FLOWER.get(), "materials/");
         this.item(AetherIIItems.AECHOR_PETAL.get(), "materials/");
         this.item(AetherIIItems.ARCTIC_SNOWBALL.get(), "materials/");
         this.item(AetherIIItems.GREEN_SWET_GEL.get(), "materials/");

@@ -201,6 +201,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Valkyrie Sprout
         this.add(AetherIIBlocks.VALKYRIE_SPROUT.get(), (sprout) -> this.droppingValkyrieSprout(sprout, AetherIIItems.VALKYRIE_WINGS.get()));
 
+        // Brettl
+        this.dropOther(AetherIIBlocks.BRETTL_PLANT.get(), AetherIIItems.BRETTL_CANE.get());
+        this.dropOther(AetherIIBlocks.BRETTL_PLANT_TIP.get(), AetherIIItems.BRETTL_CANE.get());
+
         // Ground Decoration
         this.add(AetherIIBlocks.SKYROOT_TWIG.get(), this::dropTwigs);
         this.add(AetherIIBlocks.HOLYSTONE_ROCK.get(), this::dropRocks);
