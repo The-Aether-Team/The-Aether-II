@@ -79,11 +79,8 @@ public class CockatriceRangedAttackGoal extends Goal {
             this.seeTime = 0;
         }
 
-        if (!(d0 > (double) this.attackRadiusSqr) && this.seeTime >= 5) {
-            this.mob.getNavigation().stop();
-        } else {
-            this.mob.getNavigation().moveTo(this.target, this.speedModifier);
-        }
+        this.mob.getNavigation().moveTo(this.target, this.speedModifier);
+
 
         this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
         if (flag) {
