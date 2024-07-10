@@ -34,24 +34,24 @@ public class SkyrootLizardModel<T extends SkyrootLizard> extends HierarchicalMod
     public SkyrootLizardModel(ModelPart root) {
         this.root = root;
         this.body = root.getChild("body");
-        this.leg_front_left = root.getChild("leg_front_left");
-        this.leg_front_right = root.getChild("leg_front_right");
-        this.leg_back_left = root.getChild("leg_back_left");
-        this.leg_back_right = root.getChild("leg_back_right");
-        this.neck_1 = root.getChild("neck_1");
-        this.neck_2 = root.getChild("neck_2");
-        this.neck_2_flaps = root.getChild("neck_2_flaps");
-        this.head_1 = root.getChild("head_1");
-        this.head_2 = root.getChild("head_2");
-        this.earflaps = root.getChild("earflaps");
-        this.tongue = root.getChild("tongue");
-        this.neck_1_flaps = root.getChild("neck_1_flaps");
-        this.tail_1 = root.getChild("tail_1");
-        this.tail_2 = root.getChild("tail_2");
-        this.tail_3 = root.getChild("tail_3");
-        this.tail_3_flaps = root.getChild("tail_3_flaps");
-        this.tail_2_flaps = root.getChild("tail_2_flaps");
-        this.tail_1_flaps = root.getChild("tail_1_flaps");
+        this.leg_front_left = body.getChild("leg_front_left");
+        this.leg_front_right = body.getChild("leg_front_right");
+        this.leg_back_left = body.getChild("leg_back_left");
+        this.leg_back_right = body.getChild("leg_back_right");
+        this.neck_1 = body.getChild("neck_1");
+        this.neck_2 = neck_1.getChild("neck_2");
+        this.neck_2_flaps = neck_2.getChild("neck_2_flaps");
+        this.head_1 = neck_2.getChild("head_1");
+        this.head_2 = head_1.getChild("head_2");
+        this.earflaps = head_1.getChild("earflaps");
+        this.tongue = head_1.getChild("tongue");
+        this.neck_1_flaps = neck_1.getChild("neck_1_flaps");
+        this.tail_1 = body.getChild("tail_1");
+        this.tail_2 = tail_1.getChild("tail_2");
+        this.tail_3 = tail_2.getChild("tail_3");
+        this.tail_3_flaps = tail_3.getChild("tail_3_flaps");
+        this.tail_2_flaps = tail_2.getChild("tail_2_flaps");
+        this.tail_1_flaps = tail_1.getChild("tail_1_flaps");
     }
 
     public static LayerDefinition createBodyLayer() {
