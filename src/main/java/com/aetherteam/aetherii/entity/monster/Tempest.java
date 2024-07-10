@@ -72,7 +72,7 @@ public class Tempest extends Zephyr {
 
 
     public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && isValidSpawnBlock(level, pos.below()) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(6) == 0) && level.canSeeSky(pos) && isNight(level);
+        return level.getDifficulty() != Difficulty.PEACEFUL && isValidSpawnBlock(level, pos.below()) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(2) == 0) && level.canSeeSky(pos) && isNight(level);
     }
 
     private static boolean isNight(LevelAccessor level){
@@ -80,14 +80,8 @@ public class Tempest extends Zephyr {
     }
 
     private static boolean isValidSpawnBlock(LevelAccessor level, BlockPos pos){
-        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.HOLYSTONE);
+        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.HOLYSTONE) || level.getBlockState(pos.below()).is(AetherIIBlocks.ICESTONE);
     }
-
-    /*
-    private static boolean isStormAercloud(LevelAccessor level, BlockPos pos){
-        return level.getBlockState(pos).is(AetherIIBlocks.STORM_AERCLOUD.get());
-    }
-    */
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
