@@ -25,8 +25,8 @@ public enum BiomeVariantPresets {
             (context) -> new TaegoreModel(context.bakeLayer(AetherIIModelLayers.MAGNETIC_TAEGORE)),
             (context) -> new TaegoreBabyModel(context.bakeLayer(AetherIIModelLayers.MAGNETIC_TAEGORE_BABY))),
     ARCTIC_TAEGORE(
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/arctic/arctic_arctic.png"),
-            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/arctic/arctic_arctic_baby.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/arctic/taegore_arctic.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/arctic/taegore_arctic_baby.png"),
             (context) -> new TaegoreModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_TAEGORE)),
             (context) -> new TaegoreBabyModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_TAEGORE_BABY))),
 

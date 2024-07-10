@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
 import com.aetherteam.aetherii.entity.ai.goal.TaegorePanicGoal;
 import net.minecraft.server.level.ServerLevel;
@@ -16,12 +15,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class Taegore extends AetherAnimal {
+    private final EntityType<? extends Taegore> variantType;
+
     public Taegore(EntityType<? extends Taegore> type, Level level) {
         super(type, level);
+        this.variantType = type;
     }
 
     @Override
@@ -50,7 +51,8 @@ public class Taegore extends AetherAnimal {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
-        return AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get().create(level);
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+        Taegore taegore = this.variantType.create(level);
+        return taegore;
     }
 }
