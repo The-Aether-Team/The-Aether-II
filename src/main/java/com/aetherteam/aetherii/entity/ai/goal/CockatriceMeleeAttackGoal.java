@@ -19,13 +19,9 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
     public boolean canUse() {
         if (super.canUse() && this.mob.distanceToSqr(this.mob.getTarget()) <= 3 * 3) {
             return true;
-        } else {
-            LivingEntity target = this.mob.getTarget();
-            if (target != null) {
-                this.mob.getMoveControl().setWantedPosition(target.getX(), target.getY(), target.getZ(), this.speedModifier);
-            }
-            return false;
         }
+
+        return false;
     }
 
     @Override

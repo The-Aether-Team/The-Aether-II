@@ -62,7 +62,7 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Tempest>> TEMPEST = ENTITY_TYPES.register("tempest",
             () -> EntityType.Builder.of(Tempest::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.5F, 3.5F).clientTrackingRange(10).build("tempest"));
     public static final DeferredHolder<EntityType<?>, EntityType<Cockatrice>> COCKATRICE = ENTITY_TYPES.register("cockatrice",
-            () -> EntityType.Builder.of(Cockatrice::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.95F, 2.15F).clientTrackingRange(10).build("cockatrice"));
+            () -> EntityType.Builder.of(Cockatrice::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 2.15F).clientTrackingRange(10).build("cockatrice"));
 
 
     // Projectiles
