@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -13,9 +14,11 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -39,6 +42,8 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
     public AetherIIBlockLootSubProvider(Set<Item> items, FeatureFlagSet flags, HolderLookup.Provider registries) {
         super(items, flags, registries);
     }
+
+    public static final BooleanProperty GROWN = AetherIIBlockStateProperties.BRETTL_GROWN;
 
     public LootTable.Builder droppingSnowLayer(Block block) {
         return LootTable.lootTable().withPool(LootPool.lootPool()
@@ -155,6 +160,33 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(block)
                                 .apply(IntStream.rangeClosed(1, 4).boxed().toList(), count -> SetItemCountFunction.setCount(ConstantValue.exactly((float) count))
                                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RockBlock.AMOUNT, count))))
+                        )
+                )
+        );
+    }
+
+    protected LootTable.Builder droppingBrettlPlant(Block block, ItemLike drop, ItemLike dropGrown) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, true))
+                                        )
+                                )
+                        )
+                )
+        );
+    }
+
+    protected LootTable.Builder droppingBrettlPlantTip(Block block, ItemLike drop, ItemLike dropGrown) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, false))))))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, true))
+                                        )
+                                )
                         )
                 )
         );

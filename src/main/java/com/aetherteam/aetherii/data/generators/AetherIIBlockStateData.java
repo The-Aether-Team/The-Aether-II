@@ -188,6 +188,10 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         // Valkyrie Sprout
         this.valkyrieSprout(AetherIIBlocks.VALKYRIE_SPROUT.get());
 
+        // Brettl
+        this.brettlPlant(AetherIIBlocks.BRETTL_PLANT.get());
+        this.brettlPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get());
+
         // Ground Decoration
         this.twig(AetherIIBlocks.SKYROOT_TWIG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.rock(AetherIIBlocks.HOLYSTONE_ROCK.get(), AetherIIBlocks.HOLYSTONE.get());
