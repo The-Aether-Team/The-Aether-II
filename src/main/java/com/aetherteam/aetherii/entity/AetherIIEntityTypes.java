@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.projectile.*;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -92,6 +93,11 @@ public class AetherIIEntityTypes {
     // Blocks
     public static final DeferredHolder<EntityType<?>, EntityType<HoveringBlockEntity>> HOVERING_BLOCK = ENTITY_TYPES.register("hovering_block",
             () -> EntityType.Builder.<HoveringBlockEntity>of(HoveringBlockEntity::new, MobCategory.MISC).sized(1.0F, 1.0F).clientTrackingRange(10).updateInterval(20).build("hovering_block"));
+
+    // Misc
+    public static final DeferredHolder<EntityType<?>, EntityType<ElectricField>> ELECTRIC_FIELD = ENTITY_TYPES.register("electric_field",
+            () -> EntityType.Builder.<ElectricField>of(ElectricField::new, MobCategory.MISC).fireImmune().sized(6.0F, 1.5F).clientTrackingRange(10).updateInterval(Integer.MAX_VALUE).build("electric_field"));
+
 
     public static void registerSpawnPlacements(SpawnPlacementRegisterEvent event) {
         // Passive
