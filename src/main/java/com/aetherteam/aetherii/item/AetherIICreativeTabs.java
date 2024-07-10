@@ -513,6 +513,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.BURRUKAI_PELT.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.VALKYRIE_WINGS.get());
+                output.accept(AetherIIItems.BRETTL_CANE.get());
+                output.accept(AetherIIItems.BRETTL_GRASS.get());
+                output.accept(AetherIIItems.BRETTL_ROPE.get());
+                output.accept(AetherIIItems.BRETTL_FLOWER.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
                 output.accept(AetherIIItems.MOA_FEED.get());
                 output.accept(AetherIIItems.BLUEBERRY_MOA_FEED.get());

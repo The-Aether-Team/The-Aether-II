@@ -35,7 +35,7 @@ public class AetherGrassBlock extends GrassBlock {
     }
 
     @Override
-    public boolean onTreeGrow(BlockState state, LevelReader level, BiConsumer<BlockPos, BlockState> placeFunction, RandomSource randomSource, BlockPos pos, TreeConfiguration config) {
+    public boolean onTreeGrow(BlockState state, LevelReader level, BiConsumer<BlockPos, BlockState> placeFunction, RandomSource random, BlockPos pos, TreeConfiguration config) {
         placeFunction.accept(pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
         return true;
     }

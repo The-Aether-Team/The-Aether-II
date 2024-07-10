@@ -181,6 +181,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Valkyrie Sprout
         this.addBlock(AetherIIBlocks.VALKYRIE_SPROUT, "Valkyrie Sprout");
 
+        // Brettl
+        this.addBlock(AetherIIBlocks.BRETTL_PLANT, "Brettl Plant");
+        this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
+
         // Ground Decoration
         this.addBlock(AetherIIBlocks.SKYROOT_TWIG, "Skyroot Twig");
         this.addBlock(AetherIIBlocks.HOLYSTONE_ROCK, "Holystone Rock");
@@ -545,8 +549,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
-        this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
-        this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
@@ -558,6 +560,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
         this.addItem(AetherIIItems.BURRUKAI_PELT, "Burrukai Pelt");
+        this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
+        this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
+        this.addItem(AetherIIItems.BRETTL_CANE, "Brettl Cane");
+        this.addItem(AetherIIItems.BRETTL_GRASS, "Brettl Grass");
+        this.addItem(AetherIIItems.BRETTL_ROPE, "Brettl Rope");
+        this.addItem(AetherIIItems.BRETTL_FLOWER, "Brettl Flower");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
         this.addItem(AetherIIItems.GREEN_SWET_GEL, "Green Swet Gel");
