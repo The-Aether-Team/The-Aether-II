@@ -49,6 +49,7 @@ public class Tempest extends Zephyr {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(2, new Tempest.SleepGoal(this));
         this.goalSelector.addGoal(5, new Tempest.ThunderballAttackGoal(this));
         this.goalSelector.addGoal(5, new Tempest.RandomFloatAroundGoal(this));
         this.goalSelector.addGoal(7, new Zephyr.ZephyrLookGoal(this));
@@ -72,7 +73,10 @@ public class Tempest extends Zephyr {
 
 
     public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return level.getDifficulty() != Difficulty.PEACEFUL && isValidSpawnBlock(level, pos.below()) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random) && (reason != MobSpawnType.NATURAL || random.nextInt(2) == 0) && level.canSeeSky(pos) && isNight(level);
+        if(isNight(level))
+            return level.getDifficulty() != Difficulty.PEACEFUL && isValidSpawnBlock(level, pos) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random);
+        else
+            return level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos).is(AetherIIBlocks.STORM_AERCLOUD) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random);
     }
 
     private static boolean isNight(LevelAccessor level){
@@ -80,17 +84,21 @@ public class Tempest extends Zephyr {
     }
 
     private static boolean isValidSpawnBlock(LevelAccessor level, BlockPos pos){
-        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.HOLYSTONE) || level.getBlockState(pos.below()).is(AetherIIBlocks.ICESTONE);
+        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.HOLYSTONE) || level.getBlockState(pos.below()).is(AetherIIBlocks.AETHER_GRASS_BLOCK);
+    }
+
+    private boolean isStormAercloud(Level level, BlockPos blockPos) {
+        return level.getBlockState(blockPos).is(AetherIIBlocks.STORM_AERCLOUD);
     }
 
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
-        return source.getDirectEntity() instanceof AreaEffectCloud;
+        return source.getDirectEntity() instanceof AreaEffectCloud || source.getDirectEntity() instanceof TempestThunderball;
     }
 
     @Override
     public void tick() {
-        if (!this.level().isClientSide() && !isNight(this.level())) {
+        if (!this.level().isClientSide() && !isNight(this.level()) && !isStormAercloud(this.level(), this.blockPosition())) {
             this.hurt(this.level().damageSources().generic(), 1);
             for (int i = 0; i < 7; ++i) {
                 if (this.level() instanceof ServerLevel serverLevel) {
@@ -233,7 +241,7 @@ public class Tempest extends Zephyr {
                 } else if (this.parentEntity.getChargeTime() == 20) {
                     Vec3 look = this.parentEntity.getViewVector(1.0F);
                     double accelX = target.getX() - (this.parentEntity.getX() + look.x * 4.0);
-                    double accelY = target.getY(0.5) - (0.5 + this.parentEntity.getY(0.5));
+                    double accelY = target.getY(0.5) - (0.5 + this.parentEntity.getY());
                     double accelZ = target.getZ() - (this.parentEntity.getZ() + look.z * 4.0);
                     this.parentEntity.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
                     TempestThunderball thunderBall = new TempestThunderball(level, this.parentEntity, accelX, accelY, accelZ);
@@ -247,7 +255,6 @@ public class Tempest extends Zephyr {
         }
     }
 
-    /*
     class SleepGoal extends Goal {
         private Tempest tempest;
 
@@ -267,7 +274,7 @@ public class Tempest extends Zephyr {
         }
 
         private boolean canSleep() {
-            return tempest.level().isDay() && Tempest.isStormAercloud(tempest.level(), tempest.getBlockPosBelowThatAffectsMyMovement());
+            return tempest.level().isDay() && isStormAercloud(tempest.level(), tempest.getBlockPosBelowThatAffectsMyMovement());
         }
 
         @Override
@@ -282,5 +289,4 @@ public class Tempest extends Zephyr {
             tempest.getMoveControl().setWantedPosition(tempest.getX(), tempest.getY(), tempest.getZ(), 0.0);
         }
     }
-    */
 }

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.projectile;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.ElectricField;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -88,8 +89,11 @@ public class TempestThunderball extends AbstractHurtingProjectile {
     }
 
     private void spawnElectricCircle(double x, double z) {
+        this.level().explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, false, Level.ExplosionInteraction.NONE);
         AreaEffectCloud electricCircle = new AreaEffectCloud(this.level(), x, this.getY(), z);
+
         electricCircle.setParticle(this.getTrailParticle());
+        electricCircle.setOwner((LivingEntity) this.getOwner());
         electricCircle.setRadius(2.5F);
         electricCircle.setRadiusOnUse(-0.5F);
         electricCircle.setWaitTime(10);
