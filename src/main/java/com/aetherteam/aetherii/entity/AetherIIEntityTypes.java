@@ -124,9 +124,9 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.SHEEPUFF.get(), Sheepuff.createMobAttributes().build());
         event.put(AetherIIEntityTypes.PHYG.get(), Phyg.createMobAttributes().build());
         event.put(AetherIIEntityTypes.AERBUNNY.get(), Aerbunny.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), Burrukai.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), Burrukai.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), Burrukai.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), Taegore.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), Taegore.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), Taegore.createMobAttributes().build());
         event.put(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), Burrukai.createMobAttributes().build());
         event.put(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), Burrukai.createMobAttributes().build());
         event.put(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), Burrukai.createMobAttributes().build());
