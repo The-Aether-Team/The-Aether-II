@@ -13,15 +13,19 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
@@ -155,6 +159,33 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(block)
                                 .apply(IntStream.rangeClosed(1, 4).boxed().toList(), count -> SetItemCountFunction.setCount(ConstantValue.exactly((float) count))
                                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(RockBlock.AMOUNT, count))))
+                        )
+                )
+        );
+    }
+
+    protected LootTable.Builder droppingBrettlPlant(Block block, ItemLike drop, ItemLike dropGrown) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BrettlPlantBlock.GROWN, true))
+                                        )
+                                )
+                        )
+                )
+        );
+    }
+
+    protected LootTable.Builder droppingBrettlPlantTip(Block block, ItemLike drop, ItemLike dropGrown) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BrettlPlantTipBlock.GROWN, false))))))
+                .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown)
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BrettlPlantTipBlock.GROWN, true))
+                                        )
+                                )
                         )
                 )
         );
