@@ -8,14 +8,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
-import net.minecraft.world.level.block.NetherVines;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
 
@@ -23,6 +24,7 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
     public static final MapCodec<BrettlPlantTipBlock> CODEC = simpleCodec(BrettlPlantTipBlock::new);
     public static final BooleanProperty GROWN = AetherIIBlockStateProperties.BRETTL_GROWN;
     public static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 15.0, 12.0);
+    public static final VoxelShape SHAPE_FLOWER = Block.box(4.0, 0.0, 4.0, 12.0, 10.0, 12.0);
 
     @Override
     public MapCodec<BrettlPlantTipBlock> codec() {
@@ -36,7 +38,7 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
 
     @Override
     protected int getBlocksToGrowWhenBonemealed(RandomSource random) {
-        return NetherVines.getBlocksToGrowWhenBonemealed(random);
+        return 1;
     }
 
     @Override
@@ -46,7 +48,7 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
 
     @Override
     protected boolean canGrowInto(BlockState state) {
-        return NetherVines.isValidGrowthState(state);
+        return state.isAir();
     }
 
     @Override
@@ -92,14 +94,26 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        BlockPos blockpos = pos.relative(this.growthDirection);
-        int i = Math.min(state.getValue(AGE) + 1, 2);
-        int j = this.getBlocksToGrowWhenBonemealed(random);
+        if (state.getValue(AGE) < 2) {
+            BlockPos blockpos = pos.relative(this.growthDirection);
+            int i = Math.min(state.getValue(AGE) + 1, 2);
+            int j = this.getBlocksToGrowWhenBonemealed(random);
 
-        for (int k = 0; k < j && this.canGrowInto(level.getBlockState(blockpos)); k++) {
-            level.setBlockAndUpdate(blockpos, state.setValue(AGE, i));
-            blockpos = blockpos.relative(this.growthDirection);
-            i = Math.min(i + 1, 2);
+            for (int k = 0; k < j && this.canGrowInto(level.getBlockState(blockpos)); k++) {
+                BlockState newState = state.setValue(AGE, i);
+                if (i == 2) {
+                    newState = newState.setValue(GROWN, true);
+                }
+                level.setBlockAndUpdate(blockpos, newState);
+
+                blockpos = blockpos.relative(this.growthDirection);
+                i = Math.min(i + 1, 2);
+            }
+        } else {
+            for (int i = 0; i <= 2; i++) {
+                BlockPos blockpos = pos.relative(this.growthDirection.getOpposite(), i);
+                level.setBlockAndUpdate(blockpos, level.getBlockState(blockpos).setValue(GROWN, true));
+            }
         }
     }
 
@@ -113,5 +127,10 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(GrowingPlantHeadBlock.AGE, GROWN);
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return state.getValue(GROWN) ? SHAPE_FLOWER : SHAPE;
     }
 }
