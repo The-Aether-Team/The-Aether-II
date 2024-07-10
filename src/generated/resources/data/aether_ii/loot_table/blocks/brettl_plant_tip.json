@@ -3,21 +3,21 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "aether_ii:brettl_plant_tip",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "grown": "false"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
-              "conditions": [
-                {
-                  "block": "aether_ii:brettl_plant_tip",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "grown": "false"
-                  }
-                }
-              ],
               "count": 1.0,
               "function": "minecraft:set_count"
             },
@@ -26,21 +26,27 @@
             }
           ],
           "name": "aether_ii:brettl_cane"
-        },
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "aether_ii:brettl_plant_tip",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "grown": "true"
+          }
+        }
+      ],
+      "entries": [
         {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
-              "conditions": [
-                {
-                  "block": "aether_ii:brettl_plant_tip",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "grown": "true"
-                  }
-                }
-              ],
               "count": 1.0,
               "function": "minecraft:set_count"
             },

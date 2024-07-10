@@ -31,6 +31,10 @@ public class BrettlPlantBlock extends GrowingPlantBodyBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(GROWN, Boolean.FALSE));
     }
 
+    protected BlockState updateHeadAfterConvertedFromBody(BlockState head, BlockState body) {
+        return head;
+    }
+
     @Override
     protected GrowingPlantHeadBlock getHeadBlock() {
         return (GrowingPlantHeadBlock) AetherIIBlocks.BRETTL_PLANT_TIP.get();

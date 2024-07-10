@@ -17,7 +17,13 @@
             }
           ],
           "name": "aether_ii:brettl_cane"
-        },
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
         {
           "type": "minecraft:item",
           "functions": [
