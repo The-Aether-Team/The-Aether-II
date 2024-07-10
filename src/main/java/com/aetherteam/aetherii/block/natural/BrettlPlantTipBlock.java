@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.mojang.serialization.MapCodec;
@@ -8,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.NetherVines;
@@ -99,6 +101,13 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
             blockpos = blockpos.relative(this.growthDirection);
             i = Math.min(i + 1, 2);
         }
+    }
+
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        BlockPos checkedPos = pos.relative(this.growthDirection.getOpposite());
+        BlockState checkedState = level.getBlockState(checkedPos);
+        return this.canAttachTo(checkedState) && (checkedState.is(this.getHeadBlock()) || checkedState.is(this.getBodyBlock()) || checkedState.is(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON));
     }
 
     @Override

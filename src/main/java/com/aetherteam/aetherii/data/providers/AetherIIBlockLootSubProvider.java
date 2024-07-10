@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -16,16 +17,14 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
@@ -43,6 +42,8 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
     public AetherIIBlockLootSubProvider(Set<Item> items, FeatureFlagSet flags, HolderLookup.Provider registries) {
         super(items, flags, registries);
     }
+
+    public static final BooleanProperty GROWN = AetherIIBlockStateProperties.BRETTL_GROWN;
 
     public LootTable.Builder droppingSnowLayer(Block block) {
         return LootTable.lootTable().withPool(LootPool.lootPool()
@@ -169,7 +170,7 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))
-                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BrettlPlantBlock.GROWN, true))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, true))
                                         )
                                 )
                         )
@@ -180,10 +181,10 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
     protected LootTable.Builder droppingBrettlPlantTip(Block block, ItemLike drop, ItemLike dropGrown) {
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))
-                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BrettlPlantTipBlock.GROWN, false))))))
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, false))))))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown)
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))
-                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BrettlPlantTipBlock.GROWN, true))
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, true))
                                         )
                                 )
                         )
