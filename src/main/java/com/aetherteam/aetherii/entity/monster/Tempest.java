@@ -84,7 +84,7 @@ public class Tempest extends Zephyr {
     }
 
     private static boolean isValidSpawnBlock(LevelAccessor level, BlockPos pos){
-        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.HOLYSTONE) || level.getBlockState(pos.below()).is(AetherIIBlocks.AETHER_GRASS_BLOCK);
+        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIIBlocks.AETHER_GRASS_BLOCK) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
     }
 
     private boolean isStormAercloud(Level level, BlockPos blockPos) {
