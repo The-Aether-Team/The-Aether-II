@@ -594,6 +594,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, "Skyroot Lizard on a Stick");
         this.addItem(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, "Roasted Skyroot Lizard on a Stick");
 
+        // Skyroot Buckets
+        this.addItem(AetherIIItems.SKYROOT_BUCKET, "Skyroot Bucket");
+        this.addItem(AetherIIItems.SKYROOT_WATER_BUCKET, "Skyroot Water Bucket");
+        this.addItem(AetherIIItems.SKYROOT_MILK_BUCKET, "Skyroot Milk Bucket");
+        this.addItem(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET, "Skyroot Powder Snow Bucket");
+        this.addItem(AetherIIItems.SKYROOT_COD_BUCKET, "Skyroot Bucket of Cod");
+        this.addItem(AetherIIItems.SKYROOT_SALMON_BUCKET, "Skyroot Bucket of Salmon");
+        this.addItem(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET, "Skyroot Bucket of Pufferfish");
+        this.addItem(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET, "Skyroot Bucket of Tropical Fish");
+        this.addItem(AetherIIItems.SKYROOT_AXOLOTL_BUCKET, "Skyroot Bucket of Axolotl");
+        this.addItem(AetherIIItems.SKYROOT_TADPOLE_BUCKET, "Skyroot Bucket of Tadpole");
+
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
         this.addItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Valkyrie Music Disc");

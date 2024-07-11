@@ -149,6 +149,18 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
         this.item(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
 
+        // Skyroot Buckets
+        this.item(AetherIIItems.SKYROOT_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_WATER_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_MILK_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_COD_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_SALMON_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_TADPOLE_BUCKET.get(), "miscellaneous/");
+
         // Music Discs
         this.item(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(), "miscellaneous/");
         this.item(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(), "miscellaneous/");
