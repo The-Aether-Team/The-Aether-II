@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.AechorPlant;
 import com.aetherteam.aetherii.entity.monster.Tempest;
 import com.aetherteam.aetherii.entity.monster.Zephyr;
+import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.projectile.*;
@@ -67,6 +68,9 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Tempest>> TEMPEST = ENTITY_TYPES.register("tempest",
             () -> EntityType.Builder.of(Tempest::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.5F, 3.5F).clientTrackingRange(10).build("tempest"));
 
+    // NPCs
+    public static final DeferredHolder<EntityType<?>, EntityType<Edward>> EDWARD = ENTITY_TYPES.register("edward",
+            () -> EntityType.Builder.of(Edward::new, MobCategory.CREATURE).sized(0.6F, 1.95F).eyeHeight(1.74F).passengerAttachments(2.0125F).ridingOffset(-0.7F).clientTrackingRange(8).build("edward"));
 
     // Projectiles
     public static final DeferredHolder<EntityType<?>, EntityType<HolystoneRock>> HOLYSTONE_ROCK = ENTITY_TYPES.register("holystone_rock",
@@ -139,5 +143,8 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AechorPlant.createMobAttributes().build());
         event.put(AetherIIEntityTypes.ZEPHYR.get(), Zephyr.createMobAttributes().build());
         event.put(AetherIIEntityTypes.TEMPEST.get(), Tempest.createMobAttributes().build());
+
+        // NPCs
+        event.put(AetherIIEntityTypes.EDWARD.get(), Edward.createMobAttributes().build());
     }
 }
