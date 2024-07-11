@@ -591,6 +591,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.KIRRID_LOIN, "Kirrid Loin");
         this.addItem(AetherIIItems.RAW_TAEGORE_MEAT, "Raw Taegore Meat");
         this.addItem(AetherIIItems.TAEGORE_STEAK, "Taegore Steak");
+        this.addItem(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, "Skyroot Lizard on a Stick");
+        this.addItem(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, "Roasted Skyroot Lizard on a Stick");
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");

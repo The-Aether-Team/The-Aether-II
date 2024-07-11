@@ -491,6 +491,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.KIRRID_CUTLET.get());
                 output.accept(AetherIIItems.RAW_TAEGORE_MEAT.get());
                 output.accept(AetherIIItems.TAEGORE_STEAK.get());
+                output.accept(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get());
+                output.accept(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
