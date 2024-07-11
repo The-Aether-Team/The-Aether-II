@@ -70,8 +70,8 @@ public class AetherLeavesBlock extends LeavesBlock {
 
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        return pFacing == Direction.UP
-                ? pState.setValue(SNOWY, pFacingState.is(AetherIIBlocks.ARCTIC_SNOW) || pFacingState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
+        return pFacing == Direction.UP && !pState.getValue(SNOWY) && (pFacingState.is(AetherIIBlocks.ARCTIC_SNOW) || pFacingState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
+                ? pState.setValue(SNOWY, true)
                 : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 

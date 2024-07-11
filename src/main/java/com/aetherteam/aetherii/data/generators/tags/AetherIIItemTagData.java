@@ -205,6 +205,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_GEMSTONE.get(),
                 AetherIIItems.INERT_ARKENIUM.get(),
                 AetherIIItems.INERT_GRAVITITE.get(),
+                AetherIIItems.SCATTERGLASS_SHARD.get(),
                 AetherIIItems.GOLDEN_AMBER.get(),
                 AetherIIItems.TAEGORE_HIDE.get(),
                 AetherIIItems.BURRUKAI_PELT.get(),
