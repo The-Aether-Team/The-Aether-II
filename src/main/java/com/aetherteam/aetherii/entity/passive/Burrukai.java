@@ -124,7 +124,7 @@ public class Burrukai extends AetherAnimal implements IShearable {
             ServerLevelAccessor pLevel,
             DifficultyInstance pDifficulty,
             MobSpawnType pReason,
-            @javax.annotation.Nullable SpawnGroupData pSpawnData
+            @Nullable SpawnGroupData pSpawnData
     ) {
         RandomSource randomsource = pLevel.getRandom();
         BurrukaiAi.initMemories(this, randomsource);
@@ -164,8 +164,8 @@ public class Burrukai extends AetherAnimal implements IShearable {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        Burrukai kirrid = this.variantType.create(pLevel);
-        BurrukaiAi.initMemories(kirrid, this.random);
-        return kirrid;
+        Burrukai burrukai = this.variantType.create(pLevel);
+        BurrukaiAi.initMemories(burrukai, this.random);
+        return burrukai;
     }
 }
