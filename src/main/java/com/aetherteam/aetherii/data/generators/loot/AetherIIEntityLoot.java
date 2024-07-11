@@ -81,6 +81,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_YELLOW, createSheepuffTable(AetherIIBlocks.YELLOW_CLOUDWOOL));
 
         this.add(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), createTaegoreTable());
+        this.add(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), createTaegoreTable());
+        this.add(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), createTaegoreTable());
 
         this.add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), createBurrukaiTable());
         this.add(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), createBurrukaiTable());
@@ -151,6 +153,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
         );
+
+        this.add(AetherIIEntityTypes.SKYROOT_LIZARD.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.AECHOR_PLANT.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))

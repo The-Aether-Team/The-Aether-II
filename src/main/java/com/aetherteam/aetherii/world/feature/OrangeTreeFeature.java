@@ -15,12 +15,13 @@ public class OrangeTreeFeature extends Feature<SimpleBlockConfiguration> {
     }
 
     public boolean place(FeaturePlaceContext<SimpleBlockConfiguration> context) {
-        SimpleBlockConfiguration simpleBlockConfiguration = context.config();
-        WorldGenLevel worldGenLevel = context.level();
-        BlockPos blockPos = context.origin();
-        BlockState blockState = simpleBlockConfiguration.toPlace().getState(context.random(), blockPos);
-        if (blockState.canSurvive(worldGenLevel, blockPos) && worldGenLevel.isEmptyBlock(blockPos.above())) {
-            OrangeTreeBlock.placeAt(worldGenLevel, blockState, blockPos, 2);
+        SimpleBlockConfiguration config = context.config();
+        WorldGenLevel level = context.level();
+        BlockPos pos = context.origin();
+        BlockState state = config.toPlace().getState(context.random(), pos);
+
+        if (state.canSurvive(level, pos) && level.isEmptyBlock(pos.above())) {
+            OrangeTreeBlock.placeAt(level, state, pos, 2);
             return true;
         } else {
             return false;

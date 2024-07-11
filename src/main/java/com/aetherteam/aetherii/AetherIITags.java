@@ -19,6 +19,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
+        public static final TagKey<Block> BRETTL_PLANT_SURVIVES_ON = tag("brettl_plant_survives_on");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");

@@ -743,6 +743,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.foodCooking(AetherIIItems.BURRUKAI_RIB_CUT, AetherIIItems.BURRUKAI_RIBS, 0.1F, consumer);
         this.foodCooking(AetherIIItems.KIRRID_LOIN, AetherIIItems.KIRRID_CUTLET, 0.1F, consumer);
         this.foodCooking(AetherIIItems.RAW_TAEGORE_MEAT, AetherIIItems.TAEGORE_STEAK, 0.1F, consumer);
+        this.foodCooking(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, 0.1F, consumer);
 
         // Materials
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SKYROOT_STICK.get(), 4)
@@ -765,6 +766,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.CRUDE_SCATTERGLASS)
                 .unlockedBy("has_scatterglass", has(AetherIIBlocks.CRUDE_SCATTERGLASS))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.BRETTL_ROPE.get(), 2)
+                .define('#', AetherIIItems.BRETTL_GRASS)
+                .pattern("  #")
+                .pattern(" # ")
+                .pattern("#  ")
+                .unlockedBy("has_brettl_grass", has(AetherIIItems.BRETTL_GRASS))
+                .save(consumer);
+
         this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(consumer, this.name("ambrosium_shard_from_smelting"));
         this.blastingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(consumer, this.name("ambrosium_shard_from_blasting"));
         this.smeltingOreRecipe(AetherIIItems.AMBROSIUM_SHARD.get(), AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), 0.1F).group("ambrosium").save(consumer, this.name("ambrosium_shard_from_smelting_undershale_ambrosium_ore"));
@@ -793,6 +802,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIBlocks.TARABLOOM.get())
                 .unlockedBy(getHasName(AetherIIBlocks.TARABLOOM.get()), has(AetherIIBlocks.TARABLOOM.get()))
                 .save(consumer, this.name("flower_to_purple_dye"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIGHT_BLUE_DYE)
+                .group("light_blue_dye")
+                .requires(AetherIIItems.BRETTL_FLOWER.get())
+                .unlockedBy(getHasName(AetherIIItems.BRETTL_FLOWER.get()), has(AetherIIItems.BRETTL_FLOWER.get()))
+                .save(consumer, this.name("flower_to_light_blue_dye"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)
                 .requires(AetherIIItems.MOA_FEED)
