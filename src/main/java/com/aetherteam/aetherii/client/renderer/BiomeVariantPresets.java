@@ -19,6 +19,16 @@ public enum BiomeVariantPresets {
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/highfields/taegore_highfields_baby.png"),
             (context) -> new TaegoreModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_TAEGORE)),
             (context) -> new TaegoreBabyModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_TAEGORE_BABY))),
+    MAGNETIC_TAEGORE(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/magnetic/taegore_magnetic.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/magnetic/taegore_magnetic_baby.png"),
+            (context) -> new TaegoreModel(context.bakeLayer(AetherIIModelLayers.MAGNETIC_TAEGORE)),
+            (context) -> new TaegoreBabyModel(context.bakeLayer(AetherIIModelLayers.MAGNETIC_TAEGORE_BABY))),
+    ARCTIC_TAEGORE(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/arctic/taegore_arctic.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/arctic/taegore_arctic_baby.png"),
+            (context) -> new TaegoreModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_TAEGORE)),
+            (context) -> new TaegoreBabyModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_TAEGORE_BABY))),
 
     HIGHFIELDS_BURRUKAI(
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/highfields/burrukai_highfields.png"),
