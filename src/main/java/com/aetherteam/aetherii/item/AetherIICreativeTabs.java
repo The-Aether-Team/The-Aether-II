@@ -255,6 +255,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW.get());
+                output.accept(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
+                output.accept(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
+                output.accept(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());

@@ -75,6 +75,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ARCTIC_ICE = register("arctic_ice", () -> new IceBlock(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).friction(0.98F).randomTicks().strength(0.5F).sound(SoundType.GLASS).noOcclusion().isValidSpawn((state, level, pos, entityType) -> entityType.is(AetherIITags.Entities.SPAWNING_ICE)).isRedstoneConductor(AetherIIBlocks::never)));
     public static final DeferredBlock<Block> ARCTIC_PACKED_ICE = register("arctic_packed_ice", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.ICE).instrument(NoteBlockInstrument.CHIME).friction(0.98F).strength(0.5F).sound(SoundType.GLASS)));
     public static final DeferredBlock<Block> ICESTONE = register("icestone", () -> new IcestoneBlock(Block.Properties.of().mapColor(MapColor.ICE).instrument(NoteBlockInstrument.CHIME).strength(0.5F).randomTicks().sound(SoundType.GLASS).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> LARGE_ARCTIC_ICE_CRYSTAL = register("large_arctic_ice_crystal", () -> new IceCrystalBlock(8.0F, 2.0F, Block.Properties.of().mapColor(MapColor.ICE).forceSolidOn().noOcclusion().sound(SoundType.GLASS).strength(0.5F).pushReaction(PushReaction.DESTROY).randomTicks()));
+    public static final DeferredBlock<Block> MEDIUM_ARCTIC_ICE_CRYSTAL = register("medium_arctic_ice_crystal", () -> new IceCrystalBlock(5.0F, 3.0F, Block.Properties.ofLegacyCopy(LARGE_ARCTIC_ICE_CRYSTAL.get())));
+    public static final DeferredBlock<Block> SMALL_ARCTIC_ICE_CRYSTAL = register("small_arctic_ice_crystal", () -> new IceCrystalBlock(3.0F, 5.0F, Block.Properties.ofLegacyCopy(LARGE_ARCTIC_ICE_CRYSTAL.get())));
 
     // Irradiated
     public static final DeferredBlock<Block> IRRADIATED_HOLYSTONE = register("irradiated_holystone", () -> new Block(Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get())));

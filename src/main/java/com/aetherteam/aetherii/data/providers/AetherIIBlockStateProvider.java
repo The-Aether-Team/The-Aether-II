@@ -143,6 +143,29 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void iceCrystal(Block block) {
+        ResourceLocation texture = this.texture("natural/" + this.name(block));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            ModelFile model = this.models().cross(this.name(block), texture).renderType(ResourceLocation.parse("cutout"));
+            Direction direction = state.getValue(IceCrystalBlock.FACING);
+            int x = 0;
+            int y = 0;
+            if (direction.getAxis().isHorizontal()) {
+                x = 90;
+            } else if (direction == Direction.DOWN) {
+                x = 180;
+            }
+            if (direction == Direction.EAST) {
+                y = 90;
+            } else if (direction == Direction.SOUTH) {
+                y = 180;
+            } else if (direction == Direction.WEST) {
+                y = 270;
+            }
+            return ConfiguredModel.builder().modelFile(model).rotationX(x).rotationY(y).build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
     public void aercloudAll(Block block, String location) {
         ResourceLocation texture = this.texture(this.name(block), location);
         this.aercloud(block, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture);

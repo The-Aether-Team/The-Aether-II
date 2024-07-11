@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "aether_ii:block/large_arctic_ice_crystal",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "aether_ii:block/large_arctic_ice_crystal",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "aether_ii:block/large_arctic_ice_crystal",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "aether_ii:block/large_arctic_ice_crystal",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "aether_ii:block/large_arctic_ice_crystal"
+    },
+    "facing=west": {
+      "model": "aether_ii:block/large_arctic_ice_crystal",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

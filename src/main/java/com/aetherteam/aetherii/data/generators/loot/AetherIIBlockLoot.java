@@ -57,6 +57,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_ICE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.dropSelf(AetherIIBlocks.ICESTONE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
 
         // Irradiated
         this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
