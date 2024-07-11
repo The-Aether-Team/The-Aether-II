@@ -65,6 +65,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get()
         );
+        this.tag(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON)
+                .add(AetherIIBlocks.QUICKSOIL.get())
+                .addTags(BlockTags.SAND);
         this.tag(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),
                 AetherIIBlocks.BLUE_AERCLOUD.get(),

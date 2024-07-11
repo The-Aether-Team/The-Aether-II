@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "grown=false": {
+      "model": "aether_ii:block/brettl_plant"
+    },
+    "grown=true": {
+      "model": "aether_ii:block/brettl_plant_grown"
+    }
+  }
+}

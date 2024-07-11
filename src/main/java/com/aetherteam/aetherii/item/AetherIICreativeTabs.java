@@ -501,6 +501,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.KIRRID_CUTLET.get());
                 output.accept(AetherIIItems.RAW_TAEGORE_MEAT.get());
                 output.accept(AetherIIItems.TAEGORE_STEAK.get());
+                output.accept(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get());
+                output.accept(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
@@ -523,6 +525,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.BURRUKAI_PELT.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.VALKYRIE_WINGS.get());
+                output.accept(AetherIIItems.BRETTL_CANE.get());
+                output.accept(AetherIIItems.BRETTL_GRASS.get());
+                output.accept(AetherIIItems.BRETTL_ROPE.get());
+                output.accept(AetherIIItems.BRETTL_FLOWER.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
                 output.accept(AetherIIItems.MOA_FEED.get());
                 output.accept(AetherIIItems.BLUEBERRY_MOA_FEED.get());
@@ -544,16 +550,19 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MOA_SPAWN_EGG.get());
                 output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
             }).build());
 }

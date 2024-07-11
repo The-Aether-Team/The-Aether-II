@@ -467,6 +467,20 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void brettlPlant(Block block) {
+        String blockName = this.name(block);
+        ModelFile normal = this.models().cross(blockName, this.extend(this.texture(this.name(block), "natural/"), "")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        ModelFile grown = this.models().cross(blockName + "_grown", this.extend(this.texture(this.name(block), "natural/"), "_grown")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            if (state.getValue(BrettlPlantBlock.GROWN)) {
+                return ConfiguredModel.builder().modelFile(grown).build();
+            } else {
+                return ConfiguredModel.builder().modelFile(normal).build();
+            }
+        });
+    }
+
     public void twig(Block block, Block log) {
         String blockName = this.name(block);
         ResourceLocation texture = this.texture(this.name(log), "natural/");
@@ -760,10 +774,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     public void decorativeBlock(Block block, Block endBlock) {
         ModelFile masonryBlock = this.models().cubeColumn(this.name(block), this.texture(this.name(block), "decorative/"), this.texture(this.name(endBlock), "decorative/"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(masonryBlock));
-    }
-
-    public void decorativePillar(RotatedPillarBlock block, Block endBlock) {
-        this.axisBlock(block, this.extend(this.texture(this.name(block), "decorative/"), ""), this.extend(this.texture(this.name(endBlock), "decorative/"), ""));
     }
 
     public void decorativeFacingPillar(FacingPillarBlock block, Block endBlock) {
