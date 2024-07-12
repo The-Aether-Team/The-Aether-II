@@ -23,33 +23,46 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> CONTINENTS = createKey("highlands/continents");
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
-    public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/elevation");
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification");
-    public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/factor");
-    public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/island_density");
-    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
-    public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("highlands/noise_caves");
-    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/islands/bottom_slide");
-    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/islands/top_slide");
-    public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/islands/top_slide_arctic");
-    public static final ResourceKey<DensityFunction> SLOPER = createKey("highlands/islands/sloper");
-    public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("highlands/islands/sloper_arctic");
-    public static final ResourceKey<DensityFunction> BASE_TERRAIN_SHAPER = createKey("highlands/islands/base_terrain_shaper");
-    public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/islands/terrain_shaper");
-    public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("highlands/islands/underground_shaper");
+
+    public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/terrain/island_density");
+    public static final ResourceKey<DensityFunction> SHATTERED_ISLANDS = createKey("highlands/terrain/shattered_islands");
+    public static final ResourceKey<DensityFunction> FINAL_ISLANDS = createKey("highlands/terrain/final_islands");
+
+    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/terrain/base/base_3d_noise");
+    public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/terrain/base/factor");
+    public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/terrain/base/elevation");
+    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/terrain/base/bottom_slide");
+    public static final ResourceKey<DensityFunction> TOP_SLIDE = createKey("highlands/terrain/base/top_slide");
+    public static final ResourceKey<DensityFunction> SLOPER = createKey("highlands/terrain/base/sloper");
+    public static final ResourceKey<DensityFunction> BASE_TERRAIN_SHAPER = createKey("highlands/terrain/base/base_terrain_shaper");
+    public static final ResourceKey<DensityFunction> TERRAIN_SHAPER = createKey("highlands/terrain/base/terrain_shaper");
+
+    public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/terrain/arctic/top_slide_arctic");
+    public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("highlands/terrain/arctic/sloper_arctic");
+
+    public static final ResourceKey<DensityFunction> SHATTERED_3D_NOISE = createKey("highlands/terrain/shattered/shattered_3d_noise");
+    public static final ResourceKey<DensityFunction> FACTOR_SHATTERED = createKey("highlands/terrain/shattered/factor_shattered");
+    public static final ResourceKey<DensityFunction> ELEVATION_SHATTERED = createKey("highlands/terrain/shattered/elevation_shattered");
+    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/bottom_slide_shattered");
+    public static final ResourceKey<DensityFunction> TOP_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/top_slide_shattered");
+    public static final ResourceKey<DensityFunction> TERRAIN_SHAPER_SHATTERED = createKey("highlands/terrain/base/terrain_shaper");
+
+    public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("highlands/caves/noise_caves");
+    public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("highlands/caves/underground_shaper");
+
     public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
     public static final ResourceKey<DensityFunction> LAKES_FACTOR = createKey("highlands/lakes/factor");
     public static final ResourceKey<DensityFunction> LAKES_FLOOR = createKey("highlands/lakes/lake_floor");
     public static final ResourceKey<DensityFunction> LAKES_BARRIER = createKey("highlands/lakes/lake_barrier");
+
     public static final ResourceKey<DensityFunction> COASTS_BASE_NOISE = createKey("highlands/coasts/base_noise");
     public static final ResourceKey<DensityFunction> COASTS_HIGHFIELDS = createKey("highlands/coasts/highfields");
     public static final ResourceKey<DensityFunction> COASTS_MAGNETIC = createKey("highlands/coasts/magnetic");
     public static final ResourceKey<DensityFunction> COASTS_ARCTIC = createKey("highlands/coasts/arctic");
 
-    public static final ResourceKey<DensityFunction> FINAL_DENSITY = createKey("highlands/final_density");
-
-    public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("cloudbed_noise");
-    public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("cloudbed_y_offset");
+    public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("highlands/cloudbed/noise");
+    public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("highlands/cloudbed/y_offset");
 
     private static ResourceKey<DensityFunction> createKey(String name) {
         return ResourceKey.create(Registries.DENSITY_FUNCTION, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
