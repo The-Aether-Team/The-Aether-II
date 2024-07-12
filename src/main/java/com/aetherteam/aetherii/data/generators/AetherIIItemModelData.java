@@ -193,6 +193,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.BLUEBERRY_MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.ENCHANTED_MOA_FEED.get(), "miscellaneous/");
+        this.item(AetherIIItems.CHARGE_CORE.get(), "miscellaneous/");
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         // Blocks
