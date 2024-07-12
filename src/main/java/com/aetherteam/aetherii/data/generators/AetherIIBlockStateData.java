@@ -29,6 +29,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
         this.block(AetherIIBlocks.AGIOSITE.get(), "natural/");
         this.translucentBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), "natural/");
+        this.roots(AetherIIBlocks.SKY_ROOTS.get());
 
         // Highfields
         this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");

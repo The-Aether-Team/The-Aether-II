@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": {
+      "model": "aether_ii:block/sky_roots"
+    },
+    "snowy=true": {
+      "model": "aether_ii:block/frosted_sky_roots"
+    }
+  }
+}

@@ -120,6 +120,19 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void roots(Block block) {
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            boolean snowy = state.getValue(BlockStateProperties.SNOWY);
+            ModelFile model;
+            if (snowy) {
+                model = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            } else {
+                model = this.models().cross(this.name(block), this.texture(this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            }
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
     public void snowLayer(Block block, Block base) {
         ResourceLocation texture = this.texture("natural/" + this.name(base));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
