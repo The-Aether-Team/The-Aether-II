@@ -26,7 +26,7 @@ public class AetherIINoises {
     public static void bootstrap(BootstrapContext<NormalNoise.NoiseParameters> context) {
         register(context, TEMPERATURE, -9, 1.5D, 0.0D, 1.0D, 0.0D, 0.0D, 0.0D);
         register(context, VEGETATION, -8, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D);
-        register(context, VEGETATION_RARE, -8, 1.5D, 0.0D, 5.0D, 0.0D, 0.0D, 0.0D);
+        register(context, VEGETATION_RARE, -8, 1.5D, 0.0D, 0.0D, 0.0D);
         register(context, CONTINENTALNESS, -8, 1.0D, 2.0D, 2.0D, 2.0D, 1.0D, 1.0D, 0.0D, 0.0D, 0.0D);
         register(context, EROSION, -9, 1.5, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         register(context, ELEVATION, -8, 1.0D, 0.2D, 0.0D, 0.0D, 0.0D);
