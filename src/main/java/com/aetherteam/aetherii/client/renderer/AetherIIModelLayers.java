@@ -35,6 +35,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation ARCTIC_KIRRID_BABY = register("arctic_kirrid_baby");
     public static final ModelLayerLocation MOA = register("moa");
     public static final ModelLayerLocation MOA_BABY = register("moa_baby");
+    public static final ModelLayerLocation SKYROOT_LIZARD = register("skyroot_lizard");
 
     public static final ModelLayerLocation AECHOR_PLANT = register("aechor_plant");
 
