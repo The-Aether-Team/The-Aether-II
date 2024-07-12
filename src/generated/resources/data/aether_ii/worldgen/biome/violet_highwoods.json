@@ -105,12 +105,6 @@
     "axolotls": [],
     "creature": [
       {
-        "type": "aether_ii:moa",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
-      {
         "type": "aether_ii:magnetic_kirrid",
         "maxCount": 3,
         "minCount": 1,
@@ -123,7 +117,7 @@
         "weight": 8
       },
       {
-        "type": "aether_ii:highfields_taegore",
+        "type": "aether_ii:magnetic_taegore",
         "maxCount": 3,
         "minCount": 1,
         "weight": 8
@@ -151,6 +145,12 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 6
+      },
+      {
+        "type": "aether_ii:moa",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "misc": [],

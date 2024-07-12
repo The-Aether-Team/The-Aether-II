@@ -26,10 +26,8 @@ public class AetherIIEntityTypes {
     // Passive
     public static final DeferredHolder<EntityType<?>, EntityType<FlyingCow>> FLYING_COW = ENTITY_TYPES.register("flying_cow",
             () -> EntityType.Builder.of(FlyingCow::new, MobCategory.CREATURE).sized(0.95F, 1.5F).clientTrackingRange(10).build("flying_cow"));
-
     public static final DeferredHolder<EntityType<?>, EntityType<Sheepuff>> SHEEPUFF = ENTITY_TYPES.register("sheepuff",
             () -> EntityType.Builder.of(Sheepuff::new, MobCategory.CREATURE).sized(0.95F, 1.3F).clientTrackingRange(10).build("sheepuff"));
-
     public static final DeferredHolder<EntityType<?>, EntityType<Phyg>> PHYG = ENTITY_TYPES.register("phyg",
             () -> EntityType.Builder.of(Phyg::new, MobCategory.CREATURE).sized(0.95F, 0.95F).clientTrackingRange(10).build("phyg"));
 
@@ -38,6 +36,10 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Taegore>> HIGHFIELDS_TAEGORE = ENTITY_TYPES.register("highfields_taegore",
             () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.2F, 1.5F).clientTrackingRange(10).build("highfields_taegore"));
+    public static final DeferredHolder<EntityType<?>, EntityType<Taegore>> MAGNETIC_TAEGORE = ENTITY_TYPES.register("magnetic_taegore",
+            () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.2F, 1.5F).clientTrackingRange(10).build("magnetic_taegore"));
+    public static final DeferredHolder<EntityType<?>, EntityType<Taegore>> ARCTIC_TAEGORE = ENTITY_TYPES.register("arctic_taegore",
+            () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.2F, 1.5F).clientTrackingRange(10).build("arctic_taegore"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Burrukai>> HIGHFIELDS_BURRUKAI = ENTITY_TYPES.register("highfields_burrukai",
             () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).clientTrackingRange(10).build("highfields_burrukai"));
@@ -55,6 +57,9 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<Moa>> MOA = ENTITY_TYPES.register("moa",
             () -> EntityType.Builder.of(Moa::new, MobCategory.CREATURE).sized(0.95F, 2.15F).clientTrackingRange(10).build("moa"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
+            () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.CREATURE).sized(0.9F, 0.5F).clientTrackingRange(10).ridingOffset(0).build("skyroot_lizard"));
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
@@ -106,6 +111,8 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.PHYG.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.AERBUNNY.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherTamableAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
@@ -126,7 +133,9 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.SHEEPUFF.get(), Sheepuff.createMobAttributes().build());
         event.put(AetherIIEntityTypes.PHYG.get(), Phyg.createMobAttributes().build());
         event.put(AetherIIEntityTypes.AERBUNNY.get(), Aerbunny.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), Burrukai.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), Taegore.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), Taegore.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), Taegore.createMobAttributes().build());
         event.put(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), Burrukai.createMobAttributes().build());
         event.put(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), Burrukai.createMobAttributes().build());
         event.put(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), Burrukai.createMobAttributes().build());
@@ -134,6 +143,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), Kirrid.createMobAttributes().build());
         event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), Kirrid.createMobAttributes().build());
         event.put(AetherIIEntityTypes.MOA.get(), Moa.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizard.createMobAttributes().build());
 
         // Hostile
         event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AechorPlant.createMobAttributes().build());

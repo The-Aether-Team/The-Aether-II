@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "aether_ii:greatroot_top_beam"
+  },
+  "result": {
+    "count": 1,
+    "id": "aether_ii:greatroot_planks"
+  }
+}

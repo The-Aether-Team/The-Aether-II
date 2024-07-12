@@ -2,10 +2,13 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.BucketReplacement;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
@@ -87,6 +90,16 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIItems.SKYROOT_SHOVEL, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_TROWEL, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
+
+        var buckets = this.builder(AetherIIDataMaps.BUCKET_REPLACEMENT);
+        buckets.add(Items.WATER_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_WATER_BUCKET.getKey()), false);
+        buckets.add(Items.POWDER_SNOW_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.getKey()), false);
+        buckets.add(Items.COD_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_COD_BUCKET.getKey()), false);
+        buckets.add(Items.SALMON_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_SALMON_BUCKET.getKey()), false);
+        buckets.add(Items.PUFFERFISH_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.getKey()), false);
+        buckets.add(Items.TROPICAL_FISH_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET.getKey()), false);
+        buckets.add(Items.AXOLOTL_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.getKey()), false);
+        buckets.add(Items.TADPOLE_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TADPOLE_BUCKET.getKey()), false);
     }
 
     @SuppressWarnings("deprecation")
