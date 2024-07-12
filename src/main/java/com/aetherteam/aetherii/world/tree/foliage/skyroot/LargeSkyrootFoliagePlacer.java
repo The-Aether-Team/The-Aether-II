@@ -45,8 +45,8 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
         int z = pos.getZ();
         boolean doubleTrunk = attachment.doubleTrunk();
 
-        int offsetX = random.nextInt(1) == 0 ? -1 : 1;
-        int offsetZ = random.nextInt(1) == 0 ? -1 : 1;
+        int offsetX = random.nextIntBetweenInclusive(0, 1) == 0 ? -1 : 1;
+        int offsetZ = random.nextIntBetweenInclusive(0, 1) == 0 ? -1 : 1;
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + offsetX, y - 1, z + offsetZ), 8, i, doubleTrunk);

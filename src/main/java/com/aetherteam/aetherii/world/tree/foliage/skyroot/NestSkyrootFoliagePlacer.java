@@ -54,8 +54,8 @@ public class NestSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
         int z = pos.getZ();
         boolean doubleTrunk = attachment.doubleTrunk();
 
-        int offsetX = random.nextInt(1) == 0 ? -1 : 1;
-        int offsetZ = random.nextInt(1) == 0 ? -1 : 1;
+        int offsetX = random.nextIntBetweenInclusive(0, 1) == 0 ? -1 : 1;
+        int offsetZ = random.nextIntBetweenInclusive(0, 1) == 0 ? -1 : 1;
 
         if (level instanceof WorldGenLevel worldGenLevel) {
             ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
