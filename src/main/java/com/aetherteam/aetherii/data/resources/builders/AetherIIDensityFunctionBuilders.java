@@ -185,6 +185,34 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
     }
 
+    public static DensityFunction buildFactorShattered(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate continents = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS));
+        DensityFunctions.Spline.Coordinate temperature = new DensityFunctions.Spline.Coordinate(function.getOrThrow(TEMPERATURE));
+        DensityFunctions.Spline.Coordinate erosion = new DensityFunctions.Spline.Coordinate(function.getOrThrow(EROSION));
+        return DensityFunctions.spline(factorShattered(continents, temperature, erosion));
+    }
+
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I continents, I temperature, I erosion) {
+        CubicSpline<C, I> continentsSpline = CubicSpline.builder(continents)
+                .addPoint(0.05F, 2.0F)
+                .addPoint(0.2F, 1.0F)
+                .build();
+
+        CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
+                .addPoint(-0.475F, 1.0F)
+                .addPoint(-0.4F, 7.5F)
+                .addPoint(-0.325F, continentsSpline)
+                .addPoint(0.575F, continentsSpline)
+                .addPoint(0.65F, 7.5F)
+                .build();
+
+        return CubicSpline.builder(erosion)
+                .addPoint(0.475F, temperatureSpline)
+                .addPoint(0.55F, 7.5F)
+                .addPoint(0.625F, 1.0F)
+                .build();
+    }
+
     public static DensityFunction buildIslandDensity(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate lakes = new DensityFunctions.Spline.Coordinate(function.getOrThrow(LAKES_NOISE));
         DensityFunctions.Spline.Coordinate continents = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS));
