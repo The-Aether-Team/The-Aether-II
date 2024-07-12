@@ -52,8 +52,8 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + offsetX, y - 1, z + offsetZ), 8, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + offsetX * -1, y + 1, z + offsetZ * -1), 8, i, doubleTrunk);
 
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(y + offsetX, y - 3, z + offsetZ), Direction.Axis.Y);
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(y + offsetX * -1, y - 1, z + offsetZ * -1), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + offsetX, y - 3, z + offsetZ), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + offsetX * -1, y - 1, z + offsetZ * -1), Direction.Axis.Y);
         }
     }
 
