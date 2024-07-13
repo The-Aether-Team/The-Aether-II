@@ -49,14 +49,14 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(SLOPER_ARCTIC, buildSloperArctic(function));
 
         context.register(SHATTERED_3D_NOISE, BlendedNoise.createUnseeded(
-                0.25D, // xz scale
-                0.1D, // y scale
+                0.15D, // xz scale
+                0.6D, // y scale
                 80D, // xz factor
                 160D, // y factor
                 2.0D // smear scale multiplier, capped at 8
         ));
         context.register(FACTOR_SHATTERED, buildFactorShattered(function));
-        context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 1.0, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
+        context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
         context.register(TOP_SLIDE_SHATTERED, buildTopSlideShattered(function));
         context.register(BOTTOM_SLIDE_SHATTERED, buildBottomSlideShattered(function));
 

@@ -153,12 +153,12 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
         density = DensityFunctions.mul(density, selectSlide(function));
-        density = DensityFunctions.add(density, factorize(function, -0.18));
+        density = DensityFunctions.add(density, factorize(function, -0.19));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.18));
+        density = DensityFunctions.add(density, factorize(function, -0.19));
         density = DensityFunctions.min(density, getFunction(function, NOISE_CAVES));
-        density = DensityFunctions.max(density, DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 140, DensityFunctions.constant(-1), getFunction(function, AetherIIDensityFunctions.SHATTERED_ISLANDS)));
+        density = DensityFunctions.max(density, DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 130, DensityFunctions.constant(-1), getFunction(function, AetherIIDensityFunctions.SHATTERED_ISLANDS)));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
@@ -385,25 +385,31 @@ public class AetherIIDensityFunctionBuilders {
 
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> topSlideShattered(I y, I elevation) {
         return CubicSpline.builder(elevation)
-                .addPoint(0.1F, slidePiece(y, 176, 196, 1, 0.0F))
-                .addPoint(0.15F, slidePiece(y, 180, 200, 1, 0.0F))
-                .addPoint(0.2F, slidePiece(y, 184, 204, 1, 0.0F))
-                .addPoint(0.25F, slidePiece(y, 188, 208, 1, 0.0F))
-                .addPoint(0.3F, slidePiece(y, 192, 212, 1, 0.0F))
-                .addPoint(0.35F, slidePiece(y, 196, 216, 1, 0.0F))
-                .addPoint(0.4F, slidePiece(y, 200, 220, 1, 0.0F))
+                .addPoint(0.05F, slidePiece(y, 162, 182, 1, 0.0F))
+                .addPoint(0.1F, slidePiece(y, 166, 186, 1, 0.0F))
+                .addPoint(0.15F, slidePiece(y, 170, 190, 1, 0.0F))
+                .addPoint(0.2F, slidePiece(y, 174, 194, 1, 0.0F))
+                .addPoint(0.25F, slidePiece(y, 178, 198, 1, 0.0F))
+                .addPoint(0.3F, slidePiece(y, 182, 202, 1, 0.0F))
+                .addPoint(0.35F, slidePiece(y, 186, 206, 1, 0.0F))
+                .addPoint(0.4F, slidePiece(y, 190, 210, 1, 0.0F))
+                .addPoint(0.45F, slidePiece(y, 194, 214, 1, 0.0F))
+                .addPoint(0.5F, slidePiece(y, 198, 218, 1, 0.0F))
                 .build();
     }
 
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> bottomSlideShattered(I y, I elevation) {
         return CubicSpline.builder(elevation)
-                .addPoint(0.1F, slidePiece(y, 144, 176, 0, 1))
-                .addPoint(0.15F, slidePiece(y, 148, 180, 0, 1))
-                .addPoint(0.2F, slidePiece(y, 152, 184, 0, 1))
-                .addPoint(0.25F, slidePiece(y, 156, 188, 0, 1))
-                .addPoint(0.3F, slidePiece(y, 160, 192, 0, 1))
-                .addPoint(0.35F, slidePiece(y, 164, 196, 0, 1))
-                .addPoint(0.4F, slidePiece(y, 168, 200, 0, 1))
+                .addPoint(0.05F, slidePiece(y, 130, 162, 0, 1))
+                .addPoint(0.1F, slidePiece(y, 134, 166, 0, 1))
+                .addPoint(0.15F, slidePiece(y, 138, 170, 0, 1))
+                .addPoint(0.2F, slidePiece(y, 142, 174, 0, 1))
+                .addPoint(0.25F, slidePiece(y, 146, 178, 0, 1))
+                .addPoint(0.3F, slidePiece(y, 150, 182, 0, 1))
+                .addPoint(0.35F, slidePiece(y, 154, 186, 0, 1))
+                .addPoint(0.4F, slidePiece(y, 158, 190, 0, 1))
+                .addPoint(0.45F, slidePiece(y, 162, 194, 0, 1))
+                .addPoint(0.5F, slidePiece(y, 166, 198, 0, 1))
                 .build();
     }
 
