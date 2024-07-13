@@ -6,7 +6,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundRenameItemPacket;
@@ -29,8 +32,18 @@ import net.minecraft.world.item.ItemStack;
 public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> implements ContainerListener {
     private static final ResourceLocation TEXT_FIELD_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field");
     private static final ResourceLocation TEXT_FIELD_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field_disabled");
+    private static final WidgetSprites FORGE_BUTTON_SPRITE = new WidgetSprites(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button_disabled"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/forge_button_selected"));
+    private static final ResourceLocation TIER_1_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_1");
+    private static final ResourceLocation TIER_2_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_2");
+    private static final ResourceLocation TIER_3_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_3");
+    private static final ResourceLocation TIER_4_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_4");
+    private static final ResourceLocation TIER_SELECTION_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_selection");
     private static final ResourceLocation ARKENIUM_FORGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/arkenium_forge.png");
     private EditBox name;
+    private ImageButton forgeButton;
     private final Player player;
 
     public ArkeniumForgeScreen(ArkeniumForgeMenu menu, Inventory playerInventory, Component title) {
@@ -58,6 +71,11 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         this.name.setValue("");
         this.addWidget(this.name);
         this.name.setEditable(this.menu.getSlot(0).hasItem());
+
+        this.forgeButton = this.addRenderableWidget(new ImageButton(this.leftPos + 130, this.topPos + 63, 20, 20, FORGE_BUTTON_SPRITE, button -> {
+
+        }));
+        this.forgeButton.active = false;
     }
 
     @Override
@@ -108,10 +126,12 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
     @Override
     public void slotChanged(AbstractContainerMenu containerToSend, int slotInd, ItemStack stack) {
+        AetherII.LOGGER.info(String.valueOf(slotInd)); //todo the method isnt being called.
         if (slotInd == 0) {
             this.name.setValue(stack.isEmpty() ? "" : stack.getHoverName().getString());
             this.name.setEditable(!stack.isEmpty());
             this.setFocused(this.name);
+            this.forgeButton.active = !stack.isEmpty();
         }
     }
 
