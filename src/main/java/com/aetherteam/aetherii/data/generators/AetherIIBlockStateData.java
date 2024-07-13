@@ -406,6 +406,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.holystoneFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.artisansBench(AetherIIBlocks.ARTISANS_BENCH.get());
         this.altar(AetherIIBlocks.ALTAR.get());
+        this.arkeniumForge(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
         this.bed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get());

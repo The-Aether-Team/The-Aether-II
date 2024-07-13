@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
+import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.block.utility.ArtisansBenchBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
@@ -729,6 +730,31 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .renderType("cutout");
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
             Direction direction = state.getValue(ArtisansBenchBlock.FACING);
+            switch (direction) {
+                case NORTH -> {
+                    return ConfiguredModel.builder().modelFile(model).build();
+                }
+                case EAST -> {
+                    return ConfiguredModel.builder().modelFile(model).rotationY(90).build();
+                }
+                case SOUTH -> {
+                    return ConfiguredModel.builder().modelFile(model).rotationY(180).build();
+                }
+                case WEST -> {
+                    return ConfiguredModel.builder().modelFile(model).rotationY(270).build();
+                }
+            }
+            return ConfiguredModel.builder().build();
+        });
+    }
+
+    public void arkeniumForge(Block block) {
+        ModelFile model = models().withExistingParent(name(block), modLoc("block/template_arkenium_forge"))
+                .texture("forge", texture(name(block), "utility/"))
+                .texture("particle", texture(name(AetherIIBlocks.ARKENIUM_BLOCK.get()), "construction/"))
+                .renderType("cutout");
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(ArkeniumForgeBlock.FACING);
             switch (direction) {
                 case NORTH -> {
                     return ConfiguredModel.builder().modelFile(model).build();

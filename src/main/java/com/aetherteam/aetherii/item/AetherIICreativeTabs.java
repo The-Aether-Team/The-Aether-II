@@ -336,6 +336,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_FURNACE.get());
                 output.accept(AetherIIBlocks.ALTAR.get());
                 output.accept(AetherIIBlocks.ARTISANS_BENCH.get());
+                output.accept(AetherIIBlocks.ARKENIUM_FORGE.get());
                 output.accept(AetherIIBlocks.SKYROOT_LADDER.get());
                 output.accept(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());

@@ -1,0 +1,8 @@
+{
+  "parent": "aether_ii:block/template_arkenium_forge",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "forge": "aether_ii:block/utility/arkenium_forge",
+    "particle": "aether_ii:block/construction/arkenium_block"
+  }
+}
