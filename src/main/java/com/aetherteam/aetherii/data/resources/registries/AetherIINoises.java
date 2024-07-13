@@ -32,7 +32,7 @@ public class AetherIINoises {
         register(context, EROSION, -9, 1.5, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
         register(context, AMPLIFICATION, -7, 1.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0);
         register(context, ELEVATION, -8, 1.0D, 0.2D, 0.0D, 0.0D, 0.0D);
-        register(context, ELEVATION_SHATTERED, -7, 1.0D, 0.5D, 0.0D, 0.0D, 0.0D);
+        register(context, ELEVATION_SHATTERED, -7, 0.75D, 0.25D, 0.0D, 0.0D, 0.0D);
         register(context, CAVES, -6, 1.0, 2.0, 1.0, 0.0, 0.0, 0.0, 0.0);
         register(context, CAVE_THICKNESS, -7, 0.3, 0.0, 0.0);
         register(context, ARCTIC_SNOW, -5, 1.0, 0.0, 0.5, 0.5, 0.0, 0.0);
