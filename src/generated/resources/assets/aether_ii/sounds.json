@@ -43,6 +43,12 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.lift"
   },
+  "entity.cockatrice.shoot": {
+    "sounds": [
+      "aether_ii:entity/projectile/shoot"
+    ],
+    "subtitle": "subtitles.aether.entity.cockatrice.shoot"
+  },
   "entity.flying_cow.ambient": {
     "sounds": [
       "mob/cow/say1",
