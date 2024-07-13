@@ -30,16 +30,4 @@ public class SkyrootShovelItem extends ShovelItem implements SkyrootTool {
         }
         return super.useOn(pContext);
     }
-
-    @Override
-    public boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
-        if (other.is(AetherIIItems.ARKENIUM_PLATES)) {
-            stack.set(AetherIIDataComponents.REINFORCEMENT_TIER, ReinforcementTier.FIRST);
-            stack.set(DataComponents.MAX_DAMAGE, stack.getMaxDamage() + stack.get(AetherIIDataComponents.REINFORCEMENT_TIER).getExtraDurability());
-            other.shrink(1);
-            return true;
-        }
-        AetherII.LOGGER.info(String.valueOf(stack.get(AetherIIDataComponents.REINFORCEMENT_TIER)));
-        return super.overrideOtherStackedOnMe(stack, other, slot, action, player, access);
-    }
 }

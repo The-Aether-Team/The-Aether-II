@@ -2,8 +2,10 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
+import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
+import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -81,6 +83,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         this.forgeButton = this.addRenderableWidget(new ImageButton(this.leftPos + 130, this.topPos + 63, 20, 20, FORGE_BUTTON_SPRITE, button -> {
             if (button.isActive()) {
                 this.onNameChanged(this.name.getValue());
+                this.onItemUpgraded();
             }
         }));
         this.forgeButton.setTooltip(Tooltip.create(Component.literal("Forge Item"))); //todo translate
@@ -103,7 +106,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        if (!this.menu.getInput().isEmpty() && !this.name.getValue().equals(this.menu.getInput().getHoverName().getString())) { //todo more checks
+        if ((!this.menu.getInput().isEmpty() && !this.name.getValue().equals(this.menu.getInput().getHoverName().getString())) || this.menu.getTierForMaterials() > 0) { //todo more checks
             if (!this.forgeButton.active) {
                 this.forgeButton.active = true;
             }
@@ -135,27 +138,39 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             guiGraphics.renderItem(input, (i + 73) / 2, (j + 58) / 2); //todo figure out more stable positioning
             poseStack.popPose();
 
-            int tierCount = this.menu.getTierCount(input);
-            if (tierCount > 0) {
+            ReinforcementTier reinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+            if (reinforcementTier != null) {
+                guiGraphics.blitSprite(TIER_LOCATIONS.get(reinforcementTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
+            }
+
+            int tierCount = this.menu.getTierCount();
+            if (tierCount > 0 && !this.menu.isItemAtMaxTier()) {
                 int spriteSize = 16;
                 int areaWidth = 162;
                 int x = this.leftPos + 7;
                 int y = this.topPos + 110;
+                int currentTier = this.menu.getTierForMaterials();
                 for (int tier = 1; tier <= tierCount; tier++) {
                     int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
-                    guiGraphics.blitSprite(TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
+                    if (reinforcementTier == null || tier > reinforcementTier.getTier()) {
+                        guiGraphics.blitSprite(TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
 
-                    ReinforcementTier.Cost cost = this.menu.getCostForTier(input, tier);
-                    if (cost != null) {
-                        ItemStack primary = new ItemStack(cost.primaryMaterial(), cost.primaryCount());
-                        guiGraphics.renderFakeItem(primary, offsetX - spriteSize, y + 18);
-                        guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX - spriteSize, y + 18, (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
-                        guiGraphics.renderItemDecorations(this.font, primary, offsetX - spriteSize, y + 18);
+                        ReinforcementTier.Cost cost = this.menu.getCostForTier(tier);
+                        if (cost != null) {
+                            ItemStack primary = new ItemStack(cost.primaryMaterial(), cost.primaryCount());
+                            guiGraphics.renderFakeItem(primary, offsetX - spriteSize, y + 18);
+                            guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX - spriteSize, y + 18, (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
+                            guiGraphics.renderItemDecorations(this.font, primary, offsetX - spriteSize, y + 18);
 
-                        ItemStack secondary = new ItemStack(cost.secondaryMaterial(), cost.secondaryCount());
-                        guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
-                        guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
-                        guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
+                            ItemStack secondary = new ItemStack(cost.secondaryMaterial(), cost.secondaryCount());
+                            guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
+                            guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
+                            guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
+                        }
+                    }
+
+                    if (currentTier == tier) {
+                        guiGraphics.blitSprite(TIER_SELECTION_SPRITE, offsetX - (9), y - 1, 18, 18);
                     }
                 }
             }
@@ -182,7 +197,13 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     @Override
     public void dataChanged(AbstractContainerMenu containerMenu, int dataSlotIndex, int value) { }
 
-    private void onNameChanged(String name) { //todo
+    private void onItemUpgraded() {
+        if (this.menu.upgradeItem()) {
+            PacketDistributor.sendToServer(new ForgeUpgradePacket());
+        }
+    }
+
+    private void onNameChanged(String name) {
         Slot slot = this.menu.getSlot(0);
         if (slot.hasItem()) {
             String s = name;

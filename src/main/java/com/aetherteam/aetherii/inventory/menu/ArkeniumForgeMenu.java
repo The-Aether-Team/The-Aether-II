@@ -17,9 +17,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ArkeniumForgeMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
@@ -81,20 +79,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         return stillValid(this.access, player, AetherIIBlocks.ARKENIUM_FORGE.get());
     }
 
-//    @Override
-//    public void slotsChanged(Container inventory) { //todo
-//        ItemStack itemstack = this.materialsContainer.getItem(0);
-//        ItemStack itemstack1 = this.materialsContainer.getItem(1);
-//        ItemStack itemstack2 = this.resultContainer.getItem(2);
-//        if (itemstack2.isEmpty() || !itemstack.isEmpty() && !itemstack1.isEmpty()) {
-//            if (!itemstack.isEmpty() && !itemstack1.isEmpty()) {
-//                this.setupResultSlot(itemstack, itemstack1, itemstack2);
-//            }
-//        } else {
-//            this.resultContainer.removeItemNoUpdate(2);
-//        }
-//    }
-
     @Override
     public ItemStack quickMoveStack(Player player, int slotIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
@@ -145,6 +129,26 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         this.access.execute((level, pos) -> this.clearContainer(player, this.materialsContainer));
     }
 
+    public boolean upgradeItem() {
+        int tierToUpgradeTo = this.getTierForMaterials();
+        ItemStack input = this.getInput();
+        ReinforcementTier reinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+        if (!this.isItemAtMaxTier() && ((reinforcementTier == null && tierToUpgradeTo > 0) || (reinforcementTier != null && tierToUpgradeTo > reinforcementTier.getTier()))) {
+            if (!input.isEmpty()) {
+                ReinforcementTier tier = ReinforcementTier.values()[tierToUpgradeTo - 1];
+                ReinforcementTier.Cost cost = this.getCostForTier(tierToUpgradeTo);
+                if (tier != null && cost != null) {
+                    input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
+                    input.set(DataComponents.MAX_DAMAGE, input.getMaxDamage() + tier.getExtraDurability());
+                    this.getPrimaryMaterial().shrink(cost.primaryCount());
+                    this.getSecondaryMaterial().shrink(cost.secondaryCount());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean setItemName(String itemName) {
         String s = validateName(itemName);
         if (s != null && !s.equals(this.itemName)) {
@@ -174,11 +178,19 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         return this.equipmentContainer.getItem(0);
     }
 
-    public Map<Integer, ReinforcementTier.Cost> getCosts(ItemStack itemStack) {
+    public ItemStack getPrimaryMaterial() {
+        return this.materialsContainer.getItem(0);
+    }
+
+    public ItemStack getSecondaryMaterial() {
+        return this.materialsContainer.getItem(1);
+    }
+
+    public Map<Integer, ReinforcementTier.Cost> getCosts() {
         Map<Integer, ReinforcementTier.Cost> costs = new HashMap<>();
         for (ReinforcementTier tier : ReinforcementTier.values()) {
             int value = tier.getTier();
-            ReinforcementTier.Cost cost = tier.getCost(itemStack);
+            ReinforcementTier.Cost cost = tier.getCost(this.getInput());
             if (costs != null) { //todo whys it saying this is never null
                 costs.put(value, cost);
             }
@@ -186,19 +198,19 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         return costs;
     }
 
-    public int getTierCount(ItemStack itemStack) {
-        return this.getCosts(itemStack).size();
+    public int getTierCount() {
+        return this.getCosts().size();
     }
 
-    public boolean isItemAtMaxTier(ItemStack itemStack) {
-        int max = this.getTierCount(itemStack);
-        ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+    public boolean isItemAtMaxTier() {
+        int max = this.getTierCount();
+        ReinforcementTier tier = this.getInput().get(AetherIIDataComponents.REINFORCEMENT_TIER);
         return tier != null && tier.getTier() == max;
     }
 
-    public int getTierForItem(ItemStack itemStack) {
-        int max = this.getTierCount(itemStack);
-        ReinforcementTier tier = itemStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+    public int getTierForItem() {
+        int max = this.getTierCount();
+        ReinforcementTier tier = this.getInput().get(AetherIIDataComponents.REINFORCEMENT_TIER);
         if (tier != null) {
             return Math.min(tier.getTier() + 1, max);
         } else {
@@ -207,27 +219,43 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     @Nullable
-    public ReinforcementTier.Cost getCostForTier(ItemStack itemStack, int tier) {
-        return this.getCosts(itemStack).getOrDefault(tier, null);
+    public ReinforcementTier.Cost getCostForTier(int tier) {
+        return this.getCosts().getOrDefault(tier, null);
     }
 
     public boolean isEquipment(ItemStack itemStack) {
         return !itemStack.isStackable() && itemStack.getCount() == 1 && itemStack.has(DataComponents.MAX_DAMAGE);
     }
 
-    public boolean isPrimaryMaterial(ItemStack itemStack) {
-        ReinforcementTier.Cost cost = this.getCostForTier(this.getInput(), this.getTierForItem(this.getInput()));
-        if (cost != null) {
-            return itemStack.is(cost.primaryMaterial().asItem());
+    public boolean isPrimaryMaterial(ItemStack material) {
+        for (ReinforcementTier.Cost cost : this.getCosts().values()) {
+            if (cost != null && material.is(cost.primaryMaterial().asItem())) {
+                return true;
+            }
         }
         return false;
     }
 
-    public boolean isSecondaryMaterial(ItemStack itemStack) {
-        ReinforcementTier.Cost cost = this.getCostForTier(this.getInput(), this.getTierForItem(this.getInput()));
-        if (cost != null) {
-            return itemStack.is(cost.secondaryMaterial().asItem());
+    public boolean isSecondaryMaterial(ItemStack material) {
+        for (ReinforcementTier.Cost cost : this.getCosts().values()) {
+            if (cost != null && material.is(cost.secondaryMaterial().asItem())) {
+                return true;
+            }
         }
         return false;
+    }
+
+    public int getTierForMaterials() {
+        if (!this.isItemAtMaxTier()) {
+            List<ReinforcementTier.Cost> costs = new ArrayList<>(this.getCosts().values());
+            for (int i = this.getTierCount() - 1; i >= 0; i--) {
+                ReinforcementTier.Cost cost = costs.get(i);
+                if (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= cost.primaryCount()
+                        && this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= cost.secondaryCount()) {
+                    return i + 1;
+                }
+            }
+        }
+        return -1;
     }
 }
