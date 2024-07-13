@@ -35,6 +35,7 @@ import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
@@ -161,6 +162,7 @@ public class AetherII {
 
         // SERVERBOUND
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
+        registrar.playToServer(ForgeRenamePacket.TYPE, ForgeRenamePacket.STREAM_CODEC, ForgeRenamePacket::execute);
         registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
 
         // BOTH

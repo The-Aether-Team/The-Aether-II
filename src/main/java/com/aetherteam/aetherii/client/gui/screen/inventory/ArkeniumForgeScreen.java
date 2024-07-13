@@ -3,11 +3,13 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.ReinforcementTier;
+import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
@@ -22,6 +24,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
@@ -71,14 +74,16 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         this.name.setTextColorUneditable(-1);
         this.name.setBordered(false);
         this.name.setMaxLength(50);
-        this.name.setResponder(this::onNameChanged);
         this.name.setValue("");
         this.addWidget(this.name);
         this.name.setEditable(this.menu.getSlot(0).hasItem());
 
         this.forgeButton = this.addRenderableWidget(new ImageButton(this.leftPos + 130, this.topPos + 63, 20, 20, FORGE_BUTTON_SPRITE, button -> {
-//            this.onNameChanged(this.name.getValue()); //todo
+            if (button.isActive()) {
+                this.onNameChanged(this.name.getValue());
+            }
         }));
+        this.forgeButton.setTooltip(Tooltip.create(Component.literal("Forge Item"))); //todo translate
         this.forgeButton.active = false;
 
         this.menu.addSlotListener(this);
@@ -98,6 +103,16 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        if (!this.menu.getInput().isEmpty() && !this.name.getValue().equals(this.menu.getInput().getHoverName().getString())) { //todo more checks
+            if (!this.forgeButton.active) {
+                this.forgeButton.active = true;
+            }
+        } else {
+            if (this.forgeButton.active) {
+                this.forgeButton.active = false;
+            }
+        }
+
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.name.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
@@ -161,7 +176,6 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             this.name.setValue(stack.isEmpty() ? "" : stack.getHoverName().getString());
             this.name.setEditable(!stack.isEmpty());
             this.setFocused(this.name);
-            this.forgeButton.active = !stack.isEmpty(); //todo move to only update if the materials are fulfilled and/or the name is changed.
         }
     }
 
@@ -177,7 +191,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             }
 
             if (this.menu.setItemName(s)) {
-                this.minecraft.player.connection.send(new ServerboundRenameItemPacket(s)); //todo need a custom packet; also only run when the forge button is pressed.
+                PacketDistributor.sendToServer(new ForgeRenamePacket(s));
             }
         }
     }
