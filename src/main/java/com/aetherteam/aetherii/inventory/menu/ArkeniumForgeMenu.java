@@ -219,7 +219,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     @Nullable
-    public ReinforcementTier.Cost getCostForTier(int tier) {
+    public ReinforcementTier.Cost getCostForTier(int tier) { //todo i need to add up consecutive tier costs based on the item tier.
         return this.getCosts().getOrDefault(tier, null);
     }
 
