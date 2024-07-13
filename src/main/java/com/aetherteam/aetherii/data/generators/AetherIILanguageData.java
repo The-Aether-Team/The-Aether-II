@@ -636,6 +636,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
+        this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
@@ -725,7 +726,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
-
+        this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
@@ -863,6 +864,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "zephyr.ambient", "Zephyr blows");
         this.addSubtitle("entity", "zephyr.death", "Zephyr dies");
         this.addSubtitle("entity", "zephyr.hurt", "Zephyr hurts");
+
+        this.addSubtitle("entity", "cockatrice.shoot", "Cockatrice shoots");
 
 
         // Packs

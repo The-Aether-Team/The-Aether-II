@@ -99,6 +99,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 7
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "ambient": [],
