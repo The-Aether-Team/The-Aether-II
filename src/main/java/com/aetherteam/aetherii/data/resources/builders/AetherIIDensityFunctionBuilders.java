@@ -158,7 +158,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE));
         density = DensityFunctions.add(density, factorize(function, -0.18));
         density = DensityFunctions.min(density, getFunction(function, NOISE_CAVES));
-        density = DensityFunctions.max(density, getFunction(function, SHATTERED_ISLANDS));
+        density = DensityFunctions.max(density, DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 140, DensityFunctions.constant(-1), getFunction(function, AetherIIDensityFunctions.SHATTERED_ISLANDS)));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
