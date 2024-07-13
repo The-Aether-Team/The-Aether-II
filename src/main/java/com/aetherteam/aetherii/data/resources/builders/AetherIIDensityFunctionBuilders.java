@@ -441,7 +441,10 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(8, 1.25F)
                 .addPoint(16, 0.75F)
                 .addPoint(48, 0.6F)
+                .addPoint(56, 0.4F)
                 .addPoint(72, 0.5F)
+                .addPoint(80, 0.65F)
+                .addPoint(88, 0.95F)
                 .addPoint(96, 1)
                 .build();
     }
