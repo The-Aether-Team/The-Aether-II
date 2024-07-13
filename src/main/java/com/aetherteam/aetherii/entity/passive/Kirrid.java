@@ -510,7 +510,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(AetherIITags.Items.KIRRID_TEMPTATION_ITEMS);
+        return pStack.is(AetherIITags.Items.KIRRID_FOOD);
     }
 
     @Nullable
@@ -568,60 +568,60 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         } else {
             if (this.variantType == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
                 return switch (this.getColor().get()) {
-                    case KirridColor.WHITE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_WHITE;
-                    case KirridColor.ORANGE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_ORANGE;
-                    case KirridColor.MAGENTA -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_MAGENTA;
-                    case KirridColor.LIGHT_BLUE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIGHT_BLUE;
-                    case KirridColor.YELLOW -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_YELLOW;
-                    case KirridColor.LIME -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIME;
-                    case KirridColor.PINK -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_PINK;
-                    case KirridColor.GRAY -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_GRAY;
-                    case KirridColor.LIGHT_GRAY -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIGHT_GRAY;
-                    case KirridColor.CYAN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_CYAN;
-                    case KirridColor.PURPLE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_PURPLE;
-                    case KirridColor.BLUE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BLUE;
-                    case KirridColor.BROWN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BROWN;
-                    case KirridColor.GREEN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_GREEN;
-                    case KirridColor.RED -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_RED;
-                    case KirridColor.BLACK -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BLACK;
+                    case WHITE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_WHITE;
+                    case ORANGE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_ORANGE;
+                    case MAGENTA -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_MAGENTA;
+                    case LIGHT_BLUE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIGHT_BLUE;
+                    case YELLOW -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_YELLOW;
+                    case LIME -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIME;
+                    case PINK -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_PINK;
+                    case GRAY -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_GRAY;
+                    case LIGHT_GRAY -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIGHT_GRAY;
+                    case CYAN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_CYAN;
+                    case PURPLE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_PURPLE;
+                    case BLUE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BLUE;
+                    case BROWN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BROWN;
+                    case GREEN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_GREEN;
+                    case RED -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_RED;
+                    case BLACK -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BLACK;
                 };
             } else if (this.variantType == AetherIIEntityTypes.MAGNETIC_KIRRID.get()) {
                 return switch (this.getColor().get()) {
-                    case KirridColor.WHITE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WHITE;
-                    case KirridColor.ORANGE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_ORANGE;
-                    case KirridColor.MAGENTA -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_MAGENTA;
-                    case KirridColor.LIGHT_BLUE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIGHT_BLUE;
-                    case KirridColor.YELLOW -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_YELLOW;
-                    case KirridColor.LIME -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIME;
-                    case KirridColor.PINK -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PINK;
-                    case KirridColor.GRAY -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_GRAY;
-                    case KirridColor.LIGHT_GRAY -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIGHT_GRAY;
-                    case KirridColor.CYAN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_CYAN;
-                    case KirridColor.PURPLE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PURPLE;
-                    case KirridColor.BLUE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BLUE;
-                    case KirridColor.BROWN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BROWN;
-                    case KirridColor.GREEN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_GREEN;
-                    case KirridColor.RED -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_RED;
-                    case KirridColor.BLACK -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BLACK;
+                    case WHITE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WHITE;
+                    case ORANGE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_ORANGE;
+                    case MAGENTA -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_MAGENTA;
+                    case LIGHT_BLUE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIGHT_BLUE;
+                    case YELLOW -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_YELLOW;
+                    case LIME -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIME;
+                    case PINK -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PINK;
+                    case GRAY -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_GRAY;
+                    case LIGHT_GRAY -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIGHT_GRAY;
+                    case CYAN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_CYAN;
+                    case PURPLE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PURPLE;
+                    case BLUE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BLUE;
+                    case BROWN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BROWN;
+                    case GREEN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_GREEN;
+                    case RED -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_RED;
+                    case BLACK -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BLACK;
                 };
             } else {
                 return switch (this.getColor().get()) {
-                    case KirridColor.WHITE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WHITE;
-                    case KirridColor.ORANGE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_ORANGE;
-                    case KirridColor.MAGENTA -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_MAGENTA;
-                    case KirridColor.LIGHT_BLUE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIGHT_BLUE;
-                    case KirridColor.YELLOW -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_YELLOW;
-                    case KirridColor.LIME -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIME;
-                    case KirridColor.PINK -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PINK;
-                    case KirridColor.GRAY -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_GRAY;
-                    case KirridColor.LIGHT_GRAY -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIGHT_GRAY;
-                    case KirridColor.CYAN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_CYAN;
-                    case KirridColor.PURPLE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PURPLE;
-                    case KirridColor.BLUE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BLUE;
-                    case KirridColor.BROWN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BROWN;
-                    case KirridColor.GREEN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_GREEN;
-                    case KirridColor.RED -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_RED;
-                    case KirridColor.BLACK -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BLACK;
+                    case WHITE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WHITE;
+                    case ORANGE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_ORANGE;
+                    case MAGENTA -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_MAGENTA;
+                    case LIGHT_BLUE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIGHT_BLUE;
+                    case YELLOW -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_YELLOW;
+                    case LIME -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIME;
+                    case PINK -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PINK;
+                    case GRAY -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_GRAY;
+                    case LIGHT_GRAY -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIGHT_GRAY;
+                    case CYAN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_CYAN;
+                    case PURPLE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PURPLE;
+                    case BLUE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BLUE;
+                    case BROWN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BROWN;
+                    case GREEN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_GREEN;
+                    case RED -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_RED;
+                    case BLACK -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BLACK;
                 };
             }
         }

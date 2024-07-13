@@ -2,6 +2,7 @@
   "parent": "minecraft:block/cube_column_horizontal",
   "textures": {
     "end": "aether_ii:block/decorative/skyroot_highlight",
-    "side": "aether_ii:block/decorative/skyroot_beam"
+    "side": "aether_ii:block/decorative/skyroot_beam",
+    "up": "aether_ii:block/decorative/skyroot_highlight"
   }
 }

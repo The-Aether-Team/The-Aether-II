@@ -1,0 +1,28 @@
+{
+  "values": {
+    "minecraft:axolotl_bucket": {
+      "item": "aether_ii:skyroot_axolotl_bucket"
+    },
+    "minecraft:cod_bucket": {
+      "item": "aether_ii:skyroot_cod_bucket"
+    },
+    "minecraft:powder_snow_bucket": {
+      "item": "aether_ii:skyroot_powder_snow_bucket"
+    },
+    "minecraft:pufferfish_bucket": {
+      "item": "aether_ii:skyroot_pufferfish_bucket"
+    },
+    "minecraft:salmon_bucket": {
+      "item": "aether_ii:skyroot_salmon_bucket"
+    },
+    "minecraft:tadpole_bucket": {
+      "item": "aether_ii:skyroot_tadpole_bucket"
+    },
+    "minecraft:tropical_fish_bucket": {
+      "item": "aether_ii:skyroot_tropical_fish_bucket"
+    },
+    "minecraft:water_bucket": {
+      "item": "aether_ii:skyroot_water_bucket"
+    }
+  }
+}

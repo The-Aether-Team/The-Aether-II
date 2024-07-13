@@ -53,7 +53,7 @@ public class DoubleDropsModifier extends LootModifier {
     private void doubleDrops(ObjectArrayList<ItemStack> lootStacks, ObjectArrayList<ItemStack> newStacks, RandomSource random) {
         for (ItemStack stack : lootStacks) {
             if (stack.is(AetherIITags.Items.DOUBLE_DROPS)) {
-                boolean shouldDouble = stack.getItem() instanceof BlockItem ? random.nextInt(3) == 0 : random.nextInt(3) > 0;
+                boolean shouldDouble = stack.getItem() instanceof BlockItem ? random.nextInt(5) > 3 : random.nextInt(5) > 2;
                 if (shouldDouble) {
                     newStacks.add(stack);
                 }
