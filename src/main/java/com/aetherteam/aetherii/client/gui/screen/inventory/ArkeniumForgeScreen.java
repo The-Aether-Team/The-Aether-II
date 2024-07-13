@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
+import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,6 +11,7 @@ import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundRenameItemPacket;
@@ -21,13 +23,14 @@ import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
+
 //todo
 //  get naming to work; probably shouldnt take cost.
-//  need to add forging button
 //  forging button will have to consume materials and update equipment stack; may need packets to the server for this but not sure.
-//  will need some conditional positioning to render the upgrade tier icons and the respective material costs;
-//  i do still need to figure out how reinforcing will work; do i make it a recipe type? how much will need to be configurable when it might only be the inputs. and if the inputs are static then a recipe might not even be needed. maybe only a single special type thats hardcoded
+//  need to render selection outline for tier icons dependent on input material count. also i forget if theyre meant to act as buttons as well.
 //  need to render the charm displays and "slots" around the item when inputted.
+//  forging button tooltip
 
 public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> implements ContainerListener {
     private static final ResourceLocation TEXT_FIELD_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field");
@@ -42,6 +45,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     private static final ResourceLocation TIER_4_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_4");
     private static final ResourceLocation TIER_SELECTION_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_selection");
     private static final ResourceLocation ARKENIUM_FORGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/arkenium_forge.png");
+    private static final List<ResourceLocation> TIER_LOCATIONS = List.of(TIER_1_SPRITE, TIER_2_SPRITE, TIER_3_SPRITE, TIER_4_SPRITE);
     private EditBox name;
     private ImageButton forgeButton;
     private final Player player;
@@ -73,9 +77,11 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         this.name.setEditable(this.menu.getSlot(0).hasItem());
 
         this.forgeButton = this.addRenderableWidget(new ImageButton(this.leftPos + 130, this.topPos + 63, 20, 20, FORGE_BUTTON_SPRITE, button -> {
-
+//            this.onNameChanged(this.name.getValue()); //todo
         }));
         this.forgeButton.active = false;
+
+        this.menu.addSlotListener(this);
     }
 
     @Override
@@ -103,7 +109,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         int j = (this.height - this.imageHeight) / 2;
         guiGraphics.blit(ARKENIUM_FORGE_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
 
-        ItemStack input = this.menu.getItems().getFirst();
+        ItemStack input = this.menu.getInput();
 
         guiGraphics.blitSprite(!input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
 
@@ -111,8 +117,33 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
             poseStack.scale(2, 2, 1);
-            guiGraphics.renderItem(input, (i + 73) / 2, (j + 58) / 2);
+            guiGraphics.renderItem(input, (i + 73) / 2, (j + 58) / 2); //todo figure out more stable positioning
             poseStack.popPose();
+
+            int tierCount = this.menu.getTierCount(input);
+            if (tierCount > 0) {
+                int spriteSize = 16;
+                int areaWidth = 162;
+                int x = this.leftPos + 7;
+                int y = this.topPos + 110;
+                for (int tier = 1; tier <= tierCount; tier++) {
+                    int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
+                    guiGraphics.blitSprite(TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
+
+                    ReinforcementTier.Cost cost = this.menu.getCostForTier(input, tier);
+                    if (cost != null) {
+                        ItemStack primary = new ItemStack(cost.primaryMaterial(), cost.primaryCount());
+                        guiGraphics.renderFakeItem(primary, offsetX - spriteSize, y + 18);
+                        guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX - spriteSize, y + 18, (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
+                        guiGraphics.renderItemDecorations(this.font, primary, offsetX - spriteSize, y + 18);
+
+                        ItemStack secondary = new ItemStack(cost.secondaryMaterial(), cost.secondaryCount());
+                        guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
+                        guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
+                        guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
+                    }
+                }
+            }
         }
     }
 
@@ -126,12 +157,11 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
     @Override
     public void slotChanged(AbstractContainerMenu containerToSend, int slotInd, ItemStack stack) {
-        AetherII.LOGGER.info(String.valueOf(slotInd)); //todo the method isnt being called.
         if (slotInd == 0) {
             this.name.setValue(stack.isEmpty() ? "" : stack.getHoverName().getString());
             this.name.setEditable(!stack.isEmpty());
             this.setFocused(this.name);
-            this.forgeButton.active = !stack.isEmpty();
+            this.forgeButton.active = !stack.isEmpty(); //todo move to only update if the materials are fulfilled and/or the name is changed.
         }
     }
 
@@ -147,7 +177,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             }
 
             if (this.menu.setItemName(s)) {
-                this.minecraft.player.connection.send(new ServerboundRenameItemPacket(s));
+                this.minecraft.player.connection.send(new ServerboundRenameItemPacket(s)); //todo need a custom packet; also only run when the forge button is pressed.
             }
         }
     }
