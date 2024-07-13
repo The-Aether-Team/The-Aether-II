@@ -141,10 +141,10 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.1));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.TOP_SLIDE_SHATTERED));
-        density = DensityFunctions.add(density, factorizeShattered(function, -0.325));
+        density = DensityFunctions.add(density, factorizeShattered(function, -0.3));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.BOTTOM_SLIDE_SHATTERED));
-        density = DensityFunctions.add(density, factorizeShattered(function, -0.325));
+        density = DensityFunctions.add(density, factorizeShattered(function, -0.3));
         return density;
     }
 
