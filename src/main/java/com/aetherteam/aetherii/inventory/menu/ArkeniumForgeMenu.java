@@ -194,7 +194,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         for (ReinforcementTier tier : ReinforcementTier.values()) {
             int value = tier.getTier();
             ReinforcementTier.Cost cost = tier.getCost(this.getInput());
-            if (costs != null) { //todo whys it saying this is never null
+            if (costs != null) {
                 costs.put(value, cost);
             }
         }
