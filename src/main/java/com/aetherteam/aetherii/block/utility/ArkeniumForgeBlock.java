@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class ArkeniumForgeBlock extends Block {
+public class ArkeniumForgeBlock extends Block { //todo add block entity
     private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.arkenium_forge");
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape CORNER_1 = Block.box(0.0, 0.0, 0.0, 3.0, 6.0, 3.0);
