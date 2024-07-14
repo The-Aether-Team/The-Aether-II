@@ -79,6 +79,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             if (button.isActive()) {
                 this.onNameChanged(this.name.getValue());
                 this.onItemUpgraded();
+                //todo sound
             }
         }));
         this.forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
