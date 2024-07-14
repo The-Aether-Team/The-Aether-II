@@ -29,7 +29,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.List;
 
 //todo
-//  i forget tier icons are meant to act as buttons as well.
 //  need to render the charm displays and "slots" around the item when inputted.
 
 public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> implements ContainerListener {
