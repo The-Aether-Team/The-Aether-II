@@ -21,7 +21,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class ArkeniumForgeBlock extends BaseEntityBlock { //todo add block entity
+public class ArkeniumForgeBlock extends BaseEntityBlock {
     public static final MapCodec<ArkeniumForgeBlock> CODEC = simpleCodec(ArkeniumForgeBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape CORNER_1 = Block.box(0.0, 0.0, 0.0, 3.0, 6.0, 3.0);

@@ -14,7 +14,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implements StackedContentsCompatible {
@@ -22,10 +21,6 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
 
     public ArkeniumForgeBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), pos, blockState);
-    }
-
-    public ArkeniumForgeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
-        super(type, pos, blockState);
     }
 
     @Override
