@@ -1,19 +1,16 @@
 package com.aetherteam.aetherii.block.utility;
 
-import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
+import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -22,9 +19,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-public class ArkeniumForgeBlock extends Block { //todo add block entity
-    private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.arkenium_forge");
+public class ArkeniumForgeBlock extends BaseEntityBlock { //todo add block entity
+    public static final MapCodec<ArkeniumForgeBlock> CODEC = simpleCodec(ArkeniumForgeBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape CORNER_1 = Block.box(0.0, 0.0, 0.0, 3.0, 6.0, 3.0);
     protected static final VoxelShape CORNER_2 = Block.box(13.0, 0.0, 13.0, 16.0, 6.0, 16.0);
@@ -50,8 +48,19 @@ public class ArkeniumForgeBlock extends Block { //todo add block entity
     }
 
     @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ArkeniumForgeBlockEntity(pos, state);
     }
 
     @Override
@@ -59,15 +68,16 @@ public class ArkeniumForgeBlock extends Block { //todo add block entity
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else {
-            player.openMenu(state.getMenuProvider(level, pos));
-            player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
+            this.openContainer(level, pos, player);
             return InteractionResult.CONSUME;
         }
     }
 
-    @Override
-    protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-        return new SimpleMenuProvider((id, inventory, player) -> new ArkeniumForgeMenu(id, inventory, ContainerLevelAccess.create(level, pos)), CONTAINER_TITLE);
+    protected void openContainer(Level level, BlockPos pos, Player player) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof ArkeniumForgeBlockEntity arkeniumForgeBlockEntity) {
+            player.openMenu(arkeniumForgeBlockEntity);
+        }
     }
 
     @Override

@@ -23,6 +23,7 @@
     "client.BlockRenderDispatcherMixin",
     "client.ClientLevelMixin",
     "client.LiquidBlockRendererMixin",
+    "client.accessor.EditBoxAccessor",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.ParticleAccessor",
     "client.accessor.RenderChunkRegionAccessor"

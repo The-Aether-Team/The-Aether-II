@@ -22,43 +22,29 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class ArkeniumForgeMenu extends AbstractContainerMenu {
-    private final ContainerLevelAccess access;
+    private final Container container;
     private final Player player;
-    public final Container equipmentContainer = new SimpleContainer(1) {
-        @Override
-        public void setChanged() {
-            ArkeniumForgeMenu.this.slotsChanged(this);
-            super.setChanged();
-        }
-    };
-    public final Container materialsContainer = new SimpleContainer(2) {
-        @Override
-        public void setChanged() {
-            ArkeniumForgeMenu.this.slotsChanged(this);
-            super.setChanged();
-        }
-    };
     @Nullable
     private String itemName;
 
     public ArkeniumForgeMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, ContainerLevelAccess.NULL);
+        this(containerId, playerInventory, new SimpleContainer(3));
     }
 
-    public ArkeniumForgeMenu(int containerId, Inventory playerInventory, ContainerLevelAccess access) {
+    public ArkeniumForgeMenu(int containerId, Inventory playerInventory, Container container) {
         super(AetherIIMenuTypes.ARKENIUM_FORGE.get(), containerId);
-        this.access = access;
+        this.container = container;
         this.player = playerInventory.player;
 
-        this.addSlot(new Slot(this.equipmentContainer, 0, 29, 65));
+        this.addSlot(new Slot(this.container, 0, 29, 65));
 
-        this.addSlot(new Slot(this.materialsContainer, 0, 69, 149) {
+        this.addSlot(new Slot(this.container, 1, 69, 149) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return ArkeniumForgeMenu.this.isPrimaryMaterial(stack);
             }
         });
-        this.addSlot(new Slot(this.materialsContainer, 1, 91, 149) {
+        this.addSlot(new Slot(this.container, 2, 91, 149) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return ArkeniumForgeMenu.this.isSecondaryMaterial(stack);
@@ -78,7 +64,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(this.access, player, AetherIIBlocks.ARKENIUM_FORGE.get());
+        return this.container.stillValid(player);
     }
 
     @Override
@@ -122,13 +108,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             slot.onTake(player, slotStack);
         }
         return itemStack;
-    }
-
-    @Override
-    public void removed(Player player) {
-        super.removed(player);
-        this.access.execute((level, pos) -> this.clearContainer(player, this.equipmentContainer));
-        this.access.execute((level, pos) -> this.clearContainer(player, this.materialsContainer));
     }
 
     public boolean upgradeItem() {
@@ -178,15 +157,15 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     public ItemStack getInput() {
-        return this.equipmentContainer.getItem(0);
+        return this.container.getItem(0);
     }
 
     public ItemStack getPrimaryMaterial() {
-        return this.materialsContainer.getItem(0);
+        return this.container.getItem(1);
     }
 
     public ItemStack getSecondaryMaterial() {
-        return this.materialsContainer.getItem(1);
+        return this.container.getItem(2);
     }
 
     public Map<Integer, ReinforcementTier.Cost> getCosts() {

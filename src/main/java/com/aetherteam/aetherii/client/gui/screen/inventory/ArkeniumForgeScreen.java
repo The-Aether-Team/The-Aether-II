@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.ReinforcementTier;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.EditBoxAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -31,7 +32,7 @@ import java.util.List;
 //todo
 //  need to render the charm displays and "slots" around the item when inputted.
 
-public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> implements ContainerListener {
+public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> {
     private static final ResourceLocation TEXT_FIELD_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field");
     private static final ResourceLocation TEXT_FIELD_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field_disabled");
     private static final WidgetSprites FORGE_BUTTON_SPRITE = new WidgetSprites(
@@ -48,11 +49,10 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     private static final List<ResourceLocation> TIER_LOCATIONS = List.of(TIER_1_SPRITE, TIER_2_SPRITE, TIER_3_SPRITE, TIER_4_SPRITE);
     private EditBox name;
     private ImageButton forgeButton;
-    private final Player player;
+    private ItemStack lastInput = ItemStack.EMPTY;
 
     public ArkeniumForgeScreen(ArkeniumForgeMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.player = playerInventory.player;
     }
 
     @Override
@@ -84,8 +84,6 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         }));
         this.forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
         this.forgeButton.active = false;
-
-        this.menu.addSlotListener(this);
     }
 
     @Override
@@ -102,6 +100,23 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        String nameValue = this.menu.getInput().getHoverName().getString();
+        boolean editable = !this.menu.getInput().isEmpty();
+        if (!ItemStack.matches(this.menu.getInput(), this.lastInput) && !this.name.getValue().equals(nameValue)) {
+            this.name.setValue(nameValue);
+        }
+        if (this.menu.getInput().isEmpty() && !this.name.getValue().isEmpty()) {
+            this.name.setValue("");
+        }
+        if (((EditBoxAccessor) this.name).callIsEditable() != editable) {
+            this.name.setEditable(editable);
+        }
+        if (this.menu.getInput().isEmpty() && this.name.isFocused()) {
+            this.name.setFocused(false);
+        } else if (!this.menu.getInput().isEmpty() && !this.name.isFocused()) {
+            this.name.setFocused(true);
+        }
+
         if ((!this.menu.getInput().isEmpty() && !this.name.getValue().equals(this.menu.getInput().getHoverName().getString())) || this.menu.getTierForMaterials() > this.menu.getTierForItem()) {
             if (!this.forgeButton.active) {
                 this.forgeButton.active = true;
@@ -115,6 +130,8 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.name.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
+
+        this.lastInput = this.menu.getInput();
     }
 
     @Override
@@ -185,18 +202,6 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         }
         return this.name.keyPressed(keyCode, scanCode, modifiers) || this.name.canConsumeInput() || super.keyPressed(keyCode, scanCode, modifiers);
     }
-
-    @Override
-    public void slotChanged(AbstractContainerMenu containerToSend, int slotInd, ItemStack stack) {
-        if (slotInd == 0) {
-            this.name.setValue(stack.isEmpty() ? "" : stack.getHoverName().getString());
-            this.name.setEditable(!stack.isEmpty());
-            this.setFocused(this.name);
-        }
-    }
-
-    @Override
-    public void dataChanged(AbstractContainerMenu containerMenu, int dataSlotIndex, int value) { }
 
     private void onItemUpgraded() {
         if (this.menu.upgradeItem()) {
