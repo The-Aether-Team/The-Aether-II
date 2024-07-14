@@ -102,7 +102,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        if ((!this.menu.getInput().isEmpty() && !this.name.getValue().equals(this.menu.getInput().getHoverName().getString())) || this.menu.getTierForMaterials() > 0) {
+        if ((!this.menu.getInput().isEmpty() && !this.name.getValue().equals(this.menu.getInput().getHoverName().getString())) || this.menu.getTierForMaterials() > this.menu.getTierForItem()) {
             if (!this.forgeButton.active) {
                 this.forgeButton.active = true;
             }
@@ -131,7 +131,8 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
             poseStack.scale(2, 2, 1);
-            guiGraphics.renderItem(input, (i + 73) / 2, (j + 58) / 2); //todo figure out more stable positioning
+            poseStack.translate((this.leftPos + 72) / 2.0, (this.topPos + 57) / 2.0, 0);
+            guiGraphics.renderItem(input, 0, 0);
             poseStack.popPose();
 
             ReinforcementTier reinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
@@ -152,14 +153,16 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                     guiGraphics.blitSprite(TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
 
                     ReinforcementTier.Cost cost = this.menu.getCostForTier(tier);
-                    if (cost != null) {
+                    int primaryCost = this.menu.getPrimaryCostForTier(tier);
+                    int secondaryCost = this.menu.getSecondaryCostForTier(tier);
+                    if (cost != null && primaryCost != -1 && secondaryCost != -1) {
                         if (reinforcementTier == null || tier > reinforcementTier.getTier()) {
-                            ItemStack primary = new ItemStack(cost.primaryMaterial(), cost.primaryCount());
+                            ItemStack primary = new ItemStack(cost.primaryMaterial(), primaryCost);
                             guiGraphics.renderFakeItem(primary, offsetX - spriteSize, y + 18);
                             guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX - spriteSize, y + 18, (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
                             guiGraphics.renderItemDecorations(this.font, primary, offsetX - spriteSize, y + 18);
 
-                            ItemStack secondary = new ItemStack(cost.secondaryMaterial(), cost.secondaryCount());
+                            ItemStack secondary = new ItemStack(cost.secondaryMaterial(), secondaryCost);
                             guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
                             guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
                             guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
@@ -167,7 +170,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                             guiGraphics.blitSprite(TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
                         }
                     }
-                    if (currentTier == tier) {
+                    if (currentTier == tier && currentTier > this.menu.getTierForItem()) {
                         guiGraphics.blitSprite(TIER_SELECTED_SPRITE, offsetX - (9), y - 1, 18, 18);
                     }
                 }

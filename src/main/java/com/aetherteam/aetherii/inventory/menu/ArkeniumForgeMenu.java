@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.ReinforcementTier;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringUtil;
@@ -15,6 +16,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -136,12 +138,13 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         if (!this.isItemAtMaxTier() && ((reinforcementTier == null && tierToUpgradeTo > 0) || (reinforcementTier != null && tierToUpgradeTo > reinforcementTier.getTier()))) {
             if (!input.isEmpty()) {
                 ReinforcementTier tier = ReinforcementTier.values()[tierToUpgradeTo - 1];
-                ReinforcementTier.Cost cost = this.getCostForTier(tierToUpgradeTo);
-                if (tier != null && cost != null) {
+                int primaryCost = this.getPrimaryCostForTier(tierToUpgradeTo);
+                int secondaryCost = this.getSecondaryCostForTier(tierToUpgradeTo);
+                if (tier != null && primaryCost != -1 && secondaryCost != -1) {
                     input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
                     input.set(DataComponents.MAX_DAMAGE, input.getMaxDamage() + tier.getExtraDurability());
-                    this.getPrimaryMaterial().shrink(cost.primaryCount());
-                    this.getSecondaryMaterial().shrink(cost.secondaryCount());
+                    this.getPrimaryMaterial().shrink(primaryCost);
+                    this.getSecondaryMaterial().shrink(secondaryCost);
                     return true;
                 }
             }
@@ -212,15 +215,47 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         int max = this.getTierCount();
         ReinforcementTier tier = this.getInput().get(AetherIIDataComponents.REINFORCEMENT_TIER);
         if (tier != null) {
-            return Math.min(tier.getTier() + 1, max);
+            return Math.min(tier.getTier(), max);
         } else {
-            return 1;
+            return 0;
         }
     }
 
     @Nullable
-    public ReinforcementTier.Cost getCostForTier(int tier) { //todo i need to add up consecutive tier costs based on the item tier.
+    public ReinforcementTier.Cost getCostForTier(int tier) {
         return this.getCosts().getOrDefault(tier, null);
+    }
+
+    public int getPrimaryCostForTier(int tier) {
+        ReinforcementTier.Cost initialCost = this.getCostForTier(tier);
+        if (initialCost != null) {
+            int cost = initialCost.primaryCount();
+            int minimumTier = this.getTierForItem();
+            for (int i = tier - 1; i > minimumTier; i--) {
+                ReinforcementTier.Cost costForTier = this.getCostForTier(i);
+                if (costForTier != null) {
+                    cost += costForTier.primaryCount();
+                }
+            }
+            return cost;
+        }
+        return -1;
+    }
+
+    public int getSecondaryCostForTier(int tier) {
+        ReinforcementTier.Cost initialCost = this.getCostForTier(tier);
+        if (initialCost != null) {
+            int cost = initialCost.secondaryCount();
+            int minimumTier = this.getTierForItem();
+            for (int i = tier - 1; i > minimumTier; i--) {
+                ReinforcementTier.Cost costForTier = this.getCostForTier(i);
+                if (costForTier != null) {
+                    cost += costForTier.secondaryCount();
+                }
+            }
+            return cost;
+        }
+        return -1;
     }
 
     public boolean isEquipment(ItemStack itemStack) {
@@ -250,8 +285,8 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             List<ReinforcementTier.Cost> costs = new ArrayList<>(this.getCosts().values());
             for (int i = this.getTierCount() - 1; i >= 0; i--) {
                 ReinforcementTier.Cost cost = costs.get(i);
-                if (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= cost.primaryCount()
-                        && this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= cost.secondaryCount()) {
+                if (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= this.getPrimaryCostForTier(i + 1)
+                        && this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= this.getSecondaryCostForTier(i + 1)) {
                     return i + 1;
                 }
             }
