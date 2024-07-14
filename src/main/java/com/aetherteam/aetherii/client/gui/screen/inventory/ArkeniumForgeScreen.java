@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.EditBoxAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
+import com.aetherteam.aetherii.network.packet.serverbound.ForgeTriggerSoundPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -79,7 +80,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             if (button.isActive()) {
                 this.onNameChanged(this.name.getValue());
                 this.onItemUpgraded();
-                //todo sound
+                PacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
             }
         }));
         this.forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));

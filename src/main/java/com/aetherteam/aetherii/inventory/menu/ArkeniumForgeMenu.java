@@ -1,10 +1,9 @@
 package com.aetherteam.aetherii.inventory.menu;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.ReinforcementTier;
-import com.mojang.datafixers.util.Pair;
+import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringUtil;
@@ -13,10 +12,9 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -147,6 +145,12 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void playSound() {
+        if (this.container instanceof ArkeniumForgeBlockEntity blockEntity) {
+            PacketDistributor.sendToAllPlayers(new ForgeSoundPacket(blockEntity.getBlockPos()));
         }
     }
 

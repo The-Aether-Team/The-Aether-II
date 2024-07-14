@@ -30,14 +30,8 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
-import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.PortalTravelSoundPacket;
-import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
-import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
-import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
-import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
-import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.*;
+import com.aetherteam.aetherii.network.packet.serverbound.*;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.world.AetherIIPoi;
@@ -157,6 +151,7 @@ public class AetherII {
         // CLIENTBOUND
         registrar.playToClient(EffectBuildupPacket.Set.TYPE, EffectBuildupPacket.Set.STREAM_CODEC, EffectBuildupPacket.Set::execute);
         registrar.playToClient(EffectBuildupPacket.Remove.TYPE, EffectBuildupPacket.Remove.STREAM_CODEC, EffectBuildupPacket.Remove::execute);
+        registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
@@ -164,6 +159,7 @@ public class AetherII {
         // SERVERBOUND
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
         registrar.playToServer(ForgeRenamePacket.TYPE, ForgeRenamePacket.STREAM_CODEC, ForgeRenamePacket::execute);
+        registrar.playToServer(ForgeTriggerSoundPacket.TYPE, ForgeTriggerSoundPacket.STREAM_CODEC, ForgeTriggerSoundPacket::execute);
         registrar.playToServer(ForgeUpgradePacket.TYPE, ForgeUpgradePacket.STREAM_CODEC, ForgeUpgradePacket::execute);
         registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
 
