@@ -67,22 +67,22 @@ public class OutpostCampfireRenderer implements BlockEntityRenderer<OutpostCampf
 
     @Override
     public void render(OutpostCampfireBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) { //todo this starts having z-fighting when light level dims.
-        BlockState blockState = blockEntity.getBlockState();
-        OutpostCampfireBlock block = (OutpostCampfireBlock) blockState.getBlock();
-        poseStack.translate(0, 1.5, 0);
-        poseStack.mulPose(Axis.XN.rotationDegrees(180));
-        Direction xDirection = blockState.getValue(OutpostCampfireBlock.X_DIRECTION_FROM_ORIGIN);
-        Direction zDirection = blockState.getValue(OutpostCampfireBlock.Z_DIRECTION_FROM_ORIGIN);
-        if (xDirection != Direction.EAST) {
-            poseStack.translate(-xDirection.getStepX(), 0, 0);
-        }
-        if (zDirection != Direction.SOUTH) {
-            poseStack.translate(0, 0, zDirection.getStepZ());
-        }
-        poseStack.translate((block.getScale().getX() - blockState.getValue(block.X_OFFSET_FROM_ORIGIN) - 1) * xDirection.getStepX(), 0, -(block.getScale().getZ() - blockState.getValue(block.Z_OFFSET_FROM_ORIGIN) - 1) * zDirection.getStepZ());
-        poseStack.mulPose(Axis.YP.rotationDegrees(blockState.getValue(OutpostCampfireBlock.HORIZONTAL_FACING).toYRot()));
-        VertexConsumer vertexConsumer = OUTPOST_CAMPFIRE_TEXTURE.buffer(bufferSource, RenderType::entityCutout);
-        this.campfire.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+//        BlockState blockState = blockEntity.getBlockState();
+//        OutpostCampfireBlock block = (OutpostCampfireBlock) blockState.getBlock();
+//        poseStack.translate(0, 1.5, 0);
+//        poseStack.mulPose(Axis.XN.rotationDegrees(180));
+//        Direction xDirection = blockState.getValue(OutpostCampfireBlock.X_DIRECTION_FROM_ORIGIN);
+//        Direction zDirection = blockState.getValue(OutpostCampfireBlock.Z_DIRECTION_FROM_ORIGIN);
+//        if (xDirection != Direction.EAST) {
+//            poseStack.translate(-xDirection.getStepX(), 0, 0);
+//        }
+//        if (zDirection != Direction.SOUTH) {
+//            poseStack.translate(0, 0, zDirection.getStepZ());
+//        }
+//        poseStack.translate((block.getScale().getX() - blockState.getValue(block.X_OFFSET_FROM_ORIGIN) - 1) * xDirection.getStepX(), 0, -(block.getScale().getZ() - blockState.getValue(block.Z_OFFSET_FROM_ORIGIN) - 1) * zDirection.getStepZ());
+//        poseStack.mulPose(Axis.YP.rotationDegrees(blockState.getValue(OutpostCampfireBlock.HORIZONTAL_FACING).toYRot()));
+//        VertexConsumer vertexConsumer = OUTPOST_CAMPFIRE_TEXTURE.buffer(bufferSource, RenderType::entityCutout);
+//        this.campfire.render(poseStack, vertexConsumer, packedLight, packedOverlay);
     }
 
     @Override

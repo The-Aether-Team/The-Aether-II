@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client.renderer.block;
+package com.aetherteam.aetherii.client.renderer.block.model.baked;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;

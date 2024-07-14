@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -35,12 +34,11 @@ import java.util.stream.Collectors;
 public class OutpostCampfireBlock extends MultiBlock {
     public static final MapCodec<OutpostCampfireBlock> CODEC = simpleCodec(OutpostCampfireBlock::new);
     public static final DirectionProperty HORIZONTAL_FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final BooleanProperty LIT = BlockStateProperties.LIT;
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 5.0, 16.0);
 
     public OutpostCampfireBlock(BlockBehaviour.Properties properties) {
         super(2, 2, 1, properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HORIZONTAL_FACING, Direction.WEST).setValue(LIT, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HORIZONTAL_FACING, Direction.WEST));
     }
 
     @Override
@@ -51,7 +49,7 @@ public class OutpostCampfireBlock extends MultiBlock {
     @Override
     protected void createPostBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createPostBlockStateDefinition(builder);
-        builder.add(HORIZONTAL_FACING).add(LIT);
+        builder.add(HORIZONTAL_FACING);
     }
 
     @Nullable
@@ -78,9 +76,12 @@ public class OutpostCampfireBlock extends MultiBlock {
             if (!data.getCampfirePositions().stream().map(OutpostTrackerAttachment.CampfirePosition::pos).collect(Collectors.toSet()).contains(origin)) {
                 data.addCampfirePosition(new OutpostTrackerAttachment.CampfirePosition(level.dimension(), pos));
                 player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), true);
-                if (!state.getValue(LIT)) {
-                    this.multiBlockPositions(state.getValue(X_DIRECTION_FROM_ORIGIN), state.getValue(Z_DIRECTION_FROM_ORIGIN)).forEach((loopedPos) -> level.setBlock(loopedPos.offset(origin), level.getBlockState(loopedPos.offset(origin)).setValue(LIT, true), 3));
-                }
+                this.multiBlockPositions(state.getValue(X_DIRECTION_FROM_ORIGIN), state.getValue(Z_DIRECTION_FROM_ORIGIN)).forEach((loopedPos) -> {
+                    BlockEntity blockEntity = level.getBlockEntity(loopedPos.offset(origin));
+                    if (blockEntity instanceof OutpostCampfireBlockEntity outpostCampfireBlockEntity && !outpostCampfireBlockEntity.isLit()) {
+                        outpostCampfireBlockEntity.setLit(true);
+                    }
+                });
                 Vec3 originVec = Vec3.atBottomCenterOf(this.locateOriginFrom(state, pos));
                 this.activationParticles(level, new Vec3(originVec.x() + (state.getValue(X_DIRECTION_FROM_ORIGIN).getStepX() / 2.0), originVec.y(), originVec.z() + (state.getValue(Z_DIRECTION_FROM_ORIGIN).getStepZ() / 2.0)), level.getRandom());
             }
@@ -90,7 +91,8 @@ public class OutpostCampfireBlock extends MultiBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (state.getValue(LIT)) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof OutpostCampfireBlockEntity outpostCampfireBlockEntity && outpostCampfireBlockEntity.isLit()) {
             Vec3 originVec = Vec3.atBottomCenterOf(this.locateOriginFrom(state, pos));
             this.tickParticles(level, new Vec3(originVec.x() + (state.getValue(X_DIRECTION_FROM_ORIGIN).getStepX() / 2.0), originVec.y(), originVec.z() + (state.getValue(Z_DIRECTION_FROM_ORIGIN).getStepZ() / 2.0)), level.getRandom());
         }
@@ -148,11 +150,11 @@ public class OutpostCampfireBlock extends MultiBlock {
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        if (state.getValue(LIT)) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof OutpostCampfireBlockEntity outpostCampfireBlockEntity && outpostCampfireBlockEntity.isLit()) {
             return 15;
-        } else {
-            return 0;
         }
+        return 0;
     }
 
     @Override
