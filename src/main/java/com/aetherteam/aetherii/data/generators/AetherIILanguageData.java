@@ -693,6 +693,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // GUIs
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
+        this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
 
 
         // Subtitles

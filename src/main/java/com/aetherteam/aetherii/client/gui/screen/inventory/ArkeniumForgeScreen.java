@@ -43,7 +43,8 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     private static final ResourceLocation TIER_2_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_2");
     private static final ResourceLocation TIER_3_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_3");
     private static final ResourceLocation TIER_4_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_4");
-    private static final ResourceLocation TIER_SELECTION_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_selection");
+    private static final ResourceLocation TIER_SELECTED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_selected");
+    private static final ResourceLocation TIER_COMPLETED_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "container/arkenium_forge/tier_completed");
     private static final ResourceLocation ARKENIUM_FORGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/menu/arkenium_forge.png");
     private static final List<ResourceLocation> TIER_LOCATIONS = List.of(TIER_1_SPRITE, TIER_2_SPRITE, TIER_3_SPRITE, TIER_4_SPRITE);
     private EditBox name;
@@ -81,7 +82,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 this.onItemUpgraded();
             }
         }));
-        this.forgeButton.setTooltip(Tooltip.create(Component.literal("Forge Item"))); //todo translate
+        this.forgeButton.setTooltip(Tooltip.create(Component.translatable("gui.aether_ii.arkenium_forge.forge_button.tooltip")));
         this.forgeButton.active = false;
 
         this.menu.addSlotListener(this);
@@ -139,7 +140,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             }
 
             int tierCount = this.menu.getTierCount();
-            if (tierCount > 0 && !this.menu.isItemAtMaxTier()) {
+            if (tierCount > 0) {
                 int spriteSize = 16;
                 int areaWidth = 162;
                 int x = this.leftPos + 7;
@@ -147,11 +148,12 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 int currentTier = this.menu.getTierForMaterials();
                 for (int tier = 1; tier <= tierCount; tier++) {
                     int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
-                    if (reinforcementTier == null || tier > reinforcementTier.getTier()) {
-                        guiGraphics.blitSprite(TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
 
-                        ReinforcementTier.Cost cost = this.menu.getCostForTier(tier);
-                        if (cost != null) {
+                    guiGraphics.blitSprite(TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
+
+                    ReinforcementTier.Cost cost = this.menu.getCostForTier(tier);
+                    if (cost != null) {
+                        if (reinforcementTier == null || tier > reinforcementTier.getTier()) {
                             ItemStack primary = new ItemStack(cost.primaryMaterial(), cost.primaryCount());
                             guiGraphics.renderFakeItem(primary, offsetX - spriteSize, y + 18);
                             guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX - spriteSize, y + 18, (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
@@ -161,11 +163,12 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                             guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
                             guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
                             guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
+                        } else {
+                            guiGraphics.blitSprite(TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
                         }
                     }
-
                     if (currentTier == tier) {
-                        guiGraphics.blitSprite(TIER_SELECTION_SPRITE, offsetX - (9), y - 1, 18, 18);
+                        guiGraphics.blitSprite(TIER_SELECTED_SPRITE, offsetX - (9), y - 1, 18, 18);
                     }
                 }
             }
@@ -205,7 +208,6 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             if (!slot.getItem().has(DataComponents.CUSTOM_NAME) && name.equals(slot.getItem().getHoverName().getString())) {
                 s = "";
             }
-
             if (this.menu.setItemName(s)) {
                 PacketDistributor.sendToServer(new ForgeRenamePacket(s));
             }
