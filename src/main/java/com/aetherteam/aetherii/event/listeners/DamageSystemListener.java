@@ -45,6 +45,7 @@ public class DamageSystemListener {
         DamageSystemHooks.addAbilityTooltips(itemStack, itemTooltips);
         DamageSystemHooks.addDamageTypeTooltips(player, itemTooltips, itemStack);
         DamageSystemHooks.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
+        DamageSystemHooks.addReinforcingTooltip(itemStack, itemTooltips);
     }
 
     public static void blockIncomingAttack(LivingShieldBlockEvent event) {
