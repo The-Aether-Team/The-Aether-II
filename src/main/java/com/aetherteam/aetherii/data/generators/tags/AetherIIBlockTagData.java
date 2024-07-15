@@ -51,7 +51,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.UNDERSHALE.get()
         );
-        this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES).addTags(
+        this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES)
+                .add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
+                .addTags(
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
