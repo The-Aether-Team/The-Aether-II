@@ -1,13 +1,15 @@
 package com.aetherteam.aetherii.block.furniture;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.OutpostTrackerAttachment;
+import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.MultiBlockEntity;
 import com.aetherteam.aetherii.blockentity.OutpostCampfireBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,10 +18,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -31,6 +33,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.Collectors;
 
 public class OutpostCampfireBlock extends MultiBlock {
     public static final MapCodec<OutpostCampfireBlock> CODEC = simpleCodec(OutpostCampfireBlock::new);
@@ -61,6 +65,12 @@ public class OutpostCampfireBlock extends MultiBlock {
 
     @Nullable
     @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return blockEntityType == AetherIIBlockEntityTypes.OUTPOST_CAMPFIRE.get() ? OutpostCampfireBlockEntity::tick : null;
+    }
+
+    @Nullable
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = super.getStateForPlacement(context);
         if (state != null) {
@@ -82,28 +92,12 @@ public class OutpostCampfireBlock extends MultiBlock {
     }
 
     @Override
-    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        if (state.getValue(PART_FACING) == Direction.SOUTH) {
-            Direction direction = state.getValue(PART_FACING);
-            BlockPos relativePos = pos;
-            for (int i = 0; i < 4; i++) {
-                if (level.getBlockEntity(relativePos) instanceof MultiBlockEntity multiblock) {
-                    multiblock.setLevelOriginPos(pos);
-                }
-                relativePos = relativePos.relative(direction);
-                direction = direction.getCounterClockWise();
-            }
-        }
-        super.onPlace(state, level, pos, oldState, movedByPiston);
-    }
-
-    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (level.getBlockEntity(pos) instanceof MultiBlockEntity multiblock) {
             BlockPos origin = multiblock.getLevelOriginPos();
             if (origin != null) {
                 BlockState originState = level.getBlockState(origin);
-                if (originState.is(state.getBlock())) {
+                if (originState.is(state.getBlock()) && !originState.getValue(LIT)) {
                     Direction direction = originState.getValue(PART_FACING);
                     BlockPos relativePos = origin;
                     for (int i = 0; i < 4; i++) {
@@ -111,6 +105,13 @@ public class OutpostCampfireBlock extends MultiBlock {
                         relativePos = relativePos.relative(direction);
                         direction = direction.getCounterClockWise();
                     }
+
+                    var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
+                    if (!data.getCampfirePositions().stream().map(OutpostTrackerAttachment.CampfirePosition::pos).collect(Collectors.toSet()).contains(origin)) {
+                        data.addCampfirePosition(new OutpostTrackerAttachment.CampfirePosition(level.dimension(), pos));
+                        player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), true);
+                    }
+
                     Vec3 originVec = Vec3.atBottomCenterOf(origin);
                     Direction xDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.X ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
                     Direction zDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.Z ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
