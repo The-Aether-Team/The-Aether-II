@@ -47,6 +47,7 @@ public class AetherIIMusicManager {
                         }
                     }
                 }
+                return biome.value().getBackgroundMusic().isPresent() ? biome.value().getBackgroundMusic().get() : null;
             }
         }
         return null;
