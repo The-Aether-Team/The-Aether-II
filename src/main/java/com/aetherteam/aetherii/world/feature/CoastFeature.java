@@ -1,17 +1,22 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+
+import java.util.Objects;
 
 public class CoastFeature extends Feature<CoastConfiguration> {
     public CoastFeature(Codec<CoastConfiguration> codec) {
@@ -44,6 +49,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                 }
             }
         }
+        distributeVegetation(context, level, config, random);
         return true;
     }
 
@@ -72,6 +78,13 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             return level.setBlock(pos, provider.getState(random, pos), 2);
         } else {
             return false;
+        }
+    }
+
+    protected void distributeVegetation(FeaturePlaceContext<CoastConfiguration> context, WorldGenLevel level, CoastConfiguration config, RandomSource random) {
+        if (config.brettlChance() > 0.0F && random.nextFloat() < config.brettlChance()) {
+            ConfiguredFeature<?, ?> feature = Objects.requireNonNull(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(AetherIIVegetationFeatures.BRETTL_PLANT_PATCH).orElse(null)).value();
+            feature.place(level, context.chunkGenerator(), random, context.origin());
         }
     }
 

@@ -45,19 +45,19 @@ public class AetherIIMiscPlacements {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         AetherIIPlacementUtils.register(context, COAST_QUICKSOIL, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COAST_QUICKSOIL),
-                CountPlacement.of(64),
+                CountPlacement.of(6),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 BiomeFilter.biome()
         );
         AetherIIPlacementUtils.register(context, COAST_FERROSITE_SAND, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COAST_FERROSITE_SAND),
-                CountPlacement.of(64),
+                CountPlacement.of(6),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 BiomeFilter.biome()
         );
         AetherIIPlacementUtils.register(context, COAST_ARCTIC_PACKED_ICE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.COAST_ARCTIC_PACKED_ICE),
-                CountPlacement.of(8),
+                CountPlacement.of(3),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(144)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 BiomeFilter.biome()

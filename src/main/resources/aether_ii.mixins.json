@@ -18,6 +18,7 @@
     "common.accessor.FireBlockAccessor",
     "common.accessor.LootContextParamSetsAccessor",
     "common.accessor.PerlinNoiseAccessor",
+    "common.accessor.PlayerAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor"
   ],
   "client": [

@@ -34,35 +34,41 @@ public class SkybirchFoliagePlacer extends FoliagePlacer {
      * @param foliageRadius     The {@link Integer} for the foliage radius.
      * @param offset            The {@link Integer} for the foliage offset.
      */
-    @Override  //TODO: Code Clean-Up
+    @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
+        BlockPos pos = attachment.pos();
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        boolean doubleTrunk = attachment.doubleTrunk();
+
         int branchHeightX = random.nextInt(2) - 4;
         int branchHeightNX = random.nextInt(2) - 4;
         int branchHeightZ = random.nextInt(2) - 4;
         int branchHeightNZ = random.nextInt(2) - 4;
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() - 4, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() - 2, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 4, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 4, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 2, z), 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, pos, 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 4, z), 0, i, doubleTrunk);
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 2, attachment.pos().getY() + branchHeightX, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 3, attachment.pos().getY() + 1 + branchHeightX, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() + 4, attachment.pos().getY() + 3 + branchHeightX, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 2, y + branchHeightX, z), 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 3, y + 1 + branchHeightX, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 4, y + 3 + branchHeightX, z), 0, i, doubleTrunk);
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 2, attachment.pos().getY() + branchHeightNX, attachment.pos().getZ()), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 3, attachment.pos().getY() + 1 + branchHeightNX, attachment.pos().getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX() - 4, attachment.pos().getY() + 3 + branchHeightNX, attachment.pos().getZ()), 0, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 2, y + branchHeightNX, z), 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 3, y + 1 + branchHeightNX, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 4, y + 3 + branchHeightNX, z), 0, i, doubleTrunk);
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + branchHeightZ, attachment.pos().getZ() + 2), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 1 + branchHeightZ, attachment.pos().getZ() + 3), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 3 + branchHeightZ, attachment.pos().getZ() + 4), 0, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightZ, z + 2), 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1 + branchHeightZ, z + 3), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3 + branchHeightZ, z + 4), 0, i, doubleTrunk);
 
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + branchHeightNZ, attachment.pos().getZ() - 2), 2, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 1 + branchHeightNZ, attachment.pos().getZ() - 3), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 3 + branchHeightNZ, attachment.pos().getZ() - 4), 0, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightNZ, z - 2), 2, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1 + branchHeightNZ, z - 3), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3 + branchHeightNZ, z - 4), 0, i, doubleTrunk);
         }
     }
 

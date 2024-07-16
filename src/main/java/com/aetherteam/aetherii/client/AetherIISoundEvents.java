@@ -75,6 +75,9 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_DEATH = register("entity.zephyr.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_HURT = register("entity.zephyr.hurt");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> COCKATRICE_SHOOT = register("entity.cockatrice.shoot");
+
+
     // Music
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_HIGHFIELDS = register("music.highlands.highfields");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MAGNETIC = register("music.highlands.magnetic");

@@ -15,11 +15,14 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurru
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
+import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -47,6 +50,9 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.PHYG.get(), PhygRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.FLYING_COW.get(), FlyingCowRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SHEEPUFF.get(), SheepuffRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), (context) -> new TaegoreRenderer(context, BiomeVariantPresets.HIGHFIELDS_TAEGORE));
+        event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), (context) -> new TaegoreRenderer(context, BiomeVariantPresets.MAGNETIC_TAEGORE));
+        event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), (context) -> new TaegoreRenderer(context, BiomeVariantPresets.ARCTIC_TAEGORE));
         event.registerEntityRenderer(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), (context) -> new BurrukaiRenderer(context, BiomeVariantPresets.HIGHFIELDS_BURRUKAI));
         event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), (context) -> new BurrukaiRenderer(context, BiomeVariantPresets.MAGNETIC_BURRUKAI));
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), (context) -> new BurrukaiRenderer(context, BiomeVariantPresets.ARCTIC_BURRUKAI));
@@ -54,11 +60,13 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.MAGNETIC_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.ARCTIC_KIRRID.get(), (context) -> new KirridRenderer(context, BiomeVariantPresets.ARCTIC_KIRRID));
         event.registerEntityRenderer(AetherIIEntityTypes.MOA.get(), MoaRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizardRenderer::new);
 
         // Hostile
         event.registerEntityRenderer(AetherIIEntityTypes.AECHOR_PLANT.get(), AechorPlantRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR.get(), ZephyrRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.TEMPEST.get(), TempestRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.COCKATRICE.get(), CockatriceRenderer::new);
 
         // Projectiles
         event.registerEntityRenderer(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), ThrownItemRenderer::new);
@@ -71,6 +79,9 @@ public class AetherIIRenderers {
 
         // Blocks
         event.registerEntityRenderer(AetherIIEntityTypes.HOVERING_BLOCK.get(), HoveringBlockRenderer::new);
+
+        // Misc
+        event.registerEntityRenderer(AetherIIEntityTypes.ELECTRIC_FIELD.get(), NoopRenderer::new);
     }
 
     public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -86,6 +97,12 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.PHYG, PhygModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.FLYING_COW, FlyingCowModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SHEEPUFF, SheepuffModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_TAEGORE, TaegoreModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_TAEGORE_BABY, TaegoreBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_TAEGORE, TaegoreModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_TAEGORE_BABY, TaegoreBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ARCTIC_TAEGORE, TaegoreModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ARCTIC_TAEGORE_BABY, TaegoreBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_BURRUKAI, BurrukaiModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.HIGHFIELDS_BURRUKAI_BABY, BurrukaiBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MAGNETIC_BURRUKAI, BurrukaiModel::createBodyLayer);
@@ -100,6 +117,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.ARCTIC_KIRRID_BABY, ArcticKirridBabyModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA, MoaModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_BABY, MoaBabyModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_LIZARD, SkyrootLizardModel::createBodyLayer);
 
         // Hostile
         event.registerLayerDefinition(AetherIIModelLayers.AECHOR_PLANT, AechorPlantModel::createBodyLayer);
@@ -107,6 +125,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.ZEPHYR_TRANSPARENCY, ZephyrModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.TEMPEST, TempestModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.TEMPEST_TRANSPARENCY, TempestModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.COCKATRICE, CockatriceModel::createBodyLayer);
 
         // Accessories
         // Handwear
