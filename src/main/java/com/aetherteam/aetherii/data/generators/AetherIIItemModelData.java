@@ -608,6 +608,6 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
 
         // Furniture
-        this.outpostCampfireItem(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
+        this.blockWithItem(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), "miscellaneous/");
     }
 }

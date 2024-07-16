@@ -458,6 +458,6 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.bookshelf(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get());
 
         // Furniture
-        this.multiBlock(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), AetherIIBlocks.HOLYSTONE_BRICKS.get(), "construction/");
+        this.campfire(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
     }
 }

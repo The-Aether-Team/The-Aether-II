@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.event.listeners.attachment;
 
 import com.aetherteam.aetherii.event.hooks.attachment.AerbunnyMountHooks;
-import com.aetherteam.aetherii.event.hooks.attachment.PortalTeleportationHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +23,7 @@ public class AerbunnyMountListener {
     }
 
     /**
-     * @see PortalTeleportationHooks#startInAether(Player)
+     * @see DimensionTeleportationHooks#startInAether(Player)
      */
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
@@ -32,7 +31,7 @@ public class AerbunnyMountListener {
     }
 
     /**
-     * @see PortalTeleportationHooks#createPortal(Player, Level, BlockPos, Direction, ItemStack, InteractionHand)
+     * @see DimensionTeleportationHooks#createPortal(Player, Level, BlockPos, Direction, ItemStack, InteractionHand)
      */
     public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         Player player = event.getEntity();
@@ -42,7 +41,7 @@ public class AerbunnyMountListener {
     // GENERIC ATTACHMENT METHODS
 
     /**
-     * @see PortalTeleportationHooks#update(LivingEntity)
+     * @see DimensionTeleportationHooks#update(LivingEntity)
      */
     public static void onPlayerUpdate(PlayerTickEvent.Post event) {
         Player player = event.getEntity();

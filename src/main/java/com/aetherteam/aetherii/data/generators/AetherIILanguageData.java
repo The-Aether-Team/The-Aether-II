@@ -764,6 +764,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // GUIs
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
+        this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
         this.addGuiText("guidebook.equipment.title", "Equipment");
@@ -776,6 +777,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.journal.title", "Journal");
         this.addGuiText("guidebook.rewards.title", "Rewards");
 
+
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
         this.addJukeboxSong("ascending_dawn", "Emile van Krieken - Ascending Dawn");
@@ -783,6 +785,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
         this.addJukeboxSong("demise", "Moorziey - Demise");
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
+
+
+        // Generic
+        this.addGeneric("message.campfire_added", "This Outpost Campfire is now a valid respawn option.");
+        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid Outpost Campfire.");
 
 
         // Subtitles
