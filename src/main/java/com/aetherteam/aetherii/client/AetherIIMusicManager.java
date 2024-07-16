@@ -26,8 +26,8 @@ public class AetherIIMusicManager {
                 Holder<Biome> holder = minecraft.player.level().getBiome(minecraft.player.blockPosition());
                 long time = minecraft.player.clientLevel.getLevelData().getDayTime() % 24000L;
                 boolean night = time >= 14000 && time < 22000;
-                boolean sunrise = time >= 12000 && time < 14000;
-                boolean sunset = time >= 22000;
+                boolean sunset = time >= 12000 && time < 14000;
+                boolean sunrise = time >= 22000;
 
                 if (minecraft.player.position().y <= 80) {
                     return AETHER_CAVES;
@@ -35,10 +35,10 @@ public class AetherIIMusicManager {
                 else {
                     if (night) {
                         return AETHER_NIGHT;
-                    } else if (sunrise) {
-                        return AETHER_SUNRISE;
                     } else if (sunset) {
                         return AETHER_SUNSET;
+                    } else if (sunrise) {
+                        return AETHER_SUNRISE;
                     } else if (isCreative(holder, minecraft.player)) {
                         return holder.value().getBackgroundMusic().orElse(Musics.GAME);
                     }
