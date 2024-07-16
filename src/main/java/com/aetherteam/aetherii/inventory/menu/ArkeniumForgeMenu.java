@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
+import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
@@ -26,7 +27,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     private String itemName;
 
     public ArkeniumForgeMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, new SimpleContainer(3));
+        this(containerId, playerInventory, new SimpleContainer(11));
     }
 
     public ArkeniumForgeMenu(int containerId, Inventory playerInventory, Container container) {
@@ -49,6 +50,14 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
         });
 
+        int index = 3;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 4; j++) {
+                this.addSlot(new ForgeCharmSlot(this, this.container, index, 54 + (52 * i), 39 + (17 * j)));
+                index++;
+            }
+        }
+
         for (int k = 0; k < 3; k++) {
             for (int i1 = 0; i1 < 9; i1++) {
                 this.addSlot(new Slot(playerInventory, i1 + k * 9 + 9, 8 + i1 * 18, 169 + k * 18));
@@ -66,7 +75,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int slotIndex) {
+    public ItemStack quickMoveStack(Player player, int slotIndex) { //todo account for charm slots
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(slotIndex);
         if (slot != null && slot.hasItem()) {

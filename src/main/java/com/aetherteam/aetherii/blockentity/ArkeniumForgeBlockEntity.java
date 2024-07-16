@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implements StackedContentsCompatible {
-    protected NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
+    protected NonNullList<ItemStack> items = NonNullList.withSize(11, ItemStack.EMPTY);
 
     public ArkeniumForgeBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), pos, blockState);
