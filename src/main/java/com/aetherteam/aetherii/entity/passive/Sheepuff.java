@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -52,6 +53,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -120,7 +122,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData) {
-        this.setColor(getRandomSheepuffColor(level.getRandom()));
+        this.setColor(getRandomSheepuffColor(this, level, level.getRandom()));
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
     }
 
@@ -301,19 +303,49 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         this.getEntityData().set(DATA_WOOL_COLOR_ID, color);
     }
 
-    public static SheepuffColor getRandomSheepuffColor(RandomSource random) {
-        int i = random.nextInt(100);
-        if (i < 5) {
-            return SheepuffColor.LIGHT_BLUE;
-        } else if (i < 10) {
-            return SheepuffColor.CYAN;
-        } else if (i < 15) {
-            return SheepuffColor.LIME;
-        } else if (i < 18) {
-            return SheepuffColor.PINK;
-        } else {
-            return random.nextInt(500) == 0 ? SheepuffColor.PURPLE : SheepuffColor.WHITE;
+    public static SheepuffColor getRandomSheepuffColor(Sheepuff sheepuff, ServerLevelAccessor level, RandomSource random) {
+        Holder<Biome> biome = level.getBiome(sheepuff.blockPosition());
+        if (biome.is(AetherIITags.Biomes.HIGHFIELDS)) {
+            int i = random.nextInt(100);
+            if (i < 5) {
+                return SheepuffColor.LIGHT_BLUE;
+            } else if (i < 10) {
+                return SheepuffColor.CYAN;
+            } else if (i < 15) {
+                return SheepuffColor.LIME;
+            } else if (i < 18) {
+                return SheepuffColor.PINK;
+            } else {
+                return random.nextInt(500) == 0 ? SheepuffColor.PURPLE : SheepuffColor.WHITE;
+            }
+        } else if (biome.is(AetherIITags.Biomes.MAGNETIC)) {
+            int i = random.nextInt(100);
+            if (i < 5) {
+                return SheepuffColor.CYAN;
+            } else if (i < 10) {
+                return SheepuffColor.BLUE;
+            } else if (i < 15) {
+                return SheepuffColor.GREEN;
+            } else if (i < 18) {
+                return SheepuffColor.MAGENTA;
+            } else {
+                return random.nextInt(500) == 0 ? SheepuffColor.YELLOW : SheepuffColor.WHITE;
+            }
+        } else if (biome.is(AetherIITags.Biomes.ARCTIC)) {
+            int i = random.nextInt(100);
+            if (i < 5) {
+                return SheepuffColor.LIGHT_BLUE;
+            } else if (i < 10) {
+                return SheepuffColor.BLUE;
+            } else if (i < 15) {
+                return SheepuffColor.PURPLE;
+            } else if (i < 18) {
+                return SheepuffColor.GREEN;
+            } else {
+                return random.nextInt(500) == 0 ? SheepuffColor.BLACK : SheepuffColor.WHITE;
+            }
         }
+        return SheepuffColor.WHITE;
     }
 
     @Override

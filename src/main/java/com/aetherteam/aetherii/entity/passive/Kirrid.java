@@ -482,13 +482,41 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     public static Optional<KirridColor> getRandomKirridColor(RandomSource random, Kirrid kirrid) {
-        if (kirrid.variantType == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
-            return Optional.of(KirridColor.WHITE);
+        if (kirrid.variantType == AetherIIEntityTypes.HIGHFIELDS_KIRRID.get()) {
+            int i = random.nextInt(100);
+            if (i < 5) {
+                return Optional.of(KirridColor.WHITE);
+            } else if (i < 10) {
+                return Optional.of(KirridColor.LIGHT_GRAY);
+            } else if (i < 15) {
+                return Optional.of(KirridColor.BROWN);
+            }  else {
+                return random.nextInt(500) == 0 ? Optional.of(KirridColor.YELLOW) : Optional.empty();
+            }
         } else if (kirrid.variantType == AetherIIEntityTypes.MAGNETIC_KIRRID.get()) {
-            return Optional.of(KirridColor.LIGHT_BLUE);
-        } else {
-            return Optional.empty();
+            int i = random.nextInt(100);
+            if (i < 5) {
+                return Optional.of(KirridColor.LIGHT_GRAY);
+            } else if (i < 10) {
+                return Optional.of(KirridColor.CYAN);
+            } else if (i < 15) {
+                return Optional.of(KirridColor.MAGENTA);
+            }  else {
+                return random.nextInt(500) == 0 ? Optional.of(KirridColor.BLUE) : Optional.of(KirridColor.LIGHT_BLUE);
+            }
+        } else if (kirrid.variantType == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
+            int i = random.nextInt(100);
+            if (i < 5) {
+                return Optional.of(KirridColor.LIGHT_BLUE);
+            } else if (i < 10) {
+                return Optional.of(KirridColor.LIGHT_GRAY);
+            } else if (i < 15) {
+                return Optional.of(KirridColor.BLACK);
+            }  else {
+                return random.nextInt(500) == 0 ? Optional.of(KirridColor.MAGENTA) : Optional.of(KirridColor.WHITE);
+            }
         }
+        return Optional.empty();
     }
 
     private void facePoint(double pX, double pZ) {
