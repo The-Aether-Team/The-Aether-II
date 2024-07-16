@@ -1,7 +1,16 @@
 {
   "variants": {
-    "": {
-      "model": "aether_ii:block/outpost_campfire"
+    "part_facing=east": {
+      "model": "aether_ii:block/outpost_campfire_east"
+    },
+    "part_facing=north": {
+      "model": "aether_ii:block/outpost_campfire_north"
+    },
+    "part_facing=south": {
+      "model": "aether_ii:block/outpost_campfire_south"
+    },
+    "part_facing=west": {
+      "model": "aether_ii:block/outpost_campfire_west"
     }
   }
 }
