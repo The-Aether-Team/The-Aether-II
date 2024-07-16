@@ -11,6 +11,8 @@ public class MusicListener {
     }
 
     public static void onMusicPlayed(SelectMusicEvent event) {
-        event.setMusic(MusicHooks.getSituationalMusic());
+        if (event.getPlayingMusic() != null) {
+            event.setMusic(MusicHooks.getSituationalMusic());
+        }
     }
 }

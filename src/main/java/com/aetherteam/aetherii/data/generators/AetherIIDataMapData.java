@@ -17,6 +17,7 @@ import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("deprecation")
 public class AetherIIDataMapData extends DataMapProvider {
     public AetherIIDataMapData(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
         super(output, provider);
@@ -102,7 +103,6 @@ public class AetherIIDataMapData extends DataMapProvider {
         buckets.add(Items.TADPOLE_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TADPOLE_BUCKET.getKey()), false);
     }
 
-    @SuppressWarnings("deprecation")
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {
         map.add(item.asItem().builtInRegistryHolder(), new Compostable(chance), false);
     }
