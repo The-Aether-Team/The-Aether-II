@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
-import com.aetherteam.aetherii.client.event.listeners.AudioListener;
 import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
+import com.aetherteam.aetherii.client.event.listeners.MusicListener;
 import com.aetherteam.aetherii.client.event.listeners.attachment.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.event.listeners.attachment.DimensionRenderEffectListeners;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -42,7 +42,7 @@ public class AetherIIClient {
         AerbunnyMountClientListners.listen(bus);
         DimensionRenderEffectListeners.listen(bus);
         GuiExtensionListener.listen(bus);
-        AudioListener.listen(bus);
+        MusicListener.listen(bus);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);

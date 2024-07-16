@@ -1,16 +1,16 @@
 package com.aetherteam.aetherii.client.event.listeners;
 
-import com.aetherteam.aetherii.client.AetherIIMusicManager;
+import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.SelectMusicEvent;
 
-public class AudioListener {
+public class MusicListener {
 
     public static void listen(IEventBus bus) {
-        bus.addListener(AudioListener::onMusicPlayed);
+        bus.addListener(MusicListener::onMusicPlayed);
     }
 
     public static void onMusicPlayed(SelectMusicEvent event) {
-        event.setMusic(AetherIIMusicManager.getSituationalMusic());
+        event.setMusic(MusicHooks.getSituationalMusic());
     }
 }

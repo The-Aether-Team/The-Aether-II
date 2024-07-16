@@ -1,10 +1,10 @@
-package com.aetherteam.aetherii.client;
+package com.aetherteam.aetherii.client.event.hooks;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.Music;
@@ -12,8 +12,7 @@ import net.minecraft.sounds.Musics;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 
-public class AetherIIMusicManager {
-    public static final Music AETHER_DAY = Musics.createGameMusic(AetherIISoundEvents.MUSIC_AETHER);
+public class MusicHooks {
     public static final Music AETHER_NIGHT = Musics.createGameMusic(AetherIISoundEvents.MUSIC_AETHER_NIGHT);
     public static final Music AETHER_SUNRISE = Musics.createGameMusic(AetherIISoundEvents.MUSIC_AETHER_SUNRISE);
     public static final Music AETHER_SUNSET = Musics.createGameMusic(AetherIISoundEvents.MUSIC_AETHER_SUNSET);
@@ -37,7 +36,7 @@ public class AetherIIMusicManager {
                         return AETHER_CAVES;
                     } else {
                         if (day) {
-                            return AETHER_DAY;
+                            return biome.value().getBackgroundMusic().get();
                         } else if (night) {
                             return AETHER_NIGHT;
                         } else if (sunset) {
