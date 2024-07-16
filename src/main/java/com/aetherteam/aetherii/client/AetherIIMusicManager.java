@@ -22,7 +22,7 @@ public class AetherIIMusicManager {
     private static final Minecraft minecraft = Minecraft.getInstance();
     private static final MusicManager musicManager = Minecraft.getInstance().getMusicManager();
 
-    public static Music getSituationalMusic(SoundInstance playingMusic) {
+    public static Music getSituationalMusic() {
         if (!(minecraft.screen instanceof WinScreen)) {
             if (minecraft.player != null) {
                 Holder<Biome> biome = minecraft.player.level().getBiome(minecraft.player.blockPosition());
