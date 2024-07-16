@@ -10,7 +10,7 @@
     "music": {
       "max_delay": 6000,
       "min_delay": 3000,
-      "replace_current_music": true,
+      "replace_current_music": false,
       "sound": "aether_ii:music.aether"
     },
     "sky_color": 13226495,

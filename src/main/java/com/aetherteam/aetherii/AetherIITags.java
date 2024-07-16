@@ -154,6 +154,8 @@ public class AetherIITags {
 
         public static final TagKey<Biome> ARCTIC_ICE = tag("arctic_ice");
 
+        public static final TagKey<Biome> AETHER_MUSIC = tag("aether_music");
+
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
