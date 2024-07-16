@@ -11,6 +11,6 @@ public class AudioListener {
     }
 
     public static void onMusicPlayed(SelectMusicEvent event) {
-        event.setMusic(AetherIIMusicManager.getSituationalMusic());
+        event.setMusic(AetherIIMusicManager.getSituationalMusic(event.getPlayingMusic()));
     }
 }
