@@ -1,16 +1,30 @@
 {
   "variants": {
-    "axis=x": {
+    "facing=down": {
+      "model": "aether_ii:block/agiosite_pillar",
+      "x": 180
+    },
+    "facing=east": {
       "model": "aether_ii:block/agiosite_pillar_horizontal",
       "x": 90,
       "y": 90
     },
-    "axis=y": {
-      "model": "aether_ii:block/agiosite_pillar"
-    },
-    "axis=z": {
+    "facing=north": {
       "model": "aether_ii:block/agiosite_pillar_horizontal",
       "x": 90
+    },
+    "facing=south": {
+      "model": "aether_ii:block/agiosite_pillar_horizontal",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "aether_ii:block/agiosite_pillar"
+    },
+    "facing=west": {
+      "model": "aether_ii:block/agiosite_pillar_horizontal",
+      "x": 90,
+      "y": 270
     }
   }
 }

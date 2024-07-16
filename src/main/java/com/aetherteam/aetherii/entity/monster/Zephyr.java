@@ -79,8 +79,7 @@ public class Zephyr extends FlyingMob implements Enemy {
      * @return Whether this entity can spawn, as a {@link Boolean}.
      */
     public static boolean checkZephyrSpawnRules(EntityType<? extends Zephyr> zephyr, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || level.canSeeSky(pos)
-                && level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS);
+        return reason == MobSpawnType.SPAWNER || level.canSeeSky(pos) && level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS);
     }
 
     @Override

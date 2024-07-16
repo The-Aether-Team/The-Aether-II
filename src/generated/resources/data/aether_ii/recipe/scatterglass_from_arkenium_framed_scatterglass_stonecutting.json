@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "aether_ii:arkenium_framed_scatterglass"
+  },
+  "result": {
+    "count": 1,
+    "id": "aether_ii:scatterglass"
+  }
+}

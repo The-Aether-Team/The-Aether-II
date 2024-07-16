@@ -3,6 +3,8 @@ package com.aetherteam.aetherii.block.natural;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.passive.SkyrootLizard;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -68,8 +70,8 @@ public class AetherLeavesBlock extends LeavesBlock {
 
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        return pFacing == Direction.UP
-                ? pState.setValue(SNOWY, pFacingState.is(AetherIIBlocks.ARCTIC_SNOW) || pFacingState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
+        return pFacing == Direction.UP && !pState.getValue(SNOWY) && (pFacingState.is(AetherIIBlocks.ARCTIC_SNOW) || pFacingState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
+                ? pState.setValue(SNOWY, true)
                 : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 
@@ -109,6 +111,18 @@ public class AetherLeavesBlock extends LeavesBlock {
         BlockState belowState = level.getBlockState(belowPos);
         if (!isFaceFull(belowState.getCollisionShape(level, belowPos), Direction.UP)) {
             ParticleUtils.spawnParticleBelow(level, pos, random, this.leavesParticle.get());
+        }
+    }
+
+    @Override //TODO: Make Data-Driven
+    public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
+        super.destroy(level, pos, state);
+        if (level instanceof ServerLevel serverLevel) {
+            if (serverLevel.random.nextInt(75) == 0) {
+                SkyrootLizard lizard = AetherIIEntityTypes.SKYROOT_LIZARD.get().create(serverLevel.getLevel());
+                lizard.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+                serverLevel.getLevel().addFreshEntity(lizard);
+            }
         }
     }
 

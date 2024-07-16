@@ -7,12 +7,15 @@ import com.aetherteam.aetherii.api.damage.DamageResistance;
 import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.AetherIICauldronInteractions;
+import com.aetherteam.aetherii.block.AetherIIDispenseBehaviors;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.ReloadListeners;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
@@ -54,6 +57,8 @@ import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
 import io.wispforest.accessories.api.slot.UniqueSlotHandling;
+import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -132,6 +137,9 @@ public class AetherII {
         event.enqueueWork(() -> {
             AetherIIBlocks.registerPots();
             AetherIIBlocks.registerFlammability();
+
+            this.registerDispenserBehaviors();
+            this.registerCauldronInteractions();
         });
 
         HandwearAccessory.init();
@@ -151,12 +159,14 @@ public class AetherII {
         RecipeListener.listen(bus);
         BlockInteractionListener.listen(bus);
         OutpostTrackerListener.listen(bus);
+        EntityInteractionListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);
+        neoBus.addListener(AetherIIDataMaps::registerDataMaps);
     }
 
     public void registerPackets(RegisterPayloadHandlersEvent event) {
@@ -183,5 +193,23 @@ public class AetherII {
         registrar.playBidirectional(AerbunnyMountSyncPacket.TYPE, AerbunnyMountSyncPacket.STREAM_CODEC, AerbunnyMountSyncPacket::execute);
         registrar.playBidirectional(DamageSystemSyncPacket.TYPE, DamageSystemSyncPacket.STREAM_CODEC, DamageSystemSyncPacket::execute);
         registrar.playBidirectional(OutpostTrackerSyncPacket.TYPE, OutpostTrackerSyncPacket.STREAM_CODEC, OutpostTrackerSyncPacket::execute);
+    }
+
+    private void registerDispenserBehaviors() {
+        DispenserBlock.registerBehavior(AetherIIItems.SKYROOT_WATER_BUCKET.get(), AetherIIDispenseBehaviors.SKYROOT_BUCKET_DISPENSE_BEHAVIOR);
+        DispenserBlock.registerBehavior(AetherIIItems.SKYROOT_BUCKET.get(), AetherIIDispenseBehaviors.SKYROOT_BUCKET_PICKUP_BEHAVIOR);
+    }
+
+    private void registerCauldronInteractions() {
+        CauldronInteraction.EMPTY.map().put(AetherIIItems.SKYROOT_WATER_BUCKET.get(), AetherIICauldronInteractions.FILL_WATER);
+        CauldronInteraction.WATER.map().put(AetherIIItems.SKYROOT_WATER_BUCKET.get(), AetherIICauldronInteractions.FILL_WATER);
+        CauldronInteraction.LAVA.map().put(AetherIIItems.SKYROOT_WATER_BUCKET.get(), AetherIICauldronInteractions.FILL_WATER);
+        CauldronInteraction.POWDER_SNOW.map().put(AetherIIItems.SKYROOT_WATER_BUCKET.get(), AetherIICauldronInteractions.FILL_WATER);
+        CauldronInteraction.EMPTY.map().put(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get(), AetherIICauldronInteractions.FILL_POWDER_SNOW);
+        CauldronInteraction.WATER.map().put(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get(), AetherIICauldronInteractions.FILL_POWDER_SNOW);
+        CauldronInteraction.LAVA.map().put(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get(), AetherIICauldronInteractions.FILL_POWDER_SNOW);
+        CauldronInteraction.POWDER_SNOW.map().put(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get(), AetherIICauldronInteractions.FILL_POWDER_SNOW);
+        CauldronInteraction.WATER.map().put(AetherIIItems.SKYROOT_BUCKET.get(), AetherIICauldronInteractions.EMPTY_WATER);
+        CauldronInteraction.POWDER_SNOW.map().put(AetherIIItems.SKYROOT_BUCKET.get(), AetherIICauldronInteractions.EMPTY_POWDER_SNOW);
     }
 }

@@ -224,6 +224,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 definition().with(sound("aether_ii:entity/zephyr/shoot"))
                         .subtitle("subtitles.aether_ii.entity.zephyr.shoot")
         );
+
+        this.add(AetherIISoundEvents.COCKATRICE_SHOOT,
+                definition().with(sound("aether_ii:entity/projectile/shoot"))
+                        .subtitle("subtitles.aether.entity.cockatrice.shoot")
+        );
+
         /*this.add(AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT,
                 definition().with(sound("aether:entity/zephyr/call"))
                         .subtitle("subtitles.aether.entity.zephyr.ambient")

@@ -100,17 +100,17 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 7
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "ambient": [],
     "axolotls": [],
     "creature": [
-      {
-        "type": "aether_ii:moa",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
       {
         "type": "aether_ii:arctic_kirrid",
         "maxCount": 3,
@@ -124,16 +124,40 @@
         "weight": 8
       },
       {
-        "type": "aether_ii:sheepuff",
+        "type": "aether_ii:arctic_taegore",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 6
+        "weight": 8
       },
       {
         "type": "aether_ii:aerbunny",
         "maxCount": 2,
         "minCount": 1,
         "weight": 10
+      },
+      {
+        "type": "aether_ii:sheepuff",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:flying_cow",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:phyg",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:moa",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "misc": [],

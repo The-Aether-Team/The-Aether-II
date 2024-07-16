@@ -94,17 +94,17 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 7
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "ambient": [],
     "axolotls": [],
     "creature": [
-      {
-        "type": "aether_ii:moa",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
       {
         "type": "aether_ii:magnetic_kirrid",
         "maxCount": 3,
@@ -113,6 +113,12 @@
       },
       {
         "type": "aether_ii:magnetic_burrukai",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 8
+      },
+      {
+        "type": "aether_ii:magnetic_taegore",
         "maxCount": 3,
         "minCount": 1,
         "weight": 8
@@ -140,6 +146,12 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 6
+      },
+      {
+        "type": "aether_ii:moa",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "misc": [],

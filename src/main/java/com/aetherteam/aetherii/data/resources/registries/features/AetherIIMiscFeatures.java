@@ -84,6 +84,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 Optional.empty(),
                 UniformInt.of(112, 156),
+                0.75F,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
         AetherIIFeatureUtils.register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
@@ -93,6 +94,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 Optional.of(DensityFunctions.zero()),
                 UniformInt.of(112, 156),
+                0.0F,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
         AetherIIFeatureUtils.register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
@@ -102,6 +104,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
                 Optional.empty(),
                 UniformInt.of(120, 180),
+                0.0F,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
 
