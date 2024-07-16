@@ -6,8 +6,8 @@
     "foliage_color": 11665355,
     "grass_color": 11927504,
     "music": {
-      "max_delay": 72000,
-      "min_delay": 3600,
+      "max_delay": 6000,
+      "min_delay": 3000,
       "replace_current_music": true,
       "sound": "aether_ii:music.aether"
     },
