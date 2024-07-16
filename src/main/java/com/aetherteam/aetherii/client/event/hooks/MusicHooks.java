@@ -1,15 +1,11 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.WinScreen;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.Music;
 import net.minecraft.sounds.Musics;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 
 public class MusicHooks {
