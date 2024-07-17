@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.EditBoxAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
+import com.aetherteam.aetherii.network.packet.serverbound.ForgeSlotCharmsPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeTriggerSoundPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeUpgradePacket;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -77,6 +78,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             if (button.isActive()) {
                 this.onNameChanged(this.name.getValue());
                 this.onItemUpgraded();
+                this.onCharmSlotted();
                 PacketDistributor.sendToServer(new ForgeTriggerSoundPacket());
             }
         }));
@@ -115,13 +117,16 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             this.name.setFocused(true);
         }
 
-        if ((!this.menu.getInput().isEmpty() && !this.name.getValue().equals(this.menu.getInput().getHoverName().getString())) || this.menu.getTierForMaterials() > this.menu.getTierForItem()) {
+        if (!this.menu.getInput().isEmpty() && (!this.name.getValue().equals(this.menu.getInput().getHoverName().getString())
+                || this.menu.getTierForMaterials() > this.menu.getTierForItem()
+                || this.menu.hasNewCharms())) {
             if (!this.forgeButton.active) {
                 this.forgeButton.active = true;
             }
         } else {
             if (this.forgeButton.active) {
                 this.forgeButton.active = false;
+                this.forgeButton.setFocused(false);
             }
         }
 
@@ -204,6 +209,12 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     private void onItemUpgraded() {
         if (this.menu.upgradeItem()) {
             PacketDistributor.sendToServer(new ForgeUpgradePacket());
+        }
+    }
+
+    private void onCharmSlotted() {
+        if (this.menu.slotCharms()) {
+            PacketDistributor.sendToServer(new ForgeSlotCharmsPacket());
         }
     }
 

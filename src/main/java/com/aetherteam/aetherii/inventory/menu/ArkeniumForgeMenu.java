@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.inventory.menu;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
@@ -35,7 +37,13 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         this.container = container;
         this.player = playerInventory.player;
 
-        this.addSlot(new Slot(this.container, 0, 29, 65));
+        this.addSlot(new Slot(this.container, 0, 29, 65) {
+            @Override
+            public void setChanged() {
+                super.setChanged();
+                ArkeniumForgeMenu.this.changeInput();
+            }
+        });
 
         this.addSlot(new Slot(this.container, 1, 69, 149) {
             @Override
@@ -53,7 +61,7 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         int index = 3;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 4; j++) {
-                this.addSlot(new ForgeCharmSlot(this, this.container, index, 54 + (52 * i), 39 + (17 * j)));
+                this.addSlot(new ForgeCharmSlot(this, this.container, index, 54 + (52 * i), 39 + (17 * j), index - 3));
                 index++;
             }
         }
@@ -69,19 +77,41 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         }
     }
 
+    public void changeInput() {
+        ItemStack input = this.getInput();
+        if (input.isEmpty()) {
+            for (Slot slot : this.slots) {
+                if (slot instanceof ForgeCharmSlot forgeCharmSlot) {
+                    if (!forgeCharmSlot.getItem().isEmpty()) {
+                        if (forgeCharmSlot.isLocked()) {
+                            forgeCharmSlot.set(ItemStack.EMPTY);
+                        } else {
+                            this.quickMoveStack(this.player, forgeCharmSlot.index);
+                        }
+                    }
+                }
+            }
+        } else {
+            if (input.get(AetherIIDataComponents.CHARMS) == null) { //todo better handling?
+                input.set(AetherIIDataComponents.CHARMS, new ArrayList<>(List.of(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY)));
+            }
+        }
+        AetherII.LOGGER.info(String.valueOf(input));
+    }
+
     @Override
     public boolean stillValid(Player player) {
         return this.container.stillValid(player);
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int slotIndex) { //todo account for charm slots
+    public ItemStack quickMoveStack(Player player, int slotIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(slotIndex);
         if (slot != null && slot.hasItem()) {
             ItemStack slotStack = slot.getItem();
             itemStack = slotStack.copy();
-            if (slotIndex > 2) {
+            if (slotIndex > 10) {
                 if (this.isEquipment(slotStack)) {
                     if (!this.moveItemStackTo(slotStack, 0, 1, false)) {
                         return ItemStack.EMPTY;
@@ -94,14 +124,18 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                     if (!this.moveItemStackTo(slotStack, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (slotIndex >= 3 && slotIndex < 30) {
-                    if (!this.moveItemStackTo(slotStack, 30, 39, false)) {
+                } else if (this.isCharm(slotStack)) {
+                    if (!this.moveItemStackTo(slotStack, 3, 11, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (slotIndex >= 30 && slotIndex < 39 && !this.moveItemStackTo(slotStack, 3, 30, false)) {
+                } else if (slotIndex >= 11 && slotIndex < 38) {
+                    if (!this.moveItemStackTo(slotStack, 38, 47, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (slotIndex >= 38 && slotIndex < 47 && !this.moveItemStackTo(slotStack, 11, 38, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(slotStack, 3, 39, false)) {
+            } else if (!this.moveItemStackTo(slotStack, 11, 47, false)) {
                 return ItemStack.EMPTY;
             }
             if (slotStack.isEmpty()) {
@@ -136,6 +170,21 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
         }
         return false;
+    }
+
+    public boolean slotCharms() {
+        List<ItemStack> charms = this.getInput().get(AetherIIDataComponents.CHARMS);
+        boolean flag = false;
+        if (charms != null) {
+            for (Slot slot : this.slots) {
+                if (slot instanceof ForgeCharmSlot charmSlot && !charmSlot.isLocked() && !charmSlot.getItem().isEmpty()) {
+                    charms.set(charmSlot.getCharmIndex(), charmSlot.getItem());
+                    charmSlot.setLocked(true);
+                    flag = true;
+                }
+            }
+        }
+        return flag;
     }
 
     public boolean setItemName(String itemName) {
@@ -284,5 +333,18 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
         }
         return -1;
+    }
+
+    public boolean isCharm(ItemStack itemStack) {
+        return itemStack.is(Items.BARRIER); //todo placeholder
+    }
+
+    public boolean hasNewCharms() {
+        for (Slot slot : this.slots) {
+            if (slot instanceof ForgeCharmSlot charmSlot && !charmSlot.isLocked() && !charmSlot.getItem().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
