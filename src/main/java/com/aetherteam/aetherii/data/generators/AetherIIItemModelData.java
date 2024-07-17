@@ -75,30 +75,34 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.chestplateItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.ZANITE_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.ZANITE_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.ZANITE_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.ZANITE_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.ZANITE_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.ARKENIUM_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.ARKENIUM_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.ARKENIUM_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.ARKENIUM_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.ARKENIUM_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.GRAVITITE_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.GRAVITITE_CHESTPLATE.get(), "armor/");
         this.leggingsItem(AetherIIItems.GRAVITITE_LEGGINGS.get(), "armor/");
         this.bootsItem(AetherIIItems.GRAVITITE_BOOTS.get(), "armor/");
+        this.item(AetherIIItems.GRAVITITE_GLOVES.get(), "armor/");
 
         // Materials
         this.handheldItem(AetherIIItems.SKYROOT_STICK.get(), "materials/");
-        this.item(AetherIIItems.SKYROOT_PINECONE.get(), "materials/");
         this.item(AetherIIItems.SCATTERGLASS_SHARD.get(), "materials/");
         this.item(AetherIIItems.AMBROSIUM_SHARD.get(), "materials/");
         this.item(AetherIIItems.ZANITE_GEMSTONE.get(), "materials/");
@@ -110,16 +114,20 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.CLOUDTWINE.get(), "materials/");
         this.item(AetherIIItems.TAEGORE_HIDE.get(), "materials/");
         this.item(AetherIIItems.BURRUKAI_PELT.get(), "materials/");
+        this.item(AetherIIItems.SKYROOT_PINECONE.get(), "materials/");
+        this.item(AetherIIItems.VALKYRIE_WINGS.get(), "materials/");
+        this.item(AetherIIItems.BRETTL_CANE.get(), "materials/");
+        this.item(AetherIIItems.BRETTL_GRASS.get(), "materials/");
+        this.item(AetherIIItems.BRETTL_ROPE.get(), "materials/");
+        this.item(AetherIIItems.BRETTL_FLOWER.get(), "materials/");
         this.item(AetherIIItems.AECHOR_PETAL.get(), "materials/");
         this.item(AetherIIItems.ARCTIC_SNOWBALL.get(), "materials/");
         this.item(AetherIIItems.GREEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.BLUE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.PURPLE_SWET_GEL.get(), "materials/");
-
-        this.item(AetherIIBlocks.BLUE_MOA_EGG.get().asItem(), "materials/");
-
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
+        this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "materials/");
 
         // Food
         this.item(AetherIIItems.BLUEBERRY.get(), "food/");
@@ -138,6 +146,20 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.KIRRID_LOIN.get(), "food/");
         this.item(AetherIIItems.RAW_TAEGORE_MEAT.get(), "food/");
         this.item(AetherIIItems.TAEGORE_STEAK.get(), "food/");
+        this.item(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
+        this.item(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
+
+        // Skyroot Buckets
+        this.item(AetherIIItems.SKYROOT_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_WATER_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_MILK_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_COD_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_SALMON_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.get(), "miscellaneous/");
+        this.item(AetherIIItems.SKYROOT_TADPOLE_BUCKET.get(), "miscellaneous/");
 
         // Music Discs
         this.item(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(), "miscellaneous/");
@@ -152,18 +174,27 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.PHYG_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.MOA_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.TEMPEST_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.COCKATRICE_SPAWN_EGG.get());
 
         // Misc
         this.item(AetherIIItems.MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.BLUEBERRY_MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.ENCHANTED_MOA_FEED.get(), "miscellaneous/");
+        this.item(AetherIIItems.CHARGE_CORE.get(), "miscellaneous/");
         this.portalItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), "miscellaneous/");
 
         // Blocks
@@ -226,13 +257,17 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_LOG.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LOG.get());
         this.itemBlock(AetherIIBlocks.SKYROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.GREATROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.WISPROOT_WOOD.get());
+        this.itemBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_WOOD.get());
 
         // Leaf Pile
@@ -246,6 +281,15 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATOAK_LEAF_PILE.get());
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAF_PILE.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYPINE_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_WISPROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_WISPTOP_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAF_PILE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE.get());
 
         // Leaves
         this.itemBlock(AetherIIBlocks.SKYROOT_LEAVES.get());
@@ -258,6 +302,15 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.itemBlock(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.itemBlock(AetherIIBlocks.AMBEROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
 
         // Saplings
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");
@@ -279,6 +332,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Flowers
         this.itemBlockFlat(AetherIIBlocks.HESPEROSE.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.TARABLOOM.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Bushes
         this.itemBlock(AetherIIBlocks.HIGHLANDS_BUSH.get());
@@ -287,6 +341,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Orange Tree
         this.orangeTree(AetherIIBlocks.ORANGE_TREE.get());
+
+        // Valkyrie Sprout
+        this.valkyrieSprout(AetherIIBlocks.VALKYRIE_SPROUT.get());
 
         // Ground Decoration
         this.item(AetherIIBlocks.SKYROOT_TWIG.asItem(), "miscellaneous/");
@@ -550,5 +607,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Bookshelves
         this.itemBlock(AetherIIBlocks.SKYROOT_BOOKSHELF.get());
         this.itemBlock(AetherIIBlocks.HOLYSTONE_BOOKSHELF.get());
+
+        // Furniture
+        this.blockWithItem(AetherIIBlocks.OUTPOST_CAMPFIRE.get(), "miscellaneous/");
     }
 }

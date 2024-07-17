@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.AltarScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArkeniumForgeScreen;
 import com.aetherteam.aetherii.client.gui.screen.inventory.ArtisansBenchScreen;
@@ -16,6 +17,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BuiltInRegistries.MENU, AetherII.MODID);
 
+    public static final DeferredHolder<MenuType<?>, MenuType<GuidebookEquipmentMenu>> GUIDEBOOK = register("guidebook", GuidebookEquipmentMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<HolystoneFurnaceMenu>> HOLYSTONE_FURNACE = register("holystone_furnace", HolystoneFurnaceMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<ArtisansBenchMenu>> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchMenu::new);
     public static final DeferredHolder<MenuType<?>, MenuType<AltarMenu>> ALTAR = register("altar", AltarMenu::new);
@@ -26,6 +28,7 @@ public class AetherIIMenuTypes {
     }
 
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(AetherIIMenuTypes.GUIDEBOOK.get(), GuidebookEquipmentScreen::new);
         event.register(AetherIIMenuTypes.HOLYSTONE_FURNACE.get(), HolystoneFurnaceScreen::new);
         event.register(AetherIIMenuTypes.ALTAR.get(), AltarScreen::new);
         event.register(AetherIIMenuTypes.ARTISANS_BENCH.get(), ArtisansBenchScreen::new);

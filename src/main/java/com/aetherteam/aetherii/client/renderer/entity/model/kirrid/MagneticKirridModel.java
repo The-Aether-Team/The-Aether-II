@@ -1,11 +1,11 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.kirrid;
 
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class MagneticKirridModel extends KirridModel {
+public class MagneticKirridModel extends AbstractKirridModel {
 	protected final ModelPart headPlate;
 	protected final ModelPart headPlateBroken;
 

@@ -133,4 +133,11 @@ public class AetherLeafParticle extends TextureSheetParticle {
             return new AetherLeafParticle(level, x, y, z, this.spriteSet(), (float) 240 / 255, (float) 231 / 255, (float) 101 / 255);
         }
     }
+
+    public record IrradiatedFactory(SpriteSet spriteSet) implements ParticleProvider<SimpleParticleType> {
+        @Override
+        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new AetherLeafParticle(level, x, y, z, this.spriteSet(), (float) 208 / 255, (float) 184 / 255, (float) 109 / 255);
+        }
+    }
 }

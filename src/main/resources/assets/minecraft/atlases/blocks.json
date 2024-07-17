@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "gui/slot",
+      "prefix": "gui/slot/"
+    },
+    {
+      "type": "directory",
+      "source": "entity/tiles/furniture",
+      "prefix": "entity/tiles/furniture/"
+    }
+  ]
+}

@@ -9,10 +9,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
-public class WisprootFoliagePlacer extends DarkOakFoliagePlacer {
+public class WisprootFoliagePlacer extends FoliagePlacer {
     public static final MapCodec<WisprootFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
             .apply(instance, WisprootFoliagePlacer::new));
 
@@ -23,18 +23,23 @@ public class WisprootFoliagePlacer extends DarkOakFoliagePlacer {
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        boolean doubleTrunk = attachment.doubleTrunk();
+
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 14, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(attachment.pos().getX(), attachment.pos().getY() + 2, attachment.pos().getZ()), 5, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, pos, 14, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 5, i, doubleTrunk);
 
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(4, 5) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(4, 6) + random.nextIntBetweenInclusive(-1, 1), z), 2, i, doubleTrunk);
             }
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(5, 7) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(5, 7) + random.nextIntBetweenInclusive(-1, 1), z), 2, i, doubleTrunk);
             }
             if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(7, 8) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 2, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(6, 8) + random.nextIntBetweenInclusive(-1, 1), z), 2, i, doubleTrunk);
             }
         }
     }

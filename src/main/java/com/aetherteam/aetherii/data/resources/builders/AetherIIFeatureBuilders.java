@@ -1,26 +1,23 @@
 package com.aetherteam.aetherii.data.resources.builders;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.configuration.AercloudConfiguration;
-import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
-import net.minecraft.core.HolderSet;
-import net.minecraft.util.valueproviders.ConstantFloat;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class AetherIIFeatureBuilders {
+    public static RandomPatchConfiguration aetherGrassPatch(BlockStateProvider block, int tries) {
+        return FeatureUtils.simpleRandomPatchConfiguration(tries, PlacementUtils.onlyWhenEmpty(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(block)));
+    }
 
-    @SuppressWarnings("deprecation")
-    public static CoastConfiguration createCoast(BlockState coastState) {
-        return new CoastConfiguration(
-                BlockStateProvider.simple(coastState),
-                ConstantFloat.of(6.63F),
-                ConstantFloat.of(4.46F),
-                UniformInt.of(112, 156),
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
-        );
+    public static RandomPatchConfiguration brettlPatch(int tries, Holder<PlacedFeature> feature) {
+        return new RandomPatchConfiguration(tries, 16, 4, feature);
     }
 
     public static AercloudConfiguration aercloud(int bounds, BlockState blockState) {

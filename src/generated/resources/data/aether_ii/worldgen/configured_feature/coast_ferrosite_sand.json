@@ -1,14 +1,17 @@
 {
   "type": "aether_ii:coast",
   "config": {
+    "type": "magnetic",
     "block": {
       "type": "minecraft:simple_state_provider",
       "state": {
         "Name": "aether_ii:ferrosite_sand"
       }
     },
-    "radius_bottom": 4.46,
-    "radius_top": 6.63,
+    "brettl_chance": 0.0,
+    "distance_noise": "aether_ii:highlands/coasts/highfields",
+    "pattern_noise": 0.0,
+    "size": 16.35,
     "valid_blocks": "aether_ii:aether_grass_block",
     "y_range": {
       "max_inclusive": 156,

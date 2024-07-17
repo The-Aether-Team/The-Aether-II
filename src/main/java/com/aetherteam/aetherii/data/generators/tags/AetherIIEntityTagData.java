@@ -22,8 +22,16 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         // Aether II
-        this.tag(AetherIITags.Entities.BURRUKAI)
-                .add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get());
+        this.tag(AetherIITags.Entities.TAEGORE).add(
+                AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(),
+                AetherIIEntityTypes.MAGNETIC_TAEGORE.get(),
+                AetherIIEntityTypes.ARCTIC_TAEGORE.get()
+        );
+        this.tag(AetherIITags.Entities.BURRUKAI).add(
+                AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(),
+                AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(),
+                AetherIIEntityTypes.ARCTIC_BURRUKAI.get()
+        );
         this.tag(AetherIITags.Entities.KIRRID).add(
                 AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(),
                 AetherIIEntityTypes.MAGNETIC_KIRRID.get(),
@@ -35,6 +43,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 EntityType.POLAR_BEAR
         );
         this.tag(AetherIITags.Entities.SPAWNING_AERCLOUDS).add(
+                AetherIIEntityTypes.TEMPEST.get(),
                 AetherIIEntityTypes.ZEPHYR.get()
         );
         this.tag(AetherIITags.Entities.SPAWNING_LEAVES).add(

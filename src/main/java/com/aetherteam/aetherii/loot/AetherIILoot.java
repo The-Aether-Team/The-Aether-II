@@ -15,10 +15,61 @@ public class AetherIILoot {
     public static final Set<ResourceKey<LootTable>> IMMUTABLE_LOOT_TABLES = Collections.unmodifiableSet(LOOT_TABLES);
 
     // Entities
-    public static final ResourceKey<LootTable> HIGHFIELDS_KIRRID_FUR = register("entities/kirrid/highfields_wool");
-    public static final ResourceKey<LootTable> MAGNETIC_KIRRID_FUR = register("entities/kirrid/magnetic_wool");
-    public static final ResourceKey<LootTable> ARCTIC_KIRRID_FUR = register("entities/kirrid/arctic_wool");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_PLAIN = register("entities/kirrid/highfields/plain");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_WHITE = register("entities/kirrid/highfields/white");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_ORANGE = register("entities/kirrid/highfields/orange");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_MAGENTA = register("entities/kirrid/highfields/magenta");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_LIGHT_BLUE = register("entities/kirrid/highfields/light_blue");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_YELLOW = register("entities/kirrid/highfields/yellow");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_LIME = register("entities/kirrid/highfields/lime");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_PINK = register("entities/kirrid/highfields/pink");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_GRAY = register("entities/kirrid/highfields/gray");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_LIGHT_GRAY = register("entities/kirrid/highfields/light_gray");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_CYAN = register("entities/kirrid/highfields/cyan");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_PURPLE = register("entities/kirrid/highfields/purple");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_BLUE = register("entities/kirrid/highfields/blue");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_BROWN = register("entities/kirrid/highfields/brown");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_GREEN = register("entities/kirrid/highfields/green");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_RED = register("entities/kirrid/highfields/red");
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_BLACK = register("entities/kirrid/highfields/black");
 
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_PLAIN = register("entities/kirrid/magnetic/plain");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_WHITE = register("entities/kirrid/magnetic/white");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_ORANGE = register("entities/kirrid/magnetic/orange");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_MAGENTA = register("entities/kirrid/magnetic/magenta");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_LIGHT_BLUE = register("entities/kirrid/magnetic/light_blue");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_YELLOW = register("entities/kirrid/magnetic/yellow");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_LIME = register("entities/kirrid/magnetic/lime");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_PINK = register("entities/kirrid/magnetic/pink");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_GRAY = register("entities/kirrid/magnetic/gray");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_LIGHT_GRAY = register("entities/kirrid/magnetic/light_gray");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_CYAN = register("entities/kirrid/magnetic/cyan");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_PURPLE = register("entities/kirrid/magnetic/purple");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_BLUE = register("entities/kirrid/magnetic/blue");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_BROWN = register("entities/kirrid/magnetic/brown");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_GREEN = register("entities/kirrid/magnetic/green");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_RED = register("entities/kirrid/magnetic/red");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_BLACK = register("entities/kirrid/magnetic/black");
+
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_PLAIN = register("entities/kirrid/arctic/plain");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_WHITE = register("entities/kirrid/arctic/white");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_ORANGE = register("entities/kirrid/arctic/orange");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_MAGENTA = register("entities/kirrid/arctic/magenta");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_LIGHT_BLUE = register("entities/kirrid/arctic/light_blue");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_YELLOW = register("entities/kirrid/arctic/yellow");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_LIME = register("entities/kirrid/arctic/lime");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_PINK = register("entities/kirrid/arctic/pink");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_GRAY = register("entities/kirrid/arctic/gray");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_LIGHT_GRAY = register("entities/kirrid/arctic/light_gray");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_CYAN = register("entities/kirrid/arctic/cyan");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_PURPLE = register("entities/kirrid/arctic/purple");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_BLUE = register("entities/kirrid/arctic/blue");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_BROWN = register("entities/kirrid/arctic/brown");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_GREEN = register("entities/kirrid/arctic/green");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_RED = register("entities/kirrid/arctic/red");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_BLACK = register("entities/kirrid/arctic/black");
+
+    public static final ResourceKey<LootTable> ENTITIES_SHEEPUFF_PLAIN = register("entities/sheepuff/plain");
     public static final ResourceKey<LootTable> ENTITIES_SHEEPUFF_WHITE = register("entities/sheepuff/white");
     public static final ResourceKey<LootTable> ENTITIES_SHEEPUFF_ORANGE = register("entities/sheepuff/orange");
     public static final ResourceKey<LootTable> ENTITIES_SHEEPUFF_MAGENTA = register("entities/sheepuff/magenta");

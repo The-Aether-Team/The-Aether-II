@@ -45,6 +45,10 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_bottom_0", "natural/"));
     }
 
+    public void valkyrieSprout(Block block) {
+        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_0", "natural/"));
+    }
+
     public void portalItem(Item item, String location) {
         this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
                 .texture("layer0", this.modLoc("item/" + location + this.itemName(item)))
@@ -53,5 +57,10 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
 
     public void aercloudItem(Block block) {
         this.withExistingParent(this.blockName(block), this.mcLoc("block/cube_all")).texture("all", this.texture(this.blockName(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("translucent"));
+    }
+
+    public void blockWithItem(Block block, String location) {
+        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated"))
+                .texture("layer0", this.modLoc("item/" + location + this.itemName(block.asItem())));
     }
 }

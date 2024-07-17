@@ -20,7 +20,7 @@ public class AetherIIBlockEntityTypes {
             BlockEntityType.Builder.of(SkyrootChestBlockEntity::new, AetherIIBlocks.SKYROOT_CHEST.get()).build(null));
   
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MoaEggBlockEntity>> MOA_EGG = BLOCK_ENTITY_TYPES.register("moa_egg", () ->
-            BlockEntityType.Builder.of(MoaEggBlockEntity::new, AetherIIBlocks.BLUE_MOA_EGG.get()).build(null));
+            BlockEntityType.Builder.of(MoaEggBlockEntity::new, AetherIIBlocks.MOA_EGG.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AltarBlockEntity>> ALTAR = BLOCK_ENTITY_TYPES.register("altar", () ->
             BlockEntityType.Builder.of(AltarBlockEntity::new, AetherIIBlocks.ALTAR.get()).build(null));
@@ -41,4 +41,6 @@ public class AetherIIBlockEntityTypes {
                     AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
                     AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get()).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<OutpostCampfireBlockEntity>> OUTPOST_CAMPFIRE = BLOCK_ENTITY_TYPES.register("outpost_campfire", () ->
+            BlockEntityType.Builder.of(OutpostCampfireBlockEntity::new, AetherIIBlocks.OUTPOST_CAMPFIRE.get()).build(null));
 }
