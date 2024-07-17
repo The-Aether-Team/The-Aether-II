@@ -1,7 +1,7 @@
 {
   "type": "minecraft:spline",
   "spline": {
-    "coordinate": "aether_ii:highlands/elevation",
+    "coordinate": "aether_ii:highlands/terrain/base/elevation",
     "points": [
       {
         "derivative": 0.0,

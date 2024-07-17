@@ -18,30 +18,30 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
     public static final MapCodec<AmberootFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
             .apply(instance, AmberootFoliagePlacer::new));
 
-    public AmberootFoliagePlacer(IntProvider pRadius, IntProvider pOffset) {
-        super(pRadius, pOffset);
+    public AmberootFoliagePlacer(IntProvider radius, IntProvider offset) {
+        super(radius, offset);
     }
 
     @Override
-    protected void createFoliage(LevelSimulatedReader level, FoliageSetter setter, RandomSource rand, TreeConfiguration config, int maxHeight, FoliageAttachment attachment, int height, int radius, int offset) {
-        Direction.Axis axis = Direction.Plane.HORIZONTAL.getRandomAxis(rand);
+    protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxHeight, FoliageAttachment attachment, int height, int radius, int offset) {
+        Direction.Axis axis = Direction.Plane.HORIZONTAL.getRandomAxis(random);
         Direction.Axis oppositeAxis = axis == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X;
         BlockPos origin = attachment.pos();
 
         // Place main piece
-        placeLeavesRow(level, setter, rand, config, origin, radius - 1, 0, false);
-        placeLeavesRow(level, setter, rand, config, origin, radius, -1, false);
-        placeLeavesRow(level, setter, rand, config, origin, radius, -2, false);
-        placeLeavesRow(level, setter, rand, config, origin, radius, -3, false);
+        placeLeavesRow(level, foliageSetter, random, config, origin, radius - 1, 0, false);
+        placeLeavesRow(level, foliageSetter, random, config, origin, radius, -1, false);
+        placeLeavesRow(level, foliageSetter, random, config, origin, radius, -2, false);
+        placeLeavesRow(level, foliageSetter, random, config, origin, radius, -3, false);
 
         // Place corner spikes
-        BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         for (int x = 0; x <= 1; x++) {
             for (int z = 0; z <= 1; z++) {
                 int realX = x == 0 ? -radius : radius;
                 int realZ = z == 0 ? -radius : radius;
-                mutable.setWithOffset(origin, realX, 0, realZ);
-                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, rand.nextBoolean());
+                mutablePos.setWithOffset(origin, realX, 0, realZ);
+                placeLeavesRow(level, foliageSetter, random, config, mutablePos, 0, 0, random.nextBoolean());
             }
         }
 
@@ -54,14 +54,14 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
             Direction currentOppositeDir = Direction.fromAxisAndDirection(oppositeAxis, ad);
    
             // Place top spike
-            mutable.setWithOffset(above, currentSpikeDir);
-            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
-            BlockPos spike1Loc = mutable.immutable();
-            mutable.setWithOffset(spike1Loc, 0, 1, 0);
-            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
-            mutable.setWithOffset(spike1Loc, 0, 2, 0);
-            boolean skip = rand.nextBoolean();
-            placeLeavesRow(level, setter, rand, config, mutable, 0, 0, skip);
+            mutablePos.setWithOffset(above, currentSpikeDir);
+            placeLeavesRow(level, foliageSetter, random, config, mutablePos, 0, 0, false);
+            BlockPos spike1Loc = mutablePos.immutable();
+            mutablePos.setWithOffset(spike1Loc, 0, 1, 0);
+            placeLeavesRow(level, foliageSetter, random, config, mutablePos, 0, 0, false);
+            mutablePos.setWithOffset(spike1Loc, 0, 2, 0);
+            boolean skip = random.nextBoolean();
+            placeLeavesRow(level, foliageSetter, random, config, mutablePos, 0, 0, skip);
             if (!skip) {
                 addConnector = true;
             }
@@ -76,45 +76,45 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
                     int yAbs = Mth.abs(yOffs);
                     if (oppAbs + yAbs < 2) {
                         Vec3i offs =  new Vec3i(oppAxisStep.getStepX() * oppOffs, yOffs - 1, oppAxisStep.getStepZ() * oppOffs);
-                        mutable.setWithOffset(sideLoc, offs);
-                        placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
+                        mutablePos.setWithOffset(sideLoc, offs);
+                        placeLeavesRow(level, foliageSetter, random, config, mutablePos, 0, 0, false);
                     }
                 }
             }
             // Place top spike connector
-            placeLeavesRow(level, setter, rand, config, above, 0, 0, addConnector);
+            placeLeavesRow(level, foliageSetter, random, config, above, 0, 0, addConnector);
 
             // Place the side spike
             BlockPos sideSpikeLoc = sideLoc.relative(currentSpikeDir, 1);
             for (int y = 0; y <= 1; y++) {
-                mutable.setWithOffset(sideSpikeLoc, 0, y, 0);
-                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, y == 1 && rand.nextBoolean());
+                mutablePos.setWithOffset(sideSpikeLoc, 0, y, 0);
+                placeLeavesRow(level, foliageSetter, random, config, mutablePos, 0, 0, y == 1 && random.nextBoolean());
             }
 
             // Place the front/back spikes
             BlockPos frontLoc = origin.relative(currentOppositeDir, radius + 1);
             for (int y = -1; y <= 0; y++) {
-                mutable.setWithOffset(frontLoc, 0, y, 0);
-                placeLeavesRow(level, setter, rand, config, mutable, 0, 0, false);
+                mutablePos.setWithOffset(frontLoc, 0, y, 0);
+                placeLeavesRow(level, foliageSetter, random, config, mutablePos, 0, 0, false);
             }
         }
     }
 
     // Override vanilla behavior of using the 'large' boolean value to actually affect the size, this is unwanted behavior in this case
-    protected void placeLeavesRow(LevelSimulatedReader level, FoliageSetter setter, RandomSource rand, TreeConfiguration config, BlockPos pos, int radius, int y, boolean large) {
-        // Also avoid creating a new mutable blockpos if the radius is 0 anyway
+    protected void placeLeavesRow(LevelSimulatedReader level, FoliageSetter setter, RandomSource random, TreeConfiguration config, BlockPos pos, int radius, int y, boolean large) {
+        // Also avoid creating a new mutable block pos if the radius is 0 anyway
         if (radius <= 0) {
-            if (!this.shouldSkipLocationSigned(rand, 0, y, 0, radius, large)) {
-                tryPlaceLeaf(level, setter, rand, config, pos.above(y));
+            if (!this.shouldSkipLocationSigned(random, 0, y, 0, radius, large)) {
+                tryPlaceLeaf(level, setter, random, config, pos.above(y));
                 return;
             }
         }
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         for(int j = -radius; j <= radius; ++j) {
             for(int k = -radius; k <= radius; ++k) {
-                if (!this.shouldSkipLocationSigned(rand, j, y, k, radius, large)) {
-                    blockpos$mutableblockpos.setWithOffset(pos, j, y, k);
-                    tryPlaceLeaf(level, setter, rand, config, blockpos$mutableblockpos);
+                if (!this.shouldSkipLocationSigned(random, j, y, k, radius, large)) {
+                    mutablePos.setWithOffset(pos, j, y, k);
+                    tryPlaceLeaf(level, setter, random, config, mutablePos);
                 }
             }
         }
@@ -128,7 +128,7 @@ public class AmberootFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected boolean shouldSkipLocation(RandomSource rand, int x, int y, int z, int radius, boolean remove) {
-        // when the radius is zero (placing a single block), the remove parameter, usually called large, is used to determine whether or not to remove the block
+        // when the radius is zero (placing a single block), the remove parameter, usually called large, is used to determine whether to remove the block
         if (radius == 0) {
             return remove;
         } else {

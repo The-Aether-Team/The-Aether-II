@@ -26,12 +26,12 @@ public class AetherIICarvers {
         HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
         context.register(HIGHLANDS_CAVE, WorldCarver.CAVE.configured(new CaveCarverConfiguration(
                                 0.175F,
-                                UniformHeight.of(VerticalAnchor.aboveBottom(16), VerticalAnchor.absolute(256)),
-                                UniformFloat.of(0.1F, 0.9F),
+                                UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.absolute(256)),
+                                UniformFloat.of(0.3F, 0.9F),
                                 VerticalAnchor.aboveBottom(-64),
                                 blocks.getOrThrow(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES),
-                                UniformFloat.of(0.7F, 1.4F),
-                                UniformFloat.of(0.8F, 1.3F),
+                                UniformFloat.of(0.9F, 1.7F),
+                                UniformFloat.of(1.0F, 1.5F),
                                 UniformFloat.of(-1.0F, -0.4F)
                         )
                 )

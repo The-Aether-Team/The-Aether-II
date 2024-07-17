@@ -13,14 +13,14 @@
       "input": "minecraft:y",
       "max_exclusive": 128.0,
       "min_inclusive": -4064.0,
-      "when_in_range": "aether_ii:highlands/islands/base_terrain_shaper",
+      "when_in_range": "aether_ii:highlands/terrain/base/base_terrain_shaper",
       "when_out_of_range": {
         "type": "minecraft:mul",
-        "argument1": "aether_ii:highlands/islands/base_terrain_shaper",
+        "argument1": "aether_ii:highlands/terrain/base/base_terrain_shaper",
         "argument2": "aether_ii:highlands/lakes/factor"
       }
     },
-    "when_out_of_range": "aether_ii:highlands/islands/base_terrain_shaper"
+    "when_out_of_range": "aether_ii:highlands/terrain/base/base_terrain_shaper"
   },
-  "when_out_of_range": "aether_ii:highlands/islands/base_terrain_shaper"
+  "when_out_of_range": "aether_ii:highlands/terrain/base/base_terrain_shaper"
 }

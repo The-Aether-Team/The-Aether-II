@@ -1,8 +1,46 @@
 {
   "type": "minecraft:spline",
   "spline": {
-    "coordinate": "aether_ii:highlands/elevation",
+    "coordinate": "aether_ii:highlands/terrain/shattered/elevation_shattered",
     "points": [
+      {
+        "derivative": 0.0,
+        "location": 0.05,
+        "value": {
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 162.0,
+              "value": 1.0
+            },
+            {
+              "derivative": 0.0,
+              "location": 182.0,
+              "value": 0.0
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.1,
+        "value": {
+          "coordinate": "minecraft:y",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 166.0,
+              "value": 1.0
+            },
+            {
+              "derivative": 0.0,
+              "location": 186.0,
+              "value": 0.0
+            }
+          ]
+        }
+      },
       {
         "derivative": 0.0,
         "location": 0.15,
@@ -11,13 +49,13 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 128.0,
+              "location": 170.0,
               "value": 1.0
             },
             {
               "derivative": 0.0,
-              "location": 184.0,
-              "value": 2.0
+              "location": 190.0,
+              "value": 0.0
             }
           ]
         }
@@ -30,13 +68,13 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 136.0,
+              "location": 174.0,
               "value": 1.0
             },
             {
               "derivative": 0.0,
-              "location": 192.0,
-              "value": 2.0
+              "location": 194.0,
+              "value": 0.0
             }
           ]
         }
@@ -49,13 +87,13 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 144.0,
+              "location": 178.0,
               "value": 1.0
             },
             {
               "derivative": 0.0,
-              "location": 200.0,
-              "value": 2.0
+              "location": 198.0,
+              "value": 0.0
             }
           ]
         }
@@ -68,13 +106,13 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 152.0,
+              "location": 182.0,
               "value": 1.0
             },
             {
               "derivative": 0.0,
-              "location": 208.0,
-              "value": 2.0
+              "location": 202.0,
+              "value": 0.0
             }
           ]
         }
@@ -87,13 +125,13 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 160.0,
+              "location": 186.0,
               "value": 1.0
             },
             {
               "derivative": 0.0,
-              "location": 216.0,
-              "value": 2.0
+              "location": 206.0,
+              "value": 0.0
             }
           ]
         }
@@ -106,13 +144,13 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 168.0,
+              "location": 190.0,
               "value": 1.0
             },
             {
               "derivative": 0.0,
-              "location": 224.0,
-              "value": 2.0
+              "location": 210.0,
+              "value": 0.0
             }
           ]
         }
@@ -125,13 +163,13 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 176.0,
+              "location": 194.0,
               "value": 1.0
             },
             {
               "derivative": 0.0,
-              "location": 232.0,
-              "value": 2.0
+              "location": 214.0,
+              "value": 0.0
             }
           ]
         }
@@ -144,127 +182,13 @@
           "points": [
             {
               "derivative": 0.0,
-              "location": 184.0,
+              "location": 198.0,
               "value": 1.0
             },
             {
               "derivative": 0.0,
-              "location": 240.0,
-              "value": 2.0
-            }
-          ]
-        }
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.55,
-        "value": {
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "derivative": 0.0,
-              "location": 192.0,
-              "value": 1.0
-            },
-            {
-              "derivative": 0.0,
-              "location": 248.0,
-              "value": 2.0
-            }
-          ]
-        }
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.6,
-        "value": {
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "derivative": 0.0,
-              "location": 200.0,
-              "value": 1.0
-            },
-            {
-              "derivative": 0.0,
-              "location": 256.0,
-              "value": 2.0
-            }
-          ]
-        }
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.65,
-        "value": {
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "derivative": 0.0,
-              "location": 208.0,
-              "value": 1.0
-            },
-            {
-              "derivative": 0.0,
-              "location": 264.0,
-              "value": 2.0
-            }
-          ]
-        }
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.7,
-        "value": {
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "derivative": 0.0,
-              "location": 216.0,
-              "value": 1.0
-            },
-            {
-              "derivative": 0.0,
-              "location": 272.0,
-              "value": 2.0
-            }
-          ]
-        }
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.75,
-        "value": {
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "derivative": 0.0,
-              "location": 224.0,
-              "value": 1.0
-            },
-            {
-              "derivative": 0.0,
-              "location": 280.0,
-              "value": 2.0
-            }
-          ]
-        }
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.8,
-        "value": {
-          "coordinate": "minecraft:y",
-          "points": [
-            {
-              "derivative": 0.0,
-              "location": 232.0,
-              "value": 1.0
-            },
-            {
-              "derivative": 0.0,
-              "location": 288.0,
-              "value": 2.0
+              "location": 218.0,
+              "value": 0.0
             }
           ]
         }

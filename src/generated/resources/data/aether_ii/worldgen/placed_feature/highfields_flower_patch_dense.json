@@ -1,9 +1,9 @@
 {
-  "feature": "aether_ii:valkyrie_sprout_patch",
+  "feature": "aether_ii:highfields_flower_patch",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 4
+      "type": "minecraft:count",
+      "count": 2
     },
     {
       "type": "minecraft:count_on_every_layer",

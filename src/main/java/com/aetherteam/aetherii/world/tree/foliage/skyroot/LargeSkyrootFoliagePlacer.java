@@ -40,15 +40,20 @@ public class LargeSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
-        int offsetX = random.nextInt(1) == 0 ? -1 : 1;
-        int offsetZ = random.nextInt(1) == 0 ? -1 : 1;
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        boolean doubleTrunk = attachment.doubleTrunk();
+
+        int offsetX = random.nextIntBetweenInclusive(0, 1) == 0 ? -1 : 1;
+        int offsetZ = random.nextIntBetweenInclusive(0, 1) == 0 ? -1 : 1;
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 1, pos.getZ() + offsetZ), 8, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX * -1, pos.getY() + 1, pos.getZ() + offsetZ * -1), 8, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + offsetX, y - 1, z + offsetZ), 8, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + offsetX * -1, y + 1, z + offsetZ * -1), 8, i, doubleTrunk);
 
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 3, pos.getZ() + offsetZ), Direction.Axis.Y);
-            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX * -1, pos.getY() - 1, pos.getZ() + offsetZ * -1), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + offsetX, y - 3, z + offsetZ), Direction.Axis.Y);
+            tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + offsetX * -1, y - 1, z + offsetZ * -1), Direction.Axis.Y);
         }
     }
 
