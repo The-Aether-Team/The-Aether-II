@@ -36,16 +36,21 @@ public class SingularAmberootFoliagePlacer extends FoliagePlacer {
      * @param foliageRadius     The {@link Integer} for the foliage radius.
      * @param offset            The {@link Integer} for the foliage offset.
      */
-    @Override  //TODO: Code Clean-Up
+    @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        boolean doubleTrunk = attachment.doubleTrunk();
+
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, attachment.pos(), 6, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()), 3, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 3, pos.getZ()), 1, i, attachment.doubleTrunk());
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX(), pos.getY() + 5, pos.getZ()), 0, i, attachment.doubleTrunk());
-            if (random.nextInt(2) == 0) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(2, 4), pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), 1, i, attachment.doubleTrunk());
+            this.placeLeavesRow(level, foliageSetter, random, config, pos, 6, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 3, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3, z), 1, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 5, z), 0, i, doubleTrunk);
+            if (random.nextBoolean()) {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(2, 4), z + random.nextIntBetweenInclusive(-1, 1)), 1, i, doubleTrunk);
             }
         }
     }

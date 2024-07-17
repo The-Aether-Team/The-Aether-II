@@ -28,8 +28,8 @@ import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
 import com.aetherteam.aetherii.event.listeners.attachment.AerbunnyMountListener;
 import com.aetherteam.aetherii.event.listeners.attachment.DamageSystemListener;
+import com.aetherteam.aetherii.event.listeners.attachment.DimensionTeleportationListener;
 import com.aetherteam.aetherii.event.listeners.attachment.EffectsSystemListeners;
-import com.aetherteam.aetherii.event.listeners.attachment.PortalTeleportationListener;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
@@ -38,6 +38,11 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
+import com.aetherteam.aetherii.network.packet.OutpostTrackerSyncPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.*;
+import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.OutpostRespawnPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.StepHeightPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.*;
 import com.aetherteam.aetherii.network.packet.serverbound.*;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
@@ -148,11 +153,12 @@ public class AetherII {
         DamageSystemListener.listen(bus);
         ToolModificationListener.listen(bus);
         ToolAbilityListener.listen(bus);
-        PortalTeleportationListener.listen(bus);
+        DimensionTeleportationListener.listen(bus);
         AerbunnyMountListener.listen(bus);
         WorldInteractionListener.listen(bus);
         RecipeListener.listen(bus);
         BlockInteractionListener.listen(bus);
+        OutpostTrackerListener.listen(bus);
         EntityInteractionListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
@@ -173,17 +179,20 @@ public class AetherII {
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
+        registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
 
         // SERVERBOUND
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
         registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
         registrar.playToServer(OpenGuidebookPacket.TYPE, OpenGuidebookPacket.STREAM_CODEC, OpenGuidebookPacket::execute);
         registrar.playToServer(OpenInventoryPacket.TYPE, OpenInventoryPacket.STREAM_CODEC, OpenInventoryPacket::execute);
+        registrar.playToServer(OutpostRespawnPacket.TYPE, OutpostRespawnPacket.STREAM_CODEC, OutpostRespawnPacket::execute);
         registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
 
         // BOTH
         registrar.playBidirectional(AerbunnyMountSyncPacket.TYPE, AerbunnyMountSyncPacket.STREAM_CODEC, AerbunnyMountSyncPacket::execute);
         registrar.playBidirectional(DamageSystemSyncPacket.TYPE, DamageSystemSyncPacket.STREAM_CODEC, DamageSystemSyncPacket::execute);
+        registrar.playBidirectional(OutpostTrackerSyncPacket.TYPE, OutpostTrackerSyncPacket.STREAM_CODEC, OutpostTrackerSyncPacket::execute);
     }
 
     private void registerDispenserBehaviors() {

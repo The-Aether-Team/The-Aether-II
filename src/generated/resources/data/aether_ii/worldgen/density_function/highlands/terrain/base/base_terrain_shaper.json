@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:clamp",
+  "input": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": "aether_ii:highlands/amplification",
+      "argument2": {
+        "type": "minecraft:y_clamped_gradient",
+        "from_value": 0.65,
+        "from_y": 96,
+        "to_value": 0.35,
+        "to_y": 128
+      }
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": {
+        "type": "minecraft:range_choice",
+        "input": "aether_ii:highlands/temperature",
+        "max_exclusive": 1.5,
+        "min_inclusive": -0.4,
+        "when_in_range": "aether_ii:highlands/terrain/base/sloper",
+        "when_out_of_range": "aether_ii:highlands/terrain/arctic/sloper_arctic"
+      },
+      "argument2": "aether_ii:highlands/caves/underground_shaper"
+    }
+  },
+  "max": 1.0,
+  "min": 0.0
+}
