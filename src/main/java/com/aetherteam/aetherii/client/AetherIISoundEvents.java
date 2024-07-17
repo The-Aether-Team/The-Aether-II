@@ -79,11 +79,11 @@ public class AetherIISoundEvents {
 
 
     // Music
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_HIGHFIELDS = register("music.highlands.highfields");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_MAGNETIC = register("music.highlands.magnetic");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_ARCTIC = register("music.highlands.arctic");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_IRRADIATED = register("music.highlands.irradiated");
-    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AERCLOUD_SEA = register("music.highlands.aercloud_sea");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER = register("music.aether");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_NIGHT = register("music.aether_night");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNRISE = register("music.aether_sunrise");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_SUNSET = register("music.aether_sunset");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER_AMBIENCE = register("music.aether_ambience");
 
     private static DeferredHolder<SoundEvent, SoundEvent> register(String location) {
         return SOUNDS.register(location, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, location)));
