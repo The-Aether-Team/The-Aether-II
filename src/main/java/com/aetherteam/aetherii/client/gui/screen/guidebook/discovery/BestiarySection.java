@@ -33,7 +33,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         for (BestiaryEntry entry : this.getEntries()) {
             int x = i % 6;
             int y = i / 6;
-            this.screen.addRenderableWidget(this.screen, new BestiaryEntrySlot(entry, leftPos + 30 + (x * 18), topPos + 54 + (y * 18), 16, 16));
+            this.screen.addRenderableWidget(this.screen, new BestiaryEntrySlot(entry, leftPos + 30 + (x * 18), topPos + 53 + (y * 18), 16, 16));
             i++;
         }
     }
