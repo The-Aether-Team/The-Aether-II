@@ -21,11 +21,9 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
-    private Component rightTitle = Component.translatable("gui.aether_ii.guidebook.status.mount.title");
-    protected int leftTitleLabelX;
-    protected int leftTitleLabelY;
-    protected int rightTitleLabelX;
-    protected int rightTitleLabelY;
+    private final Component rightTitle = Component.translatable("gui.aether_ii.guidebook.status.mount.title");
+    protected int titleLabelX;
+    protected int titleLabelY;
     private float xMouse;
     private float yMouse;
 
@@ -33,10 +31,8 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
         super(title);
         this.equipmentMenu = menu;
         this.playerInventory = playerInventory;
-        this.leftTitleLabelX = -16;
-        this.leftTitleLabelY = 7;
-        this.rightTitleLabelX = 162;
-        this.rightTitleLabelY = 7;
+        this.titleLabelX = 88;
+        this.titleLabelY = 13;
     }
 
     @Override
@@ -50,35 +46,45 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
         this.renderTransparentBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        this.xMouse = (float)mouseX;
-        this.yMouse = (float)mouseY;
+
+        int leftPos = (this.width / 2) - PAGE_WIDTH;
+        int topPos = (this.height - BACKING_HEIGHT) / 2;
+        int x = 83;
+        int y = 7;
+        int xOffset = 9;
+        int yOffset = 19;
+        int width = 59;
+        int height = 69;
+
+        InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, leftPos + x + xOffset, topPos + y + yOffset, leftPos + x + xOffset + width, topPos + y + yOffset + height, 30, 0.0625F, this.xMouse, this.yMouse, this.minecraft.player);
+
+        this.xMouse = (float) mouseX;
+        this.yMouse = (float) mouseY;
     }
 
     @Override
     public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        Player player = Minecraft.getInstance().player;
-        int x = (this.width - Guidebook.PAGE_WIDTH) / 2;
-        int y = (this.height - Guidebook.PAGE_HEIGHT) / 2;
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawString(this.font, this.title, x + this.leftTitleLabelX, y + this.leftTitleLabelY, 16777215, true);
-        int xOffset = 9;
-        int yOffset = 19;
-        int width = 49;
-        int height = 70;
-        InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, x + xOffset, y + yOffset, x + xOffset + width, y + yOffset + height, 30, 0.0625F, this.xMouse, this.yMouse, this.minecraft.player);
-        guiGraphics.blitSprite(HEART_CONTAINER_SPRITE, x - 57, y + 22, 9, 9);
-        guiGraphics.blitSprite(HEART_SPRITE, x - 57, y + 22, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x - 43, y + 22, 16777215, true);
-        guiGraphics.blitSprite(ARMOR_SPRITE, x - 57, y + 35, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x - 43, y + 35, 16777215, true);
+
+        Player player = Minecraft.getInstance().player;
+        int x = 27;
+        int y = 7;
+
+        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
+
+        guiGraphics.blitSprite(HEART_CONTAINER_SPRITE, x, y + 22, 9, 9);
+        guiGraphics.blitSprite(HEART_SPRITE, x, y + 22, 9, 9);
+        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 12, y + 22, 16777215, true);
+
+        guiGraphics.blitSprite(ARMOR_SPRITE, x, y + 35, 9, 9);
+        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 12, y + 35, 16777215, true);
     }
 
     @Override
     public void renderGuidebookRightPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int x = (this.width - Guidebook.PAGE_WIDTH) / 2;
-        int y = (this.height - Guidebook.PAGE_HEIGHT) / 2;
         Guidebook.super.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawString(this.font, this.rightTitle, x + this.rightTitleLabelX, y + this.rightTitleLabelY, 16777215, true);
+
+        guiGraphics.drawCenteredString(this.font, this.rightTitle, this.titleLabelX, this.titleLabelY, 16777215);
     }
 
     @Override

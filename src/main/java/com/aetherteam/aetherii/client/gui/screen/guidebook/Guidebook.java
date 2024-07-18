@@ -50,9 +50,20 @@ public interface Guidebook {
     }
 
     default void renderGuidebookSpread(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        int leftPagePos = (screen.width / 2) - PAGE_WIDTH;
+        int rightPagePos = (screen.width / 2);
+        int topPos = (screen.height - BACKING_HEIGHT) / 2;
         this.renderGuidebookBacking(screen, guiGraphics, mouseX, mouseY, partialTick);
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate((float) leftPagePos, (float) topPos, 0.0F);
         this.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.pose().popPose();
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate((float) rightPagePos, (float) topPos, 0.0F);
         this.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.pose().popPose();
     }
 
     default void renderGuidebookBacking(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -62,15 +73,15 @@ public interface Guidebook {
     }
 
     default void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int leftPos = (screen.width / 2) -  PAGE_WIDTH;
-        int topPos = (screen.height - BACKING_HEIGHT) / 2;
-        guiGraphics.blit(this.getLeftPageTexture(), leftPos, topPos, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, PAGE_WIDTH, PAGE_HEIGHT);
+        guiGraphics.blit(this.getLeftPageTexture(), 0, 0, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, PAGE_WIDTH, PAGE_HEIGHT);
     }
 
     default void renderGuidebookRightPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int leftPos = (screen.width / 2);
-        int topPos = (screen.height - BACKING_HEIGHT) / 2;
-        guiGraphics.blit(this.getRightPageTexture(), leftPos, topPos, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, PAGE_WIDTH, PAGE_HEIGHT);
+        guiGraphics.blit(this.getRightPageTexture(), 0, 0, 0, 0, 0, PAGE_WIDTH, PAGE_HEIGHT, PAGE_WIDTH, PAGE_HEIGHT);
+    }
+
+    default void switchTab() {
+
     }
 
     ResourceLocation getLeftPageTexture();

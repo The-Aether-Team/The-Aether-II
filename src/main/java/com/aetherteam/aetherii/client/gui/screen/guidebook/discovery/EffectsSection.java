@@ -17,6 +17,11 @@ public class EffectsSection extends DiscoverySection<EffectsEntry> {
     }
 
     @Override
+    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+
+    }
+
+    @Override
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
     }

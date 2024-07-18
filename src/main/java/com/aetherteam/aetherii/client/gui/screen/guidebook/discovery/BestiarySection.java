@@ -37,10 +37,31 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         for (BestiaryEntry entry : this.getEntries()) {
             int x = i % 6;
             int y = i / 6;
-            this.screen.addRenderableWidget(this.screen, new BestiaryEntrySlot(entry, leftPos - 60 + (x * 18), topPos + 53 + (y * 18), 16, 16));
+            this.screen.addRenderableWidget(this.screen, new BestiaryEntrySlot(entry, leftPos - 58 + (x * 18), topPos + 53 + (y * 18), 16, 16));
             i++;
         }
         this.rotation = 0.0F;
+    }
+
+    @Override
+    public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        int rightPagePos = (this.screen.width / 2);
+        int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+        if (this.getSelectedEntry() != null) {
+            Level level = Minecraft.getInstance().level;
+            if (level != null) {
+                Entity entity = this.getSelectedEntry().entityType().value().create(level);
+                if (entity instanceof LivingEntity livingEntity) {
+                    int x = 24;
+                    int y = 28;
+                    int width = 125;
+                    int height = 69;
+                    this.rotation = Mth.wrapDegrees(Mth.lerp(partialTick, this.rotation, this.rotation + 1.5F));
+                    int scale = (int) (30 / livingEntity.getBoundingBox().getSize());
+                    this.renderRotatingEntity(guiGraphics, rightPagePos + x, topPos + y, rightPagePos + x + width, topPos + y + height, scale, 0.2225F, this.rotation, -15.0F, livingEntity);
+                }
+            }
+        }
     }
 
     @Override
@@ -50,23 +71,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     @Override
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int leftPos = (this.screen.width / 2);
-        int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         if (this.getSelectedEntry() != null) {
-            Level level = Minecraft.getInstance().level;
-            if (level != null) {
-                Entity entity = this.selectedEntry.entityType().value().create(level);
-                if (entity instanceof LivingEntity livingEntity) {
-                    int x = 26;
-                    int y = 22;
-                    int width = 56;
-                    int height = 69;
-                    this.rotation = Mth.wrapDegrees(Mth.lerp(partialTick, this.rotation, this.rotation + 2.5F));
-                    int scale = (int) (30 / entity.getBoundingBox().getSize()); //todo dynamic scale
-                    this.renderRotatingEntity(guiGraphics, leftPos + x, topPos + y, leftPos + x + width, topPos + y + height, scale, 0.1625F, this.rotation, -20.0F, livingEntity);
-                }
-            }
-            guiGraphics.drawCenteredString(this.screen.getMinecraft().font, Component.translatable(this.getSelectedEntry().entityType().value().getDescriptionId()), leftPos + 90, topPos + 7, 16777215);
+            guiGraphics.drawCenteredString(this.screen.getMinecraft().font, Component.translatable(this.getSelectedEntry().entityType().value().getDescriptionId()), 88, 13, 16777215);
         }
     }
 

@@ -29,8 +29,8 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     private final BestiarySection bestiarySection;
     private final EffectsSection effectsSection;
     private final ExplorationSection explorationSection;
-    protected int leftTitleLabelX;
-    protected int leftTitleLabelY;
+    protected int titleLabelX;
+    protected int titleLabelY;
     protected DiscoverySection<?> currentSection;
 
     protected GuidebookDiscoveryScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
@@ -41,8 +41,8 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         this.effectsSection = new EffectsSection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.effects.title"));
         this.explorationSection = new ExplorationSection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.exploration.title"));
 
-        this.leftTitleLabelX = -25;
-        this.leftTitleLabelY = 7;
+        this.titleLabelX = 88;
+        this.titleLabelY = 13;
         this.currentSection = this.bestiarySection;
     }
 
@@ -57,7 +57,7 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         super.init();
         this.initTabs(this);
 
-        int x = ((this.width - Guidebook.PAGE_WIDTH) / 2) - 64;
+        int x = ((this.width) / 2) - Guidebook.PAGE_WIDTH + 24;
         int y = (this.height / 2) - 72;
         this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary")));
         x += 43;
@@ -73,14 +73,13 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         this.renderTransparentBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.currentSection.renderBg(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Override
     public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int x = (this.width - Guidebook.PAGE_WIDTH) / 2;
-        int y = (this.height - Guidebook.PAGE_HEIGHT) / 2;
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawString(this.font, this.title, x + this.leftTitleLabelX, y + this.leftTitleLabelY, 16777215, true);
+        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
         this.currentSection.renderEntries(guiGraphics, mouseX, mouseY, partialTick);
     }
 

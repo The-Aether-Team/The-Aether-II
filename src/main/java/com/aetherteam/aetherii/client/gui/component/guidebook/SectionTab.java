@@ -19,6 +19,7 @@ public class SectionTab extends ImageButton {
         super(x, y, width, height, SECTION_TAB, (button) -> {
             currentScreen.setCurrentSectionTab(section);
             currentScreen.initDiscovery();
+            section.selectedEntry = null;
         });
         this.currentScreen = currentScreen;
         this.section = section;

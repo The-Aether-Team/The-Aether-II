@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -23,7 +22,7 @@ public abstract class DiscoverySection<T> {
     protected final GuidebookDiscoveryScreen screen;
     protected final Component title;
     protected final List<T> entries = new ArrayList<>();
-    protected T selectedEntry;
+    public T selectedEntry;
 
     public DiscoverySection(RegistryAccess registryAccess, ResourceKey<Registry<T>> registryKey, GuidebookDiscoveryScreen screen, Component title) {
         this.registryAccess = registryAccess;
@@ -34,13 +33,12 @@ public abstract class DiscoverySection<T> {
 
     public void initSection() {
         this.constructEntries();
-        this.selectedEntry = null;
     }
 
+    public abstract void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
+
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int x = (this.screen.width - Guidebook.PAGE_WIDTH) / 2;
-        int y = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
-        guiGraphics.drawString(this.screen.getMinecraft().font, this.getTitle(), x - 60, y + 42, 16777215, true);
+        guiGraphics.drawString(this.screen.getMinecraft().font, this.getTitle(), 28, 48, 16777215, true);
     }
 
     public abstract void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
