@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.component.guidebook.SectionTab;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.BestiarySection;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.DiscoverySection;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.EffectsSection;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.ExplorationSection;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
@@ -22,11 +24,12 @@ import net.minecraft.world.entity.player.Inventory;
 //   need to figure out scrolling again...
 public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_left.png");
-    private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_EFFECTS_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_effects.png");
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
     private final BestiarySection bestiarySection;
+    private final EffectsSection effectsSection;
+    private final ExplorationSection explorationSection;
     protected int leftTitleLabelX;
     protected int leftTitleLabelY;
     protected DiscoverySection<?> currentSection;
@@ -36,6 +39,8 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         this.equipmentMenu = menu;
         this.playerInventory = playerInventory;
         this.bestiarySection = new BestiarySection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.title"));
+        this.effectsSection = new EffectsSection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.effects.title"));
+        this.explorationSection = new ExplorationSection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.exploration.title"));
 
         this.leftTitleLabelX = -25;
         this.leftTitleLabelY = 7;
@@ -43,6 +48,8 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     public void initDiscovery() {
+        this.clearWidgets();
+        this.clearFocus();
         this.init();
     }
 
@@ -55,9 +62,9 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         int y = (this.height / 2) - 72;
         this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary")));
         x += 43;
-        this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects")));
+        this.addRenderableWidget(new SectionTab(this, this.effectsSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects")));
         x += 43;
-        this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration")));
+        this.addRenderableWidget(new SectionTab(this, this.explorationSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration")));
 
         this.currentSection.initSection();
     }

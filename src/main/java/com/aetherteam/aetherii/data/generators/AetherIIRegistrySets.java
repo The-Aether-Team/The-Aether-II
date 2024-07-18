@@ -33,7 +33,9 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, AetherIIDamageInflictions::bootstrap)
             .add(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, AetherIIDamageResistances::bootstrap)
             .add(AetherIIMoaFeatherShapes.MOA_FEATHER_SHAPE_REGISTRY_KEY, AetherIIMoaFeatherShapes::bootstrap)
-            .add(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, AetherIIBestiaryEntries::bootstrap);
+            .add(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, AetherIIBestiaryEntries::bootstrap)
+            .add(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, AetherIIEffectsEntries::bootstrap)
+            .add(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, AetherIIExplorationEntries::bootstrap);
 
     public AetherIIRegistrySets(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Collections.singleton(AetherII.MODID));

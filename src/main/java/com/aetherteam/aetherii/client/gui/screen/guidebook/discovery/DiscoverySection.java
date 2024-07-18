@@ -34,6 +34,7 @@ public abstract class DiscoverySection<T> {
 
     public void initSection() {
         this.constructEntries();
+        this.selectedEntry = null;
     }
 
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
