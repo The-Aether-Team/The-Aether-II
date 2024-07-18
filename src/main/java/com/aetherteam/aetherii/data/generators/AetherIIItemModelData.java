@@ -110,6 +110,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.ARKENIUM_PLATES.get(), "materials/");
         this.item(AetherIIItems.INERT_GRAVITITE.get(), "materials/");
         this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
+        this.item(AetherIIItems.CORROBONITE_CRYSTAL.get(), "materials/");
         this.item(AetherIIItems.GOLDEN_AMBER.get(), "materials/");
         this.item(AetherIIItems.CLOUDTWINE.get(), "materials/");
         this.item(AetherIIItems.TAEGORE_HIDE.get(), "materials/");

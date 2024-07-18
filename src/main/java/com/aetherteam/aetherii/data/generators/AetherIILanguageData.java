@@ -560,6 +560,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARKENIUM_PLATES, "Arkenium Plates");
         this.addItem(AetherIIItems.INERT_GRAVITITE, "Inert Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
+        this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");

@@ -6,14 +6,17 @@ import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringUtil;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -23,6 +26,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class ArkeniumForgeMenu extends AbstractContainerMenu {
+    public static final ResourceLocation SLOT_PRIMARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gui/slot/container/arkenium_forge/slot_primary");
+    public static final ResourceLocation SLOT_SECONDARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gui/slot/container/arkenium_forge/slot_secondary");
     private final Container container;
     private final Player player;
     @Nullable
@@ -50,11 +55,21 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             public boolean mayPlace(ItemStack stack) {
                 return ArkeniumForgeMenu.this.isPrimaryMaterial(stack);
             }
+
+            @Override
+            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                return Pair.of(InventoryMenu.BLOCK_ATLAS, SLOT_PRIMARY);
+            }
         });
         this.addSlot(new Slot(this.container, 2, 91, 149) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return ArkeniumForgeMenu.this.isSecondaryMaterial(stack);
+            }
+
+            @Override
+            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                return Pair.of(InventoryMenu.BLOCK_ATLAS, SLOT_SECONDARY);
             }
         });
 

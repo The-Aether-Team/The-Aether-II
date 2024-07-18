@@ -11,12 +11,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 
 public class ForgeCharmSlot extends Slot {
-    public static final ResourceLocation EMPTY_ITEM_SLOT_CHARM = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gui/slot/item_slot_charm");
+    public static final ResourceLocation SLOT_CHARM = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gui/slot/container/arkenium_forge/slot_charm");
     private final ArkeniumForgeMenu menu;
     private final int charmIndex;
     private boolean isLocked;
@@ -81,6 +80,6 @@ public class ForgeCharmSlot extends Slot {
 
     @Override
     public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-        return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_ITEM_SLOT_CHARM);
+        return Pair.of(InventoryMenu.BLOCK_ATLAS, SLOT_CHARM);
     }
 }

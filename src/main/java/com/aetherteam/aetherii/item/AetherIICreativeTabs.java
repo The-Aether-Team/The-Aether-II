@@ -520,6 +520,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARKENIUM_PLATES.get());
                 output.accept(AetherIIItems.INERT_GRAVITITE.get());
                 output.accept(AetherIIItems.GRAVITITE_PLATE.get());
+                output.accept(AetherIIItems.CORROBONITE_CRYSTAL.get());
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
                 output.accept(AetherIIItems.CLOUDTWINE.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());

@@ -75,13 +75,13 @@ public enum ReinforcementTier implements StringRepresentable {
         public static final Predicate<ItemStack> DEFAULT = (itemStack) -> true;
 
         public static final Set<Cost> TIER_1 = Set.of(
-                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 3, AetherIIItems.INERT_GRAVITITE, 1)
+                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1)
         );
         public static final Set<Cost> TIER_2 = Set.of(
-                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 5, AetherIIItems.INERT_GRAVITITE, 2)
+                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 5, AetherIIItems.CORROBONITE_CRYSTAL, 2)
         );
         public static final Set<Cost> TIER_3 = Set.of(
-                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 7, AetherIIItems.INERT_GRAVITITE, 3)
+                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 7, AetherIIItems.CORROBONITE_CRYSTAL, 3)
         );
     }
 }
