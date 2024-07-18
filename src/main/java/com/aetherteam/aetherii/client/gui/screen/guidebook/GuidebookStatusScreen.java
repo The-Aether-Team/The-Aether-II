@@ -16,8 +16,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 
 public class GuidebookStatusScreen extends Screen implements Guidebook {
-    ResourceLocation GUIDEBOOK_STATUS_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/status/guidebook_status_left.png");
-    ResourceLocation GUIDEBOOK_STATUS_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/status/guidebook_status_right.png");
+    private static final ResourceLocation GUIDEBOOK_STATUS_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/status/guidebook_status_left.png");
+    private static final ResourceLocation GUIDEBOOK_STATUS_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/status/guidebook_status_right.png");
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;

@@ -772,7 +772,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.discovery.title", "Discovery");
         this.addGuiText("guidebook.discovery.bestiary.title", "Bestiary");
         this.addGuiText("guidebook.discovery.effects.title", "Effects");
-        this.addGuiText("guidebook.discovery.landmarks.title", "Landmarks");
+        this.addGuiText("guidebook.discovery.exploration.title", "Exploration");
         this.addGuiText("guidebook.journal.title", "Journal");
         this.addGuiText("guidebook.rewards.title", "Rewards");
 

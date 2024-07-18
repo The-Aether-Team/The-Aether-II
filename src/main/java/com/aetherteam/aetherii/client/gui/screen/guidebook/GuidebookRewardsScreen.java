@@ -14,8 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class GuidebookRewardsScreen extends Screen implements Guidebook {
-    ResourceLocation GUIDEBOOK_REWARDS_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/rewards/guidebook_rewards_left.png");
-    ResourceLocation GUIDEBOOK_REWARDS_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/rewards/guidebook_rewards_right.png");
+    private static final ResourceLocation GUIDEBOOK_REWARDS_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/rewards/guidebook_rewards_left.png");
+    private static final ResourceLocation GUIDEBOOK_REWARDS_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/rewards/guidebook_rewards_right.png");
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
