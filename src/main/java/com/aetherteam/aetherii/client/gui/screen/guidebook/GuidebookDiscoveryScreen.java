@@ -19,9 +19,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 // todo
-//   need to change discovery section tab to a class or something that i can initialize and have values in.
-//   need slot buttons that are tied to their relative registry for entries.
 //   need to figure out scrolling again...
+//   i should probably make the sections into renderable panels by using the proper interfaces and parent classes
 public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_left.png");
 
