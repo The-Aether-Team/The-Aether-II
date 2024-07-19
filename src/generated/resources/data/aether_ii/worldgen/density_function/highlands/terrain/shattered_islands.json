@@ -24,14 +24,18 @@
           "type": "minecraft:mul",
           "argument1": {
             "type": "minecraft:mul",
-            "argument1": -0.3,
-            "argument2": "aether_ii:highlands/terrain/shattered/factor_shattered"
+            "argument1": {
+              "type": "minecraft:mul",
+              "argument1": -0.3,
+              "argument2": "aether_ii:highlands/terrain/shattered/factor_shattered"
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": 0.5,
+              "argument2": "aether_ii:highlands/amplification"
+            }
           },
-          "argument2": {
-            "type": "minecraft:add",
-            "argument1": 0.5,
-            "argument2": "aether_ii:highlands/amplification"
-          }
+          "argument2": "aether_ii:highlands/continents_factor"
         }
       }
     },
@@ -41,13 +45,17 @@
     "type": "minecraft:mul",
     "argument1": {
       "type": "minecraft:mul",
-      "argument1": -0.3,
-      "argument2": "aether_ii:highlands/terrain/shattered/factor_shattered"
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": -0.3,
+        "argument2": "aether_ii:highlands/terrain/shattered/factor_shattered"
+      },
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": 0.5,
+        "argument2": "aether_ii:highlands/amplification"
+      }
     },
-    "argument2": {
-      "type": "minecraft:add",
-      "argument1": 0.5,
-      "argument2": "aether_ii:highlands/amplification"
-    }
+    "argument2": "aether_ii:highlands/continents_factor"
   }
 }

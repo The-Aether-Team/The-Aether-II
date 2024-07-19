@@ -21,7 +21,9 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(VEGETATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.VEGETATION)));
         context.register(VEGETATION_RARITY_MAPPER, makeVegetationRarityMapper(function));
         context.register(VEGETATION_RARE, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25, noise.getOrThrow(AetherIINoises.VEGETATION_RARE)).abs());
-        context.register(CONTINENTS, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.RIDGES)));
+        context.register(CONTINENTS, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 1.0, noise.getOrThrow(AetherIINoises.CONTINENTALNESS)));
+        context.register(CONTINENTS_FACTOR, buildContinentsFactor(function));
+        context.register(CONTINENTS_FINAL, buildContinentsFinal(function));
         context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.EROSION)).abs());
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -1.5, 1.5));
         context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
