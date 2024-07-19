@@ -28,7 +28,6 @@ public class AetherIIDensityFunctionBuilders {
 
     public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/terrain/island_density");
     public static final ResourceKey<DensityFunction> SHATTERED_ISLANDS = createKey("highlands/terrain/shattered_islands");
-    public static final ResourceKey<DensityFunction> SHORE_ISLANDS = createKey("highlands/terrain/shore_islands");
     public static final ResourceKey<DensityFunction> FINAL_ISLANDS = createKey("highlands/terrain/final_islands");
 
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/terrain/base/factor");
@@ -46,10 +45,6 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ELEVATION_SHATTERED = createKey("highlands/terrain/shattered/elevation_shattered");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/bottom_slide_shattered");
     public static final ResourceKey<DensityFunction> TOP_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/top_slide_shattered");
-
-    public static final ResourceKey<DensityFunction> FACTOR_SHORE = createKey("highlands/terrain/shore/factor_shore");
-    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHORE = createKey("highlands/terrain/shore/bottom_slide_shore");
-    public static final ResourceKey<DensityFunction> TOP_SLIDE_SHORE = createKey("highlands/terrain/shore/top_slide_shore");
 
     public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("highlands/caves/noise_caves");
     public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("highlands/caves/underground_shaper");
@@ -183,18 +178,19 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
 
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
-                .addPoint(-0.5F, 1.0F)
+                .addPoint(-0.525F, 1.0F)
+                .addPoint(-0.45F, 1.5F)
                 .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.3F, continentsSpline)
-                .addPoint(0.55F, continentsSpline)
+                .addPoint(-0.325F, continentsSpline)
+                .addPoint(0.575F, continentsSpline)
                 .addPoint(0.65F, 7.5F)
-                .addPoint(0.75F, 1.0F)
+                .addPoint(0.725F, 1.0F)
                 .build();
 
         return CubicSpline.builder(erosion)
-                .addPoint(0.45F, temperatureSpline)
+                .addPoint(0.475F, temperatureSpline)
                 .addPoint(0.55F, 7.5F)
-                .addPoint(0.65F, 1.0F)
+                .addPoint(0.625F, 1.0F)
                 .build();
     }
 
@@ -208,42 +204,43 @@ public class AetherIIDensityFunctionBuilders {
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I ridges, I temperature, I erosion) {
         CubicSpline<C, I> continentsSpline = CubicSpline.builder(ridges)
                 .addPoint(0.0F, 3.0F)
-                .addPoint(0.15F, 1.5F)
+                .addPoint(0.1F, 1.25F)
                 .addPoint(0.2F, 1.0F)
                 .build();
 
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
-                .addPoint(-0.5F, 1.0F)
+                .addPoint(-0.425F, 1.0F)
                 .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.3F, continentsSpline)
-                .addPoint(0.55F, continentsSpline)
+                .addPoint(-0.375F, continentsSpline)
+                .addPoint(0.625F, continentsSpline)
                 .addPoint(0.65F, 7.5F)
+                .addPoint(0.675F, 1.0F)
                 .build();
 
         return CubicSpline.builder(erosion)
-                .addPoint(0.45F, temperatureSpline)
+                .addPoint(0.525F, temperatureSpline)
                 .addPoint(0.55F, 7.5F)
-                .addPoint(0.65F, 1.0F)
+                .addPoint(0.575F, 1.0F)
                 .build();
     }
 
     public static DensityFunction buildIslandDensity(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate lakes = new DensityFunctions.Spline.Coordinate(function.getOrThrow(LAKES_NOISE));
-        DensityFunctions.Spline.Coordinate continents = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS));
+        DensityFunctions.Spline.Coordinate ridges = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES));
         DensityFunctions.Spline.Coordinate temperature = new DensityFunctions.Spline.Coordinate(function.getOrThrow(TEMPERATURE));
         DensityFunctions.Spline.Coordinate erosion = new DensityFunctions.Spline.Coordinate(function.getOrThrow(EROSION));
         DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION));
-        return DensityFunctions.spline(islandDensity(lakes, continents, temperature, erosion, elevation));
+        return DensityFunctions.spline(islandDensity(lakes, ridges, temperature, erosion, elevation));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> islandDensity(I lakes, I continents, I temperature, I erosion, I elevation) {
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> islandDensity(I lakes, I ridges, I temperature, I erosion, I elevation) {
 
         CubicSpline<C, I> lakeSpline = CubicSpline.builder(lakes)
                 .addPoint(0.45F, 1.0F)
                 .addPoint(0.575F, 0.5F)
                 .build();
 
-        CubicSpline<C, I> continentsSpline = CubicSpline.builder(continents)
+        CubicSpline<C, I> continentsSpline = CubicSpline.builder(ridges)
                 .addPoint(0.15F, 1.0F)
                 .addPoint(0.225F, lakeSpline)
                 .build();
@@ -376,12 +373,6 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
     }
 
-    public static DensityFunction buildBottomSlideShattered(HolderGetter<DensityFunction> function) {
-        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
-        DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_SHATTERED));
-        return DensityFunctions.spline(bottomSlideShattered(y, elevation));
-    }
-
     public static DensityFunction buildTopSlideShattered(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
         DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_SHATTERED));
@@ -401,6 +392,12 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(0.45F, slidePiece(y, 194, 214, 1, 0.0F))
                 .addPoint(0.5F, slidePiece(y, 198, 218, 1, 0.0F))
                 .build();
+    }
+
+    public static DensityFunction buildBottomSlideShattered(HolderGetter<DensityFunction> function) {
+        DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
+        DensityFunctions.Spline.Coordinate elevation = new DensityFunctions.Spline.Coordinate(function.getOrThrow(ELEVATION_SHATTERED));
+        return DensityFunctions.spline(bottomSlideShattered(y, elevation));
     }
 
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> bottomSlideShattered(I y, I elevation) {

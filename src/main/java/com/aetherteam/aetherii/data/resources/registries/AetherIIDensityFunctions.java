@@ -26,11 +26,6 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -1.5, 1.5));
         context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
         context.register(RIDGES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.85, noise.getOrThrow(AetherIINoises.RIDGES)).abs());
-
-        context.register(ISLAND_DENSITY, buildIslandDensity(function));
-        context.register(SHATTERED_ISLANDS, buildShatteredIslands(function));
-        context.register(FINAL_ISLANDS, buildFinalIslands(function));
-
         context.register(BASE_3D_NOISE, BlendedNoise.createUnseeded(
                 0.1D, // xz scale
                 0.02D, // y scale
@@ -38,6 +33,11 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 160D, // y factor
                 1.0D // smear scale multiplier, capped at 8
         ));
+
+        context.register(ISLAND_DENSITY, buildIslandDensity(function));
+        context.register(SHATTERED_ISLANDS, buildShatteredIslands(function));
+        context.register(FINAL_ISLANDS, buildFinalIslands(function));
+
         context.register(FACTOR, buildFactor(function));
         context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
         context.register(TOP_SLIDE, buildTopSlide(function));
