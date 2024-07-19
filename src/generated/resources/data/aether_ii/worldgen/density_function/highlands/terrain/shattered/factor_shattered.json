@@ -23,12 +23,17 @@
               "derivative": 0.0,
               "location": -0.325,
               "value": {
-                "coordinate": "aether_ii:highlands/continents",
+                "coordinate": "aether_ii:highlands/ridges",
                 "points": [
                   {
                     "derivative": 0.0,
-                    "location": 0.05,
-                    "value": 2.0
+                    "location": 0.0,
+                    "value": 3.0
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.15,
+                    "value": 1.5
                   },
                   {
                     "derivative": 0.0,
@@ -42,12 +47,17 @@
               "derivative": 0.0,
               "location": 0.575,
               "value": {
-                "coordinate": "aether_ii:highlands/continents",
+                "coordinate": "aether_ii:highlands/ridges",
                 "points": [
                   {
                     "derivative": 0.0,
-                    "location": 0.05,
-                    "value": 2.0
+                    "location": 0.0,
+                    "value": 3.0
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.15,
+                    "value": 1.5
                   },
                   {
                     "derivative": 0.0,
