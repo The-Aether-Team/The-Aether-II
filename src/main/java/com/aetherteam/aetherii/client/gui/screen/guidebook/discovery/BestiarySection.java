@@ -26,7 +26,7 @@ import java.util.List;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
-    private static final WidgetSprites SCROLL_WIDGET = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"));
+    private static final WidgetSprites SCROLL_WIDGET = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller_selected"));
     private List<Float> snapPoints;
     private boolean scrolling;
     private float scrollY;
@@ -66,6 +66,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                 }
             }
         }
+        this.renderSlotTooltips(guiGraphics, mouseX, mouseY);
     }
 
     public void renderRotatingEntity(GuiGraphics guiGraphics, int startX, int startY, int endX, int endY, int scale, float yOffset, float angleXComponent, float angleYComponent, LivingEntity livingEntity) {
@@ -99,7 +100,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         int leftPos = 30;
         int topPos = 60;
         int i = 0;
-        List<BestiaryEntry> visibleEntries = this.entries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.entries.size()));
+        List<BestiaryEntry> visibleEntries = this.entries.size() > this.maxSlots() ? this.entries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.entries.size())) : this.entries;
         for (BestiaryEntry entry : visibleEntries) {
             ResourceLocation sprite = entry.icon(); //todo undiscovered;
             int x = i % 6;
@@ -117,13 +118,12 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             i++;
         }
         this.renderScrollbar(guiGraphics);
-        this.renderSlotTooltips(guiGraphics, mouseX, mouseY);
     }
 
     private void renderScrollbar(GuiGraphics guiGraphics) {
         int scrollbarTop = 59;
         int scrollbarLeft = 140;
-        ResourceLocation location = SCROLL_WIDGET.get(this.entries.size() > this.maxSlots(), true);
+        ResourceLocation location = SCROLL_WIDGET.get(this.isScrollActive(), this.scrolling);
         guiGraphics.blitSprite(location, scrollbarLeft , (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
     }
 
@@ -144,17 +144,19 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY, boolean original) {
-        int leftPos = (this.screen.width / 2) - Guidebook.PAGE_WIDTH; //todo
-        int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
-        if (button == 0) {
-            float scrollbarGutterLeft = leftPos + 140.0F; //todo
-            float scrollbarGutterTop = topPos + 59.0F;
-            double mouseXDiff = mouseX - scrollbarGutterLeft;
-            double mouseYDiff = mouseY - scrollbarGutterTop;
-            if (mouseYDiff <= 108 && mouseYDiff >= 0 && ((mouseXDiff <= 6 && mouseXDiff >= 0) || this.scrolling)) {
-                this.scrolling = true; // Set the scrollbar as currently scrolling.
-                this.scrollY = Math.max(0, Math.min((float) mouseYDiff - (this.scrollbarHeight() / 2.0F), this.scrollbarGutterHeight())); // Set the offset for where to render the scrollbar.
-                return true;
+        if (this.isScrollActive()) {
+            int leftPos = (this.screen.width / 2) - Guidebook.PAGE_WIDTH;
+            int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+            if (button == 0) {
+                float scrollbarGutterLeft = leftPos + 140.0F;
+                float scrollbarGutterTop = topPos + 59.0F;
+                double mouseXDiff = mouseX - scrollbarGutterLeft;
+                double mouseYDiff = mouseY - scrollbarGutterTop;
+                if (mouseYDiff <= 108 && mouseYDiff >= 0 && ((mouseXDiff <= 6 && mouseXDiff >= 0) || this.scrolling)) {
+                    this.scrolling = true; // Set the scrollbar as currently scrolling.
+                    this.scrollY = Math.max(0, Math.min((float) mouseYDiff - (this.scrollbarHeight() / 2.0F), this.scrollbarGutterHeight())); // Set the offset for where to render the scrollbar.
+                    return true;
+                }
             }
         }
         return super.mouseDragged(mouseX, mouseY, button, dragX, dragY, original);
@@ -162,17 +164,19 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY, boolean original) {
-        int i = 0;
-        int index = this.getSlotOffset() / this.scrollIncrement();
-        if (index != -1) {
-            i = index;
+        if (this.isScrollActive()) {
+            int i = 0;
+            int index = this.getSlotOffset() / this.scrollIncrement();
+            if (index != -1) {
+                i = index;
+            }
+            if (scrollY < 0) {
+                i = Math.min(i + 1, this.snapPoints.size() - 1);
+            } else if (scrollY > 0) {
+                i = Math.max(i - 1, 0);
+            }
+            this.scrollY = this.snapPoints.get(i); // Set the scrollbar offset to a specified snapping point position.
         }
-        if (scrollY < 0) {
-            i = Math.min(i + 1, this.snapPoints.size() - 1);
-        } else if (scrollY > 0) {
-            i = Math.max(i - 1, 0);
-        }
-        this.scrollY = this.snapPoints.get(i); // Set the scrollbar offset to a specified snapping point position.
         return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY, original);
     }
 
@@ -212,7 +216,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         double mouseXDiff = mouseX - slotLeft;
         double mouseYDiff = mouseY - slotTop;
         int slot = ((int) (mouseXDiff / 18)) + (((int) (mouseYDiff / 18)) * 6);
-        return mouseYDiff <= 108 && mouseYDiff >= 0 && mouseXDiff <= 108 && mouseXDiff >= 0 ? slot : -1;
+        return mouseYDiff < 108 && mouseYDiff > 0 && mouseXDiff < 108 && mouseXDiff > 0 ? slot : -1;
     }
 
     private int getSlotOffset() {
@@ -233,6 +237,10 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             }
         }
         return offset * this.scrollIncrement();
+    }
+
+    private boolean isScrollActive() {
+        return this.entries.size() > this.maxSlots();
     }
 
     private int scrollIncrement() {
