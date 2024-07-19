@@ -5,13 +5,13 @@
     "points": [
       {
         "derivative": 0.0,
-        "location": 0.475,
+        "location": 0.45,
         "value": {
           "coordinate": "aether_ii:highlands/temperature",
           "points": [
             {
               "derivative": 0.0,
-              "location": -0.475,
+              "location": -0.5,
               "value": 1.0
             },
             {
@@ -21,7 +21,7 @@
             },
             {
               "derivative": 0.0,
-              "location": -0.325,
+              "location": -0.3,
               "value": {
                 "coordinate": "aether_ii:highlands/ridges",
                 "points": [
@@ -45,7 +45,7 @@
             },
             {
               "derivative": 0.0,
-              "location": 0.575,
+              "location": 0.55,
               "value": {
                 "coordinate": "aether_ii:highlands/ridges",
                 "points": [
@@ -82,7 +82,7 @@
       },
       {
         "derivative": 0.0,
-        "location": 0.625,
+        "location": 0.65,
         "value": 1.0
       }
     ]

@@ -178,18 +178,18 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
 
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
-                .addPoint(-0.475F, 1.0F)
+                .addPoint(-0.5F, 1.0F)
                 .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.325F, continentsSpline)
-                .addPoint(0.575F, continentsSpline)
+                .addPoint(-0.3F, continentsSpline)
+                .addPoint(0.55F, continentsSpline)
                 .addPoint(0.65F, 7.5F)
-                .addPoint(0.725F, 1.0F)
+                .addPoint(0.75F, 1.0F)
                 .build();
 
         return CubicSpline.builder(erosion)
-                .addPoint(0.475F, temperatureSpline)
+                .addPoint(0.45F, temperatureSpline)
                 .addPoint(0.55F, 7.5F)
-                .addPoint(0.625F, 1.0F)
+                .addPoint(0.65F, 1.0F)
                 .build();
     }
 
@@ -208,17 +208,17 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
 
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
-                .addPoint(-0.475F, 1.0F)
+                .addPoint(-0.5F, 1.0F)
                 .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.325F, continentsSpline)
-                .addPoint(0.575F, continentsSpline)
+                .addPoint(-0.3F, continentsSpline)
+                .addPoint(0.55F, continentsSpline)
                 .addPoint(0.65F, 7.5F)
                 .build();
 
         return CubicSpline.builder(erosion)
-                .addPoint(0.475F, temperatureSpline)
+                .addPoint(0.45F, temperatureSpline)
                 .addPoint(0.55F, 7.5F)
-                .addPoint(0.625F, 1.0F)
+                .addPoint(0.65F, 1.0F)
                 .build();
     }
 
