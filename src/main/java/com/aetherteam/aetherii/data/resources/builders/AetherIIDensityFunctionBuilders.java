@@ -24,12 +24,13 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification");
     public static final ResourceKey<DensityFunction> RIDGES = createKey("highlands/ridges");
+    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
 
     public static final ResourceKey<DensityFunction> ISLAND_DENSITY = createKey("highlands/terrain/island_density");
     public static final ResourceKey<DensityFunction> SHATTERED_ISLANDS = createKey("highlands/terrain/shattered_islands");
+    public static final ResourceKey<DensityFunction> SHORE_ISLANDS = createKey("highlands/terrain/shore_islands");
     public static final ResourceKey<DensityFunction> FINAL_ISLANDS = createKey("highlands/terrain/final_islands");
 
-    public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/terrain/base/base_3d_noise");
     public static final ResourceKey<DensityFunction> FACTOR = createKey("highlands/terrain/base/factor");
     public static final ResourceKey<DensityFunction> ELEVATION = createKey("highlands/terrain/base/elevation");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE = createKey("highlands/terrain/base/bottom_slide");
@@ -45,6 +46,10 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> ELEVATION_SHATTERED = createKey("highlands/terrain/shattered/elevation_shattered");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/bottom_slide_shattered");
     public static final ResourceKey<DensityFunction> TOP_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/top_slide_shattered");
+
+    public static final ResourceKey<DensityFunction> FACTOR_SHORE = createKey("highlands/terrain/shore/factor_shore");
+    public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHORE = createKey("highlands/terrain/shore/bottom_slide_shore");
+    public static final ResourceKey<DensityFunction> TOP_SLIDE_SHORE = createKey("highlands/terrain/shore/top_slide_shore");
 
     public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("highlands/caves/noise_caves");
     public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("highlands/caves/underground_shaper");

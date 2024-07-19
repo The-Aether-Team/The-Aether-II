@@ -25,7 +25,7 @@
                       "argument2": {
                         "type": "minecraft:add",
                         "argument1": -0.03,
-                        "argument2": "aether_ii:highlands/terrain/base/base_3d_noise"
+                        "argument2": "aether_ii:highlands/base_3d_noise"
                       }
                     },
                     "argument2": {
