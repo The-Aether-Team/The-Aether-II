@@ -40,7 +40,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     public void initSection() {
         super.initSection();
         this.snapPoints = new ArrayList<>();
-        int remainingSlots = this.entries.size() - this.maxSlots();
+        int remainingSlots = Mth.ceil((this.entries.size() - this.maxSlots()) / (double) this.scrollIncrement());
         for (int y = 0; y <= remainingSlots; y++) {
             this.snapPoints.add((this.scrollbarGutterHeight() / remainingSlots) * y);
         }
@@ -99,7 +99,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         int leftPos = 30;
         int topPos = 60;
         int i = 0;
-        List<BestiaryEntry> visibleEntries = this.entries.size() > this.maxSlots() ? this.entries.subList(this.getSlotOffset(), this.getSlotOffset() + this.maxSlots()) : this.entries;
+        List<BestiaryEntry> visibleEntries = this.entries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.entries.size()));
         for (BestiaryEntry entry : visibleEntries) {
             ResourceLocation sprite = entry.icon(); //todo undiscovered;
             int x = i % 6;
@@ -163,7 +163,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY, boolean original) {
         int i = 0;
-        int index = this.getSlotOffset();
+        int index = this.getSlotOffset() / this.scrollIncrement();
         if (index != -1) {
             i = index;
         }
@@ -197,7 +197,9 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         int slot = this.getSlotIndex(mouseX, mouseY);
         if (slot != -1) {
             int trueSlot = slot + this.getSlotOffset(); // Determines the true index to get from the list of Moa Skins, if there is a slot offset from scrolling.
-            return this.entries.get(trueSlot);
+            if (trueSlot < this.entries.size()) {
+                return this.entries.get(trueSlot);
+            }
         }
         return null;
     }
@@ -230,7 +232,11 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                 }
             }
         }
-        return offset;
+        return offset * this.scrollIncrement();
+    }
+
+    private int scrollIncrement() {
+        return 6;
     }
 
     private float scrollbarHeight() {
