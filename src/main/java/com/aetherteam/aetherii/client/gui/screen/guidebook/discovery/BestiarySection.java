@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -26,6 +27,9 @@ import java.util.List;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
+    private static final ResourceLocation SLASH_DEFENSE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "damage/slash_defense");
+    private static final ResourceLocation IMPACT_DEFENSE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "damage/impact_defense");
+    private static final ResourceLocation PIERCE_DEFENSE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "damage/pierce_defense");
     private static final WidgetSprites SCROLL_WIDGET = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller_selected"));
     private List<Float> snapPoints;
     private boolean scrolling;
@@ -138,7 +142,45 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     @Override
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (this.getSelectedEntry() != null) {
-            guiGraphics.drawCenteredString(this.screen.getMinecraft().font, Component.translatable(this.getSelectedEntry().entityType().value().getDescriptionId()), 88, 13, 16777215);
+            Level level = Minecraft.getInstance().level;
+            if (level != null) {
+                Entity entity = this.getSelectedEntry().entityType().value().create(level);
+                if (entity instanceof LivingEntity livingEntity) {
+                    guiGraphics.drawCenteredString(this.screen.getMinecraft().font, Component.translatable(this.getSelectedEntry().entityType().value().getDescriptionId()), 88, 13, 16777215);
+
+                    int x = 27;
+                    int y = 103;
+
+                    guiGraphics.blitSprite(Guidebook.HEART_CONTAINER_SPRITE, x + 2, y + 2, 9, 9); //todo new sprites
+                    guiGraphics.blitSprite(Guidebook.HEART_SPRITE, x + 2, y + 2, 9, 9);
+                    this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y, Component.literal(String.valueOf(livingEntity.getMaxHealth())));
+
+                    x += 18;
+                    guiGraphics.blitSprite(SLASH_DEFENSE_SPRITE, x, y, 14, 14);
+                    double slashDefense = AetherIIDamageResistances.getSlashDefense(this.registryAccess, entity);
+                    this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y, Component.literal(String.valueOf(slashDefense)));
+
+                    x += 18;
+                    guiGraphics.blitSprite(IMPACT_DEFENSE_SPRITE, x, y, 14, 14);
+                    double impactDefense = AetherIIDamageResistances.getImpactDefense(this.registryAccess, entity);
+                    this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y, Component.literal(String.valueOf(impactDefense)));
+
+                    x += 18;
+                    guiGraphics.blitSprite(PIERCE_DEFENSE_SPRITE, x, y, 14, 14);
+                    double pierceDefense = AetherIIDamageResistances.getPierceDefense(this.registryAccess, entity);
+                    this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y, Component.literal(String.valueOf(pierceDefense)));
+                }
+            }
+        }
+    }
+
+    private void renderTooltipOverIcon(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) {
+        int rightPagePos = (this.screen.width / 2);
+        int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+        double mouseXDiff = (mouseX - rightPagePos) - x;
+        double mouseYDiff = (mouseY - topPos) - y;
+        if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
+            guiGraphics.renderTooltip(Minecraft.getInstance().font, component, mouseX - rightPagePos, mouseY - topPos);
         }
     }
 

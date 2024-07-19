@@ -20,7 +20,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 // todo
 //   need to figure out scrolling again...
-//   i should probably make the sections into renderable panels by using the proper interfaces and parent classes
+
 public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_left.png");
 
