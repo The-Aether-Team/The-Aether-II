@@ -41,7 +41,6 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> TOP_SLIDE_ARCTIC = createKey("highlands/terrain/arctic/top_slide_arctic");
     public static final ResourceKey<DensityFunction> SLOPER_ARCTIC = createKey("highlands/terrain/arctic/sloper_arctic");
 
-    public static final ResourceKey<DensityFunction> SHATTERED_3D_NOISE = createKey("highlands/terrain/shattered/shattered_3d_noise");
     public static final ResourceKey<DensityFunction> FACTOR_SHATTERED = createKey("highlands/terrain/shattered/factor_shattered");
     public static final ResourceKey<DensityFunction> ELEVATION_SHATTERED = createKey("highlands/terrain/shattered/elevation_shattered");
     public static final ResourceKey<DensityFunction> BOTTOM_SLIDE_SHATTERED = createKey("highlands/terrain/shattered/bottom_slide_shattered");
