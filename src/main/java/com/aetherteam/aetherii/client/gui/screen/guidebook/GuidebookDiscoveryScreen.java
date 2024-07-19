@@ -106,6 +106,26 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        return this.currentSection.mouseDragged(mouseX, mouseY, button, dragX, dragY, super.mouseDragged(mouseX, mouseY, button, dragX, dragY));
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        return this.currentSection.mouseScrolled(mouseX, mouseY, scrollX, scrollY, true);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        return this.currentSection.mouseClicked(mouseX, mouseY, button, super.mouseClicked(mouseX, mouseY, button));
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        return this.currentSection.mouseReleased(mouseX, mouseY, button, super.mouseReleased(mouseX, mouseY, button));
+    }
+
+    @Override
     public ResourceLocation getLeftPageTexture() {
         return GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION;
     }

@@ -3,9 +3,6 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.WidgetSprites;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
@@ -35,6 +32,13 @@ public abstract class DiscoverySection<T> {
         this.constructEntries();
     }
 
+    protected void constructEntries() {
+        this.entries.clear();
+        for (int i = 0; i < 3; i++) { //todo placeholder test
+            this.registryAccess.registryOrThrow(this.registryKey).iterator().forEachRemaining(this.entries::add);
+        }
+    }
+
     public abstract void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
 
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -43,9 +47,20 @@ public abstract class DiscoverySection<T> {
 
     public abstract void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
 
-    protected void constructEntries() {
-        this.entries.clear();
-        this.registryAccess.registryOrThrow(this.registryKey).iterator().forEachRemaining(this.entries::add);
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY, boolean original) {
+        return original;
+    }
+
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY, boolean original) {
+        return original;
+    }
+
+    public boolean mouseClicked(double mouseX, double mouseY, int button, boolean original) {
+        return original;
+    }
+
+    public boolean mouseReleased(double mouseX, double mouseY, int button, boolean original) {
+        return original;
     }
 
     public Component getTitle() {
@@ -66,28 +81,5 @@ public abstract class DiscoverySection<T> {
 
     public ResourceLocation getRightPageTexture() {
         return GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION;
-    }
-
-    public abstract class DiscoveryEntrySlot extends ImageButton {
-        private final T entry;
-
-        public DiscoveryEntrySlot(T entry, int x, int y, int width, int height, WidgetSprites sprites, OnPress onPress, Component message) {
-            super(x, y, width, height, sprites, onPress, message);
-            this.entry = entry;
-        }
-
-        public T getEntry() {
-            return this.entry;
-        }
-
-        @Override
-        public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-            super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
-            if (this.isHovered() || this.isSelected()) {
-                guiGraphics.fillGradient(RenderType.guiOverlay(), this.getX() + 1, this.getY(), this.getX() + 17, this.getY() + 16, -2130706433, -2130706433, 0);
-            }
-        }
-
-        public abstract boolean isSelected();
     }
 }
