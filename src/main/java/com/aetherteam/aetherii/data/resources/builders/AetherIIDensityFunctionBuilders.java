@@ -247,7 +247,6 @@ public class AetherIIDensityFunctionBuilders {
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I ridges, I temperature, I erosion) {
         CubicSpline<C, I> continentsSpline = CubicSpline.builder(ridges)
                 .addPoint(0.0F, 3.0F)
-                .addPoint(0.1F, 1.25F)
                 .addPoint(0.2F, 1.0F)
                 .build();
 
