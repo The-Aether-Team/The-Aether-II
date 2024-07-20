@@ -59,6 +59,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.CORROBONITE_ORE.get(), "natural/");
+        this.corroboniteCluster(AetherIIBlocks.CORROBONITE_CLUSTER.get());
 
         // Aerclouds
         this.aercloudAll(AetherIIBlocks.COLD_AERCLOUD.get(), "natural/");

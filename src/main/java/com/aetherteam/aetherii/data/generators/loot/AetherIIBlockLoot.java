@@ -71,6 +71,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), AetherIIItems.ZANITE_GEMSTONE.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(), AetherIIItems.INERT_ARKENIUM.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(), AetherIIItems.INERT_GRAVITITE.get());
+        this.dropWithFortune(AetherIIBlocks.CORROBONITE_ORE.get(), AetherIIItems.CORROBONITE_CRYSTAL.get());
+        this.dropNone(AetherIIBlocks.CORROBONITE_CLUSTER.get());
 
         // Aerclouds
         this.dropSelf(AetherIIBlocks.COLD_AERCLOUD.get());

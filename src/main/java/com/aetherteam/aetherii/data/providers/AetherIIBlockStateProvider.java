@@ -145,6 +145,26 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void corroboniteCluster(Block block) {
+        ResourceLocation texture = this.texture("natural/" + this.name(block));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction facing = state.getValue(CorroboniteClusterBlock.FACING);
+            int x = 0;
+            int y = 0;
+            if (facing == Direction.DOWN) {
+                x = 180;
+            } else if (facing != Direction.UP) {
+                x = 90;
+            }
+            y = (int) facing.getOpposite().toYRot();
+
+            ModelFile modelFile = this.models().cross(this.name(block), texture).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+
+            return ConfiguredModel.builder().modelFile(modelFile).rotationX(x).rotationY(y).build();
+        }, BlockStateProperties.WATERLOGGED);
+
+    }
+
     public void aercloudAll(Block block, String location) {
         ResourceLocation texture = this.texture(this.name(block), location);
         this.aercloud(block, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture, texture);

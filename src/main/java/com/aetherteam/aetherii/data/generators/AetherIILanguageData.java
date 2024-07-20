@@ -68,6 +68,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE, "Undershale Zanite Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, "Undershale Arkenium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, "Undershale Gravitite Ore");
+        this.addBlock(AetherIIBlocks.CORROBONITE_ORE, "Corrobonite Ore");
+        this.addBlock(AetherIIBlocks.CORROBONITE_CLUSTER, "Corrobonite Cluster");
 
         // Aerclouds
         this.addBlock(AetherIIBlocks.COLD_AERCLOUD, "Cold Aercloud");
