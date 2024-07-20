@@ -17,9 +17,11 @@ public class SectionTab extends ImageButton {
 
     public SectionTab(GuidebookDiscoveryScreen currentScreen, DiscoverySection<?> section, int x, int y, int width, int height, ResourceLocation icon) {
         super(x, y, width, height, SECTION_TAB, (button) -> {
-            currentScreen.setCurrentSectionTab(section);
-            currentScreen.initDiscovery();
-            section.selectedEntry = null;
+            if (currentScreen.getCurrentSection() != section) {
+                currentScreen.setCurrentSectionTab(section);
+                currentScreen.initDiscovery();
+                section.selectedEntry = null;
+            }
         });
         this.currentScreen = currentScreen;
         this.section = section;

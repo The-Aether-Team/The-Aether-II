@@ -70,6 +70,11 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         this.renderTransparentBackground(guiGraphics);
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
+    public void renderGuidebookBacking(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        Guidebook.super.renderGuidebookBacking(screen, guiGraphics, mouseX, mouseY, partialTick);
         this.currentSection.renderBg(guiGraphics, mouseX, mouseY, partialTick);
     }
 

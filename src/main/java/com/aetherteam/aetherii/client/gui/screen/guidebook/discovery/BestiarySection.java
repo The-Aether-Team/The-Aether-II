@@ -70,7 +70,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                 }
             }
         }
-        this.renderSlotTooltips(guiGraphics, mouseX, mouseY);
     }
 
     public void renderRotatingEntity(GuiGraphics guiGraphics, int startX, int startY, int endX, int endY, int scale, float yOffset, float angleXComponent, float angleYComponent, LivingEntity livingEntity) {
@@ -122,6 +121,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             i++;
         }
         this.renderScrollbar(guiGraphics);
+        this.renderSlotTooltips(guiGraphics, mouseX, mouseY);
     }
 
     private void renderScrollbar(GuiGraphics guiGraphics) {
@@ -134,8 +134,10 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
         BestiaryEntry entry = this.getEntryFromSlot(mouseX, mouseY);
         if (entry != null) {
+            int leftPagePos = (this.screen.width / 2) - Guidebook.PAGE_WIDTH;
+            int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
             Component name = Component.translatable(entry.entityType().value().getDescriptionId());
-            guiGraphics.renderTooltip(Minecraft.getInstance().font, name, (int) mouseX, (int) mouseY);
+            guiGraphics.renderTooltip(Minecraft.getInstance().font, name, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
         }
     }
 
