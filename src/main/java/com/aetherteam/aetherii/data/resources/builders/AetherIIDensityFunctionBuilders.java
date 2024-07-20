@@ -89,7 +89,6 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction density = getFunction(function, AetherIIDensityFunctions.FACTOR_SHATTERED);
         density = DensityFunctions.mul(density, DensityFunctions.constant(value));
         density = DensityFunctions.mul(density, DensityFunctions.add(DensityFunctions.constant(0.5D), getFunction(function, AetherIIDensityFunctions.AMPLIFICATION)));
-        density = DensityFunctions.mul(density, getFunction(function, AetherIIDensityFunctions.CONTINENTS_FACTOR));
         return density;
     }
 
@@ -247,6 +246,7 @@ public class AetherIIDensityFunctionBuilders {
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I ridges, I temperature, I erosion) {
         CubicSpline<C, I> continentsSpline = CubicSpline.builder(ridges)
                 .addPoint(0.0F, 3.0F)
+                .addPoint(0.1F, 1.25F)
                 .addPoint(0.2F, 1.0F)
                 .build();
 
