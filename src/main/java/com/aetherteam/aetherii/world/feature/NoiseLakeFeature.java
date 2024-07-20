@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.world.feature;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.RockBlock;
 import com.aetherteam.aetherii.block.natural.TwigBlock;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -57,6 +58,12 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         DensityFunction lakeNoise = config.lakeNoise();
         DensityFunction lakeFloorNoise = config.lakeFloorNoise();
         DensityFunction lakeBarrierNoise = config.lakeBarrierNoise();
+
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(context.level().getSeed());
+
+        lakeNoise.mapAll(visitor);
+        lakeFloorNoise.mapAll(visitor);
+        lakeBarrierNoise.mapAll(visitor);
 
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
