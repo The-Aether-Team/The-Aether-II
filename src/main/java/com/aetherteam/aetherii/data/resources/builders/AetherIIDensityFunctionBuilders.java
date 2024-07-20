@@ -482,13 +482,13 @@ public class AetherIIDensityFunctionBuilders {
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> undergroundShaper(I y) {
         return CubicSpline.builder(y)
                 .addPoint(0, 3.0F)
-                .addPoint(8, 1.25F)
-                .addPoint(16, 0.75F)
-                .addPoint(48, 0.6F)
-                .addPoint(72, 0.5F)
-                .addPoint(80, 0.65F)
-                .addPoint(88, 0.95F)
-                .addPoint(96, 1)
+                .addPoint(8, 1.0F)
+                .addPoint(16, 0.7F)
+                .addPoint(32, 0.5F)
+                .addPoint(64, 0.55F)
+                .addPoint(72, 0.6F)
+                .addPoint(88, 0.8F)
+                .addPoint(96, 1.0F)
                 .build();
     }
 
