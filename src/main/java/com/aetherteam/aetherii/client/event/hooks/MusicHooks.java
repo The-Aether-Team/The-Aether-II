@@ -41,6 +41,6 @@ public class MusicHooks {
     }
 
     public static Music createAetherMusic(Holder<SoundEvent> event) {
-        return new Music(event, 600, 1200, false);
+        return new Music(event, 600, 2400, false);
     }
 }

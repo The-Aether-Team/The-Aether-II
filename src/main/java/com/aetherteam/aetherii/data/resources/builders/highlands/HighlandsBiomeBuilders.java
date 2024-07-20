@@ -25,7 +25,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xb5ffd0)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 1200, false))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
     private static final BiomeSpecialEffects MAGNETIC_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0xedeef5)
@@ -35,7 +35,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xc9ffd1)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 1200, false))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
     private static final BiomeSpecialEffects ARCTIC_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0xf3f0ff)
@@ -45,7 +45,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xbdf9ff)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 1200, false))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
     private static final BiomeSpecialEffects IRRADIATED_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0xf0e8dd)
@@ -55,7 +55,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xffe694)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 1200, false))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .ambientParticle(new AmbientParticleSettings(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F))
             .build();
     private static final BiomeSpecialEffects AERCLOUD_SEA_EFFECTS = new BiomeSpecialEffects.Builder()
@@ -66,7 +66,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xb5ffd0)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 1200, false))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
 
     public static Biome flourishingFieldBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
