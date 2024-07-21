@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "kill_aechor_plant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:aechor_plant"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "requirements": [
+    [
+      "kill_aechor_plant"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

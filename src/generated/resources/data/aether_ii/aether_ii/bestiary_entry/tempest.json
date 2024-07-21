@@ -1,5 +1,8 @@
 {
+  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.tempest",
   "entity_type": "aether_ii:tempest",
-  "icon": "aether_ii:guidebook/bestiary/entry",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/entry_undiscovered"
+  "icon_discovered": "aether_ii:guidebook/bestiary/tempest/discovered_slot",
+  "icon_undiscovered": "aether_ii:guidebook/bestiary/tempest/silhouette_slot",
+  "observation_advancement": "aether_ii:bestiary/observe_tempest",
+  "understanding_advancement": "aether_ii:bestiary/understand_tempest"
 }

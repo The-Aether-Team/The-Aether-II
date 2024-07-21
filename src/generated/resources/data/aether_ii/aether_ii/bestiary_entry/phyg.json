@@ -1,5 +1,8 @@
 {
+  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.phyg",
   "entity_type": "aether_ii:phyg",
-  "icon": "aether_ii:guidebook/bestiary/entry",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/entry_undiscovered"
+  "icon_discovered": "aether_ii:guidebook/bestiary/phyg/discovered_slot",
+  "icon_undiscovered": "aether_ii:guidebook/bestiary/phyg/silhouette_slot",
+  "observation_advancement": "aether_ii:bestiary/observe_phyg",
+  "understanding_advancement": "aether_ii:bestiary/understand_phyg"
 }

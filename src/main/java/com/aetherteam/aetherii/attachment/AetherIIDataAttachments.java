@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment;
+import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.attachment.player.PortalTeleportationAttachment;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -20,5 +21,6 @@ public class AetherIIDataAttachments {
 
     // Player
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AerbunnyMountAttachment>> AERBUNNY_MOUNT = ATTACHMENTS.register("ride_mob", () -> AttachmentType.builder(attach -> new AerbunnyMountAttachment()).serialize(AerbunnyMountAttachment.CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<GuidebookDiscoveryAttachment>> GUIDEBOOK_DISCOVERY = ATTACHMENTS.register("guidebook_discovery", () -> AttachmentType.builder(GuidebookDiscoveryAttachment::new).serialize(GuidebookDiscoveryAttachment.CODEC).copyOnDeath().build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<PortalTeleportationAttachment>> PORTAL_TELEPORTATION = ATTACHMENTS.register("portal_teleportation", () -> AttachmentType.builder(PortalTeleportationAttachment::new).serialize(PortalTeleportationAttachment.CODEC).copyOnDeath().build());
 }

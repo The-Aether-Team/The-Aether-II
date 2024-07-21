@@ -1,5 +1,8 @@
 {
+  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.skyroot_lizard",
   "entity_type": "aether_ii:skyroot_lizard",
-  "icon": "aether_ii:guidebook/bestiary/entry",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/entry_undiscovered"
+  "icon_discovered": "aether_ii:guidebook/bestiary/skyroot_lizard/discovered_slot",
+  "icon_undiscovered": "aether_ii:guidebook/bestiary/skyroot_lizard/silhouette_slot",
+  "observation_advancement": "aether_ii:bestiary/observe_skyroot_lizard",
+  "understanding_advancement": "aether_ii:bestiary/understand_skyroot_lizard"
 }

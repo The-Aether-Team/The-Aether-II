@@ -1,5 +1,9 @@
 {
+  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.magnetic_burrukai",
   "entity_type": "aether_ii:magnetic_burrukai",
-  "icon": "aether_ii:guidebook/bestiary/entry",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/entry_undiscovered"
+  "food": "aether_ii:burrukai_food",
+  "icon_discovered": "aether_ii:guidebook/bestiary/magnetic_burrukai/discovered_slot",
+  "icon_undiscovered": "aether_ii:guidebook/bestiary/magnetic_burrukai/silhouette_slot",
+  "observation_advancement": "aether_ii:bestiary/observe_magnetic_burrukai",
+  "understanding_advancement": "aether_ii:bestiary/understand_magnetic_burrukai"
 }

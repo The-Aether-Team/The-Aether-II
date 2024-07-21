@@ -775,6 +775,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.discovery.exploration.title", "Exploration");
         this.addGuiText("guidebook.journal.title", "Journal");
         this.addGuiText("guidebook.rewards.title", "Rewards");
+        this.addGuiText("guidebook.discovery.bestiary.entry.unknown", "???");
+        this.addGuiText("guidebook.discovery.bestiary.stat.health", "%s Health");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_weakness", "Takes %1$s More Damage from %2$s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_resistance", "Takes %1$s Less Damage from %2$s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_none", "Has No Damage Adjustment for %s Attacks");
+
+        // Bestiary
+        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+
+
 
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
@@ -783,6 +793,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
         this.addJukeboxSong("demise", "Moorziey - Demise");
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
+
+
+        // Misc
+        this.addGeneric("slash", "§9Slash§r");
+        this.addGeneric("impact", "§eImpact§r");
+        this.addGeneric("pierce", "§cPierce§r");
 
 
         // Subtitles

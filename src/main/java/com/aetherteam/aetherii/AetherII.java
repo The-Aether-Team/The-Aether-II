@@ -26,10 +26,7 @@ import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
-import com.aetherteam.aetherii.event.listeners.attachment.AerbunnyMountListener;
-import com.aetherteam.aetherii.event.listeners.attachment.DamageSystemListener;
-import com.aetherteam.aetherii.event.listeners.attachment.EffectsSystemListeners;
-import com.aetherteam.aetherii.event.listeners.attachment.PortalTeleportationListener;
+import com.aetherteam.aetherii.event.listeners.attachment.*;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
@@ -157,6 +154,7 @@ public class AetherII {
         RecipeListener.listen(bus);
         BlockInteractionListener.listen(bus);
         EntityInteractionListener.listen(bus);
+        GuidebookDiscoveryListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 
@@ -176,6 +174,7 @@ public class AetherII {
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
+        registrar.playToClient(UpdateGuidebookDiscoveryPacket.TYPE, UpdateGuidebookDiscoveryPacket.STREAM_CODEC, UpdateGuidebookDiscoveryPacket::execute);
 
         // SERVERBOUND
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);

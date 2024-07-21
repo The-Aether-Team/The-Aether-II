@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "observe": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "aether_ii:arctic_taegore"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "observe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

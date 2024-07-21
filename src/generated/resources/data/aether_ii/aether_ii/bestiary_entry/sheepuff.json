@@ -1,5 +1,9 @@
 {
+  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.sheepuff",
   "entity_type": "aether_ii:sheepuff",
-  "icon": "aether_ii:guidebook/bestiary/entry",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/entry_undiscovered"
+  "food": "aether_ii:sheepuff_food",
+  "icon_discovered": "aether_ii:guidebook/bestiary/sheepuff/discovered_slot",
+  "icon_undiscovered": "aether_ii:guidebook/bestiary/sheepuff/silhouette_slot",
+  "observation_advancement": "aether_ii:bestiary/observe_sheepuff",
+  "understanding_advancement": "aether_ii:bestiary/understand_sheepuff"
 }
