@@ -33,13 +33,11 @@ import java.util.List;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo make entry ordering logical not alphabetical
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
-    private static final ResourceLocation HEARTS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/hearts");
     private static final ResourceLocation SLASH_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");
     private static final ResourceLocation IMPACT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/impact");
     private static final ResourceLocation PIERCE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/pierce");
     private static final ResourceLocation DISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/discovered_slot");
     private static final ResourceLocation UNDISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/silhouette_slot");
-    private static final WidgetSprites SCROLL_WIDGET = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller_selected"));
     private List<Float> snapPoints;
     private boolean scrolling;
     private float scrollY;
@@ -140,7 +138,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
     private void renderScrollbar(GuiGraphics guiGraphics) {
         int scrollbarTop = 59;
         int scrollbarLeft = 140;
-        ResourceLocation location = SCROLL_WIDGET.get(this.isScrollActive(), this.scrolling);
+        ResourceLocation location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
         guiGraphics.blitSprite(location, scrollbarLeft , (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
     }
 
@@ -172,7 +170,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
 
                         //todo remove placeholder frame backings
 
-                        guiGraphics.blitSprite(HEARTS_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         String health = String.valueOf((int) livingEntity.getMaxHealth());
                         this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", health));
                         this.renderIconValue(guiGraphics, x, y, health);

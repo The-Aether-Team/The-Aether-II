@@ -67,17 +67,16 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
 
         Player player = Minecraft.getInstance().player;
-        int x = 27;
-        int y = 7;
+        int x = 24;
+        int y = 4;
 
         guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
 
-        guiGraphics.blitSprite(HEART_CONTAINER_SPRITE, x, y + 22, 9, 9);
-        guiGraphics.blitSprite(HEART_SPRITE, x, y + 22, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 12, y + 22, 16777215, true);
+        guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y + 22, 16, 16);
+        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 25, 16777215, true);
 
-        guiGraphics.blitSprite(ARMOR_SPRITE, x, y + 35, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 12, y + 35, 16777215, true);
+        guiGraphics.blitSprite(Guidebook.ARMOR_SPRITE, x, y + 35, 16, 16);
+        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 18, y + 40, 16777215, true);
     }
 
     @Override

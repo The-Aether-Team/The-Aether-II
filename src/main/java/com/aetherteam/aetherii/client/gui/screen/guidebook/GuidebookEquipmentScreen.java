@@ -122,15 +122,14 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
     private void renderStats(GuiGraphics guiGraphics) {
         Player player = Minecraft.getInstance().player;
-        int x = 39;
-        int y = 16;
+        int x = 37;
+        int y = 112;
 
-        guiGraphics.blitSprite(HEART_CONTAINER_SPRITE, x, y + 100, 9, 9);
-        guiGraphics.blitSprite(HEART_SPRITE, x, y + 100, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf((int) (player.getHealth()))), x + 11, y + 101, 16777215, true);
+        guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf((int) (player.getHealth()))), x + 18, y + 4, 16777215, true);
 
-        guiGraphics.blitSprite(ARMOR_SPRITE, x + 54, y + 100, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf(player.getArmorValue())), x + 65, y + 101, 16777215, true);
+        guiGraphics.blitSprite(Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf(player.getArmorValue())), x + 72, y + 4, 16777215, true);
     }
 
     private void renderCurrency(GuiGraphics guiGraphics) {
