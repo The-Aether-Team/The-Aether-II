@@ -156,7 +156,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 ),
                 4.5F,
                 6,
-                24,
+                32,
                 16,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
