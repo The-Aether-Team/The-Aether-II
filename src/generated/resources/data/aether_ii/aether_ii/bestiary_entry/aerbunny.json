@@ -1,8 +1,7 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.aerbunny",
   "entity_type": "aether_ii:aerbunny",
-  "icon_discovered": "aether_ii:guidebook/bestiary/aerbunny/discovered_slot",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/aerbunny/silhouette_slot",
+  "icon_discovered": "aether_ii:guidebook/bestiary/aerbunny",
   "observation_advancement": "aether_ii:bestiary/observe_aerbunny",
   "understanding_advancement": "aether_ii:bestiary/understand_aerbunny"
 }

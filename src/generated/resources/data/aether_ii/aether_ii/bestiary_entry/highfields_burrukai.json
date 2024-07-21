@@ -2,8 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.highfields_burrukai",
   "entity_type": "aether_ii:highfields_burrukai",
   "food": "aether_ii:burrukai_food",
-  "icon_discovered": "aether_ii:guidebook/bestiary/highfields_burrukai/discovered_slot",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/highfields_burrukai/silhouette_slot",
+  "icon_discovered": "aether_ii:guidebook/bestiary/highfields_burrukai",
   "observation_advancement": "aether_ii:bestiary/observe_highfields_burrukai",
   "understanding_advancement": "aether_ii:bestiary/understand_highfields_burrukai"
 }

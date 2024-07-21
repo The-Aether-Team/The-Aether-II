@@ -17,12 +17,11 @@ import net.minecraft.world.item.Item;
 
 import java.util.Optional;
 
-public record BestiaryEntry(Holder<EntityType<?>> entityType, ResourceLocation icon, ResourceLocation iconUndiscovered, String descriptionKey, Optional<TagKey<Item>> food, ResourceLocation observationAdvancement, ResourceLocation understandingAdvancement) {
+public record BestiaryEntry(Holder<EntityType<?>> entityType, ResourceLocation icon, String descriptionKey, Optional<TagKey<Item>> food, ResourceLocation observationAdvancement, ResourceLocation understandingAdvancement) {
     public static final Codec<BestiaryEntry> DIRECT_CODEC =
             RecordCodecBuilder.create(in -> in.group(
                     BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().fieldOf("entity_type").forGetter(BestiaryEntry::entityType),
                     ResourceLocation.CODEC.fieldOf("icon_discovered").forGetter(BestiaryEntry::icon),
-                    ResourceLocation.CODEC.fieldOf("icon_undiscovered").forGetter(BestiaryEntry::iconUndiscovered),
                     Codec.STRING.fieldOf("description_key").forGetter(BestiaryEntry::descriptionKey),
                     TagKey.codec(Registries.ITEM).optionalFieldOf("food").forGetter(BestiaryEntry::food),
                     ResourceLocation.CODEC.fieldOf("observation_advancement").forGetter(BestiaryEntry::observationAdvancement),

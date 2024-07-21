@@ -2,8 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.highfields_taegore",
   "entity_type": "aether_ii:highfields_taegore",
   "food": "aether_ii:taegore_food",
-  "icon_discovered": "aether_ii:guidebook/bestiary/highfields_taegore/discovered_slot",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/highfields_taegore/silhouette_slot",
+  "icon_discovered": "aether_ii:guidebook/bestiary/highfields_taegore",
   "observation_advancement": "aether_ii:bestiary/observe_highfields_taegore",
   "understanding_advancement": "aether_ii:bestiary/understand_highfields_taegore"
 }

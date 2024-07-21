@@ -24,6 +24,7 @@ public interface Guidebook {
     WidgetSprites REWARDS_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/rewards_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/rewards_tab_selected"));
     WidgetSprites SCROLLER = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller_selected"));
     ResourceLocation GUIDEBOOK_BACKING_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/guidebook_backing.png");
+    ResourceLocation SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/slot");
     ResourceLocation HEARTS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/hearts");
     ResourceLocation ARMOR_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/armor");
     int BACKING_WIDTH = 375;

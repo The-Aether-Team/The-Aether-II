@@ -1,8 +1,7 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.aechor_plant",
   "entity_type": "aether_ii:aechor_plant",
-  "icon_discovered": "aether_ii:guidebook/bestiary/aechor_plant/discovered_slot",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/aechor_plant/silhouette_slot",
+  "icon_discovered": "aether_ii:guidebook/bestiary/aechor_plant",
   "observation_advancement": "aether_ii:bestiary/observe_aechor_plant",
   "understanding_advancement": "aether_ii:bestiary/understand_aechor_plant"
 }

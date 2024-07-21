@@ -2,8 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.arctic_kirrid",
   "entity_type": "aether_ii:arctic_kirrid",
   "food": "aether_ii:kirrid_food",
-  "icon_discovered": "aether_ii:guidebook/bestiary/arctic_kirrid/discovered_slot",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/arctic_kirrid/silhouette_slot",
+  "icon_discovered": "aether_ii:guidebook/bestiary/arctic_kirrid",
   "observation_advancement": "aether_ii:bestiary/observe_arctic_kirrid",
   "understanding_advancement": "aether_ii:bestiary/understand_arctic_kirrid"
 }

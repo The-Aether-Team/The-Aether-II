@@ -2,8 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.arctic_burrukai",
   "entity_type": "aether_ii:arctic_burrukai",
   "food": "aether_ii:burrukai_food",
-  "icon_discovered": "aether_ii:guidebook/bestiary/arctic_burrukai/discovered_slot",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/arctic_burrukai/silhouette_slot",
+  "icon_discovered": "aether_ii:guidebook/bestiary/arctic_burrukai",
   "observation_advancement": "aether_ii:bestiary/observe_arctic_burrukai",
   "understanding_advancement": "aether_ii:bestiary/understand_arctic_burrukai"
 }

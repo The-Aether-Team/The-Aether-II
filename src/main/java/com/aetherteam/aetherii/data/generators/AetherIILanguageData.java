@@ -777,13 +777,30 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.rewards.title", "Rewards");
         this.addGuiText("guidebook.discovery.bestiary.entry.unknown", "???");
         this.addGuiText("guidebook.discovery.bestiary.stat.health", "%s Health");
-        this.addGuiText("guidebook.discovery.bestiary.stat.damage_weakness", "Takes %1$s More Damage from %2$s Attacks");
-        this.addGuiText("guidebook.discovery.bestiary.stat.damage_resistance", "Takes %1$s Less Damage from %2$s Attacks");
-        this.addGuiText("guidebook.discovery.bestiary.stat.damage_none", "Has No Damage Adjustment for %s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_weakness", "%1$s Damage from %2$s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_resistance", "%1$s Damage from %2$s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_none", "Standard Damage from %s Attacks");
 
         // Bestiary
         this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-
+        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
 
         // Jukebox Songs

@@ -93,8 +93,7 @@ public class AetherIIBestiaryEntries {
             ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entity.toShortString()).withPrefix(path);
             ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entity.toShortString()).withPrefix(path);
             context.register(entry.getKey(), new BestiaryEntry(holder,
-                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString() + "/discovered_slot"),
-                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString() + "/silhouette_slot"),
+                    ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString()),
                     "aether_ii.guidebook_bestiary.entity.aether_ii." + entity.toShortString(),
                     food,
                     observeId,

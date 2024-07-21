@@ -2,8 +2,7 @@
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.moa",
   "entity_type": "aether_ii:moa",
   "food": "aether_ii:moa_food",
-  "icon_discovered": "aether_ii:guidebook/bestiary/moa/discovered_slot",
-  "icon_undiscovered": "aether_ii:guidebook/bestiary/moa/silhouette_slot",
+  "icon_discovered": "aether_ii:guidebook/bestiary/moa",
   "observation_advancement": "aether_ii:bestiary/observe_moa",
   "understanding_advancement": "aether_ii:bestiary/understand_moa"
 }

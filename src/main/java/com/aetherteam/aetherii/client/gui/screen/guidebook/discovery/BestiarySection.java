@@ -11,10 +11,12 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistanc
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -36,8 +38,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
     private static final ResourceLocation SLASH_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");
     private static final ResourceLocation IMPACT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/impact");
     private static final ResourceLocation PIERCE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/pierce");
-    private static final ResourceLocation DISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/discovered_slot");
-    private static final ResourceLocation UNDISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/silhouette_slot");
+    private static final ResourceLocation UNDISCOVERED_ENTRY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/undiscovered");
+    private static final ResourceLocation DISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/default");
     private List<Float> snapPoints;
     private boolean scrolling;
     private float scrollY;
@@ -112,11 +114,18 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
         int i = 0;
         List<BestiaryEntry> visibleEntries = this.entries.size() > this.maxSlots() ? this.entries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.entries.size())) : this.entries;
         for (BestiaryEntry entry : visibleEntries) {
-            boolean observed = this.isObserved(entry);
-            ResourceLocation sprite = observed ? entry.icon() : entry.iconUndiscovered();
-//            if (Minecraft.getInstance().getTextureManager().getTexture(sprite).equals(MissingTextureAtlasSprite.getTexture())) {
-//                sprite = observed ? DISCOVERED_ENTRY_FALLBACK_SPRITE : UNDISCOVERED_ENTRY_FALLBACK_SPRITE;
-//            }
+            GuiSpriteManager guiSpriteManager = Minecraft.getInstance().getGuiSprites();
+
+            ResourceLocation sprite;
+            if (this.isObserved(entry)) {
+                sprite = entry.icon();
+                if (guiSpriteManager.getSprite(sprite).equals(guiSpriteManager.getSprite(MissingTextureAtlasSprite.getLocation()))) {
+                    sprite = DISCOVERED_ENTRY_FALLBACK_SPRITE;
+                }
+            } else {
+                sprite = UNDISCOVERED_ENTRY_SPRITE;
+            }
+
             int x = i % 6;
             int y = i / 6;
             int slotX = leftPos + (x * 18);
@@ -139,7 +148,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
         int scrollbarTop = 59;
         int scrollbarLeft = 140;
         ResourceLocation location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
-        guiGraphics.blitSprite(location, scrollbarLeft , (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
+        guiGraphics.blitSprite(location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
     }
 
     private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
@@ -159,42 +168,41 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (this.getSelectedEntry() != null) {
             Level level = Minecraft.getInstance().level;
+            Font font = Minecraft.getInstance().font;
             if (level != null) {
                 Entity entity = this.getSelectedEntry().entityType().value().create(level);
                 if (entity instanceof LivingEntity livingEntity) {
-                    guiGraphics.drawCenteredString(this.screen.getMinecraft().font, Component.translatable(this.getSelectedEntry().entityType().value().getDescriptionId()), 88, 13, 16777215);
+                    guiGraphics.drawCenteredString(font, Component.translatable(this.getSelectedEntry().entityType().value().getDescriptionId()), 88, 13, 16777215);
 
                     if (this.isUnderstood(this.getSelectedEntry())) {
                         int x = 27;
                         int y = 29;
 
-                        //todo remove placeholder frame backings
-
                         guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         String health = String.valueOf((int) livingEntity.getMaxHealth());
-                        this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", health));
                         this.renderIconValue(guiGraphics, x, y, health);
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", health));
 
                         y += 17;
                         guiGraphics.blitSprite(SLASH_SPRITE, x, y, 16, 16);
                         int slashDefense = (int) AetherIIDamageResistances.getSlashDefense(this.registryAccess, entity);
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
-                        this.renderIconValue(guiGraphics, x, y, String.valueOf(slashDefense));
-                        this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y, slashTooltip);
+                        this.renderIconValue(guiGraphics, x, y, String.valueOf(-slashDefense));
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, slashTooltip);
 
                         y += 17;
                         guiGraphics.blitSprite(IMPACT_SPRITE, x, y, 16, 16);
                         int impactDefense = (int) AetherIIDamageResistances.getImpactDefense(this.registryAccess, entity);
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
-                        this.renderIconValue(guiGraphics, x, y, String.valueOf(impactDefense));
-                        this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y,impactTooltip);
+                        this.renderIconValue(guiGraphics, x, y, String.valueOf(-impactDefense));
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y,impactTooltip);
 
                         y += 17;
                         guiGraphics.blitSprite(PIERCE_SPRITE, x, y, 16, 16);
                         int pierceDefense = (int) AetherIIDamageResistances.getPierceDefense(this.registryAccess, entity);
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
-                        this.renderIconValue(guiGraphics, x, y, String.valueOf(pierceDefense));
-                        this.renderTooltipOverIcon(guiGraphics, mouseX, mouseY, x, y, pierceTooltip);
+                        this.renderIconValue(guiGraphics, x, y, String.valueOf(-pierceDefense));
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, pierceTooltip);
 
                         //todo effect resistance render
 
@@ -218,22 +226,22 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
         Component component;
         Component damageType = Component.translatable("aether_ii." + type);
         if (value > 0) {
-            component = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.damage_resistance", value, damageType);
+            component = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.damage_resistance", -value, damageType);
         } else if (value < 0) {
-            component = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.damage_weakness", Mth.abs(value), damageType);
+            component = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.damage_weakness", "+" + -value, damageType);
         } else {
             component = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.damage_none", damageType);
         }
         return component;
     }
 
-    private void renderTooltipOverIcon(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) { //todo text wrapping
+    private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) { //todo text wrapping
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
-            guiGraphics.renderTooltip(Minecraft.getInstance().font, component, mouseX - rightPagePos, mouseY - topPos);
+            guiGraphics.renderTooltip(font, component, mouseX - rightPagePos, mouseY - topPos);
         }
     }
 
