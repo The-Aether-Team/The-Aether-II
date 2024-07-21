@@ -389,6 +389,8 @@
   "gui.aether_ii.guidebook.button.close": "Inventory",
   "gui.aether_ii.guidebook.button.open": "Guidebook",
   "gui.aether_ii.guidebook.discovery.bestiary.entry.unknown": "???",
+  "gui.aether_ii.guidebook.discovery.bestiary.info.drops": "Drops:",
+  "gui.aether_ii.guidebook.discovery.bestiary.info.eats": "Eats:",
   "gui.aether_ii.guidebook.discovery.bestiary.stat.damage_none": "Standard Damage from %s Attacks",
   "gui.aether_ii.guidebook.discovery.bestiary.stat.damage_resistance": "%1$s Damage from %2$s Attacks",
   "gui.aether_ii.guidebook.discovery.bestiary.stat.damage_weakness": "%1$s Damage from %2$s Attacks",

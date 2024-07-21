@@ -8,8 +8,10 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.google.common.collect.Iterables;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -17,20 +19,30 @@ import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import org.apache.commons.compress.utils.Lists;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo make entry ordering logical not alphabetical
@@ -44,6 +56,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
     private boolean scrolling;
     private float scrollY;
     private float rotation = 0.0F;
+    private List<Holder<Item>> currentFoods = new ArrayList<>();
+    private int switchFoodItemCounter = 0;
 
     public BestiarySection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
         super(registryAccess, AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, screen, title);
@@ -208,12 +222,51 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
 
                         //todo drops display
 
-                        //todo food display
+                        int dropsTextX = 66;
+                        int dropsTextY = 156;
+
+                        if (this.getSelectedEntry().food().isPresent()) {
+                            Registry<Item> itemRegistry = this.registryAccess.registryOrThrow(Registries.ITEM);
+                            List<Holder<Item>> tag = Lists.newArrayList(itemRegistry.getTagOrEmpty(this.getSelectedEntry().food().get()).iterator());
+                            if (this.currentFoods.isEmpty()) {
+                                this.currentFoods.addAll(tag);
+                            }
+                            if (!this.currentFoods.isEmpty()) {
+                                ItemStack itemStack = this.currentFoods.getFirst().value().getDefaultInstance();
+                                guiGraphics.drawString(font, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.eats"), 17, 156, -1);
+                                this.renderFakeSlot(guiGraphics, font, itemStack.getHoverName(), itemStack, mouseX, mouseY, 44, 151);
+                                guiGraphics.drawString(font, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.drops"), dropsTextX, dropsTextY, -1);
+
+                                if (this.switchFoodItemCounter++ >= 90) {
+                                    Collections.rotate(this.currentFoods, 1);
+                                    this.switchFoodItemCounter = 0;
+                                }
+                            }
+                        } else {
+
+                        }
+
                     }
 
                     this.drawDescriptionString(guiGraphics, Minecraft.getInstance().font, Component.translatable(this.getSelectedEntry().descriptionKey()));
                 }
             }
+        }
+    }
+
+    private void renderFakeSlot(GuiGraphics guiGraphics, Font font, Component tooltip, ItemStack stack, double mouseX, double mouseY, int x, int y) {
+        int rightPagePos = (this.screen.width / 2);
+        int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+        double mouseXDiff = (mouseX - rightPagePos) - x;
+        double mouseYDiff = (mouseY - topPos) - y;
+        guiGraphics.blitSprite(Guidebook.SLOT_SPRITE, x, y, 18, 18);
+        x += 1;
+        y += 1;
+        guiGraphics.renderItem(stack, x, y);
+        guiGraphics.renderItemDecorations(font, stack, x, y);
+        if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
+            guiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, -2130706433, -2130706433, 0);
+            guiGraphics.renderTooltip(font, tooltip, (int) (mouseX - rightPagePos), (int) (mouseY - topPos));
         }
     }
 
@@ -235,7 +288,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
         return component;
     }
 
-    private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) { //todo text wrapping
+    private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) {
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
@@ -296,8 +349,9 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button, boolean original) { //todo
         BestiaryEntry entry = this.getEntryFromSlot(mouseX, mouseY);
-        if (entry != null && (this.isObserved(entry) || this.isUnderstood(entry))) {
+        if (entry != null && (this.isObserved(entry) || this.isUnderstood(entry)) && (this.getSelectedEntry() == null || (entry.entityType().value() != this.getSelectedEntry().entityType().value()))) {
             this.selectedEntry = entry;
+            this.currentFoods.clear();
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, button, original);

@@ -50,7 +50,7 @@ public class AetherIIAdvancementData extends AdvancementProvider {
 
         private static Advancement.Builder understand(Advancement.Builder builder, EntityType<?> entity) {
             builder.addCriterion("kill_" + entity.toShortString(), KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entity)));
-            Map<EntityType<?>, TagKey<Item>> fedEntities = AetherIIBestiaryEntries.FED.entrySet().stream().collect(Collectors.toMap((e) -> e.getKey().value(), Map.Entry::getValue));
+            Map<EntityType<?>, TagKey<Item>> fedEntities = AetherIIBestiaryEntries.getFedEntityTypes();
             if (fedEntities.containsKey(entity)) {
                 TagKey<Item> food = fedEntities.get(entity);
                 builder.addCriterion("feed_" + entity.toShortString(), PlayerInteractTrigger.TriggerInstance.itemUsedOnEntity(ItemPredicate.Builder.item().of(food), Optional.of(EntityPredicate.wrap(EntityPredicate.Builder.entity().of(entity)))));

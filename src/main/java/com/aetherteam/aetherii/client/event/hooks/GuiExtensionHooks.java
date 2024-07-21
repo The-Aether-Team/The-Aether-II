@@ -80,7 +80,7 @@ public class GuiExtensionHooks {
     public static void storeGuidebookScreen(Screen screen) {
         if (screen instanceof Guidebook) {
             lastGuidebookScreen = screen;
-        } else {
+        } else if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
             lastGuidebookScreen = null;
         }
     }
