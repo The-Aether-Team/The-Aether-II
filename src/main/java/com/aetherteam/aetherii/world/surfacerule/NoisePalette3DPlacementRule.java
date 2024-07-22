@@ -23,7 +23,7 @@ public record NoisePalette3DPlacementRule(List<BlockState> blockStates, Resource
 	public SurfaceRules.SurfaceRule apply(SurfaceRules.Context context) {
 		return (x, y, z) -> {
 			NormalNoise noise = context.randomState.getOrCreateNoise(this.noise);
-			float normalizedNoise = (float) (noise.getValue(x * this.noiseFreq, y * this.noiseFreq, z * this.noiseFreq) * 0.5f + 0.5f); // Keeps noise within 0.0 - 1.0 range.
+			float normalizedNoise = (float) Math.clamp(noise.getValue(x * this.noiseFreq, y * this.noiseFreq, z * this.noiseFreq) * 0.5f + 0.5f, 0f, 1f); // Limits noise within 0.0 - 1.0 range.
 			return this.blockStates.get(Mth.lerpDiscrete(normalizedNoise, 0, this.blockStates.size() - 1));
 		};
 	}
