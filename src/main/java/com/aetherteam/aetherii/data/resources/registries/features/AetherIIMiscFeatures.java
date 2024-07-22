@@ -166,15 +166,14 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 new NoiseProvider(
                         300L,
                         new NormalNoise.NoiseParameters(0, 1.0),
-                        0.001F,
+                        0.1F,
                         List.of(
-                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
                                 AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
                                 AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
                         )
                 ),
-                5.25F,
-                3,
+                4.25F,
+                2,
                 7.5F,
                 5,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())

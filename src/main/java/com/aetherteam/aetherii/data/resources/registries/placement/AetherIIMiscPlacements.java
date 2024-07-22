@@ -25,6 +25,8 @@ public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = AetherIIPlacementUtils.createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = AetherIIPlacementUtils.createKey("noise_lake_arctic");
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = AetherIIPlacementUtils.createKey("ferrosite_pillar");
+    public static final ResourceKey<PlacedFeature> COASTAL_ARCTIC_ICE_SPIKE = AetherIIPlacementUtils.createKey("coastal_arctic_ice_spike");
+    public static final ResourceKey<PlacedFeature> ARCTIC_ICE_SPIKE_CLUSTER = AetherIIPlacementUtils.createKey("arctic_ice_spike_cluster");
     public static final ResourceKey<PlacedFeature> AETHER_WATER_LAKE = AetherIIPlacementUtils.createKey("aether_water_lake");
     public static final ResourceKey<PlacedFeature> AETHER_WATER_LAKE_UNDERGROUND = AetherIIPlacementUtils.createKey("aether_water_lake_underground");
     public static final ResourceKey<PlacedFeature> AETHER_WATER_SPRING = AetherIIPlacementUtils.createKey("aether_water_spring");
@@ -71,6 +73,23 @@ public class AetherIIMiscPlacements {
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome()
+        );
+
+        AetherIIPlacementUtils.register(context, COASTAL_ARCTIC_ICE_SPIKE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.ARCTIC_ICE_SPIKE),
+                RarityFilter.onAverageOnceEvery(2),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(144)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())), //todo
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome()
+        );
+        AetherIIPlacementUtils.register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(AetherIIMiscFeatures.ARCTIC_ICE_SPIKE),
+                NoiseBasedCountPlacement.of(12, 200.0, 0.0),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(224)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())), //todo
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome()
         );

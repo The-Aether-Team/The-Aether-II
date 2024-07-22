@@ -19,7 +19,8 @@
     [
       "aether_ii:coast_arctic_packed_ice",
       "aether_ii:noise_lake_arctic",
-      "aether_ii:cloudbed"
+      "aether_ii:cloudbed",
+      "aether_ii:coastal_arctic_ice_spike"
     ],
     [
       "aether_ii:aether_water_lake_underground"
