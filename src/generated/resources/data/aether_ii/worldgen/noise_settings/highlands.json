@@ -249,6 +249,22 @@
             "Name": "aether_ii:undershale"
           }
         }
+      },
+      {
+        "type": "aether_ii:noise_palette_3d",
+        "blockstates": [
+          {
+            "Name": "minecraft:redstone_block"
+          },
+          {
+            "Name": "minecraft:emerald_block"
+          },
+          {
+            "Name": "minecraft:gold_block"
+          }
+        ],
+        "noise": "minecraft:surface",
+        "noise_frequency": 0.5
       }
     ]
   }
