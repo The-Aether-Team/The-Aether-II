@@ -49,14 +49,16 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         this.playerInventory = playerInventory;
         this.titleLabelX = 88;
         this.titleLabelY = 13;
-        this.craftingTitleLabelX = 139;
-        this.craftingTitleLabelY = 12;
-        this.inventoryLabelX = 96;
-        this.inventoryLabelY = 64;
+        this.craftingTitleLabelX = 238;
+        this.craftingTitleLabelY = 28;
+        this.inventoryLabelX = 195;
+        this.inventoryLabelY = 80;
     }
 
     @Override
     protected void init() {
+        this.imageWidth = Guidebook.BACKING_WIDTH;
+        this.imageHeight = Guidebook.BACKING_HEIGHT;
         super.init();
         this.initTabs(this);
     }
@@ -74,7 +76,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
         if (this.getMinecraft().player != null) {
             if (this.getMinecraft().player.isCreative() && this.destroyItemSlot == null) {
-                this.destroyItemSlot = new Slot(DESTROY_ITEM_CONTAINER, 0, 121, 34);
+                this.destroyItemSlot = new Slot(DESTROY_ITEM_CONTAINER, 0, 220, 50);
                 this.getMenu().slots.add(this.destroyItemSlot);
             } else if (!this.getMinecraft().player.isCreative() && this.destroyItemSlot != null) {
                 this.getMenu().slots.remove(this.destroyItemSlot);
@@ -94,8 +96,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
         int leftPos = this.leftPos;
         int topPos = this.topPos;
-        int xOffset = -58;
-        int yOffset = 21;
+        int xOffset = 41;
+        int yOffset = 37;
         int width = 124;
         int height = 70;
         var scissorStart = new Vector2i(leftPos + xOffset, topPos + yOffset);
