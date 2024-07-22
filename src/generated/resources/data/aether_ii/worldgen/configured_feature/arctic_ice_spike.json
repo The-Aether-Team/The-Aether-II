@@ -1,8 +1,8 @@
 {
   "type": "aether_ii:arctic_ice_spike",
   "config": {
-    "additional_radius": 2,
-    "additional_slope_intensity": 7,
+    "additional_radius": 3,
+    "additional_slope_intensity": 5,
     "base_radius": 5.25,
     "base_slope_intensity": 7.5,
     "block": {

@@ -174,9 +174,9 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                         )
                 ),
                 5.25F,
-                2,
+                3,
                 7.5F,
-                7,
+                5,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
         ));
 
