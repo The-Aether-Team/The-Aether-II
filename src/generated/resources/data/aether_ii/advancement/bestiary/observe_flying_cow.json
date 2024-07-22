@@ -1,5 +1,36 @@
 {
   "criteria": {
+    "feed_flying_cow": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:flying_cow"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:flying_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_flying_cow": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:flying_cow"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
     "observe": {
       "conditions": {
         "player": [
@@ -22,7 +53,9 @@
   },
   "requirements": [
     [
-      "observe"
+      "observe",
+      "kill_flying_cow",
+      "feed_flying_cow"
     ]
   ],
   "sends_telemetry_event": true

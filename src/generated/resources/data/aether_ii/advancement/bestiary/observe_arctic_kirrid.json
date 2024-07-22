@@ -1,5 +1,36 @@
 {
   "criteria": {
+    "feed_arctic_kirrid": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:arctic_kirrid"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:kirrid_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_arctic_kirrid": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:arctic_kirrid"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
     "observe": {
       "conditions": {
         "player": [
@@ -22,7 +53,9 @@
   },
   "requirements": [
     [
-      "observe"
+      "observe",
+      "kill_arctic_kirrid",
+      "feed_arctic_kirrid"
     ]
   ],
   "sends_telemetry_event": true

@@ -36,7 +36,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         super(AetherIIMenuTypes.GUIDEBOOK.get(), containerId);
         this.owner = playerInventory.player;
 
-        int xOffset = this.owner.isCreative() ? 19 : 0;
+        int xOffset = this.owner.isCreative() ? 19 : 0; //todo theres a bug with this being offset when it shouldnt be sometimes i guess
 
         this.addSlot(new ResultSlot(playerInventory.player, this.craftSlots, this.resultSlots, 0, 295 + xOffset, 50));
 

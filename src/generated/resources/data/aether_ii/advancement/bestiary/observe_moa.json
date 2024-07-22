@@ -1,5 +1,36 @@
 {
   "criteria": {
+    "feed_moa": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:moa"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:moa_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_moa": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:moa"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
     "observe": {
       "conditions": {
         "player": [
@@ -22,7 +53,9 @@
   },
   "requirements": [
     [
-      "observe"
+      "observe",
+      "kill_moa",
+      "feed_moa"
     ]
   ],
   "sends_telemetry_event": true

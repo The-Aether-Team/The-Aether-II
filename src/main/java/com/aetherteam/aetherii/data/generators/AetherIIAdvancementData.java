@@ -37,15 +37,15 @@ public class AetherIIAdvancementData extends AdvancementProvider {
             String path = "bestiary/";
             for (EntityType<?> entityType : AetherIIBestiaryEntries.ENTITIES.values().stream().map(Holder::value).toList()) {
                 ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entityType.toShortString()).withPrefix(path);
-                Advancement.Builder.advancement().addCriterion("observe", observe(entityType)).save(consumer, observeId, existingFileHelper);
+                observe(Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, observeId, existingFileHelper);
 
                 ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entityType.toShortString()).withPrefix(path);
                 understand(Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, understandId, existingFileHelper);
             }
         }
 
-        private static Criterion<PlayerTrigger.TriggerInstance> observe(EntityType<?> entity) {
-            return PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().subPredicate(PlayerPredicate.Builder.player().setLookingAt(EntityPredicate.Builder.entity().of(entity)).build()));
+        private static Advancement.Builder observe(Advancement.Builder builder, EntityType<?> entity) {
+            return understand(builder.addCriterion("observe", PlayerTrigger.TriggerInstance.located(EntityPredicate.Builder.entity().subPredicate(PlayerPredicate.Builder.player().setLookingAt(EntityPredicate.Builder.entity().of(entity)).build()))), entity);
         }
 
         private static Advancement.Builder understand(Advancement.Builder builder, EntityType<?> entity) {

@@ -1,5 +1,36 @@
 {
   "criteria": {
+    "feed_phyg": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:phyg"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:phyg_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_phyg": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:phyg"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
     "observe": {
       "conditions": {
         "player": [
@@ -22,7 +53,9 @@
   },
   "requirements": [
     [
-      "observe"
+      "observe",
+      "kill_phyg",
+      "feed_phyg"
     ]
   ],
   "sends_telemetry_event": true

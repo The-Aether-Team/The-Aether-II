@@ -1,5 +1,36 @@
 {
   "criteria": {
+    "feed_highfields_burrukai": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:highfields_burrukai"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:burrukai_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_highfields_burrukai": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:highfields_burrukai"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
     "observe": {
       "conditions": {
         "player": [
@@ -22,7 +53,9 @@
   },
   "requirements": [
     [
-      "observe"
+      "observe",
+      "kill_highfields_burrukai",
+      "feed_highfields_burrukai"
     ]
   ],
   "sends_telemetry_event": true
