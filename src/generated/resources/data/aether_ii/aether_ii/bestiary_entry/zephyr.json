@@ -2,6 +2,14 @@
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.zephyr",
   "entity_type": "aether_ii:zephyr",
   "icon_discovered": "aether_ii:guidebook/bestiary/zephyr",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:cold_aercloud",
+      "max_count": 2,
+      "min_count": 0
+    }
+  ],
   "observation_advancement": "aether_ii:bestiary/observe_zephyr",
   "understanding_advancement": "aether_ii:bestiary/understand_zephyr"
 }

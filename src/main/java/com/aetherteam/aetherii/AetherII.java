@@ -116,7 +116,6 @@ public class AetherII {
         this.eventSetup(bus);
 
         AetherIIBlocks.registerWoodTypes(); // Registered this early to avoid bugs with WoodTypes and signs.
-        AetherIIBestiaryEntries.constructMaps();
 
         mod.registerConfig(ModConfig.Type.SERVER, AetherIIConfig.SERVER_SPEC);
         mod.registerConfig(ModConfig.Type.COMMON, AetherIIConfig.COMMON_SPEC);

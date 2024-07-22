@@ -3,6 +3,14 @@
   "entity_type": "aether_ii:moa",
   "food": "aether_ii:moa_food",
   "icon_discovered": "aether_ii:guidebook/bestiary/moa",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "minecraft:feather",
+      "max_count": 2,
+      "min_count": 0
+    }
+  ],
   "observation_advancement": "aether_ii:bestiary/observe_moa",
   "understanding_advancement": "aether_ii:bestiary/understand_moa"
 }

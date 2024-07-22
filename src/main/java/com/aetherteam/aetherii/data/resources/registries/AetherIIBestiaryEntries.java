@@ -15,8 +15,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AetherIIBestiaryEntries {
@@ -42,57 +46,65 @@ public class AetherIIBestiaryEntries {
     public static final ResourceKey<BestiaryEntry> TEMPEST = createKey("tempest");
     public static final ResourceKey<BestiaryEntry> COCKATRICE = createKey("cockatrice");
 
-    public static final Map<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> ENTITIES = new HashMap<>();
-    public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = new HashMap<>();
-    public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = new HashMap<>();
+    public static final Map<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> ENTITIES = Map.ofEntries(
+            Map.entry(FLYING_COW, AetherIIEntityTypes.FLYING_COW),
+            Map.entry(SHEEPUFF, AetherIIEntityTypes.SHEEPUFF),
+            Map.entry(PHYG, AetherIIEntityTypes.PHYG),
+            Map.entry(AERBUNNY, AetherIIEntityTypes.AERBUNNY),
+            Map.entry(HIGHFIELDS_TAEGORE, AetherIIEntityTypes.HIGHFIELDS_TAEGORE),
+            Map.entry(MAGNETIC_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE),
+            Map.entry(ARCTIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE),
+            Map.entry(HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.HIGHFIELDS_BURRUKAI),
+            Map.entry(MAGNETIC_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI),
+            Map.entry(ARCTIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI),
+            Map.entry(HIGHFIELDS_KIRRID, AetherIIEntityTypes.HIGHFIELDS_KIRRID),
+            Map.entry(MAGNETIC_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID),
+            Map.entry(ARCTIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID),
+            Map.entry(MOA, AetherIIEntityTypes.MOA),
+            Map.entry(SKYROOT_LIZARD, AetherIIEntityTypes.SKYROOT_LIZARD),
+            Map.entry(AECHOR_PLANT, AetherIIEntityTypes.AECHOR_PLANT),
+            Map.entry(ZEPHYR, AetherIIEntityTypes.ZEPHYR),
+            Map.entry(TEMPEST, AetherIIEntityTypes.TEMPEST),
+            Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE)
+    );
+    public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = Map.ofEntries(
+            Map.entry(AetherIIEntityTypes.FLYING_COW, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 2))),
+            Map.entry(AetherIIEntityTypes.SHEEPUFF, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 2), BestiaryEntry.LootDisplay.block(AetherIIBlocks.WHITE_CLOUDWOOL, 1.0, 1, 1))),
+            Map.entry(AetherIIEntityTypes.PHYG, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.RAW_TAEGORE_MEAT, 1.0, 1, 2))),
+            Map.entry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.RAW_TAEGORE_MEAT, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.TAEGORE_HIDE, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.MAGNETIC_TAEGORE, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.RAW_TAEGORE_MEAT, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.TAEGORE_HIDE, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.ARCTIC_TAEGORE, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.RAW_TAEGORE_MEAT, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.TAEGORE_HIDE, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_PELT, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.MAGNETIC_BURRUKAI, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_PELT, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.ARCTIC_BURRUKAI, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_PELT, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.HIGHFIELDS_KIRRID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CLOUDWOOL, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CLOUDWOOL, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.CLOUDWOOL, 1.0, 1, 3))),
+            Map.entry(AetherIIEntityTypes.MOA, List.of(BestiaryEntry.LootDisplay.item(Items.FEATHER.builtInRegistryHolder(), 1.0, 0, 2))),
+            Map.entry(AetherIIEntityTypes.AECHOR_PLANT, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.AECHOR_PETAL, 1.0, 1, 3), BestiaryEntry.LootDisplay.block(AetherIIBlocks.AECHOR_CUTTING, 1.0, 0, 1))),
+            Map.entry(AetherIIEntityTypes.ZEPHYR, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.COLD_AERCLOUD, 1.0, 0, 2))),
+            Map.entry(AetherIIEntityTypes.TEMPEST, List.of(BestiaryEntry.LootDisplay.block(AetherIIBlocks.STORM_AERCLOUD, 1.0, 1, 3), BestiaryEntry.LootDisplay.item(AetherIIItems.CHARGE_CORE, 1.0, 0, 1))),
+            Map.entry(AetherIIEntityTypes.COCKATRICE, List.of(BestiaryEntry.LootDisplay.item(Items.FEATHER.builtInRegistryHolder(), 1.0, 1, 3)))
+    );
+    public static final Map<Holder<EntityType<?>>, TagKey<Item>> FED = Map.ofEntries(
+            Map.entry(AetherIIEntityTypes.FLYING_COW, AetherIITags.Items.FLYING_COW_FOOD),
+            Map.entry(AetherIIEntityTypes.SHEEPUFF, AetherIITags.Items.SHEEPUFF_FOOD),
+            Map.entry(AetherIIEntityTypes.PHYG, AetherIITags.Items.PHYG_FOOD),
+            Map.entry(AetherIIEntityTypes.AERBUNNY, AetherIITags.Items.AERBUNNY_FOOD),
+            Map.entry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIITags.Items.TAEGORE_FOOD),
+            Map.entry(AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIITags.Items.TAEGORE_FOOD),
+            Map.entry(AetherIIEntityTypes.ARCTIC_TAEGORE, AetherIITags.Items.TAEGORE_FOOD),
+            Map.entry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIITags.Items.BURRUKAI_FOOD),
+            Map.entry(AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIITags.Items.BURRUKAI_FOOD),
+            Map.entry(AetherIIEntityTypes.ARCTIC_BURRUKAI, AetherIITags.Items.BURRUKAI_FOOD),
+            Map.entry(AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIITags.Items.KIRRID_FOOD),
+            Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
+            Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
+            Map.entry(AetherIIEntityTypes.MOA, AetherIITags.Items.MOA_FOOD)
+    );
 
     private static ResourceKey<BestiaryEntry> createKey(String name) {
         return ResourceKey.create(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
-    }
-
-    public static void constructMaps() {
-        ENTITIES.putAll(Map.ofEntries(
-                Map.entry(FLYING_COW, AetherIIEntityTypes.FLYING_COW),
-                Map.entry(SHEEPUFF, AetherIIEntityTypes.SHEEPUFF),
-                Map.entry(PHYG, AetherIIEntityTypes.PHYG),
-                Map.entry(AERBUNNY, AetherIIEntityTypes.AERBUNNY),
-                Map.entry(HIGHFIELDS_TAEGORE, AetherIIEntityTypes.HIGHFIELDS_TAEGORE),
-                Map.entry(MAGNETIC_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE),
-                Map.entry(ARCTIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE),
-                Map.entry(HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.HIGHFIELDS_BURRUKAI),
-                Map.entry(MAGNETIC_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI),
-                Map.entry(ARCTIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI),
-                Map.entry(HIGHFIELDS_KIRRID, AetherIIEntityTypes.HIGHFIELDS_KIRRID),
-                Map.entry(MAGNETIC_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID),
-                Map.entry(ARCTIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID),
-                Map.entry(MOA, AetherIIEntityTypes.MOA),
-                Map.entry(SKYROOT_LIZARD, AetherIIEntityTypes.SKYROOT_LIZARD),
-                Map.entry(AECHOR_PLANT, AetherIIEntityTypes.AECHOR_PLANT),
-                Map.entry(ZEPHYR, AetherIIEntityTypes.ZEPHYR),
-                Map.entry(TEMPEST, AetherIIEntityTypes.TEMPEST),
-                Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE)
-        ));
-        LOOT.putAll(Map.ofEntries(
-                Map.entry(AetherIIEntityTypes.FLYING_COW, List.of(new BestiaryEntry.LootDisplay(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 2))),
-                Map.entry(AetherIIEntityTypes.SHEEPUFF, List.of(new BestiaryEntry.LootDisplay(AetherIIItems.KIRRID_LOIN, 1.0, 1, 2), new BestiaryEntry.LootDisplay(AetherIIBlocks.WHITE_CLOUDWOOL.asItem().builtInRegistryHolder(), 1.0, 1, 2))),
-                Map.entry(AetherIIEntityTypes.PHYG, List.of(new BestiaryEntry.LootDisplay(AetherIIItems.RAW_TAEGORE_MEAT, 1.0, 1, 2)))
-        ));
-        FED.putAll(Map.ofEntries(
-                Map.entry(AetherIIEntityTypes.FLYING_COW, AetherIITags.Items.FLYING_COW_FOOD),
-                Map.entry(AetherIIEntityTypes.SHEEPUFF, AetherIITags.Items.SHEEPUFF_FOOD),
-                Map.entry(AetherIIEntityTypes.PHYG, AetherIITags.Items.PHYG_FOOD),
-                Map.entry(AetherIIEntityTypes.AERBUNNY, AetherIITags.Items.AERBUNNY_FOOD),
-                Map.entry(AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIITags.Items.TAEGORE_FOOD),
-                Map.entry(AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIITags.Items.TAEGORE_FOOD),
-                Map.entry(AetherIIEntityTypes.ARCTIC_TAEGORE, AetherIITags.Items.TAEGORE_FOOD),
-                Map.entry(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIITags.Items.BURRUKAI_FOOD),
-                Map.entry(AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIITags.Items.BURRUKAI_FOOD),
-                Map.entry(AetherIIEntityTypes.ARCTIC_BURRUKAI, AetherIITags.Items.BURRUKAI_FOOD),
-                Map.entry(AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIITags.Items.KIRRID_FOOD),
-                Map.entry(AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
-                Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
-                Map.entry(AetherIIEntityTypes.MOA, AetherIITags.Items.MOA_FOOD)
-        ));
     }
 
     public static void bootstrap(BootstrapContext<BestiaryEntry> context) {

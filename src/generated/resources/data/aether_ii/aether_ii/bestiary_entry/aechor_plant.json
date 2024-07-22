@@ -2,6 +2,20 @@
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.aechor_plant",
   "entity_type": "aether_ii:aechor_plant",
   "icon_discovered": "aether_ii:guidebook/bestiary/aechor_plant",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:aechor_petal",
+      "max_count": 3,
+      "min_count": 1
+    },
+    {
+      "chance": 1.0,
+      "item": "aether_ii:aechor_cutting",
+      "max_count": 1,
+      "min_count": 0
+    }
+  ],
   "observation_advancement": "aether_ii:bestiary/observe_aechor_plant",
   "understanding_advancement": "aether_ii:bestiary/understand_aechor_plant"
 }

@@ -1,7 +1,16 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.phyg",
   "entity_type": "aether_ii:phyg",
+  "food": "aether_ii:phyg_food",
   "icon_discovered": "aether_ii:guidebook/bestiary/phyg",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:raw_taegore_meat",
+      "max_count": 2,
+      "min_count": 1
+    }
+  ],
   "observation_advancement": "aether_ii:bestiary/observe_phyg",
   "understanding_advancement": "aether_ii:bestiary/understand_phyg"
 }

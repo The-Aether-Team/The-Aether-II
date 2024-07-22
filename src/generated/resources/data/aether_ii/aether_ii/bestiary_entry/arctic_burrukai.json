@@ -3,6 +3,20 @@
   "entity_type": "aether_ii:arctic_burrukai",
   "food": "aether_ii:burrukai_food",
   "icon_discovered": "aether_ii:guidebook/bestiary/arctic_burrukai",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:burrukai_rib_cut",
+      "max_count": 3,
+      "min_count": 1
+    },
+    {
+      "chance": 1.0,
+      "item": "aether_ii:burrukai_pelt",
+      "max_count": 3,
+      "min_count": 1
+    }
+  ],
   "observation_advancement": "aether_ii:bestiary/observe_arctic_burrukai",
   "understanding_advancement": "aether_ii:bestiary/understand_arctic_burrukai"
 }

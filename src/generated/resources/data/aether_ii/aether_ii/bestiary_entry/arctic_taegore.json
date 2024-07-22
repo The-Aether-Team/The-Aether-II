@@ -3,6 +3,20 @@
   "entity_type": "aether_ii:arctic_taegore",
   "food": "aether_ii:taegore_food",
   "icon_discovered": "aether_ii:guidebook/bestiary/arctic_taegore",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:raw_taegore_meat",
+      "max_count": 3,
+      "min_count": 1
+    },
+    {
+      "chance": 1.0,
+      "item": "aether_ii:taegore_hide",
+      "max_count": 3,
+      "min_count": 1
+    }
+  ],
   "observation_advancement": "aether_ii:bestiary/observe_arctic_taegore",
   "understanding_advancement": "aether_ii:bestiary/understand_arctic_taegore"
 }
