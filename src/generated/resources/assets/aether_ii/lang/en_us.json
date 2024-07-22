@@ -405,6 +405,8 @@
   "gui.aether_ii.guidebook.status.mount.title": "Mount",
   "gui.aether_ii.guidebook.status.title": "Status",
   "gui.aether_ii.recipebook.toggleRecipes.enchantable": "Showing Enchantable",
+  "gui.aether_ii.toast.guidebook.bestiary": "New Bestiary Entries!",
+  "gui.aether_ii.toast.guidebook.description": "Check your guidebook",
   "item.aether_ii.aechor_petal": "Aechor Petal",
   "item.aether_ii.aechor_plant_spawn_egg": "Aechor Plant Spawn Egg",
   "item.aether_ii.aerbunny_spawn_egg": "Aerbunny Spawn Egg",

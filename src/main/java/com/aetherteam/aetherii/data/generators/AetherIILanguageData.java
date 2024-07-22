@@ -782,6 +782,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.discovery.bestiary.stat.damage_none", "Standard Damage from %s Attacks");
         this.addGuiText("guidebook.discovery.bestiary.info.eats", "Eats:");
         this.addGuiText("guidebook.discovery.bestiary.info.drops", "Drops:");
+        this.addGuiText("toast.guidebook.bestiary", "New Bestiary Entries!");
+        this.addGuiText("toast.guidebook.description", "Check your guidebook");
 
         // Bestiary
         this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");

@@ -1,9 +1,10 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
+import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
+import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.UpdateGuidebookDiscoveryPacket;
-import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancements.AdvancementHolder;
@@ -69,7 +70,7 @@ public class GuidebookDiscoveryAttachment {
     public void trackDiscoveries(Player player, AdvancementHolder advancement) {
         if (player instanceof ServerPlayer serverPlayer) {
             RegistryAccess registryAccess = serverPlayer.registryAccess();
-            this.trackBestiaryEntries(registryAccess, advancement);
+            this.trackBestiaryEntries(serverPlayer, registryAccess, advancement);
             if (this.sync) {
                 PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
                 this.sync = false;
@@ -77,7 +78,7 @@ public class GuidebookDiscoveryAttachment {
         }
     }
 
-    private void trackBestiaryEntries(RegistryAccess registryAccess, AdvancementHolder advancement) { //todo toasts
+    private void trackBestiaryEntries(ServerPlayer serverPlayer, RegistryAccess registryAccess, AdvancementHolder advancement) {
         Registry<BestiaryEntry> bestiaryEntries = registryAccess.registryOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
         for (Holder.Reference<BestiaryEntry> entry : bestiaryEntries.holders().toList()) {
             if (advancement.id().equals(entry.value().observationAdvancement())) {
@@ -88,6 +89,9 @@ public class GuidebookDiscoveryAttachment {
                 this.understoodBestiaryEntries.add(entry);
                 this.sync = true;
             }
+        }
+        if (this.sync) {
+            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Icons.BESTIARY, "gui.aether_ii.toast.guidebook.bestiary", "gui.aether_ii.toast.guidebook.description"));
         }
     }
 
