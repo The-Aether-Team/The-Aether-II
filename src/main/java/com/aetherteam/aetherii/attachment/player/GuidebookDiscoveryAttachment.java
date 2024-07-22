@@ -60,6 +60,10 @@ public class GuidebookDiscoveryAttachment {
         this.shouldSyncAfterJoin = true;
     }
 
+    public void onClone(Player player) {
+        this.shouldSyncAfterJoin = true;
+    }
+
     public void onUpdate(Player player) {
         this.syncAfterJoin(player);
     }

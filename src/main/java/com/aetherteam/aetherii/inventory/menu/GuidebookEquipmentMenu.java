@@ -55,7 +55,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         for (int k = 0; k < 4; k++) {
             EquipmentSlot equipmentslot = SLOT_IDS[k];
             ResourceLocation resourcelocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
-            this.addSlot(new ArmorSlot(playerInventory, owner, equipmentslot, 39 - k, 28, 38 + k * 18, resourcelocation));
+            this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 39 - k, 28, 38 + k * 18, resourcelocation));
         }
 
         for (int l = 0; l < 3; l++) {
@@ -71,7 +71,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(playerInventory, 40, 28, 112) {
             @Override
             public void setByPlayer(ItemStack p_270969_, ItemStack p_299918_) {
-                owner.onEquipItem(EquipmentSlot.OFFHAND, p_299918_, p_270969_);
+                GuidebookEquipmentMenu.this.owner.onEquipItem(EquipmentSlot.OFFHAND, p_299918_, p_270969_);
                 super.setByPlayer(p_270969_, p_299918_);
             }
 

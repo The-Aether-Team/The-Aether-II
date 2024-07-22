@@ -11,6 +11,11 @@ public class GuidebookDiscoveryHooks {
         attachment.onLogin(player);
     }
 
+    public static void onPlayerClone(Player player) {
+        GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+        attachment.onClone(player);
+    }
+
     public static void onUpdate(Player player) {
         GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
         attachment.onUpdate(player);

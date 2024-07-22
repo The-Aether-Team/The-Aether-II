@@ -11,6 +11,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 public class GuidebookDiscoveryListener {
     public static void listen(IEventBus bus) {
         bus.addListener(GuidebookDiscoveryListener::onPlayerLogin);
+        bus.addListener(GuidebookDiscoveryListener::onPlayerClone);
         bus.addListener(GuidebookDiscoveryListener::onPlayerUpdate);
         bus.addListener(GuidebookDiscoveryListener::progressAdvancement);
     }
@@ -19,6 +20,12 @@ public class GuidebookDiscoveryListener {
         Player player = event.getEntity();
         GuidebookDiscoveryHooks.onPlayerLogin(player);
     }
+
+    public static void onPlayerClone(PlayerEvent.Clone event) {
+        Player player = event.getEntity();
+        GuidebookDiscoveryHooks.onPlayerClone(player);
+    }
+
     public static void onPlayerUpdate(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         GuidebookDiscoveryHooks.onUpdate(player);
