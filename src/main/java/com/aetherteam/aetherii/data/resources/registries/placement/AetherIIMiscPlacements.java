@@ -86,7 +86,7 @@ public class AetherIIMiscPlacements {
                 BiomeFilter.biome()
         );
         AetherIIPlacementUtils.register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(AetherIIMiscFeatures.ARCTIC_ICE_SPIKE),
-                NoiseBasedCountPlacement.of(12, 200.0, 0.0),
+                NoiseBasedCountPlacement.of(10, 200.0, 0.0),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(224)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())), //todo

@@ -5,7 +5,7 @@
       "type": "minecraft:noise_based_count",
       "noise_factor": 200.0,
       "noise_offset": 0.0,
-      "noise_to_count_ratio": 12
+      "noise_to_count_ratio": 10
     },
     {
       "type": "minecraft:in_square"
