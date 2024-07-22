@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.client.event.listeners.ClientTooltipsListener;
 import com.aetherteam.aetherii.client.event.listeners.PlayerRespawnClientListeners;
 import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
@@ -45,6 +46,7 @@ public class AetherIIClient {
         PlayerRespawnClientListeners.listen(bus);
         GuiExtensionListener.listen(bus);
         MusicListener.listen(bus);
+        ClientTooltipsListener.listen(bus);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
@@ -58,6 +60,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
         neoBus.addListener(AetherIIShaders::registerShaders);
         neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
+        neoBus.addListener(AetherIIClientTooltips::registerClientTooltipComponents);
     }
 
     public static void registerItemModelProperties() {

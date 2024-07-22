@@ -111,7 +111,6 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                 input.set(AetherIIDataComponents.CHARMS, new ArrayList<>(List.of(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY)));
             }
         }
-        AetherII.LOGGER.info(String.valueOf(input));
     }
 
     @Override
