@@ -77,6 +77,10 @@ public abstract class DiscoverySection<T> {
         return this.selectedEntry;
     }
 
+    public boolean areAnyUnchecked() {
+        return false;
+    }
+
     public ResourceLocation getRightPageTexture() {
         return GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION;
     }

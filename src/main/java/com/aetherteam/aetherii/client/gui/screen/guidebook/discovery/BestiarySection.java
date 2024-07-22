@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.network.packet.serverbound.CheckGuidebookEntryPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -31,6 +32,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.compress.utils.Lists;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -148,6 +150,11 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
             if (isHovered || isSelected) {
                 guiGraphics.fillGradient(RenderType.guiOverlay(), slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433, 0);
             }
+
+            if (this.isUnchecked(entry)) {
+                guiGraphics.blitSprite(Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
+            }
+
             i++;
         }
         this.renderScrollbar(guiGraphics);
@@ -366,6 +373,9 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
         BestiaryEntry entry = this.getEntryFromSlot(mouseX, mouseY);
         if (entry != null && (this.isObserved(entry) || this.isUnderstood(entry)) && (this.getSelectedEntry() == null || (entry.entityType().value() != this.getSelectedEntry().entityType().value()))) {
             this.selectedEntry = entry;
+            if (this.isUnchecked(entry)) {
+                this.setChecked(entry);
+            }
             this.currentFoods.clear();
             return true;
         }
@@ -455,6 +465,34 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
         if (player != null) {
             GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
             return attachment.getUnderstoodBestiaryEntries().stream().map((holder) -> holder.value().entityType()).anyMatch((e) -> e.value() == entry.entityType().value());
+        }
+        return false;
+    }
+
+    private boolean isUnchecked(BestiaryEntry entry) {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            return attachment.getUncheckedBestiaryEntries().stream().map((holder) -> holder.value().entityType()).anyMatch((e) -> e.value() == entry.entityType().value());
+        }
+        return false;
+    }
+
+    private void setChecked(BestiaryEntry entry) {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            attachment.getUncheckedBestiaryEntries().removeIf((holder) -> holder.value().entityType().value() == entry.entityType().value());
+            PacketDistributor.sendToServer(new CheckGuidebookEntryPacket(entry.entityType().value()));
+        }
+    }
+
+    @Override
+    public boolean areAnyUnchecked() {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            return !attachment.getUncheckedBestiaryEntries().isEmpty();
         }
         return false;
     }

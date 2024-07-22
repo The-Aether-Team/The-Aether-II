@@ -24,12 +24,14 @@ import java.util.List;
 public class GuidebookDiscoveryAttachment {
     private List<Holder<BestiaryEntry>> observedBestiaryEntries;
     private List<Holder<BestiaryEntry>> understoodBestiaryEntries;
+    private List<Holder<BestiaryEntry>> uncheckedBestiaryEntries;
     private boolean shouldSyncAfterJoin = false;
     private boolean sync = false;
 
     public static final Codec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("observed_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getObservedBestiaryEntries),
-            BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("understood_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getUnderstoodBestiaryEntries)
+            BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("understood_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getUnderstoodBestiaryEntries),
+            BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("unchecked_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getUncheckedBestiaryEntries)
     ).apply(instance, GuidebookDiscoveryAttachment::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookDiscoveryAttachment> STREAM_CODEC = StreamCodec.composite(
@@ -37,17 +39,21 @@ public class GuidebookDiscoveryAttachment {
             GuidebookDiscoveryAttachment::getObservedBestiaryEntries,
             BestiaryEntry.STREAM_CODEC.apply(ByteBufCodecs.list()),
             GuidebookDiscoveryAttachment::getUnderstoodBestiaryEntries,
+            BestiaryEntry.STREAM_CODEC.apply(ByteBufCodecs.list()),
+            GuidebookDiscoveryAttachment::getUncheckedBestiaryEntries,
             GuidebookDiscoveryAttachment::new
     );
 
-    public GuidebookDiscoveryAttachment(List<Holder<BestiaryEntry>> observedBestiaryEntries, List<Holder<BestiaryEntry>> understoodBestiaryEntries) {
+    public GuidebookDiscoveryAttachment(List<Holder<BestiaryEntry>> observedBestiaryEntries, List<Holder<BestiaryEntry>> understoodBestiaryEntries, List<Holder<BestiaryEntry>> uncheckedBestiaryEntries) {
         this.observedBestiaryEntries = new ArrayList<>(observedBestiaryEntries);
         this.understoodBestiaryEntries = new ArrayList<>(understoodBestiaryEntries);
+        this.uncheckedBestiaryEntries = new ArrayList<>(uncheckedBestiaryEntries);
     }
 
     public GuidebookDiscoveryAttachment() {
         this.observedBestiaryEntries = new ArrayList<>();
         this.understoodBestiaryEntries = new ArrayList<>();
+        this.uncheckedBestiaryEntries = new ArrayList<>();
     }
 
     public void onLogin(Player player) {
@@ -83,10 +89,12 @@ public class GuidebookDiscoveryAttachment {
         for (Holder.Reference<BestiaryEntry> entry : bestiaryEntries.holders().toList()) {
             if (advancement.id().equals(entry.value().observationAdvancement())) {
                 this.observedBestiaryEntries.add(entry);
+                this.uncheckedBestiaryEntries.add(entry);
                 this.sync = true;
             }
             if (advancement.id().equals(entry.value().understandingAdvancement())) {
                 this.understoodBestiaryEntries.add(entry);
+                this.uncheckedBestiaryEntries.add(entry);
                 this.sync = true;
             }
         }
@@ -103,8 +111,13 @@ public class GuidebookDiscoveryAttachment {
         return this.understoodBestiaryEntries;
     }
 
+    public List<Holder<BestiaryEntry>> getUncheckedBestiaryEntries() {
+        return this.uncheckedBestiaryEntries;
+    }
+
     public void syncAttachment(GuidebookDiscoveryAttachment other) {
         this.observedBestiaryEntries = other.observedBestiaryEntries;
         this.understoodBestiaryEntries = other.understoodBestiaryEntries;
+        this.uncheckedBestiaryEntries = other.uncheckedBestiaryEntries;
     }
 }

@@ -16,7 +16,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.util.function.BiFunction;
 
-public interface Guidebook {
+public interface Guidebook { //todo uh oh guidebook client status seems to be able to persist between worlds and isnt cleared properly on world exit/world switch
     WidgetSprites EQUIPMENT_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment_tab_selected"));
     WidgetSprites STATUS_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/status_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/status_tab_selected"));
     WidgetSprites DISCOVERY_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/discovery_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/discovery_tab_selected"));
@@ -25,6 +25,7 @@ public interface Guidebook {
     WidgetSprites SCROLLER = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/scroller_selected"));
     ResourceLocation GUIDEBOOK_BACKING_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/guidebook_backing.png");
     ResourceLocation SLOT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/slot");
+    ResourceLocation EXCLAMATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/exclamation");
     ResourceLocation HEARTS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/hearts");
     ResourceLocation ARMOR_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/armor");
     int BACKING_WIDTH = 375;

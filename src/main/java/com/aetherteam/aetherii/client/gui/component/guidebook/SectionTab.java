@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.gui.component.guidebook;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.DiscoverySection;
 import net.minecraft.client.gui.GuiGraphics;
@@ -32,6 +33,9 @@ public class SectionTab extends ImageButton {
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
         guiGraphics.blitSprite(this.icon, this.getX() + 10, this.getY() + 2, 22, 16);
+        if (this.section.areAnyUnchecked()) {
+            guiGraphics.blitSprite(Guidebook.EXCLAMATION, this.getX() + 5, this.getY() + 3, 3, 8);
+        }
     }
 
     @Override
