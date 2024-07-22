@@ -251,20 +251,256 @@
         }
       },
       {
-        "type": "aether_ii:noise_palette_3d",
-        "blockstates": [
-          {
-            "Name": "minecraft:redstone_block"
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:flourishing_field"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
           },
-          {
-            "Name": "minecraft:emerald_block"
+          "backing_ratio": 5,
+          "noise_frequency": 0.045,
+          "spot_blockstate": {
+            "Name": "aether_ii:mossy_holystone"
           },
-          {
-            "Name": "minecraft:gold_block"
-          }
-        ],
-        "noise": "minecraft:surface",
-        "noise_frequency": 0.5
+          "spot_ratio": 2
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:verdant_woods"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.045,
+          "spot_blockstate": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "spot_ratio": 2
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:shrouded_forest"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.045,
+          "spot_blockstate": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "spot_ratio": 2
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:shimmering_basin"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.045,
+          "spot_blockstate": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "spot_ratio": 2
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:frigid_sierra"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.075,
+          "spot_blockstate": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "spot_ratio": 2
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:enduring_woodland"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.075,
+          "spot_blockstate": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "spot_ratio": 2
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:frozen_lakes"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.075,
+          "spot_blockstate": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "spot_ratio": 2
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:sheer_tundra"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.075,
+          "spot_blockstate": {
+            "Name": "aether_ii:arctic_packed_ice"
+          },
+          "spot_ratio": 2
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:magnetic_scar"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.05,
+          "spot_blockstate": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "spot_ratio": 3
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:turquoise_forest"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.05,
+          "spot_blockstate": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "spot_ratio": 3
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:glistening_swamp"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.05,
+          "spot_blockstate": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "spot_ratio": 3
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:violet_highwoods"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 5,
+          "noise_frequency": 0.05,
+          "spot_blockstate": {
+            "Name": "aether_ii:ferrosite"
+          },
+          "spot_ratio": 3
+        }
       }
     ]
   }
