@@ -78,9 +78,9 @@ public class AetherIIMiscPlacements {
         );
 
         AetherIIPlacementUtils.register(context, COASTAL_ARCTIC_ICE_SPIKE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.ARCTIC_ICE_SPIKE),
-                RarityFilter.onAverageOnceEvery(2),
+                CountPlacement.of(2),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(144)),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(136)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())), //todo
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome()
