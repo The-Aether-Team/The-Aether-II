@@ -43,6 +43,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE = AetherIIFeatureUtils.registerKey("noise_lake");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_ARCTIC = AetherIIFeatureUtils.registerKey("noise_lake_arctic");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR = AetherIIFeatureUtils.registerKey("ferrosite_pillar");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_ICE_SPIKE = AetherIIFeatureUtils.registerKey("arctic_ice_spike");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_WATER_LAKE = AetherIIFeatureUtils.registerKey("aether_water_lake");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_WATER_SPRING = AetherIIFeatureUtils.registerKey("aether_water_spring");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = AetherIIFeatureUtils.registerKey("skyroot_twigs");
@@ -147,7 +148,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 new NoiseProvider(
                         200L,
                         new NormalNoise.NoiseParameters(0, 1.0),
-                        0.0633F,
+                        0.064F,
                         List.of(
                                 AetherIIBlocks.FERROSITE.get().defaultBlockState(),
                                 AetherIIBlocks.FERROSITE.get().defaultBlockState(),
@@ -159,6 +160,24 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 32,
                 16,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+        ));
+
+        AetherIIFeatureUtils.register(context, ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
+                new NoiseProvider(
+                        300L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.001F,
+                        List.of(
+                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
+                        )
+                ),
+                5.25F,
+                2,
+                7.5F,
+                7,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
         ));
 
         AetherIIFeatureUtils.register(context, AETHER_WATER_LAKE, AetherIIFeatures.LAKE.get(),
