@@ -28,25 +28,24 @@ public class ArcticIceSpikeFeature extends Feature<ArcticIceSpikeConfiguration> 
         if (random.nextBoolean()) {
             if (random.nextBoolean()) {
                 for (int i = (int) radius; i > 0; --i) {
-                    BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos((int) (pos.getX() + i / slopeIntensity), (int) (pos.getY() - i + radius), (int) (pos.getZ() + i / slopeIntensity)), (float) i / 2, random, false);
+                    BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos((int) ((pos.getX() + i / slopeIntensity) - radius / 2), (int) (pos.getY() - i + radius), (int) ((pos.getZ() + i / slopeIntensity) - radius / 2)), (float) i / 2, random, false);
                 }
             } else {
                 for (int i = (int) radius; i > 0; --i) {
-                    BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos((int) (pos.getX() - i / slopeIntensity), (int) (pos.getY() - i + radius), (int) (pos.getZ() + i / slopeIntensity)), (float) i / 2, random, false);
+                    BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos((int) ((pos.getX() - i / slopeIntensity) + radius / 2), (int) (pos.getY() - i + radius), (int) ((pos.getZ() + i / slopeIntensity) - radius / 2)), (float) i / 2, random, false);
                 }
             }
         } else {
             if (random.nextBoolean()) {
                 for (int i = (int) radius; i > 0; --i) {
-                    BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos((int) (pos.getX() - i / slopeIntensity), (int) (pos.getY() - i + radius), (int) (pos.getZ() - i / slopeIntensity)), (float) i / 2, random, false);
+                    BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos((int) ((pos.getX() - i / slopeIntensity) + radius / 2), (int) (pos.getY() - i + radius), (int) ((pos.getZ() - i / slopeIntensity) + radius / 2)), (float) i / 2, random, false);
                 }
             } else {
                 for (int i = (int) radius; i > 0; --i) {
-                    BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos((int) (pos.getX() - i / slopeIntensity), (int) (pos.getY() - i + radius), (int) (pos.getZ() + i / slopeIntensity)), (float) i / 2, random, false);
+                    BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos((int) ((pos.getX() - i / slopeIntensity) + radius / 2), (int) (pos.getY() - i + radius), (int) ((pos.getZ() + i / slopeIntensity) - radius / 2)), (float) i / 2, random, false);
                 }
             }
         }
-        BlockPlacementUtil.placeDisk(level, config.block(), pos.below(), radius / 3, random, false);
         return true;
     }
 }
