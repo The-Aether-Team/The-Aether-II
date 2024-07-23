@@ -2,6 +2,10 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.gui.component.guidebook.SectionTab;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.BestiarySection;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.DiscoverySection;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.EffectsSection;
+import com.aetherteam.aetherii.client.gui.screen.guidebook.discovery.ExplorationSection;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
@@ -15,23 +19,34 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
-    ResourceLocation GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_left.png");
-    ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_general.png");
-    ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
-    ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_EFFECTS_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_effects.png");
+    private static final ResourceLocation GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_left.png");
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
-    protected int leftTitleLabelX;
-    protected int leftTitleLabelY;
-    protected DiscoverySectionTab currentSectionTab = DiscoverySectionTab.BESTIARY;
+    private final BestiarySection bestiarySection;
+    private final EffectsSection effectsSection;
+    private final ExplorationSection explorationSection;
+    protected int titleLabelX;
+    protected int titleLabelY;
+    protected DiscoverySection<?> currentSection;
 
     protected GuidebookDiscoveryScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(title);
         this.equipmentMenu = menu;
         this.playerInventory = playerInventory;
-        this.leftTitleLabelX = -25;
-        this.leftTitleLabelY = 7;
+        this.bestiarySection = new BestiarySection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.title"));
+        this.effectsSection = new EffectsSection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.effects.title"));
+        this.explorationSection = new ExplorationSection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.exploration.title"));
+
+        this.titleLabelX = 88;
+        this.titleLabelY = 13;
+        this.currentSection = this.bestiarySection;
+    }
+
+    public void initDiscovery() {
+        this.clearWidgets();
+        this.clearFocus();
+        this.init();
     }
 
     @Override
@@ -39,13 +54,15 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         super.init();
         this.initTabs(this);
 
-        int x = ((this.width - Guidebook.PAGE_WIDTH) / 2) - 64;
+        int x = ((this.width) / 2) - Guidebook.PAGE_WIDTH + 24;
         int y = (this.height / 2) - 72;
-        this.addRenderableWidget(new SectionTab(this, DiscoverySectionTab.BESTIARY, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary")));
+        this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary")));
         x += 43;
-        this.addRenderableWidget(new SectionTab(this, DiscoverySectionTab.EFFECTS, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects")));
+        this.addRenderableWidget(new SectionTab(this, this.effectsSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_effects")));
         x += 43;
-        this.addRenderableWidget(new SectionTab(this, DiscoverySectionTab.EXPLORATION, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration")));
+        this.addRenderableWidget(new SectionTab(this, this.explorationSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration")));
+
+        this.currentSection.initSection();
     }
 
     @Override
@@ -56,11 +73,22 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     @Override
+    public void renderGuidebookBacking(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        Guidebook.super.renderGuidebookBacking(screen, guiGraphics, mouseX, mouseY, partialTick);
+        this.currentSection.renderBg(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
     public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int x = (this.width - Guidebook.PAGE_WIDTH) / 2;
-        int y = (this.height - Guidebook.PAGE_HEIGHT) / 2;
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawString(this.font, this.title, x + this.leftTitleLabelX, y + this.leftTitleLabelY, 16777215, true);
+        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
+        this.currentSection.renderEntries(guiGraphics, mouseX, mouseY, partialTick);
+    }
+
+    @Override
+    public void renderGuidebookRightPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        Guidebook.super.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
+        this.currentSection.renderInformation(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Override
@@ -80,18 +108,33 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     }
 
     @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+        return this.currentSection.mouseDragged(mouseX, mouseY, button, dragX, dragY, super.mouseDragged(mouseX, mouseY, button, dragX, dragY));
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        return this.currentSection.mouseScrolled(mouseX, mouseY, scrollX, scrollY, true);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        return this.currentSection.mouseClicked(mouseX, mouseY, button, super.mouseClicked(mouseX, mouseY, button));
+    }
+
+    @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        return this.currentSection.mouseReleased(mouseX, mouseY, button, super.mouseReleased(mouseX, mouseY, button));
+    }
+
+    @Override
     public ResourceLocation getLeftPageTexture() {
         return GUIDEBOOK_DISCOVERY_LEFT_PAGE_LOCATION;
     }
 
     @Override
     public ResourceLocation getRightPageTexture() {
-        if (this.currentSectionTab == DiscoverySectionTab.BESTIARY) {
-            return GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION;
-        } else if (this.currentSectionTab == DiscoverySectionTab.EFFECTS) {
-            return GUIDEBOOK_DISCOVERY_RIGHT_PAGE_EFFECTS_LOCATION;
-        }
-        return GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION;
+        return this.getCurrentSection().getRightPageTexture();
     }
 
     @Override
@@ -109,22 +152,16 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         return false;
     }
 
-    public void setCurrentSectionTab(DiscoverySectionTab currentSectionTab) {
-        this.currentSectionTab = currentSectionTab;
+    public void setCurrentSectionTab(DiscoverySection<?> currentSection) {
+        this.currentSection = currentSection;
     }
 
-    public DiscoverySectionTab getCurrentSectionTab() {
-        return this.currentSectionTab;
+    public DiscoverySection<?> getCurrentSection() {
+        return this.currentSection;
     }
 
     @Override
     public <T extends GuiEventListener & Renderable & NarratableEntry> T addRenderableWidget(Screen screen, T widget) {
         return this.addRenderableWidget(widget);
-    }
-
-    public enum DiscoverySectionTab {
-        BESTIARY,
-        EFFECTS,
-        EXPLORATION;
     }
 }

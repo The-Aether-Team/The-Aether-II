@@ -14,20 +14,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class GuidebookRewardsScreen extends Screen implements Guidebook {
-    ResourceLocation GUIDEBOOK_REWARDS_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/rewards/guidebook_rewards_left.png");
-    ResourceLocation GUIDEBOOK_REWARDS_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/rewards/guidebook_rewards_right.png");
+    private static final ResourceLocation GUIDEBOOK_REWARDS_LEFT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/rewards/guidebook_rewards_left.png");
+    private static final ResourceLocation GUIDEBOOK_REWARDS_RIGHT_PAGE_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/rewards/guidebook_rewards_right.png");
 
     private final GuidebookEquipmentMenu equipmentMenu;
     private final Inventory playerInventory;
-    protected int leftTitleLabelX;
-    protected int leftTitleLabelY;
+    protected int titleLabelX;
+    protected int titleLabelY;
 
     protected GuidebookRewardsScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(title);
         this.equipmentMenu = menu;
         this.playerInventory = playerInventory;
-        this.leftTitleLabelX = -16;
-        this.leftTitleLabelY = 7;
+        this.titleLabelX = 88;
+        this.titleLabelY = 13;
     }
 
     @Override
@@ -45,10 +45,8 @@ public class GuidebookRewardsScreen extends Screen implements Guidebook {
 
     @Override
     public void renderGuidebookLeftPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        int x = (this.width - Guidebook.PAGE_WIDTH) / 2;
-        int y = (this.height - Guidebook.PAGE_HEIGHT) / 2;
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
-        guiGraphics.drawString(this.font, this.title, x + this.leftTitleLabelX, y + this.leftTitleLabelY, 16777215, true);
+        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
     }
 
     @Override
