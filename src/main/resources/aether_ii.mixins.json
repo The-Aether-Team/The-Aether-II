@@ -10,6 +10,7 @@
     "common.ItemCooldownsMixin",
     "common.ItemStackMixin",
     "common.PlayerMixin",
+    "common.RandomStateMixin",
     "common.ServerLevelMixin",
     "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
