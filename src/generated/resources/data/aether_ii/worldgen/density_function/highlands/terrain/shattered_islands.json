@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": 0.1,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": 0.2,
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": -0.1,
+              "argument2": "aether_ii:highlands/terrain/base/base_3d_noise"
+            }
+          },
+          "argument2": "aether_ii:highlands/terrain/shattered/top_slide_shattered"
+        },
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:mul",
+            "argument1": -0.3,
+            "argument2": "aether_ii:highlands/terrain/shattered/factor_shattered"
+          },
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": 0.5,
+            "argument2": "aether_ii:highlands/amplification"
+          }
+        }
+      }
+    },
+    "argument2": "aether_ii:highlands/terrain/shattered/bottom_slide_shattered"
+  },
+  "argument2": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:mul",
+      "argument1": -0.3,
+      "argument2": "aether_ii:highlands/terrain/shattered/factor_shattered"
+    },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": 0.5,
+      "argument2": "aether_ii:highlands/amplification"
+    }
+  }
+}

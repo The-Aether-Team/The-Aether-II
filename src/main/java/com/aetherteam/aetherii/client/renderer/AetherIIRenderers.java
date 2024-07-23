@@ -4,10 +4,9 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.client.renderer.block.AmbientOcclusionLightModel;
-import com.aetherteam.aetherii.client.renderer.block.FastModel;
+import com.aetherteam.aetherii.client.renderer.block.model.baked.AmbientOcclusionLightModel;
+import com.aetherteam.aetherii.client.renderer.block.model.baked.FastModel;
 import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
-import com.aetherteam.aetherii.client.renderer.blockentity.OutpostCampfireRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
@@ -44,7 +43,6 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AETHER_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AETHER_HANGING_SIGN.get(), HangingSignRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MOA_EGG.get(), MoaEggRenderer::new);
-        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.OUTPOST_CAMPFIRE.get(), OutpostCampfireRenderer::new);
 
         // Entities
         // Passive
@@ -91,7 +89,6 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_FOOT, BedRenderer::createFootLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKYROOT_BED_HEAD, BedRenderer::createHeadLayer);
         event.registerLayerDefinition(AetherIIModelLayers.MOA_EGG, MoaEggModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.OUTPOST_CAMPFIRE, OutpostCampfireRenderer::createLayer);
 
         // Entities
         // Passive

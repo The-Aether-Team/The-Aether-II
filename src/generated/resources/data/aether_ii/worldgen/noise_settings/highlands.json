@@ -22,7 +22,7 @@
     "continents": "aether_ii:highlands/continents",
     "depth": "aether_ii:highlands/depth",
     "erosion": "aether_ii:highlands/erosion",
-    "final_density": "aether_ii:highlands/final_density",
+    "final_density": "aether_ii:highlands/terrain/final_islands",
     "fluid_level_floodedness": 0.0,
     "fluid_level_spread": 0.0,
     "initial_density_without_jaggedness": 0.0,

@@ -1,0 +1,50 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": -0.125,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:weird_scaled_sampler",
+          "input": "aether_ii:highlands/terrain/base/base_3d_noise",
+          "noise": "aether_ii:cave_thickness",
+          "rarity_value_mapper": "type_1"
+        },
+        "argument2": {
+          "type": "minecraft:y_clamped_gradient",
+          "from_value": 0.05,
+          "from_y": 16,
+          "to_value": 0.0,
+          "to_y": 32
+        }
+      }
+    },
+    "argument2": {
+      "type": "minecraft:weird_scaled_sampler",
+      "input": "aether_ii:highlands/terrain/base/base_3d_noise",
+      "noise": "aether_ii:caves",
+      "rarity_value_mapper": "type_2"
+    }
+  },
+  "argument2": {
+    "type": "minecraft:spline",
+    "spline": {
+      "coordinate": "minecraft:y",
+      "points": [
+        {
+          "derivative": 0.0,
+          "location": 96.0,
+          "value": 0.0
+        },
+        {
+          "derivative": 0.0,
+          "location": 112.0,
+          "value": 0.175
+        }
+      ]
+    }
+  }
+}

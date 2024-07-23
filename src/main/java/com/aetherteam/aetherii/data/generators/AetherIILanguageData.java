@@ -3,6 +3,9 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -725,6 +728,41 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
 
+        // Dimensions
+        this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
+
+
+        // Biomes
+        // Highfields
+        this.addBiome(AetherIIBiomes.FLOURISHING_FIELD, "Flourishing Field");
+        this.addBiome(AetherIIBiomes.VERDANT_WOODS, "Verdant Woods");
+        this.addBiome(AetherIIBiomes.SHROUDED_FOREST, "Shrouded Forest");
+        this.addBiome(AetherIIBiomes.SHIMMERING_BASIN, "Shimmering Basin");
+
+        // Magnetic
+        this.addBiome(AetherIIBiomes.MAGNETIC_SCAR, "Magnetic Scar");
+        this.addBiome(AetherIIBiomes.TURQUOISE_FOREST, "Turquoise Forest");
+        this.addBiome(AetherIIBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
+        this.addBiome(AetherIIBiomes.GLISTENING_SWAMP, "Glistening Swamp");
+
+        // Arctic
+        this.addBiome(AetherIIBiomes.FRIGID_SIERRA, "Frigid Sierra");
+        this.addBiome(AetherIIBiomes.ENDURING_WOODLAND, "Enduring Woodland");
+        this.addBiome(AetherIIBiomes.FROZEN_LAKES, "Frozen Lakes");
+        this.addBiome(AetherIIBiomes.SHEER_TUNDRA, "Sheer Tundra");
+
+        // Irradiated
+        this.addBiome(AetherIIBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
+        this.addBiome(AetherIIBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
+
+        // Aercloud Sea
+        this.addBiome(AetherIIBiomes.EXPANSE, "Expanse");
+
+
+        // Structures
+        this.addStructure(AetherIIStructures.OUTPOST, "Outpost");
+
+
         // Attributes
         this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");
         this.addAttribute(AetherIIAttributes.SWEEP_KNOCKBACK.get(), "Sweep Knockback");
@@ -764,6 +802,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // GUIs
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
+        this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
         this.addGuiText("guidebook.equipment.title", "Equipment");
@@ -807,6 +846,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
 
+
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
         this.addJukeboxSong("ascending_dawn", "Emile van Krieken - Ascending Dawn");
@@ -820,6 +860,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("slash", "§9Slash§r");
         this.addGeneric("impact", "§eImpact§r");
         this.addGeneric("pierce", "§cPierce§r");
+        this.addGeneric("message.campfire_added", "This Outpost Campfire is now a valid respawn option.");
+        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid Outpost Campfire.");
 
 
         // Subtitles

@@ -30,7 +30,7 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
     }
 
     private static NoiseRouter makeNoiseRouter(HolderGetter<DensityFunction> function) {
-        return createNoiseRouter(function, getFunction(function, AetherIIDensityFunctions.FINAL_DENSITY));
+        return createNoiseRouter(function, getFunction(function, AetherIIDensityFunctions.FINAL_ISLANDS));
     }
 
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> function, DensityFunction finalDensity) {

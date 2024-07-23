@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.providers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
+import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.furniture.MultiBlock;
 import com.aetherteam.aetherii.block.natural.*;
@@ -833,9 +834,16 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         simpleBlock(wallSignBlock, sign);
     }
 
-    public void multiBlock(MultiBlock block, Block particle, String location) {
-        ResourceLocation texture = this.texture(this.name(particle), location);
-        ModelFile model = this.models().getBuilder(this.name(block)).texture("particle", texture);
-        this.getVariantBuilder(block).forAllStates((state) -> ConfiguredModel.builder().modelFile(model).build());
+    public void campfire(Block block) {
+        ResourceLocation texture = this.texture(this.name(block), "furniture/");
+        ResourceLocation particleTexture = this.texture(this.name(AetherIIBlocks.HOLYSTONE_BRICKS.get()), "construction/");
+        this.getVariantBuilder(block).forAllStatesExcept((blockState) -> {
+            Direction partFacing = blockState.getValue(OutpostCampfireBlock.PART_FACING);
+            ModelFile model = this.models().withExistingParent(this.name(block) + "_" + partFacing.name().toLowerCase(), this.modLoc("template_" + this.name(block) + "_" + partFacing.name().toLowerCase()))
+                    .texture("texture", texture)
+                    .texture("particle", particleTexture)
+                    .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, OutpostCampfireBlock.LIT);
     }
 }

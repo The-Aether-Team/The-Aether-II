@@ -1,0 +1,74 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": "aether_ii:highlands/terrain/base/elevation",
+    "points": [
+      {
+        "derivative": 0.0,
+        "location": 0.4,
+        "value": {
+          "coordinate": "aether_ii:highlands/erosion",
+          "points": [
+            {
+              "derivative": 0.0,
+              "location": 0.45,
+              "value": {
+                "coordinate": "aether_ii:highlands/temperature",
+                "points": [
+                  {
+                    "derivative": 0.0,
+                    "location": 0.575,
+                    "value": {
+                      "coordinate": "aether_ii:highlands/continents",
+                      "points": [
+                        {
+                          "derivative": 0.0,
+                          "location": 0.15,
+                          "value": 1.0
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.225,
+                          "value": {
+                            "coordinate": "aether_ii:highlands/lakes/noise",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": 0.45,
+                                "value": 1.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.575,
+                                "value": 0.5
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.6,
+                    "value": 1.0
+                  }
+                ]
+              }
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.5,
+              "value": 1.0
+            }
+          ]
+        }
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.5,
+        "value": 1.0
+      }
+    ]
+  }
+}

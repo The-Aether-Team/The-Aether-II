@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.block.portal;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
@@ -58,18 +57,6 @@ public class AetherPortalBlock extends Block implements Portal {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity.canUsePortal(false)) {
             entity.setAsInsidePortal(this, pos);
-            if (entity.isOnPortalCooldown()) {
-                entity.setPortalCooldown();
-            } else {
-                if (entity.hasData(AetherIIDataAttachments.PORTAL_TELEPORTATION)) {
-                    var data = entity.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
-                    data.setInPortal(true);
-                    int waitTime = data.getPortalTimer();
-                    if (waitTime >= this.getLevelPortalTransitionTime(level, entity)) {
-                        data.setPortalTimer(0);
-                    }
-                }
-            }
         }
     }
 
