@@ -1,0 +1,32 @@
+{
+  "type": "aether_ii:arctic_ice_spike",
+  "config": {
+    "additional_radius": 3,
+    "additional_slope_intensity": 2,
+    "base_radius": 6.25,
+    "base_slope_intensity": 3.5,
+    "block": {
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": 0
+      },
+      "scale": 0.1,
+      "seed": 400,
+      "states": [
+        {
+          "Name": "aether_ii:arctic_packed_ice"
+        },
+        {
+          "Name": "aether_ii:arctic_ice"
+        }
+      ]
+    },
+    "valid_blocks": [
+      "aether_ii:aether_grass_block",
+      "aether_ii:arctic_snow_block"
+    ]
+  }
+}

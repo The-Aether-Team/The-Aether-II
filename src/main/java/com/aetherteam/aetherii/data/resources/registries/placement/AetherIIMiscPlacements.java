@@ -85,7 +85,7 @@ public class AetherIIMiscPlacements {
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome()
         );
-        AetherIIPlacementUtils.register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(AetherIIMiscFeatures.ARCTIC_ICE_SPIKE),
+        AetherIIPlacementUtils.register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(AetherIIMiscFeatures.ARCTIC_ICE_SPIKE_VARIANTS),
                 NoiseBasedCountPlacement.of(10, 200.0, 0.0),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(224)),
