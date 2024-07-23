@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_altar": {
+    "has_arkenium_forge": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_altar"
+      "has_arkenium_forge"
     ]
   ],
   "rewards": {

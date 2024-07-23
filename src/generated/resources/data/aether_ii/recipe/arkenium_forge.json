@@ -5,17 +5,14 @@
     "A": {
       "tag": "aether_ii:plates/arkenium"
     },
-    "C": {
-      "item": "aether_ii:corrobonite_crystal"
-    },
     "H": {
       "item": "aether_ii:holystone"
     }
   },
   "pattern": [
     "AAA",
-    " H ",
-    "HCH"
+    " A ",
+    "HHH"
   ],
   "result": {
     "count": 1,
