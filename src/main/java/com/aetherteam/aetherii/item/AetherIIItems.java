@@ -64,7 +64,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AetherII.MODID);
 
+    public static final Style TREASURE_NAME_COLOR = Style.EMPTY.withColor(12566527);
     public static final Style WEAPON_TOOLTIP_COLOR = Style.EMPTY.withColor(11393240);
+
+    public static final Rarity AETHER_II_TREASURE = Rarity.valueOf("AETHER_II_TREASURE");
 
     // Tools
     public static final DeferredItem<PickaxeItem> SKYROOT_PICKAXE = ITEMS.register("skyroot_pickaxe", SkyrootPickaxeItem::new);
@@ -185,7 +188,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> PURPLE_SWET_GEL = ITEMS.register("purple_swet_gel", () -> new SwetGelItem(new Item.Properties()));
     public static final DeferredItem<Item> GOLDEN_SWET_GEL = ITEMS.register("golden_swet_gel", () -> new SwetGelItem(new Item.Properties()));
     public static final DeferredItem<Item> WHITE_SWET_GEL = ITEMS.register("white_swet_gel", () -> new SwetGelItem(new Item.Properties()));
-    public static final DeferredItem<Item> CHARGE_CORE = ITEMS.register("charge_core", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> CHARGE_CORE = ITEMS.register("charge_core", () -> new Item(new Item.Properties().rarity(AETHER_II_TREASURE)));
 
     // Food
     public static final DeferredItem<Item> BLUEBERRY = ITEMS.register("blueberry", () -> new Item(new Item.Properties().food(AetherIIFoods.BLUEBERRY)));
