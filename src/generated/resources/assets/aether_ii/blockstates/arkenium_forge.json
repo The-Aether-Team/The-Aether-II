@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=east": {
+    "charged=false,facing=east": {
       "model": "aether_ii:block/arkenium_forge",
       "y": 90
     },
-    "facing=north": {
+    "charged=false,facing=north": {
       "model": "aether_ii:block/arkenium_forge"
     },
-    "facing=south": {
+    "charged=false,facing=south": {
       "model": "aether_ii:block/arkenium_forge",
       "y": 180
     },
-    "facing=west": {
+    "charged=false,facing=west": {
       "model": "aether_ii:block/arkenium_forge",
+      "y": 270
+    },
+    "charged=true,facing=east": {
+      "model": "aether_ii:block/arkenium_forge_charged",
+      "y": 90
+    },
+    "charged=true,facing=north": {
+      "model": "aether_ii:block/arkenium_forge_charged"
+    },
+    "charged=true,facing=south": {
+      "model": "aether_ii:block/arkenium_forge_charged",
+      "y": 180
+    },
+    "charged=true,facing=west": {
+      "model": "aether_ii:block/arkenium_forge_charged",
       "y": 270
     }
   }

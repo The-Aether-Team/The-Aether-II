@@ -794,12 +794,19 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void arkeniumForge(Block block) {
-        ModelFile model = models().withExistingParent(name(block), modLoc("block/template_arkenium_forge"))
-                .texture("forge", texture(name(block), "utility/"))
-                .texture("particle", texture(name(AetherIIBlocks.ARKENIUM_BLOCK.get()), "construction/"))
-                .renderType("cutout");
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
             Direction direction = state.getValue(ArkeniumForgeBlock.FACING);
+            boolean charged = state.getValue(ArkeniumForgeBlock.CHARGED);
+            ModelFile model = this.models().withExistingParent(this.name(block), modLoc("block/template_arkenium_forge"))
+                    .texture("forge", this.texture(name(block), "utility/"))
+                    .texture("particle", this.texture(name(AetherIIBlocks.ARKENIUM_BLOCK.get()), "construction/"))
+                    .renderType("cutout");
+            if (charged) {
+                model = this.models().withExistingParent(this.name(block) + "_charged", modLoc("block/template_arkenium_forge"))
+                        .texture("forge", this.texture(name(block) + "_charged", "utility/"))
+                        .texture("particle", this.texture(name(AetherIIBlocks.ARKENIUM_BLOCK.get()), "construction/"))
+                        .renderType("cutout");
+            }
             switch (direction) {
                 case NORTH -> {
                     return ConfiguredModel.builder().modelFile(model).build();

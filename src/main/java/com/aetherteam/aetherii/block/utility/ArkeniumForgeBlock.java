@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.utility;
 
+import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -11,8 +12,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -24,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 public class ArkeniumForgeBlock extends BaseEntityBlock {
     public static final MapCodec<ArkeniumForgeBlock> CODEC = simpleCodec(ArkeniumForgeBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty CHARGED = BooleanProperty.create("charged");
     protected static final VoxelShape CORNER_1 = Block.box(0.0, 0.0, 0.0, 3.0, 6.0, 3.0);
     protected static final VoxelShape CORNER_2 = Block.box(13.0, 0.0, 13.0, 16.0, 6.0, 16.0);
     protected static final VoxelShape CORNER_3 = Block.box(13.0, 0.0, 0.0, 16.0, 6.0, 3.0);
@@ -44,7 +49,7 @@ public class ArkeniumForgeBlock extends BaseEntityBlock {
 
     public ArkeniumForgeBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CHARGED, false));
     }
 
     @Override
@@ -61,6 +66,17 @@ public class ArkeniumForgeBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new ArkeniumForgeBlockEntity(pos, state);
+    }
+
+    @javax.annotation.Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return createTicker(level, blockEntityType, AetherIIBlockEntityTypes.ARKENIUM_FORGE.get());
+    }
+
+    @javax.annotation.Nullable
+    protected static <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> serverType, BlockEntityType<? extends ArkeniumForgeBlockEntity> clientType) {
+        return level.isClientSide() ? null : createTickerHelper(serverType, clientType, ArkeniumForgeBlockEntity::serverTick);
     }
 
     @Override
@@ -111,7 +127,7 @@ public class ArkeniumForgeBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING).add(CHARGED);
     }
 
     @Override

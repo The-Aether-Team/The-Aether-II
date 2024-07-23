@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.blockentity;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -44,6 +47,21 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registry) {
         super.saveAdditional(tag, registry);
         ContainerHelper.saveAllItems(tag, this.items, registry);
+    }
+
+    public static void serverTick(Level level, BlockPos pos, BlockState state, ArkeniumForgeBlockEntity blockEntity) {
+        boolean changed = false;
+        boolean isCharged = blockEntity.getItem(2).is(AetherIIItems.CORROBONITE_CRYSTAL);
+
+        if (state.getValue(ArkeniumForgeBlock.CHARGED) != isCharged) {
+            changed = true;
+            state = state.setValue(ArkeniumForgeBlock.CHARGED, isCharged);
+            level.setBlock(pos, state, 1 | 2);
+        }
+
+        if (changed) {
+            setChanged(level, pos, state);
+        }
     }
 
     @Override
