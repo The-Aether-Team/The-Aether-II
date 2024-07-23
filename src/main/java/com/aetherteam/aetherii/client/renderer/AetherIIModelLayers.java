@@ -8,13 +8,18 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_BED_FOOT = register("skyroot_bed_foot");
     public static final ModelLayerLocation SKYROOT_BED_HEAD = register("skyroot_bed_head");
     public static final ModelLayerLocation MOA_EGG = register("moa_egg");
-    public static final ModelLayerLocation OUTPOST_CAMPFIRE = register("outpost_campfire");
 
     public static final ModelLayerLocation PHYG = register("phyg");
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");
     public static final ModelLayerLocation AERBUNNY_COLLAR = register("aerbunny", "collar");
     public static final ModelLayerLocation FLYING_COW = register("flying_cow");
     public static final ModelLayerLocation SHEEPUFF = register("sheepuff");
+    public static final ModelLayerLocation HIGHFIELDS_TAEGORE = register("highfields_taegore");
+    public static final ModelLayerLocation HIGHFIELDS_TAEGORE_BABY = register("highfields_taegore_baby");
+    public static final ModelLayerLocation MAGNETIC_TAEGORE = register("magnetic_taegore");
+    public static final ModelLayerLocation MAGNETIC_TAEGORE_BABY = register("magnetic_taegore_baby");
+    public static final ModelLayerLocation ARCTIC_TAEGORE = register("arctic_taegore");
+    public static final ModelLayerLocation ARCTIC_TAEGORE_BABY = register("arctic_taegore_baby");
     public static final ModelLayerLocation HIGHFIELDS_BURRUKAI = register("highfields_burrukai");
     public static final ModelLayerLocation HIGHFIELDS_BURRUKAI_BABY = register("highfields_burrukai_baby");
     public static final ModelLayerLocation MAGNETIC_BURRUKAI = register("magnetic_burrukai");
@@ -29,6 +34,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation ARCTIC_KIRRID_BABY = register("arctic_kirrid_baby");
     public static final ModelLayerLocation MOA = register("moa");
     public static final ModelLayerLocation MOA_BABY = register("moa_baby");
+    public static final ModelLayerLocation SKYROOT_LIZARD = register("skyroot_lizard");
 
     public static final ModelLayerLocation AECHOR_PLANT = register("aechor_plant");
 
@@ -36,7 +42,9 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation ZEPHYR_TRANSPARENCY = register("zephyr", "transparency");
     public static final ModelLayerLocation TEMPEST = register("tempest");
     public static final ModelLayerLocation TEMPEST_TRANSPARENCY = register("tempest", "transparency");
-  
+
+    public static final ModelLayerLocation COCKATRICE = register("cockatrice");
+
     public static final ModelLayerLocation GLOVES = register("gloves");
     public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");
 

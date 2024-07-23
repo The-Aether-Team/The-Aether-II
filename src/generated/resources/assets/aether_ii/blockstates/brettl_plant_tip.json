@@ -1,0 +1,160 @@
+{
+  "variants": {
+    "age=0,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=0,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=1,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=1,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=10,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=10,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=11,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=11,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=12,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=12,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=13,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=13,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=14,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=14,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=15,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=15,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=16,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=16,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=17,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=17,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=18,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=18,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=19,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=19,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=2,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=2,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=20,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=20,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=21,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=21,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=22,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=22,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=23,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=23,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=24,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=24,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=25,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=25,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=3,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=3,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=4,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=4,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=5,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=5,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=6,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=6,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=7,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=7,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=8,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=8,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    },
+    "age=9,grown=false": {
+      "model": "aether_ii:block/brettl_plant_tip"
+    },
+    "age=9,grown=true": {
+      "model": "aether_ii:block/brettl_plant_tip_grown"
+    }
+  }
+}

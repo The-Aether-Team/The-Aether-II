@@ -3,6 +3,9 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -178,6 +181,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Orange Tree
         this.addBlock(AetherIIBlocks.ORANGE_TREE, "Orange Tree");
+
+        // Valkyrie Sprout
+        this.addBlock(AetherIIBlocks.VALKYRIE_SPROUT, "Valkyrie Sprout");
+
+        // Brettl
+        this.addBlock(AetherIIBlocks.BRETTL_PLANT, "Brettl Plant");
+        this.addBlock(AetherIIBlocks.BRETTL_PLANT_TIP, "Brettl Plant Tip");
 
         // Ground Decoration
         this.addBlock(AetherIIBlocks.SKYROOT_TWIG, "Skyroot Twig");
@@ -543,7 +553,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
-        this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addItem(AetherIIItems.SCATTERGLASS_SHARD, "Scatterglass Shard");
         this.addItem(AetherIIItems.AMBROSIUM_SHARD, "Ambrosium Shard");
         this.addItem(AetherIIItems.ZANITE_GEMSTONE, "Zanite Gemstone");
@@ -556,6 +565,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
         this.addItem(AetherIIItems.BURRUKAI_PELT, "Burrukai Pelt");
+        this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
+        this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
+        this.addItem(AetherIIItems.BRETTL_CANE, "Brettl Cane");
+        this.addItem(AetherIIItems.BRETTL_GRASS, "Brettl Grass");
+        this.addItem(AetherIIItems.BRETTL_ROPE, "Brettl Rope");
+        this.addItem(AetherIIItems.BRETTL_FLOWER, "Brettl Flower");
         this.addItem(AetherIIItems.AECHOR_PETAL, "Aechor Petal");
         this.addItem(AetherIIItems.ARCTIC_SNOWBALL, "Arctic Snowball");
         this.addItem(AetherIIItems.GREEN_SWET_GEL, "Green Swet Gel");
@@ -563,6 +578,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
         this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
         this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
+        this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
@@ -581,6 +597,20 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.KIRRID_LOIN, "Kirrid Loin");
         this.addItem(AetherIIItems.RAW_TAEGORE_MEAT, "Raw Taegore Meat");
         this.addItem(AetherIIItems.TAEGORE_STEAK, "Taegore Steak");
+        this.addItem(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, "Skyroot Lizard on a Stick");
+        this.addItem(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, "Roasted Skyroot Lizard on a Stick");
+
+        // Skyroot Buckets
+        this.addItem(AetherIIItems.SKYROOT_BUCKET, "Skyroot Bucket");
+        this.addItem(AetherIIItems.SKYROOT_WATER_BUCKET, "Skyroot Water Bucket");
+        this.addItem(AetherIIItems.SKYROOT_MILK_BUCKET, "Skyroot Milk Bucket");
+        this.addItem(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET, "Skyroot Powder Snow Bucket");
+        this.addItem(AetherIIItems.SKYROOT_COD_BUCKET, "Skyroot Bucket of Cod");
+        this.addItem(AetherIIItems.SKYROOT_SALMON_BUCKET, "Skyroot Bucket of Salmon");
+        this.addItem(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET, "Skyroot Bucket of Pufferfish");
+        this.addItem(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET, "Skyroot Bucket of Tropical Fish");
+        this.addItem(AetherIIItems.SKYROOT_AXOLOTL_BUCKET, "Skyroot Bucket of Axolotl");
+        this.addItem(AetherIIItems.SKYROOT_TADPOLE_BUCKET, "Skyroot Bucket of Tadpole");
 
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
@@ -595,6 +625,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
         this.addItem(AetherIIItems.SHEEPUFF_SPAWN_EGG, "Sheepuff Spawn Egg");
         this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
+        this.addItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Highfields Taegore Spawn Egg");
+        this.addItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Magnetic Taegore Spawn Egg");
+        this.addItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Arctic Taegore Spawn Egg");
         this.addItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Highfields Burrukai Spawn Egg");
         this.addItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Magnetic Burrukai Spawn Egg");
         this.addItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Arctic Burrukai Spawn Egg");
@@ -602,9 +635,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Magnetic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Arctic Kirrid Spawn Egg");
         this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
+        this.addItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG, "Skyroot Lizard Spawn Egg");
         this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
+        this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
@@ -678,6 +713,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.PHYG, "Phyg");
         this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
         this.addEntityType(AetherIIEntityTypes.SHEEPUFF, "Sheepuff");
+        this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_TAEGORE, "Highfields Taegore");
+        this.addEntityType(AetherIIEntityTypes.MAGNETIC_TAEGORE, "Magnetic Taegore");
+        this.addEntityType(AetherIIEntityTypes.ARCTIC_TAEGORE, "Arctic Taegore");
         this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, "Highfields Burrukai");
         this.addEntityType(AetherIIEntityTypes.MAGNETIC_BURRUKAI, "Magnetic Burrukai");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_BURRUKAI, "Arctic Burrukai");
@@ -685,11 +723,47 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.MAGNETIC_KIRRID, "Magnetic Kirrid");
         this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
+        this.addEntityType(AetherIIEntityTypes.SKYROOT_LIZARD, "Skyroot Lizard");
 
         // Hostile
         this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
+        this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
+
+        // Dimensions
+        this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
+
+
+        // Biomes
+        // Highfields
+        this.addBiome(AetherIIBiomes.FLOURISHING_FIELD, "Flourishing Field");
+        this.addBiome(AetherIIBiomes.VERDANT_WOODS, "Verdant Woods");
+        this.addBiome(AetherIIBiomes.SHROUDED_FOREST, "Shrouded Forest");
+        this.addBiome(AetherIIBiomes.SHIMMERING_BASIN, "Shimmering Basin");
+
+        // Magnetic
+        this.addBiome(AetherIIBiomes.MAGNETIC_SCAR, "Magnetic Scar");
+        this.addBiome(AetherIIBiomes.TURQUOISE_FOREST, "Turquoise Forest");
+        this.addBiome(AetherIIBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
+        this.addBiome(AetherIIBiomes.GLISTENING_SWAMP, "Glistening Swamp");
+
+        // Arctic
+        this.addBiome(AetherIIBiomes.FRIGID_SIERRA, "Frigid Sierra");
+        this.addBiome(AetherIIBiomes.ENDURING_WOODLAND, "Enduring Woodland");
+        this.addBiome(AetherIIBiomes.FROZEN_LAKES, "Frozen Lakes");
+        this.addBiome(AetherIIBiomes.SHEER_TUNDRA, "Sheer Tundra");
+
+        // Irradiated
+        this.addBiome(AetherIIBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
+        this.addBiome(AetherIIBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
+
+        // Aercloud Sea
+        this.addBiome(AetherIIBiomes.EXPANSE, "Expanse");
+
+
+        // Structures
+        this.addStructure(AetherIIStructures.OUTPOST, "Outpost");
 
 
         // Attributes
@@ -731,6 +805,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // GUIs
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
+        this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
         this.addGuiText("guidebook.equipment.title", "Equipment");
@@ -743,6 +818,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.journal.title", "Journal");
         this.addGuiText("guidebook.rewards.title", "Rewards");
 
+
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
         this.addJukeboxSong("ascending_dawn", "Emile van Krieken - Ascending Dawn");
@@ -750,6 +826,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
         this.addJukeboxSong("demise", "Moorziey - Demise");
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
+
+
+        // Generic
+        this.addGeneric("message.campfire_added", "This Outpost Campfire is now a valid respawn option.");
+        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid Outpost Campfire.");
 
 
         // Subtitles
@@ -793,6 +874,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "zephyr.ambient", "Zephyr blows");
         this.addSubtitle("entity", "zephyr.death", "Zephyr dies");
         this.addSubtitle("entity", "zephyr.hurt", "Zephyr hurts");
+
+        this.addSubtitle("entity", "cockatrice.shoot", "Cockatrice shoots");
 
 
         // Packs

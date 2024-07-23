@@ -6,10 +6,10 @@
     "foliage_color": 11665355,
     "grass_color": 13238225,
     "music": {
-      "max_delay": 24000,
-      "min_delay": 12000,
-      "replace_current_music": true,
-      "sound": "aether_ii:music.highlands.magnetic"
+      "max_delay": 2400,
+      "min_delay": 600,
+      "replace_current_music": false,
+      "sound": "aether_ii:music.aether"
     },
     "sky_color": 12962795,
     "water_color": 11255257,
@@ -95,17 +95,17 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 7
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "ambient": [],
     "axolotls": [],
     "creature": [
-      {
-        "type": "aether_ii:moa",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
       {
         "type": "aether_ii:magnetic_kirrid",
         "maxCount": 3,
@@ -114,6 +114,12 @@
       },
       {
         "type": "aether_ii:magnetic_burrukai",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 8
+      },
+      {
+        "type": "aether_ii:magnetic_taegore",
         "maxCount": 3,
         "minCount": 1,
         "weight": 8
@@ -141,6 +147,12 @@
         "maxCount": 3,
         "minCount": 1,
         "weight": 6
+      },
+      {
+        "type": "aether_ii:moa",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "misc": [],

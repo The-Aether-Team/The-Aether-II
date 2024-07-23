@@ -8,10 +8,10 @@
     "foliage_color": 11665355,
     "grass_color": 12450303,
     "music": {
-      "max_delay": 24000,
-      "min_delay": 12000,
-      "replace_current_music": true,
-      "sound": "aether_ii:music.highlands.arctic"
+      "max_delay": 2400,
+      "min_delay": 600,
+      "replace_current_music": false,
+      "sound": "aether_ii:music.aether"
     },
     "sky_color": 15197180,
     "water_color": 6519464,
@@ -101,17 +101,17 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 7
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "ambient": [],
     "axolotls": [],
     "creature": [
-      {
-        "type": "aether_ii:moa",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
-      },
       {
         "type": "aether_ii:arctic_kirrid",
         "maxCount": 3,
@@ -125,16 +125,40 @@
         "weight": 8
       },
       {
-        "type": "aether_ii:sheepuff",
+        "type": "aether_ii:arctic_taegore",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 6
+        "weight": 8
       },
       {
         "type": "aether_ii:aerbunny",
         "maxCount": 2,
         "minCount": 1,
         "weight": 10
+      },
+      {
+        "type": "aether_ii:sheepuff",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:flying_cow",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:phyg",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:moa",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "misc": [],

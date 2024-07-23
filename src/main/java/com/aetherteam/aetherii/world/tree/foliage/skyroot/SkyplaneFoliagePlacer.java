@@ -55,11 +55,11 @@ public class SkyplaneFoliagePlacer extends FoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + (2 + random.nextInt(1)), y - 1 + random.nextInt(2), z - (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - (2 + random.nextInt(1)), y - 1 + random.nextInt(2), z + (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
 
-            if (random.nextInt(1) == 0) {
+            if (random.nextBoolean()) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + (2 + random.nextInt(1)), y - 5 + random.nextInt(2), z - (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - (2 + random.nextInt(1)), y - 5 + random.nextInt(2), z + (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
             }
-            if (random.nextInt(1) == 0) {
+            if (random.nextBoolean()) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + (2 + random.nextInt(1)), y - 1 + random.nextInt(2), z + (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - (2 + random.nextInt(1)), y - 1 + random.nextInt(2), z - (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
             }

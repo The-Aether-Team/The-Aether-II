@@ -26,7 +26,6 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
     public void render(TempestThunderball thunderball, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         if (thunderball.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(thunderball) < 12.25)) {
             poseStack.pushPose();
-            poseStack.scale(1.5F, 1.5F, 1.5F);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
             poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
             PoseStack.Pose pose = poseStack.last();

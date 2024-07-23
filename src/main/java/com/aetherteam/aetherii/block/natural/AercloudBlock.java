@@ -37,7 +37,6 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      * @param pos    The {@link BlockPos} of the block.
      * @param entity The {@link Entity} in the block.
      */
-    @SuppressWarnings("deprecation")
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         entity.resetFallDistance();

@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 
 public class AetherIITags {
     public static class Blocks {
@@ -19,6 +20,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
+        public static final TagKey<Block> BRETTL_PLANT_SURVIVES_ON = tag("brettl_plant_survives_on");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
@@ -31,6 +33,7 @@ public class AetherIITags {
         public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");
@@ -96,14 +99,15 @@ public class AetherIITags {
         public static final TagKey<Item> ARKENIUM_REPAIRING = tag("arkenium_repairing");
         public static final TagKey<Item> GRAVITITE_REPAIRING = tag("gravitite_repairing");
 
-        public static final TagKey<Item> AERBUNNY_TEMPTATION_ITEMS = tag("aerbunny_temptation_items");
-        public static final TagKey<Item> PHYG_TEMPTATION_ITEMS = tag("phyg_temptation_items");
+        public static final TagKey<Item> AERBUNNY_FOOD = tag("aerbunny_food");
+        public static final TagKey<Item> PHYG_FOOD = tag("phyg_food");
         public static final TagKey<Item> PHYG_CALM_ITEMS = tag("phyg_calm_items");
-        public static final TagKey<Item> KIRRID_TEMPTATION_ITEMS = tag("kirrid_temptation_items");
-        public static final TagKey<Item> BURRUKAI_TEMPTATION_ITEMS = tag("burrukai_temptation_items");
-        public static final TagKey<Item> FLYING_COW_TEMPTATION_ITEMS = tag("flying_cow_temptation_items");
-        public static final TagKey<Item> SHEEPUFF_TEMPTATION_ITEMS = tag("sheepuff_temptation_items");
-        public static final TagKey<Item> MOA_FOOD_ITEMS = tag("moa_food_items");
+        public static final TagKey<Item> FLYING_COW_FOOD = tag("flying_food");
+        public static final TagKey<Item> SHEEPUFF_FOOD = tag("sheepuff_food");
+        public static final TagKey<Item> TAEGORE_FOOD = tag("taegore_food");
+        public static final TagKey<Item> BURRUKAI_FOOD = tag("burrukai_food");
+        public static final TagKey<Item> KIRRID_FOOD = tag("kirrid_food");
+        public static final TagKey<Item> MOA_FOOD = tag("moa_food");
 
         public static final TagKey<Item> AETHER_PORTAL_ACTIVATION_ITEMS = tag("aether_portal_activation_items");
         public static final TagKey<Item> SWET_GEL = tag("swet_gel");
@@ -116,6 +120,7 @@ public class AetherIITags {
     }
 
     public static class Entities {
+        public static final TagKey<EntityType<?>> TAEGORE = tag("taegore");
         public static final TagKey<EntityType<?>> BURRUKAI = tag("burrukai");
         public static final TagKey<EntityType<?>> KIRRID = tag("kirrid");
 
@@ -131,6 +136,14 @@ public class AetherIITags {
         }
     }
 
+    public static class Fluids {
+        public static final TagKey<Fluid> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
+
+        private static TagKey<Fluid> tag(String name) {
+            return TagKey.create(Registries.FLUID, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        }
+    }
+
     public static class Biomes {
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
 
@@ -140,6 +153,8 @@ public class AetherIITags {
         public static final TagKey<Biome> WARPED_NYLIUM_CONVERSION = tag("warped_nylium_conversion");
 
         public static final TagKey<Biome> ARCTIC_ICE = tag("arctic_ice");
+
+        public static final TagKey<Biome> AETHER_MUSIC = tag("aether_music");
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));

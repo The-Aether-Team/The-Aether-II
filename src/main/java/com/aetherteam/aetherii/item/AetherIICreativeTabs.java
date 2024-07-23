@@ -344,6 +344,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get());
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
+                output.accept(AetherIIBlocks.VALKYRIE_SPROUT.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
                 output.accept(AetherIIBlocks.MOA_EGG.get());
@@ -427,6 +428,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
                 output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
+                output.accept(AetherIIItems.SKYROOT_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_WATER_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_SALMON_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_COD_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_TADPOLE_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get());
+                output.accept(AetherIIItems.SKYROOT_MILK_BUCKET.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
@@ -492,6 +503,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.KIRRID_CUTLET.get());
                 output.accept(AetherIIItems.RAW_TAEGORE_MEAT.get());
                 output.accept(AetherIIItems.TAEGORE_STEAK.get());
+                output.accept(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get());
+                output.accept(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
@@ -514,6 +527,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
+                output.accept(AetherIIItems.VALKYRIE_WINGS.get());
+                output.accept(AetherIIItems.BRETTL_CANE.get());
+                output.accept(AetherIIItems.BRETTL_GRASS.get());
+                output.accept(AetherIIItems.BRETTL_ROPE.get());
+                output.accept(AetherIIItems.BRETTL_FLOWER.get());
                 output.accept(AetherIIItems.SKYROOT_PINECONE.get());
                 output.accept(AetherIIItems.MOA_FEED.get());
                 output.accept(AetherIIItems.BLUEBERRY_MOA_FEED.get());
@@ -524,6 +542,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.PURPLE_SWET_GEL.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
                 output.accept(AetherIIItems.WHITE_SWET_GEL.get());
+                output.accept(AetherIIItems.CHARGE_CORE.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()
@@ -535,15 +554,20 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG.get());
+                output.accept(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MOA_SPAWN_EGG.get());
                 output.accept(AetherIIItems.PHYG_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SHEEPUFF_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
+                output.accept(AetherIIItems.COCKATRICE_SPAWN_EGG.get());
             }).build());
 }

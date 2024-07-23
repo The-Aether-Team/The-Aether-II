@@ -2,6 +2,7 @@
   "parent": "minecraft:block/cube_column",
   "textures": {
     "end": "aether_ii:block/decorative/faded_holystone_keystone",
-    "side": "aether_ii:block/decorative/faded_holystone_capstone_pillar"
+    "side": "aether_ii:block/decorative/faded_holystone_capstone_pillar",
+    "up": "aether_ii:block/decorative/faded_holystone_keystone"
   }
 }
