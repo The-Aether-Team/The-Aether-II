@@ -16,7 +16,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.util.function.BiFunction;
 
-public interface Guidebook { //todo uh oh guidebook client status seems to be able to persist between worlds and isnt cleared properly on world exit/world switch
+public interface Guidebook {
     WidgetSprites EQUIPMENT_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/equipment_tab_selected"));
     WidgetSprites STATUS_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/status_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/status_tab_selected"));
     WidgetSprites DISCOVERY_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/discovery_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/discovery_tab_selected"));
