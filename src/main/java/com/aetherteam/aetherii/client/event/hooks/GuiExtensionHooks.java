@@ -25,8 +25,13 @@ public class GuiExtensionHooks {
 
     public static Screen openStoredGuidebookScreen(Screen screen) {
         if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
-            if (lastGuidebookScreen != null && !forceCloseGuidebook) {
-                return lastGuidebookScreen;
+            if (!forceCloseGuidebook && lastGuidebookScreen instanceof Guidebook guidebook) {
+                for (Guidebook.Tab tab : Guidebook.Tab.values()) {
+                    Screen screenToOpen = tab.getScreen().apply(guidebook.getEquipmentMenu(), guidebook.getPlayerInventory());
+                    if (lastGuidebookScreen.getClass() == screenToOpen.getClass()) {
+                        return screenToOpen;
+                    }
+                }
             }
         } else if (screen instanceof Guidebook) {
             forceCloseGuidebook = false;
