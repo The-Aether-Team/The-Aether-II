@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckGuidebookEntryPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -27,6 +28,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -43,18 +45,27 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo make entry ordering logical not alphabetical
+public class BestiarySection extends DiscoverySection<BestiaryEntry> {
+    private static final List<Holder<EntityType<?>>> ENTRY_ORDER = List.of(
+            AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW, AetherIIEntityTypes.AERBUNNY,
+            AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE,
+            AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
+            AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
+            AetherIIEntityTypes.MOA, AetherIIEntityTypes.SKYROOT_LIZARD,
+            AetherIIEntityTypes.ZEPHYR, AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE, AetherIIEntityTypes.AECHOR_PLANT
+    );
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
     private static final ResourceLocation SLASH_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");
     private static final ResourceLocation IMPACT_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/impact");
     private static final ResourceLocation PIERCE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/pierce");
     private static final ResourceLocation UNDISCOVERED_ENTRY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/undiscovered");
     private static final ResourceLocation DISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/default");
+    private final List<BestiaryEntry> orderedEntries = new ArrayList<>();
     private List<Float> snapPoints;
     private boolean scrolling;
     private float scrollY;
     private float rotation = 0.0F;
-    private List<Holder<Item>> currentFoods = new ArrayList<>();
+    private final List<Holder<Item>> currentFoods = new ArrayList<>();
     private int switchFoodItemCounter = 0;
 
     public BestiarySection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
@@ -64,8 +75,14 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
     @Override
     public void initSection() {
         super.initSection();
+        this.orderedEntries.clear();
+        ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
+            if (entry.entityType().value() == entityTypeHolder.value()) {
+                this.orderedEntries.add(entry);
+            }
+        }));
         this.snapPoints = new ArrayList<>();
-        int remainingSlots = Mth.ceil((this.entries.size() - this.maxSlots()) / (double) this.scrollIncrement());
+        int remainingSlots = Mth.ceil((this.orderedEntries.size() - this.maxSlots()) / (double) this.scrollIncrement());
         for (int y = 0; y <= remainingSlots; y++) {
             this.snapPoints.add((this.scrollbarGutterHeight() / remainingSlots) * y);
         }
@@ -124,7 +141,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
         int leftPos = 31;
         int topPos = 59;
         int i = 0;
-        List<BestiaryEntry> visibleEntries = this.entries.size() > this.maxSlots() ? this.entries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.entries.size())) : this.entries;
+
+        List<BestiaryEntry> visibleEntries = this.orderedEntries.size() > this.maxSlots() ? this.orderedEntries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.orderedEntries.size())) : this.orderedEntries;
         for (BestiaryEntry entry : visibleEntries) {
             GuiSpriteManager guiSpriteManager = Minecraft.getInstance().getGuiSprites();
 
@@ -393,8 +411,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
         int slot = this.getSlotIndex(mouseX, mouseY);
         if (slot != -1) {
             int trueSlot = slot + this.getSlotOffset(); // Determines the true index to get from the list of Moa Skins, if there is a slot offset from scrolling.
-            if (trueSlot < this.entries.size()) {
-                return this.entries.get(trueSlot);
+            if (trueSlot < this.orderedEntries.size()) {
+                return this.orderedEntries.get(trueSlot);
             }
         }
         return null;
@@ -432,7 +450,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> { //todo ma
     }
 
     private boolean isScrollActive() {
-        return this.entries.size() > this.maxSlots();
+        return this.orderedEntries.size() > this.maxSlots();
     }
 
     private int scrollIncrement() {
