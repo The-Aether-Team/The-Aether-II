@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "aether_ii:plates/arkenium"
+    },
+    "C": {
+      "item": "aether_ii:corrobonite_crystal"
+    },
+    "H": {
+      "item": "aether_ii:holystone"
+    }
+  },
+  "pattern": [
+    "AAA",
+    " H ",
+    "HCH"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:arkenium_forge"
+  }
+}
