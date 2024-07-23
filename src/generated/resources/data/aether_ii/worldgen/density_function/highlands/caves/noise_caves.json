@@ -9,7 +9,7 @@
         "type": "minecraft:add",
         "argument1": {
           "type": "minecraft:weird_scaled_sampler",
-          "input": "aether_ii:highlands/terrain/base/base_3d_noise",
+          "input": "aether_ii:highlands/base_3d_noise",
           "noise": "aether_ii:cave_thickness",
           "rarity_value_mapper": "type_1"
         },
@@ -24,7 +24,7 @@
     },
     "argument2": {
       "type": "minecraft:weird_scaled_sampler",
-      "input": "aether_ii:highlands/terrain/base/base_3d_noise",
+      "input": "aether_ii:highlands/base_3d_noise",
       "noise": "aether_ii:caves",
       "rarity_value_mapper": "type_2"
     }
