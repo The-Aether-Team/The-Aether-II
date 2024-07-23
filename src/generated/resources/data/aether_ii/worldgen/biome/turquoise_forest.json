@@ -19,6 +19,7 @@
   },
   "features": [
     [
+      "aether_ii:ferrosite_spike",
       "aether_ii:coast_ferrosite_sand",
       "aether_ii:cloudbed"
     ],

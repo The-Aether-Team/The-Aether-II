@@ -19,7 +19,7 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
     public boolean place(FeaturePlaceContext<FerrositeSpikeConfiguration> context) {
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
-        BlockPos pos = context.origin().below(2);
+        BlockPos pos = context.origin().below(3);
         FerrositeSpikeConfiguration config = context.config();
 
         float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
@@ -27,10 +27,10 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
 
         for (int i = 0; i < radius * heightFactor; ++i) {
             if (i < radius * heightFactor - heightFactor * 0.5F) {
-                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 20 - shapeVariator(random, 0.05F), random, true);
+                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 20 - shapeVariator(random, 0.05F), random, false);
             }
             if (i == radius * heightFactor - heightFactor * 0.5F) {
-                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() + i, pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), radius - (float) i / 10, random, true);
+                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() + i, pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), radius - (float) i / 10, random, false);
             }
         }
 
@@ -61,10 +61,10 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
 
         for (int i = 0; i < radius * heightFactor; ++i) {
             if (i < radius * heightFactor - heightFactor * 0.5F) {
-                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 12 - shapeVariator(random, 0.035F), random, true);
+                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 12 - shapeVariator(random, 0.035F), random, false);
             }
             if (i == radius * heightFactor - heightFactor * 0.5F) {
-                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() + i, pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), radius - (float) i / 6, random, true);
+                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() + i, pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), radius - (float) i / 6, random, false);
             }
         }
     }

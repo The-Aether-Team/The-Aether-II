@@ -24,6 +24,7 @@ public class AetherIIMiscPlacements {
     public static final ResourceKey<PlacedFeature> COAST_ARCTIC_PACKED_ICE = AetherIIPlacementUtils.createKey("coast_arctic_packed_ice");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = AetherIIPlacementUtils.createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = AetherIIPlacementUtils.createKey("noise_lake_arctic");
+    public static final ResourceKey<PlacedFeature> FERROSITE_SPIKE = AetherIIPlacementUtils.createKey("ferrosite_spike");
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = AetherIIPlacementUtils.createKey("ferrosite_pillar");
     public static final ResourceKey<PlacedFeature> COASTAL_ARCTIC_ICE_SPIKE = AetherIIPlacementUtils.createKey("coastal_arctic_ice_spike");
     public static final ResourceKey<PlacedFeature> ARCTIC_ICE_SPIKE_CLUSTER = AetherIIPlacementUtils.createKey("arctic_ice_spike_cluster");
@@ -68,8 +69,16 @@ public class AetherIIMiscPlacements {
         AetherIIPlacementUtils.register(context, NOISE_LAKE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.NOISE_LAKE), BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, NOISE_LAKE_ARCTIC, configuredFeatures.getOrThrow(AetherIIMiscFeatures.NOISE_LAKE_ARCTIC), BiomeFilter.biome());
 
-        AetherIIPlacementUtils.register(context, FERROSITE_PILLAR, configuredFeatures.getOrThrow(AetherIIMiscFeatures.FERROSITE_PILLAR),
+        AetherIIPlacementUtils.register(context, FERROSITE_SPIKE, configuredFeatures.getOrThrow(AetherIIMiscFeatures.FERROSITE_SPIKE),
                 CountPlacement.of(2),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get())), //todo
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome()
+        );
+        AetherIIPlacementUtils.register(context, FERROSITE_PILLAR, configuredFeatures.getOrThrow(AetherIIMiscFeatures.FERROSITE_PILLAR),
+                CountPlacement.of(1),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
