@@ -1,0 +1,42 @@
+{
+  "criteria": {
+    "feed_magnetic_burrukai": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:magnetic_burrukai"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:burrukai_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_magnetic_burrukai": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:magnetic_burrukai"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "requirements": [
+    [
+      "kill_magnetic_burrukai",
+      "feed_magnetic_burrukai"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -806,6 +806,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // GUIs
+        this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
         this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
@@ -816,10 +817,39 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.discovery.title", "Discovery");
         this.addGuiText("guidebook.discovery.bestiary.title", "Bestiary");
         this.addGuiText("guidebook.discovery.effects.title", "Effects");
-        this.addGuiText("guidebook.discovery.landmarks.title", "Landmarks");
+        this.addGuiText("guidebook.discovery.exploration.title", "Exploration");
         this.addGuiText("guidebook.journal.title", "Journal");
         this.addGuiText("guidebook.rewards.title", "Rewards");
-        this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
+        this.addGuiText("guidebook.discovery.bestiary.entry.unknown", "???");
+        this.addGuiText("guidebook.discovery.bestiary.stat.health", "%s Health");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_weakness", "%1$s Damage from %2$s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_resistance", "%1$s Damage from %2$s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_none", "Standard Damage from %s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.info.eats", "Eats:");
+        this.addGuiText("guidebook.discovery.bestiary.info.drops", "Drops:");
+        this.addGuiText("toast.guidebook.bestiary", "New Bestiary Entries!");
+        this.addGuiText("toast.guidebook.description", "Check your guidebook");
+
+        // Bestiary
+        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
 
         // Jukebox Songs
@@ -831,7 +861,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
 
 
-        // Generic
+        // Misc
+        this.addGeneric("slash", "§9Slash§r");
+        this.addGeneric("impact", "§eImpact§r");
+        this.addGeneric("pierce", "§cPierce§r");
         this.addGeneric("message.campfire_added", "This Outpost Campfire is now a valid respawn option.");
         this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid Outpost Campfire.");
 

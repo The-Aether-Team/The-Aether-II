@@ -25,7 +25,7 @@
                       "argument2": {
                         "type": "minecraft:add",
                         "argument1": -0.03,
-                        "argument2": "aether_ii:highlands/terrain/base/base_3d_noise"
+                        "argument2": "aether_ii:highlands/base_3d_noise"
                       }
                     },
                     "argument2": {
@@ -43,12 +43,16 @@
                       "type": "minecraft:mul",
                       "argument1": {
                         "type": "minecraft:mul",
-                        "argument1": -0.19,
-                        "argument2": "aether_ii:highlands/terrain/base/factor"
+                        "argument1": {
+                          "type": "minecraft:mul",
+                          "argument1": -0.19,
+                          "argument2": "aether_ii:highlands/terrain/base/factor"
+                        },
+                        "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
                       },
-                      "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
+                      "argument2": "aether_ii:highlands/terrain/island_density"
                     },
-                    "argument2": "aether_ii:highlands/terrain/island_density"
+                    "argument2": "aether_ii:highlands/continents_factor"
                   }
                 }
               },
@@ -60,12 +64,16 @@
                 "type": "minecraft:mul",
                 "argument1": {
                   "type": "minecraft:mul",
-                  "argument1": -0.19,
-                  "argument2": "aether_ii:highlands/terrain/base/factor"
+                  "argument1": {
+                    "type": "minecraft:mul",
+                    "argument1": -0.19,
+                    "argument2": "aether_ii:highlands/terrain/base/factor"
+                  },
+                  "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
                 },
-                "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
+                "argument2": "aether_ii:highlands/terrain/island_density"
               },
-              "argument2": "aether_ii:highlands/terrain/island_density"
+              "argument2": "aether_ii:highlands/continents_factor"
             }
           },
           "argument2": "aether_ii:highlands/caves/noise_caves"

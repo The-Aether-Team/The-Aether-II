@@ -249,8 +249,8 @@
           "biome": "aether_ii:expanse",
           "parameters": {
             "continentalness": [
-              0.0,
-              0.125
+              0.2,
+              1.0
             ],
             "depth": [
               -1.5,
@@ -279,8 +279,8 @@
           "biome": "aether_ii:shimmering_basin",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -309,8 +309,8 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -339,8 +339,8 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -369,8 +369,8 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -399,8 +399,8 @@
           "biome": "aether_ii:shrouded_forest",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -429,8 +429,8 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -459,8 +459,8 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -489,8 +489,8 @@
           "biome": "aether_ii:shrouded_forest",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -519,8 +519,8 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -549,8 +549,8 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -579,8 +579,8 @@
           "biome": "aether_ii:flourishing_field",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,
@@ -609,8 +609,8 @@
           "biome": "aether_ii:verdant_woods",
           "parameters": {
             "continentalness": [
-              0.125,
-              1.5
+              0.0,
+              0.2
             ],
             "depth": [
               -1.5,

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.nitrogen.data.providers.NitrogenLanguageProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 
@@ -36,5 +37,9 @@ public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider 
 
     public void addJukeboxSong(String songName, String name) {
         this.add("jukebox_song." + this.id + "." + songName, name);
+    }
+
+    public void addBestiaryDescription(EntityType<?> entityType, String description) {
+        this.add(this.id + ".guidebook_bestiary." + entityType.getDescriptionId(), description);
     }
 }

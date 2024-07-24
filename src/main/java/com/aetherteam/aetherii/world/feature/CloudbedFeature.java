@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.CloudbedConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -17,9 +19,15 @@ public class CloudbedFeature extends Feature<CloudbedConfiguration> {
     @Override
     public boolean place(FeaturePlaceContext<CloudbedConfiguration> context) {
         CloudbedConfiguration config = context.config();
+        WorldGenLevel level = context.level();
 
         DensityFunction cloudNoise = config.cloudNoise();
         DensityFunction yOffsetNoise = config.yOffset();
+
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
+
+        cloudNoise.mapAll(visitor);
+        yOffsetNoise.mapAll(visitor);
 
         // This should be placed, once per chunk
         int chunkX = context.origin().getX() - (context.origin().getX() % 16);

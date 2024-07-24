@@ -5,13 +5,13 @@
     "points": [
       {
         "derivative": 0.0,
-        "location": 0.475,
+        "location": 0.525,
         "value": {
           "coordinate": "aether_ii:highlands/temperature",
           "points": [
             {
               "derivative": 0.0,
-              "location": -0.475,
+              "location": -0.425,
               "value": 1.0
             },
             {
@@ -21,14 +21,19 @@
             },
             {
               "derivative": 0.0,
-              "location": -0.325,
+              "location": -0.375,
               "value": {
-                "coordinate": "aether_ii:highlands/continents",
+                "coordinate": "aether_ii:highlands/ridges",
                 "points": [
                   {
                     "derivative": 0.0,
-                    "location": 0.05,
-                    "value": 2.0
+                    "location": 0.0,
+                    "value": 3.0
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.1,
+                    "value": 1.25
                   },
                   {
                     "derivative": 0.0,
@@ -40,14 +45,19 @@
             },
             {
               "derivative": 0.0,
-              "location": 0.575,
+              "location": 0.625,
               "value": {
-                "coordinate": "aether_ii:highlands/continents",
+                "coordinate": "aether_ii:highlands/ridges",
                 "points": [
                   {
                     "derivative": 0.0,
-                    "location": 0.05,
-                    "value": 2.0
+                    "location": 0.0,
+                    "value": 3.0
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.1,
+                    "value": 1.25
                   },
                   {
                     "derivative": 0.0,
@@ -61,6 +71,11 @@
               "derivative": 0.0,
               "location": 0.65,
               "value": 7.5
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.675,
+              "value": 1.0
             }
           ]
         }
@@ -72,7 +87,7 @@
       },
       {
         "derivative": 0.0,
-        "location": 0.625,
+        "location": 0.575,
         "value": 1.0
       }
     ]
