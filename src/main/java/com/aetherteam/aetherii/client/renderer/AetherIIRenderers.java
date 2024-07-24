@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.baked.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.model.baked.FastModel;
+import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
@@ -43,6 +44,7 @@ public class AetherIIRenderers {
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AETHER_SIGN.get(), SignRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.AETHER_HANGING_SIGN.get(), HangingSignRenderer::new);
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.MOA_EGG.get(), MoaEggRenderer::new);
+        event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), ArkeniumForgeRenderer::new);
 
         // Entities
         // Passive

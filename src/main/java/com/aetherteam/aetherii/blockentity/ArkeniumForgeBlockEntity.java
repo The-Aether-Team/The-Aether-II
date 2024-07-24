@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.StackedContents;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implements StackedContentsCompatible {
     protected NonNullList<ItemStack> items = NonNullList.withSize(11, ItemStack.EMPTY);
+    private ItemStack lastInput = ItemStack.EMPTY;
 
     public ArkeniumForgeBlockEntity(BlockPos pos, BlockState blockState) {
         super(AetherIIBlockEntityTypes.ARKENIUM_FORGE.get(), pos, blockState);
@@ -47,6 +49,18 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registry) {
         super.saveAdditional(tag, registry);
         ContainerHelper.saveAllItems(tag, this.items, registry);
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+        this.loadAdditional(tag, lookupProvider);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        this.saveAdditional(tag, registries);
+        return tag;
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, ArkeniumForgeBlockEntity blockEntity) {
@@ -115,6 +129,9 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
 
         if (index == 0 && !flag) {
             this.setChanged();
+            if (this.getLevel() != null) {
+                this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 1 | 2);
+            }
         }
     }
 
@@ -128,5 +145,10 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
         for (ItemStack itemstack : this.items) {
             contents.accountStack(itemstack);
         }
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }
