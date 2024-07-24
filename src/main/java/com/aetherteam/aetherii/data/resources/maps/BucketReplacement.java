@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.data.resources;
+package com.aetherteam.aetherii.data.resources.maps;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

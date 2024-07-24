@@ -8,8 +8,10 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
+import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
+import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
@@ -26,6 +28,7 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -56,7 +59,6 @@ public class DamageSystemHooks {
 
     public static float getDamageTypeModifiedValue(Entity target, DamageSource source, double damage) {
         if (source.typeHolder().is(AetherIITags.DamageTypes.TYPED)) {
-            RegistryAccess registryAccess = target.level().registryAccess();
             Entity sourceEntity = source.getDirectEntity();
             ItemStack sourceStack = ItemStack.EMPTY;
 
@@ -67,16 +69,19 @@ public class DamageSystemHooks {
             }
 
             if (!sourceStack.isEmpty()) {
-                double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, sourceStack);
-                double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, sourceStack);
-                double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, sourceStack);
+                DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(sourceStack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
+                DamageResistance resistance = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(target.getType()).getData(AetherIIDataMaps.DAMAGE_RESISTANCE);
 
-                double slashDefense = AetherIIDamageResistances.getSlashDefense(registryAccess, target);
-                double impactDefense = AetherIIDamageResistances.getImpactDefense(registryAccess, target);
-                double pierceDefense = AetherIIDamageResistances.getPierceDefense(registryAccess, target);
+                if (resistance != null) {
+                    double slashDefense = resistance.slashValue();
+                    double impactDefense = resistance.impactValue();
+                    double pierceDefense = resistance.pierceValue();
 
-                if (AetherIIDamageResistances.hasEntity(registryAccess, target)) {
-                    if (AetherIIDamageInflictions.hasItem(registryAccess, sourceStack)) {
+                    if (infliction != null) {
+                        double slashDamage =  infliction.slashValue();
+                        double impactDamage = infliction.impactValue();
+                        double pierceDamage = infliction.pierceValue();
+
                         if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
                             Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
                             slashDamage += damages.getLeft();
@@ -101,8 +106,8 @@ public class DamageSystemHooks {
                             player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).setCriticalDamageModifier(1.0F);
                         }
                     } else {
-                        double resistance = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
-                        damage = Math.max(damage - resistance, 1.0F);
+                        double defense = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
+                        damage = Math.max(damage - defense, 1.0F);
                     }
                 }
             }
@@ -133,9 +138,8 @@ public class DamageSystemHooks {
     }
 
     public static void addDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {
-        if (player != null) {
-            RegistryAccess registryAccess = player.level().registryAccess();
-
+        DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
+        if (player != null && infliction != null) {
             int position = components.size();
             Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.value().getDescriptionId());
             for (int i = 0; i < position; i++) {
@@ -145,9 +149,9 @@ public class DamageSystemHooks {
                     break;
                 }
             }
-            double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, stack);
-            double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, stack);
-            double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, stack);
+            double slashDamage =  infliction.slashValue();
+            double impactDamage = infliction.impactValue();
+            double pierceDamage = infliction.pierceValue();
 
             addDamageTypeTooltip(components, position, slashDamage, "slash");
             addDamageTypeTooltip(components, position, impactDamage, "impact");
@@ -163,12 +167,13 @@ public class DamageSystemHooks {
     }
 
     public static void addBonusDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {
-        if (player != null) {
+        DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
+        if (player != null && infliction != null) {
             RegistryAccess registryAccess = player.level().registryAccess();
             if (stack.getItem() instanceof UniqueDamage uniqueDamage) {
-                double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, stack) - 1;
-                double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, stack) - 1;
-                double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, stack) - 1;
+                double slashDamage =  infliction.slashValue() - 1;
+                double impactDamage = infliction.impactValue() - 1;
+                double pierceDamage = infliction.pierceValue() - 1;
 
                 Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(stack, slashDamage, impactDamage, pierceDamage);
                 slashDamage = damages.getLeft();
