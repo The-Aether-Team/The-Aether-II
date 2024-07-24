@@ -38,7 +38,7 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         this.effectsSection = new EffectsSection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.effects.title"));
         this.explorationSection = new ExplorationSection(playerInventory.player.registryAccess(), this, Component.translatable("gui.aether_ii.guidebook.discovery.exploration.title"));
 
-        this.titleLabelX = 88;
+        this.titleLabelX = 100;
         this.titleLabelY = 13;
         this.currentSection = this.bestiarySection;
     }
@@ -54,7 +54,7 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         super.init();
         this.initTabs(this);
 
-        int x = ((this.width) / 2) - Guidebook.PAGE_WIDTH + 24;
+        int x = ((this.width + 2) / 2) - Guidebook.PAGE_WIDTH + 36;
         int y = (this.height / 2) - 72;
         this.addRenderableWidget(new SectionTab(this, this.bestiarySection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_bestiary")));
         x += 43;

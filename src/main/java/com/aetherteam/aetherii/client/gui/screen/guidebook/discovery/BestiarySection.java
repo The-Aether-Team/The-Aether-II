@@ -92,7 +92,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     @Override
     public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         int rightPagePos = (this.screen.width / 2);
-        int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+        int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         if (this.getSelectedEntry() != null) {
             Level level = Minecraft.getInstance().level;
             if (level != null) {
@@ -138,7 +138,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderEntries(guiGraphics, mouseX, mouseY, partialTick);
         BestiaryEntry hoveredEntry = this.getEntryFromSlot(mouseX, mouseY);
-        int leftPos = 31;
+        int leftPos = 43;
         int topPos = 59;
         int i = 0;
 
@@ -181,7 +181,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     private void renderScrollbar(GuiGraphics guiGraphics) {
         int scrollbarTop = 59;
-        int scrollbarLeft = 139;
+        int scrollbarLeft = 151;
         ResourceLocation location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
         guiGraphics.blitSprite(location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
     }
@@ -189,8 +189,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
         BestiaryEntry entry = this.getEntryFromSlot(mouseX, mouseY);
         if (entry != null) {
-            int leftPagePos = (this.screen.width / 2) - Guidebook.PAGE_WIDTH;
-            int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+            int leftPagePos = ((this.screen.width + 2) / 2) - Guidebook.PAGE_WIDTH;
+            int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
             Component name = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.entry.unknown");
             if (this.isObserved(entry)) {
                 name = Component.translatable(entry.entityType().value().getDescriptionId());
@@ -296,7 +296,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     private void renderFakeSlot(GuiGraphics guiGraphics, Font font, List<Component> tooltip, ItemStack stack, double mouseX, double mouseY, int x, int y) {
         int rightPagePos = (this.screen.width / 2);
-        int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+        int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
         guiGraphics.blitSprite(Guidebook.SLOT_SPRITE, x, y, 18, 18);
@@ -330,7 +330,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) {
         int rightPagePos = (this.screen.width / 2);
-        int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+        int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
@@ -352,7 +352,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY, boolean original) {
         if (this.isScrollActive()) {
             int leftPos = (this.screen.width / 2) - Guidebook.PAGE_WIDTH;
-            int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
+            int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
             if (button == 0) {
                 float scrollbarGutterLeft = leftPos + 139.0F;
                 float scrollbarGutterTop = topPos + 59.0F;
@@ -419,9 +419,9 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     }
 
     private int getSlotIndex(double mouseX, double mouseY) {
-        int leftPos = (this.screen.width / 2) - Guidebook.PAGE_WIDTH;
-        int topPos = (this.screen.height - Guidebook.BACKING_HEIGHT) / 2;
-        int slotLeft = leftPos + 30;
+        int leftPos = ((this.screen.width + 2) / 2) - Guidebook.PAGE_WIDTH;
+        int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
+        int slotLeft = leftPos + 42;
         int slotTop = topPos + 59;
         double mouseXDiff = mouseX - slotLeft;
         double mouseYDiff = mouseY - slotTop;

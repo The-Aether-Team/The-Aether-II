@@ -26,7 +26,7 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
         super(title);
         this.equipmentMenu = menu;
         this.playerInventory = playerInventory;
-        this.titleLabelX = 88;
+        this.titleLabelX = 100;
         this.titleLabelY = 13;
     }
 

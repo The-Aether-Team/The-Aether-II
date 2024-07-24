@@ -40,7 +40,7 @@ public abstract class DiscoverySection<T> {
     public abstract void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
 
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.drawString(this.screen.getMinecraft().font, this.getTitle(), 28, 48, 16777215, true);
+        guiGraphics.drawString(this.screen.getMinecraft().font, this.getTitle(), 40, 48, 16777215, true);
     }
 
     public abstract void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);

@@ -31,7 +31,7 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
         super(title);
         this.equipmentMenu = menu;
         this.playerInventory = playerInventory;
-        this.titleLabelX = 88;
+        this.titleLabelX = 100;
         this.titleLabelY = 13;
     }
 
@@ -48,8 +48,8 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
         int leftPos = (this.width / 2) - PAGE_WIDTH;
-        int topPos = (this.height - BACKING_HEIGHT) / 2;
-        int x = 83;
+        int topPos = (this.height - PAGE_HEIGHT) / 2;
+        int x = 95;
         int y = 7;
         int xOffset = 9;
         int yOffset = 19;
@@ -67,7 +67,7 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
 
         Player player = Minecraft.getInstance().player;
-        int x = 24;
+        int x = 36;
         int y = 4;
 
         guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
@@ -83,7 +83,7 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
     public void renderGuidebookRightPage(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         Guidebook.super.renderGuidebookRightPage(screen, guiGraphics, mouseX, mouseY, partialTick);
 
-        guiGraphics.drawCenteredString(this.font, this.rightTitle, this.titleLabelX, this.titleLabelY, 16777215);
+        guiGraphics.drawCenteredString(this.font, this.rightTitle, this.titleLabelX - 12, this.titleLabelY, 16777215);
     }
 
     @Override
