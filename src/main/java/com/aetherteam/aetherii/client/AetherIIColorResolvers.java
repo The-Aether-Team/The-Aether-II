@@ -17,6 +17,22 @@ public class AetherIIColorResolvers {
     private static final int AETHER_TALL_GRASS_COLOR = 0xB1FFCB;
 
     public static void registerBlockColor(RegisterColorHandlersEvent.Block event) {
+//        event.register((state, level, pos, tintIndex) -> {
+//            int shade = state.getValue(IrradiatedLeavesBlock.SHADE);
+//            int shadeMax = 7;
+//
+//            Color bottom = new Color(0xEFE553);
+//
+//            Color top = new Color(0xF2EFE6);
+//
+//            int resultRed = bottom.getRed() + (shade / shadeMax) * (top.getRed() - top.getRed());
+//            int resultGreen = bottom.getGreen() + (shade / shadeMax) * (top.getGreen() - top.getGreen());
+//            int resultBlue = bottom.getBlue() + (shade / shadeMax) * (top.getBlue() - top.getBlue());
+//
+//            AetherII.LOGGER.info(String.valueOf(new Color(resultRed, resultGreen, resultBlue).getRGB()));
+//
+//            return new Color(resultRed, resultGreen, resultBlue).getRGB();
+//        }, AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
         event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(level, pos, tintIndex, level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_GRASS_COLOR, 5.0F, 6.0F)),
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(level, pos, tintIndex, level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),

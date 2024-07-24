@@ -35,13 +35,13 @@ public interface FreezingBlock extends FreezingBehavior<BlockState> {
     float SQRT_8 = Mth.sqrt(8);
 
     /**
-     * Table of cached {@link AetherRecipeTypes#ICESTONE_FREEZABLE} recipes, searchable with associated {@link Block}s and {@link BlockPropertyPair}s.
+     * Table of cached {@link AetherIIRecipeTypes#ICESTONE_FREEZABLE} recipes, searchable with associated {@link Block}s and {@link BlockPropertyPair}s.
      */
     Table<Block, Pair<BlockPropertyPair, Optional<Either<ResourceKey<Biome>, TagKey<Biome>>>>, IcestoneFreezableRecipe> cachedBlocks = HashBasedTable.create();
     List<Block> cachedResults = new ArrayList<>();
 
     /**
-     * Freezes blocks from one block to another using the {@link AetherRecipeTypes#ICESTONE_FREEZABLE} recipe type.
+     * Freezes blocks from one block to another using the {@link AetherIIRecipeTypes#ICESTONE_FREEZABLE} recipe type.
      *
      * @param level  The {@link Level} to freeze the blocks in.
      * @param pos    The {@link BlockPos} the freezing occurred at.
@@ -90,7 +90,7 @@ public interface FreezingBlock extends FreezingBehavior<BlockState> {
     }
 
     /**
-     * Caches the {@link AetherRecipeTypes#ICESTONE_FREEZABLE} recipes through the level's {@link net.minecraft.world.item.crafting.RecipeManager}.
+     * Caches the {@link AetherIIRecipeTypes#ICESTONE_FREEZABLE} recipes through the level's {@link net.minecraft.world.item.crafting.RecipeManager}.
      *
      * @param level The {@link Level} that the recipe occurs in.
      */

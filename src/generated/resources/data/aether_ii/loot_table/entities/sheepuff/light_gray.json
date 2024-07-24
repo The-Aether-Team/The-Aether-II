@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:light_gray_wool"
+          "name": "aether_ii:light_gray_cloudwool"
         }
       ],
       "rolls": 1.0

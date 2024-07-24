@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.ai.brain.behavior;
 
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.behavior.OneShot;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;

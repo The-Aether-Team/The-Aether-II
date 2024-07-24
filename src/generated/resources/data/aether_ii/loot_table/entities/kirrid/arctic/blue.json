@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:blue_cloudwool"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:entities/arctic_kirrid"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "aether_ii:entities/kirrid/arctic/blue"
+}

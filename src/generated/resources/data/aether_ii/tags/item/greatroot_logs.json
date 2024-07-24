@@ -1,6 +1,8 @@
 {
   "values": [
     "aether_ii:greatroot_log",
-    "aether_ii:greatroot_wood"
+    "aether_ii:greatroot_wood",
+    "aether_ii:stripped_greatroot_log",
+    "aether_ii:stripped_greatroot_wood"
   ]
 }

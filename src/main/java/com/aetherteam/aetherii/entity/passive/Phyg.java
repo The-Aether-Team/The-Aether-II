@@ -38,7 +38,7 @@ public class Phyg extends WingedAnimal {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PhygPanicGoal(this, 1.25));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, Ingredient.of(AetherIITags.Items.PHYG_TEMPTATION_ITEMS), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, Ingredient.of(AetherIITags.Items.PHYG_FOOD), false));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(6, new FallingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -62,7 +62,7 @@ public class Phyg extends WingedAnimal {
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.is(AetherIITags.Items.PHYG_TEMPTATION_ITEMS);
+        return stack.is(AetherIITags.Items.PHYG_FOOD);
     }
 
     @Nullable

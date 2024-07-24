@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.ai.brain.behavior;
 
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.AnimalPanic;
 

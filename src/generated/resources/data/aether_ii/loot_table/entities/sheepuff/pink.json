@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:pink_wool"
+          "name": "aether_ii:pink_cloudwool"
         }
       ],
       "rolls": 1.0

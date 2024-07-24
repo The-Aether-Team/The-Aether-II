@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "aether_ii:block/natural/irradiated_amberoot_leaves",
-    "side": "aether_ii:block/natural/frosted_irradiated_amberoot_leaves"
-  }
-}

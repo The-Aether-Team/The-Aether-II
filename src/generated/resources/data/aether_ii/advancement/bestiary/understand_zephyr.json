@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "kill_zephyr": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:zephyr"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "requirements": [
+    [
+      "kill_zephyr"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

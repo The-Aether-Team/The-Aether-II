@@ -41,6 +41,16 @@ public class AetherIITreeFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = AetherIIFeatureUtils.registerKey("amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SINGULAR_AMBEROOT = AetherIIFeatureUtils.registerKey("singular_amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_AMBEROOT = AetherIIFeatureUtils.registerKey("large_amberoot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_IRRADIATED = AetherIIFeatureUtils.registerKey("skyroot_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SKYROOT_IRRADIATED = AetherIIFeatureUtils.registerKey("large_skyroot_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPLANE_IRRADIATED = AetherIIFeatureUtils.registerKey("skyplane_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYBIRCH_IRRADIATED = AetherIIFeatureUtils.registerKey("skybirch_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPINE_IRRADIATED = AetherIIFeatureUtils.registerKey("skypine_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WISPROOT_IRRADIATED = AetherIIFeatureUtils.registerKey("wisproot_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WISPTOP_IRRADIATED = AetherIIFeatureUtils.registerKey("wisptop_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GREATROOT_IRRADIATED = AetherIIFeatureUtils.registerKey("greatroot_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GREATOAK_IRRADIATED = AetherIIFeatureUtils.registerKey("greatoak_irradiated");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA_IRRADIATED = AetherIIFeatureUtils.registerKey("greatboa_irradiated");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         AetherIIFeatureUtils.register(context, SKYROOT, Feature.TREE,
@@ -154,5 +164,85 @@ public class AetherIITreeFeatures {
                         new LargeAmberootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, SKYROOT_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(4, 2, 0), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get().defaultBlockState()),
+                        new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
+                        new TwoLayersFeatureSize(1, 0, 1))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, LARGE_SKYROOT_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(7, 6, 0), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get().defaultBlockState()),
+                        new LargeSkyrootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, SKYPLANE_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(10, 4, 0), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get().defaultBlockState()),
+                        new SkyplaneFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, SKYBIRCH_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(8, 3, 0), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get().defaultBlockState()),
+                        new SkybirchFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, SKYPINE_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(11, 5, 0), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get().defaultBlockState()),
+                        new SkypineFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().build());
+
+        AetherIIFeatureUtils.register(context, WISPROOT_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(11, 4, 0), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get().defaultBlockState()),
+                        new WisprootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
+
+        AetherIIFeatureUtils.register(context, WISPTOP_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(13, 6, 0), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get().defaultBlockState()),
+                        new WisptopFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
+
+        AetherIIFeatureUtils.register(context, GREATROOT_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
+                        new GiantTrunkPlacer(6, 2, 5), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get().defaultBlockState()),
+                        new GreatrootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
+
+        AetherIIFeatureUtils.register(context, GREATOAK_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
+                        new GiantTrunkPlacer(13, 5, 6), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get().defaultBlockState()),
+                        new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
+
+        AetherIIFeatureUtils.register(context, GREATBOA_IRRADIATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
+                        new GiantTrunkPlacer(15, 3, 8), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get().defaultBlockState()),
+                        new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
     }
 }

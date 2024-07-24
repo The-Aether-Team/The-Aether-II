@@ -75,7 +75,7 @@ public class Aerbunny extends AetherTamableAnimal {
         this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(2, new RunWhenAfraid(this, 1.3));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, Ingredient.of(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, Ingredient.of(AetherIITags.Items.AERBUNNY_FOOD), false));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(6, new FallingRandomStrollGoal(this, 1.0, 80));
     }
@@ -461,7 +461,7 @@ public class Aerbunny extends AetherTamableAnimal {
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.is(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS);
+        return stack.is(AetherIITags.Items.AERBUNNY_FOOD);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xb5ffd0)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_HIGHFIELDS, 12000, 24000, true))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
     private static final BiomeSpecialEffects MAGNETIC_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0xedeef5)
@@ -35,7 +35,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xc9ffd1)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_MAGNETIC, 12000, 24000, true))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
     private static final BiomeSpecialEffects ARCTIC_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0xf3f0ff)
@@ -45,7 +45,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xbdf9ff)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_ARCTIC, 12000, 24000, true))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
     private static final BiomeSpecialEffects IRRADIATED_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0xf0e8dd)
@@ -55,7 +55,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xffe694)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_IRRADIATED, 12000, 24000, true))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .ambientParticle(new AmbientParticleSettings(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F))
             .build();
     private static final BiomeSpecialEffects AERCLOUD_SEA_EFFECTS = new BiomeSpecialEffects.Builder()
@@ -66,7 +66,7 @@ public class HighlandsBiomeBuilders {
             .grassColorOverride(0xb5ffd0)
             .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
-            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AERCLOUD_SEA, 12000, 24000, true))
+            .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
 
     public static Biome flourishingFieldBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
@@ -74,7 +74,8 @@ public class HighlandsBiomeBuilders {
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.FLOURISHING_FIELD_TREES),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.FLOURISHING_FIELD_TREES)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHFIELDS_FLOWER_PATCH_DENSE),
                 temperature, downfall);
     }
 
@@ -83,7 +84,8 @@ public class HighlandsBiomeBuilders {
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VERDANT_WOODS_TREES),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VERDANT_WOODS_TREES)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHFIELDS_FLOWER_PATCH_SPARSE),
                 temperature, downfall);
     }
 
@@ -91,13 +93,15 @@ public class HighlandsBiomeBuilders {
         return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHROUDED_FOREST_TREES),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHROUDED_FOREST_TREES)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHFIELDS_FLOWER_PATCH_SPARSE),
                 temperature, downfall);
     }
 
     public static Biome shimmeringBasinBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHIMMERING_BASIN_TREES),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHIMMERING_BASIN_TREES)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHFIELDS_FLOWER_PATCH_DENSE),
                 temperature, downfall);
     }
 
@@ -111,8 +115,10 @@ public class HighlandsBiomeBuilders {
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
+                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.4, 0.11)
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), 10, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), 8, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), 8, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 10, 1, 2))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 6, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 6, 1, 3))
@@ -120,6 +126,8 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MOA.get(), 1, 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 3, 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 7, 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 10, 1, 1))
                         .build(),
                 builder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.NOISE_LAKE)
@@ -142,10 +150,10 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHFIELDS_FLOWER_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHLANDS_BUSH_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.BLUEBERRY_BUSH_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.ORANGE_TREE_PATCH)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VALKYRIE_SPROUT_PATCH)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.COLD_AERCLOUD)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.BLUE_AERCLOUD)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.GOLDEN_AERCLOUD)
@@ -198,15 +206,19 @@ public class HighlandsBiomeBuilders {
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MOA.get(), 1, 1, 1))
+                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.4, 0.11)
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), 10, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), 8, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), 8, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 10, 1, 2))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 6, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 6, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 6, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MOA.get(), 1, 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 3, 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 7, 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 10, 1, 1))
                         .build(),
                 builder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_FERROSITE_SAND)
@@ -278,13 +290,19 @@ public class HighlandsBiomeBuilders {
                 spawnSettingsBuilder
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.6, 0.16)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MOA.get(), 1, 1, 1))
+                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.4, 0.11)
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_KIRRID.get(), 10, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), 8, 1, 3))
-                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 6, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), 8, 1, 3))
                         .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AERBUNNY.get(), 10, 1, 2))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SHEEPUFF.get(), 6, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.FLYING_COW.get(), 6, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.PHYG.get(), 6, 1, 3))
+                        .addSpawn(MobCategory.CREATURE, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.MOA.get(), 1, 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 3, 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.AECHOR_PLANT.get(), 7, 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 10, 1, 1))
                         .build(),
                 builder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.COAST_ARCTIC_PACKED_ICE)
@@ -336,6 +354,7 @@ public class HighlandsBiomeBuilders {
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 3, 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 10, 1, 1))
                         .build(),
                 builder
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
@@ -379,6 +398,7 @@ public class HighlandsBiomeBuilders {
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 1))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 3, 1, 1))
+                        .addSpawn(AetherIIMobCategory.AETHER_SURFACE_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 10, 1, 1))
                         .build(),
                 generationSettingsBuilder
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, AetherIIMiscPlacements.NOISE_LAKE)

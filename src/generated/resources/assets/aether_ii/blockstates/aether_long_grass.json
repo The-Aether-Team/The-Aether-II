@@ -1,9 +1,12 @@
 {
   "variants": {
-    "snowy=false": {
+    "grass_type=default": {
       "model": "aether_ii:block/aether_long_grass"
     },
-    "snowy=true": {
+    "grass_type=enchanted": {
+      "model": "aether_ii:block/enchanted_aether_long_grass"
+    },
+    "grass_type=snowy": {
       "model": "aether_ii:block/frosted_aether_long_grass"
     }
   }

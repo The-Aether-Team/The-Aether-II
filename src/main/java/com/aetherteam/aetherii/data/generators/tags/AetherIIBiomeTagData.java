@@ -46,6 +46,24 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 AetherIIBiomes.EXPANSE
         );
 
+        this.tag(AetherIITags.Biomes.AETHER_MUSIC).add(
+                AetherIIBiomes.FLOURISHING_FIELD,
+                AetherIIBiomes.VERDANT_WOODS,
+                AetherIIBiomes.SHROUDED_FOREST,
+                AetherIIBiomes.SHIMMERING_BASIN,
+                AetherIIBiomes.MAGNETIC_SCAR,
+                AetherIIBiomes.TURQUOISE_FOREST,
+                AetherIIBiomes.GLISTENING_SWAMP,
+                AetherIIBiomes.VIOLET_HIGHWOODS,
+                AetherIIBiomes.FRIGID_SIERRA,
+                AetherIIBiomes.ENDURING_WOODLAND,
+                AetherIIBiomes.FROZEN_LAKES,
+                AetherIIBiomes.SHEER_TUNDRA,
+                AetherIIBiomes.CONTAMINATED_JUNGLE,
+                AetherIIBiomes.BATTLEGROUND_WASTES,
+                AetherIIBiomes.EXPANSE
+        );
+
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST).add(
                 AetherIIBiomes.FLOURISHING_FIELD,
                 AetherIIBiomes.VERDANT_WOODS,

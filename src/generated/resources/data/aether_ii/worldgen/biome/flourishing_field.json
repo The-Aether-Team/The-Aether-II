@@ -8,10 +8,10 @@
     "foliage_color": 11665355,
     "grass_color": 11927504,
     "music": {
-      "max_delay": 24000,
-      "min_delay": 12000,
-      "replace_current_music": true,
-      "sound": "aether_ii:music.highlands.highfields"
+      "max_delay": 2400,
+      "min_delay": 600,
+      "replace_current_music": false,
+      "sound": "aether_ii:music.aether"
     },
     "sky_color": 13226495,
     "water_color": 10671602,
@@ -53,13 +53,14 @@
     [
       "aether_ii:moa_nest",
       "aether_ii:flourishing_field_trees",
+      "aether_ii:highfields_flower_patch_dense",
       "aether_ii:short_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:long_grass_patch",
-      "aether_ii:highfields_flower_patch",
       "aether_ii:highlands_bush_patch",
       "aether_ii:blueberry_bush_patch",
-      "aether_ii:orange_tree_patch"
+      "aether_ii:orange_tree_patch",
+      "aether_ii:valkyrie_sprout_patch"
     ],
     [
       "aether_ii:cold_aercloud",
@@ -72,6 +73,10 @@
   ],
   "has_precipitation": true,
   "spawn_costs": {
+    "aether_ii:aechor_plant": {
+      "charge": 0.4,
+      "energy_budget": 0.11
+    },
     "aether_ii:tempest": {
       "charge": 0.6,
       "energy_budget": 0.16
@@ -98,7 +103,20 @@
         "weight": 3
       }
     ],
-    "aether_ii:aether_surface_monster": [],
+    "aether_ii:aether_surface_monster": [
+      {
+        "type": "aether_ii:aechor_plant",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 7
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      }
+    ],
     "ambient": [],
     "axolotls": [],
     "creature": [
@@ -110,6 +128,12 @@
       },
       {
         "type": "aether_ii:highfields_burrukai",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 8
+      },
+      {
+        "type": "aether_ii:highfields_taegore",
         "maxCount": 3,
         "minCount": 1,
         "weight": 8

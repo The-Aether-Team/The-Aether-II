@@ -24,6 +24,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -52,9 +54,9 @@ import java.util.UUID;
 public class Moa extends MountableAnimal {
     private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Holder<MoaFeatherShape>> DATA_FEATHER_SHAPE_ID = SynchedEntityData.defineId(Moa.class, AetherIIDataSerializers.MOA_FEATHER_SHAPE.value());
-    private static final EntityDataAccessor<Integer> DATA_PRIMARY_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);  //todo moa variation
-    private static final EntityDataAccessor<Integer> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_EYE_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Optional<UUID>> DATA_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Optional<UUID>> DATA_LAST_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Integer> DATA_REMAINING_JUMPS_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
@@ -130,9 +132,9 @@ public class Moa extends MountableAnimal {
         super.defineSynchedData(builder);
         builder.define(DATA_MOA_UUID_ID, Optional.empty());
         builder.define(DATA_FEATHER_SHAPE_ID, AetherIIMoaFeatherShapes.getRegistry(this.registryAccess()).getHolderOrThrow(AetherIIMoaFeatherShapes.CURVED));
-        builder.define(DATA_PRIMARY_COLOR, 0);
-        builder.define(DATA_FEATHER_COLOR, 0);
-        builder.define(DATA_EYE_COLOR, 0);
+        builder.define(DATA_KERATIN_COLOR, KeratinColor.TEMPEST.getColor());
+        builder.define(DATA_EYE_COLOR, EyeColor.PORTAGE.getColor());
+        builder.define(DATA_FEATHER_COLOR, FeatherColor.BLUE.getColor());
         builder.define(DATA_RIDER_UUID, Optional.empty());
         builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
         builder.define(DATA_REMAINING_JUMPS_ID, 0);
@@ -195,6 +197,17 @@ public class Moa extends MountableAnimal {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
         this.generateMoaUUID(); //todo: 1.21 tag passing into this method was removed.
+
+        if (reason != MobSpawnType.NATURAL) {
+            Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(this.getRandom());
+            Moa.EyeColor eyeColor = Moa.EyeColor.getRandom(this.getRandom());
+            Moa.FeatherColor featherColor = Moa.FeatherColor.getRandom(this.getRandom());
+            this.setKeratinColor(keratinColor.getColor());
+            this.setEyeColor(eyeColor.getColor());
+            this.setFeatherColor(featherColor.getColor());
+        }
+
+
 //        if (tag != null) { // Applies NBT when spawned from incubation.
 //            if (tag.contains("IsBaby")) {
 //                this.setBaby(tag.getBoolean("IsBaby"));
@@ -440,7 +453,7 @@ public class Moa extends MountableAnimal {
             this.setSitting(!this.isSitting());
 
             return InteractionResult.sidedSuccess(this.level().isClientSide());
-        } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD_ITEMS)) { // Feeds a hungry baby Moa.
+        } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
             if (!player.getAbilities().instabuild) {
                 itemStack.shrink(1);
             }
@@ -457,7 +470,7 @@ public class Moa extends MountableAnimal {
             this.setHungry(false);
             //PacketDistributor.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
             return InteractionResult.CONSUME;
-        } else if (this.isPlayerGrown() && !this.isBaby() && this.getHealth() < this.getMaxHealth() && itemStack.is(AetherIITags.Items.MOA_FOOD_ITEMS)) { // Heals a tamed Moa.
+        } else if (this.isPlayerGrown() && !this.isBaby() && this.getHealth() < this.getMaxHealth() && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Heals a tamed Moa.
             if (!player.getAbilities().instabuild) {
                 itemStack.shrink(1);
             }
@@ -508,20 +521,12 @@ public class Moa extends MountableAnimal {
         this.entityData.set(DATA_FEATHER_SHAPE_ID, shape);
     }
 
-    public int getPrimaryColor() {
-        return this.entityData.get(DATA_PRIMARY_COLOR);
+    public int getKeratinColor() {
+        return this.entityData.get(DATA_KERATIN_COLOR);
     }
 
-    public void setPrimaryColor(int color) {
-        this.entityData.set(DATA_PRIMARY_COLOR, color);
-    }
-
-    public int getFeatherColor() {
-        return this.entityData.get(DATA_FEATHER_COLOR);
-    }
-
-    public void setFeatherColor(int color) {
-        this.entityData.set(DATA_FEATHER_COLOR, color);
+    public void setKeratinColor(int color) {
+        this.entityData.set(DATA_KERATIN_COLOR, color);
     }
 
     public int getEyeColor() {
@@ -530,6 +535,14 @@ public class Moa extends MountableAnimal {
 
     public void setEyeColor(int color) {
         this.entityData.set(DATA_EYE_COLOR, color);
+    }
+
+    public int getFeatherColor() {
+        return this.entityData.get(DATA_FEATHER_COLOR);
+    }
+
+    public void setFeatherColor(int color) {
+        this.entityData.set(DATA_FEATHER_COLOR, color);
     }
 
     /**
@@ -888,6 +901,34 @@ public class Moa extends MountableAnimal {
         MoaEggItem moaEggItem = MoaEggItem.byId(this.getMoaTypeKey());
         return moaEggItem == null ? null : new ItemStack(moaEggItem);
     }*/
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        if (this.getMoaUUID() != null) {
+            tag.putUUID("MoaUUID", this.getMoaUUID());
+        }
+        tag.putBoolean("IsBaby", this.isBaby());
+        tag.putString("FeatherShape", this.getFeatherShape().unwrapKey().orElse(AetherIIMoaFeatherShapes.CURVED).location().toString());
+        tag.putInt("KeratinColor", this.getKeratinColor());
+        tag.putInt("EyeColor", this.getEyeColor());
+        tag.putInt("FeatherColor", this.getFeatherColor());
+        if (this.getRider() != null) {
+            tag.putUUID("Rider", this.getRider());
+        }
+        if (this.getLastRider() != null) {
+            tag.putUUID("LastRider", this.getLastRider());
+        }
+        tag.putInt("RemainingJumps", this.getRemainingJumps());
+        tag.putBoolean("Hungry", this.isHungry());
+        tag.putInt("AmountFed", this.getAmountFed());
+        tag.putBoolean("PlayerGrown", this.isPlayerGrown());
+        tag.putBoolean("Sitting", this.isSitting());
+        if (this.getFollowing() != null) {
+            tag.putUUID("Following", this.getFollowing());
+        }
+    }
+
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
@@ -901,6 +942,15 @@ public class Moa extends MountableAnimal {
                 .map(location -> ResourceKey.create(AetherIIMoaFeatherShapes.MOA_FEATHER_SHAPE_REGISTRY_KEY, location))
                 .flatMap((key) -> AetherIIMoaFeatherShapes.getRegistry(this.registryAccess()).getHolder(key))
                 .ifPresent(this::setFeatherShape);
+        if (tag.contains("KeratinColor")) {
+            this.setKeratinColor(tag.getInt("KeratinColor"));
+        }
+        if (tag.contains("EyeColor")) {
+            this.setEyeColor(tag.getInt("EyeColor"));
+        }
+        if (tag.contains("FeatherColor")) {
+            this.setFeatherColor(tag.getInt("FeatherColor"));
+        }
         if (tag.hasUUID("Rider")) {
             this.setRider(tag.getUUID("Rider"));
         }
@@ -927,27 +977,107 @@ public class Moa extends MountableAnimal {
         }
     }
 
-    @Override
-    public void addAdditionalSaveData(CompoundTag tag) {
-        super.addAdditionalSaveData(tag);
-        if (this.getMoaUUID() != null) {
-            tag.putUUID("MoaUUID", this.getMoaUUID());
+    public enum KeratinColor implements StringRepresentable {
+        SKY_BLUE(9946827),
+        DEEP_SKY(7437951),
+        SAND(8355441),
+        MIDNIGHT_SKY(3489636),
+        SWAMP(5727305),
+        ROYAL(4802916),
+        TEMPEST(6572361);
+
+        private final int color;
+
+        KeratinColor(int color) {
+            this.color = color;
         }
-        tag.putBoolean("IsBaby", this.isBaby());
-        tag.putString("FeatherShape", this.getFeatherShape().unwrapKey().orElse(AetherIIMoaFeatherShapes.CURVED).location().toString());
-        if (this.getRider() != null) {
-            tag.putUUID("Rider", this.getRider());
+
+        public int getColor() {
+            return this.color;
         }
-        if (this.getLastRider() != null) {
-            tag.putUUID("LastRider", this.getLastRider());
+
+        public static KeratinColor getRandom(RandomSource random) {
+            return KeratinColor.values()[random.nextInt(KeratinColor.values().length)];
         }
-        tag.putInt("RemainingJumps", this.getRemainingJumps());
-        tag.putBoolean("Hungry", this.isHungry());
-        tag.putInt("AmountFed", this.getAmountFed());
-        tag.putBoolean("PlayerGrown", this.isPlayerGrown());
-        tag.putBoolean("Sitting", this.isSitting());
-        if (this.getFollowing() != null) {
-            tag.putUUID("Following", this.getFollowing());
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase();
+        }
+    }
+
+    public enum EyeColor implements StringRepresentable {
+        ALTO(14277081),
+        STRAW(14269583),
+        WINTER_HAZEL(14274191),
+        GOSSIP(11662240),
+        MINT(10548161),
+        ICE(10548211),
+        PERANO(10535411),
+        PORTAGE(11641075);
+
+        private final int color;
+
+        EyeColor(int color) {
+            this.color = color;
+        }
+
+        public int getColor() {
+            return this.color;
+        }
+
+        public static EyeColor getRandom(RandomSource random) {
+            return EyeColor.values()[random.nextInt(EyeColor.values().length)];
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase();
+        }
+    }
+
+    public enum FeatherColor implements StringRepresentable {
+        BLACK(1710618),
+        GREY(4210752),
+        WHITE(15132390),
+        IROKO(5060642),
+        ORANGE(14261855),
+        LIBSON_BROWN(5065003),
+        YELLOW(14272093),
+        MALLARD(4148534),
+        LIME_GREEN(12645275),
+        EVERGLADE(3165499),
+        GREEN(7992218),
+        PLANTATION(3558733),
+        SKY_BLUE(178779123),
+        CLOUD_BURST(3554893),
+        BLUE(10538483),
+        PORT_GORE(3814989),
+        PURPLE(11509491),
+        BOSSANOVA(4732493),
+        PINK(14785011),
+        LIVID_BROWN(5060163),
+        PUSE(15968982),
+        DEEP_RED(5055010),
+        RED(15944009);
+
+        private final int color;
+
+        FeatherColor(int color) {
+            this.color = color;
+        }
+
+        public int getColor() {
+            return this.color;
+        }
+
+        public static FeatherColor getRandom(RandomSource random) {
+            return FeatherColor.values()[random.nextInt(FeatherColor.values().length)];
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase();
         }
     }
 }

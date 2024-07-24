@@ -107,7 +107,6 @@ public class DamageSystemHooks {
                 }
             }
         }
-        AetherII.LOGGER.info(String.valueOf(damage));
         return (float) damage;
     }
 

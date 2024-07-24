@@ -35,7 +35,7 @@ public class DamageSystemListener {
     public static void hurtWithDamageTypes(LivingDamageEvent.Pre event) {
         Entity target = event.getEntity();
         DamageSource source = event.getContainer().getSource();
-        float damage = event.getContainer().getOriginalDamage();
+        float damage = event.getContainer().getNewDamage();
         event.getContainer().setNewDamage(DamageSystemHooks.getDamageTypeModifiedValue(target, source, damage));
     }
 

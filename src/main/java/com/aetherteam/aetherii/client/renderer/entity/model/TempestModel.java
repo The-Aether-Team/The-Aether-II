@@ -6,79 +6,94 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.util.Mth;
+import net.minecraft.client.model.geom.builders.*;
 
 public class TempestModel extends EntityModel<Tempest> {
-    public ModelPart mouth;
-    public ModelPart body;
-    public ModelPart bodyRightSideFront;
-    public ModelPart bodyRightSideBack;
-    public ModelPart bodyLeftSideFront;
-    public ModelPart bodyLeftSideBack;
-    public ModelPart cloudButt;
-    public ModelPart tailBase;
-    public ModelPart tailMiddle;
-    public ModelPart tailEnd;
+	private final ModelPart body;
 
-    public TempestModel(ModelPart model) {
-        this.mouth = model.getChild("mouth");
-        this.body = model.getChild("body");
-        this.bodyRightSideFront = model.getChild("body_right_side_front");
-        this.bodyRightSideBack = model.getChild("body_right_side_back");
-        this.bodyLeftSideFront = model.getChild("body_left_side_front");
-        this.bodyLeftSideBack = model.getChild("body_left_side_back");
-        this.cloudButt = model.getChild("cloud_butt");
-        this.tailBase = model.getChild("tail_base");
-        this.tailMiddle = this.tailBase.getChild("tail_middle");
-        this.tailEnd = this.tailMiddle.getChild("tail_end");
-    }
+	public TempestModel(ModelPart root) {
+		this.body = root.getChild("body");
+	}
 
-    public static LayerDefinition createBodyLayer() {
-        MeshDefinition meshDefinition = new MeshDefinition();
-        PartDefinition partDefinition = meshDefinition.getRoot();
-        partDefinition.addOrReplaceChild("mouth", CubeListBuilder.create().texOffs(66, 19).mirror().addBox(-3.0F, 1.0F, -8.0F, 6.0F, 3.0F, 1.0F), PartPose.offset(0.0F, 8.0F, 0.0F));
-        partDefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(27, 9).addBox(-6.0F, -4.0F, -7.0F, 12.0F, 9.0F, 14.0F), PartPose.offset(0.0F, 8.0F, 0.0F));
-        partDefinition.addOrReplaceChild("body_right_side_front", CubeListBuilder.create().texOffs(0, 20).mirror().addBox(-2.0F, -3.0F, -3.0F, 2.0F, 6.0F, 6.0F), PartPose.offset(-6.0F, 8.0F, -4.0F));
-        partDefinition.addOrReplaceChild("body_right_side_back", CubeListBuilder.create().texOffs(25, 11).mirror().addBox(-2.0F, -3.3333F, -2.5F, 2.0F, 6.0F, 6.0F), PartPose.offset(-5.5F, 9.0F, 2.0F));
-        partDefinition.addOrReplaceChild("body_left_side_front", CubeListBuilder.create().texOffs(0, 20).addBox(0.0F, -3.0F, -3.0F, 2.0F, 6.0F, 6.0F), PartPose.offset(6.0F, 8.0F, -4.0F));
-        partDefinition.addOrReplaceChild("body_left_side_back", CubeListBuilder.create().texOffs(25, 11).addBox(0.0F, -3.3333F, -2.5F, 2.0F, 6.0F, 6.0F), PartPose.offset(5.5F, 9.0F, 2.0F));
-        partDefinition.addOrReplaceChild("cloud_butt", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-6.0F, -3.0F, 0.0F, 8.0F, 6.0F, 2.0F), PartPose.offset(2.0F, 8.0F, 7.0F));
-        PartDefinition tailBase = partDefinition.addOrReplaceChild("tail_base", CubeListBuilder.create().texOffs(96, 22).addBox(-2.5F, -2.5F, -2.5F, 5.0F, 5.0F, 5.0F), PartPose.offset(0.0F, 0.0F, 12.4F));
-        PartDefinition tailMiddle = tailBase.addOrReplaceChild("tail_middle", CubeListBuilder.create().texOffs(80, 24).addBox(-2.0F, -2.0F, -1.966667F, 4.0F, 4.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 6.0F));
-        tailMiddle.addOrReplaceChild("tail_end", CubeListBuilder.create().texOffs(84, 18).addBox(-1.5F, -1.5F, -1.5F, 3.0F, 3.0F, 3.0F), PartPose.offset(0.0F, 0.0F, 5.0F));
-        return LayerDefinition.create(meshDefinition, 128, 32);
-    }
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition partdefinition = meshdefinition.getRoot();
 
-    public void setupAnim(Tempest tempest, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        float motion = Mth.sin(limbSwing * 20.0F / 57.295776F) * limbSwingAmount * 0.5F;
-        this.bodyRightSideFront.y = 8.0F - motion * 0.5F;
-        this.bodyRightSideBack.y = 9.0F + motion * 0.5F;
-        this.bodyLeftSideFront.y = this.bodyRightSideFront.y;
-        this.bodyLeftSideBack.y = this.bodyRightSideBack.y;
-        this.tailBase.x = Mth.sin(limbSwing * 20.0F / 57.295776F) * limbSwingAmount * 0.75F;
-        this.tailBase.y = 8.0F - motion;
-        this.tailBase.yRot = Mth.sin(ageInTicks * 0.5F) * limbSwingAmount * 0.75F;
-        this.tailMiddle.x = Mth.sin(limbSwing * 15.0F / 57.295776F) * limbSwingAmount * 0.85F;
-        this.tailMiddle.y = motion * 1.25F;
-        this.tailMiddle.yRot = this.tailBase.yRot + 0.25F;
-        this.tailEnd.x = Mth.sin(limbSwing * 10.0F / 57.295776F) * limbSwingAmount * 0.95F;
-        this.tailEnd.y = -motion;
-        this.tailEnd.yRot = this.tailMiddle.yRot + 0.35F;
-    }
+		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(47, 69).addBox(-3.5F, -12.0F, -3.0F, 7.0F, 7.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 17.0F, 0.0F));
 
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        this.mouth.render(poseStack, buffer, packedLight, packedOverlay);
-        this.body.render(poseStack, buffer, packedLight, packedOverlay);
-        this.bodyRightSideFront.render(poseStack, buffer, packedLight, packedOverlay);
-        this.bodyRightSideBack.render(poseStack, buffer, packedLight, packedOverlay);
-        this.bodyLeftSideFront.render(poseStack, buffer, packedLight, packedOverlay);
-        this.bodyLeftSideBack.render(poseStack, buffer, packedLight, packedOverlay);
-        this.cloudButt.render(poseStack, buffer, packedLight, packedOverlay);
-        this.tailBase.render(poseStack, buffer, packedLight, packedOverlay);
-    }
+		body.addOrReplaceChild("legs_right_r1", CubeListBuilder.create().texOffs(18, 96).addBox(0.0F, 0.0F, -3.5F, 1.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.5F, -6.0F, 5.5F, 0.0F, 0.0F, 0.2618F));
+
+		body.addOrReplaceChild("legs_left_r1", CubeListBuilder.create().texOffs(94, 96).addBox(-1.0F, 0.0F, -3.5F, 1.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.5F, -6.0F, 5.5F, 0.0F, 0.0F, -0.2618F));
+
+		body.addOrReplaceChild("wingcase_right_r1", CubeListBuilder.create().texOffs(8, 76).addBox(-3.0F, -2.0F, -1.0F, 5.0F, 3.0F, 15.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, -11.0F, 5.0F, 0.2182F, -0.3491F, -0.1309F));
+
+		body.addOrReplaceChild("wingcase_left_r1", CubeListBuilder.create().texOffs(80, 76).addBox(-2.0F, -2.0F, -1.0F, 5.0F, 3.0F, 15.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, -11.0F, 5.0F, 0.2182F, 0.3491F, 0.1309F));
+
+		PartDefinition arm_left = body.addOrReplaceChild("arm_left", CubeListBuilder.create(), PartPose.offset(3.0F, -5.5F, 0.0F));
+
+		arm_left.addOrReplaceChild("claw_left_r1", CubeListBuilder.create().texOffs(84, 111).addBox(0.75F, 8.5F, -6.0F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, 0.0F, 0.6981F, 0.0F, 0.0436F));
+
+		arm_left.addOrReplaceChild("arm_left_2_r1", CubeListBuilder.create().texOffs(80, 100).addBox(-0.75F, 2.5F, -3.0F, 4.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, 0.0F, 0.2618F, 0.0F, 0.0436F));
+
+		arm_left.addOrReplaceChild("arm_left_1_r1", CubeListBuilder.create().texOffs(83, 94).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.2618F, 0.0F, -0.2618F));
+
+		PartDefinition arm_right = body.addOrReplaceChild("arm_right", CubeListBuilder.create(), PartPose.offset(-3.0F, -5.5F, 0.0F));
+
+		arm_right.addOrReplaceChild("claw_right_r1", CubeListBuilder.create().texOffs(38, 111).addBox(-1.75F, 8.5F, -6.0F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, 0.0F, 0.6981F, 0.0F, -0.0436F));
+
+		arm_right.addOrReplaceChild("arm_right_2_r1", CubeListBuilder.create().texOffs(34, 100).addBox(-3.25F, 2.5F, -3.0F, 4.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, 0.0F, 0.2618F, 0.0F, -0.0436F));
+
+		arm_right.addOrReplaceChild("arm_right_1_r1", CubeListBuilder.create().texOffs(37, 94).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.2618F, 0.0F, 0.2618F));
+
+		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		head.addOrReplaceChild("head_inner_r1", CubeListBuilder.create().texOffs(55, 98).addBox(-4.0F, 0.0F, -1.0F, 8.0F, 4.0F, 1.0F, new CubeDeformation(0.0F))
+		.texOffs(48, 103).addBox(-4.0F, 0.0F, -7.0F, 8.0F, 4.0F, 8.0F, new CubeDeformation(0.0F))
+		.texOffs(48, 86).addBox(-4.0F, -4.0F, -7.0F, 8.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -8.5F, -3.0F, 0.0436F, 0.0F, 0.0F));
+
+		PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(56, 115).addBox(-1.0F, -10.5F, 6.0F, 2.0F, 4.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition tail_1 = tail.addOrReplaceChild("tail_1", CubeListBuilder.create().texOffs(78, 112).addBox(-1.0F, -1.5F, 8.0F, 1.0F, 4.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -9.0F, 7.0F));
+
+		tail_1.addOrReplaceChild("tail_2", CubeListBuilder.create().texOffs(104, 114).addBox(-1.0F, -1.5F, 12.0F, 1.0F, 4.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 8.0F));
+
+		PartDefinition cloud_shell = body.addOrReplaceChild("cloud_shell", CubeListBuilder.create().texOffs(30, 0).addBox(-7.5F, -6.0F, -11.0F, 15.0F, 10.0F, 19.0F, new CubeDeformation(0.0F))
+		.texOffs(30, 29).addBox(-7.5F, -6.0F, -11.0F, 15.0F, 10.0F, 19.0F, new CubeDeformation(-0.5F)), PartPose.offset(0.0F, -8.0F, 0.0F));
+
+		cloud_shell.addOrReplaceChild("wisp_right_r1", CubeListBuilder.create().texOffs(7, 21).addBox(-1.5F, 0.0F, 0.0F, 1.0F, 7.0F, 20.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.5F, -5.0F, 8.0F, 0.0F, -0.2618F, -0.1309F));
+
+		cloud_shell.addOrReplaceChild("wisp_left_r1", CubeListBuilder.create().texOffs(79, 21).addBox(0.5F, 0.0F, 0.0F, 1.0F, 7.0F, 20.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.5F, -5.0F, 8.0F, 0.0F, 0.2618F, 0.1309F));
+
+		PartDefinition fin_right = cloud_shell.addOrReplaceChild("fin_right", CubeListBuilder.create(), PartPose.offsetAndRotation(-8.5F, -1.0F, -8.0F, 0.0F, -0.0873F, 0.0F));
+
+		fin_right.addOrReplaceChild("fin_wisp_right_r1", CubeListBuilder.create().texOffs(1, 4).addBox(1.15F, -9.0F, 6.0F, 1.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 4.0F, 6.5F, 0.0F, -0.3054F, 0.0F));
+
+		fin_right.addOrReplaceChild("fin_right_r1", CubeListBuilder.create().texOffs(19, 0).addBox(1.0F, -4.0F, 1.0F, 3.0F, 7.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.2182F, 0.0F));
+
+		PartDefinition fin_left = cloud_shell.addOrReplaceChild("fin_left", CubeListBuilder.create(), PartPose.offsetAndRotation(8.5F, -1.0F, -8.0F, 0.0F, 0.0873F, 0.0F));
+
+		fin_left.addOrReplaceChild("fin_wisp_left_r1", CubeListBuilder.create().texOffs(109, 4).addBox(-2.15F, -9.0F, 6.0F, 1.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 4.0F, 6.5F, 0.0F, 0.3054F, 0.0F));
+
+		fin_left.addOrReplaceChild("fin_left_r1", CubeListBuilder.create().texOffs(79, 0).addBox(-4.0F, -4.0F, 1.0F, 3.0F, 7.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.2182F, 0.0F));
+
+		PartDefinition jaw = cloud_shell.addOrReplaceChild("jaw", CubeListBuilder.create().texOffs(47, 58).addBox(-6.0F, -3.1F, -3.75F, 12.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 4.0F, -9.5F, 0.0873F, 0.0F, 0.0F));
+
+		jaw.addOrReplaceChild("jaw_left_2_r1", CubeListBuilder.create().texOffs(104, 55).addBox(0.25F, -4.6F, 10.2F, 2.0F, 4.0F, 10.0F, new CubeDeformation(0.1F))
+		.texOffs(80, 58).addBox(-0.75F, -2.6F, 1.0F, 3.0F, 4.0F, 9.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(3.0F, -0.5F, -5.0F, 0.0F, 0.5236F, 0.0F));
+
+		jaw.addOrReplaceChild("jaw_right_2_r1", CubeListBuilder.create().texOffs(0, 55).addBox(-2.25F, -4.6F, 10.2F, 2.0F, 4.0F, 10.0F, new CubeDeformation(0.1F))
+		.texOffs(24, 58).addBox(-2.25F, -2.6F, 1.0F, 3.0F, 4.0F, 9.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(-3.0F, -0.5F, -5.0F, 0.0F, -0.5236F, 0.0F));
+
+		return LayerDefinition.create(meshdefinition, 128, 128);
+	}
+
+	@Override
+	public void setupAnim(Tempest entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
+	}
+
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+	}
 }

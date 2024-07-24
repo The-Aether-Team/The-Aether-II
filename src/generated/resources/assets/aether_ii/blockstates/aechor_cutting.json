@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": {
+      "model": "aether_ii:block/aechor_cutting"
+    },
+    "snowy=true": {
+      "model": "aether_ii:block/aechor_cutting"
+    }
+  }
+}

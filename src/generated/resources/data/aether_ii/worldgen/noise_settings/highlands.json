@@ -19,10 +19,10 @@
   },
   "noise_router": {
     "barrier": 0.0,
-    "continents": "aether_ii:highlands/continents",
+    "continents": "aether_ii:highlands/continents_final",
     "depth": "aether_ii:highlands/depth",
     "erosion": "aether_ii:highlands/erosion",
-    "final_density": "aether_ii:highlands/final_density",
+    "final_density": "aether_ii:highlands/terrain/final_islands",
     "fluid_level_floodedness": 0.0,
     "fluid_level_spread": 0.0,
     "initial_density_without_jaggedness": 0.0,
@@ -135,6 +135,42 @@
           "then_run": {
             "type": "minecraft:sequence",
             "sequence": [
+              {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:biome",
+                  "biome_is": [
+                    "aether_ii:battleground_wastes"
+                  ]
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "aether_ii:enchanted_aether_grass_block",
+                    "Properties": {
+                      "snowy": "false"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:biome",
+                  "biome_is": [
+                    "aether_ii:contaminated_jungle"
+                  ]
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "aether_ii:enchanted_aether_grass_block",
+                    "Properties": {
+                      "snowy": "false"
+                    }
+                  }
+                }
+              },
               {
                 "type": "minecraft:condition",
                 "if_true": {

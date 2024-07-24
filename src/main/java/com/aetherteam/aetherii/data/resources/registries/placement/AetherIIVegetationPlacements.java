@@ -22,8 +22,10 @@ public class AetherIIVegetationPlacements {
     public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH = AetherIIPlacementUtils.createKey("highlands_bush_patch");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = AetherIIPlacementUtils.createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = AetherIIPlacementUtils.createKey("orange_tree_patch");
+    public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH = AetherIIPlacementUtils.createKey("valkyrie_sprout_patch");
 
-    public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = AetherIIPlacementUtils.createKey("highfields_flower_patch");
+    public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_DENSE = AetherIIPlacementUtils.createKey("highfields_flower_patch_dense");
+    public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_SPARSE = AetherIIPlacementUtils.createKey("highfields_flower_patch_sparse");
 
     public static final ResourceKey<PlacedFeature> FLOURISHING_FIELD_TREES = AetherIIPlacementUtils.createKey("flourishing_field_trees");
     public static final ResourceKey<PlacedFeature> VERDANT_WOODS_TREES = AetherIIPlacementUtils.createKey("verdant_woods_trees");
@@ -57,7 +59,11 @@ public class AetherIIVegetationPlacements {
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BiomeFilter.biome());
 
-        AetherIIPlacementUtils.register(context, HIGHFIELDS_FLOWER_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.HIGHFIELDS_FLOWER_PATCH),
+        AetherIIPlacementUtils.register(context, HIGHFIELDS_FLOWER_PATCH_DENSE, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.HIGHFIELDS_FLOWER_PATCH),
+                CountPlacement.of(2),
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
+                BiomeFilter.biome());
+        AetherIIPlacementUtils.register(context, HIGHFIELDS_FLOWER_PATCH_SPARSE, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.HIGHFIELDS_FLOWER_PATCH),
                 RarityFilter.onAverageOnceEvery(2),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BiomeFilter.biome());
@@ -72,6 +78,10 @@ public class AetherIIVegetationPlacements {
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.ORANGE_TREE_PATCH),
                 RarityFilter.onAverageOnceEvery(16),
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
+                BiomeFilter.biome());
+        AetherIIPlacementUtils.register(context, VALKYRIE_SPROUT_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.VALKYRIE_SPROUT_PATCH),
+                RarityFilter.onAverageOnceEvery(4),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BiomeFilter.biome());
 
@@ -104,9 +114,9 @@ public class AetherIIVegetationPlacements {
         AetherIIPlacementUtils.register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYPINE),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2), AetherIIBlocks.SKYPINE_SAPLING.get()));
 
-        AetherIIPlacementUtils.register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_DENSE),
+        AetherIIPlacementUtils.register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_IRRADIATED),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
-        AetherIIPlacementUtils.register(context, BATTLEGROUND_WASTES_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_AMBEROOT_SPARSE),
+        AetherIIPlacementUtils.register(context, BATTLEGROUND_WASTES_TREES, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.TREES_IRRADIATED),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
 
         AetherIIPlacementUtils.register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());

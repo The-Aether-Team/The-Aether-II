@@ -3,6 +3,8 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
+import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.data.resources.builders.AetherIIFeatureBuilders;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
 import net.minecraft.core.HolderGetter;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.VegetationPatchConfiguration;
@@ -37,6 +40,8 @@ public class AetherIIVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH_PATCH = AetherIIFeatureUtils.registerKey("highlands_bush_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH_PATCH = AetherIIFeatureUtils.registerKey("blueberry_bush_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE_PATCH = AetherIIFeatureUtils.registerKey("orange_tree_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT_PATCH = AetherIIFeatureUtils.registerKey("brettl_plant_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = AetherIIFeatureUtils.registerKey("valkyrie_sprout_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_TURF_TOP = AetherIIFeatureUtils.registerKey("ferrosite_pillar_turf_top");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_TURF = AetherIIFeatureUtils.registerKey("ferrosite_pillar_turf");
@@ -48,6 +53,7 @@ public class AetherIIVegetationFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_TURQUOISE_FOREST = AetherIIFeatureUtils.registerKey("trees_turquoise_forest");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_VIOLET_HIGHWOODS = AetherIIFeatureUtils.registerKey("trees_violet_highwoods");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_ENDURING_WOODLANDS = AetherIIFeatureUtils.registerKey("trees_enduring_woodland");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_IRRADIATED = AetherIIFeatureUtils.registerKey("trees_irradiated");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_SPARSE = AetherIIFeatureUtils.registerKey("trees_amberoot_sparse");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_AMBEROOT_DENSE = AetherIIFeatureUtils.registerKey("trees_amberoot_dense");
 
@@ -60,9 +66,9 @@ public class AetherIIVegetationFeatures {
         orangeTrees.add(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 3), 1);
         orangeTrees.add(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4), 1);
 
-        AetherIIFeatureUtils.register(context, SHORT_GRASS_PATCH, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(BlockStateProvider.simple(AetherIIBlocks.AETHER_SHORT_GRASS.get()), 64));
-        AetherIIFeatureUtils.register(context, MEDIUM_GRASS_PATCH, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(BlockStateProvider.simple(AetherIIBlocks.AETHER_MEDIUM_GRASS.get()), 32));
-        AetherIIFeatureUtils.register(context, LONG_GRASS_PATCH, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(BlockStateProvider.simple(AetherIIBlocks.AETHER_LONG_GRASS.get()), 16));
+        AetherIIFeatureUtils.register(context, SHORT_GRASS_PATCH, Feature.RANDOM_PATCH, AetherIIFeatureBuilders.aetherGrassPatch(BlockStateProvider.simple(AetherIIBlocks.AETHER_SHORT_GRASS.get()), 64));
+        AetherIIFeatureUtils.register(context, MEDIUM_GRASS_PATCH, Feature.RANDOM_PATCH, AetherIIFeatureBuilders.aetherGrassPatch(BlockStateProvider.simple(AetherIIBlocks.AETHER_MEDIUM_GRASS.get()), 32));
+        AetherIIFeatureUtils.register(context, LONG_GRASS_PATCH, Feature.RANDOM_PATCH, AetherIIFeatureBuilders.aetherGrassPatch(BlockStateProvider.simple(AetherIIBlocks.AETHER_LONG_GRASS.get()), 16));
 
         AetherIIFeatureUtils.register(context, HIGHFIELDS_FLOWER_PATCH, Feature.FLOWER,
                 NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1).add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)), 32));
@@ -73,6 +79,10 @@ public class AetherIIVegetationFeatures {
                 NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState(), 1)), 64));
         AetherIIFeatureUtils.register(context, ORANGE_TREE_PATCH, Feature.RANDOM_PATCH,
                 FeatureUtils.simpleRandomPatchConfiguration(16, PlacementUtils.onlyWhenEmpty(AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(new WeightedStateProvider(orangeTrees)))));
+        AetherIIFeatureUtils.register(context, VALKYRIE_SPROUT_PATCH, Feature.RANDOM_PATCH,
+                FeatureUtils.simpleRandomPatchConfiguration(24, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))))));
+        AetherIIFeatureUtils.register(context, BRETTL_PLANT_PATCH, Feature.RANDOM_PATCH,
+                AetherIIFeatureBuilders.brettlPatch(64, PlacementUtils.onlyWhenEmpty(AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration())));
 
         AetherIIFeatureUtils.register(context, FERROSITE_PILLAR_TURF_TOP, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
@@ -137,6 +147,21 @@ public class AetherIIVegetationFeatures {
         AetherIIFeatureUtils.register(context, TREES_ENDURING_WOODLANDS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.GREATBOA), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.03F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYPINE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get()))));
+
+        AetherIIFeatureUtils.register(context, TREES_IRRADIATED, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.LARGE_SKYROOT_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.4F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.WISPROOT_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPROOT_SAPLING.get())), 0.025F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYPLANE_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPLANE_SAPLING.get())), 0.05F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.GREATOAK_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATOAK_SAPLING.get())), 0.002F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYBIRCH_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYBIRCH_SAPLING.get())), 0.075F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.WISPTOP_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPTOP_SAPLING.get())), 0.005F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.GREATROOT_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATROOT_SAPLING.get())), 0.0075F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYPINE_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get())), 0.125F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.GREATBOA_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.001F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.025F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.SINGULAR_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.025F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.LARGE_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.065F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.SKYROOT_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get()))));
 
         AetherIIFeatureUtils.register(context, TREES_AMBEROOT_SPARSE, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIITreeFeatures.SINGULAR_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.3F),

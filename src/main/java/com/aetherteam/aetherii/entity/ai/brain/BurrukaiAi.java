@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.entity.ai.brain.behavior.NeutralAnimalPanic;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.RamAttack;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.Burrukai;
-import com.aetherteam.aetherii.entity.passive.kirrid.Kirrid;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;

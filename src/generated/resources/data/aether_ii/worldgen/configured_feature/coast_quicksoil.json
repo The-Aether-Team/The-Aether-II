@@ -8,6 +8,7 @@
         "Name": "aether_ii:quicksoil"
       }
     },
+    "brettl_chance": 0.75,
     "distance_noise": "aether_ii:highlands/coasts/highfields",
     "size": 16.35,
     "valid_blocks": "aether_ii:aether_grass_block",

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.passive.Moa;
@@ -33,19 +34,22 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         placeNest(level, config.nestBlock(), pos, radius + 1.0F, random);
         placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos, radius, random);
 
-       placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(), radius + 1, random);
-       placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(2), radius, random);
+        placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(), radius + 1, random);
+        placeNest(level, BlockStateProvider.simple(Blocks.AIR), pos.above(2), radius, random);
 
-       //MoaFeatherShape moaType = AetherIIMoaFeatherShapes.getWeightedChance(level.registryAccess(), level.getRandom()); //todo moa variation
-        this.setBlock(level, pos, AetherIIBlocks.BLUE_MOA_EGG.get().defaultBlockState());
-
+        Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(random);
+        Moa.EyeColor eyeColor = Moa.EyeColor.getRandom(random);
+        Moa.FeatherColor featherColor = Moa.FeatherColor.getRandom(random);
+        this.setBlock(level, pos, AetherIIBlocks.MOA_EGG.get().defaultBlockState().setValue(MoaEggBlock.KERATIN, keratinColor).setValue(MoaEggBlock.EYES, eyeColor).setValue(MoaEggBlock.FEATHERS, featherColor));
         if (config.spawnMoas()) {
-             for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2; i++) {
                 Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel());
-                 moa.setPos(pos.getCenter().add(i, 0, i));
-                 //moa.setMoaTypeByKey(Objects.requireNonNull(AetherIIMoaFeatherShapes.getResourceKey(level.registryAccess(), moaType)));
-                 MoaAi.initMoaHomeMemories(moa, level.getRandom());
+                moa.setPos(pos.getCenter().add(i, 0, i));
+                MoaAi.initMoaHomeMemories(moa, level.getRandom());
                 moa.setBaby(false);
+                moa.setKeratinColor(keratinColor.getColor());
+                moa.setEyeColor(eyeColor.getColor());
+                moa.setFeatherColor(featherColor.getColor());
                 level.getLevel().addFreshEntity(moa);
             }
         }

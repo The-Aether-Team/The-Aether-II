@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
@@ -47,36 +49,32 @@ public class NestSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
         BlockPos pos = attachment.pos();
-        int offsetX = random.nextInt(1) == 0 ? -1 : 1;
-        int offsetZ = random.nextInt(1) == 0 ? -1 : 1;
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+        boolean doubleTrunk = attachment.doubleTrunk();
+
+        int offsetX = random.nextIntBetweenInclusive(0, 1) == 0 ? -1 : 1;
+        int offsetZ = random.nextIntBetweenInclusive(0, 1) == 0 ? -1 : 1;
 
         if (level instanceof WorldGenLevel worldGenLevel) {
             ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
             ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(AetherIIMiscFeatures.MOA_NEST_TREE).orElse(null)).value();
 
             for (int i = offset; i >= offset - foliageHeight; --i) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 2 * offsetX, pos.getY() - 7, pos.getZ() + 2 * offsetZ), 13, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + 2 * offsetX, pos.getY() - 6, pos.getZ() + 2 * offsetZ), 16, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 2 * offsetX, y - 7, z + 2 * offsetZ), 13, i, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 2 * offsetX, y - 6, z + 2 * offsetZ), 16, i, doubleTrunk);
 
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 1, pos.getZ() + offsetZ), 11, i, attachment.doubleTrunk());
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY(), pos.getZ() + offsetZ), 15, i, attachment.doubleTrunk());
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + offsetX, y - 1, z + offsetZ), 11, i, doubleTrunk);
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + offsetX, y, z + offsetZ), 15, i, doubleTrunk);
 
-                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(pos.getX() + offsetX, pos.getY() - 1, pos.getZ() + offsetZ), Direction.Axis.Y);
+                tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + offsetX, y - 1, z + offsetZ), Direction.Axis.Y);
 
                 if (!(random.nextInt(2) == 0)) {
-                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() - random.nextIntBetweenInclusive(9, 10) + random.nextIntBetweenInclusive(-1, 1), pos.getZ()), 4, i, attachment.doubleTrunk());
+                    this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(9, 10) + random.nextIntBetweenInclusive(-1, 1), z), 4, i, doubleTrunk);
                 }
             }
-            nest.place(worldGenLevel, chunk, random, new BlockPos(pos.getX() + 2 * offsetX, pos.getY() - 6, pos.getZ() + 2 * offsetZ));
-
-//            MoaFeatherShape moaType = AetherIIMoaFeatherShapes.getWeightedChance(worldGenLevel.registryAccess(), random);  //todo moa variation
-            for (int i = 0; i < 2; i++) {
-                Moa moa = AetherIIEntityTypes.MOA.get().create(worldGenLevel.getLevel());
-                moa.setPos(new BlockPos(new BlockPos(pos.getX() + 2 * offsetX, pos.getY() - 6, pos.getZ() + 2 * offsetZ)).getCenter().add(i, 0, i));
-//                moa.setMoaTypeByKey(Objects.requireNonNull(AetherIIMoaFeatherShapes.getResourceKey(worldGenLevel.registryAccess(), moaType)));
-                MoaAi.initMoaHomeMemories(moa, worldGenLevel.getRandom());moa.setBaby(false);
-                worldGenLevel.getLevel().addFreshEntity(moa);
-            }
+            nest.place(worldGenLevel, chunk, random, new BlockPos(x + 2 * offsetX, y - 6, z + 2 * offsetZ));
         }
     }
 

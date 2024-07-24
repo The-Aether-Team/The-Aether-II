@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.block.portal;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
@@ -58,18 +57,6 @@ public class AetherPortalBlock extends Block implements Portal {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity.canUsePortal(false)) {
             entity.setAsInsidePortal(this, pos);
-            if (entity.isOnPortalCooldown()) {
-                entity.setPortalCooldown();
-            } else {
-                if (entity.hasData(AetherIIDataAttachments.PORTAL_TELEPORTATION)) {
-                    var data = entity.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
-                    data.setInPortal(true);
-                    int waitTime = data.getPortalTimer();
-                    if (waitTime >= this.getLevelPortalTransitionTime(level, entity)) {
-                        data.setPortalTimer(0);
-                    }
-                }
-            }
         }
     }
 
@@ -92,7 +79,8 @@ public class AetherPortalBlock extends Block implements Portal {
         } else {
             WorldBorder worldborder = serverlevel.getWorldBorder();
             double d0 = DimensionType.getTeleportationScale(pLevel.dimensionType(), serverlevel.dimensionType());
-            BlockPos blockpos = worldborder.clampToBounds(pEntity.getX() * d0, pEntity.getY(), pEntity.getZ() * d0);
+            int yOffset = resourcekey == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL ? 64 : -64;
+            BlockPos blockpos = worldborder.clampToBounds(pEntity.getX() * d0, pEntity.getY() + yOffset, pEntity.getZ() * d0);
             return this.getExitPortal(serverlevel, pEntity, pPos, blockpos, worldborder);
         }
     }

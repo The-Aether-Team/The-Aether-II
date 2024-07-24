@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
+import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
+import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +14,22 @@ import net.minecraft.world.entity.Entity;
 import java.util.function.Function;
 
 public enum BiomeVariantPresets {
+    HIGHFIELDS_TAEGORE(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/highfields/taegore_highfields.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/highfields/taegore_highfields_baby.png"),
+            (context) -> new TaegoreModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_TAEGORE)),
+            (context) -> new TaegoreBabyModel(context.bakeLayer(AetherIIModelLayers.HIGHFIELDS_TAEGORE_BABY))),
+    MAGNETIC_TAEGORE(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/magnetic/taegore_magnetic.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/magnetic/taegore_magnetic_baby.png"),
+            (context) -> new TaegoreModel(context.bakeLayer(AetherIIModelLayers.MAGNETIC_TAEGORE)),
+            (context) -> new TaegoreBabyModel(context.bakeLayer(AetherIIModelLayers.MAGNETIC_TAEGORE_BABY))),
+    ARCTIC_TAEGORE(
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/arctic/taegore_arctic.png"),
+            ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/taegore/arctic/taegore_arctic_baby.png"),
+            (context) -> new TaegoreModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_TAEGORE)),
+            (context) -> new TaegoreBabyModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_TAEGORE_BABY))),
+
     HIGHFIELDS_BURRUKAI(
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/highfields/burrukai_highfields.png"),
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/highfields/burrukai_highfields_baby.png"),
@@ -27,6 +45,7 @@ public enum BiomeVariantPresets {
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/burrukai/arctic/burrukai_arctic_baby.png"),
             (context) -> new BurrukaiModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_BURRUKAI)),
             (context) -> new BurrukaiBabyModel(context.bakeLayer(AetherIIModelLayers.ARCTIC_BURRUKAI_BABY))),
+
     HIGHFIELDS_KIRRID(
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields.png"),
             ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/highfields/kirrid_highfields_baby.png"),

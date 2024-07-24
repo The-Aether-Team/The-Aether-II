@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "aether_ii:icestone"
+  },
+  "result": {
+    "count": 1,
+    "id": "aether_ii:icestone_stairs"
+  }
+}

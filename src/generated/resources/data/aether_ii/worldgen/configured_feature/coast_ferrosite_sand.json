@@ -8,6 +8,7 @@
         "Name": "aether_ii:ferrosite_sand"
       }
     },
+    "brettl_chance": 0.0,
     "distance_noise": "aether_ii:highlands/coasts/highfields",
     "pattern_noise": 0.0,
     "size": 16.35,

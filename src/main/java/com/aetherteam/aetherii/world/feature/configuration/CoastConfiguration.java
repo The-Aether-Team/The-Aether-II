@@ -14,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 
 import java.util.Optional;
 
-public record CoastConfiguration(BlockStateProvider block, CoastFeature.Type type, float size, DensityFunction distanceNoise, Optional<DensityFunction> patternNoise, UniformInt yRange, HolderSet<Block> validBlocks) implements FeatureConfiguration {
+public record CoastConfiguration(BlockStateProvider block, CoastFeature.Type type, float size, DensityFunction distanceNoise, Optional<DensityFunction> patternNoise, UniformInt yRange, float brettlChance, HolderSet<Block> validBlocks) implements FeatureConfiguration {
     public static final Codec<CoastConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
             BlockStateProvider.CODEC.fieldOf("block").forGetter(CoastConfiguration::block),
             CoastFeature.Type.CODEC.fieldOf("type").forGetter(CoastConfiguration::type),
@@ -22,6 +22,7 @@ public record CoastConfiguration(BlockStateProvider block, CoastFeature.Type typ
             DensityFunction.HOLDER_HELPER_CODEC.fieldOf("distance_noise").forGetter(CoastConfiguration::distanceNoise),
             DensityFunction.HOLDER_HELPER_CODEC.optionalFieldOf("pattern_noise").forGetter(CoastConfiguration::patternNoise),
             UniformInt.CODEC.fieldOf("y_range").forGetter(CoastConfiguration::yRange),
+            Codec.floatRange(0.0F, 1.0F).fieldOf("brettl_chance").forGetter(CoastConfiguration::brettlChance),
             RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("valid_blocks").forGetter(CoastConfiguration::validBlocks)
     ).apply(instance, CoastConfiguration::new));
 }

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "aether_ii:faded_holystone_bricks"
+  },
+  "result": {
+    "count": 2,
+    "id": "aether_ii:faded_holystone_brick_slab"
+  }
+}

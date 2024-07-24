@@ -151,11 +151,31 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.ALTAR_FUEL).add(
                 AetherIIItems.AMBROSIUM_SHARD.get()
         );
-        this.tag(AetherIITags.Items.PHYG_TEMPTATION_ITEMS).add(
+        this.tag(AetherIITags.Items.PHYG_FOOD).add(
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()
         );
-        this.tag(AetherIITags.Items.AERBUNNY_TEMPTATION_ITEMS).add(
+        this.tag(AetherIITags.Items.FLYING_COW_FOOD).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
+        this.tag(AetherIITags.Items.SHEEPUFF_FOOD).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
+        this.tag(AetherIITags.Items.TAEGORE_FOOD).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
+        this.tag(AetherIITags.Items.BURRUKAI_FOOD).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
+        this.tag(AetherIITags.Items.KIRRID_FOOD).add(
+                AetherIIItems.ORANGE.get(),
+                AetherIIItems.BLUEBERRY.get()
+        );
+        this.tag(AetherIITags.Items.AERBUNNY_FOOD).add(
                 AetherIIItems.ORANGE.get()
         );
         this.tag(AetherIITags.Items.TAEGORE_HIDE_REPAIRING).add(AetherIIItems.TAEGORE_HIDE.get());
@@ -185,6 +205,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ZANITE_GEMSTONE.get(),
                 AetherIIItems.INERT_ARKENIUM.get(),
                 AetherIIItems.INERT_GRAVITITE.get(),
+                AetherIIItems.SCATTERGLASS_SHARD.get(),
                 AetherIIItems.GOLDEN_AMBER.get(),
                 AetherIIItems.TAEGORE_HIDE.get(),
                 AetherIIItems.BURRUKAI_PELT.get(),
@@ -247,8 +268,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.asItem()
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem()
         );
 
         // Vanilla
@@ -398,8 +418,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.asItem(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem(),
-                AetherIIBlocks.IRRADIATED_AMBEROOT_LEAVES.asItem()
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.asItem()
         );
         this.tag(ItemTags.SMALL_FLOWERS).add(
                 AetherIIBlocks.HESPEROSE.asItem(),
