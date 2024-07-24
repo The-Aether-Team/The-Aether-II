@@ -31,6 +31,7 @@ import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
+import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
@@ -92,6 +93,7 @@ public class AetherII {
                 AetherIIEffects.EFFECTS,
                 AetherIIArmorMaterials.ARMOR_MATERIALS,
                 AetherIIDataSerializers.ENTITY_DATA_SERIALIZERS,
+                AetherIIDataComponents.DATA_COMPONENT_TYPES,
                 AetherIIDataAttachments.ATTACHMENTS,
                 AetherIICreativeTabs.CREATIVE_MODE_TABS,
                 AetherIIMenuTypes.MENU_TYPES,
@@ -173,6 +175,7 @@ public class AetherII {
         registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
         registrar.playToClient(EffectBuildupPacket.Set.TYPE, EffectBuildupPacket.Set.STREAM_CODEC, EffectBuildupPacket.Set::execute);
         registrar.playToClient(EffectBuildupPacket.Remove.TYPE, EffectBuildupPacket.Remove.STREAM_CODEC, EffectBuildupPacket.Remove::execute);
+        registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);
         registrar.playToClient(GuidebookToastPacket.TYPE, GuidebookToastPacket.STREAM_CODEC, GuidebookToastPacket::execute);
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
@@ -182,6 +185,10 @@ public class AetherII {
 
         // SERVERBOUND
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
+        registrar.playToServer(ForgeRenamePacket.TYPE, ForgeRenamePacket.STREAM_CODEC, ForgeRenamePacket::execute);
+        registrar.playToServer(ForgeSlotCharmsPacket.TYPE, ForgeSlotCharmsPacket.STREAM_CODEC, ForgeSlotCharmsPacket::execute);
+        registrar.playToServer(ForgeTriggerSoundPacket.TYPE, ForgeTriggerSoundPacket.STREAM_CODEC, ForgeTriggerSoundPacket::execute);
+        registrar.playToServer(ForgeUpgradePacket.TYPE, ForgeUpgradePacket.STREAM_CODEC, ForgeUpgradePacket::execute);
         registrar.playToServer(CheckGuidebookEntryPacket.TYPE, CheckGuidebookEntryPacket.STREAM_CODEC, CheckGuidebookEntryPacket::execute);
         registrar.playToServer(ClearItemPacket.TYPE, ClearItemPacket.STREAM_CODEC, ClearItemPacket::execute);
         registrar.playToServer(OpenGuidebookPacket.TYPE, OpenGuidebookPacket.STREAM_CODEC, OpenGuidebookPacket::execute);

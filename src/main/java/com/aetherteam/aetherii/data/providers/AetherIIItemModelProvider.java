@@ -1,10 +1,13 @@
 package com.aetherteam.aetherii.data.providers;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.nitrogen.data.providers.NitrogenItemModelProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;
@@ -13,6 +16,15 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvider {
     public AetherIIItemModelProvider(PackOutput output, String id, ExistingFileHelper helper) {
         super(output, id, helper);
+    }
+
+    public void reinforcedItem(Item item, String location) {
+        ItemModelBuilder builder = this.withExistingParent(this.itemName(item), this.mcLoc("item/handheld")).texture("layer0", this.modLoc("item/" + location + this.itemName(item)));
+        this.withExistingParent(this.itemName(item) + "_reinforced_1", this.mcLoc("item/generated")).texture("layer0", this.modLoc("item/" + location + this.itemName(item) + "_reinforced_1"));
+        this.withExistingParent(this.itemName(item) + "_reinforced_2", this.mcLoc("item/generated")).texture("layer0", this.modLoc("item/" + location + this.itemName(item) + "_reinforced_2"));
+        builder
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), 0.1F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_reinforced_1"))).end()
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), 0.3F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_reinforced_2"))).end();
     }
 
     public void crossbowItem(Item item, String location) {
