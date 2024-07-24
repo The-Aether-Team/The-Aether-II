@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
@@ -43,6 +44,11 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
         this.player = playerInventory.player;
 
         this.addSlot(new Slot(this.container, 0, 29, 65) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return ArkeniumForgeMenu.this.isEquipment(stack);
+            }
+
             @Override
             public void setChanged() {
                 super.setChanged();
@@ -314,25 +320,15 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     public boolean isEquipment(ItemStack itemStack) {
-        return !itemStack.isStackable() && itemStack.getCount() == 1 && itemStack.has(DataComponents.MAX_DAMAGE);
+        return itemStack.is(AetherIITags.Items.CAN_BE_REINFORCED);
     }
 
     public boolean isPrimaryMaterial(ItemStack material) {
-        for (ReinforcementTier.Cost cost : this.getCosts().values()) {
-            if (cost != null && material.is(cost.primaryMaterial().asItem())) {
-                return true;
-            }
-        }
-        return false;
+        return material.is(AetherIITags.Items.FORGE_PRIMARY_MATERIAL);
     }
 
     public boolean isSecondaryMaterial(ItemStack material) {
-        for (ReinforcementTier.Cost cost : this.getCosts().values()) {
-            if (cost != null && material.is(cost.secondaryMaterial().asItem())) {
-                return true;
-            }
-        }
-        return false;
+        return material.is(AetherIITags.Items.FORGE_SECONDARY_MATERIAL);
     }
 
     public int getTierForMaterials() {
