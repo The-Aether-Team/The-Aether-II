@@ -134,4 +134,9 @@ public class ArkeniumForgeBlock extends BaseEntityBlock {
     public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.getValue(CHARGED) ? 8 : 0;
+    }
 }
