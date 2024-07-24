@@ -5,12 +5,12 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
@@ -71,17 +71,37 @@ public enum ReinforcementTier implements StringRepresentable {
         return this.name();
     }
 
-    public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) { //todo temps
-        public static final Predicate<ItemStack> DEFAULT = (itemStack) -> true;
+    public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {
+        public static final Predicate<ItemStack> SKYROOT = isTier(AetherIIItemTiers.SKYROOT);
+        public static final Predicate<ItemStack> HOLYSTONE = isTier(AetherIIItemTiers.HOLYSTONE);
+        public static final Predicate<ItemStack> ZANITE = isTier(AetherIIItemTiers.ZANITE);
+        public static final Predicate<ItemStack> ARKENIUM = isTier(AetherIIItemTiers.ARKENIUM);
+        public static final Predicate<ItemStack> GRAVITITE = isTier(AetherIIItemTiers.GRAVITITE);
 
         public static final Set<Cost> TIER_1 = Set.of(
-                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1)
+                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
+                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
+                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 2, Items.AIR, 0),
+                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATES, 2, Items.AIR, 0),
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATES, 3, Items.AIR, 0)
         );
         public static final Set<Cost> TIER_2 = Set.of(
-                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 5, AetherIIItems.CORROBONITE_CRYSTAL, 2)
+                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 2, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATES, 3, AetherIIItems.CORROBONITE_CRYSTAL, 1),
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 1)
         );
         public static final Set<Cost> TIER_3 = Set.of(
-                new Cost(DEFAULT, AetherIIItems.ARKENIUM_PLATES, 7, AetherIIItems.CORROBONITE_CRYSTAL, 3)
+                new Cost(SKYROOT, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(HOLYSTONE, AetherIIItems.ARKENIUM_PLATES, 4, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(ZANITE, AetherIIItems.ARKENIUM_PLATES, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATES, 5, AetherIIItems.CORROBONITE_CRYSTAL, 3),
+                new Cost(GRAVITITE, AetherIIItems.ARKENIUM_PLATES, 6, AetherIIItems.CORROBONITE_CRYSTAL, 3)
         );
+
+        private static Predicate<ItemStack> isTier(AetherIIItemTiers tier) {
+            return (itemStack) -> itemStack.getItem() instanceof TieredItem tieredItem && tieredItem.getTier() == tier;
+        }
     }
 }

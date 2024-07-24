@@ -178,14 +178,19 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                     if (cost != null && primaryCost != -1 && secondaryCost != -1) {
                         if (reinforcementTier == null || tier > reinforcementTier.getTier()) {
                             ItemStack primary = new ItemStack(cost.primaryMaterial(), primaryCost);
-                            guiGraphics.renderFakeItem(primary, offsetX - spriteSize, y + 18);
-                            guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX - spriteSize, y + 18, (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
-                            guiGraphics.renderItemDecorations(this.font, primary, offsetX - spriteSize, y + 18);
-
                             ItemStack secondary = new ItemStack(cost.secondaryMaterial(), secondaryCost);
-                            guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
-                            guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
-                            guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
+
+                            if (!primary.isEmpty()) {
+                                int secondX = secondary.isEmpty() ? 8 : 0;
+                                guiGraphics.renderFakeItem(primary, secondX + offsetX - spriteSize, y + 18);
+                                guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), secondX + offsetX - spriteSize, y + 18, secondX + (offsetX - spriteSize) + 16, (y + 18) + 16, 822083583);
+                                guiGraphics.renderItemDecorations(this.font, primary, secondX + offsetX - spriteSize, y + 18);
+                            }
+                            if (!secondary.isEmpty()) {
+                                guiGraphics.renderFakeItem(secondary, offsetX, y + 18);
+                                guiGraphics.fill(RenderType.guiGhostRecipeOverlay(), offsetX, y + 18, offsetX + 16, (y + 18) + 16, 822083583);
+                                guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
+                            }
                         } else {
                             guiGraphics.blitSprite(TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
                         }
