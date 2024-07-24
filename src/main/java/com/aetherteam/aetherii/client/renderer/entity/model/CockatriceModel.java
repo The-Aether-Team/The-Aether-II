@@ -70,7 +70,7 @@ public class CockatriceModel<T extends Cockatrice> extends HierarchicalModel<T> 
 
         PartDefinition jaw_left_r1 = jaw.addOrReplaceChild("jaw_left_r1", CubeListBuilder.create().texOffs(76, 41).addBox(0.5F, 1.1F, -6.5F, 2.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.0349F, 0.1745F, -0.2618F));
 
-        PartDefinition jaw_front_r1 = jaw.addOrReplaceChild("jaw_front_r1", CubeListBuilder.create().texOffs(59, 51).addBox(-2.0F, 1.0F, -10.2F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.0873F, 0.0F, 0.0F));
+        PartDefinition jaw_front_r1 = jaw.addOrReplaceChild("jaw_front_r1", CubeListBuilder.create().texOffs(59, 51).addBox(-2.0F, 1.0F, -10.2F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.02F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.0873F, 0.0F, 0.0F));
 
         PartDefinition arm_left = body_front.addOrReplaceChild("arm_left", CubeListBuilder.create(), PartPose.offsetAndRotation(3.0F, -7.0F, -6.0F, -0.2182F, 0.0F, 0.0F));
 
@@ -166,6 +166,7 @@ public class CockatriceModel<T extends Cockatrice> extends HierarchicalModel<T> 
 
         return LayerDefinition.create(meshdefinition, 168, 168);
     }
+
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
