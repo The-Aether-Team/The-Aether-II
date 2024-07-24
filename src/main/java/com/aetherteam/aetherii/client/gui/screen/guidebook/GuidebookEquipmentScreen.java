@@ -37,9 +37,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     private static final SimpleContainer DESTROY_ITEM_CONTAINER = new SimpleContainer(1);
 
     private final Inventory playerInventory;
-    private float xMouse;
-    private float yMouse;
-    private Component craftingTitle = Component.translatable("container.crafting");
+    private final Component craftingTitle = Component.translatable("container.crafting");
     protected int craftingTitleLabelX;
     protected int craftingTitleLabelY;
     @Nullable
@@ -49,16 +47,18 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     public GuidebookEquipmentScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.playerInventory = playerInventory;
-        this.titleLabelX = -24;
-        this.titleLabelY = -3;
-        this.craftingTitleLabelX = 139;
-        this.craftingTitleLabelY = 12;
-        this.inventoryLabelX = 96;
-        this.inventoryLabelY = 64;
+        this.titleLabelX = 100;
+        this.titleLabelY = 13;
+        this.craftingTitleLabelX = 145;
+        this.craftingTitleLabelY = 28;
+        this.inventoryLabelX = 102;
+        this.inventoryLabelY = 80;
     }
 
     @Override
     protected void init() {
+        this.imageWidth = Guidebook.PAGE_WIDTH;
+        this.imageHeight = Guidebook.PAGE_HEIGHT;
         super.init();
         this.initTabs(this);
     }
@@ -76,7 +76,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
 
         if (this.getMinecraft().player != null) {
             if (this.getMinecraft().player.isCreative() && this.destroyItemSlot == null) {
-                this.destroyItemSlot = new Slot(DESTROY_ITEM_CONTAINER, 0, 121, 34);
+                this.destroyItemSlot = new Slot(DESTROY_ITEM_CONTAINER, 0, 127, 50);
                 this.getMenu().slots.add(this.destroyItemSlot);
             } else if (!this.getMinecraft().player.isCreative() && this.destroyItemSlot != null) {
                 this.getMenu().slots.remove(this.destroyItemSlot);
@@ -89,14 +89,22 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         }
 
         this.renderTooltip(guiGraphics, mouseX, mouseY);
-
-        this.xMouse = (float) mouseX;
-        this.yMouse = (float) mouseY;
     }
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         this.renderGuidebookSpread(this, guiGraphics, mouseX, mouseY, partialTick);
+        int leftPos = this.leftPos;
+        int topPos = this.topPos;
+        int xOffset = -51;
+        int yOffset = 37;
+        int width = 124;
+        int height = 70;
+        var scissorStart = new Vector2i(leftPos + xOffset, topPos + yOffset);
+        var scissorEnd = new Vector2i(leftPos + xOffset + width, topPos + yOffset + height);
+        var size = new Vector2i((int) ((scissorEnd.x - scissorStart.x) / 1.75), scissorEnd.y - scissorStart.y);
+        this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, scissorStart, size, scissorStart, scissorEnd, mouseX, mouseY, 0);
+        this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, new Vector2i(scissorStart).add((int) (size.x / 1.5), 0), size, scissorStart, scissorEnd, mouseX, mouseY, 180);
     }
 
     @Override
@@ -104,7 +112,6 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         int xOffset = Minecraft.getInstance().player != null && Minecraft.getInstance().player.isCreative() ? 19 : 0;
         guiGraphics.drawString(this.font, this.craftingTitle, this.craftingTitleLabelX + xOffset, this.craftingTitleLabelY, 4210752, false);
         guiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
-        guiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215, true);
     }
 
     @Override
@@ -112,24 +119,19 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
         this.renderStats(guiGraphics);
         this.renderCurrency(guiGraphics);
-        int x = this.leftPos - 49;
-        int y = this.topPos + 21;
-        Vector2i scissorStart = new Vector2i(x, y);
-        Vector2i scissorEnd = new Vector2i(x + 124, y + 70);
-        Vector2i size = new Vector2i((int) ((scissorEnd.x - scissorStart.x) / 2.5), scissorEnd.y - scissorStart.y);
-        this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, scissorStart, size, scissorStart, scissorEnd, mouseX, mouseY, 0);
-        this.renderEntityInInventoryFollowingMouseRotated(guiGraphics, scissorStart.add(size.x, 0), size, scissorStart, scissorEnd, mouseX + 50, mouseY, 180);
+        guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
     }
 
     private void renderStats(GuiGraphics guiGraphics) {
         Player player = Minecraft.getInstance().player;
-        int x = this.leftPos;
-        int y = this.topPos;
-        guiGraphics.blitSprite(HEART_CONTAINER_SPRITE, x - 50, y + 100, 9, 9);
-        guiGraphics.blitSprite(HEART_SPRITE, x - 50, y + 100, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf((int) (player.getHealth()))), x - 39, y + 101, 16777215, true);
-        guiGraphics.blitSprite(ARMOR_SPRITE, x - 25, y + 100, 9, 9);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf(player.getArmorValue())), x - 14, y + 101, 16777215, true);
+        int x = 49;
+        int y = 112;
+
+        guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf((int) (player.getHealth()))), x + 18, y + 4, 16777215, true);
+
+        guiGraphics.blitSprite(Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf(player.getArmorValue())), x + 72, y + 4, 16777215, true);
     }
 
     private void renderCurrency(GuiGraphics guiGraphics) {
@@ -227,6 +229,11 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
     @Override
     public Inventory getPlayerInventory() {
         return this.playerInventory;
+    }
+
+    @Override
+    public void switchTab() {
+        this.getMenu().slots.remove(this.destroyItemSlot);
     }
 
     @Override

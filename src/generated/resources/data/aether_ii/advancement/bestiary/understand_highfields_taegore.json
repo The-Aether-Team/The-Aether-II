@@ -1,0 +1,42 @@
+{
+  "criteria": {
+    "feed_highfields_taegore": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:highfields_taegore"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:taegore_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_highfields_taegore": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:highfields_taegore"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "requirements": [
+    [
+      "kill_highfields_taegore",
+      "feed_highfields_taegore"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
