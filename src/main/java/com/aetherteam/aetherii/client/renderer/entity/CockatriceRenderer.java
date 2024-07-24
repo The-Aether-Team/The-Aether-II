@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.client.renderer.entity.model.CockatriceModel;
 import com.aetherteam.aetherii.entity.monster.Cockatrice;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.EnderEyesLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceModel> {

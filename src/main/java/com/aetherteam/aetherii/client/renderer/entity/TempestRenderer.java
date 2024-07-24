@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
-import com.aetherteam.aetherii.client.renderer.entity.layers.CockatriceEmissiveLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.TempestEmissiveLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.TempestModel;
 import com.aetherteam.aetherii.entity.monster.Tempest;
