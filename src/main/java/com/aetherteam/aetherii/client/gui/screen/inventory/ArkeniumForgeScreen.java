@@ -148,16 +148,25 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
         guiGraphics.blitSprite(!input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
 
         if (!input.isEmpty()) {
+            ItemStack displayStack = input.copy();
+            if (this.forgeButton.active) {
+                if (this.menu.getTierForMaterials() > 0) {
+                    displayStack.set(AetherIIDataComponents.REINFORCEMENT_TIER, ReinforcementTier.values()[this.menu.getTierForMaterials() - 1]);
+                }
+            }
+
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
             poseStack.scale(2, 2, 1);
             poseStack.translate((this.leftPos + 72) / 2.0, (this.topPos + 57) / 2.0, 0);
-            guiGraphics.renderItem(input, 0, 0);
+            guiGraphics.renderItem(displayStack, 0, 0);
             poseStack.popPose();
 
             ReinforcementTier reinforcementTier = input.get(AetherIIDataComponents.REINFORCEMENT_TIER);
-            if (reinforcementTier != null) {
-                guiGraphics.blitSprite(TIER_LOCATIONS.get(reinforcementTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
+            ReinforcementTier displayTier = displayStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+
+            if (displayTier != null) {
+                guiGraphics.blitSprite(TIER_LOCATIONS.get(displayTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
             }
 
             int tierCount = this.menu.getTierCount();

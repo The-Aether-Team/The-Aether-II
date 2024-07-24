@@ -25,10 +25,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.HOLYSTONE_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.HOLYSTONE_TROWEL.get(), "tools/");
 
-        this.handheldItem(AetherIIItems.ZANITE_PICKAXE.get(), "tools/");
-        this.handheldItem(AetherIIItems.ZANITE_AXE.get(), "tools/");
-        this.handheldItem(AetherIIItems.ZANITE_SHOVEL.get(), "tools/");
-        this.handheldItem(AetherIIItems.ZANITE_TROWEL.get(), "tools/");
+        this.reinforcedItem(AetherIIItems.ZANITE_PICKAXE.get(), "tools/");
+        this.reinforcedItem(AetherIIItems.ZANITE_AXE.get(), "tools/");
+        this.reinforcedItem(AetherIIItems.ZANITE_SHOVEL.get(), "tools/");
+        this.reinforcedItem(AetherIIItems.ZANITE_TROWEL.get(), "tools/");
 
         this.handheldItem(AetherIIItems.ARKENIUM_PICKAXE.get(), "tools/");
         this.handheldItem(AetherIIItems.ARKENIUM_AXE.get(), "tools/");
@@ -53,9 +53,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.HOLYSTONE_SPEAR.get(), "weapons/");
         this.crossbowItem(AetherIIItems.HOLYSTONE_CROSSBOW.get(), "weapons/");
 
-        this.handheldItem(AetherIIItems.ZANITE_SHORTSWORD.get(), "weapons/");
-        this.handheldItem(AetherIIItems.ZANITE_HAMMER.get(), "weapons/");
-        this.handheldItem(AetherIIItems.ZANITE_SPEAR.get(), "weapons/");
+        this.reinforcedItem(AetherIIItems.ZANITE_SHORTSWORD.get(), "weapons/");
+        this.reinforcedItem(AetherIIItems.ZANITE_HAMMER.get(), "weapons/");
+        this.reinforcedItem(AetherIIItems.ZANITE_SPEAR.get(), "weapons/");
         this.crossbowItem(AetherIIItems.ZANITE_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.ARKENIUM_SHORTSWORD.get(), "weapons/");
