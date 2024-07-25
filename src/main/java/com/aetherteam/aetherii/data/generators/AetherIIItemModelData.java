@@ -25,10 +25,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.HOLYSTONE_SHOVEL.get(), "tools/");
         this.handheldItem(AetherIIItems.HOLYSTONE_TROWEL.get(), "tools/");
 
-        this.handheldItem(AetherIIItems.ZANITE_PICKAXE.get(), "tools/");
-        this.handheldItem(AetherIIItems.ZANITE_AXE.get(), "tools/");
-        this.handheldItem(AetherIIItems.ZANITE_SHOVEL.get(), "tools/");
-        this.handheldItem(AetherIIItems.ZANITE_TROWEL.get(), "tools/");
+        this.reinforcedItem(AetherIIItems.ZANITE_PICKAXE.get(), "tools/");
+        this.reinforcedItem(AetherIIItems.ZANITE_AXE.get(), "tools/");
+        this.reinforcedItem(AetherIIItems.ZANITE_SHOVEL.get(), "tools/");
+        this.reinforcedItem(AetherIIItems.ZANITE_TROWEL.get(), "tools/");
 
         this.handheldItem(AetherIIItems.ARKENIUM_PICKAXE.get(), "tools/");
         this.handheldItem(AetherIIItems.ARKENIUM_AXE.get(), "tools/");
@@ -53,9 +53,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.HOLYSTONE_SPEAR.get(), "weapons/");
         this.crossbowItem(AetherIIItems.HOLYSTONE_CROSSBOW.get(), "weapons/");
 
-        this.handheldItem(AetherIIItems.ZANITE_SHORTSWORD.get(), "weapons/");
-        this.handheldItem(AetherIIItems.ZANITE_HAMMER.get(), "weapons/");
-        this.handheldItem(AetherIIItems.ZANITE_SPEAR.get(), "weapons/");
+        this.reinforcedItem(AetherIIItems.ZANITE_SHORTSWORD.get(), "weapons/");
+        this.reinforcedItem(AetherIIItems.ZANITE_HAMMER.get(), "weapons/");
+        this.reinforcedItem(AetherIIItems.ZANITE_SPEAR.get(), "weapons/");
         this.crossbowItem(AetherIIItems.ZANITE_CROSSBOW.get(), "weapons/");
 
         this.handheldItem(AetherIIItems.ARKENIUM_SHORTSWORD.get(), "weapons/");
@@ -110,6 +110,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.ARKENIUM_PLATES.get(), "materials/");
         this.item(AetherIIItems.INERT_GRAVITITE.get(), "materials/");
         this.item(AetherIIItems.GRAVITITE_PLATE.get(), "materials/");
+        this.item(AetherIIItems.CORROBONITE_CRYSTAL.get(), "materials/");
         this.item(AetherIIItems.GOLDEN_AMBER.get(), "materials/");
         this.item(AetherIIItems.CLOUDTWINE.get(), "materials/");
         this.item(AetherIIItems.TAEGORE_HIDE.get(), "materials/");
@@ -241,6 +242,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.CORROBONITE_ORE.get());
+        this.itemBlockFlat(AetherIIBlocks.CORROBONITE_CLUSTER.get(), "natural/");
 
         // Aerclouds
         this.aercloudItem(AetherIIBlocks.COLD_AERCLOUD.get());
@@ -590,6 +593,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.itemBlock(AetherIIBlocks.ARTISANS_BENCH.get());
         this.itemBlock(AetherIIBlocks.ALTAR.get());
+        this.itemBlock(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_CHEST.get(), this.mcLoc("item/chest"));
         this.itemBlockFlat(AetherIIBlocks.SKYROOT_LADDER.get(), "construction/");
         this.lookalikeBlock(AetherIIBlocks.SKYROOT_BED.get(), this.mcLoc("item/template_bed"));

@@ -596,6 +596,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("HHH")
                 .unlockedBy(getHasName(AetherIIBlocks.ARTISANS_BENCH.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_FORGE.get())
+                .define('H', AetherIIBlocks.HOLYSTONE.get())
+                .define('A', AetherIITags.Items.PLATES_ARKENIUM)
+                .pattern("AAA")
+                .pattern(" A ")
+                .pattern("HHH")
+                .unlockedBy(getHasName(AetherIIBlocks.ARKENIUM_FORGE.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
+                .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("###")

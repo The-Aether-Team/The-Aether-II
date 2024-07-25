@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arkenium_forge": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#aether_ii:plates/arkenium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:arkenium_forge"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_arkenium_forge"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:arkenium_forge"
+    ]
+  }
+}
