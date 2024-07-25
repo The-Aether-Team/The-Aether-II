@@ -157,6 +157,7 @@ public class AetherII {
         OutpostTrackerListener.listen(bus);
         EntityInteractionListener.listen(bus);
         GuidebookDiscoveryListener.listen(bus);
+        EquipmentAbilitiesListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 

@@ -18,6 +18,7 @@
     "common.accessor.CraftingMenuAccessor",
     "common.accessor.EntityAccessor",
     "common.accessor.FireBlockAccessor",
+    "common.accessor.LivingEntityAccessor",
     "common.accessor.LootContextParamSetsAccessor",
     "common.accessor.PerlinNoiseAccessor",
     "common.accessor.PlayerAccessor",
