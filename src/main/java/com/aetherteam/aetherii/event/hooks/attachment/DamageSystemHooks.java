@@ -8,31 +8,27 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
 import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
 import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
 import com.aetherteam.aetherii.item.combat.GlovesItem;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import io.wispforest.accessories.api.AccessoriesAPI;
-import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
-import io.wispforest.accessories.api.components.AccessoriesDataComponents;
-import io.wispforest.accessories.api.components.AccessoryItemAttributeModifiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -258,6 +254,22 @@ public class DamageSystemHooks {
             }
             components.remove(attributeTooltip);
             components.add(attributeTooltip, Component.empty().append(Component.translatable("attribute.modifier.equals.0", "+" + value + "%", Component.translatable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.value().getDescriptionId())).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
+        }
+    }
+
+    public static void addReinforcingTooltip(ItemStack stack, List<Component> components) {
+        ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+        if (tier != null) {
+            int position = 1;
+            String text = "ability.tooltip";
+            for (int i = 1; i < components.size(); i++) {
+                Component component = components.get(i);
+                if (component.toString().contains(text)) {
+                    position = i + 1;
+                    break;
+                }
+            }
+            components.add(position, Component.literal("Reinforcement ").append(Component.translatable("enchantment.level." + tier.getTier())).withColor(14408667));
         }
     }
 

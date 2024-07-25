@@ -71,6 +71,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), AetherIIItems.ZANITE_GEMSTONE.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(), AetherIIItems.INERT_ARKENIUM.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(), AetherIIItems.INERT_GRAVITITE.get());
+        this.dropWithFortune(AetherIIBlocks.CORROBONITE_ORE.get(), AetherIIItems.CORROBONITE_CRYSTAL.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.CORROBONITE_CLUSTER.get());
 
         // Aerclouds
         this.dropSelf(AetherIIBlocks.COLD_AERCLOUD.get());
@@ -450,6 +452,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get());
         this.dropSelf(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.dropSelf(AetherIIBlocks.ALTAR.get());
+        this.dropSelf(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.dropSelf(AetherIIBlocks.ARTISANS_BENCH.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_CHEST.get());
         this.dropSelf(AetherIIBlocks.SKYROOT_LADDER.get());

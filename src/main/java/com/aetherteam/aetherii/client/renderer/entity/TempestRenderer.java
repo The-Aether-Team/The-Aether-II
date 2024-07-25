@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.layers.TempestEmissiveLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.TempestModel;
 import com.aetherteam.aetherii.entity.monster.Tempest;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -18,6 +19,7 @@ public class TempestRenderer extends MobRenderer<Tempest, TempestModel> {
 
     public TempestRenderer(EntityRendererProvider.Context context) {
         super(context, new TempestModel(context.bakeLayer(AetherIIModelLayers.TEMPEST)), 0.5F);
+        this.addLayer(new TempestEmissiveLayer(this));
     }
 
     @Override

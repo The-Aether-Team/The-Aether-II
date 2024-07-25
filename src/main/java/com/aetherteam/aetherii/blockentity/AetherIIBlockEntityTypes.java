@@ -25,6 +25,9 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AltarBlockEntity>> ALTAR = BLOCK_ENTITY_TYPES.register("altar", () ->
             BlockEntityType.Builder.of(AltarBlockEntity::new, AetherIIBlocks.ALTAR.get()).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ArkeniumForgeBlockEntity>> ARKENIUM_FORGE = BLOCK_ENTITY_TYPES.register("arkenium_forge", () ->
+            BlockEntityType.Builder.of(ArkeniumForgeBlockEntity::new, AetherIIBlocks.ARKENIUM_FORGE.get()).build(null));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyrootBedBlockEntity>> SKYROOT_BED = BLOCK_ENTITY_TYPES.register("skyroot_bed", () ->
             BlockEntityType.Builder.of(SkyrootBedBlockEntity::new, AetherIIBlocks.SKYROOT_BED.get()).build(null));
 
