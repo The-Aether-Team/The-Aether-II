@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.structure;
 
+import com.aetherteam.aetherii.world.structure.spawning.HeightSpawningChecks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -65,19 +66,9 @@ public class AetherJigsawStructure extends Structure {
         this.liquidSettings = liquidSettings;
     }
 
-    private boolean extraSpawningChecks(GenerationContext context) {
-        ChunkPos chunkpos = context.chunkPos();
-        return context.chunkGenerator().getFirstOccupiedHeight(
-                chunkpos.getWorldPosition().getX(),
-                chunkpos.getWorldPosition().getZ(),
-                Heightmap.Types.WORLD_SURFACE_WG,
-                context.heightAccessor(),
-                context.randomState()) > checkedY;
-    }
-
     @Override
     public @NotNull Optional<GenerationStub> findGenerationPoint(@NotNull GenerationContext context) {
-        if (!extraSpawningChecks(context)) {
+        if (!new HeightSpawningChecks().checkHeight(context, checkedY, 384)) {
             return Optional.empty();
         }
         int startY = startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));

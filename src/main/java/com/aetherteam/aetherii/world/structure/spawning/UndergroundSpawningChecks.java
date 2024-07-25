@@ -1,47 +1,34 @@
 package com.aetherteam.aetherii.world.structure.spawning;
 
-import com.aetherteam.aetherii.AetherIITags;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.RandomState;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 
 public class UndergroundSpawningChecks {
 
-    /*
-    private ChunkPos searchNearbyChunks(ChunkPos chunkPos, MutableInt height, ChunkGenerator generator, LevelHeightAccessor heightAccessor, RandomState randomState, StructureTemplateManager templateManager, int aboveBottom, int belowTop) {
-        int y;
-        for (int x = -1; x <= 1; x++) {
-            for (int z = -1; z <= 1; z++) {
-                if (x != 0 || z != 0) {
-                    ChunkPos offset = new ChunkPos(chunkPos.x + x, chunkPos.z + z);
-                    y = UndergroundJigsawStructure.findStartingHeight(generator, heightAccessor, offset, randomState, templateManager, aboveBottom, belowTop);
-                    if (y > heightAccessor.getMinBuildHeight()) {
-                        height.setValue(y);
-                        return offset;
-                    }
-                }
-            }
-        }
-        return chunkPos;
-    }
-
-
-    private static int findStartingHeight(ChunkGenerator generator, LevelHeightAccessor heightAccessor, ChunkPos chunkPos, RandomState random, StructureTemplateManager templateManager, int aboveBottom, int belowTop) {
+    public static int findStartingHeight(ChunkGenerator generator, LevelHeightAccessor heightAccessor, ChunkPos chunkPos, WorldgenRandom random, RandomState randomState, StructureTemplateManager templateManager, ResourceLocation checkedTemplate, int aboveBottom, int belowTop, int additionalThickness) {
         int minX = chunkPos.getMinBlockX() - 1;
         int minZ = chunkPos.getMinBlockZ() - 1;
         int maxX = chunkPos.getMaxBlockX() + 1;
         int maxZ = chunkPos.getMaxBlockZ() + 1;
         NoiseColumn[] columns = {
-                generator.getBaseColumn(minX, minZ, heightAccessor, random),
-                generator.getBaseColumn(minX, maxZ, heightAccessor, random),
-                generator.getBaseColumn(maxX, minZ, heightAccessor, random),
-                generator.getBaseColumn(maxX, maxZ, heightAccessor, random)
+                generator.getBaseColumn(minX, minZ, heightAccessor, randomState),
+                generator.getBaseColumn(minX, maxZ, heightAccessor, randomState),
+                generator.getBaseColumn(maxX, minZ, heightAccessor, randomState),
+                generator.getBaseColumn(maxX, maxZ, heightAccessor, randomState)
         };
-        int roomHeight = checkRoomHeight(templateManager, this.startPool.value().getRandomTemplate(random));
+        int roomHeight = checkTemplateHeight(templateManager, checkedTemplate, random);
         int height = heightAccessor.getMinBuildHeight();
         int maxHeight = heightAccessor.getMaxBuildHeight() - belowTop;
-        int thickness = roomHeight + 16;
+        int thickness = roomHeight + additionalThickness;
         int currentThickness = 0;
         for (int y = height + aboveBottom; y <= maxHeight; y++) {
             if (checkEachCornerAtY(columns, y)) {
@@ -59,16 +46,14 @@ public class UndergroundSpawningChecks {
         return height;
     }
 
-     */
-
-    private static int checkRoomHeight(StructureTemplateManager manager, ResourceLocation roomName) {
+    public static int checkTemplateHeight(StructureTemplateManager manager, ResourceLocation roomName, WorldgenRandom random) {
         StructureTemplate template = manager.getOrCreate(roomName);
-        return template.getSize().getY();
+        return template.getSize(Rotation.getRandom(random)).getY();
     }
 
-    private static boolean checkEachCornerAtY(NoiseColumn[] columns, int y) {
+    public static boolean checkEachCornerAtY(NoiseColumn[] columns, int y) {
         for (NoiseColumn column : columns) {
-            if (column.getBlock(y).isAir() || column.getBlock(y).is(AetherIITags.Blocks.AERCLOUDS)) {
+            if (column.getBlock(y).isAir() || column.getBlock(y).is(Blocks.WATER)) {
                 return false;
             }
         }
