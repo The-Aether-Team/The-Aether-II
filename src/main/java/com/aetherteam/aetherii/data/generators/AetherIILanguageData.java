@@ -695,6 +695,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HAMMER.get(), 1, "§9Ability:§r Shifts Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Shifts Gravity");
 
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 1, "§9Ability:§r Stun Resistance");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 1, "§9Ability:§r Attribute Speed");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_LEGGINGS.get(), 1, "§9Ability:§r Attribute Speed");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CHESTPLATE.get(), 1, "§9Ability:§r Attribute Speed");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HELMET.get(), 1, "§9Ability:§r Attribute Speed");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_GLOVES.get(), 1, "§9Ability:§r Attribute Speed");
+
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_BOOTS.get(), 1, "§9Ability:§r Double Jump");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_LEGGINGS.get(), 1, "§9Ability:§r Double Jump");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CHESTPLATE.get(), 1, "§9Ability:§r Double Jump");

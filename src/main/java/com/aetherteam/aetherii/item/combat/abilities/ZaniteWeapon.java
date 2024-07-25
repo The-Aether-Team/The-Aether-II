@@ -13,7 +13,7 @@ import org.apache.commons.compress.utils.Lists;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public interface ZaniteWeapon extends ZaniteTool, UniqueDamage {
+public interface ZaniteWeapon extends ZaniteTool, UniqueDamage { //todo replace with ItemAttributeModifierEvent
     ResourceLocation DAMAGE_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite_modified_attack_damage");
 
     default ItemAttributeModifiers increaseDamage(ItemAttributeModifiers modifiers, ItemStack stack) {

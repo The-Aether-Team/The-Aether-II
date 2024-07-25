@@ -14,7 +14,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 
-public class HandwearAccessory implements Accessory {
+public class HandwearAccessory implements Accessory { //todo attach to GlovesItem and move registries to item and client registries
+    public static final ResourceLocation BASE_GLOVES_STAMINA_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_stamina_restoration");
+
     public static void clientInit() {
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), GlovesRenderer::new);
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), GlovesRenderer::new);
@@ -30,9 +32,7 @@ public class HandwearAccessory implements Accessory {
         AccessoriesAPI.registerAccessory(AetherIIItems.ARKENIUM_GLOVES.get(), new HandwearAccessory(10));
         AccessoriesAPI.registerAccessory(AetherIIItems.GRAVITITE_GLOVES.get(), new HandwearAccessory(20));
     }
-
-    public static final ResourceLocation BASE_GLOVES_STAMINA_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_stamina_restoration");
-
+//todo ability handling with extra attributes
     private final double restoration;
 
     public HandwearAccessory(double restoration) {

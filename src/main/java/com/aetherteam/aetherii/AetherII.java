@@ -158,6 +158,7 @@ public class AetherII {
         EntityInteractionListener.listen(bus);
         GuidebookDiscoveryListener.listen(bus);
         EquipmentAbilitiesListener.listen(bus);
+        ItemAttributeListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 
