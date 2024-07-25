@@ -41,7 +41,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(FINAL_ISLANDS, buildFinalIslands(function));
 
         context.register(FACTOR, buildFactor(function));
-        context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
+        context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
         context.register(TOP_SLIDE, buildTopSlide(function));
         context.register(BOTTOM_SLIDE, buildBottomSlide(function));
         context.register(SLOPER, buildSloper(function));
