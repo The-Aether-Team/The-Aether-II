@@ -27,7 +27,7 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
 
         for (int i = 0; i < radius * heightFactor; ++i) {
             if (i < radius * heightFactor - heightFactor * 0.2F) {
-                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 20 - shapeVariator(random, 0.5F), random, false);
+                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 20 - BlockPlacementUtil.shapeVariator(random, 0.5F), random, false);
             }
             if (i == radius * heightFactor - heightFactor * 0.2F) {
                 BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() + i, pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), radius - (float) i / 10, random, false);
@@ -61,22 +61,11 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
 
         for (int i = 0; i < radius * heightFactor; ++i) {
             if (i < radius * heightFactor - heightFactor * 0.5F) {
-                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 10 - shapeVariator(random, 0.35F), random, false);
+                BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 10 - BlockPlacementUtil.shapeVariator(random, 0.35F), random, false);
             }
             if (i == radius * heightFactor - heightFactor * 0.5F) {
                 BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX() + random.nextIntBetweenInclusive(-1, 1), pos.getY() + i, pos.getZ() + random.nextIntBetweenInclusive(-1, 1)), radius - (float) i / 4, random, false);
             }
-        }
-    }
-
-    private float shapeVariator(RandomSource random, float value) {
-        if (random.nextInt(16) == 5) {
-            return value * 1.5F;
-        }
-        else if (random.nextInt(12) == 5) {
-            return value * 1.25F;
-        } else {
-            return value;
         }
     }
 }
