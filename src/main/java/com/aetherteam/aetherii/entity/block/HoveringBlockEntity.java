@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.entity.block;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.EquipmentAbilitiesAttachment;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -88,6 +90,10 @@ public class HoveringBlockEntity extends Entity {
                 this.markShouldSettle();
             }
         } else {
+            if (holdingPlayer != null) {
+                EquipmentAbilitiesAttachment attachment = holdingPlayer.getData(AetherIIDataAttachments.EQUIPMENT_ABILITIES);
+                attachment.setGravititeHoldingFloatingBlock(false);
+            }
             if (this.verticalCollision || this.horizontalCollision || this.onGround()) {
                 this.markShouldSettle();
             }

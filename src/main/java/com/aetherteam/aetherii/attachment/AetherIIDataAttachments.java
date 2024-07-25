@@ -4,10 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.entity.DroppedItemAttachment;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
-import com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment;
-import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
-import com.aetherteam.aetherii.attachment.player.DimensionTeleportationAttachment;
-import com.aetherteam.aetherii.attachment.player.OutpostTrackerAttachment;
+import com.aetherteam.aetherii.attachment.player.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -27,6 +24,7 @@ public class AetherIIDataAttachments {
     // Player
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AerbunnyMountAttachment>> AERBUNNY_MOUNT = ATTACHMENTS.register("ride_mob", () -> AttachmentType.builder(attach -> new AerbunnyMountAttachment()).serialize(AerbunnyMountAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<GuidebookDiscoveryAttachment>> GUIDEBOOK_DISCOVERY = ATTACHMENTS.register("guidebook_discovery", () -> AttachmentType.builder(GuidebookDiscoveryAttachment::new).serialize(GuidebookDiscoveryAttachment.CODEC).copyOnDeath().build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<EquipmentAbilitiesAttachment>> EQUIPMENT_ABILITIES = ATTACHMENTS.register("equipment_abilities", () -> AttachmentType.builder(EquipmentAbilitiesAttachment::new).serialize(EquipmentAbilitiesAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DimensionTeleportationAttachment>> DIMENSION_TELEPORTATION = ATTACHMENTS.register("dimension_teleportation", () -> AttachmentType.builder(DimensionTeleportationAttachment::new).serialize(DimensionTeleportationAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<OutpostTrackerAttachment>> OUTPOST_TRACKER = ATTACHMENTS.register("outpost_tracker", () -> AttachmentType.builder(OutpostTrackerAttachment::new).serialize(OutpostTrackerAttachment.CODEC).copyOnDeath().build());
 }
