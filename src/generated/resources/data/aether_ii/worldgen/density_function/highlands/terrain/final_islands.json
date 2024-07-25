@@ -43,14 +43,10 @@
                       "type": "minecraft:mul",
                       "argument1": {
                         "type": "minecraft:mul",
-                        "argument1": {
-                          "type": "minecraft:mul",
-                          "argument1": -0.19,
-                          "argument2": "aether_ii:highlands/terrain/base/factor"
-                        },
-                        "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
+                        "argument1": -0.19,
+                        "argument2": "aether_ii:highlands/terrain/base/factor"
                       },
-                      "argument2": "aether_ii:highlands/terrain/island_density"
+                      "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
                     },
                     "argument2": "aether_ii:highlands/continents_factor"
                   }
@@ -64,14 +60,10 @@
                 "type": "minecraft:mul",
                 "argument1": {
                   "type": "minecraft:mul",
-                  "argument1": {
-                    "type": "minecraft:mul",
-                    "argument1": -0.19,
-                    "argument2": "aether_ii:highlands/terrain/base/factor"
-                  },
-                  "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
+                  "argument1": -0.19,
+                  "argument2": "aether_ii:highlands/terrain/base/factor"
                 },
-                "argument2": "aether_ii:highlands/terrain/island_density"
+                "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
               },
               "argument2": "aether_ii:highlands/continents_factor"
             }
