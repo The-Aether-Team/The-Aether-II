@@ -191,7 +191,32 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.HOLYSTONE_TROWEL.get(),
                 AetherIIItems.ZANITE_TROWEL.get(),
                 AetherIIItems.ARKENIUM_TROWEL.get(),
-                AetherIIItems.GRAVITITE_TROWEL.get()
+                AetherIIItems.GRAVITITE_TROWEL.get(),
+                AetherIIItems.TAEGORE_HIDE_HELMET.get(),
+                AetherIIItems.BURRUKAI_PELT_HELMET.get(),
+                AetherIIItems.ZANITE_HELMET.get(),
+                AetherIIItems.ARKENIUM_HELMET.get(),
+                AetherIIItems.GRAVITITE_HELMET.get(),
+                AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(),
+                AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(),
+                AetherIIItems.ZANITE_CHESTPLATE.get(),
+                AetherIIItems.ARKENIUM_CHESTPLATE.get(),
+                AetherIIItems.GRAVITITE_CHESTPLATE.get(),
+                AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(),
+                AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(),
+                AetherIIItems.ZANITE_LEGGINGS.get(),
+                AetherIIItems.ARKENIUM_LEGGINGS.get(),
+                AetherIIItems.GRAVITITE_LEGGINGS.get(),
+                AetherIIItems.TAEGORE_HIDE_BOOTS.get(),
+                AetherIIItems.BURRUKAI_PELT_BOOTS.get(),
+                AetherIIItems.ZANITE_BOOTS.get(),
+                AetherIIItems.ARKENIUM_BOOTS.get(),
+                AetherIIItems.GRAVITITE_BOOTS.get(),
+                AetherIIItems.TAEGORE_HIDE_GLOVES.get(),
+                AetherIIItems.BURRUKAI_PELT_GLOVES.get(),
+                AetherIIItems.ZANITE_GLOVES.get(),
+                AetherIIItems.ARKENIUM_GLOVES.get(),
+                AetherIIItems.GRAVITITE_GLOVES.get()
         );
         this.tag(AetherIITags.Items.FORGE_PRIMARY_MATERIAL).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.FORGE_SECONDARY_MATERIAL).add(AetherIIItems.CORROBONITE_CRYSTAL.get());
