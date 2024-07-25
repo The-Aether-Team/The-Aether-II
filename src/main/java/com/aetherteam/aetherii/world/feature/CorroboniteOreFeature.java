@@ -34,13 +34,13 @@ public class CorroboniteOreFeature extends Feature<OreConfiguration> { //todo co
         float f = randomsource.nextFloat() * (float) Math.PI;
         float f1 = (float)oreconfiguration.size / 8.0F;
         int i = Mth.ceil(((float)oreconfiguration.size / 16.0F * 2.0F + 1.0F) / 2.0F);
-        double d0 = (double)blockpos.getX() + Math.sin((double)f) * (double)f1;
-        double d1 = (double)blockpos.getX() - Math.sin((double)f) * (double)f1;
-        double d2 = (double)blockpos.getZ() + Math.cos((double)f) * (double)f1;
-        double d3 = (double)blockpos.getZ() - Math.cos((double)f) * (double)f1;
+        double d0 = (double)blockpos.getX() + Math.sin(f) * (double)f1;
+        double d1 = (double)blockpos.getX() - Math.sin(f) * (double)f1;
+        double d2 = (double)blockpos.getZ() + Math.cos(f) * (double)f1;
+        double d3 = (double)blockpos.getZ() - Math.cos(f) * (double)f1;
         int j = 2;
-        double d4 = (double)(blockpos.getY() + randomsource.nextInt(3) - 2);
-        double d5 = (double)(blockpos.getY() + randomsource.nextInt(3) - 2);
+        double d4 = blockpos.getY() + randomsource.nextInt(3) - 2;
+        double d5 = blockpos.getY() + randomsource.nextInt(3) - 2;
         int k = blockpos.getX() - Mth.ceil(f1) - i;
         int l = blockpos.getY() - 2 - i;
         int i1 = blockpos.getZ() - Mth.ceil(f1) - i;
@@ -82,9 +82,9 @@ public class CorroboniteOreFeature extends Feature<OreConfiguration> { //todo co
 
         for (int k = 0; k < j; k++) {
             float f = (float)k / (float)j;
-            double d0 = Mth.lerp((double)f, minX, maxX);
-            double d1 = Mth.lerp((double)f, minY, maxY);
-            double d2 = Mth.lerp((double)f, minZ, maxZ);
+            double d0 = Mth.lerp(f, minX, maxX);
+            double d1 = Mth.lerp(f, minY, maxY);
+            double d2 = Mth.lerp(f, minZ, maxZ);
             double d3 = random.nextDouble() * (double)j / 16.0;
             double d4 = ((double)(Mth.sin((float) Math.PI * f) + 1.0F) * d3 + 1.0) / 2.0;
             adouble[k * 4 + 0] = d0;
