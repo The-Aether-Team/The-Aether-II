@@ -556,6 +556,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
+                output.accept(AetherIIItems.COCKATRICE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());
@@ -569,6 +570,5 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
-                output.accept(AetherIIItems.COCKATRICE_SPAWN_EGG.get());
             }).build());
 }
