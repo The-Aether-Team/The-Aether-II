@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.network.packet.CurrencySyncPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.packet.SyncPacket;
@@ -44,7 +43,6 @@ public class CurrencyAttachment implements INBTSynchable {
 
     public void onUpdate(Player player) {
         this.syncAfterJoin(player);
-        AetherII.LOGGER.info(String.valueOf(this.amount));
     }
 
     private void syncAfterJoin(Player player) {
