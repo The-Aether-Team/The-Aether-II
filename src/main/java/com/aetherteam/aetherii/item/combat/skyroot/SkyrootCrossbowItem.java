@@ -11,8 +11,8 @@ public class SkyrootCrossbowItem extends AetherIICrossbowItem {
         super(AetherIIItemTiers.SKYROOT, new Properties());
     }
 
-    @Override
-    public int getProjectileCount(ServerLevel level, ItemStack tool, Entity entity, int projectileCount) { //todo special charge data component check.
-        return 2;
-    }
+//    @Override
+//    public int getProjectileCount(ServerLevel level, ItemStack tool, Entity entity, int projectileCount) { //todo special charge data component check.
+//        return 2;
+//    }
 }

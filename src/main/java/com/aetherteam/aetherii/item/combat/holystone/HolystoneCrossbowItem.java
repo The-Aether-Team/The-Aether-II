@@ -11,13 +11,13 @@ public class HolystoneCrossbowItem extends AetherIICrossbowItem {
         super(AetherIIItemTiers.HOLYSTONE, new Properties());
     }
 
-    @Override
-    public float getProjectileSpread(ServerLevel level, ItemStack tool, Entity entity, float projectileSpread) { //todo special charge data component check.
-        return 10.0F;
-    }
-
-    @Override
-    public int getProjectileCount(ServerLevel level, ItemStack tool, Entity entity, int projectileCount) { //todo special charge data component check.
-        return 3;
-    }
+//    @Override
+//    public float getProjectileSpread(ServerLevel level, ItemStack tool, Entity entity, float projectileSpread) { //todo special charge data component check.
+//        return 10.0F;
+//    }
+//
+//    @Override
+//    public int getProjectileCount(ServerLevel level, ItemStack tool, Entity entity, int projectileCount) { //todo special charge data component check.
+//        return 3;
+//    }
 }
