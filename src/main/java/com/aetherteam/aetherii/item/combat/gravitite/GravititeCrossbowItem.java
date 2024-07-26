@@ -12,10 +12,10 @@ public class GravititeCrossbowItem extends AetherIICrossbowItem {
         super(AetherIIItemTiers.GRAVITITE, new Properties());
     }
 
-    @Override
-    protected Projectile createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit) { //todo special charge data component check.
-        Projectile projectile = super.createProjectile(level, shooter, weapon, ammo, isCrit);
-        projectile.setNoGravity(true);
-        return projectile;
-    }
+//    @Override
+//    protected Projectile createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit) { //todo special charge data component check.
+//        Projectile projectile = super.createProjectile(level, shooter, weapon, ammo, isCrit);
+//        projectile.setNoGravity(true);
+//        return projectile;
+//    }
 }
