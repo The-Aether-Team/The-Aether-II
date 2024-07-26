@@ -60,6 +60,8 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.CORROBONITE_ORE.get(), "natural/");
+        this.corroboniteCluster(AetherIIBlocks.CORROBONITE_CLUSTER.get());
 
         // Aerclouds
         this.aercloudAll(AetherIIBlocks.COLD_AERCLOUD.get(), "natural/");
@@ -438,6 +440,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.holystoneFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get());
         this.artisansBench(AetherIIBlocks.ARTISANS_BENCH.get());
         this.altar(AetherIIBlocks.ALTAR.get());
+        this.arkeniumForge(AetherIIBlocks.ARKENIUM_FORGE.get());
         this.skyrootChest(AetherIIBlocks.SKYROOT_CHEST.get());
         this.skyrootLadder(AetherIIBlocks.SKYROOT_LADDER.get());
         this.bed(AetherIIBlocks.SKYROOT_BED.get(), AetherIIBlocks.SKYROOT_PLANKS.get());

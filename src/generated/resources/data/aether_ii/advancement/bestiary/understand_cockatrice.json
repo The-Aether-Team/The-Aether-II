@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "kill_cockatrice": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:cockatrice"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "requirements": [
+    [
+      "kill_cockatrice"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

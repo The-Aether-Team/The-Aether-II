@@ -9,7 +9,9 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
@@ -188,6 +190,22 @@ public class DamageSystemHooks {
             }
             components.remove(removePosition);
             components.add(addPosition, Component.literal("").append(Component.translatable("attribute.modifier.plus.0", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(value), damageTypeText).withStyle(ChatFormatting.BLUE)));
+        }
+    }
+
+    public static void addReinforcingTooltip(ItemStack stack, List<Component> components) {
+        ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+        if (tier != null) {
+            int position = 1;
+            String text = "ability.tooltip";
+            for (int i = 1; i < components.size(); i++) {
+                Component component = components.get(i);
+                if (component.toString().contains(text)) {
+                    position = i + 1;
+                    break;
+                }
+            }
+            components.add(position, Component.literal("Reinforcement ").append(Component.translatable("enchantment.level." + tier.getTier())).withColor(14408667));
         }
     }
 

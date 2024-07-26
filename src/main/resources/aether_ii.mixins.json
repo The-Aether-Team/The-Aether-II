@@ -28,6 +28,7 @@
     "client.LiquidBlockRendererMixin",
     "client.ReceivingLevelScreenMixin",
     "client.accessor.DeathScreenAccessor",
+    "client.accessor.EditBoxAccessor",
     "client.accessor.LevelRendererAccessor",
     "client.accessor.ParticleAccessor",
     "client.accessor.PlayerModelAccessor",

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -26,6 +27,7 @@ public class AetherIIOreFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE_BURIED = AetherIIFeatureUtils.registerKey("ore_gravitite_buried");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE = AetherIIFeatureUtils.registerKey("ore_gravitite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_HOLYSTONE_QUARTZ = AetherIIFeatureUtils.registerKey("ore_holystone_quartz");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_CORROBONITE = AetherIIFeatureUtils.registerKey("ore_corrobonite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GLINT = AetherIIFeatureUtils.registerKey("ore_glint");
 
     public static final RuleTest HOLYSTONE = new TagMatchTest(AetherIITags.Blocks.HOLYSTONE);
@@ -69,6 +71,7 @@ public class AetherIIOreFeatures {
         AetherIIFeatureUtils.register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(gravitite, 3, 0.5F));
         AetherIIFeatureUtils.register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 4));
         AetherIIFeatureUtils.register(context, ORE_HOLYSTONE_QUARTZ, Feature.ORE, new OreConfiguration(quartz, 6));
+        AetherIIFeatureUtils.register(context, ORE_CORROBONITE, AetherIIFeatures.CORROBONITE_ORE.get(), new OreConfiguration(UNDERGROUND, AetherIIBlocks.CORROBONITE_ORE.get().defaultBlockState(), 4));
         AetherIIFeatureUtils.register(context, ORE_GLINT, Feature.ORE, new OreConfiguration(glint, 6));
     }
 }

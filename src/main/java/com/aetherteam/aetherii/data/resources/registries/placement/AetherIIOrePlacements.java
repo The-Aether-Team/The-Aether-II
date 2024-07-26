@@ -24,6 +24,7 @@ public class AetherIIOrePlacements {
     public static final ResourceKey<PlacedFeature> ORE_GRAVITITE_BURIED = AetherIIPlacementUtils.createKey("ore_gravitite_buried");
     public static final ResourceKey<PlacedFeature> ORE_GRAVITITE = AetherIIPlacementUtils.createKey("ore_gravitite");
     public static final ResourceKey<PlacedFeature> ORE_HOLYSTONE_QUARTZ = AetherIIPlacementUtils.createKey("ore_holystone_quartz");
+    public static final ResourceKey<PlacedFeature> ORE_CORROBONITE = AetherIIPlacementUtils.createKey("ore_corrobonite");
     public static final ResourceKey<PlacedFeature> ORE_GLINT = AetherIIPlacementUtils.createKey("ore_glint");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -53,6 +54,8 @@ public class AetherIIOrePlacements {
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-58), VerticalAnchor.aboveBottom(88))));
         AetherIIPlacementUtils.register(context, ORE_HOLYSTONE_QUARTZ, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_HOLYSTONE_QUARTZ),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(180))));
+        AetherIIPlacementUtils.register(context, ORE_CORROBONITE, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_CORROBONITE),
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(56))));
         AetherIIPlacementUtils.register(context, ORE_GLINT, configuredFeatures.getOrThrow(AetherIIOreFeatures.ORE_GLINT),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(0), VerticalAnchor.aboveBottom(144))));
     }
