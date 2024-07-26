@@ -32,7 +32,7 @@ public class HandwearAccessory implements Accessory { //todo attach to GlovesIte
         AccessoriesAPI.registerAccessory(AetherIIItems.ARKENIUM_GLOVES.get(), new HandwearAccessory(10));
         AccessoriesAPI.registerAccessory(AetherIIItems.GRAVITITE_GLOVES.get(), new HandwearAccessory(20));
     }
-//todo ability handling with extra attributes
+
     private final double restoration;
 
     public HandwearAccessory(double restoration) {
