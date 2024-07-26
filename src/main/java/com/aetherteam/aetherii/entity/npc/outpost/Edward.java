@@ -1,13 +1,13 @@
 package com.aetherteam.aetherii.entity.npc.outpost;
 
-import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.entity.npc.MerchantEntity;
+import com.aetherteam.aetherii.entity.npc.MerchantTrades;
 import com.aetherteam.aetherii.entity.npc.NpcEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -17,7 +17,8 @@ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
@@ -25,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class Edward extends NpcEntity {
+public class Edward extends MerchantEntity {
     private static final EntityDataAccessor<Boolean> DATA_SITTING_ID = SynchedEntityData.defineId(Edward.class, EntityDataSerializers.BOOLEAN);
     private BlockPos sittingPosition;
 
@@ -47,6 +48,8 @@ public class Edward extends NpcEntity {
 
     @Override
     protected void registerGoals() {
+        this.goalSelector.addGoal(1, new TradeWithPlayerGoal(this));
+        this.goalSelector.addGoal(1, new LookAtTradingPlayerGoal(this));
         this.goalSelector.addGoal(1, new StrollExceptWhenSitting(this, 1.0));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
@@ -54,9 +57,24 @@ public class Edward extends NpcEntity {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @org.jetbrains.annotations.Nullable SpawnGroupData spawnGroupData) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
         this.setSittingPosition(this.blockPosition());
         return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
+    }
+
+    @Override
+    protected void updateTrades() {
+        MerchantTrades.ItemListing[] listings = MerchantTrades.EDWARD_TRADES.get(1);
+        if (listings != null) {
+            MerchantOffers merchantOffers = this.getOffers();
+            this.addOffersFromItemListings(merchantOffers, listings, 5);
+            int i = this.random.nextInt(listings.length);
+            MerchantTrades.ItemListing randomListing = listings[i];
+            MerchantOffer merchantOffer = randomListing.getOffer(this, this.random);
+            if (merchantOffer != null) {
+                merchantOffers.add(merchantOffer);
+            }
+        }
     }
 
     @Override

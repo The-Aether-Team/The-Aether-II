@@ -706,6 +706,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
 
+        // NPCs
+        this.addEntityType(AetherIIEntityTypes.EDWARD, "Edward");
+
 
         // Attributes
         this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");
