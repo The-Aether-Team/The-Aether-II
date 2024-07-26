@@ -54,7 +54,6 @@ public class GreatboaFoliagePlacer extends AbstractBranchedFoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y - 8, z + random.nextIntBetweenInclusive(0, 1)), 8, i, doubleTrunk);
 
             this.placeCornerLogs(level, foliageSetter, random, config, pos, -1);
-            this.placeCornerLogs(level, foliageSetter, random, config, pos, -8);
         }
     }
 
