@@ -142,10 +142,10 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
         density = DensityFunctions.mul(density, selectSlide(function));
-        density = DensityFunctions.add(density, factorize(function, -0.19));
+        density = DensityFunctions.add(density, factorize(function, -0.185));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, BOTTOM_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.19));
+        density = DensityFunctions.add(density, factorize(function, -0.185));
         density = DensityFunctions.min(density, getFunction(function, NOISE_CAVES));
         density = DensityFunctions.max(density, DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 130, DensityFunctions.constant(-1), getFunction(function, AetherIIDensityFunctions.SHATTERED_ISLANDS)));
         density = DensityFunctions.blendDensity(density);
