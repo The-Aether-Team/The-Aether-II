@@ -53,9 +53,9 @@ public class ArcticBurrukaiModel extends AbstractBurrukaiModel {
 
 		PartDefinition head_plate = head_main.addOrReplaceChild("head_plate", CubeListBuilder.create().texOffs(33, 0).mirror().addBox(-4.0F, -8.5F, -3.5F, 8.0F, 2.0F, 10.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.8727F, 0.0F, 0.0F));
 
-		PartDefinition antler_right = head_main.addOrReplaceChild("antler_right", CubeListBuilder.create().texOffs(83, 140).mirror().addBox(5.0F, -17.0F, -1.0F, 10.0F, 14.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.75F, 0.2508F, -0.085F, -0.1013F));
+		PartDefinition antler_right = head_main.addOrReplaceChild("antler_right", CubeListBuilder.create().texOffs(83, 140).mirror().addBox(5.0F, -17.0F, -1.0F, 10.0F, 14.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.75F, 0.2508F, -0.085F, -0.1013F));
 
-		PartDefinition antler_left = head_main.addOrReplaceChild("antler_left", CubeListBuilder.create().texOffs(0, 140).addBox(-15.0F, -17.0F, -1.0F, 10.0F, 14.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.75F, 0.2508F, 0.085F, 0.1013F));
+		PartDefinition antler_left = head_main.addOrReplaceChild("antler_left", CubeListBuilder.create().texOffs(0, 140).addBox(-15.0F, -17.0F, -1.0F, 10.0F, 14.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.75F, 0.2508F, 0.085F, 0.1013F));
 
 		PartDefinition ear_left = head_main.addOrReplaceChild("ear_left", CubeListBuilder.create().texOffs(58, 40).mirror().addBox(-4.5F, -0.5F, -2.0F, 1.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.5236F));
 
