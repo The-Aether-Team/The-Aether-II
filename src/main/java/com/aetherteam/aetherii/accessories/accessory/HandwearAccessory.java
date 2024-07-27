@@ -26,10 +26,10 @@ public class HandwearAccessory implements Accessory { //todo attach to GlovesIte
     }
 
     public static void init() {
-        AccessoriesAPI.registerAccessory(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), new HandwearAccessory(5)); //todo
-        AccessoriesAPI.registerAccessory(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), new HandwearAccessory(7));
-        AccessoriesAPI.registerAccessory(AetherIIItems.ZANITE_GLOVES.get(), new HandwearAccessory(10));
-        AccessoriesAPI.registerAccessory(AetherIIItems.ARKENIUM_GLOVES.get(), new HandwearAccessory(10));
+        AccessoriesAPI.registerAccessory(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), new HandwearAccessory(5));
+        AccessoriesAPI.registerAccessory(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), new HandwearAccessory(10));
+        AccessoriesAPI.registerAccessory(AetherIIItems.ZANITE_GLOVES.get(), new HandwearAccessory(15));
+        AccessoriesAPI.registerAccessory(AetherIIItems.ARKENIUM_GLOVES.get(), new HandwearAccessory(15));
         AccessoriesAPI.registerAccessory(AetherIIItems.GRAVITITE_GLOVES.get(), new HandwearAccessory(20));
     }
 
