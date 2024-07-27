@@ -20,7 +20,7 @@ public final class EquipmentUtil {
         return !(attacker instanceof Player player) || (combatifyLoaded ? player.getAttackStrengthScale(1.0F) >= 1.95F : player.getAttackStrengthScale(1.0F) >= 1.0F);
     }
 
-    public static boolean hasArmorAbility(LivingEntity entity, Holder<ArmorMaterial> material) {
+    public static int getArmorCount(LivingEntity entity, Holder<ArmorMaterial> material) {
         Map<Holder<ArmorMaterial>, Integer> armorTypeCount = new HashMap<>();
         for (ItemStack itemStack : entity.getArmorSlots()) {
             if (itemStack.getItem() instanceof ArmorItem armorItem) {
@@ -44,6 +44,10 @@ public final class EquipmentUtil {
                 }
             }
         }
-        return armorTypeCount.computeIfAbsent(material, i -> 0) >= 3;
+        return armorTypeCount.computeIfAbsent(material, i -> 0);
+    }
+
+    public static boolean hasArmorAbility(LivingEntity entity, Holder<ArmorMaterial> material) {
+        return getArmorCount(entity, material) >= 3;
     }
 }

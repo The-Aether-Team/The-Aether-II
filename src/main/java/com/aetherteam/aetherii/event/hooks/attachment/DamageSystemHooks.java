@@ -14,6 +14,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.EquipmentUtil;
 import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
 import com.aetherteam.aetherii.item.combat.GlovesItem;
@@ -23,6 +24,7 @@ import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -40,6 +42,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.common.Tags;
@@ -124,11 +128,30 @@ public class DamageSystemHooks {
         }
     }
 
-    public static void addAbilityTooltips(ItemStack stack, List<Component> components) {
+    public static void addAbilityTooltips(Player player, ItemStack stack, List<Component> components) {
         for (int i = 1; i <= 5; i++) {
             String string = stack.getDescriptionId() + "." + AetherII.MODID + ".ability.tooltip." + i;
             if (I18n.exists(string)) {
-                components.add(i, Component.translatable(string));
+                if (player != null && (stack.getItem() instanceof ArmorItem || stack.getItem() instanceof GlovesItem) && Component.translatable(string).getString().contains("%s")) {
+                    Holder<ArmorMaterial> material = null;
+                    if (stack.getItem() instanceof ArmorItem armorItem) {
+                        material = armorItem.getMaterial();
+                    } else if (stack.getItem() instanceof GlovesItem glovesItem) {
+                        material = glovesItem.getMaterial();
+                    }
+                    if (material != null) {
+                        int currentEquipmentCount = EquipmentUtil.getArmorCount(player, material);
+                        Component component;
+                        if (currentEquipmentCount >= 3) {
+                            component = Component.literal("3/3").withStyle(ChatFormatting.WHITE);
+                        } else {
+                            component = Component.literal(currentEquipmentCount + "/3").withStyle(ChatFormatting.GRAY);
+                        }
+                        components.add(i, Component.translatable(string, component));
+                    }
+                } else {
+                    components.add(i, Component.translatable(string));
+                }
             }
         }
     }

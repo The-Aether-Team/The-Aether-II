@@ -43,7 +43,7 @@ public class DamageSystemListener {
         Player player = event.getEntity();
         ItemStack itemStack = event.getItemStack();
         List<Component> itemTooltips = event.getToolTip();
-        DamageSystemHooks.addAbilityTooltips(itemStack, itemTooltips);
+        DamageSystemHooks.addAbilityTooltips(player, itemStack, itemTooltips);
         DamageSystemHooks.addDamageTypeTooltips(player, itemTooltips, itemStack);
         DamageSystemHooks.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
         DamageSystemHooks.addShieldTooltips(itemTooltips, itemStack);
