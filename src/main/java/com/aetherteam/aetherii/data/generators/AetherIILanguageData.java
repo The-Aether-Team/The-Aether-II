@@ -705,6 +705,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDamageTypeTooltip("pierce", "§cPierce§r Damage");
 
 
+        // Miscellaneous Item Tooltips
+        this.addItemTooltip("treasure.description", "Treasure Item");
+        this.addItemTooltip("currency.description", "Converts to Currency:");
+        this.addItemTooltip("currency.amount", "+%s Glint");
+
+
         // Accessory Slots
         this.addAccessorySlot("relic_slot", "Relic");
         this.addAccessorySlot("handwear_slot", "Handwear");
