@@ -701,37 +701,57 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), 1, "§9Ability:§r Calms Animals");
         this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_HELMET.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_HELMET.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
         this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 1, "§9Ability:§r Stun Resistance");
         this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 1, "§9Ability:§r Attribute Speed");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_LEGGINGS.get(), 1, "§9Ability:§r Attribute Speed");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CHESTPLATE.get(), 1, "§9Ability:§r Attribute Speed");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HELMET.get(), 1, "§9Ability:§r Attribute Speed");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HELMET.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_GLOVES.get(), 1, "§9Ability:§r Attribute Speed");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_BOOTS.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_BOOTS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_LEGGINGS.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CHESTPLATE.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HELMET.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HELMET.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_GLOVES.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_BOOTS.get(), 1, "§9Ability:§r Double Jump");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_LEGGINGS.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CHESTPLATE.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HELMET.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HELMET.get(), 2, "§9Set Pieces:§r %s");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
 
         // Damage Types
