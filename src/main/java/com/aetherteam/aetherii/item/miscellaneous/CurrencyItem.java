@@ -37,6 +37,9 @@ public class CurrencyItem extends Item {
         attachment.setAmount(attachment.getAmount() + this.currencyAmount);
         player.awardStat(Stats.ITEM_USED.get(this));
         stack.consume(1, player);
+        if (!level.isClientSide()) {
+            player.displayClientMessage(Component.translatable("aether_ii.tooltip.item.currency.amount", this.currencyAmount).withColor(15066623), true);
+        }
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }
 
