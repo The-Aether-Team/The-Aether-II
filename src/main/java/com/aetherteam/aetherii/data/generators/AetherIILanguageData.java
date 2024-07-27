@@ -626,15 +626,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
         this.addItem(AetherIIItems.SHEEPUFF_SPAWN_EGG, "Sheepuff Spawn Egg");
         this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
-        this.addItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Highfields Taegore Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Magnetic Taegore Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Arctic Taegore Spawn Egg");
-        this.addItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Highfields Burrukai Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Magnetic Burrukai Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Arctic Burrukai Spawn Egg");
+        this.addItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Taegore (Highfields) Spawn Egg");
+        this.addItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Taegore (Magnetic) Spawn Egg");
+        this.addItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Taegore (Arctic) Spawn Egg");
+        this.addItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Burrukai (Highfields) Spawn Egg");
+        this.addItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Burrukai (Magnetic) Spawn Egg");
+        this.addItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Burrukai (Arctic) Spawn Egg");
         this.addItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Highfields Kirrid Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Magnetic Kirrid Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Arctic Kirrid Spawn Egg");
+        this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid (Magnetic) Spawn Egg");
+        this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid (Arctic) Spawn Egg");
         this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
         this.addItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG, "Skyroot Lizard Spawn Egg");
         this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
@@ -714,15 +714,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.PHYG, "Phyg");
         this.addEntityType(AetherIIEntityTypes.FLYING_COW, "Flying Cow");
         this.addEntityType(AetherIIEntityTypes.SHEEPUFF, "Sheepuff");
-        this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_TAEGORE, "Highfields Taegore");
-        this.addEntityType(AetherIIEntityTypes.MAGNETIC_TAEGORE, "Magnetic Taegore");
-        this.addEntityType(AetherIIEntityTypes.ARCTIC_TAEGORE, "Arctic Taegore");
-        this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, "Highfields Burrukai");
-        this.addEntityType(AetherIIEntityTypes.MAGNETIC_BURRUKAI, "Magnetic Burrukai");
-        this.addEntityType(AetherIIEntityTypes.ARCTIC_BURRUKAI, "Arctic Burrukai");
-        this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_KIRRID, "Highfields Kirrid");
-        this.addEntityType(AetherIIEntityTypes.MAGNETIC_KIRRID, "Magnetic Kirrid");
-        this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Arctic Kirrid");
+        this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_TAEGORE, "Taegore (Highfields)");
+        this.addEntityType(AetherIIEntityTypes.MAGNETIC_TAEGORE, "Taegore (Magnetic)");
+        this.addEntityType(AetherIIEntityTypes.ARCTIC_TAEGORE, "Taegore (Arctic)");
+        this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, "Burrukai (Highfields)");
+        this.addEntityType(AetherIIEntityTypes.MAGNETIC_BURRUKAI, "Burrukai (Magnetic)");
+        this.addEntityType(AetherIIEntityTypes.ARCTIC_BURRUKAI, "Burrukai (Arctic)");
+        this.addEntityType(AetherIIEntityTypes.HIGHFIELDS_KIRRID, "Kirrid (Highfields)");
+        this.addEntityType(AetherIIEntityTypes.MAGNETIC_KIRRID, "Kirrid (Magnetic)");
+        this.addEntityType(AetherIIEntityTypes.ARCTIC_KIRRID, "Kirrid (Arctic)");
         this.addEntityType(AetherIIEntityTypes.MOA, "Moa");
         this.addEntityType(AetherIIEntityTypes.SKYROOT_LIZARD, "Skyroot Lizard");
 
@@ -827,8 +827,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.discovery.bestiary.stat.damage_none", "Standard Damage from %s Attacks");
         this.addGuiText("guidebook.discovery.bestiary.info.eats", "Eats:");
         this.addGuiText("guidebook.discovery.bestiary.info.drops", "Drops:");
-        this.addGuiText("toast.guidebook.bestiary", "New Bestiary Entries!");
-        this.addGuiText("toast.guidebook.description", "Check your guidebook");
+        this.addGuiText("toast.guidebook.bestiary", "New Bestiary Entry!");
+        this.addGuiText("toast.guidebook.effects", "New Effects Entry!");
+        this.addGuiText("toast.guidebook.exploration", "New Exploration Entry!");
+        this.addGuiText("toast.guidebook.description", "Check your Guidebook");
 
         // Bestiary
         this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
