@@ -59,7 +59,6 @@ public class GuidebookToast implements Toast {
         }
 
         public void render(GuiGraphics guiGraphics, int width, int height) {
-            RenderSystem.enableBlend();
             guiGraphics.blitSprite(this.sprite, 0, 0, width, height);
         }
 
@@ -92,7 +91,6 @@ public class GuidebookToast implements Toast {
         }
 
         public void render(GuiGraphics guiGraphics, int x, int y) {
-            RenderSystem.enableBlend();
             guiGraphics.blitSprite(this.sprite, x, y, 22, 16);
             guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable(this.title), 32, 7, -13423317, false);
         }
