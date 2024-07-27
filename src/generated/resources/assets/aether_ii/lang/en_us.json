@@ -26,7 +26,7 @@
   "aether_ii.message.campfire_respawn_failed": "Failed to locate a valid Outpost Campfire.",
   "aether_ii.pierce": "§cPierce§r",
   "aether_ii.slash": "§9Slash§r",
-  "aether_ii.tooltip.item.currency.amount": "+%s Glint",
+  "aether_ii.tooltip.item.currency.amount": "%s Glint",
   "aether_ii.tooltip.item.currency.description": "Converts to Currency:",
   "aether_ii.tooltip.item.damage.impact": "§eImpact§r Damage",
   "aether_ii.tooltip.item.damage.pierce": "§cPierce§r Damage",

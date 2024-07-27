@@ -3,7 +3,9 @@ package com.aetherteam.aetherii.item.miscellaneous;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.CurrencyAttachment;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.GuiAccessor;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -37,8 +39,12 @@ public class CurrencyItem extends Item {
         attachment.setAmount(attachment.getAmount() + this.currencyAmount);
         player.awardStat(Stats.ITEM_USED.get(this));
         stack.consume(1, player);
-        if (!level.isClientSide()) {
-            player.displayClientMessage(Component.translatable("aether_ii.tooltip.item.currency.amount", this.currencyAmount).withColor(15066623), true);
+        if (level.isClientSide()) {
+            GuiAccessor gui = (GuiAccessor) Minecraft.getInstance().gui;
+            player.displayClientMessage(Component.translatable("aether_ii.tooltip.item.currency.amount", attachment.getAmount()).withColor(15066623), true);
+            if (gui.aether$getOverlayMessageString() != null && gui.aether$getOverlayMessageTime() > 0) {
+                gui.aether$setOverlayMessageTime(30);
+            }
         }
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }

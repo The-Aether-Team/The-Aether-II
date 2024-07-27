@@ -708,7 +708,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Miscellaneous Item Tooltips
         this.addItemTooltip("treasure.description", "Treasure Item");
         this.addItemTooltip("currency.description", "Converts to Currency:");
-        this.addItemTooltip("currency.amount", "+%s Glint");
+        this.addItemTooltip("currency.amount", "%s Glint");
 
 
         // Accessory Slots
