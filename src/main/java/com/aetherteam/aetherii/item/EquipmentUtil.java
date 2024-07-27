@@ -1,5 +1,8 @@
 package com.aetherteam.aetherii.item;
 
+import com.aetherteam.aetherii.item.combat.GlovesItem;
+import io.wispforest.accessories.api.AccessoriesCapability;
+import io.wispforest.accessories.api.slot.SlotEntryReference;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +25,18 @@ public final class EquipmentUtil {
         for (ItemStack itemStack : entity.getArmorSlots()) {
             if (itemStack.getItem() instanceof ArmorItem armorItem) {
                 Holder<ArmorMaterial> materialHolder = armorItem.getMaterial();
+                if (armorTypeCount.containsKey(materialHolder)) {
+                    armorTypeCount.put(materialHolder, armorTypeCount.get(materialHolder) + 1);
+                } else {
+                    armorTypeCount.put(materialHolder, 1);
+                }
+            }
+        }
+        AccessoriesCapability accessories = AccessoriesCapability.get(entity);
+        if (accessories != null) {
+            SlotEntryReference slotEntryReference = accessories.getFirstEquipped((itemStack) -> itemStack.getItem() instanceof GlovesItem);
+            if (slotEntryReference != null && slotEntryReference.stack().getItem() instanceof GlovesItem glovesItem) {
+                Holder<ArmorMaterial> materialHolder = glovesItem.getMaterial();
                 if (armorTypeCount.containsKey(materialHolder)) {
                     armorTypeCount.put(materialHolder, armorTypeCount.get(materialHolder) + 1);
                 } else {
