@@ -23,6 +23,7 @@ public class AetherIIDataAttachments {
 
     // Player
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<AerbunnyMountAttachment>> AERBUNNY_MOUNT = ATTACHMENTS.register("ride_mob", () -> AttachmentType.builder(attach -> new AerbunnyMountAttachment()).serialize(AerbunnyMountAttachment.CODEC).build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<CurrencyAttachment>> CURRENCY = ATTACHMENTS.register("currency", () -> AttachmentType.builder(CurrencyAttachment::new).serialize(CurrencyAttachment.CODEC).copyOnDeath().build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<GuidebookDiscoveryAttachment>> GUIDEBOOK_DISCOVERY = ATTACHMENTS.register("guidebook_discovery", () -> AttachmentType.builder(GuidebookDiscoveryAttachment::new).serialize(GuidebookDiscoveryAttachment.CODEC).copyOnDeath().build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<EquipmentAbilitiesAttachment>> EQUIPMENT_ABILITIES = ATTACHMENTS.register("equipment_abilities", () -> AttachmentType.builder(EquipmentAbilitiesAttachment::new).serialize(EquipmentAbilitiesAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DimensionTeleportationAttachment>> DIMENSION_TELEPORTATION = ATTACHMENTS.register("dimension_teleportation", () -> AttachmentType.builder(DimensionTeleportationAttachment::new).serialize(DimensionTeleportationAttachment.CODEC).build());

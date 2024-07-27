@@ -67,6 +67,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWithFortune(AetherIIBlocks.ARKENIUM_ORE.get(), AetherIIItems.INERT_ARKENIUM.get());
         this.dropWithFortune(AetherIIBlocks.GRAVITITE_ORE.get(), AetherIIItems.INERT_GRAVITITE.get());
         this.dropWithFortune(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), Items.QUARTZ);
+        this.dropWithFortune(AetherIIBlocks.GLINT_ORE.get(), AetherIIItems.GLINT_GEMSTONE.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), AetherIIItems.AMBROSIUM_SHARD.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), AetherIIItems.ZANITE_GEMSTONE.get());
         this.dropWithFortune(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(), AetherIIItems.INERT_ARKENIUM.get());

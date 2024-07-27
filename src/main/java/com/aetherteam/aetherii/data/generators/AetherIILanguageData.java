@@ -64,6 +64,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_ORE, "Arkenium Ore");
         this.addBlock(AetherIIBlocks.GRAVITITE_ORE, "Gravitite Ore");
         this.addBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE, "Holystone Quartz Ore");
+        this.addBlock(AetherIIBlocks.GLINT_ORE, "Glint Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE, "Undershale Ambrosium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE, "Undershale Zanite Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, "Undershale Arkenium Ore");
@@ -563,6 +564,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.INERT_GRAVITITE, "Inert Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
         this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
+        this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
@@ -580,6 +582,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
         this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
         this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
+        this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
@@ -646,7 +649,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
         this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");
-        this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
+        this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         // Tooltips
@@ -730,6 +733,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDamageTypeTooltip("slash", "§9Slash§r Damage");
         this.addDamageTypeTooltip("impact", "§eImpact§r Damage");
         this.addDamageTypeTooltip("pierce", "§cPierce§r Damage");
+
+
+        // Miscellaneous Item Tooltips
+        this.addItemTooltip("treasure.description", "Treasure Item");
+        this.addItemTooltip("currency.description", "Converts to Currency:");
+        this.addItemTooltip("currency.amount", "%s Glint");
 
 
         // Accessory Slots
@@ -846,6 +855,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
         this.addGuiText("guidebook.equipment.title", "Equipment");
+        this.addGuiText("guidebook.equipment.pouch.tooltip.title", "Pouch");
+        this.addGuiText("guidebook.equipment.pouch.tooltip.description", "%s Glint");
         this.addGuiText("guidebook.status.title", "Status");
         this.addGuiText("guidebook.status.mount.title", "Mount");
         this.addGuiText("guidebook.discovery.title", "Discovery");
