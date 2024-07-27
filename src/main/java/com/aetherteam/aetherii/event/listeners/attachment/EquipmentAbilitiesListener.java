@@ -23,7 +23,7 @@ public class EquipmentAbilitiesListener {
         LivingEntity livingEntity = event.getEntity();
         if (EquipmentUtil.hasArmorAbility(livingEntity, AetherIIArmorMaterials.GRAVITITE)) {
             event.setDamageMultiplier(event.getDamageMultiplier() * 0.5F);
-            if (livingEntity.fallDistance < 50) {
+            if (livingEntity.fallDistance < 8) {
                 event.setDistance(0);
             }
         }
@@ -47,6 +47,7 @@ public class EquipmentAbilitiesListener {
                 }
                 player.hasImpulse = true;
             }
+            player.resetFallDistance();
             accessor.aether$setNoJumpDelay(10);
             attachment.setGravititeJumpUsed(true);
         }
