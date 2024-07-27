@@ -50,6 +50,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.ARCTIC_KIRRID.get(),
                 AetherIIEntityTypes.MOA.get(),
                 AetherIIEntityTypes.ZEPHYR.get(),
+                AetherIIEntityTypes.COCKATRICE.get(),
                 AetherIIEntityTypes.TEMPEST.get(),
                 AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
