@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.gui.component.guidebook.GuidebookTab;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
 import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
@@ -255,13 +256,13 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                                     PacketDistributor.sendToServer(new HeldCurrencyPacket(stack.copy()));
                                 }
                             }
-                        } else if (this.getMenu().getCarried().is(AetherIIItems.GLINT_COIN)) {
+                        } else if (this.getMenu().getCarried().getItem() instanceof CurrencyItem currencyItem) {
                             ItemStack stack = this.getMenu().getCarried().copy();
                             int amount = 0;
                             if (mouseButton == 0) { // place carried stack
-                                amount = stack.getCount();
+                                amount = stack.getCount() * currencyItem.getCurrencyAmount();
                             } else if (mouseButton == 1) { // place single item
-                                amount = 1;
+                                amount = currencyItem.getCurrencyAmount();
                             }
                             if (amount > 0) {
                                 stack.shrink(amount);

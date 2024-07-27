@@ -39,4 +39,8 @@ public class CurrencyItem extends Item {
         stack.consume(1, player);
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }
+
+    public int getCurrencyAmount() {
+        return this.currencyAmount;
+    }
 }
