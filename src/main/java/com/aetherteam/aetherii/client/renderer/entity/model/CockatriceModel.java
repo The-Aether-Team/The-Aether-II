@@ -48,21 +48,21 @@ public class CockatriceModel extends HierarchicalModel<Cockatrice> {
                 .texOffs(62, 36).addBox(-1.5F, -1.5F, -4.5F, 3.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
                 .texOffs(53, 25).addBox(-2.5F, -1.5F, -11.5F, 5.0F, 2.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -8.0F, 1.5F, 0.0873F, 0.0F, 0.0F));
 
-        PartDefinition head_feather_right_4_r1 = head.addOrReplaceChild("head_feather_right_4_r1", CubeListBuilder.create().texOffs(25, 5).addBox(0.71F, 3.45F, 1.25F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.5F, -1.5F, 1.7453F, -0.1309F, -0.0436F));
+        PartDefinition head_feather_right_4_r1 = head.addOrReplaceChild("head_feather_right_4_r1", CubeListBuilder.create().texOffs(25, 5).addBox(0.71F, 3.45F, 1.25F, 0.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.5F, -1.5F, 1.7453F, -0.1309F, -0.0436F));
 
-        PartDefinition head_feather_right_3_r1 = head.addOrReplaceChild("head_feather_right_3_r1", CubeListBuilder.create().texOffs(31, 3).addBox(1.2182F, 2.0683F, 0.1541F, 1.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.5F, -1.5F, 1.2828F, -0.3316F, 0.0349F));
+        PartDefinition head_feather_right_3_r1 = head.addOrReplaceChild("head_feather_right_3_r1", CubeListBuilder.create().texOffs(31, 3).addBox(1.2182F, 2.0683F, 0.1541F, 0.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.5F, -1.5F, 1.2828F, -0.3316F, 0.0349F));
 
-        PartDefinition head_feather_right_2_r1 = head.addOrReplaceChild("head_feather_right_2_r1", CubeListBuilder.create().texOffs(41, 3).addBox(0.9F, 1.65F, -1.0F, 1.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.5F, -1.5F, 0.829F, -0.3491F, 0.2618F));
+        PartDefinition head_feather_right_2_r1 = head.addOrReplaceChild("head_feather_right_2_r1", CubeListBuilder.create().texOffs(41, 3).addBox(0.9F, 1.65F, -1.0F, 0.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.5F, -1.5F, 0.829F, -0.3491F, 0.2618F));
 
-        PartDefinition head_feather_right_1_r1 = head.addOrReplaceChild("head_feather_right_1_r1", CubeListBuilder.create().texOffs(51, 5).addBox(0.0F, 0.0F, 0.0F, 1.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.5F, -1.5F, 0.0F, 0.0F, 0.3054F));
+        PartDefinition head_feather_right_1_r1 = head.addOrReplaceChild("head_feather_right_1_r1", CubeListBuilder.create().texOffs(51, 5).addBox(0.0F, 0.0F, 0.0F, 0.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.5F, -1.5F, -1.5F, 0.0F, 0.0F, 0.3054F));
 
-        PartDefinition head_feather_left_4_r1 = head.addOrReplaceChild("head_feather_left_4_r1", CubeListBuilder.create().texOffs(103, 5).addBox(-1.71F, 3.45F, 1.25F, 1.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -1.5F, -1.5F, 1.7453F, 0.1309F, 0.0436F));
+        PartDefinition head_feather_left_4_r1 = head.addOrReplaceChild("head_feather_left_4_r1", CubeListBuilder.create().texOffs(104, 5).addBox(-0.71F, 3.45F, 1.25F, 0.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -1.5F, -1.5F, 1.7453F, 0.1309F, 0.0436F));
 
-        PartDefinition head_feather_left_3_r1 = head.addOrReplaceChild("head_feather_left_3_r1", CubeListBuilder.create().texOffs(93, 3).addBox(-2.2182F, 2.0683F, 0.1541F, 1.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -1.5F, -1.5F, 1.2828F, 0.3316F, -0.0349F));
+        PartDefinition head_feather_left_3_r1 = head.addOrReplaceChild("head_feather_left_3_r1", CubeListBuilder.create().texOffs(94, 3).addBox(-1.2182F, 2.0683F, 0.1541F, 0.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -1.5F, -1.5F, 1.2828F, 0.3316F, -0.0349F));
 
-        PartDefinition head_feather_left_2_r1 = head.addOrReplaceChild("head_feather_left_2_r1", CubeListBuilder.create().texOffs(83, 3).addBox(-1.9F, 1.65F, -1.0F, 1.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -1.5F, -1.5F, 0.829F, 0.3491F, -0.2618F));
+        PartDefinition head_feather_left_2_r1 = head.addOrReplaceChild("head_feather_left_2_r1", CubeListBuilder.create().texOffs(84, 3).addBox(-0.9F, 1.65F, -1.0F, 0.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -1.5F, -1.5F, 0.829F, 0.3491F, -0.2618F));
 
-        PartDefinition head_feather_left_1_r1 = head.addOrReplaceChild("head_feather_left_1_r1", CubeListBuilder.create().texOffs(77, 5).addBox(-1.0F, 0.0F, 0.0F, 1.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -1.5F, -1.5F, 0.0F, 0.0F, -0.3054F));
+        PartDefinition head_feather_left_1_r1 = head.addOrReplaceChild("head_feather_left_1_r1", CubeListBuilder.create().texOffs(78, 5).addBox(0.0F, 0.0F, 0.0F, 0.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, -1.5F, -1.5F, 0.0F, 0.0F, -0.3054F));
 
         PartDefinition jaw = head.addOrReplaceChild("jaw", CubeListBuilder.create().texOffs(58, 41).addBox(-1.5F, 0.6F, -7.0F, 3.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, -1.0F));
 
@@ -77,15 +77,20 @@ public class CockatriceModel extends HierarchicalModel<Cockatrice> {
         PartDefinition arm_left_1_r1 = arm_left.addOrReplaceChild("arm_left_1_r1", CubeListBuilder.create().texOffs(107, 12).addBox(-1.0F, -0.9F, -1.5F, 3.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
 
         PartDefinition arm_left_2 = arm_left.addOrReplaceChild("arm_left_2", CubeListBuilder.create().texOffs(98, 24).addBox(-2.2F, -2.0F, -8.5F, 4.0F, 5.0F, 11.0F, new CubeDeformation(0.0F))
-                .texOffs(101, 48).addBox(0.78F, 2.5F, -6.0F, 1.0F, 11.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.5F, 4.5F, 0.0F, 0.5672F, 0.1745F, -0.3491F));
+                .texOffs(102, 48).addBox(1.78F, 2.5F, -6.0F, 0.0F, 11.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(101, 109).addBox(1.77F, 2.5F, -6.0F, 0.0F, 11.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.5F, 4.5F, 0.0F, 0.5672F, 0.1745F, -0.3491F));
 
-        PartDefinition arm_left_feather_5_r1 = arm_left_2.addOrReplaceChild("arm_left_feather_5_r1", CubeListBuilder.create().texOffs(125, 48).addBox(-0.71F, -0.3F, -1.5F, 1.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 1.0F, 1.8F, 0.9163F, 0.0F, 0.0F));
+        PartDefinition arm_left_feather_5_emissive_r1 = arm_left_2.addOrReplaceChild("arm_left_feather_5_emissive_r1", CubeListBuilder.create().texOffs(125, 109).addBox(0.28F, -0.3F, -1.5F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(126, 48).addBox(0.29F, -0.3F, -1.5F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 1.0F, 1.8F, 0.9163F, 0.0F, 0.0F));
 
-        PartDefinition arm_left_feather_4_r1 = arm_left_2.addOrReplaceChild("arm_left_feather_4_r1", CubeListBuilder.create().texOffs(117, 48).addBox(-0.72F, -1.0F, -1.0F, 1.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 3.0F, 0.8F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition arm_left_feather_4_emissive_r1 = arm_left_2.addOrReplaceChild("arm_left_feather_4_emissive_r1", CubeListBuilder.create().texOffs(117, 109).addBox(0.27F, -1.0F, -1.0F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(118, 48).addBox(0.28F, -1.0F, -1.0F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 3.0F, 0.8F, 0.4363F, 0.0F, 0.0F));
 
-        PartDefinition arm_left_feather_3_r1 = arm_left_2.addOrReplaceChild("arm_left_feather_3_r1", CubeListBuilder.create().texOffs(109, 48).addBox(-0.71F, -1.0F, -1.3F, 1.0F, 10.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 3.0F, -2.0F, 0.2618F, 0.0F, 0.0F));
+        PartDefinition arm_left_feather_3_emissive_r1 = arm_left_2.addOrReplaceChild("arm_left_feather_3_emissive_r1", CubeListBuilder.create().texOffs(109, 109).addBox(0.28F, -1.0F, -1.3F, 0.0F, 10.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(110, 48).addBox(0.29F, -1.0F, -1.3F, 0.0F, 10.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 3.0F, -2.0F, 0.2618F, 0.0F, 0.0F));
 
-        PartDefinition arm_left_feather_1_r1 = arm_left_2.addOrReplaceChild("arm_left_feather_1_r1", CubeListBuilder.create().texOffs(93, 48).addBox(-0.71F, -1.0F, -0.7F, 1.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 3.0F, -8.0F, -0.2618F, 0.0F, 0.0F));
+        PartDefinition arm_left_feather_1_emissive_r1 = arm_left_2.addOrReplaceChild("arm_left_feather_1_emissive_r1", CubeListBuilder.create().texOffs(93, 109).addBox(0.28F, -1.0F, -0.7F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(94, 48).addBox(0.29F, -1.0F, -0.7F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 3.0F, -8.0F, -0.2618F, 0.0F, 0.0F));
 
         PartDefinition hand_left = arm_left_2.addOrReplaceChild("hand_left", CubeListBuilder.create().texOffs(106, 40).addBox(-0.4F, -4.5F, -5.0F, 3.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
                 .texOffs(100, 42).addBox(-0.4F, -4.5F, -3.0F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 3.0F, -7.0F, 0.0F, 0.1309F, -0.0175F));
@@ -95,15 +100,20 @@ public class CockatriceModel extends HierarchicalModel<Cockatrice> {
         PartDefinition arm_right_1_r1 = arm_right.addOrReplaceChild("arm_right_1_r1", CubeListBuilder.create().texOffs(15, 12).addBox(-2.0F, -0.9F, -1.5F, 3.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
 
         PartDefinition arm_right_2 = arm_right.addOrReplaceChild("arm_right_2", CubeListBuilder.create().texOffs(6, 24).addBox(-1.8F, -2.0F, -8.5F, 4.0F, 5.0F, 11.0F, new CubeDeformation(0.0F))
-                .texOffs(25, 48).addBox(-1.78F, 2.5F, -6.0F, 1.0F, 11.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.5F, 4.5F, 0.0F, 0.5672F, -0.1745F, 0.3491F));
+                .texOffs(25, 48).addBox(-1.78F, 2.5F, -6.0F, 0.0F, 11.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(25, 109).addBox(-1.77F, 2.5F, -6.0F, 0.0F, 11.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-5.5F, 4.5F, 0.0F, 0.5672F, -0.1745F, 0.3491F));
 
-        PartDefinition arm_right_feather_6_r1 = arm_right_2.addOrReplaceChild("arm_right_feather_6_r1", CubeListBuilder.create().texOffs(1, 48).addBox(-0.29F, -0.3F, -1.5F, 1.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 1.0F, 1.8F, 0.9163F, 0.0F, 0.0F));
+        PartDefinition arm_right_feather_5_emissive_r1 = arm_right_2.addOrReplaceChild("arm_right_feather_5_emissive_r1", CubeListBuilder.create().texOffs(1, 109).addBox(-0.28F, -0.3F, -1.5F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(1, 48).addBox(-0.29F, -0.3F, -1.5F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 1.0F, 1.8F, 0.9163F, 0.0F, 0.0F));
 
-        PartDefinition arm_right_feather_5_r1 = arm_right_2.addOrReplaceChild("arm_right_feather_5_r1", CubeListBuilder.create().texOffs(9, 48).addBox(-0.28F, -1.0F, -1.0F, 1.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 3.0F, 0.8F, 0.4363F, 0.0F, 0.0F));
+        PartDefinition arm_right_feather_4_emissive_r1 = arm_right_2.addOrReplaceChild("arm_right_feather_4_emissive_r1", CubeListBuilder.create().texOffs(9, 109).addBox(-0.27F, -1.0F, -1.0F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(9, 48).addBox(-0.28F, -1.0F, -1.0F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 3.0F, 0.8F, 0.4363F, 0.0F, 0.0F));
 
-        PartDefinition arm_right_feather_4_r1 = arm_right_2.addOrReplaceChild("arm_right_feather_4_r1", CubeListBuilder.create().texOffs(17, 48).addBox(-0.29F, -1.0F, -1.3F, 1.0F, 10.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 3.0F, -2.0F, 0.2618F, 0.0F, 0.0F));
+        PartDefinition arm_right_feather_3_emissive_r1 = arm_right_2.addOrReplaceChild("arm_right_feather_3_emissive_r1", CubeListBuilder.create().texOffs(17, 109).addBox(-0.28F, -1.0F, -1.3F, 0.0F, 10.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(17, 48).addBox(-0.29F, -1.0F, -1.3F, 0.0F, 10.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 3.0F, -2.0F, 0.2618F, 0.0F, 0.0F));
 
-        PartDefinition arm_right_feather_1_r1 = arm_right_2.addOrReplaceChild("arm_right_feather_1_r1", CubeListBuilder.create().texOffs(33, 48).addBox(-0.29F, -1.0F, -0.7F, 1.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 3.0F, -8.0F, -0.2618F, 0.0F, 0.0F));
+        PartDefinition arm_right_feather_1_emissive_r1 = arm_right_2.addOrReplaceChild("arm_right_feather_1_emissive_r1", CubeListBuilder.create().texOffs(33, 109).addBox(-0.28F, -1.0F, -0.7F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(33, 48).addBox(-0.29F, -1.0F, -0.7F, 0.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, 3.0F, -8.0F, -0.2618F, 0.0F, 0.0F));
 
         PartDefinition hand_right = arm_right_2.addOrReplaceChild("hand_right", CubeListBuilder.create().texOffs(14, 40).addBox(-2.6F, -4.5F, -5.0F, 3.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
                 .texOffs(28, 42).addBox(-0.6F, -4.5F, -3.0F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 3.0F, -7.0F, 0.0F, -0.1309F, 0.0175F));
@@ -150,19 +160,24 @@ public class CockatriceModel extends HierarchicalModel<Cockatrice> {
 
         PartDefinition tail_feathers = body.addOrReplaceChild("tail_feathers", CubeListBuilder.create(), PartPose.offset(0.0F, -3.8F, 7.95F));
 
-        PartDefinition tail_feather_right_1_r1 = tail_feathers.addOrReplaceChild("tail_feather_right_1_r1", CubeListBuilder.create().texOffs(55, 121).addBox(-2.6F, -0.1F, -1.15F, 3.0F, 19.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 0.0F, 0.0F, 0.6545F, -0.3491F, 0.0F));
+        PartDefinition tail_feather_right_1_emissive_r1 = tail_feathers.addOrReplaceChild("tail_feather_right_1_emissive_r1", CubeListBuilder.create().texOffs(57, 142).addBox(-2.6F, -0.1F, -0.16F, 3.0F, 19.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(57, 122).addBox(-2.6F, -0.1F, -0.15F, 3.0F, 19.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 0.0F, 0.0F, 0.6545F, -0.3491F, 0.0F));
 
-        PartDefinition tail_feather_left_1_r1 = tail_feathers.addOrReplaceChild("tail_feather_left_1_r1", CubeListBuilder.create().texOffs(71, 121).addBox(-0.4F, -0.1F, -1.15F, 3.0F, 19.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.0F, 0.0F, 0.0F, 0.6545F, 0.3491F, 0.0F));
+        PartDefinition tail_feather_left_1_emissive_r1 = tail_feathers.addOrReplaceChild("tail_feather_left_1_emissive_r1", CubeListBuilder.create().texOffs(73, 142).addBox(-0.4F, -0.1F, -0.16F, 3.0F, 19.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(73, 122).addBox(-0.4F, -0.1F, -0.15F, 3.0F, 19.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.0F, 0.0F, 0.0F, 0.6545F, 0.3491F, 0.0F));
 
-        PartDefinition tail_feather_mid_r1 = tail_feathers.addOrReplaceChild("tail_feather_mid_r1", CubeListBuilder.create().texOffs(63, 121).addBox(-1.5F, 0.0F, -0.95F, 3.0F, 20.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.6981F, 0.0F, 0.0F));
+        PartDefinition tail_feather_mid_emissive_r1 = tail_feathers.addOrReplaceChild("tail_feather_mid_emissive_r1", CubeListBuilder.create().texOffs(65, 142).addBox(-1.5F, 0.0F, 0.04F, 3.0F, 20.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(65, 122).addBox(-1.5F, 0.0F, 0.05F, 3.0F, 20.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.6981F, 0.0F, 0.0F));
 
         PartDefinition rear_feather_left = body.addOrReplaceChild("rear_feather_left", CubeListBuilder.create(), PartPose.offset(4.5F, -3.5F, 7.0F));
 
-        PartDefinition rear_feather_left_r1 = rear_feather_left.addOrReplaceChild("rear_feather_left_r1", CubeListBuilder.create().texOffs(79, 121).addBox(-1.4F, 0.0F, -0.1F, 3.0F, 18.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.6545F, -1.8326F, 0.0F));
+        PartDefinition rear_feather_left_emissive_r1 = rear_feather_left.addOrReplaceChild("rear_feather_left_emissive_r1", CubeListBuilder.create().texOffs(80, 142).addBox(-1.4F, 0.0F, -0.09F, 3.0F, 18.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(80, 122).addBox(-1.4F, 0.0F, -0.1F, 3.0F, 18.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.6545F, -1.8326F, 0.0F));
 
         PartDefinition rear_feather_right = body.addOrReplaceChild("rear_feather_right", CubeListBuilder.create(), PartPose.offset(-4.5F, -3.5F, 7.0F));
 
-        PartDefinition rear_feather_right_r1 = rear_feather_right.addOrReplaceChild("rear_feather_right_r1", CubeListBuilder.create().texOffs(46, 121).addBox(-1.6F, 0.0F, -0.1F, 3.0F, 18.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.6545F, 1.8326F, 0.0F));
+        PartDefinition rear_feather_right_emissive_r1 = rear_feather_right.addOrReplaceChild("rear_feather_right_emissive_r1", CubeListBuilder.create().texOffs(47, 142).addBox(-1.6F, 0.0F, -0.09F, 3.0F, 18.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(47, 122).addBox(-1.6F, 0.0F, -0.1F, 3.0F, 18.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.6545F, 1.8326F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 168, 168);
     }
