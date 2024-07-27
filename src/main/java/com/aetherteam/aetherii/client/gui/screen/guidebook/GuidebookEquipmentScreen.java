@@ -112,8 +112,8 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
                 if (this.isHovering(this.currencySlot.x, this.currencySlot.y, 16, 16, mouseX, mouseY)) {
                     List<Component> componentList = new ArrayList<>();
-                    componentList.add(Component.literal("Pouch"));
-                    componentList.add(Component.literal(data.getAmount() + " Glint").withStyle(AetherIIItems.CURRENCY_NAME_COLOR));
+                    componentList.add(Component.translatable("gui.aether_ii.guidebook.equipment.pouch.tooltip.title"));
+                    componentList.add(Component.translatable("gui.aether_ii.guidebook.equipment.pouch.tooltip.description", data.getAmount()).withStyle(AetherIIItems.CURRENCY_NAME_COLOR));
                     guiGraphics.renderComponentTooltip(this.font, componentList, mouseX, mouseY);
                 }
             }

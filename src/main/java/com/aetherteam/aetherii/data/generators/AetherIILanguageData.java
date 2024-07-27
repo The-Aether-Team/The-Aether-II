@@ -815,6 +815,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
         this.addGuiText("guidebook.equipment.title", "Equipment");
+        this.addGuiText("guidebook.equipment.pouch.tooltip.title", "Pouch");
+        this.addGuiText("guidebook.equipment.pouch.tooltip.description", "%s Glint");
         this.addGuiText("guidebook.status.title", "Status");
         this.addGuiText("guidebook.status.mount.title", "Mount");
         this.addGuiText("guidebook.discovery.title", "Discovery");

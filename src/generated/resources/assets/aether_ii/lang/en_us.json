@@ -423,6 +423,8 @@
   "gui.aether_ii.guidebook.discovery.effects.title": "Effects",
   "gui.aether_ii.guidebook.discovery.exploration.title": "Exploration",
   "gui.aether_ii.guidebook.discovery.title": "Discovery",
+  "gui.aether_ii.guidebook.equipment.pouch.tooltip.description": "%s Glint",
+  "gui.aether_ii.guidebook.equipment.pouch.tooltip.title": "Pouch",
   "gui.aether_ii.guidebook.equipment.title": "Equipment",
   "gui.aether_ii.guidebook.journal.title": "Journal",
   "gui.aether_ii.guidebook.rewards.title": "Rewards",
