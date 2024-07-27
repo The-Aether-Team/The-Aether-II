@@ -487,33 +487,33 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
             if (i < 5) {
                 return Optional.of(KirridColor.WHITE);
             } else if (i < 10) {
-                return Optional.of(KirridColor.LIGHT_GRAY);
-            } else if (i < 15) {
                 return Optional.of(KirridColor.BROWN);
+            } else if (i < 15) {
+                return Optional.of(KirridColor.BLACK);
             }  else {
-                return random.nextInt(500) == 0 ? Optional.of(KirridColor.YELLOW) : Optional.empty();
+                return random.nextInt(500) == 0 ? Optional.of(KirridColor.LIME) : Optional.empty();
             }
         } else if (kirrid.variantType == AetherIIEntityTypes.MAGNETIC_KIRRID.get()) {
             int i = random.nextInt(100);
             if (i < 5) {
-                return Optional.of(KirridColor.LIGHT_GRAY);
+                return Optional.of(KirridColor.GRAY);
             } else if (i < 10) {
-                return Optional.of(KirridColor.CYAN);
+                return Optional.of(KirridColor.LIME);
             } else if (i < 15) {
-                return Optional.of(KirridColor.MAGENTA);
+                return Optional.of(KirridColor.GREEN);
             }  else {
-                return random.nextInt(500) == 0 ? Optional.of(KirridColor.BLUE) : Optional.of(KirridColor.LIGHT_BLUE);
+                return random.nextInt(500) == 0 ? Optional.of(KirridColor.PURPLE) : Optional.of(KirridColor.LIGHT_BLUE);
             }
         } else if (kirrid.variantType == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
             int i = random.nextInt(100);
             if (i < 5) {
-                return Optional.of(KirridColor.LIGHT_BLUE);
+                return Optional.of(KirridColor.BROWN);
             } else if (i < 10) {
-                return Optional.of(KirridColor.LIGHT_GRAY);
+                return Optional.of(KirridColor.MAGENTA);
             } else if (i < 15) {
-                return Optional.of(KirridColor.BLACK);
+                return Optional.of(KirridColor.PINK);
             }  else {
-                return random.nextInt(500) == 0 ? Optional.of(KirridColor.MAGENTA) : Optional.of(KirridColor.WHITE);
+                return random.nextInt(500) == 0 ? Optional.of(KirridColor.BLUE) : Optional.of(KirridColor.WHITE);
             }
         }
         return Optional.empty();

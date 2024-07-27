@@ -308,41 +308,41 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         if (biome.is(AetherIITags.Biomes.HIGHFIELDS)) {
             int i = random.nextInt(100);
             if (i < 5) {
-                return SheepuffColor.LIGHT_BLUE;
+                return SheepuffColor.LIGHT_GRAY;
             } else if (i < 10) {
-                return SheepuffColor.CYAN;
+                return SheepuffColor.GRAY;
             } else if (i < 15) {
-                return SheepuffColor.LIME;
+                return SheepuffColor.CYAN;
             } else if (i < 18) {
-                return SheepuffColor.PINK;
+                return SheepuffColor.YELLOW;
             } else {
-                return random.nextInt(500) == 0 ? SheepuffColor.PURPLE : SheepuffColor.WHITE;
+                return random.nextInt(500) == 0 ? SheepuffColor.MAGENTA : SheepuffColor.WHITE;
             }
         } else if (biome.is(AetherIITags.Biomes.MAGNETIC)) {
             int i = random.nextInt(100);
             if (i < 5) {
-                return SheepuffColor.CYAN;
+                return SheepuffColor.LIGHT_GRAY;
             } else if (i < 10) {
-                return SheepuffColor.BLUE;
+                return SheepuffColor.GRAY;
             } else if (i < 15) {
-                return SheepuffColor.GREEN;
+                return SheepuffColor.CYAN;
             } else if (i < 18) {
-                return SheepuffColor.MAGENTA;
+                return SheepuffColor.LIGHT_BLUE;
             } else {
-                return random.nextInt(500) == 0 ? SheepuffColor.YELLOW : SheepuffColor.WHITE;
+                return random.nextInt(500) == 0 ? SheepuffColor.MAGENTA : SheepuffColor.WHITE;
             }
         } else if (biome.is(AetherIITags.Biomes.ARCTIC)) {
             int i = random.nextInt(100);
             if (i < 5) {
-                return SheepuffColor.LIGHT_BLUE;
+                return SheepuffColor.LIGHT_GRAY;
             } else if (i < 10) {
-                return SheepuffColor.BLUE;
+                return SheepuffColor.GRAY;
             } else if (i < 15) {
-                return SheepuffColor.PURPLE;
+                return SheepuffColor.CYAN;
             } else if (i < 18) {
-                return SheepuffColor.GREEN;
+                return SheepuffColor.BROWN;
             } else {
-                return random.nextInt(500) == 0 ? SheepuffColor.BLACK : SheepuffColor.WHITE;
+                return random.nextInt(500) == 0 ? SheepuffColor.MAGENTA : SheepuffColor.WHITE;
             }
         }
         return SheepuffColor.WHITE;
