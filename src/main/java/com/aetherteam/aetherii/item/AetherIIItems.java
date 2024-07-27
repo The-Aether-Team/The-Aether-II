@@ -64,9 +64,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AetherII.MODID);
 
-    public static final Style TREASURE_NAME_COLOR = Style.EMPTY.withColor(12566527);
+    public static final Style CURRENCY_NAME_COLOR = Style.EMPTY.withColor(12566527);
+    public static final Style TREASURE_NAME_COLOR = Style.EMPTY.withColor(16765952);
     public static final Style WEAPON_TOOLTIP_COLOR = Style.EMPTY.withColor(11393240);
 
+    public static final Rarity AETHER_II_CURRENCY = Rarity.valueOf("AETHER_II_CURRENCY");
     public static final Rarity AETHER_II_TREASURE = Rarity.valueOf("AETHER_II_TREASURE");
 
     // Tools
@@ -256,6 +258,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> MOA_FEED = ITEMS.register("moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = ITEMS.register("blueberry_moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ENCHANTED_MOA_FEED = ITEMS.register("enchanted_moa_feed", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> GLINT_COIN = ITEMS.register("glint_coin", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GLINT_COIN = ITEMS.register("glint_coin", () -> new Item(new Item.Properties().rarity(AETHER_II_CURRENCY)));
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = ITEMS.register("aether_portal_frame", () -> new AetherPortalItem(new Item.Properties().stacksTo(1)));
 }

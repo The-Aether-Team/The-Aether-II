@@ -13,6 +13,10 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public class AetherIIEnumExtensions {
+    public static final EnumProxy<Rarity> AETHER_II_CURRENCY_RARITY_PROXY = new EnumProxy<>(
+            Rarity.class, -1, "aether_ii:currency", (UnaryOperator<Style>) (style) -> AetherIIItems.CURRENCY_NAME_COLOR
+    );
+
     public static final EnumProxy<Rarity> AETHER_II_TREASURE_RARITY_PROXY = new EnumProxy<>(
             Rarity.class, -1, "aether_ii:treasure", (UnaryOperator<Style>) (style) -> AetherIIItems.TREASURE_NAME_COLOR
     );

@@ -2,6 +2,15 @@
   "entries": [
     {
       "enum": "net/minecraft/world/item/Rarity",
+      "name": "AETHER_II_CURRENCY",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "field": "AETHER_II_CURRENCY_RARITY_PROXY"
+      }
+    },
+    {
+      "enum": "net/minecraft/world/item/Rarity",
       "name": "AETHER_II_TREASURE",
       "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
       "parameters": {
