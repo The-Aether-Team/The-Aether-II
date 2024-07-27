@@ -26,6 +26,8 @@ import com.aetherteam.aetherii.item.materials.ArcticSnowballItem;
 import com.aetherteam.aetherii.item.materials.SkyrootPineconeItem;
 import com.aetherteam.aetherii.item.materials.SwetGelItem;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
+import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
+import com.aetherteam.aetherii.item.miscellaneous.TreasureItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootMilkBucketItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootMobBucketItem;
@@ -64,7 +66,12 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AetherII.MODID);
 
+    public static final Style CURRENCY_NAME_COLOR = Style.EMPTY.withColor(12566527);
+    public static final Style TREASURE_NAME_COLOR = Style.EMPTY.withColor(16765952);
     public static final Style WEAPON_TOOLTIP_COLOR = Style.EMPTY.withColor(11393240);
+
+    public static final Rarity AETHER_II_CURRENCY = Rarity.valueOf("AETHER_II_CURRENCY");
+    public static final Rarity AETHER_II_TREASURE = Rarity.valueOf("AETHER_II_TREASURE");
 
     // Tools
     public static final DeferredItem<PickaxeItem> SKYROOT_PICKAXE = ITEMS.register("skyroot_pickaxe", SkyrootPickaxeItem::new);
@@ -170,6 +177,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> INERT_GRAVITITE = ITEMS.register("inert_gravitite", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> GRAVITITE_PLATE = ITEMS.register("gravitite_plate", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> CORROBONITE_CRYSTAL = ITEMS.register("corrobonite_crystal", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GLINT_GEMSTONE = ITEMS.register("glint_gemstone", () -> new CurrencyItem(10, new Item.Properties())); //todo
     public static final DeferredItem<Item> GOLDEN_AMBER = ITEMS.register("golden_amber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> CLOUDTWINE = ITEMS.register("cloudtwine", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> TAEGORE_HIDE = ITEMS.register("taegore_hide", () -> new Item(new Item.Properties()));
@@ -185,6 +193,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> PURPLE_SWET_GEL = ITEMS.register("purple_swet_gel", () -> new SwetGelItem(new Item.Properties()));
     public static final DeferredItem<Item> GOLDEN_SWET_GEL = ITEMS.register("golden_swet_gel", () -> new SwetGelItem(new Item.Properties()));
     public static final DeferredItem<Item> WHITE_SWET_GEL = ITEMS.register("white_swet_gel", () -> new SwetGelItem(new Item.Properties()));
+    public static final DeferredItem<Item> CHARGE_CORE = ITEMS.register("charge_core", () -> new TreasureItem(new Item.Properties()));
 
     // Food
     public static final DeferredItem<Item> BLUEBERRY = ITEMS.register("blueberry", () -> new Item(new Item.Properties().food(AetherIIFoods.BLUEBERRY)));
@@ -251,6 +260,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> MOA_FEED = ITEMS.register("moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = ITEMS.register("blueberry_moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ENCHANTED_MOA_FEED = ITEMS.register("enchanted_moa_feed", () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> CHARGE_CORE = ITEMS.register("charge_core", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GLINT_COIN = ITEMS.register("glint_coin", () -> new CurrencyItem(1, new Item.Properties()));
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = ITEMS.register("aether_portal_frame", () -> new AetherPortalItem(new Item.Properties().stacksTo(1)));
 }
