@@ -22,7 +22,10 @@ public class EquipmentAbilitiesListener {
     public static void onPlayerFall(LivingFallEvent event) {
         LivingEntity livingEntity = event.getEntity();
         if (EquipmentUtil.hasArmorAbility(livingEntity, AetherIIArmorMaterials.GRAVITITE)) {
-            event.setDamageMultiplier(event.getDamageMultiplier() * 0.3F);
+            event.setDamageMultiplier(event.getDamageMultiplier() * 0.5F);
+            if (livingEntity.fallDistance < 50) {
+                event.setDistance(0);
+            }
         }
     }
 
