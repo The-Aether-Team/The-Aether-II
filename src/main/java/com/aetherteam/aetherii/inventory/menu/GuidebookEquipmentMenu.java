@@ -36,17 +36,17 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         super(AetherIIMenuTypes.GUIDEBOOK.get(), containerId);
         this.owner = playerInventory.player;
 
-        int xOffset = this.owner.isCreative() ? 19 : 0;
+        int xOffset = this.owner.isCreative() ? 19 : 0; //todo theres a bug with this being offset when it shouldnt be sometimes i guess
 
-        this.addSlot(new ResultSlot(playerInventory.player, this.craftSlots, this.resultSlots, 0, 196 + xOffset, 34));
+        this.addSlot(new ResultSlot(playerInventory.player, this.craftSlots, this.resultSlots, 0, 202 + xOffset, 50));
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                this.addSlot(new Slot(this.craftSlots, j + i * 2,  xOffset + 140 + j * 18, 24 + i * 18));
+                this.addSlot(new Slot(this.craftSlots, j + i * 2,  xOffset + 146 + j * 18, 40 + i * 18));
             }
         }
 
-        AccessoriesSlotGenerator generator = AccessoriesSlotGenerator.of(this::addSlot, 57, 22, this.owner, AetherIISlotHandling.getRelicSlotType(), AetherIISlotHandling.getHandwearSlotType(), AetherIISlotHandling.getAccessorySlotType());
+        AccessoriesSlotGenerator generator = AccessoriesSlotGenerator.of(this::addSlot, 64, 38, this.owner, AetherIISlotHandling.getRelicSlotType(), AetherIISlotHandling.getHandwearSlotType(), AetherIISlotHandling.getAccessorySlotType());
 
         if (generator != null) {
             this.addedSlots = generator.padding(0).column();
@@ -55,23 +55,23 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         for (int k = 0; k < 4; k++) {
             EquipmentSlot equipmentslot = SLOT_IDS[k];
             ResourceLocation resourcelocation = TEXTURE_EMPTY_SLOTS.get(equipmentslot);
-            this.addSlot(new ArmorSlot(playerInventory, owner, equipmentslot, 39 - k, -71, 22 + k * 18, resourcelocation));
+            this.addSlot(new ArmorSlot(playerInventory, this.owner, equipmentslot, 39 - k, -64, 38 + k * 18, resourcelocation));
         }
 
         for (int l = 0; l < 3; l++) {
             for (int j1 = 0; j1 < 9; j1++) {
-                this.addSlot(new Slot(playerInventory, j1 + (l + 1) * 9, 96 + j1 * 18, 76 + l * 18));
+                this.addSlot(new Slot(playerInventory, j1 + (l + 1) * 9, 102 + j1 * 18, 92 + l * 18));
             }
         }
 
         for (int i1 = 0; i1 < 9; i1++) {
-            this.addSlot(new Slot(playerInventory, i1, 96 + i1 * 18, 134));
+            this.addSlot(new Slot(playerInventory, i1, 102 + i1 * 18, 150));
         }
 
-        this.addSlot(new Slot(playerInventory, 40, -71, 96) {
+        this.addSlot(new Slot(playerInventory, 40, -64, 112) {
             @Override
             public void setByPlayer(ItemStack p_270969_, ItemStack p_299918_) {
-                owner.onEquipItem(EquipmentSlot.OFFHAND, p_299918_, p_270969_);
+                GuidebookEquipmentMenu.this.owner.onEquipItem(EquipmentSlot.OFFHAND, p_299918_, p_270969_);
                 super.setByPlayer(p_270969_, p_299918_);
             }
 

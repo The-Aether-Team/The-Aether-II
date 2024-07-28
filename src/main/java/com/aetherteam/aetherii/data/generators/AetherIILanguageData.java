@@ -3,6 +3,9 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -65,10 +68,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_ORE, "Arkenium Ore");
         this.addBlock(AetherIIBlocks.GRAVITITE_ORE, "Gravitite Ore");
         this.addBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE, "Holystone Quartz Ore");
+        this.addBlock(AetherIIBlocks.GLINT_ORE, "Glint Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE, "Undershale Ambrosium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE, "Undershale Zanite Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, "Undershale Arkenium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, "Undershale Gravitite Ore");
+        this.addBlock(AetherIIBlocks.CORROBONITE_ORE, "Corrobonite Ore");
+        this.addBlock(AetherIIBlocks.CORROBONITE_CLUSTER, "Corrobonite Cluster");
 
         // Aerclouds
         this.addBlock(AetherIIBlocks.COLD_AERCLOUD, "Cold Aercloud");
@@ -434,6 +440,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addBlock(AetherIIBlocks.ALTAR, "Altar");
         this.addBlock(AetherIIBlocks.ARTISANS_BENCH, "Artisan's Bench");
+        this.addBlock(AetherIIBlocks.ARKENIUM_FORGE, "Arkenium Forge");
         this.addBlock(AetherIIBlocks.SKYROOT_CHEST, "Skyroot Chest");
         this.addBlock(AetherIIBlocks.SKYROOT_LADDER, "Skyroot Ladder");
         this.addBlock(AetherIIBlocks.SKYROOT_BED, "Skyroot Bed");
@@ -560,6 +567,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ARKENIUM_PLATES, "Arkenium Plates");
         this.addItem(AetherIIItems.INERT_GRAVITITE, "Inert Gravitite");
         this.addItem(AetherIIItems.GRAVITITE_PLATE, "Gravitite Plate");
+        this.addItem(AetherIIItems.CORROBONITE_CRYSTAL, "Corrobonite Crystal");
+        this.addItem(AetherIIItems.GLINT_GEMSTONE, "Glint Gemstone");
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
@@ -577,6 +586,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
         this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
         this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
+        this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
@@ -637,11 +647,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
+        this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
         this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");
+        this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         // Tooltips
@@ -697,6 +709,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addDamageTypeTooltip("pierce", "§cPierce§r Damage");
 
 
+        // Miscellaneous Item Tooltips
+        this.addItemTooltip("treasure.description", "Treasure Item");
+        this.addItemTooltip("currency.description", "Converts to Currency:");
+        this.addItemTooltip("currency.amount", "%s Glint");
+
+
         // Accessory Slots
         this.addAccessorySlot("relic_slot", "Relic");
         this.addAccessorySlot("handwear_slot", "Handwear");
@@ -725,6 +743,41 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
+        this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
+
+        // Dimensions
+        this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
+
+
+        // Biomes
+        // Highfields
+        this.addBiome(AetherIIBiomes.FLOURISHING_FIELD, "Flourishing Field");
+        this.addBiome(AetherIIBiomes.VERDANT_WOODS, "Verdant Woods");
+        this.addBiome(AetherIIBiomes.SHROUDED_FOREST, "Shrouded Forest");
+        this.addBiome(AetherIIBiomes.SHIMMERING_BASIN, "Shimmering Basin");
+
+        // Magnetic
+        this.addBiome(AetherIIBiomes.MAGNETIC_SCAR, "Magnetic Scar");
+        this.addBiome(AetherIIBiomes.TURQUOISE_FOREST, "Turquoise Forest");
+        this.addBiome(AetherIIBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
+        this.addBiome(AetherIIBiomes.GLISTENING_SWAMP, "Glistening Swamp");
+
+        // Arctic
+        this.addBiome(AetherIIBiomes.FRIGID_SIERRA, "Frigid Sierra");
+        this.addBiome(AetherIIBiomes.ENDURING_WOODLAND, "Enduring Woodland");
+        this.addBiome(AetherIIBiomes.FROZEN_LAKES, "Frozen Lakes");
+        this.addBiome(AetherIIBiomes.SHEER_TUNDRA, "Sheer Tundra");
+
+        // Irradiated
+        this.addBiome(AetherIIBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
+        this.addBiome(AetherIIBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
+
+        // Aercloud Sea
+        this.addBiome(AetherIIBiomes.EXPANSE, "Expanse");
+
+
+        // Structures
+        this.addStructure(AetherIIStructures.OUTPOST, "Outpost");
 
 
         // Attributes
@@ -762,21 +815,57 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addContainerType(AetherIIMenuTypes.HOLYSTONE_FURNACE, "Holystone Furnace");
         this.addContainerType(AetherIIMenuTypes.ARTISANS_BENCH, "Artisan's Bench");
         this.addContainerType(AetherIIMenuTypes.ALTAR, "Altar");
+        this.addContainerType(AetherIIMenuTypes.ARKENIUM_FORGE, "Arkenium Forge");
 
 
         // GUIs
+        this.addGuiText("arkenium_forge.forge_button.tooltip", "Forge Item");
         this.addGuiText("recipebook.toggleRecipes.enchantable", "Showing Enchantable");
+        this.addGuiText("deathScreen.outpost_respawn", "Respawn at Outpost");
         this.addGuiText("guidebook.button.open", "Guidebook");
         this.addGuiText("guidebook.button.close", "Inventory");
         this.addGuiText("guidebook.equipment.title", "Equipment");
+        this.addGuiText("guidebook.equipment.pouch.tooltip.title", "Pouch");
+        this.addGuiText("guidebook.equipment.pouch.tooltip.description", "%s Glint");
         this.addGuiText("guidebook.status.title", "Status");
         this.addGuiText("guidebook.status.mount.title", "Mount");
         this.addGuiText("guidebook.discovery.title", "Discovery");
         this.addGuiText("guidebook.discovery.bestiary.title", "Bestiary");
         this.addGuiText("guidebook.discovery.effects.title", "Effects");
-        this.addGuiText("guidebook.discovery.landmarks.title", "Landmarks");
+        this.addGuiText("guidebook.discovery.exploration.title", "Exploration");
         this.addGuiText("guidebook.journal.title", "Journal");
         this.addGuiText("guidebook.rewards.title", "Rewards");
+        this.addGuiText("guidebook.discovery.bestiary.entry.unknown", "???");
+        this.addGuiText("guidebook.discovery.bestiary.stat.health", "%s Health");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_weakness", "%1$s Damage from %2$s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_resistance", "%1$s Damage from %2$s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.stat.damage_none", "Standard Damage from %s Attacks");
+        this.addGuiText("guidebook.discovery.bestiary.info.eats", "Eats:");
+        this.addGuiText("guidebook.discovery.bestiary.info.drops", "Drops:");
+        this.addGuiText("toast.guidebook.bestiary", "New Bestiary Entries!");
+        this.addGuiText("toast.guidebook.description", "Check your guidebook");
+
+        // Bestiary
+        this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.AERBUNNY.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+
 
         // Jukebox Songs
         this.addJukeboxSong("aether_tune", "Noisestorm - Aether Tune");
@@ -785,6 +874,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addJukeboxSong("approaches", "Emile van Krieken - Approaches");
         this.addJukeboxSong("demise", "Moorziey - Demise");
         this.addJukeboxSong("recording_892", "Emile van Krieken - ???");
+
+
+        // Misc
+        this.addGeneric("slash", "§9Slash§r");
+        this.addGeneric("impact", "§eImpact§r");
+        this.addGeneric("pierce", "§cPierce§r");
+        this.addGeneric("message.campfire_added", "This Outpost Campfire is now a valid respawn option.");
+        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid Outpost Campfire.");
 
 
         // Subtitles
@@ -828,6 +925,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "zephyr.ambient", "Zephyr blows");
         this.addSubtitle("entity", "zephyr.death", "Zephyr dies");
         this.addSubtitle("entity", "zephyr.hurt", "Zephyr hurts");
+
+        this.addSubtitle("entity", "cockatrice.shoot", "Cockatrice shoots");
 
 
         // Packs

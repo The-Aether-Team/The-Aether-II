@@ -183,6 +183,19 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                         )
                 )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                         .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CORE.get())
+                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
+                         )
+                )
+        );
+
+        this.add(AetherIIEntityTypes.COCKATRICE.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(Items.FEATHER)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                        )
+                )
         );
     }
 

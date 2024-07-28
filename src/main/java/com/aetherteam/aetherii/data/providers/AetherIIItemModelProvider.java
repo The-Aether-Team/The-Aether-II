@@ -1,10 +1,13 @@
 package com.aetherteam.aetherii.data.providers;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.nitrogen.data.providers.NitrogenItemModelProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;
@@ -13,6 +16,15 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvider {
     public AetherIIItemModelProvider(PackOutput output, String id, ExistingFileHelper helper) {
         super(output, id, helper);
+    }
+
+    public void reinforcedItem(Item item, String location) {
+        ItemModelBuilder builder = this.withExistingParent(this.itemName(item), this.mcLoc("item/handheld")).texture("layer0", this.modLoc("item/" + location + this.itemName(item)));
+        this.withExistingParent(this.itemName(item) + "_reinforced_1", this.mcLoc("item/generated")).texture("layer0", this.modLoc("item/" + location + this.itemName(item) + "_reinforced_1"));
+        this.withExistingParent(this.itemName(item) + "_reinforced_2", this.mcLoc("item/generated")).texture("layer0", this.modLoc("item/" + location + this.itemName(item) + "_reinforced_2"));
+        builder
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), 0.1F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_reinforced_1"))).end()
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), 0.3F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_reinforced_2"))).end();
     }
 
     public void crossbowItem(Item item, String location) {
@@ -60,17 +72,8 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
         this.withExistingParent(this.blockName(block), this.mcLoc("block/cube_all")).texture("all", this.texture(this.blockName(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("translucent"));
     }
 
-    public void outpostCampfireItem(Block block) {
-        this.withExistingParent(this.blockName(block), this.mcLoc("item/chest"))
-                .transforms()
-                .transform(ItemDisplayContext.GUI).rotation(30.0F, 45.0F, 0.0F).translation(-4.95F, 1.5F, 0.0F).scale(0.425F, 0.425F, 0.425F).end()
-                .transform(ItemDisplayContext.GROUND).rotation(0.0F, 0.0F, 0.0F).translation(-2.0F, 3.0F, -2.0F).scale(0.25F, 0.25F, 0.25F).end()
-                .transform(ItemDisplayContext.HEAD).rotation(0.0F, 180.0F, 0.0F).translation(8.0F, 14.5F, 8.0F).scale(1.0F, 1.0F, 1.0F).end()
-                .transform(ItemDisplayContext.FIXED).rotation(0.0F, 180.0F, 0.0F).translation(4.0F, 1.0F, 1.0F).scale(0.5F, 0.5F, 0.5F).end()
-                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(75.0F, 315.0F, 0.0F).translation(0.0F, 6.25F, 0.75F).scale(0.225F, 0.225F, 0.225F).end()
-                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, 315.0F, 0.0F).translation(2.0F, 2.5F, -5.0F).scale(0.4F, 0.4F, 0.4F).end()
-                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(75.0F, -315.0F, 0.0F).translation(0.0F, 6.25F, 0.75F).scale(0.225F, 0.225F, 0.225F).end()
-                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0.0F, -315.0F, 0.0F).translation(2.0F, 2.5F, -5.0F).scale(0.4F, 0.4F, 0.4F).end()
-                .end();
+    public void blockWithItem(Block block, String location) {
+        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated"))
+                .texture("layer0", this.modLoc("item/" + location + this.itemName(block.asItem())));
     }
 }

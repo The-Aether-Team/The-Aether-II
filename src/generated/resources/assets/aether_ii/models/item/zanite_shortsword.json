@@ -1,5 +1,19 @@
 {
   "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "aether_ii:item/zanite_shortsword_reinforced_1",
+      "predicate": {
+        "aether_ii:reinforcement_tier": 0.1
+      }
+    },
+    {
+      "model": "aether_ii:item/zanite_shortsword_reinforced_2",
+      "predicate": {
+        "aether_ii:reinforcement_tier": 0.3
+      }
+    }
+  ],
   "textures": {
     "layer0": "aether_ii:item/weapons/zanite_shortsword"
   }

@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.IceCrystalBlock;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -35,6 +36,11 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         RandomSource random = context.random();
         BlockPos pos = context.origin();
         CoastConfiguration config = context.config();
+
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
+
+        config.distanceNoise().mapAll(visitor);
+        config.patternNoise().ifPresent(noise -> noise.mapAll(visitor));
 
         for (int x = pos.getX(); x < pos.getX() + 16; ++x) {
             for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {

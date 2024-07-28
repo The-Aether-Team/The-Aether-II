@@ -1,0 +1,62 @@
+{
+  "criteria": {
+    "feed_magnetic_taegore": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:magnetic_taegore"
+            }
+          }
+        ],
+        "item": {
+          "items": "#aether_ii:taegore_food"
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "kill_magnetic_taegore": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "aether_ii:magnetic_taegore"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    },
+    "observe": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "minecraft:player",
+                "looking_at": {
+                  "type": "aether_ii:magnetic_taegore"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "observe",
+      "kill_magnetic_taegore",
+      "feed_magnetic_taegore"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

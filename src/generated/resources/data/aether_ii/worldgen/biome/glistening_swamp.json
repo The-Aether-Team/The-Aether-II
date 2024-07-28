@@ -6,10 +6,10 @@
     "foliage_color": 11665355,
     "grass_color": 13238225,
     "music": {
-      "max_delay": 24000,
-      "min_delay": 12000,
-      "replace_current_music": true,
-      "sound": "aether_ii:music.highlands.magnetic"
+      "max_delay": 2400,
+      "min_delay": 600,
+      "replace_current_music": false,
+      "sound": "aether_ii:music.aether"
     },
     "sky_color": 12962795,
     "water_color": 11255257,
@@ -36,7 +36,9 @@
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
-      "aether_ii:ore_holystone_quartz"
+      "aether_ii:ore_holystone_quartz",
+      "aether_ii:ore_corrobonite",
+      "aether_ii:ore_glint"
     ],
     [],
     [
@@ -94,6 +96,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 7
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "ambient": [],
