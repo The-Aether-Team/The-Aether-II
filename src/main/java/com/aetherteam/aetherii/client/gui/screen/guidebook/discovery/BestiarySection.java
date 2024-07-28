@@ -193,9 +193,17 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
             Component name = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.entry.unknown");
             if (this.isObserved(entry)) {
-                name = Component.translatable(entry.entityType().value().getDescriptionId());
+                if (entry.slotName().isPresent()) {
+                    name = Component.translatable(entry.slotName().get());
+                } else {
+                    name = Component.translatable(entry.entityType().value().getDescriptionId());
+                }
             }
-            guiGraphics.renderTooltip(Minecraft.getInstance().font, name, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
+            List<Component> components = new ArrayList<>(List.of(name));
+            if (this.isObserved(entry) && entry.slotSubtitle().isPresent()) {
+                components.add(Component.translatable(entry.slotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+            }
+            guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
         }
     }
 
@@ -207,7 +215,11 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             if (level != null) {
                 Entity entity = this.getSelectedEntry().entityType().value().create(level);
                 if (entity instanceof LivingEntity livingEntity) {
-                    guiGraphics.drawCenteredString(font, Component.translatable(this.getSelectedEntry().entityType().value().getDescriptionId()), 88, 13, 16777215);
+                    String name = this.getSelectedEntry().entityType().value().getDescriptionId();
+                    if (this.getSelectedEntry().name().isPresent()) {
+                        name = this.getSelectedEntry().name().get();
+                    }
+                    guiGraphics.drawCenteredString(font, Component.translatable(name), 88, 13, 16777215);
 
                     if (this.isUnderstood(this.getSelectedEntry())) {
                         int x = 27;

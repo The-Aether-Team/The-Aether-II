@@ -1,5 +1,5 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.arctic_burrukai",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.arctic_burrukai",
   "entity_type": "aether_ii:arctic_burrukai",
   "food": "aether_ii:burrukai_food",
   "icon_discovered": "aether_ii:guidebook/bestiary/arctic_burrukai",
@@ -17,6 +17,9 @@
       "min_count": 1
     }
   ],
+  "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.arctic_burrukai",
   "observation_advancement": "aether_ii:bestiary/observe_arctic_burrukai",
+  "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.arctic_burrukai",
+  "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.arctic_burrukai",
   "understanding_advancement": "aether_ii:bestiary/understand_arctic_burrukai"
 }

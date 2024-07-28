@@ -844,6 +844,36 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("toast.guidebook.description", "Check your Guidebook");
 
         // Bestiary
+        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Highfields Taegore");
+        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Magnetic Taegore");
+        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Arctic Taegore");
+        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Highfields Burrukai");
+        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Magnetic Burrukai");
+        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Arctic Burrukai");
+        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Highfields Kirrid");
+        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Magnetic Kirrid");
+        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Arctic Kirrid");
+
+        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Taegore");
+        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Taegore");
+        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Taegore");
+        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Burrukai");
+        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Burrukai");
+        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Burrukai");
+        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Kirrid");
+        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Kirrid");
+        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Kirrid");
+
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Highfields");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Magnetic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Arctic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Highfields");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Magnetic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Arctic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Highfields");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Magnetic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Arctic");
+
         this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");

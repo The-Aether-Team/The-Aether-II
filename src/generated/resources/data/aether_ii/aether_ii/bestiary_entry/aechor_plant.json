@@ -1,5 +1,5 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.aechor_plant",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aechor_plant",
   "entity_type": "aether_ii:aechor_plant",
   "icon_discovered": "aether_ii:guidebook/bestiary/aechor_plant",
   "loot": [
