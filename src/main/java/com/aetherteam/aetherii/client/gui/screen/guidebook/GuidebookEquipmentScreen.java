@@ -239,7 +239,14 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             if (slot != null) {
                 if (slot == this.currencySlot) {
                     var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
-                    if (type == ClickType.PICKUP) {
+                    if (type == ClickType.PICKUP || type == ClickType.QUICK_CRAFT) {
+                        if (type == ClickType.QUICK_CRAFT) {
+                            if (mouseButton == 5) {
+                                mouseButton = 1;
+                            } else if (mouseButton == 1) {
+                                mouseButton = 0;
+                            }
+                        }
                         if (this.getMenu().getCarried().isEmpty()) {
                             if (data.getAmount() > 0) {
                                 ItemStack stack = new ItemStack(AetherIIItems.GLINT_COIN.get());
