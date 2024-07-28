@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.event.listeners;
 import com.aetherteam.aetherii.client.event.hooks.GuiExtensionHooks;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
 import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.item.ItemStack;
@@ -21,9 +22,11 @@ public class GuiExtensionListener {
         Screen screen = event.getScreen();
         Screen storedScreen = GuiExtensionHooks.openStoredGuidebookScreen(screen);
         if (storedScreen != null) {
-            event.setNewScreen(storedScreen);
-            if (storedScreen instanceof GuidebookEquipmentScreen) {
-                PacketDistributor.sendToServer(new OpenGuidebookPacket(ItemStack.EMPTY));
+            if (Minecraft.getInstance().player != null && (Minecraft.getInstance().player.portalProcess == null || !Minecraft.getInstance().player.portalProcess.isInsidePortalThisTick())) {
+                event.setNewScreen(storedScreen);
+                if (storedScreen instanceof GuidebookEquipmentScreen) {
+                    PacketDistributor.sendToServer(new OpenGuidebookPacket(ItemStack.EMPTY));
+                }
             }
         }
     }
