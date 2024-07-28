@@ -27,6 +27,7 @@
   "client": [
     "client.BlockRenderDispatcherMixin",
     "client.ClientLevelMixin",
+    "client.HumanoidArmorLayerMixin",
     "client.LiquidBlockRendererMixin",
     "client.ReceivingLevelScreenMixin",
     "client.accessor.DeathScreenAccessor",
