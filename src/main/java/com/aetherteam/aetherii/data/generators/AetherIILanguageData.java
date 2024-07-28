@@ -881,8 +881,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("highfields", "Highfields");
         this.addGeneric("magnetic", "Magnetic");
         this.addGeneric("arctic", "Arctic");
-        this.addGeneric("message.campfire_added", "This Outpost Campfire is now a valid respawn option.");
-        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid Outpost Campfire.");
+        this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
+        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
 
 
         // Subtitles
