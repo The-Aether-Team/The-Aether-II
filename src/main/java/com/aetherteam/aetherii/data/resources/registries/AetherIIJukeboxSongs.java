@@ -31,7 +31,6 @@ public class AetherIIJukeboxSongs {
         register(context, APPROACHES, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_APPROACHES.getDelegate(), 274, 4);
         register(context, DEMISE, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_MUSIC_DISC_DEMISE.getDelegate(), 300, 5);
         register(context, RECORDING_892, (Holder.Reference<SoundEvent>) AetherIISoundEvents.ITEM_RECORDING_892.getDelegate(), 97, 6);
-
     }
 
     private static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> key, Holder.Reference<SoundEvent> soundEvent, int lengthInSeconds, int comparatorOutput) {

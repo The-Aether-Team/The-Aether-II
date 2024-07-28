@@ -1,0 +1,22 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.sheepuff",
+  "entity_type": "aether_ii:sheepuff",
+  "food": "aether_ii:sheepuff_food",
+  "icon_discovered": "aether_ii:guidebook/bestiary/sheepuff",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:kirrid_loin",
+      "max_count": 2,
+      "min_count": 1
+    },
+    {
+      "chance": 1.0,
+      "item": "aether_ii:white_cloudwool",
+      "max_count": 1,
+      "min_count": 1
+    }
+  ],
+  "observation_advancement": "aether_ii:bestiary/observe_sheepuff",
+  "understanding_advancement": "aether_ii:bestiary/understand_sheepuff"
+}

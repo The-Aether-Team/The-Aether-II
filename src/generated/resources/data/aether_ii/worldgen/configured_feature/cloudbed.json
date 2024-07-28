@@ -7,10 +7,10 @@
         "Name": "aether_ii:cold_aercloud"
       }
     },
-    "cloud_noise": "aether_ii:cloudbed_noise",
+    "cloud_noise": "aether_ii:highlands/cloudbed/noise",
     "cloud_radius": 10.0,
     "offset_max": 15.0,
-    "offset_noise": "aether_ii:cloudbed_y_offset",
+    "offset_noise": "aether_ii:highlands/cloudbed/y_offset",
     "predicate": {
       "type": "minecraft:matching_blocks",
       "blocks": "minecraft:air"

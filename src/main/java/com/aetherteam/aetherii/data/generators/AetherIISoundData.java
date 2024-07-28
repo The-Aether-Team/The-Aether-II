@@ -224,6 +224,12 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 definition().with(sound("aether_ii:entity/zephyr/shoot"))
                         .subtitle("subtitles.aether_ii.entity.zephyr.shoot")
         );
+
+        this.add(AetherIISoundEvents.COCKATRICE_SHOOT,
+                definition().with(sound("aether_ii:entity/projectile/shoot"))
+                        .subtitle("subtitles.aether.entity.cockatrice.shoot")
+        );
+
         /*this.add(AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT,
                 definition().with(sound("aether:entity/zephyr/call"))
                         .subtitle("subtitles.aether.entity.zephyr.ambient")
@@ -238,30 +244,36 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );*/
 
         // Music
-//        this.add(AetherIISoundEvents.MUSIC_HIGHFIELDS,
-//                definition().with(
-//                        sound("aether:music/aether1").stream()
-//                )
-//        );
-//        this.add(AetherIISoundEvents.MUSIC_MAGNETIC,
-//                definition().with(
-//                        sound("aether:music/aether1").stream()
-//                )
-//        );
-//        this.add(AetherIISoundEvents.MUSIC_ARCTIC,
-//                definition().with(
-//                        sound("aether:music/aether1").stream()
-//                )
-//        );
-//        this.add(AetherIISoundEvents.MUSIC_IRRADIATED,
-//                definition().with(
-//                        sound("aether:music/aether1").stream()
-//                )
-//        );
-//        this.add(AetherIISoundEvents.MUSIC_AERCLOUD_SEA,
-//                definition().with(
-//                        sound("aether:music/aether1").stream()
-//                )
-//        );
+        this.add(AetherIISoundEvents.MUSIC_AETHER,
+                definition().with(
+                        sound("aether_ii:music/aether1").stream(),
+                        sound("aether_ii:music/aether2").stream(),
+                        sound("aether_ii:music/aether3").stream(),
+                        sound("aether_ii:music/aether4").stream(),
+                        sound("aether_ii:music/aether5").stream(),
+                        sound("aether_ii:music/aether6").stream()
+                )
+        );
+        this.add(AetherIISoundEvents.MUSIC_AETHER_NIGHT,
+                definition().with(
+                        sound("aether_ii:music/aether_night1").stream(),
+                        sound("aether_ii:music/aether_night2").stream()
+                )
+        );
+        this.add(AetherIISoundEvents.MUSIC_AETHER_SUNRISE,
+                definition().with(
+                        sound("aether_ii:music/aether_sunrise").stream()
+                )
+        );
+        this.add(AetherIISoundEvents.MUSIC_AETHER_SUNSET,
+                definition().with(
+                        sound("aether_ii:music/aether_sunset").stream()
+                )
+        );
+        this.add(AetherIISoundEvents.MUSIC_AETHER_AMBIENCE,
+                definition().with(
+                        sound("aether_ii:music/aether_ambience1").stream()
+                )
+        );
     }
 }

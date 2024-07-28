@@ -1,7 +1,11 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.event.listeners.ClientTooltipsListener;
+import com.aetherteam.aetherii.client.event.listeners.PlayerRespawnClientListeners;
 import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
+import com.aetherteam.aetherii.client.event.listeners.MusicListener;
 import com.aetherteam.aetherii.client.event.listeners.attachment.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.event.listeners.attachment.DimensionRenderEffectListeners;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -9,8 +13,11 @@ import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
+import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.item.combat.AetherIICrossbowItem;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
@@ -40,7 +47,10 @@ public class AetherIIClient {
 
         AerbunnyMountClientListners.listen(bus);
         DimensionRenderEffectListeners.listen(bus);
+        PlayerRespawnClientListeners.listen(bus);
         GuiExtensionListener.listen(bus);
+        MusicListener.listen(bus);
+        ClientTooltipsListener.listen(bus);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
@@ -53,6 +63,8 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::bakeModels);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
         neoBus.addListener(AetherIIShaders::registerShaders);
+        neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
+        neoBus.addListener(AetherIIClientTooltips::registerClientTooltipComponents);
     }
 
     public static void registerItemModelProperties() {
@@ -77,6 +89,12 @@ public class AetherIIClient {
                 livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"), (stack, level, livingEntity, value) ->
                 AetherIICrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+
+        ClampedItemPropertyFunction reinforcementProperty = (stack, level, livingEntity, value) -> {
+            ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
+            return tier != null ? tier.getTier() * 0.1F : Float.NEGATIVE_INFINITY;
+        };
+        ItemProperties.registerGeneric(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), reinforcementProperty);
     }
 
     private static void registerShieldProperties(Item item) {
