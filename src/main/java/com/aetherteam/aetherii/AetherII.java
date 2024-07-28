@@ -47,6 +47,7 @@ import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
+import com.aetherteam.aetherii.world.surfacerule.AetherIISurfaceRules;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.google.common.reflect.Reflection;
@@ -110,7 +111,8 @@ public class AetherII {
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIPoolElementTypes.POOL_ELEMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
-                AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS
+                AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS,
+                AetherIISurfaceRules.MATERIAL_RULES
         };
 
         for (DeferredRegister<?> register : registers) {
