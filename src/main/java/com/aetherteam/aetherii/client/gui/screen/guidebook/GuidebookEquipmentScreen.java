@@ -9,7 +9,6 @@ import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
 import com.aetherteam.aetherii.network.packet.serverbound.ClearItemPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.HeldCurrencyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
-import com.mojang.datafixers.util.Pair;
 import io.wispforest.accessories.AccessoriesInternals;
 import io.wispforest.accessories.networking.server.NukeAccessories;
 import net.minecraft.client.Minecraft;
@@ -27,7 +26,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -95,12 +93,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
             }
         }
         if (this.currencySlot == null) {
-            this.currencySlot = new Slot(CURRENCY_CONTAINER, 0, 64, 112) {
-                @Override
-                public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                    return Pair.of(InventoryMenu.BLOCK_ATLAS, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "item/miscellaneous/glint_coin"));
-                }
-            };
+            this.currencySlot = new Slot(CURRENCY_CONTAINER, 0, 64, 112);
             this.getMenu().slots.add(this.currencySlot);
         }
 
@@ -133,6 +126,7 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
                 int y = slot.y;
                 guiGraphics.pose().pushPose();
                 guiGraphics.pose().translate(0.0F, 0.0F, 100.0F);
+                guiGraphics.renderFakeItem(AetherIIItems.GLINT_COIN.toStack(), x, y);
                 guiGraphics.renderItemDecorations(this.font, AetherIIItems.GLINT_COIN.toStack(), x, y, text);
                 guiGraphics.pose().popPose();
             }
