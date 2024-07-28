@@ -3,10 +3,12 @@ package com.aetherteam.aetherii.data.providers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.construction.AetherFarmBlock;
+import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.furniture.MultiBlock;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
+import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.block.utility.ArtisansBenchBlock;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockStateProvider;
 import net.minecraft.core.Direction;
@@ -141,6 +143,26 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                     .end();
             return ConfiguredModel.builder().modelFile(model).build();
         });
+    }
+
+    public void corroboniteCluster(Block block) {
+        ResourceLocation texture = this.texture("natural/" + this.name(block));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction facing = state.getValue(CorroboniteClusterBlock.FACING);
+            int x = 0;
+            int y = 0;
+            if (facing == Direction.DOWN) {
+                x = 180;
+            } else if (facing != Direction.UP) {
+                x = 90;
+            }
+            y = (int) facing.getOpposite().toYRot();
+
+            ModelFile modelFile = this.models().cross(this.name(block), texture).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+
+            return ConfiguredModel.builder().modelFile(modelFile).rotationX(x).rotationY(y).build();
+        }, BlockStateProperties.WATERLOGGED);
+
     }
 
     public void aercloudAll(Block block, String location) {
@@ -771,6 +793,38 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void arkeniumForge(Block block) {
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            Direction direction = state.getValue(ArkeniumForgeBlock.FACING);
+            boolean charged = state.getValue(ArkeniumForgeBlock.CHARGED);
+            ModelFile model = this.models().withExistingParent(this.name(block), modLoc("block/template_arkenium_forge"))
+                    .texture("forge", this.texture(name(block), "utility/"))
+                    .texture("particle", this.texture(name(AetherIIBlocks.ARKENIUM_BLOCK.get()), "construction/"))
+                    .renderType("cutout");
+            if (charged) {
+                model = this.models().withExistingParent(this.name(block) + "_charged", modLoc("block/template_arkenium_forge"))
+                        .texture("forge", this.texture(name(block) + "_charged", "utility/"))
+                        .texture("particle", this.texture(name(AetherIIBlocks.ARKENIUM_BLOCK.get()), "construction/"))
+                        .renderType("cutout");
+            }
+            switch (direction) {
+                case NORTH -> {
+                    return ConfiguredModel.builder().modelFile(model).build();
+                }
+                case EAST -> {
+                    return ConfiguredModel.builder().modelFile(model).rotationY(90).build();
+                }
+                case SOUTH -> {
+                    return ConfiguredModel.builder().modelFile(model).rotationY(180).build();
+                }
+                case WEST -> {
+                    return ConfiguredModel.builder().modelFile(model).rotationY(270).build();
+                }
+            }
+            return ConfiguredModel.builder().build();
+        });
+    }
+
     public void decorativeBlock(Block block, Block endBlock) {
         ModelFile masonryBlock = this.models().cubeColumn(this.name(block), this.texture(this.name(block), "decorative/"), this.texture(this.name(endBlock), "decorative/"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(masonryBlock));
@@ -833,9 +887,16 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         simpleBlock(wallSignBlock, sign);
     }
 
-    public void multiBlock(MultiBlock block, Block particle, String location) {
-        ResourceLocation texture = this.texture(this.name(particle), location);
-        ModelFile model = this.models().getBuilder(this.name(block)).texture("particle", texture);
-        this.getVariantBuilder(block).forAllStates((state) -> ConfiguredModel.builder().modelFile(model).build());
+    public void campfire(Block block) {
+        ResourceLocation texture = this.texture(this.name(block), "furniture/");
+        ResourceLocation particleTexture = this.texture(this.name(AetherIIBlocks.HOLYSTONE_BRICKS.get()), "construction/");
+        this.getVariantBuilder(block).forAllStatesExcept((blockState) -> {
+            Direction partFacing = blockState.getValue(OutpostCampfireBlock.PART_FACING);
+            ModelFile model = this.models().withExistingParent(this.name(block) + "_" + partFacing.name().toLowerCase(), this.modLoc("template_" + this.name(block) + "_" + partFacing.name().toLowerCase()))
+                    .texture("texture", texture)
+                    .texture("particle", particleTexture)
+                    .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, OutpostCampfireBlock.LIT);
     }
 }

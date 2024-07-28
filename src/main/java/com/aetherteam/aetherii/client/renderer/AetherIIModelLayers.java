@@ -8,7 +8,6 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_BED_FOOT = register("skyroot_bed_foot");
     public static final ModelLayerLocation SKYROOT_BED_HEAD = register("skyroot_bed_head");
     public static final ModelLayerLocation MOA_EGG = register("moa_egg");
-    public static final ModelLayerLocation OUTPOST_CAMPFIRE = register("outpost_campfire");
 
     public static final ModelLayerLocation PHYG = register("phyg");
     public static final ModelLayerLocation AERBUNNY = register("aerbunny");
@@ -35,16 +34,17 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation ARCTIC_KIRRID_BABY = register("arctic_kirrid_baby");
     public static final ModelLayerLocation MOA = register("moa");
     public static final ModelLayerLocation MOA_BABY = register("moa_baby");
+    public static final ModelLayerLocation SKYROOT_LIZARD = register("skyroot_lizard");
 
     public static final ModelLayerLocation AECHOR_PLANT = register("aechor_plant");
-
     public static final ModelLayerLocation ZEPHYR = register("zephyr");
     public static final ModelLayerLocation ZEPHYR_TRANSPARENCY = register("zephyr", "transparency");
     public static final ModelLayerLocation TEMPEST = register("tempest");
     public static final ModelLayerLocation TEMPEST_TRANSPARENCY = register("tempest", "transparency");
+    public static final ModelLayerLocation COCKATRICE = register("cockatrice");
 
     public static final ModelLayerLocation EDWARD = register("edward");
-  
+
     public static final ModelLayerLocation GLOVES = register("gloves");
     public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");
 

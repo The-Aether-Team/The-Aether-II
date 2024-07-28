@@ -34,7 +34,7 @@ public class DamageSystemListener {
     public static void hurtWithDamageTypes(LivingDamageEvent.Pre event) {
         Entity target = event.getEntity();
         DamageSource source = event.getContainer().getSource();
-        float damage = event.getContainer().getOriginalDamage();
+        float damage = event.getContainer().getNewDamage();
         event.getContainer().setNewDamage(DamageSystemHooks.getDamageTypeModifiedValue(target, source, damage));
     }
 
@@ -45,6 +45,7 @@ public class DamageSystemListener {
         DamageSystemHooks.addAbilityTooltips(itemStack, itemTooltips);
         DamageSystemHooks.addDamageTypeTooltips(player, itemTooltips, itemStack);
         DamageSystemHooks.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
+        DamageSystemHooks.addReinforcingTooltip(itemStack, itemTooltips);
     }
 
     public static void blockIncomingAttack(LivingShieldBlockEvent event) {

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "aether_ii:arkenium_framed_quicksoil_glass_pane"
+  },
+  "result": {
+    "count": 1,
+    "id": "aether_ii:quicksoil_glass_pane"
+  }
+}

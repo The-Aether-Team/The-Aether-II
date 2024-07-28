@@ -1,0 +1,16 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.flying_cow",
+  "entity_type": "aether_ii:flying_cow",
+  "food": "aether_ii:flying_food",
+  "icon_discovered": "aether_ii:guidebook/bestiary/flying_cow",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:burrukai_rib_cut",
+      "max_count": 2,
+      "min_count": 1
+    }
+  ],
+  "observation_advancement": "aether_ii:bestiary/observe_flying_cow",
+  "understanding_advancement": "aether_ii:bestiary/understand_flying_cow"
+}

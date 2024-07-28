@@ -43,6 +43,12 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.lift"
   },
+  "entity.cockatrice.shoot": {
+    "sounds": [
+      "aether_ii:entity/projectile/shoot"
+    ],
+    "subtitle": "subtitles.aether.entity.cockatrice.shoot"
+  },
   "entity.flying_cow.ambient": {
     "sounds": [
       "mob/cow/say1",
@@ -283,5 +289,69 @@
       "mob/slime/big4"
     ],
     "subtitle": "subtitles.aether.item.swet_ball.use"
+  },
+  "music.aether": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether1",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/aether2",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/aether3",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/aether4",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/aether5",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/aether6",
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_ambience": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_ambience1",
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_night": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_night1",
+        "stream": true
+      },
+      {
+        "name": "aether_ii:music/aether_night2",
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_sunrise": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_sunrise",
+        "stream": true
+      }
+    ]
+  },
+  "music.aether_sunset": {
+    "sounds": [
+      {
+        "name": "aether_ii:music/aether_sunset",
+        "stream": true
+      }
+    ]
   }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "aether_ii:plates/arkenium"
+    },
+    "H": {
+      "item": "aether_ii:holystone"
+    }
+  },
+  "pattern": [
+    "AAA",
+    " A ",
+    "HHH"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:arkenium_forge"
+  }
+}
