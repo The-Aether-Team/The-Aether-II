@@ -236,11 +236,11 @@
         "if_true": {
           "type": "minecraft:vertical_gradient",
           "false_at_and_above": {
-            "absolute": 88
+            "absolute": 111
           },
           "random_name": "minecraft:undershale",
           "true_at_and_below": {
-            "absolute": 80
+            "absolute": 96
           }
         },
         "then_run": {

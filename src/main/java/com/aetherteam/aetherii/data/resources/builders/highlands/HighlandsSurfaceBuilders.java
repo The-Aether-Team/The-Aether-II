@@ -43,7 +43,7 @@ public class HighlandsSurfaceBuilders {
                         SurfaceRules.verticalGradient("aether_dirt", VerticalAnchor.belowTop(272), VerticalAnchor.belowTop(272))),
                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, AETHER_DIRT)),
 
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(80), VerticalAnchor.absolute(88)), UNDERSHALE),
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(96), VerticalAnchor.absolute(111)), UNDERSHALE),
 
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FLOURISHING_FIELD), MOSSY_HOLYSTONE),
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.VERDANT_WOODS), MOSSY_HOLYSTONE),
