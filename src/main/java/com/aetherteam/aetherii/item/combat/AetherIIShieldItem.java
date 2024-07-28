@@ -26,7 +26,7 @@ public class AetherIIShieldItem extends ShieldItem {
 
     public static ItemAttributeModifiers createAttributes(float staminaReductionRate) {
         return ItemAttributeModifiers.builder()
-                .add(AetherIIAttributes.SHOCK_RANGE, new AttributeModifier(BASE_SHIELD_STAMINA_REDUCTION_ID, staminaReductionRate, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND)
+                .add(AetherIIAttributes.SHIELD_STAMINA_REDUCTION, new AttributeModifier(BASE_SHIELD_STAMINA_REDUCTION_ID, staminaReductionRate, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND)
                 .build();
     }
 

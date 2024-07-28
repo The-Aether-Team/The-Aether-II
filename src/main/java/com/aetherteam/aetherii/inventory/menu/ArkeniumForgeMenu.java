@@ -263,7 +263,15 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     }
 
     public int getTierCount() {
-        return this.getCosts().size();
+        int count = 0;
+        List<ReinforcementTier.Cost> costs = new ArrayList<>(this.getCosts().values());
+        for (int i = costs.size() - 1; i >= 0; i--) {
+            ReinforcementTier.Cost cost = costs.get(i);
+            if (cost != null) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public boolean isItemAtMaxTier() {
@@ -334,11 +342,13 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
     public int getTierForMaterials() {
         if (!this.isItemAtMaxTier()) {
             List<ReinforcementTier.Cost> costs = new ArrayList<>(this.getCosts().values());
-            for (int i = this.getTierCount() - 1; i >= 0; i--) {
+            for (int i = costs.size() - 1; i >= 0; i--) {
                 ReinforcementTier.Cost cost = costs.get(i);
-                if (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= this.getPrimaryCostForTier(i + 1)
-                        && this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= this.getSecondaryCostForTier(i + 1)) {
-                    return i + 1;
+                if (cost != null) {
+                    if (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= this.getPrimaryCostForTier(i + 1)
+                            && this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= this.getSecondaryCostForTier(i + 1)) {
+                        return i + 1;
+                    }
                 }
             }
         }

@@ -1,0 +1,89 @@
+{
+  "values": {
+    "aether_ii:aechor_plant": {
+      "impact_value": 2.0,
+      "pierce_value": 0.0,
+      "slash_value": -2.0
+    },
+    "aether_ii:aerbunny": {
+      "impact_value": 2.0,
+      "pierce_value": -2.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:arctic_burrukai": {
+      "impact_value": -2.0,
+      "pierce_value": 0.0,
+      "slash_value": 2.0
+    },
+    "aether_ii:arctic_kirrid": {
+      "impact_value": 2.0,
+      "pierce_value": -2.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:arctic_taegore": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": -2.0
+    },
+    "aether_ii:cockatrice": {
+      "impact_value": 0.0,
+      "pierce_value": 2.0,
+      "slash_value": -2.0
+    },
+    "aether_ii:flying_cow": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:highfields_burrukai": {
+      "impact_value": -2.0,
+      "pierce_value": 0.0,
+      "slash_value": 2.0
+    },
+    "aether_ii:highfields_kirrid": {
+      "impact_value": 2.0,
+      "pierce_value": -2.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:magnetic_burrukai": {
+      "impact_value": -2.0,
+      "pierce_value": 0.0,
+      "slash_value": 2.0
+    },
+    "aether_ii:magnetic_kirrid": {
+      "impact_value": 2.0,
+      "pierce_value": -2.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:magnetic_taegore": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": -2.0
+    },
+    "aether_ii:moa": {
+      "impact_value": 2.0,
+      "pierce_value": -2.0,
+      "slash_value": 2.0
+    },
+    "aether_ii:phyg": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:sheepuff": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:tempest": {
+      "impact_value": 2.0,
+      "pierce_value": -2.0,
+      "slash_value": 2.0
+    },
+    "aether_ii:zephyr": {
+      "impact_value": 2.0,
+      "pierce_value": -2.0,
+      "slash_value": 0.0
+    }
+  }
+}

@@ -26,7 +26,7 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> STAB_DAMAGE = ATTRIBUTES.register("stab_damage", () -> new RangedAttribute("attributes.aether_ii.stab_damage", 2.0, 0.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_REDUCTION = ATTRIBUTES.register("shield_stamina_reduction", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_reduction", 0.0, 0.0, 500.0));
-    public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_RESTORATION = ATTRIBUTES.register("shield_stamina_restoration", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_restoration", 5.0, 0.0, 500.0));
+    public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_RESTORATION = ATTRIBUTES.register("shield_stamina_restoration", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_restoration", 2.0, 0.0, 500.0));
 
     public static void registerEntityAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, SWEEP_RANGE);
