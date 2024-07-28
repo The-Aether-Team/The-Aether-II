@@ -92,14 +92,36 @@ public class GuidebookDiscoveryAttachment {
         Registry<BestiaryEntry> bestiaryEntries = registryAccess.registryOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
         for (Holder.Reference<BestiaryEntry> entry : bestiaryEntries.holders().toList()) {
             if (advancement.id().equals(entry.value().observationAdvancement())) {
-                this.observedBestiaryEntries.add(entry);
-                this.uncheckedBestiaryEntries.add(entry);
-                this.sync = true;
+                boolean flag = false;
+                if (!this.observedBestiaryEntries.contains(entry)) {
+                    this.observedBestiaryEntries.add(entry);
+                    flag = true;
+                }
+                if (!this.uncheckedBestiaryEntries.contains(entry)) {
+                    this.uncheckedBestiaryEntries.add(entry);
+                    flag = true;
+                }
+                if (flag) {
+                    this.sync = true;
+                }
             }
             if (advancement.id().equals(entry.value().understandingAdvancement())) {
-                this.understoodBestiaryEntries.add(entry);
-                this.uncheckedBestiaryEntries.add(entry);
-                this.sync = true;
+                boolean flag = false;
+                if (!this.observedBestiaryEntries.contains(entry)) {
+                    this.observedBestiaryEntries.add(entry);
+                    flag = true;
+                }
+                if (!this.understoodBestiaryEntries.contains(entry)) {
+                    this.understoodBestiaryEntries.add(entry);
+                    flag = true;
+                }
+                if (!this.uncheckedBestiaryEntries.contains(entry)) {
+                    this.uncheckedBestiaryEntries.add(entry);
+                    flag = true;
+                }
+                if (flag) {
+                    this.sync = true;
+                }
             }
         }
         if (this.sync) {
@@ -117,6 +139,10 @@ public class GuidebookDiscoveryAttachment {
 
     public List<Holder<BestiaryEntry>> getUncheckedBestiaryEntries() {
         return this.uncheckedBestiaryEntries;
+    }
+
+    public boolean hasAnyBestiaryEntryStatus(Holder<BestiaryEntry> bestiaryEntry) {
+        return this.getObservedBestiaryEntries().contains(bestiaryEntry) || this.getUncheckedBestiaryEntries().contains(bestiaryEntry);
     }
 
     public void syncAttachment(GuidebookDiscoveryAttachment other) {

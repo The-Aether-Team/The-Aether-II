@@ -448,6 +448,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MUSIC_DISC_DEMISE.get());
                 output.accept(AetherIIItems.RECORDING_892.get());
                 output.accept(AetherIIItems.GLINT_COIN.get());
+                output.accept(AetherIIItems.GUIDEBOOK_PAGE.get());
                 output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
             }).build());
 

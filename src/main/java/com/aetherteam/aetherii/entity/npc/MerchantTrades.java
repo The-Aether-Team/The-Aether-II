@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.npc;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -15,12 +14,12 @@ import net.minecraft.world.level.block.Block;
 
 import javax.annotation.Nullable;
 
-public class MerchantTrades {
+public final class MerchantTrades {
     public static final Int2ObjectMap<ItemListing[]> EDWARD_TRADES = toIntMap(
             ImmutableMap.of(
                     1,
                     new ItemListing[] {
-                            new ItemsForGlint(AetherIIBlocks.SKYPINE_SAPLING.get(), 20, 1, 5)
+                            new ItemsForGlint(AetherIIItems.GUIDEBOOK_PAGE.get(), 20, 1, 5)
                     }
             )
     );
@@ -75,7 +74,7 @@ public class MerchantTrades {
         @Override
         public MerchantOffer getOffer(Entity trader, RandomSource random) {
             ItemStack itemstack = this.itemStack.copy();
-            return new MerchantOffer(new ItemCost(AetherIIItems.AMBROSIUM_SHARD.get(), this.cost), itemstack, this.maxUses, 0, this.priceMultiplier);
+            return new MerchantOffer(new ItemCost(AetherIIItems.GLINT_COIN.get(), this.cost), itemstack, this.maxUses, 0, this.priceMultiplier);
         }
     }
 }

@@ -650,6 +650,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
         this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
+        this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         // Tooltips
