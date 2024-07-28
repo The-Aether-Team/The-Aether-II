@@ -524,15 +524,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
         // Armor
-        this.addItem(AetherIIItems.TAEGORE_HIDE_HELMET, "Taegore Hide Helmet");
-        this.addItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, "Taegore Hide Chestplate");
-        this.addItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS, "Taegore Hide Leggings");
+        this.addItem(AetherIIItems.TAEGORE_HIDE_HELMET, "Taegore Hide Cap");
+        this.addItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, "Taegore Hide Tunic");
+        this.addItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS, "Taegore Hide Pants");
         this.addItem(AetherIIItems.TAEGORE_HIDE_BOOTS, "Taegore Hide Boots");
         this.addItem(AetherIIItems.TAEGORE_HIDE_GLOVES, "Taegore Hide Gloves");
 
-        this.addItem(AetherIIItems.BURRUKAI_PELT_HELMET, "Burrukai Pelt Helmet");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, "Burrukai Pelt Chestplate");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS, "Burrukai Pelt Leggings");
+        this.addItem(AetherIIItems.BURRUKAI_PELT_HELMET, "Burrukai Pelt Cap");
+        this.addItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, "Burrukai Pelt Tunic");
+        this.addItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS, "Burrukai Pelt Pants");
         this.addItem(AetherIIItems.BURRUKAI_PELT_BOOTS, "Burrukai Pelt Boots");
         this.addItem(AetherIIItems.BURRUKAI_PELT_GLOVES, "Burrukai Pelt Gloves");
 
@@ -540,19 +540,19 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_CHESTPLATE, "Zanite Chestplate");
         this.addItem(AetherIIItems.ZANITE_LEGGINGS, "Zanite Leggings");
         this.addItem(AetherIIItems.ZANITE_BOOTS, "Zanite Boots");
-        this.addItem(AetherIIItems.ZANITE_GLOVES, "Zanite Gloves");
+        this.addItem(AetherIIItems.ZANITE_GLOVES, "Zanite Gauntlets");
 
         this.addItem(AetherIIItems.ARKENIUM_HELMET, "Arkenium Helmet");
         this.addItem(AetherIIItems.ARKENIUM_CHESTPLATE, "Arkenium Chestplate");
         this.addItem(AetherIIItems.ARKENIUM_LEGGINGS, "Arkenium Leggings");
         this.addItem(AetherIIItems.ARKENIUM_BOOTS, "Arkenium Boots");
-        this.addItem(AetherIIItems.ARKENIUM_GLOVES, "Arkenium Gloves");
+        this.addItem(AetherIIItems.ARKENIUM_GLOVES, "Arkenium Gauntlets");
 
         this.addItem(AetherIIItems.GRAVITITE_HELMET, "Gravitite Helmet");
         this.addItem(AetherIIItems.GRAVITITE_CHESTPLATE, "Gravitite Chestplate");
         this.addItem(AetherIIItems.GRAVITITE_LEGGINGS, "Gravitite Leggings");
         this.addItem(AetherIIItems.GRAVITITE_BOOTS, "Gravitite Boots");
-        this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gloves");
+        this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gauntlets");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
