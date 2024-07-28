@@ -34,7 +34,7 @@ public class AetherJigsawStructure extends Structure {
                     HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
-                    Codec.intRange(-4096, 4096).fieldOf("checked_y").forGetter(structure -> structure.checkedY),
+                    Codec.intRange(-4096, 4096).fieldOf("discard_below_y").forGetter(structure -> structure.discardBelowY),
                     Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(structure -> structure.poolAliases),
                     DimensionPadding.CODEC
                             .optionalFieldOf("dimension_padding", DimensionPadding.ZERO)
@@ -47,7 +47,7 @@ public class AetherJigsawStructure extends Structure {
     private final HeightProvider startHeight;
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
-    private final int checkedY;
+    private final int discardBelowY;
     private final List<PoolAliasBinding> poolAliases;
     private final DimensionPadding dimensionPadding;
     private final LiquidSettings liquidSettings;
@@ -60,7 +60,7 @@ public class AetherJigsawStructure extends Structure {
         this.startHeight = startHeight;
         this.projectStartToHeightmap = projectStartToHeightmap;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
-        this.checkedY = checkedY;
+        this.discardBelowY = checkedY;
         this.poolAliases = poolAliases;
         this.dimensionPadding = dimensionPadding;
         this.liquidSettings = liquidSettings;
@@ -68,7 +68,7 @@ public class AetherJigsawStructure extends Structure {
 
     @Override
     public @NotNull Optional<GenerationStub> findGenerationPoint(@NotNull GenerationContext context) {
-        if (!new HeightSpawningChecks().checkHeight(context, checkedY, 384)) {
+        if (!new HeightSpawningChecks().checkHeight(context, discardBelowY, 384)) {
             return Optional.empty();
         }
         int startY = startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
