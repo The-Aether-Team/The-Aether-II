@@ -21,12 +21,30 @@
         },
         "up": {
           "cullface": "up",
-          "texture": "#top_1",
-          "tintindex": 0
+          "texture": "#top"
         },
         "west": {
           "cullface": "west",
           "texture": "#side"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "up": {
+          "cullface": "up",
+          "texture": "#top_1",
+          "tintindex": 0
         }
       },
       "from": [
@@ -189,6 +207,7 @@
     "overlay_3": "aether_ii:block/natural/aether_grass_block_side_overlay_3",
     "particle": "aether_ii:block/natural/aether_dirt",
     "side": "aether_ii:block/natural/aether_grass_block_side",
+    "top": "aether_ii:block/natural/aether_grass_block_top",
     "top_1": "aether_ii:block/natural/aether_grass_block_top_1",
     "top_2": "aether_ii:block/natural/aether_grass_block_top_2",
     "top_3": "aether_ii:block/natural/aether_grass_block_top_3"
