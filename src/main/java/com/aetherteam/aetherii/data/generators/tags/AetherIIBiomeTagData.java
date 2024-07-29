@@ -92,6 +92,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 AetherIIBiomes.TURQUOISE_FOREST,
                 AetherIIBiomes.GLISTENING_SWAMP,
                 AetherIIBiomes.VIOLET_HIGHWOODS,
+                AetherIIBiomes.FRIGID_SIERRA,
                 AetherIIBiomes.ENDURING_WOODLAND,
                 AetherIIBiomes.SHEER_TUNDRA
         );
