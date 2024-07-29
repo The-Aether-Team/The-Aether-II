@@ -5,7 +5,7 @@ import net.minecraft.util.StringRepresentable;
 public enum AltarBookCategory implements StringRepresentable {
     FOOD("food"),
     BLOCKS("blocks"),
-    REPAIRING("food"),
+    REPAIRING("repairing"),
     MISC("misc");
 
     public static final StringRepresentable.EnumCodec<AltarBookCategory> CODEC = StringRepresentable.fromEnum(AltarBookCategory::values);
