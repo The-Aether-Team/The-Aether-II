@@ -1,6 +1,7 @@
 {
   "type": "aether_ii:aether_jigsaw",
   "biomes": "#aether_ii:has_structure/outpost",
+  "discard_above_y": 256,
   "discard_below_y": 128,
   "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": 32,

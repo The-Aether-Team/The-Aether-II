@@ -35,6 +35,7 @@ public class AetherJigsawStructure extends Structure {
                     Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> structure.projectStartToHeightmap),
                     Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
                     Codec.intRange(-4096, 4096).fieldOf("discard_below_y").forGetter(structure -> structure.discardBelowY),
+                    Codec.intRange(-4096, 4096).fieldOf("discard_above_y").forGetter(structure -> structure.discardAboveY),
                     Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(structure -> structure.poolAliases),
                     DimensionPadding.CODEC.optionalFieldOf("dimension_padding", DimensionPadding.ZERO).forGetter(structure -> structure.dimensionPadding),
                     LiquidSettings.CODEC.optionalFieldOf("liquid_settings", LiquidSettings.APPLY_WATERLOGGING).forGetter(structure -> structure.liquidSettings)
@@ -46,11 +47,12 @@ public class AetherJigsawStructure extends Structure {
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
     private final int discardBelowY;
+    private final int discardAboveY;
     private final List<PoolAliasBinding> poolAliases;
     private final DimensionPadding dimensionPadding;
     private final LiquidSettings liquidSettings;
 
-    public AetherJigsawStructure(StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int checkedY, List<PoolAliasBinding> poolAliases, DimensionPadding dimensionPadding, LiquidSettings liquidSettings) {
+    public AetherJigsawStructure(StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int discardBelowY, int discardAboveY, List<PoolAliasBinding> poolAliases, DimensionPadding dimensionPadding, LiquidSettings liquidSettings) {
         super(config);
         this.startPool = startPool;
         this.startJigsawName = startJigsawName;
@@ -58,7 +60,8 @@ public class AetherJigsawStructure extends Structure {
         this.startHeight = startHeight;
         this.projectStartToHeightmap = projectStartToHeightmap;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
-        this.discardBelowY = checkedY;
+        this.discardBelowY = discardBelowY;
+        this.discardAboveY = discardAboveY;
         this.poolAliases = poolAliases;
         this.dimensionPadding = dimensionPadding;
         this.liquidSettings = liquidSettings;
@@ -66,7 +69,7 @@ public class AetherJigsawStructure extends Structure {
 
     @Override
     public @NotNull Optional<GenerationStub> findGenerationPoint(@NotNull GenerationContext context) {
-        if (!new HeightSpawningChecks().checkHeight(context, discardBelowY, 384)) {
+        if (!new HeightSpawningChecks().checkHeight(context, discardBelowY, discardAboveY)) {
             return Optional.empty();
         }
         int startY = startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
