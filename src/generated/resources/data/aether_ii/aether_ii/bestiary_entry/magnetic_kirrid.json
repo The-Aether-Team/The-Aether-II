@@ -1,0 +1,25 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.magnetic_kirrid",
+  "entity_type": "aether_ii:magnetic_kirrid",
+  "food": "aether_ii:kirrid_food",
+  "icon_discovered": "aether_ii:guidebook/bestiary/magnetic_kirrid",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:kirrid_loin",
+      "max_count": 3,
+      "min_count": 1
+    },
+    {
+      "chance": 1.0,
+      "item": "aether_ii:cloudwool",
+      "max_count": 3,
+      "min_count": 1
+    }
+  ],
+  "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.magnetic_kirrid",
+  "observation_advancement": "aether_ii:bestiary/observe_magnetic_kirrid",
+  "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.magnetic_kirrid",
+  "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.magnetic_kirrid",
+  "understanding_advancement": "aether_ii:bestiary/understand_magnetic_kirrid"
+}

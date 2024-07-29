@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "aether_ii:item/weapons/scatterglass_bolt"
   }

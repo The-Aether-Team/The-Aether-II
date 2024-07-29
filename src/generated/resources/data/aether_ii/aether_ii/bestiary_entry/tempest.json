@@ -1,0 +1,21 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.tempest",
+  "entity_type": "aether_ii:tempest",
+  "icon_discovered": "aether_ii:guidebook/bestiary/tempest",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:storm_aercloud",
+      "max_count": 3,
+      "min_count": 1
+    },
+    {
+      "chance": 1.0,
+      "item": "aether_ii:charge_core",
+      "max_count": 1,
+      "min_count": 0
+    }
+  ],
+  "observation_advancement": "aether_ii:bestiary/observe_tempest",
+  "understanding_advancement": "aether_ii:bestiary/understand_tempest"
+}

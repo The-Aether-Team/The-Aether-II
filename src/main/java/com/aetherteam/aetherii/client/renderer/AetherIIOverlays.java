@@ -54,18 +54,15 @@ public class AetherIIOverlays {
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
-            int screenWidth = minecraft.getWindow().getScreenWidth();
             if (player != null) {
-                renderEffects(minecraft, player, guiGraphics, screenWidth);
+                renderEffects(minecraft, player, guiGraphics);
             }
         });
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield_blocking"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
-            int screenWidth = minecraft.getWindow().getScreenWidth();
-            int screenHeight = minecraft.getWindow().getScreenHeight();
             if (player != null) {
-                renderBlockIndicator(minecraft, guiGraphics, player, screenWidth, screenHeight);
+                renderBlockIndicator(minecraft, guiGraphics, player);
             }
         });
     }
@@ -92,7 +89,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void renderEffects(Minecraft minecraft, LocalPlayer player, GuiGraphics guiGraphics, int screenWidth) {
+    private static void renderEffects(Minecraft minecraft, LocalPlayer player, GuiGraphics guiGraphics) {
         Collection<EffectBuildupInstance> collection = minecraft.player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).getActiveBuildups().values();
         if (!collection.isEmpty()) {
             Screen $$4 = minecraft.screen;
@@ -108,7 +105,7 @@ public class AetherIIOverlays {
 
             for (EffectBuildupInstance buildup : Ordering.natural().reverse().sortedCopy(collection)) {
                 Holder<MobEffect> effect = buildup.getType();
-                int i = screenWidth;
+                int i = guiGraphics.guiWidth();
                 int j = 27;
                 if (minecraft.isDemo()) {
                     j += 15;
@@ -142,8 +139,8 @@ public class AetherIIOverlays {
                     float flashInterval = (Mth.cos((0.5F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
                     guiGraphics.setColor(1.0F, 1.0F, 1.0F, flashInterval);
                     guiGraphics.blitSprite(BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24);
-                    guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
                 }
+                guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
                 TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(effect);
                 int i1 = j;
@@ -152,10 +149,12 @@ public class AetherIIOverlays {
             }
 
             list.forEach(Runnable::run);
+
+            RenderSystem.disableBlend();
         }
     }
 
-    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player, int screenWidth, int screenHeight) {
+    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player) {
         Options options = minecraft.options; //todo visual for broken shield restoring to full shield using cooldown counter.
         if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
@@ -168,8 +167,8 @@ public class AetherIIOverlays {
                         if (!minecraft.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
                             RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-                            int j = screenHeight / 2 - 5;
-                            int k = screenWidth / 2 - 19;
+                            int j = guiGraphics.guiHeight() / 2 - 5;
+                            int k = guiGraphics.guiWidth() / 2 - 19;
                             int l = (int) (f * 10.0F);
                             guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
                             guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
@@ -180,8 +179,8 @@ public class AetherIIOverlays {
                 } else if (options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR) {
                     HumanoidArm humanoidarm = player.getMainArm().getOpposite();
                     boolean flag = player.getOffhandItem().isEmpty();
-                    int j2 = screenHeight - 20;
-                    int i = screenWidth / 2;
+                    int j2 = guiGraphics.guiHeight() - 20;
+                    int i = guiGraphics.guiWidth() / 2;
                     int k2 = i - 91 - 22 - (!flag ? 31 : 3);
                     if (humanoidarm == HumanoidArm.RIGHT) {
                         k2 = i + 91 + 1 + (!flag ? 31 : 3);

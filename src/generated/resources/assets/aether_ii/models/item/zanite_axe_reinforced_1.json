@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "aether_ii:item/tools/zanite_axe_reinforced_1"
+  }
+}

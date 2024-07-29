@@ -1,9 +1,9 @@
 {
   "type": "aether_ii:ferrosite_pillar",
   "config": {
-    "additional_height": 16,
+    "additional_height": 24,
     "additional_radius": 6,
-    "base_height": 24,
+    "base_height": 40,
     "base_radius": 4.5,
     "block": {
       "type": "minecraft:noise_provider",
@@ -13,8 +13,8 @@
         ],
         "firstOctave": 0
       },
-      "scale": 0.0633,
-      "seed": 200,
+      "scale": 0.064,
+      "seed": 300,
       "states": [
         {
           "Name": "aether_ii:ferrosite"

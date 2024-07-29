@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "aether_ii:block/corrobonite_cluster",
+      "x": 180,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "aether_ii:block/corrobonite_cluster",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "aether_ii:block/corrobonite_cluster",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "aether_ii:block/corrobonite_cluster",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "aether_ii:block/corrobonite_cluster",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "aether_ii:block/corrobonite_cluster",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

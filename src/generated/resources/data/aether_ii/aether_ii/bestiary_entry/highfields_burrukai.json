@@ -1,0 +1,25 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.highfields_burrukai",
+  "entity_type": "aether_ii:highfields_burrukai",
+  "food": "aether_ii:burrukai_food",
+  "icon_discovered": "aether_ii:guidebook/bestiary/highfields_burrukai",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:burrukai_rib_cut",
+      "max_count": 3,
+      "min_count": 1
+    },
+    {
+      "chance": 1.0,
+      "item": "aether_ii:burrukai_pelt",
+      "max_count": 3,
+      "min_count": 1
+    }
+  ],
+  "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.highfields_burrukai",
+  "observation_advancement": "aether_ii:bestiary/observe_highfields_burrukai",
+  "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.highfields_burrukai",
+  "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.highfields_burrukai",
+  "understanding_advancement": "aether_ii:bestiary/understand_highfields_burrukai"
+}

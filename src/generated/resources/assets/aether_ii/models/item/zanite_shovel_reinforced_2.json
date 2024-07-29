@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "aether_ii:item/tools/zanite_shovel_reinforced_2"
+  }
+}

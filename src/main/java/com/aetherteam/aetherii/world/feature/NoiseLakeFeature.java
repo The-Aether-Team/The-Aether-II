@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.world.feature;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.RockBlock;
 import com.aetherteam.aetherii.block.natural.TwigBlock;
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -34,17 +35,17 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
                 // Determinds the noise value at each y-level
                 placeLakeLayer(context, xCoord, height, zCoord, 0.4, 1.0);
-                placeLakeLayer(context, xCoord, height - 1, zCoord, 0.425, 0.75);
-                placeLakeLayer(context, xCoord, height - 2, zCoord, 0.44, 0.6);
-                placeLakeLayer(context, xCoord, height - 3, zCoord, 0.45, 0.5);
-                placeLakeLayer(context, xCoord, height - 4, zCoord, 0.46, 0.47);
-                placeLakeLayer(context, xCoord, height - 5, zCoord, 0.47, 0.43);
-                placeLakeLayer(context, xCoord, height - 6, zCoord, 0.48, 0.39);
-                placeLakeLayer(context, xCoord, height - 7, zCoord, 0.49, 0.35);
-                placeLakeLayer(context, xCoord, height - 8, zCoord, 0.5, 0.3);
-                placeLakeLayer(context, xCoord, height - 9, zCoord, 0.51, 0.25);
-                placeLakeLayer(context, xCoord, height - 10, zCoord, 0.54, 0.175);
-                placeLakeLayer(context, xCoord, height - 11, zCoord, 0.57, 0.08);
+                placeLakeLayer(context, xCoord, height - 1, zCoord, 0.425, 0.8);
+                placeLakeLayer(context, xCoord, height - 2, zCoord, 0.44, 0.75);
+                placeLakeLayer(context, xCoord, height - 3, zCoord, 0.445, 0.7);
+                placeLakeLayer(context, xCoord, height - 4, zCoord, 0.45, 0.625);
+                placeLakeLayer(context, xCoord, height - 5, zCoord, 0.465, 0.55);
+                placeLakeLayer(context, xCoord, height - 6, zCoord, 0.47, 0.475);
+                placeLakeLayer(context, xCoord, height - 7, zCoord, 0.475, 0.4);
+                placeLakeLayer(context, xCoord, height - 8, zCoord, 0.48, 0.3);
+                placeLakeLayer(context, xCoord, height - 9, zCoord, 0.485, 0.2);
+                placeLakeLayer(context, xCoord, height - 10, zCoord, 0.491, 0.1);
+                placeLakeLayer(context, xCoord, height - 11, zCoord, 0.55, 0.035);
             }
         }
         return true;
@@ -57,6 +58,12 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         DensityFunction lakeNoise = config.lakeNoise();
         DensityFunction lakeFloorNoise = config.lakeFloorNoise();
         DensityFunction lakeBarrierNoise = config.lakeBarrierNoise();
+
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(context.level().getSeed());
+
+        lakeNoise.mapAll(visitor);
+        lakeFloorNoise.mapAll(visitor);
+        lakeBarrierNoise.mapAll(visitor);
 
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(x, y, z));

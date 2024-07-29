@@ -1,0 +1,15 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.cockatrice",
+  "entity_type": "aether_ii:cockatrice",
+  "icon_discovered": "aether_ii:guidebook/bestiary/cockatrice",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "minecraft:feather",
+      "max_count": 3,
+      "min_count": 1
+    }
+  ],
+  "observation_advancement": "aether_ii:bestiary/observe_cockatrice",
+  "understanding_advancement": "aether_ii:bestiary/understand_cockatrice"
+}

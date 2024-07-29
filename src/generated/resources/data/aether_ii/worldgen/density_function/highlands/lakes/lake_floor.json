@@ -5,7 +5,7 @@
     "noise": {
       "amplitudes": [
         2.5,
-        1.0,
+        1.5,
         0.0,
         0.0,
         0.0,
@@ -14,7 +14,7 @@
       "firstOctave": -6
     },
     "seed": 17,
-    "xz_scale": 1.0,
+    "xz_scale": 0.75,
     "y_scale": 0.0
   }
 }

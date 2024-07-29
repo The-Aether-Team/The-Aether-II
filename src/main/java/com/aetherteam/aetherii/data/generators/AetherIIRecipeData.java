@@ -596,6 +596,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("HHH")
                 .unlockedBy(getHasName(AetherIIBlocks.ARTISANS_BENCH.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_FORGE.get())
+                .define('H', AetherIIBlocks.HOLYSTONE.get())
+                .define('A', AetherIITags.Items.PLATES_ARKENIUM)
+                .pattern("AAA")
+                .pattern(" A ")
+                .pattern("HHH")
+                .unlockedBy(getHasName(AetherIIBlocks.ARKENIUM_FORGE.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
+                .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CHEST.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
                 .pattern("###")
@@ -705,6 +713,16 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeSpearWithTag(AetherIIItems.GRAVITITE_SPEAR, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
         this.makeCrossbowWithTag(AetherIIItems.GRAVITITE_CROSSBOW, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
         this.makeShieldWithTag(AetherIIItems.GRAVITITE_SHIELD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_BOLT.get(), 1)
+                .define('S', AetherIIItems.SCATTERGLASS_SHARD)
+                .define('/', AetherIITags.Items.RODS_SKYROOT)
+                .define('F', Tags.Items.FEATHERS)
+                .pattern("  S")
+                .pattern(" / ")
+                .pattern("F  ")
+                .unlockedBy("has_scatterglass_shard", has(AetherIIItems.SCATTERGLASS_SHARD))
+                .save(consumer);
 
         // Armor
         this.makeHelmet(AetherIIItems.TAEGORE_HIDE_HELMET, AetherIIItems.TAEGORE_HIDE).save(consumer);

@@ -6,7 +6,7 @@
     "foliage_color": 11665355,
     "grass_color": 13238225,
     "music": {
-      "max_delay": 1200,
+      "max_delay": 2400,
       "min_delay": 600,
       "replace_current_music": false,
       "sound": "aether_ii:music.aether"
@@ -36,7 +36,9 @@
       "aether_ii:ore_arkenium",
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
-      "aether_ii:ore_holystone_quartz"
+      "aether_ii:ore_holystone_quartz",
+      "aether_ii:ore_corrobonite",
+      "aether_ii:ore_glint"
     ],
     [],
     [

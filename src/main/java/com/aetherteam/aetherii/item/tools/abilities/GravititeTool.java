@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.item.tools.abilities;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.EquipmentAbilitiesAttachment;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -23,27 +25,31 @@ public interface GravititeTool {
         Player player = context.getPlayer();
         InteractionHand hand = context.getHand();
         if (itemStack.getItem() instanceof TieredItem tieredItem) {
-            if (player != null) { //todo account for stripping and other block interactions
-                if (blockState.getMenuProvider(level, blockPos) == null || player.isShiftKeyDown()) {
+            if (player != null && player.isShiftKeyDown()) {
+                if (blockState.getMenuProvider(level, blockPos) == null) {
                     if ((itemStack.getDestroySpeed(blockState) == tieredItem.getTier().getSpeed() || itemStack.isCorrectToolForDrops(blockState))) {
                         if (blockState.getDestroySpeed(level, blockPos) >= 0.0F && !blockState.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF) && !blockState.is(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST)) {
-                            if (!level.isClientSide()) {
-                                HoveringBlockEntity floatingBlockEntity = new HoveringBlockEntity(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, blockState);
-                                if (blockState.hasBlockEntity()) {
-                                    BlockEntity blockEntity = level.getBlockEntity(blockPos);
-                                    if (blockEntity != null) {
-                                        floatingBlockEntity.blockData = blockEntity.saveWithoutMetadata(level.registryAccess());
+                            EquipmentAbilitiesAttachment attachment = player.getData(AetherIIDataAttachments.EQUIPMENT_ABILITIES);
+                            if (!attachment.isGravititeHoldingFloatingBlock()) {
+                                attachment.setGravititeHoldingFloatingBlock(true);
+                                if (!level.isClientSide()) {
+                                    HoveringBlockEntity floatingBlockEntity = new HoveringBlockEntity(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, blockState);
+                                    if (blockState.hasBlockEntity()) {
+                                        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+                                        if (blockEntity != null) {
+                                            floatingBlockEntity.blockData = blockEntity.saveWithoutMetadata(level.registryAccess());
+                                        }
                                     }
+                                    floatingBlockEntity.setHoldingPlayer(player);
+                                    level.addFreshEntity(floatingBlockEntity);
+                                    level.removeBlockEntity(blockPos);
+                                    level.removeBlock(blockPos, false);
+                                    itemStack.hurtAndBreak(4, player, LivingEntity.getSlotForHand(hand));
+                                } else {
+                                    player.swing(hand);
                                 }
-                                floatingBlockEntity.setHoldingPlayer(player);
-                                level.addFreshEntity(floatingBlockEntity);
-                                level.removeBlockEntity(blockPos);
-                                level.removeBlock(blockPos, false);
-                                itemStack.hurtAndBreak(4, player, LivingEntity.getSlotForHand(hand));
-                            } else {
-                                player.swing(hand);
+                                return true;
                             }
-                            return true;
                         }
                     }
                 }
