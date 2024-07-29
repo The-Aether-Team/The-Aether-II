@@ -153,7 +153,7 @@ public class AetherIIDensityFunctionBuilders {
         density = density.squeeze();
         return density;
     }
-
+  
     // Base Islands
     public static DensityFunction buildFactor(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate ridges = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES));
@@ -359,7 +359,6 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.mul(density, DensityFunctions.add(DensityFunctions.constant(0.5D), getFunction(function, AMPLIFICATION)));
         return density;
     }
-
 
     public static DensityFunction buildTopSlideShattered(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));

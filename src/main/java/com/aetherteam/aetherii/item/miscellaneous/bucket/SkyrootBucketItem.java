@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.miscellaneous.bucket;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.data.resources.BucketReplacement;
+import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -28,11 +28,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.neoforged.neoforge.event.EventHooks;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
 
 public class SkyrootBucketItem extends BucketItem {
     public final Fluid content;

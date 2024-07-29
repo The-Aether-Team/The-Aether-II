@@ -28,9 +28,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 
-//todo
-//  need to render the charm displays and "slots" around the item when inputted.
-
 public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> {
     private static final ResourceLocation TEXT_FIELD_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field");
     private static final ResourceLocation TEXT_FIELD_DISABLED_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field_disabled");

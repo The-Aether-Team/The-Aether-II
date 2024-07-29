@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
@@ -20,7 +21,7 @@ public class DamageSystemListener {
     public static void listen(IEventBus bus) {
         bus.addListener(DamageSystemListener::criticalHitTracking);
         bus.addListener(DamageSystemListener::hurtWithDamageTypes);
-        bus.addListener(DamageSystemListener::applyDamageTypeTooltips);
+        bus.addListener(EventPriority.LOW, DamageSystemListener::applyTooltips);
         bus.addListener(DamageSystemListener::blockIncomingAttack);
         bus.addListener(DamageSystemListener::tickPlayer);
     }
@@ -38,13 +39,15 @@ public class DamageSystemListener {
         event.getContainer().setNewDamage(DamageSystemHooks.getDamageTypeModifiedValue(target, source, damage));
     }
 
-    public static void applyDamageTypeTooltips(ItemTooltipEvent event) {
+    public static void applyTooltips(ItemTooltipEvent event) {
         Player player = event.getEntity();
         ItemStack itemStack = event.getItemStack();
         List<Component> itemTooltips = event.getToolTip();
-        DamageSystemHooks.addAbilityTooltips(itemStack, itemTooltips);
+        DamageSystemHooks.addAbilityTooltips(player, itemStack, itemTooltips);
         DamageSystemHooks.addDamageTypeTooltips(player, itemTooltips, itemStack);
         DamageSystemHooks.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
+        DamageSystemHooks.addShieldTooltips(itemTooltips, itemStack);
+        DamageSystemHooks.addGloveTooltips(player, itemTooltips, itemStack);
         DamageSystemHooks.addReinforcingTooltip(itemStack, itemTooltips);
     }
 

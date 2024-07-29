@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_scatterglass_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:scatterglass_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:scatterglass_bolt"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_scatterglass_shard"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:scatterglass_bolt"
+    ]
+  }
+}

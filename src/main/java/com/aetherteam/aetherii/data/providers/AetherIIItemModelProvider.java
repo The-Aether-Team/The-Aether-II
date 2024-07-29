@@ -46,6 +46,52 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                 .override().predicate(ResourceLocation.withDefaultNamespace("charged"), 1).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_bolt"))).end();
     }
 
+    public void dyedHelmetItem(Item item, String location) {
+        this.dyedStyledArmorItem(item, location, "helmet");
+    }
+
+    public void dyedChestplateItem(Item item, String location) {
+        this.dyedStyledArmorItem(item, location, "chestplate");
+    }
+
+    public void dyedLeggingsItem(Item item, String location) {
+        this.dyedStyledArmorItem(item, location, "leggings");
+    }
+
+    public void dyedBootsItem(Item item, String location) {
+        this.dyedStyledArmorItem(item, location, "boots");
+    }
+
+    public void dyedGlovesItem(Item item, String location) {
+        this.dyedStyledArmorItem(item, location, "gloves");
+    }
+
+    public void dyedStyledArmorItem(Item item, String location, String type) {
+        this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
+                .texture("layer0", this.modLoc("item/" + location + this.itemName(item)))
+                .texture("layer1", this.modLoc("item/" + location + this.itemName(item) + "_dyed"));
+    }
+
+    public void helmetItem(Item item, String location) {
+        this.styledArmorItem(item, location, "helmet");
+    }
+
+    public void chestplateItem(Item item, String location) {
+        this.styledArmorItem(item, location, "chestplate");
+    }
+
+    public void leggingsItem(Item item, String location) {
+        this.styledArmorItem(item, location, "leggings");
+    }
+
+    public void bootsItem(Item item, String location) {
+        this.styledArmorItem(item, location, "boots");
+    }
+
+    public void styledArmorItem(Item item, String location, String type) {
+        this.withExistingParent(this.itemName(item), this.mcLoc("item/generated")).texture("layer0", this.modLoc("item/" + location + this.itemName(item)));
+    }
+
     public void itemBlockGrass(Block block, String location) {
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated"))
                 .texture("layer0", this.texture(this.blockName(block) + "_1", location))

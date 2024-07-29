@@ -69,7 +69,7 @@ public class DimensionTeleportationListener {
     /**
      * @see DimensionTeleportationHooks#update(LivingEntity)
      */
-    public static void onPlayerUpdate(PlayerTickEvent.Post event) {
+    public static void onPlayerUpdate(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
         DimensionTeleportationHooks.update(player);
     }
