@@ -40,7 +40,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                     level,
                     config.block(),
                     new BlockPos(pos.getX(), pos.getY() + i + height + (int) radius, pos.getZ()),
-                    radius + i * shapeVariator(random, 0.05F),
+                    radius + i * BlockPlacementUtil.shapeVariator(random, 0.05F),
                     random,
                     true);
         }
@@ -101,7 +101,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                     level,
                     config.block(),
                     new BlockPos(pos.getX(), pos.getY() + i + (int) radius, pos.getZ()),
-                    radius + i * shapeVariator(random, 0.05F),
+                    radius + i * BlockPlacementUtil.shapeVariator(random, 0.05F),
                     random,
                     true);
         }
@@ -111,7 +111,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                     level,
                     config.block(),
                     new BlockPos(pos.getX(), pos.getY() + i + offset + (int) radius, pos.getZ()),
-                    radius + i * shapeVariator(random, 2F),
+                    radius + i * BlockPlacementUtil.shapeVariator(random, 2F),
                     random,
                     true);
         }
@@ -126,16 +126,5 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
 
         ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(AetherIIVegetationFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
         turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + (int) radius, pos.getZ()));
-    }
-
-    private float shapeVariator(RandomSource random, float value) {
-        if (random.nextInt(16) == 5) {
-            return value * 1.5F;
-        }
-        else if (random.nextInt(12) == 5) {
-            return value * 1.25F;
-        } else {
-            return value;
-        }
     }
 }
