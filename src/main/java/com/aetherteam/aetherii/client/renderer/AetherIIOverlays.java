@@ -54,9 +54,8 @@ public class AetherIIOverlays {
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
-            int screenWidth = minecraft.getWindow().getScreenWidth();
             if (player != null) {
-                renderEffects(minecraft, player, guiGraphics, screenWidth);
+                renderEffects(minecraft, player, guiGraphics);
             }
         });
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield_blocking"), (guiGraphics, partialTicks) -> {
@@ -90,7 +89,7 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void renderEffects(Minecraft minecraft, LocalPlayer player, GuiGraphics guiGraphics, int screenWidth) {
+    private static void renderEffects(Minecraft minecraft, LocalPlayer player, GuiGraphics guiGraphics) {
         Collection<EffectBuildupInstance> collection = minecraft.player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).getActiveBuildups().values();
         if (!collection.isEmpty()) {
             Screen $$4 = minecraft.screen;
@@ -106,7 +105,7 @@ public class AetherIIOverlays {
 
             for (EffectBuildupInstance buildup : Ordering.natural().reverse().sortedCopy(collection)) {
                 Holder<MobEffect> effect = buildup.getType();
-                int i = screenWidth;
+                int i = guiGraphics.guiWidth();
                 int j = 27;
                 if (minecraft.isDemo()) {
                     j += 15;
@@ -140,8 +139,8 @@ public class AetherIIOverlays {
                     float flashInterval = (Mth.cos((0.5F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
                     guiGraphics.setColor(1.0F, 1.0F, 1.0F, flashInterval);
                     guiGraphics.blitSprite(BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24);
-                    guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
                 }
+                guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
                 TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(effect);
                 int i1 = j;
@@ -150,6 +149,8 @@ public class AetherIIOverlays {
             }
 
             list.forEach(Runnable::run);
+
+            RenderSystem.disableBlend();
         }
     }
 
