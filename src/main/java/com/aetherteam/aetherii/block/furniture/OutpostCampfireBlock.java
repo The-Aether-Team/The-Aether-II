@@ -109,7 +109,7 @@ public class OutpostCampfireBlock extends MultiBlock {
                     var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
                     if (!data.getCampfirePositions().stream().map(OutpostTrackerAttachment.CampfirePosition::pos).collect(Collectors.toSet()).contains(origin)) {
                         data.addCampfirePosition(new OutpostTrackerAttachment.CampfirePosition(level.dimension(), pos));
-                        player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), true);
+                        player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), false);
                     }
 
                     Vec3 originVec = Vec3.atBottomCenterOf(origin);

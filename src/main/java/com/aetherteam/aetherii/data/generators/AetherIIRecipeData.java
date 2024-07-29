@@ -714,6 +714,16 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeCrossbowWithTag(AetherIIItems.GRAVITITE_CROSSBOW, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
         this.makeShieldWithTag(AetherIIItems.GRAVITITE_SHIELD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_BOLT.get(), 1)
+                .define('S', AetherIIItems.SCATTERGLASS_SHARD)
+                .define('/', AetherIITags.Items.RODS_SKYROOT)
+                .define('F', Tags.Items.FEATHERS)
+                .pattern("  S")
+                .pattern(" / ")
+                .pattern("F  ")
+                .unlockedBy("has_scatterglass_shard", has(AetherIIItems.SCATTERGLASS_SHARD))
+                .save(consumer);
+
         // Armor
         this.makeHelmet(AetherIIItems.TAEGORE_HIDE_HELMET, AetherIIItems.TAEGORE_HIDE).save(consumer);
         this.makeChestplate(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, AetherIIItems.TAEGORE_HIDE).save(consumer);

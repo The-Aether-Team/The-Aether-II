@@ -1,5 +1,5 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.tempest",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.tempest",
   "entity_type": "aether_ii:tempest",
   "icon_discovered": "aether_ii:guidebook/bestiary/tempest",
   "loot": [

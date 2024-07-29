@@ -31,9 +31,9 @@ public class AetherIISlotHandling implements UniqueSlotHandling.RegistrationCall
 
     @Override
     public void registerSlots(UniqueSlotHandling.UniqueSlotBuilderFactory factory) {
-        RELIC_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "relic_slot"), 2).slotPredicates(RELIC_PREDICATE).validTypes(EntityType.PLAYER).build();
-        HANDWEAR_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "handwear_slot"), 1).slotPredicates(HANDWEAR_PREDICATE).validTypes(EntityType.PLAYER).build();
-        ACCESSORY_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory_slot"), 1).slotPredicates(ACCESSORY_PREDICATE).validTypes(EntityType.PLAYER).build();
+        RELIC_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "relic_slot"), 2).slotPredicates(RELIC_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
+        HANDWEAR_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "handwear_slot"), 1).slotPredicates(HANDWEAR_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
+        ACCESSORY_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory_slot"), 1).slotPredicates(ACCESSORY_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
     }
 
     @Nullable

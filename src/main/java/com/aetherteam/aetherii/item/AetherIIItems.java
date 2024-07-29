@@ -8,12 +8,15 @@ import com.aetherteam.aetherii.item.combat.*;
 import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumHammerItem;
 import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumShortswordItem;
 import com.aetherteam.aetherii.item.combat.arkenium.ArkeniumSpearItem;
+import com.aetherteam.aetherii.item.combat.gravitite.GravititeCrossbowItem;
 import com.aetherteam.aetherii.item.combat.gravitite.GravititeHammerItem;
 import com.aetherteam.aetherii.item.combat.gravitite.GravititeShortswordItem;
 import com.aetherteam.aetherii.item.combat.gravitite.GravititeSpearItem;
+import com.aetherteam.aetherii.item.combat.holystone.HolystoneCrossbowItem;
 import com.aetherteam.aetherii.item.combat.holystone.HolystoneHammerItem;
 import com.aetherteam.aetherii.item.combat.holystone.HolystoneShortswordItem;
 import com.aetherteam.aetherii.item.combat.holystone.HolystoneSpearItem;
+import com.aetherteam.aetherii.item.combat.skyroot.SkyrootCrossbowItem;
 import com.aetherteam.aetherii.item.combat.skyroot.SkyrootHammerItem;
 import com.aetherteam.aetherii.item.combat.skyroot.SkyrootShortswordItem;
 import com.aetherteam.aetherii.item.combat.skyroot.SkyrootSpearItem;
@@ -26,6 +29,7 @@ import com.aetherteam.aetherii.item.materials.ArcticSnowballItem;
 import com.aetherteam.aetherii.item.materials.SkyrootPineconeItem;
 import com.aetherteam.aetherii.item.materials.SwetGelItem;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
+import com.aetherteam.aetherii.item.miscellaneous.BiomeMobSpawnEggItem;
 import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
 import com.aetherteam.aetherii.item.miscellaneous.TreasureItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
@@ -105,13 +109,13 @@ public class AetherIIItems {
     public static final DeferredItem<SwordItem> SKYROOT_SHORTSWORD = ITEMS.register("skyroot_shortsword", SkyrootShortswordItem::new);
     public static final DeferredItem<HammerItem> SKYROOT_HAMMER = ITEMS.register("skyroot_hammer", SkyrootHammerItem::new);
     public static final DeferredItem<SpearItem> SKYROOT_SPEAR = ITEMS.register("skyroot_spear", SkyrootSpearItem::new);
-    public static final DeferredItem<CrossbowItem> SKYROOT_CROSSBOW = ITEMS.register("skyroot_crossbow", () -> new AetherIICrossbowItem(AetherIIItemTiers.SKYROOT, new Item.Properties()));
+    public static final DeferredItem<CrossbowItem> SKYROOT_CROSSBOW = ITEMS.register("skyroot_crossbow", SkyrootCrossbowItem::new);
     public static final DeferredItem<ShieldItem> SKYROOT_SHIELD = ITEMS.register("skyroot_shield", () -> new AetherIIShieldItem(AetherIIItemTiers.SKYROOT, new Item.Properties().attributes(AetherIIShieldItem.createAttributes(100))));
 
     public static final DeferredItem<SwordItem> HOLYSTONE_SHORTSWORD = ITEMS.register("holystone_shortsword", HolystoneShortswordItem::new);
     public static final DeferredItem<HammerItem> HOLYSTONE_HAMMER = ITEMS.register("holystone_hammer", HolystoneHammerItem::new);
     public static final DeferredItem<SpearItem> HOLYSTONE_SPEAR = ITEMS.register("holystone_spear", HolystoneSpearItem::new);
-    public static final DeferredItem<CrossbowItem> HOLYSTONE_CROSSBOW = ITEMS.register("holystone_crossbow", () -> new AetherIICrossbowItem(AetherIIItemTiers.HOLYSTONE, new Item.Properties()));
+    public static final DeferredItem<CrossbowItem> HOLYSTONE_CROSSBOW = ITEMS.register("holystone_crossbow", HolystoneCrossbowItem::new);
     public static final DeferredItem<ShieldItem> HOLYSTONE_SHIELD = ITEMS.register("holystone_shield", () -> new AetherIIShieldItem(AetherIIItemTiers.HOLYSTONE, new Item.Properties().attributes(AetherIIShieldItem.createAttributes(80))));
 
     public static final DeferredItem<SwordItem> ZANITE_SHORTSWORD = ITEMS.register("zanite_shortsword", ZaniteShortswordItem::new);
@@ -129,7 +133,7 @@ public class AetherIIItems {
     public static final DeferredItem<SwordItem> GRAVITITE_SHORTSWORD = ITEMS.register("gravitite_shortsword", GravititeShortswordItem::new);
     public static final DeferredItem<HammerItem> GRAVITITE_HAMMER = ITEMS.register("gravitite_hammer", GravititeHammerItem::new);
     public static final DeferredItem<SpearItem> GRAVITITE_SPEAR = ITEMS.register("gravitite_spear", GravititeSpearItem::new);
-    public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = ITEMS.register("gravitite_crossbow", () -> new AetherIICrossbowItem(AetherIIItemTiers.GRAVITITE, new Item.Properties()));
+    public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = ITEMS.register("gravitite_crossbow", GravititeCrossbowItem::new);
     public static final DeferredItem<ShieldItem> GRAVITITE_SHIELD = ITEMS.register("gravitite_shield", () -> new AetherIIShieldItem(AetherIIItemTiers.GRAVITITE, new Item.Properties().attributes(AetherIIShieldItem.createAttributes(40))));
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = ITEMS.register("scatterglass_bolt", () -> new ScatterglassBoltItem(new Item.Properties()));
@@ -139,31 +143,31 @@ public class AetherIIItems {
     public static final DeferredItem<Item> TAEGORE_HIDE_CHESTPLATE = ITEMS.register("taegore_hide_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(5))));
     public static final DeferredItem<Item> TAEGORE_HIDE_LEGGINGS = ITEMS.register("taegore_hide_leggings", () -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(5))));
     public static final DeferredItem<Item> TAEGORE_HIDE_BOOTS = ITEMS.register("taegore_hide_boots", () -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(5))));
-    public static final DeferredItem<Item> TAEGORE_HIDE_GLOVES = ITEMS.register("taegore_hide_gloves", () -> new GlovesItem("taegore_hide_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> TAEGORE_HIDE_GLOVES = ITEMS.register("taegore_hide_gloves", () -> new GlovesItem(AetherIIArmorMaterials.TAEGORE_HIDE, "taegore_hide_gloves", new Item.Properties().durability(GlovesItem.getDurability(5))));
 
     public static final DeferredItem<Item> BURRUKAI_PELT_HELMET = ITEMS.register("burrukai_pelt_helmet", () -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(5))));
     public static final DeferredItem<Item> BURRUKAI_PELT_CHESTPLATE = ITEMS.register("burrukai_pelt_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(5))));
     public static final DeferredItem<Item> BURRUKAI_PELT_LEGGINGS = ITEMS.register("burrukai_pelt_leggings", () -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(5))));
     public static final DeferredItem<Item> BURRUKAI_PELT_BOOTS = ITEMS.register("burrukai_pelt_boots", () -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(5))));
-    public static final DeferredItem<Item> BURRUKAI_PELT_GLOVES = ITEMS.register("burrukai_pelt_gloves", () -> new GlovesItem("burrukai_pelt_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> BURRUKAI_PELT_GLOVES = ITEMS.register("burrukai_pelt_gloves", () -> new GlovesItem(AetherIIArmorMaterials.BURRUKAI_PELT, "burrukai_pelt_gloves", new Item.Properties().durability(GlovesItem.getDurability(5))));
 
     public static final DeferredItem<Item> ZANITE_HELMET = ITEMS.register("zanite_helmet", () -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))));
     public static final DeferredItem<Item> ZANITE_CHESTPLATE = ITEMS.register("zanite_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
     public static final DeferredItem<Item> ZANITE_LEGGINGS = ITEMS.register("zanite_leggings", () -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
     public static final DeferredItem<Item> ZANITE_BOOTS = ITEMS.register("zanite_boots", () -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
-    public static final DeferredItem<Item> ZANITE_GLOVES = ITEMS.register("zanite_gloves", () -> new GlovesItem("zanite_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> ZANITE_GLOVES = ITEMS.register("zanite_gloves", () -> new GlovesItem(AetherIIArmorMaterials.ZANITE, "zanite_gloves", new Item.Properties().durability(GlovesItem.getDurability(15))));
 
     public static final DeferredItem<Item> ARKENIUM_HELMET = ITEMS.register("arkenium_helmet", () -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(15))));
     public static final DeferredItem<Item> ARKENIUM_CHESTPLATE = ITEMS.register("arkenium_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(15))));
     public static final DeferredItem<Item> ARKENIUM_LEGGINGS = ITEMS.register("arkenium_leggings", () -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(15))));
     public static final DeferredItem<Item> ARKENIUM_BOOTS = ITEMS.register("arkenium_boots", () -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(15))));
-    public static final DeferredItem<Item> ARKENIUM_GLOVES = ITEMS.register("arkenium_gloves", () -> new GlovesItem("arkenium_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> ARKENIUM_GLOVES = ITEMS.register("arkenium_gloves", () -> new GlovesItem(AetherIIArmorMaterials.ARKENIUM, "arkenium_gloves", new Item.Properties().durability(GlovesItem.getDurability(15))));
 
     public static final DeferredItem<Item> GRAVITITE_HELMET = ITEMS.register("gravitite_helmet", () -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(33))));
     public static final DeferredItem<Item> GRAVITITE_CHESTPLATE = ITEMS.register("gravitite_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(33))));
     public static final DeferredItem<Item> GRAVITITE_LEGGINGS = ITEMS.register("gravitite_leggings", () -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(33))));
     public static final DeferredItem<Item> GRAVITITE_BOOTS = ITEMS.register("gravitite_boots", () -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(33))));
-    public static final DeferredItem<Item> GRAVITITE_GLOVES = ITEMS.register("gravitite_gloves", () -> new GlovesItem("gravitite_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> GRAVITITE_GLOVES = ITEMS.register("gravitite_gloves", () -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, "gravitite_gloves", new Item.Properties().durability(GlovesItem.getDurability(33))));
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = ITEMS.register("skyroot_stick", () -> new Item(new Item.Properties()));
@@ -240,15 +244,15 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SHEEPUFF_SPAWN_EGG = ITEMS.register("sheepuff_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.SHEEPUFF, 0xE8F0F8, 0xA6D4FF, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> PHYG_SPAWN_EGG = ITEMS.register("phyg_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.PHYG, 0xF7A6B1, 0xFFDD61, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> AERBUNNY_SPAWN_EGG = ITEMS.register("aerbunny_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.AERBUNNY, 0xE8F7FF, 0xFFD6F9, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> HIGHFIELDS_TAEGORE_SPAWN_EGG = ITEMS.register("highfields_taegore_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_TAEGORE, 0xB2CCF2, 0xFFDE96, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> MAGNETIC_TAEGORE_SPAWN_EGG = ITEMS.register("magnetic_taegore_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.MAGNETIC_TAEGORE, 0x9DC2BE, 0xDBAD88, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> ARCTIC_TAEGORE_SPAWN_EGG = ITEMS.register("arctic_taegore_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.ARCTIC_TAEGORE, 0x797D97, 0xDEDEDE, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> HIGHFIELDS_BURRUKAI_SPAWN_EGG = ITEMS.register("highfields_burrukai_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, 0x4E7EA8, 0x6C7080, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> MAGNETIC_BURRUKAI_SPAWN_EGG = ITEMS.register("magnetic_burrukai_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.MAGNETIC_BURRUKAI, 0x858071, 0x4C5667, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> ARCTIC_BURRUKAI_SPAWN_EGG = ITEMS.register("arctic_burrukai_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.ARCTIC_BURRUKAI, 0x786491, 0xB5C1E8, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> HIGHFIELDS_KIRRID_SPAWN_EGG = ITEMS.register("highfields_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_KIRRID, 0xADA896, 0xFFD787, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> MAGNETIC_KIRRID_SPAWN_EGG = ITEMS.register("magnetic_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.MAGNETIC_KIRRID, 0x8788AF, 0xB1E0DC, new Item.Properties()));
-    public static final DeferredItem<SpawnEggItem> ARCTIC_KIRRID_SPAWN_EGG = ITEMS.register("arctic_kirrid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.ARCTIC_KIRRID, 0xC3C1BE, 0xAD9078, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> HIGHFIELDS_TAEGORE_SPAWN_EGG = ITEMS.register("highfields_taegore_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_TAEGORE, "highfields", 0xB2CCF2, 0xFFDE96, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> MAGNETIC_TAEGORE_SPAWN_EGG = ITEMS.register("magnetic_taegore_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.MAGNETIC_TAEGORE, "magnetic", 0x9DC2BE, 0xDBAD88, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> ARCTIC_TAEGORE_SPAWN_EGG = ITEMS.register("arctic_taegore_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.ARCTIC_TAEGORE, "arctic", 0x797D97, 0xDEDEDE, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> HIGHFIELDS_BURRUKAI_SPAWN_EGG = ITEMS.register("highfields_burrukai_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, "highfields", 0x4E7EA8, 0x6C7080, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> MAGNETIC_BURRUKAI_SPAWN_EGG = ITEMS.register("magnetic_burrukai_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.MAGNETIC_BURRUKAI, "magnetic", 0x858071, 0x4C5667, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> ARCTIC_BURRUKAI_SPAWN_EGG = ITEMS.register("arctic_burrukai_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.ARCTIC_BURRUKAI, "arctic", 0x786491, 0xB5C1E8, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> HIGHFIELDS_KIRRID_SPAWN_EGG = ITEMS.register("highfields_kirrid_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.HIGHFIELDS_KIRRID, "highfields", 0xADA896, 0xFFD787, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> MAGNETIC_KIRRID_SPAWN_EGG = ITEMS.register("magnetic_kirrid_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.MAGNETIC_KIRRID, "magnetic", 0x8788AF, 0xB1E0DC, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> ARCTIC_KIRRID_SPAWN_EGG = ITEMS.register("arctic_kirrid_spawn_egg", () -> new BiomeMobSpawnEggItem(AetherIIEntityTypes.ARCTIC_KIRRID, "arctic", 0xC3C1BE, 0xAD9078, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> MOA_SPAWN_EGG = ITEMS.register("moa_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.MOA, 0x91B2DB, 0xE8FCFF, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> SKYROOT_LIZARD_SPAWN_EGG = ITEMS.register("skyroot_lizard_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.SKYROOT_LIZARD, 0x595844, 0xD1F79E, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> AECHOR_PLANT_SPAWN_EGG = ITEMS.register("aechor_plant_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.AECHOR_PLANT, 0xCF95E2, 0x7477AB, new Item.Properties()));

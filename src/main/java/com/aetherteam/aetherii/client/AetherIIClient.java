@@ -81,10 +81,9 @@ public class AetherIIClient {
         registerShieldProperties(AetherIIItems.GRAVITITE_SHIELD.get());
     }
 
-    private static void registerCrossbowProperties(Item item) { //todo: crossbow needs porting
-//        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"), (stack, level, livingEntity, value) ->
-//                livingEntity == null ? 0.0F : AetherIICrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / (float) AetherIICrossbowItem.getCrossbowChargeDuration(stack));
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"), (stack, level, livingEntity, value) ->0.0F);
+    private static void registerCrossbowProperties(Item item) {
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"), (stack, level, livingEntity, value) ->
+                livingEntity == null ? 0.0F : AetherIICrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / (float) ((AetherIICrossbowItem) stack.getItem()).getCrossbowChargeDuration(stack, livingEntity));
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pulling"), (stack, level, livingEntity, value) ->
                 livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"), (stack, level, livingEntity, value) ->

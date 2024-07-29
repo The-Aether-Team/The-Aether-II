@@ -2,24 +2,32 @@ package com.aetherteam.aetherii.event.hooks.attachment;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
+import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageInflictions;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
+import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.EquipmentUtil;
 import com.aetherteam.aetherii.item.ReinforcementTier;
 import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
+import com.aetherteam.aetherii.item.combat.GlovesItem;
 import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
+import io.wispforest.accessories.api.AccessoriesAPI;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -27,11 +35,15 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.common.Tags;
@@ -47,7 +59,6 @@ public class DamageSystemHooks {
 
     public static float getDamageTypeModifiedValue(Entity target, DamageSource source, double damage) {
         if (source.typeHolder().is(AetherIITags.DamageTypes.TYPED)) {
-            RegistryAccess registryAccess = target.level().registryAccess();
             Entity sourceEntity = source.getDirectEntity();
             ItemStack sourceStack = ItemStack.EMPTY;
 
@@ -58,16 +69,19 @@ public class DamageSystemHooks {
             }
 
             if (!sourceStack.isEmpty()) {
-                double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, sourceStack);
-                double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, sourceStack);
-                double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, sourceStack);
+                DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(sourceStack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
+                DamageResistance resistance = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(target.getType()).getData(AetherIIDataMaps.DAMAGE_RESISTANCE);
 
-                double slashDefense = AetherIIDamageResistances.getSlashDefense(registryAccess, target);
-                double impactDefense = AetherIIDamageResistances.getImpactDefense(registryAccess, target);
-                double pierceDefense = AetherIIDamageResistances.getPierceDefense(registryAccess, target);
+                if (resistance != null) {
+                    double slashDefense = resistance.slashValue();
+                    double impactDefense = resistance.impactValue();
+                    double pierceDefense = resistance.pierceValue();
 
-                if (AetherIIDamageResistances.hasEntity(registryAccess, target)) {
-                    if (AetherIIDamageInflictions.hasItem(registryAccess, sourceStack)) {
+                    if (infliction != null) {
+                        double slashDamage =  infliction.slashValue();
+                        double impactDamage = infliction.impactValue();
+                        double pierceDamage = infliction.pierceValue();
+
                         if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
                             Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
                             slashDamage += damages.getLeft();
@@ -92,8 +106,8 @@ public class DamageSystemHooks {
                             player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).setCriticalDamageModifier(1.0F);
                         }
                     } else {
-                        double resistance = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
-                        damage = Math.max(damage - resistance, 1.0F);
+                        double defense = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
+                        damage = Math.max(damage - defense, 1.0F);
                     }
                 }
             }
@@ -114,19 +128,37 @@ public class DamageSystemHooks {
         }
     }
 
-    public static void addAbilityTooltips(ItemStack stack, List<Component> components) {
+    public static void addAbilityTooltips(Player player, ItemStack stack, List<Component> components) {
         for (int i = 1; i <= 5; i++) {
             String string = stack.getDescriptionId() + "." + AetherII.MODID + ".ability.tooltip." + i;
             if (I18n.exists(string)) {
-                components.add(i, Component.translatable(string));
+                if (player != null && (stack.getItem() instanceof ArmorItem || stack.getItem() instanceof GlovesItem) && Component.translatable(string).getString().contains("%s")) {
+                    Holder<ArmorMaterial> material = null;
+                    if (stack.getItem() instanceof ArmorItem armorItem) {
+                        material = armorItem.getMaterial();
+                    } else if (stack.getItem() instanceof GlovesItem glovesItem) {
+                        material = glovesItem.getMaterial();
+                    }
+                    if (material != null) {
+                        int currentEquipmentCount = EquipmentUtil.getArmorCount(player, material);
+                        Component component;
+                        if (currentEquipmentCount >= 3) {
+                            component = Component.literal("3/3").withStyle(ChatFormatting.WHITE);
+                        } else {
+                            component = Component.literal(currentEquipmentCount + "/3").withStyle(ChatFormatting.GRAY);
+                        }
+                        components.add(i, Component.translatable(string, component));
+                    }
+                } else {
+                    components.add(i, Component.translatable(string));
+                }
             }
         }
     }
 
     public static void addDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {
-        if (player != null) {
-            RegistryAccess registryAccess = player.level().registryAccess();
-
+        DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
+        if (player != null && infliction != null) {
             int position = components.size();
             Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.value().getDescriptionId());
             for (int i = 0; i < position; i++) {
@@ -136,9 +168,9 @@ public class DamageSystemHooks {
                     break;
                 }
             }
-            double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, stack);
-            double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, stack);
-            double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, stack);
+            double slashDamage =  infliction.slashValue();
+            double impactDamage = infliction.impactValue();
+            double pierceDamage = infliction.pierceValue();
 
             addDamageTypeTooltip(components, position, slashDamage, "slash");
             addDamageTypeTooltip(components, position, impactDamage, "impact");
@@ -154,12 +186,13 @@ public class DamageSystemHooks {
     }
 
     public static void addBonusDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {
-        if (player != null) {
+        DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
+        if (player != null && infliction != null) {
             RegistryAccess registryAccess = player.level().registryAccess();
             if (stack.getItem() instanceof UniqueDamage uniqueDamage) {
-                double slashDamage = AetherIIDamageInflictions.getSlashDamage(registryAccess, stack) - 1;
-                double impactDamage = AetherIIDamageInflictions.getImpactDamage(registryAccess, stack) - 1;
-                double pierceDamage = AetherIIDamageInflictions.getPierceDamage(registryAccess, stack) - 1;
+                double slashDamage =  infliction.slashValue() - 1;
+                double impactDamage = infliction.impactValue() - 1;
+                double pierceDamage = infliction.pierceValue() - 1;
 
                 Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(stack, slashDamage, impactDamage, pierceDamage);
                 slashDamage = damages.getLeft();
@@ -193,6 +226,60 @@ public class DamageSystemHooks {
         }
     }
 
+    public static void addShieldTooltips(List<Component> components, ItemStack stack) {
+        if (stack.getItem() instanceof AetherIIShieldItem) {
+            int useTooltip = components.size() - 1;
+            int attributeTooltip = components.size() - 1;
+
+            Component useText = Component.translatable("item.modifiers." + EquipmentSlotGroup.HAND.getSerializedName());
+            Component attributeText = Component.translatable(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.value().getDescriptionId());
+
+            for (int i = components.size() - 1; i >= 0; i--) {
+                Component component = components.get(i);
+                if (component.getString().contains(useText.getString())) {
+                    useTooltip = i;
+                }
+                if (component.getString().contains(attributeText.getString())) {
+                    attributeTooltip = i;
+                }
+            }
+            int value = 0;
+            for (ItemAttributeModifiers.Entry entry : stack.getAttributeModifiers().modifiers()) {
+                if (entry.modifier().is(AetherIIShieldItem.BASE_SHIELD_STAMINA_REDUCTION_ID)) {
+                    value = (int) ((entry.modifier().amount() / DamageSystemAttachment.MAX_SHIELD_STAMINA) * 100);
+                }
+            }
+            components.remove(useTooltip);
+            components.add(useTooltip, Component.translatable("aether_ii.tooltip.item.modifiers.blocking").withStyle(ChatFormatting.GRAY));
+            components.remove(attributeTooltip);
+            components.add(attributeTooltip, CommonComponents.space().append(Component.translatable("attribute.modifier.equals.0", value + "%", Component.translatable(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.value().getDescriptionId())).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
+        }
+    }
+
+    public static void addGloveTooltips(Player player, List<Component> components, ItemStack stack) {
+        if (stack.getItem() instanceof GlovesItem) {
+            int attributeTooltip = components.size() - 1;
+
+            Component attributeText = Component.translatable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.value().getDescriptionId());
+
+            for (int i = components.size() - 1; i >= 0; i--) {
+                Component component = components.get(i);
+                if (component.getString().contains(attributeText.getString())) {
+                    attributeTooltip = i;
+                }
+            }
+
+            int value = 0;
+            for (AttributeModifier entry : AccessoriesAPI.getAttributeModifiers(stack, player, AetherIISlotHandling.getHandwearSlotType().slotName(), 0).getAttributeModifiers(false).values()) {
+                if (entry.id().getPath().contains(HandwearAccessory.BASE_GLOVES_STAMINA_RESTORATION_ID.getNamespace())) {
+                    value = (int) ((entry.amount() / DamageSystemAttachment.MAX_SHIELD_STAMINA) * 100);
+                }
+            }
+            components.remove(attributeTooltip);
+            components.add(attributeTooltip, Component.empty().append(Component.translatable("attribute.modifier.equals.0", "+" + value + "%", Component.translatable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.value().getDescriptionId())).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
+        }
+    }
+
     public static void addReinforcingTooltip(ItemStack stack, List<Component> components) {
         ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
         if (tier != null) {
@@ -211,11 +298,11 @@ public class DamageSystemHooks {
 
     public static void buildUpShieldStun(LivingEntity entity, DamageSource source) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
-            if (source.getEntity() != null) { //todo check for aether hostile mobs only or something idk
+            if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) {
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
-                if (entity.getUseItem().getItem() instanceof AetherIIShieldItem shield) {
-                    rate = (int) player.getAttribute(AetherIIAttributes.SHIELD_STAMINA_RESTORATION).getValue();
+                if (entity.getUseItem().getItem() instanceof AetherIIShieldItem) {
+                    rate = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_REDUCTION);
                 }
                 attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, attachment.getShieldStamina() - rate));
                 if (attachment.getShieldStamina() <= 0) {
@@ -231,11 +318,10 @@ public class DamageSystemHooks {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
             if (player.tickCount % 5 == 0) {
                 if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
-                    int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION);
-                    if (player.isBlocking()) {
-                        restore /= 4;
+                    if (!player.isBlocking()) {
+                        int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION);
+                        attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + restore));
                     }
-                    attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + restore));
                 }
             }
         }
