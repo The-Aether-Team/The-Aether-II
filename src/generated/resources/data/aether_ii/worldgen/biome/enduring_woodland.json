@@ -34,7 +34,6 @@
     [],
     [],
     [
-      "aether_ii:ore_arctic_packed_ice",
       "aether_ii:ore_scatterglass",
       "aether_ii:ore_agiosite",
       "aether_ii:ore_icestone",
@@ -44,7 +43,8 @@
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
       "aether_ii:ore_holystone_quartz",
-      "aether_ii:ore_corrobonite"
+      "aether_ii:ore_corrobonite",
+      "aether_ii:ore_glint"
     ],
     [],
     [],

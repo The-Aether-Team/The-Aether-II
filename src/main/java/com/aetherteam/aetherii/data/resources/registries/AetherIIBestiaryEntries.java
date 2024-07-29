@@ -67,6 +67,17 @@ public class AetherIIBestiaryEntries {
             Map.entry(TEMPEST, AetherIIEntityTypes.TEMPEST),
             Map.entry(COCKATRICE, AetherIIEntityTypes.COCKATRICE)
     );
+    public static final List<Holder<EntityType<?>>> NAMED = List.of(
+            AetherIIEntityTypes.HIGHFIELDS_TAEGORE,
+            AetherIIEntityTypes.MAGNETIC_TAEGORE,
+            AetherIIEntityTypes.ARCTIC_TAEGORE,
+            AetherIIEntityTypes.HIGHFIELDS_BURRUKAI,
+            AetherIIEntityTypes.MAGNETIC_BURRUKAI,
+            AetherIIEntityTypes.ARCTIC_BURRUKAI,
+            AetherIIEntityTypes.HIGHFIELDS_KIRRID,
+            AetherIIEntityTypes.MAGNETIC_KIRRID,
+            AetherIIEntityTypes.ARCTIC_KIRRID
+    );
     public static final Map<Holder<EntityType<?>>, List<BestiaryEntry.LootDisplay>> LOOT = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.FLYING_COW, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.BURRUKAI_RIB_CUT, 1.0, 1, 2))),
             Map.entry(AetherIIEntityTypes.SHEEPUFF, List.of(BestiaryEntry.LootDisplay.item(AetherIIItems.KIRRID_LOIN, 1.0, 1, 2), BestiaryEntry.LootDisplay.block(AetherIIBlocks.WHITE_CLOUDWOOL, 1.0, 1, 1))),
@@ -112,6 +123,14 @@ public class AetherIIBestiaryEntries {
         for (Map.Entry<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> entry : ENTITIES.entrySet()) {
             Holder<EntityType<?>> holder = entry.getValue();
             EntityType<?> entity = holder.value();
+            Optional<String> name = Optional.empty();
+            Optional<String> slotName = Optional.empty();
+            Optional<String> slotSubtitle = Optional.empty();
+            if (NAMED.contains(holder)) {
+                name = Optional.of("aether_ii.guidebook_bestiary.name.entity.aether_ii." + entity.toShortString());
+                slotName = Optional.of("aether_ii.guidebook_bestiary.slot_name.entity.aether_ii." + entity.toShortString());
+                slotSubtitle = Optional.of("aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii." + entity.toShortString());
+            }
             List<BestiaryEntry.LootDisplay> loot = new ArrayList<>();
             if (LOOT.containsKey(holder)) {
                 loot.addAll(LOOT.get(holder));
@@ -124,7 +143,10 @@ public class AetherIIBestiaryEntries {
             ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entity.toShortString()).withPrefix(path);
             context.register(entry.getKey(), new BestiaryEntry(holder,
                     ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString()),
-                    "aether_ii.guidebook_bestiary.entity.aether_ii." + entity.toShortString(),
+                    name,
+                    slotName,
+                    slotSubtitle,
+                    "aether_ii.guidebook_bestiary.description.entity.aether_ii." + entity.toShortString(),
                     loot,
                     food,
                     observeId,

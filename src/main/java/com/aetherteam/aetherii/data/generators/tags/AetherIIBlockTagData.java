@@ -182,6 +182,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.MOA_HATCH_BLOCK).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
         );
+        this.tag(AetherIITags.Blocks.HOLYSTONE_ABILITY_GUARANTEED).addTag(Tags.Blocks.ORES);
         this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).addTags(
                 BlockTags.BUTTONS,
                 BlockTags.PRESSURE_PLATES,
@@ -473,6 +474,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.GLINT_ORE.get(),
                 AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
@@ -720,6 +722,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ICESTONE_SLAB.get(),
                 AetherIIBlocks.ICESTONE_WALL.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.GLINT_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get()
         );
@@ -743,6 +746,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
                 AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.GLINT_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(),
@@ -798,13 +802,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBROSIUM_ORE.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
-                AetherIIBlocks.GRAVITITE_ORE.get()
+                AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.GLINT_ORE.get()
         );
         this.tag(Tags.Blocks.ORES).add(
                 AetherIIBlocks.AMBROSIUM_ORE.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
                 AetherIIBlocks.ARKENIUM_ORE.get(),
-                AetherIIBlocks.GRAVITITE_ORE.get()
+                AetherIIBlocks.GRAVITITE_ORE.get(),
+                AetherIIBlocks.GLINT_ORE.get()
         );
         this.tag(Tags.Blocks.STONES).addTag(AetherIITags.Blocks.HOLYSTONE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(

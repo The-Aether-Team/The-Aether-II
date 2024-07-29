@@ -40,6 +40,7 @@ public class AetherIITags {
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
         public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");
 
+        public static final TagKey<Block> HOLYSTONE_ABILITY_GUARANTEED = tag("holystone_ability_guaranteed");
         public static final TagKey<Block> GRAVITITE_ABILITY_BLACKLIST = tag("gravitite_ability_blacklist");
 
         private static TagKey<Block> tag(String name) {
@@ -127,6 +128,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> BURRUKAI = tag("burrukai");
         public static final TagKey<EntityType<?>> KIRRID = tag("kirrid");
 
+        public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
 
@@ -148,6 +150,12 @@ public class AetherIITags {
     }
 
     public static class Biomes {
+        public static final TagKey<Biome> HIGHFIELDS = tag("highfields");
+        public static final TagKey<Biome> MAGNETIC = tag("magnetic");
+        public static final TagKey<Biome> ARCTIC = tag("arctic");
+        public static final TagKey<Biome> IRRADIATED = tag("irradiated");
+        public static final TagKey<Biome> EXPANSE = tag("expanse");
+
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
 
         public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");

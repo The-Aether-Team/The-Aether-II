@@ -20,6 +20,26 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
     @SuppressWarnings("unchecked")
     @Override
     public void addTags(HolderLookup.Provider provider) {
+        this.tag(AetherIITags.Biomes.HIGHFIELDS).add(
+                AetherIIBiomes.FLOURISHING_FIELD,
+                AetherIIBiomes.VERDANT_WOODS,
+                AetherIIBiomes.SHROUDED_FOREST,
+                AetherIIBiomes.SHIMMERING_BASIN);
+        this.tag(AetherIITags.Biomes.MAGNETIC).add(
+                AetherIIBiomes.MAGNETIC_SCAR,
+                AetherIIBiomes.TURQUOISE_FOREST,
+                AetherIIBiomes.GLISTENING_SWAMP,
+                AetherIIBiomes.VIOLET_HIGHWOODS);
+        this.tag(AetherIITags.Biomes.ARCTIC).add(
+                AetherIIBiomes.FRIGID_SIERRA,
+                AetherIIBiomes.ENDURING_WOODLAND,
+                AetherIIBiomes.FROZEN_LAKES,
+                AetherIIBiomes.SHEER_TUNDRA);
+        this.tag(AetherIITags.Biomes.IRRADIATED).add(
+                AetherIIBiomes.CONTAMINATED_JUNGLE,
+                AetherIIBiomes.BATTLEGROUND_WASTES);
+        this.tag(AetherIITags.Biomes.EXPANSE).add(AetherIIBiomes.EXPANSE);
+
         this.tag(AetherIITags.Biomes.MYCELIUM_CONVERSION).add(Biomes.MUSHROOM_FIELDS);
         this.tag(AetherIITags.Biomes.PODZOL_CONVERSION).add(
                 Biomes.OLD_GROWTH_PINE_TAIGA,

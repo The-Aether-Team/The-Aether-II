@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.entity.block;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.EquipmentAbilitiesAttachment;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -31,6 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class HoveringBlockEntity extends Entity {
     private static final EntityDataAccessor<Integer> DATA_OWNER_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.INT);
@@ -71,7 +74,7 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    public void tick() { //todo figure out how to not have these get stuck on non falling blocks like slabs and deal with replaceables etc.
+    public void tick() {
         Entity holdingPlayer = this.getHoldingPlayer();
         if (this.held) {
             if (holdingPlayer != null) {
@@ -88,6 +91,10 @@ public class HoveringBlockEntity extends Entity {
                 this.markShouldSettle();
             }
         } else {
+            if (holdingPlayer != null) {
+                EquipmentAbilitiesAttachment attachment = holdingPlayer.getData(AetherIIDataAttachments.EQUIPMENT_ABILITIES);
+                attachment.setGravititeHoldingFloatingBlock(false);
+            }
             if (this.verticalCollision || this.horizontalCollision || this.onGround()) {
                 this.markShouldSettle();
             }
@@ -137,7 +144,12 @@ public class HoveringBlockEntity extends Entity {
 
     private void markShouldSettle() {
         if (this.targetSettlePosition == null) {
-            this.targetSettlePosition = this.blockPosition().getCenter().subtract(0, 0.5, 0);
+            Optional<BlockPos> newPos = BlockPos.findClosestMatch(this.blockPosition(), 1, 1, (pos) -> this.level().getBlockState(pos).getCollisionShape(this.level(), pos).isEmpty());
+            Vec3 targetPos = this.blockPosition().getCenter().subtract(0, 0.5, 0);
+            if (newPos.isPresent()) {
+                targetPos = newPos.get().getCenter().subtract(0, 0.5, 0);
+            }
+            this.targetSettlePosition = targetPos;
         }
     }
 
@@ -147,7 +159,13 @@ public class HoveringBlockEntity extends Entity {
         this.setDeltaMovement(motion);
         if (this.position().distanceTo(this.targetSettlePosition) <= 0.001) {
             if (!this.level().isClientSide()) {
-                if (this.level().setBlock(this.blockPosition(), this.blockState, 2)) {
+                BlockState levelState = this.level().getBlockState(this.blockPosition());
+                if (!levelState.isAir()) {
+                    this.level().destroyBlock(this.blockPosition(), true);
+                }
+                this.level().setBlock(this.blockPosition(), this.blockState, 2);
+                levelState = this.level().getBlockState(this.blockPosition());
+                if (levelState.is(this.getBlockState().getBlock())) {
                     if (this.blockData != null && this.getBlockState().hasBlockEntity()) {
                         BlockEntity blockEntity = this.level().getBlockEntity(this.blockPosition());
                         if (blockEntity != null) {

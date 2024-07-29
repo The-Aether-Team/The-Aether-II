@@ -103,7 +103,7 @@ public class GuidebookDiscoveryAttachment {
             }
         }
         if (this.sync) {
-            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Icons.BESTIARY, "gui.aether_ii.toast.guidebook.bestiary", "gui.aether_ii.toast.guidebook.description"));
+            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, GuidebookToast.Icons.BESTIARY));
         }
     }
 

@@ -1,5 +1,5 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.cockatrice",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.cockatrice",
   "entity_type": "aether_ii:cockatrice",
   "icon_discovered": "aether_ii:guidebook/bestiary/cockatrice",
   "loot": [

@@ -1,0 +1,79 @@
+{
+  "values": {
+    "aether_ii:arkenium_hammer": {
+      "impact_value": 6.0,
+      "pierce_value": 0.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:arkenium_shortsword": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": 6.0
+    },
+    "aether_ii:arkenium_spear": {
+      "impact_value": 0.0,
+      "pierce_value": 6.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:gravitite_hammer": {
+      "impact_value": 7.0,
+      "pierce_value": 0.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:gravitite_shortsword": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": 7.0
+    },
+    "aether_ii:gravitite_spear": {
+      "impact_value": 0.0,
+      "pierce_value": 7.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:holystone_hammer": {
+      "impact_value": 5.0,
+      "pierce_value": 0.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:holystone_shortsword": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": 5.0
+    },
+    "aether_ii:holystone_spear": {
+      "impact_value": 0.0,
+      "pierce_value": 5.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:skyroot_hammer": {
+      "impact_value": 4.0,
+      "pierce_value": 0.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:skyroot_shortsword": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": 4.0
+    },
+    "aether_ii:skyroot_spear": {
+      "impact_value": 0.0,
+      "pierce_value": 4.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:zanite_hammer": {
+      "impact_value": 6.0,
+      "pierce_value": 0.0,
+      "slash_value": 0.0
+    },
+    "aether_ii:zanite_shortsword": {
+      "impact_value": 0.0,
+      "pierce_value": 0.0,
+      "slash_value": 6.0
+    },
+    "aether_ii:zanite_spear": {
+      "impact_value": 0.0,
+      "pierce_value": 6.0,
+      "slash_value": 0.0
+    }
+  }
+}

@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.inventory.menu.GuidebookEquipmentMenu;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -77,6 +79,10 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
 
         guiGraphics.blitSprite(Guidebook.ARMOR_SPRITE, x, y + 35, 16, 16);
         guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 18, y + 40, 16777215, true);
+
+        var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
+        guiGraphics.renderItem(AetherIIItems.GLINT_COIN.toStack(), x + 68, y + 95);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf(data.getAmount())), x + 85, y + 99, 16777215, true);
     }
 
     @Override

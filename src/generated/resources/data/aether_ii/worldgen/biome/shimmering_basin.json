@@ -30,7 +30,6 @@
     [],
     [
       "aether_ii:ore_scatterglass",
-      "aether_ii:ore_mossy_holystone",
       "aether_ii:ore_agiosite",
       "aether_ii:ore_icestone_small",
       "aether_ii:ore_ambrosium",
@@ -39,7 +38,8 @@
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
       "aether_ii:ore_holystone_quartz",
-      "aether_ii:ore_corrobonite"
+      "aether_ii:ore_corrobonite",
+      "aether_ii:ore_glint"
     ],
     [
       "aether_ii:skyroot_twigs",
