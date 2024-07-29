@@ -1,9 +1,11 @@
 {
-  "feature": "aether_ii:ferrosite_pillar",
+  "feature": "aether_ii:arctic_ice_spike_variants",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 1
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 200.0,
+      "noise_offset": 0.0,
+      "noise_to_count_ratio": 10
     },
     {
       "type": "minecraft:in_square"
@@ -13,7 +15,7 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 200
+          "absolute": 224
         },
         "min_inclusive": {
           "absolute": 128
@@ -23,13 +25,16 @@
     {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
-        "type": "minecraft:matching_block_tag",
+        "type": "minecraft:matching_blocks",
+        "blocks": [
+          "aether_ii:aether_grass_block",
+          "aether_ii:arctic_snow_block"
+        ],
         "offset": [
           0,
           -1,
           0
-        ],
-        "tag": "aether_ii:aether_dirt"
+        ]
       }
     },
     {
