@@ -17,11 +17,18 @@
       "type": "minecraft:mul",
       "argument1": {
         "type": "minecraft:range_choice",
-        "input": "aether_ii:highlands/temperature",
-        "max_exclusive": 1.5,
-        "min_inclusive": -0.4,
-        "when_in_range": "aether_ii:highlands/terrain/base/sloper",
-        "when_out_of_range": "aether_ii:highlands/terrain/arctic/sloper_arctic"
+        "input": "aether_ii:highlands/erosion",
+        "max_exclusive": 0.55,
+        "min_inclusive": 0.0,
+        "when_in_range": {
+          "type": "minecraft:range_choice",
+          "input": "aether_ii:highlands/temperature",
+          "max_exclusive": 1.5,
+          "min_inclusive": -0.4,
+          "when_in_range": "aether_ii:highlands/terrain/base/sloper",
+          "when_out_of_range": "aether_ii:highlands/terrain/arctic/sloper_arctic"
+        },
+        "when_out_of_range": "aether_ii:highlands/terrain/base/sloper"
       },
       "argument2": "aether_ii:highlands/caves/underground_shaper"
     }

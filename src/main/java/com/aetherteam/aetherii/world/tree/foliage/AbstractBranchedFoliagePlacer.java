@@ -29,4 +29,16 @@ public abstract class AbstractBranchedFoliagePlacer extends FoliagePlacer {
             return true;
         }
     }
+
+    // Used for Greatroot Trees
+    protected void placeCornerLogs(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, BlockPos pos, int offset) {
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+
+        tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x - 1, y + offset, z - 1), Direction.Axis.Y);
+        tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + 2, y + offset, z - 1), Direction.Axis.Y);
+        tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x + 2, y + offset, z + 2), Direction.Axis.Y);
+        tryPlaceLog(level, foliageSetter, random, config, new BlockPos(x - 1, y + offset, z + 2), Direction.Axis.Y);
+    }
 }
