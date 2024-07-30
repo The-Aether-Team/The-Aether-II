@@ -19,14 +19,14 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
     public boolean place(FeaturePlaceContext<FerrositeSpikeConfiguration> context) {
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
-        BlockPos pos = context.origin().below(3);
+        BlockPos pos = context.origin().below(5);
         FerrositeSpikeConfiguration config = context.config();
 
         float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
         float heightFactor = 6.5F + random.nextInt(5);
 
         for (int i = 0; i < radius * heightFactor; ++i) {
-            if (i < radius * heightFactor - heightFactor * 0.2F) {
+            if (i < radius * heightFactor - heightFactor * 0.1F) {
                 BlockPlacementUtil.placeDisk(level, config.block(), new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), radius - (float) i / 20 - BlockPlacementUtil.shapeVariator(random, 0.5F), random, false);
             }
             if (i == radius * heightFactor - heightFactor * 0.2F) {
