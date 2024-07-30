@@ -127,7 +127,7 @@ public class AetherIIDensityFunctionBuilders {
     // Terrain
     public static DensityFunction buildShatteredIslands(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, BASE_3D_NOISE);
-        density = DensityFunctions.add(density, DensityFunctions.constant(-0.1));
+        density = DensityFunctions.add(density, DensityFunctions.constant(-0.075));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
         density = DensityFunctions.mul(density, getFunction(function, TOP_SLIDE_SHATTERED));
         density = DensityFunctions.add(density, factorizeShattered(function, -0.3));
@@ -324,24 +324,17 @@ public class AetherIIDensityFunctionBuilders {
 
     // Shattered Islands
     public static DensityFunction buildFactorShattered(HolderGetter<DensityFunction> function) {
-        DensityFunctions.Spline.Coordinate ridges = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES));
         DensityFunctions.Spline.Coordinate temperature = new DensityFunctions.Spline.Coordinate(function.getOrThrow(TEMPERATURE));
         DensityFunctions.Spline.Coordinate erosion = new DensityFunctions.Spline.Coordinate(function.getOrThrow(EROSION));
-        return DensityFunctions.spline(factorShattered(ridges, temperature, erosion));
+        return DensityFunctions.spline(factorShattered(temperature, erosion));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I ridges, I temperature, I erosion) {
-        CubicSpline<C, I> continentsSpline = CubicSpline.builder(ridges)
-                .addPoint(0.0F, 3.0F)
-                .addPoint(0.1F, 1.25F)
-                .addPoint(0.2F, 1.0F)
-                .build();
-
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I temperature, I erosion) {
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
                 .addPoint(-0.425F, 1.0F)
                 .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.375F, continentsSpline)
-                .addPoint(0.625F, continentsSpline)
+                .addPoint(-0.375F, 1.0F)
+                .addPoint(0.625F, 1.0F)
                 .addPoint(0.65F, 7.5F)
                 .addPoint(0.675F, 1.0F)
                 .build();
