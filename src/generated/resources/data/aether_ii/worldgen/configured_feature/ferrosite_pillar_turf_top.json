@@ -20,7 +20,7 @@
       "feature": "aether_ii:aether_grass_bonemeal",
       "placement": []
     },
-    "vertical_range": 16,
+    "vertical_range": 4,
     "xz_radius": {
       "type": "minecraft:uniform",
       "max_inclusive": 28,

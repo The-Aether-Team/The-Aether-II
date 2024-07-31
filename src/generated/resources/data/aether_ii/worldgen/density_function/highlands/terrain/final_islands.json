@@ -50,7 +50,7 @@
                       "type": "minecraft:mul",
                       "argument1": {
                         "type": "minecraft:mul",
-                        "argument1": -0.185,
+                        "argument1": -0.19,
                         "argument2": "aether_ii:highlands/terrain/base/factor"
                       },
                       "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
@@ -67,7 +67,7 @@
                 "type": "minecraft:mul",
                 "argument1": {
                   "type": "minecraft:mul",
-                  "argument1": -0.185,
+                  "argument1": -0.19,
                   "argument2": "aether_ii:highlands/terrain/base/factor"
                 },
                 "argument2": "aether_ii:highlands/terrain/base/terrain_shaper"
