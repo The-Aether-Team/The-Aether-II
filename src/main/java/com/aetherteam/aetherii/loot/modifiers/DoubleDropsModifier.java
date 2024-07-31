@@ -11,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -18,6 +19,9 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class DoubleDropsModifier extends LootModifier {
     public static final MapCodec<DoubleDropsModifier> CODEC = RecordCodecBuilder.mapCodec((instance) -> LootModifier.codecStart(instance).apply(instance, DoubleDropsModifier::new));
@@ -40,22 +44,37 @@ public class DoubleDropsModifier extends LootModifier {
 
         if (targetState != null) {
             if (tool != null && tool.getItem() instanceof SkyrootTool) {
-                this.doubleDrops(lootStacks, newStacks, context.getRandom());
+                this.increaseDrops(lootStacks, newStacks, context.getRandom());
             }
         } else if (targetEntity != null) {
             if (attacker instanceof LivingEntity livingEntity && EquipmentUtil.isFullStrength(livingEntity) && livingEntity.getMainHandItem().getItem() instanceof SkyrootWeapon && !targetEntity.getType().is(AetherIITags.Entities.NO_DOUBLE_DROPS)) {
-                this.doubleDrops(lootStacks, newStacks, context.getRandom());
+                this.increaseDrops(lootStacks, newStacks, context.getRandom());
             }
         }
         return newStacks;
     }
 
-    private void doubleDrops(ObjectArrayList<ItemStack> lootStacks, ObjectArrayList<ItemStack> newStacks, RandomSource random) {
-        for (ItemStack stack : lootStacks) {
-            if (stack.is(AetherIITags.Items.DOUBLE_DROPS)) {
-                boolean shouldDouble = stack.getItem() instanceof BlockItem ? random.nextInt(5) > 3 : random.nextInt(5) > 2;
-                if (shouldDouble) {
-                    newStacks.add(stack);
+    private void increaseDrops(ObjectArrayList<ItemStack> lootStacks, ObjectArrayList<ItemStack> newStacks, RandomSource random) {
+        Set<Item> distinctItems = lootStacks.stream().map(ItemStack::getItem).collect(Collectors.toSet());
+        for (Item item : distinctItems) {
+            if (item.getDefaultInstance().is(AetherIITags.Items.DOUBLE_DROPS)) {
+                int count = 0;
+                double chance = random.nextDouble();
+                if (item instanceof BlockItem) { //todo balance
+                    if (chance < 0.1) {
+                        count = 2;
+                    } else if (chance < 0.5) {
+                        count = 1;
+                    }
+                } else {
+                    if (chance < 0.25) {
+                        count = 2;
+                    } else if (chance < 0.75) {
+                        count = 1;
+                    }
+                }
+                if (count > 0) {
+                    newStacks.add(new ItemStack(item, count));
                 }
             }
         }

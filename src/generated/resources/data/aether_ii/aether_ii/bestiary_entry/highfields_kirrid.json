@@ -1,5 +1,5 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.highfields_kirrid",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.highfields_kirrid",
   "entity_type": "aether_ii:highfields_kirrid",
   "food": "aether_ii:kirrid_food",
   "icon_discovered": "aether_ii:guidebook/bestiary/highfields_kirrid",
@@ -17,6 +17,9 @@
       "min_count": 1
     }
   ],
+  "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.highfields_kirrid",
   "observation_advancement": "aether_ii:bestiary/observe_highfields_kirrid",
+  "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.highfields_kirrid",
+  "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.highfields_kirrid",
   "understanding_advancement": "aether_ii:bestiary/understand_highfields_kirrid"
 }

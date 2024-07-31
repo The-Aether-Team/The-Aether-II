@@ -14,6 +14,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -26,6 +27,8 @@ import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SpringConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
@@ -42,7 +45,11 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_ARCTIC_PACKED_ICE = AetherIIFeatureUtils.registerKey("coast_arctic_packed_ice");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE = AetherIIFeatureUtils.registerKey("noise_lake");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_ARCTIC = AetherIIFeatureUtils.registerKey("noise_lake_arctic");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_SPIKE = AetherIIFeatureUtils.registerKey("ferrosite_spike");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR = AetherIIFeatureUtils.registerKey("ferrosite_pillar");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_ICE_SPIKE = AetherIIFeatureUtils.registerKey("arctic_ice_spike");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_ARCTIC_ICE_SPIKE = AetherIIFeatureUtils.registerKey("mega_arctic_ice_spike");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_ICE_SPIKE_VARIANTS = AetherIIFeatureUtils.registerKey("arctic_ice_spike_variants");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_WATER_LAKE = AetherIIFeatureUtils.registerKey("aether_water_lake");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_WATER_SPRING = AetherIIFeatureUtils.registerKey("aether_water_spring");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = AetherIIFeatureUtils.registerKey("skyroot_twigs");
@@ -61,6 +68,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
 
         SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
@@ -143,11 +151,26 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                         true
                 ));
 
-        AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
+        AetherIIFeatureUtils.register(context, FERROSITE_SPIKE, AetherIIFeatures.FERROSITE_SPIKE.get(), new FerrositeSpikeConfiguration(
                 new NoiseProvider(
                         200L,
                         new NormalNoise.NoiseParameters(0, 1.0),
-                        0.0633F,
+                        0.12F,
+                        List.of(
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
+                        )
+                ),
+                2.5F,
+                3,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+        ));
+        AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
+                new NoiseProvider(
+                        300L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.064F,
                         List.of(
                                 AetherIIBlocks.FERROSITE.get().defaultBlockState(),
                                 AetherIIBlocks.FERROSITE.get().defaultBlockState(),
@@ -156,10 +179,46 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                 ),
                 4.5F,
                 6,
+                40,
                 24,
-                16,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
+
+        AetherIIFeatureUtils.register(context, ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
+                new NoiseProvider(
+                        400L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.1F,
+                        List.of(
+                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
+                        )
+                ),
+                4.25F,
+                2,
+                7.5F,
+                5,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
+        ));
+        AetherIIFeatureUtils.register(context, MEGA_ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
+                new NoiseProvider(
+                        500L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.1F,
+                        List.of(
+                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
+                        )
+                ),
+                6.25F,
+                3,
+                3.5F,
+                2,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
+        ));
+        AetherIIFeatureUtils.register(context, ARCTIC_ICE_SPIKE_VARIANTS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIIMiscFeatures.MEGA_ARCTIC_ICE_SPIKE)), 0.1F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIIMiscFeatures.ARCTIC_ICE_SPIKE))));
 
         AetherIIFeatureUtils.register(context, AETHER_WATER_LAKE, AetherIIFeatures.LAKE.get(),
                 new AetherLakeConfiguration(BlockStateProvider.simple(Blocks.WATER), BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get())));

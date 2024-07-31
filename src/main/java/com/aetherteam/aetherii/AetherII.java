@@ -2,8 +2,8 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
 import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
-import com.aetherteam.aetherii.api.damage.DamageInfliction;
-import com.aetherteam.aetherii.api.damage.DamageResistance;
+import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
+import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
 import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -47,6 +47,7 @@ import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
+import com.aetherteam.aetherii.world.surfacerule.AetherIISurfaceRules;
 import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.google.common.reflect.Reflection;
@@ -80,8 +81,6 @@ public class AetherII {
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, BestiaryEntry.DIRECT_CODEC, BestiaryEntry.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, EffectsEntry.DIRECT_CODEC, EffectsEntry.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIDamageInflictions.DAMAGE_INFLICTION_REGISTRY_KEY, DamageInfliction.CODEC, DamageInfliction.CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIDamageResistances.DAMAGE_RESISTANCE_REGISTRY_KEY, DamageResistance.CODEC, DamageResistance.CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIMoaFeatherShapes.MOA_FEATHER_SHAPE_REGISTRY_KEY, MoaFeatherShape.DIRECT_CODEC, MoaFeatherShape.DIRECT_CODEC));
 
         DeferredRegister<?>[] registers = {
@@ -110,7 +109,8 @@ public class AetherII {
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIPoolElementTypes.POOL_ELEMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
-                AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS
+                AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS,
+                AetherIISurfaceRules.MATERIAL_RULES
         };
 
         for (DeferredRegister<?> register : registers) {
@@ -161,6 +161,8 @@ public class AetherII {
         OutpostTrackerListener.listen(bus);
         EntityInteractionListener.listen(bus);
         GuidebookDiscoveryListener.listen(bus);
+        EquipmentAbilitiesListener.listen(bus);
+        ItemAttributeListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 

@@ -109,13 +109,16 @@ public class OutpostCampfireBlock extends MultiBlock {
                     var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
                     if (!data.getCampfirePositions().stream().map(OutpostTrackerAttachment.CampfirePosition::pos).collect(Collectors.toSet()).contains(origin)) {
                         data.addCampfirePosition(new OutpostTrackerAttachment.CampfirePosition(level.dimension(), pos));
-                        player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), true);
+                        if (!level.isClientSide()) {
+                            player.displayClientMessage(Component.translatable("aether_ii.message.campfire_added"), false);
+                        }
                     }
 
                     Vec3 originVec = Vec3.atBottomCenterOf(origin);
                     Direction xDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.X ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
                     Direction zDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.Z ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
                     this.activationParticles(level, new Vec3(originVec.x() + (xDir.getStepX() / 2.0), originVec.y(), originVec.z() + (zDir.getStepZ() / 2.0)), level.getRandom());
+                    return InteractionResult.sidedSuccess(level.isClientSide());
                 }
             }
         }

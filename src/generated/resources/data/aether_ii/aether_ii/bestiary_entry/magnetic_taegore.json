@@ -1,5 +1,5 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.magnetic_taegore",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.magnetic_taegore",
   "entity_type": "aether_ii:magnetic_taegore",
   "food": "aether_ii:taegore_food",
   "icon_discovered": "aether_ii:guidebook/bestiary/magnetic_taegore",
@@ -17,6 +17,9 @@
       "min_count": 1
     }
   ],
+  "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.magnetic_taegore",
   "observation_advancement": "aether_ii:bestiary/observe_magnetic_taegore",
+  "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.magnetic_taegore",
+  "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.magnetic_taegore",
   "understanding_advancement": "aether_ii:bestiary/understand_magnetic_taegore"
 }
