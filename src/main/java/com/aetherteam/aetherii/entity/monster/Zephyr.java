@@ -108,7 +108,7 @@ public class Zephyr extends FlyingMob implements Enemy {
         if (this.level().isClientSide()) {
             if (this.isBlow()) {
                 Vec3 look = this.getViewVector(1.0F);
-                this.level().addParticle(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), this.getX(), this.getY() + 2.5F, this.getZ(), look.x * 1.5F + random.nextFloat() * 0.1F, look.y * 1.5F + random.nextFloat() * 0.1F, look.z * 1.5F + random.nextFloat() * 0.1F);
+                this.level().addParticle(AetherIIParticleTypes.ZEPHYR_SNOWFLAKE.get(), this.getX(), this.getY() + 0.75F, this.getZ(), look.x * 1.5F + random.nextFloat() * 0.1F, look.y * 1.5F + random.nextFloat() * 0.1F, look.z * 1.5F + random.nextFloat() * 0.1F);
             }
         }
 
