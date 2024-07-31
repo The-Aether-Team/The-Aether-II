@@ -62,7 +62,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.SKYROOT_PINECONE.get(),
                 AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
                 AetherIIEntityTypes.TOXIC_DART.get(),
-                AetherIIEntityTypes.ZEPHYR_SNOWBALL.get(),
+                AetherIIEntityTypes.ZEPHYR_WEBBING_BALL.get(),
                 AetherIIEntityTypes.TEMPEST_THUNDERBALL.get()
         );
         this.tag(AetherIITags.Entities.NO_DOUBLE_DROPS).addTag(Tags.EntityTypes.BOSSES).add(EntityType.PLAYER);
