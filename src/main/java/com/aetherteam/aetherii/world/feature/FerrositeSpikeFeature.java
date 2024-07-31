@@ -19,7 +19,7 @@ public class FerrositeSpikeFeature extends Feature<FerrositeSpikeConfiguration> 
     public boolean place(FeaturePlaceContext<FerrositeSpikeConfiguration> context) {
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
-        BlockPos pos = context.origin().below(5);
+        BlockPos pos = context.origin().below(2);
         FerrositeSpikeConfiguration config = context.config();
 
         float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
