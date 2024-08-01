@@ -25,16 +25,16 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
 
-public class ZephyrSnowball extends Fireball implements ItemSupplier {
+public class ZephyrWebbingBall extends Fireball implements ItemSupplier {
     private int ticksInAir;
 
-    public ZephyrSnowball(EntityType<? extends ZephyrSnowball> type, Level level) {
+    public ZephyrWebbingBall(EntityType<? extends ZephyrWebbingBall> type, Level level) {
         super(type, level);
         this.setNoGravity(true);
     }
 
-    public ZephyrSnowball(Level level, LivingEntity shooter, double accelX, double accelY, double accelZ) {
-        super(AetherIIEntityTypes.ZEPHYR_SNOWBALL.get(), shooter, new Vec3(accelX, accelY, accelZ), level);
+    public ZephyrWebbingBall(Level level, LivingEntity shooter, double accelX, double accelY, double accelZ) {
+        super(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL.get(), shooter, new Vec3(accelX, accelY, accelZ), level);
         this.setNoGravity(true);
     }
 

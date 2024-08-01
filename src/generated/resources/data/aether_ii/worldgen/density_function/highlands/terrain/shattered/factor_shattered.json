@@ -22,50 +22,12 @@
             {
               "derivative": 0.0,
               "location": -0.375,
-              "value": {
-                "coordinate": "aether_ii:highlands/ridges",
-                "points": [
-                  {
-                    "derivative": 0.0,
-                    "location": 0.0,
-                    "value": 3.0
-                  },
-                  {
-                    "derivative": 0.0,
-                    "location": 0.1,
-                    "value": 1.25
-                  },
-                  {
-                    "derivative": 0.0,
-                    "location": 0.2,
-                    "value": 1.0
-                  }
-                ]
-              }
+              "value": 1.0
             },
             {
               "derivative": 0.0,
               "location": 0.625,
-              "value": {
-                "coordinate": "aether_ii:highlands/ridges",
-                "points": [
-                  {
-                    "derivative": 0.0,
-                    "location": 0.0,
-                    "value": 3.0
-                  },
-                  {
-                    "derivative": 0.0,
-                    "location": 0.1,
-                    "value": 1.25
-                  },
-                  {
-                    "derivative": 0.0,
-                    "location": 0.2,
-                    "value": 1.0
-                  }
-                ]
-              }
+              "value": 1.0
             },
             {
               "derivative": 0.0,
