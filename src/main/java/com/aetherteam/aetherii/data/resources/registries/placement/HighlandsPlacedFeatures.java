@@ -99,7 +99,8 @@ public class HighlandsPlacedFeatures {
                 context,
                 VALKYRIE_SPROUT_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.VALKYRIE_SPROUT_PATCH),
-                NoiseThresholdCountPlacement.of(0.7, 0, 1),
+                NoiseThresholdCountPlacement.of(0.5, 0, 4),
+                RarityFilter.onAverageOnceEvery(6),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());

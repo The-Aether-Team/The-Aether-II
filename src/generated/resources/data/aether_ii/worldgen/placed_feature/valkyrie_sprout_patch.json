@@ -3,9 +3,13 @@
   "placement": [
     {
       "type": "minecraft:noise_threshold_count",
-      "above_noise": 1,
+      "above_noise": 4,
       "below_noise": 0,
-      "noise_level": 0.7
+      "noise_level": 0.5
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 6
     },
     {
       "type": "minecraft:in_square"

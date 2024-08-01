@@ -39,7 +39,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
@@ -186,8 +185,10 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                 context,
                 VALKYRIE_SPROUT_PATCH,
                 Feature.RANDOM_PATCH,
-                FeatureUtils.simpleRandomPatchConfiguration(
-                        490,
+                new RandomPatchConfiguration(
+                        160,
+                        4,
+                        3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
