@@ -1,5 +1,5 @@
 {
-  "feature": "aether_ii:trees_biome_flourishing_field",
+  "feature": "aether_ii:wisproot",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
@@ -10,7 +10,7 @@
     },
     {
       "type": "minecraft:surface_water_depth_filter",
-      "max_water_depth": 0
+      "max_water_depth": 2
     },
     {
       "type": "minecraft:heightmap",
@@ -18,6 +18,18 @@
     },
     {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": {
+          "Name": "aether_ii:wisproot_sapling",
+          "Properties": {
+            "stage": "0"
+          }
+        }
+      }
     }
   ]
 }

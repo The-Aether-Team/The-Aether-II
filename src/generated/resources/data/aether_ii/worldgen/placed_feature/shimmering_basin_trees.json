@@ -1,16 +1,16 @@
 {
-  "feature": "aether_ii:wisproot",
+  "feature": "aether_ii:trees_biome_shimmering_basin",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 2
+      "chance": 1
     },
     {
       "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:surface_water_depth_filter",
-      "max_water_depth": 2
+      "max_water_depth": 0
     },
     {
       "type": "minecraft:heightmap",
@@ -18,18 +18,6 @@
     },
     {
       "type": "minecraft:biome"
-    },
-    {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
-        "type": "minecraft:would_survive",
-        "state": {
-          "Name": "aether_ii:wisproot_sapling",
-          "Properties": {
-            "stage": "0"
-          }
-        }
-      }
     }
   ]
 }

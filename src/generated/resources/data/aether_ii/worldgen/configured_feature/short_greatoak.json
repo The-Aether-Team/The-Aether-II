@@ -5,18 +5,18 @@
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:dirt"
+        "Name": "aether_ii:aether_dirt"
       }
     },
     "foliage_placer": {
-      "type": "aether_ii:skyplane_foliage_placer",
-      "offset": 2,
-      "radius": 1
+      "type": "aether_ii:greatoak_foliage_placer",
+      "offset": 0,
+      "radius": 3
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:skyplane_leaves",
+        "Name": "aether_ii:greatoak_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -34,15 +34,15 @@
       "upper_size": 0
     },
     "trunk_placer": {
-      "type": "minecraft:straight_trunk_placer",
-      "base_height": 10,
+      "type": "minecraft:giant_trunk_placer",
+      "base_height": 13,
       "height_rand_a": 4,
-      "height_rand_b": 2
+      "height_rand_b": 3
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:skyroot_log",
+        "Name": "aether_ii:greatroot_log",
         "Properties": {
           "axis": "y"
         }
