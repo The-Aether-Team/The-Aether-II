@@ -19,6 +19,10 @@ import net.minecraft.world.level.levelgen.placement.*;
 import java.util.List;
 
 public class HighlandsPlacedFeatures {
+    // Vegetation
+    public static final ResourceKey<PlacedFeature> GRASS_FIELD = createKey("grass_field");
+
+
     // Trees
     // Highfields
     public static final ResourceKey<PlacedFeature> FLOURISHING_FIELD_TREES = createKey("flourishing_field_trees");
@@ -42,7 +46,22 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> BATTLEGROUND_WASTES_TREES = createKey("battleground_wastes_trees");
     
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+        bootstrapVegetation(context);
         bootstrapTrees(context);
+    }
+
+    public static void bootstrapVegetation(BootstrapContext<PlacedFeature> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        PlacementUtils.register(
+                context,
+                GRASS_FIELD,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GRASS_FIELD),
+                NoiseBasedCountPlacement.of(40, 5, 0.3),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome()
+        );
     }
 
     public static void bootstrapTrees(BootstrapContext<PlacedFeature> context) {

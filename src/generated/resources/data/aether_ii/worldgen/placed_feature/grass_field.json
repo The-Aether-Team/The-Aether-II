@@ -1,0 +1,21 @@
+{
+  "feature": "aether_ii:grass_field",
+  "placement": [
+    {
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 5.0,
+      "noise_offset": 0.3,
+      "noise_to_count_ratio": 40
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

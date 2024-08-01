@@ -76,7 +76,8 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.LAKES, AetherIIMiscPlacements.AETHER_WATER_LAKE)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.FLOURISHING_FIELD_TREES)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHFIELDS_FLOWER_PATCH_DENSE),
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GRASS_FIELD),
+//                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHFIELDS_FLOWER_PATCH_DENSE),
                 temperature, downfall);
     }
 
@@ -147,16 +148,16 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_HOLYSTONE_QUARTZ)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_CORROBONITE)
                         .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, AetherIIOrePlacements.ORE_GLINT)
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, AetherIIMiscPlacements.SKYROOT_TWIGS)
-                        .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, AetherIIMiscPlacements.HOLYSTONE_ROCKS)
+//                        .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, AetherIIMiscPlacements.SKYROOT_TWIGS)
+//                        .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, AetherIIMiscPlacements.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, AetherIIMiscPlacements.AETHER_WATER_SPRING)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHLANDS_BUSH_PATCH)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.BLUEBERRY_BUSH_PATCH)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.ORANGE_TREE_PATCH)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VALKYRIE_SPROUT_PATCH)
+//                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.SHORT_GRASS_PATCH)
+//                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.MEDIUM_GRASS_PATCH)
+//                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.LONG_GRASS_PATCH)
+//                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.HIGHLANDS_BUSH_PATCH)
+//                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.BLUEBERRY_BUSH_PATCH)
+//                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.ORANGE_TREE_PATCH)
+//                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIVegetationPlacements.VALKYRIE_SPROUT_PATCH)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.COLD_AERCLOUD)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.BLUE_AERCLOUD)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, AetherIIMiscPlacements.GOLDEN_AERCLOUD)

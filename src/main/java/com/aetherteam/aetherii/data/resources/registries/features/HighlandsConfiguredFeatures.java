@@ -20,24 +20,28 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
 
 public class HighlandsConfiguredFeatures { //todo maybe sort these by biome first instead idk.
+    // Vegetation
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_FIELD = AetherIIFeatureUtils.registerKey("grass_field");
+
+
     // Trees
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = createKey("amberoot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_AMBEROOT = createKey("large_amberoot");
@@ -94,7 +98,33 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_IRRADIATED = createKey("trees_irradiated");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        bootstrapVegetation(context);
         bootstrapTrees(context);
+    }
+
+    private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        register(context, GRASS_FIELD, Feature.RANDOM_PATCH, new RandomPatchConfiguration(
+                80,
+                12,
+                4,
+                PlacementUtils.onlyWhenEmpty(
+                        Feature.SIMPLE_BLOCK,
+                        new SimpleBlockConfiguration(
+                                new NoiseProvider(
+                                        2345L,
+                                        new NormalNoise.NoiseParameters(0, 1.0),
+                                        0.02F,
+                                        List.of(
+                                                AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(),
+                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
+                                                AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(),
+                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
+                                                AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState()
+                                        )
+                                )
+                        )
+                )
+        ));
     }
 
     private static void bootstrapTrees(BootstrapContext<ConfiguredFeature<?, ?>> context) {

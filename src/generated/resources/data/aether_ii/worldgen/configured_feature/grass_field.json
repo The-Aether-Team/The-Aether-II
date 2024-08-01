@@ -1,0 +1,67 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:noise_provider",
+            "noise": {
+              "amplitudes": [
+                1.0
+              ],
+              "firstOctave": 0
+            },
+            "scale": 0.02,
+            "seed": 2345,
+            "states": [
+              {
+                "Name": "aether_ii:aether_long_grass",
+                "Properties": {
+                  "grass_type": "default"
+                }
+              },
+              {
+                "Name": "aether_ii:aether_medium_grass",
+                "Properties": {
+                  "grass_type": "default"
+                }
+              },
+              {
+                "Name": "aether_ii:aether_short_grass",
+                "Properties": {
+                  "grass_type": "default"
+                }
+              },
+              {
+                "Name": "aether_ii:aether_medium_grass",
+                "Properties": {
+                  "grass_type": "default"
+                }
+              },
+              {
+                "Name": "aether_ii:aether_long_grass",
+                "Properties": {
+                  "grass_type": "default"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        }
+      ]
+    },
+    "tries": 80,
+    "xz_spread": 12,
+    "y_spread": 4
+  }
+}

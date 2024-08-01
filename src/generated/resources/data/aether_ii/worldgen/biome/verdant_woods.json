@@ -44,24 +44,14 @@
       "aether_ii:ore_corrobonite",
       "aether_ii:ore_glint"
     ],
-    [
-      "aether_ii:skyroot_twigs",
-      "aether_ii:holystone_rocks"
-    ],
+    [],
     [
       "aether_ii:aether_water_spring"
     ],
     [
       "aether_ii:moa_nest",
       "aether_ii:verdant_woods_trees",
-      "aether_ii:highfields_flower_patch_sparse",
-      "aether_ii:short_grass_patch",
-      "aether_ii:medium_grass_patch",
-      "aether_ii:long_grass_patch",
-      "aether_ii:highlands_bush_patch",
-      "aether_ii:blueberry_bush_patch",
-      "aether_ii:orange_tree_patch",
-      "aether_ii:valkyrie_sprout_patch"
+      "aether_ii:highfields_flower_patch_sparse"
     ],
     [
       "aether_ii:cold_aercloud",
