@@ -1,9 +1,9 @@
 {
-  "feature": "aether_ii:medium_grass_patch",
+  "feature": "aether_ii:small_grass_patch",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 3
+      "count": 2
     },
     {
       "type": "minecraft:in_square"

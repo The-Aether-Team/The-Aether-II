@@ -50,7 +50,9 @@
     ],
     [
       "aether_ii:shrouded_forest_trees",
-      "aether_ii:highfields_flower_patch_sparse"
+      "aether_ii:small_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:large_grass_patch"
     ],
     [
       "aether_ii:cold_aercloud",

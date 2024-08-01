@@ -25,6 +25,15 @@
                   }
                 },
                 "weight": 3
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:aether_long_grass",
+                  "Properties": {
+                    "grass_type": "default"
+                  }
+                },
+                "weight": 4
               }
             ]
           }
@@ -54,8 +63,8 @@
         }
       ]
     },
-    "tries": 64,
-    "xz_spread": 6,
+    "tries": 48,
+    "xz_spread": 8,
     "y_spread": 3
   }
 }

@@ -46,11 +46,11 @@ import java.util.List;
 
 public class HighlandsConfiguredFeatures { //todo maybe sort these by biome first instead idk.
     // Vegetation
-    public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_FIELD = AetherIIFeatureUtils.registerKey("grass_field");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_GRASS_PATCH = AetherIIFeatureUtils.registerKey("small_grass_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS_PATCH = AetherIIFeatureUtils.registerKey("medium_grass_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_GRASS_PATCH = AetherIIFeatureUtils.registerKey("large_grass_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = AetherIIFeatureUtils.registerKey("valkyrie_sprout_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_FIELD = createKey("grass_field");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_GRASS_PATCH = createKey("small_grass_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS_PATCH = createKey("medium_grass_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_GRASS_PATCH = createKey("large_grass_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
 
 
     // Trees
@@ -136,20 +136,52 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 )
         ));
-
-//        register(
-//                context,
-//                SMALL_GRASS_PATCH,
-//                Feature.RANDOM_PATCH,
-//                new RandomPatchConfiguration(
-//                        64,
-//                        4,
-//                        3,
-//                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-//                                BlockStateProvider.simple(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState()
-//                        ))
-//                )
-//        ));
+        register(
+                context,
+                SMALL_GRASS_PATCH,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        80,
+                        4,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState())
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(
+                context,
+                MEDIUM_GRASS_PATCH,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        64,
+                        6,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                                        .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
+                                        .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
+                                        .build())
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(
+                context,
+                LARGE_GRASS_PATCH,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        48,
+                        8,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                                        .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
+                                        .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
+                                        .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 4)
+                                        .build())
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
         register(
                 context,
                 VALKYRIE_SPROUT_PATCH,
