@@ -33,7 +33,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = createKey("violet_highwoods_trees");
 
     // Arctic
-    public static final ResourceKey<PlacedFeature> GREATBOA_TREES = createKey("greatboa_trees");
+    public static final ResourceKey<PlacedFeature> FRIGID_SIERRA_TREES = createKey("frigid_sierra_trees");
     public static final ResourceKey<PlacedFeature> ENDURING_WOODLAND_TREES = createKey("enduring_woodland_trees");
     public static final ResourceKey<PlacedFeature> FROZEN_LAKES_TREES = createKey("frozen_lakes_trees");
 
@@ -75,12 +75,12 @@ public class HighlandsPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
 
         // Arctic
-        register(context, GREATBOA_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREATBOA),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(16), AetherIIBlocks.GREATBOA_SAPLING.get()));
+        register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FRIGID_SIERRA),
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(16)));
         register(context, ENDURING_WOODLAND_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_ENDURING_WOODLANDS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
-        register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SKYPINE),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2), AetherIIBlocks.SKYPINE_SAPLING.get()));
+        register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FROZEN_LAKES),
+                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(1)));
 
         // Irradiated
         register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_IRRADIATED),

@@ -20,7 +20,27 @@
     },
     "features": [
       {
-        "chance": 0.01,
+        "chance": 0.005,
+        "feature": {
+          "feature": "aether_ii:skybirch",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:skybirch_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chance": 0.002,
         "feature": {
           "feature": "aether_ii:greatroot",
           "placement": [
@@ -30,6 +50,26 @@
                 "type": "minecraft:would_survive",
                 "state": {
                   "Name": "aether_ii:greatroot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chance": 0.001,
+        "feature": {
+          "feature": "aether_ii:trees_amberoot_sparse",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:amberoot_sapling",
                   "Properties": {
                     "stage": "0"
                   }

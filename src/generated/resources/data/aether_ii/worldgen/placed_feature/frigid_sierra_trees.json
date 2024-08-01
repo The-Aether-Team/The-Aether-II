@@ -1,5 +1,5 @@
 {
-  "feature": "aether_ii:greatboa",
+  "feature": "aether_ii:trees_biome_frigid_sierra",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
@@ -18,18 +18,6 @@
     },
     {
       "type": "minecraft:biome"
-    },
-    {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
-        "type": "minecraft:would_survive",
-        "state": {
-          "Name": "aether_ii:greatboa_sapling",
-          "Properties": {
-            "stage": "0"
-          }
-        }
-      }
     }
   ]
 }

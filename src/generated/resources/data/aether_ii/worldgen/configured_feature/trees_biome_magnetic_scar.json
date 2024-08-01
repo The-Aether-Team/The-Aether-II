@@ -58,6 +58,26 @@
             }
           ]
         }
+      },
+      {
+        "chance": 0.02,
+        "feature": {
+          "feature": "aether_ii:trees_amberoot_sparse",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:amberoot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
       }
     ]
   }
