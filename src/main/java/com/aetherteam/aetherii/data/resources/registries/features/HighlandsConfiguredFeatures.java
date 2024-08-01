@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries.features;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
@@ -13,7 +14,9 @@ import com.aetherteam.aetherii.world.tree.foliage.skyroot.*;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
 import com.google.common.collect.ImmutableList;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
@@ -24,6 +27,7 @@ import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
@@ -35,6 +39,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
@@ -42,6 +47,9 @@ import java.util.List;
 public class HighlandsConfiguredFeatures { //todo maybe sort these by biome first instead idk.
     // Vegetation
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_FIELD = AetherIIFeatureUtils.registerKey("grass_field");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_GRASS_PATCH = AetherIIFeatureUtils.registerKey("small_grass_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS_PATCH = AetherIIFeatureUtils.registerKey("medium_grass_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_GRASS_PATCH = AetherIIFeatureUtils.registerKey("large_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = AetherIIFeatureUtils.registerKey("valkyrie_sprout_patch");
 
 
@@ -110,7 +118,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                 80,
                 12,
                 4,
-                PlacementUtils.onlyWhenEmpty(
+                PlacementUtils.filtered(
                         Feature.SIMPLE_BLOCK,
                         new SimpleBlockConfiguration(
                                 new NoiseProvider(
@@ -125,14 +133,34 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                                                 AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState()
                                         )
                                 )
-                        )
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 )
         ));
+
+//        register(
+//                context,
+//                SMALL_GRASS_PATCH,
+//                Feature.RANDOM_PATCH,
+//                new RandomPatchConfiguration(
+//                        64,
+//                        4,
+//                        3,
+//                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+//                                BlockStateProvider.simple(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState()
+//                        ))
+//                )
+//        ));
         register(
                 context,
                 VALKYRIE_SPROUT_PATCH,
                 Feature.RANDOM_PATCH,
-                FeatureUtils.simpleRandomPatchConfiguration(490, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))))));
+                FeatureUtils.simpleRandomPatchConfiguration(
+                        490,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
     }
 
     private static void bootstrapTrees(BootstrapContext<ConfiguredFeature<?, ?>> context) {

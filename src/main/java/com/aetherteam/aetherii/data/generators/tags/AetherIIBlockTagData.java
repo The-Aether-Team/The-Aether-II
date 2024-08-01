@@ -53,6 +53,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES)
                 .add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
+                .add(AetherIIBlocks.MOSSY_HOLYSTONE.get())
+                .add(AetherIIBlocks.FERROSITE.get())
+                .add(AetherIIBlocks.ARCTIC_PACKED_ICE.get())
                 .addTags(
                 AetherIITags.Blocks.AETHER_DIRT,
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
@@ -67,9 +70,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get()
         );
-        this.tag(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON)
-                .add(AetherIIBlocks.QUICKSOIL.get())
-                .addTags(BlockTags.SAND);
         this.tag(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.COLD_AERCLOUD.get(),
                 AetherIIBlocks.BLUE_AERCLOUD.get(),
@@ -174,6 +174,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.ALLOWED_BUCKET_PICKUP).add(
                 Blocks.POWDER_SNOW);
+        this.tag(AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON)
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON)
+                .add(AetherIIBlocks.QUICKSOIL.get())
+                .addTags(BlockTags.SAND);
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
         );
