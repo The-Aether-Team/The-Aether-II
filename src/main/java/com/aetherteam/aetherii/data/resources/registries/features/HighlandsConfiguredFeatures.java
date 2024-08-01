@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
@@ -15,6 +16,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -40,6 +42,7 @@ import java.util.List;
 public class HighlandsConfiguredFeatures { //todo maybe sort these by biome first instead idk.
     // Vegetation
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_FIELD = AetherIIFeatureUtils.registerKey("grass_field");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = AetherIIFeatureUtils.registerKey("valkyrie_sprout_patch");
 
 
     // Trees
@@ -125,6 +128,11 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         )
                 )
         ));
+        register(
+                context,
+                VALKYRIE_SPROUT_PATCH,
+                Feature.RANDOM_PATCH,
+                FeatureUtils.simpleRandomPatchConfiguration(490, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))))));
     }
 
     private static void bootstrapTrees(BootstrapContext<ConfiguredFeature<?, ?>> context) {

@@ -21,6 +21,7 @@ import java.util.List;
 public class HighlandsPlacedFeatures {
     // Vegetation
     public static final ResourceKey<PlacedFeature> GRASS_FIELD = createKey("grass_field");
+    public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH = AetherIIPlacementUtils.createKey("valkyrie_sprout_patch");
 
 
     // Trees
@@ -53,7 +54,7 @@ public class HighlandsPlacedFeatures {
     public static void bootstrapVegetation(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        PlacementUtils.register(
+        register(
                 context,
                 GRASS_FIELD,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GRASS_FIELD),
@@ -62,6 +63,14 @@ public class HighlandsPlacedFeatures {
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome()
         );
+        register(
+                context,
+                VALKYRIE_SPROUT_PATCH,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.VALKYRIE_SPROUT_PATCH),
+                NoiseThresholdCountPlacement.of(0.7, 0, 1),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
     }
 
     public static void bootstrapTrees(BootstrapContext<PlacedFeature> context) {
