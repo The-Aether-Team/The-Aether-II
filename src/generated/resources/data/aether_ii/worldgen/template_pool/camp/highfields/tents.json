@@ -7,7 +7,7 @@
         "processors": "aether_ii:camp_highfields",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 1
     },
     {
       "element": {

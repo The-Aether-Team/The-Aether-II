@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:camp/highfields/storage_areas/storage_area_1",
+        "location": "aether_ii:camp/highfields/storage_areas/storage_area_01",
         "processors": "aether_ii:camp_highfields",
         "projection": "rigid"
       },
@@ -12,7 +12,7 @@
     {
       "element": {
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:camp/highfields/storage_areas/storage_area_2",
+        "location": "aether_ii:camp/highfields/storage_areas/storage_area_02",
         "processors": "aether_ii:camp_highfields",
         "projection": "rigid"
       },
