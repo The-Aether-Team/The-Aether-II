@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIVegetationPlacements;
 import com.aetherteam.aetherii.data.resources.registries.placement.HighlandsPlacedFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

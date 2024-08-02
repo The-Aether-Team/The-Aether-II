@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIICarvers;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIMiscPlacements;
 import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIOrePlacements;
-import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIVegetationPlacements;
 import com.aetherteam.aetherii.data.resources.registries.placement.HighlandsPlacedFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.HolderGetter;

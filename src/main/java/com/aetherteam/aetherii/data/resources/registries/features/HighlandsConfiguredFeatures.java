@@ -3,12 +3,14 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.CoastFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
+import com.aetherteam.aetherii.world.tree.decorator.LeafPileDecorator;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
@@ -81,13 +83,18 @@ public class HighlandsConfiguredFeatures {
 
     // Highfields
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT = createKey("skyroot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_WITH_LEAF_PILES = createKey("skyroot_with_leaf_piles");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_SKYROOT = createKey("short_skyroot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SKYROOT = createKey("large_skyroot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NEST_SKYROOT = createKey("nest_skyroot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NEST_SKYROOT_WITH_LEAF_PILES = createKey("nest_skyroot_with_leaf_piles");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPLANE = createKey("skyplane");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPLANE_WITH_LEAF_PILES = createKey("skyplane_with_leaf_piles");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_SKYPLANE = createKey("short_skyplane");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WISPROOT = createKey("wisproot");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WISPROOT_WITH_LEAF_PILES = createKey("wisproot_with_leaf_piles");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATOAK = createKey("greatoak");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GREATOAK_WITH_LEAF_PILES = createKey("greatoak_with_leaf_piles");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_GREATOAK = createKey("short_greatoak");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_FLOURISHING_FIELD = createKey("trees_biome_flourishing_field");
@@ -329,6 +336,14 @@ public class HighlandsConfiguredFeatures {
                         new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
                         new TwoLayersFeatureSize(1, 0, 1))
                         .ignoreVines().build());
+        register(context, SKYROOT_WITH_LEAF_PILES, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(4, 2, 1), BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAVES.get().defaultBlockState()),
+                        new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
+                        new TwoLayersFeatureSize(1, 0, 1))
+                        .ignoreVines()
+                        .decorators(List.of(new LeafPileDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true))))).build());
         register(context, SHORT_SKYROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
@@ -350,6 +365,14 @@ public class HighlandsConfiguredFeatures {
                         new NestSkyrootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());
+        register(context, NEST_SKYROOT_WITH_LEAF_PILES, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(12, 3, 0), BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAVES.get().defaultBlockState()),
+                        new NestSkyrootFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines()
+                        .decorators(List.of(new LeafPileDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true))))).build());
         register(context, SKYPLANE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
@@ -357,6 +380,14 @@ public class HighlandsConfiguredFeatures {
                         new SkyplaneFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().build());
+        register(context, SKYPLANE_WITH_LEAF_PILES, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(10, 4, 2), BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAVES.get().defaultBlockState()),
+                        new SkyplaneFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines()
+                        .decorators(List.of(new LeafPileDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true))))).build());
         register(context, SHORT_SKYPLANE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
@@ -370,7 +401,16 @@ public class HighlandsConfiguredFeatures {
                         new StraightTrunkPlacer(11, 4, 0), BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LEAVES.get().defaultBlockState()),
                         new WisprootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
-                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
+                        .ignoreVines().decorators(List.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
+        register(context, WISPROOT_WITH_LEAF_PILES, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(11, 4, 0), BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LEAVES.get().defaultBlockState()),
+                        new WisprootFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().decorators(List.of(
+                                new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()),
+                                new LeafPileDecorator(BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true))))).build());
         register(context, GREATOAK, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
@@ -378,6 +418,14 @@ public class HighlandsConfiguredFeatures {
                         new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState())).build());
+        register(context, GREATOAK_WITH_LEAF_PILES, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
+                        new GiantTrunkPlacer(13, 5, 6), BlockStateProvider.simple(AetherIIBlocks.GREATOAK_LEAVES.get().defaultBlockState()),
+                        new GreatoakFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(0, 0, 0))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState()))
+                        .decorators(List.of(new LeafPileDecorator(BlockStateProvider.simple(AetherIIBlocks.GREATOAK_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true))))).build());
         register(context, SHORT_GREATOAK, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
@@ -403,10 +451,15 @@ public class HighlandsConfiguredFeatures {
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(TREES_AMBEROOT_DENSE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.05F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get()))));
         register(context, TREES_BIOME_SHROUDED_FOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPLANE_WITH_LEAF_PILES), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.1F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.025F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYROOT_WITH_LEAF_PILES), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.015F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(NEST_SKYROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.0015F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(NEST_SKYROOT_WITH_LEAF_PILES), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.0005F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(WISPROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPROOT_SAPLING.get())), 0.015F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(WISPROOT_WITH_LEAF_PILES), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.WISPROOT_SAPLING.get())), 0.005F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATOAK), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATOAK_SAPLING.get())), 0.15F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATOAK_WITH_LEAF_PILES), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATOAK_SAPLING.get())), 0.05F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(TREES_AMBEROOT_SPARSE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.01F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPLANE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPLANE_SAPLING.get()))));
         register(context, TREES_BIOME_SHIMMERING_BASIN, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
@@ -431,7 +484,7 @@ public class HighlandsConfiguredFeatures {
                         new StraightTrunkPlacer(13, 6, 0), BlockStateProvider.simple(AetherIIBlocks.WISPTOP_LEAVES.get().defaultBlockState()),
                         new WisptopFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
                         new TwoLayersFeatureSize(0, 0, 0))
-                        .ignoreVines().decorators(ImmutableList.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
+                        .ignoreVines().decorators(List.of(new WisprootTreeDecorator(AetherIIBlocks.MOSSY_WISPROOT_LOG.get().defaultBlockState()))).build());
         register(context, GREATROOT, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),

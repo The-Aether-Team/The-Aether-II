@@ -20,9 +20,49 @@
     },
     "features": [
       {
+        "chance": 0.1,
+        "feature": {
+          "feature": "aether_ii:skyplane_with_leaf_piles",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:skyroot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
         "chance": 0.025,
         "feature": {
           "feature": "aether_ii:skyroot",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:skyroot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chance": 0.015,
+        "feature": {
+          "feature": "aether_ii:skyroot_with_leaf_piles",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
@@ -60,6 +100,26 @@
         }
       },
       {
+        "chance": 5.0E-4,
+        "feature": {
+          "feature": "aether_ii:nest_skyroot_with_leaf_piles",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:skyroot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
         "chance": 0.015,
         "feature": {
           "feature": "aether_ii:wisproot",
@@ -80,9 +140,49 @@
         }
       },
       {
+        "chance": 0.005,
+        "feature": {
+          "feature": "aether_ii:wisproot_with_leaf_piles",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:wisproot_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
         "chance": 0.15,
         "feature": {
           "feature": "aether_ii:greatoak",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:greatoak_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "chance": 0.05,
+        "feature": {
+          "feature": "aether_ii:greatoak_with_leaf_piles",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
