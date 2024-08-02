@@ -3,7 +3,9 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
@@ -13,7 +15,6 @@ import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatrootFoliagePlac
 import com.aetherteam.aetherii.world.tree.foliage.skyroot.*;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
-import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Vec3i;
@@ -48,9 +49,9 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS_PATCH = createKey("medium_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_GRASS_PATCH = createKey("large_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
-
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH = AetherIIFeatureUtils.registerKey("highlands_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = AetherIIFeatureUtils.registerKey("blueberry_bush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = AetherIIFeatureUtils.registerKey("orange_tree_patch");
 
     // Trees
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = createKey("amberoot");
@@ -194,7 +195,6 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
-
         AetherIIFeatureUtils.register(
                 context,
                 HIGHLANDS_BUSH,
@@ -208,7 +208,6 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
                 )
         );
-
         AetherIIFeatureUtils.register(
                 context,
                 BLUEBERRY_BUSH,
@@ -222,6 +221,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
                 )
         );
+        AetherIIFeatureUtils.register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
     }
 
     private static void bootstrapTrees(BootstrapContext<ConfiguredFeature<?, ?>> context) {
