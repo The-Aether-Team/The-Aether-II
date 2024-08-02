@@ -1,17 +1,22 @@
 {
-  "feature": "aether_ii:blueberry_bush_patch",
+  "feature": "aether_ii:blueberry_bush",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 8
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 0,
+      "below_noise": 1,
+      "noise_level": 0.1
     },
     {
-      "type": "minecraft:count_on_every_layer",
-      "count": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 1,
-        "min_inclusive": 0
-      }
+      "type": "minecraft:rarity_filter",
+      "chance": 10
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
     },
     {
       "type": "minecraft:biome"

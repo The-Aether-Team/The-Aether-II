@@ -13,6 +13,7 @@ import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatrootFoliagePlac
 import com.aetherteam.aetherii.world.tree.foliage.skyroot.*;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
+import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Vec3i;
@@ -49,6 +50,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
     public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH = AetherIIFeatureUtils.registerKey("highlands_bush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = AetherIIFeatureUtils.registerKey("blueberry_bush");
 
     // Trees
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = createKey("amberoot");
@@ -130,7 +132,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                                                 AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState()
                                         )
                                 )
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 )
         ));
         register(
@@ -143,7 +145,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -159,7 +161,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                                         .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
                                         .build())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -176,7 +178,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
                                         .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 4)
                                         .build())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -189,7 +191,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
 
@@ -203,7 +205,21 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.HIGHLANDS_BUSH.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON), BlockPredicate.replaceable()))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
+                )
+        );
+
+        AetherIIFeatureUtils.register(
+                context,
+                BLUEBERRY_BUSH,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        100,
+                        2,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
                 )
         );
     }

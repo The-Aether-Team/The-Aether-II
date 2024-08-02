@@ -8,10 +8,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "aether_ii:aether_short_grass",
-              "Properties": {
-                "grass_type": "default"
-              }
+              "Name": "aether_ii:blueberry_bush"
             }
           }
         }
@@ -32,16 +29,15 @@
                 "tag": "aether_ii:aether_plant_survives_on"
               },
               {
-                "type": "minecraft:matching_blocks",
-                "blocks": "minecraft:air"
+                "type": "minecraft:replaceable"
               }
             ]
           }
         }
       ]
     },
-    "tries": 80,
-    "xz_spread": 4,
+    "tries": 100,
+    "xz_spread": 2,
     "y_spread": 3
   }
 }

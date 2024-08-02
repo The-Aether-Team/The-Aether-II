@@ -174,7 +174,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.ALLOWED_BUCKET_PICKUP).add(
                 Blocks.POWDER_SNOW);
-        this.tag(AetherIITags.Blocks.AETHER_GRASS_SURVIVES_ON)
+        this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON)
                 .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON)
                 .add(AetherIIBlocks.QUICKSOIL.get())

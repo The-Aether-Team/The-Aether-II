@@ -43,7 +43,7 @@
                   -1,
                   0
                 ],
-                "tag": "aether_ii:aether_grass_survives_on"
+                "tag": "aether_ii:aether_plant_survives_on"
               },
               {
                 "type": "minecraft:matching_blocks",

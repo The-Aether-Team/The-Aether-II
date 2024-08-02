@@ -11,7 +11,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 
 public class AetherIIVegetationPlacements {
-    public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = AetherIIPlacementUtils.createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = AetherIIPlacementUtils.createKey("orange_tree_patch");
 
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_DENSE = AetherIIPlacementUtils.createKey("highfields_flower_patch_dense");
@@ -32,10 +31,6 @@ public class AetherIIVegetationPlacements {
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BiomeFilter.biome());
 
-        AetherIIPlacementUtils.register(context, BLUEBERRY_BUSH_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.BLUEBERRY_BUSH_PATCH),
-                RarityFilter.onAverageOnceEvery(8),
-                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
-                BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.ORANGE_TREE_PATCH),
                 RarityFilter.onAverageOnceEvery(16),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),

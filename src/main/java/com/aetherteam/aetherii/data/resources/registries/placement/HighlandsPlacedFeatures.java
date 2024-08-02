@@ -28,6 +28,7 @@ public class HighlandsPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH = AetherIIPlacementUtils.createKey("highlands_bush_patch");
     public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_FIELD_PATCH = AetherIIPlacementUtils.createKey("highlands_bush_field_patch");
+    public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = AetherIIPlacementUtils.createKey("blueberry_bush_patch");
 
     // Trees
     // Highfields
@@ -115,6 +116,13 @@ public class HighlandsPlacedFeatures {
         AetherIIPlacementUtils.register(context, HIGHLANDS_BUSH_FIELD_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHLANDS_BUSH),
                 NoiseThresholdCountPlacement.of(-0.1, 2, 0),
                 RarityFilter.onAverageOnceEvery(20),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BiomeFilter.biome());
+
+        AetherIIPlacementUtils.register(context, BLUEBERRY_BUSH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUEBERRY_BUSH),
+                NoiseThresholdCountPlacement.of(0.1, 1, 0),
+                RarityFilter.onAverageOnceEvery(10),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome());
