@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.data.resources.registries.placement;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIFeatureUtils;
 import com.aetherteam.aetherii.data.resources.registries.features.HighlandsConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -13,7 +12,6 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -28,6 +26,8 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LARGE_GRASS_PATCH = createKey("large_grass_patch");
     public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
 
+    public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH = AetherIIPlacementUtils.createKey("highlands_bush_patch");
+    public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_FIELD_PATCH = AetherIIPlacementUtils.createKey("highlands_bush_field_patch");
 
     // Trees
     // Highfields
@@ -65,7 +65,7 @@ public class HighlandsPlacedFeatures {
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GRASS_FIELD),
                 NoiseBasedCountPlacement.of(40, 5, 0.3),
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome()
         );
         register(
@@ -103,6 +103,20 @@ public class HighlandsPlacedFeatures {
                 RarityFilter.onAverageOnceEvery(6),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
+
+        AetherIIPlacementUtils.register(context, HIGHLANDS_BUSH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHLANDS_BUSH),
+                NoiseThresholdCountPlacement.of(-0.1, 2, 0),
+                RarityFilter.onAverageOnceEvery(2),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BiomeFilter.biome());
+
+        AetherIIPlacementUtils.register(context, HIGHLANDS_BUSH_FIELD_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHLANDS_BUSH),
+                NoiseThresholdCountPlacement.of(-0.1, 2, 0),
+                RarityFilter.onAverageOnceEvery(20),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome());
     }
 

@@ -20,25 +20,24 @@
             "type": "minecraft:all_of",
             "predicates": [
               {
-                "type": "minecraft:matching_blocks",
-                "blocks": "minecraft:air"
-              },
-              {
-                "type": "minecraft:matching_blocks",
-                "blocks": "aether_ii:aether_grass_block",
+                "type": "minecraft:matching_block_tag",
                 "offset": [
                   0,
                   -1,
                   0
-                ]
+                ],
+                "tag": "aether_ii:aether_grass_survives_on"
+              },
+              {
+                "type": "minecraft:replaceable"
               }
             ]
           }
         }
       ]
     },
-    "tries": 96,
-    "xz_spread": 7,
+    "tries": 100,
+    "xz_spread": 2,
     "y_spread": 3
   }
 }
