@@ -92,7 +92,7 @@ public class AetherIIVegetationFeatures {
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
                         0.0F,
-                        16,
+                        4,
                         0.0F,
                         UniformInt.of(24, 28),
                         0.3F
