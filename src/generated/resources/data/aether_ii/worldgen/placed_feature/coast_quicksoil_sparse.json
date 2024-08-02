@@ -1,9 +1,9 @@
 {
-  "feature": "aether_ii:coast_ferrosite_sand",
+  "feature": "aether_ii:coast_quicksoil",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 4
+      "count": 2
     },
     {
       "type": "minecraft:height_range",

@@ -1,9 +1,13 @@
 package com.aetherteam.aetherii.data.resources.registries.placement;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
+import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
 import com.aetherteam.aetherii.data.resources.registries.features.HighlandsConfiguredFeatures;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -12,6 +16,8 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -25,10 +31,13 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MEDIUM_GRASS_PATCH = createKey("medium_grass_patch");
     public static final ResourceKey<PlacedFeature> LARGE_GRASS_PATCH = createKey("large_grass_patch");
     public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
-    public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH = AetherIIPlacementUtils.createKey("highlands_bush_patch");
-    public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_FIELD_PATCH = AetherIIPlacementUtils.createKey("highlands_bush_field_patch");
-    public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = AetherIIPlacementUtils.createKey("blueberry_bush_patch");
-    public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = AetherIIPlacementUtils.createKey("orange_tree_patch");
+    public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH = createKey("highlands_bush_patch");
+    public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_FIELD_PATCH = createKey("highlands_bush_field_patch");
+    public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
+    public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = createKey("orange_tree_patch");
+
+    public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
+
 
     // Trees
     // Highfields
@@ -51,10 +60,34 @@ public class HighlandsPlacedFeatures {
     // Irradiated
     public static final ResourceKey<PlacedFeature> CONTAMINATED_JUNGLE_TREES = createKey("contaminated_jungle_trees");
     public static final ResourceKey<PlacedFeature> BATTLEGROUND_WASTES_TREES = createKey("battleground_wastes_trees");
-    
+
+
+    // Worldgen
+    public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = createKey("coast_quicksoil");
+    public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL_SPARSE = createKey("coast_quicksoil_sparse");
+    public static final ResourceKey<PlacedFeature> COAST_FERROSITE_SAND = createKey("coast_ferrosite_sand");
+    public static final ResourceKey<PlacedFeature> COAST_ARCTIC_PACKED_ICE = createKey("coast_arctic_packed_ice");
+
+    public static final ResourceKey<PlacedFeature> WATER_POND = createKey("water_pond");
+    public static final ResourceKey<PlacedFeature> WATER_POND_UNDERGROUND = createKey("water_pond_underground");
+    public static final ResourceKey<PlacedFeature> WATER_SPRING = createKey("water_spring");
+    public static final ResourceKey<PlacedFeature> NOISE_LAKE = createKey("noise_lake");
+    public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = createKey("noise_lake_arctic");
+
+    public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = createKey("ferrosite_pillar");
+
+    public static final ResourceKey<PlacedFeature> FERROSITE_SPIKE = createKey("ferrosite_spike");
+    public static final ResourceKey<PlacedFeature> COASTAL_ARCTIC_ICE_SPIKE = createKey("coastal_arctic_ice_spike");
+    public static final ResourceKey<PlacedFeature> ARCTIC_ICE_SPIKE_CLUSTER = createKey("arctic_ice_spike_cluster");
+
+    public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_ARCTIC = createKey("freeze_top_layer_arctic");
+
+    public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
+
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         bootstrapVegetation(context);
         bootstrapTrees(context);
+        bootstrapWorldgen(context);
     }
 
     public static void bootstrapVegetation(BootstrapContext<PlacedFeature> context) {
@@ -128,6 +161,8 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
+
+        register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
     }
 
     public static void bootstrapTrees(BootstrapContext<PlacedFeature> context) {
@@ -172,6 +207,90 @@ public class HighlandsPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
         register(context, BATTLEGROUND_WASTES_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_IRRADIATED),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
+    }
+
+    public static void bootstrapWorldgen(BootstrapContext<PlacedFeature> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        register(context, COAST_QUICKSOIL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_QUICKSOIL),
+                CountPlacement.of(4),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                BiomeFilter.biome()
+        );
+        register(context, COAST_QUICKSOIL_SPARSE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_QUICKSOIL),
+                CountPlacement.of(2),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                BiomeFilter.biome()
+        );
+        register(context, COAST_FERROSITE_SAND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_FERROSITE_SAND),
+                CountPlacement.of(4),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                BiomeFilter.biome()
+        );
+        register(context, COAST_ARCTIC_PACKED_ICE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_ARCTIC_PACKED_ICE),
+                CountPlacement.of(3),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(144)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
+                BiomeFilter.biome()
+        );
+
+        register(context, WATER_POND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WATER_POND),
+                RarityFilter.onAverageOnceEvery(25),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                BiomeFilter.biome());
+        register(context, WATER_POND_UNDERGROUND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WATER_POND),
+                RarityFilter.onAverageOnceEvery(15),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.not(BlockPredicate.ONLY_IN_AIR_PREDICATE), BlockPredicate.insideWorld(new BlockPos(0, -5, 0))), 16),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5),
+                BiomeFilter.biome());
+        register(context, WATER_SPRING, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WATER_SPRING),
+                CountPlacement.of(15),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.aboveBottom(256)),
+                BiomeFilter.biome());
+        register(context, NOISE_LAKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE), BiomeFilter.biome());
+        register(context, NOISE_LAKE_ARCTIC, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE_ARCTIC), BiomeFilter.biome());
+
+        register(context, FERROSITE_PILLAR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FERROSITE_PILLAR),
+                CountPlacement.of(1),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome()
+        );
+
+        register(context, FERROSITE_SPIKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FERROSITE_SPIKE),
+                CountPlacement.of(2),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(256)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get())), //todo
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome()
+        );
+        register(context, COASTAL_ARCTIC_ICE_SPIKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE),
+                CountPlacement.of(2),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(112), VerticalAnchor.absolute(136)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())), //todo
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome()
+        );
+        register(context, ARCTIC_ICE_SPIKE_CLUSTER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_ICE_SPIKE_VARIANTS),
+                NoiseBasedCountPlacement.of(10, 200.0, 0.0),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.absolute(128), VerticalAnchor.absolute(224)),
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(new BlockPos(0, -1, 0), AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())), //todo
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome()
+        );
+
+        register(context, FREEZE_TOP_LAYER_ARCTIC, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FREEZE_TOP_LAYER_ARCTIC), BiomeFilter.biome());
+
+        register(context, CLOUDBED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
     }
 
     private static ResourceKey<PlacedFeature> createKey(String name) {

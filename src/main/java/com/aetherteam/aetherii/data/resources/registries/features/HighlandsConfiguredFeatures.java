@@ -5,7 +5,10 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import com.aetherteam.aetherii.world.feature.CoastFeature;
+import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
@@ -17,6 +20,7 @@ import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -25,7 +29,12 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -38,20 +47,26 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
+import java.util.Optional;
 
-public class HighlandsConfiguredFeatures { //todo maybe sort these by biome first instead idk.
+public class HighlandsConfiguredFeatures {
     // Vegetation
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_FIELD = createKey("grass_field");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_GRASS_PATCH = createKey("small_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS_PATCH = createKey("medium_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_GRASS_PATCH = createKey("large_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH = AetherIIFeatureUtils.registerKey("highlands_bush");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = AetherIIFeatureUtils.registerKey("blueberry_bush");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = AetherIIFeatureUtils.registerKey("orange_tree_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH = createKey("highlands_bush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = createKey("blueberry_bush");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = AetherIIFeatureUtils.registerKey("aether_grass_bonemeal");
+
 
     // Trees
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBEROOT = createKey("amberoot");
@@ -107,10 +122,35 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA_IRRADIATED = createKey("greatboa_irradiated");
     
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_IRRADIATED = createKey("trees_irradiated");
+    
+    
+    // Worldgen
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = createKey("coast_quicksoil");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_SAND = createKey("coast_ferrosite_sand");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_ARCTIC_PACKED_ICE = createKey("coast_arctic_packed_ice");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_POND = createKey("water_pond");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_SPRING = createKey("water_spring");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE = createKey("noise_lake");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_ARCTIC = createKey("noise_lake_arctic");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR = createKey("ferrosite_pillar");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_TURF_TOP = createKey("ferrosite_pillar_turf_top");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_TURF = createKey("ferrosite_pillar_turf");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_SPIKE = createKey("ferrosite_spike");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_ICE_SPIKE = createKey("arctic_ice_spike");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_ARCTIC_ICE_SPIKE = createKey("mega_arctic_ice_spike");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_ICE_SPIKE_VARIANTS = createKey("arctic_ice_spike_variants");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FREEZE_TOP_LAYER_ARCTIC = createKey("freeze_top_layer_arctic");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         bootstrapVegetation(context);
         bootstrapTrees(context);
+        bootstrapWorldgen(context);
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -195,7 +235,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
-        AetherIIFeatureUtils.register(
+        register(
                 context,
                 HIGHLANDS_BUSH,
                 Feature.RANDOM_PATCH,
@@ -208,7 +248,7 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
                 )
         );
-        AetherIIFeatureUtils.register(
+        register(
                 context,
                 BLUEBERRY_BUSH,
                 Feature.RANDOM_PATCH,
@@ -221,7 +261,13 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
                 )
         );
-        AetherIIFeatureUtils.register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
+        register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
+
+        register(context, AETHER_GRASS_BONEMEAL, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
+        )));
     }
 
     private static void bootstrapTrees(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -505,6 +551,192 @@ public class HighlandsConfiguredFeatures { //todo maybe sort these by biome firs
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SINGULAR_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.025F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(LARGE_AMBEROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.065F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYROOT_IRRADIATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get()))));
+    }
+
+    private static void bootstrapWorldgen(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
+
+        register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), new CoastConfiguration(
+                BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
+                CoastFeature.Type.HIGHFIELDS,
+                16.35F,
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
+                Optional.empty(),
+                UniformInt.of(112, 156),
+                0.75F,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+        ));
+        register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
+                BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
+                CoastFeature.Type.MAGNETIC,
+                16.35F,
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
+                Optional.of(DensityFunctions.zero()),
+                UniformInt.of(112, 156),
+                0.0F,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+        ));
+        register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
+                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
+                CoastFeature.Type.ARCTIC,
+                16.35F,
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
+                Optional.empty(),
+                UniformInt.of(120, 180),
+                0.0F,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+        ));
+
+        register(context, WATER_POND, AetherIIFeatures.LAKE.get(),
+                new AetherLakeConfiguration(BlockStateProvider.simple(Blocks.WATER), BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get())));
+        register(context, WATER_SPRING, Feature.SPRING,
+                new SpringConfiguration(Fluids.WATER.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.UNDERSHALE.get(), AetherIIBlocks.HOLYSTONE.get(), AetherIIBlocks.AETHER_DIRT.get())));
+
+        register(context, NOISE_LAKE, AetherIIFeatures.NOISE_LAKE.get(),
+                new NoiseLakeConfiguration(
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        ConstantInt.of(124),
+                        new NoiseProvider(
+                                100L,
+                                new NormalNoise.NoiseParameters(0, 1.0),
+                                0.075F,
+                                List.of(
+                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
+                                )
+                        ),
+                        false
+                ));
+        register(context, NOISE_LAKE_ARCTIC, AetherIIFeatures.NOISE_LAKE.get(),
+                new NoiseLakeConfiguration(
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        ConstantInt.of(124),
+                        new NoiseProvider(
+                                100L,
+                                new NormalNoise.NoiseParameters(0, 1.0),
+                                0.075F,
+                                List.of(
+                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
+                                )
+                        ),
+                        true
+                ));
+
+        register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
+                new NoiseProvider(
+                        300L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.064F,
+                        List.of(
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
+                        )
+                ),
+                4.5F,
+                6,
+                40,
+                24,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+        ));
+        register(context, FERROSITE_PILLAR_TURF_TOP, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_DIRT,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AETHER_GRASS_BONEMEAL)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.0F,
+                        4,
+                        0.0F,
+                        UniformInt.of(24, 28),
+                        0.3F
+                )
+        );
+        register(context, FERROSITE_PILLAR_TURF, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.FERROSITE,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(FERROSITE_PILLAR_TURF_TOP)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(3, 4),
+                        0.0F,
+                        16,
+                        1.0F,
+                        UniformInt.of(24, 28),
+                        0.3F
+                )
+        );
+
+        register(context, FERROSITE_SPIKE, AetherIIFeatures.FERROSITE_SPIKE.get(), new FerrositeSpikeConfiguration(
+                new NoiseProvider(
+                        200L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.12F,
+                        List.of(
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
+                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
+                        )
+                ),
+                2.5F,
+                3,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+        ));
+        register(context, ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
+                new NoiseProvider(
+                        400L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.1F,
+                        List.of(
+                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
+                        )
+                ),
+                4.25F,
+                2,
+                7.5F,
+                5,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
+        ));
+        register(context, MEGA_ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
+                new NoiseProvider(
+                        500L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.1F,
+                        List.of(
+                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
+                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
+                        )
+                ),
+                6.25F,
+                3,
+                3.5F,
+                2,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
+        ));
+        register(context, ARCTIC_ICE_SPIKE_VARIANTS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEGA_ARCTIC_ICE_SPIKE)), 0.1F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ARCTIC_ICE_SPIKE))));
+
+        AetherIIFeatureUtils.register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
+
+        AetherIIFeatureUtils.register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
+                new CloudbedConfiguration(
+                        BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                        96,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_NOISE),
+                        10D,
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
+                        15D
+                ));
     }
 
     private static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {

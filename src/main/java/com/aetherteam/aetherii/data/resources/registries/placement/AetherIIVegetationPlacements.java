@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegeta
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -13,8 +12,6 @@ import net.minecraft.world.level.levelgen.placement.*;
 public class AetherIIVegetationPlacements {
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_DENSE = AetherIIPlacementUtils.createKey("highfields_flower_patch_dense");
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_SPARSE = AetherIIPlacementUtils.createKey("highfields_flower_patch_sparse");
-
-    public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = AetherIIPlacementUtils.createKey("aether_grass_bonemeal");
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -28,11 +25,5 @@ public class AetherIIVegetationPlacements {
                 RarityFilter.onAverageOnceEvery(2),
                 CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
                 BiomeFilter.biome());
-
-
-
-
-
-        AetherIIPlacementUtils.register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(AetherIIVegetationFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
     }
 }

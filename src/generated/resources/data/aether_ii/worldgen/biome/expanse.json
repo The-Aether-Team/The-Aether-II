@@ -17,33 +17,16 @@
   },
   "features": [
     [
-      "aether_ii:noise_lake",
       "aether_ii:cloudbed"
     ],
-    [
-      "aether_ii:aether_water_lake",
-      "aether_ii:aether_water_lake_underground"
-    ],
     [],
     [],
     [],
     [],
-    [
-      "aether_ii:ore_scatterglass",
-      "aether_ii:ore_agiosite",
-      "aether_ii:ore_icestone_small",
-      "aether_ii:ore_ambrosium",
-      "aether_ii:ore_zanite",
-      "aether_ii:ore_arkenium",
-      "aether_ii:ore_gravitite_buried",
-      "aether_ii:ore_gravitite",
-      "aether_ii:ore_holystone_quartz",
-      "aether_ii:ore_glint"
-    ],
     [],
-    [
-      "aether_ii:aether_water_spring"
-    ],
+    [],
+    [],
+    [],
     [],
     [
       "aether_ii:cold_aercloud",

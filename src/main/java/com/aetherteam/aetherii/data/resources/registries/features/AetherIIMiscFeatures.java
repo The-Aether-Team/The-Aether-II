@@ -40,18 +40,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
-    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = AetherIIFeatureUtils.registerKey("coast_quicksoil");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_SAND = AetherIIFeatureUtils.registerKey("coast_ferrosite_sand");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_ARCTIC_PACKED_ICE = AetherIIFeatureUtils.registerKey("coast_arctic_packed_ice");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE = AetherIIFeatureUtils.registerKey("noise_lake");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_ARCTIC = AetherIIFeatureUtils.registerKey("noise_lake_arctic");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_SPIKE = AetherIIFeatureUtils.registerKey("ferrosite_spike");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR = AetherIIFeatureUtils.registerKey("ferrosite_pillar");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_ICE_SPIKE = AetherIIFeatureUtils.registerKey("arctic_ice_spike");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_ARCTIC_ICE_SPIKE = AetherIIFeatureUtils.registerKey("mega_arctic_ice_spike");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_ICE_SPIKE_VARIANTS = AetherIIFeatureUtils.registerKey("arctic_ice_spike_variants");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_WATER_LAKE = AetherIIFeatureUtils.registerKey("aether_water_lake");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_WATER_SPRING = AetherIIFeatureUtils.registerKey("aether_water_spring");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = AetherIIFeatureUtils.registerKey("skyroot_twigs");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_ROCKS = AetherIIFeatureUtils.registerKey("holystone_rocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST = AetherIIFeatureUtils.registerKey("moa_nest");
@@ -63,13 +51,9 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_AERCLOUD = AetherIIFeatureUtils.registerKey("green_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = AetherIIFeatureUtils.registerKey("purple_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = AetherIIFeatureUtils.registerKey("storm_aercloud");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = AetherIIFeatureUtils.registerKey("cloudbed");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FREEZE_TOP_LAYER_ARCTIC = AetherIIFeatureUtils.registerKey("freeze_top_layer_arctic");
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
-        HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
 
         SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
@@ -85,145 +69,6 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
             }
         }
 
-        AetherIIFeatureUtils.register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), new CoastConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
-                CoastFeature.Type.HIGHFIELDS,
-                16.35F,
-                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
-                Optional.empty(),
-                UniformInt.of(112, 156),
-                0.75F,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
-        ));
-        AetherIIFeatureUtils.register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
-                CoastFeature.Type.MAGNETIC,
-                16.35F,
-                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
-                Optional.of(DensityFunctions.zero()),
-                UniformInt.of(112, 156),
-                0.0F,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
-        ));
-        AetherIIFeatureUtils.register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
-                CoastFeature.Type.ARCTIC,
-                16.35F,
-                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
-                Optional.empty(),
-                UniformInt.of(120, 180),
-                0.0F,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
-        ));
-
-        AetherIIFeatureUtils.register(context, NOISE_LAKE, AetherIIFeatures.NOISE_LAKE.get(),
-                new NoiseLakeConfiguration(
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
-                        ConstantInt.of(124),
-                        new NoiseProvider(
-                                100L,
-                                new NormalNoise.NoiseParameters(0, 1.0),
-                                0.075F,
-                                List.of(
-                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
-                                )
-                        ),
-                        false
-                ));
-        AetherIIFeatureUtils.register(context, NOISE_LAKE_ARCTIC, AetherIIFeatures.NOISE_LAKE.get(),
-                new NoiseLakeConfiguration(
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
-                        ConstantInt.of(124),
-                        new NoiseProvider(
-                                100L,
-                                new NormalNoise.NoiseParameters(0, 1.0),
-                                0.075F,
-                                List.of(
-                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
-                                )
-                        ),
-                        true
-                ));
-
-        AetherIIFeatureUtils.register(context, FERROSITE_SPIKE, AetherIIFeatures.FERROSITE_SPIKE.get(), new FerrositeSpikeConfiguration(
-                new NoiseProvider(
-                        200L,
-                        new NormalNoise.NoiseParameters(0, 1.0),
-                        0.12F,
-                        List.of(
-                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
-                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
-                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
-                        )
-                ),
-                2.5F,
-                3,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
-        ));
-        AetherIIFeatureUtils.register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
-                new NoiseProvider(
-                        300L,
-                        new NormalNoise.NoiseParameters(0, 1.0),
-                        0.064F,
-                        List.of(
-                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
-                                AetherIIBlocks.FERROSITE.get().defaultBlockState(),
-                                AetherIIBlocks.RUSTED_FERROSITE.get().defaultBlockState()
-                        )
-                ),
-                4.5F,
-                6,
-                40,
-                24,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
-        ));
-
-        AetherIIFeatureUtils.register(context, ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
-                new NoiseProvider(
-                        400L,
-                        new NormalNoise.NoiseParameters(0, 1.0),
-                        0.1F,
-                        List.of(
-                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
-                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
-                        )
-                ),
-                4.25F,
-                2,
-                7.5F,
-                5,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
-        ));
-        AetherIIFeatureUtils.register(context, MEGA_ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
-                new NoiseProvider(
-                        500L,
-                        new NormalNoise.NoiseParameters(0, 1.0),
-                        0.1F,
-                        List.of(
-                                AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState(),
-                                AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
-                        )
-                ),
-                6.25F,
-                3,
-                3.5F,
-                2,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
-        ));
-        AetherIIFeatureUtils.register(context, ARCTIC_ICE_SPIKE_VARIANTS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIIMiscFeatures.MEGA_ARCTIC_ICE_SPIKE)), 0.1F)
-        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AetherIIMiscFeatures.ARCTIC_ICE_SPIKE))));
-
-        AetherIIFeatureUtils.register(context, AETHER_WATER_LAKE, AetherIIFeatures.LAKE.get(),
-                new AetherLakeConfiguration(BlockStateProvider.simple(Blocks.WATER), BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get())));
-        AetherIIFeatureUtils.register(context, AETHER_WATER_SPRING, Feature.SPRING,
-                new SpringConfiguration(Fluids.WATER.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.UNDERSHALE.get(), AetherIIBlocks.HOLYSTONE.get(), AetherIIBlocks.AETHER_DIRT.get())));
 
         AetherIIFeatureUtils.register(context, SKYROOT_TWIGS, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(twigs), 4));
         AetherIIFeatureUtils.register(context, HOLYSTONE_ROCKS, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(rocks), 4));
@@ -237,18 +82,5 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
         AetherIIFeatureUtils.register(context, GREEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(8, AetherIIBlocks.GREEN_AERCLOUD.get().defaultBlockState()));
         AetherIIFeatureUtils.register(context, PURPLE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(8, AetherIIBlocks.PURPLE_AERCLOUD.get().defaultBlockState()));
         AetherIIFeatureUtils.register(context, STORM_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), AetherIIFeatureBuilders.aercloud(6, AetherIIBlocks.STORM_AERCLOUD.get().defaultBlockState()));
-
-        AetherIIFeatureUtils.register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
-                new CloudbedConfiguration(
-                        BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
-                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
-                        96,
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_NOISE),
-                        10D,
-                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
-                        15D
-                ));
-
-        AetherIIFeatureUtils.register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
     }
 }

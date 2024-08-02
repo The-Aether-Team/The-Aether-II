@@ -19,13 +19,13 @@
   },
   "features": [
     [
+      "aether_ii:coast_quicksoil_sparse",
       "aether_ii:noise_lake",
-      "aether_ii:coast_quicksoil",
       "aether_ii:cloudbed"
     ],
     [
-      "aether_ii:aether_water_lake",
-      "aether_ii:aether_water_lake_underground"
+      "aether_ii:water_pond",
+      "aether_ii:water_pond_underground"
     ],
     [],
     [],
@@ -46,7 +46,7 @@
     ],
     [],
     [
-      "aether_ii:aether_water_spring"
+      "aether_ii:water_spring"
     ],
     [
       "aether_ii:shrouded_forest_trees",
