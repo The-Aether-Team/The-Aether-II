@@ -105,8 +105,8 @@ public class Tempest extends Zephyr implements BlightMonster {
     }
 
     @Override
-    public void tick() {
-        super.tick();
+    public void aiStep() {
+        super.aiStep();
         if ((!this.level().isClientSide() && !isNight(this.level()) && !isStormAercloud(this.level(), this.blockPosition())) || this.getHideTime() >= 50)  {
             this.setHideTime(this.getHideTime() + 1);
             if (this.getHideTime() == 50)
@@ -125,13 +125,6 @@ public class Tempest extends Zephyr implements BlightMonster {
                 this.discard();
         } else {
             this.setHideTime(0);
-        }
-
-        for (int count = 0; count < 3; ++count) {
-            double xOffset = this.position().x() + (this.level().getRandom().nextDouble() * 1.5) - 0.75;
-            double yOffset = this.position().y() + (this.level().getRandom().nextDouble() * 2) - 0.5;
-            double zOffset = this.position().z() + (this.level().getRandom().nextDouble() * 1.5) - 0.75;
-            this.level().addParticle(AetherIIParticleTypes.TEMPEST_ELECTRICITY.get(), xOffset, yOffset, zOffset, 0.0, 0.0, 0.0);
         }
     }
 

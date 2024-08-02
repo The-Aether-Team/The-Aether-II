@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 public interface BlightMonster {
 
     /**
-     * Call this from your entity's tick method.
+     * Call this from your entity's aiStep method.
      */
     default void burnEffects(Entity entity, RandomSource random, int tickCount){
         for (int i = 0; i < 7; ++i) {
