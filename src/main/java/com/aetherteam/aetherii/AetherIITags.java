@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.material.Fluid;
 
 public class AetherIITags {
@@ -170,6 +171,14 @@ public class AetherIITags {
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        }
+    }
+
+    public static class Structures {
+        public static final TagKey<Structure> STRUCTURE_BLACKLIST_FILTER = tag("structure_blacklist_filter");
+
+        private static TagKey<Structure> tag(String name) {
+            return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 

@@ -2,8 +2,6 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
 import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
-import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
-import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
 import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -18,8 +16,8 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.ReloadListeners;
-import com.aetherteam.aetherii.data.resources.registries.*;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
+import com.aetherteam.aetherii.data.resources.registries.*;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
@@ -45,6 +43,7 @@ import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import com.aetherteam.aetherii.world.placementmodifier.AetherIIPlacementModifiers;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.surfacerule.AetherIISurfaceRules;
@@ -104,6 +103,7 @@ public class AetherII {
                 AetherIIGameEvents.GAME_EVENTS,
                 AetherIIPoi.POI,
                 AetherIIFeatures.FEATURES,
+                AetherIIPlacementModifiers.PLACEMENT_MODIFIERS,
                 AetherIITreeDecoratorTypes.TREE_DECORATORS,
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,
