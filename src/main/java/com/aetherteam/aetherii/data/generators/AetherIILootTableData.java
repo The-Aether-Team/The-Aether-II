@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.data.generators.loot.AetherIIBlockLoot;
+import com.aetherteam.aetherii.data.generators.loot.AetherIIChestLoot;
 import com.aetherteam.aetherii.data.generators.loot.AetherIIEntityLoot;
 import com.aetherteam.aetherii.data.generators.loot.AetherIIStrippingLoot;
 import com.aetherteam.aetherii.loot.AetherIILoot;
@@ -16,8 +17,9 @@ import java.util.concurrent.CompletableFuture;
 public class AetherIILootTableData {
     public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         return new LootTableProvider(output, AetherIILoot.IMMUTABLE_LOOT_TABLES, List.of(
-                new LootTableProvider.SubProviderEntry(AetherIIEntityLoot::new, LootContextParamSets.ENTITY),
                 new LootTableProvider.SubProviderEntry(AetherIIBlockLoot::new, LootContextParamSets.BLOCK),
+                new LootTableProvider.SubProviderEntry(AetherIIEntityLoot::new, LootContextParamSets.ENTITY),
+                new LootTableProvider.SubProviderEntry(AetherIIChestLoot::new, LootContextParamSets.CHEST),
                 new LootTableProvider.SubProviderEntry(AetherIIStrippingLoot::new, AetherIILootContexts.STRIPPING)
         ), registries);
     }

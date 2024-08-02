@@ -87,6 +87,11 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> ENTITIES_SHEEPUFF_RED = register("entities/sheepuff/red");
     public static final ResourceKey<LootTable> ENTITIES_SHEEPUFF_BLACK = register("entities/sheepuff/black");
 
+    // Chests
+    public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS = register("chests/camp_highfields");
+    public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_FARMER = register("chests/camp_highfields_farmer");
+    public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_HUNTER = register("chests/camp_highfields_hunter");
+    public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_FLETCHER = register("chests/camp_highfields_fletcher");
 
     // Stripping
     public static final ResourceKey<LootTable> STRIP_MOSSY_WISPROOT = register("stripping/strip_mossy_wisproot");
