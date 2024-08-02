@@ -1,0 +1,23 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/highfields/tents/small_tent",
+        "processors": "aether_ii:camp_highfields",
+        "projection": "terrain_matching"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/highfields/tents/tent",
+        "processors": "aether_ii:camp_highfields",
+        "projection": "terrain_matching"
+      },
+      "weight": 3
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

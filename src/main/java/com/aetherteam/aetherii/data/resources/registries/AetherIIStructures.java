@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIStructureBuilders;
+import com.aetherteam.aetherii.data.resources.registries.pools.CampHighfieldsPools;
 import com.aetherteam.aetherii.data.resources.registries.pools.OutpostPools;
 import com.aetherteam.aetherii.world.structure.AetherJigsawStructure;
 import net.minecraft.core.HolderGetter;
@@ -26,6 +27,7 @@ import java.util.Optional;
 
 public class AetherIIStructures {
     public static final ResourceKey<Structure> OUTPOST = createKey("outpost");
+    public static final ResourceKey<Structure> CAMP_HIGHFIELDS = createKey("camp_highfields");
 
     private static ResourceKey<Structure> createKey(String name) {
         return ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -37,6 +39,10 @@ public class AetherIIStructures {
 
         context.register(OUTPOST, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(OutpostPools.START), Optional.empty(), 10, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                templatePools.getOrThrow(OutpostPools.OUTPOST), Optional.empty(), 10, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+
+        context.register(CAMP_HIGHFIELDS, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
+                templatePools.getOrThrow(CampHighfieldsPools.CENTER), Optional.empty(), 24, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
     }
 }

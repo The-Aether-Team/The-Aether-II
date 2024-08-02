@@ -1,0 +1,29 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/highfields/storage_areas/storage_area_1",
+        "processors": "aether_ii:camp_highfields",
+        "projection": "terrain_matching"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:camp/highfields/storage_areas/storage_area_2",
+        "processors": "aether_ii:camp_highfields",
+        "projection": "terrain_matching"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

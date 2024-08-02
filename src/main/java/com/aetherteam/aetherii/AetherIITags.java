@@ -157,6 +157,7 @@ public class AetherIITags {
         public static final TagKey<Biome> EXPANSE = tag("expanse");
 
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
+        public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
 
         public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");
         public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");

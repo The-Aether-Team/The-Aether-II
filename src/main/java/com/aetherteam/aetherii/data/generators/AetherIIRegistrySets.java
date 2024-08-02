@@ -28,6 +28,7 @@ public class AetherIIRegistrySets extends DatapackBuiltinEntriesProvider {
             .add(Registries.STRUCTURE, AetherIIStructures::bootstrap)
             .add(Registries.STRUCTURE_SET, AetherIIStructureSets::bootstrap)
             .add(Registries.TEMPLATE_POOL, AetherIIPools::bootstrap)
+            .add(Registries.PROCESSOR_LIST, AetherIIProcessorLists::bootstrap)
             .add(Registries.DAMAGE_TYPE, AetherIIDamageTypes::bootstrap)
             .add(Registries.JUKEBOX_SONG, AetherIIJukeboxSongs::bootstrap)
             .add(AetherIIMoaFeatherShapes.MOA_FEATHER_SHAPE_REGISTRY_KEY, AetherIIMoaFeatherShapes::bootstrap)
