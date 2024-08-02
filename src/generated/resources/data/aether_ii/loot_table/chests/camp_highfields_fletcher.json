@@ -104,13 +104,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:skyroot_trowel",
+          "name": "aether_ii:skyroot_crossbow",
           "weight": 9
         },
         {
           "type": "minecraft:item",
-          "name": "aether_ii:holystone_trowel",
-          "weight": 5
+          "name": "aether_ii:holystone_crossbow",
+          "weight": 6
         },
         {
           "type": "minecraft:item",

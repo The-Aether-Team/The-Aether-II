@@ -106,8 +106,8 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_TROWEL).setWeight(9))
-                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_TROWEL).setWeight(5))
+                        .add(LootItem.lootTableItem(AetherIIItems.SKYROOT_CROSSBOW).setWeight(9))
+                        .add(LootItem.lootTableItem(AetherIIItems.HOLYSTONE_CROSSBOW).setWeight(6))
                         .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CROSSBOW))
                 )
         );
