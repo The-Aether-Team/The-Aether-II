@@ -27,6 +27,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
+import java.util.function.Predicate;
 
 public class Tempest extends Zephyr implements BlightMonster {
     private static final int FLAG_SLEEPING = 32;
@@ -106,11 +107,14 @@ public class Tempest extends Zephyr implements BlightMonster {
     @Override
     public void tick() {
         super.tick();
-        if (!this.level().isClientSide() && !isNight(this.level()) && !isStormAercloud(this.level(), this.blockPosition())) {
+        if ((!this.level().isClientSide() && !isNight(this.level()) && !isStormAercloud(this.level(), this.blockPosition())) || this.getHideTime() >= 50)  {
             this.setHideTime(this.getHideTime() + 1);
             if (this.getHideTime() == 50)
-                if (this.level() instanceof ServerLevel serverLevel)
+                if (this.level() instanceof ServerLevel serverLevel) {
                     serverLevel.broadcastEntityEvent(this, (byte) 61);
+                    this.removeAllGoals(Predicate.isEqual(Tempest.ThunderballAttackGoal.class));
+                    this.removeAllGoals(Predicate.isEqual(Tempest.RandomFloatAroundGoal.class));
+                }
 
             if (this.getHideTime() <= 110) {
                 burnEffects(this, this.random, this.tickCount);
