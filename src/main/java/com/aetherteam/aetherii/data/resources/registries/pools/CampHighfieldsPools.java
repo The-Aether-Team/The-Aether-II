@@ -55,7 +55,7 @@ public class CampHighfieldsPools {
                         Pair.of(AetherIIPools.aetherPool("camp/highfields/tents/small_tent", processorCamp), 2),
                         Pair.of(AetherIIPools.aetherPool("camp/highfields/tents/tent", processorCamp), 3)
                 ),
-                StructureTemplatePool.Projection.TERRAIN_MATCHING)
+                StructureTemplatePool.Projection.RIGID)
         );
 
         context.register(DECORATIONS, new StructureTemplatePool(
@@ -67,7 +67,7 @@ public class CampHighfieldsPools {
                         Pair.of(AetherIIPools.aetherPool("camp/highfields/decorations/well", processorCamp), 2),
                         Pair.of(StructurePoolElement.empty(), 2)
                 ),
-                StructureTemplatePool.Projection.TERRAIN_MATCHING)
+                StructureTemplatePool.Projection.RIGID)
         );
 
         context.register(STORAGE_AREAS, new StructureTemplatePool(
@@ -77,7 +77,7 @@ public class CampHighfieldsPools {
                         Pair.of(AetherIIPools.aetherPool("camp/highfields/storage_areas/storage_area_2", processorCamp), 1),
                         Pair.of(StructurePoolElement.empty(), 1)
                 ),
-                StructureTemplatePool.Projection.TERRAIN_MATCHING)
+                StructureTemplatePool.Projection.RIGID)
         );
     }
 }

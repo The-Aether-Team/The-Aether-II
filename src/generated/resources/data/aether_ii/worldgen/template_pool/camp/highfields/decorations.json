@@ -5,7 +5,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/decorations/blueberry_farm",
         "processors": "aether_ii:camp_highfields",
-        "projection": "terrain_matching"
+        "projection": "rigid"
       },
       "weight": 1
     },
@@ -14,7 +14,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/decorations/orange_farm",
         "processors": "aether_ii:camp_highfields",
-        "projection": "terrain_matching"
+        "projection": "rigid"
       },
       "weight": 1
     },
@@ -23,7 +23,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/decorations/valkyrie_sprout_farm",
         "processors": "aether_ii:camp_highfields",
-        "projection": "terrain_matching"
+        "projection": "rigid"
       },
       "weight": 1
     },
@@ -32,7 +32,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/decorations/well",
         "processors": "aether_ii:camp_highfields",
-        "projection": "terrain_matching"
+        "projection": "rigid"
       },
       "weight": 2
     },

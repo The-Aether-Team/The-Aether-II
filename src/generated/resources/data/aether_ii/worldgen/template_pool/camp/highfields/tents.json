@@ -5,7 +5,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/tents/small_tent",
         "processors": "aether_ii:camp_highfields",
-        "projection": "terrain_matching"
+        "projection": "rigid"
       },
       "weight": 2
     },
@@ -14,7 +14,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/tents/tent",
         "processors": "aether_ii:camp_highfields",
-        "projection": "terrain_matching"
+        "projection": "rigid"
       },
       "weight": 3
     }
