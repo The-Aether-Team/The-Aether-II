@@ -5,11 +5,11 @@
       "chunk_count": 8,
       "other_set": "aether_ii:outposts"
     },
-    "frequency": 0.4,
+    "frequency": 0.5,
     "frequency_reduction_method": "legacy_type_1",
     "salt": 1147092,
     "separation": 8,
-    "spacing": 24
+    "spacing": 20
   },
   "structures": [
     {
