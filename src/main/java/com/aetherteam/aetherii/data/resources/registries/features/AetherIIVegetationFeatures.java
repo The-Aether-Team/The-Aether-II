@@ -31,14 +31,10 @@ import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import java.util.List;
 
 public class AetherIIVegetationFeatures {
-    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = AetherIIFeatureUtils.registerKey("highfields_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT_PATCH = AetherIIFeatureUtils.registerKey("brettl_plant_patch");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        AetherIIFeatureUtils.register(context, HIGHFIELDS_FLOWER_PATCH, Feature.FLOWER,
-                NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1).add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)), 32));
-
         AetherIIFeatureUtils.register(context, BRETTL_PLANT_PATCH, Feature.RANDOM_PATCH,
                 AetherIIFeatureBuilders.brettlPatch(64, PlacementUtils.onlyWhenEmpty(AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration())));
     }

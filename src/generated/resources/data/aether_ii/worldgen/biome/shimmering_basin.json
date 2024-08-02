@@ -50,9 +50,10 @@
       "aether_ii:shimmering_basin_trees_sunken",
       "aether_ii:grass_field",
       "aether_ii:valkyrie_sprout_patch",
-      "aether_ii:highlands_bush_field_patch",
+      "aether_ii:highlands_bush_patch_field",
       "aether_ii:blueberry_bush_patch",
-      "aether_ii:orange_tree_patch"
+      "aether_ii:orange_tree_patch",
+      "aether_ii:highfields_flower_patch"
     ],
     [
       "aether_ii:cold_aercloud",

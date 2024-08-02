@@ -18,6 +18,7 @@ import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatrootFoliagePlac
 import com.aetherteam.aetherii.world.tree.foliage.skyroot.*;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
+import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
@@ -64,6 +65,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH = createKey("highlands_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = createKey("blueberry_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = AetherIIFeatureUtils.registerKey("highfields_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = AetherIIFeatureUtils.registerKey("aether_grass_bonemeal");
 
@@ -262,6 +265,20 @@ public class HighlandsConfiguredFeatures {
                 )
         );
         register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
+
+        register(
+                context,
+                HIGHFIELDS_FLOWER_PATCH,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        24,
+                        7,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
+                        )), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
+        ));
 
         register(context, AETHER_GRASS_BONEMEAL, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                 .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
@@ -725,9 +742,9 @@ public class HighlandsConfiguredFeatures {
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEGA_ARCTIC_ICE_SPIKE)), 0.1F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ARCTIC_ICE_SPIKE))));
 
-        AetherIIFeatureUtils.register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
+        register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
 
-        AetherIIFeatureUtils.register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
+        register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
                 new CloudbedConfiguration(
                         BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
