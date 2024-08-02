@@ -53,7 +53,7 @@ public class CampHighfieldsPools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPool("camp/highfields/tents/small_tent", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/tents/tent", processorCamp), 3)
+                        Pair.of(AetherIIPools.aetherPool("camp/highfields/tents/tent", processorCamp), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -73,9 +73,9 @@ public class CampHighfieldsPools {
         context.register(STORAGE_AREAS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/storage_areas/storage_area_01", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/storage_areas/storage_area_02", processorCamp), 1),
-                        Pair.of(StructurePoolElement.empty(), 1)
+                        Pair.of(AetherIIPools.aetherPool("camp/highfields/storage_areas/storage_area_01", processorCamp), 2),
+                        Pair.of(AetherIIPools.aetherPool("camp/highfields/storage_areas/storage_area_02", processorCamp), 2),
+                        Pair.of(StructurePoolElement.empty(), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

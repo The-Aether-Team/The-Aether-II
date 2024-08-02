@@ -7,7 +7,7 @@
         "processors": "aether_ii:camp_highfields",
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
@@ -16,13 +16,13 @@
         "processors": "aether_ii:camp_highfields",
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
         "element_type": "minecraft:empty_pool_element"
       },
-      "weight": 1
+      "weight": 3
     }
   ],
   "fallback": "minecraft:empty"
