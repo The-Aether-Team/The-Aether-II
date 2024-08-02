@@ -35,6 +35,6 @@ public class AetherIIStructureSets {
                 new RandomSpreadStructurePlacement(34, 22, RandomSpreadType.LINEAR, 2738116)));
 
         context.register(CAMPS, new StructureSet(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS),
-                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.5F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 16, 8, RandomSpreadType.LINEAR)));
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.5F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 22, 12, RandomSpreadType.LINEAR)));
     }
 }
