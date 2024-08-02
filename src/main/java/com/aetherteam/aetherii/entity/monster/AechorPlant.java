@@ -27,7 +27,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class AechorPlant  extends PathfinderMob implements RangedAttackMob {
+public class AechorPlant extends PathfinderMob implements RangedAttackMob {
     private static final EntityDataAccessor<Boolean> DATA_TARGETING_ENTITY_ID = SynchedEntityData.defineId(AechorPlant.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState attackAnimationState = new AnimationState();
