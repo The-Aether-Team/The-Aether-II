@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesRenderer;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.combat.GlovesItem;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;

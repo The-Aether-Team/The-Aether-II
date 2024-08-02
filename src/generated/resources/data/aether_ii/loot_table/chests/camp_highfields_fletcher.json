@@ -22,7 +22,7 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "max": 2.0,
+        "max": 3.0,
         "min": 1.0
       }
     },
@@ -96,7 +96,7 @@
       "rolls": {
         "type": "minecraft:uniform",
         "max": 3.0,
-        "min": 1.0
+        "min": 2.0
       }
     },
     {
@@ -105,12 +105,12 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_trowel",
-          "weight": 7
+          "weight": 9
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_trowel",
-          "weight": 3
+          "weight": 5
         },
         {
           "type": "minecraft:item",
@@ -120,7 +120,7 @@
       "rolls": {
         "type": "minecraft:uniform",
         "max": 1.0,
-        "min": 0.0
+        "min": 1.0
       }
     }
   ],

@@ -119,12 +119,12 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_spear",
-          "weight": 6
+          "weight": 5
         },
         {
           "type": "minecraft:item",
           "name": "aether_ii:holystone_spear",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "minecraft:item",
@@ -143,7 +143,7 @@
         {
           "type": "minecraft:item",
           "name": "aether_ii:skyroot_shield",
-          "weight": 8
+          "weight": 7
         },
         {
           "type": "minecraft:item",
