@@ -73,6 +73,9 @@ public class SwetModel<T extends Swet> extends HierarchicalModel<T> {
         this.squish.visible = false;
         this.animate(entity.groundAnimationState, SwetAnimation.ground, ageInTicks);
         this.animate(entity.jumpAnimationState, SwetAnimation.jump, ageInTicks);
+        this.gel.xScale *= 1 + 0.1F * entity.getFoodSaturation();
+        this.gel.yScale *= 1 + 0.1F * entity.getFoodSaturation();
+        this.gel.zScale *= 1 + 0.1F * entity.getFoodSaturation();
         this.gel.xScale *= (1.0F - entity.getWaterDamageScale());
         this.gel.yScale *= (1.0F - entity.getWaterDamageScale());
         this.gel.zScale *= (1.0F - entity.getWaterDamageScale());

@@ -11,6 +11,7 @@ import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
+import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
@@ -23,6 +24,7 @@ import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
@@ -37,6 +39,20 @@ import java.util.List;
 import java.util.Map;
 
 public class AetherIIRenderers {
+    public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
+        event.getSkins().forEach(model -> {
+            if (event.getSkin(model) instanceof LivingEntityRenderer<?, ?> livingEntityRenderer) {
+                livingEntityRenderer.addLayer(new SwetLayer(event.getContext(), livingEntityRenderer));
+            }
+        });
+        event.getEntityTypes().forEach(entityType -> {
+
+            if (event.getRenderer(entityType) instanceof LivingEntityRenderer r) {
+                ((LivingEntityRenderer<?, ?>) r).addLayer(new SwetLayer<>(event.getContext(), r));
+            }
+        });
+    }
+
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         // Blocks
         event.registerBlockEntityRenderer(AetherIIBlockEntityTypes.SKYROOT_CHEST.get(), SkyrootChestRenderer::new);

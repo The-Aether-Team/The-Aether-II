@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -34,6 +35,7 @@ import java.util.EnumSet;
 public class Swet extends Mob implements Enemy {
     private static final EntityDataAccessor<Boolean> DATA_MID_JUMP_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DATA_WATER_DAMAGE_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_FOOD_SATURATION_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
 
     private boolean wasOnGround;
     private int jumpTimer;
@@ -53,11 +55,10 @@ public class Swet extends Mob implements Enemy {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new ConsumeGoal(this));
         this.goalSelector.addGoal(1, new HuntGoal(this));
         this.goalSelector.addGoal(2, new SwetRandomDirectionGoal(this));
         this.goalSelector.addGoal(4, new SwetKeepOnJumpingGoal(this));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, (target) -> !(target.getRootVehicle() instanceof Swet)));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -73,6 +74,7 @@ public class Swet extends Mob implements Enemy {
         super.defineSynchedData(builder);
         builder.define(DATA_MID_JUMP_ID, false);
         builder.define(DATA_WATER_DAMAGE_SCALE_ID, 0.0F);
+        builder.define(DATA_FOOD_SATURATION_ID, 1.0F);
     }
 
     /**
@@ -114,7 +116,7 @@ public class Swet extends Mob implements Enemy {
         if (this.isInWater()) {
             this.spawnDissolveParticles();
             if (this.getWaterDamageScale() < 1.0F) {
-                this.setWaterDamageScale(this.getWaterDamageScale() + 0.02F);
+                this.setWaterDamageScale(this.getWaterDamageScale() + 0.05F);
             }
         }
         super.tick();
@@ -129,16 +131,20 @@ public class Swet extends Mob implements Enemy {
             }
         }
 
+        if (this.getFoodSaturation() > 0) {
+            this.setFoodSaturation(this.getFoodSaturation() - 0.001F);
+        }
+
 
         // Spawn particles when no target is captured.
-        if (!this.hasPrey() && this.canSpawnSplashParticles()) {
+        /*if (this.canSpawnSplashParticles()) {
             if (this.level().isClientSide()) {
                 double d = (float) this.getX() + (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.3F;
                 double d1 = (float) this.getY() + this.getBbHeight();
                 double d2 = (float) this.getZ() + (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.3F;
                 this.level().addParticle(ParticleTypes.SPLASH, d, d1 - 0.25, d2, 0.0, 0.0, 0.0);
             }
-        }
+        }*/
 
         // Handle jump behavior and animation.
         if (!this.isNoAi()) {
@@ -220,6 +226,22 @@ public class Swet extends Mob implements Enemy {
         this.getEntityData().set(DATA_WATER_DAMAGE_SCALE_ID, scale);
     }
 
+    /**
+     * @return The {@link Float} Saturation the Swet has received.
+     */
+    public float getFoodSaturation() {
+        return this.getEntityData().get(DATA_FOOD_SATURATION_ID);
+    }
+
+    /**
+     * Sets the Saturation the Swet has received.
+     *
+     * @param foodSaturation The {@link Float} value.
+     */
+    public void setFoodSaturation(float foodSaturation) {
+        this.getEntityData().set(DATA_FOOD_SATURATION_ID, foodSaturation);
+    }
+
 
     /**
      * @return The {@link Float} height of the Swet model.
@@ -263,11 +285,9 @@ public class Swet extends Mob implements Enemy {
         return AetherIISoundEvents.ENTITY_SWET_SQUISH.get();
     }
 
-    /**
-     * @return A {@link Boolean} for whether the Swet has captured prey (a passenger).
-     */
-    public boolean hasPrey() {
-        return getFirstPassenger() != null;
+    public static boolean canLatch(final Swet swet, final Player player) {
+        return !player.isInWater() && swet.getFoodSaturation() <= 3 && swet.getWaterDamageScale() <= 0.25F && player.getData(AetherIIDataAttachments.SWET)
+                .canLatchOn() && player.getFoodData().getFoodLevel() > 4;
     }
 
     /**
@@ -316,6 +336,7 @@ public class Swet extends Mob implements Enemy {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putFloat("WaterDamageScale", this.getWaterDamageScale());
+        tag.putFloat("Saturation", this.getFoodSaturation());
     }
 
     @Override
@@ -324,83 +345,17 @@ public class Swet extends Mob implements Enemy {
         if (tag.contains("WaterDamageScale")) {
             this.setWaterDamageScale(tag.getFloat("WaterDamageScale"));
         }
-    }
-
-    /**
-     * Makes the Swet jump 3 times when it has a consumed target, in an attempt to damage the target.
-     */
-    public static class ConsumeGoal extends Goal {
-        private final Swet swet;
-        private int jumps = 0;
-
-        private float chosenDegrees = 0;
-
-        public ConsumeGoal(Swet swet) {
-            this.swet = swet;
-            this.setFlags(EnumSet.of(Flag.MOVE));
-        }
-
-        @Override
-        public boolean canUse() {
-            return this.swet.hasPrey()
-                    && this.swet.getPassengers().get(0) instanceof LivingEntity passenger
-                    ;
-        }
-
-        @Override
-        public void tick() {
-            if (this.jumps <= 3) {
-                if (this.swet.onGround()) {
-                    this.swet.level().broadcastEntityEvent(this.swet, (byte) 71); // This is to make sure the Swet actually touches the ground on the client.
-                    this.swet.playSound(AetherIISoundEvents.ENTITY_SWET_JUMP.get(), 1.0F, ((this.swet.getRandom().nextFloat() - this.swet.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
-
-                    this.chosenDegrees = (float) this.swet.getRandom().nextInt(360);
-                    if (this.jumps == 0) {
-                        this.swet.setDeltaMovement(this.swet.getDeltaMovement().add(0, 0.65, 0));
-                    } else if (this.jumps == 1) {
-                        this.swet.setDeltaMovement(this.swet.getDeltaMovement().add(0, 0.75, 0));
-                    } else if (this.jumps == 2) {
-                        this.swet.setDeltaMovement(this.swet.getDeltaMovement().add(0, 1.55, 0));
-                    } else {
-                        this.swet.getPassengers().get(0).stopRiding();
-                        this.swet.spawnDissolveParticles();
-                        this.swet.discard();
-                    }
-                    if (!this.swet.getMidJump()) {
-                        this.jumps++;
-                    }
-                }
-
-                if (!this.swet.wasOnGround) {
-                    if (this.swet.getJumpTimer() < 6) {
-                        if (this.jumps == 1) {
-                            this.moveHorizontal(0.0F, 0.1F, this.chosenDegrees);
-                        } else if (this.jumps == 2) {
-                            this.moveHorizontal(0.0F, 0.15F, this.chosenDegrees);
-                        } else if (this.jumps == 3) {
-                            this.moveHorizontal(0.0F, 0.3F, this.chosenDegrees);
-                        }
-                    }
-                }
-            }
-        }
-
-        public void moveHorizontal(float strafe, float forward, float rotation) {
-            float f = Mth.square(strafe) + Mth.square(forward);
-
-            f = Mth.sqrt(f);
-            if (f < 1.0F) f = 1.0F;
-            strafe = strafe * f;
-            forward = forward * f;
-            float f1 = Mth.sin(rotation * 0.017453292F);
-            float f2 = Mth.cos(rotation * 0.017453292F);
-
-            this.swet.setDeltaMovement(strafe * f2 - forward * f1, this.swet.getDeltaMovement().y(), (forward * f2 + strafe * f1));
-            if (this.swet.getMoveControl() instanceof SwetMoveControl swetMoveControl) {
-                swetMoveControl.yRot = rotation % 360;
-            }
+        if (tag.contains("Saturation")) {
+            this.setFoodSaturation(tag.getFloat("Saturation"));
         }
     }
+
+    public boolean processSucking(Player player) {
+        player.causeFoodExhaustion(0.025F);
+        this.setFoodSaturation(this.getFoodSaturation() + 0.025F);
+        return player.getFoodData().getFoodLevel() < 5 || this.getFoodSaturation() >= 5;
+    }
+
 
     private int getJumpTimer() {
         return this.jumpTimer;
@@ -420,22 +375,22 @@ public class Swet extends Mob implements Enemy {
         @Override
         public boolean canUse() {
             LivingEntity target = this.swet.getTarget();
-            if (this.swet.hasPrey() || target == null || !target.isAlive() || (target instanceof Player player && player.getAbilities().invulnerable)) {
+            if (target == null || !target.isAlive() || (target instanceof Player player && player.getAbilities().invulnerable)) {
                 return false;
             } else {
-                return this.swet.getMoveControl() instanceof SwetMoveControl;
+                return this.swet.getMoveControl() instanceof SwetMoveControl && target instanceof Player player && canLatch(this.swet, player);
             }
         }
 
         @Override
         public boolean canContinueToUse() {
             LivingEntity target = this.swet.getTarget();
-            if (this.swet.hasPrey() || target == null || !target.isAlive()) {
+            if (target == null || !target.isAlive()) {
                 return false;
             } else if (target instanceof Player player && player.getAbilities().invulnerable) {
                 return false;
             } else {
-                return true;
+                return target instanceof Player player && canLatch(this.swet, player);
             }
         }
 
@@ -447,7 +402,9 @@ public class Swet extends Mob implements Enemy {
                     this.swet.lookAt(target, 10.0F, 10.0F);
                     swetMoveControl.setDirection(this.swet.getYRot(), true);
                     if (this.swet.getBoundingBox().intersects(target.getBoundingBox())) {
-                        //this.swet.consumePassenger(target);
+                        if (target instanceof Player player) {
+                            player.getData(AetherIIDataAttachments.SWET.get()).latchSwet(this.swet);
+                        }
                     }
                 }
             }
