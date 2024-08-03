@@ -107,27 +107,24 @@ public class HighlandsPlacedFeatures {
                 context,
                 SMALL_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SMALL_GRASS_PATCH),
-                CountPlacement.of(2),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome()
         );
         register(
                 context,
                 MEDIUM_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MEDIUM_GRASS_PATCH),
-                CountPlacement.of(3),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 2)),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome()
         );
         register(
                 context,
                 LARGE_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_GRASS_PATCH),
-                CountPlacement.of(4),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
+                CountOnEveryLayerPlacement.of(UniformInt.of(0, 3)),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome()
         );
         register(
@@ -143,19 +140,19 @@ public class HighlandsPlacedFeatures {
                 NoiseThresholdCountPlacement.of(-0.1, 2, 0),
                 RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome());
         register(context, HIGHLANDS_BUSH_PATCH_FIELD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHLANDS_BUSH),
                 NoiseThresholdCountPlacement.of(-0.1, 2, 0),
                 RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome());
         register(context, BLUEBERRY_BUSH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUEBERRY_BUSH),
                 NoiseThresholdCountPlacement.of(0.1, 1, 0),
                 RarityFilter.onAverageOnceEvery(10),
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome());
         register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORANGE_TREE),
                 NoiseBasedCountPlacement.of(3, 10, 0),
@@ -173,7 +170,7 @@ public class HighlandsPlacedFeatures {
         register(context, HIGHFIELDS_FLOWER_PATCH_FOREST, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHFIELDS_FLOWER_PATCH),
                 RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome());
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());

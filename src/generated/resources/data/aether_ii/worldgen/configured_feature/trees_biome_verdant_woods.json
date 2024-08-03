@@ -102,7 +102,7 @@
       {
         "chance": 0.005,
         "feature": {
-          "feature": "aether_ii:greatoak",
+          "feature": "aether_ii:short_greatoak",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",
