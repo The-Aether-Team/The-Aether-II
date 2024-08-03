@@ -188,7 +188,7 @@ public class HighlandsPlacedFeatures {
         register(context, VERDANT_WOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VERDANT_WOODS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
         register(context, SHROUDED_FOREST_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_SHROUDED_FOREST),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(22, 0.1F, 1)));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(150, 0.25F, 50)));
         register(context, SHIMMERING_BASIN_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_SHIMMERING_BASIN),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(1)));
         register(context, SHIMMERING_BASIN_TREES_SUNKEN, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WISPROOT),
