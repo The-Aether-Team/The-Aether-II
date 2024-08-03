@@ -140,6 +140,7 @@ public class HighlandsConfiguredFeatures {
 
 
     // Underground
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKY_ROOTS = createKey("sky_roots");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
 
     
@@ -691,18 +692,31 @@ public class HighlandsConfiguredFeatures {
 
         register(
                 context,
+                SKY_ROOTS,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        25,
+                        3,
+                        2,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(AetherIIBlocks.SKY_ROOTS.get().defaultBlockState())
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, 1, 0), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(
+                context,
                 COARSE_AETHER_DIRT_CEILING,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE,
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
-                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS)), //todo roots
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKY_ROOTS)),
                         CaveSurface.CEILING,
                         UniformInt.of(1, 2),
-                        0.0F,
-                        5,
-                        0.0F,
-                        UniformInt.of(1, 6),
+                        0.1F,
+                        3,
+                        0.125F,
+                        UniformInt.of(1, 4),
                         0.75F
                 )
         );
