@@ -20,6 +20,26 @@
     },
     "features": [
       {
+        "chance": 0.25,
+        "feature": {
+          "feature": "aether_ii:wisptop_with_leaf_piles",
+          "placement": [
+            {
+              "type": "minecraft:block_predicate_filter",
+              "predicate": {
+                "type": "minecraft:would_survive",
+                "state": {
+                  "Name": "aether_ii:wisptop_sapling",
+                  "Properties": {
+                    "stage": "0"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
         "chance": 0.005,
         "feature": {
           "feature": "aether_ii:skybirch",
