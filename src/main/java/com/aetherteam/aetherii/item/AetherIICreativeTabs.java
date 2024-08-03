@@ -347,8 +347,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
                 output.accept(AetherIIBlocks.VALKYRIE_SPROUT.get());
+                output.accept(AetherIIBlocks.SKY_ROOTS.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
+                output.accept(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
+                output.accept(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
+                output.accept(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
                 output.accept(AetherIIBlocks.MOA_EGG.get());
             }).build());
 

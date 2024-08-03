@@ -29,6 +29,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
         this.block(AetherIIBlocks.AGIOSITE.get(), "natural/");
         this.translucentBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), "natural/");
+        this.roots(AetherIIBlocks.SKY_ROOTS.get());
 
         // Highfields
         this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");
@@ -45,6 +46,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.translucentBlock(AetherIIBlocks.ARCTIC_ICE.get(), "natural/");
         this.block(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), "natural/");
         this.block(AetherIIBlocks.ICESTONE.get(), "natural/");
+        this.iceCrystal(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
+        this.iceCrystal(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
+        this.iceCrystal(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
 
         // Irradiated
         this.block(AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");

@@ -1,21 +1,27 @@
 package com.aetherteam.aetherii.world.feature;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.IceCrystalBlock;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 
 import java.util.Objects;
 
@@ -48,8 +54,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                                 && level.getBlockState(placementPos.below(8)).isAir()
                                 && level.getBlockState(placementPos.below(16)).isAir()
                                 && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
-                            placeCoast(level, config.block(), placementPos, config.size(), random, distance);
-                            placeCoast(level, config.block(), placementPos.below(), config.size(), random, (int) (distance / 1.75F));
+                            placeCoast(level, config.block(), placementPos, config.size(), random, distance, config.type());
+                            placeCoast(level, config.block(), placementPos.below(), config.size(), random, (int) (distance / 1.75F), config.type());
                             break;
                         }
                 }
@@ -59,32 +65,45 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         return true;
     }
 
-    public static void placeCoast(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random, int distance) {
+    public static void placeCoast(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random, int distance, Type type) {
         float radiusSq = radius * radius;
-        placeCoastBlock(level, blockProvider, center, random, distance);
+        placeCoastBlock(level, blockProvider, center, random, distance, type);
         for (int z = 0; z < radius; z++) {
             for (int x = 0; x < radius; x++) {
                 if (x * x + z * z > radiusSq) continue;
-                placeCoastBlock(level, blockProvider, center.offset(x, 0, z), random, distance);
-                placeCoastBlock(level, blockProvider, center.offset(-x, 0, -z), random, distance);
-                placeCoastBlock(level, blockProvider, center.offset(-z, 0, x), random, distance);
-                placeCoastBlock(level, blockProvider, center.offset(z, 0, -x), random, distance);
+                placeCoastBlock(level, blockProvider, center.offset(x, 0, z), random, distance, type);
+                placeCoastBlock(level, blockProvider, center.offset(-x, 0, -z), random, distance, type);
+                placeCoastBlock(level, blockProvider, center.offset(-z, 0, x), random, distance, type);
+                placeCoastBlock(level, blockProvider, center.offset(z, 0, -x), random, distance, type);
             }
         }
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance) {
+    public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance, Type type) {
         if ((level.getBlockState(pos).isAir() || level.getBlockState(pos).getBlock() instanceof BushBlock)
                 && (level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
         )) {
-            return level.setBlock(pos, provider.getState(random, pos), 2);
-        } else {
-            return false;
+            BlockState state = provider.getState(random, pos);
+            if (level.setBlock(pos, state, 2)) {
+                if (type == Type.ARCTIC) { //todo data-driven
+                    SimpleWeightedRandomList.Builder<BlockState> crystals = new SimpleWeightedRandomList.Builder<>();
+                    crystals.add(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 3);
+                    crystals.add(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 2);
+                    crystals.add(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1);
+                    WeightedStateProvider weightedProvider = new WeightedStateProvider(crystals);
+                    BlockState crystalState = weightedProvider.getState(random, pos.below());
+                    if (random.nextInt(20) == 0 && level.getBlockState(pos.below()).isAir()) {
+                        level.setBlock(pos.below(), crystalState, 2);
+                    }
+                }
+                return true;
+            }
         }
+        return false;
     }
 
     protected void distributeVegetation(FeaturePlaceContext<CoastConfiguration> context, WorldGenLevel level, CoastConfiguration config, RandomSource random) {

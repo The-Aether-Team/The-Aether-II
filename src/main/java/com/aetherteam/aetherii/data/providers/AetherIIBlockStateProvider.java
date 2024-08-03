@@ -126,6 +126,19 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void roots(Block block) {
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            boolean snowy = state.getValue(BlockStateProperties.SNOWY);
+            ModelFile model;
+            if (snowy) {
+                model = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            } else {
+                model = this.models().cross(this.name(block), this.texture(this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            }
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
     public void snowLayer(Block block, Block base) {
         ResourceLocation texture = this.texture("natural/" + this.name(base));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
@@ -149,6 +162,29 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void iceCrystal(Block block) {
+        ResourceLocation texture = this.texture("natural/" + this.name(block));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            ModelFile model = this.models().cross(this.name(block), texture).renderType(ResourceLocation.parse("cutout"));
+            Direction direction = state.getValue(IceCrystalBlock.FACING);
+            int x = 0;
+            int y = 0;
+            if (direction.getAxis().isHorizontal()) {
+                x = 90;
+            } else if (direction == Direction.DOWN) {
+                x = 180;
+            }
+            if (direction == Direction.EAST) {
+                y = 90;
+            } else if (direction == Direction.SOUTH) {
+                y = 180;
+            } else if (direction == Direction.WEST) {
+                y = 270;
+            }
+            return ConfiguredModel.builder().modelFile(model).rotationX(x).rotationY(y).build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
     public void corroboniteCluster(Block block) {
         ResourceLocation texture = this.texture("natural/" + this.name(block));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
@@ -166,7 +202,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
             return ConfiguredModel.builder().modelFile(modelFile).rotationX(x).rotationY(y).build();
         }, BlockStateProperties.WATERLOGGED);
-
     }
 
     public void aercloudAll(Block block, String location) {
