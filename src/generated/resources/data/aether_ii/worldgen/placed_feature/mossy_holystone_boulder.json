@@ -1,11 +1,11 @@
 {
-  "feature": "aether_ii:holystone_rocks",
+  "feature": "aether_ii:mossy_holystone_boulder",
   "placement": [
     {
       "type": "minecraft:noise_threshold_count",
       "above_noise": 1,
       "below_noise": 0,
-      "noise_level": 0.1
+      "noise_level": 0.2
     },
     {
       "type": "minecraft:in_square"
@@ -13,6 +13,12 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:replaceable"
+      }
     },
     {
       "type": "minecraft:biome"

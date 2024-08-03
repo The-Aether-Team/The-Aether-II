@@ -40,8 +40,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = AetherIIFeatureUtils.registerKey("skyroot_twigs");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_ROCKS = AetherIIFeatureUtils.registerKey("holystone_rocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST = AetherIIFeatureUtils.registerKey("moa_nest");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST_TREE = AetherIIFeatureUtils.registerKey("moa_nest_tree");
 
@@ -54,25 +52,6 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
 
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-
-        SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
-        for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
-            for (int amount : TwigBlock.AMOUNT.getPossibleValues()) {
-                twigs.add(AetherIIBlocks.SKYROOT_TWIG.get().defaultBlockState().setValue(TwigBlock.FACING, facing).setValue(TwigBlock.AMOUNT, amount), amount);
-            }
-        }
-
-        SimpleWeightedRandomList.Builder<BlockState> rocks = new SimpleWeightedRandomList.Builder<>();
-        for (Direction facing : RockBlock.FACING.getPossibleValues()) {
-            for (int amount : RockBlock.AMOUNT.getPossibleValues()) {
-                rocks.add(AetherIIBlocks.HOLYSTONE_ROCK.get().defaultBlockState().setValue(RockBlock.FACING, facing).setValue(RockBlock.AMOUNT, amount), amount);
-            }
-        }
-
-
-        AetherIIFeatureUtils.register(context, SKYROOT_TWIGS, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(twigs), 4));
-        AetherIIFeatureUtils.register(context, HOLYSTONE_ROCKS, Feature.RANDOM_PATCH, NitrogenConfiguredFeatureBuilders.grassPatch(new WeightedStateProvider(rocks), 4));
-
         AetherIIFeatureUtils.register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
         AetherIIFeatureUtils.register(context, MOA_NEST_TREE, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
 

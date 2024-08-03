@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
 import com.aetherteam.aetherii.data.resources.registries.features.HighlandsConfiguredFeatures;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
@@ -23,6 +22,12 @@ import net.minecraft.world.level.levelgen.placement.*;
 import java.util.List;
 
 public class HighlandsPlacedFeatures {
+    // Surface
+    public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = createKey("skyroot_twigs");
+    public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = createKey("holystone_rocks");
+    public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
+
+
     // Vegetation
     public static final ResourceKey<PlacedFeature> GRASS_FIELD = createKey("grass_field");
     public static final ResourceKey<PlacedFeature> SMALL_GRASS_PATCH = createKey("small_grass_patch");
@@ -86,9 +91,41 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+        bootstrapSurface(context);
         bootstrapVegetation(context);
         bootstrapTrees(context);
         bootstrapWorldgen(context);
+    }
+
+    public static void bootstrapSurface(BootstrapContext<PlacedFeature> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        register(
+                context,
+                SKYROOT_TWIGS,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SKYROOT_TWIGS),
+                NoiseThresholdCountPlacement.of(0.4, 1, 0),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BiomeFilter.biome());
+        register(
+                context,
+                HOLYSTONE_ROCKS,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HOLYSTONE_ROCKS),
+                NoiseThresholdCountPlacement.of(0.1, 0, 1),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BiomeFilter.biome());
+        register(
+                context,
+                MOSSY_HOLYSTONE_BOULDER,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MOSSY_HOLYSTONE_BOULDER),
+                NoiseThresholdCountPlacement.of(0.2, 0, 1),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()),
+                BiomeFilter.biome()
+        );
     }
 
     public static void bootstrapVegetation(BootstrapContext<PlacedFeature> context) {

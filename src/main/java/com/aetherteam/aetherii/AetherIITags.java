@@ -35,6 +35,8 @@ public class AetherIITags {
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
 
         public static final TagKey<Block> AETHER_PLANT_SURVIVES_ON = tag("aether_plant_survives_on");
+        public static final TagKey<Block> SKYROOT_TWIG_SURVIVES_ON = tag("skyroot_twig_survives_on");
+        public static final TagKey<Block> HOLYSTONE_ROCK_SURVIVES_ON = tag("holystone_rock_survives_on");
         public static final TagKey<Block> BRETTL_PLANT_SURVIVES_ON = tag("brettl_plant_survives_on");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");

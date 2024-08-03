@@ -27,7 +27,10 @@
       "aether_ii:water_pond",
       "aether_ii:water_pond_underground"
     ],
-    [],
+    [
+      "aether_ii:skyroot_twigs",
+      "aether_ii:holystone_rocks"
+    ],
     [],
     [],
     [],

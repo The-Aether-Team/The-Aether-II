@@ -3,9 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries.features;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
-import com.aetherteam.aetherii.block.natural.OrangeTreeBlock;
-import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.CoastFeature;
@@ -22,6 +20,7 @@ import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
 import com.aetherteam.nitrogen.data.resources.builders.NitrogenConfiguredFeatureBuilders;
 import com.google.common.collect.ImmutableList;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Vec3i;
@@ -58,6 +57,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class HighlandsConfiguredFeatures {
+    // Surface
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = createKey("skyroot_twigs");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_ROCKS = createKey("holystone_rocks");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
+
+
     // Vegetation
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_FIELD = createKey("grass_field");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_GRASS_PATCH = createKey("small_grass_patch");
@@ -159,9 +164,52 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        bootstrapSurface(context);
         bootstrapVegetation(context);
         bootstrapTrees(context);
         bootstrapWorldgen(context);
+    }
+
+    private static void bootstrapSurface(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
+        for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
+            for (int amount : TwigBlock.AMOUNT.getPossibleValues()) {
+                twigs.add(AetherIIBlocks.SKYROOT_TWIG.get().defaultBlockState().setValue(TwigBlock.FACING, facing).setValue(TwigBlock.AMOUNT, amount), amount);
+            }
+        }
+
+        SimpleWeightedRandomList.Builder<BlockState> rocks = new SimpleWeightedRandomList.Builder<>();
+        for (Direction facing : RockBlock.FACING.getPossibleValues()) {
+            for (int amount : RockBlock.AMOUNT.getPossibleValues()) {
+                rocks.add(AetherIIBlocks.HOLYSTONE_ROCK.get().defaultBlockState().setValue(RockBlock.FACING, facing).setValue(RockBlock.AMOUNT, amount), amount);
+            }
+        }
+
+        register(
+                context,
+                SKYROOT_TWIGS,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        2,
+                        1,
+                        1,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(twigs)),
+                                BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(
+                context,
+                HOLYSTONE_ROCKS,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        4,
+                        2,
+                        2,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(rocks)),
+                                BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(context, MOSSY_HOLYSTONE_BOULDER, Feature.FOREST_ROCK, new BlockStateConfiguration(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState()));
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {

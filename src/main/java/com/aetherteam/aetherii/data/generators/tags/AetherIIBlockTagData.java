@@ -176,6 +176,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.POWDER_SNOW);
         this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON)
                 .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON)
+                .addTag(AetherIITags.Blocks.AETHER_DIRT);
+        this.tag(AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON)
+                .addTag(AetherIITags.Blocks.AETHER_DIRT)
+                .addTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
         this.tag(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON)
                 .add(AetherIIBlocks.QUICKSOIL.get())
                 .addTags(BlockTags.SAND);

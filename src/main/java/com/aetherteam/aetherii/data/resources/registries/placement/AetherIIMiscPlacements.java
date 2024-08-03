@@ -19,8 +19,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 
 public class AetherIIMiscPlacements {
-    public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = AetherIIPlacementUtils.createKey("skyroot_twigs");
-    public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = AetherIIPlacementUtils.createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> MOA_NEST = AetherIIPlacementUtils.createKey("moa_nest");
     public static final ResourceKey<PlacedFeature> COLD_AERCLOUD = AetherIIPlacementUtils.createKey("cold_aercloud");
     public static final ResourceKey<PlacedFeature> BLUE_AERCLOUD = AetherIIPlacementUtils.createKey("blue_aercloud");
@@ -32,20 +30,6 @@ public class AetherIIMiscPlacements {
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
-
-
-
-
-        AetherIIPlacementUtils.register(context, SKYROOT_TWIGS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.SKYROOT_TWIGS),
-                NoiseThresholdCountPlacement.of(-0.8, 1, 2),
-                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
-                BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, HOLYSTONE_ROCKS, configuredFeatures.getOrThrow(AetherIIMiscFeatures.HOLYSTONE_ROCKS),
-                NoiseThresholdCountPlacement.of(-0.8, 1, 2),
-                CountOnEveryLayerPlacement.of(UniformInt.of(0, 1)),
-                BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(new BlockPos(0, -1, 0), AetherIITags.Blocks.AETHER_DIRT)), //todo
-                BiomeFilter.biome());
 
         AetherIIPlacementUtils.register(context, MOA_NEST, configuredFeatures.getOrThrow(AetherIIMiscFeatures.MOA_NEST),
                 RarityFilter.onAverageOnceEvery(6),
