@@ -1,10 +1,10 @@
 {
   "type": "aether_ii:arctic_ice_spike",
   "config": {
-    "additional_radius": 2,
-    "additional_slope_intensity": 5,
-    "base_radius": 4.25,
-    "base_slope_intensity": 7.5,
+    "additional_radius": 4,
+    "additional_slope_intensity": 7,
+    "base_radius": 3.25,
+    "base_slope_intensity": 5.5,
     "block": {
       "type": "minecraft:noise_provider",
       "noise": {

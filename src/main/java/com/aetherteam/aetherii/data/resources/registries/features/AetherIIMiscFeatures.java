@@ -194,10 +194,10 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                                 AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState()
                         )
                 ),
-                4.25F,
-                2,
-                7.5F,
-                5,
+                3.25F,
+                4,
+                5.5F,
+                7,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
         ));
         AetherIIFeatureUtils.register(context, MEGA_ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
@@ -211,7 +211,7 @@ public class AetherIIMiscFeatures extends AetherIIFeatureBuilders {
                         )
                 ),
                 6.25F,
-                3,
+                5,
                 3.5F,
                 2,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
