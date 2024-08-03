@@ -69,6 +69,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR.get(), ZephyrRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.TEMPEST.get(), TempestRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.COCKATRICE.get(), CockatriceRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SWET.get(), SwetRenderer::new);
 
         // Projectiles
         event.registerEntityRenderer(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), ThrownItemRenderer::new);
@@ -126,6 +127,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.ZEPHYR, ZephyrModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.TEMPEST, TempestModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.COCKATRICE, CockatriceModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SWET, SwetModel::createBodyLayer);
 
         // Accessories
         // Handwear
