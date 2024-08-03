@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.data.resources.registries.placement;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
 import com.aetherteam.aetherii.data.resources.registries.features.HighlandsConfiguredFeatures;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
@@ -12,6 +11,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -68,6 +68,10 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> BATTLEGROUND_WASTES_TREES = createKey("battleground_wastes_trees");
 
 
+    // Underground
+    public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
+
+
     // Worldgen
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = createKey("coast_quicksoil");
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL_SPARSE = createKey("coast_quicksoil_sparse");
@@ -94,6 +98,7 @@ public class HighlandsPlacedFeatures {
         bootstrapSurface(context);
         bootstrapVegetation(context);
         bootstrapTrees(context);
+        bootstrapUnderground(context);
         bootstrapWorldgen(context);
     }
 
@@ -255,6 +260,19 @@ public class HighlandsPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
         register(context, BATTLEGROUND_WASTES_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_IRRADIATED),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
+    }
+
+    public static void bootstrapUnderground(BootstrapContext<PlacedFeature> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
+        register(context, COARSE_AETHER_DIRT_CEILING, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_CEILING),
+                CountPlacement.of(125),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(132), VerticalAnchor.top()),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(-1)),
+                BiomeFilter.biome()
+        );
     }
 
     public static void bootstrapWorldgen(BootstrapContext<PlacedFeature> context) {
