@@ -45,23 +45,23 @@ public class SwetModel<T extends Swet> extends HierarchicalModel<T> {
         PartDefinition squish = gel.addOrReplaceChild("squish", CubeListBuilder.create().texOffs(56, 32).addBox(-9.0F, -3.5F, -9.0F, 18.0F, 4.0F, 18.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 8.0F, 0.0F));
 
         PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -4.5F, -4.5F, 9.0F, 9.0F, 9.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 18).addBox(-4.5F, -4.5F, -4.5F, 9.0F, 9.0F, 9.0F, new CubeDeformation(-0.5F)), PartPose.offset(0.0F, -8.5F, -1.0F));
+                .texOffs(0, 18).addBox(-4.5F, -4.5F, -4.5F, 9.0F, 9.0F, 9.0F, new CubeDeformation(-0.5F)), PartPose.offset(0.0F, -8.5F, -0.5F));
 
-        PartDefinition wisp_top_left = head.addOrReplaceChild("wisp_top_left", CubeListBuilder.create(), PartPose.offset(4.5F, -3.5F, 2.5F));
+        PartDefinition wisp_top_left = head.addOrReplaceChild("wisp_top_left", CubeListBuilder.create(), PartPose.offset(4.5F, -2.5F, -1.5F));
 
-        PartDefinition wisp_top_left_r1 = wisp_top_left.addOrReplaceChild("wisp_top_left_r1", CubeListBuilder.create().texOffs(2, 28).addBox(0.0F, -1.0F, 0.0F, 0.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, -4.0F, 0.1309F, 0.1309F, 0.0F));
+        PartDefinition wisp_top_left_r1 = wisp_top_left.addOrReplaceChild("wisp_top_left_r1", CubeListBuilder.create().texOffs(2, 28).addBox(0.0F, -1.0F, 0.0F, 0.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1309F, 0.1309F, 0.0F));
 
-        PartDefinition wisp_top_right = head.addOrReplaceChild("wisp_top_right", CubeListBuilder.create(), PartPose.offset(-4.5F, -3.5F, 2.5F));
+        PartDefinition wisp_top_right = head.addOrReplaceChild("wisp_top_right", CubeListBuilder.create(), PartPose.offset(-4.5F, -2.5F, -1.5F));
 
-        PartDefinition wisp_top_right_r1 = wisp_top_right.addOrReplaceChild("wisp_top_right_r1", CubeListBuilder.create().texOffs(2, 28).mirror().addBox(0.0F, -1.0F, 0.0F, 0.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 1.0F, -4.0F, 0.1309F, -0.1309F, 0.0F));
+        PartDefinition wisp_top_right_r1 = wisp_top_right.addOrReplaceChild("wisp_top_right_r1", CubeListBuilder.create().texOffs(2, 28).mirror().addBox(0.0F, -1.0F, 0.0F, 0.0F, 3.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1309F, -0.1309F, 0.0F));
 
-        PartDefinition wisp_bottom_left = head.addOrReplaceChild("wisp_bottom_left", CubeListBuilder.create(), PartPose.offset(4.5F, 1.5F, 3.5F));
+        PartDefinition wisp_bottom_left = head.addOrReplaceChild("wisp_bottom_left", CubeListBuilder.create(), PartPose.offset(4.5F, 1.5F, -0.5F));
 
-        PartDefinition wisp_bottom_left_r1 = wisp_bottom_left.addOrReplaceChild("wisp_bottom_left_r1", CubeListBuilder.create().texOffs(3, 32).addBox(0.0F, 0.0F, 0.0F, 0.0F, 3.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -4.0F, -0.1309F, 0.1309F, 0.0F));
+        PartDefinition wisp_bottom_left_r1 = wisp_bottom_left.addOrReplaceChild("wisp_bottom_left_r1", CubeListBuilder.create().texOffs(3, 32).addBox(0.0F, 0.0F, 0.0F, 0.0F, 3.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.1309F, 0.1309F, 0.0F));
 
-        PartDefinition wisp_bottom_right = head.addOrReplaceChild("wisp_bottom_right", CubeListBuilder.create(), PartPose.offset(-4.5F, 1.5F, 3.5F));
+        PartDefinition wisp_bottom_right = head.addOrReplaceChild("wisp_bottom_right", CubeListBuilder.create(), PartPose.offset(-4.5F, 1.5F, -0.5F));
 
-        PartDefinition wisp_bottom_right_r1 = wisp_bottom_right.addOrReplaceChild("wisp_bottom_right_r1", CubeListBuilder.create().texOffs(3, 32).mirror().addBox(0.0F, 0.0F, 0.0F, 0.0F, 3.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, -4.0F, -0.1309F, -0.1309F, 0.0F));
+        PartDefinition wisp_bottom_right_r1 = wisp_bottom_right.addOrReplaceChild("wisp_bottom_right_r1", CubeListBuilder.create().texOffs(3, 32).mirror().addBox(0.0F, 0.0F, 0.0F, 0.0F, 3.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.1309F, -0.1309F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 128, 64);
     }

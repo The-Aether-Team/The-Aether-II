@@ -34,7 +34,7 @@ public class SwetGelLayer extends RenderLayer<Swet, SwetModel<Swet>> {
             if (flag) {
                 vertexconsumer = bufferSource.getBuffer(RenderType.outline(this.getTextureLocation(livingEntity)));
             } else {
-                vertexconsumer = bufferSource.getBuffer(RenderType.entityTranslucent(this.getTextureLocation(livingEntity)));
+                vertexconsumer = bufferSource.getBuffer(RenderType.entityTranslucentCull(this.getTextureLocation(livingEntity)));
             }
 
 
