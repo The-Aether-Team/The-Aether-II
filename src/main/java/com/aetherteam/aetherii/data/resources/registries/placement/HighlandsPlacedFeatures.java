@@ -134,6 +134,7 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()),
+                RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
                 BiomeFilter.biome()
         );
     }

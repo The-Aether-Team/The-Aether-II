@@ -31,6 +31,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -51,6 +52,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
+import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.level.material.Fluids;
@@ -181,6 +183,8 @@ public class HighlandsConfiguredFeatures {
     }
 
     private static void bootstrapSurface(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+
         SimpleWeightedRandomList.Builder<BlockState> twigs = new SimpleWeightedRandomList.Builder<>();
         for (Direction facing : TwigBlock.FACING.getPossibleValues()) {
             for (int amount : TwigBlock.AMOUNT.getPossibleValues()) {
@@ -219,7 +223,16 @@ public class HighlandsConfiguredFeatures {
                                 BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
-        register(context, MOSSY_HOLYSTONE_BOULDER, Feature.FOREST_ROCK, new BlockStateConfiguration(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState()));
+        register(context, MOSSY_HOLYSTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
+                new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        .add(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState(), 4)
+                        .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1)
+                        .build()),
+                0.5F,
+                UniformFloat.of(0.0F, 1.0F),
+                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 6)))),
+                1.0F,
+                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())));
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
