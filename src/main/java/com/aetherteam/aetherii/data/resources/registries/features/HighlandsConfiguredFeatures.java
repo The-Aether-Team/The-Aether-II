@@ -241,7 +241,7 @@ public class HighlandsConfiguredFeatures {
                 12,
                 4,
                 PlacementUtils.filtered(
-                        Feature.SIMPLE_BLOCK,
+                        AetherIIFeatures.AETHER_GRASS.get(),
                         new SimpleBlockConfiguration(
                                 new NoiseProvider(
                                         2345L,
@@ -266,7 +266,7 @@ public class HighlandsConfiguredFeatures {
                         80,
                         4,
                         3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState())
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
@@ -279,7 +279,7 @@ public class HighlandsConfiguredFeatures {
                         64,
                         6,
                         3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
                                 new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
                                         .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
@@ -295,7 +295,7 @@ public class HighlandsConfiguredFeatures {
                         48,
                         8,
                         3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
                                 new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
                                         .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
@@ -360,7 +360,7 @@ public class HighlandsConfiguredFeatures {
                         )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
         ));
 
-        register(context, AETHER_GRASS_BONEMEAL, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+        register(context, AETHER_GRASS_BONEMEAL, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                 .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
