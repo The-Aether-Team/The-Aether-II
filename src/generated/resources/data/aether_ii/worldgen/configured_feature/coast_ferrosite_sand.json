@@ -8,11 +8,11 @@
         "Name": "aether_ii:ferrosite_sand"
       }
     },
-    "brettl_chance": 0.0,
     "distance_noise": "aether_ii:highlands/coasts/highfields",
     "pattern_noise": 0.0,
     "size": 16.35,
     "valid_blocks": "aether_ii:aether_grass_block",
+    "vegetation_chance": 0.0,
     "y_range": {
       "max_inclusive": 156,
       "min_inclusive": 112

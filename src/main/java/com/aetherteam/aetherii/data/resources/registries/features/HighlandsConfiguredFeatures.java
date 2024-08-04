@@ -49,7 +49,9 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
+import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.level.material.Fluids;
 
@@ -72,6 +74,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH = createKey("highlands_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = createKey("blueberry_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT = createKey("brettl_plant");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = AetherIIFeatureUtils.registerKey("highfields_flower_patch");
 
@@ -201,7 +204,7 @@ public class HighlandsConfiguredFeatures {
                         1,
                         1,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(twigs)),
-                                BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -213,7 +216,7 @@ public class HighlandsConfiguredFeatures {
                         2,
                         2,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(rocks)),
-                                BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(context, MOSSY_HOLYSTONE_BOULDER, Feature.FOREST_ROCK, new BlockStateConfiguration(AetherIIBlocks.MOSSY_HOLYSTONE.get().defaultBlockState()));
@@ -239,7 +242,7 @@ public class HighlandsConfiguredFeatures {
                                                 AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState()
                                         )
                                 )
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 )
         ));
         register(
@@ -252,7 +255,7 @@ public class HighlandsConfiguredFeatures {
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -268,7 +271,7 @@ public class HighlandsConfiguredFeatures {
                                         .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 2)
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
                                         .build())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -285,7 +288,7 @@ public class HighlandsConfiguredFeatures {
                                         .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 3)
                                         .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 4)
                                         .build())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -298,7 +301,7 @@ public class HighlandsConfiguredFeatures {
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 2))
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -311,7 +314,7 @@ public class HighlandsConfiguredFeatures {
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.HIGHLANDS_BUSH.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
                 )
         );
         register(
@@ -324,10 +327,11 @@ public class HighlandsConfiguredFeatures {
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.BLUEBERRY_BUSH.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
                 )
         );
         register(context, ORANGE_TREE, AetherIIFeatures.ORANGE_TREE.get(), new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.ORANGE_TREE.get().defaultBlockState().setValue(OrangeTreeBlock.AGE, 4))));
+        register(context, BRETTL_PLANT, AetherIIFeatures.BRETTL_PLANT.get(), new NoneFeatureConfiguration());
 
         register(
                 context,
@@ -340,7 +344,7 @@ public class HighlandsConfiguredFeatures {
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                                 .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
-                        )), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
+                        )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
         ));
 
         register(context, AETHER_GRASS_BONEMEAL, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
@@ -704,7 +708,7 @@ public class HighlandsConfiguredFeatures {
                         4,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
                                 BlockStateProvider.simple(AetherIIBlocks.SKY_ROOTS.get().defaultBlockState())
-                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, 1, 0), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
         register(
@@ -754,7 +758,10 @@ public class HighlandsConfiguredFeatures {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 Optional.empty(),
                 UniformInt.of(112, 156),
-                0.75F,
+                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BRETTL_PLANT),
+                        RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
+                0.01F,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
         register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
@@ -764,6 +771,7 @@ public class HighlandsConfiguredFeatures {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 Optional.of(DensityFunctions.zero()),
                 UniformInt.of(112, 156),
+                Optional.empty(),
                 0.0F,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));
@@ -774,6 +782,7 @@ public class HighlandsConfiguredFeatures {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
                 Optional.empty(),
                 UniformInt.of(120, 180),
+                Optional.empty(),
                 0.0F,
                 HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
         ));

@@ -8,10 +8,10 @@
         "Name": "aether_ii:arctic_packed_ice"
       }
     },
-    "brettl_chance": 0.0,
     "distance_noise": "aether_ii:highlands/coasts/arctic",
     "size": 16.35,
     "valid_blocks": "aether_ii:aether_grass_block",
+    "vegetation_chance": 0.0,
     "y_range": {
       "max_inclusive": 180,
       "min_inclusive": 120

@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
 import com.aetherteam.aetherii.data.resources.registries.features.HighlandsConfiguredFeatures;
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositePillarConfiguration;

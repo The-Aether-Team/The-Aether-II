@@ -12,14 +12,6 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class AetherIIFeatureBuilders {
-    public static RandomPatchConfiguration aetherGrassPatch(BlockStateProvider block, int tries) {
-        return FeatureUtils.simpleRandomPatchConfiguration(tries, PlacementUtils.onlyWhenEmpty(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(block)));
-    }
-
-    public static RandomPatchConfiguration brettlPatch(int tries, Holder<PlacedFeature> feature) {
-        return new RandomPatchConfiguration(tries, 16, 4, feature);
-    }
-
     public static AercloudConfiguration aercloud(int bounds, BlockState blockState) {
         return new AercloudConfiguration(bounds, BlockStateProvider.simple(blockState));
     }
