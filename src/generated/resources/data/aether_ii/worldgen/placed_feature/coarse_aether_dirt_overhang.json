@@ -2,12 +2,10 @@
   "feature": "aether_ii:coarse_aether_dirt_ceiling",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 50
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 10
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 10.0,
+      "noise_offset": 0.0,
+      "noise_to_count_ratio": 50
     },
     {
       "type": "minecraft:in_square"
@@ -15,13 +13,14 @@
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:uniform",
+        "type": "minecraft:trapezoid",
         "max_inclusive": {
           "below_top": 0
         },
         "min_inclusive": {
-          "above_bottom": 132
-        }
+          "above_bottom": 112
+        },
+        "plateau": 208
       }
     },
     {
