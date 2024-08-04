@@ -10,7 +10,7 @@
     },
     "distance_noise": "aether_ii:highlands/coasts/highfields",
     "size": 16.35,
-    "valid_blocks": "aether_ii:aether_grass_block",
+    "valid_blocks": "aether_ii:quicksoil_coast_generates_on",
     "vegetation_chance": 0.01,
     "vegetation_feature": {
       "feature": "aether_ii:brettl_plant",

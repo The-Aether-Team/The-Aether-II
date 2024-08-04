@@ -10,7 +10,7 @@
     },
     "distance_noise": "aether_ii:highlands/coasts/arctic",
     "size": 16.35,
-    "valid_blocks": "aether_ii:aether_grass_block",
+    "valid_blocks": "aether_ii:arctic_coast_generates_on",
     "vegetation_chance": 0.0,
     "y_range": {
       "max_inclusive": 180,

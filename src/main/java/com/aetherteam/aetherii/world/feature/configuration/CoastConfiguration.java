@@ -7,6 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.DensityFunction;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import java.util.Optional;
 
-public record CoastConfiguration(BlockStateProvider block, CoastFeature.Type type, float size, DensityFunction distanceNoise, Optional<DensityFunction> patternNoise, UniformInt yRange, Optional<Holder<PlacedFeature>> vegetationFeature, float vegetationChance, HolderSet<Block> validBlocks) implements FeatureConfiguration {
+public record CoastConfiguration(BlockStateProvider block, CoastFeature.Type type, float size, DensityFunction distanceNoise, Optional<DensityFunction> patternNoise, UniformInt yRange, Optional<Holder<PlacedFeature>> vegetationFeature, float vegetationChance, TagKey<Block> validBlocks) implements FeatureConfiguration {
     public static final Codec<CoastConfiguration> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
             BlockStateProvider.CODEC.fieldOf("block").forGetter(CoastConfiguration::block),
             CoastFeature.Type.CODEC.fieldOf("type").forGetter(CoastConfiguration::type),
@@ -26,6 +27,6 @@ public record CoastConfiguration(BlockStateProvider block, CoastFeature.Type typ
             UniformInt.CODEC.fieldOf("y_range").forGetter(CoastConfiguration::yRange),
             PlacedFeature.CODEC.optionalFieldOf("vegetation_feature").forGetter(CoastConfiguration::vegetationFeature),
             Codec.floatRange(0.0F, 1.0F).fieldOf("vegetation_chance").forGetter(CoastConfiguration::vegetationChance),
-            RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("valid_blocks").forGetter(CoastConfiguration::validBlocks)
+            TagKey.codec(Registries.BLOCK).fieldOf("valid_blocks").forGetter(CoastConfiguration::validBlocks)
     ).apply(instance, CoastConfiguration::new));
 }

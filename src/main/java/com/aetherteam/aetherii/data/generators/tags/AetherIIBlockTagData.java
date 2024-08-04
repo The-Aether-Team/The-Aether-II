@@ -180,15 +180,33 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 .addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON)
                 .addTag(AetherIITags.Blocks.AETHER_DIRT)
-                .addTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS)
-                .add(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+                .addTag(AetherIITags.Blocks.HOLYSTONE)
+                .addTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
+        this.tag(AetherIITags.Blocks.BOULDER_SURVIVES_ON)
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON)
+                .addTag(AetherIITags.Blocks.AETHER_DIRT)
+                .addTag(AetherIITags.Blocks.HOLYSTONE)
+                .addTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
         this.tag(AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON)
                 .add(AetherIIBlocks.QUICKSOIL.get())
                 .addTags(BlockTags.SAND);
-        this.tag(AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
-                AetherIIBlocks.COARSE_AETHER_DIRT.get());
+        this.tag(AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE).add(
                 AetherIIBlocks.HOLYSTONE.get());
+        this.tag(AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON)
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.FERROSITE_COAST_GENERATES_ON)
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON)
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON)
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON)
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get()
         );

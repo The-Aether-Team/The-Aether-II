@@ -65,6 +65,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = createKey("skyroot_twigs");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_ROCKS = createKey("holystone_rocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
 
 
     // Vegetation
@@ -232,7 +233,14 @@ public class HighlandsConfiguredFeatures {
                 UniformFloat.of(0.0F, 1.0F),
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 6)))),
                 1.0F,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())));
+                AetherIITags.Blocks.BOULDER_SURVIVES_ON));
+        register(context, FALLEN_SKYROOT_LOG, AetherIIFeatures.FALLEN_LOG.get(), new FallenLogConfiguration(
+                BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
+                UniformInt.of(2, 4),
+                Optional.empty(),
+                0.0F,
+                AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON
+        ));
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -775,7 +783,7 @@ public class HighlandsConfiguredFeatures {
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                         BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.BRETTL_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)))),
                 0.01F,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+                AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON
         ));
         register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
@@ -786,7 +794,7 @@ public class HighlandsConfiguredFeatures {
                 UniformInt.of(112, 156),
                 Optional.empty(),
                 0.0F,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+                AetherIITags.Blocks.FERROSITE_COAST_GENERATES_ON
         ));
         register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
@@ -797,7 +805,7 @@ public class HighlandsConfiguredFeatures {
                 UniformInt.of(120, 180),
                 Optional.empty(),
                 0.0F,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+                AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON
         ));
 
         register(context, WATER_POND, AetherIIFeatures.LAKE.get(),
@@ -855,7 +863,7 @@ public class HighlandsConfiguredFeatures {
                 6,
                 40,
                 24,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+                AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON
         ));
         register(context, FERROSITE_PILLAR_TURF_TOP, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
@@ -899,7 +907,7 @@ public class HighlandsConfiguredFeatures {
                 ),
                 2.5F,
                 3,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get())
+                AetherIITags.Blocks.FERROSITE_SPIKE_GENERATES_ON
         ));
         register(context, ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
                 new NoiseProvider(
@@ -915,7 +923,7 @@ public class HighlandsConfiguredFeatures {
                 2,
                 7.5F,
                 5,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
+                AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
         ));
         register(context, MEGA_ARCTIC_ICE_SPIKE, AetherIIFeatures.ARCTIC_ICE_SPIKE.get(), new ArcticIceSpikeConfiguration(
                 new NoiseProvider(
@@ -931,7 +939,7 @@ public class HighlandsConfiguredFeatures {
                 3,
                 3.5F,
                 2,
-                HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
+                AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON
         ));
         register(context, ARCTIC_ICE_SPIKE_VARIANTS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEGA_ARCTIC_ICE_SPIKE)), 0.1F)

@@ -29,6 +29,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
+    public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
 
 
     // Vegetation
@@ -135,6 +136,18 @@ public class HighlandsPlacedFeatures {
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()),
                 RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
+                BiomeFilter.biome()
+        );
+        register(
+                context,
+                FALLEN_SKYROOT_LOG,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FALLEN_SKYROOT_LOG),
+                NoiseThresholdCountPlacement.of(0.0, 1, 2),
+                RarityFilter.onAverageOnceEvery(4),
+                InSquarePlacement.spread(),
+                SurfaceWaterDepthFilter.forMaxDepth(1),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_DIRT), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
                 BiomeFilter.biome()
         );
     }
