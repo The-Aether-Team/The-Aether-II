@@ -493,7 +493,7 @@ public class HighlandsPlacedFeatures {
 
         AetherIIPlacementUtils.register(context, SURFACE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(8),
+                RarityFilter.onAverageOnceEvery(12),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, SURFACE_GOLDEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GOLDEN_AERCLOUD),
@@ -503,17 +503,17 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, SURFACE_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(16),
+                RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, SURFACE_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(16),
+                RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         AetherIIPlacementUtils.register(context, SURFACE_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(16),
+                RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
 
