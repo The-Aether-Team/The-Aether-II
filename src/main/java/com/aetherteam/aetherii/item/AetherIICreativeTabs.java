@@ -264,14 +264,15 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.RUSTED_FERROSITE.get());
                 output.accept(AetherIIBlocks.ICESTONE.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
+                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
-                output.accept(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
-                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
                 output.accept(AetherIIBlocks.CORROBONITE_ORE.get());

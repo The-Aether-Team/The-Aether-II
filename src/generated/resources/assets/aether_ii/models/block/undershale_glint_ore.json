@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "aether_ii:block/natural/undershale_glint_ore"
+  }
+}

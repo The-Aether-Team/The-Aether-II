@@ -14,7 +14,6 @@ import java.util.List;
 
 public class AetherIIPlacementUtils {
     public static void bootstrap(BootstrapContext<PlacedFeature> placedFeature) {
-        AetherIIOrePlacements.bootstrap(placedFeature);
         AetherIIMiscPlacements.bootstrap(placedFeature);
     }
 
