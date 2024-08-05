@@ -31,6 +31,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
+    public static final ResourceKey<PlacedFeature> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
 
 
     // Vegetation
@@ -187,6 +188,15 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_DIRT), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
                 BiomeFilter.biome()
         );
+        register(
+                context,
+                FALLEN_WISPROOT_LOG,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FALLEN_WISPROOT_LOG),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_DIRT), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
+                BiomeFilter.biome()
+        );
     }
 
     public static void bootstrapVegetation(BootstrapContext<PlacedFeature> context) {
@@ -299,7 +309,7 @@ public class HighlandsPlacedFeatures {
         register(context, MAGNETIC_SCAR_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_MAGNETIC_SCAR),
                 VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
         register(context, TURQUOISE_FOREST_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_TURQUOISE_FOREST),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(4, 0.1F, 1)));
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.1F, 1)));
         register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VIOLET_HIGHWOODS),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
 

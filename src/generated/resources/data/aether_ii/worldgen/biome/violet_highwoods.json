@@ -27,7 +27,10 @@
       "aether_ii:water_pond",
       "aether_ii:water_pond_underground"
     ],
-    [],
+    [
+      "aether_ii:skyroot_twigs",
+      "aether_ii:holystone_rocks"
+    ],
     [],
     [],
     [],
@@ -50,7 +53,15 @@
     ],
     [
       "aether_ii:moa_nest",
-      "aether_ii:violet_highwoods_trees"
+      "aether_ii:violet_highwoods_trees",
+      "aether_ii:small_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:large_grass_patch",
+      "aether_ii:fallen_wisproot_log",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:coarse_aether_dirt_ceiling",
+      "aether_ii:coarse_aether_dirt_overhang",
+      "aether_ii:blueberry_bush_patch"
     ],
     [
       "aether_ii:high_storm_aercloud",

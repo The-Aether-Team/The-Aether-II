@@ -44,7 +44,12 @@
     [
       "aether_ii:water_spring"
     ],
-    [],
+    [
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:coarse_aether_dirt_ceiling",
+      "aether_ii:coarse_aether_dirt_overhang",
+      "aether_ii:blueberry_bush_patch"
+    ],
     [
       "aether_ii:high_storm_aercloud",
       "aether_ii:high_green_aercloud",

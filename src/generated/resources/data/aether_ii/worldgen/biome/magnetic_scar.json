@@ -28,7 +28,9 @@
       "aether_ii:water_pond",
       "aether_ii:water_pond_underground"
     ],
-    [],
+    [
+      "aether_ii:holystone_rocks"
+    ],
     [],
     [],
     [],
@@ -50,7 +52,12 @@
       "aether_ii:water_spring"
     ],
     [
-      "aether_ii:magnetic_scar_trees"
+      "aether_ii:magnetic_scar_trees",
+      "aether_ii:grass_field",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:coarse_aether_dirt_ceiling",
+      "aether_ii:coarse_aether_dirt_overhang",
+      "aether_ii:blueberry_bush_patch"
     ],
     [
       "aether_ii:high_storm_aercloud",

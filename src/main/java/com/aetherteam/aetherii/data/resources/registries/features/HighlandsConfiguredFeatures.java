@@ -73,6 +73,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> HOLYSTONE_ROCKS = createKey("holystone_rocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
 
 
     // Vegetation
@@ -269,6 +270,13 @@ public class HighlandsConfiguredFeatures {
         register(context, FALLEN_SKYROOT_LOG, AetherIIFeatures.FALLEN_LOG.get(), new FallenLogConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
                 UniformInt.of(2, 4),
+                Optional.empty(),
+                0.0F,
+                AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON
+        ));
+        register(context, FALLEN_WISPROOT_LOG, AetherIIFeatures.FALLEN_LOG.get(), new FallenLogConfiguration(
+                BlockStateProvider.simple(AetherIIBlocks.WISPROOT_LOG.get()),
+                UniformInt.of(3, 6),
                 Optional.empty(),
                 0.0F,
                 AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON
