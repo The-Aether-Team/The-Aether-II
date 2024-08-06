@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.living.EffectsSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.*;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -28,4 +29,6 @@ public class AetherIIDataAttachments {
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<EquipmentAbilitiesAttachment>> EQUIPMENT_ABILITIES = ATTACHMENTS.register("equipment_abilities", () -> AttachmentType.builder(EquipmentAbilitiesAttachment::new).serialize(EquipmentAbilitiesAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<DimensionTeleportationAttachment>> DIMENSION_TELEPORTATION = ATTACHMENTS.register("dimension_teleportation", () -> AttachmentType.builder(DimensionTeleportationAttachment::new).serialize(DimensionTeleportationAttachment.CODEC).build());
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<OutpostTrackerAttachment>> OUTPOST_TRACKER = ATTACHMENTS.register("outpost_tracker", () -> AttachmentType.builder(OutpostTrackerAttachment::new).serialize(OutpostTrackerAttachment.CODEC).copyOnDeath().build());
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<SwetAttachment>> SWET = ATTACHMENTS.register("swet", () -> AttachmentType.serializable((entity) -> new SwetAttachment((Player) entity)).build());
+
 }

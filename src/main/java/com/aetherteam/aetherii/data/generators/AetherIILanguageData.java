@@ -644,6 +644,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
         this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
+        this.addItem(AetherIIItems.SWET_SPAWN_EGG, "Swet Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
@@ -799,6 +800,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
+        this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
@@ -1018,6 +1020,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addSubtitle("entity", "cockatrice.shoot", "Cockatrice shoots");
 
+        this.addSubtitle("entity", "swet.attack", "Swet attacks");
+        this.addSubtitle("entity", "swet.death", "Swet dies");
+        this.addSubtitle("entity", "swet.hurt", "Swet hurts");
+        this.addSubtitle("entity", "swet.jump", "Swet squishes");
+        this.addSubtitle("entity", "swet.squish", "Swet squishes");
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");

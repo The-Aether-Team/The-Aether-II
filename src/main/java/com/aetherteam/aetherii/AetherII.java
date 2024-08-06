@@ -2,8 +2,6 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
 import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
-import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
-import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
 import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -18,8 +16,8 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.ReloadListeners;
-import com.aetherteam.aetherii.data.resources.registries.*;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
+import com.aetherteam.aetherii.data.resources.registries.*;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
@@ -163,6 +161,7 @@ public class AetherII {
         GuidebookDiscoveryListener.listen(bus);
         EquipmentAbilitiesListener.listen(bus);
         ItemAttributeListener.listen(bus);
+        SwetListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);
 
@@ -186,6 +185,7 @@ public class AetherII {
         registrar.playToClient(RemountAerbunnyPacket.TYPE, RemountAerbunnyPacket.STREAM_CODEC, RemountAerbunnyPacket::execute);
         registrar.playToClient(UpdateGuidebookDiscoveryPacket.TYPE, UpdateGuidebookDiscoveryPacket.STREAM_CODEC, UpdateGuidebookDiscoveryPacket::execute);
         registrar.playToClient(SetVehiclePacket.TYPE, SetVehiclePacket.STREAM_CODEC, SetVehiclePacket::execute);
+        registrar.playToClient(SwetSyncPacket.TYPE, SwetSyncPacket.STREAM_CODEC, SwetSyncPacket::execute);
 
         // SERVERBOUND
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);

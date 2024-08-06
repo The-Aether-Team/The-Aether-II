@@ -109,6 +109,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 10
+      },
+      {
+        "type": "aether_ii:swet",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
       }
     ],
     "ambient": [],
