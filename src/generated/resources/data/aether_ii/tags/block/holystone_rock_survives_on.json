@@ -2,6 +2,7 @@
   "values": [
     "#aether_ii:aether_dirt",
     "#aether_ii:holystone",
-    "#aether_ii:aether_underground_blocks"
+    "#aether_ii:aether_underground_blocks",
+    "aether_ii:icestone"
   ]
 }

@@ -80,8 +80,9 @@ public class BoulderFeature extends Feature<BoulderConfiguration> {
             }
         }
 
+        placements.sort(Comparator.comparingInt(Vec3i::getY).reversed());
         placements.forEach((placementPos) -> {
-            if (!level.getBlockState(placementPos).isCollisionShapeFullBlock(level, placementPos) || level.getBlockState(placementPos).is(config.validBlocks())) {
+            if (!level.getBlockState(placementPos).isCollisionShapeFullBlock(level, placementPos) && level.getBlockState(placementPos.below()).is(config.validBlocks())) {
                 level.setBlock(placementPos, config.block().getState(random, placementPos), 3);
             }
         });

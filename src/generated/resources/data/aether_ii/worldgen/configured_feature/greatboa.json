@@ -4,6 +4,95 @@
     "decorators": [
       {
         "type": "aether_ii:snow"
+      },
+      {
+        "type": "aether_ii:leaf_pile",
+        "block_provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_twig",
+                "Properties": {
+                  "facing": "north",
+                  "twig_amount": "1"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_twig",
+                "Properties": {
+                  "facing": "north",
+                  "twig_amount": "2"
+                }
+              },
+              "weight": 2
+            },
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_twig",
+                "Properties": {
+                  "facing": "south",
+                  "twig_amount": "1"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_twig",
+                "Properties": {
+                  "facing": "south",
+                  "twig_amount": "2"
+                }
+              },
+              "weight": 2
+            },
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_twig",
+                "Properties": {
+                  "facing": "west",
+                  "twig_amount": "1"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_twig",
+                "Properties": {
+                  "facing": "west",
+                  "twig_amount": "2"
+                }
+              },
+              "weight": 2
+            },
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_twig",
+                "Properties": {
+                  "facing": "east",
+                  "twig_amount": "1"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:skyroot_twig",
+                "Properties": {
+                  "facing": "east",
+                  "twig_amount": "2"
+                }
+              },
+              "weight": 2
+            }
+          ]
+        },
+        "chance": 50
       }
     ],
     "dirt_provider": {

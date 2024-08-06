@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
 import com.google.common.collect.Lists;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -11,14 +13,19 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 
 import java.util.List;
 
-public class LeafPileDecorator extends TreeDecorator {
-    public static final MapCodec<LeafPileDecorator> CODEC = BlockStateProvider.CODEC
-            .fieldOf("provider")
-            .xmap(LeafPileDecorator::new, p_69327_ -> p_69327_.provider);
-    private final BlockStateProvider provider;
+public class GroundFeatureDecorator extends TreeDecorator {
+    public static final MapCodec<GroundFeatureDecorator> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                    BlockStateProvider.CODEC.fieldOf("block_provider").forGetter(decorator -> decorator.blockProvider),
+                    Codec.INT.fieldOf("chance").forGetter(decorator -> decorator.chance)
+            ).apply(instance, GroundFeatureDecorator::new)
+    );
+    protected final BlockStateProvider blockProvider;
+    protected final int chance;
 
-    public LeafPileDecorator(BlockStateProvider provider) {
-        this.provider = provider;
+    public GroundFeatureDecorator(BlockStateProvider blockProvider, int chance) {
+        this.blockProvider = blockProvider;
+        this.chance = chance;
     }
 
     @Override
@@ -56,7 +63,7 @@ public class LeafPileDecorator extends TreeDecorator {
         for (int i = -2; i <= 2; ++i) {
             for (int j = -2; j <= 2; ++j) {
                 if (Math.abs(i) != 2 || Math.abs(j) != 2) {
-                    if (random.nextInt(5) > 2) {
+                    if (random.nextInt(this.chance) == 0) {
                         this.placeBlockAt(context, pos.offset(i, 0, j));
                     }
                 }
@@ -67,7 +74,7 @@ public class LeafPileDecorator extends TreeDecorator {
     private void placeBlockAt(TreeDecorator.Context context, BlockPos pos) {
         BlockPos blockpos = pos.above();
         if (Feature.isGrassOrDirt(context.level(), blockpos.below()) && context.isAir(blockpos)) {
-            context.setBlock(blockpos, this.provider.getState(context.random(), pos));
+            context.setBlock(blockpos, this.blockProvider.getState(context.random(), pos));
         }
     }
 

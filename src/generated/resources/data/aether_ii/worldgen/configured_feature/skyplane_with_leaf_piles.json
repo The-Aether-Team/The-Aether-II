@@ -4,7 +4,7 @@
     "decorators": [
       {
         "type": "aether_ii:leaf_pile",
-        "provider": {
+        "block_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {
             "Name": "aether_ii:skyplane_leaf_pile",
@@ -13,7 +13,8 @@
               "piles": "1"
             }
           }
-        }
+        },
+        "chance": 3
       }
     ],
     "dirt_provider": {

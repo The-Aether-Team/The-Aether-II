@@ -29,7 +29,10 @@
       "aether_ii:water_pond",
       "aether_ii:water_pond_underground"
     ],
-    [],
+    [
+      "aether_ii:mossy_holystone_boulder",
+      "aether_ii:icestone_boulder"
+    ],
     [],
     [],
     [],
@@ -49,7 +52,11 @@
     [],
     [],
     [
-      "aether_ii:moa_nest"
+      "aether_ii:moa_nest",
+      "aether_ii:grass_field",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:coarse_aether_dirt_frosted_ceiling",
+      "aether_ii:blueberry_bush_patch"
     ],
     [
       "aether_ii:freeze_top_layer_arctic",

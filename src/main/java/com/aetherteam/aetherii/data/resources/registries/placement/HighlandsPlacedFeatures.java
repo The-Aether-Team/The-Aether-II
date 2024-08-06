@@ -30,6 +30,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = createKey("holystone_rocks");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
+    public static final ResourceKey<PlacedFeature> ICESTONE_BOULDER = createKey("icestone_boulder");
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<PlacedFeature> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
 
@@ -77,6 +78,7 @@ public class HighlandsPlacedFeatures {
     // Underground
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_FLOOR = createKey("coarse_aether_dirt_floor");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
+    public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_FROSTED_CEILING = createKey("coarse_aether_dirt_frosted_ceiling");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_OVERHANG = createKey("coarse_aether_dirt_overhang");
 
     public static final ResourceKey<PlacedFeature> ORE_SCATTERGLASS = AetherIIPlacementUtils.createKey("ore_scatterglass");
@@ -170,6 +172,17 @@ public class HighlandsPlacedFeatures {
                 MOSSY_HOLYSTONE_BOULDER,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MOSSY_HOLYSTONE_BOULDER),
                 NoiseThresholdCountPlacement.of(0.2, 0, 1),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()),
+                RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
+                BiomeFilter.biome()
+        );
+        register(
+                context,
+                ICESTONE_BOULDER,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ICESTONE_BOULDER),
+                NoiseThresholdCountPlacement.of(0.0, 1, 0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()),
@@ -340,6 +353,15 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, COARSE_AETHER_DIRT_CEILING, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_CEILING),
+                CountPlacement.of(90),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(112), VerticalAnchor.top(), 208)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(-1)),
+                BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.solid(), 12)),
+                BiomeFilter.biome()
+        );
+        register(context, COARSE_AETHER_DIRT_FROSTED_CEILING, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_FROSTED_CEILING),
                 CountPlacement.of(90),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(112), VerticalAnchor.top(), 208)),
