@@ -403,7 +403,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AECHOR_CUTTING.get()
         );
         this.tag(BlockTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.get());
-        this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT);
+        this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT).add(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.tag(BlockTags.FLOWER_POTS).add(
                 AetherIIBlocks.POTTED_SKYROOT_SAPLING.get(),
                 AetherIIBlocks.POTTED_SKYPLANE_SAPLING.get(),

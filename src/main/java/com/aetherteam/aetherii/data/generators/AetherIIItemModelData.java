@@ -219,6 +219,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Highfields
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+        this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
+        this.itemBlock(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET.get());
 
         // Magnetic
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());

@@ -139,6 +139,54 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }, BlockStateProperties.WATERLOGGED);
     }
 
+    public void floweringBryalinn(Block block, Block mossBlock, String flowerName) {
+        ResourceLocation moss = this.texture("natural/" + this.name(mossBlock));
+        ResourceLocation flower = this.texture("natural/" + flowerName);
+        ModelFile model = this.models().withExistingParent(this.name(block), "block/block")
+                .texture("flower", flower).texture("moss", moss).texture("particle", moss).renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                .element().from(10, 1, 2).to(10, 4, 6).rotation().angle(45).axis(Direction.Axis.Y).origin(10, 1, 2).rescale(true).end().shade(false).ao(false)
+                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
+                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
+                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("#flower").end()
+                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("#flower").end()
+                .end()
+                .element().from(14, 1, 2).to(14, 4, 6).rotation().angle(-45).axis(Direction.Axis.Y).origin(14, 1, 2).rescale(true).end().shade(false).ao(false)
+                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
+                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
+                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("#flower").end()
+                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("#flower").end()
+                .end()
+                .element().from(2, 1, 10).to(2, 4, 14).rotation().angle(45).axis(Direction.Axis.Y).origin(2, 1, 10).rescale(true).end().shade(false).ao(false)
+                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
+                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
+                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("flower").end()
+                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("flower").end()
+                .end()
+                .element().from(6, 1, 10).to(6, 4, 14).rotation().angle(-45).axis(Direction.Axis.Y).origin(6, 1, 10).rescale(true).end().shade(false).ao(false)
+                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
+                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
+                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("flower").end()
+                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("flower").end()
+                .end()
+                .element().from(0, 0, 0).to(16, 1, 16)
+                .face(Direction.NORTH).uvs(0, 15, 16, 16).texture("#moss").end()
+                .face(Direction.EAST).uvs(0, 15, 16, 16).texture("#moss").end()
+                .face(Direction.SOUTH).uvs(0, 15, 16, 16).texture("#moss").end()
+                .face(Direction.WEST).uvs(0, 15, 16, 16).texture("#moss").end()
+                .face(Direction.UP).uvs(0, 0, 16, 16).texture("#moss").end()
+                .face(Direction.DOWN).uvs(0, 0, 16, 16).texture("#moss").end()
+                .end();
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(model));
+    }
+
     public void snowLayer(Block block, Block base) {
         ResourceLocation texture = this.texture("natural/" + this.name(base));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
