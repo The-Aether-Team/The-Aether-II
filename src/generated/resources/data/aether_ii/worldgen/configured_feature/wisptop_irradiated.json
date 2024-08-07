@@ -10,6 +10,9 @@
             "facing": "up"
           }
         }
+      },
+      {
+        "type": "aether_ii:irradiation"
       }
     ],
     "dirt_provider": {

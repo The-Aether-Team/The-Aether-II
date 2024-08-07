@@ -12,7 +12,7 @@
         }
       },
       {
-        "type": "aether_ii:leaf_pile",
+        "type": "aether_ii:ground_feature",
         "block_provider": {
           "type": "minecraft:simple_state_provider",
           "state": {

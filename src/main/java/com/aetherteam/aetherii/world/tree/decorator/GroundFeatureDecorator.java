@@ -80,6 +80,6 @@ public class GroundFeatureDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> type() {
-        return AetherIITreeDecoratorTypes.LEAF_PILE.get();
+        return AetherIITreeDecoratorTypes.GROUND_FEATURE.get();
     }
 }

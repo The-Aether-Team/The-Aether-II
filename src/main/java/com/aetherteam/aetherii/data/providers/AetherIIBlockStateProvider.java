@@ -384,6 +384,13 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void tintedLeaves(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            ModelFile model = this.models().leaves(this.name(block), this.texture(this.name(block), "natural/"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
+    }
+
     public void shortGrass(Block block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
             AetherTallGrassBlock.GrassType type = state.getValue(AetherTallGrassBlock.TYPE);
