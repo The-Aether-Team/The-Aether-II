@@ -22,15 +22,12 @@ public class AetherIIColorResolvers {
             float shade = state.getValue(IrradiatedLeavesBlock.SHADE);
             float shadeMax = 7.0F;
 
-            Color bottom = new Color(0xEFE553);
-
-            Color top = new Color(0xF2EFE6);
+            Color bottom = new Color(0xFFF68D);
+            Color top = new Color(0xFFFFFF);
 
             int resultRed = bottom.getRed() + (int) ((shade / shadeMax) * (top.getRed() - bottom.getRed()));
             int resultGreen = bottom.getGreen() + (int) ((shade / shadeMax) * (top.getGreen() - bottom.getGreen()));
             int resultBlue = bottom.getBlue() + (int) ((shade / shadeMax) * (top.getBlue() - bottom.getBlue()));
-
-//            AetherII.LOGGER.info(String.valueOf(new Color(resultRed, resultGreen, resultBlue).getRGB()));
 
             return new Color(resultRed, resultGreen, resultBlue).getRGB();
         },
