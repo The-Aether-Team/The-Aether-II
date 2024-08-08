@@ -60,6 +60,8 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> COASTS_MAGNETIC = createKey("highlands/coasts/magnetic");
     public static final ResourceKey<DensityFunction> COASTS_ARCTIC = createKey("highlands/coasts/arctic");
 
+    public static final ResourceKey<DensityFunction> SNOW_NOISE = createKey("highlands/snow/noise");
+
     public static final ResourceKey<DensityFunction> CLOUDBED_NOISE = createKey("highlands/cloudbed/noise");
     public static final ResourceKey<DensityFunction> CLOUDBED_Y_OFFSET = createKey("highlands/cloudbed/y_offset");
 
