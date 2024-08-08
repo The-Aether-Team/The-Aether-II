@@ -159,9 +159,11 @@ public class HighlandsConfiguredFeatures {
     // Underground
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKY_ROOTS = createKey("sky_roots");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FROSTED_SKY_ROOTS = createKey("frosted_sky_roots");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CRYSTALS = createKey("ice_crystals");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_FLOOR = createKey("coarse_aether_dirt_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_FROSTED_CEILING = createKey("coarse_aether_dirt_frosted_ceiling");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CEILING = createKey("ice_ceiling");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE = createKey("ore_icestone");
@@ -273,13 +275,13 @@ public class HighlandsConfiguredFeatures {
                 AetherIITags.Blocks.BOULDER_SURVIVES_ON));
         register(context, ICESTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
                 new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                        .add(AetherIIBlocks.ICESTONE.get().defaultBlockState(), 4)
-                        .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 1)
+                        .add(AetherIIBlocks.ICESTONE.get().defaultBlockState(), 1)
+                        .add(AetherIIBlocks.HOLYSTONE.get().defaultBlockState(), 3)
                         .build()),
                 0.5F,
                 UniformFloat.of(0.0F, 1.0F),
-                Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 6)))),
-                1.0F,
+                Optional.empty(),
+                0.0F,
                 AetherIITags.Blocks.BOULDER_SURVIVES_ON));
         register(context, FALLEN_SKYROOT_LOG, AetherIIFeatures.FALLEN_LOG.get(), new FallenLogConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
@@ -831,6 +833,22 @@ public class HighlandsConfiguredFeatures {
         );
         register(
                 context,
+                ICE_CRYSTALS,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        20,
+                        4,
+                        4,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                .add(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
+                                .add(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
+                                .add(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get().defaultBlockState().setValue(IceCrystalBlock.FACING, Direction.DOWN), 1)
+                                .build())
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(
+                context,
                 COARSE_AETHER_DIRT_FLOOR,
                 Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
@@ -877,6 +895,23 @@ public class HighlandsConfiguredFeatures {
                         3,
                         0.125F,
                         UniformInt.of(1, 4),
+                        0.75F
+                )
+        );
+        register(
+                context,
+                ICE_CEILING,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.ARCTIC_ICE_REPLACEABLE,
+                        BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS)),
+                        CaveSurface.CEILING,
+                        UniformInt.of(1, 2),
+                        0.35F,
+                        3,
+                        0.35F, //todo
+                        UniformInt.of(1, 3),
                         0.75F
                 )
         );

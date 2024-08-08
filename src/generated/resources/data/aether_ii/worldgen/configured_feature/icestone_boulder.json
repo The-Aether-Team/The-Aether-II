@@ -8,13 +8,13 @@
           "data": {
             "Name": "aether_ii:icestone"
           },
-          "weight": 4
+          "weight": 1
         },
         {
           "data": {
             "Name": "aether_ii:holystone"
           },
-          "weight": 1
+          "weight": 3
         }
       ]
     },
@@ -25,19 +25,6 @@
       "max_exclusive": 1.0,
       "min_inclusive": 0.0
     },
-    "vegetation_chance": 1.0,
-    "vegetation_feature": {
-      "feature": "aether_ii:holystone_rocks",
-      "placement": [
-        {
-          "type": "minecraft:count",
-          "count": {
-            "type": "minecraft:uniform",
-            "max_inclusive": 6,
-            "min_inclusive": 1
-          }
-        }
-      ]
-    }
+    "vegetation_chance": 0.0
   }
 }

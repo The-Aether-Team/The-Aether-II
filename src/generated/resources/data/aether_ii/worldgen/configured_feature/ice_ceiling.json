@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:vegetation_patch",
+  "config": {
+    "depth": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 2,
+      "min_inclusive": 1
+    },
+    "extra_bottom_block_chance": 0.35,
+    "extra_edge_column_chance": 0.75,
+    "ground_state": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:arctic_packed_ice"
+      }
+    },
+    "replaceable": "#aether_ii:arctic_ice_replaceable",
+    "surface": "ceiling",
+    "vegetation_chance": 0.35,
+    "vegetation_feature": {
+      "feature": "aether_ii:ice_crystals",
+      "placement": []
+    },
+    "vertical_range": 3,
+    "xz_radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 3,
+      "min_inclusive": 1
+    }
+  }
+}

@@ -41,7 +41,9 @@ public class AetherIITags {
         public static final TagKey<Block> FALLEN_LOG_SURVIVES_ON = tag("fallen_log_survives_on");
         public static final TagKey<Block> BRETTL_PLANT_SURVIVES_ON = tag("brettl_plant_survives_on");
         public static final TagKey<Block> SKY_ROOTS_SURVIVES_ON = tag("sky_roots_survives_on");
+        public static final TagKey<Block> ICE_CRYSTAL_SURVIVES_ON = tag("ice_crystal_survives_on");
         public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
+        public static final TagKey<Block> ARCTIC_ICE_REPLACEABLE = tag("arctic_ice_replaceable");
         public static final TagKey<Block> QUICKSOIL_COAST_GENERATES_ON = tag("quicksoil_coast_generates_on");
         public static final TagKey<Block> FERROSITE_COAST_GENERATES_ON = tag("ferrosite_coast_generates_on");
         public static final TagKey<Block> ARCTIC_COAST_GENERATES_ON = tag("arctic_coast_generates_on");
