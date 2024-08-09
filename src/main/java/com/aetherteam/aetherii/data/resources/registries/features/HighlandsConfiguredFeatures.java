@@ -51,10 +51,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
-import net.minecraft.world.level.levelgen.placement.CaveSurface;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
@@ -159,6 +156,7 @@ public class HighlandsConfiguredFeatures {
     // Underground
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKY_ROOTS = createKey("sky_roots");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FROSTED_SKY_ROOTS = createKey("frosted_sky_roots");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE = createKey("ice");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CRYSTALS = createKey("ice_crystals");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_FLOOR = createKey("coarse_aether_dirt_floor");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
@@ -832,6 +830,18 @@ public class HighlandsConfiguredFeatures {
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.SKY_ROOTS_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
+        register(context,
+                ICE,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        20,
+                        4,
+                        4,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+                                BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get().defaultBlockState())
+                        ), BlockPredicate.allOf(BlockPredicate.matchesBlocks(Vec3i.ZERO.above(), AetherIIBlocks.ARCTIC_PACKED_ICE.get()), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
         register(
                 context,
                 ICE_CRYSTALS,
@@ -967,8 +977,10 @@ public class HighlandsConfiguredFeatures {
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
                 Optional.empty(),
                 UniformInt.of(120, 180),
-                Optional.empty(),
-                0.0F,
+                Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                        List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS)), 0.35F)),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE))))),
+                0.25F,
                 AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON
         ));
 
