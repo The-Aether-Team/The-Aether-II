@@ -1126,7 +1126,25 @@ public class HighlandsConfiguredFeatures {
 
         register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
                 new CloudbedConfiguration(
-                        BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState()),
+                        new NoiseProvider(
+                                2345L,
+                                new NormalNoise.NoiseParameters(-6, 1, -2.0, 0.0, 0.25, 1.25),
+                                1.0F,
+                                List.of(
+                                        AetherIIBlocks.GREEN_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.BLUE_AERCLOUD.get().defaultBlockState()
+                                )
+                        ),
                         BlockPredicate.ONLY_IN_AIR_PREDICATE,
                         96,
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_NOISE),
