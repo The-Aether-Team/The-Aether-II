@@ -25,29 +25,23 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
     public boolean place(FeaturePlaceContext<AercloudConfiguration> context) {
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
-        boolean direction = random.nextBoolean();
-        BlockPos blockPos = context.origin().offset(-random.nextInt(8), 0, (direction ? 8 : 0) - random.nextInt(8));
+        boolean positiveZAngle = random.nextBoolean();
+        BlockPos blockPos = context.origin().offset(-random.nextInt(8), 0, (positiveZAngle ? 0 : 8) - random.nextInt(8));
         AercloudConfiguration config = context.config();
         BlockState blockState = config.block().getState(random, blockPos);
 
-        for (int amount = 0; amount < config.bounds(); ++amount) {
-            int xOffset = random.nextInt(2);
-            int yOffset = (random.nextBoolean() ? random.nextInt(3) - 1 : 0);
-            int zOffset = random.nextInt(2);
+        int width = 3;
+        int height = 2;
 
-            if (direction) {
-                blockPos = blockPos.offset(xOffset, yOffset, -zOffset);
-            } else {
-                blockPos = blockPos.offset(xOffset, yOffset, zOffset);
-            }
+        for (int lengthCount = 0; lengthCount < config.bounds(); ++lengthCount) {
+            blockPos = blockPos.offset(random.nextInt(2), (random.nextBoolean() ? random.nextInt(3) - 1 : 0), random.nextInt(2) * (positiveZAngle ? 1 : -1));
 
-            for (int x = blockPos.getX(); x < blockPos.getX() + random.nextInt(2) + 3; ++x) {
-                for (int y = blockPos.getY(); y < blockPos.getY() + random.nextInt(1) + 2; ++y) {
-                    for (int z = blockPos.getZ(); z < blockPos.getZ() + random.nextInt(2) + 3; ++z) {
-                        BlockPos newPosition = new BlockPos(x, y, z);
-
+            for (int x = 0; x < random.nextInt(2) + width; ++x) {
+                for (int y = 0; y < random.nextInt(1) + height; ++y) {
+                    for (int z = 0; z < random.nextInt(2) + width; ++z) {
+                        BlockPos newPosition = blockPos.offset(x, y, z);
                         if (level.isEmptyBlock(newPosition)) {
-                            if (Math.abs(x - blockPos.getX()) + Math.abs(y - blockPos.getY()) + Math.abs(z - blockPos.getZ()) < 4 + random.nextInt(2)) {
+                            if (x + y + z < 4 + random.nextInt(2)) {
                                 this.setBlock(level, newPosition, blockState);
                             }
                         }
@@ -55,6 +49,7 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
                 }
             }
         }
+
         return true;
     }
 }
