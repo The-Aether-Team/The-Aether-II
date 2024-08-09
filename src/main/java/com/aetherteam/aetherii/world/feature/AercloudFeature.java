@@ -30,18 +30,19 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
         AercloudConfiguration config = context.config();
         BlockState blockState = config.block().getState(random, blockPos);
 
-        int width = 3;
-        int height = 1;
+        int baseWidth = 3;
+        int baseHeight = 1;
 
         for (int lengthCount = 0; lengthCount < config.bounds(); ++lengthCount) {
-            blockPos = blockPos.offset(random.nextInt(2), (random.nextInt(5) > 2 ? random.nextInt(3) - 1 : 0), random.nextInt(2) * (positiveZAngle ? 1 : -1));
+            boolean changeYChance = random.nextInt(7) > 5;
+            blockPos = blockPos.offset(random.nextInt(2), (changeYChance ? random.nextInt(3) - 1 : 0), random.nextInt(2) * (positiveZAngle ? 1 : -1));
 
-            for (int x = 0; x < random.nextInt(2) + width; ++x) {
-                for (int y = 0; y < random.nextInt(1) + height; ++y) {
-                    for (int z = 0; z < random.nextInt(2) + width; ++z) {
+            for (int x = 0; x < baseWidth + random.nextInt(3); ++x) {
+                for (int y = 0; y < baseHeight + random.nextInt(2); ++y) {
+                    for (int z = 0; z < baseWidth + random.nextInt(3); ++z) {
                         BlockPos newPosition = blockPos.offset(x, y, z);
                         if (level.isEmptyBlock(newPosition)) {
-                            if (x + y + z < random.nextInt(9)) {
+                            if (x + y + z < random.nextInt(28)) {
                                 this.setBlock(level, newPosition, blockState);
                             }
                         }
