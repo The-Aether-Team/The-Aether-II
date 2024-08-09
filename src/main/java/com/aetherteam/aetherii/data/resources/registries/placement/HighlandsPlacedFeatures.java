@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.features.HighlandsConfiguredFeatures;
+import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
 import com.aetherteam.nitrogen.data.resources.builders.NitrogenPlacedFeatureBuilders;
@@ -116,6 +117,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ARCTIC_ICE_SPIKE_CLUSTER = createKey("arctic_ice_spike_cluster");
 
     public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_ARCTIC = createKey("freeze_top_layer_arctic");
+    public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER_TUNDRA = createKey("freeze_top_layer_tundra");
 
     public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
 
@@ -186,8 +188,9 @@ public class HighlandsPlacedFeatures {
                 NoiseThresholdCountPlacement.of(0.0, 1, 0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                new ElevationFilter(VerticalAnchor.aboveBottom(192), VerticalAnchor.top()),
                 BlockPredicateFilter.forPredicate(BlockPredicate.replaceable()),
-                RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 BiomeFilter.biome()
         );
         register(
@@ -501,6 +504,7 @@ public class HighlandsPlacedFeatures {
         );
 
         register(context, FREEZE_TOP_LAYER_ARCTIC, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FREEZE_TOP_LAYER_ARCTIC), BiomeFilter.biome());
+        register(context, FREEZE_TOP_LAYER_TUNDRA, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FREEZE_TOP_LAYER_TUNDRA), BiomeFilter.biome());
 
         register(context, CLOUDBED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
     }

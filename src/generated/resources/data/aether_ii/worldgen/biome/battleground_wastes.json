@@ -31,7 +31,10 @@
       "aether_ii:water_pond",
       "aether_ii:water_pond_underground"
     ],
-    [],
+    [
+      "aether_ii:skyroot_twigs",
+      "aether_ii:holystone_rocks"
+    ],
     [],
     [],
     [],
@@ -52,7 +55,12 @@
       "aether_ii:water_spring"
     ],
     [
-      "aether_ii:battleground_wastes_trees"
+      "aether_ii:battleground_wastes_trees",
+      "aether_ii:grass_field",
+      "aether_ii:small_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:large_grass_patch",
+      "aether_ii:coarse_aether_dirt_floor"
     ],
     [
       "aether_ii:high_storm_aercloud",

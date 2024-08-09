@@ -30,6 +30,8 @@
       "aether_ii:water_pond_underground"
     ],
     [
+      "aether_ii:holystone_rocks",
+      "aether_ii:mossy_holystone_boulder",
       "aether_ii:icestone_boulder"
     ],
     [],
@@ -55,10 +57,11 @@
       "aether_ii:grass_field",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_frosted_ceiling",
-      "aether_ii:ice_overhang"
+      "aether_ii:ice_overhang",
+      "aether_ii:blueberry_bush_patch"
     ],
     [
-      "aether_ii:freeze_top_layer_arctic",
+      "aether_ii:freeze_top_layer_tundra",
       "aether_ii:high_storm_aercloud",
       "aether_ii:high_green_aercloud",
       "aether_ii:high_purple_aercloud",
@@ -178,5 +181,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.0
+  "temperature": 0.35
 }

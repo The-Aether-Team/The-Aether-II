@@ -175,7 +175,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ALLOWED_BUCKET_PICKUP).add(
                 Blocks.POWDER_SNOW);
         this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON)
-                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON)
                 .addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON)
@@ -806,6 +806,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(BlockTags.SNOW_LAYER_CANNOT_SURVIVE_ON).addTags(AetherIITags.Blocks.AERCLOUDS).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
+                AetherIIBlocks.ICESTONE.get(),
                 AetherIIBlocks.ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );

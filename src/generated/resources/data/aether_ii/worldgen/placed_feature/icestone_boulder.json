@@ -15,6 +15,15 @@
       "heightmap": "MOTION_BLOCKING_NO_LEAVES"
     },
     {
+      "type": "aether_ii:elevation_filter",
+      "max": {
+        "below_top": 0
+      },
+      "min": {
+        "above_bottom": 192
+      }
+    },
+    {
       "type": "minecraft:block_predicate_filter",
       "predicate": {
         "type": "minecraft:replaceable"
@@ -23,11 +32,7 @@
     {
       "type": "minecraft:random_offset",
       "xz_spread": 0,
-      "y_spread": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 1,
-        "min_inclusive": 0
-      }
+      "y_spread": 1
     },
     {
       "type": "minecraft:biome"

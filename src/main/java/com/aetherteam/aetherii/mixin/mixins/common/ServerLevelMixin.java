@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ServerLevel.class)
 public class ServerLevelMixin {
     @Inject(at = @At(value = "HEAD"), method = "tickPrecipitation(Lnet/minecraft/core/BlockPos;)V", cancellable = true)
-    private void tickPrecipitation(BlockPos pos, CallbackInfo ci) { //todo
+    private void tickPrecipitation(BlockPos pos, CallbackInfo ci) {
         ServerLevel serverLevel = (ServerLevel) (Object) this;
         BlockPos heightmapPos = serverLevel.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, pos);
         BlockPos belowHeightmapPos = heightmapPos.below();
@@ -45,20 +45,20 @@ public class ServerLevelMixin {
                         int layers = blockState.getValue(SnowLayerBlock.LAYERS);
                         if (layers < Math.min(i, 8)) {
                             BlockState blockstate1 = blockState.setValue(SnowLayerBlock.LAYERS, layers + 1);
-//                            Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
-//                            serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
+                            Block.pushEntitiesUp(blockState, blockstate1, serverLevel, heightmapPos);
+                            serverLevel.setBlockAndUpdate(heightmapPos, blockstate1);
                         }
                     } else if (AetherGrassBlock.plantNotSnowed(blockState) && blockState.getBlock() instanceof Snowable snowable) {
-//                        serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState));
+                        serverLevel.setBlockAndUpdate(heightmapPos, snowable.setSnowy(blockState));
                     } else {
-//                        serverLevel.setBlockAndUpdate(heightmapPos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState());
+                        serverLevel.setBlockAndUpdate(heightmapPos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState());
                     }
                 }
 
                 Biome.Precipitation precipitation = biome.getPrecipitationAt(belowHeightmapPos);
                 if (precipitation != Biome.Precipitation.NONE) {
                     BlockState blockState = serverLevel.getBlockState(belowHeightmapPos);
-//                    blockState.getBlock().handlePrecipitation(blockState, serverLevel, belowHeightmapPos, precipitation);
+                    blockState.getBlock().handlePrecipitation(blockState, serverLevel, belowHeightmapPos, precipitation);
                 }
             }
             ci.cancel();

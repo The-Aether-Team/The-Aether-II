@@ -45,6 +45,7 @@ import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.aetherteam.aetherii.world.AetherIIPoi;
 import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import com.aetherteam.aetherii.world.feature.modifier.filter.AetherIIPlacementModifierTypes;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.AetherIIBlockPredicateTypes;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
@@ -112,7 +113,8 @@ public class AetherII {
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
                 AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS,
                 AetherIISurfaceRules.MATERIAL_RULES,
-                AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES
+                AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
+                AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES
         };
 
         for (DeferredRegister<?> register : registers) {
