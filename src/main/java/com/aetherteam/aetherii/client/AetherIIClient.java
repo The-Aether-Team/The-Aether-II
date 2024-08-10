@@ -1,11 +1,11 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.event.listeners.ClientTooltipsListener;
-import com.aetherteam.aetherii.client.event.listeners.PlayerRespawnClientListeners;
 import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
+import com.aetherteam.aetherii.client.event.listeners.ClientTooltipsListener;
 import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
 import com.aetherteam.aetherii.client.event.listeners.MusicListener;
+import com.aetherteam.aetherii.client.event.listeners.PlayerRespawnClientListeners;
 import com.aetherteam.aetherii.client.event.listeners.attachment.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.event.listeners.attachment.DimensionRenderEffectListeners;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -58,6 +58,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRecipeCategories::registerRecipeCategories);
         neoBus.addListener(AetherIIParticleTypes::registerParticleFactories);
         neoBus.addListener(AetherIIOverlays::registerOverlays);
+        neoBus.addListener(AetherIIRenderers::registerAddLayer);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
         neoBus.addListener(AetherIIRenderers::bakeModels);
