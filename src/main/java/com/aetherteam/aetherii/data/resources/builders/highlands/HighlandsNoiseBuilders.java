@@ -36,7 +36,7 @@ public class HighlandsNoiseBuilders extends AetherIIDensityFunctionBuilders {
     private static NoiseRouter createNoiseRouter(HolderGetter<DensityFunction> function, DensityFunction finalDensity) {
         DensityFunction temperature = getFunction(function, AetherIIDensityFunctions.TEMPERATURE);
         DensityFunction vegetation = getFunction(function, AetherIIDensityFunctions.VEGETATION_RARITY_MAPPER);
-        DensityFunction continents = getFunction(function, AetherIIDensityFunctions.CONTINENTS_FINAL);
+        DensityFunction continents = getFunction(function, AetherIIDensityFunctions.FINAL_ISLANDS);
         DensityFunction erosion = getFunction(function, AetherIIDensityFunctions.EROSION);
         DensityFunction depth = getFunction(function, AetherIIDensityFunctions.DEPTH);
         DensityFunction ridges = getFunction(function, AetherIIDensityFunctions.LAKES_NOISE);
