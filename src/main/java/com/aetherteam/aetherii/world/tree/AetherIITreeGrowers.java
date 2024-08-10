@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.world.tree;
 
-import com.aetherteam.aetherii.data.resources.registries.features.HighlandsConfiguredFeatures;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.data.resources.registries.features;
+package com.aetherteam.aetherii.data.resources.registries.highlands;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
@@ -73,6 +73,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICESTONE_BOULDER = createKey("icestone_boulder");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST = createKey("moa_nest");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST_TREE = createKey("moa_nest_tree");
 
 
     // Vegetation
@@ -296,6 +298,8 @@ public class HighlandsConfiguredFeatures {
                 0.0F,
                 AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON
         ));
+        register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
+        register(context, MOA_NEST_TREE, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -927,19 +931,19 @@ public class HighlandsConfiguredFeatures {
                 )
         );
 
-        AetherIIFeatureUtils.register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
-        AetherIIFeatureUtils.register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
-        AetherIIFeatureUtils.register(context, ORE_ICESTONE_SMALL, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 16));
-        AetherIIFeatureUtils.register(context, ORE_AGIOSITE, Feature.ORE, new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 38));
+        register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
+        register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
+        register(context, ORE_ICESTONE_SMALL, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 16));
+        register(context, ORE_AGIOSITE, Feature.ORE, new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.AGIOSITE.get().defaultBlockState(), 38));
 
-        AetherIIFeatureUtils.register(context, ORE_HOLYSTONE_QUARTZ, Feature.ORE, new OreConfiguration(quartz, 64));
-        AetherIIFeatureUtils.register(context, ORE_AMBROSIUM, Feature.ORE, new OreConfiguration(ambrosium, 16));
-        AetherIIFeatureUtils.register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(zanite, 5, 0.5F));
-        AetherIIFeatureUtils.register(context, ORE_GLINT, Feature.ORE, new OreConfiguration(glint, 4));
-        AetherIIFeatureUtils.register(context, ORE_ARKENIUM, Feature.ORE, new OreConfiguration(arkenium, 5, 0.5F));
-        AetherIIFeatureUtils.register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(gravitite, 3, 0.5F));
-        AetherIIFeatureUtils.register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 4));
-        AetherIIFeatureUtils.register(context, ORE_CORROBONITE, AetherIIFeatures.CORROBONITE_ORE.get(), new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.CORROBONITE_ORE.get().defaultBlockState(), 4));
+        register(context, ORE_HOLYSTONE_QUARTZ, Feature.ORE, new OreConfiguration(quartz, 64));
+        register(context, ORE_AMBROSIUM, Feature.ORE, new OreConfiguration(ambrosium, 16));
+        register(context, ORE_ZANITE, Feature.ORE, new OreConfiguration(zanite, 5, 0.5F));
+        register(context, ORE_GLINT, Feature.ORE, new OreConfiguration(glint, 4));
+        register(context, ORE_ARKENIUM, Feature.ORE, new OreConfiguration(arkenium, 5, 0.5F));
+        register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(gravitite, 3, 0.5F));
+        register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 4));
+        register(context, ORE_CORROBONITE, AetherIIFeatures.CORROBONITE_ORE.get(), new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.CORROBONITE_ORE.get().defaultBlockState(), 4));
     }
 
     private static void bootstrapWorldgen(BootstrapContext<ConfiguredFeature<?, ?>> context) {

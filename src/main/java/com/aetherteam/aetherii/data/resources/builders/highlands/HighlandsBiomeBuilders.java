@@ -4,8 +4,7 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIICarvers;
-import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIMiscPlacements;
-import com.aetherteam.aetherii.data.resources.registries.placement.HighlandsPlacedFeatures;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsPlacedFeatures;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.sounds.Music;
@@ -74,7 +73,7 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.COAST_QUICKSOIL)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.FLOURISHING_FIELD_TREES)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GRASS_FIELD)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.VALKYRIE_SPROUT_PATCH)
@@ -90,7 +89,7 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.SKYROOT_TWIGS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.VERDANT_WOODS_TREES)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SMALL_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MEDIUM_GRASS_PATCH)
@@ -215,7 +214,7 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.SKYROOT_TWIGS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.TURQUOISE_FOREST_TREES)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SMALL_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MEDIUM_GRASS_PATCH)
@@ -234,7 +233,7 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.SKYROOT_TWIGS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.VIOLET_HIGHWOODS_TREES)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SMALL_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MEDIUM_GRASS_PATCH)
@@ -320,7 +319,7 @@ public class HighlandsBiomeBuilders {
         return makeArcticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
                         .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.ENDURING_WOODLAND_TREES)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SMALL_GRASS_PATCH)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MEDIUM_GRASS_PATCH)
@@ -344,7 +343,7 @@ public class HighlandsBiomeBuilders {
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.MOSSY_HOLYSTONE_BOULDER)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.ICESTONE_BOULDER)
-                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AetherIIMiscPlacements.MOA_NEST)
+                        .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GRASS_FIELD)
                         .addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, HighlandsPlacedFeatures.FREEZE_TOP_LAYER_TUNDRA),
                 temperature, downfall);

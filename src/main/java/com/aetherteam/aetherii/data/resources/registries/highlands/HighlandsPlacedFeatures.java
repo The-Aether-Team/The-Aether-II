@@ -1,9 +1,8 @@
-package com.aetherteam.aetherii.data.resources.registries.placement;
+package com.aetherteam.aetherii.data.resources.registries.highlands;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.registries.features.HighlandsConfiguredFeatures;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
@@ -34,6 +33,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ICESTONE_BOULDER = createKey("icestone_boulder");
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<PlacedFeature> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
+    public static final ResourceKey<PlacedFeature> MOA_NEST = createKey("moa_nest");
 
 
     // Vegetation
@@ -47,8 +47,8 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = createKey("orange_tree_patch");
 
-    public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = AetherIIPlacementUtils.createKey("highfields_flower_patch");
-    public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_FOREST = AetherIIPlacementUtils.createKey("highfields_flower_patch_forest");
+    public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
+    public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_FOREST = createKey("highfields_flower_patch_forest");
 
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -83,19 +83,19 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_OVERHANG = createKey("coarse_aether_dirt_overhang");
     public static final ResourceKey<PlacedFeature> ICE_OVERHANG = createKey("ice_overhang");
 
-    public static final ResourceKey<PlacedFeature> ORE_SCATTERGLASS = AetherIIPlacementUtils.createKey("ore_scatterglass");
-    public static final ResourceKey<PlacedFeature> ORE_ICESTONE = AetherIIPlacementUtils.createKey("ore_icestone");
-    public static final ResourceKey<PlacedFeature> ORE_ICESTONE_SMALL = AetherIIPlacementUtils.createKey("ore_icestone_small");
-    public static final ResourceKey<PlacedFeature> ORE_AGIOSITE = AetherIIPlacementUtils.createKey("ore_agiosite");
+    public static final ResourceKey<PlacedFeature> ORE_SCATTERGLASS = createKey("ore_scatterglass");
+    public static final ResourceKey<PlacedFeature> ORE_ICESTONE = createKey("ore_icestone");
+    public static final ResourceKey<PlacedFeature> ORE_ICESTONE_SMALL = createKey("ore_icestone_small");
+    public static final ResourceKey<PlacedFeature> ORE_AGIOSITE = createKey("ore_agiosite");
 
-    public static final ResourceKey<PlacedFeature> ORE_HOLYSTONE_QUARTZ = AetherIIPlacementUtils.createKey("ore_holystone_quartz");
-    public static final ResourceKey<PlacedFeature> ORE_AMBROSIUM = AetherIIPlacementUtils.createKey("ore_ambrosium");
-    public static final ResourceKey<PlacedFeature> ORE_ZANITE = AetherIIPlacementUtils.createKey("ore_zanite");
-    public static final ResourceKey<PlacedFeature> ORE_GLINT = AetherIIPlacementUtils.createKey("ore_glint");
-    public static final ResourceKey<PlacedFeature> ORE_ARKENIUM = AetherIIPlacementUtils.createKey("ore_arkenium");
-    public static final ResourceKey<PlacedFeature> ORE_GRAVITITE_BURIED = AetherIIPlacementUtils.createKey("ore_gravitite_buried");
-    public static final ResourceKey<PlacedFeature> ORE_GRAVITITE = AetherIIPlacementUtils.createKey("ore_gravitite");
-    public static final ResourceKey<PlacedFeature> ORE_CORROBONITE = AetherIIPlacementUtils.createKey("ore_corrobonite");
+    public static final ResourceKey<PlacedFeature> ORE_HOLYSTONE_QUARTZ = createKey("ore_holystone_quartz");
+    public static final ResourceKey<PlacedFeature> ORE_AMBROSIUM = createKey("ore_ambrosium");
+    public static final ResourceKey<PlacedFeature> ORE_ZANITE = createKey("ore_zanite");
+    public static final ResourceKey<PlacedFeature> ORE_GLINT = createKey("ore_glint");
+    public static final ResourceKey<PlacedFeature> ORE_ARKENIUM = createKey("ore_arkenium");
+    public static final ResourceKey<PlacedFeature> ORE_GRAVITITE_BURIED = createKey("ore_gravitite_buried");
+    public static final ResourceKey<PlacedFeature> ORE_GRAVITITE = createKey("ore_gravitite");
+    public static final ResourceKey<PlacedFeature> ORE_CORROBONITE = createKey("ore_corrobonite");
 
 
     // Worldgen
@@ -212,6 +212,14 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_DIRT), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE)),
+                BiomeFilter.biome()
+        );
+        register(context, MOA_NEST, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MOA_NEST),
+                RarityFilter.onAverageOnceEvery(6),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(128), VerticalAnchor.absolute(200)),
+                PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get()),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome()
         );
     }
@@ -394,33 +402,33 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
 
-        AetherIIPlacementUtils.register(context, ORE_SCATTERGLASS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_SCATTERGLASS),
+        register(context, ORE_SCATTERGLASS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_SCATTERGLASS),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top())));
-        AetherIIPlacementUtils.register(context, ORE_ICESTONE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ICESTONE),
+        register(context, ORE_ICESTONE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ICESTONE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top())));
-        AetherIIPlacementUtils.register(context, ORE_ICESTONE_SMALL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ICESTONE_SMALL),
+        register(context, ORE_ICESTONE_SMALL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ICESTONE_SMALL),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top())));
-        AetherIIPlacementUtils.register(context, ORE_AGIOSITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AGIOSITE),
+        register(context, ORE_AGIOSITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AGIOSITE),
                 NoiseBasedCountPlacement.of(150, 125, 0.0F),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(96)),
                 BiomeFilter.biome());
 
-        AetherIIPlacementUtils.register(context, ORE_HOLYSTONE_QUARTZ, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_HOLYSTONE_QUARTZ),
+        register(context, ORE_HOLYSTONE_QUARTZ, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_HOLYSTONE_QUARTZ),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.top())));
-        AetherIIPlacementUtils.register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AMBROSIUM),
+        register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AMBROSIUM),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(16, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.top())));
-        AetherIIPlacementUtils. register(context, ORE_ZANITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ZANITE),
+         register(context, ORE_ZANITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ZANITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(170))));
-        AetherIIPlacementUtils.register(context, ORE_GLINT, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GLINT),
+        register(context, ORE_GLINT, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GLINT),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(114))));
-        AetherIIPlacementUtils. register(context, ORE_ARKENIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ARKENIUM),
+         register(context, ORE_ARKENIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ARKENIUM),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(10, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96), 60))));
-        AetherIIPlacementUtils.register(context, ORE_GRAVITITE_BURIED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GRAVITITE_BURIED),
+        register(context, ORE_GRAVITITE_BURIED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GRAVITITE_BURIED),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
-        AetherIIPlacementUtils.register(context, ORE_GRAVITITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GRAVITITE),
+        register(context, ORE_GRAVITITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GRAVITITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(7, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
-        AetherIIPlacementUtils.register(context, ORE_CORROBONITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_CORROBONITE),
+        register(context, ORE_CORROBONITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_CORROBONITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(60), 25))));
     }
 
@@ -511,75 +519,75 @@ public class HighlandsPlacedFeatures {
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
-        AetherIIPlacementUtils.register(context, HIGH_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
+        register(context, HIGH_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(288), VerticalAnchor.aboveBottom(320)),
                 RarityFilter.onAverageOnceEvery(36),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, HIGH_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
+        register(context, HIGH_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(256), VerticalAnchor.aboveBottom(304)),
                 RarityFilter.onAverageOnceEvery(36),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, HIGH_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
+        register(context, HIGH_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(256), VerticalAnchor.aboveBottom(304)),
                 RarityFilter.onAverageOnceEvery(36),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
 
-        AetherIIPlacementUtils.register(context, MIDDLE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
+        register(context, MIDDLE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(208), VerticalAnchor.aboveBottom(256)),
                 RarityFilter.onAverageOnceEvery(36),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, MIDDLE_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
+        register(context, MIDDLE_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(208), VerticalAnchor.aboveBottom(256)),
                 RarityFilter.onAverageOnceEvery(48),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
 
-        AetherIIPlacementUtils.register(context, SURFACE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
+        register(context, SURFACE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(18),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, SURFACE_GOLDEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GOLDEN_AERCLOUD),
+        register(context, SURFACE_GOLDEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GOLDEN_AERCLOUD),
                 HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(36),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, SURFACE_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
+        register(context, SURFACE_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(26),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, SURFACE_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
+        register(context, SURFACE_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(26),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, SURFACE_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
+        register(context, SURFACE_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
                 RarityFilter.onAverageOnceEvery(26),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
 
-        AetherIIPlacementUtils.register(context, LOWER_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
+        register(context, LOWER_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, LOWER_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
+        register(context, LOWER_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, LOWER_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
+        register(context, LOWER_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        AetherIIPlacementUtils.register(context, LOWER_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
+        register(context, LOWER_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
                 RarityFilter.onAverageOnceEvery(20),
                 InSquarePlacement.spread(),
