@@ -24,8 +24,8 @@ public class HighlandsBiomeSourceBuilders {
         Climate.Parameter tempMagnetic3 = Climate.Parameter.span(0.25F, 0.65F);
         Climate.Parameter tempIrradiated = Climate.Parameter.span(0.65F, 1.5F);
 
-        Climate.Parameter continentExpanse = Climate.Parameter.span(-0.5F, -0.25F);
-        Climate.Parameter continentLand = Climate.Parameter.span(-0.25F, 1.5F);
+        Climate.Parameter continentLand = Climate.Parameter.span(0.0F, 0.2F);
+        Climate.Parameter continentExpanse = Climate.Parameter.span(0.2F, 1.0F);
 
         Climate.Parameter erosionDefault = Climate.Parameter.span(0.0F, 0.55F);
         Climate.Parameter erosionMagnetic = Climate.Parameter.span(0.55F, 1.5F);
@@ -53,7 +53,7 @@ public class HighlandsBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempArctic, fullRange, fullRange, erosionDefault, depthArcticLayer3, ridgeLand, 0), biomes.getOrThrow(AetherIIBiomes.FRIGID_SIERRA)),
 
                 // Highfields
-                Pair.of(new Climate.ParameterPoint(fullRange, fullRange, continentExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.EXPANSE)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(AetherIIBiomes.EXPANSE)),
 
                 Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentLand, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(AetherIIBiomes.SHIMMERING_BASIN)),
 
