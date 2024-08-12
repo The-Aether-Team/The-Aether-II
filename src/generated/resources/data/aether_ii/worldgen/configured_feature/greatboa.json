@@ -102,7 +102,7 @@
       }
     },
     "foliage_placer": {
-      "type": "aether_ii:greatoak_foliage_placer",
+      "type": "aether_ii:greatboa_foliage_placer",
       "offset": 0,
       "radius": 3
     },
