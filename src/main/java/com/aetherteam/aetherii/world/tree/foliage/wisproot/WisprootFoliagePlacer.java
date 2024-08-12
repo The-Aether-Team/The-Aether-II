@@ -30,7 +30,11 @@ public class WisprootFoliagePlacer extends FoliagePlacer {
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, pos, 14, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 5, i, doubleTrunk);
+            if (random.nextBoolean()) {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1 - random.nextInt(3), y + 1, z + 1 - random.nextInt(3)), 5, i, doubleTrunk);
+            } else {
+                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 5, i, doubleTrunk);
+            }
 
             if (random.nextInt(2) == 0) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(4, 6) + random.nextIntBetweenInclusive(-1, 1), z), 2, i, doubleTrunk);
