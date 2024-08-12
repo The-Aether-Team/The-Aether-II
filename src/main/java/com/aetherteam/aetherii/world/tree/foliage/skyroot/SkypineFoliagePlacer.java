@@ -1,12 +1,10 @@
 package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -43,10 +41,7 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
         int j = 0;
         int k = 0;
 
-//        offset = 3;
-
         for (int l = offset; l >= -foliageHeight; l--) {
-//            AetherII.LOGGER.info(i + " " + j + " " + k + " " + l);
             this.placeLeavesRow(level, foliageSetter, random, config, blockpos, i, l, attachment.doubleTrunk());
             if (i >= j) {
                 i = k;
@@ -56,31 +51,6 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
                 i++;
             }
         }
-
-
-//        BlockPos pos = attachment.pos();
-//        int x = pos.getX();
-//        int y = pos.getY();
-//        int z = pos.getZ();
-//        boolean doubleTrunk = attachment.doubleTrunk();
-//
-//        for (int i = offset; i >= offset - foliageHeight; --i) {
-//            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 7, z), 14, i, doubleTrunk);
-////            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 6, z), 4, i, doubleTrunk);
-//            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 6, z), 10, i, doubleTrunk);
-////            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 5, z), 5, i, doubleTrunk);
-//            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 4, z), 8, i, doubleTrunk);
-////            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 2, z), 2, i, doubleTrunk);
-//            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 2, z), 5, i, doubleTrunk);
-//            this.placeLeavesRow(level, foliageSetter, random, config, pos, 2, i, doubleTrunk);
-//            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 0, z), 1, i, doubleTrunk);
-//            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 1, i, doubleTrunk);
-//            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 0, i, doubleTrunk);
-//
-////            if (random.nextBoolean()) {
-////                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(8, 9), z + random.nextIntBetweenInclusive(-1, 1)), 3, i, attachment.doubleTrunk());
-////            }
-//        }
     }
 
     /**
