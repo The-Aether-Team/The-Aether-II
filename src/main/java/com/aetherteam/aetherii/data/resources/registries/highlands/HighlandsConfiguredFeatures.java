@@ -670,8 +670,8 @@ public class HighlandsConfiguredFeatures {
         register(context, SKYPINE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
-                        new StraightTrunkPlacer(10, 3, 0), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
-                        new SkypineFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new StraightTrunkPlacer(6, 3, 1), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
+                        new SkypineFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(0, 0, 0))
                         .ignoreVines()
                         .decorators(List.of(
