@@ -521,75 +521,75 @@ public class HighlandsPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         register(context, HIGH_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(288), VerticalAnchor.aboveBottom(320)),
-                RarityFilter.onAverageOnceEvery(36),
+                RarityFilter.onAverageOnceEvery(72),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, HIGH_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(256), VerticalAnchor.aboveBottom(304)),
-                RarityFilter.onAverageOnceEvery(36),
+                RarityFilter.onAverageOnceEvery(72),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, HIGH_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(256), VerticalAnchor.aboveBottom(304)),
-                RarityFilter.onAverageOnceEvery(36),
+                RarityFilter.onAverageOnceEvery(72),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
 
         register(context, MIDDLE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(208), VerticalAnchor.aboveBottom(256)),
-                RarityFilter.onAverageOnceEvery(36),
+                RarityFilter.onAverageOnceEvery(72),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, MIDDLE_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(208), VerticalAnchor.aboveBottom(256)),
-                RarityFilter.onAverageOnceEvery(48),
+                RarityFilter.onAverageOnceEvery(80),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
 
         register(context, SURFACE_COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(18),
+                RarityFilter.onAverageOnceEvery(48),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, SURFACE_GOLDEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GOLDEN_AERCLOUD),
                 HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(36),
+                RarityFilter.onAverageOnceEvery(70),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, SURFACE_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(26),
+                RarityFilter.onAverageOnceEvery(64),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, SURFACE_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(26),
+                RarityFilter.onAverageOnceEvery(64),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, SURFACE_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(26),
+                RarityFilter.onAverageOnceEvery(64),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
 
         register(context, LOWER_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(96)),
-                RarityFilter.onAverageOnceEvery(20),
+                RarityFilter.onAverageOnceEvery(48),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, LOWER_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
-                RarityFilter.onAverageOnceEvery(20),
+                RarityFilter.onAverageOnceEvery(48),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, LOWER_GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
-                RarityFilter.onAverageOnceEvery(20),
+                RarityFilter.onAverageOnceEvery(48),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, LOWER_PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
-                RarityFilter.onAverageOnceEvery(20),
+                RarityFilter.onAverageOnceEvery(48),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
     }
