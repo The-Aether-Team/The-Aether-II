@@ -364,6 +364,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(112), VerticalAnchor.top(), 220)),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -32, 2),
                 BiomeFilter.biome()
         );
         register(context, ENCHANTED_GRASS_AND_DIRT_FLOOR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ENCHANTED_GRASS_AND_DIRT_FLOOR),
@@ -372,6 +373,7 @@ public class HighlandsPlacedFeatures {
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(80), VerticalAnchor.top(), 250)),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, -32, 2),
                 BiomeFilter.biome()
         );
         register(context, COARSE_AETHER_DIRT_FLOOR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_FLOOR),
