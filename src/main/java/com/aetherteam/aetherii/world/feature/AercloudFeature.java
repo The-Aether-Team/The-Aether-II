@@ -42,7 +42,7 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
                     for (int z = 0; z < baseWidth + random.nextInt(3); ++z) {
                         BlockPos newPosition = blockPos.offset(x, y, z);
                         if (level.isEmptyBlock(newPosition)) {
-                            if (x + y + z < random.nextInt(28)) {
+                            if (x + y + z < 9 + random.nextInt(16)) {
                                 this.setBlock(level, newPosition, blockState);
                             }
                         }
