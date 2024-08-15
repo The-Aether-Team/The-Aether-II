@@ -13,4 +13,5 @@ public class AetherIITreeDecoratorTypes {
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<SnowDecorator>> SNOW = TREE_DECORATORS.register("snow", () -> new TreeDecoratorType<>(SnowDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<WisprootTreeDecorator>> WISPROOT_DECORATOR = TREE_DECORATORS.register("wisproot_decorator", () -> new TreeDecoratorType<>(WisprootTreeDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<IrradiationTreeDecorator>> IRRADIATION = TREE_DECORATORS.register("irradiation", () -> new TreeDecoratorType<>(IrradiationTreeDecorator.CODEC));
+    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<AlterGroundTagDecorator>> ALTER_GROUND_TAG = TREE_DECORATORS.register("alter_ground_tag", () -> new TreeDecoratorType<>(AlterGroundTagDecorator.CODEC));
 }

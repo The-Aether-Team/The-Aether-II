@@ -3,6 +3,19 @@
   "config": {
     "decorators": [
       {
+        "type": "aether_ii:alter_ground_tag",
+        "provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:aether_grass_block",
+            "Properties": {
+              "snowy": "false"
+            }
+          }
+        },
+        "tag": "aether_ii:grass_snow_replaceable"
+      },
+      {
         "type": "aether_ii:snow"
       },
       {

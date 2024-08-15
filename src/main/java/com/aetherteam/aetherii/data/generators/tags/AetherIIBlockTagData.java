@@ -196,6 +196,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get());
+        this.tag(AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON).addTag(AetherIITags.Blocks.AETHER_DIRT).add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
         this.tag(AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
@@ -204,6 +205,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE.get());
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_REPLACEABLE).add(
                 AetherIIBlocks.HOLYSTONE.get());
+        this.tag(AetherIITags.Blocks.GRASS_SNOW_REPLACEABLE).add(
+                AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
         this.tag(AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON)
                 .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.FERROSITE_COAST_GENERATES_ON)

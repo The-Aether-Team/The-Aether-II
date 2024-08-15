@@ -8,10 +8,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunction
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.CoastFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
-import com.aetherteam.aetherii.world.tree.decorator.GroundFeatureDecorator;
-import com.aetherteam.aetherii.world.tree.decorator.IrradiationTreeDecorator;
-import com.aetherteam.aetherii.world.tree.decorator.SnowDecorator;
-import com.aetherteam.aetherii.world.tree.decorator.WisprootTreeDecorator;
+import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.SingularAmberootFoliagePlacer;
@@ -22,10 +19,7 @@ import com.aetherteam.aetherii.world.tree.foliage.skyroot.*;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Vec3i;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -682,6 +676,7 @@ public class HighlandsConfiguredFeatures {
                         new TwoLayersFeatureSize(2, 0, 2))
                         .ignoreVines()
                         .decorators(List.of(
+                                new AlterGroundTagDecorator(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), AetherIITags.Blocks.GRASS_SNOW_REPLACEABLE),
                                 new SnowDecorator(),
                                 new GroundFeatureDecorator(new WeightedStateProvider(twigs), 50)))
                         .build());
@@ -693,13 +688,14 @@ public class HighlandsConfiguredFeatures {
                         new TwoLayersFeatureSize(1, 2, 2))
                         .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState()))
                         .decorators(List.of(
+                                new AlterGroundTagDecorator(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), AetherIITags.Blocks.GRASS_SNOW_REPLACEABLE),
                                 new SnowDecorator(),
                                 new GroundFeatureDecorator(new WeightedStateProvider(twigs), 50)))
                         .build());
 
         register(context, TREES_BIOME_FRIGID_SIERRA, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get())), 0.25F)
-        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get()))));
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON))), 0.1F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON)))));
         register(context, TREES_BIOME_ENDURING_WOODLANDS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.03F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get()))));
