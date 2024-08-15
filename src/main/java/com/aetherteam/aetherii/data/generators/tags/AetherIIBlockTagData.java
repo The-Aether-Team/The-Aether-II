@@ -196,6 +196,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get());
+        this.tag(AetherIITags.Blocks.GRASS_AND_DIRT_REPLACEABLE).add(
+                AetherIIBlocks.AETHER_DIRT.get(),
+                AetherIIBlocks.COARSE_AETHER_DIRT.get(),
+                AetherIIBlocks.HOLYSTONE.get());
         this.tag(AetherIITags.Blocks.COARSE_AETHER_DIRT_REPLACEABLE).add(
                 AetherIIBlocks.HOLYSTONE.get());
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_REPLACEABLE).add(

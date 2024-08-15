@@ -77,6 +77,8 @@ public class HighlandsPlacedFeatures {
 
 
     // Underground
+    public static final ResourceKey<PlacedFeature> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
+    public static final ResourceKey<PlacedFeature> ENCHANTED_GRASS_AND_DIRT_FLOOR = createKey("enchanted_grass_and_dirt_floor");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_FLOOR = createKey("coarse_aether_dirt_floor");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_FROSTED_CEILING = createKey("coarse_aether_dirt_frosted_ceiling");
@@ -356,6 +358,22 @@ public class HighlandsPlacedFeatures {
     public static void bootstrapUnderground(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
+        register(context, GRASS_AND_DIRT_FLOOR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GRASS_AND_DIRT_FLOOR),
+                CountPlacement.of(65),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(112), VerticalAnchor.top(), 220)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                BiomeFilter.biome()
+        );
+        register(context, ENCHANTED_GRASS_AND_DIRT_FLOOR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ENCHANTED_GRASS_AND_DIRT_FLOOR),
+                CountPlacement.of(80),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(80), VerticalAnchor.top(), 250)),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                BiomeFilter.biome()
+        );
         register(context, COARSE_AETHER_DIRT_FLOOR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_FLOOR),
                 CountPlacement.of(45),
                 InSquarePlacement.spread(),

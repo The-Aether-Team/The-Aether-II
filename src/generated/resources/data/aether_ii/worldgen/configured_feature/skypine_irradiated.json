@@ -15,7 +15,7 @@
     "foliage_placer": {
       "type": "aether_ii:skypine_foliage_placer",
       "offset": 2,
-      "radius": 1
+      "radius": 3
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
@@ -40,9 +40,9 @@
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 11,
-      "height_rand_a": 5,
-      "height_rand_b": 0
+      "base_height": 6,
+      "height_rand_a": 3,
+      "height_rand_b": 1
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
