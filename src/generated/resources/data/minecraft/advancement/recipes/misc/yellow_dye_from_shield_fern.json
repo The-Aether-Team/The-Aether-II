@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shield_fern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:shield_fern"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:yellow_dye_from_shield_fern"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_shield_fern"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:yellow_dye_from_shield_fern"
+    ]
+  }
+}

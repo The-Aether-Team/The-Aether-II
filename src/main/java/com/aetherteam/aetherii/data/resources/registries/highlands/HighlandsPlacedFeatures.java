@@ -50,6 +50,8 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_FOREST = createKey("highfields_flower_patch_forest");
 
+    public static final ResourceKey<PlacedFeature> IRRADIATED_FLOWER_PATCH = createKey("irradiated_flower_patch");
+
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
 
@@ -306,6 +308,12 @@ public class HighlandsPlacedFeatures {
                 RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BiomeFilter.biome());
+        register(context, IRRADIATED_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.IRRADIATED_FLOWER_PATCH),
+                NoiseThresholdCountPlacement.of(-0.8, 5, 2),
+                RarityFilter.onAverageOnceEvery(2),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());

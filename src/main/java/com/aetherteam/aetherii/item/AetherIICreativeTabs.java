@@ -343,6 +343,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_LONG_GRASS.get());
                 output.accept(AetherIIBlocks.HESPEROSE.get());
                 output.accept(AetherIIBlocks.TARABLOOM.get());
+                output.accept(AetherIIBlocks.SHIELD_FERN.get());
                 output.accept(AetherIIBlocks.POASPROUT.get());
                 output.accept(AetherIIBlocks.AECHOR_CUTTING.get());
                 output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());

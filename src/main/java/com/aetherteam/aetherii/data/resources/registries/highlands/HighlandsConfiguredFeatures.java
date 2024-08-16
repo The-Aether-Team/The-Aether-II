@@ -91,6 +91,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT = createKey("brettl_plant");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> IRRADIATED_FLOWER_PATCH = createKey("irradiated_flower_patch");
+
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -433,6 +435,19 @@ public class HighlandsConfiguredFeatures {
                                 .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
                         )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
         ));
+
+        register(
+                context,
+                IRRADIATED_FLOWER_PATCH,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        24,
+                        7,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                .add(AetherIIBlocks.SHIELD_FERN.get().defaultBlockState(), 1)
+                        )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
+                ));
 
         register(context, AETHER_GRASS_BONEMEAL, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                 .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)

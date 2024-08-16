@@ -440,7 +440,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.ENDERMAN_HOLDABLE).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.QUICKSOIL.get(),
                 AetherIIBlocks.HESPEROSE.get(),
-                AetherIIBlocks.TARABLOOM.get()
+                AetherIIBlocks.TARABLOOM.get(),
+                AetherIIBlocks.SHIELD_FERN.get()
+
         );
         this.tag(BlockTags.ICE).add(
                 AetherIIBlocks.ARCTIC_ICE.get(),

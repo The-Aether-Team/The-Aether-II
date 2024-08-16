@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "yellow_dye",
+  "ingredients": [
+    {
+      "item": "aether_ii:shield_fern"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:yellow_dye"
+  }
+}
