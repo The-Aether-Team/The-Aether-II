@@ -50,9 +50,9 @@ public class SkyplaneFoliagePlacer extends FoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 5, z), 3, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 3, z), 3, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 3, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 1, i, doubleTrunk);
         }
-        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 2, 0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 6, 1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 3, 1, doubleTrunk);
 
 
         this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + xOffset, y - 5, z + zOffset), 2, 1, doubleTrunk);
