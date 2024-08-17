@@ -8,10 +8,11 @@ import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
-public class ToxinEffect extends MobEffect {
-    public ToxinEffect() {
-        super(MobEffectCategory.HARMFUL, 7720557);
+public class VenomEffect extends MobEffect {
+    public VenomEffect() {
+        super(MobEffectCategory.HARMFUL, 7289241);
     }
 
     @Override
@@ -20,6 +21,10 @@ public class ToxinEffect extends MobEffect {
             Registry<DamageType> damageTypes = livingEntity.damageSources().damageTypes;
             Holder.Reference<DamageType> damageType = damageTypes.getHolderOrThrow(AetherIIDamageTypes.TOXIN);
             livingEntity.hurt(new DamageSource(damageType), 1.0F);
+        }
+        if (livingEntity instanceof Player player && player.getFoodData().getFoodLevel() > 1) {
+            player.getFoodData().setSaturation(0.0F);
+            player.causeFoodExhaustion(4.0F);
         }
         return true;
     }

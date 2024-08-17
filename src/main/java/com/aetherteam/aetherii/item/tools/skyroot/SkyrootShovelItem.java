@@ -22,12 +22,4 @@ public class SkyrootShovelItem extends ShovelItem implements SkyrootTool {
     public SkyrootShovelItem() {
         super(AetherIIItemTiers.SKYROOT, new Properties().attributes(ShovelItem.createAttributes(AetherIIItemTiers.SKYROOT, 1.5F, -3.0F)));
     }
-
-    @Override
-    public InteractionResult useOn(UseOnContext pContext) {
-        if (pContext.getPlayer() != null) {
-            pContext.getPlayer().getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.TOXIN, 500);
-        }
-        return super.useOn(pContext);
-    }
 }

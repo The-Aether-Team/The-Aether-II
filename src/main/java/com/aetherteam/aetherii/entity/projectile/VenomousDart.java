@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.projectile;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
@@ -14,18 +13,18 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 
-public class ToxicDart extends AbstractArrow {
-    public ToxicDart(EntityType<? extends ToxicDart> entityType, Level level) {
+public class VenomousDart extends AbstractArrow {
+    public VenomousDart(EntityType<? extends VenomousDart> entityType, Level level) {
         super(entityType, level);
     }
 
-    public ToxicDart(double x, double y, double z, Level level) {
-        super(AetherIIEntityTypes.TOXIC_DART.get(), x, y, z, level, new ItemStack(Items.ARROW), null);
+    public VenomousDart(double x, double y, double z, Level level) {
+        super(AetherIIEntityTypes.VENOMOUS_DART.get(), x, y, z, level, new ItemStack(Items.ARROW), null);
         this.pickup = Pickup.DISALLOWED;
     }
 
-    public ToxicDart(LivingEntity owner, Level level) {
-        super(AetherIIEntityTypes.TOXIC_DART.get(), owner, level, new ItemStack(Items.ARROW), null);
+    public VenomousDart(LivingEntity owner, Level level) {
+        super(AetherIIEntityTypes.VENOMOUS_DART.get(), owner, level, new ItemStack(Items.ARROW), null);
         this.pickup = Pickup.DISALLOWED;
     }
 
@@ -54,7 +53,7 @@ public class ToxicDart extends AbstractArrow {
     @Override
     protected void doPostHurtEffects(LivingEntity living) {
         super.doPostHurtEffects(living);
-        living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.TOXIN, 350);
+        living.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.VENOM, 350);
     }
 
     @Override

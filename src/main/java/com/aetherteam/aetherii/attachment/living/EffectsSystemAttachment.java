@@ -67,6 +67,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
             } else {
                 this.activeBuildups.get(effect).increaseBuildup(amount);
             }
+            this.loadingSync = true;
         }
     }
 

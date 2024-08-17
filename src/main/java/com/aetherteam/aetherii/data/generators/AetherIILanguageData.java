@@ -854,6 +854,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Effects
         this.addEffect(AetherIIEffects.TOXIN, "Toxin");
+        this.addEffect(AetherIIEffects.VENOM, "Venom");
 
 
         // Creative Tabs
