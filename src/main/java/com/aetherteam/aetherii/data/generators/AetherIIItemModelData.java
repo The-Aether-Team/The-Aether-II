@@ -209,6 +209,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.AETHER_FARMLAND.get());
+        this.itemBlock(AetherIIBlocks.SHIMMERING_SILT.get());
 
         // Underground
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());

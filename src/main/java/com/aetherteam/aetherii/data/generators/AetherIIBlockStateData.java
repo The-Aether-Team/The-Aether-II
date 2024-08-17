@@ -23,6 +23,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.AETHER_DIRT.get(), "natural/");
         this.block(AetherIIBlocks.COARSE_AETHER_DIRT.get(), "natural/");
         this.farmland(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
+        this.block(AetherIIBlocks.SHIMMERING_SILT.get(), "natural/");
 
         // Underground
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");

@@ -719,6 +719,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.COARSE_AETHER_DIRT.get(),
                 AetherIIBlocks.AETHER_FARMLAND.get(),
+                AetherIIBlocks.SHIMMERING_SILT.get(),
                 AetherIIBlocks.QUICKSOIL.get(),
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),

@@ -25,6 +25,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformFloat;
@@ -43,6 +44,7 @@ import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeature
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.DualNoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
@@ -1064,13 +1066,19 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
                         ConstantInt.of(124),
-                        new NoiseProvider(
-                                100L,
-                                new NormalNoise.NoiseParameters(0, 1.0),
-                                0.075F,
+                        new DualNoiseProvider(
+                                new InclusiveRange<>(1, 4),
+                                new NormalNoise.NoiseParameters(-6, 1.0),
+                                1.0F,
+                                2345L,
+                                new NormalNoise.NoiseParameters(-2, 1.0),
+                                1.0F,
                                 List.of(
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
                         false
