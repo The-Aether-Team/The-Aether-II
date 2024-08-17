@@ -1205,10 +1205,13 @@ public class HighlandsConfiguredFeatures {
                 new CloudbedConfiguration(
                         new NoiseProvider(
                                 2345L,
-                                new NormalNoise.NoiseParameters(-6, 1.25, -0.25, 1.0, 0.5, 1.25),
+                                new NormalNoise.NoiseParameters(-7, 1.25, -0.25, 1.0, 0.5, 1.25),
                                 1.0F,
                                 List.of(
                                         AetherIIBlocks.GREEN_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
                                         AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
                                         AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
                                         AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState(),
