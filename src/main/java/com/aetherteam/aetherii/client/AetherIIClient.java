@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.client.event.listeners.ClientTooltipsListener;
 import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
 import com.aetherteam.aetherii.client.event.listeners.MusicListener;
@@ -39,7 +38,7 @@ public class AetherIIClient {
             registerItemModelProperties();
         });
 
-        HandwearAccessory.clientInit();
+        AetherIIRenderers.registerAccessoryRenderers();
     }
 
     public static void eventSetup(IEventBus neoBus) {

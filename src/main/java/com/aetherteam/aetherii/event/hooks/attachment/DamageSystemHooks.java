@@ -2,8 +2,7 @@ package com.aetherteam.aetherii.event.hooks.attachment;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
-import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
+import com.aetherteam.aetherii.inventory.AetherIISlotHandling;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
@@ -271,7 +270,7 @@ public class DamageSystemHooks {
 
             int value = 0;
             for (AttributeModifier entry : AccessoriesAPI.getAttributeModifiers(stack, player, AetherIISlotHandling.getHandwearSlotType().slotName(), 0).getAttributeModifiers(false).values()) {
-                if (entry.id().getPath().contains(HandwearAccessory.BASE_GLOVES_STAMINA_RESTORATION_ID.getNamespace())) {
+                if (entry.id().getPath().contains(GlovesItem.BASE_GLOVES_STAMINA_RESTORATION_ID.getNamespace())) {
                     value = (int) ((entry.amount() / DamageSystemAttachment.MAX_SHIELD_STAMINA) * 100);
                 }
             }

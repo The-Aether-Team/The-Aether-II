@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.accessories;
+package com.aetherteam.aetherii.inventory;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
@@ -17,6 +17,10 @@ public class AetherIISlotHandling implements UniqueSlotHandling.RegistrationCall
     private static final ResourceLocation HANDWEAR_PREDICATE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "handwear_items");
     private static final ResourceLocation ACCESSORY_PREDICATE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory_items");
 
+    public static final ResourceLocation RELIC_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "relic_slot");
+    public static final ResourceLocation HANDWEAR_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "handwear_slot");
+    public static final ResourceLocation ACCESSORY_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory_slot");
+
     public static final AetherIISlotHandling INSTANCE = new AetherIISlotHandling();
 
     private static SlotTypeReference RELIC_SLOT;
@@ -31,9 +35,9 @@ public class AetherIISlotHandling implements UniqueSlotHandling.RegistrationCall
 
     @Override
     public void registerSlots(UniqueSlotHandling.UniqueSlotBuilderFactory factory) {
-        RELIC_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "relic_slot"), 2).slotPredicates(RELIC_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
-        HANDWEAR_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "handwear_slot"), 1).slotPredicates(HANDWEAR_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
-        ACCESSORY_SLOT = factory.create(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory_slot"), 1).slotPredicates(ACCESSORY_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
+        RELIC_SLOT = factory.create(RELIC_SLOT_LOCATION, 2).slotPredicates(RELIC_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
+        HANDWEAR_SLOT = factory.create(HANDWEAR_SLOT_LOCATION, 1).slotPredicates(HANDWEAR_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
+        ACCESSORY_SLOT = factory.create(ACCESSORY_SLOT_LOCATION, 1).slotPredicates(ACCESSORY_PREDICATE).validTypes(EntityType.PLAYER).allowEquipFromUse(true).build();
     }
 
     @Nullable

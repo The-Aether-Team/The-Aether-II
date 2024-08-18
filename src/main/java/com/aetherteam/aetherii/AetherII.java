@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii;
 
-import com.aetherteam.aetherii.accessories.AetherIISlotHandling;
-import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
+import com.aetherteam.aetherii.inventory.AetherIISlotHandling;
 import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -139,11 +138,12 @@ public class AetherII {
             AetherIIBlocks.registerPots();
             AetherIIBlocks.registerFlammability();
 
+            AetherIIItems.registerAccessories();
+
             this.registerDispenserBehaviors();
             this.registerCauldronInteractions();
         });
 
-        HandwearAccessory.init();
         UniqueSlotHandling.EVENT.register(AetherIISlotHandling.INSTANCE);
     }
 
