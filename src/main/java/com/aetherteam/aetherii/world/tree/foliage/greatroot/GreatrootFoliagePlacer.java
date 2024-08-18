@@ -45,14 +45,14 @@ public class GreatrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
         boolean doubleTrunk = attachment.doubleTrunk();
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, pos, 12, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y, z), 12, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z + 1), 12, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y, z + 1), 12, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y + 1, z + random.nextIntBetweenInclusive(0, 1)), 7, i, doubleTrunk);
-
-            this.placeCornerLogs(level, foliageSetter, random, config, pos, -1);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 12, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y - 1, z), 12, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z + 1), 12, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y - 1, z + 1), 12, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y, z + random.nextIntBetweenInclusive(0, 1)), 7, i, doubleTrunk);
         }
+
+        this.placeCornerLogs(level, foliageSetter, random, config, pos, -1, 0);
     }
 
     /**

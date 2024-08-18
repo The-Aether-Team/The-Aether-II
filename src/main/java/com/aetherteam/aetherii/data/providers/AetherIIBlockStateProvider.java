@@ -126,6 +126,67 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void roots(Block block) {
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            boolean snowy = state.getValue(BlockStateProperties.SNOWY);
+            ModelFile model;
+            if (snowy) {
+                model = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            } else {
+                model = this.models().cross(this.name(block), this.texture(this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            }
+            return ConfiguredModel.builder().modelFile(model).build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
+    public void floweringBryalinn(Block block, Block mossBlock, String flowerName) {
+        ResourceLocation moss = this.texture("natural/" + this.name(mossBlock));
+        ResourceLocation flower = this.texture("natural/" + flowerName);
+        ModelFile model = this.models().withExistingParent(this.name(block), "block/block")
+                .texture("flower", flower).texture("moss", moss).texture("particle", moss).renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                .element().from(10, 1, 2).to(10, 4, 6).rotation().angle(45).axis(Direction.Axis.Y).origin(10, 1, 2).rescale(true).end().shade(false).ao(false)
+                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
+                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
+                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("#flower").end()
+                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("#flower").end()
+                .end()
+                .element().from(14, 1, 2).to(14, 4, 6).rotation().angle(-45).axis(Direction.Axis.Y).origin(14, 1, 2).rescale(true).end().shade(false).ao(false)
+                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
+                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
+                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("#flower").end()
+                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("#flower").end()
+                .end()
+                .element().from(2, 1, 10).to(2, 4, 14).rotation().angle(45).axis(Direction.Axis.Y).origin(2, 1, 10).rescale(true).end().shade(false).ao(false)
+                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
+                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
+                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("flower").end()
+                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("flower").end()
+                .end()
+                .element().from(6, 1, 10).to(6, 4, 14).rotation().angle(-45).axis(Direction.Axis.Y).origin(6, 1, 10).rescale(true).end().shade(false).ao(false)
+                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
+                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
+                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
+                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("flower").end()
+                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("flower").end()
+                .end()
+                .element().from(0, 0, 0).to(16, 1, 16)
+                .face(Direction.NORTH).uvs(0, 15, 16, 16).texture("#moss").end()
+                .face(Direction.EAST).uvs(0, 15, 16, 16).texture("#moss").end()
+                .face(Direction.SOUTH).uvs(0, 15, 16, 16).texture("#moss").end()
+                .face(Direction.WEST).uvs(0, 15, 16, 16).texture("#moss").end()
+                .face(Direction.UP).uvs(0, 0, 16, 16).texture("#moss").end()
+                .face(Direction.DOWN).uvs(0, 0, 16, 16).texture("#moss").end()
+                .end();
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(model));
+    }
+
     public void snowLayer(Block block, Block base) {
         ResourceLocation texture = this.texture("natural/" + this.name(base));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
@@ -149,6 +210,29 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void iceCrystal(Block block) {
+        ResourceLocation texture = this.texture("natural/" + this.name(block));
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            ModelFile model = this.models().cross(this.name(block), texture).renderType(ResourceLocation.parse("cutout"));
+            Direction direction = state.getValue(IceCrystalBlock.FACING);
+            int x = 0;
+            int y = 0;
+            if (direction.getAxis().isHorizontal()) {
+                x = 90;
+            } else if (direction == Direction.DOWN) {
+                x = 180;
+            }
+            if (direction == Direction.EAST) {
+                y = 90;
+            } else if (direction == Direction.SOUTH) {
+                y = 180;
+            } else if (direction == Direction.WEST) {
+                y = 270;
+            }
+            return ConfiguredModel.builder().modelFile(model).rotationX(x).rotationY(y).build();
+        }, BlockStateProperties.WATERLOGGED);
+    }
+
     public void corroboniteCluster(Block block) {
         ResourceLocation texture = this.texture("natural/" + this.name(block));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
@@ -166,7 +250,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
 
             return ConfiguredModel.builder().modelFile(modelFile).rotationX(x).rotationY(y).build();
         }, BlockStateProperties.WATERLOGGED);
-
     }
 
     public void aercloudAll(Block block, String location) {
@@ -297,6 +380,13 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             } else {
                 model = this.models().cubeAll(this.name(block), this.texture(this.name(block), "natural/"));
             }
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
+    }
+
+    public void tintedLeaves(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            ModelFile model = this.models().leaves(this.name(block), this.texture(this.name(block), "natural/"));
             return ConfiguredModel.builder().modelFile(model).build();
         });
     }

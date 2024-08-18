@@ -24,7 +24,7 @@
       "aether_ii:arctic_ice_spike_cluster"
     ],
     [
-      "aether_ii:aether_water_lake_underground"
+      "aether_ii:water_pond_underground"
     ],
     [],
     [],
@@ -47,18 +47,28 @@
     [],
     [
       "aether_ii:frozen_lakes_trees",
-      "aether_ii:short_grass_patch",
-      "aether_ii:medium_grass_patch",
-      "aether_ii:long_grass_patch"
+      "aether_ii:grass_field",
+      "aether_ii:grass_and_dirt_floor",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:coarse_aether_dirt_frosted_ceiling",
+      "aether_ii:ice_overhang",
+      "aether_ii:blueberry_bush_patch"
     ],
     [
       "aether_ii:freeze_top_layer_arctic",
-      "aether_ii:cold_aercloud",
-      "aether_ii:blue_aercloud",
-      "aether_ii:golden_aercloud",
-      "aether_ii:green_aercloud",
-      "aether_ii:purple_aercloud",
-      "aether_ii:storm_aercloud"
+      "aether_ii:high_storm_aercloud",
+      "aether_ii:high_green_aercloud",
+      "aether_ii:high_purple_aercloud",
+      "aether_ii:middle_cold_aercloud",
+      "aether_ii:middle_storm_aercloud",
+      "aether_ii:surface_cold_aercloud",
+      "aether_ii:surface_blue_aercloud",
+      "aether_ii:surface_green_aercloud",
+      "aether_ii:surface_purple_aercloud",
+      "aether_ii:lower_storm_aercloud",
+      "aether_ii:lower_blue_aercloud",
+      "aether_ii:lower_green_aercloud",
+      "aether_ii:lower_purple_aercloud"
     ]
   ],
   "has_precipitation": true,
@@ -102,6 +112,12 @@
       },
       {
         "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "aether_ii:swet",
         "maxCount": 1,
         "minCount": 1,
         "weight": 10

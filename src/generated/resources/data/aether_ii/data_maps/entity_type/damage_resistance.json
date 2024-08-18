@@ -75,6 +75,11 @@
       "pierce_value": 0.0,
       "slash_value": 0.0
     },
+    "aether_ii:swet": {
+      "impact_value": 0.0,
+      "pierce_value": -2.0,
+      "slash_value": 2.0
+    },
     "aether_ii:tempest": {
       "impact_value": 2.0,
       "pierce_value": -2.0,

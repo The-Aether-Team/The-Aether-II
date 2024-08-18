@@ -1,5 +1,5 @@
 {
-  "feature": "aether_ii:trees_turquoise_forest",
+  "feature": "aether_ii:trees_biome_turquoise_forest",
   "placement": [
     {
       "type": "minecraft:count",
@@ -7,11 +7,11 @@
         "type": "minecraft:weighted_list",
         "distribution": [
           {
-            "data": 4,
+            "data": 2,
             "weight": 9
           },
           {
-            "data": 5,
+            "data": 3,
             "weight": 1
           }
         ]

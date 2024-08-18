@@ -1,11 +1,6 @@
 package com.aetherteam.aetherii.world.tree.foliage.skyroot;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIMiscFeatures;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
-import com.aetherteam.aetherii.entity.passive.Moa;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
 import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.MapCodec;
@@ -59,7 +54,7 @@ public class NestSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
         if (level instanceof WorldGenLevel worldGenLevel) {
             ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
-            ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(AetherIIMiscFeatures.MOA_NEST_TREE).orElse(null)).value();
+            ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(HighlandsConfiguredFeatures.MOA_NEST_TREE).orElse(null)).value();
 
             for (int i = offset; i >= offset - foliageHeight; --i) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 2 * offsetX, y - 7, z + 2 * offsetZ), 13, i, doubleTrunk);

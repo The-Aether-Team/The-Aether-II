@@ -7,10 +7,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -19,10 +19,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -31,10 +31,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -43,10 +43,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -55,10 +55,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -67,10 +67,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -79,10 +79,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -91,10 +91,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=false,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -103,10 +103,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -115,10 +115,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -127,10 +127,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -139,10 +139,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -151,10 +151,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -163,10 +163,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -175,10 +175,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -187,10 +187,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=1,persistent=true,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -199,10 +199,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -211,10 +211,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -223,10 +223,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -235,10 +235,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -247,10 +247,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -259,10 +259,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -271,10 +271,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -283,10 +283,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=false,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -295,10 +295,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -307,10 +307,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -319,10 +319,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -331,10 +331,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -343,10 +343,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -355,10 +355,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -367,10 +367,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -379,10 +379,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=2,persistent=true,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -391,10 +391,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -403,10 +403,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -415,10 +415,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -427,10 +427,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -439,10 +439,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -451,10 +451,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -463,10 +463,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -475,10 +475,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=false,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -487,10 +487,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -499,10 +499,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -511,10 +511,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -523,10 +523,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -535,10 +535,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -547,10 +547,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -559,10 +559,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -571,10 +571,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=3,persistent=true,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -583,10 +583,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -595,10 +595,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -607,10 +607,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -619,10 +619,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -631,10 +631,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -643,10 +643,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -655,10 +655,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -667,10 +667,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=false,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -679,10 +679,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -691,10 +691,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -703,10 +703,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -715,10 +715,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -727,10 +727,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -739,10 +739,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -751,10 +751,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -763,10 +763,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=4,persistent=true,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -775,10 +775,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -787,10 +787,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -799,10 +799,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -811,10 +811,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -823,10 +823,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -835,10 +835,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -847,10 +847,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -859,10 +859,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=false,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -871,10 +871,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -883,10 +883,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -895,10 +895,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -907,10 +907,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -919,10 +919,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -931,10 +931,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -943,10 +943,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -955,10 +955,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=5,persistent=true,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -967,10 +967,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -979,10 +979,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -991,10 +991,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1003,10 +1003,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1015,10 +1015,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1027,10 +1027,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1039,10 +1039,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1051,10 +1051,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=false,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1063,10 +1063,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1075,10 +1075,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1087,10 +1087,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1099,10 +1099,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1111,10 +1111,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1123,10 +1123,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1135,10 +1135,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1147,10 +1147,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=6,persistent=true,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1159,10 +1159,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1171,10 +1171,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1183,10 +1183,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1195,10 +1195,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1207,10 +1207,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1219,10 +1219,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1231,10 +1231,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1243,10 +1243,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=false,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=0,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1255,10 +1255,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=0,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=0,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=1,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1267,10 +1267,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=1,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=1,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=2,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1279,10 +1279,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=2,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=2,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=3,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1291,10 +1291,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=3,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=3,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=4,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1303,10 +1303,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=4,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=4,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=5,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1315,10 +1315,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=5,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=5,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=6,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1327,10 +1327,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=6,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=6,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=7,snowy=false,waterlogged=false": {
       "model": "aether_ii:block/irradiated_skybirch_leaves"
@@ -1339,10 +1339,10 @@
       "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=7,snowy=true,waterlogged=false": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     },
     "distance=7,persistent=true,shade=7,snowy=true,waterlogged=true": {
-      "model": "aether_ii:block/frosted_irradiated_skybirch_leaves"
+      "model": "aether_ii:block/irradiated_skybirch_leaves"
     }
   }
 }

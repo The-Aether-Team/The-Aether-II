@@ -1,5 +1,7 @@
 {
   "values": [
-    "aether_ii:player_aoe_no_knockback"
+    "aether_ii:player_aoe_no_knockback",
+    "aether_ii:toxin",
+    "aether_ii:venom"
   ]
 }

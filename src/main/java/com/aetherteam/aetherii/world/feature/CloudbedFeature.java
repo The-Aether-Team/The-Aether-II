@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -52,11 +53,12 @@ public class CloudbedFeature extends Feature<CloudbedConfiguration> {
                     // Calculate how many blocks down from the main y offset plane should be generated
                     float blocksDown = Mth.lerp(realCloud, 0F, (float) config.cloudRadius() - 1F) - realOffset;
                     // Floor these values and then place the blocks
+                    BlockState state = config.block().getState(context.random(), new BlockPos(xCoord, config.yLevel(), zCoord));
                     for (int i = Mth.floor(-blocksDown); i <= Mth.floor(blocksUp); i++) {
                         int y = Mth.clamp(config.yLevel() + i, context.level().getMinBuildHeight(), context.level().getMaxBuildHeight());
                         BlockPos pos = new BlockPos(xCoord, y, zCoord);
                         if (config.predicate().test(context.level(), pos)) {
-                            this.setBlock(context.level(), pos, config.block().getState(context.random(), pos));
+                            this.setBlock(context.level(), pos, state);
                         }
                     }
                 }
