@@ -1,5 +1,5 @@
 {
-  "feature": "aether_ii:trees_shrouded_forest",
+  "feature": "aether_ii:trees_biome_shrouded_forest",
   "placement": [
     {
       "type": "minecraft:count",
@@ -7,11 +7,11 @@
         "type": "minecraft:weighted_list",
         "distribution": [
           {
-            "data": 24,
-            "weight": 9
+            "data": 150,
+            "weight": 3
           },
           {
-            "data": 25,
+            "data": 200,
             "weight": 1
           }
         ]

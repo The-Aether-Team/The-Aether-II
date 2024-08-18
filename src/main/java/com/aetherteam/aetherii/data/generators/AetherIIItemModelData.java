@@ -209,16 +209,21 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.AETHER_FARMLAND.get());
+        this.itemBlock(AetherIIBlocks.SHIMMERING_SILT.get());
 
         // Underground
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE.get());
         this.itemBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+        this.itemBlockFlat(AetherIIBlocks.SKY_ROOTS.get(), "natural/");
 
         // Highfields
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+        this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
+        this.itemBlock(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET.get());
 
         // Magnetic
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
@@ -231,19 +236,23 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ARCTIC_ICE.get());
         this.itemBlock(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.itemBlock(AetherIIBlocks.ICESTONE.get());
+        this.itemBlockFlat(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get(), "natural/");
 
         // Irradiated
         this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
 
         // Ores
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
         this.itemBlock(AetherIIBlocks.AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.GLINT_ORE.get());
         this.itemBlock(AetherIIBlocks.ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_ORE.get());
-        this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
-        this.itemBlock(AetherIIBlocks.GLINT_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
         this.itemBlock(AetherIIBlocks.CORROBONITE_ORE.get());

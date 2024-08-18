@@ -17,14 +17,16 @@
   },
   "features": [
     [
-      "aether_ii:noise_lake",
       "aether_ii:coast_quicksoil",
+      "aether_ii:noise_lake",
       "aether_ii:cloudbed"
     ],
     [
-      "aether_ii:aether_water_lake_underground"
+      "aether_ii:water_pond_underground"
     ],
-    [],
+    [
+      "aether_ii:holystone_rocks"
+    ],
     [],
     [],
     [],
@@ -41,31 +43,39 @@
       "aether_ii:ore_corrobonite",
       "aether_ii:ore_glint"
     ],
+    [],
     [
-      "aether_ii:skyroot_twigs",
-      "aether_ii:holystone_rocks"
-    ],
-    [
-      "aether_ii:aether_water_spring"
+      "aether_ii:water_spring"
     ],
     [
       "aether_ii:shimmering_basin_trees",
-      "aether_ii:highfields_flower_patch_dense",
-      "aether_ii:short_grass_patch",
-      "aether_ii:medium_grass_patch",
-      "aether_ii:long_grass_patch",
-      "aether_ii:highlands_bush_patch",
-      "aether_ii:blueberry_bush_patch",
+      "aether_ii:shimmering_basin_trees_sunken",
+      "aether_ii:grass_field",
+      "aether_ii:valkyrie_sprout_patch",
+      "aether_ii:highlands_bush_patch_field",
       "aether_ii:orange_tree_patch",
-      "aether_ii:valkyrie_sprout_patch"
+      "aether_ii:highfields_flower_patch",
+      "aether_ii:fallen_skyroot_log",
+      "aether_ii:grass_and_dirt_floor",
+      "aether_ii:coarse_aether_dirt_floor",
+      "aether_ii:coarse_aether_dirt_ceiling",
+      "aether_ii:coarse_aether_dirt_overhang",
+      "aether_ii:blueberry_bush_patch"
     ],
     [
-      "aether_ii:cold_aercloud",
-      "aether_ii:blue_aercloud",
-      "aether_ii:golden_aercloud",
-      "aether_ii:green_aercloud",
-      "aether_ii:purple_aercloud",
-      "aether_ii:storm_aercloud"
+      "aether_ii:high_storm_aercloud",
+      "aether_ii:high_green_aercloud",
+      "aether_ii:high_purple_aercloud",
+      "aether_ii:middle_cold_aercloud",
+      "aether_ii:middle_storm_aercloud",
+      "aether_ii:surface_cold_aercloud",
+      "aether_ii:surface_blue_aercloud",
+      "aether_ii:surface_green_aercloud",
+      "aether_ii:surface_purple_aercloud",
+      "aether_ii:lower_storm_aercloud",
+      "aether_ii:lower_blue_aercloud",
+      "aether_ii:lower_green_aercloud",
+      "aether_ii:lower_purple_aercloud"
     ]
   ],
   "has_precipitation": true,

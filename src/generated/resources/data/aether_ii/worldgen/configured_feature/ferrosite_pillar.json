@@ -27,6 +27,6 @@
         }
       ]
     },
-    "valid_blocks": "aether_ii:aether_grass_block"
+    "valid_blocks": "aether_ii:ferrosite_pillar_generates_on"
   }
 }

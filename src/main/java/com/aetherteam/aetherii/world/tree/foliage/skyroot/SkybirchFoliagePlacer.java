@@ -53,23 +53,43 @@ public class SkybirchFoliagePlacer extends FoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, pos, 2, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 1, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 4, z), 0, i, doubleTrunk);
-
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 2, y + branchHeightX, z), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 3, y + 1 + branchHeightX, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 4, y + 3 + branchHeightX, z), 0, i, doubleTrunk);
-
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 2, y + branchHeightNX, z), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 3, y + 1 + branchHeightNX, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 4, y + 3 + branchHeightNX, z), 0, i, doubleTrunk);
-
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightZ, z + 2), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1 + branchHeightZ, z + 3), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3 + branchHeightZ, z + 4), 0, i, doubleTrunk);
-
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightNZ, z - 2), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1 + branchHeightNZ, z - 3), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3 + branchHeightNZ, z - 4), 0, i, doubleTrunk);
         }
+
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightX, z), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y + branchHeightX, z), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 2, y + 1 + branchHeightX, z), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 3, y + 1 + branchHeightX, z), 1,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 3, y + 2 + branchHeightX, z), 1,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 3, y + 3 + branchHeightX, z), 0,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 4, y + 3 + branchHeightX, z), 0,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 4, y + 4 + branchHeightX, z), 0,  0, doubleTrunk);
+
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightNX, z), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 1, y + branchHeightNX, z), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 2, y + 1 + branchHeightNX, z), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 3, y + 1 + branchHeightNX, z), 1,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 3, y + 2 + branchHeightNX, z), 1,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 3, y + 3 + branchHeightNX, z), 0,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 4, y + 3 + branchHeightNX, z), 0,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - 4, y + 4 + branchHeightNX, z), 0,  0, doubleTrunk);
+
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightZ, z), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightZ, z + 1), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1 + branchHeightZ, z + 2), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1 + branchHeightZ, z + 3), 1,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2 + branchHeightZ, z + 3), 1,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3 + branchHeightZ, z + 3), 0,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3 + branchHeightZ, z + 4), 0,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 4 + branchHeightZ, z + 4), 0,  0, doubleTrunk);
+
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightNZ, z), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + branchHeightNZ, z - 1), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1 + branchHeightNZ, z - 2), 2, -1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1 + branchHeightNZ, z - 3), 1,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2 + branchHeightNZ, z - 3), 1,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3 + branchHeightNZ, z - 3), 0,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3 + branchHeightNZ, z - 4), 0,  0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 4 + branchHeightNZ, z - 4), 0,  0, doubleTrunk);
     }
 
     /**
@@ -82,7 +102,7 @@ public class SkybirchFoliagePlacer extends FoliagePlacer {
      */
     @Override
     public int foliageHeight(RandomSource random, int height, TreeConfiguration config) {
-        return 7;
+        return 6;
     }
 
     /**
@@ -98,7 +118,7 @@ public class SkybirchFoliagePlacer extends FoliagePlacer {
      */
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
-        return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(2);
+        return Mth.square(localX) + Mth.square(localY) + Mth.square(localZ) > range + (localY != 0 ? random.nextInt(2) : 0);
     }
 
     @Override

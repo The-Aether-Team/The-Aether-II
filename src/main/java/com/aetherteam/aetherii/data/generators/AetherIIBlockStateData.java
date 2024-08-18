@@ -23,16 +23,21 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.AETHER_DIRT.get(), "natural/");
         this.block(AetherIIBlocks.COARSE_AETHER_DIRT.get(), "natural/");
         this.farmland(AetherIIBlocks.AETHER_FARMLAND.get(), AetherIIBlocks.AETHER_DIRT.get());
+        this.block(AetherIIBlocks.SHIMMERING_SILT.get(), "natural/");
 
         // Underground
         this.block(AetherIIBlocks.HOLYSTONE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE.get(), "natural/");
         this.block(AetherIIBlocks.AGIOSITE.get(), "natural/");
         this.translucentBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), "natural/");
+        this.roots(AetherIIBlocks.SKY_ROOTS.get());
 
         // Highfields
         this.block(AetherIIBlocks.QUICKSOIL.get(), "natural/");
         this.block(AetherIIBlocks.MOSSY_HOLYSTONE.get(), "natural/");
+        this.block(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "natural/");
+        this.carpet(AetherIIBlocks.BRYALINN_MOSS_CARPET.get(), AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "natural/");
+        this.floweringBryalinn(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET.get(), AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn_flower");
 
         // Magnetic
         this.block(AetherIIBlocks.FERROSITE_SAND.get(), "natural/");
@@ -45,19 +50,23 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.translucentBlock(AetherIIBlocks.ARCTIC_ICE.get(), "natural/");
         this.block(AetherIIBlocks.ARCTIC_PACKED_ICE.get(), "natural/");
         this.block(AetherIIBlocks.ICESTONE.get(), "natural/");
+        this.iceCrystal(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
+        this.iceCrystal(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
+        this.iceCrystal(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
 
         // Irradiated
         this.block(AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");
 
         // Ores
+        this.block(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), "natural/");
         this.block(AetherIIBlocks.AMBROSIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ZANITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.GLINT_ORE.get(), "natural/");
         this.block(AetherIIBlocks.ARKENIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.GRAVITITE_ORE.get(), "natural/");
-        this.block(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), "natural/");
-        this.block(AetherIIBlocks.GLINT_ORE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(), "natural/");
+        this.block(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get(), "natural/");
         this.block(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get(), "natural/");
         this.block(AetherIIBlocks.CORROBONITE_ORE.get(), "natural/");
@@ -123,15 +132,15 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.leaves(AetherIIBlocks.GREATOAK_LEAVES.get());
         this.leaves(AetherIIBlocks.GREATBOA_LEAVES.get());
         this.leaves(AetherIIBlocks.AMBEROOT_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
-        this.leaves(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get());
+        this.tintedLeaves(AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
 
         // Saplings
         this.saplingBlock(AetherIIBlocks.SKYROOT_SAPLING.get(), "natural/");

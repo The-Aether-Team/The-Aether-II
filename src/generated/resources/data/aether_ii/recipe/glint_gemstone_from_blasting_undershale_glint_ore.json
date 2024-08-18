@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "group": "glint",
+  "ingredient": {
+    "item": "aether_ii:undershale_glint_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "aether_ii:glint_gemstone"
+  }
+}

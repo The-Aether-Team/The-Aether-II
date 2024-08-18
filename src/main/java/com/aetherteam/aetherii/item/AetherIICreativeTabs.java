@@ -249,6 +249,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.COARSE_AETHER_DIRT.get());
                 output.accept(AetherIIBlocks.AETHER_FARMLAND.get());
+                output.accept(AetherIIBlocks.SHIMMERING_SILT.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
                 output.accept(AetherIIBlocks.ARCTIC_ICE.get());
@@ -264,14 +265,15 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.RUSTED_FERROSITE.get());
                 output.accept(AetherIIBlocks.ICESTONE.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+                output.accept(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
                 output.accept(AetherIIBlocks.AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.ZANITE_ORE.get());
+                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.GRAVITITE_ORE.get());
-                output.accept(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
-                output.accept(AetherIIBlocks.GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
                 output.accept(AetherIIBlocks.CORROBONITE_ORE.get());
@@ -347,8 +349,15 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BLUEBERRY_BUSH.get());
                 output.accept(AetherIIBlocks.ORANGE_TREE.get());
                 output.accept(AetherIIBlocks.VALKYRIE_SPROUT.get());
+                output.accept(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
+                output.accept(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
+                output.accept(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET.get());
+                output.accept(AetherIIBlocks.SKY_ROOTS.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
+                output.accept(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
+                output.accept(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
+                output.accept(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
                 output.accept(AetherIIBlocks.MOA_EGG.get());
             }).build());
 

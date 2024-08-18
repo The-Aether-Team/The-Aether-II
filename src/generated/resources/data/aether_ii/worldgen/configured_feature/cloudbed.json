@@ -2,10 +2,69 @@
   "type": "aether_ii:cloudbed",
   "config": {
     "block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:cold_aercloud"
-      }
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.25,
+          -0.25,
+          1.0,
+          0.5,
+          1.25
+        ],
+        "firstOctave": -7
+      },
+      "scale": 1.0,
+      "seed": 2345,
+      "states": [
+        {
+          "Name": "aether_ii:green_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:cold_aercloud"
+        },
+        {
+          "Name": "aether_ii:blue_aercloud"
+        }
+      ]
     },
     "cloud_noise": "aether_ii:highlands/cloudbed/noise",
     "cloud_radius": 10.0,
