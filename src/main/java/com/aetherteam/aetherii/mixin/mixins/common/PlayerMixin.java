@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
-import com.aetherteam.aetherii.item.AetherIIItemAbilities;
+import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -38,9 +38,9 @@ public class PlayerMixin { //todo sounds, particles, and stats
 
     @ModifyExpressionValue(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;getItemInHand(Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/item/ItemStack;"), method = "attack(Lnet/minecraft/world/entity/Entity;)V")
     private ItemStack getItemInHand(ItemStack original, @Share("canShortswordSlash") LocalBooleanRef canShortswordSlash, @Share("canHammerShock") LocalBooleanRef canHammerShock, @Share("canSpearStab") LocalBooleanRef canSpearStab) {
-        canShortswordSlash.set(original.canPerformAction(AetherIIItemAbilities.SHORTSWORD_SLASH));
-        canHammerShock.set(original.canPerformAction(AetherIIItemAbilities.HAMMER_SHOCK));
-        canSpearStab.set(original.canPerformAction(AetherIIItemAbilities.SPEAR_STAB));
+        canShortswordSlash.set(original.canPerformAction(AetherIINeoItemAbilities.SHORTSWORD_SLASH));
+        canHammerShock.set(original.canPerformAction(AetherIINeoItemAbilities.HAMMER_SHOCK));
+        canSpearStab.set(original.canPerformAction(AetherIINeoItemAbilities.SPEAR_STAB));
         return original;
     }
 

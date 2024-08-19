@@ -11,13 +11,13 @@ import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
 import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.EquipmentUtil;
-import com.aetherteam.aetherii.item.ReinforcementTier;
-import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
-import com.aetherteam.aetherii.item.combat.GlovesItem;
-import com.aetherteam.aetherii.item.combat.abilities.UniqueDamage;
+import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
+import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
+import com.aetherteam.aetherii.item.equipment.weapons.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import io.wispforest.accessories.api.AccessoriesAPI;
@@ -226,7 +226,7 @@ public class DamageSystemHooks {
     }
 
     public static void addShieldTooltips(List<Component> components, ItemStack stack) {
-        if (stack.getItem() instanceof AetherIIShieldItem) {
+        if (stack.getItem() instanceof TieredShieldItem) {
             int useTooltip = components.size() - 1;
             int attributeTooltip = components.size() - 1;
 
@@ -244,7 +244,7 @@ public class DamageSystemHooks {
             }
             int value = 0;
             for (ItemAttributeModifiers.Entry entry : stack.getAttributeModifiers().modifiers()) {
-                if (entry.modifier().is(AetherIIShieldItem.BASE_SHIELD_STAMINA_REDUCTION_ID)) {
+                if (entry.modifier().is(TieredShieldItem.BASE_SHIELD_STAMINA_REDUCTION_ID)) {
                     value = (int) ((entry.modifier().amount() / DamageSystemAttachment.MAX_SHIELD_STAMINA) * 100);
                 }
             }
@@ -300,7 +300,7 @@ public class DamageSystemHooks {
             if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) {
                 DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
-                if (entity.getUseItem().getItem() instanceof AetherIIShieldItem) {
+                if (entity.getUseItem().getItem() instanceof TieredShieldItem) {
                     rate = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_REDUCTION);
                 }
                 attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, attachment.getShieldStamina() - rate));

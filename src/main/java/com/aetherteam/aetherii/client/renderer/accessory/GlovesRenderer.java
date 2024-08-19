@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.client.renderer.accessory;
 
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
-import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
-import com.aetherteam.aetherii.item.combat.GlovesItem;
+import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
+import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.PlayerModelAccessor;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

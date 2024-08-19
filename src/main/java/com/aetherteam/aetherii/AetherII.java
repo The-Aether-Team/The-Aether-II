@@ -26,9 +26,9 @@ import com.aetherteam.aetherii.event.listeners.*;
 import com.aetherteam.aetherii.event.listeners.attachment.*;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
-import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
+import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
@@ -150,10 +150,11 @@ public class AetherII {
     public void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
+        AetherIIItems.registerEquipmentAbilities(bus);
+
         EffectsSystemListeners.listen(bus);
         DamageSystemListener.listen(bus);
         ToolModificationListener.listen(bus);
-        ToolAbilityListener.listen(bus);
         DimensionTeleportationListener.listen(bus);
         AerbunnyMountListener.listen(bus);
         CurrencyListener.listen(bus);
@@ -163,8 +164,6 @@ public class AetherII {
         OutpostTrackerListener.listen(bus);
         EntityInteractionListener.listen(bus);
         GuidebookDiscoveryListener.listen(bus);
-        EquipmentAbilitiesListener.listen(bus);
-        ItemAttributeListener.listen(bus);
         SwetListener.listen(bus);
 
         bus.addListener(ReloadListeners::reloadListenerSetup);

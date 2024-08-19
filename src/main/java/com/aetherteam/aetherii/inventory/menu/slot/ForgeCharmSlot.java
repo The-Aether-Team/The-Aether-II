@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.inventory.menu.slot;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.ReinforcementTier;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;

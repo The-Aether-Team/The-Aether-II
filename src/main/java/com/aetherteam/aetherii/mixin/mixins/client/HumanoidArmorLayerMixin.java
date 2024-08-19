@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
-import com.aetherteam.aetherii.item.AetherIIArmorMaterials;
+import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.core.Holder;
