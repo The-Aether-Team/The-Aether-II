@@ -58,6 +58,7 @@ public class AetherIIEventListeners {
 
         // Living
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
+        bus.addListener(AetherIIEventListeners::onLivingBlockAttack);
 
         // Block
         bus.addListener(AetherIIEventListeners::onBlockUpdateNeighbor);
