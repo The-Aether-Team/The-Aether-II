@@ -21,7 +21,6 @@ import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
-import com.aetherteam.aetherii.event.listeners.DamageSystemListener;
 import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
@@ -154,8 +153,6 @@ public class AetherII {
         AetherIIEventListeners.listen(bus);
 
         AetherIIItems.registerEquipmentAbilities(bus);
-
-        DamageSystemListener.listen(bus);
 
         bus.addListener(ReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);

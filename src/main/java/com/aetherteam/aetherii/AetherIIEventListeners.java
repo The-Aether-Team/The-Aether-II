@@ -5,11 +5,14 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
 import com.aetherteam.aetherii.event.hooks.PlayerHooks;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,18 +23,19 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.portal.DimensionTransition;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerRespawnPositionEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AetherIIEventListeners {
@@ -45,17 +49,24 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerPostTick);
         bus.addListener(AetherIIEventListeners::onPlayerRightClickBlock);
         bus.addListener(AetherIIEventListeners::onPlayerEntityInteractSpecific);
+        bus.addListener(AetherIIEventListeners::onPlayerCriticalHitAttack);
         bus.addListener(AetherIIEventListeners::onPlayerAdvancementProgression);
         bus.addListener(AetherIIEventListeners::onPlayersFinishSleeping);
 
         // Entity
         bus.addListener(AetherIIEventListeners::onEntityPostTick);
 
+        // Living
+        bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
+
         // Block
         bus.addListener(AetherIIEventListeners::onBlockUpdateNeighbor);
         bus.addListener(AetherIIEventListeners::onModifyBlock);
         bus.addListener(AetherIIEventListeners::onAlterGround);
         bus.addListener(AetherIIEventListeners::onBlockFreeze);
+
+        // Item
+        bus.addListener(EventPriority.LOW, AetherIIEventListeners::onTooltipCreationLowPriority);
     }
 
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
@@ -142,6 +153,13 @@ public class AetherIIEventListeners {
         }
     }
 
+    public static void onPlayerCriticalHitAttack(CriticalHitEvent event) {
+        Player player = event.getEntity();
+        float modifier = event.getDamageMultiplier();
+
+        player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM.get()).setCriticalDamageModifier(modifier);
+    }
+
     public static void onPlayerAdvancementProgression(AdvancementEvent.AdvancementProgressEvent event) {
         Player player = event.getEntity();
         AdvancementHolder advancementHolder = event.getAdvancement();
@@ -160,8 +178,26 @@ public class AetherIIEventListeners {
         Entity entity = event.getEntity();
 
         if (entity instanceof LivingEntity livingEntity) {
+            livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).postTickUpdate(livingEntity);
             livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).postTickUpdate(livingEntity);
         }
+    }
+
+    public static void onLivingPreDamaged(LivingDamageEvent.Pre event) {
+        LivingEntity target = event.getEntity();
+        DamageSource source = event.getContainer().getSource();
+        float damage = event.getContainer().getNewDamage();
+
+        damage = target.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getDamageTypeModifiedValue(target, source, damage);
+
+        event.getContainer().setNewDamage(damage);
+    }
+
+    public static void onLivingBlockAttack(LivingShieldBlockEvent event) {
+        LivingEntity livingEntity = event.getEntity();
+        DamageSource source = event.getDamageSource();
+
+        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source);
     }
 
     public static void onBlockUpdateNeighbor(BlockEvent.NeighborNotifyEvent event) {
@@ -217,5 +253,13 @@ public class AetherIIEventListeners {
         if (cancelled) {
             event.setCanceled(true);
         }
+    }
+
+    public static void onTooltipCreationLowPriority(ItemTooltipEvent event) {
+        Player player = event.getEntity();
+        ItemStack itemStack = event.getItemStack();
+        List<Component> itemTooltips = event.getToolTip();
+
+        AetherIIItems.registerTooltips(player, itemStack, itemTooltips);
     }
 }

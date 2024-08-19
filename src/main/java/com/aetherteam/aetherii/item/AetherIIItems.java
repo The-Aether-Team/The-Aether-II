@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIJukeboxSongs;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
@@ -64,9 +65,11 @@ import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootSolidBucketItem;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.Accessory;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
@@ -74,6 +77,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
 
 public class AetherIIItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AetherII.MODID);
@@ -297,5 +302,14 @@ public class AetherIIItems {
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
         bus.addListener(ZaniteTool::modifyBreakSpeed);
+    }
+
+    public static void registerTooltips(Player player, ItemStack itemStack, List<Component> itemTooltips) {
+        EquipmentUtil.addAbilityTooltips(player, itemStack, itemTooltips);
+        EquipmentUtil.addDamageTypeTooltips(player, itemTooltips, itemStack);
+        EquipmentUtil.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
+        EquipmentUtil.addShieldTooltips(itemTooltips, itemStack);
+        EquipmentUtil.addGloveTooltips(player, itemTooltips, itemStack);
+        EquipmentUtil.addReinforcingTooltip(itemStack, itemTooltips);
     }
 }
