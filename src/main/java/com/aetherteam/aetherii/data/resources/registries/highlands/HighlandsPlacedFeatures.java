@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries.highlands;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsPlacementBuilders;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
@@ -316,13 +317,13 @@ public class HighlandsPlacedFeatures {
 
         // Highfields
         register(context, FLOURISHING_FIELD_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FLOURISHING_FIELD),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(2)));
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(2)));
         register(context, VERDANT_WOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VERDANT_WOODS),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
         register(context, SHROUDED_FOREST_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_SHROUDED_FOREST),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(150, 0.25F, 50)));
+                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(150, 0.25F, 50)));
         register(context, SHIMMERING_BASIN_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_SHIMMERING_BASIN),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(5)));
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(5)));
         register(context, SHIMMERING_BASIN_TREES_SUNKEN, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WISPROOT),
                 RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
@@ -334,25 +335,25 @@ public class HighlandsPlacedFeatures {
 
         // Magnetic
         register(context, MAGNETIC_SCAR_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_MAGNETIC_SCAR),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(3)));
         register(context, TURQUOISE_FOREST_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_TURQUOISE_FOREST),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.1F, 1)));
+                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(2, 0.1F, 1)));
         register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VIOLET_HIGHWOODS),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
 
         // Arctic
         register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FRIGID_SIERRA),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(4))); //16
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(4))); //16
         register(context, ENDURING_WOODLAND_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_ENDURING_WOODLANDS),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
+                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
         register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FROZEN_LAKES),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(1)));
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(1)));
 
         // Irradiated
         register(context, CONTAMINATED_JUNGLE_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_IRRADIATED),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
         register(context, BATTLEGROUND_WASTES_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_IRRADIATED),
-                VegetationPlacements.treePlacement(RarityFilter.onAverageOnceEvery(3)));
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(3)));
     }
 
     public static void bootstrapUnderground(BootstrapContext<PlacedFeature> context) {

@@ -96,5 +96,10 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 AetherIIBiomes.ENDURING_WOODLAND,
                 AetherIIBiomes.SHEER_TUNDRA
         );
+
+        this.tag(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_HIGHFIELDS).add(
+                AetherIIBiomes.FLOURISHING_FIELD,
+                AetherIIBiomes.VERDANT_WOODS
+        );
     }
 }

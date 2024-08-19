@@ -49,7 +49,7 @@ public class AetherIIData {
         generator.addProvider(event.includeServer(), new AetherIIEntityTagData(packOutput, lookupProvider, fileHelper));
         generator.addProvider(event.includeServer(), new AetherIIFluidTagData(packOutput, lookupProvider, fileHelper));
         generator.addProvider(event.includeServer(), new AetherIIBiomeTagData(packOutput, lookupProvider, fileHelper));
-//        generator.addProvider(event.includeServer(), new AetherIIStructureTagData(packOutput, registryProvider, fileHelper));
+        generator.addProvider(event.includeServer(), new AetherIIStructureTagData(packOutput, registryProvider, fileHelper));
         generator.addProvider(event.includeServer(), new AetherIIDamageTypeTagData(packOutput, registryProvider, fileHelper));
 
         // pack.mcmeta

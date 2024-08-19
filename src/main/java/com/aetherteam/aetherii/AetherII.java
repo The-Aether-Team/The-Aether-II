@@ -43,6 +43,7 @@ import com.aetherteam.aetherii.world.density.AetherIIDensityFunctionTypes;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.modifier.filter.AetherIIPlacementModifierTypes;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.AetherIIBlockPredicateTypes;
+import com.aetherteam.aetherii.world.placementmodifier.AetherIIPlacementModifiers;
 import com.aetherteam.aetherii.world.structure.AetherIIStructureTypes;
 import com.aetherteam.aetherii.world.structure.pool.AetherIIPoolElementTypes;
 import com.aetherteam.aetherii.world.surfacerule.AetherIISurfaceRules;
@@ -102,6 +103,7 @@ public class AetherII {
                 AetherIIGameEvents.GAME_EVENTS,
                 AetherIIPoi.POI,
                 AetherIIFeatures.FEATURES,
+                AetherIIPlacementModifiers.PLACEMENT_MODIFIERS,
                 AetherIITreeDecoratorTypes.TREE_DECORATORS,
                 AetherIIFoliagePlacerTypes.FOLIAGE_PLACERS,
                 AetherIIStructureTypes.STRUCTURE_TYPES,

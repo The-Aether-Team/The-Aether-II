@@ -11,13 +11,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 public class OutpostPools {
-    public static final ResourceKey<StructureTemplatePool> START = AetherIIPools.createKey("outpost/outposts");
+    public static final ResourceKey<StructureTemplatePool> OUTPOST = AetherIIPools.createKey("outpost/outposts");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
-        context.register(START, new StructureTemplatePool(
+        context.register(OUTPOST, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPool("outpost/outpost"), 1),

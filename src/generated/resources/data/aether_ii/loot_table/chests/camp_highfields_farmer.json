@@ -1,0 +1,174 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:blueberry",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:orange",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:wyndberry"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_lizard_on_a_stick"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 2.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
+                "min": 3.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:brettl_grass",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 4.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:valkyrie_wings",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "aether_ii:aechor_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_pinecone"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_trowel",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:holystone_trowel",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:arkenium_trowel"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_bucket"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_water_bucket"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:skyroot_milk_bucket"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
+    }
+  ],
+  "random_sequence": "aether_ii:chests/camp_highfields_farmer"
+}
