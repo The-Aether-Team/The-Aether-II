@@ -151,7 +151,6 @@ public class AetherII {
         IEventBus bus = NeoForge.EVENT_BUS;
 
         AetherIIEventListeners.listen(bus);
-
         AetherIIItems.registerEquipmentAbilities(bus);
 
         bus.addListener(ReloadListeners::registerReloadListeners);
