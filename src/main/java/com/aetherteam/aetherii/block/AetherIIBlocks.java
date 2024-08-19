@@ -39,7 +39,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -665,14 +664,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         WoodType.register(AetherIIWoodTypes.WISPROOT);
     }
 
-    public static void registerBlockModifications(BlockEvent.BlockToolModificationEvent event) {
-        LevelAccessor levelAccessor = event.getLevel();
-        BlockPos pos = event.getPos();
-        ItemAbility toolAction = event.getItemAbility();
-        BlockState oldState = event.getState();
+    public static BlockState registerBlockModifications(LevelAccessor levelAccessor, ItemAbility toolAction, BlockPos blockPos, BlockState oldState, BlockState newState) {
         Block oldBlock = oldState.getBlock();
-        BlockState newState = oldState;
-
         if (toolAction == ItemAbilities.AXE_STRIP) {
             if (STRIPPABLES.containsKey(oldBlock)) {
                 newState = STRIPPABLES.get(oldBlock).withPropertiesOf(oldState);
@@ -682,16 +675,13 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
                 newState = FLATTENABLES.get(oldBlock).withPropertiesOf(oldState);
             }
         } else if (toolAction == ItemAbilities.HOE_TILL) {
-            if (levelAccessor.getBlockState(pos.above()).isAir()) {
+            if (levelAccessor.getBlockState(blockPos.above()).isAir()) {
                 if (TILLABLES.containsKey(oldBlock)) {
                     newState = TILLABLES.get(oldBlock).withPropertiesOf(oldState);
                 }
             }
         }
-
-        if (newState != oldState && !event.isSimulated() && !event.isCanceled()) {
-            event.setFinalState(newState);
-        }
+        return newState;
     }
 
     private static <T extends Block> DeferredBlock<T> baseRegister(String name, Supplier<? extends T> block, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {

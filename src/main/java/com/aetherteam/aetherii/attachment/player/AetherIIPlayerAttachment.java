@@ -97,6 +97,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      * Handles functions when the player logs in to a world from {@link net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent}.
      */
     public void login(Player player) {
+        this.startInAether(player);
         this.remountAerbunny(player);
         this.shouldSyncAfterJoin = true;
     }
@@ -144,6 +145,28 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      */
     public boolean canSpawnInAether() {
         return this.canSpawnInAether;
+    }
+
+    public void startInAether(Player player) { //todo: port to new 1.21 portal system
+//        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
+//        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
+//            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
+//                if (player instanceof ServerPlayer serverPlayer) {
+//                    MinecraftServer server = serverPlayer.level().getServer();
+//                    if (server != null) {
+//                        ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL);
+//                        if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
+//                            if (player.changeDimension(aetherLevel, new AetherPortalForcer(aetherLevel, false, true)) != null) {
+//                                serverPlayer.setRespawnPosition(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, serverPlayer.blockPosition(), serverPlayer.getYRot(), true, false);
+//                                aetherIIPlayer.setCanSpawnInAether(false); // Sets that the player has already spawned in the Aether.
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        } else {
+//            aetherIIPlayer.setCanSpawnInAether(false);
+//        }
     }
 
     /**
