@@ -51,7 +51,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(SLOPER_ARCTIC, buildSloperArctic(function));
 
         context.register(FACTOR_SHATTERED, buildFactorShattered(function));
-        context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
+        context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
         context.register(TOP_SLIDE_SHATTERED, buildTopSlideShattered(function));
         context.register(BOTTOM_SLIDE_SHATTERED, buildBottomSlideShattered(function));
 

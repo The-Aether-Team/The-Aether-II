@@ -155,18 +155,15 @@ public class AetherII {
 
         AetherIIItems.registerEquipmentAbilities(bus);
 
-        EffectsSystemListeners.listen(bus);
         DamageSystemListener.listen(bus);
         ToolModificationListener.listen(bus);
         DimensionTeleportationListener.listen(bus);
-        CurrencyListener.listen(bus);
         WorldInteractionListener.listen(bus);
         RecipeListener.listen(bus);
         BlockInteractionListener.listen(bus);
         OutpostTrackerListener.listen(bus);
         EntityInteractionListener.listen(bus);
         GuidebookDiscoveryListener.listen(bus);
-        SwetListener.listen(bus);
 
         bus.addListener(ReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);
