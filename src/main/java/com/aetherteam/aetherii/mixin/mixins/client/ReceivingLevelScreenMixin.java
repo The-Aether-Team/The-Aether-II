@@ -25,7 +25,7 @@ public class ReceivingLevelScreenMixin {
     @Inject(method = "<init>", at = @At("TAIL"))
     private void init(BooleanSupplier levelReceived, ReceivingLevelScreen.Reason reason, CallbackInfo ci) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.portalProcess != null && Minecraft.getInstance().player.portalProcess.isSamePortal(AetherIIBlocks.AETHER_PORTAL.get())) {
-            var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.DIMENSION_TELEPORTATION);
+            var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.PLAYER);
             this.isInAetherPortal = true;
             this.portalIntensity = data.getPortalIntensity();
             this.oPortalIntensity = data.getOldPortalIntensity();
@@ -43,7 +43,7 @@ public class ReceivingLevelScreenMixin {
     @Inject(method = "onClose()V", at = @At("HEAD"), cancellable = true)
     private void onClose(CallbackInfo ci) {
         if (Minecraft.getInstance().player != null && this.isInAetherPortal) {
-            var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.DIMENSION_TELEPORTATION);
+            var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.PLAYER);
             data.portalIntensity = this.portalIntensity;
             data.oPortalIntensity = this.oPortalIntensity;
         }

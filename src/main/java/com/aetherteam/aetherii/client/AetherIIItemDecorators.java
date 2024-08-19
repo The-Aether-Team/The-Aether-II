@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;

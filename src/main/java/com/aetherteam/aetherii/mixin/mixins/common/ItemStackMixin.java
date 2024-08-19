@@ -2,10 +2,10 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.combat.AetherIIShieldItem;
-import com.aetherteam.aetherii.item.combat.HammerItem;
-import com.aetherteam.aetherii.item.combat.ShortswordItem;
-import com.aetherteam.aetherii.item.combat.SpearItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.Holder;
@@ -32,15 +32,15 @@ import java.util.function.Consumer;
 public abstract class ItemStackMixin<E> {
     @Unique
     private final List<ResourceLocation> defaultAttributeUUIDs = List.of(
-            ShortswordItem.BASE_SWEEP_RANGE_ID,
-            HammerItem.BASE_SHOCK_RANGE_ID,
-            SpearItem.BASE_STAB_RADIUS_ID,
-            SpearItem.BASE_STAB_DISTANCE_ID,
-            AetherIIShieldItem.BASE_SHIELD_STAMINA_REDUCTION_ID
+            TieredShortswordItem.BASE_SWEEP_RANGE_ID,
+            TieredHammerItem.BASE_SHOCK_RANGE_ID,
+            TieredSpearItem.BASE_STAB_RADIUS_ID,
+            TieredSpearItem.BASE_STAB_DISTANCE_ID,
+            TieredShieldItem.BASE_SHIELD_STAMINA_REDUCTION_ID
     );
 
     @ModifyVariable(method = "addModifierTooltip(Ljava/util/function/Consumer;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/Holder;Lnet/minecraft/world/entity/ai/attributes/AttributeModifier;)V", at = @At("STORE"), ordinal = 0)
-    private boolean injected(boolean flag, @Local(argsOnly = true) AttributeModifier attributeModifier) {
+    private boolean addModifierTooltip(boolean flag, @Local(argsOnly = true) AttributeModifier attributeModifier) {
         if (this.defaultAttributeUUIDs.contains(attributeModifier.id())) {
             return true;
         }

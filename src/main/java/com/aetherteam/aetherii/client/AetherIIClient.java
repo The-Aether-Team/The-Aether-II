@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.accessories.accessory.HandwearAccessory;
 import com.aetherteam.aetherii.client.event.listeners.ClientTooltipsListener;
 import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
 import com.aetherteam.aetherii.client.event.listeners.MusicListener;
@@ -13,10 +12,10 @@ import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.ReinforcementTier;
-import com.aetherteam.aetherii.item.combat.AetherIICrossbowItem;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -39,7 +38,7 @@ public class AetherIIClient {
             registerItemModelProperties();
         });
 
-        HandwearAccessory.clientInit();
+        AetherIIRenderers.registerAccessoryRenderers();
     }
 
     public static void eventSetup(IEventBus neoBus) {
@@ -84,11 +83,11 @@ public class AetherIIClient {
 
     private static void registerCrossbowProperties(Item item) {
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"), (stack, level, livingEntity, value) ->
-                livingEntity == null ? 0.0F : AetherIICrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / (float) ((AetherIICrossbowItem) stack.getItem()).getCrossbowChargeDuration(stack, livingEntity));
+                livingEntity == null ? 0.0F : TieredCrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / (float) ((TieredCrossbowItem) stack.getItem()).getCrossbowChargeDuration(stack, livingEntity));
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pulling"), (stack, level, livingEntity, value) ->
                 livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"), (stack, level, livingEntity, value) ->
-                AetherIICrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+                TieredCrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
 
         ClampedItemPropertyFunction reinforcementProperty = (stack, level, livingEntity, value) -> {
             ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);

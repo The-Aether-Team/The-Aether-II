@@ -36,15 +36,16 @@ public class OutpostTrackerAttachment {
         this.shouldRespawnAtOutpost = shouldRespawnAtOutpost;
     }
 
-    public void onJoinLevel() {
+    public void login(Player player) {
         this.shouldSyncAfterJoin = true;
     }
 
-    public void handleRespawn() {
+    public void handleRespawn(Player player) {
+        this.setShouldRespawnAtOutpost(false);
         this.shouldSyncAfterJoin = true;
     }
 
-    public void onUpdate(Player player) {
+    public void postTickUpdate(Player player) {
         this.syncAfterJoin(player);
     }
 

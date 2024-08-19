@@ -17,7 +17,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.Iterator;
 import java.util.List;
 
-public class SwetAttachment implements INBTSerializable<CompoundTag> {
+public class SwetAttachment implements INBTSerializable<CompoundTag> { //todo merge into player atttachment
     public static final int MAX_SWET_COUNT = 3;
 
     private final List<Swet> swets = Lists.newArrayList();
@@ -96,7 +96,7 @@ public class SwetAttachment implements INBTSerializable<CompoundTag> {
         }
     }
 
-    public void tick() {
+    public void playerPostTickUpdate(Player player) {
         if (this.loadingSync) {
             PacketDistributor.sendToAllPlayers(new SwetSyncPacket(this.entity.getId(), this.serializeNBT(this.entity.registryAccess())));
             this.loadingSync = false;

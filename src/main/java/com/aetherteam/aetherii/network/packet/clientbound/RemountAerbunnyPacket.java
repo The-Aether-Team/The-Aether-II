@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import net.minecraft.client.Minecraft;
@@ -45,7 +44,7 @@ public record RemountAerbunnyPacket(int vehicleID, int aerbunnyID) implements Cu
             Level world = Minecraft.getInstance().player.level();
             if (world.getEntity(payload.vehicleID()) instanceof Player player && world.getEntity(payload.aerbunnyID()) instanceof Aerbunny aerbunny) {
                 aerbunny.startRiding(player);
-                player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(aerbunny);
+                player.getData(AetherIIDataAttachments.PLAYER).setMountedAerbunny(aerbunny);
             }
         }
     }

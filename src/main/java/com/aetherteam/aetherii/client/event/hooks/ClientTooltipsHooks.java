@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.client.event.hooks;
 
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;

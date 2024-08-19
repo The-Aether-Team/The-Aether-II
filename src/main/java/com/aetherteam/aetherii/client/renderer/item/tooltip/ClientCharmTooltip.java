@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.client.renderer.item.tooltip;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.ReinforcementTier;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;

@@ -385,6 +385,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
                 output.accept(AetherIIBlocks.SKYROOT_BED.get());
                 output.accept(AetherIIBlocks.OUTPOST_CAMPFIRE.get());
+                output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_EQUIPMENT_AND_UTILITIES = CREATIVE_MODE_TABS.register("equipment_and_utilities", () -> CreativeModeTab.builder()
@@ -457,7 +458,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MUSIC_DISC_DEMISE.get());
                 output.accept(AetherIIItems.RECORDING_892.get());
                 output.accept(AetherIIItems.GLINT_COIN.get());
-                output.accept(AetherIIItems.AETHER_PORTAL_FRAME.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("armor_and_accessories", () -> CreativeModeTab.builder()
