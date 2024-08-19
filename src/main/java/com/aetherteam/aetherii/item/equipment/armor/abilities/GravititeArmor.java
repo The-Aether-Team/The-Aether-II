@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.armor.abilities;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.player.EquipmentAbilitiesAttachment;
+import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
@@ -26,7 +26,7 @@ public interface GravititeArmor {
     static void playerUpdate(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         LivingEntityAccessor accessor = (LivingEntityAccessor) player;
-        EquipmentAbilitiesAttachment attachment = player.getData(AetherIIDataAttachments.EQUIPMENT_ABILITIES);
+        AetherIIPlayerAttachment attachment = player.getData(AetherIIDataAttachments.PLAYER);
         if (player.onGround() && attachment.isGravititeJumpUsed()) {
             attachment.setGravititeJumpUsed(false);
         }

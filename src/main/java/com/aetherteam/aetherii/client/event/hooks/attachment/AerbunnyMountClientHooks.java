@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.event.hooks.attachment;
 
-import com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import net.minecraft.client.player.Input;
@@ -15,7 +14,7 @@ public class AerbunnyMountClientHooks {
      * @see com.aetherteam.aether.client.event.listeners.capability.AetherPlayerClientListener#onMove(MovementInputUpdateEvent)
      */
     public static void movementInput(Player player, Input input) {
-        var aetherPlayer = player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT);
+        var aetherPlayer = player.getData(AetherIIDataAttachments.PLAYER);
         boolean isJumping = input.jumping;
         if (isJumping != aetherPlayer.isJumping()) {
             aetherPlayer.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setJumping", isJumping);

@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;

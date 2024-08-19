@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.event.hooks.attachment;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.player.DimensionTeleportationAttachment;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.world.LevelUtil;
@@ -134,7 +133,7 @@ public class DimensionTeleportationHooks {
      */
     public static void update(LivingEntity entity) {
         if (entity instanceof Player player) {
-            player.getData(AetherIIDataAttachments.DIMENSION_TELEPORTATION).onUpdate(player);
+            player.getData(AetherIIDataAttachments.PLAYER).onUpdate(player);
         }
     }
 }

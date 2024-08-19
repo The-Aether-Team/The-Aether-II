@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.item.equipment.tools.abilities;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.attachment.player.EquipmentAbilitiesAttachment;
+import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +29,7 @@ public interface GravititeTool {
                 if (blockState.getMenuProvider(level, blockPos) == null) {
                     if ((itemStack.getDestroySpeed(blockState) == tieredItem.getTier().getSpeed() || itemStack.isCorrectToolForDrops(blockState))) {
                         if (blockState.getDestroySpeed(level, blockPos) >= 0.0F && !blockState.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF) && !blockState.is(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST)) {
-                            EquipmentAbilitiesAttachment attachment = player.getData(AetherIIDataAttachments.EQUIPMENT_ABILITIES);
+                            AetherIIPlayerAttachment attachment = player.getData(AetherIIDataAttachments.PLAYER);
                             if (!attachment.isGravititeHoldingFloatingBlock()) {
                                 attachment.setGravititeHoldingFloatingBlock(true);
                                 if (!level.isClientSide()) {

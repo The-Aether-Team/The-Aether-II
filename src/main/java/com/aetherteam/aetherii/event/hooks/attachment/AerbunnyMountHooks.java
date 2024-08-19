@@ -15,17 +15,17 @@ public class AerbunnyMountHooks {
      * @see WorldInteractionListener#onPlayerLogin(PlayerEvent.PlayerLoggedInEvent)
      */
     public static void onPlayerLogin(Player player) {
-        var aetherIIPlayer = player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT);
+        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PLAYER);
         aetherIIPlayer.onLogin(player);
     }
 
     public static void onPlayerLogout(Player player) {
-        var aetherIIPlayer = player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT);
+        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PLAYER);
         aetherIIPlayer.onLogout(player);
     }
 
     public static void onUpdate(Player player) {
-        var aetherIIPlayer = player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT);
+        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PLAYER);
         aetherIIPlayer.onUpdate(player);
     }
 }

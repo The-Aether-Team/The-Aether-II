@@ -31,7 +31,7 @@ import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
-import com.aetherteam.aetherii.network.packet.AerbunnyMountSyncPacket;
+import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
 import com.aetherteam.aetherii.network.packet.CurrencySyncPacket;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
 import com.aetherteam.aetherii.network.packet.OutpostTrackerSyncPacket;
@@ -206,7 +206,7 @@ public class AetherII {
         registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
 
         // BOTH
-        registrar.playBidirectional(AerbunnyMountSyncPacket.TYPE, AerbunnyMountSyncPacket.STREAM_CODEC, AerbunnyMountSyncPacket::execute);
+        registrar.playBidirectional(AetherIIPlayerSyncPacket.TYPE, AetherIIPlayerSyncPacket.STREAM_CODEC, AetherIIPlayerSyncPacket::execute);
         registrar.playBidirectional(CurrencySyncPacket.TYPE, CurrencySyncPacket.STREAM_CODEC, CurrencySyncPacket::execute);
         registrar.playBidirectional(DamageSystemSyncPacket.TYPE, DamageSystemSyncPacket.STREAM_CODEC, DamageSystemSyncPacket::execute);
         registrar.playBidirectional(OutpostTrackerSyncPacket.TYPE, OutpostTrackerSyncPacket.STREAM_CODEC, OutpostTrackerSyncPacket::execute);
