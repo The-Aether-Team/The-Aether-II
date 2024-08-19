@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(AetherII.MODID);
@@ -53,35 +54,35 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     /**
      * Blocks able to be flattened with {@link ItemAbilities#AXE_STRIP}, and the equivalent result block.
      */
-    public static final Map<Block, Block> STRIPPABLES = (new ImmutableMap.Builder<Block, Block>())
-            .put(AetherIIBlocks.SKYROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
-            .put(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
-            .put(AetherIIBlocks.GREATROOT_LOG.get(), AetherIIBlocks.STRIPPED_GREATROOT_LOG.get())
-            .put(AetherIIBlocks.GREATROOT_WOOD.get(), AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get())
-            .put(AetherIIBlocks.WISPROOT_LOG.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get())
-            .put(AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get())
-            .put(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.get())
-            .put(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
-            .put(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
+    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> STRIPPABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
+            .put(() -> AetherIIBlocks.SKYROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
+            .put(() -> AetherIIBlocks.SKYROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
+            .put(() -> AetherIIBlocks.GREATROOT_LOG, () -> AetherIIBlocks.STRIPPED_GREATROOT_LOG)
+            .put(() -> AetherIIBlocks.GREATROOT_WOOD, () -> AetherIIBlocks.STRIPPED_GREATROOT_WOOD)
+            .put(() -> AetherIIBlocks.WISPROOT_LOG, () -> AetherIIBlocks.STRIPPED_WISPROOT_LOG)
+            .put(() -> AetherIIBlocks.WISPROOT_WOOD, () -> AetherIIBlocks.STRIPPED_WISPROOT_WOOD)
+            .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG, () -> AetherIIBlocks.WISPROOT_LOG)
+            .put(() -> AetherIIBlocks.AMBEROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
+            .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
             .build();
 
     /**
      * Blocks able to be flattened with {@link ItemAbilities#SHOVEL_FLATTEN}, and the equivalent result block.
      */
-    public static final Map<Block, Block> FLATTENABLES = (new ImmutableMap.Builder<Block, Block>())
-            .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
-            .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
-            .put(AetherIIBlocks.COARSE_AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
+    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> FLATTENABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
+            .put(() -> AetherIIBlocks.AETHER_GRASS_BLOCK, () -> AetherIIBlocks.AETHER_DIRT_PATH)
+            .put(() -> AetherIIBlocks.AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT_PATH)
+            .put(() -> AetherIIBlocks.COARSE_AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT_PATH)
             .build();
 
     /**
      * Blocks able to be tilled with {@link ItemAbilities#HOE_TILL}, and the equivalent result block.
      */
-    public static final Map<Block, Block> TILLABLES = (new ImmutableMap.Builder<Block, Block>())
-            .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_FARMLAND.get())
-            .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_FARMLAND.get())
-            .put(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_FARMLAND.get())
-            .put(AetherIIBlocks.COARSE_AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT.get())
+    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> TILLABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
+            .put(() -> AetherIIBlocks.AETHER_DIRT, () -> AetherIIBlocks.AETHER_FARMLAND)
+            .put(() -> AetherIIBlocks.AETHER_GRASS_BLOCK, () -> AetherIIBlocks.AETHER_FARMLAND)
+            .put(() -> AetherIIBlocks.AETHER_DIRT_PATH, () -> AetherIIBlocks.AETHER_FARMLAND)
+            .put(() -> AetherIIBlocks.COARSE_AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT)
             .build();
 
     // Portal
@@ -551,6 +552,47 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Furniture
     public static final DeferredBlock<OutpostCampfireBlock> OUTPOST_CAMPFIRE = register("outpost_campfire", () -> new OutpostCampfireBlock(Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(15.0F, 1200.0F).noOcclusion().pushReaction(PushReaction.BLOCK)));
 
+    private static <T extends Block> DeferredBlock<T> baseRegister(String name, Supplier<? extends T> block, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {
+        DeferredBlock<T> register = BLOCKS.register(name, block);
+        AetherIIItems.ITEMS.register(name, item.apply(register));
+        return register;
+    }
+
+    private static <B extends Block> DeferredBlock<B> register(String name, Supplier<B> block) {
+        return baseRegister(name, block, AetherIIBlocks::registerBlockItem);
+    }
+
+    private static <T extends Block> Supplier<BlockItem> registerBlockItem(final DeferredBlock<T> deferredBlock) {
+        return () -> {
+            DeferredBlock<T> block = Objects.requireNonNull(deferredBlock);
+            if (block == HOLYSTONE_ROCK) {
+                return new RockItem(HOLYSTONE_ROCK.get(), new Item.Properties());
+            } else if (block == AMBROSIUM_TORCH) {
+                return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN);
+            } else if (block == SKYROOT_CHEST) {
+                return new EntityBlockItem(block.get(), SkyrootChestBlockEntity::new, new Item.Properties());
+            } else if (block == SKYROOT_BED) {
+                return new EntityBlockItem(block.get(), SkyrootBedBlockEntity::new, new Item.Properties().stacksTo(1));
+            } else if (block == SKYROOT_SIGN) {
+                return new SignItem(new Item.Properties().stacksTo(16), SKYROOT_SIGN.get(), SKYROOT_WALL_SIGN.get());
+            } else if (block == SKYROOT_HANGING_SIGN) {
+                return new HangingSignItem(SKYROOT_HANGING_SIGN.get(), SKYROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
+            } else if (block == GREATROOT_SIGN) {
+                return new SignItem(new Item.Properties().stacksTo(16), GREATROOT_SIGN.get(), GREATROOT_WALL_SIGN.get());
+            } else if (block == GREATROOT_HANGING_SIGN) {
+                return new HangingSignItem(GREATROOT_HANGING_SIGN.get(), GREATROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
+            } else if (block == WISPROOT_SIGN) {
+                return new SignItem(new Item.Properties().stacksTo(16), WISPROOT_SIGN.get(), WISPROOT_WALL_SIGN.get());
+            } else if (block == WISPROOT_HANGING_SIGN) {
+                return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
+            } else if (block == OUTPOST_CAMPFIRE) {
+                return new EntityBlockItem(block.get(), OutpostCampfireBlockEntity::new, new Item.Properties());
+            } else {
+                return new BlockItem(block.get(), new Item.Properties());
+            }
+        };
+    }
+
     public static void registerPots() {
         FlowerPotBlock pot = (FlowerPotBlock) Blocks.FLOWER_POT;
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.SKYROOT_SAPLING.get()), AetherIIBlocks.POTTED_SKYROOT_SAPLING);
@@ -665,63 +707,26 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     }
 
     public static BlockState registerBlockModifications(LevelAccessor levelAccessor, ItemAbility toolAction, BlockPos blockPos, BlockState oldState, BlockState newState) {
+        Map<Block, Block> strippables = STRIPPABLES.entrySet().stream().collect(Collectors.toMap((e) -> e.getKey().get().get(), (e) -> e.getValue().get().get()));
+        Map<Block, Block> flattenables = FLATTENABLES.entrySet().stream().collect(Collectors.toMap((e) -> e.getKey().get().get(), (e) -> e.getValue().get().get()));
+        Map<Block, Block> tillables = TILLABLES.entrySet().stream().collect(Collectors.toMap((e) -> e.getKey().get().get(), (e) -> e.getValue().get().get()));
+
         Block oldBlock = oldState.getBlock();
         if (toolAction == ItemAbilities.AXE_STRIP) {
-            if (STRIPPABLES.containsKey(oldBlock)) {
-                newState = STRIPPABLES.get(oldBlock).withPropertiesOf(oldState);
+            if (strippables.containsKey(oldBlock)) {
+                newState = strippables.get(oldBlock).withPropertiesOf(oldState);
             }
         } else if (toolAction == ItemAbilities.SHOVEL_FLATTEN) {
-            if (FLATTENABLES.containsKey(oldBlock)) {
-                newState = FLATTENABLES.get(oldBlock).withPropertiesOf(oldState);
+            if (flattenables.containsKey(oldBlock)) {
+                newState = flattenables.get(oldBlock).withPropertiesOf(oldState);
             }
         } else if (toolAction == ItemAbilities.HOE_TILL) {
             if (levelAccessor.getBlockState(blockPos.above()).isAir()) {
-                if (TILLABLES.containsKey(oldBlock)) {
-                    newState = TILLABLES.get(oldBlock).withPropertiesOf(oldState);
+                if (tillables.containsKey(oldBlock)) {
+                    newState = tillables.get(oldBlock).withPropertiesOf(oldState);
                 }
             }
         }
         return newState;
-    }
-
-    private static <T extends Block> DeferredBlock<T> baseRegister(String name, Supplier<? extends T> block, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {
-        DeferredBlock<T> register = BLOCKS.register(name, block);
-        AetherIIItems.ITEMS.register(name, item.apply(register));
-        return register;
-    }
-
-    private static <B extends Block> DeferredBlock<B> register(String name, Supplier<B> block) {
-        return baseRegister(name, block, AetherIIBlocks::registerBlockItem);
-    }
-
-    private static <T extends Block> Supplier<BlockItem> registerBlockItem(final DeferredBlock<T> deferredBlock) {
-        return () -> {
-            DeferredBlock<T> block = Objects.requireNonNull(deferredBlock);
-            if (block == HOLYSTONE_ROCK) {
-                return new RockItem(HOLYSTONE_ROCK.get(), new Item.Properties());
-            } else if (block == AMBROSIUM_TORCH) {
-                return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN);
-            } else if (block == SKYROOT_CHEST) {
-                return new EntityBlockItem(block.get(), SkyrootChestBlockEntity::new, new Item.Properties());
-            } else if (block == SKYROOT_BED) {
-                return new EntityBlockItem(block.get(), SkyrootBedBlockEntity::new, new Item.Properties().stacksTo(1));
-            } else if (block == SKYROOT_SIGN) {
-                return new SignItem(new Item.Properties().stacksTo(16), SKYROOT_SIGN.get(), SKYROOT_WALL_SIGN.get());
-            } else if (block == SKYROOT_HANGING_SIGN) {
-                return new HangingSignItem(SKYROOT_HANGING_SIGN.get(), SKYROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
-            } else if (block == GREATROOT_SIGN) {
-                return new SignItem(new Item.Properties().stacksTo(16), GREATROOT_SIGN.get(), GREATROOT_WALL_SIGN.get());
-            } else if (block == GREATROOT_HANGING_SIGN) {
-                return new HangingSignItem(GREATROOT_HANGING_SIGN.get(), GREATROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
-            } else if (block == WISPROOT_SIGN) {
-                return new SignItem(new Item.Properties().stacksTo(16), WISPROOT_SIGN.get(), WISPROOT_WALL_SIGN.get());
-            } else if (block == WISPROOT_HANGING_SIGN) {
-                return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
-            } else if (block == OUTPOST_CAMPFIRE) {
-                return new EntityBlockItem(block.get(), OutpostCampfireBlockEntity::new, new Item.Properties());
-            } else {
-                return new BlockItem(block.get(), new Item.Properties());
-            }
-        };
     }
 }
