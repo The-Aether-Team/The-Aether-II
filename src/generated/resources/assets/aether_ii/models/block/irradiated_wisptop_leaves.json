@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/leaves",
   "textures": {
     "all": "aether_ii:block/natural/irradiated_wisptop_leaves"
   }

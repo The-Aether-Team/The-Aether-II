@@ -1,0 +1,21 @@
+{
+  "type": "aether_ii:fallen_log",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:wisproot_log",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "valid_blocks": "aether_ii:fallen_log_survives_on",
+    "vegetation_chance": 0.0,
+    "y_range": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 6,
+      "min_inclusive": 3
+    }
+  }
+}

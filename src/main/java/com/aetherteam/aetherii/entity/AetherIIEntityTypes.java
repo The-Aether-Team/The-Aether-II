@@ -3,10 +3,7 @@ package com.aetherteam.aetherii.entity;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
-import com.aetherteam.aetherii.entity.monster.AechorPlant;
-import com.aetherteam.aetherii.entity.monster.Cockatrice;
-import com.aetherteam.aetherii.entity.monster.Tempest;
-import com.aetherteam.aetherii.entity.monster.Zephyr;
+import com.aetherteam.aetherii.entity.monster.*;
 import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.projectile.*;
 import net.minecraft.core.registries.Registries;
@@ -72,6 +69,8 @@ public class AetherIIEntityTypes {
   
     public static final DeferredHolder<EntityType<?>, EntityType<Cockatrice>> COCKATRICE = ENTITY_TYPES.register("cockatrice",
             () -> EntityType.Builder.of(Cockatrice::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 2.15F).clientTrackingRange(10).build("cockatrice"));
+    public static final DeferredHolder<EntityType<?>, EntityType<Swet>> SWET = ENTITY_TYPES.register("swet",
+            () -> EntityType.Builder.of(Swet::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.9F).clientTrackingRange(10).build("swet"));
 
 
     // Projectiles
@@ -89,6 +88,9 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<ToxicDart>> TOXIC_DART = ENTITY_TYPES.register("toxic_dart",
             () -> EntityType.Builder.<ToxicDart>of(ToxicDart::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("toxic_dart"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<VenomousDart>> VENOMOUS_DART = ENTITY_TYPES.register("venomous_dart",
+            () -> EntityType.Builder.<VenomousDart>of(VenomousDart::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("venomous_dart"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ZephyrWebbingBall>> ZEPHYR_WEBBING_BALL = ENTITY_TYPES.register("zephyr_webbing_ball",
             () -> EntityType.Builder.<ZephyrWebbingBall>of(ZephyrWebbingBall::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(10).build("zephyr_webbing_ball"));
@@ -128,6 +130,7 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.ZEPHYR.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zephyr::checkZephyrSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.TEMPEST.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Tempest::checkTempestSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.COCKATRICE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Cockatrice::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.SWET.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Swet::checkSwetSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
 
     }
 
@@ -154,5 +157,6 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.ZEPHYR.get(), Zephyr.createMobAttributes().build());
         event.put(AetherIIEntityTypes.TEMPEST.get(), Tempest.createMobAttributes().build());
         event.put(AetherIIEntityTypes.COCKATRICE.get(), Cockatrice.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.SWET.get(), Swet.createMobAttributes().build());
     }
 }

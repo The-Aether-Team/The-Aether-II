@@ -56,15 +56,15 @@ public class GuidebookDiscoveryAttachment {
         this.uncheckedBestiaryEntries = new ArrayList<>();
     }
 
-    public void onLogin(Player player) {
+    public void login(Player player) {
         this.shouldSyncAfterJoin = true;
     }
 
-    public void onClone(Player player) {
+    public void clone(Player player) {
         this.shouldSyncAfterJoin = true;
     }
 
-    public void onUpdate(Player player) {
+    public void postTickUpdate(Player player) {
         this.syncAfterJoin(player);
     }
 

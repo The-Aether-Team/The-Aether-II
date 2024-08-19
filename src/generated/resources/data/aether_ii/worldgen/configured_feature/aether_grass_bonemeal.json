@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:simple_block",
+  "type": "aether_ii:aether_grass",
   "config": {
     "to_place": {
       "type": "minecraft:weighted_state_provider",

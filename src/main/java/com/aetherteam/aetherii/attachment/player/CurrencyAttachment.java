@@ -37,11 +37,11 @@ public class CurrencyAttachment implements INBTSynchable {
         return this.synchableFunctions;
     }
 
-    public void onJoinLevel() {
+    public void login(Player player) {
         this.shouldSyncAfterJoin = true;
     }
 
-    public void onUpdate(Player player) {
+    public void postTickUpdate(Player player) {
         this.syncAfterJoin(player);
     }
 

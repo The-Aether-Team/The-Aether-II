@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
@@ -37,26 +36,5 @@ public class OutpostTrackerHooks {
             }
         }
         return null;
-    }
-
-    public static void markNoLongerRespawnAtOutpost(Player player) {
-        player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).setShouldRespawnAtOutpost(false);
-    }
-
-    public static void onPlayerLogin(Entity entity) {
-        if (entity instanceof Player player) {
-            var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
-            data.onJoinLevel();
-        }
-    }
-
-    public static void onUpdate(Player player) {
-        var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
-        data.onUpdate(player);
-    }
-
-    public static void onRespawn(Player player) {
-        var data = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER);
-        data.handleRespawn();
     }
 }

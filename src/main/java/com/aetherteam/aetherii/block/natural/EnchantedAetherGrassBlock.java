@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.registries.placement.AetherIIVegetationPlacements;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsPlacedFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -67,7 +67,7 @@ public class EnchantedAetherGrassBlock extends GrassBlock {
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         BlockPos abovePos = pos.above();
         Block grass = AetherIIBlocks.AETHER_GRASS_BLOCK.get();
-        Optional<Holder.Reference<PlacedFeature>> grassFeatureOptional = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(AetherIIVegetationPlacements.AETHER_GRASS_BONEMEAL);
+        Optional<Holder.Reference<PlacedFeature>> grassFeatureOptional = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(HighlandsPlacedFeatures.AETHER_GRASS_BONEMEAL);
 
         start:
         for (int i = 0; i < 128; ++i) {

@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.ReinforcementTier;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.EditBoxAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeSlotCharmsPacket;

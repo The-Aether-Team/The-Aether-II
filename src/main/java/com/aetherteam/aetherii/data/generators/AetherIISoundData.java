@@ -230,6 +230,45 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether.entity.cockatrice.shoot")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_SWET_ATTACK,
+                definition().with(
+                        sound("minecraft:mob/slime/attack1"),
+                        sound("minecraft:mob/slime/attack2")
+                ).subtitle("subtitles.aether.entity.swet.attack")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SWET_DEATH,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.entity.swet.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SWET_HURT,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.entity.swet.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SWET_JUMP,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.entity.swet.squish")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SWET_SQUISH,
+                definition().with(
+                        sound("minecraft:mob/slime/big1"),
+                        sound("minecraft:mob/slime/big2"),
+                        sound("minecraft:mob/slime/big3"),
+                        sound("minecraft:mob/slime/big4")
+                ).subtitle("subtitles.aether.entity.swet.squish")
+        );
+
         /*this.add(AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT,
                 definition().with(sound("aether:entity/zephyr/call"))
                         .subtitle("subtitles.aether.entity.zephyr.ambient")

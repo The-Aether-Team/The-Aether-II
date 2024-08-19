@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.IrradiatedLeavesBlock;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
@@ -17,22 +18,28 @@ public class AetherIIColorResolvers {
     private static final int AETHER_TALL_GRASS_COLOR = 0xB1FFCB;
 
     public static void registerBlockColor(RegisterColorHandlersEvent.Block event) {
-//        event.register((state, level, pos, tintIndex) -> {
-//            int shade = state.getValue(IrradiatedLeavesBlock.SHADE);
-//            int shadeMax = 7;
-//
-//            Color bottom = new Color(0xEFE553);
-//
-//            Color top = new Color(0xF2EFE6);
-//
-//            int resultRed = bottom.getRed() + (shade / shadeMax) * (top.getRed() - top.getRed());
-//            int resultGreen = bottom.getGreen() + (shade / shadeMax) * (top.getGreen() - top.getGreen());
-//            int resultBlue = bottom.getBlue() + (shade / shadeMax) * (top.getBlue() - top.getBlue());
-//
-//            AetherII.LOGGER.info(String.valueOf(new Color(resultRed, resultGreen, resultBlue).getRGB()));
-//
-//            return new Color(resultRed, resultGreen, resultBlue).getRGB();
-//        }, AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get());
+        event.register((state, level, pos, tintIndex) -> {
+            float shade = state.getValue(IrradiatedLeavesBlock.SHADE);
+            float shadeMax = 7.0F;
+
+            Color bottom = new Color(0xFFF68D);
+            Color top = new Color(0xFFFFFF);
+
+            int resultRed = bottom.getRed() + (int) ((shade / shadeMax) * (top.getRed() - bottom.getRed()));
+            int resultGreen = bottom.getGreen() + (int) ((shade / shadeMax) * (top.getGreen() - bottom.getGreen()));
+            int resultBlue = bottom.getBlue() + (int) ((shade / shadeMax) * (top.getBlue() - bottom.getBlue()));
+
+            return new Color(resultRed, resultGreen, resultBlue).getRGB();
+        },
+                AetherIIBlocks.IRRADIATED_SKYROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
         event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(level, pos, tintIndex, level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_GRASS_COLOR, 5.0F, 6.0F)),
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(level, pos, tintIndex, level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),

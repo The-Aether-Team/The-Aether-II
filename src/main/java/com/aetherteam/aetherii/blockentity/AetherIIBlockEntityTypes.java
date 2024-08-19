@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -18,7 +19,7 @@ public class AetherIIBlockEntityTypes {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyrootChestBlockEntity>> SKYROOT_CHEST = BLOCK_ENTITY_TYPES.register("skyroot_chest", () ->
             BlockEntityType.Builder.of(SkyrootChestBlockEntity::new, AetherIIBlocks.SKYROOT_CHEST.get()).build(null));
-  
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MoaEggBlockEntity>> MOA_EGG = BLOCK_ENTITY_TYPES.register("moa_egg", () ->
             BlockEntityType.Builder.of(MoaEggBlockEntity::new, AetherIIBlocks.MOA_EGG.get()).build(null));
 
@@ -31,16 +32,15 @@ public class AetherIIBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyrootBedBlockEntity>> SKYROOT_BED = BLOCK_ENTITY_TYPES.register("skyroot_bed", () ->
             BlockEntityType.Builder.of(SkyrootBedBlockEntity::new, AetherIIBlocks.SKYROOT_BED.get()).build(null));
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AetherSignBlockEntity>> AETHER_SIGN = BLOCK_ENTITY_TYPES.register("aether_sign", () ->
-            BlockEntityType.Builder.of(AetherSignBlockEntity::new, AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
-                    AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),
-                    AetherIIBlocks.WISPROOT_WALL_SIGN.get(), AetherIIBlocks.WISPROOT_SIGN.get()).build(null));
-
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AetherHangingSignBlockEntity>> AETHER_HANGING_SIGN = BLOCK_ENTITY_TYPES.register("aether_hanging_sign", () ->
-            BlockEntityType.Builder.of(AetherHangingSignBlockEntity::new, AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
-                    AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
-                    AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get()).build(null));
-
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<OutpostCampfireBlockEntity>> OUTPOST_CAMPFIRE = BLOCK_ENTITY_TYPES.register("outpost_campfire", () ->
             BlockEntityType.Builder.of(OutpostCampfireBlockEntity::new, AetherIIBlocks.OUTPOST_CAMPFIRE.get()).build(null));
+
+    public static void registerValidBlockEntityTypes(BlockEntityTypeAddBlocksEvent event) {
+        event.modify(BlockEntityType.SIGN, AetherIIBlocks.SKYROOT_WALL_SIGN.get(), AetherIIBlocks.SKYROOT_SIGN.get(),
+                AetherIIBlocks.GREATROOT_WALL_SIGN.get(), AetherIIBlocks.GREATROOT_SIGN.get(),
+                AetherIIBlocks.WISPROOT_WALL_SIGN.get(), AetherIIBlocks.WISPROOT_SIGN.get());
+        event.modify(BlockEntityType.HANGING_SIGN, AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(),
+                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get());
+    }
 }
