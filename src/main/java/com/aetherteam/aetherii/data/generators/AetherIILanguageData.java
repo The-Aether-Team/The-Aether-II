@@ -3,9 +3,9 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -817,29 +817,29 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Biomes
         // Highfields
-        this.addBiome(AetherIIBiomes.FLOURISHING_FIELD, "Flourishing Field");
-        this.addBiome(AetherIIBiomes.VERDANT_WOODS, "Verdant Woods");
-        this.addBiome(AetherIIBiomes.SHROUDED_FOREST, "Shrouded Forest");
-        this.addBiome(AetherIIBiomes.SHIMMERING_BASIN, "Shimmering Basin");
+        this.addBiome(HighlandsBiomes.FLOURISHING_FIELD, "Flourishing Field");
+        this.addBiome(HighlandsBiomes.VERDANT_WOODS, "Verdant Woods");
+        this.addBiome(HighlandsBiomes.SHROUDED_FOREST, "Shrouded Forest");
+        this.addBiome(HighlandsBiomes.SHIMMERING_BASIN, "Shimmering Basin");
 
         // Magnetic
-        this.addBiome(AetherIIBiomes.MAGNETIC_SCAR, "Magnetic Scar");
-        this.addBiome(AetherIIBiomes.TURQUOISE_FOREST, "Turquoise Forest");
-        this.addBiome(AetherIIBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
-        this.addBiome(AetherIIBiomes.GLISTENING_SWAMP, "Glistening Swamp");
+        this.addBiome(HighlandsBiomes.MAGNETIC_SCAR, "Magnetic Scar");
+        this.addBiome(HighlandsBiomes.TURQUOISE_FOREST, "Turquoise Forest");
+        this.addBiome(HighlandsBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
+        this.addBiome(HighlandsBiomes.GLISTENING_SWAMP, "Glistening Swamp");
 
         // Arctic
-        this.addBiome(AetherIIBiomes.FRIGID_SIERRA, "Frigid Sierra");
-        this.addBiome(AetherIIBiomes.ENDURING_WOODLAND, "Enduring Woodland");
-        this.addBiome(AetherIIBiomes.FROZEN_LAKES, "Frozen Lakes");
-        this.addBiome(AetherIIBiomes.SHEER_TUNDRA, "Sheer Tundra");
+        this.addBiome(HighlandsBiomes.FRIGID_SIERRA, "Frigid Sierra");
+        this.addBiome(HighlandsBiomes.ENDURING_WOODLAND, "Enduring Woodland");
+        this.addBiome(HighlandsBiomes.FROZEN_LAKES, "Frozen Lakes");
+        this.addBiome(HighlandsBiomes.SHEER_TUNDRA, "Sheer Tundra");
 
         // Irradiated
-        this.addBiome(AetherIIBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
-        this.addBiome(AetherIIBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
+        this.addBiome(HighlandsBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
+        this.addBiome(HighlandsBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
 
         // Aercloud Sea
-        this.addBiome(AetherIIBiomes.EXPANSE, "Expanse");
+        this.addBiome(HighlandsBiomes.EXPANSE, "Expanse");
 
 
         // Structures

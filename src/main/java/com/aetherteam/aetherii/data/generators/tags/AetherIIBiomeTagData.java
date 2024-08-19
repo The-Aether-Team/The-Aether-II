@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.generators.tags;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
@@ -21,24 +21,24 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
     @Override
     public void addTags(HolderLookup.Provider provider) {
         this.tag(AetherIITags.Biomes.HIGHFIELDS).add(
-                AetherIIBiomes.FLOURISHING_FIELD,
-                AetherIIBiomes.VERDANT_WOODS,
-                AetherIIBiomes.SHROUDED_FOREST,
-                AetherIIBiomes.SHIMMERING_BASIN);
+                HighlandsBiomes.FLOURISHING_FIELD,
+                HighlandsBiomes.VERDANT_WOODS,
+                HighlandsBiomes.SHROUDED_FOREST,
+                HighlandsBiomes.SHIMMERING_BASIN);
         this.tag(AetherIITags.Biomes.MAGNETIC).add(
-                AetherIIBiomes.MAGNETIC_SCAR,
-                AetherIIBiomes.TURQUOISE_FOREST,
-                AetherIIBiomes.GLISTENING_SWAMP,
-                AetherIIBiomes.VIOLET_HIGHWOODS);
+                HighlandsBiomes.MAGNETIC_SCAR,
+                HighlandsBiomes.TURQUOISE_FOREST,
+                HighlandsBiomes.GLISTENING_SWAMP,
+                HighlandsBiomes.VIOLET_HIGHWOODS);
         this.tag(AetherIITags.Biomes.ARCTIC).add(
-                AetherIIBiomes.FRIGID_SIERRA,
-                AetherIIBiomes.ENDURING_WOODLAND,
-                AetherIIBiomes.FROZEN_LAKES,
-                AetherIIBiomes.SHEER_TUNDRA);
+                HighlandsBiomes.FRIGID_SIERRA,
+                HighlandsBiomes.ENDURING_WOODLAND,
+                HighlandsBiomes.FROZEN_LAKES,
+                HighlandsBiomes.SHEER_TUNDRA);
         this.tag(AetherIITags.Biomes.IRRADIATED).add(
-                AetherIIBiomes.CONTAMINATED_JUNGLE,
-                AetherIIBiomes.BATTLEGROUND_WASTES);
-        this.tag(AetherIITags.Biomes.EXPANSE).add(AetherIIBiomes.EXPANSE);
+                HighlandsBiomes.CONTAMINATED_JUNGLE,
+                HighlandsBiomes.BATTLEGROUND_WASTES);
+        this.tag(AetherIITags.Biomes.EXPANSE).add(HighlandsBiomes.EXPANSE);
 
         this.tag(AetherIITags.Biomes.MYCELIUM_CONVERSION).add(Biomes.MUSHROOM_FIELDS);
         this.tag(AetherIITags.Biomes.PODZOL_CONVERSION).add(
@@ -49,57 +49,57 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
         this.tag(AetherIITags.Biomes.WARPED_NYLIUM_CONVERSION).add(Biomes.WARPED_FOREST);
 
         this.tag(AetherIITags.Biomes.ARCTIC_ICE).add(
-                AetherIIBiomes.FLOURISHING_FIELD,
-                AetherIIBiomes.VERDANT_WOODS,
-                AetherIIBiomes.SHROUDED_FOREST,
-                AetherIIBiomes.SHIMMERING_BASIN,
-                AetherIIBiomes.MAGNETIC_SCAR,
-                AetherIIBiomes.TURQUOISE_FOREST,
-                AetherIIBiomes.GLISTENING_SWAMP,
-                AetherIIBiomes.VIOLET_HIGHWOODS,
-                AetherIIBiomes.FRIGID_SIERRA,
-                AetherIIBiomes.ENDURING_WOODLAND,
-                AetherIIBiomes.FROZEN_LAKES,
-                AetherIIBiomes.SHEER_TUNDRA,
-                AetherIIBiomes.CONTAMINATED_JUNGLE,
-                AetherIIBiomes.BATTLEGROUND_WASTES,
-                AetherIIBiomes.EXPANSE
+                HighlandsBiomes.FLOURISHING_FIELD,
+                HighlandsBiomes.VERDANT_WOODS,
+                HighlandsBiomes.SHROUDED_FOREST,
+                HighlandsBiomes.SHIMMERING_BASIN,
+                HighlandsBiomes.MAGNETIC_SCAR,
+                HighlandsBiomes.TURQUOISE_FOREST,
+                HighlandsBiomes.GLISTENING_SWAMP,
+                HighlandsBiomes.VIOLET_HIGHWOODS,
+                HighlandsBiomes.FRIGID_SIERRA,
+                HighlandsBiomes.ENDURING_WOODLAND,
+                HighlandsBiomes.FROZEN_LAKES,
+                HighlandsBiomes.SHEER_TUNDRA,
+                HighlandsBiomes.CONTAMINATED_JUNGLE,
+                HighlandsBiomes.BATTLEGROUND_WASTES,
+                HighlandsBiomes.EXPANSE
         );
 
         this.tag(AetherIITags.Biomes.AETHER_MUSIC).add(
-                AetherIIBiomes.FLOURISHING_FIELD,
-                AetherIIBiomes.VERDANT_WOODS,
-                AetherIIBiomes.SHROUDED_FOREST,
-                AetherIIBiomes.SHIMMERING_BASIN,
-                AetherIIBiomes.MAGNETIC_SCAR,
-                AetherIIBiomes.TURQUOISE_FOREST,
-                AetherIIBiomes.GLISTENING_SWAMP,
-                AetherIIBiomes.VIOLET_HIGHWOODS,
-                AetherIIBiomes.FRIGID_SIERRA,
-                AetherIIBiomes.ENDURING_WOODLAND,
-                AetherIIBiomes.FROZEN_LAKES,
-                AetherIIBiomes.SHEER_TUNDRA,
-                AetherIIBiomes.CONTAMINATED_JUNGLE,
-                AetherIIBiomes.BATTLEGROUND_WASTES,
-                AetherIIBiomes.EXPANSE
+                HighlandsBiomes.FLOURISHING_FIELD,
+                HighlandsBiomes.VERDANT_WOODS,
+                HighlandsBiomes.SHROUDED_FOREST,
+                HighlandsBiomes.SHIMMERING_BASIN,
+                HighlandsBiomes.MAGNETIC_SCAR,
+                HighlandsBiomes.TURQUOISE_FOREST,
+                HighlandsBiomes.GLISTENING_SWAMP,
+                HighlandsBiomes.VIOLET_HIGHWOODS,
+                HighlandsBiomes.FRIGID_SIERRA,
+                HighlandsBiomes.ENDURING_WOODLAND,
+                HighlandsBiomes.FROZEN_LAKES,
+                HighlandsBiomes.SHEER_TUNDRA,
+                HighlandsBiomes.CONTAMINATED_JUNGLE,
+                HighlandsBiomes.BATTLEGROUND_WASTES,
+                HighlandsBiomes.EXPANSE
         );
 
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_OUTPOST).add(
-                AetherIIBiomes.FLOURISHING_FIELD,
-                AetherIIBiomes.VERDANT_WOODS,
-                AetherIIBiomes.SHROUDED_FOREST,
-                AetherIIBiomes.MAGNETIC_SCAR,
-                AetherIIBiomes.TURQUOISE_FOREST,
-                AetherIIBiomes.GLISTENING_SWAMP,
-                AetherIIBiomes.VIOLET_HIGHWOODS,
-                AetherIIBiomes.FRIGID_SIERRA,
-                AetherIIBiomes.ENDURING_WOODLAND,
-                AetherIIBiomes.SHEER_TUNDRA
+                HighlandsBiomes.FLOURISHING_FIELD,
+                HighlandsBiomes.VERDANT_WOODS,
+                HighlandsBiomes.SHROUDED_FOREST,
+                HighlandsBiomes.MAGNETIC_SCAR,
+                HighlandsBiomes.TURQUOISE_FOREST,
+                HighlandsBiomes.GLISTENING_SWAMP,
+                HighlandsBiomes.VIOLET_HIGHWOODS,
+                HighlandsBiomes.FRIGID_SIERRA,
+                HighlandsBiomes.ENDURING_WOODLAND,
+                HighlandsBiomes.SHEER_TUNDRA
         );
 
         this.tag(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_HIGHFIELDS).add(
-                AetherIIBiomes.FLOURISHING_FIELD,
-                AetherIIBiomes.VERDANT_WOODS
+                HighlandsBiomes.FLOURISHING_FIELD,
+                HighlandsBiomes.VERDANT_WOODS
         );
     }
 }
