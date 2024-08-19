@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.inventory.AetherIISlotHandling;
+import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
 import com.mojang.datafixers.util.Pair;
 import io.wispforest.accessories.api.menu.AccessoriesSlotGenerator;
@@ -46,7 +46,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
             }
         }
 
-        AccessoriesSlotGenerator generator = AccessoriesSlotGenerator.of(this::addSlot, 64, 38, this.owner, AetherIISlotHandling.getRelicSlotType(), AetherIISlotHandling.getHandwearSlotType(), AetherIISlotHandling.getAccessorySlotType());
+        AccessoriesSlotGenerator generator = AccessoriesSlotGenerator.of(this::addSlot, 64, 38, this.owner, AetherIIAccessorySlots.getRelicSlotType(), AetherIIAccessorySlots.getHandwearSlotType(), AetherIIAccessorySlots.getAccessorySlotType());
 
         if (generator != null) {
             this.addedSlots = generator.padding(0).column();

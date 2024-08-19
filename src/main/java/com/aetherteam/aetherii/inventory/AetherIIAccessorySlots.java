@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
-public class AetherIISlotHandling implements UniqueSlotHandling.RegistrationCallback {
+public class AetherIIAccessorySlots implements UniqueSlotHandling.RegistrationCallback {
     private static final ResourceLocation RELIC_PREDICATE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "relic_items");
     private static final ResourceLocation HANDWEAR_PREDICATE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "handwear_items");
     private static final ResourceLocation ACCESSORY_PREDICATE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory_items");
@@ -21,13 +21,13 @@ public class AetherIISlotHandling implements UniqueSlotHandling.RegistrationCall
     public static final ResourceLocation HANDWEAR_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "handwear_slot");
     public static final ResourceLocation ACCESSORY_SLOT_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory_slot");
 
-    public static final AetherIISlotHandling INSTANCE = new AetherIISlotHandling();
+    public static final AetherIIAccessorySlots INSTANCE = new AetherIIAccessorySlots();
 
     private static SlotTypeReference RELIC_SLOT;
     private static SlotTypeReference HANDWEAR_SLOT;
     private static SlotTypeReference ACCESSORY_SLOT;
 
-    private AetherIISlotHandling() {
+    private AetherIIAccessorySlots() {
         AccessoriesAPI.registerPredicate(RELIC_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_RELICS)));
         AccessoriesAPI.registerPredicate(HANDWEAR_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_HANDWEAR)));
         AccessoriesAPI.registerPredicate(ACCESSORY_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_ACCESSORIES)));

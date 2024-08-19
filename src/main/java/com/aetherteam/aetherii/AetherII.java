@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii;
 
-import com.aetherteam.aetherii.inventory.AetherIISlotHandling;
+import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -144,7 +144,7 @@ public class AetherII {
             this.registerCauldronInteractions();
         });
 
-        UniqueSlotHandling.EVENT.register(AetherIISlotHandling.INSTANCE);
+        UniqueSlotHandling.EVENT.register(AetherIIAccessorySlots.INSTANCE);
     }
 
     public void eventSetup(IEventBus neoBus) {

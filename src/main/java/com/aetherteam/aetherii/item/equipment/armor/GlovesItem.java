@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.item.equipment.armor;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
-import com.aetherteam.aetherii.inventory.AetherIISlotHandling;
+import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import io.wispforest.accessories.api.Accessory;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
 import io.wispforest.accessories.api.slot.SlotReference;
@@ -34,7 +34,7 @@ public class GlovesItem extends Item implements Accessory {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        if (reference.slotName().equals(AetherIISlotHandling.HANDWEAR_SLOT_LOCATION.toString())) {
+        if (reference.slotName().equals(AetherIIAccessorySlots.HANDWEAR_SLOT_LOCATION.toString())) {
             builder.addStackable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION, new AttributeModifier(BASE_GLOVES_STAMINA_RESTORATION_ID, this.restoration, AttributeModifier.Operation.ADD_VALUE));
         }
     }
