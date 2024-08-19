@@ -23,7 +23,6 @@ import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.event.listeners.*;
-import com.aetherteam.aetherii.event.listeners.attachment.*;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
@@ -150,13 +149,14 @@ public class AetherII {
     public void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
+        AetherIIEventListeners.listen(bus);
+
         AetherIIItems.registerEquipmentAbilities(bus);
 
         EffectsSystemListeners.listen(bus);
         DamageSystemListener.listen(bus);
         ToolModificationListener.listen(bus);
         DimensionTeleportationListener.listen(bus);
-        AerbunnyMountListener.listen(bus);
         CurrencyListener.listen(bus);
         WorldInteractionListener.listen(bus);
         RecipeListener.listen(bus);
@@ -166,9 +166,8 @@ public class AetherII {
         GuidebookDiscoveryListener.listen(bus);
         SwetListener.listen(bus);
 
-        bus.addListener(ReloadListeners::reloadListenerSetup);
-
-        neoBus.addListener(AetherIIBlockEntityTypes::addValidBlockEntityTypes);
+        bus.addListener(ReloadListeners::registerReloadListeners);
+        neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);
         neoBus.addListener(AetherIIAttributes::registerEntityAttributes);
         neoBus.addListener(AetherIIEntityTypes::registerSpawnPlacements);
         neoBus.addListener(AetherIIEntityTypes::registerEntityAttributes);

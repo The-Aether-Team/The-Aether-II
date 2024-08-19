@@ -89,14 +89,14 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     /**
      * Handles functions when the player logs out of a world from {@link net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent}.
      */
-    public void onLogout(Player player) {
+    public void logout(Player player) {
         this.removeAerbunny();
     }
 
     /**
      * Handles functions when the player logs in to a world from {@link net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent}.
      */
-    public void onLogin(Player player) {
+    public void login(Player player) {
         this.remountAerbunny(player);
         this.shouldSyncAfterJoin = true;
     }
@@ -104,7 +104,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     /**
      * Handles functions when the player ticks from {@link net.neoforged.neoforge.event.entity.living.LivingEvent.LivingTickEvent}
      */
-    public void onUpdate(Player player) {
+    public void postTickUpdate(Player player) {
         this.handleAetherPortal(player);
         this.syncAfterJoin(player);
         this.syncClients(player);

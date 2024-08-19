@@ -16,7 +16,7 @@ public class ReloadListeners {
     /**
      * @see Aether#eventSetup()
      */
-    public static void reloadListenerSetup(AddReloadListenerEvent event) {
+    public static void registerReloadListeners(AddReloadListenerEvent event) {
         event.addListener(new RecipeReloadListener());
     }
 

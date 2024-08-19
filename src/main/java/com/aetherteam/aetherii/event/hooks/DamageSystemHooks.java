@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.event.hooks.attachment;
+package com.aetherteam.aetherii.event.hooks;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;

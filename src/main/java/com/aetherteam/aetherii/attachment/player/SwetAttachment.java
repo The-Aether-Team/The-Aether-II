@@ -96,7 +96,7 @@ public class SwetAttachment implements INBTSerializable<CompoundTag> { //todo me
         }
     }
 
-    public void tick() {
+    public void playerPostTickUpdate(Player player) {
         if (this.loadingSync) {
             PacketDistributor.sendToAllPlayers(new SwetSyncPacket(this.entity.getId(), this.serializeNBT(this.entity.registryAccess())));
             this.loadingSync = false;

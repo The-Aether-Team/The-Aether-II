@@ -1,8 +1,7 @@
-package com.aetherteam.aetherii.event.hooks.attachment;
+package com.aetherteam.aetherii.event.hooks;
 
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.event.listeners.WorldInteractionListener;
 import com.aetherteam.aetherii.world.LevelUtil;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -123,17 +121,5 @@ public class DimensionTeleportationHooks {
             }
         }
         return false;
-    }
-
-    // GENERIC ATTACHMENT METHODS
-
-    /**
-     * @see DimensionTeleportationAttachment#onUpdate(Player)
-     * @see DimensionTeleportationListener#onPlayerUpdate(LivingEvent.LivingTickEvent)
-     */
-    public static void update(LivingEntity entity) {
-        if (entity instanceof Player player) {
-            player.getData(AetherIIDataAttachments.PLAYER).onUpdate(player);
-        }
     }
 }
