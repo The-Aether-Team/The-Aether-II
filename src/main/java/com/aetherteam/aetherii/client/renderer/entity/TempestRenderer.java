@@ -6,13 +6,10 @@ import com.aetherteam.aetherii.client.renderer.entity.layers.TempestEmissiveLaye
 import com.aetherteam.aetherii.client.renderer.entity.model.TempestModel;
 import com.aetherteam.aetherii.entity.monster.Tempest;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Pose;
 
 /**
  * [CODE COPY] - {@link com.aetherteam.aether.client.renderer.entity.ZephyrRenderer}.

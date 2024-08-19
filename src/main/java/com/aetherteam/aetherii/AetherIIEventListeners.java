@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.event.hooks.AttachmentHooks;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -10,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.LogicalSide;
+import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -21,9 +23,11 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerLogin);
         bus.addListener(AetherIIEventListeners::onPlayerLogout);
         bus.addListener(AetherIIEventListeners::onPlayerRespawn);
+        bus.addListener(AetherIIEventListeners::onPlayerClone);
         bus.addListener(AetherIIEventListeners::onPlayerPostTick);
         bus.addListener(AetherIIEventListeners::onPlayerRightClickBlock);
         bus.addListener(AetherIIEventListeners::onPlayerEntityInteractSpecific);
+        bus.addListener(AetherIIEventListeners::onPlayerAdvancementProgression);
 
         // LivingEntity
         bus.addListener(AetherIIEventListeners::onLivingPostTick);
@@ -45,6 +49,12 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         AttachmentHooks.playerRespawn(player);
+    }
+
+    public static void onPlayerClone(PlayerEvent.Clone event) {
+        Player player = event.getEntity();
+
+        AttachmentHooks.playerClone(player);
     }
 
     public static void onPlayerPostTick(PlayerTickEvent.Post event) {
@@ -75,6 +85,13 @@ public class AetherIIEventListeners {
         LogicalSide side = event.getSide();
 
 
+    }
+
+    public static void onPlayerAdvancementProgression(AdvancementEvent.AdvancementProgressEvent event) {
+        Player player = event.getEntity();
+        AdvancementHolder advancementHolder = event.getAdvancement();
+
+        AttachmentHooks.playerProgressAdvancement(player, advancementHolder);
     }
 
     public static void onLivingPostTick(EntityTickEvent.Post event) {

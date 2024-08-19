@@ -2,11 +2,8 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 
 import com.aetherteam.aetherii.client.renderer.BiomeVariantPresets;
-import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.AbstractBurrukaiBabyModel;
-import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.AbstractBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
-import com.aetherteam.aetherii.entity.passive.Burrukai;
 import com.aetherteam.aetherii.entity.passive.Taegore;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

@@ -77,6 +77,10 @@ public class GuidebookDiscoveryAttachment {
         }
     }
 
+    public void progressAdvancement(Player player, AdvancementHolder advancement) {
+        this.trackDiscoveries(player, advancement);
+    }
+
     public void trackDiscoveries(Player player, AdvancementHolder advancement) {
         if (player instanceof ServerPlayer serverPlayer) {
             RegistryAccess registryAccess = serverPlayer.registryAccess();

@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.event.listeners;
 
 import com.aetherteam.aetherii.event.hooks.ToolModificationHooks;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.LevelAccessor;
@@ -15,22 +14,7 @@ public class ToolModificationListener {
      * @see com.aetherteam.aetherii.AetherII#eventSetup(IEventBus)
      */
     public static void listen(IEventBus bus) {
-        bus.addListener(ToolModificationListener::setupToolModifications);
         bus.addListener(ToolModificationListener::setupStrippingLoot);
-    }
-
-    /**
-     * @see ToolModificationHooks#setupToolActions(LevelAccessor, BlockPos, BlockState, ItemAbility)
-     */
-    public static void setupToolModifications(BlockEvent.BlockToolModificationEvent event) {
-        LevelAccessor levelAccessor = event.getLevel();
-        BlockPos pos = event.getPos();
-        BlockState oldState = event.getState();
-        ItemAbility toolAction = event.getItemAbility();
-        BlockState newState = ToolModificationHooks.setupToolActions(levelAccessor, pos, oldState, toolAction);
-        if (newState != oldState && !event.isSimulated() && !event.isCanceled()) {
-            event.setFinalState(newState);
-        }
     }
 
     /**

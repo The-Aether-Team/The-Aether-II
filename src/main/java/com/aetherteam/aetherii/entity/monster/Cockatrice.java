@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceRangedAttackGoal;
-import com.aetherteam.aetherii.entity.projectile.ToxicDart;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;

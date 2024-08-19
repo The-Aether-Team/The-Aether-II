@@ -40,7 +40,7 @@ public class OutpostTrackerAttachment {
         this.shouldSyncAfterJoin = true;
     }
 
-    public void handleRespawn(Player player) {
+    public void respawn(Player player) {
         this.setShouldRespawnAtOutpost(false);
         this.shouldSyncAfterJoin = true;
     }

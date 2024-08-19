@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.item.components;
 
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
+import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.network.codec.ByteBufCodecs;

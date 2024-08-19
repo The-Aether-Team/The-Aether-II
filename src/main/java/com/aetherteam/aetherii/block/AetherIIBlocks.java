@@ -19,6 +19,8 @@ import com.aetherteam.aetherii.item.materials.RockItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.FireBlockAccessor;
 import com.aetherteam.aetherii.world.tree.AetherIITreeGrowers;
 import com.aetherteam.nitrogen.item.block.EntityBlockItem;
+import com.google.common.collect.ImmutableMap;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.ColorRGBA;
@@ -26,22 +28,62 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(AetherII.MODID);
+
+    /**
+     * Blocks able to be flattened with {@link ItemAbilities#AXE_STRIP}, and the equivalent result block.
+     */
+    public static final Map<Block, Block> STRIPPABLES = (new ImmutableMap.Builder<Block, Block>())
+            .put(AetherIIBlocks.SKYROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
+            .put(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
+            .put(AetherIIBlocks.GREATROOT_LOG.get(), AetherIIBlocks.STRIPPED_GREATROOT_LOG.get())
+            .put(AetherIIBlocks.GREATROOT_WOOD.get(), AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get())
+            .put(AetherIIBlocks.WISPROOT_LOG.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get())
+            .put(AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get())
+            .put(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.get())
+            .put(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
+            .put(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get())
+            .build();
+
+    /**
+     * Blocks able to be flattened with {@link ItemAbilities#SHOVEL_FLATTEN}, and the equivalent result block.
+     */
+    public static final Map<Block, Block> FLATTENABLES = (new ImmutableMap.Builder<Block, Block>())
+            .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
+            .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
+            .put(AetherIIBlocks.COARSE_AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT_PATH.get())
+            .build();
+
+    /**
+     * Blocks able to be tilled with {@link ItemAbilities#HOE_TILL}, and the equivalent result block.
+     */
+    public static final Map<Block, Block> TILLABLES = (new ImmutableMap.Builder<Block, Block>())
+            .put(AetherIIBlocks.AETHER_DIRT.get(), AetherIIBlocks.AETHER_FARMLAND.get())
+            .put(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_FARMLAND.get())
+            .put(AetherIIBlocks.AETHER_DIRT_PATH.get(), AetherIIBlocks.AETHER_FARMLAND.get())
+            .put(AetherIIBlocks.COARSE_AETHER_DIRT.get(), AetherIIBlocks.AETHER_DIRT.get())
+            .build();
 
     // Portal
     public static final DeferredBlock<AetherPortalBlock> AETHER_PORTAL = BLOCKS.register("aether_portal", () -> new AetherPortalBlock(Block.Properties.of().noCollission().randomTicks().strength(-1.0F).sound(SoundType.GLASS).lightLevel(AetherIIBlocks::lightLevel11).pushReaction(PushReaction.BLOCK).forceSolidOn().noLootTable()));
@@ -621,6 +663,35 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         WoodType.register(AetherIIWoodTypes.SKYROOT);
         WoodType.register(AetherIIWoodTypes.GREATROOT);
         WoodType.register(AetherIIWoodTypes.WISPROOT);
+    }
+
+    public static void registerBlockModifications(BlockEvent.BlockToolModificationEvent event) {
+        LevelAccessor levelAccessor = event.getLevel();
+        BlockPos pos = event.getPos();
+        ItemAbility toolAction = event.getItemAbility();
+        BlockState oldState = event.getState();
+        Block oldBlock = oldState.getBlock();
+        BlockState newState = oldState;
+
+        if (toolAction == ItemAbilities.AXE_STRIP) {
+            if (STRIPPABLES.containsKey(oldBlock)) {
+                newState = STRIPPABLES.get(oldBlock).withPropertiesOf(oldState);
+            }
+        } else if (toolAction == ItemAbilities.SHOVEL_FLATTEN) {
+            if (FLATTENABLES.containsKey(oldBlock)) {
+                newState = FLATTENABLES.get(oldBlock).withPropertiesOf(oldState);
+            }
+        } else if (toolAction == ItemAbilities.HOE_TILL) {
+            if (levelAccessor.getBlockState(pos.above()).isAir()) {
+                if (TILLABLES.containsKey(oldBlock)) {
+                    newState = TILLABLES.get(oldBlock).withPropertiesOf(oldState);
+                }
+            }
+        }
+
+        if (newState != oldState && !event.isSimulated() && !event.isCanceled()) {
+            event.setFinalState(newState);
+        }
     }
 
     private static <T extends Block> DeferredBlock<T> baseRegister(String name, Supplier<? extends T> block, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {

@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;

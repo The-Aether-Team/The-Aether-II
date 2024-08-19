@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.loot.modifiers;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
-import com.aetherteam.aetherii.item.equipment.weapons.abilities.SkyrootWeapon;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.SkyrootTool;
+import com.aetherteam.aetherii.item.equipment.weapons.abilities.SkyrootWeapon;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
