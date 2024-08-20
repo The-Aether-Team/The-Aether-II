@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.weapons.zanite;
 
+import com.aetherteam.aetherii.AetherIIDamageStats;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
 import com.aetherteam.aetherii.item.equipment.weapons.abilities.ZaniteWeapon;
@@ -9,7 +10,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 public class ZaniteSpearItem extends TieredSpearItem implements ZaniteWeapon {
     public ZaniteSpearItem() {
-        super(AetherIIItemTiers.ZANITE, new Properties().attributes(TieredSpearItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F)));
+        super(AetherIIItemTiers.ZANITE, new Properties().attributes(AetherIIDamageStats.merge(TieredSpearItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F), AetherIIDamageStats.ZANITE_SPEAR)));
     }
 
     @Override

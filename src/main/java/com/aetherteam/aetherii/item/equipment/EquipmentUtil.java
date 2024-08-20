@@ -2,8 +2,6 @@ package com.aetherteam.aetherii.item.equipment;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
-import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -103,26 +101,26 @@ public final class EquipmentUtil {
         }
     }
 
-    public static void addDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {
-        DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
-        if (player != null && infliction != null) {
-            int position = components.size();
-            Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.value().getDescriptionId());
-            for (int i = 0; i < position; i++) {
-                Component component = components.get(i);
-                if (component.getString().contains(damageText.getString())) {
-                    position = i + 1;
-                    break;
-                }
-            }
-            double slashDamage =  infliction.slashValue();
-            double impactDamage = infliction.impactValue();
-            double pierceDamage = infliction.pierceValue();
-
-            addDamageTypeTooltip(components, position, slashDamage, "slash");
-            addDamageTypeTooltip(components, position, impactDamage, "impact");
-            addDamageTypeTooltip(components, position, pierceDamage, "pierce");
-        }
+    public static void addDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) { //todo may be able to remove.
+//        DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
+//        if (player != null && infliction != null) {
+//            int position = components.size();
+//            Component damageText = Component.translatable(Attributes.ATTACK_DAMAGE.value().getDescriptionId());
+//            for (int i = 0; i < position; i++) {
+//                Component component = components.get(i);
+//                if (component.getString().contains(damageText.getString())) {
+//                    position = i + 1;
+//                    break;
+//                }
+//            }
+//            double slashDamage =  infliction.slashValue();
+//            double impactDamage = infliction.impactValue();
+//            double pierceDamage = infliction.pierceValue();
+//
+//            addDamageTypeTooltip(components, position, slashDamage, "slash");
+//            addDamageTypeTooltip(components, position, impactDamage, "impact");
+//            addDamageTypeTooltip(components, position, pierceDamage, "pierce");
+//        }
     }
 
     private static void addDamageTypeTooltip(List<Component> components, int position, double value, String name) {
@@ -133,24 +131,24 @@ public final class EquipmentUtil {
     }
 
     public static void addBonusDamageTypeTooltips(Player player, List<Component> components, ItemStack stack) {
-        DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
-        if (player != null && infliction != null) {
-            RegistryAccess registryAccess = player.level().registryAccess();
-            if (stack.getItem() instanceof UniqueDamage uniqueDamage) {
-                double slashDamage =  infliction.slashValue() - 1;
-                double impactDamage = infliction.impactValue() - 1;
-                double pierceDamage = infliction.pierceValue() - 1;
-
-                Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(stack, slashDamage, impactDamage, pierceDamage);
-                slashDamage = damages.getLeft();
-                impactDamage = damages.getMiddle();
-                pierceDamage = damages.getRight();
-
-                addBonusDamageTypeTooltip(components, slashDamage, "slash");
-                addBonusDamageTypeTooltip(components, impactDamage, "impact");
-                addBonusDamageTypeTooltip(components, pierceDamage, "pierce");
-            }
-        }
+//        DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(stack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
+//        if (player != null && infliction != null) {
+//            RegistryAccess registryAccess = player.level().registryAccess();
+//            if (stack.getItem() instanceof UniqueDamage uniqueDamage) {
+//                double slashDamage =  infliction.slashValue() - 1;
+//                double impactDamage = infliction.impactValue() - 1;
+//                double pierceDamage = infliction.pierceValue() - 1;
+//
+//                Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(stack, slashDamage, impactDamage, pierceDamage);
+//                slashDamage = damages.getLeft();
+//                impactDamage = damages.getMiddle();
+//                pierceDamage = damages.getRight();
+//
+//                addBonusDamageTypeTooltip(components, slashDamage, "slash");
+//                addBonusDamageTypeTooltip(components, impactDamage, "impact");
+//                addBonusDamageTypeTooltip(components, pierceDamage, "pierce");
+//            }
+//        }
     }
 
     private static void addBonusDamageTypeTooltip(List<Component> components, double value, String name) {

@@ -4,9 +4,6 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
-import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
 import com.aetherteam.aetherii.item.equipment.weapons.abilities.UniqueDamage;
@@ -69,31 +66,34 @@ public class DamageSystemAttachment implements INBTSynchable {
         }
     }
 
-    public float getDamageTypeModifiedValue(Entity target, DamageSource source, double damage) {
+    public float getDamageTypeModifiedValue(LivingEntity target, DamageSource source, double damage) {
         if (source.typeHolder().is(AetherIITags.DamageTypes.TYPED)) {
             Entity sourceEntity = source.getDirectEntity();
             ItemStack sourceStack = ItemStack.EMPTY;
 
             if (sourceEntity instanceof LivingEntity livingSource) {
                 sourceStack = livingSource.getMainHandItem();
-            } else if (sourceEntity instanceof Projectile && sourceEntity instanceof ItemSupplier itemSupplier) {
-                sourceStack = itemSupplier.getItem();
             }
+//            else if (sourceEntity instanceof Projectile && sourceEntity instanceof ItemSupplier itemSupplier) { //todo
+//                sourceStack = itemSupplier.getItem();
+//            }
 
             if (!sourceStack.isEmpty()) {
-                DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(sourceStack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
-                DamageResistance resistance = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(target.getType()).getData(AetherIIDataMaps.DAMAGE_RESISTANCE);
+                double slashDefense = target.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0;
+                double impactDefense = target.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0;
+                double pierceDefense = target.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0;
 
-                if (resistance != null) {
-                    double slashDefense = resistance.slashValue();
-                    double impactDefense = resistance.impactValue();
-                    double pierceDefense = resistance.pierceValue();
+                if (slashDefense != 0 || impactDefense != 0 || pierceDefense != 0) {
+                    double slashDamage = 0;
+                    double impactDamage = 0;
+                    double pierceDamage = 0;
+                    if (source.getDirectEntity() instanceof LivingEntity livingEntity) {
+                        slashDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_DAMAGE) : 0.0;
+                        impactDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_DAMAGE) : 0.0;
+                        pierceDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_DAMAGE) : 0.0;
+                    }
 
-                    if (infliction != null) {
-                        double slashDamage =  infliction.slashValue();
-                        double impactDamage = infliction.impactValue();
-                        double pierceDamage = infliction.pierceValue();
-
+                    if (slashDamage != 0 || impactDamage != 0 || pierceDamage != 0) {
                         if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
                             Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
                             slashDamage += damages.getLeft();
