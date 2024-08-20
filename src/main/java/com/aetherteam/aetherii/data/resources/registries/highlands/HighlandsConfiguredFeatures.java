@@ -433,6 +433,7 @@ public class HighlandsConfiguredFeatures {
                                 .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 1)
                         )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
         ));
 

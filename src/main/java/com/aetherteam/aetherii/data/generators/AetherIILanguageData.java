@@ -187,6 +187,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SHIELD_FERN, "Shield Fern");
         this.addBlock(AetherIIBlocks.POASPROUT, "Poasprout");
         this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
+        this.addBlock(AetherIIBlocks.LILICHIME, "Lilichime");
 
         // Bushes
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");

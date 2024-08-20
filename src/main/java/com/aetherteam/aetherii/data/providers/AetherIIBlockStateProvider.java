@@ -399,6 +399,17 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void asymmetricalCrossOdd(Block block) {
+
+        ModelFile model = this.models().withExistingParent(this.name(block), this.modLoc("block/asymmetrical_cross_odd"))
+                .texture("0", this.extend(this.texture(this.name(block), "natural/"), "_0"))
+                .texture("1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                .texture("particle", this.extend(this.texture(this.name(block), "natural/"), "_0"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+
+        this.getVariantBuilder(block).partialState().addModels(ConfiguredModel.builder().modelFile(model).build()).addModels(ConfiguredModel.builder().modelFile(model).rotationY(90).build());
+    }
+
     public void shortGrass(Block block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
             AetherTallGrassBlock.GrassType type = state.getValue(AetherTallGrassBlock.TYPE);

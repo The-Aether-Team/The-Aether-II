@@ -34,6 +34,15 @@
                   }
                 },
                 "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:lilichime",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
               }
             ]
           }

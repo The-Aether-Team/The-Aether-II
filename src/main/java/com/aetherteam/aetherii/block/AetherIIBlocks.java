@@ -250,6 +250,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> AECHOR_CUTTING = register("aechor_cutting", () -> new AechorCuttingBlock(Block.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> SHIELD_FERN = register("shield_fern", () -> new TallGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> POASPROUT = register("poasprout", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
+    public static final DeferredBlock<Block> LILICHIME = register("lilichime", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
+
 
     // Potted Flowers
     public static final DeferredBlock<FlowerPotBlock> POTTED_HESPEROSE = BLOCKS.register("potted_hesperose", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, HESPEROSE, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
@@ -257,6 +259,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FlowerPotBlock> POTTED_AECHOR_CUTTING = BLOCKS.register("potted_aechor_cutting", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, AECHOR_CUTTING, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_POASPROUT = BLOCKS.register("potted_poasprout", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, POASPROUT, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_SHIELD_FERN = BLOCKS.register("potted_shield_fern", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SHIELD_FERN, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_LILICHIME = BLOCKS.register("potted_lilichime", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LILICHIME, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
+
 
     // Bushes
     public static final DeferredBlock<Block> HIGHLANDS_BUSH = register("highlands_bush", () -> new HighlandsBushBlock(Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).strength(0.2F).sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::spawnOnLeaves).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));

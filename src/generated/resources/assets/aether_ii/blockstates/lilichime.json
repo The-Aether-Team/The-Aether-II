@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "aether_ii:block/lilichime"
+      },
+      {
+        "model": "aether_ii:block/lilichime",
+        "y": 90
+      }
+    ]
+  }
+}

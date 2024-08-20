@@ -178,6 +178,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.crossBlock(AetherIIBlocks.SHIELD_FERN.get(), "natural/");
         this.frostedCross(AetherIIBlocks.POASPROUT.get());
         this.crossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
+        this.asymmetricalCrossOdd(AetherIIBlocks.LILICHIME.get());
 
         // Potted Flowers
         this.pottedPlant(AetherIIBlocks.POTTED_HESPEROSE.get(), AetherIIBlocks.HESPEROSE.get(), "natural/");
