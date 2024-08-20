@@ -25,6 +25,15 @@
                   }
                 },
                 "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:poasprout",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
               }
             ]
           }

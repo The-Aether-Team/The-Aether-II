@@ -827,21 +827,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_gravitite_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_undershale_gravitite_ore"));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WHITE_DYE)
-                .group("white_dye")
-                .requires(AetherIIBlocks.HESPEROSE.get())
-                .unlockedBy(getHasName(AetherIIBlocks.HESPEROSE.get()), has(AetherIIBlocks.HESPEROSE.get()))
-                .save(consumer, this.name("flower_to_white_dye"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PURPLE_DYE)
-                .group("purple_dye")
-                .requires(AetherIIBlocks.TARABLOOM.get())
-                .unlockedBy(getHasName(AetherIIBlocks.TARABLOOM.get()), has(AetherIIBlocks.TARABLOOM.get()))
-                .save(consumer, this.name("flower_to_purple_dye"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIGHT_BLUE_DYE)
-                .group("light_blue_dye")
-                .requires(AetherIIItems.BRETTL_FLOWER.get())
-                .unlockedBy(getHasName(AetherIIItems.BRETTL_FLOWER.get()), has(AetherIIItems.BRETTL_FLOWER.get()))
-                .save(consumer, this.name("flower_to_light_blue_dye"));
+
+        oneToOneConversionRecipe(consumer, Items.WHITE_DYE, AetherIIBlocks.HESPEROSE, "white_dye");
+        oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, AetherIIBlocks.TARABLOOM, "purple_dye");
+        oneToOneConversionRecipe(consumer, Items.WHITE_DYE, AetherIIBlocks.POASPROUT, "white_dye");
+        oneToOneConversionRecipe(consumer, Items.LIGHT_BLUE_DYE, AetherIIItems.BRETTL_FLOWER, "light_blue_dye");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)
                 .requires(AetherIIItems.MOA_FEED)
