@@ -108,10 +108,14 @@ public class AetherIIDamageStats { //todo tooltip functionality
     }
 
     public static ItemAttributeModifiers merge(ItemAttributeModifiers modifiers, List<ItemAttributeModifiers.Entry> add) {
+        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
         for (ItemAttributeModifiers.Entry entry : add) {
-            modifiers = modifiers.withModifierAdded(entry.attribute(), entry.modifier(), entry.slot());
+            builder = builder.add(entry.attribute(), entry.modifier(), entry.slot());
         }
-        return modifiers;
+        for (ItemAttributeModifiers.Entry entry : modifiers.modifiers()) {
+            builder = builder.add(entry.attribute(), entry.modifier(), entry.slot());
+        }
+        return builder.build();
     }
 
     public static AttributeSupplier.Builder merge(AttributeSupplier.Builder builder, AttributeSupplier.Builder add) {
