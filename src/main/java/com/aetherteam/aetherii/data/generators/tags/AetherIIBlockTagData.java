@@ -435,7 +435,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_ORANGE_TREE.get(),
                 AetherIIBlocks.POTTED_HESPEROSE.get(),
                 AetherIIBlocks.POTTED_TARABLOOM.get(),
-                AetherIIBlocks.POTTED_AECHOR_CUTTING.get()
+                AetherIIBlocks.POTTED_POASPROUT.get(),
+                AetherIIBlocks.POTTED_SHIELD_FERN.get()
         );
         this.tag(BlockTags.ENDERMAN_HOLDABLE).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.QUICKSOIL.get(),

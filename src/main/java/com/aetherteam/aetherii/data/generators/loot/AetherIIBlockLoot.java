@@ -183,6 +183,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.AETHER_SHORT_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
         this.add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
         this.add(AetherIIBlocks.AETHER_LONG_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HIGHLAND_FERN.get(), BlockLootSubProvider::createShearsOnlyDrop);
 
         // Flowers
         this.dropSelf(AetherIIBlocks.HESPEROSE.get());
@@ -195,6 +196,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_HESPEROSE.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_TARABLOOM.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AECHOR_CUTTING.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_POASPROUT.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_SHIELD_FERN.get());
 
         // Bushes
         this.dropSelf(AetherIIBlocks.HIGHLANDS_BUSH.get());
