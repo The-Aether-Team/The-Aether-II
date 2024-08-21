@@ -21,40 +21,40 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> PIERCE_RESISTANCE = ATTRIBUTES.register("pierce_resistance", () -> new RangedAttribute("attributes.aether_ii.pierce_resistance", 0.0, -1024.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> SWEEP_RANGE = ATTRIBUTES.register("sweep_range", () -> new RangedAttribute("attributes.aether_ii.sweep_range", 0.0, 0.0, 1024.0));
-    public static final DeferredHolder<Attribute, Attribute> SWEEP_KNOCKBACK = ATTRIBUTES.register("sweep_knockback", () -> new RangedAttribute("attributes.aether_ii.sweep_knockback", 0.4, 0.0, 1024.0));
-    public static final DeferredHolder<Attribute, Attribute> SWEEP_DAMAGE = ATTRIBUTES.register("sweep_damage", () -> new RangedAttribute("attributes.aether_ii.sweep_damage", 1.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> SWEEP_KNOCKBACK = ATTRIBUTES.register("sweep_knockback", () -> new RangedAttribute("attributes.aether_ii.sweep_knockback", 0.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> SWEEP_DAMAGE = ATTRIBUTES.register("sweep_damage", () -> new RangedAttribute("attributes.aether_ii.sweep_damage", 0.0, 0.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> SHOCK_RANGE = ATTRIBUTES.register("shock_range", () -> new RangedAttribute("attributes.aether_ii.shock_range", 0.0, 0.0, 1024.0));
-    public static final DeferredHolder<Attribute, Attribute> SHOCK_KNOCKBACK = ATTRIBUTES.register("shock_knockback", () -> new RangedAttribute("attributes.aether_ii.shock_knockback", 1.0, 0.0, 1024.0));
-    public static final DeferredHolder<Attribute, Attribute> SHOCK_DAMAGE = ATTRIBUTES.register("shock_damage", () -> new RangedAttribute("attributes.aether_ii.shock_damage", 0.1, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> SHOCK_KNOCKBACK = ATTRIBUTES.register("shock_knockback", () -> new RangedAttribute("attributes.aether_ii.shock_knockback", 0.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> SHOCK_DAMAGE = ATTRIBUTES.register("shock_damage", () -> new RangedAttribute("attributes.aether_ii.shock_damage", 0.0, 0.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> STAB_RADIUS = ATTRIBUTES.register("stab_radius", () -> new RangedAttribute("attributes.aether_ii.stab_radius", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> STAB_DISTANCE = ATTRIBUTES.register("stab_distance", () -> new RangedAttribute("attributes.aether_ii.stab_distance", 0.0, 0.0, 1024.0));
-    public static final DeferredHolder<Attribute, Attribute> STAB_KNOCKBACK = ATTRIBUTES.register("stab_knockback", () -> new RangedAttribute("attributes.aether_ii.stab_knockback", 0.2, 0.0, 1024.0));
-    public static final DeferredHolder<Attribute, Attribute> STAB_DAMAGE = ATTRIBUTES.register("stab_damage", () -> new RangedAttribute("attributes.aether_ii.stab_damage", 2.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> STAB_KNOCKBACK = ATTRIBUTES.register("stab_knockback", () -> new RangedAttribute("attributes.aether_ii.stab_knockback", 0.0, 0.0, 1024.0));
+    public static final DeferredHolder<Attribute, Attribute> STAB_DAMAGE = ATTRIBUTES.register("stab_damage", () -> new RangedAttribute("attributes.aether_ii.stab_damage", 0.0, 0.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_REDUCTION = ATTRIBUTES.register("shield_stamina_reduction", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_reduction", 0.0, 0.0, 500.0));
-    public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_RESTORATION = ATTRIBUTES.register("shield_stamina_restoration", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_restoration", 2.0, 0.0, 500.0));
+    public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_RESTORATION = ATTRIBUTES.register("shield_stamina_restoration", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_restoration", 0.0, 0.0, 500.0));
 
     public static void registerEntityAttributes(EntityAttributeModificationEvent event) {
-        event.add(EntityType.PLAYER, SLASH_DAMAGE);
-        event.add(EntityType.PLAYER, IMPACT_DAMAGE);
-        event.add(EntityType.PLAYER, PIERCE_DAMAGE);
+        event.add(EntityType.PLAYER, SLASH_DAMAGE, 0.0);
+        event.add(EntityType.PLAYER, IMPACT_DAMAGE, 0.0);
+        event.add(EntityType.PLAYER, PIERCE_DAMAGE, 0.0);
 
-        event.add(EntityType.PLAYER, SWEEP_RANGE);
-        event.add(EntityType.PLAYER, SWEEP_KNOCKBACK);
-        event.add(EntityType.PLAYER, SWEEP_DAMAGE);
+        event.add(EntityType.PLAYER, SWEEP_RANGE, 0.0);
+        event.add(EntityType.PLAYER, SWEEP_KNOCKBACK, 0.4);
+        event.add(EntityType.PLAYER, SWEEP_DAMAGE, 1.0);
 
-        event.add(EntityType.PLAYER, SHOCK_RANGE);
-        event.add(EntityType.PLAYER, SHOCK_KNOCKBACK);
-        event.add(EntityType.PLAYER, SHOCK_DAMAGE);
+        event.add(EntityType.PLAYER, SHOCK_RANGE, 0.0);
+        event.add(EntityType.PLAYER, SHOCK_KNOCKBACK, 1.0);
+        event.add(EntityType.PLAYER, SHOCK_DAMAGE, 0.1);
 
-        event.add(EntityType.PLAYER, STAB_RADIUS);
-        event.add(EntityType.PLAYER, STAB_DISTANCE);
-        event.add(EntityType.PLAYER, STAB_KNOCKBACK);
-        event.add(EntityType.PLAYER, STAB_DAMAGE);
+        event.add(EntityType.PLAYER, STAB_RADIUS, 0.0);
+        event.add(EntityType.PLAYER, STAB_DISTANCE, 0.0);
+        event.add(EntityType.PLAYER, STAB_KNOCKBACK, 0.2);
+        event.add(EntityType.PLAYER, STAB_DAMAGE, 2.0);
 
-        event.add(EntityType.PLAYER, SHIELD_STAMINA_REDUCTION);
-        event.add(EntityType.PLAYER, SHIELD_STAMINA_RESTORATION);
+        event.add(EntityType.PLAYER, SHIELD_STAMINA_REDUCTION, 0.0);
+        event.add(EntityType.PLAYER, SHIELD_STAMINA_RESTORATION, 2.0);
     }
 }

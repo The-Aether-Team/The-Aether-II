@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public interface ZaniteTool {
-    static void modifyBreakSpeed(PlayerEvent.BreakSpeed event) { //todo convert to attachments like zaniteweapon
+    static void modifyBreakSpeed(PlayerEvent.BreakSpeed event) { //todo use break speed attribute modifiers instead
         Player player = event.getEntity();
         ItemStack itemStack = player.getMainHandItem();
         if (!event.isCanceled()) {

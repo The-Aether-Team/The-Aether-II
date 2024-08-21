@@ -764,12 +764,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
 
-        // Damage Types
-        this.addDamageTypeTooltip("slash", "§9Slash§r Damage");
-        this.addDamageTypeTooltip("impact", "§eImpact§r Damage");
-        this.addDamageTypeTooltip("pierce", "§cPierce§r Damage");
-
-
         // Miscellaneous Item Tooltips
         this.addItemTooltip("treasure.description", "Treasure Item");
         this.addItemTooltip("currency.description", "Converts to Currency:");
@@ -847,6 +841,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Attributes
+        this.addAttribute(AetherIIAttributes.SLASH_DAMAGE.get(), "§9Slash§r Damage");
+        this.addAttribute(AetherIIAttributes.IMPACT_DAMAGE.get(), "§eImpact§r Damage");
+        this.addAttribute(AetherIIAttributes.PIERCE_DAMAGE.get(), "§cPierce§r Damage");
+        this.addAttribute(AetherIIAttributes.SLASH_RESISTANCE.get(), "§9Slash§r Resistance");
+        this.addAttribute(AetherIIAttributes.IMPACT_RESISTANCE.get(), "§eImpact§r Resistance");
+        this.addAttribute(AetherIIAttributes.PIERCE_RESISTANCE.get(), "§cPierce§r Resistance");
         this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");
         this.addAttribute(AetherIIAttributes.SWEEP_KNOCKBACK.get(), "Sweep Knockback");
         this.addAttribute(AetherIIAttributes.SWEEP_DAMAGE.get(), "Sweep Damage");
@@ -976,9 +976,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Misc
-        this.addGeneric("slash", "§9Slash§r");
-        this.addGeneric("impact", "§eImpact§r");
-        this.addGeneric("pierce", "§cPierce§r");
         this.addGeneric("highfields", "Highfields");
         this.addGeneric("magnetic", "Magnetic");
         this.addGeneric("arctic", "Arctic");

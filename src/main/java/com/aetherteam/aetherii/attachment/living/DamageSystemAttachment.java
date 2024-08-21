@@ -6,22 +6,19 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
-import com.aetherteam.aetherii.item.equipment.weapons.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -84,23 +81,18 @@ public class DamageSystemAttachment implements INBTSynchable {
                 double pierceDefense = target.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0;
 
                 if (slashDefense != 0 || impactDefense != 0 || pierceDefense != 0) {
+                    double baseDamage = Attributes.ATTACK_DAMAGE.value().getDefaultValue();
                     double slashDamage = 0;
                     double impactDamage = 0;
                     double pierceDamage = 0;
                     if (source.getDirectEntity() instanceof LivingEntity livingEntity) {
+                        baseDamage = livingEntity.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
                         slashDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_DAMAGE) : 0.0;
                         impactDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_DAMAGE) : 0.0;
                         pierceDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_DAMAGE) : 0.0;
                     }
 
                     if (slashDamage != 0 || impactDamage != 0 || pierceDamage != 0) {
-                        if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
-                            Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
-                            slashDamage += damages.getLeft();
-                            impactDamage += damages.getMiddle();
-                            pierceDamage += damages.getRight();
-                        }
-
                         this.createSoundsAndParticles(sourceEntity, target, slashDamage, slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_INCORRECT.get());
                         this.createSoundsAndParticles(sourceEntity, target, impactDamage, impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
                         this.createSoundsAndParticles(sourceEntity, target, pierceDamage, pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
@@ -109,7 +101,7 @@ public class DamageSystemAttachment implements INBTSynchable {
                         double impactCalculation = impactDamage > 0.0 ? Math.max(impactDamage - impactDefense, 0.0) : 0.0;
                         double pierceCalculation = pierceDamage > 0.0 ? Math.max(pierceDamage - pierceDefense, 0.0) : 0.0;
 
-                        damage = Math.max(slashCalculation + impactCalculation + pierceCalculation, 1.0);
+                        damage = Math.max(baseDamage + slashCalculation + impactCalculation + pierceCalculation, baseDamage);
 
                         if (sourceEntity instanceof Player player) {
                             damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
@@ -119,7 +111,7 @@ public class DamageSystemAttachment implements INBTSynchable {
                         }
                     } else {
                         double defense = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
-                        damage = Math.max(damage - defense, 1.0F);
+                        damage = Math.max(damage - defense, baseDamage);
                     }
                 }
             }

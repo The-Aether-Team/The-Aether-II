@@ -67,6 +67,7 @@ import io.wispforest.accessories.api.Accessory;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -82,6 +83,10 @@ import java.util.List;
 
 public class AetherIIItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(AetherII.MODID);
+
+    public static final ResourceLocation BASE_SLASH_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_slash_damage");
+    public static final ResourceLocation BASE_IMPACT_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_impact_damage");
+    public static final ResourceLocation BASE_PIERCE_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_pierce_damage");
 
     public static final Style CURRENCY_NAME_COLOR = Style.EMPTY.withColor(12566527);
     public static final Style TREASURE_NAME_COLOR = Style.EMPTY.withColor(16765952);
@@ -306,7 +311,6 @@ public class AetherIIItems {
 
     public static void registerTooltips(Player player, ItemStack itemStack, List<Component> itemTooltips) {
         EquipmentUtil.addAbilityTooltips(player, itemStack, itemTooltips);
-        EquipmentUtil.addDamageTypeTooltips(player, itemTooltips, itemStack);
         EquipmentUtil.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
         EquipmentUtil.addShieldTooltips(itemTooltips, itemStack);
         EquipmentUtil.addGloveTooltips(player, itemTooltips, itemStack);
