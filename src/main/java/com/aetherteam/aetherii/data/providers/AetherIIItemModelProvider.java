@@ -107,7 +107,7 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
     }
 
     public void lilichime(Block block) {
-        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_0", "natural/"));
+        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_item", "natural/"));
     }
 
     public void portalItem(Item item, String location) {

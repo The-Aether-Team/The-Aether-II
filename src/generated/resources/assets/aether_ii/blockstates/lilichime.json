@@ -1,13 +1,10 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "aether_ii:block/lilichime"
-      },
-      {
-        "model": "aether_ii:block/lilichime",
-        "y": 90
-      }
-    ]
+    "snowy=false": {
+      "model": "aether_ii:block/lilichime"
+    },
+    "snowy=true": {
+      "model": "aether_ii:block/lilichime"
+    }
   }
 }
