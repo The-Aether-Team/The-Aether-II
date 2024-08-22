@@ -355,7 +355,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.VALKYRIE_SPROUT.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
                 output.accept(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
-                output.accept(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET.get());
+                output.accept(AetherIIBlocks.BRYALINN_MOSS_VINES.get());
                 output.accept(AetherIIBlocks.SKY_ROOTS.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());

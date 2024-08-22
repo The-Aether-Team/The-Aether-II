@@ -223,7 +223,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
-        this.itemBlock(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET.get());
+        this.itemBlockFlat(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), "natural/");
 
         // Magnetic
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());

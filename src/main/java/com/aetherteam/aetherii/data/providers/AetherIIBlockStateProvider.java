@@ -16,12 +16,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.List;
+import java.util.stream.IntStream;
 
 public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvider {
     public AetherIIBlockStateProvider(PackOutput output, String id, ExistingFileHelper helper) {
@@ -140,52 +142,91 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }, BlockStateProperties.WATERLOGGED);
     }
 
-    public void floweringBryalinn(Block block, Block mossBlock, String flowerName) {
-        ResourceLocation moss = this.texture("natural/" + this.name(mossBlock));
-        ResourceLocation flower = this.texture("natural/" + flowerName);
-        ModelFile model = this.models().withExistingParent(this.name(block), "block/block")
-                .texture("flower", flower).texture("moss", moss).texture("particle", moss).renderType(ResourceLocation.withDefaultNamespace("cutout"))
-                .element().from(10, 1, 2).to(10, 4, 6).rotation().angle(45).axis(Direction.Axis.Y).origin(10, 1, 2).rescale(true).end().shade(false).ao(false)
-                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
-                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
-                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
-                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
-                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("#flower").end()
-                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("#flower").end()
-                .end()
-                .element().from(14, 1, 2).to(14, 4, 6).rotation().angle(-45).axis(Direction.Axis.Y).origin(14, 1, 2).rescale(true).end().shade(false).ao(false)
-                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
-                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
-                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
-                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
-                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("#flower").end()
-                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("#flower").end()
-                .end()
-                .element().from(2, 1, 10).to(2, 4, 14).rotation().angle(45).axis(Direction.Axis.Y).origin(2, 1, 10).rescale(true).end().shade(false).ao(false)
-                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
-                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
-                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
-                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
-                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("flower").end()
-                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("flower").end()
-                .end()
-                .element().from(6, 1, 10).to(6, 4, 14).rotation().angle(-45).axis(Direction.Axis.Y).origin(6, 1, 10).rescale(true).end().shade(false).ao(false)
-                .face(Direction.NORTH).uvs(0 , 0, 0, 3).texture("#flower").end()
-                .face(Direction.EAST).uvs(6, 12, 10, 15).texture("#flower").end()
-                .face(Direction.SOUTH).uvs(0, 0, 0, 3).texture("#flower").end()
-                .face(Direction.WEST).uvs(6, 12, 10, 15).texture("#flower").end()
-                .face(Direction.UP).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90).texture("flower").end()
-                .face(Direction.DOWN).uvs(0, 0, 4, 0).rotation(ModelBuilder.FaceRotation.CLOCKWISE_90).texture("flower").end()
-                .end()
-                .element().from(0, 0, 0).to(16, 1, 16)
-                .face(Direction.NORTH).uvs(0, 15, 16, 16).texture("#moss").end()
-                .face(Direction.EAST).uvs(0, 15, 16, 16).texture("#moss").end()
-                .face(Direction.SOUTH).uvs(0, 15, 16, 16).texture("#moss").end()
-                .face(Direction.WEST).uvs(0, 15, 16, 16).texture("#moss").end()
-                .face(Direction.UP).uvs(0, 0, 16, 16).texture("#moss").end()
-                .face(Direction.DOWN).uvs(0, 0, 16, 16).texture("#moss").end()
+    public void mossVines(Block block) {
+        ModelFile normalModel = this.models().getBuilder(this.name(block))
+                .ao(false)
+                .texture("vine", this.texture(this.name(block), "natural/"))
+                .texture("particle", this.texture(this.name(block), "natural/"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                .element().from(0.0F, 0.0F, 0.2F).to(16.0F, 16.0F, 0.2F)//.shade(false)
+                .face(Direction.NORTH).uvs(16, 0, 0, 16).texture("#vine").end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#vine").end()
                 .end();
-        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(model));
+        ModelFile bottomModel  = this.models().getBuilder(this.name(block) + "_bottom")
+                .ao(false)
+                .texture("vine", this.extend(texture(this.name(block), "natural/"), "_bottom"))
+                .texture("particle", this.extend(texture(this.name(block), "natural/"), "_bottom"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                .element().from(0.0F, 0.0F, 0.2F).to(16.0F, 16.0F, 0.2F)//.shade(false)
+                .face(Direction.NORTH).uvs(16, 0, 0, 16).texture("#vine").end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#vine").end()
+                .end();
+
+        MultiPartBlockStateBuilder builder = this.getMultipartBuilder(block);
+        List<BooleanProperty> directions = List.of(BottomedVineBlock.NORTH, BottomedVineBlock.EAST, BottomedVineBlock.SOUTH, BottomedVineBlock.WEST, BottomedVineBlock.UP);
+        int y = 0;
+        for (BooleanProperty direction : directions) {
+            if (direction != BottomedVineBlock.UP) {
+                builder = builder.part()
+                        .modelFile(normalModel).uvLock(true).rotationY(y).addModel()
+                        .condition(direction, true)
+                        .condition(BottomedVineBlock.AGE, ArrayUtils.toObject(IntStream.range(0, 25).toArray()))
+                        .end();
+                builder = builder.part()
+                        .modelFile(normalModel).uvLock(true).rotationY(y).addModel()
+                        .condition(BottomedVineBlock.EAST, false)
+                        .condition(BottomedVineBlock.NORTH, false)
+                        .condition(BottomedVineBlock.SOUTH, false)
+                        .condition(BottomedVineBlock.UP, false)
+                        .condition(BottomedVineBlock.WEST, false)
+                        .condition(BottomedVineBlock.AGE, ArrayUtils.toObject(IntStream.range(0, 25).toArray()))
+                        .end();
+                builder = builder.part()
+                        .modelFile(bottomModel).uvLock(true).rotationY(y).addModel()
+                        .condition(direction, true)
+                        .condition(BottomedVineBlock.AGE, 25)
+                        .end();
+                builder = builder.part()
+                        .modelFile(bottomModel).uvLock(true).rotationY(y).addModel()
+                        .condition(BottomedVineBlock.EAST, false)
+                        .condition(BottomedVineBlock.NORTH, false)
+                        .condition(BottomedVineBlock.SOUTH, false)
+                        .condition(BottomedVineBlock.UP, false)
+                        .condition(BottomedVineBlock.WEST, false)
+                        .condition(BottomedVineBlock.AGE, 25)
+                        .end();
+                y += 90;
+            } else {
+                builder = builder.part()
+                        .modelFile(normalModel).uvLock(true).rotationX(270).addModel()
+                        .condition(direction, true)
+                        .condition(BottomedVineBlock.AGE, ArrayUtils.toObject(IntStream.range(0, 25).toArray()))
+                        .end();
+                builder = builder.part()
+                        .modelFile(normalModel).uvLock(true).rotationX(270).addModel()
+                        .condition(BottomedVineBlock.EAST, false)
+                        .condition(BottomedVineBlock.NORTH, false)
+                        .condition(BottomedVineBlock.SOUTH, false)
+                        .condition(BottomedVineBlock.UP, false)
+                        .condition(BottomedVineBlock.WEST, false)
+                        .condition(BottomedVineBlock.AGE, ArrayUtils.toObject(IntStream.range(0, 25).toArray()))
+                        .end();
+                builder = builder.part()
+                        .modelFile(bottomModel).uvLock(true).rotationX(270).addModel()
+                        .condition(direction, true)
+                        .condition(BottomedVineBlock.AGE, 25)
+                        .end();
+                builder = builder.part()
+                        .modelFile(bottomModel).uvLock(true).rotationX(270).addModel()
+                        .condition(BottomedVineBlock.EAST, false)
+                        .condition(BottomedVineBlock.NORTH, false)
+                        .condition(BottomedVineBlock.SOUTH, false)
+                        .condition(BottomedVineBlock.UP, false)
+                        .condition(BottomedVineBlock.WEST, false)
+                        .condition(BottomedVineBlock.AGE, 25)
+                        .end();
+            }
+        }
     }
 
     public void snowLayer(Block block, Block base) {

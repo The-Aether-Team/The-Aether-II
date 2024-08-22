@@ -500,7 +500,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(AetherIIBlocks.AMBROSIUM_TORCH.get());
-        this.tag(BlockTags.CLIMBABLE).add(AetherIIBlocks.SKYROOT_LADDER.get());
+        this.tag(BlockTags.CLIMBABLE).add(
+                AetherIIBlocks.SKYROOT_LADDER.get(),
+                AetherIIBlocks.BRYALINN_MOSS_VINES.get()
+        );
         this.tag(BlockTags.FENCE_GATES).add(
                 AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
                 AetherIIBlocks.GREATROOT_FENCE_GATE.get(),
@@ -629,6 +632,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
+                AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(),
                 AetherIIBlocks.GREATROOT_LOG.get(),
@@ -826,6 +830,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_ICE.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
+        this.tag(BlockTags.REPLACEABLE).add(AetherIIBlocks.BRYALINN_MOSS_VINES.get());
+
 
         // Forge
         this.tag(Tags.Blocks.BOOKSHELVES).add(

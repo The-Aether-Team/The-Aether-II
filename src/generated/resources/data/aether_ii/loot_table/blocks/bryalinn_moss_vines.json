@@ -5,17 +5,20 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": "minecraft:shears"
+          }
         }
       ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:flowering_bryalinn_moss_carpet"
+          "name": "aether_ii:bryalinn_moss_vines"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/flowering_bryalinn_moss_carpet"
+  "random_sequence": "aether_ii:blocks/bryalinn_moss_vines"
 }
