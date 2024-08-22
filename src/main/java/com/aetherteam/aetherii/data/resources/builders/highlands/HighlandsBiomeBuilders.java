@@ -46,7 +46,7 @@ public class HighlandsBiomeBuilders {
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 600, 2400, false))
             .build();
     private static final BiomeSpecialEffects IRRADIATED_EFFECTS = new BiomeSpecialEffects.Builder()
-            .fogColor(0xf0e8dd)
+            .fogColor(0xF0E8BE)
             .skyColor(0xfcebc5)
             .waterColor(0xaed4bf)
             .waterFogColor(0xbccc81)
