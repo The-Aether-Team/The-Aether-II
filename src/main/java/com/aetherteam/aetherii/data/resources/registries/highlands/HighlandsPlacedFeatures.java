@@ -41,16 +41,16 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SMALL_GRASS_PATCH = createKey("small_grass_patch");
     public static final ResourceKey<PlacedFeature> MEDIUM_GRASS_PATCH = createKey("medium_grass_patch");
     public static final ResourceKey<PlacedFeature> LARGE_GRASS_PATCH = createKey("large_grass_patch");
+    public static final ResourceKey<PlacedFeature> IRRADIATED_GRASS_PATCH = createKey("irradiated_grass_patch");
     public static final ResourceKey<PlacedFeature> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
     public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH = createKey("highlands_bush_patch");
     public static final ResourceKey<PlacedFeature> HIGHLANDS_BUSH_PATCH_FIELD = createKey("highlands_bush_patch_field");
     public static final ResourceKey<PlacedFeature> BLUEBERRY_BUSH_PATCH = createKey("blueberry_bush_patch");
     public static final ResourceKey<PlacedFeature> ORANGE_TREE_PATCH = createKey("orange_tree_patch");
 
+    public static final ResourceKey<PlacedFeature> HIGHLANDS_FLOWER_PATCH = createKey("highlands_flower_patch");
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
-    public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH_FOREST = createKey("highfields_flower_patch_forest");
-
-    public static final ResourceKey<PlacedFeature> IRRADIATED_FLOWER_PATCH = createKey("irradiated_flower_patch");
+    public static final ResourceKey<PlacedFeature> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
 
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -266,6 +266,14 @@ public class HighlandsPlacedFeatures {
         );
         register(
                 context,
+                IRRADIATED_GRASS_PATCH,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.IRRADIATED_GRASS_PATCH),
+                CountOnEveryLayerPlacement.of(UniformInt.of(2, 6)),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BiomeFilter.biome()
+        );
+        register(
+                context,
                 VALKYRIE_SPROUT_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.VALKYRIE_SPROUT_PATCH),
                 NoiseThresholdCountPlacement.of(0.5, 0, 4),
@@ -298,20 +306,18 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())),
                 BiomeFilter.biome());
 
-        register(context, HIGHFIELDS_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHFIELDS_FLOWER_PATCH),
-                NoiseThresholdCountPlacement.of(-0.8, 5, 2),
-                RarityFilter.onAverageOnceEvery(2),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
-                BiomeFilter.biome());
-        register(context, HIGHFIELDS_FLOWER_PATCH_FOREST, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHFIELDS_FLOWER_PATCH),
+        register(context, HIGHLANDS_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHLANDS_FLOWER_PATCH),
                 RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome());
-        register(context, IRRADIATED_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.IRRADIATED_FLOWER_PATCH),
-                NoiseThresholdCountPlacement.of(-0.8, 5, 2),
-                RarityFilter.onAverageOnceEvery(2),
+        register(context, HIGHFIELDS_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHFIELDS_FLOWER_PATCH),
+                NoiseThresholdCountPlacement.of(0.8, 1, 3),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
+        register(context, MAGNETIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MAGNETIC_FLOWER_PATCH),
+                NoiseThresholdCountPlacement.of(0.8, 1, 3),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());

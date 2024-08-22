@@ -1,15 +1,11 @@
 {
-  "feature": "aether_ii:irradiated_flower_patch",
+  "feature": "aether_ii:magnetic_flower_patch",
   "placement": [
     {
       "type": "minecraft:noise_threshold_count",
-      "above_noise": 2,
-      "below_noise": 5,
-      "noise_level": -0.8
-    },
-    {
-      "type": "minecraft:rarity_filter",
-      "chance": 2
+      "above_noise": 3,
+      "below_noise": 1,
+      "noise_level": 0.8
     },
     {
       "type": "minecraft:in_square"

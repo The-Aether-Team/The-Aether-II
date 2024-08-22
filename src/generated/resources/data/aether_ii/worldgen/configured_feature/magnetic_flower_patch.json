@@ -24,13 +24,13 @@
             "slow_scale": 1.0,
             "states": [
               {
-                "Name": "aether_ii:hesperose",
+                "Name": "aether_ii:poasprout",
                 "Properties": {
                   "snowy": "false"
                 }
               },
               {
-                "Name": "aether_ii:tarabloom",
+                "Name": "aether_ii:lilichime",
                 "Properties": {
                   "snowy": "false"
                 }

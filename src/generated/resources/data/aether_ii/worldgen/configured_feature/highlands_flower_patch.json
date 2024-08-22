@@ -10,7 +10,37 @@
             "entries": [
               {
                 "data": {
-                  "Name": "aether_ii:shield_fern"
+                  "Name": "aether_ii:hesperose",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:tarabloom",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:poasprout",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:lilichime",
+                  "Properties": {
+                    "snowy": "false"
+                  }
                 },
                 "weight": 1
               }
@@ -41,8 +71,8 @@
         }
       ]
     },
-    "tries": 24,
-    "xz_spread": 7,
+    "tries": 16,
+    "xz_spread": 8,
     "y_spread": 3
   }
 }

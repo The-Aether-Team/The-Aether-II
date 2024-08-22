@@ -43,10 +43,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.DualNoiseProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
@@ -84,15 +81,16 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_GRASS_PATCH = createKey("small_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEDIUM_GRASS_PATCH = createKey("medium_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_GRASS_PATCH = createKey("large_grass_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> IRRADIATED_GRASS_PATCH = createKey("irradiated_grass_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> VALKYRIE_SPROUT_PATCH = createKey("valkyrie_sprout_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_BUSH = createKey("highlands_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUEBERRY_BUSH = createKey("blueberry_bush");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORANGE_TREE = createKey("orange_tree_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRETTL_PLANT = createKey("brettl_plant");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_FLOWER_PATCH = createKey("highlands_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> IRRADIATED_FLOWER_PATCH = createKey("irradiated_flower_patch");
-
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -386,6 +384,25 @@ public class HighlandsConfiguredFeatures {
         );
         register(
                 context,
+                IRRADIATED_GRASS_PATCH,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        64,
+                        8,
+                        4,
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(
+                                new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>()
+                                        .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
+                                        .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 2)
+                                        .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
+                                        .add(AetherIIBlocks.HIGHLAND_FERN.get().defaultBlockState(), 1)
+                                        .add(AetherIIBlocks.SHIELD_FERN.get().defaultBlockState(), 2)
+                                        .build())
+                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
+                )
+        );
+        register(
+                context,
                 VALKYRIE_SPROUT_PATCH,
                 Feature.RANDOM_PATCH,
                 new RandomPatchConfiguration(
@@ -428,11 +445,11 @@ public class HighlandsConfiguredFeatures {
 
         register(
                 context,
-                HIGHFIELDS_FLOWER_PATCH,
+                HIGHLANDS_FLOWER_PATCH,
                 Feature.FLOWER,
                 new RandomPatchConfiguration(
-                        24,
-                        7,
+                        16,
+                        8,
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                                 .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
@@ -441,19 +458,72 @@ public class HighlandsConfiguredFeatures {
                                 .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 1)
                         )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
         ));
-
         register(
                 context,
-                IRRADIATED_FLOWER_PATCH,
+                HIGHFIELDS_FLOWER_PATCH,
                 Feature.FLOWER,
                 new RandomPatchConfiguration(
-                        24,
-                        7,
+                        40,
+                        8,
                         3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                                .add(AetherIIBlocks.SHIELD_FERN.get().defaultBlockState(), 1)
-                        )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
-                ));
+                        PlacementUtils.filtered(
+                                Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        new DualNoiseProvider(
+                                                new InclusiveRange<>(1, 3),
+                                                new NormalNoise.NoiseParameters(-5, 1.0),
+                                                1.0F,
+                                                2345L,
+                                                new NormalNoise.NoiseParameters(-1, 1.0),
+                                                1.0F,
+                                                List.of(
+//                                                        AetherIIBlocks.RED_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.ORANGE_CLOUDWOOL.get().defaultBlockState(),
+                                                        AetherIIBlocks.HESPEROSE.get().defaultBlockState(),
+                                                        AetherIIBlocks.TARABLOOM.get().defaultBlockState()
+//                                                        AetherIIBlocks.GREEN_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.CYAN_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.BLUE_CLOUDWOOL.get().defaultBlockState()
+
+                                                )
+                                        )
+                                ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
+                        )
+                )
+        );
+        register(
+                context,
+                MAGNETIC_FLOWER_PATCH,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        40,
+                        8,
+                        3,
+                        PlacementUtils.filtered(
+                                Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        new DualNoiseProvider(
+                                                new InclusiveRange<>(1, 3),
+                                                new NormalNoise.NoiseParameters(-5, 1.0),
+                                                1.0F,
+                                                2345L,
+                                                new NormalNoise.NoiseParameters(-1, 1.0),
+                                                1.0F,
+                                                List.of(
+//                                                        AetherIIBlocks.RED_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.ORANGE_CLOUDWOOL.get().defaultBlockState(),
+                                                        AetherIIBlocks.POASPROUT.get().defaultBlockState(),
+                                                        AetherIIBlocks.LILICHIME.get().defaultBlockState()
+//                                                        AetherIIBlocks.GREEN_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.CYAN_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.BLUE_CLOUDWOOL.get().defaultBlockState()
+
+                                                )
+                                        )
+                                ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
+                        )
+                )
+        );
 
         register(context, AETHER_GRASS_BONEMEAL, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                 .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
@@ -944,7 +1014,7 @@ public class HighlandsConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ENCHANTED_GRASS_BLOCKS)), 0.25F)),
-                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(LARGE_GRASS_PATCH)))),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(IRRADIATED_GRASS_PATCH)))),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
                         0.0F,
