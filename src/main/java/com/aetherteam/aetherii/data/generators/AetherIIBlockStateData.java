@@ -171,14 +171,14 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.shortGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get());
         this.shortGrass(AetherIIBlocks.AETHER_LONG_GRASS.get());
         this.tintedFern(AetherIIBlocks.HIGHLAND_FERN.get());
+        this.crossBlock(AetherIIBlocks.SHIELD_FERN.get(), "natural/");
 
         // Flowers
         this.frostedCross(AetherIIBlocks.HESPEROSE.get());
         this.frostedCross(AetherIIBlocks.TARABLOOM.get());
-        this.crossBlock(AetherIIBlocks.SHIELD_FERN.get(), "natural/");
         this.frostedCross(AetherIIBlocks.POASPROUT.get());
-        this.crossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
         this.lilichime(AetherIIBlocks.LILICHIME.get());
+        this.crossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Potted Flowers
         this.pottedPlant(AetherIIBlocks.POTTED_HESPEROSE.get(), AetherIIBlocks.HESPEROSE.get(), "natural/");

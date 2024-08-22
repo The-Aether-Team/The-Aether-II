@@ -25,6 +25,12 @@
                   }
                 },
                 "weight": 3
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:highland_fern"
+                },
+                "weight": 1
               }
             ]
           }
