@@ -175,7 +175,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ALLOWED_BUCKET_PICKUP).add(
                 Blocks.POWDER_SNOW);
         this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON)
-                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get());
+                .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(), AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.tag(AetherIITags.Blocks.SKYROOT_TWIG_SURVIVES_ON)
                 .addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(AetherIITags.Blocks.HOLYSTONE_ROCK_SURVIVES_ON)
