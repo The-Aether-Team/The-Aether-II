@@ -2,8 +2,10 @@
   "feature": "aether_ii:bryalinn_moss_floor",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 8
+      "type": "minecraft:noise_based_count",
+      "noise_factor": 150.0,
+      "noise_offset": 0.0,
+      "noise_to_count_ratio": 20
     },
     {
       "type": "minecraft:in_square"

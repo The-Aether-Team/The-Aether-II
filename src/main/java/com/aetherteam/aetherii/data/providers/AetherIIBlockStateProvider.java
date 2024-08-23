@@ -157,7 +157,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("vine", this.extend(texture(this.name(block), "natural/"), "_bottom"))
                 .texture("particle", this.extend(texture(this.name(block), "natural/"), "_bottom"))
                 .renderType(ResourceLocation.withDefaultNamespace("cutout"))
-                .element().from(0.0F, 0.0F, 0.2F).to(16.0F, 16.0F, 0.2F)//.shade(false)
+                .element().from(0.0F, 0.0F, 0.25F).to(16.0F, 16.0F, 0.25F)//.shade(false)
                 .face(Direction.NORTH).uvs(16, 0, 0, 16).texture("#vine").end()
                 .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#vine").end()
                 .end();
