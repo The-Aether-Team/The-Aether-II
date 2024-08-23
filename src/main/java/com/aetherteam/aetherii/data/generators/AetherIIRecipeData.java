@@ -135,6 +135,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         woodFromLogs(consumer, AetherIIBlocks.GREATROOT_WOOD.get(), AetherIIBlocks.GREATROOT_LOG.get());
         woodFromLogs(consumer, AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.WISPROOT_LOG.get());
         woodFromLogs(consumer, AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.AMBEROOT_LOG.get());
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), 1)
+                .requires(AetherIIBlocks.WISPROOT_LOG)
+                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
+                .unlockedBy("has_vines", has(AetherIIBlocks.BRYALINN_MOSS_VINES))
+                .save(consumer);
 
         // Leaf Pile
         leafPile(consumer, AetherIIBlocks.SKYROOT_LEAF_PILE, AetherIIBlocks.SKYROOT_LEAVES.get());
