@@ -311,7 +311,6 @@ public class AetherIIItems {
 
     public static void registerTooltips(Player player, ItemStack itemStack, List<Component> itemTooltips) {
         EquipmentUtil.addAbilityTooltips(player, itemStack, itemTooltips);
-        EquipmentUtil.addBonusDamageTypeTooltips(player, itemTooltips, itemStack);
         EquipmentUtil.addShieldTooltips(itemTooltips, itemStack);
         EquipmentUtil.addGloveTooltips(player, itemTooltips, itemStack);
         EquipmentUtil.addReinforcingTooltip(itemStack, itemTooltips);
