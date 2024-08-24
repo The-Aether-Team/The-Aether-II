@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client.gui.component.toast;
 
 import com.aetherteam.aetherii.AetherII;
-import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

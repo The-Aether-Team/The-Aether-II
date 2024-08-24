@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.client.renderer;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
-import com.aetherteam.aetherii.attachment.player.DimensionTeleportationAttachment;
+import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.google.common.collect.Lists;
@@ -48,7 +48,7 @@ public class AetherIIOverlays {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
-                renderAetherPortalOverlay(guiGraphics, minecraft, player.getData(AetherIIDataAttachments.DIMENSION_TELEPORTATION.get()), partialTicks);
+                renderAetherPortalOverlay(guiGraphics, minecraft, player.getData(AetherIIDataAttachments.PLAYER.get()), partialTicks);
             }
         });
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (guiGraphics, partialTicks) -> {
@@ -67,7 +67,7 @@ public class AetherIIOverlays {
         });
     }
 
-    private static void renderAetherPortalOverlay(GuiGraphics guiGraphics, Minecraft minecraft, DimensionTeleportationAttachment handler, DeltaTracker partialTicks) {
+    private static void renderAetherPortalOverlay(GuiGraphics guiGraphics, Minecraft minecraft, AetherIIPlayerAttachment handler, DeltaTracker partialTicks) {
         float timeInPortal = Mth.lerp(partialTicks.getGameTimeDeltaPartialTick(false), handler.getOldPortalIntensity(), handler.getPortalIntensity());
         if (timeInPortal > 0.0F) {
             if (timeInPortal < 1.0F) {

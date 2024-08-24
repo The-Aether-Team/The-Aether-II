@@ -29,15 +29,15 @@
     "ignore_vines": true,
     "minimum_size": {
       "type": "minecraft:two_layers_feature_size",
-      "limit": 0,
-      "lower_size": 0,
-      "upper_size": 0
+      "limit": 1,
+      "lower_size": 1,
+      "upper_size": 2
     },
     "trunk_placer": {
       "type": "minecraft:giant_trunk_placer",
-      "base_height": 13,
-      "height_rand_a": 5,
-      "height_rand_b": 6
+      "base_height": 16,
+      "height_rand_a": 2,
+      "height_rand_b": 1
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",

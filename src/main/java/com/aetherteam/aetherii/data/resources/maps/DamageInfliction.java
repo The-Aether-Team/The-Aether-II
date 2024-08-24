@@ -2,8 +2,6 @@ package com.aetherteam.aetherii.data.resources.maps;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;

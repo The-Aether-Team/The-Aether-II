@@ -51,7 +51,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(SLOPER_ARCTIC, buildSloperArctic(function));
 
         context.register(FACTOR_SHATTERED, buildFactorShattered(function));
-        context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
+        context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
         context.register(TOP_SLIDE_SHATTERED, buildTopSlideShattered(function));
         context.register(BOTTOM_SLIDE_SHATTERED, buildBottomSlideShattered(function));
 
@@ -67,6 +67,10 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(COASTS_HIGHFIELDS, buildCoastNoise(function, 5.0D));
         context.register(COASTS_MAGNETIC, buildCoastNoise(function,7.0D));
         context.register(COASTS_ARCTIC, buildCoastNoise(function,3.0D));
+
+        context.register(SNOW_NOISE, DensityFunctions.add(
+                DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 42), DensityFunctions.constant(1.0D)),
+                DensityFunctions.constant(0.1D)));
 
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": {
+      "item": "aether_ii:aether_dirt"
+    },
+    "G": {
+      "item": "aether_ii:shimmering_silt"
+    }
+  },
+  "pattern": [
+    "DG",
+    "GD"
+  ],
+  "result": {
+    "count": 4,
+    "id": "aether_ii:coarse_aether_dirt"
+  }
+}

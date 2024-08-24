@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIINoises;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.world.surfacerule.NoisePalette3DPlacementRule;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -20,18 +20,18 @@ public class HighlandsSurfaceBuilders {
 
     public static SurfaceRules.RuleSource surfaceRules() {
         SurfaceRules.RuleSource surface = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.BATTLEGROUND_WASTES), ENCHANTED_AETHER_GRASS_BLOCK),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.CONTAMINATED_JUNGLE), ENCHANTED_AETHER_GRASS_BLOCK),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.BATTLEGROUND_WASTES), ENCHANTED_AETHER_GRASS_BLOCK),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.CONTAMINATED_JUNGLE), ENCHANTED_AETHER_GRASS_BLOCK),
                 SurfaceRules.ifTrue(SurfaceRules.waterBlockCheck(-1, 0), AETHER_GRASS_BLOCK),
                 AETHER_DIRT);
         return SurfaceRules.sequence(
 
 
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FRIGID_SIERRA),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.FRIGID_SIERRA),
                         SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.5D, 0.35D),
                                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, ARCTIC_SNOW_BLOCK))),
 
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FRIGID_SIERRA),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.FRIGID_SIERRA),
                         SurfaceRules.ifTrue(SurfaceRules.noiseCondition(AetherIINoises.ARCTIC_SNOW, -0.5D, 0.35D),
                                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, ARCTIC_SNOW_BLOCK))),
 
@@ -45,25 +45,25 @@ public class HighlandsSurfaceBuilders {
 
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("undershale", VerticalAnchor.absolute(89), VerticalAnchor.absolute(101)), UNDERSHALE),
 
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FLOURISHING_FIELD), MOSSY_HOLYSTONE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.VERDANT_WOODS), MOSSY_HOLYSTONE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHROUDED_FOREST), MOSSY_HOLYSTONE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHIMMERING_BASIN), MOSSY_HOLYSTONE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.FLOURISHING_FIELD), MOSSY_HOLYSTONE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.VERDANT_WOODS), MOSSY_HOLYSTONE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.SHROUDED_FOREST), MOSSY_HOLYSTONE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.SHIMMERING_BASIN), MOSSY_HOLYSTONE),
 
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FRIGID_SIERRA), PACKED_ICE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.ENDURING_WOODLAND), PACKED_ICE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.FROZEN_LAKES), PACKED_ICE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.SHEER_TUNDRA), PACKED_ICE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.FRIGID_SIERRA), PACKED_ICE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.ENDURING_WOODLAND), PACKED_ICE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.FROZEN_LAKES), PACKED_ICE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.SHEER_TUNDRA), PACKED_ICE),
 
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.MAGNETIC_SCAR), FERROSITE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.TURQUOISE_FOREST), FERROSITE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.GLISTENING_SWAMP), FERROSITE),
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.VIOLET_HIGHWOODS), FERROSITE)
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.MAGNETIC_SCAR), FERROSITE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.TURQUOISE_FOREST), FERROSITE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.GLISTENING_SWAMP), FERROSITE),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.VIOLET_HIGHWOODS), FERROSITE)
 
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.MAGNETIC_SCAR), RUSTED_FERROSITE),
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.TURQUOISE_FOREST), RUSTED_FERROSITE),
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.GLISTENING_SWAMP), RUSTED_FERROSITE),
-//                SurfaceRules.ifTrue(SurfaceRules.isBiome(AetherIIBiomes.VIOLET_HIGHWOODS), RUSTED_FERROSITE) //todo
+//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.MAGNETIC_SCAR), RUSTED_FERROSITE),
+//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.TURQUOISE_FOREST), RUSTED_FERROSITE),
+//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.GLISTENING_SWAMP), RUSTED_FERROSITE),
+//                SurfaceRules.ifTrue(SurfaceRules.isBiome(HighlandsBiomes.VIOLET_HIGHWOODS), RUSTED_FERROSITE) //todo
         );
     }
 }

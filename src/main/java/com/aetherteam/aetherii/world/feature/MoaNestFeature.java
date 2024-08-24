@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.passive.Moa;
-import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.feature.configuration.MoaNestConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;

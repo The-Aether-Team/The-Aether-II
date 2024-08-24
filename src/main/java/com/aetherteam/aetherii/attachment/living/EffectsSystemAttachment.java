@@ -51,7 +51,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
         }
     }
 
-    public void tick() {
+    public void postTickUpdate(LivingEntity livingEntity) {
         if (this.loadingSync) {
             PacketDistributor.sendToAllPlayers(new EffectBuildupPacket.Set(this.entity.getId(), this.activeBuildups));
             this.loadingSync = false;
@@ -67,6 +67,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
             } else {
                 this.activeBuildups.get(effect).increaseBuildup(amount);
             }
+            this.loadingSync = true;
         }
     }
 

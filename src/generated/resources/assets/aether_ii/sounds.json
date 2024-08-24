@@ -221,6 +221,49 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.swet.attack": {
+    "sounds": [
+      "mob/slime/attack1",
+      "mob/slime/attack2"
+    ],
+    "subtitle": "subtitles.aether.entity.swet.attack"
+  },
+  "entity.swet.death": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.entity.swet.death"
+  },
+  "entity.swet.hurt": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.entity.swet.hurt"
+  },
+  "entity.swet.jump": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.entity.swet.squish"
+  },
+  "entity.swet.squish": {
+    "sounds": [
+      "mob/slime/big1",
+      "mob/slime/big2",
+      "mob/slime/big3",
+      "mob/slime/big4"
+    ],
+    "subtitle": "subtitles.aether.entity.swet.squish"
+  },
   "entity.zephyr.shoot": {
     "sounds": [
       "aether_ii:entity/zephyr/shoot"

@@ -1,0 +1,43 @@
+{
+  "type": "aether_ii:boulder",
+  "config": {
+    "block": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "aether_ii:mossy_holystone"
+          },
+          "weight": 4
+        },
+        {
+          "data": {
+            "Name": "aether_ii:holystone"
+          },
+          "weight": 1
+        }
+      ]
+    },
+    "radius": 0.5,
+    "valid_blocks": "aether_ii:boulder_survives_on",
+    "variation": {
+      "type": "minecraft:uniform",
+      "max_exclusive": 1.0,
+      "min_inclusive": 0.0
+    },
+    "vegetation_chance": 1.0,
+    "vegetation_feature": {
+      "feature": "aether_ii:holystone_rocks",
+      "placement": [
+        {
+          "type": "minecraft:count",
+          "count": {
+            "type": "minecraft:uniform",
+            "max_inclusive": 6,
+            "min_inclusive": 1
+          }
+        }
+      ]
+    }
+  }
+}

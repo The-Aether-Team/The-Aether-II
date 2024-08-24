@@ -52,9 +52,9 @@ public class GreatoakFoliagePlacer extends AbstractBranchedFoliagePlacer {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y + 1, z + random.nextIntBetweenInclusive(0, 1)), 4, i, doubleTrunk);
 
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y - 7, z + random.nextIntBetweenInclusive(0, 1)), 9, i, doubleTrunk);
-
-            this.placeCornerLogs(level, foliageSetter, random, config, pos, -1);
         }
+
+        this.placeCornerLogs(level, foliageSetter, random, config, pos, -1, 0);
     }
 
     /**

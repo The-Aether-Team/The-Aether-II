@@ -9,8 +9,8 @@
           "Name": "aether_ii:corrobonite_ore"
         },
         "target": {
-          "predicate_type": "minecraft:tag_match",
-          "tag": "aether_ii:aether_underground_blocks"
+          "block": "aether_ii:undershale",
+          "predicate_type": "minecraft:block_match"
         }
       }
     ]

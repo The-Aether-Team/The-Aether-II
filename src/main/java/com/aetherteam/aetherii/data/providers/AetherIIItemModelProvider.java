@@ -3,11 +3,9 @@ package com.aetherteam.aetherii.data.providers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.nitrogen.data.providers.NitrogenItemModelProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;
@@ -98,6 +96,7 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                 .texture("layer1", this.texture(this.blockName(block) + "_2", location))
                 .texture("layer2", this.texture(this.blockName(block) + "_3", location));
     }
+
 
     public void orangeTree(Block block) {
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_bottom_0", "natural/"));

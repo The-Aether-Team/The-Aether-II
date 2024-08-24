@@ -2,9 +2,13 @@ package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+
+import java.util.Optional;
 
 public final class EntityUtil {
     /**
@@ -35,5 +39,14 @@ public final class EntityUtil {
         double y = entity.getY() + ((double) random.nextFloat() * entity.getBbHeight()) - d1 * d3;
         double z = entity.getZ() + ((double) random.nextFloat() * entity.getBbWidth() * 2.0) - entity.getBbWidth() - d2 * d3;
         entity.level().addParticle(ParticleTypes.POOF, x, y, z, d0, d1, d2);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Entity> T clone(final T entity) {
+        CompoundTag compoundTag = new CompoundTag();
+        entity.save(compoundTag);
+        final Optional<T> newEnt = (Optional<T>) EntityType.create(compoundTag, entity.level());
+
+        return newEnt.orElse(null);
     }
 }

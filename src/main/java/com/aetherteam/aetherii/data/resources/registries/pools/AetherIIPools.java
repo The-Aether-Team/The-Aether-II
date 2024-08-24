@@ -22,11 +22,12 @@ public class AetherIIPools {
     private static final Holder<StructureProcessorList> EMPTY = Holder.direct(new StructureProcessorList(List.of()));
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
-        HolderGetter<StructureTemplatePool> holderGetter = context.lookup(Registries.TEMPLATE_POOL);
-        Holder<StructureTemplatePool> fallback = holderGetter.getOrThrow(Pools.EMPTY);
-
+        HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
+        Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
         context.register(Pools.EMPTY, new StructureTemplatePool(fallback, ImmutableList.of(), StructureTemplatePool.Projection.RIGID));
+
         OutpostPools.bootstrap(context);
+        CampHighfieldsPools.bootstrap(context);
     }
 
     public static ResourceKey<StructureTemplatePool> createKey(String name) {
@@ -39,5 +40,9 @@ public class AetherIIPools {
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id) {
         return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool);
+    }
+
+    public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id, Holder<StructureProcessorList> processor) {
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool);
     }
 }

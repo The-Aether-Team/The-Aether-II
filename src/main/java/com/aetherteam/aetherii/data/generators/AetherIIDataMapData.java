@@ -142,6 +142,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         resistances.add(AetherIIEntityTypes.ZEPHYR, new DamageResistance(0, 2, -2), false);
         resistances.add(AetherIIEntityTypes.TEMPEST, new DamageResistance(2, 2, -2), false);
         resistances.add(AetherIIEntityTypes.COCKATRICE, new DamageResistance(-2, 0, 2), false);
+        resistances.add(AetherIIEntityTypes.SWET, new DamageResistance(2, 0, -2), false);
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {
