@@ -50,6 +50,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get());
 
         // Magnetic
         this.dropSelf(AetherIIBlocks.FERROSITE_SAND.get());

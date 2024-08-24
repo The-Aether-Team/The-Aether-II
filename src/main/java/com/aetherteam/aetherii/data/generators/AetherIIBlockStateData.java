@@ -38,6 +38,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "natural/");
         this.carpet(AetherIIBlocks.BRYALINN_MOSS_CARPET.get(), AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "natural/");
         this.mossVines(AetherIIBlocks.BRYALINN_MOSS_VINES.get());
+        this.bryalinnFlowers(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get());
 
         // Magnetic
         this.block(AetherIIBlocks.FERROSITE_SAND.get(), "natural/");

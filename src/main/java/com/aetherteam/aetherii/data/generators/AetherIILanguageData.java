@@ -47,6 +47,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK, "Bryalinn Moss Block");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET, "Bryalinn Moss Carpet");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_VINES, "Bryalinn Moss Vines");
+        this.addBlock(AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "Bryalinn Moss Flowers");
 
         // Magnetic
         this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");

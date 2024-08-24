@@ -229,6 +229,16 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }
     }
 
+    public void bryalinnFlowers(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            ModelFile model = this.models().withExistingParent(this.name(block), this.modLoc("block/template_bryalinn_moss_flowers"))
+                    .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                    .texture("0", this.texture(this.name(block), "natural/"))
+                    .texture("particle", this.texture(this.name(block), "natural/"));
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
+    }
+
     public void snowLayer(Block block, Block base) {
         ResourceLocation texture = this.texture("natural/" + this.name(base));
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
