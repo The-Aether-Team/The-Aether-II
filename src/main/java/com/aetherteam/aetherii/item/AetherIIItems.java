@@ -306,7 +306,6 @@ public class AetherIIItems {
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
-        bus.addListener(ZaniteTool::modifyBreakSpeed);
     }
 
     public static void registerTooltips(Player player, ItemStack itemStack, List<Component> itemTooltips) {

@@ -33,10 +33,10 @@ public interface ZaniteWeapon extends ZaniteTool { //todo replace with ItemAttri
         List<ItemAttributeModifiers.Entry> modifierEntryList = Lists.newArrayList(modifiers.modifiers().listIterator());
 
         modifierEntryList.removeIf((entry) -> entry.modifier().is(DAMAGE_TYPES.get(typeAttribute)));
-        modifierEntryList.add(new ItemAttributeModifiers.Entry(typeAttribute, new AttributeModifier(DAMAGE_TYPES.get(typeAttribute), this.calculateIncrease(typeAttribute, DAMAGE_TYPES.get(typeAttribute), modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
+        modifierEntryList.add(new ItemAttributeModifiers.Entry(typeAttribute, new AttributeModifier(DAMAGE_TYPES.get(typeAttribute), this.calculateDamageIncrease(typeAttribute, DAMAGE_TYPES.get(typeAttribute), modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
 
         modifierEntryList.removeIf((entry) -> entry.modifier().is(DAMAGE_MODIFIER_ID));
-        modifierEntryList.add(new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, this.calculateIncrease(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID, modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
+        modifierEntryList.add(new ItemAttributeModifiers.Entry(Attributes.ATTACK_DAMAGE, new AttributeModifier(DAMAGE_MODIFIER_ID, this.calculateDamageIncrease(Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID, modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
 
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
         for (ItemAttributeModifiers.Entry entry : modifierEntryList) {
@@ -45,17 +45,17 @@ public interface ZaniteWeapon extends ZaniteTool { //todo replace with ItemAttri
         return builder.build();
     }
 
-     default int calculateIncrease(Holder<Attribute> base, ResourceLocation bonusModifier, ItemAttributeModifiers modifiers, ItemStack stack) {
-        AtomicReference<Double> baseDamage = new AtomicReference<>(0.0);
+     default int calculateDamageIncrease(Holder<Attribute> base, ResourceLocation bonusModifier, ItemAttributeModifiers modifiers, ItemStack stack) {
+        AtomicReference<Double> baseStat = new AtomicReference<>(0.0);
         modifiers.forEach(EquipmentSlotGroup.MAINHAND, (attribute, modifier) -> {
             if (attribute.value() == base.value() && !modifier.id().equals(bonusModifier)) {
-                baseDamage.updateAndGet(v -> v + modifier.amount());
+                baseStat.updateAndGet(v -> v + modifier.amount());
             }
         });
-        return this.calculateIncrease(stack, baseDamage.get());
+        return this.calculateDamageIncrease(stack, baseStat.get());
     }
 
-    default int calculateIncrease(ItemStack stack, double baseDamage) {
+    default int calculateDamageIncrease(ItemStack stack, double baseDamage) {
         double boostedDamage = this.calculateZaniteBuff(stack, baseDamage);
         boostedDamage -= baseDamage;
         if (boostedDamage < 0.0) {
