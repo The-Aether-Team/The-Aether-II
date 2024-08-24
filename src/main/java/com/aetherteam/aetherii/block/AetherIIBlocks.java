@@ -279,7 +279,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FlowerPotBlock> POTTED_ORANGE_TREE = BLOCKS.register("potted_orange_tree", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ORANGE_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT)));
 
     // Valkyrie Sprout
-    public static final DeferredBlock<Block> VALKYRIE_SPROUT = register("valkyrie_sprout", () -> new ValkyrieSproutBlock(Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).sound(SoundType.GRASS).instabreak().noCollission()));
+    public static final DeferredBlock<Block> VALKYRIE_SPROUT = register("valkyrie_sprout", () -> new ValkyrieSproutBlock(Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).sound(SoundType.GRASS).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.XZ)));
 
     // Brettl
     public static final DeferredBlock<Block> BRETTL_PLANT = BLOCKS.register("brettl_plant", () -> new BrettlPlantBlock(BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));

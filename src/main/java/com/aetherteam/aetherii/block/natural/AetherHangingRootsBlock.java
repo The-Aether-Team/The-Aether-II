@@ -61,4 +61,9 @@ public class AetherHangingRootsBlock extends HangingRootsBlock {
     public static boolean isFree(BlockState state) {
         return state.isAir() || state.is(BlockTags.FIRE) || state.liquid() || state.canBeReplaced();
     }
+
+    @Override
+    protected float getMaxHorizontalOffset() {
+        return 0.175F;
+    }
 }
