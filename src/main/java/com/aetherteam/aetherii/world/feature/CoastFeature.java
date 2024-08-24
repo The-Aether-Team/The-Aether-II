@@ -74,7 +74,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
     @SuppressWarnings("UnusedReturnValue")
     public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance, Set<BlockPos> set) {
-        if (level.getBlockState(pos).canBeReplaced()
+        if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
                 && (level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                 || level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
