@@ -4,6 +4,8 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIJukeboxSongs;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.item.consumables.CurativeItem;
+import com.aetherteam.aetherii.item.consumables.PreventativeItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
@@ -237,6 +239,10 @@ public class AetherIIItems {
     public static final DeferredItem<Item> TAEGORE_STEAK = ITEMS.register("taegore_steak", () -> new Item(new Item.Properties().food(AetherIIFoods.TAEGORE_STEAK)));
     public static final DeferredItem<Item> SKYROOT_LIZARD_ON_A_STICK = ITEMS.register("skyroot_lizard_on_a_stick", () -> new Item(new Item.Properties().food(AetherIIFoods.SKYROOT_LIZARD_ON_A_STICK)));
     public static final DeferredItem<Item> ROASTED_SKYROOT_LIZARD_ON_A_STICK = ITEMS.register("roasted_skyroot_lizard_on_a_stick", () -> new Item(new Item.Properties().food(AetherIIFoods.ROASTED_SKYROOT_LIZARD_ON_A_STICK)));
+
+    // Consumables
+    public static final DeferredItem<Item> BANDAGE = ITEMS.register("bandage", () -> new PreventativeItem(UseAnim.BOW, 15, AetherIIPreventatives.BANDAGE, new Item.Properties()));
+    public static final DeferredItem<Item> SPLINT = ITEMS.register("splint", () -> new CurativeItem(UseAnim.BOW, 15, AetherIIEffectCures.SPLINT, new Item.Properties()));
 
     // Skyroot Buckets
     public static final DeferredItem<Item> SKYROOT_BUCKET = ITEMS.register("skyroot_bucket", () -> new SkyrootBucketItem(Fluids.EMPTY, new Item.Properties().stacksTo(16)));

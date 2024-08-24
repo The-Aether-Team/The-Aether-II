@@ -613,6 +613,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, "Skyroot Lizard on a Stick");
         this.addItem(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, "Roasted Skyroot Lizard on a Stick");
 
+        // Consumables
+        this.addItem(AetherIIItems.BANDAGE, "Bandage");
+        this.addItem(AetherIIItems.SPLINT, "Splint");
+
         // Skyroot Buckets
         this.addItem(AetherIIItems.SKYROOT_BUCKET, "Skyroot Bucket");
         this.addItem(AetherIIItems.SKYROOT_WATER_BUCKET, "Skyroot Water Bucket");
@@ -870,6 +874,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Effects
+        this.addEffect(AetherIIEffects.WOUND, "Wound");
+        this.addEffect(AetherIIEffects.FRACTURE, "Fracture");
         this.addEffect(AetherIIEffects.TOXIN, "Toxin");
         this.addEffect(AetherIIEffects.VENOM, "Venom");
 

@@ -458,6 +458,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.MUSIC_DISC_DEMISE.get());
                 output.accept(AetherIIItems.RECORDING_892.get());
                 output.accept(AetherIIItems.GLINT_COIN.get());
+                output.accept(AetherIIItems.BANDAGE.get());
+                output.accept(AetherIIItems.SPLINT.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("armor_and_accessories", () -> CreativeModeTab.builder()

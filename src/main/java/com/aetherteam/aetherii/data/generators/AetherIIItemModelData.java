@@ -152,6 +152,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
         this.item(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
 
+        // Consumables
+        this.item(AetherIIItems.BANDAGE.get(), "miscellaneous/");
+        this.item(AetherIIItems.SPLINT.get(), "miscellaneous/");
+
         // Skyroot Buckets
         this.item(AetherIIItems.SKYROOT_BUCKET.get(), "miscellaneous/");
         this.item(AetherIIItems.SKYROOT_WATER_BUCKET.get(), "miscellaneous/");
