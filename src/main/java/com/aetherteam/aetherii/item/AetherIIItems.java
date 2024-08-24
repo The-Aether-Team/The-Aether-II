@@ -47,6 +47,7 @@ import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootCrossbowIte
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootShortswordItem;
 import com.aetherteam.aetherii.item.equipment.weapons.skyroot.SkyrootSpearItem;
+import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteShortswordItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteSpearItem;
@@ -139,7 +140,7 @@ public class AetherIIItems {
     public static final DeferredItem<SwordItem> ZANITE_SHORTSWORD = ITEMS.register("zanite_shortsword", ZaniteShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> ZANITE_HAMMER = ITEMS.register("zanite_hammer", ZaniteHammerItem::new);
     public static final DeferredItem<TieredSpearItem> ZANITE_SPEAR = ITEMS.register("zanite_spear", ZaniteSpearItem::new);
-    public static final DeferredItem<CrossbowItem> ZANITE_CROSSBOW = ITEMS.register("zanite_crossbow", () -> new TieredCrossbowItem(AetherIIItemTiers.ZANITE, new Item.Properties()));
+    public static final DeferredItem<CrossbowItem> ZANITE_CROSSBOW = ITEMS.register("zanite_crossbow", ZaniteCrossbowItem::new);
     public static final DeferredItem<ShieldItem> ZANITE_SHIELD = ITEMS.register("zanite_shield", () -> new TieredShieldItem(AetherIIItemTiers.ZANITE, new Item.Properties().attributes(TieredShieldItem.createAttributes(60))));
 
     public static final DeferredItem<SwordItem> ARKENIUM_SHORTSWORD = ITEMS.register("arkenium_shortsword", ArkeniumShortswordItem::new);
