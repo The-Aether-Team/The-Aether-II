@@ -34,18 +34,18 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 int zCoord = chunkZ + z;
 
                 // Determinds the noise value at each y-level
-                placeLakeLayer(context, xCoord, height, zCoord, 0.4, 1.0);
-                placeLakeLayer(context, xCoord, height - 1, zCoord, 0.425, 0.8);
-                placeLakeLayer(context, xCoord, height - 2, zCoord, 0.44, 0.75);
-                placeLakeLayer(context, xCoord, height - 3, zCoord, 0.445, 0.7);
-                placeLakeLayer(context, xCoord, height - 4, zCoord, 0.45, 0.625);
-                placeLakeLayer(context, xCoord, height - 5, zCoord, 0.465, 0.55);
-                placeLakeLayer(context, xCoord, height - 6, zCoord, 0.47, 0.475);
-                placeLakeLayer(context, xCoord, height - 7, zCoord, 0.475, 0.4);
-                placeLakeLayer(context, xCoord, height - 8, zCoord, 0.48, 0.3);
-                placeLakeLayer(context, xCoord, height - 9, zCoord, 0.485, 0.2);
-                placeLakeLayer(context, xCoord, height - 10, zCoord, 0.491, 0.1);
-                placeLakeLayer(context, xCoord, height - 11, zCoord, 0.55, 0.035);
+                placeLakeLayer(context, xCoord, height, zCoord, 0.3, 1.0);
+                placeLakeLayer(context, xCoord, height - 1, zCoord, 0.325, 0.8);
+                placeLakeLayer(context, xCoord, height - 2, zCoord, 0.34, 0.75);
+                placeLakeLayer(context, xCoord, height - 3, zCoord, 0.345, 0.7);
+                placeLakeLayer(context, xCoord, height - 4, zCoord, 0.35, 0.625);
+                placeLakeLayer(context, xCoord, height - 5, zCoord, 0.365, 0.55);
+                placeLakeLayer(context, xCoord, height - 6, zCoord, 0.37, 0.475);
+                placeLakeLayer(context, xCoord, height - 7, zCoord, 0.375, 0.4);
+                placeLakeLayer(context, xCoord, height - 8, zCoord, 0.38, 0.3);
+                placeLakeLayer(context, xCoord, height - 9, zCoord, 0.385, 0.2);
+                placeLakeLayer(context, xCoord, height - 10, zCoord, 0.391, 0.1);
+                placeLakeLayer(context, xCoord, height - 11, zCoord, 0.45, 0.035);
             }
         }
         return true;
