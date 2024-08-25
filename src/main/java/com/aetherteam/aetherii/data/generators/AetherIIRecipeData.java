@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -586,6 +587,23 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE_FURNACE.get()), has(AetherIITags.Items.STONE_CRAFTING))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Blocks.SMOKER)
+                .define('#', ItemTags.LOGS)
+                .define('F', AetherIIBlocks.HOLYSTONE_FURNACE.get())
+                .pattern(" # ")
+                .pattern("#F#")
+                .pattern(" # ")
+                .unlockedBy(getHasName(Blocks.SMOKER), has(ItemTags.LOGS))
+                .save(consumer, "smoker_from_holystone_furnace");
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Blocks.BLAST_FURNACE)
+                .define('#', Blocks.SMOOTH_STONE)
+                .define('I', Items.IRON_INGOT)
+                .define('F', AetherIIBlocks.HOLYSTONE_FURNACE.get())
+                .pattern("III")
+                .pattern("IFI")
+                .pattern("###")
+                .unlockedBy(getHasName(Blocks.BLAST_FURNACE), has(Blocks.SMOOTH_STONE))
+                .save(consumer, "blast_furnace_from_holystone_furnace");
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ALTAR.get())
                 .define('H', AetherIIBlocks.HOLYSTONE.get())
                 .define('Z', AetherIITags.Items.GEMS_ZANITE)
