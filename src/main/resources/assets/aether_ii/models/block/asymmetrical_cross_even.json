@@ -1,4 +1,5 @@
 {
+	"ambientocclusion": false,
 	"elements": [
 		{
 			"from": [0, 0, 8],
