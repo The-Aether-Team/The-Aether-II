@@ -280,8 +280,7 @@ public class HighlandsConfiguredFeatures {
                 0.5F,
                 UniformFloat.of(0.0F, 1.0F),
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS), CountPlacement.of(UniformInt.of(1, 6)))),
-                1.0F,
-                AetherIITags.Blocks.BOULDER_SURVIVES_ON));
+                1.0F));
         register(context, ICESTONE_BOULDER, AetherIIFeatures.BOULDER.get(), new BoulderConfiguration(
                 new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                         .add(AetherIIBlocks.ICESTONE.get().defaultBlockState(), 1)
@@ -290,8 +289,7 @@ public class HighlandsConfiguredFeatures {
                 0.5F,
                 UniformFloat.of(0.0F, 1.0F),
                 Optional.empty(),
-                0.0F,
-                AetherIITags.Blocks.BOULDER_SURVIVES_ON));
+                0.0F));
         register(context, FALLEN_SKYROOT_LOG, AetherIIFeatures.FALLEN_LOG.get(), new FallenLogConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get()),
                 UniformInt.of(2, 4),
