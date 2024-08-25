@@ -90,6 +90,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHLANDS_FLOWER_PATCH = createKey("highlands_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -456,6 +457,8 @@ public class HighlandsConfiguredFeatures {
                                 .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1)
+
                         )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
         ));
         register(
@@ -514,6 +517,39 @@ public class HighlandsConfiguredFeatures {
 //                                                        AetherIIBlocks.ORANGE_CLOUDWOOL.get().defaultBlockState(),
                                                         AetherIIBlocks.POASPROUT.get().defaultBlockState(),
                                                         AetherIIBlocks.LILICHIME.get().defaultBlockState()
+//                                                        AetherIIBlocks.GREEN_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.CYAN_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.BLUE_CLOUDWOOL.get().defaultBlockState()
+
+                                                )
+                                        )
+                                ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
+                        )
+                )
+        );
+
+        register(
+                context,
+                ARCTIC_FLOWER_PATCH,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        40,
+                        8,
+                        3,
+                        PlacementUtils.filtered(
+                                Feature.SIMPLE_BLOCK,
+                                new SimpleBlockConfiguration(
+                                        new DualNoiseProvider(
+                                                new InclusiveRange<>(1, 3),
+                                                new NormalNoise.NoiseParameters(-5, 1.0),
+                                                1.0F,
+                                                2345L,
+                                                new NormalNoise.NoiseParameters(-1, 1.0),
+                                                1.0F,
+                                                List.of(
+//                                                        AetherIIBlocks.RED_CLOUDWOOL.get().defaultBlockState(),
+//                                                        AetherIIBlocks.ORANGE_CLOUDWOOL.get().defaultBlockState(),
+                                                        AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
 //                                                        AetherIIBlocks.GREEN_CLOUDWOOL.get().defaultBlockState(),
 //                                                        AetherIIBlocks.CYAN_CLOUDWOOL.get().defaultBlockState(),
 //                                                        AetherIIBlocks.BLUE_CLOUDWOOL.get().defaultBlockState()

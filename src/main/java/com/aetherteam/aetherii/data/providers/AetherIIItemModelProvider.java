@@ -106,6 +106,10 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_0", "natural/"));
     }
 
+    public void sativalShoot(Block block) {
+        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_0", "natural/"));
+    }
+
     public void lilichime(Block block) {
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_item", "natural/"));
     }

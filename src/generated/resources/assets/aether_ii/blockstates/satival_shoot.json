@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "aether_ii:block/satival_shoot"
+      },
+      {
+        "model": "aether_ii:block/satival_shoot",
+        "y": 90
+      }
+    ]
+  }
+}

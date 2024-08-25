@@ -191,6 +191,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.HESPEROSE.get());
         this.dropSelf(AetherIIBlocks.TARABLOOM.get());
         this.dropSelf(AetherIIBlocks.POASPROUT.get());
+        this.dropSelf(AetherIIBlocks.SATIVAL_SHOOT.get());
         this.dropSelf(AetherIIBlocks.LILICHIME.get());
         this.dropSelf(AetherIIBlocks.AECHOR_CUTTING.get());
 
@@ -200,6 +201,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_TARABLOOM.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AECHOR_CUTTING.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_POASPROUT.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_SATIVAL_SHOOT.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_SHIELD_FERN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_LILICHIME.get());
 

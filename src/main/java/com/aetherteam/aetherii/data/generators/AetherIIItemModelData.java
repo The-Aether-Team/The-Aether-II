@@ -352,6 +352,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.TARABLOOM.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.POASPROUT.get(), "natural/");
         this.lilichime(AetherIIBlocks.LILICHIME.get());
+        this.sativalShoot(AetherIIBlocks.SATIVAL_SHOOT.get());
         this.itemBlockFlat(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Bushes

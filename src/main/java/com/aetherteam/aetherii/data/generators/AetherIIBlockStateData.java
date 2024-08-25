@@ -178,6 +178,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.frostedCross(AetherIIBlocks.HESPEROSE.get());
         this.frostedCross(AetherIIBlocks.TARABLOOM.get());
         this.frostedCross(AetherIIBlocks.POASPROUT.get());
+        this.asymmetricalCrossEven(AetherIIBlocks.SATIVAL_SHOOT.get());
         this.lilichime(AetherIIBlocks.LILICHIME.get());
         this.crossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
@@ -186,6 +187,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.pottedPlant(AetherIIBlocks.POTTED_TARABLOOM.get(), AetherIIBlocks.TARABLOOM.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_AECHOR_CUTTING.get(), AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_POASPROUT.get(), AetherIIBlocks.POASPROUT.get(), "natural/");
+//        this.pottedPlant(AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(), AetherIIBlocks.SATIVAL_SHOOT.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_SHIELD_FERN.get(), AetherIIBlocks.SHIELD_FERN.get(), "natural/");
         // Bushes
         this.bush(AetherIIBlocks.HIGHLANDS_BUSH.get());

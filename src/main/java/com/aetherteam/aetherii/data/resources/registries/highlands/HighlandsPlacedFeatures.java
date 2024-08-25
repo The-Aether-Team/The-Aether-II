@@ -52,6 +52,9 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HIGHLANDS_FLOWER_PATCH = createKey("highlands_flower_patch");
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
     public static final ResourceKey<PlacedFeature> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
+    public static final ResourceKey<PlacedFeature> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
+
+
 
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -199,8 +202,6 @@ public class HighlandsPlacedFeatures {
                 RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
                 BiomeFilter.biome()
         );
-                BiomeFilter.biome()
-        );
         register(
                 context,
                 FALLEN_SKYROOT_LOG,
@@ -321,6 +322,11 @@ public class HighlandsPlacedFeatures {
                 PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
         register(context, MAGNETIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MAGNETIC_FLOWER_PATCH),
+                NoiseThresholdCountPlacement.of(0.8, 1, 3),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
+        register(context, ARCTIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_FLOWER_PATCH),
                 NoiseThresholdCountPlacement.of(0.8, 1, 3),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
