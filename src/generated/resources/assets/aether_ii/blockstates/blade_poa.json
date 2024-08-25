@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "aether_ii:block/blade_poa"
+      },
+      {
+        "model": "aether_ii:block/blade_poa",
+        "y": 90
+      }
+    ]
+  }
+}

@@ -46,6 +46,15 @@
                   "Name": "aether_ii:shield_fern"
                 },
                 "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:blade_poa",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 2
               }
             ]
           }

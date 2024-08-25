@@ -398,6 +398,7 @@ public class HighlandsConfiguredFeatures {
                                         .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
                                         .add(AetherIIBlocks.HIGHLAND_FERN.get().defaultBlockState(), 1)
                                         .add(AetherIIBlocks.SHIELD_FERN.get().defaultBlockState(), 2)
+                                        .add(AetherIIBlocks.BLADE_POA.get().defaultBlockState(), 2)
                                         .build())
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )

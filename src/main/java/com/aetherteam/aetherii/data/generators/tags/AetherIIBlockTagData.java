@@ -416,7 +416,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.TARABLOOM.get(),
                 AetherIIBlocks.POASPROUT.get(),
                 AetherIIBlocks.AECHOR_CUTTING.get(),
-                AetherIIBlocks.LILICHIME.get()
+                AetherIIBlocks.LILICHIME.get(),
+                AetherIIBlocks.SATIVAL_SHOOT.get()
         );
         this.tag(BlockTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.get());
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT).add(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
@@ -440,6 +441,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_POASPROUT.get(),
                 AetherIIBlocks.POTTED_SHIELD_FERN.get(),
                 AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(),
+                AetherIIBlocks.POTTED_BLADE_POA.get(),
                 AetherIIBlocks.POTTED_LILICHIME.get()
         );
         this.tag(BlockTags.ENDERMAN_HOLDABLE).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
@@ -448,7 +450,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.TARABLOOM.get(),
                 AetherIIBlocks.LILICHIME.get(),
                 AetherIIBlocks.SHIELD_FERN.get(),
-                AetherIIBlocks.SATIVAL_SHOOT.get()
+                AetherIIBlocks.SATIVAL_SHOOT.get(),
+                AetherIIBlocks.BLADE_POA.get()
 
         );
         this.tag(BlockTags.ICE).add(
