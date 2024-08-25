@@ -434,7 +434,7 @@ public class HighlandsConfiguredFeatures {
                 BLUEBERRY_BUSH,
                 Feature.RANDOM_PATCH,
                 new RandomPatchConfiguration(
-                        100,
+                        55,
                         2,
                         3,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
@@ -770,8 +770,8 @@ public class HighlandsConfiguredFeatures {
         register(context, SKYPINE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
-                        new StraightTrunkPlacer(6, 3, 1), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
-                        new SkypineFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2)),
+                        new StraightTrunkPlacer(6, 4, 1), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
+                        new SkypineFoliagePlacer(UniformInt.of(3, 5), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(2, 0, 2))
                         .ignoreVines()
                         .decorators(List.of(
@@ -834,8 +834,8 @@ public class HighlandsConfiguredFeatures {
         register(context, SKYPINE_IRRADIATED, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
-                        new StraightTrunkPlacer(6, 3, 1), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get().defaultBlockState()),
-                        new SkypineFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2)),
+                        new StraightTrunkPlacer(6, 4, 1), BlockStateProvider.simple(AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get().defaultBlockState()),
+                        new SkypineFoliagePlacer(UniformInt.of(3, 5), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(2, 0, 2))
                         .ignoreVines().decorators(ImmutableList.of(new IrradiationTreeDecorator())).build());
         register(context, WISPROOT_IRRADIATED, Feature.TREE,

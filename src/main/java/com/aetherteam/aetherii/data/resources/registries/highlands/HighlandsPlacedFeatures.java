@@ -359,7 +359,7 @@ public class HighlandsPlacedFeatures {
         register(context, FRIGID_SIERRA_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FRIGID_SIERRA),
                 HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(4))); //16
         register(context, ENDURING_WOODLAND_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_ENDURING_WOODLANDS),
-                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(10, 0.1F, 1)));
+                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(20, 0.1F, 4)));
         register(context, FROZEN_LAKES_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FROZEN_LAKES),
                 HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(1)));
 
