@@ -184,6 +184,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 .addTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS)
                 .add(AetherIIBlocks.ICESTONE.get());
         this.tag(AetherIITags.Blocks.BOULDER_SURVIVES_ON)
+                .add(AetherIIBlocks.HOLYSTONE.get())
                 .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON)
                 .addTag(AetherIITags.Blocks.AETHER_DIRT)
