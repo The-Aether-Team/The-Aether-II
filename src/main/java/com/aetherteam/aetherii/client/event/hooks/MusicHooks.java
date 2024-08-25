@@ -18,10 +18,10 @@ public class MusicHooks {
         if (!(Minecraft.getInstance().screen instanceof WinScreen)) {
 
             long time = Minecraft.getInstance().player.clientLevel.getLevelData().getDayTime() % 24000L;
-            boolean day = time >= 500 && time < 11500;
-            boolean sunset = time >= 11500 && time < 14500;
-            boolean night = time >= 14500 && time < 21500;
-            boolean sunrise = time >= 21500 || (time >= 0 && time < 500);
+            boolean day = time >= 0 && time < 12000;
+            boolean sunset = time >= 12000 && time < 14000;
+            boolean night = time >= 14000 && time < 22000;
+            boolean sunrise = time >= 22000;
 
             if (Minecraft.getInstance().player.position().y <= 80) {
                 return AETHER_CAVES;
