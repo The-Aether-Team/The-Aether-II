@@ -453,7 +453,7 @@ public class HighlandsConfiguredFeatures {
                         16,
                         8,
                         3,
-                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                                 .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
@@ -471,7 +471,7 @@ public class HighlandsConfiguredFeatures {
                         8,
                         3,
                         PlacementUtils.filtered(
-                                Feature.SIMPLE_BLOCK,
+                                AetherIIFeatures.AETHER_FLOWER.get(),
                                 new SimpleBlockConfiguration(
                                         new DualNoiseProvider(
                                                 new InclusiveRange<>(1, 3),
@@ -504,7 +504,7 @@ public class HighlandsConfiguredFeatures {
                         8,
                         3,
                         PlacementUtils.filtered(
-                                Feature.SIMPLE_BLOCK,
+                                AetherIIFeatures.AETHER_FLOWER.get(),
                                 new SimpleBlockConfiguration(
                                         new DualNoiseProvider(
                                                 new InclusiveRange<>(1, 3),
@@ -538,7 +538,7 @@ public class HighlandsConfiguredFeatures {
                         8,
                         3,
                         PlacementUtils.filtered(
-                                Feature.SIMPLE_BLOCK,
+                                AetherIIFeatures.AETHER_FLOWER.get(),
                                 new SimpleBlockConfiguration(
                                         new DualNoiseProvider(
                                                 new InclusiveRange<>(1, 3),

@@ -3,7 +3,7 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "minecraft:simple_block",
+        "type": "aether_ii:aether_flower",
         "config": {
           "to_place": {
             "type": "minecraft:weighted_state_provider",
