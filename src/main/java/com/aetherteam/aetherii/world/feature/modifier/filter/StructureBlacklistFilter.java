@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.world.placementmodifier;
+package com.aetherteam.aetherii.world.feature.modifier.filter;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.mojang.serialization.MapCodec;
@@ -37,6 +37,6 @@ public class StructureBlacklistFilter extends PlacementFilter {
 
     @Override
     public PlacementModifierType<?> type() {
-        return AetherIIPlacementModifiers.STRUCTURE_BLACKLIST_FILTER.get();
+        return AetherIIPlacementModifierTypes.STRUCTURE_BLACKLIST_FILTER.get();
     }
 }
