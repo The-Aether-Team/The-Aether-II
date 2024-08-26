@@ -705,6 +705,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHORTSWORD.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HAMMER.get(), 1, "§9Ability:§r Upgrades Further");
         this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SPEAR.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CROSSBOW.get(), 1, "§9Ability:§r Upgrades Further");
 
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PICKAXE.get(), 1, "§9Ability:§r Levitates Block");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PICKAXE.get(), 2, "§3Use:§r Crouch-Interact");
