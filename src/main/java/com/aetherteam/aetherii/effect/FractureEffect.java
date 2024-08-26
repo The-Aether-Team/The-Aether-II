@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.effect;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.item.AetherIIEffectCures;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -19,13 +18,19 @@ public class FractureEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) { //todo apply multiplier to damage type weakness for mobs to increase it.
-        livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().multiply(1.0, 0.8, 1.0));
-        if (livingEntity.fallDistance <= 0 && this.lastFallDistance > 1) {
-            livingEntity.hurt(livingEntity.damageSources().magic(), (float) (4 << amplifier));
+        livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().multiply(0.75, 1.0, 0.75));
+        if (livingEntity.getDeltaMovement().y() > 0) {
+            livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().multiply(1.0, 0.9, 1.0));
+        }
+        if (this.lastFallDistance == 0.0F) {
+            this.lastFallDistance = livingEntity.fallDistance;
+        }
+        if (livingEntity.fallDistance <= 0 && this.lastFallDistance > 2) {
+            livingEntity.hurt(livingEntity.damageSources().magic(), 1.0F);
             this.lastFallDistance = 0.0F;
         }
         if (livingEntity.isSprinting()) {
-            livingEntity.hurt(livingEntity.damageSources().magic(), (float) (4 << amplifier));
+            livingEntity.hurt(livingEntity.damageSources().magic(), 1.0F);
             livingEntity.setSprinting(false);
         }
         this.lastFallDistance = livingEntity.fallDistance;
@@ -34,8 +39,7 @@ public class FractureEffect extends MobEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        int i = 5 >> amplifier;
-        return i == 0 || duration % i == 0;
+        return true;
     }
 
     @Override

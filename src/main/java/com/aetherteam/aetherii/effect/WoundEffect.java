@@ -13,16 +13,16 @@ import java.util.Set;
 
 public class WoundEffect extends InstantenousMobEffect {
     protected WoundEffect() {
-        super(MobEffectCategory.HARMFUL, 12721951);
+        super(MobEffectCategory.HARMFUL, 13118248);
     }
 
     @Override
     public void applyInstantenousEffect(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity livingEntity, int amplifier, double health) {
-        int damage = (int) (health * (double) (4 << amplifier) + 0.5); //todo total health percentage instead to make it dependent on mob target?
+        //todo total health percentage instead to make it dependent on mob target?
         if (source == null) {
-            livingEntity.hurt(livingEntity.damageSources().magic(), (float) damage); //todo damage sources
+            livingEntity.hurt(livingEntity.damageSources().magic(), 4.0F); //todo damage sources
         } else {
-            livingEntity.hurt(livingEntity.damageSources().indirectMagic(source, indirectSource), (float) damage);
+            livingEntity.hurt(livingEntity.damageSources().indirectMagic(source, indirectSource), 4.0F);
         }
     }
 

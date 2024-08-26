@@ -11,17 +11,19 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
 
     private final Holder<MobEffect> type;
     private final MobEffectInstance instance;
+    private final int buildupReductionRate;
     private final int initialInstanceDuration;
     private int buildup;
     private boolean triggerEffect = false;
 
     public EffectBuildupInstance(EffectBuildupPresets.Preset preset, int buildup) {
-        this(preset.type(), preset.instanceBuilder().get(), buildup);
+        this(preset.type(), preset.instanceBuilder().get(), preset.buildupReductionRate(), buildup);
     }
 
-    public EffectBuildupInstance(Holder<MobEffect> type, MobEffectInstance instance, int buildup) {
+    public EffectBuildupInstance(Holder<MobEffect> type, MobEffectInstance instance, int buildupReductionRate, int buildup) {
         this.type = type;
         this.instance = instance;
+        this.buildupReductionRate = buildupReductionRate;
         this.initialInstanceDuration = instance.getDuration();
         this.buildup = buildup;
     }
@@ -38,7 +40,9 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
             }
             return (this.instance.isInfiniteDuration() || this.instance.getDuration() > 0) && entity.hasEffect(this.type);
         } else {
-            this.buildup--;
+            if (entity.tickCount % 2 == 0) {
+                this.buildup -= this.buildupReductionRate;
+            }
             return this.buildup > 0;
         }
     }
@@ -76,6 +80,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
 
     public CompoundTag save(CompoundTag tag) {
         tag.put("effect_instance", this.instance.save());
+        tag.putInt("buildup_reduction_rate", this.buildupReductionRate);
         tag.putInt("buildup", this.buildup);
         return tag;
     }
@@ -83,8 +88,9 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     public static EffectBuildupInstance load(CompoundTag tag) {
         CompoundTag effectTag = (CompoundTag) tag.get("effect_instance");
         MobEffectInstance effect = MobEffectInstance.load(effectTag);
+        int buildupReductionRate = tag.getInt("buildup_reduction_rate");
         int buildup = tag.getInt("buildup");
-        return new EffectBuildupInstance(effect.getEffect(), effect, buildup);
+        return new EffectBuildupInstance(effect.getEffect(), effect, buildupReductionRate, buildup);
     }
 
     @Override
