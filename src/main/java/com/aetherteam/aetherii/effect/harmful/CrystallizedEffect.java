@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.effect;
+package com.aetherteam.aetherii.effect.harmful;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -7,9 +7,9 @@ import net.neoforged.neoforge.common.EffectCure;
 
 import java.util.Set;
 
-public class StunEffect extends MobEffect {
-    public StunEffect() {
-        super(MobEffectCategory.HARMFUL, 16515010);
+public class CrystallizedEffect extends MobEffect {
+    public CrystallizedEffect() {
+        super(MobEffectCategory.HARMFUL, 9016745);
     }
 
     @Override
@@ -17,3 +17,4 @@ public class StunEffect extends MobEffect {
         cures.clear();
     }
 }
+

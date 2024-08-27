@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.effect;
+package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import net.minecraft.core.Holder;

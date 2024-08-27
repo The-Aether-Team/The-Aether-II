@@ -1,7 +1,6 @@
-package com.aetherteam.aetherii.effect;
+package com.aetherteam.aetherii.effect.harmful;
 
 import net.minecraft.world.effect.InstantenousMobEffect;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -12,7 +11,7 @@ import javax.annotation.Nullable;
 import java.util.Set;
 
 public class WoundEffect extends InstantenousMobEffect {
-    protected WoundEffect() {
+    public WoundEffect() {
         super(MobEffectCategory.HARMFUL, 13118248);
     }
 

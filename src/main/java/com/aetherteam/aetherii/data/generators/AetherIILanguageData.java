@@ -876,9 +876,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Effects
         this.addEffect(AetherIIEffects.WOUND, "Wound");
+        this.addEffect(AetherIIEffects.STUN, "Stun");
         this.addEffect(AetherIIEffects.FRACTURE, "Fracture");
+        this.addEffect(AetherIIEffects.AMBROSIUM_POISONING, "Ambrosium Poisoning");
         this.addEffect(AetherIIEffects.TOXIN, "Toxin");
         this.addEffect(AetherIIEffects.VENOM, "Venom");
+        this.addEffect(AetherIIEffects.CHARGED, "Charged");
+        this.addEffect(AetherIIEffects.WEBBED, "Webbed");
+        this.addEffect(AetherIIEffects.IMMOLATION, "Immolation");
+        this.addEffect(AetherIIEffects.FROSTBITE, "Frostbite");
+        this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
+        this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
 
 
         // Creative Tabs

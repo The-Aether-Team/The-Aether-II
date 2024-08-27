@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.effect;
+package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.item.AetherIIEffectCures;
 import net.minecraft.world.effect.MobEffect;
