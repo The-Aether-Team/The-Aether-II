@@ -53,10 +53,7 @@ import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteShortswordItem;
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteSpearItem;
-import com.aetherteam.aetherii.item.materials.AmbrosiumShardItem;
-import com.aetherteam.aetherii.item.materials.ArcticSnowballItem;
-import com.aetherteam.aetherii.item.materials.SkyrootPineconeItem;
-import com.aetherteam.aetherii.item.materials.SwetGelItem;
+import com.aetherteam.aetherii.item.materials.*;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
 import com.aetherteam.aetherii.item.miscellaneous.BiomeMobSpawnEggItem;
 import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
@@ -218,6 +215,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> PURPLE_SWET_GEL = ITEMS.register("purple_swet_gel", () -> new SwetGelItem(new Item.Properties()));
     public static final DeferredItem<Item> GOLDEN_SWET_GEL = ITEMS.register("golden_swet_gel", () -> new SwetGelItem(new Item.Properties()));
     public static final DeferredItem<Item> WHITE_SWET_GEL = ITEMS.register("white_swet_gel", () -> new SwetGelItem(new Item.Properties()));
+    public static final DeferredItem<Item> SCATTERGLASS_VIAL = ITEMS.register("scatterglass_vial", () -> new VialItem(new Item.Properties()));
     public static final DeferredItem<Item> CHARGE_CORE = ITEMS.register("charge_core", () -> new TreasureItem(new Item.Properties()));
 
     // Food
@@ -241,8 +239,11 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ROASTED_SKYROOT_LIZARD_ON_A_STICK = ITEMS.register("roasted_skyroot_lizard_on_a_stick", () -> new Item(new Item.Properties().food(AetherIIFoods.ROASTED_SKYROOT_LIZARD_ON_A_STICK)));
 
     // Consumables
+    public static final DeferredItem<Item> WATER_VIAL = ITEMS.register("water_vial", () -> new WaterVialItem(new Item.Properties()));
     public static final DeferredItem<Item> BANDAGE = ITEMS.register("bandage", () -> new PreventativeItem(UseAnim.BOW, 15, AetherIIPreventatives.BANDAGE, new Item.Properties()));
     public static final DeferredItem<Item> SPLINT = ITEMS.register("splint", () -> new CurativeItem(UseAnim.BOW, 15, AetherIIEffectCures.SPLINT, new Item.Properties()));
+    public static final DeferredItem<Item> ANTITOXIN_VIAL = ITEMS.register("antitoxin_vial", () -> new PreventativeItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIPreventatives.ANTITOXIN_VIAL, new Item.Properties()));
+    public static final DeferredItem<Item> ANTIVENOM_VIAL = ITEMS.register("antivenom_vial", () -> new PreventativeItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIPreventatives.ANTIVENOM_VIAL, new Item.Properties()));
 
     // Skyroot Buckets
     public static final DeferredItem<Item> SKYROOT_BUCKET = ITEMS.register("skyroot_bucket", () -> new SkyrootBucketItem(Fluids.EMPTY, new Item.Properties().stacksTo(16)));

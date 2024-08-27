@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/consumables/golden_swet_jelly"
+    "layer0": "aether_ii:item/consumables/water_vial"
   }
 }

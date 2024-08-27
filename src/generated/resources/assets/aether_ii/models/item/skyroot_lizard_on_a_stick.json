@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/food/skyroot_lizard_on_a_stick"
+    "layer0": "aether_ii:item/consumables/skyroot_lizard_on_a_stick"
   }
 }

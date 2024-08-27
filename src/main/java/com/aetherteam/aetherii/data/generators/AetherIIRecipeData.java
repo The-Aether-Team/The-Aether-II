@@ -804,6 +804,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("#  ")
                 .unlockedBy("has_brettl_grass", has(AetherIIItems.BRETTL_GRASS))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_VIAL.get(), 4)
+                .define('#', AetherIIBlocks.SCATTERGLASS.get())
+                .pattern("# #")
+                .pattern(" # ")
+                .unlockedBy("has_scatterglass", has(AetherIIBlocks.SCATTERGLASS.get()))
+                .save(consumer);
 
         this.smeltingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(consumer, this.name("quartz_from_smelting_holystone_quartz_ore"));
         this.blastingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(consumer, this.name("quartz_from_blasting_holystone_quartz_ore"));

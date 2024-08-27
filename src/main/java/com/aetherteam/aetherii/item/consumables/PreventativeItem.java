@@ -14,16 +14,23 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class PreventativeItem extends Item {
     private final UseAnim useAnimation;
     private final int useDuration;
+    private final Supplier<ItemStack> remainderItem;
     private final Map<Holder<MobEffect>, Integer> preventativeMap;
 
     public PreventativeItem(UseAnim useAnimation, int useDuration, Map<Holder<MobEffect>, Integer> preventativeMap, Properties properties) {
+        this(useAnimation, useDuration, () -> ItemStack.EMPTY, preventativeMap, properties);
+    }
+
+    public PreventativeItem(UseAnim useAnimation, int useDuration, Supplier<ItemStack> remainderItem, Map<Holder<MobEffect>, Integer> preventativeMap, Properties properties) {
         super(properties);
         this.useAnimation = useAnimation;
         this.useDuration = useDuration;
+        this.remainderItem = remainderItem;
         this.preventativeMap = preventativeMap;
     }
 
@@ -34,13 +41,25 @@ public class PreventativeItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
-        super.finishUsingItem(stack, level, entityLiving);
-        if (entityLiving instanceof ServerPlayer serverplayer) {
-            if (!serverplayer.getAbilities().instabuild) {
-                stack.shrink(1);
+        Player player = entityLiving instanceof Player ? (Player) entityLiving : null;
+        if (player instanceof ServerPlayer serverPlayer) {
+            CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
+        }
+
+        if (player != null) {
+            player.awardStat(Stats.ITEM_USED.get(this));
+            stack.consume(1, player);
+        }
+
+        if (!this.remainderItem.get().isEmpty()) {
+            if (player == null || !player.hasInfiniteMaterials()) {
+                if (stack.isEmpty()) {
+                    return this.remainderItem.get();
+                }
+                if (player != null) {
+                    player.getInventory().add(this.remainderItem.get());
+                }
             }
-            CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, stack);
-            serverplayer.awardStat(Stats.ITEM_USED.get(this));
         }
 
         for (Map.Entry<Holder<MobEffect>, Integer> entry : this.preventativeMap.entrySet()) {

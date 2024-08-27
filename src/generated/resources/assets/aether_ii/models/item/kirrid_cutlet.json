@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/food/kirrid_cutlet"
+    "layer0": "aether_ii:item/consumables/kirrid_cutlet"
   }
 }

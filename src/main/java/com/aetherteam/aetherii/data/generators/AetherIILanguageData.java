@@ -591,6 +591,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
         this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
         this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
+        this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");
         this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
 
         // Food
@@ -614,8 +615,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, "Roasted Skyroot Lizard on a Stick");
 
         // Consumables
+        this.addItem(AetherIIItems.WATER_VIAL, "Water Vial");
         this.addItem(AetherIIItems.BANDAGE, "Bandage");
         this.addItem(AetherIIItems.SPLINT, "Splint");
+        this.addItem(AetherIIItems.ANTITOXIN_VIAL, "Antitoxin Vial");
+        this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
 
         // Skyroot Buckets
         this.addItem(AetherIIItems.SKYROOT_BUCKET, "Skyroot Bucket");
@@ -896,7 +900,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_EQUIPMENT_AND_UTILITIES.get(), "Aether II Equipment & Utilities");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_ARMOR_AND_ACCESSORIES.get(), "Aether II Armor & Accessories");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FOOD_AND_DRINKS.get(), "Aether II Food & Drinks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_CONSUMABLES.get(), "Aether II Consumables");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_INGREDIENTS.get(), "Aether II Ingredients");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_SPAWN_EGGS.get(), "Aether II Spawn Eggs");
 
