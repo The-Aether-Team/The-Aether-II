@@ -30,6 +30,11 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         super(output, id, helper);
     }
 
+    public void cutoutBlock(Block block, String location) {
+        ModelFile model = this.models().withExistingParent(this.name(block), this.mcLoc("block/cube_all")).renderType(ResourceLocation.withDefaultNamespace("cutout")).texture("all", this.texture(this.name(block), location));
+        this.getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(model).build());
+    }
+
     public void grass(Block block, Block dirtBlock) {
         this.grassBlock(block, block, dirtBlock, this.grassBlockTinted(block, dirtBlock));
     }

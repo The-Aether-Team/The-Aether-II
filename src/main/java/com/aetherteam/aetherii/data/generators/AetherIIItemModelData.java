@@ -225,6 +225,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
         this.itemBlockFlat(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), "natural/");
         this.itemBlockFlatItem(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get());
+        this.itemBlock(AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());

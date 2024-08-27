@@ -111,6 +111,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> BRYALINN_MOSS_CARPET = register("bryalinn_moss_carpet", () -> new CarpetBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> BRYALINN_MOSS_VINES = register("bryalinn_moss_vines", () -> new BottomedVineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).replaceable().noCollission().randomTicks().strength(0.1F).sound(SoundType.VINE).ignitedByLava().pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> BRYALINN_MOSS_FLOWERS = register("bryalinn_moss_flowers", () -> new BryalinnFlowersBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> TANGLED_BRANCHES = register("tangled_branches", () -> new Block(Block.Properties.of().noOcclusion().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.WOOD)));
 
     // Magnetic
     public static final DeferredBlock<Block> FERROSITE_SAND = register("ferrosite_sand", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_PURPLE).instrument(NoteBlockInstrument.SNARE).strength(0.5F).sound(SoundType.SAND)));
