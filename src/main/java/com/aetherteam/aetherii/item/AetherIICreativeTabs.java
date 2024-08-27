@@ -522,6 +522,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SPLINT.get());
                 output.accept(AetherIIItems.ANTITOXIN_VIAL.get());
                 output.accept(AetherIIItems.ANTIVENOM_VIAL.get());
+                output.accept(AetherIIItems.HEALING_STONE.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()

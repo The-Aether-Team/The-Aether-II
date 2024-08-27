@@ -79,6 +79,10 @@ public class AetherIIClient {
         registerShieldProperties(AetherIIItems.ZANITE_SHIELD.get());
         registerShieldProperties(AetherIIItems.ARKENIUM_SHIELD.get());
         registerShieldProperties(AetherIIItems.GRAVITITE_SHIELD.get());
+
+        registerHealingStoneProperties(AetherIIItems.HEALING_STONE.get());
+
+        registerGenericProperties();
     }
 
     private static void registerCrossbowProperties(Item item) {
@@ -88,15 +92,22 @@ public class AetherIIClient {
                 livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"), (stack, level, livingEntity, value) ->
                 TieredCrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+    }
 
+    private static void registerShieldProperties(Item item) {
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, livingEntity, value) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
+    }
+
+    private static void registerHealingStoneProperties(Item item) {
+        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), (stack, level, livingEntity, value) ->
+                stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES) != null ? stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES) / 10.0F : 0.0F);
+    }
+
+    private static void registerGenericProperties() {
         ClampedItemPropertyFunction reinforcementProperty = (stack, level, livingEntity, value) -> {
             ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
             return tier != null ? tier.getTier() * 0.1F : Float.NEGATIVE_INFINITY;
         };
         ItemProperties.registerGeneric(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), reinforcementProperty);
-    }
-
-    private static void registerShieldProperties(Item item) {
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, livingEntity, value) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
     }
 }

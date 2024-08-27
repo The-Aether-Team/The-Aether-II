@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "aether_ii:item/healing_stone_1",
+      "predicate": {
+        "aether_ii:charge": 0.1
+      }
+    },
+    {
+      "model": "aether_ii:item/healing_stone_2",
+      "predicate": {
+        "aether_ii:charge": 0.2
+      }
+    },
+    {
+      "model": "aether_ii:item/healing_stone_3",
+      "predicate": {
+        "aether_ii:charge": 0.3
+      }
+    },
+    {
+      "model": "aether_ii:item/healing_stone_4",
+      "predicate": {
+        "aether_ii:charge": 0.4
+      }
+    },
+    {
+      "model": "aether_ii:item/healing_stone_5",
+      "predicate": {
+        "aether_ii:charge": 0.5
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "aether_ii:item/consumables/healing_stone_0"
+  }
+}

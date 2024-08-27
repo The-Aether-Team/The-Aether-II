@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "aether_ii:ambrosium_shard"
+    },
+    "H": {
+      "item": "aether_ii:holystone"
+    }
+  },
+  "pattern": [
+    "AHA",
+    "HHH",
+    "AHA"
+  ],
+  "result": {
+    "components": {
+      "aether_ii:healing_stone_charges": 1
+    },
+    "count": 1,
+    "id": "aether_ii:healing_stone"
+  }
+}
