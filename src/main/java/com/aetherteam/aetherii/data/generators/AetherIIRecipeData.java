@@ -841,6 +841,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         oneToOneConversionRecipe(consumer, Items.LIGHT_BLUE_DYE, AetherIIBlocks.LILICHIME, "light_blue_dye");
         oneToOneConversionRecipe(consumer, Items.BLUE_DYE, AetherIIBlocks.SATIVAL_SHOOT, "blue_dye");
         oneToOneConversionRecipe(consumer, Items.PINK_DYE, AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "pink_dye");
+        oneToOneConversionRecipe(consumer, Items.BROWN_DYE, AetherIIBlocks.SKY_ROOTS, "brown_dye");
 
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)

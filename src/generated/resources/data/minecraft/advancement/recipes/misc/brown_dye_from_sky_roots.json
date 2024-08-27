@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sky_roots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:sky_roots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:brown_dye_from_sky_roots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sky_roots"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:brown_dye_from_sky_roots"
+    ]
+  }
+}
