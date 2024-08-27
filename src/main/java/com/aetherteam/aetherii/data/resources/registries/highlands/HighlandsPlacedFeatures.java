@@ -439,7 +439,7 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, EXPOSED_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BRYALINN_MOSS_FLOOR),
-                NoiseBasedCountPlacement.of(20, 150, 0.0),
+                NoiseBasedCountPlacement.of(35, 50, 0.0),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),

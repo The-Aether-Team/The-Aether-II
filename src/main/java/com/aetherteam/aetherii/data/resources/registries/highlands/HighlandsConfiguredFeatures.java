@@ -33,10 +33,10 @@ import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.PinkPetalsBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -170,7 +170,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_CEILING = createKey("coarse_aether_dirt_ceiling");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_FROSTED_CEILING = createKey("coarse_aether_dirt_frosted_ceiling");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CEILING = createKey("ice_ceiling");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_VEGETATION = createKey("bryalinn_moss_vegetation");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_CARPET = createKey("bryalinn_moss_carpet");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOWERS = createKey("bryalinn_moss_flowers");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_VINES = createKey("bryalinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR = createKey("bryalinn_moss_floor");
 
@@ -970,6 +971,13 @@ public class HighlandsConfiguredFeatures {
                 OreConfiguration.target(HOLYSTONE_TEST, AetherIIBlocks.GRAVITITE_ORE.get().defaultBlockState()),
                 OreConfiguration.target(UNDERSHALE_TEST, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get().defaultBlockState()));
 
+        SimpleWeightedRandomList.Builder<BlockState> bryalinnFlowers = SimpleWeightedRandomList.builder();
+        for (int i = 1; i <= 4; i++) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                bryalinnFlowers.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get().defaultBlockState().setValue(BryalinnFlowersBlock.AMOUNT, i).setValue(BryalinnFlowersBlock.FACING, direction), 1);
+            }
+        }
+
         register(
                 context,
                 SKY_ROOTS,
@@ -1155,13 +1163,23 @@ public class HighlandsConfiguredFeatures {
                 )
         );
         register(context,
-                BRYALINN_MOSS_VEGETATION,
+                BRYALINN_MOSS_CARPET,
                 Feature.RANDOM_PATCH,
                 new RandomPatchConfiguration(
                         3,
                         2,
                         2,
                         PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.solid(BlockPos.ZERO.below())))
+                )
+        );
+        FeatureUtils.register(context,
+                BRYALINN_MOSS_FLOWERS,
+                Feature.FLOWER,
+                new RandomPatchConfiguration(
+                        3,
+                        2,
+                        2,
+                        PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(bryalinnFlowers)))
                 )
         );
         register(context,
@@ -1178,15 +1196,16 @@ public class HighlandsConfiguredFeatures {
                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
                         PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                                 List.of(
-                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_VEGETATION)), 0.3F),
-                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F)
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_CARPET)), 0.2F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_FLOWERS)), 0.3F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.1F)
                                 ),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
                         0.35F,
                         5,
-                        0.8F,
+                        0.925F,
                         UniformInt.of(1, 4),
                         0.5F
                 )

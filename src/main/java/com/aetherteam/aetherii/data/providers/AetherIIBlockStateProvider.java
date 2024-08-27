@@ -230,13 +230,29 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
     }
 
     public void bryalinnFlowers(Block block) {
-        this.getVariantBuilder(block).forAllStates((state) -> {
-            ModelFile model = this.models().withExistingParent(this.name(block), this.modLoc("block/template_bryalinn_moss_flowers"))
+        ResourceLocation texture = this.texture(this.name(block), "natural/");
+
+        MultiPartBlockStateBuilder builder = this.getMultipartBuilder(block);
+        for (int i = 1; i <= 4; i++) {
+            ModelFile model = this.models().withExistingParent(this.name(block) + "_" + i, this.modLoc("block/template_bryalinn_moss_flowers_" + i))
+                    .ao(false)
                     .renderType(ResourceLocation.withDefaultNamespace("cutout"))
-                    .texture("0", this.texture(this.name(block), "natural/"))
-                    .texture("particle", this.texture(this.name(block), "natural/"));
-            return ConfiguredModel.builder().modelFile(model).build();
-        });
+                    .texture("0", texture)
+                    .texture("particle", texture);
+
+            builder = builder.part().modelFile(model).addModel()
+                    .condition(BryalinnFlowersBlock.FACING, Direction.NORTH).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(90).addModel()
+                    .condition(BryalinnFlowersBlock.FACING, Direction.EAST).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(180).addModel()
+                    .condition(BryalinnFlowersBlock.FACING, Direction.SOUTH).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(270).addModel()
+                    .condition(BryalinnFlowersBlock.FACING, Direction.WEST).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+        }
     }
 
     public void snowLayer(Block block, Block base) {

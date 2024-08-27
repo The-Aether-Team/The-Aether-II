@@ -224,6 +224,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
         this.itemBlockFlat(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), "natural/");
+        this.itemBlockFlatItem(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get());
 
         // Magnetic
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
@@ -351,9 +352,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.HESPEROSE.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.TARABLOOM.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.POASPROUT.get(), "natural/");
-        this.lilichime(AetherIIBlocks.LILICHIME.get());
-        this.sativalShoot(AetherIIBlocks.SATIVAL_SHOOT.get());
-        this.sativalShoot(AetherIIBlocks.BLADE_POA.get());
+        this.itemBlockFlatItem(AetherIIBlocks.LILICHIME.get());
+        this.itemBlockFlat0(AetherIIBlocks.SATIVAL_SHOOT.get());
+        this.itemBlockFlat0(AetherIIBlocks.BLADE_POA.get());
         this.itemBlockFlat(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Bushes
@@ -365,7 +366,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.orangeTree(AetherIIBlocks.ORANGE_TREE.get());
 
         // Valkyrie Sprout
-        this.valkyrieSprout(AetherIIBlocks.VALKYRIE_SPROUT.get());
+        this.itemBlockFlat0(AetherIIBlocks.VALKYRIE_SPROUT.get());
 
         // Ground Decoration
         this.item(AetherIIBlocks.SKYROOT_TWIG.asItem(), "miscellaneous/");

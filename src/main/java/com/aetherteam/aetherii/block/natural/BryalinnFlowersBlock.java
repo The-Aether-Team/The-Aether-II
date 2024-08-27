@@ -49,7 +49,7 @@ public class BryalinnFlowersBlock extends AetherBushBlock implements Bonemealabl
 
     public BryalinnFlowersBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, Integer.valueOf(1)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1));
     }
 
     @Override
@@ -64,9 +64,7 @@ public class BryalinnFlowersBlock extends AetherBushBlock implements Bonemealabl
 
     @Override
     public boolean canBeReplaced(BlockState p_272922_, BlockPlaceContext p_273534_) {
-        return !p_273534_.isSecondaryUseActive() && p_273534_.getItemInHand().is(this.asItem()) && p_272922_.getValue(AMOUNT) < 4
-                ? true
-                : super.canBeReplaced(p_272922_, p_273534_);
+        return !p_273534_.isSecondaryUseActive() && p_273534_.getItemInHand().is(this.asItem()) && p_272922_.getValue(AMOUNT) < 4 || super.canBeReplaced(p_272922_, p_273534_);
     }
 
     @Override
@@ -78,7 +76,7 @@ public class BryalinnFlowersBlock extends AetherBushBlock implements Bonemealabl
     public BlockState getStateForPlacement(BlockPlaceContext p_273158_) {
         BlockState blockstate = p_273158_.getLevel().getBlockState(p_273158_.getClickedPos());
         return blockstate.is(this)
-                ? blockstate.setValue(AMOUNT, Integer.valueOf(Math.min(4, blockstate.getValue(AMOUNT) + 1)))
+                ? blockstate.setValue(AMOUNT, Math.min(4, blockstate.getValue(AMOUNT) + 1))
                 : this.defaultBlockState().setValue(FACING, p_273158_.getHorizontalDirection().getOpposite());
     }
 
@@ -86,7 +84,6 @@ public class BryalinnFlowersBlock extends AetherBushBlock implements Bonemealabl
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_272634_) {
         p_272634_.add(FACING, AMOUNT);
     }
-
 
     @Override
     public boolean isValidBonemealTarget(LevelReader p_272968_, BlockPos p_273762_, BlockState p_273662_) {

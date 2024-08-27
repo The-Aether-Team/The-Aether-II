@@ -12,7 +12,7 @@
     },
     "replaceable": "#aether_ii:aether_underground_blocks",
     "surface": "floor",
-    "vegetation_chance": 0.8,
+    "vegetation_chance": 0.925,
     "vegetation_feature": {
       "feature": {
         "type": "minecraft:random_selector",
@@ -41,14 +41,21 @@
           },
           "features": [
             {
-              "chance": 0.3,
+              "chance": 0.2,
               "feature": {
-                "feature": "aether_ii:bryalinn_moss_vegetation",
+                "feature": "aether_ii:bryalinn_moss_carpet",
                 "placement": []
               }
             },
             {
-              "chance": 0.2,
+              "chance": 0.3,
+              "feature": {
+                "feature": "aether_ii:bryalinn_moss_flowers",
+                "placement": []
+              }
+            },
+            {
+              "chance": 0.1,
               "feature": {
                 "feature": "aether_ii:medium_grass_patch",
                 "placement": []
