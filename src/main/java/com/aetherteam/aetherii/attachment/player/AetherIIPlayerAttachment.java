@@ -17,6 +17,7 @@ import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.gui.screens.ReceivingLevelScreen;
 import net.minecraft.client.gui.screens.WinScreen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.nbt.CompoundTag;
@@ -27,6 +28,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
 
@@ -364,5 +367,17 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     @Override
     public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
         return new AetherIIPlayerSyncPacket(entityID, key, type, value);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void movementInput(Player player, Input input) {
+        boolean isJumping = input.jumping;
+        if (isJumping != this.isJumping()) {
+            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setJumping", isJumping);
+        }
+        boolean isMoving = isJumping || input.up || input.down || input.left || input.right || player.isFallFlying();
+        if (isMoving != this.isMoving()) {
+            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setMoving", isMoving);
+        }
     }
 }

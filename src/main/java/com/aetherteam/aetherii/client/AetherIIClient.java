@@ -1,12 +1,6 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.event.listeners.ClientTooltipsListener;
-import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
-import com.aetherteam.aetherii.client.event.listeners.MusicListener;
-import com.aetherteam.aetherii.client.event.listeners.PlayerRespawnClientListeners;
-import com.aetherteam.aetherii.client.event.listeners.attachment.AerbunnyMountClientListners;
-import com.aetherteam.aetherii.client.event.listeners.attachment.DimensionRenderEffectListeners;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
@@ -44,12 +38,7 @@ public class AetherIIClient {
     public static void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
-        AerbunnyMountClientListners.listen(bus);
-        DimensionRenderEffectListeners.listen(bus);
-        PlayerRespawnClientListeners.listen(bus);
-        GuiExtensionListener.listen(bus);
-        MusicListener.listen(bus);
-        ClientTooltipsListener.listen(bus);
+        AetherIIClientEventListeners.listen(bus);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
@@ -60,7 +49,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerAddLayer);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
-        neoBus.addListener(AetherIIRenderers::bakeModels);
+        neoBus.addListener(AetherIIRenderers::registerBakedModels);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
         neoBus.addListener(AetherIIShaders::registerShaders);
         neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
