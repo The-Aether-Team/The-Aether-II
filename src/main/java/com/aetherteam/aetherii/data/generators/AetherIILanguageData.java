@@ -193,6 +193,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BLADE_POA, "Blade Poa");
         this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
 
+        // Potted Flowers
+        this.addBlock(AetherIIBlocks.POTTED_HIGHLAND_FERN, "Potted Highland Fern");
+        this.addBlock(AetherIIBlocks.POTTED_SHIELD_FERN, "Potted Shield Fern");
+        this.addBlock(AetherIIBlocks.POTTED_HESPEROSE, "Potted Hesperose");
+        this.addBlock(AetherIIBlocks.POTTED_TARABLOOM, "Potted Tarabloom");
+        this.addBlock(AetherIIBlocks.POTTED_POASPROUT, "Potted Poasprout");
+        this.addBlock(AetherIIBlocks.POTTED_SATIVAL_SHOOT, "Potted Satival Shoot");
+        this.addBlock(AetherIIBlocks.POTTED_LILICHIME, "Potted Lilichime");
+        this.addBlock(AetherIIBlocks.POTTED_BLADE_POA, "Potted Blade Poa");
+        this.addBlock(AetherIIBlocks.POTTED_AECHOR_CUTTING, "Potted Aechor Cutting");
+
         // Bushes
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
         this.addBlock(AetherIIBlocks.BLUEBERRY_BUSH, "Blueberry Bush");

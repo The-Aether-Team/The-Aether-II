@@ -180,17 +180,21 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.frostedCross(AetherIIBlocks.TARABLOOM.get());
         this.frostedCross(AetherIIBlocks.POASPROUT.get());
         this.asymmetricalCrossEven(AetherIIBlocks.SATIVAL_SHOOT.get());
-        this.asymmetricalCrossOdd(AetherIIBlocks.BLADE_POA.get());
         this.lilichime(AetherIIBlocks.LILICHIME.get());
+        this.asymmetricalCrossOdd(AetherIIBlocks.BLADE_POA.get());
         this.crossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Potted Flowers
+        this.pottedTintedPlant(AetherIIBlocks.POTTED_HIGHLAND_FERN.get(), AetherIIBlocks.HIGHLAND_FERN.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_SHIELD_FERN.get(), AetherIIBlocks.SHIELD_FERN.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_HESPEROSE.get(), AetherIIBlocks.HESPEROSE.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_TARABLOOM.get(), AetherIIBlocks.TARABLOOM.get(), "natural/");
-        this.pottedPlant(AetherIIBlocks.POTTED_AECHOR_CUTTING.get(), AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_POASPROUT.get(), AetherIIBlocks.POASPROUT.get(), "natural/");
-//        this.pottedPlant(AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(), AetherIIBlocks.SATIVAL_SHOOT.get(), "natural/");
-        this.pottedPlant(AetherIIBlocks.POTTED_SHIELD_FERN.get(), AetherIIBlocks.SHIELD_FERN.get(), "natural/");
+        this.pottedAsymmetricalEvenPlant(AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(), AetherIIBlocks.SATIVAL_SHOOT.get(), "natural/");
+        this.pottedLilichime(AetherIIBlocks.POTTED_LILICHIME.get(), AetherIIBlocks.LILICHIME.get(), "natural/");
+        this.pottedAsymmetricalOddPlant(AetherIIBlocks.POTTED_BLADE_POA.get(), AetherIIBlocks.BLADE_POA.get(), "natural/");
+        this.pottedPlant(AetherIIBlocks.POTTED_AECHOR_CUTTING.get(), AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
+
         // Bushes
         this.bush(AetherIIBlocks.HIGHLANDS_BUSH.get());
         this.crossBlock(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), "natural/");

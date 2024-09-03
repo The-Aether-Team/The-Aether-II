@@ -436,13 +436,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH.get(),
                 AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.POTTED_ORANGE_TREE.get(),
+                AetherIIBlocks.POTTED_HIGHLAND_FERN.get(),
+                AetherIIBlocks.POTTED_SHIELD_FERN.get(),
                 AetherIIBlocks.POTTED_HESPEROSE.get(),
                 AetherIIBlocks.POTTED_TARABLOOM.get(),
                 AetherIIBlocks.POTTED_POASPROUT.get(),
-                AetherIIBlocks.POTTED_SHIELD_FERN.get(),
                 AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(),
+                AetherIIBlocks.POTTED_LILICHIME.get(),
                 AetherIIBlocks.POTTED_BLADE_POA.get(),
-                AetherIIBlocks.POTTED_LILICHIME.get()
+                AetherIIBlocks.POTTED_AECHOR_CUTTING.get()
         );
         this.tag(BlockTags.ENDERMAN_HOLDABLE).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.QUICKSOIL.get(),

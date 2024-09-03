@@ -257,15 +257,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> AECHOR_CUTTING = register("aechor_cutting", () -> new AechorCuttingBlock(Block.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
 
     // Potted Flowers
+    public static final DeferredBlock<FlowerPotBlock> POTTED_HIGHLAND_FERN = BLOCKS.register("potted_highland_fern", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, HIGHLAND_FERN, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_SHIELD_FERN = BLOCKS.register("potted_shield_fern", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SHIELD_FERN, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_HESPEROSE = BLOCKS.register("potted_hesperose", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, HESPEROSE, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_TARABLOOM = BLOCKS.register("potted_tarabloom", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, TARABLOOM, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
-    public static final DeferredBlock<FlowerPotBlock> POTTED_AECHOR_CUTTING = BLOCKS.register("potted_aechor_cutting", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, AECHOR_CUTTING, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_POASPROUT = BLOCKS.register("potted_poasprout", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, POASPROUT, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_SATIVAL_SHOOT = BLOCKS.register("potted_satival_shoot", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SATIVAL_SHOOT, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
-    public static final DeferredBlock<FlowerPotBlock> POTTED_SHIELD_FERN = BLOCKS.register("potted_shield_fern", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SHIELD_FERN, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_LILICHIME = BLOCKS.register("potted_lilichime", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LILICHIME, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
     public static final DeferredBlock<FlowerPotBlock> POTTED_BLADE_POA = BLOCKS.register("potted_blade_poa", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLADE_POA, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
-
+    public static final DeferredBlock<FlowerPotBlock> POTTED_AECHOR_CUTTING = BLOCKS.register("potted_aechor_cutting", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, AECHOR_CUTTING, Block.Properties.ofFullCopy(Blocks.FLOWER_POT)));
 
     // Bushes
     public static final DeferredBlock<Block> HIGHLANDS_BUSH = register("highlands_bush", () -> new HighlandsBushBlock(Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).strength(0.2F).sound(SoundType.GRASS).noOcclusion().isValidSpawn(AetherIIBlocks::spawnOnLeaves).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never)));
@@ -619,15 +619,19 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.GREATOAK_SAPLING.get()), AetherIIBlocks.POTTED_GREATOAK_SAPLING);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.GREATBOA_SAPLING.get()), AetherIIBlocks.POTTED_GREATBOA_SAPLING);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.AMBEROOT_SAPLING.get()), AetherIIBlocks.POTTED_AMBEROOT_SAPLING);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.HIGHLAND_FERN.get()), AetherIIBlocks.POTTED_HIGHLAND_FERN);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.SHIELD_FERN.get()), AetherIIBlocks.POTTED_SHIELD_FERN);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.HESPEROSE.get()), AetherIIBlocks.POTTED_HESPEROSE);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.TARABLOOM.get()), AetherIIBlocks.POTTED_TARABLOOM);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.POASPROUT.get()), AetherIIBlocks.POTTED_POASPROUT);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.SATIVAL_SHOOT.get()), AetherIIBlocks.POTTED_SATIVAL_SHOOT);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.LILICHIME.get()), AetherIIBlocks.POTTED_LILICHIME);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLADE_POA.get()), AetherIIBlocks.POTTED_BLADE_POA);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.AECHOR_CUTTING.get()), AetherIIBlocks.POTTED_AECHOR_CUTTING);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.HIGHLANDS_BUSH.get()), AetherIIBlocks.POTTED_HIGHLANDS_BUSH);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLUEBERRY_BUSH.get()), AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get()), AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.ORANGE_TREE.get()), AetherIIBlocks.POTTED_ORANGE_TREE);
-        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.POASPROUT.get()), AetherIIBlocks.POTTED_POASPROUT);
-        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.SHIELD_FERN.get()), AetherIIBlocks.POTTED_SHIELD_FERN);
     }
 
     public static void registerFlammability() {
@@ -665,6 +669,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AETHER_SHORT_GRASS.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.AETHER_LONG_GRASS.get(), 60, 100);
+        fireBlockAccessor.callSetFlammable(AetherIIBlocks.HIGHLAND_FERN.get(), 60, 100);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.HIGHLANDS_BUSH.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.BLUEBERRY_BUSH.get(), 30, 60);
         fireBlockAccessor.callSetFlammable(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(), 60, 100);

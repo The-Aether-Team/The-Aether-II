@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/flower_pot_lilichime",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "flower": "aether_ii:block/natural/lilichime"
+  }
+}

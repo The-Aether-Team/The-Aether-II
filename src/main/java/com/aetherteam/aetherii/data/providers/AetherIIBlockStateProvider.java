@@ -479,7 +479,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                     .renderType(ResourceLocation.withDefaultNamespace("cutout"));
             return ConfiguredModel.builder().modelFile(model).build();
         });
-
     }
 
     public void asymmetricalCrossEven(Block block) {
@@ -498,6 +497,34 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("particle", this.extend(this.texture(this.name(block), "natural/"), "_0"))
                 .renderType(ResourceLocation.withDefaultNamespace("cutout"));
         this.getVariantBuilder(block).partialState().addModels(ConfiguredModel.builder().modelFile(model).build()).addModels(ConfiguredModel.builder().modelFile(model).rotationY(90).build());
+    }
+
+    public void pottedTintedPlant(Block block, Block flower, String location) {
+        ModelFile pot = this.models().withExistingParent(this.name(block), this.mcLoc("block/tinted_flower_pot_cross")).texture("plant", this.modLoc("block/" + location + this.name(flower))).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public void pottedAsymmetricalEvenPlant(Block block, Block flower, String location) {
+        ModelFile pot = this.models().withExistingParent(this.name(block), this.modLoc("block/flower_pot_asymmetrical_cross_even"))
+                .texture("0", this.extend(this.texture(this.name(flower), location), "_0"))
+                .texture("1", this.extend(this.texture(this.name(flower), location), "_1"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public void pottedAsymmetricalOddPlant(Block block, Block flower, String location) {
+        ModelFile pot = this.models().withExistingParent(this.name(block), this.modLoc("block/flower_pot_asymmetrical_cross_odd"))
+                .texture("0", this.extend(this.texture(this.name(flower), location), "_0"))
+                .texture("1", this.extend(this.texture(this.name(flower), location), "_1"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public void pottedLilichime(Block block, Block flower, String location) {
+        ModelFile pot = this.models().withExistingParent(this.name(block), this.modLoc("block/flower_pot_lilichime"))
+                .texture("flower", this.texture(this.name(flower), location))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
     }
 
     public void shortGrass(Block block) {
