@@ -907,6 +907,17 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(moaEgg));
     }
 
+    public void torchBlock(Block block, Block wall) {
+        ModelFile torch = this.models().withExistingParent(this.name(block), this.modLoc("block/template_tall_torch")).texture("torch", this.texture(this.name(block), "utility/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        ModelFile wallTorch = this.models().withExistingParent(this.name(wall), this.modLoc("block/template_tall_wall_torch")).texture("torch", this.texture(this.name(block), "utility/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        this.simpleBlock(block, torch);
+        getVariantBuilder(wall).forAllStates(state ->
+                ConfiguredModel.builder()
+                        .modelFile(wallTorch)
+                        .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 90) % 360)
+                        .build());
+    }
+
     public void skyrootCraftingTable(Block block, Block baseBlock, String location) {
         ResourceLocation baseTexture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/" + location + this.name(baseBlock));
         ModelFile workbench = this.models().cube(this.name(block),
