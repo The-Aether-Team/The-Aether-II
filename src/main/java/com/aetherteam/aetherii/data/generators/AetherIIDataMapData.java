@@ -62,8 +62,15 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIBlocks.AETHER_SHORT_GRASS, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.AETHER_MEDIUM_GRASS, 0.3F);
         this.addCompost(compostables, AetherIIBlocks.AETHER_LONG_GRASS, 0.3F);
+        this.addCompost(compostables, AetherIIBlocks.HIGHLAND_FERN, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.SHIELD_FERN, 0.65F);
         this.addCompost(compostables, AetherIIBlocks.HESPEROSE, 0.65F);
         this.addCompost(compostables, AetherIIBlocks.TARABLOOM, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.POASPROUT, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.SATIVAL_SHOOT, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.LILICHIME, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.BLADE_POA, 0.65F);
+        this.addCompost(compostables, AetherIIBlocks.AECHOR_CUTTING, 0.65F);
         this.addCompost(compostables, AetherIIBlocks.HIGHLANDS_BUSH, 0.5F);
         this.addCompost(compostables, AetherIIBlocks.BLUEBERRY_BUSH, 0.5F);
         this.addCompost(compostables, AetherIIBlocks.BLUEBERRY_BUSH_STEM, 0.5F);
