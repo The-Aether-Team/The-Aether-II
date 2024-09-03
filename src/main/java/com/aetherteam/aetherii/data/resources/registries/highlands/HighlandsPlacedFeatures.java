@@ -312,17 +312,17 @@ public class HighlandsPlacedFeatures {
         register(context, HIGHFIELDS_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHFIELDS_FLOWER_PATCH),
                 NoiseThresholdCountPlacement.of(0.8, 1, 3),
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome());
         register(context, MAGNETIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MAGNETIC_FLOWER_PATCH),
                 NoiseThresholdCountPlacement.of(0.8, 1, 3),
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome());
         register(context, ARCTIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_FLOWER_PATCH),
                 NoiseThresholdCountPlacement.of(0.8, 1, 3),
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP,
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BiomeFilter.biome());
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
