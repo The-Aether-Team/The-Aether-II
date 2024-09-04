@@ -13,7 +13,6 @@ import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
-import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumAxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumPickaxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.arkenium.ArkeniumShovelItem;
@@ -321,7 +320,8 @@ public class AetherIIItems {
     public static void registerTooltips(Player player, ItemStack itemStack, List<Component> itemTooltips) {
         EquipmentUtil.addAbilityTooltips(player, itemStack, itemTooltips);
         EquipmentUtil.addShieldTooltips(itemTooltips, itemStack);
-        EquipmentUtil.addGloveTooltips(player, itemTooltips, itemStack);
+        EquipmentUtil.addArmorTooltips(player, itemTooltips, itemStack);
+        EquipmentUtil.addGloveTooltips(player, itemTooltips, itemStack); //todo move to glovesitem class.
         EquipmentUtil.addReinforcingTooltip(itemStack, itemTooltips);
     }
 }
