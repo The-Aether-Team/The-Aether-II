@@ -323,5 +323,6 @@ public class AetherIIItems {
         EquipmentUtil.addArmorTooltips(player, itemTooltips, itemStack);
         EquipmentUtil.addGloveTooltips(player, itemTooltips, itemStack); //todo move to glovesitem class.
         EquipmentUtil.addReinforcingTooltip(itemStack, itemTooltips);
+        EquipmentUtil.addEffectResistanceTooltips(player, itemStack, itemTooltips);
     }
 }

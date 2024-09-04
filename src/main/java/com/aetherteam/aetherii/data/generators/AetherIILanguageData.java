@@ -877,6 +877,18 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.STAB_DAMAGE.get(), "Stab Damage");
         this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.get(), "Shield Stamina Used");
         this.addAttribute(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION.get(), "Shield Cooldown Speed");
+        this.addAttribute(AetherIIAttributes.WOUND_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.STUN_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.FRACTURE_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.AMBROSIUM_POISONING_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.TOXIN_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.VENOM_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.CHARGED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.WEBBED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.IMMOLATION_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.FROSTBITE_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.FUNGAL_ROT_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.CRYSTALLIZED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
 
 
         // Effects
