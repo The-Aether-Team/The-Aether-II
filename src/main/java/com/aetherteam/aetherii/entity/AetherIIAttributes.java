@@ -36,18 +36,18 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_REDUCTION = ATTRIBUTES.register("shield_stamina_reduction", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_reduction", 0.0, 0.0, 500.0));
     public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_RESTORATION = ATTRIBUTES.register("shield_stamina_restoration", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_restoration", 0.0, 0.0, 500.0));
 
-    public static final DeferredHolder<Attribute, Attribute> WOUND_EFFECT_RESISTANCE = ATTRIBUTES.register("wound_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.wound_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> STUN_EFFECT_RESISTANCE = ATTRIBUTES.register("stun_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.stun_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> FRACTURE_EFFECT_RESISTANCE = ATTRIBUTES.register("fracture_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.fracture_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> AMBROSIUM_POISONING_EFFECT_RESISTANCE = ATTRIBUTES.register("ambrosium_poisoning_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.ambrosium_poisoning_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> TOXIN_EFFECT_RESISTANCE = ATTRIBUTES.register("toxin_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.toxin_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> VENOM_EFFECT_RESISTANCE = ATTRIBUTES.register("venom_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.venom_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> CHARGED_EFFECT_RESISTANCE = ATTRIBUTES.register("charged_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.charged_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> WEBBED_EFFECT_RESISTANCE = ATTRIBUTES.register("webbed_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.webbed_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> IMMOLATION_EFFECT_RESISTANCE = ATTRIBUTES.register("immolation_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.immolation_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> FROSTBITE_EFFECT_RESISTANCE = ATTRIBUTES.register("frostbite_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.frostbite_effect_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> FUNGAL_ROT_EFFECT_RESISTANCE = ATTRIBUTES.register("fungal_rot_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.fungal_rot_resistance", 1.0, 0.0, 10.0));
-    public static final DeferredHolder<Attribute, Attribute> CRYSTALLIZED_EFFECT_RESISTANCE = ATTRIBUTES.register("crystallized_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.crystallized_resistance", 1.0, 0.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> WOUND_EFFECT_RESISTANCE = ATTRIBUTES.register("wound_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.wound_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> STUN_EFFECT_RESISTANCE = ATTRIBUTES.register("stun_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.stun_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> FRACTURE_EFFECT_RESISTANCE = ATTRIBUTES.register("fracture_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.fracture_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> AMBROSIUM_POISONING_EFFECT_RESISTANCE = ATTRIBUTES.register("ambrosium_poisoning_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.ambrosium_poisoning_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> TOXIN_EFFECT_RESISTANCE = ATTRIBUTES.register("toxin_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.toxin_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> VENOM_EFFECT_RESISTANCE = ATTRIBUTES.register("venom_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.venom_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> CHARGED_EFFECT_RESISTANCE = ATTRIBUTES.register("charged_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.charged_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> WEBBED_EFFECT_RESISTANCE = ATTRIBUTES.register("webbed_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.webbed_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> IMMOLATION_EFFECT_RESISTANCE = ATTRIBUTES.register("immolation_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.immolation_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> FROSTBITE_EFFECT_RESISTANCE = ATTRIBUTES.register("frostbite_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.frostbite_effect_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> FUNGAL_ROT_EFFECT_RESISTANCE = ATTRIBUTES.register("fungal_rot_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.fungal_rot_resistance", 0.0, -10.0, 10.0));
+    public static final DeferredHolder<Attribute, Attribute> CRYSTALLIZED_EFFECT_RESISTANCE = ATTRIBUTES.register("crystallized_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.crystallized_resistance", 0.0, -10.0, 10.0));
 
     public static void registerEntityAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, SLASH_DAMAGE, 0.0);
@@ -69,5 +69,18 @@ public class AetherIIAttributes {
 
         event.add(EntityType.PLAYER, SHIELD_STAMINA_REDUCTION, 0.0);
         event.add(EntityType.PLAYER, SHIELD_STAMINA_RESTORATION, 2.0);
+
+        event.add(EntityType.PLAYER, WOUND_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, STUN_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, FRACTURE_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, AMBROSIUM_POISONING_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, TOXIN_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, VENOM_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, CHARGED_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, WEBBED_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, IMMOLATION_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, FROSTBITE_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, FUNGAL_ROT_EFFECT_RESISTANCE, 0.0);
+        event.add(EntityType.PLAYER, CRYSTALLIZED_EFFECT_RESISTANCE, 0.0);
     }
 }

@@ -67,7 +67,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
             double modifiedAmount = amount;
             if (AetherIIEffectResistances.RESISTANCES.containsKey(effect) && AetherIIEffectResistances.RESISTANCES.get(effect) != null) {
                 if (this.entity.getAttributes().hasAttribute(AetherIIEffectResistances.RESISTANCES.get(effect))) {
-                    modifiedAmount *= this.entity.getAttributeValue(AetherIIEffectResistances.RESISTANCES.get(effect));
+                    modifiedAmount -= modifiedAmount * this.entity.getAttributeValue(AetherIIEffectResistances.RESISTANCES.get(effect));
                 }
             }
             if (!this.activeBuildups.containsKey(effect)) {
