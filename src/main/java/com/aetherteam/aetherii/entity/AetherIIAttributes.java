@@ -34,7 +34,7 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> STAB_DAMAGE = ATTRIBUTES.register("stab_damage", () -> new RangedAttribute("attributes.aether_ii.stab_damage", 0.0, 0.0, 1024.0));
 
     public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_REDUCTION = ATTRIBUTES.register("shield_stamina_reduction", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_reduction", 0.0, 0.0, 500.0));
-    public static final DeferredHolder<Attribute, Attribute> SHIELD_STAMINA_RESTORATION = ATTRIBUTES.register("shield_stamina_restoration", () -> new RangedAttribute("attributes.aether_ii.shield_stamina_restoration", 0.0, 0.0, 500.0));
+    public static final DeferredHolder<Attribute, Attribute> SHIELD_COOLDOWN_REDUCTION = ATTRIBUTES.register("shield_cooldown_reduction", () -> new RangedAttribute("attributes.aether_ii.shield_cooldown_reduction", 0.0, 0.0, 300.0));
 
     public static final DeferredHolder<Attribute, Attribute> WOUND_EFFECT_RESISTANCE = ATTRIBUTES.register("wound_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.wound_effect_resistance", 0.0, -10.0, 10.0));
     public static final DeferredHolder<Attribute, Attribute> STUN_EFFECT_RESISTANCE = ATTRIBUTES.register("stun_effect_resistance", () -> new RangedAttribute("attributes.aether_ii.stun_effect_resistance", 0.0, -10.0, 10.0));
@@ -68,7 +68,7 @@ public class AetherIIAttributes {
         event.add(EntityType.PLAYER, STAB_DAMAGE, 2.0);
 
         event.add(EntityType.PLAYER, SHIELD_STAMINA_REDUCTION, 0.0);
-        event.add(EntityType.PLAYER, SHIELD_STAMINA_RESTORATION, 2.0);
+        event.add(EntityType.PLAYER, SHIELD_COOLDOWN_REDUCTION, 0.0);
 
         event.add(EntityType.PLAYER, WOUND_EFFECT_RESISTANCE, 0.0);
         event.add(EntityType.PLAYER, STUN_EFFECT_RESISTANCE, 0.0);

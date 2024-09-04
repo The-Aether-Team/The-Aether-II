@@ -9,7 +9,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import java.util.List;
 
-public class AetherIIDamageStats { //todo tooltip functionality
+public class AetherIIDamageStats {
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_SHORTSWORD = List.of(slashDamageModifer(3.0));
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_HAMMER = List.of(impactDamageModifer(3.0));
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_SPEAR = List.of(pierceDamageModifer(3.0));

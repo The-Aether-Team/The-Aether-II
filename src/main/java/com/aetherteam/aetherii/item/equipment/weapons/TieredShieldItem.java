@@ -26,7 +26,7 @@ public class TieredShieldItem extends ShieldItem {
 
     public static ItemAttributeModifiers createAttributes(float staminaReductionRate) {
         return ItemAttributeModifiers.builder()
-                .add(AetherIIAttributes.SHIELD_STAMINA_REDUCTION, new AttributeModifier(BASE_SHIELD_STAMINA_REDUCTION_ID, staminaReductionRate, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND) //todo is there a way to have custom slot groups
+                .add(AetherIIAttributes.SHIELD_STAMINA_REDUCTION, new AttributeModifier(BASE_SHIELD_STAMINA_REDUCTION_ID, staminaReductionRate, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND)
                 .build();
     }
 

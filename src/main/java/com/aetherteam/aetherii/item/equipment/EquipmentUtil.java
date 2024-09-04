@@ -202,7 +202,7 @@ public final class EquipmentUtil {
         if (stack.getItem() instanceof GlovesItem) {
             int attributeTooltip = components.size() - 1;
 
-            Component attributeText = Component.translatable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.value().getDescriptionId());
+            Component attributeText = Component.translatable(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION.value().getDescriptionId());
 
             for (int i = components.size() - 1; i >= 0; i--) {
                 Component component = components.get(i);
@@ -213,16 +213,16 @@ public final class EquipmentUtil {
 
             int value = 0;
             for (AttributeModifier entry : AccessoriesAPI.getAttributeModifiers(stack, player, AetherIIAccessorySlots.getHandwearSlotType().slotName(), 0).getAttributeModifiers(false).values()) {
-                if (entry.id().getPath().contains(GlovesItem.BASE_GLOVES_STAMINA_RESTORATION_ID.getNamespace())) {
-                    value = (int) ((entry.amount() / DamageSystemAttachment.MAX_SHIELD_STAMINA) * 100);
+                if (entry.id().getPath().contains(GlovesItem.BASE_GLOVES_COOLDOWN_RESTORATION_ID.getNamespace())) {
+                    value = (int) ((entry.amount() / 300.0F) * 100);
                 }
             }
             components.remove(attributeTooltip);
-            components.add(attributeTooltip, Component.empty().append(Component.translatable("attribute.modifier.equals.0", "+" + value + "%", Component.translatable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.value().getDescriptionId())).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
+            components.add(attributeTooltip, Component.empty().append(Component.translatable("attribute.modifier.equals.0", "+" + value + "%", Component.translatable(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION.value().getDescriptionId())).withStyle(AetherIIItems.WEAPON_TOOLTIP_COLOR)));
         }
     }
 
-    public static void addReinforcingTooltip(ItemStack stack, List<Component> components) { //todo component tooltip?
+    public static void addReinforcingTooltip(ItemStack stack, List<Component> components) {
         ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
         if (tier != null) {
             int position = 1;
@@ -234,7 +234,7 @@ public final class EquipmentUtil {
                     break;
                 }
             }
-            components.add(position, Component.literal("Reinforcement ").append(Component.translatable("enchantment.level." + tier.getTier())).withColor(14408667));
+            components.add(position, Component.literal("Reinforcement ").append(Component.translatable("enchantment.level." + tier.getTier())).withColor(14408667)); //todo component tooltip?
         }
     }
 }

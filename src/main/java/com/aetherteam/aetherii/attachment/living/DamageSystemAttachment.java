@@ -55,8 +55,7 @@ public class DamageSystemAttachment implements INBTSynchable {
             if (player.tickCount % 5 == 0) {
                 if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
                     if (!player.isBlocking()) {
-                        int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION);
-                        attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + restore));
+                        attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + 2));
                     }
                 }
             }
@@ -135,13 +134,17 @@ public class DamageSystemAttachment implements INBTSynchable {
     public void buildUpShieldStun(LivingEntity entity, DamageSource source) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
             if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) {
-                int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
+                int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2;
+                int cooldown;
                 if (entity.getUseItem().getItem() instanceof TieredShieldItem) {
                     rate = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_REDUCTION);
+                    cooldown = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION);
+                } else {
+                    cooldown = 0;
                 }
                 this.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, this.getShieldStamina() - rate));
                 if (this.getShieldStamina() <= 0) {
-                    player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300));
+                    player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300 - cooldown));
                     player.stopUsingItem();
                 }
             }
