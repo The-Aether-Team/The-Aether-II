@@ -1,8 +1,10 @@
 package com.aetherteam.aetherii.attachment.living;
 
+import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
+import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.core.Holder;
@@ -62,10 +64,16 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {
         Holder<MobEffect> effect = buildup.type();
         if (!this.entity.hasEffect(effect)) {
+            double modifiedAmount = amount;
+            if (AetherIIEffectResistances.RESISTANCES.containsKey(effect) && AetherIIEffectResistances.RESISTANCES.get(effect) != null) {
+                if (this.entity.getAttributes().hasAttribute(AetherIIEffectResistances.RESISTANCES.get(effect))) {
+                    modifiedAmount *= this.entity.getAttributeValue(AetherIIEffectResistances.RESISTANCES.get(effect));
+                }
+            }
             if (!this.activeBuildups.containsKey(effect)) {
-                this.activeBuildups.put(effect, new EffectBuildupInstance(buildup, amount));
+                this.activeBuildups.put(effect, new EffectBuildupInstance(buildup, (int) modifiedAmount));
             } else {
-                this.activeBuildups.get(effect).increaseBuildup(amount);
+                this.activeBuildups.get(effect).increaseBuildup((int) modifiedAmount);
             }
             this.loadingSync = true;
         }
