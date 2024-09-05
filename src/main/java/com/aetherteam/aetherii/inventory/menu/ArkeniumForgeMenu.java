@@ -27,10 +27,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ArkeniumForgeMenu extends AbstractContainerMenu {
     public static final List<Holder<Item>> REINFORCEABLE = List.of(
@@ -254,7 +251,14 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                 int secondaryCost = this.getSecondaryCostForTier(tierToUpgradeTo);
                 if (tier != null && primaryCost != -1 && secondaryCost != -1) {
                     input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
-                    input.set(DataComponents.MAX_DAMAGE, input.getMaxDamage() + tier.getExtraDurability());
+
+                    int minTier = 0;
+                    if (reinforcementTier != null) {
+                        minTier = reinforcementTier.getTier();
+                    }
+                    int extraDurability = List.of(ReinforcementTier.values()).subList(minTier, tierToUpgradeTo).stream().mapToInt(ReinforcementTier::getExtraDurability).sum();
+                    input.set(DataComponents.MAX_DAMAGE, input.getMaxDamage() + extraDurability);
+
                     this.getPrimaryMaterial().shrink(primaryCost);
                     this.getSecondaryMaterial().shrink(secondaryCost);
                     return true;
@@ -417,8 +421,8 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             for (int i = costs.size() - 1; i >= 0; i--) {
                 ReinforcementTier.Cost cost = costs.get(i);
                 if (cost != null) {
-                    if (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= this.getPrimaryCostForTier(i + 1)
-                            && this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= this.getSecondaryCostForTier(i + 1)) {
+                    if (((cost.primaryMaterial().asItem() == Items.AIR && cost.secondaryMaterial().asItem() != Items.AIR) || (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= this.getPrimaryCostForTier(i + 1)))
+                            && ((cost.primaryMaterial().asItem() != Items.AIR && cost.secondaryMaterial().asItem() == Items.AIR) || (this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= this.getSecondaryCostForTier(i + 1)))) {
                         return i + 1;
                     }
                 }
