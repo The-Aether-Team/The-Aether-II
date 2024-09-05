@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.*;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -190,7 +191,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                 ItemStack inResultSlot = stacks.get(9);
                 if (inResultSlot.isEmpty()) {
                     if (ItemStack.isSameItem(input, result)) {
-                        return input.getDamageValue() > 0;
+                        return !input.has(DataComponents.MAX_DAMAGE) || input.getDamageValue() > 0;
                     } else {
                         return true;
                     }
@@ -213,7 +214,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
             ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
             ItemStack output = stacks.get(9);
             if (output.isEmpty()) {
-                if (ItemStack.isSameItem(input, result)) {
+                if (ItemStack.isSameItem(input, result) && input.has(DataComponents.MAX_DAMAGE) && input.getDamageValue() > 0) {
                     ItemStack copy = input.copy();
                     copy.setDamageValue(0);
                     stacks.set(9, copy);

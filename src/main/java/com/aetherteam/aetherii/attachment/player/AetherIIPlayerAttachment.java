@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
@@ -26,6 +27,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -113,6 +115,16 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         this.syncAfterJoin(player);
         this.syncClients(player);
         this.checkToRemoveAerbunny(player);
+        this.handleHealingStoneHealth(player);
+    }
+
+    private void handleHealingStoneHealth(Player player) {
+        if (player.getAttribute(Attributes.MAX_HEALTH).hasModifier(HealingStoneItem.BONUS_HEALTH)) {
+            double maxHealthWithoutBonus = player.getAttributeValue(Attributes.MAX_HEALTH) - player.getAttribute(Attributes.MAX_HEALTH).getModifier(HealingStoneItem.BONUS_HEALTH).amount();
+            if (player.getHealth() <= maxHealthWithoutBonus) {
+                player.getAttribute(Attributes.MAX_HEALTH).removeModifier(HealingStoneItem.BONUS_HEALTH);
+            }
+        }
     }
 
     private void syncAfterJoin(Player player) {
