@@ -181,14 +181,19 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     private boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<AltarEnchantingRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
-        if (!stacks.get(0).isEmpty() && recipeHolder != null) {
+        ItemStack input = stacks.get(0);
+        if (!input.isEmpty() && recipeHolder != null) {
             ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
             if (result.isEmpty()) {
                 return false;
             } else {
                 ItemStack inResultSlot = stacks.get(9);
                 if (inResultSlot.isEmpty()) {
-                    return true;
+                    if (ItemStack.isSameItem(input, result)) {
+                        return input.getDamageValue() > 0;
+                    } else {
+                        return true;
+                    }
                 } else if (!ItemStack.isSameItem(inResultSlot, result)) {
                     return false;
                 } else if (inResultSlot.getCount() + result.getCount() <= maxStackSize && inResultSlot.getCount() + result.getCount() <= inResultSlot.getMaxStackSize()) {
@@ -208,11 +213,16 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
             ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
             ItemStack output = stacks.get(9);
             if (output.isEmpty()) {
-                stacks.set(9, result.copy());
+                if (ItemStack.isSameItem(input, result)) {
+                    ItemStack copy = input.copy();
+                    copy.setDamageValue(0);
+                    stacks.set(9, copy);
+                } else {
+                    stacks.set(9, result.copy());
+                }
             } else if (output.is(result.getItem())) {
                 output.grow(result.getCount());
             }
-
             input.shrink(1);
             return true;
         } else {
