@@ -9,6 +9,7 @@ import java.util.Map;
 public class AetherIIPreventatives {
     public static final Map<Holder<MobEffect>, Integer> BANDAGE = Map.ofEntries(
             Map.entry(AetherIIEffects.WOUND, 250),
+            Map.entry(AetherIIEffects.STUN, 250),
             Map.entry(AetherIIEffects.FRACTURE, 250)
     );
     public static final Map<Holder<MobEffect>, Integer> ANTITOXIN_VIAL = Map.ofEntries(
