@@ -27,8 +27,9 @@ public class AetherIIDamageTypeTagData extends TagsProvider<DamageType> {
                 DamageTypes.TRIDENT,
                 DamageTypes.THROWN);
 
-        this.tag(DamageTypeTags.NO_KNOCKBACK).add(AetherIIDamageTypes.PLAYER_AOE_NO_KNOCKBACK, AetherIIDamageTypes.WOUND, AetherIIDamageTypes.FRACTURE, AetherIIDamageTypes.TOXIN, AetherIIDamageTypes.VENOM);
+        this.tag(DamageTypeTags.NO_KNOCKBACK).add(AetherIIDamageTypes.PLAYER_AOE_NO_KNOCKBACK, AetherIIDamageTypes.WOUND, AetherIIDamageTypes.FRACTURE, AetherIIDamageTypes.TOXIN, AetherIIDamageTypes.VENOM, AetherIIDamageTypes.IMMOLATION);
         this.tag(DamageTypeTags.BYPASSES_ARMOR).add(AetherIIDamageTypes.WOUND, AetherIIDamageTypes.FRACTURE, AetherIIDamageTypes.TOXIN, AetherIIDamageTypes.VENOM);
-        this.tag(DamageTypeTags.IS_LIGHTNING).add(AetherIIDamageTypes.SHOCK);
+        this.tag(DamageTypeTags.IS_LIGHTNING).add(AetherIIDamageTypes.CHARGED);
+        this.tag(DamageTypeTags.IS_FIRE).add(AetherIIDamageTypes.IMMOLATION);
     }
 }

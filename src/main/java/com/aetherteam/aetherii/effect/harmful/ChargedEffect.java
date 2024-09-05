@@ -22,13 +22,13 @@ public class ChargedEffect extends MobEffect {
         boolean remove = false;
         for (Entity entity : livingEntity.level().getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && living.hasEffect(AetherIIEffects.CHARGED))) {
             if (entity instanceof LivingEntity living) {
-                livingEntity.hurt(AetherIIDamageTypes.damageSource(living.level(), AetherIIDamageTypes.SHOCK), 4.0F);
+                livingEntity.hurt(AetherIIDamageTypes.damageSource(living.level(), AetherIIDamageTypes.CHARGED), 4.0F);
                 living.removeEffect(AetherIIEffects.CHARGED);
                 remove = true;
             }
         }
         if (remove) {
-            livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.SHOCK), 4.0F);
+            livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.CHARGED), 4.0F);
             livingEntity.removeEffect(AetherIIEffects.CHARGED);
         }
         return true;

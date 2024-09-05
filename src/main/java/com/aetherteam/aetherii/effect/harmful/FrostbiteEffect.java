@@ -8,14 +8,9 @@ import net.neoforged.neoforge.common.EffectCure;
 
 import java.util.Set;
 
-public class FrostbiteEffect extends MobEffect {
+public class FrostbiteEffect extends MobEffect { //todo hot block proximity check system
     public FrostbiteEffect() {
         super(MobEffectCategory.HARMFUL, 4361110);
-    }
-
-    @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        return super.applyEffectTick(livingEntity, amplifier);
     }
 
     @Override
