@@ -152,6 +152,7 @@ public class AetherII {
 
         AetherIIEventListeners.listen(bus);
         AetherIIItems.registerEquipmentAbilities(bus);
+        AetherIIEffects.registerUniqueBehaviors(bus);
 
         bus.addListener(ReloadListeners::registerReloadListeners);
         neoBus.addListener(AetherIIBlockEntityTypes::registerValidBlockEntityTypes);

@@ -18,9 +18,7 @@ public class VenomEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if (livingEntity.getHealth() > 1.0F) {
-            Registry<DamageType> damageTypes = livingEntity.damageSources().damageTypes;
-            Holder.Reference<DamageType> damageType = damageTypes.getHolderOrThrow(AetherIIDamageTypes.TOXIN);
-            livingEntity.hurt(new DamageSource(damageType), 1.0F);
+            livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.VENOM), 1.0F);
         }
         if (livingEntity instanceof Player player && player.getFoodData().getFoodLevel() > 1) {
             player.getFoodData().setSaturation(0.0F);

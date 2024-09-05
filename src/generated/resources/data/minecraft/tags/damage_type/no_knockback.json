@@ -1,6 +1,8 @@
 {
   "values": [
     "aether_ii:player_aoe_no_knockback",
+    "aether_ii:wound",
+    "aether_ii:fracture",
     "aether_ii:toxin",
     "aether_ii:venom"
   ]

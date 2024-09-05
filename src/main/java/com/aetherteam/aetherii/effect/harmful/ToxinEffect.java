@@ -17,9 +17,7 @@ public class ToxinEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if (livingEntity.getHealth() > 1.0F) {
-            Registry<DamageType> damageTypes = livingEntity.damageSources().damageTypes;
-            Holder.Reference<DamageType> damageType = damageTypes.getHolderOrThrow(AetherIIDamageTypes.TOXIN);
-            livingEntity.hurt(new DamageSource(damageType), 1.0F);
+            livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.TOXIN), 1.0F);
         }
         return true;
     }

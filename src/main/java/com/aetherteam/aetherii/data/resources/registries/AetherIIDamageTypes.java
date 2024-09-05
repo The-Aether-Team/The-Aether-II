@@ -16,14 +16,20 @@ import javax.annotation.Nullable;
 public class AetherIIDamageTypes {
     public static final ResourceKey<DamageType> PLAYER_AOE = createKey("player_aoe");
     public static final ResourceKey<DamageType> PLAYER_AOE_NO_KNOCKBACK = createKey("player_aoe_no_knockback");
+    public static final ResourceKey<DamageType> WOUND = createKey("wound");
+    public static final ResourceKey<DamageType> FRACTURE = createKey("fracture");
     public static final ResourceKey<DamageType> TOXIN = createKey("toxin");
     public static final ResourceKey<DamageType> VENOM = createKey("venom");
+    public static final ResourceKey<DamageType> SHOCK = createKey("shock");
 
     public static void bootstrap(BootstrapContext<DamageType> context) {
         context.register(PLAYER_AOE, new DamageType("player", 0.1F));
         context.register(PLAYER_AOE_NO_KNOCKBACK, new DamageType("player", 0.1F));
-        context.register(TOXIN, new DamageType("toxin", 0.1F));
-        context.register(VENOM, new DamageType("venom", 0.1F));
+        context.register(WOUND, new DamageType("aether_ii.effect.wound", 0.1F));
+        context.register(FRACTURE, new DamageType("aether_ii.effect.fracture", 0.1F));
+        context.register(TOXIN, new DamageType("aether_ii.effect.toxin", 0.1F));
+        context.register(VENOM, new DamageType("aether_ii.effect.venom", 0.1F));
+        context.register(SHOCK, new DamageType("aether_ii.effect.charged.shock", 0.1F));
     }
 
     private static ResourceKey<DamageType> createKey(String name) {

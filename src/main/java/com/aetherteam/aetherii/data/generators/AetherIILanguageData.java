@@ -1076,6 +1076,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "swet.jump", "Swet squishes");
         this.addSubtitle("entity", "swet.squish", "Swet squishes");
 
+
+        this.addDeath("effect.wound", "%1$s was fatally wounded");
+        this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
+        this.addDeath("effect.toxin", "%1$s succumbed to toxin");
+        this.addDeath("effect.venom", "%1$s succumbed to venom");
+        this.addDeath("effect.charged.shock", "%1$s was electrocuted");
+
         // Packs
         this.addPackDescription("mod", "Aether II Resources");
     }
