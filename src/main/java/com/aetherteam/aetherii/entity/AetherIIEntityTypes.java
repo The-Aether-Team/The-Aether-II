@@ -63,7 +63,7 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build("aechor_plant"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Zephyr>> ZEPHYR = ENTITY_TYPES.register("zephyr",
-            () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.5F, 3.5F).clientTrackingRange(10).build("zephyr"));
+            () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.0F, 1.75F).clientTrackingRange(10).build("zephyr"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Tempest>> TEMPEST = ENTITY_TYPES.register("tempest",
             () -> EntityType.Builder.of(Tempest::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(1.5F, 1.5F).clientTrackingRange(10).build("tempest"));

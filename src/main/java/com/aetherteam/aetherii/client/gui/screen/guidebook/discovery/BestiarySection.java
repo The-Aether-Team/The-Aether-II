@@ -106,7 +106,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                     int width = 125;
                     int height = 69;
                     this.rotation = Mth.wrapDegrees(Mth.lerp(partialTick, this.rotation, this.rotation + 0.85F));
-                    int scale = (int) (30 / livingEntity.getBoundingBox().getSize());
+                    int scale = (int) ((30 / livingEntity.getBoundingBox().getSize()) * this.getSelectedEntry().scaleMultiplier().orElse(1.0));
                     this.renderRotatingEntity(guiGraphics, rightPagePos + x, topPos + y, rightPagePos + x + width, topPos + y + height, scale, 0.2225F, this.rotation, -15.0F, livingEntity);
                 }
             }
