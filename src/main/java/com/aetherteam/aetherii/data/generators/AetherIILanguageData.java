@@ -1016,6 +1016,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Misc
+        this.addGeneric("slash", "§9Slash§r");
+        this.addGeneric("impact", "§eImpact§r");
+        this.addGeneric("pierce", "§cPierce§r");
         this.addGeneric("highfields", "Highfields");
         this.addGeneric("magnetic", "Magnetic");
         this.addGeneric("arctic", "Arctic");
