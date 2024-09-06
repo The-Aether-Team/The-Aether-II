@@ -3,8 +3,8 @@ package com.aetherteam.aetherii.attachment.living;
 import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
-import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
-import com.google.common.collect.BiMap;
+import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupRemovePacket;
+import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupSetPacket;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.core.Holder;
@@ -55,7 +55,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
 
     public void postTickUpdate(LivingEntity livingEntity) {
         if (this.loadingSync) {
-            PacketDistributor.sendToAllPlayers(new EffectBuildupPacket.Set(this.entity.getId(), this.activeBuildups));
+            PacketDistributor.sendToAllPlayers(new EffectBuildupSetPacket(this.entity.getId(), this.activeBuildups));
             this.loadingSync = false;
         }
         this.activeBuildups.values().removeIf(instance -> !instance.tick(this.entity));
@@ -92,7 +92,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
 
     public void removeBuildup(Holder<MobEffect> effect) {
         if (!this.entity.level().isClientSide()) {
-            PacketDistributor.sendToAllPlayers(new EffectBuildupPacket.Remove(this.entity.getId(), effect));
+            PacketDistributor.sendToAllPlayers(new EffectBuildupRemovePacket(this.entity.getId(), effect));
         }
         this.activeBuildups.remove(effect);
     }
