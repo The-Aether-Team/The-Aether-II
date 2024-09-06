@@ -42,21 +42,21 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class AetherIIPlayerAttachment implements INBTSynchable {
+    private boolean isMoving;
+    private boolean isJumping;
+
     private boolean canGetPortal = true;
     private boolean canSpawnInAether = true;
 
     public float portalIntensity;
     public float oPortalIntensity;
 
-    private boolean isMoving;
-    private boolean isJumping;
-
     @Nullable
     private Aerbunny mountedAerbunny;
     private Optional<CompoundTag> mountedAerbunnyTag = Optional.empty();
 
-    private boolean gravititeHoldingFloatingBlock;
-    private boolean gravititeJumpUsed;
+    private boolean gravititeHoldingFloatingBlock = false;
+    private boolean gravititeJumpUsed = true;
 
     private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
             Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
@@ -82,10 +82,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         this.gravititeJumpUsed = gravititeJumpUsed;
     }
 
-    public AetherIIPlayerAttachment() {
-        this.gravititeHoldingFloatingBlock = false;
-        this.gravititeJumpUsed = true;
-    }
+    public AetherIIPlayerAttachment() { }
 
     public Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> getSynchableFunctions() {
         return this.synchableFunctions;
@@ -111,20 +108,11 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      * Handles functions when the player ticks from {@link net.neoforged.neoforge.event.entity.living.LivingEvent.LivingTickEvent}
      */
     public void postTickUpdate(Player player) {
-        this.handleAetherPortal(player);
         this.syncAfterJoin(player);
         this.syncClients(player);
-        this.checkToRemoveAerbunny(player);
+        this.handleAetherPortal(player);
         this.handleHealingStoneHealth(player);
-    }
-
-    private void handleHealingStoneHealth(Player player) {
-        if (player.getAttribute(Attributes.MAX_HEALTH).hasModifier(HealingStoneItem.BONUS_HEALTH)) {
-            double maxHealthWithoutBonus = player.getAttributeValue(Attributes.MAX_HEALTH) - player.getAttribute(Attributes.MAX_HEALTH).getModifier(HealingStoneItem.BONUS_HEALTH).amount();
-            if (player.getHealth() <= maxHealthWithoutBonus) {
-                player.getAttribute(Attributes.MAX_HEALTH).removeModifier(HealingStoneItem.BONUS_HEALTH);
-            }
-        }
+        this.checkToRemoveAerbunny(player);
     }
 
     private void syncAfterJoin(Player player) {
@@ -148,50 +136,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
                 }
             }
             this.setShouldSyncBetweenClients(false);
-        }
-    }
-
-    public void setCanSpawnInAether(boolean canSpawnInAether) {
-        this.canSpawnInAether = canSpawnInAether;
-    }
-
-    /**
-     * @return Whether the player will spawn in the Aether dimension on first join, as a {@link Boolean}.
-     */
-    public boolean canSpawnInAether() {
-        return this.canSpawnInAether;
-    }
-
-    public void startInAether(Player player) { //todo: port to new 1.21 portal system
-//        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
-//        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
-//            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
-//                if (player instanceof ServerPlayer serverPlayer) {
-//                    MinecraftServer server = serverPlayer.level().getServer();
-//                    if (server != null) {
-//                        ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL);
-//                        if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
-//                            if (player.changeDimension(aetherLevel, new AetherPortalForcer(aetherLevel, false, true)) != null) {
-//                                serverPlayer.setRespawnPosition(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, serverPlayer.blockPosition(), serverPlayer.getYRot(), true, false);
-//                                aetherIIPlayer.setCanSpawnInAether(false); // Sets that the player has already spawned in the Aether.
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        } else {
-//            aetherIIPlayer.setCanSpawnInAether(false);
-//        }
-    }
-
-    /**
-     * Gives the player an Aether Portal Frame item on login if the {@link AetherIIConfig.Common#start_with_portal} config is enabled.
-     */
-    private void handleGivePortal(Player player) {
-        if (AetherIIConfig.COMMON.start_with_portal.get()) {
-            this.givePortalItem(player);
-        } else {
-            this.setCanGetPortal(false);
         }
     }
 
@@ -233,41 +177,12 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         }
     }
 
-    /**
-     * Gives the player an Aether Portal Frame item.
-     */
-    public void givePortalItem(Player player) {
-        if (this.canGetPortal()) {
-            player.addItem(new ItemStack(AetherIIItems.AETHER_PORTAL_FRAME.get()));
-            this.setCanGetPortal(false);
-        }
-    }
-
-    public void setCanGetPortal(boolean canGetPortal) {
-        this.canGetPortal = canGetPortal;
-    }
-
-    /**
-     * @return Whether the player can get the Aether Portal Frame item, as a {@link Boolean}.
-     */
-    public boolean canGetPortal() {
-        return this.canGetPortal;
-    }
-
-    public float getPortalIntensity() {
-        return this.portalIntensity;
-    }
-
-    public float getOldPortalIntensity() {
-        return this.oPortalIntensity;
-    }
-
-    /**
-     * Checks whether the capability should stop tracking a mounted Aerbunny.
-     */
-    private void checkToRemoveAerbunny(Player player) {
-        if (this.getMountedAerbunny() != null && (!this.getMountedAerbunny().isAlive() || !player.isAlive())) {
-            this.setMountedAerbunny(null);
+    private void handleHealingStoneHealth(Player player) {
+        if (player.getAttribute(Attributes.MAX_HEALTH).hasModifier(HealingStoneItem.BONUS_HEALTH)) {
+            double maxHealthWithoutBonus = player.getAttributeValue(Attributes.MAX_HEALTH) - player.getAttribute(Attributes.MAX_HEALTH).getModifier(HealingStoneItem.BONUS_HEALTH).amount();
+            if (player.getHealth() <= maxHealthWithoutBonus) {
+                player.getAttribute(Attributes.MAX_HEALTH).removeModifier(HealingStoneItem.BONUS_HEALTH);
+            }
         }
     }
 
@@ -304,6 +219,70 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         }
     }
 
+    /**
+     * Checks whether the capability should stop tracking a mounted Aerbunny.
+     */
+    private void checkToRemoveAerbunny(Player player) {
+        if (this.getMountedAerbunny() != null && (!this.getMountedAerbunny().isAlive() || !player.isAlive())) {
+            this.setMountedAerbunny(null);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void movementInput(Player player, Input input) {
+        boolean isJumping = input.jumping;
+        if (isJumping != this.isJumping()) {
+            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setJumping", isJumping);
+        }
+        boolean isMoving = isJumping || input.up || input.down || input.left || input.right || player.isFallFlying();
+        if (isMoving != this.isMoving()) {
+            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setMoving", isMoving);
+        }
+    }
+
+    /**
+     * Gives the player an Aether Portal Frame item on login if the {@link AetherIIConfig.Common#start_with_portal} config is enabled.
+     */
+    private void handleGivePortal(Player player) {
+        if (AetherIIConfig.COMMON.start_with_portal.get()) {
+            this.givePortalItem(player);
+        } else {
+            this.setCanGetPortal(false);
+        }
+    }
+
+    /**
+     * Gives the player an Aether Portal Frame item.
+     */
+    private void givePortalItem(Player player) {
+        if (this.canGetPortal()) {
+            player.addItem(new ItemStack(AetherIIItems.AETHER_PORTAL_FRAME.get()));
+            this.setCanGetPortal(false);
+        }
+    }
+
+    public void startInAether(Player player) { //todo: port to new 1.21 portal system
+//        var aetherIIPlayer = player.getData(AetherIIDataAttachments.PORTAL_TELEPORTATION);
+//        if (AetherIIConfig.SERVER.spawn_in_aether.get()) {
+//            if (aetherIIPlayer.canSpawnInAether()) { // Checks if the player has been set to spawn in the Aether.
+//                if (player instanceof ServerPlayer serverPlayer) {
+//                    MinecraftServer server = serverPlayer.level().getServer();
+//                    if (server != null) {
+//                        ServerLevel aetherLevel = server.getLevel(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL);
+//                        if (aetherLevel != null && serverPlayer.level().dimension() != AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
+//                            if (player.changeDimension(aetherLevel, new AetherPortalForcer(aetherLevel, false, true)) != null) {
+//                                serverPlayer.setRespawnPosition(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, serverPlayer.blockPosition(), serverPlayer.getYRot(), true, false);
+//                                aetherIIPlayer.setCanSpawnInAether(false); // Sets that the player has already spawned in the Aether.
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        } else {
+//            aetherIIPlayer.setCanSpawnInAether(false);
+//        }
+    }
+
     public void setMoving(boolean isMoving) {
         this.isMoving = isMoving;
     }
@@ -324,6 +303,36 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      */
     public boolean isJumping() {
         return this.isJumping;
+    }
+
+    public void setCanGetPortal(boolean canGetPortal) {
+        this.canGetPortal = canGetPortal;
+    }
+
+    /**
+     * @return Whether the player can get the Aether Portal Frame item, as a {@link Boolean}.
+     */
+    public boolean canGetPortal() {
+        return this.canGetPortal;
+    }
+
+    public void setCanSpawnInAether(boolean canSpawnInAether) {
+        this.canSpawnInAether = canSpawnInAether;
+    }
+
+    /**
+     * @return Whether the player will spawn in the Aether dimension on first join, as a {@link Boolean}.
+     */
+    public boolean canSpawnInAether() {
+        return this.canSpawnInAether;
+    }
+
+    public float getPortalIntensity() {
+        return this.portalIntensity;
+    }
+
+    public float getOldPortalIntensity() {
+        return this.oPortalIntensity;
     }
 
     public void setMountedAerbunny(@Nullable Aerbunny mountedAerbunny) {
@@ -379,17 +388,5 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     @Override
     public SyncPacket getSyncPacket(int entityID, String key, Type type, Object value) {
         return new AetherIIPlayerSyncPacket(entityID, key, type, value);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void movementInput(Player player, Input input) {
-        boolean isJumping = input.jumping;
-        if (isJumping != this.isJumping()) {
-            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setJumping", isJumping);
-        }
-        boolean isMoving = isJumping || input.up || input.down || input.left || input.right || player.isFallFlying();
-        if (isMoving != this.isMoving()) {
-            this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setMoving", isMoving);
-        }
     }
 }
