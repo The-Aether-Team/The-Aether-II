@@ -7,6 +7,13 @@
       {
         "model": "aether_ii:block/blade_poa",
         "y": 90
+      },
+      {
+        "model": "aether_ii:block/blade_poa_mirrored"
+      },
+      {
+        "model": "aether_ii:block/blade_poa_mirrored",
+        "y": 90
       }
     ]
   }

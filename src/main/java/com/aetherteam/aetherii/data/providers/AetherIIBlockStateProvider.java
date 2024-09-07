@@ -487,7 +487,16 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
                 .texture("particle", this.extend(this.texture(this.name(block), "natural/"), "_0"))
                 .renderType(ResourceLocation.withDefaultNamespace("cutout"));
-        this.getVariantBuilder(block).partialState().addModels(ConfiguredModel.builder().modelFile(model).build()).addModels(ConfiguredModel.builder().modelFile(model).rotationY(90).build());
+        ModelFile modelMirrored = this.models().withExistingParent(this.name(block) + "_mirrored", this.modLoc("block/asymmetrical_cross_even_mirrored"))
+                .texture("0", this.extend(this.texture(this.name(block), "natural/"), "_0"))
+                .texture("1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                .texture("particle", this.extend(this.texture(this.name(block), "natural/"), "_0"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        this.getVariantBuilder(block).partialState()
+                .addModels(ConfiguredModel.builder().modelFile(model).build())
+                .addModels(ConfiguredModel.builder().modelFile(model).rotationY(90).build())
+                .addModels(ConfiguredModel.builder().modelFile(modelMirrored).build())
+                .addModels(ConfiguredModel.builder().modelFile(modelMirrored).rotationY(90).build());
     }
 
     public void asymmetricalCrossOdd(Block block) {
@@ -496,7 +505,16 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
                 .texture("particle", this.extend(this.texture(this.name(block), "natural/"), "_0"))
                 .renderType(ResourceLocation.withDefaultNamespace("cutout"));
-        this.getVariantBuilder(block).partialState().addModels(ConfiguredModel.builder().modelFile(model).build()).addModels(ConfiguredModel.builder().modelFile(model).rotationY(90).build());
+        ModelFile modelMirrored = this.models().withExistingParent(this.name(block) + "_mirrored", this.modLoc("block/asymmetrical_cross_odd_mirrored"))
+                .texture("0", this.extend(this.texture(this.name(block), "natural/"), "_0"))
+                .texture("1", this.extend(this.texture(this.name(block), "natural/"), "_1"))
+                .texture("particle", this.extend(this.texture(this.name(block), "natural/"), "_0"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        this.getVariantBuilder(block).partialState()
+                .addModels(ConfiguredModel.builder().modelFile(model).build())
+                .addModels(ConfiguredModel.builder().modelFile(model).rotationY(90).build())
+                .addModels(ConfiguredModel.builder().modelFile(modelMirrored).build())
+                .addModels(ConfiguredModel.builder().modelFile(modelMirrored).rotationY(90).build());
     }
 
     public void pottedTintedPlant(Block block, Block flower, String location) {
