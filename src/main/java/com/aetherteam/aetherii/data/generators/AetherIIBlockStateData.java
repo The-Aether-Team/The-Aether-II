@@ -55,6 +55,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.iceCrystal(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
         this.iceCrystal(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
         this.iceCrystal(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
+        this.block(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "natural/");
+        this.carpet(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get(), AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "natural/");
+        this.mossVines(AetherIIBlocks.SHAYELINN_MOSS_VINES.get());
 
         // Irradiated
         this.block(AetherIIBlocks.IRRADIATED_HOLYSTONE.get(), "natural/");

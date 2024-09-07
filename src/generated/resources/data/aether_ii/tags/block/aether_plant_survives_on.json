@@ -2,6 +2,7 @@
   "values": [
     "aether_ii:aether_grass_block",
     "aether_ii:enchanted_aether_grass_block",
-    "aether_ii:bryalinn_moss_block"
+    "aether_ii:bryalinn_moss_block",
+    "aether_ii:shayelinn_moss_block"
   ]
 }

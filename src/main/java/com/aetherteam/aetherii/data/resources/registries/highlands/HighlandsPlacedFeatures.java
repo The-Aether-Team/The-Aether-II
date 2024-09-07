@@ -91,6 +91,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_OVERHANG = createKey("coarse_aether_dirt_overhang");
     public static final ResourceKey<PlacedFeature> ICE_OVERHANG = createKey("ice_overhang");
     public static final ResourceKey<PlacedFeature> EXPOSED_BRYALINN_MOSS_COVER = createKey("exposed_bryalinn_moss_cover");
+    public static final ResourceKey<PlacedFeature> EXPOSED_SHAYELINN_MOSS_COVER = createKey("exposed_shayelinn_moss_cover");
 
     public static final ResourceKey<PlacedFeature> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<PlacedFeature> ORE_ICESTONE = createKey("ore_icestone");
@@ -445,6 +446,15 @@ public class HighlandsPlacedFeatures {
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
                 RandomOffsetPlacement.vertical(ConstantInt.of(1)),
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
+                BiomeFilter.biome()
+        );
+        register(context, EXPOSED_SHAYELINN_MOSS_COVER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHAYELINN_MOSS_FLOOR),
+                NoiseBasedCountPlacement.of(10, 50, 0.0),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.top()),
                 BiomeFilter.biome()
         );
 

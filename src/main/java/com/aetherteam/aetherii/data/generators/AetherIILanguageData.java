@@ -64,6 +64,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL, "Large Arctic Ice Crystal");
         this.addBlock(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL, "Medium Arctic Ice Crystal");
         this.addBlock(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL, "Small Arctic Ice Crystal");
+        this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_BLOCK, "Shayelinn Moss Block");
+        this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_CARPET, "Shayelinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_VINES, "Shayelinn Moss Vines");
 
         // Irradiated
         this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");

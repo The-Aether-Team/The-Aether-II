@@ -241,6 +241,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get(), "natural/");
+        this.itemBlock(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get());
+        this.itemBlockFlat(AetherIIBlocks.SHAYELINN_MOSS_VINES.get(), "natural/");
 
         // Irradiated
         this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());

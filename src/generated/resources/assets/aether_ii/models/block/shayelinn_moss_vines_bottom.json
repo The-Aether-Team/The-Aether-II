@@ -1,0 +1,36 @@
+{
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "north": {
+          "texture": "#vine",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#vine"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0.25
+      ],
+      "to": [
+        16,
+        16,
+        0.25
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "aether_ii:block/natural/shayelinn_moss_vines_bottom",
+    "vine": "aether_ii:block/natural/shayelinn_moss_vines_bottom"
+  }
+}
