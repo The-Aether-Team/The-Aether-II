@@ -30,7 +30,9 @@ public class HighlandsPlacedFeatures {
     // Surface
     public static final ResourceKey<PlacedFeature> SKYROOT_TWIGS = createKey("skyroot_twigs");
     public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS = createKey("holystone_rocks");
+    public static final ResourceKey<PlacedFeature> HOLYSTONE_ROCKS_TUNDRA = createKey("holystone_rocks_tundra");
     public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER = createKey("mossy_holystone_boulder");
+    public static final ResourceKey<PlacedFeature> MOSSY_HOLYSTONE_BOULDER_TUNDRA = createKey("mossy_holystone_boulder_tundra");
     public static final ResourceKey<PlacedFeature> ICESTONE_BOULDER = createKey("icestone_boulder");
     public static final ResourceKey<PlacedFeature> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<PlacedFeature> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
@@ -53,8 +55,6 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> HIGHFIELDS_FLOWER_PATCH = createKey("highfields_flower_patch");
     public static final ResourceKey<PlacedFeature> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
     public static final ResourceKey<PlacedFeature> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
-
-
 
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -116,6 +116,7 @@ public class HighlandsPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> WATER_POND = createKey("water_pond");
     public static final ResourceKey<PlacedFeature> WATER_POND_UNDERGROUND = createKey("water_pond_underground");
+    public static final ResourceKey<PlacedFeature> WATER_POND_TUNDRA = createKey("water_pond_tundra");
     public static final ResourceKey<PlacedFeature> WATER_SPRING = createKey("water_spring");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = createKey("noise_lake_arctic");
@@ -182,9 +183,30 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome());
         register(
                 context,
+                HOLYSTONE_ROCKS_TUNDRA,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HOLYSTONE_ROCKS),
+                NoiseThresholdCountPlacement.of(0.1, 1, 2),
+                RarityFilter.onAverageOnceEvery(2),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BiomeFilter.biome());
+        register(
+                context,
                 MOSSY_HOLYSTONE_BOULDER,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MOSSY_HOLYSTONE_BOULDER),
                 NoiseThresholdCountPlacement.of(0.2, 0, 1),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.BOULDER_SURVIVES_ON))),
+                RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
+                BiomeFilter.biome()
+        );
+        register(
+                context,
+                MOSSY_HOLYSTONE_BOULDER_TUNDRA,
+                configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MOSSY_HOLYSTONE_BOULDER),
+                NoiseThresholdCountPlacement.of(0.2, 1, 2),
+                RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.BOULDER_SURVIVES_ON))),
@@ -449,7 +471,8 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, EXPOSED_SHAYELINN_MOSS_COVER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHAYELINN_MOSS_FLOOR),
-                NoiseBasedCountPlacement.of(10, 50, 0.0),
+                NoiseBasedCountPlacement.of(8, 30, 0.0),
+                RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
                 HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
@@ -524,6 +547,10 @@ public class HighlandsPlacedFeatures {
                 RarityFilter.onAverageOnceEvery(15),
                 EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.allOf(BlockPredicate.not(BlockPredicate.ONLY_IN_AIR_PREDICATE), BlockPredicate.insideWorld(new BlockPos(0, -5, 0))), 16),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -5),
+                BiomeFilter.biome());
+        register(context, WATER_POND_TUNDRA, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WATER_POND_TUNDRA),
+                RarityFilter.onAverageOnceEvery(2),
+                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
                 BiomeFilter.biome());
         register(context, WATER_SPRING, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WATER_SPRING),
                 CountPlacement.of(15),

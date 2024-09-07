@@ -198,6 +198,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_ARCTIC_PACKED_ICE = createKey("coast_arctic_packed_ice");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_POND = createKey("water_pond");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_POND_TUNDRA = createKey("water_pond_tundra");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_SPRING = createKey("water_spring");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE = createKey("noise_lake");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_ARCTIC = createKey("noise_lake_arctic");
@@ -1308,7 +1309,7 @@ public class HighlandsConfiguredFeatures {
         ));
 
         register(context, WATER_POND, AetherIIFeatures.LAKE.get(),
-                new AetherLakeConfiguration(BlockStateProvider.simple(Blocks.WATER), new NoiseProvider(
+                new AetherLakeConfiguration(ConstantInt.of(2), BlockStateProvider.simple(Blocks.WATER), new NoiseProvider(
                         2345L,
                         new NormalNoise.NoiseParameters(0, 1.0),
                         0.25F,
@@ -1319,6 +1320,9 @@ public class HighlandsConfiguredFeatures {
                                 AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                         )
                 )));
+
+        register(context, WATER_POND_TUNDRA, AetherIIFeatures.LAKE.get(),
+                new AetherLakeConfiguration(UniformInt.of(2, 5), BlockStateProvider.simple(Blocks.WATER), SimpleStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get())));
         register(context, WATER_SPRING, Feature.SPRING,
                 new SpringConfiguration(Fluids.WATER.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.UNDERSHALE.get(), AetherIIBlocks.HOLYSTONE.get(), AetherIIBlocks.AETHER_DIRT.get())));
 

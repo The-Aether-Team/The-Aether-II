@@ -10,6 +10,7 @@
         }
       }
     },
+    "shrink_scale": 2,
     "top": {
       "type": "minecraft:noise_provider",
       "noise": {

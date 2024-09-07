@@ -19,7 +19,10 @@
               },
               {
                 "data": {
-                  "Name": "aether_ii:highland_fern"
+                  "Name": "aether_ii:highland_fern",
+                  "Properties": {
+                    "grass_type": "default"
+                  }
                 },
                 "weight": 1
               }

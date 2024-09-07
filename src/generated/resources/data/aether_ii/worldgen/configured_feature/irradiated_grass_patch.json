@@ -37,13 +37,19 @@
               },
               {
                 "data": {
-                  "Name": "aether_ii:highland_fern"
+                  "Name": "aether_ii:highland_fern",
+                  "Properties": {
+                    "grass_type": "default"
+                  }
                 },
                 "weight": 1
               },
               {
                 "data": {
-                  "Name": "aether_ii:shield_fern"
+                  "Name": "aether_ii:shield_fern",
+                  "Properties": {
+                    "grass_type": "default"
+                  }
                 },
                 "weight": 2
               },

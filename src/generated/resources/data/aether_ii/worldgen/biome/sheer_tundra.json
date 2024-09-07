@@ -26,12 +26,13 @@
       "aether_ii:arctic_ice_spike_cluster"
     ],
     [
-      "aether_ii:water_pond",
+      "aether_ii:water_pond_tundra",
+      "aether_ii:water_spring",
       "aether_ii:water_pond_underground"
     ],
     [
-      "aether_ii:holystone_rocks",
-      "aether_ii:mossy_holystone_boulder",
+      "aether_ii:holystone_rocks_tundra",
+      "aether_ii:mossy_holystone_boulder_tundra",
       "aether_ii:icestone_boulder"
     ],
     [],

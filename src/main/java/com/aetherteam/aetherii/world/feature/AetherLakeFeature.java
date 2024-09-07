@@ -40,9 +40,9 @@ public class AetherLakeFeature extends Feature<AetherLakeConfiguration> {
             int i = random.nextInt(4) + 4;
 
             for (int j = 0; j < i; ++j) {
-                double xWidth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * 6.0 + 3.0;
-                double yDepth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * 4.0 + 2.0;
-                double zWidth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * 6.0 + 3.0;
+                double xWidth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / context.config().shrinkScale().sample(random))) : random.nextDouble()) * 6.0 + 3.0;
+                double yDepth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / context.config().shrinkScale().sample(random))) : random.nextDouble()) * 4.0 + 2.0;
+                double zWidth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / context.config().shrinkScale().sample(random))) : random.nextDouble()) * 6.0 + 3.0;
                 double xSquish = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * (16.0 - xWidth - 2.0) + 1.0 + xWidth / 2.0;
                 double ySquish = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * (8.0 - yDepth - 4.0) + 2.0 + yDepth / 2.0;
                 double zSquish = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * (16.0 - zWidth - 2.0) + 1.0 + zWidth / 2.0;
