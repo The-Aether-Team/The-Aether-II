@@ -1,13 +1,14 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.world.feature.configuration.AetherLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,19 +40,19 @@ public class AetherLakeFeature extends Feature<AetherLakeConfiguration> {
             int i = random.nextInt(4) + 4;
 
             for (int j = 0; j < i; ++j) {
-                double d0 = random.nextDouble() * 6.0 + 3.0;
-                double d1 = random.nextDouble() * 4.0 + 2.0;
-                double d2 = random.nextDouble() * 6.0 + 3.0;
-                double d3 = random.nextDouble() * (16.0 - d0 - 2.0) + 1.0 + d0 / 2.0;
-                double d4 = random.nextDouble() * (8.0 - d1 - 4.0) + 2.0 + d1 / 2.0;
-                double d5 = random.nextDouble() * (16.0 - d2 - 2.0) + 1.0 + d2 / 2.0;
+                double xWidth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * 6.0 + 3.0;
+                double yDepth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * 4.0 + 2.0;
+                double zWidth = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * 6.0 + 3.0;
+                double xSquish = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * (16.0 - xWidth - 2.0) + 1.0 + xWidth / 2.0;
+                double ySquish = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * (8.0 - yDepth - 4.0) + 2.0 + yDepth / 2.0;
+                double zSquish = (random.nextInt(3) == 0 ? (0.5 + (random.nextDouble() / 2)) : random.nextDouble()) * (16.0 - zWidth - 2.0) + 1.0 + zWidth / 2.0;
 
                 for (int l = 1; l < 15; ++l) {
                     for (int i1 = 1; i1 < 15; ++i1) {
                         for (int j1 = 1; j1 < 7; ++j1) {
-                            double d6 = ((double) l - d3) / (d0 / 2.0);
-                            double d7 = ((double) j1 - d4) / (d1 / 2.0);
-                            double d8 = ((double) i1 - d5) / (d2 / 2.0);
+                            double d6 = ((double) l - xSquish) / (xWidth / 2.0);
+                            double d7 = ((double) j1 - ySquish) / (yDepth / 2.0);
+                            double d8 = ((double) i1 - zSquish) / (zWidth / 2.0);
                             double d9 = d6 * d6 + d7 * d7 + d8 * d8;
                             if (d9 < 1.0) {
                                 booleans[(l * 16 + i1) * 8 + j1] = true;
@@ -98,15 +99,23 @@ public class AetherLakeFeature extends Feature<AetherLakeConfiguration> {
                 }
             }
 
-            BlockState topBlockState = aetherLakeConfiguration.top().getState(random, blockPos);
-            if (!topBlockState.isAir()) {
-                for (int i2 = 0; i2 < 16; ++i2) {
-                    for (int j3 = 0; j3 < 16; ++j3) {
-                        for (int j4 = 4; j4 < 8; ++j4) {
-                            if (booleans[(i2 * 16 + j3) * 8 + j4]) {
-                                BlockPos offsetPos = blockPos.offset(i2, j4 - 1, j3);
-                                if (isDirt(level.getBlockState(offsetPos)) && level.getBrightness(LightLayer.SKY, blockPos.offset(i2, j4, j3)) > 0) {
-                                    level.setBlock(offsetPos, topBlockState, 2);
+            for (int i2 = 0; i2 < 16; ++i2) {
+                for (int j3 = 0; j3 < 16; ++j3) {
+                    for (int j4 = 0; j4 < 8; ++j4) {
+                        if (booleans[(i2 * 16 + j3) * 8 + j4]) {
+                            BlockPos offsetPos = blockPos.offset(i2, j4 - 1, j3);
+                            BlockState offsetState = level.getBlockState(offsetPos);
+                            if (offsetState.is(AetherIITags.Blocks.AETHER_DIRT)) {
+                                level.setBlock(offsetPos, aetherLakeConfiguration.top().getState(random, offsetPos), 2);
+                            }
+                            if (random.nextBoolean()) {
+                                for (Direction direction : Direction.Plane.HORIZONTAL.stream().toList()) {
+                                    BlockPos offsetPos2 = offsetPos.relative(direction);
+                                    if ((level.getBlockState(offsetPos2).is(AetherIITags.Blocks.AETHER_DIRT) || level.getBlockState(offsetPos2).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS))) {
+                                        if ((!level.getBlockState(offsetPos2.above()).liquid() && !level.getBlockState(offsetPos2).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS)) || random.nextInt(3) != 0) {
+                                            level.setBlock(offsetPos2, aetherLakeConfiguration.top().getState(random, offsetPos2), 2);
+                                        }
+                                    }
                                 }
                             }
                         }

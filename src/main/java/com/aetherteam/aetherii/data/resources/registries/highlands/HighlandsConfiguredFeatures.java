@@ -33,7 +33,6 @@ import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.PinkPetalsBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
@@ -1269,7 +1268,17 @@ public class HighlandsConfiguredFeatures {
         ));
 
         register(context, WATER_POND, AetherIIFeatures.LAKE.get(),
-                new AetherLakeConfiguration(BlockStateProvider.simple(Blocks.WATER), BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get())));
+                new AetherLakeConfiguration(BlockStateProvider.simple(Blocks.WATER), new NoiseProvider(
+                        2345L,
+                        new NormalNoise.NoiseParameters(0, 1.0),
+                        0.25F,
+                        List.of(
+                                AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
+                                AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
+                                AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
+                        )
+                )));
         register(context, WATER_SPRING, Feature.SPRING,
                 new SpringConfiguration(Fluids.WATER.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.UNDERSHALE.get(), AetherIIBlocks.HOLYSTONE.get(), AetherIIBlocks.AETHER_DIRT.get())));
 

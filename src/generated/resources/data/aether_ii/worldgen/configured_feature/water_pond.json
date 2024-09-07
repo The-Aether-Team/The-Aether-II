@@ -11,13 +11,29 @@
       }
     },
     "top": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:aether_grass_block",
-        "Properties": {
-          "snowy": "false"
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": 0
+      },
+      "scale": 0.25,
+      "seed": 2345,
+      "states": [
+        {
+          "Name": "aether_ii:shimmering_silt"
+        },
+        {
+          "Name": "aether_ii:shimmering_silt"
+        },
+        {
+          "Name": "aether_ii:coarse_aether_dirt"
+        },
+        {
+          "Name": "aether_ii:shimmering_silt"
         }
-      }
+      ]
     }
   }
 }
