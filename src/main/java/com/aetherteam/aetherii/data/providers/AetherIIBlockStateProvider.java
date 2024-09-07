@@ -30,6 +30,17 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         super(output, id, helper);
     }
 
+//    public void mirroredBlock(Block block, String location) {
+//        ModelFile model = this.models().withExistingParent(this.name(block), this.mcLoc("block/cube_all")).texture("all", this.texture(this.name(block), location));
+//        ModelFile modelMirrored = this.models().withExistingParent(this.name(block) + "_mirrored", this.mcLoc("block/cube_mirrored_all")).texture("all", this.texture(this.name(block), location));
+//        this.getVariantBuilder(block).partialState()
+//                .addModels(ConfiguredModel.builder().modelFile(model).build())
+//                .addModels(ConfiguredModel.builder().modelFile(model).rotationY(180).build())
+//                .addModels(ConfiguredModel.builder().modelFile(modelMirrored).build())
+//                .addModels(ConfiguredModel.builder().modelFile(modelMirrored).rotationY(180).build());
+////        this.getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(model).build());
+//    }
+
     public void cutoutBlock(Block block, String location) {
         ModelFile model = this.models().withExistingParent(this.name(block), this.mcLoc("block/cube_all")).renderType(ResourceLocation.withDefaultNamespace("cutout")).texture("all", this.texture(this.name(block), location));
         this.getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder().modelFile(model).build());
