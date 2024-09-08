@@ -8,6 +8,7 @@
       }
     },
     "distance_noise": "aether_ii:highlands/coasts/arctic",
+    "pattern_noise": 0.0,
     "size": 16.35,
     "valid_blocks": "aether_ii:arctic_coast_generates_on",
     "vegetation_chance": 0.25,

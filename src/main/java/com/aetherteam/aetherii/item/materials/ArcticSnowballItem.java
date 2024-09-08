@@ -34,12 +34,12 @@ public class ArcticSnowballItem extends SnowballItem implements ThrowableItem {
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
+    public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.CUSTOM;
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack, LivingEntity livingEntity) {
+    public int getUseDuration(ItemStack stack, LivingEntity livingEntity) {
         return 72000;
     }
 

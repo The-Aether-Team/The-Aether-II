@@ -8,7 +8,7 @@
       }
     },
     "distance_noise": "aether_ii:highlands/coasts/highfields",
-    "pattern_noise": 0.0,
+    "pattern_noise": "aether_ii:highlands/coasts/pattern_magnetic",
     "size": 16.35,
     "valid_blocks": "aether_ii:ferrosite_coast_generates_on",
     "vegetation_chance": 0.0,
