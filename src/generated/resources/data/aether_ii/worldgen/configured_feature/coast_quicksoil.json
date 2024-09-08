@@ -1,7 +1,6 @@
 {
   "type": "aether_ii:coast",
   "config": {
-    "type": "highfields",
     "block": {
       "type": "minecraft:simple_state_provider",
       "state": {

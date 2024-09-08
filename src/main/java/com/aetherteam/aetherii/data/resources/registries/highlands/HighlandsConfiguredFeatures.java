@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
-import com.aetherteam.aetherii.world.feature.CoastFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
@@ -1022,7 +1021,6 @@ public class HighlandsConfiguredFeatures {
 
         register(context, COAST_QUICKSOIL, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
-                CoastFeature.Type.HIGHFIELDS,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 Optional.empty(),
@@ -1035,7 +1033,6 @@ public class HighlandsConfiguredFeatures {
         ));
         register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
-                CoastFeature.Type.MAGNETIC,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
                 Optional.of(DensityFunctions.zero()),
@@ -1046,7 +1043,6 @@ public class HighlandsConfiguredFeatures {
         ));
         register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
-                CoastFeature.Type.ARCTIC,
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
                 Optional.empty(),
