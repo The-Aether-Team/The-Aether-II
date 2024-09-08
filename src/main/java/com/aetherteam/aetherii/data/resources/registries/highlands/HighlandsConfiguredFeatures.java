@@ -1023,7 +1023,6 @@ public class HighlandsConfiguredFeatures {
                 BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
-                DensityFunctions.zero(),
                 UniformInt.of(112, 156),
                 Optional.of(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BRETTL_PLANT),
                         RandomOffsetPlacement.vertical(ConstantInt.of(1)),
@@ -1048,7 +1047,6 @@ public class HighlandsConfiguredFeatures {
                 ),
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
-                DensityFunctions.zero(),
                 UniformInt.of(112, 156),
                 Optional.empty(),
                 0.0F,
@@ -1058,7 +1056,6 @@ public class HighlandsConfiguredFeatures {
                 BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_ARCTIC),
-                DensityFunctions.zero(),
                 UniformInt.of(120, 180),
                 Optional.of(PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
                         List.of(new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ICE_CRYSTALS)), 0.35F)),

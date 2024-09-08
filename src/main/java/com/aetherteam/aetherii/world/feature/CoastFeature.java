@@ -30,9 +30,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         Set<BlockPos> set = new HashSet<>();
 
         DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
-
         config.distanceNoise().mapAll(visitor);
-        config.patternNoise().mapAll(visitor);
 
         for (int x = pos.getX(); x < pos.getX() + 16; ++x) {
             for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {
@@ -46,8 +44,8 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                                 && level.getBlockState(placementPos.below(8)).isAir()
                                 && level.getBlockState(placementPos.below(16)).isAir()
                                 && level.getBlockState(placementPos.above()).is(config.validBlocks()) && level.getBlockState(placementPos.above(2)).isAir()) {
-                            placeCoast(level, config.block(), config, placementPos, config.size(), random, distance, set);
-                            placeCoast(level, config.block(), config, placementPos.below(), config.size(), random, (int) (distance / 1.75F), set);
+                            placeCoast(level, config.block(), placementPos, config.size(), random, distance, set);
+                            placeCoast(level, config.block(), placementPos.below(), config.size(), random, (int) (distance / 1.75F), set);
                             break;
                         }
                 }
@@ -57,23 +55,22 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         return true;
     }
 
-    public static void placeCoast(WorldGenLevel level, BlockStateProvider blockProvider, CoastConfiguration config, BlockPos center, float radius, RandomSource random, int distance, Set<BlockPos> set) {
+    public static void placeCoast(WorldGenLevel level, BlockStateProvider blockProvider, BlockPos center, float radius, RandomSource random, int distance, Set<BlockPos> set) {
         float radiusSq = radius * radius;
-        placeCoastBlock(level, blockProvider, config, center, random, distance, set);
+        placeCoastBlock(level, blockProvider, center, random, distance, set);
         for (int z = 0; z < radius; z++) {
             for (int x = 0; x < radius; x++) {
                 if (x * x + z * z > radiusSq) continue;
-                placeCoastBlock(level, blockProvider, config, center.offset(x, 0, z), random, distance, set);
-                placeCoastBlock(level, blockProvider, config, center.offset(-x, 0, -z), random, distance, set);
-                placeCoastBlock(level, blockProvider, config, center.offset(-z, 0, x), random, distance, set);
-                placeCoastBlock(level, blockProvider, config, center.offset(z, 0, -x), random, distance, set);
+                placeCoastBlock(level, blockProvider, center.offset(x, 0, z), random, distance, set);
+                placeCoastBlock(level, blockProvider, center.offset(-x, 0, -z), random, distance, set);
+                placeCoastBlock(level, blockProvider, center.offset(-z, 0, x), random, distance, set);
+                placeCoastBlock(level, blockProvider, center.offset(z, 0, -x), random, distance, set);
             }
         }
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, CoastConfiguration config, BlockPos pos, RandomSource random, int distance, Set<BlockPos> set) {
-        if (!(config.patternNoise().compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ())) < 0.0D)) {
+    public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance, Set<BlockPos> set) {
             if (level.getBlockState(pos).canBeReplaced()
                     && (level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
                     || level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
@@ -86,7 +83,6 @@ public class CoastFeature extends Feature<CoastConfiguration> {
                     return true;
                 }
             }
-        }
         return false;
     }
 
