@@ -93,6 +93,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_HAMMER.get(),
                 AetherIIItems.ARKENIUM_SPEAR.get(),
                 AetherIIItems.ARKENIUM_SHIELD.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
                 AetherIIItems.GRAVITITE_SHORTSWORD.get(),
                 AetherIIItems.GRAVITITE_HAMMER.get(),
                 AetherIIItems.GRAVITITE_SPEAR.get(),

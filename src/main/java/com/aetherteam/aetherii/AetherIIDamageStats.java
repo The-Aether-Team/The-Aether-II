@@ -22,6 +22,7 @@ public class AetherIIDamageStats {
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_SHORTSWORD = List.of(slashDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_HAMMER = List.of(impactDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_SPEAR = List.of(pierceDamageModifer(5.0));
+    public static final List<ItemAttributeModifiers.Entry> ARKENIUM_CROSSBOW = List.of(pierceDamageModifer(2.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SHORTSWORD = List.of(slashDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_HAMMER = List.of(impactDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SPEAR = List.of(pierceDamageModifer(6.0));
