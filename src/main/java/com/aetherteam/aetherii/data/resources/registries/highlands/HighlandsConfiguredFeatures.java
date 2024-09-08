@@ -1032,10 +1032,23 @@ public class HighlandsConfiguredFeatures {
                 AetherIITags.Blocks.QUICKSOIL_COAST_GENERATES_ON
         ));
         register(context, COAST_FERROSITE_SAND, AetherIIFeatures.COAST.get(), new CoastConfiguration(
-                BlockStateProvider.simple(AetherIIBlocks.FERROSITE_SAND.get()),
+                new NoiseProvider(
+                        99L,
+                        new NormalNoise.NoiseParameters(-3, 1.0, 0.25, 0.0, 0.0),
+                        1.0F,
+                        List.of(
+                                Blocks.AIR.defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                Blocks.AIR.defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                Blocks.AIR.defaultBlockState()
+                        )
+                ),
                 16.35F,
                 AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_HIGHFIELDS),
-                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_PATTERN_MAGNETIC),
+                DensityFunctions.zero(),
                 UniformInt.of(112, 156),
                 Optional.empty(),
                 0.0F,
