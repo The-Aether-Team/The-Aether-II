@@ -8,6 +8,7 @@
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
     "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
     "lake_noise": "aether_ii:highlands/lakes/noise",
+    "noise_start_value": 0.3,
     "underwater_block": {
       "type": "minecraft:dual_noise_provider",
       "noise": {

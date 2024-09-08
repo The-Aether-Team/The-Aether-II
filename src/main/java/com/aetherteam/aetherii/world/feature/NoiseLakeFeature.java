@@ -26,6 +26,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         int chunkX = context.origin().getX() - (context.origin().getX() % 16);
         int chunkZ = context.origin().getZ() - (context.origin().getZ() % 16);
         int height = context.config().height().getMinValue();
+        double noiseStartValue = context.config().noiseStartValue();
 
         // Generates this feature chunk-wise
         for (int x = 0; x < 16; x++) {
@@ -35,17 +36,17 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
                 // Determinds the noise value at each y-level
                 placeLakeLayer(context, xCoord, height, zCoord, 0.3, 1.0);
-                placeLakeLayer(context, xCoord, height - 1, zCoord, 0.325, 0.8);
-                placeLakeLayer(context, xCoord, height - 2, zCoord, 0.34, 0.75);
-                placeLakeLayer(context, xCoord, height - 3, zCoord, 0.345, 0.7);
-                placeLakeLayer(context, xCoord, height - 4, zCoord, 0.35, 0.625);
-                placeLakeLayer(context, xCoord, height - 5, zCoord, 0.365, 0.55);
-                placeLakeLayer(context, xCoord, height - 6, zCoord, 0.37, 0.475);
-                placeLakeLayer(context, xCoord, height - 7, zCoord, 0.375, 0.4);
-                placeLakeLayer(context, xCoord, height - 8, zCoord, 0.38, 0.3);
-                placeLakeLayer(context, xCoord, height - 9, zCoord, 0.385, 0.2);
-                placeLakeLayer(context, xCoord, height - 10, zCoord, 0.391, 0.1);
-                placeLakeLayer(context, xCoord, height - 11, zCoord, 0.45, 0.035);
+                placeLakeLayer(context, xCoord, height - 1, zCoord, noiseStartValue + 0.025, 0.8);
+                placeLakeLayer(context, xCoord, height - 2, zCoord, noiseStartValue + 0.04, 0.75);
+                placeLakeLayer(context, xCoord, height - 3, zCoord, noiseStartValue + 0.045, 0.7);
+                placeLakeLayer(context, xCoord, height - 4, zCoord, noiseStartValue + 0.05, 0.625);
+                placeLakeLayer(context, xCoord, height - 5, zCoord, noiseStartValue + 0.065, 0.55);
+                placeLakeLayer(context, xCoord, height - 6, zCoord, noiseStartValue + 0.07, 0.475);
+                placeLakeLayer(context, xCoord, height - 7, zCoord, noiseStartValue + 0.075, 0.4);
+                placeLakeLayer(context, xCoord, height - 8, zCoord, noiseStartValue + 0.08, 0.3);
+                placeLakeLayer(context, xCoord, height - 9, zCoord, noiseStartValue + 0.085, 0.2);
+                placeLakeLayer(context, xCoord, height - 10, zCoord, noiseStartValue + 0.091, 0.1);
+                placeLakeLayer(context, xCoord, height - 11, zCoord, noiseStartValue + 0.15, 0.035);
             }
         }
         return true;
