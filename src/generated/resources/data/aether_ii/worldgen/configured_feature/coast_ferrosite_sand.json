@@ -5,11 +5,14 @@
       "type": "minecraft:noise_provider",
       "noise": {
         "amplitudes": [
-          1.0
+          1.0,
+          0.25,
+          0.0,
+          0.0
         ],
-        "firstOctave": 0
+        "firstOctave": -3
       },
-      "scale": 0.075,
+      "scale": 1.0,
       "seed": 99,
       "states": [
         {
@@ -36,7 +39,6 @@
       ]
     },
     "distance_noise": "aether_ii:highlands/coasts/highfields",
-    "pattern_noise": 0.0,
     "size": 16.35,
     "valid_blocks": "aether_ii:ferrosite_coast_generates_on",
     "vegetation_chance": 0.0,

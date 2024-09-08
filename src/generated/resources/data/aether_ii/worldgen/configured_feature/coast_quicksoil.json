@@ -8,7 +8,6 @@
       }
     },
     "distance_noise": "aether_ii:highlands/coasts/highfields",
-    "pattern_noise": 0.0,
     "size": 16.35,
     "valid_blocks": "aether_ii:quicksoil_coast_generates_on",
     "vegetation_chance": 0.01,

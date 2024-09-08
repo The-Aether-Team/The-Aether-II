@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
+import com.aetherteam.aetherii.world.feature.NoiseLakeFeature;
 import com.aetherteam.aetherii.world.feature.configuration.*;
 import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
@@ -1091,6 +1092,7 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
+                        NoiseLakeFeature.Type.LAKE,
                         false
                 ));
         register(context, NOISE_LAKE_ARCTIC, AetherIIFeatures.NOISE_LAKE.get(),
@@ -1109,6 +1111,7 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
                                 )
                         ),
+                        NoiseLakeFeature.Type.LAKE,
                         true
                 ));
 

@@ -1,6 +1,7 @@
 {
   "type": "aether_ii:noise_lake",
   "config": {
+    "type": "lake",
     "frozen": true,
     "height": {
       "value": 124
