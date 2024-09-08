@@ -841,6 +841,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
         this.tag(BlockTags.REPLACEABLE).add(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), AetherIIBlocks.SHAYELINN_MOSS_VINES.get());
+        this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(AetherIIBlocks.FERROSITE_SAND.get());
 
 
         // Forge
