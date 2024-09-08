@@ -231,6 +231,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
         this.itemBlock(AetherIIBlocks.FERROSITE.get());
         this.itemBlock(AetherIIBlocks.RUSTED_FERROSITE.get());
+        this.itemBlockFlat(AetherIIBlocks.MAGNETIC_SHROOM.get(), "natural/");
 
         // Arctic
         this.itemBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());

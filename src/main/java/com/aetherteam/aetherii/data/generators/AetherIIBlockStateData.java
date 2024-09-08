@@ -45,6 +45,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.block(AetherIIBlocks.FERROSITE_SAND.get(), "natural/");
         this.block(AetherIIBlocks.FERROSITE.get(), "natural/");
         this.block(AetherIIBlocks.RUSTED_FERROSITE.get(), "natural/");
+        this.crossBlock(AetherIIBlocks.MAGNETIC_SHROOM.get(), "natural/");
 
         // Arctic
         this.block(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), "natural/");

@@ -54,6 +54,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");
         this.addBlock(AetherIIBlocks.FERROSITE, "Ferrosite");
         this.addBlock(AetherIIBlocks.RUSTED_FERROSITE, "Rusted Ferrosite");
+        this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM, "Magnetic Shroom");
 
         // Arctic
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK, "Arctic Snow Block");

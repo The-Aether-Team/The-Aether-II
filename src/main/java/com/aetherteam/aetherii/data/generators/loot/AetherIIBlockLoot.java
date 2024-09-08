@@ -58,6 +58,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.FERROSITE_SAND.get());
         this.dropSelf(AetherIIBlocks.FERROSITE.get());
         this.dropSelf(AetherIIBlocks.RUSTED_FERROSITE.get());
+        this.dropSelf(AetherIIBlocks.MAGNETIC_SHROOM.get());
 
         // Arctic
         this.add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.ARCTIC_SNOWBALL, ConstantValue.exactly(4.0F)));
