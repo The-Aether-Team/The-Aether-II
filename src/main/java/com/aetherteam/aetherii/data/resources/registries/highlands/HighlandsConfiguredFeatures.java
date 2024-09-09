@@ -195,6 +195,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_SPRING = createKey("water_spring");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE = createKey("noise_lake");
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_ARCTIC = createKey("noise_lake_arctic");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NOISE_LAKE_SWAMP = createKey("noise_lake_swamp");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR = createKey("ferrosite_pillar");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERROSITE_PILLAR_TURF_TOP = createKey("ferrosite_pillar_turf_top");
@@ -1112,6 +1113,32 @@ public class HighlandsConfiguredFeatures {
                                 )
                         ),
                         NoiseLakeFeature.Type.LAKE,
+                        true
+                ));
+
+        register(context, NOISE_LAKE_SWAMP, AetherIIFeatures.NOISE_LAKE.get(),
+                new NoiseLakeConfiguration(
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        0.3,
+                        ConstantInt.of(124),
+                        new DualNoiseProvider(
+                                new InclusiveRange<>(1, 4),
+                                new NormalNoise.NoiseParameters(-6, 1.0),
+                                1.0F,
+                                2345L,
+                                new NormalNoise.NoiseParameters(-2, 1.0),
+                                1.0F,
+                                List.of(
+                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                        AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
+                                )
+                        ),
+                        NoiseLakeFeature.Type.SWAMP,
                         true
                 ));
 
