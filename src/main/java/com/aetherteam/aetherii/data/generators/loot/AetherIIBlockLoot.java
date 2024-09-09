@@ -75,6 +75,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Irradiated
         this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
+        this.dropSelf(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.TARAHESP_AMBRELINN_CARPET.get());
+        this.add(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_VINES.get(), BlockLootSubProvider::createShearsOnlyDrop);
 
         // Ores
         this.add(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), this::createQuartzOreDrops);

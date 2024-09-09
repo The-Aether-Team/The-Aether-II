@@ -136,6 +136,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Irradiated
     public static final DeferredBlock<Block> IRRADIATED_HOLYSTONE = register("irradiated_holystone", () -> new Block(Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get())));
+    public static final DeferredBlock<Block> TARAHESP_AMBRELINN_MOSS_BLOCK = register("tarahesp_ambrelinn_moss_block", () -> new AetherMossBlock(HighlandsConfiguredFeatures.SHAYELINN_MOSS_FLOOR, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.1F).sound(SoundType.MOSS).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> TARAHESP_AMBRELINN_CARPET = register("tarahesp_ambrelinn_moss_carpet", () -> new CarpetBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY)));
+    public static final DeferredBlock<Block> TARAHESP_AMBRELINN_MOSS_VINES = register("tarahesp_ambrelinn_moss_vines", () -> new BottomedVineBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().randomTicks().strength(0.1F).sound(SoundType.VINE).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 
     // Ores
     public static final DeferredBlock<Block> HOLYSTONE_QUARTZ_ORE = register("holystone_quartz_ore", () -> new DropExperienceBlock(UniformInt.of(2, 5), Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));

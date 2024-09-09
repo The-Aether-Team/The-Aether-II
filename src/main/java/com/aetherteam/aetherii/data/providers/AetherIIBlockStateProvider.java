@@ -164,7 +164,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("vine", this.texture(this.name(block), "natural/"))
                 .texture("particle", this.texture(this.name(block), "natural/"))
                 .renderType(ResourceLocation.withDefaultNamespace("cutout"))
-                .element().from(0.0F, 0.0F, 0.2F).to(16.0F, 16.0F, 0.2F)//.shade(false)
+                .element().from(0.0F, 0.0F, 0.2F).to(16.0F, 16.0F, 0.2F)
                 .face(Direction.NORTH).uvs(16, 0, 0, 16).texture("#vine").end()
                 .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#vine").end()
                 .end();
@@ -173,7 +173,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("vine", this.extend(texture(this.name(block), "natural/"), "_bottom"))
                 .texture("particle", this.extend(texture(this.name(block), "natural/"), "_bottom"))
                 .renderType(ResourceLocation.withDefaultNamespace("cutout"))
-                .element().from(0.0F, 0.0F, 0.25F).to(16.0F, 16.0F, 0.25F)//.shade(false)
+                .element().from(0.0F, 0.0F, 0.25F).to(16.0F, 16.0F, 0.25F)
                 .face(Direction.NORTH).uvs(16, 0, 0, 16).texture("#vine").end()
                 .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#vine").end()
                 .end();
@@ -268,6 +268,129 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
             builder = builder.part().modelFile(model).rotationY(270).addModel()
                     .condition(BryalinnFlowersBlock.FACING, Direction.WEST).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
                     .end();
+        }
+    }
+
+    public void tarahespAmbrelinnMossVines(Block block) {
+        ModelFile normalModel = this.models().getBuilder(this.name(block))
+                .ao(false)
+                .texture("vine", this.texture(this.name(block), "natural/"))
+                .texture("particle", this.texture(this.name(block), "natural/"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                .element().from(0.0F, 0.0F, 0.2F).to(16.0F, 16.0F, 0.2F)
+                .face(Direction.NORTH).uvs(16, 0, 0, 16).texture("#vine").end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#vine").end()
+                .end()
+                .element().from(4.0F, 0.0F, -4.0F).to(4.0F, 16.0F, 4.0F)
+                .rotation().angle(0).axis(Direction.Axis.Y).origin(4.0F, 0.0F, -4.0F).end()
+                .face(Direction.NORTH).uvs(0, 0, 0, 16).texture("#vine").end()
+                .face(Direction.EAST).uvs(8, 0, 0, 16).texture("#vine").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 16).texture("#vine").end()
+                .face(Direction.WEST).uvs(0, 0, 8, 16).texture("#vine").end()
+                .face(Direction.UP).uvs(0, 0, 8, 0).texture("#vine").end()
+                .face(Direction.DOWN).uvs(0, 0, 8, 0).texture("#vine").end()
+                .end()
+                .element().from(12.0F, 0.0F, -4.0F).to(12.0F, 16.0F, 4.0F)
+                .rotation().angle(0).axis(Direction.Axis.Y).origin(12.0F, 0.0F, -4.0F).end()
+                .face(Direction.NORTH).uvs(0, 0, 0, 16).texture("#vine").end()
+                .face(Direction.EAST).uvs(16, 0, 8, 16).texture("#vine").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 16).texture("#vine").end()
+                .face(Direction.WEST).uvs(8, 0, 16, 16).texture("#vine").end()
+                .face(Direction.UP).uvs(0, 0, 8, 0).texture("#vine").end()
+                .face(Direction.DOWN).uvs(0, 0, 8, 0).texture("#vine").end()
+                .end();
+        ModelFile bottomModel  = this.models().getBuilder(this.name(block) + "_bottom")
+                .ao(false)
+                .texture("vine", this.extend(texture(this.name(block), "natural/"), "_bottom"))
+                .texture("particle", this.extend(texture(this.name(block), "natural/"), "_bottom"))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                .element().from(0.0F, 0.0F, 0.25F).to(16.0F, 16.0F, 0.25F)
+                .face(Direction.NORTH).uvs(16, 0, 0, 16).texture("#vine").end()
+                .face(Direction.SOUTH).uvs(0, 0, 16, 16).texture("#vine").end()
+                .end()
+                .element().from(4.0F, 0.0F, -4.0F).to(4.0F, 16.0F, 4.0F)
+                .rotation().angle(0).axis(Direction.Axis.Y).origin(4.0F, 0.0F, -4.0F).end()
+                .face(Direction.NORTH).uvs(0, 0, 0, 16).texture("#vine").end()
+                .face(Direction.EAST).uvs(8, 0, 0, 16).texture("#vine").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 16).texture("#vine").end()
+                .face(Direction.WEST).uvs(0, 0, 8, 16).texture("#vine").end()
+                .face(Direction.UP).uvs(0, 0, 8, 0).texture("#vine").end()
+                .face(Direction.DOWN).uvs(0, 0, 8, 0).texture("#vine").end()
+                .end()
+                .element().from(12.0F, 0.0F, -4.0F).to(12.0F, 16.0F, 4.0F)
+                .rotation().angle(0).axis(Direction.Axis.Y).origin(12.0F, 0.0F, -4.0F).end()
+                .face(Direction.NORTH).uvs(0, 0, 0, 16).texture("#vine").end()
+                .face(Direction.EAST).uvs(16, 0, 8, 16).texture("#vine").end()
+                .face(Direction.SOUTH).uvs(0, 0, 0, 16).texture("#vine").end()
+                .face(Direction.WEST).uvs(8, 0, 16, 16).texture("#vine").end()
+                .face(Direction.UP).uvs(0, 0, 8, 0).texture("#vine").end()
+                .face(Direction.DOWN).uvs(0, 0, 8, 0).texture("#vine").end()
+                .end();
+
+        MultiPartBlockStateBuilder builder = this.getMultipartBuilder(block);
+        List<BooleanProperty> directions = List.of(BottomedVineBlock.NORTH, BottomedVineBlock.EAST, BottomedVineBlock.SOUTH, BottomedVineBlock.WEST, BottomedVineBlock.UP);
+        int y = 0;
+        for (BooleanProperty direction : directions) {
+            if (direction != BottomedVineBlock.UP) {
+                builder = builder.part()
+                        .modelFile(normalModel).uvLock(true).rotationY(y).addModel()
+                        .condition(direction, true)
+                        .condition(BottomedVineBlock.AGE, ArrayUtils.toObject(IntStream.range(0, 25).toArray()))
+                        .end();
+                builder = builder.part()
+                        .modelFile(normalModel).uvLock(true).rotationY(y).addModel()
+                        .condition(BottomedVineBlock.EAST, false)
+                        .condition(BottomedVineBlock.NORTH, false)
+                        .condition(BottomedVineBlock.SOUTH, false)
+                        .condition(BottomedVineBlock.UP, false)
+                        .condition(BottomedVineBlock.WEST, false)
+                        .condition(BottomedVineBlock.AGE, ArrayUtils.toObject(IntStream.range(0, 25).toArray()))
+                        .end();
+                builder = builder.part()
+                        .modelFile(bottomModel).uvLock(true).rotationY(y).addModel()
+                        .condition(direction, true)
+                        .condition(BottomedVineBlock.AGE, 25)
+                        .end();
+                builder = builder.part()
+                        .modelFile(bottomModel).uvLock(true).rotationY(y).addModel()
+                        .condition(BottomedVineBlock.EAST, false)
+                        .condition(BottomedVineBlock.NORTH, false)
+                        .condition(BottomedVineBlock.SOUTH, false)
+                        .condition(BottomedVineBlock.UP, false)
+                        .condition(BottomedVineBlock.WEST, false)
+                        .condition(BottomedVineBlock.AGE, 25)
+                        .end();
+                y += 90;
+            } else {
+                builder = builder.part()
+                        .modelFile(normalModel).uvLock(true).rotationX(270).addModel()
+                        .condition(direction, true)
+                        .condition(BottomedVineBlock.AGE, ArrayUtils.toObject(IntStream.range(0, 25).toArray()))
+                        .end();
+                builder = builder.part()
+                        .modelFile(normalModel).uvLock(true).rotationX(270).addModel()
+                        .condition(BottomedVineBlock.EAST, false)
+                        .condition(BottomedVineBlock.NORTH, false)
+                        .condition(BottomedVineBlock.SOUTH, false)
+                        .condition(BottomedVineBlock.UP, false)
+                        .condition(BottomedVineBlock.WEST, false)
+                        .condition(BottomedVineBlock.AGE, ArrayUtils.toObject(IntStream.range(0, 25).toArray()))
+                        .end();
+                builder = builder.part()
+                        .modelFile(bottomModel).uvLock(true).rotationX(270).addModel()
+                        .condition(direction, true)
+                        .condition(BottomedVineBlock.AGE, 25)
+                        .end();
+                builder = builder.part()
+                        .modelFile(bottomModel).uvLock(true).rotationX(270).addModel()
+                        .condition(BottomedVineBlock.EAST, false)
+                        .condition(BottomedVineBlock.NORTH, false)
+                        .condition(BottomedVineBlock.SOUTH, false)
+                        .condition(BottomedVineBlock.UP, false)
+                        .condition(BottomedVineBlock.WEST, false)
+                        .condition(BottomedVineBlock.AGE, 25)
+                        .end();
+            }
         }
     }
 
