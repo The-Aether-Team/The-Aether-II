@@ -64,6 +64,8 @@ public class HighlandsPlacedFeatures {
     // Magnetic
     public static final ResourceKey<PlacedFeature> MAGNETIC_SCAR_TREES = createKey("magnetic_scar_trees");
     public static final ResourceKey<PlacedFeature> TURQUOISE_FOREST_TREES = createKey("turquoise_forest_trees");
+    public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_TREES = createKey("glistening_swamp_trees");
+    public static final ResourceKey<PlacedFeature> GLISTENING_SWAMP_TREES_SUNKEN = createKey("glistening_swamp_trees_sunken");
     public static final ResourceKey<PlacedFeature> VIOLET_HIGHWOODS_TREES = createKey("violet_highwoods_trees");
 
     // Arctic
@@ -330,14 +332,22 @@ public class HighlandsPlacedFeatures {
                 SurfaceWaterDepthFilter.forMaxDepth(2),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BiomeFilter.biome(),
-                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(AetherIIBlocks.WISPROOT_SAPLING.get().defaultBlockState(), BlockPos.ZERO))
-        );
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(AetherIIBlocks.WISPROOT_SAPLING.get().defaultBlockState(), BlockPos.ZERO)));
 
         // Magnetic
         register(context, MAGNETIC_SCAR_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_MAGNETIC_SCAR),
                 HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(3)));
         register(context, TURQUOISE_FOREST_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_TURQUOISE_FOREST),
                 HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(2, 0.1F, 1)));
+        register(context, GLISTENING_SWAMP_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_GLISTENING_SWAMP),
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(20)));
+        register(context, GLISTENING_SWAMP_TREES_SUNKEN, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREATROOT),
+                RarityFilter.onAverageOnceEvery(4),
+                InSquarePlacement.spread(),
+                SurfaceWaterDepthFilter.forMaxDepth(3),
+                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BiomeFilter.biome(),
+                BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(AetherIIBlocks.GREATROOT_SAPLING.get().defaultBlockState(), BlockPos.ZERO)));
         register(context, VIOLET_HIGHWOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VIOLET_HIGHWOODS),
                 HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
 

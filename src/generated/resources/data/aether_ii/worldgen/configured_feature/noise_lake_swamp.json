@@ -7,7 +7,7 @@
       "value": 124
     },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
-    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
+    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor_swamp",
     "lake_noise": "aether_ii:highlands/lakes/noise",
     "noise_start_value": 0.3,
     "underwater_block": {
