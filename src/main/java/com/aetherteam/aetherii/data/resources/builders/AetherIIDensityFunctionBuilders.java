@@ -155,7 +155,7 @@ public class AetherIIDensityFunctionBuilders {
         density = density.squeeze();
         return density;
     }
-  
+
     // Base Islands
     public static DensityFunction buildFactor(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate ridges = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES));
@@ -165,7 +165,7 @@ public class AetherIIDensityFunctionBuilders {
     }
 
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factor(I ridges, I temperature, I erosion) {
-        CubicSpline<C, I> continentsSpline = CubicSpline.builder(ridges)
+        CubicSpline<C, I> ridgeSpline = CubicSpline.builder(ridges)
                 .addPoint(0.0F, 3.0F)
                 .addPoint(0.2F, 1.0F)
                 .build();
@@ -174,8 +174,8 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(-0.525F, 1.0F)
                 .addPoint(-0.45F, 1.5F)
                 .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.325F, continentsSpline)
-                .addPoint(0.575F, continentsSpline)
+                .addPoint(-0.325F, ridgeSpline)
+                .addPoint(0.575F, ridgeSpline)
                 .addPoint(0.65F, 7.5F)
                 .addPoint(0.725F, 1.0F)
                 .build();
@@ -288,7 +288,6 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction density = base;
         density = DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 128, density, DensityFunctions.mul(density, getFunction(function, LAKES_FACTOR)));
         density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -1.5, 0.65, density, base);
-        density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, base);
         return density;
     }
 
@@ -444,11 +443,10 @@ public class AetherIIDensityFunctionBuilders {
     public static DensityFunction buildLakeFactor(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate lakes = new DensityFunctions.Spline.Coordinate(function.getOrThrow(LAKES_NOISE));
         DensityFunctions.Spline.Coordinate temperature = new DensityFunctions.Spline.Coordinate(function.getOrThrow(TEMPERATURE));
-        DensityFunctions.Spline.Coordinate erosion = new DensityFunctions.Spline.Coordinate(function.getOrThrow(EROSION));
-        return DensityFunctions.spline(lakeFactor(lakes, temperature, erosion));
+        return DensityFunctions.spline(lakeFactor(lakes, temperature));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> lakeFactor(I lakes, I temperature, I erosion) {
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> lakeFactor(I lakes, I temperature) {
 
         CubicSpline<C, I> lakeSpline = CubicSpline.builder(lakes)
                 .addPoint(0.3F, 1.0F)
@@ -456,14 +454,9 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(0.4F, 25.0F)
                 .build();
 
-        CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
+        return CubicSpline.builder(temperature)
                 .addPoint(0.575F, lakeSpline)
                 .addPoint(0.65F, 1.0F)
-                .build();
-
-        return CubicSpline.builder(erosion)
-                .addPoint(0.425F, temperatureSpline)
-                .addPoint(0.55F, 1.0F)
                 .build();
     }
 

@@ -2,7 +2,7 @@
   "type": "aether_ii:noise_lake",
   "config": {
     "type": "swamp",
-    "frozen": true,
+    "frozen": false,
     "height": {
       "value": 124
     },

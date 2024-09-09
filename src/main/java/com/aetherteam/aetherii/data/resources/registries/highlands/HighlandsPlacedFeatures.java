@@ -111,6 +111,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WATER_SPRING = createKey("water_spring");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = createKey("noise_lake_arctic");
+    public static final ResourceKey<PlacedFeature> NOISE_LAKE_SWAMP = createKey("noise_lake_swamp");
 
     public static final ResourceKey<PlacedFeature> FERROSITE_PILLAR = createKey("ferrosite_pillar");
 
@@ -496,6 +497,7 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome());
         register(context, NOISE_LAKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE), BiomeFilter.biome());
         register(context, NOISE_LAKE_ARCTIC, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE_ARCTIC), BiomeFilter.biome());
+        register(context, NOISE_LAKE_SWAMP, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE_SWAMP), BiomeFilter.biome());
 
         register(context, FERROSITE_PILLAR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FERROSITE_PILLAR),
                 CountPlacement.of(1),

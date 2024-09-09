@@ -1,26 +1,19 @@
 {
   "type": "minecraft:range_choice",
-  "input": "aether_ii:highlands/erosion",
-  "max_exclusive": 0.55,
-  "min_inclusive": 0.0,
+  "input": "aether_ii:highlands/temperature",
+  "max_exclusive": 0.65,
+  "min_inclusive": -1.5,
   "when_in_range": {
     "type": "minecraft:range_choice",
-    "input": "aether_ii:highlands/temperature",
-    "max_exclusive": 0.65,
-    "min_inclusive": -1.5,
-    "when_in_range": {
-      "type": "minecraft:range_choice",
-      "input": "minecraft:y",
-      "max_exclusive": 128.0,
-      "min_inclusive": -4064.0,
-      "when_in_range": "aether_ii:highlands/terrain/base/base_terrain_shaper",
-      "when_out_of_range": {
-        "type": "minecraft:mul",
-        "argument1": "aether_ii:highlands/terrain/base/base_terrain_shaper",
-        "argument2": "aether_ii:highlands/lakes/factor"
-      }
-    },
-    "when_out_of_range": "aether_ii:highlands/terrain/base/base_terrain_shaper"
+    "input": "minecraft:y",
+    "max_exclusive": 128.0,
+    "min_inclusive": -4064.0,
+    "when_in_range": "aether_ii:highlands/terrain/base/base_terrain_shaper",
+    "when_out_of_range": {
+      "type": "minecraft:mul",
+      "argument1": "aether_ii:highlands/terrain/base/base_terrain_shaper",
+      "argument2": "aether_ii:highlands/lakes/factor"
+    }
   },
   "when_out_of_range": "aether_ii:highlands/terrain/base/base_terrain_shaper"
 }

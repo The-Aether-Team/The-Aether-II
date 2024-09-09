@@ -1139,7 +1139,7 @@ public class HighlandsConfiguredFeatures {
                                 )
                         ),
                         NoiseLakeFeature.Type.SWAMP,
-                        true
+                        false
                 ));
 
         register(context, FERROSITE_PILLAR, AetherIIFeatures.FERROSITE_PILLAR.get(), new FerrositePillarConfiguration(
