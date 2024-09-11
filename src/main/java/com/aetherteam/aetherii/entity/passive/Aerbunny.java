@@ -32,6 +32,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
@@ -45,6 +46,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.event.EventHooks;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
@@ -231,65 +233,64 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
-        if (this.isTame()) {
-            if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-                this.heal((float) itemstack.getFoodProperties(this).nutrition());
-                if (!player.getAbilities().instabuild) {
-                    itemstack.shrink(1);
-                }
+        ItemStack itemStack = player.getItemInHand(hand);
+        Item item = itemStack.getItem();
 
-                this.gameEvent(GameEvent.EAT, this);
-                return InteractionResult.SUCCESS;
-            } else {
-                if (item instanceof DyeItem dyeitem && this.isOwnedBy(player)) {
-                    DyeColor dyecolor = dyeitem.getDyeColor();
-                    if (dyecolor != this.getCollarColor()) {
-                        this.setCollarColor(dyecolor);
-                        if (!player.getAbilities().instabuild) {
-                            itemstack.shrink(1);
-                        }
-
-                        return InteractionResult.SUCCESS;
-                    }
-
-                    return super.mobInteract(player, hand);
-                }
-
-            }
-        } else if (this.isFood(itemstack) && this.getAfraidTime() <= 0) {
-            if (!player.getAbilities().instabuild) {
-                itemstack.shrink(1);
-            }
-
-            if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, player)) {
-                this.tame(player);
-                this.navigation.stop();
-                this.setTarget(null);
-                this.setOrderedToSit(true);
-                this.level().broadcastEntityEvent(this, (byte) 7);
-            } else {
-                this.level().broadcastEntityEvent(this, (byte) 6);
-            }
-
-            return InteractionResult.SUCCESS;
-        }
 
         InteractionResult result = super.mobInteract(player, hand);
-        if (player.isShiftKeyDown() && this.isTame() && (!result.consumesAction() || this.isBaby()) && this.isOwnedBy(player)) {
-            this.setOrderedToSit(!this.isOrderedToSit());
-            this.jumping = false;
-            this.navigation.stop();
-            this.setTarget(null);
-            return InteractionResult.SUCCESS;
+
+
+
+        if (this.isTame()) {
+            if (this.isOwnedBy(player)) {
+                if (item instanceof DyeItem dye) {
+                    DyeColor dyeColor = dye.getDyeColor();
+                    if (dyeColor != this.getCollarColor()) {
+                        if (!this.level().isClientSide()) {
+                            this.setCollarColor(dyeColor);
+                            itemStack.consume(1, player);
+                            this.setPersistenceRequired();
+                        }
+                        return InteractionResult.sidedSuccess(this.level().isClientSide());
+                    }
+                } else if (this.isFood(itemStack) && this.getHealth() < this.getMaxHealth()) {
+                    if (!this.level().isClientSide()) {
+                        FoodProperties food = itemStack.getFoodProperties(this);
+                        this.heal(food != null ? (float) food.nutrition() : 1.0F);
+                        this.usePlayerItem(player, hand, itemStack);
+                    }
+
+                    return InteractionResult.sidedSuccess(this.level().isClientSide());
+                }
+
+                if (!result.consumesAction() && !player.isShiftKeyDown()) {
+                    this.setOrderedToSit(!this.isOrderedToSit());
+                    result = InteractionResult.sidedSuccess(this.level().isClientSide());
+                }
+            }
+        } else if (this.isFood(itemStack) && this.getAfraidTime() <= 0) {
+            if (!this.level().isClientSide()) {
+                this.usePlayerItem(player, hand, itemStack);
+                if (this.random.nextInt(3) == 0 && !EventHooks.onAnimalTame(this, player)) {
+                    this.tame(player);
+                    this.setOrderedToSit(true);
+                    this.level().broadcastEntityEvent(this, (byte) 7);
+                } else {
+                    this.level().broadcastEntityEvent(this, (byte) 6);
+                }
+                this.setPersistenceRequired();
+            }
+
+            return InteractionResult.sidedSuccess(this.level().isClientSide());
         }
+
         if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
             // Aerbunny can be mounted/dismounted if the shift key is held or no other interaction actions succeed, but only if the Aerbunny is not inside a block.
-            if ((player.isShiftKeyDown() || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
-                return this.ridePlayer(player);
+            if ((this.getVehicle() != null || player.isShiftKeyDown() || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
+                result = this.ridePlayer(player);
             }
         }
+
         return result;
     }
 

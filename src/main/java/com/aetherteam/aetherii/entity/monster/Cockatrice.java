@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceRangedAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
@@ -85,7 +86,8 @@ public class Cockatrice extends Monster implements RangedAttackMob {
                 .add(Attributes.MAX_HEALTH, 25.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
-                .add(Attributes.ATTACK_DAMAGE, 4.0);
+                .add(Attributes.ATTACK_DAMAGE, 4.0)
+                .add(AetherIIAttributes.VENOM_EFFECT_RESISTANCE, 1.0);
     }
 
     @Override

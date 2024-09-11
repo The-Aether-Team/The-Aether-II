@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.weapons;
 
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
@@ -77,6 +78,11 @@ public class TieredCrossbowItem extends CrossbowItem {
         } else if (!player.getProjectile(stack).isEmpty()) {
             this.startSoundPlayed = false;
             this.midLoadSoundPlayed = false;
+            if (player.isCrouching()) {
+                stack.set(AetherIIDataComponents.CROSSBOW_SPECIAL, true);
+            } else {
+                stack.set(AetherIIDataComponents.CROSSBOW_SPECIAL, false);
+            }
             player.startUsingItem(hand);
             return InteractionResultHolder.consume(stack);
         } else {

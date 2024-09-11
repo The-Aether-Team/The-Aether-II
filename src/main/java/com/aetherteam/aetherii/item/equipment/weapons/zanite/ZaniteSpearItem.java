@@ -1,26 +1,21 @@
 package com.aetherteam.aetherii.item.equipment.weapons.zanite;
 
+import com.aetherteam.aetherii.AetherIIDamageStats;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
 import com.aetherteam.aetherii.item.equipment.weapons.abilities.ZaniteWeapon;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
-import org.apache.commons.lang3.tuple.Triple;
 
 public class ZaniteSpearItem extends TieredSpearItem implements ZaniteWeapon {
     public ZaniteSpearItem() {
-        super(AetherIIItemTiers.ZANITE, new Properties().attributes(TieredSpearItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F)));
+        super(AetherIIItemTiers.ZANITE, new Properties().attributes(AetherIIDamageStats.merge(TieredSpearItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F), AetherIIDamageStats.ZANITE_SPEAR)));
     }
 
     @Override
     public boolean isDamaged(ItemStack stack) {
-        stack.set(DataComponents.ATTRIBUTE_MODIFIERS, this.increaseDamage(stack.getAttributeModifiers(), stack));
+        stack.set(DataComponents.ATTRIBUTE_MODIFIERS, this.increaseDamage(AetherIIAttributes.PIERCE_DAMAGE, stack.getAttributeModifiers(), stack));
         return super.isDamaged(stack);
-    }
-
-    @Override
-    public Triple<Double, Double, Double> getUniqueDamage(ItemStack itemStack, double slashDamage, double impactDamage, double pierceDamage) {
-        pierceDamage = this.calculateIncrease(itemStack, pierceDamage);
-        return Triple.of(slashDamage, impactDamage, pierceDamage);
     }
 }

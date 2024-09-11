@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cloudwool": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#aether_ii:cloudwool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:bandage"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cloudwool"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:bandage"
+    ]
+  }
+}

@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.List;
 import java.util.Optional;
 
-public record BestiaryEntry(Holder<EntityType<?>> entityType, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, List<LootDisplay> loot, Optional<TagKey<Item>> food, ResourceLocation observationAdvancement, ResourceLocation understandingAdvancement) {
+public record BestiaryEntry(Holder<EntityType<?>> entityType, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, Optional<Double> scaleMultiplier, String descriptionKey, List<LootDisplay> loot, Optional<TagKey<Item>> food, ResourceLocation observationAdvancement, ResourceLocation understandingAdvancement) {
     public static final Codec<BestiaryEntry> DIRECT_CODEC =
             RecordCodecBuilder.create(in -> in.group(
                     BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().fieldOf("entity_type").forGetter(BestiaryEntry::entityType),
@@ -30,6 +30,7 @@ public record BestiaryEntry(Holder<EntityType<?>> entityType, ResourceLocation i
                     Codec.STRING.optionalFieldOf("name").forGetter(BestiaryEntry::name),
                     Codec.STRING.optionalFieldOf("slot_name").forGetter(BestiaryEntry::slotName),
                     Codec.STRING.optionalFieldOf("slot_subtitle").forGetter(BestiaryEntry::slotSubtitle),
+                    Codec.DOUBLE.optionalFieldOf("scale_multiplier").forGetter(BestiaryEntry::scaleMultiplier),
                     Codec.STRING.fieldOf("description_key").forGetter(BestiaryEntry::descriptionKey),
                     LootDisplay.DIRECT_CODEC.sizeLimitedListOf(3).fieldOf("loot").forGetter(BestiaryEntry::loot),
                     TagKey.codec(Registries.ITEM).optionalFieldOf("food").forGetter(BestiaryEntry::food),

@@ -129,28 +129,37 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.PURPLE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
+        this.item(AetherIIItems.SCATTERGLASS_VIAL.get(), "materials/");
         this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "materials/");
         this.item(AetherIIItems.CHARGE_CORE.get(), "materials/");
 
         // Food
-        this.item(AetherIIItems.BLUEBERRY.get(), "food/");
-        this.item(AetherIIItems.ENCHANTED_BLUEBERRY.get(), "food/");
-        this.item(AetherIIItems.ORANGE.get(), "food/");
-        this.item(AetherIIItems.WYNDBERRY.get(), "food/");
-        this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "food/");
-        this.item(AetherIIItems.GREEN_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.PURPLE_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.WHITE_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.BURRUKAI_RIBS.get(), "food/");
-        this.item(AetherIIItems.BURRUKAI_RIB_CUT.get(), "food/");
-        this.item(AetherIIItems.KIRRID_CUTLET.get(), "food/");
-        this.item(AetherIIItems.KIRRID_LOIN.get(), "food/");
-        this.item(AetherIIItems.RAW_TAEGORE_MEAT.get(), "food/");
-        this.item(AetherIIItems.TAEGORE_STEAK.get(), "food/");
-        this.item(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
-        this.item(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
+        this.item(AetherIIItems.BLUEBERRY.get(), "consumables/");
+        this.item(AetherIIItems.ENCHANTED_BLUEBERRY.get(), "consumables/");
+        this.item(AetherIIItems.ORANGE.get(), "consumables/");
+        this.item(AetherIIItems.WYNDBERRY.get(), "consumables/");
+        this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "consumables/");
+        this.item(AetherIIItems.GREEN_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.PURPLE_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.WHITE_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.BURRUKAI_RIBS.get(), "consumables/");
+        this.item(AetherIIItems.BURRUKAI_RIB_CUT.get(), "consumables/");
+        this.item(AetherIIItems.KIRRID_CUTLET.get(), "consumables/");
+        this.item(AetherIIItems.KIRRID_LOIN.get(), "consumables/");
+        this.item(AetherIIItems.RAW_TAEGORE_MEAT.get(), "consumables/");
+        this.item(AetherIIItems.TAEGORE_STEAK.get(), "consumables/");
+        this.item(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(), "consumables/");
+        this.item(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get(), "consumables/");
+
+        // Consumables
+        this.item(AetherIIItems.WATER_VIAL.get(), "consumables/");
+        this.item(AetherIIItems.BANDAGE.get(), "consumables/");
+        this.item(AetherIIItems.SPLINT.get(), "consumables/");
+        this.item(AetherIIItems.ANTITOXIN_VIAL.get(), "consumables/");
+        this.item(AetherIIItems.ANTIVENOM_VIAL.get(), "consumables/");
+        this.healingStoneItem(AetherIIItems.HEALING_STONE.get());
 
         // Skyroot Buckets
         this.item(AetherIIItems.SKYROOT_BUCKET.get(), "miscellaneous/");

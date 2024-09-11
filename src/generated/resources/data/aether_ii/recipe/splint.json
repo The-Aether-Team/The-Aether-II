@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "aether_ii:skyroot_stick"
+    },
+    {
+      "tag": "aether_ii:cloudwool"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:splint"
+  }
+}

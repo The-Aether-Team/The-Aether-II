@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/food/raw_taegore_meat"
+    "layer0": "aether_ii:item/consumables/raw_taegore_meat"
   }
 }

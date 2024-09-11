@@ -78,6 +78,25 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.PURPLE_AERCLOUD.get(),
                 AetherIIBlocks.STORM_AERCLOUD.get()
         );
+        this.tag(AetherIITags.Blocks.CLOUDWOOL).add(
+                AetherIIBlocks.CLOUDWOOL.get(),
+                AetherIIBlocks.WHITE_CLOUDWOOL.get(),
+                AetherIIBlocks.ORANGE_CLOUDWOOL.get(),
+                AetherIIBlocks.MAGENTA_CLOUDWOOL.get(),
+                AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(),
+                AetherIIBlocks.YELLOW_CLOUDWOOL.get(),
+                AetherIIBlocks.LIME_CLOUDWOOL.get(),
+                AetherIIBlocks.PINK_CLOUDWOOL.get(),
+                AetherIIBlocks.GRAY_CLOUDWOOL.get(),
+                AetherIIBlocks.LIGHT_GRAY_CLOUDWOOL.get(),
+                AetherIIBlocks.CYAN_CLOUDWOOL.get(),
+                AetherIIBlocks.PURPLE_CLOUDWOOL.get(),
+                AetherIIBlocks.BLUE_CLOUDWOOL.get(),
+                AetherIIBlocks.BROWN_CLOUDWOOL.get(),
+                AetherIIBlocks.GREEN_CLOUDWOOL.get(),
+                AetherIIBlocks.RED_CLOUDWOOL.get(),
+                AetherIIBlocks.BLACK_CLOUDWOOL.get()
+        );
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.SKYROOT_WOOD.get(),

@@ -3,10 +3,7 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
-import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
-import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
-import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -111,45 +108,6 @@ public class AetherIIDataMapData extends DataMapProvider {
         buckets.add(Items.TROPICAL_FISH_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET.getKey()), false);
         buckets.add(Items.AXOLOTL_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.getKey()), false);
         buckets.add(Items.TADPOLE_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TADPOLE_BUCKET.getKey()), false);
-        
-        var inflictions = this.builder(AetherIIDataMaps.DAMAGE_INFLICTION);
-        inflictions.add(AetherIIItems.SKYROOT_SHORTSWORD, new DamageInfliction(4.0, 0, 0), false);
-        inflictions.add(AetherIIItems.SKYROOT_HAMMER, new DamageInfliction(0, 4.0, 0), false);
-        inflictions.add(AetherIIItems.SKYROOT_SPEAR, new DamageInfliction(0, 0, 4.0), false);
-        inflictions.add(AetherIIItems.HOLYSTONE_SHORTSWORD, new DamageInfliction(5.0, 0, 0), false);
-        inflictions.add(AetherIIItems.HOLYSTONE_HAMMER, new DamageInfliction(0, 5.0, 0), false);
-        inflictions.add(AetherIIItems.HOLYSTONE_SPEAR, new DamageInfliction(0, 0, 5.0), false);
-        inflictions.add(AetherIIItems.ZANITE_SHORTSWORD, new DamageInfliction(6.0, 0.0, 0), false);
-        inflictions.add(AetherIIItems.ZANITE_HAMMER, new DamageInfliction(0, 6.0, 0), false);
-        inflictions.add(AetherIIItems.ZANITE_SPEAR, new DamageInfliction(0, 0, 6.0), false);
-        inflictions.add(AetherIIItems.ARKENIUM_SHORTSWORD, new DamageInfliction(6.0, 0.0, 0), false);
-        inflictions.add(AetherIIItems.ARKENIUM_HAMMER, new DamageInfliction(0, 6.0, 0), false);
-        inflictions.add(AetherIIItems.ARKENIUM_SPEAR, new DamageInfliction(0, 0, 6.0), false);
-        inflictions.add(AetherIIItems.GRAVITITE_SHORTSWORD, new DamageInfliction(7.0, 0.0, 0), false);
-        inflictions.add(AetherIIItems.GRAVITITE_HAMMER, new DamageInfliction(0, 7.0, 0), false);
-        inflictions.add(AetherIIItems.GRAVITITE_SPEAR, new DamageInfliction(0, 0, 7.0), false);
-        
-        var resistances = this.builder(AetherIIDataMaps.DAMAGE_RESISTANCE);
-        resistances.add(AetherIIEntityTypes.FLYING_COW, new DamageResistance(0, 0, 0), false);
-        resistances.add(AetherIIEntityTypes.SHEEPUFF, new DamageResistance(0, 0, 0), false);
-        resistances.add(AetherIIEntityTypes.PHYG, new DamageResistance(0, 0, 0), false);
-        resistances.add(AetherIIEntityTypes.AERBUNNY, new DamageResistance(0, 2, -2), false);
-        resistances.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID, new DamageResistance(-2, 0, 0), false);
-        resistances.add(AetherIIEntityTypes.MAGNETIC_TAEGORE, new DamageResistance(-2, 0, 0), false);
-        resistances.add(AetherIIEntityTypes.ARCTIC_TAEGORE, new DamageResistance(-2, 0, 0), false);
-        resistances.add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, new DamageResistance(2, -2, 0), false);
-        resistances.add(AetherIIEntityTypes.MAGNETIC_BURRUKAI, new DamageResistance(2, -2, 0), false);
-        resistances.add(AetherIIEntityTypes.ARCTIC_BURRUKAI, new DamageResistance(2, -2, 0), false);
-        resistances.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID, new DamageResistance(0, 2, -2), false);
-        resistances.add(AetherIIEntityTypes.MAGNETIC_KIRRID, new DamageResistance(0, 2, -2), false);
-        resistances.add(AetherIIEntityTypes.ARCTIC_KIRRID, new DamageResistance(0, 2, -2), false);
-        resistances.add(AetherIIEntityTypes.MOA, new DamageResistance(2, 2, -2), false);
-
-        resistances.add(AetherIIEntityTypes.AECHOR_PLANT, new DamageResistance(-2, 2, 0), false);
-        resistances.add(AetherIIEntityTypes.ZEPHYR, new DamageResistance(0, 2, -2), false);
-        resistances.add(AetherIIEntityTypes.TEMPEST, new DamageResistance(2, 2, -2), false);
-        resistances.add(AetherIIEntityTypes.COCKATRICE, new DamageResistance(-2, 0, 2), false);
-        resistances.add(AetherIIEntityTypes.SWET, new DamageResistance(2, 0, -2), false);
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {
