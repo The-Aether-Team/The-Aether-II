@@ -30,7 +30,7 @@ public record PortalTravelSoundPacket() implements CustomPacketPayload {
 
     public static void execute(PortalTravelSoundPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
-            PortalSoundUtil.playPortalSound(Minecraft.getInstance().player);
+            PortalSoundUtil.playTravelSound();
         }
     }
 }

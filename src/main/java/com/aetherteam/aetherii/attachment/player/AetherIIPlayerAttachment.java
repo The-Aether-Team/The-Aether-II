@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.portal.PortalSoundUtil;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
@@ -202,9 +203,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
                     }
 
                     if (this.portalIntensity == 0.0F) {
-                        Minecraft.getInstance()
-                                .getSoundManager()
-                                .play(SimpleSoundInstance.forLocalAmbience(AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER.get(), localPlayer.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F));
+                        PortalSoundUtil.playTriggerSound();
                     }
 
                     f = 0.0125F;

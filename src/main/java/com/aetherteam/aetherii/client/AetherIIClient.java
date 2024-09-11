@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.event.listeners.*;
 import com.aetherteam.aetherii.client.event.listeners.attachment.AerbunnyMountClientListners;
 import com.aetherteam.aetherii.client.event.listeners.attachment.DimensionRenderEffectListeners;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
@@ -54,7 +55,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
         neoBus.addListener(AetherIIColorResolvers::registerItemColor);
         neoBus.addListener(AetherIIRecipeCategories::registerRecipeCategories);
-        neoBus.addListener(AetherIIParticleTypes::registerParticleFactories);
+        neoBus.addListener(AetherIIParticleFactories::registerParticleFactories);
         neoBus.addListener(AetherIIOverlays::registerOverlays);
         neoBus.addListener(AetherIIRenderers::registerAddLayer);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
