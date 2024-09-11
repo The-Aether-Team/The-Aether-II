@@ -219,6 +219,9 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = createKey("purple_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = createKey("storm_aercloud");
 
+    // Dungeon
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_GUARDIAN_TREE_ENTRANCE = createKey("infected_guardian_tree_entrance");
+
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         bootstrapSurface(context);
@@ -1236,6 +1239,12 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
                         15D
                 ));
+
+        register(context, INFECTED_GUARDIAN_TREE_ENTRANCE, AetherIIFeatures.DUNGEON_ENTRANCE.get(), new DungeonEntranceConfiguration(
+                ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dungeon/infected_guardian_tree/entrance"),
+                -4,
+                -4
+        ));
     }
     
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {
