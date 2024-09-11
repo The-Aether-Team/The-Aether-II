@@ -2,7 +2,7 @@
   "type": "minecraft:smelting",
   "category": "food",
   "cookingtime": 200,
-  "experience": 0.1,
+  "experience": 0.35,
   "ingredient": {
     "item": "aether_ii:raw_taegore_meat"
   },

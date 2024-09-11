@@ -1,0 +1,15 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "repairing",
+  "experience": 0.0,
+  "fuel_count": 1,
+  "group": "repair_taegore_hide_armor",
+  "ingredient": {
+    "item": "aether_ii:taegore_hide_chestplate"
+  },
+  "processing_time": 200,
+  "result": {
+    "count": 1,
+    "id": "aether_ii:taegore_hide_chestplate"
+  }
+}

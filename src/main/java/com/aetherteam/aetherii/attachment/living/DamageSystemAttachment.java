@@ -4,27 +4,21 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.data.resources.maps.DamageInfliction;
-import com.aetherteam.aetherii.data.resources.maps.DamageResistance;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
-import com.aetherteam.aetherii.item.equipment.weapons.abilities.UniqueDamage;
 import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ItemSupplier;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -61,46 +55,63 @@ public class DamageSystemAttachment implements INBTSynchable {
             if (player.tickCount % 5 == 0) {
                 if (attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA && attachment.getShieldStamina() > 0) { //todo balance
                     if (!player.isBlocking()) {
-                        int restore = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_RESTORATION);
-                        attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + restore));
+                        attachment.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.min(500, attachment.getShieldStamina() + 2));
                     }
                 }
             }
         }
     }
 
-    public float getDamageTypeModifiedValue(Entity target, DamageSource source, double damage) {
+    public void buildUpShieldStun(LivingEntity entity, DamageSource source) {
+        if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
+            if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) {
+                int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2;
+                int cooldown;
+                if (entity.getUseItem().getItem() instanceof TieredShieldItem) {
+                    rate = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_REDUCTION);
+                    cooldown = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION);
+                } else {
+                    cooldown = 0;
+                }
+                this.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, this.getShieldStamina() - rate));
+                if (this.getShieldStamina() <= 0) {
+                    player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300 - cooldown));
+                    player.stopUsingItem();
+                }
+            }
+        }
+    }
+
+    public float getDamageTypeModifiedValue(LivingEntity target, DamageSource source, double damage) {
         if (source.typeHolder().is(AetherIITags.DamageTypes.TYPED)) {
             Entity sourceEntity = source.getDirectEntity();
             ItemStack sourceStack = ItemStack.EMPTY;
 
             if (sourceEntity instanceof LivingEntity livingSource) {
                 sourceStack = livingSource.getMainHandItem();
-            } else if (sourceEntity instanceof Projectile && sourceEntity instanceof ItemSupplier itemSupplier) {
-                sourceStack = itemSupplier.getItem();
             }
+//            else if (sourceEntity instanceof Projectile && sourceEntity instanceof ItemSupplier itemSupplier) { //todo
+//                sourceStack = itemSupplier.getItem();
+//            }
 
             if (!sourceStack.isEmpty()) {
-                DamageInfliction infliction = BuiltInRegistries.ITEM.wrapAsHolder(sourceStack.getItem()).getData(AetherIIDataMaps.DAMAGE_INFLICTION);
-                DamageResistance resistance = BuiltInRegistries.ENTITY_TYPE.wrapAsHolder(target.getType()).getData(AetherIIDataMaps.DAMAGE_RESISTANCE);
+                double slashDefense = target.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0;
+                double impactDefense = target.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0;
+                double pierceDefense = target.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0;
 
-                if (resistance != null) {
-                    double slashDefense = resistance.slashValue();
-                    double impactDefense = resistance.impactValue();
-                    double pierceDefense = resistance.pierceValue();
+                if (slashDefense != 0 || impactDefense != 0 || pierceDefense != 0) {
+                    double baseDamage = Attributes.ATTACK_DAMAGE.value().getDefaultValue();
+                    double slashDamage = 0;
+                    double impactDamage = 0;
+                    double pierceDamage = 0;
+                    if (source.getDirectEntity() instanceof LivingEntity livingEntity) {
+                        baseDamage = livingEntity.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
+                        slashDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_DAMAGE) : 0.0;
+                        impactDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_DAMAGE) : 0.0;
+                        pierceDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_DAMAGE) : 0.0;
+                    }
 
-                    if (infliction != null) {
-                        double slashDamage =  infliction.slashValue();
-                        double impactDamage = infliction.impactValue();
-                        double pierceDamage = infliction.pierceValue();
-
-                        if (sourceStack.getItem() instanceof UniqueDamage uniqueDamage) {
-                            Triple<Double, Double, Double> damages = uniqueDamage.getUniqueDamage(sourceStack, slashDamage, impactDamage, pierceDamage);
-                            slashDamage += damages.getLeft();
-                            impactDamage += damages.getMiddle();
-                            pierceDamage += damages.getRight();
-                        }
-
+                    if (slashDamage != 0 || impactDamage != 0 || pierceDamage != 0) {
                         this.createSoundsAndParticles(sourceEntity, target, slashDamage, slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_INCORRECT.get());
                         this.createSoundsAndParticles(sourceEntity, target, impactDamage, impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
                         this.createSoundsAndParticles(sourceEntity, target, pierceDamage, pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
@@ -109,7 +120,7 @@ public class DamageSystemAttachment implements INBTSynchable {
                         double impactCalculation = impactDamage > 0.0 ? Math.max(impactDamage - impactDefense, 0.0) : 0.0;
                         double pierceCalculation = pierceDamage > 0.0 ? Math.max(pierceDamage - pierceDefense, 0.0) : 0.0;
 
-                        damage = Math.max(slashCalculation + impactCalculation + pierceCalculation, 1.0);
+                        damage = Math.max(baseDamage + slashCalculation + impactCalculation + pierceCalculation, baseDamage);
 
                         if (sourceEntity instanceof Player player) {
                             damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
@@ -119,7 +130,7 @@ public class DamageSystemAttachment implements INBTSynchable {
                         }
                     } else {
                         double defense = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
-                        damage = Math.max(damage - defense, 1.0F);
+                        damage = Math.max(damage - defense, baseDamage);
                     }
                 }
             }
@@ -136,22 +147,6 @@ public class DamageSystemAttachment implements INBTSynchable {
                     PacketDistributor.sendToPlayersNear(serverLevel, null, source.getX(), source.getY(), source.getZ(), 15,  new DamageTypeParticlePacket(target.getId(), particleType));
                 }
                 source.level().playSound(null, source.getX(), source.getY(), source.getZ(), correct, source.getSoundSource(), 1.0F, 1.0F);
-            }
-        }
-    }
-
-    public void buildUpShieldStun(LivingEntity entity, DamageSource source) {
-        if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
-            if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) {
-                int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2; //todo balance
-                if (entity.getUseItem().getItem() instanceof TieredShieldItem) {
-                    rate = (int) player.getAttributeValue(AetherIIAttributes.SHIELD_STAMINA_REDUCTION);
-                }
-                this.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, this.getShieldStamina() - rate));
-                if (this.getShieldStamina() <= 0) {
-                    player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 300));
-                    player.stopUsingItem();
-                }
             }
         }
     }

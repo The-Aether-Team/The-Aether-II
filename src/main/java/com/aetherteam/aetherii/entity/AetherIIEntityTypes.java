@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIIDamageStats;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.*;
@@ -62,7 +63,7 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build("aechor_plant"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Zephyr>> ZEPHYR = ENTITY_TYPES.register("zephyr",
-            () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.5F, 3.5F).clientTrackingRange(10).build("zephyr"));
+            () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.0F, 1.75F).clientTrackingRange(10).build("zephyr"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Tempest>> TEMPEST = ENTITY_TYPES.register("tempest",
             () -> EntityType.Builder.of(Tempest::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(1.5F, 1.5F).clientTrackingRange(10).build("tempest"));
@@ -139,24 +140,24 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.FLYING_COW.get(), FlyingCow.createMobAttributes().build());
         event.put(AetherIIEntityTypes.SHEEPUFF.get(), Sheepuff.createMobAttributes().build());
         event.put(AetherIIEntityTypes.PHYG.get(), Phyg.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.AERBUNNY.get(), Aerbunny.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), Taegore.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), Taegore.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), Taegore.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), Burrukai.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), Burrukai.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), Burrukai.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), Kirrid.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), Kirrid.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), Kirrid.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.MOA.get(), Moa.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.AERBUNNY.get(), AetherIIDamageStats.merge(Aerbunny.createMobAttributes(), AetherIIDamageStats.AERBUNNY).build());
+        event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), AetherIIDamageStats.merge(Taegore.createMobAttributes(), AetherIIDamageStats.HIGHFIELDS_TAEGORE).build());
+        event.put(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), AetherIIDamageStats.merge(Taegore.createMobAttributes(), AetherIIDamageStats.MAGNETIC_TAEGORE).build());
+        event.put(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), AetherIIDamageStats.merge(Taegore.createMobAttributes(), AetherIIDamageStats.ARCTIC_TAEGORE).build());
+        event.put(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), AetherIIDamageStats.merge(Burrukai.createMobAttributes(), AetherIIDamageStats.HIGHFIELDS_BURRUKAI).build());
+        event.put(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), AetherIIDamageStats.merge(Burrukai.createMobAttributes(), AetherIIDamageStats.MAGNETIC_BURRUKAI).build());
+        event.put(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), AetherIIDamageStats.merge(Burrukai.createMobAttributes(), AetherIIDamageStats.ARCTIC_BURRUKAI).build());
+        event.put(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIDamageStats.merge(Kirrid.createMobAttributes(), AetherIIDamageStats.HIGHFIELDS_KIRRID).build());
+        event.put(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIDamageStats.merge(Kirrid.createMobAttributes(), AetherIIDamageStats.MAGNETIC_KIRRID).build());
+        event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIDamageStats.merge(Kirrid.createMobAttributes(), AetherIIDamageStats.ARCTIC_KIRRID).build());
+        event.put(AetherIIEntityTypes.MOA.get(), AetherIIDamageStats.merge(Moa.createMobAttributes(), AetherIIDamageStats.MOA).build());
         event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizard.createMobAttributes().build());
 
         // Hostile
-        event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AechorPlant.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.ZEPHYR.get(), Zephyr.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.TEMPEST.get(), Tempest.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.COCKATRICE.get(), Cockatrice.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.SWET.get(), Swet.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AetherIIDamageStats.merge(AechorPlant.createMobAttributes(), AetherIIDamageStats.AECHOR_PLANT).build());
+        event.put(AetherIIEntityTypes.ZEPHYR.get(), AetherIIDamageStats.merge(Zephyr.createMobAttributes(), AetherIIDamageStats.ZEPHYR).build());
+        event.put(AetherIIEntityTypes.TEMPEST.get(), AetherIIDamageStats.merge(Tempest.createMobAttributes(), AetherIIDamageStats.TEMPEST).build());
+        event.put(AetherIIEntityTypes.COCKATRICE.get(), AetherIIDamageStats.merge(Cockatrice.createMobAttributes(), AetherIIDamageStats.COCKATRICE).build());
+        event.put(AetherIIEntityTypes.SWET.get(), AetherIIDamageStats.merge(Swet.createMobAttributes(), AetherIIDamageStats.SWET).build());
     }
 }

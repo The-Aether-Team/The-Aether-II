@@ -4,7 +4,7 @@
   "group": "cloudtwine",
   "ingredients": [
     {
-      "item": "aether_ii:cloudwool"
+      "tag": "aether_ii:cloudwool"
     }
   ],
   "result": {

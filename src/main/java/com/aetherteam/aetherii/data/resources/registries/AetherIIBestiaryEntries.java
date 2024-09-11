@@ -113,6 +113,9 @@ public class AetherIIBestiaryEntries {
             Map.entry(AetherIIEntityTypes.ARCTIC_KIRRID, AetherIITags.Items.KIRRID_FOOD),
             Map.entry(AetherIIEntityTypes.MOA, AetherIITags.Items.MOA_FOOD)
     );
+    public static final Map<Holder<EntityType<?>>, Double> SCALED = Map.ofEntries(
+            Map.entry(AetherIIEntityTypes.ZEPHYR, 1.65)
+    );
 
     private static ResourceKey<BestiaryEntry> createKey(String name) {
         return ResourceKey.create(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -139,6 +142,10 @@ public class AetherIIBestiaryEntries {
             if (FED.containsKey(holder)) {
                 food = Optional.of(FED.get(holder));
             }
+            Optional<Double> scaleMultiplier = Optional.empty();
+            if (SCALED.containsKey(holder)) {
+                scaleMultiplier = Optional.of(SCALED.get(holder));
+            }
             ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entity.toShortString()).withPrefix(path);
             ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entity.toShortString()).withPrefix(path);
             context.register(entry.getKey(), new BestiaryEntry(holder,
@@ -146,6 +153,7 @@ public class AetherIIBestiaryEntries {
                     name,
                     slotName,
                     slotSubtitle,
+                    scaleMultiplier,
                     "aether_ii.guidebook_bestiary.description.entity.aether_ii." + entity.toShortString(),
                     loot,
                     food,

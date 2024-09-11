@@ -4,10 +4,12 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.blockentity.ArkeniumForgeBlockEntity;
 import com.aetherteam.aetherii.inventory.menu.slot.ForgeCharmSlot;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.network.packet.clientbound.ForgeSoundPacket;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -19,17 +21,81 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ArkeniumForgeMenu extends AbstractContainerMenu {
+    public static final List<Holder<Item>> REINFORCEABLE = List.of(
+            AetherIIItems.SKYROOT_SHORTSWORD,
+            AetherIIItems.SKYROOT_HAMMER,
+            AetherIIItems.SKYROOT_SPEAR,
+            AetherIIItems.SKYROOT_SHIELD,
+            AetherIIItems.HOLYSTONE_SHORTSWORD,
+            AetherIIItems.HOLYSTONE_HAMMER,
+            AetherIIItems.HOLYSTONE_SPEAR,
+            AetherIIItems.HOLYSTONE_SHIELD,
+            AetherIIItems.ZANITE_SHORTSWORD,
+            AetherIIItems.ZANITE_HAMMER,
+            AetherIIItems.ZANITE_SPEAR,
+            AetherIIItems.ZANITE_SHIELD,
+            AetherIIItems.ARKENIUM_SHORTSWORD,
+            AetherIIItems.ARKENIUM_HAMMER,
+            AetherIIItems.ARKENIUM_SPEAR,
+            AetherIIItems.ARKENIUM_SHIELD,
+            AetherIIItems.GRAVITITE_SHORTSWORD,
+            AetherIIItems.GRAVITITE_HAMMER,
+            AetherIIItems.GRAVITITE_SPEAR,
+            AetherIIItems.GRAVITITE_SHIELD,
+            AetherIIItems.SKYROOT_AXE,
+            AetherIIItems.HOLYSTONE_AXE,
+            AetherIIItems.ZANITE_AXE,
+            AetherIIItems.ARKENIUM_AXE,
+            AetherIIItems.GRAVITITE_AXE,
+            AetherIIItems.SKYROOT_PICKAXE,
+            AetherIIItems.HOLYSTONE_PICKAXE,
+            AetherIIItems.ZANITE_PICKAXE,
+            AetherIIItems.ARKENIUM_PICKAXE,
+            AetherIIItems.GRAVITITE_PICKAXE,
+            AetherIIItems.SKYROOT_SHOVEL,
+            AetherIIItems.HOLYSTONE_SHOVEL,
+            AetherIIItems.ZANITE_SHOVEL,
+            AetherIIItems.ARKENIUM_SHOVEL,
+            AetherIIItems.GRAVITITE_SHOVEL,
+            AetherIIItems.SKYROOT_TROWEL,
+            AetherIIItems.HOLYSTONE_TROWEL,
+            AetherIIItems.ZANITE_TROWEL,
+            AetherIIItems.ARKENIUM_TROWEL,
+            AetherIIItems.GRAVITITE_TROWEL,
+            AetherIIItems.TAEGORE_HIDE_HELMET,
+            AetherIIItems.BURRUKAI_PELT_HELMET,
+            AetherIIItems.ZANITE_HELMET,
+            AetherIIItems.ARKENIUM_HELMET,
+            AetherIIItems.GRAVITITE_HELMET,
+            AetherIIItems.TAEGORE_HIDE_CHESTPLATE,
+            AetherIIItems.BURRUKAI_PELT_CHESTPLATE,
+            AetherIIItems.ZANITE_CHESTPLATE,
+            AetherIIItems.ARKENIUM_CHESTPLATE,
+            AetherIIItems.GRAVITITE_CHESTPLATE,
+            AetherIIItems.TAEGORE_HIDE_LEGGINGS,
+            AetherIIItems.BURRUKAI_PELT_LEGGINGS,
+            AetherIIItems.ZANITE_LEGGINGS,
+            AetherIIItems.ARKENIUM_LEGGINGS,
+            AetherIIItems.GRAVITITE_LEGGINGS,
+            AetherIIItems.TAEGORE_HIDE_BOOTS,
+            AetherIIItems.BURRUKAI_PELT_BOOTS,
+            AetherIIItems.ZANITE_BOOTS,
+            AetherIIItems.ARKENIUM_BOOTS,
+            AetherIIItems.GRAVITITE_BOOTS,
+            AetherIIItems.TAEGORE_HIDE_GLOVES,
+            AetherIIItems.BURRUKAI_PELT_GLOVES,
+            AetherIIItems.ZANITE_GLOVES,
+            AetherIIItems.ARKENIUM_GLOVES,
+            AetherIIItems.GRAVITITE_GLOVES);
     public static final ResourceLocation SLOT_PRIMARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gui/slot/container/arkenium_forge/slot_primary");
     public static final ResourceLocation SLOT_SECONDARY = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gui/slot/container/arkenium_forge/slot_secondary");
     private final Container container;
@@ -185,7 +251,14 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
                 int secondaryCost = this.getSecondaryCostForTier(tierToUpgradeTo);
                 if (tier != null && primaryCost != -1 && secondaryCost != -1) {
                     input.set(AetherIIDataComponents.REINFORCEMENT_TIER, tier);
-                    input.set(DataComponents.MAX_DAMAGE, input.getMaxDamage() + tier.getExtraDurability());
+
+                    int minTier = 0;
+                    if (reinforcementTier != null) {
+                        minTier = reinforcementTier.getTier();
+                    }
+                    int extraDurability = List.of(ReinforcementTier.values()).subList(minTier, tierToUpgradeTo).stream().mapToInt(ReinforcementTier::getExtraDurability).sum();
+                    input.set(DataComponents.MAX_DAMAGE, input.getMaxDamage() + extraDurability);
+
                     this.getPrimaryMaterial().shrink(primaryCost);
                     this.getSecondaryMaterial().shrink(secondaryCost);
                     return true;
@@ -348,8 +421,8 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             for (int i = costs.size() - 1; i >= 0; i--) {
                 ReinforcementTier.Cost cost = costs.get(i);
                 if (cost != null) {
-                    if (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= this.getPrimaryCostForTier(i + 1)
-                            && this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= this.getSecondaryCostForTier(i + 1)) {
+                    if (((cost.primaryMaterial().asItem() == Items.AIR && cost.secondaryMaterial().asItem() != Items.AIR) || (this.getPrimaryMaterial().is(cost.primaryMaterial().asItem()) && this.getPrimaryMaterial().getCount() >= this.getPrimaryCostForTier(i + 1)))
+                            && ((cost.primaryMaterial().asItem() != Items.AIR && cost.secondaryMaterial().asItem() == Items.AIR) || (this.getSecondaryMaterial().is(cost.secondaryMaterial().asItem()) && this.getSecondaryMaterial().getCount() >= this.getSecondaryCostForTier(i + 1)))) {
                         return i + 1;
                     }
                 }
