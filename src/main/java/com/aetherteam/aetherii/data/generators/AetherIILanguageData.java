@@ -72,7 +72,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Irradiated
         this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");
         this.addBlock(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_BLOCK, "Tarahesp Ambrelinn Moss Block");
-        this.addBlock(AetherIIBlocks.TARAHESP_AMBRELINN_CARPET, "Tarahesp Ambrelinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_CARPET, "Tarahesp Ambrelinn Moss Carpet");
         this.addBlock(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_VINES, "Tarahesp Ambrelinn Moss Vines");
 
         // Ores

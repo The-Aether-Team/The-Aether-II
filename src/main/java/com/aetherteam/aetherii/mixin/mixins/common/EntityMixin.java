@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
+import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.network.packet.clientbound.SetVehiclePacket;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleOptions;
@@ -35,12 +36,7 @@ public class EntityMixin {
     @ModifyArg(method = "doWaterSplashEffect()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"), index = 0)
     private ParticleOptions doWaterSplashEffect(ParticleOptions particleOptions) {
         Entity entity = (Entity) (Object) this;
-        if (entity.level() instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects) {
-            if (particleOptions == ParticleTypes.SPLASH) {
-                return AetherIIParticleTypes.SPLASH.get();
-            }
-        }
-        return particleOptions;
+        return MixinHooks.replaceSplashParticles(entity, particleOptions);
     }
 
     /**

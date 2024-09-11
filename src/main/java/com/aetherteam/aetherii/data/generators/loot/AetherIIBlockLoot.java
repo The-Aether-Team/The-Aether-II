@@ -11,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -76,7 +75,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Irradiated
         this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_BLOCK.get());
-        this.dropSelf(AetherIIBlocks.TARAHESP_AMBRELINN_CARPET.get());
+        this.dropSelf(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_VINES.get(), BlockLootSubProvider::createShearsOnlyDrop);
 
         // Ores

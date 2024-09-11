@@ -37,7 +37,7 @@ public class MossVinesFeature extends Feature<MossVinesConfiguration> {
                 } else {
                     blockState = blockState.setValue(BottomedVineBlock.AGE, 20 + random.nextInt(5));
                 }
-                if (!aboveState.is(blockState.getBlock()) || aboveState.getValue(BottomedVineBlock.AGE) < 25) {
+                if (!aboveState.is(blockState.getBlock()) || (aboveState.hasProperty(BottomedVineBlock.AGE) && aboveState.getValue(BottomedVineBlock.AGE) < 25)) {
                     addHangingVine(blockpos, blockState, worldgenlevel);
                     return true;
                 }
