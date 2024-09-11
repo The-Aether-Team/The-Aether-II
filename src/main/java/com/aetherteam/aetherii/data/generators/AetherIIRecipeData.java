@@ -536,7 +536,17 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SCATTERGLASS_PANE.get(), AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
 
         // Wool
-        this.cloudwool(consumer, RecipeCategory.MISC, AetherIIItems.CLOUDTWINE, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.CLOUDWOOL.get(), "cloudtwine_from_cloudwool", "cloudtwine");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.CLOUDTWINE, 4)
+                .requires(Ingredient.of(AetherIITags.Items.CLOUDWOOL))
+                .group("cloudtwine")
+                .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
+                .save(consumer, this.name("cloudtwine_from_cloudwool"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIBlocks.CLOUDWOOL)
+                .define('#', AetherIIItems.CLOUDTWINE)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy(getHasName(AetherIIItems.CLOUDTWINE), has(AetherIIItems.CLOUDTWINE))
+                .save(consumer, this.name(getSimpleRecipeName(AetherIIBlocks.CLOUDWOOL)));
         this.colorBlockWithDye(consumer, dyes, wool, AetherIIBlocks.CLOUDWOOL.asItem(), "wool");
         
         // Carpet
@@ -769,10 +779,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         // Foods
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_BLUEBERRY, AetherIIItems.BLUEBERRY, 2, 0.0F).save(consumer);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.ENCHANTED_WYNDBERRY, AetherIIItems.WYNDBERRY, 5, 0.0F).save(consumer);
-        this.foodCooking(AetherIIItems.BURRUKAI_RIB_CUT, AetherIIItems.BURRUKAI_RIBS, 0.1F, consumer);
-        this.foodCooking(AetherIIItems.KIRRID_LOIN, AetherIIItems.KIRRID_CUTLET, 0.1F, consumer);
-        this.foodCooking(AetherIIItems.RAW_TAEGORE_MEAT, AetherIIItems.TAEGORE_STEAK, 0.1F, consumer);
-        this.foodCooking(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, 0.1F, consumer);
+        this.foodCooking(AetherIIItems.BURRUKAI_RIB_CUT, AetherIIItems.BURRUKAI_RIBS, 0.35F, consumer);
+        this.foodCooking(AetherIIItems.KIRRID_LOIN, AetherIIItems.KIRRID_CUTLET, 0.35F, consumer);
+        this.foodCooking(AetherIIItems.RAW_TAEGORE_MEAT, AetherIIItems.TAEGORE_STEAK, 0.35F, consumer);
+        this.foodCooking(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, 0.35F, consumer);
 
         // Materials
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SKYROOT_STICK.get(), 4)
@@ -864,12 +874,35 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(consumer);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(AetherIIItems.SPLINT.get()))
+                .requires(AetherIIItems.SKYROOT_STICK.get())
+                .requires(AetherIITags.Items.CLOUDWOOL)
+                .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(AetherIIItems.BANDAGE.get()))
+                .requires(AetherIIItems.CLOUDTWINE.get())
+                .requires(AetherIITags.Items.CLOUDWOOL)
+                .unlockedBy("has_cloudwool", has(AetherIITags.Items.CLOUDWOOL))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(AetherIIItems.ANTIVENOM_VIAL.get()))
+                .requires(AetherIIItems.WATER_VIAL.get())
+                .requires(AetherIIItems.AECHOR_PETAL.get())
+                .requires(AetherIIBlocks.HESPEROSE.get())
+                .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(AetherIIItems.ANTITOXIN_VIAL.get()))
+                .requires(AetherIIItems.WATER_VIAL.get())
+                .requires(AetherIIItems.AECHOR_PETAL.get())
+                .requires(AetherIIBlocks.TARABLOOM.get())
+                .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
+                .save(consumer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, new ItemStack(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 1).build()))
                 .define('A', AetherIIItems.AMBROSIUM_SHARD.get())
                 .define('H', AetherIIBlocks.HOLYSTONE.get())
-                .pattern("AHA")
-                .pattern("HHH")
-                .pattern("AHA")
+                .pattern("HAH")
+                .pattern("AAA")
+                .pattern("HAH")
                 .unlockedBy("has_ambrosium_shard", has(AetherIIItems.AMBROSIUM_SHARD.get()))
                 .save(consumer);
 

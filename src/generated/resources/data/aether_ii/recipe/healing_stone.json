@@ -10,9 +10,9 @@
     }
   },
   "pattern": [
-    "AHA",
-    "HHH",
-    "AHA"
+    "HAH",
+    "AAA",
+    "HAH"
   ],
   "result": {
     "components": {
