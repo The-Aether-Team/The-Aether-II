@@ -66,6 +66,7 @@ dependencies {
 //    compileOnly "mezz.jei:jei-${project.mc_version}-common-api:${project.jei_version}"
 //    compileOnly "mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei_version}"
 //    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
+    implementation "curse.maven:worldedit-225608:5564371"
 
     jarJar("com.aetherteam.nitrogen:nitrogen_internals:${project.nitrogen_version}") {
         jarJar.ranged(it, "[${project.nitrogen_version},)")
