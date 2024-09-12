@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIStructureBuilders;
 import com.aetherteam.aetherii.data.resources.registries.pools.CampHighfieldsPools;
+import com.aetherteam.aetherii.data.resources.registries.pools.InfectedGuardianTreePools;
 import com.aetherteam.aetherii.data.resources.registries.pools.OutpostPools;
 import com.aetherteam.aetherii.world.structure.AetherJigsawStructure;
 import net.minecraft.core.HolderGetter;
@@ -28,6 +29,7 @@ import java.util.Optional;
 public class AetherIIStructures {
     public static final ResourceKey<Structure> OUTPOST = createKey("outpost");
     public static final ResourceKey<Structure> CAMP_HIGHFIELDS = createKey("camp_highfields");
+    public static final ResourceKey<Structure> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     private static ResourceKey<Structure> createKey(String name) {
         return ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -43,6 +45,10 @@ public class AetherIIStructures {
 
         context.register(CAMP_HIGHFIELDS, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_CAMP_HIGHFIELDS), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN),
-                templatePools.getOrThrow(CampHighfieldsPools.CENTER), Optional.empty(), 20, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                templatePools.getOrThrow(CampHighfieldsPools.CENTER), Optional.empty(), 10, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+
+        context.register(INFECTED_GUARDIAN_TREE, new AetherJigsawStructure(
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.ENCAPSULATE),
+                templatePools.getOrThrow(InfectedGuardianTreePools.LOBBIES), Optional.empty(), 30, ConstantHeight.of(VerticalAnchor.absolute(-12)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 64, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
     }
 }

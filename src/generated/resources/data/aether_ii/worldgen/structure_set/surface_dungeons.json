@@ -1,0 +1,20 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "exclusion_zone": {
+      "chunk_count": 8,
+      "other_set": "aether_ii:outposts"
+    },
+    "frequency": 0.75,
+    "frequency_reduction_method": "legacy_type_2",
+    "salt": 2209164,
+    "separation": 12,
+    "spacing": 36
+  },
+  "structures": [
+    {
+      "structure": "aether_ii:infected_guardian_tree",
+      "weight": 1
+    }
+  ]
+}

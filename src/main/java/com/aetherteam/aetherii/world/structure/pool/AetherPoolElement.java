@@ -44,10 +44,16 @@ public class AetherPoolElement extends StructurePoolElement {
             AetherPoolElement::encodeTemplate, ResourceLocation.CODEC.map(Either::left)
     );
     public static final MapCodec<AetherPoolElement> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(templateCodec(), processorsCodec(), projectionCodec()).apply(instance, AetherPoolElement::new)
+            instance -> instance.group(
+                    templateCodec(),
+                    processorsCodec(),
+                    projectionCodec(),
+                    Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir)
+            ).apply(instance, AetherPoolElement::new)
     );
     protected final Either<ResourceLocation, StructureTemplate> template;
     protected final Holder<StructureProcessorList> processors;
+    protected final boolean replaceAir;
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> p_210425_, DynamicOps<T> p_210426_, T p_210427_) {
         Optional<ResourceLocation> optional = p_210425_.left();
@@ -64,10 +70,11 @@ public class AetherPoolElement extends StructurePoolElement {
         return TEMPLATE_CODEC.fieldOf("location").forGetter(codec -> codec.template);
     }
 
-    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection) {
+    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, boolean replaceAir) {
         super(projection);
         this.template = template;
         this.processors = processors;
+        this.replaceAir = replaceAir;
     }
 
     @Override
@@ -157,9 +164,10 @@ public class AetherPoolElement extends StructurePoolElement {
         settings.setRotation(rotation);
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
-        settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
-        settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
-//        settings.setLiquidSettings() //todo
+        if (replaceAir) {
+            settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
+            settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
+        }
         settings.setFinalizeEntities(true);
         if (!offset) {
             settings.addProcessor(JigsawReplacementProcessor.INSTANCE);

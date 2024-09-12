@@ -30,12 +30,12 @@ public class CampHighfieldsPools {
         context.register(CENTER, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/center/small_center_01", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/center/small_center_02", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/center/medium_center_01", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/center/medium_center_02", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/center/large_center_01", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/center/large_center_02", processorCamp), 1)
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/center/small_center_01", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/center/small_center_02", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/center/medium_center_01", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/center/medium_center_02", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/center/large_center_01", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/center/large_center_02", processorCamp), 1)
                 ),
                 StructureTemplatePool.Projection.TERRAIN_MATCHING)
         );
@@ -43,8 +43,8 @@ public class CampHighfieldsPools {
         context.register(ADDITIONAL_PATHS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/additional_paths/path_01", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/additional_paths/path_02", processorCamp), 1)
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/additional_paths/path_01", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/additional_paths/path_02", processorCamp), 1)
                 ),
                 StructureTemplatePool.Projection.TERRAIN_MATCHING)
         );
@@ -52,8 +52,8 @@ public class CampHighfieldsPools {
         context.register(TENTS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/tents/small_tent", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/tents/tent", processorCamp), 2)
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/tents/small_tent", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/tents/tent", processorCamp), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -61,10 +61,10 @@ public class CampHighfieldsPools {
         context.register(DECORATIONS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/decorations/blueberry_farm", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/decorations/orange_farm", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/decorations/valkyrie_sprout_farm", processorCamp), 1),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/decorations/well", processorCamp), 2),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/decorations/blueberry_farm", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/decorations/orange_farm", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/decorations/valkyrie_sprout_farm", processorCamp), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/decorations/well", processorCamp), 2),
                         Pair.of(StructurePoolElement.empty(), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
@@ -73,8 +73,8 @@ public class CampHighfieldsPools {
         context.register(STORAGE_AREAS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/storage_areas/storage_area_01", processorCamp), 2),
-                        Pair.of(AetherIIPools.aetherPool("camp/highfields/storage_areas/storage_area_02", processorCamp), 2),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/storage_areas/storage_area_01", processorCamp), 2),
+                        Pair.of(AetherIIPools.aetherPoolReplace("camp/highfields/storage_areas/storage_area_02", processorCamp), 2),
                         Pair.of(StructurePoolElement.empty(), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)

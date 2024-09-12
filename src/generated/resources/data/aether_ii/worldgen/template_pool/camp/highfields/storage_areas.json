@@ -5,7 +5,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/storage_areas/storage_area_01",
         "processors": "aether_ii:camp_highfields",
-        "projection": "rigid"
+        "projection": "rigid",
+        "replace_air": true
       },
       "weight": 2
     },
@@ -14,7 +15,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/storage_areas/storage_area_02",
         "processors": "aether_ii:camp_highfields",
-        "projection": "rigid"
+        "projection": "rigid",
+        "replace_air": true
       },
       "weight": 2
     },
