@@ -186,8 +186,9 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.frostedCross(AetherIIBlocks.HESPEROSE.get());
         this.frostedCross(AetherIIBlocks.TARABLOOM.get());
         this.frostedCross(AetherIIBlocks.POASPROUT.get());
-        this.asymmetricalCrossEven(AetherIIBlocks.SATIVAL_SHOOT.get());
         this.lilichime(AetherIIBlocks.LILICHIME.get());
+        this.pluracian(AetherIIBlocks.PLURACIAN.get());
+        this.asymmetricalCrossEven(AetherIIBlocks.SATIVAL_SHOOT.get());
         this.asymmetricalCrossOdd(AetherIIBlocks.BLADE_POA.get());
         this.crossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 

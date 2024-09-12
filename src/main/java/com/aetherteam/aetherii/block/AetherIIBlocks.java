@@ -260,8 +260,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> HESPEROSE = register("hesperose", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 4, Block.Properties.ofFullCopy(Blocks.DANDELION)));
     public static final DeferredBlock<Block> TARABLOOM = register("tarabloom", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
     public static final DeferredBlock<Block> POASPROUT = register("poasprout", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
-    public static final DeferredBlock<Block> SATIVAL_SHOOT = register("satival_shoot", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
     public static final DeferredBlock<Block> LILICHIME = register("lilichime", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
+    public static final DeferredBlock<Block> PLURACIAN = register("pluracian", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
+    public static final DeferredBlock<Block> SATIVAL_SHOOT = register("satival_shoot", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
     public static final DeferredBlock<Block> BLADE_POA = register("blade_poa", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
     public static final DeferredBlock<Block> AECHOR_CUTTING = register("aechor_cutting", () -> new AechorCuttingBlock(Block.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
 

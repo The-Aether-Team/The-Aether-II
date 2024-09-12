@@ -46,6 +46,15 @@
               },
               {
                 "data": {
+                  "Name": "aether_ii:pluracian",
+                  "Properties": {
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
                   "Name": "aether_ii:satival_shoot",
                   "Properties": {
                     "snowy": "false"

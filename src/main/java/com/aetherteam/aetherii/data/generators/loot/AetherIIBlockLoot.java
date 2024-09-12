@@ -199,8 +199,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.HESPEROSE.get());
         this.dropSelf(AetherIIBlocks.TARABLOOM.get());
         this.dropSelf(AetherIIBlocks.POASPROUT.get());
-        this.dropSelf(AetherIIBlocks.SATIVAL_SHOOT.get());
         this.dropSelf(AetherIIBlocks.LILICHIME.get());
+        this.dropSelf(AetherIIBlocks.PLURACIAN.get());
+        this.dropSelf(AetherIIBlocks.SATIVAL_SHOOT.get());
         this.dropSelf(AetherIIBlocks.BLADE_POA.get());
         this.dropSelf(AetherIIBlocks.AECHOR_CUTTING.get());
 

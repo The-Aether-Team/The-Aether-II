@@ -615,6 +615,16 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
+    public void pluracian(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            ModelFile model = this.models().withExistingParent(this.name(block), this.modLoc("block/template_pluracian"))
+                    .texture("flower", this.texture(this.name(block), "natural/"))
+                    .texture("particle", this.texture(this.name(block), "natural/"))
+                    .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            return ConfiguredModel.builder().modelFile(model).nextModel().modelFile(model).rotationY(90).nextModel().modelFile(model).rotationY(180).nextModel().modelFile(model).rotationY(270).build();
+        });
+    }
+
     public void asymmetricalCrossEven(Block block) {
         ModelFile model = this.models().withExistingParent(this.name(block), this.modLoc("block/asymmetrical_cross_even"))
                 .texture("0", this.extend(this.texture(this.name(block), "natural/"), "_0"))

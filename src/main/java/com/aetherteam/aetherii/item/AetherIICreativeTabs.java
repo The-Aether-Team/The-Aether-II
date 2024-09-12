@@ -349,6 +349,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HESPEROSE.get());
                 output.accept(AetherIIBlocks.POASPROUT.get());
                 output.accept(AetherIIBlocks.LILICHIME.get());
+                output.accept(AetherIIBlocks.PLURACIAN.get());
                 output.accept(AetherIIBlocks.SATIVAL_SHOOT.get());
                 output.accept(AetherIIBlocks.AECHOR_CUTTING.get());
                 output.accept(AetherIIBlocks.HIGHLANDS_BUSH.get());

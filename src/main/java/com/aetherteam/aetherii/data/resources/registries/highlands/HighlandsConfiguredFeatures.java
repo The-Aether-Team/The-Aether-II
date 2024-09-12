@@ -488,6 +488,7 @@ public class HighlandsConfiguredFeatures {
                                 .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 1)
                                 .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1)
 
                         )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
@@ -547,7 +548,8 @@ public class HighlandsConfiguredFeatures {
 //                                                        AetherIIBlocks.RED_CLOUDWOOL.get().defaultBlockState(),
 //                                                        AetherIIBlocks.ORANGE_CLOUDWOOL.get().defaultBlockState(),
                                                         AetherIIBlocks.POASPROUT.get().defaultBlockState(),
-                                                        AetherIIBlocks.LILICHIME.get().defaultBlockState()
+                                                        AetherIIBlocks.LILICHIME.get().defaultBlockState(),
+                                                        AetherIIBlocks.PLURACIAN.get().defaultBlockState()
 //                                                        AetherIIBlocks.GREEN_CLOUDWOOL.get().defaultBlockState(),
 //                                                        AetherIIBlocks.CYAN_CLOUDWOOL.get().defaultBlockState(),
 //                                                        AetherIIBlocks.BLUE_CLOUDWOOL.get().defaultBlockState()
