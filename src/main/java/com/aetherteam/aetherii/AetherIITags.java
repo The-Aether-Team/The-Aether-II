@@ -22,6 +22,7 @@ public class AetherIITags {
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
+        public static final TagKey<Block> CLOUDWOOL = tag("cloudwool");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
@@ -75,6 +76,7 @@ public class AetherIITags {
         public static final TagKey<Item> HOLYSTONE = tag("holystone");
         public static final TagKey<Item> FERROSITE = tag("ferrosite");
         public static final TagKey<Item> AERCLOUDS = tag("aerclouds");
+        public static final TagKey<Item> CLOUDWOOL = tag("cloudwool");
         public static final TagKey<Item> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
@@ -86,7 +88,6 @@ public class AetherIITags {
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
-        public static final TagKey<Item> CLOUDWOOL = tag("cloudwool");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");

@@ -21,6 +21,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -165,6 +166,14 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
 
     protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemLike result, ItemLike ingredient, int fuelCount, float experience) {
         return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(ingredient), category, new ItemStack(result), experience, fuelCount, 200).unlockedBy("has_item", has(ingredient));
+    }
+
+    protected AltarEnchantingRecipeBuilder altarEnchanting(RecipeCategory category, ItemStack result, ItemStack ingredient, int fuelCount, float experience) {
+        return AltarEnchantingRecipeBuilder.enchanting(DataComponentIngredient.of(false, ingredient), category, result, experience, fuelCount, 200).unlockedBy("has_item", has(ingredient.getItem()));
+    }
+
+    protected AltarEnchantingRecipeBuilder altarRepairing(RecipeCategory category, ItemLike item, int fuelCount) {
+        return AltarEnchantingRecipeBuilder.enchanting(Ingredient.of(item), category, new ItemStack(item), 0.0F, fuelCount, 200).unlockedBy("has_item", has(item));
     }
 
     protected BlockStateRecipeBuilder ambrosiumEnchanting(Block result, Block ingredient) {

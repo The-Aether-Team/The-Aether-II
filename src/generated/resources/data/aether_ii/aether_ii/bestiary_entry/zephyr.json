@@ -11,5 +11,6 @@
     }
   ],
   "observation_advancement": "aether_ii:bestiary/observe_zephyr",
+  "scale_multiplier": 1.65,
   "understanding_advancement": "aether_ii:bestiary/understand_zephyr"
 }

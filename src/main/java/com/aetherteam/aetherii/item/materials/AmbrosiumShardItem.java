@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.item.materials;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.item.miscellaneous.ConsumableItem;
+import com.aetherteam.aetherii.item.miscellaneous.UsableItem;
 import com.aetherteam.aetherii.item.miscellaneous.ItemUseConversion;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AmbrosiumRecipe;
@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
-public class AmbrosiumShardItem extends Item implements ItemUseConversion<AmbrosiumRecipe>, ConsumableItem {
+public class AmbrosiumShardItem extends Item implements ItemUseConversion<AmbrosiumRecipe>, UsableItem {
     public AmbrosiumShardItem(Properties properties) {
         super(properties);
     }

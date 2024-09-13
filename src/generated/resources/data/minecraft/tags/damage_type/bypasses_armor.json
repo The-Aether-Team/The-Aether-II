@@ -1,5 +1,7 @@
 {
   "values": [
+    "aether_ii:wound",
+    "aether_ii:fracture",
     "aether_ii:toxin",
     "aether_ii:venom"
   ]

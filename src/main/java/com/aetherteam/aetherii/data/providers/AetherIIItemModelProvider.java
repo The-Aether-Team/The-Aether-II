@@ -90,6 +90,22 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
         this.withExistingParent(this.itemName(item), this.mcLoc("item/generated")).texture("layer0", this.modLoc("item/" + location + this.itemName(item)));
     }
 
+    public void healingStoneItem(Item item) {
+        ItemModelBuilder builder = this.withExistingParent(this.itemName(item), this.mcLoc("item/handheld")).texture("layer0", this.modLoc("item/consumables/" + this.itemName(item) + "_0"));
+
+        this.withExistingParent(this.itemName(item) + "_1", this.modLoc("item/" + this.itemName(item))).texture("layer0", this.modLoc("item/consumables/" + this.itemName(item) + "_1"));
+        this.withExistingParent(this.itemName(item) + "_2", this.modLoc("item/" + this.itemName(item))).texture("layer0", this.modLoc("item/consumables/" + this.itemName(item) + "_2"));
+        this.withExistingParent(this.itemName(item) + "_3", this.modLoc("item/" + this.itemName(item))).texture("layer0", this.modLoc("item/consumables/" + this.itemName(item) + "_3"));
+        this.withExistingParent(this.itemName(item) + "_4", this.modLoc("item/" + this.itemName(item))).texture("layer0", this.modLoc("item/consumables/" + this.itemName(item) + "_4"));
+        this.withExistingParent(this.itemName(item) + "_5", this.modLoc("item/" + this.itemName(item))).texture("layer0", this.modLoc("item/consumables/" + this.itemName(item) + "_5"));
+
+        builder.override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.1F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_1"))).end()
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.2F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_2"))).end()
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.3F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_3"))).end()
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.4F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_4"))).end()
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.5F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_5"))).end();
+    }
+
     public void itemBlockGrass(Block block, String location) {
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated"))
                 .texture("layer0", this.texture(this.blockName(block) + "_1", location))
