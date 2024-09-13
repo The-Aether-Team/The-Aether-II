@@ -7,34 +7,42 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
 public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> {
+    private final int buildupCap = 1000;
+
     private final Holder<MobEffect> type;
     private final MobEffectInstance instance;
+    private final int buildupReductionRate;
     private final int initialInstanceDuration;
-    private final int buildupCap;
     private int buildup;
     private boolean triggerEffect = false;
 
     public EffectBuildupInstance(EffectBuildupPresets.Preset preset, int buildup) {
-        this(preset.type(), preset.instanceBuilder().get(), preset.buildupCap(), buildup);
+        this(preset.type(), preset.instanceBuilder().get(), preset.buildupReductionRate(), buildup);
     }
 
-    public EffectBuildupInstance(Holder<MobEffect> type, MobEffectInstance instance, int buildupCap, int buildup) {
+    public EffectBuildupInstance(Holder<MobEffect> type, MobEffectInstance instance, int buildupReductionRate, int buildup) {
         this.type = type;
         this.instance = instance;
+        this.buildupReductionRate = buildupReductionRate;
         this.initialInstanceDuration = instance.getDuration();
-        this.buildupCap = buildupCap;
         this.buildup = buildup;
     }
 
     public boolean tick(LivingEntity entity) {
         if (this.isBuildupFull()) {
             if (this.triggerEffect) {
-                entity.addEffect(this.instance);
+                if (this.instance.getEffect().value().isInstantenous()) {
+                    this.instance.getEffect().value().applyInstantenousEffect(null, null, entity, this.instance.getAmplifier(), 1.0);
+                } else {
+                    entity.addEffect(this.instance);
+                }
                 this.triggerEffect = false;
             }
             return (this.instance.isInfiniteDuration() || this.instance.getDuration() > 0) && entity.hasEffect(this.type);
         } else {
-            this.buildup--;
+            if (entity.tickCount % 2 == 0) {
+                this.buildup -= this.buildupReductionRate;
+            }
             return this.buildup > 0;
         }
     }
@@ -72,7 +80,7 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
 
     public CompoundTag save(CompoundTag tag) {
         tag.put("effect_instance", this.instance.save());
-        tag.putInt("buildup_cap", this.buildupCap);
+        tag.putInt("buildup_reduction_rate", this.buildupReductionRate);
         tag.putInt("buildup", this.buildup);
         return tag;
     }
@@ -80,9 +88,9 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
     public static EffectBuildupInstance load(CompoundTag tag) {
         CompoundTag effectTag = (CompoundTag) tag.get("effect_instance");
         MobEffectInstance effect = MobEffectInstance.load(effectTag);
-        int buildupCap = tag.getInt("buildup_cap");
+        int buildupReductionRate = tag.getInt("buildup_reduction_rate");
         int buildup = tag.getInt("buildup");
-        return new EffectBuildupInstance(effect.getEffect(), effect, buildupCap, buildup);
+        return new EffectBuildupInstance(effect.getEffect(), effect, buildupReductionRate, buildup);
     }
 
     @Override

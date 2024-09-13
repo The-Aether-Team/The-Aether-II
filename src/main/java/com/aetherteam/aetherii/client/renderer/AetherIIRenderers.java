@@ -159,7 +159,7 @@ public class AetherIIRenderers {
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.GRAVITITE_GLOVES.get(), GlovesRenderer::new);
     }
 
-    public static void bakeModels(ModelEvent.ModifyBakingResult event) {
+    public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
         List<DeferredBlock<? extends Block>> fastBlocks = List.of(AetherIIBlocks.HIGHLANDS_BUSH, AetherIIBlocks.BLUEBERRY_BUSH, AetherIIBlocks.POTTED_HIGHLANDS_BUSH, AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
         List<DeferredBlock<? extends Block>> aoBlocks = List.of(AetherIIBlocks.AMBROSIUM_ORE, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE);
 

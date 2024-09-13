@@ -26,7 +26,7 @@ public class ZephyrRenderer extends MobRenderer<Zephyr, ZephyrModel> {
     @Override
     protected void scale(Zephyr zephyr, PoseStack poseStack, float partialTicks) {
         poseStack.scale(1.8F, 1.8F, 1.8F);
-        poseStack.translate(0.0, 0.15, 0.0);
+//        poseStack.translate(0.0, 0.15, 0.0);
     }
 
     @Override

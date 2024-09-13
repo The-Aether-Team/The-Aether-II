@@ -1,0 +1,15 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "repairing",
+  "experience": 0.0,
+  "fuel_count": 2,
+  "group": "repair_holystone",
+  "ingredient": {
+    "item": "aether_ii:holystone_crossbow"
+  },
+  "processing_time": 200,
+  "result": {
+    "count": 1,
+    "id": "aether_ii:holystone_crossbow"
+  }
+}

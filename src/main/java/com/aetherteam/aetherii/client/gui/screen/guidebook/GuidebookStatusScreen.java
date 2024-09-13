@@ -51,7 +51,7 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
 
         int leftPos = (this.width / 2) - PAGE_WIDTH;
         int topPos = (this.height - PAGE_HEIGHT) / 2;
-        int x = 95;
+        int x = 104;
         int y = 7;
         int xOffset = 9;
         int yOffset = 19;
@@ -69,20 +69,20 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
         Guidebook.super.renderGuidebookLeftPage(screen, guiGraphics, mouseX, mouseY, partialTick);
 
         Player player = Minecraft.getInstance().player;
-        int x = 36;
-        int y = 4;
+        int x = 31;
+        int y = 5;
 
         guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
 
         guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y + 22, 16, 16);
-        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 25, 16777215, true);
+        guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 20, y + 26, 16777215, true);
 
-        guiGraphics.blitSprite(Guidebook.ARMOR_SPRITE, x, y + 35, 16, 16);
-        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 18, y + 40, 16777215, true);
+        guiGraphics.blitSprite(Guidebook.ARMOR_SPRITE, x, y + 38, 16, 16);
+        guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 20, y + 42, 16777215, true);
 
         var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);
-        guiGraphics.renderItem(AetherIIItems.GLINT_COIN.toStack(), x + 68, y + 95);
-        guiGraphics.drawString(this.font, Component.literal(String.valueOf(data.getAmount())), x + 85, y + 99, 16777215, true);
+        guiGraphics.renderItem(AetherIIItems.GLINT_COIN.toStack(), x, y + 53);
+        guiGraphics.drawString(this.font, Component.literal(String.valueOf(data.getAmount())), x + 20, y + 58, 16777215, true);
     }
 
     @Override

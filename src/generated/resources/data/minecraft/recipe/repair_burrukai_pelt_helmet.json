@@ -1,0 +1,15 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "repairing",
+  "experience": 0.0,
+  "fuel_count": 2,
+  "group": "repair_burrukai_pelt_armor",
+  "ingredient": {
+    "item": "aether_ii:burrukai_pelt_helmet"
+  },
+  "processing_time": 200,
+  "result": {
+    "count": 1,
+    "id": "aether_ii:burrukai_pelt_helmet"
+  }
+}

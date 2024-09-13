@@ -20,6 +20,7 @@
     "common.accessor.FireBlockAccessor",
     "common.accessor.LivingEntityAccessor",
     "common.accessor.LootContextParamSetsAccessor",
+    "common.accessor.MobEffectInstanceAccessor",
     "common.accessor.PerlinNoiseAccessor",
     "common.accessor.PlayerAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor"
