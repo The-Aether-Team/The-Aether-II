@@ -538,7 +538,7 @@ public class HighlandsPlacedFeatures {
 
         register(context, CLOUDBED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
 
-        register(context, INFECTED_GUARDIAN_TREE_ENTRANCE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_GUARDIAN_TREE_ENTRANCE), BiomeFilter.biome());
+        register(context, INFECTED_GUARDIAN_TREE_ENTRANCE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_GUARDIAN_TREE_ENTRANCE));
     }
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {

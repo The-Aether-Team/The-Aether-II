@@ -1,8 +1,4 @@
 {
   "feature": "aether_ii:infected_guardian_tree_entrance",
-  "placement": [
-    {
-      "type": "minecraft:biome"
-    }
-  ]
+  "placement": []
 }
