@@ -438,9 +438,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HESPEROSE.get(),
                 AetherIIBlocks.TARABLOOM.get(),
                 AetherIIBlocks.POASPROUT.get(),
-                AetherIIBlocks.AECHOR_CUTTING.get(),
                 AetherIIBlocks.LILICHIME.get(),
-                AetherIIBlocks.SATIVAL_SHOOT.get()
+                AetherIIBlocks.PLURACIAN.get(),
+                AetherIIBlocks.SATIVAL_SHOOT.get(),
+                AetherIIBlocks.AECHOR_CUTTING.get()
         );
         this.tag(BlockTags.BEDS).add(AetherIIBlocks.SKYROOT_BED.get());
         this.tag(BlockTags.DIRT).addTag(AetherIITags.Blocks.AETHER_DIRT).add(
@@ -469,6 +470,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.POTTED_POASPROUT.get(),
                 AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(),
                 AetherIIBlocks.POTTED_LILICHIME.get(),
+                AetherIIBlocks.POTTED_PLURACIAN.get(),
                 AetherIIBlocks.POTTED_BLADE_POA.get(),
                 AetherIIBlocks.POTTED_AECHOR_CUTTING.get()
         );
@@ -477,9 +479,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HESPEROSE.get(),
                 AetherIIBlocks.TARABLOOM.get(),
                 AetherIIBlocks.LILICHIME.get(),
-                AetherIIBlocks.SHIELD_FERN.get(),
+                AetherIIBlocks.POTTED_PLURACIAN.get(),
                 AetherIIBlocks.SATIVAL_SHOOT.get(),
-                AetherIIBlocks.BLADE_POA.get()
+                AetherIIBlocks.BLADE_POA.get(),
+                AetherIIBlocks.SHIELD_FERN.get()
 
         );
         this.tag(BlockTags.ICE).add(

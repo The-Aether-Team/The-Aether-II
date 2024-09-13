@@ -214,6 +214,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_POASPROUT.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_SATIVAL_SHOOT.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_LILICHIME.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_PLURACIAN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_BLADE_POA.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AECHOR_CUTTING.get());
 

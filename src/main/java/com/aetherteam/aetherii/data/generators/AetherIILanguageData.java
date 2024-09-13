@@ -209,6 +209,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_POASPROUT, "Potted Poasprout");
         this.addBlock(AetherIIBlocks.POTTED_SATIVAL_SHOOT, "Potted Satival Shoot");
         this.addBlock(AetherIIBlocks.POTTED_LILICHIME, "Potted Lilichime");
+        this.addBlock(AetherIIBlocks.POTTED_PLURACIAN, "Potted Pluracian");
         this.addBlock(AetherIIBlocks.POTTED_BLADE_POA, "Potted Blade Poa");
         this.addBlock(AetherIIBlocks.POTTED_AECHOR_CUTTING, "Potted Aechor Cutting");
 

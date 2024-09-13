@@ -689,6 +689,13 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
     }
 
+    public void pottedPluracian(Block block, Block flower, String location) {
+        ModelFile pot = this.models().withExistingParent(this.name(block), this.modLoc("block/flower_pot_pluracian"))
+                .texture("flower", this.texture(this.name(flower), location))
+                .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
+    }
+
     public void shortGrass(Block block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
             AetherTallGrassBlock.GrassType type = state.getValue(AetherTallGrassBlock.TYPE);

@@ -200,6 +200,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
         this.pottedPlant(AetherIIBlocks.POTTED_POASPROUT.get(), AetherIIBlocks.POASPROUT.get(), "natural/");
         this.pottedAsymmetricalEvenPlant(AetherIIBlocks.POTTED_SATIVAL_SHOOT.get(), AetherIIBlocks.SATIVAL_SHOOT.get(), "natural/");
         this.pottedLilichime(AetherIIBlocks.POTTED_LILICHIME.get(), AetherIIBlocks.LILICHIME.get(), "natural/");
+        this.pottedPluracian(AetherIIBlocks.POTTED_PLURACIAN.get(), AetherIIBlocks.PLURACIAN.get(), "natural/");
         this.pottedAsymmetricalOddPlant(AetherIIBlocks.POTTED_BLADE_POA.get(), AetherIIBlocks.BLADE_POA.get(), "natural/");
         this.pottedPlant(AetherIIBlocks.POTTED_AECHOR_CUTTING.get(), AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
