@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.portal.PortalSoundUtil;
+import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -30,7 +30,7 @@ public record PortalTravelSoundPacket() implements CustomPacketPayload {
 
     public static void execute(PortalTravelSoundPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
-            PortalSoundUtil.playTravelSound();
+            PortalClientUtil.playTravelSound();
         }
     }
 }
