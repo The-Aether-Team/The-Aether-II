@@ -852,7 +852,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_gravitite_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_undershale_gravitite_ore"));
 
-        oneToOneConversionRecipe(consumer, Items.YELLOW_DYE, AetherIIBlocks.SHIELD_FERN, "yellow_dye");
         oneToOneConversionRecipe(consumer, Items.YELLOW_DYE, AetherIIBlocks.BLADE_POA, "yellow_dye");
         oneToOneConversionRecipe(consumer, Items.WHITE_DYE, AetherIIBlocks.HESPEROSE, "white_dye");
         oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, AetherIIBlocks.TARABLOOM, "purple_dye");
