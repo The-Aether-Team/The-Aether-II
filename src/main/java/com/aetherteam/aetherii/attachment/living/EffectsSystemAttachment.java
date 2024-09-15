@@ -55,7 +55,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
 
     public void postTickUpdate(LivingEntity livingEntity) {
         if (this.loadingSync) {
-            if (this.entity.level().isClientSide()) {
+            if (!this.entity.level().isClientSide()) {
                 PacketDistributor.sendToAllPlayers(new EffectBuildupSetPacket(this.entity.getId(), this.activeBuildups));
             }
             this.loadingSync = false;
