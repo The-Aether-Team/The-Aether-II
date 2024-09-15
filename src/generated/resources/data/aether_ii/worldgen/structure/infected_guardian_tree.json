@@ -9,7 +9,7 @@
   "size": 30,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": -12
+    "absolute": -20
   },
   "start_pool": "aether_ii:dungeon/infected_guardian_tree/lobbies",
   "step": "surface_structures",
