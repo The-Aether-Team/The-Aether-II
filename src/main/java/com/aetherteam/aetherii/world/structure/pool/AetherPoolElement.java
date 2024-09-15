@@ -155,8 +155,7 @@ public class AetherPoolElement extends StructurePoolElement {
     }
 
     /**
-     * Uses processors of {@link net.minecraft.world.level.levelgen.structure.pools.LegacySinglePoolElement}
-     * Might have a coded to determine if it should use processors of Single or Legacy Pool Elements in the future
+     * Based on {@link net.minecraft.world.level.levelgen.structure.pools.LegacySinglePoolElement}
      * */
     protected StructurePlaceSettings getSettings(Rotation rotation, BoundingBox boundingBox, boolean offset) {
         StructurePlaceSettings settings = new StructurePlaceSettings();
