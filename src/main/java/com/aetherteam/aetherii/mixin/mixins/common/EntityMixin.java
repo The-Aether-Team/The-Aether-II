@@ -36,7 +36,10 @@ public class EntityMixin {
     @ModifyArg(method = "doWaterSplashEffect()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"), index = 0)
     private ParticleOptions doWaterSplashEffect(ParticleOptions particleOptions) {
         Entity entity = (Entity) (Object) this;
-        return MixinHooks.replaceSplashParticles(entity, particleOptions);
+        if (entity.level().isClientSide()) {
+            return MixinHooks.replaceSplashParticles(entity, particleOptions);
+        }
+        return particleOptions;
     }
 
     /**
