@@ -135,7 +135,9 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      * On the client, this will also help to set the portal overlay.
      */
     private void handleAetherPortal(Player player) {
-        PortalClientUtil.handleAetherPortal(player, this);
+        if (player.level().isClientSide()) {
+            PortalClientUtil.handleAetherPortal(player, this);
+        }
     }
 
     private void handleHealingStoneHealth(Player player) {
