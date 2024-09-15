@@ -20,6 +20,12 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> MAIN_PATH_FLOOR_2 = AetherIIPools.createKey("dungeon/infected_guardian_tree/main_path/floor_2");
     public static final ResourceKey<StructureTemplatePool> MAIN_PATH_FLOOR_3 = AetherIIPools.createKey("dungeon/infected_guardian_tree/main_path/floor_3");
     public static final ResourceKey<StructureTemplatePool> PATHS = AetherIIPools.createKey("dungeon/infected_guardian_tree/path");
+    public static final ResourceKey<StructureTemplatePool> STAIRCASE_FLOOR_1_UPPER = AetherIIPools.createKey("dungeon/infected_guardian_tree/staircase/floor_1/upper");
+    public static final ResourceKey<StructureTemplatePool> STAIRCASE_FLOOR_2_UPPER = AetherIIPools.createKey("dungeon/infected_guardian_tree/staircase/floor_2/upper");
+    public static final ResourceKey<StructureTemplatePool> STAIRCASE_FLOOR_3_UPPER = AetherIIPools.createKey("dungeon/infected_guardian_tree/staircase/floor_3/upper");
+    public static final ResourceKey<StructureTemplatePool> STAIRCASE_FLOOR_1_LOWER = AetherIIPools.createKey("dungeon/infected_guardian_tree/staircase/floor_1/lower");
+    public static final ResourceKey<StructureTemplatePool> STAIRCASE_FLOOR_2_LOWER = AetherIIPools.createKey("dungeon/infected_guardian_tree/staircase/floor_2/lower");
+    public static final ResourceKey<StructureTemplatePool> STAIRCASE_FLOOR_3_LOWER = AetherIIPools.createKey("dungeon/infected_guardian_tree/staircase/floor_3/lower");
     public static final ResourceKey<StructureTemplatePool> ROOMS = AetherIIPools.createKey("dungeon/infected_guardian_tree/rooms");
     public static final ResourceKey<StructureTemplatePool> ARENA = AetherIIPools.createKey("dungeon/infected_guardian_tree/arena");
 
@@ -51,6 +57,22 @@ public class InfectedGuardianTreePools {
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/main_path/floor_1/main_path_01"), 1),
                         Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/main_path/floor_1/main_path_02"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(STAIRCASE_FLOOR_1_UPPER, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/staircase/floor_1/upper_01"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(STAIRCASE_FLOOR_1_LOWER, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/staircase/floor_1/lower_01"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
