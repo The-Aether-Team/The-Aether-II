@@ -25,7 +25,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.BiFunction;
 
-public class BryalinnFlowersBlock extends AetherBushBlock implements BonemealableBlock {
+public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
     private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize(
@@ -47,7 +47,7 @@ public class BryalinnFlowersBlock extends AetherBushBlock implements Bonemealabl
             }
     );
 
-    public BryalinnFlowersBlock(Properties properties) {
+    public MossFlowersBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1));
     }

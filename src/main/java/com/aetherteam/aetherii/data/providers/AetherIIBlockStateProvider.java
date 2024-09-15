@@ -257,16 +257,16 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                     .texture("particle", texture);
 
             builder = builder.part().modelFile(model).addModel()
-                    .condition(BryalinnFlowersBlock.FACING, Direction.NORTH).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .condition(MossFlowersBlock.FACING, Direction.NORTH).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
                     .end();
             builder = builder.part().modelFile(model).rotationY(90).addModel()
-                    .condition(BryalinnFlowersBlock.FACING, Direction.EAST).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .condition(MossFlowersBlock.FACING, Direction.EAST).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
                     .end();
             builder = builder.part().modelFile(model).rotationY(180).addModel()
-                    .condition(BryalinnFlowersBlock.FACING, Direction.SOUTH).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .condition(MossFlowersBlock.FACING, Direction.SOUTH).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
                     .end();
             builder = builder.part().modelFile(model).rotationY(270).addModel()
-                    .condition(BryalinnFlowersBlock.FACING, Direction.WEST).condition(BryalinnFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .condition(MossFlowersBlock.FACING, Direction.WEST).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
                     .end();
         }
     }
@@ -391,6 +391,34 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                         .condition(BottomedVineBlock.AGE, 25)
                         .end();
             }
+        }
+    }
+
+    public void tarahespAmbrelinnFlowers(Block block) {
+        ResourceLocation texturePurple = this.texture(this.name(block) + "_purple", "natural/");
+        ResourceLocation textureWhite = this.texture(this.name(block) + "_white", "natural/");
+
+        MultiPartBlockStateBuilder builder = this.getMultipartBuilder(block);
+        for (int i = 1; i <= 4; i++) {
+            ModelFile model = this.models().withExistingParent(this.name(block) + "_" + i, this.modLoc("block/template_tarahesp_ambrelinn_moss_flowers_" + i))
+                    .ao(false)
+                    .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                    .texture("0", texturePurple)
+                    .texture("1", textureWhite)
+                    .texture("particle", texturePurple);
+
+            builder = builder.part().modelFile(model).addModel()
+                    .condition(MossFlowersBlock.FACING, Direction.NORTH).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(90).addModel()
+                    .condition(MossFlowersBlock.FACING, Direction.EAST).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(180).addModel()
+                    .condition(MossFlowersBlock.FACING, Direction.SOUTH).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(270).addModel()
+                    .condition(MossFlowersBlock.FACING, Direction.WEST).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
         }
     }
 

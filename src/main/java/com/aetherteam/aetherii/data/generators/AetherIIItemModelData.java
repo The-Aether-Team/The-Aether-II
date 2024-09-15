@@ -260,6 +260,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_CARPET.get());
         this.itemBlockFlat(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_VINES.get(), "natural/");
+        this.itemBlockFlatItem(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_FLOWERS.get());
 
         // Ores
         this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());

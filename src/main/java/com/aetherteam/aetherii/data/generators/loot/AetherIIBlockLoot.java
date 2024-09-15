@@ -77,6 +77,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_VINES.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_FLOWERS.get(), this.createPetalsDrops(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get()));
 
         // Ores
         this.add(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), this::createQuartzOreDrops);
