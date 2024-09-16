@@ -17,6 +17,62 @@
           "properties": {
             "half": "lower"
           }
+        },
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "#aether_ii:tools/trowels"
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:explosion_decay"
+            },
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:ore_drops",
+              "function": "minecraft:apply_bonus"
+            }
+          ],
+          "name": "aether_ii:orange"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "aether_ii:orange_tree",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "4"
+          }
+        },
+        {
+          "block": "aether_ii:orange_tree",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "half": "lower"
+          }
+        },
+        {
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "items": "#aether_ii:tools/trowels"
+          }
         }
       ],
       "entries": [
@@ -31,7 +87,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "max": 3.0,
-                "min": 2.0
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             },

@@ -94,6 +94,7 @@ public class AetherIITags {
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
         public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");
 
+        public static final TagKey<Item> TOOLS_TROWELS = tag("tools/trowels");
         public static final TagKey<Item> TOOLS_SHORTSWORDS = tag("tools/shortswords");
         public static final TagKey<Item> TOOLS_HAMMERS = tag("tools/hammers");
         public static final TagKey<Item> TOOLS_SPEARS = tag("tools/spears");

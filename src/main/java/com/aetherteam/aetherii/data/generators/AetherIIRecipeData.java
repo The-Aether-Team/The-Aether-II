@@ -855,6 +855,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         oneToOneConversionRecipe(consumer, Items.YELLOW_DYE, AetherIIBlocks.BLADE_POA, "yellow_dye");
         oneToOneConversionRecipe(consumer, Items.WHITE_DYE, AetherIIBlocks.HESPEROSE, "white_dye");
         oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, AetherIIBlocks.TARABLOOM, "purple_dye");
+        oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, AetherIIItems.SATIVAL_BULB, "purple_dye");
         oneToOneConversionRecipe(consumer, Items.WHITE_DYE, AetherIIBlocks.POASPROUT, "white_dye");
         oneToOneConversionRecipe(consumer, Items.LIGHT_BLUE_DYE, AetherIIItems.BRETTL_FLOWER, "light_blue_dye");
         oneToOneConversionRecipe(consumer, Items.LIGHT_BLUE_DYE, AetherIIBlocks.LILICHIME, "light_blue_dye");

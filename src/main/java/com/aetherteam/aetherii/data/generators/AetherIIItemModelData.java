@@ -137,6 +137,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUEBERRY.get(), "consumables/");
         this.item(AetherIIItems.ENCHANTED_BLUEBERRY.get(), "consumables/");
         this.item(AetherIIItems.ORANGE.get(), "consumables/");
+        this.item(AetherIIItems.SATIVAL_BULB.get(), "consumables/");
         this.item(AetherIIItems.WYNDBERRY.get(), "consumables/");
         this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "consumables/");
         this.item(AetherIIItems.GREEN_SWET_JELLY.get(), "consumables/");
