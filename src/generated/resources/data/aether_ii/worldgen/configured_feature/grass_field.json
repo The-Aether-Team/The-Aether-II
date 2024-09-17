@@ -6,7 +6,7 @@
         "type": "aether_ii:aether_grass",
         "config": {
           "to_place": {
-            "type": "minecraft:dual_noise_provider",
+            "type": "minecraft:noise_provider",
             "noise": {
               "amplitudes": [
                 1.0
@@ -15,16 +15,9 @@
             },
             "scale": 0.02,
             "seed": 2345,
-            "slow_noise": {
-              "amplitudes": [
-                1.0
-              ],
-              "firstOctave": 5
-            },
-            "slow_scale": 0.02,
             "states": [
               {
-                "Name": "aether_ii:aether_medium_grass",
+                "Name": "aether_ii:aether_long_grass",
                 "Properties": {
                   "grass_type": "default"
                 }
@@ -42,21 +35,17 @@
                 }
               },
               {
-                "Name": "aether_ii:aether_short_grass",
+                "Name": "aether_ii:aether_medium_grass",
                 "Properties": {
                   "grass_type": "default"
                 }
               },
               {
-                "Name": "aether_ii:aether_medium_grass",
+                "Name": "aether_ii:aether_long_grass",
                 "Properties": {
                   "grass_type": "default"
                 }
               }
-            ],
-            "variety": [
-              1,
-              3
             ]
           }
         }

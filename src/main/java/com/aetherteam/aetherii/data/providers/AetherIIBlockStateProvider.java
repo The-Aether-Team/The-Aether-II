@@ -689,6 +689,32 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .addModels(ConfiguredModel.builder().modelFile(modelMirrored).rotationY(90).build());
     }
 
+    public void holpupea(Block block) {
+        ResourceLocation texture = this.texture(this.name(block), "natural/");
+
+        MultiPartBlockStateBuilder builder = this.getMultipartBuilder(block);
+        for (int i = 1; i <= 4; i++) {
+            ModelFile model = this.models().withExistingParent(this.name(block) + "_" + i, this.modLoc("block/template_holpupea_" + i))
+                    .ao(false)
+                    .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                    .texture("0", texture)
+                    .texture("particle", texture);
+
+            builder = builder.part().modelFile(model).addModel()
+                    .condition(MossFlowersBlock.FACING, Direction.NORTH).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(90).addModel()
+                    .condition(MossFlowersBlock.FACING, Direction.EAST).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(180).addModel()
+                    .condition(MossFlowersBlock.FACING, Direction.SOUTH).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+            builder = builder.part().modelFile(model).rotationY(270).addModel()
+                    .condition(MossFlowersBlock.FACING, Direction.WEST).condition(MossFlowersBlock.AMOUNT, ArrayUtils.toObject(IntStream.range(i, 5).toArray()))
+                    .end();
+        }
+    }
+
     public void pottedTintedPlant(Block block, Block flower, String location) {
         ModelFile pot = this.models().withExistingParent(this.name(block), this.mcLoc("block/tinted_flower_pot_cross")).texture("plant", this.modLoc("block/" + location + this.name(flower))).renderType(ResourceLocation.withDefaultNamespace("cutout"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));

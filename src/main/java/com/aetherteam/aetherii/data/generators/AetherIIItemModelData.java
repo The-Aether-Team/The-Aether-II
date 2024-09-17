@@ -374,6 +374,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlatItem(AetherIIBlocks.LILICHIME.get());
         this.itemBlockFlatItem(AetherIIBlocks.PLURACIAN.get());
         this.itemBlockFlat0(AetherIIBlocks.SATIVAL_SHOOT.get());
+        this.itemBlockFlatItem(AetherIIBlocks.HOLPUPEA.get());
         this.itemBlockFlat0(AetherIIBlocks.BLADE_POA.get());
         this.itemBlockFlat(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 

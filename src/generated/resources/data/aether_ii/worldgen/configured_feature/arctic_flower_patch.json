@@ -28,6 +28,134 @@
                 "Properties": {
                   "snowy": "false"
                 }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              {
+                "Name": "aether_ii:holpupea",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
               }
             ],
             "variety": [

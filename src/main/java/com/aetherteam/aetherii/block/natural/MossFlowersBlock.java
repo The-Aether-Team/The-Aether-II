@@ -1,33 +1,40 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiFunction;
 
-public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlock {
+public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlock, Snowable {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
+    public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
     private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize(
             (p_296142_, p_294775_) -> {
                 VoxelShape[] avoxelshape = new VoxelShape[]{
@@ -49,7 +56,23 @@ public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlo
 
     public MossFlowersBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(AMOUNT, 1).setValue(SNOWY, Boolean.FALSE));
+    }
+
+    @Override
+    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack tool) {
+        super.playerDestroy(level, player, pos, state, blockEntity, tool);
+        if (this.isSnowy(state)) {
+            level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);
+        }
+    }
+
+    @Override
+    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+        super.onBlockExploded(state, level, pos, explosion);
+        if (this.isSnowy(state)) {
+            level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);
+        }
     }
 
     @Override
@@ -82,7 +105,12 @@ public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlo
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_272634_) {
-        p_272634_.add(FACING, AMOUNT);
+        p_272634_.add(FACING, AMOUNT, SNOWY);
+    }
+
+    @Override
+    public boolean isSnowy(BlockState blockState) {
+        return blockState.getValue(SNOWY);
     }
 
     @Override

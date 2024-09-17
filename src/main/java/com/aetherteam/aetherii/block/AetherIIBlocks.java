@@ -264,6 +264,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> LILICHIME = register("lilichime", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
     public static final DeferredBlock<Block> PLURACIAN = register("pluracian", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
     public static final DeferredBlock<Block> SATIVAL_SHOOT = register("satival_shoot", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
+    public static final DeferredBlock<Block> HOLPUPEA = register("holpupea", () -> new MossFlowersBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
     public static final DeferredBlock<Block> BLADE_POA = register("blade_poa", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 12, Block.Properties.ofFullCopy(Blocks.DANDELION))); //todo mob effects
     public static final DeferredBlock<Block> AECHOR_CUTTING = register("aechor_cutting", () -> new AechorCuttingBlock(Block.Properties.of().mapColor(MapColor.PLANT).randomTicks().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).pushReaction(PushReaction.DESTROY)));
 

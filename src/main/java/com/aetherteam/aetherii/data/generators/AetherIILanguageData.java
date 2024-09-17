@@ -199,6 +199,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LILICHIME, "Lilichime");
         this.addBlock(AetherIIBlocks.PLURACIAN, "Pluracian");
         this.addBlock(AetherIIBlocks.SATIVAL_SHOOT, "Satival Shoot");
+        this.addBlock(AetherIIBlocks.HOLPUPEA, "Holpupea");
         this.addBlock(AetherIIBlocks.BLADE_POA, "Blade Poa");
         this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
 

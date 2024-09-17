@@ -54,6 +54,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraft.world.level.material.Fluids;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -315,28 +316,29 @@ public class HighlandsConfiguredFeatures {
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-//        register(context, GRASS_FIELD, Feature.RANDOM_PATCH, new RandomPatchConfiguration(
-//                80,
-//                12,
-//                4,
-//                PlacementUtils.filtered(
-//                        AetherIIFeatures.AETHER_GRASS.get(),
-//                        new SimpleBlockConfiguration(
-//                                new NoiseProvider(
-//                                        2345L,
-//                                        new NormalNoise.NoiseParameters(0, 1.0),
-//                                        0.02F,
-//                                        List.of(
-//                                                AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(),
-//                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
-//                                                AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(),
-//                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
-//                                                AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState()
-//                                        )
-//                                )
-//                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
-//                )
-//        ));
+        SimpleWeightedRandomList.Builder<BlockState> allFlowers = SimpleWeightedRandomList.<BlockState>builder()
+                .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1)
+                .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1);
+        for (int i = 1; i <= 4; i++) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                allFlowers.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
+            }
+        }
+
+        List<BlockState> arcticFlowers = new ArrayList<>(List.of(
+                AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
+        ));
+        for (int i = 1; i <= 4; i++) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                arcticFlowers.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction));
+            }
+        }
+
         register(context, GRASS_FIELD, Feature.RANDOM_PATCH, new RandomPatchConfiguration(
                 80,
                 12,
@@ -344,24 +346,46 @@ public class HighlandsConfiguredFeatures {
                 PlacementUtils.filtered(
                         AetherIIFeatures.AETHER_GRASS.get(),
                         new SimpleBlockConfiguration(
-                                new DualNoiseProvider(
-                                        new InclusiveRange<>(1, 3),
-                                        new NormalNoise.NoiseParameters(5, 1.0),
-                                        0.02F,
+                                new NoiseProvider(
                                         2345L,
                                         new NormalNoise.NoiseParameters(0, 1.0),
                                         0.02F,
                                         List.of(
-                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
+                                                AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(),
                                                 AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
                                                 AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(),
-                                                AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(),
-                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState()
+                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
+                                                AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState()
                                         )
                                 )
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 )
         ));
+//        register(context, GRASS_FIELD, Feature.RANDOM_PATCH, new RandomPatchConfiguration(
+//                80,
+//                12,
+//                4,
+//                PlacementUtils.filtered(
+//                        AetherIIFeatures.AETHER_GRASS.get(),
+//                        new SimpleBlockConfiguration(
+//                                new DualNoiseProvider(
+//                                        new InclusiveRange<>(1, 3),
+//                                        new NormalNoise.NoiseParameters(5, 1.0),
+//                                        0.02F,
+//                                        2345L,
+//                                        new NormalNoise.NoiseParameters(0, 1.0),
+//                                        0.02F,
+//                                        List.of(
+//                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
+//                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
+//                                                AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(),
+//                                                AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(),
+//                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState()
+//                                        )
+//                                )
+//                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
+//                )
+//        ));
         register(
                 context,
                 SMALL_GRASS_PATCH,
@@ -483,15 +507,8 @@ public class HighlandsConfiguredFeatures {
                         16,
                         8,
                         3,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                                .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
-                                .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
-                                .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
-                                .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 1)
-                                .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 1)
-                                .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1)
-
-                        )), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(allFlowers)),
+                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
         ));
         register(
                 context,
@@ -579,15 +596,7 @@ public class HighlandsConfiguredFeatures {
                                                 2345L,
                                                 new NormalNoise.NoiseParameters(-1, 1.0),
                                                 1.0F,
-                                                List.of(
-//                                                        AetherIIBlocks.RED_CLOUDWOOL.get().defaultBlockState(),
-//                                                        AetherIIBlocks.ORANGE_CLOUDWOOL.get().defaultBlockState(),
-                                                        AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
-//                                                        AetherIIBlocks.GREEN_CLOUDWOOL.get().defaultBlockState(),
-//                                                        AetherIIBlocks.CYAN_CLOUDWOOL.get().defaultBlockState(),
-//                                                        AetherIIBlocks.BLUE_CLOUDWOOL.get().defaultBlockState()
-
-                                                )
+                                                arcticFlowers
                                         )
                                 ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
                         )
