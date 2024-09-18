@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.*;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -181,14 +182,19 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     private boolean canProcess(RegistryAccess registryAccess, @Nullable RecipeHolder<AltarEnchantingRecipe> recipeHolder, NonNullList<ItemStack> stacks, int maxStackSize) {
-        if (!stacks.get(0).isEmpty() && recipeHolder != null) {
+        ItemStack input = stacks.get(0);
+        if (!input.isEmpty() && recipeHolder != null) {
             ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
             if (result.isEmpty()) {
                 return false;
             } else {
                 ItemStack inResultSlot = stacks.get(9);
                 if (inResultSlot.isEmpty()) {
-                    return true;
+                    if (ItemStack.isSameItem(input, result)) {
+                        return !input.has(DataComponents.MAX_DAMAGE) || input.getDamageValue() > 0;
+                    } else {
+                        return true;
+                    }
                 } else if (!ItemStack.isSameItem(inResultSlot, result)) {
                     return false;
                 } else if (inResultSlot.getCount() + result.getCount() <= maxStackSize && inResultSlot.getCount() + result.getCount() <= inResultSlot.getMaxStackSize()) {
@@ -208,11 +214,16 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
             ItemStack result = recipeHolder.value().assemble(new SingleRecipeInput(this.getItem(0)), registryAccess);
             ItemStack output = stacks.get(9);
             if (output.isEmpty()) {
-                stacks.set(9, result.copy());
+                if (ItemStack.isSameItem(input, result) && input.has(DataComponents.MAX_DAMAGE) && input.getDamageValue() > 0) {
+                    ItemStack copy = input.copy();
+                    copy.setDamageValue(0);
+                    stacks.set(9, copy);
+                } else {
+                    stacks.set(9, result.copy());
+                }
             } else if (output.is(result.getItem())) {
                 output.grow(result.getCount());
             }
-
             input.shrink(1);
             return true;
         } else {

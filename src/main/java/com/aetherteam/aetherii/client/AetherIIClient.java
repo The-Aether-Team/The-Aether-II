@@ -1,12 +1,6 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.event.listeners.ClientTooltipsListener;
-import com.aetherteam.aetherii.client.event.listeners.GuiExtensionListener;
-import com.aetherteam.aetherii.client.event.listeners.MusicListener;
-import com.aetherteam.aetherii.client.event.listeners.PlayerRespawnClientListeners;
-import com.aetherteam.aetherii.client.event.listeners.attachment.AerbunnyMountClientListners;
-import com.aetherteam.aetherii.client.event.listeners.attachment.DimensionRenderEffectListeners;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
@@ -44,12 +38,7 @@ public class AetherIIClient {
     public static void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
-        AerbunnyMountClientListners.listen(bus);
-        DimensionRenderEffectListeners.listen(bus);
-        PlayerRespawnClientListeners.listen(bus);
-        GuiExtensionListener.listen(bus);
-        MusicListener.listen(bus);
-        ClientTooltipsListener.listen(bus);
+        AetherIIClientEventListeners.listen(bus);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
@@ -60,7 +49,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerAddLayer);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
-        neoBus.addListener(AetherIIRenderers::bakeModels);
+        neoBus.addListener(AetherIIRenderers::registerBakedModels);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
         neoBus.addListener(AetherIIShaders::registerShaders);
         neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
@@ -79,6 +68,10 @@ public class AetherIIClient {
         registerShieldProperties(AetherIIItems.ZANITE_SHIELD.get());
         registerShieldProperties(AetherIIItems.ARKENIUM_SHIELD.get());
         registerShieldProperties(AetherIIItems.GRAVITITE_SHIELD.get());
+
+        registerHealingStoneProperties(AetherIIItems.HEALING_STONE.get());
+
+        registerGenericProperties();
     }
 
     private static void registerCrossbowProperties(Item item) {
@@ -88,15 +81,22 @@ public class AetherIIClient {
                 livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"), (stack, level, livingEntity, value) ->
                 TieredCrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
+    }
 
+    private static void registerShieldProperties(Item item) {
+        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, livingEntity, value) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
+    }
+
+    private static void registerHealingStoneProperties(Item item) {
+        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), (stack, level, livingEntity, value) ->
+                stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES) != null ? stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES) / 10.0F : 0.0F);
+    }
+
+    private static void registerGenericProperties() {
         ClampedItemPropertyFunction reinforcementProperty = (stack, level, livingEntity, value) -> {
             ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
             return tier != null ? tier.getTier() * 0.1F : Float.NEGATIVE_INFINITY;
         };
         ItemProperties.registerGeneric(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), reinforcementProperty);
-    }
-
-    private static void registerShieldProperties(Item item) {
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, livingEntity, value) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
     }
 }

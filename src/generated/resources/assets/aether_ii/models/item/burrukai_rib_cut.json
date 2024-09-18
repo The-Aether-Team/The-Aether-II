@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/food/burrukai_rib_cut"
+    "layer0": "aether_ii:item/consumables/burrukai_rib_cut"
   }
 }
