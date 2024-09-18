@@ -10,7 +10,9 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -62,6 +64,53 @@ public class BottomedVineBlock extends VineBlock {
             }
         }
         return super.getToolModifiedState(state, context, itemAbility, simulate);
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        if (facing == Direction.DOWN) {
+            return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+        } else {
+            BlockState updatedState = this.getUpdatedState(state, level, currentPos);
+            return !this.hasFaces(updatedState) ? Blocks.AIR.defaultBlockState() : updatedState;
+        }
+    }
+
+    private BlockState getUpdatedState(BlockState state, BlockGetter level, BlockPos pos) {
+        BlockPos abovePos = pos.above();
+        if (state.getValue(UP)) {
+            state = state.setValue(UP, isAcceptableNeighbour(level, abovePos, Direction.DOWN));
+        }
+        BlockState otherState = null;
+
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            BooleanProperty property = getPropertyForFace(direction);
+            if (state.getValue(property)) {
+                boolean flag = this.canSupportAtFace(level, pos, direction);
+                if (!flag) {
+                    if (otherState == null) {
+                        otherState = level.getBlockState(abovePos);
+                    }
+                    flag = otherState.is(this) && otherState.getValue(property) && otherState.getValue(AGE) < 25;
+                }
+                state = state.setValue(property, flag);
+            }
+        }
+        return state;
+    }
+
+    private boolean hasFaces(BlockState state) {
+        return this.countFaces(state) > 0;
+    }
+
+    private int countFaces(BlockState state) {
+        int i = 0;
+        for (BooleanProperty property : PROPERTY_BY_DIRECTION.values()) {
+            if (state.getValue(property)) {
+                i++;
+            }
+        }
+        return i;
     }
 
     @Override
@@ -174,7 +223,7 @@ public class BottomedVineBlock extends VineBlock {
             } else {
                 BooleanProperty booleanDirection = PROPERTY_BY_DIRECTION.get(direction);
                 BlockState state = level.getBlockState(pos.above());
-                return state.is(this) && state.getValue(booleanDirection);
+                return state.is(this) && state.getValue(booleanDirection) && state.getValue(AGE) < 25;
             }
         }
     }
