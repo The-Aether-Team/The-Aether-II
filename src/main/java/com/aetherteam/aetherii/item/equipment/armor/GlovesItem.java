@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class GlovesItem extends Item implements Accessory {
-    public static final ResourceLocation BASE_GLOVES_STAMINA_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_stamina_restoration");
+    public static final ResourceLocation BASE_GLOVES_COOLDOWN_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_cooldown_restoration");
 
     protected final Holder<ArmorMaterial> material;
     private final double restoration;
@@ -35,7 +35,7 @@ public class GlovesItem extends Item implements Accessory {
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
         if (reference.slotName().equals(AetherIIAccessorySlots.HANDWEAR_SLOT_LOCATION.toString())) {
-            builder.addStackable(AetherIIAttributes.SHIELD_STAMINA_RESTORATION, new AttributeModifier(BASE_GLOVES_STAMINA_RESTORATION_ID, this.restoration, AttributeModifier.Operation.ADD_VALUE));
+            builder.addStackable(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION, new AttributeModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID, this.restoration, AttributeModifier.Operation.ADD_VALUE));
         }
     }
 

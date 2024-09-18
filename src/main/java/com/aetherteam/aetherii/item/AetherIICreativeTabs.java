@@ -462,7 +462,7 @@ public class AetherIICreativeTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_ARMOR_AND_ACCESSORIES = CREATIVE_MODE_TABS.register("armor_and_accessories", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "equipment_and_utilities"))
-            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "food_and_drinks"))
+            .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "consumables"))
             .icon(() -> new ItemStack(AetherIIItems.GRAVITITE_HELMET.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".armor_and_accessories"))
             .displayItems((features, output) -> {
@@ -493,11 +493,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_GLOVES.get());
             }).build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_FOOD_AND_DRINKS = CREATIVE_MODE_TABS.register("food_and_drinks", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_CONSUMABLES = CREATIVE_MODE_TABS.register("consumables", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "combat"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "ingredients"))
             .icon(() -> new ItemStack(AetherIIItems.ORANGE.get()))
-            .title(Component.translatable("itemGroup." + AetherII.MODID + ".food_and_drinks"))
+            .title(Component.translatable("itemGroup." + AetherII.MODID + ".consumables"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.BLUEBERRY.get());
                 output.accept(AetherIIItems.ENCHANTED_BLUEBERRY.get());
@@ -517,10 +517,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.TAEGORE_STEAK.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get());
                 output.accept(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get());
+                output.accept(AetherIIItems.WATER_VIAL.get());
+                output.accept(AetherIIItems.BANDAGE.get());
+                output.accept(AetherIIItems.SPLINT.get());
+                output.accept(AetherIIItems.ANTITOXIN_VIAL.get());
+                output.accept(AetherIIItems.ANTIVENOM_VIAL.get());
+                output.accept(AetherIIItems.HEALING_STONE.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_INGREDIENTS = CREATIVE_MODE_TABS.register("ingredients", () -> CreativeModeTab.builder()
-            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "food_and_drinks"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "consumables"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "spawn_eggs"))
             .icon(() -> new ItemStack(AetherIIItems.INERT_ARKENIUM.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".ingredients"))
@@ -555,6 +561,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.PURPLE_SWET_GEL.get());
                 output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
                 output.accept(AetherIIItems.WHITE_SWET_GEL.get());
+                output.accept(AetherIIItems.SCATTERGLASS_VIAL.get());
                 output.accept(AetherIIItems.CHARGE_CORE.get());
             }).build());
 

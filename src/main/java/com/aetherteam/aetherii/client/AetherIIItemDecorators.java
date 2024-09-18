@@ -1,9 +1,12 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.IItemDecorator;
 import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 
@@ -29,45 +32,8 @@ public class AetherIIItemDecorators {
     };
 
     public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
-        event.register(AetherIIItems.SKYROOT_SHORTSWORD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.SKYROOT_HAMMER, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.SKYROOT_SPEAR, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.SKYROOT_SHIELD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.HOLYSTONE_SHORTSWORD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.HOLYSTONE_HAMMER, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.HOLYSTONE_SPEAR, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.HOLYSTONE_SHIELD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ZANITE_SHORTSWORD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ZANITE_HAMMER, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ZANITE_SPEAR, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ZANITE_SHIELD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ARKENIUM_SHORTSWORD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ARKENIUM_HAMMER, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ARKENIUM_SPEAR, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ARKENIUM_SHIELD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.GRAVITITE_SHORTSWORD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.GRAVITITE_HAMMER, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.GRAVITITE_SPEAR, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.GRAVITITE_SHIELD, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.SKYROOT_AXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.HOLYSTONE_AXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ZANITE_AXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ARKENIUM_AXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.GRAVITITE_AXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.SKYROOT_PICKAXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.HOLYSTONE_PICKAXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ZANITE_PICKAXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ARKENIUM_PICKAXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.GRAVITITE_PICKAXE, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.SKYROOT_SHOVEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.HOLYSTONE_SHOVEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ZANITE_SHOVEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ARKENIUM_SHOVEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.GRAVITITE_SHOVEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.SKYROOT_TROWEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.HOLYSTONE_TROWEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ZANITE_TROWEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.ARKENIUM_TROWEL, REINFORCED_DURABILITY);
-        event.register(AetherIIItems.GRAVITITE_TROWEL, REINFORCED_DURABILITY);
+        for (Holder<Item> item : ArkeniumForgeMenu.REINFORCEABLE) {
+            event.register(item.value(), REINFORCED_DURABILITY);
+        }
     }
 }

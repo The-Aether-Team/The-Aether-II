@@ -1,0 +1,15 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "repairing",
+  "experience": 0.0,
+  "fuel_count": 4,
+  "group": "repair_gravitite",
+  "ingredient": {
+    "item": "aether_ii:gravitite_shortsword"
+  },
+  "processing_time": 200,
+  "result": {
+    "count": 1,
+    "id": "aether_ii:gravitite_shortsword"
+  }
+}

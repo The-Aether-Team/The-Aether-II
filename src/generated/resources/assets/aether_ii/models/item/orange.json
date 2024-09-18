@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/food/orange"
+    "layer0": "aether_ii:item/consumables/orange"
   }
 }
