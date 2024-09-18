@@ -293,4 +293,3 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
         return Mth.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
     }
 }
-

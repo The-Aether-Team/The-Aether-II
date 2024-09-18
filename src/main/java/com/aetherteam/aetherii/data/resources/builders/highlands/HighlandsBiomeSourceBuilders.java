@@ -72,16 +72,18 @@ public class HighlandsBiomeSourceBuilders {
                 Pair.of(new Climate.ParameterPoint(tempHighfields3, Climate.Parameter.span(0.25F, 1.0F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.VERDANT_WOODS)),
 
                 // Magnetic
-                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.VIOLET_HIGHWOODS)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.1F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(Climate.Parameter.span(-1.5F, 0.65F), fullRange, fullRange, erosionMagnetic, fullRange, ridgeLake, 0), biomes.getOrThrow(HighlandsBiomes.GLISTENING_SWAMP)),
 
-                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-1.0F, -0.15F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.TURQUOISE_FOREST)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-0.15F, 0.2F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.VIOLET_HIGHWOODS)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionMagnetic, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.VIOLET_HIGHWOODS)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic1, Climate.Parameter.span(-0.1F, 1.0F), fullRange, erosionMagnetic, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
 
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-0.1F, 0.3F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.TURQUOISE_FOREST)),
-                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(0.3F, 1.0F), fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-1.0F, -0.15F), fullRange, erosionMagnetic, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.TURQUOISE_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(-0.15F, 0.2F), fullRange, erosionMagnetic, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic2, Climate.Parameter.span(0.2F, 1.0F), fullRange, erosionMagnetic, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.VIOLET_HIGHWOODS)),
+
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-1.0F, -0.1F), fullRange, erosionMagnetic, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(-0.1F, 0.3F), fullRange, erosionMagnetic, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.TURQUOISE_FOREST)),
+                Pair.of(new Climate.ParameterPoint(tempMagnetic3, Climate.Parameter.span(0.3F, 1.0F), fullRange, erosionMagnetic, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
 
                 Pair.of(new Climate.ParameterPoint(tempIrradiated, fullRange, fullRange, erosionMagnetic, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.MAGNETIC_SCAR)),
 

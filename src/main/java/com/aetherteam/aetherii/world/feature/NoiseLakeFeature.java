@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.aetherteam.aetherii.world.feature.configuration.NoiseLakeConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
@@ -23,9 +24,13 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
     @Override
     public boolean place(FeaturePlaceContext<NoiseLakeConfiguration> context) {
-        int chunkX = context.origin().getX() - (context.origin().getX() % 16);
-        int chunkZ = context.origin().getZ() - (context.origin().getZ() % 16);
-        int height = context.config().height().getMinValue();
+        BlockPos pos = context.origin();
+        NoiseLakeConfiguration config = context.config();
+
+        int chunkX = pos.getX() - (pos.getX() % 16);
+        int chunkZ = pos.getZ() - (pos.getZ() % 16);
+        int height = config.height().getMinValue();
+        double noiseStartValue = config.noiseStartValue();
 
         // Generates this feature chunk-wise
         for (int x = 0; x < 16; x++) {
@@ -34,18 +39,28 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 int zCoord = chunkZ + z;
 
                 // Determinds the noise value at each y-level
-                placeLakeLayer(context, xCoord, height, zCoord, 0.3, 1.0);
-                placeLakeLayer(context, xCoord, height - 1, zCoord, 0.325, 0.8);
-                placeLakeLayer(context, xCoord, height - 2, zCoord, 0.34, 0.75);
-                placeLakeLayer(context, xCoord, height - 3, zCoord, 0.345, 0.7);
-                placeLakeLayer(context, xCoord, height - 4, zCoord, 0.35, 0.625);
-                placeLakeLayer(context, xCoord, height - 5, zCoord, 0.365, 0.55);
-                placeLakeLayer(context, xCoord, height - 6, zCoord, 0.37, 0.475);
-                placeLakeLayer(context, xCoord, height - 7, zCoord, 0.375, 0.4);
-                placeLakeLayer(context, xCoord, height - 8, zCoord, 0.38, 0.3);
-                placeLakeLayer(context, xCoord, height - 9, zCoord, 0.385, 0.2);
-                placeLakeLayer(context, xCoord, height - 10, zCoord, 0.391, 0.1);
-                placeLakeLayer(context, xCoord, height - 11, zCoord, 0.45, 0.035);
+                if (config.type() == Type.LAKE) { // Noise List used for Lakes
+                    placeLakeLayer(context, xCoord, height, zCoord, noiseStartValue, 1.0);
+                    placeLakeLayer(context, xCoord, height - 1, zCoord, noiseStartValue + 0.025, 0.8);
+                    placeLakeLayer(context, xCoord, height - 2, zCoord, noiseStartValue + 0.04, 0.75);
+                    placeLakeLayer(context, xCoord, height - 3, zCoord, noiseStartValue + 0.045, 0.7);
+                    placeLakeLayer(context, xCoord, height - 4, zCoord, noiseStartValue + 0.05, 0.625);
+                    placeLakeLayer(context, xCoord, height - 5, zCoord, noiseStartValue + 0.055, 0.55);
+                    placeLakeLayer(context, xCoord, height - 6, zCoord, noiseStartValue + 0.06, 0.475);
+                    placeLakeLayer(context, xCoord, height - 7, zCoord, noiseStartValue + 0.065, 0.4);
+                    placeLakeLayer(context, xCoord, height - 8, zCoord, noiseStartValue + 0.07, 0.3);
+                    placeLakeLayer(context, xCoord, height - 9, zCoord, noiseStartValue + 0.075, 0.2);
+                    placeLakeLayer(context, xCoord, height - 10, zCoord, noiseStartValue + 0.082, 0.1);
+                    placeLakeLayer(context, xCoord, height - 11, zCoord, noiseStartValue + 0.05, 0.035);
+                } else { // Noise List used for Swamps
+                    placeLakeLayer(context, xCoord, height, zCoord, noiseStartValue, 0.45);
+                    placeLakeLayer(context, xCoord, height - 1, zCoord, noiseStartValue + 0.025, 0.4);
+                    placeLakeLayer(context, xCoord, height - 2, zCoord, noiseStartValue + 0.04, 0.35);
+                    placeLakeLayer(context, xCoord, height - 3, zCoord, noiseStartValue + 0.045, 0.3);
+                    placeLakeLayer(context, xCoord, height - 4, zCoord, noiseStartValue + 0.05, 0.25);
+                    placeLakeLayer(context, xCoord, height - 5, zCoord, noiseStartValue + 0.055, 0.175);
+                    placeLakeLayer(context, xCoord, height - 6, zCoord, noiseStartValue + 0.0625, 0.1);
+                }
             }
         }
         return true;
@@ -117,5 +132,26 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
     public int barrierThickness(double barrier) {
         return barrier < 0.25 ? 2 : 1;
+    }
+
+    public enum Type implements StringRepresentable {
+        LAKE("lake"),
+        SWAMP("swamp");
+
+        public static final Codec<NoiseLakeFeature.Type> CODEC = StringRepresentable.fromEnum(NoiseLakeFeature.Type::values);
+        private final String name;
+
+        Type(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name;
+        }
     }
 }

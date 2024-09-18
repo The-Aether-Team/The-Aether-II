@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.world.feature.configuration.CoastConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
@@ -31,9 +30,7 @@ public class CoastFeature extends Feature<CoastConfiguration> {
         Set<BlockPos> set = new HashSet<>();
 
         DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(level.getSeed());
-
         config.distanceNoise().mapAll(visitor);
-        config.patternNoise().ifPresent(noise -> noise.mapAll(visitor));
 
         for (int x = pos.getX(); x < pos.getX() + 16; ++x) {
             for (int z = pos.getZ(); z < pos.getZ() + 16; ++z) {
@@ -94,28 +91,6 @@ public class CoastFeature extends Feature<CoastConfiguration> {
             if (config.vegetationChance() > 0.0F && random.nextFloat() < config.vegetationChance()) {
                 config.vegetationFeature().ifPresent(placedFeatureHolder -> placedFeatureHolder.value().place(level, context.chunkGenerator(), random, blockPos));
             }
-        }
-    }
-
-    public enum Type implements StringRepresentable {
-        HIGHFIELDS("highfields"),
-        MAGNETIC("magnetic"),
-        ARCTIC("arctic");
-
-        public static final Codec<CoastFeature.Type> CODEC = StringRepresentable.fromEnum(CoastFeature.Type::values);
-        private final String name;
-
-        Type(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return this.name;
-        }
-
-        @Override
-        public String getSerializedName() {
-            return this.name;
         }
     }
 }

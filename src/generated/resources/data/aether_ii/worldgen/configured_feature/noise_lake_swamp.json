@@ -1,13 +1,13 @@
 {
   "type": "aether_ii:noise_lake",
   "config": {
-    "type": "lake",
+    "type": "swamp",
     "frozen": false,
     "height": {
       "value": 124
     },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
-    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
+    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor_swamp",
     "lake_noise": "aether_ii:highlands/lakes/noise",
     "noise_start_value": 0.3,
     "underwater_block": {
@@ -29,19 +29,19 @@
       "slow_scale": 1.0,
       "states": [
         {
-          "Name": "aether_ii:shimmering_silt"
+          "Name": "aether_ii:ferrosite_sand"
         },
         {
           "Name": "aether_ii:coarse_aether_dirt"
         },
         {
-          "Name": "aether_ii:shimmering_silt"
+          "Name": "aether_ii:ferrosite_sand"
         },
         {
           "Name": "aether_ii:aether_dirt"
         },
         {
-          "Name": "aether_ii:shimmering_silt"
+          "Name": "aether_ii:ferrosite_sand"
         }
       ],
       "variety": [
