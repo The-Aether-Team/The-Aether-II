@@ -61,6 +61,7 @@ public class FallPathNavigation extends GroundPathNavigation {
         }
     }
 
+
     @Override
     protected boolean canUpdatePath() {
         return true;
