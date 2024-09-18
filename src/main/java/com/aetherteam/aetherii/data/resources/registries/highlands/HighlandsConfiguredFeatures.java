@@ -325,17 +325,20 @@ public class HighlandsConfiguredFeatures {
                 .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1);
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                allFlowers.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
-            }
-        }
+
+        List<BlockState> magneticFlowers = new ArrayList<>(List.of(
+                AetherIIBlocks.POASPROUT.get().defaultBlockState(),
+                AetherIIBlocks.LILICHIME.get().defaultBlockState(),
+                AetherIIBlocks.PLURACIAN.get().defaultBlockState()
+        ));
 
         List<BlockState> arcticFlowers = new ArrayList<>(List.of(
                 AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
         ));
+
         for (int i = 1; i <= 4; i++) {
             for (Direction direction : Direction.Plane.HORIZONTAL) {
+                magneticFlowers.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction));
                 arcticFlowers.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction));
             }
         }
@@ -562,17 +565,7 @@ public class HighlandsConfiguredFeatures {
                                                 2345L,
                                                 new NormalNoise.NoiseParameters(-1, 1.0),
                                                 1.0F,
-                                                List.of(
-//                                                        AetherIIBlocks.RED_CLOUDWOOL.get().defaultBlockState(),
-//                                                        AetherIIBlocks.ORANGE_CLOUDWOOL.get().defaultBlockState(),
-                                                        AetherIIBlocks.POASPROUT.get().defaultBlockState(),
-                                                        AetherIIBlocks.LILICHIME.get().defaultBlockState(),
-                                                        AetherIIBlocks.PLURACIAN.get().defaultBlockState()
-//                                                        AetherIIBlocks.GREEN_CLOUDWOOL.get().defaultBlockState(),
-//                                                        AetherIIBlocks.CYAN_CLOUDWOOL.get().defaultBlockState(),
-//                                                        AetherIIBlocks.BLUE_CLOUDWOOL.get().defaultBlockState()
-
-                                                )
+                                                magneticFlowers
                                         )
                                 ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
                         )
