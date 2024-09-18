@@ -35,7 +35,7 @@ public class KirridPathNavigation extends GroundPathNavigation {
 
         //This make No need to rotate around a point when following a path.
         float fallDistance = this.mob.getMaxFallDistance();
-        boolean flag = d0 <= (double) this.maxDistanceToWaypoint && d2 <= (double) this.maxDistanceToWaypoint && d1 < fallDistance; //Forge: Fix MC-94054
+        boolean flag = d0 <= (double) this.maxDistanceToWaypoint && d2 <= (double) this.maxDistanceToWaypoint && d1 < fallDistance;
         if (flag || this.canCutCorner(this.path.getNextNode().type) && this.shouldTargetNextNodeInDirection(vec3)) {
             this.path.advance();
         }
