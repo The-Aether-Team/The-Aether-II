@@ -12,6 +12,5 @@
     "absolute": -20
   },
   "start_pool": "aether_ii:dungeon/infected_guardian_tree/lobbies",
-  "step": "surface_structures",
-  "terrain_adaptation": "encapsulate"
+  "step": "surface_structures"
 }
