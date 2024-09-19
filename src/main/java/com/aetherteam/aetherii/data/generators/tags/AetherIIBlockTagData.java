@@ -370,6 +370,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATBOA_SAPLING.get(),
                 AetherIIBlocks.AMBEROOT_SAPLING.get()
         );
+        this.tag(BlockTags.LOGS).add(
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
+        );
         this.tag(BlockTags.LOGS_THAT_BURN).addTags(
                 AetherIITags.Blocks.SKYROOT_LOGS,
                 AetherIITags.Blocks.GREATROOT_LOGS,
