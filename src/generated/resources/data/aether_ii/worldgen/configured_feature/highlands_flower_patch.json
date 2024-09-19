@@ -61,15 +61,6 @@
                   }
                 },
                 "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:satival_shoot",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 1
               }
             ]
           }

@@ -317,29 +317,10 @@ public class HighlandsConfiguredFeatures {
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
-        SimpleWeightedRandomList.Builder<BlockState> allFlowers = SimpleWeightedRandomList.<BlockState>builder()
-                .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
-                .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
-                .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
-                .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 1)
-                .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 1)
-                .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1)
-                .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1);
-
-        List<BlockState> magneticFlowers = new ArrayList<>(List.of(
-                AetherIIBlocks.POASPROUT.get().defaultBlockState(),
-                AetherIIBlocks.LILICHIME.get().defaultBlockState(),
-                AetherIIBlocks.PLURACIAN.get().defaultBlockState()
-        ));
-
-        List<BlockState> arcticFlowers = new ArrayList<>(List.of(
-                AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
-        ));
-
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                magneticFlowers.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction));
-                arcticFlowers.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction));
+        SimpleWeightedRandomList.Builder<BlockState> holpupea = new SimpleWeightedRandomList.Builder<>();
+        for (Direction facing : MossFlowersBlock.FACING.getPossibleValues()) {
+            for (int amount : MossFlowersBlock.AMOUNT.getPossibleValues()) {
+                holpupea.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, amount).setValue(MossFlowersBlock.FACING, facing), amount);
             }
         }
 
@@ -511,7 +492,13 @@ public class HighlandsConfiguredFeatures {
                         16,
                         8,
                         3,
-                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(allFlowers)),
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                        .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
+                                        .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
+                                        .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 1)
+                                        .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 1)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 1)
+                                        .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1))),
                                 BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable()))
         ));
         register(
@@ -565,35 +552,54 @@ public class HighlandsConfiguredFeatures {
                                                 2345L,
                                                 new NormalNoise.NoiseParameters(-1, 1.0),
                                                 1.0F,
-                                                magneticFlowers
+                                                List.of(
+                                                        AetherIIBlocks.POASPROUT.get().defaultBlockState(),
+                                                        AetherIIBlocks.LILICHIME.get().defaultBlockState(),
+                                                        AetherIIBlocks.PLURACIAN.get().defaultBlockState()
+                                                )
                                         )
                                 ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
                         )
                 )
         );
 
-        register(
-                context,
+        register(context,
                 ARCTIC_FLOWER_PATCH,
-                Feature.FLOWER,
-                new RandomPatchConfiguration(
-                        40,
-                        8,
-                        3,
-                        PlacementUtils.filtered(
-                                AetherIIFeatures.AETHER_FLOWER.get(),
-                                new SimpleBlockConfiguration(
-                                        new DualNoiseProvider(
-                                                new InclusiveRange<>(1, 3),
-                                                new NormalNoise.NoiseParameters(-5, 1.0),
-                                                1.0F,
-                                                2345L,
-                                                new NormalNoise.NoiseParameters(-1, 1.0),
-                                                1.0F,
-                                                arcticFlowers
+                Feature.RANDOM_SELECTOR,
+                new RandomFeatureConfiguration(List.of(
+                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(Feature.FLOWER,
+                                new RandomPatchConfiguration(
+                                        40,
+                                        8,
+                                        3,
+                                        PlacementUtils.filtered(
+                                                AetherIIFeatures.AETHER_FLOWER.get(),
+                                                new SimpleBlockConfiguration(new WeightedStateProvider(holpupea)),
+                                                BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
                                         )
-                                ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
-                        )
+                                )), 0.5F)
+                ), PlacementUtils.inlinePlaced(Feature.FLOWER,
+                        new RandomPatchConfiguration(
+                                40,
+                                8,
+                                3,
+                                PlacementUtils.filtered(
+                                        AetherIIFeatures.AETHER_FLOWER.get(),
+                                        new SimpleBlockConfiguration(
+                                                new DualNoiseProvider(
+                                                        new InclusiveRange<>(1, 3),
+                                                        new NormalNoise.NoiseParameters(-5, 1.0),
+                                                        1.0F,
+                                                        2345L,
+                                                        new NormalNoise.NoiseParameters(-1, 1.0),
+                                                        1.0F,
+                                                        List.of(
+                                                                AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState()
+                                                        )
+                                                )
+                                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())
+                                )
+                        ))
                 )
         );
         register(context, MAGNETIC_SHROOM_PATCH, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(SimpleStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get()))));
