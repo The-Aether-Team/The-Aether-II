@@ -14,11 +14,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "aether_ii:tarahesp_ambrelinn_moss_vines"
+          "name": "aether_ii:ambrelinn_moss_vines"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:blocks/tarahesp_ambrelinn_moss_vines"
+  "random_sequence": "aether_ii:blocks/ambrelinn_moss_vines"
 }

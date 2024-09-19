@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -11,7 +10,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -881,7 +879,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         oneToOneConversionRecipe(consumer, Items.BLUE_DYE, AetherIIBlocks.SATIVAL_SHOOT, "blue_dye");
         oneToOneConversionRecipe(consumer, Items.PINK_DYE, AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "pink_dye");
         oneToOneConversionRecipe(consumer, Items.MAGENTA_DYE, AetherIIBlocks.HOLPUPEA, "magenta_dye");
-        oneToOneConversionRecipe(consumer, Items.MAGENTA_DYE, AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_FLOWERS, "magenta_dye");
+        oneToOneConversionRecipe(consumer, Items.MAGENTA_DYE, AetherIIBlocks.TARAHESP_FLOWERS, "magenta_dye");
         oneToOneConversionRecipe(consumer, Items.BROWN_DYE, AetherIIBlocks.SKY_ROOTS, "brown_dye");
 
 

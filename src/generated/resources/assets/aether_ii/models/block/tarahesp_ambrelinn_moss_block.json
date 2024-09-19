@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "aether_ii:block/natural/tarahesp_ambrelinn_moss_block"
-  }
-}

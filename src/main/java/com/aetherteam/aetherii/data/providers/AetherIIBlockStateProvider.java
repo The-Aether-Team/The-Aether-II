@@ -279,7 +279,7 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }
     }
 
-    public void tarahespAmbrelinnMossVines(Block block) {
+    public void ambrelinnMossVines(Block block) {
         ModelFile normalModel = this.models().getBuilder(this.name(block))
                 .ao(false)
                 .texture("vine", this.texture(this.name(block), "natural/"))
@@ -402,13 +402,13 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         }
     }
 
-    public void tarahespAmbrelinnFlowers(Block block) {
+    public void tarahespFlowers(Block block) {
         ResourceLocation texturePurple = this.texture(this.name(block) + "_purple", "natural/");
         ResourceLocation textureWhite = this.texture(this.name(block) + "_white", "natural/");
 
         MultiPartBlockStateBuilder builder = this.getMultipartBuilder(block);
         for (int i = 1; i <= 4; i++) {
-            ModelFile model = this.models().withExistingParent(this.name(block) + "_" + i, this.modLoc("block/template_tarahesp_ambrelinn_moss_flowers_" + i))
+            ModelFile model = this.models().withExistingParent(this.name(block) + "_" + i, this.modLoc("block/template_tarahesp_flowers_" + i))
                     .ao(false)
                     .renderType(ResourceLocation.withDefaultNamespace("cutout"))
                     .texture("0", texturePurple)

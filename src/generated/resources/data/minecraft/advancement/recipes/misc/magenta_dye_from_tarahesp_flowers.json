@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_tarahesp_ambrelinn_moss_flowers": {
+    "has_tarahesp_flowers": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:tarahesp_ambrelinn_moss_flowers"
+            "items": "aether_ii:tarahesp_flowers"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:magenta_dye_from_tarahesp_ambrelinn_moss_flowers"
+        "recipe": "minecraft:magenta_dye_from_tarahesp_flowers"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_tarahesp_ambrelinn_moss_flowers"
+      "has_tarahesp_flowers"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:magenta_dye_from_tarahesp_ambrelinn_moss_flowers"
+      "minecraft:magenta_dye_from_tarahesp_flowers"
     ]
   }
 }

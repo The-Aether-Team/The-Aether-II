@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true
       },
       "when": {
@@ -12,7 +12,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true
       },
       "when": {
@@ -26,7 +26,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true
       },
       "when": {
@@ -36,7 +36,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true
       },
       "when": {
@@ -50,7 +50,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true,
         "y": 90
       },
@@ -61,7 +61,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true,
         "y": 90
       },
@@ -76,7 +76,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true,
         "y": 90
       },
@@ -87,7 +87,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true,
         "y": 90
       },
@@ -102,7 +102,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true,
         "y": 180
       },
@@ -113,7 +113,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true,
         "y": 180
       },
@@ -128,7 +128,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true,
         "y": 180
       },
@@ -139,7 +139,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true,
         "y": 180
       },
@@ -154,7 +154,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true,
         "y": 270
       },
@@ -165,7 +165,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true,
         "y": 270
       },
@@ -180,7 +180,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true,
         "y": 270
       },
@@ -191,7 +191,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true,
         "y": 270
       },
@@ -206,7 +206,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true,
         "x": 270
       },
@@ -217,7 +217,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines",
+        "model": "aether_ii:block/ambrelinn_moss_vines",
         "uvlock": true,
         "x": 270
       },
@@ -232,7 +232,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true,
         "x": 270
       },
@@ -243,7 +243,7 @@
     },
     {
       "apply": {
-        "model": "aether_ii:block/tarahesp_ambrelinn_moss_vines_bottom",
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
         "uvlock": true,
         "x": 270
       },

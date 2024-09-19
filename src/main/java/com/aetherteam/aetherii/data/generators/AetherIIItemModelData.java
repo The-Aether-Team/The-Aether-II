@@ -258,10 +258,10 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Irradiated
         this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
-        this.itemBlock(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_BLOCK.get());
-        this.itemBlock(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_CARPET.get());
-        this.itemBlockFlat(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_VINES.get(), "natural/");
-        this.itemBlockFlatItem(AetherIIBlocks.TARAHESP_AMBRELINN_MOSS_FLOWERS.get());
+        this.itemBlock(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
+        this.itemBlockFlat(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), "natural/");
+        this.itemBlockFlatItem(AetherIIBlocks.TARAHESP_FLOWERS.get());
 
         // Ores
         this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
