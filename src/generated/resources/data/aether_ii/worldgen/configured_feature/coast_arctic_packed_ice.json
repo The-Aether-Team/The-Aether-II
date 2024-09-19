@@ -1,17 +1,37 @@
 {
   "type": "aether_ii:coast",
   "config": {
-    "type": "arctic",
     "block": {
       "type": "minecraft:simple_state_provider",
       "state": {
         "Name": "aether_ii:arctic_packed_ice"
       }
     },
-    "brettl_chance": 0.0,
     "distance_noise": "aether_ii:highlands/coasts/arctic",
     "size": 16.35,
-    "valid_blocks": "aether_ii:aether_grass_block",
+    "valid_blocks": "aether_ii:arctic_coast_generates_on",
+    "vegetation_chance": 0.25,
+    "vegetation_feature": {
+      "feature": {
+        "type": "minecraft:random_selector",
+        "config": {
+          "default": {
+            "feature": "aether_ii:ice",
+            "placement": []
+          },
+          "features": [
+            {
+              "chance": 0.35,
+              "feature": {
+                "feature": "aether_ii:ice_crystals",
+                "placement": []
+              }
+            }
+          ]
+        }
+      },
+      "placement": []
+    },
     "y_range": {
       "max_inclusive": 180,
       "min_inclusive": 120

@@ -1,0 +1,15 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "repairing",
+  "experience": 0.0,
+  "fuel_count": 5,
+  "group": "repair_arkenium",
+  "ingredient": {
+    "item": "aether_ii:arkenium_axe"
+  },
+  "processing_time": 200,
+  "result": {
+    "count": 1,
+    "id": "aether_ii:arkenium_axe"
+  }
+}

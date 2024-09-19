@@ -1,18 +1,47 @@
 {
   "type": "aether_ii:coast",
   "config": {
-    "type": "magnetic",
     "block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:ferrosite_sand"
-      }
+      "type": "minecraft:noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0,
+          0.25,
+          0.0,
+          0.0
+        ],
+        "firstOctave": -3
+      },
+      "scale": 1.0,
+      "seed": 99,
+      "states": [
+        {
+          "Name": "minecraft:air"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
+        },
+        {
+          "Name": "minecraft:air"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
+        },
+        {
+          "Name": "minecraft:air"
+        }
+      ]
     },
-    "brettl_chance": 0.0,
     "distance_noise": "aether_ii:highlands/coasts/highfields",
-    "pattern_noise": 0.0,
     "size": 16.35,
-    "valid_blocks": "aether_ii:aether_grass_block",
+    "valid_blocks": "aether_ii:ferrosite_coast_generates_on",
+    "vegetation_chance": 0.0,
     "y_range": {
       "max_inclusive": 156,
       "min_inclusive": 112

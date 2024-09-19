@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
+import com.aetherteam.aetherii.block.natural.BlocksLightLeaves;
 import com.aetherteam.aetherii.block.natural.IrradiatedLeavesBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -65,6 +66,24 @@ public class AetherIIBlockBuilders {
 
     public static Block leaves(MapColor mapColor, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
         return new AetherLeavesBlock(
+                BlockBehaviour.Properties.of()
+                        .mapColor(mapColor)
+                        .strength(0.2F)
+                        .randomTicks()
+                        .sound(SoundType.GRASS)
+                        .noOcclusion()
+                        .isValidSpawn(AetherIIBlockBuilders::spawnOnLeaves)
+                        .isSuffocating(AetherIIBlockBuilders::never)
+                        .isViewBlocking(AetherIIBlockBuilders::never)
+                        .isRedstoneConductor(AetherIIBlockBuilders::never)
+                        .ignitedByLava()
+                        .pushReaction(PushReaction.DESTROY),
+                leavesParticle, leavesPile
+        );
+    }
+
+    public static Block blocksLightleaves(MapColor mapColor, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
+        return new BlocksLightLeaves(
                 BlockBehaviour.Properties.of()
                         .mapColor(mapColor)
                         .strength(0.2F)

@@ -6,14 +6,16 @@
     "noise": {
       "amplitudes": [
         1.0,
-        1.75,
+        1.5,
+        0.0,
+        0.0,
         0.0,
         0.0
       ],
       "firstOctave": -8
     },
     "seed": 64,
-    "xz_scale": 0.5,
+    "xz_scale": 0.75,
     "y_scale": 0.0
   }
 }

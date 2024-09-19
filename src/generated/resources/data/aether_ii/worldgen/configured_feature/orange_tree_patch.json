@@ -1,49 +1,15 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "aether_ii:orange_tree",
   "config": {
-    "feature": {
-      "feature": {
-        "type": "aether_ii:orange_tree",
-        "config": {
-          "to_place": {
-            "type": "minecraft:weighted_state_provider",
-            "entries": [
-              {
-                "data": {
-                  "Name": "aether_ii:orange_tree",
-                  "Properties": {
-                    "age": "3",
-                    "half": "lower"
-                  }
-                },
-                "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:orange_tree",
-                  "Properties": {
-                    "age": "4",
-                    "half": "lower"
-                  }
-                },
-                "weight": 1
-              }
-            ]
-          }
+    "to_place": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:orange_tree",
+        "Properties": {
+          "age": "4",
+          "half": "lower"
         }
-      },
-      "placement": [
-        {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:matching_blocks",
-            "blocks": "minecraft:air"
-          }
-        }
-      ]
-    },
-    "tries": 16,
-    "xz_spread": 7,
-    "y_spread": 3
+      }
+    }
   }
 }

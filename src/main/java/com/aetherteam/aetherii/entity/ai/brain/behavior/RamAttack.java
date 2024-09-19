@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.entity.ai.brain.behavior;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.AetherAnimal;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
@@ -68,6 +70,7 @@ public class RamAttack extends Behavior<AetherAnimal> {
                             this.finishRam(pLevel, pOwner);
                             pLevel.broadcastEntityEvent(pOwner, (byte) 61);
                             pLevel.playSound(null, pOwner, SoundEvents.GOAT_RAM_IMPACT, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                            target.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.STUN, 500);
                         }
                     } else if (blockPos.distSqr(pOwner.blockPosition()) < 5 || this.ramTick >= 100) {
                         this.finishRam(pLevel, pOwner);

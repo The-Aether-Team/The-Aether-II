@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.client.gui.screen.inventory;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
-import com.aetherteam.aetherii.item.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.ReinforcementTier;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.EditBoxAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeRenamePacket;
 import com.aetherteam.aetherii.network.packet.serverbound.ForgeSlotCharmsPacket;
@@ -27,9 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
-
-//todo
-//  need to render the charm displays and "slots" around the item when inputted.
 
 public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMenu> {
     private static final ResourceLocation TEXT_FIELD_SPRITE = ResourceLocation.withDefaultNamespace("container/anvil/text_field");

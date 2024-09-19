@@ -24,7 +24,7 @@
           "type": "minecraft:mul",
           "argument1": {
             "type": "minecraft:mul",
-            "argument1": -0.3,
+            "argument1": -0.27,
             "argument2": "aether_ii:highlands/terrain/shattered/factor_shattered"
           },
           "argument2": {
@@ -41,7 +41,7 @@
     "type": "minecraft:mul",
     "argument1": {
       "type": "minecraft:mul",
-      "argument1": -0.3,
+      "argument1": -0.27,
       "argument2": "aether_ii:highlands/terrain/shattered/factor_shattered"
     },
     "argument2": {

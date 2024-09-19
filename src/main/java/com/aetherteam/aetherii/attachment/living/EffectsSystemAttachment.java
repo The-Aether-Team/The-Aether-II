@@ -1,8 +1,10 @@
 package com.aetherteam.aetherii.attachment.living;
 
+import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
-import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupRemovePacket;
+import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupSetPacket;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import net.minecraft.core.Holder;
@@ -51,9 +53,9 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
         }
     }
 
-    public void tick() {
+    public void postTickUpdate(LivingEntity livingEntity) {
         if (this.loadingSync) {
-            PacketDistributor.sendToAllPlayers(new EffectBuildupPacket.Set(this.entity.getId(), this.activeBuildups));
+            PacketDistributor.sendToAllPlayers(new EffectBuildupSetPacket(this.entity.getId(), this.activeBuildups));
             this.loadingSync = false;
         }
         this.activeBuildups.values().removeIf(instance -> !instance.tick(this.entity));
@@ -62,11 +64,18 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
     public void addBuildup(EffectBuildupPresets.Preset buildup, int amount) {
         Holder<MobEffect> effect = buildup.type();
         if (!this.entity.hasEffect(effect)) {
-            if (!this.activeBuildups.containsKey(effect)) {
-                this.activeBuildups.put(effect, new EffectBuildupInstance(buildup, amount));
-            } else {
-                this.activeBuildups.get(effect).increaseBuildup(amount);
+            double modifiedAmount = amount;
+            if (AetherIIEffectResistances.RESISTANCES.containsKey(effect) && AetherIIEffectResistances.RESISTANCES.get(effect) != null) {
+                if (this.entity.getAttributes().hasAttribute(AetherIIEffectResistances.RESISTANCES.get(effect))) {
+                    modifiedAmount -= modifiedAmount * this.entity.getAttributeValue(AetherIIEffectResistances.RESISTANCES.get(effect));
+                }
             }
+            if (!this.activeBuildups.containsKey(effect)) {
+                this.activeBuildups.put(effect, new EffectBuildupInstance(buildup, (int) modifiedAmount));
+            } else {
+                this.activeBuildups.get(effect).increaseBuildup((int) modifiedAmount);
+            }
+            this.loadingSync = true;
         }
     }
 
@@ -83,7 +92,7 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
 
     public void removeBuildup(Holder<MobEffect> effect) {
         if (!this.entity.level().isClientSide()) {
-            PacketDistributor.sendToAllPlayers(new EffectBuildupPacket.Remove(this.entity.getId(), effect));
+            PacketDistributor.sendToAllPlayers(new EffectBuildupRemovePacket(this.entity.getId(), effect));
         }
         this.activeBuildups.remove(effect);
     }

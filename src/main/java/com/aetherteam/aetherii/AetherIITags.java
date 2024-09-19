@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.material.Fluid;
 
 public class AetherIITags {
@@ -20,8 +21,8 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
         public static final TagKey<Block> FERROSITE = tag("ferrosite");
-        public static final TagKey<Block> BRETTL_PLANT_SURVIVES_ON = tag("brettl_plant_survives_on");
         public static final TagKey<Block> AERCLOUDS = tag("aerclouds");
+        public static final TagKey<Block> CLOUDWOOL = tag("cloudwool");
         public static final TagKey<Block> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
@@ -35,11 +36,34 @@ public class AetherIITags {
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
 
+        public static final TagKey<Block> AETHER_PLANT_SURVIVES_ON = tag("aether_plant_survives_on");
+        public static final TagKey<Block> SKYROOT_TWIG_SURVIVES_ON = tag("skyroot_twig_survives_on");
+        public static final TagKey<Block> HOLYSTONE_ROCK_SURVIVES_ON = tag("holystone_rock_survives_on");
+        public static final TagKey<Block> BOULDER_SURVIVES_ON = tag("boulder_survives_on");
+        public static final TagKey<Block> FALLEN_LOG_SURVIVES_ON = tag("fallen_log_survives_on");
+        public static final TagKey<Block> BRETTL_PLANT_SURVIVES_ON = tag("brettl_plant_survives_on");
+        public static final TagKey<Block> SKY_ROOTS_SURVIVES_ON = tag("sky_roots_survives_on");
+        public static final TagKey<Block> ICE_CRYSTAL_SURVIVES_ON = tag("ice_crystal_survives_on");
+        public static final TagKey<Block> ARCTIC_TREE_SURVIVES_ON = tag("arctic_tree_survives_on");
+        public static final TagKey<Block> GRASS_AND_DIRT_REPLACEABLE = tag("grass_and_dirt_replaceable");
+        public static final TagKey<Block> COARSE_AETHER_DIRT_REPLACEABLE = tag("coarse_aether_dirt_replaceable");
+        public static final TagKey<Block> ARCTIC_ICE_REPLACEABLE = tag("arctic_ice_replaceable");
+        public static final TagKey<Block> GRASS_SNOW_REPLACEABLE = tag("grass_snow_replaceable");
+        public static final TagKey<Block> QUICKSOIL_COAST_GENERATES_ON = tag("quicksoil_coast_generates_on");
+        public static final TagKey<Block> FERROSITE_COAST_GENERATES_ON = tag("ferrosite_coast_generates_on");
+        public static final TagKey<Block> ARCTIC_COAST_GENERATES_ON = tag("arctic_coast_generates_on");
+        public static final TagKey<Block> FERROSITE_PILLAR_GENERATES_ON = tag("ferrosite_pillar_generates_on");
+        public static final TagKey<Block> FERROSITE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
+        public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
+
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
+        public static final TagKey<Block> SWET_SPAWNABLE_ON = tag("swet_spawnable_on");
+
         public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");
 
+        public static final TagKey<Block> HOLYSTONE_ABILITY_GUARANTEED = tag("holystone_ability_guaranteed");
         public static final TagKey<Block> GRAVITITE_ABILITY_BLACKLIST = tag("gravitite_ability_blacklist");
 
         private static TagKey<Block> tag(String name) {
@@ -52,6 +76,7 @@ public class AetherIITags {
         public static final TagKey<Item> HOLYSTONE = tag("holystone");
         public static final TagKey<Item> FERROSITE = tag("ferrosite");
         public static final TagKey<Item> AERCLOUDS = tag("aerclouds");
+        public static final TagKey<Item> CLOUDWOOL = tag("cloudwool");
         public static final TagKey<Item> SKYROOT_LOGS = tag("skyroot_logs");
         public static final TagKey<Item> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Item> WISPROOT_LOGS = tag("wisproot_logs");
@@ -63,7 +88,6 @@ public class AetherIITags {
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
-        public static final TagKey<Item> CLOUDWOOL = tag("cloudwool");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
@@ -127,6 +151,7 @@ public class AetherIITags {
         public static final TagKey<EntityType<?>> BURRUKAI = tag("burrukai");
         public static final TagKey<EntityType<?>> KIRRID = tag("kirrid");
 
+        public static final TagKey<EntityType<?>> AETHER_MOBS = tag("aether_mobs");
         public static final TagKey<EntityType<?>> NO_DOUBLE_DROPS = tag("no_double_drops");
         public static final TagKey<EntityType<?>> NO_AMBROSIUM_DROPS = tag("no_ambrosium_drops");
 
@@ -155,6 +180,7 @@ public class AetherIITags {
         public static final TagKey<Biome> EXPANSE = tag("expanse");
 
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
+        public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
 
         public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");
         public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");
@@ -167,6 +193,14 @@ public class AetherIITags {
 
         private static TagKey<Biome> tag(String name) {
             return TagKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        }
+    }
+
+    public static class Structures {
+        public static final TagKey<Structure> STRUCTURE_BLACKLIST_FILTER = tag("structure_blacklist_filter");
+
+        private static TagKey<Structure> tag(String name) {
+            return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 

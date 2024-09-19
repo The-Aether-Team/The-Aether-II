@@ -39,7 +39,19 @@ public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider 
         this.add("jukebox_song." + this.id + "." + songName, name);
     }
 
+    public void addBestiaryName(EntityType<?> entityType, String description) {
+        this.add(this.id + ".guidebook_bestiary.name." + entityType.getDescriptionId(), description);
+    }
+
+    public void addBestiarySlotName(EntityType<?> entityType, String description) {
+        this.add(this.id + ".guidebook_bestiary.slot_name." + entityType.getDescriptionId(), description);
+    }
+
+    public void addBestiarySlotSubtitle(EntityType<?> entityType, String description) {
+        this.add(this.id + ".guidebook_bestiary.slot_subtitle." + entityType.getDescriptionId(), description);
+    }
+
     public void addBestiaryDescription(EntityType<?> entityType, String description) {
-        this.add(this.id + ".guidebook_bestiary." + entityType.getDescriptionId(), description);
+        this.add(this.id + ".guidebook_bestiary.description." + entityType.getDescriptionId(), description);
     }
 }

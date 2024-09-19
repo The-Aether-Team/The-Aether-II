@@ -12,12 +12,15 @@
     "common.PlayerMixin",
     "common.RandomStateMixin",
     "common.ServerLevelMixin",
+    "common.accessor.AbstractArrowAccessor",
     "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
     "common.accessor.CraftingMenuAccessor",
     "common.accessor.EntityAccessor",
     "common.accessor.FireBlockAccessor",
+    "common.accessor.LivingEntityAccessor",
     "common.accessor.LootContextParamSetsAccessor",
+    "common.accessor.MobEffectInstanceAccessor",
     "common.accessor.PerlinNoiseAccessor",
     "common.accessor.PlayerAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor"
@@ -25,6 +28,7 @@
   "client": [
     "client.BlockRenderDispatcherMixin",
     "client.ClientLevelMixin",
+    "client.HumanoidArmorLayerMixin",
     "client.LiquidBlockRendererMixin",
     "client.ReceivingLevelScreenMixin",
     "client.accessor.DeathScreenAccessor",

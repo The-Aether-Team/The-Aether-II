@@ -33,7 +33,7 @@ public interface MountableMob {
      */
     default void riderTick(Mob vehicle) {
         if (vehicle.getControllingPassenger() instanceof Player player) {
-            if (player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).isJumping() && !this.isMountJumping()) {
+            if (player.getData(AetherIIDataAttachments.PLAYER).isJumping() && !this.isMountJumping()) {
                 this.setPlayerJumped(true);
             }
         }

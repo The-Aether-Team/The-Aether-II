@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.tree.foliage.greatroot;
 
+import com.aetherteam.aetherii.world.tree.foliage.AbstractBranchedFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -10,12 +11,11 @@ import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 import java.util.function.BiConsumer;
 
-public class GreatrootFoliagePlacer extends FoliagePlacer {
+public class GreatrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
     public static final MapCodec<GreatrootFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> foliagePlacerParts(instance)
             .apply(instance, GreatrootFoliagePlacer::new));
 
@@ -45,12 +45,14 @@ public class GreatrootFoliagePlacer extends FoliagePlacer {
         boolean doubleTrunk = attachment.doubleTrunk();
 
         for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, pos, 12, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y, z), 12, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z + 1), 12, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y, z + 1), 12, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y + 1, z + random.nextIntBetweenInclusive(0, 1)), 7, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 12, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y - 1, z), 12, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z + 1), 12, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 1, y - 1, z + 1), 12, i, doubleTrunk);
+            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(0, 1), y, z + random.nextIntBetweenInclusive(0, 1)), 7, i, doubleTrunk);
         }
+
+        this.placeCornerLogs(level, foliageSetter, random, config, pos, -1, 0);
     }
 
     /**

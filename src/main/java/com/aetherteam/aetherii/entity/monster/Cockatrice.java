@@ -2,9 +2,10 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceRangedAttackGoal;
-import com.aetherteam.aetherii.entity.projectile.ToxicDart;
+import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -85,7 +86,8 @@ public class Cockatrice extends Monster implements RangedAttackMob {
                 .add(Attributes.MAX_HEALTH, 25.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
-                .add(Attributes.ATTACK_DAMAGE, 4.0);
+                .add(Attributes.ATTACK_DAMAGE, 4.0)
+                .add(AetherIIAttributes.VENOM_EFFECT_RESISTANCE, 1.0);
     }
 
     @Override
@@ -115,18 +117,18 @@ public class Cockatrice extends Monster implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
-        ToxicDart snowball = new ToxicDart(this, this.level());
+        VenomousDart dart = new VenomousDart(this, this.level());
         double d0 = target.getEyeY() - this.getEyeY();
         double d1 = target.getX() - this.getX();
         double d3 = target.getZ() - this.getZ();
         double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.2F;
-        snowball.shoot(d1, d0 + d4, d3, 0.8F, 6.0F);
+        dart.shoot(d1, d0 + d4, d3, 0.8F, 6.0F);
         this.playSound(AetherIISoundEvents.COCKATRICE_SHOOT.value(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level().addFreshEntity(snowball);
+        this.level().addFreshEntity(dart);
     }
 
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return effect.getEffect() != AetherIIEffects.TOXIN.get() && super.canBeAffected(effect);
+        return effect.getEffect() != AetherIIEffects.VENOM.get() && super.canBeAffected(effect);
     }
 }

@@ -1,5 +1,5 @@
 {
-  "feature": "aether_ii:trees_enduring_woodland",
+  "feature": "aether_ii:trees_biome_enduring_woodland",
   "placement": [
     {
       "type": "minecraft:count",
@@ -21,15 +21,18 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:surface_water_depth_filter",
-      "max_water_depth": 0
-    },
-    {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
     },
     {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 0
+    },
+    {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "aether_ii:structure_blacklist_filter"
     }
   ]
 }

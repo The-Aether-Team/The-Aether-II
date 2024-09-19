@@ -1,18 +1,20 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.client.renderer.entity.animation.TempestAnimations;
 import com.aetherteam.aetherii.entity.monster.Tempest;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class TempestModel extends EntityModel<Tempest> {
+public class TempestModel extends HierarchicalModel<Tempest> {
 	private final ModelPart body;
+	private final ModelPart root;
+
 
 	public TempestModel(ModelPart root) {
 		this.body = root.getChild("body");
+		this.root = root;
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -70,14 +72,14 @@ public class TempestModel extends EntityModel<Tempest> {
 
 		PartDefinition fin_right = cloud_shell.addOrReplaceChild("fin_right", CubeListBuilder.create(), PartPose.offsetAndRotation(-6.5F, -1.0F, -6.0F, 0.0F, -0.0873F, 0.0F));
 
-		PartDefinition fin_wisp_right_emissive_r1 = fin_right.addOrReplaceChild("fin_wisp_right_emissive_r1", CubeListBuilder.create().texOffs(1, -3).addBox(1.16F, -9.0F, 6.0F, 0.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
+		PartDefinition fin_wisp_right_emissive_r1 = fin_right.addOrReplaceChild("fin_wisp_right_emissive_r1", CubeListBuilder.create().texOffs(1, -3).addBox(1.155F, -9.0F, 6.0F, 0.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
 				.texOffs(1, 4).addBox(1.15F, -9.0F, 6.0F, 0.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, 4.0F, 4.5F, 0.0F, -0.3054F, 0.0F));
 
 		PartDefinition fin_right_r1 = fin_right.addOrReplaceChild("fin_right_r1", CubeListBuilder.create().texOffs(19, 0).addBox(1.0F, -4.0F, 1.0F, 3.0F, 7.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 0.0F, -2.0F, 0.0F, -0.2182F, 0.0F));
 
 		PartDefinition fin_left = cloud_shell.addOrReplaceChild("fin_left", CubeListBuilder.create(), PartPose.offsetAndRotation(6.5F, -1.0F, -6.0F, 0.0F, 0.0873F, 0.0F));
 
-		PartDefinition fin_wisp_left_emissive_r1 = fin_left.addOrReplaceChild("fin_wisp_left_emissive_r1", CubeListBuilder.create().texOffs(110, -3).addBox(-1.16F, -9.0F, 6.0F, 0.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
+		PartDefinition fin_wisp_left_emissive_r1 = fin_left.addOrReplaceChild("fin_wisp_left_emissive_r1", CubeListBuilder.create().texOffs(110, -3).addBox(-1.155F, -9.0F, 6.0F, 0.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
 				.texOffs(110, 4).addBox(-1.15F, -9.0F, 6.0F, 0.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 4.0F, 4.5F, 0.0F, 0.3054F, 0.0F));
 
 		PartDefinition fin_left_r1 = fin_left.addOrReplaceChild("fin_left_r1", CubeListBuilder.create().texOffs(79, 0).addBox(-4.0F, -4.0F, 1.0F, 3.0F, 7.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.0F, 0.0F, -2.0F, 0.0F, 0.2182F, 0.0F));
@@ -92,12 +94,12 @@ public class TempestModel extends EntityModel<Tempest> {
 
 		PartDefinition wisp_left = cloud_shell.addOrReplaceChild("wisp_left", CubeListBuilder.create(), PartPose.offset(6.806F, -3.8194F, 7.6118F));
 
-		PartDefinition wisp_left_emissive_r1 = wisp_left.addOrReplaceChild("wisp_left_emissive_r1", CubeListBuilder.create().texOffs(80, 14).addBox(-0.01F, -1.0F, 0.0F, 0.0F, 7.0F, 20.0F, new CubeDeformation(0.0F))
+		PartDefinition wisp_left_emissive_r1 = wisp_left.addOrReplaceChild("wisp_left_emissive_r1", CubeListBuilder.create().texOffs(80, 14).addBox(-0.005F, -1.0F, 0.0F, 0.0F, 7.0F, 20.0F, new CubeDeformation(0.0F))
 				.texOffs(80, 21).addBox(0.0F, -1.0F, 0.0F, 0.0F, 7.0F, 20.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.2618F, 0.1309F));
 
 		PartDefinition wisp_right = cloud_shell.addOrReplaceChild("wisp_right", CubeListBuilder.create(), PartPose.offset(-6.806F, -3.8194F, 7.6118F));
 
-		PartDefinition wisp_right_emissive_r1 = wisp_right.addOrReplaceChild("wisp_right_emissive_r1", CubeListBuilder.create().texOffs(7, 14).addBox(0.01F, -1.0F, 0.0F, 0.0F, 7.0F, 20.0F, new CubeDeformation(0.0F))
+		PartDefinition wisp_right_emissive_r1 = wisp_right.addOrReplaceChild("wisp_right_emissive_r1", CubeListBuilder.create().texOffs(7, 14).addBox(0.005F, -1.0F, 0.0F, 0.0F, 7.0F, 20.0F, new CubeDeformation(0.0F))
 				.texOffs(7, 21).addBox(0.0F, -1.0F, 0.0F, 0.0F, 7.0F, 20.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.2618F, -0.1309F));
 
 		return LayerDefinition.create(meshdefinition, 128, 128);
@@ -105,12 +107,15 @@ public class TempestModel extends EntityModel<Tempest> {
 
 
 	@Override
-	public void setupAnim(Tempest entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
+	public void setupAnim(Tempest tempest, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animateWalk(TempestAnimations.FLY, limbSwing, limbSwingAmount, 2.0F, 2.0F);
+		this.animate(tempest.attackAnimationState, TempestAnimations.ATTACK, ageInTicks, 1.0F);
+		this.animate(tempest.hideAnimationState, TempestAnimations.DESPAWN, ageInTicks, 1.0F);
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
-		body.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
+	public ModelPart root() {
+		return this.root;
 	}
 }

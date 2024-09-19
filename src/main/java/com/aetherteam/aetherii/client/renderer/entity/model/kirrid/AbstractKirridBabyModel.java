@@ -42,7 +42,6 @@ public abstract class AbstractKirridBabyModel extends HierarchicalModel<Kirrid> 
         this.animate(kirrid.eatAnimationState, KirridBabyAnimations.EAT, ageInTicks, 1.0F);
         if (!kirrid.jumpAnimationState.isStarted()) {
             this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
-
         }
         this.plate.visible = kirrid.hasPlate();
     }

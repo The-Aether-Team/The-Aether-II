@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
@@ -37,27 +36,19 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
     @Override
     protected void createFoliage(LevelSimulatedReader level, FoliageSetter foliageSetter, RandomSource random, TreeConfiguration config, int maxFreeTreeHeight, FoliageAttachment attachment, int foliageHeight, int foliageRadius, int offset) {
-        BlockPos pos = attachment.pos();
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
-        boolean doubleTrunk = attachment.doubleTrunk();
+        BlockPos blockpos = attachment.pos();
+        int i = 0;
+        int j = 0;
+        int k = 0;
 
-        for (int i = offset; i >= offset - foliageHeight; --i) {
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 7, z), 14, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 6, z), 4, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 4, z), 10, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 5, z), 5, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 3, z), 8, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 2, z), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 5, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, pos, 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 1, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 3, z), 0, i, doubleTrunk);
-
-            if (random.nextBoolean()) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + random.nextIntBetweenInclusive(-1, 1), y - random.nextIntBetweenInclusive(8, 9), z + random.nextIntBetweenInclusive(-1, 1)), 3, i, attachment.doubleTrunk());
+        for (int l = offset; l >= -foliageHeight; l--) {
+            this.placeLeavesRow(level, foliageSetter, random, config, blockpos, i, l, attachment.doubleTrunk());
+            if (i >= j) {
+                i = k;
+                k = 1;
+                j = Math.min(j + 1, foliageRadius + attachment.radiusOffset());
+            } else {
+                i++;
             }
         }
     }
@@ -73,7 +64,7 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
     @Override
     public int foliageHeight(RandomSource random, int height, TreeConfiguration config) {
-        return 3;
+        return height - 4;
     }
 
     /**
@@ -90,7 +81,8 @@ public class SkypineFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
-        return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + random.nextInt(2);
+        return localX == range && localZ == range && range > 0;
+//        return Mth.square(localX) + Mth.square(localY + 2) + Mth.square(localZ) > range + (random.nextInt(4) == 0 ? random.nextInt(2) : 0);
     }
 
     @Override

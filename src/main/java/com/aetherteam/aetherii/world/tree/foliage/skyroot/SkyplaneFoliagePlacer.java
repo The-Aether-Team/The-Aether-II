@@ -41,29 +41,36 @@ public class SkyplaneFoliagePlacer extends FoliagePlacer {
         int y = pos.getY();
         int z = pos.getZ();
         boolean doubleTrunk = attachment.doubleTrunk();
+        int xOffset = random.nextBoolean() ? 1 : -1;
+        int zOffset = random.nextBoolean() ? 1 : -1;
 
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 8, z), 1, 0, doubleTrunk);
         for (int i = offset; i >= offset - foliageHeight; --i) {
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 7, z), 2, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 5, z), 3, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 3, z), 3, i, doubleTrunk);
             this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y - 1, z), 3, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 2, i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 2, z), 1, i, doubleTrunk);
-
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + (2 + random.nextInt(1)), y - 5 + random.nextInt(2), z + (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - (2 + random.nextInt(1)), y - 5 + random.nextInt(2), z - (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + (2 + random.nextInt(1)), y - 1 + random.nextInt(2), z - (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
-            this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - (2 + random.nextInt(1)), y - 1 + random.nextInt(2), z + (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
-
-            if (random.nextBoolean()) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + (2 + random.nextInt(1)), y - 5 + random.nextInt(2), z - (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - (2 + random.nextInt(1)), y - 5 + random.nextInt(2), z + (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
-            }
-            if (random.nextBoolean()) {
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + (2 + random.nextInt(1)), y - 1 + random.nextInt(2), z + (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
-                this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - (2 + random.nextInt(1)), y - 1 + random.nextInt(2), z - (2 + random.nextInt(1))), 2 + random.nextInt(1), i, doubleTrunk);
-            }
         }
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y, z), 6, 1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x, y + 1, z), 3, 1, doubleTrunk);
+
+
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + xOffset, y - 5, z + zOffset), 2, 1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + xOffset, y - 5, z + zOffset), 5, 0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + xOffset, y - 5, z + zOffset), 5, -1, doubleTrunk);
+
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + xOffset, y - 1, z - zOffset), 2, 1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + xOffset, y - 1, z - zOffset), 5, 0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + xOffset, y - 1, z - zOffset), 5, -1, doubleTrunk);
+
+
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - xOffset, y - 6, z - zOffset), 2, 1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - xOffset, y - 6, z - zOffset), 5, 0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - xOffset, y - 6, z - zOffset), 5, -1, doubleTrunk);
+
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - xOffset, y - 2, z + zOffset), 2, 1, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - xOffset, y - 2, z + zOffset), 5, 0, doubleTrunk);
+        this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x - xOffset, y - 2, z + zOffset), 5, -1, doubleTrunk);
     }
 
     /**
@@ -92,7 +99,7 @@ public class SkyplaneFoliagePlacer extends FoliagePlacer {
      */
     @Override
     protected boolean shouldSkipLocation(RandomSource random, int localX, int localY, int localZ, int range, boolean large) {
-        return Mth.square(localX) + Mth.square(localY) + Mth.square(localZ) > range + random.nextInt(3);
+        return Mth.square(localX) + Mth.square(localY) + Mth.square(localZ) > range + (localY != 0 && random.nextInt(4) == 0 ? -1 : 0);
     }
 
     @Override

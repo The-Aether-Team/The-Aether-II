@@ -1,5 +1,5 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.zephyr",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.zephyr",
   "entity_type": "aether_ii:zephyr",
   "icon_discovered": "aether_ii:guidebook/bestiary/zephyr",
   "loot": [
@@ -11,5 +11,6 @@
     }
   ],
   "observation_advancement": "aether_ii:bestiary/observe_zephyr",
+  "scale_multiplier": 1.65,
   "understanding_advancement": "aether_ii:bestiary/understand_zephyr"
 }

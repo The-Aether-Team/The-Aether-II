@@ -7,7 +7,8 @@ import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageResistances;
+import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
+import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckGuidebookEntryPacket;
 import net.minecraft.ChatFormatting;
@@ -18,18 +19,23 @@ import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,10 +46,7 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     private static final List<Holder<EntityType<?>>> ENTRY_ORDER = List.of(
@@ -103,7 +106,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                     int width = 125;
                     int height = 69;
                     this.rotation = Mth.wrapDegrees(Mth.lerp(partialTick, this.rotation, this.rotation + 0.85F));
-                    int scale = (int) (30 / livingEntity.getBoundingBox().getSize());
+                    int scale = (int) ((30 / livingEntity.getBoundingBox().getSize()) * this.getSelectedEntry().scaleMultiplier().orElse(1.0));
                     this.renderRotatingEntity(guiGraphics, rightPagePos + x, topPos + y, rightPagePos + x + width, topPos + y + height, scale, 0.2225F, this.rotation, -15.0F, livingEntity);
                 }
             }
@@ -193,9 +196,17 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
             Component name = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.entry.unknown");
             if (this.isObserved(entry)) {
-                name = Component.translatable(entry.entityType().value().getDescriptionId());
+                if (entry.slotName().isPresent()) {
+                    name = Component.translatable(entry.slotName().get());
+                } else {
+                    name = Component.translatable(entry.entityType().value().getDescriptionId());
+                }
             }
-            guiGraphics.renderTooltip(Minecraft.getInstance().font, name, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
+            List<Component> components = new ArrayList<>(List.of(name));
+            if (this.isObserved(entry) && entry.slotSubtitle().isPresent()) {
+                components.add(Component.translatable(entry.slotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+            }
+            guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
         }
     }
 
@@ -207,7 +218,11 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             if (level != null) {
                 Entity entity = this.getSelectedEntry().entityType().value().create(level);
                 if (entity instanceof LivingEntity livingEntity) {
-                    guiGraphics.drawCenteredString(font, Component.translatable(this.getSelectedEntry().entityType().value().getDescriptionId()), 88, 13, 16777215);
+                    String name = this.getSelectedEntry().entityType().value().getDescriptionId();
+                    if (this.getSelectedEntry().name().isPresent()) {
+                        name = this.getSelectedEntry().name().get();
+                    }
+                    guiGraphics.drawCenteredString(font, Component.translatable(name), 88, 13, 16777215);
 
                     if (this.isUnderstood(this.getSelectedEntry())) {
                         int x = 27;
@@ -216,30 +231,48 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                         guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         String health = String.valueOf((int) livingEntity.getMaxHealth());
                         this.renderIconValue(guiGraphics, x, y, health);
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", health));
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", health));
 
                         y += 17;
                         guiGraphics.blitSprite(SLASH_SPRITE, x, y, 16, 16);
-                        int slashDefense = (int) AetherIIDamageResistances.getSlashDefense(this.registryAccess, entity);
+                        int slashDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0);
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
                         this.renderIconValue(guiGraphics, x, y, String.valueOf(-slashDefense));
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, slashTooltip);
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, slashTooltip);
 
                         y += 17;
                         guiGraphics.blitSprite(IMPACT_SPRITE, x, y, 16, 16);
-                        int impactDefense = (int) AetherIIDamageResistances.getImpactDefense(this.registryAccess, entity);
+                        int impactDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0);
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
                         this.renderIconValue(guiGraphics, x, y, String.valueOf(-impactDefense));
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y,impactTooltip);
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, impactTooltip);
 
                         y += 17;
                         guiGraphics.blitSprite(PIERCE_SPRITE, x, y, 16, 16);
-                        int pierceDefense = (int) AetherIIDamageResistances.getPierceDefense(this.registryAccess, entity);
+                        int pierceDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0);
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
                         this.renderIconValue(guiGraphics, x, y, String.valueOf(-pierceDefense));
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, pierceTooltip);
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, pierceTooltip);
+
+                        x = 132;
+                        y = 29;
 
                         //todo effect resistance render
+                        MobEffectTextureManager effectTextureManager = Minecraft.getInstance().getMobEffectTextures();
+                        for (Map.Entry<Holder<MobEffect>, Holder<Attribute>> holders : AetherIIEffectResistances.RESISTANCES.entrySet()) {
+                            if (livingEntity.getAttributes().hasAttribute(holders.getValue())) {
+                                Holder<MobEffect> effectHolder = holders.getKey();
+                                TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
+                                guiGraphics.blit(x, y, 0, 18, 18, textureatlassprite);
+                                double effectValue = livingEntity.getAttributeValue(holders.getValue());
+                                Component effectTooltip = Component.literal((int) effectValue * 100 + "%")
+                                        .append(CommonComponents.space())
+                                        .append(Component.translatable(holders.getValue().value().getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
+                                this.renderIconValue(guiGraphics, x, y, String.valueOf(effectValue));
+                                this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, -Minecraft.getInstance().font.width(effectTooltip) - 22, effectTooltip);
+                                y += 17;
+                            }
+                        }
 
                         int dropsTextX = 101;
                         int dropsTextY = 156;
@@ -328,13 +361,13 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         return component;
     }
 
-    private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, Component component) {
+    private void renderTooltipOverIcon(Font font, GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int xOffset, Component component) {
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
         if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
-            guiGraphics.renderTooltip(font, component, mouseX - rightPagePos, mouseY - topPos);
+            guiGraphics.renderTooltip(font, component, (mouseX - rightPagePos) + xOffset, mouseY - topPos);
         }
     }
 

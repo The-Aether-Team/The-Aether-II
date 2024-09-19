@@ -1,5 +1,5 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.entity.aether_ii.moa",
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.moa",
   "entity_type": "aether_ii:moa",
   "food": "aether_ii:moa_food",
   "icon_discovered": "aether_ii:guidebook/bestiary/moa",

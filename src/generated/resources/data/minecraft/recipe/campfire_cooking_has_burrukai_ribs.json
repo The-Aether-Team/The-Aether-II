@@ -2,7 +2,7 @@
   "type": "minecraft:campfire_cooking",
   "category": "food",
   "cookingtime": 600,
-  "experience": 0.1,
+  "experience": 0.35,
   "ingredient": {
     "item": "aether_ii:burrukai_rib_cut"
   },

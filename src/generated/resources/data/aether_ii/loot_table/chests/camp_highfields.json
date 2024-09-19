@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:chests/camp_highfields_hunter"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:chests/camp_highfields_farmer"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "aether_ii:chests/camp_highfields_fletcher"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 1.0
+      }
+    }
+  ],
+  "random_sequence": "aether_ii:chests/camp_highfields"
+}

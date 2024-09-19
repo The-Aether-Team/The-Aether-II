@@ -50,4 +50,22 @@ public final class BlockPlacementUtil {
             return false;
         }
     }
+
+    /**
+     * Used for adding more variation to the radius of cylinder based features.
+     *
+     * @param random   The {@link RandomSource} used for a random variation.
+     * @param value    The {@link Float} used for the intensity of the variation.
+     * @return A {@link Float} used as a factor to the radius.
+     */
+    public static float shapeVariator(RandomSource random, float value) {
+        if (random.nextInt(16) == 5) {
+            return value * 1.5F;
+        }
+        else if (random.nextInt(12) == 5) {
+            return value * 1.25F;
+        } else {
+            return value;
+        }
+    }
 }

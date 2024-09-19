@@ -68,20 +68,20 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.handheldItem(AetherIIItems.GRAVITITE_SPEAR.get(), "weapons/");
         this.crossbowItem(AetherIIItems.GRAVITITE_CROSSBOW.get(), "weapons/");
 
-        this.handheldItem(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
+        this.item(AetherIIItems.SCATTERGLASS_BOLT.get(), "weapons/");
 
         // Armor
-        this.helmetItem(AetherIIItems.TAEGORE_HIDE_HELMET.get(), "armor/");
-        this.chestplateItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), "armor/");
-        this.leggingsItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), "armor/");
-        this.bootsItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), "armor/");
-        this.item(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), "armor/");
+        this.dyedHelmetItem(AetherIIItems.TAEGORE_HIDE_HELMET.get(), "armor/");
+        this.dyedChestplateItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), "armor/");
+        this.dyedLeggingsItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), "armor/");
+        this.dyedBootsItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), "armor/");
+        this.dyedGlovesItem(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), "armor/");
 
-        this.helmetItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), "armor/");
-        this.chestplateItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), "armor/");
-        this.leggingsItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), "armor/");
-        this.bootsItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), "armor/");
-        this.item(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), "armor/");
+        this.dyedHelmetItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), "armor/");
+        this.dyedChestplateItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), "armor/");
+        this.dyedLeggingsItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), "armor/");
+        this.dyedBootsItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), "armor/");
+        this.dyedGlovesItem(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), "armor/");
 
         this.helmetItem(AetherIIItems.ZANITE_HELMET.get(), "armor/");
         this.chestplateItem(AetherIIItems.ZANITE_CHESTPLATE.get(), "armor/");
@@ -129,28 +129,37 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.PURPLE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
+        this.item(AetherIIItems.SCATTERGLASS_VIAL.get(), "materials/");
         this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "materials/");
         this.item(AetherIIItems.CHARGE_CORE.get(), "materials/");
 
         // Food
-        this.item(AetherIIItems.BLUEBERRY.get(), "food/");
-        this.item(AetherIIItems.ENCHANTED_BLUEBERRY.get(), "food/");
-        this.item(AetherIIItems.ORANGE.get(), "food/");
-        this.item(AetherIIItems.WYNDBERRY.get(), "food/");
-        this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "food/");
-        this.item(AetherIIItems.GREEN_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.PURPLE_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.WHITE_SWET_JELLY.get(), "food/");
-        this.item(AetherIIItems.BURRUKAI_RIBS.get(), "food/");
-        this.item(AetherIIItems.BURRUKAI_RIB_CUT.get(), "food/");
-        this.item(AetherIIItems.KIRRID_CUTLET.get(), "food/");
-        this.item(AetherIIItems.KIRRID_LOIN.get(), "food/");
-        this.item(AetherIIItems.RAW_TAEGORE_MEAT.get(), "food/");
-        this.item(AetherIIItems.TAEGORE_STEAK.get(), "food/");
-        this.item(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
-        this.item(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get(), "food/");
+        this.item(AetherIIItems.BLUEBERRY.get(), "consumables/");
+        this.item(AetherIIItems.ENCHANTED_BLUEBERRY.get(), "consumables/");
+        this.item(AetherIIItems.ORANGE.get(), "consumables/");
+        this.item(AetherIIItems.WYNDBERRY.get(), "consumables/");
+        this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "consumables/");
+        this.item(AetherIIItems.GREEN_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.BLUE_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.PURPLE_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.GOLDEN_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.WHITE_SWET_JELLY.get(), "consumables/");
+        this.item(AetherIIItems.BURRUKAI_RIBS.get(), "consumables/");
+        this.item(AetherIIItems.BURRUKAI_RIB_CUT.get(), "consumables/");
+        this.item(AetherIIItems.KIRRID_CUTLET.get(), "consumables/");
+        this.item(AetherIIItems.KIRRID_LOIN.get(), "consumables/");
+        this.item(AetherIIItems.RAW_TAEGORE_MEAT.get(), "consumables/");
+        this.item(AetherIIItems.TAEGORE_STEAK.get(), "consumables/");
+        this.item(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get(), "consumables/");
+        this.item(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK.get(), "consumables/");
+
+        // Consumables
+        this.item(AetherIIItems.WATER_VIAL.get(), "consumables/");
+        this.item(AetherIIItems.BANDAGE.get(), "consumables/");
+        this.item(AetherIIItems.SPLINT.get(), "consumables/");
+        this.item(AetherIIItems.ANTITOXIN_VIAL.get(), "consumables/");
+        this.item(AetherIIItems.ANTIVENOM_VIAL.get(), "consumables/");
+        this.healingStoneItem(AetherIIItems.HEALING_STONE.get());
 
         // Skyroot Buckets
         this.item(AetherIIItems.SKYROOT_BUCKET.get(), "miscellaneous/");
@@ -192,6 +201,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.TEMPEST_SPAWN_EGG.get());
         this.eggItem(AetherIIItems.COCKATRICE_SPAWN_EGG.get());
+        this.eggItem(AetherIIItems.SWET_SPAWN_EGG.get());
 
         // Misc
         this.item(AetherIIItems.MOA_FEED.get(), "miscellaneous/");
@@ -209,16 +219,21 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.COARSE_AETHER_DIRT.get());
         this.itemBlock(AetherIIBlocks.AETHER_FARMLAND.get());
+        this.itemBlock(AetherIIBlocks.SHIMMERING_SILT.get());
 
         // Underground
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE.get());
         this.itemBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
+        this.itemBlockFlat(AetherIIBlocks.SKY_ROOTS.get(), "natural/");
 
         // Highfields
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
+        this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
+        this.itemBlock(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET.get());
 
         // Magnetic
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
@@ -231,19 +246,23 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.ARCTIC_ICE.get());
         this.itemBlock(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
         this.itemBlock(AetherIIBlocks.ICESTONE.get());
+        this.itemBlockFlat(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get(), "natural/");
 
         // Irradiated
         this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
 
         // Ores
+        this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
         this.itemBlock(AetherIIBlocks.AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.ZANITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.GLINT_ORE.get());
         this.itemBlock(AetherIIBlocks.ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.GRAVITITE_ORE.get());
-        this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
-        this.itemBlock(AetherIIBlocks.GLINT_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_GLINT_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
         this.itemBlock(AetherIIBlocks.CORROBONITE_ORE.get());

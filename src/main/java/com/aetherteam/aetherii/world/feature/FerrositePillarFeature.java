@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
-import com.aetherteam.aetherii.data.resources.registries.features.AetherIIVegetationFeatures;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
 import com.aetherteam.aetherii.world.BlockPlacementUtil;
 import com.aetherteam.aetherii.world.feature.configuration.FerrositePillarConfiguration;
 import com.mojang.serialization.Codec;
@@ -30,7 +30,9 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
         ChunkGenerator chunk = level.getLevel().getChunkSource().getGenerator();
 
         float radius = random.nextInt(config.additionalRadius()) + config.baseRadius();
-        int height = random.nextInt(config.additionalHeight()) + config.baseHeight();
+        int baseHeight = config.baseHeight();
+        int additionalHeight = config.additionalHeight();
+        int height = random.nextInt(additionalHeight) + baseHeight;
         int offset = (int) (-radius * 20 + radius * 16);
 
         for (int i = offset; i < 0; ++i) {
@@ -38,7 +40,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                     level,
                     config.block(),
                     new BlockPos(pos.getX(), pos.getY() + i + height + (int) radius, pos.getZ()),
-                    radius + i * shapeVariator(random, 0.05F),
+                    radius + i * BlockPlacementUtil.shapeVariator(random, 0.05F),
                     random,
                     true);
         }
@@ -61,25 +63,25 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                 random,
                 true);
 
-        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(AetherIIVegetationFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
+        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(HighlandsConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
         turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + height + (int) radius, pos.getZ()));
 
-        placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(12) + 20, pos.getZ() + random.nextInt((int) (radius * 1.25F))));
-        placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(12) + 20, pos.getZ() + random.nextInt((int) (radius * 1.25F))));
-        if (random.nextInt(1) == 0) {
-            placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(12) + 20, pos.getZ() + random.nextInt((int) (radius * 1.25F))));
+        placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F))));
+        placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F))));
+        if (random.nextBoolean()) {
+            placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F))));
         }
-        if (random.nextInt(1) == 0) {
-            placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(12) + 20, pos.getZ() + random.nextInt((int) (radius * 1.25F))));
+        if (random.nextBoolean()) {
+            placeSidePillar(context, new BlockPos(pos.getX() + random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() + random.nextInt((int) (radius * 1.25F))));
         }
 
-        placeSidePillar(context, new BlockPos(pos.getX() - random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(12) + 20, pos.getZ() - random.nextInt((int) (radius * 1.25F))));
-        placeSidePillar(context, new BlockPos(pos.getX() - random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(12) + 20, pos.getZ() - random.nextInt((int) (radius * 1.25F))));
-        if (random.nextInt(1) == 0) {
-            placeSidePillar(context, new BlockPos(pos.getX() - random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(12) + 20, pos.getZ() - random.nextInt((int) (radius * 1.25F))));
+        placeSidePillar(context, new BlockPos(pos.getX() - random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() - random.nextInt((int) (radius * 1.25F))));
+        placeSidePillar(context, new BlockPos(pos.getX() - random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() - random.nextInt((int) (radius * 1.25F))));
+        if (random.nextBoolean()) {
+            placeSidePillar(context, new BlockPos(pos.getX() - random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() - random.nextInt((int) (radius * 1.25F))));
         }
-        if (random.nextInt(1) == 0) {
-            placeSidePillar(context, new BlockPos(pos.getX() - random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(12) + 20, pos.getZ() - random.nextInt((int) (radius * 1.25F))));
+        if (random.nextBoolean()) {
+            placeSidePillar(context, new BlockPos(pos.getX() - random.nextInt((int) (radius * 1.25F)), pos.getY() + random.nextInt(additionalHeight + 2) + baseHeight, pos.getZ() - random.nextInt((int) (radius * 1.25F))));
         }
 
         return true;
@@ -99,7 +101,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                     level,
                     config.block(),
                     new BlockPos(pos.getX(), pos.getY() + i + (int) radius, pos.getZ()),
-                    radius + i * shapeVariator(random, 0.05F),
+                    radius + i * BlockPlacementUtil.shapeVariator(random, 0.05F),
                     random,
                     true);
         }
@@ -109,7 +111,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                     level,
                     config.block(),
                     new BlockPos(pos.getX(), pos.getY() + i + offset + (int) radius, pos.getZ()),
-                    radius + i * shapeVariator(random, 2F),
+                    radius + i * BlockPlacementUtil.shapeVariator(random, 2F),
                     random,
                     true);
         }
@@ -122,18 +124,7 @@ public class FerrositePillarFeature extends Feature<FerrositePillarConfiguration
                 random,
                 true);
 
-        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(AetherIIVegetationFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
+        ConfiguredFeature<?, ?> turf = Objects.requireNonNull(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(HighlandsConfiguredFeatures.FERROSITE_PILLAR_TURF).orElse(null)).value();
         turf.place(level, chunk, random, new BlockPos(pos.getX(), pos.getY() + (int) radius, pos.getZ()));
-    }
-
-    private float shapeVariator(RandomSource random, float value) {
-        if (random.nextInt(16) == 5) {
-            return value * 1.5F;
-        }
-        else if (random.nextInt(12) == 5) {
-            return value * 1.25F;
-        } else {
-            return value;
-        }
     }
 }

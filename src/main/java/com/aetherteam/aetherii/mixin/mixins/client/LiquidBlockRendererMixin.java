@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.mixin.mixins.client;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.RenderChunkRegionAccessor;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

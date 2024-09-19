@@ -37,6 +37,34 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.MAGNETIC_KIRRID.get(),
                 AetherIIEntityTypes.ARCTIC_KIRRID.get()
         );
+        this.tag(AetherIITags.Entities.AETHER_MOBS).add(
+                AetherIIEntityTypes.FLYING_COW.get(),
+                AetherIIEntityTypes.SHEEPUFF.get(),
+                AetherIIEntityTypes.PHYG.get(),
+                AetherIIEntityTypes.AERBUNNY.get(),
+                AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(),
+                AetherIIEntityTypes.MAGNETIC_TAEGORE.get(),
+                AetherIIEntityTypes.ARCTIC_TAEGORE.get(),
+                AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(),
+                AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(),
+                AetherIIEntityTypes.ARCTIC_BURRUKAI.get(),
+                AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(),
+                AetherIIEntityTypes.MAGNETIC_KIRRID.get(),
+                AetherIIEntityTypes.ARCTIC_KIRRID.get(),
+                AetherIIEntityTypes.MOA.get(),
+                AetherIIEntityTypes.SKYROOT_LIZARD.get(),
+                AetherIIEntityTypes.AECHOR_PLANT.get(),
+                AetherIIEntityTypes.ZEPHYR.get(),
+                AetherIIEntityTypes.TEMPEST.get(),
+                AetherIIEntityTypes.COCKATRICE.get(),
+                AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
+                AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
+                AetherIIEntityTypes.SKYROOT_PINECONE.get(),
+                AetherIIEntityTypes.SCATTERGLASS_BOLT.get(),
+                AetherIIEntityTypes.TOXIC_DART.get(),
+                AetherIIEntityTypes.ZEPHYR_WEBBING_BALL.get(),
+                AetherIIEntityTypes.TEMPEST_THUNDERBALL.get()
+        );
         this.tag(AetherIITags.Entities.NO_DOUBLE_DROPS).addTag(Tags.EntityTypes.BOSSES).add(EntityType.PLAYER);
         this.tag(AetherIITags.Entities.NO_AMBROSIUM_DROPS).add(EntityType.PLAYER);
         this.tag(AetherIITags.Entities.SPAWNING_ICE).add(

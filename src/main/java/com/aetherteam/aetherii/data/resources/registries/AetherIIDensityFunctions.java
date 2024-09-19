@@ -36,12 +36,11 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 1.0D // smear scale multiplier, capped at 8
         ));
 
-        context.register(ISLAND_DENSITY, buildIslandDensity(function));
         context.register(SHATTERED_ISLANDS, buildShatteredIslands(function));
         context.register(FINAL_ISLANDS, buildFinalIslands(function));
 
         context.register(FACTOR, buildFactor(function));
-        context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
+        context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
         context.register(TOP_SLIDE, buildTopSlide(function));
         context.register(BOTTOM_SLIDE, buildBottomSlide(function));
         context.register(SLOPER, buildSloper(function));
@@ -52,22 +51,27 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(SLOPER_ARCTIC, buildSloperArctic(function));
 
         context.register(FACTOR_SHATTERED, buildFactorShattered(function));
-        context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.75, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
+        context.register(ELEVATION_SHATTERED, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION_SHATTERED)).abs());
         context.register(TOP_SLIDE_SHATTERED, buildTopSlideShattered(function));
         context.register(BOTTOM_SLIDE_SHATTERED, buildBottomSlideShattered(function));
 
         context.register(NOISE_CAVES, buildNoiseCaves(function, noise));
         context.register(UNDERGROUND_SHAPER, buildUndergroundShaper(function));
 
-        context.register(LAKES_NOISE, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.0, 1.75, 0.0, 0.0), 0.5D, 0.0D, 64), DensityFunctions.constant(0.1D)));
-        context.register(LAKES_FLOOR, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 2.5, 1.0, 0.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 17).abs());
+        context.register(LAKES_NOISE, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.0, 1.5, 0.0, 0.0, 0.0, 0.0), 0.75D, 0.0D, 64), DensityFunctions.constant(0.1D)));
+        context.register(LAKES_FLOOR, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 2.5, 1.5, 0.0, 0.0, 0.0, 0.0), 0.75D, 0.0D, 17).abs());
+        context.register(LAKES_FLOOR_SWAMP, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 2.5, 1.5, 1.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 17).abs());
         context.register(LAKES_BARRIER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.5, 1.0, 0.0, 0.0), 1.0D, 0.0D, 38).abs());
         context.register(LAKES_FACTOR, buildLakeFactor(function));
 
         context.register(COASTS_BASE_NOISE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 8.0, 2.0, 0.0, 0.0), 1.5D, 0.0D, 16).abs());
         context.register(COASTS_HIGHFIELDS, buildCoastNoise(function, 5.0D));
-        context.register(COASTS_MAGNETIC, buildCoastNoise(function,7.0D));
+        context.register(COASTS_MAGNETIC, buildCoastNoise(function,9.0D));
         context.register(COASTS_ARCTIC, buildCoastNoise(function,3.0D));
+
+        context.register(SNOW_NOISE, DensityFunctions.add(
+                DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 42), DensityFunctions.constant(1.0D)),
+                DensityFunctions.constant(0.1D)));
 
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));

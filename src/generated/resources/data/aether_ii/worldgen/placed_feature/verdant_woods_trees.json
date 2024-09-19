@@ -1,5 +1,5 @@
 {
-  "feature": "aether_ii:trees_verdant_woods",
+  "feature": "aether_ii:trees_biome_verdant_woods",
   "placement": [
     {
       "type": "minecraft:count",
@@ -7,11 +7,11 @@
         "type": "minecraft:weighted_list",
         "distribution": [
           {
-            "data": 16,
+            "data": 12,
             "weight": 9
           },
           {
-            "data": 17,
+            "data": 13,
             "weight": 1
           }
         ]
@@ -21,15 +21,18 @@
       "type": "minecraft:in_square"
     },
     {
-      "type": "minecraft:surface_water_depth_filter",
-      "max_water_depth": 0
-    },
-    {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
     },
     {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 0
+    },
+    {
       "type": "minecraft:biome"
+    },
+    {
+      "type": "aether_ii:structure_blacklist_filter"
     }
   ]
 }

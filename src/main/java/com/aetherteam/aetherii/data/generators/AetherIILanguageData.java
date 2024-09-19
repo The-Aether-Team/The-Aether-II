@@ -3,9 +3,9 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIILanguageProvider;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -32,16 +32,21 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AETHER_DIRT, "Aether Dirt");
         this.addBlock(AetherIIBlocks.COARSE_AETHER_DIRT, "Coarse Aether Dirt");
         this.addBlock(AetherIIBlocks.AETHER_FARMLAND, "Aether Farmland");
+        this.addBlock(AetherIIBlocks.SHIMMERING_SILT, "Shimmering Silt");
 
         // Underground
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
         this.addBlock(AetherIIBlocks.AGIOSITE, "Agiosite");
         this.addBlock(AetherIIBlocks.CRUDE_SCATTERGLASS, "Crude Scatterglass");
+        this.addBlock(AetherIIBlocks.SKY_ROOTS, "Sky Roots");
 
         // Highfields
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
+        this.addBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK, "Bryalinn Moss Block");
+        this.addBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET, "Bryalinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET, "Flowering Bryalinn Moss Carpet");
 
         // Magnetic
         this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");
@@ -54,19 +59,23 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARCTIC_ICE, "Arctic Ice");
         this.addBlock(AetherIIBlocks.ARCTIC_PACKED_ICE, "Arctic Packed Ice");
         this.addBlock(AetherIIBlocks.ICESTONE, "Icestone");
+        this.addBlock(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL, "Large Arctic Ice Crystal");
+        this.addBlock(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL, "Medium Arctic Ice Crystal");
+        this.addBlock(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL, "Small Arctic Ice Crystal");
 
         // Irradiated
         this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");
 
         // Ores
+        this.addBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE, "Holystone Quartz Ore");
         this.addBlock(AetherIIBlocks.AMBROSIUM_ORE, "Ambrosium Ore");
         this.addBlock(AetherIIBlocks.ZANITE_ORE, "Zanite Ore");
+        this.addBlock(AetherIIBlocks.GLINT_ORE, "Glint Ore");
         this.addBlock(AetherIIBlocks.ARKENIUM_ORE, "Arkenium Ore");
         this.addBlock(AetherIIBlocks.GRAVITITE_ORE, "Gravitite Ore");
-        this.addBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE, "Holystone Quartz Ore");
-        this.addBlock(AetherIIBlocks.GLINT_ORE, "Glint Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE, "Undershale Ambrosium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ZANITE_ORE, "Undershale Zanite Ore");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_GLINT_ORE, "Undershale Glint Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE, "Undershale Arkenium Ore");
         this.addBlock(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, "Undershale Gravitite Ore");
         this.addBlock(AetherIIBlocks.CORROBONITE_ORE, "Corrobonite Ore");
@@ -524,15 +533,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SCATTERGLASS_BOLT, "Scatterglass Bolt");
 
         // Armor
-        this.addItem(AetherIIItems.TAEGORE_HIDE_HELMET, "Taegore Hide Helmet");
-        this.addItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, "Taegore Hide Chestplate");
-        this.addItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS, "Taegore Hide Leggings");
+        this.addItem(AetherIIItems.TAEGORE_HIDE_HELMET, "Taegore Hide Cap");
+        this.addItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, "Taegore Hide Tunic");
+        this.addItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS, "Taegore Hide Pants");
         this.addItem(AetherIIItems.TAEGORE_HIDE_BOOTS, "Taegore Hide Boots");
         this.addItem(AetherIIItems.TAEGORE_HIDE_GLOVES, "Taegore Hide Gloves");
 
-        this.addItem(AetherIIItems.BURRUKAI_PELT_HELMET, "Burrukai Pelt Helmet");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, "Burrukai Pelt Chestplate");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS, "Burrukai Pelt Leggings");
+        this.addItem(AetherIIItems.BURRUKAI_PELT_HELMET, "Burrukai Pelt Cap");
+        this.addItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, "Burrukai Pelt Tunic");
+        this.addItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS, "Burrukai Pelt Pants");
         this.addItem(AetherIIItems.BURRUKAI_PELT_BOOTS, "Burrukai Pelt Boots");
         this.addItem(AetherIIItems.BURRUKAI_PELT_GLOVES, "Burrukai Pelt Gloves");
 
@@ -540,19 +549,19 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ZANITE_CHESTPLATE, "Zanite Chestplate");
         this.addItem(AetherIIItems.ZANITE_LEGGINGS, "Zanite Leggings");
         this.addItem(AetherIIItems.ZANITE_BOOTS, "Zanite Boots");
-        this.addItem(AetherIIItems.ZANITE_GLOVES, "Zanite Gloves");
+        this.addItem(AetherIIItems.ZANITE_GLOVES, "Zanite Gauntlets");
 
         this.addItem(AetherIIItems.ARKENIUM_HELMET, "Arkenium Helmet");
         this.addItem(AetherIIItems.ARKENIUM_CHESTPLATE, "Arkenium Chestplate");
         this.addItem(AetherIIItems.ARKENIUM_LEGGINGS, "Arkenium Leggings");
         this.addItem(AetherIIItems.ARKENIUM_BOOTS, "Arkenium Boots");
-        this.addItem(AetherIIItems.ARKENIUM_GLOVES, "Arkenium Gloves");
+        this.addItem(AetherIIItems.ARKENIUM_GLOVES, "Arkenium Gauntlets");
 
         this.addItem(AetherIIItems.GRAVITITE_HELMET, "Gravitite Helmet");
         this.addItem(AetherIIItems.GRAVITITE_CHESTPLATE, "Gravitite Chestplate");
         this.addItem(AetherIIItems.GRAVITITE_LEGGINGS, "Gravitite Leggings");
         this.addItem(AetherIIItems.GRAVITITE_BOOTS, "Gravitite Boots");
-        this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gloves");
+        this.addItem(AetherIIItems.GRAVITITE_GLOVES, "Gravitite Gauntlets");
 
         // Materials
         this.addItem(AetherIIItems.SKYROOT_STICK, "Skyroot Stick");
@@ -582,6 +591,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
         this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
         this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
+        this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");
         this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
 
         // Food
@@ -603,6 +613,14 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.TAEGORE_STEAK, "Taegore Steak");
         this.addItem(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, "Skyroot Lizard on a Stick");
         this.addItem(AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, "Roasted Skyroot Lizard on a Stick");
+
+        // Consumables
+        this.addItem(AetherIIItems.WATER_VIAL, "Water Vial");
+        this.addItem(AetherIIItems.BANDAGE, "Bandage");
+        this.addItem(AetherIIItems.SPLINT, "Splint");
+        this.addItem(AetherIIItems.ANTITOXIN_VIAL, "Antitoxin Vial");
+        this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
+        this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
 
         // Skyroot Buckets
         this.addItem(AetherIIItems.SKYROOT_BUCKET, "Skyroot Bucket");
@@ -629,21 +647,22 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.FLYING_COW_SPAWN_EGG, "Flying Cow Spawn Egg");
         this.addItem(AetherIIItems.SHEEPUFF_SPAWN_EGG, "Sheepuff Spawn Egg");
         this.addItem(AetherIIItems.PHYG_SPAWN_EGG, "Phyg Spawn Egg");
-        this.addItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Highfields Taegore Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Magnetic Taegore Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Arctic Taegore Spawn Egg");
-        this.addItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Highfields Burrukai Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Magnetic Burrukai Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Arctic Burrukai Spawn Egg");
-        this.addItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Highfields Kirrid Spawn Egg");
-        this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Magnetic Kirrid Spawn Egg");
-        this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Arctic Kirrid Spawn Egg");
+        this.addItem(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+        this.addItem(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+        this.addItem(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG, "Taegore Spawn Egg");
+        this.addItem(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+        this.addItem(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+        this.addItem(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG, "Burrukai Spawn Egg");
+        this.addItem(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+        this.addItem(AetherIIItems.MAGNETIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
+        this.addItem(AetherIIItems.ARCTIC_KIRRID_SPAWN_EGG, "Kirrid Spawn Egg");
         this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
         this.addItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG, "Skyroot Lizard Spawn Egg");
         this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
         this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
+        this.addItem(AetherIIItems.SWET_SPAWN_EGG, "Swet Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
@@ -655,21 +674,25 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Tooltips
         // Abilities
-        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_PICKAXE.get(), 1, "§9Ability:§r Doubles Drops");
-        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_AXE.get(), 1, "§9Ability:§r Doubles Drops");
-        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHOVEL.get(), 1, "§9Ability:§r Doubles Drops");
-        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_TROWEL.get(), 1, "§9Ability:§r Doubles Drops");
-        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHORTSWORD.get(), 1, "§9Ability:§r Doubles Drops");
-        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_HAMMER.get(), 1, "§9Ability:§r Doubles Drops");
-        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SPEAR.get(), 1, "§9Ability:§r Doubles Drops");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_PICKAXE.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_AXE.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHOVEL.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_TROWEL.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SHORTSWORD.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_HAMMER.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_SPEAR.get(), 1, "§9Ability:§r Increases Yield");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_CROSSBOW.get(), 1, "§9Ability:§r Double Shot");
+        this.addPerItemAbilityTooltip(AetherIIItems.SKYROOT_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_PICKAXE.get(), 1, "§9Ability:§r Drops Ambrosium");
-        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_AXE.get(), 1, "§9Ability:§r Drops Ambrosium");
-        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHOVEL.get(), 1, "§9Ability:§r Drops Ambrosium");
-        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_TROWEL.get(), 1, "§9Ability:§r Drops Ambrosium");
-        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), 1, "§9Ability:§r Drops Ambrosium");
-        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_HAMMER.get(), 1, "§9Ability:§r Drops Ambrosium");
-        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SPEAR.get(), 1, "§9Ability:§r Drops Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_PICKAXE.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_AXE.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHOVEL.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_TROWEL.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SHORTSWORD.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_HAMMER.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_SPEAR.get(), 1, "§9Ability:§r Sheds Ambrosium");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_CROSSBOW.get(), 1, "§9Ability:§r Spread Shot");
+        this.addPerItemAbilityTooltip(AetherIIItems.HOLYSTONE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_PICKAXE.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_AXE.get(), 1, "§9Ability:§r Grows Stronger");
@@ -678,32 +701,86 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SHORTSWORD.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HAMMER.get(), 1, "§9Ability:§r Grows Stronger");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_SPEAR.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 1, "§9Ability:§r Grows Stronger");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_PICKAXE.get(), 1, "§9Ability:§r Upgrades Faster");
-        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_AXE.get(), 1, "§9Ability:§r Upgrades Faster");
-        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHOVEL.get(), 1, "§9Ability:§r Upgrades Faster");
-        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_TROWEL.get(), 1, "§9Ability:§r Upgrades Faster");
-        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHORTSWORD.get(), 1, "§9Ability:§r Upgrades Faster");
-        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HAMMER.get(), 1, "§9Ability:§r Upgrades Faster");
-        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SPEAR.get(), 1, "§9Ability:§r Upgrades Faster");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_PICKAXE.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_AXE.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHOVEL.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_TROWEL.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SHORTSWORD.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HAMMER.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_SPEAR.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CROSSBOW.get(), 1, "§9Ability:§r Upgrades Further");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PICKAXE.get(), 1, "§9Ability:§r Shifts Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PICKAXE.get(), 2, "§3Use:§r Right-Click Block");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_AXE.get(), 1, "§9Ability:§r Shifts Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_AXE.get(), 2, "§3Use:§r Right-Click Block");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHOVEL.get(), 1, "§9Ability:§r Shifts Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHOVEL.get(), 2, "§3Use:§r Right-Click Block");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 1, "§9Ability:§r Shifts Gravity");
-        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 2, "§3Use:§r Right-Click Block");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PICKAXE.get(), 1, "§9Ability:§r Levitates Block");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_PICKAXE.get(), 2, "§3Use:§r Crouch-Interact");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_AXE.get(), 1, "§9Ability:§r Levitates Block");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_AXE.get(), 2, "§3Use:§r Crouch-Interact");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHOVEL.get(), 1, "§9Ability:§r Levitates Block");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHOVEL.get(), 2, "§3Use:§r Crouch-Interact");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 1, "§9Ability:§r Levitates Block");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_TROWEL.get(), 2, "§3Use:§r Crouch-Interact");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SHORTSWORD.get(), 1, "§9Ability:§r Shifts Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HAMMER.get(), 1, "§9Ability:§r Shifts Gravity");
         this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_SPEAR.get(), 1, "§9Ability:§r Shifts Gravity");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 1, "§9Ability:§r Straight Shot");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CROSSBOW.get(), 2, "§3Use:§r Crouch-Use");
 
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_HELMET.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 1, "§9Ability:§r Calms Animals");
+        this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
-        // Damage Types
-        this.addDamageTypeTooltip("slash", "§9Slash§r Damage");
-        this.addDamageTypeTooltip("impact", "§eImpact§r Damage");
-        this.addDamageTypeTooltip("pierce", "§cPierce§r Damage");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 2, "§9Set Pieces:§r %s");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 1, "§9Ability:§r Speed Boost");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_LEGGINGS.get(), 1, "§9Ability:§r Speed Boost");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CHESTPLATE.get(), 1, "§9Ability:§r Speed Boost");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HELMET.get(), 1, "§9Ability:§r Speed Boost");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_GLOVES.get(), 1, "§9Ability:§r Speed Boost");
+        this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_BOOTS.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_LEGGINGS.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CHESTPLATE.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HELMET.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_GLOVES.get(), 1, "§9Ability:§r Upgrades Further");
+        this.addPerItemAbilityTooltip(AetherIIItems.ARKENIUM_GLOVES.get(), 2, "§9Set Pieces:§r %s");
+
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_BOOTS.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_LEGGINGS.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CHESTPLATE.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HELMET.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 1, "§9Ability:§r Double Jump");
+        this.addPerItemAbilityTooltip(AetherIIItems.GRAVITITE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
 
         // Miscellaneous Item Tooltips
@@ -716,6 +793,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAccessorySlot("relic_slot", "Relic");
         this.addAccessorySlot("handwear_slot", "Handwear");
         this.addAccessorySlot("accessory_slot", "Accessory");
+
+
+        // Use Action
+        this.addTooltip("item.modifiers.blocking", "When blocking:");
 
 
         // Entities
@@ -741,6 +822,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
+        this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
@@ -748,29 +830,29 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Biomes
         // Highfields
-        this.addBiome(AetherIIBiomes.FLOURISHING_FIELD, "Flourishing Field");
-        this.addBiome(AetherIIBiomes.VERDANT_WOODS, "Verdant Woods");
-        this.addBiome(AetherIIBiomes.SHROUDED_FOREST, "Shrouded Forest");
-        this.addBiome(AetherIIBiomes.SHIMMERING_BASIN, "Shimmering Basin");
+        this.addBiome(HighlandsBiomes.FLOURISHING_FIELD, "Flourishing Field");
+        this.addBiome(HighlandsBiomes.VERDANT_WOODS, "Verdant Woods");
+        this.addBiome(HighlandsBiomes.SHROUDED_FOREST, "Shrouded Forest");
+        this.addBiome(HighlandsBiomes.SHIMMERING_BASIN, "Shimmering Basin");
 
         // Magnetic
-        this.addBiome(AetherIIBiomes.MAGNETIC_SCAR, "Magnetic Scar");
-        this.addBiome(AetherIIBiomes.TURQUOISE_FOREST, "Turquoise Forest");
-        this.addBiome(AetherIIBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
-        this.addBiome(AetherIIBiomes.GLISTENING_SWAMP, "Glistening Swamp");
+        this.addBiome(HighlandsBiomes.MAGNETIC_SCAR, "Magnetic Scar");
+        this.addBiome(HighlandsBiomes.TURQUOISE_FOREST, "Turquoise Forest");
+        this.addBiome(HighlandsBiomes.VIOLET_HIGHWOODS, "Violet Highwoods");
+        this.addBiome(HighlandsBiomes.GLISTENING_SWAMP, "Glistening Swamp");
 
         // Arctic
-        this.addBiome(AetherIIBiomes.FRIGID_SIERRA, "Frigid Sierra");
-        this.addBiome(AetherIIBiomes.ENDURING_WOODLAND, "Enduring Woodland");
-        this.addBiome(AetherIIBiomes.FROZEN_LAKES, "Frozen Lakes");
-        this.addBiome(AetherIIBiomes.SHEER_TUNDRA, "Sheer Tundra");
+        this.addBiome(HighlandsBiomes.FRIGID_SIERRA, "Frigid Sierra");
+        this.addBiome(HighlandsBiomes.ENDURING_WOODLAND, "Enduring Woodland");
+        this.addBiome(HighlandsBiomes.FROZEN_LAKES, "Frozen Lakes");
+        this.addBiome(HighlandsBiomes.SHEER_TUNDRA, "Sheer Tundra");
 
         // Irradiated
-        this.addBiome(AetherIIBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
-        this.addBiome(AetherIIBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
+        this.addBiome(HighlandsBiomes.CONTAMINATED_JUNGLE, "Contaminated Jungle");
+        this.addBiome(HighlandsBiomes.BATTLEGROUND_WASTES, "Battleground Wastes");
 
         // Aercloud Sea
-        this.addBiome(AetherIIBiomes.EXPANSE, "Expanse");
+        this.addBiome(HighlandsBiomes.EXPANSE, "Expanse");
 
 
         // Structures
@@ -781,6 +863,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Attributes
+        this.addAttribute(AetherIIAttributes.SLASH_DAMAGE.get(), "§9Slash§r Damage");
+        this.addAttribute(AetherIIAttributes.IMPACT_DAMAGE.get(), "§eImpact§r Damage");
+        this.addAttribute(AetherIIAttributes.PIERCE_DAMAGE.get(), "§cPierce§r Damage");
+        this.addAttribute(AetherIIAttributes.SLASH_RESISTANCE.get(), "§9Slash§r Resistance");
+        this.addAttribute(AetherIIAttributes.IMPACT_RESISTANCE.get(), "§eImpact§r Resistance");
+        this.addAttribute(AetherIIAttributes.PIERCE_RESISTANCE.get(), "§cPierce§r Resistance");
         this.addAttribute(AetherIIAttributes.SWEEP_RANGE.get(), "Sweep Range");
         this.addAttribute(AetherIIAttributes.SWEEP_KNOCKBACK.get(), "Sweep Knockback");
         this.addAttribute(AetherIIAttributes.SWEEP_DAMAGE.get(), "Sweep Damage");
@@ -791,12 +879,35 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.STAB_DISTANCE.get(), "Stab Distance");
         this.addAttribute(AetherIIAttributes.STAB_KNOCKBACK.get(), "Stab Knockback");
         this.addAttribute(AetherIIAttributes.STAB_DAMAGE.get(), "Stab Damage");
-        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.get(), "Block Reduction Rate");
-        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_RESTORATION.get(), "Block Restoration Rate");
+        this.addAttribute(AetherIIAttributes.SHIELD_STAMINA_REDUCTION.get(), "Shield Stamina Used");
+        this.addAttribute(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION.get(), "Shield Cooldown Speed");
+        this.addAttribute(AetherIIAttributes.WOUND_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.STUN_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.FRACTURE_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.AMBROSIUM_POISONING_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.TOXIN_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.VENOM_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.CHARGED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.WEBBED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.IMMOLATION_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.FROSTBITE_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.FUNGAL_ROT_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.CRYSTALLIZED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
 
 
         // Effects
+        this.addEffect(AetherIIEffects.WOUND, "Wound");
+        this.addEffect(AetherIIEffects.STUN, "Stun");
+        this.addEffect(AetherIIEffects.FRACTURE, "Fracture");
+        this.addEffect(AetherIIEffects.AMBROSIUM_POISONING, "Ambrosium Poisoning");
         this.addEffect(AetherIIEffects.TOXIN, "Toxin");
+        this.addEffect(AetherIIEffects.VENOM, "Venom");
+        this.addEffect(AetherIIEffects.CHARGED, "Charged");
+        this.addEffect(AetherIIEffects.WEBBED, "Webbed");
+        this.addEffect(AetherIIEffects.IMMOLATION, "Immolation");
+        this.addEffect(AetherIIEffects.FROSTBITE, "Frostbite");
+        this.addEffect(AetherIIEffects.FUNGAL_ROT, "Fungal Rot");
+        this.addEffect(AetherIIEffects.CRYSTALLIZED, "Crystallized");
 
 
         // Creative Tabs
@@ -806,7 +917,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FUNCTIONAL_BLOCKS.get(), "Aether II Functional Blocks");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_EQUIPMENT_AND_UTILITIES.get(), "Aether II Equipment & Utilities");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_ARMOR_AND_ACCESSORIES.get(), "Aether II Armor & Accessories");
-        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_FOOD_AND_DRINKS.get(), "Aether II Food & Drinks");
+        this.addCreativeTab(AetherIICreativeTabs.AETHER_II_CONSUMABLES.get(), "Aether II Consumables");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_INGREDIENTS.get(), "Aether II Ingredients");
         this.addCreativeTab(AetherIICreativeTabs.AETHER_II_SPAWN_EGGS.get(), "Aether II Spawn Eggs");
 
@@ -842,10 +953,42 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.discovery.bestiary.stat.damage_none", "Standard Damage from %s Attacks");
         this.addGuiText("guidebook.discovery.bestiary.info.eats", "Eats:");
         this.addGuiText("guidebook.discovery.bestiary.info.drops", "Drops:");
-        this.addGuiText("toast.guidebook.bestiary", "New Bestiary Entries!");
-        this.addGuiText("toast.guidebook.description", "Check your guidebook");
+        this.addGuiText("toast.guidebook.bestiary", "New Bestiary Entry!");
+        this.addGuiText("toast.guidebook.effects", "New Effects Entry!");
+        this.addGuiText("toast.guidebook.exploration", "New Exploration Entry!");
+        this.addGuiText("toast.guidebook.description", "Check your Guidebook");
 
         // Bestiary
+        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Highfields Taegore");
+        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Magnetic Taegore");
+        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Arctic Taegore");
+        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Highfields Burrukai");
+        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Magnetic Burrukai");
+        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Arctic Burrukai");
+        this.addBestiaryName(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Highfields Kirrid");
+        this.addBestiaryName(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Magnetic Kirrid");
+        this.addBestiaryName(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Arctic Kirrid");
+
+        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Taegore");
+        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Taegore");
+        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Taegore");
+        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Burrukai");
+        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Burrukai");
+        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Burrukai");
+        this.addBestiarySlotName(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Kirrid");
+        this.addBestiarySlotName(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Kirrid");
+        this.addBestiarySlotName(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Kirrid");
+
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), "Highfields");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), "Magnetic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), "Arctic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), "Highfields");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), "Magnetic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), "Arctic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), "Highfields");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), "Magnetic");
+        this.addBestiarySlotSubtitle(AetherIIEntityTypes.ARCTIC_KIRRID.get(), "Arctic");
+
         this.addBestiaryDescription(AetherIIEntityTypes.FLYING_COW.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.SHEEPUFF.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.PHYG.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
@@ -880,8 +1023,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGeneric("slash", "§9Slash§r");
         this.addGeneric("impact", "§eImpact§r");
         this.addGeneric("pierce", "§cPierce§r");
-        this.addGeneric("message.campfire_added", "This Outpost Campfire is now a valid respawn option.");
-        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid Outpost Campfire.");
+        this.addGeneric("highfields", "Highfields");
+        this.addGeneric("magnetic", "Magnetic");
+        this.addGeneric("arctic", "Arctic");
+        this.addGeneric("message.campfire_added", "Outpost campfire respawn point set");
+        this.addGeneric("message.campfire_respawn_failed", "Failed to locate a valid outpost campfire");
 
 
         // Subtitles
@@ -928,6 +1074,19 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         this.addSubtitle("entity", "cockatrice.shoot", "Cockatrice shoots");
 
+        this.addSubtitle("entity", "swet.attack", "Swet attacks");
+        this.addSubtitle("entity", "swet.death", "Swet dies");
+        this.addSubtitle("entity", "swet.hurt", "Swet hurts");
+        this.addSubtitle("entity", "swet.jump", "Swet squishes");
+        this.addSubtitle("entity", "swet.squish", "Swet squishes");
+
+
+        this.addDeath("effect.wound", "%1$s was fatally wounded");
+        this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
+        this.addDeath("effect.toxin", "%1$s succumbed to toxin");
+        this.addDeath("effect.venom", "%1$s succumbed to venom");
+        this.addDeath("effect.charged", "%1$s was electrocuted");
+        this.addDeath("effect.immolation", "%1$s burned to death");
 
         // Packs
         this.addPackDescription("mod", "Aether II Resources");

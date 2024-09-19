@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aether_ii:item/food/blue_swet_jelly"
+    "layer0": "aether_ii:item/consumables/blue_swet_jelly"
   }
 }

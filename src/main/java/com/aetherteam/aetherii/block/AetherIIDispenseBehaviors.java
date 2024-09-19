@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.block;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
 import net.minecraft.core.BlockPos;
