@@ -642,13 +642,6 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
         });
     }
 
-    public void tintedFern(Block block) {
-        this.getVariantBuilder(block).forAllStates((state) -> {
-            ModelFile model = this.models().withExistingParent(this.name(block), this.mcLoc("block/tinted_cross")).texture("cross", this.texture(this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
-            return ConfiguredModel.builder().modelFile(model).build();
-        });
-    }
-
     public void lilichime(Block block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
             ModelFile model = this.models().withExistingParent(this.name(block), this.modLoc("block/template_lilichime"))
@@ -764,6 +757,23 @@ public abstract class AetherIIBlockStateProvider extends NitrogenBlockStateProvi
                 .texture("flower", this.texture(this.name(flower), location))
                 .renderType(ResourceLocation.withDefaultNamespace("cutout"));
         this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(pot));
+    }
+
+    public void tintedFern(Block block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            AetherTallGrassBlock.GrassType type = state.getValue(AetherTallGrassBlock.TYPE);
+            ModelFile model;
+            switch (type) {
+                case SNOWY -> model = this.models().cross("frosted_" + this.name(block), this.texture("frosted_" + this.name(block), "natural/"))
+                        .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+                case ENCHANTED -> model = this.models().cross("enchanted_" + this.name(block), this.texture("enchanted_" + this.name(block), "natural/"))
+                        .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+                default -> model = this.models().withExistingParent(this.name(block), this.mcLoc("block/tinted_cross"))
+                        .texture("cross", this.texture(this.name(block), "natural/"))
+                        .renderType(ResourceLocation.withDefaultNamespace("cutout"));
+            }
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
     }
 
     public void shortGrass(Block block) {
