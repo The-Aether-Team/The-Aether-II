@@ -82,6 +82,8 @@ dependencies {
         jarJar.pin(it, "${project.accessories_version}+${project.minecraft_version}")
     }
 
+    runtimeOnly "io.github.flemmli97:debugutils:${project.minecraft_version}-${project.debugutils_version}-neoforge"
+
     //compileOnly fileTree(dir: 'libs', include: '*.jar')
 }
 
