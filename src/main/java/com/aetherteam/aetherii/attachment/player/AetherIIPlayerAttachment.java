@@ -1,8 +1,7 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -13,19 +12,11 @@ import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.DeathScreen;
-import net.minecraft.client.gui.screens.ReceivingLevelScreen;
-import net.minecraft.client.gui.screens.WinScreen;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.player.Input;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -144,36 +135,8 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      * On the client, this will also help to set the portal overlay.
      */
     private void handleAetherPortal(Player player) {
-        if (player instanceof LocalPlayer localPlayer) {
-            if (!(Minecraft.getInstance().screen instanceof ReceivingLevelScreen)) {
-                this.oPortalIntensity = this.portalIntensity;
-                float f = 0.0F;
-                if (localPlayer.portalProcess != null && localPlayer.portalProcess.isInsidePortalThisTick() && localPlayer.portalProcess.isSamePortal(AetherIIBlocks.AETHER_PORTAL.get())) {
-                    if (Minecraft.getInstance().screen != null
-                            && !Minecraft.getInstance().screen.isPauseScreen()
-                            && !(Minecraft.getInstance().screen instanceof DeathScreen)
-                            && !(Minecraft.getInstance().screen instanceof WinScreen)) {
-                        if (Minecraft.getInstance().screen instanceof AbstractContainerScreen) {
-                            localPlayer.closeContainer();
-                        }
-
-                        Minecraft.getInstance().setScreen(null);
-                    }
-
-                    if (this.portalIntensity == 0.0F) {
-                        Minecraft.getInstance()
-                                .getSoundManager()
-                                .play(SimpleSoundInstance.forLocalAmbience(AetherIISoundEvents.BLOCK_AETHER_PORTAL_TRIGGER.get(), localPlayer.getRandom().nextFloat() * 0.4F + 0.8F, 0.25F));
-                    }
-
-                    f = 0.0125F;
-                    localPlayer.portalProcess.setAsInsidePortalThisTick(false);
-                } else if (this.portalIntensity > 0.0F) {
-                    f = -0.05F;
-                }
-
-                this.portalIntensity = Mth.clamp(this.portalIntensity + f, 0.0F, 1.0F);
-            }
+        if (player.level().isClientSide()) {
+            PortalClientUtil.handleAetherPortal(player, this);
         }
     }
 

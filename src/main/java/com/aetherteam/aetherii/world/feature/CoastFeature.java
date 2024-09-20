@@ -71,18 +71,18 @@ public class CoastFeature extends Feature<CoastConfiguration> {
 
     @SuppressWarnings("UnusedReturnValue")
     public static boolean placeCoastBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random, int distance, Set<BlockPos> set) {
-            if (level.getBlockState(pos).canBeReplaced()
-                    && (level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
-                    || level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
-                    || level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
-                    || level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
-            )) {
-                BlockState state = provider.getState(random, pos);
-                if (level.setBlock(pos, state, 2)) {
-                    set.add(pos);
-                    return true;
-                }
+        if (level.getBlockState(pos).canBeReplaced() && !level.getBlockState(pos).liquid()
+                && (level.getBlockState(pos.north(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
+                || level.getBlockState(pos.east(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
+                || level.getBlockState(pos.south(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
+                || level.getBlockState(pos.west(distance)).is(AetherIITags.Blocks.SHAPES_COASTS)
+        )) {
+            BlockState state = provider.getState(random, pos);
+            if (level.setBlock(pos, state, 2)) {
+                set.add(pos);
+                return true;
             }
+        }
         return false;
     }
 

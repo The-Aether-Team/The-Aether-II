@@ -1,0 +1,9 @@
+{
+  "parent": "aether_ii:block/asymmetrical_cross_odd_mirrored",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "0": "aether_ii:block/natural/blade_poa_0",
+    "1": "aether_ii:block/natural/blade_poa_1",
+    "particle": "aether_ii:block/natural/blade_poa_0"
+  }
+}

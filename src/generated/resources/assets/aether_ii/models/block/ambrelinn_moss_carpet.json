@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/carpet",
+  "textures": {
+    "wool": "aether_ii:block/natural/ambrelinn_moss_block"
+  }
+}

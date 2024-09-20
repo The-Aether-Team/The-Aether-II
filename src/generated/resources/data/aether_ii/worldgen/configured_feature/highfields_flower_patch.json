@@ -3,29 +3,42 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "minecraft:simple_block",
+        "type": "aether_ii:aether_flower",
         "config": {
           "to_place": {
-            "type": "minecraft:weighted_state_provider",
-            "entries": [
+            "type": "minecraft:dual_noise_provider",
+            "noise": {
+              "amplitudes": [
+                1.0
+              ],
+              "firstOctave": -1
+            },
+            "scale": 1.0,
+            "seed": 2345,
+            "slow_noise": {
+              "amplitudes": [
+                1.0
+              ],
+              "firstOctave": -5
+            },
+            "slow_scale": 1.0,
+            "states": [
               {
-                "data": {
-                  "Name": "aether_ii:hesperose",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 1
+                "Name": "aether_ii:hesperose",
+                "Properties": {
+                  "snowy": "false"
+                }
               },
               {
-                "data": {
-                  "Name": "aether_ii:tarabloom",
-                  "Properties": {
-                    "snowy": "false"
-                  }
-                },
-                "weight": 1
+                "Name": "aether_ii:tarabloom",
+                "Properties": {
+                  "snowy": "false"
+                }
               }
+            ],
+            "variety": [
+              1,
+              3
             ]
           }
         }
@@ -53,8 +66,8 @@
         }
       ]
     },
-    "tries": 24,
-    "xz_spread": 7,
+    "tries": 40,
+    "xz_spread": 8,
     "y_spread": 3
   }
 }

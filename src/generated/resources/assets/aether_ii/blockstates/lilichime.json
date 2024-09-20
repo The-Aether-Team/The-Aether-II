@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": {
+      "model": "aether_ii:block/lilichime"
+    },
+    "snowy=true": {
+      "model": "aether_ii:block/lilichime"
+    }
+  }
+}

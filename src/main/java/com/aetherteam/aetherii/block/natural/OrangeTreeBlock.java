@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -143,13 +144,17 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
      */
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
         int age = state.getValue(AGE);
         if (age > SINGLE_AGE_MAX) {
             if (!level.isClientSide()) {
                 if (player.isCreative()) {
                     preventCreativeDropFromBottomPart(level, pos, state, player);
                 } else {
-                    dropResources(state, level, pos, null, player, player.getMainHandItem());
+                    if (doubleBlockHalf == DoubleBlockHalf.LOWER) {
+                        pos = pos.above();
+                    }
+                    dropResources(state.setValue(HALF, DoubleBlockHalf.LOWER), level, pos, null, player, player.getMainHandItem());
                 }
             }
         }
@@ -180,6 +185,15 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
         } else { // Destroying for the single block state.
             super.playerDestroy(level, player, pos, state, blockEntity, tool);
         }
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
+        if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
+            return true;
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     /**

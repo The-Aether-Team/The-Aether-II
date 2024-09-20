@@ -1,0 +1,216 @@
+{
+  "ambientocclusion": false,
+  "elements": [
+    {
+      "faces": {
+        "north": {
+          "texture": "#vine",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#vine"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0.2
+      ],
+      "to": [
+        16,
+        16,
+        0.2
+      ]
+    },
+    {
+      "faces": {
+        "north": {
+          "texture": "#vine",
+          "uv": [
+            16.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#vine"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0.01
+      ],
+      "to": [
+        16,
+        16,
+        0.01
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            8.0,
+            0.0
+          ]
+        },
+        "east": {
+          "texture": "#vine",
+          "uv": [
+            8.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            8.0,
+            0.0
+          ]
+        },
+        "west": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            8.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        4,
+        0,
+        -4.2
+      ],
+      "rotation": {
+        "angle": 0.0,
+        "axis": "y",
+        "origin": [
+          4,
+          0,
+          -4
+        ]
+      },
+      "to": [
+        4,
+        16,
+        4.2
+      ]
+    },
+    {
+      "faces": {
+        "down": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            8.0,
+            0.0
+          ]
+        },
+        "east": {
+          "texture": "#vine",
+          "uv": [
+            16.0,
+            0.0,
+            8.0,
+            16.0
+          ]
+        },
+        "north": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "south": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            0.0,
+            16.0
+          ]
+        },
+        "up": {
+          "texture": "#vine",
+          "uv": [
+            0.0,
+            0.0,
+            8.0,
+            0.0
+          ]
+        },
+        "west": {
+          "texture": "#vine",
+          "uv": [
+            8.0,
+            0.0,
+            16.0,
+            16.0
+          ]
+        }
+      },
+      "from": [
+        12,
+        0,
+        -4.2
+      ],
+      "rotation": {
+        "angle": 0.0,
+        "axis": "y",
+        "origin": [
+          12,
+          0,
+          -4
+        ]
+      },
+      "to": [
+        12,
+        16,
+        4.2
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "aether_ii:block/natural/ambrelinn_moss_vines_bottom",
+    "vine": "aether_ii:block/natural/ambrelinn_moss_vines_bottom"
+  }
+}

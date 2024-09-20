@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.data.resources.builders.highlands;
 
-import com.aetherteam.aetherii.world.placementmodifier.StructureBlacklistFilter;
+import com.aetherteam.aetherii.world.feature.modifier.filter.StructureBlacklistFilter;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.worldgen.placement.PlacementUtils;

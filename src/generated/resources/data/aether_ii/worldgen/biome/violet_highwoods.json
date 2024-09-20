@@ -63,7 +63,10 @@
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
-      "aether_ii:blueberry_bush_patch"
+      "aether_ii:highlands_flower_patch",
+      "aether_ii:magnetic_flower_patch",
+      "aether_ii:blueberry_bush_patch",
+      "aether_ii:magnetic_shroom_patch"
     ],
     [
       "aether_ii:high_storm_aercloud",

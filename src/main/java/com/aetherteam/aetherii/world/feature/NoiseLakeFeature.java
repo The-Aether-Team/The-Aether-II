@@ -106,6 +106,9 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 ) {
                     this.setBlock(level, new BlockPos(x, y, z), Blocks.WATER.defaultBlockState());
                     this.setBlock(level, new BlockPos(x, y - 1, z), config.underwaterBlock().getState(context.random(), new BlockPos(x, y - 1, z)));
+                    if (level.isEmptyBlock(new BlockPos(x, y - 2, z))) {
+                        this.setBlock(level, new BlockPos(x, y - 2, z), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
+                    }
 
                     // Removes Floating Grass above the lakes
                     if (level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof BushBlock || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof TwigBlock || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof RockBlock) {

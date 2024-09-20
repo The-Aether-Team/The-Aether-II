@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/template_tarahesp_flowers_3",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "0": "aether_ii:block/natural/tarahesp_flowers_purple",
+    "1": "aether_ii:block/natural/tarahesp_flowers_white",
+    "particle": "aether_ii:block/natural/tarahesp_flowers_purple"
+  }
+}

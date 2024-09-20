@@ -46,12 +46,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.MOSSY_HOLYSTONE, "Mossy Holystone");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK, "Bryalinn Moss Block");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET, "Bryalinn Moss Carpet");
-        this.addBlock(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET, "Flowering Bryalinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.BRYALINN_MOSS_VINES, "Bryalinn Moss Vines");
+        this.addBlock(AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "Bryalinn Moss Flowers");
+        this.addBlock(AetherIIBlocks.TANGLED_BRANCHES, "Tangled Branches");
 
         // Magnetic
         this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");
         this.addBlock(AetherIIBlocks.FERROSITE, "Ferrosite");
         this.addBlock(AetherIIBlocks.RUSTED_FERROSITE, "Rusted Ferrosite");
+        this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM, "Magnetic Shroom");
 
         // Arctic
         this.addBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK, "Arctic Snow Block");
@@ -62,9 +65,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL, "Large Arctic Ice Crystal");
         this.addBlock(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL, "Medium Arctic Ice Crystal");
         this.addBlock(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL, "Small Arctic Ice Crystal");
+        this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_BLOCK, "Shayelinn Moss Block");
+        this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_CARPET, "Shayelinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.SHAYELINN_MOSS_VINES, "Shayelinn Moss Vines");
 
         // Irradiated
         this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");
+        this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_BLOCK, "Ambrelinn Moss Block");
+        this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_CARPET, "Ambrelinn Moss Carpet");
+        this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_VINES, "Ambrelinn Moss Vines");
+        this.addBlock(AetherIIBlocks.TARAHESP_FLOWERS, "Tarahesp Flowers");
 
         // Ores
         this.addBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE, "Holystone Quartz Ore");
@@ -179,11 +189,31 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AETHER_SHORT_GRASS, "Aether Short Grass");
         this.addBlock(AetherIIBlocks.AETHER_MEDIUM_GRASS, "Aether Medium Grass");
         this.addBlock(AetherIIBlocks.AETHER_LONG_GRASS, "Aether Long Grass");
+        this.addBlock(AetherIIBlocks.HIGHLAND_FERN, "Highland Fern");
+        this.addBlock(AetherIIBlocks.SHIELD_FERN, "Shield Fern");
 
         // Flowers
         this.addBlock(AetherIIBlocks.HESPEROSE, "Hesperose");
         this.addBlock(AetherIIBlocks.TARABLOOM, "Tarabloom");
+        this.addBlock(AetherIIBlocks.POASPROUT, "Poasprout");
+        this.addBlock(AetherIIBlocks.LILICHIME, "Lilichime");
+        this.addBlock(AetherIIBlocks.PLURACIAN, "Pluracian");
+        this.addBlock(AetherIIBlocks.SATIVAL_SHOOT, "Satival Shoot");
+        this.addBlock(AetherIIBlocks.HOLPUPEA, "Holpupea");
+        this.addBlock(AetherIIBlocks.BLADE_POA, "Blade Poa");
         this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
+
+        // Potted Flowers
+        this.addBlock(AetherIIBlocks.POTTED_HIGHLAND_FERN, "Potted Highland Fern");
+        this.addBlock(AetherIIBlocks.POTTED_SHIELD_FERN, "Potted Shield Fern");
+        this.addBlock(AetherIIBlocks.POTTED_HESPEROSE, "Potted Hesperose");
+        this.addBlock(AetherIIBlocks.POTTED_TARABLOOM, "Potted Tarabloom");
+        this.addBlock(AetherIIBlocks.POTTED_POASPROUT, "Potted Poasprout");
+        this.addBlock(AetherIIBlocks.POTTED_SATIVAL_SHOOT, "Potted Satival Shoot");
+        this.addBlock(AetherIIBlocks.POTTED_LILICHIME, "Potted Lilichime");
+        this.addBlock(AetherIIBlocks.POTTED_PLURACIAN, "Potted Pluracian");
+        this.addBlock(AetherIIBlocks.POTTED_BLADE_POA, "Potted Blade Poa");
+        this.addBlock(AetherIIBlocks.POTTED_AECHOR_CUTTING, "Potted Aechor Cutting");
 
         // Bushes
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
@@ -598,6 +628,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
         this.addItem(AetherIIItems.ENCHANTED_BLUEBERRY, "Enchanted Blueberry");
         this.addItem(AetherIIItems.ORANGE, "Orange");
+        this.addItem(AetherIIItems.SATIVAL_BULB, "Satival Bulb");
         this.addItem(AetherIIItems.WYNDBERRY, "Wyndberry");
         this.addItem(AetherIIItems.ENCHANTED_WYNDBERRY, "Enchanted Wyndberry");
         this.addItem(AetherIIItems.GREEN_SWET_JELLY, "Green Swet Jelly");

@@ -1,8 +1,12 @@
 package com.aetherteam.aetherii.mixin;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -129,5 +133,14 @@ public class MixinHooks {
         if (player.level() instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(ParticleTypes.SWEEP_ATTACK, player.getX() + d0, player.getY(0.5), player.getZ() + d1, 0, d0, 0.0, d1, 0.0);//todo
         }
+    }
+
+    public static ParticleOptions replaceSplashParticles(Entity entity, ParticleOptions particleOptions) {
+        if (entity.level() instanceof ClientLevel clientLevel && clientLevel.effects() instanceof HighlandsSpecialEffects) {
+            if (particleOptions == ParticleTypes.SPLASH) {
+                return AetherIIParticleTypes.SPLASH.get();
+            }
+        }
+        return particleOptions;
     }
 }

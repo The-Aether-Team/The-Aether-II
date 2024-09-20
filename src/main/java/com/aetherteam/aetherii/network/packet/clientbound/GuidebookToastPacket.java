@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.gui.GuidebookUtil;
 import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -26,8 +27,7 @@ public record GuidebookToastPacket(GuidebookToast.Type toastType, GuidebookToast
 
     public static void execute(GuidebookToastPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
-            GuidebookToast toast = new GuidebookToast(payload.toastType(), payload.toastIcon());
-            Minecraft.getInstance().getToasts().addToast(toast);
+            GuidebookUtil.addGuidebookToast(payload.toastType(), payload.toastIcon());
         }
     }
 }

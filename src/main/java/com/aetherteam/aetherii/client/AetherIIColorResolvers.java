@@ -44,6 +44,8 @@ public class AetherIIColorResolvers {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(level, pos, tintIndex, level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),
                 AetherIIBlocks.AETHER_SHORT_GRASS.get(), AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), AetherIIBlocks.AETHER_LONG_GRASS.get());
+        event.register(((state, level, pos, tintIndex) ->  level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_TALL_GRASS_COLOR),
+                AetherIIBlocks.HIGHLAND_FERN.get(), AetherIIBlocks.POTTED_HIGHLAND_FERN.get());
     }
 
     public static void registerItemColor(RegisterColorHandlersEvent.Item event) {
@@ -54,7 +56,7 @@ public class AetherIIColorResolvers {
         event.register((color, itemProvider) -> {
             BlockState blockstate = ((BlockItem) color.getItem()).getBlock().defaultBlockState();
             return event.getBlockColors().getColor(blockstate, null, null, itemProvider);
-        }, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_SHORT_GRASS.get(), AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), AetherIIBlocks.AETHER_LONG_GRASS.get());
+        }, AetherIIBlocks.AETHER_GRASS_BLOCK.get(), AetherIIBlocks.AETHER_SHORT_GRASS.get(), AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), AetherIIBlocks.AETHER_LONG_GRASS.get(), AetherIIBlocks.HIGHLAND_FERN.get());
     }
 
     private static int createTriTintGrassColor(BlockAndTintGetter level, BlockPos pos, int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) {

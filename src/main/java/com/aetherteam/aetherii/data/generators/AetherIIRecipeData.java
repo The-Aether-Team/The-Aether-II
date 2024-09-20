@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.AetherIIData;
 import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -11,7 +10,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -140,6 +138,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         woodFromLogs(consumer, AetherIIBlocks.GREATROOT_WOOD.get(), AetherIIBlocks.GREATROOT_LOG.get());
         woodFromLogs(consumer, AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.WISPROOT_LOG.get());
         woodFromLogs(consumer, AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.AMBEROOT_LOG.get());
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), 1)
+                .requires(AetherIIBlocks.WISPROOT_LOG)
+                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
+                .unlockedBy("has_vines", has(AetherIIBlocks.BRYALINN_MOSS_VINES))
+                .save(consumer);
 
         // Leaf Pile
         leafPile(consumer, AetherIIBlocks.SKYROOT_LEAF_PILE, AetherIIBlocks.SKYROOT_LEAVES.get());
@@ -753,7 +756,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeCrossbowWithTag(AetherIIItems.GRAVITITE_CROSSBOW, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
         this.makeShieldWithTag(AetherIIItems.GRAVITITE_SHIELD, AetherIITags.Items.PLATES_GRAVITITE, "has_gravitite").save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_BOLT.get(), 1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SCATTERGLASS_BOLT.get(), 4)
                 .define('S', AetherIIItems.SCATTERGLASS_SHARD)
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
                 .define('F', Tags.Items.FEATHERS)
@@ -865,21 +868,20 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_gravitite_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_undershale_gravitite_ore"));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.WHITE_DYE)
-                .group("white_dye")
-                .requires(AetherIIBlocks.HESPEROSE.get())
-                .unlockedBy(getHasName(AetherIIBlocks.HESPEROSE.get()), has(AetherIIBlocks.HESPEROSE.get()))
-                .save(consumer, this.name("flower_to_white_dye"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PURPLE_DYE)
-                .group("purple_dye")
-                .requires(AetherIIBlocks.TARABLOOM.get())
-                .unlockedBy(getHasName(AetherIIBlocks.TARABLOOM.get()), has(AetherIIBlocks.TARABLOOM.get()))
-                .save(consumer, this.name("flower_to_purple_dye"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LIGHT_BLUE_DYE)
-                .group("light_blue_dye")
-                .requires(AetherIIItems.BRETTL_FLOWER.get())
-                .unlockedBy(getHasName(AetherIIItems.BRETTL_FLOWER.get()), has(AetherIIItems.BRETTL_FLOWER.get()))
-                .save(consumer, this.name("flower_to_light_blue_dye"));
+        oneToOneConversionRecipe(consumer, Items.YELLOW_DYE, AetherIIBlocks.BLADE_POA, "yellow_dye");
+        oneToOneConversionRecipe(consumer, Items.WHITE_DYE, AetherIIBlocks.HESPEROSE, "white_dye");
+        oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, AetherIIBlocks.TARABLOOM, "purple_dye");
+        oneToOneConversionRecipe(consumer, Items.PURPLE_DYE, AetherIIItems.SATIVAL_BULB, "purple_dye");
+        oneToOneConversionRecipe(consumer, Items.WHITE_DYE, AetherIIBlocks.POASPROUT, "white_dye");
+        oneToOneConversionRecipe(consumer, Items.LIGHT_BLUE_DYE, AetherIIItems.BRETTL_FLOWER, "light_blue_dye");
+        oneToOneConversionRecipe(consumer, Items.LIGHT_BLUE_DYE, AetherIIBlocks.LILICHIME, "light_blue_dye");
+        oneToOneConversionRecipe(consumer, Items.CYAN_DYE, AetherIIBlocks.PLURACIAN, "cyan_dye");
+        oneToOneConversionRecipe(consumer, Items.BLUE_DYE, AetherIIBlocks.SATIVAL_SHOOT, "blue_dye");
+        oneToOneConversionRecipe(consumer, Items.PINK_DYE, AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "pink_dye");
+        oneToOneConversionRecipe(consumer, Items.MAGENTA_DYE, AetherIIBlocks.HOLPUPEA, "magenta_dye");
+        oneToOneConversionRecipe(consumer, Items.MAGENTA_DYE, AetherIIBlocks.TARAHESP_FLOWERS, "magenta_dye");
+        oneToOneConversionRecipe(consumer, Items.BROWN_DYE, AetherIIBlocks.SKY_ROOTS, "brown_dye");
+
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)
                 .requires(AetherIIItems.MOA_FEED)
