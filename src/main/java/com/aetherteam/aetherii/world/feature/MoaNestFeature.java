@@ -12,6 +12,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -71,8 +72,9 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
 
     @SuppressWarnings("UnusedReturnValue")
     public static boolean placeNestBlock(WorldGenLevel level, BlockStateProvider provider, BlockPos pos, RandomSource random) {
-        if (!level.getBlockState(pos).is(BlockTags.LOGS)) {
-            return level.setBlock(pos, provider.getState(random, pos), 2);
+        BlockState state = provider.getState(random, pos);
+        if (state.isAir() || !level.getBlockState(pos).is(BlockTags.LOGS)) {
+            return level.setBlock(pos, state, 2);
         } else {
             return false;
         }
