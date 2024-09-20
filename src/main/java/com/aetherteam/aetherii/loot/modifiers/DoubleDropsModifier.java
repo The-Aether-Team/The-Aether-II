@@ -63,7 +63,7 @@ public class DoubleDropsModifier extends LootModifier {
             if (item.getDefaultInstance().is(AetherIITags.Items.DOUBLE_DROPS)) {
                 int count = 0;
                 double chance = random.nextDouble();
-                if (item instanceof BlockItem) { //todo balance
+                if (item instanceof BlockItem) {
                     if (chance < 0.1) {
                         count = 2;
                     } else if (chance < 0.5) {
