@@ -132,6 +132,7 @@ public class AetherIIOverlays {
                 if (buildup.isBuildupFull()) {
                     MobEffectInstance instance = player.getEffect(buildup.getType());
                     if (instance != null) {
+                        AetherII.LOGGER.info(instance.getEffect().getRegisteredName() + "  " + buildup.getInitialInstanceDuration() + "  " + instance.getDuration());
                         int durationValueScaled = Math.min(instance.getDuration() / Math.max(1, (buildup.getInitialInstanceDuration() / 24)), 24);
                         guiGraphics.blitSprite(BUILDUP_BACKGROUND_BACKING_SPRITE, 24, 24, 0, 24 - durationValueScaled, i, j + 24 - durationValueScaled, 24, durationValueScaled);
                     }
