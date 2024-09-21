@@ -30,6 +30,7 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
                 HighlandsBiomes.TURQUOISE_FOREST,
                 HighlandsBiomes.GLISTENING_SWAMP,
                 HighlandsBiomes.VIOLET_HIGHWOODS);
+        this.tag(AetherIITags.Biomes.MAGNETIC_FOG).add(HighlandsBiomes.GLISTENING_SWAMP);
         this.tag(AetherIITags.Biomes.ARCTIC).add(
                 HighlandsBiomes.FRIGID_SIERRA,
                 HighlandsBiomes.ENDURING_WOODLAND,
