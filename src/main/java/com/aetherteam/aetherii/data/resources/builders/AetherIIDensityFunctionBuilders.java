@@ -159,32 +159,32 @@ public class AetherIIDensityFunctionBuilders {
 
     // Base Islands
     public static DensityFunction buildFactor(HolderGetter<DensityFunction> function) {
-        DensityFunctions.Spline.Coordinate ridges = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES));
         DensityFunctions.Spline.Coordinate temperature = new DensityFunctions.Spline.Coordinate(function.getOrThrow(TEMPERATURE));
         DensityFunctions.Spline.Coordinate erosion = new DensityFunctions.Spline.Coordinate(function.getOrThrow(EROSION));
-        return DensityFunctions.spline(factor(ridges, temperature, erosion));
+        DensityFunctions.Spline.Coordinate ridges = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES));
+        return DensityFunctions.spline(factor(temperature, erosion, ridges));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factor(I ridges, I temperature, I erosion) {
-        CubicSpline<C, I> ridgeSpline = CubicSpline.builder(ridges)
-                .addPoint(0.0F, 3.0F)
-                .addPoint(0.2F, 1.0F)
-                .build();
-
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factor(I temperature, I erosion, I ridges) {
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
                 .addPoint(-0.525F, 1.0F)
                 .addPoint(-0.45F, 1.5F)
                 .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.325F, ridgeSpline)
-                .addPoint(0.525F, ridgeSpline)
+                .addPoint(-0.325F, 1.0F)
+                .addPoint(0.525F, 1.0F)
                 .addPoint(0.6F, 7.5F)
                 .addPoint(0.675F, 1.0F)
                 .build();
 
-        return CubicSpline.builder(erosion)
+        CubicSpline<C, I> erosionSpline = CubicSpline.builder(erosion)
                 .addPoint(0.475F, temperatureSpline)
                 .addPoint(0.55F, 7.5F)
                 .addPoint(0.625F, 1.0F)
+                .build();
+
+        return CubicSpline.builder(ridges)
+                .addPoint(0.0F, 3.0F)
+                .addPoint(0.2F, erosionSpline)
                 .build();
     }
 
@@ -326,30 +326,30 @@ public class AetherIIDensityFunctionBuilders {
 
     // Shattered Islands
     public static DensityFunction buildFactorShattered(HolderGetter<DensityFunction> function) {
-        DensityFunctions.Spline.Coordinate ridges = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES));
         DensityFunctions.Spline.Coordinate temperature = new DensityFunctions.Spline.Coordinate(function.getOrThrow(TEMPERATURE));
         DensityFunctions.Spline.Coordinate erosion = new DensityFunctions.Spline.Coordinate(function.getOrThrow(EROSION));
-        return DensityFunctions.spline(factorShattered(ridges, temperature, erosion));
+        DensityFunctions.Spline.Coordinate ridges = new DensityFunctions.Spline.Coordinate(function.getOrThrow(RIDGES));
+        return DensityFunctions.spline(factorShattered(temperature, erosion, ridges));
     }
 
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I continents, I temperature, I erosion) {
-        CubicSpline<C, I> ridgeSpline = CubicSpline.builder(continents)
-                .addPoint(0.05F, 2.0F)
-                .addPoint(0.2F, 1.0F)
-                .build();
-
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> factorShattered(I temperature, I erosion, I ridges) {
         CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
                 .addPoint(-0.475F, 1.0F)
                 .addPoint(-0.4F, 7.5F)
-                .addPoint(-0.325F, ridgeSpline)
-                .addPoint(0.575F, ridgeSpline)
+                .addPoint(-0.325F, 1.0F)
+                .addPoint(0.575F, 1.0F)
                 .addPoint(0.65F, 7.5F)
                 .build();
 
-        return CubicSpline.builder(erosion)
+        CubicSpline<C, I> erosionSpline =  CubicSpline.builder(erosion)
                 .addPoint(0.475F, temperatureSpline)
                 .addPoint(0.55F, 7.5F)
                 .addPoint(0.625F, 1.0F)
+                .build();
+
+        return CubicSpline.builder(ridges)
+                .addPoint(0.05F, 2.0F)
+                .addPoint(0.2F, erosionSpline)
                 .build();
     }
 

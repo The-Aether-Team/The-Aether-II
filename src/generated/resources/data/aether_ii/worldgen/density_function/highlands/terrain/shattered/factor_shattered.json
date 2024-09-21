@@ -1,79 +1,65 @@
 {
   "type": "minecraft:spline",
   "spline": {
-    "coordinate": "aether_ii:highlands/erosion",
+    "coordinate": "aether_ii:highlands/ridges",
     "points": [
       {
         "derivative": 0.0,
-        "location": 0.475,
+        "location": 0.05,
+        "value": 2.0
+      },
+      {
+        "derivative": 0.0,
+        "location": 0.2,
         "value": {
-          "coordinate": "aether_ii:highlands/temperature",
+          "coordinate": "aether_ii:highlands/erosion",
           "points": [
             {
               "derivative": 0.0,
-              "location": -0.475,
+              "location": 0.475,
+              "value": {
+                "coordinate": "aether_ii:highlands/temperature",
+                "points": [
+                  {
+                    "derivative": 0.0,
+                    "location": -0.475,
+                    "value": 1.0
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": -0.4,
+                    "value": 7.5
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": -0.325,
+                    "value": 1.0
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.575,
+                    "value": 1.0
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.65,
+                    "value": 7.5
+                  }
+                ]
+              }
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.55,
+              "value": 7.5
+            },
+            {
+              "derivative": 0.0,
+              "location": 0.625,
               "value": 1.0
-            },
-            {
-              "derivative": 0.0,
-              "location": -0.4,
-              "value": 7.5
-            },
-            {
-              "derivative": 0.0,
-              "location": -0.325,
-              "value": {
-                "coordinate": "aether_ii:highlands/ridges",
-                "points": [
-                  {
-                    "derivative": 0.0,
-                    "location": 0.05,
-                    "value": 2.0
-                  },
-                  {
-                    "derivative": 0.0,
-                    "location": 0.2,
-                    "value": 1.0
-                  }
-                ]
-              }
-            },
-            {
-              "derivative": 0.0,
-              "location": 0.575,
-              "value": {
-                "coordinate": "aether_ii:highlands/ridges",
-                "points": [
-                  {
-                    "derivative": 0.0,
-                    "location": 0.05,
-                    "value": 2.0
-                  },
-                  {
-                    "derivative": 0.0,
-                    "location": 0.2,
-                    "value": 1.0
-                  }
-                ]
-              }
-            },
-            {
-              "derivative": 0.0,
-              "location": 0.65,
-              "value": 7.5
             }
           ]
         }
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.55,
-        "value": 7.5
-      },
-      {
-        "derivative": 0.0,
-        "location": 0.625,
-        "value": 1.0
       }
     ]
   }
