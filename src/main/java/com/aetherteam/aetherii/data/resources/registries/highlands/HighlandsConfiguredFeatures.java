@@ -1432,11 +1432,11 @@ public class HighlandsConfiguredFeatures {
                                 new NormalNoise.NoiseParameters(-2, 1.0),
                                 1.0F,
                                 List.of(
-                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
                                         AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
+                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState()
                                 )
                         ),
                         NoiseLakeFeature.Type.SWAMP,

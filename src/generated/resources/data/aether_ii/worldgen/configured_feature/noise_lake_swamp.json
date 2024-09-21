@@ -29,19 +29,19 @@
       "slow_scale": 1.0,
       "states": [
         {
-          "Name": "aether_ii:ferrosite_sand"
+          "Name": "aether_ii:ferrosite_mud"
         },
         {
           "Name": "aether_ii:coarse_aether_dirt"
         },
         {
-          "Name": "aether_ii:ferrosite_sand"
+          "Name": "aether_ii:ferrosite_mud"
         },
         {
           "Name": "aether_ii:aether_dirt"
         },
         {
-          "Name": "aether_ii:ferrosite_sand"
+          "Name": "aether_ii:ferrosite_mud"
         }
       ],
       "variety": [

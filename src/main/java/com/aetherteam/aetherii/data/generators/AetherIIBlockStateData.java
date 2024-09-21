@@ -43,6 +43,7 @@ public class AetherIIBlockStateData extends AetherIIBlockStateProvider {
 
         // Magnetic
         this.block(AetherIIBlocks.FERROSITE_SAND.get(), "natural/");
+        this.block(AetherIIBlocks.FERROSITE_MUD.get(), "natural/");
         this.block(AetherIIBlocks.FERROSITE.get(), "natural/");
         this.block(AetherIIBlocks.RUSTED_FERROSITE.get(), "natural/");
         this.crossBlock(AetherIIBlocks.MAGNETIC_SHROOM.get(), "natural/");
