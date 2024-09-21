@@ -501,6 +501,48 @@
           },
           "spot_ratio": 9
         }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:contaminated_jungle"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 10,
+          "noise_frequency": 0.045,
+          "spot_blockstate": {
+            "Name": "aether_ii:irradiated_holystone"
+          },
+          "spot_ratio": 3
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "aether_ii:battleground_wastes"
+          ]
+        },
+        "then_run": {
+          "type": "aether_ii:noise_palette_3d",
+          "backing_blockstate": {
+            "Name": "aether_ii:holystone"
+          },
+          "backing_ratio": 10,
+          "noise_frequency": 0.045,
+          "spot_blockstate": {
+            "Name": "aether_ii:irradiated_holystone"
+          },
+          "spot_ratio": 3
+        }
       }
     ]
   }

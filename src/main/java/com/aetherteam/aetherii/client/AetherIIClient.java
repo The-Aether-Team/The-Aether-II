@@ -1,7 +1,8 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.event.listeners.*;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
@@ -40,11 +41,13 @@ public class AetherIIClient {
 
         AetherIIClientEventListeners.listen(bus);
 
+        bus.addListener(DimensionClientListener::onRenderFog);
+
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
         neoBus.addListener(AetherIIColorResolvers::registerItemColor);
         neoBus.addListener(AetherIIRecipeCategories::registerRecipeCategories);
-        neoBus.addListener(AetherIIParticleTypes::registerParticleFactories);
+        neoBus.addListener(AetherIIParticleFactories::registerParticleFactories);
         neoBus.addListener(AetherIIOverlays::registerOverlays);
         neoBus.addListener(AetherIIRenderers::registerAddLayer);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);

@@ -1,0 +1,18 @@
+{
+  "feature": "aether_ii:irradiated_grass_patch",
+  "placement": [
+    {
+      "type": "aether_ii:improved_layer_placement",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 6,
+        "min_inclusive": 2
+      },
+      "heightmap": "MOTION_BLOCKING_NO_LEAVES",
+      "verticalBounds": 4
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

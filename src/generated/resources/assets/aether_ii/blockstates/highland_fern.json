@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "grass_type=default": {
+      "model": "aether_ii:block/highland_fern"
+    },
+    "grass_type=enchanted": {
+      "model": "aether_ii:block/enchanted_highland_fern"
+    },
+    "grass_type=snowy": {
+      "model": "aether_ii:block/frosted_highland_fern"
+    }
+  }
+}

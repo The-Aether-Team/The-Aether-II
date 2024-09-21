@@ -1,0 +1,260 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true
+      },
+      "when": {
+        "age": "25",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true
+      },
+      "when": {
+        "age": "25",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "age": "25",
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true,
+        "y": 90
+      },
+      "when": {
+        "age": "25",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "age": "25",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true,
+        "y": 180
+      },
+      "when": {
+        "age": "25",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "age": "25",
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true,
+        "y": 270
+      },
+      "when": {
+        "age": "25",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "age": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "age": "25",
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "aether_ii:block/ambrelinn_moss_vines_bottom",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "age": "25",
+        "east": "false",
+        "north": "false",
+        "south": "false",
+        "up": "false",
+        "west": "false"
+      }
+    }
+  ]
+}

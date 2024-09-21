@@ -9,11 +9,7 @@
           "functions": [
             {
               "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
+              "count": 1.0,
               "function": "minecraft:set_count"
             },
             {
@@ -22,7 +18,7 @@
               "function": "minecraft:apply_bonus"
             }
           ],
-          "name": "minecraft:moss_block"
+          "name": "aether_ii:bryalinn_moss_vines"
         }
       ],
       "rolls": 1.0

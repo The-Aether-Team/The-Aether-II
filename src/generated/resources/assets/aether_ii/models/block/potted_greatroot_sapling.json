@@ -2,6 +2,6 @@
   "parent": "minecraft:block/flower_pot_cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "plant": "aether_ii:block/natural/greatroot_leaves"
+    "plant": "aether_ii:block/natural/greatroot_sapling"
   }
 }

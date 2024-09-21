@@ -83,6 +83,8 @@ dependencies {
         jarJar.pin(it, "${project.accessories_version}+${project.minecraft_version}")
     }
 
+    runtimeOnly "io.github.flemmli97:debugutils:${project.minecraft_version}-${project.debugutils_version}-neoforge"
+
     //compileOnly fileTree(dir: 'libs', include: '*.jar')
 }
 
@@ -96,6 +98,7 @@ repositories {
     maven { url = "https://maven.wispforest.io/releases" }
     maven { url = "https://maven.shedaniel.me/" }
     maven { url = "https://maven.fabricmc.net" }
+    maven { url = "https://maven.su5ed.dev/releases" }
     maven githubPackage.invoke("The-Aether-Team/Nitrogen")
     maven githubPackage.invoke("The-Aether-Team/Cumulus")
     mavenLocal()

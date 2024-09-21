@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -49,10 +50,6 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
         builder.add(HALF, AGE);
     }
 
-    /**
-     * Warning for "deprecation" is suppressed because the method is fine to override.
-     */
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         int age = state.getValue(AGE);
@@ -103,9 +100,7 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
 
     /**
      * Ages the Orange Tree up a state with a chance from a random tick.<br><br>
-     * Warning for "deprecation" is suppressed because the method is fine to override.
      */
-    @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
@@ -143,13 +138,16 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
      */
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
         int age = state.getValue(AGE);
         if (age > SINGLE_AGE_MAX) {
             if (!level.isClientSide()) {
-                if (player.isCreative()) {
-                    preventCreativeDropFromBottomPart(level, pos, state, player);
-                } else {
-                    dropResources(state, level, pos, null, player, player.getMainHandItem());
+                preventCreativeDropFromBottomPart(level, pos, state, player);
+                if (!player.isCreative()) {
+                    if (doubleBlockHalf == DoubleBlockHalf.LOWER) {
+                        pos = pos.above();
+                    }
+                    dropResources(state.setValue(HALF, DoubleBlockHalf.LOWER), level, pos, null, player, player.getMainHandItem());
                 }
             }
         }
@@ -180,6 +178,16 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
         } else { // Destroying for the single block state.
             super.playerDestroy(level, player, pos, state, blockEntity, tool);
         }
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
+        int age = state.getValue(AGE);
+        if (doubleBlockHalf == DoubleBlockHalf.UPPER && age == DOUBLE_AGE_MAX) {
+            return true;
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     /**
@@ -279,4 +287,3 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
         return Mth.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
     }
 }
-

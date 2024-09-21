@@ -372,7 +372,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         if (this.horizontalCollision || this.moveControl.hasWanted() && this.moveControl.getWantedY() > this.getY() + 0.5) {
             f = 0.5F;
             if (this.moveControl.hasWanted() && this.moveControl.getWantedY() > this.getY() + 1.5) {
-                f = 1.5F;
+                f = 0.65F;
             }
         }
 
@@ -383,11 +383,11 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
                 f = 0.5F;
             }
             if (vec3.y > this.getY() + 1.5) {
-                f = 1.5F;
+                f = 0.65F;
             }
         }
 
-        return f + this.getJumpBoostPower();
+        return super.getJumpPower(f / 0.42F);
     }
 
     private void enableJumpControl() {
@@ -533,7 +533,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
      */
     @Override
     public int getMaxFallDistance() {
-        return this.onGround() ? super.getMaxFallDistance() : 14;
+        return this.onGround() || this.fallDistance < 5 ? 5 : 14;
     }
 
     @Override

@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "aether_ii:block/pluracian"
+      },
+      {
+        "model": "aether_ii:block/pluracian",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/pluracian",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/pluracian",
+        "y": 270
+      }
+    ],
+    "snowy=true": [
+      {
+        "model": "aether_ii:block/pluracian"
+      },
+      {
+        "model": "aether_ii:block/pluracian",
+        "y": 90
+      },
+      {
+        "model": "aether_ii:block/pluracian",
+        "y": 180
+      },
+      {
+        "model": "aether_ii:block/pluracian",
+        "y": 270
+      }
+    ]
+  }
+}

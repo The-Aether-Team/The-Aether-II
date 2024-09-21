@@ -113,13 +113,16 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                 .texture("layer2", this.texture(this.blockName(block) + "_3", location));
     }
 
-
     public void orangeTree(Block block) {
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_bottom_0", "natural/"));
     }
 
-    public void valkyrieSprout(Block block) {
+    public void itemBlockFlat0(Block block) {
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_0", "natural/"));
+    }
+
+    public void itemBlockFlatItem(Block block) {
+        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_item", "natural/"));
     }
 
     public void portalItem(Item item, String location) {

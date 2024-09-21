@@ -60,12 +60,13 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
 
         context.register(LAKES_NOISE, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.0, 1.5, 0.0, 0.0, 0.0, 0.0), 0.75D, 0.0D, 64), DensityFunctions.constant(0.1D)));
         context.register(LAKES_FLOOR, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 2.5, 1.5, 0.0, 0.0, 0.0, 0.0), 0.75D, 0.0D, 17).abs());
+        context.register(LAKES_FLOOR_SWAMP, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 2.5, 1.5, 1.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 17).abs());
         context.register(LAKES_BARRIER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.5, 1.0, 0.0, 0.0), 1.0D, 0.0D, 38).abs());
         context.register(LAKES_FACTOR, buildLakeFactor(function));
 
         context.register(COASTS_BASE_NOISE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 8.0, 2.0, 0.0, 0.0), 1.5D, 0.0D, 16).abs());
         context.register(COASTS_HIGHFIELDS, buildCoastNoise(function, 5.0D));
-        context.register(COASTS_MAGNETIC, buildCoastNoise(function,7.0D));
+        context.register(COASTS_MAGNETIC, buildCoastNoise(function,9.0D));
         context.register(COASTS_ARCTIC, buildCoastNoise(function,3.0D));
 
         context.register(SNOW_NOISE, DensityFunctions.add(

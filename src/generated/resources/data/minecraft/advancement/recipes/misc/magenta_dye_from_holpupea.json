@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_holpupea": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:holpupea"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:magenta_dye_from_holpupea"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_holpupea"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:magenta_dye_from_holpupea"
+    ]
+  }
+}

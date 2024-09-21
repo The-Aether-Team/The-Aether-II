@@ -19,7 +19,6 @@
       ]
     },
     "radius": 0.5,
-    "valid_blocks": "aether_ii:boulder_survives_on",
     "variation": {
       "type": "minecraft:uniform",
       "max_exclusive": 1.0,

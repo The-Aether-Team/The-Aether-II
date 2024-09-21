@@ -46,12 +46,6 @@ public class AetherIIRenderers {
                 livingEntityRenderer.addLayer(new SwetLayer(event.getContext(), livingEntityRenderer));
             }
         });
-        event.getEntityTypes().forEach(entityType -> {
-
-            if (event.getRenderer(entityType) instanceof LivingEntityRenderer r) {
-                ((LivingEntityRenderer<?, ?>) r).addLayer(new SwetLayer<>(event.getContext(), r));
-            }
-        });
     }
 
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
