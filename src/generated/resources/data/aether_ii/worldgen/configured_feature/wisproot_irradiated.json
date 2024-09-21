@@ -13,6 +13,216 @@
       },
       {
         "type": "aether_ii:irradiation"
+      },
+      {
+        "type": "aether_ii:moss",
+        "block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:ambrelinn_moss_block"
+          }
+        },
+        "carpet_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:ambrelinn_moss_carpet"
+          }
+        },
+        "flower_provider": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:tarahesp_flowers",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            }
+          ]
+        },
+        "vines_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:ambrelinn_moss_vines",
+            "Properties": {
+              "age": "0",
+              "east": "false",
+              "north": "false",
+              "south": "false",
+              "up": "false",
+              "west": "false"
+            }
+          }
+        }
       }
     ],
     "dirt_provider": {

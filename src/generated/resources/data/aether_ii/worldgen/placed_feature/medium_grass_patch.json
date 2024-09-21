@@ -2,16 +2,14 @@
   "feature": "aether_ii:medium_grass_patch",
   "placement": [
     {
-      "type": "minecraft:count_on_every_layer",
+      "type": "aether_ii:improved_layer_placement",
       "count": {
         "type": "minecraft:uniform",
         "max_inclusive": 2,
         "min_inclusive": 0
-      }
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+      },
+      "heightmap": "MOTION_BLOCKING_NO_LEAVES",
+      "verticalBounds": 4
     },
     {
       "type": "minecraft:biome"

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -43,8 +44,10 @@ public class DoubleDropsModifier extends LootModifier {
         Entity attacker = context.getParamOrNull(LootContextParams.DIRECT_ATTACKING_ENTITY);
 
         if (targetState != null) {
-            if (tool != null && tool.getItem() instanceof SkyrootTool) {
-                this.increaseDrops(lootStacks, newStacks, context.getRandom());
+            if (tool != null && tool.getItem() instanceof SkyrootTool && tool.getItem() instanceof TieredItem tieredItem) {
+                if ((tool.getDestroySpeed(targetState) == tieredItem.getTier().getSpeed() || tool.isCorrectToolForDrops(targetState))) {
+                    this.increaseDrops(lootStacks, newStacks, context.getRandom());
+                }
             }
         } else if (targetEntity != null) {
             if (attacker instanceof LivingEntity livingEntity && EquipmentUtil.isFullStrength(livingEntity) && livingEntity.getMainHandItem().getItem() instanceof SkyrootWeapon && !targetEntity.getType().is(AetherIITags.Entities.NO_DOUBLE_DROPS)) {
@@ -60,7 +63,7 @@ public class DoubleDropsModifier extends LootModifier {
             if (item.getDefaultInstance().is(AetherIITags.Items.DOUBLE_DROPS)) {
                 int count = 0;
                 double chance = random.nextDouble();
-                if (item instanceof BlockItem) { //todo balance
+                if (item instanceof BlockItem) {
                     if (chance < 0.1) {
                         count = 2;
                     } else if (chance < 0.5) {

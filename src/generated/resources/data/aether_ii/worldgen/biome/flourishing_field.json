@@ -56,11 +56,13 @@
       "aether_ii:grass_field",
       "aether_ii:valkyrie_sprout_patch",
       "aether_ii:highlands_bush_patch_field",
-      "aether_ii:highfields_flower_patch",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
+      "aether_ii:exposed_bryalinn_moss_cover",
+      "aether_ii:highlands_flower_patch",
+      "aether_ii:highfields_flower_patch",
       "aether_ii:blueberry_bush_patch"
     ],
     [

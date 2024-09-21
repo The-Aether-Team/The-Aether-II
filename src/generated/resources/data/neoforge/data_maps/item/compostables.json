@@ -1,5 +1,8 @@
 {
   "values": {
+    "aether_ii:aechor_cutting": {
+      "chance": 0.65
+    },
     "aether_ii:aether_long_grass": {
       "chance": 0.3
     },
@@ -17,6 +20,9 @@
     },
     "aether_ii:amberoot_sapling": {
       "chance": 0.3
+    },
+    "aether_ii:blade_poa": {
+      "chance": 0.65
     },
     "aether_ii:blueberry": {
       "chance": 0.3
@@ -63,14 +69,29 @@
     "aether_ii:hesperose": {
       "chance": 0.65
     },
+    "aether_ii:highland_fern": {
+      "chance": 0.65
+    },
     "aether_ii:highlands_bush": {
       "chance": 0.5
+    },
+    "aether_ii:lilichime": {
+      "chance": 0.65
     },
     "aether_ii:orange": {
       "chance": 0.3
     },
     "aether_ii:orange_tree": {
       "chance": 0.5
+    },
+    "aether_ii:poasprout": {
+      "chance": 0.65
+    },
+    "aether_ii:satival_shoot": {
+      "chance": 0.65
+    },
+    "aether_ii:shield_fern": {
+      "chance": 0.65
     },
     "aether_ii:skybirch_leaf_pile": {
       "chance": 0.018

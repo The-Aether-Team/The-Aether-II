@@ -1,5 +1,7 @@
 {
   "textures": [
-    "minecraft:generic_0"
+    "minecraft:generic_0",
+    "minecraft:generic_1",
+    "aether_ii:generic_1_mirrored"
   ]
 }

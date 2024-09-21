@@ -30,6 +30,7 @@ public class AetherIIBlockBuilders {
                 .sound(SoundType.WOOL)
                 .noOcclusion()
                 .dynamicShape()
+                .forceSolidOn()
                 .isValidSpawn((state, level, pos, entityType) -> entityType.is(AetherIITags.Entities.SPAWNING_AERCLOUDS))
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .isSuffocating(AetherIIBlockBuilders::never)

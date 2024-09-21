@@ -23,7 +23,7 @@ public class AetherGrassFeature extends Feature<SimpleBlockConfiguration> {
         BlockPos blockpos = context.origin();
         BlockState blockstate = simpleblockconfiguration.toPlace().getState(context.random(), blockpos);
         BlockState belowstate = worldgenlevel.getBlockState(blockpos.below());
-        if (belowstate.is(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK)) {
+        if (blockstate.getBlock() instanceof AetherTallGrassBlock && belowstate.is(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK)) {
             blockstate = blockstate.setValue(AetherTallGrassBlock.TYPE, AetherTallGrassBlock.GrassType.ENCHANTED);
         }
         if (blockstate.canSurvive(worldgenlevel, blockpos)) {

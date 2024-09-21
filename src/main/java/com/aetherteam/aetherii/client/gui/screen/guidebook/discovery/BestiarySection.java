@@ -229,29 +229,28 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                         int y = 29;
 
                         guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y, 16, 16);
-                        String health = String.valueOf((int) livingEntity.getMaxHealth());
-                        this.renderIconValue(guiGraphics, x, y, health);
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", health));
+                        this.renderIconValue(guiGraphics, x, y, (int) livingEntity.getMaxHealth());
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", (int) livingEntity.getMaxHealth()));
 
                         y += 17;
                         guiGraphics.blitSprite(SLASH_SPRITE, x, y, 16, 16);
                         int slashDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0);
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
-                        this.renderIconValue(guiGraphics, x, y, String.valueOf(-slashDefense));
+                        this.renderDefenseIconValue(guiGraphics, x, y, -slashDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, slashTooltip);
 
                         y += 17;
                         guiGraphics.blitSprite(IMPACT_SPRITE, x, y, 16, 16);
                         int impactDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0);
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
-                        this.renderIconValue(guiGraphics, x, y, String.valueOf(-impactDefense));
+                        this.renderDefenseIconValue(guiGraphics, x, y, -impactDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, impactTooltip);
 
                         y += 17;
                         guiGraphics.blitSprite(PIERCE_SPRITE, x, y, 16, 16);
                         int pierceDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0);
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
-                        this.renderIconValue(guiGraphics, x, y, String.valueOf(-pierceDefense));
+                        this.renderDefenseIconValue(guiGraphics, x, y, -pierceDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, pierceTooltip);
 
                         x = 132;
@@ -268,7 +267,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                                 Component effectTooltip = Component.literal((int) effectValue * 100 + "%")
                                         .append(CommonComponents.space())
                                         .append(Component.translatable(holders.getValue().value().getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
-                                this.renderIconValue(guiGraphics, x, y, String.valueOf(effectValue));
+                                this.renderDefenseIconValue(guiGraphics, x, y, effectValue);
                                 this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, -Minecraft.getInstance().font.width(effectTooltip) - 22, effectTooltip);
                                 y += 17;
                             }
@@ -343,9 +342,21 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         }
     }
 
-    private void renderIconValue(GuiGraphics guiGraphics, int x, int y, String value) {
+    private void renderDefenseIconValue(GuiGraphics guiGraphics, int x, int y, double value) {
         Font font = Minecraft.getInstance().font;
-        guiGraphics.drawString(font, value, x + 19 - 2 - font.width(value), y + 6 + 3, 16777215, true);
+        String name = String.valueOf(Math.abs((int) value));
+        if (value > 0) {
+            name = "₊" + name;
+        } else if (value < 0) {
+            name = "₋" + name;
+        }
+        guiGraphics.drawString(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 16777215, true);
+    }
+
+    private void renderIconValue(GuiGraphics guiGraphics, int x, int y, double value) {
+        Font font = Minecraft.getInstance().font;
+        String name = String.valueOf(Math.abs((int) value));
+        guiGraphics.drawString(font, name, x + 19 - 2 - font.width(name), y + 6 + 3, 16777215, true);
     }
 
     private Component getDamageTypeComponent(int value, String type) {

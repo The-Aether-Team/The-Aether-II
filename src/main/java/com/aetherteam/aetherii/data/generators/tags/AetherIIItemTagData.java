@@ -47,6 +47,13 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
+        this.tag(AetherIITags.Items.TOOLS_TROWELS).add(
+                AetherIIItems.SKYROOT_TROWEL.get(),
+                AetherIIItems.HOLYSTONE_TROWEL.get(),
+                AetherIIItems.ZANITE_TROWEL.get(),
+                AetherIIItems.ARKENIUM_TROWEL.get(),
+                AetherIIItems.GRAVITITE_TROWEL.get()
+        );
         this.tag(AetherIITags.Items.TOOLS_SHORTSWORDS).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.HOLYSTONE_SHORTSWORD.get(),

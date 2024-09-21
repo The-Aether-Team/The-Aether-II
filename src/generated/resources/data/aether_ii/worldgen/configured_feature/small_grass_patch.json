@@ -6,13 +6,27 @@
         "type": "aether_ii:aether_grass",
         "config": {
           "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "aether_ii:aether_short_grass",
-              "Properties": {
-                "grass_type": "default"
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "aether_ii:aether_short_grass",
+                  "Properties": {
+                    "grass_type": "default"
+                  }
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:highland_fern",
+                  "Properties": {
+                    "grass_type": "default"
+                  }
+                },
+                "weight": 1
               }
-            }
+            ]
           }
         }
       },

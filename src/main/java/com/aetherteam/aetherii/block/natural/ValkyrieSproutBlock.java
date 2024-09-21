@@ -70,4 +70,9 @@ public class ValkyrieSproutBlock extends AetherBushBlock implements Bonemealable
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Shapes.empty();
     }
+
+    @Override
+    protected float getMaxHorizontalOffset() {
+        return 0.175F;
+    }
 }

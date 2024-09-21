@@ -8,11 +8,14 @@
       "noise_to_count_ratio": 40
     },
     {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "WORLD_SURFACE_WG"
+      "type": "aether_ii:improved_layer_placement",
+      "count": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 1,
+        "min_inclusive": 0
+      },
+      "heightmap": "WORLD_SURFACE_WG",
+      "verticalBounds": 4
     },
     {
       "type": "minecraft:biome"

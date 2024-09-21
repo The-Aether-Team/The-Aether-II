@@ -137,6 +137,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.BLUEBERRY.get(), "consumables/");
         this.item(AetherIIItems.ENCHANTED_BLUEBERRY.get(), "consumables/");
         this.item(AetherIIItems.ORANGE.get(), "consumables/");
+        this.item(AetherIIItems.SATIVAL_BULB.get(), "consumables/");
         this.item(AetherIIItems.WYNDBERRY.get(), "consumables/");
         this.item(AetherIIItems.ENCHANTED_WYNDBERRY.get(), "consumables/");
         this.item(AetherIIItems.GREEN_SWET_JELLY.get(), "consumables/");
@@ -232,12 +233,15 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
-        this.itemBlock(AetherIIBlocks.FLOWERING_BRYALINN_MOSS_CARPET.get());
+        this.itemBlockFlat(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), "natural/");
+        this.itemBlockFlatItem(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get());
+        this.itemBlock(AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
         this.itemBlock(AetherIIBlocks.FERROSITE_SAND.get());
         this.itemBlock(AetherIIBlocks.FERROSITE.get());
         this.itemBlock(AetherIIBlocks.RUSTED_FERROSITE.get());
+        this.itemBlockFlat(AetherIIBlocks.MAGNETIC_SHROOM.get(), "natural/");
 
         // Arctic
         this.itemBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
@@ -248,9 +252,16 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockFlat(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get(), "natural/");
+        this.itemBlock(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get());
+        this.itemBlockFlat(AetherIIBlocks.SHAYELINN_MOSS_VINES.get(), "natural/");
 
         // Irradiated
         this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
+        this.itemBlock(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
+        this.itemBlock(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
+        this.itemBlockFlat(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), "natural/");
+        this.itemBlockFlatItem(AetherIIBlocks.TARAHESP_FLOWERS.get());
 
         // Ores
         this.itemBlock(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
@@ -353,10 +364,18 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlockGrass(AetherIIBlocks.AETHER_SHORT_GRASS.get(), "natural/");
         this.itemBlockGrass(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), "natural/");
         this.itemBlockGrass(AetherIIBlocks.AETHER_LONG_GRASS.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.HIGHLAND_FERN.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.SHIELD_FERN.get(), "natural/");
 
         // Flowers
         this.itemBlockFlat(AetherIIBlocks.HESPEROSE.get(), "natural/");
         this.itemBlockFlat(AetherIIBlocks.TARABLOOM.get(), "natural/");
+        this.itemBlockFlat(AetherIIBlocks.POASPROUT.get(), "natural/");
+        this.itemBlockFlatItem(AetherIIBlocks.LILICHIME.get());
+        this.itemBlockFlatItem(AetherIIBlocks.PLURACIAN.get());
+        this.itemBlockFlat0(AetherIIBlocks.SATIVAL_SHOOT.get());
+        this.itemBlockFlatItem(AetherIIBlocks.HOLPUPEA.get());
+        this.itemBlockFlat0(AetherIIBlocks.BLADE_POA.get());
         this.itemBlockFlat(AetherIIBlocks.AECHOR_CUTTING.get(), "natural/");
 
         // Bushes
@@ -368,7 +387,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.orangeTree(AetherIIBlocks.ORANGE_TREE.get());
 
         // Valkyrie Sprout
-        this.valkyrieSprout(AetherIIBlocks.VALKYRIE_SPROUT.get());
+        this.itemBlockFlat0(AetherIIBlocks.VALKYRIE_SPROUT.get());
 
         // Ground Decoration
         this.item(AetherIIBlocks.SKYROOT_TWIG.asItem(), "miscellaneous/");

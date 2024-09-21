@@ -17,6 +17,7 @@
   },
   "features": [
     [
+      "aether_ii:noise_lake_swamp",
       "aether_ii:coast_ferrosite_sand",
       "aether_ii:cloudbed"
     ],
@@ -45,11 +46,19 @@
       "aether_ii:water_spring"
     ],
     [
+      "aether_ii:glistening_swamp_trees",
+      "aether_ii:glistening_swamp_trees_sunken",
+      "aether_ii:small_grass_patch",
+      "aether_ii:medium_grass_patch",
+      "aether_ii:large_grass_patch",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
       "aether_ii:coarse_aether_dirt_overhang",
-      "aether_ii:blueberry_bush_patch"
+      "aether_ii:highlands_flower_patch",
+      "aether_ii:magnetic_flower_patch",
+      "aether_ii:blueberry_bush_patch",
+      "aether_ii:magnetic_shroom_patch"
     ],
     [
       "aether_ii:high_storm_aercloud",
