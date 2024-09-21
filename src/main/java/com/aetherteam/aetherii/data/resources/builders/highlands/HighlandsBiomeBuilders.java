@@ -225,6 +225,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome glisteningSwampBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
+                        .addFeature(GenerationStep.Decoration.FLUID_SPRINGS, HighlandsPlacedFeatures.WATER_SPRING_BONUS)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GLISTENING_SWAMP_TREES)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.GLISTENING_SWAMP_TREES_SUNKEN)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.SMALL_GRASS_PATCH)

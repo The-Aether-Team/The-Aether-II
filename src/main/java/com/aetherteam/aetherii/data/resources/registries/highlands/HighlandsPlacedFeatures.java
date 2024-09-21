@@ -121,6 +121,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WATER_POND_UNDERGROUND = createKey("water_pond_underground");
     public static final ResourceKey<PlacedFeature> WATER_POND_TUNDRA = createKey("water_pond_tundra");
     public static final ResourceKey<PlacedFeature> WATER_SPRING = createKey("water_spring");
+    public static final ResourceKey<PlacedFeature> WATER_SPRING_BONUS = createKey("water_spring_bonus");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = createKey("noise_lake_arctic");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_SWAMP = createKey("noise_lake_swamp");
@@ -573,6 +574,11 @@ public class HighlandsPlacedFeatures {
                 CountPlacement.of(15),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.aboveBottom(256)),
+                BiomeFilter.biome());
+        register(context, WATER_SPRING_BONUS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WATER_SPRING),
+                CountPlacement.of(20),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.aboveBottom(200)),
                 BiomeFilter.biome());
         register(context, NOISE_LAKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE), BiomeFilter.biome());
         register(context, NOISE_LAKE_ARCTIC, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE_ARCTIC), BiomeFilter.biome());
