@@ -80,11 +80,11 @@ public class InfectedGuardianTreePools {
         context.register(PATHS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_01"), 4),
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_02"), 3),
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_03"), 2),
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_01"), 2),
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_02"), 1),
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_03"), 3),
                         Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/corner"), 2),
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/t_crossing"), 1)
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/t_crossing"), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

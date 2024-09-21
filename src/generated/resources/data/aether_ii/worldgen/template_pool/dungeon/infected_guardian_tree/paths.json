@@ -10,7 +10,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 4
+      "weight": 2
     },
     {
       "element": {
@@ -22,7 +22,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 3
+      "weight": 1
     },
     {
       "element": {
@@ -34,7 +34,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 3
     },
     {
       "element": {
@@ -58,7 +58,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 3
     }
   ],
   "fallback": "minecraft:empty"
