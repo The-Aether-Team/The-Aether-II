@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -1394,6 +1395,9 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
+                        0.275,
+                        BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
+                        DensityFunctions.zero(),
                         NoiseLakeFeature.Type.LAKE,
                         false
                 ));
@@ -1413,6 +1417,9 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
                                 )
                         ),
+                        0.3,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        DensityFunctions.zero(),
                         NoiseLakeFeature.Type.LAKE,
                         true
                 ));
@@ -1439,6 +1446,9 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
+                        0.25,
+                        BlockStateProvider.simple(AetherIIBlocks.FERROSITE_MUD.get()),
+                        DensityFunctions.zero(),
                         NoiseLakeFeature.Type.SWAMP,
                         false
                 ));

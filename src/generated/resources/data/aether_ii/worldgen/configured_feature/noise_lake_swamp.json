@@ -2,6 +2,14 @@
   "type": "aether_ii:noise_lake",
   "config": {
     "type": "swamp",
+    "coast_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:ferrosite_mud"
+      }
+    },
+    "coast_noise": 0.0,
+    "coast_noise_start_value": 0.25,
     "frozen": false,
     "height": {
       "value": 124
