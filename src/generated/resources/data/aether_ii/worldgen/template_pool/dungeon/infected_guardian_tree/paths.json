@@ -4,9 +4,7 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:dungeon/infected_guardian_tree/paths/path_01",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
         "replace_air": false
       },
@@ -16,9 +14,7 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:dungeon/infected_guardian_tree/paths/path_02",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
         "replace_air": false
       },
@@ -28,9 +24,7 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:dungeon/infected_guardian_tree/paths/path_03",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
         "replace_air": false
       },
@@ -40,9 +34,7 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:dungeon/infected_guardian_tree/paths/corner",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
         "replace_air": false
       },
@@ -52,9 +44,7 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:dungeon/infected_guardian_tree/paths/t_crossing",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
         "replace_air": false
       },

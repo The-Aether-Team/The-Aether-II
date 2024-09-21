@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.resources.registries.pools;
 
+import com.aetherteam.aetherii.data.resources.registries.AetherIIProcessorLists;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -36,6 +37,8 @@ public class InfectedGuardianTreePools {
         HolderGetter<PlacedFeature> placement = context.lookup(Registries.PLACED_FEATURE);
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
+
+        Holder<StructureProcessorList> processorDungeon = processors.getOrThrow(AetherIIProcessorLists.INFECTED_GUARDIAN_TREE);
 
         context.register(ENTRANCE, new StructureTemplatePool(
                 fallback,
@@ -80,11 +83,11 @@ public class InfectedGuardianTreePools {
         context.register(PATHS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_01"), 2),
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_02"), 1),
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_03"), 3),
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/corner"), 2),
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/t_crossing"), 3)
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_01", processorDungeon), 2),
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_02", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/path_03", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/corner", processorDungeon), 2),
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/paths/t_crossing", processorDungeon), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -121,7 +124,7 @@ public class InfectedGuardianTreePools {
         context.register(ROOMS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/rooms/room_01"), 1)
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/rooms/room_01", processorDungeon), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
