@@ -176,9 +176,9 @@ public class AetherIIDensityFunctionBuilders {
                 .addPoint(-0.45F, 1.5F)
                 .addPoint(-0.4F, 7.5F)
                 .addPoint(-0.325F, ridgeSpline)
-                .addPoint(0.575F, ridgeSpline)
-                .addPoint(0.65F, 7.5F)
-                .addPoint(0.725F, 1.0F)
+                .addPoint(0.525F, ridgeSpline)
+                .addPoint(0.6F, 7.5F)
+                .addPoint(0.675F, 1.0F)
                 .build();
 
         return CubicSpline.builder(erosion)
