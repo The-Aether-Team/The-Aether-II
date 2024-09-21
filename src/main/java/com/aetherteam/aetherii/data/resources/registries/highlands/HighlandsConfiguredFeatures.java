@@ -1436,7 +1436,7 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState()
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
                         NoiseLakeFeature.Type.SWAMP,
