@@ -143,8 +143,6 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LOWER_GREEN_AERCLOUD = createKey("lower_green_aercloud");
     public static final ResourceKey<PlacedFeature> LOWER_PURPLE_AERCLOUD = createKey("lower_purple_aercloud");
 
-    public static final ResourceKey<PlacedFeature> INFECTED_GUARDIAN_TREE_ENTRANCE = createKey("infected_guardian_tree_entrance");
-
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         bootstrapSurface(context);
@@ -537,8 +535,6 @@ public class HighlandsPlacedFeatures {
         register(context, FREEZE_TOP_LAYER_TUNDRA, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.FREEZE_TOP_LAYER_TUNDRA), BiomeFilter.biome());
 
         register(context, CLOUDBED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
-
-        register(context, INFECTED_GUARDIAN_TREE_ENTRANCE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_GUARDIAN_TREE_ENTRANCE));
     }
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {

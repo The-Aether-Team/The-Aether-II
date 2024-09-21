@@ -2,9 +2,13 @@
   "elements": [
     {
       "element": {
-        "element_type": "minecraft:feature_pool_element",
-        "feature": "aether_ii:infected_guardian_tree_entrance",
-        "projection": "rigid"
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:dungeon/infected_guardian_tree/entrance",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
       },
       "weight": 1
     }

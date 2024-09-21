@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.data.resources.registries.pools;
 
-import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsPlacedFeatures;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
@@ -10,12 +9,12 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 public class InfectedGuardianTreePools {
-    public static final ResourceKey<StructureTemplatePool> LOBBIES = AetherIIPools.createKey("dungeon/infected_guardian_tree/lobbies");
     public static final ResourceKey<StructureTemplatePool> ENTRANCE = AetherIIPools.createKey("dungeon/infected_guardian_tree/entrance");
+    public static final ResourceKey<StructureTemplatePool> LOBBIES = AetherIIPools.createKey("dungeon/infected_guardian_tree/lobbies");
 
     public static final ResourceKey<StructureTemplatePool> MAIN_PATH_FLOOR_1 = AetherIIPools.createKey("dungeon/infected_guardian_tree/main_path/floor_1");
     public static final ResourceKey<StructureTemplatePool> MAIN_PATH_FLOOR_2 = AetherIIPools.createKey("dungeon/infected_guardian_tree/main_path/floor_2");
@@ -36,20 +35,19 @@ public class InfectedGuardianTreePools {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
         HolderGetter<PlacedFeature> placement = context.lookup(Registries.PLACED_FEATURE);
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
+        HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
 
-        //HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
-
+        context.register(ENTRANCE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/entrance"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
         context.register(LOBBIES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPool("dungeon/infected_guardian_tree/lobbies/lobby_01"), 1)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
-        context.register(ENTRANCE, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placement.getOrThrow(HighlandsPlacedFeatures.INFECTED_GUARDIAN_TREE_ENTRANCE)), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
