@@ -49,6 +49,6 @@ public class AetherIIStructures {
 
         context.register(INFECTED_GUARDIAN_TREE, new AetherJigsawStructure(
                 AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
-                templatePools.getOrThrow(InfectedGuardianTreePools.ENTRANCE), Optional.empty(), 20, ConstantHeight.of(VerticalAnchor.absolute(-16)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 128, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                templatePools.getOrThrow(InfectedGuardianTreePools.ENTRANCE), Optional.empty(), 15, ConstantHeight.of(VerticalAnchor.absolute(-16)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 128, 128, 256, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
     }
 }

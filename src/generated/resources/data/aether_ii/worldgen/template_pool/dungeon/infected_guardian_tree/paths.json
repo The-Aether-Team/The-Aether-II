@@ -1,0 +1,65 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:dungeon/infected_guardian_tree/paths/path_01",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:dungeon/infected_guardian_tree/paths/path_02",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:dungeon/infected_guardian_tree/paths/path_03",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:dungeon/infected_guardian_tree/paths/corner",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:dungeon/infected_guardian_tree/paths/t_crossing",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}
