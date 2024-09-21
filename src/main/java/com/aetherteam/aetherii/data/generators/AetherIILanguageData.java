@@ -887,6 +887,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Structures
         this.addStructure(AetherIIStructures.OUTPOST, "Outpost");
+        this.addStructure(AetherIIStructures.CAMP_HIGHFIELDS, "Camp Highfields");
+        this.addStructure(AetherIIStructures.INFECTED_GUARDIAN_TREE, "Infected Guardian Tree");
 
 
         // Attributes
