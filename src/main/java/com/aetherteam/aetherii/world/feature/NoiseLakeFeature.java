@@ -11,6 +11,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.HalfTransparentBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -30,6 +31,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         int chunkZ = pos.getZ() - (pos.getZ() % 16);
         int height = config.height().getMinValue();
         double noiseStartValue = config.noiseStartValue();
+        double coastNoiseStartValue = config.coastNoiseStartValue();
 
         // Generates this feature chunk-wise
         for (int x = 0; x < 16; x++) {
@@ -37,20 +39,34 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 int xCoord = chunkX + x;
                 int zCoord = chunkZ + z;
 
-                placeLakeLayer(context, xCoord, height, zCoord, noiseStartValue, 0.45);
-                placeLakeLayer(context, xCoord, height - 1, zCoord, noiseStartValue + 0.025, 0.4);
-                placeLakeLayer(context, xCoord, height - 2, zCoord, noiseStartValue + 0.04, 0.35);
-                placeLakeLayer(context, xCoord, height - 3, zCoord, noiseStartValue + 0.045, 0.3);
-                placeLakeLayer(context, xCoord, height - 4, zCoord, noiseStartValue + 0.05, 0.25);
-                placeLakeLayer(context, xCoord, height - 5, zCoord, noiseStartValue + 0.055, 0.175);
-                placeLakeLayer(context, xCoord, height - 6, zCoord, noiseStartValue + 0.0625, 0.1);
+                DensityFunction coastNoise = config.coastNoise();
+                DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(context.level().getSeed());
+                coastNoise.mapAll(visitor);
+                double coast = coastNoise.compute(new DensityFunction.SinglePointContext(xCoord, height, zCoord));
+
+                BlockPos layerPos = new BlockPos(xCoord, height, zCoord);
+
+                placeLakeLayer(context, config.coastBlock().getState(context.random(), layerPos.above()), layerPos.above(), coastNoiseStartValue + coast, noiseStartValue, 1.5);
+                placeLakeLayer(context, config.coastBlock().getState(context.random(), layerPos), layerPos, coastNoiseStartValue + coast + 0.02, noiseStartValue, 1.5);
+
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(), noiseStartValue + 0.025, 1.5, 0.8);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(2), noiseStartValue + 0.04, 1.5, 0.75);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(3), noiseStartValue + 0.045, 1.5, 0.7);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(4), noiseStartValue + 0.05, 1.5, 0.625);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(5), noiseStartValue + 0.055, 1.5, 0.55);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(6), noiseStartValue + 0.06, 1.5, 0.475);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(7), noiseStartValue + 0.065, 1.5, 0.4);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(8), noiseStartValue + 0.07, 1.5, 0.3);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(9), noiseStartValue + 0.075, 1.5, 0.2);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(10), noiseStartValue + 0.082, 1.5, 0.1);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(11), noiseStartValue + 0.05, 1.5, 0.035);
             }
         }
         return true;
     }
 
     @SuppressWarnings("deprecation")
-    public void placeLakeLayer(FeaturePlaceContext<NoiseLakeConfiguration> context, int x, int y, int z, double noiseValue, double floorNoiseValue) {
+    public void placeLakeLayer(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockState state, BlockPos pos, double noiseMin, double noiseMax, double floorNoiseValue) {
         NoiseLakeConfiguration config = context.config();
 
         DensityFunction lakeNoise = config.lakeNoise();
@@ -63,52 +79,52 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         lakeFloorNoise.mapAll(visitor);
         lakeBarrierNoise.mapAll(visitor);
 
-        double density = lakeNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
-        double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
-        double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(x, y, z));
+        double density = lakeNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
 
         // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
-        if (density > noiseValue && density < 1.5) {
+        if (density > noiseMin && density < noiseMax) {
             if (floor < floorNoiseValue) {
-                if (!level.isEmptyBlock(new BlockPos(x, y, z))
-                        && !level.isEmptyBlock(new BlockPos(x + 1, y, z))
-                        && !level.isEmptyBlock(new BlockPos(x - 1, y, z))
-                        && !level.isEmptyBlock(new BlockPos(x, y - 1, z))
-                        && !level.isEmptyBlock(new BlockPos(x, y, z + 1))
-                        && !level.isEmptyBlock(new BlockPos(x, y, z - 1))
-                        && !level.isEmptyBlock(new BlockPos(x + barrierThickness(barrier), y, z))
-                        && !level.isEmptyBlock(new BlockPos(x - barrierThickness(barrier), y, z))
-                        && !level.isEmptyBlock(new BlockPos(x, y - barrierThickness(barrier), z))
-                        && !level.isEmptyBlock(new BlockPos(x, y, z + barrierThickness(barrier)))
-                        && !level.isEmptyBlock(new BlockPos(x, y, z - barrierThickness(barrier)))
-                        && (!level.getBlockState(new BlockPos(x, y + 1, z)).isSolid()
-                        || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof HalfTransparentBlock
-                        || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof BushBlock
+                if (!level.isEmptyBlock(pos)
+                        && !level.isEmptyBlock(pos.north())
+                        && !level.isEmptyBlock(pos.east())
+                        && !level.isEmptyBlock(pos.south())
+                        && !level.isEmptyBlock(pos.west())
+                        && !level.isEmptyBlock(pos.below())
+                        && !level.isEmptyBlock(pos.east(barrierThickness(barrier)))
+                        && !level.isEmptyBlock(pos.north(barrierThickness(barrier)))
+                        && !level.isEmptyBlock(pos.south(barrierThickness(barrier)))
+                        && !level.isEmptyBlock(pos.west(barrierThickness(barrier)))
+                        && !level.isEmptyBlock(pos.below(barrierThickness(barrier)))
+                        && (!level.getBlockState(pos.above()).isSolid()
+                        || level.getBlockState(pos.above()).getBlock() instanceof HalfTransparentBlock
+                        || level.getBlockState(pos.above()).getBlock() instanceof BushBlock
                 )
                 ) {
-                    this.setBlock(level, new BlockPos(x, y, z), Blocks.WATER.defaultBlockState());
-                    this.setBlock(level, new BlockPos(x, y - 1, z), config.underwaterBlock().getState(context.random(), new BlockPos(x, y - 1, z)));
-                    if (level.isEmptyBlock(new BlockPos(x, y - 2, z))) {
-                        this.setBlock(level, new BlockPos(x, y - 2, z), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
+                    this.setBlock(level, pos, state);
+                    this.setBlock(level, pos.below(), config.underwaterBlock().getState(context.random(), pos.below()));
+                    if (level.isEmptyBlock(pos.below(2))) {
+                        this.setBlock(level, pos.below(2), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
                     }
 
                     // Removes Floating Grass above the lakes
-                    if (level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof BushBlock || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof TwigBlock || level.getBlockState(new BlockPos(x, y + 1, z)).getBlock() instanceof RockBlock) {
-                        this.setBlock(level, new BlockPos(x, y + 1, z), Blocks.AIR.defaultBlockState());
+                    if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
+                        this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
                     }
                 }
             }
 
             // Generates waterfalls
-            if (y == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(new BlockPos(x, y, z)).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) && !config.frozen()) {
-                level.setBlock(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
-                level.scheduleTick(new BlockPos(x, y, z), Fluids.WATER.defaultFluidState().getType(), 0);
+            if (pos.getY() == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(pos).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) && !config.frozen()) {
+                level.setBlock(pos, Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
+                level.scheduleTick(pos, Fluids.WATER.defaultFluidState().getType(), 0);
             }
 
             // Freezes Top if "frozen" is true
-            if (y == config.height().getMinValue() && level.getBlockState(new BlockPos(x, y, z)).is(Blocks.WATER) && config.frozen()) {
-                this.setBlock(level, new BlockPos(x, y, z), AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
+            if (pos.getY() == config.height().getMinValue() && level.getBlockState(pos).is(Blocks.WATER) && config.frozen()) {
+                this.setBlock(level, pos, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
             }
         }
     }
