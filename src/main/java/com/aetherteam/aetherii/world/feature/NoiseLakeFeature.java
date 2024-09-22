@@ -46,27 +46,28 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
                 BlockPos layerPos = new BlockPos(xCoord, height, zCoord);
 
-                placeLakeLayer(context, config.coastBlock().getState(context.random(), layerPos.above()), layerPos.above(), coastNoiseStartValue + coast, noiseStartValue, 1.5);
-                placeLakeLayer(context, config.coastBlock().getState(context.random(), layerPos), layerPos, coastNoiseStartValue + coast + 0.02, noiseStartValue, 1.5);
+                placeLakeLayer(context, config.coastBlock().getState(context.random(), layerPos.above()), layerPos.above(2), coastNoiseStartValue + coast, 1.0);
+                placeLakeLayer(context, config.coastBlock().getState(context.random(), layerPos), layerPos.above(), coastNoiseStartValue + coast, 1.0);
 
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(), noiseStartValue + 0.025, 1.5, 0.8);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(2), noiseStartValue + 0.04, 1.5, 0.75);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(3), noiseStartValue + 0.045, 1.5, 0.7);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(4), noiseStartValue + 0.05, 1.5, 0.625);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(5), noiseStartValue + 0.055, 1.5, 0.55);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(6), noiseStartValue + 0.06, 1.5, 0.475);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(7), noiseStartValue + 0.065, 1.5, 0.4);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(8), noiseStartValue + 0.07, 1.5, 0.3);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(9), noiseStartValue + 0.075, 1.5, 0.2);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(10), noiseStartValue + 0.082, 1.5, 0.1);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(11), noiseStartValue + 0.05, 1.5, 0.035);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos, noiseStartValue, 1.0);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(), noiseStartValue + 0.025, 0.8);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(2), noiseStartValue + 0.04, 0.75);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(3), noiseStartValue + 0.045, 0.7);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(4), noiseStartValue + 0.05, 0.625);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(5), noiseStartValue + 0.055, 0.55);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(6), noiseStartValue + 0.06, 0.475);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(7), noiseStartValue + 0.065, 0.4);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(8), noiseStartValue + 0.07, 0.3);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(9), noiseStartValue + 0.075, 0.2);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(10), noiseStartValue + 0.082, 0.1);
+                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(11), noiseStartValue + 0.05, 0.035);
             }
         }
         return true;
     }
 
     @SuppressWarnings("deprecation")
-    public void placeLakeLayer(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockState state, BlockPos pos, double noiseMin, double noiseMax, double floorNoiseValue) {
+    public void placeLakeLayer(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockState state, BlockPos pos, double noiseMin, double floorNoiseValue) {
         NoiseLakeConfiguration config = context.config();
 
         DensityFunction lakeNoise = config.lakeNoise();
@@ -85,7 +86,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
         // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
-        if (density > noiseMin && density < noiseMax) {
+        if (density > noiseMin && density < 1.5) {
             if (floor < floorNoiseValue) {
                 if (!level.isEmptyBlock(pos)
                         && !level.isEmptyBlock(pos.north())
