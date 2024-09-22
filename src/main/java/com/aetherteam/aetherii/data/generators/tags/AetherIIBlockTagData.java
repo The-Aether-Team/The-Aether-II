@@ -881,7 +881,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get());
-        this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(AetherIIBlocks.FERROSITE_SAND.get());
+        this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(
+                AetherIIBlocks.FERROSITE_SAND.get(),
+                AetherIIBlocks.FERROSITE_MUD.get()
+        );
 
 
         // Forge
