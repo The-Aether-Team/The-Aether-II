@@ -41,8 +41,8 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 BlockPos layerPos = new BlockPos(xCoord, height, zCoord);
 
                 if (!config.frozen()) {
-                placeShore(context, layerPos.above(), false);
-                placeShore(context, layerPos, true);
+                    placeShore(context, layerPos.above(), false);
+                    placeShore(context, layerPos, true);
                 }
 
                 placeLakeLayer(context, layerPos, noiseStartValue, 1.0);
