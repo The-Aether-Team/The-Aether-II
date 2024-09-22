@@ -1,0 +1,17 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:dungeon/infected_guardian_tree/lobbies/lobby_01",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.google.common.collect.ImmutableList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP_HIGHFIELDS = createKey("camp_highfields");
+    public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
         register(context, CAMP_HIGHFIELDS, ImmutableList.of(
@@ -27,6 +29,14 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.2F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.25F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 0)),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.15F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 1))
+                ))
+        ));
+
+        register(context, INFECTED_GUARDIAN_TREE, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new TagMatchTest(AetherIITags.Blocks.INFECTED_GUARDIAN_TREE_REPLACEABLES), new BlockMatchTest(Blocks.AIR), Blocks.AIR.defaultBlockState()),
+                        new ProcessorRule(new TagMatchTest(AetherIITags.Blocks.INFECTED_GUARDIAN_TREE_REPLACEABLES), new BlockMatchTest(Blocks.WATER), Blocks.WATER.defaultBlockState()),
+                        new ProcessorRule(new TagMatchTest(AetherIITags.Blocks.INFECTED_GUARDIAN_TREE_REPLACEABLES), new BlockMatchTest(AetherIIBlocks.COLD_AERCLOUD.get()), AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())
                 ))
         ));
     }

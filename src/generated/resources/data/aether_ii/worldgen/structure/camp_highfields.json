@@ -6,7 +6,7 @@
   "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": 32,
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
-  "size": 20,
+  "size": 4,
   "spawn_overrides": {},
   "start_height": {
     "absolute": 0

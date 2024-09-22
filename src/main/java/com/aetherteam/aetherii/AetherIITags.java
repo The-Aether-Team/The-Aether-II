@@ -61,6 +61,8 @@ public class AetherIITags {
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
         public static final TagKey<Block> SWET_SPAWNABLE_ON = tag("swet_spawnable_on");
 
+        public static final TagKey<Block> INFECTED_GUARDIAN_TREE_REPLACEABLES = tag("infected_guardian_tree_replaceables");
+
         public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");
 
         public static final TagKey<Block> HOLYSTONE_ABILITY_GUARANTEED = tag("holystone_ability_guaranteed");
@@ -182,6 +184,7 @@ public class AetherIITags {
 
         public static final TagKey<Biome> HAS_STRUCTURE_OUTPOST = tag("has_structure/outpost");
         public static final TagKey<Biome> HAS_STRUCTURE_CAMP_HIGHFIELDS = tag("has_structure/camp_highfields");
+        public static final TagKey<Biome> HAS_STRUCTURE_INFECTED_GUARDIAN_TREE = tag("has_structure/infected_guardian_tree");
 
         public static final TagKey<Biome> MYCELIUM_CONVERSION = tag("mycelium_conversion");
         public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");

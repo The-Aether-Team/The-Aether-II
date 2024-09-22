@@ -20,8 +20,8 @@ public class OutpostPools {
         context.register(OUTPOST, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPool("outpost/outpost"), 1),
-                        Pair.of(AetherIIPools.aetherPool("outpost/tall_outpost"), 1)
+                        Pair.of(AetherIIPools.aetherPoolReplace("outpost/outpost"), 1),
+                        Pair.of(AetherIIPools.aetherPoolReplace("outpost/tall_outpost"), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

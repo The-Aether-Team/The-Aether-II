@@ -50,10 +50,6 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
         builder.add(HALF, AGE);
     }
 
-    /**
-     * Warning for "deprecation" is suppressed because the method is fine to override.
-     */
-    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         int age = state.getValue(AGE);
@@ -104,9 +100,7 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
 
     /**
      * Ages the Orange Tree up a state with a chance from a random tick.<br><br>
-     * Warning for "deprecation" is suppressed because the method is fine to override.
      */
-    @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
@@ -148,9 +142,8 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
         int age = state.getValue(AGE);
         if (age > SINGLE_AGE_MAX) {
             if (!level.isClientSide()) {
-                if (player.isCreative()) {
-                    preventCreativeDropFromBottomPart(level, pos, state, player);
-                } else {
+                preventCreativeDropFromBottomPart(level, pos, state, player);
+                if (!player.isCreative()) {
                     if (doubleBlockHalf == DoubleBlockHalf.LOWER) {
                         pos = pos.above();
                     }
@@ -190,7 +183,8 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
-        if (doubleBlockHalf == DoubleBlockHalf.UPPER) {
+        int age = state.getValue(AGE);
+        if (doubleBlockHalf == DoubleBlockHalf.UPPER && age == DOUBLE_AGE_MAX) {
             return true;
         }
         return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);

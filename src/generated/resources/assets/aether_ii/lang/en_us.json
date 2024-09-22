@@ -824,6 +824,8 @@
   "menu.aether_ii.artisans_bench": "Artisan's Bench",
   "menu.aether_ii.holystone_furnace": "Holystone Furnace",
   "pack.aether_ii.mod.description": "Aether II Resources",
+  "structure.aether_ii.camp_highfields": "Camp Highfields",
+  "structure.aether_ii.infected_guardian_tree": "Infected Guardian Tree",
   "structure.aether_ii.outpost": "Outpost",
   "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce": "Blue Aercloud bounces",
   "subtitles.aether_ii.block.aether_portal.ambient": "Aether Portal whooshes",
