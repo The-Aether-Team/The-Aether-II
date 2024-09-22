@@ -40,7 +40,10 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
                 BlockPos layerPos = new BlockPos(xCoord, height, zCoord);
 
-                placeCoast(context, layerPos.above());
+                if (!config.frozen()) {
+                placeShore(context, layerPos.above(), false);
+                placeShore(context, layerPos, true);
+                }
 
                 placeLakeLayer(context, layerPos, noiseStartValue, 1.0);
                 placeLakeLayer(context, layerPos.below(), noiseStartValue + 0.025, 0.8);
@@ -123,22 +126,27 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         }
     }
 
-    public void placeCoast(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos) {
+    public void placeShore(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos, boolean secondary) {
         NoiseLakeConfiguration config = context.config();
 
         DensityFunction lakeNoise = config.lakeNoise();
+        DensityFunction shoreNoise = config.shoreNoise();
+
         DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(context.level().getSeed());
+
         lakeNoise.mapAll(visitor);
+        shoreNoise.mapAll(visitor);
+
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        double shore = shoreNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
 
         // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
-        if (density > config.coastNoiseStartValue()) {
+        if (density > config.shoreStartValue() + shore) {
             if (level.getBlockState(pos).is(AetherIITags.Blocks.AETHER_DIRT)){
-                this.setBlock(level, pos, config.coastBlock().getState(context.random(), pos));
-                //this.setBlock(level, pos.below(), config.coastBlock().getState(context.random(), pos));
+                this.setBlock(level, pos, secondary ? config.secondaryShoreBlock().getState(context.random(), pos) : config.shoreBlock().getState(context.random(), pos));
 
-                // Removes Floating Grass above the lakes
+                // Removes Floating Grass above the shores
                 if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
                     this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
                 }

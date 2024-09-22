@@ -1397,7 +1397,8 @@ public class HighlandsConfiguredFeatures {
                         ),
                         0.29,
                         BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
-                        DensityFunctions.zero(),
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
                         false
                 ));
         register(context, NOISE_LAKE_ARCTIC, AetherIIFeatures.NOISE_LAKE.get(),
@@ -1407,16 +1408,23 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
                         0.3,
                         ConstantInt.of(124),
-                        new NoiseProvider(
-                                100L,
-                                new NormalNoise.NoiseParameters(0, 1.0),
-                                0.075F,
+                        new DualNoiseProvider(
+                                new InclusiveRange<>(1, 4),
+                                new NormalNoise.NoiseParameters(-6, 1.0),
+                                1.0F,
+                                2345L,
+                                new NormalNoise.NoiseParameters(-2, 1.0),
+                                1.0F,
                                 List.of(
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
                                 )
                         ),
                         0.3,
+                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
                         DensityFunctions.zero(),
                         true
@@ -1441,12 +1449,41 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
+                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
                                 )
                         ),
                         0.275,
-                        BlockStateProvider.simple(AetherIIBlocks.FERROSITE_MUD.get()),
-                        DensityFunctions.zero(),
+                        new DualNoiseProvider(
+                                new InclusiveRange<>(1, 4),
+                                new NormalNoise.NoiseParameters(-6, 1.0),
+                                1.0F,
+                                2345L,
+                                new NormalNoise.NoiseParameters(-2, 1.0),
+                                1.0F,
+                                List.of(
+                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()
+                                )
+                        ),
+                        new DualNoiseProvider(
+                                new InclusiveRange<>(1, 4),
+                                new NormalNoise.NoiseParameters(-6, 1.25),
+                                1.0F,
+                                2345L,
+                                new NormalNoise.NoiseParameters(-2, 1.0),
+                                1.0F,
+                                List.of(
+                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
+                                )
+                        ),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
                         false
                 ));
 
