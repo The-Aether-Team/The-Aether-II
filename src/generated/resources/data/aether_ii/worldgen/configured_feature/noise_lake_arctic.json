@@ -1,7 +1,6 @@
 {
   "type": "aether_ii:noise_lake",
   "config": {
-    "type": "lake",
     "coast_block": {
       "type": "minecraft:simple_state_provider",
       "state": {

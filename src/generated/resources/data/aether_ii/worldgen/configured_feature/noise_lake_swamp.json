@@ -1,7 +1,6 @@
 {
   "type": "aether_ii:noise_lake",
   "config": {
-    "type": "swamp",
     "coast_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
@@ -15,8 +14,8 @@
       "value": 124
     },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
-    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor_swamp",
-    "lake_noise": "aether_ii:highlands/lakes/noise",
+    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
+    "lake_noise": "aether_ii:highlands/lakes/noise_swamp",
     "noise_start_value": 0.3,
     "underwater_block": {
       "type": "minecraft:dual_noise_provider",
