@@ -177,6 +177,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOWERS = createKey("bryalinn_moss_flowers");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_VINES = createKey("bryalinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR = createKey("bryalinn_moss_floor");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_MOSS_FLOOR_SWAMP = createKey("bryalinn_moss_floor_swamp");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_CARPET = createKey("shayelinn_moss_carpet");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_VINES = createKey("shayelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_FLOOR = createKey("shayelinn_moss_floor");
@@ -1253,6 +1254,29 @@ public class HighlandsConfiguredFeatures {
                         0.5F
                 )
         );
+        register(
+                context,
+                BRYALINN_MOSS_FLOOR_SWAMP,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_DIRT,
+                        BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_CARPET)), 0.2F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_FLOWERS)), 0.3F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.1F)
+                                ),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(BRYALINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        3,
+                        0.925F,
+                        UniformInt.of(3, 5),
+                        0.65F
+                )
+        );
         register(context,
                 SHAYELINN_MOSS_CARPET,
                 Feature.RANDOM_PATCH,
@@ -1410,17 +1434,17 @@ public class HighlandsConfiguredFeatures {
                         ConstantInt.of(124),
                         new DualNoiseProvider(
                                 new InclusiveRange<>(1, 4),
-                                new NormalNoise.NoiseParameters(-6, 1.5),
+                                new NormalNoise.NoiseParameters(-6, 1.0),
                                 1.0F,
                                 2345L,
                                 new NormalNoise.NoiseParameters(-2, 1.0),
                                 1.0F,
                                 List.of(
-                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState(),
-                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
+                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
+                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState(),
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState()
+                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
                         0.3,
