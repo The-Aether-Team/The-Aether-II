@@ -40,7 +40,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.AETHER_DIRT.get(),
-                AetherIIBlocks.COARSE_AETHER_DIRT.get()
+                AetherIIBlocks.COARSE_AETHER_DIRT.get(),
+                AetherIIBlocks.FERROSITE_MUD.get()
         );
         this.tag(AetherIITags.Blocks.HOLYSTONE).add(
                 AetherIIBlocks.HOLYSTONE.get(),
