@@ -1410,13 +1410,13 @@ public class HighlandsConfiguredFeatures {
                         ConstantInt.of(124),
                         new DualNoiseProvider(
                                 new InclusiveRange<>(1, 4),
-                                new NormalNoise.NoiseParameters(-6, 1.0),
+                                new NormalNoise.NoiseParameters(-6, 1.5),
                                 1.0F,
                                 2345L,
                                 new NormalNoise.NoiseParameters(-2, 1.0),
                                 1.0F,
                                 List.of(
-                                        AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
+                                        AetherIIBlocks.HOLYSTONE.get().defaultBlockState(),
                                         AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState(),
                                         AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(),

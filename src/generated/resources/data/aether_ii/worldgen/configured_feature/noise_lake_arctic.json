@@ -41,14 +41,14 @@
       "seed": 2345,
       "slow_noise": {
         "amplitudes": [
-          1.0
+          1.5
         ],
         "firstOctave": -6
       },
       "slow_scale": 1.0,
       "states": [
         {
-          "Name": "aether_ii:shimmering_silt"
+          "Name": "aether_ii:holystone"
         },
         {
           "Name": "aether_ii:coarse_aether_dirt"
