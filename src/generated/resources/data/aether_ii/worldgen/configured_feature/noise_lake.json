@@ -8,7 +8,7 @@
       }
     },
     "coast_noise": 0.0,
-    "coast_noise_start_value": 0.275,
+    "coast_noise_start_value": 0.29,
     "frozen": false,
     "height": {
       "value": 124

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.RockBlock;
 import com.aetherteam.aetherii.block.natural.TwigBlock;
@@ -11,7 +12,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.HalfTransparentBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -31,7 +31,6 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         int chunkZ = pos.getZ() - (pos.getZ() % 16);
         int height = config.height().getMinValue();
         double noiseStartValue = config.noiseStartValue();
-        double coastNoiseStartValue = config.coastNoiseStartValue();
 
         // Generates this feature chunk-wise
         for (int x = 0; x < 16; x++) {
@@ -39,35 +38,29 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 int xCoord = chunkX + x;
                 int zCoord = chunkZ + z;
 
-                DensityFunction coastNoise = config.coastNoise();
-                DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(context.level().getSeed());
-                coastNoise.mapAll(visitor);
-                double coast = coastNoise.compute(new DensityFunction.SinglePointContext(xCoord, height, zCoord));
-
                 BlockPos layerPos = new BlockPos(xCoord, height, zCoord);
 
-                placeLakeLayer(context, config.coastBlock().getState(context.random(), layerPos.above()), layerPos.above(2), coastNoiseStartValue + coast, 1.0);
-                placeLakeLayer(context, config.coastBlock().getState(context.random(), layerPos), layerPos.above(), coastNoiseStartValue + coast, 1.0);
+                placeCoast(context, layerPos.above());
 
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos, noiseStartValue, 1.0);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(), noiseStartValue + 0.025, 0.8);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(2), noiseStartValue + 0.04, 0.75);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(3), noiseStartValue + 0.045, 0.7);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(4), noiseStartValue + 0.05, 0.625);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(5), noiseStartValue + 0.055, 0.55);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(6), noiseStartValue + 0.06, 0.475);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(7), noiseStartValue + 0.065, 0.4);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(8), noiseStartValue + 0.07, 0.3);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(9), noiseStartValue + 0.075, 0.2);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(10), noiseStartValue + 0.082, 0.1);
-                placeLakeLayer(context, Blocks.WATER.defaultBlockState(), layerPos.below(11), noiseStartValue + 0.05, 0.035);
+                placeLakeLayer(context, layerPos, noiseStartValue, 1.0);
+                placeLakeLayer(context, layerPos.below(), noiseStartValue + 0.025, 0.8);
+                placeLakeLayer(context, layerPos.below(2), noiseStartValue + 0.04, 0.75);
+                placeLakeLayer(context, layerPos.below(3), noiseStartValue + 0.045, 0.7);
+                placeLakeLayer(context, layerPos.below(4), noiseStartValue + 0.05, 0.625);
+                placeLakeLayer(context, layerPos.below(5), noiseStartValue + 0.055, 0.55);
+                placeLakeLayer(context, layerPos.below(6), noiseStartValue + 0.06, 0.475);
+                placeLakeLayer(context, layerPos.below(7), noiseStartValue + 0.065, 0.4);
+                placeLakeLayer(context, layerPos.below(8), noiseStartValue + 0.07, 0.3);
+                placeLakeLayer(context, layerPos.below(9), noiseStartValue + 0.075, 0.2);
+                placeLakeLayer(context, layerPos.below(10), noiseStartValue + 0.082, 0.1);
+                placeLakeLayer(context, layerPos.below(11), noiseStartValue + 0.05, 0.035);
             }
         }
         return true;
     }
 
     @SuppressWarnings("deprecation")
-    public void placeLakeLayer(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockState state, BlockPos pos, double noiseMin, double floorNoiseValue) {
+    public void placeLakeLayer(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos, double noiseValue, double floorNoiseValue) {
         NoiseLakeConfiguration config = context.config();
 
         DensityFunction lakeNoise = config.lakeNoise();
@@ -86,7 +79,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
         // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
-        if (density > noiseMin && density < 1.5) {
+        if (density > noiseValue && density < 1.5) {
             if (floor < floorNoiseValue) {
                 if (!level.isEmptyBlock(pos)
                         && !level.isEmptyBlock(pos.north())
@@ -104,7 +97,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                         || level.getBlockState(pos.above()).getBlock() instanceof BushBlock
                 )
                 ) {
-                    this.setBlock(level, pos, state);
+                    this.setBlock(level, pos, Blocks.WATER.defaultBlockState());
                     this.setBlock(level, pos.below(), config.underwaterBlock().getState(context.random(), pos.below()));
                     if (level.isEmptyBlock(pos.below(2))) {
                         this.setBlock(level, pos.below(2), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
@@ -126,6 +119,29 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
             // Freezes Top if "frozen" is true
             if (pos.getY() == config.height().getMinValue() && level.getBlockState(pos).is(Blocks.WATER) && config.frozen()) {
                 this.setBlock(level, pos, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
+            }
+        }
+    }
+
+    public void placeCoast(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos) {
+        NoiseLakeConfiguration config = context.config();
+
+        DensityFunction lakeNoise = config.lakeNoise();
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(context.level().getSeed());
+        lakeNoise.mapAll(visitor);
+        double density = lakeNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+
+        // Determinds the block to place at specific noise values
+        WorldGenLevel level = context.level();
+        if (density > config.coastNoiseStartValue()) {
+            if (level.getBlockState(pos).is(AetherIITags.Blocks.AETHER_DIRT)){
+                this.setBlock(level, pos, config.coastBlock().getState(context.random(), pos));
+                //this.setBlock(level, pos.below(), config.coastBlock().getState(context.random(), pos));
+
+                // Removes Floating Grass above the lakes
+                if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
+                    this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+                }
             }
         }
     }

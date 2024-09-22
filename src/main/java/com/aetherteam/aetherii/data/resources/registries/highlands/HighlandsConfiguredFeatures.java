@@ -1395,7 +1395,7 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
-                        0.275,
+                        0.29,
                         BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         DensityFunctions.zero(),
                         false
@@ -1444,7 +1444,7 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
-                        0.25,
+                        0.275,
                         BlockStateProvider.simple(AetherIIBlocks.FERROSITE_MUD.get()),
                         DensityFunctions.zero(),
                         false
