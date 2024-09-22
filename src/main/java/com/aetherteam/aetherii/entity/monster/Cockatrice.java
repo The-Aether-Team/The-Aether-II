@@ -6,6 +6,9 @@ import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceRangedAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -22,6 +25,8 @@ import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class Cockatrice extends Monster implements RangedAttackMob {
 
@@ -123,12 +128,35 @@ public class Cockatrice extends Monster implements RangedAttackMob {
         double d3 = target.getZ() - this.getZ();
         double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.2F;
         dart.shoot(d1, d0 + d4, d3, 0.8F, 6.0F);
-        this.playSound(AetherIISoundEvents.COCKATRICE_SHOOT.value(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.playSound(AetherIISoundEvents.ENTITY_COCKATRICE_SHOOT.value(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(dart);
     }
 
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
         return effect.getEffect() != AetherIIEffects.VENOM.get() && super.canBeAffected(effect);
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AetherIISoundEvents.ENTITY_COCKATRICE_AMBIENT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_COCKATRICE_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherIISoundEvents.ENTITY_COCKATRICE_DEATH.get();
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(AetherIISoundEvents.ENTITY_COCKATRICE_STEP.get(), 0.15F, 1.0F);
     }
 }

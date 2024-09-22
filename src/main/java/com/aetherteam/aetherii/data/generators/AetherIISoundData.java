@@ -186,6 +186,90 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.entity.aerbunny.lift")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_TAEGORE_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TAEGORE_DEATH,
+                definition().with(sound("minecraft:mob/pig/death"))
+                        .subtitle("subtitles.aether.entity.phyg.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TAEGORE_HURT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TAEGORE_STEP,
+                definition().with(
+                        sound("minecraft:mob/pig/step1"),
+                        sound("minecraft:mob/pig/step2"),
+                        sound("minecraft:mob/pig/step3"),
+                        sound("minecraft:mob/pig/step4"),
+                        sound("minecraft:mob/pig/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_BURRUKAI_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_BURRUKAI_DEATH,
+                definition().with(sound("minecraft:mob/pig/death"))
+                        .subtitle("subtitles.aether.entity.phyg.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_BURRUKAI_HURT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_BURRUKAI_STEP,
+                definition().with(
+                        sound("minecraft:mob/pig/step1"),
+                        sound("minecraft:mob/pig/step2"),
+                        sound("minecraft:mob/pig/step3"),
+                        sound("minecraft:mob/pig/step4"),
+                        sound("minecraft:mob/pig/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_KIRRID_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_KIRRID_DEATH,
+                definition().with(sound("minecraft:mob/pig/death"))
+                        .subtitle("subtitles.aether.entity.phyg.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_KIRRID_HURT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_KIRRID_STEP,
+                definition().with(
+                        sound("minecraft:mob/pig/step1"),
+                        sound("minecraft:mob/pig/step2"),
+                        sound("minecraft:mob/pig/step3"),
+                        sound("minecraft:mob/pig/step4"),
+                        sound("minecraft:mob/pig/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_MOA_AMBIENT,
                 definition().with(sound("aether_ii:entity/moa/say"))
                         .subtitle("subtitles.aether.entity.moa.ambient")
@@ -220,14 +304,110 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether.entity.moa.egg")
         );
 
+        this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_DEATH,
+                definition().with(sound("minecraft:mob/pig/death"))
+                        .subtitle("subtitles.aether.entity.phyg.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_HURT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_STEP,
+                definition().with(
+                        sound("minecraft:mob/pig/step1"),
+                        sound("minecraft:mob/pig/step2"),
+                        sound("minecraft:mob/pig/step3"),
+                        sound("minecraft:mob/pig/step4"),
+                        sound("minecraft:mob/pig/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+
         this.add(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT,
                 definition().with(sound("aether_ii:entity/zephyr/shoot"))
                         .subtitle("subtitles.aether_ii.entity.zephyr.shoot")
         );
+        this.add(AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_ZEPHYR_DEATH,
+                definition().with(sound("minecraft:mob/pig/death"))
+                        .subtitle("subtitles.aether.entity.phyg.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_ZEPHYR_HURT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.hurt")
+        );
 
-        this.add(AetherIISoundEvents.COCKATRICE_SHOOT,
+        this.add(AetherIISoundEvents.ENTITY_TEMPEST_SHOOT,
+                definition().with(sound("aether_ii:entity/zephyr/shoot"))
+                        .subtitle("subtitles.aether_ii.entity.zephyr.shoot")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TEMPEST_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TEMPEST_DEATH,
+                definition().with(sound("minecraft:mob/pig/death"))
+                        .subtitle("subtitles.aether.entity.phyg.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TEMPEST_HURT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.hurt")
+        );
+
+        this.add(AetherIISoundEvents.ENTITY_COCKATRICE_SHOOT,
                 definition().with(sound("aether_ii:entity/projectile/shoot"))
                         .subtitle("subtitles.aether.entity.cockatrice.shoot")
+        );
+        this.add(AetherIISoundEvents.ENTITY_COCKATRICE_AMBIENT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.ambient")
+        );
+        this.add(AetherIISoundEvents.ENTITY_COCKATRICE_DEATH,
+                definition().with(sound("minecraft:mob/pig/death"))
+                        .subtitle("subtitles.aether.entity.phyg.death")
+        );
+        this.add(AetherIISoundEvents.ENTITY_COCKATRICE_HURT,
+                definition().with(
+                        sound("minecraft:mob/pig/say1"),
+                        sound("minecraft:mob/pig/say2"),
+                        sound("minecraft:mob/pig/say3")
+                ).subtitle("subtitles.aether.entity.phyg.hurt")
+        );
+        this.add(AetherIISoundEvents.ENTITY_COCKATRICE_STEP,
+                definition().with(
+                        sound("minecraft:mob/pig/step1"),
+                        sound("minecraft:mob/pig/step2"),
+                        sound("minecraft:mob/pig/step3"),
+                        sound("minecraft:mob/pig/step4"),
+                        sound("minecraft:mob/pig/step5")
+                ).subtitle("subtitles.block.generic.footsteps")
         );
 
         this.add(AetherIISoundEvents.ENTITY_SWET_ATTACK,
@@ -268,19 +448,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/slime/big4")
                 ).subtitle("subtitles.aether.entity.swet.squish")
         );
-
-        /*this.add(AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT,
-                definition().with(sound("aether:entity/zephyr/call"))
-                        .subtitle("subtitles.aether.entity.zephyr.ambient")
-        );
-        this.add(AetherIISoundEvents.ENTITY_ZEPHYR_DEATH,
-                definition().with(sound("aether:entity/zephyr/call"))
-                        .subtitle("subtitles.aether.entity.zephyr.death")
-        );
-        this.add(AetherIISoundEvents.ENTITY_ZEPHYR_HURT,
-                definition().with(sound("aether:entity/zephyr/call"))
-                        .subtitle("subtitles.aether.entity.zephyr.hurt")
-        );*/
 
         // Music
         this.add(AetherIISoundEvents.MUSIC_AETHER,

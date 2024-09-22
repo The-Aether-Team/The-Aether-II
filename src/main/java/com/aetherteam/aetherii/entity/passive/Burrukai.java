@@ -1,12 +1,15 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.brain.BurrukaiAi;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,6 +23,7 @@ import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.IShearable;
 import org.jetbrains.annotations.Nullable;
 
@@ -159,6 +163,29 @@ public class Burrukai extends AetherAnimal implements IShearable {
     @Override
     public boolean isFood(ItemStack pStack) {
         return pStack.is(AetherIITags.Items.BURRUKAI_FOOD);
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AetherIISoundEvents.ENTITY_BURRUKAI_AMBIENT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_BURRUKAI_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherIISoundEvents.ENTITY_BURRUKAI_DEATH.get();
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(AetherIISoundEvents.ENTITY_BURRUKAI_STEP.get(), 0.15F, 1.0F);
     }
 
     @Nullable

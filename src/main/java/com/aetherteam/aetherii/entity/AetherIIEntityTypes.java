@@ -70,9 +70,9 @@ public class AetherIIEntityTypes {
   
     public static final DeferredHolder<EntityType<?>, EntityType<Cockatrice>> COCKATRICE = ENTITY_TYPES.register("cockatrice",
             () -> EntityType.Builder.of(Cockatrice::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 2.15F).clientTrackingRange(10).build("cockatrice"));
+
     public static final DeferredHolder<EntityType<?>, EntityType<Swet>> SWET = ENTITY_TYPES.register("swet",
             () -> EntityType.Builder.of(Swet::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.9F).clientTrackingRange(10).build("swet"));
-
 
     // Projectiles
     public static final DeferredHolder<EntityType<?>, EntityType<HolystoneRock>> HOLYSTONE_ROCK = ENTITY_TYPES.register("holystone_rock",

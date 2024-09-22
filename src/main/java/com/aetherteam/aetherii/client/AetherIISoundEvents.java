@@ -57,10 +57,24 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SHEEPUFF_SHEAR = register("entity.sheepuff.shear");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SHEEPUFF_STEP = register("entity.sheepuff.step");
 
-
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_DEATH = register("entity.aerbunny.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_HURT = register("entity.aerbunny.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_LIFT = register("entity.aerbunny.lift");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_AMBIENT = register("entity.taegore.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_DEATH = register("entity.taegore.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_HURT = register("entity.taegore.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_STEP = register("entity.taegore.step");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_AMBIENT = register("entity.burrukai.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_DEATH = register("entity.burrukai.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_HURT = register("entity.burrukai.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_STEP = register("entity.burrukai.step");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_AMBIENT = register("entity.kirrid.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_DEATH = register("entity.kirrid.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_HURT = register("entity.kirrid.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_STEP = register("entity.kirrid.step");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_AMBIENT = register("entity.moa.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_DEATH = register("entity.moa.death");
@@ -70,12 +84,26 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_FLAP = register("entity.moa.flap");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_EGG = register("entity.moa.egg");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_AMBIENT = register("entity.skyroot_lizard.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_DEATH = register("entity.skyroot_lizard.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_HURT = register("entity.skyroot_lizard.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_STEP = register("entity.skyroot_lizard.step");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_SHOOT = register("entity.zephyr.shoot");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_AMBIENT = register("entity.zephyr.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_DEATH = register("entity.zephyr.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_HURT = register("entity.zephyr.hurt");
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> COCKATRICE_SHOOT = register("entity.cockatrice.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TEMPEST_SHOOT = register("entity.tempest.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TEMPEST_AMBIENT = register("entity.tempest.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TEMPEST_DEATH = register("entity.tempest.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TEMPEST_HURT = register("entity.tempest.hurt");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_SHOOT = register("entity.cockatrice.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_AMBIENT = register("entity.cockatrice.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_DEATH = register("entity.cockatrice.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_HURT = register("entity.cockatrice.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_STEP = register("entity.cockatrice.step");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_ATTACK = register("entity.swet.attack");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_DEATH = register("entity.swet.death");

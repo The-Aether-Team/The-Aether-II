@@ -139,17 +139,17 @@ public class Tempest extends Zephyr implements BlightMonster {
 
     @Override
     public SoundEvent getAmbientSound() {
-        return AetherIISoundEvents.ENTITY_ZEPHYR_AMBIENT.get();
+        return AetherIISoundEvents.ENTITY_TEMPEST_AMBIENT.get();
     }
 
     @Override
     public SoundEvent getHurtSound( DamageSource damageSource) {
-        return AetherIISoundEvents.ENTITY_ZEPHYR_HURT.get();
+        return AetherIISoundEvents.ENTITY_TEMPEST_HURT.get();
     }
 
     @Override
     public SoundEvent getDeathSound() {
-        return AetherIISoundEvents.ENTITY_ZEPHYR_DEATH.get();
+        return AetherIISoundEvents.ENTITY_TEMPEST_DEATH.get();
     }
 
     @Override
@@ -274,7 +274,7 @@ public class Tempest extends Zephyr implements BlightMonster {
                     double accelX = target.getX() - (this.tempest.getX() + look.x * 4.0);
                     double accelY = target.getY(0.5) - (0.5 + this.tempest.getY());
                     double accelZ = target.getZ() - (this.tempest.getZ() + look.z * 4.0);
-                    this.tempest.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+                    this.tempest.playSound(AetherIISoundEvents.ENTITY_TEMPEST_SHOOT.get(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
                     TempestThunderball thunderBall = new TempestThunderball(level, this.tempest, accelX, accelY, accelZ);
                     thunderBall.setPos(this.tempest.getX() + look.x * 1.5, this.tempest.getY(), this.tempest.getZ() + look.z * 1.5);
                     level.addFreshEntity(thunderBall);
