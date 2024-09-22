@@ -387,7 +387,7 @@ public class HighlandsPlacedFeatures {
         register(context, TURQUOISE_FOREST_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_TURQUOISE_FOREST),
                 HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(2, 0.1F, 1)));
         register(context, GLISTENING_SWAMP_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_GLISTENING_SWAMP),
-                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(16)));
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(10)));
         register(context, GLISTENING_SWAMP_TREES_SUNKEN, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SWAMP_GREATROOT),
                 RarityFilter.onAverageOnceEvery(3),
                 InSquarePlacement.spread(),
