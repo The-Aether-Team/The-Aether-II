@@ -37,12 +37,12 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKYROOT_LIZARD = register("skyroot_lizard");
 
     public static final ModelLayerLocation AECHOR_PLANT = register("aechor_plant");
-
     public static final ModelLayerLocation ZEPHYR = register("zephyr");
     public static final ModelLayerLocation TEMPEST = register("tempest");
-
     public static final ModelLayerLocation COCKATRICE = register("cockatrice");
     public static final ModelLayerLocation SWET = register("swet");
+
+    public static final ModelLayerLocation EDWARD = register("edward");
 
     public static final ModelLayerLocation GLOVES = register("gloves");
     public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");

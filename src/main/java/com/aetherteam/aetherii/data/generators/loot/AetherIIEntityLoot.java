@@ -208,6 +208,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 )
                         ))
         );
+
+        this.add(AetherIIEntityTypes.EDWARD.get(), LootTable.lootTable());
     }
 
     protected LootTable.Builder createTaegoreTable() {

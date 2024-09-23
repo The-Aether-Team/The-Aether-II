@@ -59,6 +59,7 @@ import com.aetherteam.aetherii.item.materials.*;
 import com.aetherteam.aetherii.item.miscellaneous.AetherPortalItem;
 import com.aetherteam.aetherii.item.miscellaneous.BiomeMobSpawnEggItem;
 import com.aetherteam.aetherii.item.miscellaneous.CurrencyItem;
+import com.aetherteam.aetherii.item.miscellaneous.GuidebookPageItem;
 import com.aetherteam.aetherii.item.miscellaneous.TreasureItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootMilkBucketItem;
@@ -296,6 +297,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = ITEMS.register("blueberry_moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ENCHANTED_MOA_FEED = ITEMS.register("enchanted_moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> GLINT_COIN = ITEMS.register("glint_coin", () -> new CurrencyItem(1, new Item.Properties()));
+    public static final DeferredItem<Item> GUIDEBOOK_PAGE = ITEMS.register("guidebook_page", () -> new GuidebookPageItem(new Item.Properties()));
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = ITEMS.register("aether_portal_frame", () -> new AetherPortalItem(new Item.Properties().stacksTo(1)));
 
     public static void registerAccessories() {

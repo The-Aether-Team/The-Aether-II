@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIDamageStats;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
+import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.aetherteam.aetherii.entity.monster.*;
 import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.projectile.*;
@@ -73,6 +74,9 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Swet>> SWET = ENTITY_TYPES.register("swet",
             () -> EntityType.Builder.of(Swet::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.9F).clientTrackingRange(10).build("swet"));
 
+    // NPCs
+    public static final DeferredHolder<EntityType<?>, EntityType<Edward>> EDWARD = ENTITY_TYPES.register("edward",
+            () -> EntityType.Builder.of(Edward::new, MobCategory.CREATURE).sized(0.6F, 1.95F).eyeHeight(1.74F).passengerAttachments(2.0125F).ridingOffset(-0.7F).clientTrackingRange(8).build("edward"));
 
     // Projectiles
     public static final DeferredHolder<EntityType<?>, EntityType<HolystoneRock>> HOLYSTONE_ROCK = ENTITY_TYPES.register("holystone_rock",
@@ -159,5 +163,8 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.TEMPEST.get(), AetherIIDamageStats.merge(Tempest.createMobAttributes(), AetherIIDamageStats.TEMPEST).build());
         event.put(AetherIIEntityTypes.COCKATRICE.get(), AetherIIDamageStats.merge(Cockatrice.createMobAttributes(), AetherIIDamageStats.COCKATRICE).build());
         event.put(AetherIIEntityTypes.SWET.get(), AetherIIDamageStats.merge(Swet.createMobAttributes(), AetherIIDamageStats.SWET).build());
+
+        // NPCs
+        event.put(AetherIIEntityTypes.EDWARD.get(), Edward.createMobAttributes().build());
     }
 }
