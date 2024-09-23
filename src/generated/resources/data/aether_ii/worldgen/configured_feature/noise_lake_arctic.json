@@ -1,7 +1,6 @@
 {
   "type": "aether_ii:noise_lake",
   "config": {
-    "type": "lake",
     "frozen": true,
     "height": {
       "value": 124
@@ -10,23 +9,63 @@
     "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
     "lake_noise": "aether_ii:highlands/lakes/noise",
     "noise_start_value": 0.3,
+    "secondary_shore_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:aether_grass_block",
+        "Properties": {
+          "snowy": "false"
+        }
+      }
+    },
+    "shore_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:aether_grass_block",
+        "Properties": {
+          "snowy": "false"
+        }
+      }
+    },
+    "shore_noise": 0.0,
+    "shore_start_value": 0.3,
     "underwater_block": {
-      "type": "minecraft:noise_provider",
+      "type": "minecraft:dual_noise_provider",
       "noise": {
         "amplitudes": [
           1.0
         ],
-        "firstOctave": 0
+        "firstOctave": -2
       },
-      "scale": 0.075,
-      "seed": 100,
+      "scale": 1.0,
+      "seed": 2345,
+      "slow_noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -6
+      },
+      "slow_scale": 1.0,
       "states": [
+        {
+          "Name": "aether_ii:shimmering_silt"
+        },
+        {
+          "Name": "aether_ii:coarse_aether_dirt"
+        },
+        {
+          "Name": "aether_ii:holystone"
+        },
         {
           "Name": "aether_ii:aether_dirt"
         },
         {
-          "Name": "aether_ii:holystone"
+          "Name": "aether_ii:shimmering_silt"
         }
+      ],
+      "variety": [
+        1,
+        4
       ]
     }
   }

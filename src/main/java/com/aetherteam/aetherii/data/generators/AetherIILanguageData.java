@@ -52,6 +52,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Magnetic
         this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");
+        this.addBlock(AetherIIBlocks.FERROSITE_MUD, "Ferrosite Mud");
         this.addBlock(AetherIIBlocks.FERROSITE, "Ferrosite");
         this.addBlock(AetherIIBlocks.RUSTED_FERROSITE, "Rusted Ferrosite");
         this.addBlock(AetherIIBlocks.MAGNETIC_SHROOM, "Magnetic Shroom");
@@ -817,6 +818,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("treasure.description", "Treasure Item");
         this.addItemTooltip("currency.description", "Converts to Currency:");
         this.addItemTooltip("currency.amount", "%s Glint");
+        this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
 
 
         // Accessory Slots

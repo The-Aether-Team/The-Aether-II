@@ -1,7 +1,6 @@
 {
   "type": "aether_ii:noise_lake",
   "config": {
-    "type": "lake",
     "frozen": false,
     "height": {
       "value": 124
@@ -10,6 +9,23 @@
     "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
     "lake_noise": "aether_ii:highlands/lakes/noise",
     "noise_start_value": 0.3,
+    "secondary_shore_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:aether_grass_block",
+        "Properties": {
+          "snowy": "false"
+        }
+      }
+    },
+    "shore_block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:quicksoil"
+      }
+    },
+    "shore_noise": "aether_ii:highlands/lakes/lake_shore",
+    "shore_start_value": 0.29,
     "underwater_block": {
       "type": "minecraft:dual_noise_provider",
       "noise": {

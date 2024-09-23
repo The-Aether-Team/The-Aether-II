@@ -55,6 +55,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Magnetic
         this.dropSelf(AetherIIBlocks.FERROSITE_SAND.get());
+        this.dropSelf(AetherIIBlocks.FERROSITE_MUD.get());
         this.dropSelf(AetherIIBlocks.FERROSITE.get());
         this.dropSelf(AetherIIBlocks.RUSTED_FERROSITE.get());
         this.dropSelf(AetherIIBlocks.MAGNETIC_SHROOM.get());

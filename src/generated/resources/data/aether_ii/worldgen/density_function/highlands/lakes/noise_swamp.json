@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:mul",
+    "argument1": -1.0,
+    "argument2": {
+      "type": "minecraft:abs",
+      "argument": {
+        "type": "aether_ii:perlin_noise",
+        "noise": {
+          "amplitudes": [
+            0.2,
+            0.35,
+            0.0,
+            0.0
+          ],
+          "firstOctave": -5
+        },
+        "seed": 99,
+        "xz_scale": 1.0,
+        "y_scale": 0.0
+      }
+    }
+  },
+  "argument2": "aether_ii:highlands/lakes/noise"
+}

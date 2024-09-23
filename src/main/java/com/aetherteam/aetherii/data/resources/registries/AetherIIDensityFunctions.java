@@ -24,7 +24,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(CONTINENTS, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 1.0, noise.getOrThrow(AetherIINoises.CONTINENTALNESS)));
         context.register(CONTINENTS_FACTOR, buildContinentsFactor(function));
         context.register(CONTINENTS_FINAL, buildContinentsFinal(function));
-        context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.375, noise.getOrThrow(AetherIINoises.EROSION)).abs());
+        context.register(EROSION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25, noise.getOrThrow(AetherIINoises.EROSION)).abs());
         context.register(DEPTH, DensityFunctions.yClampedGradient(0, 384, -1.5, 1.5));
         context.register(AMPLIFICATION, DensityFunctions.weirdScaledSampler(getFunction(function, AetherIIDensityFunctions.BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.AMPLIFICATION), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE1));
         context.register(RIDGES, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.85, noise.getOrThrow(AetherIINoises.RIDGES)).abs());
@@ -59,9 +59,12 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(UNDERGROUND_SHAPER, buildUndergroundShaper(function));
 
         context.register(LAKES_NOISE, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-8, 1.0, 1.5, 0.0, 0.0, 0.0, 0.0), 0.75D, 0.0D, 64), DensityFunctions.constant(0.1D)));
+        context.register(LAKES_NOISE_SWAMP,
+                DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 0.2, 0.35, 0.0, 0.0), 1.0D, 0.0D, 99).abs(), DensityFunctions.constant(-1.0D)),
+                getFunction(function, LAKES_NOISE)));
         context.register(LAKES_FLOOR, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 2.5, 1.5, 0.0, 0.0, 0.0, 0.0), 0.75D, 0.0D, 17).abs());
-        context.register(LAKES_FLOOR_SWAMP, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 2.5, 1.5, 1.0, 0.0, 0.0, 0.0), 1.0D, 0.0D, 17).abs());
         context.register(LAKES_BARRIER, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 1.5, 1.0, 0.0, 0.0), 1.0D, 0.0D, 38).abs());
+        context.register(LAKES_SHORE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-5, 0.15, 0.3, 0.0, 0.0, 0.0), 1.0D, 0.0D, 80).abs());
         context.register(LAKES_FACTOR, buildLakeFactor(function));
 
         context.register(COASTS_BASE_NOISE, new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-6, 8.0, 2.0, 0.0, 0.0), 1.5D, 0.0D, 16).abs());
