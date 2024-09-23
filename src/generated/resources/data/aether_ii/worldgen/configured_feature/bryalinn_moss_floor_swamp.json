@@ -1,0 +1,76 @@
+{
+  "type": "minecraft:vegetation_patch",
+  "config": {
+    "depth": 1,
+    "extra_bottom_block_chance": 0.35,
+    "extra_edge_column_chance": 0.65,
+    "ground_state": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:bryalinn_moss_block"
+      }
+    },
+    "replaceable": "#aether_ii:aether_dirt",
+    "surface": "floor",
+    "vegetation_chance": 0.925,
+    "vegetation_feature": {
+      "feature": {
+        "type": "minecraft:random_selector",
+        "config": {
+          "default": {
+            "feature": "aether_ii:bryalinn_moss_vines",
+            "placement": [
+              {
+                "type": "minecraft:count",
+                "count": 16
+              },
+              {
+                "type": "minecraft:random_offset",
+                "xz_spread": {
+                  "type": "minecraft:uniform",
+                  "max_inclusive": 1,
+                  "min_inclusive": -1
+                },
+                "y_spread": {
+                  "type": "minecraft:uniform",
+                  "max_inclusive": 1,
+                  "min_inclusive": -1
+                }
+              }
+            ]
+          },
+          "features": [
+            {
+              "chance": 0.2,
+              "feature": {
+                "feature": "aether_ii:bryalinn_moss_carpet",
+                "placement": []
+              }
+            },
+            {
+              "chance": 0.3,
+              "feature": {
+                "feature": "aether_ii:bryalinn_moss_flowers",
+                "placement": []
+              }
+            },
+            {
+              "chance": 0.1,
+              "feature": {
+                "feature": "aether_ii:medium_grass_patch",
+                "placement": []
+              }
+            }
+          ]
+        }
+      },
+      "placement": []
+    },
+    "vertical_range": 3,
+    "xz_radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 5,
+      "min_inclusive": 3
+    }
+  }
+}

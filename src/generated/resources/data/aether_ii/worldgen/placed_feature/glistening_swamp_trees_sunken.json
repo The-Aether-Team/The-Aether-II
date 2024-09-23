@@ -1,9 +1,9 @@
 {
-  "feature": "aether_ii:greatroot",
+  "feature": "aether_ii:swamp_greatroot",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 4
+      "chance": 3
     },
     {
       "type": "minecraft:in_square"
