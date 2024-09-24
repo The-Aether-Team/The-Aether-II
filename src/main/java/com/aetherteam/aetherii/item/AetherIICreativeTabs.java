@@ -609,6 +609,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SWET_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SKEPHID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
             }).build());
 }
