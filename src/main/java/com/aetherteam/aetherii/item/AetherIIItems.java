@@ -34,7 +34,10 @@ import com.aetherteam.aetherii.item.equipment.tools.zanite.ZaniteAxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.zanite.ZanitePickaxeItem;
 import com.aetherteam.aetherii.item.equipment.tools.zanite.ZaniteShovelItem;
 import com.aetherteam.aetherii.item.equipment.tools.zanite.ZaniteTrowelItem;
-import com.aetherteam.aetherii.item.equipment.weapons.*;
+import com.aetherteam.aetherii.item.equipment.weapons.ScatterglassBoltItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
+import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumCrossbowItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumHammerItem;
 import com.aetherteam.aetherii.item.equipment.weapons.arkenium.ArkeniumShortswordItem;
@@ -290,6 +293,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> TEMPEST_SPAWN_EGG = ITEMS.register("tempest_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.TEMPEST, 0x676A7A, 0xDEEDFF, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> COCKATRICE_SPAWN_EGG = ITEMS.register("cockatrice_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.COCKATRICE, 0x8363A6, 0xB8FFC3, new Item.Properties()));
     public static final DeferredItem<SpawnEggItem> SWET_SPAWN_EGG = ITEMS.register("swet_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.SWET, 0xC3E3EF, 0xA2D0CC, new Item.Properties()));
+    public static final DeferredItem<SpawnEggItem> SKEPHID_SPAWN_EGG = ITEMS.register("skephid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.SKEPHID, 0x7D96AB, 0xF7CC94, new Item.Properties()));
 
     // Misc
     public static final DeferredItem<Item> MOA_FEED = ITEMS.register("moa_feed", () -> new Item(new Item.Properties()));

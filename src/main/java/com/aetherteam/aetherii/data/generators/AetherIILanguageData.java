@@ -695,6 +695,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
         this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
         this.addItem(AetherIIItems.SWET_SPAWN_EGG, "Swet Spawn Egg");
+        this.addItem(AetherIIItems.SKEPHID_SPAWN_EGG, "Skephid Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
@@ -855,6 +856,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
         this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
+        this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
 
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");

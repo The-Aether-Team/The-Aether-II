@@ -79,6 +79,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.TEMPEST.get(), TempestRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.COCKATRICE.get(), CockatriceRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SWET.get(), SwetRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID.get(), SkephidRenderer::new);
 
         // Projectiles
         event.registerEntityRenderer(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), ThrownItemRenderer::new);
@@ -89,6 +90,7 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.VENOMOUS_DART.get(), VenomousDartRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL.get(), ZephyrWebbingBallRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.TEMPEST_THUNDERBALL.get(), TempestThunderballRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID_WEBBING_BALL.get(), SkephidWebbingBallRenderer::new);
 
         // Blocks
         event.registerEntityRenderer(AetherIIEntityTypes.HOVERING_BLOCK.get(), HoveringBlockRenderer::new);
@@ -138,6 +140,7 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.TEMPEST, TempestModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.COCKATRICE, CockatriceModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SWET, SwetModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.SKEPHID, SkephidModel::createBodyLayer);
 
         // Accessories
         // Handwear

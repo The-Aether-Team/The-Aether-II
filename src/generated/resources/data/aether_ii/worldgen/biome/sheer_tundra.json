@@ -99,7 +99,14 @@
   },
   "spawners": {
     "aether_ii:aether_aerwhale": [],
-    "aether_ii:aether_darkness_monster": [],
+    "aether_ii:aether_darkness_monster": [
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 5
+      }
+    ],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
