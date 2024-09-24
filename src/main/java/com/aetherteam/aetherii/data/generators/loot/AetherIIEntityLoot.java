@@ -208,6 +208,15 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 )
                         ))
         );
+
+        this.add(AetherIIEntityTypes.SKEPHID.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.CLOUDTWINE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))
+                                )
+                        )
+                ));
+
     }
 
     protected LootTable.Builder createTaegoreTable() {
