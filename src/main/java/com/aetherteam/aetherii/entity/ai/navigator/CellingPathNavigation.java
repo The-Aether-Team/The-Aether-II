@@ -24,6 +24,7 @@ public class CellingPathNavigation extends GroundPathNavigation {
         return true;
     }
 
+    @Override
     protected PathFinder createPathFinder(int p_26598_) {
         this.nodeEvaluator = new CellingNodeEvaluator();
         this.nodeEvaluator.setCanPassDoors(true);
@@ -57,15 +58,17 @@ public class CellingPathNavigation extends GroundPathNavigation {
         }
     }
 
+    @Override
     protected boolean canMoveDirectly(Vec3 p_186138_, Vec3 p_186139_) {
         return false;
     }
 
+    @Override
     public boolean isStableDestination(BlockPos p_26608_) {
         return true;
     }
 
-
+    @Override
     public void setCanFloat(boolean p_26563_) {
         this.nodeEvaluator.setCanFloat(p_26563_);
     }

@@ -18,7 +18,6 @@ import net.minecraft.world.phys.Vec3;
 
 public class CellingMonster extends Monster {
     private static final EntityDataAccessor<Direction> ATTACHED_FACE = SynchedEntityData.defineId(CellingMonster.class, EntityDataSerializers.DIRECTION);
-    private static final EntityDataAccessor<Byte> CLIMBING = SynchedEntityData.defineId(CellingMonster.class, EntityDataSerializers.BYTE);
 
     private boolean isUpsideDownNavigator;
     public float attachChangeProgress;
@@ -36,7 +35,6 @@ public class CellingMonster extends Monster {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(ATTACHED_FACE, Direction.DOWN);
-        builder.define(CLIMBING, (byte) 0);
     }
 
     @Override
@@ -84,10 +82,15 @@ public class CellingMonster extends Monster {
         }
         final Direction attachmentFacing = this.getAttachFacing();
         if (attachmentFacing != Direction.DOWN) {
-            if (attachmentFacing == Direction.UP) {
+            if (attachmentFacing == Direction.UP && this.yya >= 0) {
                 this.setDeltaMovement(this.getDeltaMovement().add(0, 1, 0));
             }
         }
+        /*if (attachmentFacing != Direction.DOWN) {
+            //this.setNoGravity(true);
+        } else {
+            //this.setNoGravity(false);
+        }*/
         if (prevAttachDir != attachmentFacing) {
             attachChangeProgress = 1F;
         }
@@ -116,7 +119,7 @@ public class CellingMonster extends Monster {
 
     @Override
     protected float getFlyingSpeed() {
-        return this.getSpeed() * 0.2F;
+        return this.getSpeed() * 0.25F;
     }
 
     @Override

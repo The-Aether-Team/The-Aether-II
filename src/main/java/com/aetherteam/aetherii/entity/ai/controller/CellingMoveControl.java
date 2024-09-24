@@ -54,12 +54,16 @@ public class CellingMoveControl extends MoveControl {
         } else if (this.operation == Operation.MOVE_TO) {
             if (this.cellingMonster.getAttachFacing() == Direction.DOWN) {
                 super.tick();
-
+                double d0 = this.wantedX - this.mob.getX();
+                double d1 = this.wantedZ - this.mob.getZ();
                 double d2 = this.wantedY - this.mob.getY();
+                float f9 = (float) (Mth.atan2(d1, d0) * 180.0F / (float) Math.PI) - 90.0F;
+                this.mob.setXxa(0.0F);
                 this.mob.setYya(0.0F);
                 if (d2 > 0.0) {
                     this.mob.setSpeed((float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
-                    this.mob.setZza(1.0F);
+                    this.mob.setYRot(this.rotlerp(this.mob.getYRot(), f9, 90.0F));
+                    this.mob.yBodyRot = this.mob.getYRot();
                 }
             } else {
                 this.operation = Operation.WAIT;
@@ -68,6 +72,7 @@ public class CellingMoveControl extends MoveControl {
                 double d2 = this.wantedY - this.mob.getY();
                 double d3 = d0 * d0 + d2 * d2 + d1 * d1;
                 if (d3 < 2.5000003E-7F) {
+                    this.mob.setXxa(0.0F);
                     this.mob.setYya(0.0F);
                     this.mob.setZza(0.0F);
                     return;
@@ -75,17 +80,24 @@ public class CellingMoveControl extends MoveControl {
 
                 float f1 = (float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED));
 
-                double d4 = Math.sqrt(d0 * d0 + d1 * d1);
-                if (Math.abs(d2) > 1.0E-5F || Math.abs(d4) > 1.0E-5F) {
+                if (Math.abs(d2) > 0.0F) {
 
                     this.mob.setYya(d2 > 0.0 ? f1 : -f1);
                 }
 
                 float f9 = (float) (Mth.atan2(d1, d0) * 180.0F / (float) Math.PI) - 90.0F;
-                this.mob.setYRot(this.rotlerp(this.mob.getYRot(), f9, 90.0F));
-                this.mob.setSpeed((float) (this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
+                this.mob.setYRot(this.cellingMonster.getAttachFacing().toYRot());
+                this.mob.yBodyRot = this.mob.getYRot();
+                if (Math.abs(d0) > 0.0F) {
+                    this.mob.setXxa(d0 > 0.0 ? f1 : -f1);
+                }
+
+                if (Math.abs(d1) > 0.0F) {
+                    this.mob.setZza(d1 > 0.0 ? f1 : -f1);
+                }
             }
         } else {
+            this.mob.setXxa(0.0F);
             this.mob.setYya(0.0F);
             super.tick();
         }

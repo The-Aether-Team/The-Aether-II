@@ -74,17 +74,20 @@ public class CellingNodeEvaluator extends WalkNodeEvaluator {
 
         for (Direction direction : Direction.values()) {
             Node node = this.findAcceptedNode(p_77484_.x + direction.getStepX(), p_77484_.y + direction.getStepY(), p_77484_.z + direction.getStepZ());
+            map.put(direction, node);
+
             for (Direction direction2 : Direction.values()) {
                 BlockPos pos = new BlockPos(p_77484_.x + direction.getStepX() + direction2.getStepX(), p_77484_.y + direction.getStepY() + direction2.getStepY(), p_77484_.z + direction.getStepZ() + direction2.getStepZ());
                 if (!this.currentContext.getBlockState(pos).getCollisionShape(this.currentContext.level(), pos).isEmpty()) {
-
-                    map.put(direction, node);
+                    if (this.isNodeValid(node)) {
+                        p_77483_[i++] = node;
+                    }
                     break;
                 }
             }
-            if (this.isNodeValid(node)) {
-                p_77483_[i++] = node;
-            }
+
+
+
         }
 
         for (Direction direction1 : Direction.Plane.HORIZONTAL) {
@@ -93,8 +96,13 @@ public class CellingNodeEvaluator extends WalkNodeEvaluator {
                 Node node1 = this.findAcceptedNode(
                         p_77484_.x + direction1.getStepX() + direction2.getStepX(), p_77484_.y, p_77484_.z + direction1.getStepZ() + direction2.getStepZ()
                 );
-                if (this.isNodeValid(node1)) {
-                    p_77483_[i++] = node1;
+                BlockPos pos = new BlockPos(p_77484_.x + direction1.getStepX() + direction2.getStepX(), p_77484_.y, p_77484_.z + direction1.getStepZ() + direction2.getStepZ());
+
+                if (!this.currentContext.getBlockState(pos).getCollisionShape(this.currentContext.level(), pos).isEmpty()) {
+
+                    if (this.isNodeValid(node1)) {
+                        p_77483_[i++] = node1;
+                    }
                 }
             }
         }
@@ -166,11 +174,14 @@ public class CellingNodeEvaluator extends WalkNodeEvaluator {
                 if (!this.currentContext.getBlockState(blockpos.offset(direction.getNormal())).isAir()) {
                     return node;
                 }
+                if (!this.currentContext.getBlockState(blockpos.offset(direction.getNormal()).below()).isAir()) {
+                    return node;
+                }
             }
 
-            //node = tryFindFirstGroundNodeBelow(p_263032_, p_263066_, p_263105_);
+            node = tryFindFirstGroundNodeBelow(p_263032_, p_263066_, p_263105_);
         }
-        return null;
+        return node;
     }
 
     protected PathType getCachedBlockType(int p_192968_, int p_192969_, int p_192970_) {

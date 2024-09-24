@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
-import com.aetherteam.aetherii.client.renderer.entity.layers.SkephidEmissiveLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.SkephidModel;
 import com.aetherteam.aetherii.entity.monster.Skephid;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -14,16 +13,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Pose;
 
 public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidModel<T>> {
-    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skephid.png");
+    private static final ResourceLocation LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skephid/skephid.png");
 
     public SkephidRenderer(EntityRendererProvider.Context context) {
         super(context, new SkephidModel<>(context.bakeLayer(AetherIIModelLayers.SKEPHID)), 0.5F);
-        this.addLayer(new SkephidEmissiveLayer<>(this));
+        //this.addLayer(new SkephidEmissiveLayer<>(this));
     }
 
     @Override
     protected void setupRotations(T entity, PoseStack poseStack, float ageInTick, float rotationYaw, float partialTicks, float p_320045_) {
-        float trans = 8F / 16F;
+        float trans = 9F / 16F;
         if (entity.getPose() != Pose.SLEEPING) {
             float progresso = 1F - (entity.prevAttachChangeProgress + (entity.attachChangeProgress - entity.prevAttachChangeProgress) * partialTicks);
 
@@ -38,6 +37,7 @@ public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidMo
                 poseStack.translate(0.0D, -trans, 0.0D);
 
             } else if (entity.getAttachFacing() == Direction.UP) {
+                poseStack.translate(0.0D, trans, 0.0D);
                 poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - rotationYaw));
                 poseStack.mulPose(Axis.XP.rotationDegrees(180));
                 poseStack.mulPose(Axis.YP.rotationDegrees(180));
@@ -77,7 +77,7 @@ public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidMo
 
 
     @Override
-    public ResourceLocation getTextureLocation(T aechorPlant) {
+    public ResourceLocation getTextureLocation(T entity) {
         return LOCATION;
     }
 }
