@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.layers.SkephidEmissiveLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.SkephidModel;
 import com.aetherteam.aetherii.entity.monster.Skephid;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,7 +18,7 @@ public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidMo
 
     public SkephidRenderer(EntityRendererProvider.Context context) {
         super(context, new SkephidModel<>(context.bakeLayer(AetherIIModelLayers.SKEPHID)), 0.5F);
-        //this.addLayer(new SkephidEmissiveLayer<>(this));
+        this.addLayer(new SkephidEmissiveLayer(this));
     }
 
     @Override
