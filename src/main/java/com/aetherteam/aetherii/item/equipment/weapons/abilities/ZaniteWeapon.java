@@ -11,8 +11,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import org.apache.commons.compress.utils.Lists;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -30,7 +30,7 @@ public interface ZaniteWeapon extends ZaniteTool { //todo replace with ItemAttri
     );
 
     default ItemAttributeModifiers increaseDamage(Holder<Attribute> typeAttribute, ItemAttributeModifiers modifiers, ItemStack stack) {
-        List<ItemAttributeModifiers.Entry> modifierEntryList = Lists.newArrayList(modifiers.modifiers().listIterator());
+        List<ItemAttributeModifiers.Entry> modifierEntryList = new ArrayList<>(modifiers.modifiers());
 
         modifierEntryList.removeIf((entry) -> entry.modifier().is(DAMAGE_TYPES.get(typeAttribute)));
         modifierEntryList.add(new ItemAttributeModifiers.Entry(typeAttribute, new AttributeModifier(DAMAGE_TYPES.get(typeAttribute), this.calculateDamageIncrease(typeAttribute, DAMAGE_TYPES.get(typeAttribute), modifiers, stack), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND));
