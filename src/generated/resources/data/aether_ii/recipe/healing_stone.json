@@ -6,7 +6,7 @@
       "item": "aether_ii:ambrosium_shard"
     },
     "H": {
-      "item": "aether_ii:holystone"
+      "tag": "aether_ii:stone_crafting"
     }
   },
   "pattern": [

@@ -642,7 +642,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(Blocks.BLAST_FURNACE), has(Blocks.SMOOTH_STONE))
                 .save(consumer, "blast_furnace_from_holystone_furnace");
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ALTAR.get())
-                .define('H', AetherIIBlocks.HOLYSTONE.get())
+                .define('H', AetherIITags.Items.STONE_CRAFTING)
                 .define('Z', AetherIITags.Items.GEMS_ZANITE)
                 .pattern("HHH")
                 .pattern("HZH")
@@ -659,7 +659,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy(getHasName(AetherIIBlocks.ARTISANS_BENCH.get()), has(AetherIITags.Items.PLATES_ARKENIUM))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ARKENIUM_FORGE.get())
-                .define('H', AetherIIBlocks.HOLYSTONE.get())
+                .define('H', AetherIITags.Items.STONE_CRAFTING)
                 .define('A', AetherIITags.Items.PLATES_ARKENIUM)
                 .pattern("AAA")
                 .pattern(" A ")
@@ -928,7 +928,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, new ItemStack(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 1).build()))
                 .define('A', AetherIIItems.AMBROSIUM_SHARD.get())
-                .define('H', AetherIIBlocks.HOLYSTONE.get())
+                .define('H', AetherIITags.Items.STONE_CRAFTING)
                 .pattern("HAH")
                 .pattern("AAA")
                 .pattern("HAH")
