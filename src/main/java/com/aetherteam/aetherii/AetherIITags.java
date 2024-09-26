@@ -90,6 +90,7 @@ public class AetherIITags {
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
+        public static final TagKey<Item> LEATHER_HIDE = tag("leather/hide");
         public static final TagKey<Item> GEMS_ZANITE = tag("gems/zanite");
         public static final TagKey<Item> PLATES_ARKENIUM = tag("plates/arkenium");
         public static final TagKey<Item> PLATES_GRAVITITE = tag("plates/gravitite");

@@ -687,6 +687,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("PPP")
                 .unlockedBy("has_wool", has(ItemTags.WOOL))
                 .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Items.ITEM_FRAME, 1)
+                .define('/', AetherIITags.Items.RODS_SKYROOT)
+                .define('#', AetherIITags.Items.LEATHER_HIDE)
+                .pattern("///")
+                .pattern("/#/")
+                .pattern("///")
+                .unlockedBy("has_leather", has(AetherIITags.Items.LEATHER_HIDE))
+                .save(consumer, "item_frame_from_hide");
 
         // Bookshelves
         bookshelf(consumer, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);
