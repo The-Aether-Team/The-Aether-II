@@ -141,10 +141,11 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     }
 
     private void handleHealingStoneHealth(Player player) {
-        if (player.getAttribute(Attributes.MAX_HEALTH).hasModifier(HealingStoneItem.BONUS_HEALTH)) {
-            double maxHealthWithoutBonus = player.getAttributeValue(Attributes.MAX_HEALTH) - player.getAttribute(Attributes.MAX_HEALTH).getModifier(HealingStoneItem.BONUS_HEALTH).amount();
-            if (player.getHealth() <= maxHealthWithoutBonus) {
-                player.getAttribute(Attributes.MAX_HEALTH).removeModifier(HealingStoneItem.BONUS_HEALTH);
+        if (player.getAttribute(Attributes.MAX_ABSORPTION).hasModifier(HealingStoneItem.BONUS_ABSORPTION)) {
+            double maxHealthWithAbsorption = player.getMaxHealth() + player.getMaxAbsorption();
+            double maxHealthWithoutBonus = maxHealthWithAbsorption - player.getAttribute(Attributes.MAX_ABSORPTION).getModifier(HealingStoneItem.BONUS_ABSORPTION).amount();
+            if (player.getHealth() < maxHealthWithoutBonus) {
+                player.getAttribute(Attributes.MAX_ABSORPTION).removeModifier(HealingStoneItem.BONUS_ABSORPTION);
             }
         }
     }

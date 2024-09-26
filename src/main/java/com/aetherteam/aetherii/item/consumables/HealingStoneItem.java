@@ -4,24 +4,26 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
+
 public class HealingStoneItem extends Item {
-    public static final ResourceLocation BONUS_HEALTH = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "healing_stone.bonus_health");
+    public static final ResourceLocation BONUS_ABSORPTION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "healing_stone.bonus_health");
 
     public HealingStoneItem(Properties properties) {
         super(properties);
@@ -41,8 +43,12 @@ public class HealingStoneItem extends Item {
                 player.awardStat(Stats.ITEM_USED.get(this));
                 player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.AMBROSIUM_POISONING, 350);
                 if (player.getHealth() + 8.0F > player.getMaxHealth()) {
-                    if (!player.getAttribute(Attributes.MAX_HEALTH).hasModifier(BONUS_HEALTH)) {
-                        player.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(new AttributeModifier(BONUS_HEALTH, player.getHealth() + 8.0F - player.getMaxHealth(), AttributeModifier.Operation.ADD_VALUE));
+                    if (!player.getAttribute(Attributes.MAX_ABSORPTION).hasModifier(BONUS_ABSORPTION)) {
+                        AetherII.LOGGER.info(Mth.floor(player.getHealth()) + " " + player.getMaxHealth());
+                        float absorption = Mth.floor(player.getHealth()) + 8.0F - player.getMaxHealth();
+                        AetherII.LOGGER.info(String.valueOf(absorption));
+                        player.getAttribute(Attributes.MAX_ABSORPTION).addTransientModifier(new AttributeModifier(BONUS_ABSORPTION, absorption, AttributeModifier.Operation.ADD_VALUE));
+                        player.setAbsorptionAmount(Math.max(player.getAbsorptionAmount(), absorption));
                     }
                 }
                 player.heal(8.0F);
@@ -74,5 +80,11 @@ public class HealingStoneItem extends Item {
             return ItemUtils.startUsingInstantly(level, player, hand);
         }
         return InteractionResultHolder.pass(itemStack);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        Integer charges = stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES);
+        tooltipComponents.add(Component.translatable("aether_ii.tooltip.item.healing_stone.charges", charges).withStyle(ChatFormatting.GRAY));
     }
 }

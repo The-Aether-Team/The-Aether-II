@@ -11,6 +11,7 @@ import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckGuidebookEntryPacket;
+import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -41,7 +42,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.apache.commons.compress.utils.Lists;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -281,7 +281,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                         Optional<TagKey<Item>> food = this.getSelectedEntry().food();
                         if (food.isPresent()) {
                             Registry<Item> itemRegistry = this.registryAccess.registryOrThrow(Registries.ITEM);
-                            List<Holder<Item>> tag = Lists.newArrayList(itemRegistry.getTagOrEmpty(food.get()).iterator());
+                            List<Holder<Item>> tag = new ArrayList<>(ImmutableList.copyOf(itemRegistry.getTagOrEmpty(food.get())));
                             if (this.currentFoods.isEmpty()) {
                                 this.currentFoods.addAll(tag);
                             }

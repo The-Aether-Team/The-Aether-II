@@ -252,6 +252,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SHIMMERING_SILT.get());
                 output.accept(AetherIIBlocks.QUICKSOIL.get());
                 output.accept(AetherIIBlocks.FERROSITE_SAND.get());
+                output.accept(AetherIIBlocks.FERROSITE_MUD.get());
                 output.accept(AetherIIBlocks.ARCTIC_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
@@ -608,6 +609,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SWET_SPAWN_EGG.get());
+                output.accept(AetherIIItems.SKEPHID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
             }).build());
 }

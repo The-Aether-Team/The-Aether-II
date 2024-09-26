@@ -43,6 +43,7 @@
     ],
     [],
     [
+      "aether_ii:bonus_water_spring",
       "aether_ii:water_spring"
     ],
     [
@@ -51,6 +52,8 @@
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
+      "aether_ii:bonus_magnetic_shroom_patch",
+      "aether_ii:swamp_bryalinn_moss_cover",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
@@ -93,7 +96,14 @@
   },
   "spawners": {
     "aether_ii:aether_aerwhale": [],
-    "aether_ii:aether_darkness_monster": [],
+    "aether_ii:aether_darkness_monster": [
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 5
+      }
+    ],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",

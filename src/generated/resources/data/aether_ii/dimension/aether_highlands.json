@@ -537,7 +537,7 @@
             "offset": 0.0,
             "temperature": [
               0.3,
-              0.65
+              0.6
             ],
             "weirdness": [
               -1.0,
@@ -567,7 +567,7 @@
             "offset": 0.0,
             "temperature": [
               0.3,
-              0.65
+              0.6
             ],
             "weirdness": [
               -1.0,
@@ -597,7 +597,7 @@
             "offset": 0.0,
             "temperature": [
               0.3,
-              0.65
+              0.6
             ],
             "weirdness": [
               -1.0,
@@ -627,7 +627,7 @@
             "offset": 0.0,
             "temperature": [
               0.3,
-              0.65
+              0.6
             ],
             "weirdness": [
               -1.0,
@@ -657,7 +657,7 @@
             "offset": 0.0,
             "temperature": [
               -1.5,
-              0.65
+              0.6
             ],
             "weirdness": [
               0.3,
@@ -837,7 +837,7 @@
             "offset": 0.0,
             "temperature": [
               0.25,
-              0.65
+              0.6
             ],
             "weirdness": [
               -1.0,
@@ -867,7 +867,7 @@
             "offset": 0.0,
             "temperature": [
               0.25,
-              0.65
+              0.6
             ],
             "weirdness": [
               -1.0,
@@ -897,7 +897,7 @@
             "offset": 0.0,
             "temperature": [
               0.25,
-              0.65
+              0.6
             ],
             "weirdness": [
               -1.0,
@@ -926,7 +926,7 @@
             ],
             "offset": 0.0,
             "temperature": [
-              0.65,
+              0.6,
               1.5
             ],
             "weirdness": [
@@ -956,7 +956,7 @@
             ],
             "offset": 0.0,
             "temperature": [
-              0.65,
+              0.6,
               1.5
             ],
             "weirdness": [
@@ -986,7 +986,7 @@
             ],
             "offset": 0.0,
             "temperature": [
-              0.65,
+              0.6,
               1.5
             ],
             "weirdness": [
@@ -1016,7 +1016,7 @@
             ],
             "offset": 0.0,
             "temperature": [
-              0.65,
+              0.6,
               1.5
             ],
             "weirdness": [

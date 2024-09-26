@@ -1,15 +1,94 @@
 {
   "type": "aether_ii:noise_lake",
   "config": {
-    "type": "swamp",
     "frozen": false,
     "height": {
       "value": 124
     },
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
-    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor_swamp",
-    "lake_noise": "aether_ii:highlands/lakes/noise",
+    "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
+    "lake_noise": "aether_ii:highlands/lakes/noise_swamp",
     "noise_start_value": 0.3,
+    "secondary_shore_block": {
+      "type": "minecraft:dual_noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -2
+      },
+      "scale": 1.0,
+      "seed": 2345,
+      "slow_noise": {
+        "amplitudes": [
+          1.25
+        ],
+        "firstOctave": -6
+      },
+      "slow_scale": 1.0,
+      "states": [
+        {
+          "Name": "aether_ii:ferrosite_mud"
+        },
+        {
+          "Name": "aether_ii:coarse_aether_dirt"
+        },
+        {
+          "Name": "aether_ii:ferrosite_mud"
+        },
+        {
+          "Name": "aether_ii:coarse_aether_dirt"
+        },
+        {
+          "Name": "aether_ii:ferrosite_sand"
+        }
+      ],
+      "variety": [
+        1,
+        4
+      ]
+    },
+    "shore_block": {
+      "type": "minecraft:dual_noise_provider",
+      "noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -2
+      },
+      "scale": 1.0,
+      "seed": 2345,
+      "slow_noise": {
+        "amplitudes": [
+          1.0
+        ],
+        "firstOctave": -6
+      },
+      "slow_scale": 1.0,
+      "states": [
+        {
+          "Name": "aether_ii:ferrosite_mud"
+        },
+        {
+          "Name": "aether_ii:coarse_aether_dirt"
+        },
+        {
+          "Name": "aether_ii:ferrosite_mud"
+        },
+        {
+          "Name": "aether_ii:coarse_aether_dirt"
+        },
+        {
+          "Name": "aether_ii:bryalinn_moss_block"
+        }
+      ],
+      "variety": [
+        1,
+        4
+      ]
+    },
+    "shore_noise": "aether_ii:highlands/lakes/lake_shore",
+    "shore_start_value": 0.275,
     "underwater_block": {
       "type": "minecraft:dual_noise_provider",
       "noise": {
@@ -29,13 +108,13 @@
       "slow_scale": 1.0,
       "states": [
         {
-          "Name": "aether_ii:ferrosite_sand"
+          "Name": "aether_ii:ferrosite_mud"
         },
         {
           "Name": "aether_ii:coarse_aether_dirt"
         },
         {
-          "Name": "aether_ii:ferrosite_sand"
+          "Name": "aether_ii:ferrosite_mud"
         },
         {
           "Name": "aether_ii:aether_dirt"

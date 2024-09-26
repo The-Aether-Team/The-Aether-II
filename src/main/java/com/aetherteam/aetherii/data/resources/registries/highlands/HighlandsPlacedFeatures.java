@@ -22,6 +22,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
+import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
@@ -56,6 +57,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
     public static final ResourceKey<PlacedFeature> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<PlacedFeature> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
+    public static final ResourceKey<PlacedFeature> BONUS_MAGNETIC_SHROOM_PATCH = createKey("bonus_magnetic_shroom_patch");
 
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -94,6 +96,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_OVERHANG = createKey("coarse_aether_dirt_overhang");
     public static final ResourceKey<PlacedFeature> ICE_OVERHANG = createKey("ice_overhang");
     public static final ResourceKey<PlacedFeature> EXPOSED_BRYALINN_MOSS_COVER = createKey("exposed_bryalinn_moss_cover");
+    public static final ResourceKey<PlacedFeature> SWAMP_BRYALINN_MOSS_COVER = createKey("swamp_bryalinn_moss_cover");
     public static final ResourceKey<PlacedFeature> EXPOSED_SHAYELINN_MOSS_COVER = createKey("exposed_shayelinn_moss_cover");
 
     public static final ResourceKey<PlacedFeature> ORE_SCATTERGLASS = createKey("ore_scatterglass");
@@ -121,6 +124,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> WATER_POND_UNDERGROUND = createKey("water_pond_underground");
     public static final ResourceKey<PlacedFeature> WATER_POND_TUNDRA = createKey("water_pond_tundra");
     public static final ResourceKey<PlacedFeature> WATER_SPRING = createKey("water_spring");
+    public static final ResourceKey<PlacedFeature> BONUS_WATER_SPRING = createKey("bonus_water_spring");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE = createKey("noise_lake");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_ARCTIC = createKey("noise_lake_arctic");
     public static final ResourceKey<PlacedFeature> NOISE_LAKE_SWAMP = createKey("noise_lake_swamp");
@@ -356,6 +360,11 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 PlacementUtils.FULL_RANGE,
                 BiomeFilter.biome());
+        register(context, BONUS_MAGNETIC_SHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MAGNETIC_SHROOM_PATCH),
+                CountPlacement.of(2),
+                InSquarePlacement.spread(),
+                PlacementUtils.FULL_RANGE,
+                BiomeFilter.biome());
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
     }
@@ -386,9 +395,9 @@ public class HighlandsPlacedFeatures {
         register(context, TURQUOISE_FOREST_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_TURQUOISE_FOREST),
                 HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(2, 0.1F, 1)));
         register(context, GLISTENING_SWAMP_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_GLISTENING_SWAMP),
-                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(20)));
-        register(context, GLISTENING_SWAMP_TREES_SUNKEN, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREATROOT),
-                RarityFilter.onAverageOnceEvery(4),
+                HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(10)));
+        register(context, GLISTENING_SWAMP_TREES_SUNKEN, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SWAMP_GREATROOT),
+                RarityFilter.onAverageOnceEvery(3),
                 InSquarePlacement.spread(),
                 SurfaceWaterDepthFilter.forMaxDepth(3),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
@@ -487,6 +496,16 @@ public class HighlandsPlacedFeatures {
                 new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.belowTop(276)),
                 BiomeFilter.biome()
         );
+        register(context, SWAMP_BRYALINN_MOSS_COVER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BRYALINN_MOSS_FLOOR_SWAMP),
+                RarityFilter.onAverageOnceEvery(2),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 12),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(126), VerticalAnchor.aboveBottom(180))),
+                new ElevationFilter(VerticalAnchor.bottom(), VerticalAnchor.top()),
+                BiomeFilter.biome()
+        );
         register(context, EXPOSED_SHAYELINN_MOSS_COVER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHAYELINN_MOSS_FLOOR),
                 NoiseBasedCountPlacement.of(8, 30, 0.0),
                 RarityFilter.onAverageOnceEvery(2),
@@ -573,6 +592,11 @@ public class HighlandsPlacedFeatures {
                 CountPlacement.of(15),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.aboveBottom(256)),
+                BiomeFilter.biome());
+        register(context, BONUS_WATER_SPRING, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.WATER_SPRING),
+                CountPlacement.of(20),
+                InSquarePlacement.spread(),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.aboveBottom(200)),
                 BiomeFilter.biome());
         register(context, NOISE_LAKE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE), BiomeFilter.biome());
         register(context, NOISE_LAKE_ARCTIC, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.NOISE_LAKE_ARCTIC), BiomeFilter.biome());
