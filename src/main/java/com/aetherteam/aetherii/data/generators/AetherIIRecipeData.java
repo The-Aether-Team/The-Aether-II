@@ -107,14 +107,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_HOLYSTONE.get())
                 .group("mossy_holystone")
                 .requires(AetherIIBlocks.HOLYSTONE.get())
-                .requires(Blocks.VINE)
-                .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE.get()), has(AetherIIBlocks.HOLYSTONE.get()))
+                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_VINES), has(AetherIIBlocks.BRYALINN_MOSS_VINES))
                 .save(consumer, this.name("mossy_holystone_with_vine"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_HOLYSTONE.get())
                 .group("mossy_holystone")
                 .requires(AetherIIBlocks.HOLYSTONE.get())
-                .requires(Blocks.MOSS_BLOCK)
-                .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE.get()), has(AetherIIBlocks.HOLYSTONE.get()))
+                .requires(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_BLOCK), has(AetherIIBlocks.BRYALINN_MOSS_BLOCK))
                 .save(consumer, this.name("mossy_holystone_with_moss"));
 
         // Arctic
@@ -129,6 +129,20 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.icestoneFreezable(Blocks.ICE, Blocks.WATER).save(consumer, this.name("icestone_freeze_water"));
         this.icestoneFreezableTag(AetherIIBlocks.ARCTIC_ICE.get(), Blocks.WATER, AetherIITags.Biomes.ARCTIC_ICE).save(consumer, this.name("icestone_freeze_water_to_arctic_ice"));
         this.icestoneFreezable(Blocks.OBSIDIAN, Blocks.LAVA).save(consumer, this.name("icestone_freeze_lava"));
+
+        //Irradiated
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.IRRADIATED_HOLYSTONE.get())
+                .group("irradiated_holystone")
+                .requires(AetherIIBlocks.HOLYSTONE.get())
+                .requires(AetherIIBlocks.AMBRELINN_MOSS_VINES)
+                .unlockedBy(getHasName(AetherIIBlocks.AMBRELINN_MOSS_VINES), has(AetherIIBlocks.AMBRELINN_MOSS_VINES))
+                .save(consumer, this.name("irradiated_holystone_with_vine"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.IRRADIATED_HOLYSTONE.get())
+                .group("irradiated_holystone")
+                .requires(AetherIIBlocks.HOLYSTONE.get())
+                .requires(AetherIIBlocks.AMBRELINN_MOSS_BLOCK)
+                .unlockedBy(getHasName(AetherIIBlocks.AMBRELINN_MOSS_BLOCK), has(AetherIIBlocks.AMBRELINN_MOSS_BLOCK))
+                .save(consumer, this.name("irradiated_holystone_with_moss"));
 
         // Moa Nest
         twoByTwoPacker(consumer, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.WOVEN_SKYROOT_STICKS, AetherIIItems.SKYROOT_STICK.get());

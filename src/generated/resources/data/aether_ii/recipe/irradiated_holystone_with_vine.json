@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "mossy_holystone",
+  "group": "irradiated_holystone",
   "ingredients": [
     {
       "item": "aether_ii:holystone"
     },
     {
-      "item": "aether_ii:bryalinn_moss_block"
+      "item": "aether_ii:ambrelinn_moss_vines"
     }
   ],
   "result": {
     "count": 1,
-    "id": "aether_ii:mossy_holystone"
+    "id": "aether_ii:irradiated_holystone"
   }
 }

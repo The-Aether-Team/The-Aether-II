@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bryalinn_moss_vines": {
+    "has_ambrelinn_moss_block": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:bryalinn_moss_vines"
+            "items": "aether_ii:ambrelinn_moss_block"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "aether_ii:mossy_holystone_with_vine"
+        "recipe": "aether_ii:irradiated_holystone_with_moss"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_bryalinn_moss_vines"
+      "has_ambrelinn_moss_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "aether_ii:mossy_holystone_with_vine"
+      "aether_ii:irradiated_holystone_with_moss"
     ]
   }
 }
