@@ -769,9 +769,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .define('S', AetherIIItems.SCATTERGLASS_SHARD)
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
                 .define('F', Tags.Items.FEATHERS)
-                .pattern("  S")
+                .pattern(" S ")
                 .pattern(" / ")
-                .pattern("F  ")
+                .pattern(" F ")
                 .unlockedBy("has_scatterglass_shard", has(AetherIIItems.SCATTERGLASS_SHARD))
                 .save(consumer);
 
