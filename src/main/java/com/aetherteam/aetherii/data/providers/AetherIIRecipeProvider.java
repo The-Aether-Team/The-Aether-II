@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.builder.AltarEnchantingRecipeBuilder;
 import com.aetherteam.aetherii.recipe.builder.BiomeParameterRecipeBuilder;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import java.util.List;
@@ -78,6 +80,30 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("BBB")
                 .pattern("###")
                 .unlockedBy(getHasName(Items.BOOK), has(Items.BOOK))
+                .save(consumer);
+    }
+
+    protected static void sign(RecipeOutput consumer, ItemLike result, ItemLike block) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 3)
+                .group("wooden_sign")
+                .define('P', block)
+                .define('/', Tags.Items.RODS_WOODEN)
+                .pattern("PPP")
+                .pattern("PPP")
+                .pattern(" / ")
+                .unlockedBy(getHasName(block), has(block))
+                .save(consumer);
+    }
+
+    protected static void hangingSign(RecipeOutput consumer, ItemLike result, ItemLike block) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 6)
+                .group("hanging_sign")
+                .define('#', block)
+                .define('X', Items.CHAIN)
+                .pattern("X X")
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_stripped_logs", has(block))
                 .save(consumer);
     }
 
