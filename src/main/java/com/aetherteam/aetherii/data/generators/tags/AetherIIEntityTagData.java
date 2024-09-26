@@ -81,6 +81,6 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
 
         // Vanilla
         this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), AetherIIEntityTypes.SKYROOT_PINECONE.get(), AetherIIEntityTypes.SCATTERGLASS_BOLT.get());
-        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(AetherIITags.Entities.KIRRID).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get()).add(AetherIIEntityTypes.ZEPHYR.get()).add(AetherIIEntityTypes.FLYING_COW.get());
+        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(AetherIITags.Entities.KIRRID).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get()).add(AetherIIEntityTypes.ZEPHYR.get()).add(AetherIIEntityTypes.FLYING_COW.get()).add(AetherIIEntityTypes.SKYROOT_LIZARD.get());
     }
 }
