@@ -27,17 +27,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
+          "name": "minecraft:air",
+          "weight": 9
+        },
+        {
+          "type": "minecraft:item",
           "name": "aether_ii:charge_core"
         }
       ],
