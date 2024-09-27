@@ -84,7 +84,11 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
                 AetherIIEntityTypes.SKYROOT_PINECONE.get(),
-                AetherIIEntityTypes.SCATTERGLASS_BOLT.get());
+                AetherIIEntityTypes.SCATTERGLASS_BOLT.get()
+        );
+        this.tag(EntityTypeTags.REDIRECTABLE_PROJECTILE).add(
+                AetherIIEntityTypes.TEMPEST_THUNDERBALL.get()
+        );
         this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(
                 AetherIITags.Entities.KIRRID
         ).add(
