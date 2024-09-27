@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.item.equipment;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
@@ -20,7 +19,6 @@ import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -95,34 +93,6 @@ public final class EquipmentUtil {
 
     public static boolean hasArmorAbility(LivingEntity entity, Holder<ArmorMaterial> material) {
         return getArmorCount(entity, material) >= 3;
-    }
-
-    public static void addAbilityTooltips(Player player, ItemStack stack, List<Component> components) {
-        for (int i = 1; i <= 5; i++) {
-            String string = stack.getDescriptionId() + "." + AetherII.MODID + ".ability.tooltip." + i;
-            if (I18n.exists(string)) {
-                if (player != null && (stack.getItem() instanceof ArmorItem || stack.getItem() instanceof GlovesItem) && Component.translatable(string).getString().contains("%s")) {
-                    Holder<ArmorMaterial> material = null;
-                    if (stack.getItem() instanceof ArmorItem armorItem) {
-                        material = armorItem.getMaterial();
-                    } else if (stack.getItem() instanceof GlovesItem glovesItem) {
-                        material = glovesItem.getMaterial();
-                    }
-                    if (material != null) {
-                        int currentEquipmentCount = EquipmentUtil.getArmorCount(player, material);
-                        Component component;
-                        if (currentEquipmentCount >= 3) {
-                            component = Component.literal("3/3").withStyle(ChatFormatting.WHITE);
-                        } else {
-                            component = Component.literal(currentEquipmentCount + "/3").withStyle(ChatFormatting.GRAY);
-                        }
-                        components.add(i, Component.translatable(string, component));
-                    }
-                } else {
-                    components.add(i, Component.translatable(string));
-                }
-            }
-        }
     }
 
     public static void addShieldTooltips(List<Component> components, ItemStack stack) { //todo i need to make an easy abstracted/scaleable system for replacing specific tooltip lines.

@@ -325,7 +325,6 @@ public class AetherIIItems {
     }
 
     public static void registerTooltips(Player player, ItemStack itemStack, List<Component> itemTooltips) {
-        EquipmentUtil.addAbilityTooltips(player, itemStack, itemTooltips);
         EquipmentUtil.addShieldTooltips(itemTooltips, itemStack);
         EquipmentUtil.addArmorTooltips(player, itemTooltips, itemStack);
         EquipmentUtil.addGloveTooltips(player, itemTooltips, itemStack); //todo move to glovesitem class.
