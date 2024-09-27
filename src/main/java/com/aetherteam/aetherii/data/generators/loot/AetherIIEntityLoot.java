@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -185,8 +184,9 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(Blocks.AIR).setWeight(9)) //TODO: WITHER SKELETON CODE
-                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CORE.get()))
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CORE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
+                        )
                 )
         );
 
