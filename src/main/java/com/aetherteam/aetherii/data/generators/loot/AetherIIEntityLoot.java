@@ -184,9 +184,9 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                         .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CORE.get())
-                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
-                         )
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CORE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
+                        )
                 )
         );
 

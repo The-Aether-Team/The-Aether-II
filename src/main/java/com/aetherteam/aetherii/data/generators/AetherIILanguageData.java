@@ -858,6 +858,21 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
 
+        // Projectile
+        this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
+        this.addEntityType(AetherIIEntityTypes.ARCTIC_SNOWBALL, "Arctic Snowball");
+        this.addEntityType(AetherIIEntityTypes.SKYROOT_PINECONE, "Skyroot Pinecone");
+        this.addEntityType(AetherIIEntityTypes.SCATTERGLASS_BOLT, "Scatterglass Bolt");
+        this.addEntityType(AetherIIEntityTypes.ZEPHYR_WEBBING_BALL, "Zephyr Webbing Ball");
+        this.addEntityType(AetherIIEntityTypes.TEMPEST_THUNDERBALL, "Tempest Thunderball");
+        this.addEntityType(AetherIIEntityTypes.SKEPHID_WEBBING_BALL, "Skephid Webbing Ball");
+        this.addEntityType(AetherIIEntityTypes.TOXIC_DART, "Toxic Dart");
+        this.addEntityType(AetherIIEntityTypes.VENOMOUS_DART, "Venomous Dart");
+
+        // Miscellaneous
+        this.addEntityType(AetherIIEntityTypes.ELECTRIC_FIELD, "Electric Field");
+
+
         // Dimensions
         this.addDimension(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, "Aether Highlands");
 

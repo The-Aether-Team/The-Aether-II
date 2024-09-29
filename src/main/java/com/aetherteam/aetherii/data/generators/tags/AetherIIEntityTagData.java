@@ -80,7 +80,23 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
         );
 
         // Vanilla
-        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), AetherIIEntityTypes.SKYROOT_PINECONE.get(), AetherIIEntityTypes.SCATTERGLASS_BOLT.get());
-        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(AetherIITags.Entities.KIRRID).add(AetherIIEntityTypes.AERBUNNY.get()).add(AetherIIEntityTypes.PHYG.get()).add(AetherIIEntityTypes.ZEPHYR.get()).add(AetherIIEntityTypes.FLYING_COW.get());
+        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(
+                AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
+                AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
+                AetherIIEntityTypes.SKYROOT_PINECONE.get(),
+                AetherIIEntityTypes.SCATTERGLASS_BOLT.get()
+        );
+        this.tag(EntityTypeTags.REDIRECTABLE_PROJECTILE).add(
+                AetherIIEntityTypes.TEMPEST_THUNDERBALL.get()
+        );
+        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).addTag(
+                AetherIITags.Entities.KIRRID
+        ).add(
+                AetherIIEntityTypes.PHYG.get(),
+                AetherIIEntityTypes.FLYING_COW.get(),
+                AetherIIEntityTypes.AERBUNNY.get(),
+                AetherIIEntityTypes.SKYROOT_LIZARD.get(),
+                AetherIIEntityTypes.ZEPHYR.get()
+        );
     }
 }
