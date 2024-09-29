@@ -821,7 +821,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get(),
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
                 AetherIIBlocks.HIGHLANDS_BUSH.get(),
-                AetherIIBlocks.BLUEBERRY_BUSH.get()
+                AetherIIBlocks.BLUEBERRY_BUSH.get(),
+                AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.BRYALINN_MOSS_CARPET.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_CARPET.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 AetherIIBlocks.ICESTONE.get(),

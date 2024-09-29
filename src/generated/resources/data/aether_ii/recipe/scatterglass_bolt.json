@@ -13,9 +13,9 @@
     }
   },
   "pattern": [
-    "  S",
+    " S ",
     " / ",
-    "F  "
+    " F "
   ],
   "result": {
     "count": 4,
