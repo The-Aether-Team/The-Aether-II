@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_holystone": {
+    "has_bryalinn_moss_block": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:holystone"
+            "items": "aether_ii:bryalinn_moss_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_holystone"
+      "has_bryalinn_moss_block"
     ]
   ],
   "rewards": {

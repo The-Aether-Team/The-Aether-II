@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "aether_ii:leather/hide"
+    },
+    "/": {
+      "tag": "aether_ii:rods/skyroot"
+    }
+  },
+  "pattern": [
+    "///",
+    "/#/",
+    "///"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:item_frame"
+  }
+}

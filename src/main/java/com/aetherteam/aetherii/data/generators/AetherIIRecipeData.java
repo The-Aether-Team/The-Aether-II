@@ -107,14 +107,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_HOLYSTONE.get())
                 .group("mossy_holystone")
                 .requires(AetherIIBlocks.HOLYSTONE.get())
-                .requires(Blocks.VINE)
-                .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE.get()), has(AetherIIBlocks.HOLYSTONE.get()))
+                .requires(AetherIIBlocks.BRYALINN_MOSS_VINES)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_VINES), has(AetherIIBlocks.BRYALINN_MOSS_VINES))
                 .save(consumer, this.name("mossy_holystone_with_vine"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.MOSSY_HOLYSTONE.get())
                 .group("mossy_holystone")
                 .requires(AetherIIBlocks.HOLYSTONE.get())
-                .requires(Blocks.MOSS_BLOCK)
-                .unlockedBy(getHasName(AetherIIBlocks.HOLYSTONE.get()), has(AetherIIBlocks.HOLYSTONE.get()))
+                .requires(AetherIIBlocks.BRYALINN_MOSS_BLOCK)
+                .unlockedBy(getHasName(AetherIIBlocks.BRYALINN_MOSS_BLOCK), has(AetherIIBlocks.BRYALINN_MOSS_BLOCK))
                 .save(consumer, this.name("mossy_holystone_with_moss"));
 
         // Arctic
@@ -177,10 +177,12 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         buttonBuilder(AetherIIBlocks.SKYROOT_BUTTON.get(), Ingredient.of(AetherIIBlocks.SKYROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.SKYROOT_PLANKS.get()), has(AetherIIBlocks.SKYROOT_PLANKS.get())).group("wooden_button").save(consumer);
         pressurePlateBuilder(RecipeCategory.REDSTONE, AetherIIBlocks.SKYROOT_PRESSURE_PLATE.get(), Ingredient.of(AetherIIBlocks.SKYROOT_PLANKS.get())).unlockedBy(getHasName(AetherIIBlocks.SKYROOT_PLANKS.get()), has(AetherIIBlocks.SKYROOT_PLANKS.get())).group("wooden_pressure_plate").save(consumer);
         this.stairs(AetherIIBlocks.SKYROOT_STAIRS, AetherIIBlocks.SKYROOT_PLANKS).group("wooden_stairs").save(consumer);
-        slabBuilder(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SKYROOT_SLAB.get(), Ingredient.of(AetherIIBlocks.SKYROOT_PLANKS.get()))
+        slabBuilder(RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.SKYROOT_SLAB, Ingredient.of(AetherIIBlocks.SKYROOT_PLANKS.get()))
                 .group("wooden_slab")
                 .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_PLANKS.get()), has(AetherIIBlocks.SKYROOT_PLANKS.get()))
                 .save(consumer);
+        sign(consumer, AetherIIBlocks.SKYROOT_SIGN.get(), AetherIIBlocks.SKYROOT_PLANKS);
+        hangingSign(consumer, AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG);
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_STAIRS.get(), AetherIIBlocks.SKYROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_SLAB.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), 2);
 
@@ -226,6 +228,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .group("wooden_slab")
                 .unlockedBy(getHasName(AetherIIBlocks.GREATROOT_PLANKS.get()), has(AetherIIBlocks.GREATROOT_PLANKS.get()))
                 .save(consumer);
+        sign(consumer, AetherIIBlocks.GREATROOT_SIGN.get(), AetherIIBlocks.GREATROOT_PLANKS);
+        hangingSign(consumer, AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.STRIPPED_GREATROOT_LOG);
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_STAIRS.get(), AetherIIBlocks.GREATROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_SLAB.get(), AetherIIBlocks.GREATROOT_PLANKS.get(), 2);
 
@@ -271,6 +275,8 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .group("wooden_slab")
                 .unlockedBy(getHasName(AetherIIBlocks.WISPROOT_PLANKS.get()), has(AetherIIBlocks.WISPROOT_PLANKS.get()))
                 .save(consumer);
+        sign(consumer, AetherIIBlocks.WISPROOT_SIGN.get(), AetherIIBlocks.WISPROOT_PLANKS);
+        hangingSign(consumer, AetherIIBlocks.WISPROOT_HANGING_SIGN.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG);
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_STAIRS.get(), AetherIIBlocks.WISPROOT_PLANKS.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_SLAB.get(), AetherIIBlocks.WISPROOT_PLANKS.get(), 2);
 
@@ -632,7 +638,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.ARTISANS_BENCH.get())
                 .define('A', AetherIITags.Items.PLATES_ARKENIUM)
                 .define('P', AetherIITags.Items.PLANKS_CRAFTING)
-                .define('H', AetherIITags.Items.STONE_CRAFTING)
+                .define('H', AetherIIBlocks.HOLYSTONE.get())
                 .pattern("AAA")
                 .pattern("PPP")
                 .pattern("HHH")
@@ -667,25 +673,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern("PPP")
                 .unlockedBy("has_wool", has(ItemTags.WOOL))
                 .save(consumer);
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_SIGN.get(), 3)
-                .group("wooden_sign")
-                .define('P', AetherIIBlocks.SKYROOT_PLANKS.get().asItem())
-                .define('/', Tags.Items.RODS_WOODEN)
-                .pattern("PPP")
-                .pattern("PPP")
-                .pattern(" / ")
-                .unlockedBy(getHasName(AetherIIBlocks.SKYROOT_PLANKS.get()), has(AetherIIBlocks.SKYROOT_PLANKS.get()))
-                .save(consumer);
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), 6)
-                .group("hanging_sign")
-                .define('#', AetherIIBlocks.STRIPPED_SKYROOT_LOG.get())
-                .define('X', Items.CHAIN)
-                .pattern("X X")
-                .pattern("###")
-                .pattern("###")
-                .unlockedBy("has_stripped_logs", has(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()))
-                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Items.ITEM_FRAME, 1)
+                .define('/', AetherIITags.Items.RODS_SKYROOT)
+                .define('#', AetherIITags.Items.LEATHER_HIDE)
+                .pattern("///")
+                .pattern("/#/")
+                .pattern("///")
+                .unlockedBy("has_leather", has(AetherIITags.Items.LEATHER_HIDE))
+                .save(consumer, "item_frame_from_hide");
 
         // Bookshelves
         bookshelf(consumer, AetherIIBlocks.SKYROOT_BOOKSHELF, AetherIIBlocks.SKYROOT_PLANKS);
@@ -760,9 +755,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .define('S', AetherIIItems.SCATTERGLASS_SHARD)
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
                 .define('F', Tags.Items.FEATHERS)
-                .pattern("  S")
+                .pattern(" S ")
                 .pattern(" / ")
-                .pattern("F  ")
+                .pattern(" F ")
                 .unlockedBy("has_scatterglass_shard", has(AetherIIItems.SCATTERGLASS_SHARD))
                 .save(consumer);
 

@@ -38,7 +38,7 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        if (level.getBlockState(pos.below()).is(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK)) {
+        if (level.getBlockState(pos.below()).is(AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK) || level.getBlockState(pos.below()).is(AetherIIBlocks.AMBRELINN_MOSS_BLOCK)) {
             return this.defaultBlockState().setValue(TYPE, GrassType.ENCHANTED);
         }
         return super.getStateForPlacement(context);

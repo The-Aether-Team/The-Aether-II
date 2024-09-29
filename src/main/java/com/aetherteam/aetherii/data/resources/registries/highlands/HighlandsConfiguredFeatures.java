@@ -139,7 +139,9 @@ public class HighlandsConfiguredFeatures {
 
     // Arctic
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPINE = createKey("skypine");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPINE_DECORATED = createKey("skypine_decorated");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA = createKey("greatboa");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> GREATBOA_DECORATED = createKey("greatboa_decorated");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_FRIGID_SIERRA = createKey("trees_biome_frigid_sierra");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREES_BIOME_ENDURING_WOODLANDS = createKey("trees_biome_enduring_woodland");
@@ -181,6 +183,9 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_CARPET = createKey("shayelinn_moss_carpet");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_VINES = createKey("shayelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHAYELINN_MOSS_FLOOR = createKey("shayelinn_moss_floor");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_CARPET = createKey("ambrelinn_moss_carpet");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_VINES = createKey("ambrelinn_moss_vines");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_FLOOR = createKey("ambrelinn_moss_floor");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE = createKey("ore_icestone");
@@ -879,12 +884,28 @@ public class HighlandsConfiguredFeatures {
                         new SkypineFoliagePlacer(UniformInt.of(3, 5), ConstantInt.of(2)),
                         new TwoLayersFeatureSize(2, 0, 2))
                         .ignoreVines()
+                        .build());
+        register(context, SKYPINE_DECORATED, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new StraightTrunkPlacer(6, 4, 1), BlockStateProvider.simple(AetherIIBlocks.SKYPINE_LEAVES.get().defaultBlockState()),
+                        new SkypineFoliagePlacer(UniformInt.of(3, 5), ConstantInt.of(2)),
+                        new TwoLayersFeatureSize(2, 0, 2))
+                        .ignoreVines()
                         .decorators(List.of(
                                 new AlterGroundTagDecorator(BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()), AetherIITags.Blocks.GRASS_SNOW_REPLACEABLE),
                                 new SnowDecorator(),
                                 new GroundFeatureDecorator(new WeightedStateProvider(twigs), 50)))
                         .build());
         register(context, GREATBOA, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
+                        new GiantTrunkPlacer(15, 3, 8), BlockStateProvider.simple(AetherIIBlocks.GREATBOA_LEAVES.get().defaultBlockState()),
+                        new GreatboaFoliagePlacer(ConstantInt.of(3), ConstantInt.of(0)),
+                        new TwoLayersFeatureSize(1, 2, 2))
+                        .ignoreVines().dirt(BlockStateProvider.simple(AetherIIBlocks.AETHER_DIRT.get().defaultBlockState()))
+                        .build());
+        register(context, GREATBOA_DECORATED, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.GREATROOT_LOG.get().defaultBlockState()),
                         new GiantTrunkPlacer(15, 3, 8), BlockStateProvider.simple(AetherIIBlocks.GREATBOA_LEAVES.get().defaultBlockState()),
@@ -898,14 +919,14 @@ public class HighlandsConfiguredFeatures {
                         .build());
 
         register(context, TREES_BIOME_FRIGID_SIERRA, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON))), 0.1F)
-        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON)))));
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE_DECORATED), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON))), 0.1F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA_DECORATED), BlockPredicateFilter.forPredicate(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARCTIC_TREE_SURVIVES_ON)))));
         register(context, TREES_BIOME_ENDURING_WOODLANDS, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.03F)
-        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get()))));
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.03F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get()))));
         register(context, TREES_BIOME_FROZEN_LAKES, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.35F)
-        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get()))));
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(GREATBOA_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.GREATBOA_SAPLING.get())), 0.35F)
+        ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPINE_DECORATED), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYPINE_SAPLING.get()))));
 
         // Irradiated
         register(context, SKYROOT_IRRADIATED, Feature.TREE,
@@ -1305,6 +1326,43 @@ public class HighlandsConfiguredFeatures {
                                         new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F)
                                 ),
                                 PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SHAYELINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(1),
+                        0.35F,
+                        5,
+                        0.925F,
+                        UniformInt.of(1, 4),
+                        0.5F
+                )
+        );
+        register(context,
+                AMBRELINN_MOSS_CARPET,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        3,
+                        2,
+                        2,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get())), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, BlockPredicate.solid(BlockPos.ZERO.below())))
+                )
+        );
+        register(context,
+                AMBRELINN_MOSS_VINES,
+                AetherIIFeatures.MOSS_VINES.get(),
+                new MossVinesConfiguration(SimpleStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_VINES.get()))
+        );
+        register(
+                context,
+                AMBRELINN_MOSS_FLOOR,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_DIRT,
+                        BlockStateProvider.simple(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()),
+                        PlacementUtils.inlinePlaced(Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(
+                                List.of(
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_CARPET)), 0.4F),
+                                        new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(MEDIUM_GRASS_PATCH)), 0.2F)
+                                ),
+                                PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(AMBRELINN_MOSS_VINES), CountPlacement.of(16), RandomOffsetPlacement.of(UniformInt.of(-1, 1), UniformInt.of(-1, 1))))),
                         CaveSurface.FLOOR,
                         ConstantInt.of(1),
                         0.35F,
