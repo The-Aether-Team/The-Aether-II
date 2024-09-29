@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "H": {
-      "tag": "aether_ii:stone_crafting"
+      "item": "aether_ii:holystone"
     },
     "Z": {
       "tag": "aether_ii:gems/zanite"

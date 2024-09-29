@@ -6,7 +6,7 @@
       "tag": "aether_ii:plates/arkenium"
     },
     "H": {
-      "tag": "aether_ii:stone_crafting"
+      "item": "aether_ii:holystone"
     }
   },
   "pattern": [
