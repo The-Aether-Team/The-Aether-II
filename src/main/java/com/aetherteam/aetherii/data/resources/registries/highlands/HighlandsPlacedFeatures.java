@@ -532,7 +532,7 @@ public class HighlandsPlacedFeatures {
         register(context, ORE_HOLYSTONE_QUARTZ, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_HOLYSTONE_QUARTZ),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.top())));
         register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AMBROSIUM),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(16, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.top())));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(18, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(24), VerticalAnchor.top())));
          register(context, ORE_ZANITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ZANITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(170))));
         register(context, ORE_GLINT, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GLINT),
