@@ -321,8 +321,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.WOODEN_SLABS).add(
                 AetherIIBlocks.SKYROOT_SLAB.asItem(),
-                AetherIIBlocks.GREATROOT_STAIRS.asItem(),
-                AetherIIBlocks.WISPROOT_STAIRS.asItem()
+                AetherIIBlocks.GREATROOT_SLAB.asItem(),
+                AetherIIBlocks.WISPROOT_SLAB.asItem()
         );
         this.tag(ItemTags.WOODEN_FENCES).add(
                 AetherIIBlocks.SKYROOT_FENCE.asItem(),
