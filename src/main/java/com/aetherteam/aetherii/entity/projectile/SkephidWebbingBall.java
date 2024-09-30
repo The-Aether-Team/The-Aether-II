@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.entity.projectile;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.PlayerAccessor;
 import net.minecraft.nbt.CompoundTag;
@@ -61,7 +63,7 @@ public class SkephidWebbingBall extends ThrowableProjectile implements ItemSuppl
                     playerAccessor.callHurtCurrentlyUsedShield(3.0F);
                 }
             } else {
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300, 1));
+                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.WEBBED, 350);
             }
         }
     }

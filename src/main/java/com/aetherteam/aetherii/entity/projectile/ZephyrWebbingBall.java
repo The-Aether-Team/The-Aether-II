@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.entity.projectile;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.PlayerAccessor;
 import net.minecraft.core.BlockPos;
@@ -105,7 +107,7 @@ public class ZephyrWebbingBall extends Fireball implements ItemSupplier {
                     playerAccessor.callHurtCurrentlyUsedShield(3.0F);
                 }
             } else {
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300));
+                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.WEBBED, 500);
             }
         }
     }
