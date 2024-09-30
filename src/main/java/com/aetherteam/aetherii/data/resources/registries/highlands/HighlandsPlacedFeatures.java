@@ -524,7 +524,7 @@ public class HighlandsPlacedFeatures {
         register(context, ORE_ICESTONE_SMALL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ICESTONE_SMALL),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top())));
         register(context, ORE_AGIOSITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AGIOSITE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(96))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(96))));
 
         register(context, ORE_HOLYSTONE_QUARTZ, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_HOLYSTONE_QUARTZ),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.top())));
