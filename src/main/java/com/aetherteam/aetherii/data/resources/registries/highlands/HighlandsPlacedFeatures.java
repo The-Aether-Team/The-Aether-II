@@ -103,6 +103,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ORE_ICESTONE = createKey("ore_icestone");
     public static final ResourceKey<PlacedFeature> ORE_ICESTONE_SMALL = createKey("ore_icestone_small");
     public static final ResourceKey<PlacedFeature> ORE_AGIOSITE = createKey("ore_agiosite");
+    public static final ResourceKey<PlacedFeature> ORE_AGIOSITE_SMALL = createKey("ore_agiosite_small");
 
     public static final ResourceKey<PlacedFeature> ORE_HOLYSTONE_QUARTZ = createKey("ore_holystone_quartz");
     public static final ResourceKey<PlacedFeature> ORE_AMBROSIUM = createKey("ore_ambrosium");
@@ -524,7 +525,9 @@ public class HighlandsPlacedFeatures {
         register(context, ORE_ICESTONE_SMALL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ICESTONE_SMALL),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.top())));
         register(context, ORE_AGIOSITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AGIOSITE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(96))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(96))));
+        register(context, ORE_AGIOSITE_SMALL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AGIOSITE),
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(96), 72))));
 
         register(context, ORE_HOLYSTONE_QUARTZ, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_HOLYSTONE_QUARTZ),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(128), VerticalAnchor.top())));
