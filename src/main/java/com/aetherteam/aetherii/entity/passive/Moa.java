@@ -453,7 +453,7 @@ public class Moa extends MountableAnimal {
             this.setSitting(!this.isSitting());
 
             return InteractionResult.sidedSuccess(this.level().isClientSide());
-        } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
+        } else if (!this.level().isClientSide() /*&& this.isPlayerGrown() TODO*/ && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
             if (!player.getAbilities().instabuild) {
                 itemStack.shrink(1);
             }
