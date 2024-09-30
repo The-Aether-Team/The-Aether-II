@@ -142,6 +142,7 @@ public class HighlandsPlacedFeatures {
 
 
     // Air
+    public static final ResourceKey<PlacedFeature> HIGH_GOLDEN_AERCLOUD = createKey("high_golden_aercloud");
     public static final ResourceKey<PlacedFeature> HIGH_STORM_AERCLOUD = createKey("high_storm_aercloud");
     public static final ResourceKey<PlacedFeature> HIGH_GREEN_AERCLOUD = createKey("high_green_aercloud");
     public static final ResourceKey<PlacedFeature> HIGH_PURPLE_AERCLOUD = createKey("high_purple_aercloud");
@@ -644,6 +645,11 @@ public class HighlandsPlacedFeatures {
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
+        register(context, HIGH_GOLDEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GOLDEN_AERCLOUD),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(288), VerticalAnchor.aboveBottom(320)),
+                RarityFilter.onAverageOnceEvery(96),
+                InSquarePlacement.spread(),
+                BiomeFilter.biome());
         register(context, HIGH_STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(288), VerticalAnchor.aboveBottom(320)),
                 RarityFilter.onAverageOnceEvery(72),
