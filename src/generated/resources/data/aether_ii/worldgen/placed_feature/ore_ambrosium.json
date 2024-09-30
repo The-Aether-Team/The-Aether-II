@@ -17,7 +17,8 @@
         },
         "min_inclusive": {
           "above_bottom": 24
-        }
+        },
+        "plateau": 96
       }
     },
     {

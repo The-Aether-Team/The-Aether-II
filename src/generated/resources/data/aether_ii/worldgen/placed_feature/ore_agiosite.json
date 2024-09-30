@@ -2,10 +2,8 @@
   "feature": "aether_ii:ore_agiosite",
   "placement": [
     {
-      "type": "minecraft:noise_based_count",
-      "noise_factor": 125.0,
-      "noise_offset": 0.0,
-      "noise_to_count_ratio": 150
+      "type": "minecraft:count",
+      "count": 6
     },
     {
       "type": "minecraft:in_square"
