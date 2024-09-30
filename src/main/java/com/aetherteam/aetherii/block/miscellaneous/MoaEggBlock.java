@@ -89,6 +89,7 @@ public class MoaEggBlock extends BaseEntityBlock {
             if (moa != null) {
                 Vec3 vec3 = pos.getCenter();
                 moa.setBaby(true);
+                moa.setPlayerGrown(true);
 //                moa.setMoaTypeByKey(this.moaType);
                 moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
                 level.addFreshEntity(moa);
