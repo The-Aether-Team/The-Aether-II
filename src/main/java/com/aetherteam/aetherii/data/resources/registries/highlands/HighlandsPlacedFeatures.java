@@ -531,15 +531,15 @@ public class HighlandsPlacedFeatures {
         register(context, ORE_AMBROSIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_AMBROSIUM),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(18, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(24), VerticalAnchor.top(), 96))));
          register(context, ORE_ZANITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ZANITE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(12, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(170))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(64), VerticalAnchor.aboveBottom(170))));
         register(context, ORE_GLINT, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GLINT),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(114))));
          register(context, ORE_ARKENIUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_ARKENIUM),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(10, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96), 60))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(7, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96), 48))));
         register(context, ORE_GRAVITITE_BURIED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GRAVITITE_BURIED),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
         register(context, ORE_GRAVITITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GRAVITITE),
-                NitrogenPlacedFeatureBuilders.commonOrePlacement(7, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
+                NitrogenPlacedFeatureBuilders.commonOrePlacement(5, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(72), 20))));
         register(context, ORE_CORROBONITE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_CORROBONITE),
                 NitrogenPlacedFeatureBuilders.commonOrePlacement(3, HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(60), 25))));
     }
