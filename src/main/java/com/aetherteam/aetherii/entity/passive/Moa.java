@@ -785,7 +785,7 @@ public class Moa extends MountableAnimal {
 
     @Override
     public boolean isSaddleable() {
-        return super.isSaddleable() && this.isPlayerGrown();
+        return super.isSaddleable() /*&& this.isPlayerGrown()*/;
     }
 
     /**
