@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -39,6 +40,7 @@ public class MoaEggBlock extends BaseEntityBlock {
     public static final EnumProperty<Moa.EyeColor> EYES = EnumProperty.create("eyes", Moa.EyeColor.class);
     public static final EnumProperty<Moa.FeatherColor> FEATHERS = EnumProperty.create("feathers", Moa.FeatherColor.class);
     public static final IntegerProperty HATCH = BlockStateProperties.HATCH;
+    public static final BooleanProperty WILD = BooleanProperty.create("wild");
     public static final int MAX_HATCH_LEVEL = 2;
     private static final int REGULAR_HATCH_TIME_TICKS = 24000;
     private static final int BOOSTED_HATCH_TIME_TICKS = 12000;
@@ -47,7 +49,7 @@ public class MoaEggBlock extends BaseEntityBlock {
 
     public MoaEggBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HATCH, 0).setValue(KERATIN, Moa.KeratinColor.TEMPEST).setValue(EYES, Moa.EyeColor.PORTAGE).setValue(FEATHERS, Moa.FeatherColor.BLUE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HATCH, 0).setValue(KERATIN, Moa.KeratinColor.TEMPEST).setValue(EYES, Moa.EyeColor.PORTAGE).setValue(FEATHERS, Moa.FeatherColor.BLUE).setValue(WILD, false));
     }
 
     @Override
@@ -55,13 +57,13 @@ public class MoaEggBlock extends BaseEntityBlock {
         return CODEC;
     }
 
-//    public ResourceKey<MoaFeatherShape> getMoaType() {
-//        return moaType;
-//    }
+    //public ResourceKey<MoaFeatherShape> getMoaType() {
+    //    return moaType;
+    //}
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HATCH).add(KERATIN).add(EYES).add(FEATHERS);
+        builder.add(HATCH).add(KERATIN).add(EYES).add(FEATHERS).add(WILD);
     }
 
     @Override
@@ -89,8 +91,10 @@ public class MoaEggBlock extends BaseEntityBlock {
             if (moa != null) {
                 Vec3 vec3 = pos.getCenter();
                 moa.setBaby(true);
-                moa.setPlayerGrown(true);
-//                moa.setMoaTypeByKey(this.moaType);
+                if (!state.getValue(WILD)) {
+                    moa.setPlayerGrown(true);
+                }
+                //moa.setMoaTypeByKey(this.moaType);
                 moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
                 level.addFreshEntity(moa);
             }
@@ -115,8 +119,8 @@ public class MoaEggBlock extends BaseEntityBlock {
         return false;
     }
 
-    public static boolean hatchBoost(BlockGetter pLevel, BlockPos pPos) {
-        return pLevel.getBlockState(pPos.below()).is(AetherIITags.Blocks.MOA_HATCH_BLOCK);
+    public static boolean hatchBoost(BlockGetter level, BlockPos pos) {
+        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.MOA_HATCH_BLOCK);
     }
 
     @Nullable
@@ -127,7 +131,7 @@ public class MoaEggBlock extends BaseEntityBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, AetherIIBlockEntityTypes.MOA_EGG.get(), MoaEggBlockEntity::tick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
+        return createTickerHelper(blockEntity, AetherIIBlockEntityTypes.MOA_EGG.get(), MoaEggBlockEntity::tick);
     }
 }
