@@ -2,7 +2,7 @@
   "type": "aether_ii:altar_enchanting",
   "category": "repairing",
   "experience": 0.0,
-  "fuel_count": 4,
+  "fuel_count": 8,
   "group": "repair_gravitite",
   "ingredient": {
     "item": "aether_ii:gravitite_shovel"
