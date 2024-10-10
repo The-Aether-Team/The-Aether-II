@@ -434,6 +434,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SlabBlock> UNDERSHALE_SLAB = register("undershale_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get())));
     public static final DeferredBlock<WallBlock> UNDERSHALE_WALL = register("undershale_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()).forceSolidOn()));
 
+    // Undershale Bricks
+    public static final DeferredBlock<Block> UNDERSHALE_BRICKS = register("undershale_bricks", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<StairBlock> UNDERSHALE_BRICK_STAIRS = register("undershale_brick_stairs", () -> new StairBlock(UNDERSHALE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get())));
+    public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get())));
+    public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn()));
+
     // Agiosite
     public static final DeferredBlock<StairBlock> AGIOSITE_STAIRS = register("agiosite_stairs", () -> new StairBlock(AGIOSITE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get())));
     public static final DeferredBlock<SlabBlock> AGIOSITE_SLAB = register("agiosite_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()).strength(2.0F, 6.0F)));

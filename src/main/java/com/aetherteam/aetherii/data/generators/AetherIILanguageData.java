@@ -361,6 +361,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_SLAB, "Undershale Slab");
         this.addBlock(AetherIIBlocks.UNDERSHALE_WALL, "Undershale Wall");
 
+        // Undershale Bricks
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICKS, "Undershale Bricks");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS, "Undershale Brick Stairs");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_SLAB, "Undershale Brick Slab");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_WALL, "Undershale Brick Wall");
+
         // Agiosite
         this.addBlock(AetherIIBlocks.AGIOSITE_STAIRS, "Agiosite Stairs");
         this.addBlock(AetherIIBlocks.AGIOSITE_SLAB, "Agiosite Slab");
