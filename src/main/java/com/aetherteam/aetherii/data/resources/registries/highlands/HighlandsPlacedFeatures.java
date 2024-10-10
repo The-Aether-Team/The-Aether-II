@@ -678,7 +678,7 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome());
         register(context, SURFACE_GOLDEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GOLDEN_AERCLOUD),
                 HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(208)),
-                RarityFilter.onAverageOnceEvery(70),
+                RarityFilter.onAverageOnceEvery(72),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, SURFACE_BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),

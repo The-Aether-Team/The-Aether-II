@@ -1,3 +1,6 @@
 {
-  "parent": "aether_ii:block/template_moa_egg"
+  "parent": "aether_ii:block/template_moa_egg",
+  "textures": {
+    "particle": "aether_ii:block/natural/woven_skyroot_sticks"
+  }
 }

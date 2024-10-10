@@ -40,10 +40,11 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(random);
         Moa.EyeColor eyeColor = Moa.EyeColor.getRandom(random);
         Moa.FeatherColor featherColor = Moa.FeatherColor.getRandom(random);
-        this.setBlock(level, pos, AetherIIBlocks.MOA_EGG.get().defaultBlockState().setValue(MoaEggBlock.KERATIN, keratinColor).setValue(MoaEggBlock.EYES, eyeColor).setValue(MoaEggBlock.FEATHERS, featherColor));
+        this.setBlock(level, pos, AetherIIBlocks.MOA_EGG.get().defaultBlockState().setValue(MoaEggBlock.KERATIN, keratinColor).setValue(MoaEggBlock.EYES, eyeColor).setValue(MoaEggBlock.FEATHERS, featherColor).setValue(MoaEggBlock.WILD, true));
         if (config.spawnMoas()) {
             for (int i = 0; i < 2; i++) {
                 Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel());
+                assert moa != null;
                 moa.setPos(pos.getCenter().add(i, 0, i));
                 MoaAi.initMoaHomeMemories(moa, level.getRandom());
                 moa.setBaby(false);
