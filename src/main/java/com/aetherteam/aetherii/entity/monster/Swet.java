@@ -113,7 +113,7 @@ public class Swet extends Mob implements Enemy {
     @Override
     public void tick() {
         // Handle dissolving in water.
-        if (this.isInWater()) {
+        if (this.isInWater() || level().isRainingAt(new BlockPos(((int) position().x()), ((int) position().y()), ((int) position().z())))) {
             this.spawnDissolveParticles();
             if (this.getWaterDamageScale() < 1.0F) {
                 this.setWaterDamageScale(this.getWaterDamageScale() + 0.05F);
