@@ -830,11 +830,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
+                AetherIIBlocks.UNDERSHALE.get(),
+                AetherIIBlocks.UNDERSHALE_STAIRS.get(),
+                AetherIIBlocks.UNDERSHALE_SLAB.get(),
+                AetherIIBlocks.UNDERSHALE_WALL.get(),
                 AetherIIBlocks.ICESTONE.get(),
                 AetherIIBlocks.ICESTONE_STAIRS.get(),
                 AetherIIBlocks.ICESTONE_SLAB.get(),
                 AetherIIBlocks.ICESTONE_WALL.get(),
                 AetherIIBlocks.ZANITE_ORE.get(),
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE.get(),
                 AetherIIBlocks.UNDERSHALE_ZANITE_ORE.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get()
         );
