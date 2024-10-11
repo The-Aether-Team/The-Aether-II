@@ -45,8 +45,8 @@ public class MoaEggBlock extends BaseEntityBlock {
     private static final int RANDOM_HATCH_OFFSET_TICKS = 300;
     private static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0);
 
-    public MoaEggBlock(BlockBehaviour.Properties p_277906_) {
-        super(p_277906_);
+    public MoaEggBlock(BlockBehaviour.Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(HATCH, 0).setValue(KERATIN, Moa.KeratinColor.TEMPEST).setValue(EYES, Moa.EyeColor.PORTAGE).setValue(FEATHERS, Moa.FeatherColor.BLUE));
     }
 
@@ -60,12 +60,12 @@ public class MoaEggBlock extends BaseEntityBlock {
 //    }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(HATCH).add(KERATIN).add(EYES).add(FEATHERS);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(HATCH).add(KERATIN).add(EYES).add(FEATHERS);
     }
 
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
@@ -78,39 +78,40 @@ public class MoaEggBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        if (!this.isReadyToHatch(pState)) {
-            pLevel.playSound(null, pPos, SoundEvents.SNIFFER_EGG_CRACK, SoundSource.BLOCKS, 0.7F, 0.9F + pRandom.nextFloat() * 0.2F);
-            pLevel.setBlock(pPos, pState.setValue(HATCH, Integer.valueOf(this.getHatchLevel(pState) + 1)), 2);
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!this.isReadyToHatch(state)) {
+            level.playSound(null, pos, SoundEvents.SNIFFER_EGG_CRACK, SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+            level.setBlock(pos, state.setValue(HATCH, this.getHatchLevel(state) + 1), 2);
         } else {
-            pLevel.playSound(null, pPos, SoundEvents.SNIFFER_EGG_HATCH, SoundSource.BLOCKS, 0.7F, 0.9F + pRandom.nextFloat() * 0.2F);
-            pLevel.destroyBlock(pPos, false);
-            Moa moa = AetherIIEntityTypes.MOA.get().create(pLevel);
+            level.playSound(null, pos, SoundEvents.SNIFFER_EGG_HATCH, SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
+            level.destroyBlock(pos, false);
+            Moa moa = AetherIIEntityTypes.MOA.get().create(level);
             if (moa != null) {
-                Vec3 vec3 = pPos.getCenter();
+                Vec3 vec3 = pos.getCenter();
                 moa.setBaby(true);
+                moa.setPlayerGrown(true);
 //                moa.setMoaTypeByKey(this.moaType);
-                moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(pLevel.random.nextFloat() * 360.0F), 0.0F);
-                pLevel.addFreshEntity(moa);
+                moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
+                level.addFreshEntity(moa);
             }
         }
     }
 
     @Override
-    public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {
-        boolean flag = hatchBoost(pLevel, pPos);
-        if (!pLevel.isClientSide() && flag) {
-            pLevel.levelEvent(3009, pPos, 0);
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        boolean flag = hatchBoost(level, pos);
+        if (!level.isClientSide() && flag) {
+            level.levelEvent(3009, pos, 0);
         }
 
         int i = flag ? 12000 : 24000;
         int j = i / 3;
-        pLevel.gameEvent(GameEvent.BLOCK_PLACE, pPos, GameEvent.Context.of(pState));
-        pLevel.scheduleTick(pPos, this, j + pLevel.random.nextInt(300));
+        level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(state));
+        level.scheduleTick(pos, this, j + level.random.nextInt(300));
     }
 
     @Override
-    public boolean isPathfindable(BlockState pState, PathComputationType pType) {
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
@@ -120,8 +121,8 @@ public class MoaEggBlock extends BaseEntityBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new MoaEggBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new MoaEggBlockEntity(pos, state);
     }
 
     @Nullable
