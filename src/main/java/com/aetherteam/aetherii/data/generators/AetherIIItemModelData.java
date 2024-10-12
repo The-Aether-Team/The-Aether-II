@@ -521,6 +521,12 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.itemBlock(AetherIIBlocks.UNDERSHALE_SLAB.get());
         this.itemWallBlock(AetherIIBlocks.UNDERSHALE_WALL.get(), AetherIIBlocks.UNDERSHALE.get(), "natural/");
 
+        // Undershale Bricks
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_BRICKS.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
+        this.itemBlock(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get());
+        this.itemWallBlock(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get(), "construction/");
+
         // Agiosite
         this.itemBlock(AetherIIBlocks.AGIOSITE_STAIRS.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE_SLAB.get());

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "aether_ii:block/construction/undershale_bricks"
+  }
+}

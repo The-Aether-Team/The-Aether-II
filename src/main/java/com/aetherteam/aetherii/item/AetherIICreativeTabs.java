@@ -138,6 +138,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.UNDERSHALE_STAIRS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_SLAB.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_WALL.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BRICKS.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get());
                 output.accept(AetherIIBlocks.AGIOSITE.get());
                 output.accept(AetherIIBlocks.AGIOSITE_STAIRS.get());
                 output.accept(AetherIIBlocks.AGIOSITE_SLAB.get());
