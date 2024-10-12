@@ -902,6 +902,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.MOA_SADDLE.get())
+                .define('#', AetherIIItems.TAEGORE_HIDE)
+                .define('/', AetherIIItems.CLOUDTWINE)
+                .pattern("###")
+                .pattern("#/#")
+                .unlockedBy("has_taegore_hide", has(AetherIIItems.TAEGORE_HIDE))
+                .save(consumer);
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(AetherIIItems.SPLINT.get()))
                 .requires(AetherIIItems.SKYROOT_STICK.get())
                 .requires(AetherIITags.Items.CLOUDWOOL)
