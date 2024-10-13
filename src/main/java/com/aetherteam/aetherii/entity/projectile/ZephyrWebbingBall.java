@@ -107,7 +107,7 @@ public class ZephyrWebbingBall extends Fireball implements ItemSupplier {
                     playerAccessor.callHurtCurrentlyUsedShield(3.0F);
                 }
             } else {
-                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.WEBBED, 500);
+                livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.WEBBED, 350);
             }
         }
     }
