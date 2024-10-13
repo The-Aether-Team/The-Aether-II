@@ -558,6 +558,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SCATTERGLASS_PANE.get(), AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get());
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.SCATTERGLASS_PANE.get(), AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
 
+        //Aerclouds
+        this.altarEnchanting(RecipeCategory.MISC, AetherIIBlocks.GREEN_AERCLOUD, AetherIIBlocks.BLUE_AERCLOUD, 1, 0.0F).save(consumer);
+
         // Wool
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.CLOUDTWINE, 4)
                 .requires(Ingredient.of(AetherIITags.Items.CLOUDWOOL))
