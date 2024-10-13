@@ -8,8 +8,8 @@
     "foliage_color": 11665355,
     "grass_color": 11927504,
     "music": {
-      "max_delay": 2400,
-      "min_delay": 600,
+      "max_delay": 10800,
+      "min_delay": 3600,
       "replace_current_music": false,
       "sound": "aether_ii:music.aether"
     },
@@ -74,6 +74,7 @@
       "aether_ii:middle_cold_aercloud",
       "aether_ii:middle_storm_aercloud",
       "aether_ii:surface_cold_aercloud",
+      "aether_ii:surface_golden_aercloud",
       "aether_ii:surface_blue_aercloud",
       "aether_ii:surface_green_aercloud",
       "aether_ii:surface_purple_aercloud",

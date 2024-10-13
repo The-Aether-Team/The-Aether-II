@@ -361,6 +361,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_SLAB, "Undershale Slab");
         this.addBlock(AetherIIBlocks.UNDERSHALE_WALL, "Undershale Wall");
 
+        // Undershale Bricks
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICKS, "Undershale Bricks");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS, "Undershale Brick Stairs");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_SLAB, "Undershale Brick Slab");
+        this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_WALL, "Undershale Brick Wall");
+
         // Agiosite
         this.addBlock(AetherIIBlocks.AGIOSITE_STAIRS, "Agiosite Stairs");
         this.addBlock(AetherIIBlocks.AGIOSITE_SLAB, "Agiosite Slab");
@@ -701,6 +707,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
         this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");
+        this.addItem(AetherIIItems.MOA_SADDLE, "Moa Saddle");
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 

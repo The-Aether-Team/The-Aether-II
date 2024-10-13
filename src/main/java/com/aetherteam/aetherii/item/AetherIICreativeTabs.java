@@ -138,6 +138,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.UNDERSHALE_STAIRS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_SLAB.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_WALL.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BRICKS.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get());
+                output.accept(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get());
                 output.accept(AetherIIBlocks.AGIOSITE.get());
                 output.accept(AetherIIBlocks.AGIOSITE_STAIRS.get());
                 output.accept(AetherIIBlocks.AGIOSITE_SLAB.get());
@@ -470,6 +474,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_TADPOLE_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_MILK_BUCKET.get());
+                output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());

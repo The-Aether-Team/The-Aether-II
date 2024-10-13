@@ -414,6 +414,19 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_SLAB.get(), AetherIIBlocks.UNDERSHALE.get(), 2);
         this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_WALL.get(), AetherIIBlocks.UNDERSHALE.get());
 
+        // Undershale Bricks
+        polished(consumer, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE_BRICKS.get(), AetherIIBlocks.UNDERSHALE.get());
+        this.stairs(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS, AetherIIBlocks.UNDERSHALE_BRICKS).save(consumer);
+        slab(consumer, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
+        wall(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_WALL.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICKS.get(), AetherIIBlocks.UNDERSHALE.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(), AetherIIBlocks.UNDERSHALE.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(), AetherIIBlocks.UNDERSHALE.get(), 2);
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_WALL.get(), AetherIIBlocks.UNDERSHALE.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get(), 2);
+        this.stonecuttingRecipe(consumer, RecipeCategory.DECORATIONS, AetherIIBlocks.UNDERSHALE_BRICK_WALL.get(), AetherIIBlocks.UNDERSHALE_BRICKS.get());
+
         // Agiosite
         this.stairs(AetherIIBlocks.AGIOSITE_STAIRS, AetherIIBlocks.AGIOSITE).save(consumer);
         slab(consumer, RecipeCategory.BUILDING_BLOCKS, AetherIIBlocks.AGIOSITE_SLAB.get(), AetherIIBlocks.AGIOSITE.get());
@@ -889,6 +902,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.MOA_SADDLE.get())
+                .define('#', AetherIIItems.TAEGORE_HIDE)
+                .define('/', AetherIIItems.CLOUDTWINE)
+                .pattern("###")
+                .pattern("#/#")
+                .unlockedBy("has_taegore_hide", has(AetherIIItems.TAEGORE_HIDE))
+                .save(consumer);
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(AetherIIItems.SPLINT.get()))
                 .requires(AetherIIItems.SKYROOT_STICK.get())
                 .requires(AetherIITags.Items.CLOUDWOOL)
@@ -986,15 +1008,15 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_CROSSBOW, 5).group("repair_arkenium").save(consumer, "repair_arkenium_crossbow");
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_SHIELD, 5).group("repair_arkenium").save(consumer, "repair_arkenium_shield");
 
-        this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_PICKAXE, 4).group("repair_gravitite").save(consumer, "repair_gravitite_pickaxe");
-        this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_AXE, 4).group("repair_gravitite").save(consumer, "repair_gravitite_axe");
-        this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_SHOVEL, 4).group("repair_gravitite").save(consumer, "repair_gravitite_shovel");
-        this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_TROWEL, 4).group("repair_gravitite").save(consumer, "repair_gravitite_trowel");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_SHORTSWORD, 4).group("repair_gravitite").save(consumer, "repair_gravitite_shortsword");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_HAMMER, 4).group("repair_gravitite").save(consumer, "repair_gravitite_hammer");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_SPEAR, 4).group("repair_gravitite").save(consumer, "repair_gravitite_spear");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_CROSSBOW, 4).group("repair_gravitite").save(consumer, "repair_gravitite_crossbow");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_SHIELD, 4).group("repair_gravitite").save(consumer, "repair_gravitite_shield");
+        this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_PICKAXE, 8).group("repair_gravitite").save(consumer, "repair_gravitite_pickaxe");
+        this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_AXE, 8).group("repair_gravitite").save(consumer, "repair_gravitite_axe");
+        this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_SHOVEL, 8).group("repair_gravitite").save(consumer, "repair_gravitite_shovel");
+        this.altarRepairing(RecipeCategory.TOOLS, AetherIIItems.GRAVITITE_TROWEL, 8).group("repair_gravitite").save(consumer, "repair_gravitite_trowel");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_SHORTSWORD, 8).group("repair_gravitite").save(consumer, "repair_gravitite_shortsword");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_HAMMER, 8).group("repair_gravitite").save(consumer, "repair_gravitite_hammer");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_SPEAR, 8).group("repair_gravitite").save(consumer, "repair_gravitite_spear");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_CROSSBOW, 8).group("repair_gravitite").save(consumer, "repair_gravitite_crossbow");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_SHIELD, 8).group("repair_gravitite").save(consumer, "repair_gravitite_shield");
 
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.TAEGORE_HIDE_HELMET, 1).group("repair_taegore_hide_armor").save(consumer, "repair_taegore_hide_helmet");
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.TAEGORE_HIDE_CHESTPLATE, 1).group("repair_taegore_hide_armor").save(consumer, "repair_taegore_hide_chestplate");
@@ -1020,10 +1042,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_BOOTS, 5).group("repair_arkenium_armor").save(consumer, "repair_arkenium_boots");
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ARKENIUM_GLOVES, 5).group("repair_arkenium_armor").save(consumer, "repair_arkenium_gloves");
 
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_HELMET, 4).group("repair_gravitite_armor").save(consumer, "repair_gravitite_helmet");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_CHESTPLATE, 4).group("repair_gravitite_armor").save(consumer, "repair_gravitite_chestplate");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_LEGGINGS, 4).group("repair_gravitite_armor").save(consumer, "repair_gravitite_leggings");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_BOOTS, 4).group("repair_gravitite_armor").save(consumer, "repair_gravitite_boots");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_GLOVES, 4).group("repair_gravitite_armor").save(consumer, "repair_gravitite_gloves");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_HELMET, 8).group("repair_gravitite_armor").save(consumer, "repair_gravitite_helmet");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_CHESTPLATE, 8).group("repair_gravitite_armor").save(consumer, "repair_gravitite_chestplate");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_LEGGINGS, 8).group("repair_gravitite_armor").save(consumer, "repair_gravitite_leggings");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_BOOTS, 8).group("repair_gravitite_armor").save(consumer, "repair_gravitite_boots");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.GRAVITITE_GLOVES, 8).group("repair_gravitite_armor").save(consumer, "repair_gravitite_gloves");
     }
 }

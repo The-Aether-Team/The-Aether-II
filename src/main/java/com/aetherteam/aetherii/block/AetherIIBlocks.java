@@ -101,7 +101,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
     // Underground
     public static final DeferredBlock<Block> HOLYSTONE = register("holystone", () -> new Block(Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops()));
-    public static final DeferredBlock<Block> UNDERSHALE = register("undershale", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> UNDERSHALE = register("undershale", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> AGIOSITE = register("agiosite", () -> new Block(Block.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops()));
     public static final DeferredBlock<HalfTransparentBlock> CRUDE_SCATTERGLASS = register("crude_scatterglass", () -> new HalfTransparentBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion().isViewBlocking(AetherIIBlocks::never)));
     public static final DeferredBlock<Block> SKY_ROOTS = register("sky_roots", () -> new AetherHangingRootsBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).replaceable().noCollission().instabreak().sound(SoundType.HANGING_ROOTS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY)));
@@ -149,12 +149,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> GLINT_ORE = register("glint_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> ARKENIUM_ORE = register("arkenium_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> GRAVITITE_ORE = register("gravitite_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
-    public static final DeferredBlock<Block> UNDERSHALE_AMBROSIUM_ORE = register("undershale_ambrosium_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), Block.Properties.ofFullCopy(AMBROSIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(3.0F, 6.0F).sound(SoundType.DEEPSLATE).lightLevel(AetherIIBlocks::lightLevel8)));
-    public static final DeferredBlock<Block> UNDERSHALE_ZANITE_ORE = register("undershale_zanite_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.ofFullCopy(ZANITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(3.0F, 6.0F).sound(SoundType.DEEPSLATE)));
-    public static final DeferredBlock<Block> UNDERSHALE_GLINT_ORE = register("undershale_glint_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.ofFullCopy(GLINT_ORE.get()).mapColor(MapColor.WOOL).strength(3.0F, 6.0F).sound(SoundType.DEEPSLATE)));
-    public static final DeferredBlock<Block> UNDERSHALE_ARKENIUM_ORE = register("undershale_arkenium_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.ofFullCopy(ARKENIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(3.0F, 6.0F).sound(SoundType.DEEPSLATE)));
-    public static final DeferredBlock<Block> UNDERSHALE_GRAVITITE_ORE = register("undershale_gravitite_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.ofFullCopy(GRAVITITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(3.0F, 6.0F).sound(SoundType.DEEPSLATE)));
-    public static final DeferredBlock<Block> CORROBONITE_ORE = register("corrobonite_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> UNDERSHALE_AMBROSIUM_ORE = register("undershale_ambrosium_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), Block.Properties.ofFullCopy(AMBROSIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).lightLevel(AetherIIBlocks::lightLevel8)));
+    public static final DeferredBlock<Block> UNDERSHALE_ZANITE_ORE = register("undershale_zanite_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.ofFullCopy(ZANITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE)));
+    public static final DeferredBlock<Block> UNDERSHALE_GLINT_ORE = register("undershale_glint_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.ofFullCopy(GLINT_ORE.get()).mapColor(MapColor.WOOL).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE)));
+    public static final DeferredBlock<Block> UNDERSHALE_ARKENIUM_ORE = register("undershale_arkenium_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.ofFullCopy(ARKENIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE)));
+    public static final DeferredBlock<Block> UNDERSHALE_GRAVITITE_ORE = register("undershale_gravitite_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.ofFullCopy(GRAVITITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE)));
+    public static final DeferredBlock<Block> CORROBONITE_ORE = register("corrobonite_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> CORROBONITE_CLUSTER = register("corrobonite_cluster", () -> new CorroboniteClusterBlock(Block.Properties.of().mapColor(MapColor.WOOL).strength(3.0F, 3.0F).noOcclusion().noCollission()));
 
     // Aerclouds
@@ -434,6 +434,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SlabBlock> UNDERSHALE_SLAB = register("undershale_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get())));
     public static final DeferredBlock<WallBlock> UNDERSHALE_WALL = register("undershale_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()).forceSolidOn()));
 
+    // Undershale Bricks
+    public static final DeferredBlock<Block> UNDERSHALE_BRICKS = register("undershale_bricks", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<StairBlock> UNDERSHALE_BRICK_STAIRS = register("undershale_brick_stairs", () -> new StairBlock(UNDERSHALE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get())));
+    public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get())));
+    public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn()));
+
     // Agiosite
     public static final DeferredBlock<StairBlock> AGIOSITE_STAIRS = register("agiosite_stairs", () -> new StairBlock(AGIOSITE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get())));
     public static final DeferredBlock<SlabBlock> AGIOSITE_SLAB = register("agiosite_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()).strength(2.0F, 6.0F)));
@@ -460,7 +466,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<WallBlock> ICESTONE_WALL = register("icestone_wall", () -> new IcestoneWallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE.get()).forceSolidOn()));
 
     // Icestone Bricks
-    public static final DeferredBlock<Block> ICESTONE_BRICKS = register("icestone_bricks", () -> new Block(Block.Properties.of().mapColor(MapColor.ICE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> ICESTONE_BRICKS = register("icestone_bricks", () -> new Block(Block.Properties.of().mapColor(MapColor.ICE).sound(SoundType.GLASS).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops()));
     public static final DeferredBlock<StairBlock> ICESTONE_BRICK_STAIRS = register("icestone_bricks_stairs", () -> new StairBlock(ICESTONE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get())));
     public static final DeferredBlock<SlabBlock> ICESTONE_BRICK_SLAB = register("icestone_bricks_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()).strength(2.0F, 6.0F)));
     public static final DeferredBlock<WallBlock> ICESTONE_BRICK_WALL = register("icestone_bricks_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()).forceSolidOn()));
