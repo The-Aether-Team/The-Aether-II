@@ -1,21 +1,21 @@
 {
-  "feature": "aether_ii:storm_aercloud",
+  "feature": "aether_ii:blue_aercloud",
   "placement": [
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "above_bottom": 320
+          "above_bottom": 220
         },
         "min_inclusive": {
-          "above_bottom": 288
+          "above_bottom": 112
         }
       }
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 72
+      "chance": 64
     },
     {
       "type": "minecraft:in_square"

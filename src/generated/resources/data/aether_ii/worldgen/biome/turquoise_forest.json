@@ -68,19 +68,12 @@
       "aether_ii:magnetic_shroom_patch"
     ],
     [
-      "aether_ii:high_storm_aercloud",
-      "aether_ii:high_green_aercloud",
-      "aether_ii:high_purple_aercloud",
-      "aether_ii:middle_cold_aercloud",
-      "aether_ii:middle_storm_aercloud",
-      "aether_ii:surface_cold_aercloud",
-      "aether_ii:surface_blue_aercloud",
-      "aether_ii:surface_green_aercloud",
-      "aether_ii:surface_purple_aercloud",
-      "aether_ii:lower_storm_aercloud",
-      "aether_ii:lower_blue_aercloud",
-      "aether_ii:lower_green_aercloud",
-      "aether_ii:lower_purple_aercloud"
+      "aether_ii:cold_aercloud",
+      "aether_ii:cold_aercloud_undercloud",
+      "aether_ii:blue_aercloud",
+      "aether_ii:purple_aercloud",
+      "aether_ii:green_aercloud",
+      "aether_ii:storm_aercloud_undercloud"
     ]
   ],
   "has_precipitation": true,

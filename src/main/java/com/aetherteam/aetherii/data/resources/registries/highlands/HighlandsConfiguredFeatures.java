@@ -237,6 +237,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_AERCLOUD = createKey("blue_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GREEN_AERCLOUD = createKey("green_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD = createKey("purple_aercloud");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_AERCLOUD_RARE = createKey("purple_aercloud_highfields");
     public static final ResourceKey<ConfiguredFeature<?, ?>> STORM_AERCLOUD = createKey("storm_aercloud");
 
 
@@ -1712,12 +1713,13 @@ public class HighlandsConfiguredFeatures {
             purpleAerclouds.add(AetherIIBlocks.PURPLE_AERCLOUD.get().defaultBlockState().setValue(PurpleAercloudBlock.FACING, direction), 1);
         }
         
-        register(context, COLD_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(14, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
-        register(context, GOLDEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(10, BlockStateProvider.simple(AetherIIBlocks.GOLDEN_AERCLOUD.get().defaultBlockState())));
+        register(context, COLD_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(18, BlockStateProvider.simple(AetherIIBlocks.COLD_AERCLOUD.get().defaultBlockState())));
+        register(context, GOLDEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(12, BlockStateProvider.simple(AetherIIBlocks.GOLDEN_AERCLOUD.get().defaultBlockState())));
         register(context, BLUE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(14, BlockStateProvider.simple(AetherIIBlocks.BLUE_AERCLOUD.get().defaultBlockState())));
         register(context, GREEN_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(14, BlockStateProvider.simple(AetherIIBlocks.GREEN_AERCLOUD.get().defaultBlockState())));
         register(context, PURPLE_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(14, new WeightedStateProvider(purpleAerclouds)));
-        register(context, STORM_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(12, BlockStateProvider.simple(AetherIIBlocks.STORM_AERCLOUD.get().defaultBlockState())));
+        register(context, PURPLE_AERCLOUD_RARE, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(12, new WeightedStateProvider(purpleAerclouds)));
+        register(context, STORM_AERCLOUD, AetherIIFeatures.AERCLOUD.get(), new AercloudConfiguration(16, BlockStateProvider.simple(AetherIIBlocks.STORM_AERCLOUD.get().defaultBlockState())));
     }
 
     private static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {

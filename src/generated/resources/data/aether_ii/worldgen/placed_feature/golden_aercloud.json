@@ -1,15 +1,15 @@
 {
-  "feature": "aether_ii:purple_aercloud",
+  "feature": "aether_ii:golden_aercloud",
   "placement": [
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:uniform",
+        "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "above_bottom": 304
+          "above_bottom": 256
         },
         "min_inclusive": {
-          "above_bottom": 256
+          "above_bottom": 136
         }
       }
     },
