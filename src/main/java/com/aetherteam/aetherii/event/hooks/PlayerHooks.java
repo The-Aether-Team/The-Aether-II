@@ -13,9 +13,14 @@ import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -27,6 +32,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -78,6 +86,46 @@ public class PlayerHooks {
                 success = true;
             }
             if (success) {
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+                player.swing(hand);
+                return true;
+            }
+        }
+        return cancellationStatus;
+    }
+
+    public static boolean ferrositeMudBottleConversion(Player player, Level level, BlockPos pos, ItemStack itemStack, InteractionHand hand, Direction face, boolean cancellationStatus) {
+        PotionContents potionContents = itemStack.get(DataComponents.POTION_CONTENTS);
+        if ((face != Direction.DOWN && potionContents != null && potionContents.is(Potions.WATER))) {
+            if (level.getBlockState(pos).getBlock() == AetherIIBlocks.FERROSITE_SAND.get()) {
+
+                level.setBlockAndUpdate(pos, AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState());
+                player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                    ItemStack bottleStack = new ItemStack(Items.GLASS_BOTTLE);
+                    if (!player.addItem(bottleStack)) {
+                        Containers.dropItemStack(player.level(), player.getX(), player.getY(), player.getZ(), bottleStack);
+                    }
+                }
+
+                if (!level.isClientSide) {
+                    if(level instanceof ServerLevel serverLevel) {
+                        for (int i = 0; i < 5; i++) {
+                            serverLevel.sendParticles(ParticleTypes.SPLASH,
+                                    (double) pos.getX() + level.random.nextDouble(),
+                                    pos.getY() + 1,
+                                    (double) pos.getZ() + level.random.nextDouble(),
+                                    1, 0.0, 0.0, 0.0, 1.0
+                            );
+                        }
+                    }
+                }
+
+                level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
+
                 if (!player.getAbilities().instabuild) {
                     itemStack.shrink(1);
                 }

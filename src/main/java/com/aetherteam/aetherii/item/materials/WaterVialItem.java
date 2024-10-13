@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.materials;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -56,30 +57,35 @@ public class WaterVialItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
-        BlockPos blockPos = context.getClickedPos();
+        BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
-        ItemStack itemstack = context.getItemInHand();
-        BlockState blockstate = level.getBlockState(blockPos);
-        if (context.getClickedFace() != Direction.DOWN && blockstate.is(BlockTags.CONVERTABLE_TO_MUD)) {
-            level.playSound(null, blockPos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
-            player.setItemInHand(context.getHand(), ItemUtils.createFilledResult(itemstack, player, new ItemStack(AetherIIItems.SCATTERGLASS_VIAL.get())));
-            player.awardStat(Stats.ITEM_USED.get(itemstack.getItem()));
+        ItemStack itemStack = context.getItemInHand();
+        BlockState state = level.getBlockState(pos);
+        if (context.getClickedFace() != Direction.DOWN && (state.is(BlockTags.CONVERTABLE_TO_MUD) || state.is(AetherIIBlocks.FERROSITE_SAND.get()))) {
+            level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
+            assert player != null;
+            player.setItemInHand(context.getHand(), ItemUtils.createFilledResult(itemStack, player, new ItemStack(AetherIIItems.SCATTERGLASS_VIAL.get())));
+            player.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
             if (!level.isClientSide()) {
                 ServerLevel serverLevel = (ServerLevel) level;
 
                 for (int i = 0; i < 5; i++) {
                     serverLevel.sendParticles(ParticleTypes.SPLASH,
-                            (double) blockPos.getX() + level.random.nextDouble(),
-                            blockPos.getY() + 1,
-                            (double) blockPos.getZ() + level.random.nextDouble(),
+                            (double) pos.getX() + level.random.nextDouble(),
+                            pos.getY() + 1,
+                            (double) pos.getZ() + level.random.nextDouble(),
                             1, 0.0, 0.0, 0.0, 1.0
                     );
                 }
             }
 
-            level.playSound(null, blockPos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-            level.gameEvent(null, GameEvent.FLUID_PLACE, blockPos);
-            level.setBlockAndUpdate(blockPos, Blocks.MUD.defaultBlockState());
+            level.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
+            if (state.is(AetherIIBlocks.FERROSITE_SAND.get())) {
+                level.setBlockAndUpdate(pos, AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState());
+            }
+            else level.setBlockAndUpdate(pos, Blocks.MUD.defaultBlockState());
+
             return InteractionResult.sidedSuccess(level.isClientSide());
         } else {
             return InteractionResult.PASS;

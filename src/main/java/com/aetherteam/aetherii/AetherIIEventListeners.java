@@ -121,14 +121,15 @@ public class AetherIIEventListeners {
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();
         Level level = event.getLevel();
-        InteractionHand interactionHand = event.getHand();
+        InteractionHand hand = event.getHand();
         ItemStack itemStack = event.getItemStack();
-        BlockPos blockPos = event.getPos();
-        Direction directionFace = event.getFace();
+        BlockPos pos = event.getPos();
+        Direction face = event.getFace();
         boolean cancelled = false;
 
-        cancelled = PlayerHooks.playerActivatePortal(player, level, blockPos, directionFace, itemStack, interactionHand, cancelled);
-        cancelled = PlayerHooks.snowlogBlock(player, level, blockPos, itemStack, interactionHand, cancelled);
+        cancelled = PlayerHooks.playerActivatePortal(player, level, pos, face, itemStack, hand, cancelled);
+        cancelled = PlayerHooks.snowlogBlock(player, level, pos, itemStack, hand, cancelled);
+        cancelled = PlayerHooks.ferrositeMudBottleConversion(player, level, pos, itemStack, hand, face, cancelled);
 
         if (cancelled) {
             event.setCanceled(true);
