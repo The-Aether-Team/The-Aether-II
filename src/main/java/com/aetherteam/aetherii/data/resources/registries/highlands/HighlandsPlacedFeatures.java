@@ -647,17 +647,17 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(80), VerticalAnchor.aboveBottom(220)),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(72), VerticalAnchor.aboveBottom(220)),
                 RarityFilter.onAverageOnceEvery(72),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
-                HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(172)),
+                HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(80), VerticalAnchor.aboveBottom(180)),
                 RarityFilter.onAverageOnceEvery(128),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(112), VerticalAnchor.aboveBottom(156)),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(156)),
                 RarityFilter.onAverageOnceEvery(112),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
@@ -667,7 +667,7 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
+                HeightRangePlacement.triangle(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(112)),
                 RarityFilter.onAverageOnceEvery(48),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
