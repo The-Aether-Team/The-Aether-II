@@ -9,13 +9,13 @@
           "above_bottom": 256
         },
         "min_inclusive": {
-          "above_bottom": 136
+          "above_bottom": 156
         }
       }
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 72
+      "chance": 136
     },
     {
       "type": "minecraft:in_square"

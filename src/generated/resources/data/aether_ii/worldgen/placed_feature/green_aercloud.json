@@ -4,18 +4,18 @@
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:uniform",
+        "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "above_bottom": 220
+          "above_bottom": 172
         },
         "min_inclusive": {
-          "above_bottom": 112
+          "above_bottom": 96
         }
       }
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 64
+      "chance": 128
     },
     {
       "type": "minecraft:in_square"

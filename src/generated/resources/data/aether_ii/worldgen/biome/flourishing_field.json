@@ -67,11 +67,12 @@
     ],
     [
       "aether_ii:cold_aercloud",
-      "aether_ii:cold_aercloud_undercloud",
       "aether_ii:golden_aercloud",
       "aether_ii:blue_aercloud",
-      "aether_ii:purple_aercloud_rare",
-      "aether_ii:storm_aercloud_undercloud"
+      "aether_ii:purple_aercloud",
+      "aether_ii:purple_aercloud_small",
+      "aether_ii:green_aercloud",
+      "aether_ii:storm_aercloud"
     ]
   ],
   "has_precipitation": true,

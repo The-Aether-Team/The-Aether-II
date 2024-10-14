@@ -145,14 +145,12 @@ public class HighlandsPlacedFeatures {
     // Air
 
     public static final ResourceKey<PlacedFeature> COLD_AERCLOUD = createKey("cold_aercloud");
-    public static final ResourceKey<PlacedFeature> COLD_AERCLOUD_UNDERCLOUD = createKey("cold_aercloud_undercloud");
     public static final ResourceKey<PlacedFeature> GOLDEN_AERCLOUD = createKey("golden_aercloud");
     public static final ResourceKey<PlacedFeature> BLUE_AERCLOUD = createKey("blue_aercloud");
     public static final ResourceKey<PlacedFeature> GREEN_AERCLOUD = createKey("green_aercloud");
     public static final ResourceKey<PlacedFeature> PURPLE_AERCLOUD = createKey("purple_aercloud");
-    public static final ResourceKey<PlacedFeature> PURPLE_AERCLOUD_RARE = createKey("purple_aercloud_rare");
+    public static final ResourceKey<PlacedFeature> PURPLE_AERCLOUD_SMALL = createKey("purple_aercloud_small");
     public static final ResourceKey<PlacedFeature> STORM_AERCLOUD = createKey("storm_aercloud");
-    public static final ResourceKey<PlacedFeature> STORM_AERCLOUD_UNDERCLOUD = createKey("storm_aercloud_undercloud");
 
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -639,49 +637,38 @@ public class HighlandsPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, COLD_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(256)),
-                RarityFilter.onAverageOnceEvery(24),
-                InSquarePlacement.spread(),
-                BiomeFilter.biome());
-        register(context, COLD_AERCLOUD_UNDERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COLD_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
-                RarityFilter.onAverageOnceEvery(32),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(32), VerticalAnchor.aboveBottom(256)),
+                RarityFilter.onAverageOnceEvery(18),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, GOLDEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GOLDEN_AERCLOUD),
-                HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(136), VerticalAnchor.aboveBottom(256)),
-                RarityFilter.onAverageOnceEvery(72),
+                HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(156), VerticalAnchor.aboveBottom(256)),
+                RarityFilter.onAverageOnceEvery(136),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
         register(context, BLUE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUE_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(112), VerticalAnchor.aboveBottom(220)),
-                RarityFilter.onAverageOnceEvery(64),
-                InSquarePlacement.spread(),
-                BiomeFilter.biome());
-        register(context, GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(112), VerticalAnchor.aboveBottom(220)),
-                RarityFilter.onAverageOnceEvery(64),
-                InSquarePlacement.spread(),
-                BiomeFilter.biome());
-        register(context, PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(112), VerticalAnchor.aboveBottom(220)),
-                RarityFilter.onAverageOnceEvery(64),
-                InSquarePlacement.spread(),
-                BiomeFilter.biome());
-        register(context, PURPLE_AERCLOUD_RARE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD_RARE),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(144)),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(80), VerticalAnchor.aboveBottom(220)),
                 RarityFilter.onAverageOnceEvery(72),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-
-        register(context, STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
-                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(136), VerticalAnchor.aboveBottom(256)),
-                RarityFilter.onAverageOnceEvery(48),
+        register(context, GREEN_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GREEN_AERCLOUD),
+                HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(172)),
+                RarityFilter.onAverageOnceEvery(128),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
-        register(context, STORM_AERCLOUD_UNDERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
+        register(context, PURPLE_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(112), VerticalAnchor.aboveBottom(156)),
+                RarityFilter.onAverageOnceEvery(112),
+                InSquarePlacement.spread(),
+                BiomeFilter.biome());
+        register(context, PURPLE_AERCLOUD_SMALL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.PURPLE_AERCLOUD_SMALL),
+                HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(164), VerticalAnchor.aboveBottom(220)),
+                RarityFilter.onAverageOnceEvery(128),
+                InSquarePlacement.spread(),
+                BiomeFilter.biome());
+        register(context, STORM_AERCLOUD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.STORM_AERCLOUD),
                 HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96)),
-                RarityFilter.onAverageOnceEvery(64),
+                RarityFilter.onAverageOnceEvery(48),
                 InSquarePlacement.spread(),
                 BiomeFilter.biome());
     }
