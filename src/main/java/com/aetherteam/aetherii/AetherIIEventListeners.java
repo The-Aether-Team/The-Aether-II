@@ -16,6 +16,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -27,6 +29,7 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
@@ -59,6 +62,7 @@ public class AetherIIEventListeners {
         // Living
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
         bus.addListener(AetherIIEventListeners::onLivingBlockAttack);
+        bus.addListener(AetherIIEventListeners::onLivingItemUsed);
 
         // Block
         bus.addListener(AetherIIEventListeners::onBlockUpdateNeighbor);
@@ -200,6 +204,13 @@ public class AetherIIEventListeners {
         DamageSource source = event.getDamageSource();
 
         livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source);
+    }
+
+    public static void onLivingItemUsed(LivingEntityUseItemEvent event) {
+        ItemStack itemStack = event.getItem();
+        if (event.getEntity() instanceof Player player) {
+            PlayerHooks.valkyrieTeaAbility(player, itemStack);
+        }
     }
 
     public static void onBlockUpdateNeighbor(BlockEvent.NeighborNotifyEvent event) {
