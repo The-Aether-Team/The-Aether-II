@@ -950,6 +950,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Effects
+        // Beneficial
+        this.addEffect(AetherIIEffects.SATURATION_BOOST, "Saturation Boost");
+
+        // Harmful
         this.addEffect(AetherIIEffects.WOUND, "Wound");
         this.addEffect(AetherIIEffects.STUN, "Stun");
         this.addEffect(AetherIIEffects.FRACTURE, "Fracture");

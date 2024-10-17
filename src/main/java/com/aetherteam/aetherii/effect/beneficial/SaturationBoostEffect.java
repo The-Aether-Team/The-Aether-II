@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.effect.beneficial;
 
-import net.minecraft.world.effect.InstantenousMobEffect;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.EffectCure;
 
 import java.util.Set;
 
-public class SaturationBoostEffect extends InstantenousMobEffect {
+public class SaturationBoostEffect extends MobEffect {
 
     public SaturationBoostEffect() {
         super(MobEffectCategory.BENEFICIAL, 14394744);
@@ -18,7 +18,9 @@ public class SaturationBoostEffect extends InstantenousMobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if (!livingEntity.level().isClientSide && livingEntity instanceof Player player) {
-            player.getFoodData().eat(amplifier + 1, 1.0F);
+            if (player.getFoodData().getSaturationLevel() < 0.25F) {
+                player.getFoodData().eat(amplifier + 1, 0.1F);
+            }
         }
 
         return true;

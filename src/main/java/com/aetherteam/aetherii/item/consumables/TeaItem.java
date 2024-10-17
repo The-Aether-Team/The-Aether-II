@@ -44,10 +44,10 @@ public class TeaItem extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
         Player player = entityLiving instanceof Player ? (Player) entityLiving : null;
         assert player != null;
+        player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(preset, 1000);
 
         if (player instanceof ServerPlayer serverPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
-            player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(preset, 1000);
         }
         if (!this.remainderItem.get().isEmpty()) {
             if (!player.hasInfiniteMaterials()) {
