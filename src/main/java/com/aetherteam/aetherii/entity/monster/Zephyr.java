@@ -116,9 +116,7 @@ public class Zephyr extends FlyingMob implements Enemy {
             Vec3 look = this.getViewVector(1.0F);
             List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate(5, 0, 5).expandTowards(0, -2, 0).move(look.scale(6.5F)), entity -> entity != this);
 
-            list.forEach(entity -> {
-                entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0)));
-            });
+            list.forEach(entity -> entity.setDeltaMovement(entity.getDeltaMovement().add(look.scale(0.2F).add(0, 0.05F, 0))));
         }
     }
 

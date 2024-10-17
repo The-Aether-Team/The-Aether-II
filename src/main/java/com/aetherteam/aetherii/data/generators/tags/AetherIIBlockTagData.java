@@ -542,7 +542,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.GRAVITITE_BLOCK.get()
+                AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.ARKENIUM_BLOCK.get()
         );
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(AetherIIBlocks.AMBROSIUM_TORCH.get());
         this.tag(BlockTags.CLIMBABLE).add(
@@ -674,6 +675,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.HOLYSTONE_FURNACE.get(),
                 AetherIIBlocks.ALTAR.get(),
                 AetherIIBlocks.ARKENIUM_FORGE.get(),
@@ -958,7 +960,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(Tags.Blocks.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
                 AetherIIBlocks.ZANITE_BLOCK.get(),
-                AetherIIBlocks.GRAVITITE_BLOCK.get()
+                AetherIIBlocks.GRAVITITE_BLOCK.get(),
+                AetherIIBlocks.ARKENIUM_BLOCK.get()
         );
         this.tag(Tags.Blocks.CHESTS_WOODEN).add(
                 AetherIIBlocks.SKYROOT_CHEST.get()

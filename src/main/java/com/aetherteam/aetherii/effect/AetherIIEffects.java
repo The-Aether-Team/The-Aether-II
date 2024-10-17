@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.effect;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.effect.beneficial.SaturationBoostEffect;
 import com.aetherteam.aetherii.effect.harmful.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,10 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, AetherII.MODID);
 
+    // Beneficial
+    public static final DeferredHolder<MobEffect, MobEffect> SATURATION_BOOST = EFFECTS.register("saturation_boost", SaturationBoostEffect::new);
+
+    // Harmful
     public static final DeferredHolder<MobEffect, MobEffect> WOUND = EFFECTS.register("wound", WoundEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> STUN = EFFECTS.register("stun", () -> new StunEffect()
             .addAttributeModifier(Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.stun.slowness"), -0.75F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

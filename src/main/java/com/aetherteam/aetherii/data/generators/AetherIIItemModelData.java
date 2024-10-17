@@ -160,6 +160,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.SPLINT.get(), "consumables/");
         this.item(AetherIIItems.ANTITOXIN_VIAL.get(), "consumables/");
         this.item(AetherIIItems.ANTIVENOM_VIAL.get(), "consumables/");
+        this.item(AetherIIItems.VALKYRIE_TEA.get(), "consumables/");
         this.healingStoneItem(AetherIIItems.HEALING_STONE.get());
 
         // Skyroot Buckets
