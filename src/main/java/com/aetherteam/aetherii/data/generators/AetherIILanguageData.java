@@ -658,6 +658,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SPLINT, "Splint");
         this.addItem(AetherIIItems.ANTITOXIN_VIAL, "Antitoxin Vial");
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
+        this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
 
         // Skyroot Buckets

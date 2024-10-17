@@ -934,6 +934,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
                 .save(consumer);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, new ItemStack(AetherIIItems.VALKYRIE_TEA.get()))
+                .requires(AetherIIItems.WATER_VIAL.get())
+                .requires(AetherIIItems.VALKYRIE_WINGS.get())
+                .requires(AetherIIItems.AMBROSIUM_SHARD.get())
+                .unlockedBy("has_water_vial", has(AetherIIItems.WATER_VIAL.get()))
+                .save(consumer);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, new ItemStack(AetherIIItems.HEALING_STONE, 1, DataComponentPatch.builder().set(AetherIIDataComponents.HEALING_STONE_CHARGES.get(), 1).build()))
                 .define('A', AetherIIItems.AMBROSIUM_SHARD.get())
                 .define('H', AetherIIBlocks.HOLYSTONE.get())
