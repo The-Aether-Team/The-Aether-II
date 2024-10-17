@@ -5,10 +5,13 @@ import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
@@ -33,13 +36,18 @@ public class TeaItem extends Item {
     }
 
     @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        return ItemUtils.startUsingInstantly(level, player, hand);
+    }
+
+    @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
         Player player = entityLiving instanceof Player ? (Player) entityLiving : null;
         assert player != null;
-        player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(preset, 1000);
 
         if (player instanceof ServerPlayer serverPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
+            player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(preset, 1000);
         }
         if (!this.remainderItem.get().isEmpty()) {
             if (!player.hasInfiniteMaterials()) {
