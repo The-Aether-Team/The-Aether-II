@@ -21,7 +21,7 @@ public class EffectBuildupPresets {
     public static Preset TOXIN = new Preset(AetherIIEffects.TOXIN, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
     public static Preset VENOM = new Preset(AetherIIEffects.VENOM, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
     public static Preset CHARGED = new Preset(AetherIIEffects.CHARGED, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
-    public static Preset WEBBED = new Preset(AetherIIEffects.WEBBED, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
+    public static Preset WEBBED = new Preset(AetherIIEffects.WEBBED, (e) -> new MobEffectInstance(e, 500, 0, false, false), 2);
     public static Preset IMMOLATION = new Preset(AetherIIEffects.IMMOLATION, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
     public static Preset FROSTBITE = new Preset(AetherIIEffects.FROSTBITE, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
     public static Preset FUNGAL_ROT = new Preset(AetherIIEffects.FUNGAL_ROT, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
