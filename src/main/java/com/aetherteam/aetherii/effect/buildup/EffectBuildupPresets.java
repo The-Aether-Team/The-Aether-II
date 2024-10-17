@@ -9,11 +9,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class EffectBuildupPresets {
-
-    // Beneficial
-    public static Preset SATURATION_BOOST = new Preset(AetherIIEffects.SATURATION_BOOST, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
-
-    // Harmful
     public static Preset WOUND = new Preset(AetherIIEffects.WOUND, (e) -> new MobEffectInstance(e, 1, 0, false, false), 2);
     public static Preset STUN = new Preset(AetherIIEffects.STUN, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
     public static Preset AMBROSIUM_POISONING = new Preset(AetherIIEffects.AMBROSIUM_POISONING, (e) -> new MobEffectInstance(e, 1000, 0, false, false), 2);
