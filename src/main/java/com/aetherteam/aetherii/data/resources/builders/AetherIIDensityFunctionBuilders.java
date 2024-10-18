@@ -451,7 +451,7 @@ public class AetherIIDensityFunctionBuilders {
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> lakeFactor(I lakes, I temperature) {
 
         CubicSpline<C, I> lakeSpline = CubicSpline.builder(lakes)
-                .addPoint(0.3F, 1.0F)
+                .addPoint(0.275F, 1.0F)
                 .addPoint(0.35F, 5.0F)
                 .addPoint(0.4F, 25.0F)
                 .build();
