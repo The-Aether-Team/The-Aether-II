@@ -49,6 +49,8 @@ public class AetherIIDensityFunctionBuilders {
 
     public static final ResourceKey<DensityFunction> NOISE_CAVES = createKey("highlands/caves/noise_caves");
     public static final ResourceKey<DensityFunction> UNDERGROUND_SHAPER = createKey("highlands/caves/underground_shaper");
+    public static final ResourceKey<DensityFunction> CRACK_NOISE = createKey("highlands/caves/crack_noise");
+    public static final ResourceKey<DensityFunction> CRACKS = createKey("highlands/caves/cracks");
 
     public static final ResourceKey<DensityFunction> LAKES_NOISE = createKey("highlands/lakes/noise");
     public static final ResourceKey<DensityFunction> LAKES_NOISE_SWAMP = createKey("highlands/lakes/noise_swamp");
