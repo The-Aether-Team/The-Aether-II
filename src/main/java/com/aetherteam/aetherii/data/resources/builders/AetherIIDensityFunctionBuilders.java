@@ -28,6 +28,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> RIDGES = createKey("highlands/ridges");
     public static final ResourceKey<DensityFunction> BASE_3D_NOISE = createKey("highlands/base_3d_noise");
 
+    public static final ResourceKey<DensityFunction> CONTINENTAL_ISLANDS = createKey("highlands/terrain/continental_islands");
     public static final ResourceKey<DensityFunction> SHATTERED_ISLANDS = createKey("highlands/terrain/shattered_islands");
     public static final ResourceKey<DensityFunction> FINAL_ISLANDS = createKey("highlands/terrain/final_islands");
 
@@ -131,6 +132,18 @@ public class AetherIIDensityFunctionBuilders {
     }
 
     // Terrain
+    public static DensityFunction buildContinentalIslands(HolderGetter<DensityFunction> function) {
+        DensityFunction density = getFunction(function, BASE_3D_NOISE);
+        density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
+        density = DensityFunctions.mul(density, selectSlide(function));
+        density = DensityFunctions.add(density, factorize(function, -0.19));
+        density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
+        density = DensityFunctions.mul(density, getFunction(function, BOTTOM_SLIDE));
+        density = DensityFunctions.add(density, factorize(function, -0.19));
+        return density;
+    }
+
     public static DensityFunction buildShatteredIslands(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, BASE_3D_NOISE);
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.1));
@@ -144,14 +157,7 @@ public class AetherIIDensityFunctionBuilders {
     }
 
     public static DensityFunction buildFinalIslands(HolderGetter<DensityFunction> function) {
-        DensityFunction density = getFunction(function, BASE_3D_NOISE);
-        density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
-        density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
-        density = DensityFunctions.mul(density, selectSlide(function));
-        density = DensityFunctions.add(density, factorize(function, -0.19));
-        density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
-        density = DensityFunctions.mul(density, getFunction(function, BOTTOM_SLIDE));
-        density = DensityFunctions.add(density, factorize(function, -0.19));
+        DensityFunction density = getFunction(function, CONTINENTAL_ISLANDS);
         density = DensityFunctions.min(density, getFunction(function, NOISE_CAVES));
         density = DensityFunctions.max(density, DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 130, DensityFunctions.constant(-1), getFunction(function, AetherIIDensityFunctions.SHATTERED_ISLANDS)));
         density = DensityFunctions.blendDensity(density);
