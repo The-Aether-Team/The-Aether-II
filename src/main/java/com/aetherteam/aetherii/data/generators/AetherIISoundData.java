@@ -29,6 +29,14 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 definition().with(sound("aether_ii:block/aercloud/blue_aercloud_bounce"))
                         .subtitle("subtitles.aether_ii.block.aercloud.blue_aercloud_bounce")
         );
+        this.add(AetherIISoundEvents.BLOCK_GREEN_AERCLOUD_BOUNCE,
+                definition().with(sound("aether_ii:block/aercloud/green_aercloud_bounce"))
+                        .subtitle("subtitles.aether_ii.block.aercloud.green_aercloud_bounce")
+        );
+        this.add(AetherIISoundEvents.BLOCK_PURPLE_AERCLOUD_BOUNCE,
+                definition().with(sound("aether_ii:block/aercloud/purple_aercloud_bounce"))
+                        .subtitle("subtitles.aether_ii.block.aercloud.purple_aercloud_bounce")
+        );
 
         // Items
         this.add(AetherIISoundEvents.ITEM_AMBROSIUM_SHARD,

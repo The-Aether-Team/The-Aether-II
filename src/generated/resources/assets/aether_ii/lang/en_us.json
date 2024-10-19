@@ -847,6 +847,8 @@
   "pack.aether_ii.mod.description": "Aether II Resources",
   "structure.aether_ii.outpost": "Outpost",
   "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce": "Blue Aercloud bounces",
+  "subtitles.aether_ii.block.aercloud.green_aercloud_bounce": "Green Aercloud bounces",
+  "subtitles.aether_ii.block.aercloud.purple_aercloud_bounce": "Purple Aercloud bounces",
   "subtitles.aether_ii.block.aether_portal.ambient": "Aether Portal whooshes",
   "subtitles.aether_ii.block.aether_portal.trigger": "Aether Portal noise intensifies",
   "subtitles.aether_ii.entity.aerbunny.death": "Aerbunny dies",

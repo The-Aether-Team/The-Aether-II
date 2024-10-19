@@ -15,6 +15,8 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_AETHER_PORTAL_TRAVEL = register("block.aether_portal.travel");
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_AETHER_PORTAL_TRIGGER = register("block.aether_portal.trigger");
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_BLUE_AERCLOUD_BOUNCE = register("block.blue_aercloud.bounce");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GREEN_AERCLOUD_BOUNCE = register("block.green_aercloud.bounce");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_PURPLE_AERCLOUD_BOUNCE = register("block.purple_aercloud.bounce");
 
     // Items
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_AMBROSIUM_SHARD = register("item.ambrosium_shard.use");
