@@ -547,6 +547,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SPLINT.get());
                 output.accept(AetherIIItems.ANTITOXIN_VIAL.get());
                 output.accept(AetherIIItems.ANTIVENOM_VIAL.get());
+                output.accept(AetherIIItems.VALKYRIE_TEA.get());
                 output.accept(AetherIIItems.HEALING_STONE.get());
             }).build());
 

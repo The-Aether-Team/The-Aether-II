@@ -658,6 +658,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SPLINT, "Splint");
         this.addItem(AetherIIItems.ANTITOXIN_VIAL, "Antitoxin Vial");
         this.addItem(AetherIIItems.ANTIVENOM_VIAL, "Antivenom Vial");
+        this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
 
         // Skyroot Buckets
@@ -949,6 +950,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
 
         // Effects
+        // Beneficial
+        this.addEffect(AetherIIEffects.SATURATION_BOOST, "Saturation Boost");
+
+        // Harmful
         this.addEffect(AetherIIEffects.WOUND, "Wound");
         this.addEffect(AetherIIEffects.STUN, "Stun");
         this.addEffect(AetherIIEffects.FRACTURE, "Fracture");
@@ -1088,6 +1093,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
         this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
+        this.addSubtitle("block", "aercloud.green_aercloud_bounce", "Green Aercloud bounces");
+        this.addSubtitle("block", "aercloud.purple_aercloud_bounce", "Purple Aercloud bounces");
 
         // Entities
         this.addSubtitle("entity", "phyg.ambient", "Phyg oinks");

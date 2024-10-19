@@ -1,10 +1,13 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -47,6 +50,7 @@ public class PurpleAercloudBlock extends AercloudBlock {
                 case NORTH -> entity.setDeltaMovement(entity.getDeltaMovement().x(), entity.getDeltaMovement().y(), -2.0);
                 case SOUTH -> entity.setDeltaMovement(entity.getDeltaMovement().x(), entity.getDeltaMovement().y(), 2.0);
             }
+            level.playSound((entity instanceof Player player ? player : null), pos, AetherIISoundEvents.BLOCK_PURPLE_AERCLOUD_BOUNCE.get(), SoundSource.BLOCKS, 0.8F, 0.5F + (((float) (Math.pow(level.getRandom().nextDouble(), 2.5))) * 0.5F));
         } else {
             super.entityInside(state, level, pos, entity);
         }

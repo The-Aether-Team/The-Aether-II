@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -34,6 +36,7 @@ public class GreenAercloudBlock extends AercloudBlock {
             if (!(entity instanceof Projectile)) {
                 entity.setOnGround(false);
             }
+            level.playSound((entity instanceof Player player ? player : null), pos, AetherIISoundEvents.BLOCK_GREEN_AERCLOUD_BOUNCE.get(), SoundSource.BLOCKS, 0.8F, 0.5F + (((float) (Math.pow(level.getRandom().nextDouble(), 2.5))) * 0.5F));
         } else {
             super.entityInside(state, level, pos, entity);
         }
