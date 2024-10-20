@@ -58,24 +58,17 @@
       "aether_ii:coarse_aether_dirt_frosted_ceiling",
       "aether_ii:ice_overhang",
       "aether_ii:highlands_flower_patch",
-      "aether_ii:arctic_flower_patch",
-      "aether_ii:blueberry_bush_patch"
+      "aether_ii:arctic_flower_patch"
     ],
     [
       "aether_ii:freeze_top_layer_arctic",
-      "aether_ii:high_storm_aercloud",
-      "aether_ii:high_green_aercloud",
-      "aether_ii:high_purple_aercloud",
-      "aether_ii:middle_cold_aercloud",
-      "aether_ii:middle_storm_aercloud",
-      "aether_ii:surface_cold_aercloud",
-      "aether_ii:surface_blue_aercloud",
-      "aether_ii:surface_green_aercloud",
-      "aether_ii:surface_purple_aercloud",
-      "aether_ii:lower_storm_aercloud",
-      "aether_ii:lower_blue_aercloud",
-      "aether_ii:lower_green_aercloud",
-      "aether_ii:lower_purple_aercloud"
+      "aether_ii:cold_aercloud",
+      "aether_ii:golden_aercloud",
+      "aether_ii:blue_aercloud",
+      "aether_ii:purple_aercloud",
+      "aether_ii:purple_aercloud_small",
+      "aether_ii:green_aercloud",
+      "aether_ii:storm_aercloud"
     ]
   ],
   "has_precipitation": true,
