@@ -25,6 +25,18 @@
     ],
     "subtitle": "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce"
   },
+  "block.green_aercloud.bounce": {
+    "sounds": [
+      "aether_ii:block/aercloud/green_aercloud_bounce"
+    ],
+    "subtitle": "subtitles.aether_ii.block.aercloud.green_aercloud_bounce"
+  },
+  "block.purple_aercloud.bounce": {
+    "sounds": [
+      "aether_ii:block/aercloud/purple_aercloud_bounce"
+    ],
+    "subtitle": "subtitles.aether_ii.block.aercloud.purple_aercloud_bounce"
+  },
   "entity.aerbunny.death": {
     "sounds": [
       "aether_ii:entity/aerbunny/death"

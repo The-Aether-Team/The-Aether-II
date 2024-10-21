@@ -28,6 +28,7 @@ import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
+import com.aetherteam.aetherii.loot.functions.AetherIILootFunctions;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
 import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
 import com.aetherteam.aetherii.network.packet.CurrencySyncPacket;
@@ -106,6 +107,7 @@ public class AetherII {
                 AetherIIStructureTypes.STRUCTURE_TYPES,
                 AetherIIPoolElementTypes.POOL_ELEMENTS,
                 AetherIIDensityFunctionTypes.DENSITY_FUNCTION_TYPES,
+                AetherIILootFunctions.LOOT_FUNCTION_TYPES,
                 AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS,
                 AetherIISurfaceRules.MATERIAL_RULES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,

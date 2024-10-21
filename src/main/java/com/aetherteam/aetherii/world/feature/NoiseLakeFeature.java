@@ -80,7 +80,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
 
-        // Determinds the block to place at specific noise values
+        // Determines the block to place at specific noise values
         WorldGenLevel level = context.level();
         if (density > noiseValue && density < 1.5) {
             if (floor < floorNoiseValue) {
@@ -98,8 +98,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                         && (!level.getBlockState(pos.above()).isSolid()
                         || level.getBlockState(pos.above()).getBlock() instanceof HalfTransparentBlock
                         || level.getBlockState(pos.above()).getBlock() instanceof BushBlock
-                )
-                ) {
+                )) {
                     this.setBlock(level, pos, Blocks.WATER.defaultBlockState());
                     this.setBlock(level, pos.below(), config.underwaterBlock().getState(context.random(), pos.below()));
                     if (level.isEmptyBlock(pos.below(2))) {

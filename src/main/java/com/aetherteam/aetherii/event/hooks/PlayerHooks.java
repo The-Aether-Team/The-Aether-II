@@ -6,6 +6,8 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
@@ -140,11 +142,11 @@ public class PlayerHooks {
         if ((target instanceof Cow || target instanceof FlyingCow) && !((Animal) target).isBaby()) {
             ItemStack heldStack = player.getItemInHand(hand);
             if (heldStack.is(AetherIIItems.SKYROOT_BUCKET.get())) {
-//                if (target instanceof FlyingCow) {
-//                    player.playSound(AetherSoundEvents.ENTITY_FLYING_COW_MILK.get(), 1.0F, 1.0F);
-//                } else {
-                player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-//                }
+                if (target instanceof FlyingCow) {
+                    player.playSound(AetherIISoundEvents.ENTITY_FLYING_COW_MILK.get(), 1.0F, 1.0F);
+                } else {
+                    player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+                }
                 ItemStack filledBucket = ItemUtils.createFilledResult(heldStack, player, AetherIIItems.SKYROOT_MILK_BUCKET.get().getDefaultInstance());
                 player.swing(hand);
                 player.setItemInHand(hand, filledBucket);
@@ -175,6 +177,12 @@ public class PlayerHooks {
             }
         }
         return interactionResult;
+    }
+
+    public static void valkyrieTeaAbility(Player player, ItemStack itemStack) {
+        if (itemStack.getFoodProperties(player) != null && (player.hasEffect(AetherIIEffects.SATURATION_BOOST))) {
+            player.getFoodData().eat(0, 0.4F);
+        }
     }
 
     @Nullable
