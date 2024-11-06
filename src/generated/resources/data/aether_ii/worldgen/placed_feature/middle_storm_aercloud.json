@@ -18,9 +18,6 @@
       "chance": 768
     },
     {
-      "type": "minecraft:in_square"
-    },
-    {
       "type": "minecraft:biome"
     }
   ]
