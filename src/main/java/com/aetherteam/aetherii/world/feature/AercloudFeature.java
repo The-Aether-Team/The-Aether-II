@@ -26,7 +26,7 @@ public class AercloudFeature extends Feature<AercloudConfiguration> {
         WorldGenLevel level = context.level();
         RandomSource random = context.random();
         boolean positiveZAngle = random.nextBoolean();
-        BlockPos blockPos = context.origin().offset(-random.nextInt(8), 0, (positiveZAngle ? 0 : 8) - random.nextInt(8));
+        BlockPos blockPos = context.origin().offset(0, 0, (positiveZAngle ? 0 : 8));
         AercloudConfiguration config = context.config();
         BlockState blockState = config.block().getState(random, blockPos);
 

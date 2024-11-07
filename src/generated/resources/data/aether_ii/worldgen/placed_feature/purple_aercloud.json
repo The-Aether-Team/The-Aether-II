@@ -6,7 +6,7 @@
       "height": {
         "type": "minecraft:uniform",
         "max_inclusive": {
-          "above_bottom": 156
+          "above_bottom": 208
         },
         "min_inclusive": {
           "above_bottom": 96
@@ -15,10 +15,7 @@
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 128
-    },
-    {
-      "type": "minecraft:in_square"
+      "chance": 156
     },
     {
       "type": "minecraft:biome"

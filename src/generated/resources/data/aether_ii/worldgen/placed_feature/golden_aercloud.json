@@ -6,19 +6,16 @@
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "above_bottom": 256
+          "above_bottom": 208
         },
         "min_inclusive": {
-          "above_bottom": 156
+          "above_bottom": 96
         }
       }
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 512
-    },
-    {
-      "type": "minecraft:in_square"
+      "chance": 384
     },
     {
       "type": "minecraft:biome"
