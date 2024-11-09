@@ -323,6 +323,7 @@ public class HighlandsConfiguredFeatures {
                 0.0F,
                 AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON
         ));
+        //TODO
         register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
         register(context, MOA_NEST_TREE, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
     }
