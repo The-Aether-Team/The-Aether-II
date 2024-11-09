@@ -54,7 +54,7 @@ public class NestSkyrootFoliagePlacer extends AbstractBranchedFoliagePlacer {
 
         if (level instanceof WorldGenLevel worldGenLevel) {
             ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
-            ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(HighlandsConfiguredFeatures.MOA_NEST_TREE).orElse(null)).value();
+            ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(HighlandsConfiguredFeatures.MOA_NEST).orElse(null)).value();
 
             for (int i = offset; i >= offset - foliageHeight; --i) {
                 this.placeLeavesRow(level, foliageSetter, random, config, new BlockPos(x + 2 * offsetX, y - 7, z + 2 * offsetZ), 13, i, doubleTrunk);

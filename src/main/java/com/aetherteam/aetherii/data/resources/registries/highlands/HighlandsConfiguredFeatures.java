@@ -73,7 +73,6 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_SKYROOT_LOG = createKey("fallen_skyroot_log");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_WISPROOT_LOG = createKey("fallen_wisproot_log");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST = createKey("moa_nest");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MOA_NEST_TREE = createKey("moa_nest_tree");
 
 
     // Vegetation
@@ -323,9 +322,7 @@ public class HighlandsConfiguredFeatures {
                 0.0F,
                 AetherIITags.Blocks.FALLEN_LOG_SURVIVES_ON
         ));
-        //TODO
         register(context, MOA_NEST, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
-        register(context, MOA_NEST_TREE, AetherIIFeatures.MOA_NEST.get(), new MoaNestConfiguration(BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), 1.5F, 2, true));
     }
 
     private static void bootstrapVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -358,31 +355,6 @@ public class HighlandsConfiguredFeatures {
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
                 )
         ));
-//        register(context, GRASS_FIELD, Feature.RANDOM_PATCH, new RandomPatchConfiguration(
-//                80,
-//                12,
-//                4,
-//                PlacementUtils.filtered(
-//                        AetherIIFeatures.AETHER_GRASS.get(),
-//                        new SimpleBlockConfiguration(
-//                                new DualNoiseProvider(
-//                                        new InclusiveRange<>(1, 3),
-//                                        new NormalNoise.NoiseParameters(5, 1.0),
-//                                        0.02F,
-//                                        2345L,
-//                                        new NormalNoise.NoiseParameters(0, 1.0),
-//                                        0.02F,
-//                                        List.of(
-//                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
-//                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(),
-//                                                AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(),
-//                                                AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(),
-//                                                AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState()
-//                                        )
-//                                )
-//                        ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE)
-//                )
-//        ));
         register(
                 context,
                 SMALL_GRASS_PATCH,
