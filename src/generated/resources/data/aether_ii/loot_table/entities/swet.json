@@ -56,7 +56,7 @@
               "function": "minecraft:enchanted_count_increase"
             }
           ],
-          "name": "minecraft:sugar"
+          "name": "aether_ii:swet_sugar"
         }
       ],
       "rolls": 1.0

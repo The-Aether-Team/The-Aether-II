@@ -890,6 +890,31 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         oneToOneConversionRecipe(consumer, Items.MAGENTA_DYE, AetherIIBlocks.TARAHESP_FLOWERS, "magenta_dye");
         oneToOneConversionRecipe(consumer, Items.BROWN_DYE, AetherIIBlocks.SKY_ROOTS, "brown_dye");
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.GREEN_SWET_JELLY.get(), 1)
+                .requires(AetherIIItems.GREEN_SWET_GEL)
+                .requires(AetherIIItems.SWET_SUGAR)
+                .unlockedBy("has_gel", has(AetherIIItems.GREEN_SWET_GEL))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.BLUE_SWET_JELLY.get(), 1)
+                .requires(AetherIIItems.BLUE_SWET_GEL)
+                .requires(AetherIIItems.SWET_SUGAR)
+                .unlockedBy("has_gel", has(AetherIIItems.BLUE_SWET_GEL))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.PURPLE_SWET_JELLY.get(), 1)
+                .requires(AetherIIItems.PURPLE_SWET_GEL)
+                .requires(AetherIIItems.SWET_SUGAR)
+                .unlockedBy("has_gel", has(AetherIIItems.PURPLE_SWET_GEL))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.GOLDEN_SWET_JELLY.get(), 1)
+                .requires(AetherIIItems.GOLDEN_SWET_GEL)
+                .requires(AetherIIItems.SWET_SUGAR)
+                .unlockedBy("has_gel", has(AetherIIItems.GOLDEN_SWET_GEL))
+                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.WHITE_SWET_JELLY.get(), 1)
+                .requires(AetherIIItems.WHITE_SWET_GEL)
+                .requires(AetherIIItems.SWET_SUGAR)
+                .unlockedBy("has_gel", has(AetherIIItems.WHITE_SWET_GEL))
+                .save(consumer);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)
                 .requires(AetherIIItems.MOA_FEED)
