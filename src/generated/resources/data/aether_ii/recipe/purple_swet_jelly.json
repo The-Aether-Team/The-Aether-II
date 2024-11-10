@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "aether_ii:purple_swet_gel"
+    },
+    {
+      "item": "aether_ii:swet_sugar"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:purple_swet_jelly"
+  }
+}

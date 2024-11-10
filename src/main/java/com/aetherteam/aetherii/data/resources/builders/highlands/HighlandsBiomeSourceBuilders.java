@@ -55,7 +55,7 @@ public class HighlandsBiomeSourceBuilders {
                 // Highfields
                 Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentExpanse, erosionDefault, fullRange, fullRange, 0), biomes.getOrThrow(HighlandsBiomes.EXPANSE)),
 
-                Pair.of(new Climate.ParameterPoint(tempHighfields, fullRange, continentLand, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(HighlandsBiomes.SHIMMERING_BASIN)),
+                Pair.of(new Climate.ParameterPoint(tempHighfields, Climate.Parameter.span(-1.5F, 2.0F), continentLand, erosionDefault, fullRange, ridgeLake, 0), biomes.getOrThrow(HighlandsBiomes.SHIMMERING_BASIN)),
 
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-1.0F, -0.1F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.FLOURISHING_FIELD)),
                 Pair.of(new Climate.ParameterPoint(tempHighfields1, Climate.Parameter.span(-0.1F, 0.2F), continentLand, erosionDefault, fullRange, ridgeLand, 0), biomes.getOrThrow(HighlandsBiomes.VERDANT_WOODS)),
