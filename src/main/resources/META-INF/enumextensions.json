@@ -49,6 +49,15 @@
       "parameters": [ "aether_ii:aether_aerwhale", 1, true, false, 128 ]
     },
     {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "AETHER_II_GLIDING_ARM_POSE",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "field": "AETHER_II_GLIDING_ARM_POSE_PROXY"
+      }
+    },
+    {
       "enum": "net/minecraft/client/RecipeBookCategories",
       "name": "AETHER_II_ALTAR_SEARCH",
       "constructor": "(Ljava/util/function/Supplier;)V",

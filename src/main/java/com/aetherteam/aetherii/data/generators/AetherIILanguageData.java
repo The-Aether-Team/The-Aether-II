@@ -662,6 +662,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.VALKYRIE_TEA, "Valkyrie Tea");
         this.addItem(AetherIIItems.HEALING_STONE, "Healing Stone");
 
+        // Gliders
+        this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");
+
         // Skyroot Buckets
         this.addItem(AetherIIItems.SKYROOT_BUCKET, "Skyroot Bucket");
         this.addItem(AetherIIItems.SKYROOT_WATER_BUCKET, "Skyroot Water Bucket");

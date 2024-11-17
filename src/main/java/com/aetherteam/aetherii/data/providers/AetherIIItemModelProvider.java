@@ -2,13 +2,16 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.nitrogen.data.providers.NitrogenItemModelProvider;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.client.model.SeparateTransformsModel;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;
+import net.neoforged.neoforge.client.model.generators.loaders.SeparateTransformsModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvider {
@@ -104,6 +107,35 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                 .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.3F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_3"))).end()
                 .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.4F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_4"))).end()
                 .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.5F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_5"))).end();
+    }
+
+    public void gliderItem(Item item) {
+        ItemModelBuilder inventory = this.nested().parent(this.getExistingFile(this.mcLoc("item/generated"))).texture("layer0", this.modLoc("item/miscellaneous/" + this.itemName(item)));
+        ItemModelBuilder glider = this.nested().parent(this.getExistingFile(this.modLoc("item/aercloud_glider"))).texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_using"))
+                .transforms()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(-90.0F, 0.0F, -45.0F).translation(12.0F, -2.0F, 3.0F).end()
+                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 0.0F, 0.0F).end()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 0.0F, 0.0F).end()
+                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 0.0F, 0.0F).end()
+                .end();
+
+        ItemModelBuilder override = this.withExistingParent(this.itemName(item) + "_using", this.modLoc("item/aercloud_glider")).texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_using"))
+                .customLoader((itemModelBuilder, existingFileHelper) ->
+                        SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
+                                .base(glider)
+                                .perspective(ItemDisplayContext.GUI, inventory)
+                                .perspective(ItemDisplayContext.GROUND, inventory)
+                                .perspective(ItemDisplayContext.FIXED, inventory)
+                ).end();
+        this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), 1.0F).model(override).end()
+                .customLoader((itemModelBuilder, existingFileHelper) ->
+                        SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
+                                .base(this.nested().parent(this.getExistingFile(this.mcLoc("item/generated"))))
+                                .perspective(ItemDisplayContext.GUI, inventory)
+                                .perspective(ItemDisplayContext.GROUND, inventory)
+                                .perspective(ItemDisplayContext.FIXED, inventory)
+                ).end();
     }
 
     public void itemBlockGrass(Block block, String location) {

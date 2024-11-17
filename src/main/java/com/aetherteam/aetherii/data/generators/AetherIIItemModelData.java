@@ -164,6 +164,9 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.VALKYRIE_TEA.get(), "consumables/");
         this.healingStoneItem(AetherIIItems.HEALING_STONE.get());
 
+        // Gliders
+        this.gliderItem(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
+
         // Skyroot Buckets
         this.item(AetherIIItems.SKYROOT_BUCKET.get(), "miscellaneous/");
         this.item(AetherIIItems.SKYROOT_WATER_BUCKET.get(), "miscellaneous/");

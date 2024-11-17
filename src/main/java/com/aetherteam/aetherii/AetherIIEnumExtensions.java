@@ -1,12 +1,16 @@
 package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.client.AetherIIArmPoseTransformers;
+import com.aetherteam.aetherii.client.AetherIIArmPoses;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
+import net.neoforged.neoforge.client.IArmPoseTransformer;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -19,6 +23,10 @@ public class AetherIIEnumExtensions {
 
     public static final EnumProxy<Rarity> AETHER_II_TREASURE_RARITY_PROXY = new EnumProxy<>(
             Rarity.class, -1, "aether_ii:treasure", (UnaryOperator<Style>) (style) -> AetherIIItems.TREASURE_NAME_COLOR
+    );
+
+    public static final EnumProxy<HumanoidModel.ArmPose> AETHER_II_GLIDING_ARM_POSE_PROXY = new EnumProxy<>(
+            HumanoidModel.ArmPose.class, true, AetherIIArmPoseTransformers.GLIDING_TRANSFORMER
     );
 
     public static Object altarSearchIcon(int idx, Class<?> type) {

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:item/generated",
+  "base": {
+    "parent": "minecraft:item/generated"
+  },
+  "loader": "neoforge:separate_transforms",
+  "overrides": [
+    {
+      "model": "aether_ii:item/cold_aercloud_glider_using",
+      "predicate": {
+        "aether_ii:parachuting": 1.0
+      }
+    }
+  ],
+  "perspectives": {
+    "fixed": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+      }
+    },
+    "ground": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+      }
+    },
+    "gui": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+      }
+    }
+  }
+}

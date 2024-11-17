@@ -254,6 +254,9 @@ public class AetherIIItems {
     public static final DeferredItem<Item> VALKYRIE_TEA = ITEMS.register("valkyrie_tea", () -> new TeaItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIEffects.SATURATION_BOOST, new Item.Properties()));
     public static final DeferredItem<Item> HEALING_STONE = ITEMS.register("healing_stone", () -> new HealingStoneItem(new Item.Properties().stacksTo(1).component(AetherIIDataComponents.HEALING_STONE_CHARGES, 0)));
 
+    // Gliders
+    public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = ITEMS.register("cold_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(100).setNoRepair())); //todo
+
     // Skyroot Buckets
     public static final DeferredItem<Item> SKYROOT_BUCKET = ITEMS.register("skyroot_bucket", () -> new SkyrootBucketItem(Fluids.EMPTY, new Item.Properties().stacksTo(16)));
     public static final DeferredItem<Item> SKYROOT_WATER_BUCKET = ITEMS.register("skyroot_water_bucket", () -> new SkyrootBucketItem(Fluids.WATER, new Item.Properties().craftRemainder(SKYROOT_BUCKET.get()).stacksTo(1)));
