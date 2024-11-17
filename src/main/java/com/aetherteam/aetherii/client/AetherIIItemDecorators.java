@@ -10,6 +10,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.IItemDecorator;
 import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 
@@ -18,12 +19,12 @@ public class AetherIIItemDecorators {
         guiGraphics.pose().pushPose();
         if (stack.getItem() instanceof GliderItem) {
             Player player = Minecraft.getInstance().player;
-            if (player != null) {
+            if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
                 int max = stack.getUseDuration(player);
                 int progress = player.getUseItemRemainingTicks();
-                if (progress != 0) {
+                if (progress > 0) {
                     int barWidth = Math.round((float) progress * 13.0F / (float) max);
-                    int rgb = 2541055;
+                    int rgb = 3183871;
 
                     int j = xOffset + 2;
                     int k = yOffset + 11;
@@ -58,6 +59,7 @@ public class AetherIIItemDecorators {
 
     public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
         event.register(AetherIIItems.COLD_AERCLOUD_GLIDER, GLIDER_DURATION);
+        event.register(AetherIIItems.GOLDEN_AERCLOUD_GLIDER, GLIDER_DURATION);
 
         for (Holder<Item> item : ArkeniumForgeMenu.REINFORCEABLE) {
             event.register(item.value(), REINFORCED_DURABILITY);

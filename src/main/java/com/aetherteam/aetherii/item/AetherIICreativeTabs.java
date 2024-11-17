@@ -464,7 +464,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GRAVITITE_TROWEL.get());
                 output.accept(AetherIIItems.ARKENIUM_SHEARS.get());
                 output.accept(AetherIIItems.SCATTERGLASS_BOLT.get());
-                output.accept(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.SKYROOT_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_WATER_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_PUFFERFISH_BUCKET.get());
@@ -475,6 +474,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_TADPOLE_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_MILK_BUCKET.get());
+                output.accept(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
+                output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());

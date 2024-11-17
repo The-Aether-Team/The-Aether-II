@@ -71,6 +71,7 @@ public class AetherIIClient {
 
     public static void registerItemModelProperties() {
         registerGliderProperties(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
+        registerGliderProperties(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
 
         registerCrossbowProperties(AetherIIItems.SKYROOT_CROSSBOW.get());
         registerCrossbowProperties(AetherIIItems.HOLYSTONE_CROSSBOW.get());
@@ -91,7 +92,7 @@ public class AetherIIClient {
 
     private static void registerGliderProperties(Item item) {
         ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), (stack, level, livingEntity, value) ->
-                livingEntity == null ? 0.0F : livingEntity.getUseItemRemainingTicks() != 0 ? 1.0F : 0.0F);
+                livingEntity == null ? 0.0F : livingEntity.getUseItemRemainingTicks() > 0 ? 1.0F : 0.0F);
     }
 
     private static void registerCrossbowProperties(Item item) {

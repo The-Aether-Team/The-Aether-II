@@ -813,6 +813,10 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.foodCooking(AetherIIItems.RAW_TAEGORE_MEAT, AetherIIItems.TAEGORE_STEAK, 0.35F, consumer);
         this.foodCooking(AetherIIItems.SKYROOT_LIZARD_ON_A_STICK, AetherIIItems.ROASTED_SKYROOT_LIZARD_ON_A_STICK, 0.35F, consumer);
 
+        // Parachutes
+        this.parachute(consumer, AetherIIItems.COLD_AERCLOUD_GLIDER, AetherIIBlocks.COLD_AERCLOUD);
+        this.parachute(consumer, AetherIIItems.GOLDEN_AERCLOUD_GLIDER, AetherIIBlocks.GOLDEN_AERCLOUD);
+
         // Materials
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, AetherIIItems.SKYROOT_STICK.get(), 4)
                 .group("sticks")

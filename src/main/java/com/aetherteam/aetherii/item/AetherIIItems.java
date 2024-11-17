@@ -256,6 +256,7 @@ public class AetherIIItems {
 
     // Gliders
     public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = ITEMS.register("cold_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(100).setNoRepair())); //todo
+    public static final DeferredItem<Item> GOLDEN_AERCLOUD_GLIDER = ITEMS.register("golden_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(500).setNoRepair())); //todo
 
     // Skyroot Buckets
     public static final DeferredItem<Item> SKYROOT_BUCKET = ITEMS.register("skyroot_bucket", () -> new SkyrootBucketItem(Fluids.EMPTY, new Item.Properties().stacksTo(16)));

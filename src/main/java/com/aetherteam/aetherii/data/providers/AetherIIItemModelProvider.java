@@ -110,19 +110,27 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
     }
 
     public void gliderItem(Item item) {
-        ItemModelBuilder inventory = this.nested().parent(this.getExistingFile(this.mcLoc("item/generated"))).texture("layer0", this.modLoc("item/miscellaneous/" + this.itemName(item)));
-        ItemModelBuilder glider = this.nested().parent(this.getExistingFile(this.modLoc("item/aercloud_glider"))).texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_using"))
+        ItemModelBuilder inventory = this.nested().parent(this.getExistingFile(this.mcLoc("item/generated")))
+                .texture("layer0", this.modLoc("item/miscellaneous/" + this.itemName(item)));
+        ItemModelBuilder glider = this.nested().parent(this.getExistingFile(this.modLoc("item/aercloud_glider")))
+                .texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_using"))
+                .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
                 .transforms()
-                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(-90.0F, 0.0F, -45.0F).translation(12.0F, -2.0F, 3.0F).end()
-                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 0.0F, 0.0F).end()
-                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 0.0F, 0.0F).end()
-                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 0.0F, 0.0F).end()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(-90.0F, 0.0F, -90.0F).translation(7.0F, -2.0F, 10.5F).end()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, 0.0F, -90.0F).translation(7.5F, 0.0F, 4.0F).end()
+                .end();
+        ItemModelBuilder gliderActive = this.nested().parent(this.getExistingFile(this.modLoc("item/aercloud_glider")))
+                .texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_using"))
+                .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
+                .transforms()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(-90.0F, 0.0F, -35.0F).translation(11.55F, -2.0F, -0.1F).end()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 9.0F, -6.0F).end()
                 .end();
 
         ItemModelBuilder override = this.withExistingParent(this.itemName(item) + "_using", this.modLoc("item/aercloud_glider")).texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_using"))
                 .customLoader((itemModelBuilder, existingFileHelper) ->
                         SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
-                                .base(glider)
+                                .base(gliderActive)
                                 .perspective(ItemDisplayContext.GUI, inventory)
                                 .perspective(ItemDisplayContext.GROUND, inventory)
                                 .perspective(ItemDisplayContext.FIXED, inventory)
@@ -131,7 +139,7 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                 .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), 1.0F).model(override).end()
                 .customLoader((itemModelBuilder, existingFileHelper) ->
                         SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
-                                .base(this.nested().parent(this.getExistingFile(this.mcLoc("item/generated"))))
+                                .base(glider)
                                 .perspective(ItemDisplayContext.GUI, inventory)
                                 .perspective(ItemDisplayContext.GROUND, inventory)
                                 .perspective(ItemDisplayContext.FIXED, inventory)

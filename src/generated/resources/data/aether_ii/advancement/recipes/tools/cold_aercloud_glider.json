@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aercloud": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:cold_aercloud"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:cold_aercloud_glider"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_aercloud"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:cold_aercloud_glider"
+    ]
+  }
+}

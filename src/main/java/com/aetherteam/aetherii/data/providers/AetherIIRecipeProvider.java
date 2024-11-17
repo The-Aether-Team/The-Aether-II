@@ -184,6 +184,17 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .unlockedBy(has, has(material));
     }
 
+    protected void parachute(RecipeOutput consumer, ItemLike result, ItemLike aercloud) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result, 1)
+                .define('#', aercloud)
+                .define('X', AetherIITags.Items.RODS_SKYROOT)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("X X")
+                .unlockedBy("has_aercloud", has(aercloud))
+                .save(consumer);
+    }
+
     protected final void foodCooking(Supplier<? extends ItemLike> material, Supplier<? extends ItemLike> result, float xp, RecipeOutput consumer) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 200).unlockedBy("has_item", has(material.get())).save(consumer, "smelting_" + getHasName(result.get()));
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(material.get()), RecipeCategory.FOOD, result.get(), xp, 100).unlockedBy("has_item", has(material.get())).save(consumer, "smoking_" + getHasName(result.get()));

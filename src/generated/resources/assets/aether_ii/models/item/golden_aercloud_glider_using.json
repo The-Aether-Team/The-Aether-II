@@ -1,65 +1,55 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "aether_ii:item/aercloud_glider",
   "base": {
     "parent": "aether_ii:item/aercloud_glider",
     "display": {
       "firstperson_righthand": {
-        "rotation": [
-          0,
-          0,
-          -90
-        ],
         "translation": [
-          7.5,
           0,
-          4
+          9,
+          -6
         ]
       },
       "thirdperson_righthand": {
         "rotation": [
           -90,
           0,
-          -90
+          -35
         ],
         "translation": [
-          7,
+          11.55,
           -2,
-          10.5
+          -0.1
         ]
       }
     },
     "textures": {
-      "glider": "aether_ii:item/miscellaneous/cold_aercloud_glider_using",
-      "particle": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+      "glider": "aether_ii:item/miscellaneous/golden_aercloud_glider_using",
+      "particle": "aether_ii:item/miscellaneous/golden_aercloud_glider"
     }
   },
   "loader": "neoforge:separate_transforms",
-  "overrides": [
-    {
-      "model": "aether_ii:item/cold_aercloud_glider_using",
-      "predicate": {
-        "aether_ii:parachuting": 1.0
-      }
-    }
-  ],
   "perspectives": {
     "fixed": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/golden_aercloud_glider"
       }
     },
     "ground": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/golden_aercloud_glider"
       }
     },
     "gui": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/golden_aercloud_glider"
       }
     }
+  },
+  "textures": {
+    "glider": "aether_ii:item/miscellaneous/golden_aercloud_glider_using"
   }
 }
