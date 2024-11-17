@@ -1,7 +1,7 @@
 {
-  "parent": "aether_ii:item/aercloud_glider",
+  "parent": "aether_ii:item/aercloud_glider_open",
   "base": {
-    "parent": "aether_ii:item/aercloud_glider",
+    "parent": "aether_ii:item/aercloud_glider_open",
     "display": {
       "firstperson_righthand": {
         "translation": [
@@ -24,8 +24,7 @@
       }
     },
     "textures": {
-      "glider": "aether_ii:item/miscellaneous/golden_aercloud_glider_using",
-      "particle": "aether_ii:item/miscellaneous/golden_aercloud_glider"
+      "glider": "aether_ii:item/miscellaneous/golden_aercloud_glider_model"
     }
   },
   "loader": "neoforge:separate_transforms",
@@ -50,6 +49,6 @@
     }
   },
   "textures": {
-    "glider": "aether_ii:item/miscellaneous/golden_aercloud_glider_using"
+    "glider": "aether_ii:item/miscellaneous/golden_aercloud_glider_model"
   }
 }
