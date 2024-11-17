@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +16,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class GliderItem extends Item {
+    public static final int GLIDING_MAX = 1000; //todo
+
     public GliderItem(Properties properties) {
         super(properties);
     }
@@ -22,8 +25,12 @@ public class GliderItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
+        Integer timer = stack.get(AetherIIDataComponents.GLIDING_TIMER);
         if (!player.onGround()) {
             player.startUsingItem(hand);
+            if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
+                stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX);
+            }
             return super.use(level, player, hand);
         } else {
             return InteractionResultHolder.fail(stack);
@@ -32,6 +39,7 @@ public class GliderItem extends Item {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingTicks) {
+        Integer timer = stack.get(AetherIIDataComponents.GLIDING_TIMER);
         if (!level.isClientSide() && remainingTicks % 10 == 0) {
             stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
         } else {
@@ -57,8 +65,15 @@ public class GliderItem extends Item {
 
             entity.resetFallDistance();
         }
-        if (entity.onGround()) {
+        if (entity.onGround() || (timer != null && timer <= 0)) {
             entity.stopUsingItem();
+            if (timer != null) {
+                stack.set(AetherIIDataComponents.GLIDING_TIMER, 0);
+            }
+        } else {
+            if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
+                stack.set(AetherIIDataComponents.GLIDING_TIMER, Math.max(timer - 1, 0));
+            }
         }
         super.onUseTick(level, entity, stack, remainingTicks);
     }
@@ -72,19 +87,31 @@ public class GliderItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+        Integer timer = stack.get(AetherIIDataComponents.GLIDING_TIMER);
         if (entity instanceof Player player) {
             player.getCooldowns().addCooldown(stack.getItem(), 100); //todo
+            if (timer != null) {
+                stack.set(AetherIIDataComponents.GLIDING_TIMER, 0);
+            }
         }
         return super.finishUsingItem(stack, level, entity);
     }
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return 1000; //todo
+        return GLIDING_MAX;
     }
 
     @Override
     public UseAnim getUseAnimation(ItemStack p_41452_) {
         return UseAnim.CUSTOM;
+    }
+
+    public static int getGlidingTimer(ItemStack stack) {
+        Integer value = stack.get(AetherIIDataComponents.GLIDING_TIMER);
+        if (value != null) {
+            return value;
+        }
+        return 0;
     }
 }

@@ -20,8 +20,8 @@ public class AetherIIItemDecorators {
         if (stack.getItem() instanceof GliderItem) {
             Player player = Minecraft.getInstance().player;
             if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
-                int max = stack.getUseDuration(player);
-                int progress = player.getUseItemRemainingTicks();
+                int max = GliderItem.GLIDING_MAX;
+                int progress = GliderItem.getGlidingTimer(stack);
                 if (progress > 0) {
                     int barWidth = Math.round((float) progress * 13.0F / (float) max);
                     int rgb = 3183871;
