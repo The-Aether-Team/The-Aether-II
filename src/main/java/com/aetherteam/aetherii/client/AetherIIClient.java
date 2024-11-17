@@ -20,10 +20,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
@@ -92,7 +89,7 @@ public class AetherIIClient {
 
     private static void registerGliderProperties(Item item) {
         ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), (stack, level, livingEntity, value) ->
-                livingEntity == null ? 0.0F : livingEntity.getUseItemRemainingTicks() > 0 ? 1.0F : 0.0F);
+                livingEntity == null ? 0.0F : livingEntity.getUseItem() == stack && livingEntity.getUseItemRemainingTicks() > 0 ? 1.0F : 0.0F);
     }
 
     private static void registerCrossbowProperties(Item item) {
