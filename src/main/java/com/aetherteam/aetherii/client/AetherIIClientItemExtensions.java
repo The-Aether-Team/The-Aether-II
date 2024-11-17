@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.miscellaneous.GliderItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.HumanoidModel;
@@ -83,7 +82,7 @@ public class AetherIIClientItemExtensions {
         @Nullable
         @Override
         public HumanoidModel.ArmPose getArmPose(LivingEntity entityLiving, InteractionHand hand, ItemStack itemStack) {
-            if (entityLiving.getUsedItemHand() == hand && GliderItem.getGlidingTimer(itemStack) > 0) {
+            if (entityLiving.getUsedItemHand() == hand && entityLiving.getUseItemRemainingTicks() > 0) {
                 return AetherIIArmPoses.GLIDING;
             }
             return IClientItemExtensions.super.getArmPose(entityLiving, hand, itemStack);

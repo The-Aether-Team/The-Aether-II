@@ -29,7 +29,7 @@ public class GliderItem extends Item {
         if (!player.onGround()) {
             player.startUsingItem(hand);
             if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
-                stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX);
+                stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX); //todo
             }
             return super.use(level, player, hand);
         } else {
@@ -67,9 +67,9 @@ public class GliderItem extends Item {
         }
         if (entity.onGround() || (timer != null && timer <= 0)) {
             entity.stopUsingItem();
-            if (timer != null) {
-                stack.set(AetherIIDataComponents.GLIDING_TIMER, 0);
-            }
+//            if (timer != null) {
+//                stack.set(AetherIIDataComponents.GLIDING_TIMER, 0);
+//            }
         } else {
             if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
                 stack.set(AetherIIDataComponents.GLIDING_TIMER, Math.max(timer - 1, 0));

@@ -13,7 +13,6 @@ import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
-import com.aetherteam.aetherii.item.miscellaneous.GliderItem;
 import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
@@ -93,7 +92,7 @@ public class AetherIIClient {
 
     private static void registerGliderProperties(Item item) {
         ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), (stack, level, livingEntity, value) ->
-                livingEntity == null ? 0.0F : GliderItem.getGlidingTimer(stack) > 0 ? 1.0F : 0.0F);
+                livingEntity == null ? 0.0F : livingEntity.getUseItemRemainingTicks() > 0 ? 1.0F : 0.0F);
     }
 
     private static void registerCrossbowProperties(Item item) {
