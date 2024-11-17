@@ -30,7 +30,7 @@ public class GliderItem extends Item {
             player.startUsingItem(hand);
             if (player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelGlide()) {
                 if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
-                    stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX); //todo
+                    stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX);
                 }
                 player.getData(AetherIIDataAttachments.PLAYER).setCanRefuelGlide(false);
             }
@@ -56,15 +56,16 @@ public class GliderItem extends Item {
             AttributeInstance gravity = entity.getAttribute(Attributes.GRAVITY);
             double gravityModifier = gravity != null ? gravity.getValue() : 0.08;
 
-            Vec3 movement = this.calculateMovement(entity, travelVec);
-            double y = movement.y();
+            double y = entity.getDeltaMovement().y();
             if (!entity.isNoGravity()) {
                 y -= gravityModifier;
             }
             y *= 0.98;
 
-            double fallSpeed = Math.max(gravityModifier * -3.125, -0.01); // Slows fall speed and slows the parachute from falling too slow and getting stuck midair.
-            entity.setDeltaMovement(movement.x(), Math.max(y, fallSpeed), movement.z());
+            double fallSpeed = Math.max(gravityModifier * -3.125, -0.025); // Slows fall speed and slows the parachute from falling too slow and getting stuck midair.
+            entity.setDeltaMovement(entity.getDeltaMovement().x(), Math.max(y, fallSpeed), entity.getDeltaMovement().z());
+
+            this.calculateMovement(entity, travelVec);
 
             entity.resetFallDistance();
         }
