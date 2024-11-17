@@ -30,7 +30,14 @@ public interface GravititeArmor {
         if (player.onGround() && attachment.isGravititeJumpUsed()) {
             attachment.setGravititeJumpUsed(false);
         }
-        if (!player.onGround() && accessor.aether$isJumping() && accessor.aether$getNoJumpDelay() == 0 && EquipmentUtil.hasArmorAbility(player, AetherIIArmorMaterials.GRAVITITE) && !attachment.isGravititeJumpUsed()) {
+        if((player.isInWater() || player.isInFluidType())){
+            if(attachment.isGravititeJumpUsed()) {
+                attachment.setGravititeJumpUsed(false);
+            }
+            accessor.aether$setNoJumpDelay(6);
+        }
+
+        if (!player.onGround() && !player.isInWater() && !player.isInFluidType() && accessor.aether$isJumping() && accessor.aether$getNoJumpDelay() == 0 && EquipmentUtil.hasArmorAbility(player, AetherIIArmorMaterials.GRAVITITE) && !attachment.isGravititeJumpUsed()) {
             float f = accessor.callGetJumpPower() * 1.25F;
             if (!(f <= 1.0E-5F)) {
                 Vec3 vec3 = player.getDeltaMovement();
