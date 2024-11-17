@@ -255,8 +255,8 @@ public class AetherIIItems {
     public static final DeferredItem<Item> HEALING_STONE = ITEMS.register("healing_stone", () -> new HealingStoneItem(new Item.Properties().stacksTo(1).component(AetherIIDataComponents.HEALING_STONE_CHARGES, 0)));
 
     // Gliders
-    public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = ITEMS.register("cold_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(100).setNoRepair().component(AetherIIDataComponents.GLIDING_TIMER, 100))); //todo
-    public static final DeferredItem<Item> GOLDEN_AERCLOUD_GLIDER = ITEMS.register("golden_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(500).setNoRepair().component(AetherIIDataComponents.GLIDING_TIMER, 100))); //todo
+    public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = ITEMS.register("cold_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(250).setNoRepair().component(AetherIIDataComponents.GLIDING_TIMER, 100))); //todo
+    public static final DeferredItem<Item> GOLDEN_AERCLOUD_GLIDER = ITEMS.register("golden_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(1000).setNoRepair().component(AetherIIDataComponents.GLIDING_TIMER, 100))); //todo
 
     // Skyroot Buckets
     public static final DeferredItem<Item> SKYROOT_BUCKET = ITEMS.register("skyroot_bucket", () -> new SkyrootBucketItem(Fluids.EMPTY, new Item.Properties().stacksTo(16)));
