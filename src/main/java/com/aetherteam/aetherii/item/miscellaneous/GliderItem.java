@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
-import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -26,10 +26,13 @@ public class GliderItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         Integer timer = stack.get(AetherIIDataComponents.GLIDING_TIMER);
-        if (!player.onGround()) {
+        if (!player.onGround() && getGlidingTimer(stack) > 0) {
             player.startUsingItem(hand);
-            if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
-                stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX); //todo
+            if (player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelGlide()) {
+                if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
+                    stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX); //todo
+                }
+                player.getData(AetherIIDataAttachments.PLAYER).setCanRefuelGlide(false);
             }
             return super.use(level, player, hand);
         } else {
@@ -67,9 +70,9 @@ public class GliderItem extends Item {
         }
         if (entity.onGround() || (timer != null && timer <= 0)) {
             entity.stopUsingItem();
-//            if (timer != null) {
-//                stack.set(AetherIIDataComponents.GLIDING_TIMER, 0);
-//            }
+            if (entity.onGround() && timer != null) {
+                stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX);
+            }
         } else {
             if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
                 stack.set(AetherIIDataComponents.GLIDING_TIMER, Math.max(timer - 1, 0));
@@ -91,7 +94,7 @@ public class GliderItem extends Item {
         if (entity instanceof Player player) {
             player.getCooldowns().addCooldown(stack.getItem(), 100); //todo
             if (timer != null) {
-                stack.set(AetherIIDataComponents.GLIDING_TIMER, 0);
+                stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX);
             }
         }
         return super.finishUsingItem(stack, level, entity);

@@ -10,7 +10,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.IItemDecorator;
 import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 
@@ -19,10 +18,10 @@ public class AetherIIItemDecorators {
         guiGraphics.pose().pushPose();
         if (stack.getItem() instanceof GliderItem) {
             Player player = Minecraft.getInstance().player;
-            if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
+            if (player != null) {
                 int max = GliderItem.GLIDING_MAX;
                 int progress = GliderItem.getGlidingTimer(stack);
-                if (progress > 0) {
+                if (progress > 0 && progress < max) {
                     int barWidth = Math.round((float) progress * 13.0F / (float) max);
                     int rgb = 3183871;
 

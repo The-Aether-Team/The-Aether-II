@@ -46,6 +46,8 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private Aerbunny mountedAerbunny;
     private Optional<CompoundTag> mountedAerbunnyTag = Optional.empty();
 
+    private boolean canRefuelGlide;
+
     private boolean gravititeHoldingFloatingBlock = false;
     private boolean gravititeJumpUsed = true;
 
@@ -58,6 +60,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
             Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
             Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether),
             CompoundTag.CODEC.optionalFieldOf("mounted_aerbunny").forGetter(AetherIIPlayerAttachment::getMountedAerbunnyTag),
+            Codec.BOOL.fieldOf("can_refuel_glide").forGetter(AetherIIPlayerAttachment::getCanRefuelGlide),
             Codec.BOOL.fieldOf("gravitite_holding_floating_block").forGetter(AetherIIPlayerAttachment::isGravititeHoldingFloatingBlock),
             Codec.BOOL.fieldOf("gravitite_jump_used").forGetter(AetherIIPlayerAttachment::isGravititeJumpUsed)
     ).apply(instance, AetherIIPlayerAttachment::new));
@@ -65,12 +68,13 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, Optional<CompoundTag> mountedAerbunnyTag, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
+    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, Optional<CompoundTag> mountedAerbunnyTag, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed, boolean canRefuelGlide) {
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
         this.mountedAerbunnyTag = mountedAerbunnyTag;
         this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
         this.gravititeJumpUsed = gravititeJumpUsed;
+        this.canRefuelGlide = canRefuelGlide;
     }
 
     public AetherIIPlayerAttachment() { }
@@ -104,6 +108,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         this.handleAetherPortal(player);
         this.handleHealingStoneHealth(player);
         this.checkToRemoveAerbunny(player);
+        this.resetGlideCheck(player);
     }
 
     private void syncAfterJoin(Player player) {
@@ -189,6 +194,12 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private void checkToRemoveAerbunny(Player player) {
         if (this.getMountedAerbunny() != null && (!this.getMountedAerbunny().isAlive() || !player.isAlive())) {
             this.setMountedAerbunny(null);
+        }
+    }
+
+    private void resetGlideCheck(Player player) {
+        if (player.onGround() && !this.getCanRefuelGlide()) {
+            this.setCanRefuelGlide(true);
         }
     }
 
@@ -320,6 +331,14 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      */
     public Optional<CompoundTag> getMountedAerbunnyTag() {
         return this.mountedAerbunnyTag;
+    }
+
+    public void setCanRefuelGlide(boolean canRefuelGlide) {
+        this.canRefuelGlide = canRefuelGlide;
+    }
+
+    public boolean getCanRefuelGlide() {
+        return this.canRefuelGlide;
     }
 
     public void setGravititeHoldingFloatingBlock(boolean gravititeHoldingFloatingBlock) {
