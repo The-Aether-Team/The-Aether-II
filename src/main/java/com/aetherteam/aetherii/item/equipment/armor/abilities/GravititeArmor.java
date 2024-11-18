@@ -27,14 +27,15 @@ public interface GravititeArmor {
         Player player = event.getEntity();
         LivingEntityAccessor accessor = (LivingEntityAccessor) player;
         AetherIIPlayerAttachment attachment = player.getData(AetherIIDataAttachments.PLAYER);
-        if (player.onGround() && attachment.isGravititeJumpUsed()) {
-            attachment.setGravititeJumpUsed(false);
+        boolean isFluid = player.isInWater() || player.isInFluidType();
+        if (isFluid) {
+            accessor.aether$setNoJumpDelay(6);
         }
-        if (player.isInWater() || player.isInFluidType()) {
-            if (attachment.isGravititeJumpUsed()) {
+
+        if (attachment.isGravititeJumpUsed()) {
+            if (isFluid || player.onGround()) {
                 attachment.setGravititeJumpUsed(false);
             }
-            accessor.aether$setNoJumpDelay(6);
         }
 
         if (!player.onGround() && !player.isInWater() && !player.isInFluidType() && accessor.aether$isJumping() && accessor.aether$getNoJumpDelay() == 0 && EquipmentUtil.hasArmorAbility(player, AetherIIArmorMaterials.GRAVITITE) && !attachment.isGravititeJumpUsed()) {
