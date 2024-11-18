@@ -16,10 +16,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class AercloudGliderItem extends Item {
-    public static final int GLIDING_MAX = 500; //todo
+    public static final int GLIDING_MAX = 500;
 
     public AercloudGliderItem(Properties properties) {
         super(properties);
@@ -79,9 +80,6 @@ public class AercloudGliderItem extends Item {
                 if (entity.onGround()) {
                     player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
                 }
-                if (!level.isClientSide()) {
-                    stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
-                }
             } else {
                 player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(Math.max(timer - 1, 0));
             }
@@ -97,11 +95,11 @@ public class AercloudGliderItem extends Item {
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int count) {
-        if (!level.isClientSide()) {
+    public void onStopUsing(ItemStack stack, LivingEntity entity, int count) {
+        if (!entity.level().isClientSide()) {
             stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
         }
-        super.releaseUsing(stack, level, entity, count);
+        super.onStopUsing(stack, entity, count);
     }
 
     @Override
@@ -126,41 +124,41 @@ public class AercloudGliderItem extends Item {
         return UseAnim.CUSTOM;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
-    public boolean isBarVisible(ItemStack stack) { //todo find a way to simplify all these checks eventually
-        Player player = Minecraft.getInstance().player; //todo test on server load
-        if (player != null) {
-            int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
-            if (progress > 0 && progress < AercloudGliderItem.GLIDING_MAX) {
-                return true;
-            }
+    public boolean isBarVisible(ItemStack stack) {
+        if (this.isGliding()) {
+            return true;
         }
         return super.isBarVisible(stack);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public int getBarWidth(ItemStack stack) {
-        Player player = Minecraft.getInstance().player; //todo test on server load
-        if (player != null) {
-            int max = AercloudGliderItem.GLIDING_MAX;
-            int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
-            if (progress > 0 && progress < max) {
-                return Math.round((float) progress * 13.0F / (float) max);
-            }
+        if (this.isGliding()) {
+            return Math.round((float) Minecraft.getInstance().player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() * 13.0F / (float) AercloudGliderItem.GLIDING_MAX);
         }
         return super.getBarWidth(stack);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public int getBarColor(ItemStack stack) {
-        Player player = Minecraft.getInstance().player; //todo test on server load
-        if (player != null) {
-            int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
-            if (progress > 0 && progress < AercloudGliderItem.GLIDING_MAX) {
-                return 3183871;
-            }
+        if (this.isGliding()) {
+            return 3183871;
         }
         return super.getBarColor(stack);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private boolean isGliding() {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
+            return progress > 0 && progress < AercloudGliderItem.GLIDING_MAX;
+        }
+        return false;
     }
 
     private void setCooldowns(Player player) {

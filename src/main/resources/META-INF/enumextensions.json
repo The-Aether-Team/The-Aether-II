@@ -53,7 +53,7 @@
       "name": "AETHER_II_GLIDING_ARM_POSE",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
-        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions",
+        "class": "com/aetherteam/aetherii/AetherIIEnumExtensions$Client",
         "field": "AETHER_II_GLIDING_ARM_POSE_PROXY"
       }
     },
