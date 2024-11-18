@@ -66,6 +66,10 @@ import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootMilkBucketItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootMobBucketItem;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootSolidBucketItem;
+import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
+import com.aetherteam.aetherii.item.miscellaneous.glider.BlueAercloudGliderItem;
+import com.aetherteam.aetherii.item.miscellaneous.glider.GoldenAercloudGliderItem;
+import com.aetherteam.aetherii.item.miscellaneous.glider.PurpleAercloudGliderItem;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.Accessory;
 import net.minecraft.core.component.DataComponents;
@@ -255,10 +259,10 @@ public class AetherIIItems {
     public static final DeferredItem<Item> HEALING_STONE = ITEMS.register("healing_stone", () -> new HealingStoneItem(new Item.Properties().stacksTo(1).component(AetherIIDataComponents.HEALING_STONE_CHARGES, 0)));
 
     // Gliders
-    public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = ITEMS.register("cold_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(250).setNoRepair())); //todo
-    public static final DeferredItem<Item> GOLDEN_AERCLOUD_GLIDER = ITEMS.register("golden_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(1000).setNoRepair())); //todo
-    public static final DeferredItem<Item> BLUE_AERCLOUD_GLIDER = ITEMS.register("blue_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(250).setNoRepair())); //todo
-    public static final DeferredItem<Item> PURPLE_AERCLOUD_GLIDER = ITEMS.register("purple_aercloud_glider", () -> new GliderItem(new Item.Properties().durability(250).setNoRepair())); //todo
+    public static final DeferredItem<Item> COLD_AERCLOUD_GLIDER = ITEMS.register("cold_aercloud_glider", () -> new AercloudGliderItem(new Item.Properties().durability(250).setNoRepair())); //todo
+    public static final DeferredItem<Item> GOLDEN_AERCLOUD_GLIDER = ITEMS.register("golden_aercloud_glider", () -> new GoldenAercloudGliderItem(new Item.Properties().durability(1000).setNoRepair())); //todo
+    public static final DeferredItem<Item> BLUE_AERCLOUD_GLIDER = ITEMS.register("blue_aercloud_glider", () -> new BlueAercloudGliderItem(new Item.Properties().durability(250).setNoRepair())); //todo
+    public static final DeferredItem<Item> PURPLE_AERCLOUD_GLIDER = ITEMS.register("purple_aercloud_glider", () -> new PurpleAercloudGliderItem(new Item.Properties().durability(250).setNoRepair())); //todo
 
     // Skyroot Buckets
     public static final DeferredItem<Item> SKYROOT_BUCKET = ITEMS.register("skyroot_bucket", () -> new SkyrootBucketItem(Fluids.EMPTY, new Item.Properties().stacksTo(16)));

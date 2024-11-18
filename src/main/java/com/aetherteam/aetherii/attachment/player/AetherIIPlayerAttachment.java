@@ -1,13 +1,12 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
-import com.aetherteam.aetherii.item.miscellaneous.GliderItem;
+import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
@@ -205,7 +204,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
 
     private void resetGlideCheck(Player player) {
         if (player.onGround() && !this.getCanRefuelGlide()) {
-            this.setGlidingTimer(GliderItem.GLIDING_MAX);
+            this.setGlidingTimer(AercloudGliderItem.GLIDING_MAX);
             this.setCanRefuelGlide(true);
         }
     }

@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.item.miscellaneous;
+package com.aetherteam.aetherii.item.miscellaneous.glider;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import net.minecraft.world.InteractionHand;
@@ -14,10 +14,10 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class GliderItem extends Item {
+public class AercloudGliderItem extends Item {
     public static final int GLIDING_MAX = 1000; //todo
 
-    public GliderItem(Properties properties) {
+    public AercloudGliderItem(Properties properties) {
         super(properties);
     }
 
@@ -28,6 +28,7 @@ public class GliderItem extends Item {
             player.startUsingItem(hand);
             if (player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelGlide()) {
                 player.getData(AetherIIDataAttachments.PLAYER).setCanRefuelGlide(false);
+                this.onParachuteOpen(level, player, hand, stack);
             }
             return super.use(level, player, hand);
         } else {
@@ -59,9 +60,11 @@ public class GliderItem extends Item {
                 y *= 0.98;
 
                 double fallSpeed = Math.max(gravityModifier * -3.125, -0.025); // Slows fall speed and slows the parachute from falling too slow and getting stuck midair.
-                entity.setDeltaMovement(entity.getDeltaMovement().x(), Math.max(y, fallSpeed), entity.getDeltaMovement().z());
 
-                this.calculateMovement(entity, travelVec);
+                if (entity.getDeltaMovement().y() < -0.075) {
+                    entity.setDeltaMovement(entity.getDeltaMovement().x(), Math.max(y, fallSpeed), entity.getDeltaMovement().z());
+                    this.calculateMovement(entity, travelVec);
+                }
 
                 entity.resetFallDistance();
             }
@@ -77,11 +80,11 @@ public class GliderItem extends Item {
         super.onUseTick(level, entity, stack, remainingTicks);
     }
 
-    public Vec3 calculateMovement(LivingEntity entity, Vec3 vec3) {
+    public void calculateMovement(LivingEntity entity, Vec3 vec3) {
         float speed = 0.03F;
         entity.moveRelative(speed, vec3);
         entity.move(MoverType.SELF, entity.getDeltaMovement());
-        return entity.getDeltaMovement();
+        entity.getDeltaMovement();
     }
 
     @Override
@@ -101,5 +104,9 @@ public class GliderItem extends Item {
     @Override
     public UseAnim getUseAnimation(ItemStack p_41452_) {
         return UseAnim.CUSTOM;
+    }
+
+    protected void onParachuteOpen(Level level, Player player, InteractionHand hand, ItemStack stack) {
+
     }
 }

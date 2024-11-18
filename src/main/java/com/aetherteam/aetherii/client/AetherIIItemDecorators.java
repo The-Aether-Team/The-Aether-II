@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.miscellaneous.GliderItem;
+import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
@@ -17,10 +17,10 @@ import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 public class AetherIIItemDecorators {
     private static final IItemDecorator GLIDER_DURATION = (guiGraphics, font, stack, xOffset, yOffset) -> {
         guiGraphics.pose().pushPose();
-        if (stack.getItem() instanceof GliderItem) {
+        if (stack.getItem() instanceof AercloudGliderItem) {
             Player player = Minecraft.getInstance().player;
             if (player != null) {
-                int max = GliderItem.GLIDING_MAX;
+                int max = AercloudGliderItem.GLIDING_MAX;
                 int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
                 if (progress > 0 && progress < max) {
                     int barWidth = Math.round((float) progress * 13.0F / (float) max);
