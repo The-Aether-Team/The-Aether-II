@@ -30,8 +30,8 @@ public interface GravititeArmor {
         if (player.onGround() && attachment.isGravititeJumpUsed()) {
             attachment.setGravititeJumpUsed(false);
         }
-        if((player.isInWater() || player.isInFluidType())){
-            if(attachment.isGravititeJumpUsed()) {
+        if (player.isInWater() || player.isInFluidType()) {
+            if (attachment.isGravititeJumpUsed()) {
                 attachment.setGravititeJumpUsed(false);
             }
             accessor.aether$setNoJumpDelay(6);
