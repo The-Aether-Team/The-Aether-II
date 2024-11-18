@@ -70,6 +70,9 @@ public class AercloudGliderItem extends Item {
 
             if (entity.onGround() || timer <= 0) {
                 entity.stopUsingItem();
+                if (timer <= 0) {
+                    player.getCooldowns().addCooldown(stack.getItem(), 100); //todo
+                }
                 if (entity.onGround()) {
                     player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
                 }
