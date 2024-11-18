@@ -167,6 +167,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         // Gliders
         this.gliderItem(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
         this.gliderItem(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
+        this.gliderItem(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
+        this.gliderItem(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
 
         // Skyroot Buckets
         this.item(AetherIIItems.SKYROOT_BUCKET.get(), "miscellaneous/");

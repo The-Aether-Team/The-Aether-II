@@ -60,6 +60,8 @@ public class AetherIIItemDecorators {
     public static void registerItemDecorators(RegisterItemDecorationsEvent event) {
         event.register(AetherIIItems.COLD_AERCLOUD_GLIDER, GLIDER_DURATION);
         event.register(AetherIIItems.GOLDEN_AERCLOUD_GLIDER, GLIDER_DURATION);
+        event.register(AetherIIItems.BLUE_AERCLOUD_GLIDER, GLIDER_DURATION);
+        event.register(AetherIIItems.PURPLE_AERCLOUD_GLIDER, GLIDER_DURATION);
 
         for (Holder<Item> item : ArkeniumForgeMenu.REINFORCEABLE) {
             event.register(item.value(), REINFORCED_DURABILITY);

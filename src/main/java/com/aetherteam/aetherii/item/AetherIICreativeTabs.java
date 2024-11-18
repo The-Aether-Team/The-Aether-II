@@ -476,6 +476,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_MILK_BUCKET.get());
                 output.accept(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
+                output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
+                output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());

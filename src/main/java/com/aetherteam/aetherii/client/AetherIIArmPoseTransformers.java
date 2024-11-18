@@ -8,7 +8,9 @@ import net.neoforged.neoforge.client.IArmPoseTransformer;
 
 public class AetherIIArmPoseTransformers {
     public static final IArmPoseTransformer GLIDING_TRANSFORMER = (humanoidModel, livingEntity, humanoidArm) -> {
-        float ageInTicks = livingEntity.tickCount + DeltaTracker.ONE.getGameTimeDeltaPartialTick(!Minecraft.getInstance().level.tickRateManager().isEntityFrozen(livingEntity));
+        float partialTicks = DeltaTracker.ONE.getGameTimeDeltaPartialTick(!Minecraft.getInstance().level.tickRateManager().isEntityFrozen(livingEntity));
+        float limbSwing = livingEntity.walkAnimation.position(partialTicks);
+        float ageInTicks = livingEntity.tickCount + partialTicks;
         humanoidModel.rightArm.z = 0.0F;
         humanoidModel.rightArm.x = -5.0F;
         humanoidModel.leftArm.z = 0.0F;
@@ -21,5 +23,7 @@ public class AetherIIArmPoseTransformers {
         humanoidModel.leftArm.yRot = 0.0F;
         AnimationUtils.bobModelPart(humanoidModel.rightArm, ageInTicks, -1.0F);
         AnimationUtils.bobModelPart(humanoidModel.leftArm, ageInTicks, 1.0F);
+        humanoidModel.rightLeg.xRot = Mth.cos(limbSwing * 0.1662F) * 0.3F * partialTicks;
+        humanoidModel.leftLeg.xRot = Mth.cos(limbSwing * 0.1662F + 3.1415927F) * 0.3F * partialTicks;
     };
 }

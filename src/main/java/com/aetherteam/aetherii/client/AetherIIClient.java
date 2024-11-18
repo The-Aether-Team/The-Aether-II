@@ -69,6 +69,8 @@ public class AetherIIClient {
     public static void registerItemModelProperties() {
         registerGliderProperties(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
         registerGliderProperties(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
+        registerGliderProperties(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
+        registerGliderProperties(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
 
         registerCrossbowProperties(AetherIIItems.SKYROOT_CROSSBOW.get());
         registerCrossbowProperties(AetherIIItems.HOLYSTONE_CROSSBOW.get());

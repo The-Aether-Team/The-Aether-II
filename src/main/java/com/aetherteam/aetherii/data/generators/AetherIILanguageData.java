@@ -665,6 +665,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Gliders
         this.addItem(AetherIIItems.COLD_AERCLOUD_GLIDER, "Cold Aercloud Glider");
         this.addItem(AetherIIItems.GOLDEN_AERCLOUD_GLIDER, "Golden Aercloud Glider");
+        this.addItem(AetherIIItems.BLUE_AERCLOUD_GLIDER, "Blue Aercloud Glider");
+        this.addItem(AetherIIItems.PURPLE_AERCLOUD_GLIDER, "Purple Aercloud Glider");
 
         // Skyroot Buckets
         this.addItem(AetherIIItems.SKYROOT_BUCKET, "Skyroot Bucket");
