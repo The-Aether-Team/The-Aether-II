@@ -89,7 +89,7 @@ public class AetherIIClient {
 
     private static void registerGliderProperties(Item item) {
         ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), (stack, level, livingEntity, value) ->
-                livingEntity == null ? 0.0F : livingEntity.getUseItem() == stack && livingEntity.getUseItemRemainingTicks() > 0 ? 1.0F : 0.0F);
+                livingEntity == null ? 0.0F : ItemStack.isSameItem(stack, livingEntity.getUseItem()) && livingEntity.getUseItemRemainingTicks() > 0 ? 1.0F : 0.0F);
     }
 
     private static void registerCrossbowProperties(Item item) {

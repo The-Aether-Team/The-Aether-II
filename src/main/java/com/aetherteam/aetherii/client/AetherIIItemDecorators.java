@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.inventory.menu.ArkeniumForgeMenu;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
@@ -20,7 +21,7 @@ public class AetherIIItemDecorators {
             Player player = Minecraft.getInstance().player;
             if (player != null) {
                 int max = GliderItem.GLIDING_MAX;
-                int progress = GliderItem.getGlidingTimer(stack);
+                int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
                 if (progress > 0 && progress < max) {
                     int barWidth = Math.round((float) progress * 13.0F / (float) max);
                     int rgb = 3183871;

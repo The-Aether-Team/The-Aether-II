@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.item.miscellaneous;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,13 +24,9 @@ public class GliderItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        Integer timer = stack.get(AetherIIDataComponents.GLIDING_TIMER);
-        if (!player.onGround() && getGlidingTimer(stack) > 0) {
+        if (!player.onGround() && player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() > 0) {
             player.startUsingItem(hand);
             if (player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelGlide()) {
-                if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
-                    stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX);
-                }
                 player.getData(AetherIIDataAttachments.PLAYER).setCanRefuelGlide(false);
             }
             return super.use(level, player, hand);
@@ -42,41 +37,41 @@ public class GliderItem extends Item {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingTicks) {
-        Integer timer = stack.get(AetherIIDataComponents.GLIDING_TIMER);
-        if (!level.isClientSide() && remainingTicks % 10 == 0) {
-            stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
-        } else {
-            float x = entity.xxa * 0.5F; // Side-to-side movement is slowed.
-            float z = entity.zza; // Forward movement is normal.
-            if (z <= 0.0F) {
-                z *= 0.25F; // Backwards movement is slowed.
+        if (entity instanceof Player player) {
+            int timer = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
+            if (!level.isClientSide() && remainingTicks % 10 == 0) {
+                stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
+            } else {
+                float x = entity.xxa * 0.5F; // Side-to-side movement is slowed.
+                float z = entity.zza; // Forward movement is normal.
+                if (z <= 0.0F) {
+                    z *= 0.25F; // Backwards movement is slowed.
+                }
+                Vec3 travelVec = new Vec3(x, entity.yya, z);
+
+                AttributeInstance gravity = entity.getAttribute(Attributes.GRAVITY);
+                double gravityModifier = gravity != null ? gravity.getValue() : 0.08;
+
+                double y = entity.getDeltaMovement().y();
+                if (!entity.isNoGravity()) {
+                    y -= gravityModifier;
+                }
+                y *= 0.98;
+
+                double fallSpeed = Math.max(gravityModifier * -3.125, -0.025); // Slows fall speed and slows the parachute from falling too slow and getting stuck midair.
+                entity.setDeltaMovement(entity.getDeltaMovement().x(), Math.max(y, fallSpeed), entity.getDeltaMovement().z());
+
+                this.calculateMovement(entity, travelVec);
+
+                entity.resetFallDistance();
             }
-            Vec3 travelVec = new Vec3(x, entity.yya, z);
-
-            AttributeInstance gravity = entity.getAttribute(Attributes.GRAVITY);
-            double gravityModifier = gravity != null ? gravity.getValue() : 0.08;
-
-            double y = entity.getDeltaMovement().y();
-            if (!entity.isNoGravity()) {
-                y -= gravityModifier;
-            }
-            y *= 0.98;
-
-            double fallSpeed = Math.max(gravityModifier * -3.125, -0.025); // Slows fall speed and slows the parachute from falling too slow and getting stuck midair.
-            entity.setDeltaMovement(entity.getDeltaMovement().x(), Math.max(y, fallSpeed), entity.getDeltaMovement().z());
-
-            this.calculateMovement(entity, travelVec);
-
-            entity.resetFallDistance();
-        }
-        if (entity.onGround() || (timer != null && timer <= 0)) {
-            entity.stopUsingItem();
-            if (entity.onGround() && timer != null) {
-                stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX);
-            }
-        } else {
-            if (stack.has(AetherIIDataComponents.GLIDING_TIMER) && timer != null) {
-                stack.set(AetherIIDataComponents.GLIDING_TIMER, Math.max(timer - 1, 0));
+            if (entity.onGround() || timer <= 0) {
+                entity.stopUsingItem();
+                if (entity.onGround()) {
+                    player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
+                }
+            } else {
+                player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(Math.max(timer - 1, 0));
             }
         }
         super.onUseTick(level, entity, stack, remainingTicks);
@@ -91,12 +86,9 @@ public class GliderItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        Integer timer = stack.get(AetherIIDataComponents.GLIDING_TIMER);
         if (entity instanceof Player player) {
             player.getCooldowns().addCooldown(stack.getItem(), 100); //todo
-            if (timer != null) {
-                stack.set(AetherIIDataComponents.GLIDING_TIMER, GLIDING_MAX);
-            }
+            player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
         }
         return super.finishUsingItem(stack, level, entity);
     }
@@ -109,13 +101,5 @@ public class GliderItem extends Item {
     @Override
     public UseAnim getUseAnimation(ItemStack p_41452_) {
         return UseAnim.CUSTOM;
-    }
-
-    public static int getGlidingTimer(ItemStack stack) {
-        Integer value = stack.get(AetherIIDataComponents.GLIDING_TIMER);
-        if (value != null) {
-            return value;
-        }
-        return 0;
     }
 }

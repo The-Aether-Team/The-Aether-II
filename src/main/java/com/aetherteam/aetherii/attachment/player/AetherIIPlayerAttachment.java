@@ -1,11 +1,13 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.AetherIIConfig;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
+import com.aetherteam.aetherii.item.miscellaneous.GliderItem;
 import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.RemountAerbunnyPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
@@ -47,13 +49,15 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private Optional<CompoundTag> mountedAerbunnyTag = Optional.empty();
 
     private boolean canRefuelGlide;
+    private int glidingTimer;
 
     private boolean gravititeHoldingFloatingBlock = false;
     private boolean gravititeJumpUsed = true;
 
     private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
             Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
-            Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping))
+            Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
+            Map.entry("setGlidingTimer", Triple.of(Type.INT, (object) -> this.setGlidingTimer((int) object), this::getGlidingTimer))
     );
 
     public static final Codec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -61,6 +65,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
             Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether),
             CompoundTag.CODEC.optionalFieldOf("mounted_aerbunny").forGetter(AetherIIPlayerAttachment::getMountedAerbunnyTag),
             Codec.BOOL.fieldOf("can_refuel_glide").forGetter(AetherIIPlayerAttachment::getCanRefuelGlide),
+            Codec.INT.fieldOf("gliding_timer").forGetter(AetherIIPlayerAttachment::getGlidingTimer),
             Codec.BOOL.fieldOf("gravitite_holding_floating_block").forGetter(AetherIIPlayerAttachment::isGravititeHoldingFloatingBlock),
             Codec.BOOL.fieldOf("gravitite_jump_used").forGetter(AetherIIPlayerAttachment::isGravititeJumpUsed)
     ).apply(instance, AetherIIPlayerAttachment::new));
@@ -68,13 +73,14 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, Optional<CompoundTag> mountedAerbunnyTag, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed, boolean canRefuelGlide) {
+    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, Optional<CompoundTag> mountedAerbunnyTag, boolean canRefuelGlide, int glidingTimer, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
         this.mountedAerbunnyTag = mountedAerbunnyTag;
+        this.canRefuelGlide = canRefuelGlide;
+        this.glidingTimer = glidingTimer;
         this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
         this.gravititeJumpUsed = gravititeJumpUsed;
-        this.canRefuelGlide = canRefuelGlide;
     }
 
     public AetherIIPlayerAttachment() { }
@@ -199,6 +205,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
 
     private void resetGlideCheck(Player player) {
         if (player.onGround() && !this.getCanRefuelGlide()) {
+            this.setGlidingTimer(GliderItem.GLIDING_MAX);
             this.setCanRefuelGlide(true);
         }
     }
@@ -339,6 +346,14 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
 
     public boolean getCanRefuelGlide() {
         return this.canRefuelGlide;
+    }
+
+    public void setGlidingTimer(int glidingTimer) {
+        this.glidingTimer = glidingTimer;
+    }
+
+    public int getGlidingTimer() {
+        return this.glidingTimer;
     }
 
     public void setGravititeHoldingFloatingBlock(boolean gravititeHoldingFloatingBlock) {
