@@ -12,6 +12,6 @@ public class BlueAercloudGliderItem extends AercloudGliderItem {
 
     @Override
     protected void onParachuteOpen(Level level, Player player, InteractionHand hand, ItemStack stack) {
-        player.setDeltaMovement(player.getDeltaMovement().add(0.0, 1.5, 0.0));
+        player.setDeltaMovement(player.getDeltaMovement().add(0.0, 2.0, 0.0));
     }
 }
