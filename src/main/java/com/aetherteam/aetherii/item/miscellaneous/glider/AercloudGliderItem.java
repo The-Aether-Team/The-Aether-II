@@ -129,7 +129,7 @@ public class AercloudGliderItem extends Item {
     @Override
     public boolean isBarVisible(ItemStack stack) { //todo find a way to simplify all these checks eventually
         Player player = Minecraft.getInstance().player; //todo test on server load
-        if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
+        if (player != null) {
             int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
             if (progress > 0 && progress < AercloudGliderItem.GLIDING_MAX) {
                 return true;
@@ -141,7 +141,7 @@ public class AercloudGliderItem extends Item {
     @Override
     public int getBarWidth(ItemStack stack) {
         Player player = Minecraft.getInstance().player; //todo test on server load
-        if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
+        if (player != null) {
             int max = AercloudGliderItem.GLIDING_MAX;
             int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
             if (progress > 0 && progress < max) {
@@ -154,7 +154,7 @@ public class AercloudGliderItem extends Item {
     @Override
     public int getBarColor(ItemStack stack) {
         Player player = Minecraft.getInstance().player; //todo test on server load
-        if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
+        if (player != null) {
             int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
             if (progress > 0 && progress < AercloudGliderItem.GLIDING_MAX) {
                 return 3183871;
