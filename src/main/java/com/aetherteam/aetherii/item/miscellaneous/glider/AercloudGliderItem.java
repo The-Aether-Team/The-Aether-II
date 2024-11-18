@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.miscellaneous.glider;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class AercloudGliderItem extends Item {
-    public static final int GLIDING_MAX = 1000; //todo
+    public static final int GLIDING_MAX = 500; //todo
 
     public AercloudGliderItem(Properties properties) {
         super(properties);
@@ -40,9 +41,7 @@ public class AercloudGliderItem extends Item {
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int remainingTicks) {
         if (entity instanceof Player player) {
             int timer = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
-            if (!level.isClientSide() && remainingTicks % 10 == 0) {
-                stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
-            } else {
+            if (level.isClientSide()) {
                 float x = entity.xxa * 0.5F; // Side-to-side movement is slowed.
                 float z = entity.zza; // Forward movement is normal.
                 if (z <= 0.0F) {
@@ -65,13 +64,17 @@ public class AercloudGliderItem extends Item {
                     entity.setDeltaMovement(entity.getDeltaMovement().x(), Math.max(y, fallSpeed), entity.getDeltaMovement().z());
                     this.calculateMovement(entity, travelVec);
                 }
-
-                entity.resetFallDistance();
             }
+
+            entity.resetFallDistance();
+
             if (entity.onGround() || timer <= 0) {
                 entity.stopUsingItem();
                 if (entity.onGround()) {
                     player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
+                }
+                if (!level.isClientSide()) {
+                    stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
                 }
             } else {
                 player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(Math.max(timer - 1, 0));
@@ -88,10 +91,21 @@ public class AercloudGliderItem extends Item {
     }
 
     @Override
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int count) {
+        if (!level.isClientSide()) {
+            stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
+        }
+        super.releaseUsing(stack, level, entity, count);
+    }
+
+    @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if (entity instanceof Player player) {
             player.getCooldowns().addCooldown(stack.getItem(), 100); //todo
             player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
+            if (!entity.level().isClientSide()) {
+                stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
+            }
         }
         return super.finishUsingItem(stack, level, entity);
     }
@@ -104,6 +118,43 @@ public class AercloudGliderItem extends Item {
     @Override
     public UseAnim getUseAnimation(ItemStack p_41452_) {
         return UseAnim.CUSTOM;
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        Player player = Minecraft.getInstance().player; //todo test on server load
+        if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
+            int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
+            if (progress > 0 && progress < AercloudGliderItem.GLIDING_MAX) {
+                return true;
+            }
+        }
+        return super.isBarVisible(stack);
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        Player player = Minecraft.getInstance().player; //todo test on server load
+        if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
+            int max = AercloudGliderItem.GLIDING_MAX;
+            int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
+            if (progress > 0 && progress < max) {
+                return Math.round((float) progress * 13.0F / (float) max);
+            }
+        }
+        return super.getBarWidth(stack);
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        Player player = Minecraft.getInstance().player; //todo test on server load
+        if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
+            int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
+            if (progress > 0 && progress < AercloudGliderItem.GLIDING_MAX) {
+                return 3183871;
+            }
+        }
+        return super.getBarColor(stack);
     }
 
     protected void onParachuteOpen(Level level, Player player, InteractionHand hand, ItemStack stack) {
