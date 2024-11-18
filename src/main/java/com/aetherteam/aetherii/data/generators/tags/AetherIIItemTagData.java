@@ -79,6 +79,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_SPEAR.get(),
                 AetherIIItems.GRAVITITE_SPEAR.get()
         );
+        this.tag(AetherIITags.Items.TOOLS_GLIDERS).add(
+                AetherIIItems.COLD_AERCLOUD_GLIDER.get(),
+                AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(),
+                AetherIIItems.BLUE_AERCLOUD_GLIDER.get(),
+                AetherIIItems.PURPLE_AERCLOUD_GLIDER.get()
+        );
         this.tag(AetherIITags.Items.EQUIPMENT_RELICS);
         this.tag(AetherIITags.Items.EQUIPMENT_HANDWEAR).add(
                 AetherIIItems.TAEGORE_HIDE_GLOVES.get(),

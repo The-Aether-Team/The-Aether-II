@@ -99,6 +99,7 @@ public class AetherIITags {
         public static final TagKey<Item> TOOLS_SHORTSWORDS = tag("tools/shortswords");
         public static final TagKey<Item> TOOLS_HAMMERS = tag("tools/hammers");
         public static final TagKey<Item> TOOLS_SPEARS = tag("tools/spears");
+        public static final TagKey<Item> TOOLS_GLIDERS = tag("tools/gliders");
 
         public static final TagKey<Item> EQUIPMENT_RELICS = tag("equipment/relics");
         public static final TagKey<Item> EQUIPMENT_HANDWEAR = tag("equipment/handwear");

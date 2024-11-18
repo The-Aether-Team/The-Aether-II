@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.item.miscellaneous.glider;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.Tags;
 
 public class AercloudGliderItem extends Item {
     public static final int GLIDING_MAX = 500; //todo
@@ -71,7 +74,7 @@ public class AercloudGliderItem extends Item {
             if (entity.onGround() || timer <= 0) {
                 entity.stopUsingItem();
                 if (timer <= 0) {
-                    player.getCooldowns().addCooldown(stack.getItem(), 100); //todo
+                    this.setCooldowns(player);
                 }
                 if (entity.onGround()) {
                     player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
@@ -104,7 +107,7 @@ public class AercloudGliderItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if (entity instanceof Player player) {
-            player.getCooldowns().addCooldown(stack.getItem(), 100); //todo
+            this.setCooldowns(player);
             player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
             if (!entity.level().isClientSide()) {
                 stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
@@ -124,7 +127,7 @@ public class AercloudGliderItem extends Item {
     }
 
     @Override
-    public boolean isBarVisible(ItemStack stack) {
+    public boolean isBarVisible(ItemStack stack) { //todo find a way to simplify all these checks eventually
         Player player = Minecraft.getInstance().player; //todo test on server load
         if (player != null && ItemStack.isSameItem(stack, player.getUseItem())) {
             int progress = player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer();
@@ -158,6 +161,10 @@ public class AercloudGliderItem extends Item {
             }
         }
         return super.getBarColor(stack);
+    }
+
+    private void setCooldowns(Player player) {
+        player.level().registryAccess().registryOrThrow(Registries.ITEM).getTagOrEmpty(AetherIITags.Items.TOOLS_GLIDERS).forEach((item) -> player.getCooldowns().addCooldown(item.value(), 100)); //todo
     }
 
     protected void onParachuteOpen(Level level, Player player, InteractionHand hand, ItemStack stack) {
