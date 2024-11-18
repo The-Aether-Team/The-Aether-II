@@ -126,6 +126,7 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                 .end();
 
         ItemModelBuilder override = this.withExistingParent(this.itemName(item) + "_model", this.modLoc("item/aercloud_glider_open")).texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_model"))
+                .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
                 .customLoader((itemModelBuilder, existingFileHelper) ->
                         SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
                                 .base(gliderOpen)
@@ -134,6 +135,7 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                                 .perspective(ItemDisplayContext.FIXED, inventory)
                 ).end();
         this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
+                .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
                 .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), 1.0F).model(override).end()
                 .customLoader((itemModelBuilder, existingFileHelper) ->
                         SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)

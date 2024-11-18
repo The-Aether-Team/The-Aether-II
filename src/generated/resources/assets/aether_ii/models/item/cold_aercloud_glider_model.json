@@ -49,6 +49,7 @@
     }
   },
   "textures": {
-    "glider": "aether_ii:item/miscellaneous/cold_aercloud_glider_model"
+    "glider": "aether_ii:item/miscellaneous/cold_aercloud_glider_model",
+    "particle": "aether_ii:item/miscellaneous/cold_aercloud_glider"
   }
 }

@@ -65,5 +65,8 @@
         "layer0": "aether_ii:item/miscellaneous/golden_aercloud_glider"
       }
     }
+  },
+  "textures": {
+    "particle": "aether_ii:item/miscellaneous/golden_aercloud_glider"
   }
 }
