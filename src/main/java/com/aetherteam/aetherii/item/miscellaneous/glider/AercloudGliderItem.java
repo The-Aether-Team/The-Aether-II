@@ -74,12 +74,6 @@ public class AercloudGliderItem extends Item {
 
             if (entity.onGround() || timer <= 0) {
                 entity.stopUsingItem();
-                if (timer <= 0) {
-                    this.setCooldowns(player, 100);
-                }
-                if (entity.onGround()) {
-                    player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
-                }
             } else {
                 player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(Math.max(timer - 1, 0));
             }
@@ -100,19 +94,23 @@ public class AercloudGliderItem extends Item {
             stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
         }
         if (entity instanceof Player player) {
-            this.setCooldowns(player, 2);
+            if (player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() <= 0) {
+                this.setCooldowns(player, 100);
+                player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
+            } else {
+                this.setCooldowns(player, 2);
+                if (player.onGround()) {
+                    player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
+                }
+            }
         }
         super.onStopUsing(stack, entity, count);
     }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        if (entity instanceof Player player) {
-            this.setCooldowns(player, 100);
-            player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
-            if (!entity.level().isClientSide()) {
-                stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
-            }
+        if (!entity.level().isClientSide()) {
+            stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
         }
         return super.finishUsingItem(stack, level, entity);
     }
