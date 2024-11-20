@@ -89,7 +89,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         this.mountedAerbunnyTag = mountedAerbunnyTag;
         this.canRefuelGlide = canRefuelGlide;
         this.glidingTimer = glidingTimer;
-        this.canRefuelAbilities = canRefuelAbilities;
+        this.canRefuelAbilities =  new HashMap<>(canRefuelAbilities);
         this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
         this.gravititeJumpUsed = gravititeJumpUsed;
     }

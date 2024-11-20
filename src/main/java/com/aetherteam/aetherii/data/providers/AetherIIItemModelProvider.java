@@ -109,7 +109,7 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                 .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), 0.5F).model(this.getExistingFile(this.modLoc("item/" + this.itemName(item) + "_5"))).end();
     }
 
-    public void gliderItem(Item item) {
+    public void gliderItem(Item item, boolean hasAbility) {
         ItemModelBuilder inventory = this.nested().parent(this.getExistingFile(this.mcLoc("item/generated")))
                 .texture("layer0", this.modLoc("item/miscellaneous/" + this.itemName(item)));
         ItemModelBuilder gliderClosed = this.nested().parent(this.getExistingFile(this.modLoc("item/aercloud_glider_closed")))
@@ -125,7 +125,7 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                 .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 9.0F, -6.0F).end()
                 .end();
 
-        ItemModelBuilder override = this.withExistingParent(this.itemName(item) + "_model", this.modLoc("item/aercloud_glider_open")).texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_model"))
+        ItemModelBuilder normalOverride = this.withExistingParent(this.itemName(item) + "_model", this.modLoc("item/aercloud_glider_open")).texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_model"))
                 .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
                 .customLoader((itemModelBuilder, existingFileHelper) ->
                         SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
@@ -134,16 +134,43 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
                                 .perspective(ItemDisplayContext.GROUND, inventory)
                                 .perspective(ItemDisplayContext.FIXED, inventory)
                 ).end();
-        this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
-                .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), 1.0F).model(override).end()
-                .customLoader((itemModelBuilder, existingFileHelper) ->
-                        SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
-                                .base(gliderClosed)
-                                .perspective(ItemDisplayContext.GUI, inventory)
-                                .perspective(ItemDisplayContext.GROUND, inventory)
-                                .perspective(ItemDisplayContext.FIXED, inventory)
-                ).end();
+        if (!hasAbility) {
+            this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
+                    .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
+                    .customLoader((itemModelBuilder, existingFileHelper) ->
+                            SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
+                                    .base(gliderClosed)
+                                    .perspective(ItemDisplayContext.GUI, inventory)
+                                    .perspective(ItemDisplayContext.GROUND, inventory)
+                                    .perspective(ItemDisplayContext.FIXED, inventory)
+                    ).end()
+                    .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), 1.0F).model(normalOverride).end();
+        } else {
+            ItemModelBuilder inventoryDull = this.nested().parent(this.getExistingFile(this.mcLoc("item/generated")))
+                    .texture("layer0", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_dull"));
+            ItemModelBuilder dullOverride = this.withExistingParent(this.itemName(item) + "_model", this.modLoc("item/aercloud_glider_open")).texture("glider", this.modLoc("item/miscellaneous/" + this.itemName(item) + "_model"))
+                    .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
+                    .customLoader((itemModelBuilder, existingFileHelper) ->
+                            SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
+                                    .base(gliderOpen)
+                                    .perspective(ItemDisplayContext.GUI, inventoryDull)
+                                    .perspective(ItemDisplayContext.GROUND, inventoryDull)
+                                    .perspective(ItemDisplayContext.FIXED, inventoryDull)
+                    ).end();
+
+            this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
+                    .texture("particle", this.modLoc("item/miscellaneous/" + this.itemName(item)))
+                    .customLoader((itemModelBuilder, existingFileHelper) ->
+                            SeparateTransformsModelBuilder.begin(itemModelBuilder, existingFileHelper)
+                                    .base(gliderClosed)
+                                    .perspective(ItemDisplayContext.GUI, inventory)
+                                    .perspective(ItemDisplayContext.GROUND, inventory)
+                                    .perspective(ItemDisplayContext.FIXED, inventory)
+                    ).end()
+                    .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), 1.0F).predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dull"), 0.0F).model(normalOverride).end()
+                    .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dull"), 1.0F).model(dullOverride).end();
+
+        }
     }
 
     public void itemBlockGrass(Block block, String location) {

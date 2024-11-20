@@ -32,19 +32,19 @@
     "fixed": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/purple_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/purple_aercloud_glider_dull"
       }
     },
     "ground": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/purple_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/purple_aercloud_glider_dull"
       }
     },
     "gui": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/purple_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/purple_aercloud_glider_dull"
       }
     }
   },
