@@ -31,9 +31,9 @@ public class AercloudGliderItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
         if (!player.onGround() && player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() > 0) {
             player.startUsingItem(hand);
+            this.onParachuteOpen(level, player, hand, stack);
             if (player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelGlide()) {
                 player.getData(AetherIIDataAttachments.PLAYER).setCanRefuelGlide(false);
-                this.onParachuteOpen(level, player, hand, stack);
             }
             return super.use(level, player, hand);
         } else {
@@ -94,25 +94,24 @@ public class AercloudGliderItem extends Item {
             stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
         }
         if (entity instanceof Player player) {
+            boolean reset = false;
             if (player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() <= 0) {
                 this.setCooldowns(player, 100);
-                player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
+                reset = true;
             } else {
                 this.setCooldowns(player, 2);
                 if (player.onGround()) {
-                    player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
+                    reset = true;
+                }
+            }
+            if (reset) {
+                player.getData(AetherIIDataAttachments.PLAYER).setGlidingTimer(GLIDING_MAX);
+                if (player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelAbilities().containsKey(stack.getItemHolder()) && !player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelAbilities().get(stack.getItemHolder())) {
+                    player.getData(AetherIIDataAttachments.PLAYER).getCanRefuelAbilities().put(stack.getItemHolder(), true);
                 }
             }
         }
         super.onStopUsing(stack, entity, count);
-    }
-
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        if (!entity.level().isClientSide()) {
-            stack.hurtAndBreak(1, entity, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
-        }
-        return super.finishUsingItem(stack, level, entity);
     }
 
     @Override
