@@ -1,25 +1,35 @@
 {
-  "parent": "aether_ii:item/aercloud_glider_open",
+  "parent": "aether_ii:item/aercloud_glider_closed",
   "base": {
-    "parent": "aether_ii:item/aercloud_glider_open",
+    "parent": "aether_ii:item/aercloud_glider_closed",
     "display": {
       "firstperson_righthand": {
-        "translation": [
+        "rotation": [
           0,
-          9,
-          -6
+          0,
+          -90
+        ],
+        "translation": [
+          7.5,
+          0,
+          4
         ]
       },
       "thirdperson_righthand": {
         "rotation": [
           -90,
           0,
-          -35
+          -80
+        ],
+        "scale": [
+          0.75,
+          0.75,
+          0.75
         ],
         "translation": [
-          11.55,
+          5.75,
           -2,
-          -0.1
+          4.15
         ]
       }
     },
@@ -49,7 +59,6 @@
     }
   },
   "textures": {
-    "glider": "aether_ii:item/miscellaneous/golden_aercloud_glider_model",
-    "particle": "aether_ii:item/miscellaneous/golden_aercloud_glider"
+    "glider": "aether_ii:item/miscellaneous/golden_aercloud_glider_model"
   }
 }

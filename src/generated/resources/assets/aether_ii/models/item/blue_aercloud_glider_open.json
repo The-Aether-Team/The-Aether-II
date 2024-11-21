@@ -24,7 +24,7 @@
       }
     },
     "textures": {
-      "glider": "aether_ii:item/miscellaneous/cold_aercloud_glider_model"
+      "glider": "aether_ii:item/miscellaneous/blue_aercloud_glider_model"
     }
   },
   "loader": "neoforge:separate_transforms",
@@ -32,24 +32,23 @@
     "fixed": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/blue_aercloud_glider"
       }
     },
     "ground": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/blue_aercloud_glider"
       }
     },
     "gui": {
       "parent": "minecraft:item/generated",
       "textures": {
-        "layer0": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+        "layer0": "aether_ii:item/miscellaneous/blue_aercloud_glider"
       }
     }
   },
   "textures": {
-    "glider": "aether_ii:item/miscellaneous/cold_aercloud_glider_model",
-    "particle": "aether_ii:item/miscellaneous/cold_aercloud_glider"
+    "glider": "aether_ii:item/miscellaneous/blue_aercloud_glider_model"
   }
 }

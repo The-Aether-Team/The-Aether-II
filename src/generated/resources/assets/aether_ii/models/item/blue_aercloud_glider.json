@@ -1,78 +1,35 @@
 {
   "parent": "minecraft:item/generated",
-  "base": {
-    "parent": "aether_ii:item/aercloud_glider_closed",
-    "display": {
-      "firstperson_righthand": {
-        "rotation": [
-          0,
-          0,
-          -90
-        ],
-        "translation": [
-          7.5,
-          0,
-          4
-        ]
-      },
-      "thirdperson_righthand": {
-        "rotation": [
-          -90,
-          0,
-          -80
-        ],
-        "scale": [
-          0.75,
-          0.75,
-          0.75
-        ],
-        "translation": [
-          5.75,
-          -2,
-          4.15
-        ]
-      }
-    },
-    "textures": {
-      "glider": "aether_ii:item/miscellaneous/blue_aercloud_glider_model"
-    }
-  },
-  "loader": "neoforge:separate_transforms",
   "overrides": [
     {
-      "model": "aether_ii:item/blue_aercloud_glider_model",
+      "model": "aether_ii:item/blue_aercloud_glider_closed",
+      "predicate": {
+        "aether_ii:dull": 0.0,
+        "aether_ii:parachuting": 0.0
+      }
+    },
+    {
+      "model": "aether_ii:item/blue_aercloud_glider_open",
       "predicate": {
         "aether_ii:dull": 0.0,
         "aether_ii:parachuting": 1.0
       }
     },
     {
-      "model": "aether_ii:item/blue_aercloud_glider_model",
+      "model": "aether_ii:item/blue_aercloud_glider_dull_closed",
       "predicate": {
-        "aether_ii:dull": 1.0
+        "aether_ii:dull": 1.0,
+        "aether_ii:parachuting": 0.0
+      }
+    },
+    {
+      "model": "aether_ii:item/blue_aercloud_glider_dull_open",
+      "predicate": {
+        "aether_ii:dull": 1.0,
+        "aether_ii:parachuting": 1.0
       }
     }
   ],
-  "perspectives": {
-    "fixed": {
-      "parent": "minecraft:item/generated",
-      "textures": {
-        "layer0": "aether_ii:item/miscellaneous/blue_aercloud_glider"
-      }
-    },
-    "ground": {
-      "parent": "minecraft:item/generated",
-      "textures": {
-        "layer0": "aether_ii:item/miscellaneous/blue_aercloud_glider"
-      }
-    },
-    "gui": {
-      "parent": "minecraft:item/generated",
-      "textures": {
-        "layer0": "aether_ii:item/miscellaneous/blue_aercloud_glider"
-      }
-    }
-  },
   "textures": {
     "particle": "aether_ii:item/miscellaneous/blue_aercloud_glider"
   }
