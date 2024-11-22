@@ -96,7 +96,7 @@ public class AercloudGliderItem extends Item {
         if (entity instanceof Player player) {
             boolean reset = false;
             if (player.getData(AetherIIDataAttachments.PLAYER).getGlidingTimer() <= 0) {
-                this.setCooldowns(player, 100);
+                this.setCooldowns(player, 80);
                 reset = true;
             } else {
                 this.setCooldowns(player, 2);
