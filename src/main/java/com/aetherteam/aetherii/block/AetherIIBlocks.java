@@ -556,12 +556,12 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ARKENIUM_BLOCK = register("arkenium_block", () -> new Block(Block.Properties.of().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.PLING).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)));
     public static final DeferredBlock<Block> GRAVITITE_BLOCK = register("gravitite_block", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_PINK).instrument(NoteBlockInstrument.PLING).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL)));
 
-    // Arilum Lantern
-    public static final DeferredBlock<Block> GREEN_ARILUM_LANTERN = register("green_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).friction(0.8F).sound(SoundType.SLIME_BLOCK).lightLevel((state) -> 15)));
-    public static final DeferredBlock<Block> BLUE_ARILUM_LANTERN = register("blue_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).friction(0.8F).sound(SoundType.SLIME_BLOCK).lightLevel((state) -> 15)));
-    public static final DeferredBlock<Block> PURPLE_ARILUM_LANTERN = register("purple_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_MAGENTA).friction(0.8F).sound(SoundType.SLIME_BLOCK).lightLevel((state) -> 15)));
-    public static final DeferredBlock<Block> GOLDEN_ARILUM_LANTERN = register("golden_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).friction(0.8F).sound(SoundType.SLIME_BLOCK).lightLevel((state) -> 15)));
-    public static final DeferredBlock<Block> WHITE_ARILUM_LANTERN = register("white_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).friction(0.8F).sound(SoundType.SLIME_BLOCK).lightLevel((state) -> 15)));
+    // Arilum Lantern //TODO make method
+    public static final DeferredBlock<Block> GREEN_ARILUM_LANTERN = register("green_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).friction(0.8F).sound(SoundType.FROGLIGHT).lightLevel((state) -> 15)));
+    public static final DeferredBlock<Block> BLUE_ARILUM_LANTERN = register("blue_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).friction(0.8F).sound(SoundType.FROGLIGHT).lightLevel((state) -> 15)));
+    public static final DeferredBlock<Block> PURPLE_ARILUM_LANTERN = register("purple_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_MAGENTA).friction(0.8F).sound(SoundType.FROGLIGHT).lightLevel((state) -> 15)));
+    public static final DeferredBlock<Block> GOLDEN_ARILUM_LANTERN = register("golden_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).friction(0.8F).sound(SoundType.FROGLIGHT).lightLevel((state) -> 15)));
+    public static final DeferredBlock<Block> WHITE_ARILUM_LANTERN = register("white_arilum_lantern", () -> new Block(Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).friction(0.8F).sound(SoundType.FROGLIGHT).lightLevel((state) -> 15)));
 
 
     // Utility
