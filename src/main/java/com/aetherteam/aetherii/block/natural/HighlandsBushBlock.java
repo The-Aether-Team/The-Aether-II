@@ -10,7 +10,7 @@ public class HighlandsBushBlock extends FullAetherBushBlock {
     }
 
     @Override
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return true;
     }
 }
