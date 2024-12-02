@@ -259,6 +259,7 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction density = getFunction(function, TEMPERATURE);
         density = DensityFunctions.rangeChoice(density, -0.4, 1.5, getFunction(function, TOP_SLIDE), getFunction(function, TOP_SLIDE_ARCTIC));
         density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, getFunction(function, TOP_SLIDE));
+        density = DensityFunctions.cacheOnce(density);
         return density;
     }
 
@@ -274,6 +275,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.rangeChoice(density, -0.4, 1.5, getFunction(function, SLOPER), getFunction(function, SLOPER_ARCTIC));
         density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, getFunction(function, SLOPER));
         density = DensityFunctions.mul(density, getFunction(function, UNDERGROUND_SHAPER));
+        density = DensityFunctions.cacheOnce(density);
         return density;
     }
 
@@ -418,6 +420,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.add(density, DensityFunctions.weirdScaledSampler(getFunction(function, BASE_3D_NOISE), noise.getOrThrow(AetherIINoises.CAVES), DensityFunctions.WeirdScaledSampler.RarityValueMapper.TYPE2));
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
         density = DensityFunctions.add(density, DensityFunctions.spline(caveGradient(y)));
+        density = DensityFunctions.cacheOnce(density);
         return density;
     }
 
