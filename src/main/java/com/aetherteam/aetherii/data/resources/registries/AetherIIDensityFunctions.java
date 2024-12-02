@@ -36,7 +36,6 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
                 1.0D // smear scale multiplier, capped at 8
         ));
 
-        context.register(CONTINENTAL_ISLANDS, buildContinentalIslands(function));
         context.register(SHATTERED_ISLANDS, buildShatteredIslands(function));
         context.register(FINAL_ISLANDS, buildFinalIslands(function));
 
