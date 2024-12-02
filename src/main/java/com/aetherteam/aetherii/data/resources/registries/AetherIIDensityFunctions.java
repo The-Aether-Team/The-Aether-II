@@ -37,7 +37,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         ));
 
         context.register(SHATTERED_ISLANDS, buildShatteredIslands(function));
-        context.register(FINAL_ISLANDS, buildFinalIslands(function));
+        context.register(FINAL_ISLANDS, finalizeIslands(function));
 
         context.register(FACTOR, buildFactor(function));
         context.register(ELEVATION, DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5, noise.getOrThrow(AetherIINoises.ELEVATION)).abs());
