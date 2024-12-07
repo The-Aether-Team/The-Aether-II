@@ -141,29 +141,21 @@ public class AetherIIDensityFunctionBuilders {
         return density;
     }
 
-    public static DensityFunction buildIslands(HolderGetter<DensityFunction> function, DensityFunction factorizer) {
+    public static DensityFunction buildFinalIslands(HolderGetter<DensityFunction> function) {
         DensityFunction density = getFunction(function, BASE_3D_NOISE);
         density = DensityFunctions.add(density, DensityFunctions.constant(-0.03));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.2));
         density = DensityFunctions.mul(density, selectSlide(function));
-        density = DensityFunctions.add(density, factorizer);
+        density = DensityFunctions.add(density, factorize(function, -0.19));
         density = DensityFunctions.add(density, DensityFunctions.constant(0.1));
         density = DensityFunctions.mul(density, getFunction(function, BOTTOM_SLIDE));
-        density = DensityFunctions.add(density, factorizer);
+        density = DensityFunctions.add(density, factorize(function, -0.19));
         density = DensityFunctions.min(density, getFunction(function, NOISE_CAVES));
         density = DensityFunctions.max(density, DensityFunctions.rangeChoice(getFunction(function, Y), DimensionType.MIN_Y * 2, 130, DensityFunctions.constant(-1), getFunction(function, AetherIIDensityFunctions.SHATTERED_ISLANDS)));
         density = DensityFunctions.blendDensity(density);
         density = DensityFunctions.interpolated(density);
         density = density.squeeze();
         return density;
-    }
-
-    public static DensityFunction checkForIslandsIslands(HolderGetter<DensityFunction> function) {
-        return buildIslands(function, factorizeBaseShaper(function, -0.19));
-    }
-
-    public static DensityFunction finalizeIslands(HolderGetter<DensityFunction> function) {
-        return buildIslands(function, factorize(function, -0.19));
     }
 
     // Base Islands
@@ -197,14 +189,6 @@ public class AetherIIDensityFunctionBuilders {
                 .build();
     }
 
-    public static DensityFunction factorizeBaseShaper(HolderGetter<DensityFunction> function, double value) {
-        DensityFunction density = getFunction(function, FACTOR);
-        density = DensityFunctions.mul(density, DensityFunctions.constant(value));
-        density = DensityFunctions.mul(density, getFunction(function, BASE_TERRAIN_SHAPER));
-        density = DensityFunctions.mul(density, getFunction(function, CONTINENTS_FACTOR));
-        return density;
-    }
-
     public static DensityFunction factorize(HolderGetter<DensityFunction> function, double value) {
         DensityFunction density = getFunction(function, FACTOR);
         density = DensityFunctions.mul(density, DensityFunctions.constant(value));
@@ -212,6 +196,7 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.mul(density, getFunction(function, CONTINENTS_FACTOR));
         return density;
     }
+
 
     public static DensityFunction buildTopSlide(HolderGetter<DensityFunction> function) {
         DensityFunctions.Spline.Coordinate y = new DensityFunctions.Spline.Coordinate(function.getOrThrow(Y));
