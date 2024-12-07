@@ -2,6 +2,7 @@
   "values": [
     "minecraft:water",
     "#aether_ii:aether_dirt",
-    "#aether_ii:aether_underground_blocks"
+    "#aether_ii:aether_underground_blocks",
+    "#aether_ii:ferrosite"
   ]
 }

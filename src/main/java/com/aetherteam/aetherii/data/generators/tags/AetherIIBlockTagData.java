@@ -59,15 +59,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 .add(AetherIIBlocks.FERROSITE.get())
                 .add(AetherIIBlocks.ARCTIC_PACKED_ICE.get())
                 .addTags(
-                AetherIITags.Blocks.AETHER_DIRT,
-                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
+                        AetherIITags.Blocks.AETHER_DIRT,
+                        AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
         );
         this.tag(AetherIITags.Blocks.SHAPES_COASTS)
                 .add(Blocks.WATER)
                 .addTags(
-                AetherIITags.Blocks.AETHER_DIRT,
-                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS
-        );
+                        AetherIITags.Blocks.AETHER_DIRT,
+                        AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
+                        AetherIITags.Blocks.FERROSITE
+                );
         this.tag(AetherIITags.Blocks.FERROSITE).add(
                 AetherIIBlocks.FERROSITE.get(),
                 AetherIIBlocks.RUSTED_FERROSITE.get()
