@@ -617,9 +617,9 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, COAST_FERROSITE_PILLAR, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_FERROSITE_PILLAR),
-                CountPlacement.of(6),
-                HeightRangePlacement.triangle(VerticalAnchor.absolute(136), VerticalAnchor.absolute(200)),
-                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 3),
+                CountPlacement.of(18),
+                HeightRangePlacement.triangle(VerticalAnchor.absolute(144), VerticalAnchor.absolute(256)),
+                EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16), //TODO find out why it isn't working
                 BiomeFilter.biome()
         );
         register(context, COAST_ARCTIC_PACKED_ICE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_ARCTIC_PACKED_ICE),

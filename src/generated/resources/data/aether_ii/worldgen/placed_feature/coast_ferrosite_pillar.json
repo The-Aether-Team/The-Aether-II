@@ -3,17 +3,17 @@
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 6
+      "count": 18
     },
     {
       "type": "minecraft:height_range",
       "height": {
         "type": "minecraft:trapezoid",
         "max_inclusive": {
-          "absolute": 200
+          "absolute": 256
         },
         "min_inclusive": {
-          "absolute": 136
+          "absolute": 144
         }
       }
     },
@@ -24,7 +24,7 @@
         "blocks": "minecraft:air"
       },
       "direction_of_search": "up",
-      "max_steps": 3,
+      "max_steps": 16,
       "target_condition": {
         "type": "minecraft:has_sturdy_face",
         "direction": "down"
