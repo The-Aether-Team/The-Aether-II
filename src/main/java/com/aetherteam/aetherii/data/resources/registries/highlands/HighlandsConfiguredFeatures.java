@@ -214,6 +214,7 @@ public class HighlandsConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = createKey("coast_quicksoil");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_SAND = createKey("coast_ferrosite_sand");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_FERROSITE_PILLAR = createKey("coast_ferrosite_pillar");
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_ARCTIC_PACKED_ICE = createKey("coast_arctic_packed_ice");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> WATER_POND = createKey("water_pond");
@@ -1448,6 +1449,28 @@ public class HighlandsConfiguredFeatures {
                 Optional.empty(),
                 0.0F,
                 AetherIITags.Blocks.FERROSITE_COAST_GENERATES_ON
+        ));
+        register(context, COAST_FERROSITE_PILLAR, AetherIIFeatures.COAST.get(), new CoastConfiguration(
+                new NoiseProvider(
+                        99L,
+                        new NormalNoise.NoiseParameters(-3, 1.0, 0.25, 0.0, 0.0),
+                        1.0F,
+                        List.of(
+                                Blocks.AIR.defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                Blocks.AIR.defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState(),
+                                Blocks.AIR.defaultBlockState()
+                        )
+                ),
+                16.35F,
+                AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.COASTS_FERROSITE_PILLAR),
+                UniformInt.of(112, 156),
+                Optional.empty(),
+                0.0F,
+                AetherIITags.Blocks.FERROSITE_PILLAR_COAST_GENERATES_ON
         ));
         register(context, COAST_ARCTIC_PACKED_ICE, AetherIIFeatures.COAST.get(), new CoastConfiguration(
                 BlockStateProvider.simple(AetherIIBlocks.ARCTIC_PACKED_ICE.get()),

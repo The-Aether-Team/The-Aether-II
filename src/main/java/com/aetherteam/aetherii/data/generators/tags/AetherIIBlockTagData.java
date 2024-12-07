@@ -249,6 +249,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.FERROSITE_COAST_GENERATES_ON)
                 .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.FERROSITE_PILLAR_COAST_GENERATES_ON)
+                .addTags(AetherIITags.Blocks.FERROSITE);
         this.tag(AetherIITags.Blocks.ARCTIC_COAST_GENERATES_ON)
                 .add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.FERROSITE_PILLAR_GENERATES_ON)
