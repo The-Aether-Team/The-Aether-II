@@ -60,7 +60,7 @@
         }
       },
       {
-        "chance": 0.025,
+        "chance": 0.01,
         "feature": {
           "feature": "aether_ii:short_skyplane",
           "placement": [
@@ -100,7 +100,7 @@
         }
       },
       {
-        "chance": 0.0075,
+        "chance": 0.005,
         "feature": {
           "feature": "aether_ii:short_greatoak",
           "placement": [
