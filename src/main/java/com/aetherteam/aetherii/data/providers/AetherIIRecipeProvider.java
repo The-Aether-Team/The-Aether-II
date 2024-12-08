@@ -36,7 +36,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected static void leafPile(RecipeOutput recipeOutput, ItemLike carpet, ItemLike material) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 32)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 8)
                 .define('#', material)
                 .pattern("##")
                 .group("leaf_pile")
