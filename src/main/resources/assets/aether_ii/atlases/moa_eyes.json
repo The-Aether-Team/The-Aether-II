@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:entity/mobs/moa/moa_eyes",
+        "aether_ii:entity/mobs/moa/moa_baby_eyes",
+        "aether_ii:entity/tiles/moa_egg/moa_egg_eyes"
+      ],
+      "palette_key": "aether_ii:entity/mobs/moa/color_palettes/eyes/base_moa_eyes",
+      "permutations": {
+        "blue": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_blue",
+        "green": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_green",
+        "yellow": "aether_ii:entity/mobs/moa/color_palettes/eyes/moa_eyes_yellow"
+      }
+    }
+  ]
+}

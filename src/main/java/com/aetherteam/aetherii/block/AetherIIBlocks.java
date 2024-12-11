@@ -592,7 +592,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = BLOCKS.register("wisproot_wall_hanging_sign", () -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, BlockBehaviour.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava()));
 
     // Moa Egg
-    public static final DeferredBlock<Block> MOA_EGG = register("moa_egg", () -> new MoaEggBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion()));
+    public static final DeferredBlock<Block> MOA_EGG = BLOCKS.register("moa_egg", () -> new MoaEggBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion()));
 
     // Bookshelves
     public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", () -> new BookshelfBlock(Block.Properties.ofFullCopy(Blocks.BOOKSHELF)));

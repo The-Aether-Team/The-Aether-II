@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_swet_gel": {
+    "has_bulbs": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:purple_swet_gel"
+            "items": "aether_ii:arilum_bulbs"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_swet_gel"
+      "has_bulbs"
     ]
   ],
   "rewards": {

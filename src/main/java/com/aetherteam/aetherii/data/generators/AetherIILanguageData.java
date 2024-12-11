@@ -517,9 +517,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Furniture
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
 
-        //Egg
-        this.addBlock(AetherIIBlocks.MOA_EGG, "Moa Egg");
-
 
         // Items
         // Tools
@@ -727,6 +724,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKEPHID_SPAWN_EGG, "Skephid Spawn Egg");
 
         // Misc
+        this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
         this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");

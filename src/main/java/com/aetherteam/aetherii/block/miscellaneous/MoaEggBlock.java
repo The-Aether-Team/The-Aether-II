@@ -5,6 +5,9 @@ import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.blockentity.MoaEggBlockEntity;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -12,8 +15,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,6 +34,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -39,6 +46,7 @@ public class MoaEggBlock extends BaseEntityBlock {
     public static final EnumProperty<Moa.KeratinColor> KERATIN = EnumProperty.create("keratin", Moa.KeratinColor.class);
     public static final EnumProperty<Moa.EyeColor> EYES = EnumProperty.create("eyes", Moa.EyeColor.class);
     public static final EnumProperty<Moa.FeatherColor> FEATHERS = EnumProperty.create("feathers", Moa.FeatherColor.class);
+    public static final EnumProperty<Moa.FeatherShape> FEATHER_SHAPE = EnumProperty.create("feather_shape", Moa.FeatherShape.class);
     public static final IntegerProperty HATCH = BlockStateProperties.HATCH;
     public static final BooleanProperty WILD = BooleanProperty.create("wild");
     public static final int MAX_HATCH_LEVEL = 2;
@@ -49,7 +57,7 @@ public class MoaEggBlock extends BaseEntityBlock {
 
     public MoaEggBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(HATCH, 0).setValue(KERATIN, Moa.KeratinColor.TEMPEST).setValue(EYES, Moa.EyeColor.PORTAGE).setValue(FEATHERS, Moa.FeatherColor.BLUE).setValue(WILD, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HATCH, 0).setValue(KERATIN, Moa.KeratinColor.BLUE).setValue(EYES, Moa.EyeColor.BLUE).setValue(FEATHERS, Moa.FeatherColor.BLUE).setValue(FEATHER_SHAPE, Moa.FeatherShape.CURVED).setValue(WILD, false));
     }
 
     @Override
@@ -57,13 +65,9 @@ public class MoaEggBlock extends BaseEntityBlock {
         return CODEC;
     }
 
-    //public ResourceKey<MoaFeatherShape> getMoaType() {
-    //    return moaType;
-    //}
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(HATCH).add(KERATIN).add(EYES).add(FEATHERS).add(WILD);
+        builder.add(HATCH, KERATIN, EYES, FEATHERS, FEATHER_SHAPE, WILD);
     }
 
     @Override
@@ -94,6 +98,11 @@ public class MoaEggBlock extends BaseEntityBlock {
                 if (!state.getValue(WILD)) {
                     moa.setPlayerGrown(true);
                 }
+                moa.setKeratinColor(state.getValue(KERATIN).getSerializedName());
+                moa.setEyeColor(state.getValue(EYES).getSerializedName());
+                moa.setFeatherColor(state.getValue(FEATHERS).getSerializedName());
+                moa.setFeatherShape(state.getValue(FEATHER_SHAPE).getSerializedName());
+
                 //moa.setMoaTypeByKey(this.moaType);
                 moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);
                 level.addFreshEntity(moa);
@@ -121,6 +130,17 @@ public class MoaEggBlock extends BaseEntityBlock {
 
     public static boolean hatchBoost(BlockGetter level, BlockPos pos) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.MOA_HATCH_BLOCK);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        ItemStack moaEggItem = super.getCloneItemStack(state, target, level, pos, player);
+        Moa.KeratinColor keratinColor = state.getValue(KERATIN);
+        Moa.EyeColor eyeColor = state.getValue(EYES);
+        Moa.FeatherColor featherColor = state.getValue(FEATHERS);
+        Moa.FeatherShape featherShape = state.getValue(FEATHER_SHAPE);
+        moaEggItem.set(AetherIIDataComponents.MOA_EGG_TYPE, new MoaEggType(keratinColor, eyeColor, featherColor, featherShape));
+        return moaEggItem;
     }
 
     @Nullable

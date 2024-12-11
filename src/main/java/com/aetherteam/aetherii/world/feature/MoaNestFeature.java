@@ -48,9 +48,9 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
                 moa.setPos(pos.getCenter().add(i, 0, i));
                 MoaAi.initMoaHomeMemories(moa, level.getRandom());
                 moa.setBaby(false);
-                moa.setKeratinColor(keratinColor.getColor());
-                moa.setEyeColor(eyeColor.getColor());
-                moa.setFeatherColor(featherColor.getColor());
+                moa.setKeratinColor(keratinColor.getSerializedName());
+                moa.setEyeColor(eyeColor.getSerializedName());
+                moa.setFeatherColor(featherColor.getSerializedName());
                 level.getLevel().addFreshEntity(moa);
             }
         }

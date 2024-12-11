@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "aether_ii.refmap.json",
   "mixins": [
+    "client.accessor.ModelManagerAccessor",
     "common.BlockBehaviourMixin",
     "common.EntityMixin",
     "common.ItemCooldownsMixin",
     "common.ItemStackMixin",
+    "common.ModelBuilderMixin",
     "common.PlayerMixin",
     "common.RandomStateMixin",
     "common.ServerLevelMixin",

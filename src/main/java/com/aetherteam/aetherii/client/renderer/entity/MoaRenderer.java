@@ -15,6 +15,9 @@ import net.minecraft.resources.ResourceLocation;
 public class MoaRenderer extends MultiBabyModelRenderer<Moa, EntityModel<Moa>, MoaModel<Moa>, MoaBabyModel<Moa>> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_base.png");
     private static final ResourceLocation BABY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_baby.png");
+    public static final ResourceLocation MOA_FEATHER_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_feather.png");
+    public static final ResourceLocation MOA_EYES_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_eyes.png");
+    public static final ResourceLocation MOA_KERATIN_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_keratin.png");
     private final MoaModel<Moa> defaultModel;
     private final MoaBabyModel<Moa> babyModel;
 
@@ -22,9 +25,9 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, EntityModel<Moa>, M
         super(context, new MoaModel<>(context.bakeLayer(AetherIIModelLayers.MOA)), 0.5F);
         this.defaultModel = new MoaModel<>(context.bakeLayer(AetherIIModelLayers.MOA));
         this.babyModel = new MoaBabyModel<>(context.bakeLayer(AetherIIModelLayers.MOA_BABY));
-        this.addLayer(new MoaKeratinLayer(this));
-        this.addLayer(new MoaFeathersLayer(this));
-        this.addLayer(new MoaEyesLayer(this));
+        this.addLayer(new MoaKeratinLayer(this, context.getModelManager()));
+        this.addLayer(new MoaFeathersLayer(this, context.getModelManager()));
+        this.addLayer(new MoaEyesLayer(this, context.getModelManager()));
     }
 
     @Override

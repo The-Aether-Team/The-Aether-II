@@ -6,15 +6,21 @@ import com.aetherteam.aetherii.client.event.listeners.*;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
+import com.aetherteam.aetherii.client.renderer.entity.MoaRenderer;
+import com.aetherteam.aetherii.client.renderer.entity.layers.MoaFeathersLayer;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.components.ReinforcementTier;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.ModelManagerAccessor;
 import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
+import com.google.common.collect.ImmutableMap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -27,11 +33,21 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 public class AetherIIClient {
     public static void clientInit(IEventBus bus) {
         bus.addListener(AetherIIClient::clientSetup);
 
         AetherIIClient.eventSetup(bus);
+
+        ModelManagerAccessor.setAtlases(ImmutableMap.<ResourceLocation, ResourceLocation>builder()
+                .putAll(ModelManagerAccessor.getAtlases())
+                .put(MoaRenderer.MOA_FEATHER_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_feather"))
+                .put(MoaRenderer.MOA_EYES_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_eyes"))
+                .put(MoaRenderer.MOA_KERATIN_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_keratin"))
+                .build()); //todo 1.21.3 replaces this with an event
     }
 
     public static void clientSetup(FMLClientSetupEvent event) {
@@ -69,6 +85,8 @@ public class AetherIIClient {
     }
 
     public static void registerItemModelProperties() {
+        registerMoaEggProperties(AetherIIItems.MOA_EGG.get());
+
         registerGliderProperties(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), false);
         registerGliderProperties(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), false);
         registerGliderProperties(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), true);
@@ -89,6 +107,37 @@ public class AetherIIClient {
         registerHealingStoneProperties(AetherIIItems.HEALING_STONE.get());
 
         registerGenericProperties();
+    }
+
+    private static void registerMoaEggProperties(Item item) {
+        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "keratin_color"), (stack, level, livingEntity, value) -> {
+            MoaEggType moaEggType = stack.get(AetherIIDataComponents.MOA_EGG_TYPE);
+            if (moaEggType != null) {
+                return new BigDecimal((double) moaEggType.keratinColor().ordinal() / Moa.KeratinColor.values().length, new MathContext(3)).floatValue();
+            }
+            return 0.0F;
+        });
+        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "eye_color"), (stack, level, livingEntity, value) -> {
+            MoaEggType moaEggType = stack.get(AetherIIDataComponents.MOA_EGG_TYPE);
+            if (moaEggType != null) {
+                return new BigDecimal((double) moaEggType.eyeColor().ordinal() / Moa.EyeColor.values().length, new MathContext(3)).floatValue();
+            }
+            return 0.0F;
+        });
+        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), (stack, level, livingEntity, value) -> {
+            MoaEggType moaEggType = stack.get(AetherIIDataComponents.MOA_EGG_TYPE);
+            if (moaEggType != null) {
+                return new BigDecimal((double) moaEggType.featherColor().ordinal() / Moa.FeatherColor.values().length, new MathContext(3)).floatValue();
+            }
+            return 0.0F;
+        });
+        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_shape"), (stack, level, livingEntity, value) -> {
+            MoaEggType moaEggType = stack.get(AetherIIDataComponents.MOA_EGG_TYPE);
+            if (moaEggType != null) {
+                return new BigDecimal((double) moaEggType.featherShape().ordinal() / Moa.FeatherShape.values().length, new MathContext(3)).floatValue();
+            }
+            return 0.0F;
+        });
     }
 
     private static void registerGliderProperties(Item item, boolean hasAbility) {

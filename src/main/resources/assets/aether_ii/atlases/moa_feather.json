@@ -1,0 +1,39 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:entity/mobs/moa/moa_feather_curved",
+        "aether_ii:entity/mobs/moa/moa_feather_flat",
+        "aether_ii:entity/mobs/moa/moa_feather_pointed",
+        "aether_ii:entity/mobs/moa/moa_baby_feather_curved",
+        "aether_ii:entity/mobs/moa/moa_baby_feather_flat",
+        "aether_ii:entity/mobs/moa/moa_baby_feather_pointed",
+        "aether_ii:entity/tiles/moa_egg/moa_egg_feather_curved",
+        "aether_ii:entity/tiles/moa_egg/moa_egg_feather_flat",
+        "aether_ii:entity/tiles/moa_egg/moa_egg_feather_pointed"
+      ],
+      "palette_key": "aether_ii:entity/mobs/moa/color_palettes/feather/base_moa_feather",
+      "permutations": {
+        "black": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_black",
+        "blooming_red": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_blooming_red",
+        "blue": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_blue",
+        "brown": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_brown",
+        "classic_black": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_classic_black",
+        "cyan": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_cyan",
+        "gray": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_gray",
+        "green": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_green",
+        "light_blue": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_light_blue",
+        "light_gray": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_light_gray",
+        "lime": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_lime",
+        "magenta": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_magenta",
+        "orange": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_orange",
+        "pink": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_pink",
+        "purple": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_purple",
+        "red": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_red",
+        "white": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_white",
+        "yellow": "aether_ii:entity/mobs/moa/color_palettes/feather/moa_feather_yellow"
+      }
+    }
+  ]
+}

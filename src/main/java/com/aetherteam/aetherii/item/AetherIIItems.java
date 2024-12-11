@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIJukeboxSongs;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.consumables.CurativeItem;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.consumables.PreventativeItem;
@@ -309,6 +310,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SKEPHID_SPAWN_EGG = ITEMS.register("skephid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.SKEPHID, 0x7D96AB, 0xF7CC94, new Item.Properties()));
 
     // Misc
+    public static final DeferredItem<Item> MOA_EGG = ITEMS.register("moa_egg", () -> new MoaEggItem(new Item.Properties().stacksTo(1).component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType())));
     public static final DeferredItem<Item> MOA_FEED = ITEMS.register("moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = ITEMS.register("blueberry_moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ENCHANTED_MOA_FEED = ITEMS.register("enchanted_moa_feed", () -> new Item(new Item.Properties()));

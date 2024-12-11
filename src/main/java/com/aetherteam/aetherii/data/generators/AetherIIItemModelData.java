@@ -132,7 +132,6 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.SWET_SUGAR.get(), "materials/");
         this.item(AetherIIItems.SCATTERGLASS_VIAL.get(), "materials/");
-        this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "materials/");
         this.item(AetherIIItems.CHARGE_CORE.get(), "materials/");
 
         // Food
@@ -215,6 +214,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.SKEPHID_SPAWN_EGG.get());
 
         // Misc
+        this.moaEgg(AetherIIItems.MOA_EGG.get());
         this.item(AetherIIItems.MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.BLUEBERRY_MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.ENCHANTED_MOA_FEED.get(), "miscellaneous/");

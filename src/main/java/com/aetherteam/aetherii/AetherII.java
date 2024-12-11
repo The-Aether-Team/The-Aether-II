@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii;
 
-import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
@@ -79,7 +78,6 @@ public class AetherII {
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, BestiaryEntry.DIRECT_CODEC, BestiaryEntry.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, EffectsEntry.DIRECT_CODEC, EffectsEntry.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIMoaFeatherShapes.MOA_FEATHER_SHAPE_REGISTRY_KEY, MoaFeatherShape.DIRECT_CODEC, MoaFeatherShape.DIRECT_CODEC));
 
         DeferredRegister<?>[] registers = {
                 AetherIIBlocks.BLOCKS,
