@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
+import com.aetherteam.aetherii.entity.passive.MountableAnimal;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
 import com.aetherteam.aetherii.world.LevelUtil;
@@ -193,5 +194,12 @@ public class PlayerHooks {
                 serverLevel.getServer().overworld().setDayTime(newTime);
             }
         }
+    }
+
+    public static boolean dismountPrevention(Entity rider, Entity mount, boolean dismounting) {
+        if (dismounting && rider.isShiftKeyDown()) {
+            return (mount instanceof MountableAnimal && !mount.onGround() && !mount.isInFluidType() && !mount.isPassenger());
+        }
+        return false;
     }
 }

@@ -28,6 +28,7 @@ import net.minecraft.world.level.portal.DimensionTransition;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
@@ -55,6 +56,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerCriticalHitAttack);
         bus.addListener(AetherIIEventListeners::onPlayerAdvancementProgression);
         bus.addListener(AetherIIEventListeners::onPlayersFinishSleeping);
+        bus.addListener(AetherIIEventListeners::onPlayerMount);
 
         // Entity
         bus.addListener(AetherIIEventListeners::onEntityPostTick);
@@ -178,6 +180,13 @@ public class AetherIIEventListeners {
         long newTime = event.getNewTime();
 
         PlayerHooks.resetAetherDayAndWeather(level, newTime);
+    }
+
+    public static void onPlayerMount(EntityMountEvent event) {
+        Entity riderEntity = event.getEntityMounting();
+        Entity mountEntity = event.getEntityBeingMounted();
+        boolean isDismounting = event.isDismounting();
+        event.setCanceled(PlayerHooks.dismountPrevention(riderEntity, mountEntity, isDismounting));
     }
 
     public static void onEntityPostTick(EntityTickEvent.Post event) {

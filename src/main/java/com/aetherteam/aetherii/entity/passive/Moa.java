@@ -211,38 +211,9 @@ public class Moa extends MountableAnimal {
             this.setFeatherColor(featherColor.getSerializedName());
             this.setFeatherShape(featherShape.getSerializedName());
         }
-
-
-//        if (tag != null) { // Applies NBT when spawned from incubation.
-//            if (tag.contains("IsBaby")) {
-//                this.setBaby(tag.getBoolean("IsBaby"));
-//            }
-//            if (tag.contains("MoaType")) {
-//                ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), tag.getString("MoaType"));
-//                if (moaTypeKey != null) {
-//                    this.setMoaTypeByKey(moaTypeKey);
-//                }
-//            }
-//            if (tag.contains("Hungry")) {
-//                this.setHungry(tag.getBoolean("Hungry"));
-//            }
-//            if (tag.contains("PlayerGrown")) {
-//                this.setPlayerGrown(tag.getBoolean("PlayerGrown"));
-//            }
-//        }
         if (spawnData == null) { // Disallow baby Moas from spawning in spawn groups.
             spawnData = new AgeableMob.AgeableMobGroupData(false);
         }
-//        if (this.getMoaType() == null) { // A random Moa Type to set during natural spawning.
-//            MoaType moaType = AetherIIMoaTypes.getWeightedChance(level.registryAccess(), this.getRandom());
-//            ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType);
-//            if (moaTypeKey != null) {
-//                this.setMoaTypeByKey(moaTypeKey);
-//            }
-//        }
-//        if (this.getMoaType() == null) {
-//            this.setMoaTypeByKey(AetherIIMoaTypes.BLUE);
-//        }
         if (reason == MobSpawnType.STRUCTURE) {
             //set moa home when spawn in nest
             MoaAi.initMoaHomeMemories(this, this.random);
@@ -279,8 +250,8 @@ public class Moa extends MountableAnimal {
     public void tick() {
         super.tick();
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
-        if (gravity != null) {
-            double max = this.isVehicle() ? -0.5 : -0.1;
+        if (gravity != null && !this.isFallFlying()) {
+            double max = -0.1;
             double fallSpeed = Math.max(gravity.getValue() * -1.25, max); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
                 this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
@@ -351,9 +322,21 @@ public class Moa extends MountableAnimal {
             if (this.getRider() == null) {
                 this.setRider(player.getUUID());
             }
+            if (!this.isEntityOnGround()) {
+                if (!this.isFallFlying()) {
+                    this.setSharedFlag(7, true);
+                }
+            } else {
+                if (this.isFallFlying()) {
+                    this.setSharedFlag(7, false);
+                }
+            }
         } else {
             if (this.getRider() != null) {
                 this.setRider(null);
+            }
+            if (this.isFallFlying()) {
+                this.setSharedFlag(7, false);
             }
         }
 
@@ -394,13 +377,6 @@ public class Moa extends MountableAnimal {
             if (this.getLastRider() == null || this.getLastRider() != player.getUUID()) {
                 this.setLastRider(player.getUUID());
             }
-            /*if (!player.level().isClientSide()) {
-                player.getData(AetherDataAttachments.AETHER_PLAYER).setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setLastRiddenMoa", this.getMoaUUID()); // Tracks the player as having last ridden this Moa.
-                Map<UUID, MoaData> userSkinsData = ServerPerkData.MOA_SKIN_INSTANCE.getServerPerkData(player.getServer());
-                if (userSkinsData.containsKey(this.getLastRider())) { // Tracks a Moa Skin as being tied to this Moa and this passenger.
-                    ServerPerkData.MOA_SKIN_INSTANCE.applyPerkWithVerification(player.getServer(), this.getLastRider(), new MoaData(this.getMoaUUID(), userSkinsData.get(this.getLastRider()).moaSkin()));
-                }
-            }*/
         }
         super.addPassenger(passenger);
     }
@@ -445,8 +421,78 @@ public class Moa extends MountableAnimal {
         if (!this.onGround()) {
             this.setRemainingJumps(this.getRemainingJumps() - 1);
             this.spawnExplosionParticle();
+
+            if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
+                Vec3 vec31 = this.getLookAngle();
+                Vec3 vec32 = this.getDeltaMovement();
+                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(1.5));
+            }
+
         }
         this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
+    }
+
+    @Override
+    public Vec3 getLookAngle() {
+        if (this.getControllingPassenger() instanceof Player player) {
+            return player.getLookAngle();
+        }
+        return super.getLookAngle();
+    }
+
+    @Override
+    public int getMaxHeadXRot() {
+        return 180;
+    }
+
+    @Override
+    public int getMaxHeadYRot() {
+        return 180;
+    }
+
+    @Override
+    protected void clampHeadRotationToBody() {
+
+    }
+
+    @Override
+    public float getYHeadRot() {
+        if (this.getControllingPassenger() instanceof Player player) {
+            return player.getYHeadRot();
+        }
+        return super.getYHeadRot();
+    }
+
+    @Override
+    public float getViewYRot(float partialTicks) {
+        if (this.getControllingPassenger() instanceof Player player) {
+            return player.getViewYRot(partialTicks);
+        }
+        return super.getViewYRot(partialTicks);
+    }
+
+    @Override
+    public float getViewXRot(float partialTicks) {
+        if (this.getControllingPassenger() instanceof Player player) {
+            return player.getViewXRot(partialTicks);
+        }
+        return super.getViewXRot(partialTicks);
+    }
+
+    @Override
+    public float getYRot() {
+        if (this.getControllingPassenger() instanceof Player player) {
+            return player.getYRot();
+        }
+        return super.getYRot();
+    }
+
+    @Override
+    public float getXRot() {
+        if (this.getControllingPassenger() instanceof Player player) {
+            return player.getXRot();
+        }
+        return super.getXRot();
     }
 
     /**
