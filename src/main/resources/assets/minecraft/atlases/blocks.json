@@ -30,6 +30,7 @@
     {
       "type": "paletted_permutations",
       "textures": [
+        "aether_ii:item/materials/moa_feather",
         "aether_ii:item/miscellaneous/moa_egg_curved",
         "aether_ii:item/miscellaneous/moa_egg_flat",
         "aether_ii:item/miscellaneous/moa_egg_pointed"

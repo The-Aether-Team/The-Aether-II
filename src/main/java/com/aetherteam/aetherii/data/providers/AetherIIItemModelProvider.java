@@ -198,6 +198,21 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_item", "natural/"));
     }
 
+    public void moaFeather(Item item) {
+        String itemName = this.itemName(item);
+        ItemModelBuilder builder = this.withExistingParent(itemName, this.mcLoc("item/generated"));
+        double featherColorIndex = 0.0;
+        for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
+            String name = itemName + "_" + featherColor.getSerializedName();
+            this.withExistingParent(name, this.mcLoc("item/generated"))
+                    .texture("layer0", this.modLoc("item/materials/" + itemName + "_" + featherColor.getSerializedName()));
+            builder.override()
+                    .predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), new BigDecimal(featherColorIndex, new MathContext(3)).floatValue())
+                    .model(this.getExistingFile(this.modLoc("item/" + name))).end();
+            featherColorIndex += 1.0 / Moa.FeatherColor.values().length;
+        }
+    }
+
     public void moaEgg(Item item) {
         String itemName = this.itemName(item);
         ItemModelBuilder builder = this.withExistingParent(itemName, this.mcLoc("item/generated"));

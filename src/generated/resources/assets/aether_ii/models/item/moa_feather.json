@@ -1,0 +1,113 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "aether_ii:item/moa_feather_black",
+      "predicate": {
+        "aether_ii:feather_color": 0.0
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_blooming_red",
+      "predicate": {
+        "aether_ii:feather_color": 0.0556
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_blue",
+      "predicate": {
+        "aether_ii:feather_color": 0.111
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_brown",
+      "predicate": {
+        "aether_ii:feather_color": 0.167
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_classic_black",
+      "predicate": {
+        "aether_ii:feather_color": 0.222
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_cyan",
+      "predicate": {
+        "aether_ii:feather_color": 0.278
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_gray",
+      "predicate": {
+        "aether_ii:feather_color": 0.333
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_green",
+      "predicate": {
+        "aether_ii:feather_color": 0.389
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_light_blue",
+      "predicate": {
+        "aether_ii:feather_color": 0.444
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_light_gray",
+      "predicate": {
+        "aether_ii:feather_color": 0.5
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_lime",
+      "predicate": {
+        "aether_ii:feather_color": 0.556
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_magenta",
+      "predicate": {
+        "aether_ii:feather_color": 0.611
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_orange",
+      "predicate": {
+        "aether_ii:feather_color": 0.667
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_pink",
+      "predicate": {
+        "aether_ii:feather_color": 0.722
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_purple",
+      "predicate": {
+        "aether_ii:feather_color": 0.778
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_red",
+      "predicate": {
+        "aether_ii:feather_color": 0.833
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_white",
+      "predicate": {
+        "aether_ii:feather_color": 0.889
+      }
+    },
+    {
+      "model": "aether_ii:item/moa_feather_yellow",
+      "predicate": {
+        "aether_ii:feather_color": 0.944
+      }
+    }
+  ]
+}

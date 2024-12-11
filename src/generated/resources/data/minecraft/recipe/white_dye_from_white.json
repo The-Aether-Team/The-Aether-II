@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "white_dye",
+  "ingredients": [
+    {
+      "type": "neoforge:components",
+      "components": {
+        "aether_ii:feather_color": "white"
+      },
+      "items": "aether_ii:moa_feather"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:white_dye"
+  }
+}

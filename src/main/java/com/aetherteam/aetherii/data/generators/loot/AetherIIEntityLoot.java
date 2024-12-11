@@ -145,14 +145,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_WHITE, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.WHITE_CLOUDWOOL));
         this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_YELLOW, createKirridTable(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIBlocks.YELLOW_CLOUDWOOL));
 
-        this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(Items.FEATHER)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
-                        )
-                )
-        );
+        this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable());
 
         this.add(AetherIIEntityTypes.SKYROOT_LIZARD.get(), LootTable.lootTable());
 
@@ -192,7 +185,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
 
         this.add(AetherIIEntityTypes.COCKATRICE.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(Items.FEATHER)
+                        .add(LootItem.lootTableItem(AetherIIItems.COCKATRICE_FEATHER)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                         )
                 )

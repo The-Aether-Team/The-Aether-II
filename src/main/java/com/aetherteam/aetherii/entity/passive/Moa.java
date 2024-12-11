@@ -303,6 +303,11 @@ public class Moa extends MountableAnimal {
             if (this.getRandom().nextInt(900) == 0 && this.deathTime == 0) {
                 this.heal(1.0F);
             }
+            if (!this.isBaby() && this.getRandom().nextInt(500) == 0) {
+                ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
+                featherStack.set(AetherIIDataComponents.FEATHER_COLOR, FeatherColor.valueOf(this.getFeatherColor().toUpperCase(Locale.ROOT)));
+                this.spawnAtLocation(featherStack);
+            }
             //TODO MOA EGG LAY
 //            if (!this.isBaby() && this.getPassengers().isEmpty() && --this.eggTime <= 0) {
 //                MoaType moaType = this.getMoaType();

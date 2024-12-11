@@ -17,7 +17,7 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:feather"
+          "name": "aether_ii:cockatrice_feather"
         }
       ],
       "rolls": 1.0

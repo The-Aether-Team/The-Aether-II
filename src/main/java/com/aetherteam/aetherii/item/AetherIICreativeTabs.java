@@ -600,6 +600,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
                 output.accept(AetherIIItems.WHITE_SWET_GEL.get());
                 output.accept(AetherIIItems.SWET_SUGAR.get());
+                output.accept(AetherIIItems.MOA_FEATHER.get());
+                output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
                 output.accept(AetherIIItems.SCATTERGLASS_VIAL.get());
                 output.accept(AetherIIItems.CHARGE_CORE.get());
             }).build());

@@ -131,6 +131,8 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.SWET_SUGAR.get(), "materials/");
+        this.moaFeather(AetherIIItems.MOA_FEATHER.get());
+        this.item(AetherIIItems.COCKATRICE_FEATHER.get(), "materials/");
         this.item(AetherIIItems.SCATTERGLASS_VIAL.get(), "materials/");
         this.item(AetherIIItems.CHARGE_CORE.get(), "materials/");
 

@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIRecipeProvider;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.core.HolderLookup;
@@ -17,8 +18,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIRecipeData extends AetherIIRecipeProvider {
@@ -81,6 +84,26 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 AetherIIBlocks.RED_CLOUDWOOL_CARPET.asItem(),
                 AetherIIBlocks.YELLOW_CLOUDWOOL_CARPET.asItem(),
                 AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.asItem()
+        );
+        Map<Moa.FeatherColor, Item> featherDyes = Map.ofEntries(
+                Map.entry(Moa.FeatherColor.BLACK, Items.BLACK_DYE),
+                Map.entry(Moa.FeatherColor.BLOOMING_RED, Items.RED_DYE),
+                Map.entry(Moa.FeatherColor.BLUE, Items.BLUE_DYE),
+                Map.entry(Moa.FeatherColor.BROWN, Items.BROWN_DYE),
+                Map.entry(Moa.FeatherColor.CLASSIC_BLACK, Items.BLACK_DYE),
+                Map.entry(Moa.FeatherColor.CYAN, Items.CYAN_DYE),
+                Map.entry(Moa.FeatherColor.GRAY, Items.GRAY_DYE),
+                Map.entry(Moa.FeatherColor.GREEN, Items.GREEN_DYE),
+                Map.entry(Moa.FeatherColor.LIGHT_BLUE, Items.LIGHT_BLUE_DYE),
+                Map.entry(Moa.FeatherColor.LIGHT_GRAY, Items.LIGHT_GRAY_DYE),
+                Map.entry(Moa.FeatherColor.LIME, Items.LIME_DYE),
+                Map.entry(Moa.FeatherColor.MAGENTA, Items.MAGENTA_DYE),
+                Map.entry(Moa.FeatherColor.ORANGE, Items.ORANGE_DYE),
+                Map.entry(Moa.FeatherColor.PINK, Items.PINK_DYE),
+                Map.entry(Moa.FeatherColor.PURPLE, Items.PURPLE_DYE),
+                Map.entry(Moa.FeatherColor.RED, Items.RED_DYE),
+                Map.entry(Moa.FeatherColor.WHITE, Items.WHITE_DYE),
+                Map.entry(Moa.FeatherColor.YELLOW, Items.YELLOW_DYE)
         );
         
         // Blocks
@@ -888,6 +911,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIItems.INERT_GRAVITITE, 8, 0.0F).group("gravitite").save(consumer);
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_gravitite_ore"));
         this.altarEnchanting(RecipeCategory.MISC, AetherIIItems.GRAVITITE_PLATE, AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE, 8, 0.0F).group("gravitite").save(consumer, this.name("gravitite_plates_from_undershale_gravitite_ore"));
+
+        for (Map.Entry<Moa.FeatherColor, Item> featherDye : featherDyes.entrySet()) {
+            ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, featherDye.getValue(), 1).
+                    requires(DataComponentIngredient.of(false, AetherIIDataComponents.FEATHER_COLOR, featherDye.getKey(), AetherIIItems.MOA_FEATHER))
+                    .group(getItemName(featherDye.getValue()))
+                    .unlockedBy(getHasName(AetherIIItems.MOA_FEATHER), has(AetherIIItems.MOA_FEATHER))
+                    .save(consumer, getItemName(featherDye.getValue()) + "_from_" + featherDye.getKey().getSerializedName());
+        }
 
         oneToOneConversionRecipe(consumer, Items.YELLOW_DYE, AetherIIBlocks.BLADE_POA, "yellow_dye");
         oneToOneConversionRecipe(consumer, Items.WHITE_DYE, AetherIIBlocks.HESPEROSE, "white_dye");

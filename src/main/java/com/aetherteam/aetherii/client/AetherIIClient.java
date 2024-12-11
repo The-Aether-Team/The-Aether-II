@@ -85,6 +85,8 @@ public class AetherIIClient {
     }
 
     public static void registerItemModelProperties() {
+        registerMoaFeatherProperties(AetherIIItems.MOA_FEATHER.get());
+
         registerMoaEggProperties(AetherIIItems.MOA_EGG.get());
 
         registerGliderProperties(AetherIIItems.COLD_AERCLOUD_GLIDER.get(), false);
@@ -107,6 +109,16 @@ public class AetherIIClient {
         registerHealingStoneProperties(AetherIIItems.HEALING_STONE.get());
 
         registerGenericProperties();
+    }
+
+    private static void registerMoaFeatherProperties(Item item) {
+        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), (stack, level, livingEntity, value) -> {
+            Moa.FeatherColor featherColor = stack.get(AetherIIDataComponents.FEATHER_COLOR);
+            if (featherColor != null) {
+                return new BigDecimal((double) featherColor.ordinal() / Moa.FeatherColor.values().length, new MathContext(3)).floatValue();
+            }
+            return 0.0F;
+        });
     }
 
     private static void registerMoaEggProperties(Item item) {

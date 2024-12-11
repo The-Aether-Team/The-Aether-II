@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_moa_feather": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:moa_feather"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:black_dye_from_classic_black"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_moa_feather"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:black_dye_from_classic_black"
+    ]
+  }
+}
