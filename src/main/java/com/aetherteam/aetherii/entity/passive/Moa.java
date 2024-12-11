@@ -989,7 +989,7 @@ public class Moa extends MountableAnimal {
         BLUE,
         BROWN,
         GREEN,
-        GREY,
+        GRAY,
         RED;
 
         public static final Codec<KeratinColor> CODEC = StringRepresentable.fromValues(KeratinColor::values);

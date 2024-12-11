@@ -867,7 +867,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addKeratinColor(Moa.KeratinColor.BLUE, "Blue");
         this.addKeratinColor(Moa.KeratinColor.BROWN, "Brown");
         this.addKeratinColor(Moa.KeratinColor.GREEN, "Green");
-        this.addKeratinColor(Moa.KeratinColor.GREY, "Grey");
+        this.addKeratinColor(Moa.KeratinColor.GRAY, "Gray");
         this.addKeratinColor(Moa.KeratinColor.RED, "Red");
 
         this.addEyeColor(Moa.EyeColor.BLUE, "Blue");

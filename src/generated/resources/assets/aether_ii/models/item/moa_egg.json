@@ -4376,7 +4376,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_black",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.0,
@@ -4385,7 +4385,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_black",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.0,
@@ -4394,7 +4394,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_black",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.0,
@@ -4403,7 +4403,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.0556,
@@ -4412,7 +4412,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.0556,
@@ -4421,7 +4421,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.0556,
@@ -4430,7 +4430,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_blue",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.111,
@@ -4439,7 +4439,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_blue",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.111,
@@ -4448,7 +4448,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_blue",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.111,
@@ -4457,7 +4457,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_brown",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.167,
@@ -4466,7 +4466,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_brown",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.167,
@@ -4475,7 +4475,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_brown",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.167,
@@ -4484,7 +4484,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.222,
@@ -4493,7 +4493,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.222,
@@ -4502,7 +4502,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.222,
@@ -4511,7 +4511,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_cyan",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.278,
@@ -4520,7 +4520,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_cyan",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.278,
@@ -4529,7 +4529,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_cyan",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.278,
@@ -4538,7 +4538,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_gray",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.333,
@@ -4547,7 +4547,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_gray",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.333,
@@ -4556,7 +4556,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_gray",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.333,
@@ -4565,7 +4565,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_green",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.389,
@@ -4574,7 +4574,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_green",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.389,
@@ -4583,7 +4583,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_green",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.389,
@@ -4592,7 +4592,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.444,
@@ -4601,7 +4601,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.444,
@@ -4610,7 +4610,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.444,
@@ -4619,7 +4619,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.5,
@@ -4628,7 +4628,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.5,
@@ -4637,7 +4637,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.5,
@@ -4646,7 +4646,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_lime",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.556,
@@ -4655,7 +4655,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_lime",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.556,
@@ -4664,7 +4664,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_lime",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.556,
@@ -4673,7 +4673,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_magenta",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.611,
@@ -4682,7 +4682,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_magenta",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.611,
@@ -4691,7 +4691,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_magenta",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.611,
@@ -4700,7 +4700,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_orange",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.667,
@@ -4709,7 +4709,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_orange",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.667,
@@ -4718,7 +4718,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_orange",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.667,
@@ -4727,7 +4727,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_pink",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.722,
@@ -4736,7 +4736,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_pink",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.722,
@@ -4745,7 +4745,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_pink",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.722,
@@ -4754,7 +4754,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_purple",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.778,
@@ -4763,7 +4763,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_purple",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.778,
@@ -4772,7 +4772,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_purple",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.778,
@@ -4781,7 +4781,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_red",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.833,
@@ -4790,7 +4790,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_red",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.833,
@@ -4799,7 +4799,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_red",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.833,
@@ -4808,7 +4808,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_white",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.889,
@@ -4817,7 +4817,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_white",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.889,
@@ -4826,7 +4826,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_white",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.889,
@@ -4835,7 +4835,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_blue_feather_yellow",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_blue_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.944,
@@ -4844,7 +4844,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_blue_feather_yellow",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_blue_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.944,
@@ -4853,7 +4853,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_blue_feather_yellow",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_blue_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.0,
         "aether_ii:feather_color": 0.944,
@@ -4862,7 +4862,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_black",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.0,
@@ -4871,7 +4871,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_black",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.0,
@@ -4880,7 +4880,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_black",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.0,
@@ -4889,7 +4889,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.0556,
@@ -4898,7 +4898,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.0556,
@@ -4907,7 +4907,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.0556,
@@ -4916,7 +4916,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_blue",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.111,
@@ -4925,7 +4925,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_blue",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.111,
@@ -4934,7 +4934,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_blue",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.111,
@@ -4943,7 +4943,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_brown",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.167,
@@ -4952,7 +4952,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_brown",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.167,
@@ -4961,7 +4961,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_brown",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.167,
@@ -4970,7 +4970,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.222,
@@ -4979,7 +4979,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.222,
@@ -4988,7 +4988,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.222,
@@ -4997,7 +4997,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_cyan",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.278,
@@ -5006,7 +5006,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_cyan",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.278,
@@ -5015,7 +5015,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_cyan",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.278,
@@ -5024,7 +5024,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_gray",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.333,
@@ -5033,7 +5033,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_gray",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.333,
@@ -5042,7 +5042,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_gray",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.333,
@@ -5051,7 +5051,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_green",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.389,
@@ -5060,7 +5060,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_green",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.389,
@@ -5069,7 +5069,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_green",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.389,
@@ -5078,7 +5078,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.444,
@@ -5087,7 +5087,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.444,
@@ -5096,7 +5096,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.444,
@@ -5105,7 +5105,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.5,
@@ -5114,7 +5114,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.5,
@@ -5123,7 +5123,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.5,
@@ -5132,7 +5132,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_lime",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.556,
@@ -5141,7 +5141,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_lime",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.556,
@@ -5150,7 +5150,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_lime",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.556,
@@ -5159,7 +5159,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_magenta",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.611,
@@ -5168,7 +5168,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_magenta",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.611,
@@ -5177,7 +5177,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_magenta",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.611,
@@ -5186,7 +5186,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_orange",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.667,
@@ -5195,7 +5195,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_orange",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.667,
@@ -5204,7 +5204,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_orange",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.667,
@@ -5213,7 +5213,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_pink",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.722,
@@ -5222,7 +5222,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_pink",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.722,
@@ -5231,7 +5231,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_pink",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.722,
@@ -5240,7 +5240,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_purple",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.778,
@@ -5249,7 +5249,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_purple",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.778,
@@ -5258,7 +5258,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_purple",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.778,
@@ -5267,7 +5267,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_red",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.833,
@@ -5276,7 +5276,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_red",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.833,
@@ -5285,7 +5285,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_red",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.833,
@@ -5294,7 +5294,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_white",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.889,
@@ -5303,7 +5303,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_white",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.889,
@@ -5312,7 +5312,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_white",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.889,
@@ -5321,7 +5321,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_green_feather_yellow",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_green_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.944,
@@ -5330,7 +5330,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_green_feather_yellow",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_green_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.944,
@@ -5339,7 +5339,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_green_feather_yellow",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_green_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.333,
         "aether_ii:feather_color": 0.944,
@@ -5348,7 +5348,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_black",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.0,
@@ -5357,7 +5357,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_black",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.0,
@@ -5366,7 +5366,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_black",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_black",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.0,
@@ -5375,7 +5375,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.0556,
@@ -5384,7 +5384,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.0556,
@@ -5393,7 +5393,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_blooming_red",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_blooming_red",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.0556,
@@ -5402,7 +5402,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_blue",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.111,
@@ -5411,7 +5411,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_blue",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.111,
@@ -5420,7 +5420,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_blue",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_blue",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.111,
@@ -5429,7 +5429,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_brown",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.167,
@@ -5438,7 +5438,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_brown",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.167,
@@ -5447,7 +5447,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_brown",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_brown",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.167,
@@ -5456,7 +5456,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.222,
@@ -5465,7 +5465,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.222,
@@ -5474,7 +5474,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_classic_black",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_classic_black",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.222,
@@ -5483,7 +5483,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_cyan",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.278,
@@ -5492,7 +5492,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_cyan",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.278,
@@ -5501,7 +5501,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_cyan",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_cyan",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.278,
@@ -5510,7 +5510,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_gray",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.333,
@@ -5519,7 +5519,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_gray",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.333,
@@ -5528,7 +5528,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_gray",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_gray",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.333,
@@ -5537,7 +5537,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_green",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.389,
@@ -5546,7 +5546,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_green",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.389,
@@ -5555,7 +5555,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_green",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_green",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.389,
@@ -5564,7 +5564,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.444,
@@ -5573,7 +5573,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.444,
@@ -5582,7 +5582,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_light_blue",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_light_blue",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.444,
@@ -5591,7 +5591,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.5,
@@ -5600,7 +5600,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.5,
@@ -5609,7 +5609,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_light_gray",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_light_gray",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.5,
@@ -5618,7 +5618,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_lime",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.556,
@@ -5627,7 +5627,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_lime",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.556,
@@ -5636,7 +5636,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_lime",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_lime",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.556,
@@ -5645,7 +5645,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_magenta",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.611,
@@ -5654,7 +5654,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_magenta",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.611,
@@ -5663,7 +5663,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_magenta",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_magenta",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.611,
@@ -5672,7 +5672,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_orange",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.667,
@@ -5681,7 +5681,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_orange",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.667,
@@ -5690,7 +5690,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_orange",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_orange",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.667,
@@ -5699,7 +5699,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_pink",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.722,
@@ -5708,7 +5708,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_pink",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.722,
@@ -5717,7 +5717,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_pink",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_pink",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.722,
@@ -5726,7 +5726,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_purple",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.778,
@@ -5735,7 +5735,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_purple",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.778,
@@ -5744,7 +5744,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_purple",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_purple",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.778,
@@ -5753,7 +5753,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_red",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.833,
@@ -5762,7 +5762,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_red",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.833,
@@ -5771,7 +5771,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_red",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_red",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.833,
@@ -5780,7 +5780,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_white",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.889,
@@ -5789,7 +5789,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_white",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.889,
@@ -5798,7 +5798,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_white",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_white",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.889,
@@ -5807,7 +5807,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_curved_keratin_grey_eyes_yellow_feather_yellow",
+      "model": "aether_ii:item/moa_egg_curved_keratin_gray_eyes_yellow_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.944,
@@ -5816,7 +5816,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_flat_keratin_grey_eyes_yellow_feather_yellow",
+      "model": "aether_ii:item/moa_egg_flat_keratin_gray_eyes_yellow_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.944,
@@ -5825,7 +5825,7 @@
       }
     },
     {
-      "model": "aether_ii:item/moa_egg_pointed_keratin_grey_eyes_yellow_feather_yellow",
+      "model": "aether_ii:item/moa_egg_pointed_keratin_gray_eyes_yellow_feather_yellow",
       "predicate": {
         "aether_ii:eye_color": 0.667,
         "aether_ii:feather_color": 0.944,
