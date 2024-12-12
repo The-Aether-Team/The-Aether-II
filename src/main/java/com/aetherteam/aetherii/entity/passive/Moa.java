@@ -421,13 +421,11 @@ public class Moa extends MountableAnimal {
         if (!this.onGround()) {
             this.setRemainingJumps(this.getRemainingJumps() - 1);
             this.spawnExplosionParticle();
-
             if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
                 Vec3 vec31 = this.getLookAngle();
                 Vec3 vec32 = this.getDeltaMovement();
                 this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(1.5));
             }
-
         }
         this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
     }
