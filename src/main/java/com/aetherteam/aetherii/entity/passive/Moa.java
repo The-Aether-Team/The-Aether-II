@@ -849,7 +849,7 @@ public class Moa extends MountableAnimal {
      */
     @Override
     public double getMountJumpStrength() {
-        return this.onGround() ? 0.95 : 0.90;
+        return this.onGround() ? 0.95 : 0.0;
     }
 
     /**
