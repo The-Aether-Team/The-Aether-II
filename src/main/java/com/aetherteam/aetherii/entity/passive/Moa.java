@@ -438,61 +438,6 @@ public class Moa extends MountableAnimal {
         return super.getLookAngle();
     }
 
-    @Override
-    public int getMaxHeadXRot() {
-        return 180;
-    }
-
-    @Override
-    public int getMaxHeadYRot() {
-        return 180;
-    }
-
-    @Override
-    protected void clampHeadRotationToBody() {
-
-    }
-
-    @Override
-    public float getYHeadRot() {
-        if (this.getControllingPassenger() instanceof Player player) {
-            return player.getYHeadRot();
-        }
-        return super.getYHeadRot();
-    }
-
-    @Override
-    public float getViewYRot(float partialTicks) {
-        if (this.getControllingPassenger() instanceof Player player) {
-            return player.getViewYRot(partialTicks);
-        }
-        return super.getViewYRot(partialTicks);
-    }
-
-    @Override
-    public float getViewXRot(float partialTicks) {
-        if (this.getControllingPassenger() instanceof Player player) {
-            return player.getViewXRot(partialTicks);
-        }
-        return super.getViewXRot(partialTicks);
-    }
-
-    @Override
-    public float getYRot() {
-        if (this.getControllingPassenger() instanceof Player player) {
-            return player.getYRot();
-        }
-        return super.getYRot();
-    }
-
-    @Override
-    public float getXRot() {
-        if (this.getControllingPassenger() instanceof Player player) {
-            return player.getXRot();
-        }
-        return super.getXRot();
-    }
-
     /**
      * Various interaction behaviors for Moas.
      *
