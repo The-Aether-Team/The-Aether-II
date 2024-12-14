@@ -40,7 +40,8 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
         Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(random);
         Moa.EyeColor eyeColor = Moa.EyeColor.getRandom(random);
         Moa.FeatherColor featherColor = Moa.FeatherColor.getRandom(random);
-        this.setBlock(level, pos, AetherIIBlocks.MOA_EGG.get().defaultBlockState().setValue(MoaEggBlock.KERATIN, keratinColor).setValue(MoaEggBlock.EYES, eyeColor).setValue(MoaEggBlock.FEATHERS, featherColor).setValue(MoaEggBlock.WILD, true));
+        Moa.FeatherShape featherShape = Moa.FeatherShape.getRandom(random);
+        this.setBlock(level, pos, AetherIIBlocks.MOA_EGG.get().defaultBlockState().setValue(MoaEggBlock.KERATIN, keratinColor).setValue(MoaEggBlock.EYES, eyeColor).setValue(MoaEggBlock.FEATHERS, featherColor).setValue(MoaEggBlock.FEATHER_SHAPE, featherShape).setValue(MoaEggBlock.WILD, true));
         if (config.spawnMoas()) {
             for (int i = 0; i < 2; i++) {
                 Moa moa = AetherIIEntityTypes.MOA.get().create(level.getLevel());
@@ -51,6 +52,7 @@ public class MoaNestFeature extends Feature<MoaNestConfiguration> {
                 moa.setKeratinColor(keratinColor.getSerializedName());
                 moa.setEyeColor(eyeColor.getSerializedName());
                 moa.setFeatherColor(featherColor.getSerializedName());
+                moa.setFeatherShape(featherShape.getSerializedName());
                 level.getLevel().addFreshEntity(moa);
             }
         }
