@@ -105,7 +105,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Moa Nest
         this.dropSelf(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
-        this.dropSelf(AetherIIBlocks.MOA_EGG.get());
+        this.add(AetherIIBlocks.MOA_EGG.get(), this::droppingMoaEgg);
 
         // Logs
         this.dropSelf(AetherIIBlocks.SKYROOT_LOG.get());
