@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -112,15 +113,15 @@ public class MoaEggBlock extends BaseEntityBlock {
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        boolean flag = hatchBoost(level, pos);
-        if (!level.isClientSide() && flag) {
-            level.levelEvent(3009, pos, 0);
+        if (level.getBlockState(pos.below()).is(AetherIITags.Blocks.MOA_HATCH_BLOCK)) {
+            if (!level.isClientSide()) {
+                level.levelEvent(3009, pos, 0);
+            }
+            int i = 12000;
+            int j = i / 3;
+            level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(state));
+            level.scheduleTick(pos, this, j + level.random.nextInt(300));
         }
-
-        int i = flag ? 12000 : 24000;
-        int j = i / 3;
-        level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(state));
-        level.scheduleTick(pos, this, j + level.random.nextInt(300));
     }
 
     @Override
@@ -128,8 +129,9 @@ public class MoaEggBlock extends BaseEntityBlock {
         return false;
     }
 
-    public static boolean hatchBoost(BlockGetter level, BlockPos pos) {
-        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.MOA_HATCH_BLOCK);
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return canSupportCenter(level, pos.below(), Direction.UP);
     }
 
     @Override
