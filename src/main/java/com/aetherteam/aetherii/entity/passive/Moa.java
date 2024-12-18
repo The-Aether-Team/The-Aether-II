@@ -250,8 +250,8 @@ public class Moa extends MountableAnimal {
     public void tick() {
         super.tick();
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
-        if (gravity != null && !this.isFallFlying()) {
-            double max = -0.1;
+        if (gravity != null) {
+            double max = this.isVehicle() ? -0.5 : -0.1;
             double fallSpeed = Math.max(gravity.getValue() * -1.25, max); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
                 this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
@@ -322,22 +322,22 @@ public class Moa extends MountableAnimal {
             if (this.getRider() == null) {
                 this.setRider(player.getUUID());
             }
-            if (!this.isEntityOnGround()) {
-                if (!this.isFallFlying()) {
-                    this.setSharedFlag(7, true);
-                }
-            } else {
-                if (this.isFallFlying()) {
-                    this.setSharedFlag(7, false);
-                }
-            }
+//            if (!this.isEntityOnGround()) {
+//                if (!this.isFallFlying()) {
+//                    this.setSharedFlag(7, true);
+//                }
+//            } else {
+//                if (this.isFallFlying()) {
+//                    this.setSharedFlag(7, false);
+//                }
+//            }
         } else {
             if (this.getRider() != null) {
                 this.setRider(null);
             }
-            if (this.isFallFlying()) {
-                this.setSharedFlag(7, false);
-            }
+//            if (this.isFallFlying()) {
+//                this.setSharedFlag(7, false);
+//            }
         }
 
         // Handles flap cooldown for sounds.
@@ -792,7 +792,7 @@ public class Moa extends MountableAnimal {
      */
     @Override
     public double getMountJumpStrength() {
-        return this.onGround() ? 0.95 : 0.0;
+        return this.onGround() ? 0.95 : 0.90;
     }
 
     /**
