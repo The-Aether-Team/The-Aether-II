@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.entity.passive;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
@@ -448,36 +449,56 @@ public class Moa extends MountableAnimal {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (this.isPlayerGrown() && player.isShiftKeyDown()) {
-            this.setSitting(!this.isSitting());
-
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
-        } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
-            if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
+        if (itemStack.is(AetherIIItems.MOA_EGG)) {
+            if (!this.level().isClientSide()) {
+                MoaEggType type = itemStack.get(AetherIIDataComponents.MOA_EGG_TYPE);
+                if (type != null) {
+                    Moa moa = AetherIIEntityTypes.MOA.get().create(this.level());
+                    if (moa != null) {
+                        Vec3 vec3 = this.blockPosition().getCenter();
+                        moa.setBaby(false);
+                        moa.setPlayerGrown(true);
+                        moa.setKeratinColor(type.keratinColor().getSerializedName());
+                        moa.setEyeColor(type.eyeColor().getSerializedName());
+                        moa.setFeatherColor(type.featherColor().getSerializedName());
+                        moa.setFeatherShape(type.featherShape().getSerializedName());
+                        moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
+                        this.level().addFreshEntity(moa);
+                        return InteractionResult.sidedSuccess(false);
+                    }
+                }
             }
-            this.setAmountFed(this.getAmountFed() + 1);
-            switch (this.getAmountFed()) {
-                case 0 -> this.setAge(-24000);
-                case 1 -> this.setAge(-16000);
-                case 2 -> this.setAge(-8000);
-                case 3 -> this.setBaby(false);
-            }
-            if (this.getAmountFed() > 3 && !this.isBaby()) {
-                this.setBaby(false);
-            }
-            this.setHungry(false);
-            //PacketDistributor.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
-            return InteractionResult.CONSUME;
-        } else if (this.isPlayerGrown() && !this.isBaby() && this.getHealth() < this.getMaxHealth() && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Heals a tamed Moa.
-            if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
-            }
-            this.heal(5.0F);
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
         } else {
-            return super.mobInteract(player, hand);
+            if (this.isPlayerGrown() && player.isShiftKeyDown()) {
+                this.setSitting(!this.isSitting());
+
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
+            } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+                this.setAmountFed(this.getAmountFed() + 1);
+                switch (this.getAmountFed()) {
+                    case 0 -> this.setAge(-24000);
+                    case 1 -> this.setAge(-16000);
+                    case 2 -> this.setAge(-8000);
+                    case 3 -> this.setBaby(false);
+                }
+                if (this.getAmountFed() > 3 && !this.isBaby()) {
+                    this.setBaby(false);
+                }
+                this.setHungry(false);
+                //PacketDistributor.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
+                return InteractionResult.CONSUME;
+            } else if (this.isPlayerGrown() && !this.isBaby() && this.getHealth() < this.getMaxHealth() && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Heals a tamed Moa.
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+                this.heal(5.0F);
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
+            }
         }
+        return super.mobInteract(player, hand);
     }
 
     public void spawnExplosionParticle() {
