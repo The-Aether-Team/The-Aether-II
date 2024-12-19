@@ -136,9 +136,9 @@ public class Moa extends MountableAnimal {
         super.defineSynchedData(builder);
         builder.define(DATA_MOA_UUID_ID, Optional.empty());
         builder.define(DATA_FEATHER_SHAPE_ID, FeatherShape.CURVED.getSerializedName());
-        builder.define(DATA_KERATIN_COLOR, KeratinColor.BLUE.getSerializedName());
+        builder.define(DATA_KERATIN_COLOR, KeratinColor.GRAY.getSerializedName());
         builder.define(DATA_EYE_COLOR, EyeColor.BLUE.getSerializedName());
-        builder.define(DATA_FEATHER_COLOR, FeatherColor.BLUE.getSerializedName());
+        builder.define(DATA_FEATHER_COLOR, FeatherColor.LIGHT_BLUE.getSerializedName());
         builder.define(DATA_RIDER_UUID, Optional.empty());
         builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
         builder.define(DATA_REMAINING_JUMPS_ID, 0);

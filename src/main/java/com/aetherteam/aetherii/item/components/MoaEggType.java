@@ -25,6 +25,6 @@ public record MoaEggType(Moa.KeratinColor keratinColor, Moa.EyeColor eyeColor, M
             MoaEggType::new);
 
     public static MoaEggType defaultType() {
-        return new MoaEggType(Moa.KeratinColor.BLUE, Moa.EyeColor.BLUE, Moa.FeatherColor.BLUE, Moa.FeatherShape.CURVED);
+        return new MoaEggType(Moa.KeratinColor.GRAY, Moa.EyeColor.BLUE, Moa.FeatherColor.LIGHT_BLUE, Moa.FeatherShape.CURVED);
     }
 }
