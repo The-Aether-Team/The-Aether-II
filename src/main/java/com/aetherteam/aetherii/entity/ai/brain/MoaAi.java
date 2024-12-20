@@ -9,11 +9,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.GlobalPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
@@ -51,7 +51,7 @@ public class MoaAi {
                 Activity.CORE,
                 0,
                 ImmutableList.of(
-                        new Swim(0.8F),
+                        new Swim<>(0.8F),
                         new BabyOnlyAnimalPanic<>(0.14F),
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
@@ -90,7 +90,7 @@ public class MoaAi {
                 Activity.FIGHT,
                 10,
                 ImmutableList.of(
-                        StopAttackingIfTargetInvalid.<Mob>create(p_35118_ -> !isNearestValidAttackTarget(pMoa, p_35118_)),
+                        StopAttackingIfTargetInvalid.create((serverLevel, livingEntity) -> !isNearestValidAttackTarget(serverLevel, pMoa, livingEntity)),
                         SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(0.14F),
                         MeleeAttack.create(20)
                 ),
@@ -98,17 +98,17 @@ public class MoaAi {
         );
     }
 
-    private static boolean isNearestValidAttackTarget(Moa pMoa, LivingEntity pTarget) {
-        return findNearestValidAttackTarget(pMoa).filter(entity -> entity == pTarget).isPresent();
+    private static boolean isNearestValidAttackTarget(ServerLevel serverLevel, Moa pMoa, LivingEntity pTarget) {
+        return findNearestValidAttackTarget(serverLevel, pMoa).filter(entity -> entity == pTarget).isPresent();
     }
 
-    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Moa moa) {
+    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel serverLevel, Moa moa) {
         if (moa.isBaby()) {
             return Optional.empty();
         }
 
         Optional<LivingEntity> optional = BehaviorUtils.getLivingEntityFromUUIDMemory(moa, MemoryModuleType.ANGRY_AT);
-        if (optional.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(moa, optional.get())) {
+        if (optional.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, moa, optional.get())) {
             return optional;
         } else if (moa.getBrain().hasMemoryValue(MemoryModuleType.HOME)) {
             Optional<? extends LivingEntity> optional1 = getTargetIfWithinRange(moa, MemoryModuleType.NEAREST_VISIBLE_PLAYER);
@@ -134,14 +134,14 @@ public class MoaAi {
         pBrain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
     }
 
-    public static void maybeRetaliate(Moa pMoa, LivingEntity pTarget) {
+    public static void maybeRetaliate(ServerLevel serverLevel, Moa pMoa, LivingEntity pTarget) {
         if (!pMoa.isPlayerGrown()) {
-            if (Sensor.isEntityAttackableIgnoringLineOfSight(pMoa, pTarget)) {
+            if (Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, pMoa, pTarget)) {
                 if (!BehaviorUtils.isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(pMoa, pTarget, 4.0)) {
                     if (!pMoa.isBaby()) {
-                        setAngerTarget(pMoa, pTarget);
+                        setAngerTarget(serverLevel, pMoa, pTarget);
                     }
-                    broadcastAngerTarget(pMoa, pTarget);
+                    broadcastAngerTarget(serverLevel, pMoa, pTarget);
                 }
             }
         } else {
@@ -154,24 +154,24 @@ public class MoaAi {
         return pMoa.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
     }
 
-    protected static void broadcastAngerTarget(Moa pMoa, LivingEntity pTarget) {
+    protected static void broadcastAngerTarget(ServerLevel serverLevel, Moa pMoa, LivingEntity pTarget) {
         Optional<NearestVisibleLivingEntities> moa = getAdultMoa(pMoa);
 
         if (moa.isPresent()) {
             for (LivingEntity moa1 : moa.get().findAll(entity -> {
                 return !entity.isBaby() && entity instanceof Moa moa2 && !moa2.isPlayerGrown() && entity.getBrain().hasMemoryValue(MemoryModuleType.HOME);
             })) {
-                setAngerTarget((Moa) moa1, pTarget);
+                setAngerTarget(serverLevel, (Moa) moa1, pTarget);
             }
         }
     }
 
-    protected static void setAngerTarget(Moa pMoa, LivingEntity pTarget) {
-        if (Sensor.isEntityAttackableIgnoringLineOfSight(pMoa, pTarget)) {
+    protected static void setAngerTarget(ServerLevel serverLevel, Moa pMoa, LivingEntity pTarget) {
+        if (Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, pMoa, pTarget)) {
             pMoa.getBrain().eraseMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
             pMoa.getBrain().setMemoryWithExpiry(MemoryModuleType.ANGRY_AT, pTarget.getUUID(), 600L);
 
-            if (pTarget.getType() == EntityType.PLAYER && pMoa.level().getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
+            if (pTarget.getType() == EntityType.PLAYER && serverLevel.getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
                 pMoa.getBrain().setMemoryWithExpiry(MemoryModuleType.UNIVERSAL_ANGER, true, 600L);
             }
         }

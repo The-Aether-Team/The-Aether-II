@@ -1,13 +1,7 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
-import com.aetherteam.aetherii.recipe.builder.book.AltarBookCategory;
-import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
-import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import com.google.common.base.Suppliers;
-import com.google.common.collect.ImmutableList;
-import net.minecraft.client.RecipeBookCategories;
-import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
 
 import java.util.function.Supplier;
 
@@ -18,7 +12,8 @@ public class AetherIIRecipeCategories {
     public static final Supplier<RecipeBookCategories> ALTAR_REPAIR = Suppliers.memoize(() -> RecipeBookCategories.valueOf("AETHER_II_ALTAR_REPAIR"));
     public static final Supplier<RecipeBookCategories> ALTAR_MISC = Suppliers.memoize(() -> RecipeBookCategories.valueOf("AETHER_II_ALTAR_MISC"));
 
-    public static void registerRecipeCategories(RegisterRecipeBookCategoriesEvent event) {
+    //TODO RECIPE BOOK CATEGORY
+    /*public static void registerRecipeCategories(RegisterRecipeBookCategoriesEvent event) {
         // Altar Enchanting
         event.registerBookCategories(AetherIIRecipeBookTypes.ALTAR, ImmutableList.of(ALTAR_SEARCH.get(), ALTAR_FOOD.get(), ALTAR_BLOCKS.get(), ALTAR_REPAIR.get(), ALTAR_MISC.get()));
         event.registerAggregateCategory(ALTAR_SEARCH.get(), ImmutableList.of(ALTAR_FOOD.get(), ALTAR_BLOCKS.get(), ALTAR_REPAIR.get(), ALTAR_MISC.get()));
@@ -34,5 +29,5 @@ public class AetherIIRecipeCategories {
             }
             return ALTAR_MISC.get();
         });
-    }
+    }*/
 }

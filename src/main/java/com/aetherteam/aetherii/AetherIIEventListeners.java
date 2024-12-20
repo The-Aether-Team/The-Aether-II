@@ -25,12 +25,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
-import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -101,12 +101,12 @@ public class AetherIIEventListeners {
 
     public static void onPlayerPositionRespawn(PlayerRespawnPositionEvent event) {
         Player player = event.getEntity();
-        DimensionTransition transition;
+        TeleportTransition transition;
 
         transition = player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).findOutpostRespawnLocation(player);
 
         if (transition != null) {
-            event.setDimensionTransition(transition);
+            event.setTeleportTransition(transition);
         }
     }
 

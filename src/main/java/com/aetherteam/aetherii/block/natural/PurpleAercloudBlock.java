@@ -14,14 +14,14 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PurpleAercloudBlock extends AercloudBlock {
     public static final Direction[] DIRECTIONS =  new Direction[] {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
-    public static final DirectionProperty FACING = DirectionProperty.create("facing", DIRECTIONS);
+    public static final EnumProperty<Direction> FACING = EnumProperty.create("facing", Direction.class, DIRECTIONS);
     protected static final VoxelShape COLLISION_SHAPE = Shapes.empty();
 
     public PurpleAercloudBlock(BlockBehaviour.Properties properties) {

@@ -19,38 +19,38 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIData {
-    public static void dataSetup(GatherDataEvent event) {
+    public static void dataSetup(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper fileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         PackOutput packOutput = generator.getPackOutput();
 
         // Client Data
-        generator.addProvider(event.includeClient(), new AetherIIBlockStateData(packOutput, fileHelper));
-        generator.addProvider(event.includeClient(), new AetherIIItemModelData(packOutput, fileHelper));
-        generator.addProvider(event.includeClient(), new AetherIIParticleData(packOutput, fileHelper));
-        generator.addProvider(event.includeClient(), new AetherIILanguageData(packOutput));
-        generator.addProvider(event.includeClient(), new AetherIISoundData(packOutput, fileHelper));
+        generator.addProvider(true, new AetherIIBlockStateData(packOutput, fileHelper));
+        generator.addProvider(true, new AetherIIItemModelData(packOutput, fileHelper));
+        generator.addProvider(true, new AetherIIParticleData(packOutput, fileHelper));
+        generator.addProvider(true, new AetherIILanguageData(packOutput));
+        generator.addProvider(true, new AetherIISoundData(packOutput, fileHelper));
 
         // Server Data
         DatapackBuiltinEntriesProvider registrySets = new AetherIIRegistrySets(packOutput, lookupProvider);
         CompletableFuture<HolderLookup.Provider> registryProvider = registrySets.getRegistryProvider();
-        generator.addProvider(event.includeServer(), registrySets);
-        generator.addProvider(event.includeServer(), new AetherIIRecipeData(packOutput, lookupProvider));
-        generator.addProvider(event.includeServer(), AetherIILootTableData.create(packOutput, lookupProvider));
-        generator.addProvider(event.includeServer(), new AetherIILootModifierData(packOutput, lookupProvider));
-        generator.addProvider(event.includeServer(), new AetherIIAdvancementData(packOutput, lookupProvider, fileHelper));
-        generator.addProvider(event.includeServer(), new AetherIIDataMapData(packOutput, lookupProvider));
+        generator.addProvider(true, registrySets);
+        generator.addProvider(true, new AetherIIRecipeData(packOutput, lookupProvider));
+        generator.addProvider(true, AetherIILootTableData.create(packOutput, lookupProvider));
+        generator.addProvider(true, new AetherIILootModifierData(packOutput, lookupProvider));
+        generator.addProvider(true, new AetherIIAdvancementData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(true, new AetherIIDataMapData(packOutput, lookupProvider));
 
         // Tags
         AetherIIBlockTagData blockTags = new AetherIIBlockTagData(packOutput, lookupProvider, fileHelper);
-        generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new AetherIIItemTagData(packOutput, lookupProvider, blockTags.contentsGetter(), fileHelper));
-        generator.addProvider(event.includeServer(), new AetherIIEntityTagData(packOutput, lookupProvider, fileHelper));
-        generator.addProvider(event.includeServer(), new AetherIIFluidTagData(packOutput, lookupProvider, fileHelper));
-        generator.addProvider(event.includeServer(), new AetherIIBiomeTagData(packOutput, lookupProvider, fileHelper));
-        generator.addProvider(event.includeServer(), new AetherIIStructureTagData(packOutput, registryProvider, fileHelper));
-        generator.addProvider(event.includeServer(), new AetherIIDamageTypeTagData(packOutput, registryProvider, fileHelper));
+        generator.addProvider(true, blockTags);
+        generator.addProvider(true, new AetherIIItemTagData(packOutput, lookupProvider, blockTags.contentsGetter(), fileHelper));
+        generator.addProvider(true, new AetherIIEntityTagData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(true, new AetherIIFluidTagData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(true, new AetherIIBiomeTagData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(true, new AetherIIStructureTagData(packOutput, registryProvider, fileHelper));
+        generator.addProvider(true, new AetherIIDamageTypeTagData(packOutput, registryProvider, fileHelper));
 
         // pack.mcmeta
         generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.TYPE, new PackMetadataSection(

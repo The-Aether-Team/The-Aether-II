@@ -63,7 +63,7 @@ public class AercloudBlock extends HalfTransparentBlock implements LiquidBlockCo
      * [CODE COPY] - {@link net.minecraft.world.level.block.AbstractGlassBlock#propagatesSkylightDown(BlockState, BlockGetter, BlockPos)}.
      */
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
+    public boolean propagatesSkylightDown(BlockState state) {
         return false;
     }
 

@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.loot.functions.SpawnSkyrootLizard;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockLootSubProvider;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -31,7 +32,6 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
-import net.minecraft.world.level.storage.loot.functions.CopyNameFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -66,7 +66,7 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .withPool(
                         LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1.0F))
-                                .when(HAS_SHEARS.or(this.hasSilkTouch()).invert())
+                                .when(this.hasShears().or(this.hasSilkTouch()).invert())
                                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(AetherIIItems.ARCTIC_SNOWBALL.get())
                                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AetherHangingRootsBlock.SNOWY, true)))
                                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
@@ -103,7 +103,7 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
         );
     }
 
-    public LootTable.Builder droppingAmberoot(Block original, Block block, Item item) {
+    public LootTable.Builder droppingAmberoot(HolderGetter<Item> holderGetter, Block original, Block block, Item item) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return LootTable.lootTable()
                 .withPool(this.applyExplosionDecay(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(original)
@@ -111,15 +111,19 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .withPool(this.applyExplosionDecay(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(block)
                         .when(this.hasSilkTouch().invert()))))
                 .withPool(this.applyExplosionDecay(item, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(item)
-                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)))
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.GOLDEN_AMBER_HARVESTERS)))
                         .when(this.hasSilkTouch().invert())
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))));
     }
 
+    protected LootTable.Builder createShearsOnlyDrop(ItemLike p_250684_) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears()).add(LootItem.lootTableItem(p_250684_)));
+    }
+
     public LootTable.Builder droppingLeafPile(Block block, Block leaves) {
         return LootTable.lootTable().withPool(LootPool.lootPool()
-                .when(HAS_SHEARS)
+                .when(this.hasShears())
                 .when(LootItemEntityPropertyCondition.entityPresent(LootContext.EntityTarget.THIS))
                 .add(AlternativesEntry.alternatives(
                         AetherLeafPileBlock.PILES.getPossibleValues(),
@@ -134,61 +138,61 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
     public LootTable.Builder droppingWithChancesAndSkyrootSticks(Block block, Block sapling, float... chances) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return createForgeSilkTouchOrShearsDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(sapling)).when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), chances)))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(HAS_SHEARS.or(this.hasSilkTouch()).invert())
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(this.hasShears().or(this.hasSilkTouch()).invert())
                         .add(this.applyExplosionDecay(block,
                                         LootItem.lootTableItem(AetherIIItems.SKYROOT_STICK.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
                                 .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(HAS_SHEARS.or(this.hasSilkTouch()).invert())
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
                                 .add(this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.SKYROOT_PINECONE.get()))
                                         .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.01F, 0.011111112F, 0.0125F, 0.0111111125F, 0.05F))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(HAS_SHEARS.or(this.hasSilkTouch()).invert())
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
                         .add(this.applyExplosionCondition(block, LootItem.lootTableItem(Items.AIR).apply(SpawnSkyrootLizard.builder()))
                                 .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.001F, 0.0011111112F, 0.00125F, 0.00111111125F, 0.005F))));
     }
 
     protected LootTable.Builder createSilkTouchOrShearsTable(ItemLike item) {
-        return LootTable.lootTable().withPool(LootPool.lootPool().when(HAS_SHEARS.or(this.hasSilkTouch())).setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(item)));
+        return LootTable.lootTable().withPool(LootPool.lootPool().when(this.hasShears().or(this.hasSilkTouch())).setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(item)));
     }
 
-    public LootTable.Builder droppingArilumBulbs(Block block, Item drop) {
+    public LootTable.Builder droppingArilumBulbs(HolderGetter<Item> holderGetter, Block block, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))
                                 .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
-                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)).invert()))
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)).invert()))
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS))))
-                .withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)).when(HAS_SHEARS.or(this.hasSilkTouch())));
+                        .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS))))
+                .withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)).when(this.hasShears().or(this.hasSilkTouch())));
     }
 
-    public LootTable.Builder droppingSativalShoot(Block block, Item drop) {
+    public LootTable.Builder droppingSativalShoot(HolderGetter<Item> holderGetter, Block block, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)))
+                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
         ).withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)).invert()));
     }
 
-    public LootTable.Builder droppingBerryBush(Block block, Block stem, Item drop) {
+    public LootTable.Builder droppingBerryBush(HolderGetter<Item> holderGetter, Block block, Block stem, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop)
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)).invert())
+                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)).invert())
                 .when(this.hasSilkTouch().invert())
         ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)))
+                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
                 .when(this.hasSilkTouch().invert())
         ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(LootItem.lootTableItem(block))
@@ -199,7 +203,7 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
         );
     }
 
-    public LootTable.Builder droppingOrangeTree(Block block, Item drop) {
+    public LootTable.Builder droppingOrangeTree(HolderGetter<Item> holderGetter, Block block, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
@@ -207,14 +211,14 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(OrangeTreeBlock.AGE, 4)))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)).invert())
+                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)).invert())
         ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(OrangeTreeBlock.AGE, 4)))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)))
+                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
         ).withPool(LootPool.lootPool()
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(OrangeTreeBlock.AGE, 4)).invert())
@@ -222,20 +226,20 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
         );
     }
 
-    public LootTable.Builder droppingValkyrieSprout(Block block, Item drop) {
+    public LootTable.Builder droppingValkyrieSprout(HolderGetter<Item> holderGetter, Block block, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ValkyrieSproutBlock.AGE, 2)))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)).invert())
+                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)).invert())
         ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(ValkyrieSproutBlock.AGE, 2)))
-                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)))
+                .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
         ).withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)));
     }
 

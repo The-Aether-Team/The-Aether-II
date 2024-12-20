@@ -27,6 +27,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -164,23 +166,24 @@ public class Moa extends MountableAnimal {
     }
 
     @Override
-    protected void customServerAiStep() {
-        this.level().getProfiler().push("kirridBrain");
-        this.getBrain().tick((ServerLevel) this.level(), this);
-        this.level().getProfiler().pop();
-        this.level().getProfiler().push("kirridActivityUpdate");
+    protected void customServerAiStep(ServerLevel serverLevel) {
+        ProfilerFiller profiler = Profiler.get();
+        profiler.push("kirridBrain");
+        this.getBrain().tick(serverLevel, this);
+        profiler.pop();
+        profiler.push("kirridActivityUpdate");
         MoaAi.updateActivity(this);
-        this.level().getProfiler().pop();
+        profiler.pop();
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        boolean flag = super.hurt(pSource, pAmount);
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
+        boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
         if (this.level().isClientSide) {
             return false;
         } else {
             if (flag && pSource.getEntity() instanceof LivingEntity) {
-                MoaAi.maybeRetaliate(this, (LivingEntity) pSource.getEntity());
+                MoaAi.maybeRetaliate(serverLevel, this, (LivingEntity) pSource.getEntity());
             }
 
             return flag;
@@ -192,16 +195,15 @@ public class Moa extends MountableAnimal {
      *
      * @param level      The {@link ServerLevelAccessor} where the entity is spawned.
      * @param difficulty The {@link DifficultyInstance} of the game.
-     * @param reason     The {@link MobSpawnType} reason.
+     * @param reason     The {@link EntitySpawnReason} reason.
      * @param spawnData  The {@link SpawnGroupData}.
-     * @param tag        The {@link CompoundTag} to apply to this entity.
      * @return The {@link SpawnGroupData} to return.
      */
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
         this.generateMoaUUID(); //todo: 1.21 tag passing into this method was removed.
 
-        if (reason != MobSpawnType.NATURAL) {
+        if (reason != EntitySpawnReason.NATURAL) {
             Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(this.getRandom());
             Moa.EyeColor eyeColor = Moa.EyeColor.getRandom(this.getRandom());
             Moa.FeatherColor featherColor = Moa.FeatherColor.getRandom(this.getRandom());
@@ -214,7 +216,7 @@ public class Moa extends MountableAnimal {
         if (spawnData == null) { // Disallow baby Moas from spawning in spawn groups.
             spawnData = new AgeableMob.AgeableMobGroupData(false);
         }
-        if (reason == MobSpawnType.STRUCTURE) {
+        if (reason == EntitySpawnReason.STRUCTURE) {
             //set moa home when spawn in nest
             MoaAi.initMoaHomeMemories(this, this.random);
         }
@@ -275,9 +277,11 @@ public class Moa extends MountableAnimal {
                 this.heal(1.0F);
             }
             if (!this.isBaby() && this.getRandom().nextInt(5000) == 0) {
-                ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
-                featherStack.set(AetherIIDataComponents.FEATHER_COLOR, FeatherColor.valueOf(this.getFeatherColor().toUpperCase(Locale.ROOT)));
-                this.spawnAtLocation(featherStack);
+                if (this.level() instanceof ServerLevel serverLevel) {
+                    ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
+                    featherStack.set(AetherIIDataComponents.FEATHER_COLOR, FeatherColor.valueOf(this.getFeatherColor().toUpperCase(Locale.ROOT)));
+                    this.spawnAtLocation(serverLevel, featherStack);
+                }
             }
             //TODO MOA EGG LAY
 //            if (!this.isBaby() && this.getPassengers().isEmpty() && --this.eggTime <= 0) {
@@ -452,7 +456,7 @@ public class Moa extends MountableAnimal {
             if (!this.level().isClientSide()) {
                 MoaEggType type = itemStack.get(AetherIIDataComponents.MOA_EGG_TYPE);
                 if (type != null) {
-                    Moa moa = AetherIIEntityTypes.MOA.get().create(this.level());
+                    Moa moa = AetherIIEntityTypes.MOA.get().create(this.level(), EntitySpawnReason.SPAWN_ITEM_USE);
                     if (moa != null) {
                         Vec3 vec3 = this.blockPosition().getCenter();
                         moa.setBaby(false);
@@ -463,7 +467,7 @@ public class Moa extends MountableAnimal {
                         moa.setFeatherShape(type.featherShape().getSerializedName());
                         moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
                         this.level().addFreshEntity(moa);
-                        return InteractionResult.sidedSuccess(false);
+                        return InteractionResult.SUCCESS;
                     }
                 }
             }
@@ -471,7 +475,7 @@ public class Moa extends MountableAnimal {
             if (this.isPlayerGrown() && player.isShiftKeyDown()) {
                 this.setSitting(!this.isSitting());
 
-                return InteractionResult.sidedSuccess(this.level().isClientSide());
+                return InteractionResult.SUCCESS;
             } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
                 if (!player.getAbilities().instabuild) {
                     itemStack.shrink(1);
@@ -494,7 +498,7 @@ public class Moa extends MountableAnimal {
                     itemStack.shrink(1);
                 }
                 this.heal(5.0F);
-                return InteractionResult.sidedSuccess(this.level().isClientSide());
+                return InteractionResult.SUCCESS;
             }
         }
         return super.mobInteract(player, hand);
@@ -827,7 +831,7 @@ public class Moa extends MountableAnimal {
     protected void updateWalkAnimation(float pPartialTick) {
         if (this.hasControllingPassenger()) {
             float f = Math.min(pPartialTick * 1.0F, 1.0F);
-            this.walkAnimation.update(f, 0.4F);
+            this.walkAnimation.update(f, pPartialTick, 0.4F);
         } else {
             super.updateWalkAnimation(pPartialTick);
         }
@@ -863,8 +867,9 @@ public class Moa extends MountableAnimal {
     /**
      * @return The float for the Moa's hitbox scaling. Set to a flat value, as Moa hitbox scaling is handled by {@link Moa#getDimensions(Pose)}.
      */
+
     @Override
-    public float getScale() {
+    public float getAgeScale() {
         return 1.0F;
     }
 

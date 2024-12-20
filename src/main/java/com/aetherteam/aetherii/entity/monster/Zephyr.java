@@ -77,18 +77,18 @@ public class Zephyr extends FlyingMob implements Enemy {
     }
 
     /**
-     * Zephyrs can spawn if {@link Mob#checkMobSpawnRules(EntityType, LevelAccessor, MobSpawnType, BlockPos, RandomSource)} is true, if they are spawning in view of the sky,
+     * Zephyrs can spawn if {@link Mob#checkMobSpawnRules(EntityType, LevelAccessor, EntitySpawnReason, BlockPos, RandomSource)} is true, if they are spawning in view of the sky,
      * if the difficulty isn't peaceful, and they spawn with a random chance of 1/11.
      *
      * @param zephyr The {@link Zephyr} {@link EntityType}.
      * @param level  The {@link LevelAccessor}.
-     * @param reason The {@link MobSpawnType} reason.
+     * @param reason The {@link EntitySpawnReason} reason.
      * @param pos    The spawn {@link BlockPos}.
      * @param random The {@link RandomSource}.
      * @return Whether this entity can spawn, as a {@link Boolean}.
      */
-    public static boolean checkZephyrSpawnRules(EntityType<? extends Zephyr> zephyr, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || level.canSeeSky(pos) && level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS);
+    public static boolean checkZephyrSpawnRules(EntityType<? extends Zephyr> zephyr, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+        return reason == EntitySpawnReason.SPAWNER || level.canSeeSky(pos) && level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class Zephyr extends FlyingMob implements Enemy {
     @Override
     public void aiStep() {
         super.aiStep();
-        if (this.getY() < this.level().getMinBuildHeight() - 2 || this.getY() > this.level().getMaxBuildHeight()) {
+        if (this.getY() < this.level().getMinY() - 2 || this.getY() > this.level().getMaxY()) {
             this.discard();
         }
         if (this.level().isClientSide()) {

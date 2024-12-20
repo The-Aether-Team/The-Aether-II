@@ -10,7 +10,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
@@ -66,16 +67,16 @@ public class BottomedVineBlock extends VineBlock {
         return super.getToolModifiedState(state, context, itemAbility, simulate);
     }
 
+
     @Override
-    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        if (facing == Direction.DOWN) {
-            return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess tickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState currentState, RandomSource randomSource) {
+        if (direction == Direction.DOWN) {
+            return super.updateShape(state, levelReader, tickAccess, blockPos, direction, currentPos, currentState, randomSource);
         } else {
-            BlockState updatedState = this.getUpdatedState(state, level, currentPos);
+            BlockState updatedState = this.getUpdatedState(state, levelReader, currentPos);
             return !this.hasFaces(updatedState) ? Blocks.AIR.defaultBlockState() : updatedState;
         }
     }
-
     private BlockState getUpdatedState(BlockState state, BlockGetter level, BlockPos pos) {
         BlockPos abovePos = pos.above();
         if (state.getValue(UP)) {
@@ -159,7 +160,7 @@ public class BottomedVineBlock extends VineBlock {
                             }
                         }
                     } else {
-                        if (randomDirection == Direction.UP && pos.getY() < level.getMaxBuildHeight() - 1) {
+                        if (randomDirection == Direction.UP && pos.getY() < level.getMaxY() - 1) {
                             if (this.canSupportAtFace(level, pos, randomDirection)) {
                                 level.setBlock(pos, state.setValue(UP, true).setValue(AGE, age), 2);
                                 return;
@@ -181,7 +182,7 @@ public class BottomedVineBlock extends VineBlock {
                             }
                         }
 
-                        if (pos.getY() > level.getMinBuildHeight()) {
+                        if (pos.getY() > level.getMinY()) {
                             BlockPos belowPos = pos.below();
                             BlockState blockstate = level.getBlockState(belowPos);
                             if (blockstate.isAir() || blockstate.is(this)) {

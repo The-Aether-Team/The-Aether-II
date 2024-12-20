@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -22,10 +23,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -37,11 +35,9 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -76,7 +72,7 @@ public class Aerbunny extends AetherTamableAnimal {
         this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(2, new RunWhenAfraid(this, 1.3));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, Ingredient.of(AetherIITags.Items.AERBUNNY_FOOD), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, itemstack -> itemstack.is(AetherIITags.Items.AERBUNNY_FOOD), false));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(6, new FallingRandomStrollGoal(this, 1.0, 80));
     }
@@ -251,21 +247,21 @@ public class Aerbunny extends AetherTamableAnimal {
                             itemStack.consume(1, player);
                             this.setPersistenceRequired();
                         }
-                        return InteractionResult.sidedSuccess(this.level().isClientSide());
+                        return InteractionResult.SUCCESS;
                     }
                 } else if (this.isFood(itemStack) && this.getHealth() < this.getMaxHealth()) {
                     if (!this.level().isClientSide()) {
-                        FoodProperties food = itemStack.getFoodProperties(this);
+                        FoodProperties food = itemStack.get(DataComponents.FOOD);
                         this.heal(food != null ? (float) food.nutrition() : 1.0F);
                         this.usePlayerItem(player, hand, itemStack);
                     }
 
-                    return InteractionResult.sidedSuccess(this.level().isClientSide());
+                    return InteractionResult.SUCCESS;
                 }
 
                 if (!result.consumesAction() && !player.isShiftKeyDown()) {
                     this.setOrderedToSit(!this.isOrderedToSit());
-                    result = InteractionResult.sidedSuccess(this.level().isClientSide());
+                    result = InteractionResult.SUCCESS;
                 }
             }
         } else if (this.isFood(itemStack) && this.getAfraidTime() <= 0) {
@@ -281,7 +277,7 @@ public class Aerbunny extends AetherTamableAnimal {
                 this.setPersistenceRequired();
             }
 
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
+            return InteractionResult.SUCCESS;
         }
 
         if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
@@ -342,8 +338,8 @@ public class Aerbunny extends AetherTamableAnimal {
      * @return Whether the entity was hurt, as a {@link Boolean}.
      */
     @Override
-    public boolean hurt(DamageSource source, float amount) {
-        boolean flag = super.hurt(source, amount);
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource source, float amount) {
+        boolean flag = super.hurtServer(serverLevel, source, amount);
         if (flag && source.getEntity() instanceof Player) {
             this.setAfraidTime(100 + this.getRandom().nextInt(50));
         }
@@ -488,8 +484,8 @@ public class Aerbunny extends AetherTamableAnimal {
      * @return Whether the Aerbunny is invulnerable to the damage, as a {@link Boolean}.
      */
     @Override
-    public boolean isInvulnerableTo(DamageSource damageSource) {
-        return (this.getVehicle() != null && this.getVehicle() == damageSource.getEntity()) || super.isInvulnerableTo(damageSource);
+    public boolean isInvulnerableTo(ServerLevel serverLevel, DamageSource damageSource) {
+        return (this.getVehicle() != null && this.getVehicle() == damageSource.getEntity()) || super.isInvulnerableTo(serverLevel, damageSource);
     }
 
     /**
@@ -503,7 +499,7 @@ public class Aerbunny extends AetherTamableAnimal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
-        Aerbunny aerbunny = AetherIIEntityTypes.AERBUNNY.get().create(level);
+        Aerbunny aerbunny = AetherIIEntityTypes.AERBUNNY.get().create(level, EntitySpawnReason.BREEDING);
         if (aerbunny != null) {
             UUID uuid = this.getOwnerUUID();
             if (uuid != null) {

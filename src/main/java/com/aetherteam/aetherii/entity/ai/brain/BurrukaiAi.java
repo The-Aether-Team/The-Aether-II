@@ -9,11 +9,11 @@ import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -30,7 +30,7 @@ public class BurrukaiAi {
     private static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 2400);
     public static final UniformInt TIME_BETWEEN_EAT = UniformInt.of(600, 1200);
     private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat()
-            .selector(p_311675_ -> p_311675_ instanceof Kirrid kirrid && !kirrid.isBaby() && !kirrid.getBrain().hasMemoryValue(MemoryModuleType.RAM_COOLDOWN_TICKS) && kirrid.hasPlate() && p_311675_.level().getWorldBorder().isWithinBounds(p_311675_.getBoundingBox()));
+            .selector((p_311675_, serverLevel) -> p_311675_ instanceof Kirrid kirrid && !kirrid.isBaby() && !kirrid.getBrain().hasMemoryValue(MemoryModuleType.RAM_COOLDOWN_TICKS) && kirrid.hasPlate() && p_311675_.level().getWorldBorder().isWithinBounds(p_311675_.getBoundingBox()));
 
     public static void initMemories(Burrukai pBurrukai, RandomSource pRandom) {
         pBurrukai.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, TIME_BETWEEN_RAMS.sample(pRandom));
@@ -52,7 +52,7 @@ public class BurrukaiAi {
                 Activity.CORE,
                 0,
                 ImmutableList.of(
-                        new Swim(0.8F),
+                        new Swim<>(0.8F),
                         new NeutralAnimalPanic<>(1.25F),
                         new LookAtTargetSink(45, 90),
                         new MoveToTargetSink(),
@@ -89,24 +89,24 @@ public class BurrukaiAi {
                 Activity.FIGHT,
                 10,
                 ImmutableList.of(
-                        StopAttackingIfTargetInvalid.<Mob>create(p_35118_ -> !isNearestValidAttackTarget(pBurrukai, p_35118_)),
+                        StopAttackingIfTargetInvalid.create((serverLevel, livingEntity) -> !isNearestValidAttackTarget(serverLevel, pBurrukai, livingEntity)),
                         new RamAttack(2.25F)
                 ),
                 MemoryModuleType.ATTACK_TARGET
         );
     }
 
-    private static boolean isNearestValidAttackTarget(Burrukai pBurrukai, LivingEntity pTarget) {
-        return findNearestValidAttackTarget(pBurrukai).filter(entity -> entity == pTarget).isPresent();
+    private static boolean isNearestValidAttackTarget(ServerLevel serverLevel, Burrukai pBurrukai, LivingEntity pTarget) {
+        return findNearestValidAttackTarget(serverLevel, pBurrukai).filter(entity -> entity == pTarget).isPresent();
     }
 
-    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(Burrukai burrukai) {
+    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel serverLevel, Burrukai burrukai) {
         if (burrukai.isBaby()) {
             return Optional.empty();
         }
 
         Optional<LivingEntity> optional = BehaviorUtils.getLivingEntityFromUUIDMemory(burrukai, MemoryModuleType.ANGRY_AT);
-        if (optional.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(burrukai, optional.get())) {
+        if (optional.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, burrukai, optional.get())) {
             return optional;
         }
         return Optional.empty();
@@ -121,11 +121,11 @@ public class BurrukaiAi {
         pBrain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
     }
 
-    public static void maybeRetaliate(Burrukai burrukai, LivingEntity pTarget) {
-        if (Sensor.isEntityAttackableIgnoringLineOfSight(burrukai, pTarget)) {
+    public static void maybeRetaliate(ServerLevel serverLevel, Burrukai burrukai, LivingEntity pTarget) {
+        if (Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, burrukai, pTarget)) {
             if (!BehaviorUtils.isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(burrukai, pTarget, 4.0)) {
                 if (!burrukai.isBaby()) {
-                    setAngerTarget(burrukai, pTarget);
+                    setAngerTarget(serverLevel, burrukai, pTarget);
                 }
                 //broadcastAngerTarget(burrukai, pTarget);
             }
@@ -137,12 +137,12 @@ public class BurrukaiAi {
         return pBurrukai.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
     }
 
-    protected static void setAngerTarget(Burrukai pBurrukai, LivingEntity pTarget) {
-        if (Sensor.isEntityAttackableIgnoringLineOfSight(pBurrukai, pTarget)) {
+    protected static void setAngerTarget(ServerLevel serverLevel, Burrukai pBurrukai, LivingEntity pTarget) {
+        if (Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, pBurrukai, pTarget)) {
             pBurrukai.getBrain().eraseMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
             pBurrukai.getBrain().setMemoryWithExpiry(MemoryModuleType.ANGRY_AT, pTarget.getUUID(), 600L);
 
-            if (pTarget.getType() == EntityType.PLAYER && pBurrukai.level().getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
+            if (pTarget.getType() == EntityType.PLAYER && serverLevel.getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
                 pBurrukai.getBrain().setMemoryWithExpiry(MemoryModuleType.UNIVERSAL_ANGER, true, 600L);
             }
         }

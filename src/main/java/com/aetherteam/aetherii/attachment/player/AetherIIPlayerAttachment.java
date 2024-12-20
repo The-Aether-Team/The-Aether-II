@@ -13,7 +13,7 @@ import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.client.player.Input;
+import net.minecraft.client.player.ClientInput;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -228,12 +228,12 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void movementInput(Player player, Input input) {
-        boolean isJumping = input.jumping;
+    public void movementInput(Player player, ClientInput input) {
+        boolean isJumping = input.keyPresses.jump();
         if (isJumping != this.isJumping()) {
             this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setJumping", isJumping);
         }
-        boolean isMoving = isJumping || input.up || input.down || input.left || input.right || player.isFallFlying();
+        boolean isMoving = isJumping || input.keyPresses.forward() || input.keyPresses.backward() || input.keyPresses.left() || input.keyPresses.right() || player.isFallFlying();
         if (isMoving != this.isMoving()) {
             this.setSynched(player.getId(), INBTSynchable.Direction.SERVER, "setMoving", isMoving);
         }

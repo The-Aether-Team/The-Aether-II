@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block.natural;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +35,7 @@ public class AetherFlowerBlock extends FlowerBlock implements Snowable {
     }
 
     @Override
-    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
         super.onBlockExploded(state, level, pos, explosion);
         if (this.isSnowy(state)) {
             level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);

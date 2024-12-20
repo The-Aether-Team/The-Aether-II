@@ -4,8 +4,8 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -20,9 +20,9 @@ public abstract class AetherAnimal extends Animal {
     }
 
     /**
-     * [CODE COPY] - {@link Animal#checkAnimalSpawnRules(EntityType, LevelAccessor, MobSpawnType, BlockPos, RandomSource)}.
+     * [CODE COPY] - {@link Animal#checkAnimalSpawnRules(EntityType, LevelAccessor, EntitySpawnReason, BlockPos, RandomSource)}.
      */
-    public static boolean checkAetherAnimalSpawnRules(EntityType<? extends AetherAnimal> animal, LevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
+    public static boolean checkAetherAnimalSpawnRules(EntityType<? extends AetherAnimal> animal, LevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON)
                 && level.getRawBrightness(pos, 0) > 8;
     }

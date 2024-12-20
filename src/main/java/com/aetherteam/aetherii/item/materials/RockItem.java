@@ -5,12 +5,10 @@ import com.aetherteam.aetherii.item.miscellaneous.ThrowableItem;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -25,23 +23,24 @@ public class RockItem extends BlockItem implements ThrowableItem {
     public InteractionResult useOn(UseOnContext context) {
         InteractionResult interactionresult = this.place(new BlockPlaceContext(context));
         if (!interactionresult.consumesAction()) {
-            InteractionResult interactionresult1 = this.use(context.getLevel(), context.getPlayer(), context.getHand()).getResult();
-            return interactionresult1 == InteractionResult.CONSUME ? InteractionResult.CONSUME_PARTIAL : interactionresult1;
+            InteractionResult interactionresult1 = this.use(context.getLevel(), context.getPlayer(), context.getHand());
+            return interactionresult1 == InteractionResult.CONSUME ? InteractionResult.CONSUME : interactionresult1;
         } else {
             return interactionresult;
         }
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.startUsingItem(hand);
-        return InteractionResultHolder.consume(stack);
+        return InteractionResult.CONSUME;
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
         this.throwItem(stack, level, livingEntity, timeLeft, SoundEvents.SNOWBALL_THROW, new HolystoneRock(level, livingEntity));
+        return true;
     }
 
     @Override

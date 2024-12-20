@@ -12,7 +12,8 @@ import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -67,10 +68,10 @@ public class AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        return pFacing == Direction.UP && !pState.getValue(SNOWY) && (pFacingState.is(AetherIIBlocks.ARCTIC_SNOW) || pFacingState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
-                ? pState.setValue(SNOWY, true)
-                : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState currentState, RandomSource randomSource) {
+        return direction == Direction.UP && !state.getValue(SNOWY) && (currentState.is(AetherIIBlocks.ARCTIC_SNOW) || currentState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
+                ? state.setValue(SNOWY, true)
+                : super.updateShape(state, level, scheduledTickAccess, blockPos, direction, currentPos, currentState, randomSource);
     }
 
     @Override

@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -101,7 +102,7 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
             if (!this.level().isClientSide()) {
                 playerEntity.startRiding(this);
             }
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
+            return InteractionResult.SUCCESS;
         } else {
             InteractionResult interactionResult = super.mobInteract(playerEntity, hand);
             if (!interactionResult.consumesAction()) {
@@ -139,10 +140,10 @@ public abstract class MountableAnimal extends AetherAnimal implements MountableM
     }
 
     @Override
-    protected void dropEquipment() {
-        super.dropEquipment();
+    protected void dropEquipment(ServerLevel serverLevel) {
+        super.dropEquipment(serverLevel);
         if (this.isSaddled()) {
-            this.spawnAtLocation(Items.SADDLE);
+            this.spawnAtLocation(serverLevel, Items.SADDLE);
         }
     }
 

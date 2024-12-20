@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.BiFunction;
 
 public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlock, Snowable {
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty AMOUNT = BlockStateProperties.FLOWER_AMOUNT;
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
     private static final BiFunction<Direction, Integer, VoxelShape> SHAPE_BY_PROPERTIES = Util.memoize(
@@ -68,7 +68,7 @@ public class MossFlowersBlock extends AetherBushBlock implements BonemealableBlo
     }
 
     @Override
-    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
         super.onBlockExploded(state, level, pos, explosion);
         if (this.isSnowy(state)) {
             level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);

@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 public class ArtisansBenchBlock extends Block {
     public static final MapCodec<ArtisansBenchBlock> CODEC = simpleCodec(ArtisansBenchBlock::new);
     private static final Component CONTAINER_TITLE = Component.translatable("menu.aether_ii.artisans_bench");
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     protected static final VoxelShape SHAPE_BASE = Block.box(0.0, 0.0, 0.0, 16.0, 13.0, 16.0);
     protected static final VoxelShape SHAPE_NORTH = Shapes.or(
             Block.box(0.0, 13.0, 14.0, 16.0, 16.0, 16.0),

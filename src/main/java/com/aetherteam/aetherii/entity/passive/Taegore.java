@@ -4,10 +4,7 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
 import com.aetherteam.aetherii.entity.ai.goal.TaegorePanicGoal;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -53,7 +50,7 @@ public class Taegore extends AetherAnimal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
-        Taegore taegore = this.variantType.create(level);
+        Taegore taegore = this.variantType.create(level, EntitySpawnReason.BREEDING);
         return taegore;
     }
 }

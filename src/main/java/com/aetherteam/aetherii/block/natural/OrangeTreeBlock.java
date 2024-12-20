@@ -79,10 +79,10 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
      * [CODE COPY] - {@link net.minecraft.world.level.block.DoublePlantBlock#updateShape(BlockState, Direction, BlockState, LevelAccessor, BlockPos, BlockPos)}.
      */
     @Override
-    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess tickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState currentState, RandomSource randomSource) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
-        if (facing.getAxis() != Direction.Axis.Y || doubleBlockHalf == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.is(this) && facingState.getValue(HALF) != doubleBlockHalf) {
-            return doubleBlockHalf == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+        if (direction.getAxis() != Direction.Axis.Y || doubleBlockHalf == DoubleBlockHalf.LOWER != (direction == Direction.UP) || currentState.is(this) && currentState.getValue(HALF) != doubleBlockHalf) {
+            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canSurvive(levelReader, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, levelReader, tickAccess, blockPos, direction, currentPos, currentState, randomSource);
         } else {
             return Blocks.AIR.defaultBlockState();
         }
@@ -198,7 +198,7 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
      * @param explosion The {@link Explosion} affecting the block.
      */
     @Override
-    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
         super.onBlockExploded(state, level, pos, explosion);
         int age = state.getValue(AGE);
         if (age == DOUBLE_AGE_MAX) {

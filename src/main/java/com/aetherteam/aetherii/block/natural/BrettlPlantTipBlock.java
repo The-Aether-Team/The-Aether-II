@@ -9,7 +9,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
@@ -52,7 +51,7 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
     }
 
     @Override
-    public BlockState getStateForPlacement(LevelAccessor level) {
+    public BlockState getStateForPlacement(RandomSource randomSource) {
         return this.defaultBlockState().setValue(AGE, 0);
     }
 

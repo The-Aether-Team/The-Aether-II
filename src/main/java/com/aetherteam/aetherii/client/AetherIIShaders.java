@@ -2,26 +2,19 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.ShaderDefines;
+import net.minecraft.client.renderer.ShaderProgram;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceProvider;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 
-import java.io.IOException;
-
 public class AetherIIShaders {
-    private static ShaderInstance cloudCoverShader;
+    private static ShaderProgram cloudCoverShader = new ShaderProgram(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cloud_cover"), DefaultVertexFormat.POSITION_COLOR, ShaderDefines.EMPTY);
 
     public static void registerShaders(RegisterShadersEvent event) {
-        ResourceProvider resourceProvider = event.getResourceProvider();
-        try {
-            event.registerShader(new ShaderInstance(resourceProvider, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cloud_cover"), DefaultVertexFormat.POSITION_COLOR), instance -> cloudCoverShader = instance);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        event.registerShader(cloudCoverShader);
     }
 
-    public static ShaderInstance getCloudCoverShader() {
+    public static ShaderProgram getCloudCoverShader() {
         return cloudCoverShader;
     }
 }

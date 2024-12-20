@@ -8,7 +8,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.player.Input;
+import net.minecraft.client.player.ClientInput;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.sounds.Music;
 import net.minecraft.world.entity.player.Player;
@@ -116,7 +116,7 @@ public class AetherIIClientEventListeners {
 
     public static void onMovementInputUpdate(MovementInputUpdateEvent event) {
         Player player = event.getEntity();
-        Input input = event.getInput();
+        ClientInput input = event.getInput();
 
         player.getData(AetherIIDataAttachments.PLAYER).movementInput(player, input);
     }

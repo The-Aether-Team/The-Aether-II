@@ -9,8 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -62,7 +60,7 @@ public class ZephyrWebbingBall extends Fireball implements ItemSupplier {
                 this.onHit(hitResult);
             }
 
-            this.checkInsideBlocks();
+            this.applyEffectsFromBlocks();
             Vec3 vec3 = this.getDeltaMovement();
             double d0 = this.getX() + vec3.x();
             double d1 = this.getY() + vec3.y();

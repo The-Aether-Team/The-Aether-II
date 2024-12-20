@@ -9,8 +9,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -58,7 +59,7 @@ public class SwetAttachment implements INBTSerializable<CompoundTag> { //todo me
 
             //When the server loads the swet from nbt with read() it is created in dimension 0, because the this.entity has not loaded yet
             if (swet.level() != serverLevel) {
-                swet.changeDimension(new DimensionTransition(serverLevel, this.entity.position(), this.entity.getDeltaMovement(), this.entity.getYRot(), this.entity.getXRot(), DimensionTransition.DO_NOTHING));
+                swet.teleport(new TeleportTransition(serverLevel, this.entity.position(), this.entity.getDeltaMovement(), this.entity.getYRot(), this.entity.getXRot(), TeleportTransition.DO_NOTHING));
             } else {
                 this.entity.level().addFreshEntity(swet);
             }
@@ -133,7 +134,7 @@ public class SwetAttachment implements INBTSerializable<CompoundTag> { //todo me
             final CompoundTag compound = list.getCompound(i);
             compound.remove("Dimension");
 
-            final Swet swet = AetherIIEntityTypes.SWET.get().create(this.entity.level());
+            final Swet swet = AetherIIEntityTypes.SWET.get().create(this.entity.level(), EntitySpawnReason.TRIGGERED);
             swet.readAdditionalSaveData(compound);
 
             this.loadingSync = true;

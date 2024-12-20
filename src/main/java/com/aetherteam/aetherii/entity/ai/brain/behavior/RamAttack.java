@@ -66,7 +66,7 @@ public class RamAttack extends Behavior<AetherAnimal> {
                 }
                 if (blockPos != null) {
                     if (pOwner.distanceToSqr(target) < pOwner.getBbWidth() * pOwner.getBbWidth()) {
-                        if (pOwner.doHurtTarget(target)) {
+                        if (pOwner.doHurtTarget(pLevel, target)) {
                             this.finishRam(pLevel, pOwner);
                             pLevel.broadcastEntityEvent(pOwner, (byte) 61);
                             pLevel.playSound(null, pOwner, SoundEvents.GOAT_RAM_IMPACT, SoundSource.NEUTRAL, 1.0F, 1.0F);

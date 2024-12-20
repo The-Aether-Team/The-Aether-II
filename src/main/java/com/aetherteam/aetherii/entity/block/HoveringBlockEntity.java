@@ -132,14 +132,14 @@ public class HoveringBlockEntity extends Entity {
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
         Entity holdingPlayer = this.getHoldingPlayer();
         if (holdingPlayer != null) {
             this.held = false;
             this.launched = true;
             this.push(holdingPlayer.getViewVector(1.0F).x() * 2.5, holdingPlayer.getViewVector(1.0F).y() * 2.5, holdingPlayer.getViewVector(1.0F).z() * 2.5);
         }
-        return super.hurt(pSource, pAmount);
+        return false;
     }
 
     private void markShouldSettle() {
@@ -194,7 +194,7 @@ public class HoveringBlockEntity extends Entity {
     private void dropBlock(BlockState state) {
         if (this.level() instanceof ServerLevel serverLevel) {
             for (ItemStack stack : Block.getDrops(state, serverLevel, this.blockPosition(), null)) {
-                this.spawnAtLocation(stack);
+                this.spawnAtLocation(serverLevel, stack);
             }
             this.discard();
         }

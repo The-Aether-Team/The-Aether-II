@@ -79,7 +79,7 @@ public class Tempest extends Zephyr implements BlightMonster {
         }
     }
 
-    public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+    public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         if(isNight(level))
             return level.getDifficulty() != Difficulty.PEACEFUL && isValidSpawnBlock(level, pos) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random);
         else
@@ -99,7 +99,7 @@ public class Tempest extends Zephyr implements BlightMonster {
     }
 
     @Override
-    public boolean isInvulnerableTo(DamageSource source) {
+    public boolean isInvulnerableTo(ServerLevel serverLevel, DamageSource source) {
         return source.getDirectEntity() instanceof AreaEffectCloud || source.getDirectEntity() instanceof TempestThunderball;
     }
 

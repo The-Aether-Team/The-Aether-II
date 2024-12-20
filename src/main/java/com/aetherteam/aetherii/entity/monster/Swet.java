@@ -96,12 +96,12 @@ public class Swet extends Mob implements Enemy {
      *
      * @param swet   The {@link Swet} {@link EntityType}.
      * @param level  The {@link LevelAccessor}.
-     * @param reason The {@link MobSpawnType} reason.
+     * @param reason The {@link EntitySpawnReason} reason.
      * @param pos    The spawn {@link BlockPos}.
      * @param random The {@link RandomSource}.
      * @return Whether this entity can spawn, as a {@link Boolean}.
      */
-    public static boolean checkSwetSpawnRules(EntityType<? extends Swet> swet, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+    public static boolean checkSwetSpawnRules(EntityType<? extends Swet> swet, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SWET_SPAWNABLE_ON)
                 && level.getRawBrightness(pos, 0) <= 8
                 && level.getDifficulty() != Difficulty.PEACEFUL;

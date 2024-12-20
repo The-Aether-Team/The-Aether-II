@@ -1,17 +1,15 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.network.packet.clientbound.SetVehiclePacket;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Saddleable;
@@ -19,7 +17,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
@@ -54,7 +52,7 @@ public class EntityMixin {
         Level level = entity.level();
         if (level instanceof ServerLevel serverLevel) {
             if (serverLevel.dimension() == AetherIIDimensions.AETHER_HIGHLANDS_LEVEL) {
-                if (entity.getY() <= serverLevel.getMinBuildHeight() && !entity.isPassenger()) {
+                if (entity.getY() <= serverLevel.getMinY() && !entity.isPassenger()) {
                     if (entity instanceof Player || entity.isVehicle() || (entity instanceof Saddleable) && ((Saddleable) entity).isSaddled()) { // Checks if an entity is a player or a vehicle of a player.
                         entityFell(entity);
                     } else if (entity instanceof Projectile projectile && projectile.getOwner() instanceof Player) {
@@ -84,11 +82,12 @@ public class EntityMixin {
             ServerLevel destination = minecraftserver.getLevel(Level.OVERWORLD);
             if (destination != null) {
                 List<Entity> passengers = entity.getPassengers();
-                serverLevel.getProfiler().push("aether_fall");
+                ProfilerFiller profiler = Profiler.get();
+                profiler.push("aether_fall");
                 entity.setPortalCooldown();
-                DimensionTransition transition = new DimensionTransition(destination, new Vec3(entity.getX(), destination.getMaxBuildHeight(), entity.getZ()), entity.getDeltaMovement(), entity.getYRot(), entity.getXRot(), false, DimensionTransition.DO_NOTHING);
-                Entity target = entity.changeDimension(transition);
-                serverLevel.getProfiler().pop();
+                TeleportTransition transition = new TeleportTransition(destination, new Vec3(entity.getX(), destination.getMaxBuildHeight(), entity.getZ()), entity.getDeltaMovement(), entity.getYRot(), entity.getXRot(), false, TeleportTransition.DO_NOTHING);
+                Entity target = entity.teleport(transition);
+                profiler.pop();
                 // Check for passengers.
                 if (target != null) {
                     for (Entity passenger : passengers) {

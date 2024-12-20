@@ -3,9 +3,11 @@ package com.aetherteam.aetherii.client.gui.component.toast;
 import com.aetherteam.aetherii.AetherII;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.gui.components.toasts.ToastManager;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,6 +23,8 @@ public class GuidebookToast implements Toast {
     private final GuidebookToast.Icons icon;
     private long lastChanged;
     private boolean changed;
+    private Toast.Visibility wantedVisibility = Toast.Visibility.HIDE;
+
 
     public GuidebookToast(GuidebookToast.Type type, GuidebookToast.Icons icon) {
         this.type = type;
@@ -28,17 +32,28 @@ public class GuidebookToast implements Toast {
     }
 
     @Override
-    public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible) {
+    public Visibility getWantedVisibility() {
+        return this.wantedVisibility;
+    }
+
+    @Override
+    public void update(ToastManager toastManager, long timeSinceLastVisible) {
         if (this.changed) {
             this.lastChanged = timeSinceLastVisible;
             this.changed = false;
         }
-        guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
+        this.wantedVisibility = (double) (timeSinceLastVisible - this.lastChanged) >= 5000.0 * toastManager.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
+
+    }
+
+    @Override
+    public void render(GuiGraphics guiGraphics, Font font, long l) {
+
+        guiGraphics.blitSprite(RenderType::guiTextured, BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
         this.type.render(guiGraphics, this.width(), this.height());
         this.icon.render(guiGraphics, 6, 8);
-        guiGraphics.drawString(toastComponent.getMinecraft().font, Component.translatable("gui.aether_ii.toast.guidebook.description"), 32, 18, -724497, false);
+        guiGraphics.drawString(font, Component.translatable("gui.aether_ii.toast.guidebook.description"), 32, 18, -724497, false);
 
-        return (double) (timeSinceLastVisible - this.lastChanged) >= 5000.0 * toastComponent.getNotificationDisplayTimeMultiplier() ? Toast.Visibility.HIDE : Toast.Visibility.SHOW;
     }
 
     public enum Type implements StringRepresentable {

@@ -6,6 +6,6 @@ import net.minecraft.client.Minecraft;
 public class GuidebookUtil {
     public static void addGuidebookToast(GuidebookToast.Type toastType, GuidebookToast.Icons toastIcon) {
         GuidebookToast toast = new GuidebookToast(toastType, toastIcon);
-        Minecraft.getInstance().getToasts().addToast(toast);
+        Minecraft.getInstance().getToastManager().addToast(toast);
     }
 }

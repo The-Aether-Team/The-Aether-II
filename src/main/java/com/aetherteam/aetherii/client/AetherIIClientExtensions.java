@@ -4,8 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluidTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.mojang.blaze3d.shaders.FogShape;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Camera;
@@ -13,11 +11,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
@@ -31,19 +29,19 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 public class AetherIIClientExtensions {
     public static final IClientItemExtensions TAEGORE_HIDE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? FastColor.ARGB32.opaque(DyedItemColor.getOrDefault(stack, -3150087)) : -1;
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, -3150087) : -1;
         }
     };
     public static final IClientItemExtensions BURRUKAI_PELT = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? FastColor.ARGB32.opaque(DyedItemColor.getOrDefault(stack, -10380096)) : -1;
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, -10380096) : -1;
         }
     };
 
@@ -133,14 +131,13 @@ public class AetherIIClientExtensions {
         }
 
         @Override
-        public Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
-            return new Vector3f(170 / 255.0F, 226 / 255.0F, 149 / 255.0F);
+        public Vector4f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector4f fluidFogColor) {
+            return new Vector4f(170 / 255.0F, 226 / 255.0F, 149 / 255.0F, 1F);
         }
 
         @Override
-        public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTicks, float nearDistance, float farDistance, FogShape shape) {
-            RenderSystem.setShaderFogStart(0.0F);
-            RenderSystem.setShaderFogEnd(12.0F);
+        public FogParameters modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick, FogParameters fogParameters) {
+            return new FogParameters(0.0F, 12.0F, fogParameters.shape(), fogParameters.red(), fogParameters.green(), fogParameters.blue(), fogParameters.alpha());
         }
 
         @Override

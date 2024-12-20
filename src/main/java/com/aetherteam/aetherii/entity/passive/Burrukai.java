@@ -8,6 +8,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -105,13 +107,14 @@ public class Burrukai extends AetherAnimal implements IShearable {
     }
 
     @Override
-    protected void customServerAiStep() {
-        this.level().getProfiler().push("burrukaiBrain");
+    protected void customServerAiStep(ServerLevel serverLevel) {
+        ProfilerFiller profilerFiller = Profiler.get();
+        profilerFiller.push("burrukaiBrain");
         this.getBrain().tick((ServerLevel) this.level(), this);
-        this.level().getProfiler().pop();
-        this.level().getProfiler().push("burrukaiActivityUpdate");
+        profilerFiller.pop();
+        profilerFiller.push("burrukaiActivityUpdate");
         BurrukaiAi.updateActivity(this);
-        this.level().getProfiler().pop();
+        profilerFiller.pop();
     }
 
     @Override
@@ -123,7 +126,7 @@ public class Burrukai extends AetherAnimal implements IShearable {
     public SpawnGroupData finalizeSpawn(
             ServerLevelAccessor pLevel,
             DifficultyInstance pDifficulty,
-            MobSpawnType pReason,
+            EntitySpawnReason pReason,
             @Nullable SpawnGroupData pSpawnData
     ) {
         RandomSource randomsource = pLevel.getRandom();
@@ -134,13 +137,13 @@ public class Burrukai extends AetherAnimal implements IShearable {
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        boolean flag = super.hurt(pSource, pAmount);
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
+        boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
         if (this.level().isClientSide) {
             return false;
         } else {
             if (flag && pSource.getEntity() instanceof LivingEntity) {
-                BurrukaiAi.maybeRetaliate(this, (LivingEntity) pSource.getEntity());
+                BurrukaiAi.maybeRetaliate(serverLevel, this, (LivingEntity) pSource.getEntity());
             }
 
             return flag;

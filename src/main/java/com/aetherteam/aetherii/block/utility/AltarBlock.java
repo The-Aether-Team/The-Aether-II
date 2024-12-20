@@ -23,20 +23,19 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 
 public class AltarBlock extends BaseEntityBlock {
     public static final MapCodec<AltarBlock> CODEC = simpleCodec(AltarBlock::new);
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty CHARGING = AetherIIBlockStateProperties.ALTAR_CHARGING;
     public static final BooleanProperty BLASTING = AetherIIBlockStateProperties.ALTAR_BLASTING;
     protected static final VoxelShape SHAPE_BASE = Block.box(2.0, 0.0, 2.0, 14.0, 2.0, 14.0);
@@ -104,7 +103,7 @@ public class AltarBlock extends BaseEntityBlock {
                 double yOffset = random.nextDouble() * 4.0 / 16.0;
                 double zOffset = axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52 : multiplier;
 
-                Vector3f color = random.nextBoolean() ? new Vector3f(Vec3.fromRGB24(14403138).toVector3f()) : Vec3.fromRGB24(9721330).toVector3f();
+                int color = random.nextBoolean() ? 14403138 : 9721330;
 
                 level.addParticle(new DustParticleOptions(color, 1.0F), x + xOffset + (i * xOffset * 0.1), y + yOffset, z + zOffset + (i * zOffset * 0.1), xOffset * 0.5, 0.0, zOffset * 0.5);
                 level.addParticle(new DustParticleOptions(color, 1.0F), x - xOffset - (i * xOffset * 0.1), y + yOffset, z - zOffset - (i * zOffset * 0.1), -xOffset * 0.5, 0.0, -zOffset * 0.5);

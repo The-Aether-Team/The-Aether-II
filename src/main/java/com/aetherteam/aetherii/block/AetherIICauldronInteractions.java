@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +34,7 @@ public class AetherIICauldronInteractions {
             CauldronInteraction.fillBucket(state, level, pos, player, hand, stack, new ItemStack(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get()), (blockState) ->
                     blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL);
 
-    private static ItemInteractionResult emptySkyrootBucket(Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack, BlockState state, SoundEvent sound) {
+    private static InteractionResult emptySkyrootBucket(Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack, BlockState state, SoundEvent sound) {
         if (!level.isClientSide()) {
             Item item = stack.getItem();
             player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(AetherIIItems.SKYROOT_BUCKET.get())));
@@ -44,6 +44,6 @@ public class AetherIICauldronInteractions {
             level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
         }
-        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 }

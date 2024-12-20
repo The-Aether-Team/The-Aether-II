@@ -2,43 +2,23 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIFluids;
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.event.listeners.*;
+import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.entity.MoaRenderer;
-import com.aetherteam.aetherii.client.renderer.entity.layers.MoaFeathersLayer;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
-import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
-import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.components.MoaEggType;
-import com.aetherteam.aetherii.item.components.ReinforcementTier;
-import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
-import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
-import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.ModelManagerAccessor;
-import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.Holder;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-
-import java.math.BigDecimal;
-import java.math.MathContext;
 
 public class AetherIIClient {
     public static void clientInit(IEventBus bus) {
@@ -93,7 +73,8 @@ public class AetherIIClient {
     }
 
     public static void registerItemModelProperties() {
-        registerMoaFeatherProperties(AetherIIItems.MOA_FEATHER.get());
+        //TODO Properties Support in 1.21.4
+        /*registerMoaFeatherProperties(AetherIIItems.MOA_FEATHER.get());
 
         registerMoaEggProperties(AetherIIItems.MOA_EGG.get());
 
@@ -116,20 +97,21 @@ public class AetherIIClient {
 
         registerHealingStoneProperties(AetherIIItems.HEALING_STONE.get());
 
-        registerGenericProperties();
+        registerGenericProperties();*/
     }
 
     private static void registerMoaFeatherProperties(Item item) {
-        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), (stack, level, livingEntity, value) -> {
+
+        /*ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), (stack, level, livingEntity, value) -> {
             Moa.FeatherColor featherColor = stack.get(AetherIIDataComponents.FEATHER_COLOR);
             if (featherColor != null) {
                 return new BigDecimal((double) featherColor.ordinal() / Moa.FeatherColor.values().length, new MathContext(3)).floatValue();
             }
             return 0.0F;
-        });
+        });*/
     }
 
-    private static void registerMoaEggProperties(Item item) {
+    /*private static void registerMoaEggProperties(Item item) {
         ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "keratin_color"), (stack, level, livingEntity, value) -> {
             MoaEggType moaEggType = stack.get(AetherIIDataComponents.MOA_EGG_TYPE);
             if (moaEggType != null) {
@@ -194,9 +176,10 @@ public class AetherIIClient {
         };
         ItemProperties.registerGeneric(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), reinforcementProperty);
     }
-
+*/
     public static void registerTooltipOverrides() {
-        TooltipListeners.TooltipPredicate setBonusPredicate = (player, itemStack, components, context, component) -> {
+        //TODO TOOL TIP PORT IN 1.21.4
+        /*TooltipListeners.TooltipPredicate setBonusPredicate = (player, itemStack, components, context, component) -> {
             if (player != null && (itemStack.getItem() instanceof ArmorItem || itemStack.getItem() instanceof GlovesItem) && component.getString().contains("%s")) {
                 Holder<ArmorMaterial> material = null;
                 if (itemStack.getItem() instanceof ArmorItem armorItem) {
@@ -216,9 +199,9 @@ public class AetherIIClient {
                 }
             }
             return component;
-        };
+        };*/
 
-        TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_HELMET, setBonusPredicate);
+        /*TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_HELMET, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_LEGGINGS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_BOOTS, setBonusPredicate);
@@ -242,6 +225,6 @@ public class AetherIIClient {
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_CHESTPLATE, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_LEGGINGS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_BOOTS, setBonusPredicate);
-        TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_GLOVES, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_GLOVES, setBonusPredicate);*/
     }
 }

@@ -10,9 +10,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
@@ -73,8 +73,8 @@ public class AetherGrassBlock extends GrassBlock {
         } else if (blockState.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LightEngine.getLightBlockInto(level, state, pos, blockState, abovePos, Direction.UP, blockState.getLightBlock(level, abovePos));
-            return i < level.getMaxLightLevel();
+            int i = LightEngine.getLightBlockInto(state, blockState, Direction.UP, blockState.getLightEmission(level, abovePos));
+            return i < level.getMaxLocalRawBrightness(pos);
         }
     }
 
@@ -87,7 +87,7 @@ public class AetherGrassBlock extends GrassBlock {
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         BlockPos abovePos = pos.above();
         Block grass = AetherIIBlocks.AETHER_GRASS_BLOCK.get();
-        Optional<Holder.Reference<PlacedFeature>> grassFeatureOptional = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(HighlandsPlacedFeatures.AETHER_GRASS_BONEMEAL);
+        Optional<Holder.Reference<PlacedFeature>> grassFeatureOptional = level.registryAccess().lookupOrThrow(Registries.PLACED_FEATURE).get(HighlandsPlacedFeatures.AETHER_GRASS_BONEMEAL);
 
         start:
         for (int i = 0; i < 128; ++i) {
@@ -124,9 +124,10 @@ public class AetherGrassBlock extends GrassBlock {
         }
     }
 
+
     @Override
-    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        return facing == Direction.UP ? state.setValue(SNOWY, isSnowySetting(facingState)) : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState facingState, RandomSource randomSource) {
+        return direction == Direction.UP ? state.setValue(SNOWY, isSnowySetting(facingState)) : super.updateShape(state, levelReader, scheduledTickAccess, blockPos, direction, currentPos, facingState, randomSource);
     }
 
     @Override
@@ -148,8 +149,8 @@ public class AetherGrassBlock extends GrassBlock {
     }
 
     public static boolean shouldSnow(Biome biome, LevelReader level, BlockPos pos) {
-        if (!biome.warmEnoughToRain(pos)) {
-            if (pos.getY() >= level.getMinBuildHeight() && pos.getY() < level.getMaxBuildHeight() && level.getBrightness(LightLayer.BLOCK, pos) < 10) {
+        if (!biome.warmEnoughToRain(pos, level.getSeaLevel())) {
+            if (pos.getY() >= level.getMinY() && pos.getY() < level.getMaxY() && level.getBrightness(LightLayer.BLOCK, pos) < 10) {
                 BlockState blockState = level.getBlockState(pos);
                 return ((blockState.isAir() || blockState.is(AetherIIBlocks.ARCTIC_SNOW)) && AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState().canSurvive(level, pos)) || AetherGrassBlock.plantNotSnowed(blockState);
             }

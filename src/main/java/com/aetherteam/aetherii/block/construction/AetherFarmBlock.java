@@ -67,7 +67,7 @@ public class AetherFarmBlock extends FarmBlock {
      */
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        if (!level.isClientSide() && CommonHooks.onFarmlandTrample(level, pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(), fallDistance, entity)) { // Forge: Move logic to Entity#canTrample
+        if (!level.isClientSide() && level instanceof ServerLevel serverLevel && CommonHooks.onFarmlandTrample(serverLevel, pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState(), fallDistance, entity)) { // Forge: Move logic to Entity#canTrample
             turnToDirt(state, level, pos);
         }
         entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());

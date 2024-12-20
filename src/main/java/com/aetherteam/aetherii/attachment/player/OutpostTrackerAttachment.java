@@ -13,7 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
@@ -63,7 +63,7 @@ public class OutpostTrackerAttachment {
         }
     }
 
-    public DimensionTransition findOutpostRespawnLocation(Player player) {
+    public TeleportTransition findOutpostRespawnLocation(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
             if (this.shouldRespawnAtOutpost()) {
                 OutpostTrackerAttachment.CampfirePosition closest = this.findClosestPositionTo((ServerLevel) serverPlayer.level(), player.blockPosition());
@@ -75,7 +75,7 @@ public class OutpostTrackerAttachment {
                                 .filter((pos) -> serverLevel.getBlockState(pos).getBlock().isPossibleToRespawnInThis(serverLevel.getBlockState(pos)) && !serverLevel.getBlockState(pos).is(AetherIIBlocks.OUTPOST_CAMPFIRE)).findFirst();
                         if (newRespawnPos.isPresent()) {
                             ServerPlayer.RespawnPosAngle posAngle = new ServerPlayer.RespawnPosAngle(new Vec3((double) newRespawnPos.get().getX() + 0.5, (double) newRespawnPos.get().getY() + 0.1, (double) newRespawnPos.get().getZ() + 0.5), serverPlayer.getRespawnAngle());
-                            return new DimensionTransition(serverLevel, posAngle.position(), Vec3.ZERO, posAngle.yaw(), 0.0F, DimensionTransition.DO_NOTHING);
+                            return new TeleportTransition(serverLevel, posAngle.position(), Vec3.ZERO, posAngle.yaw(), 0.0F, TeleportTransition.DO_NOTHING);
                         }
                     }
                 }

@@ -50,7 +50,7 @@ public class SkyrootLizard extends AetherAnimal {
             ItemStack result = ItemUtils.createFilledResult(itemStack, playerEntity, AetherIIItems.SKYROOT_LIZARD_ON_A_STICK.get().getDefaultInstance());
             playerEntity.setItemInHand(hand, result);
             this.discard();
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
+            return InteractionResult.SUCCESS;
         } else {
             return super.mobInteract(playerEntity, hand);
         }

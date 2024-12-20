@@ -64,7 +64,7 @@ public class FlyingCow extends WingedAnimal {
             playerEntity.playSound(AetherIISoundEvents.ENTITY_FLYING_COW_MILK.get(), 1.0F, 1.0F);
             ItemStack itemStack1 = ItemUtils.createFilledResult(itemStack, playerEntity, Items.MILK_BUCKET.getDefaultInstance());
             playerEntity.setItemInHand(hand, itemStack1);
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
+            return InteractionResult.SUCCESS;
         } else {
             return super.mobInteract(playerEntity, hand);
         }
@@ -112,7 +112,7 @@ public class FlyingCow extends WingedAnimal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
-        return AetherIIEntityTypes.FLYING_COW.get().create(level);
+        return AetherIIEntityTypes.FLYING_COW.get().create(level, EntitySpawnReason.BREEDING);
     }
 
     @Override

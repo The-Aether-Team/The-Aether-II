@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 
 public class OutpostCampfireBlock extends MultiBlock {
     public static final MapCodec<OutpostCampfireBlock> CODEC = simpleCodec(OutpostCampfireBlock::new);
-    public static final DirectionProperty PART_FACING = DirectionProperty.create("part_facing", Direction.Plane.HORIZONTAL);
+    public static final EnumProperty<Direction> PART_FACING = EnumProperty.create("part_facing", Direction.class, Direction.Plane.HORIZONTAL);
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 5.0, 16.0);
 
@@ -118,7 +118,7 @@ public class OutpostCampfireBlock extends MultiBlock {
                     Direction xDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.X ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
                     Direction zDir = originState.getValue(PART_FACING).getAxis() == Direction.Axis.Z ? originState.getValue(PART_FACING) : originState.getValue(PART_FACING).getCounterClockWise();
                     this.activationParticles(level, new Vec3(originVec.x() + (xDir.getStepX() / 2.0), originVec.y(), originVec.z() + (zDir.getStepZ() / 2.0)), level.getRandom());
-                    return InteractionResult.sidedSuccess(level.isClientSide());
+                    return InteractionResult.SUCCESS;
                 }
             }
         }

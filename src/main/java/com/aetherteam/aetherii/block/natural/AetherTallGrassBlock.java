@@ -72,7 +72,7 @@ public class AetherTallGrassBlock extends TallGrassBlock implements Snowable {
     }
 
     @Override
-    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
         super.onBlockExploded(state, level, pos, explosion);
         if (this.isSnowy(state)) {
             level.setBlock(pos, AetherIIBlocks.ARCTIC_SNOW.get().defaultBlockState(), 1 | 2);

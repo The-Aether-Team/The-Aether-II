@@ -3,9 +3,11 @@ package com.aetherteam.aetherii.block.furniture;
 import com.aetherteam.aetherii.blockentity.MultiBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,16 +17,17 @@ public abstract class MultiBlock extends BaseEntityBlock {
         super(properties);
     }
 
+
     @Override
-    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (level.getBlockEntity(pos) instanceof MultiBlockEntity multiblock) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
+        if (levelReader.getBlockEntity(pos) instanceof MultiBlockEntity multiblock) {
             if (multiblock.getLevelOriginPos() != null) {
-                if (!level.getBlockState(multiblock.getLevelOriginPos()).is(state.getBlock())) {
+                if (!levelReader.getBlockState(multiblock.getLevelOriginPos()).is(state.getBlock())) {
                     return Blocks.AIR.defaultBlockState();
                 }
             }
         }
-        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+        return super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
     }
 
     @Override

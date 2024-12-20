@@ -28,6 +28,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.profiling.Profiler;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -123,7 +125,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     public SpawnGroupData finalizeSpawn(
             ServerLevelAccessor pLevel,
             DifficultyInstance pDifficulty,
-            MobSpawnType pReason,
+            EntitySpawnReason pReason,
             @javax.annotation.Nullable SpawnGroupData pSpawnData
     ) {
         RandomSource randomsource = pLevel.getRandom();
@@ -194,13 +196,14 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    protected void customServerAiStep() {
-        this.level().getProfiler().push("kirridBrain");
+    protected void customServerAiStep(ServerLevel serverLevel) {
+        ProfilerFiller profilerFiller = Profiler.get();
+        profilerFiller.push("kirridBrain");
         this.getBrain().tick((ServerLevel) this.level(), this);
-        this.level().getProfiler().pop();
-        this.level().getProfiler().push("kirridActivityUpdate");
+        profilerFiller.pop();
+        profilerFiller.push("kirridActivityUpdate");
         KirridAi.updateActivity(this);
-        this.level().getProfiler().pop();
+        profilerFiller.pop();
 
         if (this.woolGrowTime >= 2400) {
             this.setSheared(false);
@@ -244,7 +247,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
         this.wasOnGround = this.onGround();
 
-        super.customServerAiStep();
+        super.customServerAiStep(serverLevel);
     }
 
     @Override
@@ -288,8 +291,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void shear(SoundSource source) {
-        this.level().playSound(null, this, AetherIISoundEvents.ENTITY_SHEEPUFF_SHEAR.get(), source, 1.0F, 1.0F);
+    public void shear(ServerLevel serverLevel, SoundSource soundSource, ItemStack stack) {
+        this.level().playSound(null, this, AetherIISoundEvents.ENTITY_SHEEPUFF_SHEAR.get(), soundSource, 1.0F, 1.0F);
         this.setSheared(true);
         int i = 1;
         i += this.getRandom().nextInt(3);
@@ -299,7 +302,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
             if (this.getColor().isPresent()) {
                 itemLike = KirridColor.CLOUDWOOL_BY_KIRRID_COLOR.get(this.getColor().get());
             }
-            ItemEntity itementity = this.spawnAtLocation(itemLike, 1);
+            ItemEntity itementity = this.spawnAtLocation(serverLevel, itemLike.asItem(), 1);
             if (itementity != null) {
                 itementity.setDeltaMovement(itementity.getDeltaMovement().add((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.1F, this.getRandom().nextFloat() * 0.05F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.1F));
             }
@@ -545,7 +548,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
         Kirrid parent = (Kirrid) pOtherParent;
-        Kirrid baby = this.variantType.create(pLevel);
+        Kirrid baby = this.variantType.create(pLevel, EntitySpawnReason.BREEDING);
         if (baby != null) {
             KirridAi.initMemories(baby, this.random);
             baby.setColor(this.getOffspringColor(this, parent));
@@ -565,7 +568,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         } else {
             CraftingInput craftinginput = makeCraftInput(color1.get().getDyeColor(), color2.get().getDyeColor());
             return Optional.of(this.level()
-                    .getRecipeManager()
+                    .recipeAccess()
                     .getRecipeFor(RecipeType.CRAFTING, craftinginput, this.level())
                     .map(p_352802_ -> p_352802_.value().assemble(craftinginput, this.level().registryAccess()))
                     .map(ItemStack::getItem)

@@ -1,8 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -14,12 +12,13 @@ public class BlocksLightLeaves extends AetherLeavesBlock {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter getter, BlockPos pos) {
+    public boolean propagatesSkylightDown(BlockState state) {
         return false;
     }
 
-    @Override
-    public int getLightBlock(BlockState state, BlockGetter getter, BlockPos pos) {
+    //TODO
+    /*@Override
+    public int getLightBlock(BlockState state) {
         return getter.getMaxLightLevel();
-    }
+    }*/
 }

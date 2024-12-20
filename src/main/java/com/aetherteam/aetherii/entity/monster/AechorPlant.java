@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -59,7 +60,7 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
     @Nullable
     @Override
     @SuppressWarnings("deprecation")
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
         this.setPos(Vec3.atBottomCenterOf(this.blockPosition()));
         return spawnData;
     }
@@ -70,16 +71,16 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
      *
      * @param aechorPlant The {@link AechorPlant} {@link EntityType}.
      * @param level       The {@link LevelAccessor}.
-     * @param reason      The {@link MobSpawnType} reason.
+     * @param reason      The {@link EntitySpawnReason} reason.
      * @param pos         The spawn {@link BlockPos}.
      * @param random      The {@link RandomSource}.
      * @return Whether this entity can spawn, as a {@link Boolean}.
      */
-    public static boolean checkAechorPlantSpawnRules(EntityType<? extends AechorPlant> aechorPlant, LevelAccessor level, MobSpawnType reason, BlockPos pos, RandomSource random) {
+    public static boolean checkAechorPlantSpawnRules(EntityType<? extends AechorPlant> aechorPlant, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON)
                 && level.getRawBrightness(pos, 0) > 8
                 && level.getDifficulty() != Difficulty.PEACEFUL
-                && (reason != MobSpawnType.NATURAL || random.nextInt(10) == 0);
+                && (reason != EntitySpawnReason.NATURAL || random.nextInt(10) == 0);
     }
 
     /**
@@ -89,7 +90,9 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
     public void tick() {
         super.tick();
         if (!this.level().getBlockState(this.blockPosition().below()).is(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON) && !this.isPassenger()) {
-            this.kill();
+            if (this.level() instanceof ServerLevel serverLevel) {
+                this.kill(serverLevel);
+            }
         }
         if (!this.level().isClientSide()) {
             if (this.getTarget() != null) {
