@@ -1,10 +1,5 @@
 {
   "parent": "minecraft:item/generated",
-<<<<<<< HEAD
-  "textures": {
-    "layer0": "aether_ii:item/miscellaneous/moa_egg"
-  }
-=======
   "overrides": [
     {
       "model": "aether_ii:item/moa_egg_curved_keratin_blue_eyes_blue_feather_black",
@@ -7297,5 +7292,4 @@
       }
     }
   ]
->>>>>>> 1.21.1-develop
 }
