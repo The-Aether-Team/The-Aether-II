@@ -2,10 +2,13 @@ package com.aetherteam.aetherii.item;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIJukeboxSongs;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.consumables.CurativeItem;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.consumables.PreventativeItem;
@@ -62,14 +65,8 @@ import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteShortswordIte
 import com.aetherteam.aetherii.item.equipment.weapons.zanite.ZaniteSpearItem;
 import com.aetherteam.aetherii.item.materials.*;
 import com.aetherteam.aetherii.item.miscellaneous.*;
-import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
-import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootMilkBucketItem;
-import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootMobBucketItem;
-import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootSolidBucketItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.BlueAercloudGliderItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.GoldenAercloudGliderItem;
-import com.aetherteam.aetherii.item.miscellaneous.glider.PurpleAercloudGliderItem;
+import com.aetherteam.aetherii.item.miscellaneous.bucket.*;
+import com.aetherteam.aetherii.item.miscellaneous.glider.*;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.Accessory;
 import net.minecraft.core.component.DataComponents;
@@ -225,9 +222,18 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GOLDEN_SWET_GEL = ITEMS.register("golden_swet_gel", () -> new SwetGelItem(new Item.Properties()));
     public static final DeferredItem<Item> WHITE_SWET_GEL = ITEMS.register("white_swet_gel", () -> new SwetGelItem(new Item.Properties()));
     public static final DeferredItem<Item> SWET_SUGAR = ITEMS.register("swet_sugar", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> MOA_FEATHER = ITEMS.register("moa_feather", () -> new MoaFeatherItem(new Item.Properties().component(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.BLUE)));
+    public static final DeferredItem<Item> COCKATRICE_FEATHER = ITEMS.register("cockatrice_feather", () -> new Item(new Item.Properties()));
 
-    public static final DeferredItem<Item> SCATTERGLASS_VIAL = ITEMS.register("scatterglass_vial", () -> new VialItem(new Item.Properties()));
+    public static final DeferredItem<Item> SCATTERGLASS_VIAL = ITEMS.register("scatterglass_vial", () -> new VialItem(new Item.Properties().stacksTo(8)));
     public static final DeferredItem<Item> CHARGE_CORE = ITEMS.register("charge_core", () -> new TreasureItem(new Item.Properties()));
+
+    // Irradiated Items
+    public static final DeferredItem<Item> IRRADIATED_ARMOR = ITEMS.register("irradiated_armor", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> IRRADIATED_WEAPON = ITEMS.register("irradiated_weapon", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> IRRADIATED_TOOL = ITEMS.register("irradiated_tool", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> IRRADIATED_CHUNK = ITEMS.register("irradiated_chunk", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> IRRADIATED_DUST = ITEMS.register("irradiated_dust", () -> new IrradiatedDustItem(new Item.Properties()));
 
     // Food
     public static final DeferredItem<Item> BLUEBERRY = ITEMS.register("blueberry", () -> new Item(new Item.Properties().food(AetherIIFoods.BLUEBERRY)));
@@ -251,12 +257,12 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ROASTED_SKYROOT_LIZARD_ON_A_STICK = ITEMS.register("roasted_skyroot_lizard_on_a_stick", () -> new Item(new Item.Properties().food(AetherIIFoods.ROASTED_SKYROOT_LIZARD_ON_A_STICK)));
 
     // Consumables
-    public static final DeferredItem<Item> WATER_VIAL = ITEMS.register("water_vial", () -> new WaterVialItem(new Item.Properties()));
+    public static final DeferredItem<Item> WATER_VIAL = ITEMS.register("water_vial", () -> new WaterVialItem(new Item.Properties().stacksTo(8)));
     public static final DeferredItem<Item> BANDAGE = ITEMS.register("bandage", () -> new PreventativeItem(UseAnim.BOW, 15, AetherIIPreventatives.BANDAGE, new Item.Properties()));
     public static final DeferredItem<Item> SPLINT = ITEMS.register("splint", () -> new CurativeItem(UseAnim.BOW, 15, AetherIIEffectCures.SPLINT, new Item.Properties()));
-    public static final DeferredItem<Item> ANTITOXIN_VIAL = ITEMS.register("antitoxin_vial", () -> new PreventativeItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIPreventatives.ANTITOXIN_VIAL, new Item.Properties()));
-    public static final DeferredItem<Item> ANTIVENOM_VIAL = ITEMS.register("antivenom_vial", () -> new PreventativeItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIPreventatives.ANTIVENOM_VIAL, new Item.Properties()));
-    public static final DeferredItem<Item> VALKYRIE_TEA = ITEMS.register("valkyrie_tea", () -> new TeaItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIEffects.SATURATION_BOOST, new Item.Properties()));
+    public static final DeferredItem<Item> ANTITOXIN_VIAL = ITEMS.register("antitoxin_vial", () -> new PreventativeItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIPreventatives.ANTITOXIN_VIAL, new Item.Properties().stacksTo(8)));
+    public static final DeferredItem<Item> ANTIVENOM_VIAL = ITEMS.register("antivenom_vial", () -> new PreventativeItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIPreventatives.ANTIVENOM_VIAL, new Item.Properties().stacksTo(8)));
+    public static final DeferredItem<Item> VALKYRIE_TEA = ITEMS.register("valkyrie_tea", () -> new TeaItem(UseAnim.DRINK, 15, () -> AetherIIItems.SCATTERGLASS_VIAL.get().getDefaultInstance(), AetherIIEffects.SATURATION_BOOST, new Item.Properties().stacksTo(8)));
     public static final DeferredItem<Item> HEALING_STONE = ITEMS.register("healing_stone", () -> new HealingStoneItem(new Item.Properties().stacksTo(1).component(AetherIIDataComponents.HEALING_STONE_CHARGES, 0)));
 
     // Gliders
@@ -276,6 +282,11 @@ public class AetherIIItems {
     public static final DeferredItem<Item> SKYROOT_TROPICAL_FISH_BUCKET = ITEMS.register("skyroot_tropical_fish_bucket", () -> new SkyrootMobBucketItem(EntityType.TROPICAL_FISH, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().craftRemainder(SKYROOT_BUCKET.get()).stacksTo(1)));
     public static final DeferredItem<Item> SKYROOT_AXOLOTL_BUCKET = ITEMS.register("skyroot_axolotl_bucket", () -> new SkyrootMobBucketItem(EntityType.AXOLOTL, Fluids.WATER, SoundEvents.BUCKET_EMPTY_AXOLOTL, new Item.Properties().craftRemainder(SKYROOT_BUCKET.get()).stacksTo(1)));
     public static final DeferredItem<Item> SKYROOT_TADPOLE_BUCKET = ITEMS.register("skyroot_tadpole_bucket", () -> new SkyrootMobBucketItem(EntityType.TADPOLE, Fluids.WATER, SoundEvents.BUCKET_EMPTY_TADPOLE, new Item.Properties().craftRemainder(SKYROOT_BUCKET.get()).stacksTo(1)));
+
+    // Arkenium Canisters
+    public static final DeferredItem<Item> ARKENIUM_CANISTER = ITEMS.register("arkenium_canister", () -> new ArkeniumCanisterItem(Fluids.EMPTY, new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> ARKENIUM_ACID_CANISTER = ITEMS.register("arkenium_acid_canister", () -> new ArkeniumCanisterItem(AetherIIFluids.ACID.get(), new Item.Properties().stacksTo(1).craftRemainder(ARKENIUM_CANISTER.get())));
+    public static final DeferredItem<Item> ARKENIUM_GAS_CANISTER = ITEMS.register("arkenium_gas_canister", () -> new SolidCanisterItem(AetherIIBlocks.GAS.get(), SoundEvents.BUCKET_EMPTY_POWDER_SNOW, new Item.Properties().stacksTo(1).craftRemainder(ARKENIUM_CANISTER.get()))); //todo
 
     // Music Discs
     public static final DeferredItem<Item> MUSIC_DISC_AETHER_TUNE = ITEMS.register("music_disc_aether_tune", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(AetherIIJukeboxSongs.AETHER_TUNE)));
@@ -309,6 +320,7 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> SKEPHID_SPAWN_EGG = ITEMS.register("skephid_spawn_egg", () -> new DeferredSpawnEggItem(AetherIIEntityTypes.SKEPHID, 0x7D96AB, 0xF7CC94, new Item.Properties()));
 
     // Misc
+    public static final DeferredItem<Item> MOA_EGG = ITEMS.register("moa_egg", () -> new MoaEggItem(new Item.Properties().stacksTo(1).component(AetherIIDataComponents.MOA_EGG_TYPE.get(), MoaEggType.defaultType())));
     public static final DeferredItem<Item> MOA_FEED = ITEMS.register("moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> BLUEBERRY_MOA_FEED = ITEMS.register("blueberry_moa_feed", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ENCHANTED_MOA_FEED = ITEMS.register("enchanted_moa_feed", () -> new Item(new Item.Properties()));

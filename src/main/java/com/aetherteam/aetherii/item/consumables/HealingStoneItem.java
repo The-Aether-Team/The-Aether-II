@@ -44,9 +44,7 @@ public class HealingStoneItem extends Item {
                 player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.AMBROSIUM_POISONING, 350);
                 if (player.getHealth() + 8.0F > player.getMaxHealth()) {
                     if (!player.getAttribute(Attributes.MAX_ABSORPTION).hasModifier(BONUS_ABSORPTION)) {
-                        AetherII.LOGGER.info(Mth.floor(player.getHealth()) + " " + player.getMaxHealth());
                         float absorption = Mth.floor(player.getHealth()) + 8.0F - player.getMaxHealth();
-                        AetherII.LOGGER.info(String.valueOf(absorption));
                         player.getAttribute(Attributes.MAX_ABSORPTION).addTransientModifier(new AttributeModifier(BONUS_ABSORPTION, absorption, AttributeModifier.Operation.ADD_VALUE));
                         player.setAbsorptionAmount(Math.max(player.getAbsorptionAmount(), absorption));
                     }

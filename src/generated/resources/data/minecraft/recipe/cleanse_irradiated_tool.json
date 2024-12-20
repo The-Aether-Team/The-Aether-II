@@ -1,0 +1,148 @@
+{
+  "type": "aether_ii:irradiation_cleansing",
+  "ingredient": {
+    "item": "aether_ii:irradiated_tool"
+  },
+  "results": [
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:skyroot_axe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:holystone_axe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_axe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_axe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_axe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:skyroot_pickaxe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:holystone_pickaxe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_pickaxe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_pickaxe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_pickaxe"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:skyroot_shovel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:holystone_shovel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_shovel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_shovel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_shovel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:skyroot_trowel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:holystone_trowel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_trowel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_trowel"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_trowel"
+      },
+      "weight": 1
+    }
+  ]
+}

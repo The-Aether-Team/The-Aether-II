@@ -1,0 +1,9 @@
+{
+  "type": "aether_ii:dust_irradiation",
+  "ingredient": {
+    "block": "aether_ii:greatoak_leaves"
+  },
+  "result": {
+    "block": "aether_ii:irradiated_greatoak_leaves"
+  }
+}

@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.item.materials;
 
-import com.aetherteam.aetherii.client.AetherIIClientItemExtensions;
 import com.aetherteam.aetherii.entity.projectile.HolystoneRock;
 import com.aetherteam.aetherii.item.miscellaneous.ThrowableItem;
 import net.minecraft.sounds.SoundEvents;
@@ -16,9 +15,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-
-import java.util.function.Consumer;
 
 public class RockItem extends BlockItem implements ThrowableItem {
     public RockItem(Block block, Properties properties) {

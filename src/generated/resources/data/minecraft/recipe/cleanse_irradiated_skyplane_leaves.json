@@ -1,0 +1,16 @@
+{
+  "type": "aether_ii:irradiation_cleansing",
+  "group": "irradiated_leaves",
+  "ingredient": {
+    "item": "aether_ii:irradiated_skyplane_leaves"
+  },
+  "results": [
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:skyplane_leaves"
+      },
+      "weight": 1
+    }
+  ]
+}

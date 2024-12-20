@@ -1,25 +1,26 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIMoaFeatherShapes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
+import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.brain.MoaAi;
 import com.aetherteam.aetherii.entity.ai.navigator.FallPathNavigation;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -48,15 +49,17 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Arrays;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
 public class Moa extends MountableAnimal {
     private static final EntityDataAccessor<Optional<UUID>> DATA_MOA_UUID_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
-    private static final EntityDataAccessor<Holder<MoaFeatherShape>> DATA_FEATHER_SHAPE_ID = SynchedEntityData.defineId(Moa.class, AetherIIDataSerializers.MOA_FEATHER_SHAPE.value());
-    private static final EntityDataAccessor<Integer> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_EYE_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<String> DATA_FEATHER_SHAPE_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<String> DATA_KERATIN_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<String> DATA_EYE_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<String> DATA_FEATHER_COLOR = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Optional<UUID>> DATA_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Optional<UUID>> DATA_LAST_RIDER_UUID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Integer> DATA_REMAINING_JUMPS_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.INT);
@@ -131,10 +134,10 @@ public class Moa extends MountableAnimal {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_MOA_UUID_ID, Optional.empty());
-        builder.define(DATA_FEATHER_SHAPE_ID, AetherIIMoaFeatherShapes.getRegistry(this.registryAccess()).getHolderOrThrow(AetherIIMoaFeatherShapes.CURVED));
-        builder.define(DATA_KERATIN_COLOR, KeratinColor.TEMPEST.getColor());
-        builder.define(DATA_EYE_COLOR, EyeColor.PORTAGE.getColor());
-        builder.define(DATA_FEATHER_COLOR, FeatherColor.BLUE.getColor());
+        builder.define(DATA_FEATHER_SHAPE_ID, FeatherShape.CURVED.getSerializedName());
+        builder.define(DATA_KERATIN_COLOR, KeratinColor.GRAY.getSerializedName());
+        builder.define(DATA_EYE_COLOR, EyeColor.BLUE.getSerializedName());
+        builder.define(DATA_FEATHER_COLOR, FeatherColor.LIGHT_BLUE.getSerializedName());
         builder.define(DATA_RIDER_UUID, Optional.empty());
         builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
         builder.define(DATA_REMAINING_JUMPS_ID, 0);
@@ -202,42 +205,15 @@ public class Moa extends MountableAnimal {
             Moa.KeratinColor keratinColor = Moa.KeratinColor.getRandom(this.getRandom());
             Moa.EyeColor eyeColor = Moa.EyeColor.getRandom(this.getRandom());
             Moa.FeatherColor featherColor = Moa.FeatherColor.getRandom(this.getRandom());
-            this.setKeratinColor(keratinColor.getColor());
-            this.setEyeColor(eyeColor.getColor());
-            this.setFeatherColor(featherColor.getColor());
+            Moa.FeatherShape featherShape = Moa.FeatherShape.getRandom(this.getRandom());
+            this.setKeratinColor(keratinColor.getSerializedName());
+            this.setEyeColor(eyeColor.getSerializedName());
+            this.setFeatherColor(featherColor.getSerializedName());
+            this.setFeatherShape(featherShape.getSerializedName());
         }
-
-
-//        if (tag != null) { // Applies NBT when spawned from incubation.
-//            if (tag.contains("IsBaby")) {
-//                this.setBaby(tag.getBoolean("IsBaby"));
-//            }
-//            if (tag.contains("MoaType")) {
-//                ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), tag.getString("MoaType"));
-//                if (moaTypeKey != null) {
-//                    this.setMoaTypeByKey(moaTypeKey);
-//                }
-//            }
-//            if (tag.contains("Hungry")) {
-//                this.setHungry(tag.getBoolean("Hungry"));
-//            }
-//            if (tag.contains("PlayerGrown")) {
-//                this.setPlayerGrown(tag.getBoolean("PlayerGrown"));
-//            }
-//        }
         if (spawnData == null) { // Disallow baby Moas from spawning in spawn groups.
             spawnData = new AgeableMob.AgeableMobGroupData(false);
         }
-//        if (this.getMoaType() == null) { // A random Moa Type to set during natural spawning.
-//            MoaType moaType = AetherIIMoaTypes.getWeightedChance(level.registryAccess(), this.getRandom());
-//            ResourceKey<MoaType> moaTypeKey = AetherIIMoaTypes.getResourceKey(level.registryAccess(), moaType);
-//            if (moaTypeKey != null) {
-//                this.setMoaTypeByKey(moaTypeKey);
-//            }
-//        }
-//        if (this.getMoaType() == null) {
-//            this.setMoaTypeByKey(AetherIIMoaTypes.BLUE);
-//        }
         if (reason == MobSpawnType.STRUCTURE) {
             //set moa home when spawn in nest
             MoaAi.initMoaHomeMemories(this, this.random);
@@ -298,6 +274,11 @@ public class Moa extends MountableAnimal {
             if (this.getRandom().nextInt(900) == 0 && this.deathTime == 0) {
                 this.heal(1.0F);
             }
+            if (!this.isBaby() && this.getRandom().nextInt(5000) == 0) {
+                ItemStack featherStack = new ItemStack(AetherIIItems.MOA_FEATHER.get());
+                featherStack.set(AetherIIDataComponents.FEATHER_COLOR, FeatherColor.valueOf(this.getFeatherColor().toUpperCase(Locale.ROOT)));
+                this.spawnAtLocation(featherStack);
+            }
             //TODO MOA EGG LAY
 //            if (!this.isBaby() && this.getPassengers().isEmpty() && --this.eggTime <= 0) {
 //                MoaType moaType = this.getMoaType();
@@ -341,10 +322,22 @@ public class Moa extends MountableAnimal {
             if (this.getRider() == null) {
                 this.setRider(player.getUUID());
             }
+//            if (!this.isEntityOnGround()) {
+//                if (!this.isFallFlying()) {
+//                    this.setSharedFlag(7, true);
+//                }
+//            } else {
+//                if (this.isFallFlying()) {
+//                    this.setSharedFlag(7, false);
+//                }
+//            }
         } else {
             if (this.getRider() != null) {
                 this.setRider(null);
             }
+//            if (this.isFallFlying()) {
+//                this.setSharedFlag(7, false);
+//            }
         }
 
         // Handles flap cooldown for sounds.
@@ -384,13 +377,6 @@ public class Moa extends MountableAnimal {
             if (this.getLastRider() == null || this.getLastRider() != player.getUUID()) {
                 this.setLastRider(player.getUUID());
             }
-            /*if (!player.level().isClientSide()) {
-                player.getData(AetherDataAttachments.AETHER_PLAYER).setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setLastRiddenMoa", this.getMoaUUID()); // Tracks the player as having last ridden this Moa.
-                Map<UUID, MoaData> userSkinsData = ServerPerkData.MOA_SKIN_INSTANCE.getServerPerkData(player.getServer());
-                if (userSkinsData.containsKey(this.getLastRider())) { // Tracks a Moa Skin as being tied to this Moa and this passenger.
-                    ServerPerkData.MOA_SKIN_INSTANCE.applyPerkWithVerification(player.getServer(), this.getLastRider(), new MoaData(this.getMoaUUID(), userSkinsData.get(this.getLastRider()).moaSkin()));
-                }
-            }*/
         }
         super.addPassenger(passenger);
     }
@@ -435,8 +421,21 @@ public class Moa extends MountableAnimal {
         if (!this.onGround()) {
             this.setRemainingJumps(this.getRemainingJumps() - 1);
             this.spawnExplosionParticle();
+            if (this.getControllingPassenger() instanceof Player && this.isFallFlying()) {
+                Vec3 vec31 = this.getLookAngle();
+                Vec3 vec32 = this.getDeltaMovement();
+                this.setDeltaMovement(vec32.add(vec31.x * 0.1D + (vec31.x * 1.5D - vec32.x) * 0.5D, vec31.y * 0.1D + (vec31.y * 1.5D - vec32.y) * 0.5D, vec31.z * 0.1D + (vec31.z * 1.5D - vec32.z) * 0.5D).scale(1.5));
+            }
         }
         this.setFlapCooldown(0); // Causes the flap sound to be played in Moa#riderTick().
+    }
+
+    @Override
+    public Vec3 getLookAngle() {
+        if (this.getControllingPassenger() instanceof Player player) {
+            return player.getLookAngle();
+        }
+        return super.getLookAngle();
     }
 
     /**
@@ -449,36 +448,56 @@ public class Moa extends MountableAnimal {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
-        if (this.isPlayerGrown() && player.isShiftKeyDown()) {
-            this.setSitting(!this.isSitting());
-
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
-        } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
-            if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
+        if (itemStack.is(AetherIIItems.MOA_EGG)) {
+            if (!this.level().isClientSide()) {
+                MoaEggType type = itemStack.get(AetherIIDataComponents.MOA_EGG_TYPE);
+                if (type != null) {
+                    Moa moa = AetherIIEntityTypes.MOA.get().create(this.level());
+                    if (moa != null) {
+                        Vec3 vec3 = this.blockPosition().getCenter();
+                        moa.setBaby(false);
+                        moa.setPlayerGrown(true);
+                        moa.setKeratinColor(type.keratinColor().getSerializedName());
+                        moa.setEyeColor(type.eyeColor().getSerializedName());
+                        moa.setFeatherColor(type.featherColor().getSerializedName());
+                        moa.setFeatherShape(type.featherShape().getSerializedName());
+                        moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
+                        this.level().addFreshEntity(moa);
+                        return InteractionResult.sidedSuccess(false);
+                    }
+                }
             }
-            this.setAmountFed(this.getAmountFed() + 1);
-            switch (this.getAmountFed()) {
-                case 0 -> this.setAge(-24000);
-                case 1 -> this.setAge(-16000);
-                case 2 -> this.setAge(-8000);
-                case 3 -> this.setBaby(false);
-            }
-            if (this.getAmountFed() > 3 && !this.isBaby()) {
-                this.setBaby(false);
-            }
-            this.setHungry(false);
-            //PacketDistributor.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
-            return InteractionResult.CONSUME;
-        } else if (this.isPlayerGrown() && !this.isBaby() && this.getHealth() < this.getMaxHealth() && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Heals a tamed Moa.
-            if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
-            }
-            this.heal(5.0F);
-            return InteractionResult.sidedSuccess(this.level().isClientSide());
         } else {
-            return super.mobInteract(player, hand);
+            if (this.isPlayerGrown() && player.isShiftKeyDown()) {
+                this.setSitting(!this.isSitting());
+
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
+            } else if (!this.level().isClientSide() && this.isPlayerGrown() && this.isBaby() && this.isHungry() && this.getAmountFed() < 3 && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Feeds a hungry baby Moa.
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+                this.setAmountFed(this.getAmountFed() + 1);
+                switch (this.getAmountFed()) {
+                    case 0 -> this.setAge(-24000);
+                    case 1 -> this.setAge(-16000);
+                    case 2 -> this.setAge(-8000);
+                    case 3 -> this.setBaby(false);
+                }
+                if (this.getAmountFed() > 3 && !this.isBaby()) {
+                    this.setBaby(false);
+                }
+                this.setHungry(false);
+                //PacketDistributor.sendToAll(new MoaInteractPacket(player.getId(), hand == InteractionHand.MAIN_HAND)); // Packet necessary to play animation because this code segment is server-side only, so no animations.
+                return InteractionResult.CONSUME;
+            } else if (this.isPlayerGrown() && !this.isBaby() && this.getHealth() < this.getMaxHealth() && itemStack.is(AetherIITags.Items.MOA_FOOD)) { // Heals a tamed Moa.
+                if (!player.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+                this.heal(5.0F);
+                return InteractionResult.sidedSuccess(this.level().isClientSide());
+            }
         }
+        return super.mobInteract(player, hand);
     }
 
     public void spawnExplosionParticle() {
@@ -513,35 +532,35 @@ public class Moa extends MountableAnimal {
         this.getEntityData().set(DATA_MOA_UUID_ID, Optional.ofNullable(uuid));
     }
 
-    public Holder<MoaFeatherShape> getFeatherShape() {
+    public String getFeatherShape() {
         return this.entityData.get(DATA_FEATHER_SHAPE_ID);
     }
 
-    public void setFeatherShape(Holder<MoaFeatherShape> shape) {
+    public void setFeatherShape(String shape) {
         this.entityData.set(DATA_FEATHER_SHAPE_ID, shape);
     }
 
-    public int getKeratinColor() {
+    public String getKeratinColor() {
         return this.entityData.get(DATA_KERATIN_COLOR);
     }
 
-    public void setKeratinColor(int color) {
+    public void setKeratinColor(String color) {
         this.entityData.set(DATA_KERATIN_COLOR, color);
     }
 
-    public int getEyeColor() {
+    public String getEyeColor() {
         return this.entityData.get(DATA_EYE_COLOR);
     }
 
-    public void setEyeColor(int color) {
+    public void setEyeColor(String color) {
         this.entityData.set(DATA_EYE_COLOR, color);
     }
 
-    public int getFeatherColor() {
+    public String getFeatherColor() {
         return this.entityData.get(DATA_FEATHER_COLOR);
     }
 
-    public void setFeatherColor(int color) {
+    public void setFeatherColor(String color) {
         this.entityData.set(DATA_FEATHER_COLOR, color);
     }
 
@@ -890,17 +909,16 @@ public class Moa extends MountableAnimal {
         }
     }
 
-    /**
-     * @return A Moa Egg {@link ItemStack} corresponding to the Moa's {@link MoaType}.
-     */
-
-    //TODO MOA EGG
-    /*@Nullable
     @Override
     public ItemStack getPickResult() {
-        MoaEggItem moaEggItem = MoaEggItem.byId(this.getMoaTypeKey());
-        return moaEggItem == null ? null : new ItemStack(moaEggItem);
-    }*/
+        ItemStack moaEggItem = new ItemStack(AetherIIItems.MOA_EGG.get());
+        KeratinColor keratinColor = KeratinColor.valueOf(this.getKeratinColor().toUpperCase(Locale.ROOT));
+        EyeColor eyeColor = EyeColor.valueOf(this.getEyeColor().toUpperCase(Locale.ROOT));
+        FeatherColor featherColor = FeatherColor.valueOf(this.getFeatherColor().toUpperCase(Locale.ROOT));
+        FeatherShape featherShape = FeatherShape.valueOf(this.getFeatherShape().toUpperCase(Locale.ROOT));
+        moaEggItem.set(AetherIIDataComponents.MOA_EGG_TYPE, new MoaEggType(keratinColor, eyeColor, featherColor, featherShape));
+        return moaEggItem;
+    }
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
@@ -909,10 +927,10 @@ public class Moa extends MountableAnimal {
             tag.putUUID("MoaUUID", this.getMoaUUID());
         }
         tag.putBoolean("IsBaby", this.isBaby());
-        tag.putString("FeatherShape", this.getFeatherShape().unwrapKey().orElse(AetherIIMoaFeatherShapes.CURVED).location().toString());
-        tag.putInt("KeratinColor", this.getKeratinColor());
-        tag.putInt("EyeColor", this.getEyeColor());
-        tag.putInt("FeatherColor", this.getFeatherColor());
+        tag.putString("FeatherShape", this.getFeatherShape());
+        tag.putString("KeratinColor", this.getKeratinColor());
+        tag.putString("EyeColor", this.getEyeColor());
+        tag.putString("FeatherColor", this.getFeatherColor());
         if (this.getRider() != null) {
             tag.putUUID("Rider", this.getRider());
         }
@@ -938,18 +956,17 @@ public class Moa extends MountableAnimal {
         if (tag.contains("IsBaby")) {
             this.setBaby(tag.getBoolean("IsBaby"));
         }
-        Optional.ofNullable(ResourceLocation.tryParse(tag.getString("FeatherShape")))
-                .map(location -> ResourceKey.create(AetherIIMoaFeatherShapes.MOA_FEATHER_SHAPE_REGISTRY_KEY, location))
-                .flatMap((key) -> AetherIIMoaFeatherShapes.getRegistry(this.registryAccess()).getHolder(key))
-                .ifPresent(this::setFeatherShape);
-        if (tag.contains("KeratinColor")) {
-            this.setKeratinColor(tag.getInt("KeratinColor"));
+        if (tag.contains("FeatherShape") && Arrays.stream(FeatherShape.values()).map(FeatherShape::getSerializedName).anyMatch((s) -> s.equals(tag.getString("FeatherShape")))) {
+            this.setFeatherShape(tag.getString("FeatherShape"));
         }
-        if (tag.contains("EyeColor")) {
-            this.setEyeColor(tag.getInt("EyeColor"));
+        if (tag.contains("KeratinColor") && Arrays.stream(KeratinColor.values()).map(KeratinColor::getSerializedName).anyMatch((s) -> s.equals(tag.getString("KeratinColor")))) {
+            this.setKeratinColor(tag.getString("KeratinColor"));
         }
-        if (tag.contains("FeatherColor")) {
-            this.setFeatherColor(tag.getInt("FeatherColor"));
+        if (tag.contains("EyeColor") && Arrays.stream(EyeColor.values()).map(EyeColor::getSerializedName).anyMatch((s) -> s.equals(tag.getString("EyeColor")))) {
+            this.setEyeColor(tag.getString("EyeColor"));
+        }
+        if (tag.contains("FeatherColor") && Arrays.stream(FeatherColor.values()).map(FeatherColor::getSerializedName).anyMatch((s) -> s.equals(tag.getString("FeatherColor")))) {
+            this.setFeatherColor(tag.getString("FeatherColor"));
         }
         if (tag.hasUUID("Rider")) {
             this.setRider(tag.getUUID("Rider"));
@@ -978,23 +995,14 @@ public class Moa extends MountableAnimal {
     }
 
     public enum KeratinColor implements StringRepresentable {
-        SKY_BLUE(9946827),
-        DEEP_SKY(7437951),
-        SAND(8355441),
-        MIDNIGHT_SKY(3489636),
-        SWAMP(5727305),
-        ROYAL(4802916),
-        TEMPEST(6572361);
+        BLUE,
+        BROWN,
+        GREEN,
+        GRAY,
+        RED;
 
-        private final int color;
-
-        KeratinColor(int color) {
-            this.color = color;
-        }
-
-        public int getColor() {
-            return this.color;
-        }
+        public static final Codec<KeratinColor> CODEC = StringRepresentable.fromValues(KeratinColor::values);
+        public static final StreamCodec<FriendlyByteBuf, KeratinColor> STREAM_CODEC = StreamCodec.of((byteBuf, keratinColor) -> byteBuf.writeUtf(keratinColor.name()), (byteBuf) -> KeratinColor.valueOf(byteBuf.readUtf()));
 
         public static KeratinColor getRandom(RandomSource random) {
             return KeratinColor.values()[random.nextInt(KeratinColor.values().length)];
@@ -1007,24 +1015,12 @@ public class Moa extends MountableAnimal {
     }
 
     public enum EyeColor implements StringRepresentable {
-        ALTO(14277081),
-        STRAW(14269583),
-        WINTER_HAZEL(14274191),
-        GOSSIP(11662240),
-        MINT(10548161),
-        ICE(10548211),
-        PERANO(10535411),
-        PORTAGE(11641075);
+        BLUE,
+        GREEN,
+        YELLOW;
 
-        private final int color;
-
-        EyeColor(int color) {
-            this.color = color;
-        }
-
-        public int getColor() {
-            return this.color;
-        }
+        public static final Codec<EyeColor> CODEC = StringRepresentable.fromValues(EyeColor::values);
+        public static final StreamCodec<FriendlyByteBuf, EyeColor> STREAM_CODEC = StreamCodec.of((byteBuf, eyeColor) -> byteBuf.writeUtf(eyeColor.name()), (byteBuf) -> EyeColor.valueOf(byteBuf.readUtf()));
 
         public static EyeColor getRandom(RandomSource random) {
             return EyeColor.values()[random.nextInt(EyeColor.values().length)];
@@ -1037,42 +1033,70 @@ public class Moa extends MountableAnimal {
     }
 
     public enum FeatherColor implements StringRepresentable {
-        BLACK(1710618),
-        GREY(4210752),
-        WHITE(15132390),
-        IROKO(5060642),
-        ORANGE(14261855),
-        LIBSON_BROWN(5065003),
-        YELLOW(14272093),
-        MALLARD(4148534),
-        LIME_GREEN(12645275),
-        EVERGLADE(3165499),
-        GREEN(7992218),
-        PLANTATION(3558733),
-        SKY_BLUE(178779123),
-        CLOUD_BURST(3554893),
-        BLUE(10538483),
-        PORT_GORE(3814989),
-        PURPLE(11509491),
-        BOSSANOVA(4732493),
-        PINK(14785011),
-        LIVID_BROWN(5060163),
-        PUSE(15968982),
-        DEEP_RED(5055010),
-        RED(15944009);
+        BLACK,
+        BLOOMING_RED,
+        BLUE,
+        BROWN,
+        CLASSIC_BLACK,
+        CYAN,
+        GRAY,
+        GREEN,
+        LIGHT_BLUE,
+        LIGHT_GRAY,
+        LIME,
+        MAGENTA,
+        ORANGE,
+        PINK,
+        PURPLE,
+        RED,
+        WHITE,
+        YELLOW;
 
-        private final int color;
-
-        FeatherColor(int color) {
-            this.color = color;
-        }
-
-        public int getColor() {
-            return this.color;
-        }
+        public static final Codec<FeatherColor> CODEC = StringRepresentable.fromValues(FeatherColor::values);
+        public static final StreamCodec<FriendlyByteBuf, FeatherColor> STREAM_CODEC = StreamCodec.of((byteBuf, featherColor) -> byteBuf.writeUtf(featherColor.name()), (byteBuf) -> FeatherColor.valueOf(byteBuf.readUtf()));
 
         public static FeatherColor getRandom(RandomSource random) {
             return FeatherColor.values()[random.nextInt(FeatherColor.values().length)];
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase();
+        }
+    }
+
+    public enum FeatherShape implements StringRepresentable {
+        CURVED(1.0, 1.0, 1.0),
+        FLAT(1.0, 1.0, 1.0),
+        POINTED(1.0, 1.0, 1.0);
+
+        public static final Codec<FeatherShape> CODEC = StringRepresentable.fromValues(FeatherShape::values);
+        public static final StreamCodec<FriendlyByteBuf, FeatherShape> STREAM_CODEC = StreamCodec.of((byteBuf, featherShape) -> byteBuf.writeUtf(featherShape.name()), (byteBuf) -> FeatherShape.valueOf(byteBuf.readUtf()));
+
+        private final double speed;
+        private final double stamina;
+        private final double strength;
+
+        FeatherShape(double speed, double stamina, double strength) {
+            this.speed = speed;
+            this.stamina = stamina;
+            this.strength = strength;
+        }
+
+        public double getSpeed() {
+            return this.speed;
+        }
+
+        public double getStamina() {
+            return this.stamina;
+        }
+
+        public double getStrength() {
+            return this.strength;
+        }
+
+        public static FeatherShape getRandom(RandomSource random) {
+            return FeatherShape.values()[random.nextInt(FeatherShape.values().length)];
         }
 
         @Override

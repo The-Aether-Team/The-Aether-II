@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.loot.functions.SpawnSkyrootLizard;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockLootSubProvider;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -29,6 +30,8 @@ import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.functions.CopyNameFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
@@ -46,6 +49,17 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
     }
 
     public static final BooleanProperty GROWN = AetherIIBlockStateProperties.BRETTL_GROWN;
+
+    protected LootTable.Builder droppingIrradiatedDustLoot(Block block) {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasSilkTouch()).add(LootItem.lootTableItem(block)))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasSilkTouch().invert())
+                        .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_WEAPON.get()))
+                        .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_TOOL.get()))
+                        .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_ARMOR.get()))
+                        .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_CHUNK.get()))
+                );
+    }
 
     protected LootTable.Builder createSkyRootsDrops(Block block) {
         return this.createSilkTouchOrShearsDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.SKYROOT_STICK.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F)))))
@@ -266,6 +280,13 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(this.applyExplosionDecay(block, LootItem.lootTableItem(dropGrown).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))))
                         .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(GROWN, true)))
+        );
+    }
+
+    protected LootTable.Builder droppingMoaEgg(Block block) {
+        return LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                .add(LootItem.lootTableItem(block)
+                        .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(AetherIIDataComponents.MOA_EGG_TYPE.get()))))
         );
     }
 }

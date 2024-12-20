@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "R": {
+      "item": "aether_ii:holystone_rock"
+    },
+    "S": {
+      "item": "aether_ii:undershale"
+    }
+  },
+  "pattern": [
+    "SR",
+    "RS"
+  ],
+  "result": {
+    "count": 2,
+    "id": "aether_ii:unstable_undershale"
+  }
+}

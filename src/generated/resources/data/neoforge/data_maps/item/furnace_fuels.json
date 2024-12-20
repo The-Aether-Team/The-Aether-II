@@ -15,6 +15,9 @@
     "aether_ii:ambrosium_shard": {
       "burn_time": 1600
     },
+    "aether_ii:arkenium_gas_canister": {
+      "burn_time": 5000
+    },
     "aether_ii:greatroot_planks": {
       "burn_time": 300
     },
@@ -36,6 +39,9 @@
     "aether_ii:skyroot_pickaxe": {
       "burn_time": 200
     },
+    "aether_ii:skyroot_pinecone": {
+      "burn_time": 400
+    },
     "aether_ii:skyroot_planks": {
       "burn_time": 300
     },
@@ -52,6 +58,9 @@
       "burn_time": 100
     },
     "aether_ii:skyroot_trowel": {
+      "burn_time": 200
+    },
+    "aether_ii:skyroot_twig": {
       "burn_time": 200
     },
     "aether_ii:wisproot_planks": {

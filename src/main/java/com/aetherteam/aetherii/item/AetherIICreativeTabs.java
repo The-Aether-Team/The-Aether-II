@@ -102,6 +102,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.HOLYSTONE_WALL.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_PRESSURE_PLATE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_BUTTON.get());
+                output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE_SLAB.get());
@@ -138,6 +139,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.UNDERSHALE_STAIRS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_SLAB.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_WALL.get());
+                output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICKS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get());
                 output.accept(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get());
@@ -266,10 +268,14 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
                 output.accept(AetherIIBlocks.ARCTIC_SNOW.get());
+                output.accept(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
+                output.accept(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.MOSSY_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.UNDERSHALE.get());
+                output.accept(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
+                output.accept(AetherIIBlocks.ICHORITE.get());
                 output.accept(AetherIIBlocks.AGIOSITE.get());
                 output.accept(AetherIIBlocks.FERROSITE.get());
                 output.accept(AetherIIBlocks.RUSTED_FERROSITE.get());
@@ -385,6 +391,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKY_ROOTS.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
+                output.accept(AetherIIBlocks.POINTED_HOLYSTONE.get());
+                output.accept(AetherIIBlocks.POINTED_ICHORITE.get());
                 output.accept(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
                 output.accept(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
                 output.accept(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
@@ -481,11 +489,19 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.SKYROOT_TADPOLE_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_POWDER_SNOW_BUCKET.get());
                 output.accept(AetherIIItems.SKYROOT_MILK_BUCKET.get());
+                output.accept(AetherIIItems.ARKENIUM_CANISTER.get());
+                output.accept(AetherIIItems.ARKENIUM_ACID_CANISTER.get());
+                output.accept(AetherIIItems.ARKENIUM_GAS_CANISTER.get());
                 output.accept(AetherIIItems.COLD_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
+                output.accept(AetherIIItems.IRRADIATED_ARMOR.get());
+                output.accept(AetherIIItems.IRRADIATED_WEAPON.get());
+                output.accept(AetherIIItems.IRRADIATED_TOOL.get());
+                output.accept(AetherIIItems.IRRADIATED_CHUNK.get());
+                output.accept(AetherIIItems.IRRADIATED_DUST.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get());
                 output.accept(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get());
                 output.accept(AetherIIItems.MUSIC_DISC_AERWHALE.get());
@@ -600,6 +616,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GOLDEN_SWET_GEL.get());
                 output.accept(AetherIIItems.WHITE_SWET_GEL.get());
                 output.accept(AetherIIItems.SWET_SUGAR.get());
+                output.accept(AetherIIItems.MOA_FEATHER.get());
+                output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
                 output.accept(AetherIIItems.SCATTERGLASS_VIAL.get());
                 output.accept(AetherIIItems.CHARGE_CORE.get());
             }).build());

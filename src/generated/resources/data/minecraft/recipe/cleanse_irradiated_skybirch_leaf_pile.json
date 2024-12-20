@@ -1,0 +1,16 @@
+{
+  "type": "aether_ii:irradiation_cleansing",
+  "group": "irradiated_leaf_pile",
+  "ingredient": {
+    "item": "aether_ii:irradiated_skybirch_leaf_pile"
+  },
+  "results": [
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:skybirch_leaf_pile"
+      },
+      "weight": 1
+    }
+  ]
+}

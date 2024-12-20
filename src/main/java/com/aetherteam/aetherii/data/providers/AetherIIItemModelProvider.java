@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.entity.passive.Moa;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.nitrogen.data.providers.NitrogenItemModelProvider;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.data.PackOutput;
@@ -13,6 +15,9 @@ import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;
 import net.neoforged.neoforge.client.model.generators.loaders.SeparateTransformsModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvider {
     public AetherIIItemModelProvider(PackOutput output, String id, ExistingFileHelper helper) {
@@ -193,10 +198,74 @@ public abstract class AetherIIItemModelProvider extends NitrogenItemModelProvide
         this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_item", "natural/"));
     }
 
+    public void moaFeather(Item item) {
+        String itemName = this.itemName(item);
+        ItemModelBuilder builder = this.withExistingParent(itemName, this.mcLoc("item/generated"));
+        double featherColorIndex = 0.0;
+        for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
+            String name = itemName + "_" + featherColor.getSerializedName();
+            this.withExistingParent(name, this.mcLoc("item/generated"))
+                    .texture("layer0", this.modLoc("item/materials/" + itemName + "_" + featherColor.getSerializedName()));
+            builder.override()
+                    .predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), new BigDecimal(featherColorIndex, new MathContext(3)).floatValue())
+                    .model(this.getExistingFile(this.modLoc("item/" + name))).end();
+            featherColorIndex += 1.0 / Moa.FeatherColor.values().length;
+        }
+    }
+
+    public void moaEgg(Item item) {
+        String itemName = this.itemName(item);
+        ItemModelBuilder builder = this.withExistingParent(itemName, this.mcLoc("item/generated"));
+        double keratinColorIndex = 0.0;
+        double eyeColorIndex = 0.0;
+        double featherColorIndex = 0.0;
+        double featherShapeIndex = 0.0;
+        for (Moa.KeratinColor keratinColor : Moa.KeratinColor.values()) {
+            for (Moa.EyeColor eyeColor : Moa.EyeColor.values()) {
+                for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
+                    for (Moa.FeatherShape featherShape : Moa.FeatherShape.values()) {
+                        String name = itemName + "_"
+                                + featherShape.getSerializedName()
+                                + "_keratin_" + keratinColor.getSerializedName()
+                                + "_eyes_" + eyeColor.getSerializedName()
+                                + "_feather_" + featherColor.getSerializedName();
+
+                        this.withExistingParent(name, this.mcLoc("item/generated"))
+                                .texture("layer0", this.modLoc("item/miscellaneous/" + itemName + "_" + featherShape.getSerializedName() + "_" + featherColor.getSerializedName()))
+                                .texture("layer1", this.modLoc("item/miscellaneous/" + itemName + "_keratin_" + keratinColor.getSerializedName()))
+                                .texture("layer2", this.modLoc("item/miscellaneous/" + itemName + "_eyes_" + eyeColor.getSerializedName()));
+                        builder.override()
+                                .predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "keratin_color"), new BigDecimal(keratinColorIndex, new MathContext(3)).floatValue())
+                                .predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "eye_color"), new BigDecimal(eyeColorIndex, new MathContext(3)).floatValue())
+                                .predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), new BigDecimal(featherColorIndex, new MathContext(3)).floatValue())
+                                .predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_shape"), new BigDecimal(featherShapeIndex, new MathContext(3)).floatValue())
+                                .model(this.getExistingFile(this.modLoc("item/" + name))).end();
+
+                        featherShapeIndex += 1.0 / Moa.FeatherShape.values().length;
+                    }
+                    featherShapeIndex = 0;
+                    featherColorIndex += 1.0 / Moa.FeatherColor.values().length;
+                }
+                featherColorIndex = 0;
+                eyeColorIndex += 1.0 / Moa.EyeColor.values().length;
+            }
+            eyeColorIndex = 0;
+            keratinColorIndex += 1.0 / Moa.KeratinColor.values().length;
+        }
+    }
+
     public void portalItem(Item item, String location) {
         this.withExistingParent(this.itemName(item), this.mcLoc("item/generated"))
                 .texture("layer0", this.modLoc("item/" + location + this.itemName(item)))
                 .texture("layer1", this.modLoc("item/" + location + this.itemName(item) + "_inside"));
+    }
+
+    public void pointedStone(Block block, String location) {
+        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block), location))
+                .transforms()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(0.0F, 100.0F, 0.0F).translation(-1.0F, -1.0F, 0.0F).scale(0.9F, 0.9F, 0.9F).end()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0.0F, 100.0F, 0.0F).translation(0.0F, -2.0F, 0.0F).scale(0.9F, 0.9F, 0.9F).end()
+                .end();
     }
 
     public void aercloudItem(Block block) {

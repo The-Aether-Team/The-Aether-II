@@ -1,0 +1,183 @@
+{
+  "type": "aether_ii:irradiation_cleansing",
+  "ingredient": {
+    "item": "aether_ii:irradiated_armor"
+  },
+  "results": [
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:taegore_hide_helmet"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:burrukai_pelt_helmet"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_helmet"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_helmet"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_helmet"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:taegore_hide_chestplate"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:burrukai_pelt_chestplate"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_chestplate"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_chestplate"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_chestplate"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:taegore_hide_leggings"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:burrukai_pelt_leggings"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_leggings"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_leggings"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_leggings"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:taegore_hide_boots"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:burrukai_pelt_boots"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_boots"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_boots"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_boots"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:taegore_hide_gloves"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:burrukai_pelt_gloves"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:zanite_gloves"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:arkenium_gloves"
+      },
+      "weight": 1
+    },
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:gravitite_gloves"
+      },
+      "weight": 1
+    }
+  ]
+}

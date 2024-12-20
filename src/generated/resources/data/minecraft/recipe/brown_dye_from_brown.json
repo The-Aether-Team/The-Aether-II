@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "brown_dye",
+  "ingredients": [
+    {
+      "type": "neoforge:components",
+      "components": {
+        "aether_ii:feather_color": "brown"
+      },
+      "items": "aether_ii:moa_feather"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:brown_dye"
+  }
+}

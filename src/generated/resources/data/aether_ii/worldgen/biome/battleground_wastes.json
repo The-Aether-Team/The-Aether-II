@@ -29,9 +29,11 @@
     ],
     [
       "aether_ii:water_pond",
-      "aether_ii:water_pond_underground"
+      "aether_ii:water_pond_underground",
+      "aether_ii:acid_pool"
     ],
     [
+      "aether_ii:crater",
       "aether_ii:skyroot_twigs",
       "aether_ii:holystone_rocks"
     ],
@@ -48,9 +50,15 @@
       "aether_ii:ore_gravitite_buried",
       "aether_ii:ore_gravitite",
       "aether_ii:ore_holystone_quartz",
-      "aether_ii:ore_glint"
+      "aether_ii:ore_glint",
+      "aether_ii:ore_gas_open",
+      "aether_ii:ore_gas_buried",
+      "aether_ii:unstable_holystone",
+      "aether_ii:unstable_undershale"
     ],
-    [],
+    [
+      "aether_ii:pointed_holystone"
+    ],
     [
       "aether_ii:water_spring"
     ],

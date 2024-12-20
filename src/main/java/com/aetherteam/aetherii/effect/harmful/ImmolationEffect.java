@@ -50,6 +50,9 @@ public class ImmolationEffect extends MobEffect { //todo preventative measures
                     livingEntity.getZ() + (level.getRandom().nextGaussian() / 5.0),
                     2, 0.0, 0.0, 0.0, 0.0F);
         }
+        if (livingEntity.isInWaterRainOrBubble()) {
+            livingEntity.removeEffect(AetherIIEffects.IMMOLATION);
+        }
         return true;
     }
 

@@ -22,7 +22,8 @@
       "aether_ii:cloudbed"
     ],
     [
-      "aether_ii:water_pond_underground"
+      "aether_ii:water_pond_underground",
+      "aether_ii:acid_pool"
     ],
     [
       "aether_ii:holystone_rocks",
@@ -43,9 +44,15 @@
       "aether_ii:ore_holystone_quartz",
       "aether_ii:ore_corrobonite",
       "aether_ii:ore_glint",
-      "aether_ii:disk_bryalinn_moss"
+      "aether_ii:disk_bryalinn_moss",
+      "aether_ii:ore_gas_open",
+      "aether_ii:ore_gas_buried",
+      "aether_ii:unstable_holystone",
+      "aether_ii:unstable_undershale"
     ],
-    [],
+    [
+      "aether_ii:pointed_holystone"
+    ],
     [
       "aether_ii:water_spring"
     ],

@@ -1,0 +1,16 @@
+{
+  "type": "aether_ii:irradiation_cleansing",
+  "group": "irradiated_leaves",
+  "ingredient": {
+    "item": "aether_ii:irradiated_greatroot_leaves"
+  },
+  "results": [
+    {
+      "data": {
+        "count": 1,
+        "id": "aether_ii:greatroot_leaves"
+      },
+      "weight": 1
+    }
+  ]
+}

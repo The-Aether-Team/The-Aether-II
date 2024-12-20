@@ -79,8 +79,10 @@ public class AetherIIDataMapData extends DataMapProvider {
         this.addCompost(compostables, AetherIIItems.ORANGE, 0.3F);
 
         var fuels = this.builder(NeoForgeDataMaps.FURNACE_FUELS);
+        fuels.add(AetherIIItems.ARKENIUM_GAS_CANISTER, new FurnaceFuel(5000), false);
         fuels.add(AetherIIBlocks.AMBROSIUM_BLOCK.asItem().builtInRegistryHolder(), new FurnaceFuel(16000), false);
         fuels.add(AetherIIItems.AMBROSIUM_SHARD, new FurnaceFuel(1600), false);
+        fuels.add(AetherIIItems.SKYROOT_PINECONE, new FurnaceFuel(400), false);
         fuels.add(AetherIIBlocks.HIGHLANDS_BUSH.asItem().builtInRegistryHolder(), new FurnaceFuel(100), false);
         fuels.add(AetherIIBlocks.SKYROOT_PLANKS.asItem().builtInRegistryHolder(), new FurnaceFuel(300), false);
         fuels.add(AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS, new FurnaceFuel(300), false);
@@ -97,6 +99,7 @@ public class AetherIIDataMapData extends DataMapProvider {
         fuels.add(AetherIIItems.SKYROOT_AXE, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_SHOVEL, new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_TROWEL, new FurnaceFuel(200), false);
+        fuels.add(AetherIIBlocks.SKYROOT_TWIG.asItem().builtInRegistryHolder(), new FurnaceFuel(200), false);
         fuels.add(AetherIIItems.SKYROOT_STICK, new FurnaceFuel(100), false);
 
         var buckets = this.builder(AetherIIDataMaps.BUCKET_REPLACEMENT);

@@ -48,9 +48,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get()
         );
+        this.tag(AetherIITags.Blocks.UNDERSHALE).add(AetherIIBlocks.UNDERSHALE.get());
         this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE.get(),
-                AetherIIBlocks.UNDERSHALE.get()
+                AetherIIBlocks.UNDERSHALE.get(),
+                AetherIIBlocks.ICHORITE.get()
         );
         this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES)
                 .add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
@@ -196,6 +198,18 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.ALLOWED_BUCKET_PICKUP).add(
                 Blocks.POWDER_SNOW);
+        this.tag(AetherIITags.Blocks.ACID_RESISTANT).add(
+                AetherIIBlocks.UNDERSHALE.get(),
+                AetherIIBlocks.ICHORITE.get(),
+                AetherIIBlocks.ARKENIUM_BLOCK.get(),
+                AetherIIBlocks.ARKENIUM_DOOR.get(),
+                AetherIIBlocks.ARKENIUM_TRAPDOOR.get());
+        this.tag(AetherIITags.Blocks.ACID_INSTANTLY_DESTROYS).addTags(BlockTags.LEAVES, AetherIITags.Blocks.AERCLOUDS);
+        this.tag(AetherIITags.Blocks.ACID_QUICKLY_DESTROYS).addTags(BlockTags.DIRT, BlockTags.LOGS, BlockTags.PLANKS);
+        this.tag(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);
+        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).add(
+                AetherIIBlocks.AMBROSIUM_TORCH.get(),
+                AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ENCHANTED_AETHER_GRASS_BLOCK.get(),
@@ -579,8 +593,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
                 AetherIIBlocks.IRRADIATED_HOLYSTONE.get(),
+                AetherIIBlocks.IRRADIATED_DUST_BLOCK.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
                 AetherIIBlocks.AGIOSITE.get(),
+                AetherIIBlocks.ICHORITE.get(),
+                AetherIIBlocks.POINTED_HOLYSTONE.get(),
+                AetherIIBlocks.POINTED_ICHORITE.get(),
                 AetherIIBlocks.CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get(),

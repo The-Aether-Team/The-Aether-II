@@ -131,8 +131,17 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.GOLDEN_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.WHITE_SWET_GEL.get(), "materials/");
         this.item(AetherIIItems.SWET_SUGAR.get(), "materials/");
+        this.moaFeather(AetherIIItems.MOA_FEATHER.get());
+        this.item(AetherIIItems.COCKATRICE_FEATHER.get(), "materials/");
         this.item(AetherIIItems.SCATTERGLASS_VIAL.get(), "materials/");
         this.item(AetherIIItems.CHARGE_CORE.get(), "materials/");
+
+        // Irradiated Items
+        this.item(AetherIIItems.IRRADIATED_ARMOR.get(), "miscellaneous/");
+        this.item(AetherIIItems.IRRADIATED_WEAPON.get(), "miscellaneous/");
+        this.item(AetherIIItems.IRRADIATED_TOOL.get(), "miscellaneous/");
+        this.item(AetherIIItems.IRRADIATED_CHUNK.get(), "miscellaneous/");
+        this.item(AetherIIItems.IRRADIATED_DUST.get(), "miscellaneous/");
 
         // Food
         this.item(AetherIIItems.BLUEBERRY.get(), "consumables/");
@@ -182,6 +191,11 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.item(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.get(), "miscellaneous/");
         this.item(AetherIIItems.SKYROOT_TADPOLE_BUCKET.get(), "miscellaneous/");
 
+        // Arkenium Canisters
+        this.item(AetherIIItems.ARKENIUM_CANISTER.get(), "miscellaneous/");
+        this.item(AetherIIItems.ARKENIUM_ACID_CANISTER.get(), "miscellaneous/");
+        this.item(AetherIIItems.ARKENIUM_GAS_CANISTER.get(), "miscellaneous/");
+
         // Music Discs
         this.item(AetherIIItems.MUSIC_DISC_AETHER_TUNE.get(), "miscellaneous/");
         this.item(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN.get(), "miscellaneous/");
@@ -214,7 +228,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
         this.eggItem(AetherIIItems.SKEPHID_SPAWN_EGG.get());
 
         // Misc
-        this.item(AetherIIBlocks.MOA_EGG.get().asItem(), "miscellaneous/");
+        this.moaEgg(AetherIIItems.MOA_EGG.get());
         this.item(AetherIIItems.MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.BLUEBERRY_MOA_FEED.get(), "miscellaneous/");
         this.item(AetherIIItems.ENCHANTED_MOA_FEED.get(), "miscellaneous/");
@@ -234,10 +248,15 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Underground
         this.itemBlock(AetherIIBlocks.HOLYSTONE.get());
+        this.itemBlock(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
         this.itemBlock(AetherIIBlocks.UNDERSHALE.get());
+        this.itemBlock(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
         this.itemBlock(AetherIIBlocks.AGIOSITE.get());
         this.itemBlock(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
         this.itemBlockFlat(AetherIIBlocks.SKY_ROOTS.get(), "natural/");
+        this.itemBlock(AetherIIBlocks.ICHORITE.get());
+        this.pointedStone(AetherIIBlocks.POINTED_HOLYSTONE.get(), "natural/");
+        this.pointedStone(AetherIIBlocks.POINTED_ICHORITE.get(), "natural/");
 
         // Highfields
         this.itemBlock(AetherIIBlocks.QUICKSOIL.get());
@@ -270,6 +289,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 
         // Irradiated
         this.itemBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
+        this.itemBlock(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
         this.itemBlock(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
         this.itemBlockFlat(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), "natural/");

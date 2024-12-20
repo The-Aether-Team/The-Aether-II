@@ -1,0 +1,63 @@
+{
+  "feature": "aether_ii:ore_gas_open",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 16
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {
+          "above_bottom": 96
+        },
+        "min_inclusive": {
+          "above_bottom": -64
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:air"
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "aether_ii:search",
+        "direction_of_search": "up",
+        "max_steps": 4,
+        "target_condition": {
+          "type": "minecraft:matching_block_tag",
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "aether_ii:search",
+        "direction_of_search": "down",
+        "max_steps": 4,
+        "target_condition": {
+          "type": "minecraft:matching_block_tag",
+          "tag": "aether_ii:aether_underground_blocks"
+        }
+      }
+    },
+    {
+      "type": "minecraft:surface_relative_threshold_filter",
+      "heightmap": "OCEAN_FLOOR_WG",
+      "max_inclusive": -4
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

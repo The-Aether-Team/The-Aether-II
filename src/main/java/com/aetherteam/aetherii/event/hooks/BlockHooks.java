@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.AetherIIGameEvents;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.FreezingBlock;
+import com.aetherteam.aetherii.block.natural.GasBlock;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.blockentity.IcestoneBlockEntity;
 import com.aetherteam.aetherii.loot.AetherIILoot;
@@ -14,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -125,5 +127,9 @@ public class BlockHooks {
             }
         }
         return cancellationStatus;
+    }
+
+    public static boolean canBreathe(LivingEntity livingEntity) {
+        return !(livingEntity.level().getBlockState(BlockPos.containing(livingEntity.getEyePosition())).getBlock() instanceof GasBlock gasBlock);
     }
 }

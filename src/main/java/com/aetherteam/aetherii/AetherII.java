@@ -1,13 +1,10 @@
 package com.aetherteam.aetherii;
 
-import com.aetherteam.aetherii.api.entity.MoaFeatherShape;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.AetherIICauldronInteractions;
-import com.aetherteam.aetherii.block.AetherIIDispenseBehaviors;
+import com.aetherteam.aetherii.block.*;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.AetherIIClient;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
@@ -79,9 +76,10 @@ public class AetherII {
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, BestiaryEntry.DIRECT_CODEC, BestiaryEntry.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY, EffectsEntry.DIRECT_CODEC, EffectsEntry.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, ExplorationEntry.DIRECT_CODEC, ExplorationEntry.DIRECT_CODEC));
-        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIMoaFeatherShapes.MOA_FEATHER_SHAPE_REGISTRY_KEY, MoaFeatherShape.DIRECT_CODEC, MoaFeatherShape.DIRECT_CODEC));
 
         DeferredRegister<?>[] registers = {
+                AetherIIFluidTypes.FLUID_TYPES,
+                AetherIIFluids.FLUIDS,
                 AetherIIBlocks.BLOCKS,
                 AetherIIItems.ITEMS,
                 AetherIIEntityTypes.ENTITY_TYPES,
@@ -166,10 +164,13 @@ public class AetherII {
         PayloadRegistrar registrar = event.registrar(MODID).versioned("1.0.0").optional();
 
         // CLIENTBOUND
+        registrar.playToClient(AcidDamageBlockPacket.TYPE, AcidDamageBlockPacket.STREAM_CODEC, AcidDamageBlockPacket::execute);
+        registrar.playToClient(AcidFizzPacket.TYPE, AcidFizzPacket.STREAM_CODEC, AcidFizzPacket::execute);
         registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
         registrar.playToClient(EffectBuildupSetPacket.TYPE, EffectBuildupSetPacket.STREAM_CODEC, EffectBuildupSetPacket::execute);
         registrar.playToClient(EffectBuildupRemovePacket.TYPE, EffectBuildupRemovePacket.STREAM_CODEC, EffectBuildupRemovePacket::execute);
         registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);
+        registrar.playToClient(GasExplosionEffectsPacket.TYPE, GasExplosionEffectsPacket.STREAM_CODEC, GasExplosionEffectsPacket::execute);
         registrar.playToClient(GuidebookToastPacket.TYPE, GuidebookToastPacket.STREAM_CODEC, GuidebookToastPacket::execute);
         registrar.playToClient(DamageTypeParticlePacket.TYPE, DamageTypeParticlePacket.STREAM_CODEC, DamageTypeParticlePacket::execute);
         registrar.playToClient(PortalTravelSoundPacket.TYPE, PortalTravelSoundPacket.STREAM_CODEC, PortalTravelSoundPacket::execute);
@@ -179,6 +180,7 @@ public class AetherII {
         registrar.playToClient(SwetSyncPacket.TYPE, SwetSyncPacket.STREAM_CODEC, SwetSyncPacket::execute);
 
         // SERVERBOUND
+        registrar.playToServer(AcidBreakBlockPacket.TYPE, AcidBreakBlockPacket.STREAM_CODEC, AcidBreakBlockPacket::execute);
         registrar.playToServer(AerbunnyPuffPacket.TYPE, AerbunnyPuffPacket.STREAM_CODEC, AerbunnyPuffPacket::execute);
         registrar.playToServer(ForgeRenamePacket.TYPE, ForgeRenamePacket.STREAM_CODEC, ForgeRenamePacket::execute);
         registrar.playToServer(ForgeSlotCharmsPacket.TYPE, ForgeSlotCharmsPacket.STREAM_CODEC, ForgeSlotCharmsPacket::execute);

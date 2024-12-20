@@ -1,0 +1,29 @@
+{
+  "feature": "aether_ii:acid_pool",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 8
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {
+          "above_bottom": 96
+        },
+        "min_inclusive": {
+          "above_bottom": -64
+        }
+      }
+    },
+    {
+      "type": "minecraft:surface_relative_threshold_filter",
+      "heightmap": "OCEAN_FLOOR_WG",
+      "max_inclusive": -4
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

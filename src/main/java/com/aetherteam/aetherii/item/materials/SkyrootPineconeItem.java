@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.item.materials;
 
-import com.aetherteam.aetherii.client.AetherIIClientItemExtensions;
 import com.aetherteam.aetherii.entity.projectile.SkyrootPinecone;
 import com.aetherteam.aetherii.item.miscellaneous.ThrowableItem;
 import net.minecraft.sounds.SoundEvents;
@@ -12,9 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-
-import java.util.function.Consumer;
 
 public class SkyrootPineconeItem extends Item implements ThrowableItem {
     public SkyrootPineconeItem(Properties properties) {

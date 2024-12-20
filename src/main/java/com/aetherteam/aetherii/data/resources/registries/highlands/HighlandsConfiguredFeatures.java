@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.feature.AetherIIFeatures;
 import com.aetherteam.aetherii.world.feature.configuration.*;
+import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
 import com.aetherteam.aetherii.world.tree.decorator.*;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.AmberootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.amberoot.LargeAmberootFoliagePlacer;
@@ -25,6 +26,7 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -46,10 +48,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlac
 import net.minecraft.world.level.levelgen.feature.stateproviders.*;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
-import net.minecraft.world.level.levelgen.placement.CaveSurface;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
@@ -64,6 +63,7 @@ public class HighlandsConfiguredFeatures {
     public static final RuleTest HOLYSTONE_TEST = new TagMatchTest(AetherIITags.Blocks.HOLYSTONE);
     public static final RuleTest UNDERSHALE_TEST = new BlockMatchTest(AetherIIBlocks.UNDERSHALE.get());
     public static final RuleTest UNDERGROUND_TEST = new TagMatchTest(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
+    public static final RuleTest AIR_TEST = new TagMatchTest(BlockTags.AIR);
     
     // Surface
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYROOT_TWIGS = createKey("skyroot_twigs");
@@ -173,6 +173,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FROSTED_SKY_ROOTS = createKey("frosted_sky_roots");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE = createKey("ice");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_CRYSTALS = createKey("ice_crystals");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> POINTED_HOLYSTONE = createKey("pointed_holystone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_BLOCKS = createKey("grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ENCHANTED_GRASS_BLOCKS = createKey("enchanted_grass_blocks");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GRASS_AND_DIRT_FLOOR = createKey("grass_and_dirt_floor");
@@ -193,6 +194,11 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_VINES = createKey("ambrelinn_moss_vines");
     public static final ResourceKey<ConfiguredFeature<?, ?>> AMBRELINN_MOSS_FLOOR = createKey("ambrelinn_moss_floor");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_HOLYSTONE = createKey("unstable_holystone");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNSTABLE_UNDERSHALE = createKey("unstable_undershale");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ACID_POOL = createKey("acid_pool");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SCATTERGLASS = createKey("ore_scatterglass");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE = createKey("ore_icestone");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_ICESTONE_SMALL = createKey("ore_icestone_small");
@@ -207,6 +213,9 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE_BURIED = createKey("ore_gravitite_buried");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GRAVITITE = createKey("ore_gravitite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_CORROBONITE = createKey("ore_corrobonite");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GAS_OPEN = createKey("ore_gas_open");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_GAS_BURIED = createKey("ore_gas_buried");
     
     
     // Worldgen
@@ -235,6 +244,8 @@ public class HighlandsConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FREEZE_TOP_LAYER_ARCTIC = createKey("freeze_top_layer_arctic");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FREEZE_TOP_LAYER_TUNDRA = createKey("freeze_top_layer_tundra");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CRATER = createKey("crater");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
     
@@ -1111,6 +1122,27 @@ public class HighlandsConfiguredFeatures {
                         ), BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.above(), AetherIITags.Blocks.ICE_CRYSTAL_SURVIVES_ON), BlockPredicate.ONLY_IN_AIR_PREDICATE))
                 )
         );
+        register(
+                context,
+                POINTED_HOLYSTONE,
+                Feature.SIMPLE_RANDOM_SELECTOR,
+                new SimpleRandomFeatureConfiguration(
+                        HolderSet.direct(
+                                PlacementUtils.inlinePlaced(
+                                        AetherIIFeatures.POINTED_STONE.get(),
+                                        new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                        EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                        RandomOffsetPlacement.vertical(ConstantInt.of(1))
+                                ),
+                                PlacementUtils.inlinePlaced(
+                                        AetherIIFeatures.POINTED_STONE.get(),
+                                        new PointedStoneConfiguration(BlockStateProvider.simple(AetherIIBlocks.HOLYSTONE.get()), BlockStateProvider.simple(AetherIIBlocks.POINTED_HOLYSTONE.get()), 0.2F, 0.7F, 0.5F, 0.5F),
+                                        EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 12),
+                                        RandomOffsetPlacement.vertical(ConstantInt.of(-1))
+                                )
+                        )
+                )
+        );
         register(context,
                 GRASS_BLOCKS,
                 Feature.RANDOM_PATCH,
@@ -1387,6 +1419,53 @@ public class HighlandsConfiguredFeatures {
                 )
         );
 
+        register(
+                context,
+                UNSTABLE_HOLYSTONE,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.HOLYSTONE,
+                        BlockStateProvider.simple(AetherIIBlocks.UNSTABLE_HOLYSTONE.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(6, 9),
+                        0.5F,
+                        4,
+                        0.0F,
+                        UniformInt.of(3, 6),
+                        0.5F
+                )
+        );
+        register(
+                context,
+                UNSTABLE_UNDERSHALE,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.UNDERSHALE,
+                        BlockStateProvider.simple(AetherIIBlocks.UNSTABLE_UNDERSHALE.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(6, 9),
+                        0.5F,
+                        4,
+                        0.0F,
+                        UniformInt.of(3, 6),
+                        0.5F
+                )
+        );
+
+        register(context, ACID_POOL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(AetherIIFeatures.ACID_POOL.get(), new AcidPoolConfiguration(UniformInt.of(1, 4), UniformInt.of(4, 6), UniformInt.of(-4, 2)),
+                        EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), BlockPredicate.ONLY_IN_AIR_PREDICATE, 16),
+                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 8)),
+                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().north(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().east(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().south(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2)),
+                        BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(BlockPos.ZERO.below().west(6), AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 2))), 0.8F)),
+                PlacementUtils.inlinePlaced(Feature.ORE, new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.ICHORITE.get().defaultBlockState(), 64), CountPlacement.of(4))
+        ));
+
         register(context, ORE_SCATTERGLASS, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.CRUDE_SCATTERGLASS.get().defaultBlockState(), 24));
         register(context, ORE_ICESTONE, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 32));
         register(context, ORE_ICESTONE_SMALL, Feature.ORE, new OreConfiguration(HOLYSTONE_TEST, AetherIIBlocks.ICESTONE.get().defaultBlockState(), 16));
@@ -1401,6 +1480,9 @@ public class HighlandsConfiguredFeatures {
         register(context, ORE_GRAVITITE_BURIED, Feature.ORE, new OreConfiguration(gravitite, 3, 0.5F));
         register(context, ORE_GRAVITITE, Feature.ORE, new OreConfiguration(gravitite, 4));
         register(context, ORE_CORROBONITE, AetherIIFeatures.CORROBONITE_ORE.get(), new OreConfiguration(UNDERSHALE_TEST, AetherIIBlocks.CORROBONITE_ORE.get().defaultBlockState(), 4));
+
+        register(context, ORE_GAS_OPEN, AetherIIFeatures.GAS.get());
+        register(context, ORE_GAS_BURIED, Feature.ORE, new OreConfiguration(UNDERGROUND_TEST, AetherIIBlocks.GAS.get().defaultBlockState(), 16, 1.0F));
     }
 
     private static void bootstrapWorldgen(BootstrapContext<ConfiguredFeature<?, ?>> context) {
@@ -1709,6 +1791,8 @@ public class HighlandsConfiguredFeatures {
 
         register(context, FREEZE_TOP_LAYER_ARCTIC, AetherIIFeatures.FREEZE_TOP_LAYER_ARCTIC.get());
         register(context, FREEZE_TOP_LAYER_TUNDRA, AetherIIFeatures.FREEZE_TOP_LAYER_TUNDRA.get());
+
+        register(context, CRATER, AetherIIFeatures.CRATER.get());
 
         register(context, CLOUDBED, AetherIIFeatures.CLOUDBED.get(),
                 new CloudbedConfiguration(

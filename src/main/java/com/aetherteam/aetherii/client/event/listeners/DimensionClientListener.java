@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.client.event.listeners;
 
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
@@ -11,6 +10,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.material.FogType;
 import net.neoforged.neoforge.client.event.ViewportEvent;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 public class DimensionClientListener {
     private static Float modifiedNearDistance = null;
@@ -26,7 +26,7 @@ public class DimensionClientListener {
             Holder<Biome> biome = clientLevel.getBiome(camera.getBlockPosition());
             if (clientLevel.effects() instanceof HighlandsSpecialEffects) {
                 FogType fluidState = camera.getFluidInCamera();
-                if (fogMode == FogRenderer.FogMode.FOG_TERRAIN && fluidState == FogType.NONE) {
+                if (fogMode == FogRenderer.FogMode.FOG_TERRAIN && fluidState == FogType.NONE && (camera.getEntity().getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE.value())) {
                     if (modifiedNearDistance == null) {
                         modifiedNearDistance = nearDistance;
                     }

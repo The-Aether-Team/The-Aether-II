@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:vegetation_patch",
+  "config": {
+    "depth": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 9,
+      "min_inclusive": 6
+    },
+    "extra_bottom_block_chance": 0.5,
+    "extra_edge_column_chance": 0.5,
+    "ground_state": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "aether_ii:unstable_holystone"
+      }
+    },
+    "replaceable": "#aether_ii:holystone",
+    "surface": "floor",
+    "vegetation_chance": 0.0,
+    "vegetation_feature": {
+      "feature": "aether_ii:holystone_rocks",
+      "placement": []
+    },
+    "vertical_range": 4,
+    "xz_radius": {
+      "type": "minecraft:uniform",
+      "max_inclusive": 6,
+      "min_inclusive": 3
+    }
+  }
+}

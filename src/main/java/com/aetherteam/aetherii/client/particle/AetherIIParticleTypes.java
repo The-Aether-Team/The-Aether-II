@@ -30,6 +30,12 @@ public class AetherIIParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FALLING_WATER = PARTICLES.register("falling_water", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> SPLASH = PARTICLES.register("splash", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> AMBROSIUM = PARTICLES.register("ambrosium_torch", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> ACID = PARTICLES.register("acid", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GAS = PARTICLES.register("gas", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DRIPPING_ACID = PARTICLES.register("dripping_acid", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FALLING_ACID = PARTICLES.register("falling_acid", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DRIPPING_DRIPSTONE_ACID = PARTICLES.register("dripping_dripstone_acid", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> FALLING_DRIPSTONE_ACID = PARTICLES.register("falling_dripstone_acid", () -> new SimpleParticleType(false));
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RAIN = PARTICLES.register("rain", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> IRRADIATION = PARTICLES.register("irradiation", () -> new SimpleParticleType(false));

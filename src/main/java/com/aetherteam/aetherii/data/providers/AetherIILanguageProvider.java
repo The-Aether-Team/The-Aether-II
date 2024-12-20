@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.providers;
 
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.nitrogen.data.providers.NitrogenLanguageProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
@@ -8,6 +9,22 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider {
     public AetherIILanguageProvider(PackOutput output, String id) {
         super(output, id);
+    }
+
+    public void addKeratinColor(Moa.KeratinColor color, String name) {
+        this.addItemTooltip("moa_egg.keratin_color." + color.getSerializedName(), name);
+    }
+
+    public void addEyeColor(Moa.EyeColor color, String name) {
+        this.addItemTooltip("moa_egg.eye_color." + color.getSerializedName(), name);
+    }
+
+    public void addFeatherColor(Moa.FeatherColor color, String name) {
+        this.addItemTooltip("moa_egg.feather_color." + color.getSerializedName(), name);
+    }
+
+    public void addFeatherShape(Moa.FeatherShape shape, String name) {
+        this.addItemTooltip("moa_egg.feather_shape." + shape.getSerializedName(), name);
     }
 
     public void addDamageTypeTooltip(String path, String name) {

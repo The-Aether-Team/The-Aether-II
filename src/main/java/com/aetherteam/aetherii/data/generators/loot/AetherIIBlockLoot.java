@@ -39,10 +39,15 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Underground
         this.dropSelf(AetherIIBlocks.HOLYSTONE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE.get());
         this.add(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.SCATTERGLASS_SHARD, UniformGenerator.between(1.0F, 3.0F)));
         this.add(AetherIIBlocks.SKY_ROOTS.get(), this::createSkyRootsDrops);
+        this.dropSelf(AetherIIBlocks.ICHORITE.get());
+        this.dropSelf(AetherIIBlocks.POINTED_HOLYSTONE.get());
+        this.dropSelf(AetherIIBlocks.POINTED_ICHORITE.get());
 
         // Highfields
         this.dropSelf(AetherIIBlocks.QUICKSOIL.get());
@@ -75,6 +80,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Irradiated
         this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
+        this.add(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get(), this::droppingIrradiatedDustLoot);
         this.dropSelf(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), BlockLootSubProvider::createShearsOnlyDrop);
@@ -105,7 +111,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Moa Nest
         this.dropSelf(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
-        this.dropSelf(AetherIIBlocks.MOA_EGG.get());
+        this.add(AetherIIBlocks.MOA_EGG.get(), this::droppingMoaEgg);
 
         // Logs
         this.dropSelf(AetherIIBlocks.SKYROOT_LOG.get());

@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:item/generated",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        100,
+        0
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ],
+      "translation": [
+        0,
+        -2,
+        0
+      ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        100,
+        0
+      ],
+      "scale": [
+        0.9,
+        0.9,
+        0.9
+      ],
+      "translation": [
+        -1,
+        -1,
+        0
+      ]
+    }
+  },
+  "textures": {
+    "layer0": "aether_ii:block/natural/pointed_ichorite"
+  }
+}

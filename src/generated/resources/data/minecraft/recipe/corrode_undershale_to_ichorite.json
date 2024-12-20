@@ -1,0 +1,9 @@
+{
+  "type": "aether_ii:acid_corrosion",
+  "ingredient": {
+    "block": "aether_ii:undershale"
+  },
+  "result": {
+    "block": "aether_ii:ichorite"
+  }
+}

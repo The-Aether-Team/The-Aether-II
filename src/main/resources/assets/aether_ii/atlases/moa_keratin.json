@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:entity/mobs/moa/moa_keratin",
+        "aether_ii:entity/mobs/moa/moa_baby_keratin",
+        "aether_ii:entity/tiles/moa_egg/moa_egg_keratin"
+      ],
+      "palette_key": "aether_ii:entity/mobs/moa/color_palettes/keratin/base_moa_keratin",
+      "permutations": {
+        "blue": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_blue",
+        "brown": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_brown",
+        "green": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_green",
+        "gray": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_gray",
+        "red": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_red"
+      }
+    }
+  ]
+}

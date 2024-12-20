@@ -243,7 +243,7 @@
         "Properties": {
           "distance": "7",
           "persistent": "false",
-          "shade": "0",
+          "shade": "7",
           "snowy": "false",
           "waterlogged": "false"
         }

@@ -13,7 +13,7 @@ public class IrradiatedLeavesBlock extends AetherLeavesBlock {
 
     public IrradiatedLeavesBlock(Properties properties, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
         super(properties, leavesParticle, leavesPile);
-        this.registerDefaultState(this.defaultBlockState().setValue(SHADE, 0));
+        this.registerDefaultState(this.defaultBlockState().setValue(SHADE, 7));
     }
 
     @Override

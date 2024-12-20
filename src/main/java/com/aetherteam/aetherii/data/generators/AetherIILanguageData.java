@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiom
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -36,10 +37,15 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Underground
         this.addBlock(AetherIIBlocks.HOLYSTONE, "Holystone");
+        this.addBlock(AetherIIBlocks.UNSTABLE_HOLYSTONE, "Unstable Holystone");
         this.addBlock(AetherIIBlocks.UNDERSHALE, "Undershale");
+        this.addBlock(AetherIIBlocks.UNSTABLE_UNDERSHALE, "Unstable Undershale");
         this.addBlock(AetherIIBlocks.AGIOSITE, "Agiosite");
         this.addBlock(AetherIIBlocks.CRUDE_SCATTERGLASS, "Crude Scatterglass");
         this.addBlock(AetherIIBlocks.SKY_ROOTS, "Sky Roots");
+        this.addBlock(AetherIIBlocks.ICHORITE, "Ichorite");
+        this.addBlock(AetherIIBlocks.POINTED_HOLYSTONE, "Pointed Holystone");
+        this.addBlock(AetherIIBlocks.POINTED_ICHORITE, "Pointed Ichorite");
 
         // Highfields
         this.addBlock(AetherIIBlocks.QUICKSOIL, "Quicksoil");
@@ -72,6 +78,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Irradiated
         this.addBlock(AetherIIBlocks.IRRADIATED_HOLYSTONE, "Irradiated Holystone");
+        this.addBlock(AetherIIBlocks.IRRADIATED_DUST_BLOCK, "Irradiated Dust Block");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_BLOCK, "Ambrelinn Moss Block");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_CARPET, "Ambrelinn Moss Carpet");
         this.addBlock(AetherIIBlocks.AMBRELINN_MOSS_VINES, "Ambrelinn Moss Vines");
@@ -517,9 +524,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Furniture
         this.addBlock(AetherIIBlocks.OUTPOST_CAMPFIRE, "Outpost Campfire");
 
-        //Egg
-        this.addBlock(AetherIIBlocks.MOA_EGG, "Moa Egg");
-
 
         // Items
         // Tools
@@ -644,8 +648,17 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
         this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
         this.addItem(AetherIIItems.SWET_SUGAR, "Swet Sugar");
+        this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
+        this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
         this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");
         this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
+
+        // Irradiated Items
+        this.addItem(AetherIIItems.IRRADIATED_ARMOR, "Irradiated Armor");
+        this.addItem(AetherIIItems.IRRADIATED_WEAPON, "Irradiated Weapon");
+        this.addItem(AetherIIItems.IRRADIATED_TOOL, "Irradiated Tool");
+        this.addItem(AetherIIItems.IRRADIATED_CHUNK, "Irradiated Chunk");
+        this.addItem(AetherIIItems.IRRADIATED_DUST, "Irradiated Dust");
 
         // Food
         this.addItem(AetherIIItems.BLUEBERRY, "Blueberry");
@@ -695,6 +708,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKYROOT_AXOLOTL_BUCKET, "Skyroot Bucket of Axolotl");
         this.addItem(AetherIIItems.SKYROOT_TADPOLE_BUCKET, "Skyroot Bucket of Tadpole");
 
+        // Arkenium Canisters
+        this.addItem(AetherIIItems.ARKENIUM_CANISTER, "Arkenium Canister");
+        this.addItem(AetherIIItems.ARKENIUM_ACID_CANISTER, "Arkenium Acid Canister");
+        this.addItem(AetherIIItems.ARKENIUM_GAS_CANISTER, "Arkenium Gas Canister");
+
         // Music Discs
         this.addItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE, "Blue Music Disc");
         this.addItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN, "Valkyrie Music Disc");
@@ -727,6 +745,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.SKEPHID_SPAWN_EGG, "Skephid Spawn Egg");
 
         // Misc
+        this.addItem(AetherIIItems.MOA_EGG, "Moa Egg");
         this.addItem(AetherIIItems.MOA_FEED, "Moa Feed");
         this.addItem(AetherIIItems.BLUEBERRY_MOA_FEED, "Blueberry Moa Feed");
         this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");
@@ -857,6 +876,44 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("currency.description", "Converts to Currency:");
         this.addItemTooltip("currency.amount", "%s Glint");
         this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
+
+        // Moa Egg Tooltips
+        this.addItemTooltip("moa_egg.keratin", "%s Keratin");
+        this.addItemTooltip("moa_egg.eyes", "%s Eyes");
+        this.addItemTooltip("moa_egg.feathers", "%1$s %2$s Feathers");
+
+        this.addKeratinColor(Moa.KeratinColor.BLUE, "Blue");
+        this.addKeratinColor(Moa.KeratinColor.BROWN, "Brown");
+        this.addKeratinColor(Moa.KeratinColor.GREEN, "Green");
+        this.addKeratinColor(Moa.KeratinColor.GRAY, "Gray");
+        this.addKeratinColor(Moa.KeratinColor.RED, "Red");
+
+        this.addEyeColor(Moa.EyeColor.BLUE, "Blue");
+        this.addEyeColor(Moa.EyeColor.GREEN, "Green");
+        this.addEyeColor(Moa.EyeColor.YELLOW, "Yellow");
+
+        this.addFeatherColor(Moa.FeatherColor.BLACK, "Black");
+        this.addFeatherColor(Moa.FeatherColor.BLOOMING_RED, "Blooming Red");
+        this.addFeatherColor(Moa.FeatherColor.BLUE, "Blue");
+        this.addFeatherColor(Moa.FeatherColor.BROWN, "Brown");
+        this.addFeatherColor(Moa.FeatherColor.CLASSIC_BLACK, "Classic Black");
+        this.addFeatherColor(Moa.FeatherColor.CYAN, "Cyan");
+        this.addFeatherColor(Moa.FeatherColor.GRAY, "Gray");
+        this.addFeatherColor(Moa.FeatherColor.GREEN, "Green");
+        this.addFeatherColor(Moa.FeatherColor.LIGHT_BLUE, "Light Blue");
+        this.addFeatherColor(Moa.FeatherColor.LIGHT_GRAY, "Light Gray");
+        this.addFeatherColor(Moa.FeatherColor.LIME, "Lime");
+        this.addFeatherColor(Moa.FeatherColor.MAGENTA, "Magenta");
+        this.addFeatherColor(Moa.FeatherColor.ORANGE, "Orange");
+        this.addFeatherColor(Moa.FeatherColor.PINK, "Pink");
+        this.addFeatherColor(Moa.FeatherColor.PURPLE, "Purple");
+        this.addFeatherColor(Moa.FeatherColor.RED, "Red");
+        this.addFeatherColor(Moa.FeatherColor.WHITE, "White");
+        this.addFeatherColor(Moa.FeatherColor.YELLOW, "Yellow");
+
+        this.addFeatherShape(Moa.FeatherShape.CURVED, "Curved");
+        this.addFeatherShape(Moa.FeatherShape.FLAT, "Flat");
+        this.addFeatherShape(Moa.FeatherShape.POINTED, "Pointed");
 
 
         // Accessory Slots

@@ -1,0 +1,9 @@
+{
+  "type": "aether_ii:dust_irradiation",
+  "ingredient": {
+    "block": "aether_ii:wisptop_leaves"
+  },
+  "result": {
+    "block": "aether_ii:irradiated_wisptop_leaves"
+  }
+}

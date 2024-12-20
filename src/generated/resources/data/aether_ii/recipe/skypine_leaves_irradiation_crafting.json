@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "irradiated_leaves",
+  "ingredients": [
+    {
+      "item": "aether_ii:skypine_leaves"
+    },
+    {
+      "item": "aether_ii:irradiated_dust"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:irradiated_skypine_leaves"
+  }
+}

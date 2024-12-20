@@ -1,0 +1,32 @@
+{
+  "feature": "aether_ii:ore_gas_buried",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": 4
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:trapezoid",
+        "max_inclusive": {
+          "above_bottom": 128
+        },
+        "min_inclusive": {
+          "above_bottom": -96
+        }
+      }
+    },
+    {
+      "type": "minecraft:surface_relative_threshold_filter",
+      "heightmap": "OCEAN_FLOOR_WG",
+      "max_inclusive": -4
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

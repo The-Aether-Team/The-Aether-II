@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "cyan_dye",
+  "ingredients": [
+    {
+      "type": "neoforge:components",
+      "components": {
+        "aether_ii:feather_color": "cyan"
+      },
+      "items": "aether_ii:moa_feather"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:cyan_dye"
+  }
+}

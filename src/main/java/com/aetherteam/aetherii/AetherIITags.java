@@ -17,6 +17,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_PORTAL_BLACKLIST = tag("aether_portal_blacklist");
         public static final TagKey<Block> AETHER_DIRT = tag("aether_dirt");
         public static final TagKey<Block> HOLYSTONE = tag("holystone");
+        public static final TagKey<Block> UNDERSHALE = tag("undershale");
         public static final TagKey<Block> AETHER_UNDERGROUND_BLOCKS = tag("aether_underground_blocks");
         public static final TagKey<Block> AETHER_CARVER_REPLACEABLES = tag("aether_carver_replaceables");
         public static final TagKey<Block> SHAPES_COASTS = tag("shapes_coasts");
@@ -35,6 +36,11 @@ public class AetherIITags {
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
+        public static final TagKey<Block> ACID_RESISTANT = tag("acid_iresistant");
+        public static final TagKey<Block> ACID_INSTANTLY_DESTROYS = tag("acid_instantly_destroys");
+        public static final TagKey<Block> ACID_QUICKLY_DESTROYS = tag("acid_quickly_destroys");
+        public static final TagKey<Block> ACID_SLOWLY_DESTROYS = tag("acid_slowly_destroys");
+        public static final TagKey<Block> TRIGGERS_GAS = tag("triggers_gas");
 
         public static final TagKey<Block> AETHER_PLANT_SURVIVES_ON = tag("aether_plant_survives_on");
         public static final TagKey<Block> SKYROOT_TWIG_SURVIVES_ON = tag("skyroot_twig_survives_on");
@@ -146,6 +152,8 @@ public class AetherIITags {
         public static final TagKey<Item> SWET_GEL = tag("swet_gel");
         public static final TagKey<Item> GOLDEN_AMBER_HARVESTERS = tag("golden_amber_harvesters");
         public static final TagKey<Item> DOUBLE_DROPS = tag("double_drops");
+        public static final TagKey<Item> IRRADIATED_ITEM = tag("irradiated_item");
+        public static final TagKey<Item> ACID_RESISTANT_ITEM = tag("acid_resistant_item");
 
         private static TagKey<Item> tag(String name) {
             return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -171,6 +179,8 @@ public class AetherIITags {
     }
 
     public static class Fluids {
+        public static final TagKey<Fluid> ACID = tag("acid");
+
         public static final TagKey<Fluid> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
 
         private static TagKey<Fluid> tag(String name) {
