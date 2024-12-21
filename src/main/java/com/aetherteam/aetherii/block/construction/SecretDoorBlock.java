@@ -10,7 +10,7 @@ public class SecretDoorBlock extends DoorBlock {
     }
 
     @Override
-    public boolean useShapeForLightOcclusion(BlockState pState) {
+    public boolean useShapeForLightOcclusion(BlockState state) {
         return true;
     }
 }

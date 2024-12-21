@@ -10,7 +10,7 @@ public class SecretTrapDoorBlock extends TrapDoorBlock {
     }
 
     @Override
-    public boolean useShapeForLightOcclusion(BlockState pState) {
+    public boolean useShapeForLightOcclusion(BlockState state) {
         return true;
     }
 }
