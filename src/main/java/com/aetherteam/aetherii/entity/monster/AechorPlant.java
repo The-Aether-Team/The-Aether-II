@@ -66,7 +66,7 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
     }
 
     /**
-     * Aechor Plants can spawn if the block at the spawn location is in the {@link AetherTags.Blocks#AECHOR_PLANT_SPAWNABLE_ON} tag, if they are spawning at a light level above 8,
+     * Aechor Plants can spawn if the block at the spawn location is in the {@link AetherIITags.Blocks#AECHOR_PLANT_SPAWNABLE_ON} tag, if they are spawning at a light level above 8,
      * if the difficulty isn't peaceful, and they spawn with a random chance of 1/10.
      *
      * @param aechorPlant The {@link AechorPlant} {@link EntityType}.

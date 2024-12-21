@@ -37,7 +37,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         super(output, provider, id);
     }
 
-    protected static void leafPile(RecipeOutput recipeOutput, ItemLike carpet, ItemLike material) {
+    protected void leafPile(RecipeOutput recipeOutput, ItemLike carpet, ItemLike material) {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 8)
                 .define('#', material)
                 .pattern("##")
@@ -74,7 +74,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         }
     }
 
-    protected static void bookshelf(RecipeOutput consumer, ItemLike result, ItemLike material) {
+    protected void bookshelf(RecipeOutput consumer, ItemLike result, ItemLike material) {
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result)
                 .define('#', material)
                 .define('B', Items.BOOK)
@@ -85,7 +85,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .save(consumer);
     }
 
-    protected static void sign(RecipeOutput consumer, ItemLike result, ItemLike block) {
+    protected void sign(RecipeOutput consumer, ItemLike result, ItemLike block) {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 3)
                 .group("wooden_sign")
                 .define('P', block)
@@ -97,7 +97,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .save(consumer);
     }
 
-    protected static void hangingSign(RecipeOutput consumer, ItemLike result, ItemLike block) {
+    protected void hangingSign(RecipeOutput consumer, ItemLike result, ItemLike block) {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 6)
                 .group("hanging_sign")
                 .define('#', block)
@@ -109,7 +109,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .save(consumer);
     }
 
-    protected static void arilumLantern(RecipeOutput consumer, ItemLike result, ItemLike gel) {
+    protected void arilumLantern(RecipeOutput consumer, ItemLike result, ItemLike gel) {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 1)
                 .group("arilum_lantern")
                 .define('#', gel)
