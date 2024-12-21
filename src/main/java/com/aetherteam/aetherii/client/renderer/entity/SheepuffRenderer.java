@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.SheepuffModel;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 public class SheepuffRenderer extends MobRenderer<Sheepuff, SheepuffModel<Sheepuff>> {
@@ -18,7 +19,7 @@ public class SheepuffRenderer extends MobRenderer<Sheepuff, SheepuffModel<Sheepu
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Sheepuff sheepuff) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return SHEEPUFF_TEXTURE;
     }
 }

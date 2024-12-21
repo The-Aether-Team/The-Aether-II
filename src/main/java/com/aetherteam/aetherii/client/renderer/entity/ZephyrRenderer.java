@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.entity.monster.Zephyr;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 public class ZephyrRenderer extends MobRenderer<Zephyr, ZephyrModel> {
@@ -30,7 +31,7 @@ public class ZephyrRenderer extends MobRenderer<Zephyr, ZephyrModel> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Zephyr pEntity) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return ZEPHYR_TEXTURE;
     }
 }

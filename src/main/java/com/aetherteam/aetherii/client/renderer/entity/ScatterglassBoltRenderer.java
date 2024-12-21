@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.projectile.ScatterglassBolt;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 public class ScatterglassBoltRenderer extends ArrowRenderer<ScatterglassBolt> {
@@ -14,7 +15,7 @@ public class ScatterglassBoltRenderer extends ArrowRenderer<ScatterglassBolt> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ScatterglassBolt bolt) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return SCATTERGLASS_BOLT_LOCATION;
     }
 }

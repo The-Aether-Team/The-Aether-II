@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class TempestThunderballRenderer extends EntityRenderer<TempestThunderball> {
     private static final ResourceLocation TEMPEST_PROJECTILE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/tempest_thunderball.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(TEMPEST_PROJECTILE_TEXTURE);
+    private static final RenderType RENDER_TYPE;
 
     public TempestThunderballRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -48,8 +48,7 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
         return 15;
     }
 
-    @Override
-    public ResourceLocation getTextureLocation(TempestThunderball thunderball) {
-        return TEMPEST_PROJECTILE_TEXTURE;
+    static {
+        RENDER_TYPE = RenderType.entityCutoutNoCull(TEMPEST_PROJECTILE_TEXTURE);
     }
 }

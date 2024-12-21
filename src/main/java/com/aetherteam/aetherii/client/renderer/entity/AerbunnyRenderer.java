@@ -10,6 +10,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -19,6 +21,11 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
     public AerbunnyRenderer(EntityRendererProvider.Context context) {
         super(context, new AerbunnyModel(context.bakeLayer(AetherIIModelLayers.AERBUNNY)), 0.3F);
         this.addLayer(new AerbunnyCollarLayer(this, context.getModelSet()));
+    }
+
+    @Override
+    public EntityRenderState createRenderState() {
+        return null;
     }
 
     /**
@@ -59,7 +66,7 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Aerbunny aerbunny) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return AERBUNNY_TEXTURE;
     }
 }

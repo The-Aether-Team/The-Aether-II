@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.CockatriceModel;
 import com.aetherteam.aetherii.entity.monster.Cockatrice;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceModel> {
@@ -18,7 +19,7 @@ public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceModel>
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Cockatrice aechorPlant) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return COCKATRICE_PLANT_TEXTURE;
     }
 }

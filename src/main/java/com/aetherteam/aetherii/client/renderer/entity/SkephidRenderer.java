@@ -9,6 +9,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Pose;
@@ -78,7 +79,7 @@ public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidMo
 
 
     @Override
-    public ResourceLocation getTextureLocation(T entity) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return LOCATION;
     }
 }

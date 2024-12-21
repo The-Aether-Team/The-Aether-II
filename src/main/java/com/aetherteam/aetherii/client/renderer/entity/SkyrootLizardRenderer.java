@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.SkyrootLizardModel;
 import com.aetherteam.aetherii.entity.passive.SkyrootLizard;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 public class SkyrootLizardRenderer extends MobRenderer<SkyrootLizard, SkyrootLizardModel<SkyrootLizard>> {
@@ -16,7 +17,7 @@ public class SkyrootLizardRenderer extends MobRenderer<SkyrootLizard, SkyrootLiz
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SkyrootLizard lizard) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return SKYROOT_LIZARD_TEXTURE;
     }
 }

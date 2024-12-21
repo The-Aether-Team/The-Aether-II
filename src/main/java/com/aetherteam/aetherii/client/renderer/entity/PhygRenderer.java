@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.PhygModel;
 import com.aetherteam.aetherii.entity.passive.Phyg;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 public class PhygRenderer extends MobRenderer<Phyg, PhygModel<Phyg>> {
@@ -16,7 +17,7 @@ public class PhygRenderer extends MobRenderer<Phyg, PhygModel<Phyg>> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Phyg phyg) {
+    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
         return PHYG_TEXTURE;
     }
 }
