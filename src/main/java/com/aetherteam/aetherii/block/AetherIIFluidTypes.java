@@ -2,12 +2,9 @@ package com.aetherteam.aetherii.block;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.pathfinder.PathType;
-import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
