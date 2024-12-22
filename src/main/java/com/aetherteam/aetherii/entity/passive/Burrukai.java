@@ -168,7 +168,7 @@ public class Burrukai extends AetherAnimal implements IShearable {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        Burrukai burrukai = this.variantType.create(pLevel);
+        Burrukai burrukai = this.variantType.create(pLevel, EntitySpawnReason.BREEDING);
         BurrukaiAi.initMemories(burrukai, this.random);
         return burrukai;
     }
