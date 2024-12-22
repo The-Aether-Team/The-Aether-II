@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
@@ -13,10 +14,6 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ARGB;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.animal.Sheep;
-import net.minecraft.world.item.DyeColor;
 
 public class KirridWoolLayer extends RenderLayer<KirridRenderState, EntityModel<KirridRenderState>> {
     private static final ResourceLocation ARCTIC_KIRRID_WOOL_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/kirrid/arctic/kirrid_arctic_wool.png");
@@ -41,21 +38,9 @@ public class KirridWoolLayer extends RenderLayer<KirridRenderState, EntityModel<
                 this.getParentModel().renderToBuffer(poseStack, consumer, packedLight, LivingEntityRenderer.getOverlayCoords(kirrid, 0.0F), -16777216);
             }
         } else {
-            int i = -1;
-            if (kirrid.customName != null && "jeb_".equals(kirrid.customName.getString())) {
-                int j = 25;
-                int k = Mth.floor(kirrid.ageInTicks);
-                int l = k / 25 + kirrid.id;
-                int i1 = DyeColor.values().length;
-                int j1 = l % i1;
-                int k1 = (l + 1) % i1;
-                float f = ((float) (k % 25) + Mth.frac(kirrid.ageInTicks)) / 25.0F;
-                int l1 = Sheep.getColor(DyeColor.byId(j1));
-                int i2 = Sheep.getColor(DyeColor.byId(k1));
-                i = ARGB.lerp(f, l1, i2);
-            } else {
-                i = Sheep.getColor(kirrid.woolColor);
-            }
+            int i = Kirrid.getDecimalColor(kirrid.woolColor);
+
+            coloredCutoutModelCopyLayerRender(this.getParentModel(), getTexture(kirrid), poseStack, bufferSource, packedLight, kirrid, i);
         }
     }
 
