@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.DyeColor;
 
 public class KirridRenderState extends LivingEntityRenderState {
 
@@ -15,5 +14,5 @@ public class KirridRenderState extends LivingEntityRenderState {
     public AnimationState eatAnimationState = new AnimationState();
     public EntityType<?> entityType;
     public int id;
-    public Kirrid.KirridColor woolColor = DyeColor.WHITE;
+    public Kirrid.KirridColor woolColor = Kirrid.KirridColor.WHITE;
 }
