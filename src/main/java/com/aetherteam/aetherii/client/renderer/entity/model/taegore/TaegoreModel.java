@@ -1,14 +1,13 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.taegore;
 
-import com.aetherteam.aetherii.entity.passive.Taegore;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.util.Mth;
 
-public class TaegoreModel extends HierarchicalModel<Taegore> {
-	private final ModelPart root;
+public class TaegoreModel extends EntityModel<LivingEntityRenderState> {
 	private final ModelPart body_main;
 	private final ModelPart head_main;
 	private final ModelPart head_lower;
@@ -37,8 +36,8 @@ public class TaegoreModel extends HierarchicalModel<Taegore> {
 	private final ModelPart spines;
 
 	public TaegoreModel(ModelPart root) {
-		this.root = root;
-		this.body_main = root.getChild("body_main");
+        super(root);
+        this.body_main = root.getChild("body_main");
 		this.head_main = body_main.getChild("head_main");
 		this.head_lower = head_main.getChild("head_lower");
 		this.head_upper = head_main.getChild("head_upper");
@@ -135,18 +134,13 @@ public class TaegoreModel extends HierarchicalModel<Taegore> {
 	}
 
 	@Override
-	public ModelPart root() {
-		return this.root;
-	}
-
-	@Override
-	public void setupAnim(Taegore entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.head_main.xRot = headPitch * Mth.DEG_TO_RAD;
-		this.head_main.yRot = netHeadYaw * Mth.DEG_TO_RAD;
-		this.leg_rear_right.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		this.leg_rear_left.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-		this.leg_front_right.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-		this.leg_front_left.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+    public void setupAnim(LivingEntityRenderState entity) {
+        super.setupAnim(entity);
+        this.head_main.xRot = entity.xRot * Mth.DEG_TO_RAD;
+        this.head_main.yRot = entity.yRot * Mth.DEG_TO_RAD;
+        this.leg_rear_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_rear_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
 	}
 }

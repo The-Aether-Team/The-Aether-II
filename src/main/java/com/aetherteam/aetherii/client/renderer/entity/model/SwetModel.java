@@ -5,12 +5,12 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.SwetAnimation;
 import com.aetherteam.aetherii.entity.monster.Swet;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class SwetModel<T extends Swet> extends HierarchicalModel<T> {
+public class SwetModel<T extends Swet> extends EntityModel<T> {
     private final ModelPart root;
     public final ModelPart body;
     public final ModelPart gel;
@@ -68,7 +68,7 @@ public class SwetModel<T extends Swet> extends HierarchicalModel<T> {
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
+        super.setupAnim(entity);
         this.gel.visible = false;
         this.squish.visible = false;
         this.animate(entity.groundAnimationState, SwetAnimation.ground, ageInTicks);

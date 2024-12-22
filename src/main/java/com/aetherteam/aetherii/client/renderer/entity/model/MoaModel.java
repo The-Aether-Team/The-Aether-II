@@ -1,15 +1,14 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.MoaAnimation;
-import com.aetherteam.aetherii.entity.passive.Moa;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class MoaModel<T extends Moa> extends HierarchicalModel<T> {
-    private final ModelPart root;
+public class MoaModel<T extends MoaRenderState> extends EntityModel<T> {
     private final ModelPart body_main;
     private final ModelPart body_front;
     private final ModelPart neck;
@@ -61,7 +60,7 @@ public class MoaModel<T extends Moa> extends HierarchicalModel<T> {
     private final ModelPart leg_right_toe_left;
 
     public MoaModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body_main = root.getChild("body_main");
         this.body_front = this.body_main.getChild("body_front");
         this.neck = this.body_front.getChild("neck");
@@ -219,20 +218,15 @@ public class MoaModel<T extends Moa> extends HierarchicalModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head_main.xRot = (headPitch * Mth.DEG_TO_RAD) + 0.1886F;
-        this.head_main.yRot = netHeadYaw * Mth.DEG_TO_RAD;
-        float flyAmount = entity.getFlyAmount(ageInTicks - entity.tickCount);
-        this.animateWalk(MoaAnimation.walk, limbSwing, Mth.clamp(limbSwingAmount - flyAmount, 0, 1F), 2.0F, 2.5F);
-        if (entity.isSitting()) {
+    public void setupAnim(T entity) {
+        super.setupAnim(entity);
+        this.head_main.xRot = (entity.xRot * Mth.DEG_TO_RAD) + 0.1886F;
+        this.head_main.yRot = entity.yRot * Mth.DEG_TO_RAD;
+        float flyAmount = entity.flyAmount;
+        this.animateWalk(MoaAnimation.walk, entity.walkAnimationPos, Mth.clamp(entity.walkAnimationSpeed - flyAmount, 0, 1F), 2.0F, 2.5F);
+        if (entity.sitting) {
             this.applyStatic(MoaAnimation.sit);
         }
-        this.animateWalk(MoaAnimation.fly, ageInTicks, flyAmount, 0.5F, 1.0F);
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
+        this.animateWalk(MoaAnimation.fly, entity.ageInTicks, flyAmount, 0.5F, 1.0F);
     }
 }

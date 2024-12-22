@@ -54,6 +54,7 @@ public abstract class WingedAnimal extends MountableAnimal {
             } else {
                 aimingForFold = 1.0F;
             }
+
             this.setWingFold(this.getWingFold() + ((aimingForFold - this.getWingFold()) / 37.5F));
         }
     }

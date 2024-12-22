@@ -11,7 +11,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderState, EntityModel<Kirrid>, AbstractKirridModel, AbstractKirridBabyModel> {
+public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderState, EntityModel<KirridRenderState>, AbstractKirridModel, AbstractKirridBabyModel> {
     private final ResourceLocation defaultTexture;
     private final ResourceLocation babyTexture;
     private final AbstractKirridModel defaultModel;
@@ -59,5 +59,8 @@ public class KirridRenderer extends MultiBabyModelRenderer<Kirrid, KirridRenderS
         renderState.ramAnimationState.copyFrom(kirrid.ramAnimationState);
         renderState.plate = kirrid.hasPlate();
         renderState.wool = !kirrid.isSheared();
+        renderState.entityType = kirrid.getType();
+        renderState.id = kirrid.getId();
+        kirrid.getColor().ifPresent(kirridColor -> renderState.woolColor = kirridColor.getDyeColor());
     }
 }

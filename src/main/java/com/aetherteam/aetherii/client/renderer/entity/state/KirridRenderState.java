@@ -2,6 +2,8 @@ package com.aetherteam.aetherii.client.renderer.entity.state;
 
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 
 public class KirridRenderState extends LivingEntityRenderState {
 
@@ -10,5 +12,7 @@ public class KirridRenderState extends LivingEntityRenderState {
     public AnimationState jumpAnimationState = new AnimationState();
     public AnimationState ramAnimationState = new AnimationState();
     public AnimationState eatAnimationState = new AnimationState();
-
+    public EntityType<?> entityType;
+    public int id;
+    public DyeColor woolColor = DyeColor.WHITE;
 }

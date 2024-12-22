@@ -1,14 +1,14 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.taegore;
 
-import com.aetherteam.aetherii.entity.passive.Taegore;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.util.Mth;
 
-public class TaegoreBabyModel extends HierarchicalModel<Taegore> {
-	private final ModelPart root;
+public class TaegoreBabyModel extends EntityModel<LivingEntityRenderState> {
+    ;
 	private final ModelPart body_main;
 	private final ModelPart tail;
 	private final ModelPart plate_f_l;
@@ -24,7 +24,7 @@ public class TaegoreBabyModel extends HierarchicalModel<Taegore> {
 	private final ModelPart plate_b_r;
 
 	public TaegoreBabyModel(ModelPart root) {
-		this.root = root;
+        super(root);
 		this.body_main = root.getChild("body_main");
 		this.tail = body_main.getChild("tail");
 		this.plate_f_l = body_main.getChild("plate_f_l");
@@ -74,18 +74,13 @@ public class TaegoreBabyModel extends HierarchicalModel<Taegore> {
 	}
 
 	@Override
-	public ModelPart root() {
-		return this.root;
-	}
-
-	@Override
-	public void setupAnim(Taegore entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.head.xRot = headPitch * Mth.DEG_TO_RAD;
-		this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
-		this.leg_b_r.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		this.leg_b_l.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-		this.leg_f_r.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-		this.leg_f_l.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+    public void setupAnim(LivingEntityRenderState entity) {
+        super.setupAnim(entity);
+        this.head.xRot = entity.xRot * Mth.DEG_TO_RAD;
+        this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;
+        this.leg_b_r.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_b_l.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_f_r.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_f_l.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
 	}
 }

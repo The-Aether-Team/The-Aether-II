@@ -8,11 +8,12 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 
-public class TempestThunderballRenderer extends EntityRenderer<TempestThunderball> {
+public class TempestThunderballRenderer extends EntityRenderer<TempestThunderball, EntityRenderState> {
     private static final ResourceLocation TEMPEST_PROJECTILE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/tempest_thunderball.png");
     private static final RenderType RENDER_TYPE;
 
@@ -21,7 +22,7 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
     }
 
     @Override
-    public void render(TempestThunderball thunderball, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(EntityRenderState thunderball, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
         PoseStack.Pose pose = poseStack.last();
@@ -31,7 +32,7 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
         vertex(vertexconsumer, pose, packedLight, 1.0F, 1, 1, 0);
         vertex(vertexconsumer, pose, packedLight, 0.0F, 1, 0, 0);
         poseStack.popPose();
-        super.render(thunderball, entityYaw, partialTicks, poseStack, buffer, packedLight);
+        super.render(thunderball, poseStack, buffer, packedLight);
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int packedLight, float x, int y, int u, int v) {
@@ -46,6 +47,11 @@ public class TempestThunderballRenderer extends EntityRenderer<TempestThunderbal
     @Override
     protected int getBlockLightLevel(TempestThunderball entity, BlockPos pos) {
         return 15;
+    }
+
+    @Override
+    public EntityRenderState createRenderState() {
+        return new EntityRenderState();
     }
 
     static {

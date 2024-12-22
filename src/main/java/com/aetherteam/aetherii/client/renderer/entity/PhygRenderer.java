@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.entity.passive.Phyg;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 public class PhygRenderer extends MobRenderer<Phyg, WingEntityRenderState, PhygModel<WingEntityRenderState>> {
     private static final ResourceLocation PHYG_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/phyg/phyg.png");
@@ -23,9 +24,10 @@ public class PhygRenderer extends MobRenderer<Phyg, WingEntityRenderState, PhygM
     }
 
     @Override
-    public void extractRenderState(Phyg p_362733_, WingEntityRenderState p_360515_, float p_361157_) {
-        super.extractRenderState(p_362733_, p_360515_, p_361157_);
-        p_360515_.wingHold = p_362733_.getWingFold();
+    public void extractRenderState(Phyg phyg, WingEntityRenderState wingEntityRenderState, float p_361157_) {
+        super.extractRenderState(phyg, wingEntityRenderState, p_361157_);
+        wingEntityRenderState.wingAngle = (phyg.getWingFold() * Mth.sin(wingEntityRenderState.ageInTicks / 15.9F));
+        wingEntityRenderState.wingHold = phyg.getWingFold();
     }
 
     @Override
