@@ -6,8 +6,10 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiMod
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
@@ -82,11 +84,11 @@ public enum BiomeVariantPresets {
         return this.babyTexture;
     }
 
-    public HierarchicalModel<? extends Entity> getDefaultModel(EntityRendererProvider.Context context) {
+    public EntityModel<? extends EntityRenderState> getDefaultModel(EntityRendererProvider.Context context) {
         return this.defaultModel.apply(context);
     }
 
-    public HierarchicalModel<? extends Entity> getBabyModel(EntityRendererProvider.Context context) {
+    public EntityModel<? extends EntityRenderState> getBabyModel(EntityRendererProvider.Context context) {
         return this.babyModel.apply(context);
     }
 }
