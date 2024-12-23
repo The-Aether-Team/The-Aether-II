@@ -2,12 +2,11 @@ package com.aetherteam.aetherii.client.renderer.entity.model.kirrid;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.KirridAnimations;
 import com.aetherteam.aetherii.client.renderer.entity.animation.KirridBabyAnimations;
-import com.aetherteam.aetherii.entity.passive.Kirrid;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 
-public abstract class AbstractKirridBabyModel extends HierarchicalModel<Kirrid> {
-    protected final ModelPart root;
+public abstract class AbstractKirridBabyModel extends EntityModel<KirridRenderState> {
     protected final ModelPart body_main;
     protected final ModelPart wool;
     protected final ModelPart head;
@@ -20,7 +19,7 @@ public abstract class AbstractKirridBabyModel extends HierarchicalModel<Kirrid> 
     protected final ModelPart leg_f_r;
 
     public AbstractKirridBabyModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body_main = root.getChild("body_main");
         this.wool = this.body_main.getChild("wool");
         this.head = this.body_main.getChild("head");
@@ -34,20 +33,15 @@ public abstract class AbstractKirridBabyModel extends HierarchicalModel<Kirrid> 
     }
 
     @Override
-    public void setupAnim(Kirrid kirrid, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head.yRot = netHeadYaw * (float) (Math.PI / 180.0);
-        this.head.xRot = headPitch * (float) (Math.PI / 180.0);
-        this.animate(kirrid.jumpAnimationState, KirridBabyAnimations.JUMP, ageInTicks, 1.0F);
-        this.animate(kirrid.eatAnimationState, KirridBabyAnimations.EAT, ageInTicks, 1.0F);
+    public void setupAnim(KirridRenderState kirrid) {
+        super.setupAnim(kirrid);
+        this.head.yRot = kirrid.yRot * (float) (Math.PI / 180.0);
+        this.head.xRot = kirrid.xRot * (float) (Math.PI / 180.0);
+        this.animate(kirrid.jumpAnimationState, KirridBabyAnimations.JUMP, kirrid.ageInTicks, 1.0F);
+        this.animate(kirrid.eatAnimationState, KirridBabyAnimations.EAT, kirrid.ageInTicks, 1.0F);
         if (!kirrid.jumpAnimationState.isStarted()) {
-            this.animateWalk(KirridAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
+            this.animateWalk(KirridAnimations.WALK, kirrid.walkAnimationPos, kirrid.walkAnimationSpeed, 2.0F, 2.0F);
         }
-        this.plate.visible = kirrid.hasPlate();
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
+        this.plate.visible = kirrid.plate;
     }
 }

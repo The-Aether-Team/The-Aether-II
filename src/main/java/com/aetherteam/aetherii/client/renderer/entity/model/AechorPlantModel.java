@@ -5,13 +5,13 @@ import com.aetherteam.aetherii.entity.monster.AechorPlant;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class AechorPlantModel extends HierarchicalModel<AechorPlant> {
+public class AechorPlantModel extends EntityModel<AechorPlant> {
     public final ModelPart root;
     public final ModelPart stem;
     public final ModelPart head;
@@ -123,7 +123,7 @@ public class AechorPlantModel extends HierarchicalModel<AechorPlant> {
 
     @Override
     public void setupAnim(AechorPlant aechorPlant, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
+        super.setupAnim(entity);
 
         int i = 0;
         for (ModelPart modelPart : this.stamenStemParts()) {

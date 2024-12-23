@@ -1,12 +1,11 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.burrukai;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.BurrukaiAnimation;
-import com.aetherteam.aetherii.entity.passive.Burrukai;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.BurrukaiRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 
-public abstract class AbstractBurrukaiBabyModel extends HierarchicalModel<Burrukai> {
-    private final ModelPart root;
+public abstract class AbstractBurrukaiBabyModel extends EntityModel<BurrukaiRenderState> {
     private final ModelPart body;
     private final ModelPart tail;
     private final ModelPart head;
@@ -17,7 +16,7 @@ public abstract class AbstractBurrukaiBabyModel extends HierarchicalModel<Burruk
     private final ModelPart leg_rear_right;
 
     public AbstractBurrukaiBabyModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.tail = this.body.getChild("tail");
         this.head = this.body.getChild("head");
@@ -29,16 +28,11 @@ public abstract class AbstractBurrukaiBabyModel extends HierarchicalModel<Burruk
     }
 
     @Override
-    public void setupAnim(Burrukai kirrid, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head.yRot = netHeadYaw * (float) (Math.PI / 180.0);
-        this.head.xRot = headPitch * (float) (Math.PI / 180.0);
-        this.animate(kirrid.ramAnimationState, BurrukaiAnimation.RUSH_START, ageInTicks, 1.0F);
-        this.animateWalk(BurrukaiAnimation.WALK, limbSwing, limbSwingAmount, 2.0F, 2.0F);
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
+    public void setupAnim(BurrukaiRenderState burrukai) {
+        super.setupAnim(burrukai);
+        this.head.yRot = burrukai.yRot * (float) (Math.PI / 180.0);
+        this.head.xRot = burrukai.xRot * (float) (Math.PI / 180.0);
+        this.animate(burrukai.ramAnimationState, BurrukaiAnimation.RUSH_START, burrukai.ageInTicks, 1.0F);
+        this.animateWalk(BurrukaiAnimation.WALK, burrukai.walkAnimationPos, burrukai.walkAnimationSpeed, 2.0F, 2.0F);
     }
 }

@@ -2,12 +2,12 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.TempestAnimations;
 import com.aetherteam.aetherii.entity.monster.Tempest;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class TempestModel extends HierarchicalModel<Tempest> {
+public class TempestModel extends EntityModel<Tempest> {
 	private final ModelPart body;
 	private final ModelPart root;
 
@@ -108,7 +108,7 @@ public class TempestModel extends HierarchicalModel<Tempest> {
 
 	@Override
 	public void setupAnim(Tempest tempest, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+        super.setupAnim(entity);
 		this.animateWalk(TempestAnimations.FLY, limbSwing, limbSwingAmount, 2.0F, 2.0F);
 		this.animate(tempest.attackAnimationState, TempestAnimations.ATTACK, ageInTicks, 1.0F);
 		this.animate(tempest.hideAnimationState, TempestAnimations.DESPAWN, ageInTicks, 1.0F);

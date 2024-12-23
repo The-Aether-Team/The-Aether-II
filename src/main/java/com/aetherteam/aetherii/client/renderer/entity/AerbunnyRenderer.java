@@ -5,17 +5,16 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.layers.AerbunnyCollarLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.AerbunnyModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
+public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState, AerbunnyModel> {
     private static final ResourceLocation AERBUNNY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/aerbunny/aerbunny.png");
 
     public AerbunnyRenderer(EntityRendererProvider.Context context) {
@@ -24,8 +23,19 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
     }
 
     @Override
-    public EntityRenderState createRenderState() {
-        return null;
+    public AerbunnyRenderState createRenderState() {
+        return new AerbunnyRenderState();
+    }
+
+    @Override
+    public void extractRenderState(Aerbunny aerbunny, AerbunnyRenderState renderState, float p_361157_) {
+        super.extractRenderState(aerbunny, renderState, p_361157_);
+        renderState.puffiness = Mth.lerp(p_361157_, aerbunny.getPuffiness(), aerbunny.getPuffiness() - aerbunny.getPuffSubtract()) / 20.0F;
+        renderState.collarColor = aerbunny.getCollarColor();
+        renderState.isSitting = aerbunny.isInSittingPose();
+        renderState.onGround = aerbunny.onGround();
+        renderState.deltaMovement = aerbunny.getDeltaMovement();
+        renderState.tame = aerbunny.isTame();
     }
 
     /**
@@ -33,11 +43,10 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
      *
      * @param aerbunny     The {@link Aerbunny} entity.
      * @param poseStack    The rendering {@link PoseStack}.
-     * @param partialTicks The {@link Float} for the game's partial ticks.
      */
     @Override
-    protected void scale(Aerbunny aerbunny, PoseStack poseStack, float partialTicks) {
-        if (aerbunny.isBaby()) {
+    protected void scale(AerbunnyRenderState aerbunny, PoseStack poseStack) {
+        if (aerbunny.isBaby) {
             poseStack.scale(0.5F, 0.5F, 0.5F);
         }
     }
@@ -47,26 +56,24 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyModel> {
      *
      * @param aerbunny     The {@link Aerbunny} entity.
      * @param poseStack    The rendering {@link PoseStack}.
-     * @param ageInTicks   The {@link Float} for the entity's age in ticks.
      * @param rotationYaw  The {@link Float} for the rotation yaw.
-     * @param partialTicks The {@link Float} for the game's partial ticks.
      */
     @Override
-    protected void setupRotations(Aerbunny aerbunny, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTicks, float scale) {
-        super.setupRotations(aerbunny, poseStack, ageInTicks, rotationYaw, partialTicks, scale);
-        if (!aerbunny.onGround()) {
-            if (aerbunny.getDeltaMovement().y() > 0.5) {
-                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(partialTicks, 0.0F, 15.0F)));
-            } else if (aerbunny.getDeltaMovement().y() < -0.5) {
-                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(partialTicks, 0.0F, -15.0F)));
+    protected void setupRotations(AerbunnyRenderState aerbunny, PoseStack poseStack, float rotationYaw, float scale) {
+        super.setupRotations(aerbunny, poseStack, rotationYaw, scale);
+        if (!aerbunny.onGround) {
+            if (aerbunny.deltaMovement.y() > 0.5) {
+                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(aerbunny.partialTick, 0.0F, 15.0F)));
+            } else if (aerbunny.deltaMovement.y() < -0.5) {
+                poseStack.mulPose(Axis.XN.rotationDegrees(Mth.rotLerp(aerbunny.partialTick, 0.0F, -15.0F)));
             } else {
-                poseStack.mulPose(Axis.XN.rotationDegrees((float) (aerbunny.getDeltaMovement().y() * 30.0)));
+                poseStack.mulPose(Axis.XN.rotationDegrees((float) (aerbunny.deltaMovement.y() * 30.0)));
             }
         }
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LivingEntityRenderState renderState) {
+    public ResourceLocation getTextureLocation(AerbunnyRenderState renderState) {
         return AERBUNNY_TEXTURE;
     }
 }

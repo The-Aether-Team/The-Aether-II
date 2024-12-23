@@ -46,6 +46,17 @@ public abstract class WingedAnimal extends MountableAnimal {
                 this.setEntityOnGround(false);
             }
         }
+
+        if (this.level().isClientSide()) {
+            float aimingForFold;
+            if (this.isEntityOnGround()) {
+                aimingForFold = 0.0F;
+            } else {
+                aimingForFold = 1.0F;
+            }
+
+            this.setWingFold(this.getWingFold() + ((aimingForFold - this.getWingFold()) / 37.5F));
+        }
     }
 
     /**

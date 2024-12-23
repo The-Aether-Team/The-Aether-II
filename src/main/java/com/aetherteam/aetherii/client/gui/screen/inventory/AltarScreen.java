@@ -85,7 +85,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements R
         int slotY = j + 24;
         Direction slotDirection = Direction.WEST;
         for (int index = 1; index <= this.getMenu().getRecipeFuelCount(input); index++) {
-            guiGraphics.blitSprite(CHARGE_SLOT_SPRITE, slotX, slotY, 20, 20);
+            guiGraphics.blitSprite(RenderType::guiTextured, CHARGE_SLOT_SPRITE, slotX, slotY, 20, 20);
             if (index % 2 == 0) {
                 slotDirection = slotDirection.getCounterClockWise();
             }
@@ -98,12 +98,12 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements R
         Direction chargeDirection = Direction.WEST;
         for (int index = 0; index < this.getMenu().getRecipeFuelCount(input); index++) {
             if (index == 0) {
-                guiGraphics.blitSprite(CHARGE_SPRITE, i + 57, j + 44, 4, 7);
+                guiGraphics.blitSprite(RenderType::guiTextured, CHARGE_SPRITE, i + 57, j + 44, 4, 7);
             } else {
                 if (chargeDirection.getStepX() != 0) {
-                    guiGraphics.blitSprite(CHARGE_HORIZONTAL_SPRITE, chargeX - 6, chargeY - 2, 12, 4);
+                    guiGraphics.blitSprite(RenderType::guiTextured, CHARGE_HORIZONTAL_SPRITE, chargeX - 6, chargeY - 2, 12, 4);
                 } else {
-                    guiGraphics.blitSprite(CHARGE_VERTICAL_SPRITE, chargeX - 2, chargeY - 6, 4, 12);
+                    guiGraphics.blitSprite(RenderType::guiTextured, CHARGE_VERTICAL_SPRITE, chargeX - 2, chargeY - 6, 4, 12);
                 }
             }
             if (index % 2 == 1) {
@@ -117,7 +117,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> implements R
         }
 
         int j1 = Mth.ceil(this.menu.getProcessingProgress() * 26.0F);
-        guiGraphics.blitSprite(OUTPUT_PROGRESS_SPRITE, 26, 16, 0, 0, i + 107, j + 58, j1, 16);
+        guiGraphics.blitSprite(RenderType::guiTextured, OUTPUT_PROGRESS_SPRITE, 26, 16, 0, 0, i + 107, j + 58, j1, 16);
     }
 
     @Override

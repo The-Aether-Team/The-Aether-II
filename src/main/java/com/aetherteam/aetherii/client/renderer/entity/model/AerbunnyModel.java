@@ -1,15 +1,14 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.AerbunnyAnimation;
-import com.aetherteam.aetherii.entity.passive.Aerbunny;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.AerbunnyRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class AerbunnyModel extends HierarchicalModel<Aerbunny> {
-    private final ModelPart root;
+public class AerbunnyModel extends EntityModel<AerbunnyRenderState> {
     private final ModelPart body;
     private final ModelPart cloudpuff;
     private final ModelPart head;
@@ -24,10 +23,9 @@ public class AerbunnyModel extends HierarchicalModel<Aerbunny> {
     private final ModelPart leg_back_right;
     private final ModelPart foot_back_right;
     private final ModelPart tail;
-    public float puffiness;
 
     public AerbunnyModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.cloudpuff = this.body.getChild("cloudpuff");
         this.head = this.body.getChild("head");
@@ -93,32 +91,22 @@ public class AerbunnyModel extends HierarchicalModel<Aerbunny> {
     }
 
     @Override
-    public void prepareMobModel(Aerbunny aerbunny, float limbSwing, float limbSwingAmount, float partialTicks) {
-        super.prepareMobModel(aerbunny, limbSwing, limbSwingAmount, partialTicks);
-        this.puffiness = Mth.lerp(partialTicks, aerbunny.getPuffiness(), aerbunny.getPuffiness() - aerbunny.getPuffSubtract()) / 20.0F;
-    }
-
-    @Override
-    public void setupAnim(Aerbunny aerbunny, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head.xRot = headPitch * Mth.DEG_TO_RAD;
-        this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
-        if (!aerbunny.isInSittingPose()) {
-            this.leg_front_right.xRot = (Mth.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount) - this.body.xRot;
-            this.leg_front_left.xRot = (Mth.cos(limbSwing * 0.6662F) * 1.0F * limbSwingAmount) - this.body.xRot;
-            this.leg_back_right.xRot = (Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.2F * limbSwingAmount) - this.body.xRot;
-            this.leg_back_left.xRot = (Mth.cos(limbSwing * 0.6662F + Mth.PI) * 1.2F * limbSwingAmount) - this.body.xRot;
+    public void setupAnim(AerbunnyRenderState aerbunny) {
+        super.setupAnim(aerbunny);
+        this.head.xRot = aerbunny.xRot * Mth.DEG_TO_RAD;
+        this.head.yRot = aerbunny.yRot * Mth.DEG_TO_RAD;
+        if (!aerbunny.isSitting) {
+            this.leg_front_right.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F) * 1.0F * aerbunny.walkAnimationSpeed) - this.body.xRot;
+            this.leg_front_left.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F) * 1.0F * aerbunny.walkAnimationSpeed) - this.body.xRot;
+            this.leg_back_right.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F + Mth.PI) * 1.2F * aerbunny.walkAnimationSpeed) - this.body.xRot;
+            this.leg_back_left.xRot = (Mth.cos(aerbunny.walkAnimationPos * 0.6662F + Mth.PI) * 1.2F * aerbunny.walkAnimationSpeed) - this.body.xRot;
         } else {
             this.applyStatic(AerbunnyAnimation.SITTING);
         }
-        float a = 1.0F + this.puffiness * 0.5F;
+        float a = 1.0F + aerbunny.puffiness * 0.5F;
 
         this.cloudpuff.xScale = a;
         this.cloudpuff.yScale = a;
         this.cloudpuff.zScale = a;
-    }
-    @Override
-    public ModelPart root() {
-        return this.root;
     }
 }
