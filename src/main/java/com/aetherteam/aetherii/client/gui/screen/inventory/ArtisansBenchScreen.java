@@ -46,7 +46,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
         guiGraphics.blit(BG_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
         int k = (int) (41.0F * this.scrollOffs);
         ResourceLocation resourcelocation = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
-        guiGraphics.blitSprite(resourcelocation, i + 119, j + 15 + k, 12, 15);
+        guiGraphics.blitSprite(RenderType::guiTextured, resourcelocation, i + 119, j + 15 + k, 12, 15);
         int l = this.leftPos + 52;
         int i1 = this.topPos + 14;
         int j1 = this.startIndex + 12;
@@ -89,7 +89,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
                 location = RECIPE_SPRITE;
             }
 
-            guiGraphics.blitSprite(location, k, i1 - 1, 16, 18);
+            guiGraphics.blitSprite(RenderType::guiTextured, location, k, i1 - 1, 16, 18);
         }
     }
 

@@ -41,7 +41,6 @@ public class IcestoneWallBlock extends WallBlock implements EntityBlock {
      * [CODE COPY] - {@link net.minecraft.world.level.block.BaseEntityBlock#triggerEvent(BlockState, Level, BlockPos, int, int)}.<br><br>
      * Warning for "deprecation" is suppressed because the method is fine to override.
      */
-    @SuppressWarnings("deprecation")
     @Override
     public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int id, int param) {
         super.triggerEvent(state, level, pos, id, param);

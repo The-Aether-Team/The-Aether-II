@@ -125,20 +125,20 @@ public class AetherIIOverlays {
 
                 int buildupScaledValue = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
 
-                guiGraphics.blitSprite(BUILDUP_BACKGROUND_OVERLAY_SPRITE, 24, 24, 0, 24 - buildupScaledValue, i, j + 24 - buildupScaledValue, 24, buildupScaledValue);
+                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OVERLAY_SPRITE, 24, 24, 0, 24 - buildupScaledValue, i, j + 24 - buildupScaledValue, 24, buildupScaledValue);
 
-                guiGraphics.blitSprite(BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
+                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
 
                 if (buildup.isBuildupFull()) {
                     MobEffectInstance instance = player.getEffect(buildup.getType());
                     if (instance != null) {
                         int durationValueScaled = Math.min(instance.getDuration() / Math.max(1, (buildup.getInitialInstanceDuration() / 24)), 24);
-                        guiGraphics.blitSprite(BUILDUP_BACKGROUND_BACKING_SPRITE, 24, 24, 0, 24 - durationValueScaled, i, j + 24 - durationValueScaled, 24, durationValueScaled);
+                        guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_BACKING_SPRITE, 24, 24, 0, 24 - durationValueScaled, i, j + 24 - durationValueScaled, 24, durationValueScaled);
                     }
 
                     float flashInterval = (Mth.cos((0.5F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
                     guiGraphics.setColor(1.0F, 1.0F, 1.0F, flashInterval);
-                    guiGraphics.blitSprite(BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24);
+                    guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24);
                 }
                 guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -170,8 +170,8 @@ public class AetherIIOverlays {
                             int j = guiGraphics.guiHeight() / 2 - 5;
                             int k = guiGraphics.guiWidth() / 2 - 19;
                             int l = (int) (f * 10.0F);
-                            guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
-                            guiGraphics.blitSprite(CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+                            guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
+                            guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
 
                             RenderSystem.defaultBlendFunc();
                         }
@@ -187,8 +187,8 @@ public class AetherIIOverlays {
                     }
 
                     int l1 = (int) (f * 18.0F);
-                    guiGraphics.blitSprite(HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
-                    guiGraphics.blitSprite(HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+                    guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
+                    guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
                 }
             }
         }

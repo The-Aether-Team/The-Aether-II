@@ -74,10 +74,10 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
 
         guiGraphics.drawCenteredString(this.font, this.title, this.titleLabelX, this.titleLabelY, 16777215);
 
-        guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y + 22, 16, 16);
+        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y + 22, 16, 16);
         guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 20, y + 26, 16777215, true);
 
-        guiGraphics.blitSprite(Guidebook.ARMOR_SPRITE, x, y + 38, 16, 16);
+        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x, y + 38, 16, 16);
         guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 20, y + 42, 16777215, true);
 
         var data = Minecraft.getInstance().player.getData(AetherIIDataAttachments.CURRENCY);

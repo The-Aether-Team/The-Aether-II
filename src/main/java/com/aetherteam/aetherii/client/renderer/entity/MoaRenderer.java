@@ -7,19 +7,20 @@ import com.aetherteam.aetherii.client.renderer.entity.layers.MoaFeathersLayer;
 import com.aetherteam.aetherii.client.renderer.entity.layers.MoaKeratinLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.MoaModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class MoaRenderer extends MultiBabyModelRenderer<Moa, EntityModel<Moa>, MoaModel<Moa>, MoaBabyModel<Moa>> {
+public class MoaRenderer extends MultiBabyModelRenderer<Moa, MoaRenderState, EntityModel<MoaRenderState>, MoaModel<MoaRenderState>, MoaBabyModel<MoaRenderState>> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_base.png");
     private static final ResourceLocation BABY_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/moa/moa_baby.png");
     public static final ResourceLocation MOA_FEATHER_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_feather.png");
     public static final ResourceLocation MOA_EYES_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_eyes.png");
     public static final ResourceLocation MOA_KERATIN_SHEET = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/atlas/moa_keratin.png");
-    private final MoaModel<Moa> defaultModel;
-    private final MoaBabyModel<Moa> babyModel;
+    private final MoaModel<MoaRenderState> defaultModel;
+    private final MoaBabyModel<MoaRenderState> babyModel;
 
     public MoaRenderer(EntityRendererProvider.Context context) {
         super(context, new MoaModel<>(context.bakeLayer(AetherIIModelLayers.MOA)), 0.5F);
@@ -31,12 +32,29 @@ public class MoaRenderer extends MultiBabyModelRenderer<Moa, EntityModel<Moa>, M
     }
 
     @Override
-    public MoaModel<Moa> getDefaultModel() {
+    public MoaRenderState createRenderState() {
+        return new MoaRenderState();
+    }
+
+    @Override
+    public void extractRenderState(Moa moa, MoaRenderState renderState, float p_361157_) {
+        super.extractRenderState(moa, renderState, p_361157_);
+        renderState.sitting = moa.isSitting();
+        renderState.saddle = moa.isSaddled();
+        renderState.flyAmount = moa.getFlyAmount(p_361157_);
+        renderState.featherColor = moa.getFeatherColor();
+        renderState.keratinColor = moa.getKeratinColor();
+        renderState.eyeColor = moa.getEyeColor();
+        renderState.featherShape = moa.getFeatherShape();
+    }
+
+    @Override
+    public MoaModel<MoaRenderState> getDefaultModel() {
         return this.defaultModel;
     }
 
     @Override
-    public MoaBabyModel<Moa> getBabyModel() {
+    public MoaBabyModel<MoaRenderState> getBabyModel() {
         return this.babyModel;
     }
 

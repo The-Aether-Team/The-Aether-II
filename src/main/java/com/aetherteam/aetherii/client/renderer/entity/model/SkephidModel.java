@@ -1,20 +1,19 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.SkephidAnimations;
-import com.aetherteam.aetherii.entity.monster.Skephid;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.SkephidRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class SkephidModel<T extends Skephid> extends HierarchicalModel<T> {
-    private final ModelPart root;
+public class SkephidModel<T extends SkephidRenderState> extends EntityModel<T> {
     private final ModelPart body;
     private final ModelPart head;
     private final ModelPart mouth;
 
     public SkephidModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.head = this.body.getChild("head");
         this.mouth = this.head.getChild("mouth");
@@ -103,15 +102,11 @@ public class SkephidModel<T extends Skephid> extends HierarchicalModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head.yRot = netHeadYaw * (float) (Math.PI / 180.0);
-        this.head.xRot = headPitch * (float) (Math.PI / 180.0);
-        this.animateWalk(SkephidAnimations.WALK, limbSwing, limbSwingAmount, 2.0F, 4.0F);
+    public void setupAnim(T entity) {
+        super.setupAnim(entity);
+        this.head.yRot = entity.yRot * (float) (Math.PI / 180.0);
+        this.head.xRot = entity.xRot * (float) (Math.PI / 180.0);
+        this.animateWalk(SkephidAnimations.WALK, entity.walkAnimationPos, entity.walkAnimationSpeed, 2.0F, 4.0F);
     }
 
-    @Override
-    public ModelPart root() {
-        return this.root;
-    }
 }

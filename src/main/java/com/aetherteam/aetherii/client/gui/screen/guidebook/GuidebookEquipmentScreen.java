@@ -170,10 +170,10 @@ public class GuidebookEquipmentScreen extends AbstractContainerScreen<GuidebookE
         int x = 49;
         int y = 112;
 
-        guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
         guiGraphics.drawString(this.font, Component.literal((int) (player.getHealth()) + "/" + (int) (player.getMaxHealth())), x + 18, y + 4, 16777215, true);
 
-        guiGraphics.blitSprite(Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
+        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.ARMOR_SPRITE, x + 54, y, 16, 16);
         guiGraphics.drawString(this.font, Component.literal(player.getArmorValue() + "/20"), x + 72, y + 4, 16777215, true);
     }
 

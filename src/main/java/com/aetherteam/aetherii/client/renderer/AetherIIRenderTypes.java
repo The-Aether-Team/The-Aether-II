@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.TriState;
 import net.neoforged.neoforge.client.event.RegisterRenderBuffersEvent;
 
 public class AetherIIRenderTypes {
@@ -18,7 +19,7 @@ public class AetherIIRenderTypes {
             1536,
             RenderType.CompositeState.builder()
                     .setShaderState(RenderType.RENDERTYPE_GLINT_SHADER)
-                    .setTextureState(new RenderStateShard.TextureStateShard(IRRADIATED_GLINT_ITEM, true, false))
+                    .setTextureState(new RenderStateShard.TextureStateShard(IRRADIATED_GLINT_ITEM, TriState.TRUE, false))
                     .setWriteMaskState(RenderType.COLOR_WRITE)
                     .setCullState(RenderType.NO_CULL)
                     .setDepthTestState(RenderType.EQUAL_DEPTH_TEST)

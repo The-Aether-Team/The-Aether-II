@@ -1,22 +1,21 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.CockatriceAnimation;
-import com.aetherteam.aetherii.entity.monster.Cockatrice;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.CockatriceRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class CockatriceModel extends HierarchicalModel<Cockatrice> {
-    private final ModelPart root;
+public class CockatriceModel extends EntityModel<CockatriceRenderState> {
     private final ModelPart body;
     private final ModelPart body_front;
     private final ModelPart neck;
     private final ModelPart head;
 
     public CockatriceModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.body_front = this.body.getChild("body_front");
         this.neck = this.body_front.getChild("neck");
@@ -184,17 +183,14 @@ public class CockatriceModel extends HierarchicalModel<Cockatrice> {
 
 
     @Override
-    public void setupAnim(Cockatrice entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head.xRot = (headPitch * Mth.DEG_TO_RAD) + 0.0873F;
-        this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
-        this.animateWalk(CockatriceAnimation.RUN, limbSwing, limbSwingAmount, 1.0F, 1.5F);
-        this.animate(entity.attackAnimationState, CockatriceAnimation.CLAW_ATTACK, ageInTicks, 2.0F);
-        this.animate(entity.shootAnimationState, CockatriceAnimation.ATTACK, ageInTicks, 1.0F);
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
+    public void setupAnim(CockatriceRenderState entity) {
+        super.setupAnim(entity);
+        float f = entity.walkAnimationSpeed;
+        float f1 = entity.walkAnimationPos;
+        this.head.xRot = (entity.yRot * Mth.DEG_TO_RAD) + 0.0873F;
+        this.head.yRot = entity.xRot * Mth.DEG_TO_RAD;
+        this.animateWalk(CockatriceAnimation.RUN, f1, f, 1.0F, 1.5F);
+        this.animate(entity.attackAnimationState, CockatriceAnimation.CLAW_ATTACK, entity.ageInTicks, 2.0F);
+        this.animate(entity.shootAnimationState, CockatriceAnimation.ATTACK, entity.ageInTicks, 1.0F);
     }
 }

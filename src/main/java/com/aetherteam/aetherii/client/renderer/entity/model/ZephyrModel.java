@@ -1,16 +1,13 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.ZephyrAnimation;
-import com.aetherteam.aetherii.entity.monster.Zephyr;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.ZephyrRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class ZephyrModel extends HierarchicalModel<Zephyr> {
-    protected final ModelPart root;
+public class ZephyrModel extends EntityModel<ZephyrRenderState> {
     public final ModelPart body;
     public final ModelPart mouth;
     public final ModelPart bottom;
@@ -25,7 +22,7 @@ public class ZephyrModel extends HierarchicalModel<Zephyr> {
     public final ModelPart tailEnd;
 
     public ZephyrModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.mouth = this.body.getChild("mouth");
         this.bottom = this.body.getChild("bottom");
@@ -70,11 +67,11 @@ public class ZephyrModel extends HierarchicalModel<Zephyr> {
     }
 
     @Override
-    public void setupAnim(Zephyr zephyr, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.animateWalk(ZephyrAnimation.FLY, limbSwing, limbSwingAmount, 2.0F, 2.0F);
-        this.animate(zephyr.blowAnimationState, ZephyrAnimation.BLOW_ATTACK, ageInTicks, 1.0F);
-        this.animate(zephyr.webAnimationState, ZephyrAnimation.WEB_ATTACK, ageInTicks, 1.0F);
+    public void setupAnim(ZephyrRenderState zephyr) {
+        super.setupAnim(zephyr);
+        this.animateWalk(ZephyrAnimation.FLY, zephyr.walkAnimationPos, zephyr.walkAnimationSpeed, 2.0F, 2.0F);
+        this.animate(zephyr.blowAnimationState, ZephyrAnimation.BLOW_ATTACK, zephyr.ageInTicks, 1.0F);
+        this.animate(zephyr.webAnimationState, ZephyrAnimation.WEB_ATTACK, zephyr.ageInTicks, 1.0F);
 
 
 //        float motion = Mth.sin((limbSwing * 20.0F) / Mth.RAD_TO_DEG) * limbSwingAmount * 0.5F;
@@ -102,15 +99,5 @@ public class ZephyrModel extends HierarchicalModel<Zephyr> {
 //        this.tailEnd.x = Mth.sin((limbSwing * 10.0F) / Mth.RAD_TO_DEG) * limbSwingAmount * 0.95F;
 //        this.tailEnd.y = -motion;
 //        this.tailEnd.yRot = this.tailMiddle.yRot + 0.35F;
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer consumer, int packedLight, int packedOverlay, int color) {
-        this.body.render(poseStack, consumer, packedLight, packedOverlay, color);
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
     }
 }

@@ -2,13 +2,13 @@ package com.aetherteam.aetherii.client.renderer.entity.model;
 
 
 import com.aetherteam.aetherii.entity.passive.SkyrootLizard;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class SkyrootLizardModel<T extends SkyrootLizard> extends HierarchicalModel<T> {
+public class SkyrootLizardModel<T extends SkyrootLizard> extends EntityModel<T> {
 
     private final ModelPart root;
     private final ModelPart body;
@@ -106,9 +106,9 @@ public class SkyrootLizardModel<T extends SkyrootLizard> extends HierarchicalMod
 
     @Override
     public void setupAnim(SkyrootLizard entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head_1.xRot = headPitch * Mth.DEG_TO_RAD;
-        this.head_1.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+        super.setupAnim(entity);
+        this.head_1.xRot = entity.xRot * Mth.DEG_TO_RAD;
+        this.head_1.yRot = entity.yRot * Mth.DEG_TO_RAD;
         this.leg_back_right.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         this.leg_back_left.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
         this.leg_front_right.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;

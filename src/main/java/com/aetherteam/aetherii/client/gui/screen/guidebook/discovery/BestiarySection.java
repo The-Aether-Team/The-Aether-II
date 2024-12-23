@@ -163,7 +163,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             int y = i / 6;
             int slotX = leftPos + (x * 18);
             int slotY = topPos + (y * 18);
-            guiGraphics.blitSprite(sprite, slotX, slotY, 16, 16);
+            guiGraphics.blitSprite(RenderType::guiTextured, sprite, slotX, slotY, 16, 16);
 
             boolean isHovered = hoveredEntry != null && entry.entityType() == hoveredEntry.entityType();
             boolean isSelected = this.selectedEntry != null && entry.entityType() == this.selectedEntry.entityType();
@@ -173,7 +173,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             }
 
             if (this.isUnchecked(entry)) {
-                guiGraphics.blitSprite(Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
+                guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
             }
 
             i++;
@@ -186,7 +186,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         int scrollbarTop = 59;
         int scrollbarLeft = 151;
         ResourceLocation location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
-        guiGraphics.blitSprite(location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
+        guiGraphics.blitSprite(RenderType::guiTextured, location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
     }
 
     private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
@@ -228,26 +228,26 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                         int x = 27;
                         int y = 29;
 
-                        guiGraphics.blitSprite(Guidebook.HEARTS_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         this.renderIconValue(guiGraphics, x, y, (int) livingEntity.getMaxHealth());
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", (int) livingEntity.getMaxHealth()));
 
                         y += 17;
-                        guiGraphics.blitSprite(SLASH_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, SLASH_SPRITE, x, y, 16, 16);
                         int slashDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0);
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
                         this.renderDefenseIconValue(guiGraphics, x, y, -slashDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, slashTooltip);
 
                         y += 17;
-                        guiGraphics.blitSprite(IMPACT_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, IMPACT_SPRITE, x, y, 16, 16);
                         int impactDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0);
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
                         this.renderDefenseIconValue(guiGraphics, x, y, -impactDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, impactTooltip);
 
                         y += 17;
-                        guiGraphics.blitSprite(PIERCE_SPRITE, x, y, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, PIERCE_SPRITE, x, y, 16, 16);
                         int pierceDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0);
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
                         this.renderDefenseIconValue(guiGraphics, x, y, -pierceDefense);
@@ -331,7 +331,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
         double mouseXDiff = (mouseX - rightPagePos) - x;
         double mouseYDiff = (mouseY - topPos) - y;
-        guiGraphics.blitSprite(Guidebook.SLOT_SPRITE, x, y, 18, 18);
+        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.SLOT_SPRITE, x, y, 18, 18);
         x += 1;
         y += 1;
         guiGraphics.renderItem(stack, x, y);

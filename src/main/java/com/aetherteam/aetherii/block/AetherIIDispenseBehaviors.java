@@ -36,7 +36,6 @@ public class AetherIIDispenseBehaviors {
     };
 
     public static final DispenseItemBehavior SKYROOT_BUCKET_PICKUP_BEHAVIOR = new DefaultDispenseItemBehavior() {
-        private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
 
         @Override
         public ItemStack execute(BlockSource source, ItemStack stack) {

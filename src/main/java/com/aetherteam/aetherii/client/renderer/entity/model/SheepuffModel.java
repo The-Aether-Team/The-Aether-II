@@ -4,14 +4,14 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.SheepuffAnimations;
-import com.aetherteam.aetherii.entity.passive.Sheepuff;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.SheepuffRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class SheepuffModel<T extends Sheepuff> extends HierarchicalModel<T> {
+public class SheepuffModel<T extends SheepuffRenderState> extends EntityModel<T> {
     public float headXRot;
 
     private final ModelPart root;
@@ -31,7 +31,7 @@ public class SheepuffModel<T extends Sheepuff> extends HierarchicalModel<T> {
     private final ModelPart wool;
 
     public SheepuffModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.head = this.body.getChild("head");
         this.ear_left = this.head.getChild("ear_left");
@@ -97,36 +97,26 @@ public class SheepuffModel<T extends Sheepuff> extends HierarchicalModel<T> {
     }
 
     @Override
-    public void prepareMobModel(T sheepuff, float limbSwing, float limbSwingAmount, float partialTicks) {
-        super.prepareMobModel(sheepuff, limbSwing, limbSwingAmount, partialTicks);
-        this.head.y = 6.0F + sheepuff.getHeadEatPositionScale(partialTicks) * 9.0F;
-        this.headXRot = sheepuff.getHeadEatAngleScale(partialTicks);
-    }
-
-    @Override
-    public void setupAnim(T sheepuff, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
+    public void setupAnim(T sheepuff) {
+        super.setupAnim(sheepuff);
+        this.head.y = 6.0F + sheepuff.headEatPositionScale * 9.0F;
+        this.headXRot = sheepuff.headEatAngleScale;
+        this.head.yRot = sheepuff.yRot * Mth.DEG_TO_RAD;
         this.head.xRot = this.headXRot;
-        this.wool.visible = !sheepuff.isSheared();
-        this.wool_leg_front_right.visible = !sheepuff.isSheared();
-        this.wool_leg_front_left.visible = !sheepuff.isSheared();
-        this.wool_leg_back_right.visible = !sheepuff.isSheared();
-        this.wool_leg_back_left.visible = !sheepuff.isSheared();
-        this.animateWalk(SheepuffAnimations.walk, limbSwing, limbSwingAmount, 2.0F, 2.5F);
-        if (sheepuff.getPuffed()) {
-            if (!sheepuff.onGround()) {
+        this.wool.visible = !sheepuff.isSheared;
+        this.wool_leg_front_right.visible = !sheepuff.isSheared;
+        this.wool_leg_front_left.visible = !sheepuff.isSheared;
+        this.wool_leg_back_right.visible = !sheepuff.isSheared;
+        this.wool_leg_back_left.visible = !sheepuff.isSheared;
+        this.animateWalk(SheepuffAnimations.walk, sheepuff.walkAnimationPos, sheepuff.walkAnimationSpeed, 2.0F, 2.5F);
+        if (sheepuff.puff) {
+            if (!sheepuff.onGround) {
                 this.applyStatic(SheepuffAnimations.falling);
             }
             this.applyStatic(SheepuffAnimations.wool_expand);
         }
-        if (sheepuff.isBaby()) {
+        if (sheepuff.isBaby) {
             this.applyStatic(SheepuffAnimations.baby);
         }
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
     }
 }

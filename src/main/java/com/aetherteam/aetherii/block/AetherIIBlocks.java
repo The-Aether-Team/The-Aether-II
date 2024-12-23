@@ -626,21 +626,21 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
             if (block == HOLYSTONE_ROCK) {
                 return new RockItem(HOLYSTONE_ROCK.get(), new Item.Properties());
             } else if (block == AMBROSIUM_TORCH) {
-                return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN);
+                return new StandingAndWallBlockItem(AMBROSIUM_TORCH.get(), AMBROSIUM_WALL_TORCH.get(), Direction.DOWN, new Item.Properties());
             } else if (block == SKYROOT_CHEST) {
                 return new EntityBlockItem(block.get(), SkyrootChestBlockEntity::new, new Item.Properties());
             } else if (block == SKYROOT_BED) {
                 return new EntityBlockItem(block.get(), SkyrootBedBlockEntity::new, new Item.Properties().stacksTo(1));
             } else if (block == SKYROOT_SIGN) {
-                return new SignItem(new Item.Properties().stacksTo(16), SKYROOT_SIGN.get(), SKYROOT_WALL_SIGN.get());
+                return new SignItem(SKYROOT_SIGN.get(), SKYROOT_WALL_SIGN.get(), new Item.Properties().stacksTo(16));
             } else if (block == SKYROOT_HANGING_SIGN) {
                 return new HangingSignItem(SKYROOT_HANGING_SIGN.get(), SKYROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
             } else if (block == GREATROOT_SIGN) {
-                return new SignItem(new Item.Properties().stacksTo(16), GREATROOT_SIGN.get(), GREATROOT_WALL_SIGN.get());
+                return new SignItem(GREATROOT_SIGN.get(), GREATROOT_WALL_SIGN.get(), new Item.Properties().stacksTo(16));
             } else if (block == GREATROOT_HANGING_SIGN) {
                 return new HangingSignItem(GREATROOT_HANGING_SIGN.get(), GREATROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
             } else if (block == WISPROOT_SIGN) {
-                return new SignItem(new Item.Properties().stacksTo(16), WISPROOT_SIGN.get(), WISPROOT_WALL_SIGN.get());
+                return new SignItem(WISPROOT_SIGN.get(), WISPROOT_WALL_SIGN.get(), new Item.Properties().stacksTo(16));
             } else if (block == WISPROOT_HANGING_SIGN) {
                 return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16));
             } else if (block == OUTPOST_CAMPFIRE) {

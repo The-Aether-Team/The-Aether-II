@@ -6,8 +6,9 @@ import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiMod
 import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
-import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
@@ -64,10 +65,10 @@ public enum BiomeVariantPresets {
 
     private final ResourceLocation defaultTexture;
     private final ResourceLocation babyTexture;
-    private final Function<EntityRendererProvider.Context, HierarchicalModel<? extends Entity>> defaultModel;
-    private final Function<EntityRendererProvider.Context, HierarchicalModel<? extends Entity>> babyModel;
+    private final Function<EntityRendererProvider.Context, EntityModel<? extends Entity>> defaultModel;
+    private final Function<EntityRendererProvider.Context, EntityModel<? extends Entity>> babyModel;
 
-    BiomeVariantPresets(ResourceLocation defaultTexture, ResourceLocation babyTexture, Function<EntityRendererProvider.Context, HierarchicalModel<?>> defaultModel, Function<EntityRendererProvider.Context, HierarchicalModel<?>> babyModel) {
+    BiomeVariantPresets(ResourceLocation defaultTexture, ResourceLocation babyTexture, Function<EntityRendererProvider.Context, EntityModel<?>> defaultModel, Function<EntityRendererProvider.Context, EntityModel<?>> babyModel) {
         this.defaultTexture = defaultTexture;
         this.babyTexture = babyTexture;
         this.defaultModel = defaultModel;
@@ -82,11 +83,11 @@ public enum BiomeVariantPresets {
         return this.babyTexture;
     }
 
-    public HierarchicalModel<? extends Entity> getDefaultModel(EntityRendererProvider.Context context) {
+    public EntityModel<? extends EntityRenderState> getDefaultModel(EntityRendererProvider.Context context) {
         return this.defaultModel.apply(context);
     }
 
-    public HierarchicalModel<? extends Entity> getBabyModel(EntityRendererProvider.Context context) {
+    public EntityModel<? extends EntityRenderState> getBabyModel(EntityRendererProvider.Context context) {
         return this.babyModel.apply(context);
     }
 }

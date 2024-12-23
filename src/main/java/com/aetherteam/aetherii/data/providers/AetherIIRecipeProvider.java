@@ -11,6 +11,7 @@ import com.aetherteam.nitrogen.data.providers.NitrogenRecipeProvider;
 import com.aetherteam.nitrogen.recipe.BlockPropertyPair;
 import com.aetherteam.nitrogen.recipe.BlockStateIngredient;
 import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -37,13 +38,13 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         super(output, provider, id);
     }
 
-    protected static void leafPile(RecipeOutput recipeOutput, ItemLike carpet, ItemLike material) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, carpet, 8)
+    protected void leafPile(HolderGetter<Item> getter, ItemLike carpet, ItemLike material) {
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, carpet, 8)
                 .define('#', material)
                 .pattern("##")
                 .group("leaf_pile")
                 .unlockedBy(getHasName(material), has(material))
-                .save(recipeOutput);
+                .save(this.output);
     }
 
     protected ShapedRecipeBuilder fence(Supplier<? extends Block> fence, Supplier<? extends Block> material) {
@@ -54,12 +55,12 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
         return this.fenceGate(fenceGate, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
     }
 
-    protected void cloudwool(RecipeOutput output, RecipeCategory itemCategory, ItemLike item, RecipeCategory blockCategory, ItemLike block, String itemRecipeName, String itemGroup) {
-        ShapelessRecipeBuilder.shapeless(itemCategory, item, 4).requires(block).group(itemGroup).unlockedBy(getHasName(block), has(block)).save(output, this.name(itemRecipeName));
-        ShapedRecipeBuilder.shaped(blockCategory, block).define('#', item).pattern("##").pattern("##").unlockedBy(getHasName(item), has(item)).save(output, this.name(getSimpleRecipeName(block)));
+    protected void cloudwool(HolderGetter<Item> getter, RecipeCategory itemCategory, ItemLike item, RecipeCategory blockCategory, ItemLike block, String itemRecipeName, String itemGroup) {
+        ShapelessRecipeBuilder.shapeless(getter, itemCategory, item, 4).requires(block).group(itemGroup).unlockedBy(getHasName(block), has(block)).save(output, this.name(itemRecipeName));
+        ShapedRecipeBuilder.shaped(getter, blockCategory, block).define('#', item).pattern("##").pattern("##").unlockedBy(getHasName(item), has(item)).save(output, this.name(getSimpleRecipeName(block)));
     }
 
-    protected void colorBlockWithDye(RecipeOutput consumer, List<Item> dyes, List<Item> dyeableItems, Item extra, String group) {
+    protected void colorBlockWithDye(List<Item> dyes, List<Item> dyeableItems, Item extra, String group) {
         for(int i = 0; i < dyes.size(); ++i) {
             Item item = dyes.get(i);
             Item item1 = dyeableItems.get(i);
@@ -70,23 +71,23 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                     .requires(Ingredient.of(ingredients.toArray(ItemStack[]::new)))
                     .group(group)
                     .unlockedBy("has_needed_dye", has(item))
-                    .save(consumer, "dye_" + getItemName(item1));
+                    .save(this.output, "dye_" + getItemName(item1));
         }
     }
 
-    protected static void bookshelf(RecipeOutput consumer, ItemLike result, ItemLike material) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, result)
+    protected void bookshelf(HolderGetter<Item> getter, ItemLike result, ItemLike material) {
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.BUILDING_BLOCKS, result)
                 .define('#', material)
                 .define('B', Items.BOOK)
                 .pattern("###")
                 .pattern("BBB")
                 .pattern("###")
                 .unlockedBy(getHasName(Items.BOOK), has(Items.BOOK))
-                .save(consumer);
+                .save(this.output);
     }
 
-    protected static void sign(RecipeOutput consumer, ItemLike result, ItemLike block) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 3)
+    protected void sign(HolderGetter<Item> getter, ItemLike result, ItemLike block) {
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result, 3)
                 .group("wooden_sign")
                 .define('P', block)
                 .define('/', Tags.Items.RODS_WOODEN)
@@ -94,11 +95,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("PPP")
                 .pattern(" / ")
                 .unlockedBy(getHasName(block), has(block))
-                .save(consumer);
+                .save(this.output);
     }
 
-    protected static void hangingSign(RecipeOutput consumer, ItemLike result, ItemLike block) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 6)
+    protected void hangingSign(HolderGetter<Item> getter, ItemLike result, ItemLike block) {
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result, 6)
                 .group("hanging_sign")
                 .define('#', block)
                 .define('X', Items.CHAIN)
@@ -106,11 +107,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("###")
                 .pattern("###")
                 .unlockedBy("has_stripped_logs", has(block))
-                .save(consumer);
+                .save(this.output);
     }
 
-    protected static void arilumLantern(RecipeOutput consumer, ItemLike result, ItemLike gel) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result, 1)
+    protected void arilumLantern(HolderGetter<Item> getter, ItemLike result, ItemLike gel) {
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, result, 1)
                 .group("arilum_lantern")
                 .define('#', gel)
                 .define('X', AetherIIItems.ARILUM_BULBS)
@@ -118,7 +119,7 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .pattern("XXX")
                 .pattern("#X#")
                 .unlockedBy("has_bulbs", has(AetherIIItems.ARILUM_BULBS))
-                .save(consumer);
+                .save(this.output);
     }
 
     protected ShapedRecipeBuilder makePickaxeWithTag(Supplier<? extends Item> pickaxe, TagKey<Item> material, String has) {
@@ -198,15 +199,15 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
                 .unlockedBy(has, has(material));
     }
 
-    protected void parachute(RecipeOutput consumer, ItemLike result, ItemLike aercloud) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result, 1)
+    protected void parachute(HolderGetter<Item> getter, ItemLike result, ItemLike aercloud) {
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, result, 1)
                 .define('#', aercloud)
                 .define('X', AetherIITags.Items.RODS_SKYROOT)
                 .pattern("###")
                 .pattern("# #")
                 .pattern("X X")
                 .unlockedBy("has_aercloud", has(aercloud))
-                .save(consumer);
+                .save(this.output);
     }
 
     protected final void foodCooking(Supplier<? extends ItemLike> material, Supplier<? extends ItemLike> result, float xp, RecipeOutput consumer) {

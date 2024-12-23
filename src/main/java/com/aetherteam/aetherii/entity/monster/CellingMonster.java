@@ -53,7 +53,7 @@ public class CellingMonster extends Monster {
         if (attachChangeProgress > 0F) {
             attachChangeProgress -= 0.1F;
         }
-        Vec3 vector3d = this.getDeltaMovement();
+
         if (!this.level().isClientSide) {
             boolean flag = this.moveControl instanceof CellingMoveControl && ((CellingMoveControl) this.moveControl).isWalkableUpper();
             boolean flag2 = this.moveControl.hasWanted() && this.moveControl.getWantedY() - this.getY() > 0;

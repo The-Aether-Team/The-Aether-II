@@ -1,26 +1,26 @@
 package com.aetherteam.aetherii.loot;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.LootContextParamSetsAccessor;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.ContextKeySetSetsAccessor;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.util.context.ContextKeySet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
 import java.util.function.Consumer;
 
 public class AetherIILootContexts {
-    public static final LootContextParamSet STRIPPING = register("stripping", (builder) -> builder.required(LootContextParams.TOOL).build());
+    public static final ContextKeySet STRIPPING = register("stripping", (builder) -> builder.required(LootContextParams.TOOL).build());
 
-    private static LootContextParamSet register(String pRegistryName, Consumer<LootContextParamSet.Builder> pBuilderConsumer) {
-        LootContextParamSet.Builder lootcontextparamset$builder = new LootContextParamSet.Builder();
-        pBuilderConsumer.accept(lootcontextparamset$builder);
-        LootContextParamSet lootcontextparamset = lootcontextparamset$builder.build();
-        ResourceLocation resourcelocation = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, pRegistryName);
-        LootContextParamSet lootcontextparamset1 = LootContextParamSetsAccessor.getRegistry().put(resourcelocation, lootcontextparamset);
-        if (lootcontextparamset1 != null) {
+    private static ContextKeySet register(String name, Consumer<ContextKeySet.Builder> consumer) {
+        ContextKeySet.Builder lootcontextparamset$builder = new ContextKeySet.Builder();
+        consumer.accept(lootcontextparamset$builder);
+        ContextKeySet contextKeySet = lootcontextparamset$builder.build();
+        ResourceLocation resourcelocation = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name);
+        ContextKeySet contextKeySet1 = ContextKeySetSetsAccessor.getRegistry().put(resourcelocation, contextKeySet);
+        if (contextKeySet1 != null) {
             throw new IllegalStateException("Loot table parameter set " + resourcelocation + " is already registered");
         } else {
-            return lootcontextparamset;
+            return contextKeySet;
         }
     }
 }

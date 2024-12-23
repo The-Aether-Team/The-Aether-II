@@ -38,9 +38,9 @@ public class HolystoneFurnaceBlock extends AbstractFurnaceBlock {
         return new HolystoneFurnaceBlockEntity(pos, state);
     }
 
-    @Override
+    @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide() ? null : createTickerHelper(blockEntityType, AetherIIBlockEntityTypes.HOLYSTONE_FURNACE.get(), AbstractFurnaceBlockEntity::serverTick);
+        return createFurnaceTicker(level, blockEntityType, AetherIIBlockEntityTypes.HOLYSTONE_FURNACE.get());
     }
 
     @Override

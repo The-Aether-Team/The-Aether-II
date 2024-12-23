@@ -1,7 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,7 +10,7 @@ public class MoaEggModel extends Model {
     private final ModelPart moa_egg;
 
     public MoaEggModel(ModelPart root) {
-        super(RenderType::entityCutoutNoCull);
+        super(root, RenderType::entityCutoutNoCull);
         this.moa_egg = root.getChild("moa_egg");
     }
 
@@ -25,11 +23,5 @@ public class MoaEggModel extends Model {
                 .texOffs(0, 18).addBox(-3.0F, -12.0F, -3.0F, 6.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 32, 32);
-    }
-
-
-    @Override
-    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, int color) {
-        moa_egg.render(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, color);
     }
 }

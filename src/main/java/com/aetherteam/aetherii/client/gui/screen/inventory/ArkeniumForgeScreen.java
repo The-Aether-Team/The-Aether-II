@@ -142,7 +142,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
 
         ItemStack input = this.menu.getInput();
 
-        guiGraphics.blitSprite(!input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
+        guiGraphics.blitSprite(RenderType::guiTextured, !input.isEmpty() ? TEXT_FIELD_SPRITE : TEXT_FIELD_DISABLED_SPRITE, this.leftPos + 33, this.topPos + 20, 110, 16);
 
         if (!input.isEmpty()) {
             ItemStack displayStack = input.copy();
@@ -163,7 +163,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
             ReinforcementTier displayTier = displayStack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
 
             if (displayTier != null) {
-                guiGraphics.blitSprite(TIER_LOCATIONS.get(displayTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
+                guiGraphics.blitSprite(RenderType::guiTextured, TIER_LOCATIONS.get(displayTier.getTier() - 1), this.leftPos + 80, this.topPos + 91, 16, 16);
             }
 
             int tierCount = this.menu.getTierCount();
@@ -176,7 +176,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                 for (int tier = 1; tier <= tierCount; tier++) {
                     int offsetX = x + ((areaWidth / (tierCount + 1)) * tier);
 
-                    guiGraphics.blitSprite(TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
+                    guiGraphics.blitSprite(RenderType::guiTextured, TIER_LOCATIONS.get(tier - 1), offsetX - (spriteSize / 2), y, spriteSize, spriteSize);
 
                     ReinforcementTier.Cost cost = this.menu.getCostForTier(tier);
                     int primaryCost = this.menu.getPrimaryCostForTier(tier);
@@ -198,11 +198,11 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
                                 guiGraphics.renderItemDecorations(this.font, secondary, offsetX, y + 18);
                             }
                         } else {
-                            guiGraphics.blitSprite(TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
+                            guiGraphics.blitSprite(RenderType::guiTextured, TIER_COMPLETED_SPRITE, offsetX - (spriteSize / 2), y + 19, spriteSize, spriteSize);
                         }
                     }
                     if (currentTier == tier && currentTier > this.menu.getTierForItem()) {
-                        guiGraphics.blitSprite(TIER_SELECTED_SPRITE, offsetX - (9), y - 1, 18, 18);
+                        guiGraphics.blitSprite(RenderType::guiTextured, TIER_SELECTED_SPRITE, offsetX - (9), y - 1, 18, 18);
                     }
                 }
             }

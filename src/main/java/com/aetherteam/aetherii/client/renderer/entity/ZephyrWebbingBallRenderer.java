@@ -8,19 +8,25 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-public class ZephyrWebbingBallRenderer extends EntityRenderer<ZephyrWebbingBall> {
+public class ZephyrWebbingBallRenderer extends EntityRenderer<ZephyrWebbingBall, EntityRenderState> {
     private static final ResourceLocation ZEPHYR_PROJECTILE_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/zephyr_webbing_ball.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(ZEPHYR_PROJECTILE_TEXTURE);
+    private static final RenderType RENDER_TYPE;
 
     public ZephyrWebbingBallRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public void render(ZephyrWebbingBall webbingBall, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public EntityRenderState createRenderState() {
+        return new EntityRenderState();
+    }
+
+    @Override
+    public void render(EntityRenderState webbingBall, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
         PoseStack.Pose pose = poseStack.last();
@@ -30,7 +36,7 @@ public class ZephyrWebbingBallRenderer extends EntityRenderer<ZephyrWebbingBall>
         vertex(vertexconsumer, pose, packedLight, 1.0F, 1, 1, 0);
         vertex(vertexconsumer, pose, packedLight, 0.0F, 1, 0, 0);
         poseStack.popPose();
-        super.render(webbingBall, entityYaw, partialTicks, poseStack, buffer, packedLight);
+        super.render(webbingBall, poseStack, buffer, packedLight);
     }
 
     private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int packedLight, float x, int y, int u, int v) {
@@ -42,9 +48,7 @@ public class ZephyrWebbingBallRenderer extends EntityRenderer<ZephyrWebbingBall>
                 .setNormal(pose, 0.0F, 1.0F, 0.0F);
     }
 
-    @Override
-    public ResourceLocation getTextureLocation(ZephyrWebbingBall webbingBall) {
-        return ZEPHYR_PROJECTILE_TEXTURE;
+    static {
+        RENDER_TYPE = RenderType.entityCutoutNoCull(ZEPHYR_PROJECTILE_TEXTURE);
     }
-
 }

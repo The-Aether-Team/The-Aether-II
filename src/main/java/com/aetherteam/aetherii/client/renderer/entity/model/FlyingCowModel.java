@@ -5,16 +5,14 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.FlyingCowAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.animation.WingAnimation;
-import com.aetherteam.aetherii.entity.passive.FlyingCow;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HierarchicalModel;
+import com.aetherteam.aetherii.client.renderer.entity.state.WingEntityRenderState;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class FlyingCowModel<T extends FlyingCow> extends HierarchicalModel<T> {
-    private final ModelPart root;
+public class FlyingCowModel<T extends WingEntityRenderState> extends EntityModel<T> {
     private final ModelPart body;
     private final ModelPart wing_left;
     private final ModelPart wing_right;
@@ -28,7 +26,7 @@ public class FlyingCowModel<T extends FlyingCow> extends HierarchicalModel<T> {
     private final ModelPart leg_back_right;
 
     public FlyingCowModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.head = this.body.getChild("head");
         this.ear_left = this.head.getChild("ear_left");
@@ -100,34 +98,18 @@ public class FlyingCowModel<T extends FlyingCow> extends HierarchicalModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.root().getAllParts().forEach(ModelPart::resetPose);
-        this.head.xRot = headPitch * Mth.DEG_TO_RAD;
-        this.head.yRot = netHeadYaw * Mth.DEG_TO_RAD;
-        this.leg_back_right.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.leg_back_left.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        this.leg_front_right.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        this.leg_front_left.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+    public void setupAnim(T entity) {
+        super.setupAnim(entity);
+        this.head.xRot = entity.yRot * Mth.DEG_TO_RAD;
+        this.head.yRot = entity.xRot * Mth.DEG_TO_RAD;
+        this.leg_back_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_back_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
+        this.animateWalk(WingAnimation.wing_open, 0.0F, entity.wingHold, 1.0F, 1.0F);
 
-
-        if (!Minecraft.getInstance().isPaused()) {
-            float aimingForFold;
-            if (entity.isEntityOnGround()) {
-                aimingForFold = 0.0F;
-            } else {
-                aimingForFold = 1.0F;
-            }
-            entity.setWingFold(entity.getWingFold() + ((aimingForFold - entity.getWingFold()) / 37.5F));
-        }
-        this.animateWalk(WingAnimation.wing_open, 0.0F, entity.getWingFold(), 1.0F, 1.0F);
-
-        if (entity.isBaby()) {
+        if (entity.isBaby) {
             this.applyStatic(FlyingCowAnimation.BABY);
         }
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
     }
 }
