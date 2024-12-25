@@ -24,7 +24,7 @@ public class AltarFuelSlot extends Slot {
     }
 
     @Override
-    public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-        return Pair.of(InventoryMenu.BLOCK_ATLAS, SLOT_FUEL);
+    public ResourceLocation getNoItemIcon() {
+        return SLOT_FUEL;
     }
 }

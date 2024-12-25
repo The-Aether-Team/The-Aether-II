@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -78,8 +79,9 @@ public class ForgeCharmSlot extends Slot {
         return this.charmIndex;
     }
 
+    @Nullable
     @Override
-    public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-        return Pair.of(InventoryMenu.BLOCK_ATLAS, SLOT_CHARM);
+    public ResourceLocation getNoItemIcon() {
+        return SLOT_CHARM;
     }
 }

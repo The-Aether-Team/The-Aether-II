@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.recipe.builder.book;
+package com.aetherteam.aetherii.recipe.book;
 
 import net.minecraft.util.StringRepresentable;
 

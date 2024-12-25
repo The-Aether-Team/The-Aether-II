@@ -4,14 +4,20 @@ import com.aetherteam.aetherii.inventory.menu.ArtisansBenchMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.StonecutterMenu;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SelectableRecipe;
 import net.minecraft.world.item.crafting.StonecutterRecipe;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplayContext;
 
 import java.util.List;
 
@@ -43,7 +49,7 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = this.topPos;
-        guiGraphics.blit(BG_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        guiGraphics.blit(RenderType::guiTextured, BG_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
         int k = (int) (41.0F * this.scrollOffs);
         ResourceLocation resourcelocation = this.isScrollBarActive() ? SCROLLER_SPRITE : SCROLLER_DISABLED_SPRITE;
         guiGraphics.blitSprite(RenderType::guiTextured, resourcelocation, i + 119, j + 15 + k, 12, 15);
@@ -61,21 +67,24 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
             int i = this.leftPos + 52;
             int j = this.topPos + 14;
             int k = this.startIndex + 12;
-            List<RecipeHolder<StonecutterRecipe>> list = this.menu.getRecipes();
+            SelectableRecipe.SingleInputSet<StonecutterRecipe> singleInputSet = this.menu.getVisibleRecipes();
 
-            for (int l = this.startIndex; l < k && l < this.menu.getNumRecipes(); ++l) {
+
+            for (int l = this.startIndex; l < k && l < singleInputSet.size(); ++l) {
                 int i1 = l - this.startIndex;
                 int j1 = i + i1 % 4 * 16;
                 int k1 = j + i1 / 4 * 18 + 2;
                 if (x >= j1 && x < j1 + 16 && y >= k1 && y < k1 + 18) {
-                    guiGraphics.renderTooltip(this.font, list.get(l).value().getResultItem(this.minecraft.level.registryAccess()), x, y);
+                    ContextMap contextMap = SlotDisplayContext.fromLevel(this.minecraft.level);
+                    SlotDisplay slotDisplay = singleInputSet.entries().get(l).recipe().optionDisplay();
+                    guiGraphics.renderTooltip(this.font, slotDisplay.resolveForFirstStack(contextMap), x, y);
                 }
             }
         }
     }
 
     private void renderButtons(GuiGraphics guiGraphics, int mouseX, int mouseY, int x, int y, int lastVisibleElementIndex) {
-        for(int i = this.startIndex; i < lastVisibleElementIndex && i < this.menu.getNumRecipes(); ++i) {
+        for(int i = this.startIndex; i < lastVisibleElementIndex && i < this.menu.getNumberOfVisibleRecipes(); ++i) {
             int j = i - this.startIndex;
             int k = x + j % 4 * 16;
             int l = j / 4;
@@ -94,14 +103,16 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     }
 
     private void renderRecipes(GuiGraphics guiGraphics, int x, int y, int startIndex) {
-        List<RecipeHolder<StonecutterRecipe>> list = this.menu.getRecipes();
+        SelectableRecipe.SingleInputSet<StonecutterRecipe> singleInputSet = this.menu.getVisibleRecipes();
+        ContextMap contextMap = SlotDisplayContext.fromLevel(this.minecraft.level);
 
-        for (int i = this.startIndex; i < startIndex && i < this.menu.getNumRecipes(); ++i) {
+        for (int i = this.startIndex; i < startIndex && i < singleInputSet.size(); ++i) {
             int j = i - this.startIndex;
             int k = x + j % 4 * 16;
             int l = j / 4;
             int i1 = y + l * 18 + 2;
-            guiGraphics.renderItem(list.get(i).value().getResultItem(this.minecraft.level.registryAccess()), k, i1);
+            SlotDisplay slotDisplay = singleInputSet.entries().get(i).recipe().optionDisplay();
+            guiGraphics.renderItem(slotDisplay.resolveForFirstStack(contextMap), k, i1);
         }
     }
 
@@ -161,11 +172,11 @@ public class ArtisansBenchScreen extends AbstractContainerScreen<ArtisansBenchMe
     }
 
     private boolean isScrollBarActive() {
-        return this.displayRecipes && this.menu.getNumRecipes() > 12;
+        return this.displayRecipes && this.menu.getNumberOfVisibleRecipes() > 12;
     }
 
     protected int getOffscreenRows() {
-        return (this.menu.getNumRecipes() + 4 - 1) / 4 - 3;
+        return (this.menu.getNumberOfVisibleRecipes() + 4 - 1) / 4 - 3;
     }
 
     private void containerChanged() {

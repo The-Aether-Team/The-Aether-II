@@ -132,8 +132,8 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
 
             @Override
-            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                return Pair.of(InventoryMenu.BLOCK_ATLAS, SLOT_PRIMARY);
+            public ResourceLocation getNoItemIcon() {
+                return SLOT_PRIMARY;
             }
         });
         this.addSlot(new Slot(this.container, 2, 91, 149) {
@@ -143,8 +143,8 @@ public class ArkeniumForgeMenu extends AbstractContainerMenu {
             }
 
             @Override
-            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                return Pair.of(InventoryMenu.BLOCK_ATLAS, SLOT_SECONDARY);
+            public ResourceLocation getNoItemIcon() {
+                return SLOT_SECONDARY;
             }
         });
 

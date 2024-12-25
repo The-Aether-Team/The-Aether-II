@@ -12,6 +12,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -96,7 +97,7 @@ public class GuidebookStatusScreen extends Screen implements Guidebook {
     protected void renderMenuBackground(GuiGraphics partialTick) { }
 
     @Override
-    protected void renderBlurredBackground(float partialTick) { }
+    protected void renderBlurredBackground() { }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {

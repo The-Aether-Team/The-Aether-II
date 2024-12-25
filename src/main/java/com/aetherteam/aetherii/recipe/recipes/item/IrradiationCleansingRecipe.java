@@ -41,23 +41,23 @@ public class IrradiationCleansingRecipe implements Recipe<SingleRecipeInputWithR
     }
 
     @Override
-    public boolean canCraftInDimensions(int i, int i1) {
-        return true;
-    }
-
-    @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public RecipeType<?> getType() {
+    public RecipeType<IrradiationCleansingRecipe> getType() {
         return AetherIIRecipeTypes.IRRADIATION_CLEANSING.get();
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<IrradiationCleansingRecipe> getSerializer() {
         return AetherIIRecipeSerializers.IRRADIATION_CLEANSING.get();
+    }
+
+    @Override
+    public PlacementInfo placementInfo() {
+        return null;
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return null;
     }
 
     public static class Serializer implements RecipeSerializer<IrradiationCleansingRecipe> {
@@ -67,7 +67,7 @@ public class IrradiationCleansingRecipe implements Recipe<SingleRecipeInputWithR
         public Serializer() {
             this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
                     Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
-                    Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
+                    Ingredient.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
                     SimpleWeightedRandomList.wrappedCodec(ItemStack.CODEC).fieldOf("results").forGetter(recipe -> recipe.results)
             ).apply(instance, IrradiationCleansingRecipe::new));
             this.streamCodec = StreamCodec.of(this::toNetwork, this::fromNetwork);

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.function.BooleanSupplier;
 
 @Mixin(ReceivingLevelScreen.class)
-public class ReceivingLevelScreenMixin {
+public class ReceivingLevelScreenMixin { //todo this class needs to be removed and the event for registering these for portals should be used instead
     @Unique
     private boolean isInAetherPortal;
     @Unique

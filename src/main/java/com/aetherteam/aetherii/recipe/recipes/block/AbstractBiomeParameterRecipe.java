@@ -18,7 +18,7 @@ import java.util.Optional;
 public abstract class AbstractBiomeParameterRecipe extends AbstractBlockStateRecipe {
     private final Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome;
 
-    public AbstractBiomeParameterRecipe(RecipeType<?> type, Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome, BlockStateIngredient ingredient, BlockPropertyPair result, Optional<ResourceLocation> function) {
+    public AbstractBiomeParameterRecipe(RecipeType<? extends AbstractBiomeParameterRecipe> type, Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome, BlockStateIngredient ingredient, BlockPropertyPair result, Optional<ResourceLocation> function) {
         super(type, ingredient, result, function);
         this.biome = biome;
     }

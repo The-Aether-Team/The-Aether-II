@@ -247,7 +247,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         }
     }
 
-    private static int getTotalProcessingTime(Level level, AltarBlockEntity blockEntity) {
+    private static int getTotalProcessingTime(ServerLevel level, AltarBlockEntity blockEntity) {
         return blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), level).map(recipeHolder -> recipeHolder.value().getProcessingTime()).orElse(200);
     }
 

@@ -30,31 +30,6 @@ public class WaterVialItem extends Item {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entityLiving) {
-        Player player = entityLiving instanceof Player ? (Player) entityLiving : null;
-        if (player instanceof ServerPlayer serverPlayer) {
-            CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
-        }
-
-        if (player != null) {
-            player.awardStat(Stats.ITEM_USED.get(this));
-            stack.consume(1, player);
-        }
-
-        if (player == null || !player.hasInfiniteMaterials()) {
-            if (stack.isEmpty()) {
-                return new ItemStack(AetherIIItems.SCATTERGLASS_VIAL.get());
-            }
-            if (player != null) {
-                player.getInventory().add(new ItemStack(AetherIIItems.SCATTERGLASS_VIAL.get()));
-            }
-        }
-
-        entityLiving.gameEvent(GameEvent.DRINK);
-        return stack;
-    }
-
-    @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
@@ -90,20 +65,5 @@ public class WaterVialItem extends Item {
         } else {
             return InteractionResult.PASS;
         }
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return 32;
-    }
-
-    @Override
-    public ItemUseAnimation getUseAnimation(ItemStack stack) {
-        return ItemUseAnimation.DRINK;
-    }
-
-    @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
-        return ItemUtils.startUsingInstantly(level, player, hand);
     }
 }

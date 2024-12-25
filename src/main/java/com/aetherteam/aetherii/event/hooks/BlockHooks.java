@@ -58,7 +58,7 @@ public class BlockHooks {
                 if ((level.dimension() == LevelUtil.returnDimension() || level.dimension() == LevelUtil.destinationDimension()) && !AetherIIConfig.SERVER.disable_aether_portal.get()) {
                     Optional<AetherPortalShape> optional = AetherPortalShape.findEmptyAetherPortalShape(level, pos, Direction.Axis.X);
                     if (optional.isPresent()) {
-                        optional.get().createPortalBlocks();
+                        optional.get().createPortalBlocks(level);
                         return true;
                     }
                 }

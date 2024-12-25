@@ -11,19 +11,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
-import net.minecraft.world.item.crafting.StonecutterRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ArtisansBenchMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
     private final DataSlot selectedRecipeIndex = DataSlot.standalone();
     private final Level level;
-    private List<RecipeHolder<StonecutterRecipe>> recipes = Lists.newArrayList();
+    private SelectableRecipe.SingleInputSet<StonecutterRecipe> recipesForInput;
     private ItemStack input = ItemStack.EMPTY;
     long lastSoundTime;
     final Slot inputSlot;
@@ -60,7 +58,7 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
                 ArtisansBenchMenu.this.resultContainer.awardUsedRecipes(player, this.getRelevantItems());
                 ItemStack itemStack = ArtisansBenchMenu.this.inputSlot.remove(1);
                 if (!itemStack.isEmpty()) {
-                    ArtisansBenchMenu.this.setupResultSlot();
+                    ArtisansBenchMenu.this.setupResultSlot(ArtisansBenchMenu.this.selectedRecipeIndex.get());
                 }
 
                 access.execute((level, pos) -> {
@@ -95,16 +93,16 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
         return this.selectedRecipeIndex.get();
     }
 
-    public List<RecipeHolder<StonecutterRecipe>> getRecipes() {
-        return this.recipes;
+    public SelectableRecipe.SingleInputSet<StonecutterRecipe> getVisibleRecipes() {
+        return this.recipesForInput;
     }
 
-    public int getNumRecipes() {
-        return this.recipes.size();
+    public int getNumberOfVisibleRecipes() {
+        return this.recipesForInput.size();
     }
 
     public boolean hasInputItem() {
-        return this.inputSlot.hasItem() && !this.recipes.isEmpty();
+        return this.inputSlot.hasItem() && !this.recipesForInput.isEmpty();
     }
 
     @Override
@@ -114,16 +112,19 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
-        if (this.isValidRecipeIndex(id)) {
-            this.selectedRecipeIndex.set(id);
-            this.setupResultSlot();
+        if (this.selectedRecipeIndex.get() == id) {
+            return false;
+        } else {
+            if (this.isValidRecipeIndex(id)) {
+                this.selectedRecipeIndex.set(id);
+                this.setupResultSlot(id);
+            }
+            return true;
         }
-
-        return true;
     }
 
     private boolean isValidRecipeIndex(int recipeIndex) {
-        return recipeIndex >= 0 && recipeIndex < this.recipes.size();
+        return recipeIndex >= 0 && recipeIndex < this.recipesForInput.size();
     }
 
     @Override
@@ -131,37 +132,36 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
         ItemStack itemStack = this.inputSlot.getItem();
         if (!itemStack.is(this.input.getItem())) {
             this.input = itemStack.copy();
-            this.setupRecipeList(inventory, itemStack);
+            this.setupRecipeList(itemStack);
         }
     }
 
-    private static SingleRecipeInput createRecipeInput(Container pContainer) {
-        return new SingleRecipeInput(pContainer.getItem(0));
-    }
-
-    private void setupRecipeList(Container container, ItemStack stack) {
-        this.recipes.clear();
+    private void setupRecipeList(ItemStack stack) {
         this.selectedRecipeIndex.set(-1);
         this.resultSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty()) {
-            this.recipes = this.level.getRecipeManager().getRecipesFor(RecipeType.STONECUTTING, createRecipeInput(container), this.level);
+            this.recipesForInput = this.level.recipeAccess().stonecutterRecipes().selectByInput(stack);
+        } else {
+            this.recipesForInput = SelectableRecipe.SingleInputSet.empty();
         }
+
     }
 
-    void setupResultSlot() {
-        if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipeIndex.get())) {
-            RecipeHolder<StonecutterRecipe> recipe = this.recipes.get(this.selectedRecipeIndex.get());
-            ItemStack itemStack = recipe.value().assemble(createRecipeInput(this.container), this.level.registryAccess());
-            if (itemStack.isItemEnabled(this.level.enabledFeatures())) {
-                this.resultContainer.setRecipeUsed(recipe);
-                this.resultSlot.set(itemStack);
-            } else {
-                this.resultSlot.set(ItemStack.EMPTY);
-            }
+    void setupResultSlot(int slot) {
+        Optional<RecipeHolder<StonecutterRecipe>> optional;
+        if (!this.recipesForInput.isEmpty() && this.isValidRecipeIndex(slot)) {
+            SelectableRecipe.SingleInputEntry<StonecutterRecipe> singleinputentry = this.recipesForInput.entries().get(slot);
+            optional = singleinputentry.recipe().recipe();
         } else {
-            this.resultSlot.set(ItemStack.EMPTY);
+            optional = Optional.empty();
         }
-
+        optional.ifPresentOrElse((recipeHolder) -> {
+            this.resultContainer.setRecipeUsed(recipeHolder);
+            this.resultSlot.set(recipeHolder.value().assemble(new SingleRecipeInput(this.container.getItem(0)), this.level.registryAccess()));
+        }, () -> {
+            this.resultSlot.set(ItemStack.EMPTY);
+            this.resultContainer.setRecipeUsed(null);
+        });
         this.broadcastChanges();
     }
 
@@ -198,7 +198,7 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
                 if (!this.moveItemStackTo(itemStack1, 2, 38, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (this.level.getRecipeManager().getRecipeFor(RecipeType.STONECUTTING, new SingleRecipeInput(itemStack1), this.level).isPresent()) {
+            } else if (this.level.recipeAccess().stonecutterRecipes().acceptsInput(itemStack1)) {
                 if (!this.moveItemStackTo(itemStack1, 0, 1, false)) {
                     return ItemStack.EMPTY;
                 }

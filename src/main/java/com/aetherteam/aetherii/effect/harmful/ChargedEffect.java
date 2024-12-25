@@ -2,15 +2,12 @@ package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.neoforge.common.EffectCure;
-
-import java.util.Set;
 
 public class ChargedEffect extends MobEffect {
     public ChargedEffect() {
@@ -18,9 +15,9 @@ public class ChargedEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+    public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
         boolean remove = false;
-        for (Entity entity : livingEntity.level().getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && living.hasEffect(AetherIIEffects.CHARGED))) {
+        for (Entity entity : serverLevel.getEntities(livingEntity, AABB.ofSize(livingEntity.position(), 5, 5, 5), (entity) -> entity instanceof LivingEntity living && living.hasEffect(AetherIIEffects.CHARGED))) {
             if (entity instanceof LivingEntity living) {
                 livingEntity.hurt(AetherIIDamageTypes.damageSource(living.level(), AetherIIDamageTypes.CHARGED), 4.0F);
                 living.removeEffect(AetherIIEffects.CHARGED);
@@ -38,10 +35,5 @@ public class ChargedEffect extends MobEffect {
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         int i = 10 >> amplifier;
         return i == 0 || duration % i == 0;
-    }
-
-    @Override
-    public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
-        cures.clear();
     }
 }

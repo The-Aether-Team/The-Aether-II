@@ -138,7 +138,7 @@ public class ArkeniumForgeScreen extends AbstractContainerScreen<ArkeniumForgeMe
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int i = this.leftPos;
         int j = (this.height - this.imageHeight) / 2;
-        guiGraphics.blit(ARKENIUM_FORGE_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        guiGraphics.blit(RenderType::guiTextured, ARKENIUM_FORGE_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
 
         ItemStack input = this.menu.getInput();
 

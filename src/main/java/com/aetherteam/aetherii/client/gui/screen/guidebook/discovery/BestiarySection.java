@@ -34,6 +34,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -99,7 +100,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         if (this.getSelectedEntry() != null) {
             Level level = Minecraft.getInstance().level;
             if (level != null) {
-                Entity entity = this.getSelectedEntry().entityType().value().create(level);
+                Entity entity = this.getSelectedEntry().entityType().value().create(level, EntitySpawnReason.COMMAND);
                 if (entity instanceof LivingEntity livingEntity) {
                     int x = 24;
                     int y = 28;
@@ -216,7 +217,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             Level level = Minecraft.getInstance().level;
             Font font = Minecraft.getInstance().font;
             if (level != null) {
-                Entity entity = this.getSelectedEntry().entityType().value().create(level);
+                Entity entity = this.getSelectedEntry().entityType().value().create(level, EntitySpawnReason.COMMAND);
                 if (entity instanceof LivingEntity livingEntity) {
                     String name = this.getSelectedEntry().entityType().value().getDescriptionId();
                     if (this.getSelectedEntry().name().isPresent()) {
