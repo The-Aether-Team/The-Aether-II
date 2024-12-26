@@ -44,7 +44,6 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -93,7 +92,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1, Ingredient.of(AetherIITags.Items.SHEEPUFF_FOOD), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1, (stack) -> stack.is(AetherIITags.Items.SHEEPUFF_FOOD), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(5, this.eatBlockGoal);
         this.goalSelector.addGoal(6, new FallingRandomStrollGoal(this, 1.0));
@@ -116,15 +115,15 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData spawnData) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
         this.setColor(getRandomSheepuffColor(this, level, level.getRandom()));
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
     }
 
     @Override
-    protected void customServerAiStep() {
+    protected void customServerAiStep(ServerLevel level) {
         this.eatAnimationTick = this.eatBlockGoal.getEatAnimationTick();
-        super.customServerAiStep();
+        super.customServerAiStep(leve);
     }
 
     @Override
@@ -235,8 +234,8 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
      * Vanilla shearing method (needed for dispenser behavior).
      */
     @Override
-    public void shear(SoundSource source) {
-        this.level().playSound(null, this, AetherIISoundEvents.ENTITY_SHEEPUFF_SHEAR.get(), source, 1.0F, 1.0F);
+    public void shear(ServerLevel serverLevel, SoundSource soundSource, ItemStack itemStack) {
+        this.level().playSound(null, this, AetherIISoundEvents.ENTITY_SHEEPUFF_SHEAR.get(), soundSource, 1.0F, 1.0F);
         int i;
         this.amountEaten = 0;
         if (this.getPuffed()) {
@@ -249,7 +248,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
         i += this.getRandom().nextInt(3);
 
         for (int j = 0; j < i; ++j) {
-            ItemEntity itementity = this.spawnAtLocation(SheepuffColor.CLOUDWOOL_BY_SHEEPUFF_COLOR.get(this.getColor()), 1);
+            ItemEntity itementity = this.spawnAtLocation(serverLevel, SheepuffColor.CLOUDWOOL_BY_SHEEPUFF_COLOR.get(this.getColor()), 1);
             if (itementity != null) {
                 itementity.setDeltaMovement(itementity.getDeltaMovement().add((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.1F, this.getRandom().nextFloat() * 0.05F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.1F));
             }

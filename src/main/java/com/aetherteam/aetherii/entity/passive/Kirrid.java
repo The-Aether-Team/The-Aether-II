@@ -122,18 +122,13 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(
-            ServerLevelAccessor pLevel,
-            DifficultyInstance pDifficulty,
-            EntitySpawnReason pReason,
-            @javax.annotation.Nullable SpawnGroupData pSpawnData
-    ) {
-        RandomSource randomsource = pLevel.getRandom();
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData pSpawnData) {
+        RandomSource randomsource = level.getRandom();
         KirridAi.initMemories(this, randomsource);
         this.ageBoundaryReached();
         this.setColor(getRandomKirridColor(randomsource, this));
 
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData);
+        return super.finalizeSpawn(level, difficulty, reason, pSpawnData);
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -156,8 +151,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    protected Brain<?> makeBrain(Dynamic<?> pDynamic) {
-        return KirridAi.makeBrain(this.variantType, this.brainProvider().makeBrain(pDynamic));
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return KirridAi.makeBrain(this.variantType, this.brainProvider().makeBrain(dynamic));
     }
 
     @Override
@@ -441,8 +436,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         return false;
     }
 
-    public void setSpeedModifier(double pSpeedModifier) {
-        this.getNavigation().setSpeedModifier(pSpeedModifier);
+    public void setSpeedModifier(double speedModifier) {
+        this.getNavigation().setSpeedModifier(speedModifier);
         this.moveControl.setWantedPosition(this.moveControl.getWantedX(), this.moveControl.getWantedY(), this.moveControl.getWantedZ(), pSpeedModifier);
     }
 

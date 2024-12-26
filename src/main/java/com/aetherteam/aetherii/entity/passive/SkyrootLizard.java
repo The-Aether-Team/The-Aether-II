@@ -58,7 +58,7 @@ public class SkyrootLizard extends AetherAnimal {
         return false;
     }
 
-    @Nullable
+    @Nullable //TODO: Do even need that?
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
         return AetherIIEntityTypes.SKYROOT_LIZARD.get().create(level, EntitySpawnReason.BREEDING);
