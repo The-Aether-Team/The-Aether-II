@@ -58,7 +58,7 @@ public class AetherLeavesBlock extends LeavesBlock {
                         level.setBlock(mutablePos.above(), pileState, 2);
                         break;
                     }
-                    if (level.isOutsideBuildHeight(mutablePos.getY()) || mutableState.isSolidRender(level, mutablePos) || !mutableState.getFluidState().isEmpty() || Shapes.joinIsNotEmpty(Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0), mutableState.getCollisionShape(level, mutablePos), BooleanOp.AND)) {
+                    if (level.isOutsideBuildHeight(mutablePos.getY()) || mutableState.isSolidRender() || !mutableState.getFluidState().isEmpty() || Shapes.joinIsNotEmpty(Block.box(6.0, 0.0, 6.0, 10.0, 16.0, 10.0), mutableState.getCollisionShape(level, mutablePos), BooleanOp.AND)) {
                         break;
                     }
                 }

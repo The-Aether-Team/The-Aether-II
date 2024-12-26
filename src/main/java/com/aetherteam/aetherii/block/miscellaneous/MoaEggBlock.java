@@ -16,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -92,7 +93,7 @@ public class MoaEggBlock extends BaseEntityBlock {
         } else {
             level.playSound(null, pos, SoundEvents.SNIFFER_EGG_HATCH, SoundSource.BLOCKS, 0.7F, 0.9F + random.nextFloat() * 0.2F);
             level.destroyBlock(pos, false);
-            Moa moa = AetherIIEntityTypes.MOA.get().create(level);
+            Moa moa = AetherIIEntityTypes.MOA.get().create(level, EntitySpawnReason.BREEDING);
             if (moa != null) {
                 Vec3 vec3 = pos.getCenter();
                 moa.setBaby(true);
@@ -135,8 +136,8 @@ public class MoaEggBlock extends BaseEntityBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        ItemStack moaEggItem = super.getCloneItemStack(state, target, level, pos, player);
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData, Player player) {
+        ItemStack moaEggItem = super.getCloneItemStack(level, pos, state, includeData, player);
         Moa.KeratinColor keratinColor = state.getValue(KERATIN);
         Moa.EyeColor eyeColor = state.getValue(EYES);
         Moa.FeatherColor featherColor = state.getValue(FEATHERS);

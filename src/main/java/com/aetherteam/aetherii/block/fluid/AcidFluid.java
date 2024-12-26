@@ -64,7 +64,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
     }
 
     @Override
-    protected void randomTick(Level level, BlockPos pos, FluidState state, RandomSource random) {
+    protected void randomTick(ServerLevel level, BlockPos pos, FluidState state, RandomSource random) {
         super.randomTick(level, pos, state, random);
         if (level.getBlockState(pos.above()).isEmpty() && state.isSource()) {
             this.createGas(level, pos);
@@ -72,8 +72,8 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
     }
 
     @Override
-    public void tick(Level level, BlockPos pos, FluidState fluidState) {
-        super.tick(level, pos, fluidState);
+    public void tick(ServerLevel level, BlockPos pos, BlockState blockState, FluidState fluidState) {
+        super.tick(level, pos, blockState, fluidState);
         this.applyGravity(level, pos, fluidState);
         this.corrodeNeighbors(level, pos);
         this.destroyBelow(level, pos, fluidState);
@@ -284,7 +284,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
     } //todo
 
     @Override
-    protected boolean canConvertToSource(Level level) {
+    protected boolean canConvertToSource(ServerLevel level) {
         return false;
     }
 

@@ -219,7 +219,7 @@ public class AetherPortalBlock extends Block implements Portal {
         Direction.Axis directionAxis = direction.getAxis();
         Direction.Axis blockAxis = state.getValue(AXIS);
         boolean flag = blockAxis != directionAxis && directionAxis.isHorizontal();
-        return !flag && !facingState.is(this) && !(AetherPortalShape.findAnyShape(levelReader, blockPos, blockAxis).isComplete()) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, facingState, level, currentPos, facingPos);
+        return !flag && !facingState.is(this) && !(AetherPortalShape.findAnyShape(levelReader, blockPos, blockAxis).isComplete()) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, levelReader, scheduledTickAccess, blockPos, direction, facingPos, facingState, randomSource);
     }
 
     /**
