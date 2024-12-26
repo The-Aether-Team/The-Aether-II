@@ -55,17 +55,17 @@ public class PlayerHooks {
                 if ((level.dimension() == LevelUtil.returnDimension() || level.dimension() == LevelUtil.destinationDimension())) {
                     Optional<AetherPortalShape> optional = AetherPortalShape.findEmptyAetherPortalShape(level, relativePos, Direction.Axis.X);
                     if (optional.isPresent()) {
-                        optional.get().createPortalBlocks();
+                        optional.get().createPortalBlocks(level);
                         player.playSound(SoundEvents.BUCKET_EMPTY, 1.0F, 1.0F);
                         player.swing(hand);
                         if (!player.isCreative()) {
                             if (stack.getCount() > 1) {
                                 stack.shrink(1);
-                                player.addItem(stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
+                                player.addItem(stack.getCraftingRemainder());
                             } else if (stack.isDamageableItem()) {
                                 stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                             } else {
-                                player.setItemInHand(hand, stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : ItemStack.EMPTY);
+                                player.setItemInHand(hand, stack.getCraftingRemainder());
                             }
                         }
                         return true;

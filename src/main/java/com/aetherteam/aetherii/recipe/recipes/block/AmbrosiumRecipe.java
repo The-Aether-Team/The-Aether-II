@@ -29,7 +29,7 @@ public class AmbrosiumRecipe extends AbstractBlockStateRecipe implements MatchEv
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<AmbrosiumRecipe> getSerializer() {
         return AetherIIRecipeSerializers.AMBROSIUM_ENCHANTING.get();
     }
 

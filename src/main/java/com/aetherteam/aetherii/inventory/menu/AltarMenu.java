@@ -6,27 +6,33 @@ import com.aetherteam.aetherii.inventory.menu.slot.AltarFuelSlot;
 import com.aetherteam.aetherii.inventory.menu.slot.AltarResultSlot;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
+import com.aetherteam.aetherii.recipe.set.AetherIIRecipePropertySets;
 import net.minecraft.core.Direction;
+import net.minecraft.recipebook.ServerPlaceRecipe;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
 import java.util.Optional;
 
-public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchantingRecipe> {
+public class AltarMenu extends RecipeBookMenu {
     private final Container container;
     private final ContainerData data;
     protected final Level level;
     private final RecipeType<AltarEnchantingRecipe> recipeType;
+    private final RecipePropertySet acceptedInputs;
+    private final RecipeBookType recipeBookType;
 
     public AltarMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, new SimpleContainer(10), new SimpleContainerData(2));
@@ -35,11 +41,13 @@ public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchanting
     public AltarMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
         super(AetherIIMenuTypes.ALTAR.get(), containerId);
         this.recipeType = AetherIIRecipeTypes.ALTAR_ENCHANTING.get();
+        this.recipeBookType = AetherIIRecipeBookTypes.ALTAR;
         checkContainerSize(container, 10);
         checkContainerDataCount(data, 2);
         this.container = container;
         this.data = data;
         this.level = playerInventory.player.level();
+        this.acceptedInputs = this.level.recipeAccess().propertySet(AetherIIRecipePropertySets.ALTAR_INPUT);
 
         // Altar
         this.addSlot(new Slot(container, 0, 51, 58)); // Input
@@ -69,41 +77,10 @@ public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchanting
     }
 
     @Override
-    public void fillCraftSlotsStackedContents(StackedContents itemHelper) {
+    public void fillCraftSlotsStackedContents(StackedItemContents itemHelper) {
         if (this.container instanceof StackedContentsCompatible container) {
             container.fillStackedContents(itemHelper);
         }
-    }
-
-    @Override
-    public void clearCraftingContent() {
-        this.getSlot(0).set(ItemStack.EMPTY);
-        this.getSlot(9).set(ItemStack.EMPTY);
-    }
-
-    @Override
-    public boolean recipeMatches(RecipeHolder<AltarEnchantingRecipe> recipeHolder) {
-        return recipeHolder.value().matches(new SingleRecipeInput(this.container.getItem(0)), this.level);
-    }
-
-    @Override
-    public int getResultSlotIndex() {
-        return 9;
-    }
-
-    @Override
-    public int getGridWidth() {
-        return 1;
-    }
-
-    @Override
-    public int getGridHeight() {
-        return 1;
-    }
-
-    @Override
-    public int getSize() {
-        return 10;
     }
 
     @Override
@@ -111,10 +88,10 @@ public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchanting
         return AetherIIRecipeBookTypes.ALTAR;
     }
 
-    @Override
-    public boolean shouldMoveToInventory(int slotIndex) {
-        return slotIndex < 1 || slotIndex > 8;
-    }
+//    @Override
+//    public boolean shouldMoveToInventory(int slotIndex) { //todo
+//        return slotIndex < 1 || slotIndex > 8;
+//    }
 
     @Override
     public ItemStack quickMoveStack(Player player, int slotIndex) {
@@ -165,17 +142,8 @@ public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchanting
         return this.container.stillValid(player);
     }
 
-    public int getRecipeFuelCount(ItemStack stack) {
-        Optional<RecipeHolder<AltarEnchantingRecipe>> recipeHolderOptional = this.level.getRecipeManager().getRecipeFor(this.recipeType, new SingleRecipeInput(stack), this.level);
-        if (recipeHolderOptional.isPresent()) {
-            AltarEnchantingRecipe recipe = recipeHolderOptional.get().value();
-            return recipe.getFuelCount();
-        }
-        return 0;
-    }
-
-    protected boolean canProcess(ItemStack pStack) {
-        return this.level.getRecipeManager().getRecipeFor(this.recipeType, new SingleRecipeInput(pStack), this.level).isPresent();
+    protected boolean canProcess(ItemStack stack) {
+        return this.acceptedInputs.test(stack);
     }
 
     public boolean isFuel(ItemStack stack) {
@@ -190,5 +158,24 @@ public class AltarMenu extends RecipeBookMenu<SingleRecipeInput, AltarEnchanting
         int i = this.data.get(0);
         int j = this.data.get(1);
         return j != 0 && i != 0 ? Mth.clamp((float) i / (float) j, 0.0F, 1.0F) : 0.0F;
+    }
+
+    @Override
+    public RecipeBookMenu.PostPlaceAction handlePlacement(boolean p_361547_, boolean p_363944_, RecipeHolder<?> recipeHolder, final ServerLevel level, Inventory container) { //todo no idea what some of these values do yet
+        final List<Slot> list = List.of(this.getSlot(0), this.getSlot(9));
+
+        return ServerPlaceRecipe.placeRecipe(new ServerPlaceRecipe.CraftingMenuAccess<>() {
+            public void fillCraftSlotsStackedContents(StackedItemContents container) {
+                AltarMenu.this.fillCraftSlotsStackedContents(container);
+            }
+
+            public void clearCraftingContent() {
+                list.forEach((slot) -> slot.set(ItemStack.EMPTY));
+            }
+
+            public boolean recipeMatches(RecipeHolder<AltarEnchantingRecipe> holder) {
+                return holder.value().matches(new SingleRecipeInput(AltarMenu.this.container.getItem(0)), level);
+            }
+        }, 1, 1, List.of(this.getSlot(0)), list, container, (RecipeHolder<AltarEnchantingRecipe>) recipeHolder, p_361547_, p_363944_);
     }
 }

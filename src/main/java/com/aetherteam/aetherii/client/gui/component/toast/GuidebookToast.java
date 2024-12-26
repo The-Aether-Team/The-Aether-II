@@ -49,7 +49,7 @@ public class GuidebookToast implements Toast {
     @Override
     public void render(GuiGraphics guiGraphics, Font font, long l) {
 
-        guiGraphics.blitSprite(RenderType::guiTextured, RenderType::guiTextured, BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
+        guiGraphics.blitSprite(RenderType::guiTextured, BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
         this.type.render(guiGraphics, this.width(), this.height());
         this.icon.render(guiGraphics, 6, 8);
         guiGraphics.drawString(font, Component.translatable("gui.aether_ii.toast.guidebook.description"), 32, 18, -724497, false);

@@ -14,6 +14,7 @@ import com.aetherteam.nitrogen.recipe.builder.BlockStateRecipeBuilder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
@@ -34,8 +35,11 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
-    public AetherIIRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, String id) {
-        super(output, provider, id);
+    private final HolderGetter<Item> getter;
+
+    public AetherIIRecipeProvider(RecipeOutput output, HolderLookup.Provider provider, String id) {
+        super(provider, output, id);
+        this.getter = provider.lookupOrThrow(Registries.ITEM);
     }
 
     protected void leafPile(HolderGetter<Item> getter, ItemLike carpet, ItemLike material) {
@@ -48,27 +52,27 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected ShapedRecipeBuilder fence(Supplier<? extends Block> fence, Supplier<? extends Block> material) {
-        return this.fence(fence, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
+        return this.fence(this.getter, fence, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)));
     }
 
     protected ShapedRecipeBuilder fenceGate(Supplier<? extends Block> fenceGate, Supplier<? extends Block> material) {
-        return this.fenceGate(fenceGate, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT));
+        return this.fenceGate(this.getter, fenceGate, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)));
     }
 
     protected void cloudwool(HolderGetter<Item> getter, RecipeCategory itemCategory, ItemLike item, RecipeCategory blockCategory, ItemLike block, String itemRecipeName, String itemGroup) {
-        ShapelessRecipeBuilder.shapeless(getter, itemCategory, item, 4).requires(block).group(itemGroup).unlockedBy(getHasName(block), has(block)).save(output, this.name(itemRecipeName));
-        ShapedRecipeBuilder.shaped(getter, blockCategory, block).define('#', item).pattern("##").pattern("##").unlockedBy(getHasName(item), has(item)).save(output, this.name(getSimpleRecipeName(block)));
+        ShapelessRecipeBuilder.shapeless(getter, itemCategory, item, 4).requires(block).group(itemGroup).unlockedBy(getHasName(block), has(block)).save(this.output, this.name(itemRecipeName));
+        ShapedRecipeBuilder.shaped(getter, blockCategory, block).define('#', item).pattern("##").pattern("##").unlockedBy(getHasName(item), has(item)).save(this.output, this.name(getSimpleRecipeName(block)));
     }
 
     protected void colorBlockWithDye(List<Item> dyes, List<Item> dyeableItems, Item extra, String group) {
         for(int i = 0; i < dyes.size(); ++i) {
             Item item = dyes.get(i);
             Item item1 = dyeableItems.get(i);
-            List<ItemStack> ingredients = dyeableItems.stream().filter(itemElement -> !itemElement.equals(item1)).map(ItemStack::new).collect(Collectors.toList());
-            ingredients.add(new ItemStack(extra));
-            ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, item1)
+            List<ItemLike> ingredients = dyeableItems.stream().filter(itemElement -> !itemElement.equals(item1)).map(ItemStack::new).map(ItemStack::getItem).collect(Collectors.toList());
+            ingredients.add(extra);
+            ShapelessRecipeBuilder.shapeless(this.getter, RecipeCategory.BUILDING_BLOCKS, item1)
                     .requires(item)
-                    .requires(Ingredient.of(ingredients.toArray(ItemStack[]::new)))
+                    .requires(Ingredient.of(ingredients.toArray(ItemLike[]::new)))
                     .group(group)
                     .unlockedBy("has_needed_dye", has(item))
                     .save(this.output, "dye_" + getItemName(item1));
@@ -123,31 +127,31 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected ShapedRecipeBuilder makePickaxeWithTag(Supplier<? extends Item> pickaxe, TagKey<Item> material, String has) {
-        return this.makePickaxeWithTag(pickaxe, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makePickaxeWithTag(this.getter, pickaxe, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeAxeWithTag(Supplier<? extends Item> axe, TagKey<Item> material, String has) {
-        return this.makeAxeWithTag(axe, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makeAxeWithTag(this.getter, axe, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeShovelWithTag(Supplier<? extends Item> shovel, TagKey<Item> material, String has) {
-        return this.makeShovelWithTag(shovel, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makeShovelWithTag(this.getter, shovel, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeHoeWithTag(Supplier<? extends Item> hoe, TagKey<Item> material, String has) {
-        return this.makeHoeWithTag(hoe, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makeHoeWithTag(this.getter, hoe, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeSwordWithTag(Supplier<? extends Item> sword, TagKey<Item> material, String has) {
-        return this.makeSwordWithTag(sword, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makeSwordWithTag(this.getter, sword, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeHammerWithTag(Supplier<? extends Item> hammer, TagKey<Item> material, String has) {
-        return this.makeHammerWithTag(hammer, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makeHammerWithTag(hammer, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeHammerWithTag(Supplier<? extends Item> hammer, TagKey<Item> material, Ingredient sticks, String has) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, hammer.get())
+        return ShapedRecipeBuilder.shaped(this.getter, RecipeCategory.COMBAT, hammer.get())
                 .define('#', material)
                 .define('/', sticks)
                 .pattern(" # ")
@@ -157,11 +161,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected ShapedRecipeBuilder makeSpearWithTag(Supplier<? extends Item> spear, TagKey<Item> material, String has) {
-        return this.makeSpearWithTag(spear, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makeSpearWithTag(spear, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeSpearWithTag(Supplier<? extends Item> spear, TagKey<Item> material, Ingredient sticks, String has) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, spear.get())
+        return ShapedRecipeBuilder.shaped(this.getter, RecipeCategory.COMBAT, spear.get())
                 .define('#', material)
                 .define('/', sticks)
                 .pattern("#")
@@ -171,11 +175,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected ShapedRecipeBuilder makeCrossbowWithTag(Supplier<? extends Item> spear, TagKey<Item> material, String has) {
-        return this.makeCrossbowWithTag(spear, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makeCrossbowWithTag(spear, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeCrossbowWithTag(Supplier<? extends Item> spear, TagKey<Item> material, Ingredient sticks, String has) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, spear.get())
+        return ShapedRecipeBuilder.shaped(this.getter, RecipeCategory.COMBAT, spear.get())
                 .define('#', material)
                 .define('/', sticks)
                 .define('C', AetherIIItems.CLOUDTWINE)
@@ -186,11 +190,11 @@ public abstract class AetherIIRecipeProvider extends NitrogenRecipeProvider {
     }
 
     protected ShapedRecipeBuilder makeShieldWithTag(Supplier<? extends Item> shield, TagKey<Item> material, String has) {
-        return this.makeShieldWithTag(shield, material, Ingredient.of(AetherIITags.Items.RODS_SKYROOT), has);
+        return this.makeShieldWithTag(shield, material, Ingredient.of(this.getter.getOrThrow(AetherIITags.Items.RODS_SKYROOT)), has);
     }
 
     protected ShapedRecipeBuilder makeShieldWithTag(Supplier<? extends Item> shield, TagKey<Item> material, Ingredient sticks, String has) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, shield.get())
+        return ShapedRecipeBuilder.shaped(this.getter, RecipeCategory.COMBAT, shield.get())
                 .define('W', material)
                 .define('o', sticks)
                 .pattern("WoW")

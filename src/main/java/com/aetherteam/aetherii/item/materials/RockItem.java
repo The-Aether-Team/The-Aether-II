@@ -46,7 +46,7 @@ public class RockItem extends BlockItem implements ThrowableItem {
 
     @Override
     public ItemUseAnimation getUseAnimation(ItemStack pStack) {
-        return ItemUseAnimation.CUSTOM; //todo the use animations seem extensible now
+        return ItemUseAnimation.NONE; //todo the use animations seem extensible now
     }
 
     @Override

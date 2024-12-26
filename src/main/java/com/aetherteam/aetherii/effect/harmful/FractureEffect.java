@@ -4,20 +4,17 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
-import com.aetherteam.aetherii.item.AetherIIEffectCures;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.MobEffectInstanceAccessor;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.neoforged.neoforge.common.EffectCure;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
-
-import java.util.Set;
 
 public class FractureEffect extends MobEffect {
     private static final ResourceLocation SLASH_WEAKNESS = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.fracture.slash_weakness");
@@ -46,7 +43,7 @@ public class FractureEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+    public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
         if (livingEntity.isSprinting()) {
             livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.FRACTURE), 1.0F);
             livingEntity.setSprinting(false);
@@ -63,12 +60,6 @@ public class FractureEffect extends MobEffect {
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         return true;
-    }
-
-    @Override
-    public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
-        cures.clear();
-        cures.add(AetherIIEffectCures.SPLINT);
     }
 
     public static void onEffectRemoval(MobEffectEvent.Remove event) {

@@ -14,8 +14,8 @@ import java.util.function.Supplier;
 public class BiomeMobSpawnEggItem extends SpawnEggItem {
     private final String biome;
 
-    public BiomeMobSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, String biome, int backgroundColor, int highlightColor, Properties props) {
-        super(type, backgroundColor, highlightColor, props); //todo assuming colors went to the client item tint system thing
+    public BiomeMobSpawnEggItem(EntityType<? extends Mob> type, String biome, Properties props) {
+        super(type, props);
         this.biome = biome;
     }
 

@@ -32,7 +32,7 @@ public class ArcticSnowballItem extends SnowballItem implements ThrowableItem {
 
     @Override
     public ItemUseAnimation getUseAnimation(ItemStack stack) {
-        return ItemUseAnimation.CUSTOM;
+        return ItemUseAnimation.NONE; //todo
     }
 
     @Override

@@ -11,10 +11,12 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,6 +31,7 @@ import net.minecraft.world.level.portal.TeleportTransition;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
@@ -66,6 +69,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
         bus.addListener(AetherIIEventListeners::onLivingBlockAttack);
         bus.addListener(AetherIIEventListeners::onLivingItemUsed);
+        bus.addListener(AetherIIEventListeners::onEffectRemove);
 
         // Block
         bus.addListener(AetherIIEventListeners::onBlockUpdateNeighbor);
@@ -297,6 +301,14 @@ public class AetherIIEventListeners {
         LivingEntity entity = event.getEntity();
         if (!BlockHooks.canBreathe(entity)) {
             event.setCanBreathe(false);
+        }
+    }
+
+    public static void onEffectRemove(MobEffectEvent.Remove event) {
+        LivingEntity livingEntity = event.getEntity();
+        Holder<MobEffect> effect = event.getEffect();
+        if (effect.is(AetherIITags.MobEffects.MILK_DOESNT_CLEAR) && livingEntity.getUseItem().is(Tags.Items.BUCKETS_MILK)) {
+            event.setCanceled(true);
         }
     }
 

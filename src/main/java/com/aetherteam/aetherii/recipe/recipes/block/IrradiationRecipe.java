@@ -29,7 +29,7 @@ public class IrradiationRecipe extends AbstractBlockStateRecipe implements Match
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<IrradiationRecipe> getSerializer() {
         return AetherIIRecipeSerializers.DUST_IRRADIATION.get();
     }
 

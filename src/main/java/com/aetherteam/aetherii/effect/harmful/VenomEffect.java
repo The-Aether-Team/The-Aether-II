@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.effect.harmful;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +13,7 @@ public class VenomEffect extends MobEffect {
     }
 
     @Override
-    public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+    public boolean applyEffectTick(ServerLevel serverLevel, LivingEntity livingEntity, int amplifier) {
         if (livingEntity.getHealth() > 1.0F) {
             livingEntity.hurt(AetherIIDamageTypes.damageSource(livingEntity.level(), AetherIIDamageTypes.VENOM), 1.0F);
         }

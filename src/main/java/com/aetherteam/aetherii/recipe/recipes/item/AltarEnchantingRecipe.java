@@ -1,69 +1,39 @@
 package com.aetherteam.aetherii.recipe.recipes.item;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.recipe.builder.book.AltarBookCategory;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
+import com.aetherteam.aetherii.recipe.book.AltarBookCategory;
+import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.serializer.AetherIIRecipeSerializers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.FurnaceRecipeDisplay;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 
-public class AltarEnchantingRecipe implements Recipe<SingleRecipeInput> {
-    protected final String group;
+import java.util.List;
+
+public class AltarEnchantingRecipe extends SingleItemRecipe {
     protected final AltarBookCategory category;
-    protected final Ingredient ingredient;
-    protected final ItemStack result;
     protected final float experience;
     protected final int fuelCount;
     protected final int processingTime;
 
     public AltarEnchantingRecipe(String group, AltarBookCategory category, Ingredient ingredient, ItemStack result, float experience, int fuelCount, int processingTime) {
-        this.group = group;
+        super(group, ingredient, result);
         this.category = category;
-        this.ingredient = ingredient;
-        this.result = result;
         this.experience = experience;
         this.fuelCount = fuelCount;
         this.processingTime = processingTime;
-    }
-
-    @Override
-    public boolean matches(SingleRecipeInput input, Level level) {
-        return this.ingredient.test(input.getItem(0));
-    }
-
-    @Override
-    public ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider provider) {
-        return this.result.copy();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> list = NonNullList.create();
-        list.add(this.ingredient);
-        return list;
-    }
-
-    @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
-        return this.result;
-    }
-
-    @Override
-    public String getGroup() {
-        return this.group;
     }
 
     public float getExperience() {
@@ -83,18 +53,29 @@ public class AltarEnchantingRecipe implements Recipe<SingleRecipeInput> {
     }
 
     @Override
-    public ItemStack getToastSymbol() {
-        return new ItemStack(AetherIIBlocks.ALTAR);
-    }
-
-    @Override
-    public RecipeType<?> getType() {
+    public RecipeType<AltarEnchantingRecipe> getType() {
         return AetherIIRecipeTypes.ALTAR_ENCHANTING.get();
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<AltarEnchantingRecipe> getSerializer() {
         return AetherIIRecipeSerializers.ALTAR_ENCHANTING.get();
+    }
+
+    @Override
+    public List<RecipeDisplay> display() {
+        return List.of(new AltarRecipeDisplay(this.input().display(), SlotDisplay.AnyFuel.INSTANCE, new SlotDisplay.ItemStackSlotDisplay(this.result()), new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()), this.fuelCount, this.processingTime, this.experience));
+    }
+
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return switch (this.category()) {
+            case BLOCKS -> AetherIIRecipeBookCategories.ALTAR_BLOCKS.get();
+            case FOOD -> AetherIIRecipeBookCategories.ALTAR_FOOD.get();
+            case REPAIRING -> AetherIIRecipeBookCategories.ALTAR_REPAIRING.get();
+            case MISC -> AetherIIRecipeBookCategories.ALTAR_MISC.get();
+            default -> throw new MatchException(null, null);
+        };
     }
 
     public static class Serializer implements RecipeSerializer<AltarEnchantingRecipe> {
@@ -103,10 +84,10 @@ public class AltarEnchantingRecipe implements Recipe<SingleRecipeInput> {
 
         public Serializer() {
             this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                    Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
+                    Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group()),
                     AltarBookCategory.CODEC.fieldOf("category").orElse(AltarBookCategory.MISC).forGetter(p_300828_ -> p_300828_.category),
-                    Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
-                    ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+                    Ingredient.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.input()),
+                    ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result()),
                     Codec.FLOAT.fieldOf("experience").orElse(0.0F).forGetter(recipe -> recipe.experience),
                     Codec.INT.fieldOf("fuel_count").orElse(1).forGetter(recipe -> recipe.fuelCount),
                     Codec.INT.fieldOf("processing_time").orElse(200).forGetter(recipe -> recipe.processingTime)
@@ -136,10 +117,10 @@ public class AltarEnchantingRecipe implements Recipe<SingleRecipeInput> {
         }
 
         public void toNetwork(RegistryFriendlyByteBuf buffer, AltarEnchantingRecipe recipe) {
-            buffer.writeUtf(recipe.group);
+            buffer.writeUtf(recipe.group());
             buffer.writeEnum(recipe.category());
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.ingredient);
-            ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.input());
+            ItemStack.STREAM_CODEC.encode(buffer, recipe.result());
             buffer.writeFloat(recipe.experience);
             buffer.writeVarInt(recipe.fuelCount);
             buffer.writeVarInt(recipe.processingTime);

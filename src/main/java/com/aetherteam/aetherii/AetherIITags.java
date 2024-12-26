@@ -4,6 +4,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -226,6 +227,14 @@ public class AetherIITags {
 
         private static TagKey<DamageType> tag(String name) {
             return TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
+        }
+    }
+
+    public static class MobEffects {
+        public static final TagKey<MobEffect> MILK_DOESNT_CLEAR = tag("typed");
+
+        private static TagKey<MobEffect> tag(String name) {
+            return TagKey.create(Registries.MOB_EFFECT, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
     }
 }

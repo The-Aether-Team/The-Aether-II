@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -85,7 +86,7 @@ public class BiomeParameterRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation id) {
+    public void save(RecipeOutput recipeOutput, ResourceKey<Recipe<?>> id) {
         AbstractBiomeParameterRecipe recipe = this.factory.create(this.biome, this.ingredient, this.result, this.function);
         recipeOutput.accept(id, recipe, null);
     }

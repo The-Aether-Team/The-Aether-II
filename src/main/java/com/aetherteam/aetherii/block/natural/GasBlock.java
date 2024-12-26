@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -79,16 +80,21 @@ public class GasBlock extends Block implements CanisterPickup {
         for (Vec3i offset : INDIRECT_NEIGHBOR_OFFSETS) {
             blockpos$mutableblockpos.setWithOffset(pos, offset);
             if (level.getBlockState(blockpos$mutableblockpos).is(this)) {
-                level.neighborShapeChanged(Direction.getNearest(offset.getX(), offset.getY(), offset.getZ()).getOpposite(), state, blockpos$mutableblockpos, pos, flags, recursionLeft);
+                level.neighborShapeChanged(Direction.getNearest(offset.getX(), offset.getY(), offset.getZ(), null).getOpposite(), blockpos$mutableblockpos, pos, state, flags, recursionLeft);
             }
         }
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
         if (level.getBlockState(neighborPos).is(AetherIITags.Blocks.TRIGGERS_GAS) || state.is(AetherIITags.Blocks.TRIGGERS_GAS)) {
             this.explode(level, pos, true);
         }
+        super.neighborChanged(state, level, pos, block, orientation, movedByPiston);
+    }
+
+    @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
         super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
     }
 

@@ -4,17 +4,17 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.DelegateBakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.ChunkRenderTypeSet;
-import net.neoforged.neoforge.client.model.BakedModelWrapper;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FastModel extends BakedModelWrapper<BakedModel> {
+public class FastModel extends DelegateBakedModel {
     public FastModel(BakedModel originalModel) {
         super(originalModel);
     }

@@ -53,7 +53,7 @@ public class GuidebookJournalScreen extends Screen implements Guidebook {
     protected void renderMenuBackground(GuiGraphics partialTick) { }
 
     @Override
-    protected void renderBlurredBackground(float partialTick) { }
+    protected void renderBlurredBackground() { }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {

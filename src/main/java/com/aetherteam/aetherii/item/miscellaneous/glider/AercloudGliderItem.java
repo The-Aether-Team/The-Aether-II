@@ -121,7 +121,7 @@ public class AercloudGliderItem extends Item {
 
     @Override
     public ItemUseAnimation getUseAnimation(ItemStack p_41452_) {
-        return ItemUseAnimation.CUSTOM;
+        return ItemUseAnimation.NONE; //todo
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.effect.buildup;
 
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,7 +37,9 @@ public class EffectBuildupInstance implements Comparable<EffectBuildupInstance> 
         if (this.isBuildupFull()) {
             if (this.triggerEffect) {
                 if (this.instance.getEffect().value().isInstantenous()) {
-                    this.instance.getEffect().value().applyInstantenousEffect(null, null, entity, this.instance.getAmplifier(), 1.0);
+                    if (entity.level() instanceof ServerLevel serverLevel) {
+                        this.instance.getEffect().value().applyInstantenousEffect(serverLevel, null, null, entity, this.instance.getAmplifier(), 1.0);
+                    }
                 } else {
                     entity.addEffect(this.instance);
                 }

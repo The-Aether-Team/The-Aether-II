@@ -6,6 +6,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 
 public class AmbrosiumParticle extends BaseAshSmokeParticle {
@@ -24,9 +25,9 @@ public class AmbrosiumParticle extends BaseAshSmokeParticle {
         int endingPackedColor = 16052832;
         int startingPackedColor = 16777215;
         float durationRatio = (float) this.age / this.lifetime;
-        this.rCol = (FastColor.ARGB32.red(startingPackedColor) + (int) (durationRatio * (FastColor.ARGB32.red(endingPackedColor) - FastColor.ARGB32.red(startingPackedColor)))) / 255.0F;
-        this.gCol = (FastColor.ARGB32.green(startingPackedColor) + (int) (durationRatio * (FastColor.ARGB32.green(endingPackedColor) - FastColor.ARGB32.green(startingPackedColor)))) / 255.0F;
-        this.bCol = (FastColor.ARGB32.blue(startingPackedColor) + (int) (durationRatio * (FastColor.ARGB32.blue(endingPackedColor) - FastColor.ARGB32.blue(startingPackedColor)))) / 255.0F;
+        this.rCol = (ARGB.red(startingPackedColor) + (int) (durationRatio * (ARGB.red(endingPackedColor) - ARGB.red(startingPackedColor)))) / 255.0F;
+        this.gCol = (ARGB.green(startingPackedColor) + (int) (durationRatio * (ARGB.green(endingPackedColor) - ARGB.green(startingPackedColor)))) / 255.0F;
+        this.bCol = (ARGB.blue(startingPackedColor) + (int) (durationRatio * (ARGB.blue(endingPackedColor) - ARGB.blue(startingPackedColor)))) / 255.0F;
     }
 
     @Override

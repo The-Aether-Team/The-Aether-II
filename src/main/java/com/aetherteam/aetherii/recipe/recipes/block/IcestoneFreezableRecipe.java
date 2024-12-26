@@ -24,7 +24,7 @@ public class IcestoneFreezableRecipe extends AbstractBiomeParameterRecipe {
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<IcestoneFreezableRecipe> getSerializer() {
         return AetherIIRecipeSerializers.ICESTONE_FREEZABLE.get();
     }
 

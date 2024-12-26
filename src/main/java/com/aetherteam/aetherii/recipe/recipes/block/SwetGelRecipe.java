@@ -36,7 +36,7 @@ public class SwetGelRecipe extends AbstractBiomeParameterRecipe implements Match
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<SwetGelRecipe> getSerializer() {
         return AetherIIRecipeSerializers.SWET_GEL_CONVERSION.get();
     }
 
