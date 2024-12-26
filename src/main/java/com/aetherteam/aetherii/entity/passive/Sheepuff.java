@@ -123,7 +123,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     @Override
     protected void customServerAiStep(ServerLevel level) {
         this.eatAnimationTick = this.eatBlockGoal.getEatAnimationTick();
-        super.customServerAiStep(leve);
+        super.customServerAiStep(level);
     }
 
     @Override
