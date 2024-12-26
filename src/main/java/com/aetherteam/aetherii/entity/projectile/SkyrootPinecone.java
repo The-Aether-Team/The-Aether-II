@@ -20,12 +20,12 @@ public class SkyrootPinecone extends ThrowableItemProjectile {
         super(entityType, level);
     }
 
-    public SkyrootPinecone(Level level, LivingEntity shooter) {
-        super(AetherIIEntityTypes.SKYROOT_PINECONE.get(), shooter, level);
+    public SkyrootPinecone(Level level, LivingEntity shooter, ItemStack stack) {
+        super(AetherIIEntityTypes.SKYROOT_PINECONE.get(), shooter, level, stack);
     }
 
-    public SkyrootPinecone(Level level, double x, double y, double z) {
-        super(AetherIIEntityTypes.SKYROOT_PINECONE.get(), x, y, z, level);
+    public SkyrootPinecone(Level level, double x, double y, double z, ItemStack stack) {
+        super(AetherIIEntityTypes.SKYROOT_PINECONE.get(), x, y, z, level, stack);
     }
 
     @Override

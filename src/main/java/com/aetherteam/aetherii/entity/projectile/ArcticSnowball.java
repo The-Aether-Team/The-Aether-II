@@ -21,12 +21,12 @@ public class ArcticSnowball extends ThrowableItemProjectile {
         super(entityType, level);
     }
 
-    public ArcticSnowball(Level level, LivingEntity shooter) {
-        super(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), shooter, level);
+    public ArcticSnowball(Level level, LivingEntity shooter, ItemStack stack) {
+        super(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), shooter, level, stack);
     }
 
-    public ArcticSnowball(Level level, double x, double y, double z) {
-        super(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), x, y, z, level);
+    public ArcticSnowball(Level level, double x, double y, double z, ItemStack stack) {
+        super(AetherIIEntityTypes.ARCTIC_SNOWBALL.get(), x, y, z, level, stack);
     }
 
     @Override
