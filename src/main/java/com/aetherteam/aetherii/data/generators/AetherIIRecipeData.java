@@ -13,7 +13,6 @@ import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.item.Item;
@@ -748,11 +747,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Items.ITEM_FRAME, 1)
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
-                .define('#', AetherIITags.Items.LEATHER_HIDE)
+                .define('#', AetherIITags.Items.ANIMALS_FURS)
                 .pattern("///")
                 .pattern("/#/")
                 .pattern("///")
-                .unlockedBy("has_leather", has(AetherIITags.Items.LEATHER_HIDE))
+                .unlockedBy("has_leather", has(AetherIITags.Items.ANIMALS_FURS))
                 .save(this.output, "item_frame_from_hide");
 
         // Bookshelves
