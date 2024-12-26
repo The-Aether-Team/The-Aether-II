@@ -180,13 +180,12 @@ public class PlayerHooks {
         return interactionResult;
     }
 
-    public static void valkyrieTeaAbility(Player player, ItemStack itemStack) {
-        if (itemStack.getFoodProperties(player) != null && (player.hasEffect(AetherIIEffects.SATURATION_BOOST))) {
+    public static void valkyrieTeaAbility(Player player) {
+        if (player.hasEffect(AetherIIEffects.SATURATION_BOOST)) {
             player.getFoodData().eat(0, 0.4F);
         }
     }
 
-    @Nullable
     public static void resetAetherDayAndWeather(LevelAccessor level, long newTime) {
         if (level instanceof ServerLevel serverLevel) {
             if (serverLevel.dimension().location().getNamespace().equals(AetherII.MODID)) {
