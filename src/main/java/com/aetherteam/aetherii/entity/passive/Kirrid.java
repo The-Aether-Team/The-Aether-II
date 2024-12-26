@@ -580,7 +580,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    protected ResourceKey<LootTable> getDefaultLootTable() {
+    protected Optional<ResourceKey<LootTable>> getDefaultLootTable() {
         if (this.isSheared()) {
             return this.getType().getDefaultLootTable();
         } else if (this.getColor().isEmpty()) {

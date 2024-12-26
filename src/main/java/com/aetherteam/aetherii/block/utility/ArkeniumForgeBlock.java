@@ -68,13 +68,13 @@ public class ArkeniumForgeBlock extends BaseEntityBlock {
         return new ArkeniumForgeBlockEntity(pos, state);
     }
 
-    @javax.annotation.Nullable
+    @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
         return createTicker(level, blockEntityType, AetherIIBlockEntityTypes.ARKENIUM_FORGE.get());
     }
 
-    @javax.annotation.Nullable
+    @Nullable
     protected static <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> serverType, BlockEntityType<? extends ArkeniumForgeBlockEntity> clientType) {
         return level.isClientSide() ? null : createTickerHelper(serverType, clientType, ArkeniumForgeBlockEntity::serverTick);
     }
