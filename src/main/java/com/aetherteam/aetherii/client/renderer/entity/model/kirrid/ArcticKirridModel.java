@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.kirrid;
 
-import com.aetherteam.aetherii.entity.passive.Kirrid;
+import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
@@ -87,9 +87,9 @@ public class ArcticKirridModel extends AbstractKirridModel {
 	}
 
 	@Override
-	public void setupAnim(Kirrid kirrid, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		super.setupAnim(kirrid, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.hornRight.visible = kirrid.hasPlate();
-		this.hornRightBroken.visible = !kirrid.hasPlate();
+	public void setupAnim(KirridRenderState kirrid) {
+		super.setupAnim(kirrid);
+		this.hornRight.visible = kirrid.plate;
+		this.hornRightBroken.visible = !kirrid.plate;
 	}
 }
