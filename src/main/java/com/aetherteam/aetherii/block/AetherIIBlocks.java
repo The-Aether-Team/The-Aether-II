@@ -58,40 +58,6 @@ import java.util.stream.Collectors;
 public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(AetherII.MODID);
 
-    /**
-     * Blocks able to be flattened with {@link ItemAbilities#AXE_STRIP}, and the equivalent result block.
-     */
-    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> STRIPPABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
-            .put(() -> AetherIIBlocks.SKYROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
-            .put(() -> AetherIIBlocks.SKYROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
-            .put(() -> AetherIIBlocks.GREATROOT_LOG, () -> AetherIIBlocks.STRIPPED_GREATROOT_LOG)
-            .put(() -> AetherIIBlocks.GREATROOT_WOOD, () -> AetherIIBlocks.STRIPPED_GREATROOT_WOOD)
-            .put(() -> AetherIIBlocks.WISPROOT_LOG, () -> AetherIIBlocks.STRIPPED_WISPROOT_LOG)
-            .put(() -> AetherIIBlocks.WISPROOT_WOOD, () -> AetherIIBlocks.STRIPPED_WISPROOT_WOOD)
-            .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG, () -> AetherIIBlocks.WISPROOT_LOG)
-            .put(() -> AetherIIBlocks.AMBEROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
-            .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
-            .build();
-
-    /**
-     * Blocks able to be flattened with {@link ItemAbilities#SHOVEL_FLATTEN}, and the equivalent result block.
-     */
-    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> FLATTENABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
-            .put(() -> AetherIIBlocks.AETHER_GRASS_BLOCK, () -> AetherIIBlocks.AETHER_DIRT_PATH)
-            .put(() -> AetherIIBlocks.AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT_PATH)
-            .put(() -> AetherIIBlocks.COARSE_AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT_PATH)
-            .build();
-
-    /**
-     * Blocks able to be tilled with {@link ItemAbilities#HOE_TILL}, and the equivalent result block.
-     */
-    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> TILLABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
-            .put(() -> AetherIIBlocks.AETHER_DIRT, () -> AetherIIBlocks.AETHER_FARMLAND)
-            .put(() -> AetherIIBlocks.AETHER_GRASS_BLOCK, () -> AetherIIBlocks.AETHER_FARMLAND)
-            .put(() -> AetherIIBlocks.AETHER_DIRT_PATH, () -> AetherIIBlocks.AETHER_FARMLAND)
-            .put(() -> AetherIIBlocks.COARSE_AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT)
-            .build();
-
     // Portal
     public static final DeferredBlock<AetherPortalBlock> AETHER_PORTAL = registerWithoutItem("aether_portal", AetherPortalBlock::new, Block.Properties.of().noCollission().randomTicks().strength(-1.0F).sound(SoundType.GLASS).lightLevel(AetherIIBlocks::lightLevel11).pushReaction(PushReaction.BLOCK).forceSolidOn().noLootTable());
 
@@ -241,16 +207,16 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> IRRADIATED_GREATBOA_LEAVES = register("irradiated_greatboa_leaves", () -> irradiatedLeaves(MapColor.TERRACOTTA_YELLOW, AetherIIParticleTypes.IRRADIATED_LEAVES, AetherIIBlocks.IRRADIATED_GREATBOA_LEAF_PILE);
 
     // Saplings
-    public static final DeferredBlock<SaplingBlock> SKYROOT_SAPLING = register("skyroot_sapling", () -> new SaplingBlock(AetherIITreeGrowers.SKYROOT, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> SKYPLANE_SAPLING = register("skyplane_sapling", () -> new SaplingBlock(AetherIITreeGrowers.SKYPLANE, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> SKYBIRCH_SAPLING = register("skybirch_sapling", () -> new SaplingBlock(AetherIITreeGrowers.SKYBIRCH, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> SKYPINE_SAPLING = register("skypine_sapling", () -> new SaplingBlock(AetherIITreeGrowers.SKYPINE, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> WISPROOT_SAPLING = register("wisproot_sapling", () -> new SaplingBlock(AetherIITreeGrowers.WISPROOT, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> WISPTOP_SAPLING = register("wisptop_sapling", () -> new SaplingBlock(AetherIITreeGrowers.WISPTOP, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> GREATROOT_SAPLING = register("greatroot_sapling", () -> new SaplingBlock(AetherIITreeGrowers.GREATROOT, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> GREATOAK_SAPLING = register("greatoak_sapling", () -> new SaplingBlock(AetherIITreeGrowers.GREATOAK, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> GREATBOA_SAPLING = register("greatboa_sapling", () -> new SaplingBlock(AetherIITreeGrowers.GREATBOA, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
-    public static final DeferredBlock<SaplingBlock> AMBEROOT_SAPLING = register("amberoot_sapling", () -> new SaplingBlock(AetherIITreeGrowers.AMBEROOT, Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> SKYROOT_SAPLING = register("skyroot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.SKYROOT, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> SKYPLANE_SAPLING = register("skyplane_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.SKYPLANE, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> SKYBIRCH_SAPLING = register("skybirch_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.SKYBIRCH, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> SKYPINE_SAPLING = register("skypine_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.SKYPINE, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> WISPROOT_SAPLING = register("wisproot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.WISPROOT, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> WISPTOP_SAPLING = register("wisptop_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.WISPTOP, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> GREATROOT_SAPLING = register("greatroot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.GREATROOT, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> GREATOAK_SAPLING = register("greatoak_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.GREATOAK, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> GREATBOA_SAPLING = register("greatboa_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.GREATBOA, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static final DeferredBlock<SaplingBlock> AMBEROOT_SAPLING = register("amberoot_sapling", (properties) -> new SaplingBlock(AetherIITreeGrowers.AMBEROOT, properties), Block.Properties.ofFullCopy(Blocks.OAK_SAPLING));
 
     // Potted Saplings
     public static final DeferredBlock<FlowerPotBlock> POTTED_SKYROOT_SAPLING = BLOCKS.register("potted_skyroot_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, SKYROOT_SAPLING, Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
@@ -265,11 +231,11 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FlowerPotBlock> POTTED_AMBEROOT_SAPLING = BLOCKS.register("potted_amberoot_sapling", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, AMBEROOT_SAPLING, Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
 
     // Grasses
-    public static final DeferredBlock<Block> AETHER_SHORT_GRASS = register("aether_short_grass", () -> new AetherTallGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
-    public static final DeferredBlock<Block> AETHER_MEDIUM_GRASS = register("aether_medium_grass", () -> new AetherTallGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
-    public static final DeferredBlock<Block> AETHER_LONG_GRASS = register("aether_long_grass", () -> new AetherTallGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
-    public static final DeferredBlock<Block> HIGHLAND_FERN = register("highland_fern", () -> new AetherTallGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
-    public static final DeferredBlock<Block> SHIELD_FERN = register("shield_fern", () -> new AetherTallGrassBlock(BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
+    public static final DeferredBlock<Block> AETHER_SHORT_GRASS = register("aether_short_grass", AetherTallGrassBlock::new, Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
+    public static final DeferredBlock<Block> AETHER_MEDIUM_GRASS = register("aether_medium_grass", AetherTallGrassBlock::new, Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
+    public static final DeferredBlock<Block> AETHER_LONG_GRASS = register("aether_long_grass", AetherTallGrassBlock::new, Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
+    public static final DeferredBlock<Block> HIGHLAND_FERN = register("highland_fern", AetherTallGrassBlock::new, Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
+    public static final DeferredBlock<Block> SHIELD_FERN = register("shield_fern", AetherTallGrassBlock::new, Block.Properties.of().mapColor(MapColor.PLANT).replaceable().noCollission().instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ).ignitedByLava().pushReaction(PushReaction.DESTROY).hasPostProcess(AetherIIBlocks::always));
 
     // Flowers
     public static final DeferredBlock<Block> HESPEROSE = register("hesperose", () -> new AetherFlowerBlock(MobEffects.SLOW_FALLING, 4, Block.Properties.ofFullCopy(Blocks.DANDELION));
@@ -305,17 +271,17 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FlowerPotBlock> POTTED_BLUEBERRY_BUSH_STEM = BLOCKS.register("potted_blueberry_bush_stem", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLUEBERRY_BUSH_STEM, Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
 
     // Orange Tree
-    public static final DeferredBlock<Block> ORANGE_TREE = register("orange_tree", () -> new OrangeTreeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).noCollission().strength(0.2F).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> ORANGE_TREE = register("orange_tree", OrangeTreeBlock::new, Block.Properties.of().mapColor(MapColor.GRASS).noCollission().strength(0.2F).sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
 
     // Potted Orange Tree
     public static final DeferredBlock<FlowerPotBlock> POTTED_ORANGE_TREE = BLOCKS.register("potted_orange_tree", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ORANGE_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.FLOWER_POT));
 
     // Valkyrie Sprout
-    public static final DeferredBlock<Block> VALKYRIE_SPROUT = register("valkyrie_sprout", () -> new ValkyrieSproutBlock(Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).sound(SoundType.GRASS).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.XZ));
+    public static final DeferredBlock<Block> VALKYRIE_SPROUT = register("valkyrie_sprout", ValkyrieSproutBlock::new, Block.Properties.of().mapColor(MapColor.GRASS).pushReaction(PushReaction.DESTROY).sound(SoundType.GRASS).instabreak().noCollission().offsetType(BlockBehaviour.OffsetType.XZ));
 
     // Brettl
-    public static final DeferredBlock<Block> BRETTL_PLANT = BLOCKS.register("brettl_plant", () -> new BrettlPlantBlock(BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> BRETTL_PLANT_TIP = BLOCKS.register("brettl_plant_tip", () -> new BrettlPlantTipBlock(BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> BRETTL_PLANT = BLOCKS.register("brettl_plant", () -> new BrettlPlantBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> BRETTL_PLANT_TIP = BLOCKS.register("brettl_plant_tip", () -> new BrettlPlantTipBlock(Block.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
 
     // Lake
     public static final DeferredBlock<Block> ARILUM_SHOOT = BLOCKS.register("arilum_shoot", () -> new ArilumShootBlock(Block.Properties.of().mapColor(MapColor.WATER).noCollission().randomTicks().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY));
@@ -325,14 +291,14 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> BLOOMING_ARILUM_PLANT = register("blooming_arilum_plant", () -> new BloomingArilumPlantBlock(Block.Properties.of().mapColor(MapColor.WATER).noCollission().randomTicks().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY).lightLevel((block) -> 5));
 
     // Ground Decoration
-    public static final DeferredBlock<Block> SKYROOT_TWIG = register("skyroot_twig", () -> new TwigBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).noOcclusion().noCollission().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> HOLYSTONE_ROCK = register("holystone_rock", () -> new RockBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOL).noOcclusion().noCollission().instabreak().sound(SoundType.STONE).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> SKYROOT_TWIG = register("skyroot_twig", TwigBlock::new, Block.Properties.of().mapColor(MapColor.COLOR_BROWN).noOcclusion().noCollission().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> HOLYSTONE_ROCK = register("holystone_rock", RockBlock::new, Block.Properties.of().mapColor(MapColor.WOOL).noOcclusion().noCollission().instabreak().sound(SoundType.STONE).pushReaction(PushReaction.DESTROY));
 
     // Skyroot Planks
     public static final DeferredBlock<Block> SKYROOT_PLANKS = register("skyroot_planks", Block.Properties.ofFullCopy(Blocks.OAK_PLANKS));
     public static final DeferredBlock<StairBlock> SKYROOT_STAIRS = register("skyroot_stairs", () -> new StairBlock(SKYROOT_PLANKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.SKYROOT_PLANKS.get()));
-    public static final DeferredBlock<SlabBlock> SKYROOT_SLAB = register("skyroot_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.SKYROOT_PLANKS.get()).strength(2.0F, 3.0F));
-    public static final DeferredBlock<FenceBlock> SKYROOT_FENCE = register("skyroot_fence", () -> new FenceBlock(Block.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<SlabBlock> SKYROOT_SLAB = register("skyroot_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.SKYROOT_PLANKS.get()).strength(2.0F, 3.0F));
+    public static final DeferredBlock<FenceBlock> SKYROOT_FENCE = register("skyroot_fence", FenceBlock::new, Block.Properties.ofFullCopy(Blocks.OAK_FENCE));
     public static final DeferredBlock<FenceGateBlock> SKYROOT_FENCE_GATE = register("skyroot_fence_gate", () -> new FenceGateBlock(AetherIIWoodTypes.SKYROOT, Block.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE));
     public static final DeferredBlock<DoorBlock> SKYROOT_DOOR = register("skyroot_door", () -> new DoorBlock(AetherIIWoodTypes.SKYROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_DOOR));
     public static final DeferredBlock<TrapDoorBlock> SKYROOT_TRAPDOOR = register("skyroot_trapdoor", () -> new TrapDoorBlock(AetherIIWoodTypes.SKYROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
@@ -346,17 +312,17 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SKYROOT_SMALL_SHINGLES = register("skyroot_small_shingles", Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
     public static final DeferredBlock<Block> SKYROOT_BASE_PLANKS = register("skyroot_base_planks", Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
     public static final DeferredBlock<Block> SKYROOT_TOP_PLANKS = register("skyroot_top_planks", Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> SKYROOT_BASE_BEAM = register("skyroot_base_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> SKYROOT_TOP_BEAM = register("skyroot_top_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> SKYROOT_BEAM = register("skyroot_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> SKYROOT_BASE_BEAM = register("skyroot_base_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> SKYROOT_TOP_BEAM = register("skyroot_top_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> SKYROOT_BEAM = register("skyroot_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
     public static final DeferredBlock<DoorBlock> SECRET_SKYROOT_DOOR = register("secret_skyroot_door", () -> new SecretDoorBlock(AetherIIWoodTypes.SKYROOT_BLOCK_SET, Block.Properties.of().mapColor(SKYROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).isValidSpawn(AetherIIBlocks::never).ignitedByLava());
     public static final DeferredBlock<TrapDoorBlock> SECRET_SKYROOT_TRAPDOOR = register("secret_skyroot_trapdoor", () -> new SecretTrapDoorBlock(AetherIIWoodTypes.SKYROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
 
     // Greatroot Planks
     public static final DeferredBlock<Block> GREATROOT_PLANKS = register("greatroot_planks", Block.Properties.ofFullCopy(Blocks.OAK_PLANKS));
     public static final DeferredBlock<StairBlock> GREATROOT_STAIRS = register("greatroot_stairs", () -> new StairBlock(GREATROOT_PLANKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.GREATROOT_PLANKS.get()));
-    public static final DeferredBlock<SlabBlock> GREATROOT_SLAB = register("greatroot_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.GREATROOT_PLANKS.get()).strength(2.0F, 3.0F));
-    public static final DeferredBlock<FenceBlock> GREATROOT_FENCE = register("greatroot_fence", () -> new FenceBlock(Block.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<SlabBlock> GREATROOT_SLAB = register("greatroot_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.GREATROOT_PLANKS.get()).strength(2.0F, 3.0F));
+    public static final DeferredBlock<FenceBlock> GREATROOT_FENCE = register("greatroot_fence", FenceBlock::new, Block.Properties.ofFullCopy(Blocks.OAK_FENCE));
     public static final DeferredBlock<FenceGateBlock> GREATROOT_FENCE_GATE = register("greatroot_fence_gate", () -> new FenceGateBlock(AetherIIWoodTypes.GREATROOT, Block.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE));
     public static final DeferredBlock<DoorBlock> GREATROOT_DOOR = register("greatroot_door", () -> new DoorBlock(AetherIIWoodTypes.GREATROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_DOOR));
     public static final DeferredBlock<TrapDoorBlock> GREATROOT_TRAPDOOR = register("greatroot_trapdoor", () -> new TrapDoorBlock(AetherIIWoodTypes.GREATROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
@@ -370,17 +336,17 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> GREATROOT_SMALL_SHINGLES = register("greatroot_small_shingles", Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
     public static final DeferredBlock<Block> GREATROOT_BASE_PLANKS = register("greatroot_base_planks", Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
     public static final DeferredBlock<Block> GREATROOT_TOP_PLANKS = register("greatroot_top_planks", Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> GREATROOT_BASE_BEAM = register("greatroot_base_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> GREATROOT_TOP_BEAM = register("greatroot_top_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> GREATROOT_BEAM = register("greatroot_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> GREATROOT_BASE_BEAM = register("greatroot_base_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> GREATROOT_TOP_BEAM = register("greatroot_top_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> GREATROOT_BEAM = register("greatroot_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
     public static final DeferredBlock<DoorBlock> SECRET_GREATROOT_DOOR = register("secret_greatroot_door", () -> new SecretDoorBlock(AetherIIWoodTypes.GREATROOT_BLOCK_SET, Block.Properties.of().mapColor(GREATROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<TrapDoorBlock> SECRET_GREATROOT_TRAPDOOR = register("secret_greatroot_trapdoor", () -> new SecretTrapDoorBlock(AetherIIWoodTypes.GREATROOT_BLOCK_SET, Block.Properties.of().mapColor(GREATROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).isValidSpawn(AetherIIBlocks::never).ignitedByLava());
 
     // Wisproot Planks
     public static final DeferredBlock<Block> WISPROOT_PLANKS = register("wisproot_planks", Block.Properties.ofFullCopy(Blocks.OAK_PLANKS));
     public static final DeferredBlock<StairBlock> WISPROOT_STAIRS = register("wisproot_stairs", () -> new StairBlock(WISPROOT_PLANKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.WISPROOT_PLANKS.get()));
-    public static final DeferredBlock<SlabBlock> WISPROOT_SLAB = register("wisproot_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.WISPROOT_PLANKS.get()).strength(2.0F, 3.0F));
-    public static final DeferredBlock<FenceBlock> WISPROOT_FENCE = register("wisproot_fence", () -> new FenceBlock(Block.Properties.ofFullCopy(Blocks.OAK_FENCE));
+    public static final DeferredBlock<SlabBlock> WISPROOT_SLAB = register("wisproot_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.WISPROOT_PLANKS.get()).strength(2.0F, 3.0F));
+    public static final DeferredBlock<FenceBlock> WISPROOT_FENCE = register("wisproot_fence", FenceBlock::new, Block.Properties.ofFullCopy(Blocks.OAK_FENCE));
     public static final DeferredBlock<FenceGateBlock> WISPROOT_FENCE_GATE = register("wisproot_fence_gate", () -> new FenceGateBlock(AetherIIWoodTypes.WISPROOT, Block.Properties.ofFullCopy(Blocks.OAK_FENCE_GATE));
     public static final DeferredBlock<DoorBlock> WISPROOT_DOOR = register("wisproot_door", () -> new DoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_DOOR));
     public static final DeferredBlock<TrapDoorBlock> WISPROOT_TRAPDOOR = register("wisproot_trapdoor", () -> new TrapDoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, Block.Properties.ofFullCopy(Blocks.OAK_TRAPDOOR));
@@ -394,34 +360,34 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> WISPROOT_SMALL_SHINGLES = register("wisproot_small_shingles", Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
     public static final DeferredBlock<Block> WISPROOT_BASE_PLANKS = register("wisproot_base_planks", Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
     public static final DeferredBlock<Block> WISPROOT_TOP_PLANKS = register("wisproot_top_planks", Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> WISPROOT_BASE_BEAM = register("wisproot_base_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> WISPROOT_TOP_BEAM = register("wisproot_top_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> WISPROOT_BEAM = register("wisproot_beam", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> WISPROOT_BASE_BEAM = register("wisproot_base_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> WISPROOT_TOP_BEAM = register("wisproot_top_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> WISPROOT_BEAM = register("wisproot_beam", FacingPillarBlock::new, Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
     public static final DeferredBlock<DoorBlock> SECRET_WISPROOT_DOOR = register("secret_wisproot_door", () -> new SecretDoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, Block.Properties.of().mapColor(WISPROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava().pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<TrapDoorBlock> SECRET_WISPROOT_TRAPDOOR = register("secret_wisproot_trapdoor", () -> new SecretTrapDoorBlock(AetherIIWoodTypes.WISPROOT_BLOCK_SET, Block.Properties.of().mapColor(WISPROOT_PLANKS.get().defaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).isValidSpawn(AetherIIBlocks::never).ignitedByLava());
 
     // Holystone
     public static final DeferredBlock<StairBlock> HOLYSTONE_STAIRS = register("holystone_stairs", () -> new StairBlock(HOLYSTONE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()));
-    public static final DeferredBlock<SlabBlock> HOLYSTONE_SLAB = register("holystone_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()).strength(2.0F, 6.0F));
-    public static final DeferredBlock<WallBlock> HOLYSTONE_WALL = register("holystone_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> HOLYSTONE_SLAB = register("holystone_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> HOLYSTONE_WALL = register("holystone_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()).forceSolidOn());
     public static final DeferredBlock<ButtonBlock> HOLYSTONE_BUTTON = register("holystone_button", () -> new ButtonBlock(BlockSetType.STONE, 20, Block.Properties.ofFullCopy(Blocks.STONE_BUTTON));
     public static final DeferredBlock<PressurePlateBlock> HOLYSTONE_PRESSURE_PLATE = register("holystone_pressure_plate", () -> new PressurePlateBlock(BlockSetType.STONE, Block.Properties.of().mapColor(MapColor.WOOL).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F));
 
     // Mossy Holystone
     public static final DeferredBlock<StairBlock> MOSSY_HOLYSTONE_STAIRS = register("mossy_holystone_stairs", () -> new StairBlock(MOSSY_HOLYSTONE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.MOSSY_HOLYSTONE.get()));
-    public static final DeferredBlock<SlabBlock> MOSSY_HOLYSTONE_SLAB = register("mossy_holystone_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.MOSSY_HOLYSTONE.get()).strength(2.0F, 6.0F));
-    public static final DeferredBlock<WallBlock> MOSSY_HOLYSTONE_WALL = register("mossy_holystone_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.MOSSY_HOLYSTONE.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> MOSSY_HOLYSTONE_SLAB = register("mossy_holystone_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.MOSSY_HOLYSTONE.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> MOSSY_HOLYSTONE_WALL = register("mossy_holystone_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.MOSSY_HOLYSTONE.get()).forceSolidOn());
 
     // Irradiated Holystone
     public static final DeferredBlock<StairBlock> IRRADIATED_HOLYSTONE_STAIRS = register("irradiated_holystone_stairs", () -> new StairBlock(IRRADIATED_HOLYSTONE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.IRRADIATED_HOLYSTONE.get()));
-    public static final DeferredBlock<SlabBlock> IRRADIATED_HOLYSTONE_SLAB = register("irradiated_holystone_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.IRRADIATED_HOLYSTONE.get()).strength(2.0F, 6.0F));
-    public static final DeferredBlock<WallBlock> IRRADIATED_HOLYSTONE_WALL = register("irradiated_holystone_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.IRRADIATED_HOLYSTONE.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> IRRADIATED_HOLYSTONE_SLAB = register("irradiated_holystone_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.IRRADIATED_HOLYSTONE.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> IRRADIATED_HOLYSTONE_WALL = register("irradiated_holystone_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.IRRADIATED_HOLYSTONE.get()).forceSolidOn());
 
     // Holystone Bricks
     public static final DeferredBlock<Block> HOLYSTONE_BRICKS = register("holystone_bricks", Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<StairBlock> HOLYSTONE_BRICK_STAIRS = register("holystone_brick_stairs", () -> new StairBlock(HOLYSTONE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE_BRICKS.get()));
-    public static final DeferredBlock<SlabBlock> HOLYSTONE_BRICK_SLAB = register("holystone_brick_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE_BRICKS.get()).strength(2.0F, 6.0F));
-    public static final DeferredBlock<WallBlock> HOLYSTONE_BRICK_WALL = register("holystone_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> HOLYSTONE_BRICK_SLAB = register("holystone_brick_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE_BRICKS.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> HOLYSTONE_BRICK_WALL = register("holystone_brick_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE_BRICKS.get()).forceSolidOn());
 
     // Holystone Decorative Blocks
     public static final DeferredBlock<Block> HOLYSTONE_FLAGSTONES = register("holystone_flagstones", Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
@@ -429,15 +395,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> HOLYSTONE_KEYSTONE = register("holystone_keystone", Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
     public static final DeferredBlock<Block> HOLYSTONE_BASE_BRICKS = register("holystone_base_bricks", Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
     public static final DeferredBlock<Block> HOLYSTONE_CAPSTONE_BRICKS = register("holystone_capstone_bricks", Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> HOLYSTONE_BASE_PILLAR = register("holystone_base_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> HOLYSTONE_CAPSTONE_PILLAR = register("holystone_capstone_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> HOLYSTONE_PILLAR = register("holystone_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> HOLYSTONE_BASE_PILLAR = register("holystone_base_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> HOLYSTONE_CAPSTONE_PILLAR = register("holystone_capstone_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> HOLYSTONE_PILLAR = register("holystone_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
 
     // Faded Holystone Bricks
     public static final DeferredBlock<Block> FADED_HOLYSTONE_BRICKS = register("faded_holystone_bricks", Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
     public static final DeferredBlock<StairBlock> FADED_HOLYSTONE_BRICK_STAIRS = register("faded_holystone_brick_stairs", () -> new StairBlock(FADED_HOLYSTONE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get()));
-    public static final DeferredBlock<SlabBlock> FADED_HOLYSTONE_BRICK_SLAB = register("faded_holystone_brick_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get()).strength(2.0F, 6.0F));
-    public static final DeferredBlock<WallBlock> FADED_HOLYSTONE_BRICK_WALL = register("faded_holystone_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> FADED_HOLYSTONE_BRICK_SLAB = register("faded_holystone_brick_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> FADED_HOLYSTONE_BRICK_WALL = register("faded_holystone_brick_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.FADED_HOLYSTONE_BRICKS.get()).forceSolidOn());
 
     // Faded Holystone Decorative Blocks
     public static final DeferredBlock<Block> FADED_HOLYSTONE_FLAGSTONES = register("faded_holystone_flagstones", Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
@@ -445,60 +411,60 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> FADED_HOLYSTONE_KEYSTONE = register("faded_holystone_keystone", Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
     public static final DeferredBlock<Block> FADED_HOLYSTONE_BASE_BRICKS = register("faded_holystone_base_bricks", Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
     public static final DeferredBlock<Block> FADED_HOLYSTONE_CAPSTONE_BRICKS = register("faded_holystone_capstone_bricks", Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> FADED_HOLYSTONE_BASE_PILLAR = register("faded_holystone_base_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> FADED_HOLYSTONE_CAPSTONE_PILLAR = register("faded_holystone_capstone_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> FADED_HOLYSTONE_PILLAR = register("faded_holystone_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> FADED_HOLYSTONE_BASE_PILLAR = register("faded_holystone_base_pillar", FacingPillarBlock::new, (Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> FADED_HOLYSTONE_CAPSTONE_PILLAR = register("faded_holystone_capstone_pillar", FacingPillarBlock::new, (Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> FADED_HOLYSTONE_PILLAR = register("faded_holystone_pillar", FacingPillarBlock::new, (Block.Properties.ofFullCopy(FADED_HOLYSTONE_BRICKS.get()));
 
     // Undershale
     public static final DeferredBlock<StairBlock> UNDERSHALE_STAIRS = register("undershale_stairs", () -> new StairBlock(UNDERSHALE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()));
-    public static final DeferredBlock<SlabBlock> UNDERSHALE_SLAB = register("undershale_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()));
-    public static final DeferredBlock<WallBlock> UNDERSHALE_WALL = register("undershale_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> UNDERSHALE_SLAB = register("undershale_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()));
+    public static final DeferredBlock<WallBlock> UNDERSHALE_WALL = register("undershale_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE.get()).forceSolidOn());
 
     // Undershale Bricks
     public static final DeferredBlock<Block> UNDERSHALE_BRICKS = register("undershale_bricks", Block.Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops());
     public static final DeferredBlock<StairBlock> UNDERSHALE_BRICK_STAIRS = register("undershale_brick_stairs", () -> new StairBlock(UNDERSHALE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
-    public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
-    public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
+    public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn());
 
     // Agiosite
     public static final DeferredBlock<StairBlock> AGIOSITE_STAIRS = register("agiosite_stairs", () -> new StairBlock(AGIOSITE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()));
-    public static final DeferredBlock<SlabBlock> AGIOSITE_SLAB = register("agiosite_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()).strength(2.0F, 6.0F));
-    public static final DeferredBlock<WallBlock> AGIOSITE_WALL = register("agiosite_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> AGIOSITE_SLAB = register("agiosite_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> AGIOSITE_WALL = register("agiosite_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()).forceSolidOn());
 
     // Agiosite Bricks
     public static final DeferredBlock<Block> AGIOSITE_BRICKS = register("agiosite_bricks", Block.Properties.of().mapColor(MapColor.TERRACOTTA_PURPLE).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<StairBlock> AGIOSITE_BRICK_STAIRS = register("agiosite_brick_stairs", () -> new StairBlock(AGIOSITE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE_BRICKS.get()));
-    public static final DeferredBlock<SlabBlock> AGIOSITE_BRICK_SLAB = register("agiosite_brick_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE_BRICKS.get()).strength(2.0F, 6.0F));
-    public static final DeferredBlock<WallBlock> AGIOSITE_BRICK_WALL = register("agiosite_brick_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> AGIOSITE_BRICK_SLAB = register("agiosite_brick_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE_BRICKS.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> AGIOSITE_BRICK_WALL = register("agiosite_brick_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE_BRICKS.get()).forceSolidOn());
 
     // Agiosite Decorative Blocks
     public static final DeferredBlock<Block> AGIOSITE_FLAGSTONES = register("agiosite_flagstones", Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
     public static final DeferredBlock<Block> AGIOSITE_KEYSTONE = register("agiosite_keystone", Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
     public static final DeferredBlock<Block> AGIOSITE_BASE_BRICKS = register("agiosite_base_bricks", Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
     public static final DeferredBlock<Block> AGIOSITE_CAPSTONE_BRICKS = register("agiosite_capstone_bricks", Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> AGIOSITE_BASE_PILLAR = register("agiosite_base_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> AGIOSITE_CAPSTONE_PILLAR = register("agiosite_capstone_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> AGIOSITE_PILLAR = register("agiosite_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> AGIOSITE_BASE_PILLAR = register("agiosite_base_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> AGIOSITE_CAPSTONE_PILLAR = register("agiosite_capstone_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> AGIOSITE_PILLAR = register("agiosite_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(AGIOSITE_BRICKS.get()));
 
     // Icestone
     public static final DeferredBlock<StairBlock> ICESTONE_STAIRS = register("icestone_stairs", () -> new IcestoneStairsBlock(ICESTONE.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE.get()));
-    public static final DeferredBlock<SlabBlock> ICESTONE_SLAB = register("icestone_slab", () -> new IcestoneSlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE.get()).strength(0.5F, 6.0F));
-    public static final DeferredBlock<WallBlock> ICESTONE_WALL = register("icestone_wall", () -> new IcestoneWallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> ICESTONE_SLAB = register("icestone_slab", IcestoneSlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE.get()).strength(0.5F, 6.0F));
+    public static final DeferredBlock<WallBlock> ICESTONE_WALL = register("icestone_wall", IcestoneWallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE.get()).forceSolidOn());
 
     // Icestone Bricks
     public static final DeferredBlock<Block> ICESTONE_BRICKS = register("icestone_bricks", Block.Properties.of().mapColor(MapColor.ICE).sound(SoundType.GLASS).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).requiresCorrectToolForDrops());
     public static final DeferredBlock<StairBlock> ICESTONE_BRICK_STAIRS = register("icestone_bricks_stairs", () -> new StairBlock(ICESTONE_BRICKS.get().defaultBlockState(), Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()));
-    public static final DeferredBlock<SlabBlock> ICESTONE_BRICK_SLAB = register("icestone_bricks_slab", () -> new SlabBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()).strength(2.0F, 6.0F));
-    public static final DeferredBlock<WallBlock> ICESTONE_BRICK_WALL = register("icestone_bricks_wall", () -> new WallBlock(Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()).forceSolidOn());
+    public static final DeferredBlock<SlabBlock> ICESTONE_BRICK_SLAB = register("icestone_bricks_slab", SlabBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> ICESTONE_BRICK_WALL = register("icestone_bricks_wall", WallBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.ICESTONE_BRICKS.get()).forceSolidOn());
 
     // Icestone Decorative Blocks
     public static final DeferredBlock<Block> ICESTONE_FLAGSTONES = register("icestone_flagstones", Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
     public static final DeferredBlock<Block> ICESTONE_KEYSTONE = register("icestone_keystone", Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
     public static final DeferredBlock<Block> ICESTONE_BASE_BRICKS = register("icestone_base_bricks", Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
     public static final DeferredBlock<Block> ICESTONE_CAPSTONE_BRICKS = register("icestone_capstone_bricks", Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> ICESTONE_BASE_PILLAR = register("icestone_base_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> ICESTONE_CAPSTONE_PILLAR = register("icestone_capstone_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
-    public static final DeferredBlock<FacingPillarBlock> ICESTONE_PILLAR = register("icestone_pillar", () -> new FacingPillarBlock(Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> ICESTONE_BASE_PILLAR = register("icestone_base_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> ICESTONE_CAPSTONE_PILLAR = register("icestone_capstone_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> ICESTONE_PILLAR = register("icestone_pillar", FacingPillarBlock::new, Block.Properties.ofFullCopy(ICESTONE_BRICKS.get()));
 
     // Glass
     public static final DeferredBlock<TransparentBlock> QUICKSOIL_GLASS = register("quicksoil_glass", () -> new QuicksoilGlassBlock(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.HAT).strength(0.2F).friction(1.1F).lightLevel(AetherIIBlocks::lightLevel11).sound(SoundType.GLASS).noOcclusion().isValidSpawn(AetherIIBlocks::never).isRedstoneConductor(AetherIIBlocks::never).isSuffocating(AetherIIBlocks::never).isViewBlocking(AetherIIBlocks::never));
@@ -511,15 +477,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<TransparentBlock> ARKENIUM_FRAMED_SCATTERGLASS = register("arkenium_framed_scatterglass", () -> new ScatterglassBlock(Block.Properties.ofFullCopy(SCATTERGLASS.get()));
 
     // Glass Panes
-    public static final DeferredBlock<IronBarsBlock> QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", () -> new IronBarsBlock(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.HAT).strength(0.2F).friction(1.1F).lightLevel(AetherIIBlocks::lightLevel11).sound(SoundType.GLASS).noOcclusion());
-    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE = register("skyroot_framed_quicksoil_glass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(QUICKSOIL_GLASS_PANE.get()));
-    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE = register("arkenium_framed_quicksoil_glass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(QUICKSOIL_GLASS_PANE.get()));
-    public static final DeferredBlock<IronBarsBlock> CRUDE_SCATTERGLASS_PANE = register("crude_scatterglass_pane", () -> new CrudeScatterglassPane(Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion().isViewBlocking(AetherIIBlocks::never));
-    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE = register("skyroot_framed_crude_scatterglass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(CRUDE_SCATTERGLASS_PANE.get()));
-    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE = register("arkenium_framed_crude_scatterglass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(CRUDE_SCATTERGLASS_PANE.get()));
-    public static final DeferredBlock<IronBarsBlock> SCATTERGLASS_PANE = register("scatterglass_pane", () -> new IronBarsBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().strength(0.2F).sound(SoundType.GLASS).requiresCorrectToolForDrops());
-    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_SCATTERGLASS_PANE = register("skyroot_framed_scatterglass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(SCATTERGLASS_PANE.get()));
-    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_SCATTERGLASS_PANE = register("arkenium_framed_scatterglass_pane", () -> new IronBarsBlock(Block.Properties.ofFullCopy(SCATTERGLASS_PANE.get()));
+    public static final DeferredBlock<IronBarsBlock> QUICKSOIL_GLASS_PANE = register("quicksoil_glass_pane", IronBarsBlock::new, Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).instrument(NoteBlockInstrument.HAT).strength(0.2F).friction(1.1F).lightLevel(AetherIIBlocks::lightLevel11).sound(SoundType.GLASS).noOcclusion());
+    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE = register("skyroot_framed_quicksoil_glass_pane", IronBarsBlock::new, Block.Properties.ofFullCopy(QUICKSOIL_GLASS_PANE.get()));
+    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE = register("arkenium_framed_quicksoil_glass_pane", IronBarsBlock::new, Block.Properties.ofFullCopy(QUICKSOIL_GLASS_PANE.get()));
+    public static final DeferredBlock<IronBarsBlock> CRUDE_SCATTERGLASS_PANE = register("crude_scatterglass_pane", IronBarsBlock::new, Block.Properties.of().mapColor(MapColor.TERRACOTTA_CYAN).instrument(NoteBlockInstrument.BASEDRUM).strength(1.5F, 6.0F).sound(SoundType.GLASS).requiresCorrectToolForDrops().noOcclusion().isViewBlocking(AetherIIBlocks::never));
+    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE = register("skyroot_framed_crude_scatterglass_pane", IronBarsBlock::new, Block.Properties.ofFullCopy(CRUDE_SCATTERGLASS_PANE.get()));
+    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE = register("arkenium_framed_crude_scatterglass_pane", IronBarsBlock::new, Block.Properties.ofFullCopy(CRUDE_SCATTERGLASS_PANE.get()));
+    public static final DeferredBlock<IronBarsBlock> SCATTERGLASS_PANE = register("scatterglass_pane", IronBarsBlock::new, Block.Properties.of().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().strength(0.2F).sound(SoundType.GLASS).requiresCorrectToolForDrops());
+    public static final DeferredBlock<IronBarsBlock> SKYROOT_FRAMED_SCATTERGLASS_PANE = register("skyroot_framed_scatterglass_pane", IronBarsBlock::new, Block.Properties.ofFullCopy(SCATTERGLASS_PANE.get()));
+    public static final DeferredBlock<IronBarsBlock> ARKENIUM_FRAMED_SCATTERGLASS_PANE = register("arkenium_framed_scatterglass_pane", IronBarsBlock::new, Block.Properties.ofFullCopy(SCATTERGLASS_PANE.get()));
 
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));
@@ -578,15 +544,15 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
 
 
     // Utility
-    public static final DeferredBlock<Block> AMBROSIUM_TORCH = register("ambrosium_torch", () -> new AmbrosiumTorchBlock(Block.Properties.ofFullCopy(Blocks.TORCH));
+    public static final DeferredBlock<Block> AMBROSIUM_TORCH = register("ambrosium_torch", AmbrosiumTorchBlock::new, Block.Properties.ofFullCopy(Blocks.TORCH));
     public static final DeferredBlock<Block> AMBROSIUM_WALL_TORCH = BLOCKS.register("ambrosium_wall_torch", () -> new AmbrosiumWallTorchBlock(Block.Properties.ofFullCopy(Blocks.WALL_TORCH));
-    public static final DeferredBlock<Block> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", () -> new SkyrootCraftingTableBlock(Block.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
-    public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", () -> new HolystoneFurnaceBlock(Block.Properties.ofFullCopy(Blocks.FURNACE));
-    public static final DeferredBlock<Block> ALTAR = register("altar", () -> new AltarBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
-    public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", () -> new ArtisansBenchBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
-    public static final DeferredBlock<Block> ARKENIUM_FORGE = register("arkenium_forge", () -> new ArkeniumForgeBlock(Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
+    public static final DeferredBlock<Block> SKYROOT_CRAFTING_TABLE = register("skyroot_crafting_table", SkyrootCraftingTableBlock::new, (Block.Properties.ofFullCopy(Blocks.CRAFTING_TABLE));
+    public static final DeferredBlock<Block> HOLYSTONE_FURNACE = register("holystone_furnace", HolystoneFurnaceBlock::new, Block.Properties.ofFullCopy(Blocks.FURNACE));
+    public static final DeferredBlock<Block> ALTAR = register("altar", AltarBlock::new, Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
+    public static final DeferredBlock<Block> ARTISANS_BENCH = register("artisans_bench", ArtisansBenchBlock::new, Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
+    public static final DeferredBlock<Block> ARKENIUM_FORGE = register("arkenium_forge", ArkeniumForgeBlock::new, Block.Properties.ofFullCopy(Blocks.STONECUTTER).noOcclusion());
     public static final DeferredBlock<Block> SKYROOT_CHEST = register("skyroot_chest", () -> new SkyrootChestBlock(Block.Properties.ofFullCopy(Blocks.CHEST), AetherIIBlockEntityTypes.SKYROOT_CHEST::get);
-    public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", () -> new LadderBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
+    public static final DeferredBlock<LadderBlock> SKYROOT_LADDER = register("skyroot_ladder", LadderBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.LADDER).strength(0.4F).sound(SoundType.LADDER).noOcclusion());
     public static final DeferredBlock<BedBlock> SKYROOT_BED = register("skyroot_bed", () -> new SkyrootBedBlock(DyeColor.WHITE, Block.Properties.ofFullCopy(Blocks.WHITE_BED));
 
     public static final DeferredBlock<StandingSignBlock> SKYROOT_SIGN = register("skyroot_sign", () -> new StandingSignBlock(AetherIIWoodTypes.SKYROOT, Block.Properties.of().mapColor(MapColor.SAND).forceSolidOn().ignitedByLava().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).sound(SoundType.WOOD));
@@ -605,42 +571,42 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<WallHangingSignBlock> WISPROOT_WALL_HANGING_SIGN = BLOCKS.register("wisproot_wall_hanging_sign", () -> new WallHangingSignBlock(AetherIIWoodTypes.WISPROOT, BlockBehaviour.Properties.of().mapColor(Blocks.OAK_LOG.defaultMapColor()).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(1.0F).ignitedByLava());
 
     // Moa Egg
-    public static final DeferredBlock<Block> MOA_EGG = BLOCKS.register("moa_egg", () -> new MoaEggBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());
+    public static final DeferredBlock<Block> MOA_EGG = BLOCKS.register("moa_egg", () -> new MoaEggBlock(Block.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(0.5F).sound(SoundType.METAL).noOcclusion());
 
     // Bookshelves
-    public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", () -> new BookshelfBlock(Block.Properties.ofFullCopy(Blocks.BOOKSHELF));
-    public static final DeferredBlock<Block> HOLYSTONE_BOOKSHELF = register("holystone_bookshelf", () -> new BookshelfBlock(Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
+    public static final DeferredBlock<Block> SKYROOT_BOOKSHELF = register("skyroot_bookshelf", BookshelfBlock::new, Block.Properties.ofFullCopy(Blocks.BOOKSHELF));
+    public static final DeferredBlock<Block> HOLYSTONE_BOOKSHELF = register("holystone_bookshelf", BookshelfBlock::new, Block.Properties.ofFullCopy(HOLYSTONE_BRICKS.get()));
 
     // Furniture
-    public static final DeferredBlock<OutpostCampfireBlock> OUTPOST_CAMPFIRE = register("outpost_campfire", () -> new OutpostCampfireBlock(Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(15.0F, 1200.0F).noOcclusion().pushReaction(PushReaction.BLOCK));
+    public static final DeferredBlock<OutpostCampfireBlock> OUTPOST_CAMPFIRE = register("outpost_campfire", OutpostCampfireBlock::new, Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).strength(15.0F, 1200.0F).noOcclusion().pushReaction(PushReaction.BLOCK));
 
 
 
-    private static <T extends Block> DeferredBlock<Block> registerWithoutItem(String name, BlockBehaviour.Properties properties) {
+    private static <T extends Block> DeferredBlock<Block> registerWithoutItem(String name, Block.Properties properties) {
         return registerWithoutItem(name, Block::new, properties);
     }
 
-    private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, Function<BlockBehaviour.Properties, T> builder, BlockBehaviour.Properties properties) {
+    private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, Function<Block.Properties, T> builder, Block.Properties properties) {
         return registerWithoutItem(name, createKey(name), builder, properties);
     }
 
-    private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, ResourceKey<Block> key, Function<BlockBehaviour.Properties, T> builder, BlockBehaviour.Properties properties) {
+    private static <T extends Block> DeferredBlock<T> registerWithoutItem(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Block.Properties properties) {
         return BLOCKS.register(name, () -> builder.apply(properties.setId(key)));
     }
 
-    private static <T extends Block> DeferredBlock<Block> register(String name, BlockBehaviour.Properties properties) {
+    private static <T extends Block> DeferredBlock<Block> register(String name, Block.Properties properties) {
         return register(name, Block::new, properties);
     }
 
-    private static <T extends Block> DeferredBlock<T> register(String name, Function<BlockBehaviour.Properties, T> builder, BlockBehaviour.Properties properties) {
+    private static <T extends Block> DeferredBlock<T> register(String name, Function<Block.Properties, T> builder, Block.Properties properties) {
         return register(name, createKey(name), builder, properties);
     }
 
-    private static <T extends Block> DeferredBlock<T> register(String name, ResourceKey<Block> key, Function<BlockBehaviour.Properties, T> builder, BlockBehaviour.Properties properties) {
+    private static <T extends Block> DeferredBlock<T> register(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Block.Properties properties) {
         return baseRegister(name, key, builder, properties, AetherIIBlocks::registerBlockItem);
     }
 
-    private static <T extends Block> DeferredBlock<T> baseRegister(String name, ResourceKey<Block> key, Function<BlockBehaviour.Properties, T> builder, BlockBehaviour.Properties properties, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {
+    private static <T extends Block> DeferredBlock<T> baseRegister(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Block.Properties properties, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {
         T block = builder.apply(properties.setId(key));
         DeferredBlock<T> registered = BLOCKS.register(name, () -> block);
         AetherIIItems.ITEMS.register(name, item.apply(registered));
@@ -796,6 +762,40 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         WoodType.register(AetherIIWoodTypes.GREATROOT);
         WoodType.register(AetherIIWoodTypes.WISPROOT);
     }
+
+    /**
+     * Blocks able to be flattened with {@link ItemAbilities#AXE_STRIP}, and the equivalent result block.
+     */
+    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> STRIPPABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
+            .put(() -> AetherIIBlocks.SKYROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
+            .put(() -> AetherIIBlocks.SKYROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
+            .put(() -> AetherIIBlocks.GREATROOT_LOG, () -> AetherIIBlocks.STRIPPED_GREATROOT_LOG)
+            .put(() -> AetherIIBlocks.GREATROOT_WOOD, () -> AetherIIBlocks.STRIPPED_GREATROOT_WOOD)
+            .put(() -> AetherIIBlocks.WISPROOT_LOG, () -> AetherIIBlocks.STRIPPED_WISPROOT_LOG)
+            .put(() -> AetherIIBlocks.WISPROOT_WOOD, () -> AetherIIBlocks.STRIPPED_WISPROOT_WOOD)
+            .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG, () -> AetherIIBlocks.WISPROOT_LOG)
+            .put(() -> AetherIIBlocks.AMBEROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
+            .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
+            .build();
+
+    /**
+     * Blocks able to be flattened with {@link ItemAbilities#SHOVEL_FLATTEN}, and the equivalent result block.
+     */
+    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> FLATTENABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
+            .put(() -> AetherIIBlocks.AETHER_GRASS_BLOCK, () -> AetherIIBlocks.AETHER_DIRT_PATH)
+            .put(() -> AetherIIBlocks.AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT_PATH)
+            .put(() -> AetherIIBlocks.COARSE_AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT_PATH)
+            .build();
+
+    /**
+     * Blocks able to be tilled with {@link ItemAbilities#HOE_TILL}, and the equivalent result block.
+     */
+    public static final Map<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>> TILLABLES = new ImmutableMap.Builder<Supplier<DeferredBlock<? extends Block>>, Supplier<DeferredBlock<? extends Block>>>()
+            .put(() -> AetherIIBlocks.AETHER_DIRT, () -> AetherIIBlocks.AETHER_FARMLAND)
+            .put(() -> AetherIIBlocks.AETHER_GRASS_BLOCK, () -> AetherIIBlocks.AETHER_FARMLAND)
+            .put(() -> AetherIIBlocks.AETHER_DIRT_PATH, () -> AetherIIBlocks.AETHER_FARMLAND)
+            .put(() -> AetherIIBlocks.COARSE_AETHER_DIRT, () -> AetherIIBlocks.AETHER_DIRT)
+            .build();
 
     public static BlockState registerBlockModifications(LevelAccessor levelAccessor, ItemAbility toolAction, BlockPos blockPos, BlockState oldState, BlockState newState) {
         Map<Block, Block> strippables = STRIPPABLES.entrySet().stream().collect(Collectors.toMap((e) -> e.getKey().get().get(), (e) -> e.getValue().get().get()));
