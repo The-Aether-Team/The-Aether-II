@@ -600,8 +600,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     }
 
     private static <T extends Block> DeferredBlock<T> baseRegister(String name, ResourceKey<Block> key, Function<Block.Properties, T> builder, Block.Properties properties, Function<DeferredBlock<T>, Supplier<? extends Item>> item) {
-        T block = builder.apply(properties.setId(key));
-        DeferredBlock<T> registered = BLOCKS.register(name, () -> block);
+        DeferredBlock<T> registered = BLOCKS.register(name, () -> builder.apply(properties.setId(key)));
         AetherIIItems.ITEMS.register(name, item.apply(registered));
         return registered;
     }
