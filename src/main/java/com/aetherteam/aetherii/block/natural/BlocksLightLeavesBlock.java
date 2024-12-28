@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Supplier;
 
-public class BlocksLightLeaves extends AetherLeavesBlock {
-    public BlocksLightLeaves(Properties properties, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
+public class BlocksLightLeavesBlock extends AetherLeavesBlock {
+    public BlocksLightLeavesBlock(Properties properties, Supplier<SimpleParticleType> leavesParticle, Supplier<Block> leavesPile) {
         super(properties, leavesParticle, leavesPile);
     }
 
