@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.recipe.recipes.item;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
@@ -64,7 +65,7 @@ public class AltarEnchantingRecipe extends SingleItemRecipe {
 
     @Override
     public List<RecipeDisplay> display() {
-        return List.of(new AltarRecipeDisplay(this.input().display(), SlotDisplay.AnyFuel.INSTANCE, new SlotDisplay.ItemStackSlotDisplay(this.result()), new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()), this.fuelCount, this.processingTime, this.experience));
+        return List.of(new AltarRecipeDisplay(this.input().display(), new SlotDisplay.TagSlotDisplay(AetherIITags.Items.ALTAR_FUEL), new SlotDisplay.ItemStackSlotDisplay(this.result()), new SlotDisplay.ItemSlotDisplay(AetherIIBlocks.ALTAR.asItem()), this.fuelCount, this.processingTime, this.experience));
     }
 
     @Override

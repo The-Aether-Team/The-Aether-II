@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
@@ -141,7 +142,7 @@ public class ArkeniumForgeBlockEntity extends BaseContainerBlockEntity implement
     }
 
     @Override
-    public void fillStackedContents(StackedContents contents) {
+    public void fillStackedContents(StackedItemContents contents) {
         for (ItemStack itemstack : this.items) {
             contents.accountStack(itemstack);
         }

@@ -20,12 +20,12 @@ public class HolystoneRock extends ThrowableItemProjectile {
         super(entityType, level);
     }
 
-    public HolystoneRock(Level level, LivingEntity shooter) {
-        super(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), shooter, level);
+    public HolystoneRock(Level level, LivingEntity shooter, ItemStack stack) {
+        super(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), shooter, level, stack);
     }
 
-    public HolystoneRock(Level level, double x, double y, double z) {
-        super(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), x, y, z, level);
+    public HolystoneRock(Level level, double x, double y, double z, ItemStack stack) {
+        super(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), x, y, z, level, stack);
     }
 
     @Override

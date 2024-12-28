@@ -8,8 +8,6 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.Optionull;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -40,14 +38,16 @@ import java.util.function.Function;
  * Also used for Datagen
  */
 public class AetherPoolElement extends StructurePoolElement {
+    private static final Comparator<StructureTemplate.JigsawBlockInfo> HIGHEST_SELECTION_PRIORITY_FIRST = Comparator.comparingInt(StructureTemplate.JigsawBlockInfo::selectionPriority).reversed();
     private static final Codec<Either<ResourceLocation, StructureTemplate>> TEMPLATE_CODEC = Codec.of(
             AetherPoolElement::encodeTemplate, ResourceLocation.CODEC.map(Either::left)
     );
     public static final MapCodec<AetherPoolElement> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(templateCodec(), processorsCodec(), projectionCodec()).apply(instance, AetherPoolElement::new)
+            instance -> instance.group(templateCodec(), processorsCodec(), projectionCodec(), overrideLiquidSettingsCodec()).apply(instance, AetherPoolElement::new)
     );
     protected final Either<ResourceLocation, StructureTemplate> template;
     protected final Holder<StructureProcessorList> processors;
+    protected final Optional<LiquidSettings> overrideLiquidSettings;
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> p_210425_, DynamicOps<T> p_210426_, T p_210427_) {
         Optional<ResourceLocation> optional = p_210425_.left();
@@ -60,14 +60,19 @@ public class AetherPoolElement extends StructurePoolElement {
         return StructureProcessorType.LIST_CODEC.fieldOf("processors").forGetter(codec -> codec.processors);
     }
 
+    protected static <E extends AetherPoolElement> RecordCodecBuilder<E, Optional<LiquidSettings>> overrideLiquidSettingsCodec() {
+        return LiquidSettings.CODEC.optionalFieldOf("override_liquid_settings").forGetter((codec) -> codec.overrideLiquidSettings);
+    }
+
     protected static <E extends AetherPoolElement> RecordCodecBuilder<E, Either<ResourceLocation, StructureTemplate>> templateCodec() {
         return TEMPLATE_CODEC.fieldOf("location").forGetter(codec -> codec.template);
     }
 
-    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection) {
+    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings) {
         super(projection);
         this.template = template;
         this.processors = processors;
+        this.overrideLiquidSettings = overrideLiquidSettings;
     }
 
     @Override
@@ -101,24 +106,16 @@ public class AetherPoolElement extends StructurePoolElement {
     }
 
     @Override
-    public List<StructureTemplate.StructureBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation, RandomSource random) {
-        StructureTemplate template = this.getTemplate(templateManager);
-        ObjectArrayList<StructureTemplate.StructureBlockInfo> structureBlockInfo = template.filterBlocks(
-                pos, new StructurePlaceSettings().setRotation(rotation), Blocks.JIGSAW, true
-        );
-        Util.shuffle(structureBlockInfo, random);
-        sortBySelectionPriority(structureBlockInfo);
-        return structureBlockInfo;
+    public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation, RandomSource random) {
+        List<StructureTemplate.JigsawBlockInfo> list = this.getTemplate(structureTemplateManager).getJigsaws(pos, rotation);
+        Util.shuffle(list, random);
+        sortBySelectionPriority(list);
+        return list;
     }
 
     @VisibleForTesting
-    static void sortBySelectionPriority(List<StructureTemplate.StructureBlockInfo> structureBlockInfo) {
-        structureBlockInfo.sort(
-                Comparator.<StructureTemplate.StructureBlockInfo>comparingInt(
-                                template -> Optionull.mapOrDefault(template.nbt(), structure -> structure.getInt("selection_priority"), 0)
-                        )
-                        .reversed()
-        );
+    static void sortBySelectionPriority(List<StructureTemplate.JigsawBlockInfo> structureBlockInfos) {
+        structureBlockInfos.sort(HIGHEST_SELECTION_PRIORITY_FIRST);
     }
 
     @Override
@@ -130,7 +127,7 @@ public class AetherPoolElement extends StructurePoolElement {
     @Override
     public boolean place(StructureTemplateManager templateManager, WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator, BlockPos offset, BlockPos pos, Rotation rotation, BoundingBox box, RandomSource random, LiquidSettings liquidSettings, boolean keepJigsaws) {
         StructureTemplate template = this.getTemplate(templateManager);
-        StructurePlaceSettings settings = this.getSettings(rotation, box, keepJigsaws);
+        StructurePlaceSettings settings = this.getSettings(rotation, box, liquidSettings, keepJigsaws);
         if (pos.getY() > 96) { // Deletes templates that generated below the cloudbed
             if (!template.placeInWorld(level, offset, pos, settings, random, 18)) {
                 return false;
@@ -151,7 +148,7 @@ public class AetherPoolElement extends StructurePoolElement {
      * Uses processors of {@link net.minecraft.world.level.levelgen.structure.pools.LegacySinglePoolElement}
      * Might have a coded to determine if it should use processors of Single or Legacy Pool Elements in the future
      * */
-    protected StructurePlaceSettings getSettings(Rotation rotation, BoundingBox boundingBox, boolean offset) {
+    protected StructurePlaceSettings getSettings(Rotation rotation, BoundingBox boundingBox, LiquidSettings liquidSettings, boolean offset) {
         StructurePlaceSettings settings = new StructurePlaceSettings();
         settings.setBoundingBox(boundingBox);
         settings.setRotation(rotation);
@@ -159,7 +156,7 @@ public class AetherPoolElement extends StructurePoolElement {
         settings.setIgnoreEntities(false);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
-//        settings.setLiquidSettings() //todo
+        settings.setLiquidSettings(this.overrideLiquidSettings.orElse(liquidSettings));
         settings.setFinalizeEntities(true);
         if (!offset) {
             settings.addProcessor(JigsawReplacementProcessor.INSTANCE);

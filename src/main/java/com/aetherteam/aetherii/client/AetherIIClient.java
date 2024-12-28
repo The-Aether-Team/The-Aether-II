@@ -3,14 +3,17 @@ package com.aetherteam.aetherii.client;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
+import com.aetherteam.aetherii.client.gui.screen.HighlandsReceivingLevelScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.entity.MoaRenderer;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.ModelManagerAccessor;
+import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -18,11 +21,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterDimensionTransitionScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
 public class AetherIIClient {
     public static void clientInit(IEventBus bus) {
         bus.addListener(AetherIIClient::clientSetup);
+        bus.addListener(AetherIIClient::registerDimensionTransitionScreens);
 
         AetherIIClient.eventSetup(bus);
 
@@ -56,19 +61,25 @@ public class AetherIIClient {
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
-        neoBus.addListener(AetherIIColorResolvers::registerItemColor);
         neoBus.addListener(AetherIIParticleFactories::registerParticleFactories);
         neoBus.addListener(AetherIIOverlays::registerOverlays);
         neoBus.addListener(AetherIIRenderers::registerAddLayer);
         neoBus.addListener(AetherIIRenderers::registerEntityRenderers);
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
         neoBus.addListener(AetherIIRenderers::registerBakedModels);
+        neoBus.addListener(AetherIIRenderers::registerRenderStateModifier);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
         neoBus.addListener(AetherIIShaders::registerShaders);
         neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
         neoBus.addListener(AetherIIClientTooltips::registerClientTooltipComponents);
         neoBus.addListener(AetherIIClientExtensions::registerClientItemExtensions);
         neoBus.addListener(AetherIIRenderTypes::registerRenderBuffers);
+        neoBus.addListener(AetherIIRecipeBookCategories::registerRecipeBookSearchCategories);
+    }
+
+    public static void registerDimensionTransitionScreens(RegisterDimensionTransitionScreenEvent event) {
+        event.registerIncomingEffect(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, HighlandsReceivingLevelScreen::new);
+        event.registerOutgoingEffect(AetherIIDimensions.AETHER_HIGHLANDS_LEVEL, HighlandsReceivingLevelScreen::new);
     }
 
     public static void registerItemModelProperties() {

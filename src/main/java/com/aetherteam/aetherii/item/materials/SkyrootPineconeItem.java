@@ -26,7 +26,7 @@ public class SkyrootPineconeItem extends Item implements ThrowableItem {
 
     @Override
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
-        this.throwItem(stack, level, livingEntity, timeLeft, SoundEvents.SNOWBALL_THROW, new SkyrootPinecone(level, livingEntity));
+        this.throwItem(stack, level, livingEntity, timeLeft, SoundEvents.SNOWBALL_THROW, new SkyrootPinecone(level, livingEntity, stack));
         return super.releaseUsing(stack, level, livingEntity, timeLeft); //todo ?
     }
 

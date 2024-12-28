@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.equipment;
 
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
@@ -49,10 +50,10 @@ import java.util.List;
 import java.util.Map;
 
 public final class EquipmentUtil {
-    private static final Map<Holder<ArmorMaterial>, List<Pair<Holder<Attribute>, ResourceLocation>>> ARMOR_ABILITY_ATTRIBUTES = new ImmutableMap.Builder<Holder<ArmorMaterial>, List<Pair<Holder<Attribute>, ResourceLocation>>>()
-            .put(AetherIIArmorMaterials.BURRUKAI_PELT, List.of(Pair.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE, BurrukaiPeltArmor.BURRUKAI_PELT_STUN_RESISTANCE), Pair.of(Attributes.KNOCKBACK_RESISTANCE, BurrukaiPeltArmor.BURRUKAI_PELT_KNOCKBACK_RESISTANCE)))
-            .put(AetherIIArmorMaterials.ZANITE, List.of(Pair.of(Attributes.MOVEMENT_EFFICIENCY, ZaniteArmor.ZANITE_MOVEMENT_SPEED), Pair.of(Attributes.MINING_EFFICIENCY, ZaniteArmor.ZANITE_MINING_SPEED), Pair.of(Attributes.ATTACK_SPEED, ZaniteArmor.ZANITE_ATTACK_SPEED)))
-            .put(AetherIIArmorMaterials.ARKENIUM, List.of(Pair.of(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE, ArkeniumArmor.ARKENIUM_BLAST_RESISTANCE)))
+    private static final Map<ResourceKey<EquipmentAsset>, List<Pair<Holder<Attribute>, ResourceLocation>>> ARMOR_ABILITY_ATTRIBUTES = new ImmutableMap.Builder<ResourceKey<EquipmentAsset>, List<Pair<Holder<Attribute>, ResourceLocation>>>()
+            .put(AetherIIEquipmentAssets.BURRUKAI_PELT, List.of(Pair.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE, BurrukaiPeltArmor.BURRUKAI_PELT_STUN_RESISTANCE), Pair.of(Attributes.KNOCKBACK_RESISTANCE, BurrukaiPeltArmor.BURRUKAI_PELT_KNOCKBACK_RESISTANCE)))
+            .put(AetherIIEquipmentAssets.ZANITE, List.of(Pair.of(Attributes.MOVEMENT_EFFICIENCY, ZaniteArmor.ZANITE_MOVEMENT_SPEED), Pair.of(Attributes.MINING_EFFICIENCY, ZaniteArmor.ZANITE_MINING_SPEED), Pair.of(Attributes.ATTACK_SPEED, ZaniteArmor.ZANITE_ATTACK_SPEED)))
+            .put(AetherIIEquipmentAssets.ARKENIUM, List.of(Pair.of(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE, ArkeniumArmor.ARKENIUM_BLAST_RESISTANCE)))
             .build();
 
     private static final Map<Holder<Item>, List<Holder<Attribute>>> ITEM_EFFECT_RESISTANCES = new ImmutableMap.Builder<Holder<Item>, List<Holder<Attribute>>>()
@@ -68,8 +69,8 @@ public final class EquipmentUtil {
         return !(attacker instanceof Player player) || (combatifyLoaded ? player.getAttackStrengthScale(1.0F) >= 1.95F : player.getAttackStrengthScale(1.0F) >= 1.0F);
     }
 
-    public static int getArmorCount(LivingEntity entity, ArmorMaterial material) {
-        Map<ResourceKey<EquipmentAsset>, Integer> armorTypeCount = new HashMap<>();
+    public static int getArmorCount(LivingEntity entity, ResourceKey<EquipmentAsset> material) {
+        Map<ResourceKey<EquipmentAsset>, Integer> armorTypeCount = new HashMap<>(); //todo shold probably switch to tag-based checks eventually.
         for (ItemStack itemStack : entity.getArmorSlots()) {
             Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
             if (equippable != null && equippable.assetId().isPresent()) {
@@ -85,18 +86,18 @@ public final class EquipmentUtil {
         if (accessories != null) { //todo
             SlotEntryReference slotEntryReference = accessories.getFirstEquipped((itemStack) -> itemStack.getItem() instanceof GlovesItem);
             if (slotEntryReference != null && slotEntryReference.stack().getItem() instanceof GlovesItem glovesItem) {
-                ArmorMaterial materialHolder = glovesItem.getMaterial();
-                if (armorTypeCount.containsKey(materialHolder)) {
-                    armorTypeCount.put(materialHolder, armorTypeCount.get(materialHolder) + 1);
+                ResourceKey<EquipmentAsset> materialAsset = glovesItem.getMaterial();
+                if (armorTypeCount.containsKey(materialAsset)) {
+                    armorTypeCount.put(materialAsset, armorTypeCount.get(materialAsset) + 1);
                 } else {
-                    armorTypeCount.put(materialHolder, 1);
+                    armorTypeCount.put(materialAsset, 1);
                 }
             }
         }
         return armorTypeCount.computeIfAbsent(material, i -> 0);
     }
 
-    public static boolean hasArmorAbility(LivingEntity entity, ArmorMaterial material) {
+    public static boolean hasArmorAbility(LivingEntity entity, ResourceKey<EquipmentAsset> material) {
         return getArmorCount(entity, material) >= 3;
     }
 
@@ -132,9 +133,10 @@ public final class EquipmentUtil {
 
     public static void addArmorTooltips(Player player, List<Component> components, ItemStack stack) {
         if (player != null && (stack.getItem() instanceof ArmorItem || stack.getItem() instanceof GlovesItem)) {
-            Holder<ArmorMaterial> material = null;
-            if (stack.getItem() instanceof ArmorItem armorItem) {
-                material = armorItem.getMaterial();
+            ResourceKey<EquipmentAsset> material = null;
+            Equippable equippable = stack.get(DataComponents.EQUIPPABLE);
+            if (equippable != null && equippable.assetId().isPresent()) {
+                material = equippable.assetId().get();
             } else if (stack.getItem() instanceof GlovesItem glovesItem) {
                 material = glovesItem.getMaterial();
             }

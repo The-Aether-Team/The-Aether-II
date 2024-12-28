@@ -150,10 +150,7 @@ public class AetherIIEventListeners {
 
     public static void onPlayerEntityInteractSpecific(PlayerInteractEvent.EntityInteractSpecific event) {
         Player player = event.getEntity();
-        Level level = event.getLevel();
         InteractionHand interactionHand = event.getHand();
-        ItemStack itemStack = event.getItemStack();
-        BlockPos localPos = event.getPos();
         Entity targetEntity = event.getTarget();
         Optional<InteractionResult> result = Optional.empty();
 
@@ -236,9 +233,8 @@ public class AetherIIEventListeners {
     }
 
     public static void onLivingItemUsed(LivingEntityUseItemEvent event) {
-        ItemStack itemStack = event.getItem();
         if (event.getEntity() instanceof Player player) {
-            PlayerHooks.valkyrieTeaAbility(player, itemStack);
+            PlayerHooks.valkyrieTeaAbility(player);
         }
     }
 

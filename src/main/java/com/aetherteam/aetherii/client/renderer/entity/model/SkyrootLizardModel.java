@@ -1,16 +1,15 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 
-import com.aetherteam.aetherii.entity.passive.SkyrootLizard;
+import com.aetherteam.aetherii.client.renderer.entity.state.SkyrootLizardRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class SkyrootLizardModel<T extends SkyrootLizard> extends EntityModel<T> {
+public class SkyrootLizardModel<T extends SkyrootLizardRenderState> extends EntityModel<T> {
 
-    private final ModelPart root;
     private final ModelPart body;
     private final ModelPart leg_front_left;
     private final ModelPart leg_front_right;
@@ -32,7 +31,7 @@ public class SkyrootLizardModel<T extends SkyrootLizard> extends EntityModel<T> 
     private final ModelPart tail_1_flaps;
 
     public SkyrootLizardModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.leg_front_left = body.getChild("leg_front_left");
         this.leg_front_right = body.getChild("leg_front_right");
@@ -98,20 +97,14 @@ public class SkyrootLizardModel<T extends SkyrootLizard> extends EntityModel<T> 
 
         return LayerDefinition.create(meshdefinition, 48, 64);
     }
-
     @Override
-    public ModelPart root() {
-        return this.root;
-    }
-
-    @Override
-    public void setupAnim(SkyrootLizard entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(T entity) {
         super.setupAnim(entity);
         this.head_1.xRot = entity.xRot * Mth.DEG_TO_RAD;
         this.head_1.yRot = entity.yRot * Mth.DEG_TO_RAD;
-        this.leg_back_right.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.leg_back_left.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        this.leg_front_right.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        this.leg_front_left.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        this.leg_back_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_back_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
     }
 }

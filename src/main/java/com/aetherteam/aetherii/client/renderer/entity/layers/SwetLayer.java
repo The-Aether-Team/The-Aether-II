@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.layers;
 
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.monster.Swet;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.EntityModel;
@@ -9,18 +9,24 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.util.context.ContextKey;
 
 import java.util.List;
 
-public class SwetLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
+public class SwetLayer<T extends LivingEntityRenderState, M extends EntityModel<T>> extends RenderLayer<T, M> {
     private final EntityRenderDispatcher dispatcher;
 
-    public SwetLayer(EntityRendererProvider.Context context, LivingEntityRenderer<T, M> renderer) {
+    public static ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
+    public static ContextKey<Integer> SWET_ID_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet_id"));
+
+
+    public SwetLayer(EntityRendererProvider.Context context, RenderLayerParent<T, M> renderer) {
         super(renderer);
         this.dispatcher = context.getEntityRenderDispatcher();
     }
@@ -30,20 +36,16 @@ public class SwetLayer<T extends LivingEntity, M extends EntityModel<T>> extends
             MultiBufferSource buffer,
             int packedLight,
             T livingEntity,
-            float limbSwing,
-            float limbSwingAmount,
-            float partialTicks,
-            float ageInTicks,
             float netHeadYaw,
             float headPitch
     ) {
-        if (this.getParentModel() instanceof PlayerModel<?> playerModel) {
-            RandomSource randomsource = RandomSource.create((long) livingEntity.getId());
+        if (this.getParentModel() instanceof PlayerModel playerModel) {
+            RandomSource randomsource = RandomSource.create((long) livingEntity.getRenderDataOrDefault(SWET_ID_KEY, 0));
             List<Swet> swets =
-                    livingEntity.getData(AetherIIDataAttachments.SWET).getLatchedSwets();
+                    livingEntity.getRenderDataOrDefault(SWET_KEY, List.of());
             for (Swet swet : swets) {
                 poseStack.pushPose();
-                ModelPart modelpart = playerModel.getRandomModelPart(randomsource);
+                ModelPart modelpart = playerModel.getRandomBodyPart(randomsource);
                 ModelPart.Cube modelpart$cube = modelpart.getRandomCube(randomsource);
                 modelpart.translateAndRotate(poseStack);
                 float x = randomsource.nextFloat();
@@ -62,7 +64,7 @@ public class SwetLayer<T extends LivingEntity, M extends EntityModel<T>> extends
                 swet.yRotO = swet.getYRot();
                 swet.xRotO = swet.getXRot();
                 poseStack.scale(-0.5F, -0.5F, 0.5F);
-                this.dispatcher.render(swet, 0.0, 0.0, 0.0, 0.0F, partialTicks, poseStack, buffer, packedLight);
+                this.dispatcher.render(swet, 0.0, 0.0, 0.0, livingEntity.partialTick, poseStack, buffer, packedLight);
 
                 poseStack.popPose();
             }

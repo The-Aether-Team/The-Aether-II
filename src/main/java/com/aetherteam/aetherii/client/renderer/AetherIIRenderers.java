@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.blockentity.AetherIIBlockEntityTypes;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesRenderer;
@@ -21,6 +22,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.kirrid.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -28,11 +30,13 @@ import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.ArrayList;
@@ -47,6 +51,17 @@ public class AetherIIRenderers {
             }
         });
     }
+
+    public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
+        event.registerEntityModifier(PlayerRenderer.class, (abstractClientPlayer, playerRenderState) -> {
+            List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET).getLatchedSwets();
+            if (swets != null) {
+                playerRenderState.setRenderData(SwetLayer.SWET_KEY, swets);
+                playerRenderState.setRenderData(SwetLayer.SWET_ID_KEY, abstractClientPlayer.getId());
+            }
+        });
+    }
+
 
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         // Blocks

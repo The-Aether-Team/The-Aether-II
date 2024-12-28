@@ -16,6 +16,7 @@ import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AcidCorrosionRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.IrradiationCleansingRecipe;
+import com.aetherteam.nitrogen.recipe.input.BlockStateRecipeInput;
 import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
@@ -79,7 +80,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
         this.destroyBelow(level, pos, fluidState);
     }
 
-    private void applyGravity(Level level, BlockPos pos, FluidState fluidState) {
+    private void applyGravity(ServerLevel level, BlockPos pos, FluidState fluidState) {
         BlockState blockState = level.getBlockState(pos);
         if (fluidState.isSource()) {
             BlockPos belowPos = pos.below();
@@ -92,16 +93,16 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
         }
     }
 
-    private void corrodeNeighbors(Level level, BlockPos pos) {
+    private void corrodeNeighbors(ServerLevel level, BlockPos pos) {
         for (Direction direction : Direction.values()) {
             BlockPos offsetPos = pos.offset(direction.getUnitVec3i());
             BlockState offsetState = level.getBlockState(offsetPos);
-            for (RecipeHolder<AcidCorrosionRecipe> recipe : level.recipeAccess().propertySet(AetherIIRecipeTypes.ACID_CORROSION.get())) {
+            for (RecipeHolder<AcidCorrosionRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ACID_CORROSION.get())) {
                 if (recipe != null) {
                     BlockState newState = recipe.value().getResultState(offsetState);
                     if (recipe.value().matches(null, level, offsetPos, null, offsetState, newState, AetherIIRecipeTypes.ACID_CORROSION.get())) {
                         if (recipe.value().convert(level, offsetPos, newState, recipe.value().getFunction())) {
-                            PacketDistributor.sendToPlayersInDimension((ServerLevel) level, new AcidFizzPacket(pos, direction.getOpposite()));
+                            PacketDistributor.sendToPlayersInDimension(level, new AcidFizzPacket(pos, direction.getOpposite()));
                         }
                     }
                 }
@@ -170,7 +171,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
         }
     }
 
-    public void entityInside(BlockState state, Level level, BlockPos blockPos, Entity entity) {
+    public void entityInside(BlockState state, ServerLevel level, BlockPos blockPos, Entity entity) {
         RandomSource random = level.getRandom();
         if (entity instanceof ItemEntity itemEntity) {
             ItemStack itemStack = itemEntity.getItem().copy();
@@ -185,7 +186,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
                     }
                 }
                 if (itemEntity.lifespan <= 500) {
-                    for (RecipeHolder<IrradiationCleansingRecipe> recipe : level.recipeAccess().propertySet(AetherIIRecipeTypes.IRRADIATION_CLEANSING.get())) {
+                    for (RecipeHolder<IrradiationCleansingRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.IRRADIATION_CLEANSING.get())) {
                         if (recipe != null) {
                             SingleRecipeInputWithRandom input = new SingleRecipeInputWithRandom(itemStack, level.getRandom());
                             if (recipe.value().matches(input, level)) {

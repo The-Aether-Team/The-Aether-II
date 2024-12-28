@@ -18,10 +18,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -85,18 +82,18 @@ public class GasBlock extends Block implements CanisterPickup {
         }
     }
 
-    @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
-        if (level.getBlockState(neighborPos).is(AetherIITags.Blocks.TRIGGERS_GAS) || state.is(AetherIITags.Blocks.TRIGGERS_GAS)) {
-            this.explode(level, pos, true);
-        }
-        super.neighborChanged(state, level, pos, block, orientation, movedByPiston);
-    }
-
-    @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
-    }
+//    @Override //TODO HOW DOES ORIENTATION WORK
+//    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
+//        if (level.getBlockState(neighborPos).is(AetherIITags.Blocks.TRIGGERS_GAS) || state.is(AetherIITags.Blocks.TRIGGERS_GAS)) {
+//            this.explode(level, pos, true);
+//        }
+//        super.neighborChanged(state, level, pos, block, orientation, movedByPiston);
+//    }
+//
+//    @Override
+//    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+//        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+//    }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -153,16 +150,16 @@ public class GasBlock extends Block implements CanisterPickup {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
         if (facing.getAxis().isHorizontal()) {
             int i = getDistanceAt(facingState, HORIZONTAL_DISTANCE, MAX_HORIZONTAL_DISTANCE) + 1;
             if (i != 1 || state.getValue(HORIZONTAL_DISTANCE) != i) {
-                level.scheduleTick(currentPos, this, 10);
+                scheduledTickAccess.scheduleTick(currentPos, this, 10);
             }
         } else if (facing.getAxis().isVertical()) {
             int j = getDistanceAt(facingState, VERTICAL_DISTANCE, MAX_VERTICAL_DISTANCE) + 1;
             if (j != 1 || state.getValue(VERTICAL_DISTANCE) != j) {
-                level.scheduleTick(currentPos, this, 10);
+                scheduledTickAccess.scheduleTick(currentPos, this, 10);
             }
         }
         return state;
@@ -223,7 +220,7 @@ public class GasBlock extends Block implements CanisterPickup {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
+    protected boolean propagatesSkylightDown(BlockState state) {
         return true;
     }
 

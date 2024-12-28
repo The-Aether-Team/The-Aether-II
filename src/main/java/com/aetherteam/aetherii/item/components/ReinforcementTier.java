@@ -1,18 +1,14 @@
 package com.aetherteam.aetherii.item.components;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
-import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
-import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.core.Holder;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
@@ -78,13 +74,13 @@ public enum ReinforcementTier implements StringRepresentable {
     }
 
     public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {
-        public static final Predicate<ItemStack> TAEGORE_HIDE = isArmorTier(AetherIIArmorMaterials.TAEGORE_HIDE);
-        public static final Predicate<ItemStack> BURRUKAI_PELT = isArmorTier(AetherIIArmorMaterials.BURRUKAI_PELT);
-        public static final Predicate<ItemStack> SKYROOT = isTier(AetherIIItemTiers.SKYROOT);
-        public static final Predicate<ItemStack> HOLYSTONE = isTier(AetherIIItemTiers.HOLYSTONE);
-        public static final Predicate<ItemStack> ZANITE = isTier(AetherIIItemTiers.ZANITE).or(isArmorTier(AetherIIArmorMaterials.ZANITE));
-        public static final Predicate<ItemStack> ARKENIUM = isTier(AetherIIItemTiers.ARKENIUM).or(isArmorTier(AetherIIArmorMaterials.ARKENIUM));
-        public static final Predicate<ItemStack> GRAVITITE = isTier(AetherIIItemTiers.GRAVITITE).or(isArmorTier(AetherIIArmorMaterials.GRAVITITE));
+        public static final Predicate<ItemStack> TAEGORE_HIDE = isTier(AetherIITags.Items.TAEGORE_HIDE_ARMOR);
+        public static final Predicate<ItemStack> BURRUKAI_PELT = isTier(AetherIITags.Items.BURRUKAI_PELT_ARMOR);
+        public static final Predicate<ItemStack> SKYROOT = isTier(AetherIITags.Items.SKYROOT_TOOL);
+        public static final Predicate<ItemStack> HOLYSTONE = isTier(AetherIITags.Items.HOLYSTONE_TOOL);
+        public static final Predicate<ItemStack> ZANITE = isTier(AetherIITags.Items.ZANITE_TOOL).or(isTier(AetherIITags.Items.ZANITE_ARMOR));
+        public static final Predicate<ItemStack> ARKENIUM = isTier(AetherIITags.Items.ARKENIUM_TOOL).or(isTier(AetherIITags.Items.ARKENIUM_ARMOR));
+        public static final Predicate<ItemStack> GRAVITITE = isTier(AetherIITags.Items.GRAVITITE_TOOL).or(isTier(AetherIITags.Items.GRAVITITE_ARMOR));
 
         public static final Set<Cost> TIER_1 = Set.of(
                 new Cost(TAEGORE_HIDE, AetherIIItems.ARKENIUM_PLATES, 1, Items.AIR, 0),
@@ -117,12 +113,8 @@ public enum ReinforcementTier implements StringRepresentable {
                 new Cost(ARKENIUM, AetherIIItems.ARKENIUM_PLATES, 6, AetherIIItems.CORROBONITE_CRYSTAL, 4)
         );
 
-        private static Predicate<ItemStack> isTier(AetherIIItemTiers tier) {
-            return (itemStack) -> itemStack.getItem() instanceof TieredItem tieredItem && tieredItem.getTier() == tier;
-        }
-
-        private static Predicate<ItemStack> isArmorTier(Holder<ArmorMaterial> material) {
-            return (itemStack) -> itemStack.getItem() instanceof ArmorItem armorItem && armorItem.getMaterial().is(material);
+        private static Predicate<ItemStack> isTier(TagKey<Item> tier) {
+            return (itemStack) -> itemStack.is(tier);
         }
     }
 }

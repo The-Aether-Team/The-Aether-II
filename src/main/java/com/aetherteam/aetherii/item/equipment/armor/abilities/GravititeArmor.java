@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.item.equipment.armor.abilities;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
@@ -15,7 +16,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 public interface GravititeArmor {
     static void playerFall(LivingFallEvent event) {
         LivingEntity livingEntity = event.getEntity();
-        if (EquipmentUtil.hasArmorAbility(livingEntity, AetherIIArmorMaterials.GRAVITITE)) {
+        if (EquipmentUtil.hasArmorAbility(livingEntity, AetherIIEquipmentAssets.GRAVITITE)) {
             event.setDamageMultiplier(event.getDamageMultiplier() * 0.5F);
             if (livingEntity.fallDistance < 8) {
                 event.setDistance(0);
@@ -38,7 +39,7 @@ public interface GravititeArmor {
             }
         }
 
-        if (!player.onGround() && !isFluid && accessor.aether$isJumping() && accessor.aether$getNoJumpDelay() == 0 && EquipmentUtil.hasArmorAbility(player, AetherIIArmorMaterials.GRAVITITE) && !attachment.isGravititeJumpUsed()) {
+        if (!player.onGround() && !isFluid && accessor.aether$isJumping() && accessor.aether$getNoJumpDelay() == 0 && EquipmentUtil.hasArmorAbility(player, AetherIIEquipmentAssets.GRAVITITE) && !attachment.isGravititeJumpUsed()) {
             float f = accessor.callGetJumpPower() * 1.25F;
             if (!(f <= 1.0E-5F)) {
                 Vec3 vec3 = player.getDeltaMovement();

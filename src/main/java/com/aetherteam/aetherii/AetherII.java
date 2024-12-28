@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii;
 
+import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
@@ -113,7 +114,8 @@ public class AetherII {
                 AetherIILootModifiers.GLOBAL_LOOT_MODIFIERS,
                 AetherIISurfaceRules.MATERIAL_RULES,
                 AetherIIBlockPredicateTypes.BLOCK_PREDICATE_TYPES,
-                AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES
+                AetherIIPlacementModifierTypes.PLACEMENT_MODIFIER_TYPES,
+                AetherIIEntitySubPredicates.ENTITY_SUB_PREDICATES
         };
 
         for (DeferredRegister<?> register : registers) {

@@ -12,9 +12,11 @@ import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class AetherIIPools {
@@ -39,10 +41,10 @@ public class AetherIIPools {
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id) {
-        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool);
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING));
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id, Holder<StructureProcessorList> processor) {
-        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool);
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING));
     }
 }

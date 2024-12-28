@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.armor.abilities;
 
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import net.minecraft.server.level.ServerLevel;
@@ -20,7 +21,7 @@ public interface TaegoreHideArmor {
         if (entity instanceof Mob mob) {
             if (mob.level() instanceof ServerLevel serverLevel) {
                 if (mob.getLastDamageSource() != null && mob.getLastDamageSource().getDirectEntity() instanceof LivingEntity attacker) {
-                    if (EquipmentUtil.hasArmorAbility(attacker, AetherIIArmorMaterials.TAEGORE_HIDE)) {
+                    if (EquipmentUtil.hasArmorAbility(attacker, AetherIIEquipmentAssets.TAEGORE_HIDE)) {
                         boolean foundPanic = false;
                         if (mob.getRandom().nextInt(30) == 0) {
                             for (WrappedGoal goal : mob.goalSelector.getAvailableGoals()) {

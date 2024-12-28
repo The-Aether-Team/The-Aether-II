@@ -1,9 +1,6 @@
 package com.aetherteam.aetherii.data.generators;
 
-import com.aetherteam.aetherii.data.generators.loot.AetherIIBlockLoot;
-import com.aetherteam.aetherii.data.generators.loot.AetherIIChestLoot;
-import com.aetherteam.aetherii.data.generators.loot.AetherIIEntityLoot;
-import com.aetherteam.aetherii.data.generators.loot.AetherIIStrippingLoot;
+import com.aetherteam.aetherii.data.generators.loot.*;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import com.aetherteam.aetherii.loot.AetherIILootContexts;
 import net.minecraft.core.HolderLookup;
@@ -20,6 +17,7 @@ public class AetherIILootTableData {
                 new LootTableProvider.SubProviderEntry(AetherIIBlockLoot::new, LootContextParamSets.BLOCK),
                 new LootTableProvider.SubProviderEntry(AetherIIEntityLoot::new, LootContextParamSets.ENTITY),
                 new LootTableProvider.SubProviderEntry(AetherIIChestLoot::new, LootContextParamSets.CHEST),
+                new LootTableProvider.SubProviderEntry(AetherIIShearingLoot::new, LootContextParamSets.SHEARING),
                 new LootTableProvider.SubProviderEntry(AetherIIStrippingLoot::new, AetherIILootContexts.STRIPPING)
         ), registries);
     }

@@ -66,7 +66,11 @@ public class AltarBlock extends BaseEntityBlock {
 
     @Nullable
     protected static <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> serverType, BlockEntityType<? extends AltarBlockEntity> clientType) {
-        return level.isClientSide() ? null : createTickerHelper(serverType, clientType, AltarBlockEntity::serverTick);
+        if (level instanceof ServerLevel serverLevel) {
+            return createTickerHelper(serverType, clientType, (tickerLevel, pos, state, blockEntity) -> AltarBlockEntity.serverTick(serverLevel, pos, state, blockEntity));
+        } else {
+            return null;
+        }
     }
 
     @Override

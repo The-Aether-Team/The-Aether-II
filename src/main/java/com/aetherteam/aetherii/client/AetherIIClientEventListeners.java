@@ -9,6 +9,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.client.sounds.MusicInfo;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.sounds.Music;
 import net.minecraft.world.entity.player.Player;
@@ -108,7 +109,7 @@ public class AetherIIClientEventListeners {
     }
 
     public static void onMusicSelected(SelectMusicEvent event) {
-        Music music = MusicHooks.getSituationalMusic();
+        MusicInfo music = MusicHooks.getSituationalMusic();
         if (music != null) {
             event.setMusic(music);
         }

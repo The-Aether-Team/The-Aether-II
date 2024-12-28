@@ -2,8 +2,9 @@ package com.aetherteam.aetherii.client.renderer.entity.layers;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
+import com.aetherteam.aetherii.client.renderer.entity.SwetRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
-import com.aetherteam.aetherii.entity.monster.Swet;
+import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
@@ -15,33 +16,28 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
-public class SwetGelLayer extends RenderLayer<Swet, SwetModel<Swet>> {
+public class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel<SwetRenderState>> {
     public static ResourceLocation EYES_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/swet/blue_swet.png");
 
-    private final SwetModel<Swet> model;
+    private final SwetModel<SwetRenderState> model;
 
-    public SwetGelLayer(RenderLayerParent<Swet, SwetModel<Swet>> renderer, EntityModelSet modelSet) {
+    public SwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel<SwetRenderState>> renderer, EntityModelSet modelSet) {
         super(renderer);
         this.model = new SwetModel<>(modelSet.bakeLayer(AetherIIModelLayers.SWET));
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, Swet livingEntity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, SwetRenderState livingEntity, float netHeadYaw, float headPitch) {
         Minecraft minecraft = Minecraft.getInstance();
-        boolean flag = minecraft.shouldEntityAppearGlowing(livingEntity) && livingEntity.isInvisible();
-        if (!livingEntity.isInvisible() || flag) {
+        boolean flag = livingEntity.appearsGlowing && livingEntity.isInvisible;
+        if (!livingEntity.isInvisible || flag) {
             VertexConsumer vertexconsumer;
             if (flag) {
-                vertexconsumer = bufferSource.getBuffer(RenderType.outline(this.getTextureLocation(livingEntity)));
+                vertexconsumer = bufferSource.getBuffer(RenderType.outline(SwetRenderer.SWET_LOCATION));
             } else {
-                vertexconsumer = bufferSource.getBuffer(RenderType.entityTranslucentCull(this.getTextureLocation(livingEntity)));
+                vertexconsumer = bufferSource.getBuffer(RenderType.entityTranslucent(SwetRenderer.SWET_LOCATION));
             }
-
-
-            this.getParentModel().copyPropertiesTo(this.model);
-
-            this.model.prepareMobModel(livingEntity, limbSwing, limbSwingAmount, partialTick);
-            this.model.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+            this.model.setupAnim(livingEntity);
             this.model.head.visible = false;
             this.model.gel.visible = true;
             this.model.squish.visible = true;

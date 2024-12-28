@@ -12,8 +12,10 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,11 +27,13 @@ import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
@@ -51,6 +55,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     protected NonNullList<ItemStack> items = NonNullList.withSize(10, ItemStack.EMPTY);
     int processingProgress;
     int processingTotalTime;
+    int fuelCount;
     boolean blasting;
     int blastingDuration;
     protected final ContainerData dataAccess = new ContainerData() {
@@ -59,6 +64,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
             return switch (id) {
                 case 0 -> AltarBlockEntity.this.processingProgress;
                 case 1 -> AltarBlockEntity.this.processingTotalTime;
+                case 2 -> AltarBlockEntity.this.fuelCount;
                 default -> 0;
             };
         }
@@ -71,15 +77,19 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                     break;
                 case 1:
                     AltarBlockEntity.this.processingTotalTime = value;
+                    break;
+                case 2:
+                    AltarBlockEntity.this.fuelCount = value;
+                    break;
             }
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     };
-    private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
+    private final Object2IntOpenHashMap<ResourceKey<Recipe<?>>> recipesUsed = new Object2IntOpenHashMap<>();
     private final RecipeManager.CachedCheck<SingleRecipeInput, AltarEnchantingRecipe> quickCheck;
 
     public AltarBlockEntity() {
@@ -114,7 +124,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         this.processingTotalTime = tag.getInt("ProcessingTimeTotal");
         CompoundTag recipesUsedTag = tag.getCompound("RecipesUsed");
         for (String key : recipesUsedTag.getAllKeys()) {
-            this.recipesUsed.put(ResourceLocation.tryParse(key), recipesUsedTag.getInt(key));
+            this.recipesUsed.put(ResourceKey.create(Registries.RECIPE, ResourceLocation.parse(key)), recipesUsedTag.getInt(key));
         }
     }
 
@@ -133,7 +143,10 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         boolean changed = false;
 
         RecipeHolder<AltarEnchantingRecipe> recipeHolder = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), level).orElse(null);
-        boolean hasFuel = hasFuel(blockEntity);
+        if (recipeHolder != null) {
+            blockEntity.fuelCount = recipeHolder.value().getFuelCount();
+        }
+        boolean hasFuel = hasFuel(level, blockEntity);
         int i = blockEntity.getMaxStackSize();
         boolean isCharging = false;
 
@@ -143,7 +156,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
                 ++blockEntity.processingProgress;
                 isCharging = true;
                 if (blockEntity.processingProgress == blockEntity.processingTotalTime) {
-                    useFuel(blockEntity);
+                    useFuel(level, blockEntity);
                     blockEntity.processingProgress = 0;
                     blockEntity.processingTotalTime = getTotalProcessingTime(level, blockEntity);
                     if (blockEntity.process(level.registryAccess(), recipeHolder, blockEntity.items, i)) {
@@ -231,9 +244,9 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         }
     }
 
-    private static boolean hasFuel(AltarBlockEntity blockEntity) {
+    private static boolean hasFuel(ServerLevel serverLevel, AltarBlockEntity blockEntity) {
         boolean flag = true;
-        for (int i = 1; i <= getRecipeFuelCount(blockEntity); i++) {
+        for (int i = 1; i <= getRecipeFuelCount(serverLevel, blockEntity); i++) {
             if (!blockEntity.isFuel(blockEntity.getItem(i))) {
                 flag = false;
             }
@@ -241,8 +254,8 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         return flag;
     }
 
-    private static void useFuel(AltarBlockEntity blockEntity) {
-        for (int i = 1; i <= getRecipeFuelCount(blockEntity); i++) {
+    private static void useFuel(ServerLevel serverLevel, AltarBlockEntity blockEntity) {
+        for (int i = 1; i <= getRecipeFuelCount(serverLevel, blockEntity); i++) {
             blockEntity.getItem(i).shrink(1);
         }
     }
@@ -251,8 +264,8 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         return blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), level).map(recipeHolder -> recipeHolder.value().getProcessingTime()).orElse(200);
     }
 
-    public static int getRecipeFuelCount(AltarBlockEntity blockEntity) {
-        Optional<RecipeHolder<AltarEnchantingRecipe>> recipeHolderOptional = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), blockEntity.level);
+    public static int getRecipeFuelCount(ServerLevel serverLevel, AltarBlockEntity blockEntity) {
+        Optional<RecipeHolder<AltarEnchantingRecipe>> recipeHolderOptional = blockEntity.quickCheck.getRecipeFor(new SingleRecipeInput(blockEntity.getItem(0)), serverLevel);
         if (recipeHolderOptional.isPresent()) {
             AltarEnchantingRecipe recipe = recipeHolderOptional.get().value();
             return recipe.getFuelCount();
@@ -353,9 +366,11 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
         }
 
         if (index == 0 && !flag) {
-            this.processingTotalTime = getTotalProcessingTime(this.level, this);
-            this.processingProgress = 0;
-            this.setChanged();
+            if (this.level instanceof ServerLevel serverLevel) {
+                this.processingTotalTime = getTotalProcessingTime(serverLevel, this);
+                this.processingProgress = 0;
+                this.setChanged();
+            }
         }
     }
 
@@ -372,7 +387,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     @Override
     public void setRecipeUsed(@Nullable RecipeHolder<?> recipeHolder) {
         if (recipeHolder != null) {
-            ResourceLocation location = recipeHolder.id();
+            ResourceKey<Recipe<?>> location = recipeHolder.id();
             this.recipesUsed.addTo(location, 1);
         }
     }
@@ -400,8 +415,8 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
 
     public List<RecipeHolder<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 popVec) {
         List<RecipeHolder<?>> list = Lists.newArrayList();
-        for (Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
-            level.getRecipeManager().byKey(entry.getKey()).ifPresent(recipeHolder -> {
+        for (Object2IntMap.Entry<ResourceKey<Recipe<?>>> entry : this.recipesUsed.object2IntEntrySet()) {
+            level.recipeAccess().byKey(entry.getKey()).ifPresent(recipeHolder -> {
                 list.add(recipeHolder);
                 createExperience(level, popVec, entry.getIntValue(), ((AltarEnchantingRecipe) recipeHolder.value()).getExperience());
             });
@@ -419,7 +434,7 @@ public class AltarBlockEntity extends BaseContainerBlockEntity implements Worldl
     }
 
     @Override
-    public void fillStackedContents(StackedContents stackedContents) {
+    public void fillStackedContents(StackedItemContents stackedContents) {
         for (ItemStack itemstack : this.items) {
             stackedContents.accountStack(itemstack);
         }

@@ -69,7 +69,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome flourishingFieldBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.COAST_QUICKSOIL)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS)
@@ -83,7 +83,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome verdantWoodsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.COAST_QUICKSOIL_SPARSE)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.SKYROOT_TWIGS)
@@ -101,7 +101,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome shroudedForestBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeHighfieldsBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.COAST_QUICKSOIL_SPARSE)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.SKYROOT_TWIGS)
@@ -211,7 +211,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome magneticScarBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.FERROSITE_SPIKE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.FERROSITE_PILLAR)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.COAST_FERROSITE_PILLAR)
@@ -224,7 +224,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome turquoiseForestBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.FERROSITE_SPIKE)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.SKYROOT_TWIGS)
@@ -252,7 +252,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome violetHighwoodsBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeMagneticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.FERROSITE_SPIKE)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.SKYROOT_TWIGS)
@@ -344,7 +344,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome frigidSierraBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeArcticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.ICESTONE_BOULDER)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.FRIGID_SIERRA_TREES)
@@ -355,7 +355,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome enduringWoodlandBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeArcticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.MOA_NEST)
                         .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, HighlandsPlacedFeatures.ENDURING_WOODLAND_TREES)
@@ -376,7 +376,7 @@ public class HighlandsBiomeBuilders {
 
     public static Biome sheerTundraBiome(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers, float temperature, float downfall) {
         return makeArcticBiome(new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers)
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND_TUNDRA)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_SPRING)
                         .addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, HighlandsPlacedFeatures.HOLYSTONE_ROCKS_TUNDRA)
@@ -492,7 +492,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_DARKNESS_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 5, 1, 3))
                         .build(),
                 builder
-                        .addCarver(GenerationStep.Carving.AIR, AetherIICarvers.HIGHLANDS_CAVE)
+                        .addCarver(AetherIICarvers.HIGHLANDS_CAVE)
                         .addFeature(GenerationStep.Decoration.RAW_GENERATION, HighlandsPlacedFeatures.CLOUDBED)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND)
                         .addFeature(GenerationStep.Decoration.LAKES, HighlandsPlacedFeatures.WATER_POND_UNDERGROUND)
