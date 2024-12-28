@@ -69,6 +69,14 @@ public class AetherIIBlockBuilders {
                 .pushReaction(PushReaction.DESTROY);
     }
 
+    public static Block.Properties arilumLanternProperties(MapColor mapColor) {
+        return Block.Properties.of()
+                .mapColor(mapColor)
+                .friction(0.8F)
+                .sound(SoundType.FROGLIGHT)
+                .lightLevel((state) -> 15);
+    }
+
     public static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
         return false;
     }
