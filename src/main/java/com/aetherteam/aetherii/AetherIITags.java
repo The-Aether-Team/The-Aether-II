@@ -116,6 +116,18 @@ public class AetherIITags {
         public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
         public static final TagKey<Item> EQUIPABLE = tag("equipable");
 
+        public static final TagKey<Item> TAEGORE_HIDE_ARMOR = tag("armor/taegore_hide");
+        public static final TagKey<Item> BURRUKAI_PELT_ARMOR = tag("armor/burrukai_pelt");
+        public static final TagKey<Item> ZANITE_ARMOR = tag("armor/zanite");
+        public static final TagKey<Item> ARKENIUM_ARMOR = tag("armor/arkenium");
+        public static final TagKey<Item> GRAVITITE_ARMOR = tag("armor/gravitite");
+
+        public static final TagKey<Item> SKYROOT_TOOL = tag("tool/skyroot");
+        public static final TagKey<Item> HOLYSTONE_TOOL = tag("tool/holystone");
+        public static final TagKey<Item> ZANITE_TOOL = tag("tool/zanite");
+        public static final TagKey<Item> ARKENIUM_TOOL = tag("tool/arkenium");
+        public static final TagKey<Item> GRAVITITE_TOOL = tag("tool/gravitite");
+
         public static final TagKey<Item> UNIQUE_TOOLTIP_COLOR = tag("unique_tooltip_color");
 
         public static final TagKey<Item> CRAFTS_SKYROOT_PLANKS = tag("crafts_skyroot_planks");

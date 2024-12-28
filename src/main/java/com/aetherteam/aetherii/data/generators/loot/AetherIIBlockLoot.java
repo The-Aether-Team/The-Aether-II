@@ -58,7 +58,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.MOSSY_HOLYSTONE.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
-        this.add(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.createPetalsDrops(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get()));
         this.dropSelf(AetherIIBlocks.TANGLED_BRANCHES.get());
 
@@ -80,14 +80,14 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
         this.dropSelf(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.SHAYELINN_MOSS_CARPET.get());
-        this.add(AetherIIBlocks.SHAYELINN_MOSS_VINES.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.SHAYELINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
 
         // Irradiated
         this.dropSelf(AetherIIBlocks.IRRADIATED_HOLYSTONE.get());
         this.add(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get(), this::droppingIrradiatedDustLoot);
         this.dropSelf(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get());
         this.dropSelf(AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
-        this.add(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), BlockLootSubProvider::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.AMBRELINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.TARAHESP_FLOWERS.get(), this.createPetalsDrops(AetherIIBlocks.TARAHESP_FLOWERS.get()));
 
         // Ores
@@ -201,11 +201,11 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_AMBEROOT_SAPLING.get());
 
         // Grasses
-        this.add(AetherIIBlocks.AETHER_SHORT_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.AETHER_LONG_GRASS.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.add(AetherIIBlocks.HIGHLAND_FERN.get(), BlockLootSubProvider::createShearsOnlyDrop);
-        this.dropSelf(AetherIIBlocks.SHIELD_FERN.get());
+        this.add(AetherIIBlocks.AETHER_SHORT_GRASS.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.AETHER_LONG_GRASS.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.HIGHLAND_FERN.get(), this::createShearsOnlyDrop);
+        this.add(AetherIIBlocks.SHIELD_FERN.get(), this::createShearsOnlyDrop);
 
         // Flowers
         this.dropSelf(AetherIIBlocks.HESPEROSE.get());

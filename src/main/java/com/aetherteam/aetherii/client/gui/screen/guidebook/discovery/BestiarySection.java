@@ -263,7 +263,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                             if (livingEntity.getAttributes().hasAttribute(holders.getValue())) {
                                 Holder<MobEffect> effectHolder = holders.getKey();
                                 TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
-                                guiGraphics.blit(x, y, 0, 18, 18, textureatlassprite);
+                                guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, x, y, 0, 18, 18);
                                 double effectValue = livingEntity.getAttributeValue(holders.getValue());
                                 Component effectTooltip = Component.literal((int) effectValue * 100 + "%")
                                         .append(CommonComponents.space())

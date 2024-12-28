@@ -32,7 +32,7 @@ public class ClientCharmTooltip implements ClientTooltipComponent {
                     int xOffset = x + (18 * i);
                     int yOffset = y + (18 * j);
                     if (stack.isEmpty()) {
-                        guiGraphics.blitSprite(RenderType::guiTextured, RenderType::guiTextured, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tooltip/charm"), xOffset, yOffset, 16, 16);
+                        guiGraphics.blitSprite(RenderType::guiTextured, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tooltip/charm"), xOffset, yOffset, 16, 16);
                     } else {
                         guiGraphics.renderItem(stack, xOffset, yOffset);
                     }

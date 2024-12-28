@@ -13,6 +13,7 @@ import net.minecraft.commands.CacheableFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -94,9 +95,9 @@ public interface FreezingBlock extends FreezingBehavior<BlockState> {
      *
      * @param level The {@link Level} that the recipe occurs in.
      */
-    static void cacheRecipes(Level level) {
+    static void cacheRecipes(ServerLevel level) {
         if (FreezingBlock.cachedBlocks.isEmpty()) {
-            for (RecipeHolder<IcestoneFreezableRecipe> recipe : level.recipeAccess().propertySet(AetherIIRecipeTypes.ICESTONE_FREEZABLE.get())) {
+            for (RecipeHolder<IcestoneFreezableRecipe> recipe : level.recipeAccess().recipeMap().byType(AetherIIRecipeTypes.ICESTONE_FREEZABLE.get())) {
                 IcestoneFreezableRecipe freezableRecipe = recipe.value();
                 BlockPropertyPair[] pairs = freezableRecipe.getIngredient().getPairs();
                 Optional<Either<ResourceKey<Biome>, TagKey<Biome>>> biome = freezableRecipe.getBiome();

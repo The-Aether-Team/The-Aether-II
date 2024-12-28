@@ -30,9 +30,7 @@ public class AltarMenu extends RecipeBookMenu {
     private final Container container;
     private final ContainerData data;
     protected final Level level;
-    private final RecipeType<AltarEnchantingRecipe> recipeType;
     private final RecipePropertySet acceptedInputs;
-    private final RecipeBookType recipeBookType;
 
     public AltarMenu(int containerId, Inventory playerInventory) {
         this(containerId, playerInventory, new SimpleContainer(10), new SimpleContainerData(2));
@@ -40,8 +38,6 @@ public class AltarMenu extends RecipeBookMenu {
 
     public AltarMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
         super(AetherIIMenuTypes.ALTAR.get(), containerId);
-        this.recipeType = AetherIIRecipeTypes.ALTAR_ENCHANTING.get();
-        this.recipeBookType = AetherIIRecipeBookTypes.ALTAR;
         checkContainerSize(container, 10);
         checkContainerDataCount(data, 2);
         this.container = container;
@@ -158,6 +154,10 @@ public class AltarMenu extends RecipeBookMenu {
         int i = this.data.get(0);
         int j = this.data.get(1);
         return j != 0 && i != 0 ? Mth.clamp((float) i / (float) j, 0.0F, 1.0F) : 0.0F;
+    }
+
+    public int getFuelCount() {
+        return this.data.get(0);
     }
 
     @Override

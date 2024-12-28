@@ -54,7 +54,7 @@ public class ServerLevelMixin {
                     }
                 }
 
-                Biome.Precipitation precipitation = biome.getPrecipitationAt(belowHeightmapPos);
+                Biome.Precipitation precipitation = biome.getPrecipitationAt(belowHeightmapPos, serverLevel.getSeaLevel());
                 if (precipitation != Biome.Precipitation.NONE) {
                     BlockState blockState = serverLevel.getBlockState(belowHeightmapPos);
                     blockState.getBlock().handlePrecipitation(blockState, serverLevel, belowHeightmapPos, precipitation);

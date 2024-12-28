@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GuidebookDiscoveryAttachment {
@@ -94,7 +95,7 @@ public class GuidebookDiscoveryAttachment {
 
     private void trackBestiaryEntries(ServerPlayer serverPlayer, RegistryAccess registryAccess, AdvancementHolder advancement) {
         Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
-        for (Holder.Reference<BestiaryEntry> entry : bestiaryEntries.holders().toList()) {
+        for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
             if (advancement.id().equals(entry.value().observationAdvancement())) {
                 this.observedBestiaryEntries.add(entry);
                 this.uncheckedBestiaryEntries.add(entry);

@@ -7,17 +7,18 @@ import com.aetherteam.aetherii.item.equipment.weapons.abilities.SkyrootWeapon;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
 
@@ -37,15 +38,16 @@ public class DoubleDropsModifier extends LootModifier {
 
         // Tools
         BlockState targetState = context.getOptionalParameter(LootContextParams.BLOCK_STATE);
+        Vec3 targetPos = context.getOptionalParameter(LootContextParams.ORIGIN);
         ItemStack tool = context.getOptionalParameter(LootContextParams.TOOL);
 
         // Weapons
         Entity targetEntity = context.getOptionalParameter(LootContextParams.THIS_ENTITY);
         Entity attacker = context.getOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY);
 
-        if (targetState != null) {
-            if (tool != null && tool.getItem() instanceof SkyrootTool && tool.getItem() instanceof TieredItem tieredItem) {
-                if ((tool.getDestroySpeed(targetState) == tieredItem.getTier().getSpeed() || tool.isCorrectToolForDrops(targetState))) {
+        if (targetState != null && targetPos != null) {
+            if (tool != null && tool.getItem() instanceof SkyrootTool) {
+                if ((targetState.getDestroySpeed(context.getLevel(), BlockPos.containing(targetPos)) > 0 && tool.isCorrectToolForDrops(targetState))) {
                     this.increaseDrops(lootStacks, newStacks, context.getRandom());
                 }
             }

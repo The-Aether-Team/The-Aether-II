@@ -1,18 +1,19 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.TempestAnimations;
-import com.aetherteam.aetherii.entity.monster.Tempest;
+import com.aetherteam.aetherii.client.renderer.entity.state.TempestRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class TempestModel extends EntityModel<Tempest> {
+public class TempestModel extends EntityModel<TempestRenderState> {
 	private final ModelPart body;
 	private final ModelPart root;
 
 
 	public TempestModel(ModelPart root) {
+		super(root);
 		this.body = root.getChild("body");
 		this.root = root;
 	}
@@ -107,15 +108,10 @@ public class TempestModel extends EntityModel<Tempest> {
 
 
 	@Override
-	public void setupAnim(Tempest tempest, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(entity);
-		this.animateWalk(TempestAnimations.FLY, limbSwing, limbSwingAmount, 2.0F, 2.0F);
-		this.animate(tempest.attackAnimationState, TempestAnimations.ATTACK, ageInTicks, 1.0F);
-		this.animate(tempest.hideAnimationState, TempestAnimations.DESPAWN, ageInTicks, 1.0F);
-	}
-
-	@Override
-	public ModelPart root() {
-		return this.root;
+	public void setupAnim(TempestRenderState tempest) {
+		super.setupAnim(tempest);
+		this.animateWalk(TempestAnimations.FLY, tempest.walkAnimationPos, tempest.walkAnimationSpeed, 2.0F, 2.0F);
+		this.animate(tempest.attackAnimationState, TempestAnimations.ATTACK, tempest.ageInTicks, 1.0F);
+		this.animate(tempest.hideAnimationState, TempestAnimations.DESPAWN, tempest.ageInTicks, 1.0F);
 	}
 }

@@ -28,6 +28,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
@@ -56,6 +57,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.Path;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.IShearable;
@@ -171,9 +173,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         this.handleFallSpeed();
         if (this.level().isClientSide()) {
             if (this.onGround() && this.jumpDuration <= 7) {
-                this.jumpAnimationState.ifStarted(animationState -> {
-                    animationState.stop();
-                });
+                this.jumpAnimationState.ifStarted(AnimationState::stop);
             }
         }
     }
@@ -288,20 +288,21 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     @Override
     public void shear(ServerLevel serverLevel, SoundSource soundSource, ItemStack stack) {
         this.level().playSound(null, this, AetherIISoundEvents.ENTITY_SHEEPUFF_SHEAR.get(), soundSource, 1.0F, 1.0F);
-        this.setSheared(true);
-        int i = 1;
-        i += this.getRandom().nextInt(3);
-
-        for (int j = 0; j < i; ++j) {
-            ItemLike itemLike = AetherIIBlocks.CLOUDWOOL.asItem();
-            if (this.getColor().isPresent()) {
-                itemLike = KirridColor.CLOUDWOOL_BY_KIRRID_COLOR.get(this.getColor().get());
-            }
-            ItemEntity itementity = this.spawnAtLocation(serverLevel, itemLike.asItem(), 1);
-            if (itementity != null) {
-                itementity.setDeltaMovement(itementity.getDeltaMovement().add((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.1F, this.getRandom().nextFloat() * 0.05F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.1F));
-            }
+        ResourceKey<LootTable> lootTable = AetherIILoot.SHEARING_HIGHFIELDS_KIRRID;
+        if (this.variantType == AetherIIEntityTypes.MAGNETIC_KIRRID.get()) {
+            lootTable = AetherIILoot.SHEARING_MAGNETIC_KIRRID;
+        } else if (this.variantType == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
+            lootTable = AetherIILoot.SHEARING_ARCTIC_KIRRID;
         }
+        this.dropFromShearingLootTable(serverLevel, lootTable, stack, (level, item) -> {
+            for (int i = 0; i < item.getCount(); ++i) {
+                ItemEntity drop = this.spawnAtLocation(level, item.copyWithCount(1), 1.0F);
+                if (drop != null) {
+                    drop.setDeltaMovement(drop.getDeltaMovement().add((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.1F, this.getRandom().nextFloat() * 0.05F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.1F));
+                }
+            }
+        });
+        this.setSheared(true);
     }
 
     @Override
@@ -438,7 +439,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
     public void setSpeedModifier(double speedModifier) {
         this.getNavigation().setSpeedModifier(speedModifier);
-        this.moveControl.setWantedPosition(this.moveControl.getWantedX(), this.moveControl.getWantedY(), this.moveControl.getWantedZ(), pSpeedModifier);
+        this.moveControl.setWantedPosition(this.moveControl.getWantedX(), this.moveControl.getWantedY(), this.moveControl.getWantedZ(), speedModifier);
     }
 
     protected SoundEvent getJumpSound() {
@@ -541,17 +542,17 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
+    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob pOtherParent) {
         Kirrid parent = (Kirrid) pOtherParent;
-        Kirrid baby = this.variantType.create(pLevel, EntitySpawnReason.BREEDING);
+        Kirrid baby = this.variantType.create(serverLevel, EntitySpawnReason.BREEDING);
         if (baby != null) {
             KirridAi.initMemories(baby, this.random);
-            baby.setColor(this.getOffspringColor(this, parent));
+            baby.setColor(this.getOffspringColor(serverLevel, this, parent));
         }
         return baby;
     }
 
-    private Optional<KirridColor> getOffspringColor(Animal parent1, Animal parent2) {
+    private Optional<KirridColor> getOffspringColor(ServerLevel serverlevel, Animal parent1, Animal parent2) {
         Optional<KirridColor> color1 = ((Kirrid) parent1).getColor();
         Optional<KirridColor> color2 = ((Kirrid) parent2).getColor();
         if (color1.isEmpty() && color2.isEmpty()) {
@@ -562,7 +563,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
             return color2;
         } else {
             CraftingInput craftinginput = makeCraftInput(color1.get().getDyeColor(), color2.get().getDyeColor());
-            return Optional.of(this.level()
+            return Optional.of(serverlevel
                     .recipeAccess()
                     .getRecipeFor(RecipeType.CRAFTING, craftinginput, this.level())
                     .map(p_352802_ -> p_352802_.value().assemble(craftinginput, this.level().registryAccess()))
@@ -577,80 +578,6 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
     private static CraftingInput makeCraftInput(DyeColor pColor1, DyeColor pColor2) {
         return CraftingInput.of(2, 1, List.of(new ItemStack(DyeItem.byColor(pColor1)), new ItemStack(DyeItem.byColor(pColor2))));
-    }
-
-    @Override
-    protected Optional<ResourceKey<LootTable>> getDefaultLootTable() {
-        if (this.isSheared()) {
-            return this.getType().getDefaultLootTable();
-        } else if (this.getColor().isEmpty()) {
-            if (this.variantType == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
-                return AetherIILoot.ENTITIES_ARCTIC_KIRRID_PLAIN;
-            } else if (this.variantType == AetherIIEntityTypes.MAGNETIC_KIRRID.get()) {
-                return AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PLAIN;
-            } else {
-                return AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PLAIN;
-            }
-        } else {
-            if (this.variantType == AetherIIEntityTypes.ARCTIC_KIRRID.get()) {
-                return switch (this.getColor().get()) {
-                    case WHITE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_WHITE;
-                    case ORANGE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_ORANGE;
-                    case MAGENTA -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_MAGENTA;
-                    case LIGHT_BLUE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIGHT_BLUE;
-                    case YELLOW -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_YELLOW;
-                    case LIME -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIME;
-                    case PINK -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_PINK;
-                    case GRAY -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_GRAY;
-                    case LIGHT_GRAY -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_LIGHT_GRAY;
-                    case CYAN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_CYAN;
-                    case PURPLE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_PURPLE;
-                    case BLUE -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BLUE;
-                    case BROWN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BROWN;
-                    case GREEN -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_GREEN;
-                    case RED -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_RED;
-                    case BLACK -> AetherIILoot.ENTITIES_ARCTIC_KIRRID_BLACK;
-                };
-            } else if (this.variantType == AetherIIEntityTypes.MAGNETIC_KIRRID.get()) {
-                return switch (this.getColor().get()) {
-                    case WHITE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WHITE;
-                    case ORANGE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_ORANGE;
-                    case MAGENTA -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_MAGENTA;
-                    case LIGHT_BLUE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIGHT_BLUE;
-                    case YELLOW -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_YELLOW;
-                    case LIME -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIME;
-                    case PINK -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PINK;
-                    case GRAY -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_GRAY;
-                    case LIGHT_GRAY -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_LIGHT_GRAY;
-                    case CYAN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_CYAN;
-                    case PURPLE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_PURPLE;
-                    case BLUE -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BLUE;
-                    case BROWN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BROWN;
-                    case GREEN -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_GREEN;
-                    case RED -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_RED;
-                    case BLACK -> AetherIILoot.ENTITIES_MAGNETIC_KIRRID_BLACK;
-                };
-            } else {
-                return switch (this.getColor().get()) {
-                    case WHITE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WHITE;
-                    case ORANGE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_ORANGE;
-                    case MAGENTA -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_MAGENTA;
-                    case LIGHT_BLUE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIGHT_BLUE;
-                    case YELLOW -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_YELLOW;
-                    case LIME -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIME;
-                    case PINK -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PINK;
-                    case GRAY -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_GRAY;
-                    case LIGHT_GRAY -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_LIGHT_GRAY;
-                    case CYAN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_CYAN;
-                    case PURPLE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_PURPLE;
-                    case BLUE -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BLUE;
-                    case BROWN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BROWN;
-                    case GREEN -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_GREEN;
-                    case RED -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_RED;
-                    case BLACK -> AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_BLACK;
-                };
-            }
-        }
     }
 
     @Override
@@ -677,7 +604,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         }
     }
 
-    public enum KirridColor {
+    public enum KirridColor implements StringRepresentable {
         WHITE(0, 16777215, DyeColor.WHITE, AetherIIBlocks.WHITE_CLOUDWOOL),
         ORANGE(1, 16760199, DyeColor.ORANGE, AetherIIBlocks.ORANGE_CLOUDWOOL),
         MAGENTA(2, 14989818, DyeColor.MAGENTA, AetherIIBlocks.MAGENTA_CLOUDWOOL),
@@ -696,13 +623,14 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         BLACK(15, 3093053, DyeColor.BLACK, AetherIIBlocks.BLACK_CLOUDWOOL);
 
         public static final IntFunction<Kirrid.KirridColor> BY_ID = ByIdMap.continuous(Kirrid.KirridColor::id, Kirrid.KirridColor.values(), ByIdMap.OutOfBoundsStrategy.ZERO);
+        public static final StringRepresentable.EnumCodec<KirridColor> CODEC = StringRepresentable.fromEnum(KirridColor::values);
         public static final StreamCodec<ByteBuf, Kirrid.KirridColor> STREAM_CODEC = ByteBufCodecs.idMapper(BY_ID, Kirrid.KirridColor::id);
 
         public static final Map<DyeColor, Kirrid.KirridColor> KIRRID_COLOR_BY_DYE = Maps.<DyeColor, Kirrid.KirridColor>newEnumMap(Arrays.stream(Kirrid.KirridColor.values()).collect(Collectors.toMap(color -> color.dyeColor, color -> color)));
 
-        private static final Map<Kirrid.KirridColor, Integer> DECIMAL_COLOR_BY_KIRRID_COLOR = Maps.<Kirrid.KirridColor, Integer>newEnumMap(Arrays.stream(Kirrid.KirridColor.values()).collect(Collectors.toMap(color -> color, color -> color.color)));
-        private static final Map<Kirrid.KirridColor, DyeColor> DYE_COLOR_BY_KIRRID_COLOR = Maps.<Kirrid.KirridColor, DyeColor>newEnumMap(Arrays.stream(Kirrid.KirridColor.values()).collect(Collectors.toMap(color -> color, color -> color.dyeColor)));
-        private static final Map<Kirrid.KirridColor, ItemLike> CLOUDWOOL_BY_KIRRID_COLOR = Maps.<Kirrid.KirridColor, ItemLike>newEnumMap(Arrays.stream(Kirrid.KirridColor.values()).collect(Collectors.toMap(color -> color, color -> color.wool)));
+        public static final Map<Kirrid.KirridColor, Integer> DECIMAL_COLOR_BY_KIRRID_COLOR = Maps.<Kirrid.KirridColor, Integer>newEnumMap(Arrays.stream(Kirrid.KirridColor.values()).collect(Collectors.toMap(color -> color, color -> color.color)));
+        public static final Map<Kirrid.KirridColor, DyeColor> DYE_COLOR_BY_KIRRID_COLOR = Maps.<Kirrid.KirridColor, DyeColor>newEnumMap(Arrays.stream(Kirrid.KirridColor.values()).collect(Collectors.toMap(color -> color, color -> color.dyeColor)));
+        public static final Map<Kirrid.KirridColor, ItemLike> CLOUDWOOL_BY_KIRRID_COLOR = Maps.<Kirrid.KirridColor, ItemLike>newEnumMap(Arrays.stream(Kirrid.KirridColor.values()).collect(Collectors.toMap(color -> color, color -> color.wool)));
 
         private final int id;
         private final int color;
@@ -730,6 +658,11 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
         public int id() {
             return id;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name();
         }
     }
 

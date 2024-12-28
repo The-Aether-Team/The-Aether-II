@@ -10,7 +10,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class BurrukaiRenderer extends MultiBabyModelRenderer<Burrukai, BurrukaiRenderState, EntityModel<Burrukai>, AbstractBurrukaiModel, AbstractBurrukaiBabyModel> {
+public class BurrukaiRenderer extends MultiBabyModelRenderer<Burrukai, BurrukaiRenderState, EntityModel<BurrukaiRenderState>, AbstractBurrukaiModel, AbstractBurrukaiBabyModel> {
     private final ResourceLocation defaultTexture;
     private final ResourceLocation babyTexture;
     private final AbstractBurrukaiModel defaultModel;

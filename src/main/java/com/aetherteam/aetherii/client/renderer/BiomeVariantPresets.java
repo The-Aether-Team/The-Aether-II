@@ -10,7 +10,6 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 
 import java.util.function.Function;
 
@@ -65,8 +64,8 @@ public enum BiomeVariantPresets {
 
     private final ResourceLocation defaultTexture;
     private final ResourceLocation babyTexture;
-    private final Function<EntityRendererProvider.Context, EntityModel<? extends Entity>> defaultModel;
-    private final Function<EntityRendererProvider.Context, EntityModel<? extends Entity>> babyModel;
+    private final Function<EntityRendererProvider.Context, EntityModel<? extends EntityRenderState>> defaultModel;
+    private final Function<EntityRendererProvider.Context, EntityModel<? extends EntityRenderState>> babyModel;
 
     BiomeVariantPresets(ResourceLocation defaultTexture, ResourceLocation babyTexture, Function<EntityRendererProvider.Context, EntityModel<?>> defaultModel, Function<EntityRendererProvider.Context, EntityModel<?>> babyModel) {
         this.defaultTexture = defaultTexture;

@@ -164,31 +164,31 @@ public class AetherIIItems {
     public static final DeferredItem<Item> TAEGORE_HIDE_CHESTPLATE = ITEMS.register("taegore_hide_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.CHESTPLATE, new Item.Properties()));
     public static final DeferredItem<Item> TAEGORE_HIDE_LEGGINGS = ITEMS.register("taegore_hide_leggings", () -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<Item> TAEGORE_HIDE_BOOTS = ITEMS.register("taegore_hide_boots", () -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.BOOTS, new Item.Properties()));
-    public static final DeferredItem<Item> TAEGORE_HIDE_GLOVES = ITEMS.register("taegore_hide_gloves", () -> new GlovesItem(AetherIIArmorMaterials.TAEGORE_HIDE, 25.0, "taegore_hide_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> TAEGORE_HIDE_GLOVES = ITEMS.register("taegore_hide_gloves", () -> new GlovesItem(AetherIIArmorMaterials.TAEGORE_HIDE, 25.0, new Item.Properties()));
 
     public static final DeferredItem<Item> BURRUKAI_PELT_HELMET = ITEMS.register("burrukai_pelt_helmet", () -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.HELMET, new Item.Properties()));
     public static final DeferredItem<Item> BURRUKAI_PELT_CHESTPLATE = ITEMS.register("burrukai_pelt_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.CHESTPLATE, new Item.Properties()));
     public static final DeferredItem<Item> BURRUKAI_PELT_LEGGINGS = ITEMS.register("burrukai_pelt_leggings", () -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<Item> BURRUKAI_PELT_BOOTS = ITEMS.register("burrukai_pelt_boots", () -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.BOOTS, new Item.Properties()));
-    public static final DeferredItem<Item> BURRUKAI_PELT_GLOVES = ITEMS.register("burrukai_pelt_gloves", () -> new GlovesItem(AetherIIArmorMaterials.BURRUKAI_PELT, 50.0, "burrukai_pelt_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> BURRUKAI_PELT_GLOVES = ITEMS.register("burrukai_pelt_gloves", () -> new GlovesItem(AetherIIArmorMaterials.BURRUKAI_PELT, 50.0, new Item.Properties()));
 
     public static final DeferredItem<Item> ZANITE_HELMET = ITEMS.register("zanite_helmet", () -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.HELMET, new Item.Properties()));
     public static final DeferredItem<Item> ZANITE_CHESTPLATE = ITEMS.register("zanite_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.CHESTPLATE, new Item.Properties()));
     public static final DeferredItem<Item> ZANITE_LEGGINGS = ITEMS.register("zanite_leggings", () -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<Item> ZANITE_BOOTS = ITEMS.register("zanite_boots", () -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.BOOTS, new Item.Properties()));
-    public static final DeferredItem<Item> ZANITE_GLOVES = ITEMS.register("zanite_gloves", () -> new GlovesItem(AetherIIArmorMaterials.ZANITE, 100.0, "zanite_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> ZANITE_GLOVES = ITEMS.register("zanite_gloves", () -> new GlovesItem(AetherIIArmorMaterials.ZANITE, 100.0, new Item.Properties()));
 
     public static final DeferredItem<Item> ARKENIUM_HELMET = ITEMS.register("arkenium_helmet", () -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.HELMET, new Item.Properties()));
     public static final DeferredItem<Item> ARKENIUM_CHESTPLATE = ITEMS.register("arkenium_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.CHESTPLATE, new Item.Properties()));
     public static final DeferredItem<Item> ARKENIUM_LEGGINGS = ITEMS.register("arkenium_leggings", () -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<Item> ARKENIUM_BOOTS = ITEMS.register("arkenium_boots", () -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.BOOTS, new Item.Properties()));
-    public static final DeferredItem<Item> ARKENIUM_GLOVES = ITEMS.register("arkenium_gloves", () -> new GlovesItem(AetherIIArmorMaterials.ARKENIUM, 100.0, "arkenium_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> ARKENIUM_GLOVES = ITEMS.register("arkenium_gloves", () -> new GlovesItem(AetherIIArmorMaterials.ARKENIUM, 100.0, new Item.Properties()));
 
     public static final DeferredItem<Item> GRAVITITE_HELMET = ITEMS.register("gravitite_helmet", () -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.HELMET, new Item.Properties()));
     public static final DeferredItem<Item> GRAVITITE_CHESTPLATE = ITEMS.register("gravitite_chestplate", () -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.CHESTPLATE, new Item.Properties()));
     public static final DeferredItem<Item> GRAVITITE_LEGGINGS = ITEMS.register("gravitite_leggings", () -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<Item> GRAVITITE_BOOTS = ITEMS.register("gravitite_boots", () -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.BOOTS, new Item.Properties()));
-    public static final DeferredItem<Item> GRAVITITE_GLOVES = ITEMS.register("gravitite_gloves", () -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, 200.0, "gravitite_gloves", new Item.Properties()));
+    public static final DeferredItem<Item> GRAVITITE_GLOVES = ITEMS.register("gravitite_gloves", () -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, 200.0, new Item.Properties()));
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = ITEMS.register("skyroot_stick", () -> new Item(new Item.Properties()));

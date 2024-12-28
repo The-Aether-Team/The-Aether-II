@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
+import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -16,17 +17,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
 import java.awt.*;
@@ -76,16 +80,9 @@ public class AetherIIOverlays {
                 timeInPortal = timeInPortal * 0.8F + 0.2F;
             }
 
-            RenderSystem.disableDepthTest();
-            RenderSystem.depthMask(false);
-            RenderSystem.enableBlend();
-            guiGraphics.setColor(1.0F, 1.0F, 1.0F, timeInPortal);
+            int i = ARGB.white(timeInPortal);
             TextureAtlasSprite textureatlassprite = minecraft.getBlockRenderer().getBlockModelShaper().getParticleIcon(AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState());
-            guiGraphics.blit(0, 0, -90, guiGraphics.guiWidth(), guiGraphics.guiHeight(), textureatlassprite);
-            RenderSystem.disableBlend();
-            RenderSystem.depthMask(true);
-            RenderSystem.enableDepthTest();
-            guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+            guiGraphics.blitSprite(RenderType::guiTexturedOverlay, textureatlassprite, 0, 0, guiGraphics.guiWidth(), guiGraphics.guiHeight(), i);
         }
     }
 
@@ -93,7 +90,7 @@ public class AetherIIOverlays {
         Collection<EffectBuildupInstance> collection = minecraft.player.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).getActiveBuildups().values();
         if (!collection.isEmpty()) {
             Screen $$4 = minecraft.screen;
-            if ($$4 instanceof EffectRenderingInventoryScreen effectrenderinginventoryscreen && effectrenderinginventoryscreen.canSeeEffects()) {
+            if ($$4 instanceof InventoryScreen inventoryScreen && ((InventoryScreenAccessor) inventoryScreen).aether_ii$getEffects() != null && ((InventoryScreenAccessor) inventoryScreen).aether_ii$getEffects().canSeeEffects()) {
                 return;
             }
 
@@ -121,13 +118,14 @@ public class AetherIIOverlays {
                 }
 
                 Color color = new Color(effect.value().getColor());
-                guiGraphics.setColor((float) color.getRed() / 255, (float) color.getGreen() / 255, (float) color.getBlue() / 255, 1.0F);
 
                 int buildupScaledValue = Math.min(buildup.getBuildup() / (buildup.getBuildupCap() / 24), 24);
 
-                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OVERLAY_SPRITE, 24, 24, 0, 24 - buildupScaledValue, i, j + 24 - buildupScaledValue, 24, buildupScaledValue);
+                guiGraphics.enableScissor(i, j + 24 - buildupScaledValue, i + 24, (j + 24 - buildupScaledValue) + buildupScaledValue);
+                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OVERLAY_SPRITE, i, (j + 24 - buildupScaledValue) - (24 - buildupScaledValue), 24, 24, ARGB.opaque(color.getRGB()));
+                guiGraphics.disableScissor();
 
-                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
+                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24, ARGB.opaque(color.getRGB()));
 
                 if (buildup.isBuildupFull()) {
                     MobEffectInstance instance = player.getEffect(buildup.getType());
@@ -137,15 +135,13 @@ public class AetherIIOverlays {
                     }
 
                     float flashInterval = (Mth.cos((0.5F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
-                    guiGraphics.setColor(1.0F, 1.0F, 1.0F, flashInterval);
-                    guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24);
+                    guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OUTLINE_SPRITE, i, j, 24, 24, ARGB.white(flashInterval));
                 }
-                guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
                 TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(effect);
                 int i1 = j;
                 int i_f = i;
-                list.add(() -> guiGraphics.blit(i_f + 3, i1 + 3, 0, 18, 18, textureatlassprite));
+                list.add(() -> guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, i_f + 3, i1 + 3, 0, 18, 18));
             }
 
             list.forEach(Runnable::run);

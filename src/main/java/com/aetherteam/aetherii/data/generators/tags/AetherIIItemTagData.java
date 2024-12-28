@@ -44,7 +44,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.copy(AetherIITags.Blocks.AGIOSITE_DECORATIVE_BLOCKS, AetherIITags.Items.AGIOSITE_DECORATIVE_BLOCKS);
         this.copy(AetherIITags.Blocks.ICESTONE_DECORATIVE_BLOCKS, AetherIITags.Items.ICESTONE_DECORATIVE_BLOCKS);
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
-        this.tag(AetherIITags.Items.LEATHER_HIDE).add(
+        this.tag(AetherIITags.Items.ANIMALS_FURS).add(
                 AetherIIItems.TAEGORE_HIDE.get(),
                 AetherIIItems.BURRUKAI_PELT.get()
                 );
@@ -94,6 +94,76 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GRAVITITE_GLOVES.get());
         this.tag(AetherIITags.Items.EQUIPMENT_ACCESSORIES);
         this.tag(AetherIITags.Items.EQUIPABLE).addTags(AetherIITags.Items.EQUIPMENT_RELICS, AetherIITags.Items.EQUIPMENT_HANDWEAR, AetherIITags.Items.EQUIPMENT_ACCESSORIES);
+        this.tag(AetherIITags.Items.TAEGORE_HIDE_ARMOR).add(
+                AetherIIItems.TAEGORE_HIDE_HELMET.get(),
+                AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(),
+                AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(),
+                AetherIIItems.TAEGORE_HIDE_BOOTS.get(),
+                AetherIIItems.TAEGORE_HIDE_GLOVES.get());
+        this.tag(AetherIITags.Items.BURRUKAI_PELT_ARMOR).add(
+                AetherIIItems.BURRUKAI_PELT_HELMET.get(),
+                AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(),
+                AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(),
+                AetherIIItems.BURRUKAI_PELT_BOOTS.get(),
+                AetherIIItems.BURRUKAI_PELT_GLOVES.get());
+        this.tag(AetherIITags.Items.ZANITE_ARMOR).add(
+                AetherIIItems.ZANITE_HELMET.get(),
+                AetherIIItems.ZANITE_CHESTPLATE.get(),
+                AetherIIItems.ZANITE_LEGGINGS.get(),
+                AetherIIItems.ZANITE_BOOTS.get(),
+                AetherIIItems.ZANITE_GLOVES.get());
+        this.tag(AetherIITags.Items.ARKENIUM_ARMOR).add(
+                AetherIIItems.ARKENIUM_HELMET.get(),
+                AetherIIItems.ARKENIUM_CHESTPLATE.get(),
+                AetherIIItems.ARKENIUM_LEGGINGS.get(),
+                AetherIIItems.ARKENIUM_BOOTS.get(),
+                AetherIIItems.ARKENIUM_GLOVES.get());
+        this.tag(AetherIITags.Items.GRAVITITE_ARMOR).add(
+                AetherIIItems.GRAVITITE_HELMET.get(),
+                AetherIIItems.GRAVITITE_CHESTPLATE.get(),
+                AetherIIItems.GRAVITITE_LEGGINGS.get(),
+                AetherIIItems.GRAVITITE_BOOTS.get(),
+                AetherIIItems.GRAVITITE_GLOVES.get());
+        this.tag(AetherIITags.Items.SKYROOT_TOOL).add(
+                AetherIIItems.SKYROOT_PICKAXE.get(),
+                AetherIIItems.SKYROOT_AXE.get(),
+                AetherIIItems.SKYROOT_SHOVEL.get(),
+                AetherIIItems.SKYROOT_TROWEL.get(),
+                AetherIIItems.SKYROOT_SHORTSWORD.get(),
+                AetherIIItems.SKYROOT_SPEAR.get(),
+                AetherIIItems.SKYROOT_HAMMER.get());
+        this.tag(AetherIITags.Items.HOLYSTONE_TOOL).add(
+                AetherIIItems.HOLYSTONE_PICKAXE.get(),
+                AetherIIItems.HOLYSTONE_AXE.get(),
+                AetherIIItems.HOLYSTONE_SHOVEL.get(),
+                AetherIIItems.HOLYSTONE_TROWEL.get(),
+                AetherIIItems.HOLYSTONE_SHORTSWORD.get(),
+                AetherIIItems.HOLYSTONE_SPEAR.get(),
+                AetherIIItems.HOLYSTONE_HAMMER.get());
+        this.tag(AetherIITags.Items.ZANITE_TOOL).add(
+                AetherIIItems.ZANITE_PICKAXE.get(),
+                AetherIIItems.ZANITE_AXE.get(),
+                AetherIIItems.ZANITE_SHOVEL.get(),
+                AetherIIItems.ZANITE_TROWEL.get(),
+                AetherIIItems.ZANITE_SHORTSWORD.get(),
+                AetherIIItems.ZANITE_SPEAR.get(),
+                AetherIIItems.ZANITE_HAMMER.get());
+        this.tag(AetherIITags.Items.ARKENIUM_TOOL).add(
+                AetherIIItems.ARKENIUM_PICKAXE.get(),
+                AetherIIItems.ARKENIUM_AXE.get(),
+                AetherIIItems.ARKENIUM_SHOVEL.get(),
+                AetherIIItems.ARKENIUM_TROWEL.get(),
+                AetherIIItems.ARKENIUM_SHORTSWORD.get(),
+                AetherIIItems.ARKENIUM_SPEAR.get(),
+                AetherIIItems.ARKENIUM_HAMMER.get());
+        this.tag(AetherIITags.Items.GRAVITITE_TOOL).add(
+                AetherIIItems.GRAVITITE_PICKAXE.get(),
+                AetherIIItems.GRAVITITE_AXE.get(),
+                AetherIIItems.GRAVITITE_SHOVEL.get(),
+                AetherIIItems.GRAVITITE_TROWEL.get(),
+                AetherIIItems.GRAVITITE_SHORTSWORD.get(),
+                AetherIIItems.GRAVITITE_SPEAR.get(),
+                AetherIIItems.GRAVITITE_HAMMER.get());
         this.tag(AetherIITags.Items.UNIQUE_TOOLTIP_COLOR).add(
                 AetherIIItems.SKYROOT_SHORTSWORD.get(),
                 AetherIIItems.SKYROOT_HAMMER.get(),

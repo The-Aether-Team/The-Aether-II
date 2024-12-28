@@ -41,7 +41,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class BlockHooks {
     public static void sendIcestoneFreezableUpdateEvent(LevelAccessor accessor, BlockPos pos) {
-        if (accessor instanceof Level level && !level.isClientSide()) {
+        if (accessor instanceof ServerLevel level) {
             BlockState oldBlockState = level.getBlockState(pos);
             FreezingBlock.cacheRecipes(level);
             if (FreezingBlock.matchesCache(oldBlockState.getBlock(), oldBlockState, accessor.getBiome(pos)) != null) {

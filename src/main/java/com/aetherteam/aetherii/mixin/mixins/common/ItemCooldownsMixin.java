@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemCooldowns;
@@ -19,14 +20,14 @@ public class ItemCooldownsMixin implements ItemCooldownsWrapper {
     @Unique
     public Player player;
 
-    @Inject(at = @At(value = "HEAD"), method = "onCooldownEnded(Lnet/minecraft/world/item/Item;)V")
-    private void onCooldownEnded(Item item, CallbackInfo ci) {
-        if (item.getDefaultInstance().is(Tags.Items.TOOLS_SHIELD)) {
-            if (!this.player.level().isClientSide()) {
-                DamageSystemAttachment attachment = this.player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
-                attachment.setSynched(this.player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", DamageSystemAttachment.MAX_SHIELD_STAMINA);
-            }
-        }
+    @Inject(at = @At(value = "HEAD"), method = "onCooldownEnded(Lnet/minecraft/resources/ResourceLocation;)V") //todo itemstack?
+    private void onCooldownEnded(ResourceLocation p_366721_, CallbackInfo ci) {
+//        if (item.getDefaultInstance().is(Tags.Items.TOOLS_SHIELD)) {
+//            if (!this.player.level().isClientSide()) {
+//                DamageSystemAttachment attachment = this.player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
+//                attachment.setSynched(this.player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", DamageSystemAttachment.MAX_SHIELD_STAMINA);
+//            }
+//        }
     }
 
     @Unique

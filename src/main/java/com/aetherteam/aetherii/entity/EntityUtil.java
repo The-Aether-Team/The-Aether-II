@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 
 import java.util.Optional;
@@ -45,7 +46,7 @@ public final class EntityUtil {
     public static <T extends Entity> T clone(final T entity) {
         CompoundTag compoundTag = new CompoundTag();
         entity.save(compoundTag);
-        final Optional<T> newEnt = (Optional<T>) EntityType.create(compoundTag, entity.level());
+        final Optional<T> newEnt = (Optional<T>) EntityType.create(compoundTag, entity.level(), EntitySpawnReason.EVENT);
 
         return newEnt.orElse(null);
     }

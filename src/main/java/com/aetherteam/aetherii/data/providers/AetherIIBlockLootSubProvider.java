@@ -117,7 +117,7 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))));
     }
 
-    protected LootTable.Builder createShearsOnlyDrop(ItemLike p_250684_) {
+    public LootTable.Builder createShearsOnlyDrop(ItemLike p_250684_) {
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears()).add(LootItem.lootTableItem(p_250684_)));
     }
 
@@ -136,18 +136,19 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
     }
 
     public LootTable.Builder droppingWithChancesAndSkyrootSticks(Block block, Block sapling, float... chances) {
-        HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-        return createForgeSilkTouchOrShearsDispatchTable(block, this.applyExplosionCondition(block, LootItem.lootTableItem(sapling)).when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), chances)))
+        HolderLookup.RegistryLookup<Enchantment> enchantmentLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        HolderLookup.RegistryLookup<Item> itemLookup = this.registries.lookupOrThrow(Registries.ITEM);
+        return createForgeSilkTouchOrShearsDispatchTable(itemLookup, block, this.applyExplosionCondition( block, LootItem.lootTableItem(sapling)).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), chances)))
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(this.hasShears().or(this.hasSilkTouch()).invert())
                         .add(this.applyExplosionDecay(block,
                                         LootItem.lootTableItem(AetherIIItems.SKYROOT_STICK.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
-                                .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))))
+                                .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))))
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
                                 .add(this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.SKYROOT_PINECONE.get()))
-                                        .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.01F, 0.011111112F, 0.0125F, 0.0111111125F, 0.05F))))
+                                        .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.01F, 0.011111112F, 0.0125F, 0.0111111125F, 0.05F))))
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
                         .add(this.applyExplosionCondition(block, LootItem.lootTableItem(Items.AIR).apply(SpawnSkyrootLizard.builder()))
-                                .when(BonusLevelTableCondition.bonusLevelFlatChance(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.001F, 0.0011111112F, 0.00125F, 0.00111111125F, 0.005F))));
+                                .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.001F, 0.0011111112F, 0.00125F, 0.00111111125F, 0.005F))));
     }
 
     protected LootTable.Builder createSilkTouchOrShearsTable(ItemLike item) {
@@ -172,12 +173,13 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
 
     public LootTable.Builder droppingSativalShoot(HolderGetter<Item> holderGetter, Block block, Item drop) {
         HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        HolderLookup.RegistryLookup<Item> itemLookup = this.registries.lookupOrThrow(Registries.ITEM);
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                 .add(this.applyExplosionDecay(block, LootItem.lootTableItem(drop))
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
                         .apply(ApplyBonusCount.addOreBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE))))
                 .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(holderGetter, AetherIITags.Items.TOOLS_TROWELS)))
-        ).withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(AetherIITags.Items.TOOLS_TROWELS)).invert()));
+        ).withPool(LootPool.lootPool().add(LootItem.lootTableItem(block)).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(itemLookup, AetherIITags.Items.TOOLS_TROWELS)).invert()));
     }
 
     public LootTable.Builder droppingBerryBush(HolderGetter<Item> holderGetter, Block block, Block stem, Item drop) {

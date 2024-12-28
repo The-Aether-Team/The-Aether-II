@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor
 import com.mojang.datafixers.util.Pair;
 import io.wispforest.accessories.api.menu.AccessoriesSlotGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
@@ -87,7 +88,9 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
      */
     @Override
     public void slotsChanged(Container inventory) {
-        CraftingMenuAccessor.callSlotChangedCraftingGrid(this, this.owner.level(), this.owner, this.craftSlots, this.resultSlots, null);
+        if (this.owner.level() instanceof ServerLevel serverLevel) { //todo
+            CraftingMenuAccessor.callSlotChangedCraftingGrid(this, serverLevel, this.owner, this.craftSlots, this.resultSlots, null);
+        }
     }
 
     /**

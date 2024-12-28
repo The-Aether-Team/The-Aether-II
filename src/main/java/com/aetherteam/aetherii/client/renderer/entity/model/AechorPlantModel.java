@@ -1,18 +1,15 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.AechorPlantAnimation;
-import com.aetherteam.aetherii.entity.monster.AechorPlant;
+import com.aetherteam.aetherii.client.renderer.entity.state.AechorPlantRenderState;
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class AechorPlantModel extends EntityModel<AechorPlant> {
-    public final ModelPart root;
+public class AechorPlantModel extends EntityModel<AechorPlantRenderState> {
     public final ModelPart stem;
     public final ModelPart head;
     public final ModelPart thorn1;
@@ -47,7 +44,7 @@ public class AechorPlantModel extends EntityModel<AechorPlant> {
     public final ModelPart lowerPetal5;
 
     public AechorPlantModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.stem = root.getChild("stem");
         this.head = root.getChild("head");
         this.thorn1 = this.stem.getChild("thorn_1");
@@ -122,8 +119,8 @@ public class AechorPlantModel extends EntityModel<AechorPlant> {
     }
 
     @Override
-    public void setupAnim(AechorPlant aechorPlant, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(entity);
+    public void setupAnim(AechorPlantRenderState aechorPlant) {
+        super.setupAnim(aechorPlant);
 
         int i = 0;
         for (ModelPart modelPart : this.stamenStemParts()) {
@@ -147,17 +144,6 @@ public class AechorPlantModel extends EntityModel<AechorPlant> {
             i++;
         }
 
-        this.animate(aechorPlant.attackAnimationState, AechorPlantAnimation.ATTACK, ageInTicks, 1.0F);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer consumer, int packedLight, int packedOverlay, int color) {
-        this.stem.render(poseStack, consumer, packedLight, packedOverlay, color);
-        this.head.render(poseStack, consumer, packedLight, packedOverlay, color);
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
+        this.animate(aechorPlant.attackAnimationState, AechorPlantAnimation.ATTACK, aechorPlant.ageInTicks, 1.0F);
     }
 }

@@ -32,6 +32,7 @@ public class SheepuffModel<T extends SheepuffRenderState> extends EntityModel<T>
 
     public SheepuffModel(ModelPart root) {
         super(root);
+        this.root = root;
         this.body = root.getChild("body");
         this.head = this.body.getChild("head");
         this.ear_left = this.head.getChild("ear_left");

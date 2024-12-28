@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.kirrid;
 
-import com.aetherteam.aetherii.entity.passive.Kirrid;
+import com.aetherteam.aetherii.client.renderer.entity.state.KirridRenderState;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
@@ -77,9 +77,9 @@ public class HighfieldsKirridModel extends AbstractKirridModel {
     }
 
     @Override
-    public void setupAnim(Kirrid kirrid, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setupAnim(kirrid, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        this.headPlate.visible = kirrid.hasPlate();
-        this.headPlateBroken.visible = !kirrid.hasPlate();
+    public void setupAnim(KirridRenderState kirrid) {
+        super.setupAnim(kirrid);
+        this.headPlate.visible = kirrid.plate;
+        this.headPlateBroken.visible = !kirrid.plate;
     }
 }

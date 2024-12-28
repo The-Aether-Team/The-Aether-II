@@ -4,14 +4,13 @@ package com.aetherteam.aetherii.client.renderer.entity.model;// Made with Blockb
 
 
 import com.aetherteam.aetherii.client.renderer.entity.animation.SwetAnimation;
-import com.aetherteam.aetherii.entity.monster.Swet;
+import com.aetherteam.aetherii.client.renderer.entity.state.SwetRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-public class SwetModel<T extends Swet> extends EntityModel<T> {
-    private final ModelPart root;
+public class SwetModel<T extends SwetRenderState> extends EntityModel<T> {
     public final ModelPart body;
     public final ModelPart gel;
     public final ModelPart squish;
@@ -22,7 +21,7 @@ public class SwetModel<T extends Swet> extends EntityModel<T> {
     private final ModelPart wisp_bottom_right;
 
     public SwetModel(ModelPart root) {
-        this.root = root;
+        super(root);
         this.body = root.getChild("body");
         this.gel = this.body.getChild("gel");
         this.squish = this.gel.getChild("squish");
@@ -67,22 +66,17 @@ public class SwetModel<T extends Swet> extends EntityModel<T> {
     }
 
     @Override
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(T entity) {
         super.setupAnim(entity);
         this.gel.visible = false;
         this.squish.visible = false;
-        this.animate(entity.groundAnimationState, SwetAnimation.ground, ageInTicks);
-        this.animate(entity.jumpAnimationState, SwetAnimation.jump, ageInTicks);
-        this.gel.xScale *= 1 + 0.1F * entity.getFoodSaturation();
-        this.gel.yScale *= 1 + 0.1F * entity.getFoodSaturation();
-        this.gel.zScale *= 1 + 0.1F * entity.getFoodSaturation();
-        this.gel.xScale *= (1.0F - entity.getWaterDamageScale());
-        this.gel.yScale *= (1.0F - entity.getWaterDamageScale());
-        this.gel.zScale *= (1.0F - entity.getWaterDamageScale());
-    }
-
-    @Override
-    public ModelPart root() {
-        return this.root;
+        this.animate(entity.groundAnimationState, SwetAnimation.ground, entity.ageInTicks);
+        this.animate(entity.jumpAnimationState, SwetAnimation.jump, entity.ageInTicks);
+        this.gel.xScale *= 1 + 0.1F * entity.foodSaturation;
+        this.gel.yScale *= 1 + 0.1F * entity.foodSaturation;
+        this.gel.zScale *= 1 + 0.1F * entity.foodSaturation;
+        this.gel.xScale *= (1.0F - entity.waterDamageScale);
+        this.gel.yScale *= (1.0F - entity.waterDamageScale);
+        this.gel.zScale *= (1.0F - entity.waterDamageScale);
     }
 }
