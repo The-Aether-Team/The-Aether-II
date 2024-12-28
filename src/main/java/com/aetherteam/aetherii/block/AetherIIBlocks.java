@@ -43,6 +43,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -149,40 +150,40 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Irradiated
     public static final DeferredBlock<Block> IRRADIATED_HOLYSTONE = register("irradiated_holystone", IrradiatedBlock::new, Block.Properties.ofFullCopy(AetherIIBlocks.HOLYSTONE.get()));
     public static final DeferredBlock<Block> IRRADIATED_DUST_BLOCK = register("irradiated_dust_block", IrradiatedBlock::new, Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(3.0F, 30.0F).lightLevel((state) -> 5).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> AMBRELINN_MOSS_BLOCK = register("ambrelinn_moss_block", () -> new AetherMossBlock(HighlandsConfiguredFeatures.AMBRELINN_MOSS_FLOOR, Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.1F).sound(SoundType.MOSS).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> AMBRELINN_MOSS_CARPET = register("ambrelinn_moss_carpet", () -> new CarpetBlock(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> AMBRELINN_MOSS_VINES = register("ambrelinn_moss_vines", () -> new BottomedVineBlock(Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().randomTicks().strength(0.1F).sound(SoundType.VINE).ignitedByLava().pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> TARAHESP_FLOWERS = register("tarahesp_flowers", () -> new MossFlowersBlock(Block.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> AMBRELINN_MOSS_BLOCK = register("ambrelinn_moss_block", (properties) -> new AetherMossBlock(HighlandsConfiguredFeatures.AMBRELINN_MOSS_FLOOR, properties), Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.1F).sound(SoundType.MOSS).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> AMBRELINN_MOSS_CARPET = register("ambrelinn_moss_carpet", CarpetBlock::new, Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.1F).sound(SoundType.MOSS_CARPET).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> AMBRELINN_MOSS_VINES = register("ambrelinn_moss_vines", BottomedVineBlock::new, Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().randomTicks().strength(0.1F).sound(SoundType.VINE).ignitedByLava().pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> TARAHESP_FLOWERS = register("tarahesp_flowers", MossFlowersBlock::new, Block.Properties.of().mapColor(MapColor.PLANT).noCollission().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY));
 
     // Ores
-    public static final DeferredBlock<Block> HOLYSTONE_QUARTZ_ORE = register("holystone_quartz_ore", () -> new DropExperienceBlock(UniformInt.of(2, 5), Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> AMBROSIUM_ORE = register("ambrosium_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops().lightLevel(AetherIIBlocks::lightLevel8));
-    public static final DeferredBlock<Block> ZANITE_ORE = register("zanite_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> GLINT_ORE = register("glint_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> ARKENIUM_ORE = register("arkenium_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> GRAVITITE_ORE = register("gravitite_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> UNDERSHALE_AMBROSIUM_ORE = register("undershale_ambrosium_ore", () -> new DropExperienceBlock(UniformInt.of(0, 2), Block.Properties.ofFullCopy(AMBROSIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).lightLevel(AetherIIBlocks::lightLevel8));
-    public static final DeferredBlock<Block> UNDERSHALE_ZANITE_ORE = register("undershale_zanite_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.ofFullCopy(ZANITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE));
-    public static final DeferredBlock<Block> UNDERSHALE_GLINT_ORE = register("undershale_glint_ore", () -> new DropExperienceBlock(UniformInt.of(3, 5), Block.Properties.ofFullCopy(GLINT_ORE.get()).mapColor(MapColor.WOOL).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE));
-    public static final DeferredBlock<Block> UNDERSHALE_ARKENIUM_ORE = register("undershale_arkenium_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.ofFullCopy(ARKENIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE));
-    public static final DeferredBlock<Block> UNDERSHALE_GRAVITITE_ORE = register("undershale_gravitite_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.ofFullCopy(GRAVITITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE));
-    public static final DeferredBlock<Block> CORROBONITE_ORE = register("corrobonite_ore", () -> new DropExperienceBlock(ConstantInt.of(0), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).requiresCorrectToolForDrops());
-    public static final DeferredBlock<Block> CORROBONITE_CLUSTER = register("corrobonite_cluster", () -> new CorroboniteClusterBlock(Block.Properties.of().mapColor(MapColor.WOOL).strength(3.0F, 3.0F).noOcclusion().noCollission());
+    public static final DeferredBlock<Block> HOLYSTONE_QUARTZ_ORE = register("holystone_quartz_ore", (properties) -> new DropExperienceBlock(UniformInt.of(2, 5), properties), Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> AMBROSIUM_ORE = register("ambrosium_ore", (properties) -> new DropExperienceBlock(UniformInt.of(0, 2), properties), Block.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops().lightLevel(AetherIIBlocks::lightLevel8));
+    public static final DeferredBlock<Block> ZANITE_ORE = register("zanite_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> GLINT_ORE = register("glint_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> ARKENIUM_ORE = register("arkenium_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> GRAVITITE_ORE = register("gravitite_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(3.0F, 3.0F).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> UNDERSHALE_AMBROSIUM_ORE = register("undershale_ambrosium_ore", (properties) -> new DropExperienceBlock(UniformInt.of(0, 2), properties), Block.Properties.ofFullCopy(AMBROSIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE).lightLevel(AetherIIBlocks::lightLevel8));
+    public static final DeferredBlock<Block> UNDERSHALE_ZANITE_ORE = register("undershale_zanite_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), Block.Properties.ofFullCopy(ZANITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE));
+    public static final DeferredBlock<Block> UNDERSHALE_GLINT_ORE = register("undershale_glint_ore", (properties) -> new DropExperienceBlock(UniformInt.of(3, 5), properties), Block.Properties.ofFullCopy(GLINT_ORE.get()).mapColor(MapColor.WOOL).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE));
+    public static final DeferredBlock<Block> UNDERSHALE_ARKENIUM_ORE = register("undershale_arkenium_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), Block.Properties.ofFullCopy(ARKENIUM_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE));
+    public static final DeferredBlock<Block> UNDERSHALE_GRAVITITE_ORE = register("undershale_gravitite_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), Block.Properties.ofFullCopy(GRAVITITE_ORE.get()).mapColor(MapColor.COLOR_LIGHT_GRAY).strength(4.0F, 6.0F).sound(SoundType.DEEPSLATE));
+    public static final DeferredBlock<Block> CORROBONITE_ORE = register("corrobonite_ore", (properties) -> new DropExperienceBlock(ConstantInt.of(0), properties), Block.Properties.of().mapColor(MapColor.WOOL).instrument(NoteBlockInstrument.BASEDRUM).strength(4.0F, 6.0F).requiresCorrectToolForDrops());
+    public static final DeferredBlock<Block> CORROBONITE_CLUSTER = register("corrobonite_cluster", CorroboniteClusterBlock::new, Block.Properties.of().mapColor(MapColor.WOOL).strength(3.0F, 3.0F).noOcclusion().noCollission());
 
     // Aerclouds
-    public static final DeferredBlock<Block> COLD_AERCLOUD = register("cold_aercloud", () -> new AercloudBlock(aercloudProperties(MapColor.SNOW));
-    public static final DeferredBlock<Block> BLUE_AERCLOUD = register("blue_aercloud", () -> new BlueAercloudBlock(aercloudProperties(MapColor.COLOR_LIGHT_BLUE));
-    public static final DeferredBlock<Block> GOLDEN_AERCLOUD = register("golden_aercloud", () -> new AercloudBlock(aercloudProperties(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> GREEN_AERCLOUD = register("green_aercloud", () -> new GreenAercloudBlock(aercloudProperties(MapColor.COLOR_LIGHT_GREEN));
-    public static final DeferredBlock<Block> PURPLE_AERCLOUD = register("purple_aercloud", () -> new PurpleAercloudBlock(aercloudProperties(MapColor.COLOR_MAGENTA));
-    public static final DeferredBlock<Block> STORM_AERCLOUD = register("storm_aercloud", () -> new AercloudBlock(aercloudProperties(MapColor.DEEPSLATE));
+    public static final DeferredBlock<Block> COLD_AERCLOUD = register("cold_aercloud", AercloudBlock::new, aercloudProperties(MapColor.SNOW));
+    public static final DeferredBlock<Block> GOLDEN_AERCLOUD = register("golden_aercloud", AercloudBlock::new, aercloudProperties(MapColor.COLOR_YELLOW));
+    public static final DeferredBlock<Block> BLUE_AERCLOUD = register("blue_aercloud", BlueAercloudBlock::new, aercloudProperties(MapColor.COLOR_LIGHT_BLUE));
+    public static final DeferredBlock<Block> GREEN_AERCLOUD = register("green_aercloud", GreenAercloudBlock::new, aercloudProperties(MapColor.COLOR_LIGHT_GREEN));
+    public static final DeferredBlock<Block> PURPLE_AERCLOUD = register("purple_aercloud", PurpleAercloudBlock::new, aercloudProperties(MapColor.COLOR_MAGENTA));
+    public static final DeferredBlock<Block> STORM_AERCLOUD = register("storm_aercloud", AercloudBlock::new, aercloudProperties(MapColor.DEEPSLATE));
 
     // Moa Nest
     public static final DeferredBlock<Block> WOVEN_SKYROOT_STICKS = register("woven_skyroot_sticks", Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(0.75F).sound(SoundType.GRASS));
 
     // Logs
-    public static final DeferredBlock<RotatedPillarBlock> SKYROOT_LOG = register("skyroot_log", () -> log(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY);
-    public static final DeferredBlock<RotatedPillarBlock> SKYROOT_WOOD = register("skyroot_wood", () -> log(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY);
+    public static final DeferredBlock<RotatedPillarBlock> SKYROOT_LOG = register("skyroot_log", log(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<RotatedPillarBlock> SKYROOT_WOOD = register("skyroot_wood", log(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_SKYROOT_LOG = register("stripped_skyroot_log", () -> log(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.TERRACOTTA_LIGHT_GRAY);
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_SKYROOT_WOOD = register("stripped_skyroot_wood", () -> log(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.TERRACOTTA_LIGHT_GRAY);
     public static final DeferredBlock<RotatedPillarBlock> GREATROOT_LOG = register("greatroot_log", () -> log(MapColor.TERRACOTTA_BROWN, MapColor.COLOR_BROWN);
@@ -540,23 +541,23 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> BLACK_CLOUDWOOL = register("black_cloudwool", Block.Properties.ofFullCopy(Blocks.BLACK_WOOL));
 
     // Carpet
-    public static final DeferredBlock<CarpetBlock> CLOUDWOOL_CARPET = register("cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.WHITE_CARPET));
-    public static final DeferredBlock<CarpetBlock> WHITE_CLOUDWOOL_CARPET = register("white_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.WHITE_CARPET));
-    public static final DeferredBlock<CarpetBlock> ORANGE_CLOUDWOOL_CARPET = register("orange_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.ORANGE_CARPET));
-    public static final DeferredBlock<CarpetBlock> MAGENTA_CLOUDWOOL_CARPET = register("magenta_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.MAGENTA_CARPET));
-    public static final DeferredBlock<CarpetBlock> LIGHT_BLUE_CLOUDWOOL_CARPET = register("light_blue_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_CARPET));
-    public static final DeferredBlock<CarpetBlock> YELLOW_CLOUDWOOL_CARPET = register("yellow_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.YELLOW_CARPET));
-    public static final DeferredBlock<CarpetBlock> LIME_CLOUDWOOL_CARPET = register("lime_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIME_CARPET));
-    public static final DeferredBlock<CarpetBlock> PINK_CLOUDWOOL_CARPET = register("pink_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.PINK_CARPET));
-    public static final DeferredBlock<CarpetBlock> GRAY_CLOUDWOOL_CARPET = register("gray_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.GRAY_CARPET));
-    public static final DeferredBlock<CarpetBlock> LIGHT_GRAY_CLOUDWOOL_CARPET = register("light_gray_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_CARPET));
-    public static final DeferredBlock<CarpetBlock> CYAN_CLOUDWOOL_CARPET = register("cyan_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.CYAN_CARPET));
-    public static final DeferredBlock<CarpetBlock> PURPLE_CLOUDWOOL_CARPET = register("purple_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.PURPLE_CARPET));
-    public static final DeferredBlock<CarpetBlock> BLUE_CLOUDWOOL_CARPET = register("blue_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BLUE_CARPET));
-    public static final DeferredBlock<CarpetBlock> BROWN_CLOUDWOOL_CARPET = register("brown_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BROWN_CARPET));
-    public static final DeferredBlock<CarpetBlock> GREEN_CLOUDWOOL_CARPET = register("green_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.GREEN_CARPET));
-    public static final DeferredBlock<CarpetBlock> RED_CLOUDWOOL_CARPET = register("red_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.RED_CARPET));
-    public static final DeferredBlock<CarpetBlock> BLACK_CLOUDWOOL_CARPET = register("black_cloudwool_carpet", () -> new CarpetBlock(Block.Properties.ofFullCopy(Blocks.BLACK_CARPET));
+    public static final DeferredBlock<CarpetBlock> CLOUDWOOL_CARPET = register("cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.WHITE_CARPET));
+    public static final DeferredBlock<CarpetBlock> WHITE_CLOUDWOOL_CARPET = register("white_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.WHITE_CARPET));
+    public static final DeferredBlock<CarpetBlock> ORANGE_CLOUDWOOL_CARPET = register("orange_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.ORANGE_CARPET));
+    public static final DeferredBlock<CarpetBlock> MAGENTA_CLOUDWOOL_CARPET = register("magenta_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.MAGENTA_CARPET));
+    public static final DeferredBlock<CarpetBlock> LIGHT_BLUE_CLOUDWOOL_CARPET = register("light_blue_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.LIGHT_BLUE_CARPET));
+    public static final DeferredBlock<CarpetBlock> YELLOW_CLOUDWOOL_CARPET = register("yellow_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.YELLOW_CARPET));
+    public static final DeferredBlock<CarpetBlock> LIME_CLOUDWOOL_CARPET = register("lime_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.LIME_CARPET));
+    public static final DeferredBlock<CarpetBlock> PINK_CLOUDWOOL_CARPET = register("pink_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.PINK_CARPET));
+    public static final DeferredBlock<CarpetBlock> GRAY_CLOUDWOOL_CARPET = register("gray_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.GRAY_CARPET));
+    public static final DeferredBlock<CarpetBlock> LIGHT_GRAY_CLOUDWOOL_CARPET = register("light_gray_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.LIGHT_GRAY_CARPET));
+    public static final DeferredBlock<CarpetBlock> CYAN_CLOUDWOOL_CARPET = register("cyan_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.CYAN_CARPET));
+    public static final DeferredBlock<CarpetBlock> PURPLE_CLOUDWOOL_CARPET = register("purple_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.PURPLE_CARPET));
+    public static final DeferredBlock<CarpetBlock> BLUE_CLOUDWOOL_CARPET = register("blue_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.BLUE_CARPET));
+    public static final DeferredBlock<CarpetBlock> BROWN_CLOUDWOOL_CARPET = register("brown_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.BROWN_CARPET));
+    public static final DeferredBlock<CarpetBlock> GREEN_CLOUDWOOL_CARPET = register("green_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.GREEN_CARPET));
+    public static final DeferredBlock<CarpetBlock> RED_CLOUDWOOL_CARPET = register("red_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.RED_CARPET));
+    public static final DeferredBlock<CarpetBlock> BLACK_CLOUDWOOL_CARPET = register("black_cloudwool_carpet", CarpetBlock::new, Block.Properties.ofFullCopy(Blocks.BLACK_CARPET));
 
     // Arkenium Blocks
     public static final DeferredBlock<DoorBlock> ARKENIUM_DOOR = register("arkenium_door", () -> new DoorBlock(BlockSetType.IRON, Block.Properties.ofFullCopy(Blocks.IRON_DOOR));
