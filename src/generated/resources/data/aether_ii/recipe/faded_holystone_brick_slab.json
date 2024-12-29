@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "aether_ii:faded_holystone_bricks"
-    }
+    "#": "aether_ii:faded_holystone_bricks"
   },
   "pattern": [
     "###"

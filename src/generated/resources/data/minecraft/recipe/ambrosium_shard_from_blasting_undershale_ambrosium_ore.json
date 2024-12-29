@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "group": "ambrosium",
+  "ingredient": "aether_ii:undershale_ambrosium_ore",
+  "result": {
+    "count": 1,
+    "id": "aether_ii:ambrosium_shard"
+  }
+}

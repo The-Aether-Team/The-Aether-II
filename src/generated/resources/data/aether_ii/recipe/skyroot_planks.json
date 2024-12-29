@@ -3,9 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    {
-      "tag": "aether_ii:crafts_skyroot_planks"
-    }
+    "#aether_ii:crafts_skyroot_planks"
   ],
   "result": {
     "count": 4,

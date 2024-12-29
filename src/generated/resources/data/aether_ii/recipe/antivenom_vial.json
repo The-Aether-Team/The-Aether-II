@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "aether_ii:water_vial"
-    },
-    {
-      "item": "aether_ii:aechor_petal"
-    },
-    {
-      "item": "aether_ii:hesperose"
-    }
+    "aether_ii:water_vial",
+    "aether_ii:aechor_petal",
+    "aether_ii:hesperose"
   ],
   "result": {
     "count": 1,

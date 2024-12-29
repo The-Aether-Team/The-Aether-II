@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_post",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "edge": "aether_ii:block/decorative/arkenium_framed_crude_scatterglass_pane_top",
-    "pane": "aether_ii:block/decorative/arkenium_framed_crude_scatterglass"
-  }
-}

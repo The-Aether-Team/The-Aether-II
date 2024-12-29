@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "aether_ii:rods/skyroot"
-    }
+    "#": "#aether_ii:rods/skyroot"
   },
   "pattern": [
     "# #",

@@ -44,6 +44,289 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "WHITE",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/white"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "ORANGE",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/orange"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "MAGENTA",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/magenta"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "LIGHT_BLUE",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/light_blue"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "YELLOW",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/yellow"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "LIME",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/lime"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "PINK",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/pink"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "GRAY",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/gray"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "LIGHT_GRAY",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/light_gray"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "CYAN",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/cyan"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "PURPLE",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/purple"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "BLUE",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/blue"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "BROWN",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/brown"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "GREEN",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/green"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "RED",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/red"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "color": "BLACK",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:entities/kirrid/arctic/black"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "aether_ii:entities/arctic_kirrid"

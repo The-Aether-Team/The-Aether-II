@@ -3,9 +3,7 @@
   "category": "food",
   "experience": 0.0,
   "fuel_count": 5,
-  "ingredient": {
-    "item": "aether_ii:wyndberry"
-  },
+  "ingredient": "aether_ii:wyndberry",
   "processing_time": 200,
   "result": {
     "count": 1,

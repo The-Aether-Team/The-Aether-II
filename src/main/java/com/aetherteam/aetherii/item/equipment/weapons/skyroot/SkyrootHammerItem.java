@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.item.equipment.weapons.abilities.SkyrootWeapon;
 import net.minecraft.world.item.Item;
 
 public class SkyrootHammerItem extends TieredHammerItem implements SkyrootWeapon {
-    public SkyrootHammerItem() {
-        super(new Item.Properties().attributes(AetherIIDamageStats.merge(TieredHammerItem.createAttributes(AetherIIItemTiers.SKYROOT, 3, -2.4F), AetherIIDamageStats.SKYROOT_HAMMER)));
+    public SkyrootHammerItem(Properties properties) {
+        super(properties.attributes(AetherIIDamageStats.merge(TieredHammerItem.createAttributes(AetherIIItemTiers.SKYROOT, 3, -2.4F), AetherIIDamageStats.SKYROOT_HAMMER)));
     }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "irradiated_leaf_pile",
+  "ingredients": [
+    "aether_ii:wisproot_leaf_pile",
+    "aether_ii:irradiated_dust"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:irradiated_wisproot_leaf_pile"
+  }
+}

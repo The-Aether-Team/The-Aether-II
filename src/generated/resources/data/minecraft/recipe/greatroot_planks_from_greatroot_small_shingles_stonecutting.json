@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:greatroot_small_shingles",
+  "result": {
+    "count": 1,
+    "id": "aether_ii:greatroot_planks"
+  }
+}

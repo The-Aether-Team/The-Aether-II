@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "aether_ii:golden_aercloud"
-    },
-    "X": {
-      "tag": "aether_ii:rods/skyroot"
-    }
+    "#": "aether_ii:golden_aercloud",
+    "X": "#aether_ii:rods/skyroot"
   },
   "pattern": [
     "###",

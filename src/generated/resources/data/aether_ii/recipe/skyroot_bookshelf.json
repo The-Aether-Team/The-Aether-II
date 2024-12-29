@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "aether_ii:skyroot_planks"
-    },
-    "B": {
-      "item": "minecraft:book"
-    }
+    "#": "aether_ii:skyroot_planks",
+    "B": "minecraft:book"
   },
   "pattern": [
     "###",

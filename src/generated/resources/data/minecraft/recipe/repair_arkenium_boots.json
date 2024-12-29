@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 5,
   "group": "repair_arkenium_armor",
-  "ingredient": {
-    "item": "aether_ii:arkenium_boots"
-  },
+  "ingredient": "aether_ii:arkenium_boots",
   "processing_time": 200,
   "result": {
     "count": 1,

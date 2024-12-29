@@ -1,8 +1,0 @@
-{
-  "parent": "aether_ii:block/template_altar",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "altar": "aether_ii:block/utility/altar_charging",
-    "particle": "aether_ii:block/natural/holystone"
-  }
-}

@@ -20,9 +20,9 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> MAGNETIC_TAEGORE = createKey("magnetic_taegore");
     public static final ResourceKey<EntityType<?>> ARCTIC_TAEGORE = createKey("arctic_taegore");
 
-    public static final ResourceKey<EntityType<?>> HIGHFIELDS_BURRUKAI = createKey("highfields_taegore");
-    public static final ResourceKey<EntityType<?>> MAGNETIC_BURRUKAI = createKey("magnetic_taegore");
-    public static final ResourceKey<EntityType<?>> ARCTIC_BURRUKAI = createKey("arctic_taegore");
+    public static final ResourceKey<EntityType<?>> HIGHFIELDS_BURRUKAI = createKey("highfields_burrukai");
+    public static final ResourceKey<EntityType<?>> MAGNETIC_BURRUKAI = createKey("magnetic_burrukai");
+    public static final ResourceKey<EntityType<?>> ARCTIC_BURRUKAI = createKey("arctic_burrukai");
 
     public static final ResourceKey<EntityType<?>> HIGHFIELDS_KIRRID = createKey("highfields_kirrid");
     public static final ResourceKey<EntityType<?>> MAGNETIC_KIRRID = createKey("magnetic_kirrid");

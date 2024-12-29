@@ -9,8 +9,8 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 
 public class ZaniteSpearItem extends TieredSpearItem implements ZaniteWeapon {
-    public ZaniteSpearItem() {
-        super(new Properties().attributes(AetherIIDamageStats.merge(TieredSpearItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F), AetherIIDamageStats.ZANITE_SPEAR)));
+    public ZaniteSpearItem(Properties properties) {
+        super(properties.attributes(AetherIIDamageStats.merge(TieredSpearItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F), AetherIIDamageStats.ZANITE_SPEAR)));
     }
 
     @Override

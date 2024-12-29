@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "sticks",
   "ingredients": [
-    {
-      "item": "aether_ii:skyroot_twig"
-    }
+    "aether_ii:skyroot_twig"
   ],
   "result": {
     "count": 2,

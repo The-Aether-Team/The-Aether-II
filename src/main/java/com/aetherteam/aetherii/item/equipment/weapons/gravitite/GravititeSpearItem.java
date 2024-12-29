@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
 
 public class GravititeSpearItem extends TieredSpearItem {
-    public GravititeSpearItem() {
-        super(new Properties().attributes(AetherIIDamageStats.merge(TieredSpearItem.createAttributes(AetherIIItemTiers.GRAVITITE, 3, -2.4F), AetherIIDamageStats.GRAVITITE_SPEAR)));
+    public GravititeSpearItem(Properties properties) {
+        super(properties.attributes(AetherIIDamageStats.merge(TieredSpearItem.createAttributes(AetherIIItemTiers.GRAVITITE, 3, -2.4F), AetherIIDamageStats.GRAVITITE_SPEAR)));
     }
 }

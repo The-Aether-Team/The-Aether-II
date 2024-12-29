@@ -8,8 +8,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 
 public class SkyrootCrossbowItem extends TieredCrossbowItem {
-    public SkyrootCrossbowItem() {
-        super(AetherIIItemTiers.SKYROOT, new Properties());
+    public SkyrootCrossbowItem(Properties properties) {
+        super(AetherIIItemTiers.SKYROOT, properties);
     }
 
     @Override

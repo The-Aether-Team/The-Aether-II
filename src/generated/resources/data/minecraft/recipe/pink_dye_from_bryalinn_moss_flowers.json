@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "pink_dye",
   "ingredients": [
-    {
-      "item": "aether_ii:bryalinn_moss_flowers"
-    }
+    "aether_ii:bryalinn_moss_flowers"
   ],
   "result": {
     "count": 1,

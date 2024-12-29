@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wooden_trapdoor",
   "key": {
-    "#": {
-      "item": "aether_ii:wisproot_planks"
-    }
+    "#": "aether_ii:wisproot_planks"
   },
   "pattern": [
     "###",

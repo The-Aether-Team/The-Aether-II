@@ -10,8 +10,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class ArkeniumCrossbowItem extends TieredCrossbowItem {
-    public ArkeniumCrossbowItem() {
-        super(AetherIIItemTiers.ARKENIUM, new Item.Properties().attributes(AetherIIDamageStats.merge(ArkeniumCrossbowItem.createAttributes(), AetherIIDamageStats.ARKENIUM_CROSSBOW)));
+    public ArkeniumCrossbowItem(Properties properties) {
+        super(AetherIIItemTiers.ARKENIUM, properties.attributes(AetherIIDamageStats.merge(ArkeniumCrossbowItem.createAttributes(), AetherIIDamageStats.ARKENIUM_CROSSBOW)));
     }
 
     private static ItemAttributeModifiers createAttributes() {

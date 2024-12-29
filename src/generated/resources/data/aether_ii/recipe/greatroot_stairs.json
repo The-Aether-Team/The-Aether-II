@@ -3,9 +3,7 @@
   "category": "building",
   "group": "wooden_stairs",
   "key": {
-    "#": {
-      "item": "aether_ii:greatroot_planks"
-    }
+    "#": "aether_ii:greatroot_planks"
   },
   "pattern": [
     "#  ",

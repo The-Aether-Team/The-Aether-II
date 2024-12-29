@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 8,
   "group": "repair_gravitite",
-  "ingredient": {
-    "item": "aether_ii:gravitite_axe"
-  },
+  "ingredient": "aether_ii:gravitite_axe",
   "processing_time": 200,
   "result": {
     "count": 1,

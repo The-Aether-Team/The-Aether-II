@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "key": {
-    "#": {
-      "item": "aether_ii:holystone"
-    }
+    "#": "aether_ii:holystone"
   },
   "pattern": [
     "##"

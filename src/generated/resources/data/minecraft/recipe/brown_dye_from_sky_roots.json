@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "brown_dye",
   "ingredients": [
-    {
-      "item": "aether_ii:sky_roots"
-    }
+    "aether_ii:sky_roots"
   ],
   "result": {
     "count": 1,

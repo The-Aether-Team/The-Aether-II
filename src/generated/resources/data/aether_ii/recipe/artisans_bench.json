@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "tag": "aether_ii:plates/arkenium"
-    },
-    "H": {
-      "item": "aether_ii:holystone"
-    },
-    "P": {
-      "tag": "aether_ii:planks_crafting"
-    }
+    "A": "#aether_ii:plates/arkenium",
+    "H": "aether_ii:holystone",
+    "P": "#aether_ii:planks_crafting"
   },
   "pattern": [
     "AAA",

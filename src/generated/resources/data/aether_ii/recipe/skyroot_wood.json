@@ -3,9 +3,7 @@
   "category": "building",
   "group": "bark",
   "key": {
-    "#": {
-      "item": "aether_ii:skyroot_log"
-    }
+    "#": "aether_ii:skyroot_log"
   },
   "pattern": [
     "##",

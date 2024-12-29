@@ -8,8 +8,8 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 
 public class ZaniteTrowelItem extends HoeItem implements ZaniteTool {
-    public ZaniteTrowelItem() {
-        super(AetherIIItemTiers.ZANITE, -2.0F, -1.0F, new Properties());
+    public ZaniteTrowelItem(Properties properties) {
+        super(AetherIIItemTiers.ZANITE, -2.0F, -1.0F, properties);
     }
 
     @Override

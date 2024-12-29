@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/carpet",
-  "textures": {
-    "wool": "aether_ii:block/construction/pink_cloudwool"
-  }
-}

@@ -4,7 +4,7 @@ import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import net.minecraft.world.item.PickaxeItem;
 
 public class ArkeniumPickaxeItem extends PickaxeItem {
-    public ArkeniumPickaxeItem() {
-        super(AetherIIItemTiers.ARKENIUM, 1, -2.8F, new Properties());
+    public ArkeniumPickaxeItem(Properties properties) {
+        super(AetherIIItemTiers.ARKENIUM, 1, -2.8F, properties);
     }
 }

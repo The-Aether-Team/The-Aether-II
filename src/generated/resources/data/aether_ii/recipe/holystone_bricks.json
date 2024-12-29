@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "aether_ii:holystone"
-    }
+    "S": "aether_ii:holystone"
   },
   "pattern": [
     "SS",

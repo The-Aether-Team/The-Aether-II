@@ -1,0 +1,13 @@
+{
+  "type": "aether_ii:altar_enchanting",
+  "category": "misc",
+  "experience": 0.0,
+  "fuel_count": 4,
+  "group": "arkenium",
+  "ingredient": "aether_ii:arkenium_ore",
+  "processing_time": 200,
+  "result": {
+    "count": 1,
+    "id": "aether_ii:arkenium_plates"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "aether_ii:block/template_artisans_bench",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bench": "aether_ii:block/utility/artisans_bench",
-    "particle": "aether_ii:block/construction/holystone_bricks"
-  }
-}

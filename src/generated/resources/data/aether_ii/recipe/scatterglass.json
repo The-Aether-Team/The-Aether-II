@@ -3,9 +3,7 @@
   "category": "blocks",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "aether_ii:crude_scatterglass"
-  },
+  "ingredient": "aether_ii:crude_scatterglass",
   "result": {
     "count": 1,
     "id": "aether_ii:scatterglass"

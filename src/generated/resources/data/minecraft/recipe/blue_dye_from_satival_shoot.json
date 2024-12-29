@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "blue_dye",
   "ingredients": [
-    {
-      "item": "aether_ii:satival_shoot"
-    }
+    "aether_ii:satival_shoot"
   ],
   "result": {
     "count": 1,

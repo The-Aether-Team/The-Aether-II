@@ -8,8 +8,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public class HolystoneShortswordItem extends TieredShortswordItem implements HolystoneWeapon {
-    public HolystoneShortswordItem() {
-        super(new Properties().attributes(AetherIIDamageStats.merge(TieredShortswordItem.createAttributes(AetherIIItemTiers.HOLYSTONE, 3, -2.4F), AetherIIDamageStats.HOLYSTONE_SHORTSWORD)));
+    public HolystoneShortswordItem(Properties properties) {
+        super(properties.attributes(AetherIIDamageStats.merge(TieredShortswordItem.createAttributes(AetherIIItemTiers.HOLYSTONE, 3, -2.4F), AetherIIDamageStats.HOLYSTONE_SHORTSWORD)));
     }
 
     @Override

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "aether_ii:undershale"
-    }
+    "S": "aether_ii:undershale"
   },
   "pattern": [
     "SS",

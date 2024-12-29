@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "aether_ii:brettl_grass"
-    }
+    "#": "aether_ii:brettl_grass"
   },
   "pattern": [
     "  #",

@@ -1,9 +1,7 @@
 {
   "type": "aether_ii:irradiation_cleansing",
   "group": "irradiated_leaves",
-  "ingredient": {
-    "item": "aether_ii:irradiated_greatoak_leaves"
-  },
+  "ingredient": "aether_ii:irradiated_greatoak_leaves",
   "results": [
     {
       "data": {

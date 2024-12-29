@@ -3,58 +3,24 @@
   "category": "building",
   "group": "carpet",
   "ingredients": [
-    {
-      "item": "minecraft:brown_dye"
-    },
+    "minecraft:brown_dye",
     [
-      {
-        "item": "aether_ii:black_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:blue_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:cyan_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:gray_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:green_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:light_blue_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:light_gray_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:lime_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:magenta_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:orange_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:pink_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:purple_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:red_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:yellow_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:white_cloudwool_carpet"
-      },
-      {
-        "item": "aether_ii:cloudwool_carpet"
-      }
+      "aether_ii:black_cloudwool_carpet",
+      "aether_ii:blue_cloudwool_carpet",
+      "aether_ii:cyan_cloudwool_carpet",
+      "aether_ii:gray_cloudwool_carpet",
+      "aether_ii:green_cloudwool_carpet",
+      "aether_ii:light_blue_cloudwool_carpet",
+      "aether_ii:light_gray_cloudwool_carpet",
+      "aether_ii:lime_cloudwool_carpet",
+      "aether_ii:magenta_cloudwool_carpet",
+      "aether_ii:orange_cloudwool_carpet",
+      "aether_ii:pink_cloudwool_carpet",
+      "aether_ii:purple_cloudwool_carpet",
+      "aether_ii:red_cloudwool_carpet",
+      "aether_ii:yellow_cloudwool_carpet",
+      "aether_ii:white_cloudwool_carpet",
+      "aether_ii:cloudwool_carpet"
     ]
   ],
   "result": {

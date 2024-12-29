@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "aether_ii:agiosite"
-    }
+    "#": "aether_ii:agiosite"
   },
   "pattern": [
     "#  ",

@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 5,
   "group": "repair_arkenium",
-  "ingredient": {
-    "item": "aether_ii:arkenium_hammer"
-  },
+  "ingredient": "aether_ii:arkenium_hammer",
   "processing_time": 200,
   "result": {
     "count": 1,

@@ -1,6 +1,0 @@
-{
-  "parent": "aether_ii:item/gravitite_crossbow",
-  "textures": {
-    "layer0": "aether_ii:item/weapons/gravitite_crossbow_pulling_2"
-  }
-}

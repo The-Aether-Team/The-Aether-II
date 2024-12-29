@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "P": {
-      "tag": "aether_ii:planks_crafting"
-    },
-    "W": {
-      "tag": "minecraft:wool"
-    }
+    "P": "#aether_ii:planks_crafting",
+    "W": "#minecraft:wool"
   },
   "pattern": [
     "WWW",

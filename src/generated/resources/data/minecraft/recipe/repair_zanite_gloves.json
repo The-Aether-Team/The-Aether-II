@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 3,
   "group": "repair_zanite_armor",
-  "ingredient": {
-    "item": "aether_ii:zanite_gloves"
-  },
+  "ingredient": "aether_ii:zanite_gloves",
   "processing_time": 200,
   "result": {
     "count": 1,

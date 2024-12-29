@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "aether_ii:stone_crafting"
-    }
+    "#": "#aether_ii:stone_crafting"
   },
   "pattern": [
     "###",

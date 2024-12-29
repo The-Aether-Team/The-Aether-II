@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "aether_ii:holystone"
-    }
+    "#": "aether_ii:holystone"
   },
   "pattern": [
     "###",

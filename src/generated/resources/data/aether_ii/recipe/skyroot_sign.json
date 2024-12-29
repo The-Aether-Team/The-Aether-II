@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "wooden_sign",
   "key": {
-    "/": {
-      "tag": "c:rods/wooden"
-    },
-    "P": {
-      "item": "aether_ii:skyroot_planks"
-    }
+    "/": "#c:rods/wooden",
+    "P": "aether_ii:skyroot_planks"
   },
   "pattern": [
     "PPP",

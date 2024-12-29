@@ -9,8 +9,8 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 
 public class ZaniteShortswordItem extends TieredShortswordItem implements ZaniteWeapon {
-    public ZaniteShortswordItem() {
-        super(new Properties().attributes(AetherIIDamageStats.merge(TieredShortswordItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F), AetherIIDamageStats.ZANITE_SHORTSWORD)));
+    public ZaniteShortswordItem(Properties properties) {
+        super(properties.attributes(AetherIIDamageStats.merge(TieredShortswordItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F), AetherIIDamageStats.ZANITE_SHORTSWORD)));
     }
 
     @Override

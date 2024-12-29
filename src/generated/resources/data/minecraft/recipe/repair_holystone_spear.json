@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 2,
   "group": "repair_holystone",
-  "ingredient": {
-    "item": "aether_ii:holystone_spear"
-  },
+  "ingredient": "aether_ii:holystone_spear",
   "processing_time": 200,
   "result": {
     "count": 1,

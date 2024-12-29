@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 2,
   "group": "repair_burrukai_pelt_armor",
-  "ingredient": {
-    "item": "aether_ii:burrukai_pelt_chestplate"
-  },
+  "ingredient": "aether_ii:burrukai_pelt_chestplate",
   "processing_time": 200,
   "result": {
     "count": 1,

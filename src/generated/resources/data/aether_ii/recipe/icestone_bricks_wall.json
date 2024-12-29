@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "aether_ii:icestone_bricks"
-    }
+    "#": "aether_ii:icestone_bricks"
   },
   "pattern": [
     "###",

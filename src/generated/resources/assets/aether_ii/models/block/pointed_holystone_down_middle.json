@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/pointed_dripstone",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "cross": "aether_ii:block/natural/pointed_holystone_down_middle"
-  }
-}

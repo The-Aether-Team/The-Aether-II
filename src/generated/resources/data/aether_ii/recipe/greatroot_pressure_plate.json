@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wooden_pressure_plate",
   "key": {
-    "#": {
-      "item": "aether_ii:greatroot_planks"
-    }
+    "#": "aether_ii:greatroot_planks"
   },
   "pattern": [
     "##"
