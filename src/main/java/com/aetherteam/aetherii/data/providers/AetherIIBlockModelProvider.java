@@ -1,6 +1,9 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.blockstates.*;
@@ -14,6 +17,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.stream.Stream;
 
@@ -68,6 +73,29 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(pane).with(Variant.variant().with(VariantProperties.MODEL, post)).with(Condition.condition().term(BlockStateProperties.NORTH, true), Variant.variant().with(VariantProperties.MODEL, side)).with(Condition.condition().term(BlockStateProperties.EAST, true), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)).with(Condition.condition().term(BlockStateProperties.SOUTH, true), Variant.variant().with(VariantProperties.MODEL, sideAlt)).with(Condition.condition().term(BlockStateProperties.WEST, true), Variant.variant().with(VariantProperties.MODEL, sideAlt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)).with(Condition.condition().term(BlockStateProperties.NORTH, false), Variant.variant().with(VariantProperties.MODEL, noSide)).with(Condition.condition().term(BlockStateProperties.EAST, false), Variant.variant().with(VariantProperties.MODEL, noSideAlt)).with(Condition.condition().term(BlockStateProperties.SOUTH, false), Variant.variant().with(VariantProperties.MODEL, noSideAlt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)).with(Condition.condition().term(BlockStateProperties.WEST, false), Variant.variant().with(VariantProperties.MODEL, noSide).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)));
     }
 
+    public void createPointedStone(BlockModelGenerators blockModels, Block block) {
+        PropertyDispatch.C2<Direction, DripstoneThickness> c2 = PropertyDispatch.properties(
+                BlockStateProperties.VERTICAL_DIRECTION, BlockStateProperties.DRIPSTONE_THICKNESS
+        );
+
+        for (DripstoneThickness thicknessUp : DripstoneThickness.values()) {
+            c2.select(Direction.UP, thicknessUp, this.createPointedStoneVariant(blockModels, block, Direction.UP, thicknessUp));
+        }
+
+        for (DripstoneThickness thicknessDown : DripstoneThickness.values()) {
+            c2.select(Direction.DOWN, thicknessDown, this.createPointedStoneVariant(blockModels, block, Direction.DOWN, thicknessDown));
+        }
+
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(c2));
+    }
+
+    public Variant createPointedStoneVariant(BlockModelGenerators blockModels, Block block, Direction direction, DripstoneThickness thickness) {
+        String name = "_" + direction.getSerializedName() + "_" + thickness.getSerializedName();
+        TextureMapping texturemapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, name));
+        return Variant.variant()
+                .with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, name, texturemapping, blockModels.modelOutput));
+    }
+
     public void createArcticSnowBlocks(BlockModelGenerators blockModels) {
         TextureMapping texturemapping = TextureMapping.cube(AetherIIBlocks.ARCTIC_SNOW.get());
         ResourceLocation resourcelocation = ModelTemplates.CUBE_ALL.create(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), texturemapping, blockModels.modelOutput);
@@ -107,6 +135,54 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         })));
         blockModels.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block, "_height2"));
     }
+
+    public void createCrossCropBlock(BlockModelGenerators blockModels, Block block, Property<Integer> property, int... list) {
+        if (property.getPossibleValues().size() != list.length) {
+            throw new IllegalArgumentException();
+        } else {
+            Int2ObjectMap<ResourceLocation> map = new Int2ObjectOpenHashMap<>();
+            PropertyDispatch propertyDispatch = PropertyDispatch.property(property)
+                    .generate(
+                            age -> {
+                                int i = list[age];
+                                ResourceLocation location = map.computeIfAbsent(
+                                        i, j -> blockModels.createSuffixedVariant(block, "_stage" + i, ModelTemplates.CROSS, TextureMapping::cross)
+                                );
+                                return Variant.variant().with(VariantProperties.MODEL, location);
+                            }
+                    );
+            blockModels.registerSimpleFlatItemModel(block.asItem());
+            blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(propertyDispatch));
+        }
+    }
+
+    public void createArtisansBench(BlockModelGenerators blockModels) {
+        blockModels.blockStateOutput
+                .accept(
+                        MultiVariantGenerator.multiVariant(
+                                        AetherIIBlocks.ARTISANS_BENCH.get(), Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.decorateItemModelLocation("template_artisans_bench"))
+                                )
+                                .with(BlockModelGenerators.createHorizontalFacingDispatch())
+
+                );
+    }
+
+    /*
+    public void createArkeniumForgeBench(BlockModelGenerators blockModels) {
+        ResourceLocation location = ModelLocationUtils.decorateItemModelLocation("template_artisans_bench");
+        blockModels.blockStateOutput
+                .accept(
+                        MultiVariantGenerator.multiVariant(
+                                        AetherIIBlocks.ARKENIUM_FORGE.get(), Variant.variant().with(VariantProperties.MODEL, location)
+                                )
+                                .with(BlockModelGenerators.createBooleanModelDispatch(ArkeniumForgeBlock.CHARGED, location))
+                                .with(BlockModelGenerators.createHorizontalFacingDispatch())
+
+                );
+    }
+
+     */
+
 
     @Override
     public final Stream<? extends Holder<Item>> getKnownItems() {
