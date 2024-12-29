@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.SnowyDirtBlock;
@@ -29,7 +28,6 @@ public class TundraSnowAndFreezeFeature extends Feature<NoneFeatureConfiguration
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         WorldGenLevel level = context.level();
-        RandomSource random = context.random();
 
         HolderGetter<DensityFunction> function = context.level().holderLookup(Registries.DENSITY_FUNCTION);
         DensityFunction noise =  AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.SNOW_NOISE);
