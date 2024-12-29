@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.stream.Stream;
@@ -57,6 +58,46 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         Item item = pane.asItem();
         blockModels.registerSimpleItemModel(item, blockModels.createFlatItemModelWithBlockTexture(item, glass));
         blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(pane).with(Variant.variant().with(VariantProperties.MODEL, post)).with(Condition.condition().term(BlockStateProperties.NORTH, true), Variant.variant().with(VariantProperties.MODEL, side)).with(Condition.condition().term(BlockStateProperties.EAST, true), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)).with(Condition.condition().term(BlockStateProperties.SOUTH, true), Variant.variant().with(VariantProperties.MODEL, sideAlt)).with(Condition.condition().term(BlockStateProperties.WEST, true), Variant.variant().with(VariantProperties.MODEL, sideAlt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)).with(Condition.condition().term(BlockStateProperties.NORTH, false), Variant.variant().with(VariantProperties.MODEL, noSide)).with(Condition.condition().term(BlockStateProperties.EAST, false), Variant.variant().with(VariantProperties.MODEL, noSideAlt)).with(Condition.condition().term(BlockStateProperties.SOUTH, false), Variant.variant().with(VariantProperties.MODEL, noSideAlt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)).with(Condition.condition().term(BlockStateProperties.WEST, false), Variant.variant().with(VariantProperties.MODEL, noSide).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)));
+    }
+
+    public void createArcticSnowBlocks(BlockModelGenerators blockModels) {
+        TextureMapping texturemapping = TextureMapping.cube(AetherIIBlocks.ARCTIC_SNOW.get());
+        ResourceLocation resourcelocation = ModelTemplates.CUBE_ALL.create(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), texturemapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.ARCTIC_SNOW.get()).with(PropertyDispatch.property(BlockStateProperties.LAYERS).generate((i) -> {
+            Variant variant = Variant.variant();
+            VariantProperty<ResourceLocation> property = VariantProperties.MODEL;
+            ResourceLocation location;
+            if (i < 8) {
+                Block block = AetherIIBlocks.ARCTIC_SNOW.get();
+                int layers = i;
+                location = ModelLocationUtils.getModelLocation(block, "_height" + layers * 2);
+            } else {
+                location = resourcelocation;
+            }
+
+            return variant.with(property, location);
+        })));
+        blockModels.registerSimpleItemModel(AetherIIBlocks.ARCTIC_SNOW.get(), ModelLocationUtils.getModelLocation(AetherIIBlocks.ARCTIC_SNOW.get(), "_height2"));
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), resourcelocation));
+    }
+
+    public void createLeafPile(BlockModelGenerators blockModels, Block block, Block baseBlock) {
+        TextureMapping texturemapping = TextureMapping.cube(block);
+        ResourceLocation resourcelocation = ModelTemplates.CUBE_ALL.create(baseBlock, texturemapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(BlockStateProperties.LAYERS).generate((i) -> {
+            Variant variant = Variant.variant();
+            VariantProperty<ResourceLocation> property = VariantProperties.MODEL;
+            ResourceLocation location;
+            if (i < 16) {
+                int layers = i;
+                location = ModelLocationUtils.getModelLocation(block, "_height" + layers * 2);
+            } else {
+                location = resourcelocation;
+            }
+
+            return variant.with(property, location);
+        })));
+        blockModels.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block, "_height2"));
     }
 
     @Override
