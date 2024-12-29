@@ -16,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 
@@ -192,21 +191,6 @@ public class AetherIIBlockModelProvider extends ModelProvider {
                                 .with(BlockModelGenerators.createHorizontalFacingDispatch())
                 );
     }
-
-    /*
-    public void createArkeniumForgeBench(BlockModelGenerators blockModels) {
-        ResourceLocation location = ModelLocationUtils.decorateItemModelLocation("template_artisans_bench");
-        blockModels.blockStateOutput
-                .accept(
-                        MultiVariantGenerator.multiVariant(
-                                        AetherIIBlocks.ARKENIUM_FORGE.get(), Variant.variant().with(VariantProperties.MODEL, location)
-                                )
-                                .with(BlockModelGenerators.createBooleanModelDispatch(ArkeniumForgeBlock.CHARGED, location))
-                                .with(BlockModelGenerators.createHorizontalFacingDispatch())
-
-                );
-    }
-     */
 
     @Override
     public final Stream<? extends Holder<Item>> getKnownItems() {
