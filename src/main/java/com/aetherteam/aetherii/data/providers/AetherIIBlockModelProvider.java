@@ -187,10 +187,9 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         blockModels.blockStateOutput
                 .accept(
                         MultiVariantGenerator.multiVariant(
-                                        AetherIIBlocks.ARTISANS_BENCH.get(), Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.decorateItemModelLocation("template_artisans_bench"))
+                                        AetherIIBlocks.ARTISANS_BENCH.get(), Variant.variant().with(VariantProperties.MODEL, AetherIIModelTemplates.ARTISANS_BENCH.getDefaultModelLocation(AetherIIBlocks.ARTISANS_BENCH.get()))
                                 )
                                 .with(BlockModelGenerators.createHorizontalFacingDispatch())
-
                 );
     }
 
