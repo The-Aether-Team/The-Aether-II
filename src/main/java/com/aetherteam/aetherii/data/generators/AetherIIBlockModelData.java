@@ -14,6 +14,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Blocks;
 
 public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
     public AetherIIBlockModelData(PackOutput packOutput) {
@@ -108,22 +109,15 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         blockModels.createTrivialCube(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 //
 //        // Logs
-//        this.log(AetherIIBlocks.SKYROOT_LOG.get());
-//        this.log(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
-//        this.log(AetherIIBlocks.GREATROOT_LOG.get());
-//        this.log(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
-//        this.log(AetherIIBlocks.WISPROOT_LOG.get());
-//        this.log(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
+        blockModels.woodProvider(AetherIIBlocks.SKYROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.SKYROOT_LOG.get()).wood(AetherIIBlocks.SKYROOT_WOOD.get());
+        blockModels.woodProvider(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
+        blockModels.woodProvider(AetherIIBlocks.GREATROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.GREATROOT_LOG.get()).wood(AetherIIBlocks.GREATROOT_WOOD.get());
+        blockModels.woodProvider(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get());
+        blockModels.woodProvider(AetherIIBlocks.WISPROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.WISPROOT_LOG.get()).wood(AetherIIBlocks.WISPROOT_WOOD.get());
+        blockModels.woodProvider(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get()).wood(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
 //        this.mossyWisprootLog(AetherIIBlocks.MOSSY_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_LOG.get());
 //        this.logDifferentTop(AetherIIBlocks.AMBEROOT_LOG.get(), AetherIIBlocks.SKYROOT_LOG.get());
-//        this.wood(AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIBlocks.SKYROOT_LOG.get());
-//        this.wood(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
-//        this.wood(AetherIIBlocks.GREATROOT_WOOD.get(), AetherIIBlocks.GREATROOT_LOG.get());
-//        this.wood(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get(), AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
-//        this.wood(AetherIIBlocks.WISPROOT_WOOD.get(), AetherIIBlocks.WISPROOT_LOG.get());
-//        this.wood(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
-//        this.wood(AetherIIBlocks.AMBEROOT_WOOD.get(), AetherIIBlocks.AMBEROOT_LOG.get());
-//
+
 //        // Leaf Pile
 //        this.leafPile(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), AetherIIBlocks.SKYROOT_LEAVES.get());
 //        this.leafPile(AetherIIBlocks.SKYPLANE_LEAF_PILE.get(), AetherIIBlocks.SKYPLANE_LEAVES.get());
