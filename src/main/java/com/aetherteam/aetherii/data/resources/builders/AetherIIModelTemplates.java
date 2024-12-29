@@ -17,6 +17,9 @@ public class AetherIIModelTemplates {
     }
 
     public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.ALL);
+    public static final ModelTemplate PLURACIAN = create("template_pluracian", TextureSlot.ALL);
+    public static final ModelTemplate POTTED_LILICHIME = create("template_potted_lilichime", TextureSlot.PLANT, TextureSlot.TOP, TextureSlot.SIDE);
+    public static final ModelTemplate POTTED_PLURACIAN = create("template_potted_pluracian", TextureSlot.PLANT, TextureSlot.TOP, TextureSlot.SIDE);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_1 = create("template_bryalinn_moss_flowers_1", "_1", TextureSlot.FLOWERBED, TextureSlot.STEM);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_2 = create("template_bryalinn_moss_flowers_2", "_2", TextureSlot.FLOWERBED, TextureSlot.STEM);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_3 = create("template_bryalinn_moss_flowers_3", "_3", TextureSlot.FLOWERBED, TextureSlot.STEM);

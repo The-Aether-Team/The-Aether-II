@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.data.resources.builders.AetherIIModelTemplates;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -15,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 
@@ -37,10 +39,10 @@ public class AetherIIBlockModelProvider extends ModelProvider {
     }
 
     public void createCustomColumn(BlockModelGenerators blockModels, Block side, Block top) {
-        TextureMapping texturemapping = TextureMapping.column(
+        TextureMapping mapping = TextureMapping.column(
                 TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top)
         );
-        ResourceLocation resourcelocation = ModelTemplates.CUBE_COLUMN.create(side, texturemapping, blockModels.modelOutput);
+        ResourceLocation resourcelocation = ModelTemplates.CUBE_COLUMN.create(side, mapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(side, resourcelocation));
     }
 
@@ -51,11 +53,11 @@ public class AetherIIBlockModelProvider extends ModelProvider {
     }
 
     public void createAetherFarmland(BlockModelGenerators blockModels) {
-        TextureMapping texturemapping = new TextureMapping().put(TextureSlot.DIRT, TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_DIRT.get())).put(TextureSlot.TOP, TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_FARMLAND.get()));
-        TextureMapping texturemapping1 = new TextureMapping().put(TextureSlot.DIRT, TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_DIRT.get())).put(TextureSlot.TOP, TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_FARMLAND.get(), "_moist"));
-        ResourceLocation resourcelocation = ModelTemplates.FARMLAND.create(AetherIIBlocks.AETHER_FARMLAND.get(), texturemapping, blockModels.modelOutput);
-        ResourceLocation resourcelocation1 = ModelTemplates.FARMLAND.create(TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_FARMLAND.get(), "_moist"), texturemapping1, blockModels.modelOutput);
-        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.AETHER_FARMLAND.get()).with(BlockModelGenerators.createEmptyOrFullDispatch(BlockStateProperties.MOISTURE, 7, resourcelocation1, resourcelocation)));
+        TextureMapping mapping = new TextureMapping().put(TextureSlot.DIRT, TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_DIRT.get())).put(TextureSlot.TOP, TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_FARMLAND.get()));
+        TextureMapping mappingMoist = new TextureMapping().put(TextureSlot.DIRT, TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_DIRT.get())).put(TextureSlot.TOP, TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_FARMLAND.get(), "_moist"));
+        ResourceLocation location = ModelTemplates.FARMLAND.create(AetherIIBlocks.AETHER_FARMLAND.get(), mapping, blockModels.modelOutput);
+        ResourceLocation locationMoist = ModelTemplates.FARMLAND.create(TextureMapping.getBlockTexture(AetherIIBlocks.AETHER_FARMLAND.get(), "_moist"), mappingMoist, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.AETHER_FARMLAND.get()).with(BlockModelGenerators.createEmptyOrFullDispatch(BlockStateProperties.MOISTURE, 7, locationMoist, location)));
     }
 
     public void createGlassBlocks(BlockModelGenerators blockModels, Block glass, Block pane) {
@@ -89,14 +91,14 @@ public class AetherIIBlockModelProvider extends ModelProvider {
 
     public Variant createPointedStoneVariant(BlockModelGenerators blockModels, Block block, Direction direction, DripstoneThickness thickness) {
         String name = "_" + direction.getSerializedName() + "_" + thickness.getSerializedName();
-        TextureMapping texturemapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, name));
+        TextureMapping mapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, name));
         return Variant.variant()
-                .with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, name, texturemapping, blockModels.modelOutput));
+                .with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, name, mapping, blockModels.modelOutput));
     }
 
     public void createArcticSnowBlocks(BlockModelGenerators blockModels) {
-        TextureMapping texturemapping = TextureMapping.cube(AetherIIBlocks.ARCTIC_SNOW.get());
-        ResourceLocation resourcelocation = ModelTemplates.CUBE_ALL.create(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), texturemapping, blockModels.modelOutput);
+        TextureMapping mapping = TextureMapping.cube(AetherIIBlocks.ARCTIC_SNOW.get());
+        ResourceLocation resourcelocation = ModelTemplates.CUBE_ALL.create(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), mapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.ARCTIC_SNOW.get()).with(PropertyDispatch.property(BlockStateProperties.LAYERS).generate((i) -> {
             Variant variant = Variant.variant();
             VariantProperty<ResourceLocation> property = VariantProperties.MODEL;
@@ -116,8 +118,8 @@ public class AetherIIBlockModelProvider extends ModelProvider {
     }
 
     public void createLeafPile(BlockModelGenerators blockModels, Block block, Block baseBlock) {
-        TextureMapping texturemapping = TextureMapping.cube(block);
-        ResourceLocation resourcelocation = ModelTemplates.CUBE_ALL.create(baseBlock, texturemapping, blockModels.modelOutput);
+        TextureMapping mapping = TextureMapping.cube(block);
+        ResourceLocation resourcelocation = ModelTemplates.CUBE_ALL.create(baseBlock, mapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(BlockStateProperties.LAYERS).generate((i) -> {
             Variant variant = Variant.variant();
             VariantProperty<ResourceLocation> property = VariantProperties.MODEL;
@@ -136,11 +138,6 @@ public class AetherIIBlockModelProvider extends ModelProvider {
 
     public void createCustomFlowerBed(BlockModelGenerators blockModels, Block block, ResourceLocation flowerbed1, ResourceLocation flowerbed2, ResourceLocation flowerbed3, ResourceLocation flowerbed4) {
         blockModels.registerSimpleFlatItemModel(block.asItem());
-       // ResourceLocation flowerbed_1 = TexturedModel.FLOWERBED_1.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput);
-       // ResourceLocation flowerbed_2 = TexturedModel.FLOWERBED_2.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput);
-       // ResourceLocation flowerbed_3 = TexturedModel.FLOWERBED_3.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput);
-       // ResourceLocation flowerbed_4 = TexturedModel.FLOWERBED_4.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput);
-
         blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
                 .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), Variant.variant().with(VariantProperties.MODEL, flowerbed1))
                 .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), Variant.variant().with(VariantProperties.MODEL, flowerbed1).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
@@ -176,6 +173,14 @@ public class AetherIIBlockModelProvider extends ModelProvider {
                 );
         blockModels.registerSimpleFlatItemModel(AetherIIBlocks.VALKYRIE_SPROUT.get().asItem());
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.VALKYRIE_SPROUT.get()).with(propertyDispatch));
+    }
+
+    public void createAmbrosiumTorch(BlockModelGenerators blockModels) {
+        TextureMapping mapping = TextureMapping.torch(AetherIIBlocks.AMBROSIUM_TORCH.get());
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.AMBROSIUM_TORCH.get(), AetherIIModelTemplates.TALL_TORCH.create(AetherIIBlocks.AMBROSIUM_TORCH.get(), mapping, blockModels.modelOutput)));
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get(), Variant.variant().with(VariantProperties.MODEL, AetherIIModelTemplates.TALL_WALL_TORCH.create(AetherIIBlocks.AMBROSIUM_WALL_TORCH.get(), mapping, blockModels.modelOutput)))
+                .with(BlockModelGenerators.createTorchHorizontalDispatch()));
+        blockModels.registerSimpleFlatItemModel(AetherIIBlocks.AMBROSIUM_TORCH.get());
     }
 
     public void createArtisansBench(BlockModelGenerators blockModels) {
