@@ -295,8 +295,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.CORROBONITE_ORE.get());
                 output.accept(AetherIIBlocks.CORROBONITE_CLUSTER.get());
                 output.accept(AetherIIBlocks.COLD_AERCLOUD.get());
-                output.accept(AetherIIBlocks.BLUE_AERCLOUD.get());
                 output.accept(AetherIIBlocks.GOLDEN_AERCLOUD.get());
+                output.accept(AetherIIBlocks.BLUE_AERCLOUD.get());
                 output.accept(AetherIIBlocks.GREEN_AERCLOUD.get());
                 output.accept(AetherIIBlocks.PURPLE_AERCLOUD.get());
                 output.accept(AetherIIBlocks.STORM_AERCLOUD.get());
@@ -643,10 +643,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.HIGHFIELDS_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_TAEGORE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_TAEGORE_SPAWN_EGG.get());
-                output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SWET_SPAWN_EGG.get());
                 output.accept(AetherIIItems.SKEPHID_SPAWN_EGG.get());
                 output.accept(AetherIIItems.TEMPEST_SPAWN_EGG.get());
+                output.accept(AetherIIItems.ZEPHYR_SPAWN_EGG.get());
             }).build());
 }
