@@ -2,9 +2,9 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import com.aetherteam.aetherii.data.providers.AetherIIBlockModelProvider;
 import com.aetherteam.aetherii.data.resources.builders.AetherIIBlockFamilies;
+import com.aetherteam.aetherii.data.resources.builders.AetherIITexturedModels;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.blockstates.Variant;
@@ -53,7 +53,11 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         blockModels.createTrivialCube(AetherIIBlocks.QUICKSOIL.get());
         blockModels.createFullAndCarpetBlocks(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
 //        this.mossVines(AetherIIBlocks.BRYALINN_MOSS_VINES.get());
-//        this.bryalinnFlowers(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get());
+        this.createCustomFlowerBed(blockModels, AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(),
+                AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_1.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput),
+                AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_2.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput),
+                AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_3.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput),
+                AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_4.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput));
         this.createCutoutCube(blockModels, AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
@@ -72,12 +76,21 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         blockModels.createAmethystCluster(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
         blockModels.createFullAndCarpetBlocks(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), AetherIIBlocks.SHAYELINN_MOSS_CARPET.get());
 //        this.mossVines(AetherIIBlocks.SHAYELINN_MOSS_VINES.get());
+        this.createCustomFlowerBed(blockModels, AetherIIBlocks.HOLPUPEA.get(),
+                AetherIITexturedModels.HOLPUPEA_1.create(AetherIIBlocks.HOLPUPEA.get(), blockModels.modelOutput),
+                AetherIITexturedModels.HOLPUPEA_2.create(AetherIIBlocks.HOLPUPEA.get(), blockModels.modelOutput),
+                AetherIITexturedModels.HOLPUPEA_3.create(AetherIIBlocks.HOLPUPEA.get(), blockModels.modelOutput),
+                AetherIITexturedModels.HOLPUPEA_4.create(AetherIIBlocks.HOLPUPEA.get(), blockModels.modelOutput));
 
         // Irradiated
         blockModels.createTrivialCube(AetherIIBlocks.IRRADIATED_DUST_BLOCK.get());
         blockModels.createFullAndCarpetBlocks(AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), AetherIIBlocks.AMBRELINN_MOSS_CARPET.get());
 //        this.ambrelinnMossVines(AetherIIBlocks.AMBRELINN_MOSS_VINES.get());
-//        this.tarahespFlowers(AetherIIBlocks.TARAHESP_FLOWERS.get());
+        this.createCustomFlowerBed(blockModels, AetherIIBlocks.TARAHESP_FLOWERS.get(),
+                AetherIITexturedModels.TARAHESP_FLOWERS_1.create(AetherIIBlocks.TARAHESP_FLOWERS.get(), blockModels.modelOutput),
+                AetherIITexturedModels.TARAHESP_FLOWERS_2.create(AetherIIBlocks.TARAHESP_FLOWERS.get(), blockModels.modelOutput),
+                AetherIITexturedModels.TARAHESP_FLOWERS_3.create(AetherIIBlocks.TARAHESP_FLOWERS.get(), blockModels.modelOutput),
+                AetherIITexturedModels.TARAHESP_FLOWERS_4.create(AetherIIBlocks.TARAHESP_FLOWERS.get(), blockModels.modelOutput));
 
         // Ores
         blockModels.createTrivialCube(AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get());
@@ -183,7 +196,6 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
 //        this.lilichime(AetherIIBlocks.LILICHIME.get());
 //        this.pluracian(AetherIIBlocks.PLURACIAN.get());
 //        this.asymmetricalCrossEven(AetherIIBlocks.SATIVAL_SHOOT.get());
-//        this.holpupea(AetherIIBlocks.HOLPUPEA.get());
 //        this.asymmetricalCrossOdd(AetherIIBlocks.BLADE_POA.get());
         blockModels.createCrossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 //
