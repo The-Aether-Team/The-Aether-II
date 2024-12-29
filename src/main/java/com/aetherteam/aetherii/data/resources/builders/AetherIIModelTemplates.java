@@ -16,7 +16,7 @@ public class AetherIIModelTemplates {
     public AetherIIModelTemplates() {
     }
 
-    public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.create("flower"));
+    public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.ALL);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_1 = create("template_bryalinn_moss_flowers_1", "_1", TextureSlot.FLOWERBED, TextureSlot.STEM);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_2 = create("template_bryalinn_moss_flowers_2", "_2", TextureSlot.FLOWERBED, TextureSlot.STEM);
     public static final ModelTemplate BRYALINN_MOSS_FLOWERS_3 = create("template_bryalinn_moss_flowers_3", "_3", TextureSlot.FLOWERBED, TextureSlot.STEM);
@@ -31,6 +31,9 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TARAHESP_FLOWERS_4 = create("template_tarahesp_flowers_4", "_4", TextureSlot.FLOWERBED, TextureSlot.STEM);
     public static final ModelTemplate TALL_TORCH = create("template_tall_torch", TextureSlot.TORCH);
     public static final ModelTemplate TALL_WALL_TORCH = create("template_tall_torch_wall", TextureSlot.TORCH);
+    public static final ModelTemplate ALTAR = create("template_altar", TextureSlot.ALL);
+    public static final ModelTemplate ARTISANS_BENCH = create("template_artisans_bench", TextureSlot.ALL);
+    public static final ModelTemplate ARKENIUM_FORGE = create("template_arkenium_forge", TextureSlot.ALL);
 
     public static ModelTemplate create(TextureSlot... textureSlot) {
         return new ModelTemplate(Optional.empty(), Optional.empty(), textureSlot);
