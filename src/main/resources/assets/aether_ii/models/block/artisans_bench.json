@@ -1,5 +1,9 @@
 {
   "texture_size": [128, 128],
+  "textures": {
+    "particle": "aether_ii:block/artisans_bench",
+    "bench": "aether_ii:block/artisans_bench"
+  },
   "elements": [
     {
       "name": "base",

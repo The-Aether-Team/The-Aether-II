@@ -187,7 +187,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         blockModels.blockStateOutput
                 .accept(
                         MultiVariantGenerator.multiVariant(
-                                        AetherIIBlocks.ARTISANS_BENCH.get(), Variant.variant().with(VariantProperties.MODEL, AetherIIModelTemplates.ARTISANS_BENCH.getDefaultModelLocation(AetherIIBlocks.ARTISANS_BENCH.get()))
+                                        AetherIIBlocks.ARTISANS_BENCH.get(), Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(AetherIIBlocks.ARTISANS_BENCH.get()))
                                 )
                                 .with(BlockModelGenerators.createHorizontalFacingDispatch())
                 );
@@ -206,9 +206,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
 
                 );
     }
-
      */
-
 
     @Override
     public final Stream<? extends Holder<Item>> getKnownItems() {

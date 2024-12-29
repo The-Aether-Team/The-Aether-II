@@ -35,7 +35,6 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TALL_TORCH = create("template_tall_torch", TextureSlot.TORCH);
     public static final ModelTemplate TALL_WALL_TORCH = create("template_tall_torch_wall", TextureSlot.TORCH);
     public static final ModelTemplate ALTAR = create("template_altar", TextureSlot.ALL);
-    public static final ModelTemplate ARTISANS_BENCH = create("template_artisans_bench", TextureSlot.ALL);
     public static final ModelTemplate ARKENIUM_FORGE = create("template_arkenium_forge", TextureSlot.ALL);
 
     public static ModelTemplate create(TextureSlot... textureSlot) {
