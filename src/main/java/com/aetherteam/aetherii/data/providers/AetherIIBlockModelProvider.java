@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
+import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -15,10 +15,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
-import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.stream.Stream;
 
@@ -136,24 +134,48 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         blockModels.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block, "_height2"));
     }
 
-    public void createCrossCropBlock(BlockModelGenerators blockModels, Block block, Property<Integer> property, int... list) {
-        if (property.getPossibleValues().size() != list.length) {
-            throw new IllegalArgumentException();
-        } else {
-            Int2ObjectMap<ResourceLocation> map = new Int2ObjectOpenHashMap<>();
-            PropertyDispatch propertyDispatch = PropertyDispatch.property(property)
-                    .generate(
-                            age -> {
-                                int i = list[age];
-                                ResourceLocation location = map.computeIfAbsent(
-                                        i, j -> blockModels.createSuffixedVariant(block, "_stage" + i, ModelTemplates.CROSS, TextureMapping::cross)
-                                );
-                                return Variant.variant().with(VariantProperties.MODEL, location);
-                            }
-                    );
-            blockModels.registerSimpleFlatItemModel(block.asItem());
-            blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(propertyDispatch));
-        }
+    public void createBryalinnMossFlowers(BlockModelGenerators blockModels) {
+        blockModels.registerSimpleFlatItemModel(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.asItem());
+        ResourceLocation location = TexturedModel.FLOWERBED_1.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput);
+        ResourceLocation location1 = TexturedModel.FLOWERBED_2.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput);
+        ResourceLocation location2 = TexturedModel.FLOWERBED_3.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput);
+        ResourceLocation location3 = TexturedModel.FLOWERBED_4.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput);
+
+        blockModels.blockStateOutput.accept(MultiPartGenerator.multiPart(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get())
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), Variant.variant().with(VariantProperties.MODEL, location))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), Variant.variant().with(VariantProperties.MODEL, location).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH), Variant.variant().with(VariantProperties.MODEL, location).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 1, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), Variant.variant().with(VariantProperties.MODEL, location).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), Variant.variant().with(VariantProperties.MODEL, location1))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), Variant.variant().with(VariantProperties.MODEL, location1).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH), Variant.variant().with(VariantProperties.MODEL, location1).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 2, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), Variant.variant().with(VariantProperties.MODEL, location1).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), Variant.variant().with(VariantProperties.MODEL, location2))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), Variant.variant().with(VariantProperties.MODEL, location2).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH), Variant.variant().with(VariantProperties.MODEL, location2).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 3, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), Variant.variant().with(VariantProperties.MODEL, location2).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH), Variant.variant().with(VariantProperties.MODEL, location3))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST), Variant.variant().with(VariantProperties.MODEL, location3).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH), Variant.variant().with(VariantProperties.MODEL, location3).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), Variant.variant().with(VariantProperties.MODEL, location3).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)));
+    }
+
+    public void createValkyrieSprout(BlockModelGenerators blockModels) {
+        Integer[] list = new Integer[]{0, 1, 2};
+
+        Int2ObjectMap<ResourceLocation> map = new Int2ObjectOpenHashMap<>();
+        PropertyDispatch propertyDispatch = PropertyDispatch.property(ValkyrieSproutBlock.AGE)
+                .generate(
+                        age -> {
+                            int i = list[age];
+                            ResourceLocation location = map.computeIfAbsent(
+                                    i, j -> blockModels.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + i, ModelTemplates.CROSS, TextureMapping::cross)
+                            );
+                            return Variant.variant().with(VariantProperties.MODEL, location);
+                        }
+                );
+        blockModels.registerSimpleFlatItemModel(AetherIIBlocks.VALKYRIE_SPROUT.get().asItem());
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.VALKYRIE_SPROUT.get()).with(propertyDispatch));
     }
 
     public void createArtisansBench(BlockModelGenerators blockModels) {

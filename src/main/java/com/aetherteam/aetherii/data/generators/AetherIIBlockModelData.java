@@ -216,7 +216,7 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
 //        this.pottedOrangeTree(AetherIIBlocks.POTTED_ORANGE_TREE.get(), AetherIIBlocks.ORANGE_TREE.get());
 //
         // Surface Vegetation
-        this.createCrossCropBlock(blockModels, AetherIIBlocks.VALKYRIE_SPROUT.get(), ValkyrieSproutBlock.AGE, 0, 1, 2);
+        this.createValkyrieSprout(blockModels);
         blockModels.createGrowingPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get(), AetherIIBlocks.BRETTL_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         // Lake
