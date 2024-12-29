@@ -77,6 +77,11 @@ public class AetherIIBlockFamilies {
             .slab(AetherIIBlocks.UNDERSHALE_SLAB.get())
             .stairs(AetherIIBlocks.UNDERSHALE_STAIRS.get())
             .getFamily();
+    public static final BlockFamily UNDERSHALE_BRICKS = familyBuilder(AetherIIBlocks.UNDERSHALE_BRICKS.get())
+            .wall(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get())
+            .slab(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get())
+            .stairs(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get())
+            .getFamily();
     public static final BlockFamily AGIOSITE = familyBuilder(AetherIIBlocks.AGIOSITE.get())
             .wall(AetherIIBlocks.AGIOSITE_WALL.get())
             .slab(AetherIIBlocks.AGIOSITE_SLAB.get())

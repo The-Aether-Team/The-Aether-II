@@ -33,6 +33,14 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, TEMPLATE_TRANSLUCENT_CUBE.create(block, TextureMapping.cube(block), blockModels.modelOutput)));
     }
 
+    public void createCustomColumn(BlockModelGenerators blockModels, Block side, Block top) {
+        TextureMapping texturemapping = TextureMapping.column(
+                TextureMapping.getBlockTexture(side), TextureMapping.getBlockTexture(top)
+        );
+        ResourceLocation resourcelocation = ModelTemplates.CUBE_COLUMN.create(side, texturemapping, blockModels.modelOutput);
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(side, resourcelocation));
+    }
+
     public void createAetherPortalBlock(BlockModelGenerators blockModels) {
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.AETHER_PORTAL.get()).with(PropertyDispatch.property(BlockStateProperties.HORIZONTAL_AXIS)
                 .select(Direction.Axis.X, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(AetherIIBlocks.AETHER_PORTAL.get(), "_ns")))
