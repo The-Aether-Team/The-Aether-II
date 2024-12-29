@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "aether_ii:water_vial"
-    },
-    {
-      "item": "aether_ii:valkyrie_wings"
-    },
-    {
-      "item": "aether_ii:ambrosium_shard"
-    }
+    "aether_ii:water_vial",
+    "aether_ii:valkyrie_wings",
+    "aether_ii:ambrosium_shard"
   ],
   "result": {
     "count": 1,

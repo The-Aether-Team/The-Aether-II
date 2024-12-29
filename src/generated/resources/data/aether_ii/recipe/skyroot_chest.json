@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "aether_ii:planks_crafting"
-    }
+    "#": "#aether_ii:planks_crafting"
   },
   "pattern": [
     "###",

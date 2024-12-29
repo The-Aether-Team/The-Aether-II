@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 1,
   "group": "repair_skyroot",
-  "ingredient": {
-    "item": "aether_ii:skyroot_hammer"
-  },
+  "ingredient": "aether_ii:skyroot_hammer",
   "processing_time": 200,
   "result": {
     "count": 1,

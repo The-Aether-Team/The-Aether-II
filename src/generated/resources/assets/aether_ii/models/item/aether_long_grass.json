@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "aether_ii:block/natural/aether_long_grass_1",
-    "layer1": "aether_ii:block/natural/aether_long_grass_2",
-    "layer2": "aether_ii:block/natural/aether_long_grass_3"
-  }
-}

@@ -72,7 +72,8 @@ public class AetherII {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public AetherII(ModContainer mod, IEventBus bus, Dist dist) {
-        bus.addListener(AetherIIData::dataSetup);
+        bus.addListener(AetherIIData::serverData);
+        bus.addListener(AetherIIData::clientData);
         bus.addListener(this::commonSetup);
         bus.addListener(this::registerPackets);
 

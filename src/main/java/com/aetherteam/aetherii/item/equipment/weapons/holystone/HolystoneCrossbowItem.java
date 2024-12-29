@@ -8,8 +8,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 
 public class HolystoneCrossbowItem extends TieredCrossbowItem {
-    public HolystoneCrossbowItem() {
-        super(AetherIIItemTiers.HOLYSTONE, new Properties());
+    public HolystoneCrossbowItem(Properties properties) {
+        super(AetherIIItemTiers.HOLYSTONE, properties);
     }
 
     @Override

@@ -8,8 +8,8 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 
 public class ZaniteAxeItem extends AxeItem implements ZaniteTool {
-    public ZaniteAxeItem() {
-        super(AetherIIItemTiers.ZANITE, 6.0F, -3.1F, new Properties());
+    public ZaniteAxeItem(Properties properties) {
+        super(AetherIIItemTiers.ZANITE, 6.0F, -3.1F, properties);
     }
 
     @Override

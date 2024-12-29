@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "minecraft:logs"
-    },
-    "F": {
-      "item": "aether_ii:holystone_furnace"
-    }
+    "#": "#minecraft:logs",
+    "F": "aether_ii:holystone_furnace"
   },
   "pattern": [
     " # ",

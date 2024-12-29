@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "H": {
-      "item": "aether_ii:holystone"
-    },
-    "Z": {
-      "tag": "aether_ii:gems/zanite"
-    }
+    "H": "aether_ii:holystone",
+    "Z": "#aether_ii:gems/zanite"
   },
   "pattern": [
     "HHH",

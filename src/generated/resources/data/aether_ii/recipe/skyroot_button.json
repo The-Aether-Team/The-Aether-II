@@ -3,9 +3,7 @@
   "category": "redstone",
   "group": "wooden_button",
   "ingredients": [
-    {
-      "item": "aether_ii:skyroot_planks"
-    }
+    "aether_ii:skyroot_planks"
   ],
   "result": {
     "count": 1,

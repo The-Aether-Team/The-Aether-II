@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 200,
   "experience": 0.35,
-  "ingredient": {
-    "item": "aether_ii:skyroot_lizard_on_a_stick"
-  },
+  "ingredient": "aether_ii:skyroot_lizard_on_a_stick",
   "result": {
     "count": 1,
     "id": "aether_ii:roasted_skyroot_lizard_on_a_stick"

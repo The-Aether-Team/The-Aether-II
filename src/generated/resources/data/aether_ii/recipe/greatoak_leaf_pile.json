@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "leaf_pile",
   "key": {
-    "#": {
-      "item": "aether_ii:greatoak_leaves"
-    }
+    "#": "aether_ii:greatoak_leaves"
   },
   "pattern": [
     "##"

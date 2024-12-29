@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "aether_ii:arctic_snow_block"
-    }
+    "#": "aether_ii:arctic_snow_block"
   },
   "pattern": [
     "###"

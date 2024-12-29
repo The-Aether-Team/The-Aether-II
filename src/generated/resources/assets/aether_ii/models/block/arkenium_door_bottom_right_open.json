@@ -1,9 +1,0 @@
-{
-  "parent": "aether_ii:block/door_bottom_right_open",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bottom": "aether_ii:block/construction/arkenium_door_bottom",
-    "door": "aether_ii:block/construction/arkenium_door",
-    "top": "aether_ii:block/construction/arkenium_door_top"
-  }
-}

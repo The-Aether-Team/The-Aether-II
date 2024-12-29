@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 100,
   "experience": 0.35,
-  "ingredient": {
-    "item": "aether_ii:raw_taegore_meat"
-  },
+  "ingredient": "aether_ii:raw_taegore_meat",
   "result": {
     "count": 1,
     "id": "aether_ii:taegore_steak"

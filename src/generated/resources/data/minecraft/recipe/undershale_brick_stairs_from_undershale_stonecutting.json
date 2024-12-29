@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:undershale",
+  "result": {
+    "count": 1,
+    "id": "aether_ii:undershale_brick_stairs"
+  }
+}

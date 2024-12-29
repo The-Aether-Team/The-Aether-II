@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bryalinn_moss_vines": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:bryalinn_moss_vines"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:mossy_holystone_with_vine"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bryalinn_moss_vines"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:mossy_holystone_with_vine"
+    ]
+  }
+}

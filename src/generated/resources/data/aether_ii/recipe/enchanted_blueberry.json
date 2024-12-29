@@ -3,9 +3,7 @@
   "category": "food",
   "experience": 0.0,
   "fuel_count": 2,
-  "ingredient": {
-    "item": "aether_ii:blueberry"
-  },
+  "ingredient": "aether_ii:blueberry",
   "processing_time": 200,
   "result": {
     "count": 1,

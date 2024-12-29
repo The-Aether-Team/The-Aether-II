@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 2,
   "group": "repair_burrukai_pelt_armor",
-  "ingredient": {
-    "item": "aether_ii:burrukai_pelt_boots"
-  },
+  "ingredient": "aether_ii:burrukai_pelt_boots",
   "processing_time": 200,
   "result": {
     "count": 1,

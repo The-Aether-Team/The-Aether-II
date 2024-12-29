@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
 import com.aetherteam.aetherii.client.gui.screen.HighlandsReceivingLevelScreen;
@@ -8,17 +7,23 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
-import com.aetherteam.aetherii.client.renderer.entity.MoaRenderer;
+import com.aetherteam.aetherii.client.renderer.item.properties.AetherIIItemModelProperties;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
-import com.aetherteam.aetherii.mixin.mixins.client.accessor.ModelManagerAccessor;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
+import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
-import com.google.common.collect.ImmutableMap;
+import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterDimensionTransitionScreenEvent;
@@ -30,13 +35,6 @@ public class AetherIIClient {
         bus.addListener(AetherIIClient::registerDimensionTransitionScreens);
 
         AetherIIClient.eventSetup(bus);
-
-        ModelManagerAccessor.setAtlases(ImmutableMap.<ResourceLocation, ResourceLocation>builder()
-                .putAll(ModelManagerAccessor.getAtlases())
-                .put(MoaRenderer.MOA_FEATHER_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_feather"))
-                .put(MoaRenderer.MOA_EYES_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_eyes"))
-                .put(MoaRenderer.MOA_KERATIN_SHEET, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "moa_keratin"))
-                .build()); //todo 1.21.3 replaces this with an event
     }
 
     public static void clientSetup(FMLClientSetupEvent event) {
@@ -75,6 +73,9 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIClientExtensions::registerClientItemExtensions);
         neoBus.addListener(AetherIIRenderTypes::registerRenderBuffers);
         neoBus.addListener(AetherIIRecipeBookCategories::registerRecipeBookSearchCategories);
+        neoBus.addListener(AetherIIItemModelProperties::registerSelectProperties);
+        neoBus.addListener(AetherIIItemModelProperties::registerRangeSelectProperties);
+        neoBus.addListener(AetherIIAtlases::registerAtlases);
     }
 
     public static void registerDimensionTransitionScreens(RegisterDimensionTransitionScreenEvent event) {
@@ -84,7 +85,7 @@ public class AetherIIClient {
 
     public static void registerItemModelProperties() {
         //TODO Properties Support in 1.21.4
-        /*registerMoaFeatherProperties(AetherIIItems.MOA_FEATHER.get());
+        /*
 
         registerMoaEggProperties(AetherIIItems.MOA_EGG.get());
 
@@ -93,32 +94,11 @@ public class AetherIIClient {
         registerGliderProperties(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), true);
         registerGliderProperties(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), true);
 
-        registerCrossbowProperties(AetherIIItems.SKYROOT_CROSSBOW.get());
-        registerCrossbowProperties(AetherIIItems.HOLYSTONE_CROSSBOW.get());
-        registerCrossbowProperties(AetherIIItems.ZANITE_CROSSBOW.get());
-        registerCrossbowProperties(AetherIIItems.ARKENIUM_CROSSBOW.get());
-        registerCrossbowProperties(AetherIIItems.GRAVITITE_CROSSBOW.get());
-
         registerShieldProperties(AetherIIItems.SKYROOT_SHIELD.get());
         registerShieldProperties(AetherIIItems.HOLYSTONE_SHIELD.get());
         registerShieldProperties(AetherIIItems.ZANITE_SHIELD.get());
         registerShieldProperties(AetherIIItems.ARKENIUM_SHIELD.get());
-        registerShieldProperties(AetherIIItems.GRAVITITE_SHIELD.get());
-
-        registerHealingStoneProperties(AetherIIItems.HEALING_STONE.get());
-
-        registerGenericProperties();*/
-    }
-
-    private static void registerMoaFeatherProperties(Item item) {
-
-        /*ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "feather_color"), (stack, level, livingEntity, value) -> {
-            Moa.FeatherColor featherColor = stack.get(AetherIIDataComponents.FEATHER_COLOR);
-            if (featherColor != null) {
-                return new BigDecimal((double) featherColor.ordinal() / Moa.FeatherColor.values().length, new MathContext(3)).floatValue();
-            }
-            return 0.0F;
-        });*/
+        registerShieldProperties(AetherIIItems.GRAVITITE_SHIELD.get());*/
     }
 
     /*private static void registerMoaEggProperties(Item item) {
@@ -161,44 +141,24 @@ public class AetherIIClient {
         }
     }
 
-    private static void registerCrossbowProperties(Item item) {
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pull"), (stack, level, livingEntity, value) ->
-                livingEntity == null ? 0.0F : TieredCrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration(livingEntity) - livingEntity.getUseItemRemainingTicks()) / (float) ((TieredCrossbowItem) stack.getItem()).getCrossbowChargeDuration(stack, livingEntity));
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("pulling"), (stack, level, livingEntity, value) ->
-                livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
-        ItemProperties.register(item, ResourceLocation.withDefaultNamespace("charged"), (stack, level, livingEntity, value) ->
-                TieredCrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
-    }
-
     private static void registerShieldProperties(Item item) {
         ItemProperties.register(item, ResourceLocation.withDefaultNamespace("blocking"), (stack, level, livingEntity, value) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
     }
 
-    private static void registerHealingStoneProperties(Item item) {
-        ItemProperties.register(item, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "charge"), (stack, level, livingEntity, value) ->
-                stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES) != null ? stack.get(AetherIIDataComponents.HEALING_STONE_CHARGES) / 10.0F : 0.0F);
-    }
-
-    private static void registerGenericProperties() {
-        ClampedItemPropertyFunction reinforcementProperty = (stack, level, livingEntity, value) -> {
-            ReinforcementTier tier = stack.get(AetherIIDataComponents.REINFORCEMENT_TIER);
-            return tier != null ? tier.getTier() * 0.1F : Float.NEGATIVE_INFINITY;
-        };
-        ItemProperties.registerGeneric(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "reinforcement_tier"), reinforcementProperty);
-    }
 */
     public static void registerTooltipOverrides() {
-        //TODO TOOL TIP PORT IN 1.21.4
-        /*TooltipListeners.TooltipPredicate setBonusPredicate = (player, itemStack, components, context, component) -> {
-            if (player != null && (itemStack.getItem() instanceof ArmorItem || itemStack.getItem() instanceof GlovesItem) && component.getString().contains("%s")) {
-                Holder<ArmorMaterial> material = null;
-                if (itemStack.getItem() instanceof ArmorItem armorItem) {
-                    material = armorItem.getMaterial();
+        //todo new component tooltip system from neoforge
+        TooltipListeners.TooltipPredicate setBonusPredicate = (player, itemStack, components, context, component) -> {
+            if (player != null && component.getString().contains("%s")) {
+                ResourceKey<EquipmentAsset> asset = null;
+                Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
+                if (equippable != null && equippable.assetId().isPresent()) {
+                    asset = equippable.assetId().get();
                 } else if (itemStack.getItem() instanceof GlovesItem glovesItem) {
-                    material = glovesItem.getMaterial();
+                    asset = glovesItem.getMaterial();
                 }
-                if (material != null) {
-                    int currentEquipmentCount = EquipmentUtil.getArmorCount(player, material);
+                if (asset != null) {
+                    int currentEquipmentCount = EquipmentUtil.getArmorCount(player, asset);
                     Component finalComponent;
                     if (currentEquipmentCount >= 3) {
                         finalComponent = Component.literal("3/3").withStyle(ChatFormatting.WHITE);
@@ -209,9 +169,9 @@ public class AetherIIClient {
                 }
             }
             return component;
-        };*/
+        };
 
-        /*TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_HELMET, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_HELMET, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_CHESTPLATE, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_LEGGINGS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_BOOTS, setBonusPredicate);
@@ -235,6 +195,6 @@ public class AetherIIClient {
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_CHESTPLATE, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_LEGGINGS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_BOOTS, setBonusPredicate);
-        TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_GLOVES, setBonusPredicate);*/
+        TooltipListeners.PREDICATES.put(AetherIIItems.GRAVITITE_GLOVES, setBonusPredicate);
     }
 }

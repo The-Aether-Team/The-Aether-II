@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
 import net.minecraft.world.item.HoeItem;
 
 public class HolystoneTrowelItem extends HoeItem implements HolystoneTool {
-    public HolystoneTrowelItem() {
-        super(AetherIIItemTiers.HOLYSTONE, -1.0F, -2.0F, new Properties());
+    public HolystoneTrowelItem(Properties properties) {
+        super(AetherIIItemTiers.HOLYSTONE, -1.0F, -2.0F, properties);
     }
 }

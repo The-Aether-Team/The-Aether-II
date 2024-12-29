@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.item.equipment.tools.abilities.HolystoneTool;
 import net.minecraft.world.item.PickaxeItem;
 
 public class HolystonePickaxeItem extends PickaxeItem implements HolystoneTool {
-    public HolystonePickaxeItem() {
-        super(AetherIIItemTiers.HOLYSTONE, 1.0F, -2.8F, new Properties());
+    public HolystonePickaxeItem(Properties properties) {
+        super(AetherIIItemTiers.HOLYSTONE, 1.0F, -2.8F, properties);
     }
 }

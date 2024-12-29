@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "aether_ii:taegore_hide"
-    },
-    "/": {
-      "item": "aether_ii:cloudtwine"
-    }
+    "#": "aether_ii:taegore_hide",
+    "/": "aether_ii:cloudtwine"
   },
   "pattern": [
     "###",

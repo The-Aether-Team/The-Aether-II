@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/nether_portal_ns",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "particle": "aether_ii:block/miscellaneous/aether_portal",
-    "portal": "aether_ii:block/miscellaneous/aether_portal"
-  }
-}

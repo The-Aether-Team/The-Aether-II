@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "W": {
-      "tag": "aether_ii:gems/zanite"
-    },
-    "o": {
-      "tag": "aether_ii:rods/skyroot"
-    }
+    "W": "#aether_ii:gems/zanite",
+    "o": "#aether_ii:rods/skyroot"
   },
   "pattern": [
     "WoW",

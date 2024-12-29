@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ambrosium_shard_from_smelting_undershale_ambrosium_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_undershale_ambrosium_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:undershale_ambrosium_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_undershale_ambrosium_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ambrosium_shard_from_smelting_undershale_ambrosium_ore"
+    ]
+  }
+}

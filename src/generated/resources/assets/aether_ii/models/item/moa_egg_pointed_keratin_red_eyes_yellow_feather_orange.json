@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "aether_ii:item/miscellaneous/moa_egg_pointed_orange",
-    "layer1": "aether_ii:item/miscellaneous/moa_egg_keratin_red",
-    "layer2": "aether_ii:item/miscellaneous/moa_egg_eyes_yellow"
-  }
-}

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "aether_ii:undershale"
-    }
+    "#": "aether_ii:undershale"
   },
   "pattern": [
     "###",

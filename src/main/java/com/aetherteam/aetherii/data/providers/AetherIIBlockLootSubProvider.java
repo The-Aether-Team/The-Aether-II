@@ -145,10 +145,10 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                                 .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))))
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
                                 .add(this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.SKYROOT_PINECONE.get()))
-                                        .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.01F, 0.011111112F, 0.0125F, 0.0111111125F, 0.05F))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
-                        .add(this.applyExplosionCondition(block, LootItem.lootTableItem(Items.AIR).apply(SpawnSkyrootLizard.builder()))
-                                .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.001F, 0.0011111112F, 0.00125F, 0.00111111125F, 0.005F))));
+                                        .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.01F, 0.011111112F, 0.0125F, 0.0111111125F, 0.05F))));
+//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
+//                        .add(this.applyExplosionCondition(block, LootItem.lootTableItem(Items.AIR).apply(SpawnSkyrootLizard.builder()))
+//                                .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.001F, 0.0011111112F, 0.00125F, 0.00111111125F, 0.005F))));
     }
 
     protected LootTable.Builder createSilkTouchOrShearsTable(ItemLike item) {

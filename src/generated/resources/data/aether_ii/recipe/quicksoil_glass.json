@@ -3,9 +3,7 @@
   "category": "blocks",
   "experience": 0.0,
   "fuel_count": 1,
-  "ingredient": {
-    "item": "aether_ii:quicksoil"
-  },
+  "ingredient": "aether_ii:quicksoil",
   "processing_time": 200,
   "result": {
     "count": 1,

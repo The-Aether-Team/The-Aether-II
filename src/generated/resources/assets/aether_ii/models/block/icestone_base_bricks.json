@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "aether_ii:block/decorative/icestone_keystone",
-    "side": "aether_ii:block/decorative/icestone_base_bricks"
-  }
-}

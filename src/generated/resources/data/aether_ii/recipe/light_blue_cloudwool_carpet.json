@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "carpet",
   "key": {
-    "#": {
-      "item": "aether_ii:light_blue_cloudwool"
-    }
+    "#": "aether_ii:light_blue_cloudwool"
   },
   "pattern": [
     "##"

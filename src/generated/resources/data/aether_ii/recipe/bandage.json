@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "aether_ii:cloudtwine"
-    },
-    {
-      "tag": "aether_ii:cloudwool"
-    }
+    "aether_ii:cloudtwine",
+    "#aether_ii:cloudwool"
   ],
   "result": {
     "count": 1,

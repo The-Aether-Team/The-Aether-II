@@ -3,12 +3,8 @@
   "category": "misc",
   "group": "arilum_lantern",
   "key": {
-    "#": {
-      "item": "aether_ii:golden_swet_gel"
-    },
-    "X": {
-      "item": "aether_ii:arilum_bulbs"
-    }
+    "#": "aether_ii:golden_swet_gel",
+    "X": "aether_ii:arilum_bulbs"
   },
   "pattern": [
     "#X#",

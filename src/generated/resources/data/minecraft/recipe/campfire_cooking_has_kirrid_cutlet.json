@@ -3,9 +3,7 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "item": "aether_ii:kirrid_loin"
-  },
+  "ingredient": "aether_ii:kirrid_loin",
   "result": {
     "count": 1,
     "id": "aether_ii:kirrid_cutlet"

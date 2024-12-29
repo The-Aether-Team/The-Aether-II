@@ -8,8 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 
 public class ZaniteShovelItem extends ShovelItem implements ZaniteTool {
-    public ZaniteShovelItem() {
-        super(AetherIIItemTiers.ZANITE, 1.5F, -3.0F, new Properties());
+    public ZaniteShovelItem(Properties properties) {
+        super(AetherIIItemTiers.ZANITE, 1.5F, -3.0F, properties);
     }
 
     @Override

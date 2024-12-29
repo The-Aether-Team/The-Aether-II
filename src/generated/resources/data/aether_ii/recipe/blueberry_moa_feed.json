@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "aether_ii:moa_feed"
-    },
-    {
-      "item": "aether_ii:blueberry"
-    }
+    "aether_ii:moa_feed",
+    "aether_ii:blueberry"
   ],
   "result": {
     "count": 1,

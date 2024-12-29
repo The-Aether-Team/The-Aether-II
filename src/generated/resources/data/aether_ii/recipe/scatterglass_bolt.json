@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "/": {
-      "tag": "aether_ii:rods/skyroot"
-    },
-    "F": {
-      "tag": "c:feathers"
-    },
-    "S": {
-      "item": "aether_ii:scatterglass_shard"
-    }
+    "/": "#aether_ii:rods/skyroot",
+    "F": "#c:feathers",
+    "S": "aether_ii:scatterglass_shard"
   },
   "pattern": [
     " S ",

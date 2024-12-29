@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "aether_ii:block/decorative/skyroot_highlight",
-    "side": "aether_ii:block/decorative/skyroot_top_beam",
-    "up": "aether_ii:block/decorative/skyroot_highlight"
-  }
-}

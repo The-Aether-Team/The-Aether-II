@@ -9,8 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class GravititeCrossbowItem extends TieredCrossbowItem {
-    public GravititeCrossbowItem() {
-        super(AetherIIItemTiers.GRAVITITE, new Properties());
+    public GravititeCrossbowItem(Properties properties) {
+        super(AetherIIItemTiers.GRAVITITE, properties);
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
 
 public class GravititeShortswordItem extends TieredShortswordItem {
-    public GravititeShortswordItem() {
-        super(new Properties().attributes(AetherIIDamageStats.merge(TieredShortswordItem.createAttributes(AetherIIItemTiers.GRAVITITE, 3, -2.4F), AetherIIDamageStats.GRAVITITE_SHORTSWORD)));
+    public GravititeShortswordItem(Properties properties) {
+        super(properties.attributes(AetherIIDamageStats.merge(TieredShortswordItem.createAttributes(AetherIIItemTiers.GRAVITITE, 3, -2.4F), AetherIIDamageStats.GRAVITITE_SHORTSWORD)));
     }
 }

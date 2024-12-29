@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "S": {
-      "item": "aether_ii:icestone"
-    }
+    "S": "aether_ii:icestone"
   },
   "pattern": [
     "SS",

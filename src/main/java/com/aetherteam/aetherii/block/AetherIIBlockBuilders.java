@@ -13,9 +13,11 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
+import java.util.function.Supplier;
+
 public class AetherIIBlockBuilders {
-    public static Block.Properties aercloudProperties(MapColor mapColor) {
-        return Block.Properties.of()
+    public static Supplier<Block.Properties> aercloudProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
                 .mapColor(mapColor)
                 .instrument(NoteBlockInstrument.FLUTE)
                 .strength(0.3F)
@@ -29,8 +31,8 @@ public class AetherIIBlockBuilders {
                 .isViewBlocking(AetherIIBlockBuilders::never);
     }
 
-    public static Block.Properties logProperties(MapColor topMapColor, MapColor sideMapColor) {
-        return Block.Properties.of()
+    public static Supplier<Block.Properties> logProperties(MapColor topMapColor, MapColor sideMapColor) {
+        return () -> Block.Properties.of()
                 .mapColor(block -> block.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor)
                 .instrument(NoteBlockInstrument.BASS)
                 .strength(2.0F)
@@ -39,8 +41,8 @@ public class AetherIIBlockBuilders {
     }
 
     @SuppressWarnings("deprecation")
-    public static Block.Properties leafPileProperties(MapColor mapColor) {
-        return Block.Properties.of()
+    public static Supplier<Block.Properties> leafPileProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
                 .mapColor(mapColor)
                 .strength(0.2F)
                 .randomTicks()
@@ -54,8 +56,8 @@ public class AetherIIBlockBuilders {
                 .pushReaction(PushReaction.DESTROY);
     }
 
-    public static Block.Properties leavesProperties(MapColor mapColor) {
-        return Block.Properties.of()
+    public static Supplier<Block.Properties> leavesProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
                 .mapColor(mapColor)
                 .strength(0.2F)
                 .randomTicks()
@@ -69,8 +71,8 @@ public class AetherIIBlockBuilders {
                 .pushReaction(PushReaction.DESTROY);
     }
 
-    public static Block.Properties arilumLanternProperties(MapColor mapColor) {
-        return Block.Properties.of()
+    public static Supplier<Block.Properties> arilumLanternProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
                 .mapColor(mapColor)
                 .friction(0.8F)
                 .sound(SoundType.FROGLIGHT)

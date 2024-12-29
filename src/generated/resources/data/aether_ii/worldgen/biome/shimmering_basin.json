@@ -1,16 +1,22 @@
 {
-  "carvers": {},
+  "carvers": [],
   "downfall": 0.5,
   "effects": {
     "fog_color": 15526908,
     "foliage_color": 11665355,
     "grass_color": 11927504,
-    "music": {
-      "max_delay": 10800,
-      "min_delay": 3600,
-      "replace_current_music": false,
-      "sound": "aether_ii:music.aether"
-    },
+    "music": [
+      {
+        "data": {
+          "max_delay": 10800,
+          "min_delay": 3600,
+          "replace_current_music": false,
+          "sound": "aether_ii:music.aether"
+        },
+        "weight": 1
+      }
+    ],
+    "music_volume": 1.0,
     "sky_color": 13226495,
     "water_color": 10671602,
     "water_fog_color": 5599370

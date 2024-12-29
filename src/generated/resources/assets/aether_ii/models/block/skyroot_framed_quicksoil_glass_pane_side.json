@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_side",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "edge": "aether_ii:block/decorative/skyroot_framed_quicksoil_glass_pane_top",
-    "pane": "aether_ii:block/decorative/skyroot_framed_quicksoil_glass"
-  }
-}

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "tag": "aether_ii:plates/arkenium"
-    },
-    "S": {
-      "item": "aether_ii:scatterglass"
-    }
+    "#": "#aether_ii:plates/arkenium",
+    "S": "aether_ii:scatterglass"
   },
   "pattern": [
     "#S#",

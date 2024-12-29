@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "cross": "aether_ii:block/natural/valkyrie_sprout_0"
-  }
-}

@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "purple_dye",
   "ingredients": [
-    {
-      "item": "aether_ii:tarabloom"
-    }
+    "aether_ii:tarabloom"
   ],
   "result": {
     "count": 1,

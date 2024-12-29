@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks_from_artisanry",
+  "ingredients": [
+    "#aether_ii:greatroot_decorative_blocks"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:greatroot_planks"
+  }
+}

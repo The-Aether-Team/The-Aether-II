@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "light_blue_dye",
   "ingredients": [
-    {
-      "item": "aether_ii:brettl_flower"
-    }
+    "aether_ii:brettl_flower"
   ],
   "result": {
     "count": 1,

@@ -4,9 +4,7 @@
   "experience": 0.0,
   "fuel_count": 4,
   "group": "arkenium",
-  "ingredient": {
-    "item": "aether_ii:inert_arkenium"
-  },
+  "ingredient": "aether_ii:inert_arkenium",
   "processing_time": 200,
   "result": {
     "count": 1,

@@ -12,11 +12,13 @@ import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
+import net.minecraft.data.loot.packs.LootData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -71,6 +73,8 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 ).withPool(createSheepuffDispatchPool(AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE))
         );
 
+        Sheepuff.SheepuffColor.CLOUDWOOL_BY_SHEEPUFF_COLOR.forEach((color, lootTable) -> this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE.get(color), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable)))));
+
         this.add(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), createTaegoreTable());
         this.add(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), createTaegoreTable());
         this.add(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), createTaegoreTable());
@@ -82,6 +86,12 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), createKirridTable(AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_BY_DYE));
         this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), createKirridTable(AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_BY_DYE));
         this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), createKirridTable(AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE));
+
+        Kirrid.KirridColor.CLOUDWOOL_BY_KIRRID_COLOR.forEach((color, lootTable) -> {
+            this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_BY_DYE.get(color), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
+            this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_BY_DYE.get(color), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
+            this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE.get(color), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
+        });
 
         this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable());
 

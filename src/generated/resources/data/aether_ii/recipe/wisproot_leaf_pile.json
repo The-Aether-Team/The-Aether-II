@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "leaf_pile",
   "key": {
-    "#": {
-      "item": "aether_ii:wisproot_leaves"
-    }
+    "#": "aether_ii:wisproot_leaves"
   },
   "pattern": [
     "##"

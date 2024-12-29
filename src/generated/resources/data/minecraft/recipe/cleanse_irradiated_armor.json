@@ -1,8 +1,6 @@
 {
   "type": "aether_ii:irradiation_cleansing",
-  "ingredient": {
-    "item": "aether_ii:irradiated_armor"
-  },
+  "ingredient": "aether_ii:irradiated_armor",
   "results": [
     {
       "data": {

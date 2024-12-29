@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "aether_ii:holystone_bricks"
-    },
-    "B": {
-      "item": "minecraft:book"
-    }
+    "#": "aether_ii:holystone_bricks",
+    "B": "minecraft:book"
   },
   "pattern": [
     "###",

@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "aether_ii:scatterglass_shard"
-    }
+    "#": "aether_ii:scatterglass_shard"
   },
   "pattern": [
     "##",

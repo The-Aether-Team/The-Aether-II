@@ -7,8 +7,8 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.context.UseOnContext;
 
 public class GravititeAxeItem extends AxeItem implements GravititeTool {
-    public GravititeAxeItem() {
-        super(AetherIIItemTiers.GRAVITITE, 5.0F, -3.0F, new Properties());
+    public GravititeAxeItem(Properties properties) {
+        super(AetherIIItemTiers.GRAVITITE, 5.0F, -3.0F, properties);
     }
 
     @Override

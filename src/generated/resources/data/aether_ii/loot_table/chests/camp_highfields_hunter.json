@@ -166,18 +166,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air",
-          "weight": 4
-        },
-        {
-          "type": "minecraft:item",
           "name": "aether_ii:charge_core"
         }
       ],
       "rolls": {
         "type": "minecraft:uniform",
         "max": 1.0,
-        "min": 1.0
+        "min": 0.0
       }
     }
   ],

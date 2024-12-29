@@ -1,18 +1,22 @@
 {
-  "carvers": {
-    "air": "aether_ii:highlands_cave"
-  },
+  "carvers": "aether_ii:highlands_cave",
   "downfall": 0.3,
   "effects": {
     "fog_color": 15788222,
     "foliage_color": 16768409,
     "grass_color": 16768409,
-    "music": {
-      "max_delay": 10800,
-      "min_delay": 3600,
-      "replace_current_music": false,
-      "sound": "aether_ii:music.aether"
-    },
+    "music": [
+      {
+        "data": {
+          "max_delay": 10800,
+          "min_delay": 3600,
+          "replace_current_music": false,
+          "sound": "aether_ii:music.aether"
+        },
+        "weight": 1
+      }
+    ],
+    "music_volume": 1.0,
     "particle": {
       "options": {
         "type": "aether_ii:ambrosium_torch"

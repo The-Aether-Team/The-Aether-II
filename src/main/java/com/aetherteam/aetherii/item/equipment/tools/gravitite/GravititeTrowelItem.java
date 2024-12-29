@@ -7,8 +7,8 @@ import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.context.UseOnContext;
 
 public class GravititeTrowelItem extends HoeItem implements GravititeTool {
-    public GravititeTrowelItem() {
-        super(AetherIIItemTiers.GRAVITITE, -3.0F, 0.0F, new Properties());
+    public GravititeTrowelItem(Properties properties) {
+        super(AetherIIItemTiers.GRAVITITE, -3.0F, 0.0F, properties);
     }
 
     @Override
