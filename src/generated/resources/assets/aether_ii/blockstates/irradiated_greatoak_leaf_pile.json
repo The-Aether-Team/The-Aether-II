@@ -22,7 +22,7 @@
       "model": "aether_ii:block/irradiated_greatoak_leaf_pile_height30"
     },
     "piles=16": {
-      "model": "aether_ii:block/irradiated_greatoak_leaves"
+      "model": "aether_ii:block/irradiated_greatoak_leaf_pile"
     },
     "piles=2": {
       "model": "aether_ii:block/irradiated_greatoak_leaf_pile_height4"

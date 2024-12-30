@@ -1,29 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/aether_grass_block",
-    "tints": [
-      {
-        "type": "aether_ii:aether_grass",
-        "darkSaturationOffset": 5.0,
-        "defaultColor": 11665355,
-        "lightSaturationOffset": 6.0,
-        "tintIndex": 0
-      },
-      {
-        "type": "aether_ii:aether_grass",
-        "darkSaturationOffset": 5.0,
-        "defaultColor": 11665355,
-        "lightSaturationOffset": 6.0,
-        "tintIndex": 1
-      },
-      {
-        "type": "aether_ii:aether_grass",
-        "darkSaturationOffset": 5.0,
-        "defaultColor": 11665355,
-        "lightSaturationOffset": 6.0,
-        "tintIndex": 2
-      }
-    ]
+    "model": "aether_ii:block/aether_grass_block"
   }
 }

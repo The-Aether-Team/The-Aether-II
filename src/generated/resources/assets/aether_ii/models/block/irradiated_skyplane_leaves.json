@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "aether_ii:block/irradiated_skyplane_leaf_pile"
+    "all": "aether_ii:block/irradiated_skyplane_leaves"
   }
 }
