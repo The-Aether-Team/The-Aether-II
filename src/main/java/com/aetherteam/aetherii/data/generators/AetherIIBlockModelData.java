@@ -7,7 +7,8 @@ import com.aetherteam.aetherii.data.resources.builders.models.AetherIIBlockFamil
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -367,9 +368,9 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         this.createAmbrosiumTorch(blockModels);
         blockModels.createCraftingTableLike(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), TextureMapping::craftingTable);
         blockModels.createFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
-        this.createArtisansBench(blockModels);
         blockModels.createTrivialCube(AetherIIBlocks.ALTAR.get()); //todo
-        blockModels.createTrivialCube(AetherIIBlocks.ARKENIUM_FORGE.get()); //todo
+        this.createArtisansBench(blockModels);
+        this.createArkeniumForge(blockModels); //todo
         blockModels.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.withDefaultNamespace("skyroot"), true);
         blockModels.createNonTemplateHorizontalBlock(AetherIIBlocks.SKYROOT_LADDER.get());
         blockModels.createTrivialCube(AetherIIBlocks.SKYROOT_BED.get()); //todo

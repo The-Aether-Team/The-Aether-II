@@ -4,10 +4,12 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
+import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -166,7 +168,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(), resourcelocation));
     }
 
-    public void createLeafPile(BlockModelGenerators blockModels, Block block, Block baseBlock) {
+    public void createLeafPile(BlockModelGenerators blockModels, Block block, Block baseBlock) { //TODO
         TextureMapping mapping = TextureMapping.cube(block);
         ResourceLocation resourcelocation = ModelTemplates.CUBE_ALL.create(block, mapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(AetherLeafPileBlock.PILES).generate((i) -> {
@@ -187,11 +189,11 @@ public class AetherIIBlockModelProvider extends ModelProvider {
 
     public void createAetherLeaves(BlockModelGenerators blockModels, Block block) {
         ResourceLocation location = TexturedModel.CUBE.create(block, blockModels.modelOutput);
-        ResourceLocation location_frosted = blockModels.createSuffixedVariant(block, "_snowy", ModelTemplates.CUBE_ALL, TextureMapping::cube);
+        ResourceLocation location_snowy = blockModels.createSuffixedVariant(block, "_snowy", ModelTemplates.CUBE_ALL, TextureMapping::cube);
         blockModels.blockStateOutput
                 .accept(
                         MultiVariantGenerator.multiVariant(block)
-                                .with(BlockModelGenerators.createBooleanModelDispatch(AetherLeavesBlock.SNOWY, location_frosted, location))
+                                .with(BlockModelGenerators.createBooleanModelDispatch(AetherLeavesBlock.SNOWY, location_snowy, location))
                 );
     }
 
@@ -249,6 +251,17 @@ public class AetherIIBlockModelProvider extends ModelProvider {
                                         AetherIIBlocks.ARTISANS_BENCH.get(), Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(AetherIIBlocks.ARTISANS_BENCH.get()))
                                 )
                                 .with(BlockModelGenerators.createHorizontalFacingDispatch())
+                );
+    }
+
+    public void createArkeniumForge(BlockModelGenerators blockModels) {
+        ResourceLocation location = AetherIITexturedModels.ARKENIUM_FORGE.create(AetherIIBlocks.ARKENIUM_FORGE.get(), blockModels.modelOutput);
+        ResourceLocation location_charged = blockModels.createSuffixedVariant(AetherIIBlocks.ARKENIUM_FORGE.get(), "_charged", AetherIIModelTemplates.ARKENIUM_FORGE, TextureMapping::cube);
+        blockModels.blockStateOutput
+                .accept(
+                        MultiVariantGenerator.multiVariant(AetherIIBlocks.ARKENIUM_FORGE.get())
+                                .with(BlockModelGenerators.createHorizontalFacingDispatch())
+                                .with(BlockModelGenerators.createBooleanModelDispatch(ArkeniumForgeBlock.CHARGED, location_charged, location))
                 );
     }
 
