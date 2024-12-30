@@ -370,7 +370,7 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         blockModels.createFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
         blockModels.createTrivialCube(AetherIIBlocks.ALTAR.get()); //todo
         this.createArtisansBench(blockModels);
-        this.createArkeniumForge(blockModels); //todo
+        this.createArkeniumForge(blockModels);
         blockModels.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.withDefaultNamespace("skyroot"), true);
         blockModels.createNonTemplateHorizontalBlock(AetherIIBlocks.SKYROOT_LADDER.get());
         blockModels.createTrivialCube(AetherIIBlocks.SKYROOT_BED.get()); //todo

@@ -67,16 +67,16 @@ public class AetherGrassBlock extends GrassBlock {
         }
     }
 
-    private static boolean canBeGrass(BlockState state, LevelReader level, BlockPos pos) {
+    private static boolean canBeGrass(BlockState state, LevelReader levelReader, BlockPos pos) {
         BlockPos abovePos = pos.above();
-        BlockState blockState = level.getBlockState(abovePos);
-        if ((blockState.is(AetherIIBlocks.ARCTIC_SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) || plantIsSnowed(blockState)) {
+        BlockState aboveState = levelReader.getBlockState(abovePos);
+        if ((aboveState.is(AetherIIBlocks.ARCTIC_SNOW) && aboveState.getValue(SnowLayerBlock.LAYERS) == 1) || plantIsSnowed(aboveState)) {
             return true;
-        } else if (blockState.getFluidState().getAmount() == 8) {
+        } else if (aboveState.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LightEngine.getLightBlockInto(state, blockState, Direction.UP, blockState.getLightEmission(level, abovePos));
-            return i < level.getMaxLocalRawBrightness(pos);
+            int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightBlock());
+            return i < 15;
         }
     }
 
