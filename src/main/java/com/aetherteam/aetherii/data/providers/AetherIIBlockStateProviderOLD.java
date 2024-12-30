@@ -119,30 +119,6 @@ package com.aetherteam.aetherii.data.providers;
 //                .end();
 //    }
 //
-//    public void dirtPath(Block block, Block dirtBlock) {
-//        ModelFile path = this.models().withExistingParent(this.name(block), this.mcLoc("block/dirt_path"))
-//                .texture("particle", this.modLoc("block/natural/" + this.name(dirtBlock)))
-//                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_top"))
-//                .texture("side", this.modLoc("block/construction/" + this.name(block) + "_side"))
-//                .texture("bottom", this.modLoc("block/natural/" + this.name(dirtBlock)));
-//        this.getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.allYRotations(path, 0, false));
-//    }
-//
-//    public void farmland(Block block, Block dirtBlock) {
-//        ModelFile farmland = this.models().withExistingParent(this.name(block), this.mcLoc("block/template_farmland"))
-//                .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
-//                .texture("top", this.modLoc("block/construction/" + this.name(block)));
-//        ModelFile moist = this.models().withExistingParent(this.name(block) + "_moist", mcLoc("block/template_farmland"))
-//                .texture("dirt", this.modLoc("block/natural/" + this.name(dirtBlock)))
-//                .texture("top", this.modLoc("block/construction/" + this.name(block) + "_moist"));
-//        this.getVariantBuilder(block).forAllStatesExcept(state -> {
-//            int moisture = state.getValue(AetherFarmBlock.MOISTURE);
-//            return ConfiguredModel.builder()
-//                    .modelFile(moisture < AetherFarmBlock.MAX_MOISTURE ? farmland : moist)
-//                    .build();
-//        });
-//    }
-//
 //    public void roots(Block block) {
 //        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
 //            boolean snowy = state.getValue(BlockStateProperties.SNOWY);
@@ -152,17 +128,6 @@ package com.aetherteam.aetherii.data.providers;
 //            } else {
 //                model = this.models().cross(this.name(block), this.texture(this.name(block), "natural/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
 //            }
-//            return ConfiguredModel.builder().modelFile(model).build();
-//        }, BlockStateProperties.WATERLOGGED);
-//    }
-//
-//    public void pointedStone(Block block) {
-//        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-//            DripstoneThickness thickness = state.getValue(PointedDripstoneBlock.THICKNESS);
-//            Direction direction = state.getValue(PointedDripstoneBlock.TIP_DIRECTION);
-//            ModelFile model = this.models().withExistingParent(this.name(block) + "_" + direction.name().toLowerCase(Locale.ROOT) + "_" + thickness.name().toLowerCase(Locale.ROOT), this.mcLoc("block/pointed_dripstone"))
-//                    .texture("cross", this.texture(this.name(block) + "_" + direction.name().toLowerCase(Locale.ROOT) + "_" + thickness.name().toLowerCase(Locale.ROOT), "natural/"))
-//                    .renderType(ResourceLocation.withDefaultNamespace("cutout"));
 //            return ConfiguredModel.builder().modelFile(model).build();
 //        }, BlockStateProperties.WATERLOGGED);
 //    }
@@ -1161,84 +1126,13 @@ package com.aetherteam.aetherii.data.providers;
 //    public void crudeScatterglassPane(IronBarsBlock block, HalfTransparentBlock glass, String location) {
 //        this.paneBlockWithRenderType(block, this.texture(this.name(glass), location), this.extend(this.texture(this.name(block), location), "_top"), ResourceLocation.withDefaultNamespace("translucent"));
 //    }
-//
-//    public void carpet(Block block, Block baseBlock, String location) {
-//        simpleBlock(block, models().singleTexture(name(block), mcLoc("block/carpet"), "wool", texture(location + name(baseBlock))));
-//    }
-//
+
 //    public void moaEgg(Block block) {
 //        ModelFile moaEgg = this.models().withExistingParent(this.name(block), modLoc("block/template_moa_egg")).texture("particle", this.texture(this.name(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()), "natural/"));
 //        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(moaEgg));
 //    }
 //
-//    public void torchBlock(Block block, Block wall) {
-//        ModelFile torch = this.models().withExistingParent(this.name(block), this.modLoc("block/template_tall_torch")).texture("torch", this.texture(this.name(block), "utility/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
-//        ModelFile wallTorch = this.models().withExistingParent(this.name(wall), this.modLoc("block/template_tall_wall_torch")).texture("torch", this.texture(this.name(block), "utility/")).renderType(ResourceLocation.withDefaultNamespace("cutout"));
-//        this.simpleBlock(block, torch);
-//        getVariantBuilder(wall).forAllStates(state ->
-//                ConfiguredModel.builder()
-//                        .modelFile(wallTorch)
-//                        .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 90) % 360)
-//                        .build());
-//    }
 //
-//    public void skyrootCraftingTable(Block block, Block baseBlock, String location) {
-//        ResourceLocation baseTexture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/" + location + this.name(baseBlock));
-//        ModelFile workbench = this.models().cube(this.name(block),
-//                        baseTexture,
-//                        this.extend(this.texture(this.name(block), "utility/"), "_top"),
-//                        this.extend(this.texture(this.name(block), "utility/"), "_front"),
-//                        this.extend(this.texture(this.name(block), "utility/"), "_side"),
-//                        this.extend(this.texture(this.name(block), "utility/"), "_front"),
-//                        this.extend(this.texture(this.name(block), "utility/"), "_side"))
-//                .texture("particle", this.extend(this.texture(this.name(block), "utility/"), "_front"));
-//        this.getVariantBuilder(block).partialState().addModels(new ConfiguredModel(workbench));
-//    }
-//
-//
-//    public void holystoneFurnace(Block block) {
-//        String blockName = this.name(block);
-//        ResourceLocation side = this.extend(this.texture(this.name(block), "utility/"), "_side");
-//        ResourceLocation front_on =  this.extend(this.texture(this.name(block), "utility/"), "_front_on");
-//        ResourceLocation front =  this.extend(this.texture(this.name(block), "utility/"), "_front");
-//        ResourceLocation top = this.extend(this.texture(this.name(block), "utility/"), "_top");
-//        ModelFile normal = this.models().orientable(blockName, side, front, top);
-//        ModelFile lit = this.models().orientable(blockName + "_on", side, front_on, top);
-//        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-//            Direction direction = state.getValue(AbstractFurnaceBlock.FACING);
-//            if (state.getValue(AbstractFurnaceBlock.LIT))
-//                switch (direction) {
-//                    case NORTH -> {
-//                        return ConfiguredModel.builder().modelFile(lit).build();
-//                    }
-//                    case SOUTH -> {
-//                        return ConfiguredModel.builder().modelFile(lit).rotationY(180).build();
-//                    }
-//                    case WEST -> {
-//                        return ConfiguredModel.builder().modelFile(lit).rotationY(270).build();
-//                    }
-//                    case EAST -> {
-//                        return ConfiguredModel.builder().modelFile(lit).rotationY(90).build();
-//                    }
-//                }
-//            else
-//                switch (direction) {
-//                    case NORTH -> {
-//                        return ConfiguredModel.builder().modelFile(normal).build();
-//                    }
-//                    case SOUTH -> {
-//                        return ConfiguredModel.builder().modelFile(normal).rotationY(180).build();
-//                    }
-//                    case WEST -> {
-//                        return ConfiguredModel.builder().modelFile(normal).rotationY(270).build();
-//                    }
-//                    case EAST -> {
-//                        return ConfiguredModel.builder().modelFile(normal).rotationY(90).build();
-//                    }
-//                }
-//            return ConfiguredModel.builder().build();
-//        });
-//    }
 //
 //    public void altar(Block block) {
 //        this.getVariantBuilder(block).forAllStatesExcept((state) -> {

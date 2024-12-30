@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left",
+  "textures": {
+    "bottom": "aether_ii:block/wisproot_door_bottom",
+    "top": "aether_ii:block/wisproot_door_top"
+  }
+}

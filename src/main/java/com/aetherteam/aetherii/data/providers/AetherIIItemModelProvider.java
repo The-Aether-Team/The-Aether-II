@@ -59,7 +59,7 @@ public class AetherIIItemModelProvider extends ModelProvider {
         for (Moa.FeatherColor featherColor : Moa.FeatherColor.values()) {
             ResourceLocation name = modelLocation.withSuffix("_" + featherColor.getSerializedName());
             ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
-            ModelTemplates.FLAT_ITEM.create(textureLocation, TextureMapping.layer0(textureLocation), itemModels.modelOutput);
+            ModelTemplates.FLAT_ITEM.create(textureLocation.withSuffix("_" + featherColor.getSerializedName()), TextureMapping.layer0(textureLocation), itemModels.modelOutput);
             list.add(ItemModelUtils.when(featherColor, model));
         }
         itemModels.itemModelOutput.accept(item, ItemModelUtils.select(new SelectFeatherColor(), ItemModelUtils.plainModel(modelLocation), list));
@@ -96,7 +96,11 @@ public class AetherIIItemModelProvider extends ModelProvider {
                                 + "_eyes_" + eyeColor.getSerializedName()
                                 + "_feather_" + featherColor.getSerializedName());
                         ItemModel.Unbaked model = ItemModelUtils.plainModel(name);
-                        ModelTemplates.FLAT_ITEM.create(textureLocation, TextureMapping.layer0(textureLocation), itemModels.modelOutput);
+                        ModelTemplates.FLAT_ITEM.create(textureLocation.withSuffix("_"
+                                + featherShape.getSerializedName()
+                                + "_keratin_" + keratinColor.getSerializedName()
+                                + "_eyes_" + eyeColor.getSerializedName()
+                                + "_feather_" + featherColor.getSerializedName()), TextureMapping.layer0(textureLocation), itemModels.modelOutput);
                         list.add(ItemModelUtils.when(type, model));
                     }
                 }

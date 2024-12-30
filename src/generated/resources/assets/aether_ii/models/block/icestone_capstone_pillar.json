@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aether_ii:block/icestone_keystone",
+    "side": "aether_ii:block/icestone_capstone_pillar"
+  }
+}

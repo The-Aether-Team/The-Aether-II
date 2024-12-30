@@ -1,0 +1,138 @@
+{
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_black"
+        },
+        "when": "black"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_blooming_red"
+        },
+        "when": "blooming_red"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_blue"
+        },
+        "when": "blue"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_brown"
+        },
+        "when": "brown"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_classic_black"
+        },
+        "when": "classic_black"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_cyan"
+        },
+        "when": "cyan"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_gray"
+        },
+        "when": "gray"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_green"
+        },
+        "when": "green"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_light_blue"
+        },
+        "when": "light_blue"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_light_gray"
+        },
+        "when": "light_gray"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_lime"
+        },
+        "when": "lime"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_magenta"
+        },
+        "when": "magenta"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_orange"
+        },
+        "when": "orange"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_pink"
+        },
+        "when": "pink"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_purple"
+        },
+        "when": "purple"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_red"
+        },
+        "when": "red"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_white"
+        },
+        "when": "white"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/moa_feather_yellow"
+        },
+        "when": "yellow"
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/moa_feather"
+    },
+    "property": "aether_ii:feather_color"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "aether_ii:block/template_tall_torch_wall",
+  "textures": {
+    "torch": "aether_ii:block/ambrosium_torch"
+  }
+}

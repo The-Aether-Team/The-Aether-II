@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "aether_ii:item/taegore_hide_leggings",
+    "tints": [
+      {
+        "type": "minecraft:dye",
+        "default": -3150087
+      }
+    ]
+  }
+}

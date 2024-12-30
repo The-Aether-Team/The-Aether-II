@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "aether_ii:item/burrukai_pelt_leggings",
+    "layer1": "aether_ii:item/burrukai_pelt_leggings_dyed"
+  }
+}

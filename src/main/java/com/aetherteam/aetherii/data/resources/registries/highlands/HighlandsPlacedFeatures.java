@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries.highlands;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsPlacementBuilders;
+import com.aetherteam.aetherii.data.resources.builders.worldgen.highlands.HighlandsPlacementBuilders;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ImprovedLayerPlacementModifier;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;

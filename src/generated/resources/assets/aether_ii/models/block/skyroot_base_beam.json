@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aether_ii:block/skyroot_highlight",
+    "side": "aether_ii:block/skyroot_base_beam"
+  }
+}

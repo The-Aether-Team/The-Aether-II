@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "aether_ii:block/medium_arctic_ice_crystal"
+  }
+}

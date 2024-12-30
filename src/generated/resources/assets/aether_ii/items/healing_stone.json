@@ -1,0 +1,47 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "entries": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/healing_stone_1"
+        },
+        "threshold": 0.1
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/healing_stone_2"
+        },
+        "threshold": 0.2
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/healing_stone_3"
+        },
+        "threshold": 0.3
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/healing_stone_4"
+        },
+        "threshold": 0.4
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "aether_ii:item/healing_stone_5"
+        },
+        "threshold": 0.5
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "aether_ii:item/healing_stone"
+    },
+    "property": "aether_ii:crossbow/pull"
+  }
+}

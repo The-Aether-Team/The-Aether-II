@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pointed_dripstone",
+  "textures": {
+    "cross": "aether_ii:block/pointed_holystone_down_frustum"
+  }
+}

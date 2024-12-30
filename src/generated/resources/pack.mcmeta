@@ -3,7 +3,7 @@
     "description": {
       "translate": "pack.aether_ii.mod.description"
     },
-    "pack_format": 61,
+    "pack_format": 46,
     "supported_formats": [
       0,
       2147483647

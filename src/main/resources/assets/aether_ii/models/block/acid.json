@@ -1,6 +1,0 @@
-{
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "particle": "aether_ii:fluid/acid_still"
-  }
-}

@@ -6,21 +6,37 @@ import net.minecraft.core.particles.SimpleParticleType;
 
 public class AetherLeafParticle extends TextureSheetParticle {
     private float rotSpeed;
-    private final float particleRandom;
     private final float spinAcceleration;
+    private final float windBig;
+    private final boolean swirl;
+    private final boolean flowAway;
+    private final double xaFlowScale;
+    private final double zaFlowScale;
+    private final double swirlPeriod;
 
-    protected AetherLeafParticle(ClientLevel pLevel, double pX, double pY, double pZ, SpriteSet pSpriteSet, float red, float green, float blue) {
-        super(pLevel, pX, pY, pZ);
-        this.setSprite(pSpriteSet.get(this.random.nextInt(12), 12));
+    protected AetherLeafParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet, float red, float green, float blue) {
+        this(level, x, y, z, spriteSet, 0.07F, 10.0F, true, false, 2.0F, 0.021F, red, green, blue);
+    }
+
+    public AetherLeafParticle(ClientLevel level, double x, double y, double z, SpriteSet spriteSet, float gravityFactor, float windBig, boolean swirl, boolean flowAway, float sizeFactor, float ySpeed, float red, float green, float blue) {
+        super(level, x, y, z);
+        this.setSprite(spriteSet.get(this.random.nextInt(12), 12));
         this.rotSpeed = (float) Math.toRadians(this.random.nextBoolean() ? -30.0 : 30.0);
-        this.particleRandom = this.random.nextFloat();
+        float particleRandom = this.random.nextFloat();
         this.spinAcceleration = (float) Math.toRadians(this.random.nextBoolean() ? -5.0 : 5.0);
+        this.windBig = windBig;
+        this.swirl = swirl;
+        this.flowAway = flowAway;
         this.lifetime = 300;
-        this.gravity = 7.5E-4F;
-        float f = this.random.nextBoolean() ? 0.075F : 0.1F;
+        this.gravity = gravityFactor * 1.2F * 0.0025F;
+        float f = sizeFactor * (this.random.nextBoolean() ? 0.05F : 0.075F);
         this.quadSize = f;
         this.setSize(f, f);
         this.friction = 1.0F;
+        this.yd = -ySpeed;
+        this.xaFlowScale = Math.cos(Math.toRadians(particleRandom * 60.0F)) * (double) this.windBig;
+        this.zaFlowScale = Math.sin(Math.toRadians(particleRandom * 60.0F)) * (double) this.windBig;
+        this.swirlPeriod = Math.toRadians(1000.0F + particleRandom * 3000.0F);
         this.rCol = red;
         this.gCol = green;
         this.bCol = blue;
@@ -43,10 +59,20 @@ public class AetherLeafParticle extends TextureSheetParticle {
         if (!this.removed) {
             float f = (float) (300 - this.lifetime);
             float f1 = Math.min(f / 300.0F, 1.0F);
-            double d0 = Math.cos(Math.toRadians(this.particleRandom * 60.0F)) * 2.0 * Math.pow(f1, 1.25);
-            double d1 = Math.sin(Math.toRadians(this.particleRandom * 60.0F)) * 2.0 * Math.pow(f1, 1.25);
-            this.xd += d0 * 0.0025F;
-            this.zd += d1 * 0.0025F;
+            double d0 = 0.0;
+            double d1 = 0.0;
+            if (this.flowAway) {
+                d0 += this.xaFlowScale * Math.pow(f1, 1.25);
+                d1 += this.zaFlowScale * Math.pow(f1, 1.25);
+            }
+
+            if (this.swirl) {
+                d0 += (double)f1 * Math.cos((double)f1 * this.swirlPeriod) * (double)this.windBig;
+                d1 += (double)f1 * Math.sin((double)f1 * this.swirlPeriod) * (double)this.windBig;
+            }
+
+            this.xd += d0 * 0.0024999999441206455;
+            this.zd += d1 * 0.0024999999441206455;
             this.yd -= this.gravity;
             this.rotSpeed += this.spinAcceleration / 20.0F;
             this.oRoll = this.roll;

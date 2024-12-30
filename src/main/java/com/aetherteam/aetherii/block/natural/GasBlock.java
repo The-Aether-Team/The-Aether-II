@@ -77,7 +77,7 @@ public class GasBlock extends Block implements CanisterPickup {
         for (Vec3i offset : INDIRECT_NEIGHBOR_OFFSETS) {
             blockpos$mutableblockpos.setWithOffset(pos, offset);
             if (level.getBlockState(blockpos$mutableblockpos).is(this)) {
-                level.neighborShapeChanged(Direction.getNearest(offset.getX(), offset.getY(), offset.getZ(), null).getOpposite(), blockpos$mutableblockpos, pos, state, flags, recursionLeft);
+//                level.neighborShapeChanged(Direction.getNearest(offset.getX(), offset.getY(), offset.getZ(), null).getOpposite(), blockpos$mutableblockpos, pos, state, flags, recursionLeft); //todo
             }
         }
     }

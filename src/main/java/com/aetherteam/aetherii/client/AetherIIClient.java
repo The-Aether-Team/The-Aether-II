@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
+import com.aetherteam.aetherii.client.renderer.item.color.AetherIIItemTintSources;
 import com.aetherteam.aetherii.client.renderer.item.properties.AetherIIItemModelProperties;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
@@ -76,6 +77,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIItemModelProperties::registerSelectProperties);
         neoBus.addListener(AetherIIItemModelProperties::registerRangeSelectProperties);
         neoBus.addListener(AetherIIAtlases::registerAtlases);
+        neoBus.addListener(AetherIIItemTintSources::registerTintSources);
     }
 
     public static void registerDimensionTransitionScreens(RegisterDimensionTransitionScreenEvent event) {
