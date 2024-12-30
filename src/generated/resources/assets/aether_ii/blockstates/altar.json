@@ -1,7 +1,64 @@
 {
   "variants": {
-    "": {
+    "blasting=false,charging=false,facing=east": {
+      "model": "aether_ii:block/altar",
+      "y": 90
+    },
+    "blasting=false,charging=false,facing=north": {
       "model": "aether_ii:block/altar"
+    },
+    "blasting=false,charging=false,facing=south": {
+      "model": "aether_ii:block/altar",
+      "y": 180
+    },
+    "blasting=false,charging=false,facing=west": {
+      "model": "aether_ii:block/altar",
+      "y": 270
+    },
+    "blasting=false,charging=true,facing=east": {
+      "model": "aether_ii:block/altar",
+      "y": 90
+    },
+    "blasting=false,charging=true,facing=north": {
+      "model": "aether_ii:block/altar"
+    },
+    "blasting=false,charging=true,facing=south": {
+      "model": "aether_ii:block/altar",
+      "y": 180
+    },
+    "blasting=false,charging=true,facing=west": {
+      "model": "aether_ii:block/altar",
+      "y": 270
+    },
+    "blasting=true,charging=false,facing=east": {
+      "model": "aether_ii:block/altar_blasting",
+      "y": 90
+    },
+    "blasting=true,charging=false,facing=north": {
+      "model": "aether_ii:block/altar_blasting"
+    },
+    "blasting=true,charging=false,facing=south": {
+      "model": "aether_ii:block/altar_blasting",
+      "y": 180
+    },
+    "blasting=true,charging=false,facing=west": {
+      "model": "aether_ii:block/altar_blasting",
+      "y": 270
+    },
+    "blasting=true,charging=true,facing=east": {
+      "model": "aether_ii:block/altar_blasting",
+      "y": 90
+    },
+    "blasting=true,charging=true,facing=north": {
+      "model": "aether_ii:block/altar_blasting"
+    },
+    "blasting=true,charging=true,facing=south": {
+      "model": "aether_ii:block/altar_blasting",
+      "y": 180
+    },
+    "blasting=true,charging=true,facing=west": {
+      "model": "aether_ii:block/altar_blasting",
+      "y": 270
     }
   }
 }

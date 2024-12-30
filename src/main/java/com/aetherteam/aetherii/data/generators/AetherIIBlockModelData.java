@@ -368,7 +368,7 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         this.createAmbrosiumTorch(blockModels);
         blockModels.createCraftingTableLike(AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), TextureMapping::craftingTable);
         blockModels.createFurnace(AetherIIBlocks.HOLYSTONE_FURNACE.get(), TexturedModel.ORIENTABLE_ONLY_TOP);
-        blockModels.createTrivialCube(AetherIIBlocks.ALTAR.get()); //todo
+        this.createAltar(blockModels); //todo
         this.createArtisansBench(blockModels);
         this.createArkeniumForge(blockModels);
         blockModels.createChest(AetherIIBlocks.SKYROOT_CHEST.get(), AetherIIBlocks.SKYROOT_PLANKS.get(), ResourceLocation.withDefaultNamespace("skyroot"), true);
