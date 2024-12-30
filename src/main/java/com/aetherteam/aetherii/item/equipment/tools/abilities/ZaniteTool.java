@@ -52,7 +52,7 @@ public interface ZaniteTool {
 
     default float getDefaultSpeed(ItemStack stack, TagKey<Block> breakableTag) {
         Tool tool = stack.get(DataComponents.TOOL);
-        HolderSet<Block> breakable = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK).getOrThrow(breakableTag);
+        HolderSet<Block> breakable = BuiltInRegistries.BLOCK.getOrThrow(breakableTag);
         if (tool != null) {
             List<Tool.Rule> rules = tool.rules();
             for (Tool.Rule rule : rules) {

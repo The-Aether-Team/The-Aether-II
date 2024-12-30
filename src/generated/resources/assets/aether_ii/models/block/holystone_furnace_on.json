@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "aether_ii:block/holystone_furnace_front_on",
+    "side": "aether_ii:block/holystone_furnace_side",
+    "top": "aether_ii:block/holystone_furnace_top"
+  }
+}

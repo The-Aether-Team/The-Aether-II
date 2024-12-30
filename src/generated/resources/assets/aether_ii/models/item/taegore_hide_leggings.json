@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "aether_ii:item/taegore_hide_leggings",
+    "layer1": "aether_ii:item/taegore_hide_leggings_dyed"
+  }
+}

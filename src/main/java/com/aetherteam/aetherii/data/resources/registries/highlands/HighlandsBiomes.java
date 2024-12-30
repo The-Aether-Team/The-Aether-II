@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.resources.registries.highlands;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.data.resources.builders.highlands.HighlandsBiomeBuilders;
+import com.aetherteam.aetherii.data.resources.builders.worldgen.highlands.HighlandsBiomeBuilders;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;

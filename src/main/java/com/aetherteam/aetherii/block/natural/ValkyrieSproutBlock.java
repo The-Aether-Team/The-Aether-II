@@ -40,7 +40,7 @@ public class ValkyrieSproutBlock extends AetherBushBlock implements Bonemealable
     }
 
     @Override
-    public boolean isRandomlyTicking(BlockState blockState) {
+    public boolean isRandomlyTicking(BlockState state) {
         return true;
     }
 

@@ -19,11 +19,19 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIData {
-    public static void serverData(GatherDataEvent.Server event) {
+    public static void data(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper fileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         PackOutput packOutput = generator.getPackOutput();
+
+        // Client Data
+        generator.addProvider(true, new AetherIIBlockModelData(packOutput));
+        generator.addProvider(true, new AetherIIItemModelData(packOutput));
+        generator.addProvider(true, new AetherIIParticleData(packOutput, fileHelper));
+        generator.addProvider(true, new AetherIILanguageData(packOutput));
+        generator.addProvider(true, new AetherIISoundData(packOutput, fileHelper));
+        generator.addProvider(true, new AetherIIEquipmentAssetData(packOutput));
 
         // Server Data
         DatapackBuiltinEntriesProvider registrySets = new AetherIIRegistrySets(packOutput, lookupProvider);
@@ -44,26 +52,6 @@ public class AetherIIData {
         generator.addProvider(true, new AetherIIBiomeTagData(packOutput, lookupProvider, fileHelper));
         generator.addProvider(true, new AetherIIStructureTagData(packOutput, registryProvider, fileHelper));
         generator.addProvider(true, new AetherIIDamageTypeTagData(packOutput, registryProvider, fileHelper));
-
-        // pack.mcmeta
-        generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.TYPE, new PackMetadataSection(
-                Component.translatable("pack.aether_ii.mod.description"),
-                DetectedVersion.BUILT_IN.getPackVersion(PackType.SERVER_DATA),
-                Optional.of(new InclusiveRange<>(0, Integer.MAX_VALUE)))));
-    }
-
-    public static void clientData(GatherDataEvent.Client event) {
-        DataGenerator generator = event.getGenerator();
-        ExistingFileHelper fileHelper = event.getExistingFileHelper();
-        PackOutput packOutput = generator.getPackOutput();
-
-        // Client Data
-        generator.addProvider(true, new AetherIIBlockModelData(packOutput));
-        generator.addProvider(true, new AetherIIItemModelData(packOutput));
-        generator.addProvider(true, new AetherIIParticleData(packOutput, fileHelper));
-        generator.addProvider(true, new AetherIILanguageData(packOutput));
-        generator.addProvider(true, new AetherIISoundData(packOutput, fileHelper));
-        generator.addProvider(true, new AetherIIEquipmentAssetData(packOutput));
 
         // pack.mcmeta
         generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.TYPE, new PackMetadataSection(

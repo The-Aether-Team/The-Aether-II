@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pointed_dripstone",
+  "textures": {
+    "cross": "aether_ii:block/pointed_ichorite_down_tip"
+  }
+}

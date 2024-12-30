@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "aether_ii:block/icestone",
+    "side": "aether_ii:block/icestone",
+    "top": "aether_ii:block/icestone"
+  }
+}

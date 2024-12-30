@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "aether_ii:item/burrukai_pelt_chestplate",
+    "tints": [
+      {
+        "type": "minecraft:dye",
+        "default": -10380096
+      }
+    ]
+  }
+}

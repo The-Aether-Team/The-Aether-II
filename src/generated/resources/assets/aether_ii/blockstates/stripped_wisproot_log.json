@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "aether_ii:block/stripped_wisproot_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "aether_ii:block/stripped_wisproot_log"
+    },
+    "axis=z": {
+      "model": "aether_ii:block/stripped_wisproot_log_horizontal",
+      "x": 90
+    }
+  }
+}

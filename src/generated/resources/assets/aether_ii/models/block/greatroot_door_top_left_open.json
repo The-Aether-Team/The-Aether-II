@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left_open",
+  "textures": {
+    "bottom": "aether_ii:block/greatroot_door_bottom",
+    "top": "aether_ii:block/greatroot_door_top"
+  }
+}

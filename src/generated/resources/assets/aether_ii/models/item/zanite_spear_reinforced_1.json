@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "aether_ii:item/zanite_spear_reinforced_1"
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "texture": "#bottom"
+        },
+        "east": {
+          "cullface": "east",
+          "texture": "#side"
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#side"
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#side"
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#top",
+          "tintindex": 0
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#side"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "cullface": "east",
+          "texture": "#side_overlay_1",
+          "tintindex": 0
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#side_overlay_1",
+          "tintindex": 0
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#side_overlay_1",
+          "tintindex": 0
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#top_1",
+          "tintindex": 0
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#side_overlay_1",
+          "tintindex": 0
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "cullface": "east",
+          "texture": "#side_overlay_1",
+          "tintindex": 0
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#side_overlay_1",
+          "tintindex": 0
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#side_overlay_1",
+          "tintindex": 0
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#top_1",
+          "tintindex": 0
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#side_overlay_1",
+          "tintindex": 0
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "cullface": "east",
+          "texture": "#side_overlay_2",
+          "tintindex": 1
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#side_overlay_2",
+          "tintindex": 1
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#side_overlay_2",
+          "tintindex": 1
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#top_2",
+          "tintindex": 1
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#side_overlay_2",
+          "tintindex": 1
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "faces": {
+        "east": {
+          "cullface": "east",
+          "texture": "#side_overlay_3",
+          "tintindex": 2
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#side_overlay_3",
+          "tintindex": 2
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#side_overlay_3",
+          "tintindex": 2
+        },
+        "up": {
+          "cullface": "up",
+          "texture": "#top_3",
+          "tintindex": 2
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#side_overlay_3",
+          "tintindex": 2
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "aether_ii:block/aether_dirt",
+    "particle": "aether_ii:block/aether_dirt",
+    "side": "aether_ii:block/aether_grass_block_side",
+    "side_overlay_1": "aether_ii:block/aether_grass_block_side_overlay_1",
+    "side_overlay_2": "aether_ii:block/aether_grass_block_side_overlay_2",
+    "side_overlay_3": "aether_ii:block/aether_grass_block_side_overlay_3",
+    "top": "aether_ii:block/aether_grass_block_top",
+    "top_1": "aether_ii:block/aether_grass_block_top_1",
+    "top_2": "aether_ii:block/aether_grass_block_top_2",
+    "top_3": "aether_ii:block/aether_grass_block_top_3"
+  }
+}

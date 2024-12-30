@@ -52,7 +52,7 @@ public class IrradiationCleansingRecipe implements Recipe<SingleRecipeInputWithR
 
     @Override
     public PlacementInfo placementInfo() {
-        return null;
+        return PlacementInfo.NOT_PLACEABLE;
     }
 
     @Override

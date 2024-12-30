@@ -16,7 +16,7 @@
 			}
 		},
 		{
-			"name": "rim _rear",
+			"name": "rim_rear",
 			"from": [14, 0, 9],
 			"to": [16, 3, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
@@ -30,7 +30,7 @@
 			}
 		},
 		{
-			"name": "rim _rear_right",
+			"name": "rim_rear_right",
 			"from": [14.75, 0, 11],
 			"to": [16.75, 3, 21],
 			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 16]},
@@ -44,7 +44,7 @@
 			}
 		},
 		{
-			"name": "rim _right",
+			"name": "rim_right",
 			"from": [0, 0, 0],
 			"to": [7, 3, 2],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},

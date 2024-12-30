@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.data.resources.builders.AetherIIStructureBuilders;
+import com.aetherteam.aetherii.data.resources.builders.worldgen.AetherIIStructureBuilders;
 import com.aetherteam.aetherii.data.resources.registries.pools.CampHighfieldsPools;
 import com.aetherteam.aetherii.data.resources.registries.pools.OutpostPools;
 import com.aetherteam.aetherii.world.structure.AetherJigsawStructure;

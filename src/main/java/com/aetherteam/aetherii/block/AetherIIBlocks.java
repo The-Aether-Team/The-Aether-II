@@ -44,7 +44,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Map;
 import java.util.Objects;
-import java.util.Properties;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
