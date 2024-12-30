@@ -8,13 +8,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.effect.MobEffect;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIMobEffectTagData extends TagsProvider<MobEffect> {
-    public AetherIIMobEffectTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, ExistingFileHelper existingFileHelper) {
-        super(output, Registries.MOB_EFFECT, registries, AetherII.MODID, existingFileHelper);
+    public AetherIIMobEffectTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, Registries.MOB_EFFECT, registries, AetherII.MODID);
     }
 
     @Override

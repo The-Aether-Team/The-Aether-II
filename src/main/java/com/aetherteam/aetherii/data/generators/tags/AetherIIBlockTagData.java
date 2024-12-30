@@ -9,14 +9,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIBlockTagData extends BlockTagsProvider {
-    public AetherIIBlockTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, @Nullable ExistingFileHelper helper) {
-        super(output, registries, AetherII.MODID, helper);
+    public AetherIIBlockTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, AetherII.MODID);
     }
 
     @SuppressWarnings("unchecked")

@@ -11,12 +11,12 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.advancements.AdvancementProvider;
+import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.common.data.AdvancementProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.List;
 import java.util.Map;
@@ -26,23 +26,23 @@ import java.util.function.Consumer;
 
 public class AetherIIAdvancementData extends AdvancementProvider {
 
-    public AetherIIAdvancementData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, ExistingFileHelper helper) {
-        super(output, registries, helper, List.of(new BestiaryAdvancements()));
+    public AetherIIAdvancementData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, List.of(new BestiaryAdvancements()));
     }
 
-    public static class BestiaryAdvancements implements AdvancementGenerator {
+    public static class BestiaryAdvancements implements AdvancementSubProvider {
         @SuppressWarnings("unused")
         @Override
-        public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
+        public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer) {
             String path = "bestiary/";
             HolderGetter<EntityType<?>> entityGetter = provider.lookupOrThrow(Registries.ENTITY_TYPE);
             HolderGetter<Item> itemGetter = provider.lookupOrThrow(Registries.ITEM);
             for (EntityType<?> entityType : AetherIIBestiaryEntries.ENTITIES.values().stream().map(Holder::value).toList()) {
                 ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entityType.toShortString()).withPrefix(path);
-                observe(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, observeId, existingFileHelper);
+                observe(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, observeId);
 
                 ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entityType.toShortString()).withPrefix(path);
-                understand(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, understandId, existingFileHelper);
+                understand(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, understandId);
             }
         }
 

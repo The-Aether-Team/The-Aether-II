@@ -9,14 +9,12 @@ import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class AetherIIEntityTagData extends EntityTypeTagsProvider {
-    public AetherIIEntityTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, @Nullable ExistingFileHelper helper) {
-        super(output, registries, AetherII.MODID, helper);
+    public AetherIIEntityTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries, AetherII.MODID);
     }
 
     @Override
