@@ -4,11 +4,12 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
 
 public class AetherIIParticleData extends ParticleDescriptionProvider {
-    public AetherIIParticleData(PackOutput output) {
-        super(output);
+    public AetherIIParticleData(PackOutput output, ExistingFileHelper helper) {
+        super(output, helper);
     }
 
     @Override

@@ -12,6 +12,7 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.util.InclusiveRange;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.Optional;
@@ -20,15 +21,16 @@ import java.util.concurrent.CompletableFuture;
 public class AetherIIData {
     public static void data(GatherDataEvent.Client event) {
         DataGenerator generator = event.getGenerator();
+        ExistingFileHelper fileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         PackOutput packOutput = generator.getPackOutput();
 
         // Client Data
         generator.addProvider(true, new AetherIIBlockModelData(packOutput));
         generator.addProvider(true, new AetherIIItemModelData(packOutput));
-        generator.addProvider(true, new AetherIIParticleData(packOutput));
+        generator.addProvider(true, new AetherIIParticleData(packOutput, fileHelper));
         generator.addProvider(true, new AetherIILanguageData(packOutput));
-        generator.addProvider(true, new AetherIISoundData(packOutput));
+        generator.addProvider(true, new AetherIISoundData(packOutput, fileHelper));
         generator.addProvider(true, new AetherIIEquipmentAssetData(packOutput));
 
         // Server Data
@@ -38,18 +40,18 @@ public class AetherIIData {
         generator.addProvider(true, new AetherIIRecipeData.Runner(packOutput, lookupProvider));
         generator.addProvider(true, AetherIILootTableData.create(packOutput, lookupProvider));
         generator.addProvider(true, new AetherIILootModifierData(packOutput, lookupProvider));
-        generator.addProvider(true, new AetherIIAdvancementData(packOutput, lookupProvider));
+        generator.addProvider(true, new AetherIIAdvancementData(packOutput, lookupProvider, fileHelper));
         generator.addProvider(true, new AetherIIDataMapData(packOutput, lookupProvider));
 
         // Tags
-        AetherIIBlockTagData blockTags = new AetherIIBlockTagData(packOutput, lookupProvider);
+        AetherIIBlockTagData blockTags = new AetherIIBlockTagData(packOutput, lookupProvider, fileHelper);
         generator.addProvider(true, blockTags);
-        generator.addProvider(true, new AetherIIItemTagData(packOutput, lookupProvider, blockTags.contentsGetter()));
-        generator.addProvider(true, new AetherIIEntityTagData(packOutput, lookupProvider));
-        generator.addProvider(true, new AetherIIFluidTagData(packOutput, lookupProvider));
-        generator.addProvider(true, new AetherIIBiomeTagData(packOutput, lookupProvider));
-        generator.addProvider(true, new AetherIIStructureTagData(packOutput, registryProvider));
-        generator.addProvider(true, new AetherIIDamageTypeTagData(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIIItemTagData(packOutput, lookupProvider, blockTags.contentsGetter(), fileHelper));
+        generator.addProvider(true, new AetherIIEntityTagData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(true, new AetherIIFluidTagData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(true, new AetherIIBiomeTagData(packOutput, lookupProvider, fileHelper));
+        generator.addProvider(true, new AetherIIStructureTagData(packOutput, registryProvider, fileHelper));
+        generator.addProvider(true, new AetherIIDamageTypeTagData(packOutput, registryProvider, fileHelper));
 
         // pack.mcmeta
         generator.addProvider(true, new PackMetadataGenerator(packOutput).add(PackMetadataSection.TYPE, new PackMetadataSection(
