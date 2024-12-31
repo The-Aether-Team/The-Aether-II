@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/arilum"
+    "model": "aether_ii:item/arilum"
   }
 }

@@ -54,6 +54,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
 
     public void createCutoutCross(BlockModelGenerators blockModels, Block block) {
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.create(block, TextureMapping.cross(block), blockModels.modelOutput)));
+        blockModels.registerSimpleFlatItemModel(block);
     }
 
     public void createAetherPortalBlock(BlockModelGenerators blockModels) {
@@ -153,6 +154,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
     public void createCrystal(BlockModelGenerators blockModels, Block block) {
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
                 .with(VariantProperties.MODEL, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.create(block, TextureMapping.cross(block), blockModels.modelOutput))).with(blockModels.createColumnWithFacing()));
+        blockModels.registerSimpleFlatItemModel(block);
     }
 
     public void createVine(BlockModelGenerators blockModels, Block block) {

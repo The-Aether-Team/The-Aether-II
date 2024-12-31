@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/medium_arctic_ice_crystal"
+    "model": "aether_ii:item/medium_arctic_ice_crystal"
   }
 }
