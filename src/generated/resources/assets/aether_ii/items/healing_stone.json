@@ -40,8 +40,8 @@
     ],
     "fallback": {
       "type": "minecraft:model",
-      "model": "aether_ii:item/healing_stone"
+      "model": "aether_ii:item/healing_stone_0"
     },
-    "property": "aether_ii:crossbow/pull"
+    "property": "aether_ii:healing_stone_charges"
   }
 }

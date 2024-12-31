@@ -224,7 +224,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GOLDEN_SWET_GEL = register("golden_swet_gel", SwetGelItem::new);
     public static final DeferredItem<Item> WHITE_SWET_GEL = register("white_swet_gel", SwetGelItem::new);
     public static final DeferredItem<Item> SWET_SUGAR = register("swet_sugar");
-    public static final DeferredItem<Item> MOA_FEATHER = register("moa_feather", MoaFeatherItem::new, () -> new Item.Properties().component(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.BLUE));
+    public static final DeferredItem<Item> MOA_FEATHER = register("moa_feather", MoaFeatherItem::new, () -> new Item.Properties().component(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.LIGHT_BLUE));
     public static final DeferredItem<Item> COCKATRICE_FEATHER = register("cockatrice_feather");
 
     public static final DeferredItem<Item> SCATTERGLASS_VIAL = register("scatterglass_vial", VialItem::new, () -> new Item.Properties().stacksTo(8));

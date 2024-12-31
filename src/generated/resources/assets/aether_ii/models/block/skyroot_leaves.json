@@ -1,6 +1,8 @@
 {
   "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:cutout",
   "textures": {
-    "all": "aether_ii:block/skyroot_leaves"
+    "all": "aether_ii:block/skyroot_leaves",
+    "particle": "aether_ii:block/skyroot_leaves"
   }
 }

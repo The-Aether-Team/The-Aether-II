@@ -18,7 +18,7 @@
     {
       "type": "paletted_permutations",
       "textures": [
-        "aether_ii:item/miscellaneous/moa_egg_eyes"
+        "aether_ii:item/moa_egg_eyes"
       ],
       "palette_key": "aether_ii:entity/mobs/moa/color_palettes/eyes/base_moa_eyes",
       "permutations": {
@@ -30,10 +30,10 @@
     {
       "type": "paletted_permutations",
       "textures": [
-        "aether_ii:item/materials/moa_feather",
-        "aether_ii:item/miscellaneous/moa_egg_curved",
-        "aether_ii:item/miscellaneous/moa_egg_flat",
-        "aether_ii:item/miscellaneous/moa_egg_pointed"
+        "aether_ii:item/moa_feather",
+        "aether_ii:item/moa_egg_curved",
+        "aether_ii:item/moa_egg_flat",
+        "aether_ii:item/moa_egg_pointed"
       ],
       "palette_key": "aether_ii:entity/mobs/moa/color_palettes/feather/base_moa_feather",
       "permutations": {
@@ -60,7 +60,7 @@
     {
       "type": "paletted_permutations",
       "textures": [
-        "aether_ii:item/miscellaneous/moa_egg_keratin"
+        "aether_ii:item/moa_egg_keratin"
       ],
       "palette_key": "aether_ii:entity/mobs/moa/color_palettes/keratin/base_moa_keratin",
       "permutations": {
