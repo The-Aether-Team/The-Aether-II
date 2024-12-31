@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.providers.AetherIIItemModelProvider;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -248,5 +249,7 @@ public class AetherIIItemModelData extends AetherIIItemModelProvider {
 //        itemModels.generateLayeredItem(AetherIIItems.AETHER_PORTAL_FRAME.get(), //todo
 //                TextureMapping.getItemTexture(AetherIIItems.AETHER_PORTAL_FRAME.get()),
 //                TextureMapping.getItemTexture(AetherIIItems.AETHER_PORTAL_FRAME.get()).withSuffix("_inside"));
+
+        this.createFenceItem(blockModels, AetherIIBlocks.SKYROOT_FENCE.asItem(), AetherIIBlocks.SKYROOT_PLANKS.get());
     }
 }

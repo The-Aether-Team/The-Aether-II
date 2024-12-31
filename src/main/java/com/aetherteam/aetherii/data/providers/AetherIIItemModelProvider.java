@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.client.renderer.item.properties.*;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import net.minecraft.client.color.item.Dye;
+import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.*;
@@ -103,6 +104,12 @@ public class AetherIIItemModelProvider extends ModelProvider {
             }
         }
         itemModels.itemModelOutput.accept(item, ItemModelUtils.select(new SelectMoaEggType(), ItemModelUtils.plainModel(modelLocation), list));
+    }
+
+    // Block Items
+    public void createFenceItem(BlockModelGenerators blockModels, Item item, Block block) {
+        ModelTemplates.FENCE_INVENTORY.create(ModelLocationUtils.getModelLocation(item),
+                TextureMapping.fence(block), blockModels.modelOutput);
     }
 
     @Override
