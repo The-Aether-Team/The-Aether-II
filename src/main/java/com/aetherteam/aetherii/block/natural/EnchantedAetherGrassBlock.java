@@ -44,22 +44,23 @@ public class EnchantedAetherGrassBlock extends GrassBlock {
             aboveState.randomTick(level, abovePos, random);
         }
         if (!canBeGrass(state, level, pos)) {
-            if (!level.isAreaLoaded(pos, 3))
-                return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+            if (!level.isAreaLoaded(pos, 1)) {
+                return;
+            }
             level.setBlockAndUpdate(pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
         }
     }
 
-    private static boolean canBeGrass(BlockState state, LevelReader level, BlockPos pos) {
+    private static boolean canBeGrass(BlockState state, LevelReader levelReader, BlockPos pos) {
         BlockPos abovePos = pos.above();
-        BlockState aboveState = level.getBlockState(abovePos);
+        BlockState aboveState = levelReader.getBlockState(abovePos);
         if (aboveState.is(AetherIIBlocks.ARCTIC_SNOW) && aboveState.getValue(SnowLayerBlock.LAYERS) == 1) {
             return true;
         } else if (aboveState.getFluidState().getAmount() == 8) {
             return false;
         } else {
             int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightBlock());
-            return i < level.getMaxLocalRawBrightness(pos);
+            return i < 15;
         }
     }
 

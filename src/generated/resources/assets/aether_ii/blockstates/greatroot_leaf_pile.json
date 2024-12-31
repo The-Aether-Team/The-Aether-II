@@ -22,7 +22,7 @@
       "model": "aether_ii:block/greatroot_leaf_pile_height15"
     },
     "piles=16": {
-      "model": "aether_ii:block/greatroot_leaf_pile"
+      "model": "aether_ii:block/greatroot_leaves"
     },
     "piles=2": {
       "model": "aether_ii:block/greatroot_leaf_pile_height2"
