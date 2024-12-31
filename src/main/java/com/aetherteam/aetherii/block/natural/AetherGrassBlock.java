@@ -14,10 +14,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.world.level.block.SnowLayerBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
@@ -47,14 +44,19 @@ public class AetherGrassBlock extends GrassBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!canBeGrass(state, level, pos)) {
-            if (!level.isAreaLoaded(pos, 3))
-                return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+            if (!level.isAreaLoaded(pos, 1)) {
+                return;
+            }
+
             level.setBlockAndUpdate(pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
         } else {
-            if (!level.isAreaLoaded(pos, 3))
-                return; // Forge: prevent loading unloaded chunks when checking neighbor's light and spreading
+            if (!level.isAreaLoaded(pos, 3)) {
+                return;
+            }
+
             if (level.getMaxLocalRawBrightness(pos.above()) >= 9) {
                 BlockState defaultState = this.defaultBlockState();
+
                 for (int i = 0; i < 4; ++i) {
                     BlockPos offsetPos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                     if (level.getBlockState(offsetPos).is(AetherIIBlocks.AETHER_DIRT.get()) && canPropagate(defaultState, level, offsetPos)) {
@@ -65,16 +67,16 @@ public class AetherGrassBlock extends GrassBlock {
         }
     }
 
-    private static boolean canBeGrass(BlockState state, LevelReader level, BlockPos pos) {
+    private static boolean canBeGrass(BlockState state, LevelReader levelReader, BlockPos pos) {
         BlockPos abovePos = pos.above();
-        BlockState blockState = level.getBlockState(abovePos);
-        if ((blockState.is(AetherIIBlocks.ARCTIC_SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) || plantIsSnowed(blockState)) {
+        BlockState aboveState = levelReader.getBlockState(abovePos);
+        if ((aboveState.is(AetherIIBlocks.ARCTIC_SNOW) && aboveState.getValue(SnowLayerBlock.LAYERS) == 1) || plantIsSnowed(aboveState)) {
             return true;
-        } else if (blockState.getFluidState().getAmount() == 8) {
+        } else if (aboveState.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LightEngine.getLightBlockInto(state, blockState, Direction.UP, blockState.getLightEmission(level, abovePos));
-            return i < level.getMaxLocalRawBrightness(pos);
+            int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightBlock());
+            return i < 15;
         }
     }
 

@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "snowy=false": {
       "model": "aether_ii:block/wisproot_leaves"
+    },
+    "snowy=true": {
+      "model": "aether_ii:block/wisproot_leaves_snowy"
     }
   }
 }

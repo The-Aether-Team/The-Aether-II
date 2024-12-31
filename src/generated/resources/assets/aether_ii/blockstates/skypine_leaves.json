@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "snowy=false": {
       "model": "aether_ii:block/skypine_leaves"
+    },
+    "snowy=true": {
+      "model": "aether_ii:block/skypine_leaves_snowy"
     }
   }
 }

@@ -20,6 +20,8 @@ public class AetherIITexturedModels extends TexturedModel {
     public static final Provider TARAHESP_FLOWERS_2 = createDefault(TextureMapping::flowerbed, AetherIIModelTemplates.TARAHESP_FLOWERS_2);
     public static final Provider TARAHESP_FLOWERS_3 = createDefault(TextureMapping::flowerbed, AetherIIModelTemplates.TARAHESP_FLOWERS_3);
     public static final Provider TARAHESP_FLOWERS_4 = createDefault(TextureMapping::flowerbed, AetherIIModelTemplates.TARAHESP_FLOWERS_4);
+    public static final Provider ALTAR = createDefault(TextureMapping::cube, AetherIIModelTemplates.ALTAR);
+    public static final Provider ARKENIUM_FORGE = createDefault(TextureMapping::cube, AetherIIModelTemplates.ARKENIUM_FORGE);
 
     public AetherIITexturedModels(TextureMapping mapping, ModelTemplate template) {
         super(mapping, template);

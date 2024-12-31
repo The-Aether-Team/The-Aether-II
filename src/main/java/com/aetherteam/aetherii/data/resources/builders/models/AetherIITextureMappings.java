@@ -18,4 +18,12 @@ public class AetherIITextureMappings {
                 .put(AetherIITextureSlots.SIDE_OVERLAY_2, TextureMapping.getBlockTexture(grass, "_side_overlay_2"))
                 .put(AetherIITextureSlots.SIDE_OVERLAY_3, TextureMapping.getBlockTexture(grass, "_side_overlay_3"));
     }
+
+    public static TextureMapping dirtPath(Block path, Block dirt) {
+        return new TextureMapping()
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(dirt))
+                .copySlot(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(path, "_top"))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(path, "_side"));
+    }
 }

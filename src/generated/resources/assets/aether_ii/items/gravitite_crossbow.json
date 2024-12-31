@@ -7,7 +7,7 @@
         {
           "model": {
             "type": "minecraft:model",
-            "model": "aether_ii:item/gravitite_crossbow_arrow"
+            "model": "aether_ii:item/gravitite_crossbow_bolt"
           },
           "when": "arrow"
         }

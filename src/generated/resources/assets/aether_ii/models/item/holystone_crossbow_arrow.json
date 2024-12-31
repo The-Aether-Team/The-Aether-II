@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/crossbow",
-  "textures": {
-    "layer0": "aether_ii:item/holystone_crossbow_arrow"
-  }
-}

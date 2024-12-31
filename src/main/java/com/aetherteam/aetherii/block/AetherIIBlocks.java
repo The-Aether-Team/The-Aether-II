@@ -606,7 +606,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     private static <T extends Block> Supplier<BlockItem> registerBlockItem(final DeferredBlock<T> deferredBlock, String name) {
         return () -> {
             DeferredBlock<T> block = Objects.requireNonNull(deferredBlock);
-            Item.Properties properties = new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name)));
+            Item.Properties properties = new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name))).useBlockDescriptionPrefix();
             if (block == HOLYSTONE_ROCK) {
                 return new RockItem(HOLYSTONE_ROCK.get(), properties);
             } else if (block == AMBROSIUM_TORCH) {

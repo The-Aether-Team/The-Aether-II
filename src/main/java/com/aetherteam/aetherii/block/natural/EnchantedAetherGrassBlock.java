@@ -52,13 +52,13 @@ public class EnchantedAetherGrassBlock extends GrassBlock {
 
     private static boolean canBeGrass(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos abovePos = pos.above();
-        BlockState blockState = level.getBlockState(abovePos);
-        if (blockState.is(AetherIIBlocks.ARCTIC_SNOW) && blockState.getValue(SnowLayerBlock.LAYERS) == 1) {
+        BlockState aboveState = level.getBlockState(abovePos);
+        if (aboveState.is(AetherIIBlocks.ARCTIC_SNOW) && aboveState.getValue(SnowLayerBlock.LAYERS) == 1) {
             return true;
-        } else if (blockState.getFluidState().getAmount() == 8) {
+        } else if (aboveState.getFluidState().getAmount() == 8) {
             return false;
         } else {
-            int i = LightEngine.getLightBlockInto(state, blockState, Direction.UP, blockState.getLightEmission(level, abovePos));
+            int i = LightEngine.getLightBlockInto(state, aboveState, Direction.UP, aboveState.getLightBlock());
             return i < level.getMaxLocalRawBrightness(pos);
         }
     }
