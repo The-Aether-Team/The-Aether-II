@@ -202,11 +202,11 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         blockModels.createGrowingPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get(), AetherIIBlocks.BRETTL_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         // Lake
-        blockModels.createCrossBlock(AetherIIBlocks.ARILUM_SHOOT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(AetherIIBlocks.ARILUM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(AetherIIBlocks.ARILUM_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(AetherIIBlocks.BLOOMING_ARILUM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createCutoutCross(blockModels, AetherIIBlocks.ARILUM_SHOOT.get());
+        this.createCutoutCross(blockModels, AetherIIBlocks.ARILUM.get());
+        this.createCutoutCross(blockModels, AetherIIBlocks.ARILUM_PLANT.get());
+        this.createCutoutCross(blockModels, AetherIIBlocks.BLOOMING_ARILUM.get());
+        this.createCutoutCross(blockModels, AetherIIBlocks.BLOOMING_ARILUM_PLANT.get());
 
         // Ground Decoration
         blockModels.createTrivialCube(AetherIIBlocks.SKYROOT_TWIG.get());
