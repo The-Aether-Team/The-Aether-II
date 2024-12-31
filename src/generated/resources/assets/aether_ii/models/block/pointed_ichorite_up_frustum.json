@@ -1,5 +1,6 @@
 {
-  "parent": "minecraft:block/pointed_dripstone",
+  "parent": "minecraft:block/cross",
+  "render_type": "minecraft:cutout",
   "textures": {
     "cross": "aether_ii:block/pointed_ichorite_up_frustum"
   }

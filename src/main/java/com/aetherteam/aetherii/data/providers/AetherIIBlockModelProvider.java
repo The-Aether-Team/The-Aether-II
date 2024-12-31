@@ -147,7 +147,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         String name = "_" + direction.getSerializedName() + "_" + thickness.getSerializedName();
         TextureMapping mapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, name));
         return Variant.variant()
-                .with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, name, mapping, blockModels.modelOutput));
+                .with(VariantProperties.MODEL, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.createWithSuffix(block, name, mapping, blockModels.modelOutput));
     }
 
     public void createCrystal(BlockModelGenerators blockModels, Block block) {
