@@ -269,7 +269,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
                         age -> {
                             int i = list[age];
                             ResourceLocation location = map.computeIfAbsent(
-                                    i, j -> blockModels.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + i, ModelTemplates.CROSS, TextureMapping::cross)
+                                    i, j -> blockModels.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + i, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross)
                             );
                             return Variant.variant().with(VariantProperties.MODEL, location);
                         }
