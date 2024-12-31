@@ -143,17 +143,22 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(c2));
     }
 
-    public void createVine(BlockModelGenerators blockModels, Block block) {
-        blockModels.createMultifaceBlockStates(block);
-        ResourceLocation resourcelocation = blockModels.createFlatItemModelWithBlockTexture(block.asItem(), block);
-//        blockModels.registerSimpleFlatItemModel(block);
-    }
-
     public Variant createPointedStoneVariant(BlockModelGenerators blockModels, Block block, Direction direction, DripstoneThickness thickness) {
         String name = "_" + direction.getSerializedName() + "_" + thickness.getSerializedName();
         TextureMapping mapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, name));
         return Variant.variant()
                 .with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, name, mapping, blockModels.modelOutput));
+    }
+
+    public void createCrystal(BlockModelGenerators blockModels, Block block) {
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
+                .with(VariantProperties.MODEL, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.create(block, TextureMapping.cross(block), blockModels.modelOutput))).with(blockModels.createColumnWithFacing()));
+    }
+
+    public void createVine(BlockModelGenerators blockModels, Block block) {
+        blockModels.createMultifaceBlockStates(block);
+        ResourceLocation resourcelocation = blockModels.createFlatItemModelWithBlockTexture(block.asItem(), block);
+//        blockModels.registerSimpleFlatItemModel(block);
     }
 
     public void createArcticSnowBlocks(BlockModelGenerators blockModels) {
