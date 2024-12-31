@@ -58,7 +58,7 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         blockModels.createTrivialCube(AetherIIBlocks.FERROSITE_MUD.get());
         blockModels.createTrivialCube(AetherIIBlocks.FERROSITE.get());
         blockModels.createTrivialCube(AetherIIBlocks.RUSTED_FERROSITE.get());
-        blockModels.createCrossBlock(AetherIIBlocks.MAGNETIC_SHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createCutoutCross(blockModels, AetherIIBlocks.MAGNETIC_SHROOM.get()); //todo flower pot
 
         // Arctic
         this.createArcticSnowBlocks(blockModels);
@@ -162,14 +162,7 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
 //        blockModels.createCrossBlock(AetherIIBlocks.HIGHLAND_FERN.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 //        blockModels.createCrossBlock(AetherIIBlocks.SHIELD_FERN.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-        // Flowers
-//        blockModels.createCrossBlock(AetherIIBlocks.LILICHIME.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo custom model
-//        blockModels.createCrossBlock(AetherIIBlocks.PLURACIAN.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo custom model
-//        blockModels.createCrossBlock(AetherIIBlocks.SATIVAL_SHOOT.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo custom model
-//        blockModels.createCrossBlock(AetherIIBlocks.BLADE_POA.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo custom model
-//        blockModels.createCrossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-
-        // Potted Flowers //todo
+        // Flowers //todo
         blockModels.createPlantWithDefaultItem(AetherIIBlocks.HIGHLAND_FERN.get(), AetherIIBlocks.POTTED_HIGHLAND_FERN.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(AetherIIBlocks.SHIELD_FERN.get(), AetherIIBlocks.POTTED_SHIELD_FERN.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         this.createSnowyPlantWithDefaultItem(blockModels, AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get());
