@@ -35,7 +35,7 @@
       ]
     }
   ],
-  "render_type": "minecraft:cutout",
+  "render_type": "minecraft:cutout_mipped",
   "textures": {
     "all": "aether_ii:block/wisproot_leaves",
     "particle": "aether_ii:block/wisproot_leaves"

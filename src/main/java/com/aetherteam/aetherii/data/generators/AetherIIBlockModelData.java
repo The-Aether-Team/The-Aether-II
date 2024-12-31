@@ -51,7 +51,7 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_2.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_3.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_4.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput));
-        this.createCutoutCube(blockModels, AetherIIBlocks.TANGLED_BRANCHES.get());
+        this.createCutoutMippedCube(blockModels, AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
         blockModels.createTrivialCube(AetherIIBlocks.FERROSITE_SAND.get());

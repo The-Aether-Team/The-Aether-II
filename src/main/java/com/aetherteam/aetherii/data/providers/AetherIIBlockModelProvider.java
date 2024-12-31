@@ -24,7 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 
@@ -37,8 +36,8 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         super(output, modId);
     }
 
-    public void createCutoutCube(BlockModelGenerators blockModels, Block block) {
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, AetherIIModelTemplates.TEMPLATE_CUTOUT_CUBE.create(block, TextureMapping.cube(block), blockModels.modelOutput)));
+    public void createCutoutMippedCube(BlockModelGenerators blockModels, Block block) {
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE.create(block, TextureMapping.cube(block), blockModels.modelOutput)));
     }
 
     public void createTranslucentCube(BlockModelGenerators blockModels, Block block) {
@@ -181,12 +180,12 @@ public class AetherIIBlockModelProvider extends ModelProvider {
     public void createLeavesWithPiles(BlockModelGenerators blockModels, Block leaves, Block piles) { //TODO
         TextureMapping leavesMapping = TextureMapping.cube(leaves).copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE);
 
-        ResourceLocation defaultLocation = AetherIIModelTemplates.TEMPLATE_CUTOUT_CUBE.create(leaves, leavesMapping, blockModels.modelOutput);
+        ResourceLocation defaultLocation = AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE.create(leaves, leavesMapping, blockModels.modelOutput);
         ResourceLocation snowyLocation = blockModels.createSuffixedVariant(leaves, "_snowy", ModelTemplates.CUBE_ALL, TextureMapping::cube);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(leaves)
                 .with(BlockModelGenerators.createBooleanModelDispatch(AetherLeavesBlock.SNOWY, snowyLocation, defaultLocation)));
 
-        this.createPiles(blockModels, leaves, piles, leavesMapping, defaultLocation);
+        this.createPiles(blockModels, piles, leavesMapping, defaultLocation);
     }
 
     public void createTintedLeavesWithPiles(BlockModelGenerators blockModels, Block leaves, Block piles) { //TODO
@@ -195,10 +194,10 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         ResourceLocation defaultLocation = AetherIIModelTemplates.LEAVES.create(leaves, leavesMapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(leaves, defaultLocation));
 
-        this.createPiles(blockModels, leaves, piles, leavesMapping, defaultLocation);
+        this.createPiles(blockModels, piles, leavesMapping, defaultLocation);
     }
 
-    public void createPiles(BlockModelGenerators blockModels, Block leaves, Block piles, TextureMapping mapping, ResourceLocation location) {
+    public void createPiles(BlockModelGenerators blockModels, Block piles, TextureMapping mapping, ResourceLocation location) {
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(piles).with(PropertyDispatch.property(AetherLeafPileBlock.PILES).generate((i) -> {
             Variant variant = Variant.variant();
             VariantProperty<ResourceLocation> property = VariantProperties.MODEL;
@@ -208,7 +207,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
                 pileLocation = ModelLocationUtils.getModelLocation(piles, "_height" + layers);
                 AetherIIModelTemplates.THIN.extend()
                         .ambientOcclusion(layers == 1)
-                        .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                        .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
                         .element(elementBuilder -> elementBuilder.from(0.0F, 0.0F, 0.0F).to(16.0F, (float) layers, 16.0F)
                                 .face(Direction.DOWN, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
                                 .face(Direction.UP, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))

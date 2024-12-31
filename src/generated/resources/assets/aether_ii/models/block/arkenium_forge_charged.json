@@ -1,5 +1,6 @@
 {
   "parent": "aether_ii:block/template_arkenium_forge",
+  "render_type": "minecraft:cutout",
   "textures": {
     "all": "aether_ii:block/arkenium_forge_charged"
   }
