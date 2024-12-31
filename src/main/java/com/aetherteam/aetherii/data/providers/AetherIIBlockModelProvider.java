@@ -142,6 +142,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         }
 
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(c2));
+        blockModels.registerSimpleFlatItemModel(block);
     }
 
     public Variant createPointedStoneVariant(BlockModelGenerators blockModels, Block block, Direction direction, DripstoneThickness thickness) {
