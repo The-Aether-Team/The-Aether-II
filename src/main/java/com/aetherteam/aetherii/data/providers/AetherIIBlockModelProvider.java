@@ -24,7 +24,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 
@@ -37,8 +36,8 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         super(output, modId);
     }
 
-    public void createCutoutCube(BlockModelGenerators blockModels, Block block) {
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, AetherIIModelTemplates.TEMPLATE_CUTOUT_CUBE.create(block, TextureMapping.cube(block), blockModels.modelOutput)));
+    public void createCutoutMippedCube(BlockModelGenerators blockModels, Block block) {
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE.create(block, TextureMapping.cube(block), blockModels.modelOutput)));
     }
 
     public void createTranslucentCube(BlockModelGenerators blockModels, Block block) {
@@ -55,6 +54,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
 
     public void createCutoutCross(BlockModelGenerators blockModels, Block block) {
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.create(block, TextureMapping.cross(block), blockModels.modelOutput)));
+        blockModels.registerSimpleFlatItemModel(block);
     }
 
     public void createAetherPortalBlock(BlockModelGenerators blockModels) {
@@ -142,19 +142,26 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         }
 
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(c2));
-    }
-
-    public void createVine(BlockModelGenerators blockModels, Block block) {
-        blockModels.createMultifaceBlockStates(block);
-        ResourceLocation resourcelocation = blockModels.createFlatItemModelWithBlockTexture(block.asItem(), block);
-//        blockModels.registerSimpleFlatItemModel(block);
+        blockModels.registerSimpleFlatItemModel(block);
     }
 
     public Variant createPointedStoneVariant(BlockModelGenerators blockModels, Block block, Direction direction, DripstoneThickness thickness) {
         String name = "_" + direction.getSerializedName() + "_" + thickness.getSerializedName();
         TextureMapping mapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, name));
         return Variant.variant()
-                .with(VariantProperties.MODEL, ModelTemplates.POINTED_DRIPSTONE.createWithSuffix(block, name, mapping, blockModels.modelOutput));
+                .with(VariantProperties.MODEL, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.createWithSuffix(block, name, mapping, blockModels.modelOutput));
+    }
+
+    public void createCrystal(BlockModelGenerators blockModels, Block block) {
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
+                .with(VariantProperties.MODEL, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.create(block, TextureMapping.cross(block), blockModels.modelOutput))).with(blockModels.createColumnWithFacing()));
+        blockModels.registerSimpleFlatItemModel(block);
+    }
+
+    public void createVine(BlockModelGenerators blockModels, Block block) {
+        blockModels.createMultifaceBlockStates(block);
+        ResourceLocation resourcelocation = blockModels.createFlatItemModelWithBlockTexture(block.asItem(), block);
+//        blockModels.registerSimpleFlatItemModel(block);
     }
 
     public void createArcticSnowBlocks(BlockModelGenerators blockModels) {
@@ -181,12 +188,12 @@ public class AetherIIBlockModelProvider extends ModelProvider {
     public void createLeavesWithPiles(BlockModelGenerators blockModels, Block leaves, Block piles) { //TODO
         TextureMapping leavesMapping = TextureMapping.cube(leaves).copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE);
 
-        ResourceLocation defaultLocation = AetherIIModelTemplates.TEMPLATE_CUTOUT_CUBE.create(leaves, leavesMapping, blockModels.modelOutput);
+        ResourceLocation defaultLocation = AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE.create(leaves, leavesMapping, blockModels.modelOutput);
         ResourceLocation snowyLocation = blockModels.createSuffixedVariant(leaves, "_snowy", ModelTemplates.CUBE_ALL, TextureMapping::cube);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(leaves)
                 .with(BlockModelGenerators.createBooleanModelDispatch(AetherLeavesBlock.SNOWY, snowyLocation, defaultLocation)));
 
-        this.createPiles(blockModels, leaves, piles, leavesMapping, defaultLocation);
+        this.createPiles(blockModels, piles, leavesMapping, defaultLocation);
     }
 
     public void createTintedLeavesWithPiles(BlockModelGenerators blockModels, Block leaves, Block piles) { //TODO
@@ -195,10 +202,10 @@ public class AetherIIBlockModelProvider extends ModelProvider {
         ResourceLocation defaultLocation = AetherIIModelTemplates.LEAVES.create(leaves, leavesMapping, blockModels.modelOutput);
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(leaves, defaultLocation));
 
-        this.createPiles(blockModels, leaves, piles, leavesMapping, defaultLocation);
+        this.createPiles(blockModels, piles, leavesMapping, defaultLocation);
     }
 
-    public void createPiles(BlockModelGenerators blockModels, Block leaves, Block piles, TextureMapping mapping, ResourceLocation location) {
+    public void createPiles(BlockModelGenerators blockModels, Block piles, TextureMapping mapping, ResourceLocation location) {
         blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(piles).with(PropertyDispatch.property(AetherLeafPileBlock.PILES).generate((i) -> {
             Variant variant = Variant.variant();
             VariantProperty<ResourceLocation> property = VariantProperties.MODEL;
@@ -208,7 +215,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
                 pileLocation = ModelLocationUtils.getModelLocation(piles, "_height" + layers);
                 AetherIIModelTemplates.THIN.extend()
                         .ambientOcclusion(layers == 1)
-                        .renderType(ResourceLocation.withDefaultNamespace("cutout"))
+                        .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
                         .element(elementBuilder -> elementBuilder.from(0.0F, 0.0F, 0.0F).to(16.0F, (float) layers, 16.0F)
                                 .face(Direction.DOWN, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
                                 .face(Direction.UP, faceBuilder -> faceBuilder.texture(TextureSlot.ALL))
@@ -265,7 +272,7 @@ public class AetherIIBlockModelProvider extends ModelProvider {
                         age -> {
                             int i = list[age];
                             ResourceLocation location = map.computeIfAbsent(
-                                    i, j -> blockModels.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + i, ModelTemplates.CROSS, TextureMapping::cross)
+                                    i, j -> blockModels.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + i, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross)
                             );
                             return Variant.variant().with(VariantProperties.MODEL, location);
                         }

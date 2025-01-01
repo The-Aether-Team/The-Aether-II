@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/greatoak_leaf_pile"
+    "model": "aether_ii:block/greatoak_leaf_pile_height1"
   }
 }

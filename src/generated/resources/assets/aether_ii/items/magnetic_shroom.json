@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/magnetic_shroom"
+    "model": "aether_ii:item/magnetic_shroom"
   }
 }

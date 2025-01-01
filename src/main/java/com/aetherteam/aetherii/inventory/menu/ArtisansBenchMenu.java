@@ -21,7 +21,7 @@ import java.util.Optional;
 
 public class ArtisansBenchMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess access;
-    private final DataSlot selectedRecipeIndex = DataSlot.standalone();
+    private DataSlot selectedRecipeIndex = DataSlot.standalone();
     private final Level level;
     private SelectableRecipe.SingleInputSet<StonecutterRecipe> recipesForInput;
     private ItemStack input = ItemStack.EMPTY;
@@ -45,6 +45,8 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
 
     public ArtisansBenchMenu(int containerId, Inventory playerInventory, final ContainerLevelAccess access) {
         super(AetherIIMenuTypes.ARTISANS_BENCH.get(), containerId);
+        this.selectedRecipeIndex = DataSlot.standalone();
+        this.recipesForInput = SelectableRecipe.SingleInputSet.empty();
         this.access = access;
         this.level = playerInventory.player.level();
         this.inputSlot = this.addSlot(new Slot(this.container, 0, 20, 33));

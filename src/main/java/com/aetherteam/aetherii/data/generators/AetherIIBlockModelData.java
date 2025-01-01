@@ -51,22 +51,22 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_2.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_3.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_4.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), blockModels.modelOutput));
-        this.createCutoutCube(blockModels, AetherIIBlocks.TANGLED_BRANCHES.get());
+        this.createCutoutMippedCube(blockModels, AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
         blockModels.createTrivialCube(AetherIIBlocks.FERROSITE_SAND.get());
         blockModels.createTrivialCube(AetherIIBlocks.FERROSITE_MUD.get());
         blockModels.createTrivialCube(AetherIIBlocks.FERROSITE.get());
         blockModels.createTrivialCube(AetherIIBlocks.RUSTED_FERROSITE.get());
-        blockModels.createCrossBlock(AetherIIBlocks.MAGNETIC_SHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createCutoutCross(blockModels, AetherIIBlocks.MAGNETIC_SHROOM.get()); //todo flower pot
 
         // Arctic
         this.createArcticSnowBlocks(blockModels);
         this.createTranslucentCube(blockModels, AetherIIBlocks.ARCTIC_ICE.get());
         blockModels.createTrivialCube(AetherIIBlocks.ARCTIC_PACKED_ICE.get());
-        blockModels.createAmethystCluster(AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
-        blockModels.createAmethystCluster(AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
-        blockModels.createAmethystCluster(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
+        this.createCrystal(blockModels, AetherIIBlocks.LARGE_ARCTIC_ICE_CRYSTAL.get());
+        this.createCrystal(blockModels, AetherIIBlocks.MEDIUM_ARCTIC_ICE_CRYSTAL.get());
+        this.createCrystal(blockModels, AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());
         blockModels.createFullAndCarpetBlocks(AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), AetherIIBlocks.SHAYELINN_MOSS_CARPET.get());
         this.createVine(blockModels, AetherIIBlocks.SHAYELINN_MOSS_VINES.get()); //todo
         this.createCustomFlowerBed(blockModels, AetherIIBlocks.HOLPUPEA.get(),
@@ -98,7 +98,7 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         blockModels.createTrivialCube(AetherIIBlocks.UNDERSHALE_ARKENIUM_ORE.get());
         blockModels.createTrivialCube(AetherIIBlocks.UNDERSHALE_GRAVITITE_ORE.get());
         blockModels.createTrivialCube(AetherIIBlocks.CORROBONITE_ORE.get());
-        blockModels.createAmethystCluster(AetherIIBlocks.CORROBONITE_CLUSTER.get());
+        this.createCrystal(blockModels, AetherIIBlocks.CORROBONITE_CLUSTER.get());
 
         // Aerclouds
         this.createTranslucentCube(blockModels, AetherIIBlocks.COLD_AERCLOUD.get()); //todo translucent interior
@@ -162,14 +162,7 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
 //        blockModels.createCrossBlock(AetherIIBlocks.HIGHLAND_FERN.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 //        blockModels.createCrossBlock(AetherIIBlocks.SHIELD_FERN.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-        // Flowers
-//        blockModels.createCrossBlock(AetherIIBlocks.LILICHIME.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo custom model
-//        blockModels.createCrossBlock(AetherIIBlocks.PLURACIAN.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo custom model
-//        blockModels.createCrossBlock(AetherIIBlocks.SATIVAL_SHOOT.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo custom model
-//        blockModels.createCrossBlock(AetherIIBlocks.BLADE_POA.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo custom model
-//        blockModels.createCrossBlock(AetherIIBlocks.AECHOR_CUTTING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-
-        // Potted Flowers //todo
+        // Flowers //todo
         blockModels.createPlantWithDefaultItem(AetherIIBlocks.HIGHLAND_FERN.get(), AetherIIBlocks.POTTED_HIGHLAND_FERN.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(AetherIIBlocks.SHIELD_FERN.get(), AetherIIBlocks.POTTED_SHIELD_FERN.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         this.createSnowyPlantWithDefaultItem(blockModels, AetherIIBlocks.HESPEROSE.get(), AetherIIBlocks.POTTED_HESPEROSE.get());
@@ -202,11 +195,11 @@ public class AetherIIBlockModelData extends AetherIIBlockModelProvider {
         blockModels.createGrowingPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get(), AetherIIBlocks.BRETTL_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         // Lake
-        blockModels.createCrossBlock(AetherIIBlocks.ARILUM_SHOOT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(AetherIIBlocks.ARILUM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(AetherIIBlocks.ARILUM_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(AetherIIBlocks.BLOOMING_ARILUM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        blockModels.createCrossBlock(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createCutoutCross(blockModels, AetherIIBlocks.ARILUM_SHOOT.get());
+        this.createCutoutCross(blockModels, AetherIIBlocks.ARILUM.get());
+        this.createCutoutCross(blockModels, AetherIIBlocks.ARILUM_PLANT.get());
+        this.createCutoutCross(blockModels, AetherIIBlocks.BLOOMING_ARILUM.get());
+        this.createCutoutCross(blockModels, AetherIIBlocks.BLOOMING_ARILUM_PLANT.get());
 
         // Ground Decoration
         blockModels.createTrivialCube(AetherIIBlocks.SKYROOT_TWIG.get());
