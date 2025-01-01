@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.block.portal;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import net.minecraft.BlockUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -152,7 +153,7 @@ public class AetherPortalShape {
                     return i;
                 }
 
-                if (blockstate.is(Blocks.NETHER_PORTAL)) {
+                if (blockstate.is(AetherIIBlocks.AETHER_PORTAL)) {
                     p_374330_.increment();
                 }
             }
@@ -162,7 +163,7 @@ public class AetherPortalShape {
     }
 
     private static boolean isEmpty(BlockState state) {
-        return state.isAir() || state.is(BlockTags.FIRE) || state.is(Blocks.NETHER_PORTAL);
+        return state.isAir() || state.is(Blocks.WATER) || state.is(AetherIIBlocks.AETHER_PORTAL);
     }
 
     public boolean isValid() {
@@ -170,7 +171,7 @@ public class AetherPortalShape {
     }
 
     public void createPortalBlocks(LevelAccessor p_374419_) {
-        BlockState blockstate = (BlockState) Blocks.NETHER_PORTAL.defaultBlockState().setValue(NetherPortalBlock.AXIS, this.axis);
+        BlockState blockstate = AetherIIBlocks.AETHER_PORTAL.get().defaultBlockState().setValue(AetherPortalBlock.AXIS, this.axis);
         BlockPos.betweenClosed(this.bottomLeft, this.bottomLeft.relative(Direction.UP, this.height - 1).relative(this.rightDir, this.width - 1)).forEach((p_374024_) -> p_374419_.setBlock(p_374024_, blockstate, 18));
     }
 
@@ -185,17 +186,17 @@ public class AetherPortalShape {
         double d2;
         if (d0 > (double) 0.0F) {
             double d3 = (double) blockpos.get(axis) + (double) entityDimensions.width() / (double) 2.0F;
-            d2 = Mth.clamp(Mth.inverseLerp(pos.get(axis) - d3, (double) 0.0F, d0), (double) 0.0F, (double) 1.0F);
+            d2 = Mth.clamp(Mth.inverseLerp(pos.get(axis) - d3, 0.0F, d0), 0.0F, 1.0F);
         } else {
-            d2 = (double) 0.5F;
+            d2 = 0.5F;
         }
 
         double d5;
         if (d1 > (double) 0.0F) {
             Direction.Axis direction$axis = Direction.Axis.Y;
-            d5 = Mth.clamp(Mth.inverseLerp(pos.get(direction$axis) - (double) blockpos.get(direction$axis), (double) 0.0F, d1), (double) 0.0F, (double) 1.0F);
+            d5 = Mth.clamp(Mth.inverseLerp(pos.get(direction$axis) - (double) blockpos.get(direction$axis), 0.0F, d1), 0.0F, 1.0F);
         } else {
-            d5 = (double) 0.0F;
+            d5 = 0.0F;
         }
 
         Direction.Axis direction$axis1 = axis == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X;
@@ -206,11 +207,11 @@ public class AetherPortalShape {
     public static Vec3 findCollisionFreePosition(Vec3 pos, ServerLevel level, Entity entity, EntityDimensions dimensions) {
         if (!(dimensions.width() > 4.0F) && !(dimensions.height() > 4.0F)) {
             double d0 = (double) dimensions.height() / (double) 2.0F;
-            Vec3 vec3 = pos.add((double) 0.0F, d0, (double) 0.0F);
-            VoxelShape voxelshape = Shapes.create(AABB.ofSize(vec3, (double) dimensions.width(), (double) 0.0F, (double) dimensions.width()).expandTowards((double) 0.0F, (double) 1.0F, (double) 0.0F).inflate(1.0E-6));
-            Optional<Vec3> optional = level.findFreePosition(entity, voxelshape, vec3, (double) dimensions.width(), (double) dimensions.height(), (double) dimensions.width());
-            Optional<Vec3> optional1 = optional.map((p_259019_) -> p_259019_.subtract((double) 0.0F, d0, (double) 0.0F));
-            return (Vec3) optional1.orElse(pos);
+            Vec3 vec3 = pos.add(0.0F, d0, 0.0F);
+            VoxelShape voxelshape = Shapes.create(AABB.ofSize(vec3, dimensions.width(), 0.0F, dimensions.width()).expandTowards(0.0F, 1.0F, 0.0F).inflate(1.0E-6));
+            Optional<Vec3> optional = level.findFreePosition(entity, voxelshape, vec3, dimensions.width(), dimensions.height(), dimensions.width());
+            Optional<Vec3> optional1 = optional.map((p_259019_) -> p_259019_.subtract(0.0F, d0, 0.0F));
+            return optional1.orElse(pos);
         } else {
             return pos;
         }

@@ -40,15 +40,15 @@ public class AetherPortalForcer {
         }
     }
 
-    public Optional<BlockPos> findClosestPortalPosition(BlockPos pExitPos, WorldBorder pWorldBorder) {
+    public Optional<BlockPos> findClosestPortalPosition(BlockPos exitPos, WorldBorder pWorldBorder) {
         PoiManager poimanager = this.level.getPoiManager();
         int i = 128;
-        poimanager.ensureLoadedAndValid(this.level, pExitPos, i);
-        return poimanager.getInSquare(p_230634_ -> p_230634_.is(AetherIIPoi.AETHER_PORTAL), pExitPos, i, PoiManager.Occupancy.ANY)
+        poimanager.ensureLoadedAndValid(this.level, exitPos, i);
+        return poimanager.getInSquare(poi -> poi.is(AetherIIPoi.AETHER_PORTAL), exitPos, i, PoiManager.Occupancy.ANY)
                 .map(PoiRecord::getPos)
                 .filter(pWorldBorder::isWithinBounds)
                 .filter(p_352047_ -> this.level.getBlockState(p_352047_).hasProperty(BlockStateProperties.HORIZONTAL_AXIS))
-                .min(Comparator.<BlockPos>comparingDouble(p_352046_ -> p_352046_.distSqr(pExitPos)).thenComparingInt(Vec3i::getY));
+                .min(Comparator.<BlockPos>comparingDouble(p_352046_ -> p_352046_.distSqr(exitPos)).thenComparingInt(Vec3i::getY));
     }
 
     /**

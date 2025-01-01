@@ -49,10 +49,6 @@ public class AetherPortalBlock extends Block implements Portal {
         builder.add(AXIS);
     }
 
-    /**
-     * [CODE COPY] - {@link Entity#handleInsidePortal(BlockPos)}<br>
-     * Warning for "deprecation" is suppressed because the method is fine to override.
-     */
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity.canUsePortal(false)) {
