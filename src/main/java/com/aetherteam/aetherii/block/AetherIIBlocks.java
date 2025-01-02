@@ -769,6 +769,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
             .put(() -> AetherIIBlocks.WISPROOT_LOG, () -> AetherIIBlocks.STRIPPED_WISPROOT_LOG)
             .put(() -> AetherIIBlocks.WISPROOT_WOOD, () -> AetherIIBlocks.STRIPPED_WISPROOT_WOOD)
             .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG, () -> AetherIIBlocks.WISPROOT_LOG)
+            .put(() -> AetherIIBlocks.MOSSY_WISPROOT_LOG_END, () -> AetherIIBlocks.WISPROOT_LOG)
             .put(() -> AetherIIBlocks.AMBEROOT_LOG, () -> AetherIIBlocks.STRIPPED_SKYROOT_LOG)
             .put(() -> AetherIIBlocks.AMBEROOT_WOOD, () -> AetherIIBlocks.STRIPPED_SKYROOT_WOOD)
             .build();
