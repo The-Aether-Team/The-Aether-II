@@ -60,6 +60,8 @@ public class AetherIIModelTemplates {
                     .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.create("side_overlay_3")).tintindex(2).cullface(Direction.WEST))
                     .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.create("side_overlay_3")).tintindex(2).cullface(Direction.EAST))
             ).build();
+    public static final ModelTemplate PORTAL_NS = ModelTemplates.create("nether_portal_ns", "_ns", AetherIITextureSlots.PORTAL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build();
+    public static final ModelTemplate PORTAL_EW = ModelTemplates.create("nether_portal_ew", "_ew", AetherIITextureSlots.PORTAL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build();
     public static final ModelTemplate THIN = ModelTemplates.create("thin_block", TextureSlot.ALL);
     public static final ModelTemplate DIRT_PATH = ModelTemplates.create("dirt_path", TextureSlot.BOTTOM, TextureSlot.PARTICLE, TextureSlot.TOP, TextureSlot.SIDE);
     public static final ModelTemplate LEAVES = ModelTemplates.create("leaves", TextureSlot.ALL).extend().renderType(ResourceLocation.withDefaultNamespace("cutout_mipped")).build();

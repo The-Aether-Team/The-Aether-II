@@ -127,9 +127,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createAetherPortalBlock() {
+        ResourceLocation locationNS = AetherIIModelTemplates.PORTAL_NS.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput);
+        ResourceLocation locationEW = AetherIIModelTemplates.PORTAL_EW.create(AetherIIBlocks.AETHER_PORTAL.get(), AetherIITextureMappings.portal(AetherIIBlocks.AETHER_PORTAL.get()), this.modelOutput);
+
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.AETHER_PORTAL.get()).with(PropertyDispatch.property(BlockStateProperties.HORIZONTAL_AXIS)
-                .select(Direction.Axis.X, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(AetherIIBlocks.AETHER_PORTAL.get(), "_ns")))
-                .select(Direction.Axis.Z, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(AetherIIBlocks.AETHER_PORTAL.get(), "_ew")))));
+                .select(Direction.Axis.X, Variant.variant().with(VariantProperties.MODEL, locationNS))
+                .select(Direction.Axis.Z, Variant.variant().with(VariantProperties.MODEL, locationEW))));
     }
 
     public void createAetherGrassBlocks() {

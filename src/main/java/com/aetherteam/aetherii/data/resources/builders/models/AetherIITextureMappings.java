@@ -5,14 +5,19 @@ import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITextureMappings {
-    public static TextureMapping snowyGrass(Block grass, Block dirt) {
+    public static TextureMapping portal(Block portal) {
+        return new TextureMapping()
+                .put(AetherIITextureSlots.PORTAL, TextureMapping.getBlockTexture(portal))
+                .copySlot(AetherIITextureSlots.PORTAL, TextureSlot.PARTICLE);
+    }
+
+        public static TextureMapping snowyGrass(Block grass, Block dirt) {
         return  new TextureMapping()
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(dirt))
                 .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(grass, "_top"))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(grass, "_snow"));
     }
-
 
     public static TextureMapping tintedGrass(Block grass, Block dirt) {
         return new TextureMapping()

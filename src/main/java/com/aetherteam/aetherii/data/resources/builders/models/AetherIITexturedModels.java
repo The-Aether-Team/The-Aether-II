@@ -8,6 +8,8 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class AetherIITexturedModels extends TexturedModel {
+    public static final Provider AETHER_PORTAL_NS = createDefault(AetherIITextureMappings::flowerbed, AetherIIModelTemplates.HOLPUPEA_2);
+    public static final Provider AETHER_PORTAL_EW = createDefault(AetherIITextureMappings::flowerbed, AetherIIModelTemplates.HOLPUPEA_2);
     public static final Provider LEAVES = createDefault(TextureMapping::cube, AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE_ALL);
     public static final Provider TINTED_LEAVES = createDefault(TextureMapping::cube, AetherIIModelTemplates.LEAVES);
     public static final Provider ASYMMETRICAL_CROSS_EVEN = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_EVEN);
