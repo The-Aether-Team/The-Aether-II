@@ -1,6 +1,29 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/aether_long_grass"
+    "model": "aether_ii:item/aether_long_grass",
+    "tints": [
+      {
+        "type": "aether_ii:aether_grass",
+        "darkSaturationOffset": 5.0,
+        "defaultColor": 11665355,
+        "lightSaturationOffset": 6.0,
+        "tintIndex": 0
+      },
+      {
+        "type": "aether_ii:aether_grass",
+        "darkSaturationOffset": 5.0,
+        "defaultColor": 11665355,
+        "lightSaturationOffset": 6.0,
+        "tintIndex": 1
+      },
+      {
+        "type": "aether_ii:aether_grass",
+        "darkSaturationOffset": 5.0,
+        "defaultColor": 11665355,
+        "lightSaturationOffset": 6.0,
+        "tintIndex": 2
+      }
+    ]
   }
 }

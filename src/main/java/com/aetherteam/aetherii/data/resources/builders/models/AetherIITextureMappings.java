@@ -33,6 +33,15 @@ public class AetherIITextureMappings {
                 .put(AetherIITextureSlots.SIDE_OVERLAY_3, TextureMapping.getBlockTexture(grass, "_side_overlay_3"));
     }
 
+    public static TextureMapping tintedTallGrass(Block tallGrass) {
+        return new TextureMapping()
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(tallGrass))
+                .copySlot(TextureSlot.CROSS, TextureSlot.PARTICLE)
+                .put(AetherIITextureSlots.OVERLAY_1, TextureMapping.getBlockTexture(tallGrass, "_1"))
+                .put(AetherIITextureSlots.OVERLAY_2, TextureMapping.getBlockTexture(tallGrass, "_2"))
+                .put(AetherIITextureSlots.OVERLAY_3, TextureMapping.getBlockTexture(tallGrass, "_3"));
+    }
+
     public static TextureMapping dirtPath(Block path, Block dirt) {
         return new TextureMapping()
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(dirt))
