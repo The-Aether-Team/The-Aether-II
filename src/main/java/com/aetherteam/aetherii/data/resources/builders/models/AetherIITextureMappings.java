@@ -50,6 +50,13 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(path, "_side"));
     }
 
+    public static TextureMapping bushBlock(Block bush) {
+        return new TextureMapping()
+                .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(bush))
+                .copySlot(TextureSlot.TEXTURE, TextureSlot.PARTICLE)
+                .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(bush));
+    }
+
     public static TextureMapping flowerbed(Block block) {
         return new TextureMapping()
                 .put(TextureSlot.FLOWERBED, TextureMapping.getBlockTexture(block))

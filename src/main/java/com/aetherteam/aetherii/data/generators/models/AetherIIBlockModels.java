@@ -195,7 +195,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 //        this.createPlantWithDefaultItem(AetherIIBlocks.ORANGE_TREE.get(), AetherIIBlocks.POTTED_ORANGE_TREE.get(), BlockModelGenerators.PlantType.NOT_TINTED); //todo
 //
 //        // Surface Vegetation
-//        this.createValkyrieSprout(blockModels);
+        this.createValkyrieSprout();
 //        this.createGrowingPlant(AetherIIBlocks.BRETTL_PLANT_TIP.get(), AetherIIBlocks.BRETTL_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         // Lake

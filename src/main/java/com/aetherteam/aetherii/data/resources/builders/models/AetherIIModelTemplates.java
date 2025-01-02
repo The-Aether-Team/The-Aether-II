@@ -136,6 +136,30 @@ public class AetherIIModelTemplates {
                     .face(Direction.WEST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(16, 0, 0, 16).cullface(Direction.EAST))
                     .face(Direction.EAST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(0, 0, 16, 16).cullface(Direction.EAST))
             ).build();
+
+    public static final ModelTemplate BUSH_BLOCK = create("bush_block", TextureSlot.TEXTURE, TextureSlot.PARTICLE, TextureSlot.CROSS).extend()
+            .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
+            .element((builder) -> builder
+                    .from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.TEXTURE))
+                    .face(Direction.UP, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.TEXTURE))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.TEXTURE))
+                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.TEXTURE))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.TEXTURE))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.TEXTURE))
+            ).element((builder) -> builder
+                    .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
+                    .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
+                    .shade(false)
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.CROSS))
+                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.CROSS))
+            ).element((builder) -> builder
+                    .from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F)
+                    .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
+                    .shade(false)
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.CROSS))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.CROSS))
+            ).build();
     public static final ModelTemplate LADDER = ModelTemplates.create("ladder", TextureSlot.TEXTURE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();

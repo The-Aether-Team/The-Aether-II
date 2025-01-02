@@ -2,10 +2,7 @@ package com.aetherteam.aetherii.data.providers;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
-import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
-import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
-import com.aetherteam.aetherii.block.natural.AetherTallGrassBlock;
-import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
+import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
@@ -13,6 +10,8 @@ import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
@@ -467,25 +466,25 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createOrientableTrapdoor(block, top, bottom, open));
         this.registerSimpleItemModel(block, bottom);
     }
-//
-//    public void createValkyrieSprout(BlockModelGenerators blockModels) {
-//        Integer[] list = new Integer[]{0, 1, 2};
-//
-//        Int2ObjectMap<ResourceLocation> map = new Int2ObjectOpenHashMap<>();
-//        PropertyDispatch propertyDispatch = PropertyDispatch.property(ValkyrieSproutBlock.AGE)
-//                .generate(
-//                        age -> {
-//                            int i = list[age];
-//                            ResourceLocation location = map.computeIfAbsent(
-//                                    i, j -> blockModels.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + i, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross)
-//                            );
-//                            return Variant.variant().with(VariantProperties.MODEL, location);
-//                        }
-//                );
-//        blockModels.registerSimpleFlatItemModel(AetherIIBlocks.VALKYRIE_SPROUT.get().asItem());
-//        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.VALKYRIE_SPROUT.get()).with(propertyDispatch));
-//    }
-//
+
+    public void createValkyrieSprout() {
+        Integer[] list = new Integer[]{0, 1, 2};
+
+        Int2ObjectMap<ResourceLocation> map = new Int2ObjectOpenHashMap<>();
+        PropertyDispatch propertyDispatch = PropertyDispatch.property(ValkyrieSproutBlock.AGE)
+                .generate(
+                        age -> {
+                            int i = list[age];
+                            ResourceLocation location = map.computeIfAbsent(
+                                    i, j -> this.createSuffixedVariant(AetherIIBlocks.VALKYRIE_SPROUT.get(), "_stage" + i, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross)
+                            );
+                            return Variant.variant().with(VariantProperties.MODEL, location);
+                        }
+                );
+        this.registerSimpleFlatItemModel(AetherIIBlocks.VALKYRIE_SPROUT.get(),"_stage0");
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(AetherIIBlocks.VALKYRIE_SPROUT.get()).with(propertyDispatch));
+    }
+
     public void createAmbrosiumTorch() {
         TextureMapping mapping = TextureMapping.torch(AetherIIBlocks.AMBROSIUM_TORCH.get());
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.AMBROSIUM_TORCH.get(), AetherIIModelTemplates.TALL_TORCH.create(AetherIIBlocks.AMBROSIUM_TORCH.get(), mapping, this.modelOutput)));
