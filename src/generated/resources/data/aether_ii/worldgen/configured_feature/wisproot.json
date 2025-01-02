@@ -5,9 +5,9 @@
       {
         "type": "aether_ii:wisproot_decorator",
         "block": {
-          "Name": "aether_ii:mossy_wisproot_log",
+          "Name": "aether_ii:mossy_wisproot_log_end",
           "Properties": {
-            "axis": "y"
+            "facing": "up"
           }
         }
       }
