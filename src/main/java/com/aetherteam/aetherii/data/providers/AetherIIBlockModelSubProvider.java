@@ -444,6 +444,11 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleTintedItemModel(AetherIIBlocks.HIGHLAND_FERN.get(), itemLocation, new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F));
     }
 
+    public void createBush(Block block) {
+        ResourceLocation location = AetherIIModelTemplates.BUSH_BLOCK.create(block, AetherIITextureMappings.bushBlock(block), this.modelOutput);
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, location));
+    }
+
     public void createSecretDoor(Block block, Block base) {
         TextureMapping mapping = TextureMapping.door(TextureMapping.getBlockTexture(base), TextureMapping.getBlockTexture(base));
         ResourceLocation bottomLeft = ModelTemplates.DOOR_BOTTOM_LEFT.create(block, mapping, this.modelOutput);

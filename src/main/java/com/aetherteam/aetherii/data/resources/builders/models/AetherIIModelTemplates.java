@@ -137,7 +137,7 @@ public class AetherIIModelTemplates {
                     .face(Direction.EAST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(0, 0, 16, 16).cullface(Direction.EAST))
             ).build();
 
-    public static final ModelTemplate BUSH_BLOCK = create("bush_block", TextureSlot.TEXTURE, TextureSlot.PARTICLE, TextureSlot.CROSS).extend()
+    public static final ModelTemplate BUSH_BLOCK = create("cube", TextureSlot.TEXTURE, TextureSlot.PARTICLE, TextureSlot.CROSS).extend()
             .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
             .element((builder) -> builder
                     .from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
