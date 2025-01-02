@@ -598,7 +598,7 @@ package com.aetherteam.aetherii.data.providers;
 //        ModelFile chest = this.models().cubeAll(this.name(block), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/construction/skyroot_planks"));
 //        this.chest(block, chest);
 //    }
-/
+//
 //
 //    public void bed(Block block, Block dummyBlock) {
 //        ModelFile head = this.models().cubeAll(this.name(block) + "_head", this.texture(this.name(dummyBlock), "construction/"));
