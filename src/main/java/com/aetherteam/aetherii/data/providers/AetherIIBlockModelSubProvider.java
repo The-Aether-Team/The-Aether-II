@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.natural.AetherLeafPileBlock;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
+import com.aetherteam.aetherii.block.natural.AetherTallGrassBlock;
 import com.aetherteam.aetherii.block.natural.PurpleAercloudBlock;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
@@ -12,6 +13,7 @@ import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITexturedModels;
+import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.*;
@@ -20,6 +22,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.VaultBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 
@@ -394,6 +398,28 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation potLocation = potTemplate.create(pot, TextureMapping.plant(block), this.modelOutput);
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, potLocation));
     }
+
+    public void createHighlandFern() {
+        ResourceLocation defaultLocation = AetherIIModelTemplates.TEMPLATE_CUTOUT_TINTED_CROSS.create(AetherIIBlocks.HIGHLAND_FERN.get(), TextureMapping.cross(AetherIIBlocks.HIGHLAND_FERN.get()), this.modelOutput);
+        ResourceLocation snowyLocation = this.createSuffixedVariant(AetherIIBlocks.HIGHLAND_FERN.get(), "_snowy", AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross);
+        ResourceLocation enchantedLocation = this.createSuffixedVariant(AetherIIBlocks.HIGHLAND_FERN.get(), "_enchanted", AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS, TextureMapping::cross);
+        this.blockStateOutput
+                .accept(
+                        MultiVariantGenerator.multiVariant(AetherIIBlocks.HIGHLAND_FERN.get())
+                                .with(PropertyDispatch.property(AetherTallGrassBlock.TYPE).generate((property) -> switch (property) {
+                                    case DEFAULT -> Variant.variant().with(VariantProperties.MODEL, defaultLocation);
+                                    case SNOWY -> Variant.variant().with(VariantProperties.MODEL, snowyLocation);
+                                    case ENCHANTED -> Variant.variant().with(VariantProperties.MODEL, enchantedLocation);
+                                }))
+                );
+
+        ResourceLocation potLocation = AetherIIModelTemplates.TEMPLATE_CUTOUT_TINTED_FLOWERPOT_CROSS.create(AetherIIBlocks.POTTED_HIGHLAND_FERN.get(), TextureMapping.plant(defaultLocation), this.modelOutput);
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(AetherIIBlocks.POTTED_HIGHLAND_FERN.get(), potLocation));
+
+        ResourceLocation itemLocation = this.createFlatItemModelWithBlockTexture(AetherIIBlocks.HIGHLAND_FERN.asItem(), AetherIIBlocks.HIGHLAND_FERN.get());
+        this.registerSimpleTintedItemModel(AetherIIBlocks.HIGHLAND_FERN.get(), itemLocation, new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F));
+    }
+
 
     public void createSecretDoor(Block block, Block base) {
         TextureMapping mapping = TextureMapping.door(TextureMapping.getBlockTexture(base), TextureMapping.getBlockTexture(base));

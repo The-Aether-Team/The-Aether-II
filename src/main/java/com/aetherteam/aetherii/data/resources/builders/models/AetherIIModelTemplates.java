@@ -18,6 +18,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TEMPLATE_TRANSLUCENT_CUBE = ModelTemplates.CUBE.extend().renderType("translucent").build();
     public static final ModelTemplate TEMPLATE_TRANSLUCENT_CUBE_ALL = ModelTemplates.CUBE_ALL.extend().renderType("translucent").build();
     public static final ModelTemplate TEMPLATE_CUTOUT_CROSS = ModelTemplates.CROSS.extend().renderType("cutout").build();
+    public static final ModelTemplate TEMPLATE_CUTOUT_TINTED_CROSS = ModelTemplates.TINTED_CROSS.extend().renderType("cutout").build();
+    public static final ModelTemplate TEMPLATE_CUTOUT_TINTED_FLOWERPOT_CROSS = ModelTemplates.TINTED_FLOWER_POT_CROSS.extend().renderType("cutout").build();
     public static final ModelTemplate EMPTY = ModelTemplates.create("block", TextureSlot.PARTICLE);
     public static final ModelTemplate TINTED_GRASS = ModelTemplates.create("block", TextureSlot.BOTTOM, TextureSlot.PARTICLE, TextureSlot.TOP, AetherIITextureSlots.TOP_1, AetherIITextureSlots.TOP_2, AetherIITextureSlots.TOP_3, TextureSlot.SIDE, AetherIITextureSlots.SIDE_OVERLAY_1, AetherIITextureSlots.SIDE_OVERLAY_2, AetherIITextureSlots.SIDE_OVERLAY_3).extend()
             .renderType(ResourceLocation.withDefaultNamespace("cutout"))
