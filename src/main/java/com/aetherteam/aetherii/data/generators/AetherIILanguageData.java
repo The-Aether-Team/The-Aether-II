@@ -426,8 +426,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Glass
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
-        this.addBlock(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS, "Skyroot Framed Quicksoil Glass");
-        this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS, "Arkenium Framed Quicksoil Glass");
+        this.addBlock(AetherIIBlocks.TILED_QUICKSOIL_GLASS, "Tiles Quicksoil Glass");
+        this.addBlock(AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS, "Gridded Quicksoil Glass");
         this.addBlock(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS, "Skyroot Framed Crude Scatterglass");
         this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS, "Arkenium Framed Crude Scatterglass");
         this.addBlock(AetherIIBlocks.SCATTERGLASS, "Scatterglass");
@@ -436,8 +436,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Glass Panes
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS_PANE, "Quicksoil Glass Pane");
-        this.addBlock(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE, "Skyroot Framed Quicksoil Glass Pane");
-        this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE, "Arkenium Framed Quicksoil Glass Pane");
+        this.addBlock(AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE, "Tiled Quicksoil Glass Pane");
+        this.addBlock(AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS_PANE, "Gridded Quicksoil Glass Pane");
         this.addBlock(AetherIIBlocks.CRUDE_SCATTERGLASS_PANE, "Crude Scatterglass Pane");
         this.addBlock(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS_PANE, "Skyroot Framed Crude Scatterglass Pane");
         this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS_PANE, "Arkenium Framed Crude Scatterglass Pane");

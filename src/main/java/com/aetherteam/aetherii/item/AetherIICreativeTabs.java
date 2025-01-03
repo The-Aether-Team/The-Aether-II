@@ -177,11 +177,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ICESTONE_CAPSTONE_PILLAR.get());
                 output.accept(AetherIIBlocks.ICESTONE_PILLAR.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS.get());
-                output.accept(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.get());
-                output.accept(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.get());
+                output.accept(AetherIIBlocks.TILED_QUICKSOIL_GLASS.get());
+                output.accept(AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get());
                 output.accept(AetherIIBlocks.QUICKSOIL_GLASS_PANE.get());
-                output.accept(AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE.get());
-                output.accept(AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE.get());
+                output.accept(AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE.get());
+                output.accept(AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS_PANE.get());
                 output.accept(AetherIIBlocks.CRUDE_SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get());
                 output.accept(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get());

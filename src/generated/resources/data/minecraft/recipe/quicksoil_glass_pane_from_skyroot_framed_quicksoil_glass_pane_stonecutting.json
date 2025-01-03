@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": "aether_ii:skyroot_framed_quicksoil_glass_pane",
-  "result": {
-    "count": 1,
-    "id": "aether_ii:quicksoil_glass_pane"
-  }
-}

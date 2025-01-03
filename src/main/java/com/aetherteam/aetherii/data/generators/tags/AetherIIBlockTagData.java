@@ -529,8 +529,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(BlockTags.VALID_SPAWN).addTag(AetherIITags.Blocks.AETHER_DIRT);
         this.tag(BlockTags.IMPERMEABLE).add(
                 AetherIIBlocks.QUICKSOIL_GLASS.get(),
-                AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.get(),
-                AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.get(),
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get(),
                 AetherIIBlocks.CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS.get(),
@@ -961,16 +961,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(Tags.Blocks.GLASS_BLOCKS_COLORLESS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS.get(),
-                AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.get(),
-                AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.get(),
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS.get(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.get(),
                 AetherIIBlocks.SCATTERGLASS.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.get()
         );
         this.tag(Tags.Blocks.GLASS_PANES_COLORLESS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS_PANE.get(),
-                AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE.get(),
-                AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE.get(),
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE.get(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS_PANE.get(),
                 AetherIIBlocks.SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get(),
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get()

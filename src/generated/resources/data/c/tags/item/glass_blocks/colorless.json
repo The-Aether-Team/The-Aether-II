@@ -1,8 +1,8 @@
 {
   "values": [
     "aether_ii:quicksoil_glass",
-    "aether_ii:skyroot_framed_quicksoil_glass",
-    "aether_ii:arkenium_framed_quicksoil_glass",
+    "aether_ii:tiled_quicksoil_glass",
+    "aether_ii:gridded_quicksoil_glass",
     "aether_ii:scatterglass",
     "aether_ii:skyroot_framed_scatterglass",
     "aether_ii:arkenium_framed_scatterglass"

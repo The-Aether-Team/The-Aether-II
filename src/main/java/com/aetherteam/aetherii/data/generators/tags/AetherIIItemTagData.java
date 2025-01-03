@@ -650,16 +650,16 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(Tags.Items.GLASS_BLOCKS_COLORLESS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS.asItem(),
-                AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS.asItem(),
-                AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS.asItem(),
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS.asItem(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS.asItem(),
                 AetherIIBlocks.SCATTERGLASS.asItem(),
                 AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS.asItem(),
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS.asItem()
         );
         this.tag(Tags.Items.GLASS_PANES_COLORLESS).add(
                 AetherIIBlocks.QUICKSOIL_GLASS_PANE.asItem(),
-                AetherIIBlocks.SKYROOT_FRAMED_QUICKSOIL_GLASS_PANE.asItem(),
-                AetherIIBlocks.ARKENIUM_FRAMED_QUICKSOIL_GLASS_PANE.asItem(),
+                AetherIIBlocks.TILED_QUICKSOIL_GLASS_PANE.asItem(),
+                AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS_PANE.asItem(),
                 AetherIIBlocks.SCATTERGLASS_PANE.asItem(),
                 AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.asItem(),
                 AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.asItem()
