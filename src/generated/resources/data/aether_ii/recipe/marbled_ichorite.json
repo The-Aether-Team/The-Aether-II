@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": "aether_ii:ichorite",
+    "Q": "minecraft:quartz"
+  },
+  "pattern": [
+    "IQ",
+    "QI"
+  ],
+  "result": {
+    "count": 2,
+    "id": "aether_ii:marbled_ichorite"
+  }
+}

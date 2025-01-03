@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_marbled_ichorite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:marbled_ichorite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:marbled_ichorite_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_marbled_ichorite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:marbled_ichorite_wall"
+    ]
+  }
+}

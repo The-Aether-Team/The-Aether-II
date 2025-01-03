@@ -34,10 +34,12 @@ public class AetherIITags {
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
         public static final TagKey<Block> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Block> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
+        public static final TagKey<Block> ICHORITE_DECORATIVE_BLOCKS = tag("ichorite_decorative_blocks");
+        public static final TagKey<Block> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
-        public static final TagKey<Block> ACID_RESISTANT = tag("acid_iresistant");
+        public static final TagKey<Block> ACID_RESISTANT = tag("acid_resistant");
         public static final TagKey<Block> ACID_INSTANTLY_DESTROYS = tag("acid_instantly_destroys");
         public static final TagKey<Block> ACID_QUICKLY_DESTROYS = tag("acid_quickly_destroys");
         public static final TagKey<Block> ACID_SLOWLY_DESTROYS = tag("acid_slowly_destroys");
@@ -96,6 +98,8 @@ public class AetherIITags {
         public static final TagKey<Item> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
         public static final TagKey<Item> HOLYSTONE_DECORATIVE_BLOCKS = tag("holystone_decorative_blocks");
         public static final TagKey<Item> FADED_HOLYSTONE_DECORATIVE_BLOCKS = tag("faded_holystone_decorative_blocks");
+        public static final TagKey<Item> ICHORITE_DECORATIVE_BLOCKS = tag("ichorite_decorative_blocks");
+        public static final TagKey<Item> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
 

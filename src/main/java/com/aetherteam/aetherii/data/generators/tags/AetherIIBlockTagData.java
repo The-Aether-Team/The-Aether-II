@@ -178,6 +178,25 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FADED_HOLYSTONE_CAPSTONE_PILLAR.get(),
                 AetherIIBlocks.FADED_HOLYSTONE_PILLAR.get()
         );
+        this.tag(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.ICHORITE_FLAGSTONES.get(),
+                AetherIIBlocks.ICHORITE_RUNESTONE.get(),
+                AetherIIBlocks.ICHORITE_KEYSTONE.get(),
+                AetherIIBlocks.ICHORITE_BASE_BRICKS.get(),
+                AetherIIBlocks.ICHORITE_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.ICHORITE_BASE_PILLAR.get(),
+                AetherIIBlocks.ICHORITE_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.ICHORITE_PILLAR.get()
+        );
+        this.tag(AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS).add(
+                AetherIIBlocks.MARBLED_FLAGSTONES.get(),
+                AetherIIBlocks.MARBLED_KEYSTONE.get(),
+                AetherIIBlocks.MARBLED_BASE_BRICKS.get(),
+                AetherIIBlocks.MARBLED_CAPSTONE_BRICKS.get(),
+                AetherIIBlocks.MARBLED_BASE_PILLAR.get(),
+                AetherIIBlocks.MARBLED_CAPSTONE_PILLAR.get(),
+                AetherIIBlocks.MARBLED_PILLAR.get()
+        );
         this.tag(AetherIITags.Blocks.AGIOSITE_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.AGIOSITE_FLAGSTONES.get(),
                 AetherIIBlocks.AGIOSITE_KEYSTONE.get(),

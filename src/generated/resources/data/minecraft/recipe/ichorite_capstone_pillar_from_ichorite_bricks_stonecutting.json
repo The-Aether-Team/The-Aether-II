@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:ichorite_bricks",
+  "result": {
+    "count": 1,
+    "id": "aether_ii:ichorite_capstone_pillar"
+  }
+}

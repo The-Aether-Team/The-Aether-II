@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "bricks_from_artisanry",
+  "ingredients": [
+    "#aether_ii:marbled_ichorite_decorative_blocks"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:marbled_ichorite"
+  }
+}
