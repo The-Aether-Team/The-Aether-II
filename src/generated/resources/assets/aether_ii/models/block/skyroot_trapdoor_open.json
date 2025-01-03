@@ -1,5 +1,6 @@
 {
-  "parent": "minecraft:block/template_orientable_trapdoor_open",
+  "parent": "minecraft:block/template_trapdoor_open",
+  "render_type": "minecraft:cutout",
   "textures": {
     "texture": "aether_ii:block/skyroot_trapdoor"
   }

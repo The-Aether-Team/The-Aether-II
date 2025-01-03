@@ -20,7 +20,7 @@ public class AetherIIBlockFamilies {
             .sign(AetherIIBlocks.SKYROOT_SIGN.get(), AetherIIBlocks.SKYROOT_WALL_SIGN.get())
             .slab(AetherIIBlocks.SKYROOT_SLAB.get())
             .stairs(AetherIIBlocks.SKYROOT_STAIRS.get())
-            .door(AetherIIBlocks.SKYROOT_DOOR.get()) //todo may need to not include here because custom texturemap
+            .door(AetherIIBlocks.SKYROOT_DOOR.get())
             .trapdoor(AetherIIBlocks.SKYROOT_TRAPDOOR.get())
             .getFamily();
     public static final BlockFamily GREATROOT_PLANKS = familyBuilder(AetherIIBlocks.GREATROOT_PLANKS.get())
@@ -31,7 +31,7 @@ public class AetherIIBlockFamilies {
             .sign(AetherIIBlocks.GREATROOT_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_SIGN.get())
             .slab(AetherIIBlocks.GREATROOT_SLAB.get())
             .stairs(AetherIIBlocks.GREATROOT_STAIRS.get())
-            .door(AetherIIBlocks.GREATROOT_DOOR.get()) //todo may need to not include here because custom texturemap
+            .door(AetherIIBlocks.GREATROOT_DOOR.get())
             .trapdoor(AetherIIBlocks.GREATROOT_TRAPDOOR.get())
             .getFamily();
     public static final BlockFamily WISPROOT_PLANKS = familyBuilder(AetherIIBlocks.WISPROOT_PLANKS.get())
@@ -42,7 +42,7 @@ public class AetherIIBlockFamilies {
             .sign(AetherIIBlocks.WISPROOT_SIGN.get(), AetherIIBlocks.WISPROOT_WALL_SIGN.get())
             .slab(AetherIIBlocks.WISPROOT_SLAB.get())
             .stairs(AetherIIBlocks.WISPROOT_STAIRS.get())
-            .door(AetherIIBlocks.WISPROOT_DOOR.get()) //todo may need to not include here because custom texturemap
+            .door(AetherIIBlocks.WISPROOT_DOOR.get())
             .trapdoor(AetherIIBlocks.WISPROOT_TRAPDOOR.get())
             .getFamily();
     public static final BlockFamily HOLYSTONE = familyBuilder(AetherIIBlocks.HOLYSTONE.get())

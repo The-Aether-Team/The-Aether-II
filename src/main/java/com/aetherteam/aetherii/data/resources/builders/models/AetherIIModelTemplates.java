@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.model.generators.template.FaceRotation;
-import org.w3c.dom.Text;
 
 import java.util.Optional;
 

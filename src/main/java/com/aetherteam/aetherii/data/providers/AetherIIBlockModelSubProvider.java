@@ -71,6 +71,16 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createDoor(block, left, bottomLeftOpen, bottomRight, bottomRightOpen, topLeft, topLeftOpen, topRight, topRightOpen));
     }
 
+    @Override
+    public void createOrientableTrapdoor(Block block) {
+        TextureMapping mapping = TextureMapping.defaultTexture(block);
+        ResourceLocation location = ModelTemplates.TRAPDOOR_TOP.extend().renderType("cutout").build().create(block, mapping, this.modelOutput);
+        ResourceLocation locationBottom = ModelTemplates.TRAPDOOR_BOTTOM.extend().renderType("cutout").build().create(block, mapping, this.modelOutput);
+        ResourceLocation locationOpen = ModelTemplates.TRAPDOOR_OPEN.extend().renderType("cutout").build().create(block, mapping, this.modelOutput);
+        this.blockStateOutput.accept(createOrientableTrapdoor(block, location, locationBottom, locationOpen));
+        this.registerSimpleItemModel(block, locationBottom);
+    }
+
     public void createCutoutMippedCube(Block block) {
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE_ALL.create(block, TextureMapping.cube(block), this.modelOutput)));
     }
