@@ -23,7 +23,7 @@
       "base": "aether_ii:item/skyroot_chest",
       "model": {
         "type": "minecraft:chest",
-        "texture": "aether_ii:skyroot"
+        "texture": "aether_ii:skyroot_chest"
       }
     },
     "pattern": "MM-dd",

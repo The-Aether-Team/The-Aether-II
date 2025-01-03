@@ -10,8 +10,8 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import java.awt.*;
 
 public class AetherIIColorResolvers {
-    public static final int AETHER_GRASS_COLOR = 0xB1FFCB;
-    public static final int AETHER_TALL_GRASS_COLOR = 0xB1FFCB;
+    public static final int AETHER_GRASS_COLOR = 0xb5ffd0;
+    public static final int AETHER_TALL_GRASS_COLOR = 0xb5ffd0;
 
     public static void registerBlockColor(RegisterColorHandlersEvent.Block event) {
         event.register((state, level, pos, tintIndex) -> {

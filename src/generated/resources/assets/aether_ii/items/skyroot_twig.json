@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/skyroot_twig"
+    "model": "aether_ii:item/skyroot_twig"
   }
 }

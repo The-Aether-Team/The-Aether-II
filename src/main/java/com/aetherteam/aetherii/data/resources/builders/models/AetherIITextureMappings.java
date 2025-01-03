@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.builders.models;
 
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class AetherIITextureMappings {
@@ -11,12 +12,26 @@ public class AetherIITextureMappings {
                 .copySlot(AetherIITextureSlots.PORTAL, TextureSlot.PARTICLE);
     }
 
-        public static TextureMapping snowyGrass(Block grass, Block dirt) {
+    public static TextureMapping snowyGrass(Block grass, Block dirt) {
         return  new TextureMapping()
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(dirt))
                 .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(grass, "_top"))
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(grass, "_snow"));
+    }
+
+    public static TextureMapping vine(ResourceLocation vine) {
+        return  new TextureMapping()
+                .put(AetherIITextureSlots.VINE, vine)
+                .copySlot(AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
+    }
+
+    public static TextureMapping snowyLeaves(Block leaves) {
+        return  new TextureMapping()
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(leaves))
+                .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(leaves))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(leaves, "_snowy"));
     }
 
     public static TextureMapping tintedGrass(Block grass, Block dirt) {

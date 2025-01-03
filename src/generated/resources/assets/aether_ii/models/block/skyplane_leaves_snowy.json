@@ -1,6 +1,9 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "aether_ii:block/skyplane_leaves_snowy"
+    "bottom": "aether_ii:block/skyplane_leaves",
+    "particle": "aether_ii:block/skyplane_leaves",
+    "side": "aether_ii:block/skyplane_leaves_snowy",
+    "top": "aether_ii:block/skyplane_leaves"
   }
 }

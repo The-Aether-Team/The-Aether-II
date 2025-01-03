@@ -7,11 +7,6 @@
     },
     {
       "type": "directory",
-      "source": "entity/tiles/furniture",
-      "prefix": "entity/tiles/furniture/"
-    },
-    {
-      "type": "directory",
       "source": "fluid",
       "prefix": "fluid/"
     },

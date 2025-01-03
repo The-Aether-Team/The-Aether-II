@@ -5,7 +5,7 @@
       "textures": [
         "aether_ii:entity/mobs/moa/moa_keratin",
         "aether_ii:entity/mobs/moa/moa_baby_keratin",
-        "aether_ii:entity/tiles/moa_egg/moa_egg_keratin"
+        "aether_ii:entity/moa_egg/moa_egg_keratin"
       ],
       "palette_key": "aether_ii:entity/mobs/moa/color_palettes/keratin/base_moa_keratin",
       "permutations": {

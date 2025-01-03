@@ -85,15 +85,4 @@ package com.aetherteam.aetherii.data.providers;
 //                    .override().predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "parachuting"), 1.0F).predicate(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "dull"), 1.0F).model(dullOpenPredicate).end();
 //        }
 //    }
-//
-//    public void itemBlockGrass(Block block, String location) {
-//        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated"))
-//                .texture("layer0", this.texture(this.blockName(block) + "_1", location))
-//                .texture("layer1", this.texture(this.blockName(block) + "_2", location))
-//                .texture("layer2", this.texture(this.blockName(block) + "_3", location));
-//    }
-//
-//    public void orangeTree(Block block) {
-//        this.withExistingParent(this.blockName(block), this.mcLoc("item/generated")).texture("layer0", this.texture(this.blockName(block) + "_bottom_0", "natural/"));
-//    }
 //}

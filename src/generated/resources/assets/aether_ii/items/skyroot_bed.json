@@ -1,6 +1,10 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "aether_ii:block/skyroot_bed"
+    "type": "minecraft:special",
+    "base": "aether_ii:item/skyroot_bed",
+    "model": {
+      "type": "minecraft:bed",
+      "texture": "aether_ii:skyroot_bed"
+    }
   }
 }

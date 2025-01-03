@@ -9,9 +9,9 @@
         "aether_ii:entity/mobs/moa/moa_baby_feather_curved",
         "aether_ii:entity/mobs/moa/moa_baby_feather_flat",
         "aether_ii:entity/mobs/moa/moa_baby_feather_pointed",
-        "aether_ii:entity/tiles/moa_egg/moa_egg_feather_curved",
-        "aether_ii:entity/tiles/moa_egg/moa_egg_feather_flat",
-        "aether_ii:entity/tiles/moa_egg/moa_egg_feather_pointed"
+        "aether_ii:entity/moa_egg/moa_egg_feather_curved",
+        "aether_ii:entity/moa_egg/moa_egg_feather_flat",
+        "aether_ii:entity/moa_egg/moa_egg_feather_pointed"
       ],
       "palette_key": "aether_ii:entity/mobs/moa/color_palettes/feather/base_moa_feather",
       "permutations": {

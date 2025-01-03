@@ -41,15 +41,15 @@ public class MoaEggRenderer implements BlockEntityRenderer<MoaEggBlockEntity> {
                 poseStack.mulPose(Axis.YP.rotationDegrees((float) (Math.cos((double) blockEntity.tickCount * 3.25) * Math.PI * 0.4F * blockEntity.getBlockState().getValue(MoaEggBlock.HATCH))));
             }
 
-            TextureAtlasSprite feathersSprite = this.moaFeathersAtlas.getSprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/tiles/moa_egg/moa_egg_feather_" + blockEntity.getBlockState().getValue(MoaEggBlock.FEATHER_SHAPE).getSerializedName() + "_" + blockEntity.getBlockState().getValue(MoaEggBlock.FEATHERS).getSerializedName()));
+            TextureAtlasSprite feathersSprite = this.moaFeathersAtlas.getSprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/moa_egg/moa_egg_feather_" + blockEntity.getBlockState().getValue(MoaEggBlock.FEATHER_SHAPE).getSerializedName() + "_" + blockEntity.getBlockState().getValue(MoaEggBlock.FEATHERS).getSerializedName()));
             VertexConsumer feathersConsumer = feathersSprite.wrap(buffer.getBuffer(RenderType.entityCutoutNoCull(MoaRenderer.MOA_FEATHER_SHEET)));
             this.moaEggModel.renderToBuffer(poseStack, feathersConsumer, packedLight, packedOverlay);
 
-            TextureAtlasSprite eyesSprite = this.moaEyesAtlas.getSprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/tiles/moa_egg/moa_egg_eyes_" + blockEntity.getBlockState().getValue(MoaEggBlock.EYES).getSerializedName()));
+            TextureAtlasSprite eyesSprite = this.moaEyesAtlas.getSprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/moa_egg/moa_egg_eyes_" + blockEntity.getBlockState().getValue(MoaEggBlock.EYES).getSerializedName()));
             VertexConsumer eyesConsumer = eyesSprite.wrap(buffer.getBuffer(RenderType.entityCutoutNoCull(MoaRenderer.MOA_EYES_SHEET)));
             this.moaEggModel.renderToBuffer(poseStack, eyesConsumer, packedLight, packedOverlay);
 
-            TextureAtlasSprite keratinSprite = this.moaKeratinAtlas.getSprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/tiles/moa_egg/moa_egg_keratin_" + blockEntity.getBlockState().getValue(MoaEggBlock.KERATIN).getSerializedName()));
+            TextureAtlasSprite keratinSprite = this.moaKeratinAtlas.getSprite(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/moa_egg/moa_egg_keratin_" + blockEntity.getBlockState().getValue(MoaEggBlock.KERATIN).getSerializedName()));
             VertexConsumer keratinConsumer = keratinSprite.wrap(buffer.getBuffer(RenderType.entityCutoutNoCull(MoaRenderer.MOA_KERATIN_SHEET)));
             this.moaEggModel.renderToBuffer(poseStack, keratinConsumer, packedLight, packedOverlay);
         }

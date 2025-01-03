@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "aether_ii:block/holystone_rock"
+    "model": "aether_ii:item/holystone_rock"
   }
 }

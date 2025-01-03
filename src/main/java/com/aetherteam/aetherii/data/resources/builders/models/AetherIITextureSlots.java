@@ -16,4 +16,5 @@ public class AetherIITextureSlots {
     public static final TextureSlot TARAHESP_FLOWERS_PURPLE = TextureSlot.create("tarahesp_flowers_purple");
     public static final TextureSlot TARAHESP_FLOWERS_WHITE = TextureSlot.create("tarahesp_flowers_white");
     public static final TextureSlot CROSS_OTHER = TextureSlot.create("cross_other");
+    public static final TextureSlot VINE = TextureSlot.create("vine");
 }

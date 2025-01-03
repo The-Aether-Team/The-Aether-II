@@ -1,5 +1,5 @@
 {
-  "parent": "aether_ii:block/cube",
+  "parent": "minecraft:block/cube",
   "elements": [
     {
       "faces": {
