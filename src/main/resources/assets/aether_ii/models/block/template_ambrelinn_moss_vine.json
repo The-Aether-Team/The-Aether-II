@@ -1,5 +1,6 @@
 {
   "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
   "elements": [
     {
       "faces": {
@@ -207,10 +208,5 @@
         4.2
       ]
     }
-  ],
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "particle": "aether_ii:block/natural/ambrelinn_moss_vines",
-    "vine": "aether_ii:block/natural/ambrelinn_moss_vines"
-  }
+  ]
 }

@@ -210,9 +210,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         return Variant.variant().with(VariantProperties.MODEL, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.createWithSuffix(block, name, mapping, this.modelOutput));
     }
 
-    public void createVine(Block block) {
-        ResourceLocation normal = AetherIIModelTemplates.VINE.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)), this.modelOutput);
-        ResourceLocation bottom = AetherIIModelTemplates.VINE.create(ModelLocationUtils.getModelLocation(block, "_bottom"), AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block, "_bottom")), this.modelOutput);
+    public void createVine(Block block, ModelTemplate template) {
+        ResourceLocation normal = template.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)), this.modelOutput);
+        ResourceLocation bottom = template.create(ModelLocationUtils.getModelLocation(block, "_bottom"), AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block, "_bottom")), this.modelOutput);
         MultiPartGenerator multiPart = MultiPartGenerator.multiPart(block);
         Condition.TerminalCondition condition = Util.make(Condition.condition(), (terminalCondition) -> MULTIFACE_GENERATOR.stream().map(Pair::getFirst).map(MultifaceBlock::getFaceProperty).forEach((bool) -> {
             if (block.defaultBlockState().hasProperty(bool)) {
