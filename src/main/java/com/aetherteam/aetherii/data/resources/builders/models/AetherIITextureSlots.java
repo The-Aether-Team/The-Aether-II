@@ -13,6 +13,8 @@ public class AetherIITextureSlots {
     public static final TextureSlot OVERLAY_1 = TextureSlot.create("overlay_1");
     public static final TextureSlot OVERLAY_2 = TextureSlot.create("overlay_2");
     public static final TextureSlot OVERLAY_3 = TextureSlot.create("overlay_3");
+    public static final TextureSlot FLOWERPOT = TextureSlot.create("flowerpot");
+    public static final TextureSlot BUSH = TextureSlot.create("bush");
     public static final TextureSlot TARAHESP_FLOWERS_PURPLE = TextureSlot.create("tarahesp_flowers_purple");
     public static final TextureSlot TARAHESP_FLOWERS_WHITE = TextureSlot.create("tarahesp_flowers_white");
     public static final TextureSlot CROSS_OTHER = TextureSlot.create("cross_other");

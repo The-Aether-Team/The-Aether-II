@@ -1,0 +1,10 @@
+{
+  "parent": "aether_ii:block/template_potted_bush_block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bush": "aether_ii:block/potted_blueberry_bush",
+    "flowerpot": "minecraft:block/flower_pot",
+    "particle": "minecraft:block/flower_pot",
+    "stem": "aether_ii:block/potted_blueberry_bush_stem"
+  }
+}

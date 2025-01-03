@@ -4,6 +4,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class AetherIITextureMappings {
     public static TextureMapping portal(Block portal) {
@@ -70,6 +71,14 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(bush))
                 .copySlot(TextureSlot.TEXTURE, TextureSlot.PARTICLE)
                 .put(TextureSlot.CROSS, TextureMapping.getBlockTexture(bush, "_stem"));
+    }
+
+    public static TextureMapping pottedBushBlock(Block block) {
+        return new TextureMapping()
+                .put(AetherIITextureSlots.FLOWERPOT, TextureMapping.getBlockTexture(Blocks.FLOWER_POT))
+                .copySlot(AetherIITextureSlots.FLOWERPOT, TextureSlot.PARTICLE)
+                .put(TextureSlot.STEM, TextureMapping.getBlockTexture(block, "_stem"))
+                .put(AetherIITextureSlots.BUSH, TextureMapping.getBlockTexture(block));
     }
 
     public static TextureMapping flowerbed(Block block) {
