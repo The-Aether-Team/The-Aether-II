@@ -91,36 +91,28 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
      * [CODE COPY] - {@link ClientLevel#getCloudColor(float)}.<br><br>
      * Modified to have lighter cloud coloration than the Overworld during weather.
      */
+
     public int getCloudColor(ClientLevel level, float partialTick) {
-        float f = level.getTimeOfDay(partialTick);
-        float f1 = Mth.cos(f * Mth.TWO_PI) * 2.0F + 0.5F;
+        int i = -1;
+        float f = level.getRainLevel(partialTick);
+        if (f > 0.0F) {
+            int j = ARGB.scaleRGB(ARGB.greyscale(i), 0.6F);
+            i = ARGB.lerp(f * 0.5F, i, j); //reduced darkening
+        }
+
+        float f3 = level.getTimeOfDay(partialTick);
+        float f1 = Mth.cos(f3 * 6.2831855F) * 2.0F + 0.5F;
         f1 = Mth.clamp(f1, 0.0F, 1.0F);
-        float f2 = 1.0F;
-        float f3 = 1.0F;
-        float f4 = 1.0F;
-        float f5 = level.getRainLevel(partialTick);
-        if (f5 > 0.0F) {
-            float f6 = (f2 * 0.3F + f3 * 0.59F + f4 * 0.11F) * 0.725F; // Modified darkening.
-            float f7 = 1.0F - f5 * 0.8F;
-            f2 = f2 * f7 + f6 * (1.0F - f7);
-            f3 = f3 * f7 + f6 * (1.0F - f7);
-            f4 = f4 * f7 + f6 * (1.0F - f7);
+        i = ARGB.multiply(i, ARGB.colorFromFloat(1.0F, f1 * 0.9F + 0.1F, f1 * 0.9F + 0.1F, f1 * 0.85F + 0.15F));
+        float f2 = level.getThunderLevel(partialTick);
+        if (f2 > 0.0F) {
+            int k = ARGB.scaleRGB(ARGB.greyscale(i), 0.2F);
+            i = ARGB.lerp(f2 * 0.5F, i, k); //reduced darkening
         }
 
-        f2 *= f1 * 0.9F + 0.1F;
-        f3 *= f1 * 0.9F + 0.1F;
-        f4 *= f1 * 0.85F + 0.15F;
-        float f9 = level.getThunderLevel(partialTick);
-        if (f9 > 0.0F) {
-            float f10 = (f2 * 0.3F + f3 * 0.59F + f4 * 0.11F) * 0.5F; // Modified darkening.
-            float f8 = 1.0F - f9 * 0.7F;
-            f2 = f2 * f8 + f10 * (1.0F - f8);
-            f3 = f3 * f8 + f10 * (1.0F - f8);
-            f4 = f4 * f8 + f10 * (1.0F - f8);
-        }
-
-        return ARGB.colorFromFloat(f2, f3, f4, 0.6F);
+        return i;
     }
+
 
 //    @Override
 //    public boolean renderSky(ClientLevel level, int ticks, float partialTick, Matrix4f modelViewMatrix, Camera camera, Matrix4f projectionMatrix, Runnable setupFog) {
