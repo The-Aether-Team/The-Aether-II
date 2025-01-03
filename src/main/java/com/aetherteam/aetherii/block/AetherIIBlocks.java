@@ -422,6 +422,54 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
     public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn());
 
+    //Ichorite
+    public static final DeferredBlock<StairBlock> ICHORITE_STAIRS = register("ichorite_stairs", (properties) -> new StairBlock(ICHORITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()));
+    public static final DeferredBlock<SlabBlock> ICHORITE_SLAB = register("ichorite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> ICHORITE_WALL = register("ichorite_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).forceSolidOn());
+
+    // Smooth Ichorite
+    public static final DeferredBlock<Block> SMOOTH_ICHORITE = register("smooth_ichorite", () -> Block.Properties.ofFullCopy(ICHORITE.get()));
+    public static final DeferredBlock<StairBlock> SMOOTH_ICHORITE_STAIRS = register("smooth_ichorite_stairs", (properties) -> new StairBlock(SMOOTH_ICHORITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.SMOOTH_ICHORITE.get()));
+    public static final DeferredBlock<SlabBlock> SMOOTH_ICHORITE_SLAB = register("smooth_ichorite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SMOOTH_ICHORITE.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> SMOOTH_ICHORITE_WALL = register("smooth_ichorite_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.SMOOTH_ICHORITE.get()).forceSolidOn());
+
+    // Ichorite Bricks
+    public static final DeferredBlock<Block> ICHORITE_BRICKS = register("ichorite_bricks", () -> Block.Properties.ofFullCopy(SMOOTH_ICHORITE.get()));
+    public static final DeferredBlock<StairBlock> ICHORITE_BRICK_STAIRS = register("ichorite_brick_stairs", (properties) -> new StairBlock(ICHORITE_BRICKS.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.SMOOTH_ICHORITE.get()));
+    public static final DeferredBlock<SlabBlock> ICHORITE_BRICK_SLAB = register("ichorite_brick_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE_BRICKS.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> ICHORITE_BRICK_WALL = register("ichorite_brick_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE_BRICKS.get()).forceSolidOn());
+
+    // Marbled Ichorite Decorative Blocks
+    public static final DeferredBlock<Block> ICHORITE_FLAGSTONES = register("ichorite_flagstones", () -> Block.Properties.ofFullCopy(ICHORITE_BRICKS.get()));
+    public static final DeferredBlock<Block> ICHORITE_RUNESTONE = register("ichorite_runestone", () -> Block.Properties.ofFullCopy(ICHORITE_BRICKS.get()));
+    public static final DeferredBlock<Block> ICHORITE_KEYSTONE = register("ichorite_keystone", () -> Block.Properties.ofFullCopy(ICHORITE_BRICKS.get()));
+    public static final DeferredBlock<Block> ICHORITE_BASE_BRICKS = register("ichorite_base_bricks", () -> Block.Properties.ofFullCopy(ICHORITE_BRICKS.get()));
+    public static final DeferredBlock<Block> ICHORITE_CAPSTONE_BRICKS = register("ichorite_capstone_bricks", () -> Block.Properties.ofFullCopy(ICHORITE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> ICHORITE_BASE_PILLAR = register("ichorite_base_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICHORITE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> ICHORITE_CAPSTONE_PILLAR = register("ichorite_capstone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICHORITE_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> ICHORITE_PILLAR = register("ichorite_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(ICHORITE_BRICKS.get()));
+
+    // Marbled Ichorite
+    public static final DeferredBlock<Block> MARBLED_ICHORITE = register("marbled_ichorite", () -> Block.Properties.ofFullCopy(ICHORITE.get()));
+    public static final DeferredBlock<StairBlock> MARBLED_ICHORITE_STAIRS = register("marbled_ichorite_stairs", (properties) -> new StairBlock(MARBLED_ICHORITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.MARBLED_ICHORITE.get()));
+    public static final DeferredBlock<SlabBlock> MARBLED_ICHORITE_SLAB = register("marbled_ichorite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.MARBLED_ICHORITE.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> MARBLED_ICHORITE_WALL = register("marbled_ichorite_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.MARBLED_ICHORITE.get()).forceSolidOn());
+
+    // Marbled Bricks
+    public static final DeferredBlock<Block> MARBLED_BRICKS = register("marbled_bricks", () -> Block.Properties.ofFullCopy(MARBLED_ICHORITE.get()));
+    public static final DeferredBlock<StairBlock> MARBLED_BRICK_STAIRS = register("marbled_brick_stairs", (properties) -> new StairBlock(MARBLED_BRICKS.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.MARBLED_BRICKS.get()));
+    public static final DeferredBlock<SlabBlock> MARBLED_BRICK_SLAB = register("marbled_brick_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.MARBLED_BRICKS.get()).strength(2.0F, 6.0F));
+    public static final DeferredBlock<WallBlock> MARBLED_BRICK_WALL = register("marbled_brick_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.MARBLED_BRICKS.get()).forceSolidOn());
+
+    // Marbled Ichorite Decorative Blocks
+    public static final DeferredBlock<Block> MARBLED_FLAGSTONES = register("marbled_flagstones", () -> Block.Properties.ofFullCopy(MARBLED_BRICKS.get()));
+    public static final DeferredBlock<Block> MARBLED_KEYSTONE = register("marbled_keystone", () -> Block.Properties.ofFullCopy(MARBLED_BRICKS.get()));
+    public static final DeferredBlock<Block> MARBLED_BASE_BRICKS = register("marbled_base_bricks", () -> Block.Properties.ofFullCopy(MARBLED_BRICKS.get()));
+    public static final DeferredBlock<Block> MARBLED_CAPSTONE_BRICKS = register("marbled_capstone_bricks", () -> Block.Properties.ofFullCopy(MARBLED_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> MARBLED_BASE_PILLAR = register("marbled_base_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(MARBLED_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> MARBLED_CAPSTONE_PILLAR = register("marbled_capstone_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(MARBLED_BRICKS.get()));
+    public static final DeferredBlock<FacingPillarBlock> MARBLED_PILLAR = register("marbled_pillar", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(MARBLED_BRICKS.get()));
+
     // Agiosite
     public static final DeferredBlock<StairBlock> AGIOSITE_STAIRS = register("agiosite_stairs", (properties) -> new StairBlock(AGIOSITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()));
     public static final DeferredBlock<SlabBlock> AGIOSITE_SLAB = register("agiosite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.AGIOSITE.get()).strength(2.0F, 6.0F));

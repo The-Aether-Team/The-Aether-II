@@ -43,7 +43,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AGIOSITE, "Agiosite");
         this.addBlock(AetherIIBlocks.CRUDE_SCATTERGLASS, "Crude Scatterglass");
         this.addBlock(AetherIIBlocks.SKY_ROOTS, "Sky Roots");
-        this.addBlock(AetherIIBlocks.ICHORITE, "Ichorite");
         this.addBlock(AetherIIBlocks.POINTED_HOLYSTONE, "Pointed Holystone");
         this.addBlock(AetherIIBlocks.POINTED_ICHORITE, "Pointed Ichorite");
 
@@ -383,6 +382,55 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS, "Undershale Brick Stairs");
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_SLAB, "Undershale Brick Slab");
         this.addBlock(AetherIIBlocks.UNDERSHALE_BRICK_WALL, "Undershale Brick Wall");
+
+        // Ichorite
+        this.addBlock(AetherIIBlocks.ICHORITE, "Ichorite");
+        this.addBlock(AetherIIBlocks.ICHORITE_STAIRS, "Ichorite Stairs");
+        this.addBlock(AetherIIBlocks.ICHORITE_SLAB, "Ichorite Slab");
+        this.addBlock(AetherIIBlocks.ICHORITE_WALL, "Ichorite Wall");
+
+        // Smooth Ichorite
+        this.addBlock(AetherIIBlocks.SMOOTH_ICHORITE, "Smooth Ichorite");
+        this.addBlock(AetherIIBlocks.SMOOTH_ICHORITE_STAIRS, "Smooth Ichorite Stairs");
+        this.addBlock(AetherIIBlocks.SMOOTH_ICHORITE_SLAB, "Smooth Ichorite Slab");
+        this.addBlock(AetherIIBlocks.SMOOTH_ICHORITE_WALL, "Smooth Ichorite Wall");
+
+        // Ichorite Bricks
+        this.addBlock(AetherIIBlocks.ICHORITE_BRICKS, "Ichorite Bricks");
+        this.addBlock(AetherIIBlocks.ICHORITE_BRICK_STAIRS, "Ichorite Brick Stairs");
+        this.addBlock(AetherIIBlocks.ICHORITE_BRICK_SLAB, "Ichorite Brick Slab");
+        this.addBlock(AetherIIBlocks.ICHORITE_BRICK_WALL, "Ichorite Brick Wall");
+
+        // Ichorite Decorative Blocks
+        this.addBlock(AetherIIBlocks.ICHORITE_FLAGSTONES, "Ichorite Flagstones");
+        this.addBlock(AetherIIBlocks.ICHORITE_RUNESTONE, "Ichorite Runestone");
+        this.addBlock(AetherIIBlocks.ICHORITE_KEYSTONE, "Ichorite Keystone");
+        this.addBlock(AetherIIBlocks.ICHORITE_BASE_BRICKS, "Ichorite Base Bricks");
+        this.addBlock(AetherIIBlocks.ICHORITE_CAPSTONE_BRICKS, "Ichorite Capstone Bricks");
+        this.addBlock(AetherIIBlocks.ICHORITE_BASE_PILLAR, "Ichorite Base Pillar");
+        this.addBlock(AetherIIBlocks.ICHORITE_CAPSTONE_PILLAR, "Ichorite Capstone Pillar");
+        this.addBlock(AetherIIBlocks.ICHORITE_PILLAR, "Ichorite Pillar");
+
+        // Marbled Ichorite
+        this.addBlock(AetherIIBlocks.MARBLED_ICHORITE, "Marbled Ichorite");
+        this.addBlock(AetherIIBlocks.MARBLED_ICHORITE_STAIRS, "Marbled Ichorite Stairs");
+        this.addBlock(AetherIIBlocks.MARBLED_ICHORITE_SLAB, "Marbled Ichorite Slab");
+        this.addBlock(AetherIIBlocks.MARBLED_ICHORITE_WALL, "Marbled Ichorite Wall");
+
+        // Marbled Bricks
+        this.addBlock(AetherIIBlocks.MARBLED_BRICKS, "Marbled Bricks");
+        this.addBlock(AetherIIBlocks.MARBLED_BRICK_STAIRS, "Marbled Brick Stairs");
+        this.addBlock(AetherIIBlocks.MARBLED_BRICK_SLAB, "Marbled Brick Slab");
+        this.addBlock(AetherIIBlocks.MARBLED_BRICK_WALL, "Marbled Brick Wall");
+
+        // Marbled Ichorite Decorative Blocks
+        this.addBlock(AetherIIBlocks.MARBLED_FLAGSTONES, "Marbled Flagstones");
+        this.addBlock(AetherIIBlocks.MARBLED_KEYSTONE, "Marbled Keystone");
+        this.addBlock(AetherIIBlocks.MARBLED_BASE_BRICKS, "Marbled Base Bricks");
+        this.addBlock(AetherIIBlocks.MARBLED_CAPSTONE_BRICKS, "Marbled Capstone Bricks");
+        this.addBlock(AetherIIBlocks.MARBLED_BASE_PILLAR, "Marbled Base Pillar");
+        this.addBlock(AetherIIBlocks.MARBLED_CAPSTONE_PILLAR, "Marbled Capstone Pillar");
+        this.addBlock(AetherIIBlocks.MARBLED_PILLAR, "Marbled Pillar");
 
         // Agiosite
         this.addBlock(AetherIIBlocks.AGIOSITE_STAIRS, "Agiosite Stairs");

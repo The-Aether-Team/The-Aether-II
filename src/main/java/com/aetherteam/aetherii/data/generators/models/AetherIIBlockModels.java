@@ -40,7 +40,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Underground
         this.createTrivialCube(AetherIIBlocks.UNSTABLE_HOLYSTONE.get());
         this.createTrivialCube(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
-        this.createTrivialCube(AetherIIBlocks.ICHORITE.get());
         this.createSnowyCross(AetherIIBlocks.SKY_ROOTS.get());
         this.createTranslucentCubeInnerFaces(AetherIIBlocks.GAS.get());
         this.createPointedStone(AetherIIBlocks.POINTED_HOLYSTONE.get());
@@ -269,6 +268,25 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.AGIOSITE_BASE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.AGIOSITE_CAPSTONE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.AGIOSITE_PILLAR.get(), AetherIIBlocks.AGIOSITE_KEYSTONE.get());
+
+        // Ichorite Decorative Blocks
+        this.createTrivialCube(AetherIIBlocks.ICHORITE_FLAGSTONES.get());
+        this.createTrivialCube(AetherIIBlocks.ICHORITE_RUNESTONE.get());
+        this.createTrivialCube(AetherIIBlocks.ICHORITE_KEYSTONE.get());
+        this.createCubeColumn(AetherIIBlocks.ICHORITE_BASE_BRICKS.get(), AetherIIBlocks.ICHORITE_KEYSTONE.get());
+        this.createCubeColumn(AetherIIBlocks.ICHORITE_CAPSTONE_BRICKS.get(), AetherIIBlocks.ICHORITE_KEYSTONE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICHORITE_BASE_PILLAR.get(), AetherIIBlocks.ICHORITE_KEYSTONE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICHORITE_CAPSTONE_PILLAR.get(), AetherIIBlocks.ICHORITE_KEYSTONE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.ICHORITE_PILLAR.get(), AetherIIBlocks.ICHORITE_KEYSTONE.get());
+
+        // Marbled Ichorite Decorative Blocks
+        this.createTrivialCube(AetherIIBlocks.MARBLED_FLAGSTONES.get());
+        this.createTrivialCube(AetherIIBlocks.MARBLED_KEYSTONE.get());
+        this.createCubeColumn(AetherIIBlocks.MARBLED_BASE_BRICKS.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
+        this.createCubeColumn(AetherIIBlocks.MARBLED_CAPSTONE_BRICKS.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.MARBLED_BASE_PILLAR.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.MARBLED_CAPSTONE_PILLAR.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
+        this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.MARBLED_PILLAR.get(), AetherIIBlocks.MARBLED_KEYSTONE.get());
 
         // Icestone Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.ICESTONE_FLAGSTONES.get());

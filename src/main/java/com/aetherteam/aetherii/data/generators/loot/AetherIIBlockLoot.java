@@ -398,6 +398,55 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get(), this::createSlabItemTable);
         this.dropSelf(AetherIIBlocks.UNDERSHALE_BRICK_WALL.get());
 
+        // Ichorite
+        this.dropSelf(AetherIIBlocks.ICHORITE.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_SLAB.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_WALL.get());
+
+        // Smooth Ichorite
+        this.dropSelf(AetherIIBlocks.SMOOTH_ICHORITE.get());
+        this.dropSelf(AetherIIBlocks.SMOOTH_ICHORITE_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.SMOOTH_ICHORITE_SLAB.get());
+        this.dropSelf(AetherIIBlocks.SMOOTH_ICHORITE_WALL.get());
+
+        // Ichorite Bricks
+        this.dropSelf(AetherIIBlocks.ICHORITE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_BRICK_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_BRICK_SLAB.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_BRICK_WALL.get());
+
+        // Ichorite Decorative Blocks
+        this.dropSelf(AetherIIBlocks.ICHORITE_FLAGSTONES.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_RUNESTONE.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_KEYSTONE.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_BASE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_CAPSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_BASE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_CAPSTONE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.ICHORITE_PILLAR.get());
+
+        // Marbled Ichorite
+        this.dropSelf(AetherIIBlocks.MARBLED_ICHORITE.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_ICHORITE_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_ICHORITE_SLAB.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_ICHORITE_WALL.get());
+
+        // Marbled Bricks
+        this.dropSelf(AetherIIBlocks.MARBLED_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_BRICK_STAIRS.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_BRICK_SLAB.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_BRICK_WALL.get());
+
+        // Marbled Ichorite Decorative Blocks
+        this.dropSelf(AetherIIBlocks.MARBLED_FLAGSTONES.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_KEYSTONE.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_BASE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_CAPSTONE_BRICKS.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_BASE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_CAPSTONE_PILLAR.get());
+        this.dropSelf(AetherIIBlocks.MARBLED_PILLAR.get());
+
         // Agiosite
         this.dropSelf(AetherIIBlocks.AGIOSITE_STAIRS.get());
         this.add(AetherIIBlocks.AGIOSITE_SLAB.get(), this::createSlabItemTable);

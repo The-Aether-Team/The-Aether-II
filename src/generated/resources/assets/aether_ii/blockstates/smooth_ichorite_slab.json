@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aether_ii:block/smooth_ichorite_slab"
+    },
+    "type=double": {
+      "model": "aether_ii:block/smooth_ichorite"
+    },
+    "type=top": {
+      "model": "aether_ii:block/smooth_ichorite_slab_top"
+    }
+  }
+}

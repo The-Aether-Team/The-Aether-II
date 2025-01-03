@@ -82,6 +82,31 @@ public class AetherIIBlockFamilies {
             .slab(AetherIIBlocks.UNDERSHALE_BRICK_SLAB.get())
             .stairs(AetherIIBlocks.UNDERSHALE_BRICK_STAIRS.get())
             .getFamily();
+    public static final BlockFamily ICHORITE = familyBuilder(AetherIIBlocks.ICHORITE.get())
+            .wall(AetherIIBlocks.ICHORITE_WALL.get())
+            .slab(AetherIIBlocks.ICHORITE_SLAB.get())
+            .stairs(AetherIIBlocks.ICHORITE_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily SMOOTH_ICHORITE = familyBuilder(AetherIIBlocks.SMOOTH_ICHORITE.get())
+            .wall(AetherIIBlocks.SMOOTH_ICHORITE_WALL.get())
+            .slab(AetherIIBlocks.SMOOTH_ICHORITE_SLAB.get())
+            .stairs(AetherIIBlocks.SMOOTH_ICHORITE_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily ICHORITE_BRICKS = familyBuilder(AetherIIBlocks.ICHORITE_BRICKS.get())
+            .wall(AetherIIBlocks.ICHORITE_BRICK_WALL.get())
+            .slab(AetherIIBlocks.ICHORITE_BRICK_SLAB.get())
+            .stairs(AetherIIBlocks.ICHORITE_BRICK_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily MARBLED_ICHORITE = familyBuilder(AetherIIBlocks.MARBLED_ICHORITE.get())
+            .wall(AetherIIBlocks.MARBLED_ICHORITE_WALL.get())
+            .slab(AetherIIBlocks.MARBLED_ICHORITE_SLAB.get())
+            .stairs(AetherIIBlocks.MARBLED_ICHORITE_STAIRS.get())
+            .getFamily();
+    public static final BlockFamily MARBLED_BRICKS = familyBuilder(AetherIIBlocks.MARBLED_BRICKS.get())
+            .wall(AetherIIBlocks.MARBLED_BRICK_WALL.get())
+            .slab(AetherIIBlocks.MARBLED_BRICK_SLAB.get())
+            .stairs(AetherIIBlocks.MARBLED_BRICK_STAIRS.get())
+            .getFamily();
     public static final BlockFamily AGIOSITE = familyBuilder(AetherIIBlocks.AGIOSITE.get())
             .wall(AetherIIBlocks.AGIOSITE_WALL.get())
             .slab(AetherIIBlocks.AGIOSITE_SLAB.get())
