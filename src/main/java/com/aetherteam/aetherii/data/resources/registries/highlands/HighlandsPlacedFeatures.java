@@ -541,9 +541,9 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, POINTED_HOLYSTONE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.POINTED_HOLYSTONE),
-                CountPlacement.of(UniformInt.of(64, 96)),
+                CountPlacement.of(UniformInt.of(64, 104)),
                 InSquarePlacement.spread(),
-                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(160))),
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(176))),
                 RarityFilter.onAverageOnceEvery(75),
                 CountPlacement.of(UniformInt.of(3, 15)),
                 RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),
