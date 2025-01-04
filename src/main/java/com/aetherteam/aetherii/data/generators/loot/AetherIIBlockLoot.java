@@ -59,7 +59,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.BRYALINN_MOSS_CARPET.get());
         this.add(AetherIIBlocks.BRYALINN_MOSS_VINES.get(), this::createShearsOnlyDrop);
         this.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.createPetalsDrops(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get()));
-        this.dropSelf(AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
         this.dropSelf(AetherIIBlocks.FERROSITE_SAND.get());
@@ -136,6 +135,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.AMBEROOT_WOOD.get(), (wood) -> this.droppingAmberoot(getter, wood, AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIItems.GOLDEN_AMBER.get()));
         this.dropSelf(AetherIIBlocks.INFESTED_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_INFESTED_WOOD.get());
+
+        // Wood Blocks
+        this.dropSelf(AetherIIBlocks.TANGLED_BRANCHES.get());
+        this.dropSelf(AetherIIBlocks.TANGLED_ROOTS.get());
 
         // Leaf Pile
         this.add(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.SKYROOT_LEAVES.get()));

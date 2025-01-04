@@ -855,6 +855,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREEN_AERCLOUD.get(),
                 AetherIIBlocks.PURPLE_AERCLOUD.get(),
                 AetherIIBlocks.STORM_AERCLOUD.get(),
+                AetherIIBlocks.TANGLED_ROOTS.get(),
                 AetherIIBlocks.SKYROOT_LEAF_PILE.get(),
                 AetherIIBlocks.SKYPLANE_LEAF_PILE.get(),
                 AetherIIBlocks.SKYBIRCH_LEAF_PILE.get(),

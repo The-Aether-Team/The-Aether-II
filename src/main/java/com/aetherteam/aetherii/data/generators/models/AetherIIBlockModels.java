@@ -54,7 +54,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_2.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.modelOutput),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_3.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.modelOutput),
                 AetherIITexturedModels.BRYALINN_MOSS_FLOWERS_4.create(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get(), this.modelOutput));
-        this.createCutoutMippedCube(AetherIIBlocks.TANGLED_BRANCHES.get());
 
         // Magnetic
         this.createTrivialCube(AetherIIBlocks.FERROSITE_SAND.get());
@@ -113,6 +112,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Moa Nest
         this.createTrivialCube(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
+        this.createMoaEgg(AetherIIBlocks.MOA_EGG.get());
 
         // Logs
         this.woodProvider(AetherIIBlocks.SKYROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.SKYROOT_LOG.get()).wood(AetherIIBlocks.SKYROOT_WOOD.get());
@@ -126,6 +126,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createFacingTopBottomColumnWithHorizontalVariant(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get(), AetherIIBlocks.WISPROOT_LOG.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
         this.woodProvider(AetherIIBlocks.INFESTED_WOOD.get()).wood(AetherIIBlocks.INFESTED_WOOD.get());
         this.woodProvider(AetherIIBlocks.STRIPPED_INFESTED_WOOD.get()).wood(AetherIIBlocks.STRIPPED_INFESTED_WOOD.get());
+
+        // Wood Blocks
+        this.createCutoutMippedCube(AetherIIBlocks.TANGLED_BRANCHES.get());
+        this.createTrivialCube(AetherIIBlocks.TANGLED_ROOTS.get());
 
         // Leaves
         this.createLeavesWithPiles(AetherIIBlocks.SKYROOT_LEAVES.get(), AetherIIBlocks.SKYROOT_LEAF_PILE.get());
@@ -360,9 +364,6 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createHangingSign(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(), AetherIIBlocks.SKYROOT_HANGING_SIGN.get(), AetherIIBlocks.SKYROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(), AetherIIBlocks.GREATROOT_HANGING_SIGN.get(), AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get());
         this.createHangingSign(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(), AetherIIBlocks.WISPROOT_HANGING_SIGN.get(), AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get());
-
-        // Moa Egg
-        this.createMoaEgg(AetherIIBlocks.MOA_EGG.get());
 
         // Bookshelves
         this.createCubeColumn(AetherIIBlocks.SKYROOT_BOOKSHELF.get(), AetherIIBlocks.SKYROOT_PLANKS.get());

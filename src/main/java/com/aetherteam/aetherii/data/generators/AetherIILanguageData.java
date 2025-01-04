@@ -53,7 +53,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_CARPET, "Bryalinn Moss Carpet");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_VINES, "Bryalinn Moss Vines");
         this.addBlock(AetherIIBlocks.BRYALINN_MOSS_FLOWERS, "Bryalinn Moss Flowers");
-        this.addBlock(AetherIIBlocks.TANGLED_BRANCHES, "Tangled Branches");
 
         // Magnetic
         this.addBlock(AetherIIBlocks.FERROSITE_SAND, "Ferrosite Sand");
@@ -129,6 +128,10 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
         this.addBlock(AetherIIBlocks.INFESTED_WOOD, "Infested Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_INFESTED_WOOD, "Stripped Infested Wood");
+
+        // Wood Blocks
+        this.addBlock(AetherIIBlocks.TANGLED_BRANCHES, "Tangled Branches");
+        this.addBlock(AetherIIBlocks.TANGLED_ROOTS, "Tangled Roots");
 
         // Leaf Pile
         this.addBlock(AetherIIBlocks.SKYROOT_LEAF_PILE, "Skyroot Leaf Pile");
