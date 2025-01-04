@@ -305,7 +305,7 @@ public class HighlandsPlacedFeatures {
                 context,
                 GRASS_FIELD,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GRASS_FIELD),
-                NoiseBasedCountPlacement.of(40, 5, 0.3),
+                CountPlacement.of(24),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(0, 1), 4),
                 BiomeFilter.biome()
         );
@@ -313,6 +313,7 @@ public class HighlandsPlacedFeatures {
                 context,
                 SMALL_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SMALL_GRASS_PATCH),
+                CountPlacement.of(8),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(0, 1), 4),
                 BiomeFilter.biome()
         );
@@ -320,6 +321,7 @@ public class HighlandsPlacedFeatures {
                 context,
                 MEDIUM_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MEDIUM_GRASS_PATCH),
+                CountPlacement.of(6),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(0, 2), 4),
                 BiomeFilter.biome()
         );
@@ -327,6 +329,7 @@ public class HighlandsPlacedFeatures {
                 context,
                 LARGE_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_GRASS_PATCH),
+                CountPlacement.of(4),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(0, 3), 4),
                 BiomeFilter.biome()
         );

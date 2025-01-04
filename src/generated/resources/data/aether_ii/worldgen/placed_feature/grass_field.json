@@ -2,10 +2,8 @@
   "feature": "aether_ii:grass_field",
   "placement": [
     {
-      "type": "minecraft:noise_based_count",
-      "noise_factor": 5.0,
-      "noise_offset": 0.3,
-      "noise_to_count_ratio": 40
+      "type": "minecraft:count",
+      "count": 24
     },
     {
       "type": "aether_ii:improved_layer_placement",
