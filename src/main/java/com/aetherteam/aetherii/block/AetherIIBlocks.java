@@ -31,6 +31,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -296,6 +297,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> SKYROOT_TWIG = register("skyroot_twig", TwigBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).noOcclusion().noCollission().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> HOLYSTONE_ROCK = register("holystone_rock", RockBlock::new, () -> Block.Properties.of().mapColor(MapColor.WOOL).noOcclusion().noCollission().instabreak().sound(SoundType.STONE).pushReaction(PushReaction.DESTROY));
 
+    // Dungeon Decoration
+    public static final DeferredBlock<MultifaceBlock> AMBROSIUM_CHUNKS = register("ambrosium_chunks", MultifaceBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_YELLOW).replaceable().noCollission().sound(SoundType.STONE).ignitedByLava().pushReaction(PushReaction.DESTROY).lightLevel((block) -> 7));
+
     // Skyroot Planks
     public static final DeferredBlock<Block> SKYROOT_PLANKS = register("skyroot_planks", () -> Block.Properties.ofFullCopy(Blocks.OAK_PLANKS));
     public static final DeferredBlock<StairBlock> SKYROOT_STAIRS = register("skyroot_stairs", (properties) -> new StairBlock(SKYROOT_PLANKS.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.SKYROOT_PLANKS.get()));
@@ -428,7 +432,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<SlabBlock> UNDERSHALE_BRICK_SLAB = register("undershale_brick_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()));
     public static final DeferredBlock<WallBlock> UNDERSHALE_BRICK_WALL = register("undershale_brick_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERSHALE_BRICKS.get()).forceSolidOn());
 
-    //Ichorite
+    // Ichorite
     public static final DeferredBlock<StairBlock> ICHORITE_STAIRS = register("ichorite_stairs", (properties) -> new StairBlock(ICHORITE.get().defaultBlockState(), properties), () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()));
     public static final DeferredBlock<SlabBlock> ICHORITE_SLAB = register("ichorite_slab", SlabBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).strength(2.0F, 6.0F));
     public static final DeferredBlock<WallBlock> ICHORITE_WALL = register("ichorite_wall", WallBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ICHORITE.get()).forceSolidOn());

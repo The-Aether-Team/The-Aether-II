@@ -14,6 +14,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -206,6 +207,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Ground Decoration
         this.createTwig(AetherIIBlocks.SKYROOT_TWIG.get(), AetherIIBlocks.SKYROOT_LOG.get());
         this.createRock(AetherIIBlocks.HOLYSTONE_ROCK.get(), AetherIIBlocks.HOLYSTONE.get());
+
+        // Dungeon Decoration
+        this.createMultiface(AetherIIBlocks.AMBROSIUM_CHUNKS.get());
 
         // Skyroot Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());

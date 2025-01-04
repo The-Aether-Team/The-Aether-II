@@ -433,6 +433,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKY_ROOTS.get());
                 output.accept(AetherIIBlocks.SKYROOT_TWIG.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_ROCK.get());
+                output.accept(AetherIIBlocks.AMBROSIUM_CHUNKS.get());
                 output.accept(AetherIIBlocks.POINTED_HOLYSTONE.get());
                 output.accept(AetherIIBlocks.POINTED_ICHORITE.get());
                 output.accept(AetherIIBlocks.SMALL_ARCTIC_ICE_CRYSTAL.get());

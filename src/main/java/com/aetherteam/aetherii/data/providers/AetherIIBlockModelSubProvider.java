@@ -79,6 +79,29 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleItemModel(block, locationBottom);
     }
 
+    @Override
+    public void createMultifaceBlockStates(Block block) {
+        ResourceLocation location = ModelLocationUtils.getModelLocation(block);
+        MultiPartGenerator multiPart = MultiPartGenerator.multiPart(block);
+        Condition.TerminalCondition terminalCondition = Util.make(Condition.condition(),
+                (condition) -> MULTIFACE_GENERATOR.stream().map(Pair::getFirst).map(MultifaceBlock::getFaceProperty).forEach((property) -> {
+            if (block.defaultBlockState().hasProperty(property)) {
+                condition.term(property, false);
+            }
+        }));
+
+        for (Pair<Direction, Function<ResourceLocation, Variant>> pair : MULTIFACE_GENERATOR) {
+            BooleanProperty booleanProperty = MultifaceBlock.getFaceProperty(pair.getFirst());
+            Function<ResourceLocation, Variant> function = pair.getSecond();
+            if (block.defaultBlockState().hasProperty(booleanProperty)) {
+                multiPart.with(Condition.condition().term(booleanProperty, true), function.apply(location));
+                multiPart.with(terminalCondition , function.apply(location));
+            }
+        }
+
+        this.blockStateOutput.accept(multiPart);
+    }
+
     public void createCutoutMippedCube(Block block) {
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, AetherIIModelTemplates.TEMPLATE_CUTOUT_MIPPED_CUBE_ALL.create(block, TextureMapping.cube(block), this.modelOutput)));
     }

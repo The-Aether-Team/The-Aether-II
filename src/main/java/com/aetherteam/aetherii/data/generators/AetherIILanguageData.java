@@ -256,6 +256,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_TWIG, "Skyroot Twig");
         this.addBlock(AetherIIBlocks.HOLYSTONE_ROCK, "Holystone Rock");
 
+        // Dungeon Decoration
+        this.addBlock(AetherIIBlocks.AMBROSIUM_CHUNKS, "Ambrosium Chunks");
+
         // Skyroot Planks
         this.addBlock(AetherIIBlocks.SKYROOT_PLANKS, "Skyroot Planks");
         this.addBlock(AetherIIBlocks.SKYROOT_STAIRS, "Skyroot Stairs");
