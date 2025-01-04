@@ -98,6 +98,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_BEAM.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
+                output.accept(AetherIIBlocks.INFESTED_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_INFESTED_WOOD.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_SLAB.get());

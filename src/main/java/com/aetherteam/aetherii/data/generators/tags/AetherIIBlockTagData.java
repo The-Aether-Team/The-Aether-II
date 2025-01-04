@@ -125,6 +125,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get()
         );
+        this.tag(AetherIITags.Blocks.INFESTED_WOOD).add(
+                AetherIIBlocks.INFESTED_WOOD.get(),
+                AetherIIBlocks.STRIPPED_INFESTED_WOOD.get()
+        );
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
                 AetherIIBlocks.SKYROOT_HIGHLIGHT.get(),
@@ -923,7 +927,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AETHER_DIRT.get(),
                 AetherIIBlocks.QUICKSOIL.get()
         );
-        this.tag(BlockTags.SNAPS_GOAT_HORN).addTags(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Blocks.AMBEROOT_LOGS).add(
+        this.tag(BlockTags.SNAPS_GOAT_HORN).addTags(AetherIITags.Blocks.SKYROOT_LOGS, AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Blocks.INFESTED_WOOD).add(
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.ICESTONE.get(),
                 AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(),

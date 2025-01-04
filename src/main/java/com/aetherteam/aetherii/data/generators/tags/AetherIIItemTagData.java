@@ -34,6 +34,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.copy(AetherIITags.Blocks.WISPROOT_LOGS, AetherIITags.Items.WISPROOT_LOGS);
         this.copy(AetherIITags.Blocks.GREATROOT_LOGS, AetherIITags.Items.GREATROOT_LOGS);
         this.copy(AetherIITags.Blocks.AMBEROOT_LOGS, AetherIITags.Items.AMBEROOT_LOGS);
+        this.copy(AetherIITags.Blocks.INFESTED_WOOD, AetherIITags.Items.INFESTED_WOOD);
         this.copy(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS, AetherIITags.Items.SKYROOT_DECORATIVE_BLOCKS);
         this.copy(AetherIITags.Blocks.GREATROOT_DECORATIVE_BLOCKS, AetherIITags.Items.GREATROOT_DECORATIVE_BLOCKS);
         this.copy(AetherIITags.Blocks.WISPROOT_DECORATIVE_BLOCKS, AetherIITags.Items.WISPROOT_DECORATIVE_BLOCKS);
@@ -209,7 +210,8 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(AetherIITags.Items.CRAFTS_SKYROOT_PLANKS).addTags(
                 AetherIITags.Items.SKYROOT_LOGS,
-                AetherIITags.Items.AMBEROOT_LOGS
+                AetherIITags.Items.AMBEROOT_LOGS,
+                AetherIITags.Items.INFESTED_WOOD
         );
         this.tag(AetherIITags.Items.CRAFTS_GREATROOT_PLANKS).addTag(
                 AetherIITags.Items.GREATROOT_LOGS
