@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.material.Fluids;
 
 public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
     public NoiseLakeFeature(Codec<NoiseLakeConfiguration> codec) {
@@ -127,7 +128,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double waterfalls = lakeWaterfallNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
-        int thickness = calculateThickness(barrier, pos.getY(), config.height().getValue());
+        int thickness = calculateShoreThickness(barrier, waterfalls, pos.getY(), config.height().getValue());
 
         // Determines the block to place at specific noise values
         WorldGenLevel level = context.level();
@@ -143,7 +144,13 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                             && !level.getBlockState(pos.above()).isSolid()
                     ) {
                         this.setBlock(level, pos, Blocks.AIR.defaultBlockState());
-                        this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
+                        if (thickness > 1) {
+                            this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
+                        } else {
+                            this.setBlock(level, pos, Blocks.AIR.defaultBlockState());
+                            level.setBlock(pos.below(), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
+                            level.scheduleTick(pos.below(), Fluids.WATER.defaultFluidState().getType(), 0);
+                        }
                         this.setBlock(level, pos.below(2), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
 
                         // Removes Floating Grass above the lakes
@@ -153,15 +160,6 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                     }
                 }
             }
-
-            /*
-            // Generates waterfalls
-            if (pos.getY() == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(pos).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) && !config.frozen()) {
-                level.setBlock(pos, Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
-                level.scheduleTick(pos, Fluids.WATER.defaultFluidState().getType(), 0);
-            }
-
-             */
         }
     }
 
@@ -190,6 +188,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
             }
         }
 
+        // Blends the Shores with the surrounding Terrain
         if (density > config.shoreStartValue() + shore - 0.005) {
             if (level.getBlockState(pos.above()).is(AetherIIBlocks.AETHER_GRASS_BLOCK)){
                 this.setBlock(level, pos.below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
@@ -213,5 +212,9 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
     public int calculateThickness(double barrier, int y, int height) {
         return (int) (y == height ? barrier / 2 : barrier);
+    }
+
+    public int calculateShoreThickness(double barrier, double waterfalls, int y, int height) {
+        return waterfalls < 0.02 ? 0 : (int) (y == height ? barrier / 2 : barrier);
     }
 }
