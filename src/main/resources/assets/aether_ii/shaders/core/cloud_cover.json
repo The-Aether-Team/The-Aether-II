@@ -4,8 +4,8 @@
     "srcrgb": "srcalpha",
     "dstrgb": "1-srcalpha"
   },
-  "vertex": "position_color",
-  "fragment": "aether_ii:cloud_cover",
+  "vertex": "minecraft:core/position_color",
+  "fragment": "aether_ii:core/cloud_cover",
   "attributes": [
     "Color"
   ],
