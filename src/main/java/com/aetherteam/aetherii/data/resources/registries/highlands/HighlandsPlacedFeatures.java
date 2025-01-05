@@ -594,8 +594,8 @@ public class HighlandsPlacedFeatures {
         );
 
         register(context, ACID_POOL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ACID_POOL),
-                CountPlacement.of(8),
-                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(96))),
+                CountPlacement.of(16),
+                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
                 BiomeFilter.biome()
         );
