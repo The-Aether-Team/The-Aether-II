@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.AetherIIRenderTypes;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.WeatherEffectRendererAccessor;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -43,17 +42,10 @@ import java.awt.*;
 public class HighlandsSpecialEffects extends DimensionSpecialEffects {
     private final DimensionSpecialEffects OVERWORLD = new OverworldEffects();
 
-    private static final ResourceLocation MOON_LOCATION = ResourceLocation.withDefaultNamespace("textures/environment/moon_phases.png");
-    private static final ResourceLocation SUN_LOCATION = ResourceLocation.withDefaultNamespace("textures/environment/sun.png");
     private static final ResourceLocation RAIN_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain.png");
     private static final ResourceLocation RAIN_STORMY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/rain_stormy.png");
     private static final ResourceLocation SNOW_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow.png");
     private static final ResourceLocation SNOW_STORMY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/environment/snow_stormy.png");
-
-    private int prevCloudX = Integer.MIN_VALUE;
-    private int prevCloudY = Integer.MIN_VALUE;
-    private int prevCloudZ = Integer.MIN_VALUE;
-    private Vec3 prevCloudColor = Vec3.ZERO;
 
     public HighlandsSpecialEffects() {
         super(256.0F, true, SkyType.OVERWORLD, false, false);
