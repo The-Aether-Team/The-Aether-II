@@ -38,10 +38,13 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
                 BlockPos layerPos = new BlockPos(xCoord, height, zCoord);
 
+                /*
                 if (!config.frozen()) {
                     placeShore(context, layerPos.above(), false);
                     placeShore(context, layerPos, true);
                 }
+
+                 */
 
                 placeShoreLayer(context, layerPos, noiseStartValue, 1.0);
                 placeLakeLayer(context, layerPos.below(1), noiseStartValue + 0.025, 0.8);
@@ -141,10 +144,8 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                             && !level.getBlockState(pos.above()).isSolid()
                     ) {
                         this.setBlock(level, pos, Blocks.AIR.defaultBlockState());
-                        this.setBlock(level, pos.below(), config.secondaryShoreBlock().getState(context.random(), pos.below()));
-                        if (level.isEmptyBlock(pos.below(2))) {
-                            this.setBlock(level, pos.below(2), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
-                        }
+                        this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
+                        this.setBlock(level, pos.below(2), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
 
                         // Removes Floating Grass above the lakes
                         if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
