@@ -14,8 +14,8 @@ public class AetherIITexturedModels extends TexturedModel {
     public static final Provider ASYMMETRICAL_CROSS_EVEN_MIRRORED = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_EVEN_MIRRORED);
     public static final Provider ASYMMETRICAL_CROSS_ODD = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_ODD);
     public static final Provider ASYMMETRICAL_CROSS_ODD_MIRRORED = createDefault(AetherIITextureMappings::asymmetricalCross, AetherIIModelTemplates.ASYMMETRICAL_CROSS_ODD_MIRRORED);
-    public static final Provider LILICHIME = createDefault(AetherIITextureMappings::plant, AetherIIModelTemplates.LILICHIME);
-    public static final Provider PLURACIAN = createDefault(AetherIITextureMappings::plant, AetherIIModelTemplates.PLURACIAN);
+    public static final Provider LILICHIME = createDefault(AetherIITextureMappings::itemPlant, AetherIIModelTemplates.LILICHIME);
+    public static final Provider PLURACIAN = createDefault(AetherIITextureMappings::itemPlant, AetherIIModelTemplates.PLURACIAN);
     public static final Provider BRYALINN_MOSS_FLOWERS_1 = createDefault(AetherIITextureMappings::flowerbed, AetherIIModelTemplates.BRYALINN_MOSS_FLOWERS_1);
     public static final Provider BRYALINN_MOSS_FLOWERS_2 = createDefault(AetherIITextureMappings::flowerbed, AetherIIModelTemplates.BRYALINN_MOSS_FLOWERS_2);
     public static final Provider BRYALINN_MOSS_FLOWERS_3 = createDefault(AetherIITextureMappings::flowerbed, AetherIIModelTemplates.BRYALINN_MOSS_FLOWERS_3);

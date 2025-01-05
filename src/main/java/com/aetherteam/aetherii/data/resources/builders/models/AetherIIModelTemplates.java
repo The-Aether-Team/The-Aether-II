@@ -242,8 +242,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ASYMMETRICAL_CROSS_ODD_MIRRORED = create("asymmetrical_cross_odd_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_ASYMMETRICAL_CROSS_EVEN = create("flower_pot_asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_ASYMMETRICAL_CROSS_ODD = create("flower_pot_asymmetrical_cross_odd", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
-    public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.PLANT).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
-    public static final ModelTemplate PLURACIAN = create("template_pluracian", TextureSlot.PLANT).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.PLANT, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate PLURACIAN = create("template_pluracian", TextureSlot.PLANT, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_LILICHIME = create("flower_pot_lilichime", TextureSlot.PLANT).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_PLURACIAN = create("flower_pot_pluracian", TextureSlot.PLANT).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_BUSH_BLOCK = create("flower_pot_bush_block", TextureSlot.STEM, AetherIITextureSlots.BUSH).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();

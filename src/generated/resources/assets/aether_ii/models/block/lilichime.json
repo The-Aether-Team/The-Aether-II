@@ -2,6 +2,7 @@
   "parent": "aether_ii:block/template_lilichime",
   "render_type": "minecraft:cutout",
   "textures": {
+    "particle": "aether_ii:item/lilichime",
     "plant": "aether_ii:block/lilichime"
   }
 }
