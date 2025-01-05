@@ -12,7 +12,10 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import org.joml.Vector3i;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class GasFeature extends Feature<NoneFeatureConfiguration> {
     public GasFeature(Codec<NoneFeatureConfiguration> codec) {

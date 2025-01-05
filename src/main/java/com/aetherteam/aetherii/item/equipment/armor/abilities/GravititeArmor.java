@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
-import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.LivingEntityAccessor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;

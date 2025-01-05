@@ -1,15 +1,16 @@
-package com.aetherteam.aetherii.block.construction;
+package com.aetherteam.aetherii.block.natural;
 
 import com.aetherteam.aetherii.block.FrictionCapped;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.TransparentBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class QuicksoilGlassBlock extends TransparentBlock implements FrictionCapped {
-    public QuicksoilGlassBlock(Properties properties) {
+public class QuicksoilBlock extends Block implements FrictionCapped {
+    public QuicksoilBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 

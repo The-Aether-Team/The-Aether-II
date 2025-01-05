@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.recipe.book;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.crafting.ExtendedRecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.neoforged.neoforge.client.event.RegisterRecipeBookSearchCategoriesEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;

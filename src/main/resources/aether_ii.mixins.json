@@ -14,6 +14,7 @@
     "common.RandomStateMixin",
     "common.ServerLevelMixin",
     "common.accessor.AbstractArrowAccessor",
+    "common.accessor.AbstractBoatAccessor",
     "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
     "common.accessor.ContextKeySetSetsAccessor",
@@ -24,6 +25,7 @@
     "common.accessor.MobEffectInstanceAccessor",
     "common.accessor.PerlinNoiseAccessor",
     "common.accessor.PlayerAccessor",
+    "common.accessor.RecipeManagerAccessor",
     "common.accessor.SaplingBlockAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor"
   ],

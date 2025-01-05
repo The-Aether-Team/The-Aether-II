@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.projectile.ToxicDart;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

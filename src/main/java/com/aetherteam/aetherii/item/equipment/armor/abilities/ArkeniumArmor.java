@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.item.equipment.armor.abilities;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
-import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;

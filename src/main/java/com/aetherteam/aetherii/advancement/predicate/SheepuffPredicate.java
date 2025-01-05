@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.advancement.predicate;
 
-import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

@@ -2,7 +2,6 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIIArmPoseTransformers;
-import com.aetherteam.aetherii.client.AetherIIArmPoses;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Style;
@@ -12,7 +11,6 @@ import net.minecraft.world.item.Rarity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
-import net.neoforged.neoforge.client.IArmPoseTransformer;
 
 import java.util.List;
 import java.util.function.Supplier;

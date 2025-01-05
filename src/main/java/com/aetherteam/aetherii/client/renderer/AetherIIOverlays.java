@@ -30,7 +30,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.level.GameType;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
 import java.awt.*;
