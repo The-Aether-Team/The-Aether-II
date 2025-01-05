@@ -1600,8 +1600,8 @@ public class HighlandsConfiguredFeatures {
                                 )
                         ),
                         0.29,
-                        BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
                         false
                 ));
