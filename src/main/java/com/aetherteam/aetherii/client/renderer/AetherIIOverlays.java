@@ -97,7 +97,6 @@ public class AetherIIOverlays {
             int j1 = 0;
             int k1 = 0;
             MobEffectTextureManager mobeffecttexturemanager = minecraft.getMobEffectTextures();
-            List<Runnable> list = Lists.newArrayListWithExpectedSize(collection.size());
 
             for (EffectBuildupInstance buildup : Ordering.natural().reverse().sortedCopy(collection)) {
                 Holder<MobEffect> effect = buildup.getType();
@@ -140,10 +139,8 @@ public class AetherIIOverlays {
                 TextureAtlasSprite textureatlassprite = mobeffecttexturemanager.get(effect);
                 int i1 = j;
                 int i_f = i;
-                list.add(() -> guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, i_f + 3, i1 + 3, 0, 18, 18));
+                guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, i_f + 3, i1 + 3, 18, 18);
             }
-
-            list.forEach(Runnable::run);
 
             RenderSystem.disableBlend();
         }
