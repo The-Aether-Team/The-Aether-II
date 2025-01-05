@@ -128,7 +128,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double waterfalls = lakeWaterfallNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
-        int thickness = calculateShoreThickness(barrier, waterfalls, pos.getY(), config.height().getValue());
+        int thickness = config.frozen() ? calculateThickness(barrier, pos.getY(), config.height().getValue()) : calculateShoreThickness(barrier, waterfalls, pos.getY(), config.height().getValue());
 
         // Determines the block to place at specific noise values
         WorldGenLevel level = context.level();

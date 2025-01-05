@@ -2,11 +2,11 @@ package com.aetherteam.aetherii.data.resources.builders.worldgen.highlands;
 
 import com.aetherteam.aetherii.world.feature.modifier.filter.StructureBlacklistFilter;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.core.BlockPos;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.placement.BiomeFilter;
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
 
 import java.util.List;
 
@@ -23,12 +23,6 @@ public class HighlandsPlacementBuilders {
     public static List<PlacementModifier> treePlacement(PlacementModifier placement) {
         return treePlacementBase(placement)
                 .add(new StructureBlacklistFilter())
-                .build();
-    }
-
-    public static List<PlacementModifier> treePlacement(PlacementModifier placement, Block saplingBlock) {
-        return treePlacementBase(placement)
-                .add(BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(saplingBlock.defaultBlockState(), BlockPos.ZERO)))
                 .build();
     }
 }
