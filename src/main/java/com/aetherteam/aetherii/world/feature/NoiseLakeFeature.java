@@ -100,11 +100,6 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                     }
                 }
             }
-
-            // Freezes Top if "frozen" is true
-            if (pos.getY() == config.height().getMinValue() - 1 && level.getBlockState(pos).is(Blocks.WATER) && config.frozen()) {
-                this.setBlock(level, pos, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
-            }
         }
     }
 
@@ -160,6 +155,11 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                     }
                 }
             }
+
+            // Freezes Top if "frozen" is true
+            if (pos.getY() == config.height().getMinValue() - 1 && level.getBlockState(pos.below()).is(Blocks.WATER) && config.frozen()) {
+                this.setBlock(level, pos.below(), AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
+            }
         }
     }
 
@@ -180,23 +180,23 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
         if (density > config.shoreStartValue() + shore) {
-            if (level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_DIRT) && level.getBlockState(pos.above()).is(AetherIITags.Blocks.AETHER_DIRT)){
+            if (level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_DIRT) && level.getBlockState(pos.above()).is(AetherIITags.Blocks.AETHER_DIRT)) {
                 this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
-               for (int i = 0; i < 4; i++) {
-                   this.setBlock(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), Blocks.AIR.defaultBlockState());
-               }
+                for (int i = 0; i < 4; i++) {
+                    this.setBlock(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), Blocks.AIR.defaultBlockState());
+                }
             }
         }
 
         // Blends the Shores with the surrounding Terrain
         if (density > config.shoreStartValue() + shore - 0.005) {
-            if (level.getBlockState(pos.above()).is(AetherIIBlocks.AETHER_GRASS_BLOCK)){
+            if (level.getBlockState(pos.above()).is(AetherIIBlocks.AETHER_GRASS_BLOCK)) {
                 this.setBlock(level, pos.below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
                 this.setBlock(level, pos, AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
                 this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
             }
 
-            if (level.getBlockState(pos.above(2)).is(AetherIIBlocks.AETHER_GRASS_BLOCK)){
+            if (level.getBlockState(pos.above(2)).is(AetherIIBlocks.AETHER_GRASS_BLOCK)) {
                 this.setBlock(level, pos.below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
                 this.setBlock(level, pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
                 this.setBlock(level, pos.above(), AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());

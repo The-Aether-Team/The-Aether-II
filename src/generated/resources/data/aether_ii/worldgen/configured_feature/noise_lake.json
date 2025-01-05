@@ -10,12 +10,6 @@
     "lake_noise": "aether_ii:highlands/lakes/noise",
     "lake_waterfall_noise": "aether_ii:highlands/lakes/lakes_waterfalls",
     "noise_start_value": 0.3,
-    "secondary_shore_block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:quicksoil"
-      }
-    },
     "shore_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
