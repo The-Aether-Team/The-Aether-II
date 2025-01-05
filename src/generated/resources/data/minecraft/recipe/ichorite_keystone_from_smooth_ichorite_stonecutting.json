@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:smooth_ichorite",
+  "result": {
+    "count": 1,
+    "id": "aether_ii:ichorite_keystone"
+  }
+}

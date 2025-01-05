@@ -46,8 +46,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.ANIMALS_FURS).add(
                 AetherIIItems.TAEGORE_HIDE.get(),
-                AetherIIItems.BURRUKAI_PELT.get()
-                );
+                AetherIIItems.BURRUKAI_PELT.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
@@ -679,6 +678,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GRAVITITE_ORE.asItem()
         );
         this.tag(Tags.Items.RODS_WOODEN).add(AetherIIItems.SKYROOT_STICK.get());
+        this.tag(Tags.Items.FEATHERS).add(
+                AetherIIItems.MOA_FEATHER.get(),
+                AetherIIItems.COCKATRICE_FEATHER.get()
+        );
         this.tag(Tags.Items.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.asItem(),
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),
