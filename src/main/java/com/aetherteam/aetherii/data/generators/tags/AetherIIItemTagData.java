@@ -323,6 +323,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.UNDERSHALE.asItem(),
                 AetherIIBlocks.AGIOSITE.asItem(),
+                AetherIIBlocks.ICHORITE.asItem(),
                 AetherIIBlocks.CRUDE_SCATTERGLASS.asItem(),
                 AetherIIBlocks.QUICKSOIL.asItem(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.asItem(),
@@ -499,7 +500,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.AGIOSITE_STAIRS.asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_STAIRS.asItem(),
                 AetherIIBlocks.ICESTONE_STAIRS.asItem(),
-                AetherIIBlocks.ICESTONE_BRICK_STAIRS.asItem()
+                AetherIIBlocks.ICESTONE_BRICK_STAIRS.asItem(),
+                AetherIIBlocks.ICHORITE_STAIRS.asItem(),
+                AetherIIBlocks.SMOOTH_ICHORITE_STAIRS.asItem(),
+                AetherIIBlocks.ICHORITE_BRICK_STAIRS.asItem(),
+                AetherIIBlocks.MARBLED_BRICK_STAIRS.asItem()
         );
         this.tag(ItemTags.SLABS).add(
                 AetherIIBlocks.HOLYSTONE_SLAB.asItem(),
@@ -512,7 +517,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.AGIOSITE_SLAB.asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_SLAB.asItem(),
                 AetherIIBlocks.ICESTONE_SLAB.asItem(),
-                AetherIIBlocks.ICESTONE_BRICK_SLAB.asItem()
+                AetherIIBlocks.ICESTONE_BRICK_SLAB.asItem(),
+                AetherIIBlocks.ICHORITE_SLAB.asItem(),
+                AetherIIBlocks.SMOOTH_ICHORITE_SLAB.asItem(),
+                AetherIIBlocks.ICHORITE_BRICK_SLAB.asItem(),
+                AetherIIBlocks.MARBLED_BRICK_SLAB.asItem()
         );
         this.tag(ItemTags.WALLS).add(
                 AetherIIBlocks.HOLYSTONE_WALL.asItem(),
@@ -525,7 +534,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.AGIOSITE_WALL.asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_WALL.asItem(),
                 AetherIIBlocks.ICESTONE_WALL.asItem(),
-                AetherIIBlocks.ICESTONE_BRICK_WALL.asItem()
+                AetherIIBlocks.ICESTONE_BRICK_WALL.asItem(),
+                AetherIIBlocks.ICHORITE_WALL.asItem(),
+                AetherIIBlocks.SMOOTH_ICHORITE_WALL.asItem(),
+                AetherIIBlocks.ICHORITE_BRICK_WALL.asItem(),
+                AetherIIBlocks.MARBLED_BRICK_WALL.asItem()
         );
         this.tag(ItemTags.LEAVES).add(
                 AetherIIBlocks.SKYROOT_LEAVES.asItem(),
