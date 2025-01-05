@@ -190,11 +190,18 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
             }
         }
 
-        if (density > config.shoreStartValue() + shore - 0.05) {
+        if (density > config.shoreStartValue() + shore - 0.005) {
             if (level.getBlockState(pos.above()).is(AetherIIBlocks.AETHER_GRASS_BLOCK)){
                 this.setBlock(level, pos.below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
                 this.setBlock(level, pos, AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
                 this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+            }
+
+            if (level.getBlockState(pos.above(2)).is(AetherIIBlocks.AETHER_GRASS_BLOCK)){
+                this.setBlock(level, pos.below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+                this.setBlock(level, pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+                this.setBlock(level, pos.above(), AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
+                this.setBlock(level, pos.above(2), Blocks.AIR.defaultBlockState());
             }
         }
 

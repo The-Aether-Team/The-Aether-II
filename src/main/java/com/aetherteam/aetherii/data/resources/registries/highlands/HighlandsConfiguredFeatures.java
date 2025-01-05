@@ -1600,7 +1600,7 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
-                        0.32,
+                        0.31,
                         BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
@@ -1629,7 +1629,7 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
-                        0.3,
+                        0.31,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
                         DensityFunctions.zero(),
