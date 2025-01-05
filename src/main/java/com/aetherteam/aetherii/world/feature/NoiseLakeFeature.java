@@ -38,13 +38,9 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
 
                 BlockPos layerPos = new BlockPos(xCoord, height, zCoord);
 
-                /*
                 if (!config.frozen()) {
-                    placeShore(context, layerPos.above(), false);
-                    placeShore(context, layerPos, true);
+                    placeShore(context, layerPos);
                 }
-
-                 */
 
                 placeShoreLayer(context, layerPos, noiseStartValue, 1.0);
                 placeLakeLayer(context, layerPos.below(1), noiseStartValue + 0.025, 0.8);
@@ -118,16 +114,19 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         DensityFunction lakeNoise = config.lakeNoise();
         DensityFunction lakeFloorNoise = config.lakeFloorNoise();
         DensityFunction lakeBarrierNoise = config.lakeBarrierNoise();
+        DensityFunction lakeWaterfallNoise = config.lakeWaterfallNoise();
 
         DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(context.level().getSeed());
 
         lakeNoise.mapAll(visitor);
         lakeFloorNoise.mapAll(visitor);
         lakeBarrierNoise.mapAll(visitor);
+        lakeWaterfallNoise.mapAll(visitor);
 
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        double waterfalls = lakeWaterfallNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         int thickness = calculateThickness(barrier, pos.getY(), config.height().getValue());
 
         // Determines the block to place at specific noise values
@@ -166,7 +165,7 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         }
     }
 
-    public void placeShore(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos, boolean secondary) {
+    public void placeShore(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos) {
         NoiseLakeConfiguration config = context.config();
 
         DensityFunction lakeNoise = config.lakeNoise();
@@ -183,8 +182,11 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
         if (density > config.shoreStartValue() + shore) {
-            if (level.getBlockState(pos.below(2)).is(AetherIITags.Blocks.AETHER_DIRT)){
-                this.setBlock(level, pos.below(2), secondary ? config.secondaryShoreBlock().getState(context.random(), pos.below(2)) : config.shoreBlock().getState(context.random(), pos.below(2)));
+            if (level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_DIRT) && level.getBlockState(pos.above()).is(AetherIITags.Blocks.AETHER_DIRT)){
+                this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
+               for (int i = 0; i < 4; i++) {
+                   this.setBlock(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), Blocks.AIR.defaultBlockState());
+               }
 
                 // Removes Floating Grass above the shores
                 if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {

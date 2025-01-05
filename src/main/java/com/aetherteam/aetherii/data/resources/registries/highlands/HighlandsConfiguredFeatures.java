@@ -1582,6 +1582,7 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_WATERFALLS),
                         0.3,
                         ConstantInt.of(124),
                         new DualNoiseProvider(
@@ -1599,8 +1600,8 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
-                        0.29,
-                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        0.32,
+                        BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
                         false
@@ -1610,6 +1611,7 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_WATERFALLS),
                         0.3,
                         ConstantInt.of(124),
                         new DualNoiseProvider(
@@ -1639,6 +1641,7 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE_SWAMP),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_WATERFALLS),
                         0.3,
                         ConstantInt.of(124),
                         new DualNoiseProvider(

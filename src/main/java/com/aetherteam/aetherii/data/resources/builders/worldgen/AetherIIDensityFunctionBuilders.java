@@ -56,6 +56,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> LAKES_FLOOR = createKey("highlands/lakes/lake_floor");
     public static final ResourceKey<DensityFunction> LAKES_BARRIER = createKey("highlands/lakes/lake_barrier");
     public static final ResourceKey<DensityFunction> LAKES_SHORE = createKey("highlands/lakes/lake_shore");
+    public static final ResourceKey<DensityFunction> LAKES_WATERFALLS = createKey("highlands/lakes/lakes_waterfalls");
 
     public static final ResourceKey<DensityFunction> COASTS_BASE_NOISE = createKey("highlands/coasts/base_noise");
     public static final ResourceKey<DensityFunction> COASTS_HIGHFIELDS = createKey("highlands/coasts/highfields");
