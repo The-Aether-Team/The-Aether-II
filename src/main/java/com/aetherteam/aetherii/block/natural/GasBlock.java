@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -73,27 +72,16 @@ public class GasBlock extends Block implements CanisterPickup {
 
     @Override
     protected void updateIndirectNeighbourShapes(BlockState state, LevelAccessor level, BlockPos pos, int flags, int recursionLeft) {
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         for (Vec3i offset : INDIRECT_NEIGHBOR_OFFSETS) {
-            blockpos$mutableblockpos.setWithOffset(pos, offset);
-            if (level.getBlockState(blockpos$mutableblockpos).is(this)) {
-//                level.neighborShapeChanged(Direction.getNearest(offset.getX(), offset.getY(), offset.getZ(), null).getOpposite(), blockpos$mutableblockpos, pos, state, flags, recursionLeft); //todo
+            mutablePos.setWithOffset(pos, offset);
+            if (level.getBlockState(mutablePos).is(this)) {
+                if (level.getBlockState(mutablePos).is(AetherIITags.Blocks.TRIGGERS_GAS) || state.is(AetherIITags.Blocks.TRIGGERS_GAS)) {
+                    this.explode(level, pos, true);
+                }
             }
         }
     }
-
-//    @Override //TODO HOW DOES ORIENTATION WORK
-//    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
-//        if (level.getBlockState(neighborPos).is(AetherIITags.Blocks.TRIGGERS_GAS) || state.is(AetherIITags.Blocks.TRIGGERS_GAS)) {
-//            this.explode(level, pos, true);
-//        }
-//        super.neighborChanged(state, level, pos, block, orientation, movedByPiston);
-//    }
-//
-//    @Override
-//    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-//        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
-//    }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -128,7 +116,7 @@ public class GasBlock extends Block implements CanisterPickup {
         this.explode(level, pos, true);
     }
 
-    public void explode(Level level, BlockPos pos, boolean playSound) {
+    public void explode(LevelAccessor level, BlockPos pos, boolean playSound) {
         if (level.removeBlock(pos, false)) {
             if (level instanceof ServerLevel serverLevel) {
                 PacketDistributor.sendToPlayersInDimension(serverLevel, new GasExplosionEffectsPacket(pos, playSound));
@@ -151,6 +139,12 @@ public class GasBlock extends Block implements CanisterPickup {
 
     @Override
     protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
+        if (levelReader instanceof Level level) {
+            if (level.getBlockState(facingPos).is(AetherIITags.Blocks.TRIGGERS_GAS) || state.is(AetherIITags.Blocks.TRIGGERS_GAS)) {
+                this.explode(level, currentPos, true);
+                return state;
+            }
+        }
         if (facing.getAxis().isHorizontal()) {
             int i = getDistanceAt(facingState, HORIZONTAL_DISTANCE, MAX_HORIZONTAL_DISTANCE) + 1;
             if (i != 1 || state.getValue(HORIZONTAL_DISTANCE) != i) {

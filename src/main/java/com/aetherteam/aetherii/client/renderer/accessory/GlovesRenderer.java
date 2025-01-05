@@ -49,6 +49,9 @@ public class GlovesRenderer implements SimpleAccessoryRenderer {
         }
 
         this.align(stack, reference, (EntityModel<S>) glovesModel, renderState, poseStack);
+        glovesModel.setAllVisible(false);
+        glovesModel.leftArm.visible = true;
+        glovesModel.rightArm.visible = true;
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.armorCutoutNoCull(texture));
         glovesModel.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, -1);

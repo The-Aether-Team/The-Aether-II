@@ -4,7 +4,9 @@ import com.aetherteam.aetherii.client.renderer.item.properties.*;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.MoaEggType;
+import net.minecraft.client.color.item.Constant;
 import net.minecraft.client.color.item.Dye;
+import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
@@ -54,7 +56,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
 
     public void generateDyedArmorItem(Item item, int defaultColor) {
         ResourceLocation resourcelocation = this.generateLayeredItem(item, TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item).withSuffix("_dyed"));
-        this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourcelocation, new Dye(defaultColor)));
+        this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourcelocation, BLANK_LAYER, new Dye(defaultColor)));
     }
 
     public void generateMoaFeatherItem(Item item) {

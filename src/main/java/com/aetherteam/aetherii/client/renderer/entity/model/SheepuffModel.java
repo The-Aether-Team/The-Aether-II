@@ -100,7 +100,7 @@ public class SheepuffModel<T extends SheepuffRenderState> extends EntityModel<T>
     @Override
     public void setupAnim(T sheepuff) {
         super.setupAnim(sheepuff);
-        this.head.y = 6.0F + sheepuff.headEatPositionScale * 9.0F;
+        this.head.y = -3.0F + sheepuff.headEatPositionScale * 9.0F * sheepuff.ageScale;
         this.headXRot = sheepuff.headEatAngleScale;
         this.head.yRot = sheepuff.yRot * Mth.DEG_TO_RAD;
         this.head.xRot = this.headXRot;
