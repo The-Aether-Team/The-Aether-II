@@ -187,8 +187,8 @@ public class CockatriceModel extends EntityModel<CockatriceRenderState> {
         super.setupAnim(entity);
         float f = entity.walkAnimationSpeed;
         float f1 = entity.walkAnimationPos;
-        this.head.xRot = (entity.yRot * Mth.DEG_TO_RAD) + 0.0873F;
-        this.head.yRot = entity.xRot * Mth.DEG_TO_RAD;
+        this.head.xRot = (entity.xRot * Mth.DEG_TO_RAD) + 0.0873F;
+        this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;
         this.animateWalk(CockatriceAnimation.RUN, f1, f, 1.0F, 1.5F);
         this.animate(entity.attackAnimationState, CockatriceAnimation.CLAW_ATTACK, entity.ageInTicks, 2.0F);
         this.animate(entity.shootAnimationState, CockatriceAnimation.ATTACK, entity.ageInTicks, 1.0F);
