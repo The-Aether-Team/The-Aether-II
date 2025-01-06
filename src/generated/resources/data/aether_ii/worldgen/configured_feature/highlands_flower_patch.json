@@ -15,7 +15,7 @@
                     "snowy": "false"
                   }
                 },
-                "weight": 1
+                "weight": 4
               },
               {
                 "data": {
@@ -24,7 +24,7 @@
                     "snowy": "false"
                   }
                 },
-                "weight": 1
+                "weight": 4
               },
               {
                 "data": {
@@ -33,7 +33,7 @@
                     "snowy": "false"
                   }
                 },
-                "weight": 2
+                "weight": 4
               },
               {
                 "data": {
@@ -42,7 +42,7 @@
                     "snowy": "false"
                   }
                 },
-                "weight": 2
+                "weight": 5
               },
               {
                 "data": {
@@ -56,12 +56,42 @@
               },
               {
                 "data": {
+                  "Name": "aether_ii:pluracian",
+                  "Properties": {
+                    "facing": "east",
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:pluracian",
+                  "Properties": {
+                    "facing": "south",
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
+                  "Name": "aether_ii:pluracian",
+                  "Properties": {
+                    "facing": "west",
+                    "snowy": "false"
+                  }
+                },
+                "weight": 1
+              },
+              {
+                "data": {
                   "Name": "aether_ii:satival_shoot",
                   "Properties": {
                     "snowy": "false"
                   }
                 },
-                "weight": 1
+                "weight": 4
               }
             ]
           }

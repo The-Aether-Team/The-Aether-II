@@ -526,12 +526,15 @@ public class HighlandsConfiguredFeatures {
                         8,
                         3,
                         PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                                        .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1))),
+                                        .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 4)
+                                        .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 4)
+                                        .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 4)
+                                        .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 5)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.NORTH), 1)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.EAST), 1)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.SOUTH), 1)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.WEST), 1)
+                                        .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 4))),
                                 BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
         ));
         register(
