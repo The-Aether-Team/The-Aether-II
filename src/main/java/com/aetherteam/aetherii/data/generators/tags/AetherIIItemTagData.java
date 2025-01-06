@@ -595,6 +595,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_PICKAXE.get(),
                 AetherIIItems.GRAVITITE_PICKAXE.get()
         );
+        this.tag(ItemTags.BUNDLES).add(AetherIIItems.HIDE_BUNDLE.get());
         this.tag(ItemTags.SWORDS).addTag(AetherIITags.Items.TOOLS_SHORTSWORDS);
         this.tag(ItemTags.AXES).add(
                 AetherIIItems.SKYROOT_AXE.get(),

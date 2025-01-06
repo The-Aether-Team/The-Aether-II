@@ -185,7 +185,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateGliderItem(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get(), false);
         this.generateGliderItem(AetherIIItems.BLUE_AERCLOUD_GLIDER.get(), true);
         this.generateGliderItem(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get(), true);
-//
+
         // Skyroot Buckets
         this.generateFlatItem(AetherIIItems.SKYROOT_BUCKET.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SKYROOT_WATER_BUCKET.get(), ModelTemplates.FLAT_ITEM);
@@ -235,6 +235,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateSpawnEgg(AetherIIItems.SKEPHID_SPAWN_EGG.get(), 0x7D96AB, 0xF7CC94);
 
         // Misc
+        this.generateBundleModels(AetherIIItems.HIDE_BUNDLE.get());
         this.generateMoaEggItem(AetherIIItems.MOA_EGG.get());
         this.generateFlatItem(AetherIIItems.MOA_FEED.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BLUEBERRY_MOA_FEED.get(), ModelTemplates.FLAT_ITEM);
