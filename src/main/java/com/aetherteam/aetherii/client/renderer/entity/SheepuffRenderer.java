@@ -31,6 +31,7 @@ public class SheepuffRenderer extends MobRenderer<Sheepuff, SheepuffRenderState,
         renderState.isSheared = sheepuff.isSheared();
         renderState.woolColor = sheepuff.getColor();
         renderState.id = sheepuff.getId();
+        renderState.puff = sheepuff.getPuffed();
     }
 
     @Override
