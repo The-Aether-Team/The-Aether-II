@@ -2,8 +2,14 @@
   "values": [
     "aether_ii:undershale",
     "aether_ii:ichorite",
+    "aether_ii:smooth_ichorite",
+    "aether_ii:ichorite_bricks",
+    "aether_ii:marbled_ichorite",
+    "aether_ii:marbled_bricks",
     "aether_ii:arkenium_block",
     "aether_ii:arkenium_door",
-    "aether_ii:arkenium_trapdoor"
+    "aether_ii:arkenium_trapdoor",
+    "#aether_ii:ichorite_decorative_blocks",
+    "#aether_ii:marbled_ichorite_decorative_blocks"
   ]
 }
