@@ -304,8 +304,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Skyroot Decorative Blocks
     public static final DeferredBlock<Block> SKYROOT_FLOORBOARDS = register("skyroot_floorboards", () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
     public static final DeferredBlock<Block> SKYROOT_HIGHLIGHT = register("skyroot_highlight", () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
-    public static final DeferredBlock<Block> SKYROOT_SHINGLES = register("skyroot_shingles", () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
-    public static final DeferredBlock<Block> SKYROOT_SMALL_SHINGLES = register("skyroot_small_shingles", () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> SKYROOT_SHINGLES = register("skyroot_shingles", HorizontalFacingBlock::new, () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> SKYROOT_SMALL_SHINGLES = register("skyroot_small_shingles", HorizontalFacingBlock::new, () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
     public static final DeferredBlock<Block> SKYROOT_BASE_PLANKS = register("skyroot_base_planks", () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
     public static final DeferredBlock<Block> SKYROOT_TOP_PLANKS = register("skyroot_top_planks", () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
     public static final DeferredBlock<FacingPillarBlock> SKYROOT_BASE_BEAM = register("skyroot_base_beam", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(SKYROOT_PLANKS.get()));
@@ -328,8 +328,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Greatroot Decorative Blocks
     public static final DeferredBlock<Block> GREATROOT_FLOORBOARDS = register("greatroot_floorboards", () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
     public static final DeferredBlock<Block> GREATROOT_HIGHLIGHT = register("greatroot_highlight", () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
-    public static final DeferredBlock<Block> GREATROOT_SHINGLES = register("greatroot_shingles", () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
-    public static final DeferredBlock<Block> GREATROOT_SMALL_SHINGLES = register("greatroot_small_shingles", () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> GREATROOT_SHINGLES = register("greatroot_shingles", HorizontalFacingBlock::new, () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> GREATROOT_SMALL_SHINGLES = register("greatroot_small_shingles", HorizontalFacingBlock::new, () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
     public static final DeferredBlock<Block> GREATROOT_BASE_PLANKS = register("greatroot_base_planks", () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
     public static final DeferredBlock<Block> GREATROOT_TOP_PLANKS = register("greatroot_top_planks", () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
     public static final DeferredBlock<FacingPillarBlock> GREATROOT_BASE_BEAM = register("greatroot_base_beam", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GREATROOT_PLANKS.get()));
@@ -352,8 +352,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Wisproot Decorative Blocks
     public static final DeferredBlock<Block> WISPROOT_FLOORBOARDS = register("wisproot_floorboards", () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
     public static final DeferredBlock<Block> WISPROOT_HIGHLIGHT = register("wisproot_highlight", () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
-    public static final DeferredBlock<Block> WISPROOT_SHINGLES = register("wisproot_shingles", () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
-    public static final DeferredBlock<Block> WISPROOT_SMALL_SHINGLES = register("wisproot_small_shingles", () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> WISPROOT_SHINGLES = register("wisproot_shingles", HorizontalFacingBlock::new, () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
+    public static final DeferredBlock<Block> WISPROOT_SMALL_SHINGLES = register("wisproot_small_shingles", HorizontalFacingBlock::new, () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
     public static final DeferredBlock<Block> WISPROOT_BASE_PLANKS = register("wisproot_base_planks", () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
     public static final DeferredBlock<Block> WISPROOT_TOP_PLANKS = register("wisproot_top_planks", () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));
     public static final DeferredBlock<FacingPillarBlock> WISPROOT_BASE_BEAM = register("wisproot_base_beam", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(WISPROOT_PLANKS.get()));

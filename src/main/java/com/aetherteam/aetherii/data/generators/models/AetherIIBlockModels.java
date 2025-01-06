@@ -204,8 +204,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Skyroot Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
         this.createTrivialCube(AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
-        this.createTrivialCube(AetherIIBlocks.SKYROOT_SHINGLES.get());
-        this.createTrivialCube(AetherIIBlocks.SKYROOT_SMALL_SHINGLES.get());
+        this.createHorizontallyRotatedBlock(AetherIIBlocks.SKYROOT_SHINGLES.get(), TexturedModel.CUBE);
+        this.createHorizontallyRotatedBlock(AetherIIBlocks.SKYROOT_SMALL_SHINGLES.get(), TexturedModel.CUBE);
         this.createCubeColumn(AetherIIBlocks.SKYROOT_BASE_PLANKS.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
         this.createCubeColumn(AetherIIBlocks.SKYROOT_TOP_PLANKS.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.SKYROOT_BASE_BEAM.get(), AetherIIBlocks.SKYROOT_HIGHLIGHT.get());
@@ -217,8 +217,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Greatroot Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.GREATROOT_FLOORBOARDS.get());
         this.createTrivialCube(AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
-        this.createTrivialCube(AetherIIBlocks.GREATROOT_SHINGLES.get());
-        this.createTrivialCube(AetherIIBlocks.GREATROOT_SMALL_SHINGLES.get());
+        this.createHorizontallyRotatedBlock(AetherIIBlocks.GREATROOT_SHINGLES.get(), TexturedModel.CUBE);
+        this.createHorizontallyRotatedBlock(AetherIIBlocks.GREATROOT_SMALL_SHINGLES.get(), TexturedModel.CUBE);
         this.createCubeColumn(AetherIIBlocks.GREATROOT_BASE_PLANKS.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
         this.createCubeColumn(AetherIIBlocks.GREATROOT_TOP_PLANKS.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.GREATROOT_BASE_BEAM.get(), AetherIIBlocks.GREATROOT_HIGHLIGHT.get());
@@ -230,8 +230,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Wisproot Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.WISPROOT_FLOORBOARDS.get());
         this.createTrivialCube(AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
-        this.createTrivialCube(AetherIIBlocks.WISPROOT_SHINGLES.get());
-        this.createTrivialCube(AetherIIBlocks.WISPROOT_SMALL_SHINGLES.get());
+        this.createHorizontallyRotatedBlock(AetherIIBlocks.WISPROOT_SHINGLES.get(), TexturedModel.CUBE);
+        this.createHorizontallyRotatedBlock(AetherIIBlocks.WISPROOT_SMALL_SHINGLES.get(), TexturedModel.CUBE);
         this.createCubeColumn(AetherIIBlocks.WISPROOT_BASE_PLANKS.get(), AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
         this.createCubeColumn(AetherIIBlocks.WISPROOT_TOP_PLANKS.get(), AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
         this.createFacingColumnWithHorizontalVariant(AetherIIBlocks.WISPROOT_BASE_BEAM.get(), AetherIIBlocks.WISPROOT_HIGHLIGHT.get());
