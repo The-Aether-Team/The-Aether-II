@@ -102,12 +102,16 @@
   "has_precipitation": true,
   "spawn_costs": {
     "aether_ii:aechor_plant": {
-      "charge": 0.3,
+      "charge": 0.4,
       "energy_budget": 0.11
     },
     "aether_ii:cockatrice": {
       "charge": 0.4,
-      "energy_budget": 0.2
+      "energy_budget": 0.15
+    },
+    "aether_ii:skephid": {
+      "charge": 0.5,
+      "energy_budget": 0.15
     },
     "aether_ii:swet": {
       "charge": 0.25,
@@ -129,13 +133,13 @@
         "type": "aether_ii:cockatrice",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 10
+        "weight": 2
       },
       {
         "type": "aether_ii:skephid",
-        "maxCount": 3,
+        "maxCount": 2,
         "minCount": 1,
-        "weight": 6
+        "weight": 1
       }
     ],
     "aether_ii:aether_sky_monster": [
@@ -157,13 +161,13 @@
         "type": "aether_ii:aechor_plant",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 6
+        "weight": 1
       },
       {
         "type": "aether_ii:swet",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 3
       }
     ],
     "ambient": [],
