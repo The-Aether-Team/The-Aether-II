@@ -225,7 +225,7 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
                             ItemStack gloves = slotEntryReference.stack();
                             if (!gloves.is(AetherIITags.Items.ACID_RESISTANT_ITEM) && !gloves.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
                                 if (livingEntity instanceof ServerPlayer serverPlayer) {
-                                    gloves.hurtAndBreak(1, serverLevel, serverPlayer, (item) -> AccessoriesAPI.breakStack(slotEntryReference.reference()));
+                                    gloves.hurtAndBreak(1, serverLevel, serverPlayer, (item) -> wAccessoriesAPI.breakStack(slotEntryReference.reference()));
                                 }
                             }
                         }
