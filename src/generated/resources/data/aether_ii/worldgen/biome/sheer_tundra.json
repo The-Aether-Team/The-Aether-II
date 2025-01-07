@@ -1,5 +1,6 @@
 {
   "carvers": "aether_ii:highlands_cave",
+  "creature_spawn_probability": 0.12,
   "downfall": 0.5,
   "effects": {
     "fog_color": 15986943,
@@ -166,7 +167,50 @@
     ],
     "ambient": [],
     "axolotls": [],
-    "creature": [],
+    "creature": [
+      {
+        "type": "aether_ii:arctic_taegore",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "aether_ii:arctic_burrukai",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "aether_ii:arctic_kirrid",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 12
+      },
+      {
+        "type": "aether_ii:phyg",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 4
+      },
+      {
+        "type": "aether_ii:flying_cow",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 4
+      },
+      {
+        "type": "aether_ii:sheepuff",
+        "maxCount": 2,
+        "minCount": 2,
+        "weight": 6
+      },
+      {
+        "type": "aether_ii:aerbunny",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 8
+      }
+    ],
     "misc": [],
     "monster": [],
     "underground_water_creature": [],
