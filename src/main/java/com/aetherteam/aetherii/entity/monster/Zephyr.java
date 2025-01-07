@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.entity.monster;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.projectile.ZephyrWebbingBall;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -273,7 +274,7 @@ public class Zephyr extends FlyingMob implements Enemy {
             LivingEntity livingEntity = this.zephyr.getTarget();
             if (livingEntity != null) {
                 //if slow down applied. star blow
-                if (livingEntity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN) && livingEntity.distanceToSqr(this.zephyr) < 76 && this.zephyr.hasLineOfSight(livingEntity) && !this.zephyr.isBlow()) {
+                if (livingEntity.hasEffect(AetherIIEffects.WEBBED) && livingEntity.distanceToSqr(this.zephyr) < 76 && this.zephyr.hasLineOfSight(livingEntity) && !this.zephyr.isBlow()) {
                     Level level = this.zephyr.level();
                     this.zephyr.setChargeTime(this.zephyr.getChargeTime() + 1);
                     if (this.zephyr.getChargeTime() == 10) {
@@ -286,7 +287,7 @@ public class Zephyr extends FlyingMob implements Enemy {
                         this.zephyr.setBlow(true);
                     }
                     //if not slow. shooting snowball
-                } else if (!livingEntity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
+                } else if (!livingEntity.hasEffect(AetherIIEffects.WEBBED)) {
                     this.zephyr.setBlow(false);
                     if (livingEntity.distanceToSqr(this.zephyr) < 1600.0 && this.zephyr.hasLineOfSight(livingEntity)) {
                         Level level = this.zephyr.level();
@@ -356,7 +357,7 @@ public class Zephyr extends FlyingMob implements Enemy {
         @Override
         public void start() {
             LivingEntity livingEntity = this.zephyr.getTarget();
-            if (livingEntity != null && livingEntity.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)) {
+            if (livingEntity != null && livingEntity.hasEffect(AetherIIEffects.WEBBED)) {
                 RandomSource random = this.zephyr.getRandom();
                 double d0 = livingEntity.getX() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
                 double d1 = livingEntity.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
