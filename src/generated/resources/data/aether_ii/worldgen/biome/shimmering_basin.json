@@ -163,19 +163,19 @@
     "creature": [
       {
         "type": "aether_ii:highfields_taegore",
-        "maxCount": 3,
+        "maxCount": 2,
         "minCount": 1,
         "weight": 4
       },
       {
         "type": "aether_ii:highfields_burrukai",
-        "maxCount": 3,
+        "maxCount": 2,
         "minCount": 1,
         "weight": 4
       },
       {
         "type": "aether_ii:highfields_kirrid",
-        "maxCount": 3,
+        "maxCount": 2,
         "minCount": 1,
         "weight": 6
       },
@@ -187,19 +187,19 @@
       },
       {
         "type": "aether_ii:flying_cow",
-        "maxCount": 4,
-        "minCount": 2,
+        "maxCount": 3,
+        "minCount": 1,
         "weight": 6
       },
       {
         "type": "aether_ii:sheepuff",
-        "maxCount": 4,
-        "minCount": 2,
+        "maxCount": 3,
+        "minCount": 1,
         "weight": 8
       },
       {
         "type": "aether_ii:aerbunny",
-        "maxCount": 2,
+        "maxCount": 3,
         "minCount": 1,
         "weight": 10
       }
