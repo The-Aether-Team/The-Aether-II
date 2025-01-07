@@ -101,8 +101,16 @@
   "has_precipitation": true,
   "spawn_costs": {
     "aether_ii:aechor_plant": {
-      "charge": 0.4,
+      "charge": 0.3,
       "energy_budget": 0.11
+    },
+    "aether_ii:cockatrice": {
+      "charge": 0.4,
+      "energy_budget": 0.2
+    },
+    "aether_ii:swet": {
+      "charge": 0.25,
+      "energy_budget": 0.1
     },
     "aether_ii:tempest": {
       "charge": 0.6,
@@ -117,16 +125,22 @@
     "aether_ii:aether_aerwhale": [],
     "aether_ii:aether_darkness_monster": [
       {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
         "type": "aether_ii:skephid",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 5
+        "weight": 6
       }
     ],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
-        "maxCount": 1,
+        "maxCount": 2,
         "minCount": 1,
         "weight": 3
       },
@@ -134,7 +148,7 @@
         "type": "aether_ii:tempest",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 2
       }
     ],
     "aether_ii:aether_surface_monster": [
@@ -142,17 +156,11 @@
         "type": "aether_ii:aechor_plant",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 7
-      },
-      {
-        "type": "aether_ii:cockatrice",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 10
+        "weight": 6
       },
       {
         "type": "aether_ii:swet",
-        "maxCount": 1,
+        "maxCount": 3,
         "minCount": 1,
         "weight": 10
       }
