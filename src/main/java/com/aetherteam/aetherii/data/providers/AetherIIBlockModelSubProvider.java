@@ -568,6 +568,11 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleFlatItemModel(rock.asItem());
     }
 
+    public void createMultifaceBlock(Block block) {
+        AetherIITexturedModels.MULTIFACE.create(block, this.modelOutput);
+        this.createMultiface(block);
+    }
+
     public void createSecretDoor(Block block, Block base) {
         TextureMapping mapping = TextureMapping.door(TextureMapping.getBlockTexture(base), TextureMapping.getBlockTexture(base));
         ResourceLocation bottomLeft = ModelTemplates.DOOR_BOTTOM_LEFT.create(block, mapping, this.modelOutput);

@@ -209,7 +209,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createRock(AetherIIBlocks.HOLYSTONE_ROCK.get(), AetherIIBlocks.HOLYSTONE.get());
 
         // Dungeon Decoration
-        this.createMultiface(AetherIIBlocks.AMBROSIUM_CHUNKS.get());
+        this.createMultifaceBlock(AetherIIBlocks.AMBROSIUM_CHUNKS.get());
 
         // Skyroot Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
