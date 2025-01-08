@@ -23,7 +23,7 @@ public class GlovesItem extends Item implements Accessory {
 
 
     public GlovesItem(ArmorMaterial material, double restoration, Properties properties) {
-        this(material.assetId(), restoration, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, material.assetId().location().getPath() + "_gloves"), properties.durability(getDurability(material.durability())));
+        this(material.assetId(), restoration, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, material.assetId().location().getPath()), properties.durability(getDurability(material.durability())));
     }
 
     public GlovesItem(ResourceKey<EquipmentAsset> material, double restoration, ResourceLocation glovesName, Properties properties) {
@@ -45,7 +45,7 @@ public class GlovesItem extends Item implements Accessory {
     } //todo this should be removeable because data components. all the render stuff has to be changed to that format
 
     public void setRenderTexture(String modId, String registryName) {
-        this.GLOVES_TEXTURE = ResourceLocation.fromNamespaceAndPath(modId, "textures/models/accessory/handwear/" + registryName + "_accessory.png");
+        this.GLOVES_TEXTURE = ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/equipment/humanoid_gloves/" + registryName + ".png");
     }
 
     public ResourceLocation getGlovesTexture() {

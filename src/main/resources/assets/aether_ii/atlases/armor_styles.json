@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "aether_ii:armor_styles/entity/humanoid/guard",
+        "aether_ii:armor_styles/entity/humanoid_gloves/guard",
+        "aether_ii:armor_styles/entity/humanoid_leggings/guard",
+        "aether_ii:armor_styles/entity/humanoid/knight",
+        "aether_ii:armor_styles/entity/humanoid_gloves/knight",
+        "aether_ii:armor_styles/entity/humanoid_leggings/knight",
+        "aether_ii:armor_styles/entity/humanoid/ranger",
+        "aether_ii:armor_styles/entity/humanoid_gloves/ranger",
+        "aether_ii:armor_styles/entity/humanoid_leggings/ranger",
+        "aether_ii:armor_styles/entity/humanoid/scout",
+        "aether_ii:armor_styles/entity/humanoid_gloves/scout",
+        "aether_ii:armor_styles/entity/humanoid_leggings/scout",
+        "aether_ii:armor_styles/entity/humanoid/warrior",
+        "aether_ii:armor_styles/entity/humanoid_gloves/warrior",
+        "aether_ii:armor_styles/entity/humanoid_leggings/warrior"
+      ],
+      "palette_key": "aether_ii:armor_styles/color_palettes/style_palette",
+      "permutations": {
+        "arkenium": "aether_ii:armor_styles/color_palettes/arkenium",
+        "burrukai_pelt": "aether_ii:armor_styles/color_palettes/burrukai_pelt",
+        "gravitite": "aether_ii:armor_styles/color_palettes/gravitite",
+        "taegore_hide": "aether_ii:armor_styles/color_palettes/taegore_hide",
+        "zanite": "aether_ii:armor_styles/color_palettes/zanite"
+      }
+    }
+  ]
+}
