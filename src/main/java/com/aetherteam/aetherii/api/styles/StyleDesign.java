@@ -23,5 +23,4 @@ public record StyleDesign(ResourceLocation assetId, Component description) {
             StyleDesign::new);
     public static final Codec<Holder<StyleDesign>> CODEC = RegistryFileCodec.create(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, DIRECT_CODEC);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<StyleDesign>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, DIRECT_STREAM_CODEC);
-
 }

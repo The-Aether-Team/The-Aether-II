@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
-public class AetherIIStyleDesigns {
+public class AetherIIStyleDesigns { //todo style names
     public static final ResourceKey<Registry<StyleDesign>> STYLE_DESIGN_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "style_design"));
 
     public static final ResourceKey<StyleDesign> GUARD = createKey("guard");

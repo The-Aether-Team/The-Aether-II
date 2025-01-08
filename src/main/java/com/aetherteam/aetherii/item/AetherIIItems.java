@@ -4,9 +4,12 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIJukeboxSongs;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleDesigns;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIStyleMaterials;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.components.ArmorStyle;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
@@ -166,35 +169,35 @@ public class AetherIIItems {
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
 
     // Armor
-    public static final DeferredItem<Item> TAEGORE_HIDE_HELMET = register("taegore_hide_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.HELMET, properties));
-    public static final DeferredItem<Item> TAEGORE_HIDE_CHESTPLATE = register("taegore_hide_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.CHESTPLATE, properties));
-    public static final DeferredItem<Item> TAEGORE_HIDE_LEGGINGS = register("taegore_hide_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.LEGGINGS, properties));
-    public static final DeferredItem<Item> TAEGORE_HIDE_BOOTS = register("taegore_hide_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.BOOTS, properties));
-    public static final DeferredItem<Item> TAEGORE_HIDE_GLOVES = register("taegore_hide_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.TAEGORE_HIDE, 25.0, properties));
+    public static final DeferredItem<Item> TAEGORE_HIDE_HELMET = register("taegore_hide_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.HELMET, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> TAEGORE_HIDE_CHESTPLATE = register("taegore_hide_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.CHESTPLATE, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> TAEGORE_HIDE_LEGGINGS = register("taegore_hide_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.LEGGINGS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> TAEGORE_HIDE_BOOTS = register("taegore_hide_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.BOOTS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> TAEGORE_HIDE_GLOVES = register("taegore_hide_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.TAEGORE_HIDE, 25.0, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
 
-    public static final DeferredItem<Item> BURRUKAI_PELT_HELMET = register("burrukai_pelt_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.HELMET, properties));
-    public static final DeferredItem<Item> BURRUKAI_PELT_CHESTPLATE = register("burrukai_pelt_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.CHESTPLATE, properties));
-    public static final DeferredItem<Item> BURRUKAI_PELT_LEGGINGS = register("burrukai_pelt_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.LEGGINGS, properties));
-    public static final DeferredItem<Item> BURRUKAI_PELT_BOOTS = register("burrukai_pelt_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.BOOTS, properties));
-    public static final DeferredItem<Item> BURRUKAI_PELT_GLOVES = register("burrukai_pelt_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.BURRUKAI_PELT, 50.0, properties));
+    public static final DeferredItem<Item> BURRUKAI_PELT_HELMET = register("burrukai_pelt_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.HELMET, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BURRUKAI_PELT, AetherIIStyleDesigns.RANGER, false))));
+    public static final DeferredItem<Item> BURRUKAI_PELT_CHESTPLATE = register("burrukai_pelt_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.CHESTPLATE, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BURRUKAI_PELT, AetherIIStyleDesigns.RANGER, false))));
+    public static final DeferredItem<Item> BURRUKAI_PELT_LEGGINGS = register("burrukai_pelt_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.LEGGINGS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BURRUKAI_PELT, AetherIIStyleDesigns.RANGER, false))));
+    public static final DeferredItem<Item> BURRUKAI_PELT_BOOTS = register("burrukai_pelt_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PELT, ArmorType.BOOTS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BURRUKAI_PELT, AetherIIStyleDesigns.RANGER, false))));
+    public static final DeferredItem<Item> BURRUKAI_PELT_GLOVES = register("burrukai_pelt_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.BURRUKAI_PELT, 50.0, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BURRUKAI_PELT, AetherIIStyleDesigns.RANGER, false))));
 
-    public static final DeferredItem<Item> ZANITE_HELMET = register("zanite_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.HELMET, properties));
-    public static final DeferredItem<Item> ZANITE_CHESTPLATE = register("zanite_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.CHESTPLATE, properties));
-    public static final DeferredItem<Item> ZANITE_LEGGINGS = register("zanite_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.LEGGINGS, properties));
-    public static final DeferredItem<Item> ZANITE_BOOTS = register("zanite_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.BOOTS, properties));
-    public static final DeferredItem<Item> ZANITE_GLOVES = register("zanite_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.ZANITE, 100.0, properties));
+    public static final DeferredItem<Item> ZANITE_HELMET = register("zanite_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.HELMET, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ZANITE, AetherIIStyleDesigns.GUARD, false))));
+    public static final DeferredItem<Item> ZANITE_CHESTPLATE = register("zanite_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.CHESTPLATE, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ZANITE, AetherIIStyleDesigns.GUARD, false))));
+    public static final DeferredItem<Item> ZANITE_LEGGINGS = register("zanite_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.LEGGINGS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ZANITE, AetherIIStyleDesigns.GUARD, false))));
+    public static final DeferredItem<Item> ZANITE_BOOTS = register("zanite_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.ZANITE, ArmorType.BOOTS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ZANITE, AetherIIStyleDesigns.GUARD, false))));
+    public static final DeferredItem<Item> ZANITE_GLOVES = register("zanite_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.ZANITE, 100.0, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ZANITE, AetherIIStyleDesigns.GUARD, false))));
 
-    public static final DeferredItem<Item> ARKENIUM_HELMET = register("arkenium_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.HELMET, properties));
-    public static final DeferredItem<Item> ARKENIUM_CHESTPLATE = register("arkenium_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.CHESTPLATE, properties));
-    public static final DeferredItem<Item> ARKENIUM_LEGGINGS = register("arkenium_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.LEGGINGS, properties));
-    public static final DeferredItem<Item> ARKENIUM_BOOTS = register("arkenium_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.BOOTS, properties));
-    public static final DeferredItem<Item> ARKENIUM_GLOVES = register("arkenium_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.ARKENIUM, 100.0, properties));
+    public static final DeferredItem<Item> ARKENIUM_HELMET = register("arkenium_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.HELMET, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ARKENIUM, AetherIIStyleDesigns.KNIGHT, false))));
+    public static final DeferredItem<Item> ARKENIUM_CHESTPLATE = register("arkenium_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.CHESTPLATE, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ARKENIUM, AetherIIStyleDesigns.KNIGHT, false))));
+    public static final DeferredItem<Item> ARKENIUM_LEGGINGS = register("arkenium_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.LEGGINGS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ARKENIUM, AetherIIStyleDesigns.KNIGHT, false))));
+    public static final DeferredItem<Item> ARKENIUM_BOOTS = register("arkenium_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.ARKENIUM, ArmorType.BOOTS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ARKENIUM, AetherIIStyleDesigns.KNIGHT, false))));
+    public static final DeferredItem<Item> ARKENIUM_GLOVES = register("arkenium_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.ARKENIUM, 100.0, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.ARKENIUM, AetherIIStyleDesigns.KNIGHT, false))));
 
-    public static final DeferredItem<Item> GRAVITITE_HELMET = register("gravitite_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.HELMET, properties));
-    public static final DeferredItem<Item> GRAVITITE_CHESTPLATE = register("gravitite_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.CHESTPLATE, properties));
-    public static final DeferredItem<Item> GRAVITITE_LEGGINGS = register("gravitite_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.LEGGINGS, properties));
-    public static final DeferredItem<Item> GRAVITITE_BOOTS = register("gravitite_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.BOOTS, properties));
-    public static final DeferredItem<Item> GRAVITITE_GLOVES = register("gravitite_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, 200.0, properties));
+    public static final DeferredItem<Item> GRAVITITE_HELMET = register("gravitite_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.HELMET, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
+    public static final DeferredItem<Item> GRAVITITE_CHESTPLATE = register("gravitite_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.CHESTPLATE, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
+    public static final DeferredItem<Item> GRAVITITE_LEGGINGS = register("gravitite_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.LEGGINGS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
+    public static final DeferredItem<Item> GRAVITITE_BOOTS = register("gravitite_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.GRAVITITE, ArmorType.BOOTS, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
+    public static final DeferredItem<Item> GRAVITITE_GLOVES = register("gravitite_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.GRAVITITE, 200.0, properties.component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.GRAVITITE, AetherIIStyleDesigns.WARRIOR, false))));
 
     // Materials
     public static final DeferredItem<Item> SKYROOT_STICK = register("skyroot_stick");

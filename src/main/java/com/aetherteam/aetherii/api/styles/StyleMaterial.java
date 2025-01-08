@@ -27,5 +27,4 @@ public record StyleMaterial(ResourceLocation assetId, Holder<Item> ingredient, C
             StyleMaterial::new);
     public static final Codec<Holder<StyleMaterial>> CODEC = RegistryFileCodec.create(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, DIRECT_CODEC);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<StyleMaterial>> STREAM_CODEC = ByteBufCodecs.holder(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, DIRECT_STREAM_CODEC);
-
 }
