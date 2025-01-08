@@ -147,8 +147,6 @@ public class AetherII {
             AetherIIBlocks.registerPots();
             AetherIIBlocks.registerFlammability();
 
-            AetherIIItems.registerAccessories();
-
             AetherIIRecipePropertySets.addToMap();
 
             this.registerDispenserBehaviors();

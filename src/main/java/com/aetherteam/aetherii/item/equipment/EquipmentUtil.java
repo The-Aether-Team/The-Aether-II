@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
 import com.aetherteam.aetherii.entity.AetherIIAttributes;
 import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
@@ -15,17 +15,16 @@ import com.aetherteam.aetherii.item.equipment.armor.abilities.ZaniteArmor;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShieldItem;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
-import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.slot.SlotEntryReference;
+import io.wispforest.accessories.impl.AccessoryAttributeLogic;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,29 +36,20 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.equipment.EquipmentAsset;
-import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.fml.ModList;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class EquipmentUtil {
-    private static final Map<ResourceKey<EquipmentAsset>, List<Pair<Holder<Attribute>, ResourceLocation>>> ARMOR_ABILITY_ATTRIBUTES = new ImmutableMap.Builder<ResourceKey<EquipmentAsset>, List<Pair<Holder<Attribute>, ResourceLocation>>>()
-            .put(AetherIIEquipmentAssets.BURRUKAI_PELT, List.of(Pair.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE, BurrukaiPeltArmor.BURRUKAI_PELT_STUN_RESISTANCE), Pair.of(Attributes.KNOCKBACK_RESISTANCE, BurrukaiPeltArmor.BURRUKAI_PELT_KNOCKBACK_RESISTANCE)))
-            .put(AetherIIEquipmentAssets.ZANITE, List.of(Pair.of(Attributes.MOVEMENT_EFFICIENCY, ZaniteArmor.ZANITE_MOVEMENT_SPEED), Pair.of(Attributes.MINING_EFFICIENCY, ZaniteArmor.ZANITE_MINING_SPEED), Pair.of(Attributes.ATTACK_SPEED, ZaniteArmor.ZANITE_ATTACK_SPEED)))
-            .put(AetherIIEquipmentAssets.ARKENIUM, List.of(Pair.of(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE, ArkeniumArmor.ARKENIUM_BLAST_RESISTANCE)))
+    private static final Map<TagKey<Item>, List<Pair<Holder<Attribute>, ResourceLocation>>> ARMOR_ABILITY_ATTRIBUTES = new ImmutableMap.Builder<TagKey<Item>, List<Pair<Holder<Attribute>, ResourceLocation>>>()
+            .put(AetherIITags.Items.BURRUKAI_PELT_ARMOR, List.of(Pair.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE, BurrukaiPeltArmor.BURRUKAI_PELT_STUN_RESISTANCE), Pair.of(Attributes.KNOCKBACK_RESISTANCE, BurrukaiPeltArmor.BURRUKAI_PELT_KNOCKBACK_RESISTANCE)))
+            .put(AetherIITags.Items.ZANITE_ARMOR, List.of(Pair.of(Attributes.MOVEMENT_EFFICIENCY, ZaniteArmor.ZANITE_MOVEMENT_SPEED), Pair.of(Attributes.MINING_EFFICIENCY, ZaniteArmor.ZANITE_MINING_SPEED), Pair.of(Attributes.ATTACK_SPEED, ZaniteArmor.ZANITE_ATTACK_SPEED)))
+            .put(AetherIITags.Items.ARKENIUM_ARMOR, List.of(Pair.of(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE, ArkeniumArmor.ARKENIUM_BLAST_RESISTANCE)))
             .build();
 
-    private static final Map<Holder<Item>, List<Holder<Attribute>>> ITEM_EFFECT_RESISTANCES = new ImmutableMap.Builder<Holder<Item>, List<Holder<Attribute>>>()
-            .put(AetherIIItems.BURRUKAI_PELT_HELMET, List.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE))
-            .put(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, List.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE))
-            .put(AetherIIItems.BURRUKAI_PELT_LEGGINGS, List.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE))
-            .put(AetherIIItems.BURRUKAI_PELT_BOOTS, List.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE))
-            .put(AetherIIItems.BURRUKAI_PELT_GLOVES, List.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE))
+    private static final Map<TagKey<Item>, List<Holder<Attribute>>> ITEM_EFFECT_RESISTANCES = new ImmutableMap.Builder<TagKey<Item>, List<Holder<Attribute>>>()
+            .put(AetherIITags.Items.BURRUKAI_PELT_ARMOR, List.of(AetherIIAttributes.STUN_EFFECT_RESISTANCE))
             .build();
 
     public static boolean isFullStrength(LivingEntity attacker) {
@@ -67,36 +57,33 @@ public final class EquipmentUtil {
         return !(attacker instanceof Player player) || (combatifyLoaded ? player.getAttackStrengthScale(1.0F) >= 1.95F : player.getAttackStrengthScale(1.0F) >= 1.0F);
     }
 
-    public static int getArmorCount(LivingEntity entity, ResourceKey<EquipmentAsset> material) {
-        Map<ResourceKey<EquipmentAsset>, Integer> armorTypeCount = new HashMap<>(); //todo shold probably switch to tag-based checks eventually.
-        for (ItemStack itemStack : entity.getArmorSlots()) {
-            Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
-            if (equippable != null && equippable.assetId().isPresent()) {
-                ResourceKey<EquipmentAsset> materialAsset = equippable.assetId().get();
-                if (armorTypeCount.containsKey(materialAsset)) {
-                    armorTypeCount.put(materialAsset, armorTypeCount.get(materialAsset) + 1);
-                } else {
-                    armorTypeCount.put(materialAsset, 1);
-                }
+    public static int getArmorCount(LivingEntity entity, TagKey<Item> checkSet) {
+        int armorTypeCount = 0;
+        List<ItemStack> equipment = getEquipment(entity);
+        for (ItemStack itemStack : equipment) {
+            TagKey<Item> armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
+            if (armorSet == checkSet) {
+                armorTypeCount++;
             }
         }
-        AccessoriesCapability accessories = AccessoriesCapability.get(entity);
-        if (accessories != null) { //todo
-            SlotEntryReference slotEntryReference = accessories.getFirstEquipped((itemStack) -> itemStack.getItem() instanceof GlovesItem);
-            if (slotEntryReference != null && slotEntryReference.stack().getItem() instanceof GlovesItem glovesItem) {
-                ResourceKey<EquipmentAsset> materialAsset = glovesItem.getMaterial();
-                if (armorTypeCount.containsKey(materialAsset)) {
-                    armorTypeCount.put(materialAsset, armorTypeCount.get(materialAsset) + 1);
-                } else {
-                    armorTypeCount.put(materialAsset, 1);
-                }
-            }
-        }
-        return armorTypeCount.computeIfAbsent(material, i -> 0);
+        return armorTypeCount;
     }
 
-    public static boolean hasArmorAbility(LivingEntity entity, ResourceKey<EquipmentAsset> material) {
-        return getArmorCount(entity, material) >= 3;
+    public static List<ItemStack> getEquipment(LivingEntity entity) {
+        AccessoriesCapability accessories = AccessoriesCapability.get(entity);
+        List<ItemStack> equipment = new ArrayList<>();
+        entity.getArmorSlots().forEach(equipment::add);
+        if (accessories != null) {
+            SlotEntryReference slotEntryReference = accessories.getFirstEquipped((itemStack) -> itemStack.getItem() instanceof GlovesItem);
+            if (slotEntryReference != null) {
+                equipment.add(slotEntryReference.stack());
+            }
+        }
+        return equipment;
+    }
+
+    public static boolean hasArmorAbility(LivingEntity entity, TagKey<Item> armorSet) {
+        return getArmorCount(entity, armorSet) >= 3;
     }
 
     public static void addShieldTooltips(List<Component> components, ItemStack stack) { //todo i need to make an easy abstracted/scaleable system for replacing specific tooltip lines.
@@ -131,16 +118,10 @@ public final class EquipmentUtil {
 
     public static void addArmorTooltips(Player player, List<Component> components, ItemStack stack) {
         if (player != null && (stack.getItem() instanceof ArmorItem || stack.getItem() instanceof GlovesItem)) {
-            ResourceKey<EquipmentAsset> material = null;
-            Equippable equippable = stack.get(DataComponents.EQUIPPABLE);
-            if (equippable != null && equippable.assetId().isPresent()) {
-                material = equippable.assetId().get();
-            } else if (stack.getItem() instanceof GlovesItem glovesItem) {
-                material = glovesItem.getMaterial();
-            }
-            if (material != null) {
-                if (ARMOR_ABILITY_ATTRIBUTES.containsKey(material) && ARMOR_ABILITY_ATTRIBUTES.get(material) != null) {
-                    if (EquipmentUtil.hasArmorAbility(player, material)) {
+            TagKey<Item> armorSet = stack.get(AetherIIDataComponents.ARMOR_SET);
+            if (armorSet != null) {
+                if (ARMOR_ABILITY_ATTRIBUTES.containsKey(armorSet) && ARMOR_ABILITY_ATTRIBUTES.get(armorSet) != null) {
+                    if (EquipmentUtil.hasArmorAbility(player, armorSet)) {
                         int position = 1;
                         String text = "attribute.";
                         for (int i = components.size() - 1; i >= 0; i--) {
@@ -150,7 +131,7 @@ public final class EquipmentUtil {
                                 break;
                             }
                         }
-                        for (Pair<Holder<Attribute>, ResourceLocation> attribute : ARMOR_ABILITY_ATTRIBUTES.get(material)) {
+                        for (Pair<Holder<Attribute>, ResourceLocation> attribute : ARMOR_ABILITY_ATTRIBUTES.get(armorSet)) {
                             if (player.getAttributes().hasAttribute(attribute.getFirst()) && player.getAttribute(attribute.getFirst()) != null) {
                                 AttributeModifier modifier = player.getAttribute(attribute.getFirst()).getModifier(attribute.getSecond());
                                 if (modifier != null) {
@@ -201,7 +182,7 @@ public final class EquipmentUtil {
             }
 
             int value = 0;
-            for (AttributeModifier entry : AccessoriesAPI.getAttributeModifiers(stack, player, AetherIIAccessorySlots.getHandwearSlotType().slotName(), 0).getAttributeModifiers(false).values()) {
+            for (AttributeModifier entry : AccessoryAttributeLogic.getAttributeModifiers(stack, player, AetherIIAccessorySlots.getHandwearSlotType().slotName(), 0).getAttributeModifiers(false).values()) {
                 if (entry.id().getPath().contains(GlovesItem.BASE_GLOVES_COOLDOWN_RESTORATION_ID.getNamespace())) {
                     value = (int) ((entry.amount() / 300.0F) * 100);
                 }

@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.armor.abilities;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
@@ -23,7 +23,7 @@ public interface ArkeniumArmor {
         Player player = event.getEntity();
         AttributeInstance blastResistanceAttribute = player.getAttribute(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE);
 
-        if (EquipmentUtil.hasArmorAbility(player, AetherIIEquipmentAssets.ARKENIUM)) {
+        if (EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.ARKENIUM_ARMOR)) {
             if (blastResistanceAttribute != null && !blastResistanceAttribute.hasModifier(ARKENIUM_BLAST_RESISTANCE)) {
                 blastResistanceAttribute.addTransientModifier(new AttributeModifier(ARKENIUM_BLAST_RESISTANCE, 0.3F, AttributeModifier.Operation.ADD_VALUE));
             }
@@ -37,7 +37,7 @@ public interface ArkeniumArmor {
     static void modifyIncomingDamage(LivingIncomingDamageEvent event) {
         DamageSource damageSource = event.getSource();
         LivingEntity entity = event.getEntity();
-        if (EquipmentUtil.hasArmorAbility(entity, AetherIIEquipmentAssets.ARKENIUM)) {
+        if (EquipmentUtil.hasArmorAbility(entity, AetherIITags.Items.ARKENIUM_ARMOR)) {
             if (damageSource.is(DamageTypeTags.IS_EXPLOSION) && !damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                 event.addReductionModifier(DamageContainer.Reduction.ARMOR, (container, reduction) -> {
                     float f = Mth.clamp(4.0F, 0.0F, 20.0F);
