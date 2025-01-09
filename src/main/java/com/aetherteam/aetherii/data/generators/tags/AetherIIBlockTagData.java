@@ -29,10 +29,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 Blocks.CHISELED_QUARTZ_BLOCK
         );
         this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLACKLIST).add(
-                AetherIIBlocks.BLUE_AERCLOUD.get(),
-                AetherIIBlocks.GREEN_AERCLOUD.get(),
-                AetherIIBlocks.PURPLE_AERCLOUD.get(),
-                AetherIIBlocks.STORM_AERCLOUD.get()
+                AetherIIBlocks.QUICKSOIL.get(),
+                AetherIIBlocks.FERROSITE_SAND.get(),
+                AetherIIBlocks.ARCTIC_PACKED_ICE.get(),
+                AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
+                AetherIIBlocks.UNSTABLE_UNDERSHALE.get()
+        ).addTags(
+                AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
+                AetherIITags.Blocks.AERCLOUDS,
+                BlockTags.LEAVES
         );
         this.tag(AetherIITags.Blocks.AETHER_DIRT).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
