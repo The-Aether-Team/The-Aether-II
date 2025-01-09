@@ -14,7 +14,6 @@ import com.aetherteam.aetherii.item.components.ArmorStyle;
 import com.aetherteam.aetherii.item.components.MoaEggType;
 import com.aetherteam.aetherii.item.consumables.HealingStoneItem;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
-import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.item.equipment.armor.AetherIIArmorMaterials;
 import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.item.equipment.armor.abilities.*;
@@ -72,13 +71,11 @@ import com.aetherteam.aetherii.item.miscellaneous.glider.GoldenAercloudGliderIte
 import com.aetherteam.aetherii.item.miscellaneous.glider.PurpleAercloudGliderItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -88,7 +85,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -370,13 +366,5 @@ public class AetherIIItems {
 
         // Tools
         bus.addListener(HolystoneTool::dropAmbrosium);
-    }
-
-    public static void registerTooltips(Player player, ItemStack itemStack, List<Component> itemTooltips) {
-        EquipmentUtil.addShieldTooltips(itemTooltips, itemStack);
-        EquipmentUtil.addArmorTooltips(player, itemTooltips, itemStack);
-        EquipmentUtil.addGloveTooltips(player, itemTooltips, itemStack); //todo move to glovesitem class.
-        EquipmentUtil.addReinforcingTooltip(itemStack, itemTooltips);
-        EquipmentUtil.addEffectResistanceTooltips(player, itemStack, itemTooltips);
     }
 }

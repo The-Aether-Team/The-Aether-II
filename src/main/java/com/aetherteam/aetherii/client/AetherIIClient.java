@@ -83,7 +83,6 @@ public class AetherIIClient {
     }
 
     public static void registerTooltipOverrides() {
-        //todo new component tooltip system from neoforge
         TooltipListeners.TooltipPredicate setBonusPredicate = (player, itemStack, components, context, component) -> {
             if (player != null && component.getString().contains("%s")) {
                 TagKey<Item> armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);

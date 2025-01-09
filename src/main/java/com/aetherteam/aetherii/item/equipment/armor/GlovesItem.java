@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.armor;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import io.wispforest.accessories.api.AccessoryItem;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.item.components;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
@@ -11,14 +12,17 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-public enum ReinforcementTier implements StringRepresentable {
+public enum ReinforcementTier implements StringRepresentable, TooltipProvider {
     FIRST(1, 50, 0, Cost.TIER_1),
     SECOND(2, 100, 0, Cost.TIER_2),
     THIRD(3, 150, 1, Cost.TIER_3),
@@ -73,6 +77,11 @@ public enum ReinforcementTier implements StringRepresentable {
     @Override
     public String getSerializedName() {
         return this.name();
+    }
+
+    @Override
+    public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
+        consumer.accept(Component.literal("Reinforcement ").append(Component.translatable("enchantment.level." + this.getTier())).withColor(14408667));
     }
 
     public record Cost(Predicate<ItemStack> stackCondition, ItemLike primaryMaterial, int primaryCount, ItemLike secondaryMaterial, int secondaryCount) {

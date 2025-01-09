@@ -17,7 +17,7 @@ import com.aetherteam.aetherii.data.ReloadListeners;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.*;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;

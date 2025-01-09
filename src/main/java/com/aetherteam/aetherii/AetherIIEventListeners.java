@@ -6,13 +6,11 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
 import com.aetherteam.aetherii.event.hooks.PlayerHooks;
-import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -28,7 +26,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.portal.TeleportTransition;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
@@ -41,7 +38,6 @@ import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -77,9 +73,6 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onAlterGround);
         bus.addListener(AetherIIEventListeners::onBlockFreeze);
         bus.addListener(AetherIIEventListeners::onBreatheInBlock);
-
-        // Item
-        bus.addListener(EventPriority.LOW, AetherIIEventListeners::onTooltipCreationLowPriority);
     }
 
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
@@ -306,13 +299,5 @@ public class AetherIIEventListeners {
         if (effect.is(AetherIITags.MobEffects.MILK_DOESNT_CLEAR) && livingEntity.getUseItem().is(Tags.Items.BUCKETS_MILK)) {
             event.setCanceled(true);
         }
-    }
-
-    public static void onTooltipCreationLowPriority(ItemTooltipEvent event) {
-        Player player = event.getEntity();
-        ItemStack itemStack = event.getItemStack();
-        List<Component> itemTooltips = event.getToolTip();
-
-        AetherIIItems.registerTooltips(player, itemStack, itemTooltips);
     }
 }

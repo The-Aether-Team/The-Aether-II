@@ -10,15 +10,19 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.sounds.MusicInfo;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import org.apache.commons.lang3.tuple.Triple;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class AetherIIClientEventListeners {
     public static void listen(IEventBus bus) {
@@ -28,6 +32,7 @@ public class AetherIIClientEventListeners {
         bus.addListener(AetherIIClientEventListeners::onGuiClose);
 
         // Tooltip
+        bus.addListener(AetherIIClientEventListeners::onAddAttributeTooltips);
         bus.addListener(AetherIIClientEventListeners::onGatherTooltipComponents);
 
         // World
@@ -68,6 +73,16 @@ public class AetherIIClientEventListeners {
         Screen screen = event.getScreen();
 
         RenderHooks.storeGuidebookScreen(screen);
+    }
+
+    public static void onAddAttributeTooltips(AddAttributeTooltipsEvent event) {
+        ItemStack itemStack = event.getStack();
+        AttributeTooltipContext context = event.getContext();
+        List<Component> tooltipLines = new ArrayList<>();
+
+        RenderHooks.addAbilityAttributeTooltip(itemStack, tooltipLines, context);
+
+        event.addTooltipLines(tooltipLines.toArray(Component[]::new));
     }
 
     public static void onGatherTooltipComponents(RenderTooltipEvent.GatherComponents event) {

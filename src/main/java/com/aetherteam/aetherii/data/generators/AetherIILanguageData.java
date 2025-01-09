@@ -7,7 +7,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIStructures;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;

@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.weapons.zanite;
 
 import com.aetherteam.aetherii.AetherIIDamageStats;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredSpearItem;
 import com.aetherteam.aetherii.item.equipment.weapons.abilities.ZaniteWeapon;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class ZaniteSpearItem extends TieredSpearItem implements ZaniteWeapon {
     public ZaniteSpearItem(Properties properties) {
-        super(properties.attributes(AetherIIDamageStats.merge(TieredSpearItem.createAttributes(AetherIIItemTiers.ZANITE, 3, -2.4F), AetherIIDamageStats.ZANITE_SPEAR)));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.ZANITE, 3, -2.4F, AetherIIDamageStats.ZANITE_SPEAR));
     }
 
     @Override

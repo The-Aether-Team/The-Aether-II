@@ -7,6 +7,6 @@ import com.aetherteam.aetherii.item.equipment.weapons.abilities.SkyrootWeapon;
 
 public class SkyrootShortswordItem extends TieredShortswordItem implements SkyrootWeapon {
     public SkyrootShortswordItem(Properties properties) {
-        super(properties.attributes(AetherIIDamageStats.merge(TieredShortswordItem.createAttributes(AetherIIItemTiers.SKYROOT, 3, -2.4F), AetherIIDamageStats.SKYROOT_SHORTSWORD)));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.SKYROOT, 3, -2.4F, AetherIIDamageStats.SKYROOT_SHORTSWORD));
     }
 }

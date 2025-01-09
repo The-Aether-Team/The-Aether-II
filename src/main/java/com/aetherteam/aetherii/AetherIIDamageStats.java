@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii;
 
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

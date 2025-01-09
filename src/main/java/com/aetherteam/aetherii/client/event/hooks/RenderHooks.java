@@ -8,7 +8,9 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScr
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.DeathScreenAccessor;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OpenInventoryPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OutpostRespawnPacket;
@@ -23,21 +25,29 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class RenderHooks {
@@ -138,6 +148,22 @@ public class RenderHooks {
             }
         }
         return null;
+    }
+
+    public static void addAbilityAttributeTooltip(ItemStack itemStack, List<Component> tooltipLines, AttributeTooltipContext context) {
+        TagKey<Item> armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
+        if (armorSet != null) {
+            Player player = Minecraft.getInstance().player;
+            if (player != null && EquipmentUtil.getEquipment(player).stream().map(ItemStack::getItem).toList().contains(itemStack.getItem())) {
+                for (Map.Entry<Holder<Attribute>, AttributeInstance> entry : ((AttributeMapAccessor) player.getAttributes()).aether_ii$getAttributes().entrySet()) {
+                    for (AttributeModifier modifier : entry.getValue().getModifiers()) {
+                        if (modifier.id().getPath().startsWith("armor_set.ability.") && modifier.id().getPath().contains(armorSet.location().getPath().substring(armorSet.location().getPath().lastIndexOf('/') + 1))) {
+                            tooltipLines.add(entry.getKey().value().toComponent(modifier, context.flag()));
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static void addCharmTooltip(ItemStack itemStack, List<Either<FormattedText, TooltipComponent>> tooltipElements) {

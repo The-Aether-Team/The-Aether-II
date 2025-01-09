@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.effect.harmful;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.MobEffectInstanceAccessor;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;

@@ -7,6 +7,6 @@ import com.aetherteam.aetherii.item.equipment.weapons.abilities.SkyrootWeapon;
 
 public class SkyrootSpearItem extends TieredSpearItem implements SkyrootWeapon {
     public SkyrootSpearItem(Properties properties) {
-        super(properties.attributes(AetherIIDamageStats.merge(TieredSpearItem.createAttributes(AetherIIItemTiers.SKYROOT, 3, -2.4F), AetherIIDamageStats.SKYROOT_SPEAR)));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.SKYROOT, 3, -2.4F, AetherIIDamageStats.SKYROOT_SPEAR));
     }
 }

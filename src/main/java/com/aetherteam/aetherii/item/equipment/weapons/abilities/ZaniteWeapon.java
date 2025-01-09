@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.weapons.abilities;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;

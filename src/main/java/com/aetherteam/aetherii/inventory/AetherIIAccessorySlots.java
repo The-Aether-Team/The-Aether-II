@@ -2,8 +2,8 @@ package com.aetherteam.aetherii.inventory;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
-import io.wispforest.accessories.api.AccessoriesAPI;
 import io.wispforest.accessories.api.slot.SlotBasedPredicate;
+import io.wispforest.accessories.api.slot.SlotPredicateRegistry;
 import io.wispforest.accessories.api.slot.SlotTypeReference;
 import io.wispforest.accessories.api.slot.UniqueSlotHandling;
 import net.minecraft.resources.ResourceLocation;
@@ -28,9 +28,9 @@ public class AetherIIAccessorySlots implements UniqueSlotHandling.RegistrationCa
     private static SlotTypeReference ACCESSORY_SLOT;
 
     private AetherIIAccessorySlots() {
-        AccessoriesAPI.registerPredicate(RELIC_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_RELICS)));
-        AccessoriesAPI.registerPredicate(HANDWEAR_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_HANDWEAR)));
-        AccessoriesAPI.registerPredicate(ACCESSORY_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_ACCESSORIES)));
+        SlotPredicateRegistry.register(RELIC_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_RELICS)));
+        SlotPredicateRegistry.register(HANDWEAR_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_HANDWEAR)));
+        SlotPredicateRegistry.register(ACCESSORY_PREDICATE, SlotBasedPredicate.ofItem(item -> new ItemStack(item).is(AetherIITags.Items.EQUIPMENT_ACCESSORIES)));
     }
 
     @Override

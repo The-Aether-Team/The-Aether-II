@@ -6,6 +6,6 @@ import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
 
 public class ArkeniumHammerItem extends TieredHammerItem {
     public ArkeniumHammerItem(Properties properties) {
-        super(properties.attributes(AetherIIDamageStats.merge(TieredHammerItem.createAttributes(AetherIIItemTiers.ARKENIUM, 3, -2.4F), AetherIIDamageStats.ARKENIUM_HAMMER)));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.ARKENIUM, 3, -2.4F, AetherIIDamageStats.ARKENIUM_HAMMER));
     }
 }
