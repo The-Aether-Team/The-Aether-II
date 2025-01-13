@@ -225,7 +225,6 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.AECHOR_CUTTING.get());
 
         // Potted Flowers
-        this.dropPottedContents(AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_HIGHLAND_FERN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_SHIELD_FERN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_HESPEROSE.get());
@@ -236,6 +235,10 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropPottedContents(AetherIIBlocks.POTTED_PLURACIAN.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_BLADE_POA.get());
         this.dropPottedContents(AetherIIBlocks.POTTED_AECHOR_CUTTING.get());
+
+        // Potted Mushrooms
+        this.dropPottedContents(AetherIIBlocks.POTTED_MAGNETIC_SHROOM.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_TANGLESHROOM.get());
 
         // Bushes
         this.dropSelf(AetherIIBlocks.HIGHLANDS_BUSH.get());
@@ -271,8 +274,9 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.SKYROOT_TWIG.get(), this::dropTwigs);
         this.add(AetherIIBlocks.HOLYSTONE_ROCK.get(), this::dropRocks);
 
-        // Surface Decoration
-        this.dropSelf(AetherIIBlocks.AMBROSIUM_CHUNKS.get());
+        // Dungeon Decoration
+        this.dropSelf(AetherIIBlocks.AMBROSIUM_CHUNKS.get()); //todo
+        this.dropSelf(AetherIIBlocks.TANGLESHROOM.get());
 
         // Skyroot Planks
         this.dropSelf(AetherIIBlocks.SKYROOT_PLANKS.get());

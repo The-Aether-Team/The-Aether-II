@@ -218,7 +218,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.AECHOR_CUTTING, "Aechor Cutting");
 
         // Potted Flowers
-        this.addBlock(AetherIIBlocks.POTTED_MAGNETIC_SHROOM, "Potted Magnetic Shroom");
         this.addBlock(AetherIIBlocks.POTTED_HIGHLAND_FERN, "Potted Highland Fern");
         this.addBlock(AetherIIBlocks.POTTED_SHIELD_FERN, "Potted Shield Fern");
         this.addBlock(AetherIIBlocks.POTTED_HESPEROSE, "Potted Hesperose");
@@ -229,6 +228,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.POTTED_PLURACIAN, "Potted Pluracian");
         this.addBlock(AetherIIBlocks.POTTED_BLADE_POA, "Potted Blade Poa");
         this.addBlock(AetherIIBlocks.POTTED_AECHOR_CUTTING, "Potted Aechor Cutting");
+        this.addBlock(AetherIIBlocks.POTTED_MAGNETIC_SHROOM, "Potted Magnetic Shroom");
+        this.addBlock(AetherIIBlocks.POTTED_TANGLESHROOM, "Potted Tangleshroom");
 
         // Bushes
         this.addBlock(AetherIIBlocks.HIGHLANDS_BUSH, "Highlands Bush");
@@ -258,6 +259,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Dungeon Decoration
         this.addBlock(AetherIIBlocks.AMBROSIUM_CHUNKS, "Ambrosium Chunks");
+        this.addBlock(AetherIIBlocks.TANGLESHROOM, "Tangleshroom");
 
         // Skyroot Planks
         this.addBlock(AetherIIBlocks.SKYROOT_PLANKS, "Skyroot Planks");

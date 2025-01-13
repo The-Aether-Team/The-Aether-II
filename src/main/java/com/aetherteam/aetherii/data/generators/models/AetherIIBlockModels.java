@@ -210,6 +210,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Dungeon Decoration
         this.createMultifaceBlock(AetherIIBlocks.AMBROSIUM_CHUNKS.get());
+        this.createPlantWithDefaultItem(AetherIIBlocks.TANGLESHROOM.get(), AetherIIBlocks.POTTED_TANGLESHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         // Skyroot Decorative Blocks
         this.createTrivialCube(AetherIIBlocks.SKYROOT_FLOORBOARDS.get());
