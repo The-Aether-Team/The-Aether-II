@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.inventory.menu;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
-import com.mojang.datafixers.util.Pair;
 import io.wispforest.accessories.api.menu.AccessoriesSlotGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;

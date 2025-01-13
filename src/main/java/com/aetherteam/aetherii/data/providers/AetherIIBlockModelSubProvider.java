@@ -29,7 +29,10 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.DripstoneThickness;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -448,7 +451,17 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleFlatItemModel(block.asItem());
 
         ResourceLocation location = provider.create(block, this.modelOutput);
-        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, location));
+        this.blockStateOutput.accept(BlockModelGenerators.createRotatedVariant(block, location));
+
+        ResourceLocation potLocation = potTemplate.create(pot, TextureMapping.plant(block), this.modelOutput);
+        this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, potLocation));
+    }
+
+    public void createFacingPlantWithDefaultItem(Block block, TexturedModel.Provider provider, Block pot, ModelTemplate potTemplate) {
+        this.registerSimpleFlatItemModel(block.asItem());
+
+        ResourceLocation location = provider.create(block, this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)).with(createHorizontalFacingDispatch()));
 
         ResourceLocation potLocation = potTemplate.create(pot, TextureMapping.plant(block), this.modelOutput);
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, potLocation));

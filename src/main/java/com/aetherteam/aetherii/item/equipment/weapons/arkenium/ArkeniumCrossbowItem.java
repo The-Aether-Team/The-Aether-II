@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class ArkeniumCrossbowItem extends TieredCrossbowItem {

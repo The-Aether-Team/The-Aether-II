@@ -11,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.HalfTransparentBlock;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -41,12 +40,11 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
                 BlockPos layerPos = new BlockPos(xCoord, height, zCoord);
 
                 if (!config.frozen()) {
-                    placeShore(context, layerPos.above(), false);
-                    placeShore(context, layerPos, true);
+                    placeShore(context, layerPos);
                 }
 
-                placeLakeLayer(context, layerPos, noiseStartValue, 1.0);
-                placeLakeLayer(context, layerPos.below(), noiseStartValue + 0.025, 0.8);
+                placeShoreLayer(context, layerPos, noiseStartValue, 1.0);
+                placeLakeLayer(context, layerPos.below(1), noiseStartValue + 0.025, 0.8);
                 placeLakeLayer(context, layerPos.below(2), noiseStartValue + 0.04, 0.75);
                 placeLakeLayer(context, layerPos.below(3), noiseStartValue + 0.045, 0.7);
                 placeLakeLayer(context, layerPos.below(4), noiseStartValue + 0.05, 0.625);
@@ -79,53 +77,93 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         double density = lakeNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
         double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        int thickness = calculateThickness(barrier, pos.getY(), config.height().getValue());
 
         // Determines the block to place at specific noise values
         WorldGenLevel level = context.level();
         if (density > noiseValue && density < 1.5) {
             if (floor < floorNoiseValue) {
-                if (!level.isEmptyBlock(pos)
-                        && !level.isEmptyBlock(pos.north())
-                        && !level.isEmptyBlock(pos.east())
-                        && !level.isEmptyBlock(pos.south())
-                        && !level.isEmptyBlock(pos.west())
-                        && !level.isEmptyBlock(pos.below())
-                        && !level.isEmptyBlock(pos.east(barrierThickness(barrier)))
-                        && !level.isEmptyBlock(pos.north(barrierThickness(barrier)))
-                        && !level.isEmptyBlock(pos.south(barrierThickness(barrier)))
-                        && !level.isEmptyBlock(pos.west(barrierThickness(barrier)))
-                        && !level.isEmptyBlock(pos.below(barrierThickness(barrier)))
-                        && (!level.getBlockState(pos.above()).isSolid()
-                        || level.getBlockState(pos.above()).getBlock() instanceof HalfTransparentBlock
-                        || level.getBlockState(pos.above()).getBlock() instanceof BushBlock
-                )) {
-                    this.setBlock(level, pos, Blocks.WATER.defaultBlockState());
-                    this.setBlock(level, pos.below(), config.underwaterBlock().getState(context.random(), pos.below()));
-                    if (level.isEmptyBlock(pos.below(2))) {
-                        this.setBlock(level, pos.below(2), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
-                    }
-
-                    // Removes Floating Grass above the lakes
-                    if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
-                        this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+                for (int i = 0; i < barrier; i++) {
+                    if (!level.isEmptyBlock(pos)
+                            && !level.isEmptyBlock(pos.east(thickness))
+                            && !level.isEmptyBlock(pos.north(thickness))
+                            && !level.isEmptyBlock(pos.south(thickness))
+                            && !level.isEmptyBlock(pos.west(thickness))
+                            && !level.isEmptyBlock(pos.below(2))
+                            && !level.getBlockState(pos.above()).isSolid()
+                    ) {
+                        this.setBlock(level, pos, Blocks.WATER.defaultBlockState());
+                        this.setBlock(level, pos.below(), config.underwaterBlock().getState(context.random(), pos.below()));
+                        if (level.isEmptyBlock(pos.below(2))) {
+                            this.setBlock(level, pos.below(2), AetherIIBlocks.HOLYSTONE.get().defaultBlockState());
+                        }
                     }
                 }
-            }
-
-            // Generates waterfalls
-            if (pos.getY() == config.height().getMinValue() && context.random().nextInt(12) == 0 && barrier > 0.25 && level.getBlockState(pos).is(AetherIIBlocks.AETHER_GRASS_BLOCK.get()) && !config.frozen()) {
-                level.setBlock(pos, Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
-                level.scheduleTick(pos, Fluids.WATER.defaultFluidState().getType(), 0);
-            }
-
-            // Freezes Top if "frozen" is true
-            if (pos.getY() == config.height().getMinValue() && level.getBlockState(pos).is(Blocks.WATER) && config.frozen()) {
-                this.setBlock(level, pos, AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
             }
         }
     }
 
-    public void placeShore(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos, boolean secondary) {
+    @SuppressWarnings("deprecation")
+    public void placeShoreLayer(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos, double noiseValue, double floorNoiseValue) {
+        NoiseLakeConfiguration config = context.config();
+
+        DensityFunction lakeNoise = config.lakeNoise();
+        DensityFunction lakeFloorNoise = config.lakeFloorNoise();
+        DensityFunction lakeBarrierNoise = config.lakeBarrierNoise();
+        DensityFunction lakeWaterfallNoise = config.lakeWaterfallNoise();
+
+        DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(context.level().getSeed());
+
+        lakeNoise.mapAll(visitor);
+        lakeFloorNoise.mapAll(visitor);
+        lakeBarrierNoise.mapAll(visitor);
+        lakeWaterfallNoise.mapAll(visitor);
+
+        double density = lakeNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        double floor = lakeFloorNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        double barrier = lakeBarrierNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        double waterfalls = lakeWaterfallNoise.compute(new DensityFunction.SinglePointContext(pos.getX(), pos.getY(), pos.getZ()));
+        int thickness = config.frozen() ? calculateThickness(barrier, pos.getY(), config.height().getValue()) : calculateShoreThickness(barrier, waterfalls, pos.getY(), config.height().getValue());
+
+        // Determines the block to place at specific noise values
+        WorldGenLevel level = context.level();
+        if (density > noiseValue && density < 1.5) {
+            if (floor < floorNoiseValue) {
+                for (int i = 0; i < barrier; i++) {
+                    if (!level.isEmptyBlock(pos)
+                            && !level.isEmptyBlock(pos.below().east(thickness))
+                            && !level.isEmptyBlock(pos.below().north(thickness))
+                            && !level.isEmptyBlock(pos.below().south(thickness))
+                            && !level.isEmptyBlock(pos.below().west(thickness))
+                            && !level.isEmptyBlock(pos.below().below(2))
+                            && !level.getBlockState(pos.above()).isSolid()
+                    ) {
+                        this.setBlock(level, pos, Blocks.AIR.defaultBlockState());
+                        if (thickness > 1) {
+                            this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
+                        } else {
+                            this.setBlock(level, pos, Blocks.AIR.defaultBlockState());
+                            level.setBlock(pos.below(), Fluids.WATER.defaultFluidState().createLegacyBlock(), 2);
+                            level.scheduleTick(pos.below(), Fluids.WATER.defaultFluidState().getType(), 0);
+                        }
+                        this.setBlock(level, pos.below(2), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+
+                        // Removes Floating Grass above the lakes
+                        if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
+                            this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+                        }
+                    }
+                }
+            }
+
+            // Freezes Top if "frozen" is true
+            if (pos.getY() == config.height().getMinValue() - 1 && level.getBlockState(pos.below()).is(Blocks.WATER) && config.frozen()) {
+                this.setBlock(level, pos.below(), AetherIIBlocks.ARCTIC_ICE.get().defaultBlockState());
+            }
+        }
+    }
+
+    public void placeShore(FeaturePlaceContext<NoiseLakeConfiguration> context, BlockPos pos) {
         NoiseLakeConfiguration config = context.config();
 
         DensityFunction lakeNoise = config.lakeNoise();
@@ -142,18 +180,41 @@ public class NoiseLakeFeature extends Feature<NoiseLakeConfiguration> {
         // Determinds the block to place at specific noise values
         WorldGenLevel level = context.level();
         if (density > config.shoreStartValue() + shore) {
-            if (level.getBlockState(pos).is(AetherIITags.Blocks.AETHER_DIRT)){
-                this.setBlock(level, pos, secondary ? config.secondaryShoreBlock().getState(context.random(), pos) : config.shoreBlock().getState(context.random(), pos));
-
-                // Removes Floating Grass above the shores
-                if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
-                    this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+            if (level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_DIRT) && level.getBlockState(pos.above()).is(AetherIITags.Blocks.AETHER_DIRT)) {
+                this.setBlock(level, pos.below(), config.shoreBlock().getState(context.random(), pos.below()));
+                for (int i = 0; i < 4; i++) {
+                    this.setBlock(level, new BlockPos(pos.getX(), pos.getY() + i, pos.getZ()), Blocks.AIR.defaultBlockState());
                 }
             }
         }
+
+        // Blends the Shores with the surrounding Terrain
+        if (density > config.shoreStartValue() + shore - 0.005) {
+            if (level.getBlockState(pos.above()).is(AetherIIBlocks.AETHER_GRASS_BLOCK)) {
+                this.setBlock(level, pos.below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+                this.setBlock(level, pos, AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
+                this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+            }
+
+            if (level.getBlockState(pos.above(2)).is(AetherIIBlocks.AETHER_GRASS_BLOCK)) {
+                this.setBlock(level, pos.below(), AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+                this.setBlock(level, pos, AetherIIBlocks.AETHER_DIRT.get().defaultBlockState());
+                this.setBlock(level, pos.above(), AetherIIBlocks.AETHER_GRASS_BLOCK.get().defaultBlockState());
+                this.setBlock(level, pos.above(2), Blocks.AIR.defaultBlockState());
+            }
+        }
+
+        // Removes Floating Grass above the shores
+        if (level.getBlockState(pos.above()).getBlock() instanceof BushBlock || level.getBlockState(pos.above()).getBlock() instanceof TwigBlock || level.getBlockState(pos.above()).getBlock() instanceof RockBlock) {
+            this.setBlock(level, pos.above(), Blocks.AIR.defaultBlockState());
+        }
     }
 
-    public int barrierThickness(double barrier) {
-        return barrier < 0.25 ? 2 : 1;
+    public int calculateThickness(double barrier, int y, int height) {
+        return (int) (y == height ? barrier / 2 : barrier);
+    }
+
+    public int calculateShoreThickness(double barrier, double waterfalls, int y, int height) {
+        return waterfalls < 0.02 ? 0 : (int) (y == height ? barrier / 2 : barrier);
     }
 }

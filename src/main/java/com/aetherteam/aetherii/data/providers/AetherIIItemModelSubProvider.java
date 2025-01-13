@@ -12,8 +12,6 @@ import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.select.Charge;
 import net.minecraft.client.renderer.item.properties.select.DisplayContext;
-import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperties;
-import net.minecraft.client.renderer.special.ShieldSpecialRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
@@ -54,7 +52,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
 
     public void generateDyedArmorItem(Item item, int defaultColor) {
         ResourceLocation resourcelocation = this.generateLayeredItem(item, TextureMapping.getItemTexture(item), TextureMapping.getItemTexture(item).withSuffix("_dyed"));
-        this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourcelocation, new Dye(defaultColor)));
+        this.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourcelocation, BLANK_LAYER, new Dye(defaultColor)));
     }
 
     public void generateMoaFeatherItem(Item item) {

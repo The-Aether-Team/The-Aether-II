@@ -5,8 +5,8 @@
       "type": "aether_ii:improved_layer_placement",
       "count": {
         "type": "minecraft:uniform",
-        "max_inclusive": 2,
-        "min_inclusive": 0
+        "max_inclusive": 4,
+        "min_inclusive": 2
       },
       "heightmap": "MOTION_BLOCKING_NO_LEAVES",
       "verticalBounds": 4

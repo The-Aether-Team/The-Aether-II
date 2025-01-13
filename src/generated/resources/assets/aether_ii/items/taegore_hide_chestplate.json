@@ -4,6 +4,10 @@
     "model": "aether_ii:item/taegore_hide_chestplate",
     "tints": [
       {
+        "type": "minecraft:constant",
+        "value": -1
+      },
+      {
         "type": "minecraft:dye",
         "default": -3150087
       }

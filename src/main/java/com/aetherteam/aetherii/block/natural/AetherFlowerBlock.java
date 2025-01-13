@@ -21,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 public class AetherFlowerBlock extends FlowerBlock implements Snowable {
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
 
-    public AetherFlowerBlock(Holder<MobEffect> effectHolder, int p_53513_, Properties properties) {
-        super(effectHolder, p_53513_, properties);
+    public AetherFlowerBlock(Holder<MobEffect> effectHolder, int duration, Properties properties) {
+        super(effectHolder, duration, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(SNOWY, Boolean.FALSE));
     }
 

@@ -1,36 +1,19 @@
 package com.aetherteam.aetherii.client.gui.screen.inventory.recipebook;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.inventory.menu.AltarMenu;
 import com.aetherteam.aetherii.recipe.display.AltarRecipeDisplay;
-import com.aetherteam.aetherii.recipe.recipes.item.AltarEnchantingRecipe;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.recipebook.GhostSlots;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
-import net.minecraft.core.Holder;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.display.FurnaceRecipeDisplay;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
-import net.minecraft.world.item.crafting.display.SlotDisplay;
-import net.minecraft.world.level.ItemLike;
 
-import javax.annotation.Nullable;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 public class AltarRecipeBookComponent extends RecipeBookComponent<AltarMenu> {
     private static final WidgetSprites FILTER_SPRITES = new WidgetSprites(

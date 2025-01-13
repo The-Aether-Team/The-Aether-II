@@ -305,7 +305,7 @@ public class HighlandsPlacedFeatures {
                 context,
                 GRASS_FIELD,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.GRASS_FIELD),
-                NoiseBasedCountPlacement.of(40, 5, 0.3),
+                CountPlacement.of(24),
                 ImprovedLayerPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, UniformInt.of(0, 1), 4),
                 BiomeFilter.biome()
         );
@@ -313,14 +313,14 @@ public class HighlandsPlacedFeatures {
                 context,
                 SMALL_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SMALL_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(0, 1), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(3, 6), 4),
                 BiomeFilter.biome()
         );
         register(
                 context,
                 MEDIUM_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MEDIUM_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(0, 2), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(2, 4), 4),
                 BiomeFilter.biome()
         );
         register(
@@ -429,7 +429,7 @@ public class HighlandsPlacedFeatures {
         register(context, FLOURISHING_FIELD_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_FLOURISHING_FIELD),
                 HighlandsPlacementBuilders.treePlacement(RarityFilter.onAverageOnceEvery(2)));
         register(context, VERDANT_WOODS_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_VERDANT_WOODS),
-                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(12, 0.1F, 1)));
+                HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(16, 0.1F, 1)));
         register(context, SHROUDED_FOREST_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_SHROUDED_FOREST),
                 HighlandsPlacementBuilders.treePlacement(PlacementUtils.countExtra(150, 0.25F, 50)));
         register(context, SHIMMERING_BASIN_TREES, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREES_BIOME_SHIMMERING_BASIN),
@@ -541,9 +541,9 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome()
         );
         register(context, POINTED_HOLYSTONE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.POINTED_HOLYSTONE),
-                CountPlacement.of(UniformInt.of(192, 256)),
+                CountPlacement.of(UniformInt.of(64, 104)),
                 InSquarePlacement.spread(),
-                PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
+                HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(96), VerticalAnchor.aboveBottom(176))),
                 RarityFilter.onAverageOnceEvery(75),
                 CountPlacement.of(UniformInt.of(3, 15)),
                 RandomOffsetPlacement.of(ClampedNormalInt.of(0.0F, 3.0F, -10, 10), ClampedNormalInt.of(0.0F, 0.6F, -2, 2)),
@@ -581,21 +581,21 @@ public class HighlandsPlacedFeatures {
         );
 
         register(context, UNSTABLE_HOLYSTONE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNSTABLE_HOLYSTONE),
-                CountPlacement.of(3),
+                RarityFilter.onAverageOnceEvery(1),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.aboveBottom(96), VerticalAnchor.top())),
                 BiomeFilter.biome()
         );
         register(context, UNSTABLE_UNDERSHALE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNSTABLE_UNDERSHALE),
-                CountPlacement.of(1),
+                RarityFilter.onAverageOnceEvery(3),
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(UniformHeight.of(VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(96))),
                 BiomeFilter.biome()
         );
 
         register(context, ACID_POOL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ACID_POOL),
-                CountPlacement.of(8),
-                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(96))),
+                CountPlacement.of(16),
+                HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
                 BiomeFilter.biome()
         );
@@ -659,7 +659,7 @@ public class HighlandsPlacedFeatures {
         );
 
         register(context, COAST_QUICKSOIL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COAST_QUICKSOIL),
-                CountPlacement.of(4),
+                CountPlacement.of(6),
                 HeightRangePlacement.triangle(VerticalAnchor.absolute(112), VerticalAnchor.absolute(156)),
                 EnvironmentScanPlacement.scanningFor(Direction.UP, BlockPredicate.hasSturdyFace(Direction.DOWN), BlockPredicate.ONLY_IN_AIR_PREDICATE, 5),
                 BiomeFilter.biome()

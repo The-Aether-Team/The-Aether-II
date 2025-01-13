@@ -10,6 +10,10 @@
     "aether_ii:agiosite_slab",
     "aether_ii:agiosite_brick_slab",
     "aether_ii:icestone_slab",
-    "aether_ii:icestone_bricks_slab"
+    "aether_ii:icestone_bricks_slab",
+    "aether_ii:ichorite_slab",
+    "aether_ii:smooth_ichorite_slab",
+    "aether_ii:ichorite_brick_slab",
+    "aether_ii:marbled_brick_slab"
   ]
 }

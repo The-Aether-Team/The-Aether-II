@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "aether_ii:block/pluracian",
+      "y": 90
+    },
+    "facing=north": {
       "model": "aether_ii:block/pluracian"
+    },
+    "facing=south": {
+      "model": "aether_ii:block/pluracian",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "aether_ii:block/pluracian",
+      "y": 270
     }
   }
 }

@@ -60,57 +60,44 @@ public class AetherIIModelTemplates {
                     .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
                     .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
                     .shade(false)
-                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.CROSS).cullface(Direction.NORTH))
-                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.CROSS).cullface(Direction.SOUTH))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_1).tintindex(0))
+                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_1).tintindex(0))
             ).element((builder) -> builder
                     .from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F)
                     .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
                     .shade(false)
-                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.CROSS).cullface(Direction.WEST))
-                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(TextureSlot.CROSS).cullface(Direction.EAST))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_1).tintindex(0))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_1).tintindex(0))
             ).element((builder) -> builder
                     .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
                     .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
                     .shade(false)
-                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_1).tintindex(0).cullface(Direction.NORTH))
-                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_1).tintindex(0).cullface(Direction.SOUTH))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_2).tintindex(1))
+                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_2).tintindex(1))
             ).element((builder) -> builder
                     .from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F)
                     .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
                     .shade(false)
-                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_1).tintindex(0).cullface(Direction.WEST))
-                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_1).tintindex(0).cullface(Direction.EAST))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_2).tintindex(1))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_2).tintindex(1))
             ).element((builder) -> builder
                     .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
                     .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
                     .shade(false)
-                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_2).tintindex(1).cullface(Direction.NORTH))
-                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_2).tintindex(1).cullface(Direction.SOUTH))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_3).tintindex(2))
+                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_3).tintindex(2))
             ).element((builder) -> builder
                     .from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F)
                     .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
                     .shade(false)
-                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_2).tintindex(1).cullface(Direction.WEST))
-                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_2).tintindex(1).cullface(Direction.EAST))
-            ).element((builder) -> builder
-                    .from(0.8F, 0.0F, 8.0F).to(15.2F, 16.0F, 8.0F)
-                    .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
-                    .shade(false)
-                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_3).tintindex(2).cullface(Direction.NORTH))
-                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_3).tintindex(2).cullface(Direction.SOUTH))
-            ).element((builder) -> builder
-                    .from(8.0F, 0.0F, 0.8F).to(8.0F, 16.0F, 15.2F)
-                    .rotation((rotation) -> rotation.origin(8, 8,8).axis(Direction.Axis.Y).angle(45.0F).rescale(true))
-                    .shade(false)
-                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_3).tintindex(2).cullface(Direction.WEST))
-                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_3).tintindex(2).cullface(Direction.EAST))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_3).tintindex(2))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.uvs(0, 0, 16, 16).texture(AetherIITextureSlots.OVERLAY_3).tintindex(2))
             ).build();
     public static final ModelTemplate PORTAL_NS = ModelTemplates.create("nether_portal_ns", "_ns", AetherIITextureSlots.PORTAL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build();
     public static final ModelTemplate PORTAL_EW = ModelTemplates.create("nether_portal_ew", "_ew", AetherIITextureSlots.PORTAL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build();
     public static final ModelTemplate THIN = ModelTemplates.create("thin_block", TextureSlot.ALL);
     public static final ModelTemplate DIRT_PATH = ModelTemplates.create("dirt_path", TextureSlot.BOTTOM, TextureSlot.PARTICLE, TextureSlot.TOP, TextureSlot.SIDE);
     public static final ModelTemplate LEAVES = ModelTemplates.create("leaves", TextureSlot.ALL).extend().renderType(ResourceLocation.withDefaultNamespace("cutout_mipped")).build();
-    public static final ModelTemplate VINE = ModelTemplates.create("vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate TRANSLUCENT_INNER_FACES = ModelTemplates.create("cube", TextureSlot.PARTICLE, TextureSlot.NORTH, TextureSlot.SOUTH, TextureSlot.EAST, TextureSlot.WEST, TextureSlot.UP, TextureSlot.DOWN).extend()
             .renderType(ResourceLocation.withDefaultNamespace("translucent"))
             .element((builder) -> builder
@@ -248,14 +235,15 @@ public class AetherIIModelTemplates {
                     .face(Direction.DOWN, (faceBuilder) -> faceBuilder.uvs(2.0F, 3.0F, 4.0F, 5.0F).texture(TextureSlot.TEXTURE))
             ).build();
 
+    public static final ModelTemplate MOSS_VINE = create("moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED = create("asymmetrical_cross_even_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_ODD = create("asymmetrical_cross_odd", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_ODD_MIRRORED = create("asymmetrical_cross_odd_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_ASYMMETRICAL_CROSS_EVEN = create("flower_pot_asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_ASYMMETRICAL_CROSS_ODD = create("flower_pot_asymmetrical_cross_odd", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
-    public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.PLANT).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
-    public static final ModelTemplate PLURACIAN = create("template_pluracian", TextureSlot.PLANT).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate LILICHIME = create("template_lilichime", TextureSlot.PLANT, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate PLURACIAN = create("template_pluracian", TextureSlot.PLANT, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_LILICHIME = create("flower_pot_lilichime", TextureSlot.PLANT).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_PLURACIAN = create("flower_pot_pluracian", TextureSlot.PLANT).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate POTTED_BUSH_BLOCK = create("flower_pot_bush_block", TextureSlot.STEM, AetherIITextureSlots.BUSH).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();

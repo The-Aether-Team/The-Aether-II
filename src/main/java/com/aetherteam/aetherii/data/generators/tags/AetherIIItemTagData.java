@@ -47,8 +47,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.ANIMALS_FURS).add(
                 AetherIIItems.TAEGORE_HIDE.get(),
-                AetherIIItems.BURRUKAI_PELT.get()
-                );
+                AetherIIItems.BURRUKAI_PELT.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
@@ -326,6 +325,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.HOLYSTONE.asItem(),
                 AetherIIBlocks.UNDERSHALE.asItem(),
                 AetherIIBlocks.AGIOSITE.asItem(),
+                AetherIIBlocks.ICHORITE.asItem(),
                 AetherIIBlocks.CRUDE_SCATTERGLASS.asItem(),
                 AetherIIBlocks.QUICKSOIL.asItem(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.asItem(),
@@ -502,7 +502,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.AGIOSITE_STAIRS.asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_STAIRS.asItem(),
                 AetherIIBlocks.ICESTONE_STAIRS.asItem(),
-                AetherIIBlocks.ICESTONE_BRICK_STAIRS.asItem()
+                AetherIIBlocks.ICESTONE_BRICK_STAIRS.asItem(),
+                AetherIIBlocks.ICHORITE_STAIRS.asItem(),
+                AetherIIBlocks.SMOOTH_ICHORITE_STAIRS.asItem(),
+                AetherIIBlocks.ICHORITE_BRICK_STAIRS.asItem(),
+                AetherIIBlocks.MARBLED_BRICK_STAIRS.asItem()
         );
         this.tag(ItemTags.SLABS).add(
                 AetherIIBlocks.HOLYSTONE_SLAB.asItem(),
@@ -515,7 +519,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.AGIOSITE_SLAB.asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_SLAB.asItem(),
                 AetherIIBlocks.ICESTONE_SLAB.asItem(),
-                AetherIIBlocks.ICESTONE_BRICK_SLAB.asItem()
+                AetherIIBlocks.ICESTONE_BRICK_SLAB.asItem(),
+                AetherIIBlocks.ICHORITE_SLAB.asItem(),
+                AetherIIBlocks.SMOOTH_ICHORITE_SLAB.asItem(),
+                AetherIIBlocks.ICHORITE_BRICK_SLAB.asItem(),
+                AetherIIBlocks.MARBLED_BRICK_SLAB.asItem()
         );
         this.tag(ItemTags.WALLS).add(
                 AetherIIBlocks.HOLYSTONE_WALL.asItem(),
@@ -528,7 +536,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.AGIOSITE_WALL.asItem(),
                 AetherIIBlocks.AGIOSITE_BRICK_WALL.asItem(),
                 AetherIIBlocks.ICESTONE_WALL.asItem(),
-                AetherIIBlocks.ICESTONE_BRICK_WALL.asItem()
+                AetherIIBlocks.ICESTONE_BRICK_WALL.asItem(),
+                AetherIIBlocks.ICHORITE_WALL.asItem(),
+                AetherIIBlocks.SMOOTH_ICHORITE_WALL.asItem(),
+                AetherIIBlocks.ICHORITE_BRICK_WALL.asItem(),
+                AetherIIBlocks.MARBLED_BRICK_WALL.asItem()
         );
         this.tag(ItemTags.LEAVES).add(
                 AetherIIBlocks.SKYROOT_LEAVES.asItem(),
@@ -681,6 +693,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GRAVITITE_ORE.asItem()
         );
         this.tag(Tags.Items.RODS_WOODEN).add(AetherIIItems.SKYROOT_STICK.get());
+        this.tag(Tags.Items.FEATHERS).add(
+                AetherIIItems.MOA_FEATHER.get(),
+                AetherIIItems.COCKATRICE_FEATHER.get()
+        );
         this.tag(Tags.Items.STORAGE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.asItem(),
                 AetherIIBlocks.ZANITE_BLOCK.asItem(),

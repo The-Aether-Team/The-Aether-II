@@ -26,7 +26,6 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -527,12 +526,15 @@ public class HighlandsConfiguredFeatures {
                         8,
                         3,
                         PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                                        .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 2)
-                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState(), 1)
-                                        .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 1))),
+                                        .add(AetherIIBlocks.HESPEROSE.get().defaultBlockState(), 4)
+                                        .add(AetherIIBlocks.TARABLOOM.get().defaultBlockState(), 4)
+                                        .add(AetherIIBlocks.POASPROUT.get().defaultBlockState(), 4)
+                                        .add(AetherIIBlocks.LILICHIME.get().defaultBlockState(), 5)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.NORTH), 1)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.EAST), 1)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.SOUTH), 1)
+                                        .add(AetherIIBlocks.PLURACIAN.get().defaultBlockState().setValue(FacingFlowerBlock.FACING, Direction.WEST), 1)
+                                        .add(AetherIIBlocks.SATIVAL_SHOOT.get().defaultBlockState(), 4))),
                                 BlockPredicate.allOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
         ));
         register(
@@ -1574,7 +1576,7 @@ public class HighlandsConfiguredFeatures {
 
         register(context, WATER_POND_TUNDRA, AetherIIFeatures.LAKE.get(),
                 new AetherLakeConfiguration(UniformInt.of(2, 5), BlockStateProvider.simple(Blocks.WATER), SimpleStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get())));
-        register(context, WATER_SPRING, Feature.SPRING,
+     register(context, WATER_SPRING, Feature.SPRING,
                 new SpringConfiguration(Fluids.WATER.defaultFluidState(), true, 4, 1, HolderSet.direct(Block::builtInRegistryHolder, AetherIIBlocks.UNDERSHALE.get(), AetherIIBlocks.HOLYSTONE.get(), AetherIIBlocks.AETHER_DIRT.get())));
 
         register(context, NOISE_LAKE, AetherIIFeatures.NOISE_LAKE.get(),
@@ -1582,6 +1584,7 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_WATERFALLS),
                         0.3,
                         ConstantInt.of(124),
                         new DualNoiseProvider(
@@ -1599,9 +1602,8 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
-                        0.29,
+                        0.31,
                         BlockStateProvider.simple(AetherIIBlocks.QUICKSOIL.get()),
-                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),
                         false
                 ));
@@ -1610,6 +1612,7 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_WATERFALLS),
                         0.3,
                         ConstantInt.of(124),
                         new DualNoiseProvider(
@@ -1627,8 +1630,7 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.SHIMMERING_SILT.get().defaultBlockState()
                                 )
                         ),
-                        0.3,
-                        BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
+                        0.31,
                         BlockStateProvider.simple(AetherIIBlocks.AETHER_GRASS_BLOCK.get()),
                         DensityFunctions.zero(),
                         true
@@ -1639,6 +1641,7 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_NOISE_SWAMP),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_FLOOR),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_BARRIER),
+                        AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_WATERFALLS),
                         0.3,
                         ConstantInt.of(124),
                         new DualNoiseProvider(
@@ -1670,21 +1673,6 @@ public class HighlandsConfiguredFeatures {
                                         AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
                                         AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
                                         AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()
-                                )
-                        ),
-                        new DualNoiseProvider(
-                                new InclusiveRange<>(1, 4),
-                                new NormalNoise.NoiseParameters(-6, 1.25),
-                                1.0F,
-                                2345L,
-                                new NormalNoise.NoiseParameters(-2, 1.0),
-                                1.0F,
-                                List.of(
-                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
-                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState(),
-                                        AetherIIBlocks.COARSE_AETHER_DIRT.get().defaultBlockState(),
-                                        AetherIIBlocks.FERROSITE_SAND.get().defaultBlockState()
                                 )
                         ),
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.LAKES_SHORE),

@@ -108,10 +108,8 @@ public class AetherIITextureMappings {
         return new TextureMapping().put(TextureSlot.PLANT, TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block));
     }
 
-    public static TextureMapping multiface(Block block) {
-        return  new TextureMapping()
-                .put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(block))
-                .copySlot(TextureSlot.TEXTURE, TextureSlot.PARTICLE);
+    public static TextureMapping itemPlant(Block block) {
+        return new TextureMapping().put(TextureSlot.PLANT, TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
     }
 
     public static TextureMapping particle(TextureMapping textureMapping) {

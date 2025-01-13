@@ -1,13 +1,9 @@
 package com.aetherteam.aetherii.client.particle;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.AetherIIClient;
-import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

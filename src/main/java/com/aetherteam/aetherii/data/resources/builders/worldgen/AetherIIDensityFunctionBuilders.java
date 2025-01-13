@@ -19,9 +19,6 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> VEGETATION = createKey("highlands/vegetation");
     public static final ResourceKey<DensityFunction> VEGETATION_RARE = createKey("highlands/vegetation_rare");
     public static final ResourceKey<DensityFunction> VEGETATION_RARITY_MAPPER = createKey("highlands/vegetation_rarity_mapper");
-    public static final ResourceKey<DensityFunction> CONTINENTS = createKey("highlands/continents");
-    public static final ResourceKey<DensityFunction> CONTINENTS_FACTOR = createKey("highlands/continents_factor");
-    public static final ResourceKey<DensityFunction> CONTINENTS_FINAL = createKey("highlands/continents_final");
     public static final ResourceKey<DensityFunction> EROSION = createKey("highlands/erosion");
     public static final ResourceKey<DensityFunction> DEPTH = createKey("highlands/depth");
     public static final ResourceKey<DensityFunction> AMPLIFICATION = createKey("highlands/amplification");
@@ -56,6 +53,7 @@ public class AetherIIDensityFunctionBuilders {
     public static final ResourceKey<DensityFunction> LAKES_FLOOR = createKey("highlands/lakes/lake_floor");
     public static final ResourceKey<DensityFunction> LAKES_BARRIER = createKey("highlands/lakes/lake_barrier");
     public static final ResourceKey<DensityFunction> LAKES_SHORE = createKey("highlands/lakes/lake_shore");
+    public static final ResourceKey<DensityFunction> LAKES_WATERFALLS = createKey("highlands/lakes/lakes_waterfalls");
 
     public static final ResourceKey<DensityFunction> COASTS_BASE_NOISE = createKey("highlands/coasts/base_noise");
     public static final ResourceKey<DensityFunction> COASTS_HIGHFIELDS = createKey("highlands/coasts/highfields");
@@ -87,45 +85,6 @@ public class AetherIIDensityFunctionBuilders {
         density = DensityFunctions.rangeChoice(getFunction(function, VEGETATION_RARE), -1.5, 0.45, density, DensityFunctions.constant(2.0));
         density = DensityFunctions.rangeChoice(getFunction(function, TEMPERATURE), -0.4, 0.3, density, vegetation);
         density = DensityFunctions.rangeChoice(getFunction(function, EROSION), 0.0, 0.55, density, vegetation);
-        return density;
-    }
-
-
-    public static DensityFunction buildContinentsFactor(HolderGetter<DensityFunction> function) {
-        DensityFunctions.Spline.Coordinate continents = new DensityFunctions.Spline.Coordinate(function.getOrThrow(CONTINENTS));
-        DensityFunctions.Spline.Coordinate temperature = new DensityFunctions.Spline.Coordinate(function.getOrThrow(TEMPERATURE));
-        DensityFunctions.Spline.Coordinate erosion = new DensityFunctions.Spline.Coordinate(function.getOrThrow(EROSION));
-        return DensityFunctions.spline(continentsFactor(continents, temperature, erosion));
-    }
-
-    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> continentsFactor(I continents, I temperature, I erosion) {
-        CubicSpline<C, I> continentsSpline = CubicSpline.builder(continents)
-                .addPoint(0.35F, 1.0F)
-                .addPoint(0.55F, 7.5F)
-                .build();
-
-        CubicSpline<C, I> temperatureSpline = CubicSpline.builder(temperature)
-                .addPoint(-0.45F, 1.0F)
-                .addPoint(-0.4F, continentsSpline)
-                .addPoint(-0.275F, continentsSpline)
-                .addPoint(-0.225F, 1.0F)
-
-                .addPoint(0.475F, 1.0F)
-                .addPoint(0.525F, continentsSpline)
-                .addPoint(0.65F, continentsSpline)
-                .addPoint(0.725F, 1.0F)
-                .build();
-
-        return CubicSpline.builder(erosion)
-                .addPoint(0.55F, temperatureSpline)
-                .addPoint(0.625F, 1.0F)
-                .build();
-    }
-
-    public static DensityFunction buildContinentsFinal(HolderGetter<DensityFunction> function) {
-        DensityFunction density = getFunction(function, CONTINENTS_FACTOR);
-        density = DensityFunctions.mul(density, DensityFunctions.constant(0.1));
-        density = DensityFunctions.add(density, DensityFunctions.constant(-0.1));
         return density;
     }
 
@@ -194,7 +153,6 @@ public class AetherIIDensityFunctionBuilders {
         DensityFunction density = getFunction(function, FACTOR);
         density = DensityFunctions.mul(density, DensityFunctions.constant(value));
         density = DensityFunctions.mul(density, getFunction(function, TERRAIN_SHAPER));
-        density = DensityFunctions.mul(density, getFunction(function, CONTINENTS_FACTOR));
         return density;
     }
 

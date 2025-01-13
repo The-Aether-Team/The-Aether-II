@@ -9,7 +9,6 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class BiomeMobSpawnEggItem extends SpawnEggItem {
     private final String biome;

@@ -21,10 +21,11 @@ public class IrradiationParticle extends BaseAshSmokeParticle {
             float pQuadSizeMultiplier,
             SpriteSet pSprites
     ) {
-        super(pLevel, pX, pY, pZ, 0.1F, -0.1F, 0.1F, pXSpeed, pYSpeed, pZSpeed, pQuadSizeMultiplier, pSprites, 1.0F, 20, 0.1F, false);
+        super(pLevel, pX, pY, pZ, 0.1F, -0.1F, 0.1F, pXSpeed, pYSpeed, pZSpeed, pQuadSizeMultiplier, pSprites, 1.0F, 20, 0.0F, false);
         this.rCol = (float) 229 / 255;
         this.gCol = (float) 191 / 255;
         this.bCol = (float) 78 / 255;
+        this.gravity = this.random.nextBoolean() ? -0.01F : 0.01F;
     }
 
     @OnlyIn(Dist.CLIENT)

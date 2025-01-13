@@ -28,6 +28,9 @@ public class AmbrosiumParticle extends BaseAshSmokeParticle {
         this.rCol = (ARGB.red(startingPackedColor) + (int) (durationRatio * (ARGB.red(endingPackedColor) - ARGB.red(startingPackedColor)))) / 255.0F;
         this.gCol = (ARGB.green(startingPackedColor) + (int) (durationRatio * (ARGB.green(endingPackedColor) - ARGB.green(startingPackedColor)))) / 255.0F;
         this.bCol = (ARGB.blue(startingPackedColor) + (int) (durationRatio * (ARGB.blue(endingPackedColor) - ARGB.blue(startingPackedColor)))) / 255.0F;
+        if (this.onGround) {
+            this.age += 5;
+        }
     }
 
     @Override

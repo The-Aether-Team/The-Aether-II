@@ -10,6 +10,10 @@
     "aether_ii:agiosite_stairs",
     "aether_ii:agiosite_brick_stairs",
     "aether_ii:icestone_stairs",
-    "aether_ii:icestone_bricks_stairs"
+    "aether_ii:icestone_bricks_stairs",
+    "aether_ii:ichorite_stairs",
+    "aether_ii:smooth_ichorite_stairs",
+    "aether_ii:ichorite_brick_stairs",
+    "aether_ii:marbled_brick_stairs"
   ]
 }

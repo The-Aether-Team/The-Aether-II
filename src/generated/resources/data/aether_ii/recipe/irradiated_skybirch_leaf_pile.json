@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "leaf_pile",
+  "key": {
+    "#": "aether_ii:irradiated_skybirch_leaves"
+  },
+  "pattern": [
+    "##"
+  ],
+  "result": {
+    "count": 8,
+    "id": "aether_ii:irradiated_skybirch_leaf_pile"
+  }
+}

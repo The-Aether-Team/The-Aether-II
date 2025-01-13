@@ -78,17 +78,17 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_BOLT.get(), ModelTemplates.FLAT_ITEM);
 
         // Armor
-        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_HELMET.get(), -3150087);
-        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), -3150087);
-        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), -3150087);
-        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), -3150087);
-        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), -3150087);
+        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_HELMET.get(), 0xFFCFEEF9);
+        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(), 0xFFCFEEF9);
+        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(), 0xFFCFEEF9);
+        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_BOOTS.get(), 0xFFCFEEF9);
+        this.generateDyedArmorItem(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 0xFFCFEEF9);
 
-        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), -10380096);
-        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), -10380096);
-        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), -10380096);
-        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), -10380096);
-        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), -10380096);
+        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 0xFF619CC0);
+        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 0xFF619CC0);
+        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 0xFF619CC0);
+        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 0xFF619CC0);
+        this.generateDyedArmorItem(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 0xFF619CC0);
 
         this.generateFlatItem(AetherIIItems.ZANITE_HELMET.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.ZANITE_CHESTPLATE.get(), ModelTemplates.FLAT_ITEM);

@@ -10,6 +10,10 @@
     "aether_ii:agiosite_wall",
     "aether_ii:agiosite_brick_wall",
     "aether_ii:icestone_wall",
-    "aether_ii:icestone_bricks_wall"
+    "aether_ii:icestone_bricks_wall",
+    "aether_ii:ichorite_wall",
+    "aether_ii:smooth_ichorite_wall",
+    "aether_ii:ichorite_brick_wall",
+    "aether_ii:marbled_brick_wall"
   ]
 }

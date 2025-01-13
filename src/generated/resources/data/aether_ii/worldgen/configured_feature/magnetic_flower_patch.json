@@ -38,6 +38,7 @@
               {
                 "Name": "aether_ii:pluracian",
                 "Properties": {
+                  "facing": "north",
                   "snowy": "false"
                 }
               }

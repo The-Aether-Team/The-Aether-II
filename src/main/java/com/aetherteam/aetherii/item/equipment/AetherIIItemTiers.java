@@ -2,12 +2,7 @@ package com.aetherteam.aetherii.item.equipment;
 
 import com.aetherteam.aetherii.AetherIITags;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ToolMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.block.Block;
-
-import java.util.function.Supplier;
 
 public class AetherIIItemTiers {
     public static final ToolMaterial SKYROOT = new ToolMaterial(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 59, 2.0F, 0.0F, 15, AetherIITags.Items.SKYROOT_REPAIRING);

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_smooth_ichorite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:smooth_ichorite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:ichorite_flagstones_from_smooth_ichorite_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_smooth_ichorite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:ichorite_flagstones_from_smooth_ichorite_stonecutting"
+    ]
+  }
+}

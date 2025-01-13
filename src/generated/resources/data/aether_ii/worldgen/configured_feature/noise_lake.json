@@ -8,16 +8,8 @@
     "lake_barrier_noise": "aether_ii:highlands/lakes/lake_barrier",
     "lake_floor_noise": "aether_ii:highlands/lakes/lake_floor",
     "lake_noise": "aether_ii:highlands/lakes/noise",
+    "lake_waterfall_noise": "aether_ii:highlands/lakes/lakes_waterfalls",
     "noise_start_value": 0.3,
-    "secondary_shore_block": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "aether_ii:aether_grass_block",
-        "Properties": {
-          "snowy": "false"
-        }
-      }
-    },
     "shore_block": {
       "type": "minecraft:simple_state_provider",
       "state": {
@@ -25,7 +17,7 @@
       }
     },
     "shore_noise": "aether_ii:highlands/lakes/lake_shore",
-    "shore_start_value": 0.29,
+    "shore_start_value": 0.31,
     "underwater_block": {
       "type": "minecraft:dual_noise_provider",
       "noise": {

@@ -8,13 +8,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 
 public class AetherIIShaders {
-//    private static ShaderProgram cloudCoverShader = new ShaderProgram(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cloud_cover"), DefaultVertexFormat.POSITION_COLOR, ShaderDefines.EMPTY);
-//
+    private static final ShaderProgram CLOUD_COVER_SHADER = new ShaderProgram(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "core/cloud_cover"), DefaultVertexFormat.POSITION_COLOR, ShaderDefines.EMPTY);
+
     public static void registerShaders(RegisterShadersEvent event) {
-//        event.registerShader(cloudCoverShader);
+        event.registerShader(CLOUD_COVER_SHADER);
     }
-//
-//    public static ShaderProgram getCloudCoverShader() {
-//        return cloudCoverShader;
-//    }
+
+    public static ShaderProgram getCloudCoverShader() {
+        return CLOUD_COVER_SHADER;
+    }
 }

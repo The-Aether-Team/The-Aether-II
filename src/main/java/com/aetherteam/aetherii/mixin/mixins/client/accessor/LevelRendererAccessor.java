@@ -1,16 +1,13 @@
 package com.aetherteam.aetherii.mixin.mixins.client.accessor;
 
-import com.mojang.blaze3d.vertex.MeshData;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexBuffer;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.client.CloudStatus;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.RenderBuffers;
+import net.minecraft.client.renderer.SkyRenderer;
+import net.minecraft.client.renderer.WeatherEffectRenderer;
 import net.minecraft.server.level.BlockDestructionProgress;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
-import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(LevelRenderer.class)
 public interface LevelRendererAccessor {
@@ -55,6 +52,15 @@ public interface LevelRendererAccessor {
 //
 //    @Invoker
 //    MeshData callBuildClouds(Tesselator tesselator, double x, double y, double z, Vec3 cloudColor);
+
+    @Accessor("renderBuffers")
+    RenderBuffers aether_ii$getRenderBuffers();
+
+    @Accessor("skyRenderer")
+    SkyRenderer aether_ii$getSkyRenderer();
+
+    @Accessor("weatherEffectRenderer")
+    WeatherEffectRenderer aether_ii$getWeatherEffectRenderer();
 
     @Accessor("destroyingBlocks")
     Int2ObjectMap<BlockDestructionProgress> aether_ii$getDestroyingBlocks();
