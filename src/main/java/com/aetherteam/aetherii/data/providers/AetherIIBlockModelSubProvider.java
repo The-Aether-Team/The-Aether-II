@@ -401,7 +401,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.createSnowyCross(plant);
 
         TextureMapping plantMapping = TextureMapping.plant(plant);
-        ResourceLocation potLocation = ModelTemplates.FLOWER_POT_CROSS.create(pot, plantMapping, this.modelOutput);
+        ResourceLocation potLocation = ModelTemplates.FLOWER_POT_CROSS.extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build().create(pot, plantMapping, this.modelOutput);
         this.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(pot, potLocation));
     }
 
