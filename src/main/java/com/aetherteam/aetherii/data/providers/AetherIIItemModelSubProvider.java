@@ -98,7 +98,7 @@ public class AetherIIItemModelSubProvider extends ItemModelGenerators {
                 .create(item, new TextureMapping().put(TextureSlot.TEXTURE, TextureMapping.getItemTexture(item, "_model")), this.modelOutput));
         ItemModel.Unbaked openGliderModelBase = ItemModelUtils.plainModel(AetherIIModelTemplates.AERCLOUD_GLIDER_OPEN.extend()
                 .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, (builder) -> builder.rotation(-90.0F, 0.0F, -35.0F).translation(11.55F, -2.0F, -0.1F))
-                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, (builder) -> builder.rotation(0.0F, 0.0F, 0.0F).translation(0.0F, 9.0F, -6.0F))
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, (builder) -> builder.rotation(0.0F, 0.0F, 0.0F).translation(-8.9F, 17.0F, 5.5F))
                 .build()
                 .create(item, new TextureMapping().put(TextureSlot.TEXTURE, TextureMapping.getItemTexture(item, "_model")), this.modelOutput));
 
