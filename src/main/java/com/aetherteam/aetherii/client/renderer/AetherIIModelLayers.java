@@ -44,6 +44,7 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation COCKATRICE = register("cockatrice");
     public static final ModelLayerLocation SWET = register("swet");
     public static final ModelLayerLocation SKEPHID = register("skephid");
+    public static final ModelLayerLocation CARRION_SPROUT = register("carrion_sprout");
 
 
     public static final ModelLayerLocation GLOVES = register("gloves");

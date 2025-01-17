@@ -228,6 +228,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateSpawnEgg(AetherIIItems.MOA_SPAWN_EGG.get(), 0x91B2DB, 0xE8FCFF);
         this.generateSpawnEgg(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG.get(), 0x595844, 0xD1F79E);
         this.generateSpawnEgg(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get(), 0xCF95E2, 0x7477AB);
+        this.generateSpawnEgg(AetherIIItems.CARRION_SPROUT_SPAWN_EGG.get(), 0xcad9e9, 0x93b1d1);
         this.generateSpawnEgg(AetherIIItems.ZEPHYR_SPAWN_EGG.get(), 0xDEE6E7, 0xC4EFFF);
         this.generateSpawnEgg(AetherIIItems.TEMPEST_SPAWN_EGG.get(), 0x676A7A, 0xDEEDFF);
         this.generateSpawnEgg(AetherIIItems.COCKATRICE_SPAWN_EGG.get(), 0x8363A6, 0xB8FFC3);

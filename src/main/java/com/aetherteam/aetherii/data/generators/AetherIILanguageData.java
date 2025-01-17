@@ -789,6 +789,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MOA_SPAWN_EGG, "Moa Spawn Egg");
         this.addItem(AetherIIItems.SKYROOT_LIZARD_SPAWN_EGG, "Skyroot Lizard Spawn Egg");
         this.addItem(AetherIIItems.AECHOR_PLANT_SPAWN_EGG, "Aechor Plant Spawn Egg");
+        this.addItem(AetherIIItems.CARRION_SPROUT_SPAWN_EGG, "Carrion Sprout Spawn Egg");
         this.addItem(AetherIIItems.ZEPHYR_SPAWN_EGG, "Zephyr Spawn Egg");
         this.addItem(AetherIIItems.TEMPEST_SPAWN_EGG, "Tempest Spawn Egg");
         this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
@@ -997,6 +998,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Hostile
         this.addEntityType(AetherIIEntityTypes.AECHOR_PLANT, "Aechor Plant");
+        this.addEntityType(AetherIIEntityTypes.CARRION_SPROUT, "Carrion Sprout");
         this.addEntityType(AetherIIEntityTypes.ZEPHYR, "Zephyr");
         this.addEntityType(AetherIIEntityTypes.TEMPEST, "Tempest");
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
@@ -1200,6 +1202,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.MOA.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.SKYROOT_LIZARD.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");

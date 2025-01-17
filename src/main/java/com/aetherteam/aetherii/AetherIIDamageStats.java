@@ -75,6 +75,10 @@ public class AetherIIDamageStats {
             .add(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
             .add(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .add(AetherIIAttributes.PIERCE_RESISTANCE, 0.0);
+    public static final AttributeSupplier.Builder CARRION_SPROUT = new AttributeSupplier.Builder()
+            .add(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
+            .add(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
+            .add(AetherIIAttributes.PIERCE_RESISTANCE, 0.0);
     public static final AttributeSupplier.Builder ZEPHYR = new AttributeSupplier.Builder()
             .add(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
             .add(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)

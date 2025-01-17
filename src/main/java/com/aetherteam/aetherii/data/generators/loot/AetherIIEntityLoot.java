@@ -105,6 +105,13 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
         );
+        this.add(AetherIIEntityTypes.CARRION_SPROUT.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.WYNDBERRY.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                        )
+                )
+        );
 
         this.add(AetherIIEntityTypes.ZEPHYR.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
