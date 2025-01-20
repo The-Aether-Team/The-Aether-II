@@ -82,7 +82,7 @@ public class CarrionSproutModel<T extends CarrionSproutRenderState> extends Enti
 
         PartDefinition stemLeefRoot = stem.addOrReplaceChild("stemLeefRoot", CubeListBuilder.create().texOffs(18, 37).addBox(-3.0F, 0.0F, -3.0F, 6.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 4.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
 
-        PartDefinition stemLeef = stemLeefRoot.addOrReplaceChild("stemLeef", CubeListBuilder.create().texOffs(6, 37).addBox(-3.0F, -8.0F, 0.0F, 6.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 0.5F, -2.0F, 1.3963F, -7.0686F, 0.0F));
+        PartDefinition stemLeef = stemLeefRoot.addOrReplaceChild("stemLeef", CubeListBuilder.create().texOffs(6, 37).addBox(-3.0F, -8.0F, 0.0F, 6.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 0.5F, -2.0F, 1.3963F, 0.7854F, 0.0F));
 
         PartDefinition stemLeef2 = stemLeefRoot.addOrReplaceChild("stemLeef2", CubeListBuilder.create().texOffs(6, 37).addBox(-3.0F, -8.0F, 0.0F, 6.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.0F, 0.5F, -2.0F, 1.3963F, -7.0686F, 0.0F));
 
