@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.construction;
 
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AmbrosiumWallTorchBlock extends WallTorchBlock {
     public AmbrosiumWallTorchBlock(Properties properties) {
-        super(ParticleTypes.SMOKE, properties);
+        super(ParticleTypes.SMOKE, properties.overrideLootTable(AetherIIBlocks.AMBROSIUM_TORCH.get().getLootTable()));
     }
 
     @Override
