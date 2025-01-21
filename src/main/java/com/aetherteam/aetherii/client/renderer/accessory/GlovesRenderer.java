@@ -92,8 +92,7 @@ public class GlovesRenderer implements AccessoryRenderer {
         if (stack.is(ItemTags.DYEABLE)) {
             IClientItemExtensions extensions = IClientItemExtensions.of(stack);
             int color = ARGB.opaque(extensions.getDefaultDyeColor(stack));
-            ResourceLocation dyedTexture = ResourceLocation.parse(texture.toString().replace(".png", "_dyed.png"));
-            VertexConsumer dyedConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(dyedTexture), stack.hasFoil());
+            VertexConsumer dyedConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
             glovesModel.renderToBuffer(poseStack, dyedConsumer, packedLight, OverlayTexture.NO_OVERLAY, color);
         }
 
