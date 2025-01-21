@@ -474,7 +474,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Glass
         this.addBlock(AetherIIBlocks.QUICKSOIL_GLASS, "Quicksoil Glass");
-        this.addBlock(AetherIIBlocks.TILED_QUICKSOIL_GLASS, "Tiles Quicksoil Glass");
+        this.addBlock(AetherIIBlocks.TILED_QUICKSOIL_GLASS, "Tiled Quicksoil Glass");
         this.addBlock(AetherIIBlocks.GRIDDED_QUICKSOIL_GLASS, "Gridded Quicksoil Glass");
         this.addBlock(AetherIIBlocks.SKYROOT_FRAMED_CRUDE_SCATTERGLASS, "Skyroot Framed Crude Scatterglass");
         this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_CRUDE_SCATTERGLASS, "Arkenium Framed Crude Scatterglass");
