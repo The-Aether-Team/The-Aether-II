@@ -285,8 +285,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.GREEN_SWET_GEL.get(),
                 AetherIIItems.BLUE_SWET_GEL.get(),
                 AetherIIItems.PURPLE_SWET_GEL.get(),
-                AetherIIItems.GOLDEN_SWET_GEL.get(),
-                AetherIIItems.WHITE_SWET_GEL.get()
+                AetherIIItems.GOLDEN_SWET_GEL.get()
         );
         this.tag(AetherIITags.Items.GOLDEN_AMBER_HARVESTERS).add(
                 AetherIIItems.ZANITE_AXE.get(),
@@ -310,7 +309,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BLUE_SWET_GEL.get(),
                 AetherIIItems.PURPLE_SWET_GEL.get(),
                 AetherIIItems.GOLDEN_SWET_GEL.get(),
-                AetherIIItems.WHITE_SWET_GEL.get(),
                 AetherIIItems.BLUEBERRY.get(),
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.WYNDBERRY.get(),

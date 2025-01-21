@@ -546,7 +546,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.BLUE_ARILUM_LANTERN, "Blue Arilum Lantern");
         this.addBlock(AetherIIBlocks.PURPLE_ARILUM_LANTERN, "Purple Arilum Lantern");
         this.addBlock(AetherIIBlocks.GOLDEN_ARILUM_LANTERN, "Golden Arilum Lantern");
-        this.addBlock(AetherIIBlocks.WHITE_ARILUM_LANTERN, "White Arilum Lantern");
 
         // Utility
         this.addBlock(AetherIIBlocks.AMBROSIUM_TORCH, "Ambrosium Torch");
@@ -697,7 +696,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUE_SWET_GEL, "Blue Swet Gel");
         this.addItem(AetherIIItems.PURPLE_SWET_GEL, "Purple Swet Gel");
         this.addItem(AetherIIItems.GOLDEN_SWET_GEL, "Golden Swet Gel");
-        this.addItem(AetherIIItems.WHITE_SWET_GEL, "White Swet Gel");
         this.addItem(AetherIIItems.SWET_SUGAR, "Swet Sugar");
         this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
@@ -722,7 +720,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.BLUE_SWET_JELLY, "Blue Swet Jelly");
         this.addItem(AetherIIItems.PURPLE_SWET_JELLY, "Purple Swet Jelly");
         this.addItem(AetherIIItems.GOLDEN_SWET_JELLY, "Golden Swet Jelly");
-        this.addItem(AetherIIItems.WHITE_SWET_JELLY, "White Swet Jelly");
         this.addItem(AetherIIItems.BURRUKAI_RIBS, "Burrukai Ribs");
         this.addItem(AetherIIItems.BURRUKAI_RIB_CUT, "Burrukai Rib Cut");
         this.addItem(AetherIIItems.KIRRID_CUTLET, "Kirrid Cutlet");

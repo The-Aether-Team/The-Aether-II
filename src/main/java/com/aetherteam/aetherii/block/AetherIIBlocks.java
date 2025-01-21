@@ -584,7 +584,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> BLUE_ARILUM_LANTERN = register("blue_arilum_lantern", arilumLanternProperties(MapColor.COLOR_LIGHT_BLUE));
     public static final DeferredBlock<Block> PURPLE_ARILUM_LANTERN = register("purple_arilum_lantern", arilumLanternProperties(MapColor.COLOR_MAGENTA));
     public static final DeferredBlock<Block> GOLDEN_ARILUM_LANTERN = register("golden_arilum_lantern", arilumLanternProperties(MapColor.COLOR_YELLOW));
-    public static final DeferredBlock<Block> WHITE_ARILUM_LANTERN = register("white_arilum_lantern", arilumLanternProperties(MapColor.COLOR_LIGHT_GRAY));
 
 
     // Utility

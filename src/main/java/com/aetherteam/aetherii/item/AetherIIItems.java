@@ -222,7 +222,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> BLUE_SWET_GEL = register("blue_swet_gel", SwetGelItem::new);
     public static final DeferredItem<Item> PURPLE_SWET_GEL = register("purple_swet_gel", SwetGelItem::new);
     public static final DeferredItem<Item> GOLDEN_SWET_GEL = register("golden_swet_gel", SwetGelItem::new);
-    public static final DeferredItem<Item> WHITE_SWET_GEL = register("white_swet_gel", SwetGelItem::new);
     public static final DeferredItem<Item> SWET_SUGAR = register("swet_sugar");
     public static final DeferredItem<Item> MOA_FEATHER = register("moa_feather", MoaFeatherItem::new, () -> new Item.Properties().component(AetherIIDataComponents.FEATHER_COLOR.get(), Moa.FeatherColor.LIGHT_BLUE));
     public static final DeferredItem<Item> COCKATRICE_FEATHER = register("cockatrice_feather");
@@ -248,7 +247,6 @@ public class AetherIIItems {
     public static final DeferredItem<Item> BLUE_SWET_JELLY = register("blue_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
     public static final DeferredItem<Item> PURPLE_SWET_JELLY = register("purple_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
     public static final DeferredItem<Item> GOLDEN_SWET_JELLY = register("golden_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
-    public static final DeferredItem<Item> WHITE_SWET_JELLY = register("white_swet_jelly", () -> new Item.Properties().food(AetherIIFoods.SWET_JELLY));
     public static final DeferredItem<Item> BURRUKAI_RIB_CUT = register("burrukai_rib_cut", () -> new Item.Properties().food(AetherIIFoods.BURRUKAI_RIB_CUT));
     public static final DeferredItem<Item> BURRUKAI_RIBS = register("burrukai_ribs", () -> new Item.Properties().food(AetherIIFoods.BURRUKAI_RIBS));
     public static final DeferredItem<Item> KIRRID_LOIN = register("kirrid_loin", () -> new Item.Properties().food(AetherIIFoods.KIRRID_LOIN));

@@ -27,7 +27,6 @@ public class AetherIISwetVariants {
     public static final ResourceKey<SwetVariant> GREEN = createKey("green");
     public static final ResourceKey<SwetVariant> PURPLE = createKey("purple");
     public static final ResourceKey<SwetVariant> GOLDEN = createKey("golden");
-    public static final ResourceKey<SwetVariant> WHITE = createKey("white");
 
     private static ResourceKey<SwetVariant> createKey(String name) {
         return ResourceKey.create(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -38,7 +37,6 @@ public class AetherIISwetVariants {
         register(context, GREEN, "green", AetherIIItems.GREEN_SWET_GEL, AetherIITags.Biomes.GREEN_SWET_SPAWNING);
         register(context, PURPLE, "purple", AetherIIItems.PURPLE_SWET_GEL, AetherIITags.Biomes.PURPLE_SWET_SPAWNING);
         register(context, GOLDEN, "golden", AetherIIItems.GOLDEN_SWET_GEL, AetherIITags.Biomes.GOLDEN_SWET_SPAWNING);
-        register(context, WHITE, "white", AetherIIItems.WHITE_SWET_GEL, AetherIITags.Biomes.WHITE_SWET_SPAWNING);
     }
 
     private static void register(BootstrapContext<SwetVariant> context, ResourceKey<SwetVariant> key, String name, Holder<Item> gelItem, ResourceKey<Biome> spawnBiome) {
