@@ -1,8 +1,12 @@
 package com.aetherteam.aetherii.data.generators.loot;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.advancement.predicate.KirridPredicate;
 import com.aetherteam.aetherii.advancement.predicate.SheepuffPredicate;
+import com.aetherteam.aetherii.advancement.predicate.SwetVariantPredicate;
+import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
@@ -10,9 +14,13 @@ import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.loot.AetherIILoot;
 import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -141,17 +149,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
         );
-        this.add(AetherIIEntityTypes.SWET.get(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.BLUE_SWET_GEL)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
-                        )
-                ).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))
-                                )
-                        ))
-        );
+        this.add(AetherIIEntityTypes.SWET.get(), createSwetTable(this.registries));
 
         this.add(AetherIIEntityTypes.SKEPHID.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
@@ -226,6 +224,23 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         return LootPool.lootPool().add(builder);
     }
 
+    public static LootTable.Builder createSwetTable(HolderLookup.Provider registries) {
+        AlternativesEntry.Builder builder = AlternativesEntry.alternatives();
+        HolderLookup.RegistryLookup<SwetVariant> registry = registries.lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY);
+        for (Holder<SwetVariant> swetVariant : registry.listElements().toList()) {
+            builder = builder.otherwise(LootItem.lootTableItem(swetVariant.value().gelItem().value())
+                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
+                    .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))
+                    .when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(new SwetVariantPredicate(swetVariant)))));
+        }
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.SWET_SUGAR)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F))
+                                )
+                        )
+                ).withPool(LootPool.lootPool().add(builder));
+    }
 
     @Override
     public Stream<EntityType<?>> getKnownEntityTypes() {

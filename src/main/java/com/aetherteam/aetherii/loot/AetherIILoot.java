@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.loot;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.aetherteam.aetherii.entity.passive.Sheepuff;
 import net.minecraft.Util;

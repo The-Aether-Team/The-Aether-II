@@ -47,6 +47,12 @@ public class AetherIIBiomeTagData extends BiomeTagsProvider {
         this.tag(AetherIITags.Biomes.CRIMSON_NYLIUM_CONVERSION).add(Biomes.CRIMSON_FOREST);
         this.tag(AetherIITags.Biomes.WARPED_NYLIUM_CONVERSION).add(Biomes.WARPED_FOREST);
 
+        this.tag(AetherIITags.Biomes.BLUE_SWET_SPAWNING).addTags(AetherIITags.Biomes.HIGHFIELDS).addTags(AetherIITags.Biomes.MAGNETIC).addTags(AetherIITags.Biomes.ARCTIC);
+        this.tag(AetherIITags.Biomes.GREEN_SWET_SPAWNING).addTags(AetherIITags.Biomes.HIGHFIELDS).addTags(AetherIITags.Biomes.MAGNETIC);
+        this.tag(AetherIITags.Biomes.PURPLE_SWET_SPAWNING).addTags(AetherIITags.Biomes.HIGHFIELDS).addTags(AetherIITags.Biomes.MAGNETIC).addTags(AetherIITags.Biomes.ARCTIC);
+        this.tag(AetherIITags.Biomes.GOLDEN_SWET_SPAWNING).addTags(AetherIITags.Biomes.HIGHFIELDS);
+        this.tag(AetherIITags.Biomes.WHITE_SWET_SPAWNING).addTags(AetherIITags.Biomes.ARCTIC);
+
         this.tag(AetherIITags.Biomes.ARCTIC_ICE).add(
                 HighlandsBiomes.FLOURISHING_FIELD,
                 HighlandsBiomes.VERDANT_WOODS,

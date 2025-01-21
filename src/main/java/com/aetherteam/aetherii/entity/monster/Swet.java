@@ -1,19 +1,29 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;
+import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -22,17 +32,26 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.WolfVariant;
+import net.minecraft.world.entity.animal.WolfVariants;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.Objects;
+import java.util.Optional;
 
 public class Swet extends Mob implements Enemy {
+    private static final EntityDataAccessor<Holder<SwetVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Swet.class, AetherIIDataSerializers.SWET_VARIANT.get());
     private static final EntityDataAccessor<Boolean> DATA_MID_JUMP_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DATA_WATER_DAMAGE_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_FOOD_SATURATION_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
@@ -72,6 +91,7 @@ public class Swet extends Mob implements Enemy {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
+        builder.define(DATA_VARIANT_ID, this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).getOrThrow(AetherIISwetVariants.BLUE));
         builder.define(DATA_MID_JUMP_ID, false);
         builder.define(DATA_WATER_DAMAGE_SCALE_ID, 0.0F);
         builder.define(DATA_FOOD_SATURATION_ID, 1.0F);
@@ -105,6 +125,21 @@ public class Swet extends Mob implements Enemy {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SWET_SPAWNABLE_ON)
                 && level.getRawBrightness(pos, 0) <= 8
                 && level.getDifficulty() != Difficulty.PEACEFUL;
+    }
+
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
+        Holder<Biome> biome = level.getBiome(this.blockPosition());
+        Holder<SwetVariant> variant;
+        if (spawnData instanceof SwetGroupData groupData) {
+            variant = groupData.type;
+        } else {
+            variant = AetherIISwetVariants.getSpawnVariant(this.getRandom(), this.registryAccess(), biome);
+            spawnData = new SwetGroupData(variant);
+        }
+        this.setVariant(variant);
+        return spawnData;
     }
 
     /**
@@ -192,6 +227,14 @@ public class Swet extends Mob implements Enemy {
         if (this.level() instanceof ServerLevel level) {
             level.broadcastEntityEvent(this, (byte) 70);
         }
+    }
+
+    public Holder<SwetVariant> getVariant() {
+        return this.entityData.get(DATA_VARIANT_ID);
+    }
+
+    public void setVariant(Holder<SwetVariant> variant) {
+        this.entityData.set(DATA_VARIANT_ID, variant);
     }
 
     /**
@@ -335,6 +378,7 @@ public class Swet extends Mob implements Enemy {
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
+        this.getVariant().unwrapKey().ifPresent((key) -> tag.putString("variant", key.location().toString()));
         tag.putFloat("WaterDamageScale", this.getWaterDamageScale());
         tag.putFloat("Saturation", this.getFoodSaturation());
     }
@@ -342,6 +386,7 @@ public class Swet extends Mob implements Enemy {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
+        Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant"))).map((location) -> ResourceKey.create(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, location)).flatMap((key) -> this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).get(key)).ifPresent(this::setVariant);
         if (tag.contains("WaterDamageScale")) {
             this.setWaterDamageScale(tag.getFloat("WaterDamageScale"));
         }
@@ -539,6 +584,15 @@ public class Swet extends Mob implements Enemy {
                 moveHelperController.setCanJump(true);
             }
             moveHelperController.setDirection(this.chosenDegrees, false);
+        }
+    }
+
+    public static class SwetGroupData extends AgeableMob.AgeableMobGroupData {
+        public final Holder<SwetVariant> type;
+
+        public SwetGroupData(Holder<SwetVariant> type) {
+            super(false);
+            this.type = type;
         }
     }
 }

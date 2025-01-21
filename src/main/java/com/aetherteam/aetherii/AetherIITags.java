@@ -222,6 +222,12 @@ public class AetherIITags {
         public static final TagKey<Biome> CRIMSON_NYLIUM_CONVERSION = tag("crimson_nylium_conversion");
         public static final TagKey<Biome> WARPED_NYLIUM_CONVERSION = tag("warped_nylium_conversion");
 
+        public static final TagKey<Biome> BLUE_SWET_SPAWNING = tag("blue_swet_spawning");
+        public static final TagKey<Biome> GREEN_SWET_SPAWNING = tag("green_swet_spawning");
+        public static final TagKey<Biome> PURPLE_SWET_SPAWNING = tag("purple_swet_spawning");
+        public static final TagKey<Biome> GOLDEN_SWET_SPAWNING = tag("golden_swet_spawning");
+        public static final TagKey<Biome> WHITE_SWET_SPAWNING = tag("white_swet_spawning");
+
         public static final TagKey<Biome> ARCTIC_ICE = tag("arctic_ice");
 
         public static final TagKey<Biome> AETHER_MUSIC = tag("aether_music");

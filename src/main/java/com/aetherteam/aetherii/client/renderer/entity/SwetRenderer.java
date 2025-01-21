@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.layers.SwetGelLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.SwetModel;
@@ -11,8 +10,6 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class SwetRenderer extends MobRenderer<Swet, SwetRenderState, SwetModel<SwetRenderState>> {
-    public static final ResourceLocation SWET_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/swet/blue_swet.png");
-
     public SwetRenderer(EntityRendererProvider.Context context) {
         super(context, new SwetModel<>(context.bakeLayer(AetherIIModelLayers.SWET)), 0.3F);
         this.addLayer(new SwetGelLayer(this, context.getModelSet()));
@@ -28,13 +25,14 @@ public class SwetRenderer extends MobRenderer<Swet, SwetRenderState, SwetModel<S
         super.extractRenderState(p_362733_, p_360515_, p_361157_);
         p_360515_.waterDamageScale = p_362733_.getWaterDamageScale();
         p_360515_.foodSaturation = p_362733_.getFoodSaturation();
+        p_360515_.texture = p_362733_.getVariant().value().texture();
         p_360515_.groundAnimationState.copyFrom(p_362733_.groundAnimationState);
         p_360515_.jumpAnimationState.copyFrom(p_362733_.jumpAnimationState);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SwetRenderState aechorPlant) {
-        return SWET_LOCATION;
+    public ResourceLocation getTextureLocation(SwetRenderState swet) {
+        return swet.texture;
     }
 
 }
