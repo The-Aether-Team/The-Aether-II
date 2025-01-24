@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.api.guidebook;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
+import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -19,47 +20,75 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public record BestiaryEntry(Holder<EntityType<?>> entityType, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, Optional<Double> scaleMultiplier, String descriptionKey, List<LootDisplay> loot, Optional<TagKey<Item>> food, ResourceLocation observationAdvancement, ResourceLocation understandingAdvancement) {
+public class BestiaryEntry extends GuidebookEntry {
     public static final Codec<BestiaryEntry> DIRECT_CODEC =
             RecordCodecBuilder.create(in -> in.group(
-                    BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().fieldOf("entity_type").forGetter(BestiaryEntry::entityType),
-                    ResourceLocation.CODEC.fieldOf("icon_discovered").forGetter(BestiaryEntry::icon),
-                    Codec.STRING.optionalFieldOf("name").forGetter(BestiaryEntry::name),
-                    Codec.STRING.optionalFieldOf("slot_name").forGetter(BestiaryEntry::slotName),
-                    Codec.STRING.optionalFieldOf("slot_subtitle").forGetter(BestiaryEntry::slotSubtitle),
-                    Codec.DOUBLE.optionalFieldOf("scale_multiplier").forGetter(BestiaryEntry::scaleMultiplier),
-                    Codec.STRING.fieldOf("description_key").forGetter(BestiaryEntry::descriptionKey),
-                    LootDisplay.DIRECT_CODEC.sizeLimitedListOf(3).fieldOf("loot").forGetter(BestiaryEntry::loot),
-                    TagKey.codec(Registries.ITEM).optionalFieldOf("food").forGetter(BestiaryEntry::food),
-                    ResourceLocation.CODEC.fieldOf("observation_advancement").forGetter(BestiaryEntry::observationAdvancement),
-                    ResourceLocation.CODEC.fieldOf("understanding_advancement").forGetter(BestiaryEntry::understandingAdvancement)
+                    BestiaryEntry.ICON.mapCodec().forGetter((entry) -> entry.getIcon().getValue()),
+                    BestiaryEntry.NAME.mapCodec().forGetter((entry) -> entry.getName().getValue()),
+                    BestiaryEntry.SLOT_NAME.mapCodec().forGetter((entry) -> entry.getSlotName().getValue()),
+                    BestiaryEntry.SLOT_SUBTITLE.mapCodec().forGetter((entry) -> entry.getSlotSubtitle().getValue()),
+                    BestiaryEntry.DESCRIPTION_KEY.mapCodec().forGetter((entry) -> entry.getDescriptionKey().getValue()),
+                    BestiaryEntry.ENTITY_TYPE.mapCodec().forGetter((entry) -> entry.getEntityType().getValue()),
+                    BestiaryEntry.SCALE_MULTIPLIER.mapCodec().forGetter((entry) -> entry.getScaleMultiplier().getValue()),
+                    LootDisplay.DIRECT_CODEC.sizeLimitedListOf(3).fieldOf("loot").forGetter((entry) -> entry.getLoot().value()),
+                    TagKey.codec(Registries.ITEM).optionalFieldOf("food").forGetter((entry) -> entry.getFood().value())
             ).apply(in, BestiaryEntry::new));
     public static final Codec<Holder<BestiaryEntry>> REFERENCE_CODEC = RegistryFileCodec.create(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, DIRECT_CODEC);
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<BestiaryEntry>> STREAM_CODEC = ByteBufCodecs.holderRegistry(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
 
-    public static final class LootDisplay {
-            public static final Codec<LootDisplay> DIRECT_CODEC =
-                    RecordCodecBuilder.create(in -> in.group(
-                            Codec.either(BuiltInRegistries.ITEM.holderByNameCodec(), BuiltInRegistries.BLOCK.holderByNameCodec()).fieldOf("item").forGetter(LootDisplay::item),
-                            Codec.DOUBLE.fieldOf("chance").forGetter(LootDisplay::chance),
-                            Codec.INT.fieldOf("min_count").forGetter(LootDisplay::minCount),
-                            Codec.INT.fieldOf("max_count").forGetter(LootDisplay::maxCount)
-                    ).apply(in, LootDisplay::new));
+    public static final DataTemplate<Holder<EntityType<?>>> ENTITY_TYPE = new DataTemplate<>("entity_type", BuiltInRegistries.ENTITY_TYPE.holderByNameCodec()::fieldOf);
+    public static final DataTemplate<Optional<Double>> SCALE_MULTIPLIER = new DataTemplate<>("scale_multiplier", Codec.DOUBLE::optionalFieldOf);
 
-        private final Either<Holder<Item>, Holder<Block>> item;
-        private final double chance;
-        private final int minCount;
-        private final int maxCount;
+    private final Info<Holder<EntityType<?>>> entityType;
+    private final Info<Optional<Double>> scaleMultiplier;
+    private final Info<List<LootDisplay>> loot; //todo need to make each loot display entry individually toggleable
+    private final Info<Optional<TagKey<Item>>> food;
 
-        public LootDisplay(Either<Holder<Item>, Holder<Block>> item, double chance, int minCount, int maxCount) {
-            this.item = item;
-            this.chance = chance;
-            this.minCount = minCount;
-            this.maxCount = maxCount;
-        }
+    public BestiaryEntry(ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<EntityType<?>> entityType, Optional<Double> scaleMultiplier, List<LootDisplay> loot, Optional<TagKey<Item>> food) {
+        super(icon, name, slotName, slotSubtitle, descriptionKey);
+        this.entityType = this.info(ENTITY_TYPE, entityType);
+        this.scaleMultiplier = this.info(SCALE_MULTIPLIER, scaleMultiplier);
+        this.loot = this.info(loot);
+        this.food = this.info(food);
+    }
+
+    public BestiaryEntry(Info<ResourceLocation> icon, Info<Optional<String>> name, Info<Optional<String>> slotName, Info<Optional<String>> slotSubtitle, Info<String> descriptionKey, Info<Holder<EntityType<?>>> entityType, Info<Optional<Double>> scaleMultiplier, Info<List<LootDisplay>> loot, Info<Optional<TagKey<Item>>> food) {
+        super(icon, name, slotName, slotSubtitle, descriptionKey);
+        this.entityType = entityType;
+        this.scaleMultiplier = scaleMultiplier;
+        this.loot = loot;
+        this.food = food;
+    }
+
+    public Info<Holder<EntityType<?>>> getEntityType() {
+        return this.entityType;
+    }
+
+    public Info<Optional<Double>> getScaleMultiplier() {
+        return this.scaleMultiplier;
+    }
+
+    public Info<List<LootDisplay>> getLoot() {
+        return this.loot;
+    }
+
+    public Info<Optional<TagKey<Item>>> getFood() {
+        return this.food;
+    }
+
+    public record LootDisplay(Either<Holder<Item>, Holder<Block>> item, double chance, int minCount, int maxCount) {
+        public static final Codec<LootDisplay> DIRECT_CODEC =
+                RecordCodecBuilder.create(in -> in.group(
+                        Codec.either(BuiltInRegistries.ITEM.holderByNameCodec(), BuiltInRegistries.BLOCK.holderByNameCodec()).fieldOf("item").forGetter(LootDisplay::item),
+                        Codec.DOUBLE.fieldOf("chance").forGetter(LootDisplay::chance),
+                        Codec.INT.fieldOf("min_count").forGetter(LootDisplay::minCount),
+                        Codec.INT.fieldOf("max_count").forGetter(LootDisplay::maxCount)
+                ).apply(in, LootDisplay::new));
 
         public static LootDisplay item(Holder<Item> item, double chance, int minCount, int maxCount) {
             return new LootDisplay(Either.left(item), chance, minCount, maxCount);
@@ -69,23 +98,7 @@ public record BestiaryEntry(Holder<EntityType<?>> entityType, ResourceLocation i
             return new LootDisplay(Either.right(item), chance, minCount, maxCount);
         }
 
-        public Either<Holder<Item>, Holder<Block>> item() {
-            return this.item;
-        }
-
-        public double chance() {
-            return this.chance;
-        }
-
-        public int minCount() {
-            return this.minCount;
-        }
-
-        public int maxCount() {
-            return this.maxCount;
-        }
-
-        public ItemLike getItemLike() {
+        public ItemLike getItemLike() { //todo wait i dont need this. all blocks are registered to the item registry too.
             if (this.item.right().isPresent()) {
                 return this.item.right().get().value();
             } else if (this.item.left().isPresent()) {
@@ -93,6 +106,20 @@ public record BestiaryEntry(Holder<EntityType<?>> entityType, ResourceLocation i
             } else {
                 return Items.AIR;
             }
+        }
+    }
+
+    public static class Client extends BestiaryEntry {
+        private final Map<String, Info<?>> clientValues = new HashMap<>();
+
+        public Client(BestiaryEntry entry) {
+            super(entry.getIcon(), entry.getName(), entry.getSlotName(), entry.getSlotSubtitle(), entry.getDescriptionKey(), entry.getEntityType(), entry.getScaleMultiplier(), entry.getLoot(), entry.getFood());
+            this.clientValues.putAll(this.getValues());
+        }
+
+        @Override
+        public Map<String, Info<?>> getValues() {
+            return ImmutableMap.copyOf(this.clientValues);
         }
     }
 }
