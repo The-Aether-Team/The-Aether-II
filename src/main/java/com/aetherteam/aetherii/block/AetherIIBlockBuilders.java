@@ -82,7 +82,7 @@ public class AetherIIBlockBuilders {
                 .isViewBlocking(AetherIIBlockBuilders::never)
                 .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .sound(SoundType.FROGLIGHT)
-                .lightLevel((state) -> 15);
+                .lightLevel((state) -> 8);
     }
 
     public static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {

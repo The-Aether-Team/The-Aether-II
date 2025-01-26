@@ -5,7 +5,8 @@
     "particle": "#texture"
   },
   "elements": [
-    {   "from": [ 2, 2, 2 ],
+    { "from": [ 2, 2, 2 ],
+      "light_emission": 15,
       "to": [ 14, 14, 14 ],
       "faces": {
         "down":  { "uv": [ 2, 2, 14, 14 ], "texture": "#inside" },
@@ -16,7 +17,7 @@
         "east":  { "uv": [ 2, 2, 14, 14 ], "texture": "#inside" }
       }
     },
-    {   "from": [ 0, 0, 0 ],
+    { "from": [ 0, 0, 0 ],
       "to": [ 16, 16, 16 ],
       "faces": {
         "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#texture", "cullface": "down" },
