@@ -71,10 +71,16 @@ public class AetherIIBlockBuilders {
                 .pushReaction(PushReaction.DESTROY);
     }
 
+    @SuppressWarnings("deprecation")
     public static Supplier<Block.Properties> arilumLanternProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
                 .mapColor(mapColor)
                 .friction(0.8F)
+                .noOcclusion()
+                .forceSolidOff()
+                .isSuffocating(AetherIIBlockBuilders::never)
+                .isViewBlocking(AetherIIBlockBuilders::never)
+                .isRedstoneConductor(AetherIIBlockBuilders::never)
                 .sound(SoundType.FROGLIGHT)
                 .lightLevel((state) -> 15);
     }

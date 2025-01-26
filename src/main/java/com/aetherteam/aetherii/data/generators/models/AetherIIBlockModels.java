@@ -339,7 +339,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Arilum Lantern
         this.createTrivialCube(AetherIIBlocks.GREEN_ARILUM_LANTERN.get());
-        this.createTrivialCube(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
+        this.createArilumLantern(AetherIIBlocks.BLUE_ARILUM_LANTERN.get());
         this.createTrivialCube(AetherIIBlocks.PURPLE_ARILUM_LANTERN.get());
         this.createTrivialCube(AetherIIBlocks.GOLDEN_ARILUM_LANTERN.get());
 
