@@ -580,10 +580,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> GRAVITITE_BLOCK = register("gravitite_block", () -> Block.Properties.of().mapColor(MapColor.COLOR_PINK).instrument(NoteBlockInstrument.PLING).strength(5.0F, 6.0F).requiresCorrectToolForDrops().sound(SoundType.METAL));
 
     // Arilum Lantern
-    public static final DeferredBlock<Block> GREEN_ARILUM_LANTERN = register("green_arilum_lantern", arilumLanternProperties(MapColor.COLOR_LIGHT_GREEN));
-    public static final DeferredBlock<Block> BLUE_ARILUM_LANTERN = register("blue_arilum_lantern", arilumLanternProperties(MapColor.COLOR_LIGHT_BLUE));
-    public static final DeferredBlock<Block> PURPLE_ARILUM_LANTERN = register("purple_arilum_lantern", arilumLanternProperties(MapColor.COLOR_MAGENTA));
-    public static final DeferredBlock<Block> GOLDEN_ARILUM_LANTERN = register("golden_arilum_lantern", arilumLanternProperties(MapColor.COLOR_YELLOW));
+    public static final DeferredBlock<Block> GREEN_ARILUM_LANTERN = register("green_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_LIGHT_GREEN));
+    public static final DeferredBlock<Block> BLUE_ARILUM_LANTERN = register("blue_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_LIGHT_BLUE));
+    public static final DeferredBlock<Block> PURPLE_ARILUM_LANTERN = register("purple_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_MAGENTA));
+    public static final DeferredBlock<Block> GOLDEN_ARILUM_LANTERN = register("golden_arilum_lantern", HalfTransparentBlock::new, arilumLanternProperties(MapColor.COLOR_YELLOW));
 
 
     // Utility
