@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.block.construction;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.FrictionCapped;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.IronBarsBlock;
@@ -19,5 +21,10 @@ public class QuicksoilGlassPaneBlock extends IronBarsBlock implements FrictionCa
     @Override
     public float getFriction(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         return this.getCappedFriction(entity, super.getFriction());
+    }
+
+    @Override
+    protected boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
+        return adjacentBlockState.is(AetherIITags.Blocks.QUICKSOIL_GLASS_PANE) || super.skipRendering(state, adjacentBlockState, side);
     }
 }

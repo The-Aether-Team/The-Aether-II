@@ -13,18 +13,16 @@ import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
-import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
 import com.aetherteam.nitrogen.event.listeners.TooltipListeners;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.equipment.EquipmentAsset;
-import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterDimensionTransitionScreenEvent;
@@ -85,18 +83,11 @@ public class AetherIIClient {
     }
 
     public static void registerTooltipOverrides() {
-        //todo new component tooltip system from neoforge
         TooltipListeners.TooltipPredicate setBonusPredicate = (player, itemStack, components, context, component) -> {
             if (player != null && component.getString().contains("%s")) {
-                ResourceKey<EquipmentAsset> asset = null;
-                Equippable equippable = itemStack.get(DataComponents.EQUIPPABLE);
-                if (equippable != null && equippable.assetId().isPresent()) {
-                    asset = equippable.assetId().get();
-                } else if (itemStack.getItem() instanceof GlovesItem glovesItem) {
-                    asset = glovesItem.getMaterial();
-                }
-                if (asset != null) {
-                    int currentEquipmentCount = EquipmentUtil.getArmorCount(player, asset);
+                TagKey<Item> armorSet = itemStack.get(AetherIIDataComponents.ARMOR_SET);
+                if (armorSet != null) {
+                    int currentEquipmentCount = EquipmentUtil.getArmorCount(player, armorSet);
                     Component finalComponent;
                     if (currentEquipmentCount >= 3) {
                         finalComponent = Component.literal("3/3").withStyle(ChatFormatting.WHITE);

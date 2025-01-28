@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "aether_ii:block/wisproot_small_shingles",
+      "y": 90
+    },
+    "facing=north": {
       "model": "aether_ii:block/wisproot_small_shingles"
+    },
+    "facing=south": {
+      "model": "aether_ii:block/wisproot_small_shingles",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "aether_ii:block/wisproot_small_shingles",
+      "y": 270
     }
   }
 }

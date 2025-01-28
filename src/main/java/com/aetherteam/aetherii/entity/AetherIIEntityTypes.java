@@ -58,6 +58,8 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
             () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.CREATURE).sized(0.9F, 0.5F).clientTrackingRange(10).ridingOffset(0).build(AetherIIEntities.SKYROOT_LIZARD));
+    public static final DeferredHolder<EntityType<?>, EntityType<CarrionSprout>> CARRION_SPROUT = ENTITY_TYPES.register("carrion_sprout",
+            () -> EntityType.Builder.of(CarrionSprout::new, MobCategory.CREATURE).sized(0.8F, 1.0F).clientTrackingRange(8).build(AetherIIEntities.CARRION_SPROUT));
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
@@ -129,6 +131,7 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.ARCTIC_KIRRID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.MOA.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AetherAnimal::checkAetherAnimalSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.CARRION_SPROUT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CarrionSprout::checkCarrionSproutSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
 
         // Hostile
         event.register(AetherIIEntityTypes.AECHOR_PLANT.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AechorPlant::checkAechorPlantSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
@@ -157,6 +160,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIDamageStats.merge(Kirrid.createMobAttributes(), AetherIIDamageStats.ARCTIC_KIRRID).build());
         event.put(AetherIIEntityTypes.MOA.get(), AetherIIDamageStats.merge(Moa.createMobAttributes(), AetherIIDamageStats.MOA).build());
         event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizard.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.CARRION_SPROUT.get(), AetherIIDamageStats.merge(CarrionSprout.createMobAttributes(), AetherIIDamageStats.CARRION_SPROUT).build());
 
         // Hostile
         event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AetherIIDamageStats.merge(AechorPlant.createMobAttributes(), AetherIIDamageStats.AECHOR_PLANT).build());

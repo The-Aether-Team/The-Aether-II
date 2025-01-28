@@ -8,26 +8,26 @@
     },
     "horizontal_radius_multiplier": {
       "type": "minecraft:uniform",
-      "max_exclusive": 1.7,
+      "max_exclusive": 2.2,
       "min_inclusive": 0.9
     },
     "lava_level": {
       "above_bottom": -64
     },
-    "probability": 0.175,
+    "probability": 0.25,
     "replaceable": "#aether_ii:aether_carver_replaceables",
     "vertical_radius_multiplier": {
       "type": "minecraft:uniform",
-      "max_exclusive": 1.5,
+      "max_exclusive": 2.0,
       "min_inclusive": 1.0
     },
     "y": {
-      "type": "minecraft:uniform",
+      "type": "minecraft:trapezoid",
       "max_inclusive": {
         "absolute": 256
       },
       "min_inclusive": {
-        "above_bottom": 32
+        "above_bottom": -16
       }
     },
     "yScale": {

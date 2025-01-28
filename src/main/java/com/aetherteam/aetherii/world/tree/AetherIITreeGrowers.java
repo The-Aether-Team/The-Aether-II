@@ -128,8 +128,8 @@ public class AetherIITreeGrowers {
 
     public static final TreeGrower AMBEROOT = new TreeGrower(
             "amberoot",
-            Optional.of(HighlandsConfiguredFeatures.TREES_AMBEROOT_SPARSE),
             Optional.empty(),
+            Optional.of(HighlandsConfiguredFeatures.TREES_AMBEROOT_SPARSE),
             Optional.empty());
 
     public static final Map<TreeGrower, TreeGrower> NORMAL_TO_IRRADIATED = Map.ofEntries(

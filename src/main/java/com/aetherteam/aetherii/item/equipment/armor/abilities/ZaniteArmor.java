@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.armor.abilities;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -21,7 +21,7 @@ public interface ZaniteArmor {
         AttributeInstance miningSpeedAttribute = player.getAttribute(Attributes.MINING_EFFICIENCY);
         AttributeInstance movementSpeedAttribute = player.getAttribute(Attributes.MOVEMENT_EFFICIENCY);
 
-        if (EquipmentUtil.hasArmorAbility(player, AetherIIEquipmentAssets.ZANITE)) {
+        if (EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.ZANITE_ARMOR)) {
             if (attackSpeedAttribute != null && !attackSpeedAttribute.hasModifier(ZANITE_ATTACK_SPEED)) {
                 attackSpeedAttribute.addTransientModifier(new AttributeModifier(ZANITE_ATTACK_SPEED, 2, AttributeModifier.Operation.ADD_VALUE));
             }

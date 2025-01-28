@@ -13,6 +13,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
+import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 
 public class AetherIICarvers {
@@ -25,13 +26,13 @@ public class AetherIICarvers {
     public static void bootstrap(BootstrapContext<ConfiguredWorldCarver<?>> context) {
         HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
         context.register(HIGHLANDS_CAVE, WorldCarver.CAVE.configured(new CaveCarverConfiguration(
-                                0.175F,
-                                UniformHeight.of(VerticalAnchor.aboveBottom(32), VerticalAnchor.absolute(256)),
+                                0.25F,
+                                TrapezoidHeight.of(VerticalAnchor.aboveBottom(-16), VerticalAnchor.absolute(256)),
                                 UniformFloat.of(0.3F, 0.9F),
                                 VerticalAnchor.aboveBottom(-64),
                                 blocks.getOrThrow(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES),
-                                UniformFloat.of(0.9F, 1.7F),
-                                UniformFloat.of(1.0F, 1.5F),
+                                UniformFloat.of(0.9F, 2.2F),
+                                UniformFloat.of(1.0F, 2.0F),
                                 UniformFloat.of(-1.0F, -0.4F)
                         )
                 )

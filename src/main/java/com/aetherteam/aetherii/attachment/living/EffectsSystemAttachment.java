@@ -1,8 +1,9 @@
 package com.aetherteam.aetherii.attachment.living;
 
-import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
+import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupRemovePacket;
 import com.aetherteam.aetherii.network.packet.clientbound.EffectBuildupSetPacket;
 import com.google.common.collect.ImmutableMap;
@@ -13,6 +14,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -67,9 +70,9 @@ public class EffectsSystemAttachment implements INBTSerializable<CompoundTag> {
         Holder<MobEffect> effect = buildup.type();
         if (!this.entity.hasEffect(effect)) {
             double modifiedAmount = amount;
-            if (AetherIIEffectResistances.RESISTANCES.containsKey(effect) && AetherIIEffectResistances.RESISTANCES.get(effect) != null) {
-                if (this.entity.getAttributes().hasAttribute(AetherIIEffectResistances.RESISTANCES.get(effect))) {
-                    modifiedAmount -= modifiedAmount * this.entity.getAttributeValue(AetherIIEffectResistances.RESISTANCES.get(effect));
+            for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) this.entity.getAttributes()).aether_ii$getAttributes().entrySet()) {
+                if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute && effectResistanceAttribute.getEffect().is(effect)) {
+                    modifiedAmount -= modifiedAmount * attributeEntries.getValue().getValue();
                 }
             }
             if (!this.activeBuildups.containsKey(effect)) {

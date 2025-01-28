@@ -12,4 +12,5 @@ public class AetherIIEntitySubPredicates {
 
     public static final DeferredHolder<MapCodec<? extends EntitySubPredicate>, MapCodec<KirridPredicate>> KIRRID = ENTITY_SUB_PREDICATES.register("kirrid", () -> KirridPredicate.CODEC);
     public static final DeferredHolder<MapCodec<? extends EntitySubPredicate>, MapCodec<SheepuffPredicate>> SHEEPUFF = ENTITY_SUB_PREDICATES.register("sheepuff", () -> SheepuffPredicate.CODEC);
+    public static final DeferredHolder<MapCodec<? extends EntitySubPredicate>, MapCodec<SwetVariantPredicate>> SWET = ENTITY_SUB_PREDICATES.register("swet", () -> SwetVariantPredicate.CODEC);
 }

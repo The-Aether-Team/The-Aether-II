@@ -1,8 +1,12 @@
 {
   "values": [
-    "aether_ii:blue_aercloud",
-    "aether_ii:green_aercloud",
-    "aether_ii:purple_aercloud",
-    "aether_ii:storm_aercloud"
+    "aether_ii:quicksoil",
+    "aether_ii:ferrosite_sand",
+    "aether_ii:arctic_packed_ice",
+    "aether_ii:unstable_holystone",
+    "aether_ii:unstable_undershale",
+    "#aether_ii:aether_underground_blocks",
+    "#aether_ii:aerclouds",
+    "#minecraft:leaves"
   ]
 }

@@ -35,6 +35,7 @@ public class AetherIIEntities {
 
     //Hostile
     public static final ResourceKey<EntityType<?>> AECHOR_PLANT = createKey("aechor_plant");
+    public static final ResourceKey<EntityType<?>> CARRION_SPROUT = createKey("carrion_sprout");
     public static final ResourceKey<EntityType<?>> ZEPHYR = createKey("zephyr");
     public static final ResourceKey<EntityType<?>> TEMPEST = createKey("tempest");
     public static final ResourceKey<EntityType<?>> COCKATRICE = createKey("cockatrice");

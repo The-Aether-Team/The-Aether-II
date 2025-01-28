@@ -38,6 +38,12 @@ public class AetherIITags {
         public static final TagKey<Block> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Block> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Block> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+        public static final TagKey<Block> QUICKSOIL_GLASS = tag("quicksoil_glass");
+        public static final TagKey<Block> CRUDE_SCATTERGLASS = tag("crude_scatterglass");
+        public static final TagKey<Block> SCATTERGLASS = tag("scatterglass");
+        public static final TagKey<Block> QUICKSOIL_GLASS_PANE = tag("quicksoil_glass_pane");
+        public static final TagKey<Block> CRUDE_SCATTERGLASS_PANE = tag("crude_scatterglass_pane");
+        public static final TagKey<Block> SCATTERGLASS_PANE = tag("scatterglass_pane");
         public static final TagKey<Block> ALLOWED_BUCKET_PICKUP = tag("allowed_bucket_pickup");
         public static final TagKey<Block> ACID_RESISTANT = tag("acid_resistant");
         public static final TagKey<Block> ACID_INSTANTLY_DESTROYS = tag("acid_instantly_destroys");
@@ -70,6 +76,7 @@ public class AetherIITags {
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");
+        public static final TagKey<Block> CARRION_SPROUT_SPAWNABLE_ON = tag("carrion_sprout_spawnable_on");
         public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
         public static final TagKey<Block> SWET_SPAWNABLE_ON = tag("swet_spawnable_on");
 
@@ -220,6 +227,12 @@ public class AetherIITags {
         public static final TagKey<Biome> PODZOL_CONVERSION = tag("podzol_conversion");
         public static final TagKey<Biome> CRIMSON_NYLIUM_CONVERSION = tag("crimson_nylium_conversion");
         public static final TagKey<Biome> WARPED_NYLIUM_CONVERSION = tag("warped_nylium_conversion");
+
+        public static final TagKey<Biome> BLUE_SWET_SPAWNING = tag("blue_swet_spawning");
+        public static final TagKey<Biome> GREEN_SWET_SPAWNING = tag("green_swet_spawning");
+        public static final TagKey<Biome> PURPLE_SWET_SPAWNING = tag("purple_swet_spawning");
+        public static final TagKey<Biome> GOLDEN_SWET_SPAWNING = tag("golden_swet_spawning");
+        public static final TagKey<Biome> WHITE_SWET_SPAWNING = tag("white_swet_spawning");
 
         public static final TagKey<Biome> ARCTIC_ICE = tag("arctic_ice");
 

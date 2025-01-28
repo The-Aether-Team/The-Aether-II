@@ -52,6 +52,7 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.MOA.get(),
                 AetherIIEntityTypes.SKYROOT_LIZARD.get(),
                 AetherIIEntityTypes.AECHOR_PLANT.get(),
+                AetherIIEntityTypes.CARRION_SPROUT.get(),
                 AetherIIEntityTypes.ZEPHYR.get(),
                 AetherIIEntityTypes.TEMPEST.get(),
                 AetherIIEntityTypes.COCKATRICE.get(),

@@ -6,6 +6,7 @@
   "refmap": "aether_ii.refmap.json",
   "mixins": [
     "client.accessor.WeatherEffectRendererAccessor",
+    "common.AttributeUtilMixin",
     "common.BlockBehaviourMixin",
     "common.EntityMixin",
     "common.ItemCooldownsMixin",
@@ -16,6 +17,7 @@
     "common.ServerLevelMixin",
     "common.accessor.AbstractArrowAccessor",
     "common.accessor.AbstractBoatAccessor",
+    "common.accessor.AttributeMapAccessor",
     "common.accessor.BlockLootAccessor",
     "common.accessor.BushBlockAccessor",
     "common.accessor.ContextKeySetSetsAccessor",
@@ -34,6 +36,7 @@
     "client.BlockModelWrapperMixin",
     "client.BlockRenderDispatcherMixin",
     "client.ClientLevelMixin",
+    "client.EquipmentLayerRendererMixin",
     "client.LayerRenderStateMixin",
     "client.LevelRendererMixin",
     "client.LiquidBlockRendererMixin",

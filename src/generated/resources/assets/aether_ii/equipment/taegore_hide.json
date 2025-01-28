@@ -5,9 +5,6 @@
         "dyeable": {
           "color_when_undyed": -6265536
         },
-        "texture": "aether_ii:taegore_hide_dyed"
-      },
-      {
         "texture": "aether_ii:taegore_hide"
       }
     ],
@@ -16,9 +13,6 @@
         "dyeable": {
           "color_when_undyed": -6265536
         },
-        "texture": "aether_ii:taegore_hide_dyed"
-      },
-      {
         "texture": "aether_ii:taegore_hide"
       }
     ]

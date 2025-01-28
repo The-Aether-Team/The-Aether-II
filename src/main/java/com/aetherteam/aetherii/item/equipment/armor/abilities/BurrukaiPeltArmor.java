@@ -1,8 +1,8 @@
 package com.aetherteam.aetherii.item.equipment.armor.abilities;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -20,7 +20,7 @@ public interface BurrukaiPeltArmor {
         AttributeInstance knockbackResistanceAttribute = player.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
         AttributeInstance stunResistanceAttribute = player.getAttribute(AetherIIAttributes.STUN_EFFECT_RESISTANCE);
 
-        if (EquipmentUtil.hasArmorAbility(player, AetherIIEquipmentAssets.BURRUKAI_PELT)) {
+        if (EquipmentUtil.hasArmorAbility(player, AetherIITags.Items.BURRUKAI_PELT_ARMOR)) {
             if (knockbackResistanceAttribute != null && !knockbackResistanceAttribute.hasModifier(BURRUKAI_PELT_KNOCKBACK_RESISTANCE)) {
                 knockbackResistanceAttribute.addTransientModifier(new AttributeModifier(BURRUKAI_PELT_KNOCKBACK_RESISTANCE, 0.2, AttributeModifier.Operation.ADD_VALUE));
             }

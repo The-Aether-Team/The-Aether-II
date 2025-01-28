@@ -6,6 +6,6 @@ import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
 
 public class ArkeniumShortswordItem extends TieredShortswordItem {
     public ArkeniumShortswordItem(Properties properties) {
-        super(properties.attributes(AetherIIDamageStats.merge(TieredShortswordItem.createAttributes(AetherIIItemTiers.ARKENIUM, 3, -2.4F), AetherIIDamageStats.ARKENIUM_SHORTSWORD)));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.ARKENIUM, 3, -2.4F, AetherIIDamageStats.ARKENIUM_SHORTSWORD));
     }
 }

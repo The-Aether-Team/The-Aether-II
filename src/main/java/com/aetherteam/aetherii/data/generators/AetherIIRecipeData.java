@@ -792,7 +792,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         arilumLantern(getter, AetherIIBlocks.BLUE_ARILUM_LANTERN, AetherIIItems.BLUE_SWET_GEL);
         arilumLantern(getter, AetherIIBlocks.PURPLE_ARILUM_LANTERN, AetherIIItems.PURPLE_SWET_GEL);
         arilumLantern(getter, AetherIIBlocks.GOLDEN_ARILUM_LANTERN, AetherIIItems.GOLDEN_SWET_GEL);
-        arilumLantern(getter, AetherIIBlocks.WHITE_ARILUM_LANTERN, AetherIIItems.WHITE_SWET_GEL);
 
         // Utility
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBROSIUM_TORCH.get(), 4)
@@ -1122,11 +1121,6 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .requires(AetherIIItems.GOLDEN_SWET_GEL)
                 .requires(AetherIIItems.SWET_SUGAR)
                 .unlockedBy("has_gel", has(AetherIIItems.GOLDEN_SWET_GEL))
-                .save(this.output);
-        ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.WHITE_SWET_JELLY.get(), 1)
-                .requires(AetherIIItems.WHITE_SWET_GEL)
-                .requires(AetherIIItems.SWET_SUGAR)
-                .unlockedBy("has_gel", has(AetherIIItems.WHITE_SWET_GEL))
                 .save(this.output);
 
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.BLUEBERRY_MOA_FEED.get(), 1)

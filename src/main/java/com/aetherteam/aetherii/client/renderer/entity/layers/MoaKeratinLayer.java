@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.renderer.entity.layers;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.entity.MoaRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.state.MoaRenderState;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -21,7 +22,7 @@ public class MoaKeratinLayer extends RenderLayer<MoaRenderState, EntityModel<Moa
 
     public MoaKeratinLayer(RenderLayerParent<MoaRenderState, EntityModel<MoaRenderState>> renderer, ModelManager modelManager) {
         super(renderer);
-        this.moaKeratinAtlas = modelManager.getAtlas(MoaRenderer.MOA_KERATIN_SHEET);
+        this.moaKeratinAtlas = modelManager.getAtlas(AetherIIAtlases.MOA_KERATIN_SHEET);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class MoaKeratinLayer extends RenderLayer<MoaRenderState, EntityModel<Moa
             String name = moa.isBaby ? "moa_baby_keratin" : "moa_keratin";
             ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "entity/mobs/moa/" + name + "_" + moa.keratinColor);
             TextureAtlasSprite sprite = this.moaKeratinAtlas.getSprite(texture);
-            VertexConsumer vertexConsumer = sprite.wrap(bufferSource.getBuffer(RenderType.entityCutoutNoCull(MoaRenderer.MOA_KERATIN_SHEET)));
+            VertexConsumer vertexConsumer = sprite.wrap(bufferSource.getBuffer(RenderType.entityCutoutNoCull(AetherIIAtlases.MOA_KERATIN_SHEET)));
             this.getParentModel().renderToBuffer(poseStack, vertexConsumer, packedLight, LivingEntityRenderer.getOverlayCoords(moa, 0.0F));
         }
     }

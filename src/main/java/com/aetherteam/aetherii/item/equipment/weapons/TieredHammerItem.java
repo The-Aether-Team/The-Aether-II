@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.weapons;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -29,24 +29,34 @@ public class TieredHammerItem extends Item {
     public static final ResourceLocation BASE_SHOCK_RANGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_shock_range");
 
     public TieredHammerItem(Item.Properties properties) {
-        super(properties.component(DataComponents.TOOL, createToolProperties()));
+        super(properties);
     }
 
-    public static Tool createToolProperties() {
-        return new Tool(List.of(
-                Tool.Rule.overrideSpeed(BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK).getOrThrow(Tags.Blocks.GLASS_BLOCKS), 15.0F),
-                Tool.Rule.overrideSpeed(BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK).getOrThrow(Tags.Blocks.GLASS_PANES), 15.0F)
-        ), 1.0F, 2);
+    public static Item.Properties applyWeaponProperties(Item.Properties properties, ToolMaterial toolMaterial, float damage, float speed, List<ItemAttributeModifiers.Entry> specialDamage) {
+        return properties.durability(toolMaterial.durability()).repairable(toolMaterial.repairItems()).enchantable(toolMaterial.enchantmentValue())
+                .component(DataComponents.TOOL, new Tool(List.of(
+                        Tool.Rule.overrideSpeed(BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK).getOrThrow(Tags.Blocks.GLASS_BLOCKS), 15.0F),
+                        Tool.Rule.overrideSpeed(BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK).getOrThrow(Tags.Blocks.GLASS_PANES), 15.0F)
+                ), 1.0F, 2))
+                .attributes(createAttributes(toolMaterial, damage, speed, specialDamage));
     }
 
-    public static ItemAttributeModifiers createAttributes(ToolMaterial pTier, int pAttackDamage, float pAttackSpeed) {
-        return createAttributes(pTier, (float) pAttackDamage, pAttackSpeed);
+    public static ItemAttributeModifiers createAttributes(ToolMaterial toolMaterial, int attackDamage, float attackSpeed) {
+        return createAttributes(toolMaterial, (float) attackDamage, attackSpeed);
     }
 
-    public static ItemAttributeModifiers createAttributes(ToolMaterial p_330371_, float p_331976_, float p_332104_) {
-        return ItemAttributeModifiers.builder()
-                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, p_331976_ + p_330371_.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, p_332104_, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+    public static ItemAttributeModifiers createAttributes(ToolMaterial toolMaterial, float attackDamage, float attackSpeed) {
+        return createAttributes(toolMaterial, attackDamage, attackSpeed, List.of());
+    }
+
+    public static ItemAttributeModifiers createAttributes(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, List<ItemAttributeModifiers.Entry> specialDamage) {
+        ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
+        for (ItemAttributeModifiers.Entry entry : specialDamage) {
+            builder.add(entry.attribute(), entry.modifier(), entry.slot());
+        }
+        return builder
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, attackDamage + toolMaterial.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .add(AetherIIAttributes.SHOCK_RANGE, new AttributeModifier(BASE_SHOCK_RANGE_ID, 2.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .build();
     }

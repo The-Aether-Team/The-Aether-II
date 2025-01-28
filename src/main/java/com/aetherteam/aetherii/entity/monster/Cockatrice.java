@@ -2,7 +2,7 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceRangedAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;

@@ -35,15 +35,13 @@ public class AetherIIClientExtensions {
     public static final IClientItemExtensions TAEGORE_HIDE = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0) : 0;
-//            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xCFEEF9) : -1;
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0xCFEEF9) : -1;
         }
     };
     public static final IClientItemExtensions BURRUKAI_PELT = new IClientItemExtensions() {
         @Override
         public int getDefaultDyeColor(ItemStack stack) {
-            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0) : 0;
-//            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0x619CC0) : -1;
+            return stack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(stack, 0x619CC0) : -1;
         }
     };
 

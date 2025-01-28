@@ -7,9 +7,10 @@ import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
-import com.aetherteam.aetherii.effect.AetherIIEffectResistances;
-import com.aetherteam.aetherii.entity.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckGuidebookEntryPacket;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
@@ -38,6 +39,7 @@ import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -259,15 +261,15 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
                         //todo effect resistance render
                         MobEffectTextureManager effectTextureManager = Minecraft.getInstance().getMobEffectTextures();
-                        for (Map.Entry<Holder<MobEffect>, Holder<Attribute>> holders : AetherIIEffectResistances.RESISTANCES.entrySet()) {
-                            if (livingEntity.getAttributes().hasAttribute(holders.getValue())) {
-                                Holder<MobEffect> effectHolder = holders.getKey();
+                        for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) livingEntity.getAttributes()).aether_ii$getAttributes().entrySet()) {
+                            if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute) {
+                                Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
                                 TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
                                 guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, x, y, 0, 18, 18);
-                                double effectValue = livingEntity.getAttributeValue(holders.getValue());
+                                double effectValue = attributeEntries.getValue().getValue();
                                 Component effectTooltip = Component.literal((int) effectValue * 100 + "%")
                                         .append(CommonComponents.space())
-                                        .append(Component.translatable(holders.getValue().value().getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
+                                        .append(Component.translatable(effectResistanceAttribute.getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
                                 this.renderDefenseIconValue(guiGraphics, x, y, effectValue);
                                 this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, -Minecraft.getInstance().font.width(effectTooltip) - 22, effectTooltip);
                                 y += 17;
