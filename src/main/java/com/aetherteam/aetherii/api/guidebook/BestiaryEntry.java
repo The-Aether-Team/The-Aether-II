@@ -134,10 +134,10 @@ public class BestiaryEntry extends GuidebookEntry {
         }
     }
 
-    public static class Client extends BestiaryEntry {
+    public static class Mutable extends BestiaryEntry { //todo this needs a codec
         private final Map<String, Info<?>> clientValues = new HashMap<>();
 
-        public Client(BestiaryEntry entry) {
+        public Mutable(BestiaryEntry entry) {
             super(entry.getIcon(), entry.getName(), entry.getSlotName(), entry.getSlotSubtitle(), entry.getDescriptionKey(), entry.getEntityType(), entry.getScaleMultiplier(), entry.getLoot1(), entry.getLoot2(), entry.getLoot3(), entry.getFood());
             this.clientValues.putAll(this.getValues());
         }

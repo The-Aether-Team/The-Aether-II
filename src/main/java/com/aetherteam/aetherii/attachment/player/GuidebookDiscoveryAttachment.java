@@ -21,7 +21,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuidebookDiscoveryAttachment {
+public class GuidebookDiscoveryAttachment { //todo
     private List<Holder<BestiaryEntry>> observedBestiaryEntries;
     private List<Holder<BestiaryEntry>> understoodBestiaryEntries;
     private List<Holder<BestiaryEntry>> uncheckedBestiaryEntries;
@@ -93,8 +93,12 @@ public class GuidebookDiscoveryAttachment {
     }
 
     private void trackBestiaryEntries(ServerPlayer serverPlayer, RegistryAccess registryAccess, AdvancementHolder advancement) {
+
+
         Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
         for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
+
+
             if (advancement.id().equals(entry.value().observationAdvancement())) {
                 this.observedBestiaryEntries.add(entry);
                 this.uncheckedBestiaryEntries.add(entry);

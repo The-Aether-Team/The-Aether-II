@@ -77,7 +77,7 @@ public abstract class GuidebookEntry {
         }
     }
 
-    public static final class Info<T> {
+    public static final class Info<T> { //todo this needs a codec and also a "viewed" value.
         private final T value;
         private boolean visible;
 
