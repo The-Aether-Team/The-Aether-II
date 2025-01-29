@@ -493,6 +493,25 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE, "Skyroot Framed Scatterglass Pane");
         this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE, "Arkenium Framed Scatterglass Pane");
 
+        // Infected Guardian Tree
+        this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
+        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
+        this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
+        this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD, "Dense Infected Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
+        this.addBlock(AetherIIBlocks.INFECTED_ROOTS, "Infected Roots");
+        this.addBlock(AetherIIBlocks.FLOWERING_INFECTED_ROOTS, "Flowering Infected Roots");
+        this.addBlock(AetherIIBlocks.DIM_INFECTED_ROOTS, "Dim Infected Roots");
+        this.addBlock(AetherIIBlocks.LUCENT_INFECTED_ROOTS, "Lucent Infected Roots");
+        this.addBlock(AetherIIBlocks.INFECTED_LAMP, "Infected Lamp");
+        this.addBlock(AetherIIBlocks.INFECTED_MOSS, "Infected Moss");
+        this.addBlock(AetherIIBlocks.FLOWERING_INFECTED_MOSS, "Flowering Infected Moss");
+        this.addBlock(AetherIIBlocks.BASE_ROOTED_INFECTED_MOSS, "Base Rooted Infected Moss");
+        this.addBlock(AetherIIBlocks.TOP_ROOTED_INFECTED_MOSS, "Top Rooted Infected Moss");
+        this.addBlock(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD, "Base Rooted Infected Wood");
+        this.addBlock(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD, "Top Rooted Infected Wood");
+
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");
         this.addBlock(AetherIIBlocks.WHITE_CLOUDWOOL, "White Cloudwool");

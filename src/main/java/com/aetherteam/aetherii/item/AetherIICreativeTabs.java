@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -278,10 +277,28 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "building_blocks"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "natural_blocks"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIBlocks.INFECTED_LOG.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".dungeon_blocks"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIBlocks.INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.DIM_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.LUCENT_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.INFECTED_LAMP.get());
+                output.accept(AetherIIBlocks.INFECTED_MOSS.get());
+                output.accept(AetherIIBlocks.FLOWERING_INFECTED_MOSS.get());
+                output.accept(AetherIIBlocks.BASE_ROOTED_INFECTED_MOSS.get());
+                output.accept(AetherIIBlocks.TOP_ROOTED_INFECTED_MOSS.get());
+                output.accept(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()

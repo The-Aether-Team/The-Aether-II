@@ -508,6 +508,25 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.SKYROOT_FRAMED_SCATTERGLASS_PANE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE.get());
 
+        // Infected Guardian Tree
+        this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());
+        this.dropSelf(AetherIIBlocks.DENSE_INFECTED_LOG.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_ROOTS.get());
+        this.dropSelf(AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get());
+        this.dropSelf(AetherIIBlocks.DIM_INFECTED_ROOTS.get());
+        this.dropSelf(AetherIIBlocks.LUCENT_INFECTED_ROOTS.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_LAMP.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_MOSS.get());
+        this.dropSelf(AetherIIBlocks.FLOWERING_INFECTED_MOSS.get());
+        this.dropSelf(AetherIIBlocks.BASE_ROOTED_INFECTED_MOSS.get());
+        this.dropSelf(AetherIIBlocks.TOP_ROOTED_INFECTED_MOSS.get());
+        this.dropSelf(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get());
+
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
         this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL.get());
