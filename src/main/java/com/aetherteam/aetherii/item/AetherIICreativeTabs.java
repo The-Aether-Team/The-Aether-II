@@ -277,9 +277,24 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "building_blocks"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "natural_blocks"))
-            .icon(() -> new ItemStack(AetherIIBlocks.INFECTED_LOG.get()))
+            .icon(() -> new ItemStack(AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".dungeon_blocks"))
             .displayItems((features, output) -> {
+                output.accept(AetherIIBlocks.GUARDIAN_LOG.get());
+                output.accept(AetherIIBlocks.GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
+                output.accept(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.DIM_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.GUARDIAN_LAMP.get());
+                output.accept(AetherIIBlocks.BASE_ROOTED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_ROOTED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
@@ -291,10 +306,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.DIM_INFECTED_ROOTS.get());
                 output.accept(AetherIIBlocks.LUCENT_INFECTED_ROOTS.get());
                 output.accept(AetherIIBlocks.INFECTED_LAMP.get());
-                output.accept(AetherIIBlocks.INFECTED_MOSS.get());
-                output.accept(AetherIIBlocks.FLOWERING_INFECTED_MOSS.get());
-                output.accept(AetherIIBlocks.BASE_ROOTED_INFECTED_MOSS.get());
-                output.accept(AetherIIBlocks.TOP_ROOTED_INFECTED_MOSS.get());
                 output.accept(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());

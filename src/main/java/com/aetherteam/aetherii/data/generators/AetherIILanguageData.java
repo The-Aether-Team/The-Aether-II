@@ -494,6 +494,22 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.ARKENIUM_FRAMED_SCATTERGLASS_PANE, "Arkenium Framed Scatterglass Pane");
 
         // Infected Guardian Tree
+        // Guardian Dungeon Blocks
+        this.addBlock(AetherIIBlocks.GUARDIAN_LOG, "Guardian Log");
+        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG, "Dense Guardian Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
+        this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
+        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD, "Dense Guardian Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
+        this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
+        this.addBlock(AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS, "Flowering Guardian Roots");
+        this.addBlock(AetherIIBlocks.DIM_GUARDIAN_ROOTS, "Dim Guardian Roots");
+        this.addBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS, "Lucent Guardian Roots");
+        this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
+        this.addBlock(AetherIIBlocks.BASE_ROOTED_GUARDIAN_WOOD, "Base Rooted Guardian Wood");
+        this.addBlock(AetherIIBlocks.TOP_ROOTED_GUARDIAN_WOOD, "Top Rooted Guardian Wood");
+
+        // Infected Dungeon Blocks
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
         this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
@@ -505,10 +521,6 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.DIM_INFECTED_ROOTS, "Dim Infected Roots");
         this.addBlock(AetherIIBlocks.LUCENT_INFECTED_ROOTS, "Lucent Infected Roots");
         this.addBlock(AetherIIBlocks.INFECTED_LAMP, "Infected Lamp");
-        this.addBlock(AetherIIBlocks.INFECTED_MOSS, "Infected Moss");
-        this.addBlock(AetherIIBlocks.FLOWERING_INFECTED_MOSS, "Flowering Infected Moss");
-        this.addBlock(AetherIIBlocks.BASE_ROOTED_INFECTED_MOSS, "Base Rooted Infected Moss");
-        this.addBlock(AetherIIBlocks.TOP_ROOTED_INFECTED_MOSS, "Top Rooted Infected Moss");
         this.addBlock(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD, "Base Rooted Infected Wood");
         this.addBlock(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD, "Top Rooted Infected Wood");
 
