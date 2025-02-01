@@ -23,7 +23,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import java.util.List;
 import java.util.Map;
 
-public class GlovesItem extends Item {
+public class GlovesItem extends Item { //todo need to work on minor things like syncing and death drops and equip and hotswap keys
     public static final ResourceLocation BASE_GLOVES_COOLDOWN_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_cooldown_restoration");
 
     private final double restoration;
