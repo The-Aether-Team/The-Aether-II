@@ -54,7 +54,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
             }
         }
 
-        AccessoryContainer accessories = this.owner.getData(AetherIIDataAttachments.ACCESSORIES);
+        AccessoryContainer accessories = this.owner.getData(AetherIIDataAttachments.ACCESSORIES); //todo this isnt good for syncing because it wont sync until opening the guidebook ui
 
         this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_RELICS, 0, 64, 38, RELIC_SLOT_LOCATION));
         this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_HANDWEAR, 1, 64, 56, HANDWEAR_SLOT_LOCATION));
