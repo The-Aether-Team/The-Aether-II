@@ -8,7 +8,6 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScr
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
-import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.DeathScreenAccessor;
@@ -259,10 +258,8 @@ public class RenderHooks {
     }
 
     public static void renderFirstPersonGloves(PoseStack poseStack, MultiBufferSource buffer, HumanoidArm arm, AbstractClientPlayer player, int packedLight, PlayerSkin skin) {
-        AccessoryContainer container = player.getData(AetherIIDataAttachments.ACCESSORIES);
-
         poseStack.pushPose();
-        GlovesLayer.renderOnFirstPerson(poseStack, buffer, container.getAccessory(AccessoryContainer.HANDWEAR_SLOT).getFirst(), arm, skin, packedLight);
+        GlovesLayer.renderOnFirstPerson(poseStack, buffer, arm, skin, packedLight);
         poseStack.popPose();
     }
 }

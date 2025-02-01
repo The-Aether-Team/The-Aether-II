@@ -1,9 +1,9 @@
 package com.aetherteam.aetherii.client.renderer.accessory;
 
-import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
+import com.aetherteam.aetherii.integration.AccessoryUtil;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ArmorStyle;
@@ -48,8 +48,7 @@ public class GlovesLayer<S extends HumanoidRenderState, M extends HumanoidModel<
     @Override
     public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
         if (Minecraft.getInstance().player != null) {
-            ItemStack stack = Minecraft.getInstance().player.getData(AetherIIDataAttachments.ACCESSORIES).getAccessory(AccessoryContainer.HANDWEAR_SLOT).getFirst();
-            if (!stack.isEmpty()) {
+            AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
                 GlovesModel glovesModel = GLOVES_MODEL;
                 if (this.getParentModel() instanceof HumanoidModel humanoidModel) {
                     if (humanoidModel instanceof PlayerModel playerModel) {
@@ -63,12 +62,12 @@ public class GlovesLayer<S extends HumanoidRenderState, M extends HumanoidModel<
                 glovesModel.rightArm.visible = true;
 
                 renderGloves(stack, glovesModel, poseStack, buffer, packedLight);
-            }
+            });
         }
     }
 
-    public static <S extends LivingEntityRenderState> void renderOnFirstPerson(PoseStack poseStack, MultiBufferSource buffer, ItemStack stack, HumanoidArm arm, PlayerSkin skin, int packedLight) {
-        if (!stack.isEmpty()) {
+    public static <S extends LivingEntityRenderState> void renderOnFirstPerson(PoseStack poseStack, MultiBufferSource buffer, HumanoidArm arm, PlayerSkin skin, int packedLight) {
+        AccessoryUtil.getFirst(Minecraft.getInstance().player, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
             GlovesModel glovesModel = GLOVES_MODEL_FIRST_PERSON;
             glovesModel.setAllVisible(false);
 
@@ -83,7 +82,7 @@ public class GlovesLayer<S extends HumanoidRenderState, M extends HumanoidModel<
             poseStack.translate((f * offset) - 0.0025, 0.0025, -0.0025);
 
             renderGloves(stack, glovesModel, poseStack, buffer, packedLight);
-        }
+        });
     }
 
     private static void renderGloves(ItemStack stack, GlovesModel glovesModel, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {

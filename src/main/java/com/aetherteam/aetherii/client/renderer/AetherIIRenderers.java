@@ -23,8 +23,6 @@ import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel
 import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.monster.Swet;
-import com.aetherteam.aetherii.item.AetherIIItems;
-import io.wispforest.accessories.api.client.AccessoriesRendererRegistry;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.blockentity.BedRenderer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;

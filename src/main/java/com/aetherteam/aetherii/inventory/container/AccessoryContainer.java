@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccessoryContainer extends SimpleContainer implements INBTSerializable<ListTag> {
-    public static final int[] RELIC_SLOT = { 0 };
-    public static final int[] HANDWEAR_SLOT = { 1 };
-    public static final int[] ACCESSORIES_SLOT = { 2, 3 };
-
     public AccessoryContainer(int size) {
         super(size);
     }
@@ -53,12 +49,19 @@ public class AccessoryContainer extends SimpleContainer implements INBTSerializa
 
     }
 
-    public List<ItemStack> getAccessory(int[] index) {
-        List<ItemStack> items = new ArrayList<>();
-        for (int i : index) {
-            ItemStack itemStack = this.getItem(i);
-            items.add(itemStack);
+    public enum SlotType {
+        RELIC(new int[] { 0 }),
+        HANDWEAR(new int[] { 1 }),
+        ACCESSORY(new int[] { 2, 3 });
+
+        private final int[] index;
+
+        SlotType(int[] index) {
+            this.index = index;
         }
-        return items;
+
+        public int[] getIndex() {
+            return this.index;
+        }
     }
 }
