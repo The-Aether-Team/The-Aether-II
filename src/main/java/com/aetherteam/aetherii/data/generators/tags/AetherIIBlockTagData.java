@@ -915,23 +915,27 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
                 AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
                 AetherIIBlocks.GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.DIM_GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
                 AetherIIBlocks.GUARDIAN_LAMP.get(),
                 AetherIIBlocks.BASE_ROOTED_GUARDIAN_WOOD.get(),
                 AetherIIBlocks.TOP_ROOTED_GUARDIAN_WOOD.get(),
-                AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.GUARDIAN_CORTEX.get(),
+                AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get(),
+                AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get(),
                 AetherIIBlocks.INFECTED_LOG.get(),
                 AetherIIBlocks.INFECTED_WOOD.get(),
                 AetherIIBlocks.DENSE_INFECTED_LOG.get(),
                 AetherIIBlocks.DENSE_INFECTED_WOOD.get(),
                 AetherIIBlocks.INFECTED_ROOTS.get(),
+                AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get(),
                 AetherIIBlocks.DIM_INFECTED_ROOTS.get(),
                 AetherIIBlocks.LUCENT_INFECTED_ROOTS.get(),
                 AetherIIBlocks.INFECTED_LAMP.get(),
                 AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get(),
-                AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get(),
-                AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get()
+                AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get()
+
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),

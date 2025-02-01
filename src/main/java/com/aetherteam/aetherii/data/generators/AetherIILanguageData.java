@@ -508,6 +508,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GUARDIAN_LAMP, "Guardian Lamp");
         this.addBlock(AetherIIBlocks.BASE_ROOTED_GUARDIAN_WOOD, "Base Rooted Guardian Wood");
         this.addBlock(AetherIIBlocks.TOP_ROOTED_GUARDIAN_WOOD, "Top Rooted Guardian Wood");
+        this.addBlock(AetherIIBlocks.GUARDIAN_CORTEX, "Guardian Cortex");
+        this.addBlock(AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD, "Base Guardian Cortex Wood");
+        this.addBlock(AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD, "Top Guardian Cortex Wood");
 
         // Infected Dungeon Blocks
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");

@@ -99,22 +99,25 @@
     "aether_ii:dense_guardian_log",
     "aether_ii:dense_guardian_wood",
     "aether_ii:guardian_roots",
+    "aether_ii:flowering_guardian_roots",
     "aether_ii:dim_guardian_roots",
     "aether_ii:lucent_guardian_roots",
     "aether_ii:guardian_lamp",
     "aether_ii:base_rooted_guardian_wood",
     "aether_ii:top_rooted_guardian_wood",
-    "aether_ii:flowering_guardian_roots",
+    "aether_ii:guardian_cortex",
+    "aether_ii:base_guardian_cortex_wood",
+    "aether_ii:top_guardian_cortex_wood",
     "aether_ii:infected_log",
     "aether_ii:infected_wood",
     "aether_ii:dense_infected_log",
     "aether_ii:dense_infected_wood",
     "aether_ii:infected_roots",
+    "aether_ii:flowering_infected_roots",
     "aether_ii:dim_infected_roots",
     "aether_ii:lucent_infected_roots",
     "aether_ii:infected_lamp",
     "aether_ii:base_rooted_infected_wood",
-    "aether_ii:top_rooted_infected_wood",
-    "aether_ii:flowering_infected_roots"
+    "aether_ii:top_rooted_infected_wood"
   ]
 }
