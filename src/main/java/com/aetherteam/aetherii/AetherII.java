@@ -22,7 +22,6 @@ import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
-import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import com.aetherteam.aetherii.inventory.AetherIIRecipeBookTypes;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIICreativeTabs;
@@ -54,7 +53,6 @@ import com.aetherteam.aetherii.world.tree.decorator.AetherIITreeDecoratorTypes;
 import com.aetherteam.aetherii.world.tree.foliage.AetherIIFoliagePlacerTypes;
 import com.google.common.reflect.Reflection;
 import com.mojang.logging.LogUtils;
-import io.wispforest.accessories.api.slot.UniqueSlotHandling;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.api.distmarker.Dist;
@@ -154,8 +152,6 @@ public class AetherII {
             this.registerDispenserBehaviors();
             this.registerCauldronInteractions();
         });
-
-        UniqueSlotHandling.EVENT.register(AetherIIAccessorySlots.INSTANCE);
     }
 
     public void eventSetup(IEventBus neoBus) {

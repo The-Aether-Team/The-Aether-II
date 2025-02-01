@@ -3,11 +3,9 @@ package com.aetherteam.aetherii.inventory.menu;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
 import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.inventory.menu.slot.AccessorySlot;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.CraftingMenuAccessor;
-import io.wispforest.accessories.api.menu.AccessoriesSlotGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
@@ -60,12 +58,6 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
         this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_HANDWEAR, 1, 64, 56, HANDWEAR_SLOT_LOCATION));
         this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_ACCESSORIES, 2, 64, 74, ACCESSORY_SLOT_LOCATION));
         this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_ACCESSORIES, 3, 64, 92, ACCESSORY_SLOT_LOCATION));
-
-//        AccessoriesSlotGenerator generator = AccessoriesSlotGenerator.of(this::addSlot, 64, 38, this.owner, AetherIIAccessorySlots.getRelicSlotType(), AetherIIAccessorySlots.getHandwearSlotType(), AetherIIAccessorySlots.getAccessorySlotType());
-//
-//        if (generator != null) {
-//            this.addedSlots = generator.padding(0).column();
-//        }
 
         for (int k = 0; k < 4; k++) {
             EquipmentSlot equipmentslot = SLOT_IDS[k];
@@ -148,15 +140,15 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 if (!this.moveItemStackTo(itemstack1, 9, 45, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(5).hasItem()) {
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(5).hasItem()) { //todo
                 if (!this.moveItemStackTo(itemstack1, 5, 6, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(6).hasItem()) {
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(6).hasItem()) { //todo
                 if (!this.moveItemStackTo(itemstack1, 6, 7, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_HANDWEAR) && !this.slots.get(7).hasItem()) {
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_HANDWEAR) && !this.slots.get(7).hasItem()) { //todo
                 if (!this.moveItemStackTo(itemstack1, 7, 8, false)) {
                     return ItemStack.EMPTY;
                 }

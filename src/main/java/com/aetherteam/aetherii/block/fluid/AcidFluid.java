@@ -5,9 +5,10 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
+import com.aetherteam.aetherii.integration.AccessoryUtil;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
-import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.LevelRendererAccessor;
 import com.aetherteam.aetherii.network.packet.clientbound.AcidDamageBlockPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.AcidFizzPacket;
@@ -16,9 +17,6 @@ import com.aetherteam.aetherii.recipe.input.SingleRecipeInputWithRandom;
 import com.aetherteam.aetherii.recipe.recipes.AetherIIRecipeTypes;
 import com.aetherteam.aetherii.recipe.recipes.block.AcidCorrosionRecipe;
 import com.aetherteam.aetherii.recipe.recipes.item.IrradiationCleansingRecipe;
-import io.wispforest.accessories.api.AccessoriesAPI;
-import io.wispforest.accessories.api.AccessoriesCapability;
-import io.wispforest.accessories.api.slot.SlotEntryReference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -218,18 +216,13 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
                         offhandItem.hurtAndBreak(1, livingEntity, EquipmentSlot.OFFHAND);
                     }
 
-                    AccessoriesCapability accessories = AccessoriesCapability.get(livingEntity);
-                    if (accessories != null) {
-                        SlotEntryReference slotEntryReference = accessories.getFirstEquipped((itemStack) -> itemStack.getItem() instanceof GlovesItem);
-                        if (slotEntryReference != null && slotEntryReference.stack().getItem() instanceof GlovesItem) {
-                            ItemStack gloves = slotEntryReference.stack();
-                            if (!gloves.is(AetherIITags.Items.ACID_RESISTANT_ITEM) && !gloves.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
-                                if (livingEntity instanceof ServerPlayer serverPlayer) {
-                                    gloves.hurtAndBreak(1, serverLevel, serverPlayer, (item) -> AccessoriesAPI.breakStack(slotEntryReference.reference()));
-                                }
+                    AccessoryUtil.getFirst(livingEntity, AccessoryContainer.SlotType.HANDWEAR).ifPresent((stack) -> {
+                        if (!stack.is(AetherIITags.Items.ACID_RESISTANT_ITEM) && !stack.has(AetherIIDataComponents.REINFORCEMENT_TIER)) {
+                            if (livingEntity instanceof ServerPlayer serverPlayer) {
+                                stack.hurtAndBreak(1, serverPlayer, EquipmentSlot.BODY);
                             }
                         }
-                    }
+                    });
                 }
             }
         }

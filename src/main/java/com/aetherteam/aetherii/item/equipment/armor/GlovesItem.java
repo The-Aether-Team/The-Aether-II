@@ -2,16 +2,28 @@ package com.aetherteam.aetherii.item.equipment.armor;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
-import com.aetherteam.aetherii.inventory.AetherIIAccessorySlots;
-import io.wispforest.accessories.api.AccessoryItem;
-import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
-import io.wispforest.accessories.api.slot.SlotReference;
+import com.aetherteam.aetherii.integration.AccessoryUtil;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.neoforged.neoforge.common.util.AttributeTooltipContext;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
-public class GlovesItem extends AccessoryItem {
+import java.util.List;
+import java.util.Map;
+
+public class GlovesItem extends Item {
     public static final ResourceLocation BASE_GLOVES_COOLDOWN_RESTORATION_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_gloves_cooldown_restoration");
 
     private final double restoration;
@@ -23,11 +35,27 @@ public class GlovesItem extends AccessoryItem {
         this.setRenderTexture(material.assetId().location().getNamespace(), material.assetId().location().getPath());
     }
 
-    @Override
-    public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) { //todo
-        if (reference.slotName().equals(AetherIIAccessorySlots.HANDWEAR_SLOT_LOCATION.toString())) {
-            builder.addStackable(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION, new AttributeModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID, this.restoration, AttributeModifier.Operation.ADD_VALUE));
+    public static void updatePlayerAttributes(EntityTickEvent.Pre event) {
+        if (event.getEntity() instanceof LivingEntity livingEntity) {
+            AttributeInstance attribute = livingEntity.getAttribute(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION);
+
+            AccessoryUtil.getFirst(livingEntity, AccessoryContainer.SlotType.HANDWEAR).ifPresentOrElse((stack) -> {
+                if (attribute != null && !attribute.hasModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID)) {
+                    attribute.addTransientModifier(new AttributeModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID, ((GlovesItem) stack.getItem()).getRestoration(), AttributeModifier.Operation.ADD_VALUE));
+                }
+            }, () -> {
+                if (attribute != null && attribute.hasModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID)) {
+                    attribute.removeModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID);
+                }
+            });
         }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = Multimaps.forMap(Map.of(AetherIIAttributes.SHIELD_COOLDOWN_REDUCTION, new AttributeModifier(BASE_GLOVES_COOLDOWN_RESTORATION_ID, this.getRestoration(), AttributeModifier.Operation.ADD_VALUE)));
+        AccessoryUtil.addAttributeTooltips(stack, tooltipComponents::add, AttributeTooltipContext.of(null, context, tooltipFlag), modifiers, "glove");
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
     public void setRenderTexture(String modId, String registryName) {
@@ -36,5 +64,9 @@ public class GlovesItem extends AccessoryItem {
 
     public ResourceLocation getGlovesTexture() {
         return this.glovesTexture;
+    }
+
+    public double getRestoration() {
+        return this.restoration;
     }
 }
