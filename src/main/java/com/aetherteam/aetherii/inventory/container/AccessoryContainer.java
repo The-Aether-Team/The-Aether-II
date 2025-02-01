@@ -8,7 +8,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AccessoryContainer extends SimpleContainer implements INBTSerializable<ListTag> {
+    public static final int[] RELIC_SLOT = { 0 };
+    public static final int[] HANDWEAR_SLOT = { 1 };
+    public static final int[] ACCESSORIES_SLOT = { 2, 3 };
+
     public AccessoryContainer(int size) {
         super(size);
     }
@@ -44,5 +51,14 @@ public class AccessoryContainer extends SimpleContainer implements INBTSerializa
 
     public void tick(LivingEntity livingEntity) {
 
+    }
+
+    public List<ItemStack> getAccessory(int[] index) {
+        List<ItemStack> items = new ArrayList<>();
+        for (int i : index) {
+            ItemStack itemStack = this.getItem(i);
+            items.add(itemStack);
+        }
+        return items;
     }
 }

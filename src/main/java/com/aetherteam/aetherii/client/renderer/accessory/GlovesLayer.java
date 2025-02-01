@@ -1,27 +1,28 @@
 package com.aetherteam.aetherii.client.renderer.accessory;
 
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIIAtlases;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.ArmorStyle;
 import com.aetherteam.aetherii.item.equipment.armor.GlovesItem;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.PlayerModelAccessor;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import io.wispforest.accessories.api.client.AccessoryRenderer;
-import io.wispforest.accessories.api.slot.SlotReference;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
-import net.minecraft.client.renderer.entity.state.PlayerRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.PlayerSkin;
@@ -34,39 +35,41 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Function;
 
-public class GlovesRenderer implements AccessoryRenderer {
-    private final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> armorStyleSpriteLookup = Util.memoize((key) -> Minecraft.getInstance().getModelManager().getAtlas(AetherIIAtlases.ARMOR_STYLES_SHEET).getSprite(key.textureId()));
-    private final GlovesModel glovesModel;
-    private final GlovesModel glovesModelSlim;
-    private final GlovesModel glovesModelFirstPerson;
+public class GlovesLayer<S extends HumanoidRenderState, M extends HumanoidModel<S>, A extends HumanoidModel<S>> extends RenderLayer<S, M> {
+    private static final Function<ArmorStyle.SpriteKey, TextureAtlasSprite> ARMOR_STYLE_SPRITE_LOOKUP = Util.memoize((key) -> Minecraft.getInstance().getModelManager().getAtlas(AetherIIAtlases.ARMOR_STYLES_SHEET).getSprite(key.textureId()));
+    private static final GlovesModel GLOVES_MODEL = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES));
+    private static final GlovesModel GLOVES_MODEL_SLIM = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES_SLIM));
+    private static final GlovesModel GLOVES_MODEL_FIRST_PERSON = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES_FIRST_PERSON));
 
-    public GlovesRenderer() {
-        this.glovesModel = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES));
-        this.glovesModelSlim = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES_SLIM));
-        this.glovesModelFirstPerson = new GlovesModel(Minecraft.getInstance().getEntityModels().bakeLayer(AetherIIModelLayers.GLOVES_FIRST_PERSON));
+    public GlovesLayer(RenderLayerParent<S, M> renderer) {
+        super(renderer);
     }
 
     @Override
-    public <S extends LivingEntityRenderState> void render(ItemStack stack, SlotReference reference, PoseStack poseStack, EntityModel<S> model, S renderState, MultiBufferSource buffer, int packedLight, float partialTicks) {
-        GlovesModel glovesModel = this.glovesModel;
-        if (model instanceof HumanoidModel humanoidModel) {
-            if (humanoidModel instanceof PlayerModel playerModel) {
-                PlayerModelAccessor playerModelAccessor = (PlayerModelAccessor) playerModel;
-                glovesModel = playerModelAccessor.aether$getSlim() ? this.glovesModelSlim : this.glovesModel;
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, S state, float netHeadYaw, float headPitch) {
+        if (Minecraft.getInstance().player != null) {
+            ItemStack stack = Minecraft.getInstance().player.getData(AetherIIDataAttachments.ACCESSORIES).getAccessory(AccessoryContainer.HANDWEAR_SLOT).getFirst();
+            if (!stack.isEmpty()) {
+                GlovesModel glovesModel = GLOVES_MODEL;
+                if (this.getParentModel() instanceof HumanoidModel humanoidModel) {
+                    if (humanoidModel instanceof PlayerModel playerModel) {
+                        PlayerModelAccessor playerModelAccessor = (PlayerModelAccessor) playerModel;
+                        glovesModel = playerModelAccessor.aether$getSlim() ? GLOVES_MODEL_SLIM : GLOVES_MODEL;
+                    }
+                    humanoidModel.copyPropertiesTo(glovesModel);
+                }
+                glovesModel.setAllVisible(false);
+                glovesModel.leftArm.visible = true;
+                glovesModel.rightArm.visible = true;
+
+                renderGloves(stack, glovesModel, poseStack, buffer, packedLight);
             }
-            humanoidModel.copyPropertiesTo(glovesModel);
         }
-        glovesModel.setAllVisible(false);
-        glovesModel.leftArm.visible = true;
-        glovesModel.rightArm.visible = true;
-
-        this.renderGloves(stack, glovesModel, poseStack, buffer, packedLight);
     }
 
-    @Override
-    public <S extends LivingEntityRenderState> void renderOnFirstPerson(HumanoidArm arm, ItemStack stack, SlotReference reference, PoseStack poseStack, EntityModel<S> model, S renderState, MultiBufferSource buffer, int packedLight, float partialTicks) {
-        if (renderState instanceof PlayerRenderState playerRenderState) {
-            GlovesModel glovesModel = this.glovesModelFirstPerson;
+    public static <S extends LivingEntityRenderState> void renderOnFirstPerson(PoseStack poseStack, MultiBufferSource buffer, ItemStack stack, HumanoidArm arm, PlayerSkin skin, int packedLight) {
+        if (!stack.isEmpty()) {
+            GlovesModel glovesModel = GLOVES_MODEL_FIRST_PERSON;
             glovesModel.setAllVisible(false);
 
             ModelPart gloveArm = arm == HumanoidArm.RIGHT ? glovesModel.rightArm : glovesModel.leftArm;
@@ -76,14 +79,14 @@ public class GlovesRenderer implements AccessoryRenderer {
             gloveArm.visible = true;
             gloveArm.zRot = f * 0.1F;
 
-            float offset = playerRenderState.skin.model() == PlayerSkin.Model.SLIM ? 0.0425F : 0.0F;
+            float offset = skin.model() == PlayerSkin.Model.SLIM ? 0.0425F : 0.0F;
             poseStack.translate((f * offset) - 0.0025, 0.0025, -0.0025);
 
-            this.renderGloves(stack, glovesModel, poseStack, buffer, packedLight);
+            renderGloves(stack, glovesModel, poseStack, buffer, packedLight);
         }
     }
 
-    private <S extends LivingEntityRenderState> void renderGloves(ItemStack stack, GlovesModel glovesModel, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    private static void renderGloves(ItemStack stack, GlovesModel glovesModel, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         ResourceLocation texture = ((GlovesItem) stack.getItem()).getGlovesTexture();
         VertexConsumer vertexConsumer = ItemRenderer.getArmorFoilBuffer(buffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
 
@@ -98,14 +101,9 @@ public class GlovesRenderer implements AccessoryRenderer {
 
         ArmorStyle style = stack.get(AetherIIDataComponents.ARMOR_STYLE);
         if (style != null && Minecraft.getInstance().level != null) {
-            TextureAtlasSprite sprite = this.armorStyleSpriteLookup.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
+            TextureAtlasSprite sprite = ARMOR_STYLE_SPRITE_LOOKUP.apply(new ArmorStyle.SpriteKey(Minecraft.getInstance().level.registryAccess(), style, "humanoid_gloves"));
             VertexConsumer consumer = sprite.wrap(buffer.getBuffer(RenderType.armorCutoutNoCull(AetherIIAtlases.ARMOR_STYLES_SHEET)));
             glovesModel.renderToBuffer(poseStack, consumer, packedLight, OverlayTexture.NO_OVERLAY);
         }
-    }
-
-    @Override
-    public boolean shouldRenderInFirstPerson(HumanoidArm arm, ItemStack stack, SlotReference reference) {
-        return true;
     }
 }

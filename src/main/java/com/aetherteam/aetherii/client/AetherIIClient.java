@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.block.AetherIIFluids;
-import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
 import com.aetherteam.aetherii.client.gui.screen.HighlandsReceivingLevelScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
@@ -44,16 +43,12 @@ public class AetherIIClient {
             ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.FLOWING_ACID.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(AetherIIFluids.ACID.get(), RenderType.translucent());
         });
-
-        AetherIIRenderers.registerAccessoryRenderers();
     }
 
     public static void eventSetup(IEventBus neoBus) {
         IEventBus bus = NeoForge.EVENT_BUS;
 
         AetherIIClientEventListeners.listen(bus);
-
-        bus.addListener(DimensionClientListener::onRenderFog);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);

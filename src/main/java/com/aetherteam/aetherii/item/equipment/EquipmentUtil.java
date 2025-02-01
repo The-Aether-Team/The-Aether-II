@@ -32,7 +32,7 @@ public final class EquipmentUtil {
     }
 
     public static List<ItemStack> getEquipment(LivingEntity entity) {
-        AccessoriesCapability accessories = AccessoriesCapability.get(entity);
+        AccessoriesCapability accessories = AccessoriesCapability.get(entity); //todo i need to centralize the accessory utils and calls in a certain place so they can conditionally redirect to other apis
         List<ItemStack> equipment = new ArrayList<>();
         entity.getArmorSlots().forEach(equipment::add);
         if (accessories != null) {

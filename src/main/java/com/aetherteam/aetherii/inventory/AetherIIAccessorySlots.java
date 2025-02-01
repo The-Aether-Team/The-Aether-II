@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
-public class AetherIIAccessorySlots implements UniqueSlotHandling.RegistrationCallback {
+public class AetherIIAccessorySlots implements UniqueSlotHandling.RegistrationCallback { //todo remove
     private static final ResourceLocation RELIC_PREDICATE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "relic_items");
     private static final ResourceLocation HANDWEAR_PREDICATE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "handwear_items");
     private static final ResourceLocation ACCESSORY_PREDICATE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "accessory_items");

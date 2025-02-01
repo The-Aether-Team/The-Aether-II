@@ -1,30 +1,46 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.event.hooks.MusicHooks;
 import com.aetherteam.aetherii.client.event.hooks.RenderHooks;
+import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Camera;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.ClientInput;
+import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.client.sounds.MusicInfo;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.material.FogType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.util.AttributeTooltipContext;
 import org.apache.commons.lang3.tuple.Triple;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class AetherIIClientEventListeners {
+    private static Float modifiedNearDistance = null;
+    private static Float modifiedFarDistance =  null;
+
     public static void listen(IEventBus bus) {
         // Screen
         bus.addListener(AetherIIClientEventListeners::onGuiOpen);
@@ -36,6 +52,7 @@ public class AetherIIClientEventListeners {
         bus.addListener(AetherIIClientEventListeners::onGatherTooltipComponents);
 
         // World
+        bus.addListener(AetherIIClientEventListeners::onRenderFog);
         bus.addListener(AetherIIClientEventListeners::onComputeFogColor);
 
         // Audio
@@ -43,6 +60,9 @@ public class AetherIIClientEventListeners {
 
         // Input
         bus.addListener(AetherIIClientEventListeners::onMovementInputUpdate);
+
+        // Entity
+        bus.addListener(AetherIIClientEventListeners::onRenderFirstPersonArm);
     }
 
     public static void onGuiOpen(ScreenEvent.Opening event) {
@@ -92,6 +112,59 @@ public class AetherIIClientEventListeners {
         RenderHooks.addCharmTooltip(itemStack, tooltipElements);
     }
 
+    public static void onRenderFog(ViewportEvent.RenderFog event) {
+        Camera camera = event.getCamera();
+        FogRenderer.FogMode fogMode = event.getMode();
+        float nearDistance = event.getNearPlaneDistance();
+        float farDistance = event.getFarPlaneDistance();
+
+        if (camera.getEntity().level() instanceof ClientLevel clientLevel) {
+            Holder<Biome> biome = clientLevel.getBiome(camera.getBlockPosition());
+            if (clientLevel.effects() instanceof HighlandsSpecialEffects) {
+                FogType fluidState = camera.getFluidInCamera();
+                if (fogMode == FogRenderer.FogMode.FOG_TERRAIN && fluidState == FogType.NONE && (camera.getEntity().getEyeInFluidType() == NeoForgeMod.EMPTY_TYPE.value())) {
+                    if (modifiedNearDistance == null) {
+                        modifiedNearDistance = nearDistance;
+                    }
+                    if (modifiedFarDistance == null) {
+                        modifiedFarDistance = farDistance;
+                    }
+
+                    float nearDistanceGoal = farDistance / 2.0F;
+                    float farDistanceGoal = farDistance;
+
+                    if (biome.is(AetherIITags.Biomes.ARCTIC)) {
+                        nearDistanceGoal = farDistance / 4.0F;
+                    } else if (biome.is(AetherIITags.Biomes.MAGNETIC_FOG)) {
+                        nearDistanceGoal = farDistance / 16.0F;
+                    } else if (biome.is(AetherIITags.Biomes.IRRADIATED)) {
+                        nearDistanceGoal = farDistance / 16.0F;
+                        farDistanceGoal = farDistance / 2.0F;
+                    }
+
+                    if (clientLevel.isRaining()) {
+                        nearDistanceGoal /= 1.5F;
+                    }
+                    if (clientLevel.isThundering()) {
+                        nearDistanceGoal /= 1.5F;
+                    }
+
+                    modifiedNearDistance = Mth.lerp(0.05F, modifiedNearDistance, nearDistanceGoal);
+                    modifiedFarDistance = Mth.lerp(0.05F, modifiedFarDistance, farDistanceGoal);
+
+                    if (!event.isCanceled()) {
+                        event.setNearPlaneDistance(modifiedNearDistance);
+                        event.setFarPlaneDistance(modifiedFarDistance);
+                        event.setCanceled(true);
+                    }
+                }
+            } else {
+                modifiedNearDistance = null;
+                modifiedFarDistance = null;
+            }
+        }
+    }
+
     public static void onComputeFogColor(ViewportEvent.ComputeFogColor event) {
         Camera camera = event.getCamera();
         float red = event.getRed();
@@ -134,5 +207,16 @@ public class AetherIIClientEventListeners {
         ClientInput input = event.getInput();
 
         player.getData(AetherIIDataAttachments.PLAYER).movementInput(player, input);
+    }
+
+    public static void onRenderFirstPersonArm(RenderArmEvent event) {
+        PoseStack poseStack = event.getPoseStack();
+        MultiBufferSource buffer = event.getMultiBufferSource();
+        HumanoidArm arm = event.getArm();
+        AbstractClientPlayer player = event.getPlayer();
+        int packedLight = event.getPackedLight();
+        PlayerSkin skin = player.getSkin();
+
+        RenderHooks.renderFirstPersonGloves(poseStack, buffer, arm, player, packedLight, skin);
     }
 }

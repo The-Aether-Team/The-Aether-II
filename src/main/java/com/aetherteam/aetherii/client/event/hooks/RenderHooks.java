@@ -7,6 +7,8 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookEquipmentScreen;
 import com.aetherteam.aetherii.client.renderer.item.tooltip.ClientCharmTooltip;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.client.renderer.accessory.GlovesLayer;
+import com.aetherteam.aetherii.inventory.container.AccessoryContainer;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.EquipmentUtil;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.DeathScreenAccessor;
@@ -14,6 +16,7 @@ import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor
 import com.aetherteam.aetherii.network.packet.serverbound.OpenGuidebookPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OpenInventoryPacket;
 import com.aetherteam.aetherii.network.packet.serverbound.OutpostRespawnPacket;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
@@ -25,11 +28,15 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -249,5 +256,13 @@ public class RenderHooks {
             }
         }
         return null;
+    }
+
+    public static void renderFirstPersonGloves(PoseStack poseStack, MultiBufferSource buffer, HumanoidArm arm, AbstractClientPlayer player, int packedLight, PlayerSkin skin) {
+        AccessoryContainer container = player.getData(AetherIIDataAttachments.ACCESSORIES);
+
+        poseStack.pushPose();
+        GlovesLayer.renderOnFirstPerson(poseStack, buffer, container.getAccessory(AccessoryContainer.HANDWEAR_SLOT).getFirst(), arm, skin, packedLight);
+        poseStack.popPose();
     }
 }
