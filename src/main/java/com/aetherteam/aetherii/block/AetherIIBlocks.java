@@ -539,6 +539,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<RotatedPillarBlock> DENSE_GUARDIAN_WOOD = register("dense_guardian_wood", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GUARDIAN_LOG = register("stripped_guardian_log", RotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.TERRACOTTA_LIGHT_GRAY));
     public static final DeferredBlock<RotatedPillarBlock> STRIPPED_GUARDIAN_WOOD = register("stripped_guardian_wood", RotatedPillarBlock::new, logProperties(MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<FacingPillarBlock> BASE_STRIPPED_GUARDIAN_WOOD = register("base_stripped_guardian_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<FacingPillarBlock> TOP_STRIPPED_GUARDIAN_WOOD = register("top_stripped_guardian_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(STRIPPED_GUARDIAN_WOOD.get()).mapColor(MapColor.TERRACOTTA_LIGHT_GRAY));
     public static final DeferredBlock<Block> GUARDIAN_ROOTS = register("guardian_roots", () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
     public static final DeferredBlock<Block> FLOWERING_GUARDIAN_ROOTS = register("flowering_guardian_roots", () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
     public static final DeferredBlock<Block> DIM_GUARDIAN_ROOTS = register("dim_guardian_roots", () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava().lightLevel((state) -> 5));
@@ -547,8 +549,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_GUARDIAN_WOOD = register("base_rooted_guardian_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
     public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_GUARDIAN_WOOD = register("top_rooted_guardian_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
     public static final DeferredBlock<RotatedPillarBlock> GUARDIAN_CORTEX = register("guardian_cortex", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
-    public static final DeferredBlock<FacingPillarBlock> BASE_GUARDIAN_CORTEX_WOOD = register("base_guardian_cortex_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
-    public static final DeferredBlock<FacingPillarBlock> TOP_GUARDIAN_CORTEX_WOOD = register("top_guardian_cortex_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
+    public static final DeferredBlock<FacingPillarBlock> BASE_GUARDIAN_CORTEX_WOOD = register("base_guardian_cortex_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_CORTEX.get()).mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<FacingPillarBlock> TOP_GUARDIAN_CORTEX_WOOD = register("top_guardian_cortex_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_CORTEX.get()).mapColor(MapColor.COLOR_BROWN));
 
     // Infected Dungeon Blocks //TODO
     public static final DeferredBlock<RotatedPillarBlock> INFECTED_LOG = register("infected_log", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));

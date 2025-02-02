@@ -516,6 +516,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+        this.dropSelf(AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD.get());
+        this.dropSelf(AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_ROOTS.get());
         this.dropSelf(AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get());
         this.dropSelf(AetherIIBlocks.DIM_GUARDIAN_ROOTS.get());

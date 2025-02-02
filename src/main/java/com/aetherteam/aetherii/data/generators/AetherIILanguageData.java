@@ -501,6 +501,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
         this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD, "Dense Guardian Wood");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
+        this.addBlock(AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD, "Base Stripped Guardian Wood");
+        this.addBlock(AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD, "Top Stripped Guardian Wood");
         this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
         this.addBlock(AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS, "Flowering Guardian Roots");
         this.addBlock(AetherIIBlocks.DIM_GUARDIAN_ROOTS, "Dim Guardian Roots");
