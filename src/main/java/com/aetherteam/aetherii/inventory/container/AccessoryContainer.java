@@ -9,6 +9,8 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -58,10 +60,12 @@ public class AccessoryContainer extends SimpleContainer implements INBTSerializa
         NonNullList<ItemStack> items = this.getItems();
         for (int i = 0; i < items.size(); i++) {
             ItemStack stack = items.get(i);
-            if (!stack.isEmpty()) { //todo account for enchantment curses
-                ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
-                itemEntity.setDefaultPickUpDelay();
-                drops.add(itemEntity);
+            if (!stack.isEmpty()) {
+                if (!EnchantmentHelper.has(stack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP)) {
+                    ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+                    itemEntity.setDefaultPickUpDelay();
+                    drops.add(itemEntity);
+                }
                 this.setItem(i, ItemStack.EMPTY);
                 this.setChanged(); //todo sync here from server->client
             }
