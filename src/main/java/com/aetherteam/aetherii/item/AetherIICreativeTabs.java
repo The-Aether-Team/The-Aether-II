@@ -298,10 +298,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get());
                 output.accept(AetherIIBlocks.GUARDIAN_CORTEX.get());
                 output.accept(AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get());
-                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
-                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
