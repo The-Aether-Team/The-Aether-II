@@ -1,16 +1,28 @@
 package com.aetherteam.aetherii.inventory.container;
 
+import com.aetherteam.aetherii.network.packet.clientbound.UpdateAccessoriesPacket;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.Collection;
 
 public class AccessoryContainer extends SimpleContainer implements INBTSerializable<ListTag> {
     public AccessoryContainer(int size) {
         super(size);
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+//        PacketDistributor.sendToAllPlayers(new UpdateAccessoriesPacket(this.getItems())); //todo need a reliable way to sync from server to client. setChanged is called on both sides so it wont work here.
     }
 
     @Override
@@ -42,8 +54,18 @@ public class AccessoryContainer extends SimpleContainer implements INBTSerializa
         }
     }
 
-    public void tick(LivingEntity livingEntity) {
-
+    public void onLivingDrops(LivingEntity entity, Collection<ItemEntity> drops) {
+        NonNullList<ItemStack> items = this.getItems();
+        for (int i = 0; i < items.size(); i++) {
+            ItemStack stack = items.get(i);
+            if (!stack.isEmpty()) { //todo account for enchantment curses
+                ItemEntity itemEntity = new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack);
+                itemEntity.setDefaultPickUpDelay();
+                drops.add(itemEntity);
+                this.setItem(i, ItemStack.EMPTY);
+                this.setChanged(); //todo sync here from server->client
+            }
+        }
     }
 
     public enum SlotType {

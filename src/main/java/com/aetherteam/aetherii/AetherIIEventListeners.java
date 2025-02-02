@@ -18,6 +18,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -38,6 +39,7 @@ import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
@@ -65,6 +67,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
         bus.addListener(AetherIIEventListeners::onLivingBlockAttack);
         bus.addListener(AetherIIEventListeners::onLivingItemUsed);
+        bus.addListener(AetherIIEventListeners::onLivingDrops);
         bus.addListener(AetherIIEventListeners::onEffectRemove);
 
         // Block
@@ -231,6 +234,21 @@ public class AetherIIEventListeners {
         }
     }
 
+    public static void onLivingDrops(LivingDropsEvent event) {
+        LivingEntity entity = event.getEntity();
+        Collection<ItemEntity> drops = event.getDrops();
+
+        entity.getData(AetherIIDataAttachments.ACCESSORIES).onLivingDrops(entity, drops);
+    }
+
+    public static void onEffectRemove(MobEffectEvent.Remove event) {
+        LivingEntity livingEntity = event.getEntity();
+        Holder<MobEffect> effect = event.getEffect();
+        if (effect.is(AetherIITags.MobEffects.MILK_DOESNT_CLEAR) && livingEntity.getUseItem().is(Tags.Items.BUCKETS_MILK)) {
+            event.setCanceled(true);
+        }
+    }
+
     public static void onBlockUpdateNeighbor(BlockEvent.NeighborNotifyEvent event) {
         LevelAccessor levelAccessor = event.getLevel();
         BlockPos blockPos = event.getPos();
@@ -290,14 +308,6 @@ public class AetherIIEventListeners {
         LivingEntity entity = event.getEntity();
         if (!BlockHooks.canBreathe(entity)) {
             event.setCanBreathe(false);
-        }
-    }
-
-    public static void onEffectRemove(MobEffectEvent.Remove event) {
-        LivingEntity livingEntity = event.getEntity();
-        Holder<MobEffect> effect = event.getEffect();
-        if (effect.is(AetherIITags.MobEffects.MILK_DOESNT_CLEAR) && livingEntity.getUseItem().is(Tags.Items.BUCKETS_MILK)) {
-            event.setCanceled(true);
         }
     }
 }
