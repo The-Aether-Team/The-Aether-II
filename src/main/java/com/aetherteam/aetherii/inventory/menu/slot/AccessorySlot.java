@@ -26,7 +26,7 @@ public class AccessorySlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return stack.is(this.accessoryTag) && super.mayPlace(stack);
+        return stack.is(this.accessoryTag);
     }
 
     @Override

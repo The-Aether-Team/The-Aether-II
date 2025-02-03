@@ -52,7 +52,7 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
             }
         }
 
-        AccessoryContainer accessories = this.owner.getData(AetherIIDataAttachments.ACCESSORIES); //todo this isnt good for syncing because it wont sync until opening the guidebook ui
+        AccessoryContainer accessories = this.owner.getData(AetherIIDataAttachments.ACCESSORIES);
 
         this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_RELICS, 0, 64, 38, RELIC_SLOT_LOCATION));
         this.addSlot(new AccessorySlot(accessories, AetherIITags.Items.EQUIPMENT_HANDWEAR, 1, 64, 56, HANDWEAR_SLOT_LOCATION));
@@ -140,15 +140,15 @@ public class GuidebookEquipmentMenu extends AbstractContainerMenu {
                 if (!this.moveItemStackTo(itemstack1, 9, 45, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(5).hasItem()) { //todo
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(5).hasItem()) {
                 if (!this.moveItemStackTo(itemstack1, 5, 6, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_RELICS) && !this.slots.get(6).hasItem()) { //todo
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_HANDWEAR) && !this.slots.get(6).hasItem()) {
                 if (!this.moveItemStackTo(itemstack1, 6, 7, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_HANDWEAR) && !this.slots.get(7).hasItem()) { //todo
+            } else if (itemstack.is(AetherIITags.Items.EQUIPMENT_ACCESSORIES) && !this.slots.get(7).hasItem()) {
                 if (!this.moveItemStackTo(itemstack1, 7, 8, false)) {
                     return ItemStack.EMPTY;
                 }
