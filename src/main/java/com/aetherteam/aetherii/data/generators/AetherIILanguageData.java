@@ -965,14 +965,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addFeatherShape(Moa.FeatherShape.POINTED, "Pointed");
 
 
-        // Accessory Slots
-        this.addAccessorySlot("relic_slot", "Relic");
-        this.addAccessorySlot("handwear_slot", "Handwear");
-        this.addAccessorySlot("accessory_slot", "Accessory");
-
-
         // Use Action
         this.addTooltip("item.modifiers.blocking", "When blocking:");
+        this.add("item.modifiers.aether_ii.handwear", "When on Hands:");
 
 
         // Entities

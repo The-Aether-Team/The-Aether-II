@@ -1,7 +1,4 @@
 {
-  "accessories.slot.aether_ii.accessory_slot": "Accessory",
-  "accessories.slot.aether_ii.handwear_slot": "Handwear",
-  "accessories.slot.aether_ii.relic_slot": "Relic",
   "aether_ii.arctic": "Arctic",
   "aether_ii.guidebook_bestiary.description.entity.aether_ii.aechor_plant": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "aether_ii.guidebook_bestiary.description.entity.aether_ii.aerbunny": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -932,6 +929,7 @@
   "item.aether_ii.zanite_trowel": "Zanite Trowel",
   "item.aether_ii.zanite_trowel.nitrogen_internals.ability.tooltip.1": "§9Ability:§r Grows Stronger",
   "item.aether_ii.zephyr_spawn_egg": "Zephyr Spawn Egg",
+  "item.modifiers.aether_ii.handwear": "When on Hands:",
   "itemGroup.aether_ii.armor_and_accessories": "Aether II Armor & Accessories",
   "itemGroup.aether_ii.building_blocks": "Aether II Building Blocks",
   "itemGroup.aether_ii.consumables": "Aether II Consumables",
