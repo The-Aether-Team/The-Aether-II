@@ -17,14 +17,11 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.Collection;
 
 public class AccessoryContainer extends SimpleContainer implements INBTSerializable<ListTag> {
+    private final NonNullList<ItemStack> lastItems;
+
     public AccessoryContainer(int size) {
         super(size);
-    }
-
-    @Override
-    public void setChanged() {
-        super.setChanged();
-//        PacketDistributor.sendToAllPlayers(new UpdateAccessoriesPacket(this.getItems())); //todo need a reliable way to sync from server to client. setChanged is called on both sides so it wont work here.
+        this.lastItems = NonNullList.withSize(size, ItemStack.EMPTY);
     }
 
     @Override
@@ -56,7 +53,19 @@ public class AccessoryContainer extends SimpleContainer implements INBTSerializa
         }
     }
 
-    public void onLivingDrops(LivingEntity entity, Collection<ItemEntity> drops) {
+    public void postTickUpdate(LivingEntity entity) {
+        if (!entity.level().isClientSide()) {
+            if (!this.lastItems.equals(this.getItems())) {
+                PacketDistributor.sendToAllPlayers(new UpdateAccessoriesPacket(this.getItems()));
+                this.lastItems.clear();
+                for (int i = 0; i < this.getItems().size(); i++) {
+                    this.lastItems.set(i, this.getItem(i));
+                }
+            }
+        }
+    }
+
+    public void dropItems(LivingEntity entity, Collection<ItemEntity> drops) {
         NonNullList<ItemStack> items = this.getItems();
         for (int i = 0; i < items.size(); i++) {
             ItemStack stack = items.get(i);
@@ -67,7 +76,6 @@ public class AccessoryContainer extends SimpleContainer implements INBTSerializa
                     drops.add(itemEntity);
                 }
                 this.setItem(i, ItemStack.EMPTY);
-                this.setChanged(); //todo sync here from server->client
             }
         }
     }

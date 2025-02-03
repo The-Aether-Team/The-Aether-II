@@ -208,6 +208,7 @@ public class AetherIIEventListeners {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).postTickUpdate(livingEntity);
             livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).postTickUpdate(livingEntity);
+            livingEntity.getData(AetherIIDataAttachments.ACCESSORIES).postTickUpdate(livingEntity);
         }
     }
 
@@ -238,7 +239,7 @@ public class AetherIIEventListeners {
         LivingEntity entity = event.getEntity();
         Collection<ItemEntity> drops = event.getDrops();
 
-        entity.getData(AetherIIDataAttachments.ACCESSORIES).onLivingDrops(entity, drops);
+        entity.getData(AetherIIDataAttachments.ACCESSORIES).dropItems(entity, drops);
     }
 
     public static void onEffectRemove(MobEffectEvent.Remove event) {
