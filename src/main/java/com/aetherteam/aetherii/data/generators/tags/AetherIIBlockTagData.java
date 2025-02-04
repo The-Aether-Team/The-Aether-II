@@ -932,6 +932,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.DENSE_INFECTED_WOOD.get(),
                 AetherIIBlocks.STRIPPED_INFECTED_LOG.get(),
                 AetherIIBlocks.STRIPPED_INFECTED_WOOD.get(),
+                AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD.get(),
+                AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD.get(),
                 AetherIIBlocks.INFECTED_ROOTS.get(),
                 AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get(),
                 AetherIIBlocks.DIM_INFECTED_ROOTS.get(),

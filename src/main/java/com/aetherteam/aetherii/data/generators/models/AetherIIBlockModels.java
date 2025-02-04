@@ -331,6 +331,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.woodProvider(AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.INFECTED_LOG.get()).wood(AetherIIBlocks.INFECTED_WOOD.get());
         this.woodProviderColumn(AetherIIBlocks.DENSE_INFECTED_LOG.get(), AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.DENSE_INFECTED_LOG.get()).wood(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
         this.woodProvider(AetherIIBlocks.STRIPPED_INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_INFECTED_LOG.get()).wood(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+        this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD.get(), AetherIIBlocks.STRIPPED_INFECTED_LOG.get(), AetherIIBlocks.INFECTED_LOG.get());
+        this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_LOG.get(), AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
         this.createTrivialCube(AetherIIBlocks.INFECTED_ROOTS.get());
         this.createTrivialCube(AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get());
         this.createTrivialCube(AetherIIBlocks.DIM_INFECTED_ROOTS.get());

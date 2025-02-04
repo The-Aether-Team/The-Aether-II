@@ -536,6 +536,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.INFECTED_WOOD.get());
         this.dropSelf(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD.get());
         this.dropSelf(AetherIIBlocks.INFECTED_ROOTS.get());
         this.dropSelf(AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get());
         this.dropSelf(AetherIIBlocks.DIM_INFECTED_ROOTS.get());

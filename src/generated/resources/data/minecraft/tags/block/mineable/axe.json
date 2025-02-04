@@ -116,6 +116,8 @@
     "aether_ii:dense_infected_wood",
     "aether_ii:stripped_infected_log",
     "aether_ii:stripped_infected_wood",
+    "aether_ii:base_stripped_infected_wood",
+    "aether_ii:top_stripped_infected_wood",
     "aether_ii:infected_roots",
     "aether_ii:flowering_infected_roots",
     "aether_ii:dim_infected_roots",
