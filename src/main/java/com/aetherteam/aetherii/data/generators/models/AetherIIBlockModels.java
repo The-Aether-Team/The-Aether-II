@@ -338,8 +338,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.DIM_INFECTED_ROOTS.get());
         this.createTrivialCube(AetherIIBlocks.LUCENT_INFECTED_ROOTS.get());
         this.createTrivialCube(AetherIIBlocks.INFECTED_LAMP.get());
-        this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_LOG.get(), AetherIIBlocks.INFECTED_ROOTS.get());
-        this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_ROOTS.get(), AetherIIBlocks.INFECTED_LOG.get());
+        this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_ROOTS.get(), AetherIIBlocks.INFECTED_LOG.get());
+        this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_LOG.get(), AetherIIBlocks.INFECTED_ROOTS.get());
 
         // Wool
         this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());

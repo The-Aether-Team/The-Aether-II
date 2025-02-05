@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "bottom": "aether_ii:block/infected_roots",
+    "bottom": "aether_ii:block/infected_log",
     "side": "aether_ii:block/base_rooted_infected_wood",
-    "top": "aether_ii:block/infected_log"
+    "top": "aether_ii:block/infected_roots"
   }
 }
