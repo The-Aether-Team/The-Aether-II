@@ -528,6 +528,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.GUARDIAN_CORTEX.get());
         this.dropSelf(AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get());
         this.dropSelf(AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES.get());
 
         // Infected Dungeon Blocks
         this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());
@@ -545,6 +547,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.INFECTED_LAMP.get());
         this.dropSelf(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get());
         this.dropSelf(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES.get());
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());

@@ -43,6 +43,10 @@
     "aether_ii:shayelinn_moss_block",
     "aether_ii:shayelinn_moss_carpet",
     "aether_ii:ambrelinn_moss_block",
-    "aether_ii:ambrelinn_moss_carpet"
+    "aether_ii:ambrelinn_moss_carpet",
+    "aether_ii:undergrowth_leaves",
+    "aether_ii:flowering_undergrowth_leaves",
+    "aether_ii:rotten_undergrowth_leaves",
+    "aether_ii:flowering_rotten_undergrowth_leaves"
   ]
 }

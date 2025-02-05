@@ -513,6 +513,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.GUARDIAN_CORTEX, "Guardian Cortex");
         this.addBlock(AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD, "Base Guardian Cortex Wood");
         this.addBlock(AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD, "Top Guardian Cortex Wood");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_LEAVES, "Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES, "Flowering Undergrowth Leaves");
 
         // Infected Dungeon Blocks
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
@@ -530,6 +532,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.INFECTED_LAMP, "Infected Lamp");
         this.addBlock(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD, "Base Rooted Infected Wood");
         this.addBlock(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD, "Top Rooted Infected Wood");
+        this.addBlock(AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES, "Rotten Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES, "Flowering Rotten Undergrowth Leaves");
 
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");

@@ -298,6 +298,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GUARDIAN_CORTEX.get());
                 output.accept(AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get());
                 output.accept(AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get());
+                output.accept(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
@@ -315,8 +317,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.INFECTED_LAMP.get());
                 output.accept(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get());
-                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
-                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()

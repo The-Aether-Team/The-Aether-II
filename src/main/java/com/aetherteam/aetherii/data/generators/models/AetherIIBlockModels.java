@@ -325,7 +325,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.woodProviderColumn(AetherIIBlocks.GUARDIAN_CORTEX.get(), AetherIIBlocks.GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.GUARDIAN_CORTEX.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get(), AetherIIBlocks.GUARDIAN_LOG.get(), AetherIIBlocks.GUARDIAN_LOG.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get(), AetherIIBlocks.GUARDIAN_LOG.get(), AetherIIBlocks.GUARDIAN_LOG.get());
-
+        this.createCutoutMippedCube(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+        this.createCutoutMippedCube(AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES.get());
 
         // Infected Dungeon Blocks
         this.woodProvider(AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.INFECTED_LOG.get()).wood(AetherIIBlocks.INFECTED_WOOD.get());
@@ -340,6 +341,8 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createTrivialCube(AetherIIBlocks.INFECTED_LAMP.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_ROOTS.get(), AetherIIBlocks.INFECTED_LOG.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_LOG.get(), AetherIIBlocks.INFECTED_ROOTS.get());
+        this.createCutoutMippedCube(AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get());
+        this.createCutoutMippedCube(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES.get());
 
         // Wool
         this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());

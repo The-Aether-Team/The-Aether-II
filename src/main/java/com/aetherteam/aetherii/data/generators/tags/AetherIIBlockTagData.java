@@ -1001,7 +1001,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_CARPET.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(),
-                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
+                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get(),
+                AetherIIBlocks.UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 AetherIIBlocks.UNDERSHALE.get(),

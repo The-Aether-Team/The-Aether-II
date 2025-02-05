@@ -551,6 +551,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<RotatedPillarBlock> GUARDIAN_CORTEX = register("guardian_cortex", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
     public static final DeferredBlock<FacingPillarBlock> BASE_GUARDIAN_CORTEX_WOOD = register("base_guardian_cortex_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_CORTEX.get()).mapColor(MapColor.COLOR_BROWN));
     public static final DeferredBlock<FacingPillarBlock> TOP_GUARDIAN_CORTEX_WOOD = register("top_guardian_cortex_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_CORTEX.get()).mapColor(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<Block> UNDERGROWTH_LEAVES = register("undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> FLOWERING_UNDERGROWTH_LEAVES = register("flowering_undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
 
     // Infected Dungeon Blocks //TODO
     public static final DeferredBlock<RotatedPillarBlock> INFECTED_LOG = register("infected_log", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
@@ -568,6 +570,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> INFECTED_LAMP = register("infected_lamp", () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava().lightLevel((state) -> 15));
     public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_INFECTED_WOOD = register("base_rooted_infected_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
     public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_INFECTED_WOOD = register("top_rooted_infected_wood", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
+    public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_LEAVES = register("rotten_undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> FLOWERING_ROTTEN_UNDERGROWTH_LEAVES = register("flowering_rotten_undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
 
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));
