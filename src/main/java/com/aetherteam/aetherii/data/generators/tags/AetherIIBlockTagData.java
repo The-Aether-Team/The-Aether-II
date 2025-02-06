@@ -335,6 +335,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
+                AetherIIBlocks.ARCTIC_SNOW.get(),
                 AetherIIBlocks.ARCTIC_ICE.get(),
                 AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()
         );
