@@ -926,6 +926,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GUARDIAN_CORTEX.get(),
                 AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get(),
                 AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get(),
+                AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get(),
                 AetherIIBlocks.INFECTED_LOG.get(),
                 AetherIIBlocks.INFECTED_WOOD.get(),
                 AetherIIBlocks.DENSE_INFECTED_LOG.get(),
@@ -943,7 +945,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get(),
                 AetherIIBlocks.INFECTED_CORTEX.get(),
                 AetherIIBlocks.BASE_INFECTED_CORTEX_WOOD.get(),
-                AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get()
+                AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get(),
+                AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get()
 
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(

@@ -139,6 +139,26 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, verticalLocation, horizontalLocation));
     }
 
+    public void createFacingTopBottomColumnWithHorizontalVariantGeneric(Block side, Block top, String suffix, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top, suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(side, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, verticalLocation, horizontalLocation));
+    }
+
+    public void createFacingTopBottomColumnWithHorizontalVariantGeneric(Block side, Block top, Block bottom, String suffix) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom, suffix));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(side, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, verticalLocation, horizontalLocation));
+    }
+
     public static BlockStateGenerator createFacingColumnWithHorizontalVariant(Block block, ResourceLocation vertical, ResourceLocation horizontal) {
         return MultiVariantGenerator.multiVariant(block).with(
                 PropertyDispatch.property(FacingPillarBlock.FACING)

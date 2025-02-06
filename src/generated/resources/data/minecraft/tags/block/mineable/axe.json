@@ -110,6 +110,8 @@
     "aether_ii:guardian_cortex",
     "aether_ii:base_guardian_cortex_wood",
     "aether_ii:top_guardian_cortex_wood",
+    "aether_ii:base_rooted_undergrowth_leaves",
+    "aether_ii:top_rooted_undergrowth_leaves",
     "aether_ii:infected_log",
     "aether_ii:infected_wood",
     "aether_ii:dense_infected_log",
@@ -127,6 +129,8 @@
     "aether_ii:top_rooted_infected_wood",
     "aether_ii:infected_cortex",
     "aether_ii:base_infected_cortex_wood",
-    "aether_ii:top_infected_cortex_wood"
+    "aether_ii:top_infected_cortex_wood",
+    "aether_ii:base_rooted_rotten_undergrowth_leaves",
+    "aether_ii:top_rooted_rotten_undergrowth_leaves"
   ]
 }
