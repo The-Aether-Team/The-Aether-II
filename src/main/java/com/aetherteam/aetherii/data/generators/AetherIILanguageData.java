@@ -532,6 +532,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.INFECTED_LAMP, "Infected Lamp");
         this.addBlock(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD, "Base Rooted Infected Wood");
         this.addBlock(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD, "Top Rooted Infected Wood");
+        this.addBlock(AetherIIBlocks.INFECTED_CORTEX, "Infected Cortex");
+        this.addBlock(AetherIIBlocks.BASE_INFECTED_CORTEX_WOOD, "Base Infected Cortex Wood");
+        this.addBlock(AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD, "Top Infected Cortex Wood");
         this.addBlock(AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES, "Rotten Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES, "Flowering Rotten Undergrowth Leaves");
 

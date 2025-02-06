@@ -940,7 +940,10 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.LUCENT_INFECTED_ROOTS.get(),
                 AetherIIBlocks.INFECTED_LAMP.get(),
                 AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get(),
-                AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get()
+                AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get(),
+                AetherIIBlocks.INFECTED_CORTEX.get(),
+                AetherIIBlocks.BASE_INFECTED_CORTEX_WOOD.get(),
+                AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get()
 
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(

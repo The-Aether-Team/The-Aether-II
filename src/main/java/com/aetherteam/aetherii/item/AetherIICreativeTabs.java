@@ -317,6 +317,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.INFECTED_LAMP.get());
                 output.accept(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.INFECTED_CORTEX.get());
+                output.accept(AetherIIBlocks.BASE_INFECTED_CORTEX_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get());
                 output.accept(AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES.get());
             }).build());

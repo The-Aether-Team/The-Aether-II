@@ -124,6 +124,9 @@
     "aether_ii:lucent_infected_roots",
     "aether_ii:infected_lamp",
     "aether_ii:base_rooted_infected_wood",
-    "aether_ii:top_rooted_infected_wood"
+    "aether_ii:top_rooted_infected_wood",
+    "aether_ii:infected_cortex",
+    "aether_ii:base_infected_cortex_wood",
+    "aether_ii:top_infected_cortex_wood"
   ]
 }
