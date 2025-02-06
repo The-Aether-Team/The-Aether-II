@@ -3,6 +3,10 @@ package com.aetherteam.aetherii.block;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.construction.*;
+import com.aetherteam.aetherii.block.dungeon.RottenUndergrowthVinesBlock;
+import com.aetherteam.aetherii.block.dungeon.RottenUndergrowthVinesPlantBlock;
+import com.aetherteam.aetherii.block.dungeon.UndergrowthVinesBlock;
+import com.aetherteam.aetherii.block.dungeon.UndergrowthVinesPlantBlock;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
@@ -31,6 +35,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -555,6 +560,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> FLOWERING_UNDERGROWTH_LEAVES = register("flowering_undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_UNDERGROWTH_LEAVES = register("base_rooted_undergrowth_leaves", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
     public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_UNDERGROWTH_LEAVES = register("top_rooted_undergrowth_leaves", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
+    public static final DeferredBlock<Block> UNDERGROWTH_VINES = register("undergrowth_vines", UndergrowthVinesBlock::new, () ->  BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GREEN).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> UNDERGROWTH_VINES_PLANT = register("undergrowth_vines_plant", UndergrowthVinesPlantBlock::new, () ->  BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GREEN).noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
 
     // Infected Dungeon Blocks
     public static final DeferredBlock<RotatedPillarBlock> INFECTED_LOG = register("infected_log", RotatedPillarBlock::new, logProperties(MapColor.WOOL, MapColor.TERRACOTTA_WHITE));
@@ -579,6 +586,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> FLOWERING_ROTTEN_UNDERGROWTH_LEAVES = register("flowering_rotten_undergrowth_leaves", () -> Block.Properties.of().strength(0.2F).mapColor(MapColor.TERRACOTTA_BROWN).sound(SoundType.AZALEA_LEAVES).noOcclusion().isSuffocating(AetherIIBlockBuilders::never).isViewBlocking(AetherIIBlockBuilders::never).isRedstoneConductor(AetherIIBlockBuilders::never).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES = register("base_rooted_rotten_undergrowth_leaves", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
     public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES = register("top_rooted_rotten_undergrowth_leaves", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
+    public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES = register("rotten_undergrowth_vines", RottenUndergrowthVinesBlock::new, () ->  BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES_PLANT = register("rotten_undergrowth_vines_plant", RottenUndergrowthVinesPlantBlock::new, () ->  BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_BROWN).noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
 
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));
