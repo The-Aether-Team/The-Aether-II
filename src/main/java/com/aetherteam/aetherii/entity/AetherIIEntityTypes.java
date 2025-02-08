@@ -58,12 +58,12 @@ public class AetherIIEntityTypes {
 
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
             () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.CREATURE).sized(0.9F, 0.5F).clientTrackingRange(10).ridingOffset(0).build(AetherIIEntities.SKYROOT_LIZARD));
-    public static final DeferredHolder<EntityType<?>, EntityType<CarrionSprout>> CARRION_SPROUT = ENTITY_TYPES.register("carrion_sprout",
-            () -> EntityType.Builder.of(CarrionSprout::new, MobCategory.CREATURE).sized(0.8F, 1.0F).clientTrackingRange(8).build(AetherIIEntities.CARRION_SPROUT));
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
             () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build(AetherIIEntities.AECHOR_PLANT));
+    public static final DeferredHolder<EntityType<?>, EntityType<CarrionSprout>> CARRION_SPROUT = ENTITY_TYPES.register("carrion_sprout",
+            () -> EntityType.Builder.of(CarrionSprout::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build(AetherIIEntities.CARRION_SPROUT));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Zephyr>> ZEPHYR = ENTITY_TYPES.register("zephyr",
             () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.0F, 1.75F).clientTrackingRange(10).build(AetherIIEntities.ZEPHYR));

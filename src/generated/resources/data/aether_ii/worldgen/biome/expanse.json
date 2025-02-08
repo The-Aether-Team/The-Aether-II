@@ -53,22 +53,43 @@
   ],
   "has_precipitation": false,
   "spawn_costs": {
+    "aether_ii:cockatrice": {
+      "charge": 0.4,
+      "energy_budget": 0.15
+    },
+    "aether_ii:skephid": {
+      "charge": 0.5,
+      "energy_budget": 0.15
+    },
     "aether_ii:tempest": {
       "charge": 0.6,
       "energy_budget": 0.16
     },
     "aether_ii:zephyr": {
-      "charge": 0.6,
+      "charge": 0.3,
       "energy_budget": 0.16
     }
   },
   "spawners": {
     "aether_ii:aether_aerwhale": [],
-    "aether_ii:aether_darkness_monster": [],
+    "aether_ii:aether_darkness_monster": [
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
+      }
+    ],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
-        "maxCount": 1,
+        "maxCount": 2,
         "minCount": 1,
         "weight": 3
       },
@@ -76,17 +97,10 @@
         "type": "aether_ii:tempest",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 2
       }
     ],
-    "aether_ii:aether_surface_monster": [
-      {
-        "type": "aether_ii:cockatrice",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 10
-      }
-    ],
+    "aether_ii:aether_surface_monster": [],
     "ambient": [],
     "axolotls": [],
     "creature": [],

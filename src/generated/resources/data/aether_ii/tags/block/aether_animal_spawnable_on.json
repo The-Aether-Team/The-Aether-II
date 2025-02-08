@@ -1,5 +1,9 @@
 {
   "values": [
-    "aether_ii:aether_grass_block"
+    "aether_ii:aether_grass_block",
+    "aether_ii:arctic_snow_block",
+    "aether_ii:arctic_snow",
+    "aether_ii:arctic_ice",
+    "aether_ii:bryalinn_moss_block"
   ]
 }

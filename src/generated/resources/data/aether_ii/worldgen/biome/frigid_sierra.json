@@ -1,5 +1,6 @@
 {
   "carvers": "aether_ii:highlands_cave",
+  "creature_spawn_probability": 0.07,
   "downfall": 0.9,
   "effects": {
     "fog_color": 15986943,
@@ -92,15 +93,31 @@
   "has_precipitation": true,
   "spawn_costs": {
     "aether_ii:aechor_plant": {
-      "charge": 0.4,
+      "charge": 0.25,
       "energy_budget": 0.11
+    },
+    "aether_ii:carrion_sprout": {
+      "charge": 0.25,
+      "energy_budget": 0.11
+    },
+    "aether_ii:cockatrice": {
+      "charge": 0.4,
+      "energy_budget": 0.15
+    },
+    "aether_ii:skephid": {
+      "charge": 0.5,
+      "energy_budget": 0.15
+    },
+    "aether_ii:swet": {
+      "charge": 0.25,
+      "energy_budget": 0.1
     },
     "aether_ii:tempest": {
       "charge": 0.6,
       "energy_budget": 0.16
     },
     "aether_ii:zephyr": {
-      "charge": 0.6,
+      "charge": 0.3,
       "energy_budget": 0.16
     }
   },
@@ -108,16 +125,22 @@
     "aether_ii:aether_aerwhale": [],
     "aether_ii:aether_darkness_monster": [
       {
-        "type": "aether_ii:skephid",
-        "maxCount": 3,
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
         "minCount": 1,
-        "weight": 5
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
-        "maxCount": 1,
+        "maxCount": 2,
         "minCount": 1,
         "weight": 3
       },
@@ -125,7 +148,7 @@
         "type": "aether_ii:tempest",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 2
       }
     ],
     "aether_ii:aether_surface_monster": [
@@ -133,77 +156,65 @@
         "type": "aether_ii:aechor_plant",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 7
+        "weight": 1
       },
       {
-        "type": "aether_ii:cockatrice",
+        "type": "aether_ii:carrion_sprout",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 10
+        "weight": 1
       },
       {
         "type": "aether_ii:swet",
-        "maxCount": 1,
+        "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 3
       }
     ],
     "ambient": [],
     "axolotls": [],
     "creature": [
       {
-        "type": "aether_ii:arctic_kirrid",
+        "type": "aether_ii:arctic_taegore",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 12
       },
       {
         "type": "aether_ii:arctic_burrukai",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 8
+        "weight": 12
       },
       {
-        "type": "aether_ii:arctic_taegore",
+        "type": "aether_ii:arctic_kirrid",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 8
+        "weight": 14
+      },
+      {
+        "type": "aether_ii:phyg",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:flying_cow",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:sheepuff",
+        "maxCount": 2,
+        "minCount": 2,
+        "weight": 4
       },
       {
         "type": "aether_ii:aerbunny",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 10
-      },
-      {
-        "type": "aether_ii:sheepuff",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 6
-      },
-      {
-        "type": "aether_ii:flying_cow",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 6
-      },
-      {
-        "type": "aether_ii:phyg",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 6
-      },
-      {
-        "type": "aether_ii:carrion_sprout",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 3
-      },
-      {
-        "type": "aether_ii:moa",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 1
+        "weight": 8
       }
     ],
     "misc": [],
