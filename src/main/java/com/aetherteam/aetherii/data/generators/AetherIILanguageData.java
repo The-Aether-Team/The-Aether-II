@@ -517,6 +517,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES, "Flowering Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES, "Base Rooted Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES, "Top Rooted Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
+        this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES_PLANT, "Undergrowth Vines Plant");
 
         // Infected Dungeon Blocks
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
@@ -541,6 +543,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES, "Flowering Rotten Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES, "Base Rooted Rotten Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES, "Top Rooted Rotten Undergrowth Leaves");
+        this.addBlock(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES, "Rotten Undergrowth Vines");
+        this.addBlock(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT, "Rotten Undergrowth Vines Plant");
 
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");

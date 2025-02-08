@@ -329,6 +329,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createCutoutMippedCube(AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get(), AetherIIBlocks.UNDERGROWTH_LEAVES.get(), "_solid", AetherIIBlocks.GUARDIAN_ROOTS.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get(), AetherIIBlocks.GUARDIAN_ROOTS.get(), AetherIIBlocks.UNDERGROWTH_LEAVES.get(), "_solid");
+        this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_VINES.get());
+        this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_VINES_PLANT.get());
+        this.registerSimpleFlatItemModel(AetherIIBlocks.UNDERGROWTH_VINES.get(), "_plant");
 
         // Infected Dungeon Blocks
         this.woodProvider(AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.INFECTED_LOG.get()).wood(AetherIIBlocks.INFECTED_WOOD.get());
@@ -350,6 +353,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createCutoutMippedCube(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(), AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get(), "_solid", AetherIIBlocks.INFECTED_ROOTS.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(), AetherIIBlocks.INFECTED_ROOTS.get(), AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get(), "_solid");
+        this.createUndergrowthVines(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
+        this.createUndergrowthVines(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT.get());
+        this.registerSimpleFlatItemModel(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get(), "_plant");
 
         // Wool
         this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());

@@ -1,8 +1,6 @@
 {
   "ambientocclusion": false,
-  "textures": {
-    "particle": "#vine"
-  },
+  "render_type": "minecraft:cutout",
   "elements": [
     {   "from": [ 4, 0, 0 ],
       "to": [ 4, 16, 16 ],

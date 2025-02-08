@@ -532,6 +532,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES.get());
         this.dropSelf(AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get());
         this.dropSelf(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_VINES.get());
+        this.otherWhenSilkTouch(AetherIIBlocks.UNDERGROWTH_VINES_PLANT.get(), AetherIIBlocks.UNDERGROWTH_VINES.get());
 
         // Infected Dungeon Blocks
         this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());
@@ -556,6 +558,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES.get());
         this.dropSelf(AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get());
         this.dropSelf(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get());
+        this.dropWhenSilkTouch(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
+        this.otherWhenSilkTouch(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT.get(), AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());

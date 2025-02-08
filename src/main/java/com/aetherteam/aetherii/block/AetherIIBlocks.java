@@ -28,7 +28,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ColorRGBA;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -36,7 +35,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -562,7 +560,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_UNDERGROWTH_LEAVES = register("base_rooted_undergrowth_leaves", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
     public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_UNDERGROWTH_LEAVES = register("top_rooted_undergrowth_leaves", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(GUARDIAN_ROOTS.get()));
     public static final DeferredBlock<Block> UNDERGROWTH_VINES = register("undergrowth_vines", UndergrowthVinesBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_GREEN).randomTicks().noCollission().instabreak().sound(SoundType.CAVE_VINES).pushReaction(PushReaction.DESTROY));
-    public static final DeferredBlock<Block> UNDERGROWTH_VINES_PLANT = register("undergrowth_vines_plant", UndergrowthVinesPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_VINES.get()));
+    public static final DeferredBlock<Block> UNDERGROWTH_VINES_PLANT = registerWithoutItem("undergrowth_vines_plant", UndergrowthVinesPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_VINES.get()));
 
     // Infected Dungeon Blocks
     public static final DeferredBlock<RotatedPillarBlock> INFECTED_LOG = register("infected_log", RotatedPillarBlock::new, logProperties(MapColor.WOOL, MapColor.TERRACOTTA_WHITE));
@@ -588,7 +586,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<FacingPillarBlock> BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES = register("base_rooted_rotten_undergrowth_leaves", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
     public static final DeferredBlock<FacingPillarBlock> TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES = register("top_rooted_rotten_undergrowth_leaves", FacingPillarBlock::new, () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()));
     public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES = register("rotten_undergrowth_vines", RottenUndergrowthVinesBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_VINES.get()).mapColor(MapColor.TERRACOTTA_BROWN));
-    public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES_PLANT = register("rotten_undergrowth_vines_plant", RottenUndergrowthVinesPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get()));
+    public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES_PLANT = registerWithoutItem("rotten_undergrowth_vines_plant", RottenUndergrowthVinesPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get()));
 
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));
