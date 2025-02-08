@@ -28,7 +28,7 @@ public class GuidebookDiscoveryAttachment { //todo
     private boolean shouldSyncAfterJoin = false;
     private boolean sync = false;
 
-    public static final Codec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group( //todo needs to use dispatch codecs
             BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("observed_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getObservedBestiaryEntries),
             BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("understood_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getUnderstoodBestiaryEntries),
             BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("unchecked_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getUncheckedBestiaryEntries)

@@ -66,7 +66,7 @@ public abstract class GuidebookEntry {
     }
 
     protected <T> Info<T> info(DataTemplate<T> data, T value) {
-        Info<T> info = new Info<>(value, false);
+        Info<T> info = new Info<>(value, false, false);
         this.values.put(data.id(), info);
         return info;
     }
@@ -80,14 +80,20 @@ public abstract class GuidebookEntry {
     public static final class Info<T> { //todo this needs a codec and also a "viewed" value.
         private final T value;
         private boolean visible;
+        private boolean viewed;
 
-        public Info(T value, boolean visible) {
+        public Info(T value, boolean visible, boolean viewed) {
             this.value = value;
             this.visible = visible;
+            this.viewed = viewed;
         }
 
         public void reveal() {
             this.visible = true;
+        }
+
+        public void view() {
+            this.viewed = true;
         }
 
         public T getValue() {
@@ -96,6 +102,10 @@ public abstract class GuidebookEntry {
 
         public boolean isVisible() {
             return this.visible;
+        }
+
+        public boolean isViewed() {
+            return this.viewed;
         }
     }
 }
