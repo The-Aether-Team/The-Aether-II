@@ -102,11 +102,11 @@
   "has_precipitation": true,
   "spawn_costs": {
     "aether_ii:aechor_plant": {
-      "charge": 0.25,
+      "charge": 0.2,
       "energy_budget": 0.11
     },
     "aether_ii:carrion_sprout": {
-      "charge": 0.25,
+      "charge": 0.2,
       "energy_budget": 0.11
     },
     "aether_ii:cockatrice": {
@@ -119,7 +119,7 @@
     },
     "aether_ii:swet": {
       "charge": 0.25,
-      "energy_budget": 0.1
+      "energy_budget": 0.14
     },
     "aether_ii:tempest": {
       "charge": 0.6,

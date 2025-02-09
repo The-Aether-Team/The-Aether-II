@@ -170,9 +170,9 @@ public class HighlandsBiomeBuilders {
                 downfall,
                 HIGHFIELDS_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.25, 0.11)
-                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.25, 0.11)
-                        .addMobCharge(AetherIIEntityTypes.SWET.get(), 0.25, 0.1)
+                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.2, 0.11)
+                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.2, 0.11)
+                        .addMobCharge(AetherIIEntityTypes.SWET.get(), 0.25, 0.14)
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.3, 0.16)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.4, 0.15)
@@ -334,9 +334,9 @@ public class HighlandsBiomeBuilders {
                 downfall,
                 MAGNETIC_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.25, 0.11)
-                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.25, 0.11)
-                        .addMobCharge(AetherIIEntityTypes.SWET.get(), 0.25, 0.1)
+                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.2, 0.11)
+                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.2, 0.11)
+                        .addMobCharge(AetherIIEntityTypes.SWET.get(), 0.25, 0.14)
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.3, 0.16)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.4, 0.15)
@@ -485,9 +485,9 @@ public class HighlandsBiomeBuilders {
                 downfall,
                 ARCTIC_EFFECTS,
                 spawnSettingsBuilder
-                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.25, 0.11)
-                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.25, 0.11)
-                        .addMobCharge(AetherIIEntityTypes.SWET.get(), 0.25, 0.1)
+                        .addMobCharge(AetherIIEntityTypes.AECHOR_PLANT.get(), 0.2, 0.11)
+                        .addMobCharge(AetherIIEntityTypes.CARRION_SPROUT.get(), 0.2, 0.11)
+                        .addMobCharge(AetherIIEntityTypes.SWET.get(), 0.25, 0.14)
                         .addMobCharge(AetherIIEntityTypes.ZEPHYR.get(), 0.3, 0.16)
                         .addMobCharge(AetherIIEntityTypes.TEMPEST.get(), 0.6, 0.16)
                         .addMobCharge(AetherIIEntityTypes.COCKATRICE.get(), 0.4, 0.15)
