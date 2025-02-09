@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.entity.passive;
+package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
 import net.minecraft.core.BlockPos;
@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -119,7 +120,8 @@ public class CarrionSprout extends PathfinderMob {
      */
     public static boolean checkCarrionSproutSpawnRules(EntityType<? extends CarrionSprout> carrionSprout, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON)
-                && level.getRawBrightness(pos, 0) > 8;
+                && level.getRawBrightness(pos, 0) > 8
+                && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
     /**
@@ -128,7 +130,7 @@ public class CarrionSprout extends PathfinderMob {
     @Override
     public void tick() {
         super.tick();
-        if (!this.level().getBlockState(this.blockPosition().below()).is(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON) && !this.isPassenger()) {
+        if (!this.level().getBlockState(this.blockPosition().below()).is(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON) && !this.isPassenger()) {
             if (this.level() instanceof ServerLevel serverLevel) {
                 this.kill(serverLevel);
             }
