@@ -123,7 +123,6 @@ public class AetherIIBestiaryEntries {
     }
 
     public static void bootstrap(BootstrapContext<BestiaryEntry> context) {
-        String path = "bestiary/";
         for (Map.Entry<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> entry : ENTITIES.entrySet()) {
             Holder<EntityType<?>> holder = entry.getValue();
             EntityType<?> entity = holder.value();
@@ -147,19 +146,18 @@ public class AetherIIBestiaryEntries {
             if (SCALED.containsKey(holder)) {
                 scaleMultiplier = Optional.of(SCALED.get(holder));
             }
-            ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entity.toShortString()).withPrefix(path);
-            ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entity.toShortString()).withPrefix(path);
-            context.register(entry.getKey(), new BestiaryEntry(holder,
+            context.register(entry.getKey(), new BestiaryEntry(
                     ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString()),
                     name,
                     slotName,
                     slotSubtitle,
-                    scaleMultiplier,
                     "aether_ii.guidebook_bestiary.description.entity.aether_ii." + entity.toShortString(),
-                    loot,
-                    food,
-                    observeId,
-                    understandId
+                    holder,
+                    scaleMultiplier,
+                    loot.get(0),
+                    loot.get(1),
+                    loot.get(2),
+                    food
             ));
         }
     }

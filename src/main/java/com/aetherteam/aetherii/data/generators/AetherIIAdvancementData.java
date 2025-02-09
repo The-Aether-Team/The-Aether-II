@@ -29,7 +29,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class AetherIIAdvancementData extends AdvancementProvider {
-    public static List<RewardWrapper<?>> REWARD_WRAPPERS = new ArrayList<>(); //todo hopefully this works
+    public static List<RewardWrapper<?>> REWARD_WRAPPERS = new ArrayList<>();
 
     public AetherIIAdvancementData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, List.of(new BestiaryAdvancements()));
