@@ -111,7 +111,7 @@ public class Swet extends Mob implements Enemy {
     }
 
     /**
-     * Swets can spawn if the block at the spawn location is in the {@link AetherTags.Blocks#SWET_SPAWNABLE_ON} tag, if they are spawning at a light level above 8,
+     * Swets can spawn if the block at the spawn location is in the {@link AetherIITags.Blocks#SWET_SPAWNABLE_ON} tag, if they are spawning at a light level above 8,
      * and  if the difficulty isn't peaceful.
      *
      * @param swet   The {@link Swet} {@link EntityType}.
@@ -123,7 +123,7 @@ public class Swet extends Mob implements Enemy {
      */
     public static boolean checkSwetSpawnRules(EntityType<? extends Swet> swet, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SWET_SPAWNABLE_ON)
-                && level.getRawBrightness(pos, 0) <= 8
+                && level.canSeeSky(pos)
                 && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
