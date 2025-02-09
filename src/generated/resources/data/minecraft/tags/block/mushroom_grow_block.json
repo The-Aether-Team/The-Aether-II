@@ -1,6 +1,20 @@
 {
   "values": [
     "aether_ii:ferrosite_sand",
-    "aether_ii:ferrosite_mud"
+    "aether_ii:ferrosite_mud",
+    "aether_ii:guardian_roots",
+    "aether_ii:dim_guardian_roots",
+    "aether_ii:lucent_guardian_roots",
+    "aether_ii:guardian_lamp",
+    "aether_ii:flowering_guardian_roots",
+    "aether_ii:base_rooted_guardian_wood",
+    "aether_ii:top_rooted_guardian_wood",
+    "aether_ii:infected_roots",
+    "aether_ii:dim_infected_roots",
+    "aether_ii:lucent_infected_roots",
+    "aether_ii:infected_lamp",
+    "aether_ii:flowering_infected_roots",
+    "aether_ii:base_rooted_infected_wood",
+    "aether_ii:top_rooted_infected_wood"
   ]
 }
