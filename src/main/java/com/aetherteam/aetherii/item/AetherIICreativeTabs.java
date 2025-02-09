@@ -328,6 +328,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
+                output.accept(AetherIIBlocks.ROTSHROOM.get());
+                output.accept(AetherIIBlocks.LARGE_ROTSHROOM.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()

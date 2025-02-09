@@ -357,6 +357,10 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createUndergrowthVines(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT.get());
         this.registerSimpleFlatItemModel(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get(), "_plant");
 
+        // Rotshroom Blocks
+        this.createPlantWithDefaultItem(AetherIIBlocks.ROTSHROOM.get(), AetherIIBlocks.POTTED_ROTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createPlantWithDefaultItem(AetherIIBlocks.LARGE_ROTSHROOM.get(), AetherIIBlocks.POTTED_LARGE_ROTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+
         // Wool
         this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());
         this.createFullAndCarpetBlocks(AetherIIBlocks.WHITE_CLOUDWOOL.get(), AetherIIBlocks.WHITE_CLOUDWOOL_CARPET.get());

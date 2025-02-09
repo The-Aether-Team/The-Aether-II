@@ -561,6 +561,14 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropWhenSilkTouch(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
         this.otherWhenSilkTouch(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT.get(), AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
 
+        // Rotshroom Blocks
+        this.dropSelf(AetherIIBlocks.ROTSHROOM.get());
+        this.dropSelf(AetherIIBlocks.LARGE_ROTSHROOM.get());
+
+        // Potted Rotshrooms
+        this.dropPottedContents(AetherIIBlocks.POTTED_ROTSHROOM.get());
+        this.dropPottedContents(AetherIIBlocks.POTTED_LARGE_ROTSHROOM.get());
+
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
         this.dropSelf(AetherIIBlocks.WHITE_CLOUDWOOL.get());

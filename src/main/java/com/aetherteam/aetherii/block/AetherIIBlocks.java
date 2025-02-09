@@ -588,6 +588,14 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES = register("rotten_undergrowth_vines", RottenUndergrowthVinesBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.UNDERGROWTH_VINES.get()).mapColor(MapColor.TERRACOTTA_BROWN));
     public static final DeferredBlock<Block> ROTTEN_UNDERGROWTH_VINES_PLANT = registerWithoutItem("rotten_undergrowth_vines_plant", RottenUndergrowthVinesPlantBlock::new, () -> Block.Properties.ofFullCopy(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get()));
 
+    // Rotshroom Blocks
+    public static final DeferredBlock<Block> ROTSHROOM = register("rotshroom", (properties) -> new MushroomBlock(TreeFeatures.HUGE_BROWN_MUSHROOM, properties), () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> LARGE_ROTSHROOM = register("large_rotshroom", (properties) -> new MushroomBlock(TreeFeatures.HUGE_BROWN_MUSHROOM, properties), () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
+
+    // Potted Rotshrooms
+    public static final DeferredBlock<FlowerPotBlock> POTTED_ROTSHROOM = registerWithoutItem("potted_rotshroom", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ROTSHROOM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
+    public static final DeferredBlock<FlowerPotBlock> POTTED_LARGE_ROTSHROOM = registerWithoutItem("potted_large_rotshroom", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LARGE_ROTSHROOM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
+
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));
     public static final DeferredBlock<Block> WHITE_CLOUDWOOL = register("white_cloudwool", () -> Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));
@@ -767,6 +775,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLUEBERRY_BUSH.get()), AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get()), AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.ORANGE_TREE.get()), AetherIIBlocks.POTTED_ORANGE_TREE);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.ROTSHROOM.get()), AetherIIBlocks.POTTED_ROTSHROOM);
+        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.LARGE_ROTSHROOM.get()), AetherIIBlocks.POTTED_LARGE_ROTSHROOM);
     }
 
     public static void registerFlammability() {
