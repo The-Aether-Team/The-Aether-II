@@ -30,6 +30,16 @@ public class CellingMonster extends Monster {
     }
 
     @Override
+    public void calculateEntityAnimation(boolean p_268129_) {
+        float f = (float) Mth.length(this.getX() - this.xo, this.getAttachFacing() != Direction.DOWN ? this.getY() - this.yo : 0.0, this.getZ() - this.zo);
+        if (!this.isPassenger() && this.isAlive()) {
+            this.updateWalkAnimation(f);
+        } else {
+            this.walkAnimation.stop();
+        }
+    }
+
+    @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(ATTACHED_FACE, Direction.DOWN);
