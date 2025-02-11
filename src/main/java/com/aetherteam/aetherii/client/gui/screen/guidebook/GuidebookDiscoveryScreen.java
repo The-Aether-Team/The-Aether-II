@@ -28,7 +28,7 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     private final ExplorationSection explorationSection;
     protected int titleLabelX;
     protected int titleLabelY;
-    protected DiscoverySection<?> currentSection;
+    protected DiscoverySection<?, ?> currentSection;
 
     protected GuidebookDiscoveryScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(title);
@@ -152,11 +152,11 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         return false;
     }
 
-    public void setCurrentSectionTab(DiscoverySection<?> currentSection) {
+    public void setCurrentSectionTab(DiscoverySection<?, ?> currentSection) {
         this.currentSection = currentSection;
     }
 
-    public DiscoverySection<?> getCurrentSection() {
+    public DiscoverySection<?, ?> getCurrentSection() {
         return this.currentSection;
     }
 

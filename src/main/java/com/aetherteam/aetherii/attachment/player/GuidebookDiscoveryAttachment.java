@@ -89,9 +89,9 @@ public class GuidebookDiscoveryAttachment { //todo
             }
         }
 
-        Optional<RewardWrapper<?>> rewardOptional = AetherIIRewardWrappers.getWrapperForAdvancement(registryAccess, advancement);
+        Optional<RewardWrapper> rewardOptional = AetherIIRewardWrappers.getWrapperForAdvancement(registryAccess, advancement);
         if (rewardOptional.isPresent()) {
-            RewardWrapper<?> reward = rewardOptional.get();
+            RewardWrapper reward = rewardOptional.get();
             for (BestiaryEntry.Mutable entry : this.bestiaryEntries) {
                 if (entry.getEntry().is(reward.entryId())) {
                     List.of(entry.getClientValues()).forEach(name -> {

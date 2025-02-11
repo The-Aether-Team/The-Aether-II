@@ -29,7 +29,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class AetherIIAdvancementData extends AdvancementProvider {
-    public static List<RewardWrapper<?>> REWARD_WRAPPERS = new ArrayList<>();
+    public static List<RewardWrapper> REWARD_WRAPPERS = new ArrayList<>();
 
     public AetherIIAdvancementData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, List.of(new BestiaryAdvancements()));
@@ -46,14 +46,14 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                 EntityType<?> entityType = entry.getValue().value();
                 ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entityType.toShortString()).withPrefix(path);
                 observe(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, observeId);
-                RewardWrapper<BestiaryEntry> observeWrapper = new RewardWrapper<>(observeId, entry.getKey().registryKey(), entry.getKey().location(), "test");
+                RewardWrapper observeWrapper = new RewardWrapper(observeId, entry.getKey().location(), List.of("test"));
                 if (!REWARD_WRAPPERS.contains(observeWrapper)) {
                     REWARD_WRAPPERS.add(observeWrapper);
                 }
 
                 ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entityType.toShortString()).withPrefix(path);
                 understand(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, understandId);
-                RewardWrapper<BestiaryEntry> understandWrapper = new RewardWrapper<>(understandId, entry.getKey().registryKey(), entry.getKey().location(), "test");
+                RewardWrapper understandWrapper = new RewardWrapper(understandId, entry.getKey().location(), List.of("test"));
                 if (!REWARD_WRAPPERS.contains(understandWrapper)) {
                     REWARD_WRAPPERS.add(understandWrapper);
                 }

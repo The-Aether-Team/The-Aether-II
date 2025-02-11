@@ -4,9 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashMap;
@@ -15,7 +12,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public abstract class GuidebookEntry {
-    public static final DataTemplate<ResourceLocation> ICON = new DataTemplate<>("icon_discovered", ResourceLocation.CODEC::fieldOf);
+    public static final DataTemplate<ResourceLocation> ICON = new DataTemplate<>("icon", ResourceLocation.CODEC::fieldOf);
     public static final DataTemplate<Optional<String>> NAME = new DataTemplate<>("name", Codec.STRING::optionalFieldOf);
     public static final DataTemplate<Optional<String>> SLOT_NAME = new DataTemplate<>("slot_name", Codec.STRING::optionalFieldOf);
     public static final DataTemplate<Optional<String>> SLOT_SUBTITLE = new DataTemplate<>("slot_subtitle", Codec.STRING::optionalFieldOf);

@@ -9,7 +9,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public class EffectsSection extends DiscoverySection<EffectsEntry> {
+public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.Mutable> {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_EFFECTS_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_effects.png");
 
     public EffectsSection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {

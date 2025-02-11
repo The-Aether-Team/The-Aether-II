@@ -31,7 +31,15 @@ public record CheckGuidebookEntryPacket(EntityType<?> entityType) implements Cus
         Player playerEntity = context.player();
         if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             GuidebookDiscoveryAttachment attachment = serverPlayer.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            attachment.getUncheckedBestiaryEntries().removeIf((holder) -> holder.value().entityType().value() == payload.entityType());
+            attachment.getBestiaryEntries().forEach((entry) -> {
+                if (entry.getEntityType().value() == payload.entityType()) {
+                    entry.getClientValues().values().forEach((info) -> {
+                        if (info.isVisible()) {
+                            info.view();
+                        }
+                    });
+                }
+            });
         }
     }
 }

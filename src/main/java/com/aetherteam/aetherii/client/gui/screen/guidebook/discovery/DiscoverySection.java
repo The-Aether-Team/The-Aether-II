@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Registry;
@@ -12,16 +13,16 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DiscoverySection<T> {
+public abstract class DiscoverySection<S extends GuidebookEntry, T extends S> {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_general.png");
     protected final RegistryAccess registryAccess;
-    protected final ResourceKey<Registry<T>> registryKey;
+    protected final ResourceKey<Registry<S>> registryKey;
     protected final GuidebookDiscoveryScreen screen;
     protected final Component title;
     protected final List<T> entries = new ArrayList<>();
     public T selectedEntry;
 
-    public DiscoverySection(RegistryAccess registryAccess, ResourceKey<Registry<T>> registryKey, GuidebookDiscoveryScreen screen, Component title) {
+    public DiscoverySection(RegistryAccess registryAccess, ResourceKey<Registry<S>> registryKey, GuidebookDiscoveryScreen screen, Component title) {
         this.registryAccess = registryAccess;
         this.registryKey = registryKey;
         this.screen = screen;
@@ -29,12 +30,7 @@ public abstract class DiscoverySection<T> {
     }
 
     public void initSection() {
-        this.constructEntries();
-    }
 
-    protected void constructEntries() {
-        this.entries.clear();
-        this.registryAccess.lookupOrThrow(this.registryKey).iterator().forEachRemaining(this.entries::add);
     }
 
     public abstract void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);

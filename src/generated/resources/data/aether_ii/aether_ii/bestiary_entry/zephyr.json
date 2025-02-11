@@ -1,16 +1,16 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.zephyr",
   "entity_type": "aether_ii:zephyr",
-  "icon_discovered": "aether_ii:guidebook/bestiary/zephyr",
-  "loot": [
-    {
-      "chance": 1.0,
-      "item": "aether_ii:cold_aercloud",
-      "max_count": 2,
-      "min_count": 0
-    }
-  ],
-  "observation_advancement": "aether_ii:bestiary/observe_zephyr",
+  "health": 0,
+  "icon": "aether_ii:guidebook/bestiary/zephyr",
+  "impact_defense": 0,
+  "loot_1": {
+    "chance": 1.0,
+    "item": "aether_ii:cold_aercloud",
+    "max_count": 2,
+    "min_count": 0
+  },
+  "pierce_defense": 0,
   "scale_multiplier": 1.65,
-  "understanding_advancement": "aether_ii:bestiary/understand_zephyr"
+  "slash_defense": 0
 }

@@ -20,7 +20,7 @@ public class AetherIIRewardWrappers {
     }
 
     public static void bootstrap(BootstrapContext<RewardWrapper> context) {
-        for (RewardWrapper<?> entry : AetherIIAdvancementData.REWARD_WRAPPERS) {
+        for (RewardWrapper entry : AetherIIAdvancementData.REWARD_WRAPPERS) {
             context.register(ResourceKey.create(REWARD_WRAPPER_REGISTRY_KEY, entry.advancement()), entry);
         }
     }
@@ -29,8 +29,8 @@ public class AetherIIRewardWrappers {
         return registryAccess.lookupOrThrow(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY);
     }
 
-    public static Optional<RewardWrapper<?>> getWrapperForAdvancement(RegistryAccess registryAccess, AdvancementHolder advancementHolder) {
-        for (RewardWrapper<?> wrapper : getRegistry(registryAccess)) {
+    public static Optional<RewardWrapper> getWrapperForAdvancement(RegistryAccess registryAccess, AdvancementHolder advancementHolder) {
+        for (RewardWrapper wrapper : getRegistry(registryAccess)) {
             if (wrapper.advancement().equals(advancementHolder.id())) {
                 return Optional.of(wrapper);
             }

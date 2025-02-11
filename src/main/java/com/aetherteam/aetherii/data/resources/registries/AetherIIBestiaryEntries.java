@@ -146,6 +146,19 @@ public class AetherIIBestiaryEntries {
             if (SCALED.containsKey(holder)) {
                 scaleMultiplier = Optional.of(SCALED.get(holder));
             }
+            Optional<BestiaryEntry.LootDisplay> loot1 = Optional.empty();
+            if (loot.size() > 0) {
+                loot1 = Optional.of(loot.get(0));
+            }
+            Optional<BestiaryEntry.LootDisplay> loot2 = Optional.empty();
+            if (loot.size() > 1) {
+                loot2 = Optional.of(loot.get(1));
+            }
+            Optional<BestiaryEntry.LootDisplay> loot3 = Optional.empty();
+            if (loot.size() > 2) {
+                loot3 = Optional.of(loot.get(2));
+            }
+
             context.register(entry.getKey(), new BestiaryEntry(
                     ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString()),
                     name,
@@ -153,10 +166,14 @@ public class AetherIIBestiaryEntries {
                     slotSubtitle,
                     "aether_ii.guidebook_bestiary.description.entity.aether_ii." + entity.toShortString(),
                     holder,
+                    0, //TODO: VALUES FROM ENTITY ATTRIBUTE BUILDERS
+                    0,
+                    0,
+                    0,
                     scaleMultiplier,
-                    loot.get(0),
-                    loot.get(1),
-                    loot.get(2),
+                    loot1,
+                    loot2,
+                    loot3,
                     food
             ));
         }

@@ -2,8 +2,9 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aerbunny",
   "entity_type": "aether_ii:aerbunny",
   "food": "aether_ii:aerbunny_food",
-  "icon_discovered": "aether_ii:guidebook/bestiary/aerbunny",
-  "loot": [],
-  "observation_advancement": "aether_ii:bestiary/observe_aerbunny",
-  "understanding_advancement": "aether_ii:bestiary/understand_aerbunny"
+  "health": 0,
+  "icon": "aether_ii:guidebook/bestiary/aerbunny",
+  "impact_defense": 0,
+  "pierce_defense": 0,
+  "slash_defense": 0
 }

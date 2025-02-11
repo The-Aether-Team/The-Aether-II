@@ -7,7 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 
-public class ExplorationSection extends DiscoverySection<ExplorationEntry> {
+public class ExplorationSection extends DiscoverySection<ExplorationEntry, ExplorationEntry.Mutable> {
     public ExplorationSection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
         super(registryAccess, AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, screen, title);
     }

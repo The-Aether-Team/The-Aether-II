@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
+import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
@@ -9,8 +10,6 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScr
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
-import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.AttributeMapAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckGuidebookEntryPacket;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
@@ -21,25 +20,19 @@ import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -51,7 +44,7 @@ import org.joml.Vector3f;
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class BestiarySection extends DiscoverySection<BestiaryEntry> {
+public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEntry.Mutable> {
     private static final List<Holder<EntityType<?>>> ENTRY_ORDER = List.of(
             AetherIIEntityTypes.PHYG, AetherIIEntityTypes.SHEEPUFF, AetherIIEntityTypes.FLYING_COW, AetherIIEntityTypes.AERBUNNY,
             AetherIIEntityTypes.HIGHFIELDS_TAEGORE, AetherIIEntityTypes.MAGNETIC_TAEGORE, AetherIIEntityTypes.ARCTIC_TAEGORE,
@@ -66,7 +59,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     private static final ResourceLocation PIERCE_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/pierce");
     private static final ResourceLocation UNDISCOVERED_ENTRY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/undiscovered");
     private static final ResourceLocation DISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/default");
-    private final List<BestiaryEntry> orderedEntries = new ArrayList<>();
+    private final List<BestiaryEntry.Mutable> orderedEntries = new ArrayList<>();
     private List<Float> snapPoints;
     private boolean scrolling;
     private float scrollY;
@@ -80,10 +73,11 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     @Override
     public void initSection() {
-        super.initSection();
+        this.entries.clear();
+        this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> this.entries.add(new BestiaryEntry.Mutable(entry)));
         this.orderedEntries.clear();
         ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
-            if (entry.entityType().value() == entityTypeHolder.value()) {
+            if (entry.getEntityType().value() == entityTypeHolder.value()) {
                 this.orderedEntries.add(entry);
             }
         }));
@@ -102,14 +96,14 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         if (this.getSelectedEntry() != null) {
             Level level = Minecraft.getInstance().level;
             if (level != null) {
-                Entity entity = this.getSelectedEntry().entityType().value().create(level, EntitySpawnReason.COMMAND);
+                Entity entity = this.getSelectedEntry().getEntityType().value().create(level, EntitySpawnReason.COMMAND);
                 if (entity instanceof LivingEntity livingEntity) {
                     int x = 24;
                     int y = 28;
                     int width = 125;
                     int height = 69;
                     this.rotation = Mth.wrapDegrees(Mth.lerp(partialTick, this.rotation, this.rotation + 0.85F));
-                    int scale = (int) ((30 / livingEntity.getBoundingBox().getSize()) * this.getSelectedEntry().scaleMultiplier().orElse(1.0));
+                    int scale = (int) ((30 / livingEntity.getBoundingBox().getSize()) * this.getSelectedEntry().getScaleMultiplier().orElse(1.0));
                     this.renderRotatingEntity(guiGraphics, rightPagePos + x, topPos + y, rightPagePos + x + width, topPos + y + height, scale, 0.2225F, this.rotation, -15.0F, livingEntity);
                 }
             }
@@ -143,18 +137,18 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     @Override
     public void renderEntries(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.renderEntries(guiGraphics, mouseX, mouseY, partialTick);
-        BestiaryEntry hoveredEntry = this.getEntryFromSlot(mouseX, mouseY);
+        BestiaryEntry.Mutable hoveredEntry = this.getEntryFromSlot(mouseX, mouseY);
         int leftPos = 43;
         int topPos = 59;
         int i = 0;
 
-        List<BestiaryEntry> visibleEntries = this.orderedEntries.size() > this.maxSlots() ? this.orderedEntries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.orderedEntries.size())) : this.orderedEntries;
-        for (BestiaryEntry entry : visibleEntries) {
+        List<BestiaryEntry.Mutable> visibleEntries = this.orderedEntries.size() > this.maxSlots() ? this.orderedEntries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.orderedEntries.size())) : this.orderedEntries;
+        for (BestiaryEntry.Mutable entry : visibleEntries) {
             GuiSpriteManager guiSpriteManager = Minecraft.getInstance().getGuiSprites();
 
             ResourceLocation sprite;
-            if (this.isObserved(entry)) {
-                sprite = entry.icon();
+            if (this.isUnlocked(entry, BestiaryEntry.ICON.id())) {
+                sprite = entry.getIcon();
                 if (guiSpriteManager.getSprite(sprite).equals(guiSpriteManager.getSprite(MissingTextureAtlasSprite.getLocation()))) {
                     sprite = DISCOVERED_ENTRY_FALLBACK_SPRITE;
                 }
@@ -168,14 +162,14 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             int slotY = topPos + (y * 18);
             guiGraphics.blitSprite(RenderType::guiTextured, sprite, slotX, slotY, 16, 16);
 
-            boolean isHovered = hoveredEntry != null && entry.entityType() == hoveredEntry.entityType();
-            boolean isSelected = this.selectedEntry != null && entry.entityType() == this.selectedEntry.entityType();
+            boolean isHovered = hoveredEntry != null && entry.getEntityType() == hoveredEntry.getEntityType();
+            boolean isSelected = this.selectedEntry != null && entry.getEntityType() == this.selectedEntry.getEntityType();
 
             if (isHovered || isSelected) {
                 guiGraphics.fillGradient(RenderType.guiOverlay(), slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433, 0);
             }
 
-            if (this.isUnchecked(entry)) {
+            if (this.isViewed(entry)) {
                 guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
             }
 
@@ -193,21 +187,21 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     }
 
     private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        BestiaryEntry entry = this.getEntryFromSlot(mouseX, mouseY);
+        BestiaryEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
         if (entry != null) {
             int leftPagePos = ((this.screen.width + 2) / 2) - Guidebook.PAGE_WIDTH;
             int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
             Component name = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.entry.unknown");
-            if (this.isObserved(entry)) {
-                if (entry.slotName().isPresent()) {
-                    name = Component.translatable(entry.slotName().get());
+            if (this.isUnlocked(entry, BestiaryEntry.SLOT_NAME.id())) {
+                if (entry.getSlotName().isPresent()) {
+                    name = Component.translatable(entry.getSlotName().get());
                 } else {
-                    name = Component.translatable(entry.entityType().value().getDescriptionId());
+                    name = Component.translatable(entry.getEntityType().value().getDescriptionId());
                 }
             }
             List<Component> components = new ArrayList<>(List.of(name));
-            if (this.isObserved(entry) && entry.slotSubtitle().isPresent()) {
-                components.add(Component.translatable(entry.slotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+            if (this.isUnlocked(entry, BestiaryEntry.SLOT_SUBTITLE.id()) && entry.getSlotSubtitle().isPresent()) {
+                components.add(Component.translatable(entry.getSlotSubtitle().get()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
             }
             guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, components, (int) (mouseX - leftPagePos), (int) (mouseY - topPos));
         }
@@ -215,74 +209,85 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     @Override
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        if (this.getSelectedEntry() != null) {
+        BestiaryEntry.Mutable entry = this.getSelectedEntry();
+        if (entry != null) {
             Level level = Minecraft.getInstance().level;
             Font font = Minecraft.getInstance().font;
             if (level != null) {
-                Entity entity = this.getSelectedEntry().entityType().value().create(level, EntitySpawnReason.COMMAND);
+                Entity entity = entry.getEntityType().value().create(level, EntitySpawnReason.COMMAND);
                 if (entity instanceof LivingEntity livingEntity) {
-                    String name = this.getSelectedEntry().entityType().value().getDescriptionId();
-                    if (this.getSelectedEntry().name().isPresent()) {
-                        name = this.getSelectedEntry().name().get();
+                    if (this.isUnlocked(entry, BestiaryEntry.NAME.id())) {
+                        String name = entry.getEntityType().value().getDescriptionId();
+                        if (entry.getName().isPresent()) {
+                            name = entry.getName().get();
+                        }
+                        guiGraphics.drawCenteredString(font, Component.translatable(name), 88, 13, 16777215);
                     }
-                    guiGraphics.drawCenteredString(font, Component.translatable(name), 88, 13, 16777215);
 
-                    if (this.isUnderstood(this.getSelectedEntry())) {
-                        int x = 27;
-                        int y = 29;
+                    int x = 27;
+                    int y = 29;
 
+                    if (this.isUnlocked(entry, BestiaryEntry.HEALTH.id())) {
                         guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         this.renderIconValue(guiGraphics, x, y, (int) livingEntity.getMaxHealth());
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", (int) livingEntity.getMaxHealth()));
+                    }
 
-                        y += 17;
+                    y += 17;
+                    if (this.isUnlocked(entry, BestiaryEntry.SLASH_DEFENSE.id())) {
                         guiGraphics.blitSprite(RenderType::guiTextured, SLASH_SPRITE, x, y, 16, 16);
                         int slashDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0);
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
                         this.renderDefenseIconValue(guiGraphics, x, y, -slashDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, slashTooltip);
+                    }
 
-                        y += 17;
+                    y += 17;
+                    if (this.isUnlocked(entry, BestiaryEntry.IMPACT_DEFENSE.id())) {
                         guiGraphics.blitSprite(RenderType::guiTextured, IMPACT_SPRITE, x, y, 16, 16);
                         int impactDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0);
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
                         this.renderDefenseIconValue(guiGraphics, x, y, -impactDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, impactTooltip);
+                    }
 
-                        y += 17;
+                    y += 17;
+                    if (this.isUnlocked(entry, BestiaryEntry.PIERCE_DEFENSE.id())) {
                         guiGraphics.blitSprite(RenderType::guiTextured, PIERCE_SPRITE, x, y, 16, 16);
                         int pierceDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0);
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
                         this.renderDefenseIconValue(guiGraphics, x, y, -pierceDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, pierceTooltip);
+                    }
 
-                        x = 132;
-                        y = 29;
+                    x = 132;
+                    y = 29;
 
-                        //todo effect resistance render
-                        MobEffectTextureManager effectTextureManager = Minecraft.getInstance().getMobEffectTextures();
-                        for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) livingEntity.getAttributes()).aether_ii$getAttributes().entrySet()) {
-                            if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute) {
-                                Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
-                                TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
-                                guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, x, y, 0, 18, 18);
-                                double effectValue = attributeEntries.getValue().getValue();
-                                Component effectTooltip = Component.literal((int) effectValue * 100 + "%")
-                                        .append(CommonComponents.space())
-                                        .append(Component.translatable(effectResistanceAttribute.getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
-                                this.renderDefenseIconValue(guiGraphics, x, y, effectValue);
-                                this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, -Minecraft.getInstance().font.width(effectTooltip) - 22, effectTooltip);
-                                y += 17;
-                            }
-                        }
+                    //todo effect resistance render
+//                    MobEffectTextureManager effectTextureManager = Minecraft.getInstance().getMobEffectTextures();
+//                    for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) livingEntity.getAttributes()).aether_ii$getAttributes().entrySet()) {
+//                        if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute) {
+//                            Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
+//                            TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
+//                            guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, x, y, 0, 18, 18);
+//                            double effectValue = attributeEntries.getValue().getValue();
+//                            Component effectTooltip = Component.literal((int) effectValue * 100 + "%")
+//                                    .append(CommonComponents.space())
+//                                    .append(Component.translatable(effectResistanceAttribute.getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
+//                            this.renderDefenseIconValue(guiGraphics, x, y, effectValue);
+//                            this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, -Minecraft.getInstance().font.width(effectTooltip) - 22, effectTooltip);
+//                            y += 17;
+//                        }
+//                    }
 
-                        int dropsTextX = 101;
-                        int dropsTextY = 156;
+                    int dropsTextX = 101;
+                    int dropsTextY = 156;
 
-                        List<BestiaryEntry.LootDisplay> loot = this.getSelectedEntry().loot();
+                    List<Optional<BestiaryEntry.LootDisplay>> loot = entry.getLoot();
 
-                        Optional<TagKey<Item>> food = this.getSelectedEntry().food();
-                        if (food.isPresent()) {
+                    Optional<TagKey<Item>> food = entry.getFood();
+                    if (food.isPresent()) {
+                        if (this.isUnlocked(entry, BestiaryEntry.FOOD.id())) {
                             Registry<Item> itemRegistry = this.registryAccess.lookupOrThrow(Registries.ITEM);
                             List<Holder<Item>> tag = new ArrayList<>(ImmutableList.copyOf(itemRegistry.getTagOrEmpty(food.get())));
                             if (this.currentFoods.isEmpty()) {
@@ -298,15 +303,18 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                                     this.switchFoodItemCounter = 0;
                                 }
                             }
-                        } else {
-                            dropsTextX = 60;
                         }
+                    } else {
+                        dropsTextX = 60;
+                    }
 
-                        if (!loot.isEmpty()) {
-                            Component drops = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.drops");
-                            guiGraphics.drawString(font, drops, dropsTextX - (font.width(drops) + 3) + (10 * (3 - loot.size())), dropsTextY, -1);
-                            int i = 0;
-                            for (BestiaryEntry.LootDisplay lootDisplay : loot) {
+                    if (!loot.isEmpty()) {
+                        Component drops = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.drops");
+                        guiGraphics.drawString(font, drops, dropsTextX - (font.width(drops) + 3) + (10 * (3 - loot.size())), dropsTextY, -1);
+                        int i = 0;
+                        for (Optional<BestiaryEntry.LootDisplay> lootDisplayOptional : loot) {
+                            if (lootDisplayOptional.isPresent() && this.isUnlocked(entry, "loot_" + (i + 1))) {
+                                BestiaryEntry.LootDisplay lootDisplay = lootDisplayOptional.get();
                                 int slotX = dropsTextX + (10 * (3 - loot.size())) + (20 * i);
                                 ItemStack itemStack = new ItemStack(lootDisplay.getItemLike());
                                 List<Component> components = new ArrayList<>();
@@ -318,12 +326,12 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                                 }
                                 components.add(Component.literal(lootDisplay.chance() * 100 + "%").withStyle(ChatFormatting.GRAY));
                                 this.renderFakeSlot(guiGraphics, font, components, itemStack, mouseX, mouseY, slotX, dropsTextY - 5);
-                                i++;
                             }
+                            i++;
                         }
                     }
 
-                    this.drawDescriptionString(guiGraphics, Minecraft.getInstance().font, Component.translatable(this.getSelectedEntry().descriptionKey()));
+                    this.drawDescriptionString(guiGraphics, Minecraft.getInstance().font, Component.translatable(entry.getDescriptionKey()));
                 }
             }
         }
@@ -435,12 +443,10 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button, boolean original) {
-        BestiaryEntry entry = this.getEntryFromSlot(mouseX, mouseY);
-        if (entry != null && (this.isObserved(entry) || this.isUnderstood(entry)) && (this.getSelectedEntry() == null || (entry.entityType().value() != this.getSelectedEntry().entityType().value()))) {
+        BestiaryEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
+        if (entry != null && (this.getSelectedEntry() == null || (entry.getEntityType().value() != this.getSelectedEntry().getEntityType().value()))) {
             this.selectedEntry = entry;
-            if (this.isUnchecked(entry)) {
-                this.setChecked(entry);
-            }
+            this.updateViewed(entry);
             this.currentFoods.clear();
             return true;
         }
@@ -454,7 +460,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
     }
 
     @Nullable
-    private BestiaryEntry getEntryFromSlot(double mouseX, double mouseY) {
+    private BestiaryEntry.Mutable getEntryFromSlot(double mouseX, double mouseY) {
         int slot = this.getSlotIndex(mouseX, mouseY);
         if (slot != -1) {
             int trueSlot = slot + this.getSlotOffset(); // Determines the true index to get from the list of Moa Skins, if there is a slot offset from scrolling.
@@ -516,40 +522,32 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         return 36;
     }
 
-    private boolean isObserved(BestiaryEntry entry) {
-        Player player = Minecraft.getInstance().player;
-        if (player != null) {
-            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            return attachment.getObservedBestiaryEntries().stream().map((holder) -> holder.value().entityType()).anyMatch((e) -> e.value() == entry.entityType().value());
+    private boolean isUnlocked(BestiaryEntry.Mutable entry, String value) {
+        if (entry.getClientValues().containsKey(value)) {
+            return entry.getClientValues().get(value).isVisible();
+        } else {
+            return false;
         }
-        return false;
     }
 
-    private boolean isUnderstood(BestiaryEntry entry) {
-        Player player = Minecraft.getInstance().player;
-        if (player != null) {
-            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            return attachment.getUnderstoodBestiaryEntries().stream().map((holder) -> holder.value().entityType()).anyMatch((e) -> e.value() == entry.entityType().value());
+    private boolean isViewed(BestiaryEntry.Mutable entry) {
+        for (Map.Entry<String, GuidebookEntry.Info> values : entry.getClientValues().entrySet()) {
+            if (values.getValue().isVisible()) {
+                if (!values.getValue().isViewed()) {
+                    return false;
+                }
+            }
         }
-        return false;
+        return true;
     }
 
-    private boolean isUnchecked(BestiaryEntry entry) {
-        Player player = Minecraft.getInstance().player;
-        if (player != null) {
-            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            return attachment.getUncheckedBestiaryEntries().stream().map((holder) -> holder.value().entityType()).anyMatch((e) -> e.value() == entry.entityType().value());
+    private void updateViewed(BestiaryEntry.Mutable entry) {
+        for (Map.Entry<String, GuidebookEntry.Info> values : entry.getClientValues().entrySet()) {
+            if (values.getValue().isVisible()) {
+                values.getValue().view();
+            }
         }
-        return false;
-    }
-
-    private void setChecked(BestiaryEntry entry) {
-        Player player = Minecraft.getInstance().player;
-        if (player != null) {
-            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            attachment.getUncheckedBestiaryEntries().removeIf((holder) -> holder.value().entityType().value() == entry.entityType().value());
-            PacketDistributor.sendToServer(new CheckGuidebookEntryPacket(entry.entityType().value()));
-        }
+        PacketDistributor.sendToServer(new CheckGuidebookEntryPacket(entry.getEntityType().value()));
     }
 
     @Override
@@ -557,7 +555,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            return !attachment.getUncheckedBestiaryEntries().isEmpty();
+            return attachment.getBestiaryEntries().stream().anyMatch((entry) -> entry.getClientValues().values().stream().anyMatch((info) -> info.isVisible() && !info.isViewed()));
         }
         return false;
     }
