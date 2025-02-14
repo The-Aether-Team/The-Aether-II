@@ -96,12 +96,12 @@ public class CellingMonster extends Monster {
             this.entityData.set(ATTACHED_FACE, Direction.UP);
         } else {
             Direction closestDirection = null;
-            double closestDistance = 0.15D;
+            double closestDistance = 2.5D;
             BlockPos pos = new BlockPos(Mth.floor(this.getX()), Mth.floor(this.getY() + (this.getBbHeight() / 2)), Mth.floor(this.getZ()));
 
             //first celling check in bb height's center
             for (BlockPos offsetPos : BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1)
-                    .filter(p_341357_ -> Math.abs(p_341357_.getX()) != 0 || Math.abs(p_341357_.getY()) != 0 || Math.abs(p_341357_.getZ()) != 0)
+                    .filter(p_341357_ -> Math.abs(p_341357_.getX() - p_341357_.getY() - p_341357_.getZ()) != 0 || !(Math.abs(p_341357_.getX()) == 1 && Math.abs(p_341357_.getY()) == 1 && Math.abs(p_341357_.getZ()) == 1))
                     .map(BlockPos::immutable)
                     .toList()) {
                 BlockPos pos1 = pos.offset(offsetPos);
