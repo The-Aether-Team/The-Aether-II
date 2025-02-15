@@ -342,7 +342,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.COCKATRICE_SPAWNABLE_BLACKLIST);
-        this.tag(AetherIITags.Blocks.SWET_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.SWET_SPAWNABLE_ON).add(
+                AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
+                AetherIIBlocks.AETHER_SHORT_GRASS.get(),
+                AetherIIBlocks.AETHER_MEDIUM_GRASS.get(),
+                AetherIIBlocks.AETHER_LONG_GRASS.get(),
+                AetherIIBlocks.ARCTIC_SNOW.get(),
+                AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
         this.tag(AetherIITags.Blocks.MOA_HATCH_BLOCK).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
         );
@@ -820,6 +826,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
+                AetherIIBlocks.AETHER_SHORT_GRASS.get(),
+                AetherIIBlocks.AETHER_MEDIUM_GRASS.get(),
+                AetherIIBlocks.AETHER_LONG_GRASS.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
@@ -1037,6 +1046,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
         this.tag(BlockTags.REPLACEABLE).add(
+                AetherIIBlocks.AETHER_SHORT_GRASS.get(),
+                AetherIIBlocks.AETHER_MEDIUM_GRASS.get(),
+                AetherIIBlocks.AETHER_LONG_GRASS.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get());

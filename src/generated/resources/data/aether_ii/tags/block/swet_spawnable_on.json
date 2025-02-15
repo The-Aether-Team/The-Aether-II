@@ -1,5 +1,10 @@
 {
   "values": [
-    "aether_ii:aether_grass_block"
+    "aether_ii:aether_grass_block",
+    "aether_ii:aether_short_grass",
+    "aether_ii:aether_medium_grass",
+    "aether_ii:aether_long_grass",
+    "aether_ii:arctic_snow",
+    "aether_ii:arctic_snow_block"
   ]
 }
