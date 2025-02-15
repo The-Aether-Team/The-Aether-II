@@ -82,6 +82,27 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             }
         }));
         this.snapPoints = new ArrayList<>();
+
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            attachment.getBestiaryEntries().stream().forEach((bestiaryEntry) -> { //todo optimize this
+                this.orderedEntries.stream().forEach((orderedEntry) -> {
+                    if (bestiaryEntry.getEntityType().is(orderedEntry.getEntityType())) {
+                        bestiaryEntry.getClientValues().entrySet().forEach((entry1) -> {
+                            orderedEntry.getClientValues().entrySet().forEach((entry2) -> {
+                                if (entry1.getKey().equals(entry2.getKey())) {
+                                    if (entry1.getValue().isVisible() && !entry2.getValue().isVisible()) {
+                                        entry2.getValue().reveal();
+                                    }
+                                }
+                            });
+                        });
+                    }
+                });
+            });
+        }
+
         int remainingSlots = Mth.ceil((this.orderedEntries.size() - this.maxSlots()) / (double) this.scrollIncrement());
         for (int y = 0; y <= remainingSlots; y++) {
             this.snapPoints.add((this.scrollbarGutterHeight() / remainingSlots) * y);
@@ -450,7 +471,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button, boolean original) {
         BestiaryEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
-        if (entry != null && (this.getSelectedEntry() == null || (entry.getEntityType().value() != this.getSelectedEntry().getEntityType().value()))) {
+        if (entry != null && (this.getSelectedEntry() == null || (entry.getEntityType().value() != this.getSelectedEntry().getEntityType().value())) && this.areAnyUnlocked(entry)) {
             this.selectedEntry = entry;
             this.updateViewed(entry);
             this.currentFoods.clear();
@@ -560,8 +581,15 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     public boolean areAnyUnchecked() {
         Player player = Minecraft.getInstance().player;
         if (player != null) {
-            GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            return attachment.getBestiaryEntries().stream().anyMatch((entry) -> entry.getClientValues().values().stream().anyMatch((info) -> info.isVisible() && !info.isViewed()));
+            return this.orderedEntries.stream().anyMatch((entry) -> entry.getClientValues().values().stream().anyMatch((info) -> info.isVisible() && !info.isViewed()));
+        }
+        return false;
+    }
+
+    public boolean areAnyUnlocked(BestiaryEntry.Mutable entry) {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            return entry.getClientValues().values().stream().anyMatch(GuidebookEntry.Info::isVisible);
         }
         return false;
     }

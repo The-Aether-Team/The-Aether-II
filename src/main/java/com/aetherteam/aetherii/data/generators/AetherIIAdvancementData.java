@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
-import com.aetherteam.aetherii.api.guidebook.RewardWrapper;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -21,7 +20,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,8 +27,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class AetherIIAdvancementData extends AdvancementProvider {
-    public static List<RewardWrapper> REWARD_WRAPPERS = new ArrayList<>();
-
     public AetherIIAdvancementData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, List.of(new BestiaryAdvancements()));
     }
@@ -46,17 +42,13 @@ public class AetherIIAdvancementData extends AdvancementProvider {
                 EntityType<?> entityType = entry.getValue().value();
                 ResourceLocation observeId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "observe_" + entityType.toShortString()).withPrefix(path);
                 observe(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, observeId);
-                RewardWrapper observeWrapper = new RewardWrapper(observeId, entry.getKey().location(), List.of("test"));
-                if (!REWARD_WRAPPERS.contains(observeWrapper)) {
-                    REWARD_WRAPPERS.add(observeWrapper);
-                }
 
-                ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entityType.toShortString()).withPrefix(path);
-                understand(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, understandId);
-                RewardWrapper understandWrapper = new RewardWrapper(understandId, entry.getKey().location(), List.of("test"));
-                if (!REWARD_WRAPPERS.contains(understandWrapper)) {
-                    REWARD_WRAPPERS.add(understandWrapper);
-                }
+//                ResourceLocation understandId = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "understand_" + entityType.toShortString()).withPrefix(path);
+//                understand(itemGetter, entityGetter, Advancement.Builder.advancement(), entityType).requirements(AdvancementRequirements.Strategy.OR).save(consumer, understandId);
+//                RewardWrapper understandWrapper = new RewardWrapper(understandId, entry.getKey().location(), List.of("test"));
+//                if (!REWARD_WRAPPERS.contains(understandWrapper)) {
+//                    REWARD_WRAPPERS.add(understandWrapper);
+//                }
             }
         }
 

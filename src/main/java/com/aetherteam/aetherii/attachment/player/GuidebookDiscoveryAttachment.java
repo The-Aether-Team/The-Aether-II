@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
-import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.api.guidebook.RewardWrapper;
 import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
@@ -19,19 +18,18 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.attachment.IAttachmentHolder;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class GuidebookDiscoveryAttachment { //todo
+public class GuidebookDiscoveryAttachment {
     private List<BestiaryEntry.Mutable> bestiaryEntries;
     private boolean shouldSyncAfterJoin = false;
     private boolean sync = false;
 
-    public static final Codec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group( //todo needs to use dispatch codecs?
+    public static final Codec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BestiaryEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getBestiaryEntries)
     ).apply(instance, GuidebookDiscoveryAttachment::new));
 
@@ -94,32 +92,15 @@ public class GuidebookDiscoveryAttachment { //todo
             RewardWrapper reward = rewardOptional.get();
             for (BestiaryEntry.Mutable entry : this.bestiaryEntries) {
                 if (entry.getEntry().is(reward.entryId())) {
-                    List.of(entry.getClientValues()).forEach(name -> {
-                        if (entry.getValues().containsKey(name)) {
-                            entry.getValues().get(name).reveal();
+                    entry.getClientValues().keySet().forEach(name -> {
+                        if (entry.getClientValues().containsKey(name)) {
+                            entry.getClientValues().get(name).reveal();
                         }
                     });
                     this.sync = true;
                 }
             }
         }
-
-
-//        Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
-//        for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
-//
-//
-//            if (advancement.id().equals(entry.value().observationAdvancement())) {
-//                this.observedBestiaryEntries.add(entry);
-//                this.uncheckedBestiaryEntries.add(entry);
-//                this.sync = true;
-//            }
-//            if (advancement.id().equals(entry.value().understandingAdvancement())) {
-//                this.understoodBestiaryEntries.add(entry);
-//                this.uncheckedBestiaryEntries.add(entry);
-//                this.sync = true;
-//            }
-//        }
         if (this.sync) {
             PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, GuidebookToast.Icons.BESTIARY));
         }

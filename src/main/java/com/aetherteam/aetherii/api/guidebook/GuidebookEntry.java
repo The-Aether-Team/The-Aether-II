@@ -98,5 +98,10 @@ public abstract class GuidebookEntry {
         public boolean isViewed() {
             return this.viewed;
         }
+
+        @Override
+        public String toString() {
+            return "Info{" + "visible=" + this.isVisible() + ", viewed=" + this.isViewed() + '}';
+        }
     }
 }
