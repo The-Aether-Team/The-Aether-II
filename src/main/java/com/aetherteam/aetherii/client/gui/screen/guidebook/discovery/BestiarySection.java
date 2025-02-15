@@ -93,7 +93,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     public void renderBg(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         int rightPagePos = (this.screen.width / 2);
         int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
-        if (this.getSelectedEntry() != null) {
+        if (this.getSelectedEntry() != null && this.isUnlocked(this.getSelectedEntry(), BestiaryEntry.ENTITY_TYPE.id())) {
             Level level = Minecraft.getInstance().level;
             if (level != null) {
                 Entity entity = this.getSelectedEntry().getEntityType().value().create(level, EntitySpawnReason.COMMAND);
@@ -169,7 +169,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                 guiGraphics.fillGradient(RenderType.guiOverlay(), slotX, slotY, slotX + 16, slotY + 16, -2130706433, -2130706433, 0);
             }
 
-            if (this.isViewed(entry)) {
+            if (!this.isViewed(entry)) {
                 guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.EXCLAMATION, slotX, slotY, 3, 8);
             }
 
@@ -309,8 +309,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     }
 
                     if (!loot.isEmpty()) {
-                        Component drops = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.drops");
-                        guiGraphics.drawString(font, drops, dropsTextX - (font.width(drops) + 3) + (10 * (3 - loot.size())), dropsTextY, -1);
+                        boolean renderTitle = false;
                         int i = 0;
                         for (Optional<BestiaryEntry.LootDisplay> lootDisplayOptional : loot) {
                             if (lootDisplayOptional.isPresent() && this.isUnlocked(entry, "loot_" + (i + 1))) {
@@ -326,12 +325,19 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                                 }
                                 components.add(Component.literal(lootDisplay.chance() * 100 + "%").withStyle(ChatFormatting.GRAY));
                                 this.renderFakeSlot(guiGraphics, font, components, itemStack, mouseX, mouseY, slotX, dropsTextY - 5);
+                                renderTitle = true;
                             }
                             i++;
                         }
+                        if (renderTitle) {
+                            Component drops = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.drops");
+                            guiGraphics.drawString(font, drops, dropsTextX - (font.width(drops) + 3) + (10 * (3 - loot.size())), dropsTextY, -1);
+                        }
                     }
 
-                    this.drawDescriptionString(guiGraphics, Minecraft.getInstance().font, Component.translatable(entry.getDescriptionKey()));
+                    if (this.isUnlocked(entry, BestiaryEntry.DESCRIPTION_KEY.id())) {
+                        this.drawDescriptionString(guiGraphics, Minecraft.getInstance().font, Component.translatable(entry.getDescriptionKey()));
+                    }
                 }
             }
         }
