@@ -22,7 +22,7 @@
         "up": {
           "cullface": "up",
           "texture": "#top",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "cullface": "west",
@@ -45,27 +45,27 @@
         "east": {
           "cullface": "east",
           "texture": "#side_overlay_1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "north": {
           "cullface": "north",
           "texture": "#side_overlay_1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "cullface": "south",
           "texture": "#side_overlay_1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "cullface": "up",
           "texture": "#top_1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "cullface": "west",
           "texture": "#side_overlay_1",
-          "tintindex": 0
+          "tintindex": 1
         }
       },
       "from": [
@@ -84,27 +84,27 @@
         "east": {
           "cullface": "east",
           "texture": "#side_overlay_2",
-          "tintindex": 1
+          "tintindex": 2
         },
         "north": {
           "cullface": "north",
           "texture": "#side_overlay_2",
-          "tintindex": 1
+          "tintindex": 2
         },
         "south": {
           "cullface": "south",
           "texture": "#side_overlay_2",
-          "tintindex": 1
+          "tintindex": 2
         },
         "up": {
           "cullface": "up",
           "texture": "#top_2",
-          "tintindex": 1
+          "tintindex": 2
         },
         "west": {
           "cullface": "west",
           "texture": "#side_overlay_2",
-          "tintindex": 1
+          "tintindex": 2
         }
       },
       "from": [
@@ -123,27 +123,27 @@
         "east": {
           "cullface": "east",
           "texture": "#side_overlay_3",
-          "tintindex": 2
+          "tintindex": 3
         },
         "north": {
           "cullface": "north",
           "texture": "#side_overlay_3",
-          "tintindex": 2
+          "tintindex": 3
         },
         "south": {
           "cullface": "south",
           "texture": "#side_overlay_3",
-          "tintindex": 2
+          "tintindex": 3
         },
         "up": {
           "cullface": "up",
           "texture": "#top_3",
-          "tintindex": 2
+          "tintindex": 3
         },
         "west": {
           "cullface": "west",
           "texture": "#side_overlay_3",
-          "tintindex": 2
+          "tintindex": 3
         }
       },
       "from": [

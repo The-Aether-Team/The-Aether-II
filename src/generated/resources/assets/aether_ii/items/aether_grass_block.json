@@ -8,13 +8,6 @@
         "darkSaturationOffset": 5.0,
         "defaultColor": 11927504,
         "lightSaturationOffset": 6.0,
-        "tintIndex": 0
-      },
-      {
-        "type": "aether_ii:aether_grass",
-        "darkSaturationOffset": 5.0,
-        "defaultColor": 11927504,
-        "lightSaturationOffset": 6.0,
         "tintIndex": 1
       },
       {
@@ -23,6 +16,13 @@
         "defaultColor": 11927504,
         "lightSaturationOffset": 6.0,
         "tintIndex": 2
+      },
+      {
+        "type": "aether_ii:aether_grass",
+        "darkSaturationOffset": 5.0,
+        "defaultColor": 11927504,
+        "lightSaturationOffset": 6.0,
+        "tintIndex": 3
       }
     ]
   }

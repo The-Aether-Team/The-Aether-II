@@ -174,9 +174,9 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(PropertyDispatch.property(BlockStateProperties.SNOWY).select(true, snowyVariant).select(false, list))
         );
         this.itemModelOutput.accept(block.asItem(), ItemModelUtils.tintedModel(model,
-                new AetherGrassColorSource(0, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F),
-                new AetherGrassColorSource(2, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F)
+                new AetherGrassColorSource(1, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F, 1),
+                new AetherGrassColorSource(2, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F, 1),
+                new AetherGrassColorSource(3, AetherIIColorResolvers.AETHER_GRASS_COLOR, 5.0F, 6.0F, 1)
         ));
     }
 
