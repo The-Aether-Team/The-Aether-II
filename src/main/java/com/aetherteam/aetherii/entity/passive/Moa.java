@@ -127,7 +127,6 @@ public class Moa extends MountableAnimal {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
-                .add(Attributes.MAX_HEALTH, 35.0)
                 .add(Attributes.MOVEMENT_SPEED, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
                 .add(Attributes.ATTACK_DAMAGE, 5.0);

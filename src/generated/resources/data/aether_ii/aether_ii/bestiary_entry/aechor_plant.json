@@ -1,9 +1,9 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aechor_plant",
   "entity_type": "aether_ii:aechor_plant",
-  "health": 0,
+  "health": 15,
   "icon": "aether_ii:guidebook/bestiary/aechor_plant",
-  "impact_defense": 0,
+  "impact_defense": 2,
   "loot_1": {
     "chance": 1.0,
     "item": "aether_ii:aechor_petal",
@@ -17,5 +17,5 @@
     "min_count": 0
   },
   "pierce_defense": 0,
-  "slash_defense": 0
+  "slash_defense": -2
 }

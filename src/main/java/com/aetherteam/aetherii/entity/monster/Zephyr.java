@@ -54,7 +54,6 @@ public class Zephyr extends FlyingMob implements Enemy {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return FlyingMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 5.0)
                 .add(Attributes.FOLLOW_RANGE, 50.0);
     }
 

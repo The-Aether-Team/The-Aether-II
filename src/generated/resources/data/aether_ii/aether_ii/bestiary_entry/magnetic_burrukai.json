@@ -2,9 +2,9 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.magnetic_burrukai",
   "entity_type": "aether_ii:magnetic_burrukai",
   "food": "aether_ii:burrukai_food",
-  "health": 0,
+  "health": 18,
   "icon": "aether_ii:guidebook/bestiary/magnetic_burrukai",
-  "impact_defense": 0,
+  "impact_defense": -2,
   "loot_1": {
     "chance": 1.0,
     "item": "aether_ii:burrukai_rib_cut",
@@ -19,7 +19,7 @@
   },
   "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.magnetic_burrukai",
   "pierce_defense": 0,
-  "slash_defense": 0,
+  "slash_defense": 2,
   "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.magnetic_burrukai",
   "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.magnetic_burrukai"
 }

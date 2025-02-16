@@ -1,9 +1,9 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.tempest",
   "entity_type": "aether_ii:tempest",
-  "health": 0,
+  "health": 30,
   "icon": "aether_ii:guidebook/bestiary/tempest",
-  "impact_defense": 0,
+  "impact_defense": 2,
   "loot_1": {
     "chance": 1.0,
     "item": "aether_ii:storm_aercloud",
@@ -16,6 +16,6 @@
     "max_count": 1,
     "min_count": 0
   },
-  "pierce_defense": 0,
-  "slash_defense": 0
+  "pierce_defense": -2,
+  "slash_defense": 2
 }

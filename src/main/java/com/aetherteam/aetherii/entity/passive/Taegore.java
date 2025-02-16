@@ -40,7 +40,6 @@ public class Taegore extends AetherAnimal {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
-                .add(Attributes.MAX_HEALTH, 14.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
                 .add(Attributes.STEP_HEIGHT, 1.0);
     }

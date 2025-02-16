@@ -251,13 +251,13 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     if (this.isUnlocked(entry, BestiaryEntry.HEALTH.id())) {
                         guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.HEARTS_SPRITE, x, y, 16, 16);
                         this.renderIconValue(guiGraphics, x, y, (int) livingEntity.getMaxHealth());
-                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", (int) livingEntity.getMaxHealth()));
+                        this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.stat.health", entry.getHealth()));
                     }
 
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.SLASH_DEFENSE.id())) {
                         guiGraphics.blitSprite(RenderType::guiTextured, SLASH_SPRITE, x, y, 16, 16);
-                        int slashDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0);
+                        int slashDefense = entry.getSlashDefense();
                         Component slashTooltip = this.getDamageTypeComponent(slashDefense, "slash");
                         this.renderDefenseIconValue(guiGraphics, x, y, -slashDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, slashTooltip);
@@ -266,7 +266,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.IMPACT_DEFENSE.id())) {
                         guiGraphics.blitSprite(RenderType::guiTextured, IMPACT_SPRITE, x, y, 16, 16);
-                        int impactDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0);
+                        int impactDefense = entry.getImpactDefense();
                         Component impactTooltip = this.getDamageTypeComponent(impactDefense, "impact");
                         this.renderDefenseIconValue(guiGraphics, x, y, -impactDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, impactTooltip);
@@ -275,7 +275,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     y += 17;
                     if (this.isUnlocked(entry, BestiaryEntry.PIERCE_DEFENSE.id())) {
                         guiGraphics.blitSprite(RenderType::guiTextured, PIERCE_SPRITE, x, y, 16, 16);
-                        int pierceDefense = (int) (livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0);
+                        int pierceDefense = entry.getPierceDefense();
                         Component pierceTooltip = this.getDamageTypeComponent(pierceDefense, "pierce");
                         this.renderDefenseIconValue(guiGraphics, x, y, -pierceDefense);
                         this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, 0, pierceTooltip);

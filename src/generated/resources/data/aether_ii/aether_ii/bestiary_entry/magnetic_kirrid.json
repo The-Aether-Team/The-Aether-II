@@ -2,9 +2,9 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.magnetic_kirrid",
   "entity_type": "aether_ii:magnetic_kirrid",
   "food": "aether_ii:kirrid_food",
-  "health": 0,
+  "health": 10,
   "icon": "aether_ii:guidebook/bestiary/magnetic_kirrid",
-  "impact_defense": 0,
+  "impact_defense": 2,
   "loot_1": {
     "chance": 1.0,
     "item": "aether_ii:kirrid_loin",
@@ -18,7 +18,7 @@
     "min_count": 1
   },
   "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.magnetic_kirrid",
-  "pierce_defense": 0,
+  "pierce_defense": -2,
   "slash_defense": 0,
   "slot_name": "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii.magnetic_kirrid",
   "slot_subtitle": "aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii.magnetic_kirrid"

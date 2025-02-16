@@ -42,7 +42,6 @@ public class Skephid extends CellingMonster implements RangedAttackMob {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 10.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.24)
                 .add(Attributes.FOLLOW_RANGE, 16.0);
     }

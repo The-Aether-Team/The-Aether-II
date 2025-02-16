@@ -82,7 +82,6 @@ public class Swet extends Mob implements Enemy {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 12.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.4)
                 .add(Attributes.FOLLOW_RANGE, 14.0)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.5);
