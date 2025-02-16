@@ -11,12 +11,21 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
-public abstract class GuidebookEntry {
+public class GuidebookEntry {
     public static final DataTemplate<ResourceLocation> ICON = new DataTemplate<>("icon", ResourceLocation.CODEC::fieldOf);
     public static final DataTemplate<Optional<String>> NAME = new DataTemplate<>("name", Codec.STRING::optionalFieldOf);
     public static final DataTemplate<Optional<String>> SLOT_NAME = new DataTemplate<>("slot_name", Codec.STRING::optionalFieldOf);
     public static final DataTemplate<Optional<String>> SLOT_SUBTITLE = new DataTemplate<>("slot_subtitle", Codec.STRING::optionalFieldOf);
     public static final DataTemplate<String> DESCRIPTION_KEY = new DataTemplate<>("description_key", Codec.STRING::fieldOf);
+
+    public static final MapCodec<GuidebookEntry> MAP_CODEC =
+            RecordCodecBuilder.mapCodec(in -> in.group(
+                    BestiaryEntry.ICON.mapCodec().forGetter(GuidebookEntry::getIcon),
+                    BestiaryEntry.NAME.mapCodec().forGetter(GuidebookEntry::getName),
+                    BestiaryEntry.SLOT_NAME.mapCodec().forGetter(GuidebookEntry::getSlotName),
+                    BestiaryEntry.SLOT_SUBTITLE.mapCodec().forGetter(GuidebookEntry::getSlotSubtitle),
+                    BestiaryEntry.DESCRIPTION_KEY.mapCodec().forGetter(GuidebookEntry::getDescriptionKey)
+            ).apply(in, GuidebookEntry::new));
 
     private final ResourceLocation icon;
     private final Optional<String> name;
@@ -61,6 +70,10 @@ public abstract class GuidebookEntry {
     protected <T> T info(DataTemplate<T> data, T value) {
         this.values.put(data.id(), new Info(false, false));
         return value;
+    }
+
+    public GuidebookEntry root() {
+        return this;
     }
 
     public record DataTemplate<T>(String id, Function<String, MapCodec<T>> codec) {

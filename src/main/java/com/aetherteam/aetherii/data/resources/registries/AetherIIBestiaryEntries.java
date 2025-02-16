@@ -176,6 +176,10 @@ public class AetherIIBestiaryEntries {
                     (int) slashDefense,
                     (int) impactDefense,
                     (int) pierceDefense,
+                    Optional.empty(), //todo effect resistances
+                    Optional.empty(),
+                    Optional.empty(),
+                    Optional.empty(),
                     scaleMultiplier,
                     loot1,
                     loot2,
