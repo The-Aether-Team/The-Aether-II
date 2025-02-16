@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
+import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.Holder;
@@ -158,11 +159,9 @@ public class AetherIIBestiaryEntries {
             double slashDefense = ATTRIBUTES.containsKey(holder) ? ATTRIBUTES.get(holder).getOrDefault(AetherIIAttributes.SLASH_RESISTANCE, 0.0) : 0.0;
             double impactDefense = ATTRIBUTES.containsKey(holder) ? ATTRIBUTES.get(holder).getOrDefault(AetherIIAttributes.IMPACT_RESISTANCE, 0.0) : 0.0;
             double pierceDefense = ATTRIBUTES.containsKey(holder) ? ATTRIBUTES.get(holder).getOrDefault(AetherIIAttributes.PIERCE_RESISTANCE, 0.0) : 0.0;
+            List<BestiaryEntry.EffectResistanceDisplay> effectResistances = getEffectResistances(holder);
             Optional<Double> scaleMultiplier = SCALED.containsKey(holder) ? Optional.of(SCALED.get(holder)) : Optional.empty();
             List<BestiaryEntry.LootDisplay> loot = LOOT.containsKey(holder) ? LOOT.get(holder) : new ArrayList<>();
-            Optional<BestiaryEntry.LootDisplay> loot1 = loot.size() > 0 ? Optional.of(loot.get(0)) : Optional.empty();
-            Optional<BestiaryEntry.LootDisplay> loot2 = loot.size() > 1 ? Optional.of(loot.get(1)) : Optional.empty();
-            Optional<BestiaryEntry.LootDisplay> loot3 = loot.size() > 2 ? Optional.of(loot.get(2)) : Optional.empty();
             Optional<TagKey<Item>> food = FED.containsKey(holder) ? Optional.of(FED.get(holder)) : Optional.empty();
 
             context.register(entry.getKey(), new BestiaryEntry(
@@ -176,14 +175,9 @@ public class AetherIIBestiaryEntries {
                     (int) slashDefense,
                     (int) impactDefense,
                     (int) pierceDefense,
-                    Optional.empty(), //todo effect resistances
-                    Optional.empty(),
-                    Optional.empty(),
-                    Optional.empty(),
+                    effectResistances,
                     scaleMultiplier,
-                    loot1,
-                    loot2,
-                    loot3,
+                    loot,
                     food
             ));
         }
@@ -191,6 +185,18 @@ public class AetherIIBestiaryEntries {
 
     public static Registry<BestiaryEntry> getRegistry(RegistryAccess registryAccess) {
         return registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
+    }
+
+    public static List<BestiaryEntry.EffectResistanceDisplay> getEffectResistances(Holder<EntityType<?>> holder) {
+        ArrayList<BestiaryEntry.EffectResistanceDisplay> effectResistances = new ArrayList<>();
+        if (ATTRIBUTES.containsKey(holder)) {
+            for (Map.Entry<Holder<Attribute>, Double> attribute : ATTRIBUTES.get(holder).entrySet()) {
+                if (attribute.getKey().value() instanceof EffectResistanceAttribute) {
+                    effectResistances.add(new BestiaryEntry.EffectResistanceDisplay(attribute.getKey(), attribute.getValue().intValue()));
+                }
+            }
+        }
+        return effectResistances;
     }
 
     public static Map<EntityType<?>, TagKey<Item>> getFedEntityTypes() {

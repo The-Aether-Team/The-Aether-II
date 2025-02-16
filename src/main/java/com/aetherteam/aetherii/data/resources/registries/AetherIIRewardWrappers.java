@@ -39,10 +39,14 @@ public class AetherIIRewardWrappers {
                     BestiaryEntry.SLASH_DEFENSE.id(),
                     BestiaryEntry.IMPACT_DEFENSE.id(),
                     BestiaryEntry.PIERCE_DEFENSE.id(),
+                    BestiaryEntry.EFFECT_RESISTANCE.id() + "_1",
+                    BestiaryEntry.EFFECT_RESISTANCE.id() + "_2",
+                    BestiaryEntry.EFFECT_RESISTANCE.id() + "_3",
+                    BestiaryEntry.EFFECT_RESISTANCE.id() + "_4",
                     BestiaryEntry.SCALE_MULTIPLIER.id(),
-                    BestiaryEntry.LOOT_1.id(),
-                    BestiaryEntry.LOOT_2.id(),
-                    BestiaryEntry.LOOT_3.id(),
+                    BestiaryEntry.LOOT.id() + "_1",
+                    BestiaryEntry.LOOT.id() + "_2",
+                    BestiaryEntry.LOOT.id() + "_3",
                     BestiaryEntry.FOOD.id()));
             context.register(ResourceKey.create(REWARD_WRAPPER_REGISTRY_KEY, observeId), observeWrapper);
         }

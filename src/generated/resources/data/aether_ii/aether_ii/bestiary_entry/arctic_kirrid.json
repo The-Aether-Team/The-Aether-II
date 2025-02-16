@@ -1,22 +1,29 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.arctic_kirrid",
+  "effect_resistances": [],
   "entity_type": "aether_ii:arctic_kirrid",
   "food": "aether_ii:kirrid_food",
   "health": 10,
   "icon": "aether_ii:guidebook/bestiary/arctic_kirrid",
   "impact_defense": 2,
-  "loot_1": {
-    "chance": 1.0,
-    "item": "aether_ii:kirrid_loin",
-    "max_count": 3,
-    "min_count": 1
-  },
-  "loot_2": {
-    "chance": 1.0,
-    "item": "aether_ii:cloudwool",
-    "max_count": 3,
-    "min_count": 1
-  },
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:kirrid_loin",
+        "max_count": 3,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:cloudwool",
+        "max_count": 3,
+        "min_count": 1
+      }
+    }
+  ],
   "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.arctic_kirrid",
   "pierce_defense": -2,
   "slash_defense": 0,

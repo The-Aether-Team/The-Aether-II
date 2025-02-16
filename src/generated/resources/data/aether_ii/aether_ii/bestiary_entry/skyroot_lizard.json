@@ -1,9 +1,11 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.skyroot_lizard",
+  "effect_resistances": [],
   "entity_type": "aether_ii:skyroot_lizard",
   "health": 0,
   "icon": "aether_ii:guidebook/bestiary/skyroot_lizard",
   "impact_defense": 0,
+  "loot_slots": [],
   "pierce_defense": 0,
   "slash_defense": 0
 }

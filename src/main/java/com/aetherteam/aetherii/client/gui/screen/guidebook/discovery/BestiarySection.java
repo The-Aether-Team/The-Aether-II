@@ -10,6 +10,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScr
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
 import com.aetherteam.aetherii.network.packet.serverbound.CheckGuidebookEntryPacket;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
@@ -20,15 +21,19 @@ import net.minecraft.client.gui.GuiSpriteManager;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.MobEffectTextureManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -284,27 +289,30 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                     x = 132;
                     y = 29;
 
-                    //todo effect resistance render
-//                    MobEffectTextureManager effectTextureManager = Minecraft.getInstance().getMobEffectTextures();
-//                    for (Map.Entry<Holder<Attribute>, AttributeInstance> attributeEntries : ((AttributeMapAccessor) livingEntity.getAttributes()).aether_ii$getAttributes().entrySet()) {
-//                        if (attributeEntries.getKey().value() instanceof EffectResistanceAttribute effectResistanceAttribute) {
-//                            Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
-//                            TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
-//                            guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, x, y, 0, 18, 18);
-//                            double effectValue = attributeEntries.getValue().getValue();
-//                            Component effectTooltip = Component.literal((int) effectValue * 100 + "%")
-//                                    .append(CommonComponents.space())
-//                                    .append(Component.translatable(effectResistanceAttribute.getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
-//                            this.renderDefenseIconValue(guiGraphics, x, y, effectValue);
-//                            this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, -Minecraft.getInstance().font.width(effectTooltip) - 22, effectTooltip);
-//                            y += 17;
-//                        }
-//                    }
+                    MobEffectTextureManager effectTextureManager = Minecraft.getInstance().getMobEffectTextures();
+                    List<BestiaryEntry.EffectResistanceDisplay> effectResistances = entry.getEffectResistances();
+                    if (!effectResistances.isEmpty()) {
+                        for (int i = 0; i < effectResistances.size(); i++) {
+                            BestiaryEntry.EffectResistanceDisplay effectResistanceDisplay = effectResistances.get(i);
+                            if (effectResistanceDisplay.attribute().value() instanceof EffectResistanceAttribute effectResistanceAttribute) {
+                                if (entry.getClientValues().containsKey(BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i) && this.isUnlocked(entry, BestiaryEntry.EFFECT_RESISTANCE.id() + "_" + i)) {
+                                    Holder<MobEffect> effectHolder = effectResistanceAttribute.getEffect();
+                                    TextureAtlasSprite textureatlassprite = effectTextureManager.get(effectHolder);
+                                    guiGraphics.blitSprite(RenderType::guiTextured, textureatlassprite, x, y, 18, 18);
+                                    int effectValue = effectResistanceDisplay.value();
+                                    Component effectTooltip = Component.literal(effectValue * 100 + "%")
+                                            .append(CommonComponents.space())
+                                            .append(Component.translatable(effectResistanceAttribute.getDescriptionId(), Component.translatable(effectHolder.value().getDescriptionId()).withColor(effectHolder.value().getColor())));
+                                    this.renderDefenseIconValue(guiGraphics, x, y, effectValue);
+                                    this.renderTooltipOverIcon(font, guiGraphics, mouseX, mouseY, x, y, -Minecraft.getInstance().font.width(effectTooltip) - 22, effectTooltip);
+                                    y += 17;
+                                }
+                            }
+                        }
+                    }
 
                     int dropsTextX = 101;
                     int dropsTextY = 156;
-
-                    List<Optional<BestiaryEntry.LootDisplay>> loot = entry.getLoot();
 
                     Optional<TagKey<Item>> food = entry.getFood();
                     if (food.isPresent()) {
@@ -329,12 +337,12 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                         dropsTextX = 60;
                     }
 
+                    List<BestiaryEntry.LootDisplay> loot = entry.getLoot();
                     if (!loot.isEmpty()) {
                         boolean renderTitle = false;
-                        int i = 0;
-                        for (Optional<BestiaryEntry.LootDisplay> lootDisplayOptional : loot) {
-                            if (lootDisplayOptional.isPresent() && this.isUnlocked(entry, "loot_" + (i + 1))) {
-                                BestiaryEntry.LootDisplay lootDisplay = lootDisplayOptional.get();
+                        for (int i = 0; i < loot.size(); i++) {
+                            BestiaryEntry.LootDisplay lootDisplay = loot.get(i);
+                            if (entry.getClientValues().containsKey(BestiaryEntry.LOOT.id() + "_" + i) && this.isUnlocked(entry, BestiaryEntry.LOOT.id() + "_" + i)) {
                                 int slotX = dropsTextX + (10 * (3 - loot.size())) + (20 * i);
                                 ItemStack itemStack = new ItemStack(lootDisplay.getItemLike());
                                 List<Component> components = new ArrayList<>();
@@ -348,7 +356,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                                 this.renderFakeSlot(guiGraphics, font, components, itemStack, mouseX, mouseY, slotX, dropsTextY - 5);
                                 renderTitle = true;
                             }
-                            i++;
                         }
                         if (renderTitle) {
                             Component drops = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.info.drops");

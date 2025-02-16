@@ -1,7 +1,6 @@
 package com.aetherteam.aetherii.api.guidebook;
 
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
-import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -31,14 +30,9 @@ public class BestiaryEntry extends GuidebookEntry {
     public static final DataTemplate<Integer> SLASH_DEFENSE = new DataTemplate<>("slash_defense", Codec.INT::fieldOf);
     public static final DataTemplate<Integer> IMPACT_DEFENSE = new DataTemplate<>("impact_defense", Codec.INT::fieldOf);
     public static final DataTemplate<Integer> PIERCE_DEFENSE = new DataTemplate<>("pierce_defense", Codec.INT::fieldOf);
-    public static final DataTemplate<Optional<EffectResistanceDisplay>> EFFECT_RESISTANCE_1 = new DataTemplate<>("effect_resistance_1", EffectResistanceDisplay.DIRECT_CODEC::optionalFieldOf);
-    public static final DataTemplate<Optional<EffectResistanceDisplay>> EFFECT_RESISTANCE_2 = new DataTemplate<>("effect_resistance_2", EffectResistanceDisplay.DIRECT_CODEC::optionalFieldOf);
-    public static final DataTemplate<Optional<EffectResistanceDisplay>> EFFECT_RESISTANCE_3 = new DataTemplate<>("effect_resistance_3", EffectResistanceDisplay.DIRECT_CODEC::optionalFieldOf);
-    public static final DataTemplate<Optional<EffectResistanceDisplay>> EFFECT_RESISTANCE_4 = new DataTemplate<>("effect_resistance_4", EffectResistanceDisplay.DIRECT_CODEC::optionalFieldOf);
+    public static final DataTemplate<EffectResistanceDisplay> EFFECT_RESISTANCE = new DataTemplate<>("effect_resistance", EffectResistanceDisplay.DIRECT_CODEC::fieldOf);
     public static final DataTemplate<Optional<Double>> SCALE_MULTIPLIER = new DataTemplate<>("scale_multiplier", Codec.DOUBLE::optionalFieldOf);
-    public static final DataTemplate<Optional<LootDisplay>> LOOT_1 = new DataTemplate<>("loot_1", LootDisplay.DIRECT_CODEC::optionalFieldOf);
-    public static final DataTemplate<Optional<LootDisplay>> LOOT_2 = new DataTemplate<>("loot_2", LootDisplay.DIRECT_CODEC::optionalFieldOf);
-    public static final DataTemplate<Optional<LootDisplay>> LOOT_3 = new DataTemplate<>("loot_3", LootDisplay.DIRECT_CODEC::optionalFieldOf);
+    public static final DataTemplate<LootDisplay> LOOT = new DataTemplate<>("loot", LootDisplay.DIRECT_CODEC::fieldOf);
     public static final DataTemplate<Optional<TagKey<Item>>> FOOD = new DataTemplate<>("food", TagKey.codec(Registries.ITEM)::optionalFieldOf);
 
     public static final Codec<BestiaryEntry> DIRECT_CODEC =
@@ -49,14 +43,9 @@ public class BestiaryEntry extends GuidebookEntry {
                     BestiaryEntry.SLASH_DEFENSE.mapCodec().forGetter(BestiaryEntry::getSlashDefense),
                     BestiaryEntry.IMPACT_DEFENSE.mapCodec().forGetter(BestiaryEntry::getImpactDefense),
                     BestiaryEntry.PIERCE_DEFENSE.mapCodec().forGetter(BestiaryEntry::getPierceDefense),
-                    BestiaryEntry.EFFECT_RESISTANCE_1.mapCodec().forGetter(BestiaryEntry::getEffectResistance1), //todo group together in an object
-                    BestiaryEntry.EFFECT_RESISTANCE_2.mapCodec().forGetter(BestiaryEntry::getEffectResistance2),
-                    BestiaryEntry.EFFECT_RESISTANCE_3.mapCodec().forGetter(BestiaryEntry::getEffectResistance3),
-                    BestiaryEntry.EFFECT_RESISTANCE_4.mapCodec().forGetter(BestiaryEntry::getEffectResistance4),
+                    Codec.list(BestiaryEntry.EFFECT_RESISTANCE.mapCodec().codec(), 0, 4).fieldOf("effect_resistances").forGetter(BestiaryEntry::getEffectResistances),
                     BestiaryEntry.SCALE_MULTIPLIER.mapCodec().forGetter(BestiaryEntry::getScaleMultiplier),
-                    BestiaryEntry.LOOT_1.mapCodec().forGetter(BestiaryEntry::getLoot1), //todo group together in an object
-                    BestiaryEntry.LOOT_2.mapCodec().forGetter(BestiaryEntry::getLoot2),
-                    BestiaryEntry.LOOT_3.mapCodec().forGetter(BestiaryEntry::getLoot3),
+                    Codec.list(BestiaryEntry.LOOT.mapCodec().codec(), 0, 3).fieldOf("loot_slots").forGetter(BestiaryEntry::getLoot),
                     BestiaryEntry.FOOD.mapCodec().forGetter(BestiaryEntry::getFood)
             ).apply(in, BestiaryEntry::new));
     public static final Codec<Holder<BestiaryEntry>> REFERENCE_CODEC = RegistryFileCodec.create(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY, DIRECT_CODEC);
@@ -67,35 +56,31 @@ public class BestiaryEntry extends GuidebookEntry {
     private final int slashDefense;
     private final int impactDefense;
     private final int pierceDefense;
-    private final Optional<EffectResistanceDisplay> effectResistance1;
-    private final Optional<EffectResistanceDisplay> effectResistance2;
-    private final Optional<EffectResistanceDisplay> effectResistance3;
-    private final Optional<EffectResistanceDisplay> effectResistance4;
+    private final List<EffectResistanceDisplay> effectResistances;
     private final Optional<Double> scaleMultiplier;
-    private final Optional<LootDisplay> loot1;
-    private final Optional<LootDisplay> loot2;
-    private final Optional<LootDisplay> loot3;
+    private final List<LootDisplay> loot;
     private final Optional<TagKey<Item>> food;
 
-    public BestiaryEntry(GuidebookEntry root, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, Optional<EffectResistanceDisplay> effectResistance1, Optional<EffectResistanceDisplay> effectResistance2, Optional<EffectResistanceDisplay> effectResistance3, Optional<EffectResistanceDisplay> effectResistance4, Optional<Double> scaleMultiplier, Optional<LootDisplay> loot1, Optional<LootDisplay> loot2, Optional<LootDisplay> loot3, Optional<TagKey<Item>> food) {
-        this(root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), entityType, health, slashDefense, impactDefense, pierceDefense, effectResistance1, effectResistance2, effectResistance3, effectResistance4, scaleMultiplier, loot1, loot2, loot3, food);
+    public BestiaryEntry(GuidebookEntry root, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, List<EffectResistanceDisplay> effectResistances, Optional<Double> scaleMultiplier, List<LootDisplay> loot, Optional<TagKey<Item>> food) {
+        this(root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), entityType, health, slashDefense, impactDefense, pierceDefense, effectResistances, scaleMultiplier, loot, food);
     }
 
-    public BestiaryEntry(ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, Optional<EffectResistanceDisplay> effectResistance1, Optional<EffectResistanceDisplay> effectResistance2, Optional<EffectResistanceDisplay> effectResistance3, Optional<EffectResistanceDisplay> effectResistance4, Optional<Double> scaleMultiplier, Optional<LootDisplay> loot1, Optional<LootDisplay> loot2, Optional<LootDisplay> loot3, Optional<TagKey<Item>> food) {
+    public BestiaryEntry(ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, List<EffectResistanceDisplay> effectResistances, Optional<Double> scaleMultiplier, List<LootDisplay> loot, Optional<TagKey<Item>> food) {
         super(icon, name, slotName, slotSubtitle, descriptionKey);
         this.entityType = this.info(ENTITY_TYPE, entityType);
         this.health = this.info(HEALTH, health);
         this.slashDefense = this.info(SLASH_DEFENSE, slashDefense);
         this.impactDefense = this.info(IMPACT_DEFENSE, impactDefense);
         this.pierceDefense = this.info(PIERCE_DEFENSE, pierceDefense);
-        this.effectResistance1 = this.info(EFFECT_RESISTANCE_1, effectResistance1);
-        this.effectResistance2 = this.info(EFFECT_RESISTANCE_2, effectResistance2);
-        this.effectResistance3 = this.info(EFFECT_RESISTANCE_3, effectResistance3);
-        this.effectResistance4 = this.info(EFFECT_RESISTANCE_4, effectResistance4);
+        this.effectResistances = effectResistances;
+        for (int i = 0; i < this.effectResistances.size(); i++) {
+            this.info(EFFECT_RESISTANCE.id() + "_" + i, effectResistances.get(i));
+        }
         this.scaleMultiplier = this.info(SCALE_MULTIPLIER, scaleMultiplier);
-        this.loot1 = this.info(LOOT_1, loot1);
-        this.loot2 = this.info(LOOT_2, loot2);
-        this.loot3 = this.info(LOOT_3, loot3);
+        this.loot = loot;
+        for (int i = 0; i < this.loot.size(); i++) {
+            this.info(LOOT.id() + "_" + i, loot.get(i));
+        }
         this.food = this.info(FOOD, food);
     }
 
@@ -119,44 +104,16 @@ public class BestiaryEntry extends GuidebookEntry {
         return this.pierceDefense;
     }
 
-    public Optional<EffectResistanceDisplay> getEffectResistance1() {
-        return this.effectResistance1;
-    }
-
-    public Optional<EffectResistanceDisplay> getEffectResistance2() {
-        return this.effectResistance2;
-    }
-
-    public Optional<EffectResistanceDisplay> getEffectResistance3() {
-        return this.effectResistance3;
-    }
-
-    public Optional<EffectResistanceDisplay> getEffectResistance4() {
-        return this.effectResistance4;
-    }
-
-    public List<Optional<EffectResistanceDisplay>> getEffectResistances() {
-        return ImmutableList.of(this.getEffectResistance1(), this.getEffectResistance2(), this.getEffectResistance3(), this.getEffectResistance4());
+    public List<EffectResistanceDisplay> getEffectResistances() {
+        return this.effectResistances;
     }
 
     public Optional<Double> getScaleMultiplier() {
         return this.scaleMultiplier;
     }
 
-    public Optional<LootDisplay> getLoot1() {
-        return this.loot1;
-    }
-
-    public Optional<LootDisplay> getLoot2() {
-        return this.loot2;
-    }
-
-    public Optional<LootDisplay> getLoot3() {
-        return this.loot3;
-    }
-
-    public List<Optional<LootDisplay>> getLoot() {
-        return ImmutableList.of(this.getLoot1(), this.getLoot2(), this.getLoot3());
+    public List<LootDisplay> getLoot() {
+        return this.loot;
     }
 
     public Optional<TagKey<Item>> getFood() {
@@ -213,7 +170,7 @@ public class BestiaryEntry extends GuidebookEntry {
         }
 
         public Mutable(Holder<BestiaryEntry> entry, Map<String, Info> clientValues) {
-            super(entry.value().getIcon(), entry.value().getName(), entry.value().getSlotName(), entry.value().getSlotSubtitle(), entry.value().getDescriptionKey(), entry.value().getEntityType(), entry.value().getHealth(), entry.value().getSlashDefense(), entry.value().getImpactDefense(), entry.value().getPierceDefense(), entry.value().getEffectResistance1(), entry.value().getEffectResistance2(), entry.value().getEffectResistance3(), entry.value().getEffectResistance4(), entry.value().getScaleMultiplier(), entry.value().getLoot1(), entry.value().getLoot2(), entry.value().getLoot3(), entry.value().getFood());
+            super(entry.value().getIcon(), entry.value().getName(), entry.value().getSlotName(), entry.value().getSlotSubtitle(), entry.value().getDescriptionKey(), entry.value().getEntityType(), entry.value().getHealth(), entry.value().getSlashDefense(), entry.value().getImpactDefense(), entry.value().getPierceDefense(), entry.value().getEffectResistances(), entry.value().getScaleMultiplier(), entry.value().getLoot(), entry.value().getFood());
             this.entry = entry;
             this.clientValues = clientValues;
         }

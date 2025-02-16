@@ -1,15 +1,20 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.zephyr",
+  "effect_resistances": [],
   "entity_type": "aether_ii:zephyr",
   "health": 5,
   "icon": "aether_ii:guidebook/bestiary/zephyr",
   "impact_defense": 2,
-  "loot_1": {
-    "chance": 1.0,
-    "item": "aether_ii:cold_aercloud",
-    "max_count": 2,
-    "min_count": 0
-  },
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:cold_aercloud",
+        "max_count": 2,
+        "min_count": 0
+      }
+    }
+  ],
   "pierce_defense": 0,
   "scale_multiplier": 1.65,
   "slash_defense": -2

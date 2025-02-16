@@ -68,7 +68,11 @@ public class GuidebookEntry {
     }
 
     protected <T> T info(DataTemplate<T> data, T value) {
-        this.values.put(data.id(), new Info(false, false));
+        return this.info(data.id(), value);
+    }
+
+    protected <T> T info(String id, T value) {
+        this.values.put(id, new Info(false, false));
         return value;
     }
 

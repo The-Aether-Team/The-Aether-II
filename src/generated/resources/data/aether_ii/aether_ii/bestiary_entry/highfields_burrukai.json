@@ -1,22 +1,29 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.highfields_burrukai",
+  "effect_resistances": [],
   "entity_type": "aether_ii:highfields_burrukai",
   "food": "aether_ii:burrukai_food",
   "health": 18,
   "icon": "aether_ii:guidebook/bestiary/highfields_burrukai",
   "impact_defense": -2,
-  "loot_1": {
-    "chance": 1.0,
-    "item": "aether_ii:burrukai_rib_cut",
-    "max_count": 3,
-    "min_count": 1
-  },
-  "loot_2": {
-    "chance": 1.0,
-    "item": "aether_ii:burrukai_pelt",
-    "max_count": 3,
-    "min_count": 1
-  },
+  "loot_slots": [
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:burrukai_rib_cut",
+        "max_count": 3,
+        "min_count": 1
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:burrukai_pelt",
+        "max_count": 3,
+        "min_count": 1
+      }
+    }
+  ],
   "name": "aether_ii.guidebook_bestiary.name.entity.aether_ii.highfields_burrukai",
   "pierce_defense": 0,
   "slash_defense": 2,
