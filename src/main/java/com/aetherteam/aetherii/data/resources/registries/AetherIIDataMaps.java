@@ -16,9 +16,9 @@ public class AetherIIDataMaps {
             .synced(BucketReplacement.ITEM_CODEC, false)
             .build();
 
+    // Don't sync, as we sync this manually with a packet
     public static final DataMapType<Biome, Integer> AETHER_GRASS_COLORS = DataMapType
             .builder(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_grass_color"), Registries.BIOME, Codec.INT)
-            .synced(Codec.INT, false)
             .build();
 
     public static void registerDataMaps(RegisterDataMapTypesEvent event) {

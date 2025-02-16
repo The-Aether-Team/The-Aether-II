@@ -45,7 +45,6 @@ public class AetherIIClientEventListeners {
 
         // World
         bus.addListener(AetherIIClientEventListeners::onComputeFogColor);
-        bus.addListener(AetherIIClientEventListeners::onPlayerLogin);
 
         // Audio
         bus.addListener(AetherIIClientEventListeners::onMusicSelected);
@@ -144,16 +143,5 @@ public class AetherIIClientEventListeners {
         ClientInput input = event.getInput();
 
         player.getData(AetherIIDataAttachments.PLAYER).movementInput(player, input);
-    }
-
-
-    public static void onPlayerLogin(ClientPlayerNetworkEvent.LoggingIn event) {
-        RegistryAccess access = event.getPlayer().registryAccess();
-        Optional<Registry<Biome>> optional = access.lookup(Registries.BIOME);
-
-        if (optional.isPresent()) {
-            Registry<Biome> registry = optional.get();
-            BiomeHooks.acceptColors(registry, registry.getDataMap(AetherIIDataMaps.AETHER_GRASS_COLORS));
-        }
     }
 }

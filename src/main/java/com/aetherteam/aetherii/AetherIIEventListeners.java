@@ -2,6 +2,7 @@ package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.event.FreezeEvent;
 import com.aetherteam.aetherii.event.hooks.BlockHooks;
@@ -82,6 +83,7 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.CURRENCY).login(player); //todo verify
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
+        BiomeHooks.sendColors(player);
     }
 
     public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
