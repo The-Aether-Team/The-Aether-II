@@ -91,21 +91,18 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            attachment.getBestiaryEntries().stream().forEach((bestiaryEntry) -> { //todo optimize this
-                this.orderedEntries.stream().forEach((orderedEntry) -> {
-                    if (bestiaryEntry.getEntityType().is(orderedEntry.getEntityType())) {
-                        bestiaryEntry.getClientValues().entrySet().forEach((entry1) -> {
-                            orderedEntry.getClientValues().entrySet().forEach((entry2) -> {
-                                if (entry1.getKey().equals(entry2.getKey())) {
-                                    if (entry1.getValue().isVisible() && !entry2.getValue().isVisible()) {
-                                        entry2.getValue().reveal();
-                                    }
-                                }
-                            });
-                        });
+            for (BestiaryEntry.Mutable bestiaryEntry : attachment.getBestiaryEntries()) {
+                Optional<BestiaryEntry.Mutable> matchingEntry = this.orderedEntries.stream().filter((mutable) -> mutable.getEntityType().is(bestiaryEntry.getEntityType())).findFirst();
+                if (matchingEntry.isPresent()) {
+                    for (Map.Entry<String, GuidebookEntry.Info> bestiaryClientValue : bestiaryEntry.getClientValues().entrySet()) {
+                        if (matchingEntry.get().getClientValues().containsKey(bestiaryClientValue.getKey())) {
+                            if (bestiaryClientValue.getValue().isVisible() && !matchingEntry.get().getClientValues().get(bestiaryClientValue.getKey()).isVisible()) {
+                                matchingEntry.get().getClientValues().get(bestiaryClientValue.getKey()).reveal();
+                            }
+                        }
                     }
-                });
-            });
+                }
+            }
         }
 
         int remainingSlots = Mth.ceil((this.orderedEntries.size() - this.maxSlots()) / (double) this.scrollIncrement());
