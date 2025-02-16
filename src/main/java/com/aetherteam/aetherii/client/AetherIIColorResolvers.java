@@ -44,15 +44,15 @@ public class AetherIIColorResolvers {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
-        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, tintIndex == 0 ? 0xFFFFFF : (level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_GRASS_COLOR), 5.0F, 6.0F, 1)),
+        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_GRASS_COLOR, 5.0F, 6.0F)),
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get());
-        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F, 0)),
+        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),
                 AetherIIBlocks.AETHER_SHORT_GRASS.get(), AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), AetherIIBlocks.AETHER_LONG_GRASS.get());
         event.register(((state, level, pos, tintIndex) ->  level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR),
                 AetherIIBlocks.HIGHLAND_FERN.get(), AetherIIBlocks.POTTED_HIGHLAND_FERN.get());
     }
 
-    public static int createTriTintGrassColor(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset, int indexOffset) {
+    public static int createTriTintGrassColor(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) {
         Color midColor = new Color(defaultColor);
 
         float[] hsb = Color.RGBtoHSB(midColor.getRed(), midColor.getGreen(), midColor.getBlue(), null);
@@ -63,7 +63,7 @@ public class AetherIIColorResolvers {
         Color darkColor = Color.getHSBColor(hue, saturation + (darkSaturationOffset / 100.0F), brightness);
         Color lightColor = Color.getHSBColor(hue, saturation - (lightSaturationOffset / 100.0F), brightness);
 
-        switch (tintIndex - indexOffset) {
+        switch (tintIndex) {
             case 0 -> {
                 return darkColor.getRGB();
             }

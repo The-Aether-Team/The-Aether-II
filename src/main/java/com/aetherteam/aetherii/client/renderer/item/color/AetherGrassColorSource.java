@@ -11,22 +11,17 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 
-public record AetherGrassColorSource(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset, int indexOffset) implements ItemTintSource {
+public record AetherGrassColorSource(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) implements ItemTintSource {
     public static final MapCodec<AetherGrassColorSource> MAP_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             Codec.INT.fieldOf("tintIndex").forGetter(AetherGrassColorSource::tintIndex),
             Codec.INT.fieldOf("defaultColor").forGetter(AetherGrassColorSource::defaultColor),
             Codec.FLOAT.fieldOf("darkSaturationOffset").forGetter(AetherGrassColorSource::darkSaturationOffset),
-            Codec.FLOAT.fieldOf("lightSaturationOffset").forGetter(AetherGrassColorSource::lightSaturationOffset),
-            Codec.INT.optionalFieldOf("tintIndex", 0).forGetter(AetherGrassColorSource::tintIndex)
-            ).apply(instance, AetherGrassColorSource::new));
-
-    public AetherGrassColorSource(int tintIndex, int defaultColor, float darkSaturationOffset, float lightSaturationOffset) {
-        this(tintIndex, defaultColor, darkSaturationOffset, lightSaturationOffset, 0);
-    }
+            Codec.FLOAT.fieldOf("lightSaturationOffset").forGetter(AetherGrassColorSource::lightSaturationOffset)
+    ).apply(instance, AetherGrassColorSource::new));
 
     @Override
     public int calculate(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity livingEntity) {
-        return AetherIIColorResolvers.createTriTintGrassColor(this.tintIndex(), this.defaultColor(), this.darkSaturationOffset(), this.lightSaturationOffset(), this.indexOffset());
+        return AetherIIColorResolvers.createTriTintGrassColor(this.tintIndex(), this.defaultColor(), this.darkSaturationOffset(), this.lightSaturationOffset());
     }
 
     @Override
