@@ -179,7 +179,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 2, 1, 1))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1, 1))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SWET.get(), 2, 1, 3))
+                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SWET.get(), 2, 1, 2))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 4, 1, 1))
                         .build(),
                 builder
@@ -340,7 +340,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 2, 1, 1))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1, 1))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SWET.get(), 2, 1, 3))
+                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SWET.get(), 2, 1, 2))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 4, 1, 1))
                         .build(),
                 builder
@@ -488,7 +488,7 @@ public class HighlandsBiomeBuilders {
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.ZEPHYR.get(), 3, 1, 2))
                         .addSpawn(AetherIIMobCategory.AETHER_SKY_MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.TEMPEST.get(), 2, 1, 1))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SKEPHID.get(), 1, 1, 1))
-                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SWET.get(), 2, 1, 3))
+                        .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.SWET.get(), 2, 1, 2))
                         .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(AetherIIEntityTypes.COCKATRICE.get(), 4, 1, 1))
                         .build(),
                 builder
