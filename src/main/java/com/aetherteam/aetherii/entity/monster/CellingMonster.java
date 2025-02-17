@@ -96,7 +96,7 @@ public class CellingMonster extends Monster {
             this.entityData.set(ATTACHED_FACE, Direction.UP);
         } else {
             Direction closestDirection = null;
-            double closestDistance = 1.5D;
+            double closestDistance = 2.5D;
             BlockPos pos = new BlockPos(Mth.floor(this.getX()), Mth.floor(this.getY() + (this.getBbHeight() / 2)), Mth.floor(this.getZ()));
 
             //first celling check in bb height's center
