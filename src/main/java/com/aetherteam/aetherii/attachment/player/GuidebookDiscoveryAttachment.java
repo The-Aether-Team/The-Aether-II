@@ -1,6 +1,8 @@
 package com.aetherteam.aetherii.attachment.player;
 
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
+import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
+import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
 import com.aetherteam.aetherii.api.guidebook.RewardWrapper;
 import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
@@ -26,21 +28,29 @@ import java.util.Optional;
 
 public class GuidebookDiscoveryAttachment {
     private List<BestiaryEntry.Mutable> bestiaryEntries;
+    private List<EffectsEntry.Mutable> effectsEntries;
+    private List<ExplorationEntry.Mutable> explorationEntries;
     private boolean shouldSyncAfterJoin = false;
     private boolean sync = false;
 
     public static final Codec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BestiaryEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getBestiaryEntries)
+            BestiaryEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getBestiaryEntries),
+            EffectsEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("effects_entries").forGetter(GuidebookDiscoveryAttachment::getEffectsEntries),
+            ExplorationEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("exploration_entries").forGetter(GuidebookDiscoveryAttachment::getExplorationEntries)
     ).apply(instance, GuidebookDiscoveryAttachment::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookDiscoveryAttachment> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC);
 
-    protected GuidebookDiscoveryAttachment(List<BestiaryEntry.Mutable> bestiaryEntries) {
+    protected GuidebookDiscoveryAttachment(List<BestiaryEntry.Mutable> bestiaryEntries, List<EffectsEntry.Mutable> effectsEntries, List<ExplorationEntry.Mutable> explorationEntries) {
         this.bestiaryEntries = new ArrayList<>(bestiaryEntries);
+        this.effectsEntries = new ArrayList<>(effectsEntries);
+        this.explorationEntries = new ArrayList<>(explorationEntries);
     }
 
     public GuidebookDiscoveryAttachment() {
         this.bestiaryEntries = new ArrayList<>();
+        this.effectsEntries = new ArrayList<>();
+        this.explorationEntries = new ArrayList<>();
     }
 
     public void login(Player player) {
@@ -110,7 +120,17 @@ public class GuidebookDiscoveryAttachment {
         return this.bestiaryEntries;
     }
 
+    public List<EffectsEntry.Mutable> getEffectsEntries() {
+        return this.effectsEntries;
+    }
+
+    public List<ExplorationEntry.Mutable> getExplorationEntries() {
+        return this.explorationEntries;
+    }
+
     public void syncAttachment(GuidebookDiscoveryAttachment other) {
         this.bestiaryEntries = other.bestiaryEntries;
+        this.effectsEntries = other.effectsEntries;
+        this.explorationEntries = other.explorationEntries;
     }
 }
