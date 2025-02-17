@@ -46,42 +46,6 @@
                   "predicate": {
                     "type_specific": {
                       "type": "aether_ii:swet",
-                      "variant": "aether_ii:purple"
-                    }
-                  }
-                }
-              ],
-              "functions": [
-                {
-                  "add": false,
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 3.0,
-                    "min": 1.0
-                  },
-                  "function": "minecraft:set_count"
-                },
-                {
-                  "count": {
-                    "type": "minecraft:uniform",
-                    "max": 1.0,
-                    "min": 0.0
-                  },
-                  "enchantment": "minecraft:looting",
-                  "function": "minecraft:enchanted_count_increase"
-                }
-              ],
-              "name": "aether_ii:purple_swet_gel"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "entity": "this",
-                  "predicate": {
-                    "type_specific": {
-                      "type": "aether_ii:swet",
                       "variant": "aether_ii:blue"
                     }
                   }
@@ -180,6 +144,42 @@
                 }
               ],
               "name": "aether_ii:green_swet_gel"
+            },
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:swet",
+                      "variant": "aether_ii:purple"
+                    }
+                  }
+                }
+              ],
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 3.0,
+                    "min": 1.0
+                  },
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 1.0,
+                    "min": 0.0
+                  },
+                  "enchantment": "minecraft:looting",
+                  "function": "minecraft:enchanted_count_increase"
+                }
+              ],
+              "name": "aether_ii:purple_swet_gel"
             }
           ]
         }
