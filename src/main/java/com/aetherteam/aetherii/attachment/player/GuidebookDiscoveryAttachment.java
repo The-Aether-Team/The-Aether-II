@@ -1,11 +1,10 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
-import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
-import com.aetherteam.aetherii.api.guidebook.ExplorationEntry;
-import com.aetherteam.aetherii.api.guidebook.RewardWrapper;
+import com.aetherteam.aetherii.api.guidebook.*;
 import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIRewardWrappers;
 import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.UpdateGuidebookDiscoveryPacket;
@@ -81,7 +80,9 @@ public class GuidebookDiscoveryAttachment {
     public void trackDiscoveries(Player player, AdvancementHolder advancement) {
         if (player instanceof ServerPlayer serverPlayer) {
             RegistryAccess registryAccess = serverPlayer.registryAccess();
-            this.trackBestiaryEntries(serverPlayer, registryAccess, advancement);
+            this.trackBestiaryEntries(registryAccess, advancement, serverPlayer);
+            this.trackEffectsEntries(registryAccess, advancement, serverPlayer);
+            this.trackExplorationEntries(registryAccess, advancement, serverPlayer);
             if (this.sync) {
                 PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
                 this.sync = false;
@@ -89,18 +90,41 @@ public class GuidebookDiscoveryAttachment {
         }
     }
 
-    private void trackBestiaryEntries(ServerPlayer serverPlayer, RegistryAccess registryAccess, AdvancementHolder advancement) {
+    private void trackBestiaryEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer) {
         if (this.bestiaryEntries.isEmpty()) {
             Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
             for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
                 this.bestiaryEntries.add(new BestiaryEntry.Mutable(entry));
             }
         }
+        this.revealEntries(registryAccess, advancement, serverPlayer, this.bestiaryEntries, GuidebookToast.Icons.BESTIARY);
+    }
 
+    private void trackEffectsEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer) {
+        if (this.effectsEntries.isEmpty()) {
+            Registry<EffectsEntry> effectsEntries = registryAccess.lookupOrThrow(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY);
+            for (Holder<EffectsEntry> entry : effectsEntries.asHolderIdMap()) {
+                this.effectsEntries.add(new EffectsEntry.Mutable(entry));
+            }
+        }
+        this.revealEntries(registryAccess, advancement, serverPlayer, this.effectsEntries, GuidebookToast.Icons.EFFECTS);
+    }
+
+    private void trackExplorationEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer) {
+        if (this.explorationEntries.isEmpty()) {
+            Registry<ExplorationEntry> explorationEntries = registryAccess.lookupOrThrow(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY);
+            for (Holder<ExplorationEntry> entry : explorationEntries.asHolderIdMap()) {
+                this.explorationEntries.add(new ExplorationEntry.Mutable(entry));
+            }
+        }
+        this.revealEntries(registryAccess, advancement, serverPlayer, this.explorationEntries, GuidebookToast.Icons.EXPLORATION);
+    }
+
+    private void revealEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer, List<? extends MutableEntry> list, GuidebookToast.Icons icon) {
         Optional<RewardWrapper> rewardOptional = AetherIIRewardWrappers.getWrapperForAdvancement(registryAccess, advancement);
         if (rewardOptional.isPresent()) {
             RewardWrapper reward = rewardOptional.get();
-            for (BestiaryEntry.Mutable entry : this.bestiaryEntries) {
+            for (MutableEntry entry : list) {
                 if (entry.getEntry().is(reward.entryId())) {
                     entry.getClientValues().keySet().forEach(name -> {
                         if (entry.getClientValues().containsKey(name)) {
@@ -112,7 +136,7 @@ public class GuidebookDiscoveryAttachment {
             }
         }
         if (this.sync) {
-            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, GuidebookToast.Icons.BESTIARY));
+            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
         }
     }
 

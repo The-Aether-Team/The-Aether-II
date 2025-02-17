@@ -156,7 +156,7 @@ public class BestiaryEntry extends GuidebookEntry {
         }
     }
 
-    public static class Mutable extends BestiaryEntry {
+    public static class Mutable extends BestiaryEntry implements MutableEntry {
         public static final Codec<Mutable> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 BestiaryEntry.REFERENCE_CODEC.fieldOf("entry").forGetter(Mutable::getEntry),
                 Codec.unboundedMap(Codec.STRING, Info.CODEC).fieldOf("values").forGetter(Mutable::getClientValues)

@@ -29,7 +29,7 @@ public class ExplorationEntry extends GuidebookEntry {
         super(icon, name, slotName, slotSubtitle, descriptionKey);
     }
 
-    public static class Mutable extends ExplorationEntry {
+    public static class Mutable extends ExplorationEntry implements MutableEntry {
         public static final Codec<ExplorationEntry.Mutable> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 ExplorationEntry.REFERENCE_CODEC.fieldOf("entry").forGetter(ExplorationEntry.Mutable::getEntry),
                 Codec.unboundedMap(Codec.STRING, Info.CODEC).fieldOf("values").forGetter(ExplorationEntry.Mutable::getClientValues)
