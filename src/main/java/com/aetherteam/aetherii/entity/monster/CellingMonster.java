@@ -96,12 +96,12 @@ public class CellingMonster extends Monster {
             this.entityData.set(ATTACHED_FACE, Direction.UP);
         } else {
             Direction closestDirection = null;
-            double closestDistance = 2.5D;
+            double closestDistance = 1.5D;
             BlockPos pos = new BlockPos(Mth.floor(this.getX()), Mth.floor(this.getY() + (this.getBbHeight() / 2)), Mth.floor(this.getZ()));
 
             //first celling check in bb height's center
             for (BlockPos offsetPos : BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1)
-                    .filter(p_341357_ -> Math.abs(p_341357_.getX() - p_341357_.getY() - p_341357_.getZ()) != 0 || !(Math.abs(p_341357_.getX()) == 1 && Math.abs(p_341357_.getY()) == 1 && Math.abs(p_341357_.getZ()) == 1))
+                    .filter(p_341357_ -> Math.abs(p_341357_.getX() - p_341357_.getY() - p_341357_.getZ()) != 0)
                     .map(BlockPos::immutable)
                     .toList()) {
                 BlockPos pos1 = pos.offset(offsetPos);
@@ -111,6 +111,44 @@ public class CellingMonster extends Monster {
                     if (closestDistance > this.position().distanceTo(offset) && level().loadedAndEntityCanStandOnFace(pos1, this, dir.getOpposite())) {
                         closestDistance = this.position().distanceTo(offset);
                         closestDirection = dir;
+                    }
+                }
+            }
+
+            if (closestDirection == null) {
+                //second celling check
+                pos = new BlockPos(Mth.floor(this.getX()), Mth.floor(this.getY()), Mth.floor(this.getZ()));
+                for (BlockPos offsetPos : BlockPos.betweenClosedStream(-1, -1, -1, 1, 0, 1)
+                        .filter(p_341357_ -> Math.abs(p_341357_.getX() - p_341357_.getY() - p_341357_.getZ()) != 0)
+                        .map(BlockPos::immutable)
+                        .toList()) {
+                    BlockPos pos1 = pos.offset(offsetPos);
+                    Direction dir = Direction.getApproximateNearest(pos1.getX() - pos.getX(), pos1.getY() - pos.getY(), pos1.getZ() - pos.getZ());
+                    Vec3 offset = Vec3.atCenterOf(pos1);
+                    if (dir != Direction.DOWN) {
+                        if (closestDistance > this.position().distanceTo(offset) && level().loadedAndEntityCanStandOnFace(pos1, this, dir.getOpposite())) {
+                            closestDistance = this.position().distanceTo(offset);
+                            closestDirection = dir;
+                        }
+                    }
+                }
+            }
+
+            if (closestDirection == null) {
+                //third celling check with full bb height
+                pos = new BlockPos(Mth.floor(this.getX()), Mth.floor(this.getY() + this.getBbHeight()), Mth.floor(this.getZ()));
+                for (BlockPos offsetPos : BlockPos.betweenClosedStream(-1, 0, -1, 1, 1, 1)
+                        .filter(p_341357_ -> Math.abs(p_341357_.getX() - p_341357_.getY() - p_341357_.getZ()) != 0)
+                        .map(BlockPos::immutable)
+                        .toList()) {
+                    BlockPos pos1 = pos.offset(offsetPos);
+                    Direction dir = Direction.getApproximateNearest(pos1.getX() - pos.getX(), pos1.getY() - pos.getY(), pos1.getZ() - pos.getZ());
+                    Vec3 offset = Vec3.atCenterOf(pos1);
+                    if (dir != Direction.DOWN) {
+                        if (closestDistance > this.position().distanceTo(offset) && level().loadedAndEntityCanStandOnFace(pos1, this, dir.getOpposite())) {
+                            closestDistance = this.position().distanceTo(offset);
+                            closestDirection = dir;
+                        }
                     }
                 }
             }

@@ -58,11 +58,12 @@ public class CellingPathNavigation extends GroundPathNavigation {
                 }
             }
 
+
             DebugPackets.sendPathFindingPacket(this.level, this.mob, this.path, this.maxDistanceToWaypoint);
             if (!this.isDone()) {
                 Vec3 vec31 = this.path.getNextEntityPos(this.mob);
                 //TODO find why 0.5 block gap has!
-                this.mob.getMoveControl().setWantedPosition(vec31.x - 0.5F, vec31.y, vec31.z - 0.5F, this.speedModifier);
+                this.mob.getMoveControl().setWantedPosition(vec31.x, vec31.y, vec31.z, this.speedModifier);
             }
         }
     }
@@ -138,7 +139,7 @@ public class CellingPathNavigation extends GroundPathNavigation {
     @Override
     protected Vec3 getTempMobPos() {
         if (this.cellingMonster.getAttachFacing() != Direction.DOWN) {
-            return new Vec3(this.mob.getX(), this.mob.getY(), this.mob.getZ());
+            return new Vec3(this.mob.getX(), this.mob.getY() + 0.5F, this.mob.getZ());
         }
 
         return super.getTempMobPos();
