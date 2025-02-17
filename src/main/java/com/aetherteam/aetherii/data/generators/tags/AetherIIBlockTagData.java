@@ -1,16 +1,17 @@
 package com.aetherteam.aetherii.data.generators.tags;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-
-import java.util.concurrent.CompletableFuture;
 
 public class AetherIIBlockTagData extends BlockTagsProvider {
     public AetherIIBlockTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
@@ -264,8 +265,14 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()).addTags(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS);
         this.tag(AetherIITags.Blocks.ACID_INSTANTLY_DESTROYS).addTags(BlockTags.LEAVES, AetherIITags.Blocks.AERCLOUDS);
         this.tag(AetherIITags.Blocks.ACID_QUICKLY_DESTROYS).addTags(BlockTags.DIRT, BlockTags.LOGS, BlockTags.PLANKS);
-        this.tag(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);
+        this.tag(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);	
+        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).addTags(
+                BlockTags.CAMPFIRES,
+                BlockTags.FIRE,
+                BlockTags.CANDLES);
         this.tag(AetherIITags.Blocks.TRIGGERS_GAS).add(
+                Blocks.TORCH,
+                Blocks.SOUL_TORCH,
                 AetherIIBlocks.AMBROSIUM_TORCH.get(),
                 AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON).add(
@@ -352,6 +359,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 BlockTags.PRESSURE_PLATES,
                 BlockTags.TRAPDOORS,
                 BlockTags.FENCE_GATES
+        );
+        this.tag(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST).add(
+                AetherIIBlocks.AETHER_PORTAL.get(),
+                Blocks.NETHER_PORTAL,
+                Blocks.END_PORTAL,
+                Blocks.END_GATEWAY
         );
 
         // Vanilla

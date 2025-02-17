@@ -3,7 +3,9 @@ package com.aetherteam.aetherii.data.generators;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.maps.BucketReplacement;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIBiomes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsBiomes;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -111,6 +113,13 @@ public class AetherIIDataMapData extends DataMapProvider {
         buckets.add(Items.TROPICAL_FISH_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TROPICAL_FISH_BUCKET.getKey()), false);
         buckets.add(Items.AXOLOTL_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_AXOLOTL_BUCKET.getKey()), false);
         buckets.add(Items.TADPOLE_BUCKET.builtInRegistryHolder(), new BucketReplacement(AetherIIItems.SKYROOT_TADPOLE_BUCKET.getKey()), false);
+
+        var colors = this.builder(AetherIIDataMaps.AETHER_GRASS_COLORS);
+        colors.add(AetherIITags.Biomes.HIGHFIELDS, 0xb5ffd0, false);
+        colors.add(AetherIITags.Biomes.MAGNETIC, 0xc9ffd1, false);
+        colors.add(AetherIITags.Biomes.ARCTIC, 0xbdf9ff, false);
+        colors.add(AetherIITags.Biomes.IRRADIATED, 0xffdd99, false);
+        colors.add(HighlandsBiomes.EXPANSE, 0xb5ffd0, false);
     }
 
     private void addCompost(DataMapProvider.Builder<Compostable, Item> map, ItemLike item, float chance) {
