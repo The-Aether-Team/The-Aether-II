@@ -2,7 +2,6 @@ package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
@@ -37,12 +36,11 @@ public record GrassTintSyncPacket(Map<ResourceKey<Biome>, Integer> types) implem
     }
 
     public static void execute(GrassTintSyncPacket packet, IPayloadContext context) {
-        if (Minecraft.getInstance().level != null) {
-            Level level = Minecraft.getInstance().level;
-            RegistryAccess access = level.registryAccess();
-            Registry<Biome> registry = access.lookupOrThrow(Registries.BIOME);
-            BiomeHooks.acceptColors(registry, packet.types);
-        }
+        Level level = context.player().level();
+        RegistryAccess access = level.registryAccess();
+        Registry<Biome> registry = access.lookupOrThrow(Registries.BIOME);
+        BiomeHooks.acceptColors(registry, packet.types);
+
     }
 
     @Override
