@@ -3,10 +3,7 @@ package com.aetherteam.aetherii.block;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.construction.*;
-import com.aetherteam.aetherii.block.dungeon.RottenUndergrowthVinesBlock;
-import com.aetherteam.aetherii.block.dungeon.RottenUndergrowthVinesPlantBlock;
-import com.aetherteam.aetherii.block.dungeon.UndergrowthVinesBlock;
-import com.aetherteam.aetherii.block.dungeon.UndergrowthVinesPlantBlock;
+import com.aetherteam.aetherii.block.dungeon.*;
 import com.aetherteam.aetherii.block.furniture.OutpostCampfireBlock;
 import com.aetherteam.aetherii.block.miscellaneous.FacingPillarBlock;
 import com.aetherteam.aetherii.block.miscellaneous.MoaEggBlock;
@@ -591,6 +588,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     // Rotshroom Blocks
     public static final DeferredBlock<Block> ROTSHROOM = register("rotshroom", (properties) -> new MushroomBlock(TreeFeatures.HUGE_BROWN_MUSHROOM, properties), () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> LARGE_ROTSHROOM = register("large_rotshroom", (properties) -> new MushroomBlock(TreeFeatures.HUGE_BROWN_MUSHROOM, properties), () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> SHELF_ROTSHROOM = register("shelf_rotshroom", ShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
 
     // Potted Rotshrooms
     public static final DeferredBlock<FlowerPotBlock> POTTED_ROTSHROOM = registerWithoutItem("potted_rotshroom", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ROTSHROOM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));

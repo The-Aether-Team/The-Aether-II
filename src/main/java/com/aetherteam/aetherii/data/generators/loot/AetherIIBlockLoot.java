@@ -564,6 +564,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Rotshroom Blocks
         this.dropSelf(AetherIIBlocks.ROTSHROOM.get());
         this.dropSelf(AetherIIBlocks.LARGE_ROTSHROOM.get());
+        this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
 
         // Potted Rotshrooms
         this.dropPottedContents(AetherIIBlocks.POTTED_ROTSHROOM.get());

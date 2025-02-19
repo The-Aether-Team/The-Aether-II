@@ -360,6 +360,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Rotshroom Blocks
         this.createPlantWithDefaultItem(AetherIIBlocks.ROTSHROOM.get(), AetherIIBlocks.POTTED_ROTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         this.createPlantWithDefaultItem(AetherIIBlocks.LARGE_ROTSHROOM.get(), AetherIIBlocks.POTTED_LARGE_ROTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get(), AetherIIBlocks.LARGE_ROTSHROOM.get());
 
         // Wool
         this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());
