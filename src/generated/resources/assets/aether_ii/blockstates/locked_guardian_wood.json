@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "aether_ii:block/guardian_wood"
+      "model": "aether_ii:block/guardian_log"
     }
   }
 }
