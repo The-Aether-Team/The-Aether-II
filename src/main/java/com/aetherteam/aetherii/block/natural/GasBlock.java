@@ -1,5 +1,13 @@
 package com.aetherteam.aetherii.block.natural;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.function.BiConsumer;
+
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3i;
+
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
@@ -7,6 +15,7 @@ import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.network.packet.clientbound.GasExplosionEffectsPacket;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -23,19 +32,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3i;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-import java.util.function.BiConsumer;
 
 public class GasBlock extends Block implements CanisterPickup {
     public static final int MAX_HORIZONTAL_DISTANCE = 2;
@@ -77,9 +80,8 @@ public class GasBlock extends Block implements CanisterPickup {
         for (Vec3i offset : INDIRECT_NEIGHBOR_OFFSETS) {
             mutablePos.setWithOffset(pos, offset);
             if (level.getBlockState(mutablePos).is(this)) {
-                if (level.getBlockState(mutablePos).is(AetherIITags.Blocks.TRIGGERS_GAS) || state.is(AetherIITags.Blocks.TRIGGERS_GAS)) {
+                if (this.shouldExplode(level.getBlockState(mutablePos)) || this.shouldExplode(state))
                     this.explode(level, pos, true);
-                }
             }
         }
     }
@@ -100,9 +102,9 @@ public class GasBlock extends Block implements CanisterPickup {
         level.scheduleTick(pos, this, 10);
         for (Direction direction : Direction.values()) {
             BlockPos offsetPos = pos.offset(direction.getUnitVec3i());
-            if (level.getBlockState(offsetPos).is(AetherIITags.Blocks.TRIGGERS_GAS)) {
+
+            if (this.shouldExplode(level.getBlockState(offsetPos)))
                 this.explode(level, pos, true);
-            }
         }
         super.onPlace(state, level, pos, oldState, movedByPiston);
     }
@@ -115,6 +117,21 @@ public class GasBlock extends Block implements CanisterPickup {
     @Override
     public void wasExploded(ServerLevel level, BlockPos pos, Explosion explosion) {
         this.explode(level, pos, true);
+    }
+
+    public boolean shouldExplode(BlockState state) {
+        if (!state.is(AetherIITags.Blocks.TRIGGERS_GAS))
+            return false;
+
+        if (state.hasProperty(BlockStateProperties.LIT)) {
+            if (state.getValue(BlockStateProperties.LIT) == true) {
+                return true;
+            }
+        } else {
+            return true;
+        }
+
+        return false;
     }
 
     public void explode(LevelAccessor level, BlockPos pos, boolean playSound) {
@@ -131,7 +148,7 @@ public class GasBlock extends Block implements CanisterPickup {
                 BlockPos offsetPos = pos.relative(direction);
                 if (level.getBlockState(offsetPos).getBlock() instanceof GasBlock gasBlock) {
                     gasBlock.explode(level, offsetPos, level.getRandom().nextInt(20) == 0);
-                } else if (level.getBlockState(offsetPos).is(AetherIITags.Blocks.TRIGGERS_GAS)) {
+                } else if (this.shouldExplode(level.getBlockState(offsetPos))) {
                     level.destroyBlock(offsetPos, true);
                 }
             }
@@ -141,7 +158,7 @@ public class GasBlock extends Block implements CanisterPickup {
     @Override
     protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
         if (levelReader instanceof Level level) {
-            if (level.getBlockState(facingPos).is(AetherIITags.Blocks.TRIGGERS_GAS) || state.is(AetherIITags.Blocks.TRIGGERS_GAS)) {
+            if (this.shouldExplode(level.getBlockState(facingPos)) || this.shouldExplode(state)) {
                 this.explode(level, currentPos, true);
                 return state;
             }

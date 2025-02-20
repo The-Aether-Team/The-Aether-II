@@ -663,11 +663,11 @@ public class AetherIICreativeTabs {
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".spawn_eggs"))
             .displayItems((features, output) -> {
                 output.accept(AetherIIItems.AECHOR_PLANT_SPAWN_EGG.get());
-                output.accept(AetherIIItems.CARRION_SPROUT_SPAWN_EGG.get());
                 output.accept(AetherIIItems.AERBUNNY_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.MAGNETIC_BURRUKAI_SPAWN_EGG.get());
                 output.accept(AetherIIItems.ARCTIC_BURRUKAI_SPAWN_EGG.get());
+                output.accept(AetherIIItems.CARRION_SPROUT_SPAWN_EGG.get());
                 output.accept(AetherIIItems.COCKATRICE_SPAWN_EGG.get());
                 output.accept(AetherIIItems.FLYING_COW_SPAWN_EGG.get());
                 output.accept(AetherIIItems.HIGHFIELDS_KIRRID_SPAWN_EGG.get());

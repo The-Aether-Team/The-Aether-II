@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "aether_ii:block/template_arilum_lantern",
   "textures": {
-    "all": "aether_ii:block/green_arilum_lantern"
+    "inside": "aether_ii:block/green_arilum_lantern_inside",
+    "texture": "aether_ii:block/green_arilum_lantern"
   }
 }

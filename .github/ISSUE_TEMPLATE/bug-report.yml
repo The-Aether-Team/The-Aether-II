@@ -1,6 +1,6 @@
 name: '🐛 Bug Report'
 description: Create an issue about a bug.
-labels: [ "type/bug" ]
+type: Bug
 title: 'Bug: <title>'
 body:
   - type: dropdown

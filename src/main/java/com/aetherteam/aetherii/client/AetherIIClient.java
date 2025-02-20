@@ -56,6 +56,7 @@ public class AetherIIClient {
         bus.addListener(DimensionClientListener::onRenderFog);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
+        neoBus.addListener(AetherIIColorResolvers::registerColorResolvers);
         neoBus.addListener(AetherIIColorResolvers::registerBlockColor);
         neoBus.addListener(AetherIIParticleFactories::registerParticleFactories);
         neoBus.addListener(AetherIIOverlays::registerOverlays);

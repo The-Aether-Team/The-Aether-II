@@ -218,7 +218,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public Variant createPointedStoneVariant(Block block, Direction direction, DripstoneThickness thickness) {
         String name = "_" + direction.getSerializedName() + "_" + thickness.getSerializedName();
         TextureMapping mapping = TextureMapping.cross(TextureMapping.getBlockTexture(block, name));
-        return Variant.variant().with(VariantProperties.MODEL, AetherIIModelTemplates.TEMPLATE_CUTOUT_CROSS.createWithSuffix(block, name, mapping, this.modelOutput));
+        return Variant.variant().with(VariantProperties.MODEL, AetherIIModelTemplates.POINTED_STONE_BLOCK.createWithSuffix(block, name, mapping, this.modelOutput));
     }
 
     public void createVine(Block block, ModelTemplate template) {
@@ -630,6 +630,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         Item item = bed.asItem();
         ResourceLocation inventoryLocation = ModelTemplates.BED_INVENTORY.create(ModelLocationUtils.getModelLocation(item), TextureMapping.particle(particle), this.modelOutput);
         this.itemModelOutput.accept(item, ItemModelUtils.specialModel(inventoryLocation, new BedSpecialRenderer.Unbaked(location)));
+    }
+
+    public void createArilumLantern(Block block) {
+        ResourceLocation location = AetherIIModelTemplates.ARILUM_LANTERN.create(block, TextureMapping.cube(block).put(TextureSlot.INSIDE, TextureMapping.getBlockTexture(block, "_inside")), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
+                .with(VariantProperties.MODEL, location)));
     }
 
     public void createMoaEgg(Block block) {

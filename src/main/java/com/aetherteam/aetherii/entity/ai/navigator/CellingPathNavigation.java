@@ -14,7 +14,7 @@ import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 
 public class CellingPathNavigation extends GroundPathNavigation {
-    public final com.aetherteam.aetherii.entity.monster.CellingMonster cellingMonster;
+    public final CellingMonster cellingMonster;
 
     public CellingPathNavigation(CellingMonster mob, Level level) {
         super(mob, level);
@@ -58,11 +58,12 @@ public class CellingPathNavigation extends GroundPathNavigation {
                 }
             }
 
+
             DebugPackets.sendPathFindingPacket(this.level, this.mob, this.path, this.maxDistanceToWaypoint);
             if (!this.isDone()) {
                 Vec3 vec31 = this.path.getNextEntityPos(this.mob);
                 //TODO find why 0.5 block gap has!
-                this.mob.getMoveControl().setWantedPosition(vec31.x - 0.5F, vec31.y, vec31.z - 0.5F, this.speedModifier);
+                this.mob.getMoveControl().setWantedPosition(vec31.x, vec31.y, vec31.z, this.speedModifier);
             }
         }
     }
@@ -73,16 +74,13 @@ public class CellingPathNavigation extends GroundPathNavigation {
         this.maxDistanceToWaypoint = this.mob.getBbWidth() > 0.75F ? this.mob.getBbWidth() / 2.0F : 0.75F - this.mob.getBbWidth() / 2.0F;
         Vec3i vec3i = this.path.getNextNodePos();
 
-        Direction reverseDirection = this.cellingMonster.getAttachFacing().getOpposite();
-        double widthOffset = this.cellingMonster.getAttachFacing() != Direction.DOWN ? 0.2F : 0.0F;
-
         double d0 = Math.abs(this.mob.getX() - ((double) vec3i.getX() + (this.mob.getBbWidth() + 1) / 2D)); //Forge: Fix MC-94054
         double d1 = Math.abs(this.mob.getY() - (double) vec3i.getY());
         double d2 = Math.abs(this.mob.getZ() - ((double) vec3i.getZ() + (this.mob.getBbWidth() + 1) / 2D)); //Forge: Fix MC-94054
 
         //no cut out
         float fallDistance = this.mob.getMaxFallDistance();
-        boolean flag = d0 <= (double) this.maxDistanceToWaypoint && d2 <= (double) this.maxDistanceToWaypoint && d1 < 1;
+        boolean flag = d0 <= (double) this.maxDistanceToWaypoint && d2 <= (double) this.maxDistanceToWaypoint && d1 <= this.maxDistanceToWaypoint;
         if (flag || this.canCutCorner(this.path.getNextNode().type) && this.shouldTargetNextNodeInDirection(vec3)) {
             this.path.advance();
         }
@@ -141,7 +139,7 @@ public class CellingPathNavigation extends GroundPathNavigation {
     @Override
     protected Vec3 getTempMobPos() {
         if (this.cellingMonster.getAttachFacing() != Direction.DOWN) {
-            return new Vec3(this.mob.getX(), this.mob.getY(), this.mob.getZ());
+            return new Vec3(this.mob.getX(), this.mob.getY() + 0.5F, this.mob.getZ());
         }
 
         return super.getTempMobPos();
