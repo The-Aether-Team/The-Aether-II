@@ -131,6 +131,7 @@
     "aether_ii:base_infected_cortex_wood",
     "aether_ii:top_infected_cortex_wood",
     "aether_ii:base_rooted_rotten_undergrowth_leaves",
-    "aether_ii:top_rooted_rotten_undergrowth_leaves"
+    "aether_ii:top_rooted_rotten_undergrowth_leaves",
+    "aether_ii:rotshroom_block"
   ]
 }
