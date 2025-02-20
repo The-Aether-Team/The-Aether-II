@@ -358,6 +358,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.registerSimpleFlatItemModel(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get(), "_plant");
 
         // Rotshroom Blocks
+        this.createTrivialCube(AetherIIBlocks.ROTSHROOM_BLOCK.get());
         this.createPlantWithDefaultItem(AetherIIBlocks.ROTSHROOM.get(), AetherIIBlocks.POTTED_ROTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         this.createPlantWithDefaultItem(AetherIIBlocks.LARGE_ROTSHROOM.get(), AetherIIBlocks.POTTED_LARGE_ROTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get(), AetherIIBlocks.LARGE_ROTSHROOM.get());

@@ -954,7 +954,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.BASE_INFECTED_CORTEX_WOOD.get(),
                 AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get(),
                 AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
-                AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get()
+                AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.ROTSHROOM_BLOCK.get()
 
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
