@@ -82,11 +82,7 @@
                   "predicate": {
                     "type_specific": {
                       "type": "aether_ii:swet",
-<<<<<<< HEAD
                       "variant": "aether_ii:golden"
-=======
-                      "variant": "aether_ii:green"
->>>>>>> 1.21.4-develop
                     }
                   }
                 }
@@ -111,11 +107,7 @@
                   "function": "minecraft:enchanted_count_increase"
                 }
               ],
-<<<<<<< HEAD
               "name": "aether_ii:golden_swet_gel"
-=======
-              "name": "aether_ii:green_swet_gel"
->>>>>>> 1.21.4-develop
             },
             {
               "type": "minecraft:item",
@@ -126,11 +118,7 @@
                   "predicate": {
                     "type_specific": {
                       "type": "aether_ii:swet",
-<<<<<<< HEAD
                       "variant": "aether_ii:green"
-=======
-                      "variant": "aether_ii:purple"
->>>>>>> 1.21.4-develop
                     }
                   }
                 }
@@ -155,11 +143,7 @@
                   "function": "minecraft:enchanted_count_increase"
                 }
               ],
-<<<<<<< HEAD
               "name": "aether_ii:green_swet_gel"
-=======
-              "name": "aether_ii:purple_swet_gel"
->>>>>>> 1.21.4-develop
             },
             {
               "type": "minecraft:item",
@@ -170,11 +154,7 @@
                   "predicate": {
                     "type_specific": {
                       "type": "aether_ii:swet",
-<<<<<<< HEAD
                       "variant": "aether_ii:purple"
-=======
-                      "variant": "aether_ii:blue"
->>>>>>> 1.21.4-develop
                     }
                   }
                 }
@@ -199,11 +179,7 @@
                   "function": "minecraft:enchanted_count_increase"
                 }
               ],
-<<<<<<< HEAD
               "name": "aether_ii:purple_swet_gel"
-=======
-              "name": "aether_ii:blue_swet_gel"
->>>>>>> 1.21.4-develop
             }
           ]
         }
