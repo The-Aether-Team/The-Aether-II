@@ -332,6 +332,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_VINES.get());
         this.createUndergrowthVines(AetherIIBlocks.UNDERGROWTH_VINES_PLANT.get());
         this.registerSimpleFlatItemModel(AetherIIBlocks.UNDERGROWTH_VINES.get(), "_plant");
+        this.copyModel(AetherIIBlocks.GUARDIAN_WOOD.get(), AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get());
+        this.copyModel(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get());
+        this.copyModel(AetherIIBlocks.GUARDIAN_ROOTS.get(), AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get());
 
         // Infected Dungeon Blocks
         this.woodProvider(AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.INFECTED_LOG.get()).wood(AetherIIBlocks.INFECTED_WOOD.get());
@@ -356,6 +359,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createUndergrowthVines(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
         this.createUndergrowthVines(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT.get());
         this.registerSimpleFlatItemModel(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get(), "_plant");
+        this.copyModel(AetherIIBlocks.INFECTED_WOOD.get(), AetherIIBlocks.LOCKED_INFECTED_WOOD.get());
+        this.copyModel(AetherIIBlocks.DENSE_INFECTED_WOOD.get(), AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get());
+        this.copyModel(AetherIIBlocks.INFECTED_ROOTS.get(), AetherIIBlocks.LOCKED_INFECTED_ROOTS.get());
 
         // Rotshroom Blocks
         this.createTrivialCube(AetherIIBlocks.ROTSHROOM_BLOCK.get());

@@ -353,6 +353,14 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 BlockTags.TRAPDOORS,
                 BlockTags.FENCE_GATES
         );
+        this.tag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS).add(
+                AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_INFECTED_WOOD.get(),
+                AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get(),
+                AetherIIBlocks.LOCKED_INFECTED_ROOTS.get()
+        );
 
         // Vanilla
         this.tag(BlockTags.WOOL).add(

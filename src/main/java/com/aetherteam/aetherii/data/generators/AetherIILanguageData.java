@@ -519,6 +519,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES, "Top Rooted Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES, "Undergrowth Vines");
         this.addBlock(AetherIIBlocks.UNDERGROWTH_VINES_PLANT, "Undergrowth Vines Plant");
+        this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_WOOD, "Locked Guardian Wood");
+        this.addBlock(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD, "Locked Dense Guardian Wood");
+        this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS, "Locked Guardian Roots");
 
         // Infected Dungeon Blocks
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
@@ -545,6 +548,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES, "Top Rooted Rotten Undergrowth Leaves");
         this.addBlock(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES, "Rotten Undergrowth Vines");
         this.addBlock(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES_PLANT, "Rotten Undergrowth Vines Plant");
+        this.addBlock(AetherIIBlocks.LOCKED_INFECTED_WOOD, "Locked Infected Wood");
+        this.addBlock(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD, "Locked Dense Infected Wood");
+        this.addBlock(AetherIIBlocks.LOCKED_INFECTED_ROOTS, "Locked Infected Roots");
 
         // Rotshroom Blocks
         this.addBlock(AetherIIBlocks.ROTSHROOM_BLOCK, "Rotshroom Block");

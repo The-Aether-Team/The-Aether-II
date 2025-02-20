@@ -303,6 +303,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.UNDERGROWTH_VINES.get());
+                output.accept(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get());
                 output.accept(AetherIIBlocks.INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
@@ -328,6 +331,9 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get());
                 output.accept(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
+                output.accept(AetherIIBlocks.LOCKED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.LOCKED_INFECTED_ROOTS.get());
                 output.accept(AetherIIBlocks.ROTSHROOM_BLOCK.get());
                 output.accept(AetherIIBlocks.ROTSHROOM.get());
                 output.accept(AetherIIBlocks.LARGE_ROTSHROOM.get());
