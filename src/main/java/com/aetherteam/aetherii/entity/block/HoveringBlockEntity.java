@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.block;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -34,6 +35,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class HoveringBlockEntity extends Entity {
     private static final EntityDataAccessor<Integer> DATA_OWNER_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.INT);
@@ -143,8 +145,17 @@ public class HoveringBlockEntity extends Entity {
     }
 
     private void markShouldSettle() {
+        Predicate<BlockPos> findPos = (pos) -> {
+            var state = level().getBlockState(pos);
+
+            if (state.is(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST))
+                return false;
+
+            return state.getCollisionShape(level(), pos).isEmpty();
+        };
+
         if (this.targetSettlePosition == null) {
-            Optional<BlockPos> newPos = BlockPos.findClosestMatch(this.blockPosition(), 1, 1, (pos) -> this.level().getBlockState(pos).getCollisionShape(this.level(), pos).isEmpty());
+            Optional<BlockPos> newPos = BlockPos.findClosestMatch(this.blockPosition(), 1, 1, findPos);
             Vec3 targetPos = this.blockPosition().getCenter().subtract(0, 0.5, 0);
             if (newPos.isPresent()) {
                 targetPos = newPos.get().getCenter().subtract(0, 0.5, 0);

@@ -1,5 +1,10 @@
 {
   "values": [
+    "#minecraft:campfires",
+    "#minecraft:fire",
+    "#minecraft:candles",
+    "minecraft:torch",
+    "minecraft:soul_torch",
     "aether_ii:ambrosium_torch",
     "aether_ii:ambrosium_wall_torch"
   ]

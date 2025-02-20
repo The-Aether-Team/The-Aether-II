@@ -38,10 +38,7 @@ public record GrassTintSyncPacket(Map<ResourceKey<Biome>, Integer> types) implem
 
     public static void execute(GrassTintSyncPacket packet, IPayloadContext context) {
         if (Minecraft.getInstance().level != null) {
-            Level level = Minecraft.getInstance().level;
-            RegistryAccess access = level.registryAccess();
-            Registry<Biome> registry = access.lookupOrThrow(Registries.BIOME);
-            BiomeHooks.acceptColors(registry, packet.types);
+            BiomeHooks.acceptColors(Minecraft.getInstance().level.registryAccess().lookupOrThrow(Registries.BIOME), packet.types);
         }
     }
 

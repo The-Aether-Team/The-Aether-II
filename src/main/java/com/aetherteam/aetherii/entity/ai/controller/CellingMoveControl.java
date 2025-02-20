@@ -57,9 +57,11 @@ public class CellingMoveControl extends MoveControl {
                 }*/
             } else {
                 this.operation = Operation.WAIT;
+                double d4 = this.cellingMonster.getAttachFacing() != Direction.DOWN ? 0.15F : 0F;
                 double d0 = this.wantedX - this.mob.getX();
                 double d1 = this.wantedZ - this.mob.getZ();
-                double d2 = this.wantedY - this.mob.getY();
+                double d2 = this.wantedY - this.mob.getY() + d4;
+
                 double d3 = d0 * d0 + d2 * d2 + d1 * d1;
                 if (d3 < 2.5000003E-7F) {
                     this.mob.setXxa(0.0F);
