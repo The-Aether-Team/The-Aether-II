@@ -589,9 +589,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLockedDungeonBlock(Block baseBlock, Block block) {
-        ResourceLocation resourcelocation = ModelLocationUtils.getModelLocation(baseBlock);
-        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourcelocation)));
+        ResourceLocation location = ModelLocationUtils.getModelLocation(baseBlock);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
         this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(baseBlock), this.modelOutput));
+    }
+
+    public void createLockedDungeonBlock(Block baseBlock, Block itemBlock, Block block) {
+        ResourceLocation location = ModelLocationUtils.getModelLocation(baseBlock);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
+        this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(itemBlock), this.modelOutput));
     }
 
     public void createUndergrowthVines(Block block) {

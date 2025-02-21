@@ -310,8 +310,6 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
-                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
-                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD.get());
