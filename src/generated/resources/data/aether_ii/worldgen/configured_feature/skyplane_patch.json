@@ -17,7 +17,251 @@
         "chance": 3
       },
       {
-        "type": "aether_ii:shrouded_canopy"
+        "type": "aether_ii:shrouded_canopy",
+        "branch_amount": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 7,
+          "min_inclusive": 4
+        },
+        "branch_height": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 7,
+          "min_inclusive": 3
+        },
+        "canopy_branch_state": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:tangled_branches"
+          }
+        },
+        "canopy_radius": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 5,
+          "min_inclusive": 2
+        },
+        "canopy_top_state": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:woven_skyroot_sticks"
+          }
+        },
+        "moss_amount": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 5,
+          "min_inclusive": 1
+        },
+        "moss_carpet_state": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_carpet"
+          }
+        },
+        "moss_flower_state": {
+          "type": "minecraft:weighted_state_provider",
+          "entries": [
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "1",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "2",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "3",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "north",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "east",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "south",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            },
+            {
+              "data": {
+                "Name": "aether_ii:bryalinn_moss_flowers",
+                "Properties": {
+                  "facing": "west",
+                  "flower_amount": "4",
+                  "snowy": "false"
+                }
+              },
+              "weight": 1
+            }
+          ]
+        },
+        "moss_radius": {
+          "type": "minecraft:uniform",
+          "max_inclusive": 7,
+          "min_inclusive": 3
+        },
+        "moss_state": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_block"
+          }
+        },
+        "moss_vine_state": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:bryalinn_moss_vines",
+            "Properties": {
+              "age": "0",
+              "east": "false",
+              "north": "false",
+              "south": "false",
+              "up": "false",
+              "west": "false"
+            }
+          }
+        }
       }
     ],
     "dirt_provider": {
@@ -55,9 +299,15 @@
     },
     "trunk_placer": {
       "type": "aether_ii:multi_tree_trunk_placer",
+      "amount": 3,
       "base_height": 10,
       "height_rand_a": 4,
-      "height_rand_b": 2
+      "height_rand_b": 2,
+      "radius": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 6,
+        "min_inclusive": 3
+      }
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",

@@ -765,13 +765,25 @@ public class HighlandsConfiguredFeatures {
         register(context, SKYPLANE_PATCH, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
-                        new MultiTreeTrunkPlacer(10, 4, 2), BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAVES.get().defaultBlockState()),
+                        new MultiTreeTrunkPlacer(10, 4, 2, UniformInt.of(3, 6), 3), BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAVES.get().defaultBlockState()),
                         new SkyplaneFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new ThreeLayersFeatureSize(1, 1, 0, 1, 0, OptionalInt.empty()))
                         .ignoreVines()
                         .decorators(List.of(
                                 new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3),
-                                new ShroudedCanopyDecorator())).build());
+                                new ShroudedCanopyDecorator(
+                                        BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState()),
+                                        BlockStateProvider.simple(AetherIIBlocks.TANGLED_BRANCHES.get().defaultBlockState()),
+                                        BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
+                                        BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState()),
+                                        BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_VINES.get().defaultBlockState()),
+                                        new WeightedStateProvider(bryallinMossFlowers),
+                                        UniformInt.of(2, 5),
+                                        UniformInt.of(3, 7),
+                                        UniformInt.of(1, 5),
+                                        UniformInt.of(4, 7),
+                                        UniformInt.of(3, 7)
+                                ))).build());
         register(context, SHORT_SKYPLANE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),

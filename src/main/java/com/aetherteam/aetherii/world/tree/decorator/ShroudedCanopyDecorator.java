@@ -1,31 +1,64 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.BottomedVineBlock;
-import com.aetherteam.aetherii.block.natural.MossFlowersBlock;
 import com.google.common.collect.HashMultimap;
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.world.level.block.BlockTypes;
+import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-import net.neoforged.neoforge.common.Tags;
 
 import java.util.*;
 
-public class ShroudedCanopyDecorator extends TreeDecorator { //todo clean up
-    public static final MapCodec<ShroudedCanopyDecorator> CODEC = MapCodec.unit(ShroudedCanopyDecorator::new);
+public class ShroudedCanopyDecorator extends TreeDecorator {
+    public static final MapCodec<ShroudedCanopyDecorator> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+        BlockStateProvider.CODEC.fieldOf("canopy_top_state").forGetter((decorator) -> decorator.canopyTopState),
+        BlockStateProvider.CODEC.fieldOf("canopy_branch_state").forGetter((decorator) -> decorator.canopyBranchState),
+        BlockStateProvider.CODEC.fieldOf("moss_state").forGetter((decorator) -> decorator.mossState),
+        BlockStateProvider.CODEC.fieldOf("moss_carpet_state").forGetter((decorator) -> decorator.mossCarpetState),
+        BlockStateProvider.CODEC.fieldOf("moss_vine_state").forGetter((decorator) -> decorator.mossVineState),
+        BlockStateProvider.CODEC.fieldOf("moss_flower_state").forGetter((decorator) -> decorator.mossFlowerState),
+        IntProvider.CODEC.fieldOf("canopy_radius").forGetter((decorator) -> decorator.canopyRadius),
+        IntProvider.CODEC.fieldOf("moss_radius").forGetter((decorator) -> decorator.mossRadius),
+        IntProvider.CODEC.fieldOf("moss_amount").forGetter((decorator) -> decorator.mossAmount),
+        IntProvider.CODEC.fieldOf("branch_amount").forGetter((decorator) -> decorator.branchAmount),
+        IntProvider.CODEC.fieldOf("branch_height").forGetter((decorator) -> decorator.branchHeight)
+    ).apply(instance, ShroudedCanopyDecorator::new));
+
+    private final BlockStateProvider canopyTopState;
+    private final BlockStateProvider canopyBranchState;
+    private final BlockStateProvider mossState;
+    private final BlockStateProvider mossCarpetState;
+    private final BlockStateProvider mossVineState;
+    private final BlockStateProvider mossFlowerState;
+    private final IntProvider canopyRadius;
+    private final IntProvider mossRadius;
+    private final IntProvider mossAmount;
+    private final IntProvider branchAmount;
+    private final IntProvider branchHeight;
+
+    public ShroudedCanopyDecorator(BlockStateProvider canopyTopState, BlockStateProvider canopyBranchState, BlockStateProvider mossState, BlockStateProvider mossCarpetState, BlockStateProvider mossVineState, BlockStateProvider mossFlowerState, IntProvider canopyRadius, IntProvider mossRadius, IntProvider mossAmount, IntProvider branchAmount, IntProvider branchHeight) {
+        this.canopyTopState = canopyTopState;
+        this.canopyBranchState = canopyBranchState;
+        this.mossState = mossState;
+        this.mossCarpetState = mossCarpetState;
+        this.mossVineState = mossVineState;
+        this.mossFlowerState = mossFlowerState;
+        this.canopyRadius = canopyRadius;
+        this.mossRadius = mossRadius;
+        this.mossAmount = mossAmount;
+        this.branchAmount = branchAmount;
+        this.branchHeight = branchHeight;
+    }
 
     @Override
     public void place(Context context) {
@@ -57,14 +90,14 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo clean up
 
             BlockPos center = new BlockPos(centerX, y.get(), centerZ);
 
-            int radius = context.random().nextInt(4) + 2;
-            this.createCircle(context, center.below(2), radius - 1, AetherIIBlocks.TANGLED_BRANCHES.get().defaultBlockState(), true);
-            this.createCircle(context, center.below(), radius, AetherIIBlocks.TANGLED_BRANCHES.get().defaultBlockState(), false);
-            this.createCircle(context, center, radius + 1, AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState(), false);
+            int radius = this.canopyRadius.sample(context.random());
+            this.createCircle(context, center.below(2), radius - 1, this.canopyBranchState.getState(context.random(), center.below(2)), true);
+            this.createCircle(context, center.below(), radius, this.canopyBranchState.getState(context.random(), center.below()), false);
+            this.createCircle(context, center, radius + 1, this.canopyTopState.getState(context.random(), center), false);
 
-            this.createMoss(context, center, radius + 3, context.random().nextInt(5) + 3, context.random().nextInt(5) + 1);
+            this.createMoss(context, center, radius + 3, this.mossRadius.sample(context.random()), this.mossAmount.sample(context.random()));
 
-            this.createBranches(context, center.below(), List.copyOf(topPoints.keySet()), radius - 1, context.random().nextInt(4) + 4, context.random().nextInt(5) + 3, AetherIIBlocks.TANGLED_BRANCHES.get().defaultBlockState());
+            this.createBranches(context, center.below(), List.copyOf(topPoints.keySet()), radius - 1, this.branchAmount.sample(context.random()), this.canopyBranchState.getState(context.random(), center.below()));
         }
     }
 
@@ -83,13 +116,6 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo clean up
     }
 
     private void createMoss(Context context, BlockPos center, int offset, int radius, int amount) {
-        SimpleWeightedRandomList.Builder<BlockState> bryallinMossFlowers = SimpleWeightedRandomList.builder();
-        for (int i = 1; i <= 4; i++) {
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                bryallinMossFlowers.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
-            }
-        }
-
         for (BlockPos start : BlockPos.randomBetweenClosed(context.random(), amount, center.getX() - offset, center.getY(), center.getZ() - offset, center.getX() + offset, center.getY() + 1, center.getZ() + offset)) {
             for (int x = -radius; x <= radius; x++) {
                 for (int z = -radius; z <= radius; z++) {
@@ -97,31 +123,13 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo clean up
                         BlockPos offsetPos = start.offset(x, 0, z);
                         if (context.isAir(offsetPos) && context.level().isStateAtPosition(offsetPos.below(), (blockState) -> blockState.is(AetherIIBlocks.WOVEN_SKYROOT_STICKS) || blockState.is(AetherIIBlocks.SKYPLANE_LEAVES))) {
                             if (context.random().nextInt(4) == 0) {
-                                context.setBlock(offsetPos, new WeightedStateProvider(bryallinMossFlowers).getState(context.random(), offsetPos)); //todo state codec parameters
+                                context.setBlock(offsetPos, this.mossFlowerState.getState(context.random(), offsetPos));
                             } else {
-                                context.setBlock(offsetPos, AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState());
+                                context.setBlock(offsetPos, this.mossCarpetState.getState(context.random(), offsetPos));
                             }
-                            context.setBlock(offsetPos.below(), AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState());
+                            context.setBlock(offsetPos.below(), this.mossState.getState(context.random(), offsetPos.below()));
                             if (context.random().nextInt(3) == 0) {
-                                for (Direction offsetDirection : Direction.Plane.HORIZONTAL.stream().toList()) {
-                                    BlockPos newPos = offsetPos.below().relative(offsetDirection);
-                                    if (context.isAir(newPos)) {
-                                        Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(context.random());
-                                        if (context.level().isStateAtPosition(newPos.relative(direction), BlockBehaviour.BlockStateBase::isSolid)) {
-                                            BlockState vineState = AetherIIBlocks.BRYALINN_MOSS_VINES.get().defaultBlockState();
-                                            vineState = vineState.setValue(VineBlock.getPropertyForFace(direction), true);
-                                            if (context.random().nextInt(4) == 0) {
-                                                vineState = vineState.setValue(BottomedVineBlock.AGE, 25);
-                                            } else {
-                                                vineState = vineState.setValue(BottomedVineBlock.AGE, 20 + context.random().nextInt(5));
-                                            }
-                                            BlockState finalBlockState = vineState;
-                                            if (context.level().isStateAtPosition(newPos.above(), (state) -> !state.is(finalBlockState.getBlock()) || (state.hasProperty(BottomedVineBlock.AGE) && state.getValue(BottomedVineBlock.AGE) < 25))) {
-                                                MossDecorator.addHangingVine(context, newPos, vineState);
-                                            }
-                                        }
-                                    }
-                                }
+                                this.createVines(context, offsetPos);
                             }
                         }
                     }
@@ -130,9 +138,9 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo clean up
         }
     }
 
-    private void createBranches(Context context, BlockPos center, List<Coordinate> goals, int radius, int amount, int height, BlockState blockState) {
+    private void createBranches(Context context, BlockPos center, List<Coordinate> goals, int radius, int amount, BlockState blockState) {
         for (BlockPos start : BlockPos.randomBetweenClosed(context.random(), amount, center.getX() - radius, center.getY(), center.getZ() - radius, center.getX() + radius, center.getY() + 1, center.getZ() + radius)) {
-            this.createBranch(context, start, goals, height, blockState);
+            this.createBranch(context, start, goals, this.branchHeight.sample(context.random()), blockState);
         }
     }
 
@@ -211,33 +219,15 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo clean up
                 for (BlockPos pos : branchPositions) {
                     if (context.random().nextBoolean()) {
                         if (context.isAir(pos.above())) {
-                            context.setBlock(pos.above(), AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState());
+                            context.setBlock(pos.above(), this.mossCarpetState.getState(context.random(), pos.above()));
                         }
                     }
 
                     if (context.random().nextInt(3) == 0) {
                         if (context.isAir(pos.above())) {
-                            context.setBlock(pos.above(), AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState());
+                            context.setBlock(pos.above(), this.mossCarpetState.getState(context.random(), pos.above()));
                         }
-                        for (Direction offsetDirection : Direction.Plane.HORIZONTAL.stream().toList()) {
-                            BlockPos newPos = pos.relative(offsetDirection);
-                            if (context.isAir(newPos)) {
-                                Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(context.random());
-                                if (context.level().isStateAtPosition(newPos.relative(direction), BlockBehaviour.BlockStateBase::isSolid)) {
-                                    BlockState vineState = AetherIIBlocks.BRYALINN_MOSS_VINES.get().defaultBlockState();
-                                    vineState = vineState.setValue(VineBlock.getPropertyForFace(direction), true);
-                                    if (context.random().nextInt(4) == 0) {
-                                        vineState = vineState.setValue(BottomedVineBlock.AGE, 25);
-                                    } else {
-                                        vineState = vineState.setValue(BottomedVineBlock.AGE, 20 + context.random().nextInt(5));
-                                    }
-                                    BlockState finalBlockState = vineState;
-                                    if (context.level().isStateAtPosition(newPos.above(), (state) -> !state.is(finalBlockState.getBlock()) || (state.hasProperty(BottomedVineBlock.AGE) && state.getValue(BottomedVineBlock.AGE) < 25))) {
-                                        MossDecorator.addHangingVine(context, newPos, vineState);
-                                    }
-                                }
-                            }
-                        }
+                        this.createVines(context, pos);
                     }
                 }
             }
@@ -246,6 +236,28 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo clean up
 
     private boolean isValidBranchPos(Context context, BlockPos pos) {
         return context.isAir(pos) || context.checkBlock(pos, state -> state.is(BlockTags.LEAVES));
+    }
+
+    private void createVines(Context context, BlockPos pos) {
+        for (Direction offsetDirection : Direction.Plane.HORIZONTAL.stream().toList()) {
+            BlockPos newPos = pos.relative(offsetDirection);
+            if (context.isAir(newPos)) {
+                Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(context.random());
+                if (context.level().isStateAtPosition(newPos.relative(direction), BlockBehaviour.BlockStateBase::isSolid)) {
+                    BlockState vineState = this.mossVineState.getState(context.random(), newPos);
+                    vineState = vineState.setValue(VineBlock.getPropertyForFace(direction), true);
+                    if (context.random().nextInt(4) == 0) {
+                        vineState = vineState.setValue(BottomedVineBlock.AGE, 25);
+                    } else {
+                        vineState = vineState.setValue(BottomedVineBlock.AGE, 20 + context.random().nextInt(5));
+                    }
+                    BlockState finalBlockState = vineState;
+                    if (context.level().isStateAtPosition(newPos.above(), (state) -> !state.is(finalBlockState.getBlock()) || (state.hasProperty(BottomedVineBlock.AGE) && state.getValue(BottomedVineBlock.AGE) < 25))) {
+                        MossDecorator.addHangingVine(context, newPos, vineState);
+                    }
+                }
+            }
+        }
     }
 
     @Override
