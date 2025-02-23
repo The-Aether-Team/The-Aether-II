@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
 
 public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidRenderState, SkephidModel<SkephidRenderState>> {
@@ -30,62 +31,34 @@ public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidRe
     @Override
     public void extractRenderState(T skephid, SkephidRenderState renderState, float p_361157_) {
         super.extractRenderState(skephid, renderState, p_361157_);
-        renderState.deltaMovement = skephid.getDeltaMovement();
-        renderState.yO = skephid.yo;
+        renderState.rotations = skephid.getCellRotation();
+        renderState.prevRotations = skephid.prevRotation;
         renderState.attachDir = skephid.getAttachFacing();
-        renderState.attachChangeProgress = skephid.attachChangeProgress;
-        renderState.prevAttachChangeProgress = skephid.prevAttachChangeProgress;
+        renderState.attachChangeProgress = skephid.getAttachAmount(p_361157_);
     }
 
     @Override
     protected void setupRotations(SkephidRenderState entity, PoseStack poseStack, float rotationYaw, float p_320045_) {
         float trans = 6.5F / 16F;
         if (entity.pose != Pose.SLEEPING) {
-            float progresso = 1F - (entity.prevAttachChangeProgress + (entity.attachChangeProgress - entity.prevAttachChangeProgress) * entity.partialTick);
-
             if (entity.attachDir == Direction.DOWN) {
-                poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - rotationYaw));
-                poseStack.translate(0.0D, trans, 0.0D);
-                if (entity.yO < entity.y) {
-                    poseStack.mulPose(Axis.XP.rotationDegrees(90 * (1 - progresso)));
-                } else {
-                    poseStack.mulPose(Axis.XP.rotationDegrees(-90 * (1 - progresso)));
-                }
-                poseStack.translate(0.0D, -trans, 0.0D);
-
-            } else if (entity.attachDir == Direction.UP) {
-                poseStack.translate(0.0D, trans, 0.0D);
-                poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - rotationYaw));
-                poseStack.mulPose(Axis.XP.rotationDegrees(180));
-                poseStack.mulPose(Axis.YP.rotationDegrees(180));
-                poseStack.translate(0.0D, -trans, 0.0D);
-
+                super.setupRotations(entity, poseStack, rotationYaw, p_320045_);
             } else {
-                poseStack.translate(0.0D, trans, 0.0D);
-                switch (entity.attachDir) {
-                    case NORTH:
-                        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F * progresso));
-                        poseStack.mulPose(Axis.ZP.rotationDegrees(0));
-                        break;
-                    case SOUTH:
-                        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F * progresso));
-                        break;
-                    case WEST:
-                        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-                        poseStack.mulPose(Axis.YP.rotationDegrees(90F - 90.0F * progresso));
-                        poseStack.mulPose(Axis.ZP.rotationDegrees(-90.0F));
-                        break;
-                    case EAST:
-                        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-                        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F * progresso - 90F));
-                        poseStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
-                        break;
-                }
-                if (entity.deltaMovement.y <= -0.001F) {
-                    poseStack.mulPose(Axis.YP.rotationDegrees(-180.0F));
-                }
-                poseStack.translate(0.0D, -trans, 0.0D);
+
+                float yaw = (float) Math.toDegrees(Mth.atan2(entity.rotations.x, entity.rotations.z));
+                float pitch = (float) -Math.toDegrees(Mth.atan2(entity.rotations.y, Math.sqrt(entity.rotations.x * entity.rotations.x + entity.rotations.z * entity.rotations.z)));
+                float prevYaw = (float) Math.toDegrees(Mth.atan2(entity.prevRotations.x, entity.prevRotations.z));
+                float prevPitch = (float) -Math.toDegrees(Mth.atan2(entity.prevRotations.y, Math.sqrt(entity.prevRotations.x * entity.prevRotations.x + entity.prevRotations.z * entity.prevRotations.z)));
+                float realYaw = prevYaw * (1 - entity.attachChangeProgress) - yaw * entity.attachChangeProgress;
+                float realPitch = prevPitch * (1 - entity.attachChangeProgress) - pitch * entity.attachChangeProgress;
+                poseStack.translate(0.0F, trans, 0.0F);
+
+                poseStack.mulPose(Axis.YP.rotationDegrees(realYaw));
+                poseStack.mulPose(Axis.XP.rotationDegrees(-90 + realPitch));
+                //poseStack.mulPose(Axis.YP.rotationDegrees(realDiff * realYaw));
+
+                poseStack.translate(0.0F, -trans, 0.0F);
+                super.setupRotations(entity, poseStack, 0.0F, p_320045_);
             }
         } else {
             super.setupRotations(entity, poseStack, rotationYaw, p_320045_);
