@@ -1,0 +1,53 @@
+package com.aetherteam.aetherii.world.tree.trunk;
+
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiConsumer;
+
+public class MultiTreeTrunkPlacer extends TrunkPlacer {
+    public static final MapCodec<MultiTreeTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) -> trunkPlacerParts(instance).apply(instance, MultiTreeTrunkPlacer::new));
+
+    public MultiTreeTrunkPlacer(int baseHeight, int heightRandA, int heightRandB) {
+        super(baseHeight, heightRandA, heightRandB);
+    }
+
+    @Override
+    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> blockSetter, RandomSource random, int freeTreeHeight, BlockPos pos, TreeConfiguration config) {
+        List<FoliagePlacer.FoliageAttachment> foliageAttachments = new ArrayList<>();
+        int radius = random.nextInt(4) + 3;
+        BlockPos min = pos.offset(-radius, -radius, -radius);
+        BlockPos max = pos.offset(radius, radius, radius);
+        Iterable<BlockPos> aroundPos = BlockPos.randomBetweenClosed(random, 3, min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ());
+        for (BlockPos origin : aroundPos) {
+            origin = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, origin.above());
+
+            setDirtAt(level, blockSetter, random, origin.below(), config);
+
+            for (int i = 0; i < freeTreeHeight; ++i) {
+                this.placeLog(level, blockSetter, random, origin.above(i), config);
+            }
+
+            foliageAttachments.add(new FoliagePlacer.FoliageAttachment(origin.above(freeTreeHeight), 0, false));
+        }
+        return foliageAttachments;
+    }
+
+    @Override
+    protected TrunkPlacerType<?> type() {
+        return AetherIITrunkPlacerTypes.MULTI_TREE_TRUNK_PLACER.get();
+    }
+}
+

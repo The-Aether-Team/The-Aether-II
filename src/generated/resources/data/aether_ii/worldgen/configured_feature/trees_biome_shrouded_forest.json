@@ -22,7 +22,7 @@
       {
         "chance": 0.1,
         "feature": {
-          "feature": "aether_ii:skyplane_with_leaf_piles",
+          "feature": "aether_ii:skyplane_patch",
           "placement": [
             {
               "type": "minecraft:block_predicate_filter",

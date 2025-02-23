@@ -88,7 +88,7 @@ public class MossDecorator extends TreeDecorator {
         }
     }
 
-    private static void addHangingVine(TreeDecorator.Context context, BlockPos pos, BlockState blockState) {
+    public static void addHangingVine(TreeDecorator.Context context, BlockPos pos, BlockState blockState) {
         context.setBlock(pos, blockState);
         int i = 10;
 

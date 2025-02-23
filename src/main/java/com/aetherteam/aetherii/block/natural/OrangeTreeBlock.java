@@ -79,10 +79,10 @@ public class OrangeTreeBlock extends AetherBushBlock implements BonemealableBloc
      * [CODE COPY] - {@link net.minecraft.world.level.block.DoublePlantBlock#updateShape(BlockState, Direction, BlockState, LevelAccessor, BlockPos, BlockPos)}.
      */
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess tickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState currentState, RandomSource randomSource) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
         DoubleBlockHalf doubleBlockHalf = state.getValue(HALF);
-        if (direction.getAxis() != Direction.Axis.Y || doubleBlockHalf == DoubleBlockHalf.LOWER != (direction == Direction.UP) || currentState.is(this) && currentState.getValue(HALF) != doubleBlockHalf) {
-            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canSurvive(levelReader, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, levelReader, tickAccess, blockPos, direction, currentPos, currentState, randomSource);
+        if (direction.getAxis() != Direction.Axis.Y || doubleBlockHalf == DoubleBlockHalf.LOWER != (direction == Direction.UP) || neighborState.is(this) && neighborState.getValue(HALF) != doubleBlockHalf) {
+            return doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canSurvive(levelReader, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
         } else {
             return Blocks.AIR.defaultBlockState();
         }

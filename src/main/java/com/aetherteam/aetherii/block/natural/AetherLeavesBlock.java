@@ -68,10 +68,10 @@ public class AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState currentState, RandomSource randomSource) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
         return direction == Direction.UP
-                ? state.setValue(SNOWY, currentState.is(AetherIIBlocks.ARCTIC_SNOW) || currentState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
-                : super.updateShape(state, level, scheduledTickAccess, blockPos, direction, currentPos, currentState, randomSource);
+                ? state.setValue(SNOWY, neighborState.is(AetherIIBlocks.ARCTIC_SNOW) || neighborState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
+                : super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
     }
 
     @Override

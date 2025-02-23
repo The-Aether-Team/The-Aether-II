@@ -18,6 +18,7 @@ import com.aetherteam.aetherii.world.tree.foliage.greatroot.GreatrootFoliagePlac
 import com.aetherteam.aetherii.world.tree.foliage.skyroot.*;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisprootFoliagePlacer;
 import com.aetherteam.aetherii.world.tree.foliage.wisproot.WisptopFoliagePlacer;
+import com.aetherteam.aetherii.world.tree.trunk.MultiTreeTrunkPlacer;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
@@ -117,6 +118,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> NEST_SKYROOT_WITH_LEAF_PILES = createKey("nest_skyroot_with_leaf_piles");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPLANE = createKey("skyplane");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPLANE_WITH_LEAF_PILES = createKey("skyplane_with_leaf_piles");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SKYPLANE_PATCH = createKey("skyplane_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_SKYPLANE = createKey("short_skyplane");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WISPROOT = createKey("wisproot");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WISPROOT_WITH_LEAF_PILES = createKey("wisproot_with_leaf_piles");
@@ -760,6 +762,16 @@ public class HighlandsConfiguredFeatures {
                         new ThreeLayersFeatureSize(1, 1, 0, 1, 0, OptionalInt.empty()))
                         .ignoreVines()
                         .decorators(List.of(new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3))).build());
+        register(context, SKYPLANE_PATCH, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
+                        new MultiTreeTrunkPlacer(10, 4, 2), BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAVES.get().defaultBlockState()),
+                        new SkyplaneFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 0, OptionalInt.empty()))
+                        .ignoreVines()
+                        .decorators(List.of(
+                                new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3),
+                                new ShroudedCanopyDecorator())).build());
         register(context, SHORT_SKYPLANE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
@@ -823,7 +835,8 @@ public class HighlandsConfiguredFeatures {
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(TREES_AMBEROOT_DENSE), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.AMBEROOT_SAPLING.get())), 0.05F)
         ), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get()))));
         register(context, TREES_BIOME_SHROUDED_FOREST, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
-                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPLANE_WITH_LEAF_PILES), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.1F),
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPLANE_PATCH), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.1F),
+//                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYPLANE_WITH_LEAF_PILES), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.1F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.025F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(SKYROOT_WITH_LEAF_PILES), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.015F),
                 new WeightedPlacedFeature(PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(NEST_SKYROOT), PlacementUtils.filteredByBlockSurvival(AetherIIBlocks.SKYROOT_SAPLING.get())), 0.0015F),
