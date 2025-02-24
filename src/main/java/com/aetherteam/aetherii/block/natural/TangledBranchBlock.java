@@ -82,4 +82,14 @@ public class TangledBranchBlock extends Block implements SimpleWaterloggedBlock 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(WATERLOGGED);
     }
+
+    @Override
+    public boolean propagatesSkylightDown(BlockState state) {
+        return false;
+    }
+
+    @Override
+    public int getLightBlock(BlockState state) {
+        return 15;
+    }
 }
