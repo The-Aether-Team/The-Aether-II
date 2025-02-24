@@ -1,8 +1,12 @@
 package com.aetherteam.aetherii.client;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.IrradiatedLeavesBlock;
-import net.minecraft.client.renderer.BiomeColors;
+import com.aetherteam.aetherii.client.event.hooks.BiomeHooks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.ColorResolver;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 import java.awt.*;
@@ -10,6 +14,12 @@ import java.awt.*;
 public class AetherIIColorResolvers {
     public static final int AETHER_GRASS_COLOR = 0xb5ffd0;
     public static final int AETHER_TALL_GRASS_COLOR = 0xb5ffd0;
+
+    public static final ColorResolver GRASS_COLORS = BiomeHooks::getColor;
+
+    public static void registerColorResolvers(RegisterColorHandlersEvent.ColorResolvers event) {
+        event.register(GRASS_COLORS);
+    }
 
     public static void registerBlockColor(RegisterColorHandlersEvent.Block event) {
         event.register((state, level, pos, tintIndex) -> {
@@ -34,11 +44,11 @@ public class AetherIIColorResolvers {
                 AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
                 AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get());
-        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_GRASS_COLOR, 5.0F, 6.0F)),
+        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_GRASS_COLOR, 5.0F, 6.0F)),
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get());
-        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),
+        event.register(((state, level, pos, tintIndex) -> createTriTintGrassColor(tintIndex, level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR, 2.0F, 10.0F)),
                 AetherIIBlocks.AETHER_SHORT_GRASS.get(), AetherIIBlocks.AETHER_MEDIUM_GRASS.get(), AetherIIBlocks.AETHER_LONG_GRASS.get());
-        event.register(((state, level, pos, tintIndex) ->  level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : AETHER_TALL_GRASS_COLOR),
+        event.register(((state, level, pos, tintIndex) ->  level != null && pos != null ? getAverageColor(level, pos, GRASS_COLORS) : AETHER_TALL_GRASS_COLOR),
                 AetherIIBlocks.HIGHLAND_FERN.get(), AetherIIBlocks.POTTED_HIGHLAND_FERN.get());
     }
 
@@ -67,5 +77,16 @@ public class AetherIIColorResolvers {
                 return defaultColor;
             }
         }
+    }
+
+    private static int getAverageColor(BlockAndTintGetter level, BlockPos blockPos, ColorResolver colorResolver) {
+        if (level != null && blockPos != null) {
+            try {
+                return level.getBlockTint(blockPos, colorResolver);
+            } catch (Exception e) {
+                AetherII.LOGGER.error("Failed to get Aether Grass color, this is not intended! Ignoring exception and using default color", e);
+            }
+        }
+        return AETHER_GRASS_COLOR;
     }
 }

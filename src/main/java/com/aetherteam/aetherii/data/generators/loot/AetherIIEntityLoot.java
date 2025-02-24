@@ -33,8 +33,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWit
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class AetherIIEntityLoot extends EntityLootSubProvider {
@@ -224,7 +223,10 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
     public static LootTable.Builder createSwetTable(HolderLookup.Provider registries) {
         AlternativesEntry.Builder builder = AlternativesEntry.alternatives();
         HolderLookup.RegistryLookup<SwetVariant> registry = registries.lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY);
-        for (Holder<SwetVariant> swetVariant : registry.listElements().toList()) {
+        List<ResourceKey<SwetVariant>> variantKeys = new ArrayList<>(registry.listElementIds().toList());
+        Collections.sort(variantKeys);
+        for (ResourceKey<SwetVariant> swetVariantId : variantKeys) {
+            Holder<SwetVariant> swetVariant = registry.getOrThrow(swetVariantId);
             builder = builder.otherwise(LootItem.lootTableItem(swetVariant.value().gelItem().value())
                     .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                     .apply(EnchantedCountIncreaseFunction.lootingMultiplier(registries, UniformGenerator.between(0.0F, 1.0F)))

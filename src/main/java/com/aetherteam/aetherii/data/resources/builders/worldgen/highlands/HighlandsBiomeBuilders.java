@@ -14,14 +14,13 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
+// NOTE: Tweaks to biome colors should be done in AetherIIDataMapData
 public class HighlandsBiomeBuilders {
     private static final BiomeSpecialEffects HIGHFIELDS_EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(0xecebfc)
             .skyColor(0xc9d1ff)
             .waterColor(0xa2d5f2)
             .waterFogColor(0x55708a)
-            .grassColorOverride(0xb5ffd0)
-            .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();
@@ -30,8 +29,6 @@ public class HighlandsBiomeBuilders {
             .skyColor(0xc5cbeb)
             .waterColor(0xabbdd9)
             .waterFogColor(0x607496)
-            .grassColorOverride(0xc9ffd1)
-            .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();
@@ -40,8 +37,6 @@ public class HighlandsBiomeBuilders {
             .skyColor(0xe7e3fc)
             .waterColor(0x637aa8)
             .waterFogColor(0x3e5082)
-            .grassColorOverride(0xbdf9ff)
-            .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();
@@ -50,8 +45,6 @@ public class HighlandsBiomeBuilders {
             .skyColor(0xfcebc5)
             .waterColor(0xaed4bf)
             .waterFogColor(0xbccc81)
-            .grassColorOverride(0xffdd99)
-            .foliageColorOverride(0xffdd99)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .ambientParticle(new AmbientParticleSettings(AetherIIParticleTypes.AMBROSIUM.get(), 0.00625F))
@@ -61,8 +54,6 @@ public class HighlandsBiomeBuilders {
             .skyColor(0xc9d1ff)
             .waterColor(0xa2d5f2)
             .waterFogColor(0x55708a)
-            .grassColorOverride(0xb5ffd0)
-            .foliageColorOverride(0xb1ffcb)
             .grassColorModifier(BiomeSpecialEffects.GrassColorModifier.NONE)
             .backgroundMusic(new Music(AetherIISoundEvents.MUSIC_AETHER, 3600, 10800, false))
             .build();

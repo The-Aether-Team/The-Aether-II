@@ -39,7 +39,7 @@ public class SkephidRenderer<T extends Skephid> extends MobRenderer<T, SkephidRe
 
     @Override
     protected void setupRotations(SkephidRenderState entity, PoseStack poseStack, float rotationYaw, float p_320045_) {
-        float trans = 9F / 16F;
+        float trans = 6.5F / 16F;
         if (entity.pose != Pose.SLEEPING) {
             float progresso = 1F - (entity.prevAttachChangeProgress + (entity.attachChangeProgress - entity.prevAttachChangeProgress) * entity.partialTick);
 
