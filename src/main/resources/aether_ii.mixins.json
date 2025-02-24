@@ -15,6 +15,7 @@
     "common.PointedDripstoneBlockMixin",
     "common.RandomStateMixin",
     "common.ServerLevelMixin",
+    "common.ServerPlayerMixin",
     "common.accessor.AbstractArrowAccessor",
     "common.accessor.AbstractBoatAccessor",
     "common.accessor.AttributeMapAccessor",
