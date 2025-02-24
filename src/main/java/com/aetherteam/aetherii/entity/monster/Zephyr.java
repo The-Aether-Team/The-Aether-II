@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
@@ -89,7 +90,7 @@ public class Zephyr extends FlyingMob implements Enemy {
      * @return Whether this entity can spawn, as a {@link Boolean}.
      */
     public static boolean checkZephyrSpawnRules(EntityType<? extends Zephyr> zephyr, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return reason == EntitySpawnReason.SPAWNER || level.canSeeSky(pos) && level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS);
+        return (reason != EntitySpawnReason.NATURAL || random.nextInt(11) == 0) || level.canSeeSky(pos) && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
     @Override
