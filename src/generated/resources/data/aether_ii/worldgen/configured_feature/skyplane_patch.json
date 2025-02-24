@@ -25,15 +25,15 @@
         },
         "branch_height": {
           "type": "minecraft:uniform",
-          "max_inclusive": 7,
-          "min_inclusive": 3
+          "max_inclusive": 4,
+          "min_inclusive": 2
         },
         "canopy_branch_state": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "aether_ii:tangled_branches",
+            "Name": "aether_ii:skyroot_wood",
             "Properties": {
-              "waterlogged": "false"
+              "axis": "y"
             }
           }
         },

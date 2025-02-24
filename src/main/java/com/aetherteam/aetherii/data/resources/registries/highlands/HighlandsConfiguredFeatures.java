@@ -773,7 +773,7 @@ public class HighlandsConfiguredFeatures {
                                 new GroundFeatureDecorator(BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAF_PILE.get().defaultBlockState().setValue(AetherLeafPileBlock.PERSISTENT, true)), 3),
                                 new ShroudedCanopyDecorator(
                                         BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState()),
-                                        BlockStateProvider.simple(AetherIIBlocks.TANGLED_BRANCHES.get().defaultBlockState()),
+                                        BlockStateProvider.simple(AetherIIBlocks.SKYROOT_WOOD.get().defaultBlockState()),
                                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
                                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState()),
                                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_VINES.get().defaultBlockState()),
@@ -782,7 +782,7 @@ public class HighlandsConfiguredFeatures {
                                         UniformInt.of(3, 7),
                                         UniformInt.of(1, 5),
                                         UniformInt.of(4, 7),
-                                        UniformInt.of(3, 7),
+                                        UniformInt.of(2, 4),
                                         0.1
                                 ))).build());
         register(context, SHORT_SKYPLANE, Feature.TREE,

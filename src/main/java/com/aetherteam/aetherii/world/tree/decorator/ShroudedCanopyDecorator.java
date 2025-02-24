@@ -100,9 +100,13 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
             BlockPos center = new BlockPos(centerX, y.get(), centerZ);
 
             int radius = this.canopyRadius.sample(context.random());
-            this.createCircle(context, center.below(2), radius - 1, this.canopyBranchState.getState(context.random(), center.below(2)), true);
-            this.createCircle(context, center.below(), radius, this.canopyBranchState.getState(context.random(), center.below()), false);
+
             this.createCircle(context, center, radius + 1, this.canopyTopState.getState(context.random(), center), false);
+
+            this.createBranches(context, center.below(), List.copyOf(topPoints.keySet()), radius - 1, this.branchAmount.sample(context.random()), this.canopyBranchState.getState(context.random(), center.below()));
+
+            this.createCircle(context, center.below(), radius, this.canopyTopState.getState(context.random(), center.below()), false);
+            this.createCircle(context, center.below(2), radius - 1, this.canopyTopState.getState(context.random(), center.below(2)), true);
 
             if (context.level() instanceof WorldGenLevel worldGenLevel && context.random().nextDouble() <= this.nestChance) {
                 ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
@@ -111,8 +115,6 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
             }
 
             this.createMoss(context, center, radius + 3, this.mossRadius.sample(context.random()), this.mossAmount.sample(context.random()));
-
-            this.createBranches(context, center.below(), List.copyOf(topPoints.keySet()), radius - 1, this.branchAmount.sample(context.random()), this.canopyBranchState.getState(context.random(), center.below()));
         }
     }
 
