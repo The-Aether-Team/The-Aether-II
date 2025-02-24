@@ -31,7 +31,10 @@
         "canopy_branch_state": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "aether_ii:tangled_branches"
+            "Name": "aether_ii:tangled_branches",
+            "Properties": {
+              "waterlogged": "false"
+            }
           }
         },
         "canopy_radius": {
