@@ -341,6 +341,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
         this.tag(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.SKEPHID_SPAWNABLE_ON).addTags(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
         this.tag(AetherIITags.Blocks.MOA_HATCH_BLOCK).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
         );

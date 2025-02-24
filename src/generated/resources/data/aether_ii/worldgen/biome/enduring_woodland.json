@@ -116,15 +116,15 @@
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
-        "maxCount": 2,
+        "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 1
       },
       {
         "type": "aether_ii:tempest",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 2
+        "weight": 1
       }
     ],
     "aether_ii:aether_surface_monster": [

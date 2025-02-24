@@ -77,6 +77,7 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");
         public static final TagKey<Block> CARRION_SPROUT_SPAWNABLE_ON = tag("carrion_sprout_spawnable_on");
+        public static final TagKey<Block> SKEPHID_SPAWNABLE_ON = tag("skephid_spawnable_on");
 
         public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");
 
