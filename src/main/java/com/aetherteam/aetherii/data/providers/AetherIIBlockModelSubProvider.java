@@ -23,10 +23,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
@@ -55,6 +52,37 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         TextureMapping texturemapping = type.getPlantTextureMapping(plant);
         ResourceLocation resourcelocation = type.getCrossPot().extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build().create(pot, texturemapping, this.modelOutput);
         this.blockStateOutput.accept(createSimpleBlock(pot, resourcelocation));
+    }
+
+    public void createTrunk(Block trunk, Block log) { //todo move model templates to registry class
+        ResourceLocation center = AetherIIModelTemplates.create("template_trunk_center", "_center", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
+        ResourceLocation side = AetherIIModelTemplates.create("template_trunk_side", "_side", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
+        ResourceLocation corner = AetherIIModelTemplates.create("template_trunk_corner", "_corner", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
+
+        ResourceLocation centerTall = AetherIIModelTemplates.create("template_trunk_center_tall", "_center_tall", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
+        ResourceLocation sideTall = AetherIIModelTemplates.create("template_trunk_side_tall", "_side_tall", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
+        ResourceLocation cornerTall = AetherIIModelTemplates.create("template_trunk_corner_tall", "_corner_tall", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
+
+        MultiPartGenerator model = MultiPartGenerator.multiPart(trunk)
+                .with(Condition.condition().term(TrunkBlock.TALL, false), Variant.variant().with(VariantProperties.MODEL, center))
+                .with(Condition.condition().term(TrunkBlock.TALL, true), Variant.variant().with(VariantProperties.MODEL, centerTall))
+                .with(Condition.condition().term(TrunkBlock.NORTH_CONNECTION, TrunkBlock.TrunkConnection.FULL, TrunkBlock.TrunkConnection.MATCHING), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.EAST_CONNECTION, TrunkBlock.TrunkConnection.FULL, TrunkBlock.TrunkConnection.MATCHING), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTH_CONNECTION, TrunkBlock.TrunkConnection.FULL, TrunkBlock.TrunkConnection.MATCHING), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.WEST_CONNECTION, TrunkBlock.TrunkConnection.FULL, TrunkBlock.TrunkConnection.MATCHING), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.NORTH_CONNECTION, TrunkBlock.TrunkConnection.FULL_TALL, TrunkBlock.TrunkConnection.MATCHING_TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.EAST_CONNECTION, TrunkBlock.TrunkConnection.FULL_TALL, TrunkBlock.TrunkConnection.MATCHING_TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTH_CONNECTION, TrunkBlock.TrunkConnection.FULL_TALL, TrunkBlock.TrunkConnection.MATCHING_TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.WEST_CONNECTION, TrunkBlock.TrunkConnection.FULL_TALL, TrunkBlock.TrunkConnection.MATCHING_TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.NORTHWEST_CONNECTION, TrunkBlock.TrunkCorner.NORMAL), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.NORTHEAST_CONNECTION, TrunkBlock.TrunkCorner.NORMAL), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTHEAST_CONNECTION, TrunkBlock.TrunkCorner.NORMAL), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTHWEST_CONNECTION, TrunkBlock.TrunkCorner.NORMAL), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.NORTHWEST_CONNECTION, TrunkBlock.TrunkCorner.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.NORTHEAST_CONNECTION, TrunkBlock.TrunkCorner.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTHEAST_CONNECTION, TrunkBlock.TrunkCorner.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTHWEST_CONNECTION, TrunkBlock.TrunkCorner.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+        this.blockStateOutput.accept(model);
     }
 
     @Override
