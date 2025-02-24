@@ -782,7 +782,8 @@ public class HighlandsConfiguredFeatures {
                                         UniformInt.of(3, 7),
                                         UniformInt.of(1, 5),
                                         UniformInt.of(4, 7),
-                                        UniformInt.of(3, 7)
+                                        UniformInt.of(3, 7),
+                                        0.1
                                 ))).build());
         register(context, SHORT_SKYPLANE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(

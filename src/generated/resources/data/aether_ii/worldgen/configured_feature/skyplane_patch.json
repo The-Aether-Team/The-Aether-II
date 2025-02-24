@@ -264,7 +264,8 @@
               "west": "false"
             }
           }
-        }
+        },
+        "nest_chance": 0.1
       }
     ],
     "dirt_provider": {

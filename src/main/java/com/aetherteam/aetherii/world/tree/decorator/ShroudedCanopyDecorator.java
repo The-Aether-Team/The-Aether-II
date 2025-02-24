@@ -2,17 +2,23 @@ package com.aetherteam.aetherii.world.tree.decorator;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.BottomedVineBlock;
+import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
 import com.google.common.collect.HashMultimap;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
@@ -21,17 +27,18 @@ import java.util.*;
 
 public class ShroudedCanopyDecorator extends TreeDecorator {
     public static final MapCodec<ShroudedCanopyDecorator> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-        BlockStateProvider.CODEC.fieldOf("canopy_top_state").forGetter((decorator) -> decorator.canopyTopState),
-        BlockStateProvider.CODEC.fieldOf("canopy_branch_state").forGetter((decorator) -> decorator.canopyBranchState),
-        BlockStateProvider.CODEC.fieldOf("moss_state").forGetter((decorator) -> decorator.mossState),
-        BlockStateProvider.CODEC.fieldOf("moss_carpet_state").forGetter((decorator) -> decorator.mossCarpetState),
-        BlockStateProvider.CODEC.fieldOf("moss_vine_state").forGetter((decorator) -> decorator.mossVineState),
-        BlockStateProvider.CODEC.fieldOf("moss_flower_state").forGetter((decorator) -> decorator.mossFlowerState),
-        IntProvider.CODEC.fieldOf("canopy_radius").forGetter((decorator) -> decorator.canopyRadius),
-        IntProvider.CODEC.fieldOf("moss_radius").forGetter((decorator) -> decorator.mossRadius),
-        IntProvider.CODEC.fieldOf("moss_amount").forGetter((decorator) -> decorator.mossAmount),
-        IntProvider.CODEC.fieldOf("branch_amount").forGetter((decorator) -> decorator.branchAmount),
-        IntProvider.CODEC.fieldOf("branch_height").forGetter((decorator) -> decorator.branchHeight)
+            BlockStateProvider.CODEC.fieldOf("canopy_top_state").forGetter((decorator) -> decorator.canopyTopState),
+            BlockStateProvider.CODEC.fieldOf("canopy_branch_state").forGetter((decorator) -> decorator.canopyBranchState),
+            BlockStateProvider.CODEC.fieldOf("moss_state").forGetter((decorator) -> decorator.mossState),
+            BlockStateProvider.CODEC.fieldOf("moss_carpet_state").forGetter((decorator) -> decorator.mossCarpetState),
+            BlockStateProvider.CODEC.fieldOf("moss_vine_state").forGetter((decorator) -> decorator.mossVineState),
+            BlockStateProvider.CODEC.fieldOf("moss_flower_state").forGetter((decorator) -> decorator.mossFlowerState),
+            IntProvider.CODEC.fieldOf("canopy_radius").forGetter((decorator) -> decorator.canopyRadius),
+            IntProvider.CODEC.fieldOf("moss_radius").forGetter((decorator) -> decorator.mossRadius),
+            IntProvider.CODEC.fieldOf("moss_amount").forGetter((decorator) -> decorator.mossAmount),
+            IntProvider.CODEC.fieldOf("branch_amount").forGetter((decorator) -> decorator.branchAmount),
+            IntProvider.CODEC.fieldOf("branch_height").forGetter((decorator) -> decorator.branchHeight),
+            Codec.doubleRange(0.0, 1.0).fieldOf("nest_chance").forGetter((decorator) -> decorator.nestChance)
     ).apply(instance, ShroudedCanopyDecorator::new));
 
     private final BlockStateProvider canopyTopState;
@@ -45,8 +52,9 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
     private final IntProvider mossAmount;
     private final IntProvider branchAmount;
     private final IntProvider branchHeight;
+    private final double nestChance;
 
-    public ShroudedCanopyDecorator(BlockStateProvider canopyTopState, BlockStateProvider canopyBranchState, BlockStateProvider mossState, BlockStateProvider mossCarpetState, BlockStateProvider mossVineState, BlockStateProvider mossFlowerState, IntProvider canopyRadius, IntProvider mossRadius, IntProvider mossAmount, IntProvider branchAmount, IntProvider branchHeight) {
+    public ShroudedCanopyDecorator(BlockStateProvider canopyTopState, BlockStateProvider canopyBranchState, BlockStateProvider mossState, BlockStateProvider mossCarpetState, BlockStateProvider mossVineState, BlockStateProvider mossFlowerState, IntProvider canopyRadius, IntProvider mossRadius, IntProvider mossAmount, IntProvider branchAmount, IntProvider branchHeight, double nestChance) {
         this.canopyTopState = canopyTopState;
         this.canopyBranchState = canopyBranchState;
         this.mossState = mossState;
@@ -58,6 +66,7 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
         this.mossAmount = mossAmount;
         this.branchAmount = branchAmount;
         this.branchHeight = branchHeight;
+        this.nestChance = nestChance;
     }
 
     @Override
@@ -94,6 +103,12 @@ public class ShroudedCanopyDecorator extends TreeDecorator {
             this.createCircle(context, center.below(2), radius - 1, this.canopyBranchState.getState(context.random(), center.below(2)), true);
             this.createCircle(context, center.below(), radius, this.canopyBranchState.getState(context.random(), center.below()), false);
             this.createCircle(context, center, radius + 1, this.canopyTopState.getState(context.random(), center), false);
+
+            if (context.level() instanceof WorldGenLevel worldGenLevel && context.random().nextDouble() <= this.nestChance) {
+                ChunkGenerator chunk = worldGenLevel.getLevel().getChunkSource().getGenerator();
+                ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HighlandsConfiguredFeatures.MOA_NEST).orElse(null)).value();
+                nest.place(worldGenLevel, chunk, context.random(), center.above(2));
+            }
 
             this.createMoss(context, center, radius + 3, this.mossRadius.sample(context.random()), this.mossAmount.sample(context.random()));
 
