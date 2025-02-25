@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.attachment.player;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -104,7 +105,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      * Handles functions when the player logs out of a world from {@link net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent}.
      */
     public void logout(Player player) {
-        this.removeAerbunny();
+
     }
 
     /**
@@ -175,8 +176,8 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     /**
      * Removes an Aerbunny from the world and stores it to NBT for the capability. This is used when a player logs out with an Aerbunny.
      */
-    private void removeAerbunny() {
-        if (this.getMountedAerbunny() != null) {
+    public void removeAerbunny() {
+        if (this.getMountedAerbunny() != null) { //todo
             Aerbunny aerbunny = this.getMountedAerbunny();
             CompoundTag nbt = new CompoundTag();
             aerbunny.save(nbt);
@@ -201,7 +202,7 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
                     PacketDistributor.sendToPlayer(serverPlayer, new RemountAerbunnyPacket(player.getId(), aerbunny.getId()));
                 }
             }
-            this.setMountedAerbunnyTag(null);
+            this.setMountedAerbunnyTag(Optional.empty());
         }
     }
 
