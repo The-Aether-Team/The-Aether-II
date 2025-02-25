@@ -109,27 +109,35 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.SKYROOT_WOOD.get(),
+                AetherIIBlocks.SKYROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(),
-                AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get()
+                AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.GREATROOT_LOGS).add(
                 AetherIIBlocks.GREATROOT_LOG.get(),
                 AetherIIBlocks.GREATROOT_WOOD.get(),
+                AetherIIBlocks.GREATROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(),
-                AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get()
+                AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.WISPROOT_LOGS).add(
                 AetherIIBlocks.WISPROOT_LOG.get(),
                 AetherIIBlocks.MOSSY_WISPROOT_LOG.get(),
                 AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get(),
                 AetherIIBlocks.WISPROOT_WOOD.get(),
+                AetherIIBlocks.WISPROOT_TRUNK.get(),
                 AetherIIBlocks.MOSSY_WISPROOT_WOOD.get(),
+                AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(),
-                AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get()
+                AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.AMBEROOT_LOGS).add(
                 AetherIIBlocks.AMBEROOT_LOG.get(),
-                AetherIIBlocks.AMBEROOT_WOOD.get()
+                AetherIIBlocks.AMBEROOT_WOOD.get(),
+                AetherIIBlocks.AMBEROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
@@ -847,6 +855,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_WOOD.get(),
                 AetherIIBlocks.WISPROOT_WOOD.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get(),
+                AetherIIBlocks.SKYROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get(),
+                AetherIIBlocks.GREATROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(),
+                AetherIIBlocks.WISPROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(),
+                AetherIIBlocks.AMBEROOT_TRUNK.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.ORANGE_TREE.get(),
                 AetherIIBlocks.SKYROOT_PLANKS.get(),

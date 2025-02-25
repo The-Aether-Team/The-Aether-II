@@ -4,8 +4,11 @@
     "aether_ii:mossy_wisproot_log",
     "aether_ii:mossy_wisproot_log_end",
     "aether_ii:wisproot_wood",
+    "aether_ii:wisproot_trunk",
     "aether_ii:mossy_wisproot_wood",
+    "aether_ii:mossy_wisproot_trunk",
     "aether_ii:stripped_wisproot_log",
-    "aether_ii:stripped_wisproot_wood"
+    "aether_ii:stripped_wisproot_wood",
+    "aether_ii:stripped_wisproot_trunk"
   ]
 }

@@ -160,12 +160,11 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockPos relative = blockPos.relative(direction);
                 TrunkConnection connection = level.getBlockState(relative).getBlock() instanceof TrunkBlock ? TrunkConnection.MATCHING : level.getBlockState(relative).isSolid() ? TrunkConnection.FULL : TrunkConnection.NONE;
-                TrunkConnection tallConnection = level.getBlockState(relative).getBlock() instanceof TrunkBlock ? TrunkConnection.MATCHING_TALL : level.getBlockState(relative).isSolid() ? TrunkConnection.FULL_TALL : TrunkConnection.NONE;
                 switch (direction) {
-                    case NORTH -> state = state.setValue(NORTH_CONNECTION, aboveState.getValueOrElse(NORTH_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? tallConnection : connection);
-                    case EAST -> state = state.setValue(EAST_CONNECTION, aboveState.getValueOrElse(EAST_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? tallConnection : connection);
-                    case SOUTH -> state = state.setValue(SOUTH_CONNECTION, aboveState.getValueOrElse(SOUTH_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? tallConnection : connection);
-                    case WEST -> state = state.setValue(WEST_CONNECTION, aboveState.getValueOrElse(WEST_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? tallConnection : connection);
+                    case NORTH -> state = state.setValue(NORTH_CONNECTION, aboveState.getValueOrElse(NORTH_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? connection.tall() : connection);
+                    case EAST -> state = state.setValue(EAST_CONNECTION, aboveState.getValueOrElse(EAST_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? connection.tall() : connection);
+                    case SOUTH -> state = state.setValue(SOUTH_CONNECTION, aboveState.getValueOrElse(SOUTH_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? connection.tall() : connection);
+                    case WEST -> state = state.setValue(WEST_CONNECTION, aboveState.getValueOrElse(WEST_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? connection.tall() : connection);
                 }
             }
             if (state.getValue(NORTH_CONNECTION).isFull() && state.getValue(EAST_CONNECTION).isFull()) state = state.setValue(NORTHEAST_CONNECTION, aboveState.getValueOrElse(NORTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
@@ -321,7 +320,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
         TrunkConnection(String name) {
             this.name = name;
         }
-        
+
         public boolean isMatching() {
             return this == MATCHING || this == MATCHING_TALL;
         }
@@ -332,6 +331,20 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
 
         public boolean isTall() {
             return this == MATCHING_TALL || this == FULL_TALL;
+        }
+
+        public TrunkConnection tall() {
+            switch(this) {
+                case MATCHING -> {
+                    return MATCHING_TALL;
+                }
+                case FULL -> {
+                    return FULL_TALL;
+                }
+                default -> {
+                    return NONE;
+                }
+            }
         }
 
         public String toString() {

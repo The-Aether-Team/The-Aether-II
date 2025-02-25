@@ -127,6 +127,13 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
 
         // Trunks
         this.createTrunk(AetherIIBlocks.SKYROOT_TRUNK.get(), AetherIIBlocks.SKYROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.GREATROOT_TRUNK.get(), AetherIIBlocks.GREATROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.WISPROOT_TRUNK.get(), AetherIIBlocks.WISPROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.AMBEROOT_TRUNK.get(), AetherIIBlocks.AMBEROOT_LOG.get());
 
         // Leaves
         this.createLeavesWithPiles(AetherIIBlocks.SKYROOT_LEAVES.get(), AetherIIBlocks.SKYROOT_LEAF_PILE.get());

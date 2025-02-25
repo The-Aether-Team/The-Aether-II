@@ -160,7 +160,14 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<RotatedPillarBlock> AMBEROOT_WOOD = register("amberoot_wood", RotatedPillarBlock::new, logProperties(MapColor.COLOR_BROWN, MapColor.TERRACOTTA_LIGHT_GRAY));
 
     // Trunks
-    public static final DeferredBlock<TrunkBlock> SKYROOT_TRUNK = register("skyroot_trunk", TrunkBlock::new, () -> Block.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava());
+    public static final DeferredBlock<TrunkBlock> SKYROOT_TRUNK = register("skyroot_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<TrunkBlock> STRIPPED_SKYROOT_TRUNK = register("stripped_skyroot_trunk", TrunkBlock::new, trunkProperties(MapColor.TERRACOTTA_LIGHT_GRAY));
+    public static final DeferredBlock<TrunkBlock> GREATROOT_TRUNK = register("greatroot_trunk", TrunkBlock::new, trunkProperties(MapColor.TERRACOTTA_BROWN));
+    public static final DeferredBlock<TrunkBlock> STRIPPED_GREATROOT_TRUNK = register("stripped_greatroot_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
+    public static final DeferredBlock<TrunkBlock> WISPROOT_TRUNK = register("wisproot_trunk", TrunkBlock::new, trunkProperties(MapColor.QUARTZ));
+    public static final DeferredBlock<TrunkBlock> MOSSY_WISPROOT_TRUNK = register("mossy_wisproot_trunk", TrunkBlock::new, trunkProperties(MapColor.QUARTZ));
+    public static final DeferredBlock<TrunkBlock> STRIPPED_WISPROOT_TRUNK = register("stripped_wisproot_trunk", TrunkBlock::new, trunkProperties(MapColor.QUARTZ));
+    public static final DeferredBlock<TrunkBlock> AMBEROOT_TRUNK = register("amberoot_trunk", TrunkBlock::new, trunkProperties(MapColor.COLOR_BROWN));
 
     // Leaf Pile
     public static final DeferredBlock<Block> SKYROOT_LEAF_PILE = register("skyroot_leaf_pile", AetherLeafPileBlock::new, leafPileProperties(MapColor.GRASS));

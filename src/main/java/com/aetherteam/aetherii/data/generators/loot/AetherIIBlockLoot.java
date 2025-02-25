@@ -136,7 +136,14 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.add(AetherIIBlocks.AMBEROOT_WOOD.get(), (wood) -> this.droppingAmberoot(getter, wood, AetherIIBlocks.SKYROOT_WOOD.get(), AetherIIItems.GOLDEN_AMBER.get()));
 
         // Trunks
-        this.dropSelf(AetherIIBlocks.SKYROOT_TRUNK.get()); //todo
+        this.dropSelf(AetherIIBlocks.SKYROOT_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.GREATROOT_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.WISPROOT_TRUNK.get());
+        this.add(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIBlocks.WISPROOT_TRUNK.get()));
+        this.dropSelf(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get());
+        this.dropSelf(AetherIIBlocks.AMBEROOT_TRUNK.get());
 
         // Leaf Pile
         this.add(AetherIIBlocks.SKYROOT_LEAF_PILE.get(), (block) -> this.droppingLeafPile(block, AetherIIBlocks.SKYROOT_LEAVES.get()));

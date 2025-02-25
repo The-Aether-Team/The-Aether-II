@@ -23,8 +23,10 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.SKYROOT_WOOD.get());
+                output.accept(AetherIIBlocks.SKYROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.SKYROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.SKYROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.SKYROOT_SLAB.get());
@@ -47,8 +49,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_BEAM.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_WOOD.get());
+                output.accept(AetherIIBlocks.GREATROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.GREATROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.GREATROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.GREATROOT_SLAB.get());
@@ -73,9 +77,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get());
                 output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
+                output.accept(AetherIIBlocks.WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_WOOD.get());
+                output.accept(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.WISPROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.WISPROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.WISPROOT_SLAB.get());
@@ -98,6 +105,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_BEAM.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
+                output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_SLAB.get());
@@ -339,11 +347,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
                 output.accept(AetherIIBlocks.TANGLED_BRANCHES.get());
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
+                output.accept(AetherIIBlocks.SKYROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
+                output.accept(AetherIIBlocks.GREATROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
+                output.accept(AetherIIBlocks.WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
+                output.accept(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
+                output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_LEAVES.get());

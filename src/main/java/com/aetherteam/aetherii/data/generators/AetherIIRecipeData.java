@@ -205,6 +205,24 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_vines", has(AetherIIBlocks.BRYALINN_MOSS_VINES))
                 .save(this.output);
 
+        // Trunks
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_TRUNK, AetherIIBlocks.SKYROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_SKYROOT_TRUNK, AetherIIBlocks.STRIPPED_SKYROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_TRUNK, AetherIIBlocks.GREATROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_GREATROOT_TRUNK, AetherIIBlocks.STRIPPED_GREATROOT_TRUNK);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_TRUNK, AetherIIBlocks.WISPROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_WISPROOT_TRUNK, AetherIIBlocks.MOSSY_WISPROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRUNK, AetherIIBlocks.AMBEROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_TRUNK, AetherIIBlocks.SKYROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_SKYROOT_TRUNK, AetherIIBlocks.STRIPPED_SKYROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_TRUNK, AetherIIBlocks.GREATROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_GREATROOT_TRUNK, AetherIIBlocks.STRIPPED_GREATROOT_TRUNK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_TRUNK, AetherIIBlocks.WISPROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_WISPROOT_TRUNK, AetherIIBlocks.MOSSY_WISPROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, AetherIIBlocks.STRIPPED_WISPROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRUNK, AetherIIBlocks.AMBEROOT_WOOD);
+
         // Leaf Pile
         leafPile(getter, AetherIIBlocks.SKYROOT_LEAF_PILE, AetherIIBlocks.SKYROOT_LEAVES.get());
         leafPile(getter, AetherIIBlocks.SKYPLANE_LEAF_PILE, AetherIIBlocks.SKYPLANE_LEAVES.get());

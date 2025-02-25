@@ -54,14 +54,15 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(createSimpleBlock(pot, resourcelocation));
     }
 
-    public void createTrunk(Block trunk, Block log) { //todo move model templates to registry class
-        ResourceLocation center = AetherIIModelTemplates.create("template_trunk_center", "_center", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
-        ResourceLocation side = AetherIIModelTemplates.create("template_trunk_side", "_side", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
-        ResourceLocation corner = AetherIIModelTemplates.create("template_trunk_corner", "_corner", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
-
-        ResourceLocation centerTall = AetherIIModelTemplates.create("template_trunk_center_tall", "_center_tall", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
-        ResourceLocation sideTall = AetherIIModelTemplates.create("template_trunk_side_tall", "_side_tall", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
-        ResourceLocation cornerTall = AetherIIModelTemplates.create("template_trunk_corner_tall", "_corner_tall", TextureSlot.ALL).create(trunk, TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE), this.modelOutput);
+    public void createTrunk(Block trunk, Block log) {
+        TextureMapping mapping = TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
+        ResourceLocation center = AetherIIModelTemplates.TRUNK_CENTER.create(trunk, mapping, this.modelOutput);
+        ResourceLocation side = AetherIIModelTemplates.TRUNK_SIDE.create(trunk, mapping, this.modelOutput);
+        ResourceLocation corner = AetherIIModelTemplates.TRUNK_CORNER.create(trunk, mapping, this.modelOutput);
+        ResourceLocation centerTall = AetherIIModelTemplates.TRUNK_CENTER_TALL.create(trunk, mapping, this.modelOutput);
+        ResourceLocation sideTall = AetherIIModelTemplates.TRUNK_SIDE_TALL.create(trunk, mapping, this.modelOutput);
+        ResourceLocation cornerTall = AetherIIModelTemplates.TRUNK_CORNER_TALL.create(trunk, mapping, this.modelOutput);
+        ResourceLocation inventory = AetherIIModelTemplates.TRUNK_INVENTORY.create(trunk, mapping, this.modelOutput);
 
         MultiPartGenerator model = MultiPartGenerator.multiPart(trunk)
                 .with(Condition.condition().term(TrunkBlock.TALL, false), Variant.variant().with(VariantProperties.MODEL, center))
@@ -83,6 +84,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(Condition.condition().term(TrunkBlock.SOUTHEAST_CONNECTION, TrunkBlock.TrunkCorner.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
                 .with(Condition.condition().term(TrunkBlock.SOUTHWEST_CONNECTION, TrunkBlock.TrunkCorner.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
         this.blockStateOutput.accept(model);
+        this.registerSimpleItemModel(trunk, inventory);
     }
 
     @Override
