@@ -765,7 +765,7 @@ public class HighlandsConfiguredFeatures {
         register(context, SKYPLANE_PATCH, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
-                        new MultiTreeTrunkPlacer(10, 4, 2, UniformInt.of(3, 6), 3), BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAVES.get().defaultBlockState()),
+                        new MultiTreeTrunkPlacer(10, 4, 2, UniformInt.of(3, 6), 10), BlockStateProvider.simple(AetherIIBlocks.SKYPLANE_LEAVES.get().defaultBlockState()),
                         new SkyplaneFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2)),
                         new ThreeLayersFeatureSize(1, 1, 0, 1, 0, OptionalInt.empty()))
                         .ignoreVines()

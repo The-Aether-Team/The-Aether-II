@@ -4,15 +4,18 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.joml.Vector3i;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,17 +47,27 @@ public class MultiTreeTrunkPlacer extends TrunkPlacer {
         BlockPos max = pos.offset(radius, radius, radius);
         Iterable<BlockPos> aroundPos = BlockPos.randomBetweenClosed(random, this.amount, min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ());
         for (BlockPos origin : aroundPos) {
-            origin = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, origin.above());
+            BlockPos heightmapPos = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, origin.above());
+            boolean noAdjacentTrees = BlockPos.betweenClosedStream(-1, -1, -1, 1, 1, 1)
+                    .map(BlockPos::immutable).filter((e) -> Vector3i.length(e.getX(), e.getY(), e.getZ()) != 0)
+                    .toList().stream().noneMatch((offset) -> level.isStateAtPosition(heightmapPos.offset(offset), state -> state.is(BlockTags.LOGS)));
 
-            setDirtAt(level, blockSetter, random, origin.below(), config);
+            if (this.isFree(level, heightmapPos) && noAdjacentTrees) {
+                setDirtAt(level, blockSetter, random, heightmapPos.below(), config);
 
-            for (int i = 0; i < freeTreeHeight; ++i) {
-                this.placeLog(level, blockSetter, random, origin.above(i), config);
+                for (int i = 0; i < freeTreeHeight; ++i) {
+                    this.placeLog(level, blockSetter, random, heightmapPos.above(i), config);
+                }
+
+                foliageAttachments.add(new FoliagePlacer.FoliageAttachment(heightmapPos.above(freeTreeHeight), 0, false));
             }
-
-            foliageAttachments.add(new FoliagePlacer.FoliageAttachment(origin.above(freeTreeHeight), 0, false));
         }
         return foliageAttachments;
+    }
+
+    @Override
+    protected boolean validTreePos(LevelSimulatedReader level, BlockPos pos) {
+        return super.validTreePos(level, pos) || level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::canBeReplaced);
     }
 
     @Override

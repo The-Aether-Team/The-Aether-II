@@ -303,7 +303,7 @@
     },
     "trunk_placer": {
       "type": "aether_ii:multi_tree_trunk_placer",
-      "amount": 3,
+      "amount": 10,
       "base_height": 10,
       "height_rand_a": 4,
       "height_rand_b": 2,
