@@ -1134,6 +1134,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(this.output);
 
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.HIDE_BUNDLE)
+                .define('-', AetherIIItems.CLOUDTWINE)
+                .define('#', AetherIIItems.TAEGORE_HIDE)
+                .pattern("-")
+                .pattern("#")
+                .unlockedBy("has_cloudtwine", this.has(AetherIIItems.CLOUDTWINE))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MOA_SADDLE.get())
                 .define('#', AetherIIItems.TAEGORE_HIDE)
                 .define('/', AetherIIItems.CLOUDTWINE)
