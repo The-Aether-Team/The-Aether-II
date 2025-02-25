@@ -219,18 +219,22 @@
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:aether_dirt"
+        "Name": "minecraft:dirt"
       }
     },
     "foliage_placer": {
-      "type": "aether_ii:skybirch_foliage_placer",
+      "type": "aether_ii:skypine_foliage_placer",
       "offset": 2,
-      "radius": 1
+      "radius": {
+        "type": "minecraft:uniform",
+        "max_inclusive": 5,
+        "min_inclusive": 3
+      }
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "aether_ii:irradiated_skybirch_leaves",
+        "Name": "aether_ii:irradiated_skypine_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -243,18 +247,16 @@
     "force_dirt": false,
     "ignore_vines": true,
     "minimum_size": {
-      "type": "minecraft:three_layers_feature_size",
-      "limit": 1,
+      "type": "minecraft:two_layers_feature_size",
+      "limit": 2,
       "lower_size": 0,
-      "middle_size": 1,
-      "upper_limit": 1,
-      "upper_size": 0
+      "upper_size": 2
     },
     "trunk_placer": {
       "type": "minecraft:straight_trunk_placer",
-      "base_height": 8,
-      "height_rand_a": 3,
-      "height_rand_b": 0
+      "base_height": 6,
+      "height_rand_a": 4,
+      "height_rand_b": 1
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
