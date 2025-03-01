@@ -81,7 +81,7 @@ public class GuidebookDiscoveryAttachment {
         if (player instanceof ServerPlayer serverPlayer) {
             RegistryAccess registryAccess = serverPlayer.registryAccess();
             this.trackBestiaryEntries(registryAccess, advancement, serverPlayer);
-            this.trackEffectsEntries(registryAccess, advancement, serverPlayer);
+            this.trackEffectsEntries(registryAccess, advancement, serverPlayer); //todo need to check that the reward wrapper registry actually matches first. but also theres no registry in the reward wrapper now.
             this.trackExplorationEntries(registryAccess, advancement, serverPlayer);
             if (this.sync) {
                 PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));

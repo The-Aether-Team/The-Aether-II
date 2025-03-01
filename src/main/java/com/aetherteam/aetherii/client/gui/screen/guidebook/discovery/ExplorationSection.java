@@ -7,6 +7,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 
+import java.util.List;
+
 public class ExplorationSection extends DiscoverySection<ExplorationEntry, ExplorationEntry.Mutable> {
     public ExplorationSection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
         super(registryAccess, AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, screen, title);
@@ -20,5 +22,10 @@ public class ExplorationSection extends DiscoverySection<ExplorationEntry, Explo
     @Override
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
+    }
+
+    @Override
+    protected List<ExplorationEntry.Mutable> getOrderedEntries() {
+        return List.of();
     }
 }

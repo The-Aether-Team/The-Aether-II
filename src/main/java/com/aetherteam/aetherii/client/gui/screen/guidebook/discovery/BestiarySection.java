@@ -64,9 +64,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     private static final ResourceLocation UNDISCOVERED_ENTRY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/undiscovered");
     private static final ResourceLocation DISCOVERED_ENTRY_FALLBACK_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/default");
     private final List<BestiaryEntry.Mutable> orderedEntries = new ArrayList<>();
-    private List<Float> snapPoints;
-    private boolean scrolling;
-    private float scrollY;
     private float rotation = 0.0F;
     private final List<Holder<Item>> currentFoods = new ArrayList<>();
     private int switchFoodItemCounter = 0;
@@ -79,19 +76,18 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     public void initSection() {
         this.entries.clear();
         this.registryAccess.lookupOrThrow(this.registryKey).asHolderIdMap().forEach((entry) -> this.entries.add(new BestiaryEntry.Mutable(entry)));
-        this.orderedEntries.clear();
+        this.getOrderedEntries().clear();
         ENTRY_ORDER.forEach((entityTypeHolder) -> this.entries.forEach((entry) -> {
             if (entry.getEntityType().value() == entityTypeHolder.value()) {
-                this.orderedEntries.add(entry);
+                this.getOrderedEntries().add(entry);
             }
         }));
-        this.snapPoints = new ArrayList<>();
 
         Player player = Minecraft.getInstance().player;
         if (player != null) {
             GuidebookDiscoveryAttachment attachment = player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
             for (BestiaryEntry.Mutable bestiaryEntry : attachment.getBestiaryEntries()) {
-                Optional<BestiaryEntry.Mutable> matchingEntry = this.orderedEntries.stream().filter((mutable) -> mutable.getEntityType().is(bestiaryEntry.getEntityType())).findFirst();
+                Optional<BestiaryEntry.Mutable> matchingEntry = this.getOrderedEntries().stream().filter((mutable) -> mutable.getEntityType().is(bestiaryEntry.getEntityType())).findFirst();
                 if (matchingEntry.isPresent()) {
                     for (Map.Entry<String, GuidebookEntry.Info> bestiaryClientValue : bestiaryEntry.getClientValues().entrySet()) {
                         if (matchingEntry.get().getClientValues().containsKey(bestiaryClientValue.getKey())) {
@@ -104,10 +100,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             }
         }
 
-        int remainingSlots = Mth.ceil((this.orderedEntries.size() - this.maxSlots()) / (double) this.scrollIncrement());
-        for (int y = 0; y <= remainingSlots; y++) {
-            this.snapPoints.add((this.scrollbarGutterHeight() / remainingSlots) * y);
-        }
+        super.initSection();
+
         this.rotation = 0.0F;
     }
 
@@ -164,7 +158,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         int topPos = 59;
         int i = 0;
 
-        List<BestiaryEntry.Mutable> visibleEntries = this.orderedEntries.size() > this.maxSlots() ? this.orderedEntries.subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.orderedEntries.size())) : this.orderedEntries;
+        List<BestiaryEntry.Mutable> visibleEntries = this.getOrderedEntries().size() > this.maxSlots() ? this.getOrderedEntries().subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.getOrderedEntries().size())) : this.getOrderedEntries();
         for (BestiaryEntry.Mutable entry : visibleEntries) {
             GuiSpriteManager guiSpriteManager = Minecraft.getInstance().getGuiSprites();
 
@@ -199,13 +193,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
         this.renderScrollbar(guiGraphics);
         this.renderSlotTooltips(guiGraphics, mouseX, mouseY);
-    }
-
-    private void renderScrollbar(GuiGraphics guiGraphics) {
-        int scrollbarTop = 59;
-        int scrollbarLeft = 151;
-        ResourceLocation location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
-        guiGraphics.blitSprite(RenderType::guiTextured, location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
     }
 
     private void renderSlotTooltips(GuiGraphics guiGraphics, double mouseX, double mouseY) {
@@ -434,44 +421,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY, boolean original) {
-        if (this.isScrollActive()) {
-            int leftPos = (this.screen.width / 2) - Guidebook.PAGE_WIDTH;
-            int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
-            if (button == 0) {
-                float scrollbarGutterLeft = leftPos + 139.0F;
-                float scrollbarGutterTop = topPos + 59.0F;
-                double mouseXDiff = mouseX - scrollbarGutterLeft;
-                double mouseYDiff = mouseY - scrollbarGutterTop;
-                if (mouseYDiff <= 108 && mouseYDiff >= 0 && ((mouseXDiff <= 6 && mouseXDiff >= 0) || this.scrolling)) {
-                    this.scrolling = true; // Set the scrollbar as currently scrolling.
-                    this.scrollY = Math.max(0, Math.min((float) mouseYDiff - (this.scrollbarHeight() / 2.0F), this.scrollbarGutterHeight())); // Set the offset for where to render the scrollbar.
-                    return true;
-                }
-            }
-        }
-        return super.mouseDragged(mouseX, mouseY, button, dragX, dragY, original);
-    }
-
-    @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY, boolean original) {
-        if (this.isScrollActive()) {
-            int i = 0;
-            int index = this.getSlotOffset() / this.scrollIncrement();
-            if (index != -1) {
-                i = index;
-            }
-            if (scrollY < 0) {
-                i = Math.min(i + 1, this.snapPoints.size() - 1);
-            } else if (scrollY > 0) {
-                i = Math.max(i - 1, 0);
-            }
-            this.scrollY = this.snapPoints.get(i); // Set the scrollbar offset to a specified snapping point position.
-        }
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY, original);
-    }
-
-    @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button, boolean original) {
         BestiaryEntry.Mutable entry = this.getEntryFromSlot(mouseX, mouseY);
         if (entry != null && (this.getSelectedEntry() == null || (entry.getEntityType().value() != this.getSelectedEntry().getEntityType().value())) && this.areAnyUnlocked(entry)) {
@@ -484,72 +433,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button, boolean original) {
-        this.scrolling = false;
-        return super.mouseReleased(mouseX, mouseY, button, original);
-    }
-
-    @Nullable
-    private BestiaryEntry.Mutable getEntryFromSlot(double mouseX, double mouseY) {
-        int slot = this.getSlotIndex(mouseX, mouseY);
-        if (slot != -1) {
-            int trueSlot = slot + this.getSlotOffset(); // Determines the true index to get from the list of Moa Skins, if there is a slot offset from scrolling.
-            if (trueSlot < this.orderedEntries.size()) {
-                return this.orderedEntries.get(trueSlot);
-            }
-        }
-        return null;
-    }
-
-    private int getSlotIndex(double mouseX, double mouseY) {
-        int leftPos = ((this.screen.width + 2) / 2) - Guidebook.PAGE_WIDTH;
-        int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
-        int slotLeft = leftPos + 42;
-        int slotTop = topPos + 59;
-        double mouseXDiff = mouseX - slotLeft;
-        double mouseYDiff = mouseY - slotTop;
-        int slot = ((int) (mouseXDiff / 18)) + (((int) (mouseYDiff / 18)) * 6);
-        return mouseYDiff < 108 && mouseYDiff > 0 && mouseXDiff < 108 && mouseXDiff > 0 ? slot : -1;
-    }
-
-    private int getSlotOffset() {
-        int offset = 0;
-        int index = this.snapPoints.indexOf(this.scrollY);
-        if (index != -1) {
-            offset = index;
-        } else {
-            for (int i = 0; i < this.snapPoints.size() - 1; i++) {
-                float currentPoint = this.snapPoints.get(i);
-                float nextPoint = this.snapPoints.get(i + 1);
-                float midway = currentPoint + ((nextPoint - currentPoint) / 2.0F);
-                if (this.scrollY > midway && this.scrollY < nextPoint) { // Closer to nextPoint.
-                    offset = i + 1;
-                } else if (this.scrollY <= midway && this.scrollY > currentPoint) { // Closer to currentPoint.
-                    offset = i;
-                }
-            }
-        }
-        return offset * this.scrollIncrement();
-    }
-
-    private boolean isScrollActive() {
-        return this.orderedEntries.size() > this.maxSlots();
-    }
-
-    private int scrollIncrement() {
-        return 6;
-    }
-
-    private float scrollbarHeight() {
-        return 9.0F;
-    }
-
-    private float scrollbarGutterHeight() {
-        return 106 - this.scrollbarHeight();
-    }
-
-    private int maxSlots() {
-        return 36;
+    public List<BestiaryEntry.Mutable> getOrderedEntries() {
+        return this.orderedEntries;
     }
 
     private boolean isUnlocked(BestiaryEntry.Mutable entry, String value) {
