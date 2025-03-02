@@ -2,12 +2,13 @@ package com.aetherteam.aetherii.client.renderer.entity.state;
 
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.core.Direction;
-import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
 
 public class SkephidRenderState extends LivingEntityRenderState {
-    public float attachChangeProgress;
-    public float prevAttachChangeProgress;
+    public Quaternionf prevRotations = new Quaternionf();
+    public Quaternionf rotations = new Quaternionf();
+
     public Direction attachDir = Direction.DOWN;
-    public double yO;
-    public Vec3 deltaMovement = Vec3.ZERO;
+    public float attachChangeProgress;
+
 }
