@@ -605,7 +605,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
                 .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
                 .put(TextureSlot.UP, TextureMapping.getBlockTexture(block, "_top"))
-                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_front"))
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_top"))
                 .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
                 .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
                 .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
@@ -619,7 +619,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
                 .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
                 .put(TextureSlot.UP, TextureMapping.getBlockTexture(top, "_top"))
-                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(top, "_front"))
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(top, "_top"))
                 .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
                 .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
                 .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
