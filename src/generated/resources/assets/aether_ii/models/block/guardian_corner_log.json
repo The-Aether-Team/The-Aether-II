@@ -4,7 +4,7 @@
     "down": "aether_ii:block/guardian_log",
     "east": "aether_ii:block/guardian_corner_log_left",
     "north": "aether_ii:block/guardian_corner_log_front",
-    "particle": "aether_ii:block/guardian_corner_log_side",
+    "particle": "aether_ii:block/guardian_corner_log_left",
     "south": "aether_ii:block/guardian_log",
     "up": "aether_ii:block/guardian_corner_log_top",
     "west": "aether_ii:block/guardian_corner_log_right"

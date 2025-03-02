@@ -602,7 +602,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
     public void createCornerLog(Block baseBlock, Block block) {
         TextureMapping mapping = (new TextureMapping())
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
                 .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
                 .put(TextureSlot.UP, TextureMapping.getBlockTexture(block, "_top"))
                 .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_front"))
@@ -616,7 +616,7 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
 
     public void createCornerLog(Block baseBlock, Block top, Block block) {
         TextureMapping mapping = (new TextureMapping())
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
                 .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
                 .put(TextureSlot.UP, TextureMapping.getBlockTexture(top, "_top"))
                 .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(top, "_front"))
