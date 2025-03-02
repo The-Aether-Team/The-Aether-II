@@ -8,9 +8,11 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
@@ -53,13 +55,15 @@ public class MultiTreeTrunkPlacer extends TrunkPlacer {
                     .toList().stream().noneMatch((offset) -> level.isStateAtPosition(heightmapPos.offset(offset), state -> state.is(BlockTags.LOGS)));
 
             if (this.isFree(level, heightmapPos) && noAdjacentTrees) {
-                setDirtAt(level, blockSetter, random, heightmapPos.below(), config);
+                if (level.isStateAtPosition(heightmapPos.below(), (state) -> Feature.isDirt(state) && !state.is(Blocks.GRASS_BLOCK) && !state.is(Blocks.MYCELIUM))) {
+                    setDirtAt(level, blockSetter, random, heightmapPos.below(), config);
 
-                for (int i = 0; i < freeTreeHeight; ++i) {
-                    this.placeLog(level, blockSetter, random, heightmapPos.above(i), config);
+                    for (int i = 0; i < freeTreeHeight; ++i) {
+                        this.placeLog(level, blockSetter, random, heightmapPos.above(i), config);
+                    }
+
+                    foliageAttachments.add(new FoliagePlacer.FoliageAttachment(heightmapPos.above(freeTreeHeight), 0, false));
                 }
-
-                foliageAttachments.add(new FoliagePlacer.FoliageAttachment(heightmapPos.above(freeTreeHeight), 0, false));
             }
         }
         return foliageAttachments;
