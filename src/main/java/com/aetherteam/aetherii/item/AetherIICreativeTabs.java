@@ -284,8 +284,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.GUARDIAN_WOOD.get());
                 output.accept(AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
                 output.accept(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.GUARDIAN_CORNER_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_CORNER_LOG.get());
                 output.accept(AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD.get());
                 output.accept(AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD.get());
                 output.accept(AetherIIBlocks.GUARDIAN_ROOTS.get());

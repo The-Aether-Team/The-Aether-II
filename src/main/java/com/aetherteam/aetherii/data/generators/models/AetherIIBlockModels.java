@@ -312,7 +312,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         // Guardian Dungeon Blocks
         this.woodProvider(AetherIIBlocks.GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.GUARDIAN_LOG.get()).wood(AetherIIBlocks.GUARDIAN_WOOD.get());
         this.woodProviderColumn(AetherIIBlocks.DENSE_GUARDIAN_LOG.get(), AetherIIBlocks.GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.DENSE_GUARDIAN_LOG.get()).wood(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
+        this.createCornerLog(AetherIIBlocks.GUARDIAN_LOG.get(), AetherIIBlocks.GUARDIAN_CORNER_LOG.get());
         this.woodProvider(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()).logWithHorizontal(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get()).wood(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+        this.createCornerLog(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get(), AetherIIBlocks.GUARDIAN_CORNER_LOG.get(), AetherIIBlocks.STRIPPED_GUARDIAN_CORNER_LOG.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD.get(), AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get(), AetherIIBlocks.GUARDIAN_LOG.get());
         this.createFacingTopBottomColumnWithHorizontalVariantGeneric(AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD.get(), AetherIIBlocks.GUARDIAN_LOG.get(), AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
         this.createTrivialCube(AetherIIBlocks.GUARDIAN_ROOTS.get());

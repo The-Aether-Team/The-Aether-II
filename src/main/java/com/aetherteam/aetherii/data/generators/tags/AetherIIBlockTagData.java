@@ -352,6 +352,14 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 BlockTags.TRAPDOORS,
                 BlockTags.FENCE_GATES
         );
+        this.tag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS).add(
+                AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_INFECTED_WOOD.get(),
+                AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get(),
+                AetherIIBlocks.LOCKED_INFECTED_ROOTS.get()
+        );
 
         // Vanilla
         this.tag(BlockTags.WOOL).add(
@@ -913,7 +921,50 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_SIGN.get(),
                 AetherIIBlocks.WISPROOT_WALL_SIGN.get(),
                 AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
-                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get()
+                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(),
+                AetherIIBlocks.GUARDIAN_LOG.get(),
+                AetherIIBlocks.GUARDIAN_WOOD.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.GUARDIAN_CORNER_LOG.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_CORNER_LOG.get(),
+                AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.DIM_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.GUARDIAN_LAMP.get(),
+                AetherIIBlocks.BASE_ROOTED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.TOP_ROOTED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.GUARDIAN_CORTEX.get(),
+                AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get(),
+                AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get(),
+                AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.INFECTED_LOG.get(),
+                AetherIIBlocks.INFECTED_WOOD.get(),
+                AetherIIBlocks.DENSE_INFECTED_LOG.get(),
+                AetherIIBlocks.DENSE_INFECTED_WOOD.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_LOG.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_WOOD.get(),
+                AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD.get(),
+                AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD.get(),
+                AetherIIBlocks.INFECTED_ROOTS.get(),
+                AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get(),
+                AetherIIBlocks.DIM_INFECTED_ROOTS.get(),
+                AetherIIBlocks.LUCENT_INFECTED_ROOTS.get(),
+                AetherIIBlocks.INFECTED_LAMP.get(),
+                AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get(),
+                AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get(),
+                AetherIIBlocks.INFECTED_CORTEX.get(),
+                AetherIIBlocks.BASE_INFECTED_CORTEX_WOOD.get(),
+                AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get(),
+                AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.ROTSHROOM_BLOCK.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),

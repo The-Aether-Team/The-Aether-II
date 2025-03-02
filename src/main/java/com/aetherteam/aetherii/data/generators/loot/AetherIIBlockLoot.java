@@ -512,10 +512,12 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Guardian Dungeon Blocks
         this.dropSelf(AetherIIBlocks.GUARDIAN_LOG.get());
         this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
+        this.dropSelf(AetherIIBlocks.GUARDIAN_CORNER_LOG.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_CORNER_LOG.get());
         this.dropSelf(AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_ROOTS.get());

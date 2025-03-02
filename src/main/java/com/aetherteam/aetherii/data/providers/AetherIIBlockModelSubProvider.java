@@ -22,6 +22,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -598,6 +599,33 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation location = ModelLocationUtils.getModelLocation(baseBlock);
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
         this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(itemBlock), this.modelOutput));
+    }
+    public void createCornerLog(Block baseBlock, Block block) {
+        TextureMapping mapping = (new TextureMapping())
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
+                .put(TextureSlot.UP, TextureMapping.getBlockTexture(block, "_top"))
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_front"))
+                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
+                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
+                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE.create(block, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE.create(ModelLocationUtils.getModelLocation(block, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(block, verticalLocation, horizontalLocation));
+    }
+
+    public void createCornerLog(Block baseBlock, Block top, Block block) {
+        TextureMapping mapping = (new TextureMapping())
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_side"))
+                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
+                .put(TextureSlot.UP, TextureMapping.getBlockTexture(top, "_top"))
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(top, "_front"))
+                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
+                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
+                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE.create(block, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE.create(ModelLocationUtils.getModelLocation(block, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(block, verticalLocation, horizontalLocation));
     }
 
     public void createUndergrowthVines(Block block) {

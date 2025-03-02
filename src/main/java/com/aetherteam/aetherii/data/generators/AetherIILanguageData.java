@@ -497,10 +497,12 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Guardian Dungeon Blocks
         this.addBlock(AetherIIBlocks.GUARDIAN_LOG, "Guardian Log");
         this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_LOG, "Dense Guardian Log");
-        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
         this.addBlock(AetherIIBlocks.GUARDIAN_WOOD, "Guardian Wood");
         this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD, "Dense Guardian Wood");
+        this.addBlock(AetherIIBlocks.GUARDIAN_CORNER_LOG, "Guardian Corner Log");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_LOG, "Stripped Guardian Log");
         this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD, "Stripped Guardian Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_CORNER_LOG, "Stripped Guardian Corner Log");
         this.addBlock(AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD, "Base Stripped Guardian Wood");
         this.addBlock(AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD, "Top Stripped Guardian Wood");
         this.addBlock(AetherIIBlocks.GUARDIAN_ROOTS, "Guardian Roots");
@@ -526,9 +528,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Infected Dungeon Blocks
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
         this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
-        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
         this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
         this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD, "Dense Infected Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
         this.addBlock(AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD, "Base Stripped Infected Wood");
         this.addBlock(AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD, "Top Stripped Infected Wood");
