@@ -511,8 +511,8 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Infected Guardian Tree
         // Guardian Dungeon Blocks
         this.dropSelf(AetherIIBlocks.GUARDIAN_LOG.get());
-        this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_WOOD.get());
+        this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
         this.dropSelf(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
         this.dropSelf(AetherIIBlocks.GUARDIAN_CORNER_LOG.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
@@ -539,11 +539,13 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
 
         // Infected Dungeon Blocks
         this.dropSelf(AetherIIBlocks.INFECTED_LOG.get());
-        this.dropSelf(AetherIIBlocks.DENSE_INFECTED_LOG.get());
-        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
         this.dropSelf(AetherIIBlocks.INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.DENSE_INFECTED_LOG.get());
         this.dropSelf(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.INFECTED_CORNER_LOG.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
         this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+        this.dropSelf(AetherIIBlocks.STRIPPED_INFECTED_CORNER_LOG.get());
         this.dropSelf(AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD.get());
         this.dropSelf(AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD.get());
         this.dropSelf(AetherIIBlocks.INFECTED_ROOTS.get());

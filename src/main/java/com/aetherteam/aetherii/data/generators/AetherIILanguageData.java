@@ -527,11 +527,13 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
 
         // Infected Dungeon Blocks
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
-        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
         this.addBlock(AetherIIBlocks.INFECTED_WOOD, "Infected Wood");
+        this.addBlock(AetherIIBlocks.DENSE_INFECTED_LOG, "Dense Infected Log");
         this.addBlock(AetherIIBlocks.DENSE_INFECTED_WOOD, "Dense Infected Wood");
+        this.addBlock(AetherIIBlocks.INFECTED_CORNER_LOG, "Infected Corner Log");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_LOG, "Stripped Infected Log");
         this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_WOOD, "Stripped Infected Wood");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_CORNER_LOG, "Stripped Infected Corner Log");
         this.addBlock(AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD, "Base Stripped Infected Wood");
         this.addBlock(AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD, "Top Stripped Infected Wood");
         this.addBlock(AetherIIBlocks.INFECTED_ROOTS, "Infected Roots");
