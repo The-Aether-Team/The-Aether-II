@@ -639,6 +639,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(VariantProperties.MODEL, location)).with(BlockModelGenerators.createHorizontalFacingDispatch()));
     }
 
+    public void createShelfRotshroomBlock(Block block, Block particle) {
+        ResourceLocation location = AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
+                .with(VariantProperties.MODEL, location)));
+    }
+
     public void createSecretDoor(Block block, Block base) {
         TextureMapping mapping = TextureMapping.door(TextureMapping.getBlockTexture(base), TextureMapping.getBlockTexture(base));
         ResourceLocation bottomLeft = ModelTemplates.DOOR_BOTTOM_LEFT.create(block, mapping, this.modelOutput);

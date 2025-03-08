@@ -263,6 +263,7 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate AMBRELINN_MOSS_VINE = create("template_ambrelinn_moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     public static final ModelTemplate UNDERGROWTH_VINES = create("template_undergrowth_vines", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     public static final ModelTemplate SHELF_ROTSHROOM = create("template_shelf_rotshroom", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_ROTSHROOM_BLOCK = create("template_shelf_rotshroom_block", TextureSlot.ALL, TextureSlot.PARTICLE);
     public static final ModelTemplate DOOR_BOTTOM_LEFT = create("door_bottom_left", "_bottom_left", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_LEFT_OPEN = create("door_bottom_left_open", "_bottom_left_open", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_RIGHT = create("door_bottom_right", "_bottom_right", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();

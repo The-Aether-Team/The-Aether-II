@@ -336,10 +336,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.LOCKED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_INFECTED_ROOTS.get());
-                output.accept(AetherIIBlocks.ROTSHROOM_BLOCK.get());
                 output.accept(AetherIIBlocks.ROTSHROOM.get());
                 output.accept(AetherIIBlocks.LARGE_ROTSHROOM.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
+                output.accept(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()

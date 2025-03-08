@@ -596,10 +596,10 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> LOCKED_INFECTED_ROOTS = register("locked_infected_roots", () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
 
     // Rotshroom Blocks
-    public static final DeferredBlock<Block> ROTSHROOM_BLOCK = register("rotshroom_block", () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
     public static final DeferredBlock<Block> ROTSHROOM = register("rotshroom", (properties) -> new MushroomBlock(TreeFeatures.HUGE_BROWN_MUSHROOM, properties), () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY)); //TODO
     public static final DeferredBlock<Block> LARGE_ROTSHROOM = register("large_rotshroom", (properties) -> new MushroomBlock(TreeFeatures.HUGE_BROWN_MUSHROOM, properties), () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY)); //TODO
     public static final DeferredBlock<Block> SHELF_ROTSHROOM = register("shelf_rotshroom", ShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
+    public static final DeferredBlock<Block> SHELF_ROTSHROOM_BLOCK = register("shelf_rotshroom_block", LargeShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
 
     // Potted Rotshrooms
     public static final DeferredBlock<FlowerPotBlock> POTTED_ROTSHROOM = registerWithoutItem("potted_rotshroom", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ROTSHROOM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
