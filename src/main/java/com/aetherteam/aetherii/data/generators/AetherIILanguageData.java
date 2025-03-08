@@ -557,14 +557,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LOCKED_INFECTED_ROOTS, "Locked Infected Roots");
 
         // Rotshroom Blocks
-        this.addBlock(AetherIIBlocks.ROTSHROOM, "Rotshroom");
-        this.addBlock(AetherIIBlocks.LARGE_ROTSHROOM, "Large Rotshroom");
+        this.addBlock(AetherIIBlocks.ROTSHROOM_TOADSTOOL, "Rotshroom Toadstool");
         this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM, "Shelf Rotshroom");
         this.addBlock(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK, "Shelf Rotshroom Block");
-
-        // Potted Rotshrooms
-        this.addBlock(AetherIIBlocks.POTTED_ROTSHROOM, "Potted Rotshroom");
-        this.addBlock(AetherIIBlocks.POTTED_LARGE_ROTSHROOM, "Potted Large Rotshroom");
 
         // Wool
         this.addBlock(AetherIIBlocks.CLOUDWOOL, "Cloudwool");

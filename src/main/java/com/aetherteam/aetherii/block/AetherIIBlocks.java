@@ -32,6 +32,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -596,14 +597,9 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> LOCKED_INFECTED_ROOTS = register("locked_infected_roots", () -> Block.Properties.ofFullCopy(INFECTED_ROOTS.get()).strength(-1.0F, 3600000.0F).noLootTable());
 
     // Rotshroom Blocks
-    public static final DeferredBlock<Block> ROTSHROOM = register("rotshroom", (properties) -> new MushroomBlock(TreeFeatures.HUGE_BROWN_MUSHROOM, properties), () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY)); //TODO
-    public static final DeferredBlock<Block> LARGE_ROTSHROOM = register("large_rotshroom", (properties) -> new MushroomBlock(TreeFeatures.HUGE_BROWN_MUSHROOM, properties), () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY)); //TODO
+    public static final DeferredBlock<Block> ROTSHROOM_TOADSTOOL = register("rotshroom_toadstool", RotshroomToadstoolBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).randomTicks().instabreak().offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> SHELF_ROTSHROOM = register("shelf_rotshroom", ShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> SHELF_ROTSHROOM_BLOCK = register("shelf_rotshroom_block", LargeShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
-
-    // Potted Rotshrooms
-    public static final DeferredBlock<FlowerPotBlock> POTTED_ROTSHROOM = registerWithoutItem("potted_rotshroom", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ROTSHROOM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
-    public static final DeferredBlock<FlowerPotBlock> POTTED_LARGE_ROTSHROOM = registerWithoutItem("potted_large_rotshroom", (properties) -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, LARGE_ROTSHROOM, properties), () -> Block.Properties.ofFullCopy(Blocks.FLOWER_POT));
 
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));
@@ -784,8 +780,6 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLUEBERRY_BUSH.get()), AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.BLUEBERRY_BUSH_STEM.get()), AetherIIBlocks.POTTED_BLUEBERRY_BUSH_STEM);
         pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.ORANGE_TREE.get()), AetherIIBlocks.POTTED_ORANGE_TREE);
-        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.ROTSHROOM.get()), AetherIIBlocks.POTTED_ROTSHROOM);
-        pot.addPlant(BuiltInRegistries.BLOCK.getKey(AetherIIBlocks.LARGE_ROTSHROOM.get()), AetherIIBlocks.POTTED_LARGE_ROTSHROOM);
     }
 
     public static void registerFlammability() {

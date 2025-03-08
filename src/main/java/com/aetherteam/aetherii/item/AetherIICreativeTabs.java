@@ -336,8 +336,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.LOCKED_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get());
                 output.accept(AetherIIBlocks.LOCKED_INFECTED_ROOTS.get());
-                output.accept(AetherIIBlocks.ROTSHROOM.get());
-                output.accept(AetherIIBlocks.LARGE_ROTSHROOM.get());
+                output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get());
             }).build());

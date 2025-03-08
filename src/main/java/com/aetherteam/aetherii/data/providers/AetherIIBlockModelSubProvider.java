@@ -633,14 +633,20 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
     }
 
-    public void createShelfRotshroom(Block block, Block particle) {
-        ResourceLocation location = AetherIIModelTemplates.SHELF_ROTSHROOM.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
+    public void createRotshroomToadstool(Block block) {
+        ResourceLocation location = AetherIIModelTemplates.ROTSHROOM_TOADSTOOL.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
+        this.registerSimpleFlatItemModel(block.asItem());
+    }
+
+    public void createShelfRotshroom(Block block, Item particle) {
+        ResourceLocation location = AetherIIModelTemplates.SHELF_ROTSHROOM.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
                 .with(VariantProperties.MODEL, location)).with(BlockModelGenerators.createHorizontalFacingDispatch()));
     }
 
-    public void createShelfRotshroomBlock(Block block, Block particle) {
-        ResourceLocation location = AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(particle)), this.modelOutput);
+    public void createShelfRotshroomBlock(Block block, Item particle) {
+        ResourceLocation location = AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
                 .with(VariantProperties.MODEL, location)));
     }

@@ -368,10 +368,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createLockedDungeonBlock(AetherIIBlocks.INFECTED_ROOTS.get(), AetherIIBlocks.LOCKED_INFECTED_ROOTS.get());
 
         // Rotshroom Blocks
-        this.createPlantWithDefaultItem(AetherIIBlocks.ROTSHROOM.get(), AetherIIBlocks.POTTED_ROTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        this.createPlantWithDefaultItem(AetherIIBlocks.LARGE_ROTSHROOM.get(), AetherIIBlocks.POTTED_LARGE_ROTSHROOM.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get(), AetherIIBlocks.LARGE_ROTSHROOM.get());
-        this.createShelfRotshroomBlock(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get(), AetherIIBlocks.LARGE_ROTSHROOM.get());
+        this.createRotshroomToadstool(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
+        this.createShelfRotshroom(AetherIIBlocks.SHELF_ROTSHROOM.get(), AetherIIBlocks.ROTSHROOM_TOADSTOOL.asItem());
+        this.createShelfRotshroomBlock(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get(), AetherIIBlocks.ROTSHROOM_TOADSTOOL.asItem());
 
         // Wool
         this.createFullAndCarpetBlocks(AetherIIBlocks.CLOUDWOOL.get(), AetherIIBlocks.CLOUDWOOL_CARPET.get());

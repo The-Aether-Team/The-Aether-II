@@ -1,0 +1,68 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"render_type": "minecraft:cutout",
+	"texture_size": [32, 32],
+	"elements": [
+		{
+			"from": [7, 0, 8],
+			"to": [9, 3, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 7, 1, 8.5], "texture": "#all"},
+				"east": {"uv": [0, 0, 0, 1.5], "texture": "#all"},
+				"south": {"uv": [0, 7, 1, 8.5], "texture": "#all"},
+				"west": {"uv": [0, 0, 0, 1.5], "texture": "#all"},
+				"up": {"uv": [1, 0, 0, 0], "texture": "#all"},
+				"down": {"uv": [1, 0, 0, 0], "texture": "#all"}
+			}
+		},
+		{
+			"from": [5, 3, 5],
+			"to": [11, 7, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 6, 7]},
+			"faces": {
+				"north": {"uv": [0, 5, 3, 7], "texture": "#all"},
+				"east": {"uv": [0, 5, 3, 7], "texture": "#all"},
+				"south": {"uv": [0, 5, 3, 7], "texture": "#all"},
+				"west": {"uv": [0, 5, 3, 7], "texture": "#all"},
+				"up": {"uv": [8, 3, 5, 0], "texture": "#all"},
+				"down": {"uv": [11, 0, 8, 3], "texture": "#all"}
+			}
+		},
+		{
+			"from": [3, 4, 3],
+			"to": [13, 4, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 4, 3]},
+			"faces": {
+				"north": {"uv": [0, 0, 5, 0], "texture": "#all"},
+				"east": {"uv": [0, 0, 5, 0], "texture": "#all"},
+				"south": {"uv": [0, 0, 5, 0], "texture": "#all"},
+				"west": {"uv": [0, 0, 5, 0], "texture": "#all"},
+				"up": {"uv": [5, 5, 0, 0], "texture": "#all"},
+				"down": {"uv": [5, 0, 0, 5], "texture": "#all"}
+			}
+		},
+		{
+			"from": [8, 0, 7],
+			"to": [8, 3, 9],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 1.5], "texture": "#all"},
+				"east": {"uv": [0, 7, 1, 8.5], "texture": "#all"},
+				"south": {"uv": [0, 0, 0, 1.5], "texture": "#all"},
+				"west": {"uv": [0, 7, 1, 8.5], "texture": "#all"},
+				"up": {"uv": [0, 1, 0, 0], "texture": "#all"},
+				"down": {"uv": [0, 0, 0, 1], "texture": "#all"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "group",
+			"origin": [3, 4, 3],
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		}
+	]
+}

@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class ShelfRotshroomBlock extends Block {
+public class ShelfRotshroomBlock extends BushBlock {
     public static final MapCodec<ShelfRotshroomBlock> CODEC = simpleCodec(ShelfRotshroomBlock::new);
     public static final EnumProperty<Direction> FACING;
     protected static final VoxelShape EAST_AABB;
