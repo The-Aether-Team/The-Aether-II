@@ -1,26 +1,22 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -29,9 +25,11 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
-public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo replace isSolid checks with something better and maybe shape test based.
+public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<TrunkBlock> CODEC = simpleCodec(TrunkBlock::new);
     public static final BooleanProperty TALL = BooleanProperty.create("tall");
     public static final EnumProperty<TrunkConnection> NORTH_CONNECTION = EnumProperty.create("north_connection", TrunkConnection.class);
@@ -43,24 +41,8 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
     public static final EnumProperty<TrunkCorner> SOUTHEAST_CONNECTION = EnumProperty.create("southeast_connection", TrunkCorner.class);
     public static final EnumProperty<TrunkCorner> SOUTHWEST_CONNECTION = EnumProperty.create("southwest_connection", TrunkCorner.class);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final VoxelShape CENTER_SHAPE = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 13.0F, 13.0F); //todo improve all of this
-    public static final VoxelShape NORTH_SHAPE = Block.box(3.0F, 0.0F, 0.0F, 13.0F, 13.0F, 3.0F);
-    public static final VoxelShape EAST_SHAPE = Block.box(13.0F, 0.0F, 3.0F, 16.0F, 13.0F, 13.0F);
-    public static final VoxelShape SOUTH_SHAPE = Block.box(3.0F, 0.0F, 13.0F, 13.0F, 13.0F, 16.0F);
-    public static final VoxelShape WEST_SHAPE = Block.box(0.0F, 0.0F, 3.0F, 3.0F, 13.0F, 13.0F);
-    public static final VoxelShape NORTHEAST_SHAPE = Block.box(13.0F, 0.0F, 0.0F, 16.0F, 13.0F, 3.0F);
-    public static final VoxelShape NORTHWEST_SHAPE = Block.box(0.0F, 0.0F, 0.0F, 3.0F, 13.0F, 3.0F);
-    public static final VoxelShape SOUTHEAST_SHAPE = Block.box(13.0F, 0.0F, 13.0F, 16.0F, 13.0F, 16.0F);
-    public static final VoxelShape SOUTHWEST_SHAPE = Block.box(0.0F, 0.0F, 13.0F, 3.0F, 13.0F, 16.0F);
-    public static final VoxelShape CENTER_TALL_SHAPE = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 16.0F, 13.0F);
-    public static final VoxelShape NORTH_TALL_SHAPE = Block.box(3.0F, 0.0F, 0.0F, 13.0F, 16.0F, 3.0F);
-    public static final VoxelShape EAST_TALL_SHAPE = Block.box(13.0F, 0.0F, 3.0F, 16.0F, 16.0F, 13.0F);
-    public static final VoxelShape SOUTH_TALL_SHAPE = Block.box(3.0F, 0.0F, 13.0F, 13.0F, 16.0F, 16.0F);
-    public static final VoxelShape WEST_TALL_SHAPE = Block.box(0.0F, 0.0F, 3.0F, 3.0F, 16.0F, 13.0F);
-    public static final VoxelShape NORTHEAST_TALL_SHAPE = Block.box(13.0F, 0.0F, 0.0F, 16.0F, 16.0F, 3.0F);
-    public static final VoxelShape NORTHWEST_TALL_SHAPE = Block.box(0.0F, 0.0F, 0.0F, 3.0F, 16.0F, 3.0F);
-    public static final VoxelShape SOUTHEAST_TALL_SHAPE = Block.box(13.0F, 0.0F, 13.0F, 16.0F, 16.0F, 16.0F);
-    public static final VoxelShape SOUTHWEST_TALL_SHAPE = Block.box(0.0F, 0.0F, 13.0F, 3.0F, 16.0F, 16.0F);
+    private static final List<EnumProperty<TrunkConnection>> SIDE_CONNECTIONS = List.of(NORTH_CONNECTION, EAST_CONNECTION, SOUTH_CONNECTION, WEST_CONNECTION);
+    private static final List<EnumProperty<TrunkCorner>> CORNER_CONNECTIONS = List.of(NORTHEAST_CONNECTION, NORTHWEST_CONNECTION, SOUTHEAST_CONNECTION, SOUTHWEST_CONNECTION);
     private final Map<BlockState, VoxelShape> shapeByIndex;
 
     public MapCodec<TrunkBlock> codec() {
@@ -80,10 +62,63 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
                 .setValue(SOUTHEAST_CONNECTION, TrunkCorner.NONE)
                 .setValue(SOUTHWEST_CONNECTION, TrunkCorner.NONE)
                 .setValue(WATERLOGGED, false));
-        this.shapeByIndex = this.makeShapes();
+        this.shapeByIndex = this.makeShapes(3.0F, 5.0F, 13.0F, 16.0F);
     }
 
-    private Map<BlockState, VoxelShape> makeShapes() {
+    private static VoxelShape applyCenterShape(VoxelShape baseShape, boolean property, VoxelShape lowShape, VoxelShape tallShape) {
+        if (property) {
+            return Shapes.or(baseShape, tallShape);
+        } else {
+            return Shapes.or(baseShape, lowShape);
+        }
+    }
+
+    private static VoxelShape applySideShape(VoxelShape baseShape, TrunkConnection property, VoxelShape lowShape, VoxelShape tallShape) {
+        if (property.isTall()) {
+            return Shapes.or(baseShape, tallShape);
+        } else {
+            return property == TrunkConnection.NONE ? baseShape : Shapes.or(baseShape, lowShape);
+        }
+    }
+
+    private static VoxelShape applyCornerShape(VoxelShape baseShape, TrunkCorner property, VoxelShape lowShape, VoxelShape tallShape) {
+        if (property == TrunkCorner.TALL) {
+            return Shapes.or(baseShape, tallShape);
+        } else {
+            return property == TrunkCorner.NONE ? baseShape : Shapes.or(baseShape, lowShape);
+        }
+    }
+
+    private Map<BlockState, VoxelShape> makeShapes(float width, float depth, float lowHeight, float tallHeight) {
+        float f = 8.0F - width;
+        float f1 = 8.0F + width;
+        float f2 = 8.0F - depth;
+        float f3 = 8.0F + depth;
+
+        VoxelShape centerShape = Block.box(f2, 0.0F, f2, f3, lowHeight, f3);
+
+        VoxelShape northShape = Block.box(f2, 0.0F, 0.0F, f3, lowHeight, f3);
+        VoxelShape southShape = Block.box(f2, 0.0F, f2, f3, lowHeight, 16.0F);
+        VoxelShape westShape = Block.box(0.0F, 0.0F, f2, f3, lowHeight, f3);
+        VoxelShape eastShape = Block.box(f2, 0.0F, f2, 16.0F, lowHeight, f3);
+
+        VoxelShape northwestShape = Block.box(0.0F, 0.0F, 0.0F, f, lowHeight, f);
+        VoxelShape northeastShape = Block.box(f1, 0.0F, 0.0F, 16.0F, lowHeight, f);
+        VoxelShape southwestShape = Block.box(0.0F, 0.0F, f1, f, lowHeight, 16.0F);
+        VoxelShape southeastShape = Block.box(f1, 0.0F, f1, 16.0F, lowHeight, 16.0F);
+
+        VoxelShape centerTallShape = Block.box(f2, 0.0F, f2, f3, tallHeight, f3);
+
+        VoxelShape northTallShape = Block.box(f2, 0.0F, 0.0F, f3, tallHeight, f3);
+        VoxelShape southTallShape = Block.box(f2, 0.0F, f2, f3, tallHeight, 16.0F);
+        VoxelShape westTallShape = Block.box(0.0F, 0.0F, f2, f3, tallHeight, f3);
+        VoxelShape eastTallShape = Block.box(f2, 0.0F, f2, 16.0F, tallHeight, f3);
+
+        VoxelShape northwestTallShape = Block.box(0.0F, 0.0F, 0.0F, f, tallHeight, f);
+        VoxelShape northeastTallShape = Block.box(f1, 0.0F, 0.0F, 16.0F, tallHeight, f);
+        VoxelShape southwestTallShape = Block.box(0.0F, 0.0F, f1, f, tallHeight, 16.0F);
+        VoxelShape southeastTallShape = Block.box(f1, 0.0F, f1, 16.0F, tallHeight, 16.0F);
+
         ImmutableMap.Builder<BlockState, VoxelShape> builder = ImmutableMap.builder();
         for (boolean tall : TALL.getPossibleValues()) {
             for (TrunkConnection north : NORTH_CONNECTION.getPossibleValues()) {
@@ -94,15 +129,20 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
                                 for (TrunkCorner northeast : NORTHEAST_CONNECTION.getPossibleValues()) {
                                     for (TrunkCorner southeast : SOUTHEAST_CONNECTION.getPossibleValues()) {
                                         for (TrunkCorner southwest : SOUTHWEST_CONNECTION.getPossibleValues()) {
-                                            VoxelShape shape = tall ? CENTER_TALL_SHAPE : CENTER_SHAPE;
-                                            if (north != TrunkConnection.NONE) shape = Shapes.or(shape, north.isTall() ? NORTH_TALL_SHAPE : NORTH_SHAPE);
-                                            if (east != TrunkConnection.NONE) shape = Shapes.or(shape, east.isTall() ? EAST_TALL_SHAPE : EAST_SHAPE);
-                                            if (south != TrunkConnection.NONE) shape = Shapes.or(shape, south.isTall() ? SOUTH_TALL_SHAPE : SOUTH_SHAPE);
-                                            if (west != TrunkConnection.NONE) shape = Shapes.or(shape, west.isTall() ? WEST_TALL_SHAPE : WEST_SHAPE);
-                                            if (northwest != TrunkCorner.NONE) shape = Shapes.or(shape, northwest == TrunkCorner.TALL ? NORTHWEST_TALL_SHAPE : NORTHWEST_SHAPE);
-                                            if (northeast != TrunkCorner.NONE) shape = Shapes.or(shape, northeast == TrunkCorner.TALL ? NORTHEAST_TALL_SHAPE : NORTHEAST_SHAPE);
-                                            if (southeast != TrunkCorner.NONE) shape = Shapes.or(shape, southeast == TrunkCorner.TALL ? SOUTHEAST_TALL_SHAPE : SOUTHEAST_SHAPE);
-                                            if (southwest != TrunkCorner.NONE) shape = Shapes.or(shape, southwest == TrunkCorner.TALL ? SOUTHWEST_TALL_SHAPE : SOUTHWEST_SHAPE);
+                                            VoxelShape shape = Shapes.empty();
+
+                                            shape = applyCenterShape(shape, tall, centerShape, centerTallShape);
+
+                                            shape = applySideShape(shape, north, northShape, northTallShape);
+                                            shape = applySideShape(shape, east, eastShape, eastTallShape);
+                                            shape = applySideShape(shape, south, southShape, southTallShape);
+                                            shape = applySideShape(shape, west, westShape, westTallShape);
+
+                                            shape = applyCornerShape(shape, northwest, northwestShape, northwestTallShape);
+                                            shape = applyCornerShape(shape, northeast, northeastShape, northeastTallShape);
+                                            shape = applyCornerShape(shape, southeast, southeastShape, southeastTallShape);
+                                            shape = applyCornerShape(shape, southwest, southwestShape, southwestTallShape);
+
                                             BlockState state = this.defaultBlockState()
                                                     .setValue(TALL, tall)
                                                     .setValue(NORTH_CONNECTION, north)
@@ -124,19 +164,74 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
                 }
             }
         }
-
         return builder.build();
+    }
+
+    @Nullable
+    protected static EnumProperty<TrunkConnection> getPropertyForDirection(Direction direction) {
+        switch (direction) {
+            case NORTH -> {
+                return NORTH_CONNECTION;
+            }
+            case SOUTH -> {
+                return SOUTH_CONNECTION;
+            }
+            case EAST -> {
+                return EAST_CONNECTION;
+            }
+            case WEST -> {
+                return WEST_CONNECTION;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
+    @Nullable
+    protected static EnumProperty<TrunkCorner> getPropertyForCorner(Direction direction1, Direction direction2) {
+        List<Direction> directions = List.of(direction1, direction2);
+        if (directions.contains(Direction.NORTH) && directions.contains(Direction.EAST)) {
+            return NORTHEAST_CONNECTION;
+        } else if (directions.contains(Direction.NORTH) && directions.contains(Direction.WEST)) {
+            return NORTHWEST_CONNECTION;
+        } else if (directions.contains(Direction.SOUTH) && directions.contains(Direction.EAST)) {
+            return SOUTHEAST_CONNECTION;
+        } else if (directions.contains(Direction.SOUTH) && directions.contains(Direction.WEST)) {
+            return SOUTHWEST_CONNECTION;
+        }
+        return null;
+    }
+
+    protected static List<Direction> getAdjacentDirections(Direction direction) {
+        switch (direction.getAxis()) {
+            case X -> {
+                return Arrays.asList(Direction.Axis.Z.getDirections());
+            }
+            case Z -> {
+                return Arrays.asList(Direction.Axis.X.getDirections());
+            }
+            default -> {
+                return List.of();
+            }
+        }
     }
 
     @Override
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = super.getStateForPlacement(context);
-        BlockPos blockPos = context.getClickedPos();
+        Level level = context.getLevel();
+        BlockPos pos = context.getClickedPos();
         if (state != null) {
-            return this.determineState(context.getLevel(), state, blockPos);
+            state = this.updateTop(state, level, level, pos, Direction.UP, pos.above(), level.getBlockState(pos.above()), context.getLevel().getRandom());
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                BlockPos relativePos = pos.relative(direction);
+                state = this.updateSides(state, level, level, pos, direction, relativePos, level.getBlockState(relativePos), context.getLevel().getRandom());
+                state = this.updateCorners(state, level, level, pos, direction, relativePos, level.getBlockState(relativePos), context.getLevel().getRandom());
+            }
         }
-        return null;
+        return state;
     }
 
     @Override
@@ -144,137 +239,92 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
         if (state.getValue(WATERLOGGED)) {
             scheduledTickAccess.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
         }
-        return this.sideUpdate(levelReader, currentPos, state, facingPos, facingState, facing);
+        if (facing == Direction.DOWN) {
+            return super.updateShape(state, levelReader, scheduledTickAccess, currentPos, facing, facingPos, facingState, randomSource);
+        } else {
+            if (facing == Direction.UP) {
+                state = this.updateTop(state, levelReader, scheduledTickAccess, currentPos, facing, facingPos, facingState, randomSource);
+            } else {
+                state = this.updateSides(state, levelReader, scheduledTickAccess, currentPos, facing, facingPos, facingState, randomSource);
+                state = this.updateCorners(state, levelReader, scheduledTickAccess, currentPos, facing, facingPos, facingState, randomSource);
+            }
+        }
+
+        return state;
     }
 
-    private BlockState sideUpdate(LevelReader levelReader, BlockPos currentPos, BlockState state, BlockPos facingPos, BlockState facingState, Direction facing) {
-        return this.determineState(levelReader, state, currentPos);
+    protected BlockState updateTop(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
+        state = state.setValue(TALL, !facingState.getShape(levelReader, facingPos).getFaceShape(facing.getOpposite()).isEmpty());
+
+        for (EnumProperty<TrunkConnection> connectionProperty : SIDE_CONNECTIONS) {
+            state = state.setValue(connectionProperty, tryRaiseConnection(state, levelReader, currentPos, connectionProperty, state.getValue(connectionProperty)));
+        }
+        for (EnumProperty<TrunkCorner> cornerProperty : CORNER_CONNECTIONS) {
+            state = state.setValue(cornerProperty, tryRaiseCorner(state, levelReader, currentPos, cornerProperty, state.getValue(cornerProperty)));
+        }
+
+        return state;
     }
 
-    public BlockState determineState(LevelReader level, BlockState state, BlockPos blockPos) { //todo find some way to simplify this with methods correlating direction to property states and stuff.
-        if (state != null) {
-            BlockState aboveState = level.getBlockState(blockPos.above());
-            if (aboveState.getBlock() instanceof TrunkBlock) {
-                state = state.setValue(TALL, true);
+    protected BlockState updateSides(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
+        EnumProperty<TrunkConnection> connection = getPropertyForDirection(facing);
+        if (connection != null) {
+            boolean connects = connectsTo(facingState, facingState.isFaceSturdy(levelReader, facingPos, Direction.SOUTH), facing);
+            TrunkConnection type = TrunkConnection.NONE;
+            if (connects) {
+                type =  tryRaiseConnection(state, levelReader, currentPos, connection, isShapeSideFull(levelReader, facing, facingPos, facingState) ? TrunkConnection.FULL : TrunkConnection.MATCHING);
             }
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                BlockPos relative = blockPos.relative(direction);
-                TrunkConnection connection = level.getBlockState(relative).getBlock() instanceof TrunkBlock ? TrunkConnection.MATCHING : level.getBlockState(relative).isSolid() ? TrunkConnection.FULL : TrunkConnection.NONE;
-                switch (direction) {
-                    case NORTH -> state = state.setValue(NORTH_CONNECTION, aboveState.getValueOrElse(NORTH_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? connection.tall() : connection);
-                    case EAST -> state = state.setValue(EAST_CONNECTION, aboveState.getValueOrElse(EAST_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? connection.tall() : connection);
-                    case SOUTH -> state = state.setValue(SOUTH_CONNECTION, aboveState.getValueOrElse(SOUTH_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? connection.tall() : connection);
-                    case WEST -> state = state.setValue(WEST_CONNECTION, aboveState.getValueOrElse(WEST_CONNECTION, TrunkConnection.NONE) != TrunkConnection.NONE ? connection.tall() : connection);
-                }
-            }
-            if (state.getValue(NORTH_CONNECTION).isFull() && state.getValue(EAST_CONNECTION).isFull()) state = state.setValue(NORTHEAST_CONNECTION, aboveState.getValueOrElse(NORTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-            if (state.getValue(NORTH_CONNECTION).isFull() && state.getValue(WEST_CONNECTION).isFull()) state = state.setValue(NORTHWEST_CONNECTION, aboveState.getValueOrElse(NORTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-            if (state.getValue(SOUTH_CONNECTION).isFull() && state.getValue(EAST_CONNECTION).isFull()) state = state.setValue(SOUTHEAST_CONNECTION, aboveState.getValueOrElse(SOUTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-            if (state.getValue(SOUTH_CONNECTION).isFull() && state.getValue(WEST_CONNECTION).isFull()) state = state.setValue(SOUTHWEST_CONNECTION, aboveState.getValueOrElse(SOUTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
+            state = state.setValue(connection, type);
+        }
+        return state;
+    }
 
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                BlockState relativeState = level.getBlockState(blockPos.relative(direction));
-                if (relativeState.getBlock() instanceof TrunkBlock) {
-                    switch (direction) {
-                        case NORTH -> {
-                            if (state.getValue(WEST_CONNECTION).isFull() && relativeState.getValue(WEST_CONNECTION).isFull()) state = state.setValue(NORTHWEST_CONNECTION, aboveState.getValueOrElse(NORTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                            if (state.getValue(EAST_CONNECTION).isFull() && relativeState.getValue(EAST_CONNECTION).isFull()) state = state.setValue(NORTHEAST_CONNECTION, aboveState.getValueOrElse(NORTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-
-                            BlockState clockwiseState = level.getBlockState(blockPos.relative(direction.getClockWise()));
-                            if (clockwiseState.getBlock() instanceof TrunkBlock) {
-                                if (state.getValue(NORTH_CONNECTION) != TrunkConnection.NONE && state.getValue(EAST_CONNECTION) != TrunkConnection.NONE
-                                        && relativeState.getValue(EAST_CONNECTION).isFull() && clockwiseState.getValue(NORTH_CONNECTION).isFull()) {
-                                    state = state.setValue(NORTHEAST_CONNECTION, aboveState.getValueOrElse(NORTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                                }
-                            }
-                            BlockState counterClockwiseState = level.getBlockState(blockPos.relative(direction.getCounterClockWise()));
-                            if (counterClockwiseState.getBlock() instanceof TrunkBlock) {
-                                if (state.getValue(NORTH_CONNECTION) != TrunkConnection.NONE && state.getValue(WEST_CONNECTION) != TrunkConnection.NONE
-                                        && relativeState.getValue(WEST_CONNECTION).isFull() && counterClockwiseState.getValue(NORTH_CONNECTION).isFull()) {
-                                    state = state.setValue(NORTHWEST_CONNECTION, aboveState.getValueOrElse(NORTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                                }
-                            }
-                        }
-                        case EAST -> {
-                            if (state.getValue(NORTH_CONNECTION).isFull() && relativeState.getValue(NORTH_CONNECTION).isFull()) state = state.setValue(NORTHEAST_CONNECTION, aboveState.getValueOrElse(NORTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                            if (state.getValue(SOUTH_CONNECTION).isFull() && relativeState.getValue(SOUTH_CONNECTION).isFull()) state = state.setValue(SOUTHEAST_CONNECTION, aboveState.getValueOrElse(SOUTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-
-                            BlockState clockwiseState = level.getBlockState(blockPos.relative(direction.getClockWise()));
-                            if (clockwiseState.getBlock() instanceof TrunkBlock) {
-                                if (state.getValue(EAST_CONNECTION) != TrunkConnection.NONE && state.getValue(NORTH_CONNECTION) != TrunkConnection.NONE
-                                        && relativeState.getValue(NORTH_CONNECTION).isFull() && clockwiseState.getValue(EAST_CONNECTION).isFull()) {
-                                    state = state.setValue(NORTHEAST_CONNECTION, aboveState.getValueOrElse(NORTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                                }
-                            }
-                            BlockState counterClockwiseState = level.getBlockState(blockPos.relative(direction.getCounterClockWise()));
-                            if (counterClockwiseState.getBlock() instanceof TrunkBlock) {
-                                if (state.getValue(EAST_CONNECTION) != TrunkConnection.NONE && state.getValue(SOUTH_CONNECTION) != TrunkConnection.NONE
-                                        && relativeState.getValue(SOUTH_CONNECTION).isFull() && counterClockwiseState.getValue(EAST_CONNECTION).isFull()) {
-                                    state = state.setValue(SOUTHEAST_CONNECTION, aboveState.getValueOrElse(SOUTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                                }
-                            }
-                        }
-                        case SOUTH -> {
-                            if (state.getValue(WEST_CONNECTION).isFull() && relativeState.getValue(WEST_CONNECTION).isFull()) state = state.setValue(SOUTHWEST_CONNECTION, aboveState.getValueOrElse(SOUTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                            if (state.getValue(EAST_CONNECTION).isFull() && relativeState.getValue(EAST_CONNECTION).isFull()) state = state.setValue(SOUTHEAST_CONNECTION, aboveState.getValueOrElse(SOUTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-
-                            BlockState clockwiseState = level.getBlockState(blockPos.relative(direction.getClockWise()));
-                            if (clockwiseState.getBlock() instanceof TrunkBlock) {
-                                if (state.getValue(SOUTH_CONNECTION) != TrunkConnection.NONE && state.getValue(WEST_CONNECTION) != TrunkConnection.NONE
-                                        && relativeState.getValue(WEST_CONNECTION).isFull() && clockwiseState.getValue(SOUTH_CONNECTION).isFull()) {
-                                    state = state.setValue(SOUTHWEST_CONNECTION, aboveState.getValueOrElse(SOUTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                                }
-                            }
-                            BlockState counterClockwiseState = level.getBlockState(blockPos.relative(direction.getCounterClockWise()));
-                            if (counterClockwiseState.getBlock() instanceof TrunkBlock) {
-                                if (state.getValue(SOUTH_CONNECTION) != TrunkConnection.NONE && state.getValue(EAST_CONNECTION) != TrunkConnection.NONE
-                                        && relativeState.getValue(EAST_CONNECTION).isFull() && counterClockwiseState.getValue(SOUTH_CONNECTION).isFull()) {
-                                    state = state.setValue(SOUTHEAST_CONNECTION, aboveState.getValueOrElse(SOUTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                                }
-                            }
-                        }
-                        case WEST -> {
-                            if (state.getValue(NORTH_CONNECTION).isFull() && relativeState.getValue(NORTH_CONNECTION).isFull()) state = state.setValue(NORTHWEST_CONNECTION, aboveState.getValueOrElse(NORTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                            if (state.getValue(SOUTH_CONNECTION).isFull() && relativeState.getValue(SOUTH_CONNECTION).isFull()) state = state.setValue(SOUTHWEST_CONNECTION, aboveState.getValueOrElse(SOUTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-
-                            BlockState clockwiseState = level.getBlockState(blockPos.relative(direction.getClockWise()));
-                            if (clockwiseState.getBlock() instanceof TrunkBlock) {
-                                if (state.getValue(WEST_CONNECTION) != TrunkConnection.NONE && state.getValue(SOUTH_CONNECTION) != TrunkConnection.NONE
-                                        && relativeState.getValue(SOUTH_CONNECTION).isFull() && clockwiseState.getValue(WEST_CONNECTION).isFull()) {
-                                    state = state.setValue(SOUTHWEST_CONNECTION, aboveState.getValueOrElse(SOUTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                                }
-                            }
-                            BlockState counterClockwiseState = level.getBlockState(blockPos.relative(direction.getCounterClockWise()));
-                            if (counterClockwiseState.getBlock() instanceof TrunkBlock) {
-                                if (state.getValue(WEST_CONNECTION) != TrunkConnection.NONE && state.getValue(NORTH_CONNECTION) != TrunkConnection.NONE
-                                        && relativeState.getValue(NORTH_CONNECTION).isFull() && counterClockwiseState.getValue(WEST_CONNECTION).isFull()) {
-                                    state = state.setValue(NORTHWEST_CONNECTION, aboveState.getValueOrElse(NORTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                                }
-                            }
+    protected BlockState updateCorners(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
+        // Side Case
+        for (Direction adjacent : getAdjacentDirections(facing)) {
+            EnumProperty<TrunkCorner> cornerProperty = getPropertyForCorner(facing, adjacent);
+            if (cornerProperty != null) {
+                EnumProperty<TrunkConnection> connectionProperty = getPropertyForDirection(adjacent);
+                if (connectionProperty != null) {
+                    if (facingState.getBlock() instanceof TrunkBlock) {
+                        if (state.getValue(connectionProperty).isFull() && facingState.getValue(connectionProperty).isFull()) {
+                            state = state.setValue(cornerProperty, tryRaiseCorner(state, levelReader, currentPos, cornerProperty, TrunkCorner.NORMAL));
+                            continue;
                         }
                     }
                 }
+                state = state.setValue(cornerProperty, TrunkCorner.NONE);
             }
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
-                BlockState relativeState = level.getBlockState(blockPos.relative(direction));
-                if (relativeState.getBlock() instanceof TrunkBlock) {
-                    switch (direction) {
-                        case NORTH -> {
-                            if (relativeState.getValue(SOUTHWEST_CONNECTION) != TrunkCorner.NONE) state = state.setValue(NORTHWEST_CONNECTION, aboveState.getValueOrElse(NORTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                            if (relativeState.getValue(SOUTHEAST_CONNECTION) != TrunkCorner.NONE) state = state.setValue(NORTHEAST_CONNECTION, aboveState.getValueOrElse(NORTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                        }
-                        case EAST -> {
-                            if (relativeState.getValue(NORTHWEST_CONNECTION) != TrunkCorner.NONE) state = state.setValue(NORTHEAST_CONNECTION, aboveState.getValueOrElse(NORTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                            if (relativeState.getValue(SOUTHWEST_CONNECTION) != TrunkCorner.NONE) state = state.setValue(SOUTHEAST_CONNECTION, aboveState.getValueOrElse(SOUTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                        }
-                        case SOUTH -> {
-                            if (relativeState.getValue(NORTHEAST_CONNECTION) != TrunkCorner.NONE) state = state.setValue(SOUTHEAST_CONNECTION, aboveState.getValueOrElse(SOUTHEAST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                            if (relativeState.getValue(NORTHWEST_CONNECTION) != TrunkCorner.NONE) state = state.setValue(SOUTHWEST_CONNECTION, aboveState.getValueOrElse(SOUTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                        }
-                        case WEST -> {
-                            if (relativeState.getValue(NORTHEAST_CONNECTION) != TrunkCorner.NONE) state = state.setValue(NORTHWEST_CONNECTION, aboveState.getValueOrElse(NORTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                            if (relativeState.getValue(SOUTHEAST_CONNECTION) != TrunkCorner.NONE) state = state.setValue(SOUTHWEST_CONNECTION, aboveState.getValueOrElse(SOUTHWEST_CONNECTION, TrunkCorner.NONE) != TrunkCorner.NONE ? TrunkCorner.TALL : TrunkCorner.NORMAL);
-                        }
+        }
+        // Interior Corner Case
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            Direction clockwise = direction.getClockWise();
+            boolean flag = isShapeSideFull(levelReader, direction, currentPos.relative(direction), levelReader.getBlockState(currentPos.relative(direction)))
+                    && isShapeSideFull(levelReader, clockwise, currentPos.relative(clockwise), levelReader.getBlockState(currentPos.relative(clockwise)));
+            EnumProperty<TrunkCorner> cornerProperty = getPropertyForCorner(direction, clockwise);
+            if (cornerProperty != null) {
+                state = state.setValue(cornerProperty, tryRaiseCorner(state, levelReader, currentPos, cornerProperty, flag ? TrunkCorner.NORMAL : TrunkCorner.NONE));
+            }
+        }
+        // Exterior Corner Case
+        for (Direction adjacent : getAdjacentDirections(facing)) {
+            BlockPos adjacentPos = currentPos.relative(adjacent);
+            BlockState adjacentState = levelReader.getBlockState(adjacentPos);
+            EnumProperty<TrunkConnection> facingConnectionProperty = getPropertyForDirection(facing);
+            EnumProperty<TrunkConnection> adjacentConnectionProperty = getPropertyForDirection(adjacent);
+            EnumProperty<TrunkCorner> cornerProperty = getPropertyForCorner(facing, adjacent);
+            EnumProperty<TrunkCorner> adjacentCornerProperty = getPropertyForCorner(facing, adjacent.getOpposite());
+            EnumProperty<TrunkCorner> facingCornerProperty = getPropertyForCorner(facing.getOpposite(), adjacent);
+            if (facingConnectionProperty != null && adjacentConnectionProperty != null && cornerProperty != null && adjacentCornerProperty != null && facingCornerProperty != null) {
+                boolean flag = facingState.getBlock() instanceof TrunkBlock && facingState.getValue(adjacentConnectionProperty).isFull()
+                        && adjacentState.getBlock() instanceof TrunkBlock && adjacentState.getValue(facingConnectionProperty).isFull();
+                state = state.setValue(cornerProperty, tryRaiseCorner(state, levelReader, currentPos, cornerProperty, flag ? TrunkCorner.NORMAL : TrunkCorner.NONE));
+                if (levelReader instanceof LevelAccessor levelAccessor && flag) {
+                    if (facingState.getBlock() instanceof TrunkBlock) {
+                        levelAccessor.setBlock(facingPos, facingState.setValue(facingCornerProperty, tryRaiseCorner(facingState, levelReader, facingPos, facingCornerProperty, TrunkCorner.NORMAL)), 3);
+                    }
+                    if (adjacentState.getBlock() instanceof TrunkBlock) {
+                        levelAccessor.setBlock(adjacentPos, adjacentState.setValue(adjacentCornerProperty, tryRaiseCorner(adjacentState, levelReader, adjacentPos, adjacentCornerProperty, TrunkCorner.NORMAL)), 3);
                     }
                 }
             }
@@ -282,6 +332,44 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
         return state;
     }
 
+    private static boolean connectsTo(BlockState state, boolean sideSolid, Direction direction) {
+        Block block = state.getBlock();
+        boolean flag = block instanceof FenceGateBlock && FenceGateBlock.connectsToDirection(state, direction);
+        return block instanceof TrunkBlock || state.is(BlockTags.WALLS) || !isExceptionForConnection(state) && sideSolid || block instanceof IronBarsBlock || flag;
+    }
+
+    private static boolean isShapeSideFull(LevelReader levelReader, Direction facing, BlockPos facingPos, BlockState facingState) {
+        VoxelShape facingShape = facingState.getShape(levelReader, facingPos);
+        return Block.isFaceFull(facingShape, facing);
+    }
+
+    private static TrunkConnection tryRaiseConnection(BlockState state, LevelReader levelReader, BlockPos pos, EnumProperty<TrunkConnection> connectionProperty, TrunkConnection connection) {
+        BlockPos facingPos = pos.above();
+        BlockState facingState = levelReader.getBlockState(facingPos);
+        if (state.getValue(connectionProperty) != TrunkConnection.NONE) {
+            if ((facingState.getBlock() instanceof TrunkBlock && facingState.getValue(connectionProperty) != TrunkConnection.NONE)
+                    || (!(facingState.getBlock() instanceof TrunkBlock) && !facingState.getShape(levelReader, facingPos).getFaceShape(Direction.DOWN).isEmpty())) {
+                return state.getValue(connectionProperty).tall();
+            } else {
+                return state.getValue(connectionProperty).normal();
+            }
+        }
+        return connection;
+    }
+
+    private static TrunkCorner tryRaiseCorner(BlockState state, LevelReader levelReader, BlockPos pos, EnumProperty<TrunkCorner> cornerProperty, TrunkCorner corner) {
+        BlockPos facingPos = pos.above();
+        BlockState facingState = levelReader.getBlockState(facingPos);
+        if (state.getValue(cornerProperty) != TrunkCorner.NONE) {
+            if ((facingState.getBlock() instanceof TrunkBlock && facingState.getValue(cornerProperty) != TrunkCorner.NONE)
+                    || (!(facingState.getBlock() instanceof TrunkBlock) && !facingState.getShape(levelReader, facingPos).getFaceShape(Direction.DOWN).isEmpty())) {
+                return TrunkCorner.TALL;
+            } else {
+                return TrunkCorner.NORMAL;
+            }
+        }
+        return corner;
+    }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -342,7 +430,21 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock { //todo
                     return FULL_TALL;
                 }
                 default -> {
-                    return NONE;
+                    return this;
+                }
+            }
+        }
+
+        public TrunkConnection normal() {
+            switch(this) {
+                case MATCHING_TALL -> {
+                    return MATCHING;
+                }
+                case FULL_TALL -> {
+                    return FULL;
+                }
+                default -> {
+                    return this;
                 }
             }
         }
