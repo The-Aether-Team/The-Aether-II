@@ -9,14 +9,13 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.util.TriState;
 
 public class RotshroomToadstoolBlock extends BushBlock {
     public static final MapCodec<RotshroomToadstoolBlock> CODEC = simpleCodec(RotshroomToadstoolBlock::new);
-    protected static final VoxelShape SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 7.0, 11.0);
+    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
 
     public RotshroomToadstoolBlock(Properties properties) {
         super(properties);
@@ -40,7 +39,6 @@ public class RotshroomToadstoolBlock extends BushBlock {
     }
 
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        Vec3 vec3 = state.getOffset(pos);
-        return SHAPE.move(vec3.x, vec3.y, vec3.z);
+        return SHAPE;
     }
 }

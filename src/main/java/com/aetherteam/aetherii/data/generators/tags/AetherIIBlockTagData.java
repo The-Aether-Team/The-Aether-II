@@ -1100,7 +1100,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get());
         this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(
                 AetherIIBlocks.FERROSITE_SAND.get(),
-                AetherIIBlocks.FERROSITE_MUD.get()
+                AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.INFECTED_ROOTS.get()
         );
 
 
