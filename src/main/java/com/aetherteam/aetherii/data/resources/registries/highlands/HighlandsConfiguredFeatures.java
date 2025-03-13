@@ -798,7 +798,8 @@ public class HighlandsConfiguredFeatures {
                                         UniformInt.of(4, 7),
                                         UniformInt.of(2, 4),
                                         0.1
-                                ))).build());
+                                ),
+                                new NoiseMossDecorator())).build());
         register(context, SHORT_SKYPLANE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),
