@@ -639,6 +639,12 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         this.registerSimpleFlatItemModel(block.asItem());
     }
 
+    public void createRotshroomToadstoolCluster(Block block) {
+        ResourceLocation location = AetherIIModelTemplates.ROTSHROOM_TOADSTOOL_CLUSTER.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)).with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        this.registerSimpleFlatItemModel(block.asItem());
+    }
+
     public void createRotshroomToadstool(Block block) {
         ResourceLocation location = AetherIIModelTemplates.ROTSHROOM_TOADSTOOL.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));

@@ -568,6 +568,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         // Rotshroom Blocks
         this.dropSelf(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
         this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
+        this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get());
 
