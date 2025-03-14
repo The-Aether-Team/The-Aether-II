@@ -153,6 +153,18 @@ public class HighlandsSpecialEffects extends DimensionSpecialEffects {
         g = (Math.min(color.getGreen() + 20, 255.0F) / 255.0F) * weatherMultiplier;
         b = (Math.min(color.getBlue() + 35, 255.0F) / 255.0F) * (float) Math.pow(weatherMultiplier, bluePower);
 
+        ClientLevel.ClientLevelData worldInfo = level.getLevelData();
+        double d0 = (Minecraft.getInstance().player.getEyePosition(partialTick).y - 66) * worldInfo.getClearColorScale();
+        if (d0 < 1.0) {
+            if (d0 < 0.0) {
+                d0 = 0.0;
+            }
+            d0 *= d0;
+            r *= (float) Math.clamp(d0, 0.15F, 1.0F);
+            g *= (float) Math.clamp(d0, 0.15F, 1.0F);
+            b *= (float) Math.clamp(d0 * 1.25F, 0.15F * 1.25F, 1.0F);
+        }
+
         vertexconsumer.addVertex(matrix4f, 0.0F, -16.0F, 0.0F).setColor(ARGB.colorFromFloat(1.0F, r, g, b));
         for (int i = -180; i <= 180; i += 9) {
             vertexconsumer.addVertex(matrix4f, Math.signum(-16.0F) * 512.0F * Mth.cos((float) i * (float) (Math.PI / 180.0)), -16.0F, 512.0F * Mth.sin((float) i * (float) (Math.PI / 180.0))).setColor(ARGB.colorFromFloat(0.0F, r, g, b));
