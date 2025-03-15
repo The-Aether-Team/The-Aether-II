@@ -233,6 +233,7 @@
         "Name": "aether_ii:irradiated_skyplane_leaves",
         "Properties": {
           "distance": "7",
+          "mossy_overlay": "none",
           "persistent": "false",
           "shade": "7",
           "snowy": "false",

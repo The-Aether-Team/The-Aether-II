@@ -288,6 +288,7 @@
         "Name": "aether_ii:skyplane_leaves",
         "Properties": {
           "distance": "7",
+          "mossy_overlay": "none",
           "persistent": "false",
           "snowy": "false",
           "waterlogged": "false"

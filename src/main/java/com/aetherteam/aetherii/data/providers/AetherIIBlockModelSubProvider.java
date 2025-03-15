@@ -352,10 +352,33 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     }
 
     public void createLeavesWithPiles(Block leaves, Block piles) {
-        TextureMapping snowMapping = AetherIITextureMappings.snowyLeaves(leaves);
         ResourceLocation defaultLocation = AetherIITexturedModels.LEAVES.create(leaves, this.modelOutput);
-        ResourceLocation snowyLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), snowMapping, this.modelOutput);
-        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(leaves).with(BlockModelGenerators.createBooleanModelDispatch(AetherLeavesBlock.SNOWY, snowyLocation, defaultLocation)));
+        ResourceLocation snowyLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), AetherIITextureMappings.snowyLeaves(leaves), this.modelOutput);
+        ResourceLocation bryalinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyLeaves(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput);
+        ResourceLocation shayelinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyLeaves(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput);
+        ResourceLocation ambrelinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyLeaves(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(leaves)
+                .with(PropertyDispatch.properties(AetherLeavesBlock.SNOWY, AetherLeavesBlock.MOSSY).generate((snowy, mossy) -> {
+                    if (snowy) {
+                        return Variant.variant().with(VariantProperties.MODEL, snowyLocation);
+                    } else {
+                        switch(mossy) {
+                            case BRYALINN -> {
+                                return Variant.variant().with(VariantProperties.MODEL, bryalinnLocation);
+                            }
+                            case SHAYELINN -> {
+                                return Variant.variant().with(VariantProperties.MODEL, shayelinnLocation);
+                            }
+                            case AMBRELINN -> {
+                                return Variant.variant().with(VariantProperties.MODEL, ambrelinnLocation);
+                            }
+                            default -> {
+                                return Variant.variant().with(VariantProperties.MODEL, defaultLocation);
+                            }
+                        }
+                    }
+                }))
+        );
         this.createPiles(piles, leaves);
     }
 

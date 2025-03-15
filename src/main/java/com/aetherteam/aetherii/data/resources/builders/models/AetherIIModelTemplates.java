@@ -125,6 +125,21 @@ public class AetherIIModelTemplates {
                     .face(Direction.WEST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(16, 0, 0, 16).cullface(Direction.EAST))
                     .face(Direction.EAST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(0, 0, 16, 16).cullface(Direction.EAST))
             ).build();
+    public static final ModelTemplate CUBE_TOP_BOTTOM_INNER_TOP = ModelTemplates.create("cube_bottom_top", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE).extend()
+            .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
+            .element((builder) -> builder
+                    .from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.texture(TextureSlot.BOTTOM).cullface(Direction.DOWN))
+                    .face(Direction.UP, (faceBuilder) -> faceBuilder.texture(TextureSlot.TOP).cullface(Direction.UP))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.NORTH))
+                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.SOUTH))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.WEST))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.EAST))
+            ).element((builder) -> builder
+                    .from(0.0F, 15.998F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.texture(TextureSlot.UP).uvs(0, 16, 16, 0).cullface(Direction.UP))
+                    .face(Direction.UP, (faceBuilder) -> faceBuilder.texture(TextureSlot.UP).uvs(0, 0, 16, 16).cullface(Direction.UP))
+            ).build();
     public static final ModelTemplate BUSH_BLOCK = ModelTemplates.create("cube", TextureSlot.TEXTURE, TextureSlot.PARTICLE, TextureSlot.CROSS).extend()
             .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
             .element((builder) -> builder

@@ -34,6 +34,14 @@ public class AetherIITextureMappings {
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(leaves, "_snowy"));
     }
 
+    public static TextureMapping mossyLeaves(Block leaves, Block moss, String suffix) {
+        return  new TextureMapping()
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(leaves))
+                .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(moss))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(leaves, "_" + suffix));
+    }
+
     public static TextureMapping tintedGrass(Block grass, Block dirt) {
         return new TextureMapping()
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(dirt))

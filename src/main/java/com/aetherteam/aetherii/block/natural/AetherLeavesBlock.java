@@ -3,30 +3,43 @@ package com.aetherteam.aetherii.block.natural;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.BushBlockAccessor;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.TriState;
 
+import java.util.Locale;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class AetherLeavesBlock extends LeavesBlock {
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
+    public static final EnumProperty<Mossy> MOSSY = EnumProperty.create("mossy_overlay", Mossy.class);
     private final Supplier<SimpleParticleType> leavesParticle;
     private final Supplier<Block> leavesPile;
 
@@ -34,7 +47,7 @@ public class AetherLeavesBlock extends LeavesBlock {
         super(properties);
         this.leavesParticle = leavesParticle;
         this.leavesPile = leavesPile;
-        this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE).setValue(MOSSY, Mossy.NONE));
     }
 
     @Override
@@ -115,7 +128,29 @@ public class AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
+    public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
+        Block plantBlock = plant.getBlock();
+        if (plantBlock instanceof BushBlock bushBlock && ((BushBlockAccessor) bushBlock).callMayPlaceOn(Blocks.GRASS_BLOCK.defaultBlockState(), level, soilPosition) && !plant.is(BlockTags.SAPLINGS)) {
+            return TriState.TRUE;
+        } else {
+            return super.canSustainPlant(state, level, soilPosition, facing, plant);
+        }
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(DISTANCE, PERSISTENT, WATERLOGGED, SNOWY);
+        pBuilder.add(DISTANCE, PERSISTENT, WATERLOGGED, SNOWY, MOSSY);
+    }
+
+    public enum Mossy implements StringRepresentable {
+        BRYALINN,
+        SHAYELINN,
+        AMBRELINN,
+        NONE;
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase(Locale.ROOT);
+        }
     }
 }

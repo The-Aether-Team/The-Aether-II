@@ -19,6 +19,7 @@
         "Name": "aether_ii:greatboa_leaves",
         "Properties": {
           "distance": "7",
+          "mossy_overlay": "none",
           "persistent": "false",
           "snowy": "false",
           "waterlogged": "false"

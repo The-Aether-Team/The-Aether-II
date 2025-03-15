@@ -23,6 +23,7 @@
         "Name": "aether_ii:skypine_leaves",
         "Properties": {
           "distance": "7",
+          "mossy_overlay": "none",
           "persistent": "false",
           "snowy": "false",
           "waterlogged": "false"

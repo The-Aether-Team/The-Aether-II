@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.block.natural.BottomedVineBlock;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
 import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
@@ -37,18 +38,19 @@ public class NoiseMossDecorator extends TreeDecorator {
                 BlockPos relativePos = pos.above();
                 if (heightmapPos.getY() == relativePos.getY()) {
                     double snowCalc = noise.compute(new DensityFunction.SinglePointContext(relativePos.getX(), relativePos.getY(), relativePos.getZ()));
-                    if (snowCalc >= -0.1F && worldGenLevel.getBlockState(relativePos).isAir()) {
-                        worldGenLevel.setBlock(relativePos, AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState(), 2);
-                        for (Direction direction : Direction.Plane.HORIZONTAL) {
-                            BlockPos offsetPos = pos.relative(direction);
-                            if (worldGenLevel.getBlockState(offsetPos).isAir()) {
-                                BlockState blockState = AetherIIBlocks.BRYALINN_MOSS_VINES.get().defaultBlockState().setValue(VineBlock.getPropertyForFace(direction.getOpposite()), true).setValue(BottomedVineBlock.AGE, 25 - worldGenLevel.getRandom().nextInt(2));
-                                MossDecorator.addHangingVine(context, offsetPos, blockState);
-                            } else if (worldGenLevel.getBlockState(offsetPos).is(AetherIIBlocks.BRYALINN_MOSS_VINES.get())) {
-                                BlockState blockState = worldGenLevel.getBlockState(offsetPos).setValue(VineBlock.getPropertyForFace(direction.getOpposite()), true).setValue(BottomedVineBlock.AGE, 25 - worldGenLevel.getRandom().nextInt(2));
-                                MossDecorator.addHangingVine(context, offsetPos, blockState);
-                            }
-                        }
+                    if (snowCalc >= -0.1F && worldGenLevel.getBlockState(relativePos).isAir() && worldGenLevel.getBlockState(pos).is(AetherIIBlocks.SKYPLANE_LEAVES)) {
+                        worldGenLevel.setBlock(pos, worldGenLevel.getBlockState(pos).setValue(AetherLeavesBlock.MOSSY, AetherLeavesBlock.Mossy.BRYALINN), 2); //todo test
+//                        worldGenLevel.setBlock(relativePos, AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState(), 2);
+//                        for (Direction direction : Direction.Plane.HORIZONTAL) {
+//                            BlockPos offsetPos = pos.relative(direction);
+//                            if (worldGenLevel.getBlockState(offsetPos).isAir()) {
+//                                BlockState blockState = AetherIIBlocks.BRYALINN_MOSS_VINES.get().defaultBlockState().setValue(VineBlock.getPropertyForFace(direction.getOpposite()), true).setValue(BottomedVineBlock.AGE, 25 - worldGenLevel.getRandom().nextInt(2));
+//                                MossDecorator.addHangingVine(context, offsetPos, blockState);
+//                            } else if (worldGenLevel.getBlockState(offsetPos).is(AetherIIBlocks.BRYALINN_MOSS_VINES.get())) {
+//                                BlockState blockState = worldGenLevel.getBlockState(offsetPos).setValue(VineBlock.getPropertyForFace(direction.getOpposite()), true).setValue(BottomedVineBlock.AGE, 25 - worldGenLevel.getRandom().nextInt(2));
+//                                MossDecorator.addHangingVine(context, offsetPos, blockState);
+//                            }
+//                        }
                     }
                 }
             }

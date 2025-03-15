@@ -60,6 +60,27 @@
         "gray": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_gray",
         "red": "aether_ii:entity/mobs/moa/color_palettes/keratin/moa_keratin_red"
       }
+    },
+    {
+      "type": "aether_ii:overlaid",
+      "textures": [
+        "aether_ii:block/skyroot_leaves",
+        "aether_ii:block/skyplane_leaves",
+        "aether_ii:block/skybirch_leaves",
+        "aether_ii:block/skyplane_leaves",
+        "aether_ii:block/wisproot_leaves",
+        "aether_ii:block/wisptop_leaves",
+        "aether_ii:block/greatroot_leaves",
+        "aether_ii:block/greatoak_leaves",
+        "aether_ii:block/greatboa_leaves",
+        "aether_ii:block/amberoot_leaves"
+      ],
+      "overlays": {
+        "snowy": "aether_ii:block/snowy_overlay",
+        "bryalinn": "aether_ii:block/bryalinn_overlay",
+        "shayelinn": "aether_ii:block/shayelinn_overlay",
+        "ambrelinn": "aether_ii:block/ambrelinn_overlay"
+      }
     }
   ]
 }
