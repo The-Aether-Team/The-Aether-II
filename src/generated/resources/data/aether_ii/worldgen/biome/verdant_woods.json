@@ -64,7 +64,6 @@
     ],
     [
       "aether_ii:moa_nest",
-      "aether_ii:verdant_woods_trees",
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
@@ -81,7 +80,8 @@
       "aether_ii:blueberry_bush_patch",
       "aether_ii:short_arilum",
       "aether_ii:arilum",
-      "aether_ii:blooming_arilum"
+      "aether_ii:blooming_arilum",
+      "aether_ii:verdant_woods_trees"
     ],
     [
       "aether_ii:high_storm_aercloud",

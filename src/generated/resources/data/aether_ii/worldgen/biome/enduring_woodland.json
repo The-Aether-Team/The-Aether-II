@@ -60,7 +60,6 @@
     [],
     [
       "aether_ii:moa_nest",
-      "aether_ii:enduring_woodland_trees",
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
@@ -69,7 +68,8 @@
       "aether_ii:coarse_aether_dirt_frosted_ceiling",
       "aether_ii:ice_overhang",
       "aether_ii:highlands_flower_patch",
-      "aether_ii:arctic_flower_patch"
+      "aether_ii:arctic_flower_patch",
+      "aether_ii:enduring_woodland_trees"
     ],
     [
       "aether_ii:freeze_top_layer_arctic",

@@ -63,7 +63,6 @@
     ],
     [
       "aether_ii:moa_nest",
-      "aether_ii:flourishing_field_trees",
       "aether_ii:grass_field",
       "aether_ii:valkyrie_sprout_patch",
       "aether_ii:highlands_bush_patch_field",
@@ -77,7 +76,8 @@
       "aether_ii:blueberry_bush_patch",
       "aether_ii:short_arilum",
       "aether_ii:arilum",
-      "aether_ii:blooming_arilum"
+      "aether_ii:blooming_arilum",
+      "aether_ii:flourishing_field_trees"
     ],
     [
       "aether_ii:high_storm_aercloud",
