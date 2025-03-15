@@ -81,6 +81,17 @@
         "shayelinn": "aether_ii:block/shayelinn_overlay",
         "ambrelinn": "aether_ii:block/ambrelinn_overlay"
       }
+    },
+    {
+      "type": "aether_ii:overlaid",
+      "textures": [
+        "aether_ii:block/woven_skyroot_sticks"
+      ],
+      "overlays": {
+        "bryalinn": "aether_ii:block/bryalinn_overlay",
+        "shayelinn": "aether_ii:block/shayelinn_overlay",
+        "ambrelinn": "aether_ii:block/ambrelinn_overlay"
+      }
     }
   ]
 }

@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
@@ -39,7 +40,7 @@ import java.util.function.Supplier;
 
 public class AetherLeavesBlock extends LeavesBlock {
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
-    public static final EnumProperty<Mossy> MOSSY = EnumProperty.create("mossy_overlay", Mossy.class);
+    public static final EnumProperty<AetherIIBlockStateProperties.Mossy> MOSSY = AetherIIBlockStateProperties.MOSSY;
     private final Supplier<SimpleParticleType> leavesParticle;
     private final Supplier<Block> leavesPile;
 
@@ -47,7 +48,7 @@ public class AetherLeavesBlock extends LeavesBlock {
         super(properties);
         this.leavesParticle = leavesParticle;
         this.leavesPile = leavesPile;
-        this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE).setValue(MOSSY, Mossy.NONE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE).setValue(MOSSY, AetherIIBlockStateProperties.Mossy.NONE));
     }
 
     @Override
@@ -83,6 +84,15 @@ public class AetherLeavesBlock extends LeavesBlock {
     @Override
     protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
         BlockState returnState = super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
+        if (direction == Direction.UP) {
+            if (neighborState.is(AetherIIBlocks.BRYALINN_MOSS_CARPET) || neighborState.is(AetherIIBlocks.BRYALINN_MOSS_BLOCK)) {
+                returnState = returnState.setValue(MOSSY, AetherIIBlockStateProperties.Mossy.BRYALINN);
+            } else if (neighborState.is(AetherIIBlocks.SHAYELINN_MOSS_CARPET) || neighborState.is(AetherIIBlocks.SHAYELINN_MOSS_BLOCK)) {
+                returnState = returnState.setValue(MOSSY, AetherIIBlockStateProperties.Mossy.SHAYELINN);
+            } else if (neighborState.is(AetherIIBlocks.AMBRELINN_MOSS_CARPET) || neighborState.is(AetherIIBlocks.AMBRELINN_MOSS_BLOCK)) {
+                returnState = returnState.setValue(MOSSY, AetherIIBlockStateProperties.Mossy.AMBRELINN);
+            }
+        }
         return direction == Direction.UP
                 ? returnState.setValue(SNOWY, neighborState.is(AetherIIBlocks.ARCTIC_SNOW) || neighborState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
                 : returnState;
@@ -138,19 +148,7 @@ public class AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(DISTANCE, PERSISTENT, WATERLOGGED, SNOWY, MOSSY);
-    }
-
-    public enum Mossy implements StringRepresentable {
-        BRYALINN,
-        SHAYELINN,
-        AMBRELINN,
-        NONE;
-
-        @Override
-        public String getSerializedName() {
-            return this.name().toLowerCase(Locale.ROOT);
-        }
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(DISTANCE, PERSISTENT, WATERLOGGED, SNOWY, MOSSY);
     }
 }

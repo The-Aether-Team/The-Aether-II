@@ -351,12 +351,35 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), Variant.variant().with(VariantProperties.MODEL, flowerbed4).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)));
     }
 
+    public void createWovenSticks(Block sticks) {
+        ResourceLocation defaultLocation = TexturedModel.CUBE.create(sticks, this.modelOutput);
+        ResourceLocation bryalinnLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(sticks, "_bryalinn"), AetherIITextureMappings.mossyTopped(sticks, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput);
+        ResourceLocation shayelinnLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(sticks, "_shayelinn"), AetherIITextureMappings.mossyTopped(sticks, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput);
+        ResourceLocation ambrelinnLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(sticks, "_ambrelinn"), AetherIITextureMappings.mossyTopped(sticks, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(sticks).with(PropertyDispatch.property(AetherLeavesBlock.MOSSY).generate((mossy) -> {
+            switch(mossy) {
+                case BRYALINN -> {
+                    return Variant.variant().with(VariantProperties.MODEL, bryalinnLocation);
+                }
+                case SHAYELINN -> {
+                    return Variant.variant().with(VariantProperties.MODEL, shayelinnLocation);
+                }
+                case AMBRELINN -> {
+                    return Variant.variant().with(VariantProperties.MODEL, ambrelinnLocation);
+                }
+                default -> {
+                    return Variant.variant().with(VariantProperties.MODEL, defaultLocation);
+                }
+            }
+        })));
+    }
+
     public void createLeavesWithPiles(Block leaves, Block piles) {
         ResourceLocation defaultLocation = AetherIITexturedModels.LEAVES.create(leaves, this.modelOutput);
         ResourceLocation snowyLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), AetherIITextureMappings.snowyLeaves(leaves), this.modelOutput);
-        ResourceLocation bryalinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyLeaves(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput);
-        ResourceLocation shayelinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyLeaves(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput);
-        ResourceLocation ambrelinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyLeaves(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput);
+        ResourceLocation bryalinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput);
+        ResourceLocation shayelinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput);
+        ResourceLocation ambrelinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(leaves)
                 .with(PropertyDispatch.properties(AetherLeavesBlock.SNOWY, AetherLeavesBlock.MOSSY).generate((snowy, mossy) -> {
                     if (snowy) {

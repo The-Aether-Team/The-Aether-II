@@ -25,7 +25,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 
 import java.util.*;
 
-public class ShroudedCanopyDecorator extends TreeDecorator {
+public class ShroudedCanopyDecorator extends TreeDecorator { //todo remove moss blocks and make canopies mossy based on the moss noise
     public static final MapCodec<ShroudedCanopyDecorator> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             BlockStateProvider.CODEC.fieldOf("canopy_top_state").forGetter((decorator) -> decorator.canopyTopState),
             BlockStateProvider.CODEC.fieldOf("canopy_branch_state").forGetter((decorator) -> decorator.canopyBranchState),

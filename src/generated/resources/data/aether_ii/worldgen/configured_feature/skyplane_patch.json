@@ -45,7 +45,10 @@
         "canopy_top_state": {
           "type": "minecraft:simple_state_provider",
           "state": {
-            "Name": "aether_ii:woven_skyroot_sticks"
+            "Name": "aether_ii:woven_skyroot_sticks",
+            "Properties": {
+              "mossy_overlay": "none"
+            }
           }
         },
         "moss_amount": {

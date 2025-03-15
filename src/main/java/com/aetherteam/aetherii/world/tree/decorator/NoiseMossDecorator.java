@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherLeavesBlock;
 import com.aetherteam.aetherii.block.natural.BottomedVineBlock;
@@ -39,7 +40,7 @@ public class NoiseMossDecorator extends TreeDecorator {
                 if (heightmapPos.getY() == relativePos.getY()) {
                     double snowCalc = noise.compute(new DensityFunction.SinglePointContext(relativePos.getX(), relativePos.getY(), relativePos.getZ()));
                     if (snowCalc >= -0.1F && worldGenLevel.getBlockState(relativePos).isAir() && worldGenLevel.getBlockState(pos).is(AetherIIBlocks.SKYPLANE_LEAVES)) {
-                        worldGenLevel.setBlock(pos, worldGenLevel.getBlockState(pos).setValue(AetherLeavesBlock.MOSSY, AetherLeavesBlock.Mossy.BRYALINN), 2); //todo test
+                        worldGenLevel.setBlock(pos, worldGenLevel.getBlockState(pos).setValue(AetherLeavesBlock.MOSSY, AetherIIBlockStateProperties.Mossy.BRYALINN), 2); //todo test
 //                        worldGenLevel.setBlock(relativePos, AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState(), 2);
 //                        for (Direction direction : Direction.Plane.HORIZONTAL) {
 //                            BlockPos offsetPos = pos.relative(direction);
