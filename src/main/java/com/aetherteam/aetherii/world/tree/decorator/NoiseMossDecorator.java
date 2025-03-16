@@ -47,7 +47,7 @@ public class NoiseMossDecorator extends TreeDecorator {
                     BlockPos groundPos = new BlockPos(xCoord, yCoord, zCoord).below();
                     if (worldGenLevel.getBlockState(groundPos.above()).isAir()) {
                         double snowCalc = noise.compute(new DensityFunction.SinglePointContext(groundPos.getX(), groundPos.getY(), groundPos.getZ()));
-                        if (snowCalc >= -0.75F) {
+                        if (snowCalc >= -1.0F) {
                             if ((context.leaves().contains(groundPos) && worldGenLevel.getBlockState(groundPos).is(AetherIIBlocks.SKYPLANE_LEAVES)) || worldGenLevel.getBlockState(groundPos).is(AetherIIBlocks.WOVEN_SKYROOT_STICKS)) {
                                 worldGenLevel.setBlock(groundPos, worldGenLevel.getBlockState(groundPos).setValue(AetherLeavesBlock.MOSSY, AetherIIBlockStateProperties.Mossy.BRYALINN), 2);
                                 for (Direction direction : Direction.Plane.HORIZONTAL) {

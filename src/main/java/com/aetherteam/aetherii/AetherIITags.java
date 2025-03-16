@@ -29,6 +29,7 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
+        public static final TagKey<Block> LEAVES = tag("leaves");
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
