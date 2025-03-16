@@ -44,7 +44,7 @@ public class AetherIITreeGrowers {
     public static final TreeGrower SKYBIRCH = new TreeGrower(
             "skybirch",
             Optional.empty(),
-            Optional.of(HighlandsConfiguredFeatures.SKYBIRCH),
+            Optional.of(HighlandsConfiguredFeatures.SKYBIRCH_SAPLING),
             Optional.empty()
     );
     public static final TreeGrower IRRADIATED_SKYBIRCH = new TreeGrower(

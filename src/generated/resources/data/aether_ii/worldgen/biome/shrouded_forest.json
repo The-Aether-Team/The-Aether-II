@@ -64,11 +64,13 @@
       "aether_ii:water_spring"
     ],
     [
+      "aether_ii:coarse_aether_dirt_surface",
       "aether_ii:shrouded_forest_trees",
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
       "aether_ii:highlands_bush_patch",
+      "aether_ii:bryalinn_flower_patch",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",

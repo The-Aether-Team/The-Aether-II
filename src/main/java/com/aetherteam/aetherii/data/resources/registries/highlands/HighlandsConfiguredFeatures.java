@@ -94,6 +94,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_FLOWER_PATCH = createKey("magnetic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARILUM = createKey("arilum");
@@ -242,6 +243,7 @@ public class HighlandsConfiguredFeatures {
     
     
     // Worldgen
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_SURFACE = createKey("coarse_aether_dirt_surface");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DISK_BRYALINN_MOSS = createKey("disk_bryalinn_moss");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> COAST_QUICKSOIL = createKey("coast_quicksoil");
@@ -404,6 +406,13 @@ public class HighlandsConfiguredFeatures {
         for (Direction facing : MossFlowersBlock.FACING.getPossibleValues()) {
             for (int amount : MossFlowersBlock.AMOUNT.getPossibleValues()) {
                 holpupea.add(AetherIIBlocks.HOLPUPEA.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, amount).setValue(MossFlowersBlock.FACING, facing), amount);
+            }
+        }
+
+        SimpleWeightedRandomList.Builder<BlockState> bryallinMossFlowers = SimpleWeightedRandomList.builder();
+        for (int i = 1; i <= 4; i++) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                bryallinMossFlowers.add(AetherIIBlocks.BRYALINN_MOSS_FLOWERS.get().defaultBlockState().setValue(MossFlowersBlock.AMOUNT, i).setValue(MossFlowersBlock.FACING, direction), 1);
             }
         }
 
@@ -658,6 +667,16 @@ public class HighlandsConfiguredFeatures {
                 )
         );
         register(context, MAGNETIC_SHROOM_PATCH, Feature.RANDOM_PATCH, FeatureUtils.simplePatchConfiguration(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(SimpleStateProvider.simple(AetherIIBlocks.MAGNETIC_SHROOM.get()))));
+        register(context,
+                BRYALINN_FLOWER_PATCH,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        96,
+                        7,
+                        3,
+                        PlacementUtils.filtered(AetherIIFeatures.AETHER_FLOWER.get(), new SimpleBlockConfiguration(new WeightedStateProvider(bryallinMossFlowers)), BlockPredicate.allOf(new MossyPredicate(Vec3i.ZERO.below()), BlockPredicate.replaceable(), BlockPredicate.noFluid()))
+                )
+        );
 
         register(context, SHORT_ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(0, 2), ConstantInt.of(0)));
         register(context, ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(1, 8), ConstantInt.of(0)));
@@ -789,13 +808,9 @@ public class HighlandsConfiguredFeatures {
                                 new ShroudedCanopyDecorator(
                                         BlockStateProvider.simple(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get().defaultBlockState()),
                                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_WOOD.get().defaultBlockState()),
-                                        BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get().defaultBlockState()),
                                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_CARPET.get().defaultBlockState()),
                                         BlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_VINES.get().defaultBlockState()),
-                                        new WeightedStateProvider(bryallinMossFlowers),
                                         UniformInt.of(2, 5),
-                                        UniformInt.of(3, 7),
-                                        UniformInt.of(1, 5),
                                         UniformInt.of(4, 7),
                                         UniformInt.of(2, 4),
                                         0.1
@@ -1669,6 +1684,23 @@ public class HighlandsConfiguredFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
 
+        register(
+                context,
+                COARSE_AETHER_DIRT_SURFACE,
+                Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON,
+                        BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(HOLYSTONE_ROCKS)),
+                        CaveSurface.FLOOR,
+                        UniformInt.of(1, 2),
+                        0.1F,
+                        2,
+                        0.0F,
+                        UniformInt.of(1, 4),
+                        0.75F
+                )
+        );
         register(context, DISK_BRYALINN_MOSS, Feature.DISK, new DiskConfiguration(
                 RuleBasedBlockStateProvider.simple(AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()), BlockPredicate.matchesTag(AetherIITags.Blocks.UNDERWATER_BRYALINN_REPLACEABLE), UniformInt.of(1, 2), 1
         ));

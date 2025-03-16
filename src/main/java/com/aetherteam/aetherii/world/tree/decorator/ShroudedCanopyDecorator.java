@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.tree.decorator;
 
-import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.BottomedVineBlock;
 import com.aetherteam.aetherii.data.resources.registries.highlands.HighlandsConfiguredFeatures;
 import com.google.common.collect.HashMultimap;
@@ -25,17 +24,13 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 
 import java.util.*;
 
-public class ShroudedCanopyDecorator extends TreeDecorator { //todo remove moss blocks and make canopies mossy based on the moss noise
+public class ShroudedCanopyDecorator extends TreeDecorator {
     public static final MapCodec<ShroudedCanopyDecorator> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             BlockStateProvider.CODEC.fieldOf("canopy_top_state").forGetter((decorator) -> decorator.canopyTopState),
             BlockStateProvider.CODEC.fieldOf("canopy_branch_state").forGetter((decorator) -> decorator.canopyBranchState),
-            BlockStateProvider.CODEC.fieldOf("moss_state").forGetter((decorator) -> decorator.mossState),
             BlockStateProvider.CODEC.fieldOf("moss_carpet_state").forGetter((decorator) -> decorator.mossCarpetState),
             BlockStateProvider.CODEC.fieldOf("moss_vine_state").forGetter((decorator) -> decorator.mossVineState),
-            BlockStateProvider.CODEC.fieldOf("moss_flower_state").forGetter((decorator) -> decorator.mossFlowerState),
             IntProvider.CODEC.fieldOf("canopy_radius").forGetter((decorator) -> decorator.canopyRadius),
-            IntProvider.CODEC.fieldOf("moss_radius").forGetter((decorator) -> decorator.mossRadius),
-            IntProvider.CODEC.fieldOf("moss_amount").forGetter((decorator) -> decorator.mossAmount),
             IntProvider.CODEC.fieldOf("branch_amount").forGetter((decorator) -> decorator.branchAmount),
             IntProvider.CODEC.fieldOf("branch_height").forGetter((decorator) -> decorator.branchHeight),
             Codec.doubleRange(0.0, 1.0).fieldOf("nest_chance").forGetter((decorator) -> decorator.nestChance)
@@ -43,27 +38,19 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo remove moss 
 
     private final BlockStateProvider canopyTopState;
     private final BlockStateProvider canopyBranchState;
-    private final BlockStateProvider mossState;
     private final BlockStateProvider mossCarpetState;
     private final BlockStateProvider mossVineState;
-    private final BlockStateProvider mossFlowerState;
     private final IntProvider canopyRadius;
-    private final IntProvider mossRadius;
-    private final IntProvider mossAmount;
     private final IntProvider branchAmount;
     private final IntProvider branchHeight;
     private final double nestChance;
 
-    public ShroudedCanopyDecorator(BlockStateProvider canopyTopState, BlockStateProvider canopyBranchState, BlockStateProvider mossState, BlockStateProvider mossCarpetState, BlockStateProvider mossVineState, BlockStateProvider mossFlowerState, IntProvider canopyRadius, IntProvider mossRadius, IntProvider mossAmount, IntProvider branchAmount, IntProvider branchHeight, double nestChance) {
+    public ShroudedCanopyDecorator(BlockStateProvider canopyTopState, BlockStateProvider canopyBranchState, BlockStateProvider mossCarpetState, BlockStateProvider mossVineState, IntProvider canopyRadius, IntProvider branchAmount, IntProvider branchHeight, double nestChance) {
         this.canopyTopState = canopyTopState;
         this.canopyBranchState = canopyBranchState;
-        this.mossState = mossState;
         this.mossCarpetState = mossCarpetState;
         this.mossVineState = mossVineState;
-        this.mossFlowerState = mossFlowerState;
         this.canopyRadius = canopyRadius;
-        this.mossRadius = mossRadius;
-        this.mossAmount = mossAmount;
         this.branchAmount = branchAmount;
         this.branchHeight = branchHeight;
         this.nestChance = nestChance;
@@ -113,8 +100,6 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo remove moss 
                 ConfiguredFeature<?, ?> nest = Objects.requireNonNull(worldGenLevel.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE).get(HighlandsConfiguredFeatures.MOA_NEST).orElse(null)).value();
                 nest.place(worldGenLevel, chunk, context.random(), center.above(2));
             }
-
-            this.createMoss(context, center, radius + 3, this.mossRadius.sample(context.random()), this.mossAmount.sample(context.random()));
         }
     }
 
@@ -126,29 +111,6 @@ public class ShroudedCanopyDecorator extends TreeDecorator { //todo remove moss 
                     BlockPos offset = center.offset(x, 0, z);
                     if (context.isAir(offset)) {
                         context.setBlock(offset, blockState);
-                    }
-                }
-            }
-        }
-    }
-
-    private void createMoss(Context context, BlockPos center, int offset, int radius, int amount) {
-        for (BlockPos start : BlockPos.randomBetweenClosed(context.random(), amount, center.getX() - offset, center.getY(), center.getZ() - offset, center.getX() + offset, center.getY() + 1, center.getZ() + offset)) {
-            for (int x = -radius; x <= radius; x++) {
-                for (int z = -radius; z <= radius; z++) {
-                    if (Math.pow(z, 2) + Math.pow(x, 2) <= Math.pow(radius + context.random().nextInt(2), 2)) {
-                        BlockPos offsetPos = start.offset(x, 0, z);
-                        if (context.isAir(offsetPos) && context.level().isStateAtPosition(offsetPos.below(), (blockState) -> blockState.is(AetherIIBlocks.WOVEN_SKYROOT_STICKS) || blockState.is(AetherIIBlocks.SKYPLANE_LEAVES))) {
-                            if (context.random().nextInt(4) == 0) {
-                                context.setBlock(offsetPos, this.mossFlowerState.getState(context.random(), offsetPos));
-                            } else {
-                                context.setBlock(offsetPos, this.mossCarpetState.getState(context.random(), offsetPos));
-                            }
-                            context.setBlock(offsetPos.below(), this.mossState.getState(context.random(), offsetPos.below()));
-                            if (context.random().nextInt(3) == 0) {
-                                this.createVines(context, offsetPos);
-                            }
-                        }
                     }
                 }
             }

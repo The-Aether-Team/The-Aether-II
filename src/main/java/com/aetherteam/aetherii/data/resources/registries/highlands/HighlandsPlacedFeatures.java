@@ -62,6 +62,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<PlacedFeature> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BONUS_MAGNETIC_SHROOM_PATCH = createKey("bonus_magnetic_shroom_patch");
+    public static final ResourceKey<PlacedFeature> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
 
     public static final ResourceKey<PlacedFeature> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<PlacedFeature> ARILUM = createKey("arilum");
@@ -133,6 +134,7 @@ public class HighlandsPlacedFeatures {
 
 
     // Worldgen
+    public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_SURFACE = createKey("coarse_aether_dirt_surface");
     public static final ResourceKey<PlacedFeature> DISK_BRYALINN_MOSS = createKey("disk_bryalinn_moss");
 
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = createKey("coast_quicksoil");
@@ -400,6 +402,11 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 PlacementUtils.FULL_RANGE,
                 BiomeFilter.biome());
+        register(context, BRYALINN_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BRYALINN_FLOWER_PATCH),
+                CountPlacement.of(2),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
+                BiomeFilter.biome());
 
         register(context, SHORT_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHORT_ARILUM),
                 PlacementUtils.countExtra(125, 0.2F, 25),
@@ -651,6 +658,13 @@ public class HighlandsPlacedFeatures {
     public static void bootstrapWorldgen(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
+        register(context, COARSE_AETHER_DIRT_SURFACE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_SURFACE),
+                CountPlacement.of(5),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                BiomeFilter.biome()
+        );
         register(context, DISK_BRYALINN_MOSS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.DISK_BRYALINN_MOSS),
                 CountPlacement.of(7),
                 InSquarePlacement.spread(),
