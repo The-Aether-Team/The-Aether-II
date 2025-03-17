@@ -571,6 +571,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM.get());
         this.dropSelf(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get());
+        this.dropSelf(AetherIIBlocks.FUNGAL_CARPET.get());
 
         // Wool
         this.dropSelf(AetherIIBlocks.CLOUDWOOL.get());
