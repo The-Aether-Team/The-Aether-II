@@ -23,17 +23,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -661,6 +656,38 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         ResourceLocation location = AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
                 .with(VariantProperties.MODEL, location)));
+    }
+
+    @Override
+    public void createMossyCarpet(Block block) {
+        ResourceLocation location = AetherIITexturedModels.CARPET_CUTOUT.create(block, this.modelOutput);
+        ResourceLocation locationTall = AetherIITexturedModels.MOSSY_CARPET_SIDE_CUTOUT.get(block).updateTextures((mapping) -> mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_tall"))).createWithSuffix(block, "_side_tall", this.modelOutput);
+        ResourceLocation locationSmall = AetherIITexturedModels.MOSSY_CARPET_SIDE_CUTOUT.get(block).updateTextures((mapping) -> mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_small"))).createWithSuffix(block, "_side_small", this.modelOutput);
+        MultiPartGenerator multipartgenerator = MultiPartGenerator.multiPart(block);
+        Condition.TerminalCondition condition = Condition.condition().term(MossyCarpetBlock.BASE, false);
+        multipartgenerator.with(Condition.condition().term(MossyCarpetBlock.BASE, true), Variant.variant().with(VariantProperties.MODEL, location));
+        multipartgenerator.with(condition, Variant.variant().with(VariantProperties.MODEL, location));
+        MULTIFACE_GENERATOR.stream().map(Pair::getFirst).forEach((p_386445_) -> {
+            EnumProperty<WallSide> wallProperty = MossyCarpetBlock.getPropertyForFace(p_386445_);
+            if (wallProperty != null && block.defaultBlockState().hasProperty(wallProperty)) {
+                condition.term(wallProperty, WallSide.NONE);
+            }
+
+        });
+
+        for (Pair<Direction, Function<ResourceLocation, Variant>> directionFunctionPair : MULTIFACE_GENERATOR) {
+            Pair<Direction, Function<ResourceLocation, Variant>> pair = directionFunctionPair;
+            Direction direction = pair.getFirst();
+            EnumProperty<WallSide> wallProperty = MossyCarpetBlock.getPropertyForFace(direction);
+            if (wallProperty != null) {
+                Function<ResourceLocation, Variant> function = pair.getSecond();
+                multipartgenerator.with(Condition.condition().term(wallProperty, WallSide.TALL), function.apply(locationTall));
+                multipartgenerator.with(Condition.condition().term(wallProperty, WallSide.LOW), function.apply(locationSmall));
+                multipartgenerator.with(condition, function.apply(locationTall));
+            }
+        }
+
+        this.blockStateOutput.accept(multipartgenerator);
     }
 
     public void createSecretDoor(Block block, Block base) {

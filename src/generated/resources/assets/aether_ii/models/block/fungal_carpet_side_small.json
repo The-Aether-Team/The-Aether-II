@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/mossy_carpet_side",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "side": "aether_ii:block/fungal_carpet_side_small"
+  }
+}

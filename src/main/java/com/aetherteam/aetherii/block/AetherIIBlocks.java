@@ -602,6 +602,7 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
     public static final DeferredBlock<Block> ROTSHROOM_TOADSTOOL_CLUSTER = register("rotshroom_toadstool_cluster", RotshroomClusterBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noOcclusion().randomTicks().instabreak().offsetType(BlockBehaviour.OffsetType.XZ).dynamicShape().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> SHELF_ROTSHROOM = register("shelf_rotshroom", ShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).noCollission().randomTicks().instabreak().sound(SoundType.FUNGUS).hasPostProcess(AetherIIBlocks::always).pushReaction(PushReaction.DESTROY));
     public static final DeferredBlock<Block> SHELF_ROTSHROOM_BLOCK = register("shelf_rotshroom_block", LargeShelfRotshroomBlock::new, () -> Block.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE).instrument(NoteBlockInstrument.BASS).strength(0.2F).sound(SoundType.WOOD).ignitedByLava());
+    public static final DeferredBlock<Block> FUNGAL_CARPET = register("fungal_carpet", FungalCarpetBlock::new, () -> BlockBehaviour.Properties.of().ignitedByLava().mapColor(MapColor.TERRACOTTA_ORANGE).strength(0.2F).sound(SoundType.FUNGUS).pushReaction(PushReaction.DESTROY));
 
     // Wool
     public static final DeferredBlock<Block> CLOUDWOOL = register("cloudwool", () -> Block.Properties.ofFullCopy(Blocks.WHITE_WOOL));

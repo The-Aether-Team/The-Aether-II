@@ -341,6 +341,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
                 output.accept(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.FUNGAL_CARPET.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()
