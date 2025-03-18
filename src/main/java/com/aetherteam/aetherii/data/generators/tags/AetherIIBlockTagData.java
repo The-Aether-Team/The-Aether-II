@@ -265,7 +265,16 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ACID_INSTANTLY_DESTROYS).addTags(BlockTags.LEAVES, AetherIITags.Blocks.AERCLOUDS);
         this.tag(AetherIITags.Blocks.ACID_QUICKLY_DESTROYS).addTags(BlockTags.DIRT, BlockTags.LOGS, BlockTags.PLANKS);
         this.tag(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);
-        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).add(
+        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).addTags( //TODO: find solutions so it doesn't trigger with unlit Blockstates
+                BlockTags.FIRE,
+                BlockTags.CANDLES,
+                BlockTags.CANDLE_CAKES,
+                BlockTags.CAMPFIRES
+        ).add(
+                Blocks.TORCH,
+                Blocks.WALL_TORCH,
+                Blocks.SOUL_TORCH,
+                Blocks.SOUL_WALL_TORCH,
                 AetherIIBlocks.AMBROSIUM_TORCH.get(),
                 AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON).add(
