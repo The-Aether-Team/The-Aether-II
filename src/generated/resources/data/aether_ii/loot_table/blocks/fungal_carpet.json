@@ -3,14 +3,23 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "aether_ii:fungal_carpet",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "bottom": "true"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
           "name": "aether_ii:fungal_carpet"
         }
       ],
