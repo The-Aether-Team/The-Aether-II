@@ -135,31 +135,31 @@ public class AetherIIItems {
     public static final DeferredItem<SwordItem> SKYROOT_SHORTSWORD = register("skyroot_shortsword", SkyrootShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> SKYROOT_HAMMER = register("skyroot_hammer", SkyrootHammerItem::new);
     public static final DeferredItem<TieredSpearItem> SKYROOT_SPEAR = register("skyroot_spear", SkyrootSpearItem::new);
-    public static final DeferredItem<CrossbowItem> SKYROOT_CROSSBOW = register("skyroot_crossbow", SkyrootCrossbowItem::new);
+    public static final DeferredItem<CrossbowItem> SKYROOT_CROSSBOW = register("skyroot_crossbow", SkyrootCrossbowItem::new, () -> new Item.Properties().enchantable(1));
     public static final DeferredItem<ShieldItem> SKYROOT_SHIELD = register("skyroot_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.SKYROOT, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(100)));
 
     public static final DeferredItem<SwordItem> HOLYSTONE_SHORTSWORD = register("holystone_shortsword", HolystoneShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> HOLYSTONE_HAMMER = register("holystone_hammer", HolystoneHammerItem::new);
     public static final DeferredItem<TieredSpearItem> HOLYSTONE_SPEAR = register("holystone_spear", HolystoneSpearItem::new);
-    public static final DeferredItem<CrossbowItem> HOLYSTONE_CROSSBOW = register("holystone_crossbow", HolystoneCrossbowItem::new);
+    public static final DeferredItem<CrossbowItem> HOLYSTONE_CROSSBOW = register("holystone_crossbow", HolystoneCrossbowItem::new, () -> new Item.Properties().enchantable(1));
     public static final DeferredItem<ShieldItem> HOLYSTONE_SHIELD = register("holystone_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.HOLYSTONE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(80)));
 
     public static final DeferredItem<SwordItem> ZANITE_SHORTSWORD = register("zanite_shortsword", ZaniteShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> ZANITE_HAMMER = register("zanite_hammer", ZaniteHammerItem::new);
     public static final DeferredItem<TieredSpearItem> ZANITE_SPEAR = register("zanite_spear", ZaniteSpearItem::new);
-    public static final DeferredItem<CrossbowItem> ZANITE_CROSSBOW = register("zanite_crossbow", ZaniteCrossbowItem::new);
+    public static final DeferredItem<CrossbowItem> ZANITE_CROSSBOW = register("zanite_crossbow", ZaniteCrossbowItem::new, () -> new Item.Properties().enchantable(1));
     public static final DeferredItem<ShieldItem> ZANITE_SHIELD = register("zanite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ZANITE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(60)));
 
     public static final DeferredItem<SwordItem> ARKENIUM_SHORTSWORD = register("arkenium_shortsword", ArkeniumShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> ARKENIUM_HAMMER = register("arkenium_hammer", ArkeniumHammerItem::new);
     public static final DeferredItem<TieredSpearItem> ARKENIUM_SPEAR = register("arkenium_spear", ArkeniumSpearItem::new);
-    public static final DeferredItem<CrossbowItem> ARKENIUM_CROSSBOW = register("arkenium_crossbow", ArkeniumCrossbowItem::new);
+    public static final DeferredItem<CrossbowItem> ARKENIUM_CROSSBOW = register("arkenium_crossbow", ArkeniumCrossbowItem::new, () -> new Item.Properties().enchantable(1));
     public static final DeferredItem<ShieldItem> ARKENIUM_SHIELD = register("arkenium_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.ARKENIUM, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(60)));
 
     public static final DeferredItem<SwordItem> GRAVITITE_SHORTSWORD = register("gravitite_shortsword", GravititeShortswordItem::new);
     public static final DeferredItem<TieredHammerItem> GRAVITITE_HAMMER = register("gravitite_hammer", GravititeHammerItem::new);
     public static final DeferredItem<TieredSpearItem> GRAVITITE_SPEAR = register("gravitite_spear", GravititeSpearItem::new);
-    public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = register("gravitite_crossbow", GravititeCrossbowItem::new);
+    public static final DeferredItem<CrossbowItem> GRAVITITE_CROSSBOW = register("gravitite_crossbow", GravititeCrossbowItem::new, () -> new Item.Properties().enchantable(1));
     public static final DeferredItem<ShieldItem> GRAVITITE_SHIELD = register("gravitite_shield", (properties) -> new TieredShieldItem(AetherIIItemTiers.GRAVITITE, properties), () -> new Item.Properties().attributes(TieredShieldItem.createAttributes(40)));
 
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
