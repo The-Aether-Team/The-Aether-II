@@ -11,9 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MossyCarpetBlock;
@@ -130,6 +128,16 @@ public class FungalCarpetBlock extends MossyCarpetBlock {
             return hasFaces(stateUpdated) && stateUpdated != stateAbove ? stateUpdated : Blocks.AIR.defaultBlockState();
         } else {
             return Blocks.AIR.defaultBlockState();
+        }
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (!state.canSurvive(level, pos)) {
+            return Blocks.AIR.defaultBlockState();
+        } else {
+            BlockState stateUpdated = getUpdatedState(state, level, pos, false);
+            return !hasFaces(stateUpdated) ? Blocks.AIR.defaultBlockState() : stateUpdated;
         }
     }
 
