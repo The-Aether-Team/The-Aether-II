@@ -7,6 +7,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -164,5 +165,13 @@ public class FungalCarpetBlock extends MossyCarpetBlock {
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BASE, NORTH, EAST, SOUTH, WEST);
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        BlockState stateTop = createTopperWithSideChance(level, pos, () -> true);
+        if (!stateTop.isAir()) {
+            level.setBlock(pos.above(), stateTop, 3);
+        }
     }
 }
