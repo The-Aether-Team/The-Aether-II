@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.AetherII;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -224,12 +225,12 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         if (state != null) {
-            state = this.updateTop(state, level, level, pos, Direction.UP, pos.above(), level.getBlockState(pos.above()), context.getLevel().getRandom());
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockPos relativePos = pos.relative(direction);
                 state = this.updateSides(state, level, level, pos, direction, relativePos, level.getBlockState(relativePos), context.getLevel().getRandom());
                 state = this.updateCorners(state, level, level, pos, direction, relativePos, level.getBlockState(relativePos), context.getLevel().getRandom());
             }
+            state = this.updateTop(state, level, level, pos, Direction.UP, pos.above(), level.getBlockState(pos.above()), context.getLevel().getRandom());
         }
         return state;
     }
