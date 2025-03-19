@@ -335,13 +335,12 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
 
     private static boolean connectsTo(BlockState state, boolean sideSolid, Direction direction) {
         Block block = state.getBlock();
-        boolean flag = block instanceof FenceGateBlock && FenceGateBlock.connectsToDirection(state, direction);
-        return block instanceof TrunkBlock || state.is(BlockTags.WALLS) || !isExceptionForConnection(state) && sideSolid || block instanceof IronBarsBlock || flag;
+        return block instanceof TrunkBlock || !isExceptionForConnection(state) && sideSolid;
     }
 
     private static boolean isShapeSideFull(LevelReader levelReader, Direction facing, BlockPos facingPos, BlockState facingState) {
         VoxelShape facingShape = facingState.getShape(levelReader, facingPos);
-        return Block.isFaceFull(facingShape, facing);
+        return Block.isFaceFull(facingShape, facing) && !isExceptionForConnection(facingState);
     }
 
     private static TrunkConnection tryRaiseConnection(BlockState state, LevelReader levelReader, BlockPos pos, EnumProperty<TrunkConnection> connectionProperty, TrunkConnection connection) {
