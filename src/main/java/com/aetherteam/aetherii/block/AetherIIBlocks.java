@@ -746,6 +746,8 @@ public class AetherIIBlocks extends AetherIIBlockBuilders {
                 return new SignItem(WISPROOT_SIGN.get(), WISPROOT_WALL_SIGN.get(), properties.stacksTo(16));
             } else if (block == WISPROOT_HANGING_SIGN) {
                 return new HangingSignItem(WISPROOT_HANGING_SIGN.get(), WISPROOT_WALL_HANGING_SIGN.get(), properties.stacksTo(16));
+            } else if (block == SKYROOT_BED) {
+                return new BedItem(SKYROOT_BED.get(), properties.stacksTo(1));
             } else {
                 return new BlockItem(block.get(), properties);
             }
