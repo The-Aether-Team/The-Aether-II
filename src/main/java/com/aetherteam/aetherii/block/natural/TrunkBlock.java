@@ -275,6 +275,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
             if (connects) {
                 type =  tryRaiseConnection(state, levelReader, currentPos, connection, isShapeSideFull(levelReader, facing, facingPos, facingState) ? TrunkConnection.FULL : TrunkConnection.MATCHING);
             }
+//            AetherII.LOGGER.info(currentPos + " " + type + " " + connection);
             state = state.setValue(connection, type);
         }
         return state;
@@ -346,15 +347,12 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     private static TrunkConnection tryRaiseConnection(BlockState state, LevelReader levelReader, BlockPos pos, EnumProperty<TrunkConnection> connectionProperty, TrunkConnection connection) {
         BlockPos facingPos = pos.above();
         BlockState facingState = levelReader.getBlockState(facingPos);
-        if (state.getValue(connectionProperty) != TrunkConnection.NONE) {
-            if ((facingState.getBlock() instanceof TrunkBlock && facingState.getValue(connectionProperty) != TrunkConnection.NONE)
-                    || (!(facingState.getBlock() instanceof TrunkBlock) && !facingState.getShape(levelReader, facingPos).getFaceShape(Direction.DOWN).isEmpty())) {
-                return state.getValue(connectionProperty).tall();
-            } else {
-                return state.getValue(connectionProperty).normal();
-            }
+        if ((facingState.getBlock() instanceof TrunkBlock && facingState.getValue(connectionProperty) != TrunkConnection.NONE)
+                || (!(facingState.getBlock() instanceof TrunkBlock) && !facingState.getShape(levelReader, facingPos).getFaceShape(Direction.DOWN).isEmpty())) {
+            return connection.tall();
+        } else {
+            return connection.normal();
         }
-        return connection;
     }
 
     private static TrunkCorner tryRaiseCorner(BlockState state, LevelReader levelReader, BlockPos pos, EnumProperty<TrunkCorner> cornerProperty, TrunkCorner corner) {
