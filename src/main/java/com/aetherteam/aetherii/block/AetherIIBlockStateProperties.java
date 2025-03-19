@@ -10,4 +10,5 @@ public class AetherIIBlockStateProperties {
     public static final BooleanProperty ALTAR_CHARGING = BooleanProperty.create("charging");
     public static final BooleanProperty ALTAR_BLASTING = BooleanProperty.create("blasting");
     public static final BooleanProperty BRETTL_GROWN = BooleanProperty.create("grown");
+    public static final BooleanProperty REINFORCED =  BooleanProperty.create("reinforced");
 }

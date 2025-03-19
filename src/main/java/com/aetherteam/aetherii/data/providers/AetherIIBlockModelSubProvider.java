@@ -22,17 +22,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.block.state.properties.DripstoneThickness;
+import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -124,6 +120,36 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top, "_top"))
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom, "_top"));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(side, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, verticalLocation, horizontalLocation));
+    }
+
+    public void createFacingTopBottomColumnWithHorizontalVariantGeneric(Block side, Block top, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(side, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, verticalLocation, horizontalLocation));
+    }
+
+    public void createFacingTopBottomColumnWithHorizontalVariantGeneric(Block side, Block top, String suffix, Block bottom) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top, suffix))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(side, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, verticalLocation, horizontalLocation));
+    }
+
+    public void createFacingTopBottomColumnWithHorizontalVariantGeneric(Block side, Block top, Block bottom, String suffix) {
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(side))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(top))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(bottom, suffix));
         ResourceLocation verticalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(side, mapping, this.modelOutput);
         ResourceLocation horizontalLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(side, "_horizontal"), mapping, this.modelOutput);
         this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(side, verticalLocation, horizontalLocation));
@@ -556,6 +582,112 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
             }
         })));
         this.registerSimpleFlatItemModel(rock.asItem());
+    }
+
+    public void createLockedDungeonBlock(Block baseBlock, Block block) {
+        ResourceLocation location = ModelLocationUtils.getModelLocation(baseBlock);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
+        this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(baseBlock), this.modelOutput));
+    }
+
+    public void createLockedDungeonBlock(Block baseBlock, Block itemBlock, Block block) {
+        ResourceLocation location = ModelLocationUtils.getModelLocation(baseBlock);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
+        this.registerSimpleItemModel(block.asItem(), AetherIIModelTemplates.LOCKED_BLOCK_INVENTORY.create(block.asItem(), AetherIITextureMappings.lockedBlockInventory(itemBlock), this.modelOutput));
+    }
+    public void createCornerLog(Block baseBlock, Block block) {
+        TextureMapping mapping = (new TextureMapping())
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
+                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
+                .put(TextureSlot.UP, TextureMapping.getBlockTexture(block, "_top"))
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(block, "_top"))
+                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
+                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
+                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE.create(block, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE.create(ModelLocationUtils.getModelLocation(block, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(block, verticalLocation, horizontalLocation));
+    }
+
+    public void createCornerLog(Block baseBlock, Block top, Block block) {
+        TextureMapping mapping = (new TextureMapping())
+                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block, "_left"))
+                .put(TextureSlot.DOWN, TextureMapping.getBlockTexture(baseBlock))
+                .put(TextureSlot.UP, TextureMapping.getBlockTexture(top, "_top"))
+                .put(TextureSlot.NORTH, TextureMapping.getBlockTexture(top, "_top"))
+                .put(TextureSlot.EAST, TextureMapping.getBlockTexture(block, "_left"))
+                .put(TextureSlot.SOUTH, TextureMapping.getBlockTexture(baseBlock))
+                .put(TextureSlot.WEST, TextureMapping.getBlockTexture(block, "_right"));
+        ResourceLocation verticalLocation = ModelTemplates.CUBE.create(block, mapping, this.modelOutput);
+        ResourceLocation horizontalLocation = ModelTemplates.CUBE.create(ModelLocationUtils.getModelLocation(block, "_horizontal"), mapping, this.modelOutput);
+        this.blockStateOutput.accept(createFacingColumnWithHorizontalVariant(block, verticalLocation, horizontalLocation));
+    }
+
+    public void createUndergrowthVines(Block block) {
+        ResourceLocation location = AetherIIModelTemplates.UNDERGROWTH_VINES.create(block, AetherIITextureMappings.vine(TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(block)), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
+    }
+
+    public void createRotshroomCluster(Block block) {
+        ResourceLocation location = AetherIIModelTemplates.ROTSHROOM_CLUSTER.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)).with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        this.registerSimpleFlatItemModel(block.asItem());
+    }
+
+    public void createRotshroomToadstoolCluster(Block block) {
+        ResourceLocation location = AetherIIModelTemplates.ROTSHROOM_TOADSTOOL_CLUSTER.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)).with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        this.registerSimpleFlatItemModel(block.asItem());
+    }
+
+    public void createRotshroomToadstool(Block block) {
+        ResourceLocation location = AetherIIModelTemplates.ROTSHROOM_TOADSTOOL.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem())), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, location)));
+        this.registerSimpleFlatItemModel(block.asItem());
+    }
+
+    public void createShelfRotshroom(Block block, Item particle) {
+        ResourceLocation location = AetherIIModelTemplates.SHELF_ROTSHROOM.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
+                .with(VariantProperties.MODEL, location)).with(BlockModelGenerators.createHorizontalFacingDispatch()));
+    }
+
+    public void createShelfRotshroomBlock(Block block, Item particle) {
+        ResourceLocation location = AetherIIModelTemplates.SHELF_ROTSHROOM_BLOCK.create(block, TextureMapping.cube(block).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(particle)), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant()
+                .with(VariantProperties.MODEL, location)));
+    }
+
+    @Override
+    public void createMossyCarpet(Block block) {
+        ResourceLocation location = AetherIITexturedModels.CARPET_CUTOUT.create(block, this.modelOutput);
+        ResourceLocation locationTall = AetherIITexturedModels.MOSSY_CARPET_SIDE_CUTOUT.get(block).updateTextures((mapping) -> mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_tall"))).createWithSuffix(block, "_side_tall", this.modelOutput);
+        ResourceLocation locationSmall = AetherIITexturedModels.MOSSY_CARPET_SIDE_CUTOUT.get(block).updateTextures((mapping) -> mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side_small"))).createWithSuffix(block, "_side_small", this.modelOutput);
+        MultiPartGenerator multipartgenerator = MultiPartGenerator.multiPart(block);
+        Condition.TerminalCondition condition = Condition.condition().term(MossyCarpetBlock.BASE, false);
+        multipartgenerator.with(Condition.condition().term(MossyCarpetBlock.BASE, true), Variant.variant().with(VariantProperties.MODEL, location));
+        multipartgenerator.with(condition, Variant.variant().with(VariantProperties.MODEL, location));
+        MULTIFACE_GENERATOR.stream().map(Pair::getFirst).forEach((p_386445_) -> {
+            EnumProperty<WallSide> wallProperty = MossyCarpetBlock.getPropertyForFace(p_386445_);
+            if (wallProperty != null && block.defaultBlockState().hasProperty(wallProperty)) {
+                condition.term(wallProperty, WallSide.NONE);
+            }
+
+        });
+
+        for (Pair<Direction, Function<ResourceLocation, Variant>> directionFunctionPair : MULTIFACE_GENERATOR) {
+            Pair<Direction, Function<ResourceLocation, Variant>> pair = directionFunctionPair;
+            Direction direction = pair.getFirst();
+            EnumProperty<WallSide> wallProperty = MossyCarpetBlock.getPropertyForFace(direction);
+            if (wallProperty != null) {
+                Function<ResourceLocation, Variant> function = pair.getSecond();
+                multipartgenerator.with(Condition.condition().term(wallProperty, WallSide.TALL), function.apply(locationTall));
+                multipartgenerator.with(Condition.condition().term(wallProperty, WallSide.LOW), function.apply(locationSmall));
+                multipartgenerator.with(condition, function.apply(locationTall));
+            }
+        }
+
+        this.blockStateOutput.accept(multipartgenerator);
     }
 
     public void createSecretDoor(Block block, Block base) {

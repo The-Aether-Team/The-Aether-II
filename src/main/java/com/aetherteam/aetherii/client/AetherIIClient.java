@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
+import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
 import com.aetherteam.aetherii.client.gui.screen.HighlandsReceivingLevelScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
@@ -54,6 +55,7 @@ public class AetherIIClient {
         AetherIIClientEventListeners.listen(bus);
 
         bus.addListener(DimensionClientListener::onRenderFog);
+        bus.addListener(LevelClientListener::onRenderLevelLast);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerColorResolvers);

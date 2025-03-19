@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
+import com.aetherteam.aetherii.AetherII;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +14,7 @@ public class AetherIITextureMappings {
     }
 
     public static TextureMapping snowyGrass(Block grass, Block dirt) {
-        return  new TextureMapping()
+        return new TextureMapping()
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(dirt))
                 .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(grass, "_top"))
@@ -21,13 +22,13 @@ public class AetherIITextureMappings {
     }
 
     public static TextureMapping vine(ResourceLocation vine) {
-        return  new TextureMapping()
+        return new TextureMapping()
                 .put(AetherIITextureSlots.VINE, vine)
                 .copySlot(AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
     }
 
     public static TextureMapping snowyLeaves(Block leaves) {
-        return  new TextureMapping()
+        return new TextureMapping()
                 .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(leaves))
                 .copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
                 .put(TextureSlot.TOP, TextureMapping.getBlockTexture(leaves))
@@ -110,6 +111,12 @@ public class AetherIITextureMappings {
 
     public static TextureMapping itemPlant(Block block) {
         return new TextureMapping().put(TextureSlot.PLANT, TextureMapping.getBlockTexture(block)).put(TextureSlot.PARTICLE, TextureMapping.getItemTexture(block.asItem()));
+    }
+
+    public static TextureMapping lockedBlockInventory(Block block) {
+        return new TextureMapping()
+                .put(AetherIITextureSlots.FACE, TextureMapping.getBlockTexture(block))
+                .put(AetherIITextureSlots.OVERLAY, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "block/dungeon_lock"));
     }
 
     public static TextureMapping particle(TextureMapping textureMapping) {
