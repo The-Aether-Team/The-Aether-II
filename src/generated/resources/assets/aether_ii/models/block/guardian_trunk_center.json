@@ -1,0 +1,7 @@
+{
+  "parent": "aether_ii:block/template_trunk_center",
+  "textures": {
+    "all": "aether_ii:block/guardian_log",
+    "particle": "aether_ii:block/guardian_log"
+  }
+}

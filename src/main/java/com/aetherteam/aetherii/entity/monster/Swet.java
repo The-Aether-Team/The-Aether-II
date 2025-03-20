@@ -36,6 +36,7 @@ import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.WolfVariant;
 import net.minecraft.world.entity.animal.WolfVariants;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -50,7 +51,7 @@ import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Swet extends Mob implements Enemy {
+public class Swet extends Monster implements Enemy {
     private static final EntityDataAccessor<Holder<SwetVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Swet.class, AetherIIDataSerializers.SWET_VARIANT.get());
     private static final EntityDataAccessor<Boolean> DATA_MID_JUMP_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DATA_WATER_DAMAGE_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
@@ -108,23 +109,6 @@ public class Swet extends Mob implements Enemy {
             this.refreshDimensions();
         }
         super.onSyncedDataUpdated(dataAccessor);
-    }
-
-    /**
-     * Swets can spawn if the block at the spawn location is in the {@link AetherTags.Blocks#SWET_SPAWNABLE_ON} tag, if they are spawning at a light level above 8,
-     * and  if the difficulty isn't peaceful.
-     *
-     * @param swet   The {@link Swet} {@link EntityType}.
-     * @param level  The {@link LevelAccessor}.
-     * @param reason The {@link EntitySpawnReason} reason.
-     * @param pos    The spawn {@link BlockPos}.
-     * @param random The {@link RandomSource}.
-     * @return Whether this entity can spawn, as a {@link Boolean}.
-     */
-    public static boolean checkSwetSpawnRules(EntityType<? extends Swet> swet, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SWET_SPAWNABLE_ON)
-                && level.getRawBrightness(pos, 0) <= 8
-                && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
     @Nullable
