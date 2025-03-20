@@ -100,6 +100,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARILUM = createKey("arilum");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLOOMING_ARILUM = createKey("blooming_arilum");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_MOSS_COVER = createKey("tree_moss_cover");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
 
@@ -682,6 +684,8 @@ public class HighlandsConfiguredFeatures {
         register(context, ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(1, 8), ConstantInt.of(0)));
         register(context, BLOOMING_ARILUM, AetherIIFeatures.ARILUM.get(), new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.BLOOMING_ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get()), UniformInt.of(1, 3), UniformInt.of(4, 6)));
 
+        register(context, TREE_MOSS_COVER, AetherIIFeatures.TREE_MOSS_COVER.get());
+
         register(context, AETHER_GRASS_BONEMEAL, AetherIIFeatures.AETHER_GRASS.get(), new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                 .add(AetherIIBlocks.AETHER_SHORT_GRASS.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 1)
@@ -814,8 +818,7 @@ public class HighlandsConfiguredFeatures {
                                         UniformInt.of(4, 7),
                                         UniformInt.of(2, 4),
                                         0.1
-                                ),
-                                new NoiseMossDecorator())).build());
+                                ))).build());
         register(context, SHORT_SKYPLANE, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(AetherIIBlocks.SKYROOT_LOG.get().defaultBlockState()),

@@ -15,6 +15,5 @@ public class AetherIITreeDecoratorTypes {
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<IrradiationTreeDecorator>> IRRADIATION = TREE_DECORATORS.register("irradiation", () -> new TreeDecoratorType<>(IrradiationTreeDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<AlterGroundTagDecorator>> ALTER_GROUND_TAG = TREE_DECORATORS.register("alter_ground_tag", () -> new TreeDecoratorType<>(AlterGroundTagDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<MossDecorator>> MOSS = TREE_DECORATORS.register("moss", () -> new TreeDecoratorType<>(MossDecorator.CODEC));
-    public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<NoiseMossDecorator>> NOISE_MOSS = TREE_DECORATORS.register("noise_moss", () -> new TreeDecoratorType<>(NoiseMossDecorator.CODEC));
     public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<ShroudedCanopyDecorator>> SHROUDED_CANOPY = TREE_DECORATORS.register("shrouded_canopy", () -> new TreeDecoratorType<>(ShroudedCanopyDecorator.CODEC));
 }

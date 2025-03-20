@@ -68,6 +68,8 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ARILUM = createKey("arilum");
     public static final ResourceKey<PlacedFeature> BLOOMING_ARILUM = createKey("blooming_arilum");
 
+    public static final ResourceKey<PlacedFeature> TREE_MOSS_COVER = createKey("tree_moss_cover");
+
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
 
@@ -426,6 +428,8 @@ public class HighlandsPlacedFeatures {
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
+
+        register(context, TREE_MOSS_COVER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREE_MOSS_COVER));
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
     }
