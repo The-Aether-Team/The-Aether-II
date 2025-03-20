@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -121,7 +122,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
                                             shape = applyCornerShape(shape, southwest, southwestShape, southwestTallShape);
 
                                             TrunkProperties trunkProperties = new TrunkProperties(tall, north, east, south, west, northwest, northeast, southeast, southwest);
-                                            builder.put(trunkProperties, shape);
+                                            builder.put(trunkProperties, shape.optimize());
                                         }
                                     }
                                 }
@@ -136,25 +137,25 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
 
     private static VoxelShape applyCenterShape(VoxelShape baseShape, boolean property, VoxelShape lowShape, VoxelShape tallShape) {
         if (property) {
-            return Shapes.or(baseShape, tallShape);
+            return Shapes.joinUnoptimized(baseShape, tallShape, BooleanOp.OR);
         } else {
-            return Shapes.or(baseShape, lowShape);
+            return Shapes.joinUnoptimized(baseShape, lowShape, BooleanOp.OR);
         }
     }
 
     private static VoxelShape applySideShape(VoxelShape baseShape, TrunkConnection property, VoxelShape lowShape, VoxelShape tallShape) {
         if (property.isTall()) {
-            return Shapes.or(baseShape, tallShape);
+            return Shapes.joinUnoptimized(baseShape, tallShape, BooleanOp.OR);
         } else {
-            return property == TrunkConnection.NONE ? baseShape : Shapes.or(baseShape, lowShape);
+            return property == TrunkConnection.NONE ? baseShape : Shapes.joinUnoptimized(baseShape, lowShape, BooleanOp.OR);
         }
     }
 
     private static VoxelShape applyCornerShape(VoxelShape baseShape, TrunkCorner property, VoxelShape lowShape, VoxelShape tallShape) {
         if (property == TrunkCorner.TALL) {
-            return Shapes.or(baseShape, tallShape);
+            return Shapes.joinUnoptimized(baseShape, tallShape, BooleanOp.OR);
         } else {
-            return property == TrunkCorner.NONE ? baseShape : Shapes.or(baseShape, lowShape);
+            return property == TrunkCorner.NONE ? baseShape : Shapes.joinUnoptimized(baseShape, lowShape, BooleanOp.OR);
         }
     }
 
