@@ -158,43 +158,43 @@
         "type": "aether_ii:highfields_taegore",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 20
       },
       {
         "type": "aether_ii:highfields_burrukai",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 20
       },
       {
         "type": "aether_ii:highfields_kirrid",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 12
+        "weight": 24
       },
       {
         "type": "aether_ii:phyg",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 4
+        "weight": 8
       },
       {
         "type": "aether_ii:flying_cow",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 4
+        "weight": 8
       },
       {
         "type": "aether_ii:sheepuff",
         "maxCount": 2,
         "minCount": 2,
-        "weight": 6
+        "weight": 12
       },
       {
         "type": "aether_ii:aerbunny",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 8
+        "weight": 16
       }
     ],
     "misc": [],

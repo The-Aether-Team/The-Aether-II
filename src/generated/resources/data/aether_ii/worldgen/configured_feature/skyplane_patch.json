@@ -71,7 +71,7 @@
             }
           }
         },
-        "nest_chance": 0.1
+        "nest_chance": 0.025
       }
     ],
     "dirt_provider": {
