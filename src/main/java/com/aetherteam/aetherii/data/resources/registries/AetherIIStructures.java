@@ -28,6 +28,7 @@ import java.util.Optional;
 public class AetherIIStructures {
     public static final ResourceKey<Structure> OUTPOST = createKey("outpost");
     public static final ResourceKey<Structure> CAMP_HIGHFIELDS = createKey("camp_highfields");
+    public static final ResourceKey<Structure> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
 
     private static ResourceKey<Structure> createKey(String name) {
         return ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
