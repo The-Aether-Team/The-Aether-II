@@ -30,6 +30,7 @@ public class AetherIIPools {
 
         OutpostPools.bootstrap(context);
         CampHighfieldsPools.bootstrap(context);
+        InfectedGuardianTreePools.bootstrap(context);
     }
 
     public static ResourceKey<StructureTemplatePool> createKey(String name) {
@@ -41,10 +42,18 @@ public class AetherIIPools {
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id) {
-        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING));
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), true);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id, Holder<StructureProcessorList> processor) {
-        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING));
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), true);
+    }
+
+    public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id) {
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), false);
+    }
+
+    public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id, Holder<StructureProcessorList> processor) {
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), false);
     }
 }

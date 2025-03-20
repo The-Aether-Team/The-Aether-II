@@ -43,10 +43,17 @@ public class AetherPoolElement extends StructurePoolElement {
             AetherPoolElement::encodeTemplate, ResourceLocation.CODEC.map(Either::left)
     );
     public static final MapCodec<AetherPoolElement> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(templateCodec(), processorsCodec(), projectionCodec(), overrideLiquidSettingsCodec()).apply(instance, AetherPoolElement::new)
+            instance -> instance.group(
+                    templateCodec(),
+                    processorsCodec(),
+                    projectionCodec(),
+                    overrideLiquidSettingsCodec(),
+                    Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir)
+            ).apply(instance, AetherPoolElement::new)
     );
     protected final Either<ResourceLocation, StructureTemplate> template;
     protected final Holder<StructureProcessorList> processors;
+    protected final boolean replaceAir;
     protected final Optional<LiquidSettings> overrideLiquidSettings;
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> p_210425_, DynamicOps<T> p_210426_, T p_210427_) {
@@ -68,11 +75,12 @@ public class AetherPoolElement extends StructurePoolElement {
         return TEMPLATE_CODEC.fieldOf("location").forGetter(codec -> codec.template);
     }
 
-    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings) {
+    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, boolean replaceAir) {
         super(projection);
         this.template = template;
         this.processors = processors;
         this.overrideLiquidSettings = overrideLiquidSettings;
+        this.replaceAir = replaceAir;
     }
 
     @Override
@@ -155,7 +163,9 @@ public class AetherPoolElement extends StructurePoolElement {
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
-        settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
+        if (replaceAir) {
+            settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
+        }
         settings.setLiquidSettings(this.overrideLiquidSettings.orElse(liquidSettings));
         settings.setFinalizeEntities(true);
         if (!offset) {

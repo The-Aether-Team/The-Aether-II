@@ -6,7 +6,8 @@
         "location": "aether_ii:camp/highfields/tents/small_tent",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp_highfields",
-        "projection": "rigid"
+        "projection": "rigid",
+        "replace_air": true
       },
       "weight": 1
     },
@@ -16,7 +17,8 @@
         "location": "aether_ii:camp/highfields/tents/tent",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp_highfields",
-        "projection": "rigid"
+        "projection": "rigid",
+        "replace_air": true
       },
       "weight": 2
     }

@@ -6,7 +6,8 @@
         "location": "aether_ii:camp/highfields/additional_paths/path_01",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp_highfields",
-        "projection": "terrain_matching"
+        "projection": "terrain_matching",
+        "replace_air": true
       },
       "weight": 1
     },
@@ -16,7 +17,8 @@
         "location": "aether_ii:camp/highfields/additional_paths/path_02",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp_highfields",
-        "projection": "terrain_matching"
+        "projection": "terrain_matching",
+        "replace_air": true
       },
       "weight": 1
     }
