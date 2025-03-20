@@ -1,18 +1,14 @@
 package com.aetherteam.aetherii.block.natural;
 
-import com.aetherteam.aetherii.AetherII;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -44,7 +40,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final List<EnumProperty<TrunkConnection>> SIDE_CONNECTIONS = List.of(NORTH_CONNECTION, EAST_CONNECTION, SOUTH_CONNECTION, WEST_CONNECTION);
     private static final List<EnumProperty<TrunkCorner>> CORNER_CONNECTIONS = List.of(NORTHEAST_CONNECTION, NORTHWEST_CONNECTION, SOUTHEAST_CONNECTION, SOUTHWEST_CONNECTION);
-    private final Map<BlockState, VoxelShape> shapeByIndex;
+    private static final Map<TrunkProperties, VoxelShape> SHAPE_BY_INDEX = makeShapes();
 
     public MapCodec<TrunkBlock> codec() {
         return CODEC;
@@ -63,34 +59,14 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(SOUTHEAST_CONNECTION, TrunkCorner.NONE)
                 .setValue(SOUTHWEST_CONNECTION, TrunkCorner.NONE)
                 .setValue(WATERLOGGED, false));
-        this.shapeByIndex = this.makeShapes(3.0F, 5.0F, 13.0F, 16.0F);
     }
 
-    private static VoxelShape applyCenterShape(VoxelShape baseShape, boolean property, VoxelShape lowShape, VoxelShape tallShape) {
-        if (property) {
-            return Shapes.or(baseShape, tallShape);
-        } else {
-            return Shapes.or(baseShape, lowShape);
-        }
-    }
+    public static Map<TrunkProperties, VoxelShape> makeShapes() {
+        float width = 3.0F;
+        float depth = 5.0F;
+        float lowHeight = 13.0F;
+        float tallHeight = 16.0F;
 
-    private static VoxelShape applySideShape(VoxelShape baseShape, TrunkConnection property, VoxelShape lowShape, VoxelShape tallShape) {
-        if (property.isTall()) {
-            return Shapes.or(baseShape, tallShape);
-        } else {
-            return property == TrunkConnection.NONE ? baseShape : Shapes.or(baseShape, lowShape);
-        }
-    }
-
-    private static VoxelShape applyCornerShape(VoxelShape baseShape, TrunkCorner property, VoxelShape lowShape, VoxelShape tallShape) {
-        if (property == TrunkCorner.TALL) {
-            return Shapes.or(baseShape, tallShape);
-        } else {
-            return property == TrunkCorner.NONE ? baseShape : Shapes.or(baseShape, lowShape);
-        }
-    }
-
-    private Map<BlockState, VoxelShape> makeShapes(float width, float depth, float lowHeight, float tallHeight) {
         float f = 8.0F - width;
         float f1 = 8.0F + width;
         float f2 = 8.0F - depth;
@@ -120,7 +96,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
         VoxelShape southwestTallShape = Block.box(0.0F, 0.0F, f1, f, tallHeight, 16.0F);
         VoxelShape southeastTallShape = Block.box(f1, 0.0F, f1, 16.0F, tallHeight, 16.0F);
 
-        ImmutableMap.Builder<BlockState, VoxelShape> builder = ImmutableMap.builder();
+        ImmutableMap.Builder<TrunkProperties, VoxelShape> builder = ImmutableMap.builder();
         for (boolean tall : TALL.getPossibleValues()) {
             for (TrunkConnection north : NORTH_CONNECTION.getPossibleValues()) {
                 for (TrunkConnection east : EAST_CONNECTION.getPossibleValues()) {
@@ -144,18 +120,8 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
                                             shape = applyCornerShape(shape, southeast, southeastShape, southeastTallShape);
                                             shape = applyCornerShape(shape, southwest, southwestShape, southwestTallShape);
 
-                                            BlockState state = this.defaultBlockState()
-                                                    .setValue(TALL, tall)
-                                                    .setValue(NORTH_CONNECTION, north)
-                                                    .setValue(EAST_CONNECTION, east)
-                                                    .setValue(SOUTH_CONNECTION, south)
-                                                    .setValue(WEST_CONNECTION, west)
-                                                    .setValue(NORTHWEST_CONNECTION, northwest)
-                                                    .setValue(NORTHEAST_CONNECTION, northeast)
-                                                    .setValue(SOUTHEAST_CONNECTION, southeast)
-                                                    .setValue(SOUTHWEST_CONNECTION, southwest);
-                                            builder.put(state.setValue(WATERLOGGED, false), shape);
-                                            builder.put(state.setValue(WATERLOGGED, true), shape);
+                                            TrunkProperties trunkProperties = new TrunkProperties(tall, north, east, south, west, northwest, northeast, southeast, southwest);
+                                            builder.put(trunkProperties, shape);
                                         }
                                     }
                                 }
@@ -166,6 +132,30 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
             }
         }
         return builder.build();
+    }
+
+    private static VoxelShape applyCenterShape(VoxelShape baseShape, boolean property, VoxelShape lowShape, VoxelShape tallShape) {
+        if (property) {
+            return Shapes.or(baseShape, tallShape);
+        } else {
+            return Shapes.or(baseShape, lowShape);
+        }
+    }
+
+    private static VoxelShape applySideShape(VoxelShape baseShape, TrunkConnection property, VoxelShape lowShape, VoxelShape tallShape) {
+        if (property.isTall()) {
+            return Shapes.or(baseShape, tallShape);
+        } else {
+            return property == TrunkConnection.NONE ? baseShape : Shapes.or(baseShape, lowShape);
+        }
+    }
+
+    private static VoxelShape applyCornerShape(VoxelShape baseShape, TrunkCorner property, VoxelShape lowShape, VoxelShape tallShape) {
+        if (property == TrunkCorner.TALL) {
+            return Shapes.or(baseShape, tallShape);
+        } else {
+            return property == TrunkCorner.NONE ? baseShape : Shapes.or(baseShape, lowShape);
+        }
     }
 
     @Nullable
@@ -371,7 +361,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return this.shapeByIndex.get(state);
+        return SHAPE_BY_INDEX.get(TrunkProperties.fromState(state));
     }
 
     @Override
@@ -473,6 +463,22 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
 
         public String getSerializedName() {
             return this.name;
+        }
+    }
+
+    public record TrunkProperties(boolean tall, TrunkConnection north, TrunkConnection east, TrunkConnection south, TrunkConnection west, TrunkCorner northwest, TrunkCorner northeast, TrunkCorner southeast, TrunkCorner southwest) {
+        public static TrunkProperties fromState(BlockState state) {
+            return new TrunkProperties(
+                    state.getValue(TALL),
+                    state.getValue(NORTH_CONNECTION),
+                    state.getValue(EAST_CONNECTION),
+                    state.getValue(SOUTH_CONNECTION),
+                    state.getValue(WEST_CONNECTION),
+                    state.getValue(NORTHWEST_CONNECTION),
+                    state.getValue(NORTHEAST_CONNECTION),
+                    state.getValue(SOUTHEAST_CONNECTION),
+                    state.getValue(SOUTHWEST_CONNECTION)
+            );
         }
     }
 }
