@@ -22,7 +22,7 @@
         "uvlock": true
       },
       "when": {
-        "north_connection": "full|matching"
+        "north_connection": "normal"
       }
     },
     {
@@ -32,7 +32,7 @@
         "y": 90
       },
       "when": {
-        "east_connection": "full|matching"
+        "east_connection": "normal"
       }
     },
     {
@@ -42,7 +42,7 @@
         "y": 180
       },
       "when": {
-        "south_connection": "full|matching"
+        "south_connection": "normal"
       }
     },
     {
@@ -52,7 +52,7 @@
         "y": 270
       },
       "when": {
-        "west_connection": "full|matching"
+        "west_connection": "normal"
       }
     },
     {
@@ -61,7 +61,7 @@
         "uvlock": true
       },
       "when": {
-        "north_connection": "full_tall|matching_tall"
+        "north_connection": "tall"
       }
     },
     {
@@ -71,7 +71,7 @@
         "y": 90
       },
       "when": {
-        "east_connection": "full_tall|matching_tall"
+        "east_connection": "tall"
       }
     },
     {
@@ -81,7 +81,7 @@
         "y": 180
       },
       "when": {
-        "south_connection": "full_tall|matching_tall"
+        "south_connection": "tall"
       }
     },
     {
@@ -91,7 +91,7 @@
         "y": 270
       },
       "when": {
-        "west_connection": "full_tall|matching_tall"
+        "west_connection": "tall"
       }
     },
     {

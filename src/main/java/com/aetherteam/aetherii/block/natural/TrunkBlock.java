@@ -144,7 +144,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     private static VoxelShape applySideShape(VoxelShape baseShape, TrunkConnection property, VoxelShape lowShape, VoxelShape tallShape) {
-        if (property.isTall()) {
+        if (property == TrunkConnection.TALL) {
             return Shapes.joinUnoptimized(baseShape, tallShape, BooleanOp.OR);
         } else {
             return property == TrunkConnection.NONE ? baseShape : Shapes.joinUnoptimized(baseShape, lowShape, BooleanOp.OR);
@@ -264,9 +264,8 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
             boolean connects = connectsTo(facingState, facingState.isFaceSturdy(levelReader, facingPos, Direction.SOUTH), facing);
             TrunkConnection type = TrunkConnection.NONE;
             if (connects) {
-                type =  tryRaiseConnection(state, levelReader, currentPos, connection, isShapeSideFull(levelReader, facing, facingPos, facingState) ? TrunkConnection.FULL : TrunkConnection.MATCHING);
+                type = tryRaiseConnection(state, levelReader, currentPos, connection, TrunkConnection.NORMAL);
             }
-//            AetherII.LOGGER.info(currentPos + " " + type + " " + connection);
             state = state.setValue(connection, type);
         }
         return state;
@@ -280,7 +279,8 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
                 EnumProperty<TrunkConnection> connectionProperty = getPropertyForDirection(adjacent);
                 if (connectionProperty != null) {
                     if (facingState.getBlock() instanceof TrunkBlock) {
-                        if (state.getValue(connectionProperty).isFull() && facingState.getValue(connectionProperty).isFull()) {
+                        if (isShapeSideFull(levelReader, adjacent, currentPos.relative(adjacent), levelReader.getBlockState(currentPos.relative(adjacent)))
+                                && isShapeSideFull(levelReader, adjacent, facingPos.relative(adjacent), levelReader.getBlockState(facingPos.relative(adjacent)))) {
                             state = state.setValue(cornerProperty, tryRaiseCorner(state, levelReader, currentPos, cornerProperty, TrunkCorner.NORMAL));
                             continue;
                         }
@@ -309,8 +309,8 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
             EnumProperty<TrunkCorner> adjacentCornerProperty = getPropertyForCorner(facing, adjacent.getOpposite());
             EnumProperty<TrunkCorner> facingCornerProperty = getPropertyForCorner(facing.getOpposite(), adjacent);
             if (facingConnectionProperty != null && adjacentConnectionProperty != null && cornerProperty != null && adjacentCornerProperty != null && facingCornerProperty != null) {
-                boolean flag = facingState.getBlock() instanceof TrunkBlock && facingState.getValue(adjacentConnectionProperty).isFull()
-                        && adjacentState.getBlock() instanceof TrunkBlock && adjacentState.getValue(facingConnectionProperty).isFull();
+                boolean flag = facingState.getBlock() instanceof TrunkBlock && isShapeSideFull(levelReader, adjacent, facingPos.relative(adjacent), levelReader.getBlockState(facingPos.relative(adjacent)))
+                        && adjacentState.getBlock() instanceof TrunkBlock && isShapeSideFull(levelReader, facing, adjacentPos.relative(facing), levelReader.getBlockState(adjacentPos.relative(facing)));
                 state = state.setValue(cornerProperty, tryRaiseCorner(state, levelReader, currentPos, cornerProperty, flag ? TrunkCorner.NORMAL : TrunkCorner.NONE));
                 if (levelReader instanceof LevelAccessor levelAccessor && flag) {
                     if (facingState.getBlock() instanceof TrunkBlock) {
@@ -338,11 +338,15 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     private static TrunkConnection tryRaiseConnection(BlockState state, LevelReader levelReader, BlockPos pos, EnumProperty<TrunkConnection> connectionProperty, TrunkConnection connection) {
         BlockPos facingPos = pos.above();
         BlockState facingState = levelReader.getBlockState(facingPos);
-        if ((facingState.getBlock() instanceof TrunkBlock && facingState.getValue(connectionProperty) != TrunkConnection.NONE)
-                || (!(facingState.getBlock() instanceof TrunkBlock) && !facingState.getShape(levelReader, facingPos).getFaceShape(Direction.DOWN).isEmpty())) {
-            return connection.tall();
+        if (connection != TrunkConnection.NONE) {
+            if ((facingState.getBlock() instanceof TrunkBlock && facingState.getValue(connectionProperty) != TrunkConnection.NONE)
+                    || (!(facingState.getBlock() instanceof TrunkBlock) && !facingState.getShape(levelReader, facingPos).getFaceShape(Direction.DOWN).isEmpty())) {
+                return TrunkConnection.TALL;
+            } else {
+                return TrunkConnection.NORMAL;
+            }
         } else {
-            return connection.normal();
+            return connection;
         }
     }
 
@@ -387,55 +391,13 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
 
     public enum TrunkConnection implements StringRepresentable {
         NONE("none"),
-        MATCHING("matching"),
-        MATCHING_TALL("matching_tall"),
-        FULL("full"),
-        FULL_TALL("full_tall");
+        NORMAL("normal"),
+        TALL("tall");
 
         private final String name;
 
         TrunkConnection(String name) {
             this.name = name;
-        }
-
-        public boolean isMatching() {
-            return this == MATCHING || this == MATCHING_TALL;
-        }
-
-        public boolean isFull() {
-            return this == FULL || this == FULL_TALL;
-        }
-
-        public boolean isTall() {
-            return this == MATCHING_TALL || this == FULL_TALL;
-        }
-
-        public TrunkConnection tall() {
-            switch(this) {
-                case MATCHING -> {
-                    return MATCHING_TALL;
-                }
-                case FULL -> {
-                    return FULL_TALL;
-                }
-                default -> {
-                    return this;
-                }
-            }
-        }
-
-        public TrunkConnection normal() {
-            switch(this) {
-                case MATCHING_TALL -> {
-                    return MATCHING;
-                }
-                case FULL_TALL -> {
-                    return FULL;
-                }
-                default -> {
-                    return this;
-                }
-            }
         }
 
         public String toString() {
