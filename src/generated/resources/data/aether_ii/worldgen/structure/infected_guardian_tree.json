@@ -1,7 +1,8 @@
 {
   "type": "aether_ii:aether_jigsaw",
   "biomes": "#aether_ii:has_structure/infected_guardian_tree",
-  "discard_above_y": 172,
+  "buried": true,
+  "discard_above_y": 156,
   "discard_below_y": 128,
   "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": 32,
@@ -12,6 +13,5 @@
     "absolute": -20
   },
   "start_pool": "aether_ii:infected_guardian_tree/start_room",
-  "step": "surface_structures",
-  "terrain_adaptation": "encapsulate"
+  "step": "surface_structures"
 }
