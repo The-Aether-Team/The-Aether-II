@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.structure;
 
-import com.aetherteam.aetherii.world.structure.spawning.HeightSpawningChecks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -8,6 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
@@ -69,13 +70,12 @@ public class AetherJigsawStructure extends Structure {
 
     @Override
     public @NotNull Optional<GenerationStub> findGenerationPoint(@NotNull GenerationContext context) {
-        if (!new HeightSpawningChecks().checkHeight(context, discardBelowY, discardAboveY)) {
+        if (!this.checkHeight(context, discardBelowY, discardAboveY)) {
             return Optional.empty();
         }
         int startY = startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
         ChunkPos chunkPos = context.chunkPos();
         BlockPos pos = new BlockPos(chunkPos.getMiddleBlockX(), startY, chunkPos.getMiddleBlockZ());
-
         return JigsawPlacement.addPieces(
                 context,
                 startPool,
@@ -89,6 +89,16 @@ public class AetherJigsawStructure extends Structure {
                 this.dimensionPadding,
                 this.liquidSettings
         );
+    }
+
+    public boolean checkHeight(Structure.GenerationContext context, int minY, int maxY) {
+        ChunkPos chunkpos = context.chunkPos();
+        int posTest = context.chunkGenerator().getFirstOccupiedHeight(chunkpos.getWorldPosition().getX(), chunkpos.getWorldPosition().getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
+        return posTest > minY && posTest < maxY;
+    }
+
+    public boolean checkBuried(Structure.GenerationContext context, BlockPos pos) {
+        return context.chunkGenerator().getBaseColumn(pos.getY() - 24, pos.getY(), context.heightAccessor(), context.randomState()).getBlock(pos.getY() - 24).is(Blocks.AIR) ;
     }
 
     @Override
