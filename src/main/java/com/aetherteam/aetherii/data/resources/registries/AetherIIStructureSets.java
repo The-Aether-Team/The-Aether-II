@@ -39,6 +39,6 @@ public class AetherIIStructureSets {
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.6F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 22, 10, RandomSpreadType.LINEAR)));
 
         context.register(SURFACE_DUNGEONS, new StructureSet(structures.getOrThrow(AetherIIStructures.INFECTED_GUARDIAN_TREE),
-                new RandomSpreadStructurePlacement(24, 16, RandomSpreadType.LINEAR, 897773)));
+                new RandomSpreadStructurePlacement(22, 14, RandomSpreadType.LINEAR, 897773)));
     }
 }
