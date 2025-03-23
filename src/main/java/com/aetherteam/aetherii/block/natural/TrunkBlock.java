@@ -22,8 +22,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     public static final MapCodec<TrunkBlock> CODEC = simpleCodec(TrunkBlock::new);
@@ -92,10 +91,10 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
                 for (WallSide east : EAST_CONNECTION.getPossibleValues()) {
                     for (WallSide south : SOUTH_CONNECTION.getPossibleValues()) {
                         for (WallSide west : WEST_CONNECTION.getPossibleValues()) {
-//                            for (WallSide northwest : NORTHWEST_CONNECTION.getPossibleValues()) {
-//                                for (WallSide northeast : NORTHEAST_CONNECTION.getPossibleValues()) {
-//                                    for (WallSide southeast : SOUTHEAST_CONNECTION.getPossibleValues()) {
-//                                        for (WallSide southwest : SOUTHWEST_CONNECTION.getPossibleValues()) {
+                            for (WallSide northwest : WallSide.values()) {
+                                for (WallSide northeast : WallSide.values()) {
+                                    for (WallSide southeast : WallSide.values()) {
+                                        for (WallSide southwest : WallSide.values()) {
                                             VoxelShape shape = Shapes.empty();
 
                                             shape = applyCenterShape(shape, tall, centerShape, centerTallShape);
@@ -105,17 +104,17 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
                                             shape = applySideShape(shape, south, southShape, southTallShape);
                                             shape = applySideShape(shape, west, westShape, westTallShape);
 
-//                                            shape = applyCornerShape(shape, northwest, northwestShape, northwestTallShape);
-//                                            shape = applyCornerShape(shape, northeast, northeastShape, northeastTallShape);
-//                                            shape = applyCornerShape(shape, southeast, southeastShape, southeastTallShape);
-//                                            shape = applyCornerShape(shape, southwest, southwestShape, southwestTallShape);
+                                            shape = applyCornerShape(shape, northwest, northwestShape, northwestTallShape);
+                                            shape = applyCornerShape(shape, northeast, northeastShape, northeastTallShape);
+                                            shape = applyCornerShape(shape, southeast, southeastShape, southeastTallShape);
+                                            shape = applyCornerShape(shape, southwest, southwestShape, southwestTallShape);
 
-                                            TrunkProperties trunkProperties = new TrunkProperties(tall, north, east, south, west);
+                                            TrunkProperties trunkProperties = new TrunkProperties(tall, north, east, south, west, northwest, northeast, southeast, southwest);
                                             builder.put(trunkProperties, shape.optimize());
-//                                        }
-//                                    }
-//                                }
-//                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -148,6 +147,47 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
         }
     }
 
+    public static Map<String, WallSide> getCornerProperties(BlockGetter level, BlockPos pos) {
+        Map<String, WallSide> properties = new LinkedHashMap<>();
+        for (Direction facing : Direction.Plane.HORIZONTAL) {
+            for (Direction adjacent : getAdjacentDirections(facing)) {
+                String cornerProperty = getNameForCorner(facing, adjacent);
+                if (cornerProperty != null) {
+                    BlockPos facingPos = pos.relative(facing);
+                    BlockPos adjacentPos = pos.relative(adjacent);
+                    BlockPos cornerPos = pos.relative(facing).relative(adjacent);
+
+                    BlockState facingState = level.getBlockState(facingPos);
+                    BlockState adjacentState = level.getBlockState(adjacentPos);
+                    BlockState cornerState = level.getBlockState(cornerPos);
+
+                    if (connectsTo(facingState) && connectsTo(adjacentState) && checkCornerCases(level, facing, adjacent, facingPos, adjacentPos, cornerPos, facingState, adjacentState, cornerState)) {
+                        properties.putIfAbsent(cornerProperty, WallSide.LOW);
+                    }
+
+                    if (properties.get(cornerProperty) == WallSide.LOW) {
+                        BlockPos abovePos = pos.above();
+                        facingPos = facingPos.above();
+                        adjacentPos = adjacentPos.above();
+                        cornerPos = cornerPos.above();
+
+                        BlockState aboveState = level.getBlockState(abovePos);
+                        facingState = level.getBlockState(facingPos);
+                        adjacentState = level.getBlockState(adjacentPos);
+                        cornerState = level.getBlockState(cornerPos);
+
+                        boolean basicCase = isShapeSidePresent(level, Direction.UP.getOpposite(), abovePos, aboveState);
+
+                        if (basicCase || (isTrunk(aboveState) && checkCornerCases(level, facing, adjacent, facingPos, adjacentPos, cornerPos, facingState, adjacentState, cornerState))) {
+                            properties.put(cornerProperty, WallSide.TALL);
+                        }
+                    }
+                }
+            }
+        }
+        return properties;
+    }
+
     @Nullable
     protected static EnumProperty<WallSide> getPropertyForDirection(Direction direction) {
         switch (direction) {
@@ -165,6 +205,35 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
             }
             default -> {
                 return null;
+            }
+        }
+    }
+
+    @Nullable
+    protected static String getNameForCorner(Direction direction1, Direction direction2) {
+        List<Direction> directions = List.of(direction1, direction2);
+        if (directions.contains(Direction.NORTH) && directions.contains(Direction.EAST)) {
+            return "northeast_connection";
+        } else if (directions.contains(Direction.NORTH) && directions.contains(Direction.WEST)) {
+            return "northwest_connection";
+        } else if (directions.contains(Direction.SOUTH) && directions.contains(Direction.EAST)) {
+            return "southeast_connection";
+        } else if (directions.contains(Direction.SOUTH) && directions.contains(Direction.WEST)) {
+            return "southwest_connection";
+        }
+        return null;
+    }
+
+    protected static List<Direction> getAdjacentDirections(Direction direction) {
+        switch (direction.getAxis()) {
+            case X -> {
+                return Arrays.asList(Direction.Axis.Z.getDirections());
+            }
+            case Z -> {
+                return Arrays.asList(Direction.Axis.X.getDirections());
+            }
+            default -> {
+                return List.of();
             }
         }
     }
@@ -216,7 +285,7 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     protected BlockState updateSides(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
         EnumProperty<WallSide> connection = getPropertyForDirection(facing);
         if (connection != null) {
-            boolean connects = connectsTo(facingState, facingState.isFaceSturdy(levelReader, facingPos, Direction.SOUTH), facing);
+            boolean connects = connectsTo(facingState, facingState.isFaceSturdy(levelReader, facingPos, facing));
             WallSide type = WallSide.NONE;
             if (connects) {
                 type = tryRaiseConnection(state, levelReader, currentPos, connection, WallSide.LOW);
@@ -226,17 +295,21 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
         return state;
     }
 
-    private static boolean connectsTo(BlockState state, boolean sideSolid, Direction direction) {
-        Block block = state.getBlock();
-        return block instanceof TrunkBlock || !isExceptionForConnection(state) && sideSolid;
+    private static boolean checkCornerCases(BlockGetter level, Direction facing, Direction adjacent, BlockPos facingPos, BlockPos adjacentPos, BlockPos cornerPos, BlockState facingState, BlockState adjacentState, BlockState cornerState) {
+        boolean lowCaseInner = isShapeSideFull(level, facing.getOpposite(), facingPos, facingState) && isShapeSideFull(level, adjacent.getOpposite(), adjacentPos, adjacentState);
+        boolean lowCaseSide = (isShapeSideFull(level, facing.getOpposite(), facingPos, facingState) && isShapeSideFull(level, facing.getOpposite(), cornerPos, cornerState) && isTrunk(adjacentState))
+                || (isShapeSideFull(level, adjacent.getOpposite(), adjacentPos, adjacentState) && isShapeSideFull(level, adjacent.getOpposite(), cornerPos, cornerState) && isTrunk(facingState));
+        boolean lowCaseOuter1 = (isTrunk(adjacentState) && isTrunk(facingState) && isShapeSideFull(level, adjacent.getOpposite(), cornerPos, cornerState) && isShapeSideFull(level, facing.getOpposite(), cornerPos, cornerState));
+        boolean lowCaseOuter2 = (isShapeSideFull(level, facing.getOpposite(), facingPos, facingState) && isShapeSideFull(level, adjacent, facingPos, facingState) && isTrunk(adjacentState) && isTrunk(cornerState));
+        return lowCaseInner || lowCaseSide || lowCaseOuter1 || lowCaseOuter2;
     }
 
     private static WallSide tryRaiseConnection(BlockState state, LevelReader levelReader, BlockPos pos, EnumProperty<WallSide> connectionProperty, WallSide connection) {
         BlockPos facingPos = pos.above();
         BlockState facingState = levelReader.getBlockState(facingPos);
         if (connection != WallSide.NONE) {
-            if ((facingState.getBlock() instanceof TrunkBlock && facingState.getValue(connectionProperty) != WallSide.NONE)
-                    || (!(facingState.getBlock() instanceof TrunkBlock) && !facingState.getShape(levelReader, facingPos).getFaceShape(Direction.DOWN).isEmpty())) {
+            if ((isTrunk(facingState) && facingState.getValue(connectionProperty) != WallSide.NONE)
+                    || (!isTrunk(facingState) && !facingState.getShape(levelReader, facingPos).getFaceShape(Direction.DOWN).isEmpty())) {
                 return WallSide.TALL;
             } else {
                 return WallSide.LOW;
@@ -246,9 +319,29 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
         }
     }
 
+    private static boolean connectsTo(BlockState state, boolean sideSolid) {
+        return isTrunk(state) || (!isExceptionForConnection(state) && sideSolid);
+    }
+
+    private static boolean connectsTo(BlockState state) {
+        return isTrunk(state) || !isExceptionForConnection(state);
+    }
+
+    private static boolean isShapeSidePresent(BlockGetter level, Direction facing, BlockPos facingPos, BlockState facingState) {
+        return !isTrunk(facingState) && !facingState.getShape(level, facingPos).getFaceShape(facing).isEmpty() && !Block.isExceptionForConnection(facingState);
+    }
+
+    private static boolean isShapeSideFull(BlockGetter level, Direction facing, BlockPos facingPos, BlockState facingState) {
+        return !isTrunk(facingState) && Block.isFaceFull(facingState.getShape(level, facingPos), facing) && !Block.isExceptionForConnection(facingState);
+    }
+
+    private static boolean isTrunk(BlockState state) {
+        return state.getBlock() instanceof TrunkBlock;
+    }
+
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE_BY_INDEX.get(TrunkProperties.fromState(state));
+        return SHAPE_BY_INDEX.get(TrunkProperties.fromBlock(state, getCornerProperties(level, pos)));
     }
 
     @Override
@@ -271,14 +364,18 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
         builder.add(TALL, NORTH_CONNECTION, EAST_CONNECTION, SOUTH_CONNECTION, WEST_CONNECTION, WATERLOGGED);
     }
 
-    public record TrunkProperties(boolean tall, WallSide north, WallSide east, WallSide south, WallSide west) {
-        public static TrunkProperties fromState(BlockState state) {
+    public record TrunkProperties(boolean tall, WallSide north, WallSide east, WallSide south, WallSide west, WallSide northwest, WallSide northeast, WallSide southeast, WallSide southwest) {
+        public static TrunkProperties fromBlock(BlockState state, Map<String, WallSide> map) {
             return new TrunkProperties(
                     state.getValue(TALL),
                     state.getValue(NORTH_CONNECTION),
                     state.getValue(EAST_CONNECTION),
                     state.getValue(SOUTH_CONNECTION),
-                    state.getValue(WEST_CONNECTION)
+                    state.getValue(WEST_CONNECTION),
+                    map.computeIfAbsent("northwest_connection", (s) -> WallSide.NONE),
+                    map.computeIfAbsent("northeast_connection", (s) -> WallSide.NONE),
+                    map.computeIfAbsent("southeast_connection", (s) -> WallSide.NONE),
+                    map.computeIfAbsent("southwest_connection", (s) -> WallSide.NONE)
             );
         }
     }
