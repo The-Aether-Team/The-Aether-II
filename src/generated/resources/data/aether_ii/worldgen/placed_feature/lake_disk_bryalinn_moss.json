@@ -1,0 +1,22 @@
+{
+  "feature": "aether_ii:disk_bryalinn_moss",
+  "placement": [
+    {
+      "type": "aether_ii:lake_placement"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 25
+    },
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:matching_blocks",
+        "blocks": "minecraft:water"
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

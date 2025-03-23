@@ -8,7 +8,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.KelpBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
@@ -25,21 +24,19 @@ public class ArilumFeature extends Feature<ArilumConfiguration> {
         RandomSource random = context.random();
         int height = context.config().height().sample(random);
         int depth = context.config().depth().sample(random);
-        int j = level.getHeight(Heightmap.Types.OCEAN_FLOOR, pos.getX(), pos.getZ());
-        BlockPos heightPos = new BlockPos(pos.getX(), j, pos.getZ());
-        if (level.getBlockState(heightPos).is(Blocks.WATER) && level.getBlockState(heightPos.above(depth)).is(Blocks.WATER)) {
-            BlockState endState = context.config().grassProvider().getState(random, heightPos);
-            BlockState bodyState = context.config().plantProvider().getState(random, heightPos);
+        if (level.getBlockState(pos).is(Blocks.WATER) && level.getBlockState(pos.above(depth)).is(Blocks.WATER)) {
+            BlockState endState = context.config().grassProvider().getState(random, pos);
+            BlockState bodyState = context.config().plantProvider().getState(random, pos);
             for (int l = 0; l <= height; l++) {
-                if (level.getBlockState(heightPos).is(Blocks.WATER) && bodyState.canSurvive(level, heightPos)) {
+                if (level.getBlockState(pos).is(Blocks.WATER) && bodyState.canSurvive(level, pos)) {
                     if (l == height) {
-                        level.setBlock(heightPos, endState.setValue(KelpBlock.AGE, random.nextInt(4) + 20), 2);
+                        level.setBlock(pos, endState.setValue(KelpBlock.AGE, random.nextInt(4) + 20), 2);
                         i++;
                     } else {
-                        level.setBlock(heightPos, bodyState, 2);
+                        level.setBlock(pos, bodyState, 2);
                     }
                 } else if (l > 0) {
-                    BlockPos belowPos = heightPos.below();
+                    BlockPos belowPos = pos.below();
                     if (endState.canSurvive(level, belowPos) && !level.getBlockState(belowPos.below()).is(endState.getBlock())) {
                         level.setBlock(belowPos, endState.setValue(KelpBlock.AGE, random.nextInt(4) + 20), 2);
                         i++;
@@ -47,7 +44,7 @@ public class ArilumFeature extends Feature<ArilumConfiguration> {
                     break;
                 }
 
-                heightPos = heightPos.above();
+                pos = pos.above();
             }
         }
 
