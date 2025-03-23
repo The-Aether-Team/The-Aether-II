@@ -124,14 +124,10 @@ public class GasBlock extends Block implements CanisterPickup {
             return false;
 
         if (state.hasProperty(BlockStateProperties.LIT)) {
-            if (state.getValue(BlockStateProperties.LIT) == true) {
-                return true;
-            }
+            return state.getValue(BlockStateProperties.LIT);
         } else {
             return true;
         }
-
-        return false;
     }
 
     public void explode(LevelAccessor level, BlockPos pos, boolean playSound) {

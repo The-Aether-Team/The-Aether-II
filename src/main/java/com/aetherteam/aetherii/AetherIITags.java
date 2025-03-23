@@ -86,6 +86,8 @@ public class AetherIITags {
         public static final TagKey<Block> GRAVITITE_ABILITY_BLACKLIST = tag("gravitite_ability_blacklist");
         public static final TagKey<Block> HOVERING_BLOCK_REPLACE_BLACKLIST = tag("hovering_block_replace_blacklist");
 
+        public static final TagKey<Block> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
+
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
         }
@@ -110,6 +112,8 @@ public class AetherIITags {
         public static final TagKey<Item> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+
+        public static final TagKey<Item> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> ANIMALS_FURS = tag("animals/furs");

@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.event.hooks;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
@@ -200,5 +201,12 @@ public class PlayerHooks {
             return (mount instanceof MountableAnimal && !mount.onGround() && !mount.isInFluidType() && !mount.isPassenger());
         }
         return false;
+    }
+
+    public static float handleReinforcedBlocks(BlockState state, float speed) {
+        if (state.hasProperty(AetherIIBlockStateProperties.REINFORCED) && state.getValue(AetherIIBlockStateProperties.REINFORCED)) {
+            return speed * 0.05F;
+        }
+        return speed;
     }
 }

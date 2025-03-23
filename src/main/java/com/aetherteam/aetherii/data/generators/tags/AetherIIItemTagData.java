@@ -43,6 +43,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.copy(AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Items.MARBLED_ICHORITE_DECORATIVE_BLOCKS);
         this.copy(AetherIITags.Blocks.AGIOSITE_DECORATIVE_BLOCKS, AetherIITags.Items.AGIOSITE_DECORATIVE_BLOCKS);
         this.copy(AetherIITags.Blocks.ICESTONE_DECORATIVE_BLOCKS, AetherIITags.Items.ICESTONE_DECORATIVE_BLOCKS);
+        this.copy(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS, AetherIITags.Items.LOCKED_DUNGEON_BLOCKS);
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(AetherIITags.Items.ANIMALS_FURS).add(
                 AetherIIItems.TAEGORE_HIDE.get(),
@@ -635,6 +636,52 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.BURRUKAI_PELT_BOOTS.get(),
                 AetherIIItems.BURRUKAI_PELT_GLOVES.get()
         );
+        this.tag(ItemTags.SWORD_ENCHANTABLE).addTags(
+                AetherIITags.Items.TOOLS_SPEARS,
+                AetherIITags.Items.TOOLS_HAMMERS
+        );
+        this.tag(ItemTags.CROSSBOW_ENCHANTABLE).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
+        );
+        this.tag(ItemTags.DURABILITY_ENCHANTABLE).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
+        );
+        this.tag(ItemTags.VANISHING_ENCHANTABLE).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
+        );
+        this.tag(ItemTags.PILLAGER_PREFERRED_WEAPONS).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
+        );
+        this.tag(ItemTags.PIGLIN_PREFERRED_WEAPONS).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
+        );
+        this.tag(ItemTags.WITHER_SKELETON_DISLIKED_WEAPONS).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
+        );
 
         // Forge
         this.tag(Tags.Items.BOOKSHELVES).add(
@@ -713,10 +760,24 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_CROSSBOW.get(),
                 AetherIIItems.GRAVITITE_CROSSBOW.get()
         );
+        this.tag(Tags.Items.RANGED_WEAPON_TOOLS).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
+        );
         this.tag(Tags.Items.TOOLS).addTags(
                 AetherIITags.Items.TOOLS_SHORTSWORDS,
                 AetherIITags.Items.TOOLS_HAMMERS,
                 AetherIITags.Items.TOOLS_SPEARS
+        );
+        this.tag(Tags.Items.ENCHANTABLES).add(
+                AetherIIItems.SKYROOT_CROSSBOW.get(),
+                AetherIIItems.HOLYSTONE_CROSSBOW.get(),
+                AetherIIItems.ZANITE_CROSSBOW.get(),
+                AetherIIItems.ARKENIUM_CROSSBOW.get(),
+                AetherIIItems.GRAVITITE_CROSSBOW.get()
         );
         this.tag(ItemTags.HEAD_ARMOR).add(
                 AetherIIItems.TAEGORE_HIDE_HELMET.get(),

@@ -455,20 +455,22 @@ public class Moa extends MountableAnimal {
         ItemStack itemStack = player.getItemInHand(hand);
         if (itemStack.is(AetherIIItems.MOA_EGG)) {
             if (!this.level().isClientSide()) {
-                MoaEggType type = itemStack.get(AetherIIDataComponents.MOA_EGG_TYPE);
-                if (type != null) {
-                    Moa moa = AetherIIEntityTypes.MOA.get().create(this.level(), EntitySpawnReason.SPAWN_ITEM_USE);
-                    if (moa != null) {
-                        Vec3 vec3 = this.blockPosition().getCenter();
-                        moa.setBaby(false);
-                        moa.setPlayerGrown(true);
-                        moa.setKeratinColor(type.keratinColor().getSerializedName());
-                        moa.setEyeColor(type.eyeColor().getSerializedName());
-                        moa.setFeatherColor(type.featherColor().getSerializedName());
-                        moa.setFeatherShape(type.featherShape().getSerializedName());
-                        moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
-                        this.level().addFreshEntity(moa);
-                        return InteractionResult.SUCCESS;
+                if (player.hasInfiniteMaterials()) {
+                    MoaEggType type = itemStack.get(AetherIIDataComponents.MOA_EGG_TYPE);
+                    if (type != null) {
+                        Moa moa = AetherIIEntityTypes.MOA.get().create(this.level(), EntitySpawnReason.SPAWN_ITEM_USE);
+                        if (moa != null) {
+                            Vec3 vec3 = this.blockPosition().getCenter();
+                            moa.setBaby(false);
+                            moa.setPlayerGrown(true);
+                            moa.setKeratinColor(type.keratinColor().getSerializedName());
+                            moa.setEyeColor(type.eyeColor().getSerializedName());
+                            moa.setFeatherColor(type.featherColor().getSerializedName());
+                            moa.setFeatherShape(type.featherShape().getSerializedName());
+                            moa.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(this.getRandom().nextFloat() * 360.0F), 0.0F);
+                            this.level().addFreshEntity(moa);
+                            return InteractionResult.SUCCESS;
+                        }
                     }
                 }
             }

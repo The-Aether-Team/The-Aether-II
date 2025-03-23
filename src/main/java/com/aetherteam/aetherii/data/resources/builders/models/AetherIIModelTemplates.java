@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import com.aetherteam.aetherii.AetherII;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.ModelTemplate;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -276,6 +273,14 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TARAHESP_FLOWERS_3 = create("template_tarahesp_flowers_3", "_3", AetherIITextureSlots.TARAHESP_FLOWERS_PURPLE, AetherIITextureSlots.TARAHESP_FLOWERS_WHITE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate TARAHESP_FLOWERS_4 = create("template_tarahesp_flowers_4", "_4", AetherIITextureSlots.TARAHESP_FLOWERS_PURPLE, AetherIITextureSlots.TARAHESP_FLOWERS_WHITE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate AMBRELINN_MOSS_VINE = create("template_ambrelinn_moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
+    public static final ModelTemplate UNDERGROWTH_VINES = create("template_undergrowth_vines", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
+    public static final ModelTemplate ROTSHROOM_CLUSTER = create("template_rotshroom_cluster", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate ROTSHROOM_TOADSTOOL_CLUSTER = create("template_rotshroom_toadstool_cluster", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate ROTSHROOM_TOADSTOOL = create("template_rotshroom_toadstool", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_ROTSHROOM = create("template_shelf_rotshroom", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_ROTSHROOM_BLOCK = create("template_shelf_rotshroom_block", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate CARPET_CUTOUT = ModelTemplates.create("carpet", TextureSlot.WOOL).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate MOSSY_CARPET_SIDE_CUTOUT = ModelTemplates.create("mossy_carpet_side", TextureSlot.SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_LEFT = create("door_bottom_left", "_bottom_left", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_LEFT_OPEN = create("door_bottom_left_open", "_bottom_left_open", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_RIGHT = create("door_bottom_right", "_bottom_right", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
@@ -293,6 +298,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ARTISANS_BENCH = create("template_artisans_bench", TextureSlot.ALL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ARKENIUM_FORGE = create("template_arkenium_forge", TextureSlot.ALL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ARILUM_LANTERN = create("template_arilum_lantern", TextureSlot.TEXTURE, TextureSlot.INSIDE);
+
+    public static final ModelTemplate LOCKED_BLOCK_INVENTORY = createItem("locked_block_inventory", AetherIITextureSlots.FACE, AetherIITextureSlots.OVERLAY).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
     public static final ModelTemplate TRANSLUCENT_FLAT_ITEM = ModelTemplates.FLAT_ITEM.extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build();
     public static final ModelTemplate MEDIUM_CRYSTAL = ModelTemplates.createItem("medium_amethyst_bud", TextureSlot.LAYER0);
