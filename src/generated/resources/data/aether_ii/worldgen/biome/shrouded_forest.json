@@ -64,11 +64,14 @@
       "aether_ii:water_spring"
     ],
     [
+      "aether_ii:coarse_aether_dirt_surface",
       "aether_ii:shrouded_forest_trees",
+      "aether_ii:tree_moss_cover",
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
       "aether_ii:highlands_bush_patch",
+      "aether_ii:bryalinn_flower_patch",
       "aether_ii:grass_and_dirt_floor",
       "aether_ii:coarse_aether_dirt_floor",
       "aether_ii:coarse_aether_dirt_ceiling",
@@ -155,43 +158,43 @@
         "type": "aether_ii:highfields_taegore",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 20
       },
       {
         "type": "aether_ii:highfields_burrukai",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 10
+        "weight": 20
       },
       {
         "type": "aether_ii:highfields_kirrid",
         "maxCount": 3,
         "minCount": 1,
-        "weight": 12
+        "weight": 24
       },
       {
         "type": "aether_ii:phyg",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 4
+        "weight": 8
       },
       {
         "type": "aether_ii:flying_cow",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 4
+        "weight": 8
       },
       {
         "type": "aether_ii:sheepuff",
         "maxCount": 2,
         "minCount": 2,
-        "weight": 6
+        "weight": 12
       },
       {
         "type": "aether_ii:aerbunny",
         "maxCount": 2,
         "minCount": 1,
-        "weight": 8
+        "weight": 16
       }
     ],
     "misc": [],

@@ -130,6 +130,26 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.AMBEROOT_LOG.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get()
         );
+        this.tag(AetherIITags.Blocks.LEAVES).add(
+                AetherIIBlocks.SKYROOT_LEAVES.get(),
+                AetherIIBlocks.SKYPLANE_LEAVES.get(),
+                AetherIIBlocks.SKYBIRCH_LEAVES.get(),
+                AetherIIBlocks.SKYPINE_LEAVES.get(),
+                AetherIIBlocks.WISPROOT_LEAVES.get(),
+                AetherIIBlocks.WISPTOP_LEAVES.get(),
+                AetherIIBlocks.GREATROOT_LEAVES.get(),
+                AetherIIBlocks.GREATOAK_LEAVES.get(),
+                AetherIIBlocks.GREATBOA_LEAVES.get(),
+                AetherIIBlocks.AMBEROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
+        );
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
                 AetherIIBlocks.SKYROOT_HIGHLIGHT.get(),
@@ -341,12 +361,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
-        this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
+        this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).addTag(AetherIITags.Blocks.LEAVES).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW.get(),
                 AetherIIBlocks.ARCTIC_ICE.get(),
-                AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
+                AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()
         );
         this.tag(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
@@ -541,26 +564,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MARBLED_ICHORITE_WALL.get(),
                 AetherIIBlocks.MARBLED_BRICK_WALL.get()
         );
-        this.tag(BlockTags.LEAVES).add(
-                AetherIIBlocks.SKYROOT_LEAVES.get(),
-                AetherIIBlocks.SKYPLANE_LEAVES.get(),
-                AetherIIBlocks.SKYBIRCH_LEAVES.get(),
-                AetherIIBlocks.SKYPINE_LEAVES.get(),
-                AetherIIBlocks.WISPROOT_LEAVES.get(),
-                AetherIIBlocks.WISPTOP_LEAVES.get(),
-                AetherIIBlocks.GREATROOT_LEAVES.get(),
-                AetherIIBlocks.GREATOAK_LEAVES.get(),
-                AetherIIBlocks.GREATBOA_LEAVES.get(),
-                AetherIIBlocks.AMBEROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
-        );
+        this.tag(BlockTags.LEAVES).addTag(AetherIITags.Blocks.LEAVES);
         this.tag(BlockTags.TRAPDOORS).add(
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
         );
@@ -673,7 +677,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_LADDER.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
-                AetherIIBlocks.AMBRELINN_MOSS_VINES.get()
+                AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
+                AetherIIBlocks.TANGLED_BRANCHES.get()
         );
         this.tag(BlockTags.FENCE_GATES).add(
                 AetherIIBlocks.SKYROOT_FENCE_GATE.get(),

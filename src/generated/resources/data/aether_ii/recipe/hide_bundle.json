@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "aether_ii:taegore_hide",
+    "-": "aether_ii:cloudtwine"
+  },
+  "pattern": [
+    "-",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "aether_ii:hide_bundle"
+  }
+}

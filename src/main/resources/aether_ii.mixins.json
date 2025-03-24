@@ -9,6 +9,7 @@
     "common.AttributeUtilMixin",
     "common.BlockBehaviourMixin",
     "common.EntityMixin",
+    "common.HeightmapTypesMixin",
     "common.ItemCooldownsMixin",
     "common.ItemStackMixin",
     "common.PlayerMixin",
