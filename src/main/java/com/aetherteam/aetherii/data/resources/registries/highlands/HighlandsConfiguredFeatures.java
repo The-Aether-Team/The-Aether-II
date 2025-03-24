@@ -1818,7 +1818,7 @@ public class HighlandsConfiguredFeatures {
                 ));
 
         register(context, INFECTED_GUARDIAN_TREE_ENTRANCE, AetherIIFeatures.DUNGEON_ENTRANCE.get(), new DungeonEntranceConfiguration(
-          ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/entrance"), 12, 12));
+          ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "infected_guardian_tree/entrance"), 11, 11));
     }
     
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {
