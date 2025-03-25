@@ -62,7 +62,6 @@
       "aether_ii:water_spring"
     ],
     [
-      "aether_ii:shimmering_basin_trees",
       "aether_ii:shimmering_basin_trees_sunken",
       "aether_ii:grass_field",
       "aether_ii:valkyrie_sprout_patch",
@@ -80,7 +79,8 @@
       "aether_ii:short_arilum",
       "aether_ii:arilum",
       "aether_ii:blooming_arilum",
-      "aether_ii:pond_arilum"
+      "aether_ii:pond_arilum",
+      "aether_ii:shimmering_basin_trees"
     ],
     [
       "aether_ii:high_storm_aercloud",

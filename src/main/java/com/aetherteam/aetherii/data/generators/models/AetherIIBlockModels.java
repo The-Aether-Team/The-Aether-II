@@ -112,7 +112,7 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createAercloud(AetherIIBlocks.STORM_AERCLOUD.get());
 
         // Moa Nest
-        this.createTrivialCube(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
+        this.createWovenSticks(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
 
         // Logs
         this.woodProvider(AetherIIBlocks.SKYROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.SKYROOT_LOG.get()).wood(AetherIIBlocks.SKYROOT_WOOD.get());

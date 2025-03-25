@@ -93,7 +93,7 @@ public class AetherIIBlockBuilders {
     }
 
     public static boolean spawnOnLeaves(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
-        return entityType.is(AetherIITags.Entities.SPAWNING_LEAVES);
+        return entityType.is(AetherIITags.Entities.SPAWNING_LEAVES) || (state.getOptionalValue(AetherIIBlockStateProperties.MOSSY).isPresent() && state.getValue(AetherIIBlockStateProperties.MOSSY) != AetherIIBlockStateProperties.Mossy.NONE);
     }
 
     public static int lightLevel8(BlockState state) {

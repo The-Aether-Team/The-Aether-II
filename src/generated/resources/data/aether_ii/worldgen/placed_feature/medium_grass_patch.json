@@ -8,7 +8,7 @@
         "max_inclusive": 4,
         "min_inclusive": 2
       },
-      "heightmap": "MOTION_BLOCKING_NO_LEAVES",
+      "heightmap": "MOTION_BLOCKING",
       "verticalBounds": 4
     },
     {

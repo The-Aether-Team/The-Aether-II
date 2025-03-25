@@ -152,22 +152,22 @@ public class GasBlock extends Block implements CanisterPickup {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
         if (levelReader instanceof Level level) {
-            if (this.shouldExplode(level.getBlockState(facingPos)) || this.shouldExplode(state)) {
-                this.explode(level, currentPos, true);
+            if (this.shouldExplode(level.getBlockState(neighborPos)) || this.shouldExplode(state)) {
+                this.explode(level, pos, true);
                 return state;
             }
         }
-        if (facing.getAxis().isHorizontal()) {
-            int i = getDistanceAt(facingState, HORIZONTAL_DISTANCE, MAX_HORIZONTAL_DISTANCE) + 1;
+        if (direction.getAxis().isHorizontal()) {
+            int i = getDistanceAt(neighborState, HORIZONTAL_DISTANCE, MAX_HORIZONTAL_DISTANCE) + 1;
             if (i != 1 || state.getValue(HORIZONTAL_DISTANCE) != i) {
-                scheduledTickAccess.scheduleTick(currentPos, this, 10);
+                scheduledTickAccess.scheduleTick(pos, this, 10);
             }
-        } else if (facing.getAxis().isVertical()) {
-            int j = getDistanceAt(facingState, VERTICAL_DISTANCE, MAX_VERTICAL_DISTANCE) + 1;
+        } else if (direction.getAxis().isVertical()) {
+            int j = getDistanceAt(neighborState, VERTICAL_DISTANCE, MAX_VERTICAL_DISTANCE) + 1;
             if (j != 1 || state.getValue(VERTICAL_DISTANCE) != j) {
-                scheduledTickAccess.scheduleTick(currentPos, this, 10);
+                scheduledTickAccess.scheduleTick(pos, this, 10);
             }
         }
         return state;

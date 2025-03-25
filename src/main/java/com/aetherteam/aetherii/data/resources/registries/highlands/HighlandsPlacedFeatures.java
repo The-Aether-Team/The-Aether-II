@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.highlands.Highla
 import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ImprovedLayerPlacementModifier;
 import com.aetherteam.aetherii.world.feature.modifier.filter.LakePlacementModifier;
+import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
 import com.aetherteam.nitrogen.data.resources.builders.NitrogenPlacedFeatureBuilders;
@@ -62,11 +63,14 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ARCTIC_FLOWER_PATCH = createKey("arctic_flower_patch");
     public static final ResourceKey<PlacedFeature> MAGNETIC_SHROOM_PATCH = createKey("magnetic_shroom_patch");
     public static final ResourceKey<PlacedFeature> BONUS_MAGNETIC_SHROOM_PATCH = createKey("bonus_magnetic_shroom_patch");
+    public static final ResourceKey<PlacedFeature> BRYALINN_FLOWER_PATCH = createKey("bryalinn_flower_patch");
 
     public static final ResourceKey<PlacedFeature> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<PlacedFeature> ARILUM = createKey("arilum");
     public static final ResourceKey<PlacedFeature> BLOOMING_ARILUM = createKey("blooming_arilum");
     public static final ResourceKey<PlacedFeature> POND_ARILUM = createKey("pond_arilum");
+
+    public static final ResourceKey<PlacedFeature> TREE_MOSS_COVER = createKey("tree_moss_cover");
 
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
 
@@ -134,6 +138,7 @@ public class HighlandsPlacedFeatures {
 
 
     // Worldgen
+    public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_SURFACE = createKey("coarse_aether_dirt_surface");
     public static final ResourceKey<PlacedFeature> DISK_BRYALINN_MOSS = createKey("disk_bryalinn_moss");
     public static final ResourceKey<PlacedFeature> LAKE_DISK_BRYALINN_MOSS = createKey("lake_disk_bryalinn_moss");
 
@@ -314,28 +319,28 @@ public class HighlandsPlacedFeatures {
                 context,
                 SMALL_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SMALL_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(3, 6), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(3, 6), 4),
                 BiomeFilter.biome()
         );
         register(
                 context,
                 MEDIUM_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MEDIUM_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(2, 4), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(2, 4), 4),
                 BiomeFilter.biome()
         );
         register(
                 context,
                 LARGE_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(0, 3), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 3), 4),
                 BiomeFilter.biome()
         );
         register(
                 context,
                 IRRADIATED_GRASS_PATCH,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.IRRADIATED_GRASS_PATCH),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(2, 6), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(2, 6), 4),
                 BiomeFilter.biome()
         );
         register(
@@ -350,45 +355,45 @@ public class HighlandsPlacedFeatures {
         register(context, HIGHLANDS_BUSH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHLANDS_BUSH),
                 NoiseThresholdCountPlacement.of(-0.1, 2, 0),
                 RarityFilter.onAverageOnceEvery(2),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(0, 1), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
                 BiomeFilter.biome());
         register(context, HIGHLANDS_BUSH_PATCH_FIELD, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHLANDS_BUSH),
                 NoiseThresholdCountPlacement.of(-0.1, 2, 0),
                 RarityFilter.onAverageOnceEvery(20),
-                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, UniformInt.of(0, 1), 4),
+                ImprovedLayerPlacementModifier.of(Heightmap.Types.MOTION_BLOCKING, UniformInt.of(0, 1), 4),
                 BiomeFilter.biome());
         register(context, BLUEBERRY_BUSH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLUEBERRY_BUSH),
                 NoiseThresholdCountPlacement.of(0.1, 1, 0),
                 RarityFilter.onAverageOnceEvery(10),
                 InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
         register(context, ORANGE_TREE_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORANGE_TREE),
                 NoiseBasedCountPlacement.of(3, 10, 0),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP,
-                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(new Vec3i(0, -1, 0), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), BlockPredicate.replaceable())),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.anyOf(BlockPredicate.matchesTag(Vec3i.ZERO.below(), AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON), new MossyPredicate(Vec3i.ZERO.below())), BlockPredicate.replaceable(), BlockPredicate.noFluid())),
                 BiomeFilter.biome());
 
         register(context, HIGHLANDS_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHLANDS_FLOWER_PATCH),
                 RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
         register(context, HIGHFIELDS_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.HIGHFIELDS_FLOWER_PATCH),
                 NoiseThresholdCountPlacement.of(0.8, 1, 3),
                 InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
         register(context, MAGNETIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MAGNETIC_FLOWER_PATCH),
                 NoiseThresholdCountPlacement.of(0.8, 1, 3),
                 InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
         register(context, ARCTIC_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARCTIC_FLOWER_PATCH),
                 NoiseThresholdCountPlacement.of(0.8, 1, 3),
                 InSquarePlacement.spread(),
-                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
         register(context, MAGNETIC_SHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.MAGNETIC_SHROOM_PATCH),
                 CountPlacement.of(UniformInt.of(0, 12)),
@@ -399,6 +404,11 @@ public class HighlandsPlacedFeatures {
                 CountPlacement.of(2),
                 InSquarePlacement.spread(),
                 PlacementUtils.FULL_RANGE,
+                BiomeFilter.biome());
+        register(context, BRYALINN_FLOWER_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BRYALINN_FLOWER_PATCH),
+                CountPlacement.of(2),
+                InSquarePlacement.spread(),
+                PlacementUtils.HEIGHTMAP,
                 BiomeFilter.biome());
 
         register(context, SHORT_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHORT_ARILUM),
@@ -422,6 +432,8 @@ public class HighlandsPlacedFeatures {
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
+
+        register(context, TREE_MOSS_COVER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREE_MOSS_COVER));
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
     }
@@ -654,6 +666,13 @@ public class HighlandsPlacedFeatures {
     public static void bootstrapWorldgen(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
+        register(context, COARSE_AETHER_DIRT_SURFACE, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_SURFACE),
+                CountPlacement.of(5),
+                InSquarePlacement.spread(),
+                HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES),
+                RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+                BiomeFilter.biome()
+        );
         register(context, DISK_BRYALINN_MOSS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.DISK_BRYALINN_MOSS),
                 CountPlacement.of(7),
                 InSquarePlacement.spread(),

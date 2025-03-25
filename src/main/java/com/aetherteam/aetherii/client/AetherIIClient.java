@@ -11,6 +11,7 @@ import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherIIItemTintSources;
 import com.aetherteam.aetherii.client.renderer.item.properties.AetherIIItemModelProperties;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
+import com.aetherteam.aetherii.client.sprite.AetherIISpriteSourceTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -77,6 +78,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIItemModelProperties::registerSelectProperties);
         neoBus.addListener(AetherIIItemModelProperties::registerRangeSelectProperties);
         neoBus.addListener(AetherIIAtlases::registerAtlases);
+        neoBus.addListener(AetherIISpriteSourceTypes::registerSpriteSourceTypes);
         neoBus.addListener(AetherIIItemTintSources::registerTintSources);
     }
 
