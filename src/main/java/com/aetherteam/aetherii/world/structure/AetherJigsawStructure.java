@@ -107,10 +107,10 @@ public class AetherJigsawStructure extends Structure {
     }
 
     private static boolean checkCorners(ChunkGenerator generator, LevelHeightAccessor heightAccessor, ChunkPos chunkPos, RandomState random, int startY) {
-        int minX = chunkPos.getMinBlockX() - 8;
-        int minZ = chunkPos.getMinBlockZ() - 8;
-        int maxX = chunkPos.getMaxBlockX() + 8;
-        int maxZ = chunkPos.getMaxBlockZ() + 8;
+        int minX = chunkPos.getMinBlockX() - 1;
+        int minZ = chunkPos.getMinBlockZ() - 1;
+        int maxX = chunkPos.getMaxBlockX() + 1;
+        int maxZ = chunkPos.getMaxBlockZ() + 1;
         NoiseColumn[] columns = {
                 generator.getBaseColumn(minX, minZ, heightAccessor, random),
                 generator.getBaseColumn(minX, maxZ, heightAccessor, random),
@@ -118,7 +118,7 @@ public class AetherJigsawStructure extends Structure {
                 generator.getBaseColumn(maxX, maxZ, heightAccessor, random)
         };
         for (NoiseColumn column : columns) {
-            if (!column.getBlock(startY - 20).isAir()) {
+            if (!column.getBlock(startY - 16).isAir()) {
                 return true;
             }
         }

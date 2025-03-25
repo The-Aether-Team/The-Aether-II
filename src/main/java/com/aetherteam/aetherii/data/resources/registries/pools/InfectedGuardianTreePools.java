@@ -11,11 +11,20 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 public class InfectedGuardianTreePools {
+    public static final ResourceKey<StructureTemplatePool> ENTRANCE = AetherIIPools.createKey("infected_guardian_tree/entrance");
     public static final ResourceKey<StructureTemplatePool> START_ROOM = AetherIIPools.createKey("infected_guardian_tree/start_room");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
+
+        context.register(ENTRANCE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/entrance"), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
 
         context.register(START_ROOM, new StructureTemplatePool(
                 fallback,

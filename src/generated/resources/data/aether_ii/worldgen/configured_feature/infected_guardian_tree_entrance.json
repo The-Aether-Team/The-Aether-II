@@ -1,8 +1,0 @@
-{
-  "type": "aether_ii:dungeon_entrance",
-  "config": {
-    "path": "aether_ii:infected_guardian_tree/entrance",
-    "x_offset": 11,
-    "z_offset": 11
-  }
-}

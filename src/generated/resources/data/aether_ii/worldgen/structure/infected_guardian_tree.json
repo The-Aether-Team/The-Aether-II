@@ -2,7 +2,7 @@
   "type": "aether_ii:aether_jigsaw",
   "biomes": "#aether_ii:has_structure/infected_guardian_tree",
   "buried": true,
-  "discard_above_y": 164,
+  "discard_above_y": 176,
   "discard_below_y": 128,
   "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": 64,
@@ -10,9 +10,8 @@
   "size": 20,
   "spawn_overrides": {},
   "start_height": {
-    "absolute": -28
+    "absolute": -3
   },
-  "start_pool": "aether_ii:infected_guardian_tree/start_room",
-  "step": "surface_structures",
-  "terrain_adaptation": "encapsulate"
+  "start_pool": "aether_ii:infected_guardian_tree/entrance",
+  "step": "surface_structures"
 }

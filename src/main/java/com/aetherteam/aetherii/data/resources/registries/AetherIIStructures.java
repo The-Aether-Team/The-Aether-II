@@ -48,8 +48,8 @@ public class AetherIIStructures {
                 templatePools.getOrThrow(CampHighfieldsPools.CENTER), Optional.empty(), 20, ConstantHeight.of(VerticalAnchor.absolute(0)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 32, 128, 256, false, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
         context.register(INFECTED_GUARDIAN_TREE, new AetherJigsawStructure(
-                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.ENCAPSULATE),
-                templatePools.getOrThrow(InfectedGuardianTreePools.START_ROOM), Optional.empty(), 20, ConstantHeight.of(VerticalAnchor.absolute(-28)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 64, 128, 164, true, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
+                AetherIIStructureBuilders.structure(biomes.getOrThrow(AetherIITags.Biomes.HAS_STRUCTURE_INFECTED_GUARDIAN_TREE), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE),
+                templatePools.getOrThrow(InfectedGuardianTreePools.ENTRANCE), Optional.empty(), 20, ConstantHeight.of(VerticalAnchor.absolute(-3)), Optional.of(Heightmap.Types.WORLD_SURFACE_WG), 64, 128, 176, true, List.of(), DimensionPadding.ZERO, LiquidSettings.IGNORE_WATERLOGGING));
 
     }
 }
