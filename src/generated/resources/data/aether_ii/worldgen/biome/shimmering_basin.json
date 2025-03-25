@@ -49,6 +49,7 @@
       "aether_ii:ore_corrobonite",
       "aether_ii:ore_glint",
       "aether_ii:disk_bryalinn_moss",
+      "aether_ii:lake_disk_bryalinn_moss",
       "aether_ii:ore_gas_open",
       "aether_ii:ore_gas_buried",
       "aether_ii:unstable_holystone",
@@ -78,6 +79,7 @@
       "aether_ii:short_arilum",
       "aether_ii:arilum",
       "aether_ii:blooming_arilum",
+      "aether_ii:pond_arilum",
       "aether_ii:shimmering_basin_trees"
     ],
     [

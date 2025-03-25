@@ -2,21 +2,11 @@
   "feature": "aether_ii:underwater_mossy_holystone_boulder",
   "placement": [
     {
-      "type": "minecraft:noise_threshold_count",
-      "above_noise": 2,
-      "below_noise": 4,
-      "noise_level": -0.2
+      "type": "aether_ii:lake_placement"
     },
     {
       "type": "minecraft:rarity_filter",
-      "chance": 2
-    },
-    {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "OCEAN_FLOOR"
+      "chance": 40
     },
     {
       "type": "minecraft:block_predicate_filter",

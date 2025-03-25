@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.data.resources.builders.worldgen.highlands.HighlandsPlacementBuilders;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ImprovedLayerPlacementModifier;
+import com.aetherteam.aetherii.world.feature.modifier.filter.LakePlacementModifier;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
@@ -67,6 +68,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SHORT_ARILUM = createKey("short_arilum");
     public static final ResourceKey<PlacedFeature> ARILUM = createKey("arilum");
     public static final ResourceKey<PlacedFeature> BLOOMING_ARILUM = createKey("blooming_arilum");
+    public static final ResourceKey<PlacedFeature> POND_ARILUM = createKey("pond_arilum");
 
     public static final ResourceKey<PlacedFeature> TREE_MOSS_COVER = createKey("tree_moss_cover");
 
@@ -138,6 +140,7 @@ public class HighlandsPlacedFeatures {
     // Worldgen
     public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_SURFACE = createKey("coarse_aether_dirt_surface");
     public static final ResourceKey<PlacedFeature> DISK_BRYALINN_MOSS = createKey("disk_bryalinn_moss");
+    public static final ResourceKey<PlacedFeature> LAKE_DISK_BRYALINN_MOSS = createKey("lake_disk_bryalinn_moss");
 
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL = createKey("coast_quicksoil");
     public static final ResourceKey<PlacedFeature> COAST_QUICKSOIL_SPARSE = createKey("coast_quicksoil_sparse");
@@ -252,10 +255,8 @@ public class HighlandsPlacedFeatures {
                 context,
                 UNDERWATER_MOSSY_HOLYSTONE_BOULDER,
                 configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERWATER_MOSSY_HOLYSTONE_BOULDER),
-                NoiseThresholdCountPlacement.of(-0.2, 4, 2),
-                RarityFilter.onAverageOnceEvery(2),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new LakePlacementModifier(),
+                RarityFilter.onAverageOnceEvery(40),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.BOULDER_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 RandomOffsetPlacement.vertical(UniformInt.of(0, 1)),
                 BiomeFilter.biome()
@@ -411,19 +412,22 @@ public class HighlandsPlacedFeatures {
                 BiomeFilter.biome());
 
         register(context, SHORT_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.SHORT_ARILUM),
-                PlacementUtils.countExtra(125, 0.2F, 25),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new LakePlacementModifier(),
+                RarityFilter.onAverageOnceEvery(2),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
         register(context, ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARILUM),
-                NoiseBasedCountPlacement.of(100, 10.0, 0.0),
-                InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                new LakePlacementModifier(),
+                RarityFilter.onAverageOnceEvery(5),
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
                 BiomeFilter.biome());
         register(context, BLOOMING_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.BLOOMING_ARILUM),
-                NoiseBasedCountPlacement.of(50, 10.0, 0.5),
+                new LakePlacementModifier(),
+                RarityFilter.onAverageOnceEvery(6),
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
+                BiomeFilter.biome());
+        register(context, POND_ARILUM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.POND_ARILUM),
+                NoiseBasedCountPlacement.of(25, 10.0, 0.5),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))),
@@ -673,6 +677,12 @@ public class HighlandsPlacedFeatures {
                 CountPlacement.of(7),
                 InSquarePlacement.spread(),
                 PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)),
+                BiomeFilter.biome()
+        );
+        register(context, LAKE_DISK_BRYALINN_MOSS, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.DISK_BRYALINN_MOSS),
+                new LakePlacementModifier(),
+                RarityFilter.onAverageOnceEvery(25),
                 BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)),
                 BiomeFilter.biome()
         );
