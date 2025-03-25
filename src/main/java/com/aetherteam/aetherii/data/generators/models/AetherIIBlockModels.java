@@ -125,6 +125,22 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.woodProvider(AetherIIBlocks.MOSSY_WISPROOT_LOG.get()).logWithHorizontal(AetherIIBlocks.MOSSY_WISPROOT_LOG.get()).wood(AetherIIBlocks.MOSSY_WISPROOT_WOOD.get());
         this.createFacingTopBottomColumnWithHorizontalVariant(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get(), AetherIIBlocks.WISPROOT_LOG.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
 
+        // Trunks
+        this.createTrunk(AetherIIBlocks.SKYROOT_TRUNK.get(), AetherIIBlocks.SKYROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.GREATROOT_TRUNK.get(), AetherIIBlocks.GREATROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.WISPROOT_TRUNK.get(), AetherIIBlocks.WISPROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(), AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(), AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.AMBEROOT_TRUNK.get(), AetherIIBlocks.AMBEROOT_LOG.get());
+        this.createTrunk(AetherIIBlocks.GUARDIAN_TRUNK.get(), AetherIIBlocks.GUARDIAN_LOG.get());
+        this.createTrunk(AetherIIBlocks.DENSE_GUARDIAN_TRUNK.get(), AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get(), AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
+        this.createTrunk(AetherIIBlocks.INFECTED_TRUNK.get(), AetherIIBlocks.INFECTED_LOG.get());
+        this.createTrunk(AetherIIBlocks.DENSE_INFECTED_TRUNK.get(), AetherIIBlocks.DENSE_INFECTED_LOG.get());
+        this.createTrunk(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get(), AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+
         // Leaves
         this.createLeavesWithPiles(AetherIIBlocks.SKYROOT_LEAVES.get(), AetherIIBlocks.SKYROOT_LEAF_PILE.get());
         this.createLeavesWithPiles(AetherIIBlocks.SKYPLANE_LEAVES.get(), AetherIIBlocks.SKYPLANE_LEAF_PILE.get());

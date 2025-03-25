@@ -128,6 +128,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_WOOD, "Stripped Wisproot Wood");
         this.addBlock(AetherIIBlocks.AMBEROOT_WOOD, "Amberoot Wood");
 
+        // Trunks
+        this.addBlock(AetherIIBlocks.SKYROOT_TRUNK, "Skyroot Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_SKYROOT_TRUNK, "Stripped Skyroot Trunk");
+        this.addBlock(AetherIIBlocks.GREATROOT_TRUNK, "Greatroot Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_GREATROOT_TRUNK, "Stripped Greatroot Trunk");
+        this.addBlock(AetherIIBlocks.WISPROOT_TRUNK, "Wisproot Trunk");
+        this.addBlock(AetherIIBlocks.MOSSY_WISPROOT_TRUNK, "Mossy Wisproot Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, "Stripped Wisproot Trunk");
+        this.addBlock(AetherIIBlocks.AMBEROOT_TRUNK, "Amberoot Trunk");
+
         // Leaf Pile
         this.addBlock(AetherIIBlocks.SKYROOT_LEAF_PILE, "Skyroot Leaf Pile");
         this.addBlock(AetherIIBlocks.SKYPLANE_LEAF_PILE, "Skyplane Leaf Pile");
@@ -524,6 +534,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_WOOD, "Locked Guardian Wood");
         this.addBlock(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD, "Locked Dense Guardian Wood");
         this.addBlock(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS, "Locked Guardian Roots");
+        this.addBlock(AetherIIBlocks.GUARDIAN_TRUNK, "Guardian Trunk");
+        this.addBlock(AetherIIBlocks.DENSE_GUARDIAN_TRUNK, "Dense Guardian Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, "Stripped Guardian Trunk");
 
         // Infected Dungeon Blocks
         this.addBlock(AetherIIBlocks.INFECTED_LOG, "Infected Log");
@@ -555,6 +568,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBlock(AetherIIBlocks.LOCKED_INFECTED_WOOD, "Locked Infected Wood");
         this.addBlock(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD, "Locked Dense Infected Wood");
         this.addBlock(AetherIIBlocks.LOCKED_INFECTED_ROOTS, "Locked Infected Roots");
+        this.addBlock(AetherIIBlocks.INFECTED_TRUNK, "Infected Trunk");
+        this.addBlock(AetherIIBlocks.DENSE_INFECTED_TRUNK, "Dense Infected Trunk");
+        this.addBlock(AetherIIBlocks.STRIPPED_INFECTED_TRUNK, "Stripped Infected Trunk");
 
         // Rotshroom Blocks
         this.addBlock(AetherIIBlocks.ROTSHROOM_CLUSTER, "Rotshroom Cluster");

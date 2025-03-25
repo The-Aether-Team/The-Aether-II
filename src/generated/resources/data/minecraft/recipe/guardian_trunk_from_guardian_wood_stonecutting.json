@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "aether_ii:guardian_wood",
+  "result": {
+    "count": 1,
+    "id": "aether_ii:guardian_trunk"
+  }
+}

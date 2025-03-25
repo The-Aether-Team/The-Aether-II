@@ -248,6 +248,13 @@ public class AetherIIModelTemplates {
             ).build();
     public static final ModelTemplate POINTED_STONE_BLOCK = ModelTemplates.create("pointed_dripstone", TextureSlot.CROSS).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
+    public static final ModelTemplate TRUNK_CENTER = AetherIIModelTemplates.create("template_trunk_center", "_center", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_SIDE = AetherIIModelTemplates.create("template_trunk_side", "_side", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_CORNER = AetherIIModelTemplates.create("template_trunk_corner", "_corner", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_CENTER_TALL = AetherIIModelTemplates.create("template_trunk_center_tall", "_center_tall", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_SIDE_TALL = AetherIIModelTemplates.create("template_trunk_side_tall", "_side_tall", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_CORNER_TALL = AetherIIModelTemplates.create("template_trunk_corner_tall", "_corner_tall", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_INVENTORY = AetherIIModelTemplates.create("template_trunk_inventory", "_inventory", TextureSlot.ALL);
     public static final ModelTemplate MOSS_VINE = create("moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED = create("asymmetrical_cross_even_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();

@@ -40,6 +40,15 @@ public class AetherIIBlockBuilders {
                 .ignitedByLava();
     }
 
+    public static Supplier<Block.Properties> trunkProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
+                .mapColor(mapColor)
+                .instrument(NoteBlockInstrument.BASS)
+                .strength(2.0F)
+                .sound(SoundType.WOOD)
+                .ignitedByLava();
+    }
+
     @SuppressWarnings("deprecation")
     public static Supplier<Block.Properties> leafPileProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
