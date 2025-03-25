@@ -328,11 +328,11 @@ public class TrunkBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     private static boolean isShapeSidePresent(BlockGetter level, Direction facing, BlockPos facingPos, BlockState facingState) {
-        return !isTrunk(facingState) && !facingState.getShape(level, facingPos).getFaceShape(facing).isEmpty() && !Block.isExceptionForConnection(facingState);
+        return !isTrunk(facingState) && !facingState.getCollisionShape(level, facingPos).getFaceShape(facing).isEmpty() && !Block.isExceptionForConnection(facingState);
     }
 
     private static boolean isShapeSideFull(BlockGetter level, Direction facing, BlockPos facingPos, BlockState facingState) {
-        return !isTrunk(facingState) && Block.isFaceFull(facingState.getShape(level, facingPos), facing) && !Block.isExceptionForConnection(facingState);
+        return !isTrunk(facingState) && Block.isFaceFull(facingState.getCollisionShape(level, facingPos), facing) && !Block.isExceptionForConnection(facingState);
     }
 
     private static boolean isTrunk(BlockState state) {
