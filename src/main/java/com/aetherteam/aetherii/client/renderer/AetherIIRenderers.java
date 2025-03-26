@@ -8,6 +8,7 @@ import com.aetherteam.aetherii.client.renderer.accessory.GlovesRenderer;
 import com.aetherteam.aetherii.client.renderer.accessory.model.GlovesModel;
 import com.aetherteam.aetherii.client.renderer.block.model.baked.AmbientOcclusionLightModel;
 import com.aetherteam.aetherii.client.renderer.block.model.baked.FastModel;
+import com.aetherteam.aetherii.client.renderer.block.model.unbaked.UnbakedTrunkModelLoader;
 import com.aetherteam.aetherii.client.renderer.blockentity.ArkeniumForgeRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
@@ -196,5 +197,9 @@ public class AetherIIRenderers {
             }
         }
         return models;
+    }
+
+    public static void registerModelLoaders(ModelEvent.RegisterLoaders event) {
+        event.register(UnbakedTrunkModelLoader.ID , UnbakedTrunkModelLoader.INSTANCE);
     }
 }

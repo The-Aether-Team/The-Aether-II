@@ -2,27 +2,11 @@
   "feature": "aether_ii:short_arilum",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": {
-        "type": "minecraft:weighted_list",
-        "distribution": [
-          {
-            "data": 125,
-            "weight": 4
-          },
-          {
-            "data": 150,
-            "weight": 1
-          }
-        ]
-      }
+      "type": "aether_ii:lake_placement"
     },
     {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:heightmap",
-      "heightmap": "OCEAN_FLOOR"
+      "type": "minecraft:rarity_filter",
+      "chance": 2
     },
     {
       "type": "minecraft:block_predicate_filter",

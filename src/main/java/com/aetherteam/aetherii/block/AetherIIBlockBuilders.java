@@ -40,6 +40,15 @@ public class AetherIIBlockBuilders {
                 .ignitedByLava();
     }
 
+    public static Supplier<Block.Properties> trunkProperties(MapColor mapColor) {
+        return () -> Block.Properties.of()
+                .mapColor(mapColor)
+                .instrument(NoteBlockInstrument.BASS)
+                .strength(2.0F)
+                .sound(SoundType.WOOD)
+                .ignitedByLava();
+    }
+
     @SuppressWarnings("deprecation")
     public static Supplier<Block.Properties> leafPileProperties(MapColor mapColor) {
         return () -> Block.Properties.of()
@@ -93,7 +102,7 @@ public class AetherIIBlockBuilders {
     }
 
     public static boolean spawnOnLeaves(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
-        return entityType.is(AetherIITags.Entities.SPAWNING_LEAVES);
+        return entityType.is(AetherIITags.Entities.SPAWNING_LEAVES) || (state.getOptionalValue(AetherIIBlockStateProperties.MOSSY).isPresent() && state.getValue(AetherIIBlockStateProperties.MOSSY) != AetherIIBlockStateProperties.Mossy.NONE);
     }
 
     public static int lightLevel8(BlockState state) {

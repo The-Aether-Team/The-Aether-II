@@ -1,32 +1,46 @@
 package com.aetherteam.aetherii.block.natural;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.client.renderer.level.HighlandsSpecialEffects;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.BushBlockAccessor;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.TriState;
 
+import java.util.Locale;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class AetherLeavesBlock extends LeavesBlock {
     public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
+    public static final EnumProperty<AetherIIBlockStateProperties.Mossy> MOSSY = AetherIIBlockStateProperties.MOSSY;
     private final Supplier<SimpleParticleType> leavesParticle;
     private final Supplier<Block> leavesPile;
 
@@ -34,7 +48,7 @@ public class AetherLeavesBlock extends LeavesBlock {
         super(properties);
         this.leavesParticle = leavesParticle;
         this.leavesPile = leavesPile;
-        this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(DISTANCE, 7).setValue(PERSISTENT, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(SNOWY, Boolean.FALSE).setValue(MOSSY, AetherIIBlockStateProperties.Mossy.NONE));
     }
 
     @Override
@@ -68,10 +82,20 @@ public class AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState currentState, RandomSource randomSource) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
+        BlockState returnState = super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
+        if (direction == Direction.UP) {
+            if (neighborState.is(AetherIIBlocks.BRYALINN_MOSS_CARPET) || neighborState.is(AetherIIBlocks.BRYALINN_MOSS_BLOCK)) {
+                returnState = returnState.setValue(MOSSY, AetherIIBlockStateProperties.Mossy.BRYALINN);
+            } else if (neighborState.is(AetherIIBlocks.SHAYELINN_MOSS_CARPET) || neighborState.is(AetherIIBlocks.SHAYELINN_MOSS_BLOCK)) {
+                returnState = returnState.setValue(MOSSY, AetherIIBlockStateProperties.Mossy.SHAYELINN);
+            } else if (neighborState.is(AetherIIBlocks.AMBRELINN_MOSS_CARPET) || neighborState.is(AetherIIBlocks.AMBRELINN_MOSS_BLOCK)) {
+                returnState = returnState.setValue(MOSSY, AetherIIBlockStateProperties.Mossy.AMBRELINN);
+            }
+        }
         return direction == Direction.UP
-                ? state.setValue(SNOWY, currentState.is(AetherIIBlocks.ARCTIC_SNOW) || currentState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
-                : super.updateShape(state, level, scheduledTickAccess, blockPos, direction, currentPos, currentState, randomSource);
+                ? returnState.setValue(SNOWY, neighborState.is(AetherIIBlocks.ARCTIC_SNOW) || neighborState.is(AetherIIBlocks.ARCTIC_SNOW_BLOCK))
+                : returnState;
     }
 
     @Override
@@ -114,7 +138,17 @@ public class AetherLeavesBlock extends LeavesBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(DISTANCE, PERSISTENT, WATERLOGGED, SNOWY);
+    public TriState canSustainPlant(BlockState state, BlockGetter level, BlockPos soilPosition, Direction facing, BlockState plant) {
+        Block plantBlock = plant.getBlock();
+        if (plantBlock instanceof BushBlock bushBlock && ((BushBlockAccessor) bushBlock).callMayPlaceOn(Blocks.GRASS_BLOCK.defaultBlockState(), level, soilPosition) && !plant.is(BlockTags.SAPLINGS)) {
+            return TriState.TRUE;
+        } else {
+            return super.canSustainPlant(state, level, soilPosition, facing, plant);
+        }
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(DISTANCE, PERSISTENT, WATERLOGGED, SNOWY, MOSSY);
     }
 }

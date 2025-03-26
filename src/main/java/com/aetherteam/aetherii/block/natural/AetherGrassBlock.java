@@ -131,8 +131,8 @@ public class AetherGrassBlock extends GrassBlock {
 
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState facingState, RandomSource randomSource) {
-        return direction == Direction.UP ? state.setValue(SNOWY, isSnowySetting(facingState)) : super.updateShape(state, levelReader, scheduledTickAccess, blockPos, direction, currentPos, facingState, randomSource);
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
+        return direction == Direction.UP ? state.setValue(SNOWY, isSnowySetting(neighborState)) : super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
     }
 
     @Override

@@ -7,6 +7,8 @@ import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.block.utility.AltarBlock;
 import com.aetherteam.aetherii.block.utility.ArkeniumForgeBlock;
 import com.aetherteam.aetherii.client.AetherIIColorResolvers;
+import com.aetherteam.aetherii.client.renderer.block.model.builder.TrunkModelBuilder;
+import com.aetherteam.aetherii.client.renderer.block.model.unbaked.UnbakedTrunkModelLoader;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherGrassColorSource;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIIModelTemplates;
 import com.aetherteam.aetherii.data.resources.builders.models.AetherIITextureMappings;
@@ -22,7 +24,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MossyCarpetBlock;
 import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.properties.*;
@@ -33,6 +34,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
+
+import static com.aetherteam.aetherii.client.renderer.block.model.baked.TrunkModel.*;
 
 public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
     public AetherIIBlockModelSubProvider(Consumer<BlockStateGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -51,6 +54,43 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
         TextureMapping texturemapping = type.getPlantTextureMapping(plant);
         ResourceLocation resourcelocation = type.getCrossPot().extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build().create(pot, texturemapping, this.modelOutput);
         this.blockStateOutput.accept(createSimpleBlock(pot, resourcelocation));
+    }
+
+    public void createTrunk(Block trunk, Block log) {
+        TextureMapping mapping = TextureMapping.cube(log).copyForced(TextureSlot.ALL, TextureSlot.PARTICLE);
+        ResourceLocation side = AetherIIModelTemplates.TRUNK_SIDE.create(trunk, mapping, this.modelOutput);
+        ResourceLocation corner = AetherIIModelTemplates.TRUNK_CORNER.create(trunk, mapping, this.modelOutput);
+        ResourceLocation sideTall = AetherIIModelTemplates.TRUNK_SIDE_TALL.create(trunk, mapping, this.modelOutput);
+        ResourceLocation cornerTall = AetherIIModelTemplates.TRUNK_CORNER_TALL.create(trunk, mapping, this.modelOutput);
+        ResourceLocation inventory = AetherIIModelTemplates.TRUNK_INVENTORY.create(trunk, mapping, this.modelOutput);
+
+        Consumer<TrunkModelBuilder> connections = (loader) -> {
+            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHWEST_CONNECTION.getName(), WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHEAST_CONNECTION.getName(), WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHEAST_CONNECTION.getName(), WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHWEST_CONNECTION.getName(), WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, corner).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHWEST_CONNECTION.getName(), WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(NORTHEAST_CONNECTION.getName(), WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHEAST_CONNECTION.getName(), WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true));
+            loader.add(new UnbakedTrunkModelLoader.Holder(SOUTHWEST_CONNECTION.getName(), WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, cornerTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+        };
+
+        ResourceLocation center = AetherIIModelTemplates.TRUNK_CENTER.extend().customLoader(TrunkModelBuilder::new, connections).build().create(trunk, mapping, this.modelOutput);
+        ResourceLocation centerTall = AetherIIModelTemplates.TRUNK_CENTER_TALL.extend().customLoader(TrunkModelBuilder::new, connections).build().create(trunk, mapping, this.modelOutput);
+
+        MultiPartGenerator model = MultiPartGenerator.multiPart(trunk)
+                .with(Condition.condition().term(TrunkBlock.TALL, false), Variant.variant().with(VariantProperties.MODEL, center))
+                .with(Condition.condition().term(TrunkBlock.TALL, true), Variant.variant().with(VariantProperties.MODEL, centerTall))
+                .with(Condition.condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.EAST_CONNECTION, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.WEST_CONNECTION, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.NORTH_CONNECTION, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.EAST_CONNECTION,WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.SOUTH_CONNECTION, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition().term(TrunkBlock.WEST_CONNECTION, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, sideTall).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.UV_LOCK, true));
+        this.blockStateOutput.accept(model);
+        this.registerSimpleItemModel(trunk, inventory);
     }
 
     @Override
@@ -377,11 +417,57 @@ public class AetherIIBlockModelSubProvider extends BlockModelGenerators {
                 .with(Condition.condition().term(BlockStateProperties.FLOWER_AMOUNT, 4).term(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST), Variant.variant().with(VariantProperties.MODEL, flowerbed4).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270)));
     }
 
+    public void createWovenSticks(Block sticks) {
+        ResourceLocation defaultLocation = TexturedModel.CUBE.create(sticks, this.modelOutput);
+        ResourceLocation bryalinnLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(sticks, "_bryalinn"), AetherIITextureMappings.mossyTopped(sticks, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput);
+        ResourceLocation shayelinnLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(sticks, "_shayelinn"), AetherIITextureMappings.mossyTopped(sticks, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput);
+        ResourceLocation ambrelinnLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(sticks, "_ambrelinn"), AetherIITextureMappings.mossyTopped(sticks, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(sticks).with(PropertyDispatch.property(AetherLeavesBlock.MOSSY).generate((mossy) -> {
+            switch(mossy) {
+                case BRYALINN -> {
+                    return Variant.variant().with(VariantProperties.MODEL, bryalinnLocation);
+                }
+                case SHAYELINN -> {
+                    return Variant.variant().with(VariantProperties.MODEL, shayelinnLocation);
+                }
+                case AMBRELINN -> {
+                    return Variant.variant().with(VariantProperties.MODEL, ambrelinnLocation);
+                }
+                default -> {
+                    return Variant.variant().with(VariantProperties.MODEL, defaultLocation);
+                }
+            }
+        })));
+    }
+
     public void createLeavesWithPiles(Block leaves, Block piles) {
-        TextureMapping snowMapping = AetherIITextureMappings.snowyLeaves(leaves);
         ResourceLocation defaultLocation = AetherIITexturedModels.LEAVES.create(leaves, this.modelOutput);
-        ResourceLocation snowyLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), snowMapping, this.modelOutput);
-        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(leaves).with(BlockModelGenerators.createBooleanModelDispatch(AetherLeavesBlock.SNOWY, snowyLocation, defaultLocation)));
+        ResourceLocation snowyLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_snowy"), AetherIITextureMappings.snowyLeaves(leaves), this.modelOutput);
+        ResourceLocation bryalinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_bryalinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(), "bryalinn"), this.modelOutput);
+        ResourceLocation shayelinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_shayelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(), "shayelinn"), this.modelOutput);
+        ResourceLocation ambrelinnLocation = AetherIIModelTemplates.CUBE_TOP_BOTTOM_INNER_TOP.create(ModelLocationUtils.getModelLocation(leaves, "_ambrelinn"), AetherIITextureMappings.mossyTopped(leaves, AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(), "ambrelinn"), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(leaves)
+                .with(PropertyDispatch.properties(AetherLeavesBlock.SNOWY, AetherLeavesBlock.MOSSY).generate((snowy, mossy) -> {
+                    if (snowy) {
+                        return Variant.variant().with(VariantProperties.MODEL, snowyLocation);
+                    } else {
+                        switch(mossy) {
+                            case BRYALINN -> {
+                                return Variant.variant().with(VariantProperties.MODEL, bryalinnLocation);
+                            }
+                            case SHAYELINN -> {
+                                return Variant.variant().with(VariantProperties.MODEL, shayelinnLocation);
+                            }
+                            case AMBRELINN -> {
+                                return Variant.variant().with(VariantProperties.MODEL, ambrelinnLocation);
+                            }
+                            default -> {
+                                return Variant.variant().with(VariantProperties.MODEL, defaultLocation);
+                            }
+                        }
+                    }
+                }))
+        );
         this.createPiles(piles, leaves);
     }
 

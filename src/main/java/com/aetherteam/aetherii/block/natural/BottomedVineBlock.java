@@ -69,11 +69,11 @@ public class BottomedVineBlock extends VineBlock {
 
 
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess tickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState currentState, RandomSource randomSource) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
         if (direction == Direction.DOWN) {
-            return super.updateShape(state, levelReader, tickAccess, blockPos, direction, currentPos, currentState, randomSource);
+            return super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
         } else {
-            BlockState updatedState = this.getUpdatedState(state, levelReader, currentPos);
+            BlockState updatedState = this.getUpdatedState(state, levelReader, pos);
             return !this.hasFaces(updatedState) ? Blocks.AIR.defaultBlockState() : updatedState;
         }
     }

@@ -20,7 +20,7 @@
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:dirt"
+        "Name": "aether_ii:aether_dirt"
       }
     },
     "foliage_placer": {
@@ -35,6 +35,7 @@
         "Name": "aether_ii:skyroot_leaves",
         "Properties": {
           "distance": "7",
+          "mossy_overlay": "none",
           "persistent": "false",
           "snowy": "false",
           "waterlogged": "false"

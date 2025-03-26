@@ -208,6 +208,36 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_vines", has(AetherIIBlocks.BRYALINN_MOSS_VINES))
                 .save(this.output);
 
+        // Trunks
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_TRUNK, AetherIIBlocks.SKYROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_SKYROOT_TRUNK, AetherIIBlocks.STRIPPED_SKYROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_TRUNK, AetherIIBlocks.GREATROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_GREATROOT_TRUNK, AetherIIBlocks.STRIPPED_GREATROOT_TRUNK);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_TRUNK, AetherIIBlocks.WISPROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_WISPROOT_TRUNK, AetherIIBlocks.MOSSY_WISPROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRUNK, AetherIIBlocks.AMBEROOT_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.GUARDIAN_TRUNK, AetherIIBlocks.GUARDIAN_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.DENSE_GUARDIAN_TRUNK, AetherIIBlocks.DENSE_GUARDIAN_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, AetherIIBlocks.STRIPPED_GUARDIAN_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.INFECTED_TRUNK, AetherIIBlocks.INFECTED_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.DENSE_INFECTED_TRUNK, AetherIIBlocks.DENSE_INFECTED_WOOD);
+        this.wall(RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_INFECTED_TRUNK, AetherIIBlocks.STRIPPED_INFECTED_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_TRUNK, AetherIIBlocks.SKYROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_SKYROOT_TRUNK, AetherIIBlocks.STRIPPED_SKYROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GREATROOT_TRUNK, AetherIIBlocks.GREATROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_GREATROOT_TRUNK, AetherIIBlocks.STRIPPED_GREATROOT_TRUNK);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.WISPROOT_TRUNK, AetherIIBlocks.WISPROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.MOSSY_WISPROOT_TRUNK, AetherIIBlocks.MOSSY_WISPROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_WISPROOT_TRUNK, AetherIIBlocks.STRIPPED_WISPROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.AMBEROOT_TRUNK, AetherIIBlocks.AMBEROOT_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.GUARDIAN_TRUNK, AetherIIBlocks.GUARDIAN_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.DENSE_GUARDIAN_TRUNK, AetherIIBlocks.DENSE_GUARDIAN_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK, AetherIIBlocks.STRIPPED_GUARDIAN_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.INFECTED_TRUNK, AetherIIBlocks.INFECTED_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.DENSE_INFECTED_TRUNK, AetherIIBlocks.DENSE_INFECTED_WOOD);
+        this.stonecuttingRecipe(this.output, RecipeCategory.DECORATIONS, AetherIIBlocks.STRIPPED_INFECTED_TRUNK, AetherIIBlocks.STRIPPED_INFECTED_WOOD);
+
         // Leaf Pile
         leafPile(getter, AetherIIBlocks.SKYROOT_LEAF_PILE, AetherIIBlocks.SKYROOT_LEAVES.get());
         leafPile(getter, AetherIIBlocks.SKYPLANE_LEAF_PILE, AetherIIBlocks.SKYPLANE_LEAVES.get());
@@ -1149,6 +1179,13 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .unlockedBy("has_feed", has(AetherIIItems.MOA_FEED))
                 .save(this.output);
 
+        ShapedRecipeBuilder.shaped(getter, RecipeCategory.TOOLS, AetherIIItems.HIDE_BUNDLE)
+                .define('-', AetherIIItems.CLOUDTWINE)
+                .define('#', AetherIIItems.TAEGORE_HIDE)
+                .pattern("-")
+                .pattern("#")
+                .unlockedBy("has_cloudtwine", this.has(AetherIIItems.CLOUDTWINE))
+                .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.MOA_SADDLE.get())
                 .define('#', AetherIIItems.TAEGORE_HIDE)
                 .define('/', AetherIIItems.CLOUDTWINE)

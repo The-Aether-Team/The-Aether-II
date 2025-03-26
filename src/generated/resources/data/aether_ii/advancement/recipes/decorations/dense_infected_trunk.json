@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dense_infected_wood": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aether_ii:dense_infected_wood"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "aether_ii:dense_infected_trunk"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dense_infected_wood"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "aether_ii:dense_infected_trunk"
+    ]
+  }
+}
