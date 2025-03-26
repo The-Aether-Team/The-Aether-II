@@ -32,13 +32,13 @@ public class AetherIIStructureSets {
     public static void bootstrap(BootstrapContext<StructureSet> context) {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
+        Holder.Reference<StructureSet> surfaceDungeons = context.register(SURFACE_DUNGEONS, new StructureSet(structures.getOrThrow(AetherIIStructures.INFECTED_GUARDIAN_TREE),
+                new RandomSpreadStructurePlacement(24, 16, RandomSpreadType.LINEAR, 897773)));
+
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
-                new RandomSpreadStructurePlacement(28, 18, RandomSpreadType.LINEAR, 2738116)));
+                new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 1.0F, 2738116, Optional.of(new StructurePlacement.ExclusionZone(surfaceDungeons, 16)), 28, 18, RandomSpreadType.LINEAR)));
 
         context.register(CAMPS, new StructureSet(structures.getOrThrow(AetherIIStructures.CAMP_HIGHFIELDS),
                 new RandomSpreadStructurePlacement(Vec3i.ZERO, StructurePlacement.FrequencyReductionMethod.LEGACY_TYPE_1, 0.6F, 1147092, Optional.of(new StructurePlacement.ExclusionZone(outposts, 8)), 22, 10, RandomSpreadType.LINEAR)));
-
-        context.register(SURFACE_DUNGEONS, new StructureSet(structures.getOrThrow(AetherIIStructures.INFECTED_GUARDIAN_TREE),
-                new RandomSpreadStructurePlacement(24, 16, RandomSpreadType.LINEAR, 897773)));
     }
 }
