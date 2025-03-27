@@ -36,6 +36,7 @@ import java.util.Optional;
 
 public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.Mutable> {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_EFFECTS_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_effects.png");
+    private static final ResourceLocation UNDISCOVERED_ENTRY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/effects/undiscovered");
     private final List<EffectsEntry.Mutable> orderedEntries = new ArrayList<>();
 
     public EffectsSection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
@@ -91,25 +92,19 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
 
         List<EffectsEntry.Mutable> visibleEntries = this.getOrderedEntries().size() > this.maxSlots() ? this.getOrderedEntries().subList(Math.max(0, this.getSlotOffset()), Math.min(this.getSlotOffset() + this.maxSlots(), this.getOrderedEntries().size())) : this.getOrderedEntries();
         for (EffectsEntry.Mutable entry : visibleEntries) {
-            GuiSpriteManager guiSpriteManager = Minecraft.getInstance().getGuiSprites();
-
-            ResourceLocation sprite;
-//            if (this.isUnlocked(entry, BestiaryEntry.ICON.id())) {
-                sprite = entry.getIcon();
-                if (guiSpriteManager.getSprite(sprite).equals(guiSpriteManager.getSprite(MissingTextureAtlasSprite.getLocation()))) {
-//                    sprite = DISCOVERED_ENTRY_FALLBACK_SPRITE;
-                }
-//            } else {
-//                sprite = UNDISCOVERED_ENTRY_SPRITE;
-//            }
-            TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
-
             int x = i % 6;
             int y = i / 6;
             int slotX = leftPos + (x * 18);
             int slotY = topPos + (y * 18);
-            guiGraphics.blitSprite(RenderType::guiTextured, effectAtlasSprite, slotX, slotY, 16, 16);
 
+            TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
+
+            if (this.isUnlocked(entry, EffectsEntry.ICON.id())) {
+                guiGraphics.blitSprite(RenderType::guiTextured, effectAtlasSprite, slotX, slotY, 16, 16);
+            } else {
+                guiGraphics.blitSprite(RenderType::guiTextured, UNDISCOVERED_ENTRY_SPRITE, slotX, slotY, 16, 16);
+            }
+            
             boolean isHovered = hoveredEntry != null && entry.getEffect() == hoveredEntry.getEffect();
             boolean isSelected = this.selectedEntry != null && entry.getEffect() == this.selectedEntry.getEffect();
 
