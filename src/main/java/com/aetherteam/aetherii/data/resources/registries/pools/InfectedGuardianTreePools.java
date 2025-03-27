@@ -17,6 +17,8 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> TRUNK_ENTRANCE = AetherIIPools.createKey("infected_guardian_tree/trunk/entrance");
     public static final ResourceKey<StructureTemplatePool> TRUNK_WALLS = AetherIIPools.createKey("infected_guardian_tree/trunk/walls");
     public static final ResourceKey<StructureTemplatePool> TRUNK_TOP = AetherIIPools.createKey("infected_guardian_tree/trunk/top");
+    public static final ResourceKey<StructureTemplatePool> TRUNK_BRANCHES = AetherIIPools.createKey("infected_guardian_tree/trunk/branches");
+    public static final ResourceKey<StructureTemplatePool> TRUNK_TOP_BRANCHES = AetherIIPools.createKey("infected_guardian_tree/trunk/top_branches");
     public static final ResourceKey<StructureTemplatePool> START_ROOM = AetherIIPools.createKey("infected_guardian_tree/start_room");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
@@ -54,6 +56,23 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/top_01", processorTrunk), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(TRUNK_BRANCHES, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_01", processorTrunk), 3),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_02", processorTrunk), 2)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(TRUNK_TOP_BRANCHES, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/top_branch_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
