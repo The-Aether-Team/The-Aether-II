@@ -64,6 +64,9 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
                             if (effectsClientValue.getValue().isVisible() && !matchingEntry.get().getClientValues().get(effectsClientValue.getKey()).isVisible()) {
                                 matchingEntry.get().getClientValues().get(effectsClientValue.getKey()).reveal();
                             }
+                            if (effectsClientValue.getValue().isViewed() && !matchingEntry.get().getClientValues().get(effectsClientValue.getKey()).isViewed()) {
+                                matchingEntry.get().getClientValues().get(effectsClientValue.getKey()).view();
+                            }
                         }
                     }
                 }

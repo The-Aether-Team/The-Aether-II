@@ -93,6 +93,9 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                             if (bestiaryClientValue.getValue().isVisible() && !matchingEntry.get().getClientValues().get(bestiaryClientValue.getKey()).isVisible()) {
                                 matchingEntry.get().getClientValues().get(bestiaryClientValue.getKey()).reveal();
                             }
+                            if (bestiaryClientValue.getValue().isViewed() && !matchingEntry.get().getClientValues().get(bestiaryClientValue.getKey()).isViewed()) {
+                                matchingEntry.get().getClientValues().get(bestiaryClientValue.getKey()).view();
+                            }
                         }
                     }
                 }
