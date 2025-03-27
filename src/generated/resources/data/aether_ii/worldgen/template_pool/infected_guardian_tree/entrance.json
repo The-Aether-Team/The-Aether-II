@@ -5,9 +5,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/entrance/entrance",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": {
-          "processors": []
-        },
+        "processors": "aether_ii:infected_guardian_tree_trunk",
         "projection": "rigid",
         "replace_air": false
       },

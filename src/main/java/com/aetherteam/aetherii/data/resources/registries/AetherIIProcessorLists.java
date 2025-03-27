@@ -15,6 +15,7 @@ import java.util.List;
 
 public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP_HIGHFIELDS = createKey("camp_highfields");
+    public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE_TRUNK = createKey("infected_guardian_tree_trunk");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
         register(context, CAMP_HIGHFIELDS, ImmutableList.of(
@@ -27,6 +28,13 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.2F), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.25F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 0)),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.VALKYRIE_SPROUT.get(), 0.15F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.VALKYRIE_SPROUT.get().defaultBlockState().setValue(ValkyrieSproutBlock.AGE, 1))
+                ))
+        ));
+
+        register(context, INFECTED_GUARDIAN_TREE_TRUNK, ImmutableList.of(
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get(), 0.75F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 ))
         ));
     }
