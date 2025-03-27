@@ -14,8 +14,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> TRUNK_BASE = AetherIIPools.createKey("infected_guardian_tree/trunk/base");
+    public static final ResourceKey<StructureTemplatePool> TRUNK_ENTRANCE = AetherIIPools.createKey("infected_guardian_tree/trunk/entrance");
     public static final ResourceKey<StructureTemplatePool> TRUNK_WALLS = AetherIIPools.createKey("infected_guardian_tree/trunk/walls");
-    public static final ResourceKey<StructureTemplatePool> TRUNK_CORNERS = AetherIIPools.createKey("infected_guardian_tree/trunk/corners");
     public static final ResourceKey<StructureTemplatePool> TRUNK_TOP = AetherIIPools.createKey("infected_guardian_tree/trunk/top");
     public static final ResourceKey<StructureTemplatePool> START_ROOM = AetherIIPools.createKey("infected_guardian_tree/start_room");
 
@@ -34,18 +34,18 @@ public class InfectedGuardianTreePools {
                 StructureTemplatePool.Projection.RIGID)
         );
 
-        context.register(TRUNK_WALLS, new StructureTemplatePool(
+        context.register(TRUNK_ENTRANCE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/wall_01", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/entrance_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
 
-        context.register(TRUNK_CORNERS, new StructureTemplatePool(
+        context.register(TRUNK_WALLS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/corner_01", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/wall_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

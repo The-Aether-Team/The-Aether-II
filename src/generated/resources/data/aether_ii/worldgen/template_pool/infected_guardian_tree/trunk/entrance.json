@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/trunk/corner_01",
+        "location": "aether_ii:infected_guardian_tree/trunk/entrance_01",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:infected_guardian_tree_trunk",
         "projection": "rigid",
