@@ -12,6 +12,6 @@
   "start_height": {
     "absolute": -3
   },
-  "start_pool": "aether_ii:infected_guardian_tree/entrance",
+  "start_pool": "aether_ii:infected_guardian_tree/trunk/base",
   "step": "surface_structures"
 }

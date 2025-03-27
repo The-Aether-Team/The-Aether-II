@@ -13,9 +13,9 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 public class InfectedGuardianTreePools {
-    public static final ResourceKey<StructureTemplatePool> ENTRANCE = AetherIIPools.createKey("infected_guardian_tree/entrance");
-    public static final ResourceKey<StructureTemplatePool> ENTRANCE_WALLS = AetherIIPools.createKey("infected_guardian_tree/entrance_walls");
-    public static final ResourceKey<StructureTemplatePool> ENTRANCE_CORNERS = AetherIIPools.createKey("infected_guardian_tree/entrance_corners");
+    public static final ResourceKey<StructureTemplatePool> TRUNK_BASE = AetherIIPools.createKey("infected_guardian_tree/trunk/base");
+    public static final ResourceKey<StructureTemplatePool> TRUNK_WALLS = AetherIIPools.createKey("infected_guardian_tree/trunk/walls");
+    public static final ResourceKey<StructureTemplatePool> TRUNK_CORNERS = AetherIIPools.createKey("infected_guardian_tree/trunk/corners");
     public static final ResourceKey<StructureTemplatePool> START_ROOM = AetherIIPools.createKey("infected_guardian_tree/start_room");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
@@ -25,26 +25,26 @@ public class InfectedGuardianTreePools {
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
         Holder<StructureProcessorList> processorTrunk = processors.getOrThrow(AetherIIProcessorLists.INFECTED_GUARDIAN_TREE_TRUNK);
 
-        context.register(ENTRANCE, new StructureTemplatePool(
+        context.register(TRUNK_BASE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/entrance/entrance", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/base", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
 
-        context.register(ENTRANCE_WALLS, new StructureTemplatePool(
+        context.register(TRUNK_WALLS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/entrance/entrance_wall_01", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/wall_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
 
-        context.register(ENTRANCE_CORNERS, new StructureTemplatePool(
+        context.register(TRUNK_CORNERS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/entrance/entrance_corner_01", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/corner_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
