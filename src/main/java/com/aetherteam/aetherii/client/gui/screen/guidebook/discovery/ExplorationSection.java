@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntr
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 import java.util.List;
 
@@ -22,6 +23,11 @@ public class ExplorationSection extends DiscoverySection<ExplorationEntry, Explo
     @Override
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
+    }
+
+    @Override
+    protected CustomPacketPayload getViewedPacket(ExplorationEntry.Mutable entry) {
+        return null;
     }
 
     @Override

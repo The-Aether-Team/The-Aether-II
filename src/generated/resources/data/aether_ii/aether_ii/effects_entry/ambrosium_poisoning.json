@@ -1,6 +1,6 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aether_ii:ambrosium_poisoning",
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.ambrosium_poisoning",
   "effect": "aether_ii:ambrosium_poisoning",
-  "icon": "aether_ii:ambrosium_poisoning",
+  "icon": "minecraft:ambrosium_poisoning",
   "items": []
 }

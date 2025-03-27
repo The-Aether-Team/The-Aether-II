@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -33,6 +34,7 @@ public class AetherIIEffectsEntries {
     public static final ResourceKey<EffectsEntry> FROSTBITE = createKey("frostbite");
     public static final ResourceKey<EffectsEntry> FUNGAL_ROT = createKey("fungal_rot");
     public static final ResourceKey<EffectsEntry> CRYSTALLIZED = createKey("crystallized");
+    public static final ResourceKey<EffectsEntry> SATURATION_BOOST = createKey("saturation_boost");
 
     public static final Map<ResourceKey<EffectsEntry>, Holder<MobEffect>> EFFECTS = Map.ofEntries(
             Map.entry(WOUND, AetherIIEffects.WOUND),
@@ -46,22 +48,24 @@ public class AetherIIEffectsEntries {
             Map.entry(IMMOLATION, AetherIIEffects.IMMOLATION),
             Map.entry(FROSTBITE, AetherIIEffects.FROSTBITE),
             Map.entry(FUNGAL_ROT, AetherIIEffects.FUNGAL_ROT),
-            Map.entry(CRYSTALLIZED, AetherIIEffects.CRYSTALLIZED)
+            Map.entry(CRYSTALLIZED, AetherIIEffects.CRYSTALLIZED),
+            Map.entry(SATURATION_BOOST, AetherIIEffects.SATURATION_BOOST)
     );
 
     public static final Map<Holder<MobEffect>, List<Holder<Item>>> ITEMS = Map.ofEntries(
-            Map.entry(AetherIIEffects.WOUND, List.of()),
-            Map.entry(AetherIIEffects.STUN, List.of()),
-            Map.entry(AetherIIEffects.FRACTURE, List.of()),
+            Map.entry(AetherIIEffects.WOUND, List.of(AetherIIItems.BANDAGE)),
+            Map.entry(AetherIIEffects.STUN, List.of(AetherIIItems.BANDAGE)),
+            Map.entry(AetherIIEffects.FRACTURE, List.of(AetherIIItems.BANDAGE, AetherIIItems.SPLINT)),
             Map.entry(AetherIIEffects.AMBROSIUM_POISONING, List.of()),
-            Map.entry(AetherIIEffects.TOXIN, List.of()),
-            Map.entry(AetherIIEffects.VENOM, List.of()),
+            Map.entry(AetherIIEffects.TOXIN, List.of(AetherIIItems.ANTITOXIN_VIAL)),
+            Map.entry(AetherIIEffects.VENOM, List.of(AetherIIItems.ANTIVENOM_VIAL)),
             Map.entry(AetherIIEffects.CHARGED, List.of()),
             Map.entry(AetherIIEffects.WEBBED, List.of()),
             Map.entry(AetherIIEffects.IMMOLATION, List.of()),
             Map.entry(AetherIIEffects.FROSTBITE, List.of()),
             Map.entry(AetherIIEffects.FUNGAL_ROT, List.of()),
-            Map.entry(AetherIIEffects.CRYSTALLIZED, List.of())
+            Map.entry(AetherIIEffects.CRYSTALLIZED, List.of()),
+            Map.entry(AetherIIEffects.SATURATION_BOOST, List.of())
     );
 
     private static ResourceKey<EffectsEntry> createKey(String name) {
@@ -71,12 +75,12 @@ public class AetherIIEffectsEntries {
     public static void bootstrap(BootstrapContext<EffectsEntry> context) {
         for (Map.Entry<ResourceKey<EffectsEntry>, Holder<MobEffect>> entry : EFFECTS.entrySet()) {
             Holder<MobEffect> holder = entry.getValue();
-            context.register(entry.getKey(), new EffectsEntry(
-                    ResourceLocation.parse(holder.getRegisteredName()),
+            context.register(entry.getKey(), new EffectsEntry( //todo
+                    ResourceLocation.parse(holder.getKey().location().getPath()),
                     Optional.empty(),
                     Optional.empty(),
                     Optional.empty(),
-                    "aether_ii.guidebook_bestiary.description.entity.aether_ii." + holder.getRegisteredName(),
+                    "aether_ii.guidebook_effects.description.effect.aether_ii." + holder.getKey().location().getPath(),
                     holder,
                     ITEMS.get(holder)
             ));

@@ -1,6 +1,10 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aether_ii:toxin",
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.toxin",
   "effect": "aether_ii:toxin",
-  "icon": "aether_ii:toxin",
-  "items": []
+  "icon": "minecraft:toxin",
+  "items": [
+    {
+      "item": "aether_ii:antitoxin_vial"
+    }
+  ]
 }

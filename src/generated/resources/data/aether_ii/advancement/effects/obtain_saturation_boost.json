@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "obtain_saturation_boost": {
+      "conditions": {
+        "effects": {
+          "aether_ii:saturation_boost": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_saturation_boost"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

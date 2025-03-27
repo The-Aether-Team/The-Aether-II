@@ -10,29 +10,29 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record CheckGuidebookEntryPacket(EntityType<?> entityType) implements CustomPacketPayload {
-    public static final Type<CheckGuidebookEntryPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "check_guidebook_entry"));
+public record CheckEffectsEntryPacket(MobEffect effect) implements CustomPacketPayload {
+    public static final Type<CheckEffectsEntryPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "check_effects_entry"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CheckGuidebookEntryPacket> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.registry(Registries.ENTITY_TYPE),
-            CheckGuidebookEntryPacket::entityType,
-            CheckGuidebookEntryPacket::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, CheckEffectsEntryPacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.registry(Registries.MOB_EFFECT),
+            CheckEffectsEntryPacket::effect,
+            CheckEffectsEntryPacket::new);
 
     @Override
-    public Type<CheckGuidebookEntryPacket> type() {
+    public Type<CheckEffectsEntryPacket> type() {
         return TYPE;
     }
 
-    public static void execute(CheckGuidebookEntryPacket payload, IPayloadContext context) {
+    public static void execute(CheckEffectsEntryPacket payload, IPayloadContext context) {
         Player playerEntity = context.player();
         if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
             GuidebookDiscoveryAttachment attachment = serverPlayer.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
-            attachment.getBestiaryEntries().forEach((entry) -> {
-                if (entry.getEntityType().value() == payload.entityType()) {
+            attachment.getEffectsEntries().forEach((entry) -> {
+                if (entry.getEffect().value() == payload.effect()) {
                     entry.getClientValues().values().forEach((info) -> {
                         if (info.isVisible()) {
                             info.view();

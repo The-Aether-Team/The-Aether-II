@@ -1,6 +1,10 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aether_ii:wound",
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.wound",
   "effect": "aether_ii:wound",
-  "icon": "aether_ii:wound",
-  "items": []
+  "icon": "minecraft:wound",
+  "items": [
+    {
+      "item": "aether_ii:bandage"
+    }
+  ]
 }

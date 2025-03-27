@@ -1,24 +1,31 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
+import com.aetherteam.aetherii.api.guidebook.MutableEntry;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.Guidebook;
 import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScreen;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public abstract class DiscoverySection<S extends GuidebookEntry, T extends S> {
+public abstract class DiscoverySection<S extends GuidebookEntry, T extends MutableEntry> {
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_GENERAL_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_general.png");
     protected final RegistryAccess registryAccess;
     protected final ResourceKey<Registry<S>> registryKey;
@@ -59,6 +66,22 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends S> {
         int scrollbarLeft = 151;
         ResourceLocation location = Guidebook.SCROLLER.get(this.isScrollActive(), this.scrolling);
         guiGraphics.blitSprite(RenderType::guiTextured, location, scrollbarLeft, (int) (scrollbarTop + this.scrollY), 6, 9); // Render scrollbar.
+    }
+
+    protected void renderFakeSlot(GuiGraphics guiGraphics, Font font, List<Component> tooltip, ItemStack stack, double mouseX, double mouseY, int x, int y) {
+        int rightPagePos = (this.screen.width / 2);
+        int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
+        double mouseXDiff = (mouseX - rightPagePos) - x;
+        double mouseYDiff = (mouseY - topPos) - y;
+        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.SLOT_SPRITE, x, y, 18, 18);
+        x += 1;
+        y += 1;
+        guiGraphics.renderItem(stack, x, y);
+        guiGraphics.renderItemDecorations(font, stack, x, y);
+        if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
+            guiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, -2130706433, -2130706433, 0);
+            guiGraphics.renderComponentTooltip(font, tooltip, (int) (mouseX - rightPagePos), (int) (mouseY - topPos));
+        }
     }
 
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY, boolean original) {
@@ -120,10 +143,6 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends S> {
 
     public T getSelectedEntry() {
         return this.selectedEntry;
-    }
-
-    public boolean areAnyUnchecked() {
-        return false;
     }
 
     @Nullable
@@ -188,6 +207,52 @@ public abstract class DiscoverySection<S extends GuidebookEntry, T extends S> {
     protected boolean isScrollActive() {
         return this.getOrderedEntries().size() > this.maxSlots();
     }
+
+    public boolean isUnlocked(T entry, String value) {
+        if (entry.getClientValues().containsKey(value)) {
+            return entry.getClientValues().get(value).isVisible();
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isViewed(T entry) {
+        for (Map.Entry<String, GuidebookEntry.Info> values : entry.getClientValues().entrySet()) {
+            if (values.getValue().isVisible()) {
+                if (!values.getValue().isViewed()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void updateViewed(T entry) {
+        for (Map.Entry<String, GuidebookEntry.Info> values : entry.getClientValues().entrySet()) {
+            if (values.getValue().isVisible()) {
+                values.getValue().view();
+            }
+        }
+        PacketDistributor.sendToServer(this.getViewedPacket(entry));
+    }
+
+    public boolean areAnyUnchecked() {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            return this.getOrderedEntries().stream().anyMatch((entry) -> entry.getClientValues().values().stream().anyMatch((info) -> info.isVisible() && !info.isViewed()));
+        }
+        return false;
+    }
+
+    public boolean areAnyUnlocked(T entry) {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            return entry.getClientValues().values().stream().anyMatch(GuidebookEntry.Info::isVisible);
+        }
+        return false;
+    }
+
+    protected abstract CustomPacketPayload getViewedPacket(T entry);
 
     protected abstract List<T> getOrderedEntries();
 

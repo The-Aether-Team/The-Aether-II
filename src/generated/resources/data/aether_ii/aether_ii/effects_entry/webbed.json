@@ -1,6 +1,6 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aether_ii:webbed",
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.webbed",
   "effect": "aether_ii:webbed",
-  "icon": "aether_ii:webbed",
+  "icon": "minecraft:webbed",
   "items": []
 }

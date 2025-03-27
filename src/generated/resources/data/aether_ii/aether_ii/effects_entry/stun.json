@@ -1,6 +1,10 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aether_ii:stun",
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.stun",
   "effect": "aether_ii:stun",
-  "icon": "aether_ii:stun",
-  "items": []
+  "icon": "minecraft:stun",
+  "items": [
+    {
+      "item": "aether_ii:bandage"
+    }
+  ]
 }

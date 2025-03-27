@@ -1,6 +1,13 @@
 {
-  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aether_ii:fracture",
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.fracture",
   "effect": "aether_ii:fracture",
-  "icon": "aether_ii:fracture",
-  "items": []
+  "icon": "minecraft:fracture",
+  "items": [
+    {
+      "item": "aether_ii:bandage"
+    },
+    {
+      "item": "aether_ii:splint"
+    }
+  ]
 }

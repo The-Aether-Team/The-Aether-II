@@ -97,7 +97,9 @@ public class GuidebookDiscoveryAttachment {
                 this.bestiaryEntries.add(new BestiaryEntry.Mutable(entry));
             }
         }
-        this.revealEntries(registryAccess, advancement, serverPlayer, this.bestiaryEntries, GuidebookToast.Icons.BESTIARY);
+        if (advancement.id().getPath().startsWith("bestiary/")) {
+            this.revealEntries(registryAccess, advancement, serverPlayer, this.bestiaryEntries, GuidebookToast.Icons.BESTIARY);
+        }
     }
 
     private void trackEffectsEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer) {
@@ -107,7 +109,9 @@ public class GuidebookDiscoveryAttachment {
                 this.effectsEntries.add(new EffectsEntry.Mutable(entry));
             }
         }
-        this.revealEntries(registryAccess, advancement, serverPlayer, this.effectsEntries, GuidebookToast.Icons.EFFECTS);
+        if (advancement.id().getPath().startsWith("effects/")) {
+            this.revealEntries(registryAccess, advancement, serverPlayer, this.effectsEntries, GuidebookToast.Icons.EFFECTS);
+        }
     }
 
     private void trackExplorationEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer) {
@@ -117,7 +121,9 @@ public class GuidebookDiscoveryAttachment {
                 this.explorationEntries.add(new ExplorationEntry.Mutable(entry));
             }
         }
-        this.revealEntries(registryAccess, advancement, serverPlayer, this.explorationEntries, GuidebookToast.Icons.EXPLORATION);
+        if (advancement.id().getPath().startsWith("exploration/")) {
+            this.revealEntries(registryAccess, advancement, serverPlayer, this.explorationEntries, GuidebookToast.Icons.EXPLORATION);
+        }
     }
 
     private void revealEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer, List<? extends MutableEntry> list, GuidebookToast.Icons icon) {

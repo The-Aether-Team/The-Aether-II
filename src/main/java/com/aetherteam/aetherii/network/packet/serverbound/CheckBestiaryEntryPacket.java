@@ -1,0 +1,45 @@
+package com.aetherteam.aetherii.network.packet.serverbound;
+
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.attachment.player.GuidebookDiscoveryAttachment;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
+public record CheckBestiaryEntryPacket(EntityType<?> entityType) implements CustomPacketPayload {
+    public static final Type<CheckBestiaryEntryPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "check_bestiary_entry"));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, CheckBestiaryEntryPacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.registry(Registries.ENTITY_TYPE),
+            CheckBestiaryEntryPacket::entityType,
+            CheckBestiaryEntryPacket::new);
+
+    @Override
+    public Type<CheckBestiaryEntryPacket> type() {
+        return TYPE;
+    }
+
+    public static void execute(CheckBestiaryEntryPacket payload, IPayloadContext context) {
+        Player playerEntity = context.player();
+        if (playerEntity != null && playerEntity.getServer() != null && playerEntity instanceof ServerPlayer serverPlayer) {
+            GuidebookDiscoveryAttachment attachment = serverPlayer.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY);
+            attachment.getBestiaryEntries().forEach((entry) -> {
+                if (entry.getEntityType().value() == payload.entityType()) {
+                    entry.getClientValues().values().forEach((info) -> {
+                        if (info.isVisible()) {
+                            info.view();
+                        }
+                    });
+                }
+            });
+        }
+    }
+}

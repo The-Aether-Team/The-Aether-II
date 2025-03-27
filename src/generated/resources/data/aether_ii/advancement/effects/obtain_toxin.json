@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "obtain_toxin": {
+      "conditions": {
+        "effects": {
+          "aether_ii:toxin": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_toxin"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

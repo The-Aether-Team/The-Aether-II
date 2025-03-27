@@ -10,7 +10,7 @@ import com.aetherteam.aetherii.client.gui.screen.guidebook.GuidebookDiscoveryScr
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.attributes.EffectResistanceAttribute;
-import com.aetherteam.aetherii.network.packet.serverbound.CheckGuidebookEntryPacket;
+import com.aetherteam.aetherii.network.packet.serverbound.CheckBestiaryEntryPacket;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -28,6 +28,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.FormattedCharSequence;
@@ -41,11 +42,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEntry.Mutable> {
@@ -200,7 +199,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         if (entry != null) {
             int leftPagePos = ((this.screen.width + 2) / 2) - Guidebook.PAGE_WIDTH;
             int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
-            Component name = Component.translatable("gui.aether_ii.guidebook.discovery.bestiary.entry.unknown");
+            Component name = Component.translatable("gui.aether_ii.guidebook.discovery.entry.unknown");
             if (this.isUnlocked(entry, BestiaryEntry.SLOT_NAME.id())) {
                 if (entry.getSlotName().isPresent()) {
                     name = Component.translatable(entry.getSlotName().get());
@@ -354,22 +353,6 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
         }
     }
 
-    private void renderFakeSlot(GuiGraphics guiGraphics, Font font, List<Component> tooltip, ItemStack stack, double mouseX, double mouseY, int x, int y) {
-        int rightPagePos = (this.screen.width / 2);
-        int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
-        double mouseXDiff = (mouseX - rightPagePos) - x;
-        double mouseYDiff = (mouseY - topPos) - y;
-        guiGraphics.blitSprite(RenderType::guiTextured, Guidebook.SLOT_SPRITE, x, y, 18, 18);
-        x += 1;
-        y += 1;
-        guiGraphics.renderItem(stack, x, y);
-        guiGraphics.renderItemDecorations(font, stack, x, y);
-        if (mouseYDiff <= 15 && mouseYDiff >= 0 && mouseXDiff <= 15 && mouseXDiff >= 0) {
-            guiGraphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, -2130706433, -2130706433, 0);
-            guiGraphics.renderComponentTooltip(font, tooltip, (int) (mouseX - rightPagePos), (int) (mouseY - topPos));
-        }
-    }
-
     private void renderDefenseIconValue(GuiGraphics guiGraphics, int x, int y, double value) {
         Font font = Minecraft.getInstance().font;
         String name = String.valueOf(Math.abs((int) value));
@@ -433,53 +416,13 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
     }
 
     @Override
-    public List<BestiaryEntry.Mutable> getOrderedEntries() {
-        return this.orderedEntries;
-    }
-
-    private boolean isUnlocked(BestiaryEntry.Mutable entry, String value) {
-        if (entry.getClientValues().containsKey(value)) {
-            return entry.getClientValues().get(value).isVisible();
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isViewed(BestiaryEntry.Mutable entry) {
-        for (Map.Entry<String, GuidebookEntry.Info> values : entry.getClientValues().entrySet()) {
-            if (values.getValue().isVisible()) {
-                if (!values.getValue().isViewed()) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private void updateViewed(BestiaryEntry.Mutable entry) {
-        for (Map.Entry<String, GuidebookEntry.Info> values : entry.getClientValues().entrySet()) {
-            if (values.getValue().isVisible()) {
-                values.getValue().view();
-            }
-        }
-        PacketDistributor.sendToServer(new CheckGuidebookEntryPacket(entry.getEntityType().value()));
+    protected CustomPacketPayload getViewedPacket(BestiaryEntry.Mutable entry) {
+        return new CheckBestiaryEntryPacket(entry.getEntityType().value());
     }
 
     @Override
-    public boolean areAnyUnchecked() {
-        Player player = Minecraft.getInstance().player;
-        if (player != null) {
-            return this.orderedEntries.stream().anyMatch((entry) -> entry.getClientValues().values().stream().anyMatch((info) -> info.isVisible() && !info.isViewed()));
-        }
-        return false;
-    }
-
-    public boolean areAnyUnlocked(BestiaryEntry.Mutable entry) {
-        Player player = Minecraft.getInstance().player;
-        if (player != null) {
-            return entry.getClientValues().values().stream().anyMatch(GuidebookEntry.Info::isVisible);
-        }
-        return false;
+    public List<BestiaryEntry.Mutable> getOrderedEntries() {
+        return this.orderedEntries;
     }
 
     @Override
