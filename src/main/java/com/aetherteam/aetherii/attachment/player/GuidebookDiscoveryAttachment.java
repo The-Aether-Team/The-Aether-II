@@ -66,6 +66,11 @@ public class GuidebookDiscoveryAttachment {
 
     private void syncAfterJoin(Player player) {
         if (this.shouldSyncAfterJoin) {
+            if (player.level().isClientSide()) {
+                this.getBestiaryEntries().clear();
+                this.getEffectsEntries().clear();
+                this.getExplorationEntries().clear();
+            }
             if (player instanceof ServerPlayer serverPlayer) {
                 PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
             }
