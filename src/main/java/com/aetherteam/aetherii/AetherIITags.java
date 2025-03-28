@@ -29,6 +29,7 @@ public class AetherIITags {
         public static final TagKey<Block> GREATROOT_LOGS = tag("greatroot_logs");
         public static final TagKey<Block> WISPROOT_LOGS = tag("wisproot_logs");
         public static final TagKey<Block> AMBEROOT_LOGS = tag("amberoot_logs");
+        public static final TagKey<Block> LEAVES = tag("leaves");
         public static final TagKey<Block> SKYROOT_DECORATIVE_BLOCKS = tag("skyroot_decorative_blocks");
         public static final TagKey<Block> GREATROOT_DECORATIVE_BLOCKS = tag("greatroot_decorative_blocks");
         public static final TagKey<Block> WISPROOT_DECORATIVE_BLOCKS = tag("wisproot_decorative_blocks");
@@ -77,14 +78,15 @@ public class AetherIITags {
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");
         public static final TagKey<Block> CARRION_SPROUT_SPAWNABLE_ON = tag("carrion_sprout_spawnable_on");
-        public static final TagKey<Block> COCKATRICE_SPAWNABLE_BLACKLIST = tag("cockatrice_spawnable_blacklist");
-        public static final TagKey<Block> SWET_SPAWNABLE_ON = tag("swet_spawnable_on");
+        public static final TagKey<Block> SKEPHID_SPAWNABLE_ON = tag("skephid_spawnable_on");
 
         public static final TagKey<Block> MOA_HATCH_BLOCK = tag("moa_hatch_block");
 
         public static final TagKey<Block> HOLYSTONE_ABILITY_GUARANTEED = tag("holystone_ability_guaranteed");
         public static final TagKey<Block> GRAVITITE_ABILITY_BLACKLIST = tag("gravitite_ability_blacklist");
         public static final TagKey<Block> HOVERING_BLOCK_REPLACE_BLACKLIST = tag("hovering_block_replace_blacklist");
+
+        public static final TagKey<Block> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
 
         private static TagKey<Block> tag(String name) {
             return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));
@@ -110,6 +112,8 @@ public class AetherIITags {
         public static final TagKey<Item> MARBLED_ICHORITE_DECORATIVE_BLOCKS = tag("marbled_ichorite_decorative_blocks");
         public static final TagKey<Item> AGIOSITE_DECORATIVE_BLOCKS = tag("agiosite_decorative_blocks");
         public static final TagKey<Item> ICESTONE_DECORATIVE_BLOCKS = tag("icestone_decorative_blocks");
+
+        public static final TagKey<Item> LOCKED_DUNGEON_BLOCKS = tag("locked_dungeon_blocks");
 
         public static final TagKey<Item> RODS_SKYROOT = tag("rods/skyroot");
         public static final TagKey<Item> ANIMALS_FURS = tag("animals/furs");

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "aether_ii:block/stripped_infected_log",
+    "side": "aether_ii:block/top_stripped_infected_wood",
+    "top": "aether_ii:block/infected_log"
+  }
+}

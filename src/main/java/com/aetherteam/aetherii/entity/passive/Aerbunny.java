@@ -6,8 +6,10 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -23,10 +25,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -320,6 +319,37 @@ public class Aerbunny extends AetherTamableAnimal {
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public boolean startRiding(Entity vehicle, boolean force) {
+        if (vehicle == this.getVehicle()) {
+            return false;
+        } else if (!((EntityAccessor) vehicle).callCouldAcceptPassenger()) {
+            return false;
+        } else {
+            for (Entity entity = vehicle; entity.getVehicle() != null; entity = entity.getVehicle()) {
+                if (entity.getVehicle() == this) {
+                    return false;
+                }
+            }
+
+            if (!EventHooks.canMountEntity(this, vehicle, true)) {
+                return false;
+            } else if (force || this.canRide(vehicle) && ((EntityAccessor) vehicle).callCanAddPassenger(this)) {
+                if (this.isPassenger()) {
+                    this.stopRiding();
+                }
+
+                this.setPose(Pose.STANDING);
+                ((EntityAccessor) this).aether_ii$setVehicle(vehicle);
+                ((EntityAccessor) this.getVehicle()).callAddPassenger(this);
+                ((EntityAccessor) vehicle).callGetIndirectPassengersStream().filter((entity) -> entity instanceof ServerPlayer).forEach((player) -> CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) player));
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     /**

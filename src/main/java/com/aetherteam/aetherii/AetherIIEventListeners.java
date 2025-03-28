@@ -24,6 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.portal.TeleportTransition;
@@ -53,6 +54,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerPostTick);
         bus.addListener(AetherIIEventListeners::onPlayerRightClickBlock);
         bus.addListener(AetherIIEventListeners::onPlayerEntityInteractSpecific);
+        bus.addListener(AetherIIEventListeners::onMiningSpeed);
         bus.addListener(AetherIIEventListeners::onPlayerCriticalHitAttack);
         bus.addListener(AetherIIEventListeners::onPlayerAdvancementProgression);
         bus.addListener(AetherIIEventListeners::onPlayersFinishSleeping);
@@ -156,6 +158,13 @@ public class AetherIIEventListeners {
         if (result.isPresent()) {
             event.setCancellationResult(result.get());
             event.setCanceled(true);
+        }
+    }
+
+    public static void onMiningSpeed(PlayerEvent.BreakSpeed event) {
+        BlockState state = event.getState();
+        if (!event.isCanceled()) {
+            event.setNewSpeed(PlayerHooks.handleReinforcedBlocks(state, event.getNewSpeed()));
         }
     }
 

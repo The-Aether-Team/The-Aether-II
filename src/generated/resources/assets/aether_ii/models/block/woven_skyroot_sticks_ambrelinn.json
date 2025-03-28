@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "aether_ii:block/woven_skyroot_sticks",
+    "particle": "aether_ii:block/woven_skyroot_sticks",
+    "side": "aether_ii:block/woven_skyroot_sticks_ambrelinn",
+    "top": "aether_ii:block/ambrelinn_moss_block"
+  }
+}

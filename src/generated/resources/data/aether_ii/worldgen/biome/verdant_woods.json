@@ -51,6 +51,7 @@
       "aether_ii:ore_corrobonite",
       "aether_ii:ore_glint",
       "aether_ii:disk_bryalinn_moss",
+      "aether_ii:lake_disk_bryalinn_moss",
       "aether_ii:ore_gas_open",
       "aether_ii:ore_gas_buried",
       "aether_ii:unstable_holystone",
@@ -64,7 +65,6 @@
     ],
     [
       "aether_ii:moa_nest",
-      "aether_ii:verdant_woods_trees",
       "aether_ii:small_grass_patch",
       "aether_ii:medium_grass_patch",
       "aether_ii:large_grass_patch",
@@ -81,7 +81,9 @@
       "aether_ii:blueberry_bush_patch",
       "aether_ii:short_arilum",
       "aether_ii:arilum",
-      "aether_ii:blooming_arilum"
+      "aether_ii:blooming_arilum",
+      "aether_ii:pond_arilum",
+      "aether_ii:verdant_woods_trees"
     ],
     [
       "aether_ii:high_storm_aercloud",
@@ -103,62 +105,37 @@
   "has_precipitation": true,
   "spawn_costs": {
     "aether_ii:aechor_plant": {
-      "charge": 0.25,
-      "energy_budget": 0.11
+      "charge": 0.4,
+      "energy_budget": 0.12
     },
     "aether_ii:carrion_sprout": {
-      "charge": 0.25,
-      "energy_budget": 0.11
-    },
-    "aether_ii:cockatrice": {
       "charge": 0.4,
-      "energy_budget": 0.15
-    },
-    "aether_ii:skephid": {
-      "charge": 0.5,
-      "energy_budget": 0.15
-    },
-    "aether_ii:swet": {
-      "charge": 0.25,
-      "energy_budget": 0.1
+      "energy_budget": 0.12
     },
     "aether_ii:tempest": {
       "charge": 0.6,
       "energy_budget": 0.16
     },
     "aether_ii:zephyr": {
-      "charge": 0.3,
+      "charge": 0.6,
       "energy_budget": 0.16
     }
   },
   "spawners": {
     "aether_ii:aether_aerwhale": [],
-    "aether_ii:aether_darkness_monster": [
-      {
-        "type": "aether_ii:cockatrice",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 2
-      },
-      {
-        "type": "aether_ii:skephid",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 1
-      }
-    ],
+    "aether_ii:aether_darkness_monster": [],
     "aether_ii:aether_sky_monster": [
       {
         "type": "aether_ii:zephyr",
-        "maxCount": 2,
+        "maxCount": 1,
         "minCount": 1,
-        "weight": 3
+        "weight": 1
       },
       {
         "type": "aether_ii:tempest",
         "maxCount": 1,
         "minCount": 1,
-        "weight": 2
+        "weight": 1
       }
     ],
     "aether_ii:aether_surface_monster": [
@@ -173,12 +150,6 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 1
-      },
-      {
-        "type": "aether_ii:swet",
-        "maxCount": 3,
-        "minCount": 1,
-        "weight": 3
       }
     ],
     "ambient": [],
@@ -228,7 +199,26 @@
       }
     ],
     "misc": [],
-    "monster": [],
+    "monster": [
+      {
+        "type": "aether_ii:skephid",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:swet",
+        "maxCount": 2,
+        "minCount": 1,
+        "weight": 2
+      },
+      {
+        "type": "aether_ii:cockatrice",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 4
+      }
+    ],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

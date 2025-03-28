@@ -1,6 +1,8 @@
 {
   "values": [
     "aether_ii:ferrosite_sand",
-    "aether_ii:ferrosite_mud"
+    "aether_ii:ferrosite_mud",
+    "aether_ii:guardian_roots",
+    "aether_ii:infected_roots"
   ]
 }

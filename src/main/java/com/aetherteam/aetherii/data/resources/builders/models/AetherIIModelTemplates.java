@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import com.aetherteam.aetherii.AetherII;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.ModelTemplate;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -125,6 +122,21 @@ public class AetherIIModelTemplates {
                     .face(Direction.WEST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(16, 0, 0, 16).cullface(Direction.EAST))
                     .face(Direction.EAST, (faceBuilder) -> faceBuilder.texture(TextureSlot.EAST).uvs(0, 0, 16, 16).cullface(Direction.EAST))
             ).build();
+    public static final ModelTemplate CUBE_TOP_BOTTOM_INNER_TOP = ModelTemplates.create("cube_bottom_top", TextureSlot.TOP, TextureSlot.BOTTOM, TextureSlot.SIDE).extend()
+            .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
+            .element((builder) -> builder
+                    .from(0.0F, 0.0F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.texture(TextureSlot.BOTTOM).cullface(Direction.DOWN))
+                    .face(Direction.UP, (faceBuilder) -> faceBuilder.texture(TextureSlot.TOP).cullface(Direction.UP))
+                    .face(Direction.NORTH, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.NORTH))
+                    .face(Direction.SOUTH, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.SOUTH))
+                    .face(Direction.WEST, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.WEST))
+                    .face(Direction.EAST, (faceBuilder) -> faceBuilder.texture(TextureSlot.SIDE).cullface(Direction.EAST))
+            ).element((builder) -> builder
+                    .from(0.0F, 15.998F, 0.0F).to(16.0F, 16.0F, 16.0F)
+                    .face(Direction.DOWN, (faceBuilder) -> faceBuilder.texture(TextureSlot.UP).uvs(0, 16, 16, 0).cullface(Direction.UP))
+                    .face(Direction.UP, (faceBuilder) -> faceBuilder.texture(TextureSlot.UP).uvs(0, 0, 16, 16).cullface(Direction.UP))
+            ).build();
     public static final ModelTemplate BUSH_BLOCK = ModelTemplates.create("cube", TextureSlot.TEXTURE, TextureSlot.PARTICLE, TextureSlot.CROSS).extend()
             .renderType(ResourceLocation.withDefaultNamespace("cutout_mipped"))
             .element((builder) -> builder
@@ -236,6 +248,13 @@ public class AetherIIModelTemplates {
             ).build();
     public static final ModelTemplate POINTED_STONE_BLOCK = ModelTemplates.create("pointed_dripstone", TextureSlot.CROSS).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
+    public static final ModelTemplate TRUNK_CENTER = AetherIIModelTemplates.create("template_trunk_center", "_center", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_SIDE = AetherIIModelTemplates.create("template_trunk_side", "_side", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_CORNER = AetherIIModelTemplates.create("template_trunk_corner", "_corner", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_CENTER_TALL = AetherIIModelTemplates.create("template_trunk_center_tall", "_center_tall", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_SIDE_TALL = AetherIIModelTemplates.create("template_trunk_side_tall", "_side_tall", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_CORNER_TALL = AetherIIModelTemplates.create("template_trunk_corner_tall", "_corner_tall", TextureSlot.ALL);
+    public static final ModelTemplate TRUNK_INVENTORY = AetherIIModelTemplates.create("template_trunk_inventory", "_inventory", TextureSlot.ALL);
     public static final ModelTemplate MOSS_VINE = create("moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN = create("asymmetrical_cross_even", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ASYMMETRICAL_CROSS_EVEN_MIRRORED = create("asymmetrical_cross_even_mirrored", "_mirrored", TextureSlot.CROSS, AetherIITextureSlots.CROSS_OTHER, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
@@ -261,6 +280,14 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate TARAHESP_FLOWERS_3 = create("template_tarahesp_flowers_3", "_3", AetherIITextureSlots.TARAHESP_FLOWERS_PURPLE, AetherIITextureSlots.TARAHESP_FLOWERS_WHITE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate TARAHESP_FLOWERS_4 = create("template_tarahesp_flowers_4", "_4", AetherIITextureSlots.TARAHESP_FLOWERS_PURPLE, AetherIITextureSlots.TARAHESP_FLOWERS_WHITE, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate AMBRELINN_MOSS_VINE = create("template_ambrelinn_moss_vine", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
+    public static final ModelTemplate UNDERGROWTH_VINES = create("template_undergrowth_vines", AetherIITextureSlots.VINE, TextureSlot.PARTICLE);
+    public static final ModelTemplate ROTSHROOM_CLUSTER = create("template_rotshroom_cluster", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate ROTSHROOM_TOADSTOOL_CLUSTER = create("template_rotshroom_toadstool_cluster", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate ROTSHROOM_TOADSTOOL = create("template_rotshroom_toadstool", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_ROTSHROOM = create("template_shelf_rotshroom", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate SHELF_ROTSHROOM_BLOCK = create("template_shelf_rotshroom_block", TextureSlot.ALL, TextureSlot.PARTICLE);
+    public static final ModelTemplate CARPET_CUTOUT = ModelTemplates.create("carpet", TextureSlot.WOOL).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
+    public static final ModelTemplate MOSSY_CARPET_SIDE_CUTOUT = ModelTemplates.create("mossy_carpet_side", TextureSlot.SIDE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_LEFT = create("door_bottom_left", "_bottom_left", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_LEFT_OPEN = create("door_bottom_left_open", "_bottom_left_open", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate DOOR_BOTTOM_RIGHT = create("door_bottom_right", "_bottom_right", TextureSlot.ALL, TextureSlot.BOTTOM, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
@@ -278,6 +305,8 @@ public class AetherIIModelTemplates {
     public static final ModelTemplate ARTISANS_BENCH = create("template_artisans_bench", TextureSlot.ALL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ARKENIUM_FORGE = create("template_arkenium_forge", TextureSlot.ALL, TextureSlot.PARTICLE).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
     public static final ModelTemplate ARILUM_LANTERN = create("template_arilum_lantern", TextureSlot.TEXTURE, TextureSlot.INSIDE);
+
+    public static final ModelTemplate LOCKED_BLOCK_INVENTORY = createItem("locked_block_inventory", AetherIITextureSlots.FACE, AetherIITextureSlots.OVERLAY).extend().renderType(ResourceLocation.withDefaultNamespace("cutout")).build();
 
     public static final ModelTemplate TRANSLUCENT_FLAT_ITEM = ModelTemplates.FLAT_ITEM.extend().renderType(ResourceLocation.withDefaultNamespace("translucent")).build();
     public static final ModelTemplate MEDIUM_CRYSTAL = ModelTemplates.createItem("medium_amethyst_bud", TextureSlot.LAYER0);

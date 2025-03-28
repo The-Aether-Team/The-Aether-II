@@ -4,10 +4,22 @@
     "decorators": [
       {
         "type": "aether_ii:wisproot_decorator",
-        "block": {
-          "Name": "aether_ii:mossy_wisproot_log_end",
-          "Properties": {
-            "facing": "up"
+        "mossy_full_block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:mossy_wisproot_log",
+            "Properties": {
+              "axis": "y"
+            }
+          }
+        },
+        "mossy_transition_block_provider": {
+          "type": "minecraft:simple_state_provider",
+          "state": {
+            "Name": "aether_ii:mossy_wisproot_log_end",
+            "Properties": {
+              "facing": "up"
+            }
           }
         }
       },
@@ -29,7 +41,7 @@
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:dirt"
+        "Name": "aether_ii:aether_dirt"
       }
     },
     "foliage_placer": {
@@ -43,6 +55,7 @@
         "Name": "aether_ii:wisproot_leaves",
         "Properties": {
           "distance": "7",
+          "mossy_overlay": "none",
           "persistent": "false",
           "snowy": "false",
           "waterlogged": "false"

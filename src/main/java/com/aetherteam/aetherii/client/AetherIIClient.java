@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.client;
 
 import com.aetherteam.aetherii.block.AetherIIFluids;
 import com.aetherteam.aetherii.client.event.listeners.DimensionClientListener;
+import com.aetherteam.aetherii.client.event.listeners.LevelClientListener;
 import com.aetherteam.aetherii.client.gui.screen.HighlandsReceivingLevelScreen;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleFactories;
 import com.aetherteam.aetherii.client.renderer.AetherIIOverlays;
@@ -10,6 +11,7 @@ import com.aetherteam.aetherii.client.renderer.AetherIIRenderers;
 import com.aetherteam.aetherii.client.renderer.item.color.AetherIIItemTintSources;
 import com.aetherteam.aetherii.client.renderer.item.properties.AetherIIItemModelProperties;
 import com.aetherteam.aetherii.client.renderer.level.AetherIIRenderEffects;
+import com.aetherteam.aetherii.client.sprite.AetherIISpriteSourceTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDimensions;
 import com.aetherteam.aetherii.inventory.menu.AetherIIMenuTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -54,6 +56,7 @@ public class AetherIIClient {
         AetherIIClientEventListeners.listen(bus);
 
         bus.addListener(DimensionClientListener::onRenderFog);
+        bus.addListener(LevelClientListener::onRenderLevelLast);
 
         neoBus.addListener(AetherIIMenuTypes::registerMenuScreens);
         neoBus.addListener(AetherIIColorResolvers::registerColorResolvers);
@@ -65,6 +68,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIRenderers::registerLayerDefinition);
         neoBus.addListener(AetherIIRenderers::registerBakedModels);
         neoBus.addListener(AetherIIRenderers::registerRenderStateModifier);
+        neoBus.addListener(AetherIIRenderers::registerModelLoaders);
         neoBus.addListener(AetherIIRenderEffects::registerRenderEffects);
         neoBus.addListener(AetherIIShaders::registerShaders);
         neoBus.addListener(AetherIIItemDecorators::registerItemDecorators);
@@ -75,6 +79,7 @@ public class AetherIIClient {
         neoBus.addListener(AetherIIItemModelProperties::registerSelectProperties);
         neoBus.addListener(AetherIIItemModelProperties::registerRangeSelectProperties);
         neoBus.addListener(AetherIIAtlases::registerAtlases);
+        neoBus.addListener(AetherIISpriteSourceTypes::registerSpriteSourceTypes);
         neoBus.addListener(AetherIIItemTintSources::registerTintSources);
     }
 

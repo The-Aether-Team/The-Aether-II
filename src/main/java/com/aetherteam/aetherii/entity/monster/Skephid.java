@@ -1,8 +1,13 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.goal.SkephidAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.SkephidWebbingBall;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -17,6 +22,8 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 
 public class Skephid extends CellingMonster implements RangedAttackMob {
     public Skephid(EntityType<? extends CellingMonster> p_33002_, Level p_33003_) {
@@ -59,4 +66,7 @@ public class Skephid extends CellingMonster implements RangedAttackMob {
         this.level().addFreshEntity(dart);
     }
 
+    public static boolean checkSkephidSpawnRules(EntityType<? extends Skephid> skephid, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+        return level.getBlockState(pos.below()).is(AetherIITags.Blocks.SKEPHID_SPAWNABLE_ON) && level.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn((ServerLevelAccessor) level, pos, random) && checkMobSpawnRules(skephid, level, reason, pos, random);
+    }
 }

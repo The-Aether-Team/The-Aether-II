@@ -78,8 +78,7 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
     public static boolean checkAechorPlantSpawnRules(EntityType<? extends AechorPlant> aechorPlant, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON)
                 && level.getRawBrightness(pos, 0) > 8
-                && level.getDifficulty() != Difficulty.PEACEFUL
-                && (reason != EntitySpawnReason.NATURAL || random.nextInt(10) == 0);
+                && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
     /**

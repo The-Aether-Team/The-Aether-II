@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.data.resources.builders.models;
 
 import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.neoforged.api.distmarker.Dist;
@@ -28,6 +29,8 @@ public class AetherIITexturedModels extends TexturedModel {
     public static final Provider TARAHESP_FLOWERS_2 = createDefault(AetherIITextureMappings::tarahespFlowerbed, AetherIIModelTemplates.TARAHESP_FLOWERS_2);
     public static final Provider TARAHESP_FLOWERS_3 = createDefault(AetherIITextureMappings::tarahespFlowerbed, AetherIIModelTemplates.TARAHESP_FLOWERS_3);
     public static final Provider TARAHESP_FLOWERS_4 = createDefault(AetherIITextureMappings::tarahespFlowerbed, AetherIIModelTemplates.TARAHESP_FLOWERS_4);
+    public static final Provider CARPET_CUTOUT = createDefault(TextureMapping::wool, AetherIIModelTemplates.CARPET_CUTOUT);
+    public static final Provider MOSSY_CARPET_SIDE_CUTOUT = createDefault(TextureMapping::side, AetherIIModelTemplates.MOSSY_CARPET_SIDE_CUTOUT);
     public static final Provider ALTAR = createDefault(TextureMapping::cube, AetherIIModelTemplates.ALTAR);
     public static final Provider ARKENIUM_FORGE = createDefault(TextureMapping::cube, AetherIIModelTemplates.ARKENIUM_FORGE);
 

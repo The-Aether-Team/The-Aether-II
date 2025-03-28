@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -23,8 +22,10 @@ public class AetherIICreativeTabs {
             .displayItems((features, output) -> {
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.SKYROOT_WOOD.get());
+                output.accept(AetherIIBlocks.SKYROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.STRIPPED_SKYROOT_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.SKYROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.SKYROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.SKYROOT_SLAB.get());
@@ -47,8 +48,10 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.SKYROOT_BEAM.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.GREATROOT_WOOD.get());
+                output.accept(AetherIIBlocks.GREATROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.STRIPPED_GREATROOT_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.GREATROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.GREATROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.GREATROOT_SLAB.get());
@@ -73,9 +76,12 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get());
                 output.accept(AetherIIBlocks.WISPROOT_WOOD.get());
+                output.accept(AetherIIBlocks.WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_WOOD.get());
+                output.accept(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.STRIPPED_WISPROOT_LOG.get());
                 output.accept(AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.WISPROOT_PLANKS.get());
                 output.accept(AetherIIBlocks.WISPROOT_STAIRS.get());
                 output.accept(AetherIIBlocks.WISPROOT_SLAB.get());
@@ -98,6 +104,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WISPROOT_BEAM.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
                 output.accept(AetherIIBlocks.AMBEROOT_WOOD.get());
+                output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.HOLYSTONE.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_STAIRS.get());
                 output.accept(AetherIIBlocks.HOLYSTONE_SLAB.get());
@@ -278,10 +285,77 @@ public class AetherIICreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_DUNGEON_BLOCKS = CREATIVE_MODE_TABS.register("dungeon_blocks", () -> CreativeModeTab.builder()
             .withTabsBefore(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "building_blocks"))
             .withTabsAfter(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "natural_blocks"))
-            .icon(() -> new ItemStack(Blocks.STONE))
+            .icon(() -> new ItemStack(AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get()))
             .title(Component.translatable("itemGroup." + AetherII.MODID + ".dungeon_blocks"))
             .displayItems((features, output) -> {
-
+                output.accept(AetherIIBlocks.GUARDIAN_LOG.get());
+                output.accept(AetherIIBlocks.GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.GUARDIAN_TRUNK.get());
+                output.accept(AetherIIBlocks.DENSE_GUARDIAN_LOG.get());
+                output.accept(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.DENSE_GUARDIAN_TRUNK.get());
+                output.accept(AetherIIBlocks.GUARDIAN_CORNER_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get());
+                output.accept(AetherIIBlocks.STRIPPED_GUARDIAN_CORNER_LOG.get());
+                output.accept(AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.DIM_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.GUARDIAN_LAMP.get());
+                output.accept(AetherIIBlocks.BASE_ROOTED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_ROOTED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.GUARDIAN_CORTEX.get());
+                output.accept(AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get());
+                output.accept(AetherIIBlocks.UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.FLOWERING_UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.UNDERGROWTH_VINES.get());
+                output.accept(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get());
+                output.accept(AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get());
+                output.accept(AetherIIBlocks.INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.INFECTED_TRUNK.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.DENSE_INFECTED_TRUNK.get());
+                output.accept(AetherIIBlocks.INFECTED_CORNER_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_INFECTED_LOG.get());
+                output.accept(AetherIIBlocks.STRIPPED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get());
+                output.accept(AetherIIBlocks.STRIPPED_INFECTED_CORNER_LOG.get());
+                output.accept(AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.DIM_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.LUCENT_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.INFECTED_LAMP.get());
+                output.accept(AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.INFECTED_CORTEX.get());
+                output.accept(AetherIIBlocks.BASE_INFECTED_CORTEX_WOOD.get());
+                output.accept(AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get());
+                output.accept(AetherIIBlocks.ROTTEN_UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.FLOWERING_ROTTEN_UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get());
+                output.accept(AetherIIBlocks.ROTTEN_UNDERGROWTH_VINES.get());
+                output.accept(AetherIIBlocks.LOCKED_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get());
+                output.accept(AetherIIBlocks.LOCKED_INFECTED_ROOTS.get());
+                output.accept(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
+                output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get());
+                output.accept(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get());
+                output.accept(AetherIIBlocks.SHELF_ROTSHROOM.get());
+                output.accept(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get());
+                output.accept(AetherIIBlocks.FUNGAL_CARPET.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_NATURAL_BLOCKS = CREATIVE_MODE_TABS.register("natural_blocks", () -> CreativeModeTab.builder()
@@ -339,11 +413,16 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIBlocks.WOVEN_SKYROOT_STICKS.get());
                 output.accept(AetherIIBlocks.TANGLED_BRANCHES.get());
                 output.accept(AetherIIBlocks.SKYROOT_LOG.get());
+                output.accept(AetherIIBlocks.SKYROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.GREATROOT_LOG.get());
+                output.accept(AetherIIBlocks.GREATROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.WISPROOT_LOG.get());
+                output.accept(AetherIIBlocks.WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG.get());
+                output.accept(AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get());
                 output.accept(AetherIIBlocks.AMBEROOT_LOG.get());
+                output.accept(AetherIIBlocks.AMBEROOT_TRUNK.get());
                 output.accept(AetherIIBlocks.SKYROOT_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYPLANE_LEAVES.get());
                 output.accept(AetherIIBlocks.SKYBIRCH_LEAVES.get());
@@ -533,6 +612,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GOLDEN_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.BLUE_AERCLOUD_GLIDER.get());
                 output.accept(AetherIIItems.PURPLE_AERCLOUD_GLIDER.get());
+                output.accept(AetherIIItems.HIDE_BUNDLE.get());
                 output.accept(AetherIIItems.MOA_SADDLE.get());
                 output.accept(AetherIIItems.IRRADIATED_ARMOR.get());
                 output.accept(AetherIIItems.IRRADIATED_WEAPON.get());

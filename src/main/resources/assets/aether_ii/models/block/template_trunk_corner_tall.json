@@ -1,0 +1,18 @@
+{
+	"elements": [
+		{
+			"name": "northwest",
+			"from": [0, 0, 0],
+			"to": [3, 16, 3],
+			"color": 3,
+			"faces": {
+				"north": {"uv": [13, 0, 16, 16], "texture": "#all"},
+				"east": {"uv": [13, 0, 16, 16], "texture": "#all"},
+				"south": {"uv": [0, 0, 3, 16], "texture": "#all"},
+				"west": {"uv": [0, 0, 3, 16], "texture": "#all"},
+				"up": {"uv": [0, 0, 3, 3], "texture": "#all"},
+				"down": {"uv": [0, 13, 3, 16], "texture": "#all"}
+			}
+		}
+	]
+}

@@ -8,20 +8,29 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
+import org.jetbrains.annotations.Nullable;
 
-public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
+public class BrettlPlantTipBlock extends GrowingPlantHeadBlock implements SimpleWaterloggedBlock {
     public static final MapCodec<BrettlPlantTipBlock> CODEC = simpleCodec(BrettlPlantTipBlock::new);
     public static final BooleanProperty GROWN = AetherIIBlockStateProperties.BRETTL_GROWN;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final VoxelShape SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 15.0, 12.0);
     public static final VoxelShape SHAPE_FLOWER = Block.box(4.0, 0.0, 4.0, 12.0, 10.0, 12.0);
 
@@ -32,7 +41,7 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
 
     public BrettlPlantTipBlock(Properties properties) {
         super(properties, Direction.UP, SHAPE, false, 0.1);
-        this.registerDefaultState(this.stateDefinition.any().setValue(GROWN, Boolean.FALSE));
+        this.registerDefaultState(this.stateDefinition.any().setValue(GROWN, false).setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -47,12 +56,35 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
 
     @Override
     protected boolean canGrowInto(BlockState state) {
-        return state.isAir();
+        return state.isAir() || state.is(Blocks.WATER);
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos currentPos, BlockState currentState, RandomSource randomSource) {
+        if (state.getValue(WATERLOGGED)) {
+            scheduledTickAccess.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+        return super.updateShape(state, level, scheduledTickAccess, blockPos, direction, currentPos, currentState, randomSource);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState state = super.getStateForPlacement(context);
+        if (state != null) {
+            FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
+            state = state.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
+        }
+        return state;
     }
 
     @Override
     public BlockState getStateForPlacement(RandomSource randomSource) {
         return this.defaultBlockState().setValue(AGE, 0);
+    }
+
+    @Override
+    protected BlockState updateBodyAfterConvertedFromHead(BlockState head, BlockState body) {
+        return super.updateBodyAfterConvertedFromHead(head, body).setValue(WATERLOGGED, head.getValue(WATERLOGGED));
     }
 
     @Override
@@ -65,18 +97,23 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
         if (state.getValue(AGE) < 2 && CommonHooks.canCropGrow(level, pos.relative(this.growthDirection), state, random.nextDouble() < 0.1)) {
             BlockPos blockpos = pos.relative(this.growthDirection);
             if (this.canGrowInto(level.getBlockState(blockpos))) {
+                FluidState fluidstate = level.getFluidState(blockpos);
                 if (state.getValue(AGE) == 1) {
-                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state.setValue(GROWN, true), level.random));
+                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER).setValue(GROWN, true), level.random));
                 } else {
-                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state, level.random));
+                    level.setBlockAndUpdate(blockpos, this.getGrowIntoState(state.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER), level.random));
                 }
                 CommonHooks.fireCropGrowPost(level, blockpos, level.getBlockState(blockpos));
             }
         }
         if (state.getValue(GROWN)) {
             if (level.getBlockState(pos.below()).hasProperty(GROWN) && level.getBlockState(pos.below(2)).hasProperty(GROWN)) {
-                level.setBlockAndUpdate(pos.below(), AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, true));
-                level.setBlockAndUpdate(pos.below(2), AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, true));
+                if (level.getFluidState(pos.below()).isEmpty()) {
+                    level.setBlockAndUpdate(pos.below(), AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, true));
+                }
+                if (level.getFluidState(pos.below(2)).isEmpty()) {
+                    level.setBlockAndUpdate(pos.below(2), AetherIIBlocks.BRETTL_PLANT.get().defaultBlockState().setValue(GROWN, true));
+                }
             }
         }
     }
@@ -103,7 +140,8 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
                 if (i == 2) {
                     newState = newState.setValue(GROWN, true);
                 }
-                level.setBlockAndUpdate(blockpos, newState);
+                FluidState fluidstate = level.getFluidState(blockpos);
+                level.setBlockAndUpdate(blockpos, newState.setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER));
 
                 blockpos = blockpos.relative(this.growthDirection);
                 i = Math.min(i + 1, 2);
@@ -111,7 +149,9 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
         } else {
             for (int i = 0; i <= 2; i++) {
                 BlockPos blockpos = pos.relative(this.growthDirection.getOpposite(), i);
-                level.setBlockAndUpdate(blockpos, level.getBlockState(blockpos).setValue(GROWN, true));
+                if (level.getFluidState(blockpos).isEmpty()) {
+                    level.setBlockAndUpdate(blockpos, level.getBlockState(blockpos).setValue(GROWN, true));
+                }
             }
         }
     }
@@ -124,8 +164,13 @@ public class BrettlPlantTipBlock extends GrowingPlantHeadBlock {
     }
 
     @Override
+    protected FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(GrowingPlantHeadBlock.AGE, GROWN);
+        builder.add(GrowingPlantHeadBlock.AGE, GROWN, WATERLOGGED);
     }
 
     @Override

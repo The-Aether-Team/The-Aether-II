@@ -66,17 +66,17 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(CarrionSprout::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build(AetherIIEntities.CARRION_SPROUT));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Zephyr>> ZEPHYR = ENTITY_TYPES.register("zephyr",
-            () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(4.0F, 1.75F).clientTrackingRange(10).build(AetherIIEntities.ZEPHYR));
+            () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(2.0F, 1.75F).clientTrackingRange(10).build(AetherIIEntities.ZEPHYR));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Tempest>> TEMPEST = ENTITY_TYPES.register("tempest",
             () -> EntityType.Builder.of(Tempest::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(1.5F, 1.5F).clientTrackingRange(10).build(AetherIIEntities.TEMPEST));
   
     public static final DeferredHolder<EntityType<?>, EntityType<Cockatrice>> COCKATRICE = ENTITY_TYPES.register("cockatrice",
-            () -> EntityType.Builder.of(Cockatrice::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 2.15F).clientTrackingRange(10).build(AetherIIEntities.COCKATRICE));
+            () -> EntityType.Builder.of(Cockatrice::new, MobCategory.MONSTER).sized(0.9F, 2.15F).clientTrackingRange(10).build(AetherIIEntities.COCKATRICE));
     public static final DeferredHolder<EntityType<?>, EntityType<Swet>> SWET = ENTITY_TYPES.register("swet",
-            () -> EntityType.Builder.of(Swet::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.9F).clientTrackingRange(10).build(AetherIIEntities.SWET));
+            () -> EntityType.Builder.of(Swet::new, MobCategory.MONSTER).sized(0.9F, 0.9F).clientTrackingRange(10).build(AetherIIEntities.SWET));
     public static final DeferredHolder<EntityType<?>, EntityType<Skephid>> SKEPHID = ENTITY_TYPES.register("skephid",
-            () -> EntityType.Builder.of(Skephid::new, AetherIIMobCategory.AETHER_DARKNESS_MONSTER).sized(0.8F, 0.8F).clientTrackingRange(10).build(AetherIIEntities.SKEPHID));
+            () -> EntityType.Builder.of(Skephid::new, MobCategory.MONSTER).sized(0.8F, 0.8F).clientTrackingRange(10).build(AetherIIEntities.SKEPHID));
 
 
     // Projectiles
@@ -138,8 +138,8 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.ZEPHYR.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Zephyr::checkZephyrSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.TEMPEST.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Tempest::checkTempestSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.COCKATRICE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Cockatrice::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
-        event.register(AetherIIEntityTypes.SWET.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Swet::checkSwetSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
-        event.register(AetherIIEntityTypes.SKEPHID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Skephid::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.SWET.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Swet::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.SKEPHID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Skephid::checkSkephidSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
 
     }
 

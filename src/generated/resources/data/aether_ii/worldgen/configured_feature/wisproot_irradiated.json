@@ -3,15 +3,6 @@
   "config": {
     "decorators": [
       {
-        "type": "aether_ii:wisproot_decorator",
-        "block": {
-          "Name": "aether_ii:mossy_wisproot_log_end",
-          "Properties": {
-            "facing": "up"
-          }
-        }
-      },
-      {
         "type": "aether_ii:irradiation"
       },
       {
@@ -228,7 +219,7 @@
     "dirt_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:dirt"
+        "Name": "aether_ii:aether_dirt"
       }
     },
     "foliage_placer": {
@@ -242,6 +233,7 @@
         "Name": "aether_ii:irradiated_wisproot_leaves",
         "Properties": {
           "distance": "7",
+          "mossy_overlay": "none",
           "persistent": "false",
           "shade": "7",
           "snowy": "false",

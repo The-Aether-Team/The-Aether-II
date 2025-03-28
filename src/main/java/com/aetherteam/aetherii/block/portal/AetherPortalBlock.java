@@ -211,11 +211,11 @@ public class AetherPortalBlock extends Block implements Portal {
      */
     @SuppressWarnings("deprecation")
     @Override
-    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos facingPos, BlockState facingState, RandomSource randomSource) {
+    protected BlockState updateShape(BlockState state, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource randomSource) {
         Direction.Axis directionAxis = direction.getAxis();
         Direction.Axis blockAxis = state.getValue(AXIS);
         boolean flag = blockAxis != directionAxis && directionAxis.isHorizontal();
-        return !flag && !facingState.is(this) && !(AetherPortalShape.findAnyShape(levelReader, blockPos, blockAxis).isComplete()) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, levelReader, scheduledTickAccess, blockPos, direction, facingPos, facingState, randomSource);
+        return !flag && !neighborState.is(this) && !(AetherPortalShape.findAnyShape(levelReader, pos, blockAxis).isComplete()) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, levelReader, scheduledTickAccess, pos, direction, neighborPos, neighborState, randomSource);
     }
 
     /**

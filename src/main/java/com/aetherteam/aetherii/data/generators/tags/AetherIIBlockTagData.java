@@ -1,17 +1,16 @@
 package com.aetherteam.aetherii.data.generators.tags;
 
-import java.util.concurrent.CompletableFuture;
-
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
-
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
+
+import java.util.concurrent.CompletableFuture;
 
 public class AetherIIBlockTagData extends BlockTagsProvider {
     public AetherIIBlockTagData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
@@ -109,27 +108,55 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.SKYROOT_LOGS).add(
                 AetherIIBlocks.SKYROOT_LOG.get(),
                 AetherIIBlocks.SKYROOT_WOOD.get(),
+                AetherIIBlocks.SKYROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_SKYROOT_LOG.get(),
-                AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get()
+                AetherIIBlocks.STRIPPED_SKYROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.GREATROOT_LOGS).add(
                 AetherIIBlocks.GREATROOT_LOG.get(),
                 AetherIIBlocks.GREATROOT_WOOD.get(),
+                AetherIIBlocks.GREATROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_GREATROOT_LOG.get(),
-                AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get()
+                AetherIIBlocks.STRIPPED_GREATROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_GREATROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.WISPROOT_LOGS).add(
                 AetherIIBlocks.WISPROOT_LOG.get(),
                 AetherIIBlocks.MOSSY_WISPROOT_LOG.get(),
                 AetherIIBlocks.MOSSY_WISPROOT_LOG_END.get(),
                 AetherIIBlocks.WISPROOT_WOOD.get(),
+                AetherIIBlocks.WISPROOT_TRUNK.get(),
                 AetherIIBlocks.MOSSY_WISPROOT_WOOD.get(),
+                AetherIIBlocks.MOSSY_WISPROOT_TRUNK.get(),
                 AetherIIBlocks.STRIPPED_WISPROOT_LOG.get(),
-                AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get()
+                AetherIIBlocks.STRIPPED_WISPROOT_WOOD.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get()
         );
         this.tag(AetherIITags.Blocks.AMBEROOT_LOGS).add(
                 AetherIIBlocks.AMBEROOT_LOG.get(),
-                AetherIIBlocks.AMBEROOT_WOOD.get()
+                AetherIIBlocks.AMBEROOT_WOOD.get(),
+                AetherIIBlocks.AMBEROOT_TRUNK.get()
+        );
+        this.tag(AetherIITags.Blocks.LEAVES).add(
+                AetherIIBlocks.SKYROOT_LEAVES.get(),
+                AetherIIBlocks.SKYPLANE_LEAVES.get(),
+                AetherIIBlocks.SKYBIRCH_LEAVES.get(),
+                AetherIIBlocks.SKYPINE_LEAVES.get(),
+                AetherIIBlocks.WISPROOT_LEAVES.get(),
+                AetherIIBlocks.WISPTOP_LEAVES.get(),
+                AetherIIBlocks.GREATROOT_LEAVES.get(),
+                AetherIIBlocks.GREATOAK_LEAVES.get(),
+                AetherIIBlocks.GREATBOA_LEAVES.get(),
+                AetherIIBlocks.AMBEROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
+                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
         );
         this.tag(AetherIITags.Blocks.SKYROOT_DECORATIVE_BLOCKS).add(
                 AetherIIBlocks.SKYROOT_FLOORBOARDS.get(),
@@ -265,14 +292,17 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()).addTags(AetherIITags.Blocks.ICHORITE_DECORATIVE_BLOCKS, AetherIITags.Blocks.MARBLED_ICHORITE_DECORATIVE_BLOCKS);
         this.tag(AetherIITags.Blocks.ACID_INSTANTLY_DESTROYS).addTags(BlockTags.LEAVES, AetherIITags.Blocks.AERCLOUDS);
         this.tag(AetherIITags.Blocks.ACID_QUICKLY_DESTROYS).addTags(BlockTags.DIRT, BlockTags.LOGS, BlockTags.PLANKS);
-        this.tag(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);	
-        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).addTags(
-                BlockTags.CAMPFIRES,
+        this.tag(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);
+        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).addTags( //TODO: find solutions so it doesn't trigger with unlit Blockstates
                 BlockTags.FIRE,
-                BlockTags.CANDLES);
-        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).add(
+                BlockTags.CANDLES,
+                BlockTags.CANDLE_CAKES,
+                BlockTags.CAMPFIRES
+        ).add(
                 Blocks.TORCH,
+                Blocks.WALL_TORCH,
                 Blocks.SOUL_TORCH,
+                Blocks.SOUL_WALL_TORCH,
                 AetherIIBlocks.AMBROSIUM_TORCH.get(),
                 AetherIIBlocks.AMBROSIUM_WALL_TORCH.get());
         this.tag(AetherIITags.Blocks.AETHER_PLANT_SURVIVES_ON).add(
@@ -339,17 +369,19 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
-        this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).add(
+        this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).addTag(AetherIITags.Blocks.LEAVES).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW.get(),
                 AetherIIBlocks.ARCTIC_ICE.get(),
-                AetherIIBlocks.BRYALINN_MOSS_BLOCK.get()
+                AetherIIBlocks.WOVEN_SKYROOT_STICKS.get(),
+                AetherIIBlocks.BRYALINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
+                AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get()
         );
         this.tag(AetherIITags.Blocks.AECHOR_PLANT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
         this.tag(AetherIITags.Blocks.CARRION_SPROUT_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
-        this.tag(AetherIITags.Blocks.COCKATRICE_SPAWNABLE_BLACKLIST);
-        this.tag(AetherIITags.Blocks.SWET_SPAWNABLE_ON).add(AetherIIBlocks.AETHER_GRASS_BLOCK.get());
+        this.tag(AetherIITags.Blocks.SKEPHID_SPAWNABLE_ON).addTags(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
         this.tag(AetherIITags.Blocks.MOA_HATCH_BLOCK).add(
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
         );
@@ -360,11 +392,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 BlockTags.TRAPDOORS,
                 BlockTags.FENCE_GATES
         );
-        this.tag(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST).add(
-                AetherIIBlocks.AETHER_PORTAL.get(),
-                Blocks.NETHER_PORTAL,
-                Blocks.END_PORTAL,
-                Blocks.END_GATEWAY
+        this.tag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS).add(
+                AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_INFECTED_WOOD.get(),
+                AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get(),
+                AetherIIBlocks.LOCKED_INFECTED_ROOTS.get()
         );
 
         // Vanilla
@@ -538,26 +572,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.MARBLED_ICHORITE_WALL.get(),
                 AetherIIBlocks.MARBLED_BRICK_WALL.get()
         );
-        this.tag(BlockTags.LEAVES).add(
-                AetherIIBlocks.SKYROOT_LEAVES.get(),
-                AetherIIBlocks.SKYPLANE_LEAVES.get(),
-                AetherIIBlocks.SKYBIRCH_LEAVES.get(),
-                AetherIIBlocks.SKYPINE_LEAVES.get(),
-                AetherIIBlocks.WISPROOT_LEAVES.get(),
-                AetherIIBlocks.WISPTOP_LEAVES.get(),
-                AetherIIBlocks.GREATROOT_LEAVES.get(),
-                AetherIIBlocks.GREATOAK_LEAVES.get(),
-                AetherIIBlocks.GREATBOA_LEAVES.get(),
-                AetherIIBlocks.AMBEROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYPLANE_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYBIRCH_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_SKYPINE_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_WISPROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_WISPTOP_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATROOT_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATOAK_LEAVES.get(),
-                AetherIIBlocks.IRRADIATED_GREATBOA_LEAVES.get()
-        );
+        this.tag(BlockTags.LEAVES).addTag(AetherIITags.Blocks.LEAVES);
         this.tag(BlockTags.TRAPDOORS).add(
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
         );
@@ -670,7 +685,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SKYROOT_LADDER.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
-                AetherIIBlocks.AMBRELINN_MOSS_VINES.get()
+                AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
+                AetherIIBlocks.TANGLED_BRANCHES.get()
         );
         this.tag(BlockTags.FENCE_GATES).add(
                 AetherIIBlocks.SKYROOT_FENCE_GATE.get(),
@@ -833,6 +849,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_TRAPDOOR.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
+                AetherIIBlocks.AETHER_SHORT_GRASS.get(),
+                AetherIIBlocks.AETHER_MEDIUM_GRASS.get(),
+                AetherIIBlocks.AETHER_LONG_GRASS.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get(),
@@ -847,6 +866,13 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_WOOD.get(),
                 AetherIIBlocks.WISPROOT_WOOD.get(),
                 AetherIIBlocks.AMBEROOT_WOOD.get(),
+                AetherIIBlocks.SKYROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_SKYROOT_TRUNK.get(),
+                AetherIIBlocks.GREATROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(),
+                AetherIIBlocks.WISPROOT_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_WISPROOT_TRUNK.get(),
+                AetherIIBlocks.AMBEROOT_TRUNK.get(),
                 AetherIIBlocks.BLUEBERRY_BUSH_STEM.get(),
                 AetherIIBlocks.ORANGE_TREE.get(),
                 AetherIIBlocks.SKYROOT_PLANKS.get(),
@@ -924,7 +950,58 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_SIGN.get(),
                 AetherIIBlocks.WISPROOT_WALL_SIGN.get(),
                 AetherIIBlocks.WISPROOT_HANGING_SIGN.get(),
-                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get()
+                AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get(),
+                AetherIIBlocks.GUARDIAN_LOG.get(),
+                AetherIIBlocks.GUARDIAN_WOOD.get(),
+                AetherIIBlocks.GUARDIAN_TRUNK.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_TRUNK.get(),
+                AetherIIBlocks.GUARDIAN_CORNER_LOG.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_CORNER_LOG.get(),
+                AetherIIBlocks.BASE_STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.TOP_STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.FLOWERING_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.DIM_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.GUARDIAN_LAMP.get(),
+                AetherIIBlocks.BASE_ROOTED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.TOP_ROOTED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.GUARDIAN_CORTEX.get(),
+                AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get(),
+                AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get(),
+                AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.INFECTED_LOG.get(),
+                AetherIIBlocks.INFECTED_WOOD.get(),
+                AetherIIBlocks.INFECTED_TRUNK.get(),
+                AetherIIBlocks.DENSE_INFECTED_LOG.get(),
+                AetherIIBlocks.DENSE_INFECTED_WOOD.get(),
+                AetherIIBlocks.DENSE_INFECTED_TRUNK.get(),
+                AetherIIBlocks.INFECTED_CORNER_LOG.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_LOG.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_WOOD.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_TRUNK.get(),
+                AetherIIBlocks.STRIPPED_INFECTED_CORNER_LOG.get(),
+                AetherIIBlocks.BASE_STRIPPED_INFECTED_WOOD.get(),
+                AetherIIBlocks.TOP_STRIPPED_INFECTED_WOOD.get(),
+                AetherIIBlocks.INFECTED_ROOTS.get(),
+                AetherIIBlocks.FLOWERING_INFECTED_ROOTS.get(),
+                AetherIIBlocks.DIM_INFECTED_ROOTS.get(),
+                AetherIIBlocks.LUCENT_INFECTED_ROOTS.get(),
+                AetherIIBlocks.INFECTED_LAMP.get(),
+                AetherIIBlocks.BASE_ROOTED_INFECTED_WOOD.get(),
+                AetherIIBlocks.TOP_ROOTED_INFECTED_WOOD.get(),
+                AetherIIBlocks.INFECTED_CORTEX.get(),
+                AetherIIBlocks.BASE_INFECTED_CORTEX_WOOD.get(),
+                AetherIIBlocks.TOP_INFECTED_CORTEX_WOOD.get(),
+                AetherIIBlocks.BASE_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get(),
+                AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()
         );
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
@@ -984,7 +1061,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.SHAYELINN_MOSS_BLOCK.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_CARPET.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_BLOCK.get(),
-                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get()
+                AetherIIBlocks.AMBRELINN_MOSS_CARPET.get(),
+                AetherIIBlocks.FUNGAL_CARPET.get()
         );
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(
                 AetherIIBlocks.UNDERSHALE.get(),
@@ -1050,12 +1128,17 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get()
         );
         this.tag(BlockTags.REPLACEABLE).add(
+                AetherIIBlocks.AETHER_SHORT_GRASS.get(),
+                AetherIIBlocks.AETHER_MEDIUM_GRASS.get(),
+                AetherIIBlocks.AETHER_LONG_GRASS.get(),
                 AetherIIBlocks.BRYALINN_MOSS_VINES.get(),
                 AetherIIBlocks.SHAYELINN_MOSS_VINES.get(),
                 AetherIIBlocks.AMBRELINN_MOSS_VINES.get());
         this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(
                 AetherIIBlocks.FERROSITE_SAND.get(),
-                AetherIIBlocks.FERROSITE_MUD.get()
+                AetherIIBlocks.FERROSITE_MUD.get(),
+                AetherIIBlocks.GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.INFECTED_ROOTS.get()
         );
 
 
