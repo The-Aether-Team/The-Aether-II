@@ -1102,6 +1102,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.TOXIC_DART, "Toxic Dart");
         this.addEntityType(AetherIIEntityTypes.VENOMOUS_DART, "Venomous Dart");
 
+        // NPCs
+        this.addEntityType(AetherIIEntityTypes.EDWARD, "Edward");
+
         // Miscellaneous
         this.addEntityType(AetherIIEntityTypes.ELECTRIC_FIELD, "Electric Field");
 

@@ -3,5 +3,7 @@
   "effect": "aether_ii:ambrosium_poisoning",
   "icon": "minecraft:ambrosium_poisoning",
   "id": "aether_ii:ambrosium_poisoning",
-  "items": []
+  "items": [],
+  "name": "effect.aether_ii.ambrosium_poisoning",
+  "slot_name": "effect.aether_ii.ambrosium_poisoning"
 }

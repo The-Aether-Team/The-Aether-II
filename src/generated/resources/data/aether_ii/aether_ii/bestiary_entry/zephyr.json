@@ -16,7 +16,9 @@
       }
     }
   ],
+  "name": "entity.aether_ii.zephyr",
   "pierce_defense": 0,
   "scale_multiplier": 1.65,
-  "slash_defense": -2
+  "slash_defense": -2,
+  "slot_name": "entity.aether_ii.zephyr"
 }

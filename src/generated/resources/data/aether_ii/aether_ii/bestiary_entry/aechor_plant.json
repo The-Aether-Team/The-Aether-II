@@ -24,6 +24,8 @@
       }
     }
   ],
+  "name": "entity.aether_ii.aechor_plant",
   "pierce_defense": 0,
-  "slash_defense": -2
+  "slash_defense": -2,
+  "slot_name": "entity.aether_ii.aechor_plant"
 }

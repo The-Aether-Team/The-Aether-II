@@ -7,5 +7,7 @@
     {
       "item": "aether_ii:antitoxin_vial"
     }
-  ]
+  ],
+  "name": "effect.aether_ii.toxin",
+  "slot_name": "effect.aether_ii.toxin"
 }

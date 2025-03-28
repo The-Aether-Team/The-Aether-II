@@ -3,5 +3,7 @@
   "effect": "aether_ii:frostbite",
   "icon": "minecraft:frostbite",
   "id": "aether_ii:frostbite",
-  "items": []
+  "items": [],
+  "name": "effect.aether_ii.frostbite",
+  "slot_name": "effect.aether_ii.frostbite"
 }

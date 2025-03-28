@@ -24,6 +24,8 @@
       }
     }
   ],
+  "name": "entity.aether_ii.tempest",
   "pierce_defense": -2,
-  "slash_defense": 2
+  "slash_defense": 2,
+  "slot_name": "entity.aether_ii.tempest"
 }

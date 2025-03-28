@@ -37,7 +37,7 @@ public class EffectsEntry extends GuidebookEntry {
         this(root.getId(), root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), effect, items);
     }
 
-    public EffectsEntry(ResourceLocation id, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<MobEffect> effect, List<Holder<Item>> items) {
+    public EffectsEntry(ResourceLocation id, ResourceLocation icon, String name, String slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<MobEffect> effect, List<Holder<Item>> items) {
         super(id, icon, name, slotName, slotSubtitle, descriptionKey);
         this.effect = this.info(EFFECT, effect);
         this.items = items;

@@ -65,7 +65,7 @@ public class BestiaryEntry extends GuidebookEntry {
         this(root.getId(), root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), entityType, health, slashDefense, impactDefense, pierceDefense, effectResistances, scaleMultiplier, loot, food);
     }
 
-    public BestiaryEntry(ResourceLocation id, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, List<EffectResistanceDisplay> effectResistances, Optional<Double> scaleMultiplier, List<LootDisplay> loot, Optional<TagKey<Item>> food) {
+    public BestiaryEntry(ResourceLocation id, ResourceLocation icon, String name, String slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, List<EffectResistanceDisplay> effectResistances, Optional<Double> scaleMultiplier, List<LootDisplay> loot, Optional<TagKey<Item>> food) {
         super(id, icon, name, slotName, slotSubtitle, descriptionKey);
         this.entityType = this.info(ENTITY_TYPE, entityType);
         this.health = this.info(HEALTH, health);

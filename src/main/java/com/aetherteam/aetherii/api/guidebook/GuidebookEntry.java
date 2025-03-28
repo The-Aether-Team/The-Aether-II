@@ -14,8 +14,8 @@ import java.util.function.Function;
 public class GuidebookEntry {
     public static final DataTemplate<ResourceLocation> ID = new DataTemplate<>("id", ResourceLocation.CODEC::fieldOf);
     public static final DataTemplate<ResourceLocation> ICON = new DataTemplate<>("icon", ResourceLocation.CODEC::fieldOf);
-    public static final DataTemplate<Optional<String>> NAME = new DataTemplate<>("name", Codec.STRING::optionalFieldOf);
-    public static final DataTemplate<Optional<String>> SLOT_NAME = new DataTemplate<>("slot_name", Codec.STRING::optionalFieldOf);
+    public static final DataTemplate<String> NAME = new DataTemplate<>("name", Codec.STRING::fieldOf);
+    public static final DataTemplate<String> SLOT_NAME = new DataTemplate<>("slot_name", Codec.STRING::fieldOf);
     public static final DataTemplate<Optional<String>> SLOT_SUBTITLE = new DataTemplate<>("slot_subtitle", Codec.STRING::optionalFieldOf);
     public static final DataTemplate<String> DESCRIPTION_KEY = new DataTemplate<>("description_key", Codec.STRING::fieldOf);
 
@@ -31,14 +31,14 @@ public class GuidebookEntry {
 
     private final ResourceLocation id;
     private final ResourceLocation icon;
-    private final Optional<String> name;
-    private final Optional<String> slotName;
+    private final String name;
+    private final String slotName;
     private final Optional<String> slotSubtitle;
     private final String descriptionKey;
 
     protected final Map<String, Info> values = new HashMap<>();
 
-    public GuidebookEntry(ResourceLocation id, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey) {
+    public GuidebookEntry(ResourceLocation id, ResourceLocation icon, String name, String slotName, Optional<String> slotSubtitle, String descriptionKey) {
         this.id = this.info(ID, id);
         this.icon = this.info(ICON, icon);
         this.name = this.info(NAME, name);
@@ -55,11 +55,11 @@ public class GuidebookEntry {
         return this.icon;
     }
 
-    public Optional<String> getName() {
+    public String getName() {
         return this.name;
     }
 
-    public Optional<String> getSlotName() {
+    public String getSlotName() {
         return this.slotName;
     }
 

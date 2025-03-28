@@ -7,5 +7,7 @@
     {
       "item": "aether_ii:bandage"
     }
-  ]
+  ],
+  "name": "effect.aether_ii.stun",
+  "slot_name": "effect.aether_ii.stun"
 }

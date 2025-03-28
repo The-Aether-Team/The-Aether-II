@@ -8,7 +8,6 @@ import net.minecraft.world.entity.EntityType;
 
 //TODO: figure out proper naming for the class or we should merge it with AetherIIEntityTypes
 public class AetherIIEntities {
-
     //Passive
     public static final ResourceKey<EntityType<?>> PHYG = createKey("phyg");
     public static final ResourceKey<EntityType<?>> FLYING_COW = createKey("flying_cow");
@@ -41,6 +40,10 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> COCKATRICE = createKey("cockatrice");
     public static final ResourceKey<EntityType<?>> SWET = createKey("swet");
     public static final ResourceKey<EntityType<?>> SKEPHID = createKey("skephid");
+
+
+    //NPCs
+    public static final ResourceKey<EntityType<?>> EDWARD = createKey("edward");
 
 
     //Projectiles

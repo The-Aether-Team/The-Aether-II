@@ -7,6 +7,8 @@
   "id": "aether_ii:skyroot_lizard",
   "impact_defense": 0,
   "loot_slots": [],
+  "name": "entity.aether_ii.skyroot_lizard",
   "pierce_defense": 0,
-  "slash_defense": 0
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.skyroot_lizard"
 }

@@ -25,6 +25,8 @@
       }
     }
   ],
+  "name": "entity.aether_ii.sheepuff",
   "pierce_defense": 0,
-  "slash_defense": 0
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.sheepuff"
 }

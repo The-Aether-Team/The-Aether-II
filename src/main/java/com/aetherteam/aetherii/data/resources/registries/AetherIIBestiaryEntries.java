@@ -152,8 +152,8 @@ public class AetherIIBestiaryEntries {
         for (Map.Entry<ResourceKey<BestiaryEntry>, Holder<EntityType<?>>> entry : ENTITIES.entrySet()) {
             Holder<EntityType<?>> holder = entry.getValue();
             EntityType<?> entity = holder.value();
-            Optional<String> name = NAMED.contains(holder) ? Optional.of("aether_ii.guidebook_bestiary.name.entity.aether_ii." + entity.toShortString()) : Optional.empty();
-            Optional<String> slotName = NAMED.contains(holder) ? Optional.of("aether_ii.guidebook_bestiary.slot_name.entity.aether_ii." + entity.toShortString()) : Optional.empty();
+            String name = NAMED.contains(holder) ? "aether_ii.guidebook_bestiary.name.entity.aether_ii." + entity.toShortString() : entity.getDescriptionId();
+            String slotName = NAMED.contains(holder) ? "aether_ii.guidebook_bestiary.slot_name.entity.aether_ii." + entity.toShortString() : entity.getDescriptionId();
             Optional<String> slotSubtitle = NAMED.contains(holder) ? Optional.of("aether_ii.guidebook_bestiary.slot_subtitle.entity.aether_ii." + entity.toShortString()) : Optional.empty();
             double health = ATTRIBUTES.containsKey(holder) ? ATTRIBUTES.get(holder).getOrDefault(Attributes.MAX_HEALTH, 0.0) : 0.0;
             double slashDefense = ATTRIBUTES.containsKey(holder) ? ATTRIBUTES.get(holder).getOrDefault(AetherIIAttributes.SLASH_RESISTANCE, 0.0) : 0.0;

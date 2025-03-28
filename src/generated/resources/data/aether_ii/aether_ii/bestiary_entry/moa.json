@@ -17,6 +17,8 @@
       }
     }
   ],
+  "name": "entity.aether_ii.moa",
   "pierce_defense": -2,
-  "slash_defense": 2
+  "slash_defense": 2,
+  "slot_name": "entity.aether_ii.moa"
 }

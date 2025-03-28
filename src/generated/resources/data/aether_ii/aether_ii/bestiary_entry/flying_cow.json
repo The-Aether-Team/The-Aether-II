@@ -17,6 +17,8 @@
       }
     }
   ],
+  "name": "entity.aether_ii.flying_cow",
   "pierce_defense": 0,
-  "slash_defense": 0
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.flying_cow"
 }

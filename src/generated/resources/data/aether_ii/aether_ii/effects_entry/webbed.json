@@ -3,5 +3,7 @@
   "effect": "aether_ii:webbed",
   "icon": "minecraft:webbed",
   "id": "aether_ii:webbed",
-  "items": []
+  "items": [],
+  "name": "effect.aether_ii.webbed",
+  "slot_name": "effect.aether_ii.webbed"
 }

@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.client.gui.screen.guidebook.discovery;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
 import com.aetherteam.aetherii.api.guidebook.GuidebookEntry;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
@@ -125,11 +126,7 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
             int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
             Component name = Component.translatable("gui.aether_ii.guidebook.discovery.entry.unknown");
             if (this.isUnlocked(entry, EffectsEntry.SLOT_NAME.id())) {
-                if (entry.getSlotName().isPresent()) {
-                    name = Component.translatable(entry.getSlotName().get());
-                } else {
-                    name = Component.translatable(entry.getEffect().value().getDescriptionId());
-                }
+                name = Component.translatable(entry.getSlotName());
             }
             List<Component> components = new ArrayList<>(List.of(name));
             if (this.isUnlocked(entry, EffectsEntry.SLOT_SUBTITLE.id()) && entry.getSlotSubtitle().isPresent()) {
@@ -144,6 +141,10 @@ public class EffectsSection extends DiscoverySection<EffectsEntry, EffectsEntry.
         EffectsEntry.Mutable entry = this.getSelectedEntry();
         if (entry != null) {
             Font font = Minecraft.getInstance().font;
+            if (this.isUnlocked(entry, EffectsEntry.NAME.id())) {
+                guiGraphics.drawCenteredString(font, Component.translatable(entry.getName()), 88, 13, 16777215);
+            }
+
             if (this.isUnlocked(this.getSelectedEntry(), EffectsEntry.EFFECT.id())) {
                 TextureAtlasSprite effectAtlasSprite = Minecraft.getInstance().getMobEffectTextures().get(entry.getEffect());
 

@@ -8,6 +8,8 @@
   "id": "aether_ii:aerbunny",
   "impact_defense": 2,
   "loot_slots": [],
+  "name": "entity.aether_ii.aerbunny",
   "pierce_defense": -2,
-  "slash_defense": 0
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.aerbunny"
 }

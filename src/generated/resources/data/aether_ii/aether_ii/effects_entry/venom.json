@@ -7,5 +7,7 @@
     {
       "item": "aether_ii:antivenom_vial"
     }
-  ]
+  ],
+  "name": "effect.aether_ii.venom",
+  "slot_name": "effect.aether_ii.venom"
 }

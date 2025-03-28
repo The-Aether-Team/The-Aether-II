@@ -11,7 +11,13 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntr
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.components.GuidebookEntryData;
 import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
+import com.aetherteam.aetherii.network.packet.clientbound.UpdateGuidebookDiscoveryPacket;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -57,6 +63,7 @@ public class GuidebookPageItem extends Item {
                 }
                 if (icon != null) {
                     PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
+                    PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(attachment));
                     return InteractionResult.SUCCESS_SERVER;
                 }
             }
@@ -82,6 +89,7 @@ public class GuidebookPageItem extends Item {
                 }
                 if (icon != null) {
                     PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
+                    PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(attachment));
                     return InteractionResult.SUCCESS_SERVER;
                 }
             }
@@ -91,6 +99,19 @@ public class GuidebookPageItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) { //todo
-//        tooltipComponents.add(Component.literal("Random Bestiary Entry").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+        List<GuidebookEntryData> dataList = stack.get(AetherIIDataComponents.GUIDEBOOK_ENTRY_DATA);
+        if (dataList != null) {
+            for (GuidebookEntryData data : dataList) {
+                ResourceKey registryKey = ResourceKey.createRegistryKey(data.registry());
+                ResourceKey resourceKey = ResourceKey.create(registryKey, ResourceLocation.parse(data.name()));
+                context.registries().lookupOrThrow(registryKey).get(resourceKey).ifPresent((object) -> {
+                    if (object instanceof Holder holder && holder.value() instanceof GuidebookEntry guidebookEntry) {
+                        tooltipComponents.add(Component.translatable(guidebookEntry.getName()).withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+                    }
+                });
+            }
+        } else {
+            tooltipComponents.add(Component.literal("Random").withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC)); //todo
+        }
     }
 }

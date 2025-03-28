@@ -10,5 +10,7 @@
     {
       "item": "aether_ii:splint"
     }
-  ]
+  ],
+  "name": "effect.aether_ii.fracture",
+  "slot_name": "effect.aether_ii.fracture"
 }

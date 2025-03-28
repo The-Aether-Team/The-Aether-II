@@ -186,6 +186,7 @@ public class AetherII {
         registrar.playToClient(ClientGrabItemPacket.TYPE, ClientGrabItemPacket.STREAM_CODEC, ClientGrabItemPacket::execute);
         registrar.playToClient(EffectBuildupSetPacket.TYPE, EffectBuildupSetPacket.STREAM_CODEC, EffectBuildupSetPacket::execute);
         registrar.playToClient(EffectBuildupRemovePacket.TYPE, EffectBuildupRemovePacket.STREAM_CODEC, EffectBuildupRemovePacket::execute);
+        registrar.playToClient(FlushGuidebookDataPacket.TYPE, FlushGuidebookDataPacket.STREAM_CODEC, FlushGuidebookDataPacket::execute);
         registrar.playToClient(ForgeSoundPacket.TYPE, ForgeSoundPacket.STREAM_CODEC, ForgeSoundPacket::execute);
         registrar.playToClient(GasExplosionEffectsPacket.TYPE, GasExplosionEffectsPacket.STREAM_CODEC, GasExplosionEffectsPacket::execute);
         registrar.playToClient(GuidebookToastPacket.TYPE, GuidebookToastPacket.STREAM_CODEC, GuidebookToastPacket::execute);

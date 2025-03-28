@@ -3,5 +3,7 @@
   "effect": "aether_ii:crystallized",
   "icon": "minecraft:crystallized",
   "id": "aether_ii:crystallized",
-  "items": []
+  "items": [],
+  "name": "effect.aether_ii.crystallized",
+  "slot_name": "effect.aether_ii.crystallized"
 }

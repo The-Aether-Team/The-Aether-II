@@ -3,5 +3,7 @@
   "effect": "aether_ii:immolation",
   "icon": "minecraft:immolation",
   "id": "aether_ii:immolation",
-  "items": []
+  "items": [],
+  "name": "effect.aether_ii.immolation",
+  "slot_name": "effect.aether_ii.immolation"
 }

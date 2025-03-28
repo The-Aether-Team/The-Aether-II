@@ -78,8 +78,8 @@ public class AetherIIEffectsEntries {
             context.register(entry.getKey(), new EffectsEntry(
                     entry.getKey().location(),
                     ResourceLocation.parse(holder.getKey().location().getPath()),
-                    Optional.empty(),
-                    Optional.empty(),
+                    holder.value().getDescriptionId(),
+                    holder.value().getDescriptionId(),
                     Optional.empty(),
                     "aether_ii.guidebook_effects.description.effect.aether_ii." + holder.getKey().location().getPath(),
                     holder,

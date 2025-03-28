@@ -3,5 +3,7 @@
   "effect": "aether_ii:fungal_rot",
   "icon": "minecraft:fungal_rot",
   "id": "aether_ii:fungal_rot",
-  "items": []
+  "items": [],
+  "name": "effect.aether_ii.fungal_rot",
+  "slot_name": "effect.aether_ii.fungal_rot"
 }

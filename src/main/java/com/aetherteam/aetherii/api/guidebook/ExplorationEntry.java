@@ -25,7 +25,7 @@ public class ExplorationEntry extends GuidebookEntry {
         super(root.getId(), root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey());
     }
 
-    public ExplorationEntry(ResourceLocation id, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey) {
+    public ExplorationEntry(ResourceLocation id, ResourceLocation icon, String name, String slotName, Optional<String> slotSubtitle, String descriptionKey) {
         super(id, icon, name, slotName, slotSubtitle, descriptionKey);
     }
 

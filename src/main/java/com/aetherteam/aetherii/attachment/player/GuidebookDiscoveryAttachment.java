@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntries;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIRewardWrappers;
+import com.aetherteam.aetherii.network.packet.clientbound.FlushGuidebookDataPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.UpdateGuidebookDiscoveryPacket;
 import com.mojang.serialization.Codec;
@@ -66,39 +67,33 @@ public class GuidebookDiscoveryAttachment {
 
     private void syncAfterJoin(Player player) {
         if (this.shouldSyncAfterJoin) {
-            this.setupEntries(player);
             if (player instanceof ServerPlayer serverPlayer) {
+                PacketDistributor.sendToPlayer(serverPlayer, new FlushGuidebookDataPacket());
+                this.setupEntries(serverPlayer);
                 PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
             }
             this.shouldSyncAfterJoin = false;
         }
     }
 
-    private void setupEntries(Player player) {
-        if (player.level().isClientSide()) {
-            this.getBestiaryEntries().clear();
-            this.getEffectsEntries().clear();
-            this.getExplorationEntries().clear();
+    private void setupEntries(ServerPlayer serverPlayer) {
+        RegistryAccess registryAccess = serverPlayer.registryAccess();
+        if (this.bestiaryEntries.isEmpty()) {
+            Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
+            for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
+                this.bestiaryEntries.add(new BestiaryEntry.Mutable(entry));
+            }
         }
-        if (player instanceof ServerPlayer serverPlayer) {
-            RegistryAccess registryAccess = serverPlayer.registryAccess();
-            if (this.bestiaryEntries.isEmpty()) {
-                Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
-                for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
-                    this.bestiaryEntries.add(new BestiaryEntry.Mutable(entry));
-                }
+        if (this.effectsEntries.isEmpty()) {
+            Registry<EffectsEntry> effectsEntries = registryAccess.lookupOrThrow(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY);
+            for (Holder<EffectsEntry> entry : effectsEntries.asHolderIdMap()) {
+                this.effectsEntries.add(new EffectsEntry.Mutable(entry));
             }
-            if (this.effectsEntries.isEmpty()) {
-                Registry<EffectsEntry> effectsEntries = registryAccess.lookupOrThrow(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY);
-                for (Holder<EffectsEntry> entry : effectsEntries.asHolderIdMap()) {
-                    this.effectsEntries.add(new EffectsEntry.Mutable(entry));
-                }
-            }
-            if (this.explorationEntries.isEmpty()) {
-                Registry<ExplorationEntry> explorationEntries = registryAccess.lookupOrThrow(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY);
-                for (Holder<ExplorationEntry> entry : explorationEntries.asHolderIdMap()) {
-                    this.explorationEntries.add(new ExplorationEntry.Mutable(entry));
-                }
+        }
+        if (this.explorationEntries.isEmpty()) {
+            Registry<ExplorationEntry> explorationEntries = registryAccess.lookupOrThrow(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY);
+            for (Holder<ExplorationEntry> entry : explorationEntries.asHolderIdMap()) {
+                this.explorationEntries.add(new ExplorationEntry.Mutable(entry));
             }
         }
     }
@@ -158,6 +153,12 @@ public class GuidebookDiscoveryAttachment {
         if (this.sync && icon != null) {
             PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
         }
+    }
+
+    public void clearEntries() {
+        this.getBestiaryEntries().clear();
+        this.getEffectsEntries().clear();
+        this.getExplorationEntries().clear();
     }
 
     public GuidebookToast.Icons getIconForEntry(MutableEntry entry) {

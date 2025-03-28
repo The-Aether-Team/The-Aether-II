@@ -204,11 +204,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             int topPos = (this.screen.height - Guidebook.PAGE_HEIGHT) / 2;
             Component name = Component.translatable("gui.aether_ii.guidebook.discovery.entry.unknown");
             if (this.isUnlocked(entry, BestiaryEntry.SLOT_NAME.id())) {
-                if (entry.getSlotName().isPresent()) {
-                    name = Component.translatable(entry.getSlotName().get());
-                } else {
-                    name = Component.translatable(entry.getEntityType().value().getDescriptionId());
-                }
+                name = Component.translatable(entry.getSlotName());
             }
             List<Component> components = new ArrayList<>(List.of(name));
             if (this.isUnlocked(entry, BestiaryEntry.SLOT_SUBTITLE.id()) && entry.getSlotSubtitle().isPresent()) {
@@ -228,11 +224,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                 Entity entity = entry.getEntityType().value().create(level, EntitySpawnReason.COMMAND);
                 if (entity instanceof LivingEntity livingEntity) {
                     if (this.isUnlocked(entry, BestiaryEntry.NAME.id())) {
-                        String name = entry.getEntityType().value().getDescriptionId();
-                        if (entry.getName().isPresent()) {
-                            name = entry.getName().get();
-                        }
-                        guiGraphics.drawCenteredString(font, Component.translatable(name), 88, 13, 16777215);
+                        guiGraphics.drawCenteredString(font, Component.translatable(entry.getName()), 88, 13, 16777215);
                     }
 
                     int x = 27;
