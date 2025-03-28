@@ -5,6 +5,7 @@
   "food": "aether_ii:phyg_food",
   "health": 0,
   "icon": "aether_ii:guidebook/bestiary/phyg",
+  "id": "aether_ii:phyg",
   "impact_defense": 0,
   "loot_slots": [
     {

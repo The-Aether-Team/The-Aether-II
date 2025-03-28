@@ -5,6 +5,7 @@
   "food": "aether_ii:moa_food",
   "health": 35,
   "icon": "aether_ii:guidebook/bestiary/moa",
+  "id": "aether_ii:moa",
   "impact_defense": 2,
   "loot_slots": [
     {

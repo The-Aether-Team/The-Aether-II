@@ -4,6 +4,7 @@
   "entity_type": "aether_ii:tempest",
   "health": 30,
   "icon": "aether_ii:guidebook/bestiary/tempest",
+  "id": "aether_ii:tempest",
   "impact_defense": 2,
   "loot_slots": [
     {

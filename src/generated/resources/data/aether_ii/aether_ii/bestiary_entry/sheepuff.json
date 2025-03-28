@@ -5,6 +5,7 @@
   "food": "aether_ii:sheepuff_food",
   "health": 0,
   "icon": "aether_ii:guidebook/bestiary/sheepuff",
+  "id": "aether_ii:sheepuff",
   "impact_defense": 0,
   "loot_slots": [
     {

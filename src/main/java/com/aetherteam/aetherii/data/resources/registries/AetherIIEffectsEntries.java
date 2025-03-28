@@ -75,7 +75,8 @@ public class AetherIIEffectsEntries {
     public static void bootstrap(BootstrapContext<EffectsEntry> context) {
         for (Map.Entry<ResourceKey<EffectsEntry>, Holder<MobEffect>> entry : EFFECTS.entrySet()) {
             Holder<MobEffect> holder = entry.getValue();
-            context.register(entry.getKey(), new EffectsEntry( //todo
+            context.register(entry.getKey(), new EffectsEntry(
+                    entry.getKey().location(),
                     ResourceLocation.parse(holder.getKey().location().getPath()),
                     Optional.empty(),
                     Optional.empty(),

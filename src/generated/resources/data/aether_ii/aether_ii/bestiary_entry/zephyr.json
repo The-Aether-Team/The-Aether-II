@@ -4,6 +4,7 @@
   "entity_type": "aether_ii:zephyr",
   "health": 5,
   "icon": "aether_ii:guidebook/bestiary/zephyr",
+  "id": "aether_ii:zephyr",
   "impact_defense": 2,
   "loot_slots": [
     {

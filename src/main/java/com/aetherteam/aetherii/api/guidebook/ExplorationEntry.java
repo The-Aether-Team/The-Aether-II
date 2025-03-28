@@ -22,11 +22,11 @@ public class ExplorationEntry extends GuidebookEntry {
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<ExplorationEntry>> STREAM_CODEC = ByteBufCodecs.holderRegistry(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY);
 
     public ExplorationEntry(GuidebookEntry root) {
-        super(root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey());
+        super(root.getId(), root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey());
     }
 
-    public ExplorationEntry(ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey) {
-        super(icon, name, slotName, slotSubtitle, descriptionKey);
+    public ExplorationEntry(ResourceLocation id, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey) {
+        super(id, icon, name, slotName, slotSubtitle, descriptionKey);
     }
 
     public static class Mutable extends ExplorationEntry implements MutableEntry {
@@ -43,7 +43,7 @@ public class ExplorationEntry extends GuidebookEntry {
         }
 
         public Mutable(Holder<ExplorationEntry> entry, Map<String, Info> clientValues) {
-            super(entry.value().getIcon(), entry.value().getName(), entry.value().getSlotName(), entry.value().getSlotSubtitle(), entry.value().getDescriptionKey());
+            super(entry.value().getId(), entry.value().getIcon(), entry.value().getName(), entry.value().getSlotName(), entry.value().getSlotSubtitle(), entry.value().getDescriptionKey());
             this.entry = entry;
             this.clientValues = clientValues;
         }

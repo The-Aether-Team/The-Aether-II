@@ -11,6 +11,7 @@
   "entity_type": "aether_ii:cockatrice",
   "health": 25,
   "icon": "aether_ii:guidebook/bestiary/cockatrice",
+  "id": "aether_ii:cockatrice",
   "impact_defense": 0,
   "loot_slots": [
     {

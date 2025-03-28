@@ -2,6 +2,7 @@
   "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.wound",
   "effect": "aether_ii:wound",
   "icon": "minecraft:wound",
+  "id": "aether_ii:wound",
   "items": [
     {
       "item": "aether_ii:bandage"

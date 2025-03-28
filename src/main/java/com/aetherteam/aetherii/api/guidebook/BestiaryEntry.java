@@ -62,11 +62,11 @@ public class BestiaryEntry extends GuidebookEntry {
     private final Optional<TagKey<Item>> food;
 
     public BestiaryEntry(GuidebookEntry root, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, List<EffectResistanceDisplay> effectResistances, Optional<Double> scaleMultiplier, List<LootDisplay> loot, Optional<TagKey<Item>> food) {
-        this(root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), entityType, health, slashDefense, impactDefense, pierceDefense, effectResistances, scaleMultiplier, loot, food);
+        this(root.getId(), root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), entityType, health, slashDefense, impactDefense, pierceDefense, effectResistances, scaleMultiplier, loot, food);
     }
 
-    public BestiaryEntry(ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, List<EffectResistanceDisplay> effectResistances, Optional<Double> scaleMultiplier, List<LootDisplay> loot, Optional<TagKey<Item>> food) {
-        super(icon, name, slotName, slotSubtitle, descriptionKey);
+    public BestiaryEntry(ResourceLocation id, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<EntityType<?>> entityType, int health, int slashDefense, int impactDefense, int pierceDefense, List<EffectResistanceDisplay> effectResistances, Optional<Double> scaleMultiplier, List<LootDisplay> loot, Optional<TagKey<Item>> food) {
+        super(id, icon, name, slotName, slotSubtitle, descriptionKey);
         this.entityType = this.info(ENTITY_TYPE, entityType);
         this.health = this.info(HEALTH, health);
         this.slashDefense = this.info(SLASH_DEFENSE, slashDefense);
@@ -170,7 +170,7 @@ public class BestiaryEntry extends GuidebookEntry {
         }
 
         public Mutable(Holder<BestiaryEntry> entry, Map<String, Info> clientValues) {
-            super(entry.value().getIcon(), entry.value().getName(), entry.value().getSlotName(), entry.value().getSlotSubtitle(), entry.value().getDescriptionKey(), entry.value().getEntityType(), entry.value().getHealth(), entry.value().getSlashDefense(), entry.value().getImpactDefense(), entry.value().getPierceDefense(), entry.value().getEffectResistances(), entry.value().getScaleMultiplier(), entry.value().getLoot(), entry.value().getFood());
+            super(entry.value().getId(), entry.value().getIcon(), entry.value().getName(), entry.value().getSlotName(), entry.value().getSlotSubtitle(), entry.value().getDescriptionKey(), entry.value().getEntityType(), entry.value().getHealth(), entry.value().getSlashDefense(), entry.value().getImpactDefense(), entry.value().getPierceDefense(), entry.value().getEffectResistances(), entry.value().getScaleMultiplier(), entry.value().getLoot(), entry.value().getFood());
             this.entry = entry;
             this.clientValues = clientValues;
         }

@@ -5,6 +5,7 @@
   "food": "aether_ii:burrukai_food",
   "health": 18,
   "icon": "aether_ii:guidebook/bestiary/arctic_burrukai",
+  "id": "aether_ii:arctic_burrukai",
   "impact_defense": -2,
   "loot_slots": [
     {

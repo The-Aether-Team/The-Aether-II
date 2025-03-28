@@ -34,11 +34,11 @@ public class EffectsEntry extends GuidebookEntry {
     private final List<Holder<Item>> items;
 
     public EffectsEntry(GuidebookEntry root, Holder<MobEffect> effect, List<Holder<Item>> items) {
-        this(root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), effect, items);
+        this(root.getId(), root.getIcon(), root.getName(), root.getSlotName(), root.getSlotSubtitle(), root.getDescriptionKey(), effect, items);
     }
 
-    public EffectsEntry(ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<MobEffect> effect, List<Holder<Item>> items) {
-        super(icon, name, slotName, slotSubtitle, descriptionKey);
+    public EffectsEntry(ResourceLocation id, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey, Holder<MobEffect> effect, List<Holder<Item>> items) {
+        super(id, icon, name, slotName, slotSubtitle, descriptionKey);
         this.effect = this.info(EFFECT, effect);
         this.items = items;
         for (int i = 0; i < this.items.size(); i++) {
@@ -68,7 +68,7 @@ public class EffectsEntry extends GuidebookEntry {
         }
 
         public Mutable(Holder<EffectsEntry> entry, Map<String, Info> clientValues) {
-            super(entry.value().getIcon(), entry.value().getName(), entry.value().getSlotName(), entry.value().getSlotSubtitle(), entry.value().getDescriptionKey(), entry.value().getEffect(), entry.value().getItems());
+            super(entry.value().getId(), entry.value().getIcon(), entry.value().getName(), entry.value().getSlotName(), entry.value().getSlotSubtitle(), entry.value().getDescriptionKey(), entry.value().getEffect(), entry.value().getItems());
             this.entry = entry;
             this.clientValues = clientValues;
         }

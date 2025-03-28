@@ -86,9 +86,9 @@ public class AetherIIRewardWrappers {
         return registryAccess.lookupOrThrow(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY);
     }
 
-    public static Optional<RewardWrapper> getWrapperForAdvancement(RegistryAccess registryAccess, AdvancementHolder advancementHolder) {
+    public static Optional<RewardWrapper> getWrapperForAdvancement(RegistryAccess registryAccess, ResourceLocation advancement) {
         for (RewardWrapper wrapper : getRegistry(registryAccess)) {
-            if (wrapper.advancement().equals(advancementHolder.id())) {
+            if (wrapper.advancement().equals(advancement)) {
                 return Optional.of(wrapper);
             }
         }

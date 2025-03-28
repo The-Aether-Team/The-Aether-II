@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class GuidebookEntry {
+    public static final DataTemplate<ResourceLocation> ID = new DataTemplate<>("id", ResourceLocation.CODEC::fieldOf);
     public static final DataTemplate<ResourceLocation> ICON = new DataTemplate<>("icon", ResourceLocation.CODEC::fieldOf);
     public static final DataTemplate<Optional<String>> NAME = new DataTemplate<>("name", Codec.STRING::optionalFieldOf);
     public static final DataTemplate<Optional<String>> SLOT_NAME = new DataTemplate<>("slot_name", Codec.STRING::optionalFieldOf);
@@ -20,6 +21,7 @@ public class GuidebookEntry {
 
     public static final MapCodec<GuidebookEntry> MAP_CODEC =
             RecordCodecBuilder.mapCodec(in -> in.group(
+                    BestiaryEntry.ID.mapCodec().forGetter(GuidebookEntry::getId),
                     BestiaryEntry.ICON.mapCodec().forGetter(GuidebookEntry::getIcon),
                     BestiaryEntry.NAME.mapCodec().forGetter(GuidebookEntry::getName),
                     BestiaryEntry.SLOT_NAME.mapCodec().forGetter(GuidebookEntry::getSlotName),
@@ -27,6 +29,7 @@ public class GuidebookEntry {
                     BestiaryEntry.DESCRIPTION_KEY.mapCodec().forGetter(GuidebookEntry::getDescriptionKey)
             ).apply(in, GuidebookEntry::new));
 
+    private final ResourceLocation id;
     private final ResourceLocation icon;
     private final Optional<String> name;
     private final Optional<String> slotName;
@@ -35,12 +38,17 @@ public class GuidebookEntry {
 
     protected final Map<String, Info> values = new HashMap<>();
 
-    public GuidebookEntry(ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey) {
+    public GuidebookEntry(ResourceLocation id, ResourceLocation icon, Optional<String> name, Optional<String> slotName, Optional<String> slotSubtitle, String descriptionKey) {
+        this.id = this.info(ID, id);
         this.icon = this.info(ICON, icon);
         this.name = this.info(NAME, name);
         this.slotName = this.info(SLOT_NAME, slotName);
         this.slotSubtitle = this.info(SLOT_SUBTITLE, slotSubtitle);
         this.descriptionKey = this.info(DESCRIPTION_KEY, descriptionKey);
+    }
+
+    public ResourceLocation getId() {
+        return this.id;
     }
 
     public ResourceLocation getIcon() {

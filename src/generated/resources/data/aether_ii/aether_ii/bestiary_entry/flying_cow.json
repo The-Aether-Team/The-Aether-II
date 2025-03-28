@@ -5,6 +5,7 @@
   "food": "aether_ii:flying_food",
   "health": 0,
   "icon": "aether_ii:guidebook/bestiary/flying_cow",
+  "id": "aether_ii:flying_cow",
   "impact_defense": 0,
   "loot_slots": [
     {

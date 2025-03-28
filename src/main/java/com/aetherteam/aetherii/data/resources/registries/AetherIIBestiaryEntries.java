@@ -165,6 +165,7 @@ public class AetherIIBestiaryEntries {
             Optional<TagKey<Item>> food = FED.containsKey(holder) ? Optional.of(FED.get(holder)) : Optional.empty();
 
             context.register(entry.getKey(), new BestiaryEntry(
+                    entry.getKey().location(),
                     ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/bestiary/" + entity.toShortString()),
                     name,
                     slotName,

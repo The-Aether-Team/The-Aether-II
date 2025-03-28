@@ -2,5 +2,6 @@
   "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.webbed",
   "effect": "aether_ii:webbed",
   "icon": "minecraft:webbed",
+  "id": "aether_ii:webbed",
   "items": []
 }

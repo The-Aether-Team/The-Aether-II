@@ -5,6 +5,7 @@
   "food": "aether_ii:kirrid_food",
   "health": 10,
   "icon": "aether_ii:guidebook/bestiary/magnetic_kirrid",
+  "id": "aether_ii:magnetic_kirrid",
   "impact_defense": 2,
   "loot_slots": [
     {

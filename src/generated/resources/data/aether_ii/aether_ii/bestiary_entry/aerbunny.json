@@ -5,6 +5,7 @@
   "food": "aether_ii:aerbunny_food",
   "health": 6,
   "icon": "aether_ii:guidebook/bestiary/aerbunny",
+  "id": "aether_ii:aerbunny",
   "impact_defense": 2,
   "loot_slots": [],
   "pierce_defense": -2,
