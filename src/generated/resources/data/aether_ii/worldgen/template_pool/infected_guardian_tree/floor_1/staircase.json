@@ -1,0 +1,31 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/floor_1/staircase_01",
+        "max_y": 384,
+        "min_y": 72,
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_trunk",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/floor_1/lobby_01",
+        "max_y": 72,
+        "min_y": 0,
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_trunk",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

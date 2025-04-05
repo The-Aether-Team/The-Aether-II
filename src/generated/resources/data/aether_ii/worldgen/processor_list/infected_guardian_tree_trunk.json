@@ -31,6 +31,72 @@
           "output_state": {
             "Name": "minecraft:air"
           }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:lime_cloudwool",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.6
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:stripped_guardian_wood",
+            "Properties": {
+              "axis": "y",
+              "reinforced": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:lime_cloudwool",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "minecraft:air"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:light_blue_cloudwool",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.5
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:guardian_wood",
+            "Properties": {
+              "axis": "y",
+              "reinforced": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:light_blue_cloudwool",
+            "predicate_type": "minecraft:block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:guardian_trunk",
+            "Properties": {
+              "east_connection": "none",
+              "north_connection": "none",
+              "south_connection": "none",
+              "tall": "false",
+              "waterlogged": "false",
+              "west_connection": "none"
+            }
+          }
         }
       ]
     },
