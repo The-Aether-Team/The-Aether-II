@@ -4,6 +4,8 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/tents/small_tent",
+        "max_y": 384,
+        "min_y": 96,
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp_highfields",
         "projection": "rigid",
@@ -15,6 +17,8 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/tents/tent",
+        "max_y": 384,
+        "min_y": 96,
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp_highfields",
         "projection": "rigid",

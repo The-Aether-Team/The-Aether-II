@@ -4,6 +4,8 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:outpost/outpost",
+        "max_y": 384,
+        "min_y": 96,
         "override_liquid_settings": "ignore_waterlogging",
         "processors": {
           "processors": []
@@ -17,6 +19,8 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:outpost/tall_outpost",
+        "max_y": 384,
+        "min_y": 96,
         "override_liquid_settings": "ignore_waterlogging",
         "processors": {
           "processors": []

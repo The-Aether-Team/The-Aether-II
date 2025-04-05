@@ -4,6 +4,8 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/additional_paths/path_01",
+        "max_y": 384,
+        "min_y": 96,
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp_highfields",
         "projection": "terrain_matching",
@@ -15,6 +17,8 @@
       "element": {
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/additional_paths/path_02",
+        "max_y": 384,
+        "min_y": 96,
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:camp_highfields",
         "projection": "terrain_matching",

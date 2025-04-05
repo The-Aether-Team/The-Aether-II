@@ -48,13 +48,17 @@ public class AetherPoolElement extends StructurePoolElement {
                     processorsCodec(),
                     projectionCodec(),
                     overrideLiquidSettingsCodec(),
+                    Codec.INT.fieldOf("min_y").forGetter(structure -> structure.minY),
+                    Codec.INT.fieldOf("max_y").forGetter(structure -> structure.maxY),
                     Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir)
             ).apply(instance, AetherPoolElement::new)
     );
     protected final Either<ResourceLocation, StructureTemplate> template;
     protected final Holder<StructureProcessorList> processors;
-    protected final boolean replaceAir;
     protected final Optional<LiquidSettings> overrideLiquidSettings;
+    protected final int minY;
+    protected final int maxY;
+    protected final boolean replaceAir;
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> p_210425_, DynamicOps<T> p_210426_, T p_210427_) {
         Optional<ResourceLocation> optional = p_210425_.left();
@@ -75,11 +79,13 @@ public class AetherPoolElement extends StructurePoolElement {
         return TEMPLATE_CODEC.fieldOf("location").forGetter(codec -> codec.template);
     }
 
-    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, boolean replaceAir) {
+    public AetherPoolElement(Either<ResourceLocation, StructureTemplate> template, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int minY, int maxY, boolean replaceAir) {
         super(projection);
         this.template = template;
         this.processors = processors;
         this.overrideLiquidSettings = overrideLiquidSettings;
+        this.minY = minY;
+        this.maxY = maxY;
         this.replaceAir = replaceAir;
     }
 
@@ -136,7 +142,7 @@ public class AetherPoolElement extends StructurePoolElement {
     public boolean place(StructureTemplateManager templateManager, WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator, BlockPos offset, BlockPos pos, Rotation rotation, BoundingBox box, RandomSource random, LiquidSettings liquidSettings, boolean keepJigsaws) {
         StructureTemplate template = this.getTemplate(templateManager);
         StructurePlaceSettings settings = this.getSettings(rotation, box, liquidSettings, keepJigsaws);
-        if (pos.getY() > 96) { // Deletes templates that generated below the cloudbed
+        if (pos.getY() > this.minY && pos.getY() < this.maxY) { // Determines in which height range the template can be placed
             if (!template.placeInWorld(level, offset, pos, settings, random, 18)) {
                 return false;
             } else {
@@ -145,7 +151,6 @@ public class AetherPoolElement extends StructurePoolElement {
                 )) {
                     this.handleDataMarker(level, structureBlockInfo, offset, rotation, random, box);
                 }
-
                 return true;
             }
         }
