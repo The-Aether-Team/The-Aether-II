@@ -33,6 +33,9 @@
           }
         }
       ]
+    },
+    {
+      "processor_type": "aether_ii:reinforce_blocks"
     }
   ]
 }
