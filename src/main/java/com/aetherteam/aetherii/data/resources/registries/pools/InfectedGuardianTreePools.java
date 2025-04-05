@@ -16,6 +16,7 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> TRUNK_BASE = AetherIIPools.createKey("infected_guardian_tree/trunk/base");
     public static final ResourceKey<StructureTemplatePool> TRUNK_ENTRANCE = AetherIIPools.createKey("infected_guardian_tree/trunk/entrance");
     public static final ResourceKey<StructureTemplatePool> TRUNK_WALLS = AetherIIPools.createKey("infected_guardian_tree/trunk/walls");
+    public static final ResourceKey<StructureTemplatePool> TRUNK_BOTTOM = AetherIIPools.createKey("infected_guardian_tree/trunk/bottom");
     public static final ResourceKey<StructureTemplatePool> TRUNK_TOP = AetherIIPools.createKey("infected_guardian_tree/trunk/top");
     public static final ResourceKey<StructureTemplatePool> TRUNK_BRANCHES = AetherIIPools.createKey("infected_guardian_tree/trunk/branches");
     public static final ResourceKey<StructureTemplatePool> TRUNK_TOP_BRANCHES = AetherIIPools.createKey("infected_guardian_tree/trunk/top_branches");
@@ -56,6 +57,14 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/top_01", processorTrunk), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(TRUNK_BOTTOM, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/bottom", processorTrunk, 0, 384), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
