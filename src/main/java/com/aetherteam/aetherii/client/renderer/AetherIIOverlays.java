@@ -7,7 +7,6 @@ import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -34,7 +33,6 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
 import java.awt.*;
 import java.util.Collection;
-import java.util.List;
 
 public class AetherIIOverlays {
     protected static final ResourceLocation BUILDUP_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background");
@@ -123,13 +121,23 @@ public class AetherIIOverlays {
                 guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_OVERLAY_SPRITE, i, (j + 24 - buildupScaledValue) - (24 - buildupScaledValue), 24, 24, ARGB.opaque(color.getRGB()));
                 guiGraphics.disableScissor();
 
-                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24, ARGB.opaque(color.getRGB()));
+                guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_SPRITE, i, j, 24, 24);
 
                 if (buildup.isBuildupFull()) {
                     MobEffectInstance instance = player.getEffect(buildup.getType());
                     if (instance != null) {
                         int durationValueScaled = Math.min(instance.getDuration() / Math.max(1, (buildup.getInitialInstanceDuration() / 24)), 24);
-                        guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_BACKING_SPRITE, 24, 24, 0, 24 - durationValueScaled, i, j + 24 - durationValueScaled, 24, durationValueScaled);
+                        int textureWidth = 24;
+                        int textureHeight = 24;
+                        int uPosition = 0;
+                        int vPosition = 24 - durationValueScaled;
+                        int x = i;
+                        int y = j + 24 - durationValueScaled;
+                        int uWidth = 24;
+                        int vHeight = durationValueScaled;
+                        guiGraphics.enableScissor(x, y, x + uWidth, y + vHeight);
+                        guiGraphics.blitSprite(RenderType::guiTextured, BUILDUP_BACKGROUND_BACKING_SPRITE, x - uPosition, y - vPosition, textureWidth, textureHeight, ARGB.opaque(color.getRGB()));
+                        guiGraphics.disableScissor();
                     }
 
                     float flashInterval = (Mth.cos((0.5F * player.tickCount) - Mth.PI) / 2.0F) + 0.5F;
