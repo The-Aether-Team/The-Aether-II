@@ -75,7 +75,7 @@ public class DamageSystemAttachment implements INBTSynchable {
                 }
                 this.setSynched(player.getId(), INBTSynchable.Direction.CLIENT, "setShieldStamina", Math.max(0, this.getShieldStamina() - rate));
                 if (this.getShieldStamina() <= 0) {
-                    player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 300 - cooldown)); //todo test this switch to using stacks
+                    player.level().registryAccess().lookupOrThrow(Registries.ITEM).getTagOrEmpty(Tags.Items.TOOLS_SHIELD).forEach((item) -> player.getCooldowns().addCooldown(item.value().getDefaultInstance(), 300 - cooldown));
                     player.stopUsingItem();
                 }
             }

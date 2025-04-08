@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
 import com.google.common.collect.Ordering;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -41,8 +42,10 @@ public class AetherIIOverlays {
     protected static final ResourceLocation BUILDUP_BACKGROUND_OVERLAY_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background_overlay");
     protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_background");
     protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_progress");
+    protected static final ResourceLocation CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/crosshair_block_indicator_broken");
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_background");
     protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_progress");
+    protected static final ResourceLocation HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/hotbar_block_indicator_broken");
 
     public static void registerOverlays(RegisterGuiLayersEvent event) {
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aether_portal_overlay"), (guiGraphics, partialTicks) -> {
@@ -63,7 +66,7 @@ public class AetherIIOverlays {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
-                renderBlockIndicator(minecraft, guiGraphics, player);
+                renderBlockIndicator(minecraft, guiGraphics, player, partialTicks);
             }
         });
     }
@@ -154,8 +157,8 @@ public class AetherIIOverlays {
         }
     }
 
-    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player) {
-        Options options = minecraft.options; //todo visual for broken shield restoring to full shield using cooldown counter.
+    private static void renderBlockIndicator(Minecraft minecraft, GuiGraphics guiGraphics, LocalPlayer player, DeltaTracker partialTicks) {
+        Options options = minecraft.options;
         if (minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
             DamageSystemAttachment attachment = player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM);
             boolean missingStamina = attachment.getShieldStamina() < DamageSystemAttachment.MAX_SHIELD_STAMINA;
@@ -167,11 +170,18 @@ public class AetherIIOverlays {
                         if (!minecraft.getDebugOverlay().showDebugScreen() || player.isReducedDebugInfo() || options.reducedDebugInfo().get()) {
                             RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-                            int j = guiGraphics.guiHeight() / 2 - 5;
                             int k = guiGraphics.guiWidth() / 2 - 19;
-                            int l = (int) (f * 10.0F);
+                            int j = guiGraphics.guiHeight() / 2 - 5;
+
                             guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k, j, 10, 10);
-                            guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+
+                            if (attachment.getShieldStamina() == 0) {
+                                int l = (int) (player.getCooldowns().getCooldownPercent(AetherIIItems.SKYROOT_SHIELD.toStack(), partialTicks.getGameTimeDeltaPartialTick(false)) * 10.0F);
+                                guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_BROKEN_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+                            } else {
+                                int l = (int) (f * 10.0F);
+                                guiGraphics.blitSprite(RenderType::guiTextured, CROSSHAIR_BLOCK_INDICATOR_PROGRESS_SPRITE, 10, 10, 0, 10 - l, k, j + 10 - l, 10, l);
+                            }
 
                             RenderSystem.defaultBlendFunc();
                         }
@@ -186,9 +196,15 @@ public class AetherIIOverlays {
                         k2 = i + 91 + 1 + (!flag ? 31 : 3);
                     }
 
-                    int l1 = (int) (f * 18.0F);
                     guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_BACKGROUND_SPRITE, k2, j2, 18, 18);
-                    guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+
+                    if (attachment.getShieldStamina() == 0) {
+                        int l1 = (int) (player.getCooldowns().getCooldownPercent(AetherIIItems.SKYROOT_SHIELD.toStack(), partialTicks.getGameTimeDeltaPartialTick(false)) * 18.0F);
+                        guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_BROKEN_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+                    } else {
+                        int l1 = (int) (f * 18.0F);
+                        guiGraphics.blitSprite(RenderType::guiTextured, HOTBAR_BLOCK_INDICATOR_PROGRESS_SPRITE, 18, 18, 0, 18 - l1, k2, j2 + 18 - l1, 18, l1);
+                    }
                 }
             }
         }
