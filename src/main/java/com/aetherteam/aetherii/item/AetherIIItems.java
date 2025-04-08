@@ -78,6 +78,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Blocks;
@@ -259,10 +260,10 @@ public class AetherIIItems {
 
     // Consumables
     public static final DeferredItem<Item> WATER_VIAL = register("water_vial", WaterVialItem::new, () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.WATER_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get()));
-    public static final DeferredItem<Item> BANDAGE = register("bandage", () -> new Item.Properties().component(DataComponents.CONSUMABLE, AetherIIConsumables.BANDAGE));
-    public static final DeferredItem<Item> SPLINT = register("splint", () -> new Item.Properties().component(DataComponents.CONSUMABLE, AetherIIConsumables.SPLINT));
-    public static final DeferredItem<Item> ANTITOXIN_VIAL = register("antitoxin_vial", () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.ANTITOXIN_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get()));
-    public static final DeferredItem<Item> ANTIVENOM_VIAL = register("antivenom_vial", () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.ANTIVENOM_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get()));
+    public static final DeferredItem<Item> BANDAGE = register("bandage", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.BANDAGE)));
+    public static final DeferredItem<Item> SPLINT = register("splint", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.SPLINT)));
+    public static final DeferredItem<Item> ANTITOXIN_VIAL = register("antitoxin_vial", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.ANTITOXIN_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get())));
+    public static final DeferredItem<Item> ANTIVENOM_VIAL = register("antivenom_vial", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.ANTIVENOM_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get())));
     public static final DeferredItem<Item> VALKYRIE_TEA = register("valkyrie_tea", () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.VALKYRIE_TEA).usingConvertsTo(SCATTERGLASS_VIAL.get()));
     public static final DeferredItem<Item> HEALING_STONE = register("healing_stone", (properties) -> new HealingStoneItem(properties.stacksTo(1).component(AetherIIDataComponents.HEALING_STONE_CHARGES, 0)));
 

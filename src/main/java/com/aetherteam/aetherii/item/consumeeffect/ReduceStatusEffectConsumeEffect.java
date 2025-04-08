@@ -19,17 +19,17 @@ import net.minecraft.world.level.Level;
 import java.util.HashMap;
 import java.util.Map;
 
-public record PreventStatusEffectConsumeEffect(Map<Holder<MobEffect>, Integer> effects) implements ConsumeEffect {
-    public static final MapCodec<PreventStatusEffectConsumeEffect> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            Codec.unboundedMap(BuiltInRegistries.MOB_EFFECT.holderByNameCodec(), Codec.INT).fieldOf("effects").forGetter(PreventStatusEffectConsumeEffect::effects)
-    ).apply(instance, PreventStatusEffectConsumeEffect::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, PreventStatusEffectConsumeEffect> STREAM_CODEC = StreamCodec.composite(
+public record ReduceStatusEffectConsumeEffect(Map<Holder<MobEffect>, Integer> effects) implements ConsumeEffect {
+    public static final MapCodec<ReduceStatusEffectConsumeEffect> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            Codec.unboundedMap(BuiltInRegistries.MOB_EFFECT.holderByNameCodec(), Codec.INT).fieldOf("effects").forGetter(ReduceStatusEffectConsumeEffect::effects)
+    ).apply(instance, ReduceStatusEffectConsumeEffect::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, ReduceStatusEffectConsumeEffect> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.map(HashMap::new, ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT), ByteBufCodecs.INT),
-            PreventStatusEffectConsumeEffect::effects,
-            PreventStatusEffectConsumeEffect::new);
+            ReduceStatusEffectConsumeEffect::effects,
+            ReduceStatusEffectConsumeEffect::new);
 
     @Override
-    public Type<PreventStatusEffectConsumeEffect> getType() {
+    public Type<ReduceStatusEffectConsumeEffect> getType() {
         return AetherIIConsumeEffectTypes.REDUCE_EFFECT_BUILDUP.get();
     }
 
