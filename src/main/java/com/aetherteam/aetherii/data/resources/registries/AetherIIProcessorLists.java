@@ -37,9 +37,7 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get(), 0.75F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.LIME_CLOUDWOOL.get(), 0.6F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIME_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
-                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get(), 0.5F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState()),
-                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIGHT_BLUE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_TRUNK.get().defaultBlockState())
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIME_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
                 new ReinforceBlocksProcessor()
         ));
