@@ -1012,6 +1012,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("treasure.description", "Treasure Item");
         this.addItemTooltip("currency.description", "Converts to Currency:");
         this.addItemTooltip("currency.amount", "%s Glint");
+        this.addItemTooltip("curative.removes", "Removes: %s");
+        this.addItemTooltip("curative.reduces", "Reduces: %s");
         this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
 
         // Moa Egg Tooltips
@@ -1171,6 +1173,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.FROSTBITE_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.FUNGAL_ROT_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.CRYSTALLIZED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.SATURATION_BOOST.get(), "Food Saturation");
 
 
         // Effects

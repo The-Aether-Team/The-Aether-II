@@ -236,9 +236,11 @@ public class AetherIIEventListeners {
         livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source);
     }
 
-    public static void onLivingItemUsed(LivingEntityUseItemEvent event) {
+    public static void onLivingItemUsed(LivingEntityUseItemEvent.Finish event) {
+        ItemStack itemStack = event.getItem();
+
         if (event.getEntity() instanceof Player player) {
-            PlayerHooks.valkyrieTeaAbility(player);
+            PlayerHooks.valkyrieTeaAbility(player, itemStack);
         }
     }
 

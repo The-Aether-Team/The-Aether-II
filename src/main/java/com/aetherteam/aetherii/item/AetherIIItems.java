@@ -264,7 +264,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> SPLINT = register("splint", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.SPLINT)));
     public static final DeferredItem<Item> ANTITOXIN_VIAL = register("antitoxin_vial", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.ANTITOXIN_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get())));
     public static final DeferredItem<Item> ANTIVENOM_VIAL = register("antivenom_vial", (properties) -> new SpecialTooltipItem(AetherIITooltips.CURATIVE, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.ANTIVENOM_VIAL).usingConvertsTo(SCATTERGLASS_VIAL.get())));
-    public static final DeferredItem<Item> VALKYRIE_TEA = register("valkyrie_tea", () -> new Item.Properties().stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.VALKYRIE_TEA).usingConvertsTo(SCATTERGLASS_VIAL.get()));
+    public static final DeferredItem<Item> VALKYRIE_TEA = register("valkyrie_tea", (properties) -> new SpecialTooltipItem(AetherIITooltips.TEA, properties.stacksTo(8).component(DataComponents.CONSUMABLE, AetherIIConsumables.VALKYRIE_TEA).usingConvertsTo(SCATTERGLASS_VIAL.get())));
     public static final DeferredItem<Item> HEALING_STONE = register("healing_stone", (properties) -> new HealingStoneItem(properties.stacksTo(1).component(AetherIIDataComponents.HEALING_STONE_CHARGES, 0)));
 
     // Gliders

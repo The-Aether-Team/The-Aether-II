@@ -9,6 +9,7 @@ import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import com.aetherteam.aetherii.entity.passive.MountableAnimal;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -27,12 +28,15 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -181,9 +185,15 @@ public class PlayerHooks {
         return interactionResult;
     }
 
-    public static void valkyrieTeaAbility(Player player) {
-        if (player.hasEffect(AetherIIEffects.SATURATION_BOOST)) {
-            player.getFoodData().eat(0, 0.4F);
+    public static void valkyrieTeaAbility(Player player, ItemStack stack) {
+        FoodProperties food = stack.get(DataComponents.FOOD);
+        if (food != null) {
+            float originalSaturation = food.saturation();
+            double saturationBoost = player.getAttributeValue(AetherIIAttributes.SATURATION_BOOST);
+            float bonusSaturation = (float) (originalSaturation * (saturationBoost - 1.0F));
+            if (bonusSaturation > 0.0F) {
+                player.getFoodData().eat(0, bonusSaturation);
+            }
         }
     }
 

@@ -50,6 +50,8 @@ public class AetherIIAttributes {
     public static final DeferredHolder<Attribute, Attribute> FUNGAL_ROT_EFFECT_RESISTANCE = ATTRIBUTES.register("fungal_rot_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.FUNGAL_ROT, "attributes.aether_ii.fungal_rot_resistance", 0.0, -10.0, 10.0));
     public static final DeferredHolder<Attribute, Attribute> CRYSTALLIZED_EFFECT_RESISTANCE = ATTRIBUTES.register("crystallized_effect_resistance", () -> new EffectResistanceAttribute(AetherIIEffects.CRYSTALLIZED, "attributes.aether_ii.crystallized_resistance", 0.0, -10.0, 10.0));
 
+    public static final DeferredHolder<Attribute, Attribute> SATURATION_BOOST = ATTRIBUTES.register("saturation_boost", () -> new BaseRangedAttribute("attributes.aether_ii.saturation_boost", 1.0, 0.0, 1024.0));
+
     public static void registerEntityAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, SLASH_DAMAGE, 0.0);
         event.add(EntityType.PLAYER, IMPACT_DAMAGE, 0.0);
@@ -83,5 +85,7 @@ public class AetherIIAttributes {
         event.add(EntityType.PLAYER, FROSTBITE_EFFECT_RESISTANCE, 0.0);
         event.add(EntityType.PLAYER, FUNGAL_ROT_EFFECT_RESISTANCE, 0.0);
         event.add(EntityType.PLAYER, CRYSTALLIZED_EFFECT_RESISTANCE, 0.0);
+
+        event.add(EntityType.PLAYER, SATURATION_BOOST, 1.0);
     }
 }
