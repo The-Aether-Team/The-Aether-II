@@ -64,6 +64,24 @@
       ]
     },
     {
+      "density_function": "aether_ii:highlands/dungeon/dense_guardian_wood",
+      "processor_type": "aether_ii:density_function",
+      "result_state": {
+        "Name": "aether_ii:dense_guardian_wood",
+        "Properties": {
+          "axis": "y",
+          "reinforced": "false"
+        }
+      },
+      "target_state": {
+        "Name": "aether_ii:guardian_wood",
+        "Properties": {
+          "axis": "y",
+          "reinforced": "false"
+        }
+      }
+    },
+    {
       "processor_type": "aether_ii:reinforce_blocks"
     }
   ]

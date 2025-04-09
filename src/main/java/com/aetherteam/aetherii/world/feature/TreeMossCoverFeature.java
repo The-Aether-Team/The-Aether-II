@@ -40,7 +40,7 @@ public class TreeMossCoverFeature extends Feature<NoneFeatureConfiguration> {
 
         if (level instanceof WorldGenLevel worldGenLevel) {
             HolderGetter<DensityFunction> function = worldGenLevel.holderLookup(Registries.DENSITY_FUNCTION);
-            DensityFunction noise =  AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.TREE_MOSS);
+            DensityFunction noise =  AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.ENVIRONMENTAL_TREE_MOSS);
             DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(worldGenLevel.getSeed());
             noise.mapAll(visitor);
 

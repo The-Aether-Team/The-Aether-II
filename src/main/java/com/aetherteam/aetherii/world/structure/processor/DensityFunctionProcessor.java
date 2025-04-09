@@ -1,9 +1,11 @@
 package com.aetherteam.aetherii.world.structure.processor;
 
+import com.aetherteam.aetherii.world.density.PerlinNoiseFunction;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -33,10 +35,15 @@ public class DensityFunctionProcessor extends StructureProcessor {
     @Nullable
     @Override
     public StructureTemplate.StructureBlockInfo process(LevelReader level, BlockPos origin, BlockPos centerBottom, StructureTemplate.StructureBlockInfo originalBlockInfo, StructureTemplate.StructureBlockInfo modifiedBlockInfo, StructurePlaceSettings settings, @Nullable StructureTemplate template) {
-        double noise = this.density.compute(new DensityFunction.SinglePointContext(modifiedBlockInfo.pos().getX(), modifiedBlockInfo.pos().getY(), modifiedBlockInfo.pos().getZ()));
+        if (level instanceof WorldGenLevel worldGenLevel) {
+            DensityFunction.Visitor visitor = PerlinNoiseFunction.createOrGetVisitor(worldGenLevel.getSeed());
+            density.mapAll(visitor);
 
-        if (noise > 0 && originalBlockInfo.state() == targetState) {
-            return new StructureTemplate.StructureBlockInfo(modifiedBlockInfo.pos(), resultState, modifiedBlockInfo.nbt());
+            double noise = this.density.compute(new DensityFunction.SinglePointContext(modifiedBlockInfo.pos().getX(), modifiedBlockInfo.pos().getY(), modifiedBlockInfo.pos().getZ()));
+
+            if (noise > 0 && originalBlockInfo.state() == targetState) {
+                return new StructureTemplate.StructureBlockInfo(modifiedBlockInfo.pos(), resultState, modifiedBlockInfo.nbt());
+            }
         }
         return super.process(level, origin, centerBottom, originalBlockInfo, modifiedBlockInfo, settings, template);
     }
