@@ -29,6 +29,6 @@ public class ReinforceBlocksProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return AetherIIStructureProcessors.REINFORCE_BLOCKS.get();
+        return AetherIIStructureProcessorTypes.REINFORCE_BLOCKS.get();
     }
 }
