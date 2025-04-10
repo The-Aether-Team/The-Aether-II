@@ -3,7 +3,46 @@
     {
       "element": {
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/trunk/top_branch_01",
+        "location": "aether_ii:infected_guardian_tree/trunk/top_branch_01_a",
+        "max_y": 384,
+        "min_y": 96,
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_trunk",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/trunk/top_branch_01_b",
+        "max_y": 384,
+        "min_y": 96,
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_trunk",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/trunk/top_branch_02_a",
+        "max_y": 384,
+        "min_y": 96,
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree_trunk",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/trunk/top_branch_02_b",
         "max_y": 384,
         "min_y": 96,
         "override_liquid_settings": "ignore_waterlogging",
