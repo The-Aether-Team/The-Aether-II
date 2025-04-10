@@ -276,8 +276,12 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CRATER = createKey("crater");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUDBED = createKey("cloudbed");
-    
-    
+
+
+    // Dungeon
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
+
+
     // Air
     public static final ResourceKey<ConfiguredFeature<?, ?>> COLD_AERCLOUD = createKey("cold_aercloud");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GOLDEN_AERCLOUD = createKey("golden_aercloud");
@@ -2029,6 +2033,8 @@ public class HighlandsConfiguredFeatures {
                         AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.CLOUDBED_Y_OFFSET),
                         15D
                 ));
+
+        register(context, LARGE_SHELF_ROTSHROOM, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2));
     }
     
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {

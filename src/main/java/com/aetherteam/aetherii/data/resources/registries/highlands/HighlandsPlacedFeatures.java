@@ -171,6 +171,10 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> CLOUDBED = createKey("cloudbed");
 
 
+    // Dungeon
+    public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
+
+
     // Air
     public static final ResourceKey<PlacedFeature> HIGH_STORM_AERCLOUD = createKey("high_storm_aercloud");
     public static final ResourceKey<PlacedFeature> HIGH_GREEN_AERCLOUD = createKey("high_green_aercloud");
@@ -797,6 +801,8 @@ public class HighlandsPlacedFeatures {
         );
 
         register(context, CLOUDBED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.CLOUDBED), BiomeFilter.biome());
+
+        register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
     }
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {
