@@ -396,9 +396,15 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
                 AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
                 AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_GUARDIAN_LAMP.get(),
                 AetherIIBlocks.LOCKED_INFECTED_WOOD.get(),
                 AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get(),
-                AetherIIBlocks.LOCKED_INFECTED_ROOTS.get()
+                AetherIIBlocks.LOCKED_INFECTED_ROOTS.get(),
+                AetherIIBlocks.LOCKED_DIM_INFECTED_ROOTS.get(),
+                AetherIIBlocks.LOCKED_LUCENT_INFECTED_ROOTS.get(),
+                AetherIIBlocks.LOCKED_INFECTED_LAMP.get()
         );
 
         // Vanilla

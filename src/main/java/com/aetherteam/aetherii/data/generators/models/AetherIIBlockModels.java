@@ -353,6 +353,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createLockedDungeonBlock(AetherIIBlocks.GUARDIAN_WOOD.get(), AetherIIBlocks.GUARDIAN_LOG.get(), AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get());
         this.createLockedDungeonBlock(AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(), AetherIIBlocks.DENSE_GUARDIAN_LOG.get(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get());
         this.createLockedDungeonBlock(AetherIIBlocks.GUARDIAN_ROOTS.get(), AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get());
+        this.createLockedDungeonBlock(AetherIIBlocks.DIM_GUARDIAN_ROOTS.get(), AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS.get());
+        this.createLockedDungeonBlock(AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(), AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS.get());
+        this.createLockedDungeonBlock(AetherIIBlocks.GUARDIAN_LAMP.get(), AetherIIBlocks.LOCKED_GUARDIAN_LAMP.get());
 
         // Infected Dungeon Blocks
         this.woodProvider(AetherIIBlocks.INFECTED_LOG.get()).logWithHorizontal(AetherIIBlocks.INFECTED_LOG.get()).wood(AetherIIBlocks.INFECTED_WOOD.get());
@@ -382,6 +385,9 @@ public class AetherIIBlockModels extends AetherIIBlockModelSubProvider {
         this.createLockedDungeonBlock(AetherIIBlocks.INFECTED_WOOD.get(), AetherIIBlocks.INFECTED_LOG.get(), AetherIIBlocks.LOCKED_INFECTED_WOOD.get());
         this.createLockedDungeonBlock(AetherIIBlocks.DENSE_INFECTED_WOOD.get(), AetherIIBlocks.DENSE_INFECTED_LOG.get(), AetherIIBlocks.LOCKED_DENSE_INFECTED_WOOD.get());
         this.createLockedDungeonBlock(AetherIIBlocks.INFECTED_ROOTS.get(), AetherIIBlocks.LOCKED_INFECTED_ROOTS.get());
+        this.createLockedDungeonBlock(AetherIIBlocks.DIM_INFECTED_ROOTS.get(), AetherIIBlocks.LOCKED_DIM_INFECTED_ROOTS.get());
+        this.createLockedDungeonBlock(AetherIIBlocks.LUCENT_INFECTED_ROOTS.get(), AetherIIBlocks.LOCKED_LUCENT_INFECTED_ROOTS.get());
+        this.createLockedDungeonBlock(AetherIIBlocks.INFECTED_LAMP.get(), AetherIIBlocks.LOCKED_INFECTED_LAMP.get());
 
         // Rotshroom Blocks
         this.createRotshroomCluster(AetherIIBlocks.ROTSHROOM_CLUSTER.get());
