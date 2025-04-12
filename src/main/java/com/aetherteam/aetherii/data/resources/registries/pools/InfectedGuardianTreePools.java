@@ -114,7 +114,7 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/staircase_01", processorTrunk, 72, 384), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/lobby_01", processorTrunk, 0, 72), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/lobby_01_a", processorTrunk, 0, 72), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

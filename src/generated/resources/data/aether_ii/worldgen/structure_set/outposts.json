@@ -1,11 +1,6 @@
 {
   "placement": {
     "type": "minecraft:random_spread",
-    "exclusion_zone": {
-      "chunk_count": 16,
-      "other_set": "aether_ii:surface_dungeons"
-    },
-    "frequency_reduction_method": "legacy_type_1",
     "salt": 2738116,
     "separation": 18,
     "spacing": 28
