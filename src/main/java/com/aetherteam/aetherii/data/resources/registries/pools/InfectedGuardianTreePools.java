@@ -25,6 +25,7 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> TRUNK_BRANCHES = AetherIIPools.createKey("infected_guardian_tree/trunk/branches");
     public static final ResourceKey<StructureTemplatePool> TRUNK_TOP_BRANCHES = AetherIIPools.createKey("infected_guardian_tree/trunk/top_branches");
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/floor_1/staircase");
+    public static final ResourceKey<StructureTemplatePool> FLOOR_2_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/floor_2/staircase");
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
@@ -115,6 +116,14 @@ public class InfectedGuardianTreePools {
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/staircase_01", processorTrunk, 72, 384), 1),
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/lobby_01_a", processorTrunk, 0, 72), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(FLOOR_2_STAIRCASE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_2/staircase_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
