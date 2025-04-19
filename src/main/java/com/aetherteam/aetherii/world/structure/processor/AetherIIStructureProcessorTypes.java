@@ -11,4 +11,5 @@ public class AetherIIStructureProcessorTypes {
 
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<ReinforceBlocksProcessor>> REINFORCE_BLOCKS = STRUCTURE_PROCESSOR_TYPES.register("reinforce_blocks", () -> () -> ReinforceBlocksProcessor.CODEC);
     public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<DensityFunctionProcessor>> DENSITY_FUNCTION = STRUCTURE_PROCESSOR_TYPES.register("density_function", () -> () -> DensityFunctionProcessor.CODEC);
+    public static final DeferredHolder<StructureProcessorType<?>, StructureProcessorType<TemplateHeightConditionProcessor>> TEMPLATE_HEIGHT_CONDITION = STRUCTURE_PROCESSOR_TYPES.register("template_height_condition", () -> () -> TemplateHeightConditionProcessor.CODEC);
 }
