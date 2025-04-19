@@ -1,5 +1,7 @@
 package com.aetherteam.aetherii.world.structure.processor;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -24,9 +26,9 @@ public class TemplateHeightConditionProcessor extends StructureProcessor {
             ).apply(instance, TemplateHeightConditionProcessor::new)
     );
 
-    public TemplateHeightConditionProcessor(String inputState, String outputState, int height) {
-        this.inputTemplate = inputState;
-        this.outputTemplate = outputState;
+    public TemplateHeightConditionProcessor(String inputTemplate, String outputTemplate, int height) {
+        this.inputTemplate = inputTemplate;
+        this.outputTemplate = outputTemplate;
         this.height = height;
     }
 
@@ -37,7 +39,7 @@ public class TemplateHeightConditionProcessor extends StructureProcessor {
         if (height < originalBlockInfo.pos().getY() && originalBlockInfo.state().is(Blocks.JIGSAW) && originalBlockInfo.nbt().getString("target").equals(inputTemplate)) {
             assert modifiedBlockInfo.nbt() != null;
             modifiedBlockInfo.nbt().putString("target", this.outputTemplate);
-            return new StructureTemplate.StructureBlockInfo(modifiedBlockInfo.pos(), modifiedBlockInfo.state(), modifiedBlockInfo.nbt());
+            return new StructureTemplate.StructureBlockInfo(modifiedBlockInfo.pos(), AetherIIBlocks.PURPLE_ARILUM_LANTERN.get().defaultBlockState(), modifiedBlockInfo.nbt());
         }
         return super.process(level, origin, centerBottom, originalBlockInfo, modifiedBlockInfo, settings, template);
     }
