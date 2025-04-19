@@ -142,17 +142,22 @@ public class AetherPoolElement extends StructurePoolElement {
     public boolean place(StructureTemplateManager templateManager, WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator, BlockPos offset, BlockPos pos, Rotation rotation, BoundingBox box, RandomSource random, LiquidSettings liquidSettings, boolean keepJigsaws) {
         StructureTemplate template = this.getTemplate(templateManager);
         StructurePlaceSettings settings = this.getSettings(rotation, box, liquidSettings, keepJigsaws);
-        if (!template.placeInWorld(level, offset, pos, settings, random, 18) && offset.getY() < this.minY && offset.getY() > this.maxY) {
-            return false;
-        } else {
-            for (StructureTemplate.StructureBlockInfo structureBlockInfo : StructureTemplate.processBlockInfos(
-                    level, offset, pos, settings, this.getDataMarkers(templateManager, offset, rotation, false)
-            )) {
-                this.handleDataMarker(level, structureBlockInfo, offset, rotation, random, box);
+        if (offset.getY() > 96) { // Deletes templates that generated below the cloudbed
+            if (!template.placeInWorld(level, offset, pos, settings, random, 18)) {
+                return false;
+            } else {
+                for (StructureTemplate.StructureBlockInfo structureBlockInfo : StructureTemplate.processBlockInfos(
+                        level, offset, pos, settings, this.getDataMarkers(templateManager, offset, rotation, false)
+                )) {
+                    this.handleDataMarker(level, structureBlockInfo, offset, rotation, random, box);
+                }
+
+                return true;
             }
-            return true;
         }
+        return false;
     }
+
 
     /**
      * Uses processors of {@link net.minecraft.world.level.levelgen.structure.pools.LegacySinglePoolElement}
