@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries.pools;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.world.structure.pool.AetherPoolElement;
+import com.aetherteam.aetherii.world.structure.pool.DynamicStaircasePoolElement;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.core.Holder;
@@ -59,5 +60,9 @@ public class AetherIIPools {
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id, Holder<StructureProcessorList> processor, int minY, int maxY) {
         return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), minY, maxY, false);
+    }
+
+    public static Function<StructureTemplatePool.Projection, DynamicStaircasePoolElement> dynamicStaircase(String id, String idOther, Holder<StructureProcessorList> processor, int minY, int maxY) {
+        return pool -> new DynamicStaircasePoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, idOther)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), minY, maxY, false);
     }
 }

@@ -5,7 +5,7 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_2/staircase_01",
         "max_y": 384,
-        "min_y": 96,
+        "min_y": 0,
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:infected_guardian_tree_trunk",
         "projection": "rigid",

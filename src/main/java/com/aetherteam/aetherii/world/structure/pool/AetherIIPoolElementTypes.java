@@ -9,4 +9,5 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIPoolElementTypes {
     public static final DeferredRegister<StructurePoolElementType<?>> POOL_ELEMENTS = DeferredRegister.create(BuiltInRegistries.STRUCTURE_POOL_ELEMENT, AetherII.MODID);
     public static final DeferredHolder<StructurePoolElementType<?>, StructurePoolElementType<AetherPoolElement>> AETHER = POOL_ELEMENTS.register("aether_pool_element", () -> () -> AetherPoolElement.CODEC);
+    public static final DeferredHolder<StructurePoolElementType<?>, StructurePoolElementType<DynamicStaircasePoolElement>> DYNAMIC_STAIRCASE = POOL_ELEMENTS.register("dynamic_staircase_pool_element", () -> () -> DynamicStaircasePoolElement.CODEC);
 }
