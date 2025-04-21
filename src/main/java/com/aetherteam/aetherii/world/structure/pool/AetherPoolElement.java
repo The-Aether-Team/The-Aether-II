@@ -142,7 +142,7 @@ public class AetherPoolElement extends StructurePoolElement {
     public boolean place(StructureTemplateManager templateManager, WorldGenLevel level, StructureManager structureManager, ChunkGenerator generator, BlockPos offset, BlockPos pos, Rotation rotation, BoundingBox box, RandomSource random, LiquidSettings liquidSettings, boolean keepJigsaws) {
         StructureTemplate template = this.getTemplate(templateManager);
         StructurePlaceSettings settings = this.getSettings(rotation, box, liquidSettings, keepJigsaws);
-        if (offset.getY() > this.minY) { // Deletes templates that generated below the cloudbed
+        if (offset.getY() > this.minY && offset.getY() < this.maxY) { // Deletes templates that generated below the cloudbed
             if (!template.placeInWorld(level, offset, pos, settings, random, 18)) {
                 return false;
             } else {
