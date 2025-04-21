@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/small_center_01",
@@ -15,7 +15,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/small_center_02",
@@ -28,7 +28,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/medium_center_01",
@@ -41,7 +41,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/medium_center_02",
@@ -54,7 +54,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/large_center_01",
@@ -67,7 +67,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/center/large_center_02",

@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:outpost/outpost",
@@ -17,7 +17,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:outpost/tall_outpost",

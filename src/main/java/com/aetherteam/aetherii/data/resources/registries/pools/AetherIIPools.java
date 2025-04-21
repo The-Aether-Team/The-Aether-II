@@ -43,19 +43,19 @@ public class AetherIIPools {
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id) {
-        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 384, true);
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 256, true);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPool(String id, Holder<StructureProcessorList> processor) {
-        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 384, true);
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 256, true);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id) {
-        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 384, false);
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), EMPTY, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 180, false);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id, Holder<StructureProcessorList> processor) {
-        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 384, false);
+        return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), 96, 180, false);
     }
 
     public static Function<StructureTemplatePool.Projection, AetherPoolElement> aetherPoolBuried(String id, Holder<StructureProcessorList> processor, int minY, int maxY) {

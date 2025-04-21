@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/decorations/blueberry_farm",
@@ -15,7 +15,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/decorations/orange_farm",
@@ -28,7 +28,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/decorations/valkyrie_sprout_farm",
@@ -41,7 +41,7 @@
     },
     {
       "element": {
-        "discard_above_y": 384,
+        "discard_above_y": 256,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:camp/highfields/decorations/well",
