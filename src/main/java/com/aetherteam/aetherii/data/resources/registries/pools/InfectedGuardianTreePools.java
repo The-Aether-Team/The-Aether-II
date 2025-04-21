@@ -115,7 +115,7 @@ public class InfectedGuardianTreePools {
         context.register(FLOOR_1_STAIRCASE, new StructureTemplatePool(
                 templatePools.getOrThrow(FLOOR_1_LOBBIES),
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/floor_1/staircase_01", "infected_guardian_tree/floor_1/lobby_01_a", processors.getOrThrow(AetherIIProcessorLists.INFECTED_GUARDIAN_TREE_FLOOR_1_STAIRCASE), 72, 384), 1)
+                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/floor_1/staircase_01", "infected_guardian_tree/floor_1/lobby_01_a", processors.getOrThrow(AetherIIProcessorLists.INFECTED_GUARDIAN_TREE_TRUNK), 72, 384), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
