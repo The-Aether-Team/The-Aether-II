@@ -9,7 +9,7 @@
         "processors": "aether_ii:infected_guardian_tree_trunk",
         "projection": "rigid",
         "replace_air": false,
-        "switch_below_y": 72
+        "switch_below_y": 88
       },
       "weight": 1
     }
