@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.world.structure.pool;
 
-import com.aetherteam.aetherii.AetherII;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.mojang.datafixers.util.Either;
@@ -35,8 +34,7 @@ import java.util.function.Function;
 
 /**
  * Based on {@link net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement}
- * Used primarily for deleting Structure Templates that end up in generating in some rare circumstances
- * Also used for Datagen
+ * Used primarily for creating a staircase inside a structure that stops below a specific y and places a different Structure Template instead
  */
 public class DynamicStaircasePoolElement extends StructurePoolElement {
     private static final Comparator<StructureTemplate.JigsawBlockInfo> HIGHEST_SELECTION_PRIORITY_FIRST = Comparator.comparingInt(StructureTemplate.JigsawBlockInfo::selectionPriority).reversed();
@@ -160,11 +158,6 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
         }
     }
 
-
-    /**
-     * Uses processors of {@link net.minecraft.world.level.levelgen.structure.pools.LegacySinglePoolElement}
-     * Might have a coded to determine if it should use processors of Single or Legacy Pool Elements in the future
-     * */
     protected StructurePlaceSettings getSettings(Rotation rotation, BoundingBox boundingBox, LiquidSettings liquidSettings, boolean offset) {
         StructurePlaceSettings settings = new StructurePlaceSettings();
         settings.setBoundingBox(boundingBox);
@@ -172,7 +165,7 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
         settings.setKnownShape(true);
         settings.setIgnoreEntities(false);
         settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
-        if (replaceAir) {
+        if (replaceAir) { // Vanilla uses two separate Pool Element Types to achieve this, it has been turned into a boolean for code simplification purposes
             settings.addProcessor(BlockIgnoreProcessor.STRUCTURE_AND_AIR);
         }
         settings.setLiquidSettings(this.overrideLiquidSettings.orElse(liquidSettings));
