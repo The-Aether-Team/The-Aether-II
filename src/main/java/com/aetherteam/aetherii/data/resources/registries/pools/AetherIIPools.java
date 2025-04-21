@@ -62,7 +62,7 @@ public class AetherIIPools {
         return pool -> new AetherPoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), minY, maxY, false);
     }
 
-    public static Function<StructureTemplatePool.Projection, DynamicStaircasePoolElement> dynamicStaircase(String id, String idOther, Holder<StructureProcessorList> processor, int minY, int maxY) {
-        return pool -> new DynamicStaircasePoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, idOther)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), minY, maxY, false);
+    public static Function<StructureTemplatePool.Projection, DynamicStaircasePoolElement> dynamicStaircase(String id, String idOther, Holder<StructureProcessorList> processor, int minY) {
+        return pool -> new DynamicStaircasePoolElement(Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, id)), Either.left(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, idOther)), processor, pool, Optional.of(LiquidSettings.IGNORE_WATERLOGGING), minY, false);
     }
 }

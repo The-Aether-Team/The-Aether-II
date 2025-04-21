@@ -51,7 +51,6 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
                     projectionCodec(),
                     overrideLiquidSettingsCodec(),
                     Codec.INT.fieldOf("min_y").forGetter(structure -> structure.minY),
-                    Codec.INT.fieldOf("max_y").forGetter(structure -> structure.maxY),
                     Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir)
             ).apply(instance, DynamicStaircasePoolElement::new)
     );
@@ -60,7 +59,6 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
     protected final Holder<StructureProcessorList> processors;
     protected final Optional<LiquidSettings> overrideLiquidSettings;
     protected final int minY;
-    protected final int maxY;
     protected final boolean replaceAir;
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> p_210425_, DynamicOps<T> p_210426_, T p_210427_) {
@@ -86,14 +84,13 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
         return TEMPLATE_CODEC.fieldOf("location_other").forGetter(codec -> codec.templateOther);
     }
 
-    public DynamicStaircasePoolElement(Either<ResourceLocation, StructureTemplate> template, Either<ResourceLocation, StructureTemplate> templateOther, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int minY, int maxY, boolean replaceAir) {
+    public DynamicStaircasePoolElement(Either<ResourceLocation, StructureTemplate> template, Either<ResourceLocation, StructureTemplate> templateOther, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int minY, boolean replaceAir) {
         super(projection);
         this.template = template;
         this.templateOther = templateOther;
         this.processors = processors;
         this.overrideLiquidSettings = overrideLiquidSettings;
         this.minY = minY;
-        this.maxY = maxY;
         this.replaceAir = replaceAir;
     }
 
