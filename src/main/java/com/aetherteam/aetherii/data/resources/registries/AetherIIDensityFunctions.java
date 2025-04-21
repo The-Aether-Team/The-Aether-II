@@ -75,6 +75,7 @@ public class AetherIIDensityFunctions extends AetherIIDensityFunctionBuilders {
         context.register(ENVIRONMENTAL_TREE_MOSS, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 0.75F, 0.5F, 0.25F, 1.0F), 0.05D, 0.0D, 64), DensityFunctions.constant(0.1D)));
 
         context.register(DUNGEONS_DENSE_GUARDIAN_WOOD, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.0D, 1.0D, 1000), DensityFunctions.constant(-0.1D)));
+        context.register(DUNGEONS_GUARDIAN_ROOTS, DensityFunctions.add(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(-4, 0.75F, 1.0, 0.75, 0.0, 0.0), 1.25D, 1.25D, 1100), DensityFunctions.constant(-0.075D)));
 
         context.register(CLOUDBED_NOISE, DensityFunctions.add(DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1, 1, 1, 1, 1), 0.005D, 0.0D, 42), DensityFunctions.constant(1.5D)), DensityFunctions.constant(0.1D)));
         context.register(CLOUDBED_Y_OFFSET, DensityFunctions.mul(new PerlinNoiseFunction(new NormalNoise.NoiseParameters(0, 1, 1), 0.001D, 0.0D, 95), DensityFunctions.constant(1.5D)));

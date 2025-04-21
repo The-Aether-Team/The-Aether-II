@@ -35,8 +35,125 @@
       "processor_type": "aether_ii:density_function"
     },
     {
+      "density_function": "aether_ii:highlands/dungeon/guardian_roots",
+      "input_state": {
+        "Name": "aether_ii:guardian_wood",
+        "Properties": {
+          "axis": "y",
+          "reinforced": "false"
+        }
+      },
+      "output_state": {
+        "Name": "aether_ii:guardian_roots",
+        "Properties": {
+          "reinforced": "false"
+        }
+      },
+      "processor_type": "aether_ii:density_function"
+    },
+    {
+      "density_function": "aether_ii:highlands/dungeon/guardian_roots",
+      "input_state": {
+        "Name": "aether_ii:locked_guardian_wood",
+        "Properties": {
+          "axis": "y"
+        }
+      },
+      "output_state": {
+        "Name": "aether_ii:locked_guardian_roots"
+      },
+      "processor_type": "aether_ii:density_function"
+    },
+    {
       "processor_type": "minecraft:rule",
       "rules": [
+        {
+          "input_predicate": {
+            "block": "aether_ii:guardian_roots",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.15
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:dim_guardian_roots",
+            "Properties": {
+              "reinforced": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:guardian_roots",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.075
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:lucent_guardian_roots",
+            "Properties": {
+              "reinforced": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:guardian_roots",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.025
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:guardian_lamp",
+            "Properties": {
+              "reinforced": "false"
+            }
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:locked_guardian_roots",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.15
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:locked_dim_guardian_roots"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:locked_guardian_roots",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.075
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:locked_lucent_guardian_roots"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "aether_ii:locked_guardian_roots",
+            "predicate_type": "minecraft:random_block_match",
+            "probability": 0.025
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "aether_ii:locked_guardian_lamp"
+          }
+        },
         {
           "input_predicate": {
             "block": "aether_ii:red_cloudwool",

@@ -34,6 +34,7 @@ public class InfectedGuardianTreePools {
         Holder<StructureTemplatePool> fallback = templatePools.getOrThrow(Pools.EMPTY);
 
         HolderGetter<StructureProcessorList> processors = context.lookup(Registries.PROCESSOR_LIST);
+        Holder<StructureProcessorList> processorDungeon = processors.getOrThrow(AetherIIProcessorLists.INFECTED_GUARDIAN_TREE);
         Holder<StructureProcessorList> processorTrunk = processors.getOrThrow(AetherIIProcessorLists.INFECTED_GUARDIAN_TREE_TRUNK);
 
         HolderGetter<PlacedFeature> placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -115,7 +116,7 @@ public class InfectedGuardianTreePools {
         context.register(FLOOR_1_STAIRCASE, new StructureTemplatePool(
                 templatePools.getOrThrow(FLOOR_1_LOBBIES),
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/floor_1/staircase_01", "infected_guardian_tree/floor_1/lobby_01_a", processors.getOrThrow(AetherIIProcessorLists.INFECTED_GUARDIAN_TREE_TRUNK), 88), 1)
+                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/floor_1/staircase_01", "infected_guardian_tree/floor_1/lobby_01_a", processorDungeon, 88), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -123,7 +124,7 @@ public class InfectedGuardianTreePools {
         context.register(FLOOR_1_LOBBIES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/lobby_01_a", processorTrunk, 0, 384), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/lobby_01_a", processorDungeon, 0, 384), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -131,7 +132,7 @@ public class InfectedGuardianTreePools {
         context.register(FLOOR_2_STAIRCASE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_2/staircase_01", processorTrunk, 0, 384), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_2/staircase_01", processorDungeon, 0, 384), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
