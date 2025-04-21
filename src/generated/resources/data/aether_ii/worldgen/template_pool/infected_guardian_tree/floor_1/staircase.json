@@ -5,11 +5,11 @@
         "element_type": "aether_ii:dynamic_staircase_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_1/staircase_01",
         "location_other": "aether_ii:infected_guardian_tree/floor_1/lobby_01_a",
-        "min_y": 72,
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:infected_guardian_tree_trunk",
         "projection": "rigid",
-        "replace_air": false
+        "replace_air": false,
+        "switch_below_y": 72
       },
       "weight": 1
     }

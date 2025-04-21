@@ -50,7 +50,7 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
                     processorsCodec(),
                     projectionCodec(),
                     overrideLiquidSettingsCodec(),
-                    Codec.INT.fieldOf("min_y").forGetter(structure -> structure.minY),
+                    Codec.INT.fieldOf("switch_below_y").forGetter(structure -> structure.switchBelowY),
                     Codec.BOOL.fieldOf("replace_air").forGetter(structure -> structure.replaceAir)
             ).apply(instance, DynamicStaircasePoolElement::new)
     );
@@ -58,7 +58,7 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
     protected final Either<ResourceLocation, StructureTemplate> templateOther;
     protected final Holder<StructureProcessorList> processors;
     protected final Optional<LiquidSettings> overrideLiquidSettings;
-    protected final int minY;
+    protected final int switchBelowY;
     protected final boolean replaceAir;
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> p_210425_, DynamicOps<T> p_210426_, T p_210427_) {
@@ -84,13 +84,13 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
         return TEMPLATE_CODEC.fieldOf("location_other").forGetter(codec -> codec.templateOther);
     }
 
-    public DynamicStaircasePoolElement(Either<ResourceLocation, StructureTemplate> template, Either<ResourceLocation, StructureTemplate> templateOther, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int minY, boolean replaceAir) {
+    public DynamicStaircasePoolElement(Either<ResourceLocation, StructureTemplate> template, Either<ResourceLocation, StructureTemplate> templateOther, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, Optional<LiquidSettings> overrideLiquidSettings, int switchBelowY, boolean replaceAir) {
         super(projection);
         this.template = template;
         this.templateOther = templateOther;
         this.processors = processors;
         this.overrideLiquidSettings = overrideLiquidSettings;
-        this.minY = minY;
+        this.switchBelowY = switchBelowY;
         this.replaceAir = replaceAir;
     }
 
@@ -101,7 +101,7 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
     }
 
     private StructureTemplate getTemplate(StructureTemplateManager templateManager, BlockPos pos) {
-        return pos.getY() > 72 ? this.template.map(templateManager::getOrCreate, Function.identity()) : this.templateOther.map(templateManager::getOrCreate, Function.identity());
+        return pos.getY() > this.switchBelowY ? this.template.map(templateManager::getOrCreate, Function.identity()) : this.templateOther.map(templateManager::getOrCreate, Function.identity());
     }
 
     public List<StructureTemplate.StructureBlockInfo> getDataMarkers(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation, boolean relativePosition) {
