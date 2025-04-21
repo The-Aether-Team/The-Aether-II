@@ -120,8 +120,8 @@ public class AetherPoolElement extends StructurePoolElement {
     }
 
     @Override
-    public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation, RandomSource random) {
-        List<StructureTemplate.JigsawBlockInfo> list = this.getTemplate(structureTemplateManager).getJigsaws(pos, rotation);
+    public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation, RandomSource random) {
+        List<StructureTemplate.JigsawBlockInfo> list = this.getTemplate(templateManager).getJigsaws(pos, rotation);
         Util.shuffle(list, random);
         sortBySelectionPriority(list);
         return list;
@@ -134,8 +134,8 @@ public class AetherPoolElement extends StructurePoolElement {
 
     @Override
     public BoundingBox getBoundingBox(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation) {
-        StructureTemplate structuretemplate = this.getTemplate(templateManager);
-        return structuretemplate.getBoundingBox(new StructurePlaceSettings().setRotation(rotation), pos);
+        StructureTemplate template = this.getTemplate(templateManager);
+        return template.getBoundingBox(new StructurePlaceSettings().setRotation(rotation), pos);
     }
 
     @Override

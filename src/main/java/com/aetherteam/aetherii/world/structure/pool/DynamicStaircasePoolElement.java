@@ -108,8 +108,8 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
     }
 
     public List<StructureTemplate.StructureBlockInfo> getDataMarkers(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation, boolean relativePosition) {
-        StructureTemplate structuretemplate = this.getTemplate(templateManager, pos);
-        List<StructureTemplate.StructureBlockInfo> listFilter = structuretemplate.filterBlocks(
+        StructureTemplate template = this.getTemplate(templateManager, pos);
+        List<StructureTemplate.StructureBlockInfo> listFilter = template.filterBlocks(
                 pos, new StructurePlaceSettings().setRotation(rotation), Blocks.STRUCTURE_BLOCK, relativePosition
         );
         List<StructureTemplate.StructureBlockInfo> listInfo = Lists.newArrayList();
@@ -129,7 +129,7 @@ public class DynamicStaircasePoolElement extends StructurePoolElement {
 
     @Override
     public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager templateManager, BlockPos pos, Rotation rotation, RandomSource random) {
-        List<StructureTemplate.JigsawBlockInfo> list = this.getTemplate(templateManager, pos).getJigsaws(pos, rotation);
+        List<StructureTemplate.JigsawBlockInfo> list = this.template.map(templateManager::getOrCreate, Function.identity()).getJigsaws(pos, rotation);
         Util.shuffle(list, random);
         sortBySelectionPriority(list);
         return list;
