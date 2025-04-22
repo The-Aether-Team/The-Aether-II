@@ -39,10 +39,11 @@ public class AetherIIProcessorLists {
         ));
 
         register(context, INFECTED_GUARDIAN_TREE, ImmutableList.of(
-                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_DENSE_GUARDIAN_WOOD)),
-                new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_DENSE_GUARDIAN_WOOD)),
-                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.GUARDIAN_ROOTS.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_GUARDIAN_ROOTS)),
-                new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_GUARDIAN_ROOTS)),
+                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_DENSE_GUARDIAN_WOOD)),
+                new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_DENSE_GUARDIAN_WOOD)),
+                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_ROOTS.get().defaultBlockState(), AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_STRIPPED_GUARDIAN_WOOD)),
+                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.GUARDIAN_ROOTS.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_GUARDIAN_ROOTS)),
+                new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_GUARDIAN_ROOTS)),
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.075F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.DIM_GUARDIAN_ROOTS.get().defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.GUARDIAN_ROOTS.get(), 0.0375F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get().defaultBlockState()),
@@ -62,8 +63,8 @@ public class AetherIIProcessorLists {
         ));
 
         register(context, INFECTED_GUARDIAN_TREE_TRUNK, ImmutableList.of(
-                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_DENSE_GUARDIAN_WOOD)),
-                new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEONS_DENSE_GUARDIAN_WOOD)),
+                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_DENSE_GUARDIAN_WOOD)),
+                new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_DENSE_GUARDIAN_WOOD)),
                 new RuleProcessor(ImmutableList.of(
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get(), 0.75F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),

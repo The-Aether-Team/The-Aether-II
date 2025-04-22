@@ -35,6 +35,23 @@
       "processor_type": "aether_ii:density_function"
     },
     {
+      "density_function": "aether_ii:highlands/dungeon/stripped_guardian_wood",
+      "input_state": {
+        "Name": "aether_ii:guardian_roots",
+        "Properties": {
+          "reinforced": "false"
+        }
+      },
+      "output_state": {
+        "Name": "aether_ii:stripped_guardian_wood",
+        "Properties": {
+          "axis": "y",
+          "reinforced": "false"
+        }
+      },
+      "processor_type": "aether_ii:density_function"
+    },
+    {
       "density_function": "aether_ii:highlands/dungeon/guardian_roots",
       "input_state": {
         "Name": "aether_ii:guardian_wood",
