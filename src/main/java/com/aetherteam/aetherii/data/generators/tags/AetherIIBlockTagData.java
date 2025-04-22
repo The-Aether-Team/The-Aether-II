@@ -679,6 +679,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.GREATROOT_WALL_HANGING_SIGN.get(),
                 AetherIIBlocks.WISPROOT_WALL_HANGING_SIGN.get()
         );
+        this.tag(BlockTags.DRAGON_IMMUNE).addTag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
+        this.tag(BlockTags.WITHER_IMMUNE).addTag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
         this.tag(BlockTags.PORTALS).add(AetherIIBlocks.AETHER_PORTAL.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(
                 AetherIIBlocks.AMBROSIUM_BLOCK.get(),
@@ -1098,6 +1100,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.ARKENIUM_BLOCK.get(),
                 AetherIIBlocks.GRAVITITE_BLOCK.get()
         );
+        this.tag(BlockTags.FEATURES_CANNOT_REPLACE).addTag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS);
         this.tag(BlockTags.CONVERTABLE_TO_MUD).add(AetherIIBlocks.AETHER_DIRT.get());
         this.tag(BlockTags.SCULK_REPLACEABLE).addTag(AetherIITags.Blocks.HOLYSTONE).add(
                 AetherIIBlocks.AETHER_DIRT.get(),
