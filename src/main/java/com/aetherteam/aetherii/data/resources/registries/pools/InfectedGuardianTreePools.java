@@ -35,6 +35,7 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_LOBBIES = AetherIIPools.createKey("infected_guardian_tree/floor_3/lobbies");
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_MAIN_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_3/main/corridors");
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom");
+    public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom_reduced");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -200,6 +201,14 @@ public class InfectedGuardianTreePools {
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.LARGE_SHELF_ROTSHROOM)), 1),
                         Pair.of(StructurePoolElement.empty(), 6)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.LARGE_SHELF_ROTSHROOM)), 1),
+                        Pair.of(StructurePoolElement.empty(), 9)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
