@@ -28,6 +28,7 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/floor_1/staircase");
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_LOBBIES = AetherIIPools.createKey("infected_guardian_tree/floor_1/lobbies");
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_MAIN_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_1/main/corridors");
+    public static final ResourceKey<StructureTemplatePool> FLOOR_1_MAIN_JOINTS = AetherIIPools.createKey("infected_guardian_tree/floor_1/main/joints");
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/floor_2/staircase");
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_LOBBIES = AetherIIPools.createKey("infected_guardian_tree/floor_2/lobbies");
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_MAIN_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_2/main/corridors");
@@ -148,6 +149,15 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/main/corridor_01", processorDungeon, 0, 180), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(FLOOR_1_MAIN_JOINTS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/main/t_crossing_01", processorDungeon, 0, 180), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/main/t_crossing_02", processorDungeon, 0, 180), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/main/t_crossing_03", processorDungeon, 0, 180), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
