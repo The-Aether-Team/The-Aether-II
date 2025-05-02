@@ -286,7 +286,7 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.LARGE_SHELF_ROTSHROOM)), 1),
-                        Pair.of(StructurePoolElement.empty(), 9)
+                        Pair.of(StructurePoolElement.empty(), 12)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
