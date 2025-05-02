@@ -25,24 +25,30 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> TRUNK_ROOTS = AetherIIPools.createKey("infected_guardian_tree/trunk/roots");
     public static final ResourceKey<StructureTemplatePool> TRUNK_BRANCHES = AetherIIPools.createKey("infected_guardian_tree/trunk/branches");
     public static final ResourceKey<StructureTemplatePool> TRUNK_TOP_BRANCHES = AetherIIPools.createKey("infected_guardian_tree/trunk/top_branches");
+
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/floor_1/staircase");
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_LOBBIES = AetherIIPools.createKey("infected_guardian_tree/floor_1/lobbies");
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_MAIN_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_1/main/corridors");
-    public static final ResourceKey<StructureTemplatePool> FLOOR_1_MAIN_CORRIDORS_B = AetherIIPools.createKey("infected_guardian_tree/floor_1/main/corridors_b");
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_MAIN_JOINTS = AetherIIPools.createKey("infected_guardian_tree/floor_1/main/joints");
     public static final ResourceKey<StructureTemplatePool> FLOOR_1_SIDE_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_1/side/corridors");
+
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/floor_2/staircase");
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_LOBBIES = AetherIIPools.createKey("infected_guardian_tree/floor_2/lobbies");
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_MAIN_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_2/main/corridors");
-    public static final ResourceKey<StructureTemplatePool> FLOOR_2_MAIN_CORRIDORS_B = AetherIIPools.createKey("infected_guardian_tree/floor_2/main/corridors_b");
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_MAIN_JOINTS = AetherIIPools.createKey("infected_guardian_tree/floor_2/main/joints");
     public static final ResourceKey<StructureTemplatePool> FLOOR_2_SIDE_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_2/side/corridors");
+
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/floor_3/staircase");
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_LOBBIES = AetherIIPools.createKey("infected_guardian_tree/floor_3/lobbies");
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_MAIN_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_3/main/corridors");
-    public static final ResourceKey<StructureTemplatePool> FLOOR_3_MAIN_CORRIDORS_B = AetherIIPools.createKey("infected_guardian_tree/floor_3/main/corridors_b");
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_MAIN_JOINTS = AetherIIPools.createKey("infected_guardian_tree/floor_3/main/joints");
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_SIDE_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_3/side/corridors");
+
+    public static final ResourceKey<StructureTemplatePool> ROOMS = AetherIIPools.createKey("infected_guardian_tree/rooms/eye_rooms");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_EYE = AetherIIPools.createKey("infected_guardian_tree/rooms/eye_rooms");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_EYE_OR_JOINTS = AetherIIPools.createKey("infected_guardian_tree/rooms/eye_rooms_or_joints");
+    public static final ResourceKey<StructureTemplatePool> ROOMS_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/rooms/corridors");
+
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom");
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom_reduced");
 
@@ -66,21 +72,21 @@ public class InfectedGuardianTreePools {
         context.register(TRUNK_ENTRANCE, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/entrance_01", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/walls/entrance_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(TRUNK_WALLS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/wall_01", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/walls/wall_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(TRUNK_BACK_WALLS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/back_wall_01", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/walls/back_wall_01", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -101,40 +107,40 @@ public class InfectedGuardianTreePools {
         context.register(TRUNK_ROOTS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_01_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_01_b", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_02_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_02_b", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_03_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_03_b", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_04_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_04_b", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_05_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/root_05_b", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_01_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_01_b", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_02_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_02_b", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_03_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_03_b", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_04_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_04_b", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_05_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/roots/root_05_b", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.TERRAIN_MATCHING)
         );
         context.register(TRUNK_BRANCHES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_01_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_01_b", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_02_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_02_b", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_03_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_03_b", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_04_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branch_04_b", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/branch_01_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/branch_01_b", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/branch_02_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/branch_02_b", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/branch_03_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/branch_03_b", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/branch_04_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/branch_04_b", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(TRUNK_TOP_BRANCHES, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/top_branch_01_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/top_branch_01_b", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/top_branch_02_a", processorTrunk), 1),
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/top_branch_02_b", processorTrunk), 1)
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/top_branch_01_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/top_branch_01_b", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/top_branch_02_a", processorTrunk), 1),
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/trunk/branches/top_branch_02_b", processorTrunk), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -157,13 +163,6 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/main/corridor_01", processorDungeon, 0, 180), 1)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
-        context.register(FLOOR_1_MAIN_CORRIDORS_B, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_1/main/corridor_01_b", processorDungeon, 0, 180), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -205,13 +204,6 @@ public class InfectedGuardianTreePools {
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(FLOOR_2_MAIN_CORRIDORS_B, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_2/main/corridor_01_b", processorDungeon, 0, 180), 1)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
         context.register(FLOOR_2_MAIN_JOINTS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
@@ -250,13 +242,6 @@ public class InfectedGuardianTreePools {
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
-        context.register(FLOOR_3_MAIN_CORRIDORS_B, new StructureTemplatePool(
-                fallback,
-                ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_3/main/corridor_01_b", processorDungeon, 0, 180), 1)
-                ),
-                StructureTemplatePool.Projection.RIGID)
-        );
         context.register(FLOOR_3_MAIN_JOINTS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
@@ -270,6 +255,28 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/floor_3/side/corridor_01", processorDungeon, 0, 180), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(ROOMS_EYE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/rooms/eye_room_01", processorDungeon, 0, 180), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(ROOMS_EYE_OR_JOINTS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/rooms/eye_room_01", processorDungeon, 0, 180), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(ROOMS_CORRIDORS, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/rooms/corridor_01", processorDungeon, 0, 180), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
