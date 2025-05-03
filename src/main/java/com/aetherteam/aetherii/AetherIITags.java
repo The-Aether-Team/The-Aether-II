@@ -250,7 +250,8 @@ public class AetherIITags {
     }
 
     public static class Structures {
-        public static final TagKey<Structure> STRUCTURE_BLACKLIST_FILTER = tag("structure_blacklist_filter");
+        public static final TagKey<Structure> TREE_BLACKLIST_FILTER = tag("tree_blacklist_filter");
+        public static final TagKey<Structure> ACID_POOL_BLACKLIST_FILTER = tag("acid_pool_blacklist_filter");
 
         private static TagKey<Structure> tag(String name) {
             return TagKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, name));

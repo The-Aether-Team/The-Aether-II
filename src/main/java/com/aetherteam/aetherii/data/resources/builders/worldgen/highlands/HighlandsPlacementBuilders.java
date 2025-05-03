@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.data.resources.builders.worldgen.highlands;
 
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.world.feature.modifier.filter.StructureBlacklistFilter;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -22,7 +23,7 @@ public class HighlandsPlacementBuilders {
 
     public static List<PlacementModifier> treePlacement(PlacementModifier placement) {
         return treePlacementBase(placement)
-                .add(new StructureBlacklistFilter())
+                .add(new StructureBlacklistFilter(AetherIITags.Structures.TREE_BLACKLIST_FILTER))
                 .build();
     }
 }

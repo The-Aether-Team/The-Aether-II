@@ -7,6 +7,7 @@ import com.aetherteam.aetherii.data.resources.builders.worldgen.highlands.Highla
 import com.aetherteam.aetherii.world.feature.modifier.filter.ElevationFilter;
 import com.aetherteam.aetherii.world.feature.modifier.filter.ImprovedLayerPlacementModifier;
 import com.aetherteam.aetherii.world.feature.modifier.filter.LakePlacementModifier;
+import com.aetherteam.aetherii.world.feature.modifier.filter.StructureBlacklistFilter;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.MossyPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.ScanPredicate;
 import com.aetherteam.aetherii.world.feature.modifier.predicate.SearchPredicate;
@@ -617,6 +618,7 @@ public class HighlandsPlacedFeatures {
                 CountPlacement.of(16),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                new StructureBlacklistFilter(AetherIITags.Structures.ACID_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
 
