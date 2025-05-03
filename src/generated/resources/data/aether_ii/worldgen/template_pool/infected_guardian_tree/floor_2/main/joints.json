@@ -11,7 +11,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
@@ -24,7 +24,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
@@ -32,6 +32,32 @@
         "discard_below_y": 0,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_2/main/t_crossing_03",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 180,
+        "discard_below_y": 0,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/floor_2/main/staircase_intersection_01",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 180,
+        "discard_below_y": 0,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/floor_2/main/staircase_intersection_02",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
