@@ -10,16 +10,21 @@ import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.DamageTypeParticlePacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.packet.SyncPacket;
+import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.commons.lang3.tuple.Triple;
@@ -84,54 +89,59 @@ public class DamageSystemAttachment implements INBTSynchable {
 
     public float getDamageTypeModifiedValue(LivingEntity target, DamageSource source, double damage) {
         if (source.typeHolder().is(AetherIITags.DamageTypes.TYPED)) {
-            Entity sourceEntity = source.getDirectEntity();
-            ItemStack sourceStack = ItemStack.EMPTY;
+            Entity directEntity = source.getDirectEntity();
 
-            if (sourceEntity instanceof LivingEntity livingSource) {
-                sourceStack = livingSource.getMainHandItem();
-            }
-//            else if (sourceEntity instanceof Projectile && sourceEntity instanceof ItemSupplier itemSupplier) { //todo
-//                sourceStack = itemSupplier.getItem();
-//            }
+            double slashDefense = target.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0;
+            double impactDefense = target.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0;
+            double pierceDefense = target.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0;
 
-            if (!sourceStack.isEmpty()) {
-                double slashDefense = target.getAttributes().hasAttribute(AetherIIAttributes.SLASH_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.SLASH_RESISTANCE) : 0.0;
-                double impactDefense = target.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.IMPACT_RESISTANCE) : 0.0;
-                double pierceDefense = target.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_RESISTANCE) ? target.getAttributeValue(AetherIIAttributes.PIERCE_RESISTANCE) : 0.0;
+            double baseDamage = Attributes.ATTACK_DAMAGE.value().getDefaultValue();
+            AtomicDouble slashDamage = new AtomicDouble(0);
+            AtomicDouble impactDamage = new AtomicDouble(0);
+            AtomicDouble pierceDamage = new AtomicDouble(0);
 
-                if (slashDefense != 0 || impactDefense != 0 || pierceDefense != 0) {
-                    double baseDamage = Attributes.ATTACK_DAMAGE.value().getDefaultValue();
-                    double slashDamage = 0;
-                    double impactDamage = 0;
-                    double pierceDamage = 0;
-                    if (source.getDirectEntity() instanceof LivingEntity livingEntity) {
-                        baseDamage = livingEntity.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
-                        slashDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_DAMAGE) : 0.0;
-                        impactDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_DAMAGE) : 0.0;
-                        pierceDamage = livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_DAMAGE) : 0.0;
-                    }
-
-                    if (slashDamage != 0 || impactDamage != 0 || pierceDamage != 0) {
-                        this.createSoundsAndParticles(sourceEntity, target, slashDamage, slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_INCORRECT.get());
-                        this.createSoundsAndParticles(sourceEntity, target, impactDamage, impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
-                        this.createSoundsAndParticles(sourceEntity, target, pierceDamage, pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
-
-                        double slashCalculation = slashDamage > 0.0 ? Math.max(slashDamage - slashDefense, 0.0) : 0.0;
-                        double impactCalculation = impactDamage > 0.0 ? Math.max(impactDamage - impactDefense, 0.0) : 0.0;
-                        double pierceCalculation = pierceDamage > 0.0 ? Math.max(pierceDamage - pierceDefense, 0.0) : 0.0;
-
-                        damage = Math.max(baseDamage + slashCalculation + impactCalculation + pierceCalculation, baseDamage);
-
-                        if (sourceEntity instanceof Player player) {
-                            damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
-                            damage *= player.getAttackStrengthScale(0.5F);
-
-                            player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).setCriticalDamageModifier(1.0F);
+            if (slashDefense != 0 || impactDefense != 0 || pierceDefense != 0) {
+                if (source.getDirectEntity() instanceof LivingEntity livingEntity && !livingEntity.getMainHandItem().isEmpty()) {
+                    baseDamage = livingEntity.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
+                    slashDamage.set(livingEntity.getAttributes().hasAttribute(AetherIIAttributes.SLASH_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.SLASH_DAMAGE) : 0.0);
+                    impactDamage.set(livingEntity.getAttributes().hasAttribute(AetherIIAttributes.IMPACT_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.IMPACT_DAMAGE) : 0.0);
+                    pierceDamage.set(livingEntity.getAttributes().hasAttribute(AetherIIAttributes.PIERCE_DAMAGE) ? livingEntity.getAttributeValue(AetherIIAttributes.PIERCE_DAMAGE) : 0.0);
+                } else if (source.getDirectEntity() instanceof AbstractArrow abstractArrow && source.getEntity() instanceof LivingEntity && !abstractArrow.getWeaponItem().isEmpty()) {
+                    ItemStack weapon = abstractArrow.getWeaponItem();
+                    ItemAttributeModifiers modifiers = weapon.getAttributeModifiers();
+                    baseDamage = abstractArrow.getBaseDamage();
+                    modifiers.forEach(EquipmentSlotGroup.HAND, (attribute, modifier) -> {
+                        if (attribute.getKey() != null) {
+                            if (AetherIIAttributes.SLASH_RANGED_DAMAGE.is(attribute.getKey())) {
+                                slashDamage.set(modifier.amount());
+                            } else if (AetherIIAttributes.IMPACT_RANGED_DAMAGE.is(attribute.getKey())) {
+                                impactDamage.set(modifier.amount());
+                            } else if (AetherIIAttributes.PIERCE_RANGED_DAMAGE.is(attribute.getKey())) {
+                                pierceDamage.set(modifier.amount());
+                            }
                         }
-                    } else {
-                        double defense = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
-                        damage = Math.max(damage - defense, baseDamage);
+                    });
+                }
+                if (slashDamage.get() != 0 || impactDamage.get() != 0 || pierceDamage.get() != 0) {
+                    this.createSoundsAndParticles(directEntity, target, slashDamage.get(), slashDefense, AetherIIParticleTypes.SLASH_ATTACK.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_SLASH_DAMAGE_INCORRECT.get());
+                    this.createSoundsAndParticles(directEntity, target, impactDamage.get(), impactDefense, AetherIIParticleTypes.IMPACT_ATTACK.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_IMPACT_DAMAGE_INCORRECT.get());
+                    this.createSoundsAndParticles(directEntity, target, pierceDamage.get(), pierceDefense, AetherIIParticleTypes.PIERCE_ATTACK.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_CORRECT.get(), AetherIISoundEvents.PLAYER_PIERCE_DAMAGE_INCORRECT.get());
+
+                    double slashCalculation = slashDamage.get() > 0.0 ? Math.max(slashDamage.get() - slashDefense, 0.0) : 0.0;
+                    double impactCalculation = impactDamage.get() > 0.0 ? Math.max(impactDamage.get() - impactDefense, 0.0) : 0.0;
+                    double pierceCalculation = pierceDamage.get() > 0.0 ? Math.max(pierceDamage.get() - pierceDefense, 0.0) : 0.0;
+
+                    damage = Math.max(baseDamage + slashCalculation + impactCalculation + pierceCalculation, baseDamage);
+
+                    if (directEntity instanceof Player player) {
+                        damage *= player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).getCriticalDamageModifier();
+                        damage *= player.getAttackStrengthScale(0.5F);
+
+                        player.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).setCriticalDamageModifier(1.0F);
                     }
+                } else {
+                    double defense = Math.max(slashDefense, Math.max(impactDefense, pierceDefense));
+                    damage = Math.max(damage - defense, baseDamage);
                 }
             }
         }

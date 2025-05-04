@@ -1146,6 +1146,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.SLASH_DAMAGE.get(), "§9Slash§r Damage");
         this.addAttribute(AetherIIAttributes.IMPACT_DAMAGE.get(), "§eImpact§r Damage");
         this.addAttribute(AetherIIAttributes.PIERCE_DAMAGE.get(), "§cPierce§r Damage");
+        this.addAttribute(AetherIIAttributes.SLASH_RANGED_DAMAGE.get(), "Ranged §9Slash§r Damage");
+        this.addAttribute(AetherIIAttributes.IMPACT_RANGED_DAMAGE.get(), "Ranged §eImpact§r Damage");
+        this.addAttribute(AetherIIAttributes.PIERCE_RANGED_DAMAGE.get(), "Ranged §cPierce§r Damage");
         this.addAttribute(AetherIIAttributes.SLASH_RESISTANCE.get(), "§9Slash§r Resistance");
         this.addAttribute(AetherIIAttributes.IMPACT_RESISTANCE.get(), "§eImpact§r Resistance");
         this.addAttribute(AetherIIAttributes.PIERCE_RESISTANCE.get(), "§cPierce§r Resistance");

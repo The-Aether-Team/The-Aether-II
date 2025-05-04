@@ -202,8 +202,9 @@ public class TieredCrossbowItem extends CrossbowItem {
     @Override
     protected Projectile createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit) {
         Projectile projectile = super.createProjectile(level, shooter, weapon, ammo, isCrit);
-        if (projectile instanceof AbstractArrow abstractarrow) {
-            abstractarrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
+        if (projectile instanceof AbstractArrow abstractArrow) {
+            abstractArrow.setBaseDamage(1.0);
+            abstractArrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
         }
         return projectile;
     }

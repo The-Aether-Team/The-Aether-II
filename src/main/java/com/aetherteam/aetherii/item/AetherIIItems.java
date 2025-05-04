@@ -96,6 +96,9 @@ public class AetherIIItems {
     public static final ResourceLocation BASE_SLASH_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_slash_damage");
     public static final ResourceLocation BASE_IMPACT_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_impact_damage");
     public static final ResourceLocation BASE_PIERCE_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_pierce_damage");
+    public static final ResourceLocation BASE_SLASH_RANGED_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_slash_ranged_damage");
+    public static final ResourceLocation BASE_IMPACT_RANGED_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_impact_ranged_damage");
+    public static final ResourceLocation BASE_PIERCE_RANGED_DAMAGE_ID = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "base_pierce_ranged_damage");
 
     public static final Style CURRENCY_NAME_COLOR = Style.EMPTY.withColor(12566527);
     public static final Style TREASURE_NAME_COLOR = Style.EMPTY.withColor(16765952);
