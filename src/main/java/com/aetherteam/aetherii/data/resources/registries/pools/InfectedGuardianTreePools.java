@@ -49,6 +49,8 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> ROOMS_EYE_OR_JOINTS = AetherIIPools.createKey("infected_guardian_tree/rooms/eye_rooms_or_joints");
     public static final ResourceKey<StructureTemplatePool> ROOMS_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/rooms/corridors");
 
+    public static final ResourceKey<StructureTemplatePool> BOSS_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/boss/staircase");
+
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom");
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom_reduced");
 
@@ -285,6 +287,14 @@ public class InfectedGuardianTreePools {
                 fallback,
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/rooms/corridor_01", processorDungeon, 0, 180), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+
+        context.register(BOSS_STAIRCASE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolBuried("infected_guardian_tree/boss/staircase_01", processorDungeon, 0, 180), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
