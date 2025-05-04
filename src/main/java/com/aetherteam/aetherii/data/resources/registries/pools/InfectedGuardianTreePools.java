@@ -43,6 +43,7 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_MAIN_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_3/main/corridors");
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_MAIN_CORRIDORS_DOUBLE = AetherIIPools.createKey("infected_guardian_tree/floor_3/main/corridors_double");
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_MAIN_JOINTS = AetherIIPools.createKey("infected_guardian_tree/floor_3/main/joints");
+    public static final ResourceKey<StructureTemplatePool> FLOOR_3_MAIN_JOINTS_DOUBLE = AetherIIPools.createKey("infected_guardian_tree/floor_3/main/joints_double");
     public static final ResourceKey<StructureTemplatePool> FLOOR_3_SIDE_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/floor_3/side/corridors");
 
     public static final ResourceKey<StructureTemplatePool> ROOMS = AetherIIPools.createKey("infected_guardian_tree/rooms/eye_rooms");
@@ -266,6 +267,14 @@ public class InfectedGuardianTreePools {
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/floor_3/main/t_crossing_03", processorDungeon), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/floor_3/main/staircase_intersection_01", processorDungeon), 1),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/floor_3/main/staircase_intersection_02", processorDungeon), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(FLOOR_3_MAIN_JOINTS_DOUBLE, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/floor_3/main/t_crossing_double", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/floor_3/main/staircase_intersection_double", processorDungeon), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
