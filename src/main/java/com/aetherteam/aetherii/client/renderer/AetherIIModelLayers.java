@@ -46,6 +46,8 @@ public class AetherIIModelLayers {
     public static final ModelLayerLocation SKEPHID = register("skephid");
     public static final ModelLayerLocation CARRION_SPROUT = register("carrion_sprout");
 
+    public static final ModelLayerLocation ARKENIUM_TALOTON = register("arkenium_taloton");
+    public static final ModelLayerLocation GRAVITITE_TALOTON = register("gravitite_taloton");
 
     public static final ModelLayerLocation GLOVES = register("gloves");
     public static final ModelLayerLocation GLOVES_SLIM = register("gloves_slim");

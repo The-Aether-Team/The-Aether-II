@@ -879,6 +879,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
         this.addItem(AetherIIItems.SWET_SPAWN_EGG, "Swet Spawn Egg");
         this.addItem(AetherIIItems.SKEPHID_SPAWN_EGG, "Skephid Spawn Egg");
+        this.addItem(AetherIIItems.ARKENIUM_TALOTON_SPAWN_EGG, "Arkenium Taloton Spawn Egg");
+        this.addItem(AetherIIItems.GRAVITITE_TALOTON_SPAWN_EGG, "Gravitite Taloton Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.HIDE_BUNDLE, "Hide Bundle");
@@ -1089,6 +1091,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
         this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
+        this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALOTON, "Arkenium Taloton");
+        this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALOTON, "Gravitite Taloton");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");

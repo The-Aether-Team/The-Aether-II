@@ -320,6 +320,8 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.COCKATRICE.get(), properties));
     public static final DeferredItem<SpawnEggItem> SWET_SPAWN_EGG = register("swet_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SWET.get(), properties));
     public static final DeferredItem<SpawnEggItem> SKEPHID_SPAWN_EGG = register("skephid_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SKEPHID.get(), properties));
+    public static final DeferredItem<SpawnEggItem> ARKENIUM_TALOTON_SPAWN_EGG = register("arkenium_taloton_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.ARKENIUM_TALOTON.get(), properties));
+    public static final DeferredItem<SpawnEggItem> GRAVITITE_TALOTON_SPAWN_EGG = register("gravitite_taloton_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.GRAVITITE_TALOTON.get(), properties));
 
     // Misc
     public static final DeferredItem<Item> HIDE_BUNDLE = register("hide_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));

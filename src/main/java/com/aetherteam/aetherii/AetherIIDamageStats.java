@@ -99,6 +99,14 @@ public class AetherIIDamageStats {
             .add(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
             .add(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
             .add(AetherIIAttributes.PIERCE_RESISTANCE, -2.0);
+    public static final AttributeSupplier.Builder ARKENIUM_TALOTON = new AttributeSupplier.Builder()
+            .add(AetherIIAttributes.SLASH_RESISTANCE, 2.0)
+            .add(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
+            .add(AetherIIAttributes.PIERCE_RESISTANCE, 2.0);
+    public static final AttributeSupplier.Builder GRAVITITE_TALOTON = new AttributeSupplier.Builder()
+            .add(AetherIIAttributes.SLASH_RESISTANCE, 2.0)
+            .add(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
+            .add(AetherIIAttributes.PIERCE_RESISTANCE, -2.0);
 
     private static ItemAttributeModifiers.Entry slashDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.SLASH_DAMAGE, new AttributeModifier(AetherIIItems.BASE_SLASH_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);

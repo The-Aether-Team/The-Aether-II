@@ -204,6 +204,18 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 4
+      },
+      {
+        "type": "aether_ii:arkenium_taloton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
+      },
+      {
+        "type": "aether_ii:gravitite_taloton",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 1
       }
     ],
     "underground_water_creature": [],

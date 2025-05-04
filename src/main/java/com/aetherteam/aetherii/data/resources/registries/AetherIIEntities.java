@@ -41,6 +41,8 @@ public class AetherIIEntities {
     public static final ResourceKey<EntityType<?>> COCKATRICE = createKey("cockatrice");
     public static final ResourceKey<EntityType<?>> SWET = createKey("swet");
     public static final ResourceKey<EntityType<?>> SKEPHID = createKey("skephid");
+    public static final ResourceKey<EntityType<?>> ARKENIUM_TALOTON = createKey("arkenium_taloton");
+    public static final ResourceKey<EntityType<?>> GRAVITITE_TALOTON = createKey("gravitite_taloton");
 
 
     //Projectiles

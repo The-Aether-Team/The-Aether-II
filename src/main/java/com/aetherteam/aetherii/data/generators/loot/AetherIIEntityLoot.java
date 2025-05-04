@@ -155,6 +155,20 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 ));
 
+        this.add(AetherIIEntityTypes.ARKENIUM_TALOTON.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                        )
+                )
+        );
+        this.add(AetherIIEntityTypes.GRAVITITE_TALOTON.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                        )
+                )
+        );
     }
 
     protected LootTable.Builder createTaegoreTable() {
