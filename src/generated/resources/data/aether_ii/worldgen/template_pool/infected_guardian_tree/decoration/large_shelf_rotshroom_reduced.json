@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:feature_pool_element",
-        "feature": "aether_ii:large_shelf_rotshroom",
+        "feature": "aether_ii:large_shelf_rotshroom_underground",
         "projection": "rigid"
       },
       "weight": 1

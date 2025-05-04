@@ -22,7 +22,10 @@ public class LargeShelfMushroom extends Feature<LargeShelfMushroomConfiguration>
         RandomSource random = context.random();
         LargeShelfMushroomConfiguration config = context.config();
 
-        BlockPlacementUtil.placeDisk(level, config.block(), pos, config.baseRadius() + config.additionalRadius() + 0.5F, random, false);
-        return true;
+        if (pos.getY() > config.minY()) {
+            BlockPlacementUtil.placeDisk(level, config.block(), pos, config.baseRadius() + config.additionalRadius() + 0.5F, random, false);
+            return true;
+        }
+        return false;
     }
 }
