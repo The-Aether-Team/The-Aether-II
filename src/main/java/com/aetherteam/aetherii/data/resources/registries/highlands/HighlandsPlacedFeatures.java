@@ -659,6 +659,7 @@ public class HighlandsPlacedFeatures {
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.UP, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 4)),
                 BlockPredicateFilter.forPredicate(new SearchPredicate(Direction.DOWN, BlockPredicate.matchesTag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS), 4)),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                new StructureBlacklistFilter(AetherIITags.Structures.ACID_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
         register(context, ORE_GAS_BURIED, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ORE_GAS_BURIED),
@@ -666,6 +667,7 @@ public class HighlandsPlacedFeatures {
                 InSquarePlacement.spread(),
                 HeightRangePlacement.of(TrapezoidHeight.of(VerticalAnchor.aboveBottom(-96), VerticalAnchor.aboveBottom(128))),
                 SurfaceRelativeThresholdFilter.of(Heightmap.Types.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -4),
+                new StructureBlacklistFilter(AetherIITags.Structures.ACID_POOL_BLACKLIST_FILTER),
                 BiomeFilter.biome()
         );
     }
