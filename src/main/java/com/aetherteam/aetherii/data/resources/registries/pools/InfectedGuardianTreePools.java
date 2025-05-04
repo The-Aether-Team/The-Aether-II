@@ -301,7 +301,7 @@ public class InfectedGuardianTreePools {
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(ROOMS_CORRIDORS, new StructureTemplatePool(
-                fallback,
+                templatePools.getOrThrow(ROOMS_EYE),
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/rooms/corridor_01", processorDungeon), 1)
                 ),
