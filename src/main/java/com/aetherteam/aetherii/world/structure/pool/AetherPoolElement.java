@@ -59,11 +59,11 @@ public class AetherPoolElement extends StructurePoolElement {
     protected final int discardAboveY;
     protected final boolean replaceAir;
 
-    private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> p_210425_, DynamicOps<T> p_210426_, T p_210427_) {
-        Optional<ResourceLocation> optional = p_210425_.left();
+    private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> template, DynamicOps<T> ops, T prefix) {
+        Optional<ResourceLocation> optional = template.left();
         return optional.isEmpty()
                 ? DataResult.error(() -> "Can not serialize a runtime pool element")
-                : ResourceLocation.CODEC.encode(optional.get(), p_210426_, p_210427_);
+                : ResourceLocation.CODEC.encode(optional.get(), ops, prefix);
     }
 
     protected static <E extends AetherPoolElement> RecordCodecBuilder<E, Holder<StructureProcessorList>> processorsCodec() {
@@ -146,8 +146,7 @@ public class AetherPoolElement extends StructurePoolElement {
                 return false;
             } else {
                 for (StructureTemplate.StructureBlockInfo structureBlockInfo : StructureTemplate.processBlockInfos(
-                        level, offset, pos, settings, this.getDataMarkers(templateManager, offset, rotation, false)
-                )) {
+                        level, offset, pos, settings, this.getDataMarkers(templateManager, offset, rotation, false))) {
                     this.handleDataMarker(level, structureBlockInfo, offset, rotation, random, box);
                 }
 

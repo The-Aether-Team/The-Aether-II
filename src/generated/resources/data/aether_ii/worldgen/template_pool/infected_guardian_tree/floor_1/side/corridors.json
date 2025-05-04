@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 0,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_1/side/corridor_01",

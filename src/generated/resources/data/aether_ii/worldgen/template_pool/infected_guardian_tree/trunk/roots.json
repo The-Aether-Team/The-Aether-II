@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_01_a",
@@ -15,7 +15,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_01_b",
@@ -28,7 +28,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_02_a",
@@ -41,7 +41,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_02_b",
@@ -54,7 +54,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_03_a",
@@ -67,7 +67,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_03_b",
@@ -80,7 +80,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_04_a",
@@ -93,7 +93,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_04_b",
@@ -106,7 +106,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_05_a",
@@ -119,7 +119,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 96,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_05_b",

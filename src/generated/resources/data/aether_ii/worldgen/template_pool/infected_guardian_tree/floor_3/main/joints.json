@@ -2,7 +2,7 @@
   "elements": [
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 0,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_3/main/t_crossing_01",
@@ -15,7 +15,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 0,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_3/main/t_crossing_02",
@@ -28,7 +28,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 0,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_3/main/t_crossing_03",
@@ -41,7 +41,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 0,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_3/main/staircase_intersection_01",
@@ -54,7 +54,7 @@
     },
     {
       "element": {
-        "discard_above_y": 180,
+        "discard_above_y": 384,
         "discard_below_y": 0,
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/floor_3/main/staircase_intersection_02",

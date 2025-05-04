@@ -5,7 +5,7 @@
         "discard_above_y": 384,
         "discard_below_y": 0,
         "element_type": "aether_ii:aether_pool_element",
-        "location": "aether_ii:infected_guardian_tree/floor_2/main/corridor_01",
+        "location": "aether_ii:infected_guardian_tree/floor_3/main/corridor_double_01",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
