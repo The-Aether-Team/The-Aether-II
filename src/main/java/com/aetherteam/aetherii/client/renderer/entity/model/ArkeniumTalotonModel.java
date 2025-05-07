@@ -1,96 +1,119 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.client.renderer.entity.state.ArkeniumTalotonRenderState;
+import net.minecraft.client.model.AnimationUtils;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.util.Mth;
 
-public class ArkeniumTalotonModel extends EntityModel<LivingEntityRenderState> {
-    private final ModelPart Body;
-    private final ModelPart bone;
-    private final ModelPart bone2;
-    private final ModelPart bone3;
-    private final ModelPart bone4;
-    private final ModelPart bone5;
-    private final ModelPart bone6;
-    private final ModelPart bone7;
-    private final ModelPart bone8;
-    private final ModelPart bone9;
-    private final ModelPart bone10;
-    private final ModelPart bone11;
+public class ArkeniumTalotonModel extends EntityModel<ArkeniumTalotonRenderState> {
+    private final ModelPart body;
+    private final ModelPart rearLeg;
+    private final ModelPart rearLeg2;
+    private final ModelPart leftLeg;
+    private final ModelPart leftLeg2;
+    private final ModelPart rightLeg;
+    private final ModelPart rightLeg2;
+    private final ModelPart leftArm;
+    private final ModelPart leftArm2;
+    private final ModelPart rightArm;
+    private final ModelPart rightArm2;
+    private final ModelPart rightArm3;
 
     public ArkeniumTalotonModel(ModelPart root) {
         super(root);
-        this.Body = root.getChild("Body");
-        this.bone = this.Body.getChild("bone");
-        this.bone2 = this.bone.getChild("bone2");
-        this.bone3 = this.Body.getChild("bone3");
-        this.bone4 = this.bone3.getChild("bone4");
-        this.bone5 = this.Body.getChild("bone5");
-        this.bone6 = this.bone5.getChild("bone6");
-        this.bone7 = this.Body.getChild("bone7");
-        this.bone8 = this.bone7.getChild("bone8");
-        this.bone9 = this.Body.getChild("bone9");
-        this.bone10 = this.bone9.getChild("bone10");
-        this.bone11 = this.bone10.getChild("bone11");
+        this.body = root.getChild("body");
+        this.rearLeg = this.body.getChild("leg_rear");
+        this.rearLeg2 = this.rearLeg.getChild("leg_rear_2");
+        this.leftLeg = this.body.getChild("leg_left");
+        this.leftLeg2 = this.leftLeg.getChild("leg_left_2");
+        this.rightLeg = this.body.getChild("leg_right");
+        this.rightLeg2 = this.rightLeg.getChild("leg_right_2");
+        this.leftArm = this.body.getChild("arm_left");
+        this.leftArm2 = this.leftArm.getChild("arm_left_2");
+        this.rightArm = this.body.getChild("arm_right");
+        this.rightArm2 = this.rightArm.getChild("arm_right_2");
+        this.rightArm3 = this.rightArm2.getChild("arm_right_3");
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshDefinition = new MeshDefinition();
         PartDefinition partDefinition = meshDefinition.getRoot();
 
-        PartDefinition Body = partDefinition.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(0, 0).addBox(-17.0F, -8.0F, -1.0F, 18.0F, 8.0F, 12.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 20).addBox(-14.5F, 0.0F, 0.0F, 13.0F, 4.0F, 10.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 34).addBox(-12.5F, 4.0F, 0.0F, 9.0F, 9.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 6.0F, -5.0F));
+        PartDefinition body = partDefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(31, 0).addBox(-17.0F, -8.0F, -1.0F, 18.0F, 8.0F, 12.0F, new CubeDeformation(0.0F))
+                .texOffs(38, 20).addBox(-14.5F, 0.0F, 0.0F, 13.0F, 4.0F, 10.0F, new CubeDeformation(0.0F))
+                .texOffs(42, 34).addBox(-12.5F, 4.0F, 0.0F, 9.0F, 9.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(8.0F, 6.0F, -5.0F));
 
-        PartDefinition cube_r1 = Body.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(72, 21).addBox(-1.0F, -0.5F, -2.0F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.3F, -8.5F, 10.4F, -0.2618F, -0.0436F, 0.5236F));
+        PartDefinition body_spike_2_r1 = body.addOrReplaceChild("body_spike_2_r1", CubeListBuilder.create().texOffs(97, 3).addBox(-1.0F, -0.5F, -1.8F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.3F, -8.5F, 10.3F, -0.2618F, -0.0436F, 0.5236F));
 
-        PartDefinition cube_r2 = Body.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(66, 42).addBox(-2.0F, -3.5F, -2.0F, 4.0F, 7.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.0F, -7.5F, 10.0F, -0.3491F, -0.1309F, 0.1745F));
+        PartDefinition body_spike_1_r1 = body.addOrReplaceChild("body_spike_1_r1", CubeListBuilder.create().texOffs(80, 0).addBox(-2.0F, -3.5F, -2.0F, 4.0F, 7.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.3F, -8.2F, 10.0F, -0.3491F, -0.1309F, 0.1745F));
 
-        PartDefinition bone = Body.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(32, 69).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-8.0F, 10.5F, 8.0F));
+        PartDefinition leg_rear = body.addOrReplaceChild("leg_rear", CubeListBuilder.create().texOffs(52, 55).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(-8.0F, 10.5F, 8.0F));
 
-        PartDefinition bone2 = bone.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 5.0F));
+        PartDefinition leg_rear_2 = leg_rear.addOrReplaceChild("leg_rear_2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 5.0F));
 
-        PartDefinition cube_r3 = bone2.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(66, 28).addBox(-2.0F, -2.0F, -1.5F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
+        PartDefinition leg_rear_2_r1 = leg_rear_2.addOrReplaceChild("leg_rear_2_r1", CubeListBuilder.create().texOffs(53, 64).addBox(-2.0F, -2.0F, -1.5F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
 
-        PartDefinition bone3 = Body.addOrReplaceChild("bone3", CubeListBuilder.create().texOffs(16, 68).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.8F, 10.5F, 1.3F, 0.0F, 2.3562F, 0.0F));
+        PartDefinition leg_left = body.addOrReplaceChild("leg_left", CubeListBuilder.create().texOffs(80, 55).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.8F, 10.5F, 1.3F, 0.0F, 2.3562F, 0.0F));
 
-        PartDefinition cube_r4 = bone3.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(74, 53).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -2.5F, 4.0F, -0.1745F, -0.1309F, -0.2182F));
+        PartDefinition leg_left_spike_r1 = leg_left.addOrReplaceChild("leg_left_spike_r1", CubeListBuilder.create().texOffs(99, 57).addBox(-1.0F, -2.5F, -1.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -2.5F, 4.0F, -0.1745F, -0.1309F, -0.2182F));
 
-        PartDefinition bone4 = bone3.addOrReplaceChild("bone4", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 4.0F));
+        PartDefinition leg_left_2 = leg_left.addOrReplaceChild("leg_left_2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 4.0F));
 
-        PartDefinition cube_r5 = bone4.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(58, 54).addBox(-2.0F, -2.0F, -0.5F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
+        PartDefinition leg_left_2_r1 = leg_left_2.addOrReplaceChild("leg_left_2_r1", CubeListBuilder.create().texOffs(81, 64).addBox(-2.0F, -2.0F, -0.5F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
 
-        PartDefinition bone5 = Body.addOrReplaceChild("bone5", CubeListBuilder.create().texOffs(58, 68).addBox(4.9F, -1.5F, 0.0F, 3.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-11.2F, 10.5F, 1.3F, 0.0F, -2.3562F, 0.0F));
+        PartDefinition leg_right = body.addOrReplaceChild("leg_right", CubeListBuilder.create().texOffs(24, 55).addBox(-1.5F, -1.5F, -1.0F, 3.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-11.2F, 10.5F, 1.3F, 0.0F, -2.3562F, 0.0F));
 
-        PartDefinition bone6 = bone5.addOrReplaceChild("bone6", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 4.0F));
+        PartDefinition leg_right_2 = leg_right.addOrReplaceChild("leg_right_2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 4.0F));
 
-        PartDefinition cube_r6 = bone6.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(60, 0).addBox(-2.0F, -2.0F, -0.5F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(6.4F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
+        PartDefinition leg_right_2_r1 = leg_right_2.addOrReplaceChild("leg_right_2_r1", CubeListBuilder.create().texOffs(25, 64).addBox(-2.4F, -2.0F, -0.5F, 4.0F, 10.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.4F, 0.0F, 0.0F, 0.1745F, 0.0F, 0.0F));
 
-        PartDefinition bone7 = Body.addOrReplaceChild("bone7", CubeListBuilder.create(), PartPose.offset(0.0F, -5.0F, 5.0F));
+        PartDefinition arm_left = body.addOrReplaceChild("arm_left", CubeListBuilder.create(), PartPose.offset(0.0F, -5.0F, 5.0F));
 
-        PartDefinition cube_r7 = bone7.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(72, 14).addBox(-2.0F, -3.0F, -1.0F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 0.0F, 0.1F, -0.3927F, 0.1745F, 0.829F));
+        PartDefinition arm_left_spike_r1 = arm_left.addOrReplaceChild("arm_left_spike_r1", CubeListBuilder.create().texOffs(105, 13).addBox(-2.0F, -3.0F, -1.0F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, 0.0F, 0.1F, -0.3927F, 0.1745F, 0.829F));
 
-        PartDefinition cube_r8 = bone7.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(46, 20).addBox(-2.0F, -3.0F, -2.0F, 9.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
+        PartDefinition arm_left_1_r1 = arm_left.addOrReplaceChild("arm_left_1_r1", CubeListBuilder.create().texOffs(92, 21).addBox(-2.0F, -3.0F, -2.0F, 9.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, 0.0F, 0.7854F));
 
-        PartDefinition bone8 = bone7.addOrReplaceChild("bone8", CubeListBuilder.create().texOffs(38, 34).addBox(-3.5F, -0.5F, -3.5F, 7.0F, 13.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, 4.5F, 0.0F, 0.0F, 0.0F, -0.1309F));
+        PartDefinition arm_left_2 = arm_left.addOrReplaceChild("arm_left_2", CubeListBuilder.create().texOffs(91, 29).addBox(-3.5F, -0.5F, -3.5F, 7.0F, 13.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, 4.5F, 0.0F, 0.0F, 0.0F, -0.1309F));
 
-        PartDefinition bone9 = Body.addOrReplaceChild("bone9", CubeListBuilder.create(), PartPose.offset(-16.0F, -4.0F, 5.0F));
+        PartDefinition arm_right = body.addOrReplaceChild("arm_right", CubeListBuilder.create(), PartPose.offset(-16.0F, -4.0F, 5.0F));
 
-        PartDefinition cube_r9 = bone9.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(0, 53).addBox(-6.0F, -6.0F, -2.0F, 8.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 3.0F, -2.0F, 0.0F, 0.0F, -0.1309F));
+        PartDefinition arm_right_1_r1 = arm_right.addOrReplaceChild("arm_right_1_r1", CubeListBuilder.create().texOffs(1, 13).addBox(-6.0F, -6.0F, -2.0F, 8.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-2.0F, 3.0F, -2.0F, 0.0F, 0.0F, -0.1309F));
 
-        PartDefinition bone10 = bone9.addOrReplaceChild("bone10", CubeListBuilder.create().texOffs(0, 68).addBox(-2.0F, -0.5F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.5F, 3.5F, 0.0F, 0.0F, 0.0F, 0.1309F));
+        PartDefinition arm_right_2 = arm_right.addOrReplaceChild("arm_right_2", CubeListBuilder.create().texOffs(9, 28).addBox(-2.0F, -0.5F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.5F, 3.5F, 0.0F, 0.0F, 0.0F, 0.1309F));
 
-        PartDefinition cube_r10 = bone10.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(48, 69).addBox(-3.0F, -4.0F, -2.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 3.5F, 1.0F, 0.0F, 0.0F, -0.829F));
+        PartDefinition arm_right_spike_r1 = arm_right_2.addOrReplaceChild("arm_right_spike_r1", CubeListBuilder.create().texOffs(0, 31).addBox(-3.0F, -4.0F, -2.0F, 2.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 3.5F, 1.0F, 0.0F, 0.0F, -0.829F));
 
-        PartDefinition bone11 = bone10.addOrReplaceChild("bone11", CubeListBuilder.create().texOffs(32, 54).addBox(-3.0F, 3.0F, -1.0F, 6.0F, 8.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.3F, 2.0F, -2.5F, 0.0F, 0.0F, -0.0873F));
+        PartDefinition arm_right_3 = arm_right_2.addOrReplaceChild("arm_right_3", CubeListBuilder.create().texOffs(4, 38).addBox(-3.0F, 3.0F, -1.0F, 6.0F, 8.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.3F, 2.0F, -2.5F, 0.0F, 0.0F, -0.0873F));
 
         return LayerDefinition.create(meshDefinition, 128, 128);
     }
 
     @Override
-    public void setupAnim(LivingEntityRenderState renderState) {
+    public void setupAnim(ArkeniumTalotonRenderState renderState) {
         super.setupAnim(renderState);
+        float f = renderState.attackTicksRemaining;
+        float f1 = renderState.walkAnimationPos;
+        float f2 = renderState.walkAnimationSpeed;
+
+        if (f > 0.0F) {
+            this.rightArm.xRot = -2.0F + 1.5F * Mth.triangleWave(f, 10.0F);
+            this.leftArm.xRot = -2.0F + 1.5F * Mth.triangleWave(f, 10.0F);
+        } else {
+            this.rightArm.xRot = (-0.2F + 1.5F * Mth.triangleWave(f1, 13.0F)) * f2;
+            this.leftArm.xRot = (-0.2F - 1.5F * Mth.triangleWave(f1, 13.0F)) * f2;
+        }
+
+
+        this.rightLeg.xRot = Mth.cos(f1 * 0.6662F + Mth.HALF_PI) * 0.3F * f2;
+        this.leftLeg.xRot = Mth.cos(f1 * 0.6662F) * 0.3F * f2;
+        this.rearLeg.xRot = Mth.cos(f1 * 0.6662F + Mth.PI) * 0.3F * f2;
+
+        this.rightLeg.yRot = Mth.PI + (45 * Mth.DEG_TO_RAD) + Mth.cos(f1 * 0.6662F) * 0.8F * f2;
+        this.leftLeg.yRot = Mth.PI - (45 * Mth.DEG_TO_RAD) + Mth.cos(f1 * 0.6662F + Mth.HALF_PI) * 0.8F * f2;
+        this.rearLeg.yRot = Mth.cos(f1 * 0.6662F + Mth.PI) * 0.8F * f2;
     }
 }

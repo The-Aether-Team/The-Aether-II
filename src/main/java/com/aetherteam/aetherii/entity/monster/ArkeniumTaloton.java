@@ -1,5 +1,8 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -14,6 +17,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class ArkeniumTaloton extends Monster {
+    private int attackAnimationTick;
+
     public ArkeniumTaloton(EntityType<? extends ArkeniumTaloton> entityType, Level level) {
         super(entityType, level);
     }
@@ -36,5 +41,32 @@ public class ArkeniumTaloton extends Monster {
                 .add(Attributes.ATTACK_DAMAGE, 5.0F)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.1F)
                 .add(Attributes.STEP_HEIGHT, 1.0F);
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.attackAnimationTick > 0) {
+            this.attackAnimationTick--;
+        }
+    }
+
+    @Override
+    public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
+        this.attackAnimationTick = 10;
+        serverLevel.broadcastEntityEvent(this, (byte) 4);
+        return super.doHurtTarget(serverLevel, entity);
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 4) {
+            this.attackAnimationTick = 10;
+            this.playSound(SoundEvents.IRON_GOLEM_ATTACK, 1.0F, 1.0F);
+        }
+    }
+
+    public int getAttackAnimationTick() {
+        return this.attackAnimationTick;
     }
 }
