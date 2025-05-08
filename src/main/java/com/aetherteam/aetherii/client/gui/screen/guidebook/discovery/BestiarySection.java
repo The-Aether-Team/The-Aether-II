@@ -58,7 +58,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
             AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
             AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
             AetherIIEntityTypes.MOA, AetherIIEntityTypes.SKYROOT_LIZARD,
-            AetherIIEntityTypes.ZEPHYR, AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE, AetherIIEntityTypes.AECHOR_PLANT
+            AetherIIEntityTypes.ZEPHYR, AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE, AetherIIEntityTypes.AECHOR_PLANT,
+            AetherIIEntityTypes.ARKENIUM_TALOTON, AetherIIEntityTypes.GRAVITITE_TALOTON
     );
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
     private static final ResourceLocation SLASH_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");

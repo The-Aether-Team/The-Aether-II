@@ -788,6 +788,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
         this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");
         this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
+        this.addItem(AetherIIItems.ARKENIUM_CORE, "Arkenium Core");
+        this.addItem(AetherIIItems.GRAVITITE_CORE, "Gravitite Core");
 
         // Irradiated Items
         this.addItem(AetherIIItems.IRRADIATED_ARMOR, "Irradiated Armor");
@@ -1293,8 +1295,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALOTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALOTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
 
         // Jukebox Songs

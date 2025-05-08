@@ -141,6 +141,8 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.COCKATRICE_FEATHER.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SCATTERGLASS_VIAL.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.CHARGE_CORE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.ARKENIUM_CORE.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.GRAVITITE_CORE.get(), ModelTemplates.FLAT_ITEM);
 
         // Irradiated Items
         this.generateFlatItem(AetherIIItems.IRRADIATED_ARMOR.get(), ModelTemplates.FLAT_ITEM);

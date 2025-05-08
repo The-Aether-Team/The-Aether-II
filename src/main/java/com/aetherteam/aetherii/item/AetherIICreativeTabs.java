@@ -735,6 +735,8 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
                 output.accept(AetherIIItems.SCATTERGLASS_VIAL.get());
                 output.accept(AetherIIItems.CHARGE_CORE.get());
+                output.accept(AetherIIItems.ARKENIUM_CORE.get());
+                output.accept(AetherIIItems.GRAVITITE_CORE.get());
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> AETHER_II_SPAWN_EGGS = CREATIVE_MODE_TABS.register("spawn_eggs", () -> CreativeModeTab.builder()

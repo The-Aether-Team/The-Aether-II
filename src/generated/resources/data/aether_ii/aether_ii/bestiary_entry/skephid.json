@@ -1,0 +1,15 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.skephid",
+  "entity_type": "aether_ii:skephid",
+  "icon_discovered": "aether_ii:guidebook/bestiary/skephid",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:cloudtwine",
+      "max_count": 2,
+      "min_count": 1
+    }
+  ],
+  "observation_advancement": "aether_ii:bestiary/observe_skephid",
+  "understanding_advancement": "aether_ii:bestiary/understand_skephid"
+}
