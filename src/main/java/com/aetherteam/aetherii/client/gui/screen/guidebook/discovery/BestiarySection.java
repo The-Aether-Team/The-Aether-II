@@ -311,7 +311,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry> {
                                 int slotX = dropsTextX + (10 * (3 - loot.size())) + (20 * i);
                                 ItemStack itemStack = new ItemStack(lootDisplay.getItemLike());
                                 List<Component> components = new ArrayList<>();
-                                components.add(itemStack.getHoverName());
+                                components.add(itemStack.getStyledHoverName());
                                 if (lootDisplay.minCount() != lootDisplay.maxCount()) {
                                     components.add(Component.literal(lootDisplay.minCount() + "-" + lootDisplay.maxCount()).withStyle(ChatFormatting.GRAY));
                                 } else {
