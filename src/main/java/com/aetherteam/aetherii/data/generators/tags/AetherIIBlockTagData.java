@@ -293,7 +293,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ACID_INSTANTLY_DESTROYS).addTags(BlockTags.LEAVES, AetherIITags.Blocks.AERCLOUDS);
         this.tag(AetherIITags.Blocks.ACID_QUICKLY_DESTROYS).addTags(BlockTags.DIRT, BlockTags.LOGS, BlockTags.PLANKS);
         this.tag(AetherIITags.Blocks.ACID_SLOWLY_DESTROYS).addTags(AetherIITags.Blocks.HOLYSTONE, Tags.Blocks.STONES);
-        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).addTags( //TODO: find solutions so it doesn't trigger with unlit Blockstates
+        this.tag(AetherIITags.Blocks.TRIGGERS_GAS).addTags(
                 BlockTags.FIRE,
                 BlockTags.CANDLES,
                 BlockTags.CANDLE_CAKES,
@@ -402,6 +402,11 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         );
 
         // Vanilla
+        this.tag(BlockTags.PLANKS).add(
+                AetherIIBlocks.SKYROOT_PLANKS.get(),
+                AetherIIBlocks.GREATROOT_PLANKS.get(),
+                AetherIIBlocks.WISPROOT_PLANKS.get()
+        );
         this.tag(BlockTags.WOOL).add(
                 AetherIIBlocks.CLOUDWOOL.get(),
                 AetherIIBlocks.WHITE_CLOUDWOOL.get(),
