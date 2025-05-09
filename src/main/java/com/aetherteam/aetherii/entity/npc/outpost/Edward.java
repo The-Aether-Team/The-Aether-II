@@ -12,7 +12,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
@@ -24,11 +23,10 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
-import java.util.EnumSet;
 
 public class Edward extends MerchantEntity {
     private static final EntityDataAccessor<Boolean> DATA_SITTING_ID = SynchedEntityData.defineId(Edward.class, EntityDataSerializers.BOOLEAN);
-    private BlockPos sittingPosition;
+    private static final EntityDataAccessor<BlockPos> DATA_HOME_POSITION_ID = SynchedEntityData.defineId(Edward.class, EntityDataSerializers.BLOCK_POS);
 
     public Edward(EntityType<? extends NpcEntity> entityType, Level level) {
         super(entityType, level);
@@ -44,6 +42,7 @@ public class Edward extends MerchantEntity {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_SITTING_ID, false);
+        builder.define(DATA_HOME_POSITION_ID, BlockPos.ZERO);
     }
 
     @Override
@@ -53,12 +52,11 @@ public class Edward extends MerchantEntity {
         this.goalSelector.addGoal(1, new StrollExceptWhenSitting(this, 1.0));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(3, new SitGoal(this, 1.0));
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason spawnReason, @Nullable SpawnGroupData spawnGroupData) {
-        this.setSittingPosition(this.blockPosition());
+        this.setHomePosition(this.blockPosition());
         return super.finalizeSpawn(level, difficulty, spawnReason, spawnGroupData);
     }
 
@@ -111,26 +109,26 @@ public class Edward extends MerchantEntity {
         this.getEntityData().set(DATA_SITTING_ID, sitting);
     }
 
-    public void setSittingPosition(BlockPos sittingPosition) {
-        this.sittingPosition = sittingPosition;
+    public BlockPos getHomePosition() {
+        return this.getEntityData().get(DATA_HOME_POSITION_ID);
     }
 
-    public BlockPos getSittingPosition() {
-        return this.sittingPosition;
+    public void setHomePosition(BlockPos homePosition) {
+        this.getEntityData().set(DATA_HOME_POSITION_ID, homePosition);
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        tag.putIntArray("SittingPosition", new int[]{this.getSittingPosition().getX(), this.getSittingPosition().getY(), this.getSittingPosition().getZ()});
+        tag.putIntArray("HomePosition", new int[]{this.getHomePosition().getX(), this.getHomePosition().getY(), this.getHomePosition().getZ()});
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        if (tag.contains("SittingPosition")) {
-            int[] positions = tag.getIntArray("SittingPosition");
-            this.setSittingPosition(new BlockPos(positions[0], positions[1], positions[2]));
+        if (tag.contains("HomePosition")) {
+            int[] positions = tag.getIntArray("HomePosition");
+            this.setHomePosition(new BlockPos(positions[0], positions[1], positions[2]));
         }
     }
 
@@ -142,106 +140,32 @@ public class Edward extends MerchantEntity {
             this.edward = edward;
         }
 
-        @Nullable
-        @Override
-        protected Vec3 getPosition() {
-            if (this.edward.isSitting()) {
-                return null;
-            }
-            return super.getPosition();
-        }
-    }
-
-    public static class SitGoal extends Goal {
-        public static final int DEFAULT_INTERVAL = 120;
-        protected final Edward edward;
-        protected double wantedX;
-        protected double wantedY;
-        protected double wantedZ;
-        protected final double speedModifier;
-        protected int interval;
-        protected boolean forceTrigger;
-        private final boolean checkNoActionTime;
-
-        public SitGoal(Edward edward, double speedModifier) {
-            this(edward, speedModifier, 750);
-        }
-
-        public SitGoal(Edward edward, double speedModifier, int interval) {
-            this(edward, speedModifier, interval, true);
-        }
-
-        public SitGoal(Edward edward, double speedModifier, int interval, boolean checkNoActionTime) {
-            this.edward = edward;
-            this.speedModifier = speedModifier;
-            this.interval = interval;
-            this.checkNoActionTime = checkNoActionTime;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
-        }
-
         @Override
         public boolean canUse() {
-            if (this.edward.hasControllingPassenger()) {
-                return false;
-            } else {
-                if (!this.forceTrigger) {
-                    if (!this.edward.getNavigation().isDone()) {
-                        return false;
-                    }
-
-                    if (this.checkNoActionTime && this.edward.getNoActionTime() >= 100) {
-                        return false;
-                    }
-
-                    if (this.edward.getRandom().nextInt(reducedTickDelay(this.interval)) != 0) {
-                        return false;
-                    }
-                }
-
-                Vec3 vec3 = this.getPosition();
-                if (vec3 == null) {
-                    return false;
-                } else {
-                    this.wantedX = vec3.x;
-                    this.wantedY = vec3.y;
-                    this.wantedZ = vec3.z;
-                    this.forceTrigger = false;
-                    return true;
-                }
-            }
-        }
-
-        @Nullable
-        protected Vec3 getPosition() {
-            if (this.edward.isSitting()) {
-                return null;
-            }
-            return this.edward.getSittingPosition().getBottomCenter();
+            return !this.edward.isSitting() && super.canUse();
         }
 
         @Override
         public boolean canContinueToUse() {
-            return !this.edward.getNavigation().isDone() && !this.edward.hasControllingPassenger();
+            return !this.edward.isSitting() && super.canContinueToUse();
         }
 
+        @Nullable
         @Override
-        public void start() {
-            this.edward.getNavigation().moveTo(this.wantedX, this.wantedY, this.wantedZ, this.speedModifier);
+        protected Vec3 getPosition() {
+            if (this.edward.isSitting()) {
+                return null;
+            } else {
+                return this.edward.getRandom().nextInt(4) == 0 ? this.edward.getHomePosition().getBottomCenter() : super.getPosition();
+            }
         }
 
         @Override
         public void stop() {
-            this.edward.setSitting(true);
-            this.edward.getNavigation().stop();
             super.stop();
-        }
-
-        public void trigger() {
-            this.forceTrigger = true;
-        }
-
-        public void setInterval(int newchance) {
-            this.interval = newchance;
+            if (this.edward.getBoundingBox().inflate(2.0).contains(this.edward.getHomePosition().getBottomCenter())) {
+                this.edward.setSitting(true);
+            }
         }
     }
 }
