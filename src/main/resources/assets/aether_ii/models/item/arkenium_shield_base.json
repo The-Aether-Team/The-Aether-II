@@ -11,7 +11,8 @@
 		"6": "aether_ii:item/shields/arkenium_shield/arkenium_center_mid",
 		"7": "aether_ii:item/shields/arkenium_shield/arkenium_wing_right1",
 		"8": "aether_ii:item/shields/arkenium_shield/arkenium_wing_right_left2",
-		"9": "aether_ii:item/shields/arkenium_shield/arkenium_wing_left1"
+		"9": "aether_ii:item/shields/arkenium_shield/arkenium_wing_left1",
+		"particle": "#0"
 	},
 	"elements": [
 		{

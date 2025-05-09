@@ -11,7 +11,8 @@
 		"6": "aether_ii:item/shields/skyroot_shield/skyroot_wing_right1",
 		"7": "aether_ii:item/shields/skyroot_shield/skyroot_wing_right3",
 		"8": "aether_ii:item/shields/skyroot_shield/skyroot_wing_left1",
-		"9": "aether_ii:item/shields/skyroot_shield/skyroot_wing_left3"
+		"9": "aether_ii:item/shields/skyroot_shield/skyroot_wing_left3",
+		"particle": "#0"
 	},
 	"elements": [
 		{
