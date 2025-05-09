@@ -52,6 +52,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerRespawn);
         bus.addListener(AetherIIEventListeners::onPlayerPositionRespawn);
         bus.addListener(AetherIIEventListeners::onPlayerClone);
+        bus.addListener(AetherIIEventListeners::onPlayerChangedDimension);
         bus.addListener(AetherIIEventListeners::onPlayerPostTick);
         bus.addListener(AetherIIEventListeners::onPlayerRightClickBlock);
         bus.addListener(AetherIIEventListeners::onPlayerEntityInteractSpecific);
@@ -120,6 +121,12 @@ public class AetherIIEventListeners {
 
         player.getData(AetherIIDataAttachments.CURRENCY).clone(original, player, wasDeath);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).clone(player);
+    }
+
+    public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        Player player = event.getEntity();
+
+        player.getData(AetherIIDataAttachments.PLAYER).changeDimension(player);
     }
 
     public static void onPlayerPostTick(PlayerTickEvent.Post event) {
