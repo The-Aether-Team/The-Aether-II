@@ -1,13 +1,24 @@
 package com.aetherteam.aetherii.attachment.player;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
+import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerPlayerAccessor;
 import com.aetherteam.aetherii.network.packet.CurrencySyncPacket;
 import com.aetherteam.nitrogen.attachment.INBTSynchable;
 import com.aetherteam.nitrogen.network.packet.SyncPacket;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameRules;
 import org.apache.commons.lang3.tuple.Triple;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -41,6 +52,18 @@ public class CurrencyAttachment implements INBTSynchable {
         this.shouldSyncAfterJoin = true;
     }
 
+    public void clone(Player original, Player player, boolean wasDeath) {
+        if (wasDeath) {
+            if (player.level() instanceof ServerLevel serverLevel) {
+                GameRules gameRules = serverLevel.getGameRules();
+                if (gameRules.getRule(GameRules.RULE_KEEPINVENTORY).get()) {
+                    player.getData(AetherIIDataAttachments.CURRENCY).setAmount(original.getData(AetherIIDataAttachments.CURRENCY).getAmount());
+                }
+            }
+        }
+        this.shouldSyncAfterJoin = true;
+    }
+
     public void postTickUpdate(Player player) {
         this.syncAfterJoin(player);
     }
@@ -49,6 +72,27 @@ public class CurrencyAttachment implements INBTSynchable {
         if (this.shouldSyncAfterJoin) {
             this.forceSync(player.getId(), Direction.CLIENT);
             this.shouldSyncAfterJoin = false;
+        }
+    }
+
+    public void dropAll(Player player, Collection<ItemEntity> drops) {
+        if (player instanceof ServerPlayer serverPlayer && player.level() instanceof ServerLevel serverLevel) {
+            GameRules gameRules = serverLevel.getGameRules();
+            if (!gameRules.getRule(GameRules.RULE_KEEPINVENTORY).get()) {
+                int amount = player.getData(AetherIIDataAttachments.CURRENCY).getAmount();
+                int fullStacks = Math.floorDiv(amount, 64);
+                int leftoverStack = amount % 64;
+                Collection<ItemEntity> newStacks = new ArrayList<>();
+                for (int i = 0; i < fullStacks; i++) {
+                    ItemStack itemStack = new ItemStack(AetherIIItems.GLINT_COIN.get(), 64);
+                    ItemEntity itemEntity = ((ServerPlayerAccessor) serverPlayer).callCreateItemStackToDrop(itemStack, true, false);
+                    newStacks.add(itemEntity);
+                }
+                ItemStack itemStack = new ItemStack(AetherIIItems.GLINT_COIN.get(), leftoverStack);
+                ItemEntity itemEntity = ((ServerPlayerAccessor) serverPlayer).callCreateItemStackToDrop(itemStack, true, false);
+                newStacks.add(itemEntity);
+                drops.addAll(newStacks);
+            }
         }
     }
 

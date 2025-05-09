@@ -32,7 +32,8 @@
     "common.accessor.PlayerAccessor",
     "common.accessor.RecipeManagerAccessor",
     "common.accessor.SaplingBlockAccessor",
-    "common.accessor.ServerGamePacketListenerImplAccessor"
+    "common.accessor.ServerGamePacketListenerImplAccessor",
+    "common.accessor.ServerPlayerAccessor"
   ],
   "client": [
     "client.BlockModelWrapperMixin",
