@@ -146,11 +146,10 @@ public class HoveringBlockEntity extends Entity {
 
     private void markShouldSettle() {
         Predicate<BlockPos> findPos = (pos) -> {
-            var state = level().getBlockState(pos);
-
-            if (state.is(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST))
+            var state = this.level().getBlockState(pos);
+            if (state.is(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST)) {
                 return false;
-
+            }
             return state.getCollisionShape(level(), pos).isEmpty();
         };
 
@@ -167,18 +166,19 @@ public class HoveringBlockEntity extends Entity {
     private void settleBlock() {
         Vec3 currentPos = this.position();
         Vec3 motion = this.targetSettlePosition.subtract(currentPos);
+        BlockPos newPos = BlockPos.containing(this.targetSettlePosition.x(), this.targetSettlePosition.y(), this.targetSettlePosition.z());
         this.setDeltaMovement(motion);
         if (this.position().distanceTo(this.targetSettlePosition) <= 0.001) {
             if (!this.level().isClientSide()) {
-                BlockState levelState = this.level().getBlockState(this.blockPosition());
+                BlockState levelState = this.level().getBlockState(newPos);
                 if (!levelState.isAir()) {
-                    this.level().destroyBlock(this.blockPosition(), true);
+                    this.level().destroyBlock(newPos, true);
                 }
-                this.level().setBlock(this.blockPosition(), this.blockState, 2);
-                levelState = this.level().getBlockState(this.blockPosition());
+                this.level().setBlock(newPos, this.blockState, 2);
+                levelState = this.level().getBlockState(newPos);
                 if (levelState.is(this.getBlockState().getBlock())) {
                     if (this.blockData != null && this.getBlockState().hasBlockEntity()) {
-                        BlockEntity blockEntity = this.level().getBlockEntity(this.blockPosition());
+                        BlockEntity blockEntity = this.level().getBlockEntity(newPos);
                         if (blockEntity != null) {
                             CompoundTag tag = blockEntity.saveWithoutMetadata(this.level().registryAccess());
                             for (String string : this.blockData.getAllKeys()) {

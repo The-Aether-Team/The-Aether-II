@@ -389,6 +389,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).add(
                 Blocks.PISTON_HEAD
         );
+        this.tag(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST).addTags(
+                BlockTags.PORTALS
+        );
         this.tag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS).add(
                 AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
                 AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
