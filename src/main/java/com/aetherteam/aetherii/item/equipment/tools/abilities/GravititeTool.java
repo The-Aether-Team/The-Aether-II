@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.ChestType;
 
 public interface GravititeTool {
     default boolean levitateBlock(UseOnContext context) {
@@ -25,7 +26,11 @@ public interface GravititeTool {
         InteractionHand hand = context.getHand();
         if (player != null && player.isShiftKeyDown()) {
             if ((itemStack.isCorrectToolForDrops(blockState))) {
-                if (blockState.getDestroySpeed(level, blockPos) >= 0.0F && !blockState.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF) && !blockState.is(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST)) {
+                if (blockState.getDestroySpeed(level, blockPos) >= 0.0F
+                        && !blockState.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF)
+                        && (!blockState.hasProperty(BlockStateProperties.CHEST_TYPE) || blockState.getValue(BlockStateProperties.CHEST_TYPE) == ChestType.SINGLE)
+                        && (!blockState.hasProperty(BlockStateProperties.EXTENDED) || !blockState.getValue(BlockStateProperties.EXTENDED))
+                        && !blockState.is(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST)) {
                     AetherIIPlayerAttachment attachment = player.getData(AetherIIDataAttachments.PLAYER);
                     if (!attachment.isGravititeHoldingFloatingBlock()) {
                         attachment.setGravititeHoldingFloatingBlock(true);

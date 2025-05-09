@@ -386,11 +386,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WOVEN_SKYROOT_STICKS.get()
         );
         this.tag(AetherIITags.Blocks.HOLYSTONE_ABILITY_GUARANTEED).addTag(Tags.Blocks.ORES);
-        this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).addTags(
-                BlockTags.BUTTONS,
-                BlockTags.PRESSURE_PLATES,
-                BlockTags.TRAPDOORS,
-                BlockTags.FENCE_GATES
+        this.tag(AetherIITags.Blocks.GRAVITITE_ABILITY_BLACKLIST).add(
+                Blocks.PISTON_HEAD
         );
         this.tag(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS).add(
                 AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),

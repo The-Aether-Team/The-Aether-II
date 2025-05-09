@@ -33,7 +33,16 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
     public void render(HoveringBlockEntityRenderState floatingBlock, PoseStack poseStack, MultiBufferSource buffer, int packedLightIn) {
         BlockState blockState = floatingBlock.blockState;
 
-        if (blockState.getRenderShape() == RenderShape.MODEL) {
+        if (floatingBlock.blockEntityDummy != null) {
+            BlockEntityRenderer<BlockEntity> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(floatingBlock.blockEntityDummy);
+            if (renderer != null) {
+                poseStack.pushPose();
+                poseStack.translate(-0.5, 0.0, -0.5);
+                renderer.render(floatingBlock.blockEntityDummy, floatingBlock.partialTick, poseStack, buffer, packedLightIn, OverlayTexture.NO_OVERLAY);
+                poseStack.popPose();
+                super.render(floatingBlock, poseStack, buffer, packedLightIn);
+            }
+        } else if (blockState.getRenderShape() == RenderShape.MODEL) {
             BlockAndTintGetter world = floatingBlock.level;
             poseStack.pushPose();
             poseStack.translate(-0.5, 0.0, -0.5);
@@ -44,15 +53,6 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
             }
             poseStack.popPose();
             super.render(floatingBlock, poseStack, buffer, packedLightIn);
-        } else if (floatingBlock.blockEntityDummy != null) {
-            BlockEntityRenderer<BlockEntity> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(floatingBlock.blockEntityDummy);
-            if (renderer != null) {
-                poseStack.pushPose();
-                poseStack.translate(-0.5, 0.0, -0.5);
-                renderer.render(floatingBlock.blockEntityDummy, floatingBlock.partialTick, poseStack, buffer, packedLightIn, OverlayTexture.NO_OVERLAY);
-                poseStack.popPose();
-                super.render(floatingBlock, poseStack, buffer, packedLightIn);
-            }
         }
     }
 
@@ -68,9 +68,12 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
         BlockState blockState = floatingBlock.getBlockState();
 
         if (blockState.hasBlockEntity() && blockState.getBlock() instanceof BaseEntityBlock baseEntityBlock) {
-            if (renderState.blockEntityDummy == null) {
-                renderState.blockEntityDummy = baseEntityBlock.newBlockEntity(BlockPos.ZERO, blockState);
+            renderState.blockEntityDummy = baseEntityBlock.newBlockEntity(BlockPos.ZERO, blockState);
+            if (renderState.blockEntityDummy != null) {
+                renderState.blockEntityDummy.setLevel(floatingBlock.level());
             }
+        } else {
+            renderState.blockEntityDummy = null;
         }
 
         BlockPos blockpos = BlockPos.containing(floatingBlock.getX(), floatingBlock.getBoundingBox().maxY, floatingBlock.getZ());
