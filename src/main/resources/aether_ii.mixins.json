@@ -8,6 +8,7 @@
     "client.accessor.WeatherEffectRendererAccessor",
     "common.AttributeUtilMixin",
     "common.BlockBehaviourMixin",
+    "common.BoneMealItemMixin",
     "common.EntityMixin",
     "common.HeightmapTypesMixin",
     "common.ItemCooldownsMixin",
