@@ -1,13 +1,27 @@
 {
   "entries": {
+    "aether_ii:burrukai_pelt_boots": 5,
+    "aether_ii:burrukai_pelt_chestplate": 5,
+    "aether_ii:burrukai_pelt_gloves": 5,
+    "aether_ii:burrukai_pelt_helmet": 5,
+    "aether_ii:burrukai_pelt_leggings": 5,
+    "aether_ii:cloudwool": 5,
+    "aether_ii:hide_bundle": 5,
     "aether_ii:skyroot_axe": 5,
     "aether_ii:skyroot_chest": 5,
     "aether_ii:skyroot_crafting_table": 5,
+    "aether_ii:skyroot_hammer": 5,
     "aether_ii:skyroot_ladder": 5,
     "aether_ii:skyroot_pickaxe": 5,
     "aether_ii:skyroot_shovel": 5,
+    "aether_ii:skyroot_spear": 5,
     "aether_ii:skyroot_stick": 5,
     "aether_ii:skyroot_sword": 5,
-    "aether_ii:skyroot_trowel": 5
+    "aether_ii:skyroot_trowel": 5,
+    "aether_ii:taegore_hide_boots": 5,
+    "aether_ii:taegore_hide_chestplate": 5,
+    "aether_ii:taegore_hide_gloves": 5,
+    "aether_ii:taegore_hide_helmet": 5,
+    "aether_ii:taegore_hide_leggings": 5
   }
 }

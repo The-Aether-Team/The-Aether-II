@@ -743,6 +743,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GRAVITITE_ORE.asItem()
         );
         this.tag(Tags.Items.RODS_WOODEN).add(AetherIIItems.SKYROOT_STICK.get());
+        this.tag(Tags.Items.STRINGS).add(AetherIIItems.CLOUDTWINE.get());
+        this.tag(Tags.Items.LEATHERS).addTag(
+                AetherIITags.Items.ANIMALS_FURS
+        );
         this.tag(Tags.Items.FEATHERS).add(
                 AetherIIItems.MOA_FEATHER.get(),
                 AetherIIItems.COCKATRICE_FEATHER.get()
