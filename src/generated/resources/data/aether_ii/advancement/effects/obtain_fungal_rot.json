@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "obtain_fungal_rot": {
+      "conditions": {
+        "effects": {
+          "aether_ii:fungal_rot": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_fungal_rot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

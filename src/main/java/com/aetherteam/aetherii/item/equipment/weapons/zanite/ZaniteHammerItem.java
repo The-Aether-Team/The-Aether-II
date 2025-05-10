@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.weapons.zanite;
 
-import com.aetherteam.aetherii.AetherIIDamageStats;
+import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredHammerItem;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class ZaniteHammerItem extends TieredHammerItem implements ZaniteWeapon {
     public ZaniteHammerItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.ZANITE, 3, -2.4F, AetherIIDamageStats.ZANITE_HAMMER));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.ZANITE, 3, -2.4F, AetherIIStats.ZANITE_HAMMER));
     }
 
     @Override

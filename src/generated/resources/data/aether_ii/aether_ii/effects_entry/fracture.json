@@ -1,0 +1,16 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.fracture",
+  "effect": "aether_ii:fracture",
+  "icon": "minecraft:fracture",
+  "id": "aether_ii:fracture",
+  "items": [
+    {
+      "item": "aether_ii:bandage"
+    },
+    {
+      "item": "aether_ii:splint"
+    }
+  ],
+  "name": "effect.aether_ii.fracture",
+  "slot_name": "effect.aether_ii.fracture"
+}

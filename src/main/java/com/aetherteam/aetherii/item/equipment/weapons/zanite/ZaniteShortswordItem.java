@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.weapons.zanite;
 
-import com.aetherteam.aetherii.AetherIIDamageStats;
+import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredShortswordItem;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class ZaniteShortswordItem extends TieredShortswordItem implements ZaniteWeapon {
     public ZaniteShortswordItem(Properties properties) {
-        super(applyWeaponProperties(properties, AetherIIItemTiers.ZANITE, 3, -2.4F, AetherIIDamageStats.ZANITE_SHORTSWORD));
+        super(applyWeaponProperties(properties, AetherIIItemTiers.ZANITE, 3, -2.4F, AetherIIStats.ZANITE_SHORTSWORD));
     }
 
     @Override

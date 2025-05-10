@@ -1,0 +1,9 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.saturation_boost",
+  "effect": "aether_ii:saturation_boost",
+  "icon": "minecraft:saturation_boost",
+  "id": "aether_ii:saturation_boost",
+  "items": [],
+  "name": "effect.aether_ii.saturation_boost",
+  "slot_name": "effect.aether_ii.saturation_boost"
+}

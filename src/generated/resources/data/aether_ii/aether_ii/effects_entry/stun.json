@@ -1,0 +1,13 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.stun",
+  "effect": "aether_ii:stun",
+  "icon": "minecraft:stun",
+  "id": "aether_ii:stun",
+  "items": [
+    {
+      "item": "aether_ii:bandage"
+    }
+  ],
+  "name": "effect.aether_ii.stun",
+  "slot_name": "effect.aether_ii.stun"
+}

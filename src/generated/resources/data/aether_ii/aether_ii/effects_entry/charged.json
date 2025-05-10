@@ -1,0 +1,9 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.charged",
+  "effect": "aether_ii:charged",
+  "icon": "minecraft:charged",
+  "id": "aether_ii:charged",
+  "items": [],
+  "name": "effect.aether_ii.charged",
+  "slot_name": "effect.aether_ii.charged"
+}
