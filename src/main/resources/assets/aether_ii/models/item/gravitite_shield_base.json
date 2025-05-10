@@ -13,7 +13,8 @@
 		"8": "aether_ii:item/shields/gravitite_shield/gravitite_wing_lefta",
 		"9": "aether_ii:item/shields/gravitite_shield/gravitite_wing_leftb",
 		"10": "aether_ii:item/shields/gravitite_shield/gravitite_wing_leftc",
-		"11": "aether_ii:item/shields/gravitite_shield/gravitite_center_mid"
+		"11": "aether_ii:item/shields/gravitite_shield/gravitite_center_mid",
+		"particle": "#0"
 	},
 	"elements": [
 		{

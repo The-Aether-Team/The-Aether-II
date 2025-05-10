@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "obtain_frostbite": {
+      "conditions": {
+        "effects": {
+          "aether_ii:frostbite": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_frostbite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

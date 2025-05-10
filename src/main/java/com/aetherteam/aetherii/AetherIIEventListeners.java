@@ -19,12 +19,12 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.portal.TeleportTransition;
@@ -40,6 +40,7 @@ import net.neoforged.neoforge.event.level.SleepFinishedTimeEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 
@@ -51,6 +52,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onPlayerRespawn);
         bus.addListener(AetherIIEventListeners::onPlayerPositionRespawn);
         bus.addListener(AetherIIEventListeners::onPlayerClone);
+        bus.addListener(AetherIIEventListeners::onPlayerChangedDimension);
         bus.addListener(AetherIIEventListeners::onPlayerPostTick);
         bus.addListener(AetherIIEventListeners::onPlayerRightClickBlock);
         bus.addListener(AetherIIEventListeners::onPlayerEntityInteractSpecific);
@@ -68,6 +70,7 @@ public class AetherIIEventListeners {
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
         bus.addListener(AetherIIEventListeners::onLivingBlockAttack);
         bus.addListener(AetherIIEventListeners::onLivingItemUsed);
+        bus.addListener(AetherIIEventListeners::onLivingDrops);
         bus.addListener(AetherIIEventListeners::onEffectRemove);
 
         // Block
@@ -112,9 +115,18 @@ public class AetherIIEventListeners {
     }
 
     public static void onPlayerClone(PlayerEvent.Clone event) {
+        Player original = event.getOriginal();
+        Player player = event.getEntity();
+        boolean wasDeath = event.isWasDeath();
+
+        player.getData(AetherIIDataAttachments.CURRENCY).clone(original, player, wasDeath);
+        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).clone(player);
+    }
+
+    public static void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
         Player player = event.getEntity();
 
-        player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).clone(player);
+        player.getData(AetherIIDataAttachments.PLAYER).changeDimension(player);
     }
 
     public static void onPlayerPostTick(PlayerTickEvent.Post event) {
@@ -304,6 +316,15 @@ public class AetherIIEventListeners {
         LivingEntity entity = event.getEntity();
         if (!BlockHooks.canBreathe(entity)) {
             event.setCanBreathe(false);
+        }
+    }
+
+    public static void onLivingDrops(LivingDropsEvent event) {
+        LivingEntity entity = event.getEntity();
+        Collection<ItemEntity> drops = event.getDrops();
+
+        if (entity instanceof Player player) {
+            player.getData(AetherIIDataAttachments.CURRENCY).dropAll(player, drops);
         }
     }
 

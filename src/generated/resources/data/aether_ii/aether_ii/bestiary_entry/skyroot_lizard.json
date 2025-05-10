@@ -1,8 +1,14 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.skyroot_lizard",
+  "effect_resistances": [],
   "entity_type": "aether_ii:skyroot_lizard",
-  "icon_discovered": "aether_ii:guidebook/bestiary/skyroot_lizard",
-  "loot": [],
-  "observation_advancement": "aether_ii:bestiary/observe_skyroot_lizard",
-  "understanding_advancement": "aether_ii:bestiary/understand_skyroot_lizard"
+  "health": 0,
+  "icon": "aether_ii:guidebook/bestiary/skyroot_lizard",
+  "id": "aether_ii:skyroot_lizard",
+  "impact_defense": 0,
+  "loot_slots": [],
+  "name": "entity.aether_ii.skyroot_lizard",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.skyroot_lizard"
 }

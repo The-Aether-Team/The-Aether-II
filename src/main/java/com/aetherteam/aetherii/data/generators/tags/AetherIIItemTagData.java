@@ -9,6 +9,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -400,6 +401,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ARKENIUM_PLATES.get());
 
         // Vanilla
+        this.tag(ItemTags.PLANKS).add(
+                AetherIIBlocks.SKYROOT_PLANKS.asItem(),
+                AetherIIBlocks.GREATROOT_PLANKS.asItem(),
+                AetherIIBlocks.WISPROOT_PLANKS.asItem()
+        );
         this.tag(ItemTags.WOOL).add(
                 AetherIIBlocks.CLOUDWOOL.asItem(),
                 AetherIIBlocks.WHITE_CLOUDWOOL.asItem(),
@@ -741,6 +747,10 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIBlocks.GRAVITITE_ORE.asItem()
         );
         this.tag(Tags.Items.RODS_WOODEN).add(AetherIIItems.SKYROOT_STICK.get());
+        this.tag(Tags.Items.STRINGS).add(AetherIIItems.CLOUDTWINE.get());
+        this.tag(Tags.Items.LEATHERS).addTag(
+                AetherIITags.Items.ANIMALS_FURS
+        );
         this.tag(Tags.Items.FEATHERS).add(
                 AetherIIItems.MOA_FEATHER.get(),
                 AetherIIItems.COCKATRICE_FEATHER.get()

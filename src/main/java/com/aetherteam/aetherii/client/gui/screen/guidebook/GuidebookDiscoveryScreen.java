@@ -28,7 +28,7 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
     private final ExplorationSection explorationSection;
     protected int titleLabelX;
     protected int titleLabelY;
-    protected DiscoverySection<?> currentSection;
+    protected DiscoverySection<?, ?> currentSection;
 
     protected GuidebookDiscoveryScreen(GuidebookEquipmentMenu menu, Inventory playerInventory, Component title) {
         super(title);
@@ -62,7 +62,9 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         x += 43;
         this.addRenderableWidget(new SectionTab(this, this.explorationSection, x, y, 42, 19, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/icon_exploration")));
 
-        this.currentSection.initSection();
+        this.bestiarySection.initSection();
+        this.effectsSection.initSection();
+        this.explorationSection.initSection();
     }
 
     @Override
@@ -152,11 +154,11 @@ public class GuidebookDiscoveryScreen extends Screen implements Guidebook {
         return false;
     }
 
-    public void setCurrentSectionTab(DiscoverySection<?> currentSection) {
+    public void setCurrentSectionTab(DiscoverySection<?, ?> currentSection) {
         this.currentSection = currentSection;
     }
 
-    public DiscoverySection<?> getCurrentSection() {
+    public DiscoverySection<?, ?> getCurrentSection() {
         return this.currentSection;
     }
 

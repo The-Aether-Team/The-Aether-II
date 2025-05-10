@@ -333,6 +333,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> ENCHANTED_MOA_FEED = register("enchanted_moa_feed");
     public static final DeferredItem<Item> MOA_SADDLE = register("moa_saddle", MoaSaddleItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> GLINT_COIN = register("glint_coin", (properties) -> new CurrencyItem(1, properties));
+    public static final DeferredItem<Item> GUIDEBOOK_PAGE = register("guidebook_page", GuidebookPageItem::new, () -> new Item.Properties().stacksTo(1));
     public static final DeferredItem<Item> AETHER_PORTAL_FRAME = register("aether_portal_frame", AetherPortalItem::new, () -> new Item.Properties().stacksTo(1));
 
     private static <T extends Item> DeferredItem<Item> register(String name) {

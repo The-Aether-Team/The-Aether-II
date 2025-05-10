@@ -14,10 +14,10 @@ public class SectionTab extends ImageButton {
     public static WidgetSprites SECTION_TAB = new WidgetSprites(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/page_section_tab"), ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/page_section_tab_selected"));
 
     private final GuidebookDiscoveryScreen currentScreen;
-    private final DiscoverySection<?> section;
+    private final DiscoverySection<?, ?> section;
     private final ResourceLocation icon;
 
-    public SectionTab(GuidebookDiscoveryScreen currentScreen, DiscoverySection<?> section, int x, int y, int width, int height, ResourceLocation icon) {
+    public SectionTab(GuidebookDiscoveryScreen currentScreen, DiscoverySection<?, ?> section, int x, int y, int width, int height, ResourceLocation icon) {
         super(x, y, width, height, SECTION_TAB, (button) -> {
             if (currentScreen.getCurrentSection() != section) {
                 currentScreen.setCurrentSectionTab(section);

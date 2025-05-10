@@ -1,16 +1,24 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.moa",
+  "effect_resistances": [],
   "entity_type": "aether_ii:moa",
   "food": "aether_ii:moa_food",
-  "icon_discovered": "aether_ii:guidebook/bestiary/moa",
-  "loot": [
+  "health": 35,
+  "icon": "aether_ii:guidebook/bestiary/moa",
+  "id": "aether_ii:moa",
+  "impact_defense": 2,
+  "loot_slots": [
     {
-      "chance": 1.0,
-      "item": "minecraft:feather",
-      "max_count": 2,
-      "min_count": 0
+      "loot": {
+        "chance": 1.0,
+        "item": "minecraft:feather",
+        "max_count": 2,
+        "min_count": 0
+      }
     }
   ],
-  "observation_advancement": "aether_ii:bestiary/observe_moa",
-  "understanding_advancement": "aether_ii:bestiary/understand_moa"
+  "name": "entity.aether_ii.moa",
+  "pierce_defense": -2,
+  "slash_defense": 2,
+  "slot_name": "entity.aether_ii.moa"
 }
