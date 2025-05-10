@@ -943,7 +943,6 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.WISPROOT_BASE_BEAM.get(),
                 AetherIIBlocks.WISPROOT_TOP_BEAM.get(),
                 AetherIIBlocks.WISPROOT_BEAM.get(),
-                AetherIIBlocks.SKYROOT_BED.get(),
                 AetherIIBlocks.SKYROOT_SIGN.get(),
                 AetherIIBlocks.SKYROOT_WALL_SIGN.get(),
                 AetherIIBlocks.SKYROOT_HANGING_SIGN.get(),

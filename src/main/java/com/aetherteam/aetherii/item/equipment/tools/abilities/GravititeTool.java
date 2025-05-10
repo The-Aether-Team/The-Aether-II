@@ -39,7 +39,7 @@ public interface GravititeTool {
                             if (blockState.hasBlockEntity()) {
                                 BlockEntity blockEntity = level.getBlockEntity(blockPos);
                                 if (blockEntity != null) {
-                                    floatingBlockEntity.blockData = blockEntity.saveWithoutMetadata(level.registryAccess());
+                                    floatingBlockEntity.setBlockEntityData(blockEntity.saveWithoutMetadata(level.registryAccess()));
                                 }
                             }
                             floatingBlockEntity.setHoldingPlayer(player);
