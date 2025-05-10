@@ -1013,6 +1013,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("treasure.description", "Treasure Item");
         this.addItemTooltip("currency.description", "Converts to Currency:");
         this.addItemTooltip("currency.amount", "%s Glint");
+        this.addItemTooltip("curative.removes", "Removes: %s");
+        this.addItemTooltip("curative.reduces", "Reduces: %s");
         this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
 
         // Moa Egg Tooltips
@@ -1148,6 +1150,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.SLASH_DAMAGE.get(), "§9Slash§r Damage");
         this.addAttribute(AetherIIAttributes.IMPACT_DAMAGE.get(), "§eImpact§r Damage");
         this.addAttribute(AetherIIAttributes.PIERCE_DAMAGE.get(), "§cPierce§r Damage");
+        this.addAttribute(AetherIIAttributes.SLASH_RANGED_DAMAGE.get(), "Ranged §9Slash§r Damage");
+        this.addAttribute(AetherIIAttributes.IMPACT_RANGED_DAMAGE.get(), "Ranged §eImpact§r Damage");
+        this.addAttribute(AetherIIAttributes.PIERCE_RANGED_DAMAGE.get(), "Ranged §cPierce§r Damage");
         this.addAttribute(AetherIIAttributes.SLASH_RESISTANCE.get(), "§9Slash§r Resistance");
         this.addAttribute(AetherIIAttributes.IMPACT_RESISTANCE.get(), "§eImpact§r Resistance");
         this.addAttribute(AetherIIAttributes.PIERCE_RESISTANCE.get(), "§cPierce§r Resistance");
@@ -1175,6 +1180,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.FROSTBITE_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.FUNGAL_ROT_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.CRYSTALLIZED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.SATURATION_BOOST.get(), "Food Saturation");
 
 
         // Effects

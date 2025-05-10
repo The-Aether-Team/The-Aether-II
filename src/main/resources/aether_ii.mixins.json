@@ -44,6 +44,8 @@
     "client.LayerRenderStateMixin",
     "client.LevelRendererMixin",
     "client.LiquidBlockRendererMixin",
+    "client.LocalPlayerMixin",
+    "client.PlayerRendererMixin",
     "client.accessor.DeathScreenAccessor",
     "client.accessor.EditBoxAccessor",
     "client.accessor.GuiAccessor",

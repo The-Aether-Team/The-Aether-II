@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.effect;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.effect.beneficial.SaturationBoostEffect;
 import com.aetherteam.aetherii.effect.harmful.*;
+import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
@@ -16,7 +17,8 @@ public class AetherIIEffects {
     public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, AetherII.MODID);
 
     // Beneficial
-    public static final DeferredHolder<MobEffect, MobEffect> SATURATION_BOOST = EFFECTS.register("saturation_boost", SaturationBoostEffect::new);
+    public static final DeferredHolder<MobEffect, MobEffect> SATURATION_BOOST = EFFECTS.register("saturation_boost", () -> new SaturationBoostEffect()
+            .addAttributeModifier(AetherIIAttributes.SATURATION_BOOST, ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect.saturation_boost.double_saturation"), 1.0F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
     // Harmful
     public static final DeferredHolder<MobEffect, MobEffect> WOUND = EFFECTS.register("wound", WoundEffect::new);
