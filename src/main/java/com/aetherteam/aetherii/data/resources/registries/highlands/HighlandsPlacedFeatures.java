@@ -28,6 +28,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 
@@ -73,6 +74,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TREE_MOSS_COVER = createKey("tree_moss_cover");
 
     public static final ResourceKey<PlacedFeature> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
+    public static final ResourceKey<PlacedFeature> ARILUM_BONEMEAL = createKey("arilum_bonemeal");
 
 
     // Trees
@@ -436,6 +438,7 @@ public class HighlandsPlacedFeatures {
         register(context, TREE_MOSS_COVER, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.TREE_MOSS_COVER));
 
         register(context, AETHER_GRASS_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.AETHER_GRASS_BONEMEAL), PlacementUtils.isEmpty());
+        register(context, ARILUM_BONEMEAL, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ARILUM_BONEMEAL), BlockPredicateFilter.forPredicate(BlockPredicate.matchesBlocks(Blocks.WATER)));
     }
 
     public static void bootstrapTrees(BootstrapContext<PlacedFeature> context) {

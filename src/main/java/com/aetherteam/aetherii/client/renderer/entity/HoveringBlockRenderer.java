@@ -22,8 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
 public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, HoveringBlockEntityRenderState> {
-
-
     public HoveringBlockRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.shadowRadius = 0.5F;
@@ -44,7 +42,8 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
             }
             poseStack.popPose();
             super.render(floatingBlock, poseStack, buffer, packedLightIn);
-        } else if (floatingBlock.blockEntityDummy != null) {
+        }
+        if (floatingBlock.blockEntityDummy != null) {
             BlockEntityRenderer<BlockEntity> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(floatingBlock.blockEntityDummy);
             if (renderer != null) {
                 poseStack.pushPose();
@@ -68,9 +67,15 @@ public class HoveringBlockRenderer extends EntityRenderer<HoveringBlockEntity, H
         BlockState blockState = floatingBlock.getBlockState();
 
         if (blockState.hasBlockEntity() && blockState.getBlock() instanceof BaseEntityBlock baseEntityBlock) {
-            if (renderState.blockEntityDummy == null) {
-                renderState.blockEntityDummy = baseEntityBlock.newBlockEntity(BlockPos.ZERO, blockState);
+            renderState.blockEntityDummy = baseEntityBlock.newBlockEntity(BlockPos.ZERO, blockState);
+            if (renderState.blockEntityDummy != null) {
+                renderState.blockEntityDummy.setLevel(floatingBlock.level());
+                if (floatingBlock.getBlockEntityData() != null) {
+                    renderState.blockEntityDummy.loadWithComponents(floatingBlock.getBlockEntityData(), floatingBlock.registryAccess());
+                }
             }
+        } else {
+            renderState.blockEntityDummy = null;
         }
 
         BlockPos blockpos = BlockPos.containing(floatingBlock.getX(), floatingBlock.getBoundingBox().maxY, floatingBlock.getZ());

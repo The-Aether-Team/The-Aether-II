@@ -39,11 +39,10 @@ import java.util.function.Predicate;
 
 public class HoveringBlockEntity extends Entity {
     private static final EntityDataAccessor<Integer> DATA_OWNER_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<BlockPos> DATA_START_POS = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.BLOCK_POS);
+    private static final EntityDataAccessor<BlockPos> DATA_START_POS_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.BLOCK_POS);
+    private static final EntityDataAccessor<CompoundTag> DATA_BLOCK_ENTITY_DATA_ID = SynchedEntityData.defineId(HoveringBlockEntity.class, EntityDataSerializers.COMPOUND_TAG);
 
     private BlockState blockState = Blocks.SAND.defaultBlockState();
-    @Nullable
-    public CompoundTag blockData;
     protected boolean held = true;
     protected boolean launched;
     protected int launchDuration;
@@ -72,7 +71,8 @@ public class HoveringBlockEntity extends Entity {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(DATA_OWNER_ID, -1);
-        builder.define(DATA_START_POS, BlockPos.ZERO);
+        builder.define(DATA_START_POS_ID, BlockPos.ZERO);
+        builder.define(DATA_BLOCK_ENTITY_DATA_ID, new CompoundTag());
     }
 
     @Override
@@ -146,11 +146,10 @@ public class HoveringBlockEntity extends Entity {
 
     private void markShouldSettle() {
         Predicate<BlockPos> findPos = (pos) -> {
-            var state = level().getBlockState(pos);
-
-            if (state.is(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST))
+            var state = this.level().getBlockState(pos);
+            if (state.is(AetherIITags.Blocks.HOVERING_BLOCK_REPLACE_BLACKLIST)) {
                 return false;
-
+            }
             return state.getCollisionShape(level(), pos).isEmpty();
         };
 
@@ -167,22 +166,23 @@ public class HoveringBlockEntity extends Entity {
     private void settleBlock() {
         Vec3 currentPos = this.position();
         Vec3 motion = this.targetSettlePosition.subtract(currentPos);
+        BlockPos newPos = BlockPos.containing(this.targetSettlePosition.x(), this.targetSettlePosition.y(), this.targetSettlePosition.z());
         this.setDeltaMovement(motion);
         if (this.position().distanceTo(this.targetSettlePosition) <= 0.001) {
             if (!this.level().isClientSide()) {
-                BlockState levelState = this.level().getBlockState(this.blockPosition());
+                BlockState levelState = this.level().getBlockState(newPos);
                 if (!levelState.isAir()) {
-                    this.level().destroyBlock(this.blockPosition(), true);
+                    this.level().destroyBlock(newPos, true);
                 }
-                this.level().setBlock(this.blockPosition(), this.blockState, 2);
-                levelState = this.level().getBlockState(this.blockPosition());
+                this.level().setBlock(newPos, this.blockState, 2);
+                levelState = this.level().getBlockState(newPos);
                 if (levelState.is(this.getBlockState().getBlock())) {
-                    if (this.blockData != null && this.getBlockState().hasBlockEntity()) {
-                        BlockEntity blockEntity = this.level().getBlockEntity(this.blockPosition());
+                    if (this.getBlockEntityData() != null && this.getBlockState().hasBlockEntity()) {
+                        BlockEntity blockEntity = this.level().getBlockEntity(newPos);
                         if (blockEntity != null) {
                             CompoundTag tag = blockEntity.saveWithoutMetadata(this.level().registryAccess());
-                            for (String string : this.blockData.getAllKeys()) {
-                                Tag blockDataTag = this.blockData.get(string);
+                            for (String string : this.getBlockEntityData().getAllKeys()) {
+                                Tag blockDataTag = this.getBlockEntityData().get(string);
                                 if (blockDataTag != null) {
                                     tag.put(string, blockDataTag.copy());
                                 }
@@ -232,11 +232,19 @@ public class HoveringBlockEntity extends Entity {
     }
 
     public void setStartPos(BlockPos pStartPos) {
-        this.entityData.set(DATA_START_POS, pStartPos);
+        this.entityData.set(DATA_START_POS_ID, pStartPos);
     }
 
     public BlockPos getStartPos() {
-        return this.entityData.get(DATA_START_POS);
+        return this.entityData.get(DATA_START_POS_ID);
+    }
+
+    public void setBlockEntityData(CompoundTag tag) {
+        this.entityData.set(DATA_BLOCK_ENTITY_DATA_ID, tag);
+    }
+
+    public CompoundTag getBlockEntityData() {
+        return this.entityData.get(DATA_BLOCK_ENTITY_DATA_ID);
     }
 
     public BlockState getBlockState() {
@@ -270,8 +278,8 @@ public class HoveringBlockEntity extends Entity {
     @Override
     protected void addAdditionalSaveData(CompoundTag tag) {
         tag.put("BlockState", NbtUtils.writeBlockState(this.blockState));
-        if (this.blockData != null) {
-            tag.put("TileEntityData", this.blockData);
+        if (this.getBlockEntityData() != null) {
+            tag.put("TileEntityData", this.getBlockEntityData());
         }
     }
 
@@ -281,7 +289,7 @@ public class HoveringBlockEntity extends Entity {
             this.blockState = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), tag.getCompound("BlockState"));
         }
         if (tag.contains("TileEntityData", 10)) {
-            this.blockData = tag.getCompound("TileEntityData");
+            this.setBlockEntityData(tag.getCompound("TileEntityData"));
         }
         if (this.blockState.isAir()) {
             this.blockState = Blocks.SAND.defaultBlockState();

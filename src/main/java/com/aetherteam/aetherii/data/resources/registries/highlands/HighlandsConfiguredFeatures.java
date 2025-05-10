@@ -104,6 +104,7 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TREE_MOSS_COVER = createKey("tree_moss_cover");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> AETHER_GRASS_BONEMEAL = createKey("aether_grass_bonemeal");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARILUM_BONEMEAL = createKey("arilum_bonemeal");
 
 
     // Trees
@@ -693,6 +694,19 @@ public class HighlandsConfiguredFeatures {
                 .add(AetherIIBlocks.AETHER_MEDIUM_GRASS.get().defaultBlockState(), 1)
                 .add(AetherIIBlocks.AETHER_LONG_GRASS.get().defaultBlockState(), 1)
         )));
+        register(context, ARILUM_BONEMEAL, Feature.RANDOM_SELECTOR, new RandomFeatureConfiguration(List.of(
+                new WeightedPlacedFeature(PlacementUtils.inlinePlaced(
+                        AetherIIFeatures.ARILUM.get(),
+                        new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.ARILUM_PLANT.get()), UniformInt.of(1, 8), ConstantInt.of(0)),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER)))
+                ), 0.5F)),
+                PlacementUtils.inlinePlaced(
+                        AetherIIFeatures.ARILUM.get(),
+                        new ArilumConfiguration(SimpleStateProvider.simple(AetherIIBlocks.BLOOMING_ARILUM.get()), SimpleStateProvider.simple(AetherIIBlocks.BLOOMING_ARILUM_PLANT.get()), UniformInt.of(1, 3), UniformInt.of(4, 6)),
+                        BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.matchesTag(BlockPos.ZERO.below(), AetherIITags.Blocks.ARILUM_SURVIVES_ON), BlockPredicate.matchesBlocks(Blocks.WATER))))
+                )
+        );
+
     }
 
     private static void bootstrapTrees(BootstrapContext<ConfiguredFeature<?, ?>> context) {

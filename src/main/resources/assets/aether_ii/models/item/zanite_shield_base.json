@@ -11,7 +11,8 @@
 		"6": "aether_ii:item/shields/zanite_shield/zanite_wing_righta",
 		"7": "aether_ii:item/shields/zanite_shield/zanite_wing_rightb",
 		"8": "aether_ii:item/shields/zanite_shield/zanite_wing_lefta",
-		"9": "aether_ii:item/shields/zanite_shield/zanite_wing_leftb"
+		"9": "aether_ii:item/shields/zanite_shield/zanite_wing_leftb",
+		"particle": "#0"
 	},
 	"elements": [
 		{
