@@ -8,11 +8,11 @@ import com.aetherteam.aetherii.block.natural.AetherGrassBlock;
 import com.aetherteam.aetherii.block.natural.Snowable;
 import com.aetherteam.aetherii.block.portal.AetherPortalShape;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.attributes.AetherIIAttributes;
 import com.aetherteam.aetherii.entity.passive.FlyingCow;
 import com.aetherteam.aetherii.entity.passive.MountableAnimal;
 import com.aetherteam.aetherii.item.AetherIIItems;
+import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.miscellaneous.bucket.SkyrootBucketItem;
 import com.aetherteam.aetherii.world.LevelUtil;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -28,10 +28,9 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.Cow;
@@ -52,6 +51,16 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class PlayerHooks {
+    public static void forceSpecialLoadingCrouch(Player player) {
+        ItemStack useStack = player.getUseItem();
+        Boolean special = useStack.get(AetherIIDataComponents.CROSSBOW_SPECIAL);
+        if (special != null && special) {
+            if (!player.getAbilities().flying && !player.isSwimming() && !player.isPassenger()) {
+                player.setPose(Pose.CROUCHING);
+            }
+        }
+    }
+
     public static boolean playerActivatePortal(Player player, Level level, BlockPos pos, @Nullable Direction direction, ItemStack stack, InteractionHand hand, boolean cancellationStatus) {
         if (direction != null) {
             BlockPos relativePos = pos.relative(direction);

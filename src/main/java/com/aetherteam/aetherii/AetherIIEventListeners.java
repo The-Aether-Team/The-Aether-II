@@ -125,6 +125,7 @@ public class AetherIIEventListeners {
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.SWET).postTickUpdate(player);
+        PlayerHooks.forceSpecialLoadingCrouch(player);
     }
 
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
