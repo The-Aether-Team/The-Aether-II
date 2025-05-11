@@ -197,7 +197,8 @@ public class InfectedGuardianTreePools {
         context.register(SIDE_CORRIDORS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_01", processorDungeon), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_01", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_02", processorDungeon), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -214,7 +215,8 @@ public class InfectedGuardianTreePools {
         context.register(ROOM_CORRIDORS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/room/corridor_01", processorDungeon), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/room/corridor_01", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/room/corridor_02", processorDungeon), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -222,7 +224,9 @@ public class InfectedGuardianTreePools {
         context.register(STAIRCASE_1, new StructureTemplatePool(
                 templatePools.getOrThrow(LOBBIES_1),
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/staircase_01", "infected_guardian_tree/floor_1/lobby_01_a", processorDungeon, 96), 1)
+                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_a", processorDungeon, 96), 1),
+                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_b", processorDungeon, 96), 1),
+                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_c", processorDungeon, 96), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
