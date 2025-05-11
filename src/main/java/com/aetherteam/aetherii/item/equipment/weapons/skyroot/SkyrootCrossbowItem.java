@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.weapons.skyroot;
 
-import com.aetherteam.aetherii.AetherIIDamageStats;
+import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.weapons.TieredCrossbowItem;
@@ -11,7 +11,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class SkyrootCrossbowItem extends TieredCrossbowItem {
     public SkyrootCrossbowItem(Properties properties) {
-        super(AetherIIItemTiers.SKYROOT, properties.attributes(new ItemAttributeModifiers(AetherIIDamageStats.SKYROOT_CROSSBOW, true)));
+        super(AetherIIItemTiers.SKYROOT, properties.attributes(new ItemAttributeModifiers(AetherIIStats.SKYROOT_CROSSBOW, true)));
     }
 
     @Override

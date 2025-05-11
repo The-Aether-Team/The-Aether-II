@@ -17,19 +17,23 @@ public class AetherIIStats {
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_SHORTSWORD = List.of(slashDamageModifer(3.0));
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_HAMMER = List.of(impactDamageModifer(3.0));
     public static final List<ItemAttributeModifiers.Entry> SKYROOT_SPEAR = List.of(pierceDamageModifer(3.0));
+    public static final List<ItemAttributeModifiers.Entry> SKYROOT_CROSSBOW = List.of(rangedPierceDamageModifer(2.0));
     public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_SHORTSWORD = List.of(slashDamageModifer(4.0));
     public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_HAMMER = List.of(impactDamageModifer(4.0));
     public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_SPEAR = List.of(pierceDamageModifer(4.0));
+    public static final List<ItemAttributeModifiers.Entry> HOLYSTONE_CROSSBOW = List.of(rangedPierceDamageModifer(3.0));
     public static final List<ItemAttributeModifiers.Entry> ZANITE_SHORTSWORD = List.of(slashDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ZANITE_HAMMER = List.of(impactDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ZANITE_SPEAR = List.of(pierceDamageModifer(5.0));
+    public static final List<ItemAttributeModifiers.Entry> ZANITE_CROSSBOW = List.of(rangedPierceDamageModifer(4.0));
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_SHORTSWORD = List.of(slashDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_HAMMER = List.of(impactDamageModifer(5.0));
     public static final List<ItemAttributeModifiers.Entry> ARKENIUM_SPEAR = List.of(pierceDamageModifer(5.0));
-    public static final List<ItemAttributeModifiers.Entry> ARKENIUM_CROSSBOW = List.of(pierceDamageModifer(2.0));
+    public static final List<ItemAttributeModifiers.Entry> ARKENIUM_CROSSBOW = List.of(pierceDamageModifer(2.0), rangedPierceDamageModifer(4.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SHORTSWORD = List.of(slashDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_HAMMER = List.of(impactDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SPEAR = List.of(pierceDamageModifer(6.0));
+    public static final List<ItemAttributeModifiers.Entry> GRAVITITE_CROSSBOW = List.of(rangedPierceDamageModifer(5.0));
 
     public static final ImmutableMap<Holder<Attribute>, Double> AERBUNNY = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 6.0)
@@ -145,12 +149,24 @@ public class AetherIIStats {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.SLASH_DAMAGE, new AttributeModifier(AetherIIItems.BASE_SLASH_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
     }
 
+    private static ItemAttributeModifiers.Entry rangedSlashDamageModifer(double amount) {
+        return new ItemAttributeModifiers.Entry(AetherIIAttributes.SLASH_RANGED_DAMAGE, new AttributeModifier(AetherIIItems.BASE_SLASH_RANGED_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND);
+    }
+
     private static ItemAttributeModifiers.Entry impactDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.IMPACT_DAMAGE, new AttributeModifier(AetherIIItems.BASE_IMPACT_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
     }
 
+    private static ItemAttributeModifiers.Entry rangedImpactDamageModifer(double amount) {
+        return new ItemAttributeModifiers.Entry(AetherIIAttributes.IMPACT_RANGED_DAMAGE, new AttributeModifier(AetherIIItems.BASE_IMPACT_RANGED_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND);
+    }
+
     private static ItemAttributeModifiers.Entry pierceDamageModifer(double amount) {
         return new ItemAttributeModifiers.Entry(AetherIIAttributes.PIERCE_DAMAGE, new AttributeModifier(AetherIIItems.BASE_PIERCE_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+    }
+
+    private static ItemAttributeModifiers.Entry rangedPierceDamageModifer(double amount) {
+        return new ItemAttributeModifiers.Entry(AetherIIAttributes.PIERCE_RANGED_DAMAGE, new AttributeModifier(AetherIIItems.BASE_PIERCE_RANGED_DAMAGE_ID, amount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.HAND);
     }
 
     public static ItemAttributeModifiers merge(ItemAttributeModifiers modifiers, List<ItemAttributeModifiers.Entry> add) {
