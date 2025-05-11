@@ -82,11 +82,9 @@ public class Cockatrice extends Monster implements RangedAttackMob {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 25.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
-                .add(Attributes.ATTACK_DAMAGE, 4.0)
-                .add(AetherIIAttributes.VENOM_EFFECT_RESISTANCE, 1.0);
+                .add(Attributes.ATTACK_DAMAGE, 4.0);
     }
 
     @Override

@@ -6,8 +6,11 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntr
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-public class ExplorationSection extends DiscoverySection<ExplorationEntry> {
+import java.util.List;
+
+public class ExplorationSection extends DiscoverySection<ExplorationEntry, ExplorationEntry.Mutable> {
     public ExplorationSection(RegistryAccess registryAccess, GuidebookDiscoveryScreen screen, Component title) {
         super(registryAccess, AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY, screen, title);
     }
@@ -20,5 +23,15 @@ public class ExplorationSection extends DiscoverySection<ExplorationEntry> {
     @Override
     public void renderInformation(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
+    }
+
+    @Override
+    protected CustomPacketPayload getViewedPacket(ExplorationEntry.Mutable entry) {
+        return null;
+    }
+
+    @Override
+    protected List<ExplorationEntry.Mutable> getOrderedEntries() {
+        return List.of();
     }
 }

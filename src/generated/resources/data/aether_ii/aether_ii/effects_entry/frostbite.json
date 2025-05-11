@@ -1,0 +1,9 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.frostbite",
+  "effect": "aether_ii:frostbite",
+  "icon": "minecraft:frostbite",
+  "id": "aether_ii:frostbite",
+  "items": [],
+  "name": "effect.aether_ii.frostbite",
+  "slot_name": "effect.aether_ii.frostbite"
+}

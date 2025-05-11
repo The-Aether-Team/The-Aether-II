@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.equipment.weapons.zanite;
 
+import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.equipment.AetherIIItemTiers;
 import com.aetherteam.aetherii.item.equipment.tools.abilities.ZaniteTool;
@@ -8,11 +9,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 
 public class ZaniteCrossbowItem extends TieredCrossbowItem implements ZaniteTool {
     public ZaniteCrossbowItem(Properties properties) {
-        super(AetherIIItemTiers.ZANITE, properties);
+        super(AetherIIItemTiers.ZANITE, properties.attributes(new ItemAttributeModifiers(AetherIIStats.ZANITE_CROSSBOW, true)));
     }
 
     @Override

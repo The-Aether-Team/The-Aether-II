@@ -1,21 +1,31 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.aechor_plant",
+  "effect_resistances": [],
   "entity_type": "aether_ii:aechor_plant",
-  "icon_discovered": "aether_ii:guidebook/bestiary/aechor_plant",
-  "loot": [
+  "health": 15,
+  "icon": "aether_ii:guidebook/bestiary/aechor_plant",
+  "id": "aether_ii:aechor_plant",
+  "impact_defense": 2,
+  "loot_slots": [
     {
-      "chance": 1.0,
-      "item": "aether_ii:aechor_petal",
-      "max_count": 3,
-      "min_count": 1
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:aechor_petal",
+        "max_count": 3,
+        "min_count": 1
+      }
     },
     {
-      "chance": 1.0,
-      "item": "aether_ii:aechor_cutting",
-      "max_count": 1,
-      "min_count": 0
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:aechor_cutting",
+        "max_count": 1,
+        "min_count": 0
+      }
     }
   ],
-  "observation_advancement": "aether_ii:bestiary/observe_aechor_plant",
-  "understanding_advancement": "aether_ii:bestiary/understand_aechor_plant"
+  "name": "entity.aether_ii.aechor_plant",
+  "pierce_defense": 0,
+  "slash_defense": -2,
+  "slot_name": "entity.aether_ii.aechor_plant"
 }

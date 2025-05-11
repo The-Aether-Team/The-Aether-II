@@ -12,7 +12,8 @@
 		"7": "aether_ii:item/shields/holystone_shield/holystone_wing_right2",
 		"8": "aether_ii:item/shields/holystone_shield/holystone_wing_left1",
 		"9": "aether_ii:item/shields/holystone_shield/holystone_wing_left2",
-		"10": "aether_ii:item/shields/holystone_shield/holystone_center_left_right"
+		"10": "aether_ii:item/shields/holystone_shield/holystone_center_left_right",
+		"particle": "#0"
 	},
 	"elements": [
 		{

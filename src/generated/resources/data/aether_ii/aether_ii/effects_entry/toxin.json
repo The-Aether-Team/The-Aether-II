@@ -1,0 +1,13 @@
+{
+  "description_key": "aether_ii.guidebook_effects.description.effect.aether_ii.toxin",
+  "effect": "aether_ii:toxin",
+  "icon": "minecraft:toxin",
+  "id": "aether_ii:toxin",
+  "items": [
+    {
+      "item": "aether_ii:antitoxin_vial"
+    }
+  ],
+  "name": "effect.aether_ii.toxin",
+  "slot_name": "effect.aether_ii.toxin"
+}
