@@ -155,15 +155,15 @@ public class InfectedGuardianTreePools {
         context.register(MAIN_CORRIDORS_2, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/corridor_02", processorDungeon), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/corridor_03", processorDungeon), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/corridor_02", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/corridor_03", processorDungeon), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
         context.register(MAIN_CORRIDORS_3, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/corridor_03", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/corridor_03", processorDungeon), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/corridor_04", processorDungeon), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
@@ -178,11 +178,11 @@ public class InfectedGuardianTreePools {
         context.register(MAIN_JOINTS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/t_crossing_01", processorDungeon), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/t_crossing_02", processorDungeon), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/t_crossing_03", processorDungeon), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/staircase_intersection_01", processorDungeon), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/staircase_intersection_02", processorDungeon), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/t_crossing_01", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/t_crossing_02", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/t_crossing_03", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/staircase_intersection_01", processorDungeon), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/main/staircase_intersection_02", processorDungeon), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -197,8 +197,8 @@ public class InfectedGuardianTreePools {
         context.register(SIDE_CORRIDORS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_01", processorDungeon), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_02", processorDungeon), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_01", processorDungeon), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_02", processorDungeon), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
@@ -215,8 +215,8 @@ public class InfectedGuardianTreePools {
         context.register(ROOM_CORRIDORS, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/room/corridor_01", processorDungeon), 1),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/room/corridor_02", processorDungeon), 1)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/room/corridor_01", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/room/corridor_02", processorDungeon), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
