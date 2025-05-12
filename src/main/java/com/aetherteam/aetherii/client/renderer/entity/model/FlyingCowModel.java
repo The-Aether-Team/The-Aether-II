@@ -100,8 +100,8 @@ public class FlyingCowModel<T extends WingEntityRenderState> extends EntityModel
     @Override
     public void setupAnim(T entity) {
         super.setupAnim(entity);
-        this.head.xRot = entity.yRot * Mth.DEG_TO_RAD;
-        this.head.yRot = entity.xRot * Mth.DEG_TO_RAD;
+        this.head.xRot = entity.xRot * Mth.DEG_TO_RAD;
+        this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;
         this.leg_back_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
         this.leg_back_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
         this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
