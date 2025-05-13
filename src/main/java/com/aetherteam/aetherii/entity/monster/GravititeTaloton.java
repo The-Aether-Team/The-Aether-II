@@ -4,6 +4,7 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -18,6 +19,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class GravititeTaloton extends Taloton implements RangedAttackMob {
+    private float legRotO;
+    private float legRot;
+    private float debrisRot0;
+    private float debrisRot;
+
     public GravititeTaloton(EntityType<? extends GravititeTaloton> entityType, Level level) {
         super(entityType, level);
     }
@@ -35,8 +41,27 @@ public class GravititeTaloton extends Taloton implements RangedAttackMob {
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 15.0F)
-                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.STEP_HEIGHT, 1.0F);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
+        if (gravity != null) {
+            double fallSpeed = Math.max(gravity.getValue() * -1.25, -0.1); // Entity isn't allowed to fall too slowly from gravity.
+            if (this.getDeltaMovement().y() < fallSpeed) {
+                this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
+                this.hasImpulse = true;
+            }
+        }
+        if (this.level().isClientSide()) {
+            this.legRotO = this.legRot;
+            this.legRot += 0.1F;
+            this.debrisRot0 = this.debrisRot;
+            this.debrisRot -= 0.15F;
+        }
     }
 
     @Override
@@ -49,5 +74,29 @@ public class GravititeTaloton extends Taloton implements RangedAttackMob {
         dart.shoot(d1, d0 + d4, d3, 0.8F, 6.0F);
         this.playSound(AetherIISoundEvents.COCKATRICE_SHOOT.value(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(dart);
+    }
+
+    @Override
+    public void jumpFromGround() { }
+
+    @Override
+    public boolean onClimbable() {
+        return this.horizontalCollision;
+    }
+
+    public float getLegRotO() {
+        return this.legRotO;
+    }
+
+    public float getLegRot() {
+        return this.legRot;
+    }
+
+    public float getDebrisRot0() {
+        return this.debrisRot0;
+    }
+
+    public float getDebrisRot() {
+        return this.debrisRot;
     }
 }

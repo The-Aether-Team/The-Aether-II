@@ -1,21 +1,99 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.client.renderer.entity.state.GravititeTalotonRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 
-public class GravititeTalotonModel extends EntityModel<LivingEntityRenderState> {
+public class GravititeTalotonModel extends EntityModel<GravititeTalotonRenderState> {
+    private final ModelPart body;
+    private final ModelPart legsNode;
+    private final ModelPart legLeftPosition;
+    private final ModelPart legLeft;
+    private final ModelPart legRightPosition;
+    private final ModelPart legRight;
+    private final ModelPart legRearPosition;
+    private final ModelPart legRear;
+    private final ModelPart debrisNode;
+    private final ModelPart debris1;
+    private final ModelPart debris2;
+
     public GravititeTalotonModel(ModelPart root) {
         super(root);
+        this.body = root.getChild("body");
+        this.legsNode = this.body.getChild("legs_node");
+        this.legLeftPosition = this.legsNode.getChild("leg_left_position");
+        this.legLeft = this.legLeftPosition.getChild("leg_left");
+        this.legRightPosition = this.legsNode.getChild("leg_right_position");
+        this.legRight = this.legRightPosition.getChild("leg_right");
+        this.legRearPosition = this.legsNode.getChild("leg_rear_position");
+        this.legRear = this.legRearPosition.getChild("leg_rear");
+        this.debrisNode = this.body.getChild("debris_node");
+        this.debris1 = this.debrisNode.getChild("debris_1");
+        this.debris2 = this.debrisNode.getChild("debris_2");
     }
 
     public static LayerDefinition createBodyLayer() {
         MeshDefinition meshDefinition = new MeshDefinition();
         PartDefinition partDefinition = meshDefinition.getRoot();
 
+        PartDefinition body = partDefinition.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 14.0F, 0.0F));
+
+        PartDefinition rock_b_r1 = body.addOrReplaceChild("rock_b_r1", CubeListBuilder.create().texOffs(74, 110).addBox(-1.5F, -5.0F, -1.0F, 3.0F, 7.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.7F, 5.0F, 0.1745F, 0.0F, 0.0F));
+
+        PartDefinition rock_b_l_r1 = body.addOrReplaceChild("rock_b_l_r1", CubeListBuilder.create().texOffs(20, 111).addBox(-0.5F, -4.0F, -1.0F, 2.0F, 7.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, -1.7F, 3.7F, 0.2182F, 0.7854F, 0.0F));
+
+        PartDefinition rock_f_r_r1 = body.addOrReplaceChild("rock_f_r_r1", CubeListBuilder.create().texOffs(84, 110).addBox(-1.5F, -4.0F, -1.0F, 2.0F, 7.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.5F, -2.7F, -2.1F, -0.2182F, 0.7854F, 0.0F));
+
+        PartDefinition rock_b_r_r1 = body.addOrReplaceChild("rock_b_r_r1", CubeListBuilder.create().texOffs(28, 111).addBox(-1.5F, -2.0F, -1.0F, 3.0F, 5.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, -2.7F, 2.8F, 0.4363F, -0.7854F, 0.0F));
+
+        PartDefinition rock_f_l_r1 = body.addOrReplaceChild("rock_f_l_r1", CubeListBuilder.create().texOffs(38, 111).addBox(-0.5F, -1.0F, 0.0F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.8F, -2.4F, -3.5F, -0.1745F, -0.7854F, 0.0F));
+
+        PartDefinition rock_f_r1 = body.addOrReplaceChild("rock_f_r1", CubeListBuilder.create().texOffs(10, 111).addBox(-1.5F, -4.0F, -1.0F, 3.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.7F, -5.0F, -0.2618F, 0.0F, 0.0F));
+
+        PartDefinition rock_r_r1 = body.addOrReplaceChild("rock_r_r1", CubeListBuilder.create().texOffs(0, 111).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.8F, -5.0F, -0.5F, 0.0F, 0.0F, 0.1745F));
+
+        PartDefinition rock_l_r1 = body.addOrReplaceChild("rock_l_r1", CubeListBuilder.create().texOffs(64, 110).addBox(-1.0F, -4.0F, -1.0F, 2.0F, 9.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.4F, -4.7F, -0.5F, 0.0F, 0.0F, -0.1745F));
+
+        PartDefinition body_3_r1 = body.addOrReplaceChild("body_3_r1", CubeListBuilder.create().texOffs(72, 96).addBox(-2.5F, -6.0F, -2.5F, 5.0F, 9.0F, 5.0F, new CubeDeformation(0.0F))
+                .texOffs(44, 96).addBox(-3.5F, 3.0F, -3.5F, 7.0F, 6.0F, 7.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 96).addBox(-5.5F, 9.0F, -5.5F, 11.0F, 4.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -9.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
+
+        PartDefinition legs_node = body.addOrReplaceChild("legs_node", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+        PartDefinition leg_left_position = legs_node.addOrReplaceChild("leg_left_position", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 2.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
+
+        PartDefinition leg_left = leg_left_position.addOrReplaceChild("leg_left", CubeListBuilder.create().texOffs(108, 104).addBox(-1.5F, -3.8F, -3.5F, 3.0F, 11.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(92, 96).addBox(-2.5F, -1.8F, -2.5F, 5.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, -6.0F, 0.5236F, 0.0F, 0.0F));
+
+        PartDefinition leg_right_position = legs_node.addOrReplaceChild("leg_right_position", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 2.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
+
+        PartDefinition leg_right = leg_right_position.addOrReplaceChild("leg_right", CubeListBuilder.create().texOffs(44, 109).addBox(-1.5F, -3.8F, -3.5F, 3.0F, 11.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(92, 104).addBox(-2.5F, -1.8F, -2.5F, 5.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, -6.0F, 0.5236F, 0.0F, 0.0F));
+
+        PartDefinition leg_rear_position = legs_node.addOrReplaceChild("leg_rear_position", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 2.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
+
+        PartDefinition leg_rear = leg_rear_position.addOrReplaceChild("leg_rear", CubeListBuilder.create().texOffs(54, 109).addBox(-1.5F, -3.8F, -3.5F, 3.0F, 11.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(108, 96).addBox(-2.5F, -1.8F, -2.5F, 5.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, -6.0F, 0.5236F, 0.0F, 0.0F));
+
+        PartDefinition debris_node = body.addOrReplaceChild("debris_node", CubeListBuilder.create(), PartPose.offset(0.0F, -3.0F, 0.0F));
+
+        PartDefinition debris_1 = debris_node.addOrReplaceChild("debris_1", CubeListBuilder.create().texOffs(0, 0).addBox(-14.0F, -10.0F, -14.0F, 28.0F, 20.0F, 28.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+        PartDefinition debris_2 = debris_node.addOrReplaceChild("debris_2", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+        PartDefinition debris_2_r1 = debris_2.addOrReplaceChild("debris_2_r1", CubeListBuilder.create().texOffs(0, 48).addBox(-14.0F, -10.0F, -14.0F, 28.0F, 20.0F, 28.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
+
         return LayerDefinition.create(meshDefinition, 128, 128);
+    }
+
+    @Override
+    public void setupAnim(GravititeTalotonRenderState renderState) {
+        super.setupAnim(renderState);
+        this.body.yRot = (180.0F + renderState.bodyRot) * Mth.DEG_TO_RAD;
+        this.legsNode.yRot = -this.body.yRot + renderState.legRot;
+        this.debrisNode.yRot = -this.body.yRot + renderState.debrisRot;
     }
 }
