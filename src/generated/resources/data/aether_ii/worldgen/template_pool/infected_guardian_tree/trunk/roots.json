@@ -7,8 +7,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_01_a",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -20,8 +20,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_01_b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -33,8 +33,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_02_a",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -46,8 +46,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_02_b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -59,8 +59,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_03_a",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -72,8 +72,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_03_b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -85,8 +85,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_04_a",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -98,8 +98,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_04_b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -111,8 +111,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_05_a",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1
@@ -124,8 +124,8 @@
         "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/trunk/roots/root_05_b",
         "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree_trunk",
-        "projection": "terrain_matching",
+        "processors": "aether_ii:infected_guardian_tree_roots",
+        "projection": "rigid",
         "replace_air": false
       },
       "weight": 1

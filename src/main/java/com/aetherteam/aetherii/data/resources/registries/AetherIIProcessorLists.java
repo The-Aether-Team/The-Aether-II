@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.resources.registries;
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.ValkyrieSproutBlock;
+import com.aetherteam.aetherii.world.structure.processor.CappedGravityProcessor;
 import com.aetherteam.aetherii.world.structure.processor.DensityFunctionProcessor;
 import com.aetherteam.aetherii.world.structure.processor.ReinforceBlocksProcessor;
 import com.google.common.collect.ImmutableList;
@@ -13,6 +14,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class AetherIIProcessorLists {
     public static final ResourceKey<StructureProcessorList> CAMP_HIGHFIELDS = createKey("camp_highfields");
     public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE = createKey("infected_guardian_tree");
     public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE_TRUNK = createKey("infected_guardian_tree_trunk");
+    public static final ResourceKey<StructureProcessorList> INFECTED_GUARDIAN_TREE_ROOTS = createKey("infected_guardian_tree_roots");
 
     public static void bootstrap(BootstrapContext<StructureProcessorList> context) {
         HolderGetter<DensityFunction> function = context.lookup(Registries.DENSITY_FUNCTION);
@@ -72,6 +75,17 @@ public class AetherIIProcessorLists {
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.PURPLE_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState()),
                         new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.LIME_CLOUDWOOL.get(), 0.6F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get().defaultBlockState()),
                         new ProcessorRule(new BlockMatchTest(AetherIIBlocks.LIME_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
+                )),
+                new ReinforceBlocksProcessor()
+        ));
+
+        register(context, INFECTED_GUARDIAN_TREE_ROOTS, ImmutableList.of(
+                new CappedGravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1),
+                new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_DENSE_GUARDIAN_WOOD)),
+                new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_DENSE_GUARDIAN_WOOD)),
+                new RuleProcessor(ImmutableList.of(
+                        new ProcessorRule(new RandomBlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get(), 0.75F), AlwaysTrueTest.INSTANCE, AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState()),
+                        new ProcessorRule(new BlockMatchTest(AetherIIBlocks.RED_CLOUDWOOL.get()), AlwaysTrueTest.INSTANCE, Blocks.AIR.defaultBlockState())
                 )),
                 new ReinforceBlocksProcessor()
         ));
