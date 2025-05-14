@@ -39,5 +39,14 @@ public class AetherIIRecipePrioritiesData extends RecipePrioritiesProvider {
         this.add("hide_bundle", 5);
 
         this.add("cloudwool", 5);
+
+        this.add("holystone_furnace", 5);
+        this.add("holystone_pickaxe", 5);
+        this.add("holystone_axe", 5);
+        this.add("holystone_shovel", 5);
+        this.add("holystone_trowel", 5);
+        this.add("holystone_shortsword", 5);
+        this.add("holystone_hammer", 5);
+        this.add("holystone_spear", 5);
     }
 }
