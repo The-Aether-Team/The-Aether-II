@@ -63,6 +63,11 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
         );
         this.add(AetherIIEntityTypes.AERBUNNY.get(), LootTable.lootTable());
 
+        Sheepuff.SheepuffColor.CLOUDWOOL_BY_SHEEPUFF_COLOR.forEach((color, itemLike) -> this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE.get(color), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(itemLike)).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SheepuffPredicate.isPuffed(false)))))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(2.0F)).add(LootItem.lootTableItem(itemLike)).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(SheepuffPredicate.isPuffed(true))))))
+        );
+
         this.add(AetherIIEntityTypes.SHEEPUFF.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN)
@@ -70,28 +75,31 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
                                 .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
                         )
-                ).withPool(createSheepuffDispatchPool(AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE))
+                )
+                .withPool(createSheepuffDispatchPool(AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE))
         );
 
-        Sheepuff.SheepuffColor.CLOUDWOOL_BY_SHEEPUFF_COLOR.forEach((color, lootTable) -> this.add(AetherIIEntityTypes.SHEEPUFF.get(), AetherIILoot.ENTITIES_SHEEPUFF_WOOL_BY_DYE.get(color), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable)))));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), this.createTaegoreTable());
+        this.add(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), this.createTaegoreTable());
+        this.add(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), this.createTaegoreTable());
 
-        this.add(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), createTaegoreTable());
-        this.add(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), createTaegoreTable());
-        this.add(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), createTaegoreTable());
-
-        this.add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), createBurrukaiTable());
-        this.add(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), createBurrukaiTable());
-        this.add(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), createBurrukaiTable());
-
-        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), createKirridTable(AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_BY_DYE));
-        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), createKirridTable(AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_BY_DYE));
-        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), createKirridTable(AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE));
+        this.add(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), this.createBurrukaiTable());
+        this.add(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), this.createBurrukaiTable());
+        this.add(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), this.createBurrukaiTable());
 
         Kirrid.KirridColor.CLOUDWOOL_BY_KIRRID_COLOR.forEach((color, lootTable) -> {
             this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_BY_DYE.get(color), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
             this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_BY_DYE.get(color), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
             this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE.get(color), LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(lootTable))));
         });
+
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_UNDYED, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL))));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_UNDYED, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL))));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_UNDYED, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL))));
+
+        this.add(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), this.createKirridTable(AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_BY_DYE, AetherIILoot.ENTITIES_HIGHFIELDS_KIRRID_WOOL_UNDYED));
+        this.add(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), this.createKirridTable(AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_BY_DYE, AetherIILoot.ENTITIES_MAGNETIC_KIRRID_WOOL_UNDYED));
+        this.add(AetherIIEntityTypes.ARCTIC_KIRRID.get(), this.createKirridTable(AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE, AetherIILoot.ENTITIES_ARCTIC_KIRRID_WOOL_UNDYED));
 
         this.add(AetherIIEntityTypes.MOA.get(), LootTable.lootTable());
 
@@ -192,7 +200,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                 );
     }
 
-    protected LootTable.Builder createKirridTable(Map<Kirrid.KirridColor, ResourceKey<LootTable>> wool) {
+    protected LootTable.Builder createKirridTable(Map<Kirrid.KirridColor, ResourceKey<LootTable>> wool, ResourceKey<LootTable> undyed) {
         return LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIItems.KIRRID_LOIN)
@@ -200,15 +208,17 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                                 .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
                                 .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F)))
                         )
-                ).withPool(createKirridDispatchPool(wool));
+                )
+                .withPool(createKirridDispatchPool(wool, undyed));
     }
 
-    public static LootPool.Builder createKirridDispatchPool(Map<Kirrid.KirridColor, ResourceKey<LootTable>> map) {
+    public static LootPool.Builder createKirridDispatchPool(Map<Kirrid.KirridColor, ResourceKey<LootTable>> map, ResourceKey<LootTable> undyed) {
         AlternativesEntry.Builder builder = AlternativesEntry.alternatives();
         Map.Entry<Kirrid.KirridColor, ResourceKey<LootTable>> entry;
         for (Iterator<Map.Entry<Kirrid.KirridColor, ResourceKey<LootTable>>> var2 = map.entrySet().iterator(); var2.hasNext(); builder = builder.otherwise(NestedLootTable.lootTableReference(entry.getValue()).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(KirridPredicate.hasWool(entry.getKey())))))) {
             entry = var2.next();
         }
+        builder = builder.otherwise(NestedLootTable.lootTableReference(undyed).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(KirridPredicate.hasWool()))));
         return LootPool.lootPool().add(builder);
     }
 

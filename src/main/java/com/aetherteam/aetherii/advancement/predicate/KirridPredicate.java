@@ -40,4 +40,8 @@ public record KirridPredicate(Optional<Boolean> sheared, Optional<Kirrid.KirridC
     public static KirridPredicate hasWool(Kirrid.KirridColor color) {
         return new KirridPredicate(Optional.of(false), Optional.of(color));
     }
+
+    public static KirridPredicate hasWool() {
+        return new KirridPredicate(Optional.of(false), Optional.empty());
+    }
 }
