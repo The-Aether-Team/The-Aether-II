@@ -7,8 +7,8 @@ import net.neoforged.neoforge.common.data.RecipePrioritiesProvider;
 
 import java.util.concurrent.CompletableFuture;
 
-public class AetherRecipePrioritiesData extends RecipePrioritiesProvider {
-    public AetherRecipePrioritiesData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+public class AetherIIRecipePrioritiesData extends RecipePrioritiesProvider {
+    public AetherIIRecipePrioritiesData(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, AetherII.MODID);
     }
 

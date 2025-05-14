@@ -5,16 +5,13 @@
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "condition": "minecraft:inverted",
-          "term": {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "type_specific": {
-                "type": "aether_ii:sheepuff",
-                "puffed": false,
-                "sheared": true
-              }
+          "condition": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "type_specific": {
+              "type": "aether_ii:sheepuff",
+              "puffed": false,
+              "sheared": false
             }
           }
         }
@@ -40,8 +37,8 @@
           "predicate": {
             "type_specific": {
               "type": "aether_ii:sheepuff",
-              "puffed": false,
-              "sheared": true
+              "puffed": true,
+              "sheared": false
             }
           }
         }

@@ -17,12 +17,19 @@ public class AetherIILoot {
     public static final Set<ResourceKey<LootTable>> IMMUTABLE_LOOT_TABLES = Collections.unmodifiableSet(LOOT_TABLES);
 
     // Entities
+    public static final ResourceKey<LootTable> ENTITIES_HIGHFIELDS_KIRRID_WOOL_UNDYED = register("entities/kirrid/highfields/undyed");
+    public static final ResourceKey<LootTable> ENTITIES_MAGNETIC_KIRRID_WOOL_UNDYED = register("entities/kirrid/magnetic/undyed");
+    public static final ResourceKey<LootTable> ENTITIES_ARCTIC_KIRRID_WOOL_UNDYED = register("entities/kirrid/arctic/undyed");
+
     public static final Map<Kirrid.KirridColor, ResourceKey<LootTable>> ENTITIES_HIGHFIELDS_KIRRID_WOOL_BY_DYE = Util.make(new EnumMap<>(Kirrid.KirridColor.class), (map) -> makeKirridColorMap(map, "entities/kirrid/highfields"));
     public static final Map<Kirrid.KirridColor, ResourceKey<LootTable>> ENTITIES_MAGNETIC_KIRRID_WOOL_BY_DYE = Util.make(new EnumMap<>(Kirrid.KirridColor.class), (map) -> makeKirridColorMap(map, "entities/kirrid/magnetic"));
     public static final Map<Kirrid.KirridColor, ResourceKey<LootTable>> ENTITIES_ARCTIC_KIRRID_WOOL_BY_DYE = Util.make(new EnumMap<>(Kirrid.KirridColor.class), (map) -> makeKirridColorMap(map, "entities/kirrid/arctic"));
 
     public static final Map<Sheepuff.SheepuffColor, ResourceKey<LootTable>> ENTITIES_SHEEPUFF_WOOL_BY_DYE = Util.make(new EnumMap<>(Sheepuff.SheepuffColor.class), (map) -> makeSheepuffColorMap(map, "entities/sheepuff"));
 
+    public static final ResourceKey<LootTable> SHEARING_HIGHFIELDS_KIRRID_WOOL_UNDYED = register("shearing/kirrid/highfields/undyed");
+    public static final ResourceKey<LootTable> SHEARING_MAGNETIC_KIRRID_WOOL_UNDYED = register("shearing/kirrid/magnetic/undyed");
+    public static final ResourceKey<LootTable> SHEARING_ARCTIC_KIRRID_WOOL_UNDYED = register("shearing/kirrid/arctic/undyed");
     // Shearing
     public static final Map<Kirrid.KirridColor, ResourceKey<LootTable>> SHEARING_HIGHFIELDS_KIRRID_WOOL_BY_DYE = Util.make(new EnumMap<>(Kirrid.KirridColor.class), (map) -> makeKirridColorMap(map, "shearing/kirrid/highfields"));
     public static final Map<Kirrid.KirridColor, ResourceKey<LootTable>> SHEARING_MAGNETIC_KIRRID_WOOL_BY_DYE = Util.make(new EnumMap<>(Kirrid.KirridColor.class), (map) -> makeKirridColorMap(map, "shearing/kirrid/magnetic"));

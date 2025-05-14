@@ -61,7 +61,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "WHITE",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -78,7 +78,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "ORANGE",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -95,7 +95,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "MAGENTA",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -112,7 +112,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "LIGHT_BLUE",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -129,7 +129,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "YELLOW",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -146,7 +146,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "LIME",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -163,7 +163,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "PINK",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -180,7 +180,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "GRAY",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -197,7 +197,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "LIGHT_GRAY",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -214,7 +214,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "CYAN",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -231,7 +231,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "PURPLE",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -248,7 +248,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "BLUE",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -265,7 +265,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "BROWN",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -282,7 +282,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "GREEN",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -299,7 +299,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "RED",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
@@ -316,7 +316,7 @@
                     "type_specific": {
                       "type": "aether_ii:sheepuff",
                       "color": "BLACK",
-                      "puffed": false
+                      "sheared": false
                     }
                   }
                 }
