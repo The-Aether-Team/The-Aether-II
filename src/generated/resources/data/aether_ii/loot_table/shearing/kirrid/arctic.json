@@ -278,6 +278,22 @@
                 }
               ],
               "value": "aether_ii:shearing/kirrid/arctic/black"
+            },
+            {
+              "type": "minecraft:loot_table",
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "type_specific": {
+                      "type": "aether_ii:kirrid",
+                      "sheared": false
+                    }
+                  }
+                }
+              ],
+              "value": "aether_ii:shearing/kirrid/arctic/undyed"
             }
           ]
         }

@@ -844,7 +844,7 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
                 .pattern("A")
                 .pattern("/")
-                .unlockedBy(getHasName(AetherIIItems.HOLYSTONE_PICKAXE.get()), has(AetherIIItems.HOLYSTONE_PICKAXE.get()))
+                .unlockedBy(getHasName(AetherIIItems.AMBROSIUM_SHARD.get()), has(AetherIIItems.AMBROSIUM_SHARD.get()))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, AetherIIBlocks.SKYROOT_CRAFTING_TABLE.get())
                 .define('#', AetherIITags.Items.PLANKS_CRAFTING)
