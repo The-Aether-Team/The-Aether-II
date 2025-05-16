@@ -881,8 +881,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
         this.addItem(AetherIIItems.SWET_SPAWN_EGG, "Swet Spawn Egg");
         this.addItem(AetherIIItems.SKEPHID_SPAWN_EGG, "Skephid Spawn Egg");
-        this.addItem(AetherIIItems.ARKENIUM_TALOTON_SPAWN_EGG, "Arkenium Taloton Spawn Egg");
-        this.addItem(AetherIIItems.GRAVITITE_TALOTON_SPAWN_EGG, "Gravitite Taloton Spawn Egg");
+        this.addItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG, "Arkenium Taluton Spawn Egg");
+        this.addItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG, "Gravitite Taluton Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.HIDE_BUNDLE, "Hide Bundle");
@@ -1093,8 +1093,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
         this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
-        this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALOTON, "Arkenium Taloton");
-        this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALOTON, "Gravitite Taloton");
+        this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
+        this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1298,8 +1298,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALOTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALOTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
 
         // Jukebox Songs

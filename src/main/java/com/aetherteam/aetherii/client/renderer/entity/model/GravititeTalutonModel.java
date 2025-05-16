@@ -1,13 +1,13 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.entity.state.GravititeTalotonRenderState;
+import com.aetherteam.aetherii.client.renderer.entity.state.GravititeTalutonRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class GravititeTalotonModel extends EntityModel<GravititeTalotonRenderState> {
+public class GravititeTalutonModel extends EntityModel<GravititeTalutonRenderState> {
     private final ModelPart body;
     private final ModelPart legsNode;
     private final ModelPart legLeftPosition;
@@ -20,7 +20,7 @@ public class GravititeTalotonModel extends EntityModel<GravititeTalotonRenderSta
     private final ModelPart debris1;
     private final ModelPart debris2;
 
-    public GravititeTalotonModel(ModelPart root) {
+    public GravititeTalutonModel(ModelPart root) {
         super(root);
         this.body = root.getChild("body");
         this.legsNode = this.body.getChild("legs_node");
@@ -90,7 +90,7 @@ public class GravititeTalotonModel extends EntityModel<GravititeTalotonRenderSta
     }
 
     @Override
-    public void setupAnim(GravititeTalotonRenderState renderState) {
+    public void setupAnim(GravititeTalutonRenderState renderState) {
         super.setupAnim(renderState);
         this.body.yRot = (180.0F + renderState.bodyRot) * Mth.DEG_TO_RAD;
         this.legsNode.yRot = -this.body.yRot + renderState.legRot;

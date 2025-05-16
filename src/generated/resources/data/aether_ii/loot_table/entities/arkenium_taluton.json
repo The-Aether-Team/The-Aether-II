@@ -39,11 +39,11 @@
               "unenchanted_chance": 0.075
             }
           ],
-          "name": "aether_ii:gravitite_core"
+          "name": "aether_ii:arkenium_core"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "aether_ii:entities/gravitite_taloton"
+  "random_sequence": "aether_ii:entities/arkenium_taluton"
 }

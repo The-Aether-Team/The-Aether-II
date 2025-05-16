@@ -155,7 +155,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 ));
 
-        this.add(AetherIIEntityTypes.ARKENIUM_TALOTON.get(), LootTable.lootTable()
+        this.add(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
@@ -167,7 +167,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
         );
-        this.add(AetherIIEntityTypes.GRAVITITE_TALOTON.get(), LootTable.lootTable()
+        this.add(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), LootTable.lootTable()
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE.get())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))

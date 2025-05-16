@@ -1,15 +1,13 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.entity.state.ArkeniumTalotonRenderState;
-import net.minecraft.client.model.AnimationUtils;
+import com.aetherteam.aetherii.client.renderer.entity.state.ArkeniumTalutonRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.util.Mth;
 
-public class ArkeniumTalotonModel extends EntityModel<ArkeniumTalotonRenderState> {
+public class ArkeniumTalutonModel extends EntityModel<ArkeniumTalutonRenderState> {
     private final ModelPart body;
     private final ModelPart rearLeg;
     private final ModelPart rearLeg2;
@@ -23,7 +21,7 @@ public class ArkeniumTalotonModel extends EntityModel<ArkeniumTalotonRenderState
     private final ModelPart rightArm2;
     private final ModelPart rightArm3;
 
-    public ArkeniumTalotonModel(ModelPart root) {
+    public ArkeniumTalutonModel(ModelPart root) {
         super(root);
         this.body = root.getChild("body");
         this.rearLeg = this.body.getChild("leg_rear");
@@ -93,7 +91,7 @@ public class ArkeniumTalotonModel extends EntityModel<ArkeniumTalotonRenderState
     }
 
     @Override
-    public void setupAnim(ArkeniumTalotonRenderState renderState) {
+    public void setupAnim(ArkeniumTalutonRenderState renderState) {
         super.setupAnim(renderState);
         float f = renderState.attackTicksRemaining;
         float f1 = renderState.walkAnimationPos;

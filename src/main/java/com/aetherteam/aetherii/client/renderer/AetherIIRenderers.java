@@ -97,8 +97,8 @@ public class AetherIIRenderers {
         event.registerEntityRenderer(AetherIIEntityTypes.COCKATRICE.get(), CockatriceRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SWET.get(), SwetRenderer::new);
         event.registerEntityRenderer(AetherIIEntityTypes.SKEPHID.get(), SkephidRenderer::new);
-        event.registerEntityRenderer(AetherIIEntityTypes.ARKENIUM_TALOTON.get(), ArkeniumTalotonRenderer::new);
-        event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_TALOTON.get(), GravititeTalotonRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), ArkeniumTalutonRenderer::new);
+        event.registerEntityRenderer(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), GravititeTalutonRenderer::new);
 
         // Projectiles
         event.registerEntityRenderer(AetherIIEntityTypes.HOLYSTONE_ROCK.get(), ThrownItemRenderer::new);
@@ -161,8 +161,8 @@ public class AetherIIRenderers {
         event.registerLayerDefinition(AetherIIModelLayers.COCKATRICE, CockatriceModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SWET, SwetModel::createBodyLayer);
         event.registerLayerDefinition(AetherIIModelLayers.SKEPHID, SkephidModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.ARKENIUM_TALOTON, ArkeniumTalotonModel::createBodyLayer);
-        event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALOTON, GravititeTalotonModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.ARKENIUM_TALUTON, ArkeniumTalutonModel::createBodyLayer);
+        event.registerLayerDefinition(AetherIIModelLayers.GRAVITITE_TALUTON, GravititeTalutonModel::createBodyLayer);
 
         // Accessories
         // Handwear

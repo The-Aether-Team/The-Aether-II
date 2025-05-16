@@ -18,13 +18,13 @@ import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class GravititeTaloton extends Taloton implements RangedAttackMob {
+public class GravititeTaluton extends Taluton implements RangedAttackMob {
     private float legRotO;
     private float legRot;
     private float debrisRot0;
     private float debrisRot;
 
-    public GravititeTaloton(EntityType<? extends GravititeTaloton> entityType, Level level) {
+    public GravititeTaluton(EntityType<? extends GravititeTaluton> entityType, Level level) {
         super(entityType, level);
     }
 

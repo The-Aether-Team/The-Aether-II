@@ -11,15 +11,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 
-public abstract class Taloton extends Monster {
-    protected Taloton(EntityType<? extends Taloton> entityType, Level level) {
+public abstract class Taluton extends Monster {
+    protected Taluton(EntityType<? extends Taluton> entityType, Level level) {
         super(entityType, level);
     }
 
-    public static boolean checkTalotonSpawnRules(EntityType<? extends Monster> taloton, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+    public static boolean checkTalutonSpawnRules(EntityType<? extends Monster> taluton, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS)
                 && level.getDifficulty() != Difficulty.PEACEFUL
                 && isDarkEnoughToSpawn((ServerLevelAccessor) level, pos, random)
-                && checkMobSpawnRules(taloton, level, reason, pos, random);
+                && checkMobSpawnRules(taluton, level, reason, pos, random);
     }
 }

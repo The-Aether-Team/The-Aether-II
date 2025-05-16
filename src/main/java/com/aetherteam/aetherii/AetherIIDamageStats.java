@@ -99,11 +99,11 @@ public class AetherIIDamageStats {
             .add(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
             .add(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
             .add(AetherIIAttributes.PIERCE_RESISTANCE, -2.0);
-    public static final AttributeSupplier.Builder ARKENIUM_TALOTON = new AttributeSupplier.Builder()
+    public static final AttributeSupplier.Builder ARKENIUM_TALUTON = new AttributeSupplier.Builder()
             .add(AetherIIAttributes.SLASH_RESISTANCE, 2.0)
             .add(AetherIIAttributes.IMPACT_RESISTANCE, -2.0)
             .add(AetherIIAttributes.PIERCE_RESISTANCE, 2.0);
-    public static final AttributeSupplier.Builder GRAVITITE_TALOTON = new AttributeSupplier.Builder()
+    public static final AttributeSupplier.Builder GRAVITITE_TALUTON = new AttributeSupplier.Builder()
             .add(AetherIIAttributes.SLASH_RESISTANCE, 2.0)
             .add(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .add(AetherIIAttributes.PIERCE_RESISTANCE, -2.0);

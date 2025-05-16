@@ -78,10 +78,10 @@ public class AetherIIEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Skephid>> SKEPHID = ENTITY_TYPES.register("skephid",
             () -> EntityType.Builder.of(Skephid::new, MobCategory.MONSTER).sized(0.8F, 0.8F).clientTrackingRange(10).build(AetherIIEntities.SKEPHID));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<ArkeniumTaloton>> ARKENIUM_TALOTON = ENTITY_TYPES.register("arkenium_taloton",
-            () -> EntityType.Builder.of(ArkeniumTaloton::new, MobCategory.MONSTER).sized(1.0F, 2.0F).clientTrackingRange(10).build(AetherIIEntities.ARKENIUM_TALOTON));
-    public static final DeferredHolder<EntityType<?>, EntityType<GravititeTaloton>> GRAVITITE_TALOTON = ENTITY_TYPES.register("gravitite_taloton",
-            () -> EntityType.Builder.of(GravititeTaloton::new, MobCategory.MONSTER).sized(1.0F, 2.0F).clientTrackingRange(10).build(AetherIIEntities.GRAVITITE_TALOTON));
+    public static final DeferredHolder<EntityType<?>, EntityType<ArkeniumTaluton>> ARKENIUM_TALUTON = ENTITY_TYPES.register("arkenium_taluton",
+            () -> EntityType.Builder.of(ArkeniumTaluton::new, MobCategory.MONSTER).sized(1.0F, 2.0F).clientTrackingRange(10).build(AetherIIEntities.ARKENIUM_TALUTON));
+    public static final DeferredHolder<EntityType<?>, EntityType<GravititeTaluton>> GRAVITITE_TALUTON = ENTITY_TYPES.register("gravitite_taluton",
+            () -> EntityType.Builder.of(GravititeTaluton::new, MobCategory.MONSTER).sized(1.0F, 2.0F).clientTrackingRange(10).build(AetherIIEntities.GRAVITITE_TALUTON));
 
 
     // Projectiles
@@ -145,8 +145,8 @@ public class AetherIIEntityTypes {
         event.register(AetherIIEntityTypes.COCKATRICE.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Cockatrice::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.SWET.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Swet::checkMonsterSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
         event.register(AetherIIEntityTypes.SKEPHID.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Skephid::checkSkephidSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
-        event.register(AetherIIEntityTypes.ARKENIUM_TALOTON.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Taloton::checkTalotonSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
-        event.register(AetherIIEntityTypes.GRAVITITE_TALOTON.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Taloton::checkTalotonSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Taluton::checkTalutonSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
+        event.register(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Taluton::checkTalutonSpawnRules, RegisterSpawnPlacementsEvent.Operation.OR);
     }
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
@@ -175,7 +175,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.COCKATRICE.get(), AetherIIDamageStats.merge(Cockatrice.createMobAttributes(), AetherIIDamageStats.COCKATRICE).build());
         event.put(AetherIIEntityTypes.SWET.get(), AetherIIDamageStats.merge(Swet.createMobAttributes(), AetherIIDamageStats.SWET).build());
         event.put(AetherIIEntityTypes.SKEPHID.get(), AetherIIDamageStats.merge(Skephid.createMobAttributes(), AetherIIDamageStats.SKEPHID).build());
-        event.put(AetherIIEntityTypes.ARKENIUM_TALOTON.get(), AetherIIDamageStats.merge(ArkeniumTaloton.createMobAttributes(), AetherIIDamageStats.ARKENIUM_TALOTON).build());
-        event.put(AetherIIEntityTypes.GRAVITITE_TALOTON.get(), AetherIIDamageStats.merge(GravititeTaloton.createMobAttributes(), AetherIIDamageStats.GRAVITITE_TALOTON).build());
+        event.put(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), AetherIIDamageStats.merge(ArkeniumTaluton.createMobAttributes(), AetherIIDamageStats.ARKENIUM_TALUTON).build());
+        event.put(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), AetherIIDamageStats.merge(GravititeTaluton.createMobAttributes(), AetherIIDamageStats.GRAVITITE_TALUTON).build());
     }
 }

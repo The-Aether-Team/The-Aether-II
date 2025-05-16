@@ -1,0 +1,21 @@
+{
+  "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.gravitite_taluton",
+  "entity_type": "aether_ii:gravitite_taluton",
+  "icon_discovered": "aether_ii:guidebook/bestiary/gravitite_taluton",
+  "loot": [
+    {
+      "chance": 1.0,
+      "item": "aether_ii:holystone",
+      "max_count": 2,
+      "min_count": 0
+    },
+    {
+      "chance": 1.0,
+      "item": "aether_ii:arkenium_core",
+      "max_count": 1,
+      "min_count": 0
+    }
+  ],
+  "observation_advancement": "aether_ii:bestiary/observe_gravitite_taluton",
+  "understanding_advancement": "aether_ii:bestiary/understand_gravitite_taluton"
+}

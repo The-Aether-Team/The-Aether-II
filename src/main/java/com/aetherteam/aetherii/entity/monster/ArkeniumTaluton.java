@@ -16,10 +16,10 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class ArkeniumTaloton extends Monster {
+public class ArkeniumTaluton extends Monster {
     private int attackAnimationTick;
 
-    public ArkeniumTaloton(EntityType<? extends ArkeniumTaloton> entityType, Level level) {
+    public ArkeniumTaluton(EntityType<? extends ArkeniumTaluton> entityType, Level level) {
         super(entityType, level);
     }
 

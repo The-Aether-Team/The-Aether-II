@@ -211,13 +211,13 @@
         "weight": 4
       },
       {
-        "type": "aether_ii:arkenium_taloton",
+        "type": "aether_ii:arkenium_taluton",
         "maxCount": 1,
         "minCount": 1,
         "weight": 1
       },
       {
-        "type": "aether_ii:gravitite_taloton",
+        "type": "aether_ii:gravitite_taluton",
         "maxCount": 1,
         "minCount": 1,
         "weight": 1

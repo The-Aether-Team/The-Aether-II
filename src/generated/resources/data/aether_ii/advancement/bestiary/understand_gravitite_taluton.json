@@ -1,13 +1,13 @@
 {
   "criteria": {
-    "kill_gravitite_taloton": {
+    "kill_gravitite_taluton": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "aether_ii:gravitite_taloton"
+              "type": "aether_ii:gravitite_taluton"
             }
           }
         ]
@@ -17,7 +17,7 @@
   },
   "requirements": [
     [
-      "kill_gravitite_taloton"
+      "kill_gravitite_taluton"
     ]
   ],
   "sends_telemetry_event": true

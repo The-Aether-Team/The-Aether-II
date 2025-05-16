@@ -1,13 +1,13 @@
 {
   "criteria": {
-    "kill_arkenium_taloton": {
+    "kill_arkenium_taluton": {
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "aether_ii:arkenium_taloton"
+              "type": "aether_ii:arkenium_taluton"
             }
           }
         ]
@@ -24,7 +24,7 @@
               "type_specific": {
                 "type": "minecraft:player",
                 "looking_at": {
-                  "type": "aether_ii:arkenium_taloton"
+                  "type": "aether_ii:arkenium_taluton"
                 }
               }
             }
@@ -37,7 +37,7 @@
   "requirements": [
     [
       "observe",
-      "kill_arkenium_taloton"
+      "kill_arkenium_taluton"
     ]
   ],
   "sends_telemetry_event": true
