@@ -60,7 +60,7 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
             this.legRotO = this.legRot;
             this.legRot += 0.1F;
             this.debrisRot0 = this.debrisRot;
-            this.debrisRot -= 0.15F;
+            this.debrisRot -= 0.05F;
         }
     }
 
