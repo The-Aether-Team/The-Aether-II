@@ -11,7 +11,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 3
     },
     {
       "element": {
@@ -24,8 +24,21 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 1
+      "weight": 2
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 0,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/corridors/side/dead_end_joint",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
     }
   ],
-  "fallback": "minecraft:empty"
+  "fallback": "aether_ii:infected_guardian_tree/corridors/dead_ends_joint"
 }
