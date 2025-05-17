@@ -33,16 +33,14 @@ public class GravititeDebrisShotRenderer extends EntityRenderer<GravititeDebrisS
     @Override
     public void extractRenderState(GravititeDebrisShot entity, GravititeDebrisShotRenderState renderState, float partialTick) {
         super.extractRenderState(entity, renderState, partialTick);
-        renderState.xRot = entity.getXRot(partialTick);
         renderState.yRot = entity.getYRot(partialTick);
     }
 
     @Override
     public void render(GravititeDebrisShotRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int partialTick) {
         poseStack.pushPose();
-        poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F - renderState.xRot));
-        poseStack.mulPose(Axis.YP.rotationDegrees(renderState.ageInTicks * -75.0F));
-
+        poseStack.translate(0, 0.25, 0);
+        poseStack.mulPose(Axis.YN.rotationDegrees(renderState.yRot));
         this.model.setupAnim(renderState);
         VertexConsumer vertexconsumer = bufferSource.getBuffer(this.model.renderType(TEXTURE_LOCATION));
         this.model.renderToBuffer(poseStack, vertexconsumer, partialTick, OverlayTexture.NO_OVERLAY);
