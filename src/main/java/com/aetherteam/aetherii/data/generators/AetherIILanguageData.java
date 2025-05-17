@@ -1106,6 +1106,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKEPHID_WEBBING_BALL, "Skephid Webbing Ball");
         this.addEntityType(AetherIIEntityTypes.TOXIC_DART, "Toxic Dart");
         this.addEntityType(AetherIIEntityTypes.VENOMOUS_DART, "Venomous Dart");
+        this.addEntityType(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT, "Gravitite Debris Shot");
 
         // Miscellaneous
         this.addEntityType(AetherIIEntityTypes.ELECTRIC_FIELD, "Electric Field");

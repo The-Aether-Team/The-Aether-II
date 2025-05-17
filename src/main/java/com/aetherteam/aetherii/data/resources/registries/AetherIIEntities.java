@@ -59,6 +59,7 @@ public class AetherIIEntities {
 
     public static final ResourceKey<EntityType<?>> TEMPEST_THUNDERBALL = createKey("skephid_thunderball");
 
+    public static final ResourceKey<EntityType<?>> GRAVITITE_DEBRIS_SHOT = createKey("gravitite_debris_shot");
 
     //Blocks
     public static final ResourceKey<EntityType<?>> HOVERING_BLOCK = createKey("hovering_block");
