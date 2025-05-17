@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.projectile;
 
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
@@ -23,14 +24,25 @@ public class GravititeDebrisShot extends AbstractHurtingProjectile {
     }
 
     public GravititeDebrisShot(LivingEntity owner, Level level) {
-        super(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT.get(), level);
+        this(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT.get(), level);
         this.setOwner(owner);
+        this.setPos(owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
         this.setNoGravity(true);
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
 
+    }
+
+    @Override
+    public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
+        super.shoot(x, y, z, velocity, inaccuracy);
+        if (this.getOwner() != null) {
+            this.setXRot(this.getOwner().getXRot());
+            this.setYRot(this.getOwner().getYHeadRot());
+            this.setOldRot();
+        }
     }
 
     @Override
@@ -43,28 +55,45 @@ public class GravititeDebrisShot extends AbstractHurtingProjectile {
                 this.discard();
             }
         }
-        if (this.level().isClientSide() || (this.getOwner() == null || this.getOwner().isAlive()) && this.level().hasChunkAt(this.blockPosition())) {
-            HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-            if (hitResult.getType() != HitResult.Type.MISS && !EventHooks.onProjectileImpact(this, hitResult)) {
-                this.onHit(hitResult);
+
+        Entity entity = this.getOwner();
+        this.applyInertia();
+        if (this.level().isClientSide || (entity == null || !entity.isRemoved()) && this.level().hasChunkAt(this.blockPosition())) {
+            HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity, this.getClipType());
+            boolean impacted = hitresult.getType() != HitResult.Type.MISS && !EventHooks.onProjectileImpact(this, hitresult);
+            Vec3 vec3;
+            if (impacted) {
+                vec3 = hitresult.getLocation();
+            } else {
+                vec3 = this.position().add(this.getDeltaMovement());
             }
 
+            this.setPos(vec3);
             this.applyEffectsFromBlocks();
-            Vec3 vec3 = this.getDeltaMovement();
-            double d0 = this.getX() + vec3.x();
-            double d1 = this.getY() + vec3.y();
-            double d2 = this.getZ() + vec3.z();
-            ProjectileUtil.rotateTowardsMovement(this, 0.2F);
-            float f = this.getInertia();
-            if (this.isInWater()) {
-                this.discard();
-            }
 
-            this.setDeltaMovement(vec3.add(vec3.normalize().scale(this.accelerationPower)).scale(f));
-            this.setPos(d0, d1, d2);
+            this.baseTick();
+
+            if (hitresult.getType() != HitResult.Type.MISS && this.isAlive() && impacted) {
+                this.hitTargetOrDeflectSelf(hitresult);
+            }
         } else {
             this.discard();
         }
+    }
+
+    private void applyInertia() {
+        Vec3 vec3 = this.getDeltaMovement();
+        Vec3 vec31 = this.position();
+        float f;
+        if (this.isInWater()) {
+            for(int i = 0; i < 4; ++i) {
+                this.level().addParticle(ParticleTypes.BUBBLE, vec31.x - vec3.x * (double) 0.25F, vec31.y - vec3.y * (double) 0.25F, vec31.z - vec3.z * (double) 0.25F, vec3.x, vec3.y, vec3.z);
+            }
+            f = this.getLiquidInertia();
+        } else {
+            f = this.getInertia();
+        }
+        this.setDeltaMovement(vec3.add(vec3.normalize().scale(this.accelerationPower)).scale(f));
     }
 
     @Override
@@ -82,7 +111,7 @@ public class GravititeDebrisShot extends AbstractHurtingProjectile {
             Entity entity = result.getEntity();
             Entity entity1 = this.getOwner();
             if (entity1 instanceof LivingEntity) {
-                entity.hurt(this.damageSources().indirectMagic(this, entity1), 2.0F);
+                entity.hurt(this.damageSources().indirectMagic(this, entity1), 4.0F);
             }
         }
     }

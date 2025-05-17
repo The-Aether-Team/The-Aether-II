@@ -1,8 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.GravititeDebrisShot;
-import com.aetherteam.aetherii.entity.projectile.VenomousDart;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -67,16 +66,14 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
 
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
-        GravititeDebrisShot debris = new GravititeDebrisShot(this, this.level());
-        debris.setPos(this.getX(), this.getEyeY() - 0.7, this.getZ());
-        debris.forceSetRotation(this.getXRot(), this.getYRot());
-        double d0 = target.getEyeY() - this.getEyeY();
-        double d1 = target.getX() - this.getX();
-        double d3 = target.getZ() - this.getZ();
-        double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.1F;
-        debris.shoot(d1, d0 + d4, d3, 0.01F, 0.0F);
-        this.playSound(AetherIISoundEvents.COCKATRICE_SHOOT.value(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level().addFreshEntity(debris);
+        GravititeDebrisShot debrisShot = new GravititeDebrisShot(this, this.level());
+        double d0 = target.getX() - this.getX();
+        double d1 = target.getY(0.5) - debrisShot.getY();
+        double d2 = target.getZ() - this.getZ();
+        if (this.level() instanceof ServerLevel serverLevel) {
+            debrisShot.shoot(d0, d1, d2, 0.5F, 0.0F);
+            serverLevel.addFreshEntity(debrisShot);
+        }
     }
 
     @Override

@@ -4,8 +4,6 @@ import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.AetherIIModelLayers;
 import com.aetherteam.aetherii.client.renderer.entity.model.GravititeDebrisShotModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.GravititeDebrisShotRenderState;
-import com.aetherteam.aetherii.client.renderer.entity.state.GravititeTalutonRenderState;
-import com.aetherteam.aetherii.entity.monster.GravititeTaluton;
 import com.aetherteam.aetherii.entity.projectile.GravititeDebrisShot;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -41,8 +39,8 @@ public class GravititeDebrisShotRenderer extends EntityRenderer<GravititeDebrisS
         poseStack.pushPose();
         poseStack.translate(0, 0.25, 0);
         poseStack.mulPose(Axis.YN.rotationDegrees(renderState.yRot));
-        this.model.setupAnim(renderState);
         VertexConsumer vertexconsumer = bufferSource.getBuffer(this.model.renderType(TEXTURE_LOCATION));
+        this.model.setupAnim(renderState);
         this.model.renderToBuffer(poseStack, vertexconsumer, partialTick, OverlayTexture.NO_OVERLAY);
         poseStack.popPose();
         super.render(renderState, poseStack, bufferSource, partialTick);
