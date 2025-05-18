@@ -37,7 +37,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 3
     }
   ],
   "fallback": "aether_ii:infected_guardian_tree/corridors/dead_ends_joint"
