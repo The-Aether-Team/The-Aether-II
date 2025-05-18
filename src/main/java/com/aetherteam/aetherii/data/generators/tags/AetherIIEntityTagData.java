@@ -99,7 +99,8 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.AERBUNNY.get(),
                 AetherIIEntityTypes.SKYROOT_LIZARD.get(),
                 AetherIIEntityTypes.ZEPHYR.get(),
-                AetherIIEntityTypes.SKEPHID.get()
+                AetherIIEntityTypes.SKEPHID.get(),
+                AetherIIEntityTypes.GRAVITITE_TALUTON.get()
         );
     }
 }

@@ -44,7 +44,7 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 15.0F)
+                .add(Attributes.MAX_HEALTH, 20.0F)
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.STEP_HEIGHT, 1.0F);
     }
