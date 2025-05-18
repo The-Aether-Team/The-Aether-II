@@ -54,8 +54,11 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.AECHOR_PLANT.get(),
                 AetherIIEntityTypes.CARRION_SPROUT.get(),
                 AetherIIEntityTypes.ZEPHYR.get(),
+                AetherIIEntityTypes.SKEPHID.get(),
                 AetherIIEntityTypes.TEMPEST.get(),
                 AetherIIEntityTypes.COCKATRICE.get(),
+                AetherIIEntityTypes.ARKENIUM_TALUTON.get(),
+                AetherIIEntityTypes.GRAVITITE_TALUTON.get(),
                 AetherIIEntityTypes.HOLYSTONE_ROCK.get(),
                 AetherIIEntityTypes.ARCTIC_SNOWBALL.get(),
                 AetherIIEntityTypes.SKYROOT_PINECONE.get(),
@@ -96,7 +99,8 @@ public class AetherIIEntityTagData extends EntityTypeTagsProvider {
                 AetherIIEntityTypes.AERBUNNY.get(),
                 AetherIIEntityTypes.SKYROOT_LIZARD.get(),
                 AetherIIEntityTypes.ZEPHYR.get(),
-                AetherIIEntityTypes.SKEPHID.get()
+                AetherIIEntityTypes.SKEPHID.get(),
+                AetherIIEntityTypes.GRAVITITE_TALUTON.get()
         );
     }
 }
