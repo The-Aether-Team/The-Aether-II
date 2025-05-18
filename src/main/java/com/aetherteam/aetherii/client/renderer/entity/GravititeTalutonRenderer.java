@@ -10,7 +10,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 public class GravititeTalutonRenderer extends MobRenderer<GravititeTaluton, GravititeTalutonRenderState, GravititeTalutonModel> {
     private static final ResourceLocation GRAVITITE_TALUTON_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/gravitite_taluton/gravitite_taluton.png");
@@ -28,15 +27,15 @@ public class GravititeTalutonRenderer extends MobRenderer<GravititeTaluton, Grav
     @Override
     public void extractRenderState(GravititeTaluton entity, GravititeTalutonRenderState renderState, float partialTick) {
         super.extractRenderState(entity, renderState, partialTick);
-        renderState.legRot = Mth.rotLerp(partialTick, entity.getLegRotO(), entity.getLegRot());
-        renderState.debrisRot = Mth.rotLerp(partialTick, entity.getDebrisRot0(), entity.getDebrisRot());
+        renderState.attackAnimationState.copyFrom(entity.attackAnimationState);
+        renderState.reloadAnimationState.copyFrom(entity.reloadAnimationState);
+        renderState.debrisVisible = entity.debrisVisible;
+        renderState.viewYRot = entity.getViewYRot(partialTick);
     }
 
     @Override
     protected void scale(GravititeTalutonRenderState renderState, PoseStack poseStack) {
         poseStack.translate(0.0, -0.3, 0.0);
-        float sin = Mth.sin((renderState.ageInTicks + renderState.partialTick) / 6);
-        poseStack.translate(0.0, sin / 15, 0.0);
     }
 
     @Override

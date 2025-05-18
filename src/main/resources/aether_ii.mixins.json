@@ -30,6 +30,7 @@
     "common.accessor.MobEffectInstanceAccessor",
     "common.accessor.PerlinNoiseAccessor",
     "common.accessor.PlayerAccessor",
+    "common.accessor.RangedAttackGoalAccessor",
     "common.accessor.RecipeManagerAccessor",
     "common.accessor.SaplingBlockAccessor",
     "common.accessor.ServerGamePacketListenerImplAccessor"

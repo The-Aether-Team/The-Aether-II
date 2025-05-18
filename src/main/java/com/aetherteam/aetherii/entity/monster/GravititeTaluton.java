@@ -1,7 +1,9 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.entity.projectile.GravititeDebrisShot;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.RangedAttackGoalAccessor;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -19,10 +21,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class GravititeTaluton extends Taluton implements RangedAttackMob {
-    private float legRotO;
-    private float legRot;
-    private float debrisRot0;
-    private float debrisRot;
+    public static final int ATTACK_DURATION = 100;
+    public RangedAttackGoal attackGoal;
+    public AnimationState attackAnimationState = new AnimationState();
+    public AnimationState reloadAnimationState = new AnimationState();
+    public boolean debrisVisible;
 
     public GravititeTaluton(EntityType<? extends GravititeTaluton> entityType, Level level) {
         super(entityType, level);
@@ -30,7 +33,8 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.0, 60, 10.0F));
+        this.attackGoal = new RangedAttackGoal(this, 1.0, ATTACK_DURATION, 10.0F);
+        this.goalSelector.addGoal(1, this.attackGoal);
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
@@ -56,11 +60,35 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
                 this.hasImpulse = true;
             }
         }
-        if (this.level().isClientSide()) {
-            this.legRotO = this.legRot;
-            this.legRot += 0.1F;
-            this.debrisRot0 = this.debrisRot;
-            this.debrisRot -= 0.05F;
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.attackGoal != null) {
+            int attackTime = ((RangedAttackGoalAccessor) this.attackGoal).aether_ii$getAttackTime();
+            switch(attackTime) {
+                case 22 -> this.level().broadcastEntityEvent(this, (byte) 59);
+                case 1 -> this.level().broadcastEntityEvent(this, (byte) 61);
+                case ATTACK_DURATION -> this.level().broadcastEntityEvent(this, (byte) 60);
+                case 60 -> this.level().broadcastEntityEvent(this, (byte) 62);
+            }
+        }
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 59) {
+            this.attackAnimationState.start(this.tickCount);
+        } else if (id == 60) {
+            this.attackAnimationState.stop();
+        } else if (id == 61) {
+            this.debrisVisible = false;
+        } else if (id == 62) {
+            this.debrisVisible = true;
+            this.reloadAnimationState.start(this.tickCount);
+        } else {
+            super.handleEntityEvent(id);
         }
     }
 
@@ -82,21 +110,5 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
     @Override
     public boolean onClimbable() {
         return this.horizontalCollision;
-    }
-
-    public float getLegRotO() {
-        return this.legRotO;
-    }
-
-    public float getLegRot() {
-        return this.legRot;
-    }
-
-    public float getDebrisRot0() {
-        return this.debrisRot0;
-    }
-
-    public float getDebrisRot() {
-        return this.debrisRot;
     }
 }
