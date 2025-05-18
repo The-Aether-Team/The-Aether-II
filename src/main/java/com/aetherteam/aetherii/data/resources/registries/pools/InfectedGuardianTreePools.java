@@ -211,10 +211,13 @@ public class InfectedGuardianTreePools {
         context.register(SIDE_JOINTS, new StructureTemplatePool(
                 templatePools.getOrThrow(DEAD_END_JOINT),
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corner", processorDungeon), 3),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/t_crossing", processorDungeon), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/staircase_intersection", processorDungeon), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/dead_end_joint", processorDungeon), 3)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corner", processorDungeon), 5),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/t_crossing", processorDungeon), 4),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/staircase_intersection", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/dead_end_joint", processorDungeon), 6),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/joint_room_01_a", processorDungeon), 3),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/joint_room_01_b", processorDungeon), 1),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/joint_room_01_c", processorDungeon), 2)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

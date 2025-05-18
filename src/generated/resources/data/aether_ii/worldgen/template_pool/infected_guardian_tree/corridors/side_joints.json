@@ -11,7 +11,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 3
+      "weight": 5
     },
     {
       "element": {
@@ -24,7 +24,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -37,7 +37,7 @@
         "projection": "rigid",
         "replace_air": false
       },
-      "weight": 2
+      "weight": 3
     },
     {
       "element": {
@@ -50,7 +50,46 @@
         "projection": "rigid",
         "replace_air": false
       },
+      "weight": 6
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 0,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/corridors/side/joint_room_01_a",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
       "weight": 3
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 0,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/corridors/side/joint_room_01_b",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "discard_above_y": 384,
+        "discard_below_y": 0,
+        "element_type": "aether_ii:aether_pool_element",
+        "location": "aether_ii:infected_guardian_tree/corridors/side/joint_room_01_c",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false
+      },
+      "weight": 2
     }
   ],
   "fallback": "aether_ii:infected_guardian_tree/corridors/dead_end_joint"
