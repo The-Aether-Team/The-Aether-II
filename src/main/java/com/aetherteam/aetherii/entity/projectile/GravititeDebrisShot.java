@@ -109,18 +109,15 @@ public class GravititeDebrisShot extends AbstractHurtingProjectile {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (!this.level().isClientSide) {
-            Entity entity = result.getEntity();
-            Entity entity1 = this.getOwner();
-            if (entity1 instanceof LivingEntity livingEntity) {
-                if (livingEntity.isBlocking()) {
-                    if (entity instanceof Player player && player.isBlocking()) {
-                        PlayerAccessor playerAccessor = (PlayerAccessor) player;
-                        playerAccessor.callHurtCurrentlyUsedShield(3.0F);
-                    }
-                } else {
-                    entity.hurt(this.damageSources().indirectMagic(this, entity1), 4.0F);
+        Entity entity = result.getEntity();
+        if (entity instanceof LivingEntity livingEntity) {
+            if (livingEntity.isBlocking()) {
+                if (entity instanceof Player player && player.isBlocking()) {
+                    PlayerAccessor playerAccessor = (PlayerAccessor) player;
+                    playerAccessor.callHurtCurrentlyUsedShield(3.0F);
                 }
+            } else {
+                entity.hurt(this.damageSources().indirectMagic(this, this.getOwner()), 4.0F);
             }
         }
     }
