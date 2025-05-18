@@ -46,7 +46,6 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> LOBBIES_2 = AetherIIPools.createKey("infected_guardian_tree/center/lobbies_2");
     public static final ResourceKey<StructureTemplatePool> LOBBIES_3 = AetherIIPools.createKey("infected_guardian_tree/center/lobbies_3");
 
-    public static final ResourceKey<StructureTemplatePool> ROOMS = AetherIIPools.createKey("infected_guardian_tree/rooms/eye_rooms");
     public static final ResourceKey<StructureTemplatePool> ROOMS_EYE = AetherIIPools.createKey("infected_guardian_tree/rooms/eye_rooms");
     public static final ResourceKey<StructureTemplatePool> ROOMS_EYE_OR_JOINTS = AetherIIPools.createKey("infected_guardian_tree/rooms/eye_rooms_or_joints");
 
@@ -212,6 +211,7 @@ public class InfectedGuardianTreePools {
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corner", processorDungeon), 3),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/t_crossing", processorDungeon), 2),
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/staircase_intersection", processorDungeon), 2),
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/dead_end_joint", processorDungeon), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
