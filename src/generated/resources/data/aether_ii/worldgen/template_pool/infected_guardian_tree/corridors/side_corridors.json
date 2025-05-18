@@ -27,5 +27,5 @@
       "weight": 3
     }
   ],
-  "fallback": "aether_ii:infected_guardian_tree/corridors/dead_ends_corridor"
+  "fallback": "aether_ii:infected_guardian_tree/corridors/dead_end_corridor"
 }

@@ -27,5 +27,5 @@
       "weight": 1
     }
   ],
-  "fallback": "minecraft:empty"
+  "fallback": "aether_ii:infected_guardian_tree/corridors/room_corridors"
 }
