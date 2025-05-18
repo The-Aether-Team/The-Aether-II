@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIIConfig;
 import com.aetherteam.aetherii.block.portal.PortalClientUtil;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
@@ -67,7 +66,8 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
             Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
             Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
-            Map.entry("setGlidingTimer", Triple.of(Type.INT, (object) -> this.setGlidingTimer((int) object), this::getGlidingTimer))
+            Map.entry("setGlidingTimer", Triple.of(Type.INT, (object) -> this.setGlidingTimer((int) object), this::getGlidingTimer)),
+            Map.entry("setGravititeJumpUsed", Triple.of(Type.BOOLEAN, (object) -> this.setGravititeJumpUsed((boolean) object), this::isGravititeJumpUsed))
     );
 
     public static final Codec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -114,6 +114,10 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     public void login(Player player) {
         this.startInAether(player);
         this.remountAerbunny(player);
+        this.shouldSyncAfterJoin = true;
+    }
+
+    public void changeDimension(Player player) {
         this.shouldSyncAfterJoin = true;
     }
 

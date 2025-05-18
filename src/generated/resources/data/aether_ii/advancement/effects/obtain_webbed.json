@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "obtain_webbed": {
+      "conditions": {
+        "effects": {
+          "aether_ii:webbed": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_webbed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

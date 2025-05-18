@@ -56,7 +56,6 @@ public class Tempest extends Zephyr implements BlightMonster {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return FlyingMob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0)
                 .add(Attributes.FOLLOW_RANGE, 40.0);
     }
 

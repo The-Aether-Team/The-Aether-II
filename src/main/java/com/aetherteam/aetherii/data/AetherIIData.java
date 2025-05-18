@@ -35,6 +35,7 @@ public class AetherIIData {
         CompletableFuture<HolderLookup.Provider> registryProvider = registrySets.getRegistryProvider();
         generator.addProvider(true, registrySets);
         generator.addProvider(true, new AetherIIRecipeData.Runner(packOutput, registryProvider));
+        generator.addProvider(true, new AetherIIRecipePrioritiesData(packOutput, registryProvider));
         generator.addProvider(true, AetherIILootTableData.create(packOutput, registryProvider));
         generator.addProvider(true, new AetherIILootModifierData(packOutput, registryProvider));
         generator.addProvider(true, new AetherIIAdvancementData(packOutput, registryProvider));

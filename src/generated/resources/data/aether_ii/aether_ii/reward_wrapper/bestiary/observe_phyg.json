@@ -1,0 +1,25 @@
+{
+  "advancement": "aether_ii:bestiary/observe_phyg",
+  "entry": "aether_ii:phyg",
+  "entry_values": [
+    "icon",
+    "name",
+    "slot_name",
+    "slot_subtitle",
+    "description_key",
+    "entity_type",
+    "health",
+    "slash_defense",
+    "impact_defense",
+    "pierce_defense",
+    "effect_resistance_0",
+    "effect_resistance_1",
+    "effect_resistance_2",
+    "effect_resistance_3",
+    "scale_multiplier",
+    "loot_0",
+    "loot_1",
+    "loot_2",
+    "food"
+  ]
+}

@@ -1,8 +1,12 @@
 package com.aetherteam.aetherii.attachment.player;
 
-import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
+import com.aetherteam.aetherii.api.guidebook.*;
 import com.aetherteam.aetherii.client.gui.component.toast.GuidebookToast;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIBestiaryEntries;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIEffectsEntries;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIExplorationEntries;
+import com.aetherteam.aetherii.data.resources.registries.AetherIIRewardWrappers;
+import com.aetherteam.aetherii.network.packet.clientbound.FlushGuidebookDataPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.GuidebookToastPacket;
 import com.aetherteam.aetherii.network.packet.clientbound.UpdateGuidebookDiscoveryPacket;
 import com.mojang.serialization.Codec;
@@ -20,40 +24,33 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GuidebookDiscoveryAttachment {
-    private List<Holder<BestiaryEntry>> observedBestiaryEntries;
-    private List<Holder<BestiaryEntry>> understoodBestiaryEntries;
-    private List<Holder<BestiaryEntry>> uncheckedBestiaryEntries;
+    private List<BestiaryEntry.Mutable> bestiaryEntries;
+    private List<EffectsEntry.Mutable> effectsEntries;
+    private List<ExplorationEntry.Mutable> explorationEntries;
     private boolean shouldSyncAfterJoin = false;
     private boolean sync = false;
 
     public static final Codec<GuidebookDiscoveryAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("observed_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getObservedBestiaryEntries),
-            BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("understood_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getUnderstoodBestiaryEntries),
-            BestiaryEntry.REFERENCE_CODEC.listOf().fieldOf("unchecked_bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getUncheckedBestiaryEntries)
+            BestiaryEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("bestiary_entries").forGetter(GuidebookDiscoveryAttachment::getBestiaryEntries),
+            EffectsEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("effects_entries").forGetter(GuidebookDiscoveryAttachment::getEffectsEntries),
+            ExplorationEntry.Mutable.DIRECT_CODEC.listOf().fieldOf("exploration_entries").forGetter(GuidebookDiscoveryAttachment::getExplorationEntries)
     ).apply(instance, GuidebookDiscoveryAttachment::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookDiscoveryAttachment> STREAM_CODEC = StreamCodec.composite(
-            BestiaryEntry.STREAM_CODEC.apply(ByteBufCodecs.list()),
-            GuidebookDiscoveryAttachment::getObservedBestiaryEntries,
-            BestiaryEntry.STREAM_CODEC.apply(ByteBufCodecs.list()),
-            GuidebookDiscoveryAttachment::getUnderstoodBestiaryEntries,
-            BestiaryEntry.STREAM_CODEC.apply(ByteBufCodecs.list()),
-            GuidebookDiscoveryAttachment::getUncheckedBestiaryEntries,
-            GuidebookDiscoveryAttachment::new
-    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookDiscoveryAttachment> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC);
 
-    public GuidebookDiscoveryAttachment(List<Holder<BestiaryEntry>> observedBestiaryEntries, List<Holder<BestiaryEntry>> understoodBestiaryEntries, List<Holder<BestiaryEntry>> uncheckedBestiaryEntries) {
-        this.observedBestiaryEntries = new ArrayList<>(observedBestiaryEntries);
-        this.understoodBestiaryEntries = new ArrayList<>(understoodBestiaryEntries);
-        this.uncheckedBestiaryEntries = new ArrayList<>(uncheckedBestiaryEntries);
+    protected GuidebookDiscoveryAttachment(List<BestiaryEntry.Mutable> bestiaryEntries, List<EffectsEntry.Mutable> effectsEntries, List<ExplorationEntry.Mutable> explorationEntries) {
+        this.bestiaryEntries = new ArrayList<>(bestiaryEntries);
+        this.effectsEntries = new ArrayList<>(effectsEntries);
+        this.explorationEntries = new ArrayList<>(explorationEntries);
     }
 
     public GuidebookDiscoveryAttachment() {
-        this.observedBestiaryEntries = new ArrayList<>();
-        this.understoodBestiaryEntries = new ArrayList<>();
-        this.uncheckedBestiaryEntries = new ArrayList<>();
+        this.bestiaryEntries = new ArrayList<>();
+        this.effectsEntries = new ArrayList<>();
+        this.explorationEntries = new ArrayList<>();
     }
 
     public void login(Player player) {
@@ -71,9 +68,33 @@ public class GuidebookDiscoveryAttachment {
     private void syncAfterJoin(Player player) {
         if (this.shouldSyncAfterJoin) {
             if (player instanceof ServerPlayer serverPlayer) {
+                PacketDistributor.sendToPlayer(serverPlayer, new FlushGuidebookDataPacket());
+                this.setupEntries(serverPlayer);
                 PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
             }
             this.shouldSyncAfterJoin = false;
+        }
+    }
+
+    private void setupEntries(ServerPlayer serverPlayer) {
+        RegistryAccess registryAccess = serverPlayer.registryAccess();
+        if (this.bestiaryEntries.isEmpty()) {
+            Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
+            for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
+                this.bestiaryEntries.add(new BestiaryEntry.Mutable(entry));
+            }
+        }
+        if (this.effectsEntries.isEmpty()) {
+            Registry<EffectsEntry> effectsEntries = registryAccess.lookupOrThrow(AetherIIEffectsEntries.EFFECTS_ENTRY_REGISTRY_KEY);
+            for (Holder<EffectsEntry> entry : effectsEntries.asHolderIdMap()) {
+                this.effectsEntries.add(new EffectsEntry.Mutable(entry));
+            }
+        }
+        if (this.explorationEntries.isEmpty()) {
+            Registry<ExplorationEntry> explorationEntries = registryAccess.lookupOrThrow(AetherIIExplorationEntries.EXPLORATION_ENTRY_REGISTRY_KEY);
+            for (Holder<ExplorationEntry> entry : explorationEntries.asHolderIdMap()) {
+                this.explorationEntries.add(new ExplorationEntry.Mutable(entry));
+            }
         }
     }
 
@@ -84,7 +105,9 @@ public class GuidebookDiscoveryAttachment {
     public void trackDiscoveries(Player player, AdvancementHolder advancement) {
         if (player instanceof ServerPlayer serverPlayer) {
             RegistryAccess registryAccess = serverPlayer.registryAccess();
-            this.trackBestiaryEntries(serverPlayer, registryAccess, advancement);
+            this.trackBestiaryEntries(registryAccess, advancement, serverPlayer);
+            this.trackEffectsEntries(registryAccess, advancement, serverPlayer);
+            this.trackExplorationEntries(registryAccess, advancement, serverPlayer);
             if (this.sync) {
                 PacketDistributor.sendToPlayer(serverPlayer, new UpdateGuidebookDiscoveryPacket(this));
                 this.sync = false;
@@ -92,40 +115,81 @@ public class GuidebookDiscoveryAttachment {
         }
     }
 
-    private void trackBestiaryEntries(ServerPlayer serverPlayer, RegistryAccess registryAccess, AdvancementHolder advancement) {
-        Registry<BestiaryEntry> bestiaryEntries = registryAccess.lookupOrThrow(AetherIIBestiaryEntries.BESTIARY_ENTRY_REGISTRY_KEY);
-        for (Holder<BestiaryEntry> entry : bestiaryEntries.asHolderIdMap()) {
-            if (advancement.id().equals(entry.value().observationAdvancement())) {
-                this.observedBestiaryEntries.add(entry);
-                this.uncheckedBestiaryEntries.add(entry);
-                this.sync = true;
-            }
-            if (advancement.id().equals(entry.value().understandingAdvancement())) {
-                this.understoodBestiaryEntries.add(entry);
-                this.uncheckedBestiaryEntries.add(entry);
-                this.sync = true;
-            }
-        }
-        if (this.sync) {
-            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, GuidebookToast.Icons.BESTIARY));
+    private void trackBestiaryEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer) {
+        if (advancement.id().getPath().startsWith("bestiary/")) {
+            this.revealEntries(registryAccess, advancement, serverPlayer, this.bestiaryEntries);
         }
     }
 
-    public List<Holder<BestiaryEntry>> getObservedBestiaryEntries() {
-        return this.observedBestiaryEntries;
+    private void trackEffectsEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer) {
+        if (advancement.id().getPath().startsWith("effects/")) {
+            this.revealEntries(registryAccess, advancement, serverPlayer, this.effectsEntries);
+        }
     }
 
-    public List<Holder<BestiaryEntry>> getUnderstoodBestiaryEntries() {
-        return this.understoodBestiaryEntries;
+    private void trackExplorationEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer) {
+        if (advancement.id().getPath().startsWith("exploration/")) {
+            this.revealEntries(registryAccess, advancement, serverPlayer, this.explorationEntries);
+        }
     }
 
-    public List<Holder<BestiaryEntry>> getUncheckedBestiaryEntries() {
-        return this.uncheckedBestiaryEntries;
+    private void revealEntries(RegistryAccess registryAccess, AdvancementHolder advancement, ServerPlayer serverPlayer, List<? extends MutableEntry> list) {
+        GuidebookToast.Icons icon = null;
+        Optional<RewardWrapper> rewardOptional = AetherIIRewardWrappers.getWrapperForAdvancement(registryAccess, advancement.id());
+        if (rewardOptional.isPresent()) {
+            RewardWrapper reward = rewardOptional.get();
+            for (MutableEntry entry : list) {
+                if (entry.getEntry().is(reward.entryId())) {
+                    entry.getClientValues().keySet().forEach(name -> {
+                        if (entry.getClientValues().containsKey(name)) {
+                            entry.getClientValues().get(name).reveal();
+                        }
+                    });
+                    icon = this.getIconForEntry(entry);
+                    this.sync = true;
+                }
+            }
+        }
+        if (this.sync && icon != null) {
+            PacketDistributor.sendToPlayer(serverPlayer, new GuidebookToastPacket(GuidebookToast.Type.DISCOVERY, icon));
+        }
+    }
+
+    public void clearEntries() {
+        this.getBestiaryEntries().clear();
+        this.getEffectsEntries().clear();
+        this.getExplorationEntries().clear();
+    }
+
+    public GuidebookToast.Icons getIconForEntry(MutableEntry entry) {
+        switch(entry) {
+            case BestiaryEntry.Mutable e -> {
+                return GuidebookToast.Icons.BESTIARY;
+            }
+            case EffectsEntry.Mutable e -> {
+                return GuidebookToast.Icons.EFFECTS;
+            }
+            default -> {
+                return GuidebookToast.Icons.EXPLORATION;
+            }
+        }
+    }
+
+    public List<BestiaryEntry.Mutable> getBestiaryEntries() {
+        return this.bestiaryEntries;
+    }
+
+    public List<EffectsEntry.Mutable> getEffectsEntries() {
+        return this.effectsEntries;
+    }
+
+    public List<ExplorationEntry.Mutable> getExplorationEntries() {
+        return this.explorationEntries;
     }
 
     public void syncAttachment(GuidebookDiscoveryAttachment other) {
-        this.observedBestiaryEntries = other.observedBestiaryEntries;
-        this.understoodBestiaryEntries = other.understoodBestiaryEntries;
-        this.uncheckedBestiaryEntries = other.uncheckedBestiaryEntries;
+        this.bestiaryEntries = other.bestiaryEntries;
+        this.effectsEntries = other.effectsEntries;
+        this.explorationEntries = other.explorationEntries;
     }
 }

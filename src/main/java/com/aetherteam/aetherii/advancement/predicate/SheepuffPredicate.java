@@ -39,10 +39,10 @@ public record SheepuffPredicate(Optional<Boolean> puffed, Optional<Boolean> shea
     }
 
     public static SheepuffPredicate hasWool(Sheepuff.SheepuffColor color) {
-        return new SheepuffPredicate(Optional.of(false), Optional.empty(), Optional.of(color));
+        return new SheepuffPredicate(Optional.empty(), Optional.of(false), Optional.of(color));
     }
 
-    public static SheepuffPredicate isPuffed() {
-        return new SheepuffPredicate(Optional.of(false), Optional.of(true), Optional.empty());
+    public static SheepuffPredicate isPuffed(boolean puffed) {
+        return new SheepuffPredicate(Optional.of(puffed), Optional.of(false), Optional.empty());
     }
 }

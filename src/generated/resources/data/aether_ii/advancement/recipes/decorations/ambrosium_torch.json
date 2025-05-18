@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_holystone_pickaxe": {
+    "has_ambrosium_shard": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:holystone_pickaxe"
+            "items": "aether_ii:ambrosium_shard"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_holystone_pickaxe"
+      "has_ambrosium_shard"
     ]
   ],
   "rewards": {

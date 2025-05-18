@@ -1,11 +1,12 @@
 package com.aetherteam.aetherii.entity;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.AetherIIDamageStats;
+import com.aetherteam.aetherii.AetherIIStats;
 import com.aetherteam.aetherii.data.resources.AetherIIMobCategory;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEntities;
 import com.aetherteam.aetherii.entity.block.HoveringBlockEntity;
 import com.aetherteam.aetherii.entity.monster.*;
+import com.aetherteam.aetherii.entity.npc.outpost.Edward;
 import com.aetherteam.aetherii.entity.passive.*;
 import com.aetherteam.aetherii.entity.projectile.*;
 import net.minecraft.core.registries.Registries;
@@ -77,12 +78,14 @@ public class AetherIIEntityTypes {
             () -> EntityType.Builder.of(Swet::new, MobCategory.MONSTER).sized(0.9F, 0.9F).clientTrackingRange(10).build(AetherIIEntities.SWET));
     public static final DeferredHolder<EntityType<?>, EntityType<Skephid>> SKEPHID = ENTITY_TYPES.register("skephid",
             () -> EntityType.Builder.of(Skephid::new, MobCategory.MONSTER).sized(0.8F, 0.8F).clientTrackingRange(10).build(AetherIIEntities.SKEPHID));
-
     public static final DeferredHolder<EntityType<?>, EntityType<ArkeniumTaluton>> ARKENIUM_TALUTON = ENTITY_TYPES.register("arkenium_taluton",
             () -> EntityType.Builder.of(ArkeniumTaluton::new, MobCategory.MONSTER).sized(1.0F, 1.65F).eyeHeight(1.25F).clientTrackingRange(10).build(AetherIIEntities.ARKENIUM_TALUTON));
     public static final DeferredHolder<EntityType<?>, EntityType<GravititeTaluton>> GRAVITITE_TALUTON = ENTITY_TYPES.register("gravitite_taluton",
             () -> EntityType.Builder.of(GravititeTaluton::new, MobCategory.MONSTER).sized(0.75F, 1.9F).eyeHeight(1.4F).clientTrackingRange(10).build(AetherIIEntities.GRAVITITE_TALUTON));
 
+    // NPCs
+    public static final DeferredHolder<EntityType<?>, EntityType<Edward>> EDWARD = ENTITY_TYPES.register("edward",
+            () -> EntityType.Builder.of(Edward::new, MobCategory.CREATURE).sized(0.6F, 1.95F).eyeHeight(1.74F).passengerAttachments(2.0125F).ridingOffset(-0.7F).clientTrackingRange(8).build(AetherIIEntities.EDWARD));
 
     // Projectiles
     public static final DeferredHolder<EntityType<?>, EntityType<HolystoneRock>> HOLYSTONE_ROCK = ENTITY_TYPES.register("holystone_rock",
@@ -157,28 +160,31 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.FLYING_COW.get(), FlyingCow.createMobAttributes().build());
         event.put(AetherIIEntityTypes.SHEEPUFF.get(), Sheepuff.createMobAttributes().build());
         event.put(AetherIIEntityTypes.PHYG.get(), Phyg.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.AERBUNNY.get(), AetherIIDamageStats.merge(Aerbunny.createMobAttributes(), AetherIIDamageStats.AERBUNNY).build());
-        event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), AetherIIDamageStats.merge(Taegore.createMobAttributes(), AetherIIDamageStats.HIGHFIELDS_TAEGORE).build());
-        event.put(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), AetherIIDamageStats.merge(Taegore.createMobAttributes(), AetherIIDamageStats.MAGNETIC_TAEGORE).build());
-        event.put(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), AetherIIDamageStats.merge(Taegore.createMobAttributes(), AetherIIDamageStats.ARCTIC_TAEGORE).build());
-        event.put(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), AetherIIDamageStats.merge(Burrukai.createMobAttributes(), AetherIIDamageStats.HIGHFIELDS_BURRUKAI).build());
-        event.put(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), AetherIIDamageStats.merge(Burrukai.createMobAttributes(), AetherIIDamageStats.MAGNETIC_BURRUKAI).build());
-        event.put(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), AetherIIDamageStats.merge(Burrukai.createMobAttributes(), AetherIIDamageStats.ARCTIC_BURRUKAI).build());
-        event.put(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIDamageStats.merge(Kirrid.createMobAttributes(), AetherIIDamageStats.HIGHFIELDS_KIRRID).build());
-        event.put(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIDamageStats.merge(Kirrid.createMobAttributes(), AetherIIDamageStats.MAGNETIC_KIRRID).build());
-        event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIDamageStats.merge(Kirrid.createMobAttributes(), AetherIIDamageStats.ARCTIC_KIRRID).build());
-        event.put(AetherIIEntityTypes.MOA.get(), AetherIIDamageStats.merge(Moa.createMobAttributes(), AetherIIDamageStats.MOA).build());
+        event.put(AetherIIEntityTypes.AERBUNNY.get(), AetherIIStats.merge(Aerbunny.createMobAttributes(), AetherIIStats.AERBUNNY).build());
+        event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), AetherIIStats.merge(Taegore.createMobAttributes(), AetherIIStats.HIGHFIELDS_TAEGORE).build());
+        event.put(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), AetherIIStats.merge(Taegore.createMobAttributes(), AetherIIStats.MAGNETIC_TAEGORE).build());
+        event.put(AetherIIEntityTypes.ARCTIC_TAEGORE.get(), AetherIIStats.merge(Taegore.createMobAttributes(), AetherIIStats.ARCTIC_TAEGORE).build());
+        event.put(AetherIIEntityTypes.HIGHFIELDS_BURRUKAI.get(), AetherIIStats.merge(Burrukai.createMobAttributes(), AetherIIStats.HIGHFIELDS_BURRUKAI).build());
+        event.put(AetherIIEntityTypes.MAGNETIC_BURRUKAI.get(), AetherIIStats.merge(Burrukai.createMobAttributes(), AetherIIStats.MAGNETIC_BURRUKAI).build());
+        event.put(AetherIIEntityTypes.ARCTIC_BURRUKAI.get(), AetherIIStats.merge(Burrukai.createMobAttributes(), AetherIIStats.ARCTIC_BURRUKAI).build());
+        event.put(AetherIIEntityTypes.HIGHFIELDS_KIRRID.get(), AetherIIStats.merge(Kirrid.createMobAttributes(), AetherIIStats.HIGHFIELDS_KIRRID).build());
+        event.put(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIStats.merge(Kirrid.createMobAttributes(), AetherIIStats.MAGNETIC_KIRRID).build());
+        event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIStats.merge(Kirrid.createMobAttributes(), AetherIIStats.ARCTIC_KIRRID).build());
+        event.put(AetherIIEntityTypes.MOA.get(), AetherIIStats.merge(Moa.createMobAttributes(), AetherIIStats.MOA).build());
         event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizard.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.CARRION_SPROUT.get(), AetherIIDamageStats.merge(CarrionSprout.createMobAttributes(), AetherIIDamageStats.CARRION_SPROUT).build());
+        event.put(AetherIIEntityTypes.CARRION_SPROUT.get(), AetherIIStats.merge(CarrionSprout.createMobAttributes(), AetherIIStats.CARRION_SPROUT).build());
 
         // Hostile
-        event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AetherIIDamageStats.merge(AechorPlant.createMobAttributes(), AetherIIDamageStats.AECHOR_PLANT).build());
-        event.put(AetherIIEntityTypes.ZEPHYR.get(), AetherIIDamageStats.merge(Zephyr.createMobAttributes(), AetherIIDamageStats.ZEPHYR).build());
-        event.put(AetherIIEntityTypes.TEMPEST.get(), AetherIIDamageStats.merge(Tempest.createMobAttributes(), AetherIIDamageStats.TEMPEST).build());
-        event.put(AetherIIEntityTypes.COCKATRICE.get(), AetherIIDamageStats.merge(Cockatrice.createMobAttributes(), AetherIIDamageStats.COCKATRICE).build());
-        event.put(AetherIIEntityTypes.SWET.get(), AetherIIDamageStats.merge(Swet.createMobAttributes(), AetherIIDamageStats.SWET).build());
-        event.put(AetherIIEntityTypes.SKEPHID.get(), AetherIIDamageStats.merge(Skephid.createMobAttributes(), AetherIIDamageStats.SKEPHID).build());
-        event.put(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), AetherIIDamageStats.merge(ArkeniumTaluton.createMobAttributes(), AetherIIDamageStats.ARKENIUM_TALUTON).build());
-        event.put(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), AetherIIDamageStats.merge(GravititeTaluton.createMobAttributes(), AetherIIDamageStats.GRAVITITE_TALUTON).build());
+        event.put(AetherIIEntityTypes.AECHOR_PLANT.get(), AetherIIStats.merge(AechorPlant.createMobAttributes(), AetherIIStats.AECHOR_PLANT).build());
+        event.put(AetherIIEntityTypes.ZEPHYR.get(), AetherIIStats.merge(Zephyr.createMobAttributes(), AetherIIStats.ZEPHYR).build());
+        event.put(AetherIIEntityTypes.TEMPEST.get(), AetherIIStats.merge(Tempest.createMobAttributes(), AetherIIStats.TEMPEST).build());
+        event.put(AetherIIEntityTypes.COCKATRICE.get(), AetherIIStats.merge(Cockatrice.createMobAttributes(), AetherIIStats.COCKATRICE).build());
+        event.put(AetherIIEntityTypes.SWET.get(), AetherIIStats.merge(Swet.createMobAttributes(), AetherIIStats.SWET).build());
+        event.put(AetherIIEntityTypes.SKEPHID.get(), AetherIIStats.merge(Skephid.createMobAttributes(), AetherIIStats.SKEPHID).build());
+        event.put(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), AetherIIStats.merge(ArkeniumTaluton.createMobAttributes(), AetherIIStats.ARKENIUM_TALUTON).build());
+        event.put(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), AetherIIStats.merge(GravititeTaluton.createMobAttributes(), AetherIIStats.GRAVITITE_TALUTON).build());
+
+        // NPCs
+        event.put(AetherIIEntityTypes.EDWARD.get(), Edward.createMobAttributes().build());
     }
 }

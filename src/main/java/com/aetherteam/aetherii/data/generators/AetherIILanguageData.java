@@ -892,6 +892,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.ENCHANTED_MOA_FEED, "Enchanted Moa Feed");
         this.addItem(AetherIIItems.MOA_SADDLE, "Moa Saddle");
         this.addItem(AetherIIItems.GLINT_COIN, "Glint Coin");
+        this.addItem(AetherIIItems.GUIDEBOOK_PAGE, "Guidebook Page");
         this.addItem(AetherIIItems.AETHER_PORTAL_FRAME, "Aether Portal Frame");
 
         // Tooltips
@@ -1016,6 +1017,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItemTooltip("treasure.description", "Treasure Item");
         this.addItemTooltip("currency.description", "Converts to Currency:");
         this.addItemTooltip("currency.amount", "%s Glint");
+        this.addItemTooltip("curative.removes", "Removes: %s");
+        this.addItemTooltip("curative.reduces", "Reduces: %s");
         this.addItemTooltip("healing_stone.charges", "%s/5 Charges");
 
         // Moa Egg Tooltips
@@ -1108,6 +1111,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.VENOMOUS_DART, "Venomous Dart");
         this.addEntityType(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT, "Gravitite Debris Shot");
 
+        // NPCs
+        this.addEntityType(AetherIIEntityTypes.EDWARD, "Edward");
+
         // Miscellaneous
         this.addEntityType(AetherIIEntityTypes.ELECTRIC_FIELD, "Electric Field");
 
@@ -1151,6 +1157,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.SLASH_DAMAGE.get(), "§9Slash§r Damage");
         this.addAttribute(AetherIIAttributes.IMPACT_DAMAGE.get(), "§eImpact§r Damage");
         this.addAttribute(AetherIIAttributes.PIERCE_DAMAGE.get(), "§cPierce§r Damage");
+        this.addAttribute(AetherIIAttributes.SLASH_RANGED_DAMAGE.get(), "Ranged §9Slash§r Damage");
+        this.addAttribute(AetherIIAttributes.IMPACT_RANGED_DAMAGE.get(), "Ranged §eImpact§r Damage");
+        this.addAttribute(AetherIIAttributes.PIERCE_RANGED_DAMAGE.get(), "Ranged §cPierce§r Damage");
         this.addAttribute(AetherIIAttributes.SLASH_RESISTANCE.get(), "§9Slash§r Resistance");
         this.addAttribute(AetherIIAttributes.IMPACT_RESISTANCE.get(), "§eImpact§r Resistance");
         this.addAttribute(AetherIIAttributes.PIERCE_RESISTANCE.get(), "§cPierce§r Resistance");
@@ -1178,6 +1187,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addAttribute(AetherIIAttributes.FROSTBITE_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.FUNGAL_ROT_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
         this.addAttribute(AetherIIAttributes.CRYSTALLIZED_EFFECT_RESISTANCE.get(), "%s Buildup Resistance");
+        this.addAttribute(AetherIIAttributes.SATURATION_BOOST.get(), "Food Saturation");
 
 
         // Effects
@@ -1235,7 +1245,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addGuiText("guidebook.discovery.exploration.title", "Exploration");
         this.addGuiText("guidebook.journal.title", "Journal");
         this.addGuiText("guidebook.rewards.title", "Rewards");
-        this.addGuiText("guidebook.discovery.bestiary.entry.unknown", "???");
+        this.addGuiText("guidebook.discovery.entry.unknown", "???");
         this.addGuiText("guidebook.discovery.bestiary.stat.health", "%s Health");
         this.addGuiText("guidebook.discovery.bestiary.stat.damage_weakness", "%1$s Damage from %2$s Attacks");
         this.addGuiText("guidebook.discovery.bestiary.stat.damage_resistance", "%1$s Damage from %2$s Attacks");
@@ -1301,6 +1311,19 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+
+        this.addEffectsDescription(AetherIIEffects.WOUND.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.STUN.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.FRACTURE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.AMBROSIUM_POISONING.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.TOXIN.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.VENOM.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.CHARGED.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.WEBBED.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.IMMOLATION.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.FROSTBITE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.FUNGAL_ROT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addEffectsDescription(AetherIIEffects.CRYSTALLIZED.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
 
         // Jukebox Songs

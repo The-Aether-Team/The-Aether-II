@@ -9,5 +9,5 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIConsumeEffectTypes {
     public static final DeferredRegister<ConsumeEffect.Type<?>> CONSUME_EFFECT_TYPE = DeferredRegister.create(BuiltInRegistries.CONSUME_EFFECT_TYPE, AetherII.MODID);
 
-    public static final DeferredHolder<ConsumeEffect.Type<?>, ConsumeEffect.Type<PreventStatusEffectConsumeEffect>> REDUCE_EFFECT_BUILDUP = CONSUME_EFFECT_TYPE.register("reduce_effect_buildup", () -> new ConsumeEffect.Type<>(PreventStatusEffectConsumeEffect.CODEC, PreventStatusEffectConsumeEffect.STREAM_CODEC));
+    public static final DeferredHolder<ConsumeEffect.Type<?>, ConsumeEffect.Type<ReduceStatusEffectConsumeEffect>> REDUCE_EFFECT_BUILDUP = CONSUME_EFFECT_TYPE.register("reduce_effect_buildup", () -> new ConsumeEffect.Type<>(ReduceStatusEffectConsumeEffect.CODEC, ReduceStatusEffectConsumeEffect.STREAM_CODEC));
 }

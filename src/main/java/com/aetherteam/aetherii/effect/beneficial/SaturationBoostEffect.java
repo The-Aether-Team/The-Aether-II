@@ -4,7 +4,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 
 public class SaturationBoostEffect extends MobEffect {
-
     public SaturationBoostEffect() {
         super(MobEffectCategory.BENEFICIAL, 14394744);
     }

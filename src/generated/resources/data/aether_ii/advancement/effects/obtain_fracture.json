@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "obtain_fracture": {
+      "conditions": {
+        "effects": {
+          "aether_ii:fracture": {}
+        }
+      },
+      "trigger": "minecraft:effects_changed"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_fracture"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

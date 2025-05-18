@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.data.providers;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.aetherteam.nitrogen.data.providers.NitrogenLanguageProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 
@@ -65,5 +66,9 @@ public abstract class AetherIILanguageProvider extends NitrogenLanguageProvider 
 
     public void addBestiaryDescription(EntityType<?> entityType, String description) {
         this.add(this.id + ".guidebook_bestiary.description." + entityType.getDescriptionId(), description);
+    }
+
+    public void addEffectsDescription(MobEffect effect, String description) {
+        this.add(this.id + ".guidebook_effects.description." + effect.getDescriptionId(), description);
     }
 }

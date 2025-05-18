@@ -1,21 +1,31 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.arkenium_taluton",
+  "effect_resistances": [],
   "entity_type": "aether_ii:arkenium_taluton",
-  "icon_discovered": "aether_ii:guidebook/bestiary/arkenium_taluton",
-  "loot": [
+  "health": 0,
+  "icon": "aether_ii:guidebook/bestiary/arkenium_taluton",
+  "id": "aether_ii:arkenium_taluton",
+  "impact_defense": 0,
+  "loot_slots": [
     {
-      "chance": 1.0,
-      "item": "aether_ii:holystone",
-      "max_count": 2,
-      "min_count": 0
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:holystone",
+        "max_count": 2,
+        "min_count": 0
+      }
     },
     {
-      "chance": 1.0,
-      "item": "aether_ii:arkenium_core",
-      "max_count": 1,
-      "min_count": 0
+      "loot": {
+        "chance": 1.0,
+        "item": "aether_ii:arkenium_core",
+        "max_count": 1,
+        "min_count": 0
+      }
     }
   ],
-  "observation_advancement": "aether_ii:bestiary/observe_arkenium_taluton",
-  "understanding_advancement": "aether_ii:bestiary/understand_arkenium_taluton"
+  "name": "entity.aether_ii.arkenium_taluton",
+  "pierce_defense": 0,
+  "slash_defense": 0,
+  "slot_name": "entity.aether_ii.arkenium_taluton"
 }
