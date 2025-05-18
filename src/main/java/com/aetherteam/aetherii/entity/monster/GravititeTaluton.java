@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.GravititeDebrisShot;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.RangedAttackGoalAccessor;
 import net.minecraft.server.level.ServerLevel;
@@ -102,6 +103,7 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
             debrisShot.shoot(d0, d1, d2, 0.5F, 0.0F);
             serverLevel.addFreshEntity(debrisShot);
         }
+        this.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), this.getSoundVolume(), (this.level().getRandom().nextFloat() - this.level().getRandom().nextFloat()) * 0.2F + 1.0F);
     }
 
     @Override
