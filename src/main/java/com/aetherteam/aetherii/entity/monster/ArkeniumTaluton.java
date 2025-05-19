@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -61,6 +60,7 @@ public class ArkeniumTaluton extends Monster {
     public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
         this.attackAnimationTick = 10;
         serverLevel.broadcastEntityEvent(this, (byte) 4);
+        this.playSound(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_ATTACK.get(), 1.0F, 1.0F);
         return super.doHurtTarget(serverLevel, entity);
     }
 
@@ -68,7 +68,8 @@ public class ArkeniumTaluton extends Monster {
     public void handleEntityEvent(byte id) {
         if (id == 4) {
             this.attackAnimationTick = 10;
-            this.playSound(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_ATTACK.get(), 1.0F, 1.0F); //todo not playing?
+        } else {
+            super.handleEntityEvent(id);
         }
     }
 
