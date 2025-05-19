@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.inventory.menu;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
@@ -68,7 +69,7 @@ public class ArtisansBenchMenu extends AbstractContainerMenu {
                 access.execute((level, pos) -> {
                     long l = level.getGameTime();
                     if (ArtisansBenchMenu.this.lastSoundTime != l) {
-                        level.playSound(null, pos, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.BLOCKS, 1.0F, 1.0F);
+                        level.playSound(null, pos, AetherIISoundEvents.UI_ARTISANS_BENCH_TAKE_RESULT.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
                         ArtisansBenchMenu.this.lastSoundTime = l;
                     }
                 });

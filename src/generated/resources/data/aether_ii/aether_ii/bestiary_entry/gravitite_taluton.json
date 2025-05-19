@@ -2,10 +2,10 @@
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.gravitite_taluton",
   "effect_resistances": [],
   "entity_type": "aether_ii:gravitite_taluton",
-  "health": 0,
+  "health": 20,
   "icon": "aether_ii:guidebook/bestiary/gravitite_taluton",
   "id": "aether_ii:gravitite_taluton",
-  "impact_defense": 0,
+  "impact_defense": 2,
   "loot_slots": [
     {
       "loot": {
@@ -18,14 +18,14 @@
     {
       "loot": {
         "chance": 1.0,
-        "item": "aether_ii:arkenium_core",
+        "item": "aether_ii:gravitite_core",
         "max_count": 1,
         "min_count": 0
       }
     }
   ],
   "name": "entity.aether_ii.gravitite_taluton",
-  "pierce_defense": 0,
-  "slash_defense": 0,
+  "pierce_defense": -2,
+  "slash_defense": 2,
   "slot_name": "entity.aether_ii.gravitite_taluton"
 }

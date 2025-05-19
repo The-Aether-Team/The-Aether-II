@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.ai.brain.behavior;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -24,7 +25,7 @@ public class AfterLongJumpFalling extends Behavior<Mob> {
         super.start(pLevel, pEntity, pGameTime);
         if (pEntity.onGround()) {
             pEntity.setDeltaMovement(pEntity.getDeltaMovement().multiply(0.1F, 1.0, 0.1F));
-            pLevel.playSound(null, pEntity, SoundEvents.GOAT_STEP, SoundSource.NEUTRAL, 2.0F, 1.0F);
+            pLevel.playSound(null, pEntity, AetherIISoundEvents.ENTITY_KIRRID_STEP.get(), SoundSource.NEUTRAL, 2.0F, 1.0F);
         }
         pEntity.setPose(Pose.STANDING);
         pEntity.setDiscardFriction(false);

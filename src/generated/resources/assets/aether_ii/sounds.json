@@ -19,11 +19,108 @@
     ],
     "subtitle": "subtitles.aether_ii.block.aether_portal.trigger"
   },
+  "block.arkenium_forge.use": {
+    "sounds": [
+      "random/anvil_use"
+    ],
+    "subtitle": "subtitles.aether_ii.block.arkenium_forge.use"
+  },
   "block.blue_aercloud.bounce": {
     "sounds": [
       "aether_ii:block/aercloud/blue_aercloud_bounce"
     ],
     "subtitle": "subtitles.aether_ii.block.aercloud.blue_aercloud_bounce"
+  },
+  "block.bush.rustle": {
+    "sounds": [
+      "block/vine/climb1",
+      "block/vine/climb2",
+      "block/vine/climb3",
+      "block/vine/climb4",
+      "block/vine/climb5"
+    ],
+    "subtitle": "subtitles.aether_ii.block.bush.rustle"
+  },
+  "block.gas.ignite": {
+    "sounds": [
+      "mob/ghast/fireball4"
+    ],
+    "subtitle": "subtitles.aether_ii.block.gas.ignite"
+  },
+  "block.holystone_furnace.crackle": {
+    "sounds": [
+      "block/furnace/fire_crackle1",
+      "block/furnace/fire_crackle2",
+      "block/furnace/fire_crackle3",
+      "block/furnace/fire_crackle4",
+      "block/furnace/fire_crackle5"
+    ],
+    "subtitle": "subtitles.aether_ii.block.holystone_furnace.fire_crackle"
+  },
+  "block.moa_egg.crack": {
+    "sounds": [
+      {
+        "name": "mob/turtle/egg/egg_crack1",
+        "pitch": 0.8
+      },
+      {
+        "name": "mob/turtle/egg/egg_crack2",
+        "pitch": 0.8
+      },
+      {
+        "name": "mob/turtle/egg/egg_crack3",
+        "pitch": 0.8
+      },
+      {
+        "name": "mob/turtle/egg/egg_crack4",
+        "pitch": 0.8
+      },
+      {
+        "name": "mob/turtle/egg/egg_crack5",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.block.moa_egg.crack"
+  },
+  "block.moa_egg.hatch": {
+    "sounds": [
+      {
+        "name": "mob/turtle/egg/egg_break1",
+        "pitch": 0.8
+      },
+      {
+        "name": "mob/turtle/egg/egg_break2",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.block.moa_egg.hatch"
+  },
+  "entity.aechor_plant.death": {
+    "sounds": [
+      "damage/fallbig"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aechor_plant.death"
+  },
+  "entity.aechor_plant.hurt": {
+    "sounds": [
+      "damage/hit1",
+      "damage/hit2",
+      "damage/hit3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aechor_plant.hurt"
+  },
+  "entity.aechor_plant.shoot": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aechor_plant.shoot"
+  },
+  "entity.aerbunny.ambient": {
+    "sounds": [
+      "aether_ii:entity/aerbunny/say1",
+      "aether_ii:entity/aerbunny/say2"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerbunny.ambient"
   },
   "entity.aerbunny.death": {
     "sounds": [
@@ -33,7 +130,8 @@
   },
   "entity.aerbunny.hurt": {
     "sounds": [
-      "aether_ii:entity/aerbunny/hurt"
+      "aether_ii:entity/aerbunny/hurt",
+      "aether_ii:entity/aerbunny/hurt2"
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.hurt"
   },
@@ -43,11 +141,181 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.lift"
   },
+  "entity.arctic_snowball.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.arctic_snowball.throw"
+  },
+  "entity.arkenium_taluton.ambient": {
+    "sounds": [
+      "ambient/cave/cave3",
+      "ambient/cave/cave7",
+      "ambient/cave/cave9"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.arkenium_taluton.ambient"
+  },
+  "entity.arkenium_taluton.attack": {
+    "sounds": [
+      "mob/irongolem/throw"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.arkenium_taluton.attack"
+  },
+  "entity.arkenium_taluton.death": {
+    "sounds": [
+      "dig/stone1",
+      "dig/stone2",
+      "dig/stone3",
+      "dig/stone4"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.arkenium_taluton.death"
+  },
+  "entity.arkenium_taluton.hurt": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.arkenium_taluton.hurt"
+  },
+  "entity.arkenium_taluton.step": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.blighted.burn": {
+    "sounds": [
+      "random/fizz"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.blighted.burn"
+  },
+  "entity.burrukai.ambient": {
+    "sounds": [
+      {
+        "name": "aether_ii:entity/burrukai/say1",
+        "volume": 0.45
+      },
+      {
+        "name": "aether_ii:entity/burrukai/say2",
+        "volume": 0.45
+      },
+      {
+        "name": "aether_ii:entity/burrukai/say3",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.burrukai.ambient"
+  },
+  "entity.burrukai.death": {
+    "sounds": [
+      {
+        "name": "aether_ii:entity/burrukai/death",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.burrukai.death"
+  },
+  "entity.burrukai.hurt": {
+    "sounds": [
+      {
+        "name": "aether_ii:entity/burrukai/hurt1",
+        "volume": 0.45
+      },
+      {
+        "name": "aether_ii:entity/burrukai/hurt2",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.burrukai.hurt"
+  },
+  "entity.burrukai.step": {
+    "sounds": [
+      "mob/cow/step1",
+      "mob/cow/step2",
+      "mob/cow/step3",
+      "mob/cow/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.carrion_sprout.death": {
+    "sounds": [
+      "damage/fallbig"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.carrion_sprout.death"
+  },
+  "entity.carrion_sprout.hurt": {
+    "sounds": [
+      "damage/hit1",
+      "damage/hit2",
+      "damage/hit3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.carrion_sprout.hurt"
+  },
+  "entity.carrion_sprout.trap": {
+    "sounds": [
+      "damage/hit1"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.carrion_sprout.trap"
+  },
+  "entity.cockatrice.ambient": {
+    "sounds": [
+      "aether_ii:entity/cockatrice/say"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.cockatrice.ambient"
+  },
+  "entity.cockatrice.death": {
+    "sounds": [
+      "aether_ii:entity/cockatrice/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.cockatrice.death"
+  },
+  "entity.cockatrice.hurt": {
+    "sounds": [
+      "aether_ii:entity/cockatrice/hurt"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.cockatrice.hurt"
+  },
   "entity.cockatrice.shoot": {
     "sounds": [
-      "aether_ii:entity/projectile/shoot"
+      "random/bow"
     ],
-    "subtitle": "subtitles.aether.entity.cockatrice.shoot"
+    "subtitle": "subtitles.aether_ii.entity.cockatrice.shoot"
+  },
+  "entity.cockatrice.step": {
+    "sounds": [
+      "mob/pig/step1",
+      "mob/pig/step2",
+      "mob/pig/step3",
+      "mob/pig/step4",
+      "mob/pig/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.electric_field.ambient": {
+    "sounds": [
+      {
+        "name": "ambient/weather/thunder1",
+        "volume": 0.5
+      },
+      {
+        "name": "ambient/weather/thunder2",
+        "volume": 0.5
+      },
+      {
+        "name": "ambient/weather/thunder3",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.electric_field.create"
   },
   "entity.flying_cow.ambient": {
     "sounds": [
@@ -56,7 +324,7 @@
       "mob/cow/say3",
       "mob/cow/say4"
     ],
-    "subtitle": "subtitles.aether.entity.flying_cow.ambient"
+    "subtitle": "subtitles.aether_ii.entity.flying_cow.ambient"
   },
   "entity.flying_cow.death": {
     "sounds": [
@@ -64,7 +332,7 @@
       "mob/cow/hurt2",
       "mob/cow/hurt3"
     ],
-    "subtitle": "subtitles.aether.entity.flying_cow.death"
+    "subtitle": "subtitles.aether_ii.entity.flying_cow.death"
   },
   "entity.flying_cow.hurt": {
     "sounds": [
@@ -72,7 +340,7 @@
       "mob/cow/hurt2",
       "mob/cow/hurt3"
     ],
-    "subtitle": "subtitles.aether.entity.flying_cow.hurt"
+    "subtitle": "subtitles.aether_ii.entity.flying_cow.hurt"
   },
   "entity.flying_cow.milk": {
     "sounds": [
@@ -80,15 +348,192 @@
       "entity/cow/milk2",
       "entity/cow/milk3"
     ],
-    "subtitle": "subtitles.aether.entity.flying_cow.milk"
+    "subtitle": "subtitles.aether_ii.entity.flying_cow.milk"
   },
   "entity.flying_cow.saddle": {
     "sounds": [
       "mob/horse/leather"
     ],
-    "subtitle": "subtitles.aether.entity.flying_cow.saddle"
+    "subtitle": "subtitles.aether_ii.entity.flying_cow.saddle"
   },
   "entity.flying_cow.step": {
+    "sounds": [
+      "mob/cow/step1",
+      "mob/cow/step2",
+      "mob/cow/step3",
+      "mob/cow/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.gravitite_taluton.ambient": {
+    "sounds": [
+      "ambient/cave/cave3",
+      "ambient/cave/cave7",
+      "ambient/cave/cave9"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.gravitite_taluton.ambient"
+  },
+  "entity.gravitite_taluton.death": {
+    "sounds": [
+      "dig/stone1",
+      "dig/stone2",
+      "dig/stone3",
+      "dig/stone4"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.gravitite_taluton.death"
+  },
+  "entity.gravitite_taluton.hurt": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.gravitite_taluton.hurt"
+  },
+  "entity.gravitite_taluton.shoot": {
+    "sounds": [
+      "aether_ii:entity/zephyr/shoot"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.gravitite_taluton.shoot"
+  },
+  "entity.gravitite_taluton.step": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.kirrid.ambient": {
+    "sounds": [
+      {
+        "name": "mob/goat/idle1",
+        "volume": 0.82
+      },
+      {
+        "name": "mob/goat/idle2",
+        "volume": 0.82
+      },
+      {
+        "name": "mob/goat/idle3",
+        "volume": 0.84
+      },
+      {
+        "name": "mob/goat/idle4",
+        "volume": 0.84
+      },
+      {
+        "name": "mob/goat/idle5",
+        "volume": 0.84
+      },
+      {
+        "name": "mob/goat/idle6",
+        "volume": 0.84
+      },
+      {
+        "name": "mob/goat/idle7",
+        "volume": 0.83
+      },
+      {
+        "name": "mob/goat/idle8",
+        "volume": 0.84
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.kirrid.ambient"
+  },
+  "entity.kirrid.death": {
+    "sounds": [
+      {
+        "name": "mob/goat/death1",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/goat/death2",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/goat/death3",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/goat/death4",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/goat/death5",
+        "volume": 0.65
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.kirrid.death"
+  },
+  "entity.kirrid.hurt": {
+    "sounds": [
+      {
+        "name": "mob/goat/hurt1",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/goat/hurt2",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/goat/hurt3",
+        "volume": 0.65
+      },
+      {
+        "name": "mob/goat/hurt4",
+        "volume": 0.65
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.kirrid.hurt"
+  },
+  "entity.kirrid.jump": {
+    "sounds": [
+      {
+        "name": "mob/goat/jump1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/jump1",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/jump2",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/jump2",
+        "pitch": 0.8,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.kirrid.jump"
+  },
+  "entity.kirrid.ram_impact": {
+    "sounds": [
+      {
+        "name": "mob/goat/impact1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/impact2",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/impact2",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.kirrid.ram_impact"
+  },
+  "entity.kirrid.step": {
     "sounds": [
       "mob/cow/step1",
       "mob/cow/step2",
@@ -101,37 +546,37 @@
     "sounds": [
       "aether_ii:entity/moa/say"
     ],
-    "subtitle": "subtitles.aether.entity.moa.ambient"
+    "subtitle": "subtitles.aether_ii.entity.moa.ambient"
   },
   "entity.moa.death": {
     "sounds": [
-      "aether_ii:entity/moa/say"
+      "aether_ii:entity/moa/death"
     ],
-    "subtitle": "subtitles.aether.entity.moa.death"
+    "subtitle": "subtitles.aether_ii.entity.moa.death"
   },
   "entity.moa.egg": {
     "sounds": [
       "mob/chicken/plop"
     ],
-    "subtitle": "subtitles.aether.entity.moa.egg"
+    "subtitle": "subtitles.aether_ii.entity.moa.egg"
   },
   "entity.moa.flap": {
     "sounds": [
       "mob/bat/takeoff"
     ],
-    "subtitle": "subtitles.aether.entity.moa.flap"
+    "subtitle": "subtitles.aether_ii.entity.moa.flap"
   },
   "entity.moa.hurt": {
     "sounds": [
-      "aether_ii:entity/moa/say"
+      "aether_ii:entity/moa/hurt"
     ],
-    "subtitle": "subtitles.aether.entity.moa.hurt"
+    "subtitle": "subtitles.aether_ii.entity.moa.hurt"
   },
   "entity.moa.saddle": {
     "sounds": [
       "mob/horse/leather"
     ],
-    "subtitle": "subtitles.aether.entity.moa.saddle"
+    "subtitle": "subtitles.aether_ii.entity.moa.saddle"
   },
   "entity.moa.step": {
     "sounds": [
@@ -149,13 +594,13 @@
       "mob/pig/say2",
       "mob/pig/say3"
     ],
-    "subtitle": "subtitles.aether.entity.phyg.ambient"
+    "subtitle": "subtitles.aether_ii.entity.phyg.ambient"
   },
   "entity.phyg.death": {
     "sounds": [
       "mob/pig/death"
     ],
-    "subtitle": "subtitles.aether.entity.phyg.death"
+    "subtitle": "subtitles.aether_ii.entity.phyg.death"
   },
   "entity.phyg.hurt": {
     "sounds": [
@@ -163,13 +608,13 @@
       "mob/pig/say2",
       "mob/pig/say3"
     ],
-    "subtitle": "subtitles.aether.entity.phyg.hurt"
+    "subtitle": "subtitles.aether_ii.entity.phyg.hurt"
   },
   "entity.phyg.saddle": {
     "sounds": [
       "mob/horse/leather"
     ],
-    "subtitle": "subtitles.aether.entity.phyg.saddle"
+    "subtitle": "subtitles.aether_ii.entity.phyg.saddle"
   },
   "entity.phyg.step": {
     "sounds": [
@@ -181,13 +626,162 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.player.attack.shock": {
+    "sounds": [
+      {
+        "name": "item/mace/smash_ground1",
+        "volume": 0.9
+      },
+      {
+        "name": "item/mace/smash_ground2",
+        "volume": 0.9
+      },
+      {
+        "name": "item/mace/smash_ground3",
+        "volume": 0.9
+      },
+      {
+        "name": "item/mace/smash_ground4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.attack.shock"
+  },
+  "entity.player.attack.stab": {
+    "sounds": [
+      "item/trident/pierce1",
+      "item/trident/pierce2",
+      "item/trident/pierce3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.attack.stab"
+  },
+  "entity.player.attack.sweep": {
+    "sounds": [
+      {
+        "name": "entity/player/attack/sweep1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/sweep2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/sweep3",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/sweep4",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/sweep5",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/sweep6",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/sweep7",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.attack.sweep"
+  },
+  "entity.player.damage.impact.correct": {
+    "sounds": [
+      {
+        "name": "entity/player/attack/crit1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/crit2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/crit3",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.damage.impact.correct"
+  },
+  "entity.player.damage.impact.incorrect": {
+    "sounds": [
+      "item/shield/block1",
+      "item/shield/block2",
+      "item/shield/block3",
+      "item/shield/block4",
+      "item/shield/block5"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.damage.impact.incorrect"
+  },
+  "entity.player.damage.pierce.correct": {
+    "sounds": [
+      {
+        "name": "entity/player/attack/crit1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/crit2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/crit3",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.damage.pierce.correct"
+  },
+  "entity.player.damage.pierce.incorrect": {
+    "sounds": [
+      "item/shield/block1",
+      "item/shield/block2",
+      "item/shield/block3",
+      "item/shield/block4",
+      "item/shield/block5"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.damage.pierce.incorrect"
+  },
+  "entity.player.damage.slash.correct": {
+    "sounds": [
+      {
+        "name": "entity/player/attack/crit1",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/crit2",
+        "volume": 0.7
+      },
+      {
+        "name": "entity/player/attack/crit3",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.damage.slash.correct"
+  },
+  "entity.player.damage.slash.incorrect": {
+    "sounds": [
+      "item/shield/block1",
+      "item/shield/block2",
+      "item/shield/block3",
+      "item/shield/block4",
+      "item/shield/block5"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.player.damage.slash.incorrect"
+  },
+  "entity.rock.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.rock.throw"
+  },
   "entity.sheepuff.ambient": {
     "sounds": [
       "mob/sheep/say1",
       "mob/sheep/say2",
       "mob/sheep/say3"
     ],
-    "subtitle": "subtitles.aether.entity.sheepuff.ambient"
+    "subtitle": "subtitles.aether_ii.entity.sheepuff.ambient"
   },
   "entity.sheepuff.death": {
     "sounds": [
@@ -195,7 +789,7 @@
       "mob/sheep/say2",
       "mob/sheep/say3"
     ],
-    "subtitle": "subtitles.aether.entity.sheepuff.death"
+    "subtitle": "subtitles.aether_ii.entity.sheepuff.death"
   },
   "entity.sheepuff.hurt": {
     "sounds": [
@@ -203,7 +797,7 @@
       "mob/sheep/say2",
       "mob/sheep/say3"
     ],
-    "subtitle": "subtitles.aether.entity.sheepuff.hurt"
+    "subtitle": "subtitles.aether_ii.entity.sheepuff.hurt"
   },
   "entity.sheepuff.shear": {
     "sounds": [
@@ -221,12 +815,87 @@
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
+  "entity.skephid.ambient": {
+    "sounds": [
+      "mob/spider/say1",
+      "mob/spider/say2",
+      "mob/spider/say3",
+      "mob/spider/say4"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.skephid.ambient"
+  },
+  "entity.skephid.death": {
+    "sounds": [
+      "mob/spider/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.skephid.death"
+  },
+  "entity.skephid.hurt": {
+    "sounds": [
+      "mob/spider/say1",
+      "mob/spider/say2",
+      "mob/spider/say3",
+      "mob/spider/say4"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.skephid.hurt"
+  },
+  "entity.skephid.shoot": {
+    "sounds": [
+      "aether_ii:entity/zephyr/shoot"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.skephid.shoot"
+  },
+  "entity.skephid.step": {
+    "sounds": [
+      "mob/spider/step1",
+      "mob/spider/step2",
+      "mob/spider/step3",
+      "mob/spider/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.skyroot_lizard.ambient": {
+    "sounds": [
+      "mob/silverfish/say1",
+      "mob/silverfish/say3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.skyroot_lizard.ambient"
+  },
+  "entity.skyroot_lizard.death": {
+    "sounds": [
+      "damage/hit1",
+      "damage/hit2",
+      "damage/hit3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.skyroot_lizard.death"
+  },
+  "entity.skyroot_lizard.hurt": {
+    "sounds": [
+      "damage/hit1",
+      "damage/hit2",
+      "damage/hit3"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.skyroot_lizard.hurt"
+  },
+  "entity.skyroot_lizard.step": {
+    "sounds": [
+      "mob/chicken/step1",
+      "mob/chicken/step2"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.skyroot_pinecone.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.skyroot_pinecone.throw"
+  },
   "entity.swet.attack": {
     "sounds": [
       "mob/slime/attack1",
       "mob/slime/attack2"
     ],
-    "subtitle": "subtitles.aether.entity.swet.attack"
+    "subtitle": "subtitles.aether_ii.entity.swet.attack"
   },
   "entity.swet.death": {
     "sounds": [
@@ -235,7 +904,7 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.entity.swet.death"
+    "subtitle": "subtitles.aether_ii.entity.swet.death"
   },
   "entity.swet.hurt": {
     "sounds": [
@@ -244,7 +913,7 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.entity.swet.hurt"
+    "subtitle": "subtitles.aether_ii.entity.swet.hurt"
   },
   "entity.swet.jump": {
     "sounds": [
@@ -253,7 +922,7 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.entity.swet.squish"
+    "subtitle": "subtitles.aether_ii.entity.swet.squish"
   },
   "entity.swet.squish": {
     "sounds": [
@@ -262,7 +931,108 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.entity.swet.squish"
+    "subtitle": "subtitles.aether_ii.entity.swet.squish"
+  },
+  "entity.taegore.ambient": {
+    "sounds": [
+      {
+        "name": "aether_ii:entity/taegore/say1",
+        "volume": 0.45
+      },
+      {
+        "name": "aether_ii:entity/taegore/say2",
+        "volume": 0.45
+      },
+      {
+        "name": "aether_ii:entity/taegore/say3",
+        "volume": 0.45
+      },
+      {
+        "name": "aether_ii:entity/taegore/say4",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.taegore.ambient"
+  },
+  "entity.taegore.death": {
+    "sounds": [
+      {
+        "name": "aether_ii:entity/taegore/death",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.taegore.death"
+  },
+  "entity.taegore.hurt": {
+    "sounds": [
+      {
+        "name": "aether_ii:entity/taegore/hurt1",
+        "volume": 0.45
+      },
+      {
+        "name": "aether_ii:entity/taegore/hurt2",
+        "volume": 0.45
+      },
+      {
+        "name": "aether_ii:entity/taegore/hurt3",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.taegore.hurt"
+  },
+  "entity.taegore.step": {
+    "sounds": [
+      "mob/pig/step1",
+      "mob/pig/step2",
+      "mob/pig/step3",
+      "mob/pig/step4",
+      "mob/pig/step5"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "entity.tempest.ambient": {
+    "sounds": [
+      "aether_ii:entity/zephyr/call",
+      "aether_ii:entity/zephyr/call2"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.tempest.ambient"
+  },
+  "entity.tempest.death": {
+    "sounds": [
+      "aether_ii:entity/zephyr/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.tempest.death"
+  },
+  "entity.tempest.hurt": {
+    "sounds": [
+      "aether_ii:entity/zephyr/hurt"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.tempest.hurt"
+  },
+  "entity.tempest.shoot": {
+    "sounds": [
+      "aether_ii:entity/zephyr/shoot"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.tempest.shoot"
+  },
+  "entity.zephyr.ambient": {
+    "sounds": [
+      "aether_ii:entity/zephyr/call",
+      "aether_ii:entity/zephyr/call2"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.zephyr.ambient"
+  },
+  "entity.zephyr.death": {
+    "sounds": [
+      "aether_ii:entity/zephyr/death"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.zephyr.death"
+  },
+  "entity.zephyr.hurt": {
+    "sounds": [
+      "aether_ii:entity/zephyr/hurt"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.zephyr.hurt"
   },
   "entity.zephyr.shoot": {
     "sounds": [
@@ -274,7 +1044,62 @@
     "sounds": [
       "block/amethyst/shimmer"
     ],
-    "subtitle": "subtitles.aether.item.ambrosium_shard.use"
+    "subtitle": "subtitles.aether_ii.item.ambrosium_shard.use"
+  },
+  "item.armor.arkenium": {
+    "sounds": [
+      "item/armor/equip_iron1",
+      "item/armor/equip_iron2",
+      "item/armor/equip_iron3",
+      "item/armor/equip_iron4",
+      "item/armor/equip_iron5",
+      "item/armor/equip_iron6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_arkenium"
+  },
+  "item.armor.equip_burrukai_pelt": {
+    "sounds": [
+      "item/armor/equip_leather1",
+      "item/armor/equip_leather2",
+      "item/armor/equip_leather3",
+      "item/armor/equip_leather4",
+      "item/armor/equip_leather5",
+      "item/armor/equip_leather6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_burrukai_pelt"
+  },
+  "item.armor.equip_taegore_hide": {
+    "sounds": [
+      "item/armor/equip_leather1",
+      "item/armor/equip_leather2",
+      "item/armor/equip_leather3",
+      "item/armor/equip_leather4",
+      "item/armor/equip_leather5",
+      "item/armor/equip_leather6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_taegore_hide"
+  },
+  "item.armor.gravitite": {
+    "sounds": [
+      "item/armor/equip_gold1",
+      "item/armor/equip_gold2",
+      "item/armor/equip_gold3",
+      "item/armor/equip_gold4",
+      "item/armor/equip_gold5",
+      "item/armor/equip_gold6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_gravitite"
+  },
+  "item.armor.zanite": {
+    "sounds": [
+      "item/armor/equip_diamond1",
+      "item/armor/equip_diamond2",
+      "item/armor/equip_diamond3",
+      "item/armor/equip_diamond4",
+      "item/armor/equip_diamond5",
+      "item/armor/equip_diamond6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_zanite"
   },
   "item.music_disc.aerwhale": {
     "sounds": [
@@ -324,6 +1149,22 @@
       }
     ]
   },
+  "item.scatterglass_vial.empty": {
+    "sounds": [
+      "item/bottle/empty1",
+      "item/bottle/empty2"
+    ],
+    "subtitle": "subtitles.aether_ii.item.scaterglass_vial.empty"
+  },
+  "item.scatterglass_vial.fill": {
+    "sounds": [
+      "item/bottle/fill1",
+      "item/bottle/fill2",
+      "item/bottle/fill3",
+      "item/bottle/fill4"
+    ],
+    "subtitle": "subtitles.aether_ii.item.scaterglass_vial.fill"
+  },
   "item.swet_ball.use": {
     "sounds": [
       "mob/slime/big1",
@@ -331,7 +1172,7 @@
       "mob/slime/big3",
       "mob/slime/big4"
     ],
-    "subtitle": "subtitles.aether.item.swet_ball.use"
+    "subtitle": "subtitles.aether_ii.item.swet_gel.use"
   },
   "music.aether": {
     "sounds": [
@@ -396,5 +1237,23 @@
         "stream": true
       }
     ]
+  },
+  "ui.artisans_bench.select_recipe": {
+    "sounds": [
+      "random/click"
+    ]
+  },
+  "ui.artisans_bench.take_result": {
+    "sounds": [
+      {
+        "name": "ui/stonecutter/cut1",
+        "pitch": 0.92
+      },
+      {
+        "name": "ui/stonecutter/cut2",
+        "pitch": 0.92
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.ui.artisans_bench.take_result"
   }
 }

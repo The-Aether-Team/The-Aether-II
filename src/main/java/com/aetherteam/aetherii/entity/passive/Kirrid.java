@@ -23,7 +23,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.Mth;
@@ -34,6 +33,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -56,6 +56,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
@@ -440,10 +441,6 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         this.moveControl.setWantedPosition(this.moveControl.getWantedX(), this.moveControl.getWantedY(), this.moveControl.getWantedZ(), speedModifier);
     }
 
-    protected SoundEvent getJumpSound() {
-        return SoundEvents.GOAT_LONG_JUMP;
-    }
-
     @Override
     public boolean isShearable(Player player, ItemStack item, Level world, BlockPos pos) {
         return this.readyForShearing();
@@ -540,12 +537,40 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel serverLevel, AgeableMob pOtherParent) {
-        Kirrid parent = (Kirrid) pOtherParent;
-        Kirrid baby = this.variantType.create(serverLevel, EntitySpawnReason.BREEDING);
+    protected SoundEvent getAmbientSound() {
+        return AetherIISoundEvents.ENTITY_KIRRID_AMBIENT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_KIRRID_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherIISoundEvents.ENTITY_KIRRID_DEATH.get();
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(AetherIISoundEvents.ENTITY_KIRRID_STEP.get(), 0.15F, 1.0F);
+    }
+
+    @Nullable
+    protected SoundEvent getJumpSound() {
+        return AetherIISoundEvents.ENTITY_KIRRID_JUMP.get();
+    }
+
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+        EntityType<? extends Kirrid> variant = level.getRandom().nextBoolean() ? this.variantType : ((Kirrid) otherParent).variantType;
+        Kirrid baby = variant.create(level, EntitySpawnReason.BREEDING);
         if (baby != null) {
             KirridAi.initMemories(baby, this.random);
-            baby.setColor(this.getOffspringColor(serverLevel, this, parent));
+            baby.setColor(this.getOffspringColor(level, this, (Kirrid) otherParent));
         }
         return baby;
     }

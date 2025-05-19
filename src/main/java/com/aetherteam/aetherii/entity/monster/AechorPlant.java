@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.projectile.ToxicDart;
 import net.minecraft.core.BlockPos;
@@ -159,7 +160,8 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
             needle.shoot(x, y + 0.5F, z, 0.285F + (float) y * 0.08F, 1.0F);
             this.level().addFreshEntity(needle);
         }
-//        this.playSound(AetherSoundEvents.ENTITY_AECHOR_PLANT_SHOOT.get(), 2.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+
+        this.playSound(AetherIISoundEvents.ENTITY_AECHOR_PLANT_SHOOT.get(), 2.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
     }
 
     /**

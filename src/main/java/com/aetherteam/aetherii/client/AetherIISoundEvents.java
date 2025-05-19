@@ -7,18 +7,40 @@ import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class AetherIISoundEvents {
+public class AetherIISoundEvents { //TODO SoundActions??? blocksound categories?
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, AetherII.MODID);
 
     // Blocks
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_AETHER_PORTAL_AMBIENT = register("block.aether_portal.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_AETHER_PORTAL_TRAVEL = register("block.aether_portal.travel");
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_AETHER_PORTAL_TRIGGER = register("block.aether_portal.trigger");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_BLUE_AERCLOUD_BOUNCE = register("block.blue_aercloud.bounce");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_MOA_EGG_CRACK = register("block.moa_egg.crack");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_MOA_EGG_HATCH = register("block.moa_egg.hatch");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_BUSH_RUSTLE = register("block.bush.rustle");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_GAS_IGNITE = register("block.gas.ignite");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_HOLYSTONE_FURNACE_CRACKLE = register("block.holystone_furnace.crackle");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_ARKENIUM_FORGE_USE = register("block.arkenium_forge.use");
 
     // Items
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_AMBROSIUM_SHARD = register("item.ambrosium_shard.use");
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_SWET_BALL_USE = register("item.swet_ball.use");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_SWET_GEL_USE = register("item.swet_ball.use");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_SCATTERGLASS_VIAL_FILL = register("item.scatterglass_vial.fill");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_SCATTERGLASS_VIAL_EMPTY = register("item.scatterglass_vial.empty");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL = register("item.arkenium_canister.fill");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY = register("item.arkenium_canister.empty");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL_ACID = register("item.arkenium_canister.fill_acid");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY_ACID = register("item.arkenium_canister.empty_acid");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_FILL_GAS = register("item.arkenium_canister.fill_gas");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARKENIUM_CANISTER_EMPTY_GAS = register("item.arkenium_canister.empty_gas");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_AETHER_TUNE = register("item.music_disc.aether_tune");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_ASCENDING_DAWN = register("item.music_disc.ascending_dawn");
@@ -27,6 +49,13 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_MUSIC_DISC_DEMISE = register("item.music_disc.demise");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_RECORDING_892 = register("item.music_disc.recording_892");
 
+    // Armor
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_TAEGORE_HIDE = register("item.armor.equip_taegore_hide");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_BURRUKAI_PELT = register("item.armor.equip_burrukai_pelt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_ZANITE = register("item.armor.zanite");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_ARKENIUM = register("item.armor.arkenium");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_GRAVITITE = register("item.armor.gravitite");
+
     // Player
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_SLASH_DAMAGE_CORRECT = register("entity.player.damage.slash.correct");
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_IMPACT_DAMAGE_CORRECT = register("entity.player.damage.impact.correct");
@@ -34,6 +63,7 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_SLASH_DAMAGE_INCORRECT = register("entity.player.damage.slash.incorrect");
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_IMPACT_DAMAGE_INCORRECT = register("entity.player.damage.impact.incorrect");
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_PIERCE_DAMAGE_INCORRECT = register("entity.player.damage.pierce.incorrect");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_ATTACK_SWEEP = register("entity.player.attack.sweep");
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_ATTACK_SHOCK = register("entity.player.attack.shock");
     public static final DeferredHolder<SoundEvent, SoundEvent> PLAYER_ATTACK_STAB = register("entity.player.attack.stab");
 
@@ -57,10 +87,27 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SHEEPUFF_SHEAR = register("entity.sheepuff.shear");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SHEEPUFF_STEP = register("entity.sheepuff.step");
 
-
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_AMBIENT = register("entity.aerbunny.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_DEATH = register("entity.aerbunny.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_HURT = register("entity.aerbunny.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_LIFT = register("entity.aerbunny.lift");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_AMBIENT = register("entity.taegore.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_DEATH = register("entity.taegore.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_HURT = register("entity.taegore.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_STEP = register("entity.taegore.step");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_AMBIENT = register("entity.burrukai.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_DEATH = register("entity.burrukai.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_HURT = register("entity.burrukai.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_STEP = register("entity.burrukai.step");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_AMBIENT = register("entity.kirrid.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_DEATH = register("entity.kirrid.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_HURT = register("entity.kirrid.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_STEP = register("entity.kirrid.step");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_JUMP = register("entity.kirrid.jump");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_RAM_IMPACT = register("entity.kirrid.ram_impact");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_AMBIENT = register("entity.moa.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_DEATH = register("entity.moa.death");
@@ -70,12 +117,34 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_FLAP = register("entity.moa.flap");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_MOA_EGG = register("entity.moa.egg");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_AMBIENT = register("entity.skyroot_lizard.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_DEATH = register("entity.skyroot_lizard.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_HURT = register("entity.skyroot_lizard.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_LIZARD_STEP = register("entity.skyroot_lizard.step");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AECHOR_PLANT_SHOOT = register("entity.aechor_plant.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AECHOR_PLANT_DEATH = register("entity.aechor_plant.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AECHOR_PLANT_HURT = register("entity.aechor_plant.hurt");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_CARRION_SPROUT_TRAP = register("entity.carrion_sprout.trap");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_CARRION_SPROUT_DEATH = register("entity.carrion_sprout.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_CARRION_SPROUT_HURT = register("entity.carrion_sprout.hurt");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_SHOOT = register("entity.zephyr.shoot");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_AMBIENT = register("entity.zephyr.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_DEATH = register("entity.zephyr.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ZEPHYR_HURT = register("entity.zephyr.hurt");
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> COCKATRICE_SHOOT = register("entity.cockatrice.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TEMPEST_SHOOT = register("entity.tempest.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TEMPEST_AMBIENT = register("entity.tempest.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TEMPEST_DEATH = register("entity.tempest.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TEMPEST_HURT = register("entity.tempest.hurt");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_SHOOT = register("entity.cockatrice.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_AMBIENT = register("entity.cockatrice.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_DEATH = register("entity.cockatrice.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_HURT = register("entity.cockatrice.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_COCKATRICE_STEP = register("entity.cockatrice.step");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_ATTACK = register("entity.swet.attack");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_DEATH = register("entity.swet.death");
@@ -83,6 +152,37 @@ public class AetherIISoundEvents {
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_JUMP = register("entity.swet.jump");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SWET_SQUISH = register("entity.swet.squish");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKEPHID_SHOOT = register("entity.skephid.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKEPHID_AMBIENT = register("entity.skephid.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKEPHID_DEATH = register("entity.skephid.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKEPHID_HURT = register("entity.skephid.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKEPHID_STEP = register("entity.skephid.step");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ARKENIUM_TALUTON_ATTACK = register("entity.arkenium_taluton.attack");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ARKENIUM_TALUTON_AMBIENT = register("entity.arkenium_taluton.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ARKENIUM_TALUTON_DEATH = register("entity.arkenium_taluton.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ARKENIUM_TALUTON_HURT = register("entity.arkenium_taluton.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ARKENIUM_TALUTON_STEP = register("entity.arkenium_taluton.step");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_GRAVITITE_TALUTON_SHOOT = register("entity.gravitite_taluton.shoot");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_GRAVITITE_TALUTON_AMBIENT = register("entity.gravitite_taluton.ambient");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_GRAVITITE_TALUTON_DEATH = register("entity.gravitite_taluton.death");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_GRAVITITE_TALUTON_HURT = register("entity.gravitite_taluton.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_GRAVITITE_TALUTON_STEP = register("entity.gravitite_taluton.step");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BLIGHTED_BURN = register("entity.blighted.burn");
+
+    // Projectiles
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ARCTIC_SNOWBALL_THROW = register("entity.arctic_snowball.throw");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ROCK_THROW = register("entity.rock.throw");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_SKYROOT_PINECONE_THROW = register("entity.skyroot_pinecone.throw");
+
+    // Miscellaneous
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_ELECTRIC_FIELD_CREATE = register("entity.electric_field.ambient");
+
+    // UI
+    public static final DeferredHolder<SoundEvent, SoundEvent> UI_ARTISANS_BENCH_SELECT_RECIPE = register("ui.artisans_bench.select_recipe");
+    public static final DeferredHolder<SoundEvent, SoundEvent> UI_ARTISANS_BENCH_TAKE_RESULT = register("ui.artisans_bench.take_result");
 
     // Music
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_AETHER = register("music.aether");

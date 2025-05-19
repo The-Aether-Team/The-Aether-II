@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.materials;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.SkyrootPinecone;
 import com.aetherteam.aetherii.item.miscellaneous.ThrowableItem;
 import net.minecraft.sounds.SoundEvents;
@@ -25,7 +26,7 @@ public class SkyrootPineconeItem extends Item implements ThrowableItem {
 
     @Override
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeLeft) {
-        this.throwItem(stack, level, livingEntity, timeLeft, SoundEvents.SNOWBALL_THROW, new SkyrootPinecone(level, livingEntity, stack));
+        this.throwItem(stack, level, livingEntity, timeLeft, AetherIISoundEvents.ENTITY_SKYROOT_PINECONE_THROW.get(), new SkyrootPinecone(level, livingEntity, stack));
         return true;
     }
 

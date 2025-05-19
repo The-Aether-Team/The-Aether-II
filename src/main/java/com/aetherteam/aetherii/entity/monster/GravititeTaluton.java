@@ -3,7 +3,10 @@ package com.aetherteam.aetherii.entity.monster;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.GravititeDebrisShot;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.RangedAttackGoalAccessor;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,6 +23,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+
+import javax.annotation.Nullable;
 
 public class GravititeTaluton extends Taluton implements RangedAttackMob {
     public static final int ATTACK_DURATION = 100;
@@ -102,7 +108,7 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
             debrisShot.shoot(d0, d1, d2, 0.5F, 0.0F);
             serverLevel.addFreshEntity(debrisShot);
         }
-        this.playSound(AetherIISoundEvents.ENTITY_ZEPHYR_SHOOT.get(), this.getSoundVolume(), (this.level().getRandom().nextFloat() - this.level().getRandom().nextFloat()) * 0.2F + 1.0F);
+        this.playSound(AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_SHOOT.get(), this.getSoundVolume(), (this.level().getRandom().nextFloat() - this.level().getRandom().nextFloat()) * 0.2F + 1.0F);
     }
 
     @Override
@@ -111,5 +117,28 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
     @Override
     public boolean onClimbable() {
         return this.horizontalCollision;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_AMBIENT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_DEATH.get();
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        this.playSound(AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_STEP.get(), 0.15F, 1.0F);
     }
 }

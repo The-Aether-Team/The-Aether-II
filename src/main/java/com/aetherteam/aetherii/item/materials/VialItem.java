@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.item.materials;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -34,7 +35,7 @@ public class VialItem extends Item {
                     return InteractionResult.PASS;
                 }
                 if (level.getFluidState(blockPos).is(FluidTags.WATER)) {
-                    level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+                    level.playSound(player, player.getX(), player.getY(), player.getZ(), AetherIISoundEvents.ITEM_SCATTERGLASS_VIAL_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
                     level.gameEvent(player, GameEvent.FLUID_PICKUP, blockPos);
                     return InteractionResult.SUCCESS.heldItemTransformedTo(this.turnBottleIntoItem(itemStack, player, new ItemStack(AetherIIItems.WATER_VIAL.get())));
                 }

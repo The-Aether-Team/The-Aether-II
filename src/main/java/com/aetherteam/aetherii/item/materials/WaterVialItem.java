@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.item.materials;
 
 import com.aetherteam.aetherii.block.AetherIIBlocks;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -51,7 +52,7 @@ public class WaterVialItem extends Item {
                 }
             }
 
-            level.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.playSound(null, pos, AetherIISoundEvents.ITEM_SCATTERGLASS_VIAL_EMPTY.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
             level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
             if (state.is(AetherIIBlocks.FERROSITE_SAND.get())) {
                 level.setBlockAndUpdate(pos, AetherIIBlocks.FERROSITE_MUD.get().defaultBlockState());

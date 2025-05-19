@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -26,7 +27,7 @@ public record ForgeSoundPacket(BlockPos pos) implements CustomPacketPayload {
 
     public static void execute(ForgeSoundPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
-            Minecraft.getInstance().level.playLocalSound(payload.pos(), SoundEvents.ANVIL_USE, SoundSource.BLOCKS, 1.0F, Minecraft.getInstance().level.getRandom().nextFloat() * 0.1F + 0.9F, false); //todo sound
+            Minecraft.getInstance().level.playLocalSound(payload.pos(), AetherIISoundEvents.BLOCK_ARKENIUM_FORGE_USE.get(), SoundSource.BLOCKS, 1.0F, Minecraft.getInstance().level.getRandom().nextFloat() * 0.1F + 0.9F, false);
         }
     }
 }

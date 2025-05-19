@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -21,8 +22,8 @@ public interface BlightMonster {
                 serverLevel.sendParticles(ParticleTypes.SMOKE, entity.getRandomX(0.3), entity.getRandomY() - 0.1, entity.getRandomZ(0.3), 1, 0, 0, 0, random.nextGaussian() * 0.02);
             }
         }
-        if(tickCount % 13 == 0){
-            entity.level().playSound(entity, entity.getOnPos(), SoundEvents.LAVA_EXTINGUISH, SoundSource.HOSTILE, 0.5f, 1.0f);
+        if (tickCount % 13 == 0){
+            entity.level().playSound(entity, entity.getOnPos(), AetherIISoundEvents.ENTITY_BLIGHTED_BURN.get(), SoundSource.HOSTILE, 0.5f, 1.0f);
         }
     }
 

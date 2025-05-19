@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.*;
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
@@ -70,7 +71,7 @@ public class KirridAi {
                                                         p_149474_ -> TIME_BETWEEN_RAMS,
                                                         RAM_TARGET_CONDITIONS,
                                                         1.5F,
-                                                        p_149468_ -> SoundEvents.GOAT_RAM_IMPACT
+                                                        p_149468_ -> AetherIISoundEvents.ENTITY_KIRRID_RAM_IMPACT.get()
                                                 ), 2), Pair.of(new KirridEatGrass(), 2), Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )

@@ -1306,6 +1306,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SWET.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
@@ -1350,7 +1351,43 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         // Blocks
         this.addSubtitle("block", "aether_portal.ambient", "Aether Portal whooshes");
         this.addSubtitle("block", "aether_portal.trigger", "Aether Portal noise intensifies");
+
         this.addSubtitle("block", "aercloud.blue_aercloud_bounce", "Blue Aercloud bounces");
+
+        this.addSubtitle("block", "moa_egg.crack", "Moa Egg cracks");
+        this.addSubtitle("block", "moa_egg.hatch", "Moa Egg hatches");
+
+        this.addSubtitle("block", "bush.rustle", "Bush rustles");
+
+        this.addSubtitle("block", "gas.ignite", "Gas ignites");
+
+        this.addSubtitle("block", "holystone_furnace.fire_crackle", "Holystone Furnace crackles");
+
+        this.addSubtitle("block", "arkenium_forge.use", "Arkenium Forge used");
+
+        // Items
+        this.addSubtitle("item", "ambrosium_shard.use", "Ambrosium Shard used");
+        this.addSubtitle("item", "swet_gel.use", "Swet Gel used");
+
+        this.addSubtitle("item", "scaterglass_vial.fill", "Scatterglass Vial fills");
+        this.addSubtitle("item", "scaterglass_vial.empty", "Scatterglass Vial empties");
+
+        this.addSubtitle("item", "armor.equip_taegore_hide", "Taegore Hide armor rustles");
+        this.addSubtitle("item", "armor.equip_burrukai_pelt", "Burrukai Pelt armor rustles");
+        this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");
+        this.addSubtitle("item", "armor.equip_arkenium", "Arkenium armor clanks");
+        this.addSubtitle("item", "armor.equip_gravitite", "Gravitite armor clinks");
+
+        // Player
+        this.addSubtitle("entity", "player.damage.slash.correct", "Strong slashing attack");
+        this.addSubtitle("entity", "player.damage.impact.correct", "Strong impacting attack");
+        this.addSubtitle("entity", "player.damage.pierce.correct", "Strong piercing attack");
+        this.addSubtitle("entity", "player.damage.slash.incorrect", "Weak slashing attack");
+        this.addSubtitle("entity", "player.damage.impact.incorrect", "Weak impacting attack");
+        this.addSubtitle("entity", "player.damage.pierce.incorrect", "Weak piercing attack");
+        this.addSubtitle("entity", "player.attack.sweep", "Sweeping attack");
+        this.addSubtitle("entity", "player.attack.shock", "Shocking attack");
+        this.addSubtitle("entity", "player.attack.stab", "Stabbing attack");
 
         // Entities
         this.addSubtitle("entity", "phyg.ambient", "Phyg oinks");
@@ -1371,6 +1408,29 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "sheepuff.hurt", "Sheepuff hurts");
         this.addSubtitle("entity", "sheepuff.step", "Footsteps");
 
+        this.addSubtitle("entity", "aerbunny.ambient", "Aerbunny squeaks");
+        this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
+        this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny hurts");
+        this.addSubtitle("entity", "aerbunny.lift", "Aerbunny squeals");
+
+        this.addSubtitle("entity", "taegore.ambient", "Taegore snorts");
+        this.addSubtitle("entity", "taegore.death", "Taegore dies");
+        this.addSubtitle("entity", "taegore.hurt", "Taegore hurts");
+
+        this.addSubtitle("entity", "burrukai.ambient", "Burrukai huffs");
+        this.addSubtitle("entity", "burrukai.death", "Burrukai dies");
+        this.addSubtitle("entity", "burrukai.hurt", "Burrukai hurts");
+
+        this.addSubtitle("entity", "kirrid.ambient", "Kirrid bleats");
+        this.addSubtitle("entity", "kirrid.death", "Kirrid dies");
+        this.addSubtitle("entity", "kirrid.hurt", "Kirrid hurts");
+        this.addSubtitle("entity", "kirrid.jump", "Kirrid leaps");
+        this.addSubtitle("entity", "kirrid.ram_impact", "Kirrid rams");
+
+        this.addSubtitle("entity", "skyroot_lizard.ambient", "Skyroot Lizard hisses");
+        this.addSubtitle("entity", "skyroot_lizard.death", "Skyroot Lizard dies");
+        this.addSubtitle("entity", "skyroot_lizard.hurt", "Skyroot Lizard hurts");
+
         this.addSubtitle("entity", "moa.ambient", "Moa calls");
         this.addSubtitle("entity", "moa.death", "Moa dies");
         this.addSubtitle("entity", "moa.hurt", "Moa hurts");
@@ -1379,16 +1439,28 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "moa.flap", "Moa flaps");
         this.addSubtitle("entity", "moa.egg", "Moa plops");
 
-        this.addSubtitle("entity", "aerbunny.death", "Aerbunny dies");
-        this.addSubtitle("entity", "aerbunny.hurt", "Aerbunny squeals");
-        this.addSubtitle("entity", "aerbunny.lift", "Aerbunny squeaks");
+        this.addSubtitle("entity", "aechor_plant.shoot", "Aechor Plant shoots");
+        this.addSubtitle("entity", "aechor_plant.hurt", "Aechor Plant hurts");
+        this.addSubtitle("entity", "aechor_plant.death", "Aechor Plant dies");
+
+        this.addSubtitle("entity", "carrion_sprout.trap", "Carrion Sprout closes");
+        this.addSubtitle("entity", "carrion_sprout.hurt", "Carrion Sprout hurts");
+        this.addSubtitle("entity", "carrion_sprout.death", "Carrion Sprout dies");
 
         this.addSubtitle("entity", "zephyr.shoot", "Zephyr spits");
         this.addSubtitle("entity", "zephyr.ambient", "Zephyr blows");
         this.addSubtitle("entity", "zephyr.death", "Zephyr dies");
         this.addSubtitle("entity", "zephyr.hurt", "Zephyr hurts");
 
+        this.addSubtitle("entity", "tempest.shoot", "Tempest spits");
+        this.addSubtitle("entity", "tempest.ambient", "Tempest sparks");
+        this.addSubtitle("entity", "tempest.death", "Tempest dies");
+        this.addSubtitle("entity", "tempest.hurt", "Tempest hurts");
+
         this.addSubtitle("entity", "cockatrice.shoot", "Cockatrice shoots");
+        this.addSubtitle("entity", "cockatrice.ambient", "Cockatrice calls");
+        this.addSubtitle("entity", "cockatrice.death", "Cockatrice dies");
+        this.addSubtitle("entity", "cockatrice.hurt", "Cockatrice hurts");
 
         this.addSubtitle("entity", "swet.attack", "Swet attacks");
         this.addSubtitle("entity", "swet.death", "Swet dies");
@@ -1396,7 +1468,35 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "swet.jump", "Swet squishes");
         this.addSubtitle("entity", "swet.squish", "Swet squishes");
 
+        this.addSubtitle("entity", "skephid.shoot", "Skephid shoots");
+        this.addSubtitle("entity", "skephid.ambient", "Skephid chitters");
+        this.addSubtitle("entity", "skephid.death", "Skephid dies");
+        this.addSubtitle("entity", "skephid.hurt", "Skephid hurts");
 
+        this.addSubtitle("entity", "arkenium_taluton.attack", "Arkenium Taluton attacks");
+        this.addSubtitle("entity", "arkenium_taluton.ambient", "Arkenium Taluton drones");
+        this.addSubtitle("entity", "arkenium_taluton.death", "Arkenium Taluton dies");
+        this.addSubtitle("entity", "arkenium_taluton.hurt", "Arkenium Taluton hurts");
+
+        this.addSubtitle("entity", "gravitite_taluton.shoot", "Gravitite Taluton shoots");
+        this.addSubtitle("entity", "gravitite_taluton.ambient", "Gravitite Taluton drones");
+        this.addSubtitle("entity", "gravitite_taluton.death", "Gravitite Taluton dies");
+        this.addSubtitle("entity", "gravitite_taluton.hurt", "Gravitite Taluton hurts");
+
+        this.addSubtitle("entity", "blighted.burn", "Something burns");
+
+        // Projectiles
+        this.addSubtitle("entity", "arctic_snowball.throw", "Arctic Snowball flies");
+        this.addSubtitle("entity", "rock.throw", "Rock flies");
+        this.addSubtitle("entity", "skyroot_pinecone.throw", "Skyroot Pinecone flies");
+
+        // Miscellaneous
+        this.addSubtitle("entity", "electric_field.create", "Electricity booms");
+
+        // UI
+        this.addSubtitle("ui", "artisans_bench.take_result", "Artisan's Bench used");
+
+        // Deaths
         this.addDeath("effect.wound", "%1$s was fatally wounded");
         this.addDeath("effect.fracture", "Oof, owie, %1$s's bones");
         this.addDeath("effect.toxin", "%1$s succumbed to toxin");

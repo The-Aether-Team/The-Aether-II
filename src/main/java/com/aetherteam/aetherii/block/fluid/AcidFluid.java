@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.block.fluid;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.AetherIIFluids;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDamageTypes;
 import com.aetherteam.aetherii.item.AetherIIItems;
@@ -28,7 +29,6 @@ import net.minecraft.server.level.BlockDestructionProgress;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.RandomSource;
@@ -284,8 +284,8 @@ public abstract class AcidFluid extends BaseFlowingFluid implements CanisterFlui
 
     @Override
     public Optional<SoundEvent> getPickupSound() {
-        return Optional.of(SoundEvents.BUCKET_FILL);
-    } //todo
+        return Optional.of(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_ACID.get());
+    }
 
     @Override
     protected boolean canConvertToSource(ServerLevel level) {

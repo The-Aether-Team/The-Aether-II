@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii.network.packet.clientbound;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -9,7 +10,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,7 +40,7 @@ public record GasExplosionEffectsPacket(BlockPos pos, boolean playSound) impleme
                         payload.pos().getX(),
                         payload.pos().getY(),
                         payload.pos().getZ(),
-                        SoundEvents.FIRECHARGE_USE,
+                        AetherIISoundEvents.BLOCK_GAS_IGNITE.get(),
                         SoundSource.BLOCKS,
                         10.0F,
                         (1.0F + (Minecraft.getInstance().level.getRandom().nextFloat() - Minecraft.getInstance().level.getRandom().nextFloat()) * 0.2F) * 0.7F,

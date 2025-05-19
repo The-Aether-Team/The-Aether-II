@@ -469,6 +469,11 @@ public class Aerbunny extends AetherTamableAnimal {
         this.entityData.set(DATA_COLLAR_COLOR, pCollarColor.getId());
     }
 
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return AetherIISoundEvents.ENTITY_AERBUNNY_AMBIENT.get();
+    }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
