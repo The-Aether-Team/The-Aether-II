@@ -282,6 +282,7 @@ public class HighlandsConfiguredFeatures {
     // Dungeon
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ROTSHROOM_PATCH = createKey("rotshroom_patch");
 
 
     // Air
@@ -2051,6 +2052,21 @@ public class HighlandsConfiguredFeatures {
 
         register(context, LARGE_SHELF_ROTSHROOM, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2, 96));
         register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, AetherIIFeatures.LARGE_SHELF_MUSHROOM.get(), new LargeShelfMushroomConfiguration(BlockStateProvider.simple(AetherIIBlocks.SHELF_ROTSHROOM_BLOCK.get()), 1, 2, 0));
+        register(
+                context,
+                ROTSHROOM_PATCH,
+                Feature.RANDOM_PATCH,
+                new RandomPatchConfiguration(
+                        32,
+                        4,
+                        3,
+                        PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                                .add(AetherIIBlocks.ROTSHROOM_CLUSTER.get().defaultBlockState(), 2)
+                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL.get().defaultBlockState(), 1)
+                                .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState(), 2)
+                                .add(AetherIIBlocks.FUNGAL_CARPET.get().defaultBlockState(), 7)
+                                .build())
+                        ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));
     }
     
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {
