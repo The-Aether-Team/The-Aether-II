@@ -29,11 +29,6 @@ public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRen
     }
 
     @Override
-    protected void scale(AechorPlantRenderState aechorPlant, PoseStack poseStack) {
-        poseStack.translate(0.0, 1.2, 0.0);
-    }
-
-    @Override
     public ResourceLocation getTextureLocation(AechorPlantRenderState renderState) {
         return AECHOR_PLANT_TEXTURE;
     }
