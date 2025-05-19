@@ -30,6 +30,53 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         .subtitle("subtitles.aether_ii.block.aercloud.blue_aercloud_bounce")
         );
 
+        this.add(AetherIISoundEvents.BLOCK_FERROSITE_BREAK,
+                definition().with(
+                        sound("minecraft:dig/stone1"),
+                        sound("minecraft:dig/stone2"),
+                        sound("minecraft:dig/stone3"),
+                        sound("minecraft:dig/stone4")
+                ).subtitle("subtitles.block.generic.break")
+        );
+        this.add(AetherIISoundEvents.BLOCK_FERROSITE_STEP,
+                definition().with(
+                        sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.block.generic.footsteps")
+        );
+        this.add(AetherIISoundEvents.BLOCK_FERROSITE_PLACE,
+                definition().with(
+                        sound("minecraft:dig/stone1"),
+                        sound("minecraft:dig/stone2"),
+                        sound("minecraft:dig/stone3"),
+                        sound("minecraft:dig/stone4")
+                ).subtitle("subtitles.block.generic.place")
+        );
+        this.add(AetherIISoundEvents.BLOCK_FERROSITE_HIT,
+                definition().with(
+                        sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.block.generic.hit")
+        );
+        this.add(AetherIISoundEvents.BLOCK_FERROSITE_FALL,
+                definition().with(
+                        sound("minecraft:step/stone1"),
+                        sound("minecraft:step/stone2"),
+                        sound("minecraft:step/stone3"),
+                        sound("minecraft:step/stone4"),
+                        sound("minecraft:step/stone5"),
+                        sound("minecraft:step/stone6")
+                ).subtitle("subtitles.block.generic.fall")
+        );
+
         this.add(AetherIISoundEvents.BLOCK_MOA_EGG_CRACK,
                 definition().with(
                         sound("minecraft:mob/turtle/egg/egg_crack1").pitch(0.8),
@@ -156,6 +203,49 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/armor/equip_gold5"),
                         sound("minecraft:item/armor/equip_gold6")
                 ).subtitle("subtitles.aether_ii.item.armor.equip_gravitite")
+        );
+
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL,
+                definition().with(
+                        sound("minecraft:item/bucket/fill1"),
+                        sound("minecraft:item/bucket/fill2"),
+                        sound("minecraft:item/bucket/fill3")
+                ).subtitle("subtitles.aether_ii.item.arkenium_canister.fill")
+        );
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_EMPTY,
+                definition().with(
+                        sound("minecraft:item/bucket/empty1").pitch(0.9F),
+                        sound("minecraft:item/bucket/empty2"),
+                        sound("minecraft:item/bucket/empty3")
+                ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
+        );
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_ACID,
+                definition().with(
+                        sound("minecraft:item/bucket/fill1"),
+                        sound("minecraft:item/bucket/fill2"),
+                        sound("minecraft:item/bucket/fill3")
+                ).subtitle("subtitles.aether_ii.item.arkenium_canister.fill")
+        );
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_EMPTY_ACID,
+                definition().with(
+                        sound("minecraft:item/bucket/empty1").pitch(0.9F),
+                        sound("minecraft:item/bucket/empty2"),
+                        sound("minecraft:item/bucket/empty3")
+                ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
+        );
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_FILL_GAS,
+                definition().with(
+                        sound("minecraft:item/bucket/fill1"),
+                        sound("minecraft:item/bucket/fill2"),
+                        sound("minecraft:item/bucket/fill3")
+                ).subtitle("subtitles.aether_ii.item.arkenium_canister.fill")
+        );
+        this.add(AetherIISoundEvents.ITEM_ARKENIUM_CANISTER_EMPTY_GAS,
+                definition().with(
+                        sound("minecraft:item/bucket/empty1").pitch(0.9F),
+                        sound("minecraft:item/bucket/empty2"),
+                        sound("minecraft:item/bucket/empty3")
+                ).subtitle("subtitles.aether_ii.item.arkenium_canister.empty")
         );
 
         this.add(AetherIISoundEvents.ITEM_MUSIC_DISC_AETHER_TUNE,

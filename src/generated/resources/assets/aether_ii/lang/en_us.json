@@ -1162,6 +1162,8 @@
   "subtitles.aether_ii.entity.zephyr.hurt": "Zephyr hurts",
   "subtitles.aether_ii.entity.zephyr.shoot": "Zephyr spits",
   "subtitles.aether_ii.item.ambrosium_shard.use": "Ambrosium Shard used",
+  "subtitles.aether_ii.item.arkenium_canister.empty": "Arkenium Canister empties",
+  "subtitles.aether_ii.item.arkenium_canister.fill": "Arkenium Canister fills",
   "subtitles.aether_ii.item.armor.equip_arkenium": "Arkenium armor clanks",
   "subtitles.aether_ii.item.armor.equip_burrukai_pelt": "Burrukai Pelt armor rustles",
   "subtitles.aether_ii.item.armor.equip_gravitite": "Gravitite armor clinks",

@@ -7,7 +7,9 @@ import io.wispforest.accessories.api.AccessoryItem;
 import io.wispforest.accessories.api.SoundEventData;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
 import io.wispforest.accessories.api.slot.SlotReference;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.ArmorMaterial;
@@ -18,11 +20,13 @@ public class GlovesItem extends AccessoryItem {
 
     private final double restoration;
     protected ResourceLocation glovesTexture;
+    protected Holder<SoundEvent> equipSound;
 
     public GlovesItem(ArmorMaterial material, double restoration, Properties properties) {
         super(properties.durability(13 * material.durability()));
         this.restoration = restoration;
         this.setRenderTexture(material.assetId().location().getNamespace(), material.assetId().location().getPath());
+        this.equipSound = material.equipSound();
     }
 
     @Override
@@ -32,16 +36,17 @@ public class GlovesItem extends AccessoryItem {
         }
     }
 
+    @Nullable
+    @Override
+    public SoundEventData getEquipSound(ItemStack stack, SlotReference reference) {
+        return new SoundEventData(this.equipSound, 1.0F, 1.0F);
+    }
+
     public void setRenderTexture(String modId, String registryName) {
         this.glovesTexture = ResourceLocation.fromNamespaceAndPath(modId, "textures/entity/equipment/humanoid_gloves/" + registryName + ".png");
     }
 
     public ResourceLocation getGlovesTexture() {
         return this.glovesTexture;
-    }
-
-    @Override //todo
-    public @Nullable SoundEventData getEquipSound(ItemStack stack, SlotReference reference) {
-        return super.getEquipSound(stack, reference);
     }
 }

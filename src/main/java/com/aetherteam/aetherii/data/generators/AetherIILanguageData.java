@@ -1372,6 +1372,9 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "scaterglass_vial.fill", "Scatterglass Vial fills");
         this.addSubtitle("item", "scaterglass_vial.empty", "Scatterglass Vial empties");
 
+        this.addSubtitle("item", "arkenium_canister.fill", "Arkenium Canister fills");
+        this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
+
         this.addSubtitle("item", "armor.equip_taegore_hide", "Taegore Hide armor rustles");
         this.addSubtitle("item", "armor.equip_burrukai_pelt", "Burrukai Pelt armor rustles");
         this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");

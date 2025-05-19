@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class AetherIISoundEvents { //TODO SoundActions??? blocksound categories?
+public class AetherIISoundEvents { //TODO blocksound categories?
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, AetherII.MODID);
 
     // Blocks
@@ -16,6 +16,12 @@ public class AetherIISoundEvents { //TODO SoundActions??? blocksound categories?
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_AETHER_PORTAL_TRIGGER = register("block.aether_portal.trigger");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_BLUE_AERCLOUD_BOUNCE = register("block.blue_aercloud.bounce");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_FERROSITE_BREAK = register("block.ferrosite.break");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_FERROSITE_STEP = register("block.ferrosite.step");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_FERROSITE_PLACE = register("block.ferrosite.place");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_FERROSITE_HIT = register("block.ferrosite.hit");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_FERROSITE_FALL = register("block.ferrosite.fall");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_MOA_EGG_CRACK = register("block.moa_egg.crack");
     public static final DeferredHolder<SoundEvent, SoundEvent> BLOCK_MOA_EGG_HATCH = register("block.moa_egg.hatch");

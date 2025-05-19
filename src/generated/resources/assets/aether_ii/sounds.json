@@ -41,6 +41,57 @@
     ],
     "subtitle": "subtitles.aether_ii.block.bush.rustle"
   },
+  "block.ferrosite.break": {
+    "sounds": [
+      "dig/stone1",
+      "dig/stone2",
+      "dig/stone3",
+      "dig/stone4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.ferrosite.fall": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.fall"
+  },
+  "block.ferrosite.hit": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.ferrosite.place": {
+    "sounds": [
+      "dig/stone1",
+      "dig/stone2",
+      "dig/stone3",
+      "dig/stone4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.ferrosite.step": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
   "block.gas.ignite": {
     "sounds": [
       "mob/ghast/fireball4"
@@ -1045,6 +1096,63 @@
       "block/amethyst/shimmer"
     ],
     "subtitle": "subtitles.aether_ii.item.ambrosium_shard.use"
+  },
+  "item.arkenium_canister.empty": {
+    "sounds": [
+      {
+        "name": "item/bucket/empty1",
+        "pitch": 0.9
+      },
+      "item/bucket/empty2",
+      "item/bucket/empty3"
+    ],
+    "subtitle": "subtitles.aether_ii.item.arkenium_canister.empty"
+  },
+  "item.arkenium_canister.empty_acid": {
+    "sounds": [
+      {
+        "name": "item/bucket/empty1",
+        "pitch": 0.9
+      },
+      "item/bucket/empty2",
+      "item/bucket/empty3"
+    ],
+    "subtitle": "subtitles.aether_ii.item.arkenium_canister.empty"
+  },
+  "item.arkenium_canister.empty_gas": {
+    "sounds": [
+      {
+        "name": "item/bucket/empty1",
+        "pitch": 0.9
+      },
+      "item/bucket/empty2",
+      "item/bucket/empty3"
+    ],
+    "subtitle": "subtitles.aether_ii.item.arkenium_canister.empty"
+  },
+  "item.arkenium_canister.fill": {
+    "sounds": [
+      "item/bucket/fill1",
+      "item/bucket/fill2",
+      "item/bucket/fill3"
+    ],
+    "subtitle": "subtitles.aether_ii.item.arkenium_canister.fill"
+  },
+  "item.arkenium_canister.fill_acid": {
+    "sounds": [
+      "item/bucket/fill1",
+      "item/bucket/fill2",
+      "item/bucket/fill3"
+    ],
+    "subtitle": "subtitles.aether_ii.item.arkenium_canister.fill"
+  },
+  "item.arkenium_canister.fill_gas": {
+    "sounds": [
+      "item/bucket/fill1",
+      "item/bucket/fill2",
+      "item/bucket/fill3"
+    ],
+    "subtitle": "subtitles.aether_ii.item.arkenium_canister.fill"
   },
   "item.armor.arkenium": {
     "sounds": [
