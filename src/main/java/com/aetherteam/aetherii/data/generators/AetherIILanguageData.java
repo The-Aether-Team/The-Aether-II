@@ -788,6 +788,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
         this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");
         this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
+        this.addItem(AetherIIItems.ARKENIUM_CORE, "Arkenium Core");
+        this.addItem(AetherIIItems.GRAVITITE_CORE, "Gravitite Core");
 
         // Irradiated Items
         this.addItem(AetherIIItems.IRRADIATED_ARMOR, "Irradiated Armor");
@@ -879,6 +881,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.COCKATRICE_SPAWN_EGG, "Cockatrice Spawn Egg");
         this.addItem(AetherIIItems.SWET_SPAWN_EGG, "Swet Spawn Egg");
         this.addItem(AetherIIItems.SKEPHID_SPAWN_EGG, "Skephid Spawn Egg");
+        this.addItem(AetherIIItems.ARKENIUM_TALUTON_SPAWN_EGG, "Arkenium Taluton Spawn Egg");
+        this.addItem(AetherIIItems.GRAVITITE_TALUTON_SPAWN_EGG, "Gravitite Taluton Spawn Egg");
 
         // Misc
         this.addItem(AetherIIItems.HIDE_BUNDLE, "Hide Bundle");
@@ -1092,6 +1096,8 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.COCKATRICE, "Cockatrice");
         this.addEntityType(AetherIIEntityTypes.SWET, "Swet");
         this.addEntityType(AetherIIEntityTypes.SKEPHID, "Skephid");
+        this.addEntityType(AetherIIEntityTypes.ARKENIUM_TALUTON, "Arkenium Taluton");
+        this.addEntityType(AetherIIEntityTypes.GRAVITITE_TALUTON, "Gravitite Taluton");
 
         // Projectile
         this.addEntityType(AetherIIEntityTypes.HOLYSTONE_ROCK, "Holystone Rock");
@@ -1103,6 +1109,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addEntityType(AetherIIEntityTypes.SKEPHID_WEBBING_BALL, "Skephid Webbing Ball");
         this.addEntityType(AetherIIEntityTypes.TOXIC_DART, "Toxic Dart");
         this.addEntityType(AetherIIEntityTypes.VENOMOUS_DART, "Venomous Dart");
+        this.addEntityType(AetherIIEntityTypes.GRAVITITE_DEBRIS_SHOT, "Gravitite Debris Shot");
 
         // NPCs
         this.addEntityType(AetherIIEntityTypes.EDWARD, "Edward");
@@ -1299,8 +1306,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addBestiaryDescription(AetherIIEntityTypes.AECHOR_PLANT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.CARRION_SPROUT.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.ZEPHYR.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.SKEPHID.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.TEMPEST.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addBestiaryDescription(AetherIIEntityTypes.COCKATRICE.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        this.addBestiaryDescription(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
 
         this.addEffectsDescription(AetherIIEffects.WOUND.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         this.addEffectsDescription(AetherIIEffects.STUN.get(), "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
