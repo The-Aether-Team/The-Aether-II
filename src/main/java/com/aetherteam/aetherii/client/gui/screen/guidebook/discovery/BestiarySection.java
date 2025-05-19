@@ -54,7 +54,8 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
             AetherIIEntityTypes.HIGHFIELDS_KIRRID, AetherIIEntityTypes.MAGNETIC_KIRRID, AetherIIEntityTypes.ARCTIC_KIRRID,
             AetherIIEntityTypes.HIGHFIELDS_BURRUKAI, AetherIIEntityTypes.MAGNETIC_BURRUKAI, AetherIIEntityTypes.ARCTIC_BURRUKAI,
             AetherIIEntityTypes.MOA, AetherIIEntityTypes.SKYROOT_LIZARD,
-            AetherIIEntityTypes.ZEPHYR, AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE, AetherIIEntityTypes.AECHOR_PLANT
+            AetherIIEntityTypes.ZEPHYR, AetherIIEntityTypes.SKEPHID, AetherIIEntityTypes.TEMPEST, AetherIIEntityTypes.COCKATRICE, AetherIIEntityTypes.AECHOR_PLANT,
+            AetherIIEntityTypes.ARKENIUM_TALUTON, AetherIIEntityTypes.GRAVITITE_TALUTON
     );
     private static final ResourceLocation GUIDEBOOK_DISCOVERY_RIGHT_PAGE_BESTIARY_LOCATION = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/gui/guidebook/discovery/guidebook_discovery_right_bestiary.png");
     private static final ResourceLocation SLASH_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "guidebook/stats/slash");
@@ -323,7 +324,7 @@ public class BestiarySection extends DiscoverySection<BestiaryEntry, BestiaryEnt
                                 int slotX = dropsTextX + (10 * (3 - loot.size())) + (20 * i);
                                 ItemStack itemStack = new ItemStack(lootDisplay.getItemLike());
                                 List<Component> components = new ArrayList<>();
-                                components.add(itemStack.getHoverName());
+                                components.add(itemStack.getStyledHoverName());
                                 if (lootDisplay.minCount() != lootDisplay.maxCount()) {
                                     components.add(Component.literal(lootDisplay.minCount() + "-" + lootDisplay.maxCount()).withStyle(ChatFormatting.GRAY));
                                 } else {

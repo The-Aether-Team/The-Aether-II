@@ -163,6 +163,31 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 ));
 
+        this.add(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CORE.get())
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+                        )
+                )
+        );
+        this.add(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.HOLYSTONE.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F)))
+                        )
+                )
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(AetherIIItems.GRAVITITE_CORE.get())
+                                .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
+                        )
+                )
+        );
+
         this.add(AetherIIEntityTypes.EDWARD.get(), LootTable.lootTable());
     }
 

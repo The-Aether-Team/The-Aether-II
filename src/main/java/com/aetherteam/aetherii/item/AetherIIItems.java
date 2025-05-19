@@ -232,7 +232,11 @@ public class AetherIIItems {
     public static final DeferredItem<Item> COCKATRICE_FEATHER = register("cockatrice_feather");
 
     public static final DeferredItem<Item> SCATTERGLASS_VIAL = register("scatterglass_vial", VialItem::new, () -> new Item.Properties().stacksTo(8));
-    public static final DeferredItem<Item> CHARGE_CORE = register("charge_core", TreasureItem::new);
+
+    // Treasure
+    public static final DeferredItem<Item> CHARGE_CORE = register("charge_core", TreasureItem::new); //todo rename charge core
+    public static final DeferredItem<Item> ARKENIUM_CORE = register("arkenium_core", TreasureItem::new);
+    public static final DeferredItem<Item> GRAVITITE_CORE = register("gravitite_core", TreasureItem::new);
 
     // Irradiated Items
     public static final DeferredItem<Item> IRRADIATED_ARMOR = register("irradiated_armor", () -> new Item.Properties().stacksTo(1));
@@ -324,6 +328,8 @@ public class AetherIIItems {
     public static final DeferredItem<SpawnEggItem> COCKATRICE_SPAWN_EGG = register("cockatrice_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.COCKATRICE.get(), properties));
     public static final DeferredItem<SpawnEggItem> SWET_SPAWN_EGG = register("swet_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SWET.get(), properties));
     public static final DeferredItem<SpawnEggItem> SKEPHID_SPAWN_EGG = register("skephid_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.SKEPHID.get(), properties));
+    public static final DeferredItem<SpawnEggItem> ARKENIUM_TALUTON_SPAWN_EGG = register("arkenium_taluton_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.ARKENIUM_TALUTON.get(), properties));
+    public static final DeferredItem<SpawnEggItem> GRAVITITE_TALUTON_SPAWN_EGG = register("gravitite_taluton_spawn_egg", (properties) -> new SpawnEggItem(AetherIIEntityTypes.GRAVITITE_TALUTON.get(), properties));
 
     // Misc
     public static final DeferredItem<Item> HIDE_BUNDLE = register("hide_bundle", BundleItem::new, () -> new Item.Properties().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY));
