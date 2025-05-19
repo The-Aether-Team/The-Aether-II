@@ -1,15 +1,22 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.animation.AechorPlantAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.AechorPlantRenderState;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class AechorPlantModel extends EntityModel<AechorPlantRenderState> {
+    public static final AnimationHolder PASSIVE_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aechor_plant/passive"));
+    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "aechor_plant/attack"));
+
     private final ModelPart main;
     private final ModelPart body;
     private final ModelPart petal;
@@ -120,7 +127,7 @@ public class AechorPlantModel extends EntityModel<AechorPlantRenderState> {
     @Override
     public void setupAnim(AechorPlantRenderState aechorPlant) {
         super.setupAnim(aechorPlant);
-
-//        this.animate(aechorPlant.attackAnimationState, AechorPlantAnimation.ATTACK, aechorPlant.ageInTicks, 1.0F);
+        this.animateWalk(PASSIVE_ANIMATION, aechorPlant.ageInTicks, aechorPlant.ageInTicks, 1.0F, 1.0F);
+        this.animate(aechorPlant.attackAnimationState, ATTACK_ANIMATION, aechorPlant.ageInTicks, 1.0F);
     }
 }

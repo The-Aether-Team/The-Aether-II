@@ -9,10 +9,12 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -180,15 +182,15 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
         this.getEntityData().set(DATA_TARGETING_ENTITY_ID, targetingEntity);
     }
 
-//    @Override
-//    protected SoundEvent getHurtSound(DamageSource damageSource) {
-//        return AetherSoundEvents.ENTITY_AECHOR_PLANT_HURT.get();
-//    }
-//
-//    @Override
-//    protected SoundEvent getDeathSound() {
-//        return AetherSoundEvents.ENTITY_AECHOR_PLANT_DEATH.get();
-//    }
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return AetherIISoundEvents.ENTITY_AECHOR_PLANT_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return AetherIISoundEvents.ENTITY_AECHOR_PLANT_DEATH.get();
+    }
 
     @Override
     public boolean hasLineOfSight(Entity entity) {
@@ -257,7 +259,7 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
         public void tick() {
             double d0 = this.aechorPlant.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
 
-            if (this.attackTime == this.attackInterval) {
+            if (this.attackTime == this.attackInterval - 10) {
                 this.aechorPlant.level().broadcastEntityEvent(this.aechorPlant, (byte) 61);
             }
 
