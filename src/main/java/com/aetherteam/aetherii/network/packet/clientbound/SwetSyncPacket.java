@@ -43,7 +43,7 @@ public record SwetSyncPacket(int entityID, net.minecraft.nbt.CompoundTag compoun
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
             Level world = Minecraft.getInstance().player.level();
             if (world.getEntity(payload.entityID()) instanceof Player player) {
-                player.getData(AetherIIDataAttachments.SWET.get()).deserializeNBT(player.level().registryAccess(), payload.compoundTag());
+                player.getData(AetherIIDataAttachments.SWET_LATCH.get()).deserializeNBT(player.level().registryAccess(), payload.compoundTag());
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
@@ -8,10 +7,7 @@ import com.aetherteam.aetherii.data.resources.registries.AetherIISwetVariants;
 import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -21,8 +17,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
@@ -32,15 +26,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.WolfVariant;
-import net.minecraft.world.entity.animal.WolfVariants;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -48,7 +38,6 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
-import java.util.Objects;
 import java.util.Optional;
 
 public class Swet extends Monster implements Enemy {
@@ -312,7 +301,7 @@ public class Swet extends Monster implements Enemy {
     }
 
     public static boolean canLatch(final Swet swet, final Player player) {
-        return !player.isInWater() && swet.getFoodSaturation() <= 3 && swet.getWaterDamageScale() <= 0.25F && player.getData(AetherIIDataAttachments.SWET)
+        return !player.isInWater() && swet.getFoodSaturation() <= 3 && swet.getWaterDamageScale() <= 0.25F && player.getData(AetherIIDataAttachments.SWET_LATCH)
                 .canLatchOn() && player.getFoodData().getFoodLevel() > 4;
     }
 
@@ -431,7 +420,7 @@ public class Swet extends Monster implements Enemy {
                     swetMoveControl.setDirection(this.swet.getYRot(), true);
                     if (this.swet.getBoundingBox().intersects(target.getBoundingBox())) {
                         if (target instanceof Player player) {
-                            player.getData(AetherIIDataAttachments.SWET.get()).latchSwet(this.swet);
+                            player.getData(AetherIIDataAttachments.SWET_LATCH.get()).latchSwet(this.swet);
                         }
                     }
                 }

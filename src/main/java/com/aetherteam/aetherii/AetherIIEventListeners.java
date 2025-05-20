@@ -85,6 +85,7 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         player.getData(AetherIIDataAttachments.PLAYER).login(player);
+        player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).login(player);
         player.getData(AetherIIDataAttachments.CURRENCY).login(player); //todo verify
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).login(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).login(player); //todo verify
@@ -133,10 +134,11 @@ public class AetherIIEventListeners {
         Player player = event.getEntity();
 
         player.getData(AetherIIDataAttachments.PLAYER).postTickUpdate(player);
+        player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).postTickUpdate(player);
+        player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.CURRENCY).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.OUTPOST_TRACKER).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.SWET).postTickUpdate(player);
         PlayerHooks.forceSpecialLoadingCrouch(player);
     }
 

@@ -49,10 +49,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     public float portalIntensity;
     public float oPortalIntensity;
 
-    @Nullable
-    private Aerbunny mountedAerbunny;
-    private Optional<CompoundTag> mountedAerbunnyTag = Optional.empty();
-
     private boolean canRefuelGlide;
     private int glidingTimer;
     private Map<Holder<Item>, Boolean> canRefuelAbilities = new HashMap<>(Map.of(
@@ -73,7 +69,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     public static final Codec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
             Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether),
-            CompoundTag.CODEC.optionalFieldOf("mounted_aerbunny").forGetter(AetherIIPlayerAttachment::getMountedAerbunnyTag),
             Codec.BOOL.fieldOf("can_refuel_glide").forGetter(AetherIIPlayerAttachment::getCanRefuelGlide),
             Codec.INT.fieldOf("gliding_timer").forGetter(AetherIIPlayerAttachment::getGlidingTimer),
             ExtraCodecs.strictUnboundedMap(BuiltInRegistries.ITEM.holderByNameCodec(), Codec.BOOL).fieldOf("can_refuel_abilities").forGetter(AetherIIPlayerAttachment::getCanRefuelAbilities),
@@ -84,10 +79,9 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, Optional<CompoundTag> mountedAerbunnyTag, boolean canRefuelGlide, int glidingTimer, Map<Holder<Item>, Boolean> canRefuelAbilities, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
+    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, boolean canRefuelGlide, int glidingTimer, Map<Holder<Item>, Boolean> canRefuelAbilities, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
-        this.mountedAerbunnyTag = mountedAerbunnyTag;
         this.canRefuelGlide = canRefuelGlide;
         this.glidingTimer = glidingTimer;
         this.canRefuelAbilities =  new HashMap<>(canRefuelAbilities);
@@ -113,7 +107,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
      */
     public void login(Player player) {
         this.startInAether(player);
-        this.remountAerbunny(player);
         this.shouldSyncAfterJoin = true;
     }
 
@@ -129,7 +122,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         this.syncClients(player);
         this.handleAetherPortal(player);
         this.handleHealingStoneHealth(player);
-        this.checkToRemoveAerbunny(player);
         this.resetGlideCheck(player);
     }
 
@@ -174,48 +166,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
             if (player.getHealth() < maxHealthWithoutBonus) {
                 player.getAttribute(Attributes.MAX_ABSORPTION).removeModifier(HealingStoneItem.BONUS_ABSORPTION);
             }
-        }
-    }
-
-    /**
-     * Removes an Aerbunny from the world and stores it to NBT for the capability. This is used when a player logs out with an Aerbunny.
-     */
-    public void removeAerbunny() {
-        if (this.getMountedAerbunny() != null) { //todo
-            Aerbunny aerbunny = this.getMountedAerbunny();
-            CompoundTag nbt = new CompoundTag();
-            aerbunny.save(nbt);
-            this.setMountedAerbunnyTag(Optional.of(nbt));
-            aerbunny.stopRiding();
-            aerbunny.setRemoved(Entity.RemovalReason.UNLOADED_WITH_PLAYER);
-        }
-    }
-
-    /**
-     * Remounts an Aerbunny to the player if there exists stored NBT when joining the world.
-     */
-    private void remountAerbunny(Player player) {
-        if (this.getMountedAerbunnyTag().isPresent()) {
-            if (!player.level().isClientSide()) {
-                Aerbunny aerbunny = new Aerbunny(AetherIIEntityTypes.AERBUNNY.get(), player.level());
-                aerbunny.load(this.getMountedAerbunnyTag().get());
-                player.level().addFreshEntity(aerbunny);
-                aerbunny.startRiding(player);
-                this.setMountedAerbunny(aerbunny);
-                if (player instanceof ServerPlayer serverPlayer) {
-                    PacketDistributor.sendToPlayer(serverPlayer, new RemountAerbunnyPacket(player.getId(), aerbunny.getId()));
-                }
-            }
-            this.setMountedAerbunnyTag(Optional.empty());
-        }
-    }
-
-    /**
-     * Checks whether the capability should stop tracking a mounted Aerbunny.
-     */
-    private void checkToRemoveAerbunny(Player player) {
-        if (this.getMountedAerbunny() != null && (!this.getMountedAerbunny().isAlive() || !player.isAlive())) {
-            this.setMountedAerbunny(null);
         }
     }
 
@@ -337,29 +287,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
 
     public float getOldPortalIntensity() {
         return this.oPortalIntensity;
-    }
-
-    public void setMountedAerbunny(@Nullable Aerbunny mountedAerbunny) {
-        this.mountedAerbunny = mountedAerbunny;
-    }
-
-    /**
-     * @return The {@link Aerbunny} currently mounted to the player
-     */
-    @Nullable
-    public Aerbunny getMountedAerbunny() {
-        return this.mountedAerbunny;
-    }
-
-    public void setMountedAerbunnyTag(Optional<CompoundTag> mountedAerbunnyTag) {
-        this.mountedAerbunnyTag = mountedAerbunnyTag;
-    }
-
-    /**
-     * @return The {@link CompoundTag} data for the Aerbunny currently mounted to the player.
-     */
-    public Optional<CompoundTag> getMountedAerbunnyTag() {
-        return this.mountedAerbunnyTag;
     }
 
     public void setCanRefuelGlide(boolean canRefuelGlide) {

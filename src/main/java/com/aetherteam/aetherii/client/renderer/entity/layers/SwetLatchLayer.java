@@ -15,10 +15,10 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 
 import java.util.List;
 
-public class SwetLayer<T extends LivingEntityRenderState, M extends EntityModel<T>> extends RenderLayer<T, M> {
+public class SwetLatchLayer<T extends LivingEntityRenderState, M extends EntityModel<T>> extends RenderLayer<T, M> {
     private final EntityRenderDispatcher dispatcher;
 
-    public SwetLayer(EntityRendererProvider.Context context, RenderLayerParent<T, M> renderer) {
+    public SwetLatchLayer(EntityRendererProvider.Context context, RenderLayerParent<T, M> renderer) {
         super(renderer);
         this.dispatcher = context.getEntityRenderDispatcher();
     }

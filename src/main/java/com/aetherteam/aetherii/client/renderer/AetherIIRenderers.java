@@ -14,7 +14,7 @@ import com.aetherteam.aetherii.client.renderer.blockentity.MoaEggRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootBedRenderer;
 import com.aetherteam.aetherii.client.renderer.blockentity.SkyrootChestRenderer;
 import com.aetherteam.aetherii.client.renderer.entity.*;
-import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLayer;
+import com.aetherteam.aetherii.client.renderer.entity.layers.SwetLatchLayer;
 import com.aetherteam.aetherii.client.renderer.entity.model.*;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.ArcticBurrukaiModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.burrukai.BurrukaiBabyModel;
@@ -52,14 +52,14 @@ public class AetherIIRenderers {
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
             if (event.getSkin(model) instanceof LivingEntityRenderer<?, ?, ?> livingEntityRenderer) {
-                livingEntityRenderer.addLayer(new SwetLayer(event.getContext(), livingEntityRenderer));
+                livingEntityRenderer.addLayer(new SwetLatchLayer(event.getContext(), livingEntityRenderer));
             }
         });
     }
 
     public static void registerRenderStateModifier(RegisterRenderStateModifiersEvent event) {
         event.registerEntityModifier(PlayerRenderer.class, (abstractClientPlayer, playerRenderState) -> {
-            List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET).getLatchedSwets();
+            List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET_LATCH).getLatchedSwets();
             if (swets != null) {
                 playerRenderState.setRenderData(SWET_KEY, swets);
             }

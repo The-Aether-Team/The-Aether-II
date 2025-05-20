@@ -5,7 +5,7 @@ import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
-import com.aetherteam.aetherii.attachment.player.SwetAttachment;
+import com.aetherteam.aetherii.attachment.player.SwetLatchAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
 import com.aetherteam.aetherii.entity.monster.Swet;
@@ -230,7 +230,7 @@ public class AetherIIOverlays {
     }
 
     private static void renderSwetOverlay(GuiGraphics guiGraphics, LocalPlayer player) {
-        SwetAttachment attachment = player.getData(AetherIIDataAttachments.SWET);
+        SwetLatchAttachment attachment = player.getData(AetherIIDataAttachments.SWET_LATCH);
         List<Swet> swets = attachment.getLatchedSwets();
         if (!swets.isEmpty()) {
             Swet swet = attachment.getLatchedSwets().getFirst();

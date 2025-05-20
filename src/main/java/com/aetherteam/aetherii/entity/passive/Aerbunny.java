@@ -171,7 +171,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
     /**
      * Makes the vehicle player fall slowly, and handles the jump ability for the player.
      */
-    private void handlePlayerInput() {
+    private void handlePlayerInput() { //todo jump sounds and stuff
         if (this.getVehicle() instanceof Player player) {
             if (player.isSpectator()) {
                 this.stopRiding();
@@ -240,7 +240,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
      * @return The {@link InteractionResult}.
      */
     @Override
-    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+    public InteractionResult mobInteract(Player player, InteractionHand hand) { //todo interactions for sitting and riding need to be sorted out again
         ItemStack itemStack = player.getItemInHand(hand);
         Item item = itemStack.getItem();
 
@@ -336,7 +336,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
                 if (this.isTame()) {
                     this.setOrderedToSit(false);
                 }
-                player.getData(AetherIIDataAttachments.PLAYER).setMountedAerbunny(this);
+                player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(this);
                 this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LIFT.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
                 this.setVehicleUUID(Optional.of(player.getUUID()));
             }
@@ -382,7 +382,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
     @Override
     public void stopRiding() {
         if (this.getVehicle() instanceof Player player) {
-            player.getData(AetherIIDataAttachments.PLAYER).setMountedAerbunny(null);
+            player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(null);
         }
         super.stopRiding();
     }
@@ -596,6 +596,9 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
         super.addAdditionalSaveData(tag);
         tag.putInt("AfraidTime", this.getAfraidTime());
         tag.putByte("CollarColor", (byte) this.getCollarColor().getId());
+        if (this.getVehicleUUID().isPresent()) {
+            tag.putUUID("VehicleUUID", this.getVehicleUUID().get());
+        }
     }
 
     @Override
@@ -606,6 +609,9 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
         }
         if (tag.contains("CollarColor", 99)) {
             this.setCollarColor(DyeColor.byId(tag.getInt("CollarColor")));
+        }
+        if (tag.contains("VehicleUUID")) {
+            this.setVehicleUUID(Optional.of(tag.getUUID("VehicleUUID")));
         }
     }
 
