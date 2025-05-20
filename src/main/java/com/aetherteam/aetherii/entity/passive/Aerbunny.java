@@ -55,6 +55,7 @@ import java.util.UUID;
 
 public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and better slowfalling ordering maybe with special attributes
     private static final EntityDataAccessor<Integer> DATA_PUFFINESS_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> DATA_PUFF_COOLDOWN_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_AFRAID_TIME_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_FAST_FALLING_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
@@ -91,6 +92,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
     public void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_PUFFINESS_ID, 0);
+        builder.define(DATA_PUFF_COOLDOWN_ID, 0);
         builder.define(DATA_AFRAID_TIME_ID, 0);
         builder.define(DATA_FAST_FALLING_ID, false);
         builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
@@ -142,6 +144,12 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
         if (this.getVehicle() != null && (this.getVehicle().onGround() || this.getVehicle().isInFluidType() || blockIntersection)) { // Reset the last tracked fall position if the Aerbunny touches a surface.
             this.lastPos = null;
         }
+
+        if (this.getVehicle() == null) {
+            this.setPuffCooldown(0);
+        } else if (this.getPuffCooldown() > 0) {
+            this.setPuffCooldown(this.getPuffCooldown() - 1);
+        }
     }
 
     /**
@@ -171,7 +179,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
     /**
      * Makes the vehicle player fall slowly, and handles the jump ability for the player.
      */
-    private void handlePlayerInput() { //todo jump sounds and stuff
+    private void handlePlayerInput() {
         if (this.getVehicle() instanceof Player player) {
             if (player.isSpectator()) {
                 this.stopRiding();
@@ -196,10 +204,13 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
                         }
                         // The player is only able to jump if the Aerbunny's position is below the last tracked falling position, to avoid infinite jump exploits.
                         if (!player.onGround() && data.isJumping() && player.getDeltaMovement().y() <= 0.0 && this.position().y() < this.lastPos.y() - 1.1) {
-                            player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
-                            PacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
-                            this.spawnExplosionParticle();
-                            this.lastPos = null;
+                            if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
+                                player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
+                                PacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
+                                this.spawnExplosionParticle();
+                                this.lastPos = null;
+                                this.setPuffCooldown(20);
+                            }
                         }
                     }
                 }
@@ -331,6 +342,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
                 this.setFastFalling(true); // Aerbunny will fall fast when dismounted.
                 Vec3 playerMovement = player.getDeltaMovement();
                 this.setDeltaMovement(playerMovement.x() * 5, playerMovement.y() * 0.5 + 0.5, playerMovement.z() * 5);
+                this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LAND.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
                 this.setVehicleUUID(Optional.empty());
             } else if (this.startRiding(player)) { // Mount segment.
                 if (this.isTame()) {
@@ -422,6 +434,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
         if (this.level() instanceof ServerLevel) {
             this.setPuffiness(MAXIMUM_PUFFS);
         }
+        this.level().playSound(null, this, AetherIISoundEvents.ENTITY_AERBUNNY_HOP.get(), SoundSource.NEUTRAL, 2.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
     }
 
     private void spawnExplosionParticle() {
@@ -444,6 +457,14 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
      */
     public void setPuffiness(int puffiness) {
         this.entityData.set(DATA_PUFFINESS_ID, puffiness);
+    }
+
+    public int getPuffCooldown() {
+        return this.entityData.get(DATA_PUFF_COOLDOWN_ID);
+    }
+
+    public void setPuffCooldown(int cooldown) {
+        this.entityData.set(DATA_PUFF_COOLDOWN_ID, cooldown);
     }
 
     /**

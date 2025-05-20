@@ -96,7 +96,9 @@ public class AetherIISoundEvents { //TODO blocksound categories?
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_AMBIENT = register("entity.aerbunny.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_DEATH = register("entity.aerbunny.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_HURT = register("entity.aerbunny.hurt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_HOP = register("entity.aerbunny.hop");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_LIFT = register("entity.aerbunny.lift");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_AERBUNNY_LAND = register("entity.aerbunny.land");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_AMBIENT = register("entity.taegore.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_DEATH = register("entity.taegore.death");

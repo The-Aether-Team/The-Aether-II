@@ -179,12 +179,24 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.death"
   },
+  "entity.aerbunny.hop": {
+    "sounds": [
+      "mob/breeze/whirl"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerbunny.hop"
+  },
   "entity.aerbunny.hurt": {
     "sounds": [
       "aether_ii:entity/aerbunny/hurt",
       "aether_ii:entity/aerbunny/hurt2"
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.hurt"
+  },
+  "entity.aerbunny.land": {
+    "sounds": [
+      "aether_ii:entity/aerbunny/land"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.aerbunny.land"
   },
   "entity.aerbunny.lift": {
     "sounds": [
