@@ -34,6 +34,8 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.context.ContextKey;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
@@ -45,6 +47,8 @@ import java.util.List;
 import java.util.Map;
 
 public class AetherIIRenderers {
+    public static ContextKey<List<Swet>> SWET_KEY = new ContextKey<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet"));
+
     public static void registerAddLayer(EntityRenderersEvent.AddLayers event) {
         event.getSkins().forEach(model -> {
             if (event.getSkin(model) instanceof LivingEntityRenderer<?, ?, ?> livingEntityRenderer) {
@@ -57,8 +61,7 @@ public class AetherIIRenderers {
         event.registerEntityModifier(PlayerRenderer.class, (abstractClientPlayer, playerRenderState) -> {
             List<Swet> swets = abstractClientPlayer.getData(AetherIIDataAttachments.SWET).getLatchedSwets();
             if (swets != null) {
-                playerRenderState.setRenderData(SwetLayer.SWET_KEY, swets);
-                playerRenderState.setRenderData(SwetLayer.SWET_ID_KEY, abstractClientPlayer.getId());
+                playerRenderState.setRenderData(SWET_KEY, swets);
             }
         });
     }
