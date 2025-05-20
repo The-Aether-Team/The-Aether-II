@@ -787,6 +787,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.MOA_FEATHER, "Moa Feather");
         this.addItem(AetherIIItems.COCKATRICE_FEATHER, "Cockatrice Feather");
         this.addItem(AetherIIItems.SCATTERGLASS_VIAL, "Scatterglass Vial");
+        this.addItem(AetherIIItems.ZEPHYR_HUSK, "Zephyr Husk");
         this.addItem(AetherIIItems.CHARGE_CORE, "Charge Core");
         this.addItem(AetherIIItems.ARKENIUM_CORE, "Arkenium Core");
         this.addItem(AetherIIItems.GRAVITITE_CORE, "Gravitite Core");
