@@ -770,6 +770,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
         this.addItem(AetherIIItems.BURRUKAI_PELT, "Burrukai Pelt");
+        this.addItem(AetherIIItems.KIRRID_PLATE, "Kirrid Plate");
         this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
         this.addItem(AetherIIItems.BRETTL_CANE, "Brettl Cane");

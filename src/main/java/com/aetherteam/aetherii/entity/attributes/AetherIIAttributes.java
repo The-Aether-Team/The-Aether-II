@@ -13,6 +13,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class AetherIIAttributes {
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, AetherII.MODID);
 
+    public static final DeferredHolder<Attribute, Attribute> SLOW_FALLING_MAGNITUDE = ATTRIBUTES.register("slow_falling_magnitude", () -> new RangedAttribute("attributes.aether_ii.slow_falling_magnitude", 1.0, 0.0, 1.0)); //todo how do i do this
+
     public static final DeferredHolder<Attribute, Attribute> SLASH_DAMAGE = ATTRIBUTES.register("slash_damage", () -> new BaseRangedAttribute("attributes.aether_ii.slash_damage", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> IMPACT_DAMAGE = ATTRIBUTES.register("impact_damage", () -> new BaseRangedAttribute("attributes.aether_ii.impact_damage", 0.0, 0.0, 1024.0));
     public static final DeferredHolder<Attribute, Attribute> PIERCE_DAMAGE = ATTRIBUTES.register("pierce_damage", () -> new BaseRangedAttribute("attributes.aether_ii.pierce_damage", 0.0, 0.0, 1024.0));

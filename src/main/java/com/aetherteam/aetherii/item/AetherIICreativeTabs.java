@@ -713,6 +713,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.CLOUDTWINE.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
                 output.accept(AetherIIItems.BURRUKAI_PELT.get());
+                output.accept(AetherIIItems.KIRRID_PLATE.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.VALKYRIE_WINGS.get());
                 output.accept(AetherIIItems.BRETTL_CANE.get());

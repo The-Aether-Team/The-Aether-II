@@ -181,7 +181,7 @@
   },
   "entity.aerbunny.hop": {
     "sounds": [
-      "mob/breeze/whirl"
+      "aether_ii:entity/aerbunny/say2"
     ],
     "subtitle": "subtitles.aether_ii.entity.aerbunny.hop"
   },

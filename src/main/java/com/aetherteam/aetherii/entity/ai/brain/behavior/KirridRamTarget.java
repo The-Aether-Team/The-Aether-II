@@ -2,11 +2,13 @@ package com.aetherteam.aetherii.entity.ai.brain.behavior;
 
 import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
+import com.aetherteam.aetherii.item.AetherIIItems;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.Behavior;
@@ -15,6 +17,9 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -110,6 +115,19 @@ public class KirridRamTarget extends Behavior<Kirrid> {
         pLevel.broadcastEntityEvent(pOwner, (byte) 62);
         pOwner.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, this.getTimeBetweenRams.apply(pOwner).sample(pLevel.random));
         pOwner.getBrain().eraseMemory(AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get());
+        if (pOwner.hasPlate()) {
+            this.dropPlate(pOwner);
+        }
+    }
+
+    protected void dropPlate(Kirrid pOwner) {
+        Vec3 vec3 = pOwner.position();
+        ItemStack itemstack = new ItemStack(AetherIIItems.KIRRID_PLATE.get());
+        double d0 = Mth.randomBetween(pOwner.getRandom(), -0.2F, 0.2F);
+        double d1 = Mth.randomBetween(pOwner.getRandom(), 0.3F, 0.7F);
+        double d2 = Mth.randomBetween(pOwner.getRandom(), -0.2F, 0.2F);
+        ItemEntity itementity = new ItemEntity(pOwner.level(), vec3.x(), vec3.y(), vec3.z(), itemstack, d0, d1, d2);
+        pOwner.level().addFreshEntity(itementity);
     }
 
     @Override

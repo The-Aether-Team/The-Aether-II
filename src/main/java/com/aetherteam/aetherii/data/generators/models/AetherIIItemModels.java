@@ -123,6 +123,7 @@ public class AetherIIItemModels extends AetherIIItemModelSubProvider {
         this.generateFlatItem(AetherIIItems.CLOUDTWINE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.TAEGORE_HIDE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BURRUKAI_PELT.get(), ModelTemplates.FLAT_ITEM);
+        this.generateFlatItem(AetherIIItems.KIRRID_PLATE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.SKYROOT_PINECONE.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.VALKYRIE_WINGS.get(), ModelTemplates.FLAT_ITEM);
         this.generateFlatItem(AetherIIItems.BRETTL_CANE.get(), ModelTemplates.FLAT_ITEM);

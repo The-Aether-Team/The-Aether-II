@@ -216,6 +216,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> CLOUDTWINE = register("cloudtwine");
     public static final DeferredItem<Item> TAEGORE_HIDE = register("taegore_hide");
     public static final DeferredItem<Item> BURRUKAI_PELT = register("burrukai_pelt");
+    public static final DeferredItem<Item> KIRRID_PLATE = register("kirrid_plate");
     public static final DeferredItem<Item> AECHOR_PETAL = register("aechor_petal");
     public static final DeferredItem<Item> BRETTL_CANE = register("brettl_cane", (properties) -> new BlockItem(AetherIIBlocks.BRETTL_PLANT_TIP.get(), properties.useItemDescriptionPrefix()));
     public static final DeferredItem<Item> BRETTL_GRASS = register("brettl_grass");

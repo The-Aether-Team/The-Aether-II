@@ -471,7 +471,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
         );
         this.add(AetherIISoundEvents.ENTITY_AERBUNNY_HOP,
                 definition().with(
-                        sound("minecraft:mob/breeze/whirl")
+                        sound("aether_ii:entity/aerbunny/say2")
                 ).subtitle("subtitles.aether_ii.entity.aerbunny.hop")
         );
         this.add(AetherIISoundEvents.ENTITY_AERBUNNY_LIFT,
