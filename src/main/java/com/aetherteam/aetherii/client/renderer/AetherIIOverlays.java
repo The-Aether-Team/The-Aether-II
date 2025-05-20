@@ -56,28 +56,36 @@ public class AetherIIOverlays {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
-                renderAetherPortalOverlay(guiGraphics, minecraft, player.getData(AetherIIDataAttachments.PLAYER.get()), partialTicks);
+                if (!minecraft.options.hideGui) {
+                    renderAetherPortalOverlay(guiGraphics, minecraft, player.getData(AetherIIDataAttachments.PLAYER.get()), partialTicks);
+                }
             }
         });
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "effect_buildups"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
-                renderEffects(minecraft, player, guiGraphics);
+                if (!minecraft.options.hideGui) {
+                    renderEffects(minecraft, player, guiGraphics);
+                }
             }
         });
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "shield_blocking"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
-                renderBlockIndicator(minecraft, guiGraphics, player, partialTicks);
+                if (!minecraft.options.hideGui) {
+                    renderBlockIndicator(minecraft, guiGraphics, player, partialTicks);
+                }
             }
         });
         event.registerBelowAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet_overlay"), (guiGraphics, partialTicks) -> {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
             if (player != null) {
-                renderSwetOverlay(guiGraphics, player);
+                if (!minecraft.options.hideGui) {
+                    renderSwetOverlay(guiGraphics, player);
+                }
             }
         });
     }
