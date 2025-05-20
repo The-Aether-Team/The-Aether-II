@@ -50,6 +50,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and better slowfalling ordering maybe with special attributes
@@ -57,6 +58,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
     private static final EntityDataAccessor<Integer> DATA_AFRAID_TIME_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_FAST_FALLING_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Optional<UUID>> DATA_VEHICLE_UUID_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.OPTIONAL_UUID);
 
     private static final int MAXIMUM_PUFFS = 11;
 
@@ -92,6 +94,7 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
         builder.define(DATA_AFRAID_TIME_ID, 0);
         builder.define(DATA_FAST_FALLING_ID, false);
         builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
+        builder.define(DATA_VEHICLE_UUID_ID, Optional.empty());
     }
 
     /**
@@ -215,6 +218,13 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
      */
     @Override
     public void baseTick() {
+        if (this.getVehicle() instanceof Player vehicle) {
+            if (!vehicle.isCrouching() && this.getDefaultDimensions(this.getPose()).height() != 0.03F) {
+                this.refreshDimensions();
+            } else if (vehicle.isCrouching() && this.getDefaultDimensions(this.getPose()).height() == 0.03F) {
+                this.refreshDimensions();
+            }
+        }
         super.baseTick();
         if (this.isAlive() && this.isPassenger() && this.getVehicle() != null && this.getVehicle().isEyeInFluidType(NeoForgeMod.WATER_TYPE.value())
                 && !this.level().getBlockState(BlockPos.containing(this.getVehicle().getX(), this.getVehicle().getEyeY(), this.getVehicle().getZ())).is(Blocks.BUBBLE_COLUMN)) {
@@ -283,13 +293,25 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
         }
 
         if (!(this.getVehicle() instanceof Player vehicle) || vehicle.equals(player)) { // Interacting player has to be the one wearing the Aerbunny.
-            // Aerbunny can be mounted/dismounted if the shift key is held or no other interaction actions succeed, but only if the Aerbunny is not inside a block.
-            if ((this.getVehicle() != null || player.isShiftKeyDown() || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
-                result = this.ridePlayer(player);
+            // Aerbunny can be mounted/dismounted if the shift key is held and no other interaction actions succeed, but only if the Aerbunny is not inside a block.
+            if ((this.getVehicle() != null || result == InteractionResult.PASS || result == InteractionResult.FAIL) && !super.isInWall()) {
+                if (player.isShiftKeyDown()) {
+                    result = this.ridePlayer(player);
+                }
             }
         }
 
         return result;
+    }
+
+    @Override
+    protected EntityDimensions getDefaultDimensions(Pose pose) {
+        if (this.getVehicle() instanceof Player vehicle) {
+            if (!vehicle.isShiftKeyDown()) {
+                return EntityDimensions.scalable(0.03F, 0.03F);
+            }
+        }
+        return super.getDefaultDimensions(pose);
     }
 
     /**
@@ -309,12 +331,14 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
                 this.setFastFalling(true); // Aerbunny will fall fast when dismounted.
                 Vec3 playerMovement = player.getDeltaMovement();
                 this.setDeltaMovement(playerMovement.x() * 5, playerMovement.y() * 0.5 + 0.5, playerMovement.z() * 5);
+                this.setVehicleUUID(Optional.empty());
             } else if (this.startRiding(player)) { // Mount segment.
                 if (this.isTame()) {
                     this.setOrderedToSit(false);
                 }
                 player.getData(AetherIIDataAttachments.PLAYER).setMountedAerbunny(this);
                 this.level().playSound(player, this, AetherIISoundEvents.ENTITY_AERBUNNY_LIFT.get(), SoundSource.NEUTRAL, 1.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
+                this.setVehicleUUID(Optional.of(player.getUUID()));
             }
             return InteractionResult.SUCCESS;
         }
@@ -467,6 +491,14 @@ public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and b
 
     public void setCollarColor(DyeColor pCollarColor) {
         this.entityData.set(DATA_COLLAR_COLOR, pCollarColor.getId());
+    }
+
+    public Optional<UUID> getVehicleUUID() {
+        return this.entityData.get(DATA_VEHICLE_UUID_ID);
+    }
+
+    public void setVehicleUUID(Optional<UUID> uuid) {
+        this.entityData.set(DATA_VEHICLE_UUID_ID, uuid);
     }
 
     @Nullable
