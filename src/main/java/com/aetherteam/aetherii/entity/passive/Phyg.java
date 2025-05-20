@@ -103,7 +103,7 @@ public class Phyg extends WingedAnimal {
     @Override
     public boolean isSaddleable() {
         return false;
-    }
+    } //todo are we still doing saddleable
 
     /**
      * [CODE COPY] - {@link Pig#getLeashOffset()}.

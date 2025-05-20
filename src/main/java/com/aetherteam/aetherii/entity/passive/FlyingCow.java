@@ -123,5 +123,5 @@ public class FlyingCow extends WingedAnimal {
     @Override
     public boolean isSaddleable() {
         return false;
-    }
+    } //todo are we still doing saddleable
 }

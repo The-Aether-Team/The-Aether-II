@@ -29,8 +29,6 @@ public class BurrukaiAi {
     private static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
     private static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 2400);
     public static final UniformInt TIME_BETWEEN_EAT = UniformInt.of(600, 1200);
-    private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat()
-            .selector((p_311675_, serverLevel) -> p_311675_ instanceof Kirrid kirrid && !kirrid.isBaby() && !kirrid.getBrain().hasMemoryValue(MemoryModuleType.RAM_COOLDOWN_TICKS) && kirrid.hasPlate() && p_311675_.level().getWorldBorder().isWithinBounds(p_311675_.getBoundingBox()));
 
     public static void initMemories(Burrukai pBurrukai, RandomSource pRandom) {
         pBurrukai.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, TIME_BETWEEN_RAMS.sample(pRandom));

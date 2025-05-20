@@ -1,11 +1,14 @@
 package com.aetherteam.aetherii.client.renderer;
 
 import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.attachment.living.DamageSystemAttachment;
 import com.aetherteam.aetherii.attachment.player.AetherIIPlayerAttachment;
+import com.aetherteam.aetherii.attachment.player.SwetAttachment;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupInstance;
+import com.aetherteam.aetherii.entity.monster.Swet;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.mixin.mixins.client.accessor.InventoryScreenAccessor;
 import com.google.common.collect.Ordering;
@@ -34,6 +37,7 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
 import java.awt.*;
 import java.util.Collection;
+import java.util.List;
 
 public class AetherIIOverlays {
     protected static final ResourceLocation BUILDUP_BACKGROUND_SPRITE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "hud/buildup_background");
@@ -67,6 +71,13 @@ public class AetherIIOverlays {
             LocalPlayer player = minecraft.player;
             if (player != null) {
                 renderBlockIndicator(minecraft, guiGraphics, player, partialTicks);
+            }
+        });
+        event.registerBelowAll(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "swet_overlay"), (guiGraphics, partialTicks) -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            LocalPlayer player = minecraft.player;
+            if (player != null) {
+                renderSwetOverlay(guiGraphics, player);
             }
         });
     }
@@ -208,5 +219,40 @@ public class AetherIIOverlays {
                 }
             }
         }
+    }
+
+    private static void renderSwetOverlay(GuiGraphics guiGraphics, LocalPlayer player) {
+        SwetAttachment attachment = player.getData(AetherIIDataAttachments.SWET);
+        List<Swet> swets = attachment.getLatchedSwets();
+        if (!swets.isEmpty()) {
+            Swet swet = attachment.getLatchedSwets().getFirst();
+            if (swet != null) {
+                Holder<SwetVariant> variant = swet.getVariant();
+                ResourceLocation left1Sprite = variant.value().left1();
+                ResourceLocation left2Sprite = variant.value().left2();
+                ResourceLocation right1Sprite = variant.value().right1();
+                ResourceLocation right2Sprite = variant.value().right2();
+
+                drawCorner(guiGraphics, left1Sprite, left2Sprite, 0, guiGraphics.guiHeight() - 128);
+                drawCorner(guiGraphics, right1Sprite, right2Sprite, guiGraphics.guiWidth() - 128, guiGraphics.guiHeight() - 128);
+            }
+        }
+    }
+
+    private static void drawCorner(GuiGraphics guiGraphics, ResourceLocation sprite, ResourceLocation sprite2, int x, int y) {
+        final float startRange = 0.1F;
+        final float endRange = 0.7F;
+
+        final float oscilationRange = (endRange - startRange) / 2;
+        final float oscilationOffset = oscilationRange + startRange;
+
+        drawSingle(guiGraphics, sprite, x, y, oscilationOffset + (float) Math.sin(System.currentTimeMillis() / 200.0) * oscilationRange);
+        drawSingle(guiGraphics, sprite2, x, y, oscilationOffset + (float) Math.sin((System.currentTimeMillis() / 200.0) + 60.0) * oscilationRange);
+    }
+
+    private static void drawSingle(GuiGraphics guiGraphics, ResourceLocation sprite, int x, int y, float alpha) {
+        RenderSystem.enableBlend();
+        guiGraphics.blitSprite(RenderType::guiTextured, sprite, x, y, 128, 128, ARGB.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
+        RenderSystem.disableBlend();
     }
 }

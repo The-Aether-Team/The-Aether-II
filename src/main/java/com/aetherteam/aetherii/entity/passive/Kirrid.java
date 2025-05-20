@@ -123,6 +123,11 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         this.setSpeedModifier(0.0);
     }
 
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Animal.createAnimalAttributes()
+                .add(Attributes.MOVEMENT_SPEED, 0.26);
+    }
+
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData pSpawnData) {
         RandomSource randomsource = level.getRandom();
@@ -131,11 +136,6 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         this.setColor(getRandomKirridColor(randomsource, this));
 
         return super.finalizeSpawn(level, difficulty, reason, pSpawnData);
-    }
-
-    public static AttributeSupplier.Builder createMobAttributes() {
-        return Animal.createAnimalAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.26);
     }
 
     @Override
@@ -152,8 +152,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
-        return KirridAi.makeBrain(this.variantType, this.brainProvider().makeBrain(dynamic));
+    protected Brain<Kirrid> makeBrain(Dynamic<?> dynamic) {
+        return (Brain<Kirrid>) KirridAi.makeBrain(this.variantType, this.brainProvider().makeBrain(dynamic));
     }
 
     @Override
@@ -342,9 +342,9 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void setJumping(boolean pJumping) {
-        super.setJumping(pJumping);
-        if (pJumping) {
+    public void setJumping(boolean jumping) {
+        super.setJumping(jumping);
+        if (jumping) {
             this.playSound(this.getJumpSound(), this.getSoundVolume(), ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) * 0.8F);
         }
     }

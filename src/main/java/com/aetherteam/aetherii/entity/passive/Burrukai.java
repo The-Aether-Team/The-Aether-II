@@ -6,11 +6,8 @@ import com.aetherteam.aetherii.entity.ai.brain.BurrukaiAi;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.DifficultyInstance;
@@ -68,32 +65,32 @@ public class Burrukai extends AetherAnimal implements IShearable {
         this.variantType = type;
     }
 
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Animal.createAnimalAttributes()
+                .add(Attributes.MOVEMENT_SPEED, 0.24)
+                .add(Attributes.ATTACK_DAMAGE, 3.0)
+                .add(Attributes.ATTACK_KNOCKBACK, 4.0F)
+                .add(Attributes.ARMOR, 4.0)
+                .add(Attributes.STEP_HEIGHT, 1.0);
+    }
+
     @Override
-    public void handleEntityEvent(byte pId) {
-        if (pId == 61) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
+        BurrukaiAi.initMemories(this, level.getRandom());
+        return super.finalizeSpawn(level, difficulty, reason, spawnData);
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 61) {
             this.ramAnimationState.start(this.tickCount);
-        } else if (pId == 62) {
+        } else if (id == 62) {
             this.ramAnimationState.stop();
-        } else if (pId == 64) {
+        } else if (id == 64) {
             this.rushAnimationState.start(this.tickCount);
         } else {
-            super.handleEntityEvent(pId);
+            super.handleEntityEvent(id);
         }
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-    }
-
-    @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
-    }
-
-    @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
     }
 
     @Override
@@ -102,8 +99,8 @@ public class Burrukai extends AetherAnimal implements IShearable {
     }
 
     @Override
-    protected Brain<?> makeBrain(Dynamic<?> pDynamic) {
-        return BurrukaiAi.makeBrain(this.variantType, this, this.brainProvider().makeBrain(pDynamic));
+    protected Brain<Burrukai> makeBrain(Dynamic<?> dynamic) {
+        return (Brain<Burrukai>) BurrukaiAi.makeBrain(this.variantType, this, this.brainProvider().makeBrain(dynamic));
     }
 
     @Override
@@ -123,28 +120,9 @@ public class Burrukai extends AetherAnimal implements IShearable {
     }
 
     @Override
-    public int getMaxHeadYRot() {
-        return 15;
-    }
-
-    @Override
-    public SpawnGroupData finalizeSpawn(
-            ServerLevelAccessor pLevel,
-            DifficultyInstance pDifficulty,
-            EntitySpawnReason pReason,
-            @Nullable SpawnGroupData pSpawnData
-    ) {
-        RandomSource randomsource = pLevel.getRandom();
-        BurrukaiAi.initMemories(this, randomsource);
-        this.ageBoundaryReached();
-
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData);
-    }
-
-    @Override
     public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
         boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
-        if (this.level().isClientSide) {
+        if (this.level().isClientSide()) {
             return false;
         } else {
             if (flag && pSource.getEntity() instanceof LivingEntity) {
@@ -155,18 +133,14 @@ public class Burrukai extends AetherAnimal implements IShearable {
         }
     }
 
-    public static AttributeSupplier.Builder createMobAttributes() {
-        return Animal.createAnimalAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.24)
-                .add(Attributes.ATTACK_DAMAGE, 3.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 4.0F)
-                .add(Attributes.ARMOR, 4.0)
-                .add(Attributes.STEP_HEIGHT, 1.0);
+    @Override
+    public int getMaxHeadYRot() {
+        return 15;
     }
 
     @Override
-    public boolean isFood(ItemStack pStack) {
-        return pStack.is(AetherIITags.Items.BURRUKAI_FOOD);
+    public boolean isFood(ItemStack stack) {
+        return stack.is(AetherIITags.Items.BURRUKAI_FOOD);
     }
 
     @Nullable

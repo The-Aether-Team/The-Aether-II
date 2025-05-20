@@ -119,75 +119,11 @@ public class Moa extends MountableAnimal {
         this.setPathfindingMalus(PathType.LAVA, -1.0F);
     }
 
-
-    @Override
-    protected PathNavigation createNavigation(Level level) {
-        return new FallPathNavigation(this, level);
-    }
-
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 1.0)
                 .add(Attributes.FOLLOW_RANGE, 16.0)
                 .add(Attributes.ATTACK_DAMAGE, 5.0);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(DATA_MOA_UUID_ID, Optional.empty());
-        builder.define(DATA_FEATHER_SHAPE_ID, FeatherShape.CURVED.getSerializedName());
-        builder.define(DATA_KERATIN_COLOR, KeratinColor.GRAY.getSerializedName());
-        builder.define(DATA_EYE_COLOR, EyeColor.BLUE.getSerializedName());
-        builder.define(DATA_FEATHER_COLOR, FeatherColor.LIGHT_BLUE.getSerializedName());
-        builder.define(DATA_RIDER_UUID, Optional.empty());
-        builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
-        builder.define(DATA_REMAINING_JUMPS_ID, 0);
-        builder.define(DATA_HUNGRY_ID, false);
-        builder.define(DATA_AMOUNT_FED_ID, 0);
-        builder.define(DATA_PLAYER_GROWN_ID, false);
-        builder.define(DATA_SITTING_ID, false);
-        builder.define(DATA_FOLLOWING_ID, Optional.empty());
-    }
-
-    @Override
-    protected Brain.Provider<Moa> brainProvider() {
-        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<?> makeBrain(Dynamic<?> pDynamic) {
-        return MoaAi.makeBrain(this, this.brainProvider().makeBrain(pDynamic));
-    }
-
-    @Override
-    public Brain<Moa> getBrain() {
-        return (Brain<Moa>) super.getBrain();
-    }
-
-    @Override
-    protected void customServerAiStep(ServerLevel serverLevel) {
-        ProfilerFiller profiler = Profiler.get();
-        profiler.push("kirridBrain");
-        this.getBrain().tick(serverLevel, this);
-        profiler.pop();
-        profiler.push("kirridActivityUpdate");
-        MoaAi.updateActivity(this);
-        profiler.pop();
-    }
-
-    @Override
-    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
-        boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
-        if (this.level().isClientSide) {
-            return false;
-        } else {
-            if (flag && pSource.getEntity() instanceof LivingEntity) {
-                MoaAi.maybeRetaliate(serverLevel, this, (LivingEntity) pSource.getEntity());
-            }
-
-            return flag;
-        }
     }
 
     /**
@@ -223,6 +159,24 @@ public class Moa extends MountableAnimal {
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
     }
 
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_MOA_UUID_ID, Optional.empty());
+        builder.define(DATA_FEATHER_SHAPE_ID, FeatherShape.CURVED.getSerializedName());
+        builder.define(DATA_KERATIN_COLOR, KeratinColor.GRAY.getSerializedName());
+        builder.define(DATA_EYE_COLOR, EyeColor.BLUE.getSerializedName());
+        builder.define(DATA_FEATHER_COLOR, FeatherColor.LIGHT_BLUE.getSerializedName());
+        builder.define(DATA_RIDER_UUID, Optional.empty());
+        builder.define(DATA_LAST_RIDER_UUID, Optional.empty());
+        builder.define(DATA_REMAINING_JUMPS_ID, 0);
+        builder.define(DATA_HUNGRY_ID, false);
+        builder.define(DATA_AMOUNT_FED_ID, 0);
+        builder.define(DATA_PLAYER_GROWN_ID, false);
+        builder.define(DATA_SITTING_ID, false);
+        builder.define(DATA_FOLLOWING_ID, Optional.empty());
+    }
+
     /**
      * Refreshes the Moa's bounding box dimensions.
      *
@@ -234,6 +188,51 @@ public class Moa extends MountableAnimal {
             this.refreshDimensions();
         }
         super.onSyncedDataUpdated(dataAccessor);
+    }
+
+    @Override
+    protected Brain.Provider<Moa> brainProvider() {
+        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
+    }
+
+    @Override
+    protected Brain<?> makeBrain(Dynamic<?> pDynamic) {
+        return MoaAi.makeBrain(this, this.brainProvider().makeBrain(pDynamic));
+    }
+
+    @Override
+    public Brain<Moa> getBrain() {
+        return (Brain<Moa>) super.getBrain();
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new FallPathNavigation(this, level);
+    }
+
+    @Override
+    protected void customServerAiStep(ServerLevel serverLevel) {
+        ProfilerFiller profiler = Profiler.get();
+        profiler.push("kirridBrain");
+        this.getBrain().tick(serverLevel, this);
+        profiler.pop();
+        profiler.push("kirridActivityUpdate");
+        MoaAi.updateActivity(this);
+        profiler.pop();
+    }
+
+    @Override
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
+        boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
+        if (this.level().isClientSide) {
+            return false;
+        } else {
+            if (flag && pSource.getEntity() instanceof LivingEntity) {
+                MoaAi.maybeRetaliate(serverLevel, this, (LivingEntity) pSource.getEntity());
+            }
+
+            return flag;
+        }
     }
 
     /**

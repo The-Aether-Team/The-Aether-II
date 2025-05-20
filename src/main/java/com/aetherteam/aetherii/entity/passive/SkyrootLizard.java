@@ -89,7 +89,7 @@ public class SkyrootLizard extends AetherAnimal {
         this.playSound(AetherIISoundEvents.ENTITY_SKYROOT_LIZARD_STEP.get(), 0.15F, 1.0F);
     }
 
-    @Nullable //TODO: Do even need that?
+    @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
         return AetherIIEntityTypes.SKYROOT_LIZARD.get().create(level, EntitySpawnReason.BREEDING);

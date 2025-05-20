@@ -1,5 +1,9 @@
 {
   "biomes": "#aether_ii:golden_swet_spawning",
   "gel_item": "aether_ii:golden_swet_gel",
+  "overlay_left_1": "aether_ii:overlay/swet/golden_left_1",
+  "overlay_left_2": "aether_ii:overlay/swet/golden_left_2",
+  "overlay_right_1": "aether_ii:overlay/swet/golden_right_1",
+  "overlay_right_2": "aether_ii:overlay/swet/golden_right_2",
   "texture": "aether_ii:textures/entity/mobs/swet/golden.png"
 }
