@@ -177,6 +177,7 @@ public class HighlandsPlacedFeatures {
     // Dungeon
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
+    public static final ResourceKey<PlacedFeature> ROTSHROOM_PATCH = createKey("rotshroom_patch");
 
 
     // Air
@@ -812,6 +813,7 @@ public class HighlandsPlacedFeatures {
 
         register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
         register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
+        register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTSHROOM_PATCH));
     }
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {
