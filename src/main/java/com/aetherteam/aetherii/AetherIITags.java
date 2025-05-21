@@ -73,7 +73,8 @@ public class AetherIITags {
         public static final TagKey<Block> ARCTIC_COAST_GENERATES_ON = tag("arctic_coast_generates_on");
         public static final TagKey<Block> FERROSITE_PILLAR_GENERATES_ON = tag("ferrosite_pillar_generates_on");
         public static final TagKey<Block> FERROSITE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
-        public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("ferrosite_spike_generates_on");
+        public static final TagKey<Block> ARCTIC_ICE_SPIKE_GENERATES_ON = tag("arctic_ice_spike_generates_on");
+        public static final TagKey<Block> UNDERGROWTH_PATCH_GENERATES_ON = tag("undergrowth_patch_generates_on");
 
         public static final TagKey<Block> AETHER_ANIMALS_SPAWNABLE_ON = tag("aether_animal_spawnable_on");
         public static final TagKey<Block> AECHOR_PLANT_SPAWNABLE_ON = tag("aechor_plant_spawnable_on");

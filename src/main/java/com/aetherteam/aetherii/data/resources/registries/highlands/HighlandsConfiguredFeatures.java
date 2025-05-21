@@ -28,11 +28,10 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.util.valueproviders.UniformFloat;
-import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -283,6 +282,8 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ROTSHROOM_PATCH = createKey("rotshroom_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_VINE = createKey("undergrowth_vine");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
 
 
     // Air
@@ -2066,6 +2067,29 @@ public class HighlandsConfiguredFeatures {
                                 .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState(), 2)
                                 .build())
                         ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));
+        register(
+                context,
+                UNDERGROWTH_VINE,
+                Feature.BLOCK_COLUMN,
+                new BlockColumnConfiguration(
+                        List.of(
+                                BlockColumnConfiguration.layer(
+                                        new WeightedListInt(
+                                                SimpleWeightedRandomList.<IntProvider>builder()
+                                                        .add(UniformInt.of(1, 5), 1)
+                                                        .add(UniformInt.of(0, 3), 2)
+                                                        .build()
+                                        ),
+                                        BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_VINES_PLANT.get())
+                                ),
+                                BlockColumnConfiguration.layer(ConstantInt.of(1), BlockStateProvider.simple(AetherIIBlocks.UNDERGROWTH_VINES.get()))
+                        ),
+                        Direction.DOWN,
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE,
+                        true
+                )
+        );
+        FeatureUtils.register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON, BlockStateProvider.simple(AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get()), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERGROWTH_VINE)), CaveSurface.CEILING, ConstantInt.of(1), 0.5F, 3, 1.0F, UniformInt.of(3, 5), 0.5F));
     }
     
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {

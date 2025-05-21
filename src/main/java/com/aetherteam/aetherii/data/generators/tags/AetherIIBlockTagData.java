@@ -369,6 +369,12 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+        this.tag(AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON).add(
+                AetherIIBlocks.GUARDIAN_LOG.get(),
+                AetherIIBlocks.GUARDIAN_WOOD.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.GUARDIAN_ROOTS.get());
         this.tag(AetherIITags.Blocks.AETHER_ANIMALS_SPAWNABLE_ON).addTag(AetherIITags.Blocks.LEAVES).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get(),
