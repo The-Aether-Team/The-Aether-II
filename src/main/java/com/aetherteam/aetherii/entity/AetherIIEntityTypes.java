@@ -153,9 +153,9 @@ public class AetherIIEntityTypes {
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         // Passive
-        event.put(AetherIIEntityTypes.FLYING_COW.get(), FlyingCow.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.SHEEPUFF.get(), Sheepuff.createMobAttributes().build());
-        event.put(AetherIIEntityTypes.PHYG.get(), Phyg.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.FLYING_COW.get(), AetherIIStats.merge(FlyingCow.createMobAttributes(), AetherIIStats.FLYING_COW).build());
+        event.put(AetherIIEntityTypes.SHEEPUFF.get(), AetherIIStats.merge(Sheepuff.createMobAttributes(), AetherIIStats.SHEEPUFF).build());
+        event.put(AetherIIEntityTypes.PHYG.get(), AetherIIStats.merge(Phyg.createMobAttributes(), AetherIIStats.PHYG).build());
         event.put(AetherIIEntityTypes.AERBUNNY.get(), AetherIIStats.merge(Aerbunny.createMobAttributes(), AetherIIStats.AERBUNNY).build());
         event.put(AetherIIEntityTypes.HIGHFIELDS_TAEGORE.get(), AetherIIStats.merge(Taegore.createMobAttributes(), AetherIIStats.HIGHFIELDS_TAEGORE).build());
         event.put(AetherIIEntityTypes.MAGNETIC_TAEGORE.get(), AetherIIStats.merge(Taegore.createMobAttributes(), AetherIIStats.MAGNETIC_TAEGORE).build());
@@ -167,7 +167,7 @@ public class AetherIIEntityTypes {
         event.put(AetherIIEntityTypes.MAGNETIC_KIRRID.get(), AetherIIStats.merge(Kirrid.createMobAttributes(), AetherIIStats.MAGNETIC_KIRRID).build());
         event.put(AetherIIEntityTypes.ARCTIC_KIRRID.get(), AetherIIStats.merge(Kirrid.createMobAttributes(), AetherIIStats.ARCTIC_KIRRID).build());
         event.put(AetherIIEntityTypes.MOA.get(), AetherIIStats.merge(Moa.createMobAttributes(), AetherIIStats.MOA).build());
-        event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), SkyrootLizard.createMobAttributes().build());
+        event.put(AetherIIEntityTypes.SKYROOT_LIZARD.get(), AetherIIStats.merge(SkyrootLizard.createMobAttributes(), AetherIIStats.SKYROOT_LIZARD).build());
         event.put(AetherIIEntityTypes.CARRION_SPROUT.get(), AetherIIStats.merge(CarrionSprout.createMobAttributes(), AetherIIStats.CARRION_SPROUT).build());
 
         // Hostile

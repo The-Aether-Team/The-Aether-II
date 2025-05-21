@@ -101,7 +101,6 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
-                .add(Attributes.MAX_HEALTH, 8.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.23);
     }
 

@@ -35,6 +35,15 @@ public class AetherIIStats {
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_SPEAR = List.of(pierceDamageModifer(6.0));
     public static final List<ItemAttributeModifiers.Entry> GRAVITITE_CROSSBOW = List.of(rangedPierceDamageModifer(5.0));
 
+    public static final ImmutableMap<Holder<Attribute>, Double> FLYING_COW = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 10.0)
+            .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> SHEEPUFF = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 8.0)
+            .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> PHYG = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 10.0)
+            .build();
     public static final ImmutableMap<Holder<Attribute>, Double> AERBUNNY = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 6.0)
             .put(AetherIIAttributes.SLASH_RESISTANCE, 0.0)
@@ -100,6 +109,9 @@ public class AetherIIStats {
             .put(AetherIIAttributes.SLASH_RESISTANCE, 2.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, -2.0)
+            .build();
+    public static final ImmutableMap<Holder<Attribute>, Double> SKYROOT_LIZARD = ImmutableMap.<Holder<Attribute>, Double>builder()
+            .put(Attributes.MAX_HEALTH, 4.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> AECHOR_PLANT = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 15.0)

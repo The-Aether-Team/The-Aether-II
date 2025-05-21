@@ -43,7 +43,6 @@ public class SkyrootLizard extends AetherAnimal {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
-                .add(Attributes.MAX_HEALTH, 4.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3);
     }
 
