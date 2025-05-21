@@ -32,10 +32,7 @@ import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
 import com.aetherteam.aetherii.item.consumeeffect.AetherIIConsumeEffectTypes;
 import com.aetherteam.aetherii.loot.functions.AetherIILootFunctions;
 import com.aetherteam.aetherii.loot.modifiers.AetherIILootModifiers;
-import com.aetherteam.aetherii.network.packet.AetherIIPlayerSyncPacket;
-import com.aetherteam.aetherii.network.packet.CurrencySyncPacket;
-import com.aetherteam.aetherii.network.packet.DamageSystemSyncPacket;
-import com.aetherteam.aetherii.network.packet.OutpostTrackerSyncPacket;
+import com.aetherteam.aetherii.network.packet.*;
 import com.aetherteam.aetherii.network.packet.clientbound.*;
 import com.aetherteam.aetherii.network.packet.serverbound.*;
 import com.aetherteam.aetherii.recipe.book.AetherIIRecipeBookCategories;
@@ -215,6 +212,7 @@ public class AetherII {
         registrar.playToServer(StepHeightPacket.TYPE, StepHeightPacket.STREAM_CODEC, StepHeightPacket::execute);
 
         // BOTH
+        registrar.playBidirectional(AbilityBehaviorSyncPacket.TYPE, AbilityBehaviorSyncPacket.STREAM_CODEC, AbilityBehaviorSyncPacket::execute);
         registrar.playBidirectional(AetherIIPlayerSyncPacket.TYPE, AetherIIPlayerSyncPacket.STREAM_CODEC, AetherIIPlayerSyncPacket::execute);
         registrar.playBidirectional(CurrencySyncPacket.TYPE, CurrencySyncPacket.STREAM_CODEC, CurrencySyncPacket::execute);
         registrar.playBidirectional(DamageSystemSyncPacket.TYPE, DamageSystemSyncPacket.STREAM_CODEC, DamageSystemSyncPacket::execute);

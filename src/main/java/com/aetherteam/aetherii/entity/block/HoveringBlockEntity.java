@@ -94,8 +94,7 @@ public class HoveringBlockEntity extends Entity {
             }
         } else {
             if (holdingPlayer != null) {
-                AetherIIPlayerAttachment attachment = holdingPlayer.getData(AetherIIDataAttachments.PLAYER);
-                attachment.setGravititeHoldingFloatingBlock(false);
+                holdingPlayer.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).setGravititeHoldingFloatingBlock(false);
             }
             if (this.verticalCollision || this.horizontalCollision || this.onGround()) {
                 this.markShouldSettle();

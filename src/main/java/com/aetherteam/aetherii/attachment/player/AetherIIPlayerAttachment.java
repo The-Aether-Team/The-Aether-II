@@ -49,44 +49,23 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     public float portalIntensity;
     public float oPortalIntensity;
 
-    private boolean canRefuelGlide;
-    private int glidingTimer;
-    private Map<Holder<Item>, Boolean> canRefuelAbilities = new HashMap<>(Map.of(
-            AetherIIItems.BLUE_AERCLOUD_GLIDER, false,
-            AetherIIItems.PURPLE_AERCLOUD_GLIDER, false
-    ));
-
-    private boolean gravititeHoldingFloatingBlock = false;
-    private boolean gravititeJumpUsed = true;
-
     private final Map<String, Triple<Type, Consumer<Object>, Supplier<Object>>> synchableFunctions = Map.ofEntries(
             Map.entry("setMoving", Triple.of(Type.BOOLEAN, (object) -> this.setMoving((boolean) object), this::isMoving)),
             Map.entry("setJumping", Triple.of(Type.BOOLEAN, (object) -> this.setJumping((boolean) object), this::isJumping)),
-            Map.entry("setGlidingTimer", Triple.of(Type.INT, (object) -> this.setGlidingTimer((int) object), this::getGlidingTimer)),
-            Map.entry("setGravititeJumpUsed", Triple.of(Type.BOOLEAN, (object) -> this.setGravititeJumpUsed((boolean) object), this::isGravititeJumpUsed))
+            Map.entry("setShouldSyncBetweenClients", Triple.of(Type.BOOLEAN, (object) -> this.setShouldSyncBetweenClients((boolean) object), this::shouldSyncBetweenClients))
     );
 
     public static final Codec<AetherIIPlayerAttachment> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.fieldOf("can_get_portal").forGetter(AetherIIPlayerAttachment::canGetPortal),
-            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether),
-            Codec.BOOL.fieldOf("can_refuel_glide").forGetter(AetherIIPlayerAttachment::getCanRefuelGlide),
-            Codec.INT.fieldOf("gliding_timer").forGetter(AetherIIPlayerAttachment::getGlidingTimer),
-            ExtraCodecs.strictUnboundedMap(BuiltInRegistries.ITEM.holderByNameCodec(), Codec.BOOL).fieldOf("can_refuel_abilities").forGetter(AetherIIPlayerAttachment::getCanRefuelAbilities),
-            Codec.BOOL.fieldOf("gravitite_holding_floating_block").forGetter(AetherIIPlayerAttachment::isGravititeHoldingFloatingBlock),
-            Codec.BOOL.fieldOf("gravitite_jump_used").forGetter(AetherIIPlayerAttachment::isGravititeJumpUsed)
+            Codec.BOOL.fieldOf("can_spawn_in_aether").forGetter(AetherIIPlayerAttachment::canSpawnInAether)
     ).apply(instance, AetherIIPlayerAttachment::new));
 
     private boolean shouldSyncAfterJoin;
     private boolean shouldSyncBetweenClients;
 
-    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether, boolean canRefuelGlide, int glidingTimer, Map<Holder<Item>, Boolean> canRefuelAbilities, boolean gravititeHoldingFloatingBlock, boolean gravititeJumpUsed) {
+    protected AetherIIPlayerAttachment(boolean canGetPortal, boolean canSpawnInAether) {
         this.canGetPortal = canGetPortal;
         this.canSpawnInAether = canSpawnInAether;
-        this.canRefuelGlide = canRefuelGlide;
-        this.glidingTimer = glidingTimer;
-        this.canRefuelAbilities =  new HashMap<>(canRefuelAbilities);
-        this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
-        this.gravititeJumpUsed = gravititeJumpUsed;
     }
 
     public AetherIIPlayerAttachment() { }
@@ -110,6 +89,12 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         this.shouldSyncAfterJoin = true;
     }
 
+    public void onJoinLevel(Player player) {
+        if (player.level().isClientSide() && player.isLocalPlayer()) {
+            this.setSynched(player.getId(), Direction.SERVER, "setShouldSyncBetweenClients", true);
+        }
+    }
+
     public void changeDimension(Player player) {
         this.shouldSyncAfterJoin = true;
     }
@@ -121,8 +106,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
         this.syncAfterJoin(player);
         this.syncClients(player);
         this.handleAetherPortal(player);
-        this.handleHealingStoneHealth(player);
-        this.resetGlideCheck(player);
     }
 
     private void syncAfterJoin(Player player) {
@@ -156,29 +139,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
     private void handleAetherPortal(Player player) {
         if (player.level().isClientSide()) {
             PortalClientUtil.handleAetherPortal(player, this);
-        }
-    }
-
-    private void handleHealingStoneHealth(Player player) {
-        if (player.getAttribute(Attributes.MAX_ABSORPTION).hasModifier(HealingStoneItem.BONUS_ABSORPTION)) {
-            double maxHealthWithAbsorption = player.getMaxHealth() + player.getMaxAbsorption();
-            double maxHealthWithoutBonus = maxHealthWithAbsorption - player.getAttribute(Attributes.MAX_ABSORPTION).getModifier(HealingStoneItem.BONUS_ABSORPTION).amount();
-            if (player.getHealth() < maxHealthWithoutBonus) {
-                player.getAttribute(Attributes.MAX_ABSORPTION).removeModifier(HealingStoneItem.BONUS_ABSORPTION);
-            }
-        }
-    }
-
-    private void resetGlideCheck(Player player) {
-        if (player.onGround()) {
-            if (!this.getCanRefuelGlide()) {
-                this.setGlidingTimer(AercloudGliderItem.GLIDING_MAX);
-                this.setCanRefuelGlide(true);
-                for (Iterator<Map.Entry<Holder<Item>, Boolean>> iterator = this.getCanRefuelAbilities().entrySet().iterator(); iterator.hasNext(); ) {
-                    Map.Entry<Holder<Item>, Boolean> entry = iterator.next();
-                    this.getCanRefuelAbilities().put(entry.getKey(), true);
-                }
-            }
         }
     }
 
@@ -287,42 +247,6 @@ public class AetherIIPlayerAttachment implements INBTSynchable {
 
     public float getOldPortalIntensity() {
         return this.oPortalIntensity;
-    }
-
-    public void setCanRefuelGlide(boolean canRefuelGlide) {
-        this.canRefuelGlide = canRefuelGlide;
-    }
-
-    public boolean getCanRefuelGlide() {
-        return this.canRefuelGlide;
-    }
-
-    public void setGlidingTimer(int glidingTimer) {
-        this.glidingTimer = glidingTimer;
-    }
-
-    public int getGlidingTimer() {
-        return this.glidingTimer;
-    }
-
-    public Map<Holder<Item>, Boolean> getCanRefuelAbilities() {
-        return this.canRefuelAbilities;
-    }
-
-    public void setGravititeHoldingFloatingBlock(boolean gravititeHoldingFloatingBlock) {
-        this.gravititeHoldingFloatingBlock = gravititeHoldingFloatingBlock;
-    }
-
-    public boolean isGravititeHoldingFloatingBlock() {
-        return this.gravititeHoldingFloatingBlock;
-    }
-
-    public void setGravititeJumpUsed(boolean gravititeJumpUsed) {
-        this.gravititeJumpUsed = gravititeJumpUsed;
-    }
-
-    public boolean isGravititeJumpUsed() {
-        return this.gravititeJumpUsed;
     }
 
     /**

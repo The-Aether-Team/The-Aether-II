@@ -53,7 +53,7 @@ import java.util.EnumSet;
 import java.util.Optional;
 import java.util.UUID;
 
-public class Aerbunny extends AetherTamableAnimal { //todo cooldown system and better slowfalling ordering maybe with special attributes
+public class Aerbunny extends AetherTamableAnimal {
     private static final EntityDataAccessor<Integer> DATA_PUFFINESS_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_PUFF_COOLDOWN_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_AFRAID_TIME_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
