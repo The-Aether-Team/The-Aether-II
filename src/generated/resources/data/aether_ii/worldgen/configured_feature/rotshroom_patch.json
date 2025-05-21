@@ -15,7 +15,7 @@
                     "facing": "north"
                   }
                 },
-                "weight": 2
+                "weight": 3
               },
               {
                 "data": {
@@ -31,19 +31,6 @@
                   }
                 },
                 "weight": 2
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:fungal_carpet",
-                  "Properties": {
-                    "bottom": "true",
-                    "east": "none",
-                    "north": "none",
-                    "south": "none",
-                    "west": "none"
-                  }
-                },
-                "weight": 7
               }
             ]
           }
