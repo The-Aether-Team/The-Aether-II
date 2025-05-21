@@ -362,10 +362,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/pig/say3")
                 ).subtitle("subtitles.aether_ii.entity.phyg.hurt")
         );
-        this.add(AetherIISoundEvents.ENTITY_PHYG_SADDLE,
-                definition().with(sound("minecraft:mob/horse/leather"))
-                        .subtitle("subtitles.aether_ii.entity.phyg.saddle")
-        );
         this.add(AetherIISoundEvents.ENTITY_PHYG_STEP,
                 definition().with(
                         sound("minecraft:mob/pig/step1"),
@@ -397,10 +393,6 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/cow/hurt2"),
                         sound("minecraft:mob/cow/hurt3")
                 ).subtitle("subtitles.aether_ii.entity.flying_cow.hurt")
-        );
-        this.add(AetherIISoundEvents.ENTITY_FLYING_COW_SADDLE,
-                definition().with(sound("minecraft:mob/horse/leather"))
-                        .subtitle("subtitles.aether_ii.entity.flying_cow.saddle")
         );
         this.add(AetherIISoundEvents.ENTITY_FLYING_COW_MILK,
                 definition().with(

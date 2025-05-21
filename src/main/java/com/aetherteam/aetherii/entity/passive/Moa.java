@@ -253,7 +253,7 @@ public class Moa extends MountableAnimal {
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
         if (gravity != null) {
             double max = this.isVehicle() ? -0.5 : -0.1;
-            double fallSpeed = Math.max(gravity.getValue() * -1.25, max); // Entity isn't allowed to fall too slowly from gravity.
+            double fallSpeed = Math.min(gravity.getValue() * -1.25, max); // Entity isn't allowed to fall too slowly from gravity.
             if (this.getDeltaMovement().y() < fallSpeed && !this.playerTriedToCrouch()) {
                 this.setDeltaMovement(this.getDeltaMovement().x(), fallSpeed, this.getDeltaMovement().z());
                 this.hasImpulse = true;

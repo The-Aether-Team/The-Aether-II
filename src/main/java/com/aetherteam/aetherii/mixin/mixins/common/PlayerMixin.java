@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.mixin.mixins.common;
 
+import com.aetherteam.aetherii.entity.passive.MountableAnimal;
 import com.aetherteam.aetherii.item.equipment.AetherIINeoItemAbilities;
 import com.aetherteam.aetherii.mixin.MixinHooks;
 import com.aetherteam.aetherii.mixin.wrappers.common.ItemCooldownsWrapper;
@@ -22,11 +23,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
-public class PlayerMixin { //todo sounds, particles, and stats
+public abstract class PlayerMixin { //todo sounds, particles, and stats
     @Mutable
     @Final
     @Shadow
     private ItemCooldowns cooldowns;
+
+    @Shadow
+    protected abstract boolean wantsToStopRiding();
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void init(Level level, BlockPos pos, float yRot, GameProfile gameProfile, CallbackInfo ci) {
@@ -50,5 +54,31 @@ public class PlayerMixin { //todo sounds, particles, and stats
         MixinHooks.shortswordSlashBehavior(player, target, canShortswordSlash.get());
         MixinHooks.hammerShockBehavior(player, target, canHammerShock.get());
         MixinHooks.spearStabBehavior(player, target, canSpearStab.get());
+    }
+
+    /**
+     * Used to set whether the player tried to crouch for {@link MountableAnimal}, before crouching is cancelled for mounts by the {@link Player} class.
+     *
+     * @param ci The {@link CallbackInfo} for the void method return.
+     */
+    @Inject(at = @At(value = "HEAD"), method = "rideTick()V")
+    private void rideTickHead(CallbackInfo ci, @Share("wantsToStopRiding") LocalBooleanRef wantsToStopRiding) {
+        Player player = (Player) (Object) this;
+        wantsToStopRiding.set(this.wantsToStopRiding());
+        if (!player.level().isClientSide()) {
+            if (player.isPassenger() && player.getVehicle() instanceof MountableAnimal mountableAnimal) {
+                mountableAnimal.setPlayerTriedToCrouch(player.isShiftKeyDown());
+            }
+        }
+    }
+
+    @Inject(at = @At(value = "TAIL"), method = "rideTick()V")
+    private void rideTickTail(CallbackInfo ci, @Share("wantsToStopRiding") LocalBooleanRef wantsToStopRiding) {
+        Player player = (Player) (Object) this;
+        if (!player.level().isClientSide() && !player.isShiftKeyDown() && wantsToStopRiding.get()) {
+            if (player.isPassenger() && player.getVehicle() instanceof MountableAnimal) {
+                player.setShiftKeyDown(true);
+            }
+        }
     }
 }

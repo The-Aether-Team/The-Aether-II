@@ -49,25 +49,55 @@ public class FlyingCow extends WingedAnimal {
                 .add(Attributes.MOVEMENT_SPEED, 0.2);
     }
 
-    @Override
-    public boolean isFood(ItemStack stack) {
-        return stack.is(AetherIITags.Items.FLYING_COW_FOOD);
-    }
-
     /**
      * [CODE COPY] - {@link net.minecraft.world.entity.animal.Cow#mobInteract(Player, InteractionHand)}.
      */
     @Override
-    public InteractionResult mobInteract(Player playerEntity, InteractionHand hand) {
-        ItemStack itemStack = playerEntity.getItemInHand(hand);
-        if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
-            playerEntity.playSound(AetherIISoundEvents.ENTITY_FLYING_COW_MILK.get(), 1.0F, 1.0F);
-            ItemStack itemStack1 = ItemUtils.createFilledResult(itemStack, playerEntity, Items.MILK_BUCKET.getDefaultInstance());
-            playerEntity.setItemInHand(hand, itemStack1);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (player.isHolding(itemstack -> itemstack.is(AetherIITags.Items.FLYING_COW_CALM_ITEMS))) {
+            if (!this.isVehicle() && !player.isSecondaryUseActive()) {
+                if (!this.level().isClientSide()) {
+                    player.startRiding(this);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        } else if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
+            player.playSound(AetherIISoundEvents.ENTITY_FLYING_COW_MILK.get(), 1.0F, 1.0F);
+            ItemStack itemStack1 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
+            player.setItemInHand(hand, itemStack1);
             return InteractionResult.SUCCESS;
-        } else {
-            return super.mobInteract(playerEntity, hand);
         }
+        return super.mobInteract(player, hand);
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getControllingPassenger() {
+        if (this.getFirstPassenger() instanceof LivingEntity livingEntity && livingEntity.isHolding(itemstack -> itemstack.is(AetherIITags.Items.FLYING_COW_CALM_ITEMS))) {
+            return livingEntity;
+        }
+        return null;
+    }
+
+    @Override
+    public float getSteeringSpeed() {
+        return super.getSteeringSpeed() * 0.9F;
+    }
+
+    @Override
+    public double getMountJumpStrength() {
+        return 0.95F;
+    }
+
+    @Override
+    public boolean canJump() {
+        return this.onGround();
+    }
+
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return stack.is(AetherIITags.Items.FLYING_COW_FOOD);
     }
 
     @Nullable
@@ -88,12 +118,6 @@ public class FlyingCow extends WingedAnimal {
         return AetherIISoundEvents.ENTITY_FLYING_COW_DEATH.get();
     }
 
-    @Nullable
-    @Override
-    protected SoundEvent getSaddledSound() {
-        return AetherIISoundEvents.ENTITY_FLYING_COW_SADDLE.get();
-    }
-
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(AetherIISoundEvents.ENTITY_FLYING_COW_STEP.get(), 0.15F, 1.0F);
@@ -102,11 +126,6 @@ public class FlyingCow extends WingedAnimal {
     @Override
     protected float getSoundVolume() {
         return 0.4F;
-    }
-
-    @Override
-    public float getSteeringSpeed() {
-        return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 0.75F;
     }
 
     @Nullable
@@ -123,5 +142,18 @@ public class FlyingCow extends WingedAnimal {
     @Override
     public boolean isSaddleable() {
         return false;
-    } //todo are we still doing saddleable
+    }
+
+    @Override
+    protected void updateWalkAnimation(float partialTick) {
+        float multiplier = 4.0F;
+        if (this.getControllingPassenger() != null) {
+            multiplier = 1.75F;
+            if (!this.onGround()) {
+                multiplier = 1.25F;
+            }
+        }
+        float f = Math.min(partialTick * multiplier, 1.0F);
+        this.walkAnimation.update(f, 0.4F, this.isBaby() ? 3.0F : 1.0F);
+    }
 }

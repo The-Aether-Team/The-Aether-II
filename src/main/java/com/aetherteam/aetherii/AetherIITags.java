@@ -171,6 +171,7 @@ public class AetherIITags {
         public static final TagKey<Item> PHYG_FOOD = tag("phyg_food");
         public static final TagKey<Item> PHYG_CALM_ITEMS = tag("phyg_calm_items");
         public static final TagKey<Item> FLYING_COW_FOOD = tag("flying_food");
+        public static final TagKey<Item> FLYING_COW_CALM_ITEMS = tag("flying_cow_calm_items");
         public static final TagKey<Item> SHEEPUFF_FOOD = tag("sheepuff_food");
         public static final TagKey<Item> TAEGORE_FOOD = tag("taegore_food");
         public static final TagKey<Item> BURRUKAI_FOOD = tag("burrukai_food");

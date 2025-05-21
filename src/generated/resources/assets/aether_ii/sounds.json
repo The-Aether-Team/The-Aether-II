@@ -413,12 +413,6 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.flying_cow.milk"
   },
-  "entity.flying_cow.saddle": {
-    "sounds": [
-      "mob/horse/leather"
-    ],
-    "subtitle": "subtitles.aether_ii.entity.flying_cow.saddle"
-  },
   "entity.flying_cow.step": {
     "sounds": [
       "mob/cow/step1",
@@ -672,12 +666,6 @@
       "mob/pig/say3"
     ],
     "subtitle": "subtitles.aether_ii.entity.phyg.hurt"
-  },
-  "entity.phyg.saddle": {
-    "sounds": [
-      "mob/horse/leather"
-    ],
-    "subtitle": "subtitles.aether_ii.entity.phyg.saddle"
   },
   "entity.phyg.step": {
     "sounds": [

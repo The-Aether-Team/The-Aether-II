@@ -40,7 +40,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.Optional;
 
-public class Swet extends Monster implements Enemy {
+public class Swet extends Monster implements Enemy { //todo hitbox scaling and more hunger siphoning
     private static final EntityDataAccessor<Holder<SwetVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Swet.class, AetherIIDataSerializers.SWET_VARIANT.get());
     private static final EntityDataAccessor<Boolean> DATA_MID_JUMP_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Float> DATA_WATER_DAMAGE_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);

@@ -253,9 +253,15 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()
         );
+        this.tag(AetherIITags.Items.PHYG_CALM_ITEMS).add(
+                AetherIIItems.VALKYRIE_WINGS.get()
+        );
         this.tag(AetherIITags.Items.FLYING_COW_FOOD).add(
                 AetherIIItems.ORANGE.get(),
                 AetherIIItems.BLUEBERRY.get()
+        );
+        this.tag(AetherIITags.Items.FLYING_COW_CALM_ITEMS).add(
+                AetherIIItems.VALKYRIE_WINGS.get()
         );
         this.tag(AetherIITags.Items.SHEEPUFF_FOOD).add(
                 AetherIIItems.ORANGE.get(),

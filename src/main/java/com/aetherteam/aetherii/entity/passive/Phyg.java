@@ -8,6 +8,8 @@ import com.aetherteam.aetherii.entity.ai.goal.PhygPanicGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -51,13 +53,41 @@ public class Phyg extends WingedAnimal {
                 .add(Attributes.MOVEMENT_SPEED, 0.25);
     }
 
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if (player.isHolding(itemstack -> itemstack.is(AetherIITags.Items.PHYG_CALM_ITEMS))) {
+            if (!this.isVehicle() && !player.isSecondaryUseActive()) {
+                if (!this.level().isClientSide()) {
+                    player.startRiding(this);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.mobInteract(player, hand);
+    }
+
     @Nullable
     @Override
     public LivingEntity getControllingPassenger() {
         if (this.getFirstPassenger() instanceof LivingEntity livingEntity && livingEntity.isHolding(itemstack -> itemstack.is(AetherIITags.Items.PHYG_CALM_ITEMS))) {
-            return super.getControllingPassenger();
+            return livingEntity;
         }
         return null;
+    }
+
+    @Override
+    public float getSteeringSpeed() {
+        return super.getSteeringSpeed() * 0.8F;
+    }
+
+    @Override
+    public double getMountJumpStrength() {
+        return 0.85F;
+    }
+
+    @Override
+    public boolean canJump() {
+        return this.onGround();
     }
 
     @Override
@@ -83,12 +113,6 @@ public class Phyg extends WingedAnimal {
         return AetherIISoundEvents.ENTITY_PHYG_DEATH.get();
     }
 
-    @Nullable
-    @Override
-    protected SoundEvent getSaddledSound() {
-        return AetherIISoundEvents.ENTITY_PHYG_SADDLE.get();
-    }
-
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(AetherIISoundEvents.ENTITY_PHYG_STEP.get(), 0.15F, 1.0F);
@@ -103,7 +127,7 @@ public class Phyg extends WingedAnimal {
     @Override
     public boolean isSaddleable() {
         return false;
-    } //todo are we still doing saddleable
+    }
 
     /**
      * [CODE COPY] - {@link Pig#getLeashOffset()}.
@@ -111,5 +135,18 @@ public class Phyg extends WingedAnimal {
     @OnlyIn(Dist.CLIENT)
     public Vec3 getLeashOffset() {
         return new Vec3(0.0, 0.6F * this.getEyeHeight(), this.getBbWidth() * 0.4F);
+    }
+
+    @Override
+    protected void updateWalkAnimation(float partialTick) {
+        float multiplier = 4.0F;
+        if (this.getControllingPassenger() != null) {
+            multiplier = 1.75F;
+            if (!this.onGround()) {
+                multiplier = 1.25F;
+            }
+        }
+        float f = Math.min(partialTick * multiplier, 1.0F);
+        this.walkAnimation.update(f, 0.4F, this.isBaby() ? 3.0F : 1.0F);
     }
 }

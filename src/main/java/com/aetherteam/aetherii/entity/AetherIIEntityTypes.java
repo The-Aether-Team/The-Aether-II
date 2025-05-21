@@ -24,52 +24,52 @@ public class AetherIIEntityTypes {
 
     // Passive
     public static final DeferredHolder<EntityType<?>, EntityType<Phyg>> PHYG = ENTITY_TYPES.register("phyg",
-            () -> EntityType.Builder.of(Phyg::new, MobCategory.CREATURE).sized(0.95F, 0.95F).clientTrackingRange(10).build(AetherIIEntities.PHYG));
+            () -> EntityType.Builder.of(Phyg::new, MobCategory.CREATURE).sized(0.95F, 0.85F).clientTrackingRange(10).build(AetherIIEntities.PHYG));
     public static final DeferredHolder<EntityType<?>, EntityType<FlyingCow>> FLYING_COW = ENTITY_TYPES.register("flying_cow",
-            () -> EntityType.Builder.of(FlyingCow::new, MobCategory.CREATURE).sized(0.95F, 1.5F).clientTrackingRange(10).build(AetherIIEntities.FLYING_COW));
+            () -> EntityType.Builder.of(FlyingCow::new, MobCategory.CREATURE).sized(0.95F, 1.1F).eyeHeight(1.05F).clientTrackingRange(10).build(AetherIIEntities.FLYING_COW));
     public static final DeferredHolder<EntityType<?>, EntityType<Sheepuff>> SHEEPUFF = ENTITY_TYPES.register("sheepuff",
-            () -> EntityType.Builder.of(Sheepuff::new, MobCategory.CREATURE).sized(0.95F, 1.3F).clientTrackingRange(10).build(AetherIIEntities.SHEEPUFF));
+            () -> EntityType.Builder.of(Sheepuff::new, MobCategory.CREATURE).sized(0.9F, 1.25F).eyeHeight(0.85F).clientTrackingRange(10).build(AetherIIEntities.SHEEPUFF));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Aerbunny>> AERBUNNY = ENTITY_TYPES.register("aerbunny",
-            () -> EntityType.Builder.of(Aerbunny::new, MobCategory.CREATURE).sized(0.6F, 0.5F).clientTrackingRange(10).ridingOffset(0).build(AetherIIEntities.AERBUNNY));
+            () -> EntityType.Builder.of(Aerbunny::new, MobCategory.CREATURE).sized(0.55F, 0.45F).eyeHeight(0.25F).clientTrackingRange(10).ridingOffset(0).build(AetherIIEntities.AERBUNNY));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Taegore>> HIGHFIELDS_TAEGORE = ENTITY_TYPES.register("highfields_taegore",
-            () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.2F, 1.5F).clientTrackingRange(10).build(AetherIIEntities.HIGHFIELDS_TAEGORE));
+            () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.3F, 1.7F).eyeHeight(0.85F).clientTrackingRange(10).build(AetherIIEntities.HIGHFIELDS_TAEGORE));
     public static final DeferredHolder<EntityType<?>, EntityType<Taegore>> MAGNETIC_TAEGORE = ENTITY_TYPES.register("magnetic_taegore",
-            () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.2F, 1.5F).clientTrackingRange(10).build(AetherIIEntities.MAGNETIC_TAEGORE));
+            () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.3F, 1.7F).eyeHeight(0.85F).clientTrackingRange(10).build(AetherIIEntities.MAGNETIC_TAEGORE));
     public static final DeferredHolder<EntityType<?>, EntityType<Taegore>> ARCTIC_TAEGORE = ENTITY_TYPES.register("arctic_taegore",
-            () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.2F, 1.5F).clientTrackingRange(10).build(AetherIIEntities.ARCTIC_TAEGORE));
+            () -> EntityType.Builder.of(Taegore::new, MobCategory.CREATURE).sized(1.3F, 1.7F).eyeHeight(0.85F).clientTrackingRange(10).build(AetherIIEntities.ARCTIC_TAEGORE));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Burrukai>> HIGHFIELDS_BURRUKAI = ENTITY_TYPES.register("highfields_burrukai",
-            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).clientTrackingRange(10).build(AetherIIEntities.HIGHFIELDS_BURRUKAI));
+            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.HIGHFIELDS_BURRUKAI));
     public static final DeferredHolder<EntityType<?>, EntityType<Burrukai>> MAGNETIC_BURRUKAI = ENTITY_TYPES.register("magnetic_burrukai",
-            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).clientTrackingRange(10).build(AetherIIEntities.MAGNETIC_BURRUKAI));
+            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.MAGNETIC_BURRUKAI));
     public static final DeferredHolder<EntityType<?>, EntityType<Burrukai>> ARCTIC_BURRUKAI = ENTITY_TYPES.register("arctic_burrukai",
-            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).clientTrackingRange(10).build(AetherIIEntities.ARCTIC_BURRUKAI));
+            () -> EntityType.Builder.of(Burrukai::new, MobCategory.CREATURE).sized(1.5F, 1.95F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.ARCTIC_BURRUKAI));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Kirrid>> HIGHFIELDS_KIRRID = ENTITY_TYPES.register("highfields_kirrid",
-            () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.9F, 1.25F).clientTrackingRange(10).build(AetherIIEntities.HIGHFIELDS_KIRRID));
+            () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.95F, 1.35F).eyeHeight(1.1F).clientTrackingRange(10).build(AetherIIEntities.HIGHFIELDS_KIRRID));
     public static final DeferredHolder<EntityType<?>, EntityType<Kirrid>> MAGNETIC_KIRRID = ENTITY_TYPES.register("magnetic_kirrid",
-            () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.9F, 1.25F).clientTrackingRange(10).build(AetherIIEntities.MAGNETIC_KIRRID));
+            () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.95F, 1.35F).eyeHeight(1.1F).clientTrackingRange(10).build(AetherIIEntities.MAGNETIC_KIRRID));
     public static final DeferredHolder<EntityType<?>, EntityType<Kirrid>> ARCTIC_KIRRID = ENTITY_TYPES.register("arctic_kirrid",
-            () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.9F, 1.25F).clientTrackingRange(10).build(AetherIIEntities.ARCTIC_KIRRID));
+            () -> EntityType.Builder.of(Kirrid::new, MobCategory.CREATURE).sized(0.95F, 1.35F).eyeHeight(1.1F).clientTrackingRange(10).build(AetherIIEntities.ARCTIC_KIRRID));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Moa>> MOA = ENTITY_TYPES.register("moa",
-            () -> EntityType.Builder.of(Moa::new, MobCategory.CREATURE).sized(0.95F, 2.15F).clientTrackingRange(10).build(AetherIIEntities.MOA));
+            () -> EntityType.Builder.of(Moa::new, MobCategory.CREATURE).sized(1.25F, 2.35F).eyeHeight(2.1F).clientTrackingRange(10).build(AetherIIEntities.MOA));
 
     public static final DeferredHolder<EntityType<?>, EntityType<SkyrootLizard>> SKYROOT_LIZARD = ENTITY_TYPES.register("skyroot_lizard",
-            () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.CREATURE).sized(0.9F, 0.5F).clientTrackingRange(10).ridingOffset(0).build(AetherIIEntities.SKYROOT_LIZARD));
+            () -> EntityType.Builder.of(SkyrootLizard::new, MobCategory.CREATURE).sized(0.95F, 0.35F).clientTrackingRange(10).build(AetherIIEntities.SKYROOT_LIZARD));
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
-            () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build(AetherIIEntities.AECHOR_PLANT));
+            () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 0.4F).eyeHeight(0.25F).clientTrackingRange(8).build(AetherIIEntities.AECHOR_PLANT));
     public static final DeferredHolder<EntityType<?>, EntityType<CarrionSprout>> CARRION_SPROUT = ENTITY_TYPES.register("carrion_sprout",
             () -> EntityType.Builder.of(CarrionSprout::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build(AetherIIEntities.CARRION_SPROUT));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Zephyr>> ZEPHYR = ENTITY_TYPES.register("zephyr",
-            () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(2.0F, 1.75F).clientTrackingRange(10).build(AetherIIEntities.ZEPHYR));
+            () -> EntityType.Builder.of(Zephyr::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(2.0F, 1.75F).eyeHeight(1.2F).clientTrackingRange(10).build(AetherIIEntities.ZEPHYR));
     public static final DeferredHolder<EntityType<?>, EntityType<Tempest>> TEMPEST = ENTITY_TYPES.register("tempest",
-            () -> EntityType.Builder.of(Tempest::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(1.5F, 1.5F).clientTrackingRange(10).build(AetherIIEntities.TEMPEST));
+            () -> EntityType.Builder.of(Tempest::new, AetherIIMobCategory.AETHER_SKY_MONSTER).sized(1.5F, 1.4F).eyeHeight(0.85F).clientTrackingRange(10).build(AetherIIEntities.TEMPEST));
   
     public static final DeferredHolder<EntityType<?>, EntityType<Cockatrice>> COCKATRICE = ENTITY_TYPES.register("cockatrice",
             () -> EntityType.Builder.of(Cockatrice::new, MobCategory.MONSTER).sized(0.9F, 2.15F).clientTrackingRange(10).build(AetherIIEntities.COCKATRICE));
@@ -84,7 +84,7 @@ public class AetherIIEntityTypes {
 
     // NPCs
     public static final DeferredHolder<EntityType<?>, EntityType<Edward>> EDWARD = ENTITY_TYPES.register("edward",
-            () -> EntityType.Builder.of(Edward::new, MobCategory.CREATURE).sized(0.6F, 1.95F).eyeHeight(1.74F).passengerAttachments(2.0125F).ridingOffset(-0.7F).clientTrackingRange(8).build(AetherIIEntities.EDWARD));
+            () -> EntityType.Builder.of(Edward::new, MobCategory.CREATURE).sized(0.6F, 1.95F).eyeHeight(1.75F).clientTrackingRange(8).build(AetherIIEntities.EDWARD));
 
     // Projectiles
     public static final DeferredHolder<EntityType<?>, EntityType<HolystoneRock>> HOLYSTONE_ROCK = ENTITY_TYPES.register("holystone_rock",
