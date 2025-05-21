@@ -16,7 +16,7 @@ import oshi.util.tuples.Quartet;
 import java.util.function.Supplier;
 
 public class AbilityBehaviorSyncPacket extends SyncEntityPacket<AbilityBehaviorAttachment> {
-    public static final Type<AbilityBehaviorSyncPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sync_player_attachment"));
+    public static final Type<AbilityBehaviorSyncPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "sync_ability_behavior_attachment"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, AbilityBehaviorSyncPacket> STREAM_CODEC = CustomPacketPayload.codec(
             AbilityBehaviorSyncPacket::write,

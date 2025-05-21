@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
+import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
@@ -192,7 +193,9 @@ public class Aerbunny extends AetherTamableAnimal {
                 AttributeInstance playerGravity = player.getAttribute(Attributes.GRAVITY);
                 if (playerGravity != null) {
                     if (!player.getAbilities().flying && !player.isInFluidType() && playerGravity.getValue() > 0.02) {  // Entity isn't allowed to fall too slowly from gravity.
-                        player.setDeltaMovement(player.getDeltaMovement().add(0.0, 0.05, 0.0));
+                        if (!player.getUseItem().is(AetherIITags.Items.TOOLS_GLIDERS)) {
+                            player.setDeltaMovement(player.getDeltaMovement().add(0.0, 0.05, 0.0));
+                        }
                     }
                 }
 

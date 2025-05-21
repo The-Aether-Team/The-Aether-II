@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class AbilityBehaviorAttachment implements INBTSynchable { //todo map of tracked slowfall functions to use for aerbunny and glider
+public class AbilityBehaviorAttachment implements INBTSynchable {
     private boolean canRefuelGlide;
     private int glidingTimer;
     private Map<Holder<Item>, Boolean> canRefuelAbilities = new HashMap<>(Map.of(
