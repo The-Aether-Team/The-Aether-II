@@ -6,7 +6,6 @@ import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.EntityUtil;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
-import com.aetherteam.aetherii.item.miscellaneous.glider.AercloudGliderItem;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.EntityAccessor;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.ServerGamePacketListenerImplAccessor;
 import com.aetherteam.aetherii.network.packet.serverbound.AerbunnyPuffPacket;
@@ -254,14 +253,11 @@ public class Aerbunny extends AetherTamableAnimal {
      * @return The {@link InteractionResult}.
      */
     @Override
-    public InteractionResult mobInteract(Player player, InteractionHand hand) { //todo interactions for sitting and riding need to be sorted out again
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         Item item = itemStack.getItem();
 
-
         InteractionResult result = super.mobInteract(player, hand);
-
-
 
         if (this.isTame()) {
             if (this.isOwnedBy(player)) {
@@ -392,7 +388,7 @@ public class Aerbunny extends AetherTamableAnimal {
     }
 
     /**
-     * Stop tracking mounted Aerbunny with {@link AerbunnyMountAttachment}.
+     * Stop tracking mounted Aerbunny with {@link com.aetherteam.aetherii.attachment.player.AerbunnyMountAttachment}.
      */
     @Override
     public void stopRiding() {
