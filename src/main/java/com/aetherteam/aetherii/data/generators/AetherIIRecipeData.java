@@ -924,11 +924,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.DECORATIONS, Items.ITEM_FRAME, 1)
                 .define('/', AetherIITags.Items.RODS_SKYROOT)
-                .define('#', AetherIITags.Items.ANIMALS_FURS)
+                .define('#', AetherIIItems.TAEGORE_HIDE)
                 .pattern("///")
                 .pattern("/#/")
                 .pattern("///")
-                .unlockedBy("has_leather", has(AetherIITags.Items.ANIMALS_FURS))
+                .unlockedBy("has_leather", has(AetherIIItems.TAEGORE_HIDE))
                 .save(this.output, "item_frame_from_hide");
 
         // Bookshelves
@@ -1017,11 +1017,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.makeBoots(getter, AetherIIItems.TAEGORE_HIDE_BOOTS, AetherIIItems.TAEGORE_HIDE).save(this.output);
         this.makeGloves(getter, AetherIIItems.TAEGORE_HIDE_GLOVES, AetherIIItems.TAEGORE_HIDE).save(this.output);
 
-        this.makeHelmet(getter, AetherIIItems.BURRUKAI_PELT_HELMET, AetherIIItems.BURRUKAI_PELT).save(this.output);
-        this.makeChestplate(getter, AetherIIItems.BURRUKAI_PELT_CHESTPLATE, AetherIIItems.BURRUKAI_PELT).save(this.output);
-        this.makeLeggings(getter, AetherIIItems.BURRUKAI_PELT_LEGGINGS, AetherIIItems.BURRUKAI_PELT).save(this.output);
-        this.makeBoots(getter, AetherIIItems.BURRUKAI_PELT_BOOTS, AetherIIItems.BURRUKAI_PELT).save(this.output);
-        this.makeGloves(getter, AetherIIItems.BURRUKAI_PELT_GLOVES, AetherIIItems.BURRUKAI_PELT).save(this.output);
+        this.makeHelmet(getter, AetherIIItems.BURRUKAI_PLATE_HELMET, AetherIIItems.BURRUKAI_PLATE).save(this.output);
+        this.makeChestplate(getter, AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, AetherIIItems.BURRUKAI_PLATE).save(this.output);
+        this.makeLeggings(getter, AetherIIItems.BURRUKAI_PLATE_LEGGINGS, AetherIIItems.BURRUKAI_PLATE).save(this.output);
+        this.makeBoots(getter, AetherIIItems.BURRUKAI_PLATE_BOOTS, AetherIIItems.BURRUKAI_PLATE).save(this.output);
+        this.makeGloves(getter, AetherIIItems.BURRUKAI_PLATE_GLOVES, AetherIIItems.BURRUKAI_PLATE).save(this.output);
 
         this.makeHelmetWithTag(getter, AetherIIItems.ZANITE_HELMET, AetherIITags.Items.GEMS_ZANITE, "zanite").save(this.output);
         this.makeChestplateWithTag(getter, AetherIIItems.ZANITE_CHESTPLATE, AetherIITags.Items.GEMS_ZANITE, "zanite").save(this.output);
@@ -1315,11 +1315,11 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.TAEGORE_HIDE_BOOTS, 1).group("repair_taegore_hide_armor").save(this.output, "repair_taegore_hide_boots");
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.TAEGORE_HIDE_GLOVES, 1).group("repair_taegore_hide_armor").save(this.output, "repair_taegore_hide_gloves");
 
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PELT_HELMET, 2).group("repair_burrukai_pelt_armor").save(this.output, "repair_burrukai_pelt_helmet");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PELT_CHESTPLATE, 2).group("repair_burrukai_pelt_armor").save(this.output, "repair_burrukai_pelt_chestplate");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PELT_LEGGINGS, 2).group("repair_burrukai_pelt_armor").save(this.output, "repair_burrukai_pelt_leggings");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PELT_BOOTS, 2).group("repair_burrukai_pelt_armor").save(this.output, "repair_burrukai_pelt_boots");
-        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PELT_GLOVES, 2).group("repair_burrukai_pelt_armor").save(this.output, "repair_burrukai_pelt_gloves");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PLATE_HELMET, 2).group("repair_burrukai_plate_armor").save(this.output, "repair_burrukai_plate_helmet");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, 2).group("repair_burrukai_plate_armor").save(this.output, "repair_burrukai_plate_chestplate");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PLATE_LEGGINGS, 2).group("repair_burrukai_plate_armor").save(this.output, "repair_burrukai_plate_leggings");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PLATE_BOOTS, 2).group("repair_burrukai_plate_armor").save(this.output, "repair_burrukai_plate_boots");
+        this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.BURRUKAI_PLATE_GLOVES, 2).group("repair_burrukai_plate_armor").save(this.output, "repair_burrukai_plate_gloves");
 
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ZANITE_HELMET, 3).group("repair_zanite_armor").save(this.output, "repair_zanite_helmet");
         this.altarRepairing(RecipeCategory.COMBAT, AetherIIItems.ZANITE_CHESTPLATE, 3).group("repair_zanite_armor").save(this.output, "repair_zanite_chestplate");
@@ -1368,27 +1368,27 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
 
         this.irradiationCleansing(RecipeCategory.COMBAT, SimpleWeightedRandomList.<ItemStack>builder()
                 .add(AetherIIItems.TAEGORE_HIDE_HELMET.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PELT_HELMET.toStack(), 1)
+                .add(AetherIIItems.BURRUKAI_PLATE_HELMET.toStack(), 1)
                 .add(AetherIIItems.ZANITE_HELMET.toStack(), 1)
                 .add(AetherIIItems.ARKENIUM_HELMET.toStack(), 1)
                 .add(AetherIIItems.GRAVITITE_HELMET.toStack(), 1)
                 .add(AetherIIItems.TAEGORE_HIDE_CHESTPLATE.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.toStack(), 1)
+                .add(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.toStack(), 1)
                 .add(AetherIIItems.ZANITE_CHESTPLATE.toStack(), 1)
                 .add(AetherIIItems.ARKENIUM_CHESTPLATE.toStack(), 1)
                 .add(AetherIIItems.GRAVITITE_CHESTPLATE.toStack(), 1)
                 .add(AetherIIItems.TAEGORE_HIDE_LEGGINGS.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PELT_LEGGINGS.toStack(), 1)
+                .add(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.toStack(), 1)
                 .add(AetherIIItems.ZANITE_LEGGINGS.toStack(), 1)
                 .add(AetherIIItems.ARKENIUM_LEGGINGS.toStack(), 1)
                 .add(AetherIIItems.GRAVITITE_LEGGINGS.toStack(), 1)
                 .add(AetherIIItems.TAEGORE_HIDE_BOOTS.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PELT_BOOTS.toStack(), 1)
+                .add(AetherIIItems.BURRUKAI_PLATE_BOOTS.toStack(), 1)
                 .add(AetherIIItems.ZANITE_BOOTS.toStack(), 1)
                 .add(AetherIIItems.ARKENIUM_BOOTS.toStack(), 1)
                 .add(AetherIIItems.GRAVITITE_BOOTS.toStack(), 1)
                 .add(AetherIIItems.TAEGORE_HIDE_GLOVES.toStack(), 1)
-                .add(AetherIIItems.BURRUKAI_PELT_GLOVES.toStack(), 1)
+                .add(AetherIIItems.BURRUKAI_PLATE_GLOVES.toStack(), 1)
                 .add(AetherIIItems.ZANITE_GLOVES.toStack(), 1)
                 .add(AetherIIItems.ARKENIUM_GLOVES.toStack(), 1)
                 .add(AetherIIItems.GRAVITITE_GLOVES.toStack(), 1)

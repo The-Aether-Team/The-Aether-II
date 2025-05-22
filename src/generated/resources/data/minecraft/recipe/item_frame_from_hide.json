@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": "#aether_ii:animals/furs",
+    "#": "aether_ii:taegore_hide",
     "/": "#aether_ii:rods/skyroot"
   },
   "pattern": [

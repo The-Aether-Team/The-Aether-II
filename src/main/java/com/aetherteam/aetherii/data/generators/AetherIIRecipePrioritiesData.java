@@ -31,11 +31,11 @@ public class AetherIIRecipePrioritiesData extends RecipePrioritiesProvider {
         this.add("taegore_hide_leggings", 5);
         this.add("taegore_hide_boots", 5);
         this.add("taegore_hide_gloves", 5);
-        this.add("burrukai_pelt_helmet", 5);
-        this.add("burrukai_pelt_chestplate", 5);
-        this.add("burrukai_pelt_leggings", 5);
-        this.add("burrukai_pelt_boots", 5);
-        this.add("burrukai_pelt_gloves", 5);
+        this.add("burrukai_plate_helmet", 5);
+        this.add("burrukai_plate_chestplate", 5);
+        this.add("burrukai_plate_leggings", 5);
+        this.add("burrukai_plate_boots", 5);
+        this.add("burrukai_plate_gloves", 5);
         this.add("hide_bundle", 5);
 
         this.add("cloudwool", 5);

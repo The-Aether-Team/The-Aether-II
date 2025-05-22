@@ -42,7 +42,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
                         .add(LootItem.lootTableItem(AetherIIItems.TAEGORE_HIDE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
-                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PELT).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.BURRUKAI_PLATE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
                         .add(LootItem.lootTableItem(AetherIIBlocks.CLOUDWOOL).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 5.0F))))
                 )
 

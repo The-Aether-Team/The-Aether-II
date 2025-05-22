@@ -19,7 +19,7 @@
     {
       "loot": {
         "chance": 1.0,
-        "item": "aether_ii:burrukai_pelt",
+        "item": "aether_ii:burrukai_plate",
         "max_count": 3,
         "min_count": 1
       }

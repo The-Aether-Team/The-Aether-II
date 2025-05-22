@@ -300,6 +300,23 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.burrukai.hurt"
   },
+  "entity.burrukai.ram_impact": {
+    "sounds": [
+      {
+        "name": "mob/goat/impact1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/impact2",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/impact2",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.burrukai.ram_impact"
+  },
   "entity.burrukai.step": {
     "sounds": [
       "mob/cow/step1",
@@ -1165,7 +1182,7 @@
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_arkenium"
   },
-  "item.armor.equip_burrukai_pelt": {
+  "item.armor.equip_burrukai_plate": {
     "sounds": [
       "item/armor/equip_leather1",
       "item/armor/equip_leather2",
@@ -1174,7 +1191,7 @@
       "item/armor/equip_leather5",
       "item/armor/equip_leather6"
     ],
-    "subtitle": "subtitles.aether_ii.item.armor.equip_burrukai_pelt"
+    "subtitle": "subtitles.aether_ii.item.armor.equip_burrukai_plate"
   },
   "item.armor.equip_taegore_hide": {
     "sounds": [

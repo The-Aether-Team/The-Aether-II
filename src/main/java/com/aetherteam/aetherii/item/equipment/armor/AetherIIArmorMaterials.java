@@ -16,12 +16,12 @@ public class AetherIIArmorMaterials { //todo sounds
         map.put(ArmorType.CHESTPLATE, 3);
         map.put(ArmorType.HELMET, 1);
     }), 15, AetherIISoundEvents.ITEM_ARMOR_EQUIP_TAEGORE_HIDE, 0.0F, 0.0F, AetherIITags.Items.TAEGORE_HIDE_REPAIRING, AetherIIEquipmentAssets.TAEGORE_HIDE);
-    public static final ArmorMaterial BURRUKAI_PELT = new ArmorMaterial(5, Util.make(new EnumMap<>(ArmorType.class), map -> {
+    public static final ArmorMaterial BURRUKAI_PLATE = new ArmorMaterial(5, Util.make(new EnumMap<>(ArmorType.class), map -> {
         map.put(ArmorType.BOOTS, 1);
         map.put(ArmorType.LEGGINGS, 4);
         map.put(ArmorType.CHESTPLATE, 5);
         map.put(ArmorType.HELMET, 2);
-    }), 15, AetherIISoundEvents.ITEM_ARMOR_EQUIP_BURRUKAI_PELT, 0.0F, 0.0F, AetherIITags.Items.BURRUKAI_PELT_REPAIRING, AetherIIEquipmentAssets.BURRUKAI_PELT);
+    }), 15, AetherIISoundEvents.ITEM_ARMOR_EQUIP_BURRUKAI_PLATE, 0.0F, 0.0F, AetherIITags.Items.BURRUKAI_PLATE_REPAIRING, AetherIIEquipmentAssets.BURRUKAI_PLATE);
     public static final ArmorMaterial ZANITE = new ArmorMaterial(15, Util.make(new EnumMap<>(ArmorType.class), map -> {
         map.put(ArmorType.BOOTS, 2);
         map.put(ArmorType.LEGGINGS, 5);

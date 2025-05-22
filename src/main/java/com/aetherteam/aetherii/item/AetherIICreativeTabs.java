@@ -638,11 +638,11 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.TAEGORE_HIDE_LEGGINGS.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE_BOOTS.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE_GLOVES.get());
-                output.accept(AetherIIItems.BURRUKAI_PELT_HELMET.get());
-                output.accept(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get());
-                output.accept(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get());
-                output.accept(AetherIIItems.BURRUKAI_PELT_BOOTS.get());
-                output.accept(AetherIIItems.BURRUKAI_PELT_GLOVES.get());
+                output.accept(AetherIIItems.BURRUKAI_PLATE_HELMET.get());
+                output.accept(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get());
+                output.accept(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get());
+                output.accept(AetherIIItems.BURRUKAI_PLATE_BOOTS.get());
+                output.accept(AetherIIItems.BURRUKAI_PLATE_GLOVES.get());
                 output.accept(AetherIIItems.ZANITE_HELMET.get());
                 output.accept(AetherIIItems.ZANITE_CHESTPLATE.get());
                 output.accept(AetherIIItems.ZANITE_LEGGINGS.get());
@@ -712,7 +712,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.GOLDEN_AMBER.get());
                 output.accept(AetherIIItems.CLOUDTWINE.get());
                 output.accept(AetherIIItems.TAEGORE_HIDE.get());
-                output.accept(AetherIIItems.BURRUKAI_PELT.get());
+                output.accept(AetherIIItems.BURRUKAI_PLATE.get());
                 output.accept(AetherIIItems.KIRRID_PLATE.get());
                 output.accept(AetherIIItems.AECHOR_PETAL.get());
                 output.accept(AetherIIItems.VALKYRIE_WINGS.get());

@@ -111,11 +111,11 @@ public class AetherIIClient {
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_LEGGINGS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_BOOTS, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.TAEGORE_HIDE_GLOVES, setBonusPredicate);
-        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PELT_HELMET, setBonusPredicate);
-        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, setBonusPredicate);
-        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PELT_LEGGINGS, setBonusPredicate);
-        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PELT_BOOTS, setBonusPredicate);
-        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PELT_GLOVES, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PLATE_HELMET, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PLATE_LEGGINGS, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PLATE_BOOTS, setBonusPredicate);
+        TooltipListeners.PREDICATES.put(AetherIIItems.BURRUKAI_PLATE_GLOVES, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.ZANITE_HELMET, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.ZANITE_CHESTPLATE, setBonusPredicate);
         TooltipListeners.PREDICATES.put(AetherIIItems.ZANITE_LEGGINGS, setBonusPredicate);

@@ -12,7 +12,7 @@
     {
       "data": {
         "count": 1,
-        "id": "aether_ii:burrukai_pelt_helmet"
+        "id": "aether_ii:burrukai_plate_helmet"
       },
       "weight": 1
     },
@@ -47,7 +47,7 @@
     {
       "data": {
         "count": 1,
-        "id": "aether_ii:burrukai_pelt_chestplate"
+        "id": "aether_ii:burrukai_plate_chestplate"
       },
       "weight": 1
     },
@@ -82,7 +82,7 @@
     {
       "data": {
         "count": 1,
-        "id": "aether_ii:burrukai_pelt_leggings"
+        "id": "aether_ii:burrukai_plate_leggings"
       },
       "weight": 1
     },
@@ -117,7 +117,7 @@
     {
       "data": {
         "count": 1,
-        "id": "aether_ii:burrukai_pelt_boots"
+        "id": "aether_ii:burrukai_plate_boots"
       },
       "weight": 1
     },
@@ -152,7 +152,7 @@
     {
       "data": {
         "count": 1,
-        "id": "aether_ii:burrukai_pelt_gloves"
+        "id": "aether_ii:burrukai_plate_gloves"
       },
       "weight": 1
     },

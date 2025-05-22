@@ -731,11 +731,11 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.TAEGORE_HIDE_BOOTS, "Taegore Hide Boots");
         this.addItem(AetherIIItems.TAEGORE_HIDE_GLOVES, "Taegore Hide Gloves");
 
-        this.addItem(AetherIIItems.BURRUKAI_PELT_HELMET, "Burrukai Pelt Cap");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_CHESTPLATE, "Burrukai Pelt Tunic");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_LEGGINGS, "Burrukai Pelt Pants");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_BOOTS, "Burrukai Pelt Boots");
-        this.addItem(AetherIIItems.BURRUKAI_PELT_GLOVES, "Burrukai Pelt Gloves");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_HELMET, "Burrukai Plate Cap");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE, "Burrukai Plate Tunic");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_LEGGINGS, "Burrukai Plate Pants");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_BOOTS, "Burrukai Plate Boots");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE_GLOVES, "Burrukai Plate Gloves");
 
         this.addItem(AetherIIItems.ZANITE_HELMET, "Zanite Helmet");
         this.addItem(AetherIIItems.ZANITE_CHESTPLATE, "Zanite Chestplate");
@@ -769,7 +769,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addItem(AetherIIItems.GOLDEN_AMBER, "Golden Amber");
         this.addItem(AetherIIItems.CLOUDTWINE, "Cloudtwine");
         this.addItem(AetherIIItems.TAEGORE_HIDE, "Taegore Hide");
-        this.addItem(AetherIIItems.BURRUKAI_PELT, "Burrukai Pelt");
+        this.addItem(AetherIIItems.BURRUKAI_PLATE, "Burrukai Plate");
         this.addItem(AetherIIItems.KIRRID_PLATE, "Kirrid Plate");
         this.addItem(AetherIIItems.SKYROOT_PINECONE, "Skyroot Pinecone");
         this.addItem(AetherIIItems.VALKYRIE_WINGS, "Valkyrie Wings");
@@ -963,16 +963,16 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 1, "§9Ability:§r Calms Animals");
         this.addPerItemAbilityTooltip(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_BOOTS.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_HELMET.get(), 2, "§9Set Pieces:§r %s");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 1, "§9Ability:§r Stun Resistance");
-        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PELT_GLOVES.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_HELMET.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_HELMET.get(), 2, "§9Set Pieces:§r %s");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_GLOVES.get(), 1, "§9Ability:§r Stun Resistance");
+        this.addPerItemAbilityTooltip(AetherIIItems.BURRUKAI_PLATE_GLOVES.get(), 2, "§9Set Pieces:§r %s");
 
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 1, "§9Ability:§r Speed Boost");
         this.addPerItemAbilityTooltip(AetherIIItems.ZANITE_BOOTS.get(), 2, "§9Set Pieces:§r %s");
@@ -1378,7 +1378,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("item", "arkenium_canister.empty", "Arkenium Canister empties");
 
         this.addSubtitle("item", "armor.equip_taegore_hide", "Taegore Hide armor rustles");
-        this.addSubtitle("item", "armor.equip_burrukai_pelt", "Burrukai Pelt armor rustles");
+        this.addSubtitle("item", "armor.equip_burrukai_plate", "Burrukai Plate armor rustles");
         this.addSubtitle("item", "armor.equip_zanite", "Zanite armor clangs");
         this.addSubtitle("item", "armor.equip_arkenium", "Arkenium armor clanks");
         this.addSubtitle("item", "armor.equip_gravitite", "Gravitite armor clinks");

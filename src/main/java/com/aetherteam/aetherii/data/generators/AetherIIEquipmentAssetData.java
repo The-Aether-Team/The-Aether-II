@@ -26,7 +26,7 @@ public class AetherIIEquipmentAssetData extends EquipmentAssetProvider {
 
     private static void bootstrap(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> consumer) {
         consumer.accept(AetherIIEquipmentAssets.TAEGORE_HIDE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "taegore_hide"), true).build());
-        consumer.accept(AetherIIEquipmentAssets.BURRUKAI_PELT, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "burrukai_pelt"), true).build());
+        consumer.accept(AetherIIEquipmentAssets.BURRUKAI_PLATE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "burrukai_plate"), true).build());
         consumer.accept(AetherIIEquipmentAssets.ZANITE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "zanite")).build());
         consumer.accept(AetherIIEquipmentAssets.ARKENIUM, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "arkenium")).build());
         consumer.accept(AetherIIEquipmentAssets.GRAVITITE, EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite")).build());

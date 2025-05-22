@@ -46,9 +46,6 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.copy(AetherIITags.Blocks.ICESTONE_DECORATIVE_BLOCKS, AetherIITags.Items.ICESTONE_DECORATIVE_BLOCKS);
         this.copy(AetherIITags.Blocks.LOCKED_DUNGEON_BLOCKS, AetherIITags.Items.LOCKED_DUNGEON_BLOCKS);
         this.tag(AetherIITags.Items.RODS_SKYROOT).add(AetherIIItems.SKYROOT_STICK.get());
-        this.tag(AetherIITags.Items.ANIMALS_FURS).add(
-                AetherIIItems.TAEGORE_HIDE.get(),
-                AetherIIItems.BURRUKAI_PELT.get());
         this.tag(AetherIITags.Items.GEMS_ZANITE).add(AetherIIItems.ZANITE_GEMSTONE.get());
         this.tag(AetherIITags.Items.PLATES_ARKENIUM).add(AetherIIItems.ARKENIUM_PLATES.get());
         this.tag(AetherIITags.Items.PLATES_GRAVITITE).add(AetherIIItems.GRAVITITE_PLATE.get());
@@ -89,7 +86,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         this.tag(AetherIITags.Items.EQUIPMENT_RELICS);
         this.tag(AetherIITags.Items.EQUIPMENT_HANDWEAR).add(
                 AetherIIItems.TAEGORE_HIDE_GLOVES.get(),
-                AetherIIItems.BURRUKAI_PELT_GLOVES.get(),
+                AetherIIItems.BURRUKAI_PLATE_GLOVES.get(),
                 AetherIIItems.ZANITE_GLOVES.get(),
                 AetherIIItems.ARKENIUM_GLOVES.get(),
                 AetherIIItems.GRAVITITE_GLOVES.get());
@@ -101,12 +98,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(),
                 AetherIIItems.TAEGORE_HIDE_BOOTS.get(),
                 AetherIIItems.TAEGORE_HIDE_GLOVES.get());
-        this.tag(AetherIITags.Items.BURRUKAI_PELT_ARMOR).add(
-                AetherIIItems.BURRUKAI_PELT_HELMET.get(),
-                AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(),
-                AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(),
-                AetherIIItems.BURRUKAI_PELT_BOOTS.get(),
-                AetherIIItems.BURRUKAI_PELT_GLOVES.get());
+        this.tag(AetherIITags.Items.BURRUKAI_PLATE_ARMOR).add(
+                AetherIIItems.BURRUKAI_PLATE_HELMET.get(),
+                AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(),
+                AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(),
+                AetherIIItems.BURRUKAI_PLATE_BOOTS.get(),
+                AetherIIItems.BURRUKAI_PLATE_GLOVES.get());
         this.tag(AetherIITags.Items.ZANITE_ARMOR).add(
                 AetherIIItems.ZANITE_HELMET.get(),
                 AetherIIItems.ZANITE_CHESTPLATE.get(),
@@ -286,7 +283,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.AECHOR_PETAL.get()
         );
         this.tag(AetherIITags.Items.TAEGORE_HIDE_REPAIRING).add(AetherIIItems.TAEGORE_HIDE.get());
-        this.tag(AetherIITags.Items.BURRUKAI_PELT_REPAIRING).add(AetherIIItems.BURRUKAI_PELT.get());
+        this.tag(AetherIITags.Items.BURRUKAI_PLATE_REPAIRING).add(AetherIIItems.BURRUKAI_PLATE.get());
         this.tag(AetherIITags.Items.SKYROOT_REPAIRING).addTag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS);
         this.tag(AetherIITags.Items.HOLYSTONE_REPAIRING).add(AetherIIBlocks.HOLYSTONE.asItem());
         this.tag(AetherIITags.Items.ZANITE_REPAIRING).add(AetherIIItems.ZANITE_GEMSTONE.get());
@@ -314,7 +311,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.SCATTERGLASS_SHARD.get(),
                 AetherIIItems.GOLDEN_AMBER.get(),
                 AetherIIItems.TAEGORE_HIDE.get(),
-                AetherIIItems.BURRUKAI_PELT.get(),
+                AetherIIItems.BURRUKAI_PLATE.get(),
                 AetherIIItems.AECHOR_PETAL.get(),
                 AetherIIItems.ARCTIC_SNOWBALL.get(),
                 AetherIIItems.GREEN_SWET_GEL.get(),
@@ -646,11 +643,11 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(),
                 AetherIIItems.TAEGORE_HIDE_BOOTS.get(),
                 AetherIIItems.TAEGORE_HIDE_GLOVES.get(),
-                AetherIIItems.BURRUKAI_PELT_HELMET.get(),
-                AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(),
-                AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(),
-                AetherIIItems.BURRUKAI_PELT_BOOTS.get(),
-                AetherIIItems.BURRUKAI_PELT_GLOVES.get()
+                AetherIIItems.BURRUKAI_PLATE_HELMET.get(),
+                AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(),
+                AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(),
+                AetherIIItems.BURRUKAI_PLATE_BOOTS.get(),
+                AetherIIItems.BURRUKAI_PLATE_GLOVES.get()
         );
         this.tag(ItemTags.SWORD_ENCHANTABLE).addTags(
                 AetherIITags.Items.TOOLS_SPEARS,
@@ -754,9 +751,7 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(Tags.Items.RODS_WOODEN).add(AetherIIItems.SKYROOT_STICK.get());
         this.tag(Tags.Items.STRINGS).add(AetherIIItems.CLOUDTWINE.get());
-        this.tag(Tags.Items.LEATHERS).addTag(
-                AetherIITags.Items.ANIMALS_FURS
-        );
+        this.tag(Tags.Items.LEATHERS).add(AetherIIItems.TAEGORE_HIDE.get());
         this.tag(Tags.Items.FEATHERS).add(
                 AetherIIItems.MOA_FEATHER.get(),
                 AetherIIItems.COCKATRICE_FEATHER.get()
@@ -801,28 +796,28 @@ public class AetherIIItemTagData extends ItemTagsProvider {
         );
         this.tag(ItemTags.HEAD_ARMOR).add(
                 AetherIIItems.TAEGORE_HIDE_HELMET.get(),
-                AetherIIItems.BURRUKAI_PELT_HELMET.get(),
+                AetherIIItems.BURRUKAI_PLATE_HELMET.get(),
                 AetherIIItems.ZANITE_HELMET.get(),
                 AetherIIItems.ARKENIUM_HELMET.get(),
                 AetherIIItems.GRAVITITE_HELMET.get()
         );
         this.tag(ItemTags.CHEST_ARMOR).add(
                 AetherIIItems.TAEGORE_HIDE_CHESTPLATE.get(),
-                AetherIIItems.BURRUKAI_PELT_CHESTPLATE.get(),
+                AetherIIItems.BURRUKAI_PLATE_CHESTPLATE.get(),
                 AetherIIItems.ZANITE_CHESTPLATE.get(),
                 AetherIIItems.ARKENIUM_CHESTPLATE.get(),
                 AetherIIItems.GRAVITITE_CHESTPLATE.get()
         );
         this.tag(ItemTags.LEG_ARMOR).add(
                 AetherIIItems.TAEGORE_HIDE_LEGGINGS.get(),
-                AetherIIItems.BURRUKAI_PELT_LEGGINGS.get(),
+                AetherIIItems.BURRUKAI_PLATE_LEGGINGS.get(),
                 AetherIIItems.ZANITE_LEGGINGS.get(),
                 AetherIIItems.ARKENIUM_LEGGINGS.get(),
                 AetherIIItems.GRAVITITE_LEGGINGS.get()
         );
         this.tag(ItemTags.FOOT_ARMOR).add(
                 AetherIIItems.TAEGORE_HIDE_BOOTS.get(),
-                AetherIIItems.BURRUKAI_PELT_BOOTS.get(),
+                AetherIIItems.BURRUKAI_PLATE_BOOTS.get(),
                 AetherIIItems.ZANITE_BOOTS.get(),
                 AetherIIItems.ARKENIUM_BOOTS.get(),
                 AetherIIItems.GRAVITITE_BOOTS.get()

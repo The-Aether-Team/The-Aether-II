@@ -164,7 +164,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/armor/equip_leather6")
                 ).subtitle("subtitles.aether_ii.item.armor.equip_taegore_hide")
         );
-        this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_BURRUKAI_PELT,
+        this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_BURRUKAI_PLATE,
                 definition().with(
                         sound("minecraft:item/armor/equip_leather1"),
                         sound("minecraft:item/armor/equip_leather2"),
@@ -172,7 +172,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/armor/equip_leather4"),
                         sound("minecraft:item/armor/equip_leather5"),
                         sound("minecraft:item/armor/equip_leather6")
-                ).subtitle("subtitles.aether_ii.item.armor.equip_burrukai_pelt")
+                ).subtitle("subtitles.aether_ii.item.armor.equip_burrukai_plate")
         );
         this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_ZANITE,
                 definition().with(
