@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:holystone_shield"
+            "items": "aether_ii:burrukai_plate_shield"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:repair_holystone_shield"
+        "recipe": "minecraft:repair_burrukai_plate_shield"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:repair_holystone_shield"
+      "minecraft:repair_burrukai_plate_shield"
     ]
   }
 }

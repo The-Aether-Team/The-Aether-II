@@ -3,11 +3,11 @@
   "category": "repairing",
   "experience": 0.0,
   "fuel_count": 2,
-  "group": "repair_holystone",
-  "ingredient": "aether_ii:holystone_shield",
+  "group": "repair_burrukai_plate",
+  "ingredient": "aether_ii:burrukai_plate_shield",
   "processing_time": 200,
   "result": {
     "count": 1,
-    "id": "aether_ii:holystone_shield"
+    "id": "aether_ii:burrukai_plate_shield"
   }
 }

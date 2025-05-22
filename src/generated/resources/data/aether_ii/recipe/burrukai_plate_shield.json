@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "W": "#aether_ii:crafts_holystone_tools",
+    "W": "aether_ii:burrukai_plate",
     "o": "#aether_ii:rods/skyroot"
   },
   "pattern": [
@@ -12,6 +12,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "aether_ii:holystone_shield"
+    "id": "aether_ii:burrukai_plate_shield"
   }
 }

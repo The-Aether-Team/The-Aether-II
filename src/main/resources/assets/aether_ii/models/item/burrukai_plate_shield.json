@@ -1,5 +1,5 @@
 {
-	"parent": "aether_ii:item/holystone_shield_base",
+	"parent": "aether_ii:item/burrukai_plate_shield_base",
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [ 0, 90, 0 ],
@@ -42,7 +42,7 @@
 			"predicate": {
 				"blocking": 1
 			},
-			"model": "aether_ii:item/holystone_shield_blocking"
+			"model": "aether_ii:item/burrukai_plate_shield_blocking"
 		}
 	]
 }
