@@ -54,6 +54,7 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom");
     public static final ResourceKey<StructureTemplatePool> DECORATION_LARGE_SHELF_ROTSHROOM_REDUCED = AetherIIPools.createKey("infected_guardian_tree/decoration/large_shelf_rotshroom_reduced");
     public static final ResourceKey<StructureTemplatePool> DECORATION_ROTSHROOM_PATCH = AetherIIPools.createKey("infected_guardian_tree/decoration/rotshroom_patch");
+    public static final ResourceKey<StructureTemplatePool> DECORATION_UNDERGROWTH_PATCH = AetherIIPools.createKey("infected_guardian_tree/decoration/undergrowth_patch");
 
     public static void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureTemplatePool> templatePools = context.lookup(Registries.TEMPLATE_POOL);
@@ -358,6 +359,14 @@ public class InfectedGuardianTreePools {
                 ImmutableList.of(
                         Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.ROTSHROOM_PATCH)), 1),
                         Pair.of(StructurePoolElement.empty(), 4)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(DECORATION_UNDERGROWTH_PATCH, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.UNDERGROWTH_PATCH)), 1),
+                        Pair.of(StructurePoolElement.empty(), 3)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
