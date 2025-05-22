@@ -6,6 +6,10 @@ import com.aetherteam.aetherii.entity.ai.goal.CockatriceMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceRangedAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -27,29 +31,15 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
-public class Cockatrice extends Monster implements RangedAttackMob {
+public class Cockatrice extends Monster implements RangedAttackMob, Blighted { //todo shrink hitbox to minimize particles during despawn
+    public static final EntityDataAccessor<Integer> DATA_HIDE_ID = SynchedEntityData.defineId(Cockatrice.class, EntityDataSerializers.INT);
 
-    private int attackTick;
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState shootAnimationState = new AnimationState();
+    private int attackTick;
 
     public Cockatrice(EntityType<? extends Cockatrice> entityType, Level level) {
         super(entityType, level);
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (this.level().isClientSide()) {
-            //handle the attack animation
-            if (this.attackAnimationState.isStarted()) {
-                if (this.attackTick >= 40) {
-                    this.attackAnimationState.stop();
-                } else {
-                    ++this.attackTick;
-                }
-            }
-        }
     }
 
     @Override
@@ -69,6 +59,19 @@ public class Cockatrice extends Monster implements RangedAttackMob {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, false).setUnseenMemoryTicks(300));
     }
 
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Monster.createMobAttributes()
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
+                .add(Attributes.FOLLOW_RANGE, 16.0)
+                .add(Attributes.ATTACK_DAMAGE, 4.0);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_HIDE_ID, 0);
+    }
+
     @Override
     public void handleEntityEvent(byte pId) {
         if (pId == 61) {
@@ -85,36 +88,40 @@ public class Cockatrice extends Monster implements RangedAttackMob {
         }
     }
 
-    public static AttributeSupplier.Builder createMobAttributes() {
-        return Monster.createMobAttributes()
-                .add(Attributes.MOVEMENT_SPEED, 0.3)
-                .add(Attributes.FOLLOW_RANGE, 16.0)
-                .add(Attributes.ATTACK_DAMAGE, 4.0);
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide()) {
+            //handle the attack animation
+            if (this.attackAnimationState.isStarted()) {
+                if (this.attackTick >= 40) {
+                    this.attackAnimationState.stop();
+                } else {
+                    ++this.attackTick;
+                }
+            }
+        }
     }
 
     @Override
     public void aiStep() {
-        boolean flag = this.isSunBurnTick();
-        if (flag) {
-            ItemStack itemstack = this.getItemBySlot(EquipmentSlot.HEAD);
-            if (!itemstack.isEmpty()) {
-                if (itemstack.isDamageableItem()) {
-                    Item item = itemstack.getItem();
-                    itemstack.setDamageValue(itemstack.getDamageValue() + this.random.nextInt(2));
-                    if (itemstack.getDamageValue() >= itemstack.getMaxDamage()) {
-                        this.onEquippedItemBroken(item, EquipmentSlot.HEAD);
-                        this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-                    }
-                }
-
-                flag = false;
-            }
-
-            if (flag) {
-                this.igniteForSeconds(8.0F);
-            }
-        }
         super.aiStep();
+        if (Blighted.super.isUniformSunBurnTick(this) || this.getHideTime() >= 50) {
+            this.setHideTime(this.getHideTime() + 1);
+            if (this.getHideTime() == 50) {
+                if (this.level() instanceof ServerLevel serverLevel) {
+                    //todo animation
+                }
+            }
+            if (this.getHideTime() <= 145) {
+                Blighted.super.burnEffects(this, this.random, this.tickCount, 1.5F);
+                if (this.getHideTime() == 145) {
+                    this.discard();
+                }
+            }
+        } else {
+            this.setHideTime(0);
+        }
     }
 
     @Override
@@ -132,6 +139,16 @@ public class Cockatrice extends Monster implements RangedAttackMob {
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
         return effect.getEffect() != AetherIIEffects.VENOM.get() && super.canBeAffected(effect);
+    }
+
+    @Override
+    public int getHideTime() {
+        return this.getEntityData().get(DATA_HIDE_ID);
+    }
+
+    @Override
+    public void setHideTime(int hideTime) {
+        this.getEntityData().set(DATA_HIDE_ID, hideTime);
     }
 
     @Nullable

@@ -3,7 +3,6 @@ package com.aetherteam.aetherii.entity.monster;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.BlightMonster;
 import com.aetherteam.aetherii.entity.projectile.TempestThunderball;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -28,11 +27,10 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 import java.util.function.Predicate;
 
-public class Tempest extends Zephyr implements BlightMonster {
-    private static final int FLAG_SLEEPING = 32;
+public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox to minimize particles during despawn
     public static final EntityDataAccessor<Integer> DATA_ATTACK_CHARGE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DATA_HIDE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.BYTE);
+    public static final EntityDataAccessor<Boolean> DATA_SLEEPING_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState hideAnimationState = new AnimationState();
@@ -44,7 +42,7 @@ public class Tempest extends Zephyr implements BlightMonster {
     }
 
     @Override
-    protected void registerGoals() {
+    protected void registerGoals() { //todo sun flee behavior
         this.goalSelector.addGoal(3, new Tempest.SleepGoal(this));
         this.goalSelector.addGoal(5, new Tempest.ThunderballAttackGoal(this));
         this.goalSelector.addGoal(5, new Tempest.RandomFloatAroundGoal(this));
@@ -52,7 +50,6 @@ public class Tempest extends Zephyr implements BlightMonster {
 
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, false));
     }
-
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return FlyingMob.createMobAttributes()
@@ -64,7 +61,7 @@ public class Tempest extends Zephyr implements BlightMonster {
         super.defineSynchedData(builder);
         builder.define(DATA_ATTACK_CHARGE_ID, 0);
         builder.define(DATA_HIDE_ID, 0);
-        builder.define(DATA_FLAGS_ID, (byte) 0);
+        builder.define(DATA_SLEEPING_ID, false);
     }
 
     @Override
@@ -105,22 +102,24 @@ public class Tempest extends Zephyr implements BlightMonster {
     @Override
     public void aiStep() {
         super.aiStep();
-        if ((!this.level().isClientSide() && !isNight(this.level()) && !isStormAercloud(this.level(), this.blockPosition())) || this.getHideTime() >= 50)  {
+        if ((Blighted.super.isUniformSunBurnTick(this) && !this.isStormAercloud(this.level(), this.blockPosition())) || this.getHideTime() >= 50) {
             this.setHideTime(this.getHideTime() + 1);
-            if (this.getHideTime() == 50)
+            if (this.getHideTime() == 50) {
                 if (this.level() instanceof ServerLevel serverLevel) {
                     serverLevel.broadcastEntityEvent(this, (byte) 61);
                     this.removeAllGoals(Predicate.isEqual(Tempest.ThunderballAttackGoal.class));
                     this.removeAllGoals(Predicate.isEqual(Tempest.RandomFloatAroundGoal.class));
                 }
-
-            if (this.getHideTime() <= 110) {
-                burnEffects(this, this.random, this.tickCount);
-                if (this.getHideTime() > 65)
-                    this.moveTo(this.getX(), this.getY() + 0.035, this.getZ());
             }
-            if (this.getHideTime() == 145)
-                this.discard();
+            if (this.getHideTime() <= 145) {
+                Blighted.super.burnEffects(this, this.random, this.tickCount, 0.85F);
+                if (this.getHideTime() > 65) {
+                    this.moveTo(this.getX(), this.getY() + 0.035, this.getZ());
+                }
+                if (this.getHideTime() == 145) {
+                    this.discard();
+                }
+            }
         } else {
             this.setHideTime(0);
         }
@@ -134,6 +133,14 @@ public class Tempest extends Zephyr implements BlightMonster {
     @Override
     public void setHideTime(int hideTime) {
         this.getEntityData().set(DATA_HIDE_ID, hideTime);
+    }
+
+    public boolean isAsleep() {
+        return this.getEntityData().get(DATA_SLEEPING_ID);
+    }
+
+    public void setAsleep(boolean sleeping) {
+        this.getEntityData().set(DATA_SLEEPING_ID, sleeping);
     }
 
     @Override
@@ -150,28 +157,6 @@ public class Tempest extends Zephyr implements BlightMonster {
     public SoundEvent getDeathSound() {
         return AetherIISoundEvents.ENTITY_TEMPEST_DEATH.get();
     }
-
-    @Override
-    public boolean isSleeping() {
-        return this.getFlag(FLAG_SLEEPING);
-    }
-
-    public void setSleeping(boolean sleeping) {
-        this.setFlag(32, sleeping);
-    }
-
-    private void setFlag(int flagId, boolean value) {
-        if (value) {
-            this.entityData.set(DATA_FLAGS_ID, (byte)(this.entityData.get(DATA_FLAGS_ID) | flagId));
-        } else {
-            this.entityData.set(DATA_FLAGS_ID, (byte)(this.entityData.get(DATA_FLAGS_ID) & ~flagId));
-        }
-    }
-
-    private boolean getFlag(int flagId) {
-        return (this.entityData.get(DATA_FLAGS_ID) & flagId) != 0;
-    }
-
 
     protected static class RandomFloatAroundGoal extends Goal {
         private final Tempest tempest;
@@ -295,7 +280,7 @@ public class Tempest extends Zephyr implements BlightMonster {
 
         @Override
         public boolean canUse() {
-            return tempest.xxa == 0.0F && tempest.yya == 0.0F && tempest.zza == 0.0F && (this.canSleep() || tempest.isSleeping());
+            return tempest.xxa == 0.0F && tempest.yya == 0.0F && tempest.zza == 0.0F && (this.canSleep() || tempest.isAsleep());
         }
 
         @Override
@@ -309,12 +294,12 @@ public class Tempest extends Zephyr implements BlightMonster {
 
         @Override
         public void stop() {
-            tempest.setSleeping(false);
+            tempest.setAsleep(false);
         }
 
         @Override
         public void start() {
-            tempest.setSleeping(true);
+            tempest.setAsleep(true);
             tempest.getNavigation().stop();
             tempest.getMoveControl().setWantedPosition(tempest.getX(), tempest.getY(), tempest.getZ(), 0.0);
         }

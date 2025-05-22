@@ -188,7 +188,7 @@ public class TempestAnimations {
 					new Keyframe(1.4583F, KeyframeAnimations.posVec(0.0F, 7.45F, -8.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(3.1667F, KeyframeAnimations.posVec(0.0F, 10.0F, -8.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(3.5F, KeyframeAnimations.posVec(0.0F, 12.0F, -8.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(4.4583F, KeyframeAnimations.posVec(0.0F, -36.0F, -3.0F), AnimationChannel.Interpolations.LINEAR)
+					new Keyframe(4.4583F, KeyframeAnimations.posVec(0.0F, 0.0F, -3.0F), AnimationChannel.Interpolations.LINEAR)
 			))
 			.addAnimation("body", new AnimationChannel(AnimationChannel.Targets.SCALE,
 					new Keyframe(3.7917F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.LINEAR),
