@@ -735,7 +735,7 @@ public class AetherIICreativeTabs {
                 output.accept(AetherIIItems.COCKATRICE_FEATHER.get());
                 output.accept(AetherIIItems.SCATTERGLASS_VIAL.get());
                 output.accept(AetherIIItems.ZEPHYR_HUSK.get());
-                output.accept(AetherIIItems.CHARGE_CORE.get());
+                output.accept(AetherIIItems.CHARGE_CATALYST.get());
                 output.accept(AetherIIItems.ARKENIUM_CORE.get());
                 output.accept(AetherIIItems.GRAVITITE_CORE.get());
             }).build());

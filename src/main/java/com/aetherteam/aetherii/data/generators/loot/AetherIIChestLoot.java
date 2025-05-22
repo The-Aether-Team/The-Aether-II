@@ -59,7 +59,7 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                 )
 
                 .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
-                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CORE))
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CATALYST))
                 )
         );
 

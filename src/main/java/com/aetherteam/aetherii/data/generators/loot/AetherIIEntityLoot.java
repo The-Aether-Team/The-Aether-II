@@ -145,7 +145,7 @@ public class AetherIIEntityLoot extends EntityLootSubProvider {
                         )
                 )
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CORE.get())
+                        .add(LootItem.lootTableItem(AetherIIItems.CHARGE_CATALYST.get())
                                 .when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.075F, 0.025F))
                         )
                 )

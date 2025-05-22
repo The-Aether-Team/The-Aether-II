@@ -236,7 +236,7 @@ public class AetherIIItems {
 
     // Treasure
     public static final DeferredItem<Item> ZEPHYR_HUSK = register("zephyr_husk", TreasureItem::new);
-    public static final DeferredItem<Item> CHARGE_CORE = register("charge_core", TreasureItem::new); //todo rename charge core
+    public static final DeferredItem<Item> CHARGE_CATALYST = register("charge_catalyst", TreasureItem::new);
     public static final DeferredItem<Item> ARKENIUM_CORE = register("arkenium_core", TreasureItem::new);
     public static final DeferredItem<Item> GRAVITITE_CORE = register("gravitite_core", TreasureItem::new);
 

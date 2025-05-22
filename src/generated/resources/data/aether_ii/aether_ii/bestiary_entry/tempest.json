@@ -18,7 +18,7 @@
     {
       "loot": {
         "chance": 1.0,
-        "item": "aether_ii:charge_core",
+        "item": "aether_ii:charge_catalyst",
         "max_count": 1,
         "min_count": 0
       }
