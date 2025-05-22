@@ -19,6 +19,14 @@
     {
       "loot": {
         "chance": 1.0,
+        "item": "aether_ii:beast_pelt",
+        "max_count": 2,
+        "min_count": 0
+      }
+    },
+    {
+      "loot": {
+        "chance": 1.0,
         "item": "aether_ii:burrukai_plate",
         "max_count": 3,
         "min_count": 1

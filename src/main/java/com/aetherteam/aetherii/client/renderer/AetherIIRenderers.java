@@ -185,7 +185,7 @@ public class AetherIIRenderers {
     }
 
     public static void registerAccessoryRenderers() {
-        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.TAEGORE_HIDE_GLOVES.get(), GlovesRenderer::new);
+        AccessoriesRendererRegistry.registerRenderer(AetherIIItems.BEAST_PELT_GLOVES.get(), GlovesRenderer::new);
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.BURRUKAI_PLATE_GLOVES.get(), GlovesRenderer::new);
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.ZANITE_GLOVES.get(), GlovesRenderer::new);
         AccessoriesRendererRegistry.registerRenderer(AetherIIItems.ARKENIUM_GLOVES.get(), GlovesRenderer::new);

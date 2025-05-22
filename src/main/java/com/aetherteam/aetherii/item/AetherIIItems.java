@@ -169,11 +169,11 @@ public class AetherIIItems {
     public static final DeferredItem<Item> SCATTERGLASS_BOLT = register("scatterglass_bolt", ScatterglassBoltItem::new);
 
     // Armor
-    public static final DeferredItem<Item> TAEGORE_HIDE_HELMET = register("taegore_hide_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.HELMET, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.TAEGORE_HIDE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
-    public static final DeferredItem<Item> TAEGORE_HIDE_CHESTPLATE = register("taegore_hide_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.CHESTPLATE, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.TAEGORE_HIDE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
-    public static final DeferredItem<Item> TAEGORE_HIDE_LEGGINGS = register("taegore_hide_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.LEGGINGS, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.TAEGORE_HIDE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
-    public static final DeferredItem<Item> TAEGORE_HIDE_BOOTS = register("taegore_hide_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.TAEGORE_HIDE, ArmorType.BOOTS, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.TAEGORE_HIDE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
-    public static final DeferredItem<Item> TAEGORE_HIDE_GLOVES = register("taegore_hide_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.TAEGORE_HIDE, 25.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.TAEGORE_HIDE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.TAEGORE_HIDE, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> BEAST_PELT_HELMET = register("beast_pelt_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.BEAST_PELT, ArmorType.HELMET, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BEAST_PELT_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BEAST_PELT, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> BEAST_PELT_CHESTPLATE = register("beast_pelt_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.BEAST_PELT, ArmorType.CHESTPLATE, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BEAST_PELT_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BEAST_PELT, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> BEAST_PELT_LEGGINGS = register("beast_pelt_leggings", (properties) -> new ArmorItem(AetherIIArmorMaterials.BEAST_PELT, ArmorType.LEGGINGS, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BEAST_PELT_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BEAST_PELT, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> BEAST_PELT_BOOTS = register("beast_pelt_boots", (properties) -> new ArmorItem(AetherIIArmorMaterials.BEAST_PELT, ArmorType.BOOTS, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BEAST_PELT_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BEAST_PELT, AetherIIStyleDesigns.SCOUT, false))));
+    public static final DeferredItem<Item> BEAST_PELT_GLOVES = register("beast_pelt_gloves", (properties) -> new GlovesItem(AetherIIArmorMaterials.BEAST_PELT, 25.0, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BEAST_PELT_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BEAST_PELT, AetherIIStyleDesigns.SCOUT, false))));
 
     public static final DeferredItem<Item> BURRUKAI_PLATE_HELMET = register("burrukai_plate_helmet", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PLATE, ArmorType.HELMET, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BURRUKAI_PLATE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BURRUKAI_PLATE, AetherIIStyleDesigns.RANGER, false))));
     public static final DeferredItem<Item> BURRUKAI_PLATE_CHESTPLATE = register("burrukai_plate_chestplate", (properties) -> new ArmorItem(AetherIIArmorMaterials.BURRUKAI_PLATE, ArmorType.CHESTPLATE, properties.component(AetherIIDataComponents.ARMOR_SET, AetherIITags.Items.BURRUKAI_PLATE_ARMOR).component(AetherIIDataComponents.ARMOR_STYLE, new ArmorStyle(AetherIIStyleMaterials.BURRUKAI_PLATE, AetherIIStyleDesigns.RANGER, false))));
@@ -214,7 +214,7 @@ public class AetherIIItems {
     public static final DeferredItem<Item> GLINT_GEMSTONE = register("glint_gemstone", (properties) -> new CurrencyItem(10, properties)); //todo
     public static final DeferredItem<Item> GOLDEN_AMBER = register("golden_amber");
     public static final DeferredItem<Item> CLOUDTWINE = register("cloudtwine");
-    public static final DeferredItem<Item> TAEGORE_HIDE = register("taegore_hide");
+    public static final DeferredItem<Item> BEAST_PELT = register("beast_pelt");
     public static final DeferredItem<Item> BURRUKAI_PLATE = register("burrukai_plate");
     public static final DeferredItem<Item> KIRRID_PLATE = register("kirrid_plate");
     public static final DeferredItem<Item> AECHOR_PETAL = register("aechor_petal");
@@ -370,7 +370,7 @@ public class AetherIIItems {
 
     public static void registerEquipmentAbilities(IEventBus bus) {
         // Armor
-        bus.addListener(TaegoreHideArmor::updateEntityTargeting);
+        bus.addListener(BeastPeltArmor::updateEntityTargeting);
         bus.addListener(BurrukaiPlateArmor::updatePlayerAttributes);
         bus.addListener(ZaniteArmor::updatePlayerAttributes);
         bus.addListener(ArkeniumArmor::updatePlayerAttributes);

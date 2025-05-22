@@ -154,7 +154,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                 ).subtitle("subtitles.aether_ii.item.scaterglass_vial.empty")
         );
 
-        this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_TAEGORE_HIDE,
+        this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_BEAST_PELT,
                 definition().with(
                         sound("minecraft:item/armor/equip_leather1"),
                         sound("minecraft:item/armor/equip_leather2"),
@@ -162,7 +162,7 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:item/armor/equip_leather4"),
                         sound("minecraft:item/armor/equip_leather5"),
                         sound("minecraft:item/armor/equip_leather6")
-                ).subtitle("subtitles.aether_ii.item.armor.equip_taegore_hide")
+                ).subtitle("subtitles.aether_ii.item.armor.equip_beast_pelt")
         );
         this.add(AetherIISoundEvents.ITEM_ARMOR_EQUIP_BURRUKAI_PLATE,
                 definition().with(

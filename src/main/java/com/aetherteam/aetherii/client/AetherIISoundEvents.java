@@ -56,7 +56,7 @@ public class AetherIISoundEvents { //TODO blocksound categories?
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_RECORDING_892 = register("item.music_disc.recording_892");
 
     // Armor
-    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_TAEGORE_HIDE = register("item.armor.equip_taegore_hide");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_BEAST_PELT = register("item.armor.equip_beast_pelt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_BURRUKAI_PLATE = register("item.armor.equip_burrukai_plate");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_ZANITE = register("item.armor.zanite");
     public static final DeferredHolder<SoundEvent, SoundEvent> ITEM_ARMOR_EQUIP_ARKENIUM = register("item.armor.arkenium");

@@ -10,12 +10,12 @@ import net.minecraft.world.item.equipment.ArmorType;
 import java.util.EnumMap;
 
 public class AetherIIArmorMaterials { //todo sounds
-    public static final ArmorMaterial TAEGORE_HIDE = new ArmorMaterial(5, Util.make(new EnumMap<>(ArmorType.class), map -> {
+    public static final ArmorMaterial BEAST_PELT = new ArmorMaterial(5, Util.make(new EnumMap<>(ArmorType.class), map -> {
         map.put(ArmorType.BOOTS, 1);
         map.put(ArmorType.LEGGINGS, 2);
         map.put(ArmorType.CHESTPLATE, 3);
         map.put(ArmorType.HELMET, 1);
-    }), 15, AetherIISoundEvents.ITEM_ARMOR_EQUIP_TAEGORE_HIDE, 0.0F, 0.0F, AetherIITags.Items.TAEGORE_HIDE_REPAIRING, AetherIIEquipmentAssets.TAEGORE_HIDE);
+    }), 15, AetherIISoundEvents.ITEM_ARMOR_EQUIP_BEAST_PELT, 0.0F, 0.0F, AetherIITags.Items.BEAST_PELT_REPAIRING, AetherIIEquipmentAssets.BEAST_PELT);
     public static final ArmorMaterial BURRUKAI_PLATE = new ArmorMaterial(5, Util.make(new EnumMap<>(ArmorType.class), map -> {
         map.put(ArmorType.BOOTS, 1);
         map.put(ArmorType.LEGGINGS, 4);

@@ -131,7 +131,7 @@ public class AetherIITags {
         public static final TagKey<Item> EQUIPMENT_ACCESSORIES = tag("equipment/accessories");
         public static final TagKey<Item> EQUIPABLE = tag("equipable");
 
-        public static final TagKey<Item> TAEGORE_HIDE_ARMOR = tag("armor/taegore_hide");
+        public static final TagKey<Item> BEAST_PELT_ARMOR = tag("armor/beast_pelt");
         public static final TagKey<Item> BURRUKAI_PLATE_ARMOR = tag("armor/burrukai_plate");
         public static final TagKey<Item> ZANITE_ARMOR = tag("armor/zanite");
         public static final TagKey<Item> ARKENIUM_ARMOR = tag("armor/arkenium");
@@ -158,7 +158,7 @@ public class AetherIITags {
         public static final TagKey<Item> FORGE_PRIMARY_MATERIAL = tag("forge_primary_material");
         public static final TagKey<Item> FORGE_SECONDARY_MATERIAL = tag("forge_secondary_material");
 
-        public static final TagKey<Item> TAEGORE_HIDE_REPAIRING = tag("taegore_hide_repairing");
+        public static final TagKey<Item> BEAST_PELT_REPAIRING = tag("beast_pelt_repairing");
         public static final TagKey<Item> BURRUKAI_PLATE_REPAIRING = tag("burrukai_plate_repairing");
         public static final TagKey<Item> SKYROOT_REPAIRING = tag("skyroot_repairing");
         public static final TagKey<Item> HOLYSTONE_REPAIRING = tag("holystone_repairing");

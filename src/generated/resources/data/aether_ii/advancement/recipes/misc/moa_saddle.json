@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_taegore_hide": {
+    "has_beast_pelt": {
       "conditions": {
         "items": [
           {
-            "items": "aether_ii:taegore_hide"
+            "items": "aether_ii:beast_pelt"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_taegore_hide"
+      "has_beast_pelt"
     ]
   ],
   "rewards": {

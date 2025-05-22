@@ -19,7 +19,7 @@
     {
       "loot": {
         "chance": 1.0,
-        "item": "aether_ii:taegore_hide",
+        "item": "aether_ii:beast_pelt",
         "max_count": 3,
         "min_count": 1
       }

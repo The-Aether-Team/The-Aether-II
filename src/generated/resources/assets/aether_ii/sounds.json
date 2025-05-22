@@ -1182,6 +1182,17 @@
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_arkenium"
   },
+  "item.armor.equip_beast_pelt": {
+    "sounds": [
+      "item/armor/equip_leather1",
+      "item/armor/equip_leather2",
+      "item/armor/equip_leather3",
+      "item/armor/equip_leather4",
+      "item/armor/equip_leather5",
+      "item/armor/equip_leather6"
+    ],
+    "subtitle": "subtitles.aether_ii.item.armor.equip_beast_pelt"
+  },
   "item.armor.equip_burrukai_plate": {
     "sounds": [
       "item/armor/equip_leather1",
@@ -1192,17 +1203,6 @@
       "item/armor/equip_leather6"
     ],
     "subtitle": "subtitles.aether_ii.item.armor.equip_burrukai_plate"
-  },
-  "item.armor.equip_taegore_hide": {
-    "sounds": [
-      "item/armor/equip_leather1",
-      "item/armor/equip_leather2",
-      "item/armor/equip_leather3",
-      "item/armor/equip_leather4",
-      "item/armor/equip_leather5",
-      "item/armor/equip_leather6"
-    ],
-    "subtitle": "subtitles.aether_ii.item.armor.equip_taegore_hide"
   },
   "item.armor.gravitite": {
     "sounds": [
