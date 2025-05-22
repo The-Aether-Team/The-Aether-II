@@ -9,7 +9,7 @@
         "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
         "replace_air": false,
-        "switch_below_y": 96
+        "switch_below_y": 108
       },
       "weight": 1
     },
@@ -22,7 +22,7 @@
         "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
         "replace_air": false,
-        "switch_below_y": 96
+        "switch_below_y": 108
       },
       "weight": 1
     },
@@ -35,7 +35,7 @@
         "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
         "replace_air": false,
-        "switch_below_y": 96
+        "switch_below_y": 108
       },
       "weight": 1
     }
