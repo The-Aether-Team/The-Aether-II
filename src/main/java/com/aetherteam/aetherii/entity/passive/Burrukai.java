@@ -75,9 +75,37 @@ public class Burrukai extends AetherAnimal implements IShearable {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @javax.annotation.Nullable SpawnGroupData spawnData) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
         BurrukaiAi.initMemories(this, level.getRandom());
         return super.finalizeSpawn(level, difficulty, reason, spawnData);
+    }
+
+    @Override
+    protected Brain.Provider<Burrukai> brainProvider() {
+        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
+    }
+
+    @Override
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return BurrukaiAi.makeBrain(this.variantType, this, this.brainProvider().makeBrain(dynamic));
+    }
+
+    @Override
+    public Brain<Burrukai> getBrain() {
+        return (Brain<Burrukai>) super.getBrain();
+    }
+
+    @Override
+    protected void customServerAiStep(ServerLevel serverLevel) {
+        ProfilerFiller profiler = Profiler.get();
+
+        profiler.push("burrukaiBrain");
+        this.getBrain().tick((ServerLevel) this.level(), this);
+        profiler.pop();
+
+        profiler.push("burrukaiActivityUpdate");
+        BurrukaiAi.updateActivity(this);
+        profiler.pop();
     }
 
     @Override
@@ -94,39 +122,13 @@ public class Burrukai extends AetherAnimal implements IShearable {
     }
 
     @Override
-    protected Brain.Provider<Burrukai> brainProvider() {
-        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
-    }
-
-    @Override
-    protected Brain<Burrukai> makeBrain(Dynamic<?> dynamic) {
-        return (Brain<Burrukai>) BurrukaiAi.makeBrain(this.variantType, this, this.brainProvider().makeBrain(dynamic));
-    }
-
-    @Override
-    public Brain<Burrukai> getBrain() {
-        return (Brain<Burrukai>) super.getBrain();
-    }
-
-    @Override
-    protected void customServerAiStep(ServerLevel serverLevel) {
-        ProfilerFiller profilerFiller = Profiler.get();
-        profilerFiller.push("burrukaiBrain");
-        this.getBrain().tick((ServerLevel) this.level(), this);
-        profilerFiller.pop();
-        profilerFiller.push("burrukaiActivityUpdate");
-        BurrukaiAi.updateActivity(this);
-        profilerFiller.pop();
-    }
-
-    @Override
-    public boolean hurtServer(ServerLevel serverLevel, DamageSource pSource, float pAmount) {
-        boolean flag = super.hurtServer(serverLevel, pSource, pAmount);
+    public boolean hurtServer(ServerLevel serverLevel, DamageSource source, float amount) {
+        boolean flag = super.hurtServer(serverLevel, source, amount);
         if (this.level().isClientSide()) {
             return false;
         } else {
-            if (flag && pSource.getEntity() instanceof LivingEntity) {
-                BurrukaiAi.maybeRetaliate(serverLevel, this, (LivingEntity) pSource.getEntity());
+            if (flag && source.getEntity() instanceof LivingEntity livingEntity) {
+                BurrukaiAi.maybeRetaliate(serverLevel, this, livingEntity);
             }
 
             return flag;

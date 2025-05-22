@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.entity.ai.brain.behavior;
+package com.aetherteam.aetherii.entity.ai.brain.behavior.kirrid;
 
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import net.minecraft.server.level.ServerLevel;
@@ -13,9 +13,8 @@ public class KirridPanic extends AnimalPanic<Kirrid> {
     }
 
     @Override
-    protected void tick(ServerLevel pLevel, Kirrid pOwner, long pGameTime) {
-        super.tick(pLevel, pOwner, pGameTime);
-        pOwner.setSpeedModifier(this.speedMultiplier);
-
+    protected void tick(ServerLevel serverLevel, Kirrid owner, long gameTime) {
+        super.tick(serverLevel, owner, gameTime);
+        owner.setSpeedModifier(this.speedMultiplier);
     }
 }

@@ -1427,6 +1427,7 @@ public class AetherIILanguageData extends AetherIILanguageProvider {
         this.addSubtitle("entity", "burrukai.ambient", "Burrukai huffs");
         this.addSubtitle("entity", "burrukai.death", "Burrukai dies");
         this.addSubtitle("entity", "burrukai.hurt", "Burrukai hurts");
+        this.addSubtitle("entity", "burrukai.ram_impact", "Burrukai rams");
 
         this.addSubtitle("entity", "kirrid.ambient", "Kirrid bleats");
         this.addSubtitle("entity", "kirrid.death", "Kirrid dies");

@@ -107,6 +107,7 @@ public class AetherIISoundEvents { //TODO blocksound categories?
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_DEATH = register("entity.burrukai.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_HURT = register("entity.burrukai.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_STEP = register("entity.burrukai.step");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_RAM_IMPACT = register("entity.burrukai.ram_impact");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_AMBIENT = register("entity.kirrid.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_KIRRID_DEATH = register("entity.kirrid.death");

@@ -12,13 +12,13 @@ public class TaegorePanicGoal extends PanicGoal {
 
     @Override
     protected boolean findRandomPosition() {
-        Vec3 vec3 = DefaultRandomPos.getPos(this.mob, 32, 6);
-        if (vec3 == null) {
+        Vec3 pos = DefaultRandomPos.getPos(this.mob, 32, 6);
+        if (pos == null) {
             return false;
         } else {
-            this.posX = vec3.x;
-            this.posY = vec3.y;
-            this.posZ = vec3.z;
+            this.posX = pos.x;
+            this.posY = pos.y;
+            this.posZ = pos.z;
             return true;
         }
     }

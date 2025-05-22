@@ -12,6 +12,6 @@ public class PhygPanicGoal extends PanicGoal {
 
     @Override
     protected boolean shouldPanic() {
-        return super.shouldPanic() || this.mob.getFirstPassenger() instanceof LivingEntity livingEntity && !livingEntity.isHolding(itemstack -> itemstack.is(AetherIITags.Items.PHYG_CALM_ITEMS));
+        return super.shouldPanic() || this.mob.getFirstPassenger() instanceof LivingEntity livingEntity && !livingEntity.isHolding(stack -> stack.is(AetherIITags.Items.PHYG_CALM_ITEMS));
     }
 }

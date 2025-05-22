@@ -529,6 +529,13 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/cow/step4")
                 ).subtitle("subtitles.block.generic.footsteps")
         );
+        this.add(AetherIISoundEvents.ENTITY_BURRUKAI_RAM_IMPACT,
+                definition().with(
+                        sound("minecraft:mob/goat/impact1").volume(0.8F),
+                        sound("minecraft:mob/goat/impact2").volume(0.8F),
+                        sound("minecraft:mob/goat/impact2").volume(0.8F)
+                ).subtitle("subtitles.aether_ii.entity.burrukai.ram_impact")
+        );
 
         this.add(AetherIISoundEvents.ENTITY_KIRRID_AMBIENT,
                 definition().with(

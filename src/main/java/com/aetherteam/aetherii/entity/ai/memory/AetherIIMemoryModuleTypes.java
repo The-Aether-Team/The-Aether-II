@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public class AetherIIMemoryModuleTypes {
     public static final DeferredRegister<MemoryModuleType<?>> MEMORY_MODULE_TYPES = DeferredRegister.create(BuiltInRegistries.MEMORY_MODULE_TYPE, AetherII.MODID);
+
     public static final DeferredHolder<MemoryModuleType<?>, MemoryModuleType<Kirrid>> KIRRID_BATTLE_TARGET = MEMORY_MODULE_TYPES.register("kirrid_battle_target", () -> new MemoryModuleType<>(Optional.empty()));
     public static final DeferredHolder<MemoryModuleType<?>, MemoryModuleType<Integer>> EAT_GRASS_COOLDOWN = MEMORY_MODULE_TYPES.register("eat_grass_cooldown", () -> new MemoryModuleType<>(Optional.of(Codec.INT)));
 }

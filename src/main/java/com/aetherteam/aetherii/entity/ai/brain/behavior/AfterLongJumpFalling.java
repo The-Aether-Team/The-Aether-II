@@ -1,34 +1,35 @@
 package com.aetherteam.aetherii.entity.ai.brain.behavior;
 
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 
 public class AfterLongJumpFalling extends Behavior<Mob> {
-    public AfterLongJumpFalling() {
+    private final Holder<SoundEvent> stepSound;
+
+    public AfterLongJumpFalling(Holder<SoundEvent> stepSound) {
         super(ImmutableMap.of(), 10);
+        this.stepSound = stepSound;
     }
 
     @Override
-    protected boolean checkExtraStartConditions(ServerLevel pLevel, Mob pOwner) {
-        return pOwner.onGround() && pOwner.getPose() == Pose.LONG_JUMPING;
+    protected boolean checkExtraStartConditions(ServerLevel serverLevel, Mob owner) {
+        return owner.onGround() && owner.getPose() == Pose.LONG_JUMPING;
     }
 
-
     @Override
-    protected void start(ServerLevel pLevel, Mob pEntity, long pGameTime) {
-        super.start(pLevel, pEntity, pGameTime);
-        if (pEntity.onGround()) {
-            pEntity.setDeltaMovement(pEntity.getDeltaMovement().multiply(0.1F, 1.0, 0.1F));
-            pLevel.playSound(null, pEntity, AetherIISoundEvents.ENTITY_KIRRID_STEP.get(), SoundSource.NEUTRAL, 2.0F, 1.0F);
+    protected void start(ServerLevel serverLevel, Mob owner, long gameTime) {
+        super.start(serverLevel, owner, gameTime);
+        if (owner.onGround()) {
+            owner.setDeltaMovement(owner.getDeltaMovement().multiply(0.1F, 1.0, 0.1F));
+            serverLevel.playSound(null, owner, this.stepSound.value(), SoundSource.NEUTRAL, 2.0F, 1.0F);
         }
-        pEntity.setPose(Pose.STANDING);
-        pEntity.setDiscardFriction(false);
-
+        owner.setPose(Pose.STANDING);
+        owner.setDiscardFriction(false);
     }
 }

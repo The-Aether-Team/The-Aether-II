@@ -152,8 +152,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    protected Brain<Kirrid> makeBrain(Dynamic<?> dynamic) {
-        return (Brain<Kirrid>) KirridAi.makeBrain(this.variantType, this.brainProvider().makeBrain(dynamic));
+    protected Brain<?> makeBrain(Dynamic<?> dynamic) {
+        return KirridAi.makeBrain(this.variantType, this.brainProvider().makeBrain(dynamic));
     }
 
     @Override
@@ -191,13 +191,15 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     protected void customServerAiStep(ServerLevel serverLevel) {
-        ProfilerFiller profilerFiller = Profiler.get();
-        profilerFiller.push("kirridBrain");
-        this.getBrain().tick((ServerLevel) this.level(), this);
-        profilerFiller.pop();
-        profilerFiller.push("kirridActivityUpdate");
+        ProfilerFiller profiler = Profiler.get();
+
+        profiler.push("kirridBrain");
+        this.getBrain().tick(serverLevel, this);
+        profiler.pop();
+
+        profiler.push("kirridActivityUpdate");
         KirridAi.updateActivity(this);
-        profilerFiller.pop();
+        profiler.pop();
 
         if (this.woolGrowTime >= 2400) {
             this.setSheared(false);
@@ -222,11 +224,11 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
                 this.setJumping(false);
                 this.checkLandingDelay();
             }
-            KirridJumpControl kirridJumpControl = (KirridJumpControl) this.jumpControl;
+            KirridJumpControl kirridJumpControl = (KirridJumpControl) this.getJumpControl();
             if (!kirridJumpControl.wantJump()) {
-                if (this.moveControl.hasWanted() && this.jumpDelayTicks == 0) {
-                    Path path = this.navigation.getPath();
-                    Vec3 vec3 = new Vec3(this.moveControl.getWantedX(), this.moveControl.getWantedY(), this.moveControl.getWantedZ());
+                if (this.getMoveControl().hasWanted() && this.jumpDelayTicks == 0) {
+                    Path path = this.getNavigation().getPath();
+                    Vec3 vec3 = new Vec3(this.getMoveControl().getWantedX(), this.getMoveControl().getWantedY(), this.getMoveControl().getWantedZ());
                     if (path != null && !path.isDone()) {
                         vec3 = path.getNextEntityPos(this);
                     }
@@ -245,9 +247,27 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 1) {
+            this.spawnSprintParticle();
+            this.jumpAnimationState.start(this.tickCount);
+            this.jumpDuration = 10;
+            this.jumpTicks = 0;
+        } else if (id == 61) {
+            this.ramAnimationState.start(this.tickCount);
+        } else if (id == 62) {
+            this.ramAnimationState.stop();
+        } else if (id == 64) {
+            this.eatAnimationState.start(this.tickCount);
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
+    @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.getItem() instanceof DyeItem dyeItem) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (itemStack.getItem() instanceof DyeItem dyeItem) {
             DyeColor dyeColor = dyeItem.getDyeColor();
             KirridColor kirridColor = KirridColor.KIRRID_COLOR_BY_DYE.get(dyeColor);
             if (this.getColor().isEmpty() || this.getColor().get() != kirridColor) {
@@ -255,7 +275,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
                 if (!player.level().isClientSide()) {
                     this.setColor(Optional.of(kirridColor));
                     if (!player.getAbilities().instabuild) {
-                        itemstack.shrink(1);
+                        itemStack.shrink(1);
                     }
                 }
             }
@@ -305,30 +325,12 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void handleEntityEvent(byte pId) {
-        if (pId == 1) {
-            this.spawnSprintParticle();
-            this.jumpAnimationState.start(this.tickCount);
-            this.jumpDuration = 10;
-            this.jumpTicks = 0;
-        } else if (pId == 61) {
-            this.ramAnimationState.start(this.tickCount);
-        } else if (pId == 62) {
-            this.ramAnimationState.stop();
-        } else if (pId == 64) {
-            this.eatAnimationState.start(this.tickCount);
-        } else {
-            super.handleEntityEvent(pId);
-        }
-    }
-
-    @Override
     public void ate() {
         super.ate();
         if (this.woolGrowTime == -1) {
             this.woolGrowTime = 0;
         } else {
-            this.woolGrowTime += this.random.nextInt(30) + 30;
+            this.woolGrowTime += this.getRandom().nextInt(30) + 30;
         }
         if (this.isBaby()) {
             this.ageUp(60);
@@ -344,22 +346,22 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     @Override
     public void setJumping(boolean jumping) {
         super.setJumping(jumping);
-        if (jumping) {
-            this.playSound(this.getJumpSound(), this.getSoundVolume(), ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) * 0.8F);
+        if (jumping && this.getJumpSound() != null) {
+            this.playSound(this.getJumpSound(), this.getSoundVolume(), ((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
         }
     }
 
     @Override
     public void jumpFromGround() {
         super.jumpFromGround();
-        double d0 = this.moveControl.getSpeedModifier();
-        if (d0 > 0.0) {
-            double d1 = this.getDeltaMovement().horizontalDistanceSqr();
-            if (d1 < 0.01) {
+        double speedModifier = this.getMoveControl().getSpeedModifier();
+        if (speedModifier > 0.0) {
+            double movementLengthSqr = this.getDeltaMovement().horizontalDistanceSqr();
+            if (movementLengthSqr < 0.01) {
                 this.moveRelative(0.1F, new Vec3(0.0, 0.0, 1.0));
             }
         }
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             this.level().broadcastEntityEvent(this, (byte) 1);
         }
     }
@@ -367,14 +369,13 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     @Override
     protected float getJumpPower() {
         float f = 0.5F;
-        if (this.horizontalCollision || this.moveControl.hasWanted() && this.moveControl.getWantedY() > this.getY() + 0.5) {
-            f = 0.5F;
-            if (this.moveControl.hasWanted() && this.moveControl.getWantedY() > this.getY() + 1.5) {
+        if (this.horizontalCollision || this.getMoveControl().hasWanted() && this.getMoveControl().getWantedY() > this.getY() + 0.5) {
+            if (this.getMoveControl().hasWanted() && this.getMoveControl().getWantedY() > this.getY() + 1.5) {
                 f = 0.65F;
             }
         }
 
-        Path path = this.navigation.getPath();
+        Path path = this.getNavigation().getPath();
         if (path != null && !path.isDone()) {
             Vec3 vec3 = path.getNextEntityPos(this);
             if (vec3.y > this.getY() + 0.5) {
@@ -389,11 +390,11 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     private void enableJumpControl() {
-        ((KirridJumpControl) this.jumpControl).setCanJump(true);
+        ((KirridJumpControl) this.getJumpControl()).setCanJump(true);
     }
 
     private void disableJumpControl() {
-        ((KirridJumpControl) this.jumpControl).setCanJump(false);
+        ((KirridJumpControl) this.getJumpControl()).setCanJump(false);
     }
 
     /**
@@ -416,7 +417,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     private void setLandingDelay() {
-        if (this.moveControl.getSpeedModifier() < 0.6) {
+        if (this.getMoveControl().getSpeedModifier() < 0.6) {
             this.jumpDelayTicks = 10;
         } else {
             this.jumpDelayTicks = 1;
@@ -429,7 +430,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     public boolean dropPlate() {
-        if (this.random.nextFloat() < 0.01F) {
+        if (this.getRandom().nextFloat() < 0.01F) {
             this.setPlate(false);
             return true;
         }
@@ -438,7 +439,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
 
     public void setSpeedModifier(double speedModifier) {
         this.getNavigation().setSpeedModifier(speedModifier);
-        this.moveControl.setWantedPosition(this.moveControl.getWantedX(), this.moveControl.getWantedY(), this.moveControl.getWantedZ(), speedModifier);
+        this.getMoveControl().setWantedPosition(this.getMoveControl().getWantedX(), this.getMoveControl().getWantedY(), this.getMoveControl().getWantedZ(), speedModifier);
     }
 
     @Override
@@ -569,7 +570,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         EntityType<? extends Kirrid> variant = level.getRandom().nextBoolean() ? this.variantType : ((Kirrid) otherParent).variantType;
         Kirrid baby = variant.create(level, EntitySpawnReason.BREEDING);
         if (baby != null) {
-            KirridAi.initMemories(baby, this.random);
+            KirridAi.initMemories(baby, this.getRandom());
             baby.setColor(this.getOffspringColor(level, this, (Kirrid) otherParent));
         }
         return baby;
@@ -595,7 +596,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
                     .map(DyeItem.class::cast)
                     .map(DyeItem::getDyeColor)
                     .map(KirridColor.KIRRID_COLOR_BY_DYE::get)
-                    .orElseGet(() -> this.level().random.nextBoolean() ? color1.get(): color2.get()));
+                    .orElseGet(() -> this.level().getRandom().nextBoolean() ? color1.get(): color2.get()));
         }
     }
 
@@ -604,26 +605,26 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
-        pCompound.putBoolean("HasPlate", this.hasPlate());
-        pCompound.putBoolean("Sheared", this.isSheared());
-        pCompound.putInt("PlateGrowTime", this.plateGrowTime);
-        pCompound.putInt("WoolGrowTime", this.woolGrowTime);
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("HasPlate", this.hasPlate());
+        tag.putBoolean("Sheared", this.isSheared());
+        tag.putInt("PlateGrowTime", this.plateGrowTime);
+        tag.putInt("WoolGrowTime", this.woolGrowTime);
         if (this.getColor().isPresent()) {
-            pCompound.putInt("Color", this.getColor().get().id());
+            tag.putInt("Color", this.getColor().get().id());
         }
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
-        this.setPlate(pCompound.getBoolean("HasPlate"));
-        this.setSheared(pCompound.getBoolean("Sheared"));
-        this.plateGrowTime = pCompound.getInt("PlateGrowTime");
-        this.woolGrowTime = pCompound.getInt("WoolGrowTime");
-        if (pCompound.contains("Color")) {
-            this.setColor(Optional.of(KirridColor.BY_ID.apply(pCompound.getInt("Color"))));
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.setPlate(tag.getBoolean("HasPlate"));
+        this.setSheared(tag.getBoolean("Sheared"));
+        this.plateGrowTime = tag.getInt("PlateGrowTime");
+        this.woolGrowTime = tag.getInt("WoolGrowTime");
+        if (tag.contains("Color")) {
+            this.setColor(Optional.of(KirridColor.BY_ID.apply(tag.getInt("Color"))));
         }
     }
 
@@ -693,9 +694,9 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         private final Kirrid kirrid;
         private boolean canJump;
 
-        public KirridJumpControl(Kirrid pkirrid) {
-            super(pkirrid);
-            this.kirrid = pkirrid;
+        public KirridJumpControl(Kirrid kirrid) {
+            super(kirrid);
+            this.kirrid = kirrid;
         }
 
         public boolean wantJump() {
@@ -706,8 +707,8 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
             return this.canJump;
         }
 
-        public void setCanJump(boolean pCanJump) {
-            this.canJump = pCanJump;
+        public void setCanJump(boolean canJump) {
+            this.canJump = canJump;
         }
 
         /**
@@ -749,14 +750,14 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
          * Sets the speed and location to move to
          */
         @Override
-        public void setWantedPosition(double pX, double pY, double pZ, double pSpeed) {
+        public void setWantedPosition(double x, double y, double z, double speed) {
             if (this.kirrid.isInWater()) {
-                pSpeed = 1.5;
+                speed = 1.5;
             }
 
-            super.setWantedPosition(pX, pY, pZ, pSpeed);
-            if (pSpeed > 0.0) {
-                this.nextJumpSpeed = pSpeed;
+            super.setWantedPosition(x, y, z, speed);
+            if (speed > 0.0) {
+                this.nextJumpSpeed = speed;
             }
         }
     }

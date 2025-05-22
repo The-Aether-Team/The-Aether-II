@@ -185,8 +185,8 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.getItem() instanceof DyeItem dyeItem) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (itemStack.getItem() instanceof DyeItem dyeItem) {
             DyeColor dyeColor = dyeItem.getDyeColor();
             SheepuffColor sheepuffColor = SheepuffColor.SHEEPUFF_COLOR_BY_DYE.get(dyeColor);
             if (this.getColor() != sheepuffColor) {
@@ -194,7 +194,7 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
                 if (!player.level().isClientSide()) {
                     this.setColor(sheepuffColor);
                     if (!player.getAbilities().instabuild) {
-                        itemstack.shrink(1);
+                        itemStack.shrink(1);
                     }
                 }
             }
