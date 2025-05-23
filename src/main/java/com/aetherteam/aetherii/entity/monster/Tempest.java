@@ -19,9 +19,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -65,25 +67,18 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
     }
 
     @Override
-    public void handleEntityEvent(byte pId) {
-        if (pId == 61) {
+    public void handleEntityEvent(byte id) {
+        if (id == 61) {
             this.hideAnimationState.start(this.tickCount);
-        } else if (pId == 62) {
+        } else if (id == 62) {
             this.attackAnimationState.start(this.tickCount);
         } else {
-            super.handleEntityEvent(pId);
+            super.handleEntityEvent(id);
         }
     }
 
-    public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        if(isNight(level))
-            return level.getDifficulty() != Difficulty.PEACEFUL && isValidSpawnBlock(level, pos) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random);
-        else
-            return level.getDifficulty() != Difficulty.PEACEFUL && level.getBlockState(pos).is(AetherIIBlocks.STORM_AERCLOUD) && Mob.checkMobSpawnRules(tempest, level, reason, pos, random);
-    }
-
-    private static boolean isNight(LevelAccessor level){
-        return !(level.getSkyDarken() < 4) && !level.dimensionType().hasFixedTime();
+    public static boolean checkTempestSpawnRules(EntityType<? extends Tempest> tempest, ServerLevelAccessor level, EntitySpawnReason spawnReason, BlockPos pos, RandomSource random) {
+        return (level.getDifficulty() != Difficulty.PEACEFUL && (EntitySpawnReason.ignoresLightRequirements(spawnReason) || Monster.isDarkEnoughToSpawn(level, pos, random)) && checkMobSpawnRules(tempest, level, spawnReason, pos, random)) && isValidSpawnBlock(level, pos);
     }
 
     private static boolean isValidSpawnBlock(LevelAccessor level, BlockPos pos){
@@ -92,11 +87,6 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
 
     private boolean isStormAercloud(Level level, BlockPos blockPos) {
         return level.getBlockState(blockPos).is(AetherIIBlocks.STORM_AERCLOUD);
-    }
-
-    @Override
-    public boolean isInvulnerableTo(ServerLevel serverLevel, DamageSource source) {
-        return source.getDirectEntity() instanceof AreaEffectCloud || source.getDirectEntity() instanceof TempestThunderball;
     }
 
     @Override
@@ -126,6 +116,11 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
     }
 
     @Override
+    public boolean isInvulnerableTo(ServerLevel serverLevel, DamageSource source) {
+        return source.getDirectEntity() instanceof AreaEffectCloud || source.getDirectEntity() instanceof TempestThunderball;
+    }
+
+    @Override
     public int getHideTime() {
         return this.getEntityData().get(DATA_HIDE_ID);
     }
@@ -149,7 +144,7 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
     }
 
     @Override
-    public SoundEvent getHurtSound( DamageSource damageSource) {
+    public SoundEvent getHurtSound(DamageSource damageSource) {
         return AetherIISoundEvents.ENTITY_TEMPEST_HURT.get();
     }
 
@@ -217,7 +212,7 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
          */
         @Override
         public boolean canUse() {
-            return this.tempest.getTarget() != null && isNight(this.tempest.level());
+            return this.tempest.getTarget() != null;
         }
 
         /**
@@ -243,7 +238,7 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
         @Override
         public void tick() {
             LivingEntity target = this.tempest.getTarget();
-            if (target.distanceToSqr(this.tempest) < 40 * 40 && this.tempest.hasLineOfSight(target) && isNight(this.tempest.level())) {
+            if (target.distanceToSqr(this.tempest) < 40 * 40 && this.tempest.hasLineOfSight(target)) {
                 Level level = this.tempest.level();
                 this.tempest.setChargeTime(this.tempest.getChargeTime() + 1);
 

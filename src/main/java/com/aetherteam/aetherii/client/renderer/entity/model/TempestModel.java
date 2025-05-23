@@ -8,14 +8,16 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
 public class TempestModel extends EntityModel<TempestRenderState> {
-	private final ModelPart body;
 	private final ModelPart root;
+	private final ModelPart body;
+	private final ModelPart cloudShell;
 
 
 	public TempestModel(ModelPart root) {
 		super(root);
-		this.body = root.getChild("body");
 		this.root = root;
+		this.body = root.getChild("body");
+		this.cloudShell = this.body.getChild("cloud_shell");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -110,6 +112,7 @@ public class TempestModel extends EntityModel<TempestRenderState> {
 	@Override
 	public void setupAnim(TempestRenderState tempest) {
 		super.setupAnim(tempest);
+
 		this.animateWalk(TempestAnimations.FLY, tempest.walkAnimationPos, tempest.walkAnimationSpeed, 2.0F, 2.0F);
 		this.animate(tempest.attackAnimationState, TempestAnimations.ATTACK, tempest.ageInTicks, 1.0F);
 		this.animate(tempest.hideAnimationState, TempestAnimations.DESPAWN, tempest.ageInTicks, 1.0F);
