@@ -23,8 +23,8 @@ public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRen
     }
 
     @Override
-    public void extractRenderState(AechorPlant aechorPlant, AechorPlantRenderState aechorPlantRenderState, float p_361157_) {
-        super.extractRenderState(aechorPlant, aechorPlantRenderState, p_361157_);
+    public void extractRenderState(AechorPlant aechorPlant, AechorPlantRenderState aechorPlantRenderState, float partialTick) {
+        super.extractRenderState(aechorPlant, aechorPlantRenderState, partialTick);
         aechorPlantRenderState.attackAnimationState.copyFrom(aechorPlant.attackAnimationState);
     }
 

@@ -1,13 +1,20 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
-import com.aetherteam.aetherii.client.renderer.entity.animation.TempestAnimations;
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.state.TempestRenderState;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class TempestModel extends EntityModel<TempestRenderState> {
+	public static final AnimationHolder FLY_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/fly"));
+	public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/attack"));
+	public static final AnimationHolder DESPAWN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/despawn"));
+
 	private final ModelPart root;
 	private final ModelPart body;
 	private final ModelPart cloudShell;
@@ -113,8 +120,8 @@ public class TempestModel extends EntityModel<TempestRenderState> {
 	public void setupAnim(TempestRenderState tempest) {
 		super.setupAnim(tempest);
 
-		this.animateWalk(TempestAnimations.FLY, tempest.walkAnimationPos, tempest.walkAnimationSpeed, 2.0F, 2.0F);
-		this.animate(tempest.attackAnimationState, TempestAnimations.ATTACK, tempest.ageInTicks, 1.0F);
-		this.animate(tempest.hideAnimationState, TempestAnimations.DESPAWN, tempest.ageInTicks, 1.0F);
+		this.animateWalk(FLY_ANIMATION, tempest.walkAnimationPos, tempest.walkAnimationSpeed, 2.0F, 2.0F);
+		this.animate(tempest.attackAnimationState, ATTACK_ANIMATION, tempest.ageInTicks, 1.0F);
+		this.animate(tempest.hideAnimationState, DESPAWN_ANIMATION, tempest.ageInTicks, 1.0F);
 	}
 }

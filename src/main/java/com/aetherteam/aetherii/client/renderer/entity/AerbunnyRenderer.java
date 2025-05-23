@@ -33,9 +33,9 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
     }
 
     @Override
-    public void extractRenderState(Aerbunny aerbunny, AerbunnyRenderState renderState, float p_361157_) {
-        super.extractRenderState(aerbunny, renderState, p_361157_);
-        renderState.puffiness = Mth.lerp(p_361157_, aerbunny.getPuffiness(), aerbunny.getPuffiness() - aerbunny.getPuffSubtract()) / 20.0F;
+    public void extractRenderState(Aerbunny aerbunny, AerbunnyRenderState renderState, float partialTick) {
+        super.extractRenderState(aerbunny, renderState, partialTick);
+        renderState.puffiness = Mth.lerp(partialTick, aerbunny.getPuffiness(), aerbunny.getPuffiness() - aerbunny.getPuffSubtract()) / 20.0F;
         renderState.collarColor = aerbunny.getCollarColor();
         renderState.isSitting = aerbunny.isInSittingPose();
         renderState.onGround = aerbunny.onGround();

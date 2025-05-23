@@ -1,16 +1,13 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.renderer.entity.animation.AechorPlantAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.AechorPlantRenderState;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class AechorPlantModel extends EntityModel<AechorPlantRenderState> {

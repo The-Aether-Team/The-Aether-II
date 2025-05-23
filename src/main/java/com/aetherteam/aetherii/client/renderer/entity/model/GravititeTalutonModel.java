@@ -1,14 +1,21 @@
 package com.aetherteam.aetherii.client.renderer.entity.model;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.client.renderer.entity.animation.GravititeTalotonAnimation;
 import com.aetherteam.aetherii.client.renderer.entity.state.GravititeTalutonRenderState;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class GravititeTalutonModel extends EntityModel<GravititeTalutonRenderState> {
+    public static final AnimationHolder SPIN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_taluton/spin"));
+    public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "gravitite_taluton/attack"));
+
     private final ModelPart body;
     private final ModelPart legsNode;
     private final ModelPart legLeftPosition;
@@ -97,8 +104,8 @@ public class GravititeTalutonModel extends EntityModel<GravititeTalutonRenderSta
         this.legsNode.yRot = -this.body.yRot;
         this.debris1.yRot = -this.body.yRot;
         this.debris2.yRot = -this.body.yRot;
-        this.animateWalk(GravititeTalotonAnimation.SPIN, renderState.ageInTicks, renderState.ageInTicks, 1.0F, 1.0F);
-        this.animate(renderState.attackAnimationState, GravititeTalotonAnimation.ATTACK, renderState.ageInTicks, 2.0F);
+        this.animateWalk(SPIN_ANIMATION, renderState.ageInTicks, renderState.ageInTicks, 1.0F, 1.0F);
+        this.animate(renderState.attackAnimationState, ATTACK_ANIMATION, renderState.ageInTicks, 2.0F);
         this.animate(renderState.reloadAnimationState, GravititeTalotonAnimation.RELOAD, renderState.ageInTicks, 2.0F);
         this.debrisNode.visible = renderState.debrisVisible;
     }
