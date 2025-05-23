@@ -365,8 +365,9 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_UNDERGROWTH_PATCH, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.UNDERGROWTH_PATCH)), 1),
-                        Pair.of(StructurePoolElement.empty(), 8)
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.UNDERGROWTH_PATCH)), 6),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.ROTTEN_UNDERGROWTH_PATCH)), 2),
+                        Pair.of(StructurePoolElement.empty(), 64)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

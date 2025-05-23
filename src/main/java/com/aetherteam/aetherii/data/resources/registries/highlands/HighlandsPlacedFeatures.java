@@ -179,6 +179,7 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
     public static final ResourceKey<PlacedFeature> ROTSHROOM_PATCH = createKey("rotshroom_patch");
     public static final ResourceKey<PlacedFeature> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
+    public static final ResourceKey<PlacedFeature> ROTTEN_UNDERGROWTH_PATCH = createKey("rotten_undergrowth_patch");
 
 
     // Air
@@ -816,6 +817,7 @@ public class HighlandsPlacedFeatures {
         register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
         register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTSHROOM_PATCH));
         register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERGROWTH_PATCH));
+        register(context, ROTTEN_UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTTEN_UNDERGROWTH_PATCH));
     }
 
     public static void bootstrapAir(BootstrapContext<PlacedFeature> context) {

@@ -6,13 +6,21 @@
         "feature": "aether_ii:undergrowth_patch",
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 6
+    },
+    {
+      "element": {
+        "element_type": "minecraft:feature_pool_element",
+        "feature": "aether_ii:rotten_undergrowth_patch",
+        "projection": "rigid"
+      },
+      "weight": 2
     },
     {
       "element": {
         "element_type": "minecraft:empty_pool_element"
       },
-      "weight": 8
+      "weight": 64
     }
   ],
   "fallback": "minecraft:empty"
