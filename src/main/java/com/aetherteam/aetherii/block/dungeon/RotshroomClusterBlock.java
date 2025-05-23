@@ -19,7 +19,7 @@ import net.neoforged.neoforge.common.util.TriState;
 public class RotshroomClusterBlock extends BushBlock {
     public static final MapCodec<RotshroomClusterBlock> CODEC = simpleCodec(RotshroomClusterBlock::new);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;;
-    protected static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 10.0, 14.0);
+    protected static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 8.0, 14.0);
 
     public RotshroomClusterBlock(Properties properties) {
         super(properties);
