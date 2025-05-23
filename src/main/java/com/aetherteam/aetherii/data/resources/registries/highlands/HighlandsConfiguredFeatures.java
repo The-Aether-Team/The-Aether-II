@@ -2089,7 +2089,7 @@ public class HighlandsConfiguredFeatures {
                         true
                 )
         );
-        FeatureUtils.register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON, BlockStateProvider.simple(AetherIIBlocks.BASE_ROOTED_UNDERGROWTH_LEAVES.get()), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERGROWTH_VINE)), CaveSurface.CEILING, ConstantInt.of(1), 0.5F, 3, 1.0F, UniformInt.of(3, 5), 0.5F));
+        FeatureUtils.register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH, new VegetationPatchConfiguration(AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON, BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get()), PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERGROWTH_VINE)), CaveSurface.CEILING, ConstantInt.of(1), 0.6F, 2, 1.0F, UniformInt.of(2, 3), 0.6F));
     }
     
     private static void bootstrapAir(BootstrapContext<ConfiguredFeature<?, ?>> context) {
