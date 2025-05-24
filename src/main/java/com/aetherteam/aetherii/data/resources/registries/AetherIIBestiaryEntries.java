@@ -95,7 +95,7 @@ public class AetherIIBestiaryEntries {
             AetherIIEntityTypes.ARCTIC_KIRRID
     );
     public static final Map<Holder<EntityType<?>>, Double> SCALED = Map.ofEntries(
-            Map.entry(AetherIIEntityTypes.ZEPHYR, 1.65)
+            Map.entry(AetherIIEntityTypes.ZEPHYR, 1.0)
     );
     public static final Map<Holder<EntityType<?>>, ImmutableMap<Holder<Attribute>, Double>> ATTRIBUTES = Map.ofEntries(
             Map.entry(AetherIIEntityTypes.AERBUNNY, AetherIIStats.AERBUNNY),
