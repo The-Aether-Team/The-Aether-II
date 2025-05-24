@@ -102,9 +102,11 @@ public class SkyrootLizardModel<T extends SkyrootLizardRenderState> extends Enti
         super.setupAnim(entity);
         this.head_1.xRot = entity.xRot * Mth.DEG_TO_RAD;
         this.head_1.yRot = entity.yRot * Mth.DEG_TO_RAD;
-        this.leg_back_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
-        this.leg_back_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
-        this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
-        this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
+        this.leg_back_right.yRot = (30 * Mth.DEG_TO_RAD) + Mth.cos(entity.walkAnimationPos * 0.6662F) * 0.6F * entity.walkAnimationSpeed;
+        this.leg_back_left.yRot = (-30 * Mth.DEG_TO_RAD) + Mth.sin(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 0.6F * entity.walkAnimationSpeed;
+        this.leg_front_right.yRot = (-30 * Mth.DEG_TO_RAD) + Mth.sin(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 0.6F * entity.walkAnimationSpeed;
+        this.leg_front_left.yRot = (30 * Mth.DEG_TO_RAD) + Mth.cos(entity.walkAnimationPos * 0.6662F) * 0.6F * entity.walkAnimationSpeed;
+
+        this.tongue.visible = Mth.cos((entity.ageInTicks / 10) + (24 * Mth.DEG_TO_RAD)) > (48 * Mth.DEG_TO_RAD) && Mth.cos(entity.ageInTicks) > 0;
     }
 }
