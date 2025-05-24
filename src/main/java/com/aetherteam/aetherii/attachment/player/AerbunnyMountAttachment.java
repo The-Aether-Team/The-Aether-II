@@ -54,7 +54,7 @@ public class AerbunnyMountAttachment {
     /**
      * Remounts an Aerbunny to the player if there exists stored NBT when joining the world.
      */
-    private void remountAerbunny(Player player) {
+    public void remountAerbunny(Player player) {
         if (this.getMountedAerbunnyTag().isPresent()) {
             if (!player.level().isClientSide()) {
                 Aerbunny aerbunny = new Aerbunny(AetherIIEntityTypes.AERBUNNY.get(), player.level());

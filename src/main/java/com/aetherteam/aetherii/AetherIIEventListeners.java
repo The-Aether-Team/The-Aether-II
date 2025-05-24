@@ -33,6 +33,7 @@ import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.AlterGroundEvent;
@@ -67,6 +68,7 @@ public class AetherIIEventListeners {
 
         // Entity
         bus.addListener(AetherIIEventListeners::onEntityPostTick);
+        bus.addListener(AetherIIEventListeners::onEntityTravelToDimension);
 
         // Living
         bus.addListener(AetherIIEventListeners::onLivingPreDamaged);
@@ -141,6 +143,7 @@ public class AetherIIEventListeners {
 
         player.getData(AetherIIDataAttachments.PLAYER).changeDimension(player);
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).changeDimension(player);
+        player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).remountAerbunny(player);
     }
 
     public static void onPlayerPostTick(PlayerTickEvent.Post event) {
@@ -245,6 +248,14 @@ public class AetherIIEventListeners {
         if (entity instanceof LivingEntity livingEntity) {
             livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).postTickUpdate(livingEntity);
             livingEntity.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).postTickUpdate(livingEntity);
+        }
+    }
+
+    public static void onEntityTravelToDimension(EntityTravelToDimensionEvent event) {
+        Entity entity = event.getEntity();
+
+        if (entity instanceof Player player) {
+            player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT.get()).removeAerbunny();
         }
     }
 
