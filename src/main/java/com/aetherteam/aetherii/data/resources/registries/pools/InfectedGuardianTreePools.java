@@ -357,8 +357,9 @@ public class InfectedGuardianTreePools {
         context.register(DECORATION_ROTSHROOM_PATCH, new StructureTemplatePool(
                 fallback,
                 ImmutableList.of(
-                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.ROTSHROOM_PATCH)), 1),
-                        Pair.of(StructurePoolElement.empty(), 4)
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.ROTSHROOM_PATCH)), 3),
+                        Pair.of(StructurePoolElement.feature(placedFeatures.getOrThrow(HighlandsPlacedFeatures.INFECTED_ROTSHROOM_PATCH)), 1),
+                        Pair.of(StructurePoolElement.empty(), 9)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

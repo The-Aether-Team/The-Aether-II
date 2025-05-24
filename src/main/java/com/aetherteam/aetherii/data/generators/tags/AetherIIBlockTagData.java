@@ -369,6 +369,26 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.ARCTIC_ICE_SPIKE_GENERATES_ON).add(
                 AetherIIBlocks.AETHER_GRASS_BLOCK.get(),
                 AetherIIBlocks.ARCTIC_SNOW_BLOCK.get());
+        this.tag(AetherIITags.Blocks.INFECTED_PATCH_GENERATES_ON).add(
+                AetherIIBlocks.GUARDIAN_LOG.get(),
+                AetherIIBlocks.GUARDIAN_WOOD.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_LOG.get(),
+                AetherIIBlocks.DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_LOG.get(),
+                AetherIIBlocks.STRIPPED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.DIM_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LUCENT_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.GUARDIAN_LAMP.get(),
+                AetherIIBlocks.GUARDIAN_CORTEX.get(),
+                AetherIIBlocks.BASE_GUARDIAN_CORTEX_WOOD.get(),
+                AetherIIBlocks.TOP_GUARDIAN_CORTEX_WOOD.get(),
+                AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get(),
+                AetherIIBlocks.LOCKED_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS.get(),
+                AetherIIBlocks.LOCKED_GUARDIAN_LAMP.get());
         this.tag(AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON).add(
                 AetherIIBlocks.GUARDIAN_LOG.get(),
                 AetherIIBlocks.GUARDIAN_WOOD.get(),
