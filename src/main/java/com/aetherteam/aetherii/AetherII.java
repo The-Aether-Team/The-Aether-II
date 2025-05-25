@@ -73,6 +73,7 @@ import org.slf4j.Logger;
 public class AetherII {
     public static final String MODID = "aether_ii";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final boolean DEBUG_MODE = true;
 
     public AetherII(ModContainer mod, IEventBus bus, Dist dist) {
         bus.addListener(AetherIIData::data);
