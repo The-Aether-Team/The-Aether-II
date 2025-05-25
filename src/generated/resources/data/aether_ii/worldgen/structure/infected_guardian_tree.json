@@ -1,7 +1,6 @@
 {
   "type": "aether_ii:aether_jigsaw",
   "biomes": "#aether_ii:has_structure/infected_guardian_tree",
-  "buried": true,
   "discard_above_y": 156,
   "discard_below_y": 128,
   "liquid_settings": "ignore_waterlogging",

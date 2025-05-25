@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.RandomState;
@@ -24,6 +25,8 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
 import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -41,7 +44,6 @@ public class AetherJigsawStructure extends Structure {
                     Codec.intRange(1, 256).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
                     Codec.intRange(-4096, 4096).fieldOf("discard_below_y").forGetter(structure -> structure.discardBelowY),
                     Codec.intRange(-4096, 4096).fieldOf("discard_above_y").forGetter(structure -> structure.discardAboveY),
-                    Codec.BOOL.fieldOf("buried").forGetter(structure -> structure.buried),
                     Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(structure -> structure.poolAliases),
                     DimensionPadding.CODEC.optionalFieldOf("dimension_padding", DimensionPadding.ZERO).forGetter(structure -> structure.dimensionPadding),
                     LiquidSettings.CODEC.optionalFieldOf("liquid_settings", LiquidSettings.APPLY_WATERLOGGING).forGetter(structure -> structure.liquidSettings)
@@ -54,12 +56,11 @@ public class AetherJigsawStructure extends Structure {
     private final int maxDistanceFromCenter;
     private final int discardBelowY;
     private final int discardAboveY;
-    private final boolean buried;
     private final List<PoolAliasBinding> poolAliases;
     private final DimensionPadding dimensionPadding;
     private final LiquidSettings liquidSettings;
 
-    public AetherJigsawStructure(StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int discardBelowY, int discardAboveY, boolean buried, List<PoolAliasBinding> poolAliases, DimensionPadding dimensionPadding, LiquidSettings liquidSettings) {
+    public AetherJigsawStructure(StructureSettings config, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int size, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, int discardBelowY, int discardAboveY, List<PoolAliasBinding> poolAliases, DimensionPadding dimensionPadding, LiquidSettings liquidSettings) {
         super(config);
         this.startPool = startPool;
         this.startJigsawName = startJigsawName;
@@ -69,7 +70,6 @@ public class AetherJigsawStructure extends Structure {
         this.maxDistanceFromCenter = maxDistanceFromCenter;
         this.discardBelowY = discardBelowY;
         this.discardAboveY = discardAboveY;
-        this.buried = buried;
         this.poolAliases = poolAliases;
         this.dimensionPadding = dimensionPadding;
         this.liquidSettings = liquidSettings;
@@ -77,12 +77,23 @@ public class AetherJigsawStructure extends Structure {
 
     @Override
     public @NotNull Optional<GenerationStub> findGenerationPoint(@NotNull GenerationContext context) {
+
         ChunkGenerator generator = context.chunkGenerator();
         LevelHeightAccessor heightAccessor = context.heightAccessor();
+        StructureTemplateManager templateManager = context.structureTemplateManager();
         int startY = startHeight.sample(context.random(), new WorldGenerationContext(generator, heightAccessor));
         ChunkPos chunkPos = context.chunkPos();
         BlockPos pos = new BlockPos(chunkPos.getMiddleBlockX(), startY, chunkPos.getMiddleBlockZ());
-        if (!this.checkHeight(context, discardBelowY, discardAboveY) || (checkCorners(generator, heightAccessor, chunkPos, context.randomState(), startY) && buried)) {
+
+        BlockPos testPos0 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.NONE).getCenter();
+        BlockPos testPos90 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.CLOCKWISE_90).getCenter();
+        BlockPos testPos180 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.CLOCKWISE_180).getCenter();
+        BlockPos testPos270 = startPool.value().getRandomTemplate(context.random()).getBoundingBox(templateManager, pos, Rotation.COUNTERCLOCKWISE_90).getCenter();
+
+        if (!this.checkHeight(context, testPos0.getX(), testPos0.getZ(), discardBelowY, discardAboveY)
+                && !this.checkHeight(context, testPos90.getX(), testPos90.getZ(), discardBelowY, discardAboveY)
+                && !this.checkHeight(context, testPos180.getX(), testPos180.getZ(), discardBelowY, discardAboveY)
+                && !this.checkHeight(context, testPos270.getX(), testPos270.getZ(), discardBelowY, discardAboveY)) {
             return Optional.empty();
         }
         return JigsawPlacement.addPieces(
@@ -100,29 +111,9 @@ public class AetherJigsawStructure extends Structure {
         );
     }
 
-    public boolean checkHeight(Structure.GenerationContext context, int minY, int maxY) {
-        ChunkPos chunkpos = context.chunkPos();
-        int posTest = context.chunkGenerator().getFirstOccupiedHeight(chunkpos.getWorldPosition().getX(), chunkpos.getWorldPosition().getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
+    public boolean checkHeight(Structure.GenerationContext context, int x, int z, int minY, int maxY) {
+        int posTest = context.chunkGenerator().getFirstOccupiedHeight(x, z, Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
         return posTest > minY && posTest < maxY;
-    }
-
-    private static boolean checkCorners(ChunkGenerator generator, LevelHeightAccessor heightAccessor, ChunkPos chunkPos, RandomState random, int startY) {
-        int minX = chunkPos.getMinBlockX() - 1;
-        int minZ = chunkPos.getMinBlockZ() - 1;
-        int maxX = chunkPos.getMaxBlockX() + 1;
-        int maxZ = chunkPos.getMaxBlockZ() + 1;
-        NoiseColumn[] columns = {
-                generator.getBaseColumn(minX, minZ, heightAccessor, random),
-                generator.getBaseColumn(minX, maxZ, heightAccessor, random),
-                generator.getBaseColumn(maxX, minZ, heightAccessor, random),
-                generator.getBaseColumn(maxX, maxZ, heightAccessor, random)
-        };
-        for (NoiseColumn column : columns) {
-            if (!column.getBlock(startY - 16).isAir()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
