@@ -40,6 +40,7 @@ public class InfectedGuardianTreePools {
     public static final ResourceKey<StructureTemplatePool> FALLBACK_DEAD_END_JOINT = AetherIIPools.createKey("infected_guardian_tree/corridors/fallback_dead_end_joint");
     public static final ResourceKey<StructureTemplatePool> ROOM_CORRIDORS = AetherIIPools.createKey("infected_guardian_tree/corridors/room_corridors");
 
+    public static final ResourceKey<StructureTemplatePool> DYNAMIC_STAIRCASE = AetherIIPools.createKey("infected_guardian_tree/center/dynamic_staircase");
     public static final ResourceKey<StructureTemplatePool> STAIRCASE_1 = AetherIIPools.createKey("infected_guardian_tree/center/staircase_1");
     public static final ResourceKey<StructureTemplatePool> STAIRCASE_2 = AetherIIPools.createKey("infected_guardian_tree/center/staircase_2");
     public static final ResourceKey<StructureTemplatePool> STAIRCASE_3 = AetherIIPools.createKey("infected_guardian_tree/center/staircase_3");
@@ -262,12 +263,19 @@ public class InfectedGuardianTreePools {
                 StructureTemplatePool.Projection.RIGID)
         );
 
-        context.register(STAIRCASE_1, new StructureTemplatePool(
+        context.register(DYNAMIC_STAIRCASE, new StructureTemplatePool( //Used for edge-case generation issues regarding height
                 templatePools.getOrThrow(LOBBIES_1),
                 ImmutableList.of(
-                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_a", processorDungeon, 96), 1),
-                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_b", processorDungeon, 96), 1),
-                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_c", processorDungeon, 96), 1)
+                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/dynamic_staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_a", processorDungeon, 144), 1),
+                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/dynamic_staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_b", processorDungeon, 144), 1),
+                        Pair.of(AetherIIPools.dynamicStaircase("infected_guardian_tree/center/floor_1/dynamic_staircase_01", "infected_guardian_tree/center/floor_1/lobby_01_c", processorDungeon, 144), 1)
+                ),
+                StructureTemplatePool.Projection.RIGID)
+        );
+        context.register(STAIRCASE_1, new StructureTemplatePool(
+                fallback,
+                ImmutableList.of(
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/center/floor_1/staircase_01", processorDungeon), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );

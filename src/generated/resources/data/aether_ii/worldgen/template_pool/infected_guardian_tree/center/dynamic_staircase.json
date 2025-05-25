@@ -1,0 +1,44 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "aether_ii:dynamic_staircase_pool_element",
+        "location": "aether_ii:infected_guardian_tree/center/floor_1/dynamic_staircase_01",
+        "location_other": "aether_ii:infected_guardian_tree/center/floor_1/lobby_01_a",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false,
+        "switch_below_y": 144
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:dynamic_staircase_pool_element",
+        "location": "aether_ii:infected_guardian_tree/center/floor_1/dynamic_staircase_01",
+        "location_other": "aether_ii:infected_guardian_tree/center/floor_1/lobby_01_b",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false,
+        "switch_below_y": 144
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "aether_ii:dynamic_staircase_pool_element",
+        "location": "aether_ii:infected_guardian_tree/center/floor_1/dynamic_staircase_01",
+        "location_other": "aether_ii:infected_guardian_tree/center/floor_1/lobby_01_c",
+        "override_liquid_settings": "ignore_waterlogging",
+        "processors": "aether_ii:infected_guardian_tree",
+        "projection": "rigid",
+        "replace_air": false,
+        "switch_below_y": 144
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "aether_ii:infected_guardian_tree/center/lobbies_1"
+}

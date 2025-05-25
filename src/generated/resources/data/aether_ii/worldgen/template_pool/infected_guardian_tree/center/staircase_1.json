@@ -2,43 +2,17 @@
   "elements": [
     {
       "element": {
-        "element_type": "aether_ii:dynamic_staircase_pool_element",
+        "discard_above_y": 384,
+        "discard_below_y": 0,
+        "element_type": "aether_ii:aether_pool_element",
         "location": "aether_ii:infected_guardian_tree/center/floor_1/staircase_01",
-        "location_other": "aether_ii:infected_guardian_tree/center/floor_1/lobby_01_a",
         "override_liquid_settings": "ignore_waterlogging",
         "processors": "aether_ii:infected_guardian_tree",
         "projection": "rigid",
-        "replace_air": false,
-        "switch_below_y": 96
-      },
-      "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "aether_ii:dynamic_staircase_pool_element",
-        "location": "aether_ii:infected_guardian_tree/center/floor_1/staircase_01",
-        "location_other": "aether_ii:infected_guardian_tree/center/floor_1/lobby_01_b",
-        "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree",
-        "projection": "rigid",
-        "replace_air": false,
-        "switch_below_y": 96
-      },
-      "weight": 1
-    },
-    {
-      "element": {
-        "element_type": "aether_ii:dynamic_staircase_pool_element",
-        "location": "aether_ii:infected_guardian_tree/center/floor_1/staircase_01",
-        "location_other": "aether_ii:infected_guardian_tree/center/floor_1/lobby_01_c",
-        "override_liquid_settings": "ignore_waterlogging",
-        "processors": "aether_ii:infected_guardian_tree",
-        "projection": "rigid",
-        "replace_air": false,
-        "switch_below_y": 96
+        "replace_air": false
       },
       "weight": 1
     }
   ],
-  "fallback": "aether_ii:infected_guardian_tree/center/lobbies_1"
+  "fallback": "minecraft:empty"
 }
