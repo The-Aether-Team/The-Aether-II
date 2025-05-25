@@ -34,7 +34,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.FERROSITE_SAND.get(),
                 AetherIIBlocks.ARCTIC_PACKED_ICE.get(),
                 AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
-                AetherIIBlocks.UNSTABLE_UNDERSHALE.get()
+                AetherIIBlocks.UNSTABLE_UNDERSHALE.get(),
+                AetherIIBlocks.MOSSY_HOLYSTONE.get(),
+                AetherIIBlocks.COARSE_AETHER_DIRT.get()
         ).addTags(
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
                 AetherIITags.Blocks.AERCLOUDS,
@@ -56,7 +58,8 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
         this.tag(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS).add(
                 AetherIIBlocks.HOLYSTONE.get(),
                 AetherIIBlocks.UNDERSHALE.get(),
-                AetherIIBlocks.ICHORITE.get()
+                AetherIIBlocks.ICHORITE.get(),
+                AetherIIBlocks.AGIOSITE.get()
         );
         this.tag(AetherIITags.Blocks.AETHER_CARVER_REPLACEABLES)
                 .add(AetherIIBlocks.ARCTIC_SNOW_BLOCK.get())
