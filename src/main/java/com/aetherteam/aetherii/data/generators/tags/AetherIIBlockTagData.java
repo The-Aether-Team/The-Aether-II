@@ -22,6 +22,7 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
     public void addTags(HolderLookup.Provider provider) {
         // Aether II
         this.tag(AetherIITags.Blocks.AETHER_PORTAL_BLOCKS).add(
+                Blocks.GLOWSTONE,
                 Blocks.QUARTZ_BLOCK,
                 Blocks.SMOOTH_QUARTZ,
                 Blocks.QUARTZ_BRICKS,
