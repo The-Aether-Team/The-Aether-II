@@ -36,7 +36,9 @@ public class AetherIIBlockTagData extends BlockTagsProvider {
                 AetherIIBlocks.UNSTABLE_HOLYSTONE.get(),
                 AetherIIBlocks.UNSTABLE_UNDERSHALE.get(),
                 AetherIIBlocks.MOSSY_HOLYSTONE.get(),
-                AetherIIBlocks.COARSE_AETHER_DIRT.get()
+                AetherIIBlocks.COARSE_AETHER_DIRT.get(),
+                AetherIIBlocks.ACID.get(),
+                AetherIIBlocks.GAS.get()
         ).addTags(
                 AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS,
                 AetherIITags.Blocks.AERCLOUDS,
