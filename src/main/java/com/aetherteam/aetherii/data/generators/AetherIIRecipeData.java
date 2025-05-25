@@ -1071,7 +1071,9 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .save(this.output, "skyroot_stick_from_twig");
         ShapelessRecipeBuilder.shapeless(getter, RecipeCategory.MISC, AetherIIItems.MOA_FEED.get(), 3)
                 .requires(AetherIIItems.SKYROOT_PINECONE)
+                .requires(AetherIIItems.AECHOR_PETAL)
                 .unlockedBy("has_skyroot_pinecone", has(AetherIIItems.SKYROOT_PINECONE))
+                .unlockedBy("has_aechor_petal", has(AetherIIItems.AECHOR_PETAL))
                 .save(this.output);
         ShapedRecipeBuilder.shaped(getter, RecipeCategory.MISC, AetherIIItems.SKYROOT_BUCKET.get(), 1)
                 .define('#', AetherIITags.Items.CRAFTS_SKYROOT_TOOLS)
@@ -1103,6 +1105,14 @@ public class AetherIIRecipeData extends AetherIIRecipeProvider {
                 .pattern(" # ")
                 .unlockedBy("has_scatterglass", has(AetherIIBlocks.SCATTERGLASS.get()))
                 .save(this.output);
+        ShapedRecipeBuilder.shaped(getter,RecipeCategory.MISC, Items.GLOWSTONE_DUST, 4)
+                .define('#', AetherIIItems.AMBROSIUM_SHARD)
+                .define('@', Items.QUARTZ)
+                .pattern("#@")
+                .pattern("@#")
+                .unlockedBy("has_ambrosium_shard", has(AetherIIItems.AMBROSIUM_SHARD.get()))
+                .unlockedBy("has_quartz", has(Items.QUARTZ))
+                .save(this.output, this.name("aether_glowstone_dust"));
 
         this.smeltingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(this.output, this.name("quartz_from_smelting_holystone_quartz_ore"));
         this.blastingOreRecipe(Items.QUARTZ, AetherIIBlocks.HOLYSTONE_QUARTZ_ORE.get(), 0.5F).group("quartz").save(this.output, this.name("quartz_from_blasting_holystone_quartz_ore"));

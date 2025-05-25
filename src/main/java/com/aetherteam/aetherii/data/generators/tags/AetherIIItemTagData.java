@@ -280,8 +280,12 @@ public class AetherIIItemTagData extends ItemTagsProvider {
                 AetherIIItems.ORANGE.get()
         );
         this.tag(AetherIITags.Items.MOA_FOOD).add(
-                AetherIIItems.AECHOR_PETAL.get()
-        );
+                AetherIIItems.AECHOR_PETAL.get(),
+                AetherIIItems.MOA_FEED.get(),
+                AetherIIItems.BLUEBERRY_MOA_FEED.get(),
+                AetherIIItems.ENCHANTED_MOA_FEED.get()
+
+                );
         this.tag(AetherIITags.Items.BEAST_PELT_REPAIRING).add(AetherIIItems.BEAST_PELT.get());
         this.tag(AetherIITags.Items.BURRUKAI_PLATE_REPAIRING).add(AetherIIItems.BURRUKAI_PLATE.get());
         this.tag(AetherIITags.Items.SKYROOT_REPAIRING).addTag(AetherIITags.Items.CRAFTS_SKYROOT_TOOLS);
