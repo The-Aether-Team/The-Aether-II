@@ -2,6 +2,7 @@ package com.aetherteam.aetherii.data.resources.registries.highlands;
 
 import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDensityFunctions;
@@ -2127,7 +2128,7 @@ public class HighlandsConfiguredFeatures {
         FeatureUtils.register(context, UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
-                        BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get()),
+                        BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_UNDERGROWTH_LEAVES.get().defaultBlockState().setValue(AetherIIBlockStateProperties.REINFORCED, true)),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(UNDERGROWTH_VINE)),
                         CaveSurface.CEILING, ConstantInt.of(1),
                         0.6F,
@@ -2138,7 +2139,7 @@ public class HighlandsConfiguredFeatures {
         FeatureUtils.register(context, ROTTEN_UNDERGROWTH_PATCH, Feature.VEGETATION_PATCH,
                 new VegetationPatchConfiguration(
                         AetherIITags.Blocks.UNDERGROWTH_PATCH_GENERATES_ON,
-                        BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get()),
+                        BlockStateProvider.simple(AetherIIBlocks.TOP_ROOTED_ROTTEN_UNDERGROWTH_LEAVES.get().defaultBlockState().setValue(AetherIIBlockStateProperties.REINFORCED, true)),
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTTEN_UNDERGROWTH_VINE)),
                         CaveSurface.CEILING,
                         ConstantInt.of(1),

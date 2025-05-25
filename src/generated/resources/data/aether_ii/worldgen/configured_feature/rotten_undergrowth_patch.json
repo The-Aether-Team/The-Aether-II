@@ -10,7 +10,7 @@
         "Name": "aether_ii:top_rooted_rotten_undergrowth_leaves",
         "Properties": {
           "facing": "up",
-          "reinforced": "false"
+          "reinforced": "true"
         }
       }
     },

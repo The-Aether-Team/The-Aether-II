@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.world.feature;
 
+import com.aetherteam.aetherii.block.AetherIIBlockStateProperties;
 import com.aetherteam.aetherii.data.resources.maps.BlockInfection;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIDataMaps;
 import com.aetherteam.aetherii.world.feature.configuration.InfectedPatchConfiguration;
@@ -123,7 +124,7 @@ public class InfectedPatchFeature extends Feature<InfectedPatchConfiguration> { 
         if (infection != null) {
             Block block = BuiltInRegistries.BLOCK.getValue(infection.block());
             if (block != null) {
-                return block.defaultBlockState();
+                return block.defaultBlockState().hasProperty(AetherIIBlockStateProperties.REINFORCED) ? block.defaultBlockState().setValue(AetherIIBlockStateProperties.REINFORCED, true) : block.defaultBlockState();
             }
         }
         return level.getBlockState(mutablePos);
