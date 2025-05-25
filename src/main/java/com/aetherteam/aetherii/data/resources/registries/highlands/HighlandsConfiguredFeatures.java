@@ -29,7 +29,6 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.*;
@@ -284,7 +283,10 @@ public class HighlandsConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ROTSHROOM_PATCH = createKey("rotshroom_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ROTSHROOM_PATCH_INFECTED = createKey("rotshroom_patch_infected");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_ROTSHROOM_PATCH = createKey("infected_rotshroom_patch");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> COARSE_AETHER_DIRT_DUNGEON = createKey("coarse_aether_dirt_dungeon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> INFECTED_PATCH = createKey("infected_patch");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_VINE = createKey("undergrowth_vine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ROTTEN_UNDERGROWTH_VINE = createKey("rotten_undergrowth_vine");
     public static final ResourceKey<ConfiguredFeature<?, ?>> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
@@ -2080,7 +2082,20 @@ public class HighlandsConfiguredFeatures {
                                 .add(AetherIIBlocks.ROTSHROOM_TOADSTOOL_CLUSTER.get().defaultBlockState(), 2)
                                 .build())
                         ), BlockPredicate.ONLY_IN_AIR_PREDICATE)));
-        FeatureUtils.register(context, INFECTED_ROTSHROOM_PATCH, AetherIIFeatures.INFECTED_PATCH.get(),
+
+        FeatureUtils.register(context, COARSE_AETHER_DIRT_DUNGEON, Feature.VEGETATION_PATCH,
+                new VegetationPatchConfiguration(
+                        AetherIITags.Blocks.AETHER_DIRT,
+                        BlockStateProvider.simple(AetherIIBlocks.COARSE_AETHER_DIRT.get()),
+                        PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTSHROOM_PATCH_INFECTED)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(2),
+                        0.4F,
+                        6,
+                        0.65F,
+                        UniformInt.of(2, 4),
+                        0.375F));
+        FeatureUtils.register(context, INFECTED_PATCH, AetherIIFeatures.INFECTED_PATCH.get(),
                 new InfectedPatchConfiguration(
                         AetherIITags.Blocks.INFECTED_PATCH_GENERATES_ON,
                         PlacementUtils.inlinePlaced(configuredFeatures.getOrThrow(ROTSHROOM_PATCH_INFECTED)),
@@ -2091,6 +2106,7 @@ public class HighlandsConfiguredFeatures {
                         1.0F,
                         UniformInt.of(3, 4),
                         0.25F));
+
         register(context, UNDERGROWTH_VINE, Feature.BLOCK_COLUMN,
                 new BlockColumnConfiguration(
                         List.of(

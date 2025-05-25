@@ -3,24 +3,16 @@
     {
       "element": {
         "element_type": "minecraft:feature_pool_element",
-        "feature": "aether_ii:rotshroom_patch",
+        "feature": "aether_ii:coarse_aether_dirt_dungeon",
         "projection": "rigid"
       },
-      "weight": 3
-    },
-    {
-      "element": {
-        "element_type": "minecraft:feature_pool_element",
-        "feature": "aether_ii:infected_patch",
-        "projection": "rigid"
-      },
-      "weight": 1
+      "weight": 6
     },
     {
       "element": {
         "element_type": "minecraft:empty_pool_element"
       },
-      "weight": 9
+      "weight": 4
     }
   ],
   "fallback": "minecraft:empty"

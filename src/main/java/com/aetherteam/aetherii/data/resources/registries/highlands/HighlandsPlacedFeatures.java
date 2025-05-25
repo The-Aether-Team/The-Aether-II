@@ -29,7 +29,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.heightproviders.TrapezoidHeight;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 
@@ -178,7 +177,8 @@ public class HighlandsPlacedFeatures {
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM = createKey("large_shelf_rotshroom");
     public static final ResourceKey<PlacedFeature> LARGE_SHELF_ROTSHROOM_UNDERGROUND = createKey("large_shelf_rotshroom_underground");
     public static final ResourceKey<PlacedFeature> ROTSHROOM_PATCH = createKey("rotshroom_patch");
-    public static final ResourceKey<PlacedFeature> INFECTED_ROTSHROOM_PATCH = createKey("infected_rotshroom_patch");
+    public static final ResourceKey<PlacedFeature> COARSE_AETHER_DIRT_DUNGEON = createKey("coarse_aether_dirt_dungeon");
+    public static final ResourceKey<PlacedFeature> INFECTED_PATCH = createKey("infected_patch");
     public static final ResourceKey<PlacedFeature> UNDERGROWTH_PATCH = createKey("undergrowth_patch");
     public static final ResourceKey<PlacedFeature> ROTTEN_UNDERGROWTH_PATCH = createKey("rotten_undergrowth_patch");
 
@@ -817,7 +817,8 @@ public class HighlandsPlacedFeatures {
         register(context, LARGE_SHELF_ROTSHROOM, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM));
         register(context, LARGE_SHELF_ROTSHROOM_UNDERGROUND, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.LARGE_SHELF_ROTSHROOM_UNDERGROUND));
         register(context, ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTSHROOM_PATCH));
-        register(context, INFECTED_ROTSHROOM_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_ROTSHROOM_PATCH));
+        register(context, COARSE_AETHER_DIRT_DUNGEON, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.COARSE_AETHER_DIRT_DUNGEON));
+        register(context, INFECTED_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.INFECTED_PATCH));
         register(context, UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.UNDERGROWTH_PATCH));
         register(context, ROTTEN_UNDERGROWTH_PATCH, configuredFeatures.getOrThrow(HighlandsConfiguredFeatures.ROTTEN_UNDERGROWTH_PATCH));
     }
