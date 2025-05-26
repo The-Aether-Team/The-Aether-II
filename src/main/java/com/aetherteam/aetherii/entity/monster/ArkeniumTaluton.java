@@ -23,6 +23,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 
 public class ArkeniumTaluton extends Monster {
+    public static int ATTACK_EVENT = 4;
+
     private int attackAnimationTick;
 
     public ArkeniumTaluton(EntityType<? extends ArkeniumTaluton> entityType, Level level) {
@@ -49,6 +51,15 @@ public class ArkeniumTaluton extends Monster {
     }
 
     @Override
+    public void handleEntityEvent(byte id) {
+        if (id == ATTACK_EVENT) {
+            this.attackAnimationTick = 10;
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
+    @Override
     public void aiStep() {
         super.aiStep();
         if (this.attackAnimationTick > 0) {
@@ -59,18 +70,9 @@ public class ArkeniumTaluton extends Monster {
     @Override
     public boolean doHurtTarget(ServerLevel serverLevel, Entity entity) {
         this.attackAnimationTick = 10;
-        serverLevel.broadcastEntityEvent(this, (byte) 4);
+        serverLevel.broadcastEntityEvent(this, (byte) ATTACK_EVENT);
         this.playSound(AetherIISoundEvents.ENTITY_ARKENIUM_TALUTON_ATTACK.get(), 1.0F, 1.0F);
         return super.doHurtTarget(serverLevel, entity);
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 4) {
-            this.attackAnimationTick = 10;
-        } else {
-            super.handleEntityEvent(id);
-        }
     }
 
     public int getAttackAnimationTick() {

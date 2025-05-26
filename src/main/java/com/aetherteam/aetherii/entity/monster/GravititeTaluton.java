@@ -29,6 +29,12 @@ import javax.annotation.Nullable;
 
 public class GravititeTaluton extends Taluton implements RangedAttackMob {
     public static final int ATTACK_DURATION = 100;
+
+    public static int ATTACK_START_EVENT = 100;
+    public static int ATTACK_STOP_EVENT = 101;
+    public static int RELOAD_STOP_EVENT = 102;
+    public static int RELOAD_START_EVENT = 103;
+
     public RangedAttackGoal attackGoal;
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState reloadAnimationState = new AnimationState();
@@ -56,6 +62,23 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
     }
 
     @Override
+    public void handleEntityEvent(byte id) {
+        if (id == ATTACK_START_EVENT) {
+            this.attackAnimationState.start(this.tickCount);
+        } else if (id == ATTACK_STOP_EVENT) {
+            this.attackAnimationState.stop();
+        } else if (id == RELOAD_STOP_EVENT) {
+            this.debrisVisible = false;
+            this.reloadAnimationState.stop();
+        } else if (id == RELOAD_START_EVENT) {
+            this.debrisVisible = true;
+            this.reloadAnimationState.start(this.tickCount);
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
+    @Override
     public void tick() {
         super.tick();
         AttributeInstance gravity = this.getAttribute(Attributes.GRAVITY);
@@ -74,27 +97,11 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
         if (this.attackGoal != null) {
             int attackTime = ((RangedAttackGoalAccessor) this.attackGoal).aether_ii$getAttackTime();
             switch(attackTime) {
-                case 22 -> this.level().broadcastEntityEvent(this, (byte) 59);
-                case 1 -> this.level().broadcastEntityEvent(this, (byte) 61);
-                case ATTACK_DURATION -> this.level().broadcastEntityEvent(this, (byte) 60);
-                case 60 -> this.level().broadcastEntityEvent(this, (byte) 62);
+                case 22 -> this.level().broadcastEntityEvent(this, (byte) ATTACK_START_EVENT);
+                case 1 -> this.level().broadcastEntityEvent(this, (byte) RELOAD_STOP_EVENT);
+                case ATTACK_DURATION -> this.level().broadcastEntityEvent(this, (byte) ATTACK_STOP_EVENT);
+                case 60 -> this.level().broadcastEntityEvent(this, (byte) RELOAD_START_EVENT);
             }
-        }
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 59) {
-            this.attackAnimationState.start(this.tickCount);
-        } else if (id == 60) {
-            this.attackAnimationState.stop();
-        } else if (id == 61) {
-            this.debrisVisible = false;
-        } else if (id == 62) {
-            this.debrisVisible = true;
-            this.reloadAnimationState.start(this.tickCount);
-        } else {
-            super.handleEntityEvent(id);
         }
     }
 

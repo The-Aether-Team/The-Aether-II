@@ -31,6 +31,8 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class AechorPlant extends PathfinderMob implements RangedAttackMob {
+    public static int DART_ATTACK_EVENT = 100;
+
     private static final EntityDataAccessor<Boolean> DATA_TARGETING_ENTITY_ID = SynchedEntityData.defineId(AechorPlant.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState attackAnimationState = new AnimationState();
@@ -84,6 +86,15 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
                 && level.getDifficulty() != Difficulty.PEACEFUL;
     }
 
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == DART_ATTACK_EVENT) {
+            this.attackAnimationState.start(this.tickCount);
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
     /**
      * Kills the Aechor Plant if it is not on a valid block or on a vehicle, and also handles setting whether it is targeting an entity on client and server.
      */
@@ -101,15 +112,6 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
             } else if (this.getTarget() == null && this.isTargetingEntity()) {
                 this.setTargetingEntity(false);
             }
-        }
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 61) {
-            this.attackAnimationState.start(this.tickCount);
-        } else {
-            super.handleEntityEvent(id);
         }
     }
 
@@ -260,7 +262,7 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
             double d0 = this.aechorPlant.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
 
             if (this.attackTime == this.attackInterval - 10) {
-                this.aechorPlant.level().broadcastEntityEvent(this.aechorPlant, (byte) 61);
+                this.aechorPlant.level().broadcastEntityEvent(this.aechorPlant, (byte) DART_ATTACK_EVENT);
             }
 
             if (--this.attackTime == 0) {

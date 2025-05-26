@@ -54,6 +54,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class Aerbunny extends AetherTamableAnimal {
+    public static int PUFF_PARTICLE_EVENT = 100;
+
     private static final EntityDataAccessor<Integer> DATA_PUFFINESS_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_PUFF_COOLDOWN_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_AFRAID_TIME_ID = SynchedEntityData.defineId(Aerbunny.class, EntityDataSerializers.INT);
@@ -97,6 +99,15 @@ public class Aerbunny extends AetherTamableAnimal {
         builder.define(DATA_FAST_FALLING_ID, false);
         builder.define(DATA_COLLAR_COLOR, DyeColor.BLUE.getId());
         builder.define(DATA_VEHICLE_UUID_ID, Optional.empty());
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == PUFF_PARTICLE_EVENT) {
+            this.spawnPuffParticles();
+        } else {
+            super.handleEntityEvent(id);
+        }
     }
 
     /**
@@ -209,7 +220,7 @@ public class Aerbunny extends AetherTamableAnimal {
                             if (this.getPuffCooldown() <= 0) { // Also check cooldown timer.
                                 player.setDeltaMovement(player.getDeltaMovement().x(), 0.125, player.getDeltaMovement().z());
                                 PacketDistributor.sendToServer(new AerbunnyPuffPacket(this.getId())); // Calls Aerbunny#puff() on the server.
-                                this.spawnExplosionParticle();
+                                this.spawnPuffParticles();
                                 this.lastPos = null;
                                 this.setPuffCooldown(20);
                             }
@@ -421,7 +432,7 @@ public class Aerbunny extends AetherTamableAnimal {
         Vec3 motion = this.getDeltaMovement();
         if (motion.y() < 0) {
             this.puff();
-            this.level().broadcastEntityEvent(this, (byte) 70);
+            this.level().broadcastEntityEvent(this, (byte) PUFF_PARTICLE_EVENT);
         }
         this.setDeltaMovement(new Vec3(motion.x(), 0.25, motion.z()));
     }
@@ -436,7 +447,7 @@ public class Aerbunny extends AetherTamableAnimal {
         this.level().playSound(null, this, AetherIISoundEvents.ENTITY_AERBUNNY_HOP.get(), SoundSource.NEUTRAL, 2.0F, (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F);
     }
 
-    private void spawnExplosionParticle() {
+    private void spawnPuffParticles() {
         for (int i = 0; i < 5; i++) {
             EntityUtil.spawnMovementExplosionParticles(this);
         }
@@ -600,15 +611,6 @@ public class Aerbunny extends AetherTamableAnimal {
         }
 
         return aerbunny;
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 70) {
-            this.spawnExplosionParticle();
-        } else {
-            super.handleEntityEvent(id);
-        }
     }
 
     @Override

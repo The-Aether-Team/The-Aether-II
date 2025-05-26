@@ -35,6 +35,9 @@ public class Tempest extends Zephyr implements Blighted {
     public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 35;
     public static int HIDE_LENGTH = HIDE_ANIMATION_START + HIDE_ANIMATION_LENGTH;
 
+    public static int ATTACK_EVENT = 100;
+    public static int HIDE_EVENT = 101;
+
     public static final EntityDataAccessor<Integer> DATA_ATTACK_CHARGE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DATA_HIDE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
 
@@ -70,9 +73,11 @@ public class Tempest extends Zephyr implements Blighted {
 
     @Override
     public void handleEntityEvent(byte id) {
-        if (id == 61) {
+        if (id == ATTACK_EVENT) {
+            this.attackAnimationState.stop();
             this.hideAnimationState.start(this.tickCount);
-        } else if (id == 62) {
+        } else if (id == HIDE_EVENT) {
+            this.hideAnimationState.stop();
             this.attackAnimationState.start(this.tickCount);
         } else {
             super.handleEntityEvent(id);
@@ -96,7 +101,7 @@ public class Tempest extends Zephyr implements Blighted {
 
                 if (this.getHideTime() == HIDE_ANIMATION_START) {
                     if (this.level() instanceof ServerLevel serverLevel) {
-                        serverLevel.broadcastEntityEvent(this, (byte) 61);
+                        serverLevel.broadcastEntityEvent(this, (byte) ATTACK_EVENT);
                     }
                 }
 
@@ -250,7 +255,7 @@ public class Tempest extends Zephyr implements Blighted {
                         this.tempest.playSound(this.tempest.getAmbientSound(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
 
                     } else if (this.tempest.getChargeTime() == 0) {
-                        this.tempest.level().broadcastEntityEvent(this.tempest, (byte) 62);
+                        this.tempest.level().broadcastEntityEvent(this.tempest, (byte) HIDE_EVENT);
 
                     } else if (this.tempest.getChargeTime() == 25) {
                         Vec3 look = this.tempest.getViewVector(1.0F);

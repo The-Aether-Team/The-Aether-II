@@ -119,6 +119,15 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
+    public void handleEntityEvent(byte id) {
+        if (id == EatAetherGrassGoal.EAT_START_EVENT) {
+            this.eatAnimationTick = 40;
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
+    @Override
     protected void customServerAiStep(ServerLevel level) {
         this.eatAnimationTick = this.eatBlockGoal.getEatAnimationTick();
         super.customServerAiStep(level);
@@ -422,15 +431,6 @@ public class Sheepuff extends AetherAnimal implements Shearable, IShearable {
             return (Mth.PI / 5.0F) + 0.21991149F * Mth.sin(f * 28.7F);
         } else {
             return this.eatAnimationTick > 0 ? (Mth.PI / 5.0F) : this.getXRot() * Mth.DEG_TO_RAD;
-        }
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 10) {
-            this.eatAnimationTick = 40;
-        } else {
-            super.handleEntityEvent(id);
         }
     }
 

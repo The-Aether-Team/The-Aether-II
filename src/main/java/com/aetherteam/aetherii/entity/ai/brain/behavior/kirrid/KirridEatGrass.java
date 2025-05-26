@@ -34,7 +34,7 @@ public class KirridEatGrass extends Behavior<Kirrid> {
     @Override
     protected void start(ServerLevel serverLevel, Kirrid owner, long gameEntity) {
         this.eatTick = 0;
-        serverLevel.broadcastEntityEvent(owner, (byte) 64);
+        serverLevel.broadcastEntityEvent(owner, (byte) Kirrid.EAT_START_EVENT);
     }
 
     @Override

@@ -68,6 +68,11 @@ import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
 public class Kirrid extends AetherAnimal implements Shearable, IShearable {
+    public static int JUMP_START_EVENT = 100;
+    public static int RAM_START_EVENT = 101;
+    public static int RAM_STOP_EVENT = 102;
+    public static int EAT_START_EVENT = 103;
+
     private static final EntityDataAccessor<Optional<KirridColor>> DATA_WOOL_COLOR_ID = SynchedEntityData.defineId(Kirrid.class, AetherIIDataSerializers.OPTIONAL_KIRRID_COLOR.get());
     private static final EntityDataAccessor<Boolean> DATA_HAS_PLATE_ID = SynchedEntityData.defineId(Kirrid.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_SHEARED_ID = SynchedEntityData.defineId(Kirrid.class, EntityDataSerializers.BOOLEAN);
@@ -167,6 +172,24 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
     }
 
     @Override
+    public void handleEntityEvent(byte id) {
+        if (id == JUMP_START_EVENT) {
+            this.spawnSprintParticle();
+            this.jumpAnimationState.start(this.tickCount);
+            this.jumpDuration = 10;
+            this.jumpTicks = 0;
+        } else if (id == RAM_START_EVENT) {
+            this.ramAnimationState.start(this.tickCount);
+        } else if (id == RAM_STOP_EVENT) {
+            this.ramAnimationState.stop();
+        } else if (id == EAT_START_EVENT) {
+            this.eatAnimationState.start(this.tickCount);
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
+    @Override
     public void tick() {
         super.tick();
         this.handleFallSpeed();
@@ -244,24 +267,6 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
         this.wasOnGround = this.onGround();
 
         super.customServerAiStep(serverLevel);
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 1) {
-            this.spawnSprintParticle();
-            this.jumpAnimationState.start(this.tickCount);
-            this.jumpDuration = 10;
-            this.jumpTicks = 0;
-        } else if (id == 61) {
-            this.ramAnimationState.start(this.tickCount);
-        } else if (id == 62) {
-            this.ramAnimationState.stop();
-        } else if (id == 64) {
-            this.eatAnimationState.start(this.tickCount);
-        } else {
-            super.handleEntityEvent(id);
-        }
     }
 
     @Override
@@ -362,7 +367,7 @@ public class Kirrid extends AetherAnimal implements Shearable, IShearable {
             }
         }
         if (!this.level().isClientSide()) {
-            this.level().broadcastEntityEvent(this, (byte) 1);
+            this.level().broadcastEntityEvent(this, (byte) JUMP_START_EVENT);
         }
     }
 

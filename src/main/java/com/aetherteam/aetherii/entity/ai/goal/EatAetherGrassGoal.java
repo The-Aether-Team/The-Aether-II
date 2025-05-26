@@ -19,6 +19,7 @@ import java.util.function.Predicate;
  * Changed checks for Grass Blocks to Aether Grass Blocks.
  */
 public class EatAetherGrassGoal extends Goal {
+    public static int EAT_START_EVENT = 10;
     private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.SHORT_GRASS);
     private final Mob mob;
     private int eatAnimationTick;
@@ -45,7 +46,7 @@ public class EatAetherGrassGoal extends Goal {
     @Override
     public void start() {
         this.eatAnimationTick = this.adjustedTickDelay(40);
-        this.mob.level().broadcastEntityEvent(this.mob, (byte) 10);
+        this.mob.level().broadcastEntityEvent(this.mob, (byte) EAT_START_EVENT);
         this.mob.getNavigation().stop();
     }
 
