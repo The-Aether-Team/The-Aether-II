@@ -123,20 +123,13 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
                 if (this.getHideTime() == HIDE_ANIMATION_START) {
                     if (this.level() instanceof ServerLevel serverLevel) {
                         serverLevel.broadcastEntityEvent(this, (byte) 65);
-                        this.removeAllGoals((goal) -> true);
                     }
                 }
 
                 if (this.getHideTime() >= HIDE_PARTICLE_START) {
-                    if (this.level() instanceof ServerLevel serverLevel) {
-                        for (int i = 0; i < Math.max(0, (this.getHideTime() - (HIDE_PARTICLE_START)) * 2); ++i) {
-                            BlockParticleOption blockParticles = new BlockParticleOption(ParticleTypes.BLOCK, this.getBlockStateOn());
-                            serverLevel.sendParticles(blockParticles,
-                                    this.getRandomX(1.0F), this.getY() + 0.25, this.getRandomZ(1.0F), 1,
-                                    0, 0, 0, this.getRandom().nextGaussian() * 0.02);
-                        }
-                    }
+                    this.spawnDigParticles();
                     this.stopInPlace();
+                    this.removeAllGoals((goal) -> true);
 
                     if (this.getHideTime() == HIDE_LENGTH) {
                         this.discard();
@@ -146,6 +139,17 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
             this.setHideTime(this.getHideTime() + 1);
         } else {
             this.setHideTime(0);
+        }
+    }
+
+    private void spawnDigParticles() {
+        if (this.level() instanceof ServerLevel serverLevel) {
+            for (int i = 0; i < Math.max(0, (this.getHideTime() - (HIDE_PARTICLE_START)) * 2); ++i) {
+                BlockParticleOption blockParticles = new BlockParticleOption(ParticleTypes.BLOCK, this.getBlockStateOn());
+                serverLevel.sendParticles(blockParticles,
+                        this.getRandomX(1.0F), this.getY() + 0.25, this.getRandomZ(1.0F), 1,
+                        0, 0, 0, this.getRandom().nextGaussian() * 0.02);
+            }
         }
     }
 
