@@ -318,7 +318,6 @@ public class Zephyr extends FlyingMob implements Enemy {
                     } else if (this.zephyr.getChargeTime() <= 0) {
                         this.zephyr.setBlow(false);
                     }
-
                 }
             }
         }
@@ -363,7 +362,6 @@ public class Zephyr extends FlyingMob implements Enemy {
                 double d1 = livingEntity.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
                 double d2 = livingEntity.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
                 this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.2);
-
             } else {
                 RandomSource random = this.zephyr.getRandom();
                 double d0 = this.zephyr.getX() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;

@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.entity.monster;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.entity.projectile.TempestThunderball;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -27,12 +28,15 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
-import java.util.function.Predicate;
 
-public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox to minimize particles during despawn
+public class Tempest extends Zephyr implements Blighted {
+    public static int HIDE_ANIMATION_START = 200;
+    public static int HIDE_ANIMATION_LENGTH = 95;
+    public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 35;
+    public static int HIDE_LENGTH = HIDE_ANIMATION_START + HIDE_ANIMATION_LENGTH;
+
     public static final EntityDataAccessor<Integer> DATA_ATTACK_CHARGE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DATA_HIDE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Boolean> DATA_SLEEPING_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.BOOLEAN);
 
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState hideAnimationState = new AnimationState();
@@ -44,9 +48,8 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
     }
 
     @Override
-    protected void registerGoals() { //todo sun flee behavior
-        this.goalSelector.addGoal(3, new Tempest.SleepGoal(this));
-        this.goalSelector.addGoal(5, new Tempest.ThunderballAttackGoal(this));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(3, new Tempest.ThunderballAttackGoal(this));
         this.goalSelector.addGoal(5, new Tempest.RandomFloatAroundGoal(this));
         this.goalSelector.addGoal(7, new Zephyr.ZephyrLookGoal(this));
 
@@ -63,7 +66,6 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
         super.defineSynchedData(builder);
         builder.define(DATA_ATTACK_CHARGE_ID, 0);
         builder.define(DATA_HIDE_ID, 0);
-        builder.define(DATA_SLEEPING_ID, false);
     }
 
     @Override
@@ -85,33 +87,44 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
         return level.getBlockState(pos.below()).is(AetherIITags.Blocks.AERCLOUDS) || level.getBlockState(pos.below()).is(AetherIIBlocks.AETHER_GRASS_BLOCK) || level.getBlockState(pos.below()).is(AetherIITags.Blocks.AETHER_UNDERGROUND_BLOCKS);
     }
 
-    private boolean isStormAercloud(Level level, BlockPos blockPos) {
-        return level.getBlockState(blockPos).is(AetherIIBlocks.STORM_AERCLOUD);
-    }
-
     @Override
     public void aiStep() {
         super.aiStep();
-        if ((Blighted.super.isUniformSunBurnTick(this) && !this.isStormAercloud(this.level(), this.blockPosition())) || this.getHideTime() >= 50) {
+        if (Blighted.super.inSunlight(this) || this.getHideTime() >= HIDE_ANIMATION_START) {
+            if (this.getHideTime() <= HIDE_LENGTH) {
+                Blighted.super.weaken(this, this.getRandom(), this.tickCount, 0.65F);
+
+                if (this.getHideTime() == HIDE_ANIMATION_START) {
+                    if (this.level() instanceof ServerLevel serverLevel) {
+                        serverLevel.broadcastEntityEvent(this, (byte) 61);
+                    }
+                }
+
+                if (this.getHideTime() >= HIDE_PARTICLE_START) {
+                    this.spawnShroudParticles();
+                    this.stopInPlace();
+                    this.removeAllGoals((goal) -> true);
+
+                    if (this.getHideTime() == HIDE_LENGTH) {
+                        this.discard();
+                    }
+                }
+            }
             this.setHideTime(this.getHideTime() + 1);
-            if (this.getHideTime() == 50) {
-                if (this.level() instanceof ServerLevel serverLevel) {
-                    serverLevel.broadcastEntityEvent(this, (byte) 61);
-                    this.removeAllGoals(Predicate.isEqual(Tempest.ThunderballAttackGoal.class));
-                    this.removeAllGoals(Predicate.isEqual(Tempest.RandomFloatAroundGoal.class));
-                }
-            }
-            if (this.getHideTime() <= 145) {
-                Blighted.super.burnEffects(this, this.random, this.tickCount, 0.85F);
-                if (this.getHideTime() > 65) {
-                    this.moveTo(this.getX(), this.getY() + 0.035, this.getZ());
-                }
-                if (this.getHideTime() == 145) {
-                    this.discard();
-                }
-            }
         } else {
             this.setHideTime(0);
+        }
+    }
+
+    private void spawnShroudParticles() {
+        if (this.tickCount % 3 == 0) {
+            if (this.level() instanceof ServerLevel serverLevel) {
+                for (int i = 0; i < Math.max(0, this.getHideTime() - HIDE_PARTICLE_START); ++i) {
+                    serverLevel.sendParticles(AetherIIParticleTypes.TEMPEST_SMOKE.get(),
+                            this.getRandomX(0.85F), this.getRandomY(), this.getRandomZ(0.85F), 1,
+                            0, 0, 0, this.getRandom().nextGaussian() * 0.02);
+                }
+            }
         }
     }
 
@@ -130,14 +143,6 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
         this.getEntityData().set(DATA_HIDE_ID, hideTime);
     }
 
-    public boolean isAsleep() {
-        return this.getEntityData().get(DATA_SLEEPING_ID);
-    }
-
-    public void setAsleep(boolean sleeping) {
-        this.getEntityData().set(DATA_SLEEPING_ID, sleeping);
-    }
-
     @Override
     public SoundEvent getAmbientSound() {
         return AetherIISoundEvents.ENTITY_TEMPEST_AMBIENT.get();
@@ -153,7 +158,7 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
         return AetherIISoundEvents.ENTITY_TEMPEST_DEATH.get();
     }
 
-    protected static class RandomFloatAroundGoal extends Goal {
+    public static class RandomFloatAroundGoal extends Goal {
         private final Tempest tempest;
 
         public RandomFloatAroundGoal(Tempest tempest) {
@@ -163,15 +168,19 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
 
         @Override
         public boolean canUse() {
-            MoveControl moveControl = this.tempest.getMoveControl();
-            if (!moveControl.hasWanted()) {
-                return true;
+            if (this.tempest.getHideTime() < Tempest.HIDE_ANIMATION_START) {
+                MoveControl moveControl = this.tempest.getMoveControl();
+                if (!moveControl.hasWanted()) {
+                    return true;
+                } else {
+                    double d0 = moveControl.getWantedX() - this.tempest.getX();
+                    double d1 = moveControl.getWantedY() - this.tempest.getY();
+                    double d2 = moveControl.getWantedZ() - this.tempest.getZ();
+                    double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+                    return d3 < 1.0 || d3 > 3600.0;
+                }
             } else {
-                double d0 = moveControl.getWantedX() - this.tempest.getX();
-                double d1 = moveControl.getWantedY() - this.tempest.getY();
-                double d2 = moveControl.getWantedZ() - this.tempest.getZ();
-                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                return d3 < 1.0 || d3 > 3600.0;
+                return false;
             }
         }
 
@@ -183,120 +192,81 @@ public class Tempest extends Zephyr implements Blighted {  //todo shrink hitbox 
         @Override
         public void start() {
             LivingEntity livingEntity = this.tempest.getTarget();
+            RandomSource random = this.tempest.getRandom();
+            double d0 = this.tempest.getX() + (random.nextFloat() * 2.0F - 1.0F) * 12.0F;
+            double d1 = this.tempest.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
+            double d2 = this.tempest.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 12.0F;
             if (livingEntity != null) {
-                RandomSource random = this.tempest.getRandom();
-                double d0 = livingEntity.getX() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
-                double d1 = livingEntity.getY() + random.nextFloat() * 3.0F;
-                double d2 = livingEntity.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
-                this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.6);
-            } else {
-                RandomSource random = this.tempest.getRandom();
-                double d0 = this.tempest.getX() + (random.nextFloat() * 2.0F - 1.0F) * 12.0F;
-                double d1 = this.tempest.getY() + (random.nextFloat() * 2.0F - 1.0F) * 4.0F;
-                double d2 = this.tempest.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 12.0F;
-                this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.6);
+                d0 = livingEntity.getX() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
+                d1 = livingEntity.getY() + random.nextFloat() * 3.0F;
+                d2 = livingEntity.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 8.0F;
+            } else if (this.tempest.level().isDay()) {
+                for (int i = 0; i < 10; ++i) {
+                    Vec3 vec3 = this.tempest.position();
+                    Vec3 target = vec3.add((random.nextFloat() * 2.0F - 1.0F) * 12.0F, (random.nextFloat() * 2.0F - 1.0F) * 4.0F, (random.nextFloat() * 2.0F - 1.0F) * 12.0F);
+                    if (!this.tempest.level().canSeeSky(BlockPos.containing(target))) {
+                        d0 = vec3.x();
+                        d1 = vec3.y();
+                        d2 = vec3.z();
+                        break;
+                    }
+                }
             }
+            this.tempest.getMoveControl().setWantedPosition(d0, d1, d2, 0.6);
         }
     }
 
-    static class ThunderballAttackGoal extends Goal {
+    public static class ThunderballAttackGoal extends Goal {
         private final Tempest tempest;
 
         public ThunderballAttackGoal(Tempest tempest) {
             this.tempest = tempest;
         }
 
-        /**
-         * Returns whether execution should begin. You can also read and cache
-         * any state necessary for execution in this method as well.
-         */
         @Override
         public boolean canUse() {
             return this.tempest.getTarget() != null;
         }
 
-        /**
-         * Execute a one shot task or start executing a continuous task
-         */
         @Override
         public void start() {
             this.tempest.setChargeTime(0);
         }
 
-        /**
-         * Reset the task's internal state. Called when this task is interrupted
-         * by another one
-         */
         @Override
         public void stop() {
             this.tempest.setChargeTime(0);
         }
 
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
         @Override
         public void tick() {
             LivingEntity target = this.tempest.getTarget();
-            if (target.distanceToSqr(this.tempest) < 40 * 40 && this.tempest.hasLineOfSight(target)) {
-                Level level = this.tempest.level();
-                this.tempest.setChargeTime(this.tempest.getChargeTime() + 1);
+            if (target != null) {
+                if (target.distanceToSqr(this.tempest) < 40 * 40 && this.tempest.hasLineOfSight(target)) {
+                    Level level = this.tempest.level();
+                    this.tempest.setChargeTime(this.tempest.getChargeTime() + 1);
 
-                if (this.tempest.getChargeTime() == 10) {
-                    this.tempest.playSound(this.tempest.getAmbientSound(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+                    if (this.tempest.getChargeTime() == 10 && this.tempest.getAmbientSound() != null) {
+                        this.tempest.playSound(this.tempest.getAmbientSound(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
 
-                } else if (this.tempest.getChargeTime() == 0) {
-                    this.tempest.level().broadcastEntityEvent(this.tempest, (byte) 62);
+                    } else if (this.tempest.getChargeTime() == 0) {
+                        this.tempest.level().broadcastEntityEvent(this.tempest, (byte) 62);
 
-                } else if (this.tempest.getChargeTime() == 25) {
-                    Vec3 look = this.tempest.getViewVector(1.0F);
-                    double accelX = target.getX() - (this.tempest.getX() + look.x * 4.0);
-                    double accelY = target.getY(0.5) - (0.5 + this.tempest.getY());
-                    double accelZ = target.getZ() - (this.tempest.getZ() + look.z * 4.0);
-                    this.tempest.playSound(AetherIISoundEvents.ENTITY_TEMPEST_SHOOT.get(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
-                    TempestThunderball thunderBall = new TempestThunderball(level, this.tempest, accelX, accelY, accelZ);
-                    thunderBall.setPos(this.tempest.getX() + look.x * 1.5, this.tempest.getY(), this.tempest.getZ() + look.z * 1.5);
-                    level.addFreshEntity(thunderBall);
-                    this.tempest.setChargeTime(-40);
+                    } else if (this.tempest.getChargeTime() == 25) {
+                        Vec3 look = this.tempest.getViewVector(1.0F);
+                        double accelX = target.getX() - (this.tempest.getX() + look.x * 4.0);
+                        double accelY = target.getY(0.5) - (0.5 + this.tempest.getY());
+                        double accelZ = target.getZ() - (this.tempest.getZ() + look.z * 4.0);
+                        this.tempest.playSound(AetherIISoundEvents.ENTITY_TEMPEST_SHOOT.get(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+                        TempestThunderball thunderBall = new TempestThunderball(level, this.tempest, accelX, accelY, accelZ);
+                        thunderBall.setPos(this.tempest.getX() + look.x * 1.5, this.tempest.getY(), this.tempest.getZ() + look.z * 1.5);
+                        level.addFreshEntity(thunderBall);
+                        this.tempest.setChargeTime(-40);
+                    }
+                } else if (this.tempest.getChargeTime() > 0) {
+                    this.tempest.setChargeTime(this.tempest.getChargeTime() - 1);
                 }
-            } else if (this.tempest.getChargeTime() > 0) {
-                this.tempest.setChargeTime(this.tempest.getChargeTime() - 1);
             }
-        }
-    }
-
-    class SleepGoal extends Goal {
-        private Tempest tempest;
-
-        public SleepGoal(Tempest tempest) {
-            this.tempest = tempest;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK, Goal.Flag.JUMP));
-        }
-
-        @Override
-        public boolean canUse() {
-            return tempest.xxa == 0.0F && tempest.yya == 0.0F && tempest.zza == 0.0F && (this.canSleep() || tempest.isAsleep());
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return this.canSleep();
-        }
-
-        private boolean canSleep() {
-            return tempest.level().isDay() && isStormAercloud(tempest.level(), tempest.getBlockPosBelowThatAffectsMyMovement());
-        }
-
-        @Override
-        public void stop() {
-            tempest.setAsleep(false);
-        }
-
-        @Override
-        public void start() {
-            tempest.setAsleep(true);
-            tempest.getNavigation().stop();
-            tempest.getMoveControl().setWantedPosition(tempest.getX(), tempest.getY(), tempest.getZ(), 0.0);
         }
     }
 }

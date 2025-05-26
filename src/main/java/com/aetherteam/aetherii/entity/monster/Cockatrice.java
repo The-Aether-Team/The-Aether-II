@@ -1,11 +1,14 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceMeleeAttackGoal;
 import com.aetherteam.aetherii.entity.ai.goal.CockatriceRangedAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -24,18 +27,23 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
-public class Cockatrice extends Monster implements RangedAttackMob, Blighted { //todo shrink hitbox to minimize particles during despawn
+public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
+    public static int HIDE_ANIMATION_START = 200; //todo values
+    public static int HIDE_ANIMATION_LENGTH = 50;
+    public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 5;
+    public static int HIDE_LENGTH = HIDE_ANIMATION_START + HIDE_ANIMATION_LENGTH;
+
     public static final EntityDataAccessor<Integer> DATA_HIDE_ID = SynchedEntityData.defineId(Cockatrice.class, EntityDataSerializers.INT);
 
+    //todo dig animation.
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState shootAnimationState = new AnimationState();
+    public AnimationState digAnimationState = new AnimationState();
     private int attackTick;
 
     public Cockatrice(EntityType<? extends Cockatrice> entityType, Level level) {
@@ -47,8 +55,8 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted { /
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
-        this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0));
-        this.goalSelector.addGoal(4, new CockatriceMeleeAttackGoal(this, 1.1F, true));
+        this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.5));
+        this.goalSelector.addGoal(4, new CockatriceMeleeAttackGoal(this, 1.5F, true));
         this.goalSelector.addGoal(5, new CockatriceRangedAttackGoal(this, 0.8F, 20 * 10, 20 * 15, 10.0F));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
@@ -81,8 +89,10 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted { /
         } else if (pId == 62) {
             this.shootAnimationState.start(this.tickCount);
             this.attackAnimationState.stop();
-        } else if (pId == 63) {
-            this.shootAnimationState.stop();
+        } else if (pId == 64) {
+            this.shootAnimationState.stop(); //todo unused?
+        } else if (pId == 65) {
+            this.digAnimationState.start(this.tickCount);
         } else {
             super.handleEntityEvent(pId);
         }
@@ -106,19 +116,34 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted { /
     @Override
     public void aiStep() {
         super.aiStep();
-        if (Blighted.super.isUniformSunBurnTick(this) || this.getHideTime() >= 50) {
+        if (Blighted.super.inSunlight(this) || this.getHideTime() >= HIDE_ANIMATION_START) {
+            if (this.getHideTime() <= HIDE_LENGTH) {
+                Blighted.super.weaken(this, this.getRandom(), this.tickCount, 0.65F);
+
+                if (this.getHideTime() == HIDE_ANIMATION_START) {
+                    if (this.level() instanceof ServerLevel serverLevel) {
+                        serverLevel.broadcastEntityEvent(this, (byte) 65);
+                        this.removeAllGoals((goal) -> true);
+                    }
+                }
+
+                if (this.getHideTime() >= HIDE_PARTICLE_START) {
+                    if (this.level() instanceof ServerLevel serverLevel) {
+                        for (int i = 0; i < Math.max(0, (this.getHideTime() - (HIDE_PARTICLE_START)) * 2); ++i) {
+                            BlockParticleOption blockParticles = new BlockParticleOption(ParticleTypes.BLOCK, this.getBlockStateOn());
+                            serverLevel.sendParticles(blockParticles,
+                                    this.getRandomX(1.0F), this.getY() + 0.25, this.getRandomZ(1.0F), 1,
+                                    0, 0, 0, this.getRandom().nextGaussian() * 0.02);
+                        }
+                    }
+                    this.stopInPlace();
+
+                    if (this.getHideTime() == HIDE_LENGTH) {
+                        this.discard();
+                    }
+                }
+            }
             this.setHideTime(this.getHideTime() + 1);
-            if (this.getHideTime() == 50) {
-                if (this.level() instanceof ServerLevel serverLevel) {
-                    //todo animation
-                }
-            }
-            if (this.getHideTime() <= 145) {
-                Blighted.super.burnEffects(this, this.random, this.tickCount, 1.5F);
-                if (this.getHideTime() == 145) {
-                    this.discard();
-                }
-            }
         } else {
             this.setHideTime(0);
         }

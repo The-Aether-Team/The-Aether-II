@@ -16,6 +16,7 @@ public class CockatriceModel extends EntityModel<CockatriceRenderState> {
     public static final AnimationHolder RUN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run"));
     public static final AnimationHolder DART_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dart_attack"));
     public static final AnimationHolder CLAW_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/claw_attack"));
+    public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dig"));
 
     private final ModelPart body;
     private final ModelPart body_front;
@@ -200,5 +201,6 @@ public class CockatriceModel extends EntityModel<CockatriceRenderState> {
         this.animateWalk(RUN_ANIMATION, f1, f, 1.0F, 1.5F);
         this.animate(entity.attackAnimationState, CLAW_ATTACK_ANIMATION, entity.ageInTicks, 2.0F);
         this.animate(entity.shootAnimationState, DART_ATTACK_ANIMATION, entity.ageInTicks, 1.0F);
+        this.animate(entity.digAnimationState, DIG_ANIMATION, entity.ageInTicks, 1.0F);
     }
 }

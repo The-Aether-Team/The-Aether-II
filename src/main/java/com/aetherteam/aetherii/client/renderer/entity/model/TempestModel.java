@@ -15,16 +15,8 @@ public class TempestModel extends EntityModel<TempestRenderState> {
 	public static final AnimationHolder ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/attack"));
 	public static final AnimationHolder DESPAWN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "tempest/despawn"));
 
-	private final ModelPart root;
-	private final ModelPart body;
-	private final ModelPart cloudShell;
-
-
 	public TempestModel(ModelPart root) {
 		super(root);
-		this.root = root;
-		this.body = root.getChild("body");
-		this.cloudShell = this.body.getChild("cloud_shell");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -121,7 +113,7 @@ public class TempestModel extends EntityModel<TempestRenderState> {
 		super.setupAnim(tempest);
 
 		this.animateWalk(FLY_ANIMATION, tempest.walkAnimationPos, tempest.walkAnimationSpeed, 2.0F, 2.0F);
-		this.animate(tempest.attackAnimationState, ATTACK_ANIMATION, tempest.ageInTicks, 1.0F);
-		this.animate(tempest.hideAnimationState, DESPAWN_ANIMATION, tempest.ageInTicks, 1.0F);
+		this.animate(tempest.attackAnimationState, ATTACK_ANIMATION, tempest.ageInTicks);
+		this.animate(tempest.hideAnimationState, DESPAWN_ANIMATION, tempest.ageInTicks);
 	}
 }

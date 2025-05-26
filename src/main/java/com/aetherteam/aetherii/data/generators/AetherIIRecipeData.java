@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-public class AetherIIRecipeData extends AetherIIRecipeProvider {
+public class AetherIIRecipeData extends AetherIIRecipeProvider { //todo fix some of these registered under minecraft data namespace path
     public AetherIIRecipeData(RecipeOutput output, HolderLookup.Provider provider) {
         super(output, provider, AetherII.MODID);
     }

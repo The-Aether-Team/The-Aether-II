@@ -6,5 +6,5 @@ import net.minecraft.world.entity.AnimationState;
 public class CockatriceRenderState extends LivingEntityRenderState {
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState shootAnimationState = new AnimationState();
-
+    public AnimationState digAnimationState = new AnimationState();
 }

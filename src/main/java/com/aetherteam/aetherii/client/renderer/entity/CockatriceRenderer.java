@@ -28,6 +28,7 @@ public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceRender
         super.extractRenderState(cockatrice, renderState, partialTick);
         renderState.attackAnimationState.copyFrom(cockatrice.attackAnimationState);
         renderState.shootAnimationState.copyFrom(cockatrice.shootAnimationState);
+        renderState.digAnimationState.copyFrom(cockatrice.digAnimationState);
     }
 
     @Override
