@@ -8,25 +8,19 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
     private int ticksUntilNextAttack;
     private boolean attack;
-    private final double speedModifier;
 
     public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
         super(mob, speedModifier, followingTargetEvenIfNotSeen);
-        this.speedModifier = speedModifier;
     }
 
     @Override
     public boolean canUse() {
-        if (super.canUse() && this.mob.distanceToSqr(this.mob.getTarget()) <= 3 * 3) {
-            return true;
-        }
-
-        return false;
+        return super.canUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) <= 3 * 3;
     }
 
     @Override
     public boolean canContinueToUse() {
-        return super.canContinueToUse() && this.mob.distanceToSqr(this.mob.getTarget()) < 10 * 10;
+        return super.canContinueToUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < 10 * 10;
     }
 
     @Override
@@ -34,11 +28,6 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
         super.start();
         this.ticksUntilNextAttack = 0;
         this.attack = false;
-    }
-
-    @Override
-    public void stop() {
-        super.stop();
     }
 
     @Override
@@ -68,7 +57,6 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
         }
     }
 
-
     @Override
     protected void resetAttackCooldown() {
         this.ticksUntilNextAttack = this.adjustedTickDelay(30);
@@ -83,5 +71,4 @@ public class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
     protected int getTicksUntilNextAttack() {
         return this.ticksUntilNextAttack;
     }
-
 }

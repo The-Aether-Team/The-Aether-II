@@ -26,7 +26,7 @@ public class CockatriceRangedAttackGoal extends Goal {
 
     public CockatriceRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackIntervalMin, int attackIntervalMax, float attackRadius) {
         if (!(rangedAttackMob instanceof LivingEntity)) {
-            throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
+            throw new IllegalArgumentException("CockatriceRangedAttackGoal requires Mob implements RangedAttackMob");
         } else {
             this.rangedAttackMob = rangedAttackMob;
             this.mob = (Mob) rangedAttackMob;
@@ -60,21 +60,14 @@ public class CockatriceRangedAttackGoal extends Goal {
     }
 
     @Override
-    public boolean requiresUpdateEveryTick() {
-        return true;
-    }
-
-    @Override
     public void tick() {
-        double d0 = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
-        boolean flag = this.mob.getSensing().hasLineOfSight(this.target);
+        double distance = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
+        boolean canSee = this.mob.getSensing().hasLineOfSight(this.target);
         this.mob.getNavigation().moveTo(this.target, this.speedModifier);
-
-
         this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
-        if (flag) {
 
-            float f = (float) Math.sqrt(d0) / this.attackRadius;
+        if (canSee) {
+            float f = (float) Math.sqrt(distance) / this.attackRadius;
             float f1 = Mth.clamp(f, 0.1F, 1.0F);
             if (++this.attackTime >= 0) {
                 if (this.attackTime == 0) {
@@ -91,8 +84,12 @@ public class CockatriceRangedAttackGoal extends Goal {
     }
 
     private boolean isTimeToAttack() {
-        int i = attackTime;
-
+        int i = this.attackTime;
         return i == Mth.floor(1.25 * 20F) || i == Mth.floor(1.85 * 20) || i == Mth.floor(2.42 * 20) || i == Mth.floor(2.67 * 20);
+    }
+
+    @Override
+    public boolean requiresUpdateEveryTick() {
+        return true;
     }
 }
