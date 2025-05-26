@@ -4,7 +4,6 @@ import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
-import com.aetherteam.aetherii.entity.ai.goal.PhygPanicGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -38,7 +37,7 @@ public class Phyg extends WingedAnimal {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PhygPanicGoal(this, 1.25));
+        this.goalSelector.addGoal(1, new Phyg.PhygPanicGoal(this, 1.25));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0));
         this.goalSelector.addGoal(4, new TemptGoal(this, 1.2, item -> item.is(AetherIITags.Items.PHYG_FOOD), false));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1));
@@ -147,5 +146,16 @@ public class Phyg extends WingedAnimal {
         }
         float f = Math.min(partialTick * multiplier, 1.0F);
         this.walkAnimation.update(f, 0.4F, this.isBaby() ? 3.0F : 1.0F);
+    }
+
+    protected static class PhygPanicGoal extends PanicGoal {
+        public PhygPanicGoal(Phyg phyg, double speed) {
+            super(phyg, speed);
+        }
+
+        @Override
+        protected boolean shouldPanic() {
+            return super.shouldPanic() || this.mob.getFirstPassenger() instanceof LivingEntity livingEntity && !livingEntity.isHolding(stack -> stack.is(AetherIITags.Items.PHYG_CALM_ITEMS));
+        }
     }
 }

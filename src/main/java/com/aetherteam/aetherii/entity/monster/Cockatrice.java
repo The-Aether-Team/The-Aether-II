@@ -1,10 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
-import com.aetherteam.aetherii.entity.ai.goal.CockatriceMeleeAttackGoal;
-import com.aetherteam.aetherii.entity.ai.goal.CockatriceRangedAttackGoal;
 import com.aetherteam.aetherii.entity.projectile.VenomousDart;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -14,6 +11,8 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -31,16 +30,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 
 public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
-    public static int HIDE_ANIMATION_START = 200; //todo values
+    public static int HIDE_ANIMATION_START = 200;
     public static int HIDE_ANIMATION_LENGTH = 50;
     public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 5;
     public static int HIDE_LENGTH = HIDE_ANIMATION_START + HIDE_ANIMATION_LENGTH;
 
     public static final EntityDataAccessor<Integer> DATA_HIDE_ID = SynchedEntityData.defineId(Cockatrice.class, EntityDataSerializers.INT);
 
-    //todo dig animation.
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState shootAnimationState = new AnimationState();
     public AnimationState digAnimationState = new AnimationState();
@@ -56,8 +55,8 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.5));
-        this.goalSelector.addGoal(4, new CockatriceMeleeAttackGoal(this, 1.5F, true));
-        this.goalSelector.addGoal(5, new CockatriceRangedAttackGoal(this, 0.8F, 20 * 10, 20 * 15, 10.0F));
+        this.goalSelector.addGoal(4, new Cockatrice.CockatriceMeleeAttackGoal(this, 1.5F, true));
+        this.goalSelector.addGoal(5, new Cockatrice.CockatriceRangedAttackGoal(this, 0.8F, 20 * 10, 20 * 15, 10.0F));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -202,4 +201,158 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(AetherIISoundEvents.ENTITY_COCKATRICE_STEP.get(), 0.15F, 1.0F);
     }
+
+    protected static class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
+        private int ticksUntilNextAttack;
+        private boolean attack;
+
+        public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
+            super(mob, speedModifier, followingTargetEvenIfNotSeen);
+        }
+
+        @Override
+        public boolean canUse() {
+            return super.canUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) <= 3 * 3;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return super.canContinueToUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < 10 * 10;
+        }
+
+        @Override
+        public void start() {
+            super.start();
+            this.ticksUntilNextAttack = 0;
+            this.attack = false;
+        }
+
+        @Override
+        protected void checkAndPerformAttack(LivingEntity target) {
+            if (!(this.mob.isWithinMeleeAttackRange(target) && this.mob.getSensing().hasLineOfSight(target)) && (!this.attack)) {
+                this.resetAttackCooldown();
+                this.attack = false;
+            } else {
+                this.attack = true;
+            }
+            if (this.attack && this.ticksUntilNextAttack == 30) {
+                this.mob.level().broadcastEntityEvent(this.mob, (byte) 61);
+            }
+
+            if (this.canPerformAttack(target)) {
+                this.mob.swing(InteractionHand.MAIN_HAND);
+                this.mob.doHurtTarget(getServerLevel(this.mob.level()), target);
+                this.mob.setZza(0.3F);
+            }
+
+            if (this.attack) {
+                --this.ticksUntilNextAttack;
+            }
+
+            if (this.ticksUntilNextAttack <= 0) {
+                this.attack = false;
+            }
+        }
+
+        @Override
+        protected void resetAttackCooldown() {
+            this.ticksUntilNextAttack = this.adjustedTickDelay(30);
+        }
+
+        @Override
+        protected boolean isTimeToAttack() {
+            return this.ticksUntilNextAttack == 10 + 3;
+        }
+
+        @Override
+        protected int getTicksUntilNextAttack() {
+            return this.ticksUntilNextAttack;
+        }
+    }
+
+    protected static class CockatriceRangedAttackGoal extends Goal {
+        private final Mob mob;
+        private final RangedAttackMob rangedAttackMob;
+        @Nullable
+        private LivingEntity target;
+        private int attackTime = -1;
+        private final double speedModifier;
+        private final int attackIntervalMin;
+        private final int attackIntervalMax;
+        private final float attackRadius;
+
+        public CockatriceRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackInterval, float attackRadius) {
+            this(rangedAttackMob, speedModifier, attackInterval, attackInterval, attackRadius);
+        }
+
+        public CockatriceRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackIntervalMin, int attackIntervalMax, float attackRadius) {
+            if (!(rangedAttackMob instanceof LivingEntity)) {
+                throw new IllegalArgumentException("CockatriceRangedAttackGoal requires Mob implements RangedAttackMob");
+            } else {
+                this.rangedAttackMob = rangedAttackMob;
+                this.mob = (Mob) rangedAttackMob;
+                this.speedModifier = speedModifier;
+                this.attackIntervalMin = attackIntervalMin;
+                this.attackIntervalMax = attackIntervalMax;
+                this.attackRadius = attackRadius;
+                this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+            }
+        }
+
+        @Override
+        public boolean canUse() {
+            LivingEntity livingentity = this.mob.getTarget();
+            if (livingentity != null && livingentity.isAlive()) {
+                this.target = livingentity;
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.canUse();
+        }
+
+        @Override
+        public void stop() {
+            this.target = null;
+            this.attackTime = -1;
+        }
+
+        @Override
+        public void tick() {
+            double distance = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
+            boolean canSee = this.mob.getSensing().hasLineOfSight(this.target);
+            this.mob.getNavigation().moveTo(this.target, this.speedModifier);
+            this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
+
+            if (canSee) {
+                float f = (float) Math.sqrt(distance) / this.attackRadius;
+                float f1 = Mth.clamp(f, 0.1F, 1.0F);
+                if (++this.attackTime >= 0) {
+                    if (this.attackTime == 0) {
+                        this.mob.level().broadcastEntityEvent(this.mob, (byte) 62);
+                    }
+                    if (this.isTimeToAttack()) {
+                        this.rangedAttackMob.performRangedAttack(this.target, f1);
+                    }
+                    if (this.attackTime == 20 * Mth.floor(3.375)) {
+                        this.attackTime = -Mth.floor(f * (float) (this.attackIntervalMax - this.attackIntervalMin) + (float) this.attackIntervalMin);
+                    }
+                }
+            }
+        }
+
+        private boolean isTimeToAttack() {
+            int i = this.attackTime;
+            return i == Mth.floor(1.25 * 20F) || i == Mth.floor(1.85 * 20) || i == Mth.floor(2.42 * 20) || i == Mth.floor(2.67 * 20);
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+    }
+
 }
