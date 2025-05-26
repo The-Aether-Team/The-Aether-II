@@ -24,10 +24,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.IShearable;
 import org.jetbrains.annotations.Nullable;
 
-public class Burrukai extends AetherAnimal implements IShearable {
+public class Burrukai extends AetherAnimal {
+    public static int RAM_START_EVENT = 100;
+    public static int RAM_STOP_EVENT = 101;
+
     protected static final ImmutableList<SensorType<? extends Sensor<? super Burrukai>>> SENSOR_TYPES = ImmutableList.of(
             SensorType.NEAREST_LIVING_ENTITIES,
             SensorType.NEAREST_PLAYERS,
@@ -58,7 +60,6 @@ public class Burrukai extends AetherAnimal implements IShearable {
     private final EntityType<? extends Burrukai> variantType;
 
     public AnimationState ramAnimationState = new AnimationState();
-    public AnimationState rushAnimationState = new AnimationState();
 
     public Burrukai(EntityType<? extends Burrukai> type, Level level) {
         super(type, level);
@@ -110,12 +111,10 @@ public class Burrukai extends AetherAnimal implements IShearable {
 
     @Override
     public void handleEntityEvent(byte id) {
-        if (id == 61) {
+        if (id == RAM_START_EVENT) {
             this.ramAnimationState.start(this.tickCount);
-        } else if (id == 62) {
+        } else if (id == RAM_STOP_EVENT) {
             this.ramAnimationState.stop();
-        } else if (id == 64) {
-            this.rushAnimationState.start(this.tickCount);
         } else {
             super.handleEntityEvent(id);
         }
@@ -130,7 +129,6 @@ public class Burrukai extends AetherAnimal implements IShearable {
             if (flag && source.getEntity() instanceof LivingEntity livingEntity) {
                 BurrukaiAi.maybeRetaliate(serverLevel, this, livingEntity);
             }
-
             return flag;
         }
     }

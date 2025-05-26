@@ -74,7 +74,7 @@ public class BurrukaiAnimation {
             ))
             .build();
 
-    public static final AnimationDefinition RUSH_START = AnimationDefinition.Builder.withLength(2.0F)
+    public static final AnimationDefinition RAM = AnimationDefinition.Builder.withLength(2.0F)
             .addAnimation("leg_front_right", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
                     new Keyframe(0.375F, KeyframeAnimations.degreeVec(-35.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),

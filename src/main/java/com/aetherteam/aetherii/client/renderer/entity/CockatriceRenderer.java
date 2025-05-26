@@ -26,8 +26,8 @@ public class CockatriceRenderer extends MobRenderer<Cockatrice, CockatriceRender
     @Override
     public void extractRenderState(Cockatrice cockatrice, CockatriceRenderState renderState, float partialTick) {
         super.extractRenderState(cockatrice, renderState, partialTick);
-        renderState.attackAnimationState.copyFrom(cockatrice.attackAnimationState);
-        renderState.shootAnimationState.copyFrom(cockatrice.shootAnimationState);
+        renderState.clawAttackAnimationState.copyFrom(cockatrice.clawAttackAnimationState);
+        renderState.dartAttackAnimationState.copyFrom(cockatrice.dartAttackAnimationState);
         renderState.digAnimationState.copyFrom(cockatrice.digAnimationState);
     }
 

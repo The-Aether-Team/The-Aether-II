@@ -47,7 +47,7 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
     @Override
     protected void start(ServerLevel serverLevel, Burrukai owner, long gameTime) {
         this.ramTick = 0;
-        serverLevel.broadcastEntityEvent(owner, (byte) 61);
+        serverLevel.broadcastEntityEvent(owner, (byte) Burrukai.RAM_START_EVENT);
         owner.getBrain().eraseMemory(MemoryModuleType.WALK_TARGET);
     }
 
@@ -72,13 +72,13 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
                 if (owner.distanceToSqr(ramTarget) < owner.getBbWidth() * owner.getBbWidth()) {
                     if (owner.doHurtTarget(serverLevel, ramTarget)) {
                         this.finishRam(serverLevel, owner);
-                        serverLevel.broadcastEntityEvent(owner, (byte) 61);
+                        serverLevel.broadcastEntityEvent(owner, (byte) Burrukai.RAM_START_EVENT);
                         serverLevel.playSound(null, owner, AetherIISoundEvents.ENTITY_BURRUKAI_RAM_IMPACT.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
                         ramTarget.getData(AetherIIDataAttachments.EFFECTS_SYSTEM).addBuildup(EffectBuildupPresets.STUN, 500);
                     }
                 } else if (this.blockPos.distSqr(owner.blockPosition()) < 5 || this.ramTick >= 100) {
                     this.finishRam(serverLevel, owner);
-                    serverLevel.broadcastEntityEvent(owner, (byte) 61);
+                    serverLevel.broadcastEntityEvent(owner, (byte) Burrukai.RAM_START_EVENT);
                 } else {
                     brain.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(this.blockPos, this.speed, 1));
                 }
@@ -90,7 +90,7 @@ public class BurrukaiRamAttack extends Behavior<Burrukai> {
     }
 
     protected void finishRam(ServerLevel serverLevel, Burrukai owner) {
-        serverLevel.broadcastEntityEvent(owner, (byte) 62);
+        serverLevel.broadcastEntityEvent(owner, (byte) Burrukai.RAM_STOP_EVENT);
         this.ramTick = 0;
         this.blockPos = null;
     }

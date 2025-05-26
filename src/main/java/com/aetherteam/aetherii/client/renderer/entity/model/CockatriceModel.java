@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
 import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class CockatriceModel extends EntityModel<CockatriceRenderState> {
-    public static final AnimationHolder RUN_START_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run_start"));
+    public static final AnimationHolder RUN_START_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run_start")); //todo
     public static final AnimationHolder RUN_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/run"));
     public static final AnimationHolder DART_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/dart_attack"));
     public static final AnimationHolder CLAW_ATTACK_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "cockatrice/claw_attack"));
@@ -199,8 +199,8 @@ public class CockatriceModel extends EntityModel<CockatriceRenderState> {
         this.head.xRot = (entity.xRot * Mth.DEG_TO_RAD) + 0.0873F;
         this.head.yRot = entity.yRot * Mth.DEG_TO_RAD;
         this.animateWalk(RUN_ANIMATION, f1, f, 1.0F, 1.5F);
-        this.animate(entity.attackAnimationState, CLAW_ATTACK_ANIMATION, entity.ageInTicks, 2.0F);
-        this.animate(entity.shootAnimationState, DART_ATTACK_ANIMATION, entity.ageInTicks, 1.0F);
+        this.animate(entity.clawAttackAnimationState, CLAW_ATTACK_ANIMATION, entity.ageInTicks, 2.0F);
+        this.animate(entity.dartAttackAnimationState, DART_ATTACK_ANIMATION, entity.ageInTicks, 1.0F);
         this.animate(entity.digAnimationState, DIG_ANIMATION, entity.ageInTicks, 1.0F);
     }
 }

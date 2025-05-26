@@ -37,13 +37,16 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     public static int HIDE_ANIMATION_LENGTH = 50;
     public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 5;
     public static int HIDE_LENGTH = HIDE_ANIMATION_START + HIDE_ANIMATION_LENGTH;
+    
+    public static int CLAW_ATTACK_EVENT = 100;
+    public static int DART_ATTACK_EVENT = 101;
+    public static int DIG_EVENT = 102;
 
     public static final EntityDataAccessor<Integer> DATA_HIDE_ID = SynchedEntityData.defineId(Cockatrice.class, EntityDataSerializers.INT);
 
-    public AnimationState attackAnimationState = new AnimationState();
-    public AnimationState shootAnimationState = new AnimationState();
+    public AnimationState clawAttackAnimationState = new AnimationState();
+    public AnimationState dartAttackAnimationState = new AnimationState();
     public AnimationState digAnimationState = new AnimationState();
-    private int attackTick;
 
     public Cockatrice(EntityType<? extends Cockatrice> entityType, Level level) {
         super(entityType, level);
@@ -80,35 +83,17 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     }
 
     @Override
-    public void handleEntityEvent(byte pId) {
-        if (pId == 61) {
-            this.attackAnimationState.start(this.tickCount);
-            this.attackTick = 0;
-            this.shootAnimationState.stop();
-        } else if (pId == 62) {
-            this.shootAnimationState.start(this.tickCount);
-            this.attackAnimationState.stop();
-        } else if (pId == 64) {
-            this.shootAnimationState.stop(); //todo unused?
-        } else if (pId == 65) {
+    public void handleEntityEvent(byte id) {
+        if (id == CLAW_ATTACK_EVENT) {
+            this.dartAttackAnimationState.stop();
+            this.clawAttackAnimationState.start(this.tickCount);
+        } else if (id == DART_ATTACK_EVENT) {
+            this.clawAttackAnimationState.stop();
+            this.dartAttackAnimationState.start(this.tickCount);
+        } else if (id == DIG_EVENT) {
             this.digAnimationState.start(this.tickCount);
         } else {
-            super.handleEntityEvent(pId);
-        }
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (this.level().isClientSide()) {
-            //handle the attack animation
-            if (this.attackAnimationState.isStarted()) {
-                if (this.attackTick >= 40) {
-                    this.attackAnimationState.stop();
-                } else {
-                    ++this.attackTick;
-                }
-            }
+            super.handleEntityEvent(id);
         }
     }
 
@@ -121,7 +106,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
 
                 if (this.getHideTime() == HIDE_ANIMATION_START) {
                     if (this.level() instanceof ServerLevel serverLevel) {
-                        serverLevel.broadcastEntityEvent(this, (byte) 65);
+                        serverLevel.broadcastEntityEvent(this, (byte) DIG_EVENT);
                     }
                 }
 
@@ -236,7 +221,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
                 this.attack = true;
             }
             if (this.attack && this.ticksUntilNextAttack == 30) {
-                this.mob.level().broadcastEntityEvent(this.mob, (byte) 61);
+                this.mob.level().broadcastEntityEvent(this.mob, (byte) CLAW_ATTACK_EVENT);
             }
 
             if (this.canPerformAttack(target)) {
@@ -332,7 +317,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
                 float f1 = Mth.clamp(f, 0.1F, 1.0F);
                 if (++this.attackTime >= 0) {
                     if (this.attackTime == 0) {
-                        this.mob.level().broadcastEntityEvent(this.mob, (byte) 62);
+                        this.mob.level().broadcastEntityEvent(this.mob, (byte) DART_ATTACK_EVENT);
                     }
                     if (this.isTimeToAttack()) {
                         this.rangedAttackMob.performRangedAttack(this.target, f1);
@@ -354,5 +339,4 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
             return true;
         }
     }
-
 }
