@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.GravititeDebrisShot;
 import com.aetherteam.aetherii.mixin.mixins.common.accessor.RangedAttackGoalAccessor;
 import net.minecraft.core.BlockPos;

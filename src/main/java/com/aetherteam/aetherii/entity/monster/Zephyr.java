@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.projectile.ZephyrWebbingBall;
 import net.minecraft.core.BlockPos;

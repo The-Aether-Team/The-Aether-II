@@ -1,9 +1,8 @@
 package com.aetherteam.aetherii.entity.passive;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.ai.brain.BurrukaiAi;
-import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Dynamic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -16,9 +15,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.sensing.Sensor;
-import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -29,33 +25,6 @@ import org.jetbrains.annotations.Nullable;
 public class Burrukai extends AetherAnimal {
     public static int RAM_START_EVENT = 100;
     public static int RAM_STOP_EVENT = 101;
-
-    protected static final ImmutableList<SensorType<? extends Sensor<? super Burrukai>>> SENSOR_TYPES = ImmutableList.of(
-            SensorType.NEAREST_LIVING_ENTITIES,
-            SensorType.NEAREST_PLAYERS,
-            SensorType.NEAREST_ITEMS,
-            SensorType.NEAREST_ADULT,
-            SensorType.HURT_BY
-    );
-    protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
-            MemoryModuleType.LOOK_TARGET,
-            MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
-            MemoryModuleType.WALK_TARGET,
-            MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
-            MemoryModuleType.PATH,
-            MemoryModuleType.ATE_RECENTLY,
-            MemoryModuleType.BREED_TARGET,
-            MemoryModuleType.TEMPTING_PLAYER,
-            MemoryModuleType.NEAREST_VISIBLE_ADULT,
-            MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
-            MemoryModuleType.IS_TEMPTED,
-            MemoryModuleType.IS_PANICKING,
-            MemoryModuleType.ATTACK_TARGET,
-            MemoryModuleType.ATTACK_COOLING_DOWN,
-            MemoryModuleType.ANGRY_AT,
-            MemoryModuleType.HURT_BY,
-            MemoryModuleType.HURT_BY_ENTITY
-    );
 
     private final EntityType<? extends Burrukai> variantType;
 
@@ -83,7 +52,7 @@ public class Burrukai extends AetherAnimal {
 
     @Override
     protected Brain.Provider<Burrukai> brainProvider() {
-        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
+        return Brain.provider(BurrukaiAi.MEMORY_TYPES, BurrukaiAi.SENSOR_TYPES);
     }
 
     @Override
@@ -101,7 +70,7 @@ public class Burrukai extends AetherAnimal {
         ProfilerFiller profiler = Profiler.get();
 
         profiler.push("burrukaiBrain");
-        this.getBrain().tick((ServerLevel) this.level(), this);
+        this.getBrain().tick(serverLevel, this);
         profiler.pop();
 
         profiler.push("burrukaiActivityUpdate");

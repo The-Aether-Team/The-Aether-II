@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.data.generators;
 
 import com.aetherteam.aetherii.AetherII;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
@@ -502,6 +502,35 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
                         sound("minecraft:mob/pig/step4"),
                         sound("minecraft:mob/pig/step5")
                 ).subtitle("subtitles.block.generic.footsteps")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TAEGORE_SEARCHING,
+                definition().with(
+                        sound("minecraft:mob/sniffer/searching1").volume(0.8F),
+                        sound("minecraft:mob/sniffer/searching2").volume(0.8F),
+                        sound("minecraft:mob/sniffer/searching3").volume(0.8F),
+                        sound("minecraft:mob/sniffer/searching4").volume(0.8F),
+                        sound("minecraft:mob/sniffer/searching5").volume(0.8F),
+                        sound("minecraft:mob/sniffer/searching6").volume(0.8F)
+                ).subtitle("subtitles.aether_ii.entity.taegore.searching")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TAEGORE_DIGGING,
+                definition().with(
+                        sound("minecraft:mob/sniffer/longdig1"),
+                        sound("minecraft:mob/sniffer/longdig2")
+                ).subtitle("subtitles.aether_ii.entity.taegore.digging")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TAEGORE_DIGGING_STOP,
+                definition().with(
+                        sound("minecraft:mob/sniffer/digging_stop1"),
+                        sound("minecraft:mob/sniffer/digging_stop2")
+                ).subtitle("subtitles.aether_ii.entity.taegore.digging_stop")
+        );
+        this.add(AetherIISoundEvents.ENTITY_TAEGORE_DROP_SEED,
+                definition().with(
+                        sound("minecraft:random/pop").pitch(0.6F).volume(0.8F),
+                        sound("minecraft:random/pop").pitch(0.7F).volume(0.8F),
+                        sound("minecraft:random/pop").pitch(0.8F).volume(0.8F)
+                ).subtitle("subtitles.aether_ii.entity.taegore.drop_seed")
         );
 
         this.add(AetherIISoundEvents.ENTITY_BURRUKAI_AMBIENT,

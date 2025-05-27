@@ -1,4 +1,4 @@
-package com.aetherteam.aetherii.client;
+package com.aetherteam.aetherii.client.sound;
 
 import com.aetherteam.aetherii.AetherII;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class AetherIISoundEvents { //TODO blocksound categories?
+public class AetherIISoundEvents {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, AetherII.MODID);
 
     // Blocks
@@ -102,6 +102,10 @@ public class AetherIISoundEvents { //TODO blocksound categories?
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_DEATH = register("entity.taegore.death");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_HURT = register("entity.taegore.hurt");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_STEP = register("entity.taegore.step");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_SEARCHING = register("entity.taegore.searching");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_DIGGING = register("entity.taegore.digging");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_DIGGING_STOP = register("entity.taegore.digging_stop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_TAEGORE_DROP_SEED = register("entity.taegore.drop_seed");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_AMBIENT = register("entity.burrukai.ambient");
     public static final DeferredHolder<SoundEvent, SoundEvent> ENTITY_BURRUKAI_DEATH = register("entity.burrukai.death");

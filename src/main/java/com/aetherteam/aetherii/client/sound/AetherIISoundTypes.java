@@ -1,6 +1,5 @@
-package com.aetherteam.aetherii.client;
+package com.aetherteam.aetherii.client.sound;
 
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 

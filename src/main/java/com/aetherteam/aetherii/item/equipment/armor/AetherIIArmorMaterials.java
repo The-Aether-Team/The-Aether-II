@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.item.equipment.armor;
 
 import com.aetherteam.aetherii.AetherIITags;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.data.resources.registries.AetherIIEquipmentAssets;
 import net.minecraft.Util;
 import net.minecraft.world.item.equipment.ArmorMaterial;

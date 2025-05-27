@@ -1,7 +1,7 @@
 package com.aetherteam.aetherii.entity.ai.brain.behavior.burrukai;
 
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.passive.Burrukai;
 import com.google.common.collect.ImmutableMap;

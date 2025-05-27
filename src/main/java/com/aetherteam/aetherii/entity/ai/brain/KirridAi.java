@@ -1,11 +1,12 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.*;
+import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.entity.ai.brain.behavior.FallRandomStroll;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.kirrid.KirridEatGrass;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.kirrid.KirridPanic;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.kirrid.KirridRamOther;
-import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
+import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
+import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.passive.Kirrid;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -16,9 +17,39 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.function.Predicate;
 
 public class KirridAi {
+    public static final ImmutableList<SensorType<? extends Sensor<? super Kirrid>>> SENSOR_TYPES = ImmutableList.of(
+            SensorType.NEAREST_LIVING_ENTITIES,
+            SensorType.NEAREST_PLAYERS,
+            SensorType.NEAREST_ITEMS,
+            SensorType.NEAREST_ADULT,
+            SensorType.HURT_BY,
+            AetherIISensorTypes.KIRRID_TEMPTATIONS.get()
+    );
+    public static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
+            MemoryModuleType.LOOK_TARGET,
+            MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
+            MemoryModuleType.WALK_TARGET,
+            MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
+            MemoryModuleType.PATH,
+            MemoryModuleType.ATE_RECENTLY,
+            MemoryModuleType.BREED_TARGET,
+            MemoryModuleType.TEMPTING_PLAYER,
+            MemoryModuleType.NEAREST_VISIBLE_ADULT,
+            MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
+            MemoryModuleType.IS_TEMPTED,
+            MemoryModuleType.RAM_COOLDOWN_TICKS,
+            AetherIIMemoryModuleTypes.KIRRID_BATTLE_TARGET.get(),
+            AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(),
+            MemoryModuleType.IS_PANICKING
+    );
     public static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
     public static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 2400);
     public static final UniformInt TIME_BETWEEN_EAT = UniformInt.of(600, 1200);
@@ -45,7 +76,6 @@ public class KirridAi {
                 new KirridPanic(2.0F),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
-                new AfterLongJumpFalling(AetherIISoundEvents.ENTITY_KIRRID_STEP),
                 new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
                 new CountDownCooldownTicks(MemoryModuleType.RAM_COOLDOWN_TICKS),
                 new CountDownCooldownTicks(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get())
@@ -68,10 +98,14 @@ public class KirridAi {
         ));
     }
 
-    public static void updateActivity(Kirrid brain) {
-        brain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
+    public static void updateActivity(Kirrid owner) {
+        owner.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
                 Activity.RAM,
                 Activity.IDLE
         ));
+    }
+
+    public static Predicate<ItemStack> getTemptations() {
+        return (stack) -> stack.is(AetherIITags.Items.KIRRID_FOOD);
     }
 }

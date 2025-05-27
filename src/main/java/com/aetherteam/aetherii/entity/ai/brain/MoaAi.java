@@ -3,7 +3,7 @@ package com.aetherteam.aetherii.entity.ai.brain;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.BabyOnlyAnimalPanic;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.BetterStrollToPoi;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.FallRandomStroll;
-import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
+import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.Moa;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;

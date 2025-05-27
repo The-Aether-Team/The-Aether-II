@@ -1,10 +1,9 @@
 package com.aetherteam.aetherii.entity.ai.brain;
 
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
-import com.aetherteam.aetherii.entity.ai.brain.behavior.AfterLongJumpFalling;
+import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.NeutralAnimalPanic;
 import com.aetherteam.aetherii.entity.ai.brain.behavior.burrukai.BurrukaiRamAttack;
-import com.aetherteam.aetherii.entity.ai.memory.AetherIIMemoryModuleTypes;
+import com.aetherteam.aetherii.entity.ai.brain.sensor.AetherIISensorTypes;
 import com.aetherteam.aetherii.entity.passive.Burrukai;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -18,19 +17,47 @@ import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class BurrukaiAi {
+    public static final ImmutableList<SensorType<? extends Sensor<? super Burrukai>>> SENSOR_TYPES = ImmutableList.of(
+            SensorType.NEAREST_LIVING_ENTITIES,
+            SensorType.NEAREST_PLAYERS,
+            SensorType.NEAREST_ITEMS,
+            SensorType.NEAREST_ADULT,
+            SensorType.HURT_BY,
+            AetherIISensorTypes.BURRUKAI_TEMPTATIONS.get()
+    );
+    public static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
+            MemoryModuleType.LOOK_TARGET,
+            MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
+            MemoryModuleType.WALK_TARGET,
+            MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
+            MemoryModuleType.PATH,
+            MemoryModuleType.ATE_RECENTLY,
+            MemoryModuleType.BREED_TARGET,
+            MemoryModuleType.TEMPTING_PLAYER,
+            MemoryModuleType.NEAREST_VISIBLE_ADULT,
+            MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
+            MemoryModuleType.IS_TEMPTED,
+            MemoryModuleType.IS_PANICKING,
+            MemoryModuleType.ATTACK_TARGET,
+            MemoryModuleType.ATTACK_COOLING_DOWN,
+            MemoryModuleType.ANGRY_AT,
+            MemoryModuleType.HURT_BY,
+            MemoryModuleType.HURT_BY_ENTITY
+    );
     public static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
     public static final UniformInt TIME_BETWEEN_RAMS = UniformInt.of(600, 2400);
-    public static final UniformInt TIME_BETWEEN_EAT = UniformInt.of(600, 1200);
 
     public static void initMemories(Burrukai burrukai, RandomSource random) {
         burrukai.getBrain().setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, TIME_BETWEEN_RAMS.sample(random));
-        burrukai.getBrain().setMemory(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get(), TIME_BETWEEN_EAT.sample(random));
     }
 
     public static Brain<?> makeBrain(EntityType<? extends Burrukai> entityType, Burrukai burrukai, Brain<Burrukai> brain) {
@@ -51,9 +78,7 @@ public class BurrukaiAi {
                 new NeutralAnimalPanic<>(1.25F),
                 new LookAtTargetSink(45, 90),
                 new MoveToTargetSink(),
-                new AfterLongJumpFalling(AetherIISoundEvents.ENTITY_BURRUKAI_STEP),
-                new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                new CountDownCooldownTicks(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get())
+                new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS)
         ));
     }
 
@@ -96,8 +121,8 @@ public class BurrukaiAi {
         return Optional.empty();
     }
 
-    public static void updateActivity(Burrukai brain) {
-        brain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
+    public static void updateActivity(Burrukai owner) {
+        owner.getBrain().setActiveActivityToFirstValid(ImmutableList.of(
                 Activity.FIGHT,
                 Activity.IDLE
         ));
@@ -122,5 +147,9 @@ public class BurrukaiAi {
                 burrukai.getBrain().setMemoryWithExpiry(MemoryModuleType.UNIVERSAL_ANGER, true, 600L);
             }
         }
+    }
+
+    public static Predicate<ItemStack> getTemptations() {
+        return (stack) -> stack.is(AetherIITags.Items.BURRUKAI_FOOD);
     }
 }

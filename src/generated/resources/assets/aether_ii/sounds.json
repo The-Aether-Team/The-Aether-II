@@ -1031,6 +1031,40 @@
     ],
     "subtitle": "subtitles.aether_ii.entity.taegore.death"
   },
+  "entity.taegore.digging": {
+    "sounds": [
+      "mob/sniffer/longdig1",
+      "mob/sniffer/longdig2"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.taegore.digging"
+  },
+  "entity.taegore.digging_stop": {
+    "sounds": [
+      "mob/sniffer/digging_stop1",
+      "mob/sniffer/digging_stop2"
+    ],
+    "subtitle": "subtitles.aether_ii.entity.taegore.digging_stop"
+  },
+  "entity.taegore.drop_seed": {
+    "sounds": [
+      {
+        "name": "random/pop",
+        "pitch": 0.6,
+        "volume": 0.8
+      },
+      {
+        "name": "random/pop",
+        "pitch": 0.7,
+        "volume": 0.8
+      },
+      {
+        "name": "random/pop",
+        "pitch": 0.8,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.taegore.drop_seed"
+  },
   "entity.taegore.hurt": {
     "sounds": [
       {
@@ -1047,6 +1081,35 @@
       }
     ],
     "subtitle": "subtitles.aether_ii.entity.taegore.hurt"
+  },
+  "entity.taegore.searching": {
+    "sounds": [
+      {
+        "name": "mob/sniffer/searching1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/sniffer/searching2",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/sniffer/searching3",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/sniffer/searching4",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/sniffer/searching5",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/sniffer/searching6",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.aether_ii.entity.taegore.searching"
   },
   "entity.taegore.step": {
     "sounds": [

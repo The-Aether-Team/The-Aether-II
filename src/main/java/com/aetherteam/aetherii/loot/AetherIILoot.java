@@ -49,6 +49,9 @@ public class AetherIILoot {
     public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_HUNTER = register("chests/camp_highfields_hunter");
     public static final ResourceKey<LootTable> CHESTS_CAMP_HIGHFIELDS_FLETCHER = register("chests/camp_highfields_fletcher");
 
+    // Gift
+    public static final ResourceKey<LootTable> TAEGORE_DIGGING = register("gameplay/taegore_digging");
+
     // Stripping
     public static final ResourceKey<LootTable> STRIP_MOSSY_WISPROOT = register("stripping/strip_mossy_wisproot");
     public static final ResourceKey<LootTable> STRIP_MOSSY_WISPROOT_END = register("stripping/strip_mossy_wisproot_end");

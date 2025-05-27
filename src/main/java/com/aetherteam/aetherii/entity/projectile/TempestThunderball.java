@@ -1,6 +1,6 @@
 package com.aetherteam.aetherii.entity.projectile;
 
-import com.aetherteam.aetherii.client.AetherIISoundEvents;
+import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ElectricField;
 import net.minecraft.core.BlockPos;

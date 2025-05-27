@@ -1,13 +1,19 @@
 package com.aetherteam.aetherii.client.renderer.entity.model.taegore;
 
+import com.aetherteam.aetherii.AetherII;
+import com.aetherteam.aetherii.client.renderer.entity.state.TaegoreRenderState;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
-public class TaegoreModel extends EntityModel<LivingEntityRenderState> {
+public class TaegoreModel extends EntityModel<TaegoreRenderState> {
+	public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "taegore/dig"));
+
 	private final ModelPart body_main;
 	private final ModelPart head_main;
 	private final ModelPart head_lower;
@@ -134,7 +140,7 @@ public class TaegoreModel extends EntityModel<LivingEntityRenderState> {
 	}
 
 	@Override
-    public void setupAnim(LivingEntityRenderState entity) {
+    public void setupAnim(TaegoreRenderState entity) {
         super.setupAnim(entity);
         this.head_main.xRot = entity.xRot * Mth.DEG_TO_RAD;
         this.head_main.yRot = entity.yRot * Mth.DEG_TO_RAD;
@@ -142,5 +148,6 @@ public class TaegoreModel extends EntityModel<LivingEntityRenderState> {
         this.leg_rear_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
         this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
         this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
+		this.animate(entity.digAnimationState, DIG_ANIMATION, entity.ageInTicks, 1.5F);
 	}
 }

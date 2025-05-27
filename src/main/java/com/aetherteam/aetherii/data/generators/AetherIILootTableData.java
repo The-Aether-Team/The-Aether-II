@@ -18,6 +18,7 @@ public class AetherIILootTableData {
                 new LootTableProvider.SubProviderEntry(AetherIIEntityLoot::new, LootContextParamSets.ENTITY),
                 new LootTableProvider.SubProviderEntry(AetherIIChestLoot::new, LootContextParamSets.CHEST),
                 new LootTableProvider.SubProviderEntry(AetherIIShearingLoot::new, LootContextParamSets.SHEARING),
+                new LootTableProvider.SubProviderEntry(AetherIIGiftLoot::new, LootContextParamSets.GIFT),
                 new LootTableProvider.SubProviderEntry(AetherIIStrippingLoot::new, AetherIILootContexts.STRIPPING)
         ), registries);
     }
