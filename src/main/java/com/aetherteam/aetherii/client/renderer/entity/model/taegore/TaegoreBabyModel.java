@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.util.Mth;
 
 public class TaegoreBabyModel extends EntityModel<TaegoreRenderState> {
-    ;
 	private final ModelPart body_main;
 	private final ModelPart tail;
 	private final ModelPart plate_f_l;

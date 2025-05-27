@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.client.renderer.entity;
 
-
 import com.aetherteam.aetherii.client.renderer.BiomeVariantPresets;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreBabyModel;
 import com.aetherteam.aetherii.client.renderer.entity.model.taegore.TaegoreModel;
