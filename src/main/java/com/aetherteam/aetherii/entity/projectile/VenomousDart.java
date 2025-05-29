@@ -3,6 +3,7 @@ package com.aetherteam.aetherii.entity.projectile;
 import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.effect.buildup.EffectBuildupPresets;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
+import com.aetherteam.aetherii.mixin.mixins.common.accessor.AbstractArrowAccessor;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -24,6 +25,14 @@ public class VenomousDart extends AbstractArrow {
     public VenomousDart(LivingEntity owner, Level level) {
         super(AetherIIEntityTypes.VENOMOUS_DART.get(), owner, level, new ItemStack(Items.ARROW), null);
         this.pickup = Pickup.DISALLOWED;
+    }
+
+    @Override
+    protected void tickDespawn() {
+        ((AbstractArrowAccessor) this).aether$setLife(((AbstractArrowAccessor) this).aether$getLife() + 1);
+        if (((AbstractArrowAccessor) this).aether$getLife() >= 300) {
+            this.discard();
+        }
     }
 
     /**
