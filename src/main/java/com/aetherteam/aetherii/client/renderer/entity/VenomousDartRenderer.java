@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.state.ArrowRenderState;
 import net.minecraft.resources.ResourceLocation;
 
 public class VenomousDartRenderer extends ArrowRenderer<VenomousDart, ArrowRenderState> {
-    private static final ResourceLocation VENOMOUS_DART_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/toxic_dart.png");  //todo
+    private static final ResourceLocation VENOMOUS_DART_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/projectile/venomous_dart.png");  //todo
 
     public VenomousDartRenderer(EntityRendererProvider.Context context) {
         super(context);
