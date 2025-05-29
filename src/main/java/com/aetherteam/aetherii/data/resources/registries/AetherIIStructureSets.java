@@ -33,7 +33,7 @@ public class AetherIIStructureSets {
         HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
         context.register(SURFACE_DUNGEONS, new StructureSet(structures.getOrThrow(AetherIIStructures.INFECTED_GUARDIAN_TREE),
-                new RandomSpreadStructurePlacement(24, 10, RandomSpreadType.LINEAR, 897773)));
+                new RandomSpreadStructurePlacement(26, 12, RandomSpreadType.LINEAR, 897773)));
 
         Holder.Reference<StructureSet> outposts = context.register(OUTPOSTS, new StructureSet(structures.getOrThrow(AetherIIStructures.OUTPOST),
                 new RandomSpreadStructurePlacement(26, 16, RandomSpreadType.LINEAR, 2738116)));

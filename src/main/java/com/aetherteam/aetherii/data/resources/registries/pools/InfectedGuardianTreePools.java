@@ -209,7 +209,7 @@ public class InfectedGuardianTreePools {
                 templatePools.getOrThrow(DEAD_END_CORRIDOR),
                 ImmutableList.of(
                         Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_01", processorDungeon), 2),
-                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_02", processorDungeon), 3)
+                        Pair.of(AetherIIPools.aetherPoolUnderground("infected_guardian_tree/corridors/side/corridor_02", processorDungeon), 1)
                 ),
                 StructureTemplatePool.Projection.RIGID)
         );
