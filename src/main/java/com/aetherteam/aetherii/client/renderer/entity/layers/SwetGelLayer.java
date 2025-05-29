@@ -17,23 +17,17 @@ public class SwetGelLayer extends RenderLayer<SwetRenderState, SwetModel<SwetRen
 
     public SwetGelLayer(RenderLayerParent<SwetRenderState, SwetModel<SwetRenderState>> renderer, EntityModelSet modelSet) {
         super(renderer);
-        this.model = new SwetModel<>(modelSet.bakeLayer(AetherIIModelLayers.SWET));
+        this.model = new SwetModel<>(modelSet.bakeLayer(AetherIIModelLayers.SWET), true);
     }
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, SwetRenderState livingEntity, float netHeadYaw, float headPitch) {
         boolean flag = livingEntity.appearsGlowing && livingEntity.isInvisible;
         if (!livingEntity.isInvisible || flag) {
-            VertexConsumer vertexconsumer;
-            if (flag) {
-                vertexconsumer = bufferSource.getBuffer(RenderType.outline(livingEntity.texture));
-            } else {
-                vertexconsumer = bufferSource.getBuffer(RenderType.entityTranslucent(livingEntity.texture));
-            }
+            VertexConsumer vertexconsumer = flag
+                    ? bufferSource.getBuffer(RenderType.outline(livingEntity.texture))
+                    : bufferSource.getBuffer(RenderType.entityTranslucent(livingEntity.texture));
             this.model.setupAnim(livingEntity);
-            this.model.head.visible = false;
-            this.model.gel.visible = true;
-            this.model.squish.visible = true;
             this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, LivingEntityRenderer.getOverlayCoords(livingEntity, 0.0F));
         }
     }

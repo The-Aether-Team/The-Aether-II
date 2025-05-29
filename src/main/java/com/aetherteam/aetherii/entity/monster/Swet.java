@@ -26,7 +26,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
@@ -40,21 +39,21 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.Optional;
 
-public class Swet extends Monster implements Enemy { //todo hitbox scaling and more hunger siphoning
+public class Swet extends Monster {
+    public static int JUMP_EVENT = 100;
+    public static int LAND_EVENT = 101;
+    public static int DISSOLVE_EVENT = 102;
+
     private static final EntityDataAccessor<Holder<SwetVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(Swet.class, AetherIIDataSerializers.SWET_VARIANT.get());
     private static final EntityDataAccessor<Boolean> DATA_MID_JUMP_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Float> DATA_WATER_DAMAGE_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> DATA_WATER_DAMAGE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Float> DATA_FOOD_SATURATION_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
-
-    private boolean wasOnGround;
-    private int jumpTimer;
-    private float swetHeight = 1.0F;
-    private float swetHeightO = 1.0F;
-    private float swetWidth = 1.0F;
-    private float swetWidthO = 1.0F;
+    private static final EntityDataAccessor<Float> DATA_SWET_SCALE_ID = SynchedEntityData.defineId(Swet.class, EntityDataSerializers.FLOAT);
 
     public AnimationState jumpAnimationState = new AnimationState();
     public AnimationState groundAnimationState = new AnimationState();
+
+    private boolean wasOnGround;
 
     public Swet(EntityType<? extends Swet> type, Level level) {
         super(type, level);
@@ -67,7 +66,7 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
         this.goalSelector.addGoal(1, new HuntGoal(this));
         this.goalSelector.addGoal(2, new SwetRandomDirectionGoal(this));
         this.goalSelector.addGoal(4, new SwetKeepOnJumpingGoal(this));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true, (target, level) -> target instanceof Player player && this.canLatch(player)));
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -82,21 +81,9 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
         super.defineSynchedData(builder);
         builder.define(DATA_VARIANT_ID, this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).getOrThrow(AetherIISwetVariants.BLUE));
         builder.define(DATA_MID_JUMP_ID, false);
-        builder.define(DATA_WATER_DAMAGE_SCALE_ID, 0.0F);
+        builder.define(DATA_WATER_DAMAGE_ID, 0.0F);
         builder.define(DATA_FOOD_SATURATION_ID, 1.0F);
-    }
-
-    /**
-     * Refreshes the Swet's bounding box dimensions.
-     *
-     * @param dataAccessor The {@link EntityDataAccessor} for the entity.
-     */
-    @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> dataAccessor) {
-        if (DATA_WATER_DAMAGE_SCALE_ID.equals(dataAccessor)) {
-            this.refreshDimensions();
-        }
-        super.onSyncedDataUpdated(dataAccessor);
+        builder.define(DATA_SWET_SCALE_ID, 0.95F);
     }
 
     @Nullable
@@ -114,6 +101,29 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
         return spawnData;
     }
 
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == JUMP_EVENT) {
+            this.spawnSprintParticle();
+            this.groundAnimationState.stop();
+            this.jumpAnimationState.start(this.tickCount);
+        } else if (id == LAND_EVENT) {
+            this.jumpAnimationState.stop();
+            this.groundAnimationState.start(this.tickCount);
+        } else if (id == DISSOLVE_EVENT) {
+            for (int i = 0; i < 10; i++) {
+                double f = this.getRandom().nextFloat() * Mth.TWO_PI;
+                double f1 = this.getRandom().nextFloat() * this.getDimensions(this.getPose()).width() + 0.25F;
+                double f2 = (this.getRandom().nextFloat() * this.getDimensions(this.getPose()).height()) - (this.getRandom().nextGaussian() * 0.02 * 10.0);
+                double f3 = Mth.sin((float) f) * f1;
+                double f4 = Mth.cos((float) f) * f1;
+                this.level().addParticle(ParticleTypes.SPLASH, this.getX() + f3, this.getY() + f2, this.getZ() + f4, f3 * 1.5 + this.getDeltaMovement().x(), 4.0, f4 * 1.5 + this.getDeltaMovement().z());
+            }
+        } else {
+            super.handleEntityEvent(id);
+        }
+    }
+
     /**
      * Handles Swet behavior.
      */
@@ -122,83 +132,88 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
         // Handle dissolving in water.
         if (this.isInWater() || level().isRainingAt(new BlockPos(((int) position().x()), ((int) position().y()), ((int) position().z())))) {
             this.spawnDissolveParticles();
-            if (this.getWaterDamageScale() < 1.0F) {
-                this.setWaterDamageScale(this.getWaterDamageScale() + 0.05F);
+            if (this.getWaterDamage() < 1.0F) {
+                this.setWaterDamage(this.getWaterDamage() + 0.05F);
+                if (this.getSwetScale() > 0.0F) {
+                    this.setSwetScale(Math.max(0.0F, this.getSwetScale() - 0.05F));
+                }
             }
         }
         super.tick();
 
         if (this.onGround() && !this.wasOnGround) {
-            float f = this.getDimensions(this.getPose()).width() * 2.0F;
-            float f1 = f / 2.0F;
-            this.playSound(this.getSquishSound(), this.getSoundVolume(), ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) / 0.8F);
-            if (this.level().isClientSide()) {
-                this.groundAnimationState.start(this.tickCount);
-                this.jumpAnimationState.stop();
+            this.playSound(this.getSquishSound(), this.getSoundVolume(), ((this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.2F + 1.0F) / 0.8F);
+            if (this.level() instanceof ServerLevel serverLevel) {
+                serverLevel.broadcastEntityEvent(this, (byte) LAND_EVENT);
             }
         }
 
         if (this.getFoodSaturation() > 0) {
             this.setFoodSaturation(this.getFoodSaturation() - 0.001F);
+            if (this.getSwetScale() > 0.95F) {
+                this.setSwetScale(Math.max(0.95F, this.getSwetScale() - 0.00005F));
+            }
         }
 
-
-        // Spawn particles when no target is captured.
-        /*if (this.canSpawnSplashParticles()) {
-            if (this.level().isClientSide()) {
-                double d = (float) this.getX() + (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.3F;
-                double d1 = (float) this.getY() + this.getBbHeight();
-                double d2 = (float) this.getZ() + (this.getRandom().nextFloat() - this.getRandom().nextFloat()) * 0.3F;
-                this.level().addParticle(ParticleTypes.SPLASH, d, d1 - 0.25, d2, 0.0, 0.0, 0.0);
-            }
-        }*/
-
-        // Handle jump behavior and animation.
         if (!this.isNoAi()) {
-            this.setMidJump(!this.onGround());
-            if (this.level().isClientSide()) {
-                this.swetHeightO = this.swetHeight;
-                this.swetWidthO = this.swetWidth;
-                if (this.getMidJump()) {
-                    this.jumpTimer++;
-                } else {
-                    this.jumpTimer = 0;
-                }
-                if (this.getJumpTimer() > 1) {
-                    this.swetHeight = 1.425F;
-                    this.swetWidth = 0.875F;
-
-                    float scale = Math.min(this.getJumpTimer(), 10);
-                    if (this.getJumpTimer() > 2) {
-                        this.swetHeight -= 0.04F * scale;
-                        this.swetWidth += 0.04F * scale;
-                    }
-                    if (this.getJumpTimer() > 3) {
-                        this.swetHeight -= 0.02F * scale;
-                        this.swetWidth += 0.02F * scale;
-                    }
-                } else {
-                    this.swetHeight = this.swetHeight < 1.0F ? this.swetHeight + 0.25F : 1.0F;
-                    this.swetWidth = this.swetWidth > 1.0F ? this.swetWidth - 0.25F : 1.0F;
-                }
-            }
             this.wasOnGround = this.onGround();
         }
-
-
-        if (this.isFriendly()) { // Handle fall damage immunity when mounted.
-            this.resetFallDistance();
-        }
     }
-
 
     /**
      * Spawn dissolve particles in {@link Swet#handleEntityEvent(byte)}.
      */
     public void spawnDissolveParticles() {
         if (this.level() instanceof ServerLevel level) {
-            level.broadcastEntityEvent(this, (byte) 70);
+            level.broadcastEntityEvent(this, (byte) DISSOLVE_EVENT);
         }
+    }
+
+    public boolean canLatch(Player player) { //todo balance
+        return !player.isInWater()
+                && player.getFoodData().getFoodLevel() > 0
+                && this.getFoodSaturation() <= 3
+                && !this.isWaterDamaged()
+                && player.getData(AetherIIDataAttachments.SWET_LATCH).canLatchOn();
+    }
+
+    public boolean processSucking(Player player) { //todo balance
+        if (player.tickCount % 20 == 0) {
+            player.causeFoodExhaustion(4.0F);
+            this.setFoodSaturation(this.getFoodSaturation() + 1.0F);
+        }
+        this.setSwetScale(this.getSwetScale() + 0.0025F);
+        return this.getFoodSaturation() >= 8 || player.getFoodData().getFoodLevel() <= 0;
+    }
+
+    @Override
+    protected EntityDimensions getDefaultDimensions(Pose pose) {
+        float scale = Mth.clamp(this.getSwetScale(), 0.6F, 1.25F);
+        return EntityDimensions.scalable(scale, scale).withEyeHeight(scale / 2.0F);
+    }
+
+    protected int getJumpDelay() {
+        return this.getRandom().nextInt(20) + 10;
+    }
+
+    @Override
+    protected float getJumpPower() {
+        float jumpPower = super.getJumpPower();
+        if (this.isWaterDamaged()) {
+            jumpPower = jumpPower * 0.5F;
+        } else if (this.getSwetScale() > 0.95F) {
+            jumpPower = jumpPower * (1.0F - (this.getSwetScale() - 0.95F));
+        }
+        return jumpPower;
+    }
+
+    public boolean isWaterDamaged() {
+        return this.getWaterDamage() > 0.25F;
+    }
+
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return true;
     }
 
     public Holder<SwetVariant> getVariant() {
@@ -210,26 +225,10 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
     }
 
     /**
-     * @return Whether the Swet is in the middle of a jump, as a {@link Boolean}.
-     */
-    public boolean getMidJump() {
-        return this.getEntityData().get(DATA_MID_JUMP_ID);
-    }
-
-    /**
-     * Sets whether the Swet is in the middle of a jump.
-     *
-     * @param midJump The {@link Boolean} value.
-     */
-    public void setMidJump(boolean midJump) {
-        this.getEntityData().set(DATA_MID_JUMP_ID, midJump);
-    }
-
-    /**
      * @return The {@link Float} scale of water damage the Swet has received.
      */
-    public float getWaterDamageScale() {
-        return this.getEntityData().get(DATA_WATER_DAMAGE_SCALE_ID);
+    public float getWaterDamage() {
+        return this.getEntityData().get(DATA_WATER_DAMAGE_ID);
     }
 
     /**
@@ -237,8 +236,8 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
      *
      * @param scale The {@link Float} value.
      */
-    public void setWaterDamageScale(float scale) {
-        this.getEntityData().set(DATA_WATER_DAMAGE_SCALE_ID, scale);
+    public void setWaterDamage(float scale) {
+        this.getEntityData().set(DATA_WATER_DAMAGE_ID, scale);
     }
 
     /**
@@ -257,33 +256,21 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
         this.getEntityData().set(DATA_FOOD_SATURATION_ID, foodSaturation);
     }
 
-
     /**
-     * @return The {@link Float} height of the Swet model.
+     * @return The {@link Float} scale of the Swet.
      */
-    public float getSwetHeight() {
-        return this.swetHeight;
+    public float getSwetScale() {
+        return this.getEntityData().get(DATA_SWET_SCALE_ID);
     }
 
     /**
-     * @return The old {@link Float} height of the Swet model.
+     * Sets the scale the Swet.
+     *
+     * @param scale The {@link Float} value.
      */
-    public float getSwetHeightO() {
-        return this.swetHeightO;
-    }
-
-    /**
-     * @return The {@link Float} width of the Swet model.
-     */
-    public float getSwetWidth() {
-        return this.swetWidth;
-    }
-
-    /**
-     * @return The old {@link Float} width of the Swet model.
-     */
-    public float getSwetWidthO() {
-        return this.swetWidthO;
+    public void setSwetScale(float scale) {
+        this.getEntityData().set(DATA_SWET_SCALE_ID, scale);
+        this.refreshDimensions();
     }
 
     @Override
@@ -300,58 +287,11 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
         return AetherIISoundEvents.ENTITY_SWET_SQUISH.get();
     }
 
-    public static boolean canLatch(final Swet swet, final Player player) {
-        return !player.isInWater() && swet.getFoodSaturation() <= 3 && swet.getWaterDamageScale() <= 0.25F && player.getData(AetherIIDataAttachments.SWET_LATCH)
-                .canLatchOn() && player.getFoodData().getFoodLevel() > 4;
-    }
-
-    /**
-     * @return A {@link Boolean} for whether the Swet can spawn splash particles.
-     */
-    public boolean canSpawnSplashParticles() {
-        return true;
-    }
-
-    /**
-     * @return A {@link Boolean} for whether the Swet is being controlled, meaning it is friendly.
-     */
-    public boolean isFriendly() {
-        return this.getControllingPassenger() != null;
-    }
-
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return true;
-    }
-
-    @Override
-    public void handleEntityEvent(byte id) {
-        if (id == 1) {
-            this.spawnSprintParticle();
-            this.jumpAnimationState.start(this.tickCount);
-        } else if (id == 61) {
-            this.groundAnimationState.start(this.tickCount);
-        } else if (id == 70) {
-            for (int i = 0; i < 10; i++) {
-                double f = this.getRandom().nextFloat() * Mth.TWO_PI;
-                double f1 = this.getRandom().nextFloat() * this.swetWidth + 0.25F;
-                double f2 = (this.getRandom().nextFloat() * this.swetHeight) - (this.getRandom().nextGaussian() * 0.02 * 10.0);
-                double f3 = Mth.sin((float) f) * f1;
-                double f4 = Mth.cos((float) f) * f1;
-                this.level().addParticle(ParticleTypes.SPLASH, this.getX() + f3, this.getY() + f2, this.getZ() + f4, f3 * 1.5 + this.getDeltaMovement().x(), 4.0, f4 * 1.5 + this.getDeltaMovement().z());
-            }
-        } else if (id == 71) {
-            this.absMoveTo(this.getX(), this.getY(), this.getZ());
-        } else {
-            super.handleEntityEvent(id);
-        }
-    }
-
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         this.getVariant().unwrapKey().ifPresent((key) -> tag.putString("variant", key.location().toString()));
-        tag.putFloat("WaterDamageScale", this.getWaterDamageScale());
+        tag.putFloat("WaterDamageScale", this.getWaterDamage());
         tag.putFloat("Saturation", this.getFoodSaturation());
     }
 
@@ -360,95 +300,10 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
         super.readAdditionalSaveData(tag);
         Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant"))).map((location) -> ResourceKey.create(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, location)).flatMap((key) -> this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).get(key)).ifPresent(this::setVariant);
         if (tag.contains("WaterDamageScale")) {
-            this.setWaterDamageScale(tag.getFloat("WaterDamageScale"));
+            this.setWaterDamage(tag.getFloat("WaterDamageScale"));
         }
         if (tag.contains("Saturation")) {
             this.setFoodSaturation(tag.getFloat("Saturation"));
-        }
-    }
-
-    public boolean processSucking(Player player) {
-        player.causeFoodExhaustion(0.025F);
-        this.setFoodSaturation(this.getFoodSaturation() + 0.025F);
-        return player.getFoodData().getFoodLevel() < 5 || this.getFoodSaturation() >= 5;
-    }
-
-
-    private int getJumpTimer() {
-        return this.jumpTimer;
-    }
-
-    /**
-     * Locates a target to look towards to start jumping to, and handles consuming the target when colliding.
-     */
-    public static class HuntGoal extends Goal {
-        private final Swet swet;
-
-        public HuntGoal(Swet swet) {
-            this.swet = swet;
-            this.setFlags(EnumSet.of(Goal.Flag.LOOK));
-        }
-
-        @Override
-        public boolean canUse() {
-            LivingEntity target = this.swet.getTarget();
-            if (target == null || !target.isAlive() || (target instanceof Player player && player.getAbilities().invulnerable)) {
-                return false;
-            } else {
-                return this.swet.getMoveControl() instanceof SwetMoveControl && target instanceof Player player && canLatch(this.swet, player);
-            }
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            LivingEntity target = this.swet.getTarget();
-            if (target == null || !target.isAlive()) {
-                return false;
-            } else if (target instanceof Player player && player.getAbilities().invulnerable) {
-                return false;
-            } else {
-                return target instanceof Player player && canLatch(this.swet, player);
-            }
-        }
-
-        @Override
-        public void tick() {
-            if (this.swet.getMoveControl() instanceof SwetMoveControl swetMoveControl) {
-                LivingEntity target = this.swet.getTarget();
-                if (target != null) {
-                    this.swet.lookAt(target, 10.0F, 10.0F);
-                    swetMoveControl.setDirection(this.swet.getYRot(), true);
-                    if (this.swet.getBoundingBox().intersects(target.getBoundingBox())) {
-                        if (target instanceof Player player) {
-                            player.getData(AetherIIDataAttachments.SWET_LATCH.get()).latchSwet(this.swet);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * [CODE COPY] - {@link Slime.SlimeKeepOnJumpingGoal}.<br><br>
-     * Also checks if the Swet is able to jump.
-     */
-    public static class SwetKeepOnJumpingGoal extends Goal {
-        private final Swet swet;
-
-        public SwetKeepOnJumpingGoal(Swet swetEntity) {
-            this.swet = swetEntity;
-            this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
-        }
-
-        public boolean canUse() {
-            return !this.swet.isPassenger() && this.swet.getMoveControl() instanceof SwetMoveControl moveHelperController && moveHelperController.canJump;
-        }
-
-        public void tick() {
-            MoveControl movecontrol = this.swet.getMoveControl();
-            if (movecontrol instanceof SwetMoveControl swetMoveControl) {
-                swetMoveControl.setWantedMovement(1.0D);
-            }
         }
     }
 
@@ -483,10 +338,8 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
             this.canJump = canJump;
         }
 
+        @Override
         public void tick() {
-            if (this.swet.isFriendly()) {
-                return;
-            }
             this.swet.setYRot(this.rotlerp(this.swet.getYRot(), this.yRot, 90.0F));
             this.swet.setYHeadRot(this.swet.getYRot());
             this.swet.setYBodyRot(this.swet.getYRot());
@@ -502,7 +355,7 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
                             this.jumpDelay /= 6;
                         }
                         this.swet.getJumpControl().jump();
-                        this.swet.level().broadcastEntityEvent(this.swet, (byte) 1);
+                        this.swet.level().broadcastEntityEvent(this.swet, (byte) JUMP_EVENT);
                         this.swet.playSound(AetherIISoundEvents.ENTITY_SWET_JUMP.get(), 1.0F, ((this.swet.getRandom().nextFloat() - this.swet.getRandom().nextFloat()) * 0.2F + 1.0F) * 0.8F);
                     } else {
                         this.swet.xxa = 0.0F;
@@ -514,10 +367,6 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
                 }
             }
         }
-    }
-
-    protected int getJumpDelay() {
-        return this.random.nextInt(20) + 10;
     }
 
     /**
@@ -534,10 +383,12 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
             this.setFlags(EnumSet.of(Goal.Flag.LOOK));
         }
 
+        @Override
         public boolean canUse() {
             return this.swet.getTarget() == null && (this.swet.onGround() || this.swet.isInFluidType() || this.swet.hasEffect(MobEffects.LEVITATION)) && this.swet.getMoveControl() instanceof SwetMoveControl;
         }
 
+        @Override
         public void tick() {
             SwetMoveControl moveHelperController = (SwetMoveControl) this.swet.getMoveControl();
             float rot = moveHelperController.yRot;
@@ -556,6 +407,83 @@ public class Swet extends Monster implements Enemy { //todo hitbox scaling and m
                 moveHelperController.setCanJump(true);
             }
             moveHelperController.setDirection(this.chosenDegrees, false);
+        }
+    }
+
+    /**
+     * Locates a target to look towards to start jumping to, and handles consuming the target when colliding.
+     */
+    public static class HuntGoal extends Goal {
+        private final Swet swet;
+
+        public HuntGoal(Swet swet) {
+            this.swet = swet;
+            this.setFlags(EnumSet.of(Goal.Flag.LOOK));
+        }
+
+        @Override
+        public boolean canUse() {
+            LivingEntity target = this.swet.getTarget();
+            if (target == null || !target.isAlive() || (target instanceof Player player && player.getAbilities().invulnerable)) {
+                return false;
+            } else {
+                return this.swet.getMoveControl() instanceof SwetMoveControl && target instanceof Player player && this.swet.canLatch(player);
+            }
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            LivingEntity target = this.swet.getTarget();
+            if (target == null || !target.isAlive()) {
+                return false;
+            } else if (target instanceof Player player && player.getAbilities().invulnerable) {
+                return false;
+            } else {
+                return target instanceof Player player && this.swet.canLatch(player);
+            }
+        }
+
+        @Override
+        public void tick() {
+            if (this.swet.getMoveControl() instanceof SwetMoveControl swetMoveControl) {
+                LivingEntity target = this.swet.getTarget();
+                if (target != null) {
+                    this.swet.lookAt(target, 10.0F, 10.0F);
+                    swetMoveControl.setCanJump(true);
+                    swetMoveControl.setDirection(this.swet.getYRot(), true);
+                    if (this.swet.getBoundingBox().intersects(target.getBoundingBox())) {
+                        if (target instanceof Player player) {
+                            player.getData(AetherIIDataAttachments.SWET_LATCH.get()).latchSwet(this.swet);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * [CODE COPY] - {@link Slime.SlimeKeepOnJumpingGoal}.<br><br>
+     * Also checks if the Swet is able to jump.
+     */
+    public static class SwetKeepOnJumpingGoal extends Goal {
+        private final Swet swet;
+
+        public SwetKeepOnJumpingGoal(Swet swetEntity) {
+            this.swet = swetEntity;
+            this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+        }
+
+        @Override
+        public boolean canUse() {
+            return !this.swet.isPassenger() && this.swet.getMoveControl() instanceof SwetMoveControl moveHelperController && moveHelperController.canJump;
+        }
+
+        @Override
+        public void tick() {
+            MoveControl movecontrol = this.swet.getMoveControl();
+            if (movecontrol instanceof SwetMoveControl swetMoveControl) {
+                swetMoveControl.setWantedMovement(1.0);
+            }
         }
     }
 

@@ -151,7 +151,7 @@ public class AetherIIEventListeners {
 
         player.getData(AetherIIDataAttachments.PLAYER).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).postTickUpdate(player);
-        player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate(player);
+        player.getData(AetherIIDataAttachments.SWET_LATCH).postTickUpdate();
         player.getData(AetherIIDataAttachments.ABILITY_BEHAVIOR).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.CURRENCY).postTickUpdate(player);
         player.getData(AetherIIDataAttachments.GUIDEBOOK_DISCOVERY).postTickUpdate(player);

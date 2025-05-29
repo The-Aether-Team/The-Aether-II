@@ -171,40 +171,6 @@ public class Zephyr extends FlyingMob implements Enemy {
     }
 
     /**
-     * [CODE COPY] - {@link net.minecraft.world.entity.monster.Ghast.GhastLookGoal}.
-     */
-    protected static class ZephyrLookGoal extends Goal {
-        private final Zephyr zephyr;
-
-        public ZephyrLookGoal(Zephyr zephyr) {
-            this.zephyr = zephyr;
-            this.setFlags(EnumSet.of(Flag.LOOK));
-        }
-
-        @Override
-        public boolean canUse() {
-            return true;
-        }
-
-        @Override
-        public void tick() {
-            if (this.zephyr.getTarget() == null) {
-                Vec3 vec3d = this.zephyr.getDeltaMovement();
-                this.zephyr.setYRot(-((float) Mth.atan2(vec3d.x(), vec3d.z())) * Mth.RAD_TO_DEG);
-                this.zephyr.yBodyRot = this.zephyr.getYRot();
-            } else {
-                LivingEntity livingEntity = this.zephyr.getTarget();
-                if (livingEntity.distanceToSqr(this.zephyr) < 4096.0) {
-                    double x = livingEntity.getX() - this.zephyr.getX();
-                    double z = livingEntity.getZ() - this.zephyr.getZ();
-                    this.zephyr.setYRot(-((float) Mth.atan2(x, z)) * Mth.RAD_TO_DEG);
-                    this.zephyr.setYBodyRot(this.zephyr.getYRot());
-                }
-            }
-        }
-    }
-
-    /**
      * [CODE COPY] - {@link net.minecraft.world.entity.monster.Ghast.GhastMoveControl}.
      */
     protected static class ZephyrMoveControl extends MoveControl {
@@ -378,6 +344,40 @@ public class Zephyr extends FlyingMob implements Enemy {
                 double d1 = this.zephyr.getY() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 double d2 = this.zephyr.getZ() + (random.nextFloat() * 2.0F - 1.0F) * 16.0F;
                 this.zephyr.getMoveControl().setWantedPosition(d0, d1, d2, 1.0);
+            }
+        }
+    }
+
+    /**
+     * [CODE COPY] - {@link net.minecraft.world.entity.monster.Ghast.GhastLookGoal}.
+     */
+    protected static class ZephyrLookGoal extends Goal {
+        private final Zephyr zephyr;
+
+        public ZephyrLookGoal(Zephyr zephyr) {
+            this.zephyr = zephyr;
+            this.setFlags(EnumSet.of(Flag.LOOK));
+        }
+
+        @Override
+        public boolean canUse() {
+            return true;
+        }
+
+        @Override
+        public void tick() {
+            if (this.zephyr.getTarget() == null) {
+                Vec3 vec3d = this.zephyr.getDeltaMovement();
+                this.zephyr.setYRot(-((float) Mth.atan2(vec3d.x(), vec3d.z())) * Mth.RAD_TO_DEG);
+                this.zephyr.yBodyRot = this.zephyr.getYRot();
+            } else {
+                LivingEntity livingEntity = this.zephyr.getTarget();
+                if (livingEntity.distanceToSqr(this.zephyr) < 4096.0) {
+                    double x = livingEntity.getX() - this.zephyr.getX();
+                    double z = livingEntity.getZ() - this.zephyr.getZ();
+                    this.zephyr.setYRot(-((float) Mth.atan2(x, z)) * Mth.RAD_TO_DEG);
+                    this.zephyr.setYBodyRot(this.zephyr.getYRot());
+                }
             }
         }
     }

@@ -403,6 +403,7 @@ public class Aerbunny extends AetherTamableAnimal {
      */
     @Override
     public void stopRiding() {
+        this.refreshDimensions();
         if (this.getVehicle() instanceof Player player) {
             player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(null);
         }

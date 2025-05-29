@@ -5,6 +5,7 @@ import com.aetherteam.aetherii.attachment.AetherIIDataAttachments;
 import com.aetherteam.aetherii.entity.passive.Aerbunny;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
@@ -19,20 +20,12 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 public record RemountAerbunnyPacket(int vehicleID, int aerbunnyID) implements CustomPacketPayload {
     public static final Type<RemountAerbunnyPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "remount_aerbunny"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, RemountAerbunnyPacket> STREAM_CODEC = CustomPacketPayload.codec(
-            RemountAerbunnyPacket::write,
-            RemountAerbunnyPacket::decode);
-
-    public void write(RegistryFriendlyByteBuf buf) {
-        buf.writeInt(this.vehicleID());
-        buf.writeInt(this.aerbunnyID());
-    }
-
-    public static RemountAerbunnyPacket decode(RegistryFriendlyByteBuf buf) {
-        int vehicleID = buf.readInt();
-        int aerbunnyID = buf.readInt();
-        return new RemountAerbunnyPacket(vehicleID, aerbunnyID);
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, RemountAerbunnyPacket> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.INT,
+            RemountAerbunnyPacket::vehicleID,
+            ByteBufCodecs.INT,
+            RemountAerbunnyPacket::aerbunnyID,
+            RemountAerbunnyPacket::new);
 
     @Override
     public Type<RemountAerbunnyPacket> type() {
@@ -41,8 +34,8 @@ public record RemountAerbunnyPacket(int vehicleID, int aerbunnyID) implements Cu
 
     public static void execute(RemountAerbunnyPacket payload, IPayloadContext context) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().level != null) {
-            Level world = Minecraft.getInstance().player.level();
-            if (world.getEntity(payload.vehicleID()) instanceof Player player && world.getEntity(payload.aerbunnyID()) instanceof Aerbunny aerbunny) {
+            Level level = Minecraft.getInstance().player.level();
+            if (level.getEntity(payload.vehicleID()) instanceof Player player && level.getEntity(payload.aerbunnyID()) instanceof Aerbunny aerbunny) {
                 aerbunny.startRiding(player);
                 player.getData(AetherIIDataAttachments.AERBUNNY_MOUNT).setMountedAerbunny(aerbunny);
             }

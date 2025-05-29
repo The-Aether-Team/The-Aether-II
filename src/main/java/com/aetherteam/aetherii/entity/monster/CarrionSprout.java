@@ -76,7 +76,7 @@ public class CarrionSprout extends PathfinderMob {
             }
 
             if (!previouslyTriggered) {
-                this.playSound(AetherIISoundEvents.ENTITY_CARRION_SPROUT_TRAP.get(), 2.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F)); //todo this should only play at the start once
+                this.playSound(AetherIISoundEvents.ENTITY_CARRION_SPROUT_TRAP.get(), 2.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
             }
         }
     }

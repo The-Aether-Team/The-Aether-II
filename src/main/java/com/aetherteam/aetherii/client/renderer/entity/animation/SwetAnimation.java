@@ -6,7 +6,7 @@ import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
 public class SwetAnimation {
-        public static final AnimationDefinition jump = AnimationDefinition.Builder.withLength(0.5F)
+        public static final AnimationDefinition JUMP = AnimationDefinition.Builder.withLength(0.5F)
                 .addAnimation("gel", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
                         new Keyframe(0.125F, KeyframeAnimations.degreeVec(-12.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
@@ -58,7 +58,7 @@ public class SwetAnimation {
                 ))
                 .build();
 
-        public static final AnimationDefinition ground = AnimationDefinition.Builder.withLength(0.25F)
+        public static final AnimationDefinition GROUND = AnimationDefinition.Builder.withLength(0.25F)
                 .addAnimation("gel", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                         new Keyframe(0.125F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
                 ))
