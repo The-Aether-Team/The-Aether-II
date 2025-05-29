@@ -260,40 +260,21 @@
   },
   "entity.burrukai.ambient": {
     "sounds": [
-      {
-        "name": "aether_ii:entity/burrukai/say1",
-        "volume": 0.45
-      },
-      {
-        "name": "aether_ii:entity/burrukai/say2",
-        "volume": 0.45
-      },
-      {
-        "name": "aether_ii:entity/burrukai/say3",
-        "volume": 0.45
-      }
+      "aether_ii:entity/burrukai/say1",
+      "aether_ii:entity/burrukai/say2",
+      "aether_ii:entity/burrukai/hurt1"
     ],
     "subtitle": "subtitles.aether_ii.entity.burrukai.ambient"
   },
   "entity.burrukai.death": {
     "sounds": [
-      {
-        "name": "aether_ii:entity/burrukai/death",
-        "volume": 0.45
-      }
+      "aether_ii:entity/burrukai/death"
     ],
     "subtitle": "subtitles.aether_ii.entity.burrukai.death"
   },
   "entity.burrukai.hurt": {
     "sounds": [
-      {
-        "name": "aether_ii:entity/burrukai/hurt1",
-        "volume": 0.45
-      },
-      {
-        "name": "aether_ii:entity/burrukai/hurt2",
-        "volume": 0.45
-      }
+      "aether_ii:entity/burrukai/hurt1"
     ],
     "subtitle": "subtitles.aether_ii.entity.burrukai.hurt"
   },

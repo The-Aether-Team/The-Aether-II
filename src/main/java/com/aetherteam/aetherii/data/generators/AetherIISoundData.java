@@ -532,20 +532,18 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.ENTITY_BURRUKAI_AMBIENT,
                 definition().with(
-                        sound("aether_ii:entity/burrukai/say1").volume(0.45F),
-                        sound("aether_ii:entity/burrukai/say2").volume(0.45F),
-                        sound("aether_ii:entity/burrukai/say3").volume(0.45F)
+                        sound("aether_ii:entity/burrukai/say1"),
+                        sound("aether_ii:entity/burrukai/say2"),
+                        sound("aether_ii:entity/burrukai/hurt1")
                 ).subtitle("subtitles.aether_ii.entity.burrukai.ambient")
         );
         this.add(AetherIISoundEvents.ENTITY_BURRUKAI_DEATH,
-                definition().with(sound("aether_ii:entity/burrukai/death").volume(0.45F))
+                definition().with(sound("aether_ii:entity/burrukai/death"))
                         .subtitle("subtitles.aether_ii.entity.burrukai.death")
         );
         this.add(AetherIISoundEvents.ENTITY_BURRUKAI_HURT,
-                definition().with(
-                        sound("aether_ii:entity/burrukai/hurt1").volume(0.45F),
-                        sound("aether_ii:entity/burrukai/hurt2").volume(0.45F)
-                ).subtitle("subtitles.aether_ii.entity.burrukai.hurt")
+                definition().with(sound("aether_ii:entity/burrukai/hurt1"))
+                        .subtitle("subtitles.aether_ii.entity.burrukai.hurt")
         );
         this.add(AetherIISoundEvents.ENTITY_BURRUKAI_STEP,
                 definition().with(
