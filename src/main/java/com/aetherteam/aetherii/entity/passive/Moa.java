@@ -72,34 +72,6 @@ public class Moa extends MountableAnimal {
     private static final EntityDataAccessor<Boolean> DATA_SITTING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Optional<UUID>> DATA_FOLLOWING_ID = SynchedEntityData.defineId(Moa.class, EntityDataSerializers.OPTIONAL_UUID);
 
-    protected static final ImmutableList<SensorType<? extends Sensor<? super Moa>>> SENSOR_TYPES = ImmutableList.of(
-            SensorType.NEAREST_LIVING_ENTITIES,
-            SensorType.NEAREST_PLAYERS,
-            SensorType.NEAREST_ITEMS,
-            SensorType.NEAREST_ADULT,
-            SensorType.HURT_BY
-    );
-    protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
-            MemoryModuleType.LOOK_TARGET,
-            MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
-            MemoryModuleType.WALK_TARGET,
-            MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
-            MemoryModuleType.PATH,
-            MemoryModuleType.ATE_RECENTLY,
-            MemoryModuleType.BREED_TARGET,
-            MemoryModuleType.TEMPTING_PLAYER,
-            MemoryModuleType.NEAREST_VISIBLE_ADULT,
-            MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
-            MemoryModuleType.IS_TEMPTED,
-            MemoryModuleType.IS_PANICKING,
-            MemoryModuleType.ATTACK_TARGET,
-            MemoryModuleType.ATTACK_COOLING_DOWN,
-            MemoryModuleType.ANGRY_AT,
-            MemoryModuleType.HURT_BY,
-            MemoryModuleType.HURT_BY_ENTITY,
-            MemoryModuleType.HOME
-    );
-
     private int jumpCooldown;
     private int flapCooldown;
 
@@ -192,7 +164,7 @@ public class Moa extends MountableAnimal {
 
     @Override
     protected Brain.Provider<Moa> brainProvider() {
-        return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
+        return Brain.provider(MoaAi.MEMORY_TYPES, MoaAi.SENSOR_TYPES);
     }
 
     @Override

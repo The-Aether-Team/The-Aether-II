@@ -32,48 +32,45 @@ public class AetherIISoundData extends SoundDefinitionsProvider {
 
         this.add(AetherIISoundEvents.BLOCK_FERROSITE_BREAK,
                 definition().with(
-                        sound("minecraft:dig/stone1"),
-                        sound("minecraft:dig/stone2"),
-                        sound("minecraft:dig/stone3"),
-                        sound("minecraft:dig/stone4")
+                        sound("aether_ii:block/ferrosite/break1"),
+                        sound("aether_ii:block/ferrosite/break2"),
+                        sound("aether_ii:block/ferrosite/break3")
                 ).subtitle("subtitles.block.generic.break")
         );
         this.add(AetherIISoundEvents.BLOCK_FERROSITE_STEP,
                 definition().with(
-                        sound("minecraft:step/stone1"),
-                        sound("minecraft:step/stone2"),
-                        sound("minecraft:step/stone3"),
-                        sound("minecraft:step/stone4"),
-                        sound("minecraft:step/stone5"),
-                        sound("minecraft:step/stone6")
+                        sound("aether_ii:block/ferrosite/step1"),
+                        sound("aether_ii:block/ferrosite/step2"),
+                        sound("aether_ii:block/ferrosite/step3"),
+                        sound("aether_ii:block/ferrosite/step4"),
+                        sound("aether_ii:block/ferrosite/step5")
                 ).subtitle("subtitles.block.generic.footsteps")
         );
         this.add(AetherIISoundEvents.BLOCK_FERROSITE_PLACE,
                 definition().with(
-                        sound("minecraft:dig/stone1"),
-                        sound("minecraft:dig/stone2"),
-                        sound("minecraft:dig/stone3"),
-                        sound("minecraft:dig/stone4")
+                        sound("aether_ii:block/ferrosite/place1"),
+                        sound("aether_ii:block/ferrosite/place2"),
+                        sound("aether_ii:block/ferrosite/place3"),
+                        sound("aether_ii:block/ferrosite/place4"),
+                        sound("aether_ii:block/ferrosite/place5")
                 ).subtitle("subtitles.block.generic.place")
         );
         this.add(AetherIISoundEvents.BLOCK_FERROSITE_HIT,
                 definition().with(
-                        sound("minecraft:step/stone1"),
-                        sound("minecraft:step/stone2"),
-                        sound("minecraft:step/stone3"),
-                        sound("minecraft:step/stone4"),
-                        sound("minecraft:step/stone5"),
-                        sound("minecraft:step/stone6")
+                        sound("aether_ii:block/ferrosite/step1"),
+                        sound("aether_ii:block/ferrosite/step2"),
+                        sound("aether_ii:block/ferrosite/step3"),
+                        sound("aether_ii:block/ferrosite/step4"),
+                        sound("aether_ii:block/ferrosite/step5")
                 ).subtitle("subtitles.block.generic.hit")
         );
         this.add(AetherIISoundEvents.BLOCK_FERROSITE_FALL,
                 definition().with(
-                        sound("minecraft:step/stone1"),
-                        sound("minecraft:step/stone2"),
-                        sound("minecraft:step/stone3"),
-                        sound("minecraft:step/stone4"),
-                        sound("minecraft:step/stone5"),
-                        sound("minecraft:step/stone6")
+                        sound("aether_ii:block/ferrosite/step1"),
+                        sound("aether_ii:block/ferrosite/step2"),
+                        sound("aether_ii:block/ferrosite/step3"),
+                        sound("aether_ii:block/ferrosite/step4"),
+                        sound("aether_ii:block/ferrosite/step5")
                 ).subtitle("subtitles.block.generic.fall")
         );
 

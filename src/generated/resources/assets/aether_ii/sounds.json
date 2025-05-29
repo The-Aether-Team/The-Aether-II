@@ -43,52 +43,49 @@
   },
   "block.ferrosite.break": {
     "sounds": [
-      "dig/stone1",
-      "dig/stone2",
-      "dig/stone3",
-      "dig/stone4"
+      "aether_ii:block/ferrosite/break1",
+      "aether_ii:block/ferrosite/break2",
+      "aether_ii:block/ferrosite/break3"
     ],
     "subtitle": "subtitles.block.generic.break"
   },
   "block.ferrosite.fall": {
     "sounds": [
-      "step/stone1",
-      "step/stone2",
-      "step/stone3",
-      "step/stone4",
-      "step/stone5",
-      "step/stone6"
+      "aether_ii:block/ferrosite/step1",
+      "aether_ii:block/ferrosite/step2",
+      "aether_ii:block/ferrosite/step3",
+      "aether_ii:block/ferrosite/step4",
+      "aether_ii:block/ferrosite/step5"
     ],
     "subtitle": "subtitles.block.generic.fall"
   },
   "block.ferrosite.hit": {
     "sounds": [
-      "step/stone1",
-      "step/stone2",
-      "step/stone3",
-      "step/stone4",
-      "step/stone5",
-      "step/stone6"
+      "aether_ii:block/ferrosite/step1",
+      "aether_ii:block/ferrosite/step2",
+      "aether_ii:block/ferrosite/step3",
+      "aether_ii:block/ferrosite/step4",
+      "aether_ii:block/ferrosite/step5"
     ],
     "subtitle": "subtitles.block.generic.hit"
   },
   "block.ferrosite.place": {
     "sounds": [
-      "dig/stone1",
-      "dig/stone2",
-      "dig/stone3",
-      "dig/stone4"
+      "aether_ii:block/ferrosite/place1",
+      "aether_ii:block/ferrosite/place2",
+      "aether_ii:block/ferrosite/place3",
+      "aether_ii:block/ferrosite/place4",
+      "aether_ii:block/ferrosite/place5"
     ],
     "subtitle": "subtitles.block.generic.place"
   },
   "block.ferrosite.step": {
     "sounds": [
-      "step/stone1",
-      "step/stone2",
-      "step/stone3",
-      "step/stone4",
-      "step/stone5",
-      "step/stone6"
+      "aether_ii:block/ferrosite/step1",
+      "aether_ii:block/ferrosite/step2",
+      "aether_ii:block/ferrosite/step3",
+      "aether_ii:block/ferrosite/step4",
+      "aether_ii:block/ferrosite/step5"
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },

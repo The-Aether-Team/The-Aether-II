@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.NearestVisibleLivingEntities;
 import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.GameRules;
 
@@ -27,6 +28,33 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class MoaAi {
+    public static final ImmutableList<SensorType<? extends Sensor<? super Moa>>> SENSOR_TYPES = ImmutableList.of(
+            SensorType.NEAREST_LIVING_ENTITIES,
+            SensorType.NEAREST_PLAYERS,
+            SensorType.NEAREST_ITEMS,
+            SensorType.NEAREST_ADULT,
+            SensorType.HURT_BY
+    );
+    public static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
+            MemoryModuleType.LOOK_TARGET,
+            MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
+            MemoryModuleType.WALK_TARGET,
+            MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
+            MemoryModuleType.PATH,
+            MemoryModuleType.ATE_RECENTLY,
+            MemoryModuleType.BREED_TARGET,
+            MemoryModuleType.TEMPTING_PLAYER,
+            MemoryModuleType.NEAREST_VISIBLE_ADULT,
+            MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
+            MemoryModuleType.IS_TEMPTED,
+            MemoryModuleType.IS_PANICKING,
+            MemoryModuleType.ATTACK_TARGET,
+            MemoryModuleType.ATTACK_COOLING_DOWN,
+            MemoryModuleType.ANGRY_AT,
+            MemoryModuleType.HURT_BY,
+            MemoryModuleType.HURT_BY_ENTITY,
+            MemoryModuleType.HOME
+    );
     private static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
 
     public static void initMemories(Moa pMoa, RandomSource pRandom) {
