@@ -16,11 +16,11 @@ import javax.annotation.Nullable;
 
 public class CappedGravityProcessor extends StructureProcessor {
     public static final MapCodec<CappedGravityProcessor> CODEC = RecordCodecBuilder.mapCodec(
-        p_74116_ -> p_74116_.group(
-                    Heightmap.Types.CODEC.fieldOf("heightmap").orElse(Heightmap.Types.WORLD_SURFACE_WG).forGetter(p_163729_ -> p_163729_.heightmap),
-                    Codec.INT.fieldOf("offset").orElse(0).forGetter(p_163727_ -> p_163727_.offset)
+        instance -> instance.group(
+                    Heightmap.Types.CODEC.fieldOf("heightmap").orElse(Heightmap.Types.WORLD_SURFACE_WG).forGetter(codec -> codec.heightmap),
+                    Codec.INT.fieldOf("offset").orElse(0).forGetter(codec -> codec.offset)
                 )
-                .apply(p_74116_, CappedGravityProcessor::new)
+                .apply(instance, CappedGravityProcessor::new)
     );
     private final Heightmap.Types heightmap;
     private final int offset;
@@ -49,7 +49,7 @@ public class CappedGravityProcessor extends StructureProcessor {
         BlockPos pos = modifiedBlockInfo.pos();
         int i = level.getHeight(heightmapTypes, pos.getX(), pos.getZ()) + this.offset;
         int j = originalBlockInfo.pos().getY();
-        if (j > origin.getY() - 8 && j < origin.getY() + 8) {
+        if (i > origin.getY() - 8 && i < origin.getY() + 8) {
             return new StructureTemplate.StructureBlockInfo(new BlockPos(pos.getX(), i + j, pos.getZ()), modifiedBlockInfo.state(), modifiedBlockInfo.nbt());
         }
         return null;
