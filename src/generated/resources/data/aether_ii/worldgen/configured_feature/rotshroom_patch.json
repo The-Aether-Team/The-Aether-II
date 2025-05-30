@@ -10,10 +10,7 @@
             "entries": [
               {
                 "data": {
-                  "Name": "aether_ii:rotshroom_cluster",
-                  "Properties": {
-                    "facing": "north"
-                  }
+                  "Name": "aether_ii:rotshroom_cluster"
                 },
                 "weight": 3
               },
@@ -22,15 +19,6 @@
                   "Name": "aether_ii:rotshroom_toadstool"
                 },
                 "weight": 1
-              },
-              {
-                "data": {
-                  "Name": "aether_ii:rotshroom_toadstool_cluster",
-                  "Properties": {
-                    "facing": "north"
-                  }
-                },
-                "weight": 2
               }
             ]
           }

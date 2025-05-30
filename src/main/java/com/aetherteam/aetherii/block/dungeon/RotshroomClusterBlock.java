@@ -18,12 +18,10 @@ import net.neoforged.neoforge.common.util.TriState;
 
 public class RotshroomClusterBlock extends BushBlock {
     public static final MapCodec<RotshroomClusterBlock> CODEC = simpleCodec(RotshroomClusterBlock::new);
-    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;;
     protected static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 14.0, 8.0, 14.0);
 
     public RotshroomClusterBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -46,22 +44,5 @@ public class RotshroomClusterBlock extends BushBlock {
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Vec3 vec3 = state.getOffset(pos);
         return SHAPE.move(vec3.x, vec3.y, vec3.z);
-    }
-
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
-    }
-
-    protected BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-    }
-
-    @SuppressWarnings("deprecation")
-    protected BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
     }
 }
