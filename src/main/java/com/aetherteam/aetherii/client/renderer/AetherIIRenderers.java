@@ -190,9 +190,29 @@ public class AetherIIRenderers {
     }
 
     public static void registerBakedModels(ModelEvent.ModifyBakingResult event) {
-        List<DeferredBlock<? extends Block>> fastBlocks = List.of(AetherIIBlocks.HIGHLANDS_BUSH, AetherIIBlocks.BLUEBERRY_BUSH, AetherIIBlocks.POTTED_HIGHLANDS_BUSH, AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
-        List<DeferredBlock<? extends Block>> aoBlocks = List.of(AetherIIBlocks.AMBROSIUM_ORE, AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE, AetherIIBlocks.BLOOMING_ARILUM, AetherIIBlocks.BLOOMING_ARILUM_PLANT);
-
+        List<DeferredBlock<? extends Block>> fastBlocks = List.of(
+                AetherIIBlocks.HIGHLANDS_BUSH,
+                AetherIIBlocks.BLUEBERRY_BUSH,
+                AetherIIBlocks.POTTED_HIGHLANDS_BUSH,
+                AetherIIBlocks.POTTED_BLUEBERRY_BUSH);
+        List<DeferredBlock<? extends Block>> aoBlocks = List.of(
+                AetherIIBlocks.AMBROSIUM_ORE,
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
+                AetherIIBlocks.BLOOMING_ARILUM,
+                AetherIIBlocks.BLOOMING_ARILUM_PLANT,
+                AetherIIBlocks.UNDERSHALE_AMBROSIUM_ORE,
+                AetherIIBlocks.DIM_GUARDIAN_ROOTS,
+                AetherIIBlocks.LUCENT_GUARDIAN_ROOTS,
+                AetherIIBlocks.GUARDIAN_LAMP,
+                AetherIIBlocks.LOCKED_DIM_GUARDIAN_ROOTS,
+                AetherIIBlocks.LOCKED_LUCENT_GUARDIAN_ROOTS,
+                AetherIIBlocks.LOCKED_GUARDIAN_LAMP,
+                AetherIIBlocks.DIM_INFECTED_ROOTS,
+                AetherIIBlocks.LUCENT_INFECTED_ROOTS,
+                AetherIIBlocks.INFECTED_LAMP,
+                AetherIIBlocks.LOCKED_DIM_INFECTED_ROOTS,
+                AetherIIBlocks.LOCKED_LUCENT_INFECTED_ROOTS,
+                AetherIIBlocks.LOCKED_INFECTED_LAMP);
 
         getModels(event.getBakingResult().blockStateModels(), fastBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new FastModel(entry.getValue())));
         getModels(event.getBakingResult().blockStateModels(), aoBlocks).forEach(entry -> event.getBakingResult().blockStateModels().put(entry.getKey(), new AmbientOcclusionLightModel(entry.getValue())));
