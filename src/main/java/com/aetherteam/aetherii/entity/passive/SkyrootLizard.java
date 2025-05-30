@@ -1,19 +1,26 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.api.SkyrootLizardVariant;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
+import com.aetherteam.aetherii.data.resources.registries.AetherIISkyrootLizardVariants;
+import com.aetherteam.aetherii.entity.AetherIIDataSerializers;
 import com.aetherteam.aetherii.entity.AetherIIEntityTypes;
 import com.aetherteam.aetherii.entity.ai.goal.FallingRandomStrollGoal;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -22,11 +29,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class SkyrootLizard extends AetherAnimal {
+    private static final EntityDataAccessor<Holder<SkyrootLizardVariant>> DATA_VARIANT_ID = SynchedEntityData.defineId(SkyrootLizard.class, AetherIIDataSerializers.SKYROOT_LIZARD_VARIANT.get());
+
     public SkyrootLizard(EntityType<? extends SkyrootLizard> type, Level level) {
         super(type, level);
     }
@@ -47,6 +58,21 @@ public class SkyrootLizard extends AetherAnimal {
     }
 
     @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_VARIANT_ID, this.registryAccess().lookupOrThrow(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY).getOrThrow(AetherIISkyrootLizardVariants.SKYROOT));
+    }
+
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, EntitySpawnReason reason, @Nullable SpawnGroupData spawnData) {
+        if (reason != EntitySpawnReason.TRIGGERED) {
+            this.setVariant(AetherIISkyrootLizardVariants.getRandomVariant(level.getRandom(), level.registryAccess()));
+        }
+        return spawnData;
+    }
+
+    @Override
     public InteractionResult mobInteract(Player playerEntity, InteractionHand hand) {
         ItemStack itemStack = playerEntity.getItemInHand(hand);
         if (itemStack.is(AetherIIItems.SKYROOT_STICK)) {
@@ -58,6 +84,14 @@ public class SkyrootLizard extends AetherAnimal {
         } else {
             return super.mobInteract(playerEntity, hand);
         }
+    }
+
+    public Holder<SkyrootLizardVariant> getVariant() {
+        return this.entityData.get(DATA_VARIANT_ID);
+    }
+
+    public void setVariant(Holder<SkyrootLizardVariant> variant) {
+        this.entityData.set(DATA_VARIANT_ID, variant);
     }
 
     @Override
@@ -90,7 +124,26 @@ public class SkyrootLizard extends AetherAnimal {
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+        SkyrootLizard lizard = AetherIIEntityTypes.SKYROOT_LIZARD.get().create(level, EntitySpawnReason.BREEDING);
+        if (lizard != null) {
+            lizard.setVariant(level.getRandom().nextBoolean() ? this.getVariant() : ((SkyrootLizard) otherParent).getVariant());
+        };
         return AetherIIEntityTypes.SKYROOT_LIZARD.get().create(level, EntitySpawnReason.BREEDING);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        this.getVariant().unwrapKey().ifPresent((key) -> tag.putString("variant", key.location().toString()));
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant")))
+                .map((location) -> ResourceKey.create(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, location))
+                .flatMap((key) -> this.registryAccess().lookupOrThrow(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY).get(key))
+                .ifPresent(this::setVariant);
     }
 }

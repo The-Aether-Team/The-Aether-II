@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.block.natural.*;
 import com.aetherteam.aetherii.item.AetherIIItems;
 import com.aetherteam.aetherii.item.components.AetherIIDataComponents;
+import com.aetherteam.aetherii.loot.functions.SpawnSkyrootLizard;
 import com.aetherteam.nitrogen.data.providers.NitrogenBlockLootSubProvider;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -129,9 +130,21 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                         piles -> piles == 16 ? LootItem.lootTableItem(leaves) : LootItem.lootTableItem(block)
                                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly((float) piles)))
                                 .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(AetherLeafPileBlock.PILES, piles))))
-
                 )
         );
+    }
+
+    public LootTable.Builder droppingWithChancesAndSkyrootSticksWithLizard(Block block, Block sapling, float... chances) {
+        HolderLookup.RegistryLookup<Enchantment> enchantmentLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        HolderLookup.RegistryLookup<Item> itemLookup = this.registries.lookupOrThrow(Registries.ITEM);
+        return createForgeSilkTouchOrShearsDispatchTable(itemLookup, block, this.applyExplosionCondition( block, LootItem.lootTableItem(sapling)).when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), chances)))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).when(this.hasShears().or(this.hasSilkTouch()).invert())
+                        .add(this.applyExplosionDecay(block,
+                                        LootItem.lootTableItem(AetherIIItems.SKYROOT_STICK.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))).apply(SpawnSkyrootLizard.builder(block.builtInRegistryHolder()))
+                                .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))))
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
+                        .add(this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.SKYROOT_PINECONE.get()))
+                                .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.01F, 0.011111112F, 0.0125F, 0.0111111125F, 0.05F))));
     }
 
     public LootTable.Builder droppingWithChancesAndSkyrootSticks(Block block, Block sapling, float... chances) {
@@ -145,9 +158,6 @@ public abstract class AetherIIBlockLootSubProvider extends NitrogenBlockLootSubP
                 .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
                                 .add(this.applyExplosionCondition(block, LootItem.lootTableItem(AetherIIItems.SKYROOT_PINECONE.get()))
                                         .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.01F, 0.011111112F, 0.0125F, 0.0111111125F, 0.05F))));
-//                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).when(this.hasShears().or(this.hasSilkTouch()).invert())
-//                        .add(this.applyExplosionCondition(block, LootItem.lootTableItem(Items.AIR).apply(SpawnSkyrootLizard.builder()))
-//                                .when(BonusLevelTableCondition.bonusLevelFlatChance(enchantmentLookup.getOrThrow(Enchantments.FORTUNE), 0.001F, 0.0011111112F, 0.00125F, 0.00111111125F, 0.005F))));
     }
 
     protected LootTable.Builder createSilkTouchOrShearsTable(ItemLike item) {

@@ -298,7 +298,10 @@ public class Swet extends Monster {
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant"))).map((location) -> ResourceKey.create(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, location)).flatMap((key) -> this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).get(key)).ifPresent(this::setVariant);
+        Optional.ofNullable(ResourceLocation.tryParse(tag.getString("variant")))
+                .map((location) -> ResourceKey.create(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, location))
+                .flatMap((key) -> this.registryAccess().lookupOrThrow(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY).get(key))
+                .ifPresent(this::setVariant);
         if (tag.contains("WaterDamageScale")) {
             this.setWaterDamage(tag.getFloat("WaterDamageScale"));
         }

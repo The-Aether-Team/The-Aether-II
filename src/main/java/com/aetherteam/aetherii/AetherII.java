@@ -1,6 +1,7 @@
 package com.aetherteam.aetherii;
 
 import com.aetherteam.aetherii.advancement.predicate.AetherIIEntitySubPredicates;
+import com.aetherteam.aetherii.api.SkyrootLizardVariant;
 import com.aetherteam.aetherii.api.SwetVariant;
 import com.aetherteam.aetherii.api.guidebook.BestiaryEntry;
 import com.aetherteam.aetherii.api.guidebook.EffectsEntry;
@@ -87,6 +88,7 @@ public class AetherII {
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIStyleDesigns.STYLE_DESIGN_REGISTRY_KEY, StyleDesign.DIRECT_CODEC, StyleDesign.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIStyleMaterials.STYLE_MATERIAL_REGISTRY_KEY, StyleMaterial.DIRECT_CODEC, StyleMaterial.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIISwetVariants.SWET_VARIANT_REGISTRY_KEY, SwetVariant.DIRECT_CODEC, SwetVariant.DIRECT_CODEC));
+        bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIISkyrootLizardVariants.SKYROOT_LIZARD_VARIANT_REGISTRY_KEY, SkyrootLizardVariant.DIRECT_CODEC, SkyrootLizardVariant.DIRECT_CODEC));
         bus.addListener(DataPackRegistryEvent.NewRegistry.class, event -> event.dataPackRegistry(AetherIIRewardWrappers.REWARD_WRAPPER_REGISTRY_KEY, RewardWrapper.DIRECT_CODEC, RewardWrapper.DIRECT_CODEC));
 
         DeferredRegister<?>[] registers = {
