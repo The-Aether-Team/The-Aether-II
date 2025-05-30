@@ -88,7 +88,7 @@
           "input_predicate": {
             "block": "aether_ii:guardian_roots",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.025
+            "probability": 0.05
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -104,7 +104,7 @@
           "input_predicate": {
             "block": "aether_ii:guardian_roots",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.01
+            "probability": 0.025
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -120,7 +120,7 @@
           "input_predicate": {
             "block": "aether_ii:guardian_roots",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.005
+            "probability": 0.01
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -136,7 +136,7 @@
           "input_predicate": {
             "block": "aether_ii:locked_guardian_roots",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.025
+            "probability": 0.05
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -149,7 +149,7 @@
           "input_predicate": {
             "block": "aether_ii:locked_guardian_roots",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.01
+            "probability": 0.025
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
@@ -162,7 +162,7 @@
           "input_predicate": {
             "block": "aether_ii:locked_guardian_roots",
             "predicate_type": "minecraft:random_block_match",
-            "probability": 0.005
+            "probability": 0.01
           },
           "location_predicate": {
             "predicate_type": "minecraft:always_true"
