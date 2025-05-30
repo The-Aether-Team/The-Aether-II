@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:music_disc_aether_tune"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:music_disc_ascending_dawn"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:music_disc_aerwhale"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:music_disc_approaches"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:music_disc_demise"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "aether_ii:recording_892"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 1.0
+      }
+    }
+  ],
+  "random_sequence": "aether_ii:chests/dungeons/music_discs"
+}

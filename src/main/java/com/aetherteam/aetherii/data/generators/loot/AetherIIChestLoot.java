@@ -109,5 +109,55 @@ public class AetherIIChestLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_CROSSBOW))
                 )
         );
+
+        builder.accept(AetherIILoot.CHESTS_DUNGEONS_IRRADIATED_ITEMS, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_ARMOR))
+                        .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_WEAPON))
+                        .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_TOOL))
+                        .add(LootItem.lootTableItem(AetherIIItems.IRRADIATED_CHUNK))
+                )
+        );
+        builder.accept(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 1.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_AETHER_TUNE))
+                        .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_ASCENDING_DAWN))
+                        .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_AERWHALE))
+                        .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_APPROACHES))
+                        .add(LootItem.lootTableItem(AetherIIItems.MUSIC_DISC_DEMISE))
+                        .add(LootItem.lootTableItem(AetherIIItems.RECORDING_892))
+                )
+        );
+
+        builder.accept(AetherIILoot.CHESTS_DUNGEONS_INFECTED_GUARDIAN_TREE, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(1.0F, 2.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_SHORTSWORD).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_SPEAR).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_HAMMER).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_AXE).setWeight(4))
+                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_SHORTSWORD).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_SPEAR).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_HAMMER).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_AXE).setWeight(3))
+                        .add(LootItem.lootTableItem(AetherIIItems.GRAVITITE_AXE).setWeight(2))
+                        .add(LootItem.lootTableItem(AetherIIItems.MOA_SADDLE).setWeight(2))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(3.0F, 5.0F))
+                        .add(LootItem.lootTableItem(AetherIIItems.AMBROSIUM_SHARD).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GOLDEN_AMBER).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIBlocks.AMBROSIUM_TORCH).setWeight(4).apply(SetItemCountFunction.setCount(UniformGenerator.between(3.0F, 5.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_BLUEBERRY).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ZANITE_GEMSTONE).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ENCHANTED_WYNDBERRY).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.ARKENIUM_PLATES).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))))
+                        .add(LootItem.lootTableItem(AetherIIItems.GLINT_GEMSTONE).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 1.0F))))
+                )
+
+                .withPool(LootPool.lootPool().setRolls(UniformGenerator.between(0.0F, 1.0F))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_IRRADIATED_ITEMS).setWeight(2))
+                        .add(NestedLootTable.lootTableReference(AetherIILoot.CHESTS_DUNGEONS_MUSIC_DISCS))
+                )
+        );
     }
 }
