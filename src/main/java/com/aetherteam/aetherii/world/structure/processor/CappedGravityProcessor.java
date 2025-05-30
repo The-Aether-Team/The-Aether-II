@@ -15,19 +15,23 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import javax.annotation.Nullable;
 
 public class CappedGravityProcessor extends StructureProcessor {
-    public static final MapCodec<CappedGravityProcessor> CODEC = RecordCodecBuilder.mapCodec(
-        instance -> instance.group(
-                    Heightmap.Types.CODEC.fieldOf("heightmap").orElse(Heightmap.Types.WORLD_SURFACE_WG).forGetter(codec -> codec.heightmap),
-                    Codec.INT.fieldOf("offset").orElse(0).forGetter(codec -> codec.offset)
-                )
-                .apply(instance, CappedGravityProcessor::new)
-    );
+    public static final MapCodec<CappedGravityProcessor> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Heightmap.Types.CODEC.fieldOf("heightmap").orElse(Heightmap.Types.WORLD_SURFACE_WG).forGetter(codec -> codec.heightmap),
+            Codec.INT.fieldOf("offset").orElse(0).forGetter(codec -> codec.offset),
+            Codec.INT.fieldOf("y_distance_below").forGetter(codec -> codec.yDistanceBelow),
+            Codec.INT.fieldOf("y_distance_above").forGetter(codec -> codec.yDistanceAbove)
+    ).apply(instance, CappedGravityProcessor::new));
+
     private final Heightmap.Types heightmap;
     private final int offset;
+    private final int yDistanceBelow;
+    private final int yDistanceAbove;
 
-    public CappedGravityProcessor(Heightmap.Types heightmap, int offset) {
+    public CappedGravityProcessor(Heightmap.Types heightmap, int offset, int yDistanceBelow, int yDistanceAbove) {
         this.heightmap = heightmap;
         this.offset = offset;
+        this.yDistanceBelow = yDistanceBelow;
+        this.yDistanceAbove = yDistanceAbove;
     }
 
     @Nullable
@@ -49,7 +53,7 @@ public class CappedGravityProcessor extends StructureProcessor {
         BlockPos pos = modifiedBlockInfo.pos();
         int i = level.getHeight(heightmapTypes, pos.getX(), pos.getZ()) + this.offset;
         int j = originalBlockInfo.pos().getY();
-        if (i > origin.getY() - 8 && i < origin.getY() + 8) {
+        if (i > origin.getY() - yDistanceBelow && i < origin.getY() + yDistanceAbove) {
             return new StructureTemplate.StructureBlockInfo(new BlockPos(pos.getX(), i + j, pos.getZ()), modifiedBlockInfo.state(), modifiedBlockInfo.nbt());
         }
         return null;

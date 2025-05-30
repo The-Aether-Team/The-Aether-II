@@ -3,7 +3,9 @@
     {
       "heightmap": "WORLD_SURFACE_WG",
       "offset": -1,
-      "processor_type": "aether_ii:gravity_capped"
+      "processor_type": "aether_ii:gravity_capped",
+      "y_distance_above": 8,
+      "y_distance_below": 8
     },
     {
       "density_function": "aether_ii:highlands/dungeon/dense_guardian_wood",

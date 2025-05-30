@@ -80,7 +80,7 @@ public class AetherIIProcessorLists {
         ));
 
         register(context, INFECTED_GUARDIAN_TREE_ROOTS, ImmutableList.of(
-                new CappedGravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1),
+                new CappedGravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1, 8,8),
                 new DensityFunctionProcessor(AetherIIBlocks.GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_DENSE_GUARDIAN_WOOD)),
                 new DensityFunctionProcessor(AetherIIBlocks.LOCKED_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIBlocks.LOCKED_DENSE_GUARDIAN_WOOD.get().defaultBlockState(), AetherIIDensityFunctions.getFunction(function, AetherIIDensityFunctions.DUNGEON_DENSE_GUARDIAN_WOOD)),
                 new RuleProcessor(ImmutableList.of(
