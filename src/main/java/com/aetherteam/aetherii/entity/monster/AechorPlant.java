@@ -148,7 +148,7 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
      * @param distanceFactor The {@link Float} distance factor for targeting.
      */
     @Override
-    public void performRangedAttack(LivingEntity target, float distanceFactor) {
+    public void performRangedAttack(LivingEntity target, float distanceFactor) { //todo improve how it handles distance
         double xDist = target.getX() - this.getX();
         double zDist = target.getZ() - this.getZ();
         double sqrt = Math.sqrt(xDist * xDist + zDist * zDist + 0.1);

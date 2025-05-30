@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.NearestVisibleLivingEntities;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.GameRules;
 
@@ -45,6 +46,7 @@ public class MoaAi {
             MemoryModuleType.BREED_TARGET,
             MemoryModuleType.TEMPTING_PLAYER,
             MemoryModuleType.NEAREST_VISIBLE_ADULT,
+            MemoryModuleType.NEAREST_VISIBLE_PLAYER,
             MemoryModuleType.TEMPTATION_COOLDOWN_TICKS,
             MemoryModuleType.IS_TEMPTED,
             MemoryModuleType.IS_PANICKING,
@@ -57,95 +59,79 @@ public class MoaAi {
     );
     private static final UniformInt ADULT_FOLLOW_RANGE = UniformInt.of(5, 16);
 
-    public static void initMemories(Moa pMoa, RandomSource pRandom) {
+    public static void initMoaHomeMemories(Moa owner, RandomSource random) {
+        owner.getBrain().setMemory(MemoryModuleType.HOME, GlobalPos.of(owner.level().dimension(), owner.blockPosition()));
     }
 
-    public static void initMoaHomeMemories(Moa pMoa, RandomSource pRandom) {
-        pMoa.getBrain().setMemory(MemoryModuleType.HOME, GlobalPos.of(pMoa.level().dimension(), pMoa.blockPosition()));
+    public static Brain<?> makeBrain(Moa owner, Brain<Moa> brain) {
+        initCoreActivity(brain);
+        initIdleActivity(brain);
+        initFightActivity(owner, brain);
+
+        brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
+        brain.setDefaultActivity(Activity.IDLE);
+        brain.useDefaultActivity();
+
+        return brain;
     }
 
-    public static Brain<?> makeBrain(Moa moa, Brain<Moa> pBrain) {
-        initCoreActivity(pBrain);
-        initIdleActivity(pBrain);
-        initFightActivity(moa, pBrain);
-        pBrain.setCoreActivities(ImmutableSet.of(Activity.CORE));
-        pBrain.setDefaultActivity(Activity.IDLE);
-        pBrain.useDefaultActivity();
-        return pBrain;
+    private static void initCoreActivity(Brain<Moa> brain) {
+        brain.addActivity(Activity.CORE, 0, ImmutableList.of(
+                new Swim<>(0.8F),
+                new BabyOnlyAnimalPanic<>(0.14F),
+                new LookAtTargetSink(45, 90),
+                new MoveToTargetSink(),
+                StopBeingAngryIfTargetDead.create(),
+                new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
+                new CountDownCooldownTicks(MemoryModuleType.RAM_COOLDOWN_TICKS),
+                new CountDownCooldownTicks(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get())
+        ));
     }
 
-    private static void initCoreActivity(Brain<Moa> pBrain) {
-        pBrain.addActivity(
-                Activity.CORE,
-                0,
-                ImmutableList.of(
-                        new Swim<>(0.8F),
-                        new BabyOnlyAnimalPanic<>(0.14F),
-                        new LookAtTargetSink(45, 90),
-                        new MoveToTargetSink(),
-                        StopBeingAngryIfTargetDead.create(),
-                        new CountDownCooldownTicks(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS),
-                        new CountDownCooldownTicks(MemoryModuleType.RAM_COOLDOWN_TICKS),
-                        new CountDownCooldownTicks(AetherIIMemoryModuleTypes.EAT_GRASS_COOLDOWN.get()))
-        );
+    private static void initIdleActivity(Brain<Moa> brain) {
+        brain.addActivity(Activity.IDLE, ImmutableList.of(
+                Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
+                Pair.of(2, BehaviorBuilder.triggerIf(Predicate.not(Moa::isPlayerGrown), BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 0.12F)))),
+                Pair.of(3, StartAttacking.create(MoaAi::findNearestValidAttackTarget)),
+                Pair.of(4, new RunOne<>(ImmutableList.of(
+                        Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), FallRandomStroll.stroll(0.06F)), 2),
+                        Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), SetWalkTargetFromLookTarget.create(0.06F, 3)), 2),
+                        Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BetterStrollToPoi.create(MemoryModuleType.HOME, 0.06F, 2, 6)), 2),
+                        Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), StrollAroundPoi.create(MemoryModuleType.HOME, 0.06F, 6)), 2),
+                        Pair.of(new DoNothing(30, 60), 1)
+                )))
+        ));
     }
 
-    private static void initIdleActivity(Brain<Moa> pBrain) {
-        pBrain.addActivity(
-                Activity.IDLE,
-                ImmutableList.of(
-                        Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
-                        Pair.of(2, BehaviorBuilder.triggerIf(Predicate.not(Moa::isPlayerGrown), BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 0.12F)))),
-                        Pair.of(3, StartAttacking.<Moa>create(MoaAi::findNearestValidAttackTarget)),
-                        Pair.of(
-                                4,
-                                new RunOne<>(
-                                        ImmutableList.of(
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), FallRandomStroll.stroll(0.06F)), 2), Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), SetWalkTargetFromLookTarget.create(0.06F, 3)), 2),
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), BetterStrollToPoi.create(MemoryModuleType.HOME, 0.06F, 2, 6)), 2),
-                                                Pair.of(BehaviorBuilder.triggerIf(Predicate.not(Moa::isSitting), StrollAroundPoi.create(MemoryModuleType.HOME, 0.06F, 6)), 2),
-                                                Pair.of(new DoNothing(30, 60), 1)
-                                        )
-                                )
-                        )
-                )
-        );
+    private static void initFightActivity(Moa owner, Brain<Moa> brain) {
+        brain.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(
+                StopAttackingIfTargetInvalid.create((serverLevel, livingEntity) -> !isNearestValidAttackTarget(serverLevel, owner, livingEntity)),
+                SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(0.14F),
+                MeleeAttack.create(5)
+        ), MemoryModuleType.ATTACK_TARGET);
     }
 
-
-    private static void initFightActivity(Moa pMoa, Brain<Moa> pBrain) {
-        pBrain.addActivityAndRemoveMemoryWhenStopped(
-                Activity.FIGHT,
-                10,
-                ImmutableList.of(
-                        StopAttackingIfTargetInvalid.create((serverLevel, livingEntity) -> !isNearestValidAttackTarget(serverLevel, pMoa, livingEntity)),
-                        SetWalkTargetFromAttackTargetIfTargetOutOfReach.create(0.14F),
-                        MeleeAttack.create(20)
-                ),
-                MemoryModuleType.ATTACK_TARGET
-        );
+    private static boolean isNearestValidAttackTarget(ServerLevel serverLevel, Moa owner, LivingEntity target) {
+        return findNearestValidAttackTarget(serverLevel, owner).filter(entity -> entity == target).isPresent();
     }
 
-    private static boolean isNearestValidAttackTarget(ServerLevel serverLevel, Moa pMoa, LivingEntity pTarget) {
-        return findNearestValidAttackTarget(serverLevel, pMoa).filter(entity -> entity == pTarget).isPresent();
-    }
-
-    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel serverLevel, Moa moa) {
-        if (moa.isBaby()) {
+    private static Optional<? extends LivingEntity> findNearestValidAttackTarget(ServerLevel serverLevel, Moa owner) {
+        if (owner.isBaby()) {
             return Optional.empty();
         }
 
-        Optional<LivingEntity> optional = BehaviorUtils.getLivingEntityFromUUIDMemory(moa, MemoryModuleType.ANGRY_AT);
-        if (optional.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, moa, optional.get())) {
-            return optional;
-        } else if (moa.getBrain().hasMemoryValue(MemoryModuleType.HOME)) {
-            Optional<? extends LivingEntity> optional1 = getTargetIfWithinRange(moa, MemoryModuleType.NEAREST_VISIBLE_PLAYER);
-            Optional<GlobalPos> globalPos = moa.getBrain().getMemory(MemoryModuleType.HOME);
-            if (globalPos.isPresent() && optional1.isPresent()) {
-                if (optional1.get().level().dimension() == globalPos.get().dimension()) {
-                    if (globalPos.get().pos().distManhattan(optional1.get().blockPosition()) <= 5) {
-                        //when near of nest. begin angry
-                        return optional1;
+        Optional<LivingEntity> target = BehaviorUtils.getLivingEntityFromUUIDMemory(owner, MemoryModuleType.ANGRY_AT);
+        if (target.isPresent() && Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, owner, target.get()) && target.filter(player -> player.closerThan(owner, 6.0)).isPresent()) { //todo track line of sight and distance and follow range and dont make it too fast.
+            return target;
+        } else if (owner.getBrain().hasMemoryValue(MemoryModuleType.HOME)) {
+            Optional<Player> nearestPlayer = getTargetIfWithinRange(owner, MemoryModuleType.NEAREST_VISIBLE_PLAYER); //todo they need to be able to have the moa see the player if its near the nest and ignore follow range.
+            Optional<GlobalPos> homePos = owner.getBrain().getMemory(MemoryModuleType.HOME);
+
+            if (homePos.isPresent() && nearestPlayer.isPresent()) {
+                if (nearestPlayer.get().level().dimension() == homePos.get().dimension()) {
+                    if (homePos.get().pos().distManhattan(nearestPlayer.get().blockPosition()) <= 5) {
+                        // When near nest, begin anger.
+                        return nearestPlayer;
                     }
                 }
             }
@@ -153,54 +139,53 @@ public class MoaAi {
         return Optional.empty();
     }
 
-    private static Optional<? extends LivingEntity> getTargetIfWithinRange(Moa pMoa, MemoryModuleType<? extends LivingEntity> pMemoryType) {
-        return pMoa.getBrain().getMemory(pMemoryType).filter(p_35108_ -> p_35108_.closerThan(pMoa, 18.0));
+    private static Optional<Player> getTargetIfWithinRange(Moa owner, MemoryModuleType<Player> nearestPlayerMemory) {
+        return owner.getBrain().getMemory(nearestPlayerMemory).filter(player -> player.closerThan(owner, 18.0));
     }
 
-
-    public static void updateActivity(Moa pBrain) {
-        pBrain.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
+    public static void updateActivity(Moa owner) {
+        owner.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
     }
 
-    public static void maybeRetaliate(ServerLevel serverLevel, Moa pMoa, LivingEntity pTarget) {
-        if (!pMoa.isPlayerGrown()) {
-            if (Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, pMoa, pTarget)) {
-                if (!BehaviorUtils.isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(pMoa, pTarget, 4.0)) {
-                    if (!pMoa.isBaby()) {
-                        setAngerTarget(serverLevel, pMoa, pTarget);
+    public static void maybeRetaliate(ServerLevel serverLevel, Moa owner, LivingEntity target) {
+        if (!owner.isPlayerGrown()) {
+            if (Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, owner, target)) {
+                if (!BehaviorUtils.isOtherTargetMuchFurtherAwayThanCurrentAttackTarget(owner, target, 4.0)) {
+                    if (!owner.isBaby()) {
+                        setAngerTarget(serverLevel, owner, target);
                     }
-                    broadcastAngerTarget(serverLevel, pMoa, pTarget);
+                    broadcastAngerTarget(serverLevel, owner, target);
                 }
             }
         } else {
-            pMoa.setSitting(false);
+            owner.setSitting(false);
         }
     }
 
-
-    private static Optional<NearestVisibleLivingEntities> getAdultMoa(Moa pMoa) {
-        return pMoa.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
+    private static Optional<NearestVisibleLivingEntities> getAdultMoa(Moa owner) {
+        return owner.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES);
     }
 
-    protected static void broadcastAngerTarget(ServerLevel serverLevel, Moa pMoa, LivingEntity pTarget) {
-        Optional<NearestVisibleLivingEntities> moa = getAdultMoa(pMoa);
+    protected static void broadcastAngerTarget(ServerLevel serverLevel, Moa owner, LivingEntity target) {
+        Optional<NearestVisibleLivingEntities> moa = getAdultMoa(owner);
 
         if (moa.isPresent()) {
-            for (LivingEntity moa1 : moa.get().findAll(entity -> {
-                return !entity.isBaby() && entity instanceof Moa moa2 && !moa2.isPlayerGrown() && entity.getBrain().hasMemoryValue(MemoryModuleType.HOME);
-            })) {
-                setAngerTarget(serverLevel, (Moa) moa1, pTarget);
+            for (LivingEntity moa1 : moa.get().findAll(entity -> !entity.isBaby()
+                    && entity instanceof Moa moa2
+                    && !moa2.isPlayerGrown()
+                    && entity.getBrain().hasMemoryValue(MemoryModuleType.HOME))) {
+                setAngerTarget(serverLevel, (Moa) moa1, target);
             }
         }
     }
 
-    protected static void setAngerTarget(ServerLevel serverLevel, Moa pMoa, LivingEntity pTarget) {
-        if (Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, pMoa, pTarget)) {
-            pMoa.getBrain().eraseMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
-            pMoa.getBrain().setMemoryWithExpiry(MemoryModuleType.ANGRY_AT, pTarget.getUUID(), 600L);
+    protected static void setAngerTarget(ServerLevel serverLevel, Moa owner, LivingEntity target) {
+        if (Sensor.isEntityAttackableIgnoringLineOfSight(serverLevel, owner, target)) {
+            owner.getBrain().eraseMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
+            owner.getBrain().setMemoryWithExpiry(MemoryModuleType.ANGRY_AT, target.getUUID(), 600L);
 
-            if (pTarget.getType() == EntityType.PLAYER && serverLevel.getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
-                pMoa.getBrain().setMemoryWithExpiry(MemoryModuleType.UNIVERSAL_ANGER, true, 600L);
+            if (target.getType() == EntityType.PLAYER && serverLevel.getGameRules().getBoolean(GameRules.RULE_UNIVERSAL_ANGER)) {
+                owner.getBrain().setMemoryWithExpiry(MemoryModuleType.UNIVERSAL_ANGER, true, 600L);
             }
         }
     }

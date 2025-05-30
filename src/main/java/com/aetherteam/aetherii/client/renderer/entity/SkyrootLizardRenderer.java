@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class SkyrootLizardRenderer extends MobRenderer<SkyrootLizard, SkyrootLizardRenderState, SkyrootLizardModel<SkyrootLizardRenderState>> {
-    private static final ResourceLocation SKYROOT_LIZARD_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skyroot_lizard/skyroot_lizard.png");
+    private static final ResourceLocation SKYROOT_LIZARD_TEXTURE = ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "textures/entity/mobs/skyroot_lizard/skyroot.png");
 
     public SkyrootLizardRenderer(EntityRendererProvider.Context context) {
         super(context, new SkyrootLizardModel<>(context.bakeLayer(AetherIIModelLayers.SKYROOT_LIZARD)), 0.3F);
