@@ -17,9 +17,11 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -35,7 +37,9 @@ public class TaegoreAi {
     public static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
             MemoryModuleType.LOOK_TARGET,
             MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES,
+            MemoryModuleType.NEAREST_VISIBLE_PLAYER,
             MemoryModuleType.WALK_TARGET,
+            MemoryModuleType.AVOID_TARGET,
             MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
             MemoryModuleType.PATH,
             MemoryModuleType.ATE_RECENTLY,
@@ -54,8 +58,8 @@ public class TaegoreAi {
 
     public static Brain<?> makeBrain(EntityType<? extends Taegore> entityType, Brain<Taegore> brain) {
         initCoreActivity(brain);
-        initSniffingActivity(brain);
         initDigActivity(brain);
+        initSniffingActivity(brain);
         initIdleActivity(entityType, brain);
 
         brain.setCoreActivities(ImmutableSet.of(Activity.CORE));
@@ -75,18 +79,6 @@ public class TaegoreAi {
         ));
     }
 
-    private static void initSniffingActivity(Brain<Taegore> brain) {
-        brain.addActivityWithConditions(
-                Activity.SNIFF,
-                ImmutableList.of(Pair.of(0, new TaegoreSearching())),
-                Set.of(
-                        Pair.of(MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT),
-                        Pair.of(AetherIIMemoryModuleTypes.TAEGORE_SEARCH_TARGET.get(), MemoryStatus.VALUE_PRESENT),
-                        Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_PRESENT)
-                )
-        );
-    }
-
     private static void initDigActivity(Brain<Taegore> brain) {
         brain.addActivityWithConditions(
                 Activity.DIG,
@@ -99,13 +91,26 @@ public class TaegoreAi {
         );
     }
 
+    private static void initSniffingActivity(Brain<Taegore> brain) {
+        brain.addActivityWithConditions(
+                Activity.SNIFF,
+                ImmutableList.of(Pair.of(0, new TaegoreSearching())),
+                Set.of(
+                        Pair.of(MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT),
+                        Pair.of(AetherIIMemoryModuleTypes.TAEGORE_SEARCH_TARGET.get(), MemoryStatus.VALUE_PRESENT),
+                        Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_PRESENT)
+                )
+        );
+    }
+
     private static void initIdleActivity(EntityType<? extends Taegore> entityType, Brain<Taegore> brain) {
         brain.addActivity(Activity.IDLE, ImmutableList.of(
-                Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
-                Pair.of(1, new AnimalMakeLove(entityType)),
-                Pair.of(2, new FollowTemptation(livingEntity -> 1.2F)),
-                Pair.of(3, BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 1.1F)),
-                Pair.of(4, new RunOne<>(ImmutableList.of(
+                Pair.of(0, SetWalkTargetAwayFrom.entity(MemoryModuleType.AVOID_TARGET, 2.0F, 24, true)),
+                Pair.of(1, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
+                Pair.of(2, new AnimalMakeLove(entityType)),
+                Pair.of(3, new FollowTemptation(livingEntity -> 1.2F)),
+                Pair.of(4, BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 1.1F)),
+                Pair.of(5, new RunOne<>(ImmutableList.of(
                         Pair.of(new TaegoreBeginSearch(40, 80), 1),
                         Pair.of(RandomStroll.stroll(1.0F), 2),
                         Pair.of(SetWalkTargetFromLookTarget.create(0.8F, 3), 2),
@@ -116,6 +121,15 @@ public class TaegoreAi {
 
     public static void updateActivity(Taegore owner) {
         owner.getBrain().setActiveActivityToFirstValid(ImmutableList.of(Activity.DIG, Activity.SNIFF, Activity.IDLE));
+
+        Optional<Player> optionalTargetFromMemory = owner.getBrain().getMemory(MemoryModuleType.NEAREST_VISIBLE_PLAYER);
+        if (optionalTargetFromMemory.isPresent()) {
+            if (optionalTargetFromMemory.get().isSprinting()) {
+                owner.getBrain().setMemory(MemoryModuleType.AVOID_TARGET, optionalTargetFromMemory);
+            } else if (owner.getBrain().hasMemoryValue(MemoryModuleType.AVOID_TARGET)) {
+                owner.getBrain().setMemory(MemoryModuleType.AVOID_TARGET, Optional.empty());
+            }
+        }
     }
 
     public static void resetSearch(ServerLevel serverLevel, Taegore owner) {

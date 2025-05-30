@@ -53,11 +53,6 @@ public class Taegore extends AetherAnimal implements DiggingMob {
         this.variantType = type;
     }
 
-    @Override
-    protected void registerGoals() { //todo
-//        this.goalSelector.addGoal(4, new AvoidEntityGoal<>(this, Player.class, 8.0F, 2.0, 2.2, Entity::isSprinting));
-    }
-
     public static AttributeSupplier.Builder createMobAttributes() {
         return Animal.createAnimalAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
