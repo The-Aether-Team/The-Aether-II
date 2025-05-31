@@ -62,7 +62,7 @@ public class AetherIIEntityTypes {
 
     // Hostile
     public static final DeferredHolder<EntityType<?>, EntityType<AechorPlant>> AECHOR_PLANT = ENTITY_TYPES.register("aechor_plant",
-            () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 0.4F).eyeHeight(0.25F).clientTrackingRange(8).build(AetherIIEntities.AECHOR_PLANT));
+            () -> EntityType.Builder.of(AechorPlant::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(0.9F, 0.6F).eyeHeight(0.25F).clientTrackingRange(8).build(AetherIIEntities.AECHOR_PLANT));
     public static final DeferredHolder<EntityType<?>, EntityType<CarrionSprout>> CARRION_SPROUT = ENTITY_TYPES.register("carrion_sprout",
             () -> EntityType.Builder.of(CarrionSprout::new, AetherIIMobCategory.AETHER_SURFACE_MONSTER).sized(1.0F, 1.0F).clientTrackingRange(8).build(AetherIIEntities.CARRION_SPROUT));
 
