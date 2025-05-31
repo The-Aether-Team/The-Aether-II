@@ -66,9 +66,9 @@ public class DamageSystemAttachment implements INBTSynchable {
         }
     }
 
-    public void buildUpShieldStun(LivingEntity entity, DamageSource source) {
+    public void buildUpShieldStun(LivingEntity entity, Entity source) {
         if (entity instanceof Player player && player.getUseItem().is(Tags.Items.TOOLS_SHIELD)) {
-            if (source.getEntity() != null && source.getEntity().getType().is(AetherIITags.Entities.AETHER_MOBS)) {
+            if (source != null && source.getType().is(AetherIITags.Entities.AETHER_MOBS)) {
                 int rate = DamageSystemAttachment.MAX_SHIELD_STAMINA / 2;
                 int cooldown;
                 if (entity.getUseItem().getItem() instanceof TieredShieldItem) {

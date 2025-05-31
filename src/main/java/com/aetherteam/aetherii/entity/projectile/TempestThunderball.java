@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -113,9 +114,10 @@ public class TempestThunderball extends AbstractHurtingProjectile {
         super.onHitEntity(result);
         if (!this.level().isClientSide) {
             Entity entity = result.getEntity();
-            Entity entity1 = this.getOwner();
-            if (entity1 instanceof LivingEntity) {
-                entity.hurt(this.damageSources().indirectMagic(this, entity1), 2.0F);
+            if (entity instanceof LivingEntity livingEntity) {
+                if (livingEntity.level() instanceof ServerLevel serverLevel) {
+                    entity.hurtServer(serverLevel, this.damageSources().mobProjectile(this, livingEntity), 3.0F);
+                }
             }
         }
     }

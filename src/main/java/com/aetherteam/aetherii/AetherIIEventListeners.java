@@ -273,7 +273,7 @@ public class AetherIIEventListeners {
         LivingEntity livingEntity = event.getEntity();
         DamageSource source = event.getDamageSource();
 
-        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source);
+        livingEntity.getData(AetherIIDataAttachments.DAMAGE_SYSTEM).buildUpShieldStun(livingEntity, source.getEntity());
     }
 
     public static void onLivingItemUsed(LivingEntityUseItemEvent.Finish event) {
