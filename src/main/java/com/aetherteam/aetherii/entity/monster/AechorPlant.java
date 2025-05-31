@@ -116,32 +116,6 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
     }
 
     /**
-     * Disallows Aechor Plants from being pushed.
-     *
-     * @param x The {@link Double} for x-motion.
-     * @param y The {@link Double} for y-motion.
-     * @param z The {@link Double} for z-motion.
-     */
-    @Override
-    public void push(double x, double y, double z) {
-    }
-
-    /**
-     * Disallows Aechor Plants from jumping.
-     */
-    @Override
-    public void jumpFromGround() {
-    }
-
-    /**
-     * Disallows Aechor Plants from being leashed.
-     */
-    @Override
-    public boolean canBeLeashed() {
-        return false;
-    }
-
-    /**
      * Shoots a Poison Needle from the center of the Aechor Plant.
      *
      * @param target         The target {@link LivingEntity}.
@@ -182,6 +156,32 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
         }
 
         this.playSound(AetherIISoundEvents.ENTITY_AECHOR_PLANT_SHOOT.get(), 2.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+    }
+
+    /**
+     * Disallows Aechor Plants from being pushed.
+     *
+     * @param x The {@link Double} for x-motion.
+     * @param y The {@link Double} for y-motion.
+     * @param z The {@link Double} for z-motion.
+     */
+    @Override
+    public void push(double x, double y, double z) {
+    }
+
+    /**
+     * Disallows Aechor Plants from jumping.
+     */
+    @Override
+    public void jumpFromGround() {
+    }
+
+    /**
+     * Disallows Aechor Plants from being leashed.
+     */
+    @Override
+    public boolean canBeLeashed() {
+        return false;
     }
 
     /**
@@ -237,13 +237,11 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
         private int attackTime = -1;
         private final int attackInterval;
         private final float attackRadius;
-        private final float attackRadiusSqr;
 
         public ShootDartGoal(AechorPlant aechorPlant, int attackInterval, float attackRadius) {
             this.aechorPlant = aechorPlant;
             this.attackInterval = attackInterval;
             this.attackRadius = attackRadius;
-            this.attackRadiusSqr = attackRadius * attackRadius;
         }
 
         @Override
