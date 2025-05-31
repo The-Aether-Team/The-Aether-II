@@ -46,7 +46,7 @@ public class AetherIIBlockLoot extends AetherIIBlockLootSubProvider {
         this.dropSelf(AetherIIBlocks.UNDERSHALE.get());
         this.dropWhenSilkTouch(AetherIIBlocks.UNSTABLE_UNDERSHALE.get());
         this.dropSelf(AetherIIBlocks.AGIOSITE.get());
-        this.add(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.SCATTERGLASS_SHARD, UniformGenerator.between(1.0F, 3.0F)));
+        this.add(AetherIIBlocks.CRUDE_SCATTERGLASS.get(), block -> this.createSingleItemTableWithSilkTouch(block, AetherIIItems.SCATTERGLASS_SHARD, UniformGenerator.between(1.0F, 2.0F)));
         this.add(AetherIIBlocks.SKY_ROOTS.get(), this::createSkyRootsDrops);
         this.dropSelf(AetherIIBlocks.ICHORITE.get());
         this.dropSelf(AetherIIBlocks.POINTED_HOLYSTONE.get());
