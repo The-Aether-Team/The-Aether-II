@@ -96,7 +96,6 @@ public class AerbunnyRenderer extends MobRenderer<Aerbunny, AerbunnyRenderState,
             return RenderType.entityTranslucent(resourcelocation);
         }
         return super.getRenderType(renderState, isVisible, renderTranslucent, appearsGlowing);
-
     }
 
     @Override

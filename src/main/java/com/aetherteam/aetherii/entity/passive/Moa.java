@@ -860,7 +860,7 @@ public class Moa extends MountableAnimal {
             dimensions = dimensions.scale(1.0F, 0.5F);
         }
         if (this.isBaby()) {
-            dimensions = dimensions.scale(1.0F, 0.5F);
+            dimensions = dimensions.scale(0.5F, 0.5F);
         }
         return dimensions;
     }
