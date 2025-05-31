@@ -2,21 +2,19 @@ package com.aetherteam.aetherii.entity.monster;
 
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.entity.projectile.GravititeDebrisShot;
-import com.aetherteam.aetherii.mixin.mixins.common.accessor.RangedAttackGoalAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
@@ -26,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
+import java.util.EnumSet;
 
 public class GravititeTaluton extends Taluton implements RangedAttackMob {
     public static final int ATTACK_DURATION = 100;
@@ -35,7 +34,7 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
     public static int RELOAD_STOP_EVENT = 102;
     public static int RELOAD_START_EVENT = 103;
 
-    public RangedAttackGoal attackGoal;
+    public GravititeTalutonRangedAttackGoal attackGoal;
     public AnimationState attackAnimationState = new AnimationState();
     public AnimationState reloadAnimationState = new AnimationState();
     public boolean debrisVisible;
@@ -46,7 +45,7 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
 
     @Override
     protected void registerGoals() {
-        this.attackGoal = new RangedAttackGoal(this, 1.0, ATTACK_DURATION, 10.0F);
+        this.attackGoal = new GravititeTalutonRangedAttackGoal(this, 1.0, ATTACK_DURATION, 10.0F);
         this.goalSelector.addGoal(1, this.attackGoal);
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0));
         this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -95,7 +94,7 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
     public void aiStep() {
         super.aiStep();
         if (this.attackGoal != null) {
-            int attackTime = ((RangedAttackGoalAccessor) this.attackGoal).aether_ii$getAttackTime();
+            int attackTime = this.attackGoal.attackTime;
             switch(attackTime) {
                 case 22 -> this.level().broadcastEntityEvent(this, (byte) ATTACK_START_EVENT);
                 case 1 -> this.level().broadcastEntityEvent(this, (byte) RELOAD_STOP_EVENT);
@@ -147,5 +146,84 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         this.playSound(AetherIISoundEvents.ENTITY_GRAVITITE_TALUTON_STEP.get(), 0.15F, 1.0F);
+    }
+
+    protected static class GravititeTalutonRangedAttackGoal extends Goal {
+        private final Mob mob;
+        private final RangedAttackMob rangedAttackMob;
+        protected int attackTime = -1;
+        private final double speedModifier;
+        private int seeTime;
+        private final int attackIntervalMin;
+        private final int attackIntervalMax;
+        private final float attackRadius;
+        private final float attackRadiusSqr;
+
+        public GravititeTalutonRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackInterval, float attackRadius) {
+            this(rangedAttackMob, speedModifier, attackInterval, attackInterval, attackRadius);
+        }
+
+        public GravititeTalutonRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackIntervalMin, int attackIntervalMax, float attackRadius) {
+            if (!(rangedAttackMob instanceof LivingEntity)) {
+                throw new IllegalArgumentException("GravititeTalutonRangedAttackGoal requires Mob implements RangedAttackMob");
+            } else {
+                this.rangedAttackMob = rangedAttackMob;
+                this.mob = (Mob) rangedAttackMob;
+                this.speedModifier = speedModifier;
+                this.attackIntervalMin = attackIntervalMin;
+                this.attackIntervalMax = attackIntervalMax;
+                this.attackRadius = attackRadius;
+                this.attackRadiusSqr = attackRadius * attackRadius;
+                this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+            }
+        }
+
+        @Override
+        public boolean canUse() {
+            return this.mob.getTarget() != null;
+        }
+
+        @Override
+        public void stop() {
+            this.seeTime = 0;
+            this.attackTime = -1;
+        }
+
+        @Override
+        public void tick() {
+            LivingEntity target = this.mob.getTarget();
+            if (target != null) {
+                double distance = this.mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
+                boolean canSee = this.mob.getSensing().hasLineOfSight(target);
+
+                if (canSee) {
+                    ++this.seeTime;
+                } else {
+                    this.seeTime = 0;
+                }
+                if (distance <= (double) this.attackRadiusSqr && this.seeTime >= 5) {
+                    this.mob.getNavigation().stop();
+                } else {
+                    this.mob.getNavigation().moveTo(target, this.speedModifier);
+                }
+                this.mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+
+                if (--this.attackTime == 0) {
+                    if (canSee) {
+                        float f = (float) Math.sqrt(distance) / this.attackRadius;
+                        float f1 = Mth.clamp(f, 0.1F, 1.0F);
+                        this.rangedAttackMob.performRangedAttack(target, f1);
+                        this.attackTime = Mth.floor(f * (float) (this.attackIntervalMax - this.attackIntervalMin) + (float) this.attackIntervalMin);
+                    }
+                } else if (this.attackTime < 0) {
+                    this.attackTime = Mth.floor(Mth.lerp(Math.sqrt(distance) / this.attackRadius, this.attackIntervalMin, this.attackIntervalMax));
+                }
+            }
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
     }
 }

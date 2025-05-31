@@ -54,12 +54,11 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.5));
-        this.goalSelector.addGoal(4, new Cockatrice.CockatriceMeleeAttackGoal(this, 1.25F, true));
-        this.goalSelector.addGoal(5, new Cockatrice.CockatriceRangedAttackGoal(this, 0.8F, 20 * 10, 20 * 15, 10.0F));
+        this.goalSelector.addGoal(4, new Cockatrice.CockatriceMeleeAttackGoal(this, 1.15F, true, 6.0F));
+        this.goalSelector.addGoal(5, new Cockatrice.CockatriceRangedAttackGoal(this, 0.8F, 200, 300, 20.0F));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -144,7 +143,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         double d1 = target.getX() - this.getX();
         double d3 = target.getZ() - this.getZ();
         double d4 = Math.sqrt(d1 * d1 + d3 * d3) * 0.2F;
-        dart.shoot(d1, d0 + d4, d3, 0.8F, 6.0F);
+        dart.shoot(d1, d0 + d4, d3, 1.25F, 6.0F);
         this.playSound(AetherIISoundEvents.ENTITY_COCKATRICE_SHOOT.value(), 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(dart);
     }
@@ -190,19 +189,23 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
     protected static class CockatriceMeleeAttackGoal extends MeleeAttackGoal {
         private int ticksUntilNextAttack;
         private boolean attack;
+        private final float attackThreshold;
+        private final float attackThresholdSqr;
 
-        public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen) {
+        public CockatriceMeleeAttackGoal(PathfinderMob mob, double speedModifier, boolean followingTargetEvenIfNotSeen, float attackThreshold) {
             super(mob, speedModifier, followingTargetEvenIfNotSeen);
+            this.attackThreshold = attackThreshold;
+            this.attackThresholdSqr = attackThreshold * attackThreshold;
         }
 
         @Override
         public boolean canUse() {
-            return super.canUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) <= 3 * 3;
+            return super.canUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < this.attackThresholdSqr;
         }
 
         @Override
         public boolean canContinueToUse() {
-            return super.canContinueToUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < 10 * 10;
+            return super.canContinueToUse() && this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) < this.attackThresholdSqr;
         }
 
         @Override
@@ -253,18 +256,23 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         protected int getTicksUntilNextAttack() {
             return this.ticksUntilNextAttack;
         }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
     }
 
     protected static class CockatriceRangedAttackGoal extends Goal {
         private final Mob mob;
         private final RangedAttackMob rangedAttackMob;
-        @Nullable
-        private LivingEntity target;
         private int attackTime = -1;
         private final double speedModifier;
+        private int seeTime;
         private final int attackIntervalMin;
         private final int attackIntervalMax;
         private final float attackRadius;
+        private final float attackRadiusSqr;
 
         public CockatriceRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackInterval, float attackRadius) {
             this(rangedAttackMob, speedModifier, attackInterval, attackInterval, attackRadius);
@@ -280,50 +288,54 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
                 this.attackIntervalMin = attackIntervalMin;
                 this.attackIntervalMax = attackIntervalMax;
                 this.attackRadius = attackRadius;
+                this.attackRadiusSqr = attackRadius * attackRadius;
                 this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
             }
         }
 
         @Override
         public boolean canUse() {
-            LivingEntity livingentity = this.mob.getTarget();
-            if (livingentity != null && livingentity.isAlive()) {
-                this.target = livingentity;
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return this.canUse();
+            return this.mob.getTarget() != null && this.mob.distanceToSqr(this.mob.getTarget()) >= 6 * 6;
         }
 
         @Override
         public void stop() {
-            this.target = null;
+            this.seeTime = 0;
             this.attackTime = -1;
         }
 
         @Override
         public void tick() {
-            double distance = this.mob.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
-            boolean canSee = this.mob.getSensing().hasLineOfSight(this.target);
-            this.mob.getNavigation().moveTo(this.target, this.speedModifier);
-            this.mob.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
+            LivingEntity target = this.mob.getTarget();
+            if (target != null) {
+                double distance = this.mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
+                boolean canSee = this.mob.getSensing().hasLineOfSight(target);
 
-            if (canSee) {
-                float f = (float) Math.sqrt(distance) / this.attackRadius;
-                float f1 = Mth.clamp(f, 0.1F, 1.0F);
-                if (++this.attackTime >= 0) {
-                    if (this.attackTime == 0) {
-                        this.mob.level().broadcastEntityEvent(this.mob, (byte) DART_ATTACK_EVENT);
-                    }
-                    if (this.isTimeToAttack()) {
-                        this.rangedAttackMob.performRangedAttack(this.target, f1);
-                    }
-                    if (this.attackTime == 20 * Mth.floor(3.375)) {
-                        this.attackTime = -Mth.floor(f * (float) (this.attackIntervalMax - this.attackIntervalMin) + (float) this.attackIntervalMin);
+                if (canSee) {
+                    ++this.seeTime;
+                } else {
+                    this.seeTime = 0;
+                }
+                if (distance <= (double) this.attackRadiusSqr && this.seeTime >= 5) {
+                    this.mob.getNavigation().stop();
+                } else {
+                    this.mob.getNavigation().moveTo(target, this.speedModifier);
+                }
+                this.mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+
+                if (canSee) {
+                    float f = (float) Math.sqrt(distance) / this.attackRadius;
+                    float f1 = Mth.clamp(f, 0.1F, 1.0F);
+                    if (++this.attackTime >= 0) {
+                        if (this.attackTime == 0) {
+                            this.mob.level().broadcastEntityEvent(this.mob, (byte) DART_ATTACK_EVENT);
+                        }
+                        if (this.isTimeToAttack()) {
+                            this.rangedAttackMob.performRangedAttack(target, f1);
+                        }
+                        if (this.attackTime == 20 * Mth.floor(3.375)) {
+                            this.attackTime = -Mth.floor(f * (float) (this.attackIntervalMax - this.attackIntervalMin) + (float) this.attackIntervalMin);
+                        }
                     }
                 }
             }
@@ -331,7 +343,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
 
         private boolean isTimeToAttack() {
             int i = this.attackTime;
-            return i == Mth.floor(1.25 * 20F) || i == Mth.floor(1.85 * 20) || i == Mth.floor(2.42 * 20) || i == Mth.floor(2.67 * 20);
+            return i == Mth.floor(1.25 * 20) || i == Mth.floor(1.85 * 20) || i == Mth.floor(2.42 * 20) || i == Mth.floor(2.67 * 20);
         }
 
         @Override
