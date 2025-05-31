@@ -243,9 +243,9 @@ public class Aerbunny extends AetherTamableAnimal {
     @Override
     public void baseTick() {
         if (this.getVehicle() instanceof Player vehicle) {
-            if (!vehicle.isCrouching() && this.getDefaultDimensions(this.getPose()).height() != 0.03F) {
+            if (!vehicle.isCrouching() && this.getBoundingBox().getYsize() != 0.03F) {
                 this.refreshDimensions();
-            } else if (vehicle.isCrouching() && this.getDefaultDimensions(this.getPose()).height() == 0.03F) {
+            } else if (vehicle.isCrouching() && this.getBoundingBox().getYsize() == 0.03F) {
                 this.refreshDimensions();
             }
         }
