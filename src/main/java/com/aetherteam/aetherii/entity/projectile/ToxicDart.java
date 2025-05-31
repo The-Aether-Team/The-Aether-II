@@ -38,7 +38,7 @@ public class ToxicDart extends AbstractArrow {
     @Override
     protected void tickDespawn() {
         ((AbstractArrowAccessor) this).aether$setLife(((AbstractArrowAccessor) this).aether$getLife() + 1);
-        if (((AbstractArrowAccessor) this).aether$getLife() >= 20) {
+        if (((AbstractArrowAccessor) this).aether$getLife() >= 1) {
             this.discard();
         }
     }
@@ -63,12 +63,11 @@ public class ToxicDart extends AbstractArrow {
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-
-//        if (this.level() instanceof ServerLevel serverLevel) {
-//            BlockState blockState = serverLevel.getBlockState(this.getBlockPosBelowThatAffectsMyMovement());
-//            Vec3 vec3 = result.getLocation();
-//            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, blockState), vec3.x, vec3.y, vec3.z, 3, 0.0F, 0.0F, 0.0F, 0.0F);
-//        }
+        if (this.level() instanceof ServerLevel serverLevel) {
+            BlockState blockState = serverLevel.getBlockState(this.getBlockPosBelowThatAffectsMyMovement());
+            Vec3 vec3 = result.getLocation();
+            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, blockState), vec3.x, vec3.y, vec3.z, 4, 0.0F, this.random.nextDouble() / 3.0, 0.0F, 0.0F);
+        }
     }
 
     /**

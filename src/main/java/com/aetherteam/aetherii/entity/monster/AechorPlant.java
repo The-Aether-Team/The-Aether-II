@@ -148,20 +148,36 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
      * @param distanceFactor The {@link Float} distance factor for targeting.
      */
     @Override
-    public void performRangedAttack(LivingEntity target, float distanceFactor) { //todo improve how it handles distance
-        double xDist = target.getX() - this.getX();
-        double zDist = target.getZ() - this.getZ();
-        double sqrt = Math.sqrt(xDist * xDist + zDist * zDist + 0.1);
-        double y = 0.1 + sqrt * 0.5 + (this.getY() - target.getY()) * 0.25;
-        double distance = 5.0 / sqrt;
-
-        int amount = 8;
+    public void performRangedAttack(LivingEntity target, float distanceFactor) {
+        Vec3 originVec = this.position();
+        Vec3 targetVec = target.position();
+        int amount = 10;
         for (int i = 1; i <= amount; i++) {
             ToxicDart needle = new ToxicDart(this, this.level());
-            float angle = (Mth.TWO_PI / amount) * (i + this.getRandom().nextFloat());
-            double x = distance * Mth.cos(angle);
-            double z = distance * Mth.sin(angle);
-            needle.shoot(x, y + 0.5F, z, 0.285F + (float) y * 0.08F, 1.0F);
+
+            float velocity = 0.65F;
+            double gravity = needle.getGravity();
+
+            double theta = (Mth.TWO_PI / amount) * (i + this.getRandom().nextDouble());
+
+            double x1 = targetVec.subtract(originVec).length();
+            double y1 = targetVec.y() - originVec.y();
+
+            double root = velocity * velocity * velocity * velocity - gravity * (gravity * x1 * x1 + 2.0 * y1 * velocity * velocity);
+            root = Math.sqrt(Math.max(0.0, root));
+            double yTrajectory = Math.atan((velocity * velocity + root) / (gravity * x1));
+
+            yTrajectory = Math.max(yTrajectory, 35 * Mth.DEG_TO_RAD);
+
+            double vec2Dx = Math.cos(yTrajectory);
+            double vec2Dy = Math.sin(yTrajectory);
+
+            double vec3Dx = vec2Dx * Math.cos(theta);
+            double vec3Dz = vec2Dx * Math.sin(theta);
+
+            Vec3 trajectory = new Vec3(vec3Dx, vec2Dy, vec3Dz);
+
+            needle.shoot(trajectory.x(), trajectory.y(), trajectory.z(), velocity, 1.0F);
             this.level().addFreshEntity(needle);
         }
 
