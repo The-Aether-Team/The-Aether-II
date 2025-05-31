@@ -20,7 +20,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class ToxicDart extends AbstractArrow { //todo why are these offsetting weirdly when they hit the ground
+public class ToxicDart extends AbstractArrow {
     public ToxicDart(EntityType<? extends ToxicDart> entityType, Level level) {
         super(entityType, level);
     }
