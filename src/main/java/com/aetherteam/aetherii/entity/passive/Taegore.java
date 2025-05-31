@@ -41,7 +41,7 @@ import java.util.stream.Stream;
 public class Taegore extends AetherAnimal implements DiggingMob {
     public static int SEARCHING_EVENT = 100;
     public static int DIGGING_START_EVENT = 101;
-    public static int DIGGING_PARTICLE_EVENT = 102;
+    public static int DIGGING_TICK_EVENT = 102;
     public static int DIGGING_STOP_EVENT = 103;
 
     private final EntityType<? extends Taegore> variantType;
@@ -94,7 +94,7 @@ public class Taegore extends AetherAnimal implements DiggingMob {
         } else if (id == DIGGING_START_EVENT) {
             this.digAnimationState.start(this.tickCount);
             ClientSoundHooks.playDiggingSoundInstance(this, AetherIISoundEvents.ENTITY_TAEGORE_DIGGING.get());
-        } else if (id == DIGGING_PARTICLE_EVENT) {
+        } else if (id == DIGGING_TICK_EVENT) {
             this.emitDiggingParticles(null);
         } else if (id == DIGGING_STOP_EVENT) {
             this.digAnimationState.stop();

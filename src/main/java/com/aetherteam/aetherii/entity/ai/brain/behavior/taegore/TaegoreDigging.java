@@ -51,7 +51,7 @@ public class TaegoreDigging extends Behavior<Taegore> {
 
     @Override
     protected void tick(ServerLevel serverLevel, Taegore owner, long gameTime) {
-        serverLevel.broadcastEntityEvent(owner, (byte) Taegore.DIGGING_PARTICLE_EVENT);
+        serverLevel.broadcastEntityEvent(owner, (byte) Taegore.DIGGING_TICK_EVENT);
     }
 
     private void dropSeed(Taegore owner) {

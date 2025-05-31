@@ -58,7 +58,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
         this.goalSelector.addGoal(2, new RestrictSunGoal(this));
         this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.5));
         this.goalSelector.addGoal(4, new Cockatrice.CockatriceMeleeAttackGoal(this, 1.15F, true, 6.0F));
-        this.goalSelector.addGoal(5, new Cockatrice.CockatriceRangedAttackGoal(this, 0.8F, 200, 300, 20.0F));
+        this.goalSelector.addGoal(5, new Cockatrice.CockatriceRangedAttackGoal(this, 0.8F, 200, 300, 15.0F));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.6));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -318,7 +318,8 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
                 }
                 if (distance <= (double) this.attackRadiusSqr && this.seeTime >= 5) {
                     this.mob.getNavigation().stop();
-                } else {
+                }
+                if (distance > (double) this.attackRadiusSqr || this.seeTime < 5 || !this.isTimeToAttack()) {
                     this.mob.getNavigation().moveTo(target, this.speedModifier);
                 }
                 this.mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
