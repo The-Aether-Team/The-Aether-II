@@ -66,15 +66,11 @@ public class DoubleDropsModifier extends LootModifier {
                 int count = 0;
                 double chance = random.nextDouble();
                 if (item instanceof BlockItem) {
-                    if (chance < 0.1) {
-                        count = 2;
-                    } else if (chance < 0.5) {
+                    if (chance < 0.5) {
                         count = 1;
                     }
                 } else {
-                    if (chance < 0.25) {
-                        count = 2;
-                    } else if (chance < 0.75) {
+                    if (chance < 0.75) {
                         count = 1;
                     }
                 }
