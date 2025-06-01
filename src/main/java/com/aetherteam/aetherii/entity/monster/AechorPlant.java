@@ -1,10 +1,14 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
+import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.effect.AetherIIEffects;
 import com.aetherteam.aetherii.entity.projectile.ToxicDart;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -27,6 +31,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -113,7 +118,18 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
                 this.setTargetingEntity(false);
             }
         }
+        if (this.deathTime == 1) {
+            if (this.level() instanceof ServerLevel serverLevel) {
+                serverLevel.sendParticles(
+                        new BlockParticleOption(ParticleTypes.BLOCK, AetherIIBlocks.AECHOR_CUTTING.get().defaultBlockState()),
+                        this.getX(), this.getY(0.66), this.getZ(), 50,
+                        this.getBbWidth() / 4.0F, this.getBbHeight() / 4.0F, this.getBbWidth() / 4.0F, 0.05);
+            }
+        }
     }
+
+    @Override
+    public void makePoofParticles() { }
 
     /**
      * Shoots a Poison Needle from the center of the Aechor Plant.
@@ -166,15 +182,13 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
      * @param z The {@link Double} for z-motion.
      */
     @Override
-    public void push(double x, double y, double z) {
-    }
+    public void push(double x, double y, double z) { }
 
     /**
      * Disallows Aechor Plants from jumping.
      */
     @Override
-    public void jumpFromGround() {
-    }
+    public void jumpFromGround() { }
 
     /**
      * Disallows Aechor Plants from being leashed.

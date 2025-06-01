@@ -6,6 +6,7 @@ import com.aetherteam.aetherii.client.renderer.entity.model.AechorPlantModel;
 import com.aetherteam.aetherii.client.renderer.entity.state.AechorPlantRenderState;
 import com.aetherteam.aetherii.entity.monster.AechorPlant;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +28,16 @@ public class AechorPlantRenderer extends MobRenderer<AechorPlant, AechorPlantRen
         super.extractRenderState(aechorPlant, aechorPlantRenderState, partialTick);
         aechorPlantRenderState.attackAnimationState.copyFrom(aechorPlant.attackAnimationState);
     }
+
+    @Override
+    public void render(AechorPlantRenderState renderState, PoseStack poseStack, MultiBufferSource bufferSource, int partialTick) {
+        if (renderState.deathTime <= 0) {
+            super.render(renderState, poseStack, bufferSource, partialTick);
+        }
+    }
+
+    @Override
+    protected void setupRotations(AechorPlantRenderState renderState, PoseStack poseStack, float bodyRot, float scale) { }
 
     @Override
     public ResourceLocation getTextureLocation(AechorPlantRenderState renderState) {
