@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.monster;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -35,8 +36,8 @@ public class Tempest extends Zephyr implements Blighted {
     public static int HIDE_PARTICLE_START = HIDE_ANIMATION_START + 35;
     public static int HIDE_LENGTH = HIDE_ANIMATION_START + HIDE_ANIMATION_LENGTH;
 
-    public static int ATTACK_EVENT = 100;
-    public static int HIDE_EVENT = 101;
+    public static int HIDE_START_EVENT = 100;
+    public static int ATTACK_START_EVENT = 101;
 
     public static final EntityDataAccessor<Integer> DATA_ATTACK_CHARGE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DATA_HIDE_ID = SynchedEntityData.defineId(Tempest.class, EntityDataSerializers.INT);
@@ -52,7 +53,7 @@ public class Tempest extends Zephyr implements Blighted {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(3, new Tempest.ThunderballAttackGoal(this));
+        this.goalSelector.addGoal(3, new Tempest.ThunderballAttackGoal(this, 40.0F));
         this.goalSelector.addGoal(5, new Tempest.RandomFloatAroundGoal(this));
         this.goalSelector.addGoal(7, new Zephyr.ZephyrLookGoal(this));
 
@@ -73,10 +74,10 @@ public class Tempest extends Zephyr implements Blighted {
 
     @Override
     public void handleEntityEvent(byte id) {
-        if (id == ATTACK_EVENT) {
+        if (id == HIDE_START_EVENT) {
             this.attackAnimationState.stop();
             this.hideAnimationState.start(this.tickCount);
-        } else if (id == HIDE_EVENT) {
+        } else if (id == ATTACK_START_EVENT) {
             this.hideAnimationState.stop();
             this.attackAnimationState.start(this.tickCount);
         } else {
@@ -94,6 +95,7 @@ public class Tempest extends Zephyr implements Blighted {
 
     @Override
     public void aiStep() {
+        AetherII.LOGGER.info(String.valueOf(this.getChargeTime()));
         super.aiStep();
         if (Blighted.super.inSunlight(this) || this.getHideTime() >= HIDE_ANIMATION_START) {
             if (this.getHideTime() <= HIDE_LENGTH) {
@@ -101,7 +103,7 @@ public class Tempest extends Zephyr implements Blighted {
 
                 if (this.getHideTime() == HIDE_ANIMATION_START) {
                     if (this.level() instanceof ServerLevel serverLevel) {
-                        serverLevel.broadcastEntityEvent(this, (byte) ATTACK_EVENT);
+                        serverLevel.broadcastEntityEvent(this, (byte) HIDE_START_EVENT);
                     }
                 }
 
@@ -223,53 +225,62 @@ public class Tempest extends Zephyr implements Blighted {
 
     public static class ThunderballAttackGoal extends Goal {
         private final Tempest tempest;
+        private final float attackThresholdSqr;
+        private LivingEntity trackedTarget;
 
-        public ThunderballAttackGoal(Tempest tempest) {
+        public ThunderballAttackGoal(Tempest tempest, float attackThreshold) {
             this.tempest = tempest;
+            this.attackThresholdSqr = attackThreshold * attackThreshold;
         }
 
         @Override
         public boolean canUse() {
-            return this.tempest.getTarget() != null;
+            return this.tempest.getTarget() != null && this.tempest.getTarget().isAlive();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return this.trackedTarget != null;
         }
 
         @Override
         public void start() {
-            this.tempest.setChargeTime(0);
+            this.trackedTarget = this.tempest.getTarget();
         }
 
         @Override
         public void stop() {
-            this.tempest.setChargeTime(0);
+            this.tempest.setChargeTime(-40);
+            this.trackedTarget = null;
         }
 
         @Override
         public void tick() {
-            LivingEntity target = this.tempest.getTarget();
-            if (target != null) {
-                if (target.distanceToSqr(this.tempest) < 40 * 40 && this.tempest.hasLineOfSight(target)) {
-                    Level level = this.tempest.level();
-                    this.tempest.setChargeTime(this.tempest.getChargeTime() + 1);
+            if (this.trackedTarget != null) {
+                boolean canSee = this.trackedTarget.hasLineOfSight(this.trackedTarget);
 
-                    if (this.tempest.getChargeTime() == 10 && this.tempest.getAmbientSound() != null) {
-                        this.tempest.playSound(this.tempest.getAmbientSound(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
+                this.tempest.setChargeTime(this.tempest.getChargeTime() + 1);
 
-                    } else if (this.tempest.getChargeTime() == 0) {
-                        this.tempest.level().broadcastEntityEvent(this.tempest, (byte) HIDE_EVENT);
+                if (this.tempest.getChargeTime() == 0) {
+                    this.tempest.level().broadcastEntityEvent(this.tempest, (byte) ATTACK_START_EVENT);
 
-                    } else if (this.tempest.getChargeTime() == 25) {
-                        Vec3 look = this.tempest.getViewVector(1.0F);
-                        double accelX = target.getX() - (this.tempest.getX() + look.x * 4.0);
-                        double accelY = target.getY(0.5) - (0.5 + this.tempest.getY());
-                        double accelZ = target.getZ() - (this.tempest.getZ() + look.z * 4.0);
-                        this.tempest.playSound(AetherIISoundEvents.ENTITY_TEMPEST_SHOOT.get(), 0.75F, (level.random.nextFloat() - level.random.nextFloat()) * 0.2F + 1.0F);
-                        TempestThunderball thunderBall = new TempestThunderball(level, this.tempest, accelX, accelY, accelZ);
-                        thunderBall.setPos(this.tempest.getX() + look.x * 1.5, this.tempest.getY(), this.tempest.getZ() + look.z * 1.5);
-                        level.addFreshEntity(thunderBall);
-                        this.tempest.setChargeTime(-40);
+                } else if (this.tempest.getChargeTime() == 10 && this.tempest.getAmbientSound() != null) {
+                    this.tempest.playSound(this.tempest.getAmbientSound(), 0.75F, (this.tempest.getRandom().nextFloat() - this.tempest.getRandom().nextFloat()) * 0.2F + 1.0F);
+
+                } else if (this.tempest.getChargeTime() == 25) {
+                    Vec3 look = this.tempest.getViewVector(1.0F);
+                    double accelX = this.trackedTarget.getX() - (this.tempest.getX() + look.x * 4.0);
+                    double accelY = this.trackedTarget.getY(0.5) - (0.5 + this.tempest.getY());
+                    double accelZ = this.trackedTarget.getZ() - (this.tempest.getZ() + look.z * 4.0);
+                    this.tempest.playSound(AetherIISoundEvents.ENTITY_TEMPEST_SHOOT.get(), 0.75F, (this.tempest.getRandom().nextFloat() - this.tempest.getRandom().nextFloat()) * 0.2F + 1.0F);
+                    TempestThunderball thunderBall = new TempestThunderball(this.tempest.level(), this.tempest, accelX, accelY, accelZ);
+                    thunderBall.setPos(this.tempest.getX() + look.x * 1.5, this.tempest.getY(), this.tempest.getZ() + look.z * 1.5);
+                    this.tempest.level().addFreshEntity(thunderBall);
+                    this.tempest.setChargeTime(-40);
+
+                    if (!canSee || this.tempest.getTarget() == null || !this.tempest.getTarget().isAlive() || this.tempest.distanceToSqr(this.trackedTarget) < this.attackThresholdSqr) {
+                        this.trackedTarget = null;
                     }
-                } else if (this.tempest.getChargeTime() > 0) {
-                    this.tempest.setChargeTime(this.tempest.getChargeTime() - 1);
                 }
             }
         }
