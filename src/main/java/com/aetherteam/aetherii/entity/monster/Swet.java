@@ -169,7 +169,7 @@ public class Swet extends Monster {
         }
     }
 
-    public boolean canLatch(Player player) { //todo balance
+    public boolean canLatch(Player player) {
         return !player.isInWater()
                 && player.getFoodData().getFoodLevel() > 0
                 && this.getFoodSaturation() <= 3
@@ -177,7 +177,7 @@ public class Swet extends Monster {
                 && player.getData(AetherIIDataAttachments.SWET_LATCH).canLatchOn();
     }
 
-    public boolean processSucking(Player player) { //todo balance
+    public boolean processSucking(Player player) {
         if (player.tickCount % 20 == 0) {
             player.causeFoodExhaustion(4.0F);
             this.setFoodSaturation(this.getFoodSaturation() + 1.0F);
