@@ -1,6 +1,5 @@
 package com.aetherteam.aetherii.entity.monster;
 
-import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.block.AetherIIBlocks;
 import com.aetherteam.aetherii.client.particle.AetherIIParticleTypes;
@@ -95,7 +94,6 @@ public class Tempest extends Zephyr implements Blighted {
 
     @Override
     public void aiStep() {
-        AetherII.LOGGER.info(String.valueOf(this.getChargeTime()));
         super.aiStep();
         if (Blighted.super.inSunlight(this) || this.getHideTime() >= HIDE_ANIMATION_START) {
             if (this.getHideTime() <= HIDE_LENGTH) {
@@ -210,11 +208,11 @@ public class Tempest extends Zephyr implements Blighted {
             } else if (this.tempest.level().isDay()) {
                 for (int i = 0; i < 10; ++i) {
                     Vec3 vec3 = this.tempest.position();
-                    Vec3 target = vec3.add((random.nextFloat() * 2.0F - 1.0F) * 12.0F, (random.nextFloat() * 2.0F - 1.0F) * 4.0F, (random.nextFloat() * 2.0F - 1.0F) * 12.0F);
+                    Vec3 target = vec3.add((random.nextFloat() * 2.0F - 1.0F) * 6.0F, (random.nextFloat() * 2.0F - 1.0F) * 4.0F, (random.nextFloat() * 2.0F - 1.0F) * 6.0F);
                     if (!this.tempest.level().canSeeSky(BlockPos.containing(target))) {
-                        d0 = vec3.x();
-                        d1 = vec3.y();
-                        d2 = vec3.z();
+                        d0 = target.x();
+                        d1 = target.y();
+                        d2 = target.z();
                         break;
                     }
                 }
@@ -261,7 +259,12 @@ public class Tempest extends Zephyr implements Blighted {
 
                 this.tempest.setChargeTime(this.tempest.getChargeTime() + 1);
 
-                if (this.tempest.getChargeTime() == 0) {
+                if (this.tempest.getChargeTime() == -20) {
+                    Vec3 toTarget = this.tempest.position().vectorTo(this.trackedTarget.position());
+                    Vec3 scaled = toTarget.scale(8.0F / toTarget.length());
+                    this.tempest.getMoveControl().setWantedPosition(scaled.x(), scaled.y(), scaled.z(), 0.6);
+
+                } else if (this.tempest.getChargeTime() == 0) {
                     this.tempest.level().broadcastEntityEvent(this.tempest, (byte) ATTACK_START_EVENT);
 
                 } else if (this.tempest.getChargeTime() == 10 && this.tempest.getAmbientSound() != null) {
@@ -269,12 +272,12 @@ public class Tempest extends Zephyr implements Blighted {
 
                 } else if (this.tempest.getChargeTime() == 25) {
                     Vec3 look = this.tempest.getViewVector(1.0F);
-                    double accelX = this.trackedTarget.getX() - (this.tempest.getX() + look.x * 4.0);
-                    double accelY = this.trackedTarget.getY(0.5) - (0.5 + this.tempest.getY());
-                    double accelZ = this.trackedTarget.getZ() - (this.tempest.getZ() + look.z * 4.0);
+                    double accelX = this.trackedTarget.getX() - (this.tempest.getX() + look.x * 0.25);
+                    double accelY = this.trackedTarget.getY(0.5) - (this.tempest.getY(0.25));
+                    double accelZ = this.trackedTarget.getZ() - (this.tempest.getZ() + look.z * 0.25);
                     this.tempest.playSound(AetherIISoundEvents.ENTITY_TEMPEST_SHOOT.get(), 0.75F, (this.tempest.getRandom().nextFloat() - this.tempest.getRandom().nextFloat()) * 0.2F + 1.0F);
                     TempestThunderball thunderBall = new TempestThunderball(this.tempest.level(), this.tempest, accelX, accelY, accelZ);
-                    thunderBall.setPos(this.tempest.getX() + look.x * 1.5, this.tempest.getY(), this.tempest.getZ() + look.z * 1.5);
+                    thunderBall.setPos(this.tempest.getX() + look.x * 0.75, this.tempest.getY(0.25), this.tempest.getZ() + look.z * 0.75);
                     this.tempest.level().addFreshEntity(thunderBall);
                     this.tempest.setChargeTime(-40);
 
