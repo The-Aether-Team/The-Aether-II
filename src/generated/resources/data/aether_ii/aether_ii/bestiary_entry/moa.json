@@ -1,6 +1,13 @@
 {
   "description_key": "aether_ii.guidebook_bestiary.description.entity.aether_ii.moa",
-  "effect_resistances": [],
+  "effect_resistances": [
+    {
+      "effect_resistance": {
+        "attribute": "aether_ii:toxin_effect_resistance",
+        "value": 1
+      }
+    }
+  ],
   "entity_type": "aether_ii:moa",
   "food": "aether_ii:moa_food",
   "health": 35,

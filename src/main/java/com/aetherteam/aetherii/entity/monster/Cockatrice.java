@@ -150,7 +150,7 @@ public class Cockatrice extends Monster implements RangedAttackMob, Blighted {
 
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return effect.getEffect() != AetherIIEffects.VENOM.get() && super.canBeAffected(effect);
+        return effect.getEffect().value() != AetherIIEffects.VENOM.get() && super.canBeAffected(effect);
     }
 
     @Override

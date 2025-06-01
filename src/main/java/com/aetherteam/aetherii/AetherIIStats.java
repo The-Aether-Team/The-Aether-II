@@ -109,6 +109,7 @@ public class AetherIIStats {
             .put(AetherIIAttributes.SLASH_RESISTANCE, 2.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, -2.0)
+            .put(AetherIIAttributes.TOXIN_EFFECT_RESISTANCE, 1.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> SKYROOT_LIZARD = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 4.0)
@@ -118,6 +119,7 @@ public class AetherIIStats {
             .put(AetherIIAttributes.SLASH_RESISTANCE, -2.0)
             .put(AetherIIAttributes.IMPACT_RESISTANCE, 2.0)
             .put(AetherIIAttributes.PIERCE_RESISTANCE, 0.0)
+            .put(AetherIIAttributes.TOXIN_EFFECT_RESISTANCE, 1.0)
             .build();
     public static final ImmutableMap<Holder<Attribute>, Double> CARRION_SPROUT = ImmutableMap.<Holder<Attribute>, Double>builder()
             .put(Attributes.MAX_HEALTH, 8.0)

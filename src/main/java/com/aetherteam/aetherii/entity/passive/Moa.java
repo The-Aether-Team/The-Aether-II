@@ -756,7 +756,7 @@ public class Moa extends MountableAnimal {
      */
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return (effect.getEffect() != AetherIIEffects.TOXIN.get() || !this.isPlayerGrown()) && super.canBeAffected(effect);
+        return (effect.getEffect().value() != AetherIIEffects.TOXIN.get() || !this.isPlayerGrown()) && super.canBeAffected(effect);
     }
 
     /**

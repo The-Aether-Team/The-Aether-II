@@ -228,7 +228,7 @@ public class AechorPlant extends PathfinderMob implements RangedAttackMob {
      */
     @Override
     public boolean canBeAffected(MobEffectInstance effect) {
-        return effect.getEffect() != AetherIIEffects.TOXIN.get() && super.canBeAffected(effect);
+        return effect.getEffect().value() != AetherIIEffects.TOXIN.get() && super.canBeAffected(effect);
     }
 
     public static class ShootDartGoal extends Goal {
