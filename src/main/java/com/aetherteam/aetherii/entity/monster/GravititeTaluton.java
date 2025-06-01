@@ -66,12 +66,14 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
             this.attackAnimationState.start(this.tickCount);
         } else if (id == ATTACK_STOP_EVENT) {
             this.attackAnimationState.stop();
-        } else if (id == RELOAD_STOP_EVENT) {
             this.debrisVisible = false;
+        } else if (id == RELOAD_STOP_EVENT) {
             this.reloadAnimationState.stop();
         } else if (id == RELOAD_START_EVENT) {
-            this.debrisVisible = true;
-            this.reloadAnimationState.start(this.tickCount);
+            if (!this.debrisVisible) {
+                this.debrisVisible = true;
+                this.reloadAnimationState.start(this.tickCount);
+            }
         } else {
             super.handleEntityEvent(id);
         }
@@ -97,8 +99,8 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
             int attackTime = this.attackGoal.attackTime;
             switch(attackTime) {
                 case 22 -> this.level().broadcastEntityEvent(this, (byte) ATTACK_START_EVENT);
-                case 1 -> this.level().broadcastEntityEvent(this, (byte) RELOAD_STOP_EVENT);
-                case ATTACK_DURATION -> this.level().broadcastEntityEvent(this, (byte) ATTACK_STOP_EVENT);
+                case 40 -> this.level().broadcastEntityEvent(this, (byte) RELOAD_STOP_EVENT);
+                case 1 -> this.level().broadcastEntityEvent(this, (byte) ATTACK_STOP_EVENT);
                 case 60 -> this.level().broadcastEntityEvent(this, (byte) RELOAD_START_EVENT);
             }
         }
@@ -158,6 +160,7 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
         private final int attackIntervalMax;
         private final float attackRadius;
         private final float attackRadiusSqr;
+        private LivingEntity trackedTarget;
 
         public GravititeTalutonRangedAttackGoal(RangedAttackMob rangedAttackMob, double speedModifier, int attackInterval, float attackRadius) {
             this(rangedAttackMob, speedModifier, attackInterval, attackInterval, attackRadius);
@@ -184,17 +187,27 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
         }
 
         @Override
+        public boolean canContinueToUse() {
+            return this.trackedTarget != null;
+        }
+
+        @Override
+        public void start() {
+            this.trackedTarget = this.mob.getTarget();
+        }
+
+        @Override
         public void stop() {
             this.seeTime = 0;
             this.attackTime = -1;
+            this.trackedTarget = null;
         }
 
         @Override
         public void tick() {
-            LivingEntity target = this.mob.getTarget();
-            if (target != null) {
-                double distance = this.mob.distanceToSqr(target.getX(), target.getY(), target.getZ());
-                boolean canSee = this.mob.getSensing().hasLineOfSight(target);
+            if (this.trackedTarget != null) {
+                double distance = this.mob.distanceToSqr(this.trackedTarget.getX(), this.trackedTarget.getY(), this.trackedTarget.getZ());
+                boolean canSee = this.mob.getSensing().hasLineOfSight(this.trackedTarget);
 
                 if (canSee) {
                     ++this.seeTime;
@@ -204,16 +217,17 @@ public class GravititeTaluton extends Taluton implements RangedAttackMob {
                 if (distance <= (double) this.attackRadiusSqr && this.seeTime >= 5) {
                     this.mob.getNavigation().stop();
                 } else {
-                    this.mob.getNavigation().moveTo(target, this.speedModifier);
+                    this.mob.getNavigation().moveTo(this.trackedTarget, this.speedModifier);
                 }
-                this.mob.getLookControl().setLookAt(target, 30.0F, 30.0F);
+                this.mob.getLookControl().setLookAt(this.trackedTarget, 30.0F, 30.0F);
 
                 if (--this.attackTime == 0) {
-                    if (canSee) {
-                        float f = (float) Math.sqrt(distance) / this.attackRadius;
-                        float f1 = Mth.clamp(f, 0.1F, 1.0F);
-                        this.rangedAttackMob.performRangedAttack(target, f1);
-                        this.attackTime = Mth.floor(f * (float) (this.attackIntervalMax - this.attackIntervalMin) + (float) this.attackIntervalMin);
+                    float f = (float) Math.sqrt(distance) / this.attackRadius;
+                    float f1 = Mth.clamp(f, 0.1F, 1.0F);
+                    this.rangedAttackMob.performRangedAttack(this.trackedTarget, f1);
+                    this.attackTime = Mth.floor(f * (float) (this.attackIntervalMax - this.attackIntervalMin) + (float) this.attackIntervalMin);
+                    if (!canSee || this.mob.getTarget() == null) {
+                        this.trackedTarget = null;
                     }
                 } else if (this.attackTime < 0) {
                     this.attackTime = Mth.floor(Mth.lerp(Math.sqrt(distance) / this.attackRadius, this.attackIntervalMin, this.attackIntervalMax));
