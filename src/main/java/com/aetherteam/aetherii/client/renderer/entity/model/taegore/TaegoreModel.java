@@ -13,6 +13,8 @@ import net.neoforged.neoforge.client.entity.animation.json.AnimationHolder;
 
 public class TaegoreModel extends EntityModel<TaegoreRenderState> {
 	public static final AnimationHolder DIG_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "taegore/dig"));
+	public static final AnimationHolder DIG_START_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "taegore/dig_start"));
+	public static final AnimationHolder DIG_END_ANIMATION = Model.getAnimation(ResourceLocation.fromNamespaceAndPath(AetherII.MODID, "taegore/dig_end"));
 
 	private final ModelPart body_main;
 	private final ModelPart head_main;
@@ -148,6 +150,8 @@ public class TaegoreModel extends EntityModel<TaegoreRenderState> {
         this.leg_rear_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
         this.leg_front_right.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F + (float) Math.PI) * 1.4F * entity.walkAnimationSpeed;
         this.leg_front_left.xRot = Mth.cos(entity.walkAnimationPos * 0.6662F) * 1.4F * entity.walkAnimationSpeed;
-		this.animate(entity.digAnimationState, DIG_ANIMATION, entity.ageInTicks, 1.5F);
+		this.animate(entity.digStartAnimationState, DIG_START_ANIMATION, entity.ageInTicks, 1.0F);
+		this.animate(entity.digAnimationState, DIG_ANIMATION, entity.ageInTicks, 1.0F);
+		this.animate(entity.digEndAnimationState, DIG_END_ANIMATION, entity.ageInTicks, 1.0F);
 	}
 }

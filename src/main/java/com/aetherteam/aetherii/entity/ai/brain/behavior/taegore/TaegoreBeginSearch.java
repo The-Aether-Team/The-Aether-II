@@ -37,7 +37,7 @@ public class TaegoreBeginSearch extends Behavior<Taegore> {
         if (finished) {
             this.calculateDigPosition(owner).ifPresent(pos -> {
                 owner.getBrain().setMemory(AetherIIMemoryModuleTypes.TAEGORE_SEARCH_TARGET.get(), pos);
-                owner.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(pos, 1.25F, 0));
+                owner.getBrain().setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(pos, 0.75F, 0));
             });
         }
     }

@@ -82,7 +82,7 @@ public class TaegoreAi {
     private static void initDigActivity(Brain<Taegore> brain) {
         brain.addActivityWithConditions(
                 Activity.DIG,
-                ImmutableList.of(Pair.of(0, new TaegoreDigging(160, 180)), Pair.of(0, new TaegoreFinishedDigging(40))),
+                ImmutableList.of(Pair.of(0, new TaegoreDigging(240)), Pair.of(0, new TaegoreFinishedDigging(50))),
                 Set.of(
                         Pair.of(MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT),
                         Pair.of(MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT),

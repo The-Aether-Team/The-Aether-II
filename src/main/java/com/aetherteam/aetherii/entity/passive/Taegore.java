@@ -1,5 +1,6 @@
 package com.aetherteam.aetherii.entity.passive;
 
+import com.aetherteam.aetherii.AetherII;
 import com.aetherteam.aetherii.AetherIITags;
 import com.aetherteam.aetherii.client.sound.AetherIISoundEvents;
 import com.aetherteam.aetherii.client.sound.ClientSoundHooks;
@@ -47,6 +48,8 @@ public class Taegore extends AetherAnimal implements DiggingMob {
     private final EntityType<? extends Taegore> variantType;
 
     public AnimationState digAnimationState = new AnimationState();
+    public AnimationState digStartAnimationState = new AnimationState();
+    public AnimationState digEndAnimationState = new AnimationState();
 
     public Taegore(EntityType<? extends Taegore> type, Level level) {
         super(type, level);
@@ -92,12 +95,17 @@ public class Taegore extends AetherAnimal implements DiggingMob {
         if (id == SEARCHING_EVENT) {
             this.playSearchingSound();
         } else if (id == DIGGING_START_EVENT) {
-            this.digAnimationState.start(this.tickCount);
+            this.digStartAnimationState.start(this.tickCount);
             ClientSoundHooks.playDiggingSoundInstance(this, AetherIISoundEvents.ENTITY_TAEGORE_DIGGING.get());
         } else if (id == DIGGING_TICK_EVENT) {
-            this.emitDiggingParticles(null);
+            if (this.digStartAnimationState.getTimeInMillis(this.tickCount) >= 3000) {
+                this.digStartAnimationState.stop();
+                this.digAnimationState.startIfStopped(this.tickCount);
+                this.emitDiggingParticles(this.digAnimationState);
+            }
         } else if (id == DIGGING_STOP_EVENT) {
             this.digAnimationState.stop();
+            this.digEndAnimationState.start(this.tickCount);
             this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), AetherIISoundEvents.ENTITY_TAEGORE_DIGGING_STOP.get(), this.getSoundSource(), 1.0F, 1.0F, false);
         } else {
             super.handleEntityEvent(id);
@@ -139,13 +147,8 @@ public class Taegore extends AetherAnimal implements DiggingMob {
         return BlockPos.containing(vec3.x(), this.getY() + (double) 0.2F, vec3.z());
     }
 
-    private Vec3 getHeadPosition() {
-        return this.position().add(this.getForward().scale(1.375F));
-    } //todo value
-
-    @Override
-    public boolean isFood(ItemStack stack) {
-        return stack.is(AetherIITags.Items.TAEGORE_FOOD);
+    public Vec3 getHeadPosition() {
+        return this.position().add(this.getLookAngle().scale(1.5 / this.getLookAngle().length()));
     }
 
     @Override
@@ -160,23 +163,36 @@ public class Taegore extends AetherAnimal implements DiggingMob {
     }
 
     private void emitDiggingParticles(AnimationState animationState) {
-//        boolean flag = animationState.getTimeInMillis((float) this.tickCount) > 1700L && animationState.getTimeInMillis((float) this.tickCount) < 6000L;
-//        if (flag) {
+        boolean flag = (animationState.getTimeInMillis(this.tickCount) % 4500 > 250 && animationState.getTimeInMillis(this.tickCount) % 4500 < 750)
+                || (animationState.getTimeInMillis(this.tickCount) % 4500 > 1500 && animationState.getTimeInMillis(this.tickCount) % 4500 < 1750)
+                || (animationState.getTimeInMillis(this.tickCount) % 4500 > 3000 && animationState.getTimeInMillis(this.tickCount) % 4500 < 3250);
+        if (flag) {
+            Vec3 vecPos = this.getHeadPosition();
             BlockPos pos = this.getHeadBlock();
             BlockState state = this.level().getBlockState(pos.below());
             if (state.getRenderShape() != RenderShape.INVISIBLE) {
                 for (int i = 0; i < 30; ++i) {
                     Vec3 vec3 = Vec3.atCenterOf(pos).add(0.0F, -0.65F, 0.0F);
-                    this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), vec3.x, vec3.y, vec3.z, 0.0F, 0.0F, 0.0F);
+                    this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), vecPos.x, vec3.y, vecPos.z, 0.0F, 0.0F, 0.0F);
                 }
                 if (this.tickCount % 10 == 0) {
                     this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), state.getSoundType(this.level(), pos.below(), this).getHitSound(), this.getSoundSource(), 0.5F, 0.5F, false);
                 }
             }
-//        }
+        }
         if (this.tickCount % 10 == 0) {
             this.level().gameEvent(GameEvent.ENTITY_ACTION, this.getHeadBlock(), GameEvent.Context.of(this));
         }
+    }
+
+    @Override
+    public int getMaxHeadYRot() {
+        return 30;
+    }
+
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return stack.is(AetherIITags.Items.TAEGORE_FOOD);
     }
 
     @Nullable

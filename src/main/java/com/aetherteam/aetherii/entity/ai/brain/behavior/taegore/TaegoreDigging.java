@@ -5,7 +5,6 @@ import com.aetherteam.aetherii.entity.ai.brain.TaegoreAi;
 import com.aetherteam.aetherii.entity.ai.brain.memory.AetherIIMemoryModuleTypes;
 import com.aetherteam.aetherii.entity.passive.Taegore;
 import com.aetherteam.aetherii.loot.AetherIILoot;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.ai.behavior.Behavior;
@@ -13,17 +12,22 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
 
 public class TaegoreDigging extends Behavior<Taegore> {
-    public TaegoreDigging(int minDuration, int maxDuration) {
+    private final int duration;
+    private long endTimestamp;
+
+    public TaegoreDigging(int duration) {
         super(Map.of(
                 MemoryModuleType.IS_PANICKING, MemoryStatus.VALUE_ABSENT,
                 MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT,
                 AetherIIMemoryModuleTypes.TAEGORE_DIGGING.get(), MemoryStatus.VALUE_PRESENT,
                 AetherIIMemoryModuleTypes.TAEGORE_SEARCH_COOLDOWN.get(), MemoryStatus.VALUE_ABSENT
-        ),minDuration,maxDuration);
+        ), duration, duration);
+        this.duration = duration;
     }
 
     protected boolean checkExtraStartConditions(ServerLevel serverLevel, Taegore owner) {
@@ -37,13 +41,13 @@ public class TaegoreDigging extends Behavior<Taegore> {
     @Override
     protected void start(ServerLevel serverLevel, Taegore owner, long gameTime) {
         serverLevel.broadcastEntityEvent(owner, (byte) Taegore.DIGGING_START_EVENT);
+        this.endTimestamp = gameTime + this.duration;
     }
 
     protected void stop(ServerLevel serverLevel, Taegore owner, long gameTime) {
         boolean finished = this.timedOut(gameTime);
         if (finished) {
             owner.getBrain().setMemoryWithExpiry(AetherIIMemoryModuleTypes.TAEGORE_SEARCH_COOLDOWN.get(), Unit.INSTANCE, 9600L);
-            this.dropSeed(owner);
         } else {
             TaegoreAi.resetSearch(serverLevel, owner);
         }
@@ -52,14 +56,17 @@ public class TaegoreDigging extends Behavior<Taegore> {
     @Override
     protected void tick(ServerLevel serverLevel, Taegore owner, long gameTime) {
         serverLevel.broadcastEntityEvent(owner, (byte) Taegore.DIGGING_TICK_EVENT);
+        if (gameTime == this.endTimestamp - 25) {
+            this.dropSeed(owner);
+        }
     }
 
     private void dropSeed(Taegore owner) {
         Level level = owner.level();
         if (level instanceof ServerLevel serverlevel) {
-            BlockPos blockPos = owner.getHeadBlock();
+            Vec3 pos = owner.getHeadPosition();
             owner.dropFromGiftLootTable(serverlevel, AetherIILoot.TAEGORE_DIGGING, (tableLevel, stack) -> {
-                ItemEntity itemEntity = new ItemEntity(level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), stack);
+                ItemEntity itemEntity = new ItemEntity(level, pos.x(), pos.y(), pos.z(), stack);
                 itemEntity.setDefaultPickUpDelay();
                 tableLevel.addFreshEntity(itemEntity);
             });

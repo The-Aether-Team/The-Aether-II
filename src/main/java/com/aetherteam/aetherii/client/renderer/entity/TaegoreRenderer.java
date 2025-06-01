@@ -33,6 +33,8 @@ public class TaegoreRenderer extends MultiBabyModelRenderer<Taegore, TaegoreRend
     public void extractRenderState(Taegore taegore, TaegoreRenderState renderState, float partialTick) {
         super.extractRenderState(taegore, renderState, partialTick);
         renderState.digAnimationState.copyFrom(taegore.digAnimationState);
+        renderState.digStartAnimationState.copyFrom(taegore.digStartAnimationState);
+        renderState.digEndAnimationState.copyFrom(taegore.digEndAnimationState);
     }
 
     @Override
